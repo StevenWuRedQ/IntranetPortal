@@ -5,7 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <script type="text/javascript">
+    <script type="text/javascript">       
+
         function CompleteTask(taskId) {
             gridTaskClient.PerformCallback(taskId);
         }
@@ -28,10 +29,53 @@
             gridTaskClient.AutoFilterByColumn("Owner", key);
         }
 
-        function FilterCategoryLogs(s ,e)
-        {
+        function FilterCategoryLogs(s, e) {
             var key = s.GetValue();
             gridTaskClient.AutoFilterByColumn("Category", key);
+        }
+        function OnLogMemoKeyDown(s, e) {
+            var textArea = s.GetInputElement();
+            //if (e.htmlEvent.keyCode == 13) {
+            //    //alert(textArea.scrollHeight + "|" + s.GetHeight());
+            //    var text = txtCommentsClient.GetText();
+            //    if (text.trim() == "") {
+            //        alert("Please input comments.");
+            //    }
+            //    else
+            //        gridTrackingClient.UpdateEdit();
+
+            //    e.htmlEvent.preventDefault();
+            //    return;
+            //}
+
+            if (textArea.scrollHeight + 2 > s.GetHeight()) {
+                //alert(textArea.scrollHeight + "|" + s.GetHeight());
+                s.SetHeight(textArea.scrollHeight + 2);
+            }
+
+            if (textArea.scrollHeight + 2 < s.GetHeight()) {
+                //alert(textArea.scrollHeight + "|" + s.GetHeight());
+                s.SetHeight(textArea.scrollHeight + 2);
+            }
+        }
+        function SaveComments(s, taskId) {
+            var comments = s.GetText();
+            callbackSaveComments.PerformCallback(taskId + "|" + comments);
+        }
+        function ShowBorder(s) {
+            var tbl = s.GetMainElement();
+            if (tbl.style.borderColor == 'transparent') {
+                //border-top: 1px solid #9da0aa;
+                //border-right: 1px solid #c2c4cb;
+                //border-bottom: 1px solid #d9dae0;
+                //border-left: 1px solid #c2c4cb;
+                tbl.style.borderColor = "#9da0aa";
+                tbl.style.backgroundColor = 'white';
+            }
+            else {
+                tbl.style.borderColor = 'transparent';
+                tbl.style.backgroundColor = 'transparent';
+            }
         }
     </script>
 </head>
@@ -39,7 +83,7 @@
     <form id="form1" runat="server">
         <div style="width: 80%; background-color: #efefef; margin: 0 auto; padding: 10px;">
             <h2 style="font-family: Tahoma; font-size: 20px; margin-top: 15px; text-align: center; padding-top: 15px;">Team Task List</h2>
-            <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" Width="900px">
+            <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" Width="900px" ClientInstanceName="AddTaskFormLayout">
                 <Items>
                     <dx:LayoutGroup Caption="Add Task" ColCount="3">
                         <Items>
@@ -125,9 +169,9 @@
                                     <dx:LayoutItemNestedControlContainer>
                                         <dx:ASPxButton Text="Add" runat="server" ID="btnAdd"></dx:ASPxButton>
                                         &nbsp;
-                                          <dx:ASPxButton Text="Reset" runat="server" ID="ASPxButton1">
+                                          <dx:ASPxButton Text="Reset" runat="server" ID="ASPxButton1" AutoPostBack="false">
                                               <ClientSideEvents Click="function(s, e) {
-		ASPxClientEdit.ClearEditorsInContainer(form1);
+		ASPxClientEdit.ClearEditorsInContainer(AddTaskFormLayout.GetMainElement ());
 	}" />
 
                                           </dx:ASPxButton>
@@ -143,17 +187,14 @@
                     <dx:GridViewDataDateColumn FieldName="CreateDate" Width="110px" PropertiesDateEdit-DisplayFormatString="g">
                         <PropertiesDateEdit DisplayFormatString="g"></PropertiesDateEdit>
                         <FilterTemplate>
-
                         </FilterTemplate>
                     </dx:GridViewDataDateColumn>
                     <dx:GridViewDataTextColumn FieldName="Description">
                         <FilterTemplate>
-
                         </FilterTemplate>
                     </dx:GridViewDataTextColumn>
-                        <dx:GridViewDataTextColumn FieldName="CreateBy" Width="80px">
+                    <dx:GridViewDataTextColumn FieldName="CreateBy" Width="80px">
                         <FilterTemplate>
-
                         </FilterTemplate>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Owner" Caption="Assign To" Width="80px">
@@ -171,7 +212,7 @@
                             </dx:ASPxComboBox>
                         </FilterTemplate>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataDateColumn FieldName="DueDate" Caption="Due Date" PropertiesDateEdit-DisplayFormatString="d" Width="80px">                       
+                    <dx:GridViewDataDateColumn FieldName="DueDate" Caption="Due Date" PropertiesDateEdit-DisplayFormatString="d" Width="80px">
                     </dx:GridViewDataDateColumn>
                     <dx:GridViewDataColumn FieldName="Category" Caption="Category" Width="80px">
                         <FilterTemplate>
@@ -187,6 +228,16 @@
                     </dx:GridViewDataColumn>
                     <dx:GridViewDataTextColumn FieldName="Comments" Caption="Comments" Width="200px">
                         <FilterTemplate></FilterTemplate>
+                        <DataItemTemplate>
+                            <dx:ASPxMemo ID="txtComments" Width="100%" ClientInstanceName="txtCommentsClient" runat="server" Text='<%# Eval("Comments") %>' Height="13px" Border-BorderColor="Transparent" BackColor="Transparent">
+                                <ClientSideEvents KeyDown="OnLogMemoKeyDown" Init="function(s,e){
+                                                                                        s.GetInputElement().style.overflowY='hidden';
+                                                                                        OnLogMemoKeyDown(s,e);
+                                                                                    }"
+                                    GotFocus="function(s,e){ShowBorder(s);}" LostFocus="function(s,e){ShowBorder(s);}" />
+
+                            </dx:ASPxMemo>
+                        </DataItemTemplate>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataColumn FieldName="Status" Caption="Completed" Width="80px">
                         <DataItemTemplate>
@@ -215,6 +266,7 @@
                 </Styles>
                 <SettingsPager Mode="ShowAllRecords"></SettingsPager>
             </dx:ASPxGridView>
+            <dx:ASPxCallback runat="server" ID="callbackSaveComments" ClientInstanceName="callbackSaveComments" OnCallback="callbackSaveComments_Callback"></dx:ASPxCallback>
         </div>
     </form>
 </body>
