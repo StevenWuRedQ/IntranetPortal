@@ -156,10 +156,7 @@
                                                     <SettingsPager NumericButtonCount="5"></SettingsPager>
                                                 </dx:ASPxGridView>
                                                 <asp:Panel ID="Panel1" runat="server">
-                                                    <table style="width: 100%">
-                                                        <tr>
-                                                            <td></td>
-                                                        </tr>
+                                                    <table style="width: 100%">                                                        
                                                         <tr>
                                                             <td style="color: #666666; font-family: Tahoma; font-size: 10px; text-align: right; padding-top: 2px;">
                                                                 <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Close" AutoPostBack="false" UseSubmitBehavior="false">
