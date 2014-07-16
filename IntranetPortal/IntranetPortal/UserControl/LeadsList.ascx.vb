@@ -18,7 +18,7 @@ Public Class LeadsList
             Dim subOridates = Employee.GetManagedEmployees(Page.User.Identity.Name)
 
             If category = LeadStatus.InProcess Then
-                subOridates = Employee.GetManagedEmployees(Page.User.Identity.Name)
+                subOridates = Employee.GetManagedEmployees(Page.User.Identity.Name, False)
                 Dim leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
                 gridLeads.DataSource = leads
                 gridLeads.DataBind()
@@ -64,7 +64,15 @@ Public Class LeadsList
         Using Context As New Entities
             Dim subOridates = Employee.GetDeptUsers(OfficeName)
 
-            Dim leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
+            Dim leads As Object
+
+            If category = LeadStatus.InProcess Then
+                subOridates = Employee.GetDeptUsersList(OfficeName, False).Select(Function(emp) emp.Name).ToArray
+                leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
+            Else
+                leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
+            End If
+
             gridLeads.DataSource = leads
             gridLeads.DataBind()
         End Using

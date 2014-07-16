@@ -32,19 +32,14 @@
     End Function
 
     Public Shared Function GetManagedEmployees(managerName As String) As String()
-        Dim emps As New List(Of Employee)
-        Dim mgr = GetInstance(managerName)
-        emps.Add(mgr)
-        emps.AddRange(GetSubOrdinate(mgr.EmployeeID))
-
-        Return emps.Select(Function(e) e.Name).ToArray
+        Return GetManagedEmployees(managerName, True)
     End Function
 
-    Public Shared Function GetManagedEmployees(managerName As String, isActive As String) As String()
+    Public Shared Function GetManagedEmployees(managerName As String, onlyActive As String) As String()
         Dim emps As New List(Of Employee)
         Dim mgr = GetInstance(managerName)
         emps.Add(mgr)
-        emps.AddRange(GetSubOrdinate(mgr.EmployeeID))
+        emps.AddRange(GetSubOrdinate(mgr.EmployeeID, onlyActive))
 
         Return emps.Select(Function(e) e.Name).ToArray
     End Function
@@ -60,22 +55,37 @@
         Return GetSubOrdinate(employeeID, True)
     End Function
 
-    Public Shared Function GetSubOrdinate(employeeID As Integer, isActive As Boolean) As List(Of Employee)
+    Public Shared Function GetSubOrdinate(employeeID As Integer, onlyActive As Boolean) As List(Of Employee)
         Dim emps As New List(Of Employee)
         Using context As New Entities
-            For Each emp In context.Employees.Where(Function(em) em.ReportTo = employeeID And em.Active = isActive)
-                emps.Add(emp)
-                emps.AddRange(GetSubOrdinate(emp.EmployeeID))
-            Next
+            If onlyActive = True Then
+                For Each emp In context.Employees.Where(Function(em) em.ReportTo = employeeID And em.Active = onlyActive)
+                    emps.Add(emp)
+                    emps.AddRange(GetSubOrdinate(emp.EmployeeID))
+                Next
+            Else
+                For Each emp In context.Employees.Where(Function(em) em.ReportTo = employeeID)
+                    emps.Add(emp)
+                    emps.AddRange(GetSubOrdinate(emp.EmployeeID))
+                Next
+            End If
         End Using
 
         Return emps
     End Function
 
-    Public Shared Function GetDeptUsers(deptName As String) As String()
-        Dim emps As New List(Of Employee)
+    Public Shared Function GetDeptUsers(deptName As String, Optional onlyActive As Boolean = True) As String()
+        Return GetDeptUsersList(deptName, onlyActive).Select(Function(em) em.Name).ToArray
+
+        'Dim emps As New List(Of Employee)
+        'Using context As New Entities
+        '    Return context.Employees.Where(Function(em) em.Department = deptName And em.Active = True).Select(Function(em) em.Name).ToArray
+        'End Using
+    End Function
+
+    Public Shared Function GetUnActiveUser(deptName As String) As String()
         Using context As New Entities
-            Return context.Employees.Where(Function(em) em.Department = deptName And em.Active = True).Select(Function(em) em.Name).ToArray
+            Return context.Employees.Where(Function(em) em.Department = deptName And em.Active = False).Select(Function(em) em.Name).ToArray
         End Using
     End Function
 

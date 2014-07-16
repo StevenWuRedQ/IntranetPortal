@@ -77,6 +77,14 @@ Public Class Utility
     End Function
 
     Public Shared Function GetOfficeLeadsCount(status As LeadStatus, officeName As String) As Integer
+        If status = LeadStatus.InProcess Then
+            Return GetMgrLeadsCount(status, Employee.GetDeptUsers(officeName, False))
+        End If
+
+        If status = LeadStatus.ALL Then
+            Return GetMgrLeadsCount(status, Employee.GetDeptUsers(officeName)) + GetMgrLeadsCount(LeadStatus.InProcess, Employee.GetUnActiveUser(officeName))
+        End If
+
         Dim emps = Employee.GetDeptUsers(officeName)
         Return GetMgrLeadsCount(status, emps)
     End Function
