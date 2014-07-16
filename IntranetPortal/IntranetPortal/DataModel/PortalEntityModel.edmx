@@ -1,0 +1,1313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agent_Properties">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="varchar" MaxLength="11" />
+          <Property Name="Agent Name" Type="varchar" MaxLength="35" />
+          <Property Name="Property Address" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="2" />
+          <Property Name="Out_Address" Type="varchar" MaxLength="50" />
+          <Property Name="Out_City" Type="varchar" MaxLength="50" />
+          <Property Name="Out_State" Type="varchar" MaxLength="2" />
+          <Property Name="Out_Zipcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="APIOrders">
+          <Key>
+            <PropertyRef Name="ApiOrderID" />
+          </Key>
+          <Property Name="ApiOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="Acris" Type="int" />
+          <Property Name="TaxBill" Type="int" />
+          <Property Name="ECBViolation" Type="int" />
+          <Property Name="WaterBill" Type="int" />
+          <Property Name="Zillow" Type="int" />
+          <Property Name="TLO" Type="int" />
+          <Property Name="LatestSale" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="OrderTime" Type="datetime" />
+          <Property Name="Orderby" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReportTo" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="FileAttachments">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="10" />
+          <Property Name="Name" Type="nvarchar" MaxLength="120" />
+          <Property Name="ContentType" Type="nvarchar" MaxLength="200" />
+          <Property Name="Size" Type="int" />
+          <Property Name="Data" Type="varbinary(max)" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="Createby" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="HomeOwnerPhone">
+          <Key>
+            <PropertyRef Name="PhoneID" />
+          </Key>
+          <Property Name="PhoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="OwnerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Source" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+        </EntityType>
+        <EntityType Name="HomeOwners">
+          <Key>
+            <PropertyRef Name="OwnerID" />
+          </Key>
+          <Property Name="OwnerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="200" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="200" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="50" />
+          <Property Name="ExtensionData" Type="nvarchar" MaxLength="200" />
+          <Property Name="LocateReport" Type="varbinary(max)" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Leads">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="LeadsName" Type="nvarchar" MaxLength="120" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Process" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="CallbackDate" Type="date" />
+          <Property Name="Neighborhood" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="AssignDate" Type="datetime" />
+          <Property Name="AssignBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LeadsActivityLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActivityDate" Type="datetime" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="LeadsInfo">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="IsLisPendens" Type="bit" />
+          <Property Name="IsOtherLiens" Type="bit" />
+          <Property Name="IsTaxesOwed" Type="bit" />
+          <Property Name="IsWaterOwed" Type="bit" />
+          <Property Name="IsECBViolations" Type="bit" />
+          <Property Name="IsDOBViolations" Type="bit" />
+          <Property Name="C1stMotgrAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="C2ndMotgrAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TaxesAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TaxesOrderStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxesOrderTime" Type="datetime" />
+          <Property Name="TaxesOrderDeliveryTime" Type="datetime" />
+          <Property Name="WaterAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="WaterOrderStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="WaterOrderTime" Type="datetime" />
+          <Property Name="WaterOrderDeliveryTime" Type="datetime" />
+          <Property Name="ECBViolationsAmt" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ECBOrderStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="ECBOrderTime" Type="datetime" />
+          <Property Name="ECBOrderDeliveryTime" Type="datetime" />
+          <Property Name="DOBViolationsAmt" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DOBOrderStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOBOrderTime" Type="datetime" />
+          <Property Name="DOBOrderDeliveryTime" Type="datetime" />
+          <Property Name="AcrisOrderStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="AcrisOrderTime" Type="datetime" />
+          <Property Name="AcrisOrderDeliveryTime" Type="datetime" />
+          <Property Name="LastPaid" Type="date" />
+          <Property Name="IsCoOnFile" Type="bit" />
+          <Property Name="TypeOfCo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="70" />
+          <Property Name="CoOwner" Type="nvarchar" MaxLength="70" />
+          <Property Name="Date" Type="smalldatetime" />
+          <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="SaleDate" Type="smalldatetime" />
+          <Property Name="TaxClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="SaleType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Condition" Type="nchar" MaxLength="15" />
+          <Property Name="Block" Type="nchar" MaxLength="5" />
+          <Property Name="Lot" Type="nchar" MaxLength="4" />
+          <Property Name="DOBViolation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Deed" Type="nvarchar" MaxLength="50" />
+          <Property Name="LPindex" Type="nvarchar" MaxLength="50" />
+          <Property Name="YearBuilt" Type="nchar" MaxLength="4" />
+          <Property Name="NumFloors" Type="int" />
+          <Property Name="BuildingDem" Type="nvarchar" MaxLength="50" />
+          <Property Name="LotDem" Type="nvarchar" MaxLength="50" />
+          <Property Name="EstValue" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="StreetName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NeighName" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Borough" Type="nvarchar" MaxLength="50" />
+          <Property Name="Zoning" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaxFar" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActualFar" Type="nvarchar" MaxLength="50" />
+          <Property Name="NYCSqft" Type="float" />
+          <Property Name="UnbuiltSqft" Type="float" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LoginLogs">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="LogInTime" Type="datetime" />
+          <Property Name="LogoutTime" Type="datetime" />
+          <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="NYC_St_Names">
+          <Key>
+            <PropertyRef Name="st_name" />
+            <PropertyRef Name="BOROUGH" />
+          </Key>
+          <Property Name="st_name" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="BOROUGH" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderResponses">
+          <Key>
+            <PropertyRef Name="ResponseID" />
+          </Key>
+          <Property Name="ResponseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="APIOrderNo" Type="int" />
+          <Property Name="InfoType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Updatetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OwnerContacts">
+          <Key>
+            <PropertyRef Name="OwnerContactID" />
+          </Key>
+          <Property Name="OwnerContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="OwnerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PortalLisPen">
+          <Key>
+            <PropertyRef Name="LisPenID" />
+          </Key>
+          <Property Name="LisPenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Docket_Number" Type="nchar" MaxLength="10" />
+          <Property Name="CountyNum" Type="int" />
+          <Property Name="County" Type="nvarchar" MaxLength="50" />
+          <Property Name="Section" Type="nchar" MaxLength="2" />
+          <Property Name="Block" Type="nchar" MaxLength="5" />
+          <Property Name="Lot" Type="nchar" MaxLength="4" />
+          <Property Name="Number" Type="nchar" MaxLength="10" />
+          <Property Name="ST_Name" Type="nchar" MaxLength="30" />
+          <Property Name="Zip" Type="nchar" MaxLength="5" />
+          <Property Name="NEIGH_NAME" Type="nchar" MaxLength="25" />
+          <Property Name="FileDate" Type="date" Nullable="false" />
+          <Property Name="Original_Mortgage" Type="float" />
+          <Property Name="Mortgage_Date" Type="date" Nullable="false" />
+          <Property Name="Interest_Rate" Type="float" />
+          <Property Name="Monthly_Payment" Type="float" />
+          <Property Name="Defendant" Type="nvarchar" MaxLength="90" />
+          <Property Name="Plaintiff" Type="nvarchar" MaxLength="90" />
+          <Property Name="Attorney" Type="nvarchar" MaxLength="60" />
+          <Property Name="Attorney_Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Terms" Type="nvarchar" MaxLength="50" />
+          <Property Name="CollectedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PortalQuotes">
+          <Key>
+            <PropertyRef Name="QuoteID" />
+          </Key>
+          <Property Name="QuoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Quote" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Author" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Rolename" />
+            <PropertyRef Name="ApplicationName" />
+          </Key>
+          <Property Name="Rolename" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApplicationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SharedLeads">
+          <Key>
+            <PropertyRef Name="SharedID" />
+          </Key>
+          <Property Name="SharedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAppointments">
+          <Key>
+            <PropertyRef Name="AppoitID" />
+          </Key>
+          <Property Name="AppoitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="150" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="ScheduleDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Location" Type="nvarchar" MaxLength="120" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="50" />
+          <Property Name="Agent" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Label" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LogID" Type="int" />
+        </EntityType>
+        <EntityType Name="UserMessages">
+          <Key>
+            <PropertyRef Name="MsgID" />
+          </Key>
+          <Property Name="MsgID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="Message" Type="nvarchar" MaxLength="1000" />
+          <Property Name="NotifyTime" Type="datetime" />
+          <Property Name="ReceiveTime" Type="datetime" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Createby" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="ParentMsg" Type="int" />
+        </EntityType>
+        <EntityType Name="UsersInRoles">
+          <Key>
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Rolename" />
+            <PropertyRef Name="ApplicationName" />
+          </Key>
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rolename" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApplicationName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserTasks">
+          <Key>
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="TaskID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="120" Nullable="false" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" />
+          <Property Name="Important" Type="nvarchar" MaxLength="50" />
+          <Property Name="Location" Type="nvarchar" MaxLength="120" />
+          <Property Name="Schedule" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="NotifyDate" Type="datetime" />
+          <Property Name="Status" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar(max)" />
+          <Property Name="LogID" Type="int" />
+        </EntityType>
+        <EntityContainer Name="IntranetPortalModelStoreContainer">
+          <EntitySet Name="Agent_Properties" EntityType="Self.Agent_Properties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APIOrders" EntityType="Self.APIOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileAttachments" EntityType="Self.FileAttachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeOwnerPhone" EntityType="Self.HomeOwnerPhone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeOwners" EntityType="Self.HomeOwners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Leads" EntityType="Self.Leads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeadsActivityLog" EntityType="Self.LeadsActivityLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeadsInfo" EntityType="Self.LeadsInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginLogs" EntityType="Self.LoginLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderResponses" EntityType="Self.OrderResponses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OwnerContacts" EntityType="Self.OwnerContacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortalLisPen" EntityType="Self.PortalLisPen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortalQuotes" EntityType="Self.PortalQuotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SharedLeads" EntityType="Self.SharedLeads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAppointments" EntityType="Self.UserAppointments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserMessages" EntityType="Self.UserMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersInRoles" EntityType="Self.UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTasks" EntityType="Self.UserTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NYC_St_Names" EntityType="Self.NYC_St_Names" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [NYC_St_Names].[st_name] AS [st_name], 
+    [NYC_St_Names].[BOROUGH] AS [BOROUGH]
+    FROM [dbo].[NYC_St_Names] AS [NYC_St_Names]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IntranetPortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employees" EntityType="IntranetPortalModel.Employee" />
+          <EntitySet Name="LeadsActivityLogs" EntityType="IntranetPortalModel.LeadsActivityLog" />
+          <EntitySet Name="Leads" EntityType="IntranetPortalModel.Lead" />
+          <EntitySet Name="LeadsInfoes" EntityType="IntranetPortalModel.LeadsInfo" />
+          <AssociationSet Name="LeadLeadsInfo" Association="IntranetPortalModel.LeadLeadsInfo">
+            <End Role="Lead" EntitySet="Leads" />
+            <End Role="LeadsInfo" EntitySet="LeadsInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeLead" Association="IntranetPortalModel.EmployeeLead">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Lead" EntitySet="Leads" />
+          </AssociationSet>
+          <AssociationSet Name="LeadsActivityLogLead" Association="IntranetPortalModel.LeadsActivityLogLead">
+            <End Role="LeadsActivityLog" EntitySet="LeadsActivityLogs" />
+            <End Role="Lead" EntitySet="Leads" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeLeadsActivityLog" Association="IntranetPortalModel.EmployeeLeadsActivityLog">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="LeadsActivityLog" EntitySet="LeadsActivityLogs" />
+          </AssociationSet>
+          <EntitySet Name="Roles" EntityType="IntranetPortalModel.Role" />
+          <EntitySet Name="UsersInRoles" EntityType="IntranetPortalModel.UsersInRole" />
+          <AssociationSet Name="RoleUsersInRole" Association="IntranetPortalModel.RoleUsersInRole">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UsersInRole" EntitySet="UsersInRoles" />
+          </AssociationSet>
+          <EntitySet Name="FileAttachments" EntityType="IntranetPortalModel.FileAttachment" />
+          <EntitySet Name="UserTasks" EntityType="IntranetPortalModel.UserTask" />
+          <EntitySet Name="UserAppointments" EntityType="IntranetPortalModel.UserAppointment" />
+          <EntitySet Name="OrderResponses" EntityType="IntranetPortalModel.OrderRespons" />
+          <EntitySet Name="APIOrders" EntityType="IntranetPortalModel.APIOrder" />
+          <EntitySet Name="UserMessages" EntityType="IntranetPortalModel.UserMessage" />
+          <EntitySet Name="PortalLisPens" EntityType="IntranetPortalModel.PortalLisPen" />
+          <EntitySet Name="NYC_St_Names" EntityType="IntranetPortalModel.NYC_St_Names" />
+          <EntitySet Name="PortalQuotes" EntityType="IntranetPortalModel.PortalQuote" />
+          <EntitySet Name="OwnerContacts" EntityType="IntranetPortalModel.OwnerContact" />
+          <EntitySet Name="Agent_Properties" EntityType="IntranetPortalModel.Agent_Properties" />
+          <EntitySet Name="HomeOwners" EntityType="IntranetPortalModel.HomeOwner" />
+          <EntitySet Name="LoginLogs" EntityType="IntranetPortalModel.LoginLog" />
+          <EntitySet Name="SharedLeads" EntityType="IntranetPortalModel.SharedLead" />
+          <EntitySet Name="HomeOwnerPhones" EntityType="IntranetPortalModel.HomeOwnerPhone" />
+        </EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportTo" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="Leads" Relationship="IntranetPortalModel.EmployeeLead" FromRole="Employee" ToRole="Lead" />
+          <NavigationProperty Name="LeadsActivityLogs" Relationship="IntranetPortalModel.EmployeeLeadsActivityLog" FromRole="Employee" ToRole="LeadsActivityLog" />
+        </EntityType>
+        <EntityType Name="LeadsActivityLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActivityDate" Type="DateTime" Precision="3" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Lead" Relationship="IntranetPortalModel.LeadsActivityLogLead" FromRole="LeadsActivityLog" ToRole="Lead" />
+          <NavigationProperty Name="Employee" Relationship="IntranetPortalModel.EmployeeLeadsActivityLog" FromRole="LeadsActivityLog" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Lead">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="LeadsName" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Process" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CallbackDate" Type="DateTime" Precision="0" />
+          <Property Name="Neighborhood" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AssignDate" Type="DateTime" Precision="3" />
+          <Property Name="AssignBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LeadsInfo" Relationship="IntranetPortalModel.LeadLeadsInfo" FromRole="Lead" ToRole="LeadsInfo" />
+          <NavigationProperty Name="Employee" Relationship="IntranetPortalModel.EmployeeLead" FromRole="Lead" ToRole="Employee" />
+          <NavigationProperty Name="LeadsActivityLogs" Relationship="IntranetPortalModel.LeadsActivityLogLead" FromRole="Lead" ToRole="LeadsActivityLog" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LeadsInfo">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="IsLisPendens" Type="Boolean" />
+          <Property Name="IsOtherLiens" Type="Boolean" />
+          <Property Name="IsTaxesOwed" Type="Boolean" />
+          <Property Name="IsWaterOwed" Type="Boolean" />
+          <Property Name="IsECBViolations" Type="Boolean" />
+          <Property Name="IsDOBViolations" Type="Boolean" />
+          <Property Name="C1stMotgrAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="C2ndMotgrAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TaxesAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TaxesOrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxesOrderTime" Type="DateTime" Precision="3" />
+          <Property Name="TaxesOrderDeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="WaterAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WaterOrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WaterOrderTime" Type="DateTime" Precision="3" />
+          <Property Name="WaterOrderDeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="ECBViolationsAmt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ECBOrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ECBOrderTime" Type="DateTime" Precision="3" />
+          <Property Name="ECBOrderDeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="DOBViolationsAmt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DOBOrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOBOrderTime" Type="DateTime" Precision="3" />
+          <Property Name="DOBOrderDeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="AcrisOrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AcrisOrderTime" Type="DateTime" Precision="3" />
+          <Property Name="AcrisOrderDeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="LastPaid" Type="DateTime" Precision="0" />
+          <Property Name="IsCoOnFile" Type="Boolean" />
+          <Property Name="TypeOfCo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Owner" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwner" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SaleDate" Type="DateTime" Precision="0" />
+          <Property Name="TaxClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SaleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Condition" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Block" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Lot" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="DOBViolation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Deed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LPindex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Lead" Relationship="IntranetPortalModel.LeadLeadsInfo" FromRole="LeadsInfo" ToRole="Lead" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YearBuilt" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="NumFloors" Type="Int32" />
+          <Property Name="BuildingDem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LotDem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EstValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NeighName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Borough" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Zoning" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaxFar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActualFar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NYCSqft" Type="Double" />
+          <Property Name="UnbuiltSqft" Type="Double" />
+        </EntityType>
+        <Association Name="LeadLeadsInfo">
+          <End Type="IntranetPortalModel.Lead" Role="Lead" Multiplicity="0..1" />
+          <End Type="IntranetPortalModel.LeadsInfo" Role="LeadsInfo" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="LeadsInfo">
+              <PropertyRef Name="BBLE" />
+            </Principal>
+            <Dependent Role="Lead">
+              <PropertyRef Name="BBLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeLead">
+          <End Type="IntranetPortalModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="IntranetPortalModel.Lead" Role="Lead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Lead">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LeadsActivityLogLead">
+          <End Type="IntranetPortalModel.LeadsActivityLog" Role="LeadsActivityLog" Multiplicity="*" />
+          <End Type="IntranetPortalModel.Lead" Role="Lead" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Lead">
+              <PropertyRef Name="BBLE" />
+            </Principal>
+            <Dependent Role="LeadsActivityLog">
+              <PropertyRef Name="BBLE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeLeadsActivityLog">
+          <End Type="IntranetPortalModel.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="IntranetPortalModel.LeadsActivityLog" Role="LeadsActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="LeadsActivityLog">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Rolename" />
+            <PropertyRef Name="ApplicationName" />
+          </Key>
+          <Property Name="Rolename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UsersInRole" Relationship="IntranetPortalModel.RoleUsersInRole" FromRole="Role" ToRole="UsersInRole" />
+        </EntityType>
+        <EntityType Name="UsersInRole">
+          <Key>
+            <PropertyRef Name="Username" />
+            <PropertyRef Name="Rolename" />
+            <PropertyRef Name="ApplicationName" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rolename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApplicationName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Role" Relationship="IntranetPortalModel.RoleUsersInRole" FromRole="UsersInRole" ToRole="Role" />
+        </EntityType>
+        <Association Name="RoleUsersInRole">
+          <End Type="IntranetPortalModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="IntranetPortalModel.UsersInRole" Role="UsersInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Rolename" />
+              <PropertyRef Name="ApplicationName" />
+            </Principal>
+            <Dependent Role="UsersInRole">
+              <PropertyRef Name="Rolename" />
+              <PropertyRef Name="ApplicationName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FileAttachment">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="ContentType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Int32" />
+          <Property Name="Data" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Createby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserTask">
+          <Key>
+            <PropertyRef Name="TaskID" />
+          </Key>
+          <Property Name="TaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Important" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Schedule" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LogID" Type="Int32" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="NotifyDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="UserAppointment">
+          <Key>
+            <PropertyRef Name="AppoitID" />
+          </Key>
+          <Property Name="AppoitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Subject" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ScheduleDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="Manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LogID" Type="Int32" />
+          <Property Name="Label" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OrderRespons">
+          <Key>
+            <PropertyRef Name="ResponseID" />
+          </Key>
+          <Property Name="ResponseID" Type="Int32" Nullable="false" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="APIOrderNo" Type="Int32" />
+          <Property Name="InfoType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Updatetime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="APIOrder">
+          <Key>
+            <PropertyRef Name="ApiOrderID" />
+          </Key>
+          <Property Name="ApiOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Acris" Type="Int32" />
+          <Property Name="TaxBill" Type="Int32" />
+          <Property Name="ECBViolation" Type="Int32" />
+          <Property Name="WaterBill" Type="Int32" />
+          <Property Name="Zillow" Type="Int32" />
+          <Property Name="TLO" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="OrderTime" Type="DateTime" Precision="3" />
+          <Property Name="Orderby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LatestSale" Type="Int32" />
+        </EntityType>
+        <EntityType Name="UserMessage">
+          <Key>
+            <PropertyRef Name="MsgID" />
+          </Key>
+          <Property Name="MsgID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="NotifyTime" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Createby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ParentMsg" Type="Int32" />
+          <Property Name="ReceiveTime" Type="DateTime" Precision="3" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PortalLisPen">
+          <Key>
+            <PropertyRef Name="LisPenID" />
+          </Key>
+          <Property Name="LisPenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Docket_Number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CountyNum" Type="Int32" />
+          <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Section" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="Block" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Lot" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ST_Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="NEIGH_NAME" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="FileDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Original_Mortgage" Type="Double" />
+          <Property Name="Mortgage_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Interest_Rate" Type="Double" />
+          <Property Name="Monthly_Payment" Type="Double" />
+          <Property Name="Defendant" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Plaintiff" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Attorney" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Attorney_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Terms" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CollectedOn" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="NYC_St_Names">
+          <Key>
+            <PropertyRef Name="st_name" />
+            <PropertyRef Name="BOROUGH" />
+          </Key>
+          <Property Name="st_name" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="BOROUGH" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PortalQuote">
+          <Key>
+            <PropertyRef Name="QuoteID" />
+          </Key>
+          <Property Name="QuoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Quote" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="OwnerContact">
+          <Key>
+            <PropertyRef Name="OwnerContactID" />
+          </Key>
+          <Property Name="OwnerContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Agent_Properties">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Agent_Name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="Property_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Out_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Out_City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Out_State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Out_Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="HomeOwner">
+          <Key>
+            <PropertyRef Name="OwnerID" />
+          </Key>
+          <Property Name="OwnerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ExtensionData" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="LocateReport" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="LoginLog">
+          <Key>
+            <PropertyRef Name="LogID" />
+          </Key>
+          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="LogInTime" Type="DateTime" Precision="3" />
+          <Property Name="LogoutTime" Type="DateTime" Precision="3" />
+          <Property Name="IPAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SharedLead">
+          <Key>
+            <PropertyRef Name="SharedID" />
+          </Key>
+          <Property Name="SharedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="HomeOwnerPhone">
+          <Key>
+            <PropertyRef Name="PhoneID" />
+          </Key>
+          <Property Name="PhoneID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="IntranetPortalModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="IntranetPortalModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ReportTo" ColumnName="ReportTo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadsActivityLogs">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LeadsActivityLog">
+              <MappingFragment StoreEntitySet="LeadsActivityLog">
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leads">
+            <EntityTypeMapping TypeName="IntranetPortalModel.Lead">
+              <MappingFragment StoreEntitySet="Leads">
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="AssignBy" ColumnName="AssignBy" />
+                <ScalarProperty Name="AssignDate" ColumnName="AssignDate" />
+                <ScalarProperty Name="Neighborhood" ColumnName="Neighborhood" />
+                <ScalarProperty Name="CallbackDate" ColumnName="CallbackDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Process" ColumnName="Process" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="LeadsName" ColumnName="LeadsName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadsInfoes">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LeadsInfo">
+              <MappingFragment StoreEntitySet="LeadsInfo">
+                <ScalarProperty Name="UnbuiltSqft" ColumnName="UnbuiltSqft" />
+                <ScalarProperty Name="NYCSqft" ColumnName="NYCSqft" />
+                <ScalarProperty Name="ActualFar" ColumnName="ActualFar" />
+                <ScalarProperty Name="MaxFar" ColumnName="MaxFar" />
+                <ScalarProperty Name="Zoning" ColumnName="Zoning" />
+                <ScalarProperty Name="Borough" ColumnName="Borough" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="NeighName" ColumnName="NeighName" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="EstValue" ColumnName="EstValue" />
+                <ScalarProperty Name="LotDem" ColumnName="LotDem" />
+                <ScalarProperty Name="BuildingDem" ColumnName="BuildingDem" />
+                <ScalarProperty Name="NumFloors" ColumnName="NumFloors" />
+                <ScalarProperty Name="YearBuilt" ColumnName="YearBuilt" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LPindex" ColumnName="LPindex" />
+                <ScalarProperty Name="Deed" ColumnName="Deed" />
+                <ScalarProperty Name="Remark4" ColumnName="Remark4" />
+                <ScalarProperty Name="Remark3" ColumnName="Remark3" />
+                <ScalarProperty Name="Remark2" ColumnName="Remark2" />
+                <ScalarProperty Name="Remark1" ColumnName="Remark1" />
+                <ScalarProperty Name="DOBViolation" ColumnName="DOBViolation" />
+                <ScalarProperty Name="Lot" ColumnName="Lot" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="SaleType" ColumnName="SaleType" />
+                <ScalarProperty Name="TaxClass" ColumnName="TaxClass" />
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CoOwner" ColumnName="CoOwner" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="TypeOfCo" ColumnName="TypeOfCo" />
+                <ScalarProperty Name="IsCoOnFile" ColumnName="IsCoOnFile" />
+                <ScalarProperty Name="LastPaid" ColumnName="LastPaid" />
+                <ScalarProperty Name="AcrisOrderDeliveryTime" ColumnName="AcrisOrderDeliveryTime" />
+                <ScalarProperty Name="AcrisOrderTime" ColumnName="AcrisOrderTime" />
+                <ScalarProperty Name="AcrisOrderStatus" ColumnName="AcrisOrderStatus" />
+                <ScalarProperty Name="DOBOrderDeliveryTime" ColumnName="DOBOrderDeliveryTime" />
+                <ScalarProperty Name="DOBOrderTime" ColumnName="DOBOrderTime" />
+                <ScalarProperty Name="DOBOrderStatus" ColumnName="DOBOrderStatus" />
+                <ScalarProperty Name="DOBViolationsAmt" ColumnName="DOBViolationsAmt" />
+                <ScalarProperty Name="ECBOrderDeliveryTime" ColumnName="ECBOrderDeliveryTime" />
+                <ScalarProperty Name="ECBOrderTime" ColumnName="ECBOrderTime" />
+                <ScalarProperty Name="ECBOrderStatus" ColumnName="ECBOrderStatus" />
+                <ScalarProperty Name="ECBViolationsAmt" ColumnName="ECBViolationsAmt" />
+                <ScalarProperty Name="WaterOrderDeliveryTime" ColumnName="WaterOrderDeliveryTime" />
+                <ScalarProperty Name="WaterOrderTime" ColumnName="WaterOrderTime" />
+                <ScalarProperty Name="WaterOrderStatus" ColumnName="WaterOrderStatus" />
+                <ScalarProperty Name="WaterAmt" ColumnName="WaterAmt" />
+                <ScalarProperty Name="TaxesOrderDeliveryTime" ColumnName="TaxesOrderDeliveryTime" />
+                <ScalarProperty Name="TaxesOrderTime" ColumnName="TaxesOrderTime" />
+                <ScalarProperty Name="TaxesOrderStatus" ColumnName="TaxesOrderStatus" />
+                <ScalarProperty Name="TaxesAmt" ColumnName="TaxesAmt" />
+                <ScalarProperty Name="C2ndMotgrAmt" ColumnName="C2ndMotgrAmt" />
+                <ScalarProperty Name="C1stMotgrAmt" ColumnName="C1stMotgrAmt" />
+                <ScalarProperty Name="IsDOBViolations" ColumnName="IsDOBViolations" />
+                <ScalarProperty Name="IsECBViolations" ColumnName="IsECBViolations" />
+                <ScalarProperty Name="IsWaterOwed" ColumnName="IsWaterOwed" />
+                <ScalarProperty Name="IsTaxesOwed" ColumnName="IsTaxesOwed" />
+                <ScalarProperty Name="IsOtherLiens" ColumnName="IsOtherLiens" />
+                <ScalarProperty Name="IsLisPendens" ColumnName="IsLisPendens" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="IntranetPortalModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="Rolename" ColumnName="Rolename" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersInRoles">
+            <EntityTypeMapping TypeName="IntranetPortalModel.UsersInRole">
+              <MappingFragment StoreEntitySet="UsersInRoles">
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="Rolename" ColumnName="Rolename" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileAttachments">
+            <EntityTypeMapping TypeName="IntranetPortalModel.FileAttachment">
+              <MappingFragment StoreEntitySet="FileAttachments">
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Createby" ColumnName="Createby" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTasks">
+            <EntityTypeMapping TypeName="IntranetPortalModel.UserTask">
+              <MappingFragment StoreEntitySet="UserTasks">
+                <ScalarProperty Name="NotifyDate" ColumnName="NotifyDate" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Schedule" ColumnName="Schedule" />
+                <ScalarProperty Name="Important" ColumnName="Important" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAppointments">
+            <EntityTypeMapping TypeName="IntranetPortalModel.UserAppointment">
+              <MappingFragment StoreEntitySet="UserAppointments">
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ScheduleDate" ColumnName="ScheduleDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="AppoitID" ColumnName="AppoitID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderResponses">
+            <EntityTypeMapping TypeName="IntranetPortalModel.OrderRespons">
+              <MappingFragment StoreEntitySet="OrderResponses">
+                <ScalarProperty Name="Updatetime" ColumnName="Updatetime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="InfoType" ColumnName="InfoType" />
+                <ScalarProperty Name="APIOrderNo" ColumnName="APIOrderNo" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="ResponseID" ColumnName="ResponseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APIOrders">
+            <EntityTypeMapping TypeName="IntranetPortalModel.APIOrder">
+              <MappingFragment StoreEntitySet="APIOrders">
+                <ScalarProperty Name="LatestSale" ColumnName="LatestSale" />
+                <ScalarProperty Name="Orderby" ColumnName="Orderby" />
+                <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TLO" ColumnName="TLO" />
+                <ScalarProperty Name="Zillow" ColumnName="Zillow" />
+                <ScalarProperty Name="WaterBill" ColumnName="WaterBill" />
+                <ScalarProperty Name="ECBViolation" ColumnName="ECBViolation" />
+                <ScalarProperty Name="TaxBill" ColumnName="TaxBill" />
+                <ScalarProperty Name="Acris" ColumnName="Acris" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="ApiOrderID" ColumnName="ApiOrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserMessages">
+            <EntityTypeMapping TypeName="IntranetPortalModel.UserMessage">
+              <MappingFragment StoreEntitySet="UserMessages">
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="ReceiveTime" ColumnName="ReceiveTime" />
+                <ScalarProperty Name="ParentMsg" ColumnName="ParentMsg" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Createby" ColumnName="Createby" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="NotifyTime" ColumnName="NotifyTime" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="MsgID" ColumnName="MsgID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalLisPens">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PortalLisPen">
+              <MappingFragment StoreEntitySet="PortalLisPen">
+                <ScalarProperty Name="CollectedOn" ColumnName="CollectedOn" />
+                <ScalarProperty Name="Terms" ColumnName="Terms" />
+                <ScalarProperty Name="Attorney_Phone" ColumnName="Attorney_Phone" />
+                <ScalarProperty Name="Attorney" ColumnName="Attorney" />
+                <ScalarProperty Name="Plaintiff" ColumnName="Plaintiff" />
+                <ScalarProperty Name="Defendant" ColumnName="Defendant" />
+                <ScalarProperty Name="Monthly_Payment" ColumnName="Monthly_Payment" />
+                <ScalarProperty Name="Interest_Rate" ColumnName="Interest_Rate" />
+                <ScalarProperty Name="Mortgage_Date" ColumnName="Mortgage_Date" />
+                <ScalarProperty Name="Original_Mortgage" ColumnName="Original_Mortgage" />
+                <ScalarProperty Name="FileDate" ColumnName="FileDate" />
+                <ScalarProperty Name="NEIGH_NAME" ColumnName="NEIGH_NAME" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="ST_Name" ColumnName="ST_Name" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Lot" ColumnName="Lot" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="CountyNum" ColumnName="CountyNum" />
+                <ScalarProperty Name="Docket_Number" ColumnName="Docket_Number" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="LisPenID" ColumnName="LisPenID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NYC_St_Names">
+            <EntityTypeMapping TypeName="IntranetPortalModel.NYC_St_Names">
+              <MappingFragment StoreEntitySet="NYC_St_Names">
+                <ScalarProperty Name="BOROUGH" ColumnName="BOROUGH" />
+                <ScalarProperty Name="st_name" ColumnName="st_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalQuotes">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PortalQuote">
+              <MappingFragment StoreEntitySet="PortalQuotes">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Quote" ColumnName="Quote" />
+                <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OwnerContacts">
+            <EntityTypeMapping TypeName="IntranetPortalModel.OwnerContact">
+              <MappingFragment StoreEntitySet="OwnerContacts">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="ContactType" ColumnName="ContactType" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="OwnerContactID" ColumnName="OwnerContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Agent_Properties">
+            <EntityTypeMapping TypeName="IntranetPortalModel.Agent_Properties">
+              <MappingFragment StoreEntitySet="Agent_Properties">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Out_Zipcode" ColumnName="Out_Zipcode" />
+                <ScalarProperty Name="Out_State" ColumnName="Out_State" />
+                <ScalarProperty Name="Out_City" ColumnName="Out_City" />
+                <ScalarProperty Name="Out_Address" ColumnName="Out_Address" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Property_Address" ColumnName="Property Address" />
+                <ScalarProperty Name="Agent_Name" ColumnName="Agent Name" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeOwners">
+            <EntityTypeMapping TypeName="IntranetPortalModel.HomeOwner">
+              <MappingFragment StoreEntitySet="HomeOwners">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LocateReport" ColumnName="LocateReport" />
+                <ScalarProperty Name="ExtensionData" ColumnName="ExtensionData" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginLogs">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LoginLog">
+              <MappingFragment StoreEntitySet="LoginLogs">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="LogoutTime" ColumnName="LogoutTime" />
+                <ScalarProperty Name="LogInTime" ColumnName="LogInTime" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="LogID" ColumnName="LogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SharedLeads">
+            <EntityTypeMapping TypeName="IntranetPortalModel.SharedLead">
+              <MappingFragment StoreEntitySet="SharedLeads">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="SharedID" ColumnName="SharedID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeOwnerPhones">
+            <EntityTypeMapping TypeName="IntranetPortalModel.HomeOwnerPhone">
+              <MappingFragment StoreEntitySet="HomeOwnerPhone">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="PhoneID" ColumnName="PhoneID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

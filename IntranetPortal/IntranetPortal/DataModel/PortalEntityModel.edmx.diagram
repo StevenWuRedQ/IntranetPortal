@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aa1dbe47eff54603a23941d0def4ef3e" Name="Diagram1" ZoomLevel="91">
+        <EntityTypeShape EntityType="IntranetPortalModel.Employee" Width="1.5" PointX="1.125" PointY="1.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LeadsActivityLog" Width="2.5" PointX="3.75" PointY="1.375" />
+        <EntityTypeShape EntityType="IntranetPortalModel.Lead" Width="1.75" PointX="3.625" PointY="4.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LeadsInfo" Width="1.5" PointX="8.5" PointY="1.5" />
+        <AssociationConnector Association="IntranetPortalModel.LeadLeadsInfo" />
+        <AssociationConnector Association="IntranetPortalModel.EmployeeLead" />
+        <AssociationConnector Association="IntranetPortalModel.LeadsActivityLogLead" />
+        <AssociationConnector Association="IntranetPortalModel.EmployeeLeadsActivityLog" />
+        <EntityTypeShape EntityType="IntranetPortalModel.Role" Width="1.5" PointX="3" PointY="8.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.UsersInRole" Width="1.75" PointX="0.75" PointY="8.625" />
+        <AssociationConnector Association="IntranetPortalModel.RoleUsersInRole" />
+        <EntityTypeShape EntityType="IntranetPortalModel.FileAttachment" Width="1.5" PointX="6.375" PointY="8.125" />
+        <EntityTypeShape EntityType="IntranetPortalModel.UserTask" Width="1.5" PointX="6.625" PointY="1.375" />
+        <EntityTypeShape EntityType="IntranetPortalModel.UserAppointment" Width="1.5" PointX="10.375" PointY="1.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.OrderRespons" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.APIOrder" Width="1.5" PointX="3.375" PointY="11.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.UserMessage" Width="1.5" PointX="5.375" PointY="11.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PortalLisPen" Width="1.5" PointX="12.5" PointY="6.875" />
+        <EntityTypeShape EntityType="IntranetPortalModel.NYC_St_Names" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PortalQuote" Width="1.5" PointX="12.375" PointY="3.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.OwnerContact" Width="1.5" PointX="11.375" PointY="13.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.Agent_Properties" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.HomeOwner" Width="1.5" PointX="3.375" PointY="16.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LoginLog" Width="1.5" PointX="13.375" PointY="13.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.SharedLead" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.HomeOwnerPhone" Width="1.5" PointX="14.375" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

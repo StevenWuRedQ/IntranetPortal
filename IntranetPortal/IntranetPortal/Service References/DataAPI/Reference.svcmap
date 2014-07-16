@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d0637a46-eca3-47e7-b82e-9e1de87e354c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>false</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://georgepc:8002/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="6598c575-8e9a-47ac-a24b-3da7b715371a" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="60d11988-8b8b-4412-b873-69c85c034fed" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="service21.xsd" MetadataType="Schema" ID="f22635ac-1b15-4fcc-a1ee-f98ce932752b" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="TestComponent_VB1.xsd" MetadataType="Schema" ID="41205c24-819d-4625-a057-3d2e631c557f" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="Arrays1.xsd" MetadataType="Schema" ID="28595811-c1da-487c-a94a-976753fe3a9b" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="TestComponent_VB.TLOWebService1.xsd" MetadataType="Schema" ID="1cac9edb-78b2-4e9f-84a8-9cbb30fd4ad8" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="System.ComponentModel1.xsd" MetadataType="Schema" ID="14d71494-d6d6-4c8f-ac09-0925a631ff43" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="System1.xsd" MetadataType="Schema" ID="68c8f3fc-43c8-4bad-8179-490cfee1656a" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

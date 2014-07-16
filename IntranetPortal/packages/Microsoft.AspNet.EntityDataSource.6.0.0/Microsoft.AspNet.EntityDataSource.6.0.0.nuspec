@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.AspNet.EntityDataSource</id>
+    <version>6.0.0</version>
+    <title>Microsoft ASP.NET EntityDataSource control</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/aspnetcomponent_rtw_enu.htm</licenseUrl>
+    <projectUrl>http://go.microsoft.com/fwlink/?LinkID=320979</projectUrl>
+    <iconUrl>http://go.microsoft.com/fwlink/?LinkID=386613</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This package contains the runtime assembly for ASP.NET EntityDataSource control for EntityFramework.</description>
+    <summary>This package contains the runtime assembly for ASP.NET EntityDataSource control for EntityFramework.</summary>
+    <language>en-US</language>
+    <tags>Microsoft EF Database Data ASP.NET</tags>
+    <dependencies>
+      <dependency id="EntityFramework" version="6.0.0" />
+    </dependencies>
+  </metadata>
+</package>

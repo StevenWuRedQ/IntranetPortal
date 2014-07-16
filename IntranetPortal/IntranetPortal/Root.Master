@@ -1,0 +1,276 @@
+<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Root.master.vb" Inherits="IntranetPortal.Root" %>
+
+<%@ Import Namespace="System.ComponentModel" %>
+
+<%--<%@ Register Assembly="DevExpress.Web.v13.2, Version=13.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxRibbon" TagPrefix="dx" %>--%>
+<%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Agent Portal (beta) - My Ideal Property</title>
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
+    <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
+    <style>
+        html, body, #form1 {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+    </style>
+    <script type="text/javascript" src="/scripts/PortalMessager.js"></script>
+    <script type="text/javascript">
+        // here is a cross-browser compatible way of connecting 
+        // handlers to events, in case you don't have one
+        function attachEventHandler(element, eventToHandle, eventHandler) {
+            if (element.attachEvent) {
+                element.attachEvent(eventToHandle, eventHandler);
+            } else if (element.addEventListener) {
+                element.addEventListener(eventToHandle.replace("on", ""), eventHandler, false);
+            } else {
+                element[eventToHandle] = eventHandler;
+            }
+        }
+        function Resize() {
+            splitterOnMainMaster.AdjustControl();
+            alert('splitterOnMainMaster resize');
+            splitterRightDefaultPage.AdjustControl();
+            alert('splitterRightDefaultPage resize');
+        }
+
+    </script>
+</head>
+<body onload="init();">
+    <form id="form1" runat="server">
+        <script type="text/javascript">
+            function ShowSearchLeadsInfo(bble) {
+                var url = '/ViewLeadsInfo.aspx?id=' + bble;
+                window.showModalDialog(url, 'View Leads Info', 'dialogWidth:1350px;dialogHeight:810px');
+            }
+            function GoToLead(bble) {
+                window.location.href = "/default.aspx?t=search&key=" + encodeURIComponent(txtSearchKeyClient.GetText()) + "&id=" + bble;
+            }
+
+            function endsWith(str, suffix) {
+                return str.indexOf(suffix, str.length - suffix.length) !== -1;
+            }
+        </script>
+        <dx:ASPxSplitter ID="MainSplitter" runat="server" Height="100%" Width="100%" FullscreenMode="True" Orientation="Vertical">
+            <Styles>
+                <Pane>
+                    <Paddings Padding="0px" />
+                    <Border BorderWidth="0px" />
+                </Pane>
+            </Styles>
+            <Panes>
+                <dx:SplitterPane Name="HeaderPane" Size="50px">
+                    <PaneStyle>
+                        <BorderBottom BorderWidth="1px" />
+                    </PaneStyle>
+                    <ContentCollection>
+                        <dx:SplitterContentControl>
+                            <div class="header" style="width: 100%; display: table; height: 100%; background-color: #EDEDED;">
+                                <div style="display: table-row">
+                                    <div style="float: left; display: table-cell; width: 260px;">
+                                        <div class="title" style="font-weight: bold">My Ideal Property Portal</div>
+                                    </div>
+                                    <div style="display: table-cell; float: left; margin-left: auto; margin-right: 0px; text-align: center; align-content: center;">
+                                    </div>
+                                    <div style="display: table-cell; width: 700px">
+                                        <table style="margin-top: 8px; float: right">
+                                            <tr>
+                                                <td>
+                                                    <dx:ASPxTextBox runat="server" ID="txtSearchKey" Width="300px" ClientInstanceName="txtSearchKeyClient" AutoPostBack="false">
+                                                        <ClientSideEvents KeyDown="function(s,e){
+                                                                if(e.htmlEvent.keyCode == 13)
+                                                                {
+                                                                    btnSearchClient.DoClick();                                                                                                                                     
+                                                                }                                                               
+                                                            }" />
+                                                    </dx:ASPxTextBox>
+                                                </td>
+                                                <td>
+                                                    <dx:ASPxButton runat="server" RenderMode="Button" ID="btnSearch" ClientInstanceName="btnSearchClient" UseSubmitBehavior="false" Image-Url="/images/Search.png" Image-Height="16px" Text="Search" Image-Width="16px" AutoPostBack="false">
+                                                        <Image Height="16px" Width="16px" Url="/images/Search.png"></Image>
+                                                        <FocusRectPaddings PaddingLeft="2" PaddingRight="2" PaddingBottom="0" PaddingTop="0" />
+                                                        <ClientSideEvents Click="function(s,e){
+                                                            ASPxPopupSearchPanel.ShowAtElement(s.GetMainElement());
+                                                            gridSearchLeads.PerformCallback(txtSearchKeyClient.GetText());                                                           
+                                                            }" />
+                                                    </dx:ASPxButton>
+                                                </td>
+                                                <td style="margin-left: 20px;" class="login">
+                                                    <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                                                        <AnonymousTemplate>
+                                                            <a id="loginLink" href="~/Account/Login.aspx" runat="server">Log In</a>
+                                                            <a id="registerLink" href="~/Account/Register.aspx" runat="server" visible="false">|Register</a>
+                                                        </AnonymousTemplate>
+                                                        <LoggedInTemplate>
+                                                            Welcome <span>
+                                                                <asp:LoginName ID="HeadLoginName" runat="server" />
+                                                            </span>!
+                                                [<asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />
+                                                            |<a href="/Account/ChangePassword.aspx">Setting</a>]
+                                                        </LoggedInTemplate>
+                                                    </asp:LoginView>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSearchPanel" Width="570px" Height="250px"
+                                        MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="pcMain"
+                                        ShowHeader="false" CloseAction="CloseButton"
+                                        runat="server" EnableViewState="false" PopupHorizontalAlign="RightSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
+                                        <ContentCollection>
+                                            <dx:PopupControlContentControl runat="server">
+                                                <dx:ASPxGridView runat="server" KeyFieldName="BBLE" ClientInstanceName="gridSearchLeads" ID="gridSearch" OnCustomCallback="gridSearch_CustomCallback" Width="100%" OnAfterPerformCallback="gridSearch_AfterPerformCallback">
+                                                    <Columns>
+                                                        <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1" Width="260px">
+                                                            <Settings AutoFilterCondition="Contains" />
+                                                            <DataItemTemplate>
+                                                                <a href="#" onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))  %>'><%# Eval("LeadsName")%></a>
+                                                                <span runat="server" visible='<%# Not EmpUnderManaged.Contains(Eval("EmployeeName"))%>'><%# Eval("LeadsName") %></span>
+                                                            </DataItemTemplate>
+                                                        </dx:GridViewDataTextColumn>
+                                                        <dx:GridViewDataTextColumn FieldName="Status" Settings-AllowHeaderFilter="False" VisibleIndex="2" Width="80px">
+                                                            <Settings AllowHeaderFilter="False"></Settings>
+                                                            <DataItemTemplate>
+                                                                <%# DirectCast(Eval("Status"), IntranetPortal.LeadStatus).ToString %>
+                                                            </DataItemTemplate>
+                                                        </dx:GridViewDataTextColumn>
+                                                        <dx:GridViewDataColumn FieldName="EmployeeName" VisibleIndex="4" Width="150px">
+                                                            <GroupRowTemplate>
+                                                                Employee Name: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
+                                                            </GroupRowTemplate>
+                                                        </dx:GridViewDataColumn>
+                                                        <dx:GridViewDataColumn Width="35px" VisibleIndex="5">
+                                                            <DataItemTemplate>
+                                                                <img src="/images/goto.png" title="Go To Lead" style="width: 16px; height: 16px; vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />
+                                                                <img src="/images/flag1.png" style="width: 16px; height: 16px; vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />
+                                                            </DataItemTemplate>
+                                                        </dx:GridViewDataColumn>
+                                                    </Columns>
+                                                    <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true"
+                                                        EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
+                                                    <SettingsPager NumericButtonCount="5"></SettingsPager>
+                                                </dx:ASPxGridView>
+                                                <asp:Panel ID="Panel1" runat="server">
+                                                    <table style="width: 100%">
+                                                        <tr>
+                                                            <td></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="color: #666666; font-family: Tahoma; font-size: 10px; text-align: right; padding-top: 2px;">
+                                                                <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Close" AutoPostBack="false" UseSubmitBehavior="false">
+                                                                    <ClientSideEvents Click="function(){
+                                                                                                                        ASPxPopupSearchPanel.Hide();                                                                                                                                                                                                                                            
+                                                                                                                        }"></ClientSideEvents>
+                                                                </dx:ASPxButton>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </asp:Panel>
+                                            </dx:PopupControlContentControl>
+                                        </ContentCollection>
+                                    </dx:ASPxPopupControl>
+                                    <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
+                                </div>
+                            </div>
+                        </dx:SplitterContentControl>
+                    </ContentCollection>
+                </dx:SplitterPane>
+                <dx:SplitterPane Name="MainPane" Separator-Visible="False">
+                    <Separator Visible="False"></Separator>
+                    <PaneStyle CssClass="noborder"></PaneStyle>
+                    <ContentCollection>
+                        <dx:SplitterContentControl>
+                            <asp:ContentPlaceHolder ID="Content" runat="server" />
+                        </dx:SplitterContentControl>
+                    </ContentCollection>
+                </dx:SplitterPane>
+                <dx:SplitterPane Name="FootPane" Separator-Visible="False" Size="50">
+                    <Separator Visible="False"></Separator>
+                    <PaneStyle>
+                        <BorderTop BorderWidth="1" />
+                    </PaneStyle>
+                    <ContentCollection>
+                        <dx:SplitterContentControl>
+                            <div class="footer">
+                                <div class="copyright">
+                                    Copyright © My Ideal Property 1998-2013 RESERVED.
+                                    <dx:ASPxLabel ID="lblVersion" runat="server"></dx:ASPxLabel>
+                                    &nbsp;
+                                    <div id="errorMsg"></div>
+                                </div>
+                            </div>
+                        </dx:SplitterContentControl>
+                    </ContentCollection>
+                </dx:SplitterPane>
+            </Panes>
+        </dx:ASPxSplitter>
+        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMessagerControlClient" Width="460px" Height="350px"
+            MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl2"
+            HeaderText="New Message" Modal="true"
+            runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+            <ContentCollection>
+                <dx:PopupControlContentControl runat="server">
+                    <dx:ASPxPageControl Width="100%" runat="server" ActiveTabIndex="0" TabSpacing="0px" EnableHierarchyRecreation="True" ShowTabs="false">
+                        <TabPages>
+                            <dx:TabPage Text="First" Name="tabStreet">
+                                <ContentCollection>
+                                    <dx:ContentControl runat="server">
+                                        <table style="width: 100%">
+                                            <thead>
+                                                <tr>
+                                                    <td id="tdMsgTitle" style="font-weight: bold; margin-bottom: 5px; font-size: 14px"></td>
+                                                </tr>
+                                            </thead>
+                                            <tr style="vertical-align: top">
+                                                <td id="tdMsgContent" style="height: 300px"></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
+                                                    <dx:ASPxButton ID="ASPxButton2" runat="server" Text="OK" AutoPostBack="false">
+                                                        <ClientSideEvents Click="function(){
+                                                                                                                        ReadMsg();                                                                                                                     
+                                                                                                                                                                                                                                              
+                                                                                                                        }"></ClientSideEvents>
+                                                    </dx:ASPxButton>
+                                                    <dx:ASPxButton ID="ASPxButton3" runat="server" Text="Go to Lead" AutoPostBack="false">
+                                                        <ClientSideEvents Click="function(){
+                                                                                                                      PopupViewLead();                                                                                                                  
+                                                                                                                                                                                                                                              
+                                                                                                                        }"></ClientSideEvents>
+                                                    </dx:ASPxButton>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </dx:ContentControl>
+                                </ContentCollection>
+                            </dx:TabPage>
+                        </TabPages>
+                    </dx:ASPxPageControl>
+                </dx:PopupControlContentControl>
+            </ContentCollection>
+            <ClientSideEvents Closing="function(){hook();}" />
+        </dx:ASPxPopupControl>
+        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupAwayControlClient" Width="800px" Height="400px"
+            ID="ASPxPopupControl1" HeaderText="While You Were Away" Modal="true" CloseAction="CloseButton"
+            runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+            <ContentCollection>
+                <dx:PopupControlContentControl runat="server">
+                </dx:PopupControlContentControl>
+            </ContentCollection>
+            <ClientSideEvents Closing="function(){hook();}" />
+        </dx:ASPxPopupControl>
+
+        <%--<script type="text/javascript">
+             attachEventHandler(window, "onresize", function () {
+                  //splitterOnMainMaster.AdjustControl();
+                 //alert("resize");
+             });
+    </script>--%>
+    </form>
+</body>
+</html>

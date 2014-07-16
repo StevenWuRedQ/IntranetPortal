@@ -1,0 +1,1086 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{6CA9F52B-C8D7-4098-8FB4-0626D61A9E32}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <RootNamespace>IntranetPortal</RootNamespace>
+    <AssemblyName>IntranetPortal</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MyType>Custom</MyType>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UpgradeBackupLocation />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>IntranetPortal.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>IntranetPortal.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Charts.v14.1.Core, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Office.v14.1.Core, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.PivotGrid.v14.1.Core, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v14.1.Core, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v14.1.Core, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Sparkline.v14.1.Core, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.SpellChecker.v14.1.Core, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxGauges.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxHtmlEditor.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxPivotGrid.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxScheduler.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxSpellChecker.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxThemes.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.ASPxTreeList.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Web.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.Xpo.v14.1.Web, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v14.1.Web, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGauges.v14.1.Core, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGauges.v14.1.Presets, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraPivotGrid.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v14.1.Web, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v14.1.Core, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.EntityDataSource">
+      <HintPath>..\packages\Microsoft.AspNet.EntityDataSource.6.0.0\lib\net40\Microsoft.AspNet.EntityDataSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Collections.Specialized" />
+    <Import Include="System.Configuration" />
+    <Import Include="System.Text" />
+    <Import Include="System.Text.RegularExpressions" />
+    <Import Include="System.Web" />
+    <Import Include="System.Web.Caching" />
+    <Import Include="System.Web.SessionState" />
+    <Import Include="System.Web.Security" />
+    <Import Include="System.Web.Profile" />
+    <Import Include="System.Web.UI" />
+    <Import Include="System.Web.UI.WebControls" />
+    <Import Include="System.Web.UI.WebControls.WebParts" />
+    <Import Include="System.Web.UI.HtmlControls" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\ChangePassword.aspx.designer.vb">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.vb">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.designer.vb">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.vb">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login2.aspx.designer.vb">
+      <DependentUpon>Login2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Login2.aspx.vb">
+      <DependentUpon>Login2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login.aspx.designer.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Login.aspx.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Register.aspx.designer.vb">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Register.aspx.vb">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\RegisterSuccess.aspx.designer.vb">
+      <DependentUpon>RegisterSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\RegisterSuccess.aspx.vb">
+      <DependentUpon>RegisterSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BingViewMap.aspx.designer.vb">
+      <DependentUpon>BingViewMap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BingViewMap.aspx.vb">
+      <DependentUpon>BingViewMap.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="CodeFolder\Agent_Properties.vb" />
+    <Compile Include="CodeFolder\APIOrder.vb" />
+    <Compile Include="CodeFolder\DataWCFService.vb" />
+    <Compile Include="CodeFolder\Employee.vb" />
+    <Compile Include="CodeFolder\HomeOwner.vb" />
+    <Compile Include="CodeFolder\Lead.vb" />
+    <Compile Include="CodeFolder\LeadsActivityLog.vb" />
+    <Compile Include="CodeFolder\OnlineUser.vb" />
+    <Compile Include="CodeFolder\OwnerContact.vb" />
+    <Compile Include="CodeFolder\PortalLisPen.vb" />
+    <Compile Include="CodeFolder\PortalMembership.vb" />
+    <Compile Include="CodeFolder\PortalRoleProvider.vb" />
+    <Compile Include="CodeFolder\UserAppointment.vb" />
+    <Compile Include="CodeFolder\UserMessage.vb" />
+    <Compile Include="CodeFolder\UserTask.vb" />
+    <Compile Include="CodeFolder\Utility.vb" />
+    <Compile Include="Calendar.aspx.designer.vb">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Calendar.aspx.vb">
+      <DependentUpon>Calendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DataAPITesting.aspx.designer.vb">
+      <DependentUpon>DataAPITesting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DataAPITesting.aspx.vb">
+      <DependentUpon>DataAPITesting.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="DataModel\Agent_Properties.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\APIOrder.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Employee.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\FileAttachment.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\HomeOwner.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\HomeOwnerPhone.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Lead.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\LeadsActivityLog.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\LeadsInfo.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\LoginLog.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\NYC_St_Names.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\OrderRespons.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\OwnerContact.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PortalEntityModel.Context.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PortalEntityModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PortalEntityModel.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PortalEntityModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PortalEntityModel.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PortalLisPen.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PortalQuote.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\Role.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\SharedLead.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\UserAppointment.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\UserMessage.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\UsersInRole.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\UserTask.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.designer.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\AppointmentDragToolTip.ascx.designer.vb">
+      <DependentUpon>AppointmentDragToolTip.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\AppointmentDragToolTip.ascx.vb">
+      <DependentUpon>AppointmentDragToolTip.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\AppointmentForm.ascx.designer.vb">
+      <DependentUpon>AppointmentForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\AppointmentForm.ascx.vb">
+      <DependentUpon>AppointmentForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\AppointmentFormEx.ascx.designer.vb">
+      <DependentUpon>AppointmentFormEx.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\AppointmentFormEx.ascx.vb">
+      <DependentUpon>AppointmentFormEx.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\AppointmentToolTip.ascx.designer.vb">
+      <DependentUpon>AppointmentToolTip.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\AppointmentToolTip.ascx.vb">
+      <DependentUpon>AppointmentToolTip.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\GotoDateForm.ascx.designer.vb">
+      <DependentUpon>GotoDateForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\GotoDateForm.ascx.vb">
+      <DependentUpon>GotoDateForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\HorizontalAppointmentTemplate.ascx.designer.vb">
+      <DependentUpon>HorizontalAppointmentTemplate.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\HorizontalAppointmentTemplate.ascx.vb">
+      <DependentUpon>HorizontalAppointmentTemplate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\HorizontalSameDayAppointmentTemplate.ascx.designer.vb">
+      <DependentUpon>HorizontalSameDayAppointmentTemplate.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\HorizontalSameDayAppointmentTemplate.ascx.vb">
+      <DependentUpon>HorizontalSameDayAppointmentTemplate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\InplaceEditor.ascx.designer.vb">
+      <DependentUpon>InplaceEditor.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\InplaceEditor.ascx.vb">
+      <DependentUpon>InplaceEditor.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\RecurrentAppointmentDeleteForm.ascx.designer.vb">
+      <DependentUpon>RecurrentAppointmentDeleteForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\RecurrentAppointmentDeleteForm.ascx.vb">
+      <DependentUpon>RecurrentAppointmentDeleteForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\RecurrentAppointmentEditForm.ascx.designer.vb">
+      <DependentUpon>RecurrentAppointmentEditForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\RecurrentAppointmentEditForm.ascx.vb">
+      <DependentUpon>RecurrentAppointmentEditForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\ReminderForm.ascx.designer.vb">
+      <DependentUpon>ReminderForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\ReminderForm.ascx.vb">
+      <DependentUpon>ReminderForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\SelectionToolTip.ascx.designer.vb">
+      <DependentUpon>SelectionToolTip.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\SelectionToolTip.ascx.vb">
+      <DependentUpon>SelectionToolTip.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\VerticalAppointmentTemplate.ascx.designer.vb">
+      <DependentUpon>VerticalAppointmentTemplate.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="DevExpress\ASPxSchedulerForms\VerticalAppointmentTemplate.ascx.vb">
+      <DependentUpon>VerticalAppointmentTemplate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DownloadFile.aspx.designer.vb">
+      <DependentUpon>DownloadFile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DownloadFile.aspx.vb">
+      <DependentUpon>DownloadFile.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.vb">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Management\ImportAgentData.aspx.designer.vb">
+      <DependentUpon>ImportAgentData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\ImportAgentData.aspx.vb">
+      <DependentUpon>ImportAgentData.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LeadAgent.aspx.designer.vb">
+      <DependentUpon>LeadAgent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LeadAgent.aspx.vb">
+      <DependentUpon>LeadAgent.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="CodeFolder\LeadsInfo.vb" />
+    <Compile Include="Light.master.designer.vb">
+      <DependentUpon>Light.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Light.master.vb">
+      <DependentUpon>Light.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.master.designer.vb">
+      <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Main.master.vb">
+      <DependentUpon>Main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\Default.aspx.designer.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Default.aspx.vb">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Management\Management.aspx.designer.vb">
+      <DependentUpon>Management.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\Management.aspx.vb">
+      <DependentUpon>Management.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Management\MgrEmployee.aspx.designer.vb">
+      <DependentUpon>MgrEmployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\MgrEmployee.aspx.vb">
+      <DependentUpon>MgrEmployee.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Management\MgrRole.aspx.designer.vb">
+      <DependentUpon>MgrRole.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\MgrRole.aspx.vb">
+      <DependentUpon>MgrRole.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MgrViewLeads.aspx.designer.vb">
+      <DependentUpon>MgrViewLeads.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MgrViewLeads.aspx.vb">
+      <DependentUpon>MgrViewLeads.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Management\LeadsManagement.aspx.designer.vb">
+      <DependentUpon>LeadsManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\LeadsManagement.aspx.vb">
+      <DependentUpon>LeadsManagement.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Management\ManagementMaster.master.designer.vb">
+      <DependentUpon>ManagementMaster.master</DependentUpon>
+    </Compile>
+    <Compile Include="Management\ManagementMaster.master.vb">
+      <DependentUpon>ManagementMaster.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Management\PortalStatus.aspx.designer.vb">
+      <DependentUpon>PortalStatus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\PortalStatus.aspx.vb">
+      <DependentUpon>PortalStatus.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Management\TaskList.aspx.designer.vb">
+      <DependentUpon>TaskList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\TaskList.aspx.vb">
+      <DependentUpon>TaskList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Management\TroubleShooting.aspx.designer.vb">
+      <DependentUpon>TroubleShooting.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\TroubleShooting.aspx.vb">
+      <DependentUpon>TroubleShooting.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MapTest.aspx.designer.vb">
+      <DependentUpon>MapTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MapTest.aspx.vb">
+      <DependentUpon>MapTest.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Messager\MessagerAsyncHandler.vb" />
+    <Compile Include="Messager\MessagerAsyncResult.vb" />
+    <Compile Include="Messager\MessagerHandler.vb" />
+    <Compile Include="Messager\WhileImAwayMessagerHandler.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PopupControl\ShareLeads.aspx.designer.vb">
+      <DependentUpon>ShareLeads.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\ShareLeads.aspx.vb">
+      <DependentUpon>ShareLeads.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PopupControl\WhileAwayMsgs.aspx.designer.vb">
+      <DependentUpon>WhileAwayMsgs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\WhileAwayMsgs.aspx.vb">
+      <DependentUpon>WhileAwayMsgs.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PreviewFile.aspx.designer.vb">
+      <DependentUpon>PreviewFile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PreviewFile.aspx.vb">
+      <DependentUpon>PreviewFile.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Reports\LeaderReport.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XtraReport1.Designer.vb">
+      <DependentUpon>XtraReport1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XtraReport1.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Root.Master.designer.vb">
+      <DependentUpon>Root.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Root.Master.vb">
+      <DependentUpon>Root.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Service References\DataAPI\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ShowReport.aspx.designer.vb">
+      <DependentUpon>ShowReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowReport.aspx.vb">
+      <DependentUpon>ShowReport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="StreetView.aspx.designer.vb">
+      <DependentUpon>StreetView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StreetView.aspx.vb">
+      <DependentUpon>StreetView.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="SummaryPage.aspx.designer.vb">
+      <DependentUpon>SummaryPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SummaryPage.aspx.vb">
+      <DependentUpon>SummaryPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Test.aspx.designer.vb">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test.aspx.vb">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="UploadFilePage.aspx.designer.vb">
+      <DependentUpon>UploadFilePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadFilePage.aspx.vb">
+      <DependentUpon>UploadFilePage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\ActivityLogs.ascx.designer.vb">
+      <DependentUpon>ActivityLogs.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\ActivityLogs.ascx.vb">
+      <DependentUpon>ActivityLogs.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\CompanyTree.ascx.designer.vb">
+      <DependentUpon>CompanyTree.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\CompanyTree.ascx.vb">
+      <DependentUpon>CompanyTree.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Devexpress\CustomAppointmentForm.ascx.designer.vb">
+      <DependentUpon>CustomAppointmentForm.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Devexpress\CustomAppointmentForm.ascx.vb">
+      <DependentUpon>CustomAppointmentForm.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Devexpress\CustomVerticalAppointmentTemplate.ascx.designer.vb">
+      <DependentUpon>CustomVerticalAppointmentTemplate.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Devexpress\CustomVerticalAppointmentTemplate.ascx.vb">
+      <DependentUpon>CustomVerticalAppointmentTemplate.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\Devexpress\CustomInplaceEditor.ascx.designer.vb">
+      <DependentUpon>CustomInplaceEditor.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Devexpress\CustomInplaceEditor.ascx.vb">
+      <DependentUpon>CustomInplaceEditor.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DocumentsUI.ascx.designer.vb">
+      <DependentUpon>DocumentsUI.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DocumentsUI.ascx.vb">
+      <DependentUpon>DocumentsUI.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\DoorKnockMap.ascx.designer.vb">
+      <DependentUpon>DoorKnockMap.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\DoorKnockMap.ascx.vb">
+      <DependentUpon>DoorKnockMap.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\HomeOwnerInfo.ascx.designer.vb">
+      <DependentUpon>HomeOwnerInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\HomeOwnerInfo.ascx.vb">
+      <DependentUpon>HomeOwnerInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeadsInfo.ascx.designer.vb">
+      <DependentUpon>LeadsInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeadsInfo.ascx.vb">
+      <DependentUpon>LeadsInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeadsList.ascx.designer.vb">
+      <DependentUpon>LeadsList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeadsList.ascx.vb">
+      <DependentUpon>LeadsList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeadsStatisticSummary.ascx.designer.vb">
+      <DependentUpon>LeadsStatisticSummary.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeadsStatisticSummary.ascx.vb">
+      <DependentUpon>LeadsStatisticSummary.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\LeadsSubMenu.ascx.designer.vb">
+      <DependentUpon>LeadsSubMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\LeadsSubMenu.ascx.vb">
+      <DependentUpon>LeadsSubMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\UserSummary.ascx.designer.vb">
+      <DependentUpon>UserSummary.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UserSummary.ascx.vb">
+      <DependentUpon>UserSummary.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewLeadsInfo.aspx.designer.vb">
+      <DependentUpon>ViewLeadsInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewLeadsInfo.aspx.vb">
+      <DependentUpon>ViewLeadsInfo.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="WCFDataServices\IPortalDataService.vb" />
+    <Compile Include="WCFDataServices\PortalDataService.svc.vb">
+      <DependentUpon>PortalDataService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.vb">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.vb">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\Login2.aspx" />
+    <Content Include="BingViewMap.aspx" />
+    <Content Include="DataAPITesting.aspx" />
+    <Content Include="DevExpress\ASPxSchedulerForms\AppointmentDragToolTip.ascx" />
+    <Content Include="DevExpress\ASPxSchedulerForms\AppointmentForm.ascx" />
+    <Content Include="DevExpress\ASPxSchedulerForms\AppointmentFormEx.ascx" />
+    <Content Include="DevExpress\ASPxSchedulerForms\AppointmentToolTip.ascx" />
+    <Content Include="DevExpress\ASPxSchedulerForms\GotoDateForm.ascx" />
+    <Content Include="DevExpress\ASPxSchedulerForms\HorizontalAppointmentTemplate.ascx" />
+    <Content Include="DevExpress\ASPxSchedulerForms\HorizontalSameDayAppointmentTemplate.ascx" />
+    <Content Include="DevExpress\ASPxSchedulerForms\InplaceEditor.ascx" />
+    <Content Include="DevExpress\ASPxSchedulerForms\RecurrentAppointmentDeleteForm.ascx" />
+    <Content Include="DevExpress\ASPxSchedulerForms\RecurrentAppointmentEditForm.ascx" />
+    <Content Include="DevExpress\ASPxSchedulerForms\ReminderForm.ascx" />
+    <Content Include="DevExpress\ASPxSchedulerForms\SelectionToolTip.ascx" />
+    <Content Include="DevExpress\ASPxSchedulerForms\VerticalAppointmentTemplate.ascx" />
+    <Content Include="DownloadFile.aspx" />
+    <Content Include="images\1_down_picto.png" />
+    <Content Include="images\accounting_icon.jpg" />
+    <Content Include="images\add-button-hi.png" />
+    <Content Include="images\Arrows-Down-icon.png" />
+    <Content Include="images\Arrows-Up-icon.png" />
+    <Content Include="images\assigned.png" />
+    <Content Include="images\Background.png" />
+    <Content Include="images\background2.png" />
+    <Content Include="images\callback.png" />
+    <Content Include="images\category.jpg" />
+    <Content Include="images\Closed.png" />
+    <Content Include="images\construction.png" />
+    <Content Include="images\Create.png" />
+    <Content Include="images\Dead.png" />
+    <Content Include="images\door_knocks.jpg" />
+    <Content Include="images\door_knocks.png" />
+    <Content Include="images\Down.png" />
+    <Content Include="images\downArrow.jpg" />
+    <Content Include="images\Evication.jpg" />
+    <Content Include="images\Evication.png" />
+    <Content Include="images\flag.png" />
+    <Content Include="images\flag1.png" />
+    <Content Include="images\goto.png" />
+    <Content Include="images\imprimir.png" />
+    <Content Include="images\Management.jpg" />
+    <Content Include="images\Management.png" />
+    <Content Include="images\MyIdealProptery.png" />
+    <Content Include="images\New.jpg" />
+    <Content Include="images\new_lead.png" />
+    <Content Include="images\new_lead1.png" />
+    <Content Include="images\priority.jpg" />
+    <Content Include="images\process-icon2.jpg" />
+    <Content Include="images\Refresh.png" />
+    <Content Include="images\search.png" />
+    <Content Include="images\shortsale.gif" />
+    <Content Include="images\Short_Sale_Sign.jpg" />
+    <Content Include="images\Street-view.png" />
+    <Content Include="images\toolbarBg.png" />
+    <Content Include="images\Up-icon.png" />
+    <Content Include="images\Up.png" />
+    <Content Include="images\upcomming.jpg" />
+    <Content Include="images\User Group.png" />
+    <Content Include="images\x_close.png" />
+    <Content Include="Management\ImportAgentData.aspx" />
+    <Content Include="Management\Default.aspx" />
+    <Content Include="Management\Management.aspx" />
+    <Content Include="Management\MgrEmployee.aspx" />
+    <Content Include="Management\MgrRole.aspx" />
+    <Content Include="Management\PortalStatus.aspx" />
+    <Content Include="Management\TaskList.aspx" />
+    <Content Include="Management\TroubleShooting.aspx" />
+    <Content Include="MapTest.aspx" />
+    <Content Include="PopupControl\ShareLeads.aspx" />
+    <Content Include="PopupControl\WhileAwayMsgs.aspx" />
+    <Content Include="PreviewFile.aspx" />
+    <Content Include="scripts\LeadsSubMenu.js" />
+    <Content Include="scripts\PortalMessager.js" />
+    <Content Include="scripts\prototype.js" />
+    <None Include="Service References\DataAPI\Arrays1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\configuration91.svcinfo" />
+    <None Include="Service References\DataAPI\configuration.svcinfo" />
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Acris_Out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.ALL_NYC_Tax_Liens_CO_Info.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.DOB_PPO_out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_Assessment.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_Assessment_Initial_Search_View.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_Prop_tax_Out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_WaterSewer_Out.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.LisPen.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TLOLocateReportOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TLO_SuperPhoneResults.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Acris_LatestOwner_View.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Acris_Last_Sales_Info.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_NameAndAddress_View.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\DataAPI\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
+    <Content Include="StreetView.aspx" />
+    <Content Include="SummaryPage.aspx" />
+    <Content Include="Test.aspx" />
+    <Content Include="UploadFilePage.aspx" />
+    <Content Include="UserControl\ActivityLogs.ascx" />
+    <Content Include="UserControl\Devexpress\CustomAppointmentForm.ascx" />
+    <Content Include="UserControl\Devexpress\CustomVerticalAppointmentTemplate.ascx" />
+    <Content Include="UserControl\Devexpress\CustomInplaceEditor.ascx" />
+    <Content Include="UserControl\DocumentsUI.ascx" />
+    <Content Include="UserControl\DoorKnockMap.ascx" />
+    <Content Include="UserControl\HomeOwnerInfo.ascx" />
+    <Content Include="UserControl\LeadsInfo.ascx" />
+    <Content Include="UserControl\LeadsList.ascx" />
+    <Content Include="UserControl\LeadsStatisticSummary.ascx" />
+    <Content Include="UserControl\LeadsSubMenu.ascx" />
+    <Content Include="UserControl\UserSummary.ascx" />
+    <Content Include="ViewLeadsInfo.aspx" />
+    <Content Include="WCFDataServices\PortalDataService.svc" />
+    <Content Include="WebForm2.aspx" />
+    <EmbeddedResource Include="My Project\licenses.licx" />
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\LeaderReport.resx">
+      <DependentUpon>LeaderReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XtraReport1.resx">
+      <DependentUpon>XtraReport1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EntityDeploy Include="DataModel\PortalEntityModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PortalEntityModel.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DataModel\PortalEntityModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PortalEntityModel.edmx</DependentUpon>
+      <LastGenOutput>PortalEntityModel.Context.vb</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\PortalEntityModel.edmx.diagram">
+      <DependentUpon>PortalEntityModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="DataModel\PortalEntityModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PortalEntityModel.edmx</DependentUpon>
+      <LastGenOutput>PortalEntityModel.vb</LastGenOutput>
+    </Content>
+    <Content Include="Default.aspx" />
+    <Content Include="LeadAgent.aspx" />
+    <Content Include="MgrViewLeads.aspx" />
+    <Content Include="Management\LeadsManagement.aspx" />
+    <Content Include="Management\ManagementMaster.master" />
+    <Content Include="Management\Web.config" />
+    <Content Include="images\Web.config" />
+    <None Include="My Project\PublishProfiles\Online.pubxml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\ChangePassword.aspx" />
+    <Content Include="Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Account\Login.aspx" />
+    <Content Include="Account\Register.aspx" />
+    <Content Include="Account\RegisterSuccess.aspx" />
+    <Content Include="images\announce.png" />
+    <Content Include="images\AquaHeader.jpg" />
+    <Content Include="images\asp.png" />
+    <Content Include="images\attach.png" />
+    <Content Include="images\attach_white.png" />
+    <Content Include="images\BlackGlassHeader.jpg" />
+    <Content Include="images\calendar.png" />
+    <Content Include="images\drafts.png" />
+    <Content Include="images\frame.png" />
+    <Content Include="images\GlassHeader.jpg" />
+    <Content Include="images\ide.png" />
+    <Content Include="images\inbox.png" />
+    <Content Include="images\mail.png" />
+    <Content Include="images\person.png" />
+    <Content Include="images\PlasticBlueHeader.jpg" />
+    <Content Include="images\RedWineHeader.jpg" />
+    <Content Include="images\sent.png" />
+    <Content Include="Light.Master" />
+    <Content Include="Main.Master" />
+    <Content Include="Account\Web.config" />
+    <Content Include="scripts\script.js" />
+    <Content Include="ShowReport.aspx" />
+    <Content Include="styles\styles.css" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <Content Include="Root.Master" />
+    <Content Include="UserControl\CompanyTree.ascx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="packages.config" />
+    <Content Include="WCFDataServices\Web.config" />
+    <None Include="Service References\DataAPI\service1.wsdl" />
+    <None Include="Service References\DataAPI\service2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\service21.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\System.ComponentModel1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\System1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\TestComponent_VB.TLOWebService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\TestComponent_VB1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <!--<Content Include="Site.Master" />-->
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Calendar.aspx" />
+    <Content Include="Global.asax" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DataAPI\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <!--<ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>-->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:54528/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

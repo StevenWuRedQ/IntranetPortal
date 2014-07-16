@@ -1,0 +1,1 @@
+<%@ Application Codebehind="Global.asax.vb" Inherits="IntranetPortal.Global_asax" Language="VB" %>

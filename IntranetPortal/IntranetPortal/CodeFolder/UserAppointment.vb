@@ -1,0 +1,41 @@
+﻿Partial Public Class UserAppointment
+    Public Sub NewAppointment()
+        Using context As New Entities
+            CreateBy = HttpContext.Current.User.Identity.Name
+            CreateDate = DateTime.Now
+
+            context.UserAppointments.Add(Me)
+            context.SaveChanges()
+        End Using
+
+    End Sub
+
+    Public Shared Function UpdateAppointmentStatus(logId As Integer, status As AppointmentStatus) As UserAppointment
+
+        Using Context As New Entities
+            Dim userAppoint = Context.UserAppointments.Where(Function(t) t.LogID = logId).SingleOrDefault
+
+            If userAppoint IsNot Nothing Then
+                userAppoint.Status = status
+                Context.SaveChanges()
+            End If
+
+            Return userAppoint
+        End Using
+    End Function
+
+    Public Shared Function GetAppointmentBylogID(logId As Integer) As UserAppointment
+
+        Using context As New Entities
+            Return context.UserAppointments.Where(Function(ua) ua.LogID = logId).SingleOrDefault
+        End Using
+
+    End Function
+
+    Enum AppointmentStatus
+        NewAppointment
+        Accepted
+        Declined
+        ReScheduled
+    End Enum
+End Class

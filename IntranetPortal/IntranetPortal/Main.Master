@@ -1,0 +1,97 @@
+<%@ Master Language="VB" MasterPageFile="~/Root.Master" AutoEventWireup="true" CodeBehind="Main.master.vb" Inherits="IntranetPortal.Main" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <script type="text/javascript" src="/scripts/script.js"></script>
+    
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
+    <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Font-Size="Medium" ClientInstanceName="splitterOnMainMaster">
+        <Styles>
+            <Pane>
+                <Paddings Padding="0px" />
+                <Border BorderWidth="0px" />
+           </Pane>           
+        </Styles>
+        <Panes>
+            <dx:SplitterPane Name="LeftPane" ShowCollapseBackwardButton="True"  MaxSize="320px" Size="260px">
+                <ContentCollection>
+                    <dx:SplitterContentControl>
+                        <dx:ASPxSplitter ID="LeftSplitter" runat="server" Height="100%" Orientation="Vertical" Width="100%">
+                            <Styles>
+                                <Pane>
+                                    <Paddings Padding="0px" />
+                                    <Border BorderWidth="0px" />
+                                </Pane>
+                            </Styles>
+                            <Panes>
+                                <dx:SplitterPane Name="FilterPane">
+                                    <ContentCollection>
+                                        <dx:SplitterContentControl>
+                                            <div style="overflow: auto; overflow-x: hidden; height: 100%;">
+                                                <asp:ContentPlaceHolder ID="Left" runat="server" />
+                                            </div>
+                                        </dx:SplitterContentControl>
+                                    </ContentCollection>
+                                </dx:SplitterPane>
+                                <dx:SplitterPane Name="MenuPane" AllowResize="False" Separator-Visible="False" ShowSeparatorImage="False" Size="110px">
+                                    <Separator>
+                                        <SeparatorStyle>                                            
+                                            <Border BorderWidth="1px" />
+                                            <BorderRight BorderWidth="0px" />
+                                            <BorderLeft BorderWidth="0px" />
+                                        </SeparatorStyle>
+                                    </Separator>
+                                    <ContentCollection>
+                                        <dx:SplitterContentControl>
+                                            <%-- DXCOMMENT: Configure a menu that allows switching between mail and scheduler modes --%>
+                                            <dx:ASPxMenu runat="server" ID="MenuCorner" RenderMode="Lightweight" Width="100%" Orientation="Vertical" Font-Size="Medium">
+                                                <Border BorderWidth="0" />
+                                                <ItemStyle CssClass="menuitem">
+                                                    <Paddings PaddingTop="0px" PaddingBottom="0px" />
+                                                </ItemStyle>
+                                                <Items>
+                                                    <dx:MenuItem Text="Agent" NavigateUrl="/Default.aspx">
+                                                        <Image IconID="people_customer_32x32" />
+                                                    </dx:MenuItem>
+                                                    <dx:MenuItem Text="Eviction" NavigateUrl="#" Visible="false">
+                                                        <Image Url="/images/Evication.png" />
+                                                    </dx:MenuItem>
+                                                    <dx:MenuItem Text="Processing" NavigateUrl="#" Visible="false">
+                                                        <Image Url="/images/Short_Sale_Sign.jpg" />
+                                                    </dx:MenuItem>
+                                                    <dx:MenuItem Text="Construction" NavigateUrl="#" Visible="false">
+                                                        <Image Url="/images/construction.png" />
+                                                    </dx:MenuItem>
+                                                    <dx:MenuItem Text="Accounting" Visible="false">
+                                                        <Image Url="/images/accounting_icon.jpg" />
+                                                    </dx:MenuItem>
+                                                    <dx:MenuItem Text="Management" NavigateUrl="/Management/Management.aspx" Name="manageNode" Visible="false">
+                                                        <Image Url="/images/Management.jpg" />
+                                                    </dx:MenuItem>
+                                                    <dx:MenuItem Text="Calendar" NavigateUrl="~/Calendar.aspx" Target="_blank">
+                                                        <Image Url="/images/calendar.png" />
+                                                    </dx:MenuItem>
+                                                </Items>
+                                            </dx:ASPxMenu>
+                                        </dx:SplitterContentControl>
+                                    </ContentCollection>
+                                </dx:SplitterPane>
+                            </Panes>
+                        </dx:ASPxSplitter>
+                    </dx:SplitterContentControl>
+                </ContentCollection>
+            </dx:SplitterPane>
+            <dx:SplitterPane Name="ContentPane"  ScrollBars="None">
+                <PaneStyle Paddings-Padding="0"></PaneStyle>              
+                <ContentCollection>
+                    <dx:SplitterContentControl>
+                        <div style="overflow: auto; overflow-x: hidden; overflow-y: hidden; height: 100%;">
+                            <asp:ContentPlaceHolder ID="Content" runat="server" />
+                        </div>
+                    </dx:SplitterContentControl>
+                </ContentCollection>
+            </dx:SplitterPane>
+        </Panes>
+    </dx:ASPxSplitter>
+   
+</asp:Content>

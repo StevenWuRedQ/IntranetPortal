@@ -1,0 +1,18 @@
+﻿<%@ Master Language="VB" MasterPageFile="~/Main.Master" AutoEventWireup="false" CodeBehind="ManagementMaster.master.vb" Inherits="IntranetPortal.ManagementMaster" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="Left" runat="server">
+    <dx:ASPxTreeView ID="TreeManagement" AllowSelectNode="True" runat="server">
+        <Nodes>
+            <dx:TreeViewNode Text="Leads" Expanded="true">
+                <Nodes>
+                    <dx:TreeViewNode Text="Assign Newest Leads" NavigateUrl="~/Management/AssignNewestLeads.aspx">
+                    </dx:TreeViewNode>
+                    <dx:TreeViewNode Text="Tracking Leads" Name="nodeTracking" NavigateUrl="~/Management/TrackingLeads.aspx" />
+                </Nodes>
+            </dx:TreeViewNode>
+        </Nodes>
+    </dx:ASPxTreeView>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
+       <asp:ContentPlaceHolder ID="Content" runat="server" />
+</asp:Content>
