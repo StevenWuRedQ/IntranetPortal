@@ -79,7 +79,7 @@
                             Context.Leads.Add(newlead)
                         End If
                     Else
-                        newlead.LeadsName = bble
+                        newlead.LeadsName = li.LeadsName
                         newlead.Neighborhood = li.NeighName
                         newlead.EmployeeID = CInt(cbImportAgent.SelectedItem.Value)
                         newlead.EmployeeName = cbImportAgent.SelectedItem.Text
