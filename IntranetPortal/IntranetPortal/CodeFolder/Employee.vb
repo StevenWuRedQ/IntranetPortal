@@ -1,4 +1,48 @@
-﻿Partial Public Class Employee
+﻿Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.IO
+
+Partial Public Class Employee
+
+    Public Shared Function GetProfile(name As String) As EmployeeProfile
+        Using context As New Entities
+            Dim data = context.UserProfileDatas.Where(Function(up) up.UserName = name).Select(Function(up) up.ProfileData).SingleOrDefault
+            If data IsNot Nothing Then
+                Dim serializer As New BinaryFormatter
+                Dim writer As New MemoryStream(data)
+                Dim profile As EmployeeProfile = serializer.Deserialize(writer)
+                Return profile
+            Else
+                Return New EmployeeProfile
+            End If
+        End Using
+    End Function
+
+    Public Shared Sub SaveProfile(name As String, profile As EmployeeProfile)
+        If profile IsNot Nothing Then
+
+            Using myWriter As New StringWriter
+                Dim serializer As New BinaryFormatter
+                Dim writer As New MemoryStream()
+                serializer.Serialize(writer, profile)
+                writer.Flush()
+
+                Using context As New Entities
+                    Dim userprofile = context.UserProfileDatas.Where(Function(up) up.UserName = name).SingleOrDefault
+                    If userprofile IsNot Nothing Then
+                        userprofile.ProfileData = writer.ToArray
+                    Else
+                        userprofile = New UserProfileData
+                        userprofile.UserName = name
+                        userprofile.ProfileData = writer.ToArray
+
+                        context.UserProfileDatas.Add(userprofile)
+                    End If
+
+                    context.SaveChanges()
+                End Using
+            End Using
+        End If
+    End Sub
 
     Public Shared Function GetInstance(id As Integer) As Employee
         Using context As New Entities

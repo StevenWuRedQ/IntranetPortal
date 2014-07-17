@@ -43,5 +43,6 @@ Partial Public Class Entities
     Public Overridable Property LoginLogs() As DbSet(Of LoginLog)
     Public Overridable Property SharedLeads() As DbSet(Of SharedLead)
     Public Overridable Property HomeOwnerPhones() As DbSet(Of HomeOwnerPhone)
+    Public Overridable Property UserProfileDatas() As DbSet(Of UserProfileData)
 
 End Class

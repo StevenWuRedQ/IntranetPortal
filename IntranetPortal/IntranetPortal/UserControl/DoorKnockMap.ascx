@@ -198,7 +198,9 @@
         calcRoute();
     }
 
-    function OnGetAddressComplete(s, e) {
+    var saveAddress = false;
+    function OnGetAddressComplete(s, e) {     
+
         var address = e.result;
 
         if (address == "" || address == null) {
@@ -263,7 +265,10 @@
     }
 
     function SetOriginPoint() {
-        document.cookie = 'OriginPoint=' + originPoint.GetText() + ';';
+    
+        var data = 'OriginPoint|' + originPoint.GetText();
+        SaveAddressCallback.PerformCallback(data);
+        //document.cookie = 'OriginPoint=' + originPoint.GetText() + ';';
         calcRoute();
     }
 
@@ -317,6 +322,8 @@
 </div>
 <dx:ASPxCallback runat="server" ClientInstanceName="GetAddressCallback" ID="callbackGetAddress" OnCallback="callbackGetAddress_Callback">
     <ClientSideEvents CallbackComplete="OnGetAddressComplete" />
+</dx:ASPxCallback>
+<dx:ASPxCallback runat="server" ClientInstanceName="SaveAddressCallback" ID="ASPxCallback1" OnCallback="callbackGetAddress_Callback">    
 </dx:ASPxCallback>
 <dx:ASPxPopupControl ClientInstanceName="popupSelectDoornockAddress" Width="300px" Height="300px"
     MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl2"

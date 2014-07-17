@@ -4,15 +4,24 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         If Not Page.IsPostBack Then
-            If Request.Cookies("OriginPoint") IsNot Nothing Then
-                txtOriginPoint.Text = Request.Cookies("OriginPoint").Value
+            Dim originPoint = Employee.GetProfile(Page.User.Identity.Name).DoornockAddress
+            If Not String.IsNullOrEmpty(originPoint) Then
+                txtOriginPoint.Text = originPoint
             Else
-                txtOriginPoint.Text = "914 Bedford Ave Brooklyn NY 11205"
+                txtOriginPoint.Text = "191 Patchen Ave Brooklyn NY 11233"
             End If
         End If
     End Sub
 
     Protected Sub callbackGetAddress_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        If e.Parameter.StartsWith("OriginPoint") Then
+            Dim address = e.Parameter.Replace("OriginPoint|", "")
+            Dim profile = Employee.GetProfile(Page.User.Identity.Name)
+            profile.DoornockAddress = address
+            Employee.SaveProfile(Page.User.Identity.Name, profile)
+            Return
+        End If
+
         Using Context As New Entities
 
             Dim addresses = Context.OwnerContacts.Where(Function(c) c.BBLE = e.Parameter And c.ContactType = OwnerContact.OwnerContactType.MailAddress And c.Status = OwnerContact.ContactStatus.DoorKnock).ToList

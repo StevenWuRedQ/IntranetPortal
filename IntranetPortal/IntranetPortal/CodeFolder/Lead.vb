@@ -1,5 +1,29 @@
 ﻿Partial Public Class Lead
 
+    Public ReadOnly Property FormatLeadsname As String
+        Get
+            'Dim leadsName = ""
+
+            'If leadData IsNot Nothing AndAlso Not String.IsNullOrEmpty(leadData.PropertyAddress) Then
+            '    If String.IsNullOrEmpty(leadData.Owner) Then
+            '        Return leadData.PropertyAddress
+            '    End If
+
+            '    leadsName = String.Format("{0} {1} - {2}", leadData.Number, leadData.StreetName, leadData.Owner)
+            '    leadsName = leadsName.TrimStart(" ")
+            '    If Not String.IsNullOrEmpty(leadData.CoOwner) Then
+            '        leadsName += "; " & leadData.CoOwner
+            '    End If
+
+            'End If
+
+            Dim leadsname = String.Format("<span style='color:red'>{0} {1}</span> - {2}", LeadsInfo.Number, LeadsInfo.StreetName, LeadsInfo.Owner)
+            Return leadsname
+
+        End Get
+    End Property
+
+
     Public Shared Function GetInstance(bble As String) As Lead
         Using context As New Entities
             Return context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault

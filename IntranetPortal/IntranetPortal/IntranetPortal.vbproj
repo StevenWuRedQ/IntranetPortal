@@ -241,6 +241,7 @@
     <Compile Include="CodeFolder\APIOrder.vb" />
     <Compile Include="CodeFolder\DataWCFService.vb" />
     <Compile Include="CodeFolder\Employee.vb" />
+    <Compile Include="CodeFolder\EmployeeProfile.vb" />
     <Compile Include="CodeFolder\HomeOwner.vb" />
     <Compile Include="CodeFolder\Lead.vb" />
     <Compile Include="CodeFolder\LeadsActivityLog.vb" />
@@ -337,6 +338,9 @@
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\UserMessage.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\UserProfileData.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\UsersInRole.vb">
