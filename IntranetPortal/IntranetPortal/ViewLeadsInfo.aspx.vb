@@ -3,6 +3,14 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not String.IsNullOrEmpty(Request.QueryString("id")) Then
+            Dim bble = Request.QueryString("id").ToString
+            If Not Employee.HasControlLeads(User.Identity.Name, bble) Then
+                Response.Clear()
+                Response.Write("You are not allowed to view this lead.")
+                Response.End()
+                Return
+            End If
+
             LeadsInfo.BindData(Request.QueryString("id"))
 
             If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then

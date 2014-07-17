@@ -59,7 +59,7 @@
         </td>
         <td rowspan="2" style="width: 10px"></td>
         <td style="width: 380px; vertical-align: top">
-            <h4>Priority</h4>
+            <h4>Hot Leads</h4>
             <div style="border: 1px solid #ededed; height: 355px">
                 <dx:ASPxGridView runat="server" Width="100%" ID="gridPriority" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None">
                     <Columns>

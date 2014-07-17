@@ -21,7 +21,7 @@ Public Class Utility
         Select Case cateName
             Case "New Leads"
                 category = LeadStatus.NewLead
-            Case "Priority"
+            Case "Priority", "Hot Leads"
                 category = LeadStatus.Priority
             Case "Door Knock"
                 category = LeadStatus.DoorKnocks
@@ -118,4 +118,5 @@ Public Class Utility
     Public Shared Function TotalDealsCount() As Integer
         Return GetLeadsCount(LeadStatus.InProcess, HttpContext.Current.User.Identity.Name)
     End Function
+
 End Class

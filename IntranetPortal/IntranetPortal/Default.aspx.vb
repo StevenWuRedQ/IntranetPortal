@@ -19,7 +19,7 @@ Public Class Default2
         newNode.Text = String.Format("New Leads  <font color='black'>({0})</font>", Utility.GetLeadsCount(LeadStatus.NewLead, User.Identity.Name))
 
         Dim priorityNode = AgentTree.Nodes.FindByName("priorityNode")
-        priorityNode.Text = String.Format("Priority <font color='black'>({0})</font>", Utility.GetLeadsCount(LeadStatus.Priority, User.Identity.Name))
+        priorityNode.Text = String.Format("Hot Leads <font color='black'>({0})</font>", Utility.GetLeadsCount(LeadStatus.Priority, User.Identity.Name))
 
         Dim callbackNode = AgentTree.Nodes.FindByName("callBackNode")
         callbackNode.Text = String.Format("Follow Up <font color='black'>({0})</font>", Utility.GetLeadsCount(LeadStatus.Callback, User.Identity.Name))
@@ -63,7 +63,7 @@ Public Class Default2
             priorityNode.Text = String.Format("New Leads <font color='black'>({0})</font>", Utility.GetMgrLeadsCount(LeadStatus.NewLead, emps))
 
             priorityNode = AgentTree.Nodes.FindByName("mgrPriorityNode")
-            priorityNode.Text = String.Format("Priority <font color='black'>({0})</font>", Utility.GetMgrLeadsCount(LeadStatus.Priority, emps))
+            priorityNode.Text = String.Format("Hot Leads <font color='black'>({0})</font>", Utility.GetMgrLeadsCount(LeadStatus.Priority, emps))
 
             callbackNode = AgentTree.Nodes.FindByName("mgrCallbackNode")
             callbackNode.Text = String.Format("Follow Up <font color='black'>({0})</font>", Utility.GetMgrLeadsCount(LeadStatus.Callback, emps))

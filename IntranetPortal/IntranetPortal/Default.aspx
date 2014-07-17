@@ -18,7 +18,7 @@
                                         </dx:TreeViewNode>
                                     </Nodes>
                                 </dx:TreeViewNode>
-                                <dx:TreeViewNode Text="Priority" Image-Url="/images/priority.jpg" NavigateUrl="LeadAgent.aspx?c=Priority" Name="priorityNode">
+                                <dx:TreeViewNode Text="Hot Leads" Image-Url="/images/priority.jpg" NavigateUrl="LeadAgent.aspx?c=Priority" Name="priorityNode">
                                 </dx:TreeViewNode>
                                 <dx:TreeViewNode Text="Follow Up" Expanded="true" Image-Url="/images/callback.png" NavigateUrl="LeadAgent.aspx?c=Call Back" Name="callBackNode">
                                 </dx:TreeViewNode>
@@ -38,7 +38,7 @@
                                 </dx:TreeViewNode>
                                 <dx:TreeViewNode Text="New Leads" Image-Url="/images/new_lead1.png" NavigateUrl="MgrViewLeads.aspx?c=New Leads" Name="mgrNewNode">
                                 </dx:TreeViewNode>
-                                <dx:TreeViewNode Text="Priority" Image-Url="/images/priority.jpg" NavigateUrl="MgrViewLeads.aspx?c=Priority" Name="mgrPriorityNode">
+                                <dx:TreeViewNode Text="Hot Leads" Image-Url="/images/priority.jpg" NavigateUrl="MgrViewLeads.aspx?c=Priority" Name="mgrPriorityNode">
                                 </dx:TreeViewNode>
                                 <dx:TreeViewNode Text="Follow Up" Expanded="true" Image-Url="/images/callback.png" NavigateUrl="MgrViewLeads.aspx?c=Call Back" Name="mgrCallbackNode">
                                 </dx:TreeViewNode>
@@ -54,7 +54,7 @@
                             <Nodes>                               
                                 <dx:TreeViewNode Text="New Leads" Image-Url="/images/new_lead1.png" NavigateUrl="MgrViewLeads.aspx?c=New Leads&o=Bronx" Name="New Leads">
                                 </dx:TreeViewNode>
-                                <dx:TreeViewNode Text="Priority" Image-Url="/images/priority.jpg" NavigateUrl="MgrViewLeads.aspx?c=Priority&o=Bronx" Name="Priority">
+                                <dx:TreeViewNode Text="Hot Leads" Image-Url="/images/priority.jpg" NavigateUrl="MgrViewLeads.aspx?c=Priority&o=Bronx" Name="Hot Leads">
                                 </dx:TreeViewNode>
                                 <dx:TreeViewNode Text="Follow Up" Expanded="true" Image-Url="/images/callback.png" NavigateUrl="MgrViewLeads.aspx?c=Call Back&o=Bronx" Name="Follow Up">
                                 </dx:TreeViewNode>
@@ -69,7 +69,7 @@
                             <Nodes>
                                 <dx:TreeViewNode Text="New Leads" Image-Url="/images/new_lead1.png" NavigateUrl="MgrViewLeads.aspx?c=New Leads&o=Queens" Name="New Leads">
                                 </dx:TreeViewNode>
-                                <dx:TreeViewNode Text="Priority" Image-Url="/images/priority.jpg" NavigateUrl="MgrViewLeads.aspx?c=Priority&o=Queens" Name="Priority">
+                                <dx:TreeViewNode Text="Hot Leads" Image-Url="/images/priority.jpg" NavigateUrl="MgrViewLeads.aspx?c=Priority&o=Queens" Name="Hot Leads">
                                 </dx:TreeViewNode>
                                 <dx:TreeViewNode Text="Follow Up" Expanded="true" Image-Url="/images/callback.png" NavigateUrl="MgrViewLeads.aspx?c=Call Back&o=Queens" Name="Follow Up">
                                 </dx:TreeViewNode>
@@ -84,7 +84,7 @@
                             <Nodes>
                                 <dx:TreeViewNode Text="New Leads" Image-Url="/images/new_lead1.png" NavigateUrl="MgrViewLeads.aspx?c=New Leads&o=Patchen" Name="New Leads">
                                 </dx:TreeViewNode>
-                                <dx:TreeViewNode Text="Priority" Image-Url="/images/priority.jpg" NavigateUrl="MgrViewLeads.aspx?c=Priority&o=Patchen" Name="Priority">
+                                <dx:TreeViewNode Text="Hot Leads" Image-Url="/images/priority.jpg" NavigateUrl="MgrViewLeads.aspx?c=Priority&o=Patchen" Name="Hot Leads">
                                 </dx:TreeViewNode>
                                 <dx:TreeViewNode Text="Follow Up" Expanded="true" Image-Url="/images/callback.png" NavigateUrl="MgrViewLeads.aspx?c=Call Back&o=Patchen" Name="Follow Up">
                                 </dx:TreeViewNode>
@@ -99,7 +99,7 @@
                             <Nodes>
                                 <dx:TreeViewNode Text="New Leads" Image-Url="/images/new_lead1.png" NavigateUrl="MgrViewLeads.aspx?c=New Leads&o=Rockaway" Name="New Leads">
                                 </dx:TreeViewNode>
-                                <dx:TreeViewNode Text="Priority" Image-Url="/images/priority.jpg" NavigateUrl="MgrViewLeads.aspx?c=Priority&o=Rockaway" Name="Priority">
+                                <dx:TreeViewNode Text="Hot Leads" Image-Url="/images/priority.jpg" NavigateUrl="MgrViewLeads.aspx?c=Priority&o=Rockaway" Name="Hot Leads">
                                 </dx:TreeViewNode>
                                 <dx:TreeViewNode Text="Follow Up" Expanded="true" Image-Url="/images/callback.png" NavigateUrl="MgrViewLeads.aspx?c=Call Back&o=Rockaway" Name="Follow Up">
                                 </dx:TreeViewNode>

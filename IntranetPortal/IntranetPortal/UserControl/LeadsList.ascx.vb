@@ -170,8 +170,14 @@ Public Class LeadsList
         If CategoryName = "Call Back" Then
             lblLeadCategory.Text = "Follow Up"
         Else
-            lblLeadCategory.Text = CategoryName
+            If CategoryName = "Priority" Then
+                lblLeadCategory.Text = "Hot Leads"
+            Else
+                lblLeadCategory.Text = CategoryName
+            End If
         End If
+
+      
 
         If CategoryName = "Search" Then
             SearchLeadsList()

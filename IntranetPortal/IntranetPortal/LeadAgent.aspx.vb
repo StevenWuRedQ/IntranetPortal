@@ -12,30 +12,29 @@ Public Class LeadAgent
 
             If Not Page.IsPostBack Then
 
-
                 ASPxSplitter1.ClientVisible = True
                 ASPxSplitter1.GetPaneByName("leadPanel").Collapsed = False
-
 
                 LeadsList.BindLeadsList(CategoryName)
 
                 If Not String.IsNullOrEmpty(Request.QueryString("id")) Then
+                    'Dim bble = Request.QueryString("id")
+
+                    'If Not Employee.HasControlLeads(User.Identity.Name, bble) Then
+                    '    Response.Clear()
+                    '    Response.Write("You are not allowed to view this lead.")
+                    '    Response.End()
+                    '    Return
+                    'End If
                     LeadsList.DisableClientEventOnLoad()
                     LeadsInfo.ClientVisible = True
                     LeadsInfo.BindData(Request.QueryString("id").ToString)
                 End If
-
-
             End If
 
             If Page.IsCallback Then
                 'LeadsList.BindLeadsList(CategoryName)
             End If
         End If
-
-
-
     End Sub
-
-  
 End Class

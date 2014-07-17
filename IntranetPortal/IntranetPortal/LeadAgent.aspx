@@ -5,7 +5,6 @@
 <%@ Register Src="~/UserControl/LeadsList.ascx" TagPrefix="uc1" TagName="LeadsList" %>
 <%@ Register Src="~/UserControl/LeadsStatisticSummary.ascx" TagPrefix="uc1" TagName="LeadsStatisticSummary" %>
 
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">

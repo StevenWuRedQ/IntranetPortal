@@ -31,6 +31,7 @@ Public Class LeadsInfo1
     End Sub
 
     Sub BindLeadsInfo(bble As String)
+
         If Not ShowLogPanel Then
             contentSplitter.GetPaneByName("LogPanel").Visible = False
             contentSplitter.GetPaneByName("LogPanel").Separator.Visible = DevExpress.Utils.DefaultBoolean.False

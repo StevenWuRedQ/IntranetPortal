@@ -44,6 +44,44 @@ Partial Public Class Employee
         End If
     End Sub
 
+    Public Shared Function HasControlLeads(name As String, bble As String) As Boolean
+        Using context As New Entities
+            Dim lead = context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
+
+            If lead IsNot Nothing Then
+                Dim owner = lead.EmployeeName
+
+                If owner = name And lead.Status <> LeadStatus.MgrApproval Then
+                    Return True
+                End If
+
+                If GetManagedEmployees(name).Contains(owner) Then
+                    Return True
+                End If
+
+                For Each rl In Roles.GetRolesForUser(name)
+                    If rl = "Admin" Then
+                        Return True
+                    End If
+
+                    If rl.StartsWith("OfficeManager") Then
+                        Dim dept = rl.Split("-")(1)
+
+                        If GetDeptUsers(dept).Contains(owner) Then
+                            Return True
+                        End If
+                    End If
+                Next
+
+                If Roles.IsUserInRole(name, "Admin") Then
+                    Return True
+                End If
+            End If
+
+            Return False
+        End Using
+    End Function
+
     Public Shared Function GetInstance(id As Integer) As Employee
         Using context As New Entities
             Dim emp = context.Employees.Where(Function(em) em.EmployeeID = id).FirstOrDefault
