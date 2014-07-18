@@ -20,10 +20,18 @@ Public Class LeadsManagement
     End Sub
 
     Sub BindNewestLeads()
-
         Using Context As New Entities
-            gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing Or (li.Lead.Employee.Active = False And li.Lead.Status <> LeadStatus.InProcess)).ToList
-            gridLeads.DataBind()
+            If User.IsInRole("Admin") Then
+                gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing Or (li.Lead.Employee.Active = False And li.Lead.Status <> LeadStatus.InProcess)).ToList
+                gridLeads.DataBind()
+
+            Else
+                If Employee.IsManager(User.Identity.Name) Then
+                    Dim name = User.Identity.Name
+                    gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = name And li.Lead.Status = LeadStatus.NewLead).ToList
+                    gridLeads.DataBind()
+                End If
+            End If
         End Using
     End Sub
 

@@ -15,7 +15,7 @@
         Return AddNewMessage(userName, title, message, bble, DateTime.Now)
     End Function
 
-    Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, notifyTime As DateTime)
+    Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, notifyTime As DateTime, createBy As String)
         Dim msg As New UserMessage
         msg.BBLE = bble
         msg.Title = title
@@ -23,7 +23,7 @@
         msg.Message = message
         msg.NotifyTime = notifyTime
         msg.Status = UserMessage.MsgStatus.Active
-        msg.Createby = HttpContext.Current.User.Identity.Name
+        msg.Createby = createBy
         msg.CreateTime = DateTime.Now
 
         Using context As New Entities
@@ -34,6 +34,10 @@
         End Using
 
         Return False
+    End Function
+
+    Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, notifyTime As DateTime)
+        Return AddNewMessage(userName, title, message, bble, notifyTime, HttpContext.Current.User.Identity.Name)
     End Function
 
     Public Shared Function ReadMsg(userName As String, msgId As Integer) As Boolean

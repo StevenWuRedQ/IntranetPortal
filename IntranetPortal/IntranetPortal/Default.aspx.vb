@@ -40,12 +40,12 @@ Public Class Default2
             AgentTree.Nodes.FindByName("MgrNode").Visible = False
             AgentTree.Nodes.FindByName("LeadsNode").Text = String.Format("Agent - {0}", User.Identity.Name)
         Else
-            If User.IsInRole("Admin") Then
-                'assignNode
-                Dim assingNode = AgentTree.Nodes.FindByName("assignNode")
-                assingNode.Text = String.Format("Assign Leads <font color='black'>({0})</font>", Utility.GetUnAssignedLeadsCount())
-                assingNode.Visible = True
-            End If
+            'If User.IsInRole("Admin") Then
+            'assignNode
+            Dim assingNode = AgentTree.Nodes.FindByName("assignNode")
+            assingNode.Text = String.Format("Assign Leads <font color='black'>({0})</font>", Utility.GetUnAssignedLeadsCount())
+            assingNode.Visible = True
+            'End If
 
             Dim leadsNode = AgentTree.Nodes.FindByName("LeadsNode")
             Dim mgrLeads = AgentTree.Nodes.FindByName("MgrNode")

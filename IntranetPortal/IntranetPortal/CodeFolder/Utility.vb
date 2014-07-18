@@ -91,7 +91,17 @@ Public Class Utility
 
     Public Shared Function GetUnAssignedLeadsCount() As Integer
         Using context As New Entities
-            Return context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing Or li.Lead.Employee.Active = False And li.Lead.Status <> LeadStatus.InProcess).Count
+
+            If HttpContext.Current.User.IsInRole("Admin") Then
+                Return context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing Or li.Lead.Employee.Active = False And li.Lead.Status <> LeadStatus.InProcess).Count
+            Else
+                If Employee.IsManager(HttpContext.Current.User.Identity.Name) Then
+                    Dim name = HttpContext.Current.User.Identity.Name
+                    Return context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = name And li.Lead.Status = LeadStatus.NewLead).Count
+                End If
+            End If
+
+            Return 0
         End Using
     End Function
 
