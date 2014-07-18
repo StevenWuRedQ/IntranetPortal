@@ -117,15 +117,14 @@
                 </dx:ASPxTreeView>
             </dx:PanelContent>
         </PanelCollection>
-        <ClientSideEvents EndCallback="function(s,e){
-             
+        <ClientSideEvents EndCallback="function(s,e){             
             }" />
     </dx:ASPxCallbackPanel>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <dx:ASPxSplitter Width="100%" Height="100%" ID="splitter" runat="server" Border-BorderStyle="None" ClientInstanceName="splitterRightDefaultPage">
         <Panes>
-            <dx:SplitterPane Name="ContentUrlPane" ContentUrlIFrameName="contentUrlPane" ContentUrl="/SummaryPage.aspx" PaneStyle-Border-BorderStyle="None" PaneStyle-Paddings-PaddingBottom="0" MinSize="1200px" ScrollBars="Both">
+            <dx:SplitterPane Name="ContentUrlPane" ContentUrlIFrameName="contentUrlPane" ContentUrl="/SummaryPage.aspx" PaneStyle-Border-BorderStyle="None" PaneStyle-Paddings-PaddingBottom="0" MinSize="1200px" ScrollBars="None" >
                 <ContentCollection>
                     <dx:SplitterContentControl runat="server">
                     </dx:SplitterContentControl>

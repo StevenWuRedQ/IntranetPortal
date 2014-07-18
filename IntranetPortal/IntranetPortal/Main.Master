@@ -85,9 +85,9 @@
                 <PaneStyle Paddings-Padding="0"></PaneStyle>              
                 <ContentCollection>
                     <dx:SplitterContentControl>
-                        <div style="overflow: auto; overflow-x: hidden; overflow-y: hidden; height: 100%;">
+                        <%--<div style="overflow: auto; overflow-x: hidden; overflow-y: hidden; height: 100%;">--%>
                             <asp:ContentPlaceHolder ID="Content" runat="server" />
-                        </div>
+                        <%--</div>--%>
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>

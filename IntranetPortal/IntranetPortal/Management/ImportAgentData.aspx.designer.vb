@@ -120,4 +120,22 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxLabel1 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+
+    '''<summary>
+    '''RefreshBar control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RefreshBar As Global.DevExpress.Web.ASPxEditors.ASPxProgressBar
+
+    '''<summary>
+    '''checkProgress control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents checkProgress As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class

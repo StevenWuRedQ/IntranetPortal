@@ -5,6 +5,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <script type="text/javascript">
+        function RefreshProgress(result)
+        {
+            //alert(result);
+            ProgressBar.SetValue(result);
+            window.setTimeout(function () { CheckProgress.PerformCallback(); }, 1000);
+        }
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -23,8 +31,6 @@
                                 <td style="padding-left: 10px;">
                                     <dx:ASPxButton runat="server" Text="Load" ID="btnLoad" OnClick="btnLoad_Click"></dx:ASPxButton>
                                 </td>
-                            </tr>
-                            <tr>
                             </tr>
                         </table>
 
@@ -78,8 +84,14 @@
                                 </dx:GridViewDataTextColumn>
                             </Columns>
                         </dx:ASPxGridView>                  
-                        <dx:ASPxButton runat="server" ID="ASPxButton2" Text="Refresh" OnClick="ASPxButton2_Click"></dx:ASPxButton>
+                        <dx:ASPxButton runat="server" ID="ASPxButton2" Text="Refresh" OnClick="ASPxButton2_Click">                            
+                        </dx:ASPxButton>
                         <dx:ASPxLabel runat="server" ID="ASPxLabel1"></dx:ASPxLabel>
+                        <dx:ASPxProgressBar runat="server" ClientInstanceName="ProgressBar" ID="RefreshBar" Maximum="1" Width="300px" Caption="Progress" Position="0.5">                            
+                        </dx:ASPxProgressBar>
+                        <dx:ASPxCallback runat="server" ID="checkProgress" ClientInstanceName="CheckProgress" OnCallback="checkProgress_Callback">
+                            <ClientSideEvents CallbackComplete="function(s,e){ RefreshProgress(e.result); }" />
+                        </dx:ASPxCallback>
                     </dx:PanelContent>
                 </PanelCollection>
             </dx:ASPxRoundPanel>

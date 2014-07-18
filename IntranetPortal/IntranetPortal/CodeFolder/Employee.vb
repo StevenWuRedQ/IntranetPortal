@@ -46,6 +46,10 @@ Partial Public Class Employee
 
     Public Shared Function HasControlLeads(name As String, bble As String) As Boolean
         Using context As New Entities
+            If Roles.IsUserInRole(name, "Admin") Then
+                Return True
+            End If
+
             Dim lead = context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
 
             If lead IsNot Nothing Then
@@ -60,10 +64,6 @@ Partial Public Class Employee
                 End If
 
                 For Each rl In Roles.GetRolesForUser(name)
-                    If rl = "Admin" Then
-                        Return True
-                    End If
-
                     If rl.StartsWith("OfficeManager") Then
                         Dim dept = rl.Split("-")(1)
 
@@ -72,10 +72,6 @@ Partial Public Class Employee
                         End If
                     End If
                 Next
-
-                If Roles.IsUserInRole(name, "Admin") Then
-                    Return True
-                End If
             End If
 
             Return False

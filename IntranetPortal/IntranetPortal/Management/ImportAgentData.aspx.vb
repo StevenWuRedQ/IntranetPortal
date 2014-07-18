@@ -114,25 +114,57 @@ Public Class ImportAgentData
         End Try
     End Sub
 
-    Public Shared Sub InitialData(bbles As String())
-        For Each bble In bbles
-            Try
-                DataWCFService.UpdateLeadInfo(bble, True)
-            Catch ex As Exception
-                UserMessage.AddNewMessage("123", "Initial Data Error " & bble, "Error: " & ex.Message, bble, DateTime.Now, "Initial Data")
-            End Try
-        Next
-    End Sub
+    
 
     Protected Sub ASPxButton2_Click(sender As Object, e As EventArgs) Handles ASPxButton2.Click
         Dim bbles = LeadsData(cbLeadsType.Value).Select(Function(b) b.BBLE).ToArray
 
-        Dim ctx = HttpContext.Current
-        Dim TestThread As New System.Threading.Thread(New ThreadStart(Sub()
-                                                                          HttpContext.Current = ctx
-                                                                          InitialData(bbles)
-                                                                      End Sub))
-        TestThread.Start()
+        If Not CBool(Application("InLoop")) Then
+
+            Dim ctx = HttpContext.Current
+            Dim TestThread As New System.Threading.Thread(New ThreadStart(Sub()
+                                                                              HttpContext.Current = ctx
+                                                                              InitialData(bbles, ctx.Application)
+                                                                          End Sub))
+            TestThread.Start()
+        End If
+
+        Dim script = "<script type=""text/javascript"">"
+        script += "RefreshProgress(0);"
+        script += "</script>"
+
+        If Not Page.ClientScript.IsStartupScriptRegistered("Refresh") Then
+            Page.ClientScript.RegisterStartupScript(Me.GetType, "Refresh", script)
+        End If
+    End Sub
+
+    Public Shared Sub InitialData(bbles As String(), appState As HttpApplicationState)
+        Dim count = 0
+
+        appState.Lock()
+        appState("TotalCount") = bbles.Count
+        appState("Processed") = 0
+        appState("InLoop") = True
+        appState.UnLock()
+
+        For Each bble In bbles
+            Try
+
+                DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True)
+
+                count += 1
+                appState.Lock()
+                appState("Processed") = count
+                appState.UnLock()
+
+            Catch ex As Exception
+                UserMessage.AddNewMessage("Service Error", "Initial Data Error " & bble, "Error: " & ex.Message, bble, DateTime.Now, "Initial Data")
+            End Try
+        Next
+
+        appState.Lock()
+        appState("InLoop") = False
+        appState.UnLock()
     End Sub
 
     Protected Sub ASPxButton1_Click(sender As Object, e As EventArgs) Handles ASPxButton1.Click
@@ -157,5 +189,14 @@ Public Class ImportAgentData
 
     Protected Sub gridNewLeads_DataBinding(sender As Object, e As EventArgs)
         gridNewLeads.DataSource = LeadsData(cbLeadsType.Value)
+    End Sub
+
+    Protected Sub checkProgress_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        Application.Lock()
+        Dim total = Application("TotalCount")
+        Dim count = Application("Processed")
+        Application.UnLock()
+
+        e.Result = CDbl(count / total)
     End Sub
 End Class

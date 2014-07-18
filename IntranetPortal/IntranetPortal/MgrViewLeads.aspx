@@ -37,7 +37,7 @@
                             <dx:SplitterContentControl runat="server" SupportsDisabledAttribute="True"></dx:SplitterContentControl>
                         </ContentCollection>
                     </dx:SplitterPane>
-                    <dx:SplitterPane Name="SummaryPanel" Size="20px" MinSize="1px" Separator-Visible="False" PaneStyle-Paddings-Padding="0px" PaneStyle-BackColor="gray" CollapsedStyle-Border-BorderStyle="None" AutoHeight="false">
+                    <dx:SplitterPane Name="SummaryPanel" Size="18px" MinSize="1px" Separator-Visible="False" PaneStyle-Paddings-Padding="0px" PaneStyle-BackColor="gray" CollapsedStyle-Border-BorderStyle="None" AutoHeight="false">
                         <Separator Visible="False"></Separator>
                         <PaneStyle>
                             <Border BorderStyle="None" />

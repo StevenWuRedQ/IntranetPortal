@@ -113,7 +113,19 @@ Public Class DataWCFService
                 li.NumFloors = result.STORIES
                 li.BuildingDem = result.BLDG_DIM
                 li.LotDem = result.LOT_DIM
-                li.EstValue = client.Zillow_Estimate_By_BBLE(bble)
+
+                'Try
+                '    Dim InLoop = CBool(HttpContext.Current.Application("InLoop"))
+
+                '    If InLoop Then
+                '        UserMessage.AddNewMessage("Service Message", "GetZillow", "InLoop: " & InLoop, bble)
+                '    Else
+                '        li.EstValue = client.Zillow_Estimate_By_BBLE(bble)
+                '    End If
+                'Catch ex As Exception
+
+                'End Try
+
                 'li.Owner = client.Get_Acris_Latest_OwnerName(bble)(0).NAME 'result.OWNER_NAME
                 'Dim owners = client.Get_Acris_Latest_OwnerName(bble)
                 'If owners.Count > 0 Then
@@ -286,11 +298,15 @@ Public Class DataWCFService
         If waterBill Then
             apiOrder.WaterBill = apiOrder.ItemStatus.Calling
             needWait = True
+        Else
+
         End If
 
         If zillow Then
             apiOrder.Zillow = apiOrder.ItemStatus.Calling
             needWait = True
+        Else
+            apiOrder.Zillow = apiOrder.ItemStatus.NonCall
         End If
 
         If TLO Then
