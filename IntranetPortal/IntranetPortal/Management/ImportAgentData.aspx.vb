@@ -122,11 +122,19 @@ Public Class ImportAgentData
         If Not CBool(Application("InLoop")) Then
 
             Dim ctx = HttpContext.Current
-            Dim TestThread As New System.Threading.Thread(New ThreadStart(Sub()
-                                                                              HttpContext.Current = ctx
-                                                                              InitialData(bbles, ctx.Application)
-                                                                          End Sub))
-            TestThread.Start()
+            ctx.Application.Lock()
+            ctx.Application("TotalCount") = bbles.Count
+            ctx.Application("Processed") = 0
+            ctx.Application("InLoop") = True
+            ctx.Application.UnLock()
+
+            For i = 0 To 30
+                Dim TestThread As New System.Threading.Thread(New ThreadStart(Sub()
+                                                                                  HttpContext.Current = ctx
+                                                                                  InitialData(bbles, ctx.Application)
+                                                                              End Sub))
+                TestThread.Start()
+            Next
         End If
 
         Dim script = "<script type=""text/javascript"">"
@@ -141,26 +149,40 @@ Public Class ImportAgentData
     Public Shared Sub InitialData(bbles As String(), appState As HttpApplicationState)
         Dim count = 0
 
-        appState.Lock()
-        appState("TotalCount") = bbles.Count
-        appState("Processed") = 0
-        appState("InLoop") = True
-        appState.UnLock()
+        While count < bbles.Length
+            appState.Lock()
+            count = CInt(appState("Processed"))
+            appState("Processed") = count + 1
+            appState.UnLock()
 
-        For Each bble In bbles
+            If count >= bbles.Length Then
+                Continue While
+            End If
+
+            Dim bble = bbles(count)
             Try
+                Dim lead = LeadsInfo.GetInstance(bble)
 
-                DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True)
+                'If String.IsNullOrEmpty(lead.Owner) Then
+                '    DataWCFService.UpdateAssessInfo(bble)
+                'End If
 
-                count += 1
-                appState.Lock()
-                appState("Processed") = count
-                appState.UnLock()
-
+                If String.IsNullOrEmpty(lead.Owner) Then
+                    'DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True)
+                Else
+                    If Not lead.C1stMotgrAmt.HasValue Then
+                        DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True)
+                    Else
+                        If Not lead.HasOwnerInfo Then
+                            DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)
+                        End If
+                    End If
+                End If
+                'Thread.Sleep(1000)
             Catch ex As Exception
                 UserMessage.AddNewMessage("Service Error", "Initial Data Error " & bble, "Error: " & ex.Message, bble, DateTime.Now, "Initial Data")
             End Try
-        Next
+        End While
 
         appState.Lock()
         appState("InLoop") = False

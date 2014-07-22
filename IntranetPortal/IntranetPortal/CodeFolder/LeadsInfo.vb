@@ -7,6 +7,15 @@
         End Get
     End Property
 
+    Public ReadOnly Property HasOwnerInfo As Boolean
+        Get
+            Using context As New Entities
+                Return context.HomeOwners.Where(Function(ho) ho.BBLE = BBLE And ho.Active = True And ho.LocateReport IsNot Nothing).Count > 0
+            End Using
+        End Get
+    End Property
+
+
     Public ReadOnly Property Neighborhood As String
         Get
             'Dim neighbor = ""

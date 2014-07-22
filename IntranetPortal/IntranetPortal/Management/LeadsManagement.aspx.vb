@@ -3,9 +3,13 @@ Public Class LeadsManagement
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If (Not IsPostBack) Then
-            BindData()
-        End If
+
+    End Sub
+
+    Protected Sub page_init(ByVal sender As Object, e As EventArgs) Handles Me.Init
+        'If (Not IsPostBack) Then
+        BindData()
+        'End If
     End Sub
 
     Sub BindData()
@@ -15,9 +19,26 @@ Public Class LeadsManagement
             BindOfficeEmployee(office)
         Else
             BindNewestLeads()
+            'gridLeads.DataBind()
             BindEmployeeList()
         End If
     End Sub
+
+    Function GetDataSource() As List(Of LeadsInfo)
+        Using Context As New Entities
+            If User.IsInRole("Admin") Then
+                Return Context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing Or (li.Lead.Employee.Active = False And li.Lead.Status <> LeadStatus.InProcess)).ToList
+            Else
+                If Employee.IsManager(User.Identity.Name) Then
+                    Dim name = User.Identity.Name
+                    Return Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = name And li.Lead.Status = LeadStatus.NewLead).ToList
+
+                End If
+            End If
+
+            Return New List(Of LeadsInfo)
+        End Using
+    End Function
 
     Sub BindNewestLeads()
         Using Context As New Entities
@@ -65,6 +86,11 @@ Public Class LeadsManagement
                 Return
             End If
 
+            If String.IsNullOrEmpty(Page.User.Identity.Name) Then
+                Return
+            End If
+
+
             Dim mgr = Employee.GetInstance(Page.User.Identity.Name)
             Dim emps = Employee.GetSubOrdinate(mgr.EmployeeID)
             emps.Add(mgr)
@@ -107,7 +133,22 @@ Public Class LeadsManagement
                 Context.SaveChanges()
             End Using
 
-            BindNewestLeads()
+            'BindNewestLeads()
+
+            'gridLeads.DataBind()
         End If
+        'BindData()
+        Dim script = "<script type=""text/javascript"">"
+        script += "gridLeads.Refresh();"
+
+        script += "</script>"
+
+        If Not Page.ClientScript.IsStartupScriptRegistered("Refresh") Then
+            Page.ClientScript.RegisterStartupScript(Me.GetType, "Refresh", script)
+        End If
+    End Sub
+
+    Protected Sub gridLeads_DataBinding(sender As Object, e As EventArgs)
+        'gridLeads.DataSource = GetDataSource()
     End Sub
 End Class

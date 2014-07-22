@@ -82,7 +82,7 @@
                                     </dx:ASPxCheckBox>
                                     <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Bold="true" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
                                 </div>
-                                <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsBehavior-AutoExpandAllGroups="True" SettingsPager-Mode="ShowAllRecords">
+                                <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsBehavior-AutoExpandAllGroups="True" SettingsPager-Mode="ShowAllRecords">
                                     <Columns>
                                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
                                         </dx:GridViewCommandColumn>
@@ -91,7 +91,7 @@
                                         </dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Neighborhood" Visible="false"></dx:GridViewDataTextColumn>
                                     </Columns>
-                                    <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="false"
+                                    <SettingsBehavior  AllowClientEventsOnLoad="false" 
                                         EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
                                     <Settings ShowColumnHeaders="False" VerticalScrollableHeight="50"></Settings>
                                     <Styles>
