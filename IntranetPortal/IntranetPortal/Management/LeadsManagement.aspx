@@ -91,7 +91,7 @@
                                         </dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Neighborhood" Visible="false"></dx:GridViewDataTextColumn>
                                     </Columns>
-                                    <SettingsBehavior  AllowClientEventsOnLoad="false" 
+                                    <SettingsBehavior  AllowClientEventsOnLoad="false"  AllowFocusedRow="true"
                                         EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
                                     <Settings ShowColumnHeaders="False" VerticalScrollableHeight="50"></Settings>
                                     <Styles>

@@ -109,6 +109,13 @@ Public Class LeadsList
 
     Sub BindEmployeeList()
         Using Context As New Entities
+
+            If Page.User.IsInRole("Admin") Then
+                listboxEmployee.DataSource = Context.Employees.Where(Function(emp) emp.Active = True Or emp.Name.EndsWith("Office")).ToList.OrderBy(Function(em) em.Name)
+                listboxEmployee.DataBind()
+                Return
+            End If
+
             Dim mgr = Employee.GetInstance(Page.User.Identity.Name)
             Dim emps = Employee.GetSubOrdinate(mgr.EmployeeID)
             emps.Add(mgr)

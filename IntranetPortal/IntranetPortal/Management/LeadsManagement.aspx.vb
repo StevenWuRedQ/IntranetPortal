@@ -73,6 +73,12 @@ Public Class LeadsManagement
 
     Sub BindOfficeEmployee(office As String)
         Using Context As New Entities
+            If Page.User.IsInRole("Admin") Then
+                listboxEmployee.DataSource = Context.Employees.Where(Function(emp) emp.Active = True Or emp.Name.EndsWith("Office")).ToList.OrderBy(Function(em) em.Name)
+                listboxEmployee.DataBind()
+                Return
+            End If
+
             listboxEmployee.DataSource = Employee.GetDeptUsersList(office)
             listboxEmployee.DataBind()
         End Using

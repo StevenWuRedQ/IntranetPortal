@@ -96,7 +96,7 @@ Public Class DataWCFService
                 li.NeighName = result.NEIGH_NAME
                 li.State = "NY"
                 li.ZipCode = result.ZIP
-                li.PropertyAddress = String.Format("{0} {1},{2},{3} {4}", result.NUMBER, result.ST_NAME, result.NEIGH_NAME, "NY", result.ZIP)
+                li.PropertyAddress = BuildPropertyAddress(result) 'String.Format("{0} {1},{2},{3} {4}", result.NUMBER, result.ST_NAME, result.NEIGH_NAME, "NY", result.ZIP)
                 li.Borough = result.BOROUGH
                 li.Zoning = result.ZONING
                 li.MaxFar = CDbl(result.MAX_FAR)
@@ -494,9 +494,10 @@ Public Class DataWCFService
                 Return True
             End Using
 
+        Catch ex As TimeoutException
+            Throw New Exception("Time is out. The data services is busy now. Please try later.")
         Catch ex As Exception
-            Throw ex
-            'Return False
+            Throw New Exception("Data Services isnot avaiable now. Please try later. Error messager: " & ex.Message)
         End Try
     End Function
 
@@ -553,6 +554,33 @@ Public Class DataWCFService
         Return li
     End Function
 
+    Private Shared Function BuildPropertyAddress(asessment As DataAPI.NYC_Assessment) As String
+        Dim result = String.Format("{0} {1},", asessment.NUMBER, asessment.ST_NAME)
+
+        If asessment.BOROUGH = "4" Then
+            result = result & " " & asessment.NEIGH_NAME
+        Else
+            If BoroughNames(asessment.BOROUGH) IsNot Nothing Then
+                result = result & " " & BoroughNames(asessment.BOROUGH)
+            End If
+        End If
+
+        result = result & ",NY " & asessment.ZIP
+
+        Return result.TrimStart
+    End Function
+
+    Private Shared ReadOnly Property BoroughNames As Hashtable
+        Get
+            Dim ht As New Hashtable
+            ht.Add("1", "Manhattan")
+            ht.Add("2", "Bronx")
+            ht.Add("3", "Brooklyn")
+            ht.Add("5", "Staten Island")
+
+            Return ht
+        End Get
+    End Property
 
 
 End Class

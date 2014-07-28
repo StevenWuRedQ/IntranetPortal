@@ -198,6 +198,12 @@ Partial Public Class Employee
         End If
     End Function
 
+    Public Shared Function GetAllEmps() As String()
+        Using Context As New Entities
+            Return Context.Employees.Select(Function(em) em.Name).ToArray
+        End Using
+    End Function
+
     Public Shared Function IsManager(empName As String)
         Dim rs = Roles.GetRolesForUser(empName)
 

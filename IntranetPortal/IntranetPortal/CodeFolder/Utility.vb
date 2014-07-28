@@ -93,7 +93,7 @@ Public Class Utility
         Using context As New Entities
 
             If HttpContext.Current.User.IsInRole("Admin") Then
-                Return context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing Or li.Lead.Employee.Active = False And li.Lead.Status <> LeadStatus.InProcess).Count
+                Return context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing).Count
             Else
                 If Employee.IsManager(HttpContext.Current.User.Identity.Name) Then
                     Dim name = HttpContext.Current.User.Identity.Name

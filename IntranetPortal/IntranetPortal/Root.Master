@@ -129,7 +129,7 @@
                                                         <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1" Width="260px">
                                                             <Settings AutoFilterCondition="Contains" />
                                                             <DataItemTemplate>
-                                                                <a href="#" onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))  %>'><%# Eval("LeadsName")%></a>
+                                                                <a href="#" onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>'><%# Eval("LeadsName")%></a>
                                                                 <span runat="server" visible='<%# Not EmpUnderManaged.Contains(Eval("EmployeeName"))%>'><%# Eval("LeadsName") %></span>
                                                             </DataItemTemplate>
                                                         </dx:GridViewDataTextColumn>

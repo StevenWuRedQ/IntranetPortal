@@ -19,7 +19,13 @@ Public Class Root
     Public ReadOnly Property EmpUnderManaged As String()
         Get
             If _empUnderMgred Is Nothing Then
-                _empUnderMgred = Employee.GetManagedEmployees(Page.User.Identity.Name)
+
+                If Page.User.IsInRole("Admin") Then
+                    _empUnderMgred = Employee.GetAllEmps()
+                Else
+                    _empUnderMgred = Employee.GetManagedEmployees(Page.User.Identity.Name)
+                End If
+
             End If
             Return _empUnderMgred
         End Get
