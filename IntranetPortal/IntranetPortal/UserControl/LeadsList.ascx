@@ -393,7 +393,7 @@
             </dx:ASPxHyperLink>
         </div>
     </div>
-    <dx:ASPxGridView runat="server" OnCustomCallback="gridLeads_CustomCallback" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsBehavior-AutoExpandAllGroups="True" SettingsPager-Mode="ShowAllRecords">
+    <dx:ASPxGridView runat="server" OnCustomCallback="gridLeads_CustomCallback" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
         <Columns>
             <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
             </dx:GridViewCommandColumn>
@@ -413,7 +413,7 @@
                 </GroupRowTemplate>
             </dx:GridViewDataColumn>
             <dx:GridViewDataColumn FieldName="EmployeeName" Visible="false" VisibleIndex="4">
-                <GroupRowTemplate>
+                <GroupRowTemplate>                   
                     Employee Name: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
                 </GroupRowTemplate>
             </dx:GridViewDataColumn>
@@ -641,14 +641,13 @@
                 </table>
             </FilterRow>
         </Templates>
-        <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true"
+        <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
             EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
         <SettingsPager Mode="ShowAllRecords"></SettingsPager>
         <Settings ShowColumnHeaders="False" VerticalScrollableHeight="50"></Settings>
         <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
         <SettingsCommandButton CancelButton-ButtonType="Button" UpdateButton-ButtonType="Button">
             <UpdateButton ButtonType="Button" Text="OK"></UpdateButton>
-
             <CancelButton ButtonType="Button"></CancelButton>
         </SettingsCommandButton>
         <SettingsText CommandUpdate="OK" PopupEditFormCaption="Create New Leads" />
@@ -666,7 +665,7 @@
             <Row Cursor="pointer" />
             <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
         </Styles>
-        <GroupSummary>
+        <GroupSummary>            
             <dx:ASPxSummaryItem FieldName="CallbackDate" SummaryType="Count" />
         </GroupSummary>
         <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" EndCallback="OnGridLeadsEndCallback" />

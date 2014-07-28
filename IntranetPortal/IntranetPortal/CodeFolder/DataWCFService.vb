@@ -113,56 +113,6 @@ Public Class DataWCFService
                 li.NumFloors = result.STORIES
                 li.BuildingDem = result.BLDG_DIM
                 li.LotDem = result.LOT_DIM
-
-                'Try
-                '    Dim InLoop = CBool(HttpContext.Current.Application("InLoop"))
-
-                '    If InLoop Then
-                '        UserMessage.AddNewMessage("Service Message", "GetZillow", "InLoop: " & InLoop, bble)
-                '    Else
-                '        li.EstValue = client.Zillow_Estimate_By_BBLE(bble)
-                '    End If
-                'Catch ex As Exception
-
-                'End Try
-
-                'li.Owner = client.Get_Acris_Latest_OwnerName(bble)(0).NAME 'result.OWNER_NAME
-                'Dim owners = client.Get_Acris_Latest_OwnerName(bble)
-                'If owners.Count > 0 Then
-                '    li.Owner = owners(0).NAME
-                '    li.HomeOwners = New List(Of HomeOwner)
-
-                '    If owners.Count > 1 Then
-                '        li.CoOwner = owners(1).NAME
-                '    End If
-
-                '    For Each item In owners
-                '        Dim homeOwner As New HomeOwner
-                '        homeOwner.Name = item.NAME
-                '        homeOwner.BBLE = bble
-                '        If String.IsNullOrEmpty(item.ADDRESS_1) AndAlso String.IsNullOrEmpty(item.ADDRESS_2) AndAlso String.IsNullOrEmpty(item.CITY) Then
-                '            homeOwner.Address1 = li.Number
-                '            homeOwner.Address2 = li.StreetName
-                '            homeOwner.City = li.NeighName
-                '            homeOwner.State = "NY"
-                '            homeOwner.Country = "US"
-                '            homeOwner.Zip = item.ZIP
-                '        Else
-                '            homeOwner.Address1 = item.ADDRESS_1
-                '            homeOwner.Address2 = item.ADDRESS_2
-                '            homeOwner.City = item.CITY
-                '            homeOwner.State = item.STATE
-                '            homeOwner.Country = item.COUNTRY
-                '            homeOwner.Zip = item.ZIP
-                '        End If
-                '        homeOwner.Active = True
-                '        homeOwner.CreateDate = DateTime.Now
-                '        homeOwner.CreateBy = HttpContext.Current.User.Identity.Name
-
-                '        li.HomeOwners.Add(homeOwner)
-                '    Next
-                'End If
-
                 li.LastUpdate = DateTime.Now
                 li.UpdateBy = HttpContext.Current.User.Identity.Name
 
