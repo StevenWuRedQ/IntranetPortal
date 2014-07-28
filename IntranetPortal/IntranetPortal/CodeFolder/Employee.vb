@@ -161,6 +161,12 @@ Partial Public Class Employee
         'End Using
     End Function
 
+    Public Shared Function GetAllDeptUsers(deptName As String) As String()
+        Using context As New Entities
+            Return context.Employees.Where(Function(em) em.Department = deptName).Select(Function(em) em.Name).ToArray
+        End Using
+    End Function
+
     Public Shared Function GetUnActiveUser(deptName As String) As String()
         Using context As New Entities
             Return context.Employees.Where(Function(em) em.Department = deptName And em.Active = False).Select(Function(em) em.Name).ToArray

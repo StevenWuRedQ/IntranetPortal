@@ -26,7 +26,7 @@
             </HeaderTemplate>
             <ItemTemplate>
 <%--                <tr onclick="PreviewDocument('<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>', '<%# Eval("ContentType")%>');" style="cursor:pointer" onmouseover="this.bgColor = '#D1DEFB';" onmouseout="this.bgColor = '';">--%>
-                <tr>    
+                <tr>
                 <td style="width: 20px;">
                         <dx:ASPxCheckBox runat="server"></dx:ASPxCheckBox>
                     </td>

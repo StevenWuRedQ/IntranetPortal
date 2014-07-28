@@ -168,15 +168,15 @@ Public Class ImportAgentData
                 'End If
 
                 If String.IsNullOrEmpty(lead.Owner) Then
-                    'DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True)
+                    DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True)
                 Else
-                    If Not lead.C1stMotgrAmt.HasValue Then
-                        DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True)
-                    Else
-                        If Not lead.HasOwnerInfo Then
-                            DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)
-                        End If
-                    End If
+                    'If Not lead.C1stMotgrAmt.HasValue Then
+                    '    DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True)
+                    'Else
+                    '    If Not lead.HasOwnerInfo Then
+                    '        DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)
+                    '    End If
+                    'End If
                 End If
                 'Thread.Sleep(1000)
             Catch ex As Exception

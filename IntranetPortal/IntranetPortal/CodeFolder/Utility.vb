@@ -78,7 +78,7 @@ Public Class Utility
 
     Public Shared Function GetOfficeLeadsCount(status As LeadStatus, officeName As String) As Integer
         If status = LeadStatus.InProcess Then
-            Return GetMgrLeadsCount(status, Employee.GetDeptUsers(officeName, False))
+            Return GetMgrLeadsCount(status, Employee.GetAllDeptUsers(officeName))
         End If
 
         If status = LeadStatus.ALL Then
@@ -110,10 +110,9 @@ Public Class Utility
             Dim officeName = office & " Office"
             Dim unActiveUser = Employee.GetDeptUsersList(office, False).Select(Function(emp) emp.Name).ToArray
 
-            Dim count = (From li In context.LeadsInfoes
-                                   Join ld In context.Leads On ld.BBLE Equals li.BBLE
+            Dim count = (From ld In context.Leads
                                    Where ld.EmployeeName = officeName Or (unActiveUser.Contains(ld.EmployeeName) And ld.Status <> LeadStatus.InProcess)
-                                   Select li).Count
+                                   Select ld).Count
             Return count
         End Using
     End Function

@@ -67,7 +67,7 @@ Public Class LeadsList
             Dim leads As Object
 
             If category = LeadStatus.InProcess Then
-                subOridates = Employee.GetDeptUsersList(OfficeName, False).Select(Function(emp) emp.Name).ToArray
+                subOridates = Employee.GetAllDeptUsers(OfficeName)
                 leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
             Else
                 leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)

@@ -27,7 +27,7 @@ Public Class LeadsManagement
     Function GetDataSource() As List(Of LeadsInfo)
         Using Context As New Entities
             If User.IsInRole("Admin") Then
-                Return Context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing Or (li.Lead.Employee.Active = False And li.Lead.Status <> LeadStatus.InProcess)).ToList
+                Return Context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing).ToList
             Else
                 If Employee.IsManager(User.Identity.Name) Then
                     Dim name = User.Identity.Name
@@ -43,7 +43,7 @@ Public Class LeadsManagement
     Sub BindNewestLeads()
         Using Context As New Entities
             If User.IsInRole("Admin") Then
-                gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing Or (li.Lead.Employee.Active = False And li.Lead.Status <> LeadStatus.InProcess)).ToList
+                gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing).ToList
                 gridLeads.DataBind()
 
             Else
