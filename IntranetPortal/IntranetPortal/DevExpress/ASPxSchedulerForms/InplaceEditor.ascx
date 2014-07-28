@@ -45,10 +45,10 @@
 {************************************************************************************}--%>
 
 <%@ Control Language="vb" AutoEventWireup="true" Inherits="IntranetPortal.InplaceEditor" Codebehind="InplaceEditor.ascx.vb" %>
-<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler" TagPrefix="dxwschs" %>
-<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler.Controls"
+<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler" TagPrefix="dxwschs" %>
+<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler.Controls"
 	TagPrefix="cc1" %>
-<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors"
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors"
 	TagPrefix="dxe" %>
 <table runat="server" id="mainContainer" style="width:100%; height:100%">
 	<tr>

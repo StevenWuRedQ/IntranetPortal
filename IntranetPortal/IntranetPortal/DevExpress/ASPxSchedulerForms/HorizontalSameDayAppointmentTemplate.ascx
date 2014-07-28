@@ -30,8 +30,8 @@
 {************************************************************************************}
 --%>
 <%@ Control Language="vb" AutoEventWireup="true" Inherits="IntranetPortal.HorizontalSameDayAppointmentTemplate" Codebehind="HorizontalSameDayAppointmentTemplate.ascx.vb" %>
-<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler" TagPrefix="dxwschs" %>
-<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dxe" %>
+<%@ Register Assembly="DevExpress.Web.ASPxScheduler.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxScheduler" TagPrefix="dxwschs" %>
+<%@ Register Assembly="DevExpress.Web.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxEditors" TagPrefix="dxe" %>
 <div id="appointmentDiv" runat="server" class='<%#(CType(Container, HorizontalAppointmentTemplateContainer)).Items.AppointmentStyle.CssClass%>'>
 	<table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 0, 0)%> style="width: 100%">
 		<tr>
