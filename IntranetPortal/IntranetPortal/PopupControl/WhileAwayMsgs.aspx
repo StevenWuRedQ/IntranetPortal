@@ -30,7 +30,7 @@
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Createby" Caption="FROM" Width="100px"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Message" Caption="MESSAGE" PropertiesTextEdit-EncodeHtml="false"></dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn Caption="" Width="50px" CellStyle-HorizontalAlign="Center">
+                    <dx:GridViewDataTextColumn Caption="" Width="50px" CellStyle-HorizontalAlign="Center" Visible="false">
                         <DataItemTemplate>
                             <a href="#" onclick='(<%# String.Format("ClearMsg({0})", Eval("MsgID")) %>)'>Clear</a>
                         </DataItemTemplate>

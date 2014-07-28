@@ -393,29 +393,29 @@
             </dx:ASPxHyperLink>
         </div>
     </div>
-    <dx:ASPxGridView runat="server" OnCustomCallback="gridLeads_CustomCallback" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
+    <dx:ASPxGridView runat="server" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
         <Columns>
             <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
             </dx:GridViewCommandColumn>
             <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                 <Settings AutoFilterCondition="Contains" />
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn FieldName="CallbackDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2">
+            <dx:GridViewDataTextColumn FieldName="CallbackDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">
                 <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
                 <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
-                <GroupRowTemplate>
+                <%--<GroupRowTemplate>
                     Date: <%# GroupText(Container.GroupText) & Container.SummaryText.Replace("Count=","")%>
-                </GroupRowTemplate>
+                </GroupRowTemplate>--%>
             </dx:GridViewDataTextColumn>
             <dx:GridViewDataColumn FieldName="Neighborhood" Visible="false" VisibleIndex="3">
-                <GroupRowTemplate>
+               <%-- <GroupRowTemplate>
                     Neighborhood: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
-                </GroupRowTemplate>
+                </GroupRowTemplate>--%>
             </dx:GridViewDataColumn>
-            <dx:GridViewDataColumn FieldName="EmployeeName" Visible="false" VisibleIndex="4">
-                <GroupRowTemplate>                   
+            <dx:GridViewDataColumn FieldName="EmployeeName" Visible="false" VisibleIndex="4">                
+               <%-- <GroupRowTemplate>
                     Employee Name: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
-                </GroupRowTemplate>
+                </GroupRowTemplate>--%>
             </dx:GridViewDataColumn>
             <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false" VisibleIndex="5"></dx:GridViewDataColumn>
             <dx:GridViewDataColumn Width="25px" VisibleIndex="6">
@@ -665,9 +665,9 @@
             <Row Cursor="pointer" />
             <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
         </Styles>
-        <GroupSummary>            
-            <dx:ASPxSummaryItem FieldName="CallbackDate" SummaryType="Count" />
-        </GroupSummary>
+        <GroupSummary>                        
+            <dx:ASPxSummaryItem FieldName="LeadsName" SummaryType="Count" />
+        </GroupSummary>        
         <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" EndCallback="OnGridLeadsEndCallback" />
         <Border BorderStyle="None"></Border>
     </dx:ASPxGridView>

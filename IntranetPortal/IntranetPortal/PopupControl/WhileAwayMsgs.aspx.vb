@@ -8,6 +8,12 @@
     Sub BindMsgs()
         gridMsgs.DataSource = UserMessage.GetAllNewMessage(User.Identity.Name)
         gridMsgs.DataBind()
+
+        Dim msgs = UserMessage.GetAllNewMessage(User.Identity.Name)
+
+        For Each msg In msgs
+            UserMessage.ReadMsg(User.Identity.Name, msg.MsgID)
+        Next
     End Sub
 
     Protected Sub gridMsgs_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)

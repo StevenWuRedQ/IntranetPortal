@@ -563,6 +563,22 @@ Public Class LeadsList
             BindLeadsList(lblLeadCategory.Text)
         End If
     End Sub
+
+    Protected Sub gridLeads_DataBinding(sender As Object, e As EventArgs)
+        If gridLeads.DataSource Is Nothing Then
+            BindLeadsList(lblLeadCategory.Text)
+        End If
+    End Sub
+
+    Protected Sub gridLeads_CustomGroupDisplayText(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewColumnDisplayTextEventArgs)
+        
+    End Sub
+
+    Protected Sub gridLeads_SummaryDisplayText(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewSummaryDisplayTextEventArgs)
+        If e.Item.FieldName = "LeadsName" Then
+            e.Text = e.Value
+        End If
+    End Sub
 End Class
 
 Public Enum ControlView
