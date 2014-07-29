@@ -426,7 +426,7 @@
                                                                                 </dx:LayoutItemNestedControlContainer>
                                                                             </LayoutItemNestedControlCollection>
                                                                         </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Year Build">
+                                                                        <dx:LayoutItem Caption="Year Build" FieldName="YearBuilt">
                                                                             <LayoutItemNestedControlCollection>
                                                                                 <dx:LayoutItemNestedControlContainer>
                                                                                     <dx:ASPxTextBox ID="ASPxTextBox6" Width="100%"
