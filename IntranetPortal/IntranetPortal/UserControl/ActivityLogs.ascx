@@ -243,7 +243,7 @@
     }
     // ]]>
 </script>
-<dx:ASPxPageControl Width="100%" Height="815px" EnableViewState="false" ID="pageActivitylog" runat="server" ActiveTabIndex="0" TabSpacing="2px">
+<dx:ASPxPageControl Width="100%" Height="100%" EnableViewState="false" ID="pageActivitylog" runat="server" ActiveTabIndex="0" TabSpacing="2px">
     <Paddings Padding="0px" />
     <TabStyle Width="80px" Paddings-PaddingLeft="10px">
         <Paddings PaddingLeft="10px"></Paddings>

@@ -25,14 +25,12 @@
                                     </dx:SplitterContentControl>
                                 </ContentCollection>
                             </dx:SplitterPane>
-                            <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9">
+                            <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9" ScrollBars="Auto">
                                 <PaneStyle BackColor="#F9F9F9">
                                 </PaneStyle>
                                 <ContentCollection>
                                     <dx:SplitterContentControl ID="SplitterContentControl2" runat="server">
-
                                         <uc1:LeadsInfo runat="server" ID="LeadsInfo" ClientVisible="false" />
-
                                     </dx:SplitterContentControl>
                                 </ContentCollection>
                             </dx:SplitterPane>

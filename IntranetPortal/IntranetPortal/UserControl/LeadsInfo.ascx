@@ -224,8 +224,16 @@
 
     // ]]> 
 </script>
-
-<dx:ASPxCallbackPanel runat="server" OnCallback="ASPxCallbackPanel2_Callback" ID="ASPxCallbackPanel2" Height="100%" ClientInstanceName="ContentCallbackPanel" EnableCallbackAnimation="true" ScrollBars="Auto">
+<style type="text/css">
+    .UpdateInfoAlign {
+        text-align: right;
+    }
+    .LeadsContentPanel{
+        min-height:800px;
+        /*min-width:1100px;*/
+    }
+</style>
+<dx:ASPxCallbackPanel runat="server" OnCallback="ASPxCallbackPanel2_Callback" ID="ASPxCallbackPanel2" Height="100%" ClientInstanceName="ContentCallbackPanel" EnableCallbackAnimation="true" CssClass="LeadsContentPanel">
     <PanelCollection>
         <dx:PanelContent ID="PanelContent1" runat="server">
             <dx:ASPxPanel runat="server" ID="doorKnockMapPanel" Visible="false" Width="100%" Height="100%">
@@ -242,13 +250,13 @@
                     </Pane>
                 </Styles>
                 <Panes>
-                    <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="Auto" PaneStyle-BackColor="#f9f9f9">
+                    <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" MinSize="545px">
                         <PaneStyle Paddings-Padding="0">
                             <Paddings Padding="0px"></Paddings>
                         </PaneStyle>
                         <ContentCollection>
                             <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
-                                <div style="width: 100%; align-content: center;">
+                                <div style="width: 100%; align-content: center; height: 100%">
                                     <div style="text-align: right; float: right; position: relative; margin-bottom: -21px; margin-right: 15px; font-size: 12px">
                                         <dx:ASPxButton Text="Refresh" Image-Url="/images/Refresh.png" UseSubmitBehavior="false" AutoPostBack="false" Image-Width="16px" Image-Height="16px" runat="server" ID="btnRefresh" AllowFocus="False">
                                             <FocusRectPaddings PaddingLeft="2" PaddingRight="2" />
@@ -302,7 +310,7 @@
                                         <ItemStyle Width="143px"></ItemStyle>
                                     </dx:ASPxPopupMenu>
                                     <asp:HiddenField ID="hfBBLE" runat="server" />
-                                    <dx:ASPxPageControl Width="100%" Height="815px" EnableViewState="false" ID="pageLeadsInfo" runat="server" ActiveTabIndex="0" TabSpacing="2px">
+                                    <dx:ASPxPageControl Width="100%" Height="100%" EnableViewState="false" ID="pageLeadsInfo" runat="server" ActiveTabIndex="0" TabSpacing="2px">
                                         <Paddings Padding="0px" />
                                         <TabStyle Width="80px" Paddings-PaddingLeft="10px" HorizontalAlign="Center">
                                         </TabStyle>
@@ -311,342 +319,334 @@
                                                 <TabStyle Paddings-PaddingLeft="25px"></TabStyle>
                                                 <ContentCollection>
                                                     <dx:ContentControl runat="server">
-                                                        <dx:ASPxFormLayout ClientInstanceName="formlayoutLeadsInfoClient" ID="formlayoutLeadsInfo" Width="100%" runat="server">
-                                                            <Items>
-                                                                <dx:LayoutGroup Caption="Lead Info" Width="100%" Height="100%" ColCount="3" Name="leadGroup" GroupBoxDecoration="None" SettingsItemCaptions-Location="Top">
-                                                                    <GroupBoxStyle>
-                                                                        <Caption BackColor="Transparent" ForeColor="Black"></Caption>
-                                                                    </GroupBoxStyle>
+                                                        <dx:ASPxFormLayout ClientInstanceName="formlayoutLeadsInfoClient" ID="formlayoutLeadsInfo" Width="100%" runat="server" ColCount="3" ColSpan="3" Paddings-Padding="0">
+                                                            <Items>                                                               
+                                                                <dx:LayoutGroup ColCount="3" ColSpan="3" Width="100%" GroupBoxDecoration="None">
                                                                     <Items>
-                                                                        <dx:LayoutGroup ColCount="3" ColSpan="3" Width="100%" GroupBoxDecoration="None">
-                                                                            <Items>
-                                                                                <dx:LayoutItem ShowCaption="False" FieldName="LastIssuedOn">
-                                                                                    <LayoutItemNestedControlCollection>
-                                                                                        <dx:LayoutItemNestedControlContainer>
-                                                                                            <dx:ASPxLabel runat="server">
-                                                                                            </dx:ASPxLabel>
-                                                                                        </dx:LayoutItemNestedControlContainer>
-                                                                                    </LayoutItemNestedControlCollection>
-                                                                                </dx:LayoutItem>
-                                                                                <dx:LayoutItem ShowCaption="False" FieldName="UpdateInfo" ColSpan="2" HorizontalAlign="Right">
-                                                                                    <LayoutItemNestedControlCollection>
-                                                                                        <dx:LayoutItemNestedControlContainer>
-                                                                                            <dx:ASPxLabel runat="server" EncodeHtml="false">
-                                                                                            </dx:ASPxLabel>
-                                                                                        </dx:LayoutItemNestedControlContainer>
-                                                                                    </LayoutItemNestedControlCollection>
-                                                                                </dx:LayoutItem>
-                                                                            </Items>
-                                                                            <ParentContainerStyle Paddings-Padding="0"></ParentContainerStyle>
-                                                                            <CellStyle Paddings-Padding="2"></CellStyle>
-                                                                        </dx:LayoutGroup>
-                                                                        <dx:LayoutGroup Caption="Indicator" ColCount="2" GroupBoxStyle-Caption-ForeColor="Red" ColSpan="3" GroupBoxDecoration="Box" Width="100%" Visible="false">
-                                                                            <GroupBoxStyle>
-                                                                                <Caption ForeColor="Red"></Caption>
-                                                                            </GroupBoxStyle>
-                                                                            <Items>
-                                                                                <dx:LayoutItem ShowCaption="False" FieldName="IndicatorOfLiens">
-                                                                                    <LayoutItemNestedControlCollection>
-                                                                                        <dx:LayoutItemNestedControlContainer>
-                                                                                            <dx:ASPxLabel runat="server" EncodeHtml="false">
-                                                                                            </dx:ASPxLabel>
-                                                                                        </dx:LayoutItemNestedControlContainer>
-                                                                                    </LayoutItemNestedControlCollection>
-                                                                                </dx:LayoutItem>
-                                                                                <dx:LayoutItem ShowCaption="False" FieldName="IndicatorOfWater">
-                                                                                    <LayoutItemNestedControlCollection>
-                                                                                        <dx:LayoutItemNestedControlContainer>
-                                                                                            <dx:ASPxLabel runat="server" EncodeHtml="false">
-                                                                                            </dx:ASPxLabel>
-                                                                                        </dx:LayoutItemNestedControlContainer>
-                                                                                    </LayoutItemNestedControlCollection>
-                                                                                </dx:LayoutItem>
-                                                                            </Items>
-                                                                        </dx:LayoutGroup>
-                                                                        <dx:LayoutItem Caption="Property Address" ColSpan="2" FieldName="PropertyAddress">
+                                                                        <dx:LayoutItem ShowCaption="False" FieldName="LastIssuedOn">
                                                                             <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox1"
-                                                                                        runat="server" Width="100%" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="BBLE" FieldName="BBLE" Width="33%">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                                                    <dx:ASPxLabel runat="server" Font-Bold="true">
+                                                                                <dx:LayoutItemNestedControlContainer>
+                                                                                    <dx:ASPxLabel runat="server">
                                                                                     </dx:ASPxLabel>
                                                                                 </dx:LayoutItemNestedControlContainer>
                                                                             </LayoutItemNestedControlCollection>
                                                                         </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Neighborhood" FieldName="NeighName">
+                                                                        <dx:LayoutItem ShowCaption="False" FieldName="UpdateInfo" ColSpan="2" HorizontalAlign="Right" CssClass="UpdateInfoAlign">
                                                                             <LayoutItemNestedControlCollection>
                                                                                 <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox16" Width="100%"
-                                                                                        runat="server" Text="" />
+                                                                                    <dx:ASPxLabel runat="server" EncodeHtml="false">
+                                                                                    </dx:ASPxLabel>
                                                                                 </dx:LayoutItemNestedControlContainer>
                                                                             </LayoutItemNestedControlCollection>
                                                                         </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Borough" FieldName="Borough">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox17" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="NYC Sqft" FieldName="NYCSqft">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox18" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Sale Date" FieldName="SaleDate" Width="33%">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxDateEdit runat="server" ID="dataPick" Width="100%" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Block" FieldName="Block">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox2" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Lot" FieldName="Lot">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox3" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Year Build" FieldName="YearBuilt">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox6" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Tax Class" FieldName="TaxClass">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox4" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="# of Floors" FieldName="NumFloors">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox5" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Zoning" FieldName="Zoning">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox19" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="MAX FAR" FieldName="MaxFar">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox20" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Actual FAR" FieldName="ActualFar">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox21" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-
-                                                                        <dx:LayoutItem Caption="Lis Pendens" FieldName="IsLisPendens">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxRadioButtonList runat="server" ID="ASPxRadioButtonList11" RepeatDirection="Horizontal" Border-BorderStyle="None" Paddings-Padding="0" ValueType="System.Boolean">
-                                                                                        <Paddings Padding="0px"></Paddings>
-                                                                                        <Items>
-                                                                                            <dx:ListEditItem Text="Yes" Value="true" />
-                                                                                            <dx:ListEditItem Text="No" Value="false" />
-                                                                                        </Items>
-                                                                                        <Border BorderStyle="None"></Border>
-                                                                                    </dx:ASPxRadioButtonList>
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="1st Mortgage" FieldName="C1stMotgrAmt">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox8" DisplayFormatString="C2" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="2st Mortgage" FieldName="C2ndMotgrAmt">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox9" DisplayFormatString="C2" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Other Liens" FieldName="IsOtherLiens">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxRadioButtonList runat="server" ID="ASPxRadioButtonList10" ValueType="System.Boolean" RepeatDirection="Horizontal" Border-BorderStyle="None" Paddings-Padding="0">
-                                                                                        <Paddings Padding="0px"></Paddings>
-                                                                                        <Items>
-                                                                                            <dx:ListEditItem Text="Yes" Value="true" />
-                                                                                            <dx:ListEditItem Text="No" Value="false" />
-                                                                                        </Items>
-                                                                                        <Border BorderStyle="None"></Border>
-                                                                                    </dx:ASPxRadioButtonList>
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="" ShowCaption="False" VerticalAlign="Bottom">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox15" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Unbuilt Sqft" VerticalAlign="Bottom">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox22"
-                                                                                        runat="server" Text="" Width="100%" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Taxes Owed" FieldName="IsTaxesOwed">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxRadioButtonList runat="server" ValueType="System.Boolean" ID="ASPxRadioButtonList12" RepeatDirection="Horizontal" Border-BorderStyle="None" Paddings-Padding="0">
-                                                                                        <Paddings Padding="0px"></Paddings>
-                                                                                        <Items>
-                                                                                            <dx:ListEditItem Text="Yes" Value="true" />
-                                                                                            <dx:ListEditItem Text="No" Value="false" />
-                                                                                        </Items>
-                                                                                        <Border BorderStyle="None"></Border>
-                                                                                    </dx:ASPxRadioButtonList>
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Amount" FieldName="TaxesAmt">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox7" DisplayFormatString="C2" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Building Dem" FieldName="BuildingDem">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox10" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Water Owed" FieldName="IsWaterOwed">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxRadioButtonList runat="server" ID="radioBox" ValueType="System.Boolean" RepeatDirection="Horizontal" Border-BorderStyle="None" Paddings-Padding="0">
-                                                                                        <Paddings Padding="0px"></Paddings>
-                                                                                        <Items>
-                                                                                            <dx:ListEditItem Text="Yes" Value="true" />
-                                                                                            <dx:ListEditItem Text="No" Value="false" />
-                                                                                        </Items>
-
-                                                                                        <Border BorderStyle="None"></Border>
-                                                                                    </dx:ASPxRadioButtonList>
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Amount" FieldName="WaterAmt">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox11" DisplayFormatString="C2" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Lot Dem" FieldName="LotDem">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox12" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Violations" FieldName="Violation">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxCheckBoxList runat="server" ID="cbkViolations" RepeatDirection="Horizontal" Border-BorderStyle="None" Paddings-Padding="0" ValueType="System.String">
-                                                                                        <Paddings Padding="0px"></Paddings>
-                                                                                        <Items>
-                                                                                            <dx:ListEditItem Text="ECB" Value="ECB" />
-                                                                                            <dx:ListEditItem Text="DOB" Value="DOB" />
-                                                                                        </Items>
-                                                                                        <Border BorderStyle="None"></Border>
-                                                                                    </dx:ASPxCheckBoxList>
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Amount" FieldName="ViolationAmount">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox13" DisplayFormatString="C2" Width="100%"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Est Value" FieldName="EstValue">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxTextBox ID="ASPxTextBox14" Width="100%" DisplayFormatString="C2"
-                                                                                        runat="server" Text="" />
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Liens" ColSpan="3">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer>
-                                                                                    <dx:ASPxGridView runat="server" ID="gridLiens" KeyFieldName="LisPenID" Width="100%">
-                                                                                        <Columns>
-                                                                                            <dx:GridViewDataTextColumn FieldName="Type" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
-                                                                                            <dx:GridViewDataTextColumn FieldName="Effective" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
-                                                                                            <dx:GridViewDataTextColumn FieldName="Expiration" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
-                                                                                            <dx:GridViewDataTextColumn FieldName="Plaintiff" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
-                                                                                            <dx:GridViewDataTextColumn FieldName="Defendant" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
-                                                                                            <dx:GridViewDataTextColumn FieldName="Index" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
-                                                                                        </Columns>
-                                                                                    </dx:ASPxGridView>
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-
                                                                     </Items>
-                                                                    <SettingsItemCaptions Location="Top"></SettingsItemCaptions>
+                                                                    <ParentContainerStyle Paddings-Padding="0"></ParentContainerStyle>
+                                                                    <CellStyle Paddings-Padding="2"></CellStyle>
                                                                 </dx:LayoutGroup>
+                                                                <dx:LayoutGroup Caption="Indicator" ColCount="2" GroupBoxStyle-Caption-ForeColor="Red" ColSpan="3" GroupBoxDecoration="Box" Width="100%" Visible="false">
+                                                                    <GroupBoxStyle>
+                                                                        <Caption ForeColor="Red"></Caption>
+                                                                    </GroupBoxStyle>
+                                                                    <Items>
+                                                                        <dx:LayoutItem ShowCaption="False" FieldName="IndicatorOfLiens">
+                                                                            <LayoutItemNestedControlCollection>
+                                                                                <dx:LayoutItemNestedControlContainer>
+                                                                                    <dx:ASPxLabel runat="server" EncodeHtml="false">
+                                                                                    </dx:ASPxLabel>
+                                                                                </dx:LayoutItemNestedControlContainer>
+                                                                            </LayoutItemNestedControlCollection>
+                                                                        </dx:LayoutItem>
+                                                                        <dx:LayoutItem ShowCaption="False" FieldName="IndicatorOfWater">
+                                                                            <LayoutItemNestedControlCollection>
+                                                                                <dx:LayoutItemNestedControlContainer>
+                                                                                    <dx:ASPxLabel runat="server" EncodeHtml="false">
+                                                                                    </dx:ASPxLabel>
+                                                                                </dx:LayoutItemNestedControlContainer>
+                                                                            </LayoutItemNestedControlCollection>
+                                                                        </dx:LayoutItem>
+                                                                    </Items>
+                                                                </dx:LayoutGroup>
+                                                                <dx:LayoutItem Caption="Property Address" ColSpan="2" FieldName="PropertyAddress">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox1"
+                                                                                runat="server" Width="100%" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="BBLE" FieldName="BBLE" Width="33%">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                                                            <dx:ASPxLabel runat="server" Font-Bold="true">
+                                                                            </dx:ASPxLabel>
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Neighborhood" FieldName="NeighName">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox16" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Borough" FieldName="Borough">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox17" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="NYC Sqft" FieldName="NYCSqft">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox18" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Sale Date" FieldName="SaleDate" Width="33%">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxDateEdit runat="server" ID="dataPick" Width="100%" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Block" FieldName="Block">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox2" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Lot" FieldName="Lot">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox3" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Year Build" FieldName="YearBuilt">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox6" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Tax Class" FieldName="TaxClass">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox4" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="# of Floors" FieldName="NumFloors">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox5" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Zoning" FieldName="Zoning">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox19" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="MAX FAR" FieldName="MaxFar">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox20" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Actual FAR" FieldName="ActualFar">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox21" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+
+                                                                <dx:LayoutItem Caption="Lis Pendens" FieldName="IsLisPendens">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxRadioButtonList runat="server" ID="ASPxRadioButtonList11" RepeatDirection="Horizontal" Border-BorderStyle="None" Paddings-Padding="0" ValueType="System.Boolean">
+                                                                                <Paddings Padding="0px"></Paddings>
+                                                                                <Items>
+                                                                                    <dx:ListEditItem Text="Yes" Value="true" />
+                                                                                    <dx:ListEditItem Text="No" Value="false" />
+                                                                                </Items>
+                                                                                <Border BorderStyle="None"></Border>
+                                                                            </dx:ASPxRadioButtonList>
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="1st Mortgage" FieldName="C1stMotgrAmt">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox8" DisplayFormatString="C2" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="2st Mortgage" FieldName="C2ndMotgrAmt">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox9" DisplayFormatString="C2" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Other Liens" FieldName="IsOtherLiens">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxRadioButtonList runat="server" ID="ASPxRadioButtonList10" ValueType="System.Boolean" RepeatDirection="Horizontal" Border-BorderStyle="None" Paddings-Padding="0">
+                                                                                <Paddings Padding="0px"></Paddings>
+                                                                                <Items>
+                                                                                    <dx:ListEditItem Text="Yes" Value="true" />
+                                                                                    <dx:ListEditItem Text="No" Value="false" />
+                                                                                </Items>
+                                                                                <Border BorderStyle="None"></Border>
+                                                                            </dx:ASPxRadioButtonList>
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="" ShowCaption="False" VerticalAlign="Bottom">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox15" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Unbuilt Sqft" VerticalAlign="Bottom">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox22"
+                                                                                runat="server" Text="" Width="100%" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Taxes Owed" FieldName="IsTaxesOwed">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxRadioButtonList runat="server" ValueType="System.Boolean" ID="ASPxRadioButtonList12" RepeatDirection="Horizontal" Border-BorderStyle="None" Paddings-Padding="0">
+                                                                                <Paddings Padding="0px"></Paddings>
+                                                                                <Items>
+                                                                                    <dx:ListEditItem Text="Yes" Value="true" />
+                                                                                    <dx:ListEditItem Text="No" Value="false" />
+                                                                                </Items>
+                                                                                <Border BorderStyle="None"></Border>
+                                                                            </dx:ASPxRadioButtonList>
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Amount" FieldName="TaxesAmt">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox7" DisplayFormatString="C2" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Building Dem" FieldName="BuildingDem">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox10" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Water Owed" FieldName="IsWaterOwed">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxRadioButtonList runat="server" ID="radioBox" ValueType="System.Boolean" RepeatDirection="Horizontal" Border-BorderStyle="None" Paddings-Padding="0">
+                                                                                <Paddings Padding="0px"></Paddings>
+                                                                                <Items>
+                                                                                    <dx:ListEditItem Text="Yes" Value="true" />
+                                                                                    <dx:ListEditItem Text="No" Value="false" />
+                                                                                </Items>
+
+                                                                                <Border BorderStyle="None"></Border>
+                                                                            </dx:ASPxRadioButtonList>
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Amount" FieldName="WaterAmt">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox11" DisplayFormatString="C2" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Lot Dem" FieldName="LotDem">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox12" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Violations" FieldName="Violation">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxCheckBoxList runat="server" ID="cbkViolations" RepeatDirection="Horizontal" Border-BorderStyle="None" Paddings-Padding="0" ValueType="System.String">
+                                                                                <Paddings Padding="0px"></Paddings>
+                                                                                <Items>
+                                                                                    <dx:ListEditItem Text="ECB" Value="ECB" />
+                                                                                    <dx:ListEditItem Text="DOB" Value="DOB" />
+                                                                                </Items>
+                                                                                <Border BorderStyle="None"></Border>
+                                                                            </dx:ASPxCheckBoxList>
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Amount" FieldName="ViolationAmount">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox13" DisplayFormatString="C2" Width="100%"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Est Value" FieldName="EstValue">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox14" Width="100%" DisplayFormatString="C2"
+                                                                                runat="server" Text="" />
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Liens" ColSpan="3">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer>
+                                                                            <dx:ASPxGridView runat="server" ID="gridLiens" KeyFieldName="LisPenID" Width="100%">
+                                                                                <Columns>
+                                                                                    <dx:GridViewDataTextColumn FieldName="Type" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                                                                                    <dx:GridViewDataTextColumn FieldName="Effective" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                                                                                    <dx:GridViewDataTextColumn FieldName="Expiration" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                                                                                    <dx:GridViewDataTextColumn FieldName="Plaintiff" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                                                                                    <dx:GridViewDataTextColumn FieldName="Defendant" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                                                                                    <dx:GridViewDataTextColumn FieldName="Index" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                                                                                </Columns>
+                                                                            </dx:ASPxGridView>
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>                                                              
                                                             </Items>
+                                                            <SettingsItemCaptions Location="Top"></SettingsItemCaptions>
                                                             <Styles>
                                                                 <LayoutGroupBox>
                                                                     <Caption Font-Bold="True"></Caption>
@@ -720,13 +720,13 @@
                                         PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
                                         PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="TopSides" PopupAction="LeftMouseClick">
                                         <Items>
-                                            <dx:MenuItem GroupName="Sort" Text="Call Phone" Name="Call">
+                                            <dx:MenuItem Text="Call Phone" Name="Call">
                                             </dx:MenuItem>
-                                            <dx:MenuItem GroupName="Sort" Text="# doesn't work" Name="nonWork">
+                                            <dx:MenuItem Text="# doesn't work" Name="nonWork">
                                             </dx:MenuItem>
-                                            <dx:MenuItem GroupName="Sort" Text="Working Phone number" Name="Work">
+                                            <dx:MenuItem Text="Working Phone number" Name="Work">
                                             </dx:MenuItem>
-                                              <dx:MenuItem GroupName="Sort" Text="Undo" Name="Undo">
+                                            <dx:MenuItem Text="Undo" Name="Undo">
                                             </dx:MenuItem>
                                         </Items>
                                         <ItemStyle Width="143px"></ItemStyle>
@@ -736,13 +736,13 @@
                                         ShowPopOutImages="false" AutoPostBack="false"
                                         PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="TopSides" PopupAction="LeftMouseClick">
                                         <Items>
-                                            <dx:MenuItem GroupName="Sort" Text="Door knock" Name="doorKnock">
+                                            <dx:MenuItem Text="Door knock" Name="doorKnock">
                                             </dx:MenuItem>
-                                            <dx:MenuItem GroupName="Sort" Text="Wrong Property" Name="wrongProperty">
+                                            <dx:MenuItem Text="Wrong Property" Name="wrongProperty">
                                             </dx:MenuItem>
-                                            <dx:MenuItem GroupName="Sort" Text="Correct Property" Name="correctProperty">
+                                            <dx:MenuItem Text="Correct Property" Name="correctProperty">
                                             </dx:MenuItem>
-                                               <dx:MenuItem GroupName="Sort" Text="Undo" Name="Undo">
+                                            <dx:MenuItem Text="Undo" Name="Undo">
                                             </dx:MenuItem>
                                         </Items>
                                         <ItemStyle Width="143px"></ItemStyle>
@@ -752,13 +752,13 @@
                             </dx:SplitterContentControl>
                         </ContentCollection>
                     </dx:SplitterPane>
-                    <dx:SplitterPane ShowCollapseForwardButton="True" Name="LogPanel">
+                    <dx:SplitterPane ShowCollapseForwardButton="True" Name="LogPanel" MinSize="545px">
                         <Panes>
                             <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9">
                                 <PaneStyle BackColor="#F9F9F9"></PaneStyle>
                                 <ContentCollection>
                                     <dx:SplitterContentControl ID="SplitterContentControl4" runat="server">
-                                        <div id="divLeftContent" style="width: 100%; float: left">
+                                        <div id="divLeftContent" style="width: 100%; height: 100%; float: left">
                                             <div style="text-align: right; float: right; margin-bottom: -21px; z-index: 100; margin-right: 15px; position: relative;">
                                                 <dx:ASPxButton Text="Schedule" UseSubmitBehavior="false" FocusRectPaddings-PaddingLeft="0" FocusRectPaddings-PaddingRight="0" Paddings-PaddingLeft="0" Paddings-PaddingRight="0" ID="ASPxButton2" Image-Url="/images/upcomming.jpg" AutoPostBack="false" Image-Width="16px" Image-Height="16px" runat="server">
                                                     <FocusRectPaddings PaddingLeft="2" PaddingRight="2" />
@@ -990,5 +990,5 @@
         </dx:PanelContent>
     </PanelCollection>
     <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>
-    <Border BorderStyle="None"></Border>
+    <Border BorderStyle="None"></Border>    
 </dx:ASPxCallbackPanel>
