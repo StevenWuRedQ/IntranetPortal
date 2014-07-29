@@ -47,6 +47,7 @@
                                 <dx:TreeViewNode Text="In Process" Image-Url="/images/process-icon2.jpg" NavigateUrl="MgrViewLeads.aspx?c=In Process" Name="mgrInProcessNode" />
                                 <dx:TreeViewNode Text="Dead Lead" Image-Url="/images/dead.png" NavigateUrl="MgrViewLeads.aspx?c=Dead Lead" Name="deadleadNode" />
                                 <dx:TreeViewNode Text="Closed" Image-Url="images/Closed.png" NavigateUrl="MgrViewLeads.aspx?c=Closed" Name="mgrClosedNode" />
+                                  <dx:TreeViewNode Text="Agent Overview" Image-Url="/images/assigned.png" NavigateUrl="AgentOverview/AgentOverview.aspx" Name="agentOverviewNode" />
                                 <dx:TreeViewNode Text="Search" Image-Url="/images/Search.png" NavigateUrl="MgrViewLeads.aspx?c=Search"></dx:TreeViewNode>
                             </Nodes>
                         </dx:TreeViewNode>
