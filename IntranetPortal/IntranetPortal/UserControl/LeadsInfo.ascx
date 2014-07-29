@@ -32,6 +32,13 @@
                 //telphoneLine.style.textDecoration = "none";
                 OnCallPhoneCallback("RightPhone|" + tmpPhoneNo);
             }
+
+
+            if (e.item.index == 3) {
+                //telphoneLine.style.color = "green";
+                //telphoneLine.style.textDecoration = "none";
+                OnCallPhoneCallback("UndoPhone|" + tmpPhoneNo);
+            }
         }
 
         e.item.SetChecked(false);
@@ -152,6 +159,10 @@
 
             if (e.item.index == 2) {
                 OnCallPhoneCallback("RightAddress|" + tmpAddress);
+            }
+
+            if (e.item.index == 3) {
+                OnCallPhoneCallback("UndoAddress|" + tmpAddress);
             }
 
             e.item.SetChecked(false);
@@ -715,6 +726,8 @@
                                             </dx:MenuItem>
                                             <dx:MenuItem GroupName="Sort" Text="Working Phone number" Name="Work">
                                             </dx:MenuItem>
+                                              <dx:MenuItem GroupName="Sort" Text="Undo" Name="Undo">
+                                            </dx:MenuItem>
                                         </Items>
                                         <ItemStyle Width="143px"></ItemStyle>
                                         <ClientSideEvents ItemClick="OnPhoneNumberClick" />
@@ -728,6 +741,8 @@
                                             <dx:MenuItem GroupName="Sort" Text="Wrong Property" Name="wrongProperty">
                                             </dx:MenuItem>
                                             <dx:MenuItem GroupName="Sort" Text="Correct Property" Name="correctProperty">
+                                            </dx:MenuItem>
+                                               <dx:MenuItem GroupName="Sort" Text="Undo" Name="Undo">
                                             </dx:MenuItem>
                                         </Items>
                                         <ItemStyle Width="143px"></ItemStyle>
