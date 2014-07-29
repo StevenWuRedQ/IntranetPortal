@@ -683,3 +683,16 @@ i.with_circle {
 .dxgvDataRow_MetropolisBlue1:hover img {
     visibility: visible;
 }
+/*charts css*/
+.legend {
+  text-align: center;
+}
+
+.legend .title {
+   
+    margin: 0.5em;
+    border-style: solid;
+    border-width: 0 0 0 1em;
+    padding: 0 0.3em;
+    font-size:12px;
+}
