@@ -1,8 +1,15 @@
 ﻿function init() {
+    //var send = document.getElementById('btnSend');
 
-    AwayMsg();
+    //if (!send.addEventListener) {
+    //    send.addEventListener = function (type, listener, useCapture) {
+    //        attachEvent('on' + type, function () { listener(event) });
+    //    }
+    //}
 
-    //window.setTimeout(function () { hook() }, 500);
+    //send.addEventListener('click', function () { send(); }, false);
+
+    window.setTimeout(function () { hook() }, 500);
     //window.setTimeout(function () { RefreshLeadsCount()}, 3000);
 }
 
@@ -11,42 +18,6 @@ function RefreshLeadsCount()
     //alert("Refresh");
     agentTreeCallbackPanel.PerformCallback("");
     //window.setTimeout(function () { RefreshLeadsCount() }, 1000);
-}
-
-function AwayMsg()
-{
-    var url = 'WhileImAwayMessagerHandler.ashx';
-    var request = getRequestObject();
-  
-    request.onreadystatechange = function () {
-        try {
-            if (request.readyState == 4) { 
-                if (request.status == 200) {
-                    if (request.responseText != "") {                      
-                        if (request.responseText != null) {
-                           
-                            if (!ASPxPopupAwayControlClient.GetVisible())
-                            {
-                                ASPxPopupAwayControlClient.SetContentUrl("/PopupControl/WhileAwayMsgs.aspx");
-                                ASPxPopupAwayControlClient.Show();
-                            }                                
-                        }
-                    }
-                    else
-                        window.setTimeout(function () { hook(); }, 1000);
-                }
-                else {
-                    document.getElementById('errorMsg').innerHTML +=
-                              request.responseText + '< br />';
-                }
-            }
-        }
-        catch (e) {
-            document.getElementById('errorMsg').innerHTML = "Error: " + e.message;
-        }
-    };
-    request.open('POST', url, true);
-    request.send(null);
 }
 
 var currentMsgId = null;

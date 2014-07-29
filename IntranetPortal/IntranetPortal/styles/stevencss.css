@@ -1,0 +1,685 @@
+﻿/*add by steven*/
+
+.vertical-parent {
+    display: table;
+    width: 100%;
+}
+
+.vertical-child {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.under-line-head {
+    border-bottom: 1px solid #2b586f;
+    height: 60px;
+}
+
+.under-line-menu {
+    border-bottom: 1px solid #2b586f;
+    height: 47px;
+    font-size: 24px;
+    color: #638292;
+    padding-left: 20px;
+    line-height: 60px;
+    background-color: #1c4154;
+    padding-top: 13px;
+}
+
+.nav-menu-select {
+    background: #ff400d;
+}
+
+.under-line-menu:hover {
+    background-color: #ff400d;
+    color: white;
+}
+
+.under-line-menu_hover {
+    background-color: #ff400d;
+    color: white;
+}
+
+.cell_hover {
+    /*background-color: #ff400d;
+    color:white;*/
+}
+
+.under-line-header {
+    border-bottom: 1px solid #dde0e7;
+}
+
+.right_palne_menu {
+    height: 40px;
+    margin-top: 20px;
+    color: #77787b;
+    list-style: none;
+    padding-left: 20px;
+    border-bottom: 1px solid #dde0e7;
+    align-content: center;
+}
+
+.raund-label {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    background: #77787b;
+    font-size: 18px;
+    font-weight: 900;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.raund-label2 {
+    background: #1a3847;
+    font-size: 16px;
+    font-weight: 900;
+    color: white;
+    border-radius: 16px;
+    text-align: center;
+    margin-top: -3px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.rand-button {
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+.rand-pop {
+    box-shadow: 2.5px 4.33px 40px 0px rgba(2, 2, 2, 0.3);
+    border-radius: 5px;
+    /*padding:0px 9px 30px 5px;*/
+}
+
+#ctl00_ctl00_MainSplitter_pcMain_PWC-1 {
+    padding: 2px 0px 30px 0px !important;
+}
+/*user fix the pop postion*/
+.fix_pop_postion_s {
+    margin-left: -1px !important;
+    margin-top: 10px !important;
+    padding-top: 15px;
+    padding-bottom: 30px;
+}
+
+.heading_text {
+    display: block;
+    float: left;
+    margin-top: 13px;
+    margin-left: 10px;
+}
+
+.group_lable {
+    cursor: pointer;
+    margin-left: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 14px;
+}
+/*add by steven fix UI*/
+.menuItem {
+    /*list-style: inside;*/
+    /*background: #163240;*/
+    height: 43px;
+    padding-left: 20px;
+    list-style-type: none;
+    border-bottom: 1px solid #2b586f;
+    font-size: 18px;
+    color: #7ba2b7;
+    width: 280px;
+    padding-top: 0px;
+}
+
+.dxsplControl_Portal {
+    font: 18px 'Source Sans Pro' !important;
+}
+
+.dxsplControl_MetropolisBlue {
+    font: 18px 'Source Sans Pro' !important;
+}
+
+.menuItem:hover {
+    background-color: #ff400d;
+    color: white !important;
+}
+
+.treePadding {
+    padding-top: 10px;
+    /*color: #7ba2b7;*/
+}
+
+.textMargin {
+    margin-top: 10px;
+}
+
+.dxsplControl_MetropolisBlue .header, .dxsplControl_MetropolisBlue #messageBody, .dxsplControl_MetropolisBlue .content {
+    font-family: 'Source Sans Pro' !important;
+}
+
+.dxmLite_Portal {
+    font-family: 'Source Sans Pro' !important;
+}
+
+body {
+    font: 18px 'Source Sans Pro' !important;
+}
+
+div.Hrozral {
+    float: left;
+}
+
+.dxtv-btn {
+    position: relative !important;
+    top: 10px;
+    margin-top: 7px !important;
+    margin-right: -20px;
+}
+/*the exmaple to rewite the font */
+/*.dxtvControl_MetropolisBlue
+        {
+            font:18px/27px 'Indie Flower' !important;
+        }*/
+/*---end----*/
+
+/*add by steven rewrite the search class*/
+/*@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);*/
+.dxic {
+    border: 1px solid #0e9ee9;
+    /*border-radius: 5px;*/
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.dxsplControl_MetropolisBlue {
+    font: 'Source Sans Pro' !important;
+}
+
+i[title]:hover:after {
+    /*content: attr(title);
+  padding: 4px 8px;
+  color: #333;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  white-space: nowrap;
+  
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  
+  background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #eeeeee),color-stop(1, #cccccc));
+  background-image: -webkit-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -o-linear-gradient(top, #eeeeee, #cccccc);
+      */
+}
+
+.upcase_text {
+    text-transform: uppercase;
+}
+
+.relative_parent {
+    position: relative;
+}
+/*change the pop menu bug*/
+.dxm-popup-bottom {
+    margin-top: -7px !important;
+}
+
+    .dxm-popup-bottom::before {
+        border-bottom: none;
+        top: auto;
+        border-top: 14px solid #fff;
+        bottom: -12px;
+    }
+
+    .dxm-popup-bottom::after {
+        border-bottom: none;
+        top: auto;
+        border-top: 12px solid #c0c0c0;
+        bottom: -13px;
+    }
+/*short sale css*/
+.short_sale_head_tab {
+    float: left;
+    width: 130px;
+    height: 100%;
+    text-align: center;
+}
+
+    .short_sale_head_tab:hover {
+        background: #e63000;
+    }
+
+.short_sale_buttom_tab {
+    float: left;
+    width: 110px;
+    height: 100%;
+    text-align: center;
+    border-bottom: 5px solid #eeeeee;
+    cursor: pointer;
+}
+
+    .short_sale_buttom_tab:hover {
+        border-color: #ff400d;
+    }
+
+.font_size_bold {
+    font-weight: 600;
+}
+
+.head_tab_icon_padding {
+    padding-top: 16px;
+}
+
+.sale_head_button {
+    margin-top: 18px;
+    width: 32px;
+    height: 32px;
+    border: solid 2px;
+    border-radius: 50%;
+    line-height: 32px !important;
+    text-align: center;
+}
+
+    .sale_head_button:hover {
+        color: white;
+    }
+
+div.form_head {
+    font-size: 18px;
+    color: #b1b2b7;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.sale_head_button_left {
+    margin-left: 10px;
+}
+
+.text_input {
+    border: 0px;
+    width: 100%;
+    font-size: 18px;
+    color: black;
+    font-family: 'Source Sans Pro';
+}
+
+    .text_input:focus {
+        border: 0px;
+        outline: none;
+    }
+
+.form_div_node {
+    width: 190px;
+    height: 54px;
+    border-bottom: 1px solid #dde0e7;
+    float: left;
+}
+
+.form_div_radio_group {
+    border-bottom: 0;
+}
+
+.form_span_group_text {
+    font-size: 14px;
+}
+
+.form_div_node_margin {
+    margin-left: 25px;
+}
+
+.form_div_node_line_margin {
+    margin-top: 8px;
+}
+
+.form_input_title {
+    color: #b1b2b7;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+/*Custom Radio Buttons and Checkboxes using Font Awesome*/
+
+input[type=radio],
+input[type='checkbox'] {
+    display: none;
+}
+
+    input[type=radio] + label {
+        display: inline-block;
+    }
+
+    input[type='checkbox'] + label:before,
+    input[type='radio'] + label:before {
+        display: inline-block;
+        font-family: FontAwesome;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding-right: 8px;
+    }
+
+    input[type="checkbox"]:checked + label:before {
+        padding-right: 6px;
+    }
+
+    input[type=radio] + label:before {
+        content: "\f096";
+    }
+
+    input[type=radio]:checked + label:before {
+        content: "\f046";
+    }
+
+    input[type="checkbox"] + label:before {
+        content: "\f096";
+    }
+
+    input[type="checkbox"]:checked + label:before {
+        content: "\f046";
+    }
+
+/*.circle-radio-boxes {
+  margin-left: -10px;
+  padding-top: 5px;
+}
+.circle-radio-boxes input[type=radio] {
+  visibility: hidden;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+.circle-radio-boxes label {
+  display: inline-block;
+  font-family: FontAwesome;
+  margin-left: 10px;
+}
+.circle-radio-boxes label:before {
+  content: "\f111";
+}
+.circle-radio-boxes input[type=radio]:checked ~ label:before {
+  content: "\f10c";
+}*/
+/*---end---*/
+/*fix the summay page layout*/
+.head_node_fix {
+    height: 52px;
+}
+
+#ctl00_ctl00_MainSplitter_1_S {
+    background: #e7e9ee;
+}
+
+#ctl00_ctl00_MainSplitter_2_S {
+    background: #e7e9ee !important;
+}
+
+/*li.dxm-item
+{
+    height:30px;
+}*/
+.pop_search_data {
+    padding-left: 10px;
+    padding-top: 22px;
+    margin-right: 20px;
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+    .pop_search_data:hover {
+        color: white;
+    }
+
+.dxgvDataRowHover_MetropolisBlue1 a {
+    color: #fff !important;
+}
+
+.dxgv:hover a {
+    color: white !important;
+}
+
+.search_pop_data_s {
+    height: 60px;
+    color: #3993c1;
+}
+
+.dxgvDataRowHover_MetropolisBlue1 .search_pop_data_s {
+    color: white;
+}
+
+#ctl00_ctl00_MainSplitter_pcMain_gridSearch_DXHeadersRow0 {
+    color: #b1b2b7;
+}
+
+#ctl00_ctl00_MainSplitter_txtSearchKey_I {
+    padding-left: 10px;
+}
+/*---end----*/
+
+/*short sale's UI*/
+.font_gray {
+    color: #b1b2b7;
+}
+
+.font_deep_gray {
+    color: #77787b;
+}
+
+.note_item {
+    height: 40px;
+    border-bottom: 1px solid white;
+    line-height: 40px;
+    background: #f5f5f5;
+}
+
+i.note_img {
+    margin-left: 30px;
+}
+
+span.note_text {
+    font-size: 16px;
+    margin-left: 20px;
+    width: 70%;
+}
+/*-------end---------*/
+
+/*angent overview UI*/
+.agent_layout_float {
+    float: left;
+    height: 100%;
+}
+
+i.with_circle {
+    border-radius: 50%;
+    border: 1px solid;
+    text-align: center;
+}
+
+.agent_menu_list_item {
+    padding-left: 10px;
+    font-size: 16px;
+    font-weight: 900;
+    color: #77787b;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+    border-bottom: 1px solid #eceef3;
+}
+
+    .agent_menu_list_item:hover {
+        background: #f0f2f6;
+    }
+
+.agnet_info_text {
+    width: 100%;
+    text-align: center;
+}
+
+.agent_info_detial_left {
+    width: 48%;
+    text-align: right;
+    color: #b1b2b7;
+    float: left;
+}
+
+.agent_info_detial_space {
+    width: 15px;
+    float: left;
+}
+
+.agent_info_detial_right {
+    color: #2e2f31;
+}
+
+.report_head_button {
+    height: 34px;
+    width: 34px;
+    line-height: 28px !important;
+    border-radius: 50%;
+    border: 2px solid;
+    text-align: center;
+    color: #b1b2b7;
+}
+
+    .report_head_button:hover {
+        color: #2e2f31;
+    }
+
+.report_head_button_padding {
+    margin-right: 10px;
+}
+
+.draggable_field {
+    width: 250px;
+    height: 30px;
+    background: white;
+    font-size: 14px;
+    box-shadow: 0px -1px 13px 1px rgba(2, 2, 2, 0.1);
+    line-height: 30px;
+    cursor: move;
+}
+
+.draggable_field_margin {
+    margin-top: 10px;
+}
+
+.draggable_icon {
+    font-size: 18px;
+    padding-left: 12px;
+    color: #bfc2c6;
+    padding-top: 7px;
+    /* line-height: 18px !important; */
+    display: block !important;
+    float: left;
+}
+
+.report_head {
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #b1b2b7;
+}
+
+.report_content {
+    font-size: 12px;
+}
+
+.employee_list_item {
+    border: 0px;
+    border-left: 3px solid #dde0e7;
+    list-style: none;
+    width: 255px;
+    height: 45px;
+}
+
+    .employee_list_item:hover {
+        background: #ff400d;
+        color: white;
+    }
+
+.employee_lest_head_number_label {
+    display: inline-block;
+    min-width: 24px;
+    padding: 3px 7px;
+    font-size: 18px;
+    line-height: 1;
+    color: white;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    background-color: #2e2f31;
+    border-radius: 14px;
+    font-weight: 900;
+}
+
+.font_black {
+    font-weight: 900;
+}
+
+.employee_list_item_div {
+    width: 195px;
+    padding-left: 20px;
+    padding-top: 10px;
+    float: left;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+.employee_list_item_icon {
+    color: white;
+    margin-top: 12px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.employee_list_group_margin {
+    margin-top: 10px;
+}
+
+.employee_list_item_name {
+}
+
+.report_gird_icon {
+    font-size: 14px;
+    color: #b1b2b7;
+    cursor: pointer;
+}
+
+.drappable_field_text {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.clear-fix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.clear-fix {
+    *zoom: 1;
+}
+/*----end----*/
+/*-----------------end--------*/
+.dxgvDataRow_MetropolisBlue1 img {
+    visibility: hidden;
+}
+
+.dxgvDataRow_MetropolisBlue1:hover img {
+    visibility: visible;
+}

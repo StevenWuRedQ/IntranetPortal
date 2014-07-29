@@ -2,7 +2,26 @@
 function ShowCateMenu(s, bble) {
     ASPxPopupMenuCategory.Hide();
     tmpBBLE = bble;
+    s.getBoundingClientRect();
+   
+    
     ASPxPopupMenuCategory.ShowAtElement(s);
+    var popmenu = document.getElementById("UserSummary_LeadsSubMenu_popupMenuLeads");
+    var pop_postion = popmenu.getBoundingClientRect();
+    var target_top = s.getBoundingClientRect().bottom;
+    var pop_content = document.getElementById('UserSummary_LeadsSubMenu_popupMenuLeads_DXME_');
+    if (pop_postion.top < target_top)
+    {
+        popmenu.style.top = target_top + 5;
+        pop_content.className = pop_content.className + " dxm-popup-bottom";
+        //alert(pop_postion.top+','+ target_top+' >>>here change to the arrow down and fix the postion ');
+    }
+    else {
+        pop_content.className = "dxm-popupMain dxm-popup fix_pop_postion_s";
+    }
+     
+   
+  
 }
 
 function PopupControlMapTabChange(s, e) {
