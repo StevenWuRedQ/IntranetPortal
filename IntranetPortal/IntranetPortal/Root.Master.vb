@@ -3,7 +3,7 @@ Public Class Root
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'MainSplitter.GetPaneByName("HeaderPane").Size = If(DevExpress.Web.ASPxClasses.ASPxWebControl.GlobalTheme = "Moderno", 101, 87)
-        lblVersion.Text = String.Format("Application Beta Version: {0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString)
+        lblVersion.Text = String.Format("Application Beta Version: {0},{1}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString, Server.MachineName)
 
         If Page.IsCallback Then
             'BindSearchGrid("")
