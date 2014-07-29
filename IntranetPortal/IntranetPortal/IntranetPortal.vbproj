@@ -230,6 +230,13 @@
       <DependentUpon>RegisterSuccess.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="AgentOverview\AgentOverview.aspx.designer.vb">
+      <DependentUpon>AgentOverview.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgentOverview\AgentOverview.aspx.vb">
+      <DependentUpon>AgentOverview.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="BingViewMap.aspx.designer.vb">
       <DependentUpon>BingViewMap.aspx</DependentUpon>
     </Compile>
@@ -624,6 +631,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ShortSale\ShortSale.aspx.designer.vb">
+      <DependentUpon>ShortSale.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ShortSale.aspx.vb">
+      <DependentUpon>ShortSale.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ShowReport.aspx.designer.vb">
       <DependentUpon>ShowReport.aspx</DependentUpon>
     </Compile>
@@ -771,7 +785,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Account\Login2.aspx" />
+    <Content Include="AgentOverview\AgentOverview.aspx" />
     <Content Include="BingViewMap.aspx" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\font-awesome.css" />
+    <Content Include="css\font-awesome.min.css" />
     <Content Include="DataAPITesting.aspx" />
     <Content Include="DevExpress\ASPxSchedulerForms\AppointmentDragToolTip.ascx" />
     <Content Include="DevExpress\ASPxSchedulerForms\AppointmentForm.ascx" />
@@ -787,6 +805,7 @@
     <Content Include="DevExpress\ASPxSchedulerForms\SelectionToolTip.ascx" />
     <Content Include="DevExpress\ASPxSchedulerForms\VerticalAppointmentTemplate.ascx" />
     <Content Include="DownloadFile.aspx" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />
     <Content Include="images\add-button-hi.png" />
@@ -842,14 +861,49 @@
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
     <Content Include="PreviewFile.aspx" />
+    <Content Include="scripts\Chart.js" />
     <Content Include="scripts\LeadsSubMenu.js" />
     <Content Include="scripts\PortalMessager.js" />
     <Content Include="scripts\prototype.js" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="less\bordered-pulled.less" />
+    <Content Include="less\core.less" />
+    <Content Include="less\fixed-width.less" />
+    <Content Include="less\font-awesome.less" />
+    <Content Include="less\icons.less" />
+    <Content Include="less\larger.less" />
+    <Content Include="less\list.less" />
+    <Content Include="less\mixins.less" />
+    <Content Include="less\path.less" />
+    <Content Include="less\rotated-flipped.less" />
+    <Content Include="less\spinning.less" />
+    <Content Include="less\stacked.less" />
+    <Content Include="less\variables.less" />
+    <Content Include="scss\font-awesome.scss" />
+    <Content Include="scss\_bordered-pulled.scss" />
+    <Content Include="scss\_core.scss" />
+    <Content Include="scss\_fixed-width.scss" />
+    <Content Include="scss\_icons.scss" />
+    <Content Include="scss\_larger.scss" />
+    <Content Include="scss\_list.scss" />
+    <Content Include="scss\_mixins.scss" />
+    <Content Include="scss\_path.scss" />
+    <Content Include="scss\_rotated-flipped.scss" />
+    <Content Include="scss\_spinning.scss" />
+    <Content Include="scss\_stacked.scss" />
+    <Content Include="scss\_variables.scss" />
     <None Include="Service References\DataAPI\Arrays1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\DataAPI\configuration91.svcinfo" />
     <None Include="Service References\DataAPI\configuration.svcinfo" />
+    <Content Include="scrollbar\jquery-1.11.0.min.js" />
+    <Content Include="scrollbar\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="scrollbar\jquery.mCustomScrollbar.css" />
+    <Content Include="scrollbar\jquery.mCustomScrollbar.js" />
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Acris_Out.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -893,7 +947,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
+    <Content Include="ShortSale\ShortSale.aspx" />
     <Content Include="StreetView.aspx" />
+    <Content Include="styles\stevencss.css" />
     <Content Include="SummaryPage.aspx" />
     <Content Include="Test.aspx" />
     <Content Include="UploadFilePage.aspx" />
