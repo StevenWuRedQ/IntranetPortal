@@ -8,5 +8,6 @@
         Wrong
         Right
         DoorKnock
+        Undo
     End Enum
 End Class
