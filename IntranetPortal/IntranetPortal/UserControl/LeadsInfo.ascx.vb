@@ -452,7 +452,9 @@ Public Class LeadsInfo1
                 DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, True, False)
             Case "TLO"
                 comments = String.Format("Home Owner info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
-                DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)
+                If Not DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
+                    Throw New Exception("This Lead didn't have owner info in our database.")
+                End If
         End Select
 
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString)

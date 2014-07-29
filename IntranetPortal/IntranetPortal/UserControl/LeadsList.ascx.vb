@@ -30,30 +30,32 @@ Public Class LeadsList
             End If
         End Using
 
-        If category = LeadStatus.Callback Then
-            gridLeads.GroupBy(gridLeads.Columns("CallbackDate"))
-            gridLeads.ExpandAll()
-        Else
-            gridLeads.UnGroup(gridLeads.Columns("CallbackDate"))
+        If Not Page.IsPostBack Then
+            If category = LeadStatus.Callback Then
+                gridLeads.GroupBy(gridLeads.Columns("CallbackDate"))
+                gridLeads.ExpandAll()
+            Else
+                gridLeads.UnGroup(gridLeads.Columns("CallbackDate"))
+            End If
+
+            If category = LeadStatus.DoorKnocks Then
+                gridLeads.Columns("colSelect").Visible = True
+                gridLeads.GroupBy(gridLeads.Columns("Neighborhood"))
+                gridLeads.ClientSideEvents.FocusedRowChanged = ""
+                gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
+
+                'Show View Lead Menu
+                popupMenuLeads.Items.FindByName("ViewLead").Visible = True
+            Else
+                gridLeads.Columns("colSelect").Visible = False
+            End If
+
+            gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
+
+            'Show Manager Menu
+            popupMenuLeads.Items.FindByName("Reassign").Visible = True
+            BindEmployeeList()
         End If
-
-        If category = LeadStatus.DoorKnocks Then
-            gridLeads.Columns("colSelect").Visible = True
-            gridLeads.GroupBy(gridLeads.Columns("Neighborhood"))
-            gridLeads.ClientSideEvents.FocusedRowChanged = ""
-            gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
-
-            'Show View Lead Menu
-            popupMenuLeads.Items.FindByName("ViewLead").Visible = True
-        Else
-            gridLeads.Columns("colSelect").Visible = False
-        End If
-
-        gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
-
-        'Show Manager Menu
-        popupMenuLeads.Items.FindByName("Reassign").Visible = True
-        BindEmployeeList()
     End Sub
 
     Sub BindLeadsListByOffice(category As LeadStatus)
@@ -77,30 +79,32 @@ Public Class LeadsList
             gridLeads.DataBind()
         End Using
 
-        If category = LeadStatus.Callback Then
-            gridLeads.GroupBy(gridLeads.Columns("CallbackDate"))
-            gridLeads.ExpandAll()
-        Else
-            gridLeads.UnGroup(gridLeads.Columns("CallbackDate"))
+        If Not Page.IsPostBack Then
+            If category = LeadStatus.Callback Then
+                gridLeads.GroupBy(gridLeads.Columns("CallbackDate"))
+                gridLeads.ExpandAll()
+            Else
+                gridLeads.UnGroup(gridLeads.Columns("CallbackDate"))
+            End If
+
+            If category = LeadStatus.DoorKnocks Then
+                gridLeads.Columns("colSelect").Visible = True
+                gridLeads.GroupBy(gridLeads.Columns("Neighborhood"))
+                gridLeads.ClientSideEvents.FocusedRowChanged = ""
+                gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
+
+                'Show View Lead Menu
+                popupMenuLeads.Items.FindByName("ViewLead").Visible = True
+            Else
+                gridLeads.Columns("colSelect").Visible = False
+            End If
+
+            gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
+
+            'Show Manager Menu
+            popupMenuLeads.Items.FindByName("Reassign").Visible = True
+            BindEmployeeList()
         End If
-
-        If category = LeadStatus.DoorKnocks Then
-            gridLeads.Columns("colSelect").Visible = True
-            gridLeads.GroupBy(gridLeads.Columns("Neighborhood"))
-            gridLeads.ClientSideEvents.FocusedRowChanged = ""
-            gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
-
-            'Show View Lead Menu
-            popupMenuLeads.Items.FindByName("ViewLead").Visible = True
-        Else
-            gridLeads.Columns("colSelect").Visible = False
-        End If
-
-        gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
-
-        'Show Manager Menu
-        popupMenuLeads.Items.FindByName("Reassign").Visible = True
-        BindEmployeeList()
     End Sub
 
     Public Sub DisableClientEventOnLoad()
@@ -207,13 +211,14 @@ Public Class LeadsList
             'popupMenuLeads.Items.FindByName("Delete").Visible = True
         End If
 
-        If LeadsListView = ControlView.ManagerView Then
-            BindLeadsListMgr(category)
+        If LeadsListView = ControlView.OfficeView Or Not String.IsNullOrEmpty(hfView.Value) Then
+            hfView.Value = ControlView.OfficeView
+            BindLeadsListByOffice(category)
             Return
         End If
 
-        If LeadsListView = ControlView.OfficeView Then
-            BindLeadsListByOffice(category)
+        If LeadsListView = ControlView.ManagerView Then
+            BindLeadsListMgr(category)
             Return
         End If
 
@@ -249,6 +254,12 @@ Public Class LeadsList
             End Using
         End If
 
+        If Not Page.IsPostBack Then
+            SettingGridLeads(category)
+        End If
+    End Sub
+
+    Public Sub SettingGridLeads(category As LeadStatus)
         If category = LeadStatus.Callback Then
             gridLeads.GroupBy(gridLeads.Columns("CallbackDate"))
             gridLeads.ExpandAll()
@@ -264,7 +275,6 @@ Public Class LeadsList
 
             'Show View Lead Menu
             popupMenuLeads.Items.FindByName("ViewLead").Visible = True
-
         Else
             gridLeads.Columns("colSelect").Visible = False
         End If
@@ -559,13 +569,19 @@ Public Class LeadsList
     End Sub
 
     Protected Sub gridLeads_AfterPerformCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewAfterPerformCallbackEventArgs) Handles gridLeads.AfterPerformCallback
-        If gridLeads.DataSource Is Nothing Then
-            BindLeadsList(lblLeadCategory.Text)
-        End If
+        'If gridLeads.DataSource Is Nothing Then
+        '    BindLeadsList(lblLeadCategory.Text)
+        'End If
     End Sub
 
     Protected Sub gridLeads_DataBinding(sender As Object, e As EventArgs)
         If gridLeads.DataSource Is Nothing Then
+
+            If Not String.IsNullOrEmpty(Request.QueryString("o")) Then
+                LeadsListView = ControlView.OfficeView
+                OfficeName = Request.QueryString("o")
+            End If
+
             BindLeadsList(lblLeadCategory.Text)
         End If
     End Sub

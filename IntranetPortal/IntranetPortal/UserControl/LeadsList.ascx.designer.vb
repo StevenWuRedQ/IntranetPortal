@@ -41,6 +41,15 @@ Partial Public Class LeadsList
     Protected WithEvents gridLeads As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
+    '''hfView control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfView As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''popupMenuLeads control.
     '''</summary>
     '''<remarks>

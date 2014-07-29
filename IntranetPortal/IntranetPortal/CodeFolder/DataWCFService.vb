@@ -131,11 +131,12 @@ Public Class DataWCFService
                 GetLatestSalesInfo(bble)
                 Return False
             End If
-
+            Dim loaded = False
             For Each owner In owners
 
                 Dim result = GetLocateReport(orderid, bble, owner)
                 If result IsNot Nothing Then
+                    loaded = True
                     owner.TLOLocateReport = result
                 End If
             Next
@@ -146,6 +147,8 @@ Public Class DataWCFService
             Else
                 Throw New Exception(contextError(0).ValidationErrors(0).ErrorMessage)
             End If
+
+            Return loaded
         End Using
     End Function
 
@@ -438,7 +441,7 @@ Public Class DataWCFService
                     If apiOrder.TLO = apiOrder.ItemStatus.Calling Then
                         'client.Acris_Get_LatestSale(apiOrder.ApiOrderID, bble)
                         'Dim ldinfo = LeadsInfo.GetInstance(apiOrder.BBLE)
-                        UpdateHomeOwner(bble, apiOrder.ApiOrderID)
+                        Return UpdateHomeOwner(bble, apiOrder.ApiOrderID)
                     End If
                 End Using
                 Return True

@@ -393,7 +393,7 @@
             </dx:ASPxHyperLink>
         </div>
     </div>
-    <dx:ASPxGridView runat="server" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
+    <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
         <Columns>
             <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
             </dx:GridViewCommandColumn>
@@ -671,7 +671,7 @@
         <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" EndCallback="OnGridLeadsEndCallback" />
         <Border BorderStyle="None"></Border>
     </dx:ASPxGridView>
-
+    <asp:HiddenField ID="hfView" runat="server" EnableViewState="true" />
     <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory" PopupHorizontalAlign="OutsideLeft" PopupVerticalAlign="TopSides" PopupAction="LeftMouseClick" ItemImage-Height="16" ItemImage-Width="16">
         <Items>
             <dx:MenuItem GroupName="Sort" Text="View Map" Name="GoogleStreet">
