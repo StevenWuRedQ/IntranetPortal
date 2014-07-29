@@ -161,23 +161,26 @@ Public Class ImportAgentData
 
             Dim bble = bbles(count)
             Try
-                Dim lead = LeadsInfo.GetInstance(bble)
+
+                UpdatePropertyAddress(bble)
+
+                'Dim lead = LeadsInfo.GetInstance(bble)
+
+                ''If String.IsNullOrEmpty(lead.Owner) Then
+                ''    DataWCFService.UpdateAssessInfo(bble)
+                ''End If
 
                 'If String.IsNullOrEmpty(lead.Owner) Then
-                '    DataWCFService.UpdateAssessInfo(bble)
+                '    DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True)
+                'Else
+                '    'If Not lead.C1stMotgrAmt.HasValue Then
+                '    '    DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True)
+                '    'Else
+                '    '    If Not lead.HasOwnerInfo Then
+                '    '        DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)
+                '    '    End If
+                '    'End If
                 'End If
-
-                If String.IsNullOrEmpty(lead.Owner) Then
-                    DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True)
-                Else
-                    'If Not lead.C1stMotgrAmt.HasValue Then
-                    '    DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True)
-                    'Else
-                    '    If Not lead.HasOwnerInfo Then
-                    '        DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)
-                    '    End If
-                    'End If
-                End If
                 'Thread.Sleep(1000)
             Catch ex As Exception
                 UserMessage.AddNewMessage("Service Error", "Initial Data Error " & bble, "Error: " & ex.Message, bble, DateTime.Now, "Initial Data")
@@ -187,6 +190,16 @@ Public Class ImportAgentData
         appState.Lock()
         appState("InLoop") = False
         appState.UnLock()
+    End Sub
+
+    Public Shared Sub UpdatePropertyAddress(bble As String)
+        Using Context As New Entities
+            Dim ld = Context.LeadsInfoes.Find(bble)
+            If ld IsNot Nothing Then
+                ld.PropertyAddress = Utility.BuildPropertyAddress(ld.Number, ld.StreetName, ld.Borough, ld.NeighName, ld.ZipCode)
+                Context.SaveChanges()
+            End If
+        End Using
     End Sub
 
     Protected Sub ASPxButton1_Click(sender As Object, e As EventArgs) Handles ASPxButton1.Click

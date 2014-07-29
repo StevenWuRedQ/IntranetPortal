@@ -510,32 +510,6 @@ Public Class DataWCFService
     End Function
 
     Private Shared Function BuildPropertyAddress(asessment As DataAPI.NYC_Assessment) As String
-        Dim result = String.Format("{0} {1},", asessment.NUMBER, asessment.ST_NAME)
-
-        If asessment.BOROUGH = "4" Then
-            result = result & " " & asessment.NEIGH_NAME
-        Else
-            If BoroughNames(asessment.BOROUGH) IsNot Nothing Then
-                result = result & " " & BoroughNames(asessment.BOROUGH)
-            End If
-        End If
-
-        result = result & ",NY " & asessment.ZIP
-
-        Return result.TrimStart
+        Return Utility.BuildPropertyAddress(asessment.NUMBER, asessment.ST_NAME, asessment.BOROUGH, asessment.NEIGH_NAME, asessment.ZIP)
     End Function
-
-    Private Shared ReadOnly Property BoroughNames As Hashtable
-        Get
-            Dim ht As New Hashtable
-            ht.Add("1", "Manhattan")
-            ht.Add("2", "Bronx")
-            ht.Add("3", "Brooklyn")
-            ht.Add("5", "Staten Island")
-
-            Return ht
-        End Get
-    End Property
-
-
 End Class
