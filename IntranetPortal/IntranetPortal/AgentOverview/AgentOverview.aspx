@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="AngentOverview.aspx.vb" Inherits="IntranetPortal.AngentOverview" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="AgentOverview.aspx.vb" Inherits="IntranetPortal.AngentOverview" %>
 
 <!DOCTYPE html>
 
