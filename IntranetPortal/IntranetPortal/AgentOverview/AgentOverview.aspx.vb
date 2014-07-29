@@ -1,4 +1,4 @@
-﻿Public Class AngentOverview
+﻿Public Class AgentOverview
     Inherits System.Web.UI.Page
     Public report_data As String
 
