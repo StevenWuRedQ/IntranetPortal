@@ -16,7 +16,7 @@
     height: 60px;
 }
 
-/*test steven   ffff  added*/ 
+/*test steven  ssss  ddddd added*/ 
 
 .under-line-menu {
     border-bottom: 1px solid #2b586f;
@@ -632,7 +632,7 @@ i.with_circle {
 }
 
 .employee_list_item_div {
-    width: 195px;
+    width: 213px;
     padding-left: 20px;
     padding-top: 10px;
     float: left;
@@ -697,4 +697,5 @@ i.with_circle {
     border-width: 0 0 0 1em;
     padding: 0 0.3em;
     font-size:12px;
+    color:#767676;
 }
