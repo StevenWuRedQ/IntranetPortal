@@ -211,8 +211,10 @@ Public Class DataWCFService
 
                 Return li
             End Using
+        Catch ex As System.ServiceModel.EndpointNotFoundException
+            Throw New Exception("The data serice is not avaiable. Please refresh later.")
         Catch ex As Exception
-            Throw ex
+            Throw New Exception("Exception happened during updating. Please try later. Exception: " & ex.Message)
         End Try
     End Function
 
@@ -447,7 +449,7 @@ Public Class DataWCFService
                 Return True
             End Using
 
-        Catch ex As TimeoutException
+        Catch ex As System.TimeoutException
             Throw New Exception("Time is out. The data services is busy now. Please try later.")
         Catch ex As Exception
             Throw New Exception("Data Services isnot avaiable now. Please try later. Error messager: " & ex.Message)
