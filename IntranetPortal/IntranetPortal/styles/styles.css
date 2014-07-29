@@ -588,7 +588,7 @@
 }
 /*add by steven*/
 .header {
-    background: white !important;
+    background: white;
 }
 
 .dxsplControl_Portal, .dxsplVSeparator_Portal, .dxsplHSeparator_Portal {
