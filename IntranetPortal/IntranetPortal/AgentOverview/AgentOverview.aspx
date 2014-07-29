@@ -178,6 +178,7 @@
                     <div style="padding-left: 370px; padding-top: 50px; height: 325px;">
                         <div style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px; /*background: blue; */ color: white; height: 100%;">
                             <canvas id="canvas" height="240" width="530"></canvas>
+                            <div id="lineLegend" style="color:black"></div>
                             <script>
 
                                 var lineChartData = {
@@ -187,26 +188,65 @@
                                             fillColor: "rgba(220,220,220,0.5)",
                                             strokeColor: "rgba(220,220,220,1)",
                                             pointColor: "rgba(220,220,220,1)",
-                                            data: [41, 42, 43, 45, 48, 49]
+                                            pointStrokeColor: "#fff",
+                                            pointHighlightFill: "#fff",
+                                            pointHighlightStroke: "rgba(220,220,220,1)",
+                                            data: [41, 42, 43, 45, 48, 49],
+                                            title:"Door knock"
                                         },
                                         {
                                             fillColor: "rgba(151,187,205,0.5)",
                                             strokeColor: "rgba(151,187,205,1)",
                                             pointColor: "rgba(151,187,205,1)",
-                                            data: [32, 33, 35, 34, 33, 38]
+                                            pointStrokeColor: "#fff",
+                                            pointHighlightFill: "#fff",
+                                            pointHighlightStroke: "rgba(151,187,205,1)",
+                                            data: [32, 33, 35, 34, 33, 38],
+                                            title:"Hot Leads"
                                         }
                                         ,
                                        {
                                            fillColor: "rgba(198,130,132,0.5)",
                                            strokeColor: "rgba(198,130,132,1)",
                                            pointColor: "rgba(198,130,132,1)",
-                                           data: [20, 40, 60, 80, 90, 100]
+                                           pointStrokeColor: "#fff",
+                                           pointHighlightFill: "#fff",
+                                           pointHighlightStroke: "rgba(198,130,132,1)",
+                                           data: [20, 40, 60, 80, 90, 100],
+                                           title: "Follow Ups "
                                        }
-                                    ]
-
+                                    ],
+                                    
                                 }
-                                var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
+                                
+                                function legend(parent, data) {
+                                    parent.className = 'legend';
+                                    var datas = data.hasOwnProperty('datasets') ? data.datasets : data;
 
+                                    // remove possible children of the parent
+                                    while (parent.hasChildNodes()) {
+                                        parent.removeChild(parent.lastChild);
+                                    }
+
+                                    datas.forEach(function (d) {
+                                        var title = document.createElement('span');
+                                        title.className = 'title';
+                                        title.style.borderColor = d.hasOwnProperty('strokeColor') ? d.strokeColor : d.color;
+                                        title.style.borderStyle = 'solid';
+                                        parent.appendChild(title);
+
+                                        var text = document.createTextNode(d.title);
+                                        title.appendChild(text);
+                                    });
+                                }
+
+                                var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData, {
+                                    bezierCurve: false,
+                                    datasetFill: false,
+                                    pointDotRadius: 6,
+                                    showTooltips: true,
+                                });
+                                legend(document.getElementById("lineLegend"), lineChartData);
                             </script>
                         </div>
 
@@ -228,8 +268,8 @@
                             </div>
                         </div>
                         <%--grid view--%>
-                        <div style="height: 300px; width: 100%; margin-top: 35px; padding-right: 40px; overflow-x: auto;" id="custom_report_grid">
-                            <div style="height: 300px; /*background: blue; */" id="droppable" class="custom_report_table">
+                        <div style="height: 260px; width: 100%; margin-top: 35px; padding-right: 40px; overflow-x: auto;" id="custom_report_grid">
+                            <div style="height: 260px; /*background: blue; */" id="droppable" class="custom_report_table">
 
                                 <table class="table table-condensed" style="width: 900px" id="custom_report_table">
                                   <%--  <thead>
@@ -346,7 +386,7 @@
                                            //<td class="report_content" style="width: 125px">' + data.data + '</td>\
                                             $('#custom_report_table').append('<tr>\
                                             '+table_cell+'\
-                                            <td class="report_content" style=""><i class="fa fa-list-alt report_gird_icon" onclick="custome_report_itemlick('+ i + ')"></i></td>\
+                                            <td class="report_content" style=""><i class="fa fa-list-alt report_gird_icon" style="float:right;" onclick="custome_report_itemlick(' + i + ')"></i></td>/n\
                                             <tr>\
                                             ');
                                         }
