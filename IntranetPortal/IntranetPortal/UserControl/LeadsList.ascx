@@ -179,6 +179,14 @@
                 }
             }
         }
+
+        if (e.tab.index == 3) {
+            if (tmpBBLE != null)
+            {
+                var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + tmpBBLE;
+                window.open(url, "_blank");
+            }
+        }
     }
 
     function OnLeadsCategoryClick(s, e) {
@@ -742,6 +750,7 @@
                         <dx:Tab Text="Street View" Name="streetView" />
                         <dx:Tab Text="Map View" Name="mapView" />
                         <dx:Tab Text="Bing Bird" Name="BingBird" />
+                        <dx:Tab Text="Oasis" Name="Oasis" />
                     </Tabs>
                     <ClientSideEvents ActiveTabChanged="PopupControlMapTabChange" />
                 </dx:ASPxTabControl>

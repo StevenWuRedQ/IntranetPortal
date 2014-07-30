@@ -1,5 +1,6 @@
 ﻿Imports DevExpress.Web.ASPxEditors
 Imports DevExpress.Web.ASPxTreeList
+Imports DevExpress.Web.ASPxUploadControl
 
 Public Class MgrEmployee
     Inherits System.Web.UI.Page
@@ -22,6 +23,9 @@ Public Class MgrEmployee
         emp.Department = e.NewValues("Department")
         emp.Extension = e.NewValues("Extension")
         emp.Email = e.NewValues("Email")
+        emp.Cellphone = e.NewValues("Cellphone")
+        emp.EmployeeSince = e.NewValues("EmployeeSince")
+        emp.Picture = e.NewValues("Picture")
         emp.Password = e.NewValues("Password")
         emp.ReportTo = e.NewValues("ReportTo")
         emp.Description = e.NewValues("Description")
@@ -62,6 +66,11 @@ Public Class MgrEmployee
             emp.Extension = e.NewValues("Extension")
             emp.Email = e.NewValues("Email")
             'emp.Password = e.NewValues("Password")
+
+            emp.Cellphone = e.NewValues("Cellphone")
+            emp.EmployeeSince = e.NewValues("EmployeeSince")
+            emp.Picture = e.NewValues("Picture")
+
             emp.ReportTo = e.NewValues("ReportTo")
             emp.Description = e.NewValues("Description")
             emp.Active = e.NewValues("Active")
@@ -107,4 +116,34 @@ Public Class MgrEmployee
             cbEmpColumn.PropertiesComboBox.DataSource = Context.Employees.OrderBy(Function(em) em.Name).ToList
         End Using
     End Sub
+
+    Protected Sub uplImage_FileUploadComplete(sender As Object, e As DevExpress.Web.ASPxUploadControl.FileUploadCompleteEventArgs)
+        e.CallbackData = String.Format("/DownloadFile.aspx?id={0}", SavePostedFile(e.UploadedFile))
+    End Sub
+
+   Private Function SavePostedFile(ByVal uploadedFile As UploadedFile) As String
+        'Dim bble = Request.QueryString("b").ToString
+
+        If (Not uploadedFile.IsValid) Then
+            Return String.Empty
+        End If
+        Dim fileName As String = uploadedFile.FileName
+
+        Using Context As New Entities
+            Dim attach As New FileAttachment
+            'attach.BBLE = bble
+            attach.Name = uploadedFile.FileName
+            attach.ContentType = uploadedFile.ContentType
+            attach.Size = uploadedFile.ContentLength
+            attach.Data = uploadedFile.FileBytes
+            attach.Description = "Employee Photo"
+            attach.Createby = Page.User.Identity.Name
+            attach.CreateDate = DateTime.Now
+
+            Context.FileAttachments.Add(attach)
+            Context.SaveChanges()
+
+            Return attach.FileID
+        End Using
+    End Function
 End Class

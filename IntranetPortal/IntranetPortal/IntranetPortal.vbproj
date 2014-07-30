@@ -889,6 +889,7 @@
     <Content Include="images\Up.png" />
     <Content Include="images\upcomming.jpg" />
     <Content Include="images\User Group.png" />
+    <Content Include="images\User-Empty-icon.png" />
     <Content Include="images\x_close.png" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />

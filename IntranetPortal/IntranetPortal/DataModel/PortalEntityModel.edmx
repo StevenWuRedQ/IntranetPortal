@@ -52,6 +52,9 @@
           <Property Name="Department" Type="nvarchar" MaxLength="50" />
           <Property Name="Extension" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cellphone" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeSince" Type="date" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="100" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="ReportTo" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="120" />
@@ -482,6 +485,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="Leads" Relationship="IntranetPortalModel.EmployeeLead" FromRole="Employee" ToRole="Lead" />
           <NavigationProperty Name="LeadsActivityLogs" Relationship="IntranetPortalModel.EmployeeLeadsActivityLog" FromRole="Employee" ToRole="LeadsActivityLog" />
+          <Property Name="Cellphone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeSince" Type="DateTime" Precision="0" />
+          <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LeadsActivityLog">
           <Key>
@@ -923,6 +929,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="IntranetPortalModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="EmployeeSince" ColumnName="EmployeeSince" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />

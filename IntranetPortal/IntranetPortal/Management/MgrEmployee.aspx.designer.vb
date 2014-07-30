@@ -93,4 +93,76 @@ Partial Public Class MgrEmployee
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents confirmButton As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''ASPxPopupControl2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''Popupcontrolcontentcontrol2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Popupcontrolcontentcontrol2 As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+
+    '''<summary>
+    '''lblSelectImage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblSelectImage As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+
+    '''<summary>
+    '''uplImage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents uplImage As Global.DevExpress.Web.ASPxUploadControl.ASPxUploadControl
+
+    '''<summary>
+    '''lblAllowebMimeType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblAllowebMimeType As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+
+    '''<summary>
+    '''lblMaxFileSize control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblMaxFileSize As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+
+    '''<summary>
+    '''btnUpload control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnUpload As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''btnConfirm control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnConfirm As Global.DevExpress.Web.ASPxEditors.ASPxButton
 End Class

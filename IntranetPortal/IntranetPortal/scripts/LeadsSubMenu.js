@@ -97,6 +97,13 @@ function PopupControlMapTabChange(s, e) {
             }
         }
     }
+
+    if (e.tab.index == 3) {
+        if (tmpBBLE != null) {
+            var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + tmpBBLE;
+            window.open(url, "_blank");
+        }
+    }
 }
 
 function OnLeadsCategoryClick(s, e) {

@@ -7,6 +7,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <script type="text/javascript">
+        var aspxImage = null;
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -30,7 +33,7 @@
                                             <Columns>
                                                 <dx:TreeListTextColumn FieldName="Name" ShowInCustomizationForm="True" VisibleIndex="0">
                                                     <PropertiesTextEdit>
-                                                        <ValidationSettings>
+                                                        <ValidationSettings ErrorDisplayMode="None">
                                                             <RequiredField IsRequired="True"></RequiredField>
                                                         </ValidationSettings>
                                                     </PropertiesTextEdit>
@@ -46,29 +49,42 @@
                                                     <EditCellTemplate>
                                                         <dx:ASPxTextBox ID="pswtextbox" runat="server" Text='<%#Bind("Password")%>'
                                                             Visible='<%#treeList.IsNewNodeEditing%>' Password="True">
+                                                            <ValidationSettings ErrorDisplayMode="None"></ValidationSettings>
                                                             <ClientSideEvents Validation="function(s,e){e.isValid = s.GetText()>5;}" />
                                                         </dx:ASPxTextBox>
-                                                        <asp:LinkButton ID="LinkButton1" runat="server" OnClientClick="popup.ShowAtElement(this); return false;" Visible='<%#Not treeList.IsNewNodeEditing%>'>Edit password</asp:LinkButton>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" OnClientClick="popup.ShowAtElement(); return false;" Visible='<%#Not treeList.IsNewNodeEditing%>'>Edit password</asp:LinkButton>
                                                     </EditCellTemplate>
                                                 </dx:TreeListTextColumn>
                                                 <dx:TreeListTextColumn FieldName="Extension" ShowInCustomizationForm="True" VisibleIndex="3">
                                                 </dx:TreeListTextColumn>
-                                                <dx:TreeListTextColumn FieldName="Email" ShowInCustomizationForm="True" VisibleIndex="4" PropertiesTextEdit-ValidationSettings-RequiredField-IsRequired="true">
+                                                <dx:TreeListTextColumn FieldName="Cellphone" ShowInCustomizationForm="True" VisibleIndex="4">
+                                                </dx:TreeListTextColumn>
+                                                <dx:TreeListDateTimeColumn FieldName="EmployeeSince" ShowInCustomizationForm="true" VisibleIndex="5"></dx:TreeListDateTimeColumn>
+                                                <dx:TreeListTextColumn FieldName="Email" ShowInCustomizationForm="True" VisibleIndex="6" PropertiesTextEdit-ValidationSettings-RequiredField-IsRequired="true">
                                                     <PropertiesTextEdit>
-                                                        <ValidationSettings>
+                                                        <ValidationSettings ErrorDisplayMode="None">
                                                             <RequiredField IsRequired="True"></RequiredField>
                                                         </ValidationSettings>
                                                     </PropertiesTextEdit>
                                                 </dx:TreeListTextColumn>
-                                                <dx:TreeListComboBoxColumn FieldName="ReportTo" PropertiesComboBox-ValueField="EmployeeID" PropertiesComboBox-TextField="Name" VisibleIndex="5">
+                                                <dx:TreeListComboBoxColumn FieldName="ReportTo" PropertiesComboBox-ValueField="EmployeeID" PropertiesComboBox-TextField="Name" VisibleIndex="7">
                                                     <PropertiesComboBox TextField="Name" ValueField="EmployeeID" ValueType="System.Int32">
-                                                    </PropertiesComboBox>                                              
+                                                    </PropertiesComboBox>
                                                 </dx:TreeListComboBoxColumn>
                                                 <dx:TreeListTextColumn FieldName="Description" ShowInCustomizationForm="True" VisibleIndex="9">
                                                 </dx:TreeListTextColumn>
-                                                <dx:TreeListCheckColumn FieldName="Active" ShowInCustomizationForm="True" VisibleIndex="10">
+                                                <dx:TreeListImageColumn FieldName="Picture" VisibleIndex="10" Visible="false" EditFormSettings-Visible="True">
+                                                    <EditCellTemplate>
+                                                        <dx:ASPxImage ID="imgEmpPhoto" runat="server" ImageUrl='<%# Bind("Picture")%>' Width="50px" Height="50px" Cursor="pointer">
+                                                            <EmptyImage Url="/images/User-Empty-icon.png" ></EmptyImage>
+                                                            <ClientSideEvents Click="function(s,e){aspxImage = s; selectImgs.ShowAtElement(s.GetMainElement()); getPreviewImageElement().src='/images/user-empty-icon.png';}" />
+                                                        </dx:ASPxImage>
+                                                        <dx:ASPxTextBox ID="txtImageUrl" ClientInstanceName="txtImageUrl" runat="server" Text='<%#Bind("Picture")%>' ClientVisible="false"></dx:ASPxTextBox>
+                                                    </EditCellTemplate>
+                                                </dx:TreeListImageColumn>
+                                                <dx:TreeListCheckColumn FieldName="Active" ShowInCustomizationForm="True" VisibleIndex="11">
                                                 </dx:TreeListCheckColumn>
-                                                <dx:TreeListCommandColumn ShowInCustomizationForm="True" VisibleIndex="11" ShowNewButtonInHeader="true">
+                                                <dx:TreeListCommandColumn ShowInCustomizationForm="True" VisibleIndex="12" ShowNewButtonInHeader="true">
                                                     <EditButton Visible="True">
                                                     </EditButton>
                                                     <NewButton Visible="True">
@@ -78,6 +94,7 @@
                                             <SettingsBehavior ExpandCollapseAction="NodeDblClick" />
                                             <SettingsEditing Mode="EditForm"></SettingsEditing>
                                         </dx:ASPxTreeList>
+
                                         <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" HeaderText="Edit password" Width="307px" ClientInstanceName="popup">
                                             <ContentCollection>
                                                 <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol1" runat="server">
@@ -108,7 +125,131 @@
                                                 </dx:PopupControlContentControl>
                                             </ContentCollection>
                                         </dx:ASPxPopupControl>
-                                        <%--<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=CHRISPC;Initial Catalog=IntranetPortal;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework" ProviderName="System.Data.SqlClient" SelectCommand="SELECT EmployeeID, EmployeeNo, Name, Position, Department, Extension, Email, Password, ReportTo, Description, CreateDate, CreateBy, Active FROM Employees ORDER BY Name"></asp:SqlDataSource>--%>
+
+                                        <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" HeaderText="Select Photo" ClientInstanceName="selectImgs" Modal="true" Width="500px">
+                                            <ContentCollection>
+                                                <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol2" runat="server">
+                                                    <style type="text/css">
+                                                        #mainContainer td.buttonCell {
+                                                            padding-top: 15px;
+                                                        }
+
+                                                        #mainContainer td.caption {
+                                                            padding-right: 5px;
+                                                            padding-top: 4px;
+                                                            vertical-align: top;
+                                                        }
+
+                                                        #mainContainer td.content {
+                                                            padding-bottom: 20px;
+                                                        }
+
+                                                        #mainContainer td.imagePreviewCell {
+                                                            border: solid 2px gray;
+                                                            width: 110px;
+                                                            height: 115px;
+                                                            /*if IE*/
+                                                            height: expression("110px");
+                                                            text-align: center;
+                                                        }
+
+                                                        #mainContainer td.note {
+                                                            text-align: left;
+                                                            padding-top: 1px;
+                                                        }
+                                                    </style>
+                                                    <script type="text/javascript">
+                                                        // <![CDATA[
+                                                        function Uploader_OnUploadStart() {
+                                                            btnUpload.SetEnabled(false);
+                                                        }
+                                                        function Uploader_OnFileUploadComplete(args) {
+                                                            var imgSrc = aspxPreviewImgSrc;
+                                                            if (args.isValid) {
+                                                                //var date = new Date();
+                                                                imgSrc = args.callbackData;
+                                                                aspxPreviewImgSrc = imgSrc;                                                               
+                                                                getPreviewImageElement().src = imgSrc;
+                                                            }
+                                                        }
+                                                        function Uploader_OnFilesUploadComplete(args) {
+                                                            UpdateUploadButton();
+                                                        }
+                                                        function UpdateUploadButton() {
+                                                            btnUpload.SetEnabled(uploader.GetText(0) != "");
+                                                        }
+                                                        function getPreviewImageElement() {
+                                                            return document.getElementById("previewImage");
+                                                        }
+                                                        // ]]> 
+                                                    </script>
+                                                    <table id="mainContainer" style="width: 100%">
+                                                        <tr>
+                                                            <td class="content">
+                                                                <table>
+                                                                    <tr>
+                                                                        <td style="padding-right: 20px; vertical-align: top;">
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td class="caption">
+                                                                                        <dx:ASPxLabel ID="lblSelectImage" runat="server" Text="Select Image:">
+                                                                                        </dx:ASPxLabel>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <dx:ASPxUploadControl ID="uplImage" runat="server" ClientInstanceName="uploader" ShowProgressPanel="True"
+                                                                                            NullText="Click here to browse files..." Size="35" OnFileUploadComplete="uplImage_FileUploadComplete">
+                                                                                            <ClientSideEvents FileUploadComplete="function(s, e) { Uploader_OnFileUploadComplete(e); }"
+                                                                                                FilesUploadComplete="function(s, e) { Uploader_OnFilesUploadComplete(e); }"
+                                                                                                FileUploadStart="function(s, e) { Uploader_OnUploadStart(); }"
+                                                                                                TextChanged="function(s, e) { UpdateUploadButton(); }"></ClientSideEvents>
+                                                                                            <ValidationSettings MaxFileSize="4194304" AllowedFileExtensions=".jpg,.jpeg,.jpe,.gif">
+                                                                                            </ValidationSettings>
+                                                                                        </dx:ASPxUploadControl>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td></td>
+                                                                                    <td class="note">
+                                                                                        <dx:ASPxLabel ID="lblAllowebMimeType" runat="server" Text="Allowed image types: jpeg, gif"
+                                                                                            Font-Size="8pt">
+                                                                                        </dx:ASPxLabel>
+                                                                                        <br />
+                                                                                        <dx:ASPxLabel ID="lblMaxFileSize" runat="server" Text="Maximum file size: 4Mb" Font-Size="8pt">
+                                                                                        </dx:ASPxLabel>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td colspan="2" class="buttonCell">
+                                                                                        <dx:ASPxButton ID="btnUpload" runat="server" AutoPostBack="False" Text="Upload" ClientInstanceName="btnUpload" CausesValidation="false"
+                                                                                            Width="100px" ClientEnabled="False" Style="margin: 0 auto;">
+                                                                                            <ClientSideEvents Click="function(s, e) { uploader.Upload(); }" />
+                                                                                        </dx:ASPxButton>
+                                                                                        &nbsp;
+                                                                                        <dx:ASPxButton ID="btnConfirm" runat="server" AutoPostBack="False" Text="OK" CausesValidation="false"
+                                                                                            Width="100px" Style="margin: 0 auto;">
+                                                                                            <ClientSideEvents Click="function(s, e) { aspxImage.SetImageUrl(aspxPreviewImgSrc);txtImageUrl.SetText(aspxPreviewImgSrc); selectImgs.Hide(); }" />
+                                                                                        </dx:ASPxButton>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                        <td class="imagePreviewCell">
+                                                                            <img id="previewImage" alt="" src="/images/user-empty-icon.png" width="110" height="105" /></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <script type="text/javascript">
+                                                        // <![CDATA[
+                                                        var aspxPreviewImgSrc = getPreviewImageElement().src;
+                                                        // ]]> 
+                                                    </script>
+
+                                                </dx:PopupControlContentControl>
+                                            </ContentCollection>
+                                        </dx:ASPxPopupControl>
+
                                     </dx:PanelContent>
                                 </PanelCollection>
                             </dx:ASPxRoundPanel>
