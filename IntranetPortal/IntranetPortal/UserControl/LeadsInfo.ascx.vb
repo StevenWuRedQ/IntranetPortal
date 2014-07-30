@@ -118,7 +118,7 @@ Public Class LeadsInfo1
                     End If
                 End If
 
-                If lead IsNot Nothing AndAlso lead.LeadsActivityLogs IsNot Nothing AndAlso lead.LeadsActivityLogs.Count > 0 Then
+                If lead IsNot Nothing Then
                     BindActivityLog(bble)
                 End If
             End If
