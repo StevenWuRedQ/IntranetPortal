@@ -44,6 +44,22 @@ Partial Public Class Employee
         End If
     End Sub
 
+
+    Public ReadOnly Property Manager As String
+        Get
+            If ReportTo.HasValue AndAlso ReportTo.Value > 0 Then
+                Dim mgr = GetInstance(ReportTo.Value)
+                If mgr Is Nothing Then
+                    Return ""
+                Else
+                    Return mgr.Name
+                End If
+            End If
+
+            Return ""
+        End Get
+    End Property
+
     Public Shared Function HasControlLeads(name As String, bble As String) As Boolean
         Using context As New Entities
             If Roles.IsUserInRole(name, "Admin") Then
