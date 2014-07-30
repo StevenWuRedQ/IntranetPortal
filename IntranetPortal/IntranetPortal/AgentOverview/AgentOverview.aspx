@@ -167,10 +167,7 @@
                             <%----end item--%>
                         </div>
                         <%-----end info detial-----%>
-                    </div>
-
-
-
+                    </div>                    
                 </div>
                 <%--chart UI--%>
                 <div style="height: 490px;">
@@ -299,7 +296,6 @@
                                             <td class="report_content" ><i class="fa fa-list-alt report_gird_icon" onclick="custome_report_itemlick(1)"></i></td>
                                         </tr>--%>
                                     </tbody>
-
                                 </table>
                                 <script>
                                     $(document).ready(function () {
