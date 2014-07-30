@@ -2,11 +2,11 @@
     Inherits System.Web.UI.Page
     Public report_data As String
 
+    Public Property CurrentEmployee As Employee
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        CurrentEmployee = Employee.GetInstance(User.Identity.Name)
         report_data = report_data_f()
-
-
     End Sub
 
 

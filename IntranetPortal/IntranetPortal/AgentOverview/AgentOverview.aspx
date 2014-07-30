@@ -131,36 +131,36 @@
                     <%--angent info--%>
 
                     <div style="width: 370px; height: 490px; background: url('../images/profile_bg.png')">
-                        <%--width:201 height:201--%>
-                        <img src="../images/agent_pic_defined.png" class="img-circle" style="margin-top: 40px; margin-left: 84px;" />
-                        <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text">Benn Martin</div>
-                        <div style="margin-top: 8px; font-size: 16px; color: #234b60; font-weight: 900" class="agnet_info_text">Sales Agent</div>
+                        <%--width:201 height:201--%>                     
+                        <img src="<%=IIf(String.IsNullOrEmpty(CurrentEmployee.Picture), "/images/user-empty-icon.png", CurrentEmployee.Picture)%>" class="img-circle" style="margin-top: 40px; margin-left: 84px; height:200px; width:200px" />                       
+                        <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"><%= CurrentEmployee.Name %></div>
+                        <div style="margin-top: 8px; font-size: 16px; color: #234b60; font-weight: 900" class="agnet_info_text"><%= CurrentEmployee.Position %></div>
                         <%--info detial--%>
                         <div style="font-size: 14px; margin-top: 25px">
                             <%--items--%>
                             <div class="agent_info_detial_left">Manger</div>
                             <div class="agent_info_detial_space">&nbsp;</div>
-                            <div class="agent_info_detial_right">Ron borovinsky</div>
+                            <div class="agent_info_detial_right"><%= CurrentEmployee.Manager%></div>
                             <%----end item--%>
                             <%--items--%>
                             <div class="agent_info_detial_left">Office</div>
                             <div class="agent_info_detial_space">&nbsp;</div>
-                            <div class="agent_info_detial_right">Sales(Brooklyn)</div>
+                            <div class="agent_info_detial_right"><%= CurrentEmployee.Position %>(<%= CurrentEmployee.Department%>) </div>
                             <%----end item--%>
                             <%--items--%>
                             <div class="agent_info_detial_left">Employee Since</div>
                             <div class="agent_info_detial_space">&nbsp;</div>
-                            <div class="agent_info_detial_right">Jan 7,2014</div>
+                            <div class="agent_info_detial_right"><%=String.Format("{0:d}", CurrentEmployee.EmployeeSince) %></div>
                             <%----end item--%>
                             <%--items--%>
                             <div class="agent_info_detial_left">Cell</div>
                             <div class="agent_info_detial_space">&nbsp;</div>
-                            <div class="agent_info_detial_right">(718)123-456</div>
+                            <div class="agent_info_detial_right"><%= String.Format("{0:(###) ###-####}", CurrentEmployee.Cellphone) %></div>
                             <%----end item--%>
                             <%--items--%>
                             <div class="agent_info_detial_left">Email</div>
                             <div class="agent_info_detial_space">&nbsp;</div>
-                            <div class="agent_info_detial_right" style="color: #3993c1">email@example.com</div>
+                            <div class="agent_info_detial_right" style="color: #3993c1"><%= CurrentEmployee.Email%></div>
                             <%----end item--%>
                             <%--items--%>
 
