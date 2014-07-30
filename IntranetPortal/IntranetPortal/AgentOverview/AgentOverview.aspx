@@ -50,7 +50,7 @@
                             <i class="fa fa-group with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;&nbsp;<span style="color: #234b60; font-size: 30px;">Employees</span>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-sort-amount-desc"></i>
                         </div>
-                        <input type="text" data-var="@btn-info-color" class="form-control" style="width: 250px; margin-top: 25px; height: 30px;" placeholder="Type employee’s name" />
+                        <input type="text" data-var="@btn-info-color" class="form-control" style="width: 250px; margin-top: 25px; height: 30px; color:#b1b2b7" placeholder="Type employee’s name" />
                         <div style="margin-top: 27px; height: 290px; /*background: blue*/">
                             <div>
                                 <span class="font_black">A</span>&nbsp;&nbsp;&nbsp;<span class="employee_lest_head_number_label">2</span>
@@ -140,27 +140,27 @@
                             <%--items--%>
                             <div class="agent_info_detial_left">Manger</div>
                             <div class="agent_info_detial_space">&nbsp;</div>
-                            <div class="agent_info_detial_right"><%= CurrentEmployee.Manager%></div>
+                            <div class="agent_info_detial_right"><%= CurrentEmployee.Manager%>&nbsp;</div>
                             <%----end item--%>
                             <%--items--%>
                             <div class="agent_info_detial_left">Office</div>
                             <div class="agent_info_detial_space">&nbsp;</div>
-                            <div class="agent_info_detial_right"><%= CurrentEmployee.Position %>(<%= CurrentEmployee.Department%>) </div>
+                            <div class="agent_info_detial_right"><%= CurrentEmployee.Position %>(<%= CurrentEmployee.Department%>)&nbsp; </div>
                             <%----end item--%>
                             <%--items--%>
                             <div class="agent_info_detial_left">Employee Since</div>
                             <div class="agent_info_detial_space">&nbsp;</div>
-                            <div class="agent_info_detial_right"><%=String.Format("{0:d}", CurrentEmployee.EmployeeSince) %></div>
+                            <div class="agent_info_detial_right"><%=String.Format("{0:d}", CurrentEmployee.EmployeeSince) %>&nbsp;</div>
                             <%----end item--%>
                             <%--items--%>
                             <div class="agent_info_detial_left">Cell</div>
                             <div class="agent_info_detial_space">&nbsp;</div>
-                            <div class="agent_info_detial_right"><%= String.Format("{0:(###) ###-####}", CurrentEmployee.Cellphone) %></div>
+                            <div class="agent_info_detial_right"><%= String.Format("{0:(###) ###-####}", CurrentEmployee.Cellphone) %>&nbsp;</div>
                             <%----end item--%>
                             <%--items--%>
                             <div class="agent_info_detial_left">Email</div>
                             <div class="agent_info_detial_space">&nbsp;</div>
-                            <div class="agent_info_detial_right" style="color: #3993c1"><%= CurrentEmployee.Email%></div>
+                            <div class="agent_info_detial_right" style="color: #3993c1"><%= CurrentEmployee.Email%>&nbsp;</div>
                             <%----end item--%>
                             <%--items--%>
 
@@ -178,7 +178,7 @@
                     <div style="padding-left: 370px; padding-top: 50px; height: 325px;">
                         <div style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px; /*background: blue; */ color: white; height: 100%;">
                             <canvas id="canvas" height="240" width="530"></canvas>
-                            <div id="lineLegend" style="color:black"></div>
+                            <div id="lineLegend"></div>
                             <script>
 
                                 var lineChartData = {
@@ -243,8 +243,10 @@
                                 var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData, {
                                     bezierCurve: false,
                                     datasetFill: false,
-                                    pointDotRadius: 6,
-                                    showTooltips: true,
+                                    pointDotRadius: 6,                                 
+                                    //legendTemplate: "<ul><li><span style=\"background-color:red\">111222</span></li><li><span style=\"background-color:red\">111222</span></li><li><span style=\"background-color:red\">111222</span></li></ul>"
+                                    showTooltip: true,
+                                    tooltipTemplate: "<span>tooltips</span>"
                                 });
                                 legend(document.getElementById("lineLegend"), lineChartData);
                             </script>
@@ -269,8 +271,11 @@
                         </div>
                         <%--grid view--%>
                         <div style="height: 260px; width: 100%; margin-top: 35px; padding-right: 40px; overflow-x: auto;" id="custom_report_grid">
-                            <div style="height: 260px; /*background: blue; */" id="droppable" class="custom_report_table">
+                            <table class="table table-condensed" style="width: 900px;margin-bottom: 0px;" id="custom_report_table_head">
 
+                             </table>
+                             <div style="height: 230px; /*background: blue; */" id="droppable" class="custom_report_table">
+                                
                                 <table class="table table-condensed" style="width: 900px" id="custom_report_table">
                                   <%--  <thead>
                                         <tr>
@@ -283,7 +288,7 @@
                                             <th class="report_head">&nbsp;</th>
                                         </tr>
                                     </thead>--%>
-                                    <tbody>
+                                    <tbody id="custom_report_tbody">
                                         <%-- <tr>
                                             <td class="report_content" style="font-weight: 900; width: 230px;">123 Main St, Brooklyn, NY 12345</td>
                                             <td class="report_content" style="width: 90px">4/23/2014</td>
@@ -340,22 +345,30 @@
                                     }
                                     function change_table_thead()
                                     {
-                                        
+                                        $('#custom_report_table_head thead').remove();
                                         $('#custom_report_table thead').remove();
                                         $('#custom_report_table tbody').remove();
 
                                         var report_fileds = window.report_fileds ? window.report_fileds : $.parseJSON('<%= report_fields() %>');
                                          var headstr = "";
-
+                                         var feilds_style = {
+                                             property: "font-weight: 900; width: 230px",
+                                             date: "width: 90px",
+                                             call_atpt: "width: 90px",
+                                             doorknk_atpt: "width: 100px",
+                                             Comment: "width: 260px",
+                                             data: "width: 125px"
+                                         }
                                          headstr += '<thead>  <tr>';
                                          for (var i in report_fileds) {
                                              //&nbsp;
-                                             headstr += '<th class="report_head">' + report_fileds[i].toString().replace("_", " "); + '</th>';
+                                             var title = report_fileds[i].toString().replace("_", " ");
+                                             headstr += '<th class="report_head" >' + report_fileds[i].toString().replace("_", " "); + '</th>';
                                          }
                                          headstr += '</tr></thead>';
 
-                                         $('#custom_report_table').append(headstr);
-                                         $('#custom_report_table').append(' <tbody>\n</tbody>');
+                                         $('#custom_report_table_head').append(headstr);
+                                         $('#custom_report_table').append(' <tbody id="custom_report_tbody">\n</tbody>');
                                     }
                                    
                                     function show_report_data() {
