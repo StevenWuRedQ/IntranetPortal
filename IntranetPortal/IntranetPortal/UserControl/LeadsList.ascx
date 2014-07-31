@@ -42,7 +42,6 @@
             leadsInfoBBLE = values;
             ContentCallbackPanel.PerformCallback(values);
         }
-
     }
 
     function OnEndCallback(s, e) {

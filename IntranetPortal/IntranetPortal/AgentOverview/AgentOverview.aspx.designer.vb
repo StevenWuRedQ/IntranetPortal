@@ -23,13 +23,58 @@ Partial Public Class AgentOverview
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''link control.
+    '''ASPxSplitter1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents link As Global.DevExpress.Web.ASPxEditors.ASPxButton
+    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+
+    '''<summary>
+    '''gridEmps control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridEmps As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''contentCallback control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents contentCallback As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+
+    '''<summary>
+    '''hfEmpName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfEmpName As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''ASPxPopupControl2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''Popupcontrolcontentcontrol2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Popupcontrolcontentcontrol2 As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
 
     '''<summary>
     '''gridReport control.

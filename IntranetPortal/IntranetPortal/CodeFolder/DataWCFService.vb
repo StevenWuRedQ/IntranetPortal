@@ -129,11 +129,12 @@ Public Class DataWCFService
 
             If owners Is Nothing Or owners.Count = 0 Then
                 GetLatestSalesInfo(bble)
-                Return False
+                'Return False
             End If
             Dim loaded = False
-            For Each owner In owners
 
+            For Each owner In owners
+                loaded = True
                 Dim result = GetLocateReport(orderid, bble, owner)
                 If result IsNot Nothing Then
                     loaded = True

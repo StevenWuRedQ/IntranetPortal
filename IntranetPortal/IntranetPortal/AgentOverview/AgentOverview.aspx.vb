@@ -7,20 +7,28 @@ Public Class AgentOverview
     Public Property CurrentEmployee As Employee
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        CurrentEmployee = Employee.GetInstance(User.Identity.Name)
-        report_data = report_data_f()
+        If Not IsPostBack Then
+            gridEmps.DataBind()
+            CurrentEmployee = Employee.GetInstance(User.Identity.Name)
+            hfEmpName.Value = CurrentEmployee.Name
+            gridReport.DataBind()
+            report_data = report_data_f()
+        End If
+    End Sub
 
-        'BindGridReport()
+    Sub BindEmp()
+        Using Context As New Entities
+            gridEmps.DataSource = Context.Employees.ToList
+        End Using
     End Sub
 
     Sub BindGridReport()
-        Dim name = User.Identity.Name
+        Dim name = hfEmpName.Value
         Using Context As New Entities
             gridReport.DataSource = (From li In Context.LeadsInfoes Join
                                    ld In Context.Leads On ld.BBLE Equals li.BBLE
                                    Where ld.EmployeeName = name
                                    Select li).ToList
-
 
             'gridReport.DataBind()
         End Using
@@ -80,16 +88,14 @@ Public Class AgentOverview
     End Sub
 
     Protected Sub chkFields_SelectedIndexChanged(sender As Object, e As EventArgs)
-        gridReport.Columns.Clear()
-        For Each item As String In chkFields.SelectedValues
-            Dim gridCol = New GridViewDataColumn
-            gridCol.FieldName = item
+        'gridReport.Columns.Clear()
+        'For Each item As String In chkFields.SelectedValues
+        '    Dim gridCol = New GridViewDataColumn
+        '    gridCol.FieldName = item
 
-            gridReport.Columns.Add(gridCol)
-        Next
-
-        BindGridReport()
-        gridReport.DataBind()
+        '    gridReport.Columns.Add(gridCol)
+        'Next
+        'gridReport.DataBind()
     End Sub
 
     Protected Sub gridReport_DataBinding(sender As Object, e As EventArgs) Handles gridReport.DataBinding
@@ -98,20 +104,33 @@ Public Class AgentOverview
         End If
     End Sub
 
+    Protected Sub gridEmps_DataBinding(sender As Object, e As EventArgs) Handles gridEmps.DataBinding
+        If gridEmps.DataSource Is Nothing Then
+            BindEmp()
+        End If
+    End Sub
+
     Protected Sub gridReport_CustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs)
         gridReport.Columns.Clear()
         For Each item As String In e.Parameters.Split(",")
             Dim gridCol = New GridViewDataColumn
             gridCol.FieldName = item
-
             gridReport.Columns.Add(gridCol)
         Next
 
-        BindGridReport()
+        'BindGridReport()
         gridReport.DataBind()
     End Sub
 
     Protected Sub Unnamed_ServerClick(sender As Object, e As EventArgs)
         gridExport.WriteXlsToResponse()
+    End Sub
+
+    Protected Sub contentCallback_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        If Not String.IsNullOrEmpty(e.Parameter) Then
+            CurrentEmployee = Employee.GetInstance(CInt(e.Parameter))
+            hfEmpName.Value = CurrentEmployee.Name
+            gridReport.DataBind()
+        End If
     End Sub
 End Class
