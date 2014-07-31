@@ -48,6 +48,8 @@
                                 <dx:TreeViewNode Text="Dead Lead" Image-Url="/images/dead.png" NavigateUrl="MgrViewLeads.aspx?c=Dead Lead" Name="deadleadNode" />
                                 <dx:TreeViewNode Text="Closed" Image-Url="images/Closed.png" NavigateUrl="MgrViewLeads.aspx?c=Closed" Name="mgrClosedNode" />
                                   <dx:TreeViewNode Text="Agent Overview" Image-Url="/images/assigned.png" NavigateUrl="AgentOverview/AgentOverview.aspx" Name="agentOverviewNode" />
+                                 <%--add priority by steven--%>
+                                 <dx:TreeViewNode Text="Priority" Image-Url="/images/priority_icon.png" NavigateUrl="Proiority/Priority.aspx" Name="priorityNode" />
                                 <dx:TreeViewNode Text="Search" Image-Url="/images/Search.png" NavigateUrl="MgrViewLeads.aspx?c=Search"></dx:TreeViewNode>
                             </Nodes>
                         </dx:TreeViewNode>
