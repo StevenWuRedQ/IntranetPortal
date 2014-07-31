@@ -271,7 +271,7 @@
                             </div>
                         </div>
                         <%--grid view--%>
-                        <dx:ASPxGridView ID="gridReport" runat="server" KeyFieldName="BBLE" AutoGenerateColumns="false" ClientInstanceName="gridReportClient" OnCustomCallback="gridReport_CustomCallback">
+                        <dx:ASPxGridView ID="gridReport" runat="server" KeyFieldName="BBLE" Width="100%" AutoGenerateColumns="false" ClientInstanceName="gridReportClient" OnCustomCallback="gridReport_CustomCallback" Settings-ShowGroupPanel="false">
                         </dx:ASPxGridView>
                         <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridReport"></dx:ASPxGridViewExporter>
 
@@ -418,8 +418,7 @@
             </div>
 
             <script type="text/javascript">
-                function Fields_ValueChanged(s, e) {
-                    alert("dd");
+                function Fields_ValueChanged(s, e) {                   
                     gridReportClient.PerformCallback(s.GetSelectedValues());
                     e.processOnServer = false;
                 }
@@ -431,7 +430,7 @@
                 <div style="margin-left: 30px; margin-top: 30px; margin-right: 20px; font-size: 24px; float: none">
                     <span style="color: #234b60">Custom Fields</span><i class="fa fa-question-circle tooltip-examples" title="Drag and drop items from the pane on the right side to view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
                     <div style="margin-top: 25px">
-                        <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" OnSelectedIndexChanged="chkFields_SelectedIndexChanged">
+                        <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" Width="100%" OnSelectedIndexChanged="chkFields_SelectedIndexChanged">
                             <Items>
                                 <dx:ListEditItem Text="Property Address" Value="PropertyAddress" />
                                 <dx:ListEditItem Text="Sale Date" Value="SaleDate" />
