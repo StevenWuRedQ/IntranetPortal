@@ -29,7 +29,8 @@ Imports System.Web.SessionState
 
 
 		Sub Application_BeginRequest(ByVal sender As Object, ByVal e As EventArgs)
-			' Fires at the beginning of each request
+        ' Fires at the beginning of each request
+        'Response.Redirect("http://portal1.myidealprop.com")
 		End Sub
 
 		Sub Application_AuthenticateRequest(ByVal sender As Object, ByVal e As EventArgs)
