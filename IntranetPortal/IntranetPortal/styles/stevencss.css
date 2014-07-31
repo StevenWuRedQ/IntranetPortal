@@ -257,12 +257,25 @@ i[title]:hover:after {
     width: 130px;
     height: 100%;
     text-align: center;
-    cursor:pointer;
+    cursor: pointer;
 }
 
-    .short_sale_head_tab:hover {
-        background: #e63000;
+.tab_button_a {
+    display: inline-block !important;
+    padding: 0px !important;
+    background: transparent !important;
+    color: white !important;
+    border: 0px !important;
+}
+
+    .tab_button_a:active {
+        color: white !important;
+        background: #e63000 !important;
     }
+
+.short_sale_head_tab:hover {
+    background: #e63000;
+}
 
 .short_sale_head_tab_nohover {
     background: #ff400d;
@@ -305,6 +318,7 @@ i[title]:hover:after {
     line-height: 32px !important;
     text-align: center;
     box-sizing: content-box;
+    cursor: pointer;
 }
 
     .sale_head_button:hover {
@@ -333,7 +347,7 @@ div.form_head {
     .text_input:focus {
         border: 0px;
         outline: none;
-        color:#0e9ee9;
+        color: #0e9ee9;
     }
 
 .form_div_node {
@@ -341,6 +355,10 @@ div.form_head {
     height: 54px;
     border-bottom: 1px solid #dde0e7;
     float: left;
+}
+
+.form_div_no_float {
+    float: none;
 }
 
 .form_div_node_no_under_line {
@@ -359,7 +377,7 @@ div.form_head {
 
 .form_span_group_text {
     font-size: 14px;
-    float:left;
+    float: left;
 }
 
 .form_div_node_margin {
@@ -400,7 +418,6 @@ input[type='checkbox'] {
         padding-right: 8px;
         width: 20px !important;
         float: left;
-
     }
 
     input[type="checkbox"]:checked + label:before {
@@ -422,9 +439,9 @@ input[type='checkbox'] {
     input[type="checkbox"]:checked + label:before {
         content: "\f046";
     }
-label
-{
-    cursor:pointer;
+
+label {
+    cursor: pointer;
 }
 /*.circle-radio-boxes {
   margin-left: -10px;
@@ -767,12 +784,55 @@ i.with_circle {
     padding: 8px 10px;
     border-radius: 16px;
     border: 1px solid;
-    float:right;
-    margin-right:10px;
-    cursor:pointer;
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
-.time_buttons:hover
-{
-    color:#0e9ee9;
+    .time_buttons:hover {
+        color: #0e9ee9;
+    }
+
+.homeowner_content {
+    margin: 22px 20px;
+}
+
+.homeowner_name {
+    font-weight: 300;
+}
+
+.homeowner_section_margin {
+    margin-top: 43px;
+}
+
+.homeowner_plus_color {
+    color: #3993c1;
+}
+
+.text_line_through {
+    text-decoration: line-through;
+}
+
+.homeowner_info_bottom {
+    padding-bottom: 10px;
+}
+
+.homeowner_info_sm_font {
+    font-size: 14px;
+}
+
+.homeowner_info_icon {
+    float: left;
+    margin-top: 5px;
+}
+
+.homeowner_info_text {
+    height: auto;
+    width: 86%;
+    margin-left: 12px;
+}
+
+.homeowner_info_label {
+    margin-left: 17px;
+    margin-top: 17px;
 }
