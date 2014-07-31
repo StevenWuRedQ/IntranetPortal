@@ -53,31 +53,31 @@ Public Class LeaderReport
     Friend WithEvents lblTax As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents lblBlock As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents lblYearBuilt As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel32 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel31 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents lbl2ndMortgage As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents lblNumOfFloor As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents lblLot As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel33 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel39 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel38 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel37 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel36 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel35 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel34 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents lblBuildingDem As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents lblLotDem As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents lblEstValue As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents lblViolationAmount As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents lblWaterAmount As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents lblTaxAmount As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents chkLisPenNo As DevExpress.XtraReports.UI.XRCheckBox
     Friend WithEvents chkLisPenYes As DevExpress.XtraReports.UI.XRCheckBox
-    Friend WithEvents XrCheckBox3 As DevExpress.XtraReports.UI.XRCheckBox
-    Friend WithEvents XrCheckBox4 As DevExpress.XtraReports.UI.XRCheckBox
-    Friend WithEvents XrCheckBox9 As DevExpress.XtraReports.UI.XRCheckBox
-    Friend WithEvents XrCheckBox10 As DevExpress.XtraReports.UI.XRCheckBox
-    Friend WithEvents XrCheckBox7 As DevExpress.XtraReports.UI.XRCheckBox
-    Friend WithEvents XrCheckBox8 As DevExpress.XtraReports.UI.XRCheckBox
-    Friend WithEvents XrCheckBox5 As DevExpress.XtraReports.UI.XRCheckBox
-    Friend WithEvents XrCheckBox6 As DevExpress.XtraReports.UI.XRCheckBox
+    Friend WithEvents chkOtherLiensYes As DevExpress.XtraReports.UI.XRCheckBox
+    Friend WithEvents chkOtherLiensNo As DevExpress.XtraReports.UI.XRCheckBox
+    Friend WithEvents chkViolationDOB As DevExpress.XtraReports.UI.XRCheckBox
+    Friend WithEvents chkViolationECB As DevExpress.XtraReports.UI.XRCheckBox
+    Friend WithEvents chkWaterNo As DevExpress.XtraReports.UI.XRCheckBox
+    Friend WithEvents chkWaterYes As DevExpress.XtraReports.UI.XRCheckBox
+    Friend WithEvents chkTaxNo As DevExpress.XtraReports.UI.XRCheckBox
+    Friend WithEvents chkTaxYes As DevExpress.XtraReports.UI.XRCheckBox
     Friend WithEvents XrLine1 As DevExpress.XtraReports.UI.XRLine
     Friend WithEvents XrLabel40 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel41 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel42 As DevExpress.XtraReports.UI.XRLabel
-    Friend WithEvents XrLabel43 As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents lblOwner As DevExpress.XtraReports.UI.XRLabel
+    Friend WithEvents lblCoOwner As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel44 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel47 As DevExpress.XtraReports.UI.XRLabel
     Friend WithEvents XrLabel46 As DevExpress.XtraReports.UI.XRLabel
@@ -148,30 +148,30 @@ Public Class LeaderReport
         Me.XrLabel46 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel45 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel44 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel43 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel42 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.lblCoOwner = New DevExpress.XtraReports.UI.XRLabel()
+        Me.lblOwner = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel41 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel40 = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLine1 = New DevExpress.XtraReports.UI.XRLine()
-        Me.XrCheckBox9 = New DevExpress.XtraReports.UI.XRCheckBox()
-        Me.XrCheckBox10 = New DevExpress.XtraReports.UI.XRCheckBox()
-        Me.XrCheckBox7 = New DevExpress.XtraReports.UI.XRCheckBox()
-        Me.XrCheckBox8 = New DevExpress.XtraReports.UI.XRCheckBox()
-        Me.XrCheckBox5 = New DevExpress.XtraReports.UI.XRCheckBox()
-        Me.XrCheckBox6 = New DevExpress.XtraReports.UI.XRCheckBox()
-        Me.XrCheckBox3 = New DevExpress.XtraReports.UI.XRCheckBox()
-        Me.XrCheckBox4 = New DevExpress.XtraReports.UI.XRCheckBox()
+        Me.chkViolationDOB = New DevExpress.XtraReports.UI.XRCheckBox()
+        Me.chkViolationECB = New DevExpress.XtraReports.UI.XRCheckBox()
+        Me.chkWaterNo = New DevExpress.XtraReports.UI.XRCheckBox()
+        Me.chkWaterYes = New DevExpress.XtraReports.UI.XRCheckBox()
+        Me.chkTaxNo = New DevExpress.XtraReports.UI.XRCheckBox()
+        Me.chkTaxYes = New DevExpress.XtraReports.UI.XRCheckBox()
+        Me.chkOtherLiensYes = New DevExpress.XtraReports.UI.XRCheckBox()
+        Me.chkOtherLiensNo = New DevExpress.XtraReports.UI.XRCheckBox()
         Me.chkLisPenNo = New DevExpress.XtraReports.UI.XRCheckBox()
         Me.chkLisPenYes = New DevExpress.XtraReports.UI.XRCheckBox()
-        Me.XrLabel39 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel38 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel37 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel36 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel35 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel34 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.lblBuildingDem = New DevExpress.XtraReports.UI.XRLabel()
+        Me.lblLotDem = New DevExpress.XtraReports.UI.XRLabel()
+        Me.lblEstValue = New DevExpress.XtraReports.UI.XRLabel()
+        Me.lblViolationAmount = New DevExpress.XtraReports.UI.XRLabel()
+        Me.lblWaterAmount = New DevExpress.XtraReports.UI.XRLabel()
+        Me.lblTaxAmount = New DevExpress.XtraReports.UI.XRLabel()
         Me.XrLabel33 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel32 = New DevExpress.XtraReports.UI.XRLabel()
-        Me.XrLabel31 = New DevExpress.XtraReports.UI.XRLabel()
+        Me.lbl2ndMortgage = New DevExpress.XtraReports.UI.XRLabel()
+        Me.lblNumOfFloor = New DevExpress.XtraReports.UI.XRLabel()
         Me.lblLot = New DevExpress.XtraReports.UI.XRLabel()
         Me.lblFirstMortgage = New DevExpress.XtraReports.UI.XRLabel()
         Me.lblTax = New DevExpress.XtraReports.UI.XRLabel()
@@ -208,15 +208,15 @@ Public Class LeaderReport
         Me.BBLE = New DevExpress.XtraReports.Parameters.Parameter()
         Me.DetailReport = New DevExpress.XtraReports.UI.DetailReportBand()
         Me.Detail1 = New DevExpress.XtraReports.UI.DetailBand()
-        Me.XrRichText1 = New DevExpress.XtraReports.UI.XRRichText()
         Me.XrRichText2 = New DevExpress.XtraReports.UI.XRRichText()
-        CType(Me.XrRichText1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.XrRichText1 = New DevExpress.XtraReports.UI.XRRichText()
         CType(Me.XrRichText2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.XrRichText1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
         '
         'Detail
         '
-        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel68, Me.XrLabel69, Me.XrLabel64, Me.XrLabel65, Me.XrLabel66, Me.XrLabel67, Me.XrLabel62, Me.XrLabel63, Me.XrLabel56, Me.XrLabel57, Me.XrLabel58, Me.XrLabel59, Me.XrLabel60, Me.XrLabel61, Me.XrLabel54, Me.XrLabel55, Me.XrLabel51, Me.XrLabel52, Me.XrLabel53, Me.XrLabel50, Me.XrLabel49, Me.XrLabel48, Me.XrLine2, Me.XrLabel47, Me.XrLabel46, Me.XrLabel45, Me.XrLabel44, Me.XrLabel43, Me.XrLabel42, Me.XrLabel41, Me.XrLabel40, Me.XrLine1, Me.XrCheckBox9, Me.XrCheckBox10, Me.XrCheckBox7, Me.XrCheckBox8, Me.XrCheckBox5, Me.XrCheckBox6, Me.XrCheckBox3, Me.XrCheckBox4, Me.chkLisPenNo, Me.chkLisPenYes, Me.XrLabel39, Me.XrLabel38, Me.XrLabel37, Me.XrLabel36, Me.XrLabel35, Me.XrLabel34, Me.XrLabel33, Me.XrLabel32, Me.XrLabel31, Me.lblLot, Me.lblFirstMortgage, Me.lblTax, Me.lblBlock, Me.lblYearBuilt, Me.lblSaleDate, Me.XrLabel24, Me.XrLabel23, Me.XrLabel22, Me.XrLabel21, Me.XrLabel14, Me.XrLabel20, Me.XrLabel19, Me.XrLabel18, Me.XrLabel17, Me.XrLabel16, Me.XrLabel15, Me.XrLabel13, Me.XrLabel12, Me.XrLabel11, Me.XrLabel10, Me.XrLabel9, Me.XrLabel8, Me.XrLabel7, Me.XrLabel6, Me.lblPropertyAddress, Me.XrLabel4})
+        Me.Detail.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrLabel68, Me.XrLabel69, Me.XrLabel64, Me.XrLabel65, Me.XrLabel66, Me.XrLabel67, Me.XrLabel62, Me.XrLabel63, Me.XrLabel56, Me.XrLabel57, Me.XrLabel58, Me.XrLabel59, Me.XrLabel60, Me.XrLabel61, Me.XrLabel54, Me.XrLabel55, Me.XrLabel51, Me.XrLabel52, Me.XrLabel53, Me.XrLabel50, Me.XrLabel49, Me.XrLabel48, Me.XrLine2, Me.XrLabel47, Me.XrLabel46, Me.XrLabel45, Me.XrLabel44, Me.lblCoOwner, Me.lblOwner, Me.XrLabel41, Me.XrLabel40, Me.XrLine1, Me.chkViolationDOB, Me.chkViolationECB, Me.chkWaterNo, Me.chkWaterYes, Me.chkTaxNo, Me.chkTaxYes, Me.chkOtherLiensYes, Me.chkOtherLiensNo, Me.chkLisPenNo, Me.chkLisPenYes, Me.lblBuildingDem, Me.lblLotDem, Me.lblEstValue, Me.lblViolationAmount, Me.lblWaterAmount, Me.lblTaxAmount, Me.XrLabel33, Me.lbl2ndMortgage, Me.lblNumOfFloor, Me.lblLot, Me.lblFirstMortgage, Me.lblTax, Me.lblBlock, Me.lblYearBuilt, Me.lblSaleDate, Me.XrLabel24, Me.XrLabel23, Me.XrLabel22, Me.XrLabel21, Me.XrLabel14, Me.XrLabel20, Me.XrLabel19, Me.XrLabel18, Me.XrLabel17, Me.XrLabel16, Me.XrLabel15, Me.XrLabel13, Me.XrLabel12, Me.XrLabel11, Me.XrLabel10, Me.XrLabel9, Me.XrLabel8, Me.XrLabel7, Me.XrLabel6, Me.lblPropertyAddress, Me.XrLabel4})
         Me.Detail.HeightF = 884.375!
         Me.Detail.Name = "Detail"
         Me.Detail.Padding = New DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100.0!)
@@ -521,29 +521,27 @@ Public Class LeaderReport
         Me.XrLabel44.Text = "Phone Number:"
         Me.XrLabel44.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
-        'XrLabel43
+        'lblCoOwner
         '
-        Me.XrLabel43.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel43.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "ALL_NYC_Tax_Liens_CO_Info.CoOwner")})
-        Me.XrLabel43.LocationFloat = New DevExpress.Utils.PointFloat(451.0833!, 350.0!)
-        Me.XrLabel43.Name = "XrLabel43"
-        Me.XrLabel43.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel43.SizeF = New System.Drawing.SizeF(248.9166!, 23.0!)
-        Me.XrLabel43.StylePriority.UseBorders = False
-        Me.XrLabel43.StylePriority.UseTextAlignment = False
-        Me.XrLabel43.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.lblCoOwner.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
+        Me.lblCoOwner.LocationFloat = New DevExpress.Utils.PointFloat(451.0833!, 350.0!)
+        Me.lblCoOwner.Name = "lblCoOwner"
+        Me.lblCoOwner.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.lblCoOwner.SizeF = New System.Drawing.SizeF(248.9166!, 23.0!)
+        Me.lblCoOwner.StylePriority.UseBorders = False
+        Me.lblCoOwner.StylePriority.UseTextAlignment = False
+        Me.lblCoOwner.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrLabel42
+        'lblOwner
         '
-        Me.XrLabel42.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel42.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "ALL_NYC_Tax_Liens_CO_Info.Owner")})
-        Me.XrLabel42.LocationFloat = New DevExpress.Utils.PointFloat(112.5!, 350.0!)
-        Me.XrLabel42.Name = "XrLabel42"
-        Me.XrLabel42.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel42.SizeF = New System.Drawing.SizeF(222.9167!, 23.0!)
-        Me.XrLabel42.StylePriority.UseBorders = False
-        Me.XrLabel42.StylePriority.UseTextAlignment = False
-        Me.XrLabel42.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.lblOwner.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
+        Me.lblOwner.LocationFloat = New DevExpress.Utils.PointFloat(112.5!, 350.0!)
+        Me.lblOwner.Name = "lblOwner"
+        Me.lblOwner.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.lblOwner.SizeF = New System.Drawing.SizeF(222.9167!, 23.0!)
+        Me.lblOwner.StylePriority.UseBorders = False
+        Me.lblOwner.StylePriority.UseTextAlignment = False
+        Me.lblOwner.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
         'XrLabel41
         '
@@ -578,85 +576,85 @@ Public Class LeaderReport
         Me.XrLine1.SizeF = New System.Drawing.SizeF(687.5!, 23.0!)
         Me.XrLine1.StylePriority.UseBorderWidth = False
         '
-        'XrCheckBox9
+        'chkViolationDOB
         '
-        Me.XrCheckBox9.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.DOBViolation")})
-        Me.XrCheckBox9.LocationFloat = New DevExpress.Utils.PointFloat(162.7499!, 275.0!)
-        Me.XrCheckBox9.Name = "XrCheckBox9"
-        Me.XrCheckBox9.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
-        Me.XrCheckBox9.StylePriority.UseTextAlignment = False
-        Me.XrCheckBox9.Text = "DOB"
-        Me.XrCheckBox9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.chkViolationDOB.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.DOBViolation")})
+        Me.chkViolationDOB.LocationFloat = New DevExpress.Utils.PointFloat(162.7499!, 275.0!)
+        Me.chkViolationDOB.Name = "chkViolationDOB"
+        Me.chkViolationDOB.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
+        Me.chkViolationDOB.StylePriority.UseTextAlignment = False
+        Me.chkViolationDOB.Text = "DOB"
+        Me.chkViolationDOB.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrCheckBox10
+        'chkViolationECB
         '
-        Me.XrCheckBox10.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsECBViolations")})
-        Me.XrCheckBox10.LocationFloat = New DevExpress.Utils.PointFloat(112.6249!, 275.0!)
-        Me.XrCheckBox10.Name = "XrCheckBox10"
-        Me.XrCheckBox10.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
-        Me.XrCheckBox10.StylePriority.UseTextAlignment = False
-        Me.XrCheckBox10.Text = "ECB"
-        Me.XrCheckBox10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.chkViolationECB.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsECBViolations")})
+        Me.chkViolationECB.LocationFloat = New DevExpress.Utils.PointFloat(112.6249!, 275.0!)
+        Me.chkViolationECB.Name = "chkViolationECB"
+        Me.chkViolationECB.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
+        Me.chkViolationECB.StylePriority.UseTextAlignment = False
+        Me.chkViolationECB.Text = "ECB"
+        Me.chkViolationECB.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrCheckBox7
+        'chkWaterNo
         '
-        Me.XrCheckBox7.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsWaterOwed")})
-        Me.XrCheckBox7.LocationFloat = New DevExpress.Utils.PointFloat(162.75!, 237.5!)
-        Me.XrCheckBox7.Name = "XrCheckBox7"
-        Me.XrCheckBox7.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
-        Me.XrCheckBox7.StylePriority.UseTextAlignment = False
-        Me.XrCheckBox7.Text = "No"
-        Me.XrCheckBox7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.chkWaterNo.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsWaterOwed")})
+        Me.chkWaterNo.LocationFloat = New DevExpress.Utils.PointFloat(162.75!, 237.5!)
+        Me.chkWaterNo.Name = "chkWaterNo"
+        Me.chkWaterNo.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
+        Me.chkWaterNo.StylePriority.UseTextAlignment = False
+        Me.chkWaterNo.Text = "No"
+        Me.chkWaterNo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrCheckBox8
+        'chkWaterYes
         '
-        Me.XrCheckBox8.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsWaterOwed")})
-        Me.XrCheckBox8.LocationFloat = New DevExpress.Utils.PointFloat(112.625!, 237.5!)
-        Me.XrCheckBox8.Name = "XrCheckBox8"
-        Me.XrCheckBox8.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
-        Me.XrCheckBox8.StylePriority.UseTextAlignment = False
-        Me.XrCheckBox8.Text = "Yes"
-        Me.XrCheckBox8.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.chkWaterYes.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsWaterOwed")})
+        Me.chkWaterYes.LocationFloat = New DevExpress.Utils.PointFloat(112.625!, 237.5!)
+        Me.chkWaterYes.Name = "chkWaterYes"
+        Me.chkWaterYes.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
+        Me.chkWaterYes.StylePriority.UseTextAlignment = False
+        Me.chkWaterYes.Text = "Yes"
+        Me.chkWaterYes.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrCheckBox5
+        'chkTaxNo
         '
-        Me.XrCheckBox5.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsTaxesOwed")})
-        Me.XrCheckBox5.LocationFloat = New DevExpress.Utils.PointFloat(162.7499!, 200.0!)
-        Me.XrCheckBox5.Name = "XrCheckBox5"
-        Me.XrCheckBox5.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
-        Me.XrCheckBox5.StylePriority.UseTextAlignment = False
-        Me.XrCheckBox5.Text = "No"
-        Me.XrCheckBox5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.chkTaxNo.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsTaxesOwed")})
+        Me.chkTaxNo.LocationFloat = New DevExpress.Utils.PointFloat(162.7499!, 200.0!)
+        Me.chkTaxNo.Name = "chkTaxNo"
+        Me.chkTaxNo.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
+        Me.chkTaxNo.StylePriority.UseTextAlignment = False
+        Me.chkTaxNo.Text = "No"
+        Me.chkTaxNo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrCheckBox6
+        'chkTaxYes
         '
-        Me.XrCheckBox6.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsTaxesOwed")})
-        Me.XrCheckBox6.LocationFloat = New DevExpress.Utils.PointFloat(112.6249!, 200.0!)
-        Me.XrCheckBox6.Name = "XrCheckBox6"
-        Me.XrCheckBox6.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
-        Me.XrCheckBox6.StylePriority.UseTextAlignment = False
-        Me.XrCheckBox6.Text = "Yes"
-        Me.XrCheckBox6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.chkTaxYes.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsTaxesOwed")})
+        Me.chkTaxYes.LocationFloat = New DevExpress.Utils.PointFloat(112.6249!, 200.0!)
+        Me.chkTaxYes.Name = "chkTaxYes"
+        Me.chkTaxYes.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
+        Me.chkTaxYes.StylePriority.UseTextAlignment = False
+        Me.chkTaxYes.Text = "Yes"
+        Me.chkTaxYes.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrCheckBox3
+        'chkOtherLiensYes
         '
-        Me.XrCheckBox3.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsOtherLiens")})
-        Me.XrCheckBox3.LocationFloat = New DevExpress.Utils.PointFloat(112.625!, 162.5!)
-        Me.XrCheckBox3.Name = "XrCheckBox3"
-        Me.XrCheckBox3.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
-        Me.XrCheckBox3.StylePriority.UseTextAlignment = False
-        Me.XrCheckBox3.Text = "Yes"
-        Me.XrCheckBox3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.chkOtherLiensYes.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsOtherLiens")})
+        Me.chkOtherLiensYes.LocationFloat = New DevExpress.Utils.PointFloat(112.625!, 162.5!)
+        Me.chkOtherLiensYes.Name = "chkOtherLiensYes"
+        Me.chkOtherLiensYes.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
+        Me.chkOtherLiensYes.StylePriority.UseTextAlignment = False
+        Me.chkOtherLiensYes.Text = "Yes"
+        Me.chkOtherLiensYes.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrCheckBox4
+        'chkOtherLiensNo
         '
-        Me.XrCheckBox4.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsOtherLiens")})
-        Me.XrCheckBox4.LocationFloat = New DevExpress.Utils.PointFloat(162.75!, 162.5!)
-        Me.XrCheckBox4.Name = "XrCheckBox4"
-        Me.XrCheckBox4.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
-        Me.XrCheckBox4.StylePriority.UseTextAlignment = False
-        Me.XrCheckBox4.Text = "No"
-        Me.XrCheckBox4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.chkOtherLiensNo.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsOtherLiens")})
+        Me.chkOtherLiensNo.LocationFloat = New DevExpress.Utils.PointFloat(162.75!, 162.5!)
+        Me.chkOtherLiensNo.Name = "chkOtherLiensNo"
+        Me.chkOtherLiensNo.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)
+        Me.chkOtherLiensNo.StylePriority.UseTextAlignment = False
+        Me.chkOtherLiensNo.Text = "No"
+        Me.chkOtherLiensNo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
         'chkLisPenNo
         '
@@ -677,77 +675,71 @@ Public Class LeaderReport
         Me.chkLisPenYes.Text = "Yes"
         Me.chkLisPenYes.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrLabel39
+        'lblBuildingDem
         '
-        Me.XrLabel39.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel39.LocationFloat = New DevExpress.Utils.PointFloat(599.9999!, 200.0!)
-        Me.XrLabel39.Name = "XrLabel39"
-        Me.XrLabel39.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel39.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
-        Me.XrLabel39.StylePriority.UseBorders = False
-        Me.XrLabel39.StylePriority.UseTextAlignment = False
-        Me.XrLabel39.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.lblBuildingDem.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
+        Me.lblBuildingDem.LocationFloat = New DevExpress.Utils.PointFloat(599.9999!, 200.0!)
+        Me.lblBuildingDem.Name = "lblBuildingDem"
+        Me.lblBuildingDem.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.lblBuildingDem.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
+        Me.lblBuildingDem.StylePriority.UseBorders = False
+        Me.lblBuildingDem.StylePriority.UseTextAlignment = False
+        Me.lblBuildingDem.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrLabel38
+        'lblLotDem
         '
-        Me.XrLabel38.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel38.LocationFloat = New DevExpress.Utils.PointFloat(599.9999!, 237.5!)
-        Me.XrLabel38.Name = "XrLabel38"
-        Me.XrLabel38.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel38.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
-        Me.XrLabel38.StylePriority.UseBorders = False
-        Me.XrLabel38.StylePriority.UseTextAlignment = False
-        Me.XrLabel38.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.lblLotDem.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
+        Me.lblLotDem.LocationFloat = New DevExpress.Utils.PointFloat(599.9999!, 237.5!)
+        Me.lblLotDem.Name = "lblLotDem"
+        Me.lblLotDem.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.lblLotDem.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
+        Me.lblLotDem.StylePriority.UseBorders = False
+        Me.lblLotDem.StylePriority.UseTextAlignment = False
+        Me.lblLotDem.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrLabel37
+        'lblEstValue
         '
-        Me.XrLabel37.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel37.LocationFloat = New DevExpress.Utils.PointFloat(600.0!, 275.0!)
-        Me.XrLabel37.Name = "XrLabel37"
-        Me.XrLabel37.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel37.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
-        Me.XrLabel37.StylePriority.UseBorders = False
-        Me.XrLabel37.StylePriority.UseTextAlignment = False
-        Me.XrLabel37.Text = "$"
-        Me.XrLabel37.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.lblEstValue.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
+        Me.lblEstValue.LocationFloat = New DevExpress.Utils.PointFloat(600.0!, 275.0!)
+        Me.lblEstValue.Name = "lblEstValue"
+        Me.lblEstValue.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.lblEstValue.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
+        Me.lblEstValue.StylePriority.UseBorders = False
+        Me.lblEstValue.StylePriority.UseTextAlignment = False
+        Me.lblEstValue.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
-        'XrLabel36
+        'lblViolationAmount
         '
-        Me.XrLabel36.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel36.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "ALL_NYC_Tax_Liens_CO_Info.DOBViolationsAmt")})
-        Me.XrLabel36.LocationFloat = New DevExpress.Utils.PointFloat(350.9583!, 275.0!)
-        Me.XrLabel36.Name = "XrLabel36"
-        Me.XrLabel36.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel36.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
-        Me.XrLabel36.StylePriority.UseBorders = False
-        Me.XrLabel36.StylePriority.UseTextAlignment = False
-        Me.XrLabel36.Text = "$"
-        Me.XrLabel36.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.lblViolationAmount.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
+        Me.lblViolationAmount.LocationFloat = New DevExpress.Utils.PointFloat(350.9583!, 275.0!)
+        Me.lblViolationAmount.Name = "lblViolationAmount"
+        Me.lblViolationAmount.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.lblViolationAmount.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
+        Me.lblViolationAmount.StylePriority.UseBorders = False
+        Me.lblViolationAmount.StylePriority.UseTextAlignment = False
+        Me.lblViolationAmount.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
-        'XrLabel35
+        'lblWaterAmount
         '
-        Me.XrLabel35.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel35.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "ALL_NYC_Tax_Liens_CO_Info.WaterAmt")})
-        Me.XrLabel35.LocationFloat = New DevExpress.Utils.PointFloat(350.9583!, 237.5!)
-        Me.XrLabel35.Name = "XrLabel35"
-        Me.XrLabel35.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel35.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
-        Me.XrLabel35.StylePriority.UseBorders = False
-        Me.XrLabel35.StylePriority.UseTextAlignment = False
-        Me.XrLabel35.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.lblWaterAmount.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
+        Me.lblWaterAmount.LocationFloat = New DevExpress.Utils.PointFloat(350.9583!, 237.5!)
+        Me.lblWaterAmount.Name = "lblWaterAmount"
+        Me.lblWaterAmount.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.lblWaterAmount.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
+        Me.lblWaterAmount.StylePriority.UseBorders = False
+        Me.lblWaterAmount.StylePriority.UseTextAlignment = False
+        Me.lblWaterAmount.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
-        'XrLabel34
+        'lblTaxAmount
         '
-        Me.XrLabel34.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel34.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "ALL_NYC_Tax_Liens_CO_Info.TaxesAmt")})
-        Me.XrLabel34.LocationFloat = New DevExpress.Utils.PointFloat(350.9584!, 200.0!)
-        Me.XrLabel34.Name = "XrLabel34"
-        Me.XrLabel34.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel34.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
-        Me.XrLabel34.StylePriority.UseBorders = False
-        Me.XrLabel34.StylePriority.UseTextAlignment = False
-        Me.XrLabel34.Text = "$"
-        Me.XrLabel34.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.lblTaxAmount.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
+        Me.lblTaxAmount.LocationFloat = New DevExpress.Utils.PointFloat(350.9584!, 200.0!)
+        Me.lblTaxAmount.Name = "lblTaxAmount"
+        Me.lblTaxAmount.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.lblTaxAmount.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
+        Me.lblTaxAmount.StylePriority.UseBorders = False
+        Me.lblTaxAmount.StylePriority.UseTextAlignment = False
+        Me.lblTaxAmount.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'XrLabel33
         '
@@ -760,29 +752,29 @@ Public Class LeaderReport
         Me.XrLabel33.StylePriority.UseTextAlignment = False
         Me.XrLabel33.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
-        'XrLabel32
+        'lbl2ndMortgage
         '
-        Me.XrLabel32.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel32.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "ALL_NYC_Tax_Liens_CO_Info.C2ndMotgrAmt", "{0:$0.00}")})
-        Me.XrLabel32.LocationFloat = New DevExpress.Utils.PointFloat(599.9999!, 125.0!)
-        Me.XrLabel32.Name = "XrLabel32"
-        Me.XrLabel32.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel32.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
-        Me.XrLabel32.StylePriority.UseBorders = False
-        Me.XrLabel32.StylePriority.UseTextAlignment = False
-        Me.XrLabel32.Text = "$"
-        Me.XrLabel32.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
+        Me.lbl2ndMortgage.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
+        Me.lbl2ndMortgage.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("Text", Nothing, "ALL_NYC_Tax_Liens_CO_Info.C2ndMotgrAmt", "{0:$0.00}")})
+        Me.lbl2ndMortgage.LocationFloat = New DevExpress.Utils.PointFloat(599.9999!, 125.0!)
+        Me.lbl2ndMortgage.Name = "lbl2ndMortgage"
+        Me.lbl2ndMortgage.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.lbl2ndMortgage.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
+        Me.lbl2ndMortgage.StylePriority.UseBorders = False
+        Me.lbl2ndMortgage.StylePriority.UseTextAlignment = False
+        Me.lbl2ndMortgage.Text = "$"
+        Me.lbl2ndMortgage.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
-        'XrLabel31
+        'lblNumOfFloor
         '
-        Me.XrLabel31.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
-        Me.XrLabel31.LocationFloat = New DevExpress.Utils.PointFloat(599.9999!, 87.5!)
-        Me.XrLabel31.Name = "XrLabel31"
-        Me.XrLabel31.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
-        Me.XrLabel31.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
-        Me.XrLabel31.StylePriority.UseBorders = False
-        Me.XrLabel31.StylePriority.UseTextAlignment = False
-        Me.XrLabel31.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
+        Me.lblNumOfFloor.Borders = DevExpress.XtraPrinting.BorderSide.Bottom
+        Me.lblNumOfFloor.LocationFloat = New DevExpress.Utils.PointFloat(599.9999!, 87.5!)
+        Me.lblNumOfFloor.Name = "lblNumOfFloor"
+        Me.lblNumOfFloor.Padding = New DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100.0!)
+        Me.lblNumOfFloor.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
+        Me.lblNumOfFloor.StylePriority.UseBorders = False
+        Me.lblNumOfFloor.StylePriority.UseTextAlignment = False
+        Me.lblNumOfFloor.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter
         '
         'lblLot
         '
@@ -804,7 +796,6 @@ Public Class LeaderReport
         Me.lblFirstMortgage.SizeF = New System.Drawing.SizeF(100.0001!, 23.0!)
         Me.lblFirstMortgage.StylePriority.UseBorders = False
         Me.lblFirstMortgage.StylePriority.UseTextAlignment = False
-        Me.lblFirstMortgage.Text = "$"
         Me.lblFirstMortgage.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft
         '
         'lblTax
@@ -1172,15 +1163,8 @@ Public Class LeaderReport
         'Detail1
         '
         Me.Detail1.Controls.AddRange(New DevExpress.XtraReports.UI.XRControl() {Me.XrRichText2, Me.XrRichText1})
+        Me.Detail1.HeightF = 100.0!
         Me.Detail1.Name = "Detail1"
-        '
-        'XrRichText1
-        '
-        Me.XrRichText1.Font = New System.Drawing.Font("Arial", 11.0!)
-        Me.XrRichText1.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 0.0!)
-        Me.XrRichText1.Name = "XrRichText1"
-        Me.XrRichText1.SerializableRtfString = resources.GetString("XrRichText1.SerializableRtfString")
-        Me.XrRichText1.SizeF = New System.Drawing.SizeF(322.9167!, 100.0!)
         '
         'XrRichText2
         '
@@ -1190,15 +1174,23 @@ Public Class LeaderReport
         Me.XrRichText2.SerializableRtfString = resources.GetString("XrRichText2.SerializableRtfString")
         Me.XrRichText2.SizeF = New System.Drawing.SizeF(349.0414!, 100.0!)
         '
+        'XrRichText1
+        '
+        Me.XrRichText1.Font = New System.Drawing.Font("Arial", 11.0!)
+        Me.XrRichText1.LocationFloat = New DevExpress.Utils.PointFloat(12.5!, 0.0!)
+        Me.XrRichText1.Name = "XrRichText1"
+        Me.XrRichText1.SerializableRtfString = resources.GetString("XrRichText1.SerializableRtfString")
+        Me.XrRichText1.SizeF = New System.Drawing.SizeF(322.9167!, 100.0!)
+        '
         'LeaderReport
         '
         Me.Bands.AddRange(New DevExpress.XtraReports.UI.Band() {Me.Detail, Me.TopMargin, Me.BottomMargin, Me.ReportHeader, Me.DetailReport})
         Me.Font = New System.Drawing.Font("Arial", 11.0!)
         Me.Margins = New System.Drawing.Printing.Margins(63, 68, 75, 88)
         Me.Parameters.AddRange(New DevExpress.XtraReports.Parameters.Parameter() {Me.BBLE})
-        Me.Version = "13.2"
-        CType(Me.XrRichText1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Version = "14.1"
         CType(Me.XrRichText2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.XrRichText1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
 
     End Sub
@@ -1210,43 +1202,103 @@ Public Class LeaderReport
 
     Public Sub BindData(bble As String)
         Using context As New Entities
-            Dim lead = context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
+            Dim li = context.LeadsInfoes.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
 
-            If lead IsNot Nothing Then
-                If lead.AssignDate.HasValue Then
-                    lblCreatedDate.Text = lead.AssignDate.Value.ToShortDateString
+            If li IsNot Nothing Then
+                If li.CreateDate.HasValue Then
+                    lblCreatedDate.Text = li.CreateDate.Value.ToShortDateString
                 End If
 
-                lblPropertyAddress.Text = lead.LeadsInfo.PropertyAddress
+                lblPropertyAddress.Text = li.PropertyAddress
 
-                If lead.LeadsInfo.SaleDate.HasValue Then
-                    lblSaleDate.Text = lead.LeadsInfo.SaleDate.Value.ToShortDateString
+                If li.SaleDate.HasValue Then
+                    lblSaleDate.Text = li.SaleDate.Value.ToShortDateString
                 End If
 
-                lblBlock.Text = lead.LeadsInfo.Block
-                lblLot.Text = lead.LeadsInfo.Lot
+                lblBlock.Text = li.Block
+                lblLot.Text = li.Lot
+                lblYearBuilt.Text = li.YearBuilt
+                lblNumOfFloor.Text = li.NumFloors
+                lblBuildingDem.Text = li.BuildingDem
+                lblLotDem.Text = li.LotDem
+                lblTax.Text = li.TaxClass
 
-                'lblYearBuilt.Text = lead.LeadsInfo
+                lblOwner.Text = li.Owner
+                lblCoOwner.Text = li.CoOwner
 
-                lblTax.Text = lead.LeadsInfo.TaxClass
-
-                If lead.LeadsInfo.IsLisPendens.HasValue Then
-                    If lead.LeadsInfo.IsLisPendens.Value Then
+                If li.IsLisPendens.HasValue Then
+                    If li.IsLisPendens.Value Then
                         chkLisPenYes.Checked = True
                     Else
                         chkLisPenNo.Checked = True
                     End If
                 End If
 
-                If lead.LeadsInfo.C1stMotgrAmt.HasValue Then
-                    lblFirstMortgage.Text = lead.LeadsInfo.C1stMotgrAmt.Value.ToString("C")
+                If li.IsOtherLiens.HasValue Then
+                    If li.IsOtherLiens.Value Then
+                        chkOtherLiensYes.Checked = True
+                    Else
+                        chkOtherLiensYes.Checked = True
+                    End If
+                End If
+
+                If li.IsTaxesOwed.HasValue Then
+                    If li.IsTaxesOwed.Value Then
+                        chkTaxYes.Checked = True
+                    Else
+                        chkTaxNo.Checked = True
+                    End If
+                End If
+
+                If li.IsWaterOwed.HasValue Then
+                    If li.IsWaterOwed.Value Then
+                        chkWaterYes.Checked = True
+                    Else
+                        chkWaterNo.Checked = True
+                    End If
+                End If
+
+                If li.IsECBViolations.HasValue Then
+                    If li.IsECBViolations.Value Then
+                        chkViolationECB.Checked = True
+                    End If
+                End If
+
+                If li.IsDOBViolations.HasValue Then
+                    If li.IsDOBViolations.Value Then
+                        chkViolationDOB.Checked = True
+                    End If
+                End If
+
+                If li.C1stMotgrAmt.HasValue AndAlso li.C1stMotgrAmt.Value > 0 Then
+                    lblFirstMortgage.Text = li.C1stMotgrAmt.Value.ToString("C")
+                End If
+
+                If li.C2ndMotgrAmt.HasValue AndAlso li.C2ndMotgrAmt.Value > 0 Then
+                    lbl2ndMortgage.Text = li.C2ndMotgrAmt.Value.ToString("C")
+                End If
+
+                If li.TaxesAmt.HasValue AndAlso li.TaxesAmt.Value > 0 Then
+                    lblTaxAmount.Text = li.TaxesAmt.Value.ToString("C")
+                End If
+
+                If li.EstValue.HasValue AndAlso li.EstValue.Value > 0 Then
+                    lblEstValue.Text = li.EstValue.Value.ToString("C")
+                End If
+
+                If li.WaterAmt.HasValue AndAlso li.WaterAmt.Value > 0 Then
+                    lblWaterAmount.Text = li.WaterAmt.Value.ToString("C")
+                End If
+
+                If li.ViolationAmount > 0 Then
+                    lblViolationAmount.Text = li.ViolationAmount.ToString("C")
                 End If
 
                 Dim resControl As HomeOwnerInfo
                 Using Page As New Page
                     resControl = Page.LoadControl(String.Format("~/UserControl/HomeOwnerInfo.ascx"))
                     resControl.BBLE = bble
-                    resControl.OwnerName = lead.LeadsInfo.Owner
+                    resControl.OwnerName = li.Owner
                     resControl.BindData(bble)
 
                     Dim stringWriter As New StringWriter
@@ -1254,9 +1306,9 @@ Public Class LeaderReport
                     resControl.RenderControl(htmlWriter)
                     XrRichText1.Html = stringWriter.ToString
 
-                    If Not String.IsNullOrEmpty(lead.LeadsInfo.CoOwner) Then
+                    If Not String.IsNullOrEmpty(li.CoOwner) Then
 
-                        resControl.OwnerName = lead.LeadsInfo.CoOwner
+                        resControl.OwnerName = li.CoOwner
                         resControl.BindData(bble)
 
                         stringWriter = New StringWriter
