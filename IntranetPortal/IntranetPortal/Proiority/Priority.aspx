@@ -398,41 +398,83 @@
                                 </div>
 
                                 <%----end line ----%>
+                                <div style="width: 230px" class="clearfix">
+                                    <%--line 4--%>
 
-                                 <%--line 4--%>
+                                    <div class="form_div_node form_div_node_line_margin">
+                                        <span class="form_input_title">Taxes</span>
+                                        <input class="text_input" value="$180,000.00" />
+                                    </div>
 
-                                <div class="form_div_node form_div_node_line_margin">
-                                    <span class="form_input_title">Taxes</span>
-                                    <input class="text_input" value="180,000.00" />
+
+                                    <%----end line ----%>
+                                    <%--line 5--%>
+
+                                    <div class="form_div_node form_div_node_line_margin">
+                                        <span class="form_input_title">water</span>
+                                        <input class="text_input" value="$180,000.00" />
+                                    </div>
+                                    <%----end line ----%>
+                                    <%--line 6--%>
+
+                                    <div class="form_div_node form_div_node_line_margin">
+                                        <span class="form_input_title">ecb/dob</span>
+                                        <input class="text_input" value=" " />
+                                    </div>
+                                    <%--line 7--%>
+
+                                    <div class="form_div_node form_div_node_line_margin">
+                                        <span class="form_input_title" style="color: #ff400d">Total debt</span>
+                                        <input class="text_input" value="$180,000.00" />
+                                    </div>
+
+                                    <%----end line ----%>
                                 </div>
-                                <div class="form_empty_node"></div>
-                               <div class="form_empty_node"></div>
-                                <div class="form_empty_node"></div>
-                                <%----end line ----%>
-                                <%--line 5--%>
-
-                                <div class="form_div_node form_div_node_line_margin">
-                                    <span class="form_input_title">3nd Mortgage</span>
-                                    <input class="text_input" value=" " />
-                                </div>
-
-                                <div class="form_empty_node"></div>
-                               <div class="form_empty_node"></div>
-
-                                <%----end line ----%>
-                                <%--line 6--%>
-
-                                <div class="form_div_node form_div_node_line_margin">
-                                    <span class="form_input_title">3nd Mortgage</span>
-                                    <input class="text_input" value=" " />
-                                </div>
-                                <div class="form_empty_node"></div>
-                               <div class="form_empty_node"></div>
 
                                 <%----end line ----%>
                             </form>
                         </div>
                         <%-------end-----%>
+
+                        <%--Liens table--%>
+                        <div style="margin: 20px;" class="clearfix">
+                            <div class="form_head" style="margin-top: 40px;">Lines</div>
+
+                            <table class="table table-condensed" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th class="report_head">Effective</th>
+                                        <th class="report_head">Expiration</th>
+                                        <th class="report_head">Type</th>
+                                        <th class="report_head">PlainTiff</th>
+                                        <th class="report_head">Defendant</th>
+                                        <th class="report_head">Index</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="report_content">8/23/2013</td>
+                                        <td class="report_content">8/23/2014</td>
+                                        <td class="report_content">H.P.D.ORDER TO CORRECT</td>
+                                        <td class="report_content">DEPT OF HOUSING PRESERVATION 100 GOLD ST 6TH FL NEW YORK NY 10038</td>
+                                        <td class="report_content">OWNER OF BLOCK & LOT</td>
+                                        <td class="report_content">HP 170/13</td>
+                                    </tr>
+                                    <tr style="color: #b1b2b7">
+                                        <td class="report_content">5/16/2013</td>
+                                        <td class="report_content">5/16/2016                                            <span class="color_balck">SATISFIED: 11/15/2013</span>
+                                        </td>
+                                        <td class="report_content">JUDGEMENT</td>
+                                        <td class="report_content">DEPT OF HOUSING PRESERVATION 100 GOLD ST 6TH FL NEW YORK NY 10038</td>
+                                        <td class="report_content">BRIGG ESTRELLA</td>
+                                        <td class="report_content">HP 170/13</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <%--end--%>
                     </div>
                     <!-- custom scrollbar plugin -->
 
@@ -454,6 +496,7 @@
                 </div>
 
             </div>
+        </div>
     </form>
 </body>
 </html>
