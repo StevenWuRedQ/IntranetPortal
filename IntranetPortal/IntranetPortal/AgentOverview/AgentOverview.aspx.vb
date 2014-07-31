@@ -1,4 +1,6 @@
-﻿Public Class AgentOverview
+﻿Imports DevExpress.Web.ASPxGridView
+
+Public Class AgentOverview
     Inherits System.Web.UI.Page
     Public report_data As String
 
@@ -7,8 +9,22 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         CurrentEmployee = Employee.GetInstance(User.Identity.Name)
         report_data = report_data_f()
+
+        'BindGridReport()
     End Sub
 
+    Sub BindGridReport()
+        Dim name = User.Identity.Name
+        Using Context As New Entities
+            gridReport.DataSource = (From li In Context.LeadsInfoes Join
+                                   ld In Context.Leads On ld.BBLE Equals li.BBLE
+                                   Where ld.EmployeeName = name
+                                   Select li).ToList
+
+
+            'gridReport.DataBind()
+        End Using
+    End Sub
 
     'retrun the report data fields
     Function report_fields() As String
@@ -61,5 +77,41 @@
         Dim index As Integer = sender
         'Request.QueryString("index")
         MsgBox("index =" & index)
+    End Sub
+
+    Protected Sub chkFields_SelectedIndexChanged(sender As Object, e As EventArgs)
+        gridReport.Columns.Clear()
+        For Each item As String In chkFields.SelectedValues
+            Dim gridCol = New GridViewDataColumn
+            gridCol.FieldName = item
+
+            gridReport.Columns.Add(gridCol)
+        Next
+
+        BindGridReport()
+        gridReport.DataBind()
+    End Sub
+
+    Protected Sub gridReport_DataBinding(sender As Object, e As EventArgs) Handles gridReport.DataBinding
+        If gridReport.DataSource Is Nothing Then
+            BindGridReport()
+        End If
+    End Sub
+
+    Protected Sub gridReport_CustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs)
+        gridReport.Columns.Clear()
+        For Each item As String In e.Parameters.Split(",")
+            Dim gridCol = New GridViewDataColumn
+            gridCol.FieldName = item
+
+            gridReport.Columns.Add(gridCol)
+        Next
+
+        BindGridReport()
+        gridReport.DataBind()
+    End Sub
+
+    Protected Sub Unnamed_ServerClick(sender As Object, e As EventArgs)
+        gridExport.WriteXlsToResponse()
     End Sub
 End Class

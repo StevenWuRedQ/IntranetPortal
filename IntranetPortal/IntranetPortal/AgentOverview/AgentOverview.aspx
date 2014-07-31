@@ -50,7 +50,7 @@
                             <i class="fa fa-group with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;&nbsp;<span style="color: #234b60; font-size: 30px;">Employees</span>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-sort-amount-desc"></i>
                         </div>
-                        <input type="text" data-var="@btn-info-color" class="form-control" style="width: 250px; margin-top: 25px; height: 30px; color:#b1b2b7" placeholder="Type employee’s name" />
+                        <input type="text" data-var="@btn-info-color" class="form-control" style="width: 250px; margin-top: 25px; height: 30px; color: #b1b2b7" placeholder="Type employee’s name" />
                         <div style="margin-top: 27px; height: 290px; /*background: blue*/">
                             <div>
                                 <span class="font_black">A</span>&nbsp;&nbsp;&nbsp;<span class="employee_lest_head_number_label">2</span>
@@ -131,8 +131,8 @@
                     <%--angent info--%>
 
                     <div style="width: 370px; height: 490px; background: url('../images/profile_bg.png')">
-                        <%--width:201 height:201--%>                     
-                        <img src="<%=IIf(String.IsNullOrEmpty(CurrentEmployee.Picture), "/images/user-empty-icon.png", CurrentEmployee.Picture)%>" class="img-circle" style="margin-top: 40px; margin-left: 84px; height:200px; width:200px" />                       
+                        <%--width:201 height:201--%>
+                        <img src="<%=IIf(String.IsNullOrEmpty(CurrentEmployee.Picture), "/images/user-empty-icon.png", CurrentEmployee.Picture)%>" class="img-circle" style="margin-top: 40px; margin-left: 84px; height: 200px; width: 200px" />
                         <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"><%= CurrentEmployee.Name %></div>
                         <div style="margin-top: 8px; font-size: 16px; color: #234b60; font-weight: 900" class="agnet_info_text"><%= CurrentEmployee.Position %></div>
                         <%--info detial--%>
@@ -167,7 +167,7 @@
                             <%----end item--%>
                         </div>
                         <%-----end info detial-----%>
-                    </div>                    
+                    </div>
                 </div>
                 <%--chart UI--%>
                 <div style="height: 490px;">
@@ -189,7 +189,7 @@
                                             pointHighlightFill: "#fff",
                                             pointHighlightStroke: "rgba(220,220,220,1)",
                                             data: [41, 42, 43, 45, 48, 49],
-                                            title:"Door knock"
+                                            title: "Door knock"
                                         },
                                         {
                                             fillColor: "rgba(151,187,205,0.5)",
@@ -199,7 +199,7 @@
                                             pointHighlightFill: "#fff",
                                             pointHighlightStroke: "rgba(151,187,205,1)",
                                             data: [32, 33, 35, 34, 33, 38],
-                                            title:"Hot Leads"
+                                            title: "Hot Leads"
                                         }
                                         ,
                                        {
@@ -213,9 +213,9 @@
                                            title: "Follow Ups "
                                        }
                                     ],
-                                    
+
                                 }
-                                
+
                                 function legend(parent, data) {
                                     parent.className = 'legend';
                                     var datas = data.hasOwnProperty('datasets') ? data.datasets : data;
@@ -240,7 +240,7 @@
                                 var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData, {
                                     bezierCurve: false,
                                     datasetFill: false,
-                                    pointDotRadius: 6,                                 
+                                    pointDotRadius: 6,
                                     //legendTemplate: "<ul><li><span style=\"background-color:red\">111222</span></li><li><span style=\"background-color:red\">111222</span></li><li><span style=\"background-color:red\">111222</span></li></ul>"
                                     showTooltip: true,
                                     tooltipTemplate: "<span>tooltips</span>"
@@ -261,20 +261,27 @@
                             <span style="color: #234b60; font-weight: 900">Customized Report&nbsp;&nbsp;&nbsp;</span>
                             <i class="fa fa-question-circle tooltip-examples" style="color: #999ca1" title="Drag and drop items from the pane on the right side to view the customized report."></i>
                             <div style="float: right; padding-right: 40px; font-size: 18px;">
-                                <i class="fa fa-print  report_head_button report_head_button_padding"></i>
+                                <button runat="server" onserverclick="Unnamed_ServerClick" style="background-color:transparent;border:none;">
+                                    <i class="fa fa-print  report_head_button report_head_button_padding"></i>
+                                </button>                                
+                                <dx:ASPxButton RenderMode="Link" runat="server" ID="link" Text='<i class="fa fa-print  report_head_button report_head_button_padding"></i>' EncodeHtml="false" OnClick="Unnamed_ServerClick">                                    
+                                </dx:ASPxButton>
                                 <i class="fa fa-save report_head_button report_head_button_padding"></i>
                                 <i class="fa fa-exchange  report_head_button"></i>
                             </div>
                         </div>
                         <%--grid view--%>
-                        <div style="height: 260px; width: 100%; margin-top: 35px; padding-right: 40px; overflow-x: auto;" id="custom_report_grid">
-                            <table class="table table-condensed" style="width: 900px;margin-bottom: 0px;" id="custom_report_table_head">
+                        <dx:ASPxGridView ID="gridReport" runat="server" KeyFieldName="BBLE" AutoGenerateColumns="false" ClientInstanceName="gridReportClient" OnCustomCallback="gridReport_CustomCallback">
+                        </dx:ASPxGridView>
+                        <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridReport"></dx:ASPxGridViewExporter>
 
-                             </table>
-                             <div style="height: 230px; /*background: blue; */" id="droppable" class="custom_report_table">
-                                
+                        <div style="height: 260px; width: 100%; margin-top: 35px; padding-right: 40px; overflow-x: auto; display: none" id="custom_report_grid">
+                            <table class="table table-condensed" style="width: 900px; margin-bottom: 0px;" id="custom_report_table_head">
+                            </table>
+                            <div style="height: 230px; /*background: blue; */" id="droppable" class="custom_report_table">
+
                                 <table class="table table-condensed" style="width: 900px" id="custom_report_table">
-                                  <%--  <thead>
+                                    <%--  <thead>
                                         <tr>
                                             <th class="report_head">Property</th>
                                             <th class="report_head">Date</th>
@@ -339,37 +346,36 @@
                                             }
                                         });
                                     }
-                                    function change_table_thead()
-                                    {
+                                    function change_table_thead() {
                                         $('#custom_report_table_head thead').remove();
                                         $('#custom_report_table thead').remove();
                                         $('#custom_report_table tbody').remove();
 
                                         var report_fileds = window.report_fileds ? window.report_fileds : $.parseJSON('<%= report_fields() %>');
-                                         var headstr = "";
-                                         var feilds_style = {
-                                             property: "font-weight: 900; width: 230px",
-                                             date: "width: 90px",
-                                             call_atpt: "width: 90px",
-                                             doorknk_atpt: "width: 100px",
-                                             Comment: "width: 260px",
-                                             data: "width: 125px"
-                                         }
-                                         headstr += '<thead>  <tr>';
-                                         for (var i in report_fileds) {
-                                             //&nbsp;
-                                             var title = report_fileds[i].toString().replace("_", " ");
-                                             headstr += '<th class="report_head" >' + report_fileds[i].toString().replace("_", " "); + '</th>';
-                                         }
-                                         headstr += '</tr></thead>';
+                                        var headstr = "";
+                                        var feilds_style = {
+                                            property: "font-weight: 900; width: 230px",
+                                            date: "width: 90px",
+                                            call_atpt: "width: 90px",
+                                            doorknk_atpt: "width: 100px",
+                                            Comment: "width: 260px",
+                                            data: "width: 125px"
+                                        }
+                                        headstr += '<thead>  <tr>';
+                                        for (var i in report_fileds) {
+                                            //&nbsp;
+                                            var title = report_fileds[i].toString().replace("_", " ");
+                                            headstr += '<th class="report_head" >' + report_fileds[i].toString().replace("_", " "); + '</th>';
+                                        }
+                                        headstr += '</tr></thead>';
 
-                                         $('#custom_report_table_head').append(headstr);
-                                         $('#custom_report_table').append(' <tbody id="custom_report_tbody">\n</tbody>');
+                                        $('#custom_report_table_head').append(headstr);
+                                        $('#custom_report_table').append(' <tbody id="custom_report_tbody">\n</tbody>');
                                     }
-                                   
+
                                     function show_report_data() {
                                         var report_data = $.parseJSON('<%= report_data %>');
-                                       
+
                                         for (var i in report_data) {
                                             var data = report_data[i];
                                             var feilds_style = {
@@ -382,19 +388,18 @@
                                             }
                                             var report_fileds = window.report_fileds ? window.report_fileds : $.parseJSON('<%= report_fields() %>');
                                             var table_cell = "";
-                                            for (var j = 0; j < report_fileds.length;j++)
-                                            {
+                                            for (var j = 0; j < report_fileds.length; j++) {
                                                 var fileds = report_fileds[j]
                                                 table_cell += '<td class="report_content" style="' + feilds_style[fileds] + ';">' + data[fileds] + '</td>\n'
                                             }
-                                           // <td class="report_content" style="font-weight: 900; width: 230px;">' + data.property + '</td>\
-                                           //<td class="report_content" style="width: 90px">' + data.date + '</td>\
-                                           //<td class="report_content" style="width: 90px">' + data.call_atpt + '</td>\
-                                           //<td class="report_content" style="width: 100px">' + data.doorknk_atpt + '</td>\
-                                           //<td class="report_content" style="width: 260px">' + data.commet + '</td>\
-                                           //<td class="report_content" style="width: 125px">' + data.data + '</td>\
+                                            // <td class="report_content" style="font-weight: 900; width: 230px;">' + data.property + '</td>\
+                                            //<td class="report_content" style="width: 90px">' + data.date + '</td>\
+                                            //<td class="report_content" style="width: 90px">' + data.call_atpt + '</td>\
+                                            //<td class="report_content" style="width: 100px">' + data.doorknk_atpt + '</td>\
+                                            //<td class="report_content" style="width: 260px">' + data.commet + '</td>\
+                                            //<td class="report_content" style="width: 125px">' + data.data + '</td>\
                                             $('#custom_report_table').append('<tr>\
-                                            '+table_cell+'\
+                                            '+ table_cell + '\
                                             <td class="report_content" style=""><i class="fa fa-list-alt report_gird_icon" style="float:right;" onclick="custome_report_itemlick(' + i + ')"></i></td>/n\
                                             <tr>\
                                             ');
@@ -412,12 +417,30 @@
                 </div>
             </div>
 
+            <script type="text/javascript">
+                function Fields_ValueChanged(s, e) {
+                    alert("dd");
+                    gridReportClient.PerformCallback(s.GetSelectedValues());
+                    e.processOnServer = false;
+                }
+            </script>
+
             <%--right panel--%>
             <div style="width: 310px; background: #f5f5f5" class="agent_layout_float">
                 <%--head--%>
                 <div style="margin-left: 30px; margin-top: 30px; margin-right: 20px; font-size: 24px; float: none">
                     <span style="color: #234b60">Custom Fields</span><i class="fa fa-question-circle tooltip-examples" title="Drag and drop items from the pane on the right side to view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
                     <div style="margin-top: 25px">
+                        <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" OnSelectedIndexChanged="chkFields_SelectedIndexChanged">
+                            <Items>
+                                <dx:ListEditItem Text="Property Address" Value="PropertyAddress" />
+                                <dx:ListEditItem Text="Sale Date" Value="SaleDate" />
+                                <dx:ListEditItem Text="Tax Class" Value="TaxClass" />
+                            </Items>
+                            <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
+                        </dx:ASPxCheckBoxList>
+
+
                         <div class="draggable_field" id="draggable_field8">
                             <i class="fa fa-long-arrow-left draggable_icon"></i>
                             <span class="drappable_field_text">Call Attemps</span>
