@@ -422,7 +422,10 @@ input[type='checkbox'] {
     input[type="checkbox"]:checked + label:before {
         content: "\f046";
     }
-
+label
+{
+    cursor:pointer;
+}
 /*.circle-radio-boxes {
   margin-left: -10px;
   padding-top: 5px;
