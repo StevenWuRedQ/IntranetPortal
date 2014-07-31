@@ -93,7 +93,7 @@
                 <%----end top block----%>
 
                 <%-----buttom infos--%>
-                <div style="position: absolute; bottom: 0; padding-left: 32px; margin-bottom: 30px">
+                <div style="position: absolute; bottom: 0; padding-left: 32px; margin-bottom: 100px"> <%-- margin-bottom:30px--%>
                     <div style="position: relative; float: left">
                         <table>
                             <tr>
@@ -463,7 +463,8 @@
                                     </tr>
                                     <tr style="color: #b1b2b7">
                                         <td class="report_content">5/16/2013</td>
-                                        <td class="report_content">5/16/2016                                            <span class="color_balck">SATISFIED: 11/15/2013</span>
+                                        <td class="report_content">5/16/2016
+                                            <span class="color_balck">SATISFIED: 11/15/2013</span>
                                         </td>
                                         <td class="report_content">JUDGEMENT</td>
                                         <td class="report_content">DEPT OF HOUSING PRESERVATION 100 GOLD ST 6TH FL NEW YORK NY 10038</td>
