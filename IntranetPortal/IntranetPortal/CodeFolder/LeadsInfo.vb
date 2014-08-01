@@ -7,6 +7,21 @@
         End Get
     End Property
 
+    Public ReadOnly Property Status As String
+        Get
+            If Lead.Status.HasValue Then
+                Return CType(Lead.Status.Value, LeadStatus).ToString
+            End If
+
+            'Dim ld = IntranetPortal.Lead.GetInstance(BBLE)
+            'If ld IsNot Nothing AndAlso ld.Status.HasValue Then
+            '    Return CType(ld.Status, LeadStatus).ToString
+            'End If
+
+            Return ""
+        End Get
+    End Property
+
     Public ReadOnly Property HasOwnerInfo As Boolean
         Get
             Using context As New Entities
