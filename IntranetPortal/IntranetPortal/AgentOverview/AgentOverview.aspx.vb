@@ -1,10 +1,13 @@
 ﻿Imports DevExpress.Web.ASPxGridView
+Imports System.Linq.Expressions
+Imports DevExpress.Web.ASPxEditors
 
 Public Class AgentOverview
     Inherits System.Web.UI.Page
     Public report_data As String
 
     Public Property CurrentEmployee As Employee
+    Public portalDataContext As New Entities
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
@@ -17,22 +20,44 @@ Public Class AgentOverview
     End Sub
 
     Sub BindEmp()
-        Using Context As New Entities
-            gridEmps.DataSource = Context.Employees.ToList
-        End Using
+        gridEmps.DataSource = portalDataContext.Employees.ToList
     End Sub
 
     Sub BindGridReport()
         Dim name = hfEmpName.Value
-        Using Context As New Entities
-            gridReport.DataSource = (From li In Context.LeadsInfoes Join
-                                   ld In Context.Leads On ld.BBLE Equals li.BBLE
+
+        'If chkFields.SelectedValues.Count > 1 Then
+        '    gridReport.Columns.Clear()
+        '    For Each item As String In chkFields.SelectedValues
+        '        Dim gridCol = New GridViewDataColumn
+        '        gridCol.FieldName = item
+        '        gridReport.Columns.Add(gridCol)
+        '    Next
+        'End If
+
+        Dim reports = (From li In portalDataContext.LeadsInfoes Join
+                                   ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
                                    Where ld.EmployeeName = name
                                    Select li).ToList
-
-            'gridReport.DataBind()
-        End Using
+        gridReport.DataSource = reports
     End Sub
+
+    'Function CreateNewStatement(fields As String) As Func(Of LeadsInfo, Object)
+    '    Dim xParameter As ParameterExpression = Expression.Parameter(GetType(LeadsInfo), "o")
+    '    Dim sourceProperties = fields.ToDictionary(Function(nam) nam, Function(nam) GetType(LeadsInfo).GetProperty(nam))
+
+    '    Dim xNew = Expression.[New]((GetType(LeadsInfo)))
+
+    '    Dim bindings = fields.Split(",").Select(Function(o) o.Trim).Select(Function(o)
+    '                                                                           Dim mi = GetType(LeadsInfo).GetProperty(o)
+    '                                                                           Dim xOriginal = Expression.Property(xParameter, mi)
+    '                                                                           Return Expression.Bind(mi, xOriginal)
+    '                                                                       End Function)
+    '    Dim xInit = Expression.MemberInit(xNew, bindings)
+    '    Dim lambda = Expression.Lambda(xInit, xParameter)
+
+    '    Return lambda.Compile()
+    'End Function
 
     'retrun the report data fields
     Function report_fields() As String
@@ -87,17 +112,6 @@ Public Class AgentOverview
         MsgBox("index =" & index)
     End Sub
 
-    Protected Sub chkFields_SelectedIndexChanged(sender As Object, e As EventArgs)
-        'gridReport.Columns.Clear()
-        'For Each item As String In chkFields.SelectedValues
-        '    Dim gridCol = New GridViewDataColumn
-        '    gridCol.FieldName = item
-
-        '    gridReport.Columns.Add(gridCol)
-        'Next
-        'gridReport.DataBind()
-    End Sub
-
     Protected Sub gridReport_DataBinding(sender As Object, e As EventArgs) Handles gridReport.DataBinding
         If gridReport.DataSource Is Nothing Then
             BindGridReport()
@@ -111,14 +125,6 @@ Public Class AgentOverview
     End Sub
 
     Protected Sub gridReport_CustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs)
-        gridReport.Columns.Clear()
-        For Each item As String In e.Parameters.Split(",")
-            Dim gridCol = New GridViewDataColumn
-            gridCol.FieldName = item
-            gridReport.Columns.Add(gridCol)
-        Next
-
-        'BindGridReport()
         gridReport.DataBind()
     End Sub
 
@@ -131,6 +137,28 @@ Public Class AgentOverview
             CurrentEmployee = Employee.GetInstance(CInt(e.Parameter))
             hfEmpName.Value = CurrentEmployee.Name
             gridReport.DataBind()
+        End If
+    End Sub
+
+    Protected Sub gridReport_Load(sender As Object, e As EventArgs)
+        If chkFields.SelectedValues.Count > 0 Then
+            For Each item As String In chkFields.SelectedValues
+                Dim gridCol = gridReport.Columns(item)
+                gridCol.Visible = True
+            Next
+        End If
+    End Sub
+
+    Protected Sub gridReport_Init(sender As Object, e As EventArgs)
+        Dim s = hfEmpName.Value
+        If chkFields.Items.Count > 0 Then
+            gridReport.Columns.Clear()
+            For Each item As ListEditItem In chkFields.Items
+                Dim gridCol = New GridViewDataColumn
+                gridCol.FieldName = item.Value
+                gridCol.Visible = False
+                gridReport.Columns.Add(gridCol)
+            Next
         End If
     End Sub
 End Class

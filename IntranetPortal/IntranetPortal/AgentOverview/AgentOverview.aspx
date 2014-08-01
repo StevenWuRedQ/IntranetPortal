@@ -198,6 +198,7 @@
                                 <PanelCollection>
                                     <dx:PanelContent>
                                         <asp:HiddenField runat="server" ID="hfEmpName" />
+                                        <dx:ASPxHiddenField runat="server" ID="hfReports" ></dx:ASPxHiddenField>
                                         <div style="width: 1000px;" class="agent_layout_float">
                                             <%--center top--%>
                                             <div style="height: 490px; float: left; border-right: 1px solid #dde0e7;">
@@ -358,10 +359,14 @@
                                                         </div>
                                                     </div>
                                                     <%--grid view--%>
-                                                    <dx:ASPxGridView ID="gridReport" runat="server" KeyFieldName="BBLE" Width="100%" AutoGenerateColumns="false" ClientInstanceName="gridReportClient" OnCustomCallback="gridReport_CustomCallback" Settings-ShowGroupPanel="false">
+                                                    <dx:ASPxGridView ID="gridReport" runat="server" KeyFieldName="BBLE" Width="100%" AutoGenerateColumns="false" ClientInstanceName="gridReportClient" OnCustomCallback="gridReport_CustomCallback" Settings-ShowGroupPanel="false" OnLoad="gridReport_Load" OnInit="gridReport_Init">
+                                                        <Settings ShowFilterBar="Visible" ShowHeaderFilterButton="true" ShowGroupPanel="true" />
                                                         <Columns>
                                                             <dx:GridViewDataColumn FieldName="PropertyAddress"></dx:GridViewDataColumn>
                                                         </Columns>
+                                                        <GroupSummary>
+                                                            <dx:ASPxSummaryItem FieldName="BBLE" SummaryType="Count" />
+                                                        </GroupSummary>
                                                     </dx:ASPxGridView>
                                                     <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridReport"></dx:ASPxGridViewExporter>
 
@@ -530,8 +535,22 @@
                                         <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" Width="100%">
                                             <Items>
                                                 <dx:ListEditItem Text="Property Address" Value="PropertyAddress" Selected="true" />
+                                                <dx:ListEditItem Text="Status" Value="Status" />
                                                 <dx:ListEditItem Text="Sale Date" Value="SaleDate" />
                                                 <dx:ListEditItem Text="Tax Class" Value="TaxClass" />
+                                                <dx:ListEditItem Text="Block" Value="Block" />
+                                                <dx:ListEditItem Text="Lot" Value="Lot" />
+                                                <dx:ListEditItem Text="Year Build" Value="YearBuilt" />
+                                                <dx:ListEditItem Text="# of floor" Value="NumFloors" />
+                                                <dx:ListEditItem Text="Building Dem" Value="BuildingDem" />
+                                                <dx:ListEditItem Text="Lot Dem" Value="LotDem" />
+                                                <dx:ListEditItem Text="Est Value" Value="EstValue" />
+                                                <dx:ListEditItem Text="Zoning" Value="Zoning" />
+                                                <dx:ListEditItem Text="MaxFar" Value="MaxFar" />
+                                                <dx:ListEditItem Text="Actual Far" Value="ActualFar" />
+                                                <dx:ListEditItem Text="NYCSqft" Value="NYCSqft" />
+                                                <dx:ListEditItem Text="Unbuilt Sqft" Value="UnbuiltSqft" />
+                                                <dx:ListEditItem Text="Create Date" Value="CreateDate" />
                                             </Items>
                                             <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
                                         </dx:ASPxCheckBoxList>

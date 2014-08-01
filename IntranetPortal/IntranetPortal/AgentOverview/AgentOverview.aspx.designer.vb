@@ -59,6 +59,15 @@ Partial Public Class AgentOverview
     Protected WithEvents hfEmpName As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
+    '''hfReports control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfReports As Global.DevExpress.Web.ASPxHiddenField.ASPxHiddenField
+
+    '''<summary>
     '''ASPxPopupControl2 control.
     '''</summary>
     '''<remarks>
