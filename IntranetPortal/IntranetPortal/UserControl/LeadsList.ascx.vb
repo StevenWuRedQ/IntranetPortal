@@ -355,7 +355,7 @@ Public Class LeadsList
             ld.AssignDate = DateTime.Now
             ld.AssignBy = Page.User.Identity.Name
 
-            If Employee.IsManager(Page.User.Identity.Name) Then
+            If Employee.IsManager(Page.User.Identity.Name) Or Page.User.IsInRole("SeniorAgent") Then
                 ld.Status = LeadStatus.NewLead
 
                 Context.Leads.Add(ld)
