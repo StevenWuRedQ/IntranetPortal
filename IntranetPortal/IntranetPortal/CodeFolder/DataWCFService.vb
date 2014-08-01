@@ -316,7 +316,8 @@ Public Class DataWCFService
                         SaveHomeOwner(bble, results(0).Owner1.TrimStart.TrimEnd, add1, "", results(0).City, results(0).State, "US", results(0).Zip, context)
                     End If
 
-                    If Not String.IsNullOrEmpty(results(0).Owner2.TrimStart.TrimEnd) Then
+                    Dim coOwner = results(0).Owner2.TrimStart.TrimEnd
+                    If Not String.IsNullOrEmpty(coOwner) AndAlso coOwner <> li.Owner Then
                         li.CoOwner = results(0).Owner2.TrimStart.TrimEnd
                         Dim add1 = String.Format("{0} {1}", results(0).Number, results(0).Street).TrimStart.TrimEnd
                         SaveHomeOwner(bble, results(0).Owner2.TrimStart.TrimEnd, add1, "", results(0).City, results(0).State, "US", results(0).Zip, context)
