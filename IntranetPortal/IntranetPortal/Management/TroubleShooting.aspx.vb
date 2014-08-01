@@ -49,6 +49,6 @@
     End Sub
 
     Protected Sub btnTestIsManager_Click(sender As Object, e As EventArgs) Handles btnTestIsManager.Click
-        lblMsg.Text = Employee.IsManager(txtName.Text).ToString
+        lblMsg.Text = Roles.IsUserInRole(txtName.Text, "SeniorAgent") 'Employee.IsManager(txtName.Text).ToString
     End Sub
 End Class

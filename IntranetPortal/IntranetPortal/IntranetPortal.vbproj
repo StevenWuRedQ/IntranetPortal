@@ -120,6 +120,7 @@
     <Reference Include="DevExpress.XtraPivotGrid.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>False</Private>
     </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraReports.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>False</Private>
     </Reference>
@@ -132,6 +133,7 @@
     <Reference Include="DevExpress.XtraTreeList.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>False</Private>
     </Reference>
+    <Reference Include="DevExtreme.WebForms.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
@@ -610,6 +612,13 @@
       <DependentUpon>PreviewFile.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Proiority\Priority.aspx.designer.vb">
+      <DependentUpon>Priority.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proiority\Priority.aspx.vb">
+      <DependentUpon>Priority.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Reports\LeaderReport.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -903,6 +912,7 @@
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
     <Content Include="PreviewFile.aspx" />
+    <Content Include="Proiority\Priority.aspx" />
     <Content Include="scripts\Chart.js" />
     <Content Include="scripts\LeadsSubMenu.js" />
     <Content Include="scripts\PortalMessager.js" />
