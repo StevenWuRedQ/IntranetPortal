@@ -272,7 +272,7 @@ i[title]:hover:after {
         color: white !important;
         background: #e63000 !important;
     }
-
+    
 .short_sale_head_tab:hover {
     background: #e63000;
 }
@@ -357,6 +357,10 @@ div.form_head {
     float: left;
 }
 
+.border_under_line {
+    border-bottom: 1px solid #dde0e7;
+}
+
 .form_div_no_float {
     float: none;
 }
@@ -439,7 +443,11 @@ input[type='checkbox'] {
     input[type="checkbox"]:checked + label:before {
         content: "\f046";
     }
-
+    .check_margin:before
+    {
+        margin-top:4px !important;
+        
+    }
 label {
     cursor: pointer;
 }
@@ -835,4 +843,259 @@ i.with_circle {
 .homeowner_info_label {
     margin-left: 17px;
     margin-top: 17px;
+}
+
+.color_gray {
+    color: #b1b2b7;
+}
+
+.color_light_green {
+    color: #95b610;
+}
+
+.color_blue {
+    color: #3993c1;
+}
+
+.filed_margin_top {
+    margin-top: 10px;
+}
+
+.homeowner_title_text {
+    height: auto;
+    margin-left: 10px;
+    margin-top: 3px;
+    line-height: 14px;
+}
+
+.homeowner_title_margin {
+    margin-left: 17px;
+}
+
+.homeowner_expanll_border {
+    border-left: 3px solid #dde0e7;
+}
+
+.more_buttom {
+    float: none;
+    color: white;
+    font-size: 14px;
+    background: #3993c1;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+    .more_buttom:hover {
+        color: white;
+    }
+
+.font_30 {
+    font-size: 30px;
+}
+
+.font_light {
+    font-weight: 300;
+}
+
+.expand_button {
+    float: right;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* collapse css*/
+.col {
+    width: 320px;
+    float: left;
+    margin-right: 32px;
+    margin-bottom: 16px;
+}
+
+.c3 {
+    margin-right: 0;
+}
+
+h1 {
+    border-bottom: 1px solid #333;
+    font-size: 32px;
+    color: #fff;
+    padding-bottom: 12px;
+    text-shadow: 0px 0px 2px rgba(0,0,0,0.6);
+}
+
+h2 {
+    margin: 10px 0;
+    color: #000;
+    font-size: 18px;
+    text-shadow: 1px 1px 2px #fff;
+}
+
+h3 {
+    margin: 0;
+   
+}
+
+    h3 a {
+        display: block;
+        padding: 10px;
+        margin: 0 !important;
+        text-decoration: none !important;
+        font-weight:900;
+        color:#b1b2b7;
+        font-size:18px;
+    }
+     h3 a:hover{
+         color:#b1b2b7;
+     }
+    h3:hover {
+       color:#b1b2b7 !important;
+    }
+
+    h3.open {
+        /*background: rgb(255,70,120);*/
+    }
+
+        h3.open a {
+            background-position: 13px -25px;
+             ;
+        }
+
+    h3 + div {
+       padding: 0 10px 10px;
+    }
+
+h2 + div,
+.example {
+    background: #fff;
+    overflow: hidden;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+/* Pre hide sections with JavaScript on
+--- */
+h3 + div {
+    display: none;
+}
+
+/* CSS3 Animation example
+--- */
+#css3-animated-example h3 + div {
+    height: 0px;
+    padding: 0px;
+    overflow: hidden;
+    background: #000;
+    display: block !important;
+    -webkit-transform: translateZ(0);
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+#css3-animated-example .content {
+    padding: 10px;
+}
+
+#css3-animated-example h3.open + div {
+    height: auto;
+    background: #aaffff;
+}
+
+/* Event example
+--- */
+pre#event-log {
+    background: #fafacc;
+    padding: 10px;
+    display: block;
+}
+
+/* Responsive design
+--- */
+@media screen and (max-width: 1056px) {
+    body {
+        width: 672px;
+    }
+
+    .c2 {
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+}
+
+.test {
+    background: #ccc;
+    padding: 10px;
+    border-bottom: 1px solid #aaa;
+}
+
+    .test + div {
+        background: #fff;
+        padding: 10px;
+    }
+
+@media only screen and (max-width: 704px), only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {
+    body {
+        width: 320px;
+    }
+
+    .c1 {
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+
+    h1 {
+        font-size: 28px;
+        text-shadow: 0px 0px 1px rgba(0,0,0,0.7);
+    }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {
+    body {
+        padding: 0 12px;
+    }
+}
+/*-----end -----*/
+/*document ui */
+.doc_list_title
+{
+   margin-top: 0px ;
+   margin-bottom: 0px; 
+   text-transform:uppercase;
+}
+.border_right
+{
+  border-right:1px solid #dde0e7;
+}
+.doc_list_checks
+{
+    width:290px;
+    padding:10px;
+    font-weight:normal;
+}
+.doc_list_checks:hover
+{
+    background:#f0f2f6;
+}
+.font_16
+{
+    font-size:16px;
+}
+.font_12
+{
+    font-size:12px;
+}
+.checks_data_text
+{
+    float:right;
+    font-size:12px;
+    margin-top:5px;
+}
+.doc_list_section
+{
+    padding-top:28px;
+    padding-left:9px;
 }
