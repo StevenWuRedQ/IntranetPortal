@@ -125,8 +125,24 @@ Partial Public Class Employee
         Return emps.Select(Function(e) e.EmployeeID).ToArray
     End Function
 
+    'Public Shared Function GetEmployeeUnderManaged(managerName As String) As List(Of Employee)
+    '    If Roles.IsUserInRole(managerName, "Admin") Then
+    '        Return GetAllEmps()
+    '    End If
+
+    'End Function
+
     Public Shared Function GetManagedEmployees(managerName As String) As String()
         Return GetManagedEmployees(managerName, True)
+    End Function
+
+    Public Shared Function GetManagedEmployeeList(managerName As String) As List(Of Employee)
+        Dim emps As New List(Of Employee)
+        Dim mgr = GetInstance(managerName)
+        emps.Add(mgr)
+        emps.AddRange(GetSubOrdinate(mgr.EmployeeID, True))
+
+        Return emps
     End Function
 
     Public Shared Function GetManagedEmployees(managerName As String, onlyActive As String) As String()
