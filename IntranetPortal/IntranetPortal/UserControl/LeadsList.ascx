@@ -779,8 +779,7 @@
                                              return;
                                          }
                                         reassignCallback.PerformCallback(tmpBBLE + '|' + item.value + '|' + item.text);
-                                        popupCtrReassignEmployeeListCtr.Hide();
-                                        gridLeads.Refresh();
+                                        popupCtrReassignEmployeeListCtr.Hide();                                       
                                         }" />
                 </dx:ASPxButton>
             </dx:PopupControlContentControl>
@@ -868,7 +867,9 @@
             </dx:PopupControlContentControl>
         </ContentCollection>
     </dx:ASPxPopupControl>
-    <dx:ASPxCallback runat="server" ClientInstanceName="reassignCallback" ID="reassignCallback" OnCallback="reassignCallback_Callback"></dx:ASPxCallback>
+    <dx:ASPxCallback runat="server" ClientInstanceName="reassignCallback" ID="reassignCallback" OnCallback="reassignCallback_Callback">
+        <ClientSideEvents CallbackComplete="function(s,e){ gridLeads.Refresh();}" />
+    </dx:ASPxCallback>
     <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
         <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
     </dx:ASPxCallback>
