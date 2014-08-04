@@ -69,6 +69,14 @@
                 ContentCallbackPanel.PerformCallback(rowKey);
 
         }
+        function Savelayout(reportName)
+        {
+            callbackPnlTemplatesClient.PerformCallback("AddReport|" + reportName);
+        }
+        function LoadLayout(reportName)
+        {
+            gridReportClient.PerformCallback("LoadLayout|" + reportName);
+        }
     </script>
 </head>
 <body style="font: 12px 'Source Sans Pro'">
@@ -78,7 +86,9 @@
         <%--angent overview ui--%>
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" FullscreenMode="true">
             <Styles>
-                <Pane Paddings-Padding="0"></Pane>
+                <Pane Paddings-Padding="0">
+                    <Paddings Padding="0px"></Paddings>
+                </Pane>
                 <Separator BackColor=" #e7e9ee"></Separator>
             </Styles>
             <Panes>
@@ -97,6 +107,7 @@
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridEmps" KeyFieldName="EmployeeID" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" ClientInstanceName="gridEmpsClient">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="Name" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                                                    <Settings AllowHeaderFilter="False"></Settings>
                                                     <DataItemTemplate>
                                                         <div class="employee_list_item_div">
                                                             <span class="font_black"><%# Eval("Name")%></span><br />
@@ -117,6 +128,10 @@
                                             <SettingsPager Mode="ShowAllRecords">
                                             </SettingsPager>
                                             <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
+
+                                            <Settings ShowColumnHeaders="False" GridLines="None"></Settings>
+
+                                            <Border BorderStyle="None"></Border>
                                         </dx:ASPxGridView>
                                     </div>
                                     <div style="margin-top: 27px; height: 290px; display: none /*background: blue*/">
@@ -198,7 +213,7 @@
                                 <PanelCollection>
                                     <dx:PanelContent>
                                         <asp:HiddenField runat="server" ID="hfEmpName" />
-                                        <dx:ASPxHiddenField runat="server" ID="hfReports" ></dx:ASPxHiddenField>
+                                        <dx:ASPxHiddenField runat="server" ID="hfReports"></dx:ASPxHiddenField>
                                         <div style="width: 1000px;" class="agent_layout_float">
                                             <%--center top--%>
                                             <div style="height: 490px; float: left; border-right: 1px solid #dde0e7;">
@@ -207,9 +222,9 @@
                                                 <div style="width: 370px; height: 490px; background: url('../images/profile_bg.png')">
                                                     <%--width:201 height:201--%>
                                                     <% If String.IsNullOrEmpty(CurrentEmployee.Picture) Then%>
-                                                    <img src="/images/user-empty-icon.png" onclick="selectImgs.ShowAtElement(this);" class="img-circle" style="margin-top: 40px; margin-left: 84px; height: 200px; width: 200px; cursor:pointer;" />
+                                                    <img src="/images/user-empty-icon.png" onclick="selectImgs.ShowAtElement(this);" class="img-circle" style="margin-top: 40px; margin-left: 84px; height: 200px; width: 200px; cursor: pointer;" />
                                                     <%Else%>
-                                                    <img src="<%=CurrentEmployee.Picture%>" onclick="selectImgs.ShowAtElement(this)" class="img-circle" style="margin-top: 40px; margin-left: 84px; height: 200px; width: 200px; cursor:pointer" />
+                                                    <img src="<%=CurrentEmployee.Picture%>" onclick="selectImgs.ShowAtElement(this)" class="img-circle" style="margin-top: 40px; margin-left: 84px; height: 200px; width: 200px; cursor: pointer" />
                                                     <%End If%>
 
                                                     <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"><%= CurrentEmployee.Name %></div>
@@ -246,17 +261,29 @@
                                                         <%----end item--%>
                                                     </div>
                                                     <%-----end info detial-----%>
+                                                    <%-----end info detial-----%>
                                                 </div>
                                             </div>
 
                                             <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" HeaderText="Select Photo" ClientInstanceName="selectImgs" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
                                                 <ContentCollection>
                                                     <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol2" runat="server">
-                                                       
                                                     </dx:PopupControlContentControl>
                                                 </ContentCollection>
                                             </dx:ASPxPopupControl>
-
+                                                 <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" HeaderText="Report Name" ClientInstanceName="SaveReportPopup" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
+                                                <ContentCollection>
+                                                    <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol1" runat="server">
+                                                        <dx:ASPxTextBox runat="server" ID="txtReportName" ClientInstanceName="txtClientReportName"></dx:ASPxTextBox>
+                                                        <dx:ASPxButton runat="server" ID="btnSave" AutoPostBack="false" Text="Add">
+                                                            <ClientSideEvents Click="function(s, e){
+                                                                SaveReportPopup.Hide();
+                                                                Savelayout(txtClientReportName.GetText());
+                                                                }" />
+                                                        </dx:ASPxButton>
+                                                    </dx:PopupControlContentControl>
+                                                </ContentCollection>
+                                            </dx:ASPxPopupControl>
                                             <%--chart UI--%>
                                             <div style="height: 490px;">
                                                 <div style="padding-top: 50px; font-size: 30px; color: #ff400d; text-align: center">In the last 6 months</div>
@@ -349,12 +376,9 @@
                                                         <span style="color: #234b60; font-weight: 900">Customized Report&nbsp;&nbsp;&nbsp;</span>
                                                         <i class="fa fa-question-circle tooltip-examples" style="color: #999ca1" title="Drag and drop items from the pane on the right side to view the customized report."></i>
                                                         <div style="float: right; padding-right: 40px; font-size: 18px;">
-                                                            <button runat="server" onserverclick="Unnamed_ServerClick" style="background-color: transparent; border: none;">
-                                                                <i class="fa fa-print  report_head_button report_head_button_padding"></i>
-                                                            </button>
-                                                            <%--<dx:ASPxButton RenderMode="Link" runat="server" ID="link" Text='<i class="fa fa-print  report_head_button report_head_button_padding"></i>' EncodeHtml="false" OnClick="Unnamed_ServerClick">
-                                                </dx:ASPxButton>--%>
-                                                            <i class="fa fa-save report_head_button report_head_button_padding"></i>
+                                                            <asp:LinkButton ID="btnExport" runat="server" OnClick="Unnamed_ServerClick" Text='<i class="fa fa-print  report_head_button report_head_button_padding"></i>'>                                                                
+                                                            </asp:LinkButton>
+                                                            <i class="fa fa-save report_head_button report_head_button_padding" onclick="SaveReportPopup.Show()"></i>                                                            
                                                             <i class="fa fa-exchange  report_head_button"></i>
                                                         </div>
                                                     </div>
@@ -471,37 +495,37 @@
                                                                 function show_report_data() {
                                                                     var report_data = $.parseJSON('<%= report_data %>');
 
-                                                        for (var i in report_data) {
-                                                            var data = report_data[i];
-                                                            var feilds_style = {
-                                                                property: "font-weight: 900; width: 230px",
-                                                                date: "width: 90px",
-                                                                call_atpt: "width: 90px",
-                                                                doorknk_atpt: "width: 100px",
-                                                                Comment: "width: 260px",
-                                                                data: "width: 125px"
-                                                            }
-                                                            var report_fileds = window.report_fileds ? window.report_fileds : $.parseJSON('<%= report_fields() %>');
-                                                            var table_cell = "";
-                                                            for (var j = 0; j < report_fileds.length; j++) {
-                                                                var fileds = report_fileds[j]
-                                                                table_cell += '<td class="report_content" style="' + feilds_style[fileds] + ';">' + data[fileds] + '</td>\n'
-                                                            }
-                                                            // <td class="report_content" style="font-weight: 900; width: 230px;">' + data.property + '</td>\
-                                                            //<td class="report_content" style="width: 90px">' + data.date + '</td>\
-                                                            //<td class="report_content" style="width: 90px">' + data.call_atpt + '</td>\
-                                                            //<td class="report_content" style="width: 100px">' + data.doorknk_atpt + '</td>\
-                                                            //<td class="report_content" style="width: 260px">' + data.commet + '</td>\
-                                                            //<td class="report_content" style="width: 125px">' + data.data + '</td>\
-                                                            $('#custom_report_table').append('<tr>\
+                                                                    for (var i in report_data) {
+                                                                        var data = report_data[i];
+                                                                        var feilds_style = {
+                                                                            property: "font-weight: 900; width: 230px",
+                                                                            date: "width: 90px",
+                                                                            call_atpt: "width: 90px",
+                                                                            doorknk_atpt: "width: 100px",
+                                                                            Comment: "width: 260px",
+                                                                            data: "width: 125px"
+                                                                        }
+                                                                        var report_fileds = window.report_fileds ? window.report_fileds : $.parseJSON('<%= report_fields() %>');
+                                                                        var table_cell = "";
+                                                                        for (var j = 0; j < report_fileds.length; j++) {
+                                                                            var fileds = report_fileds[j]
+                                                                            table_cell += '<td class="report_content" style="' + feilds_style[fileds] + ';">' + data[fileds] + '</td>\n'
+                                                                        }
+                                                                        // <td class="report_content" style="font-weight: 900; width: 230px;">' + data.property + '</td>\
+                                                                        //<td class="report_content" style="width: 90px">' + data.date + '</td>\
+                                                                        //<td class="report_content" style="width: 90px">' + data.call_atpt + '</td>\
+                                                                        //<td class="report_content" style="width: 100px">' + data.doorknk_atpt + '</td>\
+                                                                        //<td class="report_content" style="width: 260px">' + data.commet + '</td>\
+                                                                        //<td class="report_content" style="width: 125px">' + data.data + '</td>\
+                                                                        $('#custom_report_table').append('<tr>\
                                             '+ table_cell + '\
                                             <td class="report_content" style=""><i class="fa fa-list-alt report_gird_icon" style="float:right;" onclick="custome_report_itemlick(' + i + ')"></i></td>/n\
                                             <tr>\
                                             ');
-                                                        }
-                                                    }
-                                                    change_table_thead();
-                                                    show_report_data();
+                                                                    }
+                                                                }
+                                                                change_table_thead();
+                                                                show_report_data();
 
                                                             </script>
                                                         </div>
@@ -524,6 +548,22 @@
                         <dx:SplitterContentControl>
                             <div style="width: 310px; background: #f5f5f5" class="agent_layout_float">
                                 <div style="margin-left: 30px; margin-top: 30px; margin-right: 20px; font-size: 24px; float: none">
+                                    <span style="color: #234b60">Templates</span><i class="fa fa-question-circle tooltip-examples" title="Drag and drop items from the pane on the right side to view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>                                
+                                        <dx:ASPxCallbackPanel runat="server" ID="callbackPnlTemplates" ClientInstanceName="callbackPnlTemplatesClient" OnCallback="callbackPnlTemplates_Callback">
+                                            <PanelCollection>
+                                                <dx:PanelContent>
+                                                    <% If Not GetTemplates() Is Nothing Then%>
+                                                    <ul>
+                                                        <% For Each key In GetTemplates().Keys%>
+                                                        <li><span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor:pointer"><% = key%></span></li>
+                                                        <% Next%>
+                                                    </ul>
+                                                    <% Else%>
+                                                    No template saved.
+                                                    <% End If%>
+                                                </dx:PanelContent>
+                                            </PanelCollection>
+                                        </dx:ASPxCallbackPanel>
                                     <span style="color: #234b60">Custom Fields</span><i class="fa fa-question-circle tooltip-examples" title="Drag and drop items from the pane on the right side to view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
                                     <div style="margin-top: 25px">
                                         <script type="text/javascript">
@@ -534,7 +574,10 @@
                                         </script>
                                         <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" Width="100%">
                                             <Items>
+                                                <dx:ListEditItem Text="BBLE" Value="BBLE" Selected="true" />
                                                 <dx:ListEditItem Text="Property Address" Value="PropertyAddress" Selected="true" />
+                                                <dx:ListEditItem Text="Call Attemps" Value="CallAttemps" />
+                                                <dx:ListEditItem Text="Doorknock Attemps" Value="DoorKnockAttemps" />
                                                 <dx:ListEditItem Text="Status" Value="Status" />
                                                 <dx:ListEditItem Text="Sale Date" Value="SaleDate" />
                                                 <dx:ListEditItem Text="Tax Class" Value="TaxClass" />
@@ -554,7 +597,6 @@
                                             </Items>
                                             <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
                                         </dx:ASPxCheckBoxList>
-
 
                                         <div class="draggable_field" id="draggable_field8">
                                             <i class="fa fa-long-arrow-left draggable_icon"></i>

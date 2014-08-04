@@ -13,6 +13,7 @@
         <dx:ASPxButton runat="server" ID="btnLoad" Text="Load"></dx:ASPxButton>
         <dx:ASPxHyperLink runat="server" ID="linkInfo" Text="View Lead"></dx:ASPxHyperLink><br />
         <dx:ASPxButton runat="server" ID="btnGetphone" Text="Initial Phones"></dx:ASPxButton>
+        <asp:Button ID="Button1" runat="server" Text="Button" />
         <table>
             <tr>
                 <td>

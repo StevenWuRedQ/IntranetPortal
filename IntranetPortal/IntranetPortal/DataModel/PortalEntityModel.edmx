@@ -390,6 +390,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="CreateBy" Type="nvarchar(max)" />
           <Property Name="LogID" Type="int" />
         </EntityType>
+        <Function Name="UpdateEmployeeName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OldName" Type="nvarchar" Mode="In" />
+          <Parameter Name="NewName" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="IntranetPortalModelStoreContainer">
           <EntitySet Name="Agent_Properties" EntityType="Self.Agent_Properties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APIOrders" EntityType="Self.APIOrders" Schema="dbo" store:Type="Tables" />
@@ -466,6 +470,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="SharedLeads" EntityType="IntranetPortalModel.SharedLead" />
           <EntitySet Name="HomeOwnerPhones" EntityType="IntranetPortalModel.HomeOwnerPhone" />
           <EntitySet Name="UserProfileDatas" EntityType="IntranetPortalModel.UserProfileData" />
+          <FunctionImport Name="UpdateEmployeeName">
+            <Parameter Name="OldName" Mode="In" Type="String" />
+            <Parameter Name="NewName" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1329,6 +1337,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdateEmployeeName" FunctionName="IntranetPortalModel.Store.UpdateEmployeeName" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

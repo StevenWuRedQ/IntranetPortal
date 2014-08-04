@@ -86,6 +86,51 @@ Partial Public Class AgentOverview
     Protected WithEvents Popupcontrolcontentcontrol2 As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
 
     '''<summary>
+    '''ASPxPopupControl1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''Popupcontrolcontentcontrol1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Popupcontrolcontentcontrol1 As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+
+    '''<summary>
+    '''txtReportName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtReportName As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''btnSave control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSave As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''btnExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''gridReport control.
     '''</summary>
     '''<remarks>
@@ -102,6 +147,15 @@ Partial Public Class AgentOverview
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+
+    '''<summary>
+    '''callbackPnlTemplates control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents callbackPnlTemplates As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
 
     '''<summary>
     '''chkFields control.

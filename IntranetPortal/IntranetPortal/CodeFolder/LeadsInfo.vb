@@ -13,16 +13,21 @@
                 Return CType(Lead.Status.Value, LeadStatus).ToString
             End If
 
-            'Dim ld = IntranetPortal.Lead.GetInstance(BBLE)
-            'If ld IsNot Nothing AndAlso ld.Status.HasValue Then
-            '    Return CType(ld.Status, LeadStatus).ToString
-            'End If
-
             Return ""
         End Get
     End Property
 
+    Public ReadOnly Property CallAttemps As Integer
+        Get
+            Return Lead.LeadsActivityLogs.Where(Function(log) log.ActionType IsNot Nothing AndAlso log.ActionType = LeadsActivityLog.EnumActionType.CallOwner).Count
+        End Get
+    End Property
 
+    Public ReadOnly Property DoorKnockAttemps As Integer
+        Get
+            Return Lead.LeadsActivityLogs.Where(Function(log) log.ActionType IsNot Nothing AndAlso log.ActionType = LeadsActivityLog.EnumActionType.DoorKnock).Count
+        End Get
+    End Property
 
     Public ReadOnly Property HasOwnerInfo As Boolean
         Get

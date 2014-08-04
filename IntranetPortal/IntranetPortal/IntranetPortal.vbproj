@@ -640,6 +640,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Settings.vb" />
     <Compile Include="ShortSale\ShortSale.aspx.designer.vb">
       <DependentUpon>ShortSale.aspx</DependentUpon>
     </Compile>

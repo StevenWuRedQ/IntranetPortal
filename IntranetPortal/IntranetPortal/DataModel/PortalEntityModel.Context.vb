@@ -10,6 +10,8 @@
 Imports System
 Imports System.Data.Entity
 Imports System.Data.Entity.Infrastructure
+Imports System.Data.Entity.Core.Objects
+Imports System.Linq
 
 Partial Public Class Entities
     Inherits DbContext
@@ -44,5 +46,13 @@ Partial Public Class Entities
     Public Overridable Property SharedLeads() As DbSet(Of SharedLead)
     Public Overridable Property HomeOwnerPhones() As DbSet(Of HomeOwnerPhone)
     Public Overridable Property UserProfileDatas() As DbSet(Of UserProfileData)
+
+    Public Overridable Function UpdateEmployeeName(oldName As String, newName As String) As Integer
+        Dim oldNameParameter As ObjectParameter = If(oldName IsNot Nothing, New ObjectParameter("OldName", oldName), New ObjectParameter("OldName", GetType(String)))
+
+        Dim newNameParameter As ObjectParameter = If(newName IsNot Nothing, New ObjectParameter("NewName", newName), New ObjectParameter("NewName", GetType(String)))
+
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("UpdateEmployeeName", oldNameParameter, newNameParameter)
+    End Function
 
 End Class

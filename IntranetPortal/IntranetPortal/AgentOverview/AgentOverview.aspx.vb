@@ -10,14 +10,25 @@ Public Class AgentOverview
     Public portalDataContext As New Entities
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not IsPostBack Then
-            gridEmps.DataBind()
+        If String.IsNullOrEmpty(hfEmpName.Value) Then
             CurrentEmployee = Employee.GetInstance(User.Identity.Name)
             hfEmpName.Value = CurrentEmployee.Name
-            gridReport.DataBind()
-            report_data = report_data_f()
+        Else
+            CurrentEmployee = Employee.GetInstance(hfEmpName.Value)
         End If
+
+        If Not IsPostBack Then
+            gridEmps.DataBind()
+            gridReport.DataBind()
+        End If
+
+        report_data = report_data_f()
     End Sub
+
+    Function GetTemplates() As StringDictionary
+        Dim up = Employee.GetProfile(User.Identity.Name)
+        Return up.ReportTemplates
+    End Function
 
     Sub BindEmp()
         gridEmps.DataSource = portalDataContext.Employees.ToList
@@ -160,5 +171,27 @@ Public Class AgentOverview
                 gridReport.Columns.Add(gridCol)
             Next
         End If
+    End Sub    
+    
+
+    Protected Sub callbackPnlTemplates_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        If e.Parameter.StartsWith("AddReport") Then
+            Dim name = e.Parameter.Split("|")(1)
+            Dim up = Employee.GetProfile(Page.User.Identity.Name)
+
+            If up.ReportTemplates Is Nothing Then
+                up.ReportTemplates = New StringDictionary
+            End If
+
+            If up.ReportTemplates.ContainsKey(name) Then
+                up.ReportTemplates(name) = gridReport.SaveClientLayout
+            Else
+                up.ReportTemplates.Add(name, gridReport.SaveClientLayout)
+            End If
+
+            Employee.SaveProfile(User.Identity.Name, up)
+        End If
+
     End Sub
+
 End Class
