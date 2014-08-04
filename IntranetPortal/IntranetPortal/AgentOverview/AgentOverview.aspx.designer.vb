@@ -50,22 +50,13 @@ Partial Public Class AgentOverview
     Protected WithEvents contentCallback As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
 
     '''<summary>
-    '''hfEmpName control.
+    '''contentSplitter control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hfEmpName As Global.System.Web.UI.WebControls.HiddenField
-
-    '''<summary>
-    '''hfReports control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents hfReports As Global.DevExpress.Web.ASPxHiddenField.ASPxHiddenField
+    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
 
     '''<summary>
     '''ASPxPopupControl2 control.
@@ -147,6 +138,24 @@ Partial Public Class AgentOverview
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+
+    '''<summary>
+    '''hfEmpName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfEmpName As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''hfReports control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfReports As Global.DevExpress.Web.ASPxHiddenField.ASPxHiddenField
 
     '''<summary>
     '''callbackPnlTemplates control.

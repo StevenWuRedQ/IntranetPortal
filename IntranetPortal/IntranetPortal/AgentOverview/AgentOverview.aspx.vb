@@ -31,20 +31,30 @@ Public Class AgentOverview
     End Function
 
     Sub BindEmp()
-        gridEmps.DataSource = portalDataContext.Employees.ToList
+        If User.IsInRole("Admin") Then
+            gridEmps.DataSource = portalDataContext.Employees.OrderBy(Function(em) em.Name).ToList
+            Return
+        End If
+
+        Dim emps As New List(Of Employee)
+
+        Dim offices = "Bronx,Patchen,Queens,Rockaway"
+
+        For Each office In offices.Split(",")
+            If User.IsInRole("OfficeManager-" & office) Then
+                emps.AddRange(Employee.GetDeptUsersList(office))
+            End If
+        Next
+
+        If Employee.HasSubordinates(User.Identity.Name) Then
+            emps.AddRange(Employee.GetManagedEmployeeList(User.Identity.Name))
+        End If
+
+        gridEmps.DataSource = emps.Distinct.OrderBy(Function(em) em.Name).ToList
     End Sub
 
     Sub BindGridReport()
         Dim name = hfEmpName.Value
-
-        'If chkFields.SelectedValues.Count > 1 Then
-        '    gridReport.Columns.Clear()
-        '    For Each item As String In chkFields.SelectedValues
-        '        Dim gridCol = New GridViewDataColumn
-        '        gridCol.FieldName = item
-        '        gridReport.Columns.Add(gridCol)
-        '    Next
-        'End If
 
         Dim reports = (From li In portalDataContext.LeadsInfoes Join
                                    ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
@@ -52,23 +62,6 @@ Public Class AgentOverview
                                    Select li).ToList
         gridReport.DataSource = reports
     End Sub
-
-    'Function CreateNewStatement(fields As String) As Func(Of LeadsInfo, Object)
-    '    Dim xParameter As ParameterExpression = Expression.Parameter(GetType(LeadsInfo), "o")
-    '    Dim sourceProperties = fields.ToDictionary(Function(nam) nam, Function(nam) GetType(LeadsInfo).GetProperty(nam))
-
-    '    Dim xNew = Expression.[New]((GetType(LeadsInfo)))
-
-    '    Dim bindings = fields.Split(",").Select(Function(o) o.Trim).Select(Function(o)
-    '                                                                           Dim mi = GetType(LeadsInfo).GetProperty(o)
-    '                                                                           Dim xOriginal = Expression.Property(xParameter, mi)
-    '                                                                           Return Expression.Bind(mi, xOriginal)
-    '                                                                       End Function)
-    '    Dim xInit = Expression.MemberInit(xNew, bindings)
-    '    Dim lambda = Expression.Lambda(xInit, xParameter)
-
-    '    Return lambda.Compile()
-    'End Function
 
     'retrun the report data fields
     Function report_fields() As String
@@ -136,6 +129,25 @@ Public Class AgentOverview
     End Sub
 
     Protected Sub gridReport_CustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs)
+        If e.Parameters.StartsWith("LoadLayout") Then
+            Dim report = e.Parameters.Split("|")(1)
+            Dim up = Employee.GetProfile(User.Identity.Name)
+            gridReport.LoadClientLayout(up.ReportTemplates(report))
+        End If
+
+        If e.Parameters.StartsWith("FieldChange") Then
+            If chkFields.SelectedValues.Count > 0 Then
+                For Each item As ListEditItem In chkFields.Items
+                    Dim gridCol As GridViewDataColumn = gridReport.Columns(item.Value)
+                    If item.Selected Then
+                        gridCol.Visible = True
+                    Else
+                        gridCol.Visible = False
+                    End If
+                Next
+            End If
+        End If
+
         gridReport.DataBind()
     End Sub
 
@@ -152,12 +164,7 @@ Public Class AgentOverview
     End Sub
 
     Protected Sub gridReport_Load(sender As Object, e As EventArgs)
-        If chkFields.SelectedValues.Count > 0 Then
-            For Each item As String In chkFields.SelectedValues
-                Dim gridCol = gridReport.Columns(item)
-                gridCol.Visible = True
-            Next
-        End If
+       
     End Sub
 
     Protected Sub gridReport_Init(sender As Object, e As EventArgs)
@@ -167,11 +174,16 @@ Public Class AgentOverview
             For Each item As ListEditItem In chkFields.Items
                 Dim gridCol = New GridViewDataColumn
                 gridCol.FieldName = item.Value
-                gridCol.Visible = False
+                If item.Selected Then
+                    gridCol.Visible = True
+                Else
+                    gridCol.Visible = False
+                End If
+
                 gridReport.Columns.Add(gridCol)
             Next
         End If
-    End Sub    
+    End Sub
     
 
     Protected Sub callbackPnlTemplates_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
@@ -192,6 +204,20 @@ Public Class AgentOverview
             Employee.SaveProfile(User.Identity.Name, up)
         End If
 
+        If e.Parameter.StartsWith("RemoveReport") Then
+            Dim name = e.Parameter.Replace("RemoveReport|", "")
+            Dim up = Employee.GetProfile(Page.User.Identity.Name)
+
+            If up.ReportTemplates Is Nothing Then
+                Return
+            End If
+
+            If up.ReportTemplates.ContainsKey(name) Then
+                up.ReportTemplates.Remove(name)
+            End If
+
+            Employee.SaveProfile(User.Identity.Name, up)
+        End If
     End Sub
 
 End Class
