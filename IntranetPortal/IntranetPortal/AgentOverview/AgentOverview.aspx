@@ -61,18 +61,17 @@
                 DoCallback();
                 postponedCallbackRequired = false;
             }
-
-            alert(lineChartData.labels[1]);
+                        
             //Show chart
-            legend(document.getElementById("lineLegend"), lineChartData);
+            ShowChart();
         }
 
         function DoCallback() {
             var rowKey = gridEmpsClient.GetRowKey(gridEmpsClient.GetFocusedRowIndex());
             if (rowKey != null)
                 ContentCallbackPanel.PerformCallback(rowKey);
-                        
-            
+
+
         }
         function Savelayout(reportName) {
             callbackPnlTemplatesClient.PerformCallback("AddReport|" + reportName);
@@ -369,15 +368,20 @@
                                                                                     });
                                                                                 }
 
-                                                                                var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData, {
-                                                                                    bezierCurve: false,
-                                                                                    datasetFill: false,
-                                                                                    pointDotRadius: 6,
-                                                                                    //legendTemplate: "<ul><li><span style=\"background-color:red\">111222</span></li><li><span style=\"background-color:red\">111222</span></li><li><span style=\"background-color:red\">111222</span></li></ul>"
-                                                                                    showTooltip: true,
-                                                                                    tooltipTemplate: "<span>tooltips</span>"
-                                                                                });
-                                                                                legend(document.getElementById("lineLegend"), lineChartData);
+                                                                                function ShowChart() {
+                                                                                    var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData, {
+                                                                                        bezierCurve: false,
+                                                                                        datasetFill: false,
+                                                                                        pointDotRadius: 6,
+                                                                                        //legendTemplate: "<ul><li><span style=\"background-color:red\">111222</span></li><li><span style=\"background-color:red\">111222</span></li><li><span style=\"background-color:red\">111222</span></li></ul>"
+                                                                                        showTooltip: true,
+                                                                                        tooltipTemplate: "<span>tooltips</span>"
+                                                                                    });
+
+                                                                                    legend(document.getElementById("lineLegend"), lineChartData);
+                                                                                }
+
+                                                                                ShowChart();
                                                                             </script>
                                                                         </div>
 
@@ -393,7 +397,7 @@
                                                     <ContentCollection>
                                                         <dx:SplitterContentControl runat="server">
                                                             <%--report UI--%>
-                                                            <div style="margin-top:10px;">
+                                                            <div style="margin-top: 10px;">
                                                                 <%--tool head--%>
                                                                 <div style="margin-left: 40px; margin-right: 40px;">
                                                                     <%--head--%>
@@ -496,29 +500,29 @@
                                                                                     $('#custom_report_table tbody').remove();
 
                                                                                     var report_fileds = window.report_fileds ? window.report_fileds : $.parseJSON('<%= report_fields() %>');
-                                                                    var headstr = "";
-                                                                    var feilds_style = {
-                                                                        property: "font-weight: 900; width: 230px",
-                                                                        date: "width: 90px",
-                                                                        call_atpt: "width: 90px",
-                                                                        doorknk_atpt: "width: 100px",
-                                                                        Comment: "width: 260px",
-                                                                        data: "width: 125px"
-                                                                    }
-                                                                    headstr += '<thead>  <tr>';
-                                                                    for (var i in report_fileds) {
-                                                                        //&nbsp;
-                                                                        var title = report_fileds[i].toString().replace("_", " ");
-                                                                        headstr += '<th class="report_head" >' + report_fileds[i].toString().replace("_", " "); + '</th>';
-                                                                    }
-                                                                    headstr += '</tr></thead>';
+                                                                                    var headstr = "";
+                                                                                    var feilds_style = {
+                                                                                        property: "font-weight: 900; width: 230px",
+                                                                                        date: "width: 90px",
+                                                                                        call_atpt: "width: 90px",
+                                                                                        doorknk_atpt: "width: 100px",
+                                                                                        Comment: "width: 260px",
+                                                                                        data: "width: 125px"
+                                                                                    }
+                                                                                    headstr += '<thead>  <tr>';
+                                                                                    for (var i in report_fileds) {
+                                                                                        //&nbsp;
+                                                                                        var title = report_fileds[i].toString().replace("_", " ");
+                                                                                        headstr += '<th class="report_head" >' + report_fileds[i].toString().replace("_", " "); + '</th>';
+                                                                                    }
+                                                                                    headstr += '</tr></thead>';
 
-                                                                    $('#custom_report_table_head').append(headstr);
-                                                                    $('#custom_report_table').append(' <tbody id="custom_report_tbody">\n</tbody>');
-                                                                }
+                                                                                    $('#custom_report_table_head').append(headstr);
+                                                                                    $('#custom_report_table').append(' <tbody id="custom_report_tbody">\n</tbody>');
+                                                                                }
 
-                                                                function show_report_data() {
-                                                                    var report_data = $.parseJSON('<%= report_data_f %>');
+                                                                                function show_report_data() {
+                                                                                    var report_data = $.parseJSON('<%= report_data_f %>');
 
                                                                     for (var i in report_data) {
                                                                         var data = report_data[i];
