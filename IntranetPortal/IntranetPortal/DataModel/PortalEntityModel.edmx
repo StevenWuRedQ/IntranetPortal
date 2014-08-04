@@ -134,6 +134,7 @@
           <Property Name="EmployeeID" Type="int" Nullable="false" />
           <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
           <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActionType" Type="int" />
           <Property Name="ActivityDate" Type="datetime" />
           <Property Name="Comments" Type="nvarchar(max)" />
         </EntityType>
@@ -502,6 +503,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Lead" Relationship="IntranetPortalModel.LeadsActivityLogLead" FromRole="LeadsActivityLog" ToRole="Lead" />
           <NavigationProperty Name="Employee" Relationship="IntranetPortalModel.EmployeeLeadsActivityLog" FromRole="LeadsActivityLog" ToRole="Employee" />
+          <Property Name="ActionType" Type="Int32" />
         </EntityType>
         <EntityType Name="Lead">
           <Key>
@@ -951,6 +953,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySetMapping Name="LeadsActivityLogs">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadsActivityLog">
               <MappingFragment StoreEntitySet="LeadsActivityLog">
+                <ScalarProperty Name="ActionType" ColumnName="ActionType" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />

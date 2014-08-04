@@ -62,7 +62,11 @@
                     Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
                     Dim empName = HttpContext.Current.User.Identity.Name
                     Dim comments = String.Format("Change status from {0} to {1}.", CType(originateStatus, LeadStatus).ToString, status.ToString)
-                    LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName)
+                    If status = LeadStatus.DoorKnocks Then
+                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName, LeadsActivityLog.EnumActionType.DoorKnock)
+                    Else
+                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName)
+                    End If
                 End If
 
                 'copy to user task list

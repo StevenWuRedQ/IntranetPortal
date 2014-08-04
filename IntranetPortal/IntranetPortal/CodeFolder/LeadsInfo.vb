@@ -22,6 +22,8 @@
         End Get
     End Property
 
+
+
     Public ReadOnly Property HasOwnerInfo As Boolean
         Get
             Using context As New Entities

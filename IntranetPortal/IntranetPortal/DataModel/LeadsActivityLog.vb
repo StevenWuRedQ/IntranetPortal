@@ -18,6 +18,7 @@ Partial Public Class LeadsActivityLog
     Public Property EmployeeName As String
     Public Property ActivityDate As Nullable(Of Date)
     Public Property Comments As String
+    Public Property ActionType As Nullable(Of Integer)
 
     Public Overridable Property Lead As Lead
     Public Overridable Property Employee As Employee

@@ -347,7 +347,7 @@ Public Class LeadsInfo1
         If e.Parameter.StartsWith("CallPhone") Then
             Dim phoneNo = e.Parameter.Split("|")(1)
             Dim comments = String.Format("{0} did phone ({1}) call.", Page.User.Identity.Name, phoneNo)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.CallOwner)
             BindActivityLog(hfBBLE.Value)
             needRefesh = True
         End If
@@ -355,7 +355,6 @@ Public Class LeadsInfo1
         If e.Parameter.StartsWith("BadPhone") Then
             Dim phoneNo = e.Parameter.Split("|")(1)
             UpdateContact(OwnerContact.ContactStatus.Wrong, phoneNo, OwnerContact.OwnerContactType.Phone)
-
         End If
 
         If e.Parameter.StartsWith("RightPhone") Then
