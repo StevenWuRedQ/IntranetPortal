@@ -272,7 +272,7 @@ i[title]:hover:after {
         color: white !important;
         background: #e63000 !important;
     }
-    
+
 .short_sale_head_tab:hover {
     background: #e63000;
 }
@@ -443,11 +443,11 @@ input[type='checkbox'] {
     input[type="checkbox"]:checked + label:before {
         content: "\f046";
     }
-    .check_margin:before
-    {
-        margin-top:4px !important;
-        
-    }
+
+.check_margin:before {
+    margin-top: 4px !important;
+}
+
 label {
     cursor: pointer;
 }
@@ -663,7 +663,10 @@ i.with_circle {
     width: 255px;
     height: 45px;
 }
-
+.employee_list_item_no_broder
+{
+    border:0px;
+}
     .employee_list_item:hover {
         background: #ff400d;
         color: white;
@@ -932,7 +935,6 @@ h2 {
 
 h3 {
     margin: 0;
-   
 }
 
     h3 a {
@@ -940,15 +942,17 @@ h3 {
         padding: 10px;
         margin: 0 !important;
         text-decoration: none !important;
-        font-weight:900;
-        color:#b1b2b7;
-        font-size:18px;
+        font-weight: 900;
+        color: #b1b2b7;
+        font-size: 18px;
     }
-     h3 a:hover{
-         color:#b1b2b7;
-     }
+
+        h3 a:hover {
+            color: #b1b2b7;
+        }
+
     h3:hover {
-       color:#b1b2b7 !important;
+        color: #b1b2b7 !important;
     }
 
     h3.open {
@@ -961,7 +965,7 @@ h3 {
         }
 
     h3 + div {
-       padding: 0 10px 10px;
+        padding: 0 10px 10px;
     }
 
 h2 + div,
@@ -1060,42 +1064,47 @@ pre#event-log {
 }
 /*-----end -----*/
 /*document ui */
-.doc_list_title
-{
-   margin-top: 0px ;
-   margin-bottom: 0px; 
-   text-transform:uppercase;
+.doc_list_title {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-transform: uppercase;
 }
-.border_right
-{
-  border-right:1px solid #dde0e7;
+
+.border_right {
+    border-right: 1px solid #dde0e7;
 }
-.doc_list_checks
-{
-    width:290px;
-    padding:10px;
-    font-weight:normal;
+
+.doc_list_checks {
+    width: 290px;
+    padding: 10px;
+    font-weight: normal;
 }
-.doc_list_checks:hover
-{
-    background:#f0f2f6;
+
+    .doc_list_checks:hover {
+        background: #f0f2f6;
+    }
+
+.font_16 {
+    font-size: 16px;
 }
-.font_16
-{
-    font-size:16px;
+
+.font_12 {
+    font-size: 12px;
 }
-.font_12
-{
-    font-size:12px;
+
+.checks_data_text {
+    float: right;
+    font-size: 12px;
+    margin-top: 5px;
 }
-.checks_data_text
-{
-    float:right;
-    font-size:12px;
-    margin-top:5px;
+
+.doc_list_section {
+    padding-top: 28px;
+    padding-left: 9px;
 }
-.doc_list_section
-{
-    padding-top:28px;
-    padding-left:9px;
+
+.icon_right_s {
+    float: right;
+    margin-top: 10px;
+    
 }

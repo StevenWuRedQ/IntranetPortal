@@ -50,6 +50,8 @@
                                   <dx:TreeViewNode Text="Agent Overview" Image-Url="/images/assigned.png" NavigateUrl="AgentOverview/AgentOverview.aspx" Name="agentOverviewNode" />
                                  <%--add priority by steven--%>
                                  <dx:TreeViewNode Text="Priority" Image-Url="/images/priority_icon.png" NavigateUrl="Proiority/Priority.aspx" Name="priorityNode" />
+                                <%--add short sale case by steven--%>
+                                <dx:TreeViewNode Text="Cases" Image-Url="images/icon_short_sale.png" NavigateUrl="ShortSale/ShortSale.aspx" Name="shortSaleNode" />
                                 <dx:TreeViewNode Text="Search" Image-Url="/images/Search.png" NavigateUrl="MgrViewLeads.aspx?c=Search"></dx:TreeViewNode>
                             </Nodes>
                         </dx:TreeViewNode>
