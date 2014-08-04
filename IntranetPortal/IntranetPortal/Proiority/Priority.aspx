@@ -504,8 +504,8 @@
                             <%--id="home_owner_content" scorll bar some issue--%>
                             <%--style="overflow: auto;"--%>
 
-                            <div class="clearfix">
-                                <div style="width: 330px; border-right: 1px solid #dde0e7; float: left; height: 820px">
+                            <div class="clearfix" style="height: 800px; overflow: auto;" id="home_owner_content">
+                                <div style="width: 330px; border-right: 1px solid #dde0e7; float: left;">
                                     <%--left side--%>
                                     <div class="homeowner_content clearfix">
                                         <div style="font-size: 30px; color: #2e2f31">
@@ -558,33 +558,199 @@
                                                 &nbsp;
                                             </div>
                                             <%-----end-----%>
+                                        </div>
 
-                                            <%--1st section info--%>
+                                        <%--1st section info--%>
+                                        <div style="margin-top: 270px;">
+                                            <div class="form_head homeowner_section_margin">
+                                                <span>Best Phone Numbers &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color"></i>
+                                            </div>
                                             <div>
-                                                <div class="form_head homeowner_section_margin">
-                                                    <span>Best Phone Numbers &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color"></i>
+                                                <div class="clearfix homeowner_info_label">
+                                                    <div>
+                                                        <div class="color_gray clearfix">
+                                                            <i class="fa fa-phone homeowner_info_icon"></i>
+                                                            <div class="form_div_node homeowner_info_text text_line_through">
+                                                                <div>
+                                                                    (347) 233-4243
+                                                                </div>
+                                                                <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font">
+                                                                    (ET) ActiveLandLine (100%)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="color_light_green filed_margin_top clearfix">
+                                                            <i class="fa fa-phone homeowner_info_icon"></i>
+                                                            <div class="form_div_node homeowner_info_text">
+                                                                <div>
+                                                                    (347) 233-4243
+                                                                </div>
+                                                                <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font">
+                                                                    (ET) ActiveLandLine (100%)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="color_gray filed_margin_top clearfix">
+                                                            <i class="fa fa-phone homeowner_info_icon"></i>
+                                                            <div class="form_div_node homeowner_info_text">
+                                                                <div class="color_blue">
+                                                                    (347) 233-4243
+                                                                </div>
+                                                                <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
+                                                                    (ET) Mobile (82%)
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
                                                 </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <%-----end -------%>
+
+                                        <%-----2nd section info--%>
+                                        <div>
+                                            <div class="form_head homeowner_section_margin">
+                                                <span>Best Addresses &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color"></i>
+                                            </div>
+                                            <div>
+                                                <div class="clearfix homeowner_info_label">
+                                                    <div>
+                                                        <div class="color_gray clearfix">
+                                                            <i class="fa fa-map-marker homeowner_info_icon"></i>
+                                                            <div class="form_div_node homeowner_info_text">
+                                                                <div class="color_blue">
+                                                                    9411 114TH ST, SOUTH RICHMOND HILL, NY 11419
+                                                                   
+                                                                </div>
+                                                                <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
+                                                                    04/1992 to 06/13/2014
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <%----end-----%>
+
+                                        <%-----3rd section info--%>
+                                        <div>
+                                            <div class="form_head homeowner_section_margin">
+                                                <span>Best emails &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color"></i>
+                                            </div>
+                                            <div>
+                                                <div class="clearfix homeowner_info_label">
+                                                    <div>
+                                                        <div class="color_gray clearfix">
+                                                            <i class="fa fa-envelope homeowner_info_icon"></i>
+                                                            <div class="form_div_node homeowner_info_text homeowner_info_bottom">
+                                                                <div class="color_blue">
+                                                                    cistool@igateway.net
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="color_gray clearfix">
+                                                            <i class="fa fa-envelope homeowner_info_icon"></i>
+                                                            <div class="form_div_node homeowner_info_text homeowner_info_bottom">
+                                                                <div class="color_blue">
+                                                                    cistool@hotmail.com
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="color_gray clearfix">
+                                                            <i class="fa fa-envelope homeowner_info_icon"></i>
+                                                            <div class="form_div_node homeowner_info_text homeowner_info_bottom">
+                                                                <div class="color_blue">
+                                                                    bkang@cis-inc.net
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%----end-----%>
+
+                                        <%-----4th section info--%>
+                                        <div>
+                                            <div class="form_head homeowner_section_margin">
+                                                <span>Best emails &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color"></i>&nbsp;
+                                                    <i class="fa fa-stethoscope homeowner_plus_color"></i>
+                                            </div>
+                                            <div>
+                                                <div class="clearfix homeowner_info_label">
+                                                    <div>
+                                                        <div class="color_gray clearfix">
+                                                            <i class="fa fa-envelope homeowner_info_icon"></i>
+                                                            <div class="form_div_node homeowner_info_text homeowner_info_bottom">
+                                                                <div class="color_blue">
+                                                                    cistool@igateway.net
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="color_gray clearfix">
+                                                            <i class="fa fa-envelope homeowner_info_icon"></i>
+                                                            <div class="form_div_node homeowner_info_text homeowner_info_bottom">
+                                                                <div class="color_blue">
+                                                                    cistool@hotmail.com
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="color_gray clearfix">
+                                                            <i class="fa fa-envelope homeowner_info_icon"></i>
+                                                            <div class="form_div_node homeowner_info_text homeowner_info_bottom">
+                                                                <div class="color_blue">
+                                                                    bkang@cis-inc.net
+                                                                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%----end-----%>
+
+                                        <%-----5th section info--%>
+                                        <div>
+                                            <div class="form_head homeowner_section_margin">
+                                                <span>First Degree Relatives &nbsp;</span>
+                                            </div>
+                                            <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
+                                                <i class="fa fa-chain color_gray homeowner_info_icon"></i>
+                                                <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
+                                                    <span class="font_black color_balck">Zhang, Yan Fang</span><br />
+                                                    <span style="font-size: 14px">Age <span class="color_balck">44</span></span>
+                                                </div>
+
+                                            </div>
+                                            <div class="homeowner_expanll_border" style="margin-left: 20px">
                                                 <div>
-                                                    <div class="clearfix homeowner_info_label">
+                                                    <div class="clearfix homeowner_info_label" style="margin-left: 17px;">
                                                         <div>
                                                             <div class="color_gray clearfix">
                                                                 <i class="fa fa-phone homeowner_info_icon"></i>
-                                                                <div class="form_div_node homeowner_info_text text_line_through">
-                                                                    <div>
+                                                                <div class="form_div_node homeowner_info_text ">
+                                                                    <div class="color_blue">
                                                                         (347) 233-4243
                                                                     </div>
-                                                                    <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font">
-                                                                        (ET) ActiveLandLine (100%)
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="color_light_green filed_margin_top clearfix">
-                                                                <i class="fa fa-phone homeowner_info_icon"></i>
-                                                                <div class="form_div_node homeowner_info_text">
-                                                                    <div>
-                                                                        (347) 233-4243
-                                                                    </div>
-                                                                    <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font">
+                                                                    <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                                                         (ET) ActiveLandLine (100%)
                                                                     </div>
                                                                 </div>
@@ -593,203 +759,43 @@
                                                                 <i class="fa fa-phone homeowner_info_icon"></i>
                                                                 <div class="form_div_node homeowner_info_text">
                                                                     <div class="color_blue">
-                                                                        (347) 233-4243
+                                                                        (347) 789-4243
+                                                                    </div>
+                                                                    <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
+                                                                        (ET) ActiveLandLine (100%)
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="color_gray filed_margin_top clearfix">
+                                                                <i class="fa fa-phone homeowner_info_icon"></i>
+                                                                <div class="form_div_node homeowner_info_text">
+                                                                    <div class="color_blue">
+                                                                        (347) 556-4243
                                                                     </div>
                                                                     <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                                                         (ET) Mobile (82%)
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-
-                                            <%-----end -------%>
-
-                                            <%-----2nd section info--%>
-                                            <div>
-                                                <div class="form_head homeowner_section_margin">
-                                                    <span>Best Addresses &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color"></i>
-                                                </div>
-                                                <div>
-                                                    <div class="clearfix homeowner_info_label">
-                                                        <div>
-                                                            <div class="color_gray clearfix">
-                                                                <i class="fa fa-map-marker homeowner_info_icon"></i>
-                                                                <div class="form_div_node homeowner_info_text">
-                                                                    <div class="color_blue">
-                                                                        9411 114TH ST, SOUTH RICHMOND HILL, NY 11419                                                                   
-                                                                    </div>
-                                                                    <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                                                                        04/1992 to 06/13/2014
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-                                            <%----end-----%>
-
-                                            <%-----3rd section info--%>
-                                            <div>
-                                                <div class="form_head homeowner_section_margin">
-                                                    <span>Best emails &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color"></i>
-                                                </div>
-                                                <div>
-                                                    <div class="clearfix homeowner_info_label">
-                                                        <div>
-                                                            <div class="color_gray clearfix">
-                                                                <i class="fa fa-envelope homeowner_info_icon"></i>
-                                                                <div class="form_div_node homeowner_info_text homeowner_info_bottom">
-                                                                    <div class="color_blue">
-                                                                        cistool@igateway.net                                                                   
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="color_gray clearfix">
-                                                                <i class="fa fa-envelope homeowner_info_icon"></i>
-                                                                <div class="form_div_node homeowner_info_text homeowner_info_bottom">
-                                                                    <div class="color_blue">
-                                                                        cistool@hotmail.com                                                                   
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="color_gray clearfix">
-                                                                <i class="fa fa-envelope homeowner_info_icon"></i>
-                                                                <div class="form_div_node homeowner_info_text homeowner_info_bottom">
-                                                                    <div class="color_blue">
-                                                                        bkang@cis-inc.net                                                                   
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <%----end-----%>
-
-                                            <%-----4th section info--%>
-                                            <div>
-                                                <div class="form_head homeowner_section_margin">
-                                                    <span>Best emails &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color"></i>&nbsp;
-                                                    <i class="fa fa-stethoscope homeowner_plus_color"></i>
-                                                </div>
-                                                <div>
-                                                    <div class="clearfix homeowner_info_label">
-                                                        <div>
-                                                            <div class="color_gray clearfix">
-                                                                <i class="fa fa-envelope homeowner_info_icon"></i>
-                                                                <div class="form_div_node homeowner_info_text homeowner_info_bottom">
-                                                                    <div class="color_blue">
-                                                                        cistool@igateway.net                                                                   
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="color_gray clearfix">
-                                                                <i class="fa fa-envelope homeowner_info_icon"></i>
-                                                                <div class="form_div_node homeowner_info_text homeowner_info_bottom">
-                                                                    <div class="color_blue">
-                                                                        cistool@hotmail.com                                                                   
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="color_gray clearfix">
-                                                                <i class="fa fa-envelope homeowner_info_icon"></i>
-                                                                <div class="form_div_node homeowner_info_text homeowner_info_bottom">
-                                                                    <div class="color_blue">
-                                                                        bkang@cis-inc.net                                                                   
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <%----end-----%>
-
-                                            <%-----5th section info--%>
-                                            <div>
-                                                <div class="form_head homeowner_section_margin">
-                                                    <span>First Degree Relatives &nbsp;</span>
-                                                </div>
-                                                <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
-                                                    <i class="fa fa-chain color_gray homeowner_info_icon"></i>
-                                                    <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
-                                                        <span class="font_black color_balck">Zhang, Yan Fang</span><br />
-                                                        <span style="font-size: 14px">Age <span class="color_balck">44</span></span>
-                                                    </div>
-
-                                                </div>
-                                                <div class="homeowner_expanll_border" style="margin-left: 20px">
-                                                    <div>
-                                                        <div class="clearfix homeowner_info_label" style="margin-left: 17px;">
                                                             <div>
-                                                                <div class="color_gray clearfix">
-                                                                    <i class="fa fa-phone homeowner_info_icon"></i>
-                                                                    <div class="form_div_node homeowner_info_text ">
-                                                                        <div class="color_blue">
-                                                                            (347) 233-4243
-                                                                        </div>
-                                                                        <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                                                                            (ET) ActiveLandLine (100%)
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="color_gray filed_margin_top clearfix">
-                                                                    <i class="fa fa-phone homeowner_info_icon"></i>
-                                                                    <div class="form_div_node homeowner_info_text">
-                                                                        <div class="color_blue">
-                                                                            (347) 789-4243
-                                                                        </div>
-                                                                        <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                                                                            (ET) ActiveLandLine (100%)
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="color_gray filed_margin_top clearfix">
-                                                                    <i class="fa fa-phone homeowner_info_icon"></i>
-                                                                    <div class="form_div_node homeowner_info_text">
-                                                                        <div class="color_blue">
-                                                                            (347) 556-4243
-                                                                        </div>
-                                                                        <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                                                                            (ET) Mobile (82%)
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div>
-                                                                    <span class="time_buttons more_buttom">Load More Info
-                                                                    </span>
-                                                                </div>
+                                                                <span class="time_buttons more_buttom">Load More Info
+                                                                </span>
                                                             </div>
-
                                                         </div>
 
                                                     </div>
+
                                                 </div>
-
                                             </div>
-                                            <%----end-----%>
-                                        </div>
 
+                                        </div>
+                                        <%----end-----%>
                                     </div>
                                     <%------end-----%>
                                 </div>
                                 <%--right side--%>
-                                <div style="width: 329px; float: right">
+                                <div style="width: 329px; float: right; ">
 
                                     <div class="homeowner_content clearfix">
                                         <div style="font-size: 30px; color: #2e2f31">
@@ -873,7 +879,8 @@
                                                                 <i class="fa fa-map-marker homeowner_info_icon"></i>
                                                                 <div class="form_div_node homeowner_info_text">
                                                                     <div class="color_blue">
-                                                                        9411 114TH ST, SOUTH RICHMOND HILL, NY 11419                                                                   
+                                                                        9411 114TH ST, SOUTH RICHMOND HILL, NY 11419
+                                                                   
                                                                     </div>
                                                                     <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                                                         05/1993 to 06/13/2014
@@ -962,7 +969,7 @@
                             </div>
 
                         </div>
-                         <div class="tab-pane " id="documents">
+                        <div class="tab-pane " id="documents">
                             <div class="clearfix color_gray">
                                 <%--documents heads--%>
                                 <div style="padding: 35px 20px 35px 20px;" class="border_under_line">
@@ -985,30 +992,30 @@
                                     <%--left side--%>
                                     <div style="width: 330px; float: left" class="border_right">
 
-                                        
+
                                         <div class="doc_list_section">
                                             <div id="default-example" data-collapse="">
-                                                <h3 class="doc_list_title open">Helpful Docs &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>
+                                                <h3 class="doc_list_title  open color_balck" > Helpful Docs &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>
                                                 <div>
-                                                    <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                    <div class="clearfix">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id1" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id1">
                                                             <span class="color_balck">PayStub  </span>(Financials)
                                                         <span class="checks_data_text">April 3, 2014</span>
 
                                                         </label>
                                                     </div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id2" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id2">
                                                             <span class="color_balck">Inside 1   </span>(Photos)
                                                         <span class="checks_data_text">March 21, 2014</span>
 
                                                         </label>
                                                     </div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id3" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id3">
                                                             <span class="color_balck">PayStub  </span>(Construction)
                                                         <span class="checks_data_text">2013</span>
 
@@ -1017,35 +1024,36 @@
                                                 </div>
 
                                             </div>
+
                                         </div>
-                                       
-                                        <div class="border_under_line" style="height:23px"> &nbsp;</div>
-                                         <%--section 2--%>
+
+                                        <div class="border_under_line" style="height: 23px">&nbsp;</div>
+                                        <%--section 2--%>
                                         <div class="doc_list_section">
                                             <div data-collapse="">
                                                 <h3 class="doc_list_title open">Financials   &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>
                                                 <div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id4" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id4">
                                                             <span class="color_balck">PayStub  </span>
-                                                        <span class="checks_data_text">April 3, 2014</span>
+                                                            <span class="checks_data_text">April 3, 2014</span>
 
                                                         </label>
                                                     </div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id5" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id5">
                                                             <span class="color_balck">Bank Statement  </span>
-                                                        <span class="checks_data_text">March 21, 2014</span>
+                                                            <span class="checks_data_text">March 21, 2014</span>
 
                                                         </label>
                                                     </div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id6" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id6">
                                                             <span class="color_balck">Tax Return  </span>
-                                                        <span class="checks_data_text">2013</span>
+                                                            <span class="checks_data_text">2013</span>
 
                                                         </label>
                                                     </div>
@@ -1060,45 +1068,45 @@
                                                 <h3 class="doc_list_title open">Short Sale &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>
                                                 <div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id7" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id7">
                                                             <span class="color_balck">HUD  </span>
-                                                        <span class="checks_data_text">April 3, 2014</span>
+                                                            <span class="checks_data_text">April 3, 2014</span>
 
                                                         </label>
                                                     </div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id8" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id8">
                                                             <span class="color_balck">Authorization  </span>
-                                                        <span class="checks_data_text">March 21, 2014</span>
+                                                            <span class="checks_data_text">March 21, 2014</span>
 
                                                         </label>
                                                     </div>
 
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id9" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id9">
                                                             <span class="color_balck">Client Info  </span>
-                                                        <span class="checks_data_text">January 12 ,2014</span>
+                                                            <span class="checks_data_text">January 12 ,2014</span>
 
                                                         </label>
                                                     </div>
 
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id10" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id10">
                                                             <span class="color_balck">Hardship  </span>
-                                                        <span class="checks_data_text">January 12 ,2014</span>
+                                                            <span class="checks_data_text">January 12 ,2014</span>
 
                                                         </label>
                                                     </div>
 
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id11" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id11">
                                                             <span class="color_balck">ID  </span>
-                                                        <span class="checks_data_text">January 10 ,2014</span>
+                                                            <span class="checks_data_text">January 10 ,2014</span>
 
                                                         </label>
                                                     </div>
@@ -1110,33 +1118,33 @@
 
                                     </div>
                                     <%--right side--%>
-                                    <div style="width: 330px; float: left" >
+                                    <div style="width: 330px; float: left">
                                         <%--section 1--%>
                                         <div class="doc_list_section">
-                                            <div  data-collapse="">
+                                            <div data-collapse="">
                                                 <h3 class="doc_list_title open">Construction &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>
                                                 <div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id12" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id12">
                                                             <span class="color_balck">Bank Statement </span>
-                                                        <span class="checks_data_text">April 3, 2014</span>
+                                                            <span class="checks_data_text">April 3, 2014</span>
 
                                                         </label>
                                                     </div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id13" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id13">
                                                             <span class="color_balck">filename.pdf</span>
-                                                        <span class="checks_data_text">March 21, 2014</span>
+                                                            <span class="checks_data_text">March 21, 2014</span>
 
                                                         </label>
                                                     </div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id14" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id14">
                                                             <span class="color_balck">PayStub  </span>
-                                                        <span class="checks_data_text">March 9,2014</span>
+                                                            <span class="checks_data_text">March 9,2014</span>
 
                                                         </label>
                                                     </div>
@@ -1147,38 +1155,38 @@
 
                                         <%--section 2--%>
                                         <div class="doc_list_section">
-                                            <div  data-collapse="">
+                                            <div data-collapse="">
                                                 <h3 class="doc_list_title open">Photos &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>
                                                 <div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id15" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id15">
                                                             <span class="color_balck">Front</span>
-                                                        <span class="checks_data_text">April 3, 2014</span>
+                                                            <span class="checks_data_text">April 3, 2014</span>
 
                                                         </label>
                                                     </div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id16" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id16">
                                                             <span class="color_balck">Back</span>
-                                                        <span class="checks_data_text">March 21, 2014</span>
+                                                            <span class="checks_data_text">March 21, 2014</span>
 
                                                         </label>
                                                     </div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id17" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id17">
                                                             <span class="color_balck">Inside 1  </span>
-                                                        <span class="checks_data_text">March 9,2014</span>
+                                                            <span class="checks_data_text">March 9,2014</span>
 
                                                         </label>
                                                     </div>
                                                     <div>
-                                                        <input type="checkbox" name="vehicle" value="Bike" />
-                                                        <label class="doc_list_checks">
+                                                        <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id18" />
+                                                        <label class="doc_list_checks check_margin" for="doc_list_id18">
                                                             <span class="color_balck">Inside 2</span>
-                                                        <span class="checks_data_text">March 21, 2014</span>
+                                                            <span class="checks_data_text">March 21, 2014</span>
 
                                                         </label>
                                                     </div>
@@ -1188,22 +1196,20 @@
                                         </div>
 
 
-                                         <%--section 3--%>
+                                        <%--section 3--%>
                                         <div class="doc_list_section">
-                                            <div  data-collapse="">
+                                            <div data-collapse="">
                                                 <h3 class="doc_list_title">Photos &nbsp;&nbsp;<i class="fa fa-plus-square-o color_blue"></i></h3>
                                                 <div>
-                                                    
                                                 </div>
 
                                             </div>
                                         </div>
-                                         <%--section 4--%>
+                                        <%--section 4--%>
                                         <div class="doc_list_section">
-                                            <div  data-collapse="">
+                                            <div data-collapse="">
                                                 <h3 class="doc_list_title">Photos &nbsp;&nbsp;<i class="fa fa-plus-square-o color_blue"></i></h3>
                                                 <div>
-                                                    
                                                 </div>
 
                                             </div>
@@ -1257,6 +1263,47 @@
 
                                 });
                             })(jQuery);
+                        </script>
+                        <script>
+                            var el = $(".doc_list_title");
+
+                            //el.collapse();
+                            el.bind("opened", function (e, section) {
+                                var h3 = e.target;
+                                //alert("'" + h3.tagName + "' was opened");
+                                var kids = $(h3).children();
+                                kids.addClass("hilite");
+                                var icon = kids.children();
+                                //$(icon).toggleClass ('fa fa-minus-square-o color_blue');
+                              
+                                var icon_e = icon;
+                                //if (icon.length>1)
+                                //{
+                                //    icon_e = icon[1];
+                                //}
+                                if ($(icon_e).hasClass("fa"))
+                                {
+                                    $(icon_e).removeClass('fa-plus-square-o').addClass('fa-minus-square-o');
+                                }
+                              
+                                $(h3).removeClass("hilite");
+                                //section.$summary.find('fa').toggleClass('fa fa-minus-square-o color_blue');
+                            })
+                            .bind("closed", function (e, section) {
+                                var h3 = e.target;
+                                //alert("'" + h3.tagName + "' was closed");
+                                var kids = $(h3).children();
+                                kids.addClass("hilite");
+                                var icon = kids.children();
+                                //$(icon).toggleClass('fa fa-plus-square-o color_blue');
+                                //if (icon.tagName === "i") {
+                                    $(icon).removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
+                                //}
+                                $(h3).removeClass("hilite");
+                                //fa fa-plus-square-o color_blue
+                                //alert("'" + section.$summary.text() + "' was closed");
+                                //section.$summary.find('fa').toggleClass('fa fa-plus-square-o color_blue');
+                            });
                         </script>
                         <%-----------end-------%>
                         <%-----end-----%>
