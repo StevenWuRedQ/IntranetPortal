@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="AgentOverview.aspx.vb" Inherits="IntranetPortal.AgentOverview" %>
 
+<%--<%@ Register Assembly="DevExtreme.WebForms.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExtreme.WebForms" TagPrefix="devextreme" %>--%>
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -521,37 +524,37 @@
                                                                                 function show_report_data() {
                                                                                     var report_data = $.parseJSON('<%= report_data_f %>');
 
-                                                                    for (var i in report_data) {
-                                                                        var data = report_data[i];
-                                                                        var feilds_style = {
-                                                                            property: "font-weight: 900; width: 230px",
-                                                                            date: "width: 90px",
-                                                                            call_atpt: "width: 90px",
-                                                                            doorknk_atpt: "width: 100px",
-                                                                            Comment: "width: 260px",
-                                                                            data: "width: 125px"
-                                                                        }
-                                                                        var report_fileds = window.report_fileds ? window.report_fileds : $.parseJSON('<%= report_fields() %>');
-                                                                        var table_cell = "";
-                                                                        for (var j = 0; j < report_fileds.length; j++) {
-                                                                            var fileds = report_fileds[j]
-                                                                            table_cell += '<td class="report_content" style="' + feilds_style[fileds] + ';">' + data[fileds] + '</td>\n'
-                                                                        }
-                                                                        // <td class="report_content" style="font-weight: 900; width: 230px;">' + data.property + '</td>\
-                                                                        //<td class="report_content" style="width: 90px">' + data.date + '</td>\
-                                                                        //<td class="report_content" style="width: 90px">' + data.call_atpt + '</td>\
-                                                                        //<td class="report_content" style="width: 100px">' + data.doorknk_atpt + '</td>\
-                                                                        //<td class="report_content" style="width: 260px">' + data.commet + '</td>\
-                                                                        //<td class="report_content" style="width: 125px">' + data.data + '</td>\
-                                                                        $('#custom_report_table').append('<tr>\
+                                                                                    for (var i in report_data) {
+                                                                                        var data = report_data[i];
+                                                                                        var feilds_style = {
+                                                                                            property: "font-weight: 900; width: 230px",
+                                                                                            date: "width: 90px",
+                                                                                            call_atpt: "width: 90px",
+                                                                                            doorknk_atpt: "width: 100px",
+                                                                                            Comment: "width: 260px",
+                                                                                            data: "width: 125px"
+                                                                                        }
+                                                                                        var report_fileds = window.report_fileds ? window.report_fileds : $.parseJSON('<%= report_fields() %>');
+                                                                                        var table_cell = "";
+                                                                                        for (var j = 0; j < report_fileds.length; j++) {
+                                                                                            var fileds = report_fileds[j]
+                                                                                            table_cell += '<td class="report_content" style="' + feilds_style[fileds] + ';">' + data[fileds] + '</td>\n'
+                                                                                        }
+                                                                                        // <td class="report_content" style="font-weight: 900; width: 230px;">' + data.property + '</td>\
+                                                                                        //<td class="report_content" style="width: 90px">' + data.date + '</td>\
+                                                                                        //<td class="report_content" style="width: 90px">' + data.call_atpt + '</td>\
+                                                                                        //<td class="report_content" style="width: 100px">' + data.doorknk_atpt + '</td>\
+                                                                                        //<td class="report_content" style="width: 260px">' + data.commet + '</td>\
+                                                                                        //<td class="report_content" style="width: 125px">' + data.data + '</td>\
+                                                                                        $('#custom_report_table').append('<tr>\
                                             '+ table_cell + '\
                                             <td class="report_content" style=""><i class="fa fa-list-alt report_gird_icon" style="float:right;" onclick="custome_report_itemlick(' + i + ')"></i></td>/n\
                                             <tr>\
                                             ');
-                                                                    }
-                                                                }
-                                                                change_table_thead();
-                                                                show_report_data();
+                                                                                    }
+                                                                                }
+                                                                                change_table_thead();
+                                                                                show_report_data();
 
                                                                             </script>
                                                                         </div>
@@ -573,29 +576,43 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-                <dx:SplitterPane Size="310px" ShowCollapseForwardButton="True">
+                <dx:SplitterPane Size="310px" ShowCollapseForwardButton="True" CollapsedStyle-CssClass="clearfix">
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <div style="width: 310px; background: #f5f5f5" class="agent_layout_float">
-                                <div style="margin-left: 30px; margin-top: 30px; margin-right: 20px; font-size: 24px; float: none">
-                                    <span style="color: #234b60">Saved Reports</span><i class="fa fa-question-circle tooltip-examples" title="Drag and drop items from the pane on the right side to view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
-                                    <dx:ASPxCallbackPanel runat="server" ID="callbackPnlTemplates" ClientInstanceName="callbackPnlTemplatesClient" OnCallback="callbackPnlTemplates_Callback">
-                                        <PanelCollection>
-                                            <dx:PanelContent>
-                                                <% If Not GetTemplates() Is Nothing Then%>
-                                                <ul>
-                                                    <% For Each key In GetTemplates().Keys%>
-                                                    <li><span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor: pointer"><% = key%></span>
-                                                        <button type="button" value="delete" onclick='RemoveReport("<%= key %>")'>Delete</button>
-                                                    </li>
-                                                    <% Next%>
-                                                </ul>
-                                                <% Else%>
+                                <div style="margin-left: 30px; margin-top: 30px; margin-right: 20px; font-size: 24px; float: none;">
+                                    <div style="height: 460px" class="border_under_line">
+                                        <div style="padding-bottom:20px;border-bottom:1px solid #77787b">
+                                             <span style="color: #234b60">Saved Reports</span>
+                                            <i class="fa fa-question-circle tooltip-examples" title="Drag and drop items from the pane on the right side to view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
+                                        
+                                        </div>
+                                       
+                                        <dx:ASPxCallbackPanel runat="server" ID="callbackPnlTemplates" ClientInstanceName="callbackPnlTemplatesClient" OnCallback="callbackPnlTemplates_Callback">
+                                            <PanelCollection>
+                                                <dx:PanelContent>
+                                                    <% If Not GetTemplates() Is Nothing Then%>
+                                                    <ul class="list-group" style="font-size: 14px; box-shadow: none">
+
+                                                        <% For Each key In GetTemplates().Keys%>
+                                                        <li class="list-group-item color_gray" style="background-color: transparent; border: 0px;">
+                                                            <i class="fa fa-file"></i>
+                                                            <span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor:pointer; width: 140px;"><% = key%></span>
+                                                            <button type="button" value="delete" onclick='RemoveReport("<%= key %>")'>Delete</button>
+                                                        </li>
+                                                        <% Next%>
+                                                    </ul>
+                                                    <% Else%>
                                                     No template saved.
                                                     <% End If%>
-                                            </dx:PanelContent>
-                                        </PanelCollection>
-                                    </dx:ASPxCallbackPanel>
+                                                </dx:PanelContent>
+                                            </PanelCollection>
+                                        </dx:ASPxCallbackPanel>
+
+                                    </div>
+                                    <div style="height:460px;overflow:auto">
+
+                                   
                                     <span style="color: #234b60">Custom Fields</span><i class="fa fa-question-circle tooltip-examples" title="Drag and drop items from the pane on the right side to view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
                                     <div style="margin-top: 25px">
                                         <script type="text/javascript">
@@ -630,6 +647,9 @@
                                             <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
                                         </dx:ASPxCheckBoxList>
 
+                                        <div style="display:none">
+
+
                                         <div class="draggable_field" id="draggable_field8">
                                             <i class="fa fa-long-arrow-left draggable_icon"></i>
                                             <span class="drappable_field_text">Call Attemps</span>
@@ -658,7 +678,8 @@
                                             <i class="fa fa-long-arrow-left draggable_icon "></i>
                                             <span class="drappable_field_text">Data</span>
                                         </div>
-
+                                                                                </div>
+                                    </div>
                                     </div>
 
                                 </div>
