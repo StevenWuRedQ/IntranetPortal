@@ -112,25 +112,33 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-sort-amount-desc"></i>
                                     </div>
                                     <input type="text" data-var="@btn-info-color" class="form-control" style="width: 250px; margin-top: 25px; height: 30px; color: #b1b2b7" placeholder="Type employee’s name" onchange="SearchNames(this)" />
-                                    <div style="margin-top: 27px; height: 290px; overflow-y: scroll">
+                                    <div style="margin-top: 27px; height: 290px; overflow-y: scroll" id="employees_grid">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridEmps" KeyFieldName="EmployeeID" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" ClientInstanceName="gridEmpsClient">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="Name" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <Settings AllowHeaderFilter="False"></Settings>
                                                     <DataItemTemplate>
+                                                        <div class="employee_list_item clearfix">
                                                         <div class="employee_list_item_div">
                                                             <span class="font_black"><%# Eval("Name")%></span><br />
                                                             <%# Eval("Position")%>
                                                         </div>
+                                                            <i class="fa fa-list-alt employee_list_item_icon"></i>
+                                                        </div>
+                                                       
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataColumn FieldName="Position" Visible="false"></dx:GridViewDataColumn>
+                                                <%--why use tr td?--%>
+                                               <%-- <dx:GridViewDataColumn FieldName="Position" Visible="false"></dx:GridViewDataColumn>
                                                 <dx:GridViewDataColumn Width="25px" VisibleIndex="5">
                                                     <DataItemTemplate>
                                                         <i class="fa fa-list-alt employee_list_item_icon"></i>
                                                     </DataItemTemplate>
-                                                </dx:GridViewDataColumn>
+                                                </dx:GridViewDataColumn>--%>
                                             </Columns>
+                                            <Styles Cell-Paddings-Padding="0px" SelectedRow-BackColor="#FF400D">
+
+                                            </Styles>
                                             <GroupSummary>
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
                                             </GroupSummary>
@@ -239,41 +247,37 @@
                                                                     <%--angent info--%>
 
                                                                     <div style="width: 370px; height: 490px; background: url('../images/profile_bg.png')">
-                                                                        <%--width:201 height:201--%>
-                                                                        <% If String.IsNullOrEmpty(CurrentEmployee.Picture) Then%>
                                                                         <img src="/images/user-empty-icon.png" onclick="selectImgs.ShowAtElement(this);" class="img-circle" style="margin-top: 40px; margin-left: 84px; height: 200px; width: 200px; cursor: pointer;" />
-                                                                        <%Else%>
-                                                                        <img src="<%=CurrentEmployee.Picture%>" onclick="selectImgs.ShowAtElement(this)" class="img-circle" style="margin-top: 40px; margin-left: 84px; height: 200px; width: 200px; cursor: pointer" />
-                                                                        <%End If%>
+                                                                        <img src="" onclick="selectImgs.ShowAtElement(this)" class="img-circle" style="margin-top: 40px; margin-left: 84px; height: 200px; width: 200px; cursor: pointer" />
 
-                                                                        <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"><%= CurrentEmployee.Name %></div>
-                                                                        <div style="margin-top: 8px; font-size: 16px; color: #234b60; font-weight: 900" class="agnet_info_text"><%= CurrentEmployee.Position %></div>
+                                                                        <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"></div>
+                                                                        <div style="margin-top: 8px; font-size: 16px; color: #234b60; font-weight: 900" class="agnet_info_text"></div>
                                                                         <%--info detial--%>
                                                                         <div style="font-size: 14px; margin-top: 25px">
                                                                             <%--items--%>
                                                                             <div class="agent_info_detial_left">Manger</div>
                                                                             <div class="agent_info_detial_space">&nbsp;</div>
-                                                                            <div class="agent_info_detial_right"><%= CurrentEmployee.Manager%>&nbsp;</div>
+                                                                            <div class="agent_info_detial_right"></div>
                                                                             <%----end item--%>
                                                                             <%--items--%>
                                                                             <div class="agent_info_detial_left">Office</div>
                                                                             <div class="agent_info_detial_space">&nbsp;</div>
-                                                                            <div class="agent_info_detial_right"><%= CurrentEmployee.Position %>(<%= CurrentEmployee.Department%>)&nbsp; </div>
+                                                                            <div class="agent_info_detial_right"></div>
                                                                             <%----end item--%>
                                                                             <%--items--%>
                                                                             <div class="agent_info_detial_left">Employee Since</div>
                                                                             <div class="agent_info_detial_space">&nbsp;</div>
-                                                                            <div class="agent_info_detial_right"><%=String.Format("{0:d}", CurrentEmployee.EmployeeSince) %>&nbsp;</div>
+                                                                            <div class="agent_info_detial_right"></div>
                                                                             <%----end item--%>
                                                                             <%--items--%>
                                                                             <div class="agent_info_detial_left">Cell</div>
                                                                             <div class="agent_info_detial_space">&nbsp;</div>
-                                                                            <div class="agent_info_detial_right"><%= String.Format("{0:(###) ###-####}", CurrentEmployee.Cellphone) %>&nbsp;</div>
+                                                                            <div class="agent_info_detial_right"></div>
                                                                             <%----end item--%>
                                                                             <%--items--%>
                                                                             <div class="agent_info_detial_left">Email</div>
                                                                             <div class="agent_info_detial_space">&nbsp;</div>
-                                                                            <div class="agent_info_detial_right" style="color: #3993c1"><%= CurrentEmployee.Email%>&nbsp;</div>
+                                                                            <div class="agent_info_detial_right" style="color: #3993c1"></div>
                                                                             <%----end item--%>
                                                                             <%--items--%>
 
@@ -305,7 +309,7 @@
                                                                     </ContentCollection>
                                                                 </dx:ASPxPopupControl>
                                                                 <%--chart UI--%>
-                                                                <div style="height: 490px;">                                                                  
+                                                                <div style="height: 490px;">
                                                                   
                                                                     <div style="padding-top: 50px; font-size: 30px; color: #ff400d; text-align: center">In the last 6 months</div>
                                                                     <div style="padding-left: 370px; padding-top: 50px; height: 325px;">
@@ -390,7 +394,7 @@
                                                                                 ShowChart();
                                                                             </script>
                                                                         </div>
-                                                                        
+
                                                                     </div>
                                                                 </div>
                                                                 <%-----end chart ui-----%>
@@ -425,7 +429,7 @@
                                                                         </Columns>
                                                                         <GroupSummary>
                                                                             <dx:ASPxSummaryItem FieldName="BBLE" SummaryType="Count" />
-                                                                        </GroupSummary>                                                                        
+                                                                        </GroupSummary>
                                                                     </dx:ASPxGridView>
                                                                     <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridReport"></dx:ASPxGridViewExporter>
 
@@ -583,6 +587,7 @@
                     </ContentCollection>
                 </dx:SplitterPane>
                 <dx:SplitterPane Size="310px" ShowCollapseForwardButton="True" CollapsedStyle-CssClass="clearfix">
+<CollapsedStyle CssClass="clearfix"></CollapsedStyle>
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <div style="width: 310px; background: #f5f5f5" class="agent_layout_float">
@@ -616,7 +621,7 @@
                                         </dx:ASPxCallbackPanel>
 
                                     </div>
-                                    <div style="height: 460px; overflow: auto">
+                                    <div style="height: 450px; overflow: auto" id="custom_fields_div">
 
                                         <div style="padding-top:19px;padding-bottom:14px;" class="border_under_line">
                                             <span style="color: #234b60">Custom Fields</span>
@@ -728,8 +733,19 @@
                         theme: "minimal-dark"
                     }
                     );
+                $('#employees_grid').mCustomScrollbar(
+                    {
+                        theme: "minimal-dark"
+                    }
+                );
+                
+                $('#custom_fields_div').mCustomScrollbar(
+                    {
+                        theme: "minimal-dark"
+                    }
+                );
             });
-        })(jQuery);       
+        })(jQuery);
     </script>
     <%-----------end-------%>
 </body>

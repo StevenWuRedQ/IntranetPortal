@@ -291,7 +291,7 @@
                                         </div>
 
                                         <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                                            <span class="form_input_title">Zoning(<span style="color: #0e9ee9">PDF</span>)</span>
+                                            <span class="form_input_title">Zoning (<span style="color: #0e9ee9">PDF</span>)</span>
 
                                             <input class="text_input" value="28'x116'" />
                                         </div>
