@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="AgentOverview.aspx.vb" Inherits="IntranetPortal.AgentOverview" %>
 
+<%@ Register Src="~/AgentOverview/AgentCharts.ascx" TagPrefix="uc1" TagName="AgentCharts" %>
+
+
 <%--<%@ Register Assembly="DevExtreme.WebForms.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExtreme.WebForms" TagPrefix="devextreme" %>--%>
 
 
@@ -82,9 +85,10 @@
         function RemoveReport(reportName) {
             callbackPnlTemplatesClient.PerformCallback("RemoveReport|" + reportName);
         }
+        
     </script>
 </head>
-<body style="font: 12px 'Source Sans Pro'">
+<body style="font: 12px 'Source Sans Pro'" id="test">
     <form id="form1" runat="server">
         <%--test drag--%>
         <%--<div id="draggable_field2">drap</div>--%>
@@ -301,12 +305,14 @@
                                                                     </ContentCollection>
                                                                 </dx:ASPxPopupControl>
                                                                 <%--chart UI--%>
-                                                                <div style="height: 490px;">
+                                                                <div style="height: 490px;">                                                                  
+                                                                  
                                                                     <div style="padding-top: 50px; font-size: 30px; color: #ff400d; text-align: center">In the last 6 months</div>
                                                                     <div style="padding-left: 370px; padding-top: 50px; height: 325px;">
                                                                         <div style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px; /*background: blue; */ color: white; height: 100%;">
-                                                                            <canvas id="canvas" height="240" width="530"></canvas>
-                                                                            <div id="lineLegend"></div>
+                                                                            <uc1:AgentCharts runat="server" id="AgentCharts" />
+                                                                            <canvas id="canvas" height="240" width="530" style="display:none"></canvas>
+                                                                            <div id="lineLegend" style="display:none"></div>
                                                                             <script>
 
                                                                                 var lineChartData = {
@@ -384,7 +390,7 @@
                                                                                 ShowChart();
                                                                             </script>
                                                                         </div>
-
+                                                                        
                                                                     </div>
                                                                 </div>
                                                                 <%-----end chart ui-----%>
@@ -419,7 +425,7 @@
                                                                         </Columns>
                                                                         <GroupSummary>
                                                                             <dx:ASPxSummaryItem FieldName="BBLE" SummaryType="Count" />
-                                                                        </GroupSummary>
+                                                                        </GroupSummary>                                                                        
                                                                     </dx:ASPxGridView>
                                                                     <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridReport"></dx:ASPxGridViewExporter>
 
@@ -723,7 +729,7 @@
                     }
                     );
             });
-        })(jQuery);
+        })(jQuery);       
     </script>
     <%-----------end-------%>
 </body>

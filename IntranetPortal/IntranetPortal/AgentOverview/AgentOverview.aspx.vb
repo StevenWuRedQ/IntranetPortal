@@ -63,6 +63,11 @@ Public Class AgentOverview
         gridReport.DataSource = reports
     End Sub
 
+    Sub BindChart()
+
+
+    End Sub
+
     'retrun the report data fields
     Function report_fields() As String
         Dim serializer As New System.Web.Script.Serialization.JavaScriptSerializer()

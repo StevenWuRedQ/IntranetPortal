@@ -113,6 +113,15 @@ Partial Public Class AgentOverview
     Protected WithEvents btnSave As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
+    '''AgentCharts control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AgentCharts As Global.IntranetPortal.AgentCharts
+
+    '''<summary>
     '''btnExport control.
     '''</summary>
     '''<remarks>
