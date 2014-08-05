@@ -611,6 +611,7 @@ i.with_circle {
     border: 2px solid;
     text-align: center;
     color: #b1b2b7;
+    cursor:pointer;
 }
 
     .report_head_button:hover {
@@ -1107,4 +1108,8 @@ pre#event-log {
     float: right;
     margin-top: 10px;
     
+}
+#ASPxSplitter1_chkFields
+{
+    border:0px;
 }

@@ -795,7 +795,7 @@
                                     <%------end-----%>
                                 </div>
                                 <%--right side--%>
-                                <div style="width: 329px; float: right; ">
+                                <div style="width: 329px; float: right;">
 
                                     <div class="homeowner_content clearfix">
                                         <div style="font-size: 30px; color: #2e2f31">
@@ -995,7 +995,7 @@
 
                                         <div class="doc_list_section">
                                             <div id="default-example" data-collapse="">
-                                                <h3 class="doc_list_title  open color_balck" > Helpful Docs &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>
+                                                <h3 class="doc_list_title  open color_balck">Helpful Docs &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>
                                                 <div>
                                                     <div class="clearfix">
                                                         <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id1" />
@@ -1275,17 +1275,16 @@
                                 kids.addClass("hilite");
                                 var icon = kids.children();
                                 //$(icon).toggleClass ('fa fa-minus-square-o color_blue');
-                              
+
                                 var icon_e = icon;
                                 //if (icon.length>1)
                                 //{
                                 //    icon_e = icon[1];
                                 //}
-                                if ($(icon_e).hasClass("fa"))
-                                {
+                                if ($(icon_e).hasClass("fa")) {
                                     $(icon_e).removeClass('fa-plus-square-o').addClass('fa-minus-square-o');
                                 }
-                              
+
                                 $(h3).removeClass("hilite");
                                 //section.$summary.find('fa').toggleClass('fa fa-minus-square-o color_blue');
                             })
@@ -1297,7 +1296,7 @@
                                 var icon = kids.children();
                                 //$(icon).toggleClass('fa fa-plus-square-o color_blue');
                                 //if (icon.tagName === "i") {
-                                    $(icon).removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
+                                $(icon).removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
                                 //}
                                 $(h3).removeClass("hilite");
                                 //fa fa-plus-square-o color_blue
@@ -1311,6 +1310,7 @@
 
                 </div>
             </div>
+        </div>
     </form>
 </body>
 </html>

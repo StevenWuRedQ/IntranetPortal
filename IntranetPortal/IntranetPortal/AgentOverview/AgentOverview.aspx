@@ -582,12 +582,12 @@
                             <div style="width: 310px; background: #f5f5f5" class="agent_layout_float">
                                 <div style="margin-left: 30px; margin-top: 30px; margin-right: 20px; font-size: 24px; float: none;">
                                     <div style="height: 460px" class="border_under_line">
-                                        <div style="padding-bottom:20px;border-bottom:1px solid #77787b">
-                                             <span style="color: #234b60">Saved Reports</span>
+                                        <div style="padding-bottom: 20px;" class="border_under_line">
+                                            <span style="color: #234b60">Saved Reports</span>
                                             <i class="fa fa-question-circle tooltip-examples" title="Drag and drop items from the pane on the right side to view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
-                                        
+
                                         </div>
-                                       
+
                                         <dx:ASPxCallbackPanel runat="server" ID="callbackPnlTemplates" ClientInstanceName="callbackPnlTemplatesClient" OnCallback="callbackPnlTemplates_Callback">
                                             <PanelCollection>
                                                 <dx:PanelContent>
@@ -597,7 +597,7 @@
                                                         <% For Each key In GetTemplates().Keys%>
                                                         <li class="list-group-item color_gray" style="background-color: transparent; border: 0px;">
                                                             <i class="fa fa-file"></i>
-                                                            <span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor:pointer; width: 140px;"><% = key%></span>
+                                                            <span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor: pointer; width: 140px;"><% = key%></span>
                                                             <button type="button" value="delete" onclick='RemoveReport("<%= key %>")'>Delete</button>
                                                         </li>
                                                         <% Next%>
@@ -610,76 +610,81 @@
                                         </dx:ASPxCallbackPanel>
 
                                     </div>
-                                    <div style="height:460px;overflow:auto">
+                                    <div style="height: 460px; overflow: auto">
 
-                                   
-                                    <span style="color: #234b60">Custom Fields</span><i class="fa fa-question-circle tooltip-examples" title="Drag and drop items from the pane on the right side to view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
-                                    <div style="margin-top: 25px">
-                                        <script type="text/javascript">
-                                            function Fields_ValueChanged(s, e) {
-                                                gridReportClient.PerformCallback("FieldChange|" + s.GetSelectedValues());
-                                                e.processOnServer = false;
-                                            }
-                                        </script>
-                                        <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" Width="100%">
-                                            <Items>
-                                                <dx:ListEditItem Text="BBLE" Value="BBLE" Selected="true" />
-                                                <dx:ListEditItem Text="Property Address" Value="PropertyAddress" Selected="true" />
-                                                <dx:ListEditItem Text="Call Attemps" Value="CallAttemps" />
-                                                <dx:ListEditItem Text="Doorknock Attemps" Value="DoorKnockAttemps" />
-                                                <dx:ListEditItem Text="Status" Value="Status" />
-                                                <dx:ListEditItem Text="Sale Date" Value="SaleDate" />
-                                                <dx:ListEditItem Text="Tax Class" Value="TaxClass" />
-                                                <dx:ListEditItem Text="Block" Value="Block" />
-                                                <dx:ListEditItem Text="Lot" Value="Lot" />
-                                                <dx:ListEditItem Text="Year Build" Value="YearBuilt" />
-                                                <dx:ListEditItem Text="# of floor" Value="NumFloors" />
-                                                <dx:ListEditItem Text="Building Dem" Value="BuildingDem" />
-                                                <dx:ListEditItem Text="Lot Dem" Value="LotDem" />
-                                                <dx:ListEditItem Text="Est Value" Value="EstValue" />
-                                                <dx:ListEditItem Text="Zoning" Value="Zoning" />
-                                                <dx:ListEditItem Text="MaxFar" Value="MaxFar" />
-                                                <dx:ListEditItem Text="Actual Far" Value="ActualFar" />
-                                                <dx:ListEditItem Text="NYCSqft" Value="NYCSqft" />
-                                                <dx:ListEditItem Text="Unbuilt Sqft" Value="UnbuiltSqft" />
-                                                <dx:ListEditItem Text="Create Date" Value="CreateDate" />
-                                            </Items>
-                                            <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
-                                        </dx:ASPxCheckBoxList>
+                                        <div style="padding-top:19px;padding-bottom:14px;" class="border_under_line">
+                                            <span style="color: #234b60">Custom Fields</span>
+                                            <i class="fa fa-question-circle tooltip-examples" title="Drag and drop items from the pane on the right side to view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
+                                        </div>
+                                       
+                                        <div style="margin-top: 20px">
+                                            <script type="text/javascript">
+                                                function Fields_ValueChanged(s, e) {
+                                                    gridReportClient.PerformCallback("FieldChange|" + s.GetSelectedValues());
+                                                    e.processOnServer = false;
+                                                }
+                                            </script>
+                                            <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" Width="100%">
+                                                <Items>
+                                                    <dx:ListEditItem Text="BBLE" Value="BBLE" Selected="true" />
+                                                    <dx:ListEditItem Text="Property Address" Value="PropertyAddress" Selected="true" />
+                                                    <dx:ListEditItem Text="Call Attemps" Value="CallAttemps" />
+                                                    <dx:ListEditItem Text="Doorknock Attemps" Value="DoorKnockAttemps" />
+                                                    <dx:ListEditItem Text="Status" Value="Status" />
+                                                    <dx:ListEditItem Text="Sale Date" Value="SaleDate" />
+                                                    <dx:ListEditItem Text="Tax Class" Value="TaxClass" />
+                                                    <dx:ListEditItem Text="Block" Value="Block" />
+                                                    <dx:ListEditItem Text="Lot" Value="Lot" />
+                                                    <dx:ListEditItem Text="Year Build" Value="YearBuilt" />
+                                                    <dx:ListEditItem Text="# of floor" Value="NumFloors" />
+                                                    <dx:ListEditItem Text="Building Dem" Value="BuildingDem" />
+                                                    <dx:ListEditItem Text="Lot Dem" Value="LotDem" />
+                                                    <dx:ListEditItem Text="Est Value" Value="EstValue" />
+                                                    <dx:ListEditItem Text="Zoning" Value="Zoning" />
+                                                    <dx:ListEditItem Text="MaxFar" Value="MaxFar" />
+                                                    <dx:ListEditItem Text="Actual Far" Value="ActualFar" />
+                                                    <dx:ListEditItem Text="NYCSqft" Value="NYCSqft" />
+                                                    <dx:ListEditItem Text="Unbuilt Sqft" Value="UnbuiltSqft" />
+                                                    <dx:ListEditItem Text="Create Date" Value="CreateDate" />
+                                                </Items>
+                                                <%--<CheckBoxStyle  BackgroundImage-ImageUrl="../images/icon_checked_box.png"/>--%>
+                                                <%--<CheckedImage Url="../images/icon_checked_box.png"></CheckedImage>--%>
+                                                <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
+                                            </dx:ASPxCheckBoxList>
 
-                                        <div style="display:none">
+                                            <div style="display: none">
 
 
-                                        <div class="draggable_field" id="draggable_field8">
-                                            <i class="fa fa-long-arrow-left draggable_icon"></i>
-                                            <span class="drappable_field_text">Call Attemps</span>
+                                                <div class="draggable_field" id="draggable_field8">
+                                                    <i class="fa fa-long-arrow-left draggable_icon"></i>
+                                                    <span class="drappable_field_text">Call Attemps</span>
+                                                </div>
+                                                <div class="draggable_field draggable_field_margin" id="draggable_field0">
+                                                    <i class="fa fa-long-arrow-left draggable_icon "></i>
+                                                    <span class="drappable_field_text">Door Knock</span>
+                                                </div>
+                                                <div class="draggable_field draggable_field_margin" id="draggable_field">
+                                                    <i class="fa fa-long-arrow-left draggable_icon "></i>
+                                                    <span class="drappable_field_text">Attempts</span>
+                                                </div>
+                                                <div class="draggable_field draggable_field_margin" id="draggable_field1">
+                                                    <i class="fa fa-long-arrow-left draggable_icon "></i>
+                                                    <span class="drappable_field_text">Most Recent</span>
+                                                </div>
+                                                <div class="draggable_field draggable_field_margin" id="draggable_field2">
+                                                    <i class="fa fa-long-arrow-left draggable_icon "></i>
+                                                    <span class="drappable_field_text">Comment</span>
+                                                </div>
+                                                <div class="draggable_field draggable_field_margin" id="draggable_field3">
+                                                    <i class="fa fa-long-arrow-left draggable_icon "></i>
+                                                    <span class="drappable_field_text">FAR</span>
+                                                </div>
+                                                <div class="draggable_field draggable_field_margin" id="draggable_field4">
+                                                    <i class="fa fa-long-arrow-left draggable_icon "></i>
+                                                    <span class="drappable_field_text">Data</span>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="draggable_field draggable_field_margin" id="draggable_field0">
-                                            <i class="fa fa-long-arrow-left draggable_icon "></i>
-                                            <span class="drappable_field_text">Door Knock</span>
-                                        </div>
-                                        <div class="draggable_field draggable_field_margin" id="draggable_field">
-                                            <i class="fa fa-long-arrow-left draggable_icon "></i>
-                                            <span class="drappable_field_text">Attempts</span>
-                                        </div>
-                                        <div class="draggable_field draggable_field_margin" id="draggable_field1">
-                                            <i class="fa fa-long-arrow-left draggable_icon "></i>
-                                            <span class="drappable_field_text">Most Recent</span>
-                                        </div>
-                                        <div class="draggable_field draggable_field_margin" id="draggable_field2">
-                                            <i class="fa fa-long-arrow-left draggable_icon "></i>
-                                            <span class="drappable_field_text">Comment</span>
-                                        </div>
-                                        <div class="draggable_field draggable_field_margin" id="draggable_field3">
-                                            <i class="fa fa-long-arrow-left draggable_icon "></i>
-                                            <span class="drappable_field_text">FAR</span>
-                                        </div>
-                                        <div class="draggable_field draggable_field_margin" id="draggable_field4">
-                                            <i class="fa fa-long-arrow-left draggable_icon "></i>
-                                            <span class="drappable_field_text">Data</span>
-                                        </div>
-                                                                                </div>
-                                    </div>
                                     </div>
 
                                 </div>
