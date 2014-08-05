@@ -1,4 +1,5 @@
 ﻿Imports System.Threading
+Imports DevExpress.Web.ASPxEditors
 
 Public Class ImportAgentData
     Inherits System.Web.UI.Page
@@ -15,6 +16,7 @@ Public Class ImportAgentData
 
             cbImportAgent.DataSource = Context.Employees.Where(Function(emp) emp.Active = True Or emp.Name.EndsWith("Office")).ToList.OrderBy(Function(em) em.Name)
             cbImportAgent.DataBind()
+            cbImportAgent.Items.Insert(0, New ListEditItem())
         End Using
     End Sub
 
@@ -65,39 +67,38 @@ Public Class ImportAgentData
 
                     prop.Active = False
 
-                    Dim bble = prop.BBLE
-                    Dim newlead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
-                    If newlead Is Nothing Then
-                        newlead = New Lead() With {
-                                          .BBLE = bble,
-                                          .LeadsName = li.LeadsName,
-                                          .Neighborhood = li.NeighName,
-                                          .EmployeeID = CInt(cbImportAgent.SelectedItem.Value),
-                                          .EmployeeName = cbImportAgent.SelectedItem.Text,
-                                          .Status = LeadStatus.NewLead,
-                                          .AssignDate = DateTime.Now,
-                                          .AssignBy = User.Identity.Name
-                                          }
+                    If Not String.IsNullOrEmpty(cbImportAgent.Value) Then
+                        Dim bble = prop.BBLE
+                        Dim newlead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
+                        If newlead Is Nothing Then
+                            newlead = New Lead() With {
+                                              .BBLE = bble,
+                                              .LeadsName = li.LeadsName,
+                                              .Neighborhood = li.NeighName,
+                                              .EmployeeID = CInt(cbImportAgent.SelectedItem.Value),
+                                              .EmployeeName = cbImportAgent.SelectedItem.Text,
+                                              .Status = LeadStatus.NewLead,
+                                              .AssignDate = DateTime.Now,
+                                              .AssignBy = User.Identity.Name
+                                              }
 
-                        If Context.Leads.Local.Where(Function(tmp) tmp.BBLE = bble).Count = 0 Then
-                            Context.Leads.Add(newlead)
+                            If Context.Leads.Local.Where(Function(tmp) tmp.BBLE = bble).Count = 0 Then
+                                Context.Leads.Add(newlead)
+                            End If
+                        Else
+                            newlead.LeadsName = li.LeadsName
+                            newlead.Neighborhood = li.NeighName
+                            newlead.EmployeeID = CInt(cbImportAgent.SelectedItem.Value)
+                            newlead.EmployeeName = cbImportAgent.SelectedItem.Text
+                            newlead.Status = LeadStatus.NewLead
+                            newlead.AssignDate = DateTime.Now
+                            newlead.AssignBy = User.Identity.Name
                         End If
-                    Else
-                        newlead.LeadsName = li.LeadsName
-                        newlead.Neighborhood = li.NeighName
-                        newlead.EmployeeID = CInt(cbImportAgent.SelectedItem.Value)
-                        newlead.EmployeeName = cbImportAgent.SelectedItem.Text
-                        newlead.Status = LeadStatus.NewLead
-                        newlead.AssignDate = DateTime.Now
-                        newlead.AssignBy = User.Identity.Name
                     End If
-
                 Next
 
                 Context.SaveChanges()
                 lblMsg.Text = "Import Complete!"
-
-
             End Using
         Catch ex As Exception
 
@@ -114,7 +115,7 @@ Public Class ImportAgentData
         End Try
     End Sub
 
-    
+
 
     Protected Sub ASPxButton2_Click(sender As Object, e As EventArgs) Handles ASPxButton2.Click
         Dim bbles = LeadsData(cbLeadsType.Value).Select(Function(b) b.BBLE).ToArray
@@ -128,7 +129,7 @@ Public Class ImportAgentData
             ctx.Application("InLoop") = True
             ctx.Application.UnLock()
 
-            For i = 0 To 30
+            For i = 0 To 1
                 Dim TestThread As New System.Threading.Thread(New ThreadStart(Sub()
                                                                                   HttpContext.Current = ctx
                                                                                   InitialData(bbles, ctx.Application)
@@ -162,28 +163,27 @@ Public Class ImportAgentData
             Dim bble = bbles(count)
             Try
 
-                UpdatePropertyAddress(bble)
-
-                'Dim lead = LeadsInfo.GetInstance(bble)
-
-                ''If String.IsNullOrEmpty(lead.Owner) Then
-                ''    DataWCFService.UpdateAssessInfo(bble)
-                ''End If
+                'UpdatePropertyAddress(bble)
+                Dim lead = LeadsInfo.GetInstance(bble)
 
                 'If String.IsNullOrEmpty(lead.Owner) Then
-                '    DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True)
-                'Else
-                '    'If Not lead.C1stMotgrAmt.HasValue Then
-                '    '    DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True)
-                '    'Else
-                '    '    If Not lead.HasOwnerInfo Then
-                '    '        DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)
-                '    '    End If
-                '    'End If
+                '    DataWCFService.UpdateAssessInfo(bble)
                 'End If
+
+                If String.IsNullOrEmpty(lead.Owner) Then
+                    DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True)
+                Else
+                    If Not lead.C1stMotgrAmt.HasValue Then
+                        DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True)
+                    Else
+                        If Not lead.HasOwnerInfo Then
+                            DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)
+                        End If
+                    End If
+                End If
                 'Thread.Sleep(1000)
             Catch ex As Exception
-                UserMessage.AddNewMessage("Service Error", "Initial Data Error " & bble, "Error: " & ex.Message, bble, DateTime.Now, "Initial Data")
+                UserMessage.AddNewMessage("Service Error", "Initial Data Error " & bble, "Error: " & ex.Message & " StackTrace: " & ex.StackTrace, bble, DateTime.Now, "Initial Data")
             End Try
         End While
 
@@ -214,7 +214,11 @@ Public Class ImportAgentData
                 Case ""
                     newLeads = Context.LeadsInfoes.ToList
                 Case "New"
+                    newLeads = Context.LeadsInfoes.Where(Function(ld) String.IsNullOrEmpty(ld.PropertyAddress)).ToList
+                Case "HomeOwner"
                     newLeads = Context.LeadsInfoes.Where(Function(ld) String.IsNullOrEmpty(ld.Owner)).ToList
+                Case "MotgrAmt"
+                    newLeads = Context.LeadsInfoes.Where(Function(ld) ld.C1stMotgrAmt Is Nothing).OrderByDescending(Function(ld) ld.CreateDate).ToList
                 Case "Existed"
                     newLeads = Context.LeadsInfoes.Where(Function(ld) Not String.IsNullOrEmpty(ld.Owner)).ToList
             End Select

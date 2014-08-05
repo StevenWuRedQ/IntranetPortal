@@ -64,6 +64,8 @@
                                         <Items>
                                             <dx:ListEditItem Text="All" Value="" />
                                             <dx:ListEditItem Text="New" Value="New" />
+                                            <dx:ListEditItem Text="HomeOwner" Value="HomeOwner" />
+                                            <dx:ListEditItem Text="MotgrAmt" Value="MotgrAmt" />                                            
                                             <dx:ListEditItem Text="Existed" Value="Existed" />
                                         </Items>
                                     </dx:ASPxComboBox>

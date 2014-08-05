@@ -79,48 +79,68 @@ Public Class DataWCFService
         End Using
     End Function
 
+    Public Shared Function GetCurrentIdentityName() As String
+        If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.User IsNot Nothing AndAlso HttpContext.Current.User.Identity IsNot Nothing AndAlso Not String.IsNullOrEmpty(HttpContext.Current.User.Identity.Name) Then
+            Return HttpContext.Current.User.Identity.Name
+        Else
+            Return "Dataloop"
+        End If
+    End Function
+
     Public Shared Function GetFullAssessInfo(bble As String, Optional li As LeadsInfo = Nothing) As LeadsInfo
-        Using client As New DataAPI.WCFMacrosClient
-            Dim result = client.NYC_Assessment_Full(bble).SingleOrDefault
-            If li Is Nothing Then
-                li = New LeadsInfo
-                li.CreateDate = DateTime.Now
-                li.CreateBy = HttpContext.Current.User.Identity.Name
-            End If
 
-            If result IsNot Nothing Then
-                li.BBLE = result.BBLE
+        Try
+            Using client As New DataAPI.WCFMacrosClient
 
-                li.Number = result.NUMBER
-                li.StreetName = result.ST_NAME
-                li.NeighName = result.NEIGH_NAME
-                li.State = "NY"
-                li.ZipCode = result.ZIP
-                li.PropertyAddress = BuildPropertyAddress(result) 'String.Format("{0} {1},{2},{3} {4}", result.NUMBER, result.ST_NAME, result.NEIGH_NAME, "NY", result.ZIP)
-                li.Borough = result.BOROUGH
-                li.Zoning = result.ZONING
-                li.MaxFar = CDbl(result.MAX_FAR)
-                li.ActualFar = CDbl(result.ACTUAL_FAR)
-                li.NYCSqft = result.GROSS_SQFT
-                'li.UnbuiltSqft
-                'Dim salesInfo = client.Acris_Get_LatestSale(bble)
-                'li.SaleDate = salesInfo.SALE_DATE
+                Dim result = client.NYC_Assessment_Full(bble).SingleOrDefault
+                If li Is Nothing Then
+                    li = New LeadsInfo
+                    li.CreateDate = DateTime.Now
 
-                li.Block = result.BLOCK
-                li.Lot = result.LOT
-                li.YearBuilt = result.AGE
-                li.TaxClass = result.TAX_CLASS
-                li.NumFloors = result.STORIES
-                li.BuildingDem = result.BLDG_DIM
-                li.LotDem = result.LOT_DIM
-                li.LastUpdate = DateTime.Now
-                li.UpdateBy = HttpContext.Current.User.Identity.Name
+                    li.CreateBy = GetCurrentIdentityName()
+                End If
 
+                If result IsNot Nothing Then
+                    li.BBLE = result.BBLE
+
+                    li.Number = result.NUMBER
+                    li.StreetName = result.ST_NAME
+                    li.NeighName = result.NEIGH_NAME
+                    li.State = "NY"
+                    li.ZipCode = result.ZIP
+                    li.PropertyAddress = BuildPropertyAddress(result) 'String.Format("{0} {1},{2},{3} {4}", result.NUMBER, result.ST_NAME, result.NEIGH_NAME, "NY", result.ZIP)
+                    li.Borough = result.BOROUGH
+                    li.Zoning = result.ZONING
+                    li.MaxFar = CDbl(result.MAX_FAR)
+                    li.ActualFar = CDbl(result.ACTUAL_FAR)
+                    li.NYCSqft = result.GROSS_SQFT
+                    'li.UnbuiltSqft
+                    'Dim salesInfo = client.Acris_Get_LatestSale(bble)
+                    'li.SaleDate = salesInfo.SALE_DATE
+
+                    li.Block = result.BLOCK
+                    li.Lot = result.LOT
+                    li.YearBuilt = result.AGE
+                    li.TaxClass = result.TAX_CLASS
+                    li.NumFloors = result.STORIES
+                    li.BuildingDem = result.BLDG_DIM
+                    li.LotDem = result.LOT_DIM
+                    li.LastUpdate = DateTime.Now
+                    Try
+                        li.UpdateBy = GetCurrentIdentityName()
+                    Catch ex As Exception
+                        Throw New Exception("Exception Occured in GetIdentityName(). Error: " + ex.Message)
+                    End Try
+
+                    Return li
+                End If
                 Return li
-            End If
-        End Using
+            End Using
+        Catch ex As Exception
+            Throw New Exception("Error in GetFullAssessInfo: " + ex.Message)
+        End Try
 
-        Return li
+
     End Function
 
     Public Shared Function UpdateHomeOwner(bble As String, orderid As Integer) As Boolean
@@ -206,7 +226,7 @@ Public Class DataWCFService
                     lead.Neighborhood = li.NeighName
                     lead.LeadsName = li.LeadsName
                     lead.LastUpdate = DateTime.Now
-                    lead.UpdateBy = HttpContext.Current.User.Identity.Name
+                    lead.UpdateBy = GetCurrentIdentityName()
                     context.SaveChanges()
                 End If
 
@@ -276,102 +296,116 @@ Public Class DataWCFService
         End If
 
         apiOrder.OrderTime = DateTime.Now
-        apiOrder.Orderby = HttpContext.Current.User.Identity.Name
+        apiOrder.Orderby = GetCurrentIdentityName()
 
         Return OrderPropData(apiOrder)
     End Function
 
     Public Shared Sub GetLatestSalesInfo(bble As String)
-        SaveNameandAddress(bble)
+        Try
+            SaveNameandAddress(bble)
+        Catch ex As Exception
+            Throw New Exception("Erron occure in Get Latest Sales Info: " + ex.Message)
+        End Try
+
         Return
 
-        'The old services 
-        Dim apiOrder As New APIOrder
-        apiOrder.LatestSale = apiOrder.ItemStatus.Calling
-        apiOrder.BBLE = bble
-        apiOrder.OrderTime = DateTime.Now
-        apiOrder.Orderby = HttpContext.Current.User.Identity.Name
+        ''The old services 
+        'Dim apiOrder As New APIOrder
+        'apiOrder.LatestSale = apiOrder.ItemStatus.Calling
+        'apiOrder.BBLE = bble
+        'apiOrder.OrderTime = DateTime.Now
+        'apiOrder.Orderby = HttpContext.Current.User.Identity.Name
 
-        Using context As New Entities
-            context.APIOrders.Add(apiOrder)
-            context.SaveChanges()
+        'Using context As New Entities
+        '    context.APIOrders.Add(apiOrder)
+        '    context.SaveChanges()
 
-            Using client As New DataAPI.WCFMacrosClient
-                client.Acris_Get_LatestSaleAsync(apiOrder.ApiOrderID, bble)
-            End Using
-        End Using
+        '    Using client As New DataAPI.WCFMacrosClient
+        '        client.Acris_Get_LatestSaleAsync(apiOrder.ApiOrderID, bble)
+        '    End Using
+        'End Using
     End Sub
 
     Public Shared Sub SaveNameandAddress(bble As String)
         Using context As New Entities
             Dim li = context.LeadsInfoes.Where(Function(l) l.BBLE = bble).SingleOrDefault
 
-            Using client As New DataAPI.WCFMacrosClient
-                Dim results = client.NYC_NameAndAddress(bble)
+            If li IsNot Nothing Then
+                Using client As New DataAPI.WCFMacrosClient
+                    Dim results = client.NYC_NameAndAddress(bble)
 
-                If results IsNot Nothing And results.Count > 0 Then
-                    If Not String.IsNullOrEmpty(results(0).Owner1.TrimStart.TrimEnd) Then
-                        li.Owner = results(0).Owner1.TrimStart.TrimEnd
-                        Dim add1 = String.Format("{0} {1}", results(0).Number, results(0).Street).TrimStart.TrimEnd
-                        SaveHomeOwner(bble, results(0).Owner1.TrimStart.TrimEnd, add1, "", results(0).City, results(0).State, "US", results(0).Zip, context)
-                    End If
+                    If results IsNot Nothing And results.Count > 0 Then
+                        If Not String.IsNullOrEmpty(results(0).Owner1) AndAlso Not String.IsNullOrEmpty(results(0).Owner1.TrimStart.TrimEnd) Then
+                            li.Owner = results(0).Owner1.TrimStart.TrimEnd
+                            Dim add1 = String.Format("{0} {1}", results(0).Number, results(0).Street).TrimStart.TrimEnd
+                            SaveHomeOwner(bble, results(0).Owner1.TrimStart.TrimEnd, add1, "", results(0).City, results(0).State, "US", results(0).Zip, context)
+                        End If
 
-                    Dim coOwner = results(0).Owner2.TrimStart.TrimEnd
-                    If Not String.IsNullOrEmpty(coOwner) AndAlso coOwner <> li.Owner Then
-                        li.CoOwner = results(0).Owner2.TrimStart.TrimEnd
-                        Dim add1 = String.Format("{0} {1}", results(0).Number, results(0).Street).TrimStart.TrimEnd
-                        SaveHomeOwner(bble, results(0).Owner2.TrimStart.TrimEnd, add1, "", results(0).City, results(0).State, "US", results(0).Zip, context)
+                        If Not String.IsNullOrEmpty(results(0).Owner2) AndAlso Not String.IsNullOrEmpty(results(0).Owner2.TrimStart.TrimEnd) Then
+                            Dim coOwner = results(0).Owner2.TrimStart.TrimEnd
+                            If Not String.IsNullOrEmpty(coOwner) AndAlso coOwner <> li.Owner Then
+                                li.CoOwner = results(0).Owner2.TrimStart.TrimEnd
+                                Dim add1 = String.Format("{0} {1}", results(0).Number, results(0).Street).TrimStart.TrimEnd
+                                SaveHomeOwner(bble, results(0).Owner2.TrimStart.TrimEnd, add1, "", results(0).City, results(0).State, "US", results(0).Zip, context)
+                            End If
+                        End If
+
+                        For Each item In results
+                            If Not String.IsNullOrEmpty(item.Name) Then
+                                SaveHomeOwner(bble, item.Name.TrimEnd.TrimStart, item.Mail_ST1, item.Mail_ST2, item.Mail_City, item.Mail_State, "US", item.Mail_Zip, context)
+                            End If
+                        Next
                     End If
+                End Using
+
+                Dim lead = context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault
+                If lead IsNot Nothing Then
+                    lead.LeadsName = li.LeadsName
+                    lead.LastUpdate = DateTime.Now
+                    lead.UpdateBy = GetCurrentIdentityName()
                 End If
 
-                For Each item In results
-                    SaveHomeOwner(bble, item.Name.TrimEnd.TrimStart, item.Mail_ST1, item.Mail_ST2, item.Mail_City, item.Mail_State, "US", item.Mail_Zip, context)
-                Next
-            End Using
-
-            Dim lead = context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault
-            If lead IsNot Nothing Then
-                lead.LeadsName = li.LeadsName
-                lead.LastUpdate = DateTime.Now
-                lead.UpdateBy = "DataService"
+                context.SaveChanges()
             End If
-
-            context.SaveChanges()
-
             ''Update Owner Info
             'UpdateHomeOwner(li.BBLE, 1)
         End Using
     End Sub
 
     Shared Sub SaveHomeOwner(bble As String, name As String, add1 As String, add2 As String, city As String, state As String, country As String, zip As String, context As Entities)
-        Dim localOwner = context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Name = name And ho.Active = True).SingleOrDefault
+        Try
+            Dim localOwner = context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Name = name And ho.Active = True).SingleOrDefault
 
-        If localOwner IsNot Nothing Then
-            localOwner.Name = name
-            localOwner.Address1 = add1
-            localOwner.Address2 = add2
-            localOwner.City = city
-            localOwner.Country = country
-            localOwner.State = state
-            localOwner.Zip = zip
-        Else
-            If context.HomeOwners.Local.Where(Function(ho) ho.BBLE = bble And ho.Name = name).Count = 0 Then
-                context.HomeOwners.Add(New HomeOwner With {
-                                                   .BBLE = bble,
-                                                   .Name = name,
-                                                   .Address1 = add1,
-                                                   .Address2 = add2,
-                                                   .City = city,
-                                                   .Country = country,
-                                                   .State = state,
-                                                   .Zip = zip,
-                                                   .Active = True,
-                                                   .CreateDate = DateTime.Now,
-                                                   .CreateBy = "DataService"
-                                                   })
+            If localOwner IsNot Nothing Then
+                localOwner.Name = name
+                localOwner.Address1 = add1
+                localOwner.Address2 = add2
+                localOwner.City = city
+                localOwner.Country = country
+                localOwner.State = state
+                localOwner.Zip = zip
+            Else
+                If context.HomeOwners.Local.Where(Function(ho) ho.BBLE = bble And ho.Name = name).Count = 0 Then
+                    context.HomeOwners.Add(New HomeOwner With {
+                                                       .BBLE = bble,
+                                                       .Name = name,
+                                                       .Address1 = add1,
+                                                       .Address2 = add2,
+                                                       .City = city,
+                                                       .Country = country,
+                                                       .State = state,
+                                                       .Zip = zip,
+                                                       .Active = True,
+                                                       .CreateDate = DateTime.Now,
+                                                       .CreateBy = "DataService"
+                                                       })
+                End If
+
             End If
-
-        End If
+        Catch ex As Exception
+            Throw New Exception("Error occure in SaveHomeOwner. Error: " + ex.Message)
+        End Try
     End Sub
 
     Public Shared Function OrderPropData(apiOrder As APIOrder, Optional needWait As Boolean = True) As Boolean
@@ -512,6 +546,11 @@ Public Class DataWCFService
     End Function
 
     Private Shared Function BuildPropertyAddress(asessment As DataAPI.NYC_Assessment) As String
-        Return Utility.BuildPropertyAddress(asessment.NUMBER, asessment.ST_NAME, asessment.BOROUGH, asessment.NEIGH_NAME, asessment.ZIP)
+        Try
+            Return Utility.BuildPropertyAddress(asessment.NUMBER, asessment.ST_NAME, asessment.BOROUGH, asessment.NEIGH_NAME, asessment.ZIP)
+        Catch ex As Exception
+            Throw New Exception("Exception Occured in BuildPropertyAddress: " + ex.Message)
+        End Try
+
     End Function
 End Class
