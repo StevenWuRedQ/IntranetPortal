@@ -136,7 +136,11 @@ Public Class LeadsManagement
                         newlead.AssignBy = User.Identity.Name
                     End If
                 Next
-                Context.SaveChanges()
+                If Context.GetValidationErrors().Count > 0 Then
+                    Throw New Exception("Exception Occured in Assign: " & Context.GetValidationErrors()(0).ValidationErrors(0).ErrorMessage)
+                Else
+                    Context.SaveChanges()
+                End If
             End Using
 
             'BindNewestLeads()
