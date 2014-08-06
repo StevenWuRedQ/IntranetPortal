@@ -663,6 +663,7 @@ i.with_circle {
     list-style: none;
     width: 255px;
     height: 45px;
+    font-family: 'Source Sans Pro';
 }
 .employee_list_item_no_broder
 {
@@ -1112,6 +1113,12 @@ pre#event-log {
 #ASPxSplitter1_chkFields
 {
     border:0px;
+    border-left:3px solid #b1b2b7;
+}
+#ASPxSplitter1_ASPxCheckBoxList2
+{
+    border:0px;
+    border-left:3px solid #b1b2b7;
 }
 /*change the grid padding*/
 .dxgvEditFormDisplayRow_MetropolisBlue td.dxgv, .dxgvDataRow_MetropolisBlue td.dxgv, .dxgvDataRowAlt_MetropolisBlue td.dxgv, .dxgvSelectedRow_MetropolisBlue td.dxgv, .dxgvFocusedRow_MetropolisBlue td.dxgv
@@ -1119,8 +1126,28 @@ pre#event-log {
     /*padding:0px ;*/
     
 }
+.dxp-current
+{
+    border-radius:12px;
+}
 #chartContainer
 {
     width:100%;
     height:320px;
+}
+.font_source_sans_pro
+{
+    font-family:'Source Sans Pro';
+}
+.report_grid_style
+{
+    max-height:800px;
+}
+#ASPxSplitter1_contentCallback_contentSplitter_gridReport
+{
+    border:0px;
+}
+.left_border
+{
+    border-left:3px solid;
 }

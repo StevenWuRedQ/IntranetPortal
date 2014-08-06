@@ -158,6 +158,15 @@ Partial Public Class AgentOverview
     Protected WithEvents hfEmpName As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
+    '''hfMode control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfMode As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''hfReports control.
     '''</summary>
     '''<remarks>
@@ -183,4 +192,13 @@ Partial Public Class AgentOverview
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents chkFields As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
+
+    '''<summary>
+    '''ASPxCheckBoxList2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxCheckBoxList2 As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
 End Class

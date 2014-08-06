@@ -7,6 +7,7 @@ Public Class AgentOverview
     Public report_data As String
 
     Public Property CurrentEmployee As Employee
+    Public Property CurrentStatus As LeadStatus
     Public portalDataContext As New Entities
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -54,13 +55,21 @@ Public Class AgentOverview
     End Sub
 
     Sub BindGridReport()
-        Dim name = hfEmpName.Value
+        If Not String.IsNullOrEmpty(hfMode.Value) AndAlso hfMode.Value = "Status" Then
+            Dim reports = (From li In portalDataContext.LeadsInfoes Join
+                                  ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
+                                  Where ld.Status = CurrentStatus
+                                  Select li).ToList
+            gridReport.DataSource = reports
+        Else
+            Dim name = hfEmpName.Value
 
-        Dim reports = (From li In portalDataContext.LeadsInfoes Join
-                                   ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
-                                   Where ld.EmployeeName = name
-                                   Select li).ToList
-        gridReport.DataSource = reports
+            Dim reports = (From li In portalDataContext.LeadsInfoes Join
+                                       ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
+                                       Where ld.EmployeeName = name
+                                       Select li).ToList
+            gridReport.DataSource = reports
+        End If
     End Sub
 
     Sub BindChart()
@@ -153,7 +162,15 @@ Public Class AgentOverview
             End If
         End If
 
-        gridReport.DataBind()
+        If e.Parameters.StartsWith("BindStatus") Then
+            hfMode.Value = "Status"
+            Dim status = e.Parameters.Split("|")(1)
+            CurrentStatus = CType(status, LeadStatus)
+            AgentCharts.LeadsCategory = CurrentStatus
+            gridReport.DataBind()
+        End If
+
+        'gridReport.DataBind()
     End Sub
 
     Protected Sub Unnamed_ServerClick(sender As Object, e As EventArgs)
@@ -161,9 +178,19 @@ Public Class AgentOverview
     End Sub
 
     Protected Sub contentCallback_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
-        If Not String.IsNullOrEmpty(e.Parameter) Then
-            CurrentEmployee = Employee.GetInstance(CInt(e.Parameter))
-            hfEmpName.Value = CurrentEmployee.Name
+        If e.Parameter.StartsWith("EMP") Then
+            If Not String.IsNullOrEmpty(e.Parameter) Then
+                CurrentEmployee = Employee.GetInstance(CInt(e.Parameter.Split("|")(1)))
+                hfEmpName.Value = CurrentEmployee.Name
+                gridReport.DataBind()
+            End If
+        End If
+
+        If e.Parameter.StartsWith("Status") Then
+            hfMode.Value = "Status"
+            Dim status = e.Parameter.Split("|")(1)
+            CurrentStatus = CType(status, LeadStatus)
+            AgentCharts.LeadsCategory = CurrentStatus
             gridReport.DataBind()
         End If
     End Sub
