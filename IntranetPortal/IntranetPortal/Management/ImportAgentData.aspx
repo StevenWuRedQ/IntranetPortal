@@ -63,6 +63,7 @@
                                     <dx:ASPxComboBox runat="server" ID="cbLeadsType">
                                         <Items>
                                             <dx:ListEditItem Text="All" Value="" />
+                                              <dx:ListEditItem Text="Unassign" Value="Unassign" />
                                             <dx:ListEditItem Text="New" Value="New" />
                                             <dx:ListEditItem Text="HomeOwner" Value="HomeOwner" />
                                             <dx:ListEditItem Text="MotgrAmt" Value="MotgrAmt" />                                            

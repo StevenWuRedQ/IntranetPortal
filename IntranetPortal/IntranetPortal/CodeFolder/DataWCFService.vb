@@ -465,14 +465,18 @@ Public Class DataWCFService
                 Using client As New DataAPI.WCFMacrosClient
 
                     If needCallService Then
-
-                        client.GetPropdata(bble,
+                        Try
+                            client.GetPropdata(bble,
                                                apiOrder.ApiOrderID,
                                                apiOrder.Acris = apiOrder.ItemStatus.Calling,
                                                apiOrder.TaxBill = apiOrder.ItemStatus.Calling,
                                                apiOrder.ECBViolation = apiOrder.ItemStatus.Calling,
                                                apiOrder.WaterBill = apiOrder.ItemStatus.Calling,
                                                 apiOrder.Zillow = apiOrder.ItemStatus.Calling, False)
+                        Catch ex As System.TimeoutException
+                            Throw New Exception("Time is out. The data services is busy now. Please try later. Data Service: GetPropdata " & ex.Message)
+                        End Try
+                        
                         'Dim owner = client.Get_TLO(apiOrder.ApiOrderID, bble, )
 
                     End If

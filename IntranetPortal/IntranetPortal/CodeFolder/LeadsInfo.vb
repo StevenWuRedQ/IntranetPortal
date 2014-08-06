@@ -82,6 +82,19 @@
         End Get
     End Property
 
+    Public ReadOnly Property IsUpdating As Boolean
+        Get
+            Using context As New Entities
+
+                If context.APIOrders.Where(Function(order) order.BBLE = BBLE And order.Status <> APIOrder.OrderStatus.Complete).Count > 0 Then
+                    Return True
+                Else
+                    Return False
+                End If
+            End Using
+        End Get
+    End Property
+
     Public ReadOnly Property UpdateInfo As String
         Get
             Using context As New Entities

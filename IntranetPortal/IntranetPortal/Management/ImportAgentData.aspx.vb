@@ -161,6 +161,9 @@ Public Class ImportAgentData
             End If
 
             Dim bble = bbles(count)
+            Dim attemps = 0
+InitialLine:
+            attemps += 1
             Try
 
                 'UpdatePropertyAddress(bble)
@@ -176,14 +179,30 @@ Public Class ImportAgentData
                     If Not lead.C1stMotgrAmt.HasValue Then
                         DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True)
                     Else
-                        If Not lead.HasOwnerInfo Then
-                            DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)
+                        If lead.IsUpdating Then
+                            DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True)
+                        Else
+                            If Not lead.HasOwnerInfo Then
+                                DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)
+                            End If
                         End If
                     End If
                 End If
                 'Thread.Sleep(1000)
             Catch ex As Exception
-                UserMessage.AddNewMessage("Service Error", "Initial Data Error " & bble, "Error: " & ex.Message & " StackTrace: " & ex.StackTrace, bble, DateTime.Now, "Initial Data")
+                UserMessage.AddNewMessage("Service Error", "Initial Data Error " & bble & " Attemps: " & attemps, "Error: " & ex.Message & " StackTrace: " & ex.StackTrace, bble, DateTime.Now, "Initial Data")
+                Select Case attemps
+                    Case 1
+                        Thread.Sleep(30000)
+                    Case 2
+                        Thread.Sleep(60000)
+                    Case 3
+                        Thread.Sleep(300000)
+                    Case Else
+                        Thread.Sleep(1000000)
+                End Select
+
+                GoTo InitialLine
             End Try
         End While
 
@@ -213,6 +232,8 @@ Public Class ImportAgentData
             Select Case type
                 Case ""
                     newLeads = Context.LeadsInfoes.ToList
+                Case "Unassign"
+                    newLeads = Context.LeadsInfoes.Where(Function(ld) ld.Lead Is Nothing).ToList
                 Case "New"
                     newLeads = Context.LeadsInfoes.Where(Function(ld) String.IsNullOrEmpty(ld.PropertyAddress)).ToList
                 Case "HomeOwner"

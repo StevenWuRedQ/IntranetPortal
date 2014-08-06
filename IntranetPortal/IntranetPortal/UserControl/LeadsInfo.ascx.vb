@@ -43,7 +43,10 @@ Public Class LeadsInfo1
             Dim leadsinfodata As LeadsInfo
 
             If lead Is Nothing Then
-                leadsinfodata = DataWCFService.UpdateAssessInfo(bble)
+                leadsinfodata = Context.LeadsInfoes.Where(Function(li) li.BBLE = bble).SingleOrDefault
+                If leadsinfodata Is Nothing Then
+                    leadsinfodata = DataWCFService.UpdateAssessInfo(bble)
+                End If
             Else
                 leadsinfodata = lead.LeadsInfo
             End If
