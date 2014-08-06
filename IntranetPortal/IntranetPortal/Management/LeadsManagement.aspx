@@ -90,6 +90,7 @@
                                             <Settings AllowHeaderFilter="False"></Settings>
                                         </dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Neighborhood" Visible="false"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="Type" Width="30px"></dx:GridViewDataTextColumn>
                                     </Columns>
                                     <SettingsBehavior  AllowClientEventsOnLoad="false"  AllowFocusedRow="true"
                                         EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
