@@ -290,6 +290,9 @@
     <Compile Include="DataModel\APIOrder.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\BuildingCode.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\Employee.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>

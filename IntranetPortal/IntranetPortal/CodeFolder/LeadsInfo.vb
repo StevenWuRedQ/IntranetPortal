@@ -37,6 +37,18 @@
         End Get
     End Property
 
+    Public ReadOnly Property PropertyClassCode As String
+        Get
+            Using context As New Entities
+                Dim bc = context.BuildingCodes.Find(PropertyClass)
+                If bc IsNot Nothing Then
+                    Return String.Format("{0}-{1}", bc.Code, bc.Description)
+                End If
+
+                Return PropertyClass
+            End Using
+        End Get
+    End Property
 
     Public ReadOnly Property Neighborhood As String
         Get

@@ -122,6 +122,7 @@ Public Class DataWCFService
                     li.Lot = result.LOT
                     li.YearBuilt = result.AGE
                     li.TaxClass = result.TAX_CLASS
+                    li.PropertyClass = result.CLASS
                     li.NumFloors = result.STORIES
                     li.BuildingDem = result.BLDG_DIM
                     li.LotDem = result.LOT_DIM

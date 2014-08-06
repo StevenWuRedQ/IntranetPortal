@@ -477,7 +477,6 @@
                                                                         </dx:LayoutItemNestedControlContainer>
                                                                     </LayoutItemNestedControlCollection>
                                                                 </dx:LayoutItem>
-
                                                                 <dx:LayoutItem Caption="Lis Pendens" FieldName="IsLisPendens">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer>
@@ -522,7 +521,7 @@
                                                                         </dx:LayoutItemNestedControlContainer>
                                                                     </LayoutItemNestedControlCollection>
                                                                 </dx:LayoutItem>
-                                                                <dx:LayoutItem Caption="" ShowCaption="False" VerticalAlign="Bottom">
+                                                                <dx:LayoutItem Caption="Property Class" FieldName="PropertyClassCode">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer>
                                                                             <dx:ASPxTextBox ID="ASPxTextBox15" Width="100%"
@@ -530,7 +529,7 @@
                                                                         </dx:LayoutItemNestedControlContainer>
                                                                     </LayoutItemNestedControlCollection>
                                                                 </dx:LayoutItem>
-                                                                <dx:LayoutItem Caption="Unbuilt Sqft" VerticalAlign="Bottom">
+                                                                <dx:LayoutItem Caption="Unbuilt Sqft">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer>
                                                                             <dx:ASPxTextBox ID="ASPxTextBox22"

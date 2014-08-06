@@ -41,6 +41,13 @@
           <Property Name="OrderTime" Type="datetime" />
           <Property Name="Orderby" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="BuildingCodes">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -179,6 +186,7 @@
           <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
           <Property Name="SaleDate" Type="smalldatetime" />
           <Property Name="TaxClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="PropertyClass" Type="nvarchar" MaxLength="50" />
           <Property Name="SaleType" Type="nvarchar" MaxLength="50" />
           <Property Name="Condition" Type="nchar" MaxLength="15" />
           <Property Name="Block" Type="nchar" MaxLength="5" />
@@ -397,6 +405,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
         <EntityContainer Name="IntranetPortalModelStoreContainer">
           <EntitySet Name="Agent_Properties" EntityType="Self.Agent_Properties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APIOrders" EntityType="Self.APIOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BuildingCodes" EntityType="Self.BuildingCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FileAttachments" EntityType="Self.FileAttachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HomeOwnerPhone" EntityType="Self.HomeOwnerPhone" Schema="dbo" store:Type="Tables" />
@@ -474,6 +483,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
             <Parameter Name="OldName" Mode="In" Type="String" />
             <Parameter Name="NewName" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="BuildingCodes" EntityType="IntranetPortalModel.BuildingCode" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -606,6 +616,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="ActualFar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NYCSqft" Type="Double" />
           <Property Name="UnbuiltSqft" Type="Double" />
+          <Property Name="PropertyClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="LeadLeadsInfo">
           <End Type="IntranetPortalModel.Lead" Role="Lead" Multiplicity="0..1" />
@@ -930,6 +941,13 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="ProfileData" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="BuildingCode">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -993,6 +1011,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySetMapping Name="LeadsInfoes">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadsInfo">
               <MappingFragment StoreEntitySet="LeadsInfo">
+                <ScalarProperty Name="PropertyClass" ColumnName="PropertyClass" />
                 <ScalarProperty Name="UnbuiltSqft" ColumnName="UnbuiltSqft" />
                 <ScalarProperty Name="NYCSqft" ColumnName="NYCSqft" />
                 <ScalarProperty Name="ActualFar" ColumnName="ActualFar" />
@@ -1338,6 +1357,14 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UpdateEmployeeName" FunctionName="IntranetPortalModel.Store.UpdateEmployeeName" />
+          <EntitySetMapping Name="BuildingCodes">
+            <EntityTypeMapping TypeName="IntranetPortalModel.BuildingCode">
+              <MappingFragment StoreEntitySet="BuildingCodes">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

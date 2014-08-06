@@ -32,6 +32,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.SharedLead" Width="1.5" PointX="14.125" PointY="1" />
         <EntityTypeShape EntityType="IntranetPortalModel.HomeOwnerPhone" Width="1.5" PointX="14.25" PointY="3.625" />
         <EntityTypeShape EntityType="IntranetPortalModel.UserProfileData" Width="1.5" PointX="10.5" PointY="6.375" />
+        <EntityTypeShape EntityType="IntranetPortalModel.BuildingCode" Width="1.5" PointX="14.25" PointY="6.625" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
