@@ -6,6 +6,7 @@
         TaxLien = 3
     End Enum
 
+    'Get assign leads type
     Public Function GetLeadsType(type As String) As LeadsType
         Dim retType = Nothing
         If [Enum].TryParse(Of LeadsType)(type.Replace(" ", ""), retType) Then
@@ -23,6 +24,7 @@
         End Get
     End Property
 
+    'Leadsinfo status
     Public ReadOnly Property Status As String
         Get
             If Lead.Status.HasValue Then
@@ -32,6 +34,19 @@
             Return ""
         End Get
     End Property
+
+    'the finder name or agent name of this leadsinfo
+    Public ReadOnly Property AgentName As String
+        Get
+            If Lead IsNot Nothing Then
+                Return Lead.EmployeeName
+            End If
+
+            Return ""
+        End Get
+    End Property
+
+
 
     Public ReadOnly Property CallAttemps As Integer
         Get

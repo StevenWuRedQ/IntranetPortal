@@ -90,7 +90,7 @@
                                             <Settings AllowHeaderFilter="False"></Settings>
                                         </dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Neighborhood" Visible="false"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="Type" Width="30px">
+                                        <dx:GridViewDataTextColumn FieldName="Type" Width="30px" CellStyle-HorizontalAlign="Center" CellStyle-VerticalAlign="Middle">
                                             <DataItemTemplate>
                                                 <dx:ASPxImage runat="server" ID="imgType" ImageUrl="~/images/Opportunities-icon.jpg" Width="24" Height="24" Visible="false"></dx:ASPxImage>
                                             </DataItemTemplate>
