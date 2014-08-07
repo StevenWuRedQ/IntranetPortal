@@ -17,6 +17,9 @@ Public Class AgentOverview
         Else
             CurrentEmployee = Employee.GetInstance(hfEmpName.Value)
         End If
+        If Not String.IsNullOrEmpty(CurrentEmployee.Picture) Then
+            profile_image.ImageUrl = CurrentEmployee.Picture
+        End If
 
         If Not IsPostBack Then
             gridEmps.DataBind()
@@ -148,18 +151,9 @@ Public Class AgentOverview
             Dim up = Employee.GetProfile(User.Identity.Name)
             gridReport.LoadClientLayout(up.ReportTemplates(report))
         End If
-
+       
         If e.Parameters.StartsWith("FieldChange") Then
-            If chkFields.SelectedValues.Count > 0 Then
-                For Each item As ListEditItem In chkFields.Items
-                    Dim gridCol As GridViewDataColumn = gridReport.Columns(item.Value)
-                    If item.Selected Then
-                        gridCol.Visible = True
-                    Else
-                        gridCol.Visible = False
-                    End If
-                Next
-            End If
+            show_grid_by_items(False)
         End If
 
         If e.Parameters.StartsWith("BindStatus") Then
@@ -181,6 +175,8 @@ Public Class AgentOverview
         If e.Parameter.StartsWith("EMP") Then
             If Not String.IsNullOrEmpty(e.Parameter) Then
                 CurrentEmployee = Employee.GetInstance(CInt(e.Parameter.Split("|")(1)))
+                'AgentCharts.current_employee = CurrentEmployee.Name
+                'AgentCharts.Agent_leads_activity_source()
                 hfEmpName.Value = CurrentEmployee.Name
                 gridReport.DataBind()
             End If
@@ -201,22 +197,40 @@ Public Class AgentOverview
 
     Protected Sub gridReport_Init(sender As Object, e As EventArgs)
         Dim s = hfEmpName.Value
-        If chkFields.Items.Count > 0 Then
-            gridReport.Columns.Clear()
-            For Each item As ListEditItem In chkFields.Items
+
+       
+        gridReport.Columns.Clear()
+        show_grid_by_items(True)
+
+    End Sub
+    Protected Sub show_grid_by_items(isInit As Boolean)
+        init_grid_by_items(chkFields.Items, isInit)
+        init_grid_by_items(chkFields2.Items, isInit)
+    End Sub
+
+
+    Protected Sub init_grid_by_items(collectItems As ListEditItemCollection, isAdd As Boolean)
+        If collectItems.Count > 0 Then
+            For Each item As ListEditItem In collectItems
                 Dim gridCol = New GridViewDataColumn
-                gridCol.FieldName = item.Value
+                If Not isAdd Then
+                    gridCol = gridReport.Columns(item.Value)
+                Else
+                    gridCol.FieldName = item.Value
+                End If
+
                 If item.Selected Then
                     gridCol.Visible = True
                 Else
                     gridCol.Visible = False
                 End If
+                If isAdd Then
+                    gridReport.Columns.Add(gridCol)
+                End If
 
-                gridReport.Columns.Add(gridCol)
             Next
         End If
     End Sub
-    
 
     Protected Sub callbackPnlTemplates_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         If e.Parameter.StartsWith("AddReport") Then

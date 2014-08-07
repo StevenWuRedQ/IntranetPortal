@@ -28,6 +28,12 @@
         //alert(functions[type])
         functions[type]();
     };
+    function change_chart_time(e)
+    {
+        var time = $(e).text();
+        var chart = $("#container").dxChart("instance");
+        chart.option("title", time);
+    }
     function clear_chart(show_pie)
     {
         if (show_pie)
@@ -172,6 +178,11 @@
         callbackDsClient.PerformCallback(status);
     }
 
+    function LoadEmployeeBarChart(empId)
+    {
+        callbackEmployeeClient.PerformCallback(empId)
+    }
+
     function DataSourceLoadedComplete(s, e)
     {
         show_bar_chart( $.parseJSON(e.result) );
@@ -187,5 +198,8 @@
             show_bar_chart();
 </script>
 <dx:ASPxCallback runat="server" ID="callbackDs" OnCallback="callbackDs_Callback" ClientInstanceName="callbackDsClient">
+    <ClientSideEvents CallbackComplete="DataSourceLoadedComplete" />
+</dx:ASPxCallback>
+<dx:ASPxCallback runat="server" ID="ASPxCallback1" OnCallback="ASPxCallback1_Callback" ClientInstanceName="callbackEmployeeClient">
     <ClientSideEvents CallbackComplete="DataSourceLoadedComplete" />
 </dx:ASPxCallback>

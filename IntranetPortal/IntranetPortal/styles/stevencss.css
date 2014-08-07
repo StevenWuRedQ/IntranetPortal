@@ -611,7 +611,7 @@ i.with_circle {
     border: 2px solid;
     text-align: center;
     color: #b1b2b7;
-    cursor:pointer;
+    cursor: pointer;
 }
 
     .report_head_button:hover {
@@ -665,14 +665,15 @@ i.with_circle {
     height: 45px;
     font-family: 'Source Sans Pro';
 }
-.employee_list_item_no_broder
-{
-    border:0px;
+
+.employee_list_item_no_broder {
+    border: 0px;
 }
-    .employee_list_item:hover {
-        background: #ff400d;
-        color: white;
-    }
+
+.employee_list_item:hover {
+    background: #ff400d;
+    color: white;
+}
 
 .employee_lest_head_number_label {
     display: inline-block;
@@ -1108,46 +1109,57 @@ pre#event-log {
 .icon_right_s {
     float: right;
     margin-top: 10px;
-    
 }
-#ASPxSplitter1_chkFields
-{
-    border:0px;
-    border-left:3px solid #b1b2b7;
+
+#ASPxSplitter1_chkFields, #ASPxSplitter1_chkFields2 {
+    border: 0px;
+    border-left: 3px solid #b1b2b7;
 }
-#ASPxSplitter1_ASPxCheckBoxList2
-{
-    border:0px;
-    border-left:3px solid #b1b2b7;
-}
+
 /*change the grid padding*/
-.dxgvEditFormDisplayRow_MetropolisBlue td.dxgv, .dxgvDataRow_MetropolisBlue td.dxgv, .dxgvDataRowAlt_MetropolisBlue td.dxgv, .dxgvSelectedRow_MetropolisBlue td.dxgv, .dxgvFocusedRow_MetropolisBlue td.dxgv
-{
+.dxgvEditFormDisplayRow_MetropolisBlue td.dxgv, .dxgvDataRow_MetropolisBlue td.dxgv, .dxgvDataRowAlt_MetropolisBlue td.dxgv, .dxgvSelectedRow_MetropolisBlue td.dxgv, .dxgvFocusedRow_MetropolisBlue td.dxgv {
     /*padding:0px ;*/
+}
+
+.dxp-current {
+    border-radius: 12px;
+}
+
+#chartContainer {
+    width: 100%;
+    height: 320px;
+}
+
+.font_source_sans_pro {
+    font-family: 'Source Sans Pro';
+}
+
+.report_grid_style {
+    max-height: 800px;
+}
+
+#ASPxSplitter1_contentCallback_contentSplitter_gridReport {
+    border: 0px;
+}
+
+.left_border {
+    border-left: 3px solid;
+}
+
+#ASPxSplitter1_contentCallback_contentSplitter_gridReport_DXHeadersRow0 {
+    text-transform: uppercase;
+    color:#b1b2b7;
+}
+
+.class_profile_image {
+    margin-top: 40px;
+    margin-left: 84px;
+    height: 200px;
+    width: 200px;
+    cursor: pointer;
+}
+.layout_float_right
+{
+    float:right;
     
-}
-.dxp-current
-{
-    border-radius:12px;
-}
-#chartContainer
-{
-    width:100%;
-    height:320px;
-}
-.font_source_sans_pro
-{
-    font-family:'Source Sans Pro';
-}
-.report_grid_style
-{
-    max-height:800px;
-}
-#ASPxSplitter1_contentCallback_contentSplitter_gridReport
-{
-    border:0px;
-}
-.left_border
-{
-    border-left:3px solid;
 }

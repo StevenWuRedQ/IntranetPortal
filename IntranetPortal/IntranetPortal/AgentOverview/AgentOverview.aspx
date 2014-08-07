@@ -37,6 +37,7 @@
         }
     </style>
     <script type="text/javascript">
+        var empId = null;
         function SearchNames(inputBox) {
             var key = inputBox.value;
             //alert(key);
@@ -68,16 +69,19 @@
             }
 
             //Show chart
-            ShowChart();
+            if (empId != null)
+                LoadEmployeeBarChart(empId);
         }
 
         function DoCallback() {
             var rowKey = gridEmpsClient.GetRowKey(gridEmpsClient.GetFocusedRowIndex());
             if (rowKey != null)
+            {
                 ContentCallbackPanel.PerformCallback("EMP|" + rowKey);
-
-
+                empId = rowKey;
+            }
         }
+
         function Savelayout(reportName) {
             callbackPnlTemplatesClient.PerformCallback("AddReport|" + reportName);
         }
@@ -114,7 +118,7 @@
                     <ContentCollection>
                         <dx:SplitterContentControl runat="server">
                             <%--top block--%>
-                            <div style="height: 450px; border-bottom: 1px solid #dde0e7">
+                            <div style="height: 459px; border-bottom: 1px solid #dde0e7">
                                 <div style="margin: 30px 20px 30px 30px">
                                     <div style="font-size: 24px;">
                                         <i class="fa fa-group with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;&nbsp;<span style="color: #234b60; font-size: 30px;">Employees</span>
@@ -145,12 +149,11 @@
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataColumn>--%>
                                             </Columns>
-                                            <Styles Cell-Paddings-Padding="0px" SelectedRow-BackColor="#FF400D"> 
-<SelectedRow BackColor="#FF400D"></SelectedRow>
-
-<Cell>
-<Paddings Padding="0px"></Paddings>
-</Cell>
+                                            <Styles > 
+                                                    <SelectedRow BackColor="#FF400D"></SelectedRow>
+                                                    <Cell>
+                                                    <Paddings Padding="0px"></Paddings>
+                                                    </Cell>
                                             </Styles>
                                             <GroupSummary>
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
@@ -225,11 +228,11 @@
 
                                 <%--menu list--%>
                                 <div style="margin: 13px 30px 30px 30px">
-                                    <div class="agent_menu_list_item"><a href="#" onclick="ShowLeadstatus(1)">Hot Leads</a></div>
-                                    <div class="agent_menu_list_item">Follow Up</div>
-                                    <div class="agent_menu_list_item">In Negotiation</div>
-                                    <div class="agent_menu_list_item">Dead Lead </div>
-                                    <div class="agent_menu_list_item">Closed</div>
+                                    <div class="agent_menu_list_item" onclick="ShowLeadstatus(1)">Hot Leads</div>
+                                    <div class="agent_menu_list_item" onclick="ShowLeadstatus(3)">Follow Up</div>
+                                    <div class="agent_menu_list_item" onclick="ShowLeadstatus(5)">In Negotiation</div>
+                                    <div class="agent_menu_list_item" onclick="ShowLeadstatus(4)">Dead Lead </div>
+                                    <div class="agent_menu_list_item" onclick="ShowLeadstatus(7)">Closed</div>
                                 </div>
 
                                 <%-----end-----%>
@@ -255,19 +258,17 @@
                                                 <dx:SplitterPane ShowCollapseBackwardButton="True">
                                                     <ContentCollection>
                                                         <dx:SplitterContentControl runat="server">
-                                                            <div style="width: 1000px;" class="agent_layout_float clear-fix">
+                                                            <div style="width: 1272px;" class="agent_layout_float clear-fix">
                                                                 <%--center top--%>
                                                                 <div style="height: 490px; float: left; border-right: 1px solid #dde0e7;">
                                                                     <%--angent info--%>
 
                                                                     <div style="width: 370px; height: 490px; background: url('../images/profile_bg.png')">
                                                                         <%--width:201 height:201--%>
-                                                                        <% If String.IsNullOrEmpty(CurrentEmployee.Picture) Then%>
-                                                                        <img src="/images/user-empty-icon.png" onclick="selectImgs.ShowAtElement(this);" class="img-circle" style="margin-top: 40px; margin-left: 84px; height: 200px; width: 200px; cursor: pointer;" />
-                                                                        <%Else%>
-                                                                        <img src="<%=CurrentEmployee.Picture%>" onclick="selectImgs.ShowAtElement(this)" class="img-circle" style="margin-top: 40px; margin-left: 84px; height: 200px; width: 200px; cursor: pointer" />
-                                                                        <%End If%>
+                                                                       
+                                                                        <dx:ASPxImage runat="server" ID="profile_image" CssClass="img-circle class_profile_image" ImageUrl="/images/user-empty-icon.png">
 
+                                                                        </dx:ASPxImage>
                                                                         <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"><%= CurrentEmployee.Name %></div>
                                                                         <div style="margin-top: 8px; font-size: 16px; color: #234b60; font-weight: 900" class="agnet_info_text"><%= CurrentEmployee.Position %></div>
                                                                         <%--info detial--%>
@@ -332,22 +333,10 @@
 
                                                                     <div style="padding-top: 50px; font-size: 30px; color: #ff400d; text-align: center; display: none">In the last 6 months</div>
 
-                                                                    <div style="padding-left: 370px; padding-top: 10px; height: 325px;">
-                                                                        <div>
-                                                                            <div class="dropdown">
-                                                                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="background:transparent">
-                                                                                    Change Stat Range <span class="caret"></span>
-                                                                           
-                                                                                </button>
-                                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Chart of Last 6 months</a></li>
-                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Chart of Last 12 months</a></li>
-                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Chart of Last 1 year</a></li>
-                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Chart of Last 2 years</a></li>
-                                                                                </ul>
-                                                                            </div>
+                                                                    <div style="padding-left: 370px; padding-top: 10px; height: 325px;" class="clearfix">
+                                                                        <div class="layout_float_right clearfix">
 
-                                                                             <div class="dropdown">
+                                                                             <div class="dropdown layout_float_right" >
                                                                                 <button class="btn btn-default dropdown-toggle" type="button" id="chart_line_select" data-toggle="dropdown" style="background:transparent">
                                                                                     Line & Point Chart <span class="caret"></span>
                                                                            
@@ -359,6 +348,20 @@
                                                                                     
                                                                                 </ul>
                                                                             </div>
+                                                                            <div class="dropdown layout_float_right" style="margin-right:20px">
+                                                                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="background:transparent">
+                                                                                    Change Stat Range <span class="caret"></span>
+                                                                           
+                                                                                </button>
+                                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(this)">Chart of Last 6 months</a></li>
+                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(this)">Chart of Last 12 months</a></li>
+                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(this)">Chart of Last 1 year</a></li>
+                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(this)">Chart of Last 2 years</a></li>
+                                                                                </ul>
+                                                                            </div>
+
+                                                                            
                                                                         </div>
                                                                         <div style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px; /*background: blue; */ color: white; height: 100%;">
                                                                             <uc1:AgentCharts runat="server" ID="AgentCharts" />
@@ -453,36 +456,46 @@
                                                                         <span style="color: #234b60; font-weight: 900">Customized Report&nbsp;&nbsp;&nbsp;</span>
                                                                         <i class="fa fa-question-circle tooltip-examples" style="color: #999ca1" title="Check items from the pane on the right side to view the customized report."></i>
                                                                         <div style="float: right; padding-right: 40px; font-size: 18px;">
+                                                                            
+                                                                            <i class="fa fa-save report_head_button report_head_button_padding" onclick="SaveReportPopup.Show()" style="cursor: pointer"></i>
+                                                                            <i class="fa fa-exchange report_head_button tooltip-examples report_head_button_padding" title="Compare"></i>
                                                                             <asp:LinkButton ID="btnExport" runat="server" OnClick="Unnamed_ServerClick" Text='<i class="fa fa-print  report_head_button report_head_button_padding"></i>'>                                                                
                                                                             </asp:LinkButton>
-                                                                            <i class="fa fa-save report_head_button report_head_button_padding" onclick="SaveReportPopup.Show()" style="cursor: pointer"></i>
-                                                                            <i class="fa fa-exchange  report_head_button"></i>
+                                                                            <i class="fa fa-envelope  report_head_button report_head_button_padding"></i>
+                                                                            <i class="fa fa-file-pdf-o  report_head_button"></i>
+                                                                            
                                                                         </div>
                                                                     </div>
 
                                                                     <%--grid view--%>
 
                                                                     <%--<div style="overflow-x:scroll;overflow-y:scroll;max-height:900px;">--%>
-                                                                    <dx:ASPxGridView ID="gridReport" runat="server" KeyFieldName="BBLE" Width="100%" AutoGenerateColumns="false" ClientInstanceName="gridReportClient" OnCustomCallback="gridReport_CustomCallback" Settings-ShowGroupPanel="false" OnLoad="gridReport_Load" OnInit="gridReport_Init" CssClass="font_source_sans_pro" Settings-HorizontalScrollBarMode="Auto" Settings-VerticalScrollBarMode="Auto">
+                                                                    <dx:ASPxGridView ID="gridReport" runat="server" KeyFieldName="BBLE" Width="100%" AutoGenerateColumns="false" ClientInstanceName="gridReportClient" OnCustomCallback="gridReport_CustomCallback" Settings-ShowGroupPanel="false" OnLoad="gridReport_Load" OnInit="gridReport_Init" CssClass="font_source_sans_pro"  Settings-VerticalScrollBarMode="Auto" > <%--Settings-HorizontalScrollBarMode="Auto"--%>
                                                                         <Settings ShowFilterBar="Visible" ShowHeaderFilterButton="true" ShowGroupPanel="true" />
                                                                         <Columns>
-                                                                            <dx:GridViewDataColumn FieldName="PropertyAddress" CellStyle-Font-Bold="true">
-<CellStyle Font-Bold="True"></CellStyle>
+                                                                            <dx:GridViewDataColumn FieldName="PropertyAddress">
+                                                                                    <CellStyle Font-Bold="True"></CellStyle>
                                                                             </dx:GridViewDataColumn>
 
                                                                         </Columns>
-                                                                        <SettingsPager PageSize="10" PageSizeItemSettings-Visible="true" PageSizeItemSettings-ShowAllItem="true">
-<PageSizeItemSettings ShowAllItem="True" Visible="True"></PageSizeItemSettings>
+                                                                        <SettingsPager PageSize="10" PageSizeItemSettings-Visible="true" PageSizeItemSettings-ShowAllItem="true" Mode="ShowAllRecords">
+                                                                            <PageSizeItemSettings ShowAllItem="True" Visible="True"></PageSizeItemSettings>
+                                                                           
                                                                         </SettingsPager>
+                                                                        <Settings  VerticalScrollableHeight="350"/>
+
                                                                         <GroupSummary>
                                                                             <dx:ASPxSummaryItem FieldName="BBLE" SummaryType="Count" />
                                                                         </GroupSummary>
                                                                         <Styles>
-                                                                            <Cell BorderLeft-BorderWidth="0px" BorderRight-BorderWidth="0px">
-<BorderLeft BorderWidth="0px"></BorderLeft>
+                                                                            <Cell >
+                                                                                <BorderLeft BorderWidth="0px"></BorderLeft>
 
-<BorderRight BorderWidth="0px"></BorderRight>
+                                                                                <BorderRight BorderWidth="0px"></BorderRight>
                                                                             </Cell>
+                                                                            <Table>
+                                                                                
+                                                                            </Table>
                                                                         </Styles>
                                                                     </dx:ASPxGridView>
                                                                     <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridReport"></dx:ASPxGridViewExporter>
@@ -698,7 +711,7 @@
                                             <script type="text/javascript">
                                                 function Fields_ValueChanged(s, e) {
                                                     var values = filed_CheckBoxList1.GetSelectedValues() + ',' + filed_CheckBoxList2.GetSelectedValues();
-                                                    alert(values);
+                                                    
                                                     gridReportClient.PerformCallback("FieldChange|" + values);
                                                     e.processOnServer = false;
                                                 }
@@ -722,7 +735,7 @@
                                             </div>
                                             <div>
                                                 <div class="color_gray upcase_text" style="font-size: 12px; padding-bottom: 10px; padding-top: 20px">Category 2</div>
-                                                <dx:ASPxCheckBoxList ID="ASPxCheckBoxList2" runat="server" ValueType="System.String" Width="100%" ClientInstanceName="filed_CheckBoxList2">
+                                                <dx:ASPxCheckBoxList ID="chkFields2" runat="server" ValueType="System.String" Width="100%" ClientInstanceName="filed_CheckBoxList2">
                                                     <Items>
                                                         <dx:ListEditItem Text="BBLE" Value="BBLE" Selected="true" />
 

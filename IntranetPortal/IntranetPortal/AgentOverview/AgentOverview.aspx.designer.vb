@@ -59,6 +59,15 @@ Partial Public Class AgentOverview
     Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
 
     '''<summary>
+    '''profile_image control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents profile_image As Global.DevExpress.Web.ASPxEditors.ASPxImage
+
+    '''<summary>
     '''ASPxPopupControl2 control.
     '''</summary>
     '''<remarks>
@@ -194,11 +203,11 @@ Partial Public Class AgentOverview
     Protected WithEvents chkFields As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
 
     '''<summary>
-    '''ASPxCheckBoxList2 control.
+    '''chkFields2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxCheckBoxList2 As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
+    Protected WithEvents chkFields2 As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
 End Class
