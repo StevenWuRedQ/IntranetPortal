@@ -82,7 +82,7 @@
                                     </dx:ASPxCheckBox>
                                     <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Bold="true" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
                                 </div>
-                                <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsBehavior-AutoExpandAllGroups="True" SettingsPager-Mode="ShowAllRecords">
+                                <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsBehavior-AutoExpandAllGroups="True" SettingsPager-Mode="ShowAllRecords" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared">
                                     <Columns>
                                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
                                         </dx:GridViewCommandColumn>
@@ -90,7 +90,11 @@
                                             <Settings AllowHeaderFilter="False"></Settings>
                                         </dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Neighborhood" Visible="false"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="Type" Width="30px"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="Type" Width="30px">
+                                            <DataItemTemplate>
+                                                <dx:ASPxImage runat="server" ID="imgType" ImageUrl="~/images/Opportunities-icon.jpg" Width="24" Height="24" Visible="false"></dx:ASPxImage>
+                                            </DataItemTemplate>
+                                        </dx:GridViewDataTextColumn>
                                     </Columns>
                                     <SettingsBehavior  AllowClientEventsOnLoad="false"  AllowFocusedRow="true"
                                         EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />

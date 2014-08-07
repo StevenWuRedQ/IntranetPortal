@@ -212,13 +212,13 @@ Partial Public Class LeadsInfo1
     Protected WithEvents ASPxTextBox6 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
 
     '''<summary>
-    '''ASPxTextBox4 control.
+    '''ASPxTextBox15 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxTextBox4 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents ASPxTextBox15 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
 
     '''<summary>
     '''ASPxTextBox5 control.
@@ -293,13 +293,13 @@ Partial Public Class LeadsInfo1
     Protected WithEvents ASPxRadioButtonList10 As Global.DevExpress.Web.ASPxEditors.ASPxRadioButtonList
 
     '''<summary>
-    '''ASPxTextBox15 control.
+    '''ASPxTextBox4 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxTextBox15 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents ASPxTextBox4 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
 
     '''<summary>
     '''ASPxTextBox22 control.

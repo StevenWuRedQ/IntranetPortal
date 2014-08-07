@@ -228,8 +228,9 @@
     .UpdateInfoAlign {
         text-align: right;
     }
-    .LeadsContentPanel{
-        min-height:800px;
+
+    .LeadsContentPanel {
+        min-height: 800px;
         /*min-width:1100px;*/
     }
 </style>
@@ -320,7 +321,7 @@
                                                 <ContentCollection>
                                                     <dx:ContentControl runat="server">
                                                         <dx:ASPxFormLayout ClientInstanceName="formlayoutLeadsInfoClient" ID="formlayoutLeadsInfo" Width="100%" runat="server" ColCount="3" ColSpan="3" Paddings-Padding="0">
-                                                            <Items>                                                               
+                                                            <Items>
                                                                 <dx:LayoutGroup ColCount="3" ColSpan="3" Width="100%" GroupBoxDecoration="None">
                                                                     <Items>
                                                                         <dx:LayoutItem ShowCaption="False" FieldName="LastIssuedOn">
@@ -437,14 +438,16 @@
                                                                         </dx:LayoutItemNestedControlContainer>
                                                                     </LayoutItemNestedControlCollection>
                                                                 </dx:LayoutItem>
-                                                                <dx:LayoutItem Caption="Tax Class" FieldName="TaxClass">
+                                                                <dx:LayoutItem Caption="Property Class" FieldName="PropertyClassCode">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer>
-                                                                            <dx:ASPxTextBox ID="ASPxTextBox4" Width="100%"
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox15" Width="100%"
                                                                                 runat="server" Text="" />
                                                                         </dx:LayoutItemNestedControlContainer>
                                                                     </LayoutItemNestedControlCollection>
                                                                 </dx:LayoutItem>
+
+
                                                                 <dx:LayoutItem Caption="# of Floors" FieldName="NumFloors">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer>
@@ -521,15 +524,15 @@
                                                                         </dx:LayoutItemNestedControlContainer>
                                                                     </LayoutItemNestedControlCollection>
                                                                 </dx:LayoutItem>
-                                                                <dx:LayoutItem Caption="Property Class" FieldName="PropertyClassCode">
+                                                                <dx:LayoutItem Caption="Tax Class" FieldName="TaxClass">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer>
-                                                                            <dx:ASPxTextBox ID="ASPxTextBox15" Width="100%"
+                                                                            <dx:ASPxTextBox ID="ASPxTextBox4" Width="100%"
                                                                                 runat="server" Text="" />
                                                                         </dx:LayoutItemNestedControlContainer>
                                                                     </LayoutItemNestedControlCollection>
                                                                 </dx:LayoutItem>
-                                                                <dx:LayoutItem Caption="Unbuilt Sqft">
+                                                                <dx:LayoutItem Caption="Unbuilt Sqft" FieldName="UnbuiltSqft">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer>
                                                                             <dx:ASPxTextBox ID="ASPxTextBox22"
@@ -643,7 +646,7 @@
                                                                             </dx:ASPxGridView>
                                                                         </dx:LayoutItemNestedControlContainer>
                                                                     </LayoutItemNestedControlCollection>
-                                                                </dx:LayoutItem>                                                              
+                                                                </dx:LayoutItem>
                                                             </Items>
                                                             <SettingsItemCaptions Location="Top"></SettingsItemCaptions>
                                                             <Styles>
@@ -989,5 +992,5 @@
         </dx:PanelContent>
     </PanelCollection>
     <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>
-    <Border BorderStyle="None"></Border>    
+    <Border BorderStyle="None"></Border>
 </dx:ASPxCallbackPanel>

@@ -54,6 +54,11 @@ Public Class ImportAgentData
                         li.ZipCode = prop.Out_Zipcode
                         li.CreateBy = Page.User.Identity.Name
                         li.CreateDate = DateTime.Now
+
+                        If Not String.IsNullOrEmpty(prop.Type) Then
+                            li.Type = li.GetLeadsType(prop.Type)
+                        End If
+
                         If Context.LeadsInfoes.Local.Where(Function(tmp) tmp.BBLE = li.BBLE).Count = 0 Then
                             Context.LeadsInfoes.Add(li)
                             bbles.Add(prop.BBLE)

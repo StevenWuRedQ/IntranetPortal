@@ -80,6 +80,7 @@ Partial Public Class LeadsInfo
     Public Property NYCSqft As Nullable(Of Double)
     Public Property UnbuiltSqft As Nullable(Of Double)
     Public Property PropertyClass As String
+    Public Property Type As Nullable(Of Integer)
 
     Public Overridable Property Lead As Lead
 

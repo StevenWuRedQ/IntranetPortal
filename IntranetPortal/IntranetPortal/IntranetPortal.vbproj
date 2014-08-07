@@ -902,6 +902,10 @@
     <Content Include="images\imprimir.png" />
     <Content Include="images\inprogess_icon_s.png" />
     <Content Include="images\logo.png" />
+    <Content Include="images\lr_dev_opportunity.png" />
+    <Content Include="images\lr_forecosure.png" />
+    <Content Include="images\lr_has_equity.png" />
+    <Content Include="images\lr_tax_lien.png" />
     <Content Include="images\Management.jpg" />
     <Content Include="images\Management.png" />
     <Content Include="images\menu_flag.png" />
@@ -911,6 +915,7 @@
     <Content Include="images\new_lead1.png" />
     <Content Include="images\new_leads_icon.png" />
     <Content Include="images\note_more_icon.png" />
+    <Content Include="images\Opportunities-icon.jpg" />
     <Content Include="images\priority.jpg" />
     <Content Include="images\priority_icon.png" />
     <Content Include="images\process-icon2.jpg" />

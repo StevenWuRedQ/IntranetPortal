@@ -42,6 +42,8 @@
                                 </dx:GridViewDataTextColumn>
                                 <dx:GridViewDataTextColumn FieldName="Property_Address">
                                 </dx:GridViewDataTextColumn>
+                                    <dx:GridViewDataTextColumn FieldName="Type">
+                                </dx:GridViewDataTextColumn>
                             </Columns>
                         </dx:ASPxGridView>
                         Select Agent to Import:

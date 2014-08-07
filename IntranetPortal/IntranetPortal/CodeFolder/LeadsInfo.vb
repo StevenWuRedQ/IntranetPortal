@@ -1,4 +1,20 @@
 ﻿Public Class LeadsInfo
+    Public Enum LeadsType
+        DevelopmentOpportunity = 0
+        Foreclosure = 1
+        HasEquity = 2
+        TaxLien = 3
+    End Enum
+
+    Public Function GetLeadsType(type As String) As LeadsType
+        Dim retType = Nothing
+        If [Enum].TryParse(Of LeadsType)(type.Replace(" ", ""), retType) Then
+            Return retType
+        End If
+
+        Return Nothing
+    End Function
+
     Public Property HomeOwners As List(Of HomeOwner)
 
     Public ReadOnly Property LeadsName As String

@@ -114,7 +114,13 @@ Public Class DataWCFService
                     li.MaxFar = CDbl(result.MAX_FAR)
                     li.ActualFar = CDbl(result.ACTUAL_FAR)
                     li.NYCSqft = result.GROSS_SQFT
-                    'li.UnbuiltSqft
+
+                    'result.LAND_SQFT  as Land_SF
+                    'result.ORIG_SQFT as NYC_GLA
+                    If result.LAND_SQFT.HasValue AndAlso Not String.IsNullOrEmpty(result.MAX_FAR) AndAlso result.ORIG_SQFT.HasValue Then
+                        li.UnbuiltSqft = result.LAND_SQFT * CDbl(result.MAX_FAR) - result.ORIG_SQFT
+                    End If
+
                     'Dim salesInfo = client.Acris_Get_LatestSale(bble)
                     'li.SaleDate = salesInfo.SALE_DATE
 

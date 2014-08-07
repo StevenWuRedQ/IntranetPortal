@@ -1,4 +1,5 @@
-﻿
+﻿Imports DevExpress.Web.ASPxEditors
+
 Public Class LeadsManagement
     Inherits System.Web.UI.Page
 
@@ -161,4 +162,33 @@ Public Class LeadsManagement
     Protected Sub gridLeads_DataBinding(sender As Object, e As EventArgs)
         'gridLeads.DataSource = GetDataSource()
     End Sub
+
+    Protected Sub gridLeads_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs)
+        If Not e.RowType = DevExpress.Web.ASPxGridView.GridViewRowType.Data Then
+            Return
+        End If
+
+        If e.GetValue("Type") IsNot Nothing Then
+            Dim type = CType(e.GetValue("Type"), LeadsInfo.LeadsType)
+            Dim imgType = TryCast(gridLeads.FindRowCellTemplateControl(e.VisibleIndex, gridLeads.Columns("Type"), "imgType"), ASPxImage)
+            imgType.ToolTip = type.ToString
+            imgType.Visible = True
+            imgType.ImageUrl = TypeImages(e.GetValue("Type"))
+        End If
+    End Sub
+
+    Private _typeImages As StringDictionary
+    Public ReadOnly Property TypeImages As StringDictionary
+        Get
+            If _typeImages Is Nothing Then
+                _typeImages = New StringDictionary
+                _typeImages.Add(IntranetPortal.LeadsInfo.LeadsType.DevelopmentOpportunity, "~/images/lr_dev_opportunity.png")
+                _typeImages.Add(IntranetPortal.LeadsInfo.LeadsType.Foreclosure, "~/images/lr_forecosure.png")
+                _typeImages.Add(IntranetPortal.LeadsInfo.LeadsType.HasEquity, "~/images/lr_has_equity.png")
+                _typeImages.Add(IntranetPortal.LeadsInfo.LeadsType.TaxLien, "~/images/lr_tax_lien.png")
+            End If
+
+            Return _typeImages
+        End Get
+    End Property
 End Class

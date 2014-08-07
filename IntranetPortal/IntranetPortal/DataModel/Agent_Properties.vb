@@ -25,5 +25,6 @@ Partial Public Class Agent_Properties
     Public Property Longitude As Nullable(Of Double)
     Public Property Latitude As Nullable(Of Double)
     Public Property Active As Nullable(Of Boolean)
+    Public Property Type As String
 
 End Class
