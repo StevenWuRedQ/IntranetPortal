@@ -112,6 +112,7 @@
             },
             title: "In the last 6 months",
             legend: {
+                visible: false,
                 verticalAlignment: "bottom",
                 horizontalAlignment: "center"
             },

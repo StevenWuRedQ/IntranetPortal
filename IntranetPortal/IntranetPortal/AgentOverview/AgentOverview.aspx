@@ -37,7 +37,8 @@
         }
     </style>
     <script type="text/javascript">
-        var empId = '<%# CurrentEmployee.EmployeeID %>';
+        
+        var empId = null;
         
         function SearchNames(inputBox) {
             var key = inputBox.value;
@@ -72,6 +73,8 @@
             //Show chart
             if (empId != null)
                 LoadEmployeeBarChart(empId);
+
+            initScrollbars();
         }
         function onGetAgentLogButtonClick()
         {
@@ -89,13 +92,13 @@
         {
             if (empId != null)
             {
-                alert(empId);
+                //alert(empId);
                 AgentZoningData(empId)
             }else {
                 alert('EmpId is null');
-            }
-          
+            }          
         }
+
         function DoCallback() {
             var rowKey = gridEmpsClient.GetRowKey(gridEmpsClient.GetFocusedRowIndex());
             if (rowKey != null)
@@ -852,31 +855,35 @@
     <script>
         (function ($) {
             $(window).load(function () {
-
-                $(".custom_report_table").mCustomScrollbar(
-                    {
-                        theme: "minimal-dark"
-                    }
-                    );
-                $('#employees_grid').mCustomScrollbar(
-                    {
-                        theme: "minimal-dark"
-                    }
-                );
-
-                $('#custom_fields_div').mCustomScrollbar(
-                    {
-                        theme: "minimal-dark"
-                    }
-                );
-
-                $('.dxgvCSD').mCustomScrollbar(
-                   {
-                       theme: "minimal-dark"
-                   }
-               );
+                initScrollbars();              
             });
         })(jQuery);
+        function initScrollbars()
+        {
+            $(".custom_report_table").mCustomScrollbar(
+                  {
+                      theme: "minimal-dark"
+                  }
+                  );
+            $('#employees_grid').mCustomScrollbar(
+                {
+                    theme: "minimal-dark"
+                }
+            );
+
+            $('#custom_fields_div').mCustomScrollbar(
+                {
+                    theme: "minimal-dark"
+                }
+            );
+
+            $('.dxgvCSD').mCustomScrollbar(
+               {
+                   theme: "minimal-dark"
+               }
+           );
+        }
+        empId= '<%= CurrentEmployee.EmployeeID %>';
     </script>
     <%-----------end-------%>
 </body>

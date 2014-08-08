@@ -17,7 +17,6 @@
     End Function
 
     Public Property HomeOwners As List(Of HomeOwner)
-
     Public ReadOnly Property LeadsName As String
         Get
             Return Utility.GetLeadsName(Me)
