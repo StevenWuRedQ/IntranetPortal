@@ -12,7 +12,6 @@ Public Class ActivityLogs
         '        BindData(hfBBLE.Value)
         '    End If
         'End If
-
     End Sub
 
     Public Sub BindData(bble As String)
@@ -24,7 +23,6 @@ Public Class ActivityLogs
             If Not gridTracking.IsNewRowEditing Then
                 gridTracking.AddNewRow()
             End If
-
         End Using
 
         BindEmpList()
@@ -56,13 +54,14 @@ Public Class ActivityLogs
             Throw New Exception("Comments can not be empty.")
         End If
 
-        AddActivityLog(aspxdate.Date, txtComments.Text, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString)
+        LeadsActivityLog.AddActivityLog(aspxdate.Date, txtComments.Text, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)
+        'AddActivityLog(aspxdate.Date, txtComments.Text, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString)
         e.Cancel = True
 
         BindData(hfBBLE.Value)
     End Sub
 
-    Public Function AddActivityLog(logDate As DateTime, comments As String, bble As String, category As String) As LeadsActivityLog
+    Public Function AddActivityLog2(logDate As DateTime, comments As String, bble As String, category As String) As LeadsActivityLog
         Using Context As New Entities
             Dim log As New LeadsActivityLog
             log.BBLE = bble
@@ -95,7 +94,7 @@ Public Class ActivityLogs
                     Context.SaveChanges()
                 End If
 
-                AddActivityLog(DateTime.Now, "Task is completed by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is completed by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
 
             End Using
 
@@ -117,7 +116,7 @@ Public Class ActivityLogs
 
                     Context.SaveChanges()
 
-                    AddActivityLog(DateTime.Now, "New Lead is approved by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is approved by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
 
                     'Add Notify Message
                     Dim title = "New lead is Approved"
@@ -142,7 +141,7 @@ Public Class ActivityLogs
 
                     Context.SaveChanges()
 
-                    AddActivityLog(DateTime.Now, "New Lead is declined by " & Page.User.Identity.Name, log.BBLE, LeadsActivityLog.LogCategory.Status.ToString)
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is declined by " & Page.User.Identity.Name, log.BBLE, LeadsActivityLog.LogCategory.Status.ToString)
 
                     'Add Notify Message
                     Dim title = "Your lead is declined"
@@ -166,7 +165,7 @@ Public Class ActivityLogs
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
             UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.Accepted)
-            AddActivityLog(DateTime.Now, "Appointment is accepted by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is accepted by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
 
             'Add Notify Message
             Dim userApoint = UserAppointment.GetAppointmentBylogID(logId)
@@ -186,7 +185,7 @@ Public Class ActivityLogs
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
             UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.Declined)
-            AddActivityLog(DateTime.Now, "Appointment is Decline by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Decline by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
 
             'Add Notify Message
             Dim userApoint = UserAppointment.GetAppointmentBylogID(logId)
@@ -204,7 +203,7 @@ Public Class ActivityLogs
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
             UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.ReScheduled)
-            AddActivityLog(DateTime.Now, "Appointment is Rescheduled by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Rescheduled by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
 
             'Add Notify Message
             Dim userApoint = UserAppointment.GetAppointmentBylogID(logId)
@@ -244,7 +243,7 @@ Public Class ActivityLogs
                                    "<tr><td>Description:</td><td>{3}</td></tr>" &
                                    "</table>", employees, cbTaskAction.Text, cbTaskImportant.Text, txtTaskDes.Text)
 
-        Dim log = AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Task.ToString)
+        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
 
         Using Context As New Entities
 

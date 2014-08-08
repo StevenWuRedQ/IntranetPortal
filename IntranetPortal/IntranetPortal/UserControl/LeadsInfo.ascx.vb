@@ -281,7 +281,7 @@ Public Class LeadsInfo1
                                   "</table>", dateEditSchedule.Date, txtLocation.Text, cbMgr.Text, txtScheduleDescription.Text, cbScheduleType.Text)
                 Dim emps = Page.User.Identity.Name & ";" & cbMgr.Text
                 Dim subject As String = "Appointment of " + hfBBLE.Value
-                Dim log = ActivityLogs.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Appointment.ToString)
+                Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Appointment.ToString, LeadsActivityLog.EnumActionType.Appointment)
 
                 Dim ld = Lead.GetInstance(hfBBLE.Value)
 
