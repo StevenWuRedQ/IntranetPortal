@@ -3,8 +3,8 @@
 <%--<script src="/Scripts/jquery-2.1.1.min.js"></script>--%>
 <script src="/Scripts/globalize/globalize.js"></script>
 <script src="/Scripts/dx.chartjs.js"></script>
-<div id="container" style="min-width: 900px; max-width: 1200px; height: 400px;"></div>
-<div id="pieChart" style="min-width: 900px; max-width: 1200px; height: 400px;"></div>
+<div id="container" style=" max-width: 1200px; height: 400px;"></div>
+<div id="pieChart" style="max-width: 1200px; height: 400px;"></div>
 <script type="text/javascript">
 
 
@@ -129,23 +129,27 @@
         });     
     }
 
-    function show_pie_chart() {
+    function show_pie_chart( ds ) {
         clear_chart(true);
        
         var dataSource = [
-          { country: "USA", medals: 110 },
-          { country: "China", medals: 100 },
-          { country: "Russia", medals: 72 },
-          { country: "Britain", medals: 47 },
-          { country: "Australia", medals: 46 },
-          { country: "Germany", medals: 41 },
-          { country: "France", medals: 40 },
-          { country: "South Korea", medals: 31 }
+          { Name: "USA", Count: 110 },
+          { Name: "China", Count: 100 },
+          { Name: "Russia", Count: 72 },
+          { Name: "Britain", Count: 47 },
+          { Name: "Australia", Count: 46 },
+          { Name: "Germany", Count: 41 },
+          { Name: "France", Count: 40 },
+          { Name: "South Korea", Count: 31 }
         ];
-
+       
+        if (ds)
+        {
+            dataSource = ds;
+        }
         $("#pieChart").dxPieChart({
             dataSource: dataSource,
-            title: "Olympic Medals in 2008",
+            title: "Chart of last 6 months",
             legend: {
                 orientation: "horizontal",
                 itemTextPosition: "right",
@@ -154,8 +158,8 @@
                 rowCount: 2
             },
             series: [{
-                argumentField: "country",
-                valueField: "medals",
+                argumentField: "Name",
+                valueField: "Count",
                 label: {
                     visible: true,
                     font: {
@@ -180,14 +184,29 @@
 
     function LoadEmployeeBarChart(empId)
     {
-        callbackEmployeeClient.PerformCallback(empId)
+        callbackEmployeeClient.PerformCallback(empId);
     }
-
+    function LoadAngentTodayReport(empId)
+    {
+        callbackAgentClinet.PerformCallback(empId);
+    }
+    function AgentDateSourceLoadedComplete(s, e)
+    {
+        
+        show_bar_chart($.parseJSON(e.result));
+    }
     function DataSourceLoadedComplete(s, e)
     {
         show_bar_chart( $.parseJSON(e.result) );
     }
-
+    function AgentZoningData(empId)
+    {
+        callbackAgentZoning.PerformCallback(empId);
+    }
+    function AgentDateSourceZoningComplete(s, e)
+    {
+        show_pie_chart($.parseJSON(e.result))
+    }
     function ChangeDataSource()
     {
         var ds = eval('<% ChartSource()%>');        
@@ -202,4 +221,10 @@
 </dx:ASPxCallback>
 <dx:ASPxCallback runat="server" ID="ASPxCallback1" OnCallback="ASPxCallback1_Callback" ClientInstanceName="callbackEmployeeClient">
     <ClientSideEvents CallbackComplete="DataSourceLoadedComplete" />
+</dx:ASPxCallback>
+<dx:ASPxCallback runat="server" ID="loadAgentCallBack" OnCallback="loadAgentCallBack_Callback" ClientInstanceName="callbackAgentClinet">
+    <ClientSideEvents CallbackComplete="AgentDateSourceLoadedComplete" />
+</dx:ASPxCallback>
+<dx:ASPxCallback runat="server" ID="loadAgentZoning" OnCallback="loadAgentZoning_Callback" ClientInstanceName="callbackAgentZoning">
+    <ClientSideEvents CallbackComplete="AgentDateSourceZoningComplete" />
 </dx:ASPxCallback>

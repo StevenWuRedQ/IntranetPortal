@@ -30,4 +30,22 @@ Partial Public Class AgentCharts
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxCallback1 As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+
+    '''<summary>
+    '''loadAgentCallBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents loadAgentCallBack As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+
+    '''<summary>
+    '''loadAgentZoning control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents loadAgentZoning As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class

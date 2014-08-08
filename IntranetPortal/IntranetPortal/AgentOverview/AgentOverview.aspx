@@ -37,7 +37,8 @@
         }
     </style>
     <script type="text/javascript">
-        var empId = null;
+        var empId = '<%# CurrentEmployee.EmployeeID %>';
+        
         function SearchNames(inputBox) {
             var key = inputBox.value;
             //alert(key);
@@ -72,7 +73,29 @@
             if (empId != null)
                 LoadEmployeeBarChart(empId);
         }
-
+        function onGetAgentLogButtonClick()
+        {
+            if (empId != null)
+            {
+              
+                LoadAngentTodayReport(empId);
+            }else
+            {
+                alert('EmpId is null');
+            }
+            
+        }
+        function onGetAgentZoningDateClick()
+        {
+            if (empId != null)
+            {
+                alert(empId);
+                AgentZoningData(empId)
+            }else {
+                alert('EmpId is null');
+            }
+          
+        }
         function DoCallback() {
             var rowKey = gridEmpsClient.GetRowKey(gridEmpsClient.GetFocusedRowIndex());
             if (rowKey != null)
@@ -91,7 +114,7 @@
         function RemoveReport(reportName) {
             callbackPnlTemplatesClient.PerformCallback("RemoveReport|" + reportName);
         }
-
+       
         function ShowLeadstatus(status)
         {
             gridReportClient.PerformCallback("BindStatus|" + status);
@@ -302,6 +325,9 @@
 
                                                                             <%----end item--%>
                                                                         </div>
+                                                                        <button class="btn btn-default" type="button" onclick="onGetAgentLogButtonClick()">Today's Log</button>
+                                                                        
+                                                                        <button class="btn btn-default" type="button" onclick="onGetAgentZoningDateClick()" style="margin-left:20px">Leads's Tax</button>
                                                                         <%-----end info detial-----%>
                                                                         <%-----end info detial-----%>
                                                                     </div>
