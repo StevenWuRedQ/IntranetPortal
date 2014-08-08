@@ -61,6 +61,11 @@
     Enum EnumActionType
         CallOwner = 0
         DoorKnock = 1
+        FollowUp = 2
+        Appointment = 3
+        Email = 4
+        Comments = 5
+        SetAsTask = 6
     End Enum
 
 End Class
