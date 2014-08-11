@@ -179,16 +179,24 @@ InitialLine:
                 'End If
 
                 If String.IsNullOrEmpty(lead.Owner) Then
-                    DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True)
+                    If DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True) Then
+                        UserMessage.AddNewMessage("Service Message", "Initial Data Message " & bble, String.Format("All BBLE: {0} data is loaded. ", bble), bble, DateTime.Now, "Initial Data")
+                    End If
                 Else
                     If Not lead.C1stMotgrAmt.HasValue Then
-                        DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True)
+                        If DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True) Then
+                            UserMessage.AddNewMessage("Service Message", "Initial Data Message " & bble, String.Format("BBLE: {0} Morgatage data is loaded. ", bble), bble, DateTime.Now, "Initial Data")
+                        End If
                     Else
                         If lead.IsUpdating Then
-                            DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True)
+                            If DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True) Then
+                                UserMessage.AddNewMessage("Service Message", "Initial Data Message " & bble, String.Format("Refrsh BBLE: {0} data is Finished. ", bble), bble, DateTime.Now, "Initial Data")
+                            End If
                         Else
                             If Not lead.HasOwnerInfo Then
-                                DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)
+                                If DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
+                                    UserMessage.AddNewMessage("Service Message", "Initial Data Message " & bble, String.Format("Refresh BBLE: {0} homeowner info is finished.", bble), bble, DateTime.Now, "Initial Data")
+                                End If
                             End If
                         End If
                     End If
