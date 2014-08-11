@@ -37,9 +37,9 @@
         }
     </style>
     <script type="text/javascript">
-        
+
         var empId = null;
-        
+
         function SearchNames(inputBox) {
             var key = inputBox.value;
             //alert(key);
@@ -78,12 +78,12 @@
         }
         function onGetAgentLogButtonClick() {
             if (empId != null) {
-              
+
                 LoadAngentTodayReport(empId);
             } else {
                 alert('EmpId is null');
             }
-            
+
         }
         function onGetAgentZoningDateClick() {
             if (empId != null) {
@@ -91,7 +91,7 @@
                 AgentZoningData(empId)
             } else {
                 alert('EmpId is null');
-            }          
+            }
         }
 
         function DoCallback() {
@@ -111,14 +111,13 @@
         function RemoveReport(reportName) {
             callbackPnlTemplatesClient.PerformCallback("RemoveReport|" + reportName);
         }
-       
+
         function ShowLeadstatus(status) {
             gridReportClient.PerformCallback("BindStatus|" + status);
             //ContentCallbackPanel.PerformCallback("Status|" + status)
             LoadStatusBarChart(status);
         }
-        function CustomizRefershEnd()
-        {
+        function CustomizRefershEnd() {
 
             initScrollbars();
         }
@@ -173,10 +172,10 @@
                                                 </dx:GridViewDataColumn>--%>
                                             </Columns>
                                             <Styles>
-                                                    <SelectedRow BackColor="#FF400D"></SelectedRow>
-                                                    <Cell>
+                                                <SelectedRow BackColor="#FF400D"></SelectedRow>
+                                                <Cell>
                                                     <Paddings Padding="0px"></Paddings>
-                                                    </Cell>
+                                                </Cell>
                                             </Styles>
                                             <GroupSummary>
                                                 <dx:ASPxSummaryItem SummaryType="Count" />
@@ -190,7 +189,7 @@
 
                                             <Border BorderStyle="None"></Border>
                                         </dx:ASPxGridView>
-                                      
+
                                     </div>
                                     <div style="margin-top: 27px; height: 290px; display: none /*background: blue*/">
                                         <div>
@@ -247,7 +246,15 @@
 
                             <%--bottom block--%>
                             <div>
-                                <div style="margin: 22px 0px 0px 30px; font-size: 24px; color: #234b60">Lead Status</div>
+                                <div style="margin: 22px 0px 0px 0px; font-size: 24px;">
+                                    <div style="padding: 0px 20px;">
+                                        <div style="font-size: 24px;" class="clearfix">
+                                            <i class="fa fa-suitcase with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;<span style="color: #234b60; font-size: 30px;">Lead Status</span>
+                                            <i class="fa fa-sort-amount-desc icon_right_s"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
 
                                 <%--menu list--%>
                                 <div style="margin: 13px 30px 30px 30px">
@@ -288,7 +295,7 @@
 
                                                                     <div style="width: 370px; background: url('../images/profile_bg.png')">
                                                                         <%--width:201 height:201--%>
-                                                                       
+
                                                                         <dx:ASPxImage runat="server" ID="profile_image" CssClass="img-circle class_profile_image" ImageUrl="/images/user-empty-icon.png">
                                                                         </dx:ASPxImage>
                                                                         <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"><%= CurrentEmployee.Name %></div>
@@ -326,14 +333,14 @@
                                                                         </div>
                                                                         <div style="margin-left: 69px; margin-top: 10px;">
                                                                             <button class="btn btn-default button_transparent" type="button" onclick="onGetAgentLogButtonClick()">Today's Log</button>
-                                                                        
+
                                                                             <button class="btn btn-default button_transparent" type="button" onclick="onGetAgentZoningDateClick()" style="margin-left: 20px">Leads's Tax</button>
                                                                         </div>
 
                                                                         <%-----end info detial-----%>
                                                                         <%-----end info detial-----%>
                                                                     </div>
-                                                                
+
                                                                 </div>
 
                                                                 <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" HeaderText="Select Photo" ClientInstanceName="selectImgs" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
@@ -367,19 +374,19 @@
                                                                             <div class="dropdown layout_float_right">
                                                                                 <button class="btn btn-default dropdown-toggle" type="button" id="chart_line_select" data-toggle="dropdown" style="background: transparent">
                                                                                     Line & Point Chart <span class="caret"></span>
-                                                                           
+
                                                                                 </button>
                                                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="chart_line_select">
                                                                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Line</a></li>
                                                                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Bar</a></li>
                                                                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Pie</a></li>
-                                                                                    
+
                                                                                 </ul>
                                                                             </div>
                                                                             <div class="dropdown layout_float_right" style="margin-right: 20px">
                                                                                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="background: transparent">
                                                                                     Change Stat Range <span class="caret"></span>
-                                                                           
+
                                                                                 </button>
                                                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                                                                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(this)">Chart of Last 6 months</a></li>
@@ -389,7 +396,7 @@
                                                                                 </ul>
                                                                             </div>
 
-                                                                            
+
                                                                         </div>
                                                                         <div style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px; /*background: blue; */ color: white; height: 100%;">
                                                                             <uc1:AgentCharts runat="server" ID="AgentCharts" />
@@ -484,14 +491,14 @@
                                                                         <span style="color: #234b60; font-weight: 900">Customized Report&nbsp;&nbsp;&nbsp;</span>
                                                                         <i class="fa fa-question-circle tooltip-examples" style="color: #999ca1" title="Check items from the pane on the right side to view the customized report."></i>
                                                                         <div style="float: right; padding-right: 40px; font-size: 18px;">
-                                                                            
+
                                                                             <i class="fa fa-save report_head_button report_head_button_padding" onclick="SaveReportPopup.Show()" style="cursor: pointer"></i>
                                                                             <i class="fa fa-exchange report_head_button tooltip-examples report_head_button_padding" title="Compare"></i>
                                                                             <asp:LinkButton ID="btnExport" runat="server" OnClick="Unnamed_ServerClick" Text='<i class="fa fa-print  report_head_button report_head_button_padding"></i>'>                                                                
                                                                             </asp:LinkButton>
                                                                             <i class="fa fa-envelope  report_head_button report_head_button_padding"></i>
                                                                             <i class="fa fa-file-pdf-o  report_head_button"></i>
-                                                                            
+
                                                                         </div>
                                                                     </div>
 
@@ -503,13 +510,13 @@
                                                                         <Settings ShowFilterBar="Visible" ShowHeaderFilterButton="true" ShowGroupPanel="true" />
                                                                         <Columns>
                                                                             <dx:GridViewDataColumn FieldName="PropertyAddress">
-                                                                                    <CellStyle Font-Bold="True"></CellStyle>
+                                                                                <CellStyle Font-Bold="True"></CellStyle>
                                                                             </dx:GridViewDataColumn>
 
                                                                         </Columns>
                                                                         <SettingsPager PageSize="10" PageSizeItemSettings-Visible="true" PageSizeItemSettings-ShowAllItem="true" Mode="ShowAllRecords">
                                                                             <PageSizeItemSettings ShowAllItem="True" Visible="True"></PageSizeItemSettings>
-                                                                           
+
                                                                         </SettingsPager>
                                                                         <Settings VerticalScrollableHeight="350" />
 
@@ -682,7 +689,7 @@
                                             </Panes>
                                         </dx:ASPxSplitter>
                                         <asp:HiddenField runat="server" ID="hfEmpName" />
-                                                         <asp:HiddenField runat="server" ID="hfMode" />
+                                        <asp:HiddenField runat="server" ID="hfMode" />
 
                                         <dx:ASPxHiddenField runat="server" ID="hfReports"></dx:ASPxHiddenField>
                                     </dx:PanelContent>
@@ -740,7 +747,7 @@
                                             <script type="text/javascript">
                                                 function Fields_ValueChanged(s, e) {
                                                     var values = filed_CheckBoxList1.GetSelectedValues() + ',' + filed_CheckBoxList2.GetSelectedValues();
-                                                    
+
                                                     gridReportClient.PerformCallback("FieldChange|" + values);
                                                     e.processOnServer = false;
                                                 }
@@ -855,7 +862,7 @@
     <script>
         (function ($) {
             $(window).load(function () {
-                initScrollbars();              
+                initScrollbars();
             });
         })(jQuery);
         function initScrollbars() {

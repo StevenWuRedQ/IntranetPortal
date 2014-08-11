@@ -1165,5 +1165,5 @@ pre#event-log {
 }
 .button_transparent
 {
-    background:transparent;
+    background:transparent !important;
 }
