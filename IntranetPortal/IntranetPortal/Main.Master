@@ -2,10 +2,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <script type="text/javascript" src="/scripts/script.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="scrollbar/jquery.mCustomScrollbar.css" />
 </asp:Content>
 
-<asp:Content ID="navContent" ContentPlaceHolderID="NavContentHolder" runat="server">
-    <dx:ASPxSplitter ID="LeftSplitter" runat="server" Height="100%" Orientation="Vertical" Width="100%">
+<asp:Content ID="navContent" ContentPlaceHolderID="NavContentHolder" runat="server" >
+    <dx:ASPxSplitter ID="LeftSplitter" runat="server" Height="100%" Orientation="Vertical" Width="100%" >
         <Styles>
             <Pane>
                 <Paddings Padding="0px" />
@@ -13,16 +15,16 @@
             </Pane>
         </Styles>
         <Panes>
-            <dx:SplitterPane Name="FilterPane">
+            <dx:SplitterPane Name="FilterPane" >
                 <ContentCollection>
-                    <dx:SplitterContentControl>
-                        <div style="overflow: auto; overflow-x: hidden; height: 100%;">
+                    <dx:SplitterContentControl BackColor="#234b60">
+                        <div style="overflow: auto; overflow-x: hidden; height: 100%;" id="treeViewDiv">
                             <asp:ContentPlaceHolder ID="Left" runat="server" />
                         </div>
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-            <dx:SplitterPane Name="MenuPane" AllowResize="False" Separator-Visible="False" ShowSeparatorImage="False" Size="110px">
+            <dx:SplitterPane Name="MenuPane" AllowResize="False" Separator-Visible="False" ShowSeparatorImage="False" Size="180px">
                 <Separator>
                     <SeparatorStyle>
                         <Border BorderWidth="1px" />
@@ -33,32 +35,37 @@
                 <ContentCollection>
                     <dx:SplitterContentControl>
                         <%-- DXCOMMENT: Configure a menu that allows switching between mail and scheduler modes --%>
-                        <dx:ASPxMenu runat="server" ID="MenuCorner" RenderMode="Lightweight" Width="100%" Orientation="Vertical" Font-Size="Medium">
+                        <dx:ASPxMenu runat="server" ID="MenuCorner" RenderMode="Lightweight" Width="300px" Orientation="Vertical" Font-Size="Medium" Paddings-Padding="0px" >
                             <Border BorderWidth="0" />
-                            <ItemStyle CssClass="menuitem">
-                                <Paddings PaddingTop="0px" PaddingBottom="0px" />
+                            <ItemStyle  CssClass="under-line-menu" VerticalAlign="Middle"
+                                ForeColor="#638292" HoverStyle-ForeColor="white" HoverStyle-CssClass="under-line-menu_hover"
+                                HoverStyle-BackColor="#ff400d" SelectedStyle-BackColor="#ff400d"
+                                                                                       
+                                SelectedStyle-ForeColor="White" Font-Size="24px">
+                                <Paddings Padding="0px" />
+                                
                             </ItemStyle>
                             <Items>
                                 <dx:MenuItem Text="Agent" NavigateUrl="/Default.aspx">
-                                    <Image IconID="people_customer_32x32" />
+                                    <%--<Image IconID="people_customer_32x32" />--%>
                                 </dx:MenuItem>
                                 <dx:MenuItem Text="Eviction" NavigateUrl="#" Visible="false">
-                                    <Image Url="/images/Evication.png" />
+                                    <%--<Image Url="/images/Evication.png" />--%>
                                 </dx:MenuItem>
                                 <dx:MenuItem Text="Processing" NavigateUrl="#" Visible="false">
-                                    <Image Url="/images/Short_Sale_Sign.jpg" />
+                                    <%--<Image Url="/images/Short_Sale_Sign.jpg" />--%>
                                 </dx:MenuItem>
                                 <dx:MenuItem Text="Construction" NavigateUrl="#" Visible="false">
-                                    <Image Url="/images/construction.png" />
+                                    <%--<Image Url="/images/construction.png" />--%>
                                 </dx:MenuItem>
                                 <dx:MenuItem Text="Accounting" Visible="false">
-                                    <Image Url="/images/accounting_icon.jpg" />
+                                   <%-- <Image Url="/images/accounting_icon.jpg" />--%>
                                 </dx:MenuItem>
                                 <dx:MenuItem Text="Management" NavigateUrl="/Management/Management.aspx" Name="manageNode" Visible="false">
-                                    <Image Url="/images/Management.jpg" />
+                                    <%--<Image Url="/images/Management.jpg" />--%>
                                 </dx:MenuItem>
                                 <dx:MenuItem Text="Calendar" NavigateUrl="~/Calendar.aspx" Target="_blank">
-                                    <Image Url="/images/calendar.png" />
+                                   <%-- <Image Url="/images/calendar.png" />--%>
                                 </dx:MenuItem>
                             </Items>
                         </dx:ASPxMenu>
@@ -67,6 +74,22 @@
             </dx:SplitterPane>
         </Panes>
     </dx:ASPxSplitter>
+      <%--add add the scorll bar by steven --%>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="scrollbar/jquery-1.11.0.min.js"><\/script>')</script>
+     <!-- custom scrollbar plugin -->
+    <script src="scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    <script>
+        (function ($) {
+            $(window).load(function () {
+               
+                $("#treeViewDiv").mCustomScrollbar({
+                    theme: "minimal"
+                });
+            });
+        })(jQuery);
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <asp:ContentPlaceHolder ID="Content" runat="server" />

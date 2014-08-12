@@ -50,6 +50,24 @@ Partial Public Class Root
     Protected WithEvents MainSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
 
     '''<summary>
+    '''NavContentHolder control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents NavContentHolder As Global.System.Web.UI.WebControls.ContentPlaceHolder
+
+    '''<summary>
+    '''lblVersion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblVersion As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+
+    '''<summary>
     '''txtSearchKey control.
     '''</summary>
     '''<remarks>
@@ -129,15 +147,6 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Content As Global.System.Web.UI.WebControls.ContentPlaceHolder
-
-    '''<summary>
-    '''lblVersion control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblVersion As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
     '''ASPxPopupControl2 control.

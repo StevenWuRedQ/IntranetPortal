@@ -64,38 +64,53 @@
                 </Pane>
             </Styles>
             <Panes>
-                <dx:SplitterPane Name="leftNavPane" Size="310">
+                <dx:SplitterPane Name="leftNavPane" Size="280">
                     <Panes>
-                        <dx:SplitterPane Name="logoPane" Size="50">
+                        <dx:SplitterPane Name="logoPane" Size="70">
                             <ContentCollection>
                                 <dx:SplitterContentControl>
-                                    <div style="float: left; display: table-cell; width: 260px;">
-                                        <div class="title" style="font-weight: bold">My Ideal Property Portal</div>
+                                    <div style="float: left; display: table-cell; width: 280px;">
+                                        <%--<div class="title" style="font-weight: bold">My Ideal Property Portal</div>--%>
+                                        <div class="under-line-head" style="padding-left: 13px; padding-top: 17px; background: #163240; font-size: 24px; font-weight: 900; color: white;">
+                                            <img style="width: 66px; height: 52px; vertical-align: middle" src="images/logo.png" /><span style="padding-left: 10px; /*font-weight: 900; */">PORTAL</span>
+                                        </div>
                                     </div>
                                 </dx:SplitterContentControl>
                             </ContentCollection>
                         </dx:SplitterPane>
+
                         <dx:SplitterPane Name="NavPane">
                             <Separator Visible="False"></Separator>
                             <ContentCollection>
-                                <dx:SplitterContentControl>
+                                <dx:SplitterContentControl BackColor="#234b60">
                                     <asp:ContentPlaceHolder ID="NavContentHolder" runat="server"></asp:ContentPlaceHolder>
                                 </dx:SplitterContentControl>
                             </ContentCollection>
                         </dx:SplitterPane>
-                        <dx:SplitterPane Name="FootPane" Separator-Visible="False" Size="50">
+                        <dx:SplitterPane Name="FootPane" Separator-Visible="False" Size="70">
                             <Separator Visible="False"></Separator>
                             <PaneStyle>
                                 <BorderTop BorderWidth="1" />
                             </PaneStyle>
                             <ContentCollection>
-                                <dx:SplitterContentControl>
-                                    <div class="footer">
+                                <dx:SplitterContentControl BackColor="#1c4154">
+                                    <%-- <div class="footer">
                                         <div class="copyright">
                                             Copyright © My Ideal Property 1998-2013 RESERVED.
                                     <dx:ASPxLabel ID="lblVersion" runat="server"></dx:ASPxLabel>
                                             &nbsp;
                                     <div id="errorMsg"></div>
+                                        </div>
+                                    </div>--%>
+                                    <div style="width: 100%; height: 90px; padding-left: 27px; color: #446576; font-size: 12px;">
+                                        <img src="images/demo_logo.png" style="visibility: hidden;height:10px" />
+                                        <div>
+                                            DEMO LOGO / VESION:
+                                        <dx:ASPxLabel ID="lblVersion" runat="server" ForeColor="#446576" Font-Size="12px"></dx:ASPxLabel>
+                                        </div>
+                                        <%--2.0--%>
+                                        <div>
+                                            ©2014 MYIDEL PROPERTY
                                         </div>
                                     </div>
                                 </dx:SplitterContentControl>
@@ -103,7 +118,7 @@
                         </dx:SplitterPane>
                     </Panes>
                 </dx:SplitterPane>
-                <dx:SplitterPane Name="RightContentPane">                  
+                <dx:SplitterPane Name="RightContentPane">
                     <Panes>
                         <dx:SplitterPane Name="HeaderPane" Size="50px">
                             <PaneStyle>
@@ -115,7 +130,7 @@
                                         <div style="display: table-row">
                                             <div style="display: table-cell; float: left; margin-left: auto; margin-right: 0px; text-align: center; align-content: center;">
                                             </div>
-                                            <div style="display: table-cell; width: 700px; float:right">
+                                            <div style="display: table-cell; width: 700px; float: right">
                                                 <table style="margin-top: 8px; float: right">
                                                     <tr>
                                                         <td>

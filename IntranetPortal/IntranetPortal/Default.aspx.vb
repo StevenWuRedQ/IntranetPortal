@@ -4,37 +4,44 @@ Imports DevExpress.Web.ASPxTreeView
 
 Public Class Default2
     Inherits System.Web.UI.Page
+    Private layoutFomat = "<table><tr><td style=""width: 120px;"">{0}</td><td><div class=""raund-label2"">{1}</div></td></tr></table>"
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not String.IsNullOrEmpty(Request.QueryString("key")) Then
             splitter.GetPaneByName("ContentUrlPane").ContentUrl = String.Format("/LeadAgent.aspx?c=Search&key={0}&id={1}", Request.QueryString("key"), Request.QueryString("id"))
         End If
+        'Change layout by steven
+
+        'Use the font image to the text
+
+
+        Dim layoutFomatRed = "<table><tr><td style=""width: 120px;"">{0}</td><td><div class=""raund-label2"" style=""background: #ff400d;"">{1}</div></td></tr></table>"
 
         Dim taskNode = AgentTree.Nodes.FindByName("TaskNode")
-        taskNode.Text = String.Format("Task <font color='red'>({0})</font>", UserTask.GetTaskCount(User.Identity.Name))
+        taskNode.Text = String.Format(layoutFomatRed, "Task", UserTask.GetTaskCount(User.Identity.Name))
 
         Dim summaryNode = AgentTree.Nodes.FindByName("SummaryNode")
 
         Dim newNode = AgentTree.Nodes.FindByName("NewLeadsNode")
-        newNode.Text = String.Format("New Leads  <font color='black'>({0})</font>", Utility.GetLeadsCount(LeadStatus.NewLead, User.Identity.Name))
+        newNode.Text = String.Format(layoutFomat, "New Leads", Utility.GetLeadsCount(LeadStatus.NewLead, User.Identity.Name))
 
         Dim priorityNode = AgentTree.Nodes.FindByName("priorityNode")
-        priorityNode.Text = String.Format("Hot Leads <font color='black'>({0})</font>", Utility.GetLeadsCount(LeadStatus.Priority, User.Identity.Name))
+        priorityNode.Text = String.Format(layoutFomat, "Hot Leads ", Utility.GetLeadsCount(LeadStatus.Priority, User.Identity.Name))
 
         Dim callbackNode = AgentTree.Nodes.FindByName("callBackNode")
-        callbackNode.Text = String.Format("Follow Up <font color='black'>({0})</font>", Utility.GetLeadsCount(LeadStatus.Callback, User.Identity.Name))
+        callbackNode.Text = String.Format(layoutFomat, "Follow Up ", Utility.GetLeadsCount(LeadStatus.Callback, User.Identity.Name))
 
         Dim doorNode = AgentTree.Nodes.FindByName("doorKnockNode")
-        doorNode.Text = String.Format("Door Knock <font color='black'>({0})</font>", Utility.GetLeadsCount(LeadStatus.DoorKnocks, User.Identity.Name))
+        doorNode.Text = String.Format(layoutFomat, "Door Knock", Utility.GetLeadsCount(LeadStatus.DoorKnocks, User.Identity.Name))
 
         Dim inProcess = AgentTree.Nodes.FindByName("inProcessNode")
-        inProcess.Text = String.Format("In Process <font color='black'>({0})</font>", Utility.GetLeadsCount(LeadStatus.InProcess, User.Identity.Name))
+        inProcess.Text = String.Format(layoutFomat, "In Process", Utility.GetLeadsCount(LeadStatus.InProcess, User.Identity.Name))
 
         Dim deadlead = AgentTree.Nodes.FindByName("deadNode")
-        deadlead.Text = String.Format("Dead Lead <font color='black'>({0})</font>", Utility.GetLeadsCount(LeadStatus.DeadEnd, User.Identity.Name))
+        deadlead.Text = String.Format(layoutFomat, "Dead Lead", Utility.GetLeadsCount(LeadStatus.DeadEnd, User.Identity.Name))
 
         Dim closed = AgentTree.Nodes.FindByName("closedNode")
-        closed.Text = String.Format("Closed <font color='black'>({0})</font>", Utility.GetLeadsCount(LeadStatus.Closed, User.Identity.Name))
+        closed.Text = String.Format(layoutFomat, "Closed", Utility.GetLeadsCount(LeadStatus.Closed, User.Identity.Name))
 
         If Not Employee.HasSubordinates(User.Identity.Name) Then
             AgentTree.Nodes.FindByName("MgrNode").Visible = False
@@ -43,7 +50,7 @@ Public Class Default2
             'If User.IsInRole("Admin") Then
             'assignNode
             Dim assingNode = AgentTree.Nodes.FindByName("assignNode")
-            assingNode.Text = String.Format("Assign Leads <font color='black'>({0})</font>", Utility.GetUnAssignedLeadsCount())
+            assingNode.Text = String.Format(layoutFomat, "Assign Leads", Utility.GetUnAssignedLeadsCount())
             assingNode.Visible = True
             'End If
 
@@ -60,25 +67,25 @@ Public Class Default2
 
             Dim emps = Employee.GetManagedEmployees(User.Identity.Name)
             priorityNode = AgentTree.Nodes.FindByName("mgrNewNode")
-            priorityNode.Text = String.Format("New Leads <font color='black'>({0})</font>", Utility.GetMgrLeadsCount(LeadStatus.NewLead, emps))
+            priorityNode.Text = String.Format(layoutFomat, "New Leads ", Utility.GetMgrLeadsCount(LeadStatus.NewLead, emps))
 
             priorityNode = AgentTree.Nodes.FindByName("mgrPriorityNode")
-            priorityNode.Text = String.Format("Hot Leads <font color='black'>({0})</font>", Utility.GetMgrLeadsCount(LeadStatus.Priority, emps))
+            priorityNode.Text = String.Format(layoutFomat, "Hot Leads", Utility.GetMgrLeadsCount(LeadStatus.Priority, emps))
 
             callbackNode = AgentTree.Nodes.FindByName("mgrCallbackNode")
-            callbackNode.Text = String.Format("Follow Up <font color='black'>({0})</font>", Utility.GetMgrLeadsCount(LeadStatus.Callback, emps))
+            callbackNode.Text = String.Format(layoutFomat, "Follow Up ", Utility.GetMgrLeadsCount(LeadStatus.Callback, emps))
 
             doorNode = AgentTree.Nodes.FindByName("mgrDoorknockNode")
-            doorNode.Text = String.Format("Door Knock <font color='black'>({0})</font>", Utility.GetMgrLeadsCount(LeadStatus.DoorKnocks, emps))
+            doorNode.Text = String.Format(layoutFomat, "Door Knock", Utility.GetMgrLeadsCount(LeadStatus.DoorKnocks, emps))
 
             doorNode = AgentTree.Nodes.FindByName("mgrInProcessNode")
-            doorNode.Text = String.Format("In Process <font color='black'>({0})</font>", Utility.GetMgrLeadsCount(LeadStatus.InProcess, emps))
+            doorNode.Text = String.Format(layoutFomat, "In Process", Utility.GetMgrLeadsCount(LeadStatus.InProcess, emps))
 
             doorNode = AgentTree.Nodes.FindByName("mgrClosedNode")
-            doorNode.Text = String.Format("Closed <font color='black'>({0})</font>", Utility.GetMgrLeadsCount(LeadStatus.Closed, emps))
+            doorNode.Text = String.Format(layoutFomat, "Closed ", Utility.GetMgrLeadsCount(LeadStatus.Closed, emps))
 
             doorNode = AgentTree.Nodes.FindByName("deadleadNode")
-            doorNode.Text = String.Format("Dead Lead <font color='black'>({0})</font>", Utility.GetMgrLeadsCount(LeadStatus.DeadEnd, emps))
+            doorNode.Text = String.Format(layoutFomat, "Dead Lead", Utility.GetMgrLeadsCount(LeadStatus.DeadEnd, emps))
 
         End If
 
@@ -95,10 +102,10 @@ Public Class Default2
         If User.IsInRole("OfficeManager-" & officeName) Or User.IsInRole("Admin") Then
             officeNode.Visible = True
 
-            officeNode.Text = String.Format("{0}<font color='black'>({1})</font>", officeName, Utility.GetOfficeLeadsCount(LeadStatus.ALL, officeName) + Utility.GetUnAssignedLeadsCount(officeName))
+            officeNode.Text = String.Format(layoutFomat, officeName, Utility.GetOfficeLeadsCount(LeadStatus.ALL, officeName) + Utility.GetUnAssignedLeadsCount(officeName))
             For Each node As TreeViewNode In officeNode.Nodes
                 If Not String.IsNullOrEmpty(node.Name) AndAlso node.Name <> "Assign" Then
-                    node.Text = String.Format("{0}<font color='black'>({1})</font>", node.Name, Utility.GetOfficeLeadsCount(Utility.GetLeadStatus(node.Name), officeName))
+                    node.Text = String.Format(layoutFomat, node.Name, Utility.GetOfficeLeadsCount(Utility.GetLeadStatus(node.Name), officeName))
                 End If
             Next
 
