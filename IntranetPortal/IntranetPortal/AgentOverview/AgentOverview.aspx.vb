@@ -24,6 +24,8 @@ Public Class AgentOverview
         If Not IsPostBack Then
             gridEmps.DataBind()
             gridReport.DataBind()
+
+            gridEmps.GroupBy(gridEmps.Columns("Department"))
         End If
 
         report_data = report_data_f()

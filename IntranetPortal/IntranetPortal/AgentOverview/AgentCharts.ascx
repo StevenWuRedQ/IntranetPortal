@@ -7,7 +7,6 @@
 <div id="pieChart" style="max-width: 1200px; height: 400px;"></div>
 <script type="text/javascript">
 
-
     //var dataSource = [
     //    {day: "Monday", oranges: 3},
     //    {day: "Tuesday", oranges: 2},

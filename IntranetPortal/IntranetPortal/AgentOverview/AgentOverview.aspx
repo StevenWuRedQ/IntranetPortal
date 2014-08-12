@@ -163,6 +163,7 @@
                                                         </div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataColumn FieldName="Department" Visible="false"></dx:GridViewDataColumn>
                                                 <%--why use tr td?--%>
                                                 <%-- <dx:GridViewDataColumn FieldName="Position" Visible="false"></dx:GridViewDataColumn>
                                                 <dx:GridViewDataColumn Width="25px" VisibleIndex="5">
@@ -184,9 +185,7 @@
                                             <SettingsPager Mode="ShowAllRecords">
                                             </SettingsPager>
                                             <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
-
                                             <Settings ShowColumnHeaders="False" GridLines="None"></Settings>
-
                                             <Border BorderStyle="None"></Border>
                                         </dx:ASPxGridView>
 

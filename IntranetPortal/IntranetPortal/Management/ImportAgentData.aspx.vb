@@ -120,8 +120,6 @@ Public Class ImportAgentData
         End Try
     End Sub
 
-
-
     Protected Sub ASPxButton2_Click(sender As Object, e As EventArgs) Handles ASPxButton2.Click
         Dim bbles = LeadsData(cbLeadsType.Value).Select(Function(b) b.BBLE).ToArray
 
@@ -190,7 +188,7 @@ InitialLine:
                     Else
                         If lead.IsUpdating Then
                             If DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True) Then
-                                UserMessage.AddNewMessage("Service Message", "Initial Data Message " & bble, String.Format("Refrsh BBLE: {0} data is Finished. ", bble), bble, DateTime.Now, "Initial Data")
+                                UserMessage.AddNewMessage("Service Message", "Initial Data Message " & bble, String.Format("Refresh BBLE: {0} data is Finished. ", bble), bble, DateTime.Now, "Initial Data")
                             End If
                         Else
                             If Not lead.HasOwnerInfo Then
