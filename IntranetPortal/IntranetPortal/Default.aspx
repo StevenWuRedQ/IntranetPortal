@@ -21,8 +21,7 @@
             <dx:PanelContent>
                  
                   <dx:ASPxTreeView ID="AgentTree" AllowSelectNode="True" runat="server" ClientInstanceName="agentTree" Font-Size="Medium" Target="contentUrlPane" Images-NodeImage-Height="20" Images-NodeImage-Width="20" EncodeHtml="False" CssClass="scorllbar_content">
-                    <Nodes>
-                       
+                    <Nodes>                       
                         <dx:TreeViewNode Text="Agent - Bob Harry" Name="LeadsNode" Expanded="True" Image-Url="/images/summary.png" NavigateUrl="/SummaryPage.aspx" AllowCheck="True">
                             <Nodes>
                                 <dx:TreeViewNode Text="Summary" Image-Url="/images/summary_icon.png" NavigateUrl="SummaryPage.aspx" Target="contentUrlPane" Name="SummaryNode"></dx:TreeViewNode>
@@ -53,19 +52,19 @@
                                 <dx:TreeViewNode Text="Assign Leads" NavigateUrl="Management/LeadsManagement.aspx" Name="assignNode" Visible="false">
                                     <Image Url="/images/assign_leads_icon.png"></Image>
                                 </dx:TreeViewNode>
-                                <dx:TreeViewNode Text="New Leads" Image-Url="/images/new_leads_icon.png" NavigateUrl="Management/MgrViewLeads.aspx?c=New Leads" Name="mgrNewNode">
+                                <dx:TreeViewNode Text="New Leads" Image-Url="/images/new_leads_icon.png" NavigateUrl="MgrViewLeads.aspx?c=New Leads" Name="mgrNewNode">
                                 </dx:TreeViewNode>
-                                <dx:TreeViewNode Text="Priority" Image-Url="/images/priority_icon.png" NavigateUrl="Management/MgrViewLeads.aspx?c=Priority" Name="mgrPriorityNode">
+                                <dx:TreeViewNode Text="Priority" Image-Url="/images/priority_icon.png" NavigateUrl="MgrViewLeads.aspx?c=Priority" Name="mgrPriorityNode">
                                 </dx:TreeViewNode>
-                                <dx:TreeViewNode Text="Follow Up" Expanded="true" Image-Url="/images/callback_icon.png" NavigateUrl="Management/MgrViewLeads.aspx?c=Call Back" Name="mgrCallbackNode">
+                                <dx:TreeViewNode Text="Follow Up" Expanded="true" Image-Url="/images/callback_icon.png" NavigateUrl="MgrViewLeads.aspx?c=Call Back" Name="mgrCallbackNode">
                                 </dx:TreeViewNode>
-                                <dx:TreeViewNode Text="Door Knock" Image-Url="/images/door_knock_icon.png" NavigateUrl="Management/MgrViewLeads.aspx?c=Door Knock" Name="mgrDoorknockNode">
+                                <dx:TreeViewNode Text="Door Knock" Image-Url="/images/door_knock_icon.png" NavigateUrl="MgrViewLeads.aspx?c=Door Knock" Name="mgrDoorknockNode">
                                 </dx:TreeViewNode>
-                                <dx:TreeViewNode Text="In Process" Image-Url="/images/inprogess_icon_s.png" NavigateUrl="Management/MgrViewLeads.aspx?c=In Process" Name="mgrInProcessNode" />
+                                <dx:TreeViewNode Text="In Process" Image-Url="/images/inprogess_icon_s.png" NavigateUrl="MgrViewLeads.aspx?c=In Process" Name="mgrInProcessNode" />
 
-                                <dx:TreeViewNode Text="Dead Lead" Image-Url="/images/dead_lead_icon.png" NavigateUrl="Management/MgrViewLeads.aspx?c=Dead Lead" Name="deadleadNode" />
-                                <dx:TreeViewNode Text="Closed" Image-Url="images/close_icon.png" NavigateUrl="Management/MgrViewLeads.aspx?c=Closed" Name="mgrClosedNode" />
-                                <dx:TreeViewNode Text="Search" Image-Url="/images/search_icon.png" NavigateUrl="Management/MgrViewLeads.aspx?c=Search"></dx:TreeViewNode>
+                                <dx:TreeViewNode Text="Dead Lead" Image-Url="/images/dead_lead_icon.png" NavigateUrl="MgrViewLeads.aspx?c=Dead Lead" Name="deadleadNode" />
+                                <dx:TreeViewNode Text="Closed" Image-Url="images/close_icon.png" NavigateUrl="MgrViewLeads.aspx?c=Closed" Name="mgrClosedNode" />
+                                <dx:TreeViewNode Text="Search" Image-Url="/images/search_icon.png" NavigateUrl="MgrViewLeads.aspx?c=Search"></dx:TreeViewNode>
 
                                 <dx:TreeViewNode Text="Agent Overview" Image-Url="/images/agent_overview_icon.png" NavigateUrl="AgentOverview/AgentOverview.aspx" Name="agentOverviewNode" />
                                 <%--add priority by steven--%>

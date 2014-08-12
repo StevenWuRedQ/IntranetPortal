@@ -13,8 +13,6 @@ Public Class Default2
         'Change layout by steven
 
         'Use the font image to the text
-
-
         Dim layoutFomatRed = "<table><tr><td style=""width: 120px;"">{0}</td><td><div class=""raund-label2"" style=""background: #ff400d;"">{1}</div></td></tr></table>"
 
         Dim taskNode = AgentTree.Nodes.FindByName("TaskNode")

@@ -122,6 +122,16 @@
             initScrollbars();
         }
 
+        function HiddenRightPanel()
+        {         
+            var leftPanel = splitter.GetPaneByName("RightPane");
+
+            if(!leftPanel.IsCollapsed())
+            {
+                leftPanel.Collapse();
+            }
+        }
+
     </script>
 </head>
 <body style="font: 12px 'Source Sans Pro'" id="test">
@@ -699,7 +709,7 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-                <dx:SplitterPane Size="310px" ShowCollapseForwardButton="True" CollapsedStyle-CssClass="clearfix">
+                <dx:SplitterPane Size="310px" ShowCollapseForwardButton="True" CollapsedStyle-CssClass="clearfix" Name="RightPane">
                     <CollapsedStyle CssClass="clearfix"></CollapsedStyle>
                     <ContentCollection>
                         <dx:SplitterContentControl>

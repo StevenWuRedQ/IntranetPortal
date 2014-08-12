@@ -145,6 +145,12 @@
     <Reference Include="Microsoft.AspNet.EntityDataSource">
       <HintPath>..\packages\Microsoft.AspNet.EntityDataSource.6.0.0\lib\net40\Microsoft.AspNet.EntityDataSource.dll</HintPath>
     </Reference>
+    <Reference Include="PortalTheme2">
+      <HintPath>App_Themes\PortalTheme2.dll</HintPath>
+    </Reference>
+    <Reference Include="PortalThemeAssembly">
+      <HintPath>..\..\Theme\PortalTheme\PortalThemeAssembly.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
