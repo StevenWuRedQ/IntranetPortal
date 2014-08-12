@@ -10,12 +10,12 @@ Public Class Main
     End Sub
 
     Public Property LeftPanelSize As Double
-        Get
-            Return ASPxSplitter1.Panes("LeftPane").Size.Value
-        End Get
-        Set(value As Double)
-            ASPxSplitter1.Panes("LeftPane").Size = value
-        End Set
-    End Property
+        'Get
+        '    Return ASPxSplitter1.Panes("LeftPane").Size.Value
+        'End Get
+        'Set(value As Double)
+        '    ASPxSplitter1.Panes("LeftPane").Size = value
+        'End Set
+    'End Property
 
 End Class
