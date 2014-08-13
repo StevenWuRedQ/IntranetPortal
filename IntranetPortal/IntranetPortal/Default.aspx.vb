@@ -115,8 +115,9 @@ Public Class Default2
 
     Function GetAssignleadsNode(office As String) As TreeViewNode
         Dim assginNode = New TreeViewNode
-        assginNode.Text = String.Format("Assign Leads <font color='black'>({0})</font>", Utility.GetUnAssignedLeadsCount(office))
-        assginNode.Image.Url = "/images/assigned.png"
+        assginNode.Text = String.Format(layoutFomat, "Assign Leads", Utility.GetUnAssignedLeadsCount(office))
+        'change icon by steven
+        assginNode.Image.Url = "/images/assign_leads_icon.png"
         assginNode.NavigateUrl = "Management/LeadsManagement.aspx?office=" & office
         assginNode.Name = "Assign"
         Return assginNode

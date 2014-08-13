@@ -11,7 +11,14 @@
 <head id="Head1" runat="server">
     <title>Agent Portal (beta) - My Ideal Property</title>
     <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
+
+    <%--add font image by steven--%>
+    <%--<link href="css/bootstrap.min.css"  type="text/css" rel="stylesheet"/>--%>
+    <link href="css/font-awesome.css" type="text/css" rel="stylesheet" />
+    <%--------end--------%>
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
     <style>
         html, body, #form1 {
             margin: 0;
@@ -19,6 +26,10 @@
             height: 100%;
         }
     </style>
+    <%--/*add by steven*/--%>
+    <link rel="stylesheet" type="text/css" href="/styles/stevencss.css" />
+
+    <%--/*-------end------*/--%>
     <script type="text/javascript" src="/scripts/PortalMessager.js"></script>
     <script type="text/javascript">
         // here is a cross-browser compatible way of connecting 
@@ -56,13 +67,15 @@
                 return str.indexOf(suffix, str.length - suffix.length) !== -1;
             }
         </script>
-        <dx:ASPxSplitter ID="MainSplitter" runat="server" Height="100%" Width="100%" FullscreenMode="True">
+        <dx:ASPxSplitter ID="MainSplitter" runat="server" Height="100%" Width="100%" FullscreenMode="True" ShowCollapseBackwardButton="true">
             <Styles>
                 <Pane>
                     <Paddings Padding="0px" />
                     <Border BorderWidth="0px" />
+                    
                 </Pane>
             </Styles>
+            
             <Panes>
                 <dx:SplitterPane Name="leftNavPane" Size="280">
                     <Panes>
@@ -277,7 +290,10 @@
                                                 </ContentCollection>
                                             </dx:ASPxPopupControl>
                                             <%---------------------end---------------%>
-                                            <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
+                                            <div style="overflow:auto">
+                                                <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
+                                            </div>
+                                            
                                         </div>
                                     </div>
 

@@ -123,13 +123,13 @@
                             <Nodes>
                                 <dx:TreeViewNode Text="New Leads" Image-Url="/images/new_leads_icon.png" NavigateUrl="MgrViewLeads.aspx?c=New Leads&o=Rockaway" Name="New Leads">
                                 </dx:TreeViewNode>
-                                <dx:TreeViewNode Text="Hot Leads" Image-Url="/images/priority_icon.jpg" NavigateUrl="MgrViewLeads.aspx?c=Priority&o=Rockaway" Name="Hot Leads">
+                                <dx:TreeViewNode Text="Hot Leads" Image-Url="/images/priority_icon.png" NavigateUrl="MgrViewLeads.aspx?c=Priority&o=Rockaway" Name="Hot Leads">
                                 </dx:TreeViewNode>
                                 <dx:TreeViewNode Text="Follow Up" Expanded="true" Image-Url="/images/callback_icon.png" NavigateUrl="MgrViewLeads.aspx?c=Call Back&o=Rockaway" Name="Follow Up">
                                 </dx:TreeViewNode>
                                 <dx:TreeViewNode Text="Door Knock" Image-Url="/images/door_knock_icon.png" NavigateUrl="MgrViewLeads.aspx?c=Door Knock&o=Rockaway" Name="Door Knock">
                                 </dx:TreeViewNode>
-                                <dx:TreeViewNode Text="In Process" Image-Url="/images/inprogess_icon_s.jpg" NavigateUrl="MgrViewLeads.aspx?c=In Process&o=Rockaway" Name="In Process"/>
+                                <dx:TreeViewNode Text="In Process" Image-Url="/images/inprogess_icon_s.png" NavigateUrl="MgrViewLeads.aspx?c=In Process&o=Rockaway" Name="In Process"/>
                                 <dx:TreeViewNode Text="Dead Lead" Image-Url="/images/dead_lead_icon.png" NavigateUrl="MgrViewLeads.aspx?c=Dead Lead&o=Rockaway" Name="Dead Lead"/>
                                 <dx:TreeViewNode Text="Closed" Image-Url="images/close_icon.png" NavigateUrl="MgrViewLeads.aspx?c=Closed&o=Rockaway" Name="Closed"/>
                             </Nodes>

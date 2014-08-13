@@ -109,6 +109,49 @@ Public Class UserSummary
         End Using
     End Sub
 
+    'change the quote to the UI by steven
+    Public Function HtmlBlackQuote(quote As String) As String
+        Dim spliteSymble As String = "-"
+        If (quote.IndexOf("~") <> 0) Then
+            spliteSymble = "~"
+        End If
+        Dim strArry As String() = quote.Split(New Char() {spliteSymble})
+        If strArry Is Nothing Or strArry.Length < 2 Then
+            Return quote
+        End If
+        Dim FontStr As String = ""
+        Dim EndStr As String = ""
+
+        FontStr = strArry(0)
+
+        EndStr = strArry(1)
+
+        Return String.Format("{0}<br>-<span style=""font-weight:700;"">{1}</span>", FontStr, EndStr)
+        'Return "<span style=""font-weight: 900;""> 720 QUINCY ST</span> - " & leadData
+    End Function
+
+    'Change to span let it show the blod font by steven <span style="font-weight: 900;"> 720 QUINCY ST</span> by steven
+    Public Function HtmlBlackInfo(leadData As String) As String
+        Dim strArry As String() = leadData.Split(New Char() {"-"c})
+        If strArry Is Nothing Or strArry.Length < 2 Then
+            Return leadData
+        End If
+        Dim FontStr As String = ""
+        Dim EndStr As String = ""
+
+        FontStr = strArry(0)
+
+        EndStr = strArry(1)
+
+        If strArry.Length > 2 Then
+            FontStr = FontStr + "-" + EndStr
+            EndStr = strArry(2)
+        End If
+
+        Return String.Format("<span style=""font-weight: 900;"">{0}</span>-{1}", FontStr, EndStr)
+        'Return "<span style=""font-weight: 900;""> 720 QUINCY ST</span> - " & leadData
+    End Function
+
     'Protected Sub getAddressCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
     '    Using Context As New Entities
     '        Dim lead = Context.LeadsInfoes.Where(Function(ld) ld.BBLE = e.Parameter).SingleOrDefault
