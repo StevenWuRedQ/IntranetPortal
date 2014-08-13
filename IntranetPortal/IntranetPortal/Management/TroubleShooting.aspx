@@ -33,6 +33,8 @@
             </tr>
         </table>
         <dx:ASPxLabel runat="server" ID="lblMsg"></dx:ASPxLabel>
+        <dx:ASPxButton runat="server" ID="btnTestDataService" Text="Test Data Service"></dx:ASPxButton>
+                <dx:ASPxButton runat="server" ID="ASPxButton1" Text="Test HomeOwner Service"></dx:ASPxButton>
 
         <br />
     </div>

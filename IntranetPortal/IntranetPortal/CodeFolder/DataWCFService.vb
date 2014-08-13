@@ -150,22 +150,47 @@ Public Class DataWCFService
 
     Public Shared Function UpdateHomeOwner(bble As String, orderid As Integer) As Boolean
         Using context As New Entities
-            Dim owners = context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Active = True).ToList
+            Dim li = context.LeadsInfoes.Find(bble)
+            'GetLatestSalesInfo(bble)
+            If String.IsNullOrEmpty(li.Owner) Then
+                GetLatestSalesInfo(bble)
+            End If
 
+            If Not String.IsNullOrEmpty(li.Owner) AndAlso Not String.IsNullOrEmpty(li.CoOwner) Then
+                If li.Owner.Trim = li.CoOwner.Trim Then
+                    li.Owner = li.Owner.Trim
+                    li.CoOwner = Nothing
+                    context.SaveChanges()
+                End If
+            End If
+
+            Dim owners = context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Active = True And ho.Name = li.Owner).ToList
             If owners Is Nothing Or owners.Count = 0 Then
                 GetLatestSalesInfo(bble)
                 'Return False
             End If
+
             Dim loaded = False
-
-            For Each owner In owners
-
+            For Each owner In context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Active = True).ToList
                 Dim result = GetLocateReport(orderid, bble, owner)
                 If result IsNot Nothing Then
                     loaded = True
                     owner.TLOLocateReport = result
                 End If
             Next
+
+            'Reload latest sales owner info and try again
+            If Not loaded Then
+                GetLatestSalesInfo(bble)
+                For Each owner In context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Active = True).ToList
+                    Dim result = GetLocateReport(orderid, bble, owner)
+                    If result IsNot Nothing Then
+                        loaded = True
+                        owner.TLOLocateReport = result
+                    End If
+                Next
+
+            End If
 
             Dim contextError = context.GetValidationErrors()
             If contextError.Count = 0 Then
@@ -360,11 +385,18 @@ Public Class DataWCFService
                             li.CoOwner = ""
                         End If
 
-                        For Each item In results
-                            If Not String.IsNullOrEmpty(item.Name) Then
-                                SaveHomeOwner(bble, item.Name.TrimEnd.TrimStart, item.Mail_ST1, item.Mail_ST2, item.Mail_City, item.Mail_State, "US", item.Mail_Zip, context)
-                            End If
-                        Next
+                        'For Each item In results
+                        '    If Not String.IsNullOrEmpty(item.Name) Then
+                        '        Dim add1 = String.Format("{0} {1}", item.Number, item.Street).Trim
+                        '        SaveHomeOwner(bble, item.Name.TrimEnd.TrimStart, add1, item.Mail_ST2, item.Mail_City, item.Mail_State, "US", item.Mail_Zip, context)
+                        '    End If
+                        'Next
+                    Else
+                        Dim prop = client.NYC_Assessment_Full(bble).SingleOrDefault
+                        If prop IsNot Nothing AndAlso Not String.IsNullOrEmpty(prop.OWNER_NAME) Then
+                            li.Owner = prop.OWNER_NAME.Trim
+                            SaveHomeOwner(bble, prop.OWNER_NAME.Trim, prop.OWNER_ADDRESS1, prop.OWNER_ADDRESS2, prop.OWNER_CITY, prop.OWNER_STATE, prop.OWNER_COUNTRY, prop.OWNER_ZIP, context)
+                        End If
                     End If
                 End Using
 
@@ -483,7 +515,7 @@ Public Class DataWCFService
                         Catch ex As System.TimeoutException
                             Throw New Exception("Time is out. The data services is busy now. Please try later. Data Service: GetPropdata " & ex.Message)
                         End Try
-                        
+
                         'Dim owner = client.Get_TLO(apiOrder.ApiOrderID, bble, )
 
                     End If

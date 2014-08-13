@@ -86,4 +86,14 @@ Public Class TroubleShooting
         cn.Close()
 
     End Sub
+
+    Protected Sub btnTestDataService_Click(sender As Object, e As EventArgs) Handles btnTestDataService.Click
+        Dim bble = txtBble.Text
+        DataWCFService.UpdateAssessInfo(bble)
+    End Sub
+
+    Protected Sub ASPxButton1_Click(sender As Object, e As EventArgs) Handles ASPxButton1.Click
+        Dim bble = txtBble.Text
+        DataWCFService.UpdateHomeOwner(bble, 1)
+    End Sub
 End Class
