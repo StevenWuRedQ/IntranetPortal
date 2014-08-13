@@ -35,7 +35,7 @@
                 <ContentCollection>
                     <dx:SplitterContentControl>
                         <%-- DXCOMMENT: Configure a menu that allows switching between mail and scheduler modes --%>
-                        <dx:ASPxMenu runat="server" ID="MenuCorner" RenderMode="Lightweight" Width="300px" Orientation="Vertical" Font-Size="Medium" Paddings-Padding="0px" >
+                        <dx:ASPxMenu runat="server" ID="MenuCorner" RenderMode="Lightweight" Width="300px" Orientation="Vertical" Font-Size="Medium" Paddings-Padding="0px" SeparatorColor="#2b586f">
                             <Border BorderWidth="0" />
                             <ItemStyle  CssClass="under-line-menu" VerticalAlign="Middle"
                                 ForeColor="#638292" HoverStyle-ForeColor="white" HoverStyle-CssClass="under-line-menu_hover"
