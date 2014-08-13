@@ -126,7 +126,162 @@
                             </PaneStyle>
                             <ContentCollection>
                                 <dx:SplitterContentControl>
-                                    <div class="header" style="width: 100%; display: table; height: 100%; background-color: #EDEDED;">
+                                    <div class="header under-line-header" style="width: 100%; display: table; height: 100%; margin-top: -1px; background-color:white; ">
+                                        <div style="display: table-row" class="clear-fix">
+                                            <div style="float: left; display: table-cell; width: 260px;">
+                                              
+                                            </div>
+                                            <div style="display: table-cell; width: 700px">
+                                                <table style="margin-top: 10px; float: right">
+                                                    <tr>
+                                                        <td>
+                                                            <dx:ASPxTextBox runat="server" ID="txtSearchKey" Width="225px" ClientInstanceName="txtSearchKeyClient" AutoPostBack="false" Height="30px" Border-BorderStyle="None" Font-Size="14px" ForeColor="#0e9ee9">
+                                                                <ClientSideEvents KeyDown="function(s,e){
+                                                                if(e.htmlEvent.keyCode == 13)
+                                                                {
+                                                                    btnSearchClient.DoClick();                                                                                                                                     
+                                                                }                                                               
+                                                            }" />
+
+                                                                <Border BorderStyle="None"></Border>
+                                                            </dx:ASPxTextBox>
+                                                        </td>
+                                                        <td>
+                                                            <%--delete search text by steven--%>
+                                                            <dx:ASPxButton runat="server" RenderMode="Button" ID="btnSearch" ClientInstanceName="btnSearchClient" UseSubmitBehavior="false" Text=" " AutoPostBack="false" BackgroundImage-ImageUrl="/images/search_btn.png" Height="30px" Width="55px" Border-BorderStyle="None" HoverStyle-BackColor="Transparent">
+                                                                <%------end-------%>
+                                                                <%--<Image Height="16px" Width="16px" Url="/images/search_btn.png"></Image>--%>
+                                                                <%-- <FocusRectPaddings PaddingLeft="2" PaddingRight="2" PaddingBottom="0" PaddingTop="0" />--%>
+
+                                                                <%--<Image Url="/images/search_btn.png"></Image>--%>
+                                                                <ClientSideEvents Click="function(s,e){
+                                                             ASPxPopupSearchPanel.ShowAtElement(txtSearchKeyClient.GetMainElement());
+                                                               gridSearchLeads.PerformCallback(txtSearchKeyClient.GetText());                                                           
+                                                            }" />
+
+                                                                <%--<Image Url="/images/search_btn.png"></Image>--%>
+
+                                                                <HoverStyle BackColor="Transparent"></HoverStyle>
+
+                                                                <BackgroundImage ImageUrl="/images/search_btn.png" Repeat="NoRepeat"></BackgroundImage>
+
+
+                                                                <Border BorderStyle="None"></Border>
+
+
+                                                            </dx:ASPxButton>
+                                                        </td>
+                                                        <%--replace login menu with a image by steven--%>
+                                                        <td style="margin-left: 20px; font-size: 18px" class="login">
+                                                            <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                                                                <AnonymousTemplate>
+                                                                    <a id="loginLink" href="~/Account/Login.aspx" runat="server" visible="false">Log In</a>
+                                                                    <a id="registerLink" href="~/Account/Register.aspx" runat="server" visible="false">|Register</a>
+                                                                </AnonymousTemplate>
+                                                                <LoggedInTemplate>
+                                                                    Good morning, <span style="font-weight: 900">
+                                                                        <asp:LoginName ID="HeadLoginName" runat="server" />
+                                                                    </span>
+                                                                    <img src="images/arrow_down.png" />
+                                                                    <div style="display: none">
+                                                                        [<asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />
+                                                                        |<a href="/Account/ChangePassword.aspx" visible="false">Setting</a>]
+                                                                    </div>
+                                                                </LoggedInTemplate>
+                                                            </asp:LoginView>
+                                                        </td>
+                                                        <%----end------%>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <%--change the pop search screen UI style by steven--%>
+                                             <%--MinHeight="150px"--%> 
+                                            <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSearchPanel" Width="600px" Height="250px"
+                                                MaxWidth="800px" MaxHeight="800px" MinWidth="150px"  ID="pcMain"
+                                                ShowHeader="false" CloseAction="CloseButton"
+                                                runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True" CssClass="rand-pop">
+                                                <ContentCollection>
+                                                    <dx:PopupControlContentControl runat="server">
+                                                        <dx:ASPxGridView runat="server" KeyFieldName="BBLE" ClientInstanceName="gridSearchLeads" ID="gridSearch" OnCustomCallback="gridSearch_CustomCallback" Width="100%" SettingsPager-PageSize="5">
+                                                            <Columns>
+                                                                <dx:GridViewDataTextColumn FieldName="LeadsName" Caption="LEADS NAME" Settings-AllowHeaderFilter="False" VisibleIndex="1" Width="260px">
+                                                                    <Settings AutoFilterCondition="Contains" />
+                                                                    <DataItemTemplate>
+                                                                        <%--add data row height and font color  by steven--%>
+                                                                        <div  class="search_pop_data_s" >
+                                                                            <div href="#" class="pop_search_data"
+                                                                                onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))  %>'>
+                                                                                <%# Eval("LeadsName")%>
+                                                                            </div>
+                                                                            <div class="pop_search_data"
+                                                                                runat="server" visible='<%# Not EmpUnderManaged.Contains(Eval("EmployeeName"))%>'>
+                                                                                <%# Eval("LeadsName") %>
+                                                                            </div>
+                                                                        </div>
+                                                                        <%------end------%>
+                                                                    </DataItemTemplate>
+
+                                                                </dx:GridViewDataTextColumn>
+                                                                <dx:GridViewDataTextColumn FieldName="Status" Caption="STATUS" Settings-AllowHeaderFilter="False" VisibleIndex="2" Width="80px" CellStyle-HorizontalAlign="left">
+                                                                    <Settings AllowHeaderFilter="False"></Settings>
+                                                                    <DataItemTemplate>
+                                                                        <%# DirectCast(Eval("Status"), IntranetPortal.LeadStatus).ToString %>
+                                                                    </DataItemTemplate>
+                                                                    <CellStyle HorizontalAlign="left"></CellStyle>
+                                                                </dx:GridViewDataTextColumn>
+                                                                <dx:GridViewDataColumn FieldName="EmployeeName" Caption="EMPLOYEE NAME" VisibleIndex="4" Width="150px" CellStyle-HorizontalAlign="left">
+                                                                    <GroupRowTemplate>
+                                                                        Employee Name: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
+                                                                    </GroupRowTemplate>
+
+                                                                    <CellStyle HorizontalAlign="left"></CellStyle>
+                                                                </dx:GridViewDataColumn>
+                                                                <dx:GridViewDataColumn Width="35px" VisibleIndex="5">
+                                                                    <DataItemTemplate>
+
+                                                                        <%--use font image to change the image--%>
+                                                                        <i class="fa fa-external-link-square" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To Lead" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>'></i>
+                                                                        <span style="width: 10px">&nbsp;&nbsp;</span>
+                                                                        <i class="fa fa-list-alt" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>'></i>
+                                                                        <%--change image to beaty style by steven--%>
+                                                                        <%--<img src="~/images/search_pop_go_leads.png" title="Go To Lead" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />
+                                                                        <img src="~/images/search_pop_menu.png" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />--%>
+                                                                    </DataItemTemplate>
+                                                                </dx:GridViewDataColumn>
+                                                            </Columns>
+                                                            <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true"
+                                                                EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
+                                                            <SettingsPager NumericButtonCount="5"></SettingsPager>
+                                                            <Styles>
+                                                                <AlternatingRow BackColor="#f5f5f5"></AlternatingRow>
+                                                                <RowHotTrack BackColor="#ff400d"></RowHotTrack>
+                                                            </Styles>
+                                                        </dx:ASPxGridView>
+                                                        <asp:Panel ID="Panel1" runat="server">
+                                                            <table style="width: 100%; margin-top: -48px;">
+                                                                <tr>
+                                                                    <td style="width: 79%"></td>
+                                                                    <td>
+                                                                        <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Close" AutoPostBack="false" UseSubmitBehavior="false" BackColor="#77787b" CssClass="rand-button" Border-BorderStyle="None">
+                                                                            <ClientSideEvents Click="function(){
+                                                                                                                        ASPxPopupSearchPanel.Hide();                                                                                                                                                                                                                                            
+                                                                                                                        }"></ClientSideEvents>
+
+                                                                            <Border BorderStyle="None"></Border>
+                                                                        </dx:ASPxButton>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </asp:Panel>
+                                                    </dx:PopupControlContentControl>
+                                                </ContentCollection>
+                                            </dx:ASPxPopupControl>
+                                            <%---------------------end---------------%>
+                                            <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
+                                        </div>
+                                    </div>
+
+                                    <%--<div class="header" style="width: 100%; display: table; height: 100%; background-color: #EDEDED;">
                                         <div style="display: table-row">
                                             <div style="display: table-cell; float: left; margin-left: auto; margin-right: 0px; text-align: center; align-content: center;">
                                             </div>
@@ -226,7 +381,8 @@
                                             </dx:ASPxPopupControl>
                                             <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
                                         </div>
-                                    </div>
+                                    </div>--%>
+
                                 </dx:SplitterContentControl>
                             </ContentCollection>
                         </dx:SplitterPane>
