@@ -91,7 +91,7 @@
 </style>
 
 <%--change it to color sytle by steven--%>
-<div style="overflow:auto">
+<div style="overflow:auto; height:100%">
 
 
     <div style="display: inline-table; font-family: 'Source Sans Pro'; margin-left: 19px; margin-top: 15px;">
