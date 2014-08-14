@@ -16,6 +16,14 @@
         Return Nothing
     End Function
 
+    Public ReadOnly Property LisPens As List(Of PortalLisPen)
+        Get
+            Using context As New Entities
+                Return context.PortalLisPens.Where(Function(li) li.BBLE = BBLE).ToList
+            End Using
+        End Get
+    End Property
+
     Public ReadOnly Property OwnerPhoneNo As String
         Get
             Using context As New Entities
