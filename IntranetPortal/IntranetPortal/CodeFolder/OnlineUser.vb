@@ -22,6 +22,13 @@ Public Class OnlineUser
         If Not String.IsNullOrEmpty(context.User.Identity.Name) Then
             context.Application.Lock()
             Dim users = CType(context.Application("Users"), List(Of OnlineUser))
+
+            If users Is Nothing Then
+                context.Application.Lock()
+                context.Application("Users") = New List(Of OnlineUser)
+                context.Application.UnLock()
+            End If
+
             Dim currentUser = users.Where(Function(u) u.UserName = context.User.Identity.Name).SingleOrDefault
             If currentUser IsNot Nothing Then
                 currentUser.RefreshTime = DateTime.Now

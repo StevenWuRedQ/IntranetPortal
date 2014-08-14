@@ -317,7 +317,7 @@
                                         </TabStyle>
                                         <TabPages>
                                             <dx:TabPage Text="Lead" Name="tabLeadInfo">
-                                                <TabStyle Paddings-PaddingLeft="25px"></TabStyle>
+                                                <TabStyle Paddings-PaddingLeft="25px"></TabStyle>                                                
                                                 <ContentCollection>
                                                     <dx:ContentControl runat="server">
                                                         <dx:ASPxFormLayout ClientInstanceName="formlayoutLeadsInfoClient" ID="formlayoutLeadsInfo" Width="100%" runat="server" ColCount="3" ColSpan="3" Paddings-Padding="0">

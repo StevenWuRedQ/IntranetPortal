@@ -783,6 +783,13 @@
       <DependentUpon>LeadsSubMenu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\PropertyInfo.ascx.designer.vb">
+      <DependentUpon>PropertyInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\PropertyInfo.ascx.vb">
+      <DependentUpon>PropertyInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControl\UserSummary.ascx.designer.vb">
       <DependentUpon>UserSummary.ascx</DependentUpon>
     </Compile>
@@ -813,6 +820,7 @@
     <Content Include="Account\Login2.aspx" />
     <Content Include="AgentOverview\AgentCharts.ascx" />
     <Content Include="AgentOverview\AgentOverview.aspx" />
+    <Content Include="App_Themes\PortalTheme2.dll" />
     <Content Include="BingViewMap.aspx" />
     <Content Include="Content\dx.android.holo-dark.css" />
     <Content Include="Content\dx.android.holo-light.css" />
@@ -1451,6 +1459,7 @@
     <Content Include="UserControl\LeadsList.ascx" />
     <Content Include="UserControl\LeadsStatisticSummary.ascx" />
     <Content Include="UserControl\LeadsSubMenu.ascx" />
+    <Content Include="UserControl\PropertyInfo.ascx" />
     <Content Include="UserControl\UserSummary.ascx" />
     <Content Include="ViewLeadsInfo.aspx" />
     <Content Include="WCFDataServices\PortalDataService.svc" />

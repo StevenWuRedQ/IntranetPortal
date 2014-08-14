@@ -72,7 +72,7 @@ Public Class Root
         Return False
     End Function
 
-    Protected Sub gridSearch_AfterPerformCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewAfterPerformCallbackEventArgs)
+    Protected Sub gridSearch_AfterPerformCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewAfterPerformCallbackEventArgs) Handles gridSearch.AfterPerformCallback
         BindSearchGrid("")
     End Sub
 End Class
