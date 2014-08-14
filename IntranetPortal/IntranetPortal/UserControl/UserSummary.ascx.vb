@@ -6,6 +6,7 @@ Public Class UserSummary
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         BindData()
         BindCalendar()
+       
     End Sub
 
     Public ReadOnly Property Quote As String
@@ -115,6 +116,13 @@ Public Class UserSummary
         If (quote.IndexOf("~") <> 0) Then
             spliteSymble = "~"
         End If
+        If (quote.IndexOf("–") <> 0) Then
+            spliteSymble = "–"
+        End If
+
+        If (quote.IndexOf("~") <> 0) Then
+            spliteSymble = "~"
+        End If
         Dim strArry As String() = quote.Split(New Char() {spliteSymble})
         If strArry Is Nothing Or strArry.Length < 2 Then
             Return quote
@@ -132,7 +140,9 @@ Public Class UserSummary
 
     'Change to span let it show the blod font by steven <span style="font-weight: 900;"> 720 QUINCY ST</span> by steven
     Public Function HtmlBlackInfo(leadData As String) As String
-        Dim strArry As String() = leadData.Split(New Char() {"-"c})
+        Dim symble = "-"
+       
+        Dim strArry As String() = leadData.Split(New Char() {symble})
         If strArry Is Nothing Or strArry.Length < 2 Then
             Return leadData
         End If
