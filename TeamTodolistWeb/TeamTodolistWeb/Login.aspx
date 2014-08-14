@@ -59,6 +59,7 @@
                                     </td>
                                 </tr>
                             </table>
+                            <span style="color:transparent"><%= HttpContext.Current.Server.MachineName %></span>
                         </dx:PanelContent>
                     </PanelCollection>
                 </dx:ASPxRoundPanel>
