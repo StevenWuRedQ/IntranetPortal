@@ -4,21 +4,29 @@
     <%--/*display:none need delete when realse--%>
     <div style="height: 800px; overflow: auto;" id="prioity_content">
         <%--refresh label--%>
-        <div style="margin: 30px 20px; height: 30px; background: #ffefe4; color: #ff400d; border-radius: 15px; font-size: 14px; line-height: 30px;">
-            <i class="fa fa-spinner fa-spin" style="margin-left: 30px"></i>
-            <span style="padding-left: 22px">Lead is being updated, it will take a few minutes to complete.</span>
-        </div>
+        
+        <dx:ASPxPanel ID="UpatingPanel" runat="server">
+            <PanelCollection>
+                <dx:PanelContent runat="server">
+                    <div style="margin: 30px 20px; height: 30px; background: #ffefe4; color: #ff400d; border-radius: 15px; font-size: 14px; line-height: 30px;">
+                        <i class="fa fa-spinner fa-spin" style="margin-left: 30px"></i>
+                        <span style="padding-left: 22px">Lead is being updated, it will take a few minutes to complete.</span>
+                    </div>
+                </dx:PanelContent>
+            </PanelCollection>
+        </dx:ASPxPanel>
         <%--time label--%>
         <div style="height: 80px; font-size: 30px; margin-left: 30px;" class="font_gray">
             <div style="font-size: 30px">
                 <i class="fa fa-refresh"></i>
-                <span style="margin-left: 19px;">Jun 9, 2014 1:12 PM</span>
+                <span style="margin-left: 19px;"><%= LeadsInfoData.LastUpdate.ToString%></span>
                 <span class="time_buttons" style="margin-right: 30px">eCourts</span>
                 <span class="time_buttons">DOB</span>
                 <span class="time_buttons">Acris</span>
                 <span class="time_buttons">Maps</span>
             </div>
-            <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;">Started on June 2, 2014 6:37 PM</span>
+            <%--data format June 2, 2014 6:37 PM--%>
+            <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;">Started on <%= LeadsInfoData.CreateDate%></span>
         </div>
 
         <%--note list--%>
@@ -60,44 +68,44 @@
                 <div class="form_div_node form_div_node_margin">
                     <span class="form_input_title">bble</span>
 
-                    <input class="text_input font_black" value="4073038902" />
+                    <input class="text_input font_black" value="<%= LeadsInfoData.BBLE%>" />
                 </div>
                 <%--end line 1--%>
                 <%--line 2--%>
                 <div class="form_div_node form_div_node_line_margin">
                     <span class="form_input_title">Neighborhood</span>
-                    <input class="text_input" value="QUEENS" />
+                    <input class="text_input" value="<%=LeadsInfoData.Neighborhood%>" />
                 </div>
 
                 <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                     <span class="form_input_title">Borough</span>
 
-                    <input class="text_input" value="4" />
+                    <input class="text_input" value="<%=LeadsInfoData.Borough%>" />
                 </div>
 
                 <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                     <span class="form_input_title">Block</span>
 
-                    <input class="text_input" value="7327" />
+                    <input class="text_input" value="<%=LeadsInfoData.Block%>" />
                 </div>
                 <%--end line 2--%>
                 <%--line 3--%>
 
                 <div class="form_div_node form_div_node_line_margin">
                     <span class="form_input_title">Lot</span>
-                    <input class="text_input" value="29" />
+                    <input class="text_input" value="<%= LeadsInfoData.Lot%>" />
                 </div>
 
                 <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                     <span class="form_input_title">NYC SQFT</span>
 
-                    <input class="text_input" value="1532" />
+                    <input class="text_input" value="<%=LeadsInfoData.NYCSqft%>" />
                 </div>
 
                 <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                     <span class="form_input_title">Year Built</span>
 
-                    <input class="text_input" value=" " />
+                    <input class="text_input" value="<%=LeadsInfoData.YearBuilt%>" />
                 </div>
 
                 <%----end line 3----%>
@@ -106,19 +114,19 @@
 
                 <div class="form_div_node form_div_node_line_margin">
                     <span class="form_input_title">Building dem</span>
-                    <input class="text_input" value="16'x36'" />
+                    <input class="text_input" value="<%=LeadsInfoData.BuildingDem%>" />
                 </div>
 
                 <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                     <span class="form_input_title">Lot Dem</span>
 
-                    <input class="text_input" value="28'x116'" />
+                    <input class="text_input" value="<%=LeadsInfoData.LotDem%>" />
                 </div>
 
                 <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                     <span class="form_input_title">stories</span>
 
-                    <input class="text_input" value=" " />
+                    <input class="text_input" value="<%= LeadsInfoData.NumFloors %>" />
                 </div>
 
                 <%----end line 4----%>
@@ -126,38 +134,38 @@
                 <%-----line 5-----%>
                 <div class="form_div_node form_div_node_line_margin">
                     <span class="form_input_title">Tax class</span>
-                    <input class="text_input" value="1" />
+                    <input class="text_input" value="<%=LeadsInfoData.TaxClass%>" />
                 </div>
 
                 <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                     <span class="form_input_title">Zoning (<span style="color: #0e9ee9">PDF</span>)</span>
 
-                    <input class="text_input" value="28'x116'" />
+                    <input class="text_input" value="<%=LeadsInfoData.Zoning%>" />
                 </div>
 
                 <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                     <span class="form_input_title">Unbuilt sqft</span>
 
-                    <input class="text_input" value=" " />
+                    <input class="text_input" value="<%=LeadsInfoData.UnbuiltSqft%>" />
                 </div>
                 <%----end line 5--%>
 
                 <%-----line 6-----%>
                 <div class="form_div_node form_div_node_line_margin">
                     <span class="form_input_title">Max Far</span>
-                    <input class="text_input" value="0.60" />
+                    <input class="text_input" value="<%=LeadsInfoData.MaxFar%>" />
                 </div>
 
                 <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                     <span class="form_input_title">axtual far</span>
 
-                    <input class="text_input" value="0.43" />
+                    <input class="text_input" value="<%= LeadsInfoData.ActualFar%>" />
                 </div>
 
                 <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                     <span class="form_input_title">Zestimate</span>
 
-                    <input class="text_input" value=" " />
+                    <input class="text_input" value="<%=LeadsInfoData.EstValue %>" />
                 </div>
                 <%----end line --%>       
         </div>
@@ -172,7 +180,7 @@
                 <%--line 1--%>
                 <div class="form_div_node form_div_node_line_margin">
                     <span class="form_input_title">1st Mortgage</span>
-                    <input class="text_input" value="$1800,00.00" />
+                    <input class="text_input" value="$<%= LeadsInfoData.C1stMotgrAmt%>" />
                 </div>
 
                 <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
@@ -200,7 +208,7 @@
 
                 <div class="form_div_node form_div_node_line_margin">
                     <span class="form_input_title">2nd Mortgage</span>
-                    <input class="text_input" value="$3,854.42" />
+                    <input class="text_input" value="$<%=LeadsInfoData.C2ndMotgrAmt%>" />
                 </div>
 
                 <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
@@ -260,7 +268,7 @@
 
                     <div class="form_div_node form_div_node_line_margin">
                         <span class="form_input_title">Taxes</span>
-                        <input class="text_input" value="$180,000.00" />
+                        <input class="text_input" value="$<%=LeadsInfoData.TaxesAmt%>" />
                     </div>
 
 
@@ -269,20 +277,20 @@
 
                     <div class="form_div_node form_div_node_line_margin">
                         <span class="form_input_title">water</span>
-                        <input class="text_input" value="$180,000.00" />
+                        <input class="text_input" value="$<%= LeadsInfoData.WaterAmt%>" />
                     </div>
                     <%----end line ----%>
                     <%--line 6--%>
 
                     <div class="form_div_node form_div_node_line_margin">
                         <span class="form_input_title">ecb/dob</span>
-                        <input class="text_input" value=" " />
+                        <input class="text_input" value="<%= LeadsInfoData.ViolationAmount %>" />
                     </div>
                     <%--line 7--%>
 
                     <div class="form_div_node form_div_node_line_margin">
                         <span class="form_input_title" style="color: #ff400d">Total debt</span>
-                        <input class="text_input" value="$180,000.00" />
+                        <input class="text_input" value="$ <%= LeadsInfoData.C1stMotgrAmt+LeadsInfoData.C2ndMotgrAmt+LeadsInfoData.TaxesAmt+LeadsInfoData.WaterAmt %>" />
                     </div>
 
                     <%----end line ----%>
@@ -334,6 +342,25 @@
         </div>
         <%--end--%>
     </div>
-
-
 </div>
+<!-- custom scrollbar plugin -->
+
+<script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<script>
+    (function ($) {
+        $(window).load(function () {
+            alert("init msustom scroll bar");
+            $("#prioity_content").mCustomScrollbar(
+                {
+                    theme: "minimal-dark"
+                }
+                );
+            $("#home_owner_content").mCustomScrollbar(
+                {
+                    theme: "minimal-dark"
+                }
+                );
+
+        });
+    })(jQuery);
+</script>

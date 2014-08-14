@@ -657,7 +657,10 @@
                                                                 </LayoutGroupBox>
                                                             </Styles>
                                                         </dx:ASPxFormLayout>
-                                                        <uc1:PropertyInfo runat="server" ID="PropertyInfo" />
+                                                        <div style="width:720px">
+                                                            <uc1:PropertyInfo runat="server" ID="PropertyInfo" />
+                                                        </div>
+                                                        
                                                     </dx:ContentControl>
                                                 </ContentCollection>
                                             </dx:TabPage>

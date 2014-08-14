@@ -356,7 +356,7 @@ div.form_head {
 
 .form_div_node {
     width: 190px;
-    height: 54px;
+    height: 45px;
     border-bottom: 1px solid #dde0e7;
     float: left;
 }
@@ -407,10 +407,12 @@ div.form_head {
 input[type=radio],
 input[type='checkbox'] {
     display: none;
+    font-size:18px !important;
 }
 
     input[type=radio] + label {
         display: inline-block;
+        font-size:18px !important;
     }
 
     input[type='checkbox'] + label:before,
