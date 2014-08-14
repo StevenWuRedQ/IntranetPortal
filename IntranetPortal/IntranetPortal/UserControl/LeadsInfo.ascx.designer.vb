@@ -401,6 +401,15 @@ Partial Public Class LeadsInfo1
     Protected WithEvents gridLiens As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
+    '''PropertyInfo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PropertyInfo As Global.IntranetPortal.PropertyInfo
+
+    '''<summary>
     '''ownerInfoCallbackPanel control.
     '''</summary>
     '''<remarks>

@@ -55,7 +55,7 @@
                 <div class="form_div_node" style="width: 405px">
                     <span class="form_input_title">address</span>
 
-                    <input class="text_input" value="61-12 122 ST, BAYSIDE, NY 11361" />
+                    <input class="text_input" value="<%= LeadsInfoData.PropertyAddress%>" />
                 </div>
 
                 <div class="form_div_node form_div_node_margin">

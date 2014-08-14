@@ -5,6 +5,8 @@
 
     End Sub
 
-    Public Property LeadsInfoData As LeadsInfo
+    Public Property LeadsInfoData As LeadsInfo = New LeadsInfo
+
+
 
 End Class

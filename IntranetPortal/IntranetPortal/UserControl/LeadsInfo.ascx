@@ -2,6 +2,8 @@
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
 <%@ Register Src="~/UserControl/HomeOwnerInfo.ascx" TagPrefix="uc1" TagName="HomeOwnerInfo" %>
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
+<%@ Register Src="~/UserControl/PropertyInfo.ascx" TagPrefix="uc1" TagName="PropertyInfo" %>
+
 
 <script type="text/javascript">
     // <![CDATA[
@@ -320,7 +322,7 @@
                                                 <TabStyle Paddings-PaddingLeft="25px"></TabStyle>                                                
                                                 <ContentCollection>
                                                     <dx:ContentControl runat="server">
-                                                        <dx:ASPxFormLayout ClientInstanceName="formlayoutLeadsInfoClient" ID="formlayoutLeadsInfo" Width="100%" runat="server" ColCount="3" ColSpan="3" Paddings-Padding="0">
+                                                        <dx:ASPxFormLayout ClientInstanceName="formlayoutLeadsInfoClient" ID="formlayoutLeadsInfo" Width="100%" runat="server" ColCount="3" ColSpan="3" Paddings-Padding="0" Visible="false">
                                                             <Items>
                                                                 <dx:LayoutGroup ColCount="3" ColSpan="3" Width="100%" GroupBoxDecoration="None">
                                                                     <Items>
@@ -655,6 +657,7 @@
                                                                 </LayoutGroupBox>
                                                             </Styles>
                                                         </dx:ASPxFormLayout>
+                                                        <uc1:PropertyInfo runat="server" ID="PropertyInfo" />
                                                     </dx:ContentControl>
                                                 </ContentCollection>
                                             </dx:TabPage>
