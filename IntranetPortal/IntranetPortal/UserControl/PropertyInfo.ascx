@@ -44,7 +44,6 @@
             </div>
         </div>
 
-
         <%--------%>
         <%--property form--%>
         <div style="margin: 20px" class="clearfix">
