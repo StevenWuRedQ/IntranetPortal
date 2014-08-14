@@ -1164,3 +1164,27 @@ pre#event-log {
 .button_transparent {
     background: transparent !important;
 }
+li.active
+{
+    background:#e63000 !important;
+}
+/*activity ui*/
+.activity_log_item_icon
+{
+    width:24px;
+    height:24px;
+    border-radius:5px;
+    text-align:center;
+    margin-right:20px;
+    line-height:24px;
+    color:white;
+}
+.activity_green_bg
+{
+    background:#80c02c;
+}
+.activity_red_bg
+{
+    background:#f46464;
+}
+/*----end-----*/

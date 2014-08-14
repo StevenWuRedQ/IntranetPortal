@@ -158,7 +158,7 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-sort-amount-desc"></i>
                                     </div>
                                     <input type="text" data-var="@btn-info-color" class="form-control" style="width: 250px; margin-top: 25px; height: 30px; color: #b1b2b7" placeholder="Type employee’s name" onchange="SearchNames(this)" />
-                                    <div style="margin-top: 27px; height: 290px; overflow-y: scroll" id="employees_grid">
+                                    <div style="margin-top: 27px; height: 290px; overflow:auto" id="employees_grid">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridEmps" KeyFieldName="EmployeeID" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" ClientInstanceName="gridEmpsClient" CssClass="font_source_sans_pro">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="Name" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -166,14 +166,24 @@
                                                     <DataItemTemplate>
                                                         <div class="employee_list_item clearfix">
                                                             <div class="employee_list_item_div">
-                                                                <span class="font_black"><%# Eval("Name")%></span><br />
+                                                                <span class="font_black"><%# Eval("Name")%></span><br/>
                                                                 <%# Eval("Position")%>
                                                             </div>
                                                             <i class="fa fa-list-alt employee_list_item_icon"></i>
                                                         </div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataColumn FieldName="Department" Visible="false"></dx:GridViewDataColumn>
+                                                <dx:GridViewDataColumn FieldName="Department" VisibleIndex="5">
+                                                    <DataItemTemplate>
+                                                        <div>
+                                                            <%# Container.Text.Replace("(","").Replace(")","") %>
+                                                        </div>
+                                                        <div>
+                                                            <%# Eval("Department")%> count is 
+                                                        </div>
+                                                        
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataColumn>
                                                 <%--why use tr td?--%>
                                                 <%-- <dx:GridViewDataColumn FieldName="Position" Visible="false"></dx:GridViewDataColumn>
                                                 <dx:GridViewDataColumn Width="25px" VisibleIndex="5">
@@ -527,7 +537,7 @@
                                                                             <PageSizeItemSettings ShowAllItem="True" Visible="True"></PageSizeItemSettings>
 
                                                                         </SettingsPager>
-                                                                        <Settings VerticalScrollableHeight="350" />
+                                                                        <Settings VerticalScrollableHeight="290" />
 
                                                                         <GroupSummary>
                                                                             <dx:ASPxSummaryItem FieldName="BBLE" SummaryType="Count" />
@@ -731,7 +741,7 @@
                                                         <% For Each key In GetTemplates().Keys%>
                                                         <li class="list-group-item color_gray" style="background-color: transparent; border: 0px;">
                                                             <i class="fa fa-file-o" style="font-size: 18px"></i>
-                                                            <span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor: pointer; width: 140px;"><% = key%></span>
+                                                            <span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor: pointer; width:140px;"><% = key%></span>
                                                             <button type="button" value="delete" onclick='RemoveReport("<%= key %>")'>Delete</button>
                                                         </li>
                                                         <% Next%>
@@ -751,7 +761,7 @@
                                             <i class="fa fa-question-circle tooltip-examples" title="Check items view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
                                         </div>
 
-                                        <div style="margin-top: 20px; overflow: auto; height: 380px;" id="custom_fields_div">
+                                        <div style="margin-top: 20px; overflow: auto; height: 346px;" id="custom_fields_div">
 
                                             <script type="text/javascript">
                                                 function Fields_ValueChanged(s, e) {
