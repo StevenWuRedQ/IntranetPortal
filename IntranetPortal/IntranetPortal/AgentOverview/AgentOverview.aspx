@@ -96,10 +96,22 @@
 
         function DoCallback() {
             var rowKey = gridEmpsClient.GetRowKey(gridEmpsClient.GetFocusedRowIndex());
+            var rowIndex = gridEmpsClient.GetFocusedRowIndex();
+            if (gridEmpsClient.IsGroupRow(rowIndex)) {
+                gridEmpsClient.GetRowValues(rowIndex + 1, "Department", OnGetRowValues);
+            }
+
             if (rowKey != null) {
                 ContentCallbackPanel.PerformCallback("EMP|" + rowKey);
                 empId = rowKey;
             }
+        }
+
+        function OnGetRowValues(Value) {
+            // Right code 
+            alert(Value);
+            // This code will cause an error 
+            // alert(Value[0]); 
         }
 
         function Savelayout(reportName) {
@@ -122,12 +134,10 @@
             initScrollbars();
         }
 
-        function HiddenRightPanel()
-        {         
+        function HiddenRightPanel() {
             var leftPanel = splitter.GetPaneByName("RightPane");
 
-            if(!leftPanel.IsCollapsed())
-            {
+            if (!leftPanel.IsCollapsed()) {
                 leftPanel.Collapse();
             }
         }
@@ -158,7 +168,7 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-sort-amount-desc"></i>
                                     </div>
                                     <input type="text" data-var="@btn-info-color" class="form-control" style="width: 250px; margin-top: 25px; height: 30px; color: #b1b2b7" placeholder="Type employee’s name" onchange="SearchNames(this)" />
-                                    <div style="margin-top: 27px; height: 290px; overflow:auto" id="employees_grid">
+                                    <div style="margin-top: 27px; height: 290px; overflow: auto" id="employees_grid">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridEmps" KeyFieldName="EmployeeID" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" ClientInstanceName="gridEmpsClient" CssClass="font_source_sans_pro">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="Name" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -166,7 +176,7 @@
                                                     <DataItemTemplate>
                                                         <div class="employee_list_item clearfix">
                                                             <div class="employee_list_item_div">
-                                                                <span class="font_black"><%# Eval("Name")%></span><br/>
+                                                                <span class="font_black"><%# Eval("Name")%></span><br />
                                                                 <%# Eval("Position")%>
                                                             </div>
                                                             <i class="fa fa-list-alt employee_list_item_icon"></i>
@@ -174,15 +184,22 @@
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn FieldName="Department" VisibleIndex="5">
-                                                    <DataItemTemplate>
-                                                        <div>
-                                                            <%# Container.Text.Replace("(","").Replace(")","") %>
+                                                    <GroupRowTemplate>
+                                                        <table style="height: 30px">
+                                                            <tr>
+                                                                <td>
+                                                                   </td>
+                                                                <td style="font-weight: 900; width: 80px; text-align: center;">Department: <%# Container.GroupText%></td>
+                                                                <td style="padding-left: 10px">
+                                                                    <div class="raund-label">
+                                                                        <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
+                                                                    </div>
+                                                                </td>
+                                                                <%--the round div--%>
+                                                            </tr>
+                                                        </table>
                                                         </div>
-                                                        <div>
-                                                            <%# Eval("Department")%> count is 
-                                                        </div>
-                                                        
-                                                    </DataItemTemplate>
+                                                    </GroupRowTemplate>
                                                 </dx:GridViewDataColumn>
                                                 <%--why use tr td?--%>
                                                 <%-- <dx:GridViewDataColumn FieldName="Position" Visible="false"></dx:GridViewDataColumn>
@@ -719,7 +736,7 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-                <dx:SplitterPane Size="310px" ShowCollapseForwardButton="True" CollapsedStyle-CssClass="clearfix" Name="RightPane">
+                <dx:SplitterPane Size="310px" ShowCollapseForwardButton="True" CollapsedStyle-CssClass="clearfix" Name="RightPane" Collapsed="true">
                     <CollapsedStyle CssClass="clearfix"></CollapsedStyle>
                     <ContentCollection>
                         <dx:SplitterContentControl>
@@ -741,7 +758,7 @@
                                                         <% For Each key In GetTemplates().Keys%>
                                                         <li class="list-group-item color_gray" style="background-color: transparent; border: 0px;">
                                                             <i class="fa fa-file-o" style="font-size: 18px"></i>
-                                                            <span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor: pointer; width:140px;"><% = key%></span>
+                                                            <span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor: pointer; width: 140px;"><% = key%></span>
                                                             <button type="button" value="delete" onclick='RemoveReport("<%= key %>")'>Delete</button>
                                                         </li>
                                                         <% Next%>
@@ -779,7 +796,7 @@
                                                         <dx:ListEditItem Text="Property Address" Value="PropertyAddress" Selected="true" />
                                                         <dx:ListEditItem Text="Call Attemps" Value="CallAttemps" />
                                                         <dx:ListEditItem Text="Doorknock Attemps" Value="DoorKnockAttemps" />
-
+                                                        <dx:ListEditItem Text="Follow Up Attemps" Value="FollowupAttemps" />
                                                         <dx:ListEditItem Text="Create Date" Value="CreateDate" />
                                                     </Items>
 
@@ -793,7 +810,6 @@
                                                 <dx:ASPxCheckBoxList ID="chkFields2" runat="server" ValueType="System.String" Width="100%" ClientInstanceName="filed_CheckBoxList2">
                                                     <Items>
                                                         <dx:ListEditItem Text="BBLE" Value="BBLE" Selected="true" />
-
                                                         <dx:ListEditItem Text="Status" Value="Status" />
                                                         <dx:ListEditItem Text="Sale Date" Value="SaleDate" />
                                                         <dx:ListEditItem Text="Tax Class" Value="TaxClass" />
@@ -809,17 +825,16 @@
                                                         <dx:ListEditItem Text="Actual Far" Value="ActualFar" />
                                                         <dx:ListEditItem Text="NYCSqft" Value="NYCSqft" />
                                                         <dx:ListEditItem Text="Unbuilt Sqft" Value="UnbuiltSqft" />
-
+                                                        <dx:ListEditItem Text="Home Owner" Value="Owner" />
+                                                        <dx:ListEditItem Text="Co-Owner" Value="CoOwner" />
+                                                        <dx:ListEditItem Text="Good Phones" Value="OwnerPhoneNo" />
                                                     </Items>
-
                                                     <%--<CheckBoxStyle  BackgroundImage-ImageUrl="../images/icon_checked_box.png"/>--%>
                                                     <%--<CheckedImage Url="../images/icon_checked_box.png"></CheckedImage>--%>
                                                     <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
                                                 </dx:ASPxCheckBoxList>
                                             </div>
                                             <div style="display: none">
-
-
                                                 <div class="draggable_field" id="draggable_field8">
                                                     <i class="fa fa-long-arrow-left draggable_icon"></i>
                                                     <span class="drappable_field_text">Call Attemps</span>

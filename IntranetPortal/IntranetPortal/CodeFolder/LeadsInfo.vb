@@ -16,6 +16,20 @@
         Return Nothing
     End Function
 
+    Public ReadOnly Property OwnerPhoneNo As String
+        Get
+            Using context As New Entities
+                Dim phones = context.OwnerContacts.Where(Function(hp) hp.BBLE = BBLE And hp.ContactType = OwnerContact.OwnerContactType.Phone And hp.Status = OwnerContact.ContactStatus.Right).Select(Function(hp) hp.Contact).ToArray
+
+                If phones.Length > 0 Then
+                    Return String.Join(",", phones)
+                End If
+
+            End Using
+            Return ""
+        End Get
+    End Property
+
     Public Property HomeOwners As List(Of HomeOwner)
     Public ReadOnly Property LeadsName As String
         Get
@@ -56,6 +70,12 @@
     Public ReadOnly Property DoorKnockAttemps As Integer
         Get
             Return Lead.LeadsActivityLogs.Where(Function(log) log.ActionType IsNot Nothing AndAlso log.ActionType = LeadsActivityLog.EnumActionType.DoorKnock).Count
+        End Get
+    End Property
+
+    Public ReadOnly Property FollowupAttemps As Integer
+        Get
+            Return Lead.LeadsActivityLogs.Where(Function(log) log.ActionType IsNot Nothing AndAlso log.ActionType = LeadsActivityLog.EnumActionType.FollowUp).Count
         End Get
     End Property
 
