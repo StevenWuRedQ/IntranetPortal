@@ -532,7 +532,7 @@
 
                                             <%-----end -------%>
 
-                                            <%-----2nd section info--%>
+                                            <%-----best address section info--%>
                                             <div>
                                                 <div class="form_head homeowner_section_margin">
                                                     <span>Best Addresses &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color"></i>
@@ -562,7 +562,7 @@
                                             </div>
                                             <%----end-----%>
 
-                                            <%-----5th section info--%>
+                                            <%-----Degree section info--%>
                                             <div>
                                                 <div class="form_head homeowner_section_margin">
                                                     <span>First Degree Relatives &nbsp;</span>
