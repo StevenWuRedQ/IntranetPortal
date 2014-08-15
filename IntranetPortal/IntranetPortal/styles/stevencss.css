@@ -1182,7 +1182,6 @@ li.active {
     height: 24px;
     border-radius: 5px;
     text-align: center;
-    margin-right: 20px;
     line-height: 24px;
     color: white;
 }
@@ -1227,5 +1226,39 @@ activity_button {
 .activity_add_buttons {
     color: #3993c1;
     font-size: 24px;
+    cursor: pointer;
+}
+
+.activity_light_blue2 {
+    background: #31d9c3;
+}
+
+.activity_log_high_light {
+    border-left: 5px solid #295268;
+    background: #ebf8ff;
+}
+
+i.log_item_icon {
+    width: 30px;
+    text-align: center;
+}
+td.log_item_padding
+{
+    padding:10px;
+}
+div.log_item_col1
+{
+    width:310px;
+
+}
+div.log_item_col2
+{
+    width:100px;
+
+}
+div.log_item_col3
+{
+    width:121px;
+
 }
 /*-----end----*/

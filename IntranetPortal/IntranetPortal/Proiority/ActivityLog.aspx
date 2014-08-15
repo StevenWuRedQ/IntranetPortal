@@ -55,7 +55,7 @@
 
 
             <%--comment box filters--%>
-            <div style="padding: 20px;background:#f5f5f5" class="clearfix">
+            <div style="padding: 20px; background: #f5f5f5" class="clearfix">
                 <%--comment box and text--%>
 
                 <div style="float: left; height: 110px; width: 460px; margin-top: 10px;">
@@ -80,76 +80,125 @@
                             FILTER BY:&nbsp;&nbsp<i class="fa fa-filter acitivty_short_button" style="color: #444547; font-size: 14px;"></i>
                         </div>
 
-                        <div style="margin-top:50px">
+                        <div style="margin-top: 50px">
                             <div class="border_under_line">
-                                <select class="text_input" style="width: 120px; margin-bottom: 5px;background:#f5f5f5">
+                                <select class="text_input" style="width: 120px; margin-bottom: 5px; background: #f5f5f5">
                                     <option value="volvo" class="text_input">6/9/2014</option>
                                     <option value="saab" class="text_input">6/10/2014</option>
                                     <option value="opel" class="text_input">Type3</option>
                                     <option value="audi" class="text_input">Type4</option>
                                 </select>
                             </div>
-                           
+
                         </div>
-                        <div style="margin-top:15px;float:right">
-                            <i class="fa fa-plus-circle activity_add_buttons" style="margin-right:15px;"></i>
+                        <div style="margin-top: 15px; float: right">
+                            <i class="fa fa-plus-circle activity_add_buttons" style="margin-right: 15px;"></i>
                             <i class="fa fa-tasks activity_add_buttons"></i>
-                        </div>   
+                        </div>
                     </div>
 
                 </div>
             </div>
             <%-------end-----%>
-           <%-- log tables--%>
-           <div>
+            <%-- log tables--%>
+            <div>
                 <table style="font-size: 14px;">
-                    <tr style="height: 40px;">
-                        <td>
+                    <tr >
+                        <td class="log_item_padding">
                             <div class="activity_log_item_icon activity_green_bg">
                                 <i class="fa fa-check"></i>
                             </div>
                         </td>
-                        <td>
-                            <div style="width: 330px">
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
                                 Deal closed
                             </div>
                         </td>
-                        <td>
-                            <div style="width: 120px">
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
                                 Andrea Taylor
                             </div>
                         </td>
-                        <td>
-                            <div style="width: 146px">
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
                                 Jun 4, 2014 5:03 pm
                             </div>
                         </td>
                     </tr>
-                    <tr style="height: 40px; background: #f5f5f5">
-                        <td>
+                    <tr style="background: #f5f5f5">
+                        <td class="log_item_padding">
                             <div class="activity_log_item_icon activity_red_bg">
                                 <i class="fa fa-info"></i>
                             </div>
                         </td>
-                        <td>
-                            <div style="width: 330px">
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
                                 Priority
                             </div>
-                        </td>
-                        <td>
-                            <div style="width: 120px">
+                        </td >
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
                                 Andrea Taylor
                             </div>
                         </td>
-                        <td>
-                            <div style="width: 130px">
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="height: 40px;" class="activity_log_high_light " valign="top">
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon activity_light_blue2" style="margin-left:-3px">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+
+                        </td>
+                        <td  class="log_item_padding">
+                            <div class="log_item_col1">
+                                <div class="font_black color_balck">Appointment with Mr.Ulric</div>
+                                <table style="margin-top: 5px;">
+                                    <tr>
+                                        <td><i class="fa fa-info-circle log_item_icon"></i></td>
+                                        <td>Signing</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-clock-o log_item_icon"></i></td>
+                                        <td>Jun 10, 2014 5:00 pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-clock-o log_item_icon"></i></td>
+                                        <td>Jun 10, 2014 5:00 pm</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-map-marker log_item_icon"></i></td>
+                                        <td>In office</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-hand-o-right log_item_icon"></i></td>
+                                        <td>Any manager</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-comment log_item_icon"></i></td>
+                                        <td>Client has own attorney</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
                                 Jun 12, 2014 5:08 pm
                             </div>
                         </td>
                     </tr>
                 </table>
             </div>
-           <%------end-------%>
+            <%------end-------%>
         </div>
     </form>
 </body>
