@@ -103,7 +103,7 @@
             <%-- log tables--%>
             <div>
                 <table style="font-size: 14px;">
-                    <tr >
+                    <tr>
                         <td class="log_item_padding">
                             <div class="activity_log_item_icon activity_green_bg">
                                 <i class="fa fa-check"></i>
@@ -135,7 +135,7 @@
                             <div class="log_item_col1">
                                 Priority
                             </div>
-                        </td >
+                        </td>
                         <td class="log_item_padding">
                             <div class="log_item_col2">
                                 Andrea Taylor
@@ -149,14 +149,21 @@
                     </tr>
                     <tr style="height: 40px;" class="activity_log_high_light " valign="top">
                         <td class="log_item_padding">
-                            <div class="activity_log_item_icon activity_light_blue2" style="margin-left:-3px">
+                            <div class="activity_log_item_icon activity_light_blue2" style="margin-left: -3px">
                                 <i class="fa fa-clock-o"></i>
                             </div>
 
                         </td>
-                        <td  class="log_item_padding">
+                        <td class="log_item_padding">
                             <div class="log_item_col1">
-                                <div class="font_black color_balck">Appointment with Mr.Ulric</div>
+                                <div class="font_black color_balck clearfix">
+                                    Appointment with Mr.Ulric 
+                                    <div style="float: right; font-size: 18px">
+                                        <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" title="Accept"></i>
+                                        <i class="fa fa-times-circle-o log_item_hl_buttons"></i>
+                                        <i class="fa fa-history log_item_hl_buttons"></i>
+                                    </div>
+                                </div>
                                 <table style="margin-top: 5px;">
                                     <tr>
                                         <td><i class="fa fa-info-circle log_item_icon"></i></td>

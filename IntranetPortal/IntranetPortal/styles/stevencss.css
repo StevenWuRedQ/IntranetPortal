@@ -1248,7 +1248,7 @@ td.log_item_padding
 }
 div.log_item_col1
 {
-    width:310px;
+    width:300px;
 
 }
 div.log_item_col2
@@ -1258,7 +1258,16 @@ div.log_item_col2
 }
 div.log_item_col3
 {
-    width:121px;
+    width:135px;
 
+}
+i.log_item_hl_buttons
+{
+    margin-right:10px;
+    color:#b1b2b7;
+}
+i.log_item_hl_buttons:hover
+{
+    color:#2e2f31;
 }
 /*-----end----*/
