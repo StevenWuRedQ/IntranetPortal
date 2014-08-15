@@ -15,9 +15,9 @@
     border-bottom: 1px solid #2b586f;
     height: 60px;
 }
-.div-underline
-{
-    height:230px;
+
+.div-underline {
+    height: 230px;
 }
 
 /*test steven  ssss  ddddd added*/
@@ -125,9 +125,9 @@
 
 .group_lable {
     cursor: pointer;
-    margin-left: 20px;
-    padding-top: 8px;
-    padding-bottom: 8px;
+    margin-left: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
     line-height: 14px;
 }
 /*add by steven fix UI*/
@@ -407,12 +407,12 @@ div.form_head {
 input[type=radio],
 input[type='checkbox'] {
     display: none;
-    font-size:18px !important;
+    font-size: 18px !important;
 }
 
     input[type=radio] + label {
         display: inline-block;
-        font-size:18px !important;
+        font-size: 18px !important;
     }
 
     input[type='checkbox'] + label:before,
@@ -963,13 +963,13 @@ h3 {
         /*background: rgb(255,70,120);*/
     }
 
-h3.open a {
-    background-position: 13px -25px;
-}
+        h3.open a {
+            background-position: 13px -25px;
+        }
 
-h3 + div {
-    padding: 0 10px 10px;
-}
+    h3 + div {
+        padding: 0 10px 10px;
+    }
 
 h2 + div,
 .example {
@@ -1095,6 +1095,12 @@ pre#event-log {
     font-size: 12px;
 }
 
+input + label.font_12 {
+    font-size: 12px !important;
+    float: right;
+    margin-right: 20px;
+}
+
 .checks_data_text {
     float: right;
     font-size: 12px;
@@ -1166,32 +1172,60 @@ pre#event-log {
 .button_transparent {
     background: transparent !important;
 }
-li.active
-{
-    background:#e63000 !important;
+
+li.active {
+    background: #e63000 !important;
 }
 /*activity ui*/
-.activity_log_item_icon
-{
-    width:24px;
-    height:24px;
-    border-radius:5px;
-    text-align:center;
-    margin-right:20px;
-    line-height:24px;
-    color:white;
+.activity_log_item_icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 5px;
+    text-align: center;
+    margin-right: 20px;
+    line-height: 24px;
+    color: white;
 }
-.activity_green_bg
-{
-    background:#80c02c;
+
+.activity_green_bg {
+    background: #80c02c;
 }
-.activity_red_bg
-{
-    background:#f46464;
+
+.activity_red_bg {
+    background: #f46464;
 }
+
+.activity_light_blue {
+    background: #1e4154;
+}
+
+    .activity_light_blue:hover {
+        background: #1e4154;
+    }
 /*----end-----*/
-#ASPxSplitter1_LeadsInfo_ASPxCallbackPanel2_contentSplitter_pageLeadsInfo_PropertyInfo_gridLiens_DXHeadersRow0
-{
-    text-transform:uppercase;
-    color:#b1b2b7;
+#ASPxSplitter1_LeadsInfo_ASPxCallbackPanel2_contentSplitter_pageLeadsInfo_PropertyInfo_gridLiens_DXHeadersRow0 {
+    text-transform: uppercase;
+    color: #b1b2b7;
 }
+
+/*activity UI*/
+activity_button {
+    color: #7396a9;
+}
+
+.acitivty_short_button {
+    width: 32px;
+    height: 32px;
+    border: solid 1px;
+    border-radius: 50%;
+    line-height: 32px !important;
+    text-align: center;
+    box-sizing: content-box;
+    cursor: pointer;
+}
+
+.activity_add_buttons {
+    color: #3993c1;
+    font-size: 24px;
+}
+/*-----end----*/

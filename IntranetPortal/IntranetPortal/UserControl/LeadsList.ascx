@@ -48,7 +48,17 @@
         if (postponedCallbackRequired) {
             gridLeads.GetRowValues(gridLeads.GetFocusedRowIndex(), 'BBLE', OnGetRowValues);
             postponedCallbackRequired = false;
-        }        
+        }  
+        $("#prioity_content").mCustomScrollbar(
+               {
+                   theme: "minimal-dark"
+               }
+               );
+        $("#home_owner_content").mCustomScrollbar(
+            {
+                theme: "minimal-dark"
+            }
+         );
     }
 
     var mapContentframeID = "MapContent";

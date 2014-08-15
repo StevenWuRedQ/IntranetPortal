@@ -253,7 +253,7 @@
                     </Pane>
                 </Styles>
                 <Panes>
-                    <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" MinSize="545px">
+                    <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" MinSize="700px">
                         <PaneStyle Paddings-Padding="0">
                             <Paddings Padding="0px"></Paddings>
                         </PaneStyle>
@@ -313,13 +313,14 @@
                                         <ItemStyle Width="143px"></ItemStyle>
                                     </dx:ASPxPopupMenu>
                                     <asp:HiddenField ID="hfBBLE" runat="server" />
+                                    <%--change 100% to 720px not work--%>
                                     <dx:ASPxPageControl Width="100%" Height="100%" EnableViewState="false" ID="pageLeadsInfo" runat="server" ActiveTabIndex="0" TabSpacing="2px">
                                         <Paddings Padding="0px" />
                                         <TabStyle Width="80px" Paddings-PaddingLeft="10px" HorizontalAlign="Center">
                                         </TabStyle>
                                         <TabPages>
                                             <dx:TabPage Text="Lead" Name="tabLeadInfo">
-                                                <TabStyle Paddings-PaddingLeft="25px"></TabStyle>                                                
+                                                <TabStyle Paddings-PaddingLeft="0px"></TabStyle>                                                
                                                 <ContentCollection>
                                                     <dx:ContentControl runat="server">
                                                         <dx:ASPxFormLayout ClientInstanceName="formlayoutLeadsInfoClient" ID="formlayoutLeadsInfo" Width="100%" runat="server" ColCount="3" ColSpan="3" Paddings-Padding="0" Visible="false">
@@ -657,7 +658,7 @@
                                                                 </LayoutGroupBox>
                                                             </Styles>
                                                         </dx:ASPxFormLayout>
-                                                        <div style="width:720px">
+                                                        <div style="width:690px">
                                                             <uc1:PropertyInfo runat="server" ID="PropertyInfo" />
                                                         </div>
                                                         
