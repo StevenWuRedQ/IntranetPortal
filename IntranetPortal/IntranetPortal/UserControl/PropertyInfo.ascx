@@ -304,8 +304,17 @@
         <%--Liens table--%>
         <div style="margin: 20px;" class="clearfix">
             <div class="form_head" style="margin-top: 40px;">Lines</div>
-
-            <table class="table table-condensed" style="width: 100%">
+            <dx:ASPxGridView runat="server" ID="gridLiens" KeyFieldName="LisPenID" Width="100%">
+            <Columns>
+                <dx:GridViewDataTextColumn FieldName="Type" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="Effective" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="Expiration" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="Plaintiff" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="Defendant" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="Index" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+            </Columns>
+        </dx:ASPxGridView>
+            <table class="table table-condensed" style="width:100%;display:none">
                 <thead>
                     <tr>
                         <th class="report_head">Effective</th>

@@ -21,4 +21,13 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UpatingPanel As Global.DevExpress.Web.ASPxPanel.ASPxPanel
+
+    '''<summary>
+    '''gridLiens control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridLiens As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 End Class
