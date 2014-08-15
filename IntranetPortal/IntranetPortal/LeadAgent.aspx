@@ -40,7 +40,7 @@
                                     </dx:SplitterContentControl>
                                 </ContentCollection>
                             </dx:SplitterPane>
-                            <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9" ScrollBars="Auto">
+                            <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px">
                                 <PaneStyle BackColor="#F9F9F9">
                                 </PaneStyle>
                                 <ContentCollection>
@@ -49,10 +49,7 @@
                                     </dx:SplitterContentControl>
                                 </ContentCollection>
                             </dx:SplitterPane>
-                        </Panes>
-                        <ContentCollection>
-                            <dx:SplitterContentControl runat="server" SupportsDisabledAttribute="True"></dx:SplitterContentControl>
-                        </ContentCollection>
+                       </Panes>                       
                     </dx:SplitterPane>
                     <dx:SplitterPane Name="SummaryPanel" Size="18px" MinSize="1px" Separator-Visible="False" PaneStyle-Paddings-Padding="0px" CollapsedStyle-Border-BorderStyle="None" AutoHeight="false">
                         <Separator Visible="False"></Separator>

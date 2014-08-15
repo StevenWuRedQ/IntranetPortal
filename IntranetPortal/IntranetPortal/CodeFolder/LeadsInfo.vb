@@ -67,8 +67,6 @@
         End Get
     End Property
 
-
-
     Public ReadOnly Property CallAttemps As Integer
         Get
             Return Lead.LeadsActivityLogs.Where(Function(log) log.ActionType IsNot Nothing AndAlso log.ActionType = LeadsActivityLog.EnumActionType.CallOwner).Count

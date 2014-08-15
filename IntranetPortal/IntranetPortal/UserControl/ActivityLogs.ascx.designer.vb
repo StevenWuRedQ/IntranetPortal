@@ -23,22 +23,31 @@ Partial Public Class ActivityLogs
     Protected WithEvents pageActivitylog As Global.DevExpress.Web.ASPxTabControl.ASPxPageControl
 
     '''<summary>
-    '''formLayoutActivityLog control.
+    '''popupFilters control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents formLayoutActivityLog As Global.DevExpress.Web.ASPxFormLayout.ASPxFormLayout
+    Protected WithEvents popupFilters As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
-    '''ASPxDropDownEdit1 control.
+    '''dateActivity control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxDropDownEdit1 As Global.DevExpress.Web.ASPxEditors.ASPxDropDownEdit
+    Protected WithEvents dateActivity As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
+
+    '''<summary>
+    '''addCommentsCallback control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents addCommentsCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 
     '''<summary>
     '''hfBBLE control.
@@ -57,6 +66,24 @@ Partial Public Class ActivityLogs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridTracking As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''ASPxPopupControl3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''cbCateLog control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbCateLog As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
 
     '''<summary>
     '''ASPxPopupControl2 control.
@@ -219,4 +246,13 @@ Partial Public Class ActivityLogs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''formLayoutActivityLog control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents formLayoutActivityLog As Global.DevExpress.Web.ASPxFormLayout.ASPxFormLayout
 End Class

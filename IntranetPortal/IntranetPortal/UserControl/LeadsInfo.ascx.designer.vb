@@ -59,51 +59,6 @@ Partial Public Class LeadsInfo1
     Protected WithEvents SplitterContentControl3 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
 
     '''<summary>
-    '''btnRefresh control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnRefresh As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''btnShare control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnShare As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''btnSave control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSave As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''callbackSaveLeadsInfo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents callbackSaveLeadsInfo As Global.DevExpress.Web.ASPxCallback.ASPxCallback
-
-    '''<summary>
-    '''btnPrint control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnPrint As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
     '''ASPxPopupMenu3 control.
     '''</summary>
     '''<remarks>
@@ -120,285 +75,6 @@ Partial Public Class LeadsInfo1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hfBBLE As Global.System.Web.UI.WebControls.HiddenField
-
-    '''<summary>
-    '''pageLeadsInfo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pageLeadsInfo As Global.DevExpress.Web.ASPxTabControl.ASPxPageControl
-
-    '''<summary>
-    '''formlayoutLeadsInfo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents formlayoutLeadsInfo As Global.DevExpress.Web.ASPxFormLayout.ASPxFormLayout
-
-    '''<summary>
-    '''ASPxTextBox1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox1 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox16 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox16 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox17 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox17 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox18 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox18 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''dataPick control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents dataPick As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
-
-    '''<summary>
-    '''ASPxTextBox2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox2 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox3 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox6 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox6 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox15 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox15 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox5 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox5 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox19 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox19 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox20 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox20 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox21 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox21 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxRadioButtonList11 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxRadioButtonList11 As Global.DevExpress.Web.ASPxEditors.ASPxRadioButtonList
-
-    '''<summary>
-    '''ASPxTextBox8 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox8 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox9 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox9 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxRadioButtonList10 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxRadioButtonList10 As Global.DevExpress.Web.ASPxEditors.ASPxRadioButtonList
-
-    '''<summary>
-    '''ASPxTextBox4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox4 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox22 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox22 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxRadioButtonList12 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxRadioButtonList12 As Global.DevExpress.Web.ASPxEditors.ASPxRadioButtonList
-
-    '''<summary>
-    '''ASPxTextBox7 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox7 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox10 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox10 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''radioBox control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents radioBox As Global.DevExpress.Web.ASPxEditors.ASPxRadioButtonList
-
-    '''<summary>
-    '''ASPxTextBox11 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox11 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox12 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox12 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''cbkViolations control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cbkViolations As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
-
-    '''<summary>
-    '''ASPxTextBox13 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox13 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''ASPxTextBox14 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxTextBox14 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
-    '''gridLiens control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents gridLiens As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
     '''PropertyInfo control.
@@ -437,15 +113,6 @@ Partial Public Class LeadsInfo1
     Protected WithEvents HomeOwnerInfo3 As Global.IntranetPortal.HomeOwnerInfo
 
     '''<summary>
-    '''formlayoutOwnerInfo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents formlayoutOwnerInfo As Global.DevExpress.Web.ASPxFormLayout.ASPxFormLayout
-
-    '''<summary>
     '''DocumentsUI control.
     '''</summary>
     '''<remarks>
@@ -482,6 +149,15 @@ Partial Public Class LeadsInfo1
     Protected WithEvents SplitterContentControl4 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
 
     '''<summary>
+    '''ActivityLogs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
+
+    '''<summary>
     '''ASPxButton2 control.
     '''</summary>
     '''<remarks>
@@ -498,15 +174,6 @@ Partial Public Class LeadsInfo1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCallBack As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''ActivityLogs control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
 
     '''<summary>
     '''leadStatusCallback control.

@@ -66,6 +66,8 @@
         Email = 4
         Comments = 5
         SetAsTask = 6
+        UpdateInfo = 7
+        DealClosed = 8
     End Enum
 
 End Class

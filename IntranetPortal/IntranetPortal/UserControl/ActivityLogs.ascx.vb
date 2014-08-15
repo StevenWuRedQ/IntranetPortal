@@ -20,9 +20,9 @@ Public Class ActivityLogs
             gridTracking.DataSource = Context.LeadsActivityLogs.Where(Function(log) log.BBLE = bble).OrderByDescending(Function(log) log.ActivityDate).ToList
             gridTracking.DataBind()
 
-            If Not gridTracking.IsNewRowEditing Then
-                gridTracking.AddNewRow()
-            End If
+            'If Not gridTracking.IsNewRowEditing Then
+            '    gridTracking.AddNewRow()
+            'End If
         End Using
 
         BindEmpList()
@@ -265,6 +265,14 @@ Public Class ActivityLogs
         BindData(hfBBLE.Value)
     End Sub
 
+    Function GetCommentsIconClass(type As String)
+        If String.IsNullOrEmpty(type) Then
+            Return "fa fa-check"
+        End If
+
+        Return CommentIconList(type)
+    End Function
+
     Function ShowTaskPanel(cate As String) As Boolean
         Return cate = "Task"
     End Function
@@ -409,5 +417,50 @@ Public Class ActivityLogs
         If Not String.IsNullOrEmpty(hfBBLE.Value) Then
             BindData(hfBBLE.Value)
         End If
+    End Sub
+
+    Public _commentIconList As StringDictionary
+    Public ReadOnly Property CommentIconList As StringDictionary
+        Get
+            If _commentIconList Is Nothing Then
+                _commentIconList = New StringDictionary
+                _commentIconList.Add(LeadsActivityLog.EnumActionType.CallOwner, "fa fa-info")
+                _commentIconList.Add(LeadsActivityLog.EnumActionType.DoorKnock, "fa fa-check")
+                _commentIconList.Add(LeadsActivityLog.EnumActionType.FollowUp, "fa fa-check")
+                _commentIconList.Add(LeadsActivityLog.EnumActionType.Appointment, "fa fa-check")
+                _commentIconList.Add(LeadsActivityLog.EnumActionType.Email, "fa fa-check")
+                _commentIconList.Add(LeadsActivityLog.EnumActionType.Comments, "fa fa-check")
+                _commentIconList.Add(LeadsActivityLog.EnumActionType.SetAsTask, "fa fa-check")
+                _commentIconList.Add(LeadsActivityLog.EnumActionType.UpdateInfo, "fa fa-check")
+                _commentIconList.Add(LeadsActivityLog.EnumActionType.DealClosed, "fa fa-check")
+            End If
+
+            Return _commentIconList
+        End Get
+    End Property
+
+    Protected Sub addCommentsCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        If String.IsNullOrEmpty(e.Parameter) Then
+            Return
+        End If
+
+        Dim aspxdate = CDate(e.Parameter.Split("|")(0))
+        Dim txtComments = e.Parameter.Split("|")(1)
+
+        If aspxdate.Date = DateTime.Now.Date Then
+            aspxdate = DateTime.Now
+        End If
+
+        If aspxdate < DateTime.Now Then
+            aspxdate = aspxdate.Date
+        End If
+
+        If String.IsNullOrEmpty(txtComments) Then
+            Throw New Exception("Comments can not be empty.")
+        End If
+
+        LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)
+
+        'BindData(hfBBLE.Value)
     End Sub
 End Class

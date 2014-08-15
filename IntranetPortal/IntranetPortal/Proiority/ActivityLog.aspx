@@ -42,7 +42,6 @@
                     </a>
                 </li>
 
-
                 <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                 <li style="margin-right: 30px; color: #7396a9; float: right">
                     <i class="fa fa-calendar-o sale_head_button tooltip-examples" title="Schedule"></i>
@@ -71,7 +70,6 @@
                         </label>
                     </div>
                     <textarea style="border-radius: 5px; width: 100%; height: 90px; border: 2px solid #dde0e7;">
-
                     </textarea>
                 </div>
                 <div class="clearfix">
@@ -96,7 +94,6 @@
                             <i class="fa fa-tasks activity_add_buttons"></i>
                         </div>
                     </div>
-
                 </div>
             </div>
             <%-------end-----%>

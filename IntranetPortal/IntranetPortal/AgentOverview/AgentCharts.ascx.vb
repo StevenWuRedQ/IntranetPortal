@@ -26,6 +26,20 @@ Public Class AgentCharts
             Return jsonString
         End Using
     End Function
+
+    Public Function OfficeLeadsSource(office As String) As String
+        Using Context As New Entities
+            Dim emps = Employee.GetAllDeptUsers(office)
+
+            Dim source = (From ld In Context.Leads.Where(Function(ld) emps.Contains(ld.EmployeeName))
+                         Group ld By Name = ld.EmployeeName Into Count()).ToList
+
+            Dim json As New JavaScriptSerializer
+            Dim jsonString = json.Serialize(source)
+            Return jsonString
+        End Using
+    End Function
+
     Public Function Agent_leads_activity_source() As String
 
         Using Context As New Entities
@@ -64,6 +78,8 @@ Public Class AgentCharts
             Return jsonString
         End Using
     End Function
+
+
    
     Protected Sub callbackDs_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         LeadsCategory = CType(e.Parameter, LeadStatus)
@@ -84,5 +100,9 @@ Public Class AgentCharts
     Protected Sub loadAgentZoning_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         current_employee = e.Parameter
         e.Result = AgentZoningData()
+    End Sub
+
+    Protected Sub loadOfficeLeadsCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        e.Result = OfficeLeadsSource(e.Parameter)
     End Sub
 End Class

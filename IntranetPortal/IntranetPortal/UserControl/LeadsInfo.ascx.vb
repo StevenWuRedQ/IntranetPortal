@@ -78,23 +78,23 @@ Public Class LeadsInfo1
                     End If
                 End If
 
-                formlayoutLeadsInfo.DataSource = leadsinfodata
-                formlayoutLeadsInfo.DataBind()
+                'formlayoutLeadsInfo.DataSource = leadsinfodata
+                'formlayoutLeadsInfo.DataBind()
 
                 PropertyInfo.LeadsInfoData = leadsinfodata
 
 
                 If leadsinfodata.C2ndMotgrAmt > leadsinfodata.C1stMotgrAmt Then
-                    CType(formlayoutLeadsInfo.FindNestedControlByFieldName("C1stMotgrAmt"), ASPxTextBox).Text = leadsinfodata.C2ndMotgrAmt
-                    CType(formlayoutLeadsInfo.FindNestedControlByFieldName("C2ndMotgrAmt"), ASPxTextBox).Text = leadsinfodata.C1stMotgrAmt
+                    'CType(formlayoutLeadsInfo.FindNestedControlByFieldName("C1stMotgrAmt"), ASPxTextBox).Text = leadsinfodata.C2ndMotgrAmt
+                    'CType(formlayoutLeadsInfo.FindNestedControlByFieldName("C2ndMotgrAmt"), ASPxTextBox).Text = leadsinfodata.C1stMotgrAmt
                 End If
 
                 'formlayoutOwnerInfo.DataSource = lead.LeadsInfo
                 'formlayoutOwnerInfo.DataBind()
 
-                If leadsinfodata.UpdateInfo = "" Then
-                    formlayoutLeadsInfo.FindItemByFieldName("UpdateInfo").Visible = False
-                End If
+                'If leadsinfodata.UpdateInfo = "" Then
+                '    'formlayoutLeadsInfo.FindItemByFieldName("UpdateInfo").Visible = False
+                'End If
 
                 'Bind files info
                 DocumentsUI.BindFileList(bble)
@@ -115,14 +115,14 @@ Public Class LeadsInfo1
                 End If
 
                 'Bind Liens Info
-                If lead IsNot Nothing Then
-                    Dim liens = Context.PortalLisPens.Where(Function(li) li.BBLE = leadsinfodata.BBLE).ToList
+                'If lead IsNot Nothing Then
+                '    Dim liens = Context.PortalLisPens.Where(Function(li) li.BBLE = leadsinfodata.BBLE).ToList
 
-                    If liens IsNot Nothing Then
-                        gridLiens.DataSource = liens
-                        gridLiens.DataBind()
-                    End If
-                End If
+                '    If liens IsNot Nothing Then
+                '        gridLiens.DataSource = liens
+                '        gridLiens.DataBind()
+                '    End If
+                'End If
 
                 If lead IsNot Nothing Then
                     BindActivityLog(bble)
@@ -131,35 +131,35 @@ Public Class LeadsInfo1
         End Using
     End Sub
 
-    Protected Sub callbackSaveLeadsInfo_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
-        Using Context As New Entities
-            Dim bble = hfBBLE.Value
-            Dim li = Context.LeadsInfoes.Where(Function(l) l.BBLE = bble).SingleOrDefault
+    'Protected Sub callbackSaveLeadsInfo_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    '    Using Context As New Entities
+    '        Dim bble = hfBBLE.Value
+    '        Dim li = Context.LeadsInfoes.Where(Function(l) l.BBLE = bble).SingleOrDefault
 
-            If li IsNot Nothing Then
-                li.PropertyAddress = CStr(formlayoutLeadsInfo.GetNestedControlValueByFieldName("PropertyAddress"))
+    '        If li IsNot Nothing Then
+    '            li.PropertyAddress = CStr(formlayoutLeadsInfo.GetNestedControlValueByFieldName("PropertyAddress"))
 
-                Dim saleDate = formlayoutLeadsInfo.GetNestedControlValueByFieldName("SaleDate")
-                li.SaleDate = saleDate
+    '            Dim saleDate = formlayoutLeadsInfo.GetNestedControlValueByFieldName("SaleDate")
+    '            li.SaleDate = saleDate
 
-                li.Block = CStr(formlayoutLeadsInfo.GetNestedControlValueByFieldName("Block"))
-                li.Lot = CStr(formlayoutLeadsInfo.GetNestedControlValueByFieldName("Lot"))
-                li.TaxClass = CStr(formlayoutLeadsInfo.GetNestedControlValueByFieldName("TaxClass"))
-                li.IsLisPendens = (formlayoutLeadsInfo.GetNestedControlValueByFieldName("IsLisPendens"))
-                li.C1stMotgrAmt = CDbl(formlayoutLeadsInfo.GetNestedControlValueByFieldName("C1stMotgrAmt"))
-                li.C2ndMotgrAmt = CDbl(formlayoutLeadsInfo.GetNestedControlValueByFieldName("C2ndMotgrAmt"))
-                li.IsOtherLiens = (formlayoutLeadsInfo.GetNestedControlValueByFieldName("IsOtherLiens"))
-                li.IsTaxesOwed = (formlayoutLeadsInfo.GetNestedControlValueByFieldName("IsTaxesOwed"))
-                li.IsWaterOwed = CDbl(formlayoutLeadsInfo.GetNestedControlValueByFieldName("IsWaterOwed"))
-                li.WaterAmt = CDbl(formlayoutLeadsInfo.GetNestedControlValueByFieldName("WaterAmt"))
+    '            li.Block = CStr(formlayoutLeadsInfo.GetNestedControlValueByFieldName("Block"))
+    '            li.Lot = CStr(formlayoutLeadsInfo.GetNestedControlValueByFieldName("Lot"))
+    '            li.TaxClass = CStr(formlayoutLeadsInfo.GetNestedControlValueByFieldName("TaxClass"))
+    '            li.IsLisPendens = (formlayoutLeadsInfo.GetNestedControlValueByFieldName("IsLisPendens"))
+    '            li.C1stMotgrAmt = CDbl(formlayoutLeadsInfo.GetNestedControlValueByFieldName("C1stMotgrAmt"))
+    '            li.C2ndMotgrAmt = CDbl(formlayoutLeadsInfo.GetNestedControlValueByFieldName("C2ndMotgrAmt"))
+    '            li.IsOtherLiens = (formlayoutLeadsInfo.GetNestedControlValueByFieldName("IsOtherLiens"))
+    '            li.IsTaxesOwed = (formlayoutLeadsInfo.GetNestedControlValueByFieldName("IsTaxesOwed"))
+    '            li.IsWaterOwed = CDbl(formlayoutLeadsInfo.GetNestedControlValueByFieldName("IsWaterOwed"))
+    '            li.WaterAmt = CDbl(formlayoutLeadsInfo.GetNestedControlValueByFieldName("WaterAmt"))
 
-                li.UpdateBy = HttpContext.Current.User.Identity.Name
-                li.LastUpdate = DateTime.Now
+    '            li.UpdateBy = HttpContext.Current.User.Identity.Name
+    '            li.LastUpdate = DateTime.Now
 
-                Context.SaveChanges()
-            End If
-        End Using
-    End Sub
+    '            Context.SaveChanges()
+    '        End If
+    '    End Using
+    'End Sub
 
     Sub BindActivityLog(bble As String)
         ActivityLogs.BindData(bble)

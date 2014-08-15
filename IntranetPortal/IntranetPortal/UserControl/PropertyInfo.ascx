@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PropertyInfo.ascx.vb" Inherits="IntranetPortal.PropertyInfo" %>
-<div class="tab-pane active" id="property_info">
+<div class="tab-pane active" id="property_info" style="padding-top:5px">
     <%--witch scroll bar--%>
     <%--/*display:none need delete when realse--%>
     <div style="height: 800px; overflow: auto;" id="prioity_content">
@@ -323,7 +323,6 @@
                         <th class="report_head">PlainTiff</th>
                         <th class="report_head">Defendant</th>
                         <th class="report_head">Index</th>
-
                     </tr>
                 </thead>
                 <tbody>

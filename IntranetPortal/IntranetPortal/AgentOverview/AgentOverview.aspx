@@ -55,7 +55,7 @@
         //function is called on changing focused row
         function OnGridFocusedRowChanged() {
             if (gridEmpsClient.GetFocusedRowIndex() >= 0) {
-                if (ContentCallbackPanel.InCallback()) {
+                if (IsInCallback()) {
                     postponedCallbackRequired = true;
                 }
                 else {
@@ -65,6 +65,9 @@
         }
 
         function OnEndCallback(s, e) {
+            if (IsInCallback())
+                return;
+
             if (postponedCallbackRequired) {
                 DoCallback();
                 postponedCallbackRequired = false;
@@ -76,6 +79,7 @@
 
             initScrollbars();
         }
+
         function onGetAgentLogButtonClick() {
             if (empId != null) {
 
@@ -83,7 +87,6 @@
             } else {
                 alert('EmpId is null');
             }
-
         }
         function onGetAgentZoningDateClick() {
             if (empId != null) {
@@ -102,16 +105,25 @@
             }
 
             if (rowKey != null) {
-                ContentCallbackPanel.PerformCallback("EMP|" + rowKey);
-                empId = rowKey;
+                //ContentCallbackPanel.PerformCallback("EMP|" + rowKey);
+                BindEmployee(rowKey);
             }
         }
 
+        function IsInCallback() {
+            return infoCallbackClient.InCallback() || gridReportClient.InCallback();
+        }
+
+        function BindEmployee(employeeId) {
+            empId = employeeId;
+            infoCallbackClient.PerformCallback("EMP|" + employeeId);
+            gridReportClient.PerformCallback("BindEmp|" + employeeId);
+            LoadEmployeeBarChart(empId);
+        }
+
         function OnGetRowValues(Value) {
-            // Right code 
-            alert(Value);
-            // This code will cause an error 
-            // alert(Value[0]); 
+            gridReportClient.PerformCallback("BindOffice|" + Value);
+            LoadOfficeBarChart(Value);
         }
 
         function Savelayout(reportName) {
@@ -132,14 +144,6 @@
         function CustomizRefershEnd() {
 
             initScrollbars();
-        }
-
-        function HiddenRightPanel() {
-            var leftPanel = splitter.GetPaneByName("RightPane");
-
-            if (!leftPanel.IsCollapsed()) {
-                leftPanel.Collapse();
-            }
         }
 
     </script>
@@ -187,8 +191,7 @@
                                                     <GroupRowTemplate>
                                                         <table style="height: 30px">
                                                             <tr>
-                                                                <td>
-                                                                   </td>
+                                                                <td></td>
                                                                 <td style="font-weight: 900; width: 80px; text-align: center;">Department: <%# Container.GroupText%></td>
                                                                 <td style="padding-left: 10px">
                                                                     <div class="raund-label">
@@ -225,7 +228,6 @@
                                             <Settings ShowColumnHeaders="False" GridLines="None"></Settings>
                                             <Border BorderStyle="None"></Border>
                                         </dx:ASPxGridView>
-
                                     </div>
                                     <div style="margin-top: 27px; height: 290px; display: none /*background: blue*/">
                                         <div>
@@ -237,7 +239,6 @@
                                                     <span class="font_black">Alko Kone</span><br />
                                                     Eviction
                                                 </div>
-
                                             </li>
                                             <li class="employee_list_item">
                                                 <div class="employee_list_item_div">
@@ -310,22 +311,21 @@
                 <dx:SplitterPane>
                     <ContentCollection>
                         <dx:SplitterContentControl>
-                            <dx:ASPxCallbackPanel runat="server" ID="contentCallback" ClientInstanceName="ContentCallbackPanel" OnCallback="contentCallback_Callback" Width="100%" Height="100%">
-                                <PanelCollection>
-                                    <dx:PanelContent>
-                                        <dx:ASPxSplitter runat="server" ID="contentSplitter" Orientation="Vertical" Width="100%" Height="100%">
-                                            <Styles>
-                                                <Pane Paddings-Padding="0">
-                                                    <Paddings Padding="0px"></Paddings>
-                                                </Pane>
-                                                <Separator BackColor=" #e7e9ee"></Separator>
-                                            </Styles>
-                                            <Panes>
-                                                <dx:SplitterPane ShowCollapseBackwardButton="True" Size="480">
-                                                    <ContentCollection>
-                                                        <dx:SplitterContentControl runat="server">
-                                                            <div style="width: 1272px;" class="agent_layout_float clear-fix">
-                                                                <%--center top--%>
+                            <dx:ASPxSplitter runat="server" ID="contentSplitter" Orientation="Vertical" Width="100%" Height="100%">
+                                <Styles>
+                                    <Pane Paddings-Padding="0">
+                                        <Paddings Padding="0px"></Paddings>
+                                    </Pane>
+                                    <Separator BackColor=" #e7e9ee"></Separator>
+                                </Styles>
+                                <Panes>
+                                    <dx:SplitterPane ShowCollapseBackwardButton="True" Size="480">
+                                        <ContentCollection>
+                                            <dx:SplitterContentControl runat="server">
+                                                <div style="width: 1272px;" class="agent_layout_float clear-fix">
+                                                    <dx:ASPxCallbackPanel runat="server" ID="infoCallback" ClientInstanceName="infoCallbackClient" OnCallback="infoCallback_Callback">
+                                                        <PanelCollection>
+                                                            <dx:PanelContent>
                                                                 <div style="height: 480px; float: left; border-right: 1px solid #dde0e7;">
                                                                     <%--angent info--%>
 
@@ -376,362 +376,143 @@
                                                                         <%-----end info detial-----%>
                                                                         <%-----end info detial-----%>
                                                                     </div>
-
+                                                                    <asp:HiddenField runat="server" ID="hfEmpName" />
+                                                                    <asp:HiddenField runat="server" ID="hfMode" />
+                                                                    <dx:ASPxHiddenField runat="server" ID="hfReports"></dx:ASPxHiddenField>
                                                                 </div>
+                                                            </dx:PanelContent>
+                                                        </PanelCollection>
+                                                        <ClientSideEvents EndCallback="OnEndCallback" />
+                                                    </dx:ASPxCallbackPanel>
+                                                    <%--center top--%>
 
-                                                                <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" HeaderText="Select Photo" ClientInstanceName="selectImgs" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
-                                                                    <ContentCollection>
-                                                                        <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol2" runat="server">
-                                                                        </dx:PopupControlContentControl>
-                                                                    </ContentCollection>
-                                                                </dx:ASPxPopupControl>
 
-                                                                <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" HeaderText="Report Name" ClientInstanceName="SaveReportPopup" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
-                                                                    <ContentCollection>
-                                                                        <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol1" runat="server">
-                                                                            <dx:ASPxTextBox runat="server" ID="txtReportName" ClientInstanceName="txtClientReportName"></dx:ASPxTextBox>
-                                                                            <dx:ASPxButton runat="server" ID="btnSave" AutoPostBack="false" Text="Add">
-                                                                                <ClientSideEvents Click="function(s, e){
+                                                    <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" HeaderText="Select Photo" ClientInstanceName="selectImgs" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
+                                                        <ContentCollection>
+                                                            <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol2" runat="server">
+                                                            </dx:PopupControlContentControl>
+                                                        </ContentCollection>
+                                                    </dx:ASPxPopupControl>
+
+                                                    <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" HeaderText="Report Name" ClientInstanceName="SaveReportPopup" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
+                                                        <ContentCollection>
+                                                            <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol1" runat="server">
+                                                                <dx:ASPxTextBox runat="server" ID="txtReportName" ClientInstanceName="txtClientReportName"></dx:ASPxTextBox>
+                                                                <dx:ASPxButton runat="server" ID="btnSave" AutoPostBack="false" Text="Add">
+                                                                    <ClientSideEvents Click="function(s, e){
                                                                 SaveReportPopup.Hide();
                                                                 Savelayout(txtClientReportName.GetText());
                                                                 }" />
-                                                                            </dx:ASPxButton>
-                                                                        </dx:PopupControlContentControl>
-                                                                    </ContentCollection>
-                                                                </dx:ASPxPopupControl>
-                                                                <%--chart UI--%>
-                                                                <div style="height: 490px;" class="clearfix">
+                                                                </dx:ASPxButton>
+                                                            </dx:PopupControlContentControl>
+                                                        </ContentCollection>
+                                                    </dx:ASPxPopupControl>
+                                                    <%--chart UI--%>
+                                                    <div style="height: 490px;" class="clearfix">
 
-                                                                    <div style="padding-top: 50px; font-size: 30px; color: #ff400d; text-align: center; display: none">In the last 6 months</div>
+                                                        <div style="padding-top: 50px; font-size: 30px; color: #ff400d; text-align: center; display: none">In the last 6 months</div>
 
-                                                                    <div style="padding-left: 370px; padding-top: 10px; height: 325px;" class="clearfix">
-                                                                        <div class="layout_float_right clearfix">
+                                                        <div style="padding-left: 370px; padding-top: 10px; height: 325px;" class="clearfix">
+                                                            <div class="layout_float_right clearfix">
 
-                                                                            <div class="dropdown layout_float_right">
-                                                                                <button class="btn btn-default dropdown-toggle" type="button" id="chart_line_select" data-toggle="dropdown" style="background: transparent">
-                                                                                    Line & Point Chart <span class="caret"></span>
+                                                                <div class="dropdown layout_float_right">
+                                                                    <button class="btn btn-default dropdown-toggle" type="button" id="chart_line_select" data-toggle="dropdown" style="background: transparent">
+                                                                        Line & Point Chart <span class="caret"></span>
 
-                                                                                </button>
-                                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="chart_line_select">
-                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Line</a></li>
-                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Bar</a></li>
-                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Pie</a></li>
+                                                                    </button>
+                                                                    <ul class="dropdown-menu" role="menu" aria-labelledby="chart_line_select">
+                                                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Line</a></li>
+                                                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Bar</a></li>
+                                                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Pie</a></li>
 
-                                                                                </ul>
-                                                                            </div>
-                                                                            <div class="dropdown layout_float_right" style="margin-right: 20px">
-                                                                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="background: transparent">
-                                                                                    Change Stat Range <span class="caret"></span>
-
-                                                                                </button>
-                                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(this)">Chart of Last 6 months</a></li>
-                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(this)">Chart of Last 12 months</a></li>
-                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(this)">Chart of Last 1 year</a></li>
-                                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(this)">Chart of Last 2 years</a></li>
-                                                                                </ul>
-                                                                            </div>
-
-
-                                                                        </div>
-                                                                        <div style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px; /*background: blue; */ color: white; height: 100%;">
-                                                                            <uc1:AgentCharts runat="server" ID="AgentCharts" />
-                                                                            <canvas id="canvas" height="240" width="530" style="display: none"></canvas>
-                                                                            <div id="lineLegend" style="display: none"></div>
-                                                                            <script>
-
-                                                                                var lineChartData = {
-                                                                                    labels: ["Jan,2014", "Feb,2014", "Mar,2014", "Apr,2014", "May,2014", "Jun,2014"],
-                                                                                    datasets: [
-                                                                                        {
-                                                                                            fillColor: "rgba(220,220,220,0.5)",
-                                                                                            strokeColor: "rgba(220,220,220,1)",
-                                                                                            pointColor: "rgba(220,220,220,1)",
-                                                                                            pointStrokeColor: "#fff",
-                                                                                            pointHighlightFill: "#fff",
-                                                                                            pointHighlightStroke: "rgba(220,220,220,1)",
-                                                                                            data: [41, 42, 43, 45, 48, 49],
-                                                                                            title: "Door knock"
-                                                                                        },
-                                                                                        {
-                                                                                            fillColor: "rgba(151,187,205,0.5)",
-                                                                                            strokeColor: "rgba(151,187,205,1)",
-                                                                                            pointColor: "rgba(151,187,205,1)",
-                                                                                            pointStrokeColor: "#fff",
-                                                                                            pointHighlightFill: "#fff",
-                                                                                            pointHighlightStroke: "rgba(151,187,205,1)",
-                                                                                            data: [32, 33, 35, 34, 33, 38],
-                                                                                            title: "Hot Leads"
-                                                                                        }
-                                                                                        ,
-                                                                                       {
-                                                                                           fillColor: "rgba(198,130,132,0.5)",
-                                                                                           strokeColor: "rgba(198,130,132,1)",
-                                                                                           pointColor: "rgba(198,130,132,1)",
-                                                                                           pointStrokeColor: "#fff",
-                                                                                           pointHighlightFill: "#fff",
-                                                                                           pointHighlightStroke: "rgba(198,130,132,1)",
-                                                                                           data: [20, 40, 60, 80, 90, 100],
-                                                                                           title: "Follow Ups "
-                                                                                       }
-                                                                                    ],
-
-                                                                                }
-
-                                                                                function legend(parent, data) {
-                                                                                    parent.className = 'legend';
-                                                                                    var datas = data.hasOwnProperty('datasets') ? data.datasets : data;
-
-                                                                                    // remove possible children of the parent
-                                                                                    while (parent.hasChildNodes()) {
-                                                                                        parent.removeChild(parent.lastChild);
-                                                                                    }
-
-                                                                                    datas.forEach(function (d) {
-                                                                                        var title = document.createElement('span');
-                                                                                        title.className = 'title';
-                                                                                        title.style.borderColor = d.hasOwnProperty('strokeColor') ? d.strokeColor : d.color;
-                                                                                        title.style.borderStyle = 'solid';
-                                                                                        parent.appendChild(title);
-
-                                                                                        var text = document.createTextNode(d.title);
-                                                                                        title.appendChild(text);
-                                                                                    });
-                                                                                }
-
-                                                                                function ShowChart() {
-                                                                                    show_bar_chart();
-                                                                                }
-
-                                                                                //'ShowChart();
-                                                                            </script>
-                                                                        </div>
-
-                                                                    </div>
+                                                                    </ul>
                                                                 </div>
-                                                                <%-----end chart ui-----%>
+                                                                <div class="dropdown layout_float_right" style="margin-right: 20px">
+                                                                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="background: transparent">
+                                                                        Change Stat Range <span class="caret"></span>
+
+                                                                    </button>
+                                                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(this)">Chart of Last 6 months</a></li>
+                                                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(this)">Chart of Last 12 months</a></li>
+                                                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(this)">Chart of Last 1 year</a></li>
+                                                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(this)">Chart of Last 2 years</a></li>
+                                                                    </ul>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <div style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px; /*background: blue; */ color: white; height: 100%;">
+                                                                <uc1:AgentCharts runat="server" ID="AgentCharts" />
                                                             </div>
 
-                                                        </dx:SplitterContentControl>
-                                                    </ContentCollection>
-                                                </dx:SplitterPane>
-                                                <dx:SplitterPane>
-                                                    <ContentCollection>
-                                                        <dx:SplitterContentControl runat="server">
-                                                            <%--report UI--%>
-                                                            <div style="margin-top: 10px;">
-                                                                <%--tool head--%>
-                                                                <div style="margin-left: 40px; margin-right: 40px;">
-                                                                    <%--head--%>
-                                                                    <div style="font-size: 30px" class="clearfix">
-                                                                        <span style="color: #234b60; font-weight: 900">Customized Report&nbsp;&nbsp;&nbsp;</span>
-                                                                        <i class="fa fa-question-circle tooltip-examples" style="color: #999ca1" title="Check items from the pane on the right side to view the customized report."></i>
-                                                                        <div style="float: right; padding-right: 40px; font-size: 18px;">
+                                                        </div>
+                                                    </div>
+                                                    <%-----end chart ui-----%>
+                                                </div>
 
-                                                                            <i class="fa fa-save report_head_button report_head_button_padding" onclick="SaveReportPopup.Show()" style="cursor: pointer"></i>
-                                                                            <i class="fa fa-exchange report_head_button tooltip-examples report_head_button_padding" title="Compare"></i>
-                                                                            <asp:LinkButton ID="btnExport" runat="server" OnClick="Unnamed_ServerClick" Text='<i class="fa fa-print  report_head_button report_head_button_padding"></i>'>                                                                
-                                                                            </asp:LinkButton>
-                                                                            <i class="fa fa-envelope  report_head_button report_head_button_padding"></i>
-                                                                            <i class="fa fa-file-pdf-o  report_head_button"></i>
+                                            </dx:SplitterContentControl>
+                                        </ContentCollection>
+                                    </dx:SplitterPane>
+                                    <dx:SplitterPane>
+                                        <ContentCollection>
+                                            <dx:SplitterContentControl runat="server">
+                                                <%--report UI--%>
+                                                <div style="margin-top: 10px;">
+                                                    <%--tool head--%>
+                                                    <div style="margin-left: 40px; margin-right: 40px;">
+                                                        <%--head--%>
+                                                        <div style="font-size: 30px" class="clearfix">
+                                                            <span style="color: #234b60; font-weight: 900">Customized Report&nbsp;&nbsp;&nbsp;</span>
+                                                            <i class="fa fa-question-circle tooltip-examples" style="color: #999ca1" title="Check items from the pane on the right side to view the customized report."></i>
+                                                            <div style="float: right; padding-right: 40px; font-size: 18px;">
 
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <%--grid view--%>
-
-                                                                    <%--<div style="overflow-x:scroll;overflow-y:scroll;max-height:900px;">--%>
-                                                                    <dx:ASPxGridView ID="gridReport" runat="server" KeyFieldName="BBLE" Width="100%" AutoGenerateColumns="false" ClientInstanceName="gridReportClient" OnCustomCallback="gridReport_CustomCallback" Settings-ShowGroupPanel="false" OnLoad="gridReport_Load" OnInit="gridReport_Init" CssClass="font_source_sans_pro" Settings-VerticalScrollBarMode="Auto">
-                                                                        <%--Settings-HorizontalScrollBarMode="Auto"--%>
-                                                                        <Settings ShowFilterBar="Visible" ShowHeaderFilterButton="true" ShowGroupPanel="true" />
-                                                                        <Columns>
-                                                                            <dx:GridViewDataColumn FieldName="PropertyAddress">
-                                                                                <CellStyle Font-Bold="True"></CellStyle>
-                                                                            </dx:GridViewDataColumn>
-
-                                                                        </Columns>
-                                                                        <SettingsPager PageSize="10" PageSizeItemSettings-Visible="true" PageSizeItemSettings-ShowAllItem="true" Mode="ShowAllRecords">
-                                                                            <PageSizeItemSettings ShowAllItem="True" Visible="True"></PageSizeItemSettings>
-
-                                                                        </SettingsPager>
-                                                                        <Settings VerticalScrollableHeight="290" />
-
-                                                                        <GroupSummary>
-                                                                            <dx:ASPxSummaryItem FieldName="BBLE" SummaryType="Count" />
-                                                                        </GroupSummary>
-                                                                        <Styles>
-                                                                            <Cell>
-                                                                                <BorderLeft BorderWidth="0px"></BorderLeft>
-
-                                                                                <BorderRight BorderWidth="0px"></BorderRight>
-                                                                            </Cell>
-                                                                            <Table>
-                                                                            </Table>
-                                                                        </Styles>
-                                                                        <ClientSideEvents EndCallback="CustomizRefershEnd" />
-                                                                    </dx:ASPxGridView>
-                                                                    <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridReport"></dx:ASPxGridViewExporter>
-                                                                    <%--</div>--%>
-
-
-                                                                    <div style="height: 260px; width: 100%; margin-top: 35px; padding-right: 40px; overflow-x: auto; display: none" id="custom_report_grid">
-                                                                        <table class="table table-condensed" style="width: 900px; margin-bottom: 0px;" id="custom_report_table_head">
-                                                                        </table>
-                                                                        <div style="height: 230px; /*background: blue; */" id="droppable" class="custom_report_table">
-
-                                                                            <table class="table table-condensed" style="width: 900px" id="custom_report_table">
-                                                                                <%--  <thead>
-                                        <tr>
-                                            <th class="report_head">Property</th>
-                                            <th class="report_head">Date</th>
-                                            <th class="report_head">Call ATPT</th>
-                                            <th class="report_head">Doorknk ATPT</th>
-                                            <th class="report_head">Comment</th>
-                                            <th class="report_head">Data</th>
-                                            <th class="report_head">&nbsp;</th>
-                                        </tr>
-                                    </thead>--%>
-                                                                                <tbody id="custom_report_tbody">
-                                                                                    <%-- <tr>
-                                            <td class="report_content" style="font-weight: 900; width: 230px;">123 Main St, Brooklyn, NY 12345</td>
-                                            <td class="report_content" style="width: 90px">4/23/2014</td>
-                                            <td class="report_content" style="width: 90px">12</td>
-                                            <td class="report_content" style="width: 100px">3</td>
-                                            <td class="report_content" style="width: 260px">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at porta justo, vitae ultrices orci.</td>
-                                            <td class="report_content" style="width: 125px">3</td>
-                                            <td class="report_content" ><i class="fa fa-list-alt report_gird_icon" onclick="custome_report_itemlick(1)"></i></td>
-                                        </tr>--%>
-                                                                                </tbody>
-                                                                            </table>
-                                                                            <script>
-                                                                                $(document).ready(function () {
-
-                                                                                    if ($(".tooltip-examples").tooltip) {
-                                                                                        $(".tooltip-examples").tooltip({
-                                                                                            placement: 'bottom'
-                                                                                        });
-                                                                                    } else {
-                                                                                        alert('tooltip function can not found' + $(".tooltip-examples").tooltip);
-                                                                                    }
-
-                                                                                });
-                                                                                $(function () {
-                                                                                    if ($(".draggable_field").draggable) {
-                                                                                        $(".draggable_field").draggable({ revert: "invalid" });
-                                                                                        $("#droppable").droppable({
-                                                                                            drop: function (event, ui) {
-                                                                                                var draggable = ui.draggable;
-                                                                                                var fild = draggable.children("span").text()
-
-                                                                                                window.report_fileds = window.report_fileds ? window.report_fileds : $.parseJSON('<%= report_fields() %>');
-                                                                                                window.report_fileds.push(fild);
-
-                                                                                                //alert('The square with ID "' + fild + '" was dropped onto me!');
-                                                                                                $("#" + draggable.attr('id')).remove();
-                                                                                                $('#custom_report_table tr').remove();
-                                                                                                change_table_thead();
-                                                                                                show_report_data();
-                                                                                            }
-                                                                                        });
-                                                                                    }
-
-                                                                                });
-
-                                                                                var custome_report_itemlick = function (index) {
-                                                                                    //alert(index);
-                                                                                    //window.external.custome_report_itemlick(index);
-
-                                                                                    $.ajax({
-                                                                                        type: "POST",
-                                                                                        url: "AngentOverview.aspx?index=" + index,
-                                                                                        data: "{}",
-                                                                                        contentType: "application/json; charset=utf-8",
-                                                                                        dataType: "json",
-                                                                                        success: function (msg) {
-                                                                                            // Do something interesting here.
-                                                                                        }
-                                                                                    });
-                                                                                }
-                                                                                function change_table_thead() {
-                                                                                    $('#custom_report_table_head thead').remove();
-                                                                                    $('#custom_report_table thead').remove();
-                                                                                    $('#custom_report_table tbody').remove();
-
-                                                                                    var report_fileds = window.report_fileds ? window.report_fileds : $.parseJSON('<%= report_fields() %>');
-                                                                                    var headstr = "";
-                                                                                    var feilds_style = {
-                                                                                        property: "font-weight: 900; width: 230px",
-                                                                                        date: "width: 90px",
-                                                                                        call_atpt: "width: 90px",
-                                                                                        doorknk_atpt: "width: 100px",
-                                                                                        Comment: "width: 260px",
-                                                                                        data: "width: 125px"
-                                                                                    }
-                                                                                    headstr += '<thead>  <tr>';
-                                                                                    for (var i in report_fileds) {
-                                                                                        //&nbsp;
-                                                                                        var title = report_fileds[i].toString().replace("_", " ");
-                                                                                        headstr += '<th class="report_head" >' + report_fileds[i].toString().replace("_", " "); + '</th>';
-                                                                                    }
-                                                                                    headstr += '</tr></thead>';
-
-                                                                                    $('#custom_report_table_head').append(headstr);
-                                                                                    $('#custom_report_table').append(' <tbody id="custom_report_tbody">\n</tbody>');
-                                                                                }
-
-                                                                                function show_report_data() {
-                                                                                    var report_data = $.parseJSON('<%= report_data_f %>');
-
-                                                                                    for (var i in report_data) {
-                                                                                        var data = report_data[i];
-                                                                                        var feilds_style = {
-                                                                                            property: "font-weight: 900; width: 230px",
-                                                                                            date: "width: 90px",
-                                                                                            call_atpt: "width: 90px",
-                                                                                            doorknk_atpt: "width: 100px",
-                                                                                            Comment: "width: 260px",
-                                                                                            data: "width: 125px"
-                                                                                        }
-                                                                                        var report_fileds = window.report_fileds ? window.report_fileds : $.parseJSON('<%= report_fields() %>');
-                                                                                        var table_cell = "";
-                                                                                        for (var j = 0; j < report_fileds.length; j++) {
-                                                                                            var fileds = report_fileds[j]
-                                                                                            table_cell += '<td class="report_content" style="' + feilds_style[fileds] + ';">' + data[fileds] + '</td>\n'
-                                                                                        }
-                                                                                        // <td class="report_content" style="font-weight: 900; width: 230px;">' + data.property + '</td>\
-                                                                                        //<td class="report_content" style="width: 90px">' + data.date + '</td>\
-                                                                                        //<td class="report_content" style="width: 90px">' + data.call_atpt + '</td>\
-                                                                                        //<td class="report_content" style="width: 100px">' + data.doorknk_atpt + '</td>\
-                                                                                        //<td class="report_content" style="width: 260px">' + data.commet + '</td>\
-                                                                                        //<td class="report_content" style="width: 125px">' + data.data + '</td>\
-                                                                                        $('#custom_report_table').append('<tr>\
-                                            '+ table_cell + '\
-                                            <td class="report_content" style=""><i class="fa fa-list-alt report_gird_icon" style="float:right;" onclick="custome_report_itemlick(' + i + ')"></i></td>/n\
-                                            <tr>\
-                                            ');
-                                                                                    }
-                                                                                }
-                                                                                change_table_thead();
-                                                                                show_report_data();
-
-                                                                            </script>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                <i class="fa fa-save report_head_button report_head_button_padding" onclick="SaveReportPopup.Show()" style="cursor: pointer"></i>
+                                                                <i class="fa fa-exchange report_head_button tooltip-examples report_head_button_padding" title="Compare"></i>
+                                                                <asp:LinkButton ID="btnExport" runat="server" OnClick="Unnamed_ServerClick" Text='<i class="fa fa-print  report_head_button report_head_button_padding"></i>'>                                                                
+                                                                </asp:LinkButton>
+                                                                <i class="fa fa-envelope  report_head_button report_head_button_padding"></i>
+                                                                <i class="fa fa-file-pdf-o  report_head_button"></i>
                                                             </div>
-                                                        </dx:SplitterContentControl>
-                                                    </ContentCollection>
-                                                </dx:SplitterPane>
-                                            </Panes>
-                                        </dx:ASPxSplitter>
-                                        <asp:HiddenField runat="server" ID="hfEmpName" />
-                                        <asp:HiddenField runat="server" ID="hfMode" />
+                                                        </div>
 
-                                        <dx:ASPxHiddenField runat="server" ID="hfReports"></dx:ASPxHiddenField>
-                                    </dx:PanelContent>
-                                </PanelCollection>
-                                <ClientSideEvents EndCallback="OnEndCallback" />
-                            </dx:ASPxCallbackPanel>
+                                                        <%--grid view--%>
+
+                                                        <%--<div style="overflow-x:scroll;overflow-y:scroll;max-height:900px;">--%>
+                                                        <dx:ASPxGridView ID="gridReport" runat="server" KeyFieldName="BBLE" Width="100%" AutoGenerateColumns="false" ClientInstanceName="gridReportClient" OnCustomCallback="gridReport_CustomCallback" Settings-ShowGroupPanel="false" OnInit="gridReport_Init" CssClass="font_source_sans_pro" Settings-VerticalScrollBarMode="Auto">
+                                                            <%--Settings-HorizontalScrollBarMode="Auto"--%>
+                                                            <Settings ShowFilterBar="Visible" ShowHeaderFilterButton="true" ShowGroupPanel="true" />
+                                                            <Columns>
+                                                                <dx:GridViewDataColumn FieldName="PropertyAddress">
+                                                                    <CellStyle Font-Bold="True"></CellStyle>
+                                                                </dx:GridViewDataColumn>
+                                                            </Columns>
+                                                            <SettingsPager PageSize="10" PageSizeItemSettings-Visible="true" PageSizeItemSettings-ShowAllItem="true" Mode="ShowAllRecords">
+                                                                <PageSizeItemSettings ShowAllItem="True" Visible="True"></PageSizeItemSettings>
+                                                            </SettingsPager>
+                                                            <Settings VerticalScrollableHeight="290" />
+                                                            <GroupSummary>
+                                                                <dx:ASPxSummaryItem FieldName="BBLE" SummaryType="Count" />
+                                                            </GroupSummary>
+                                                            <Styles>
+                                                                <Cell>
+                                                                    <BorderLeft BorderWidth="0px"></BorderLeft>
+                                                                    <BorderRight BorderWidth="0px"></BorderRight>
+                                                                </Cell>
+                                                                <Table>
+                                                                </Table>
+                                                            </Styles>
+                                                            <ClientSideEvents EndCallback="CustomizRefershEnd" />
+                                                        </dx:ASPxGridView>
+                                                        <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridReport"></dx:ASPxGridViewExporter>
+                                                        <%--</div>--%>
+                                                    </div>
+                                                </div>
+                                            </dx:SplitterContentControl>
+                                        </ContentCollection>
+                                    </dx:SplitterPane>
+                                </Panes>
+                            </dx:ASPxSplitter>
 
                         </dx:SplitterContentControl>
                     </ContentCollection>
@@ -834,36 +615,6 @@
                                                     <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
                                                 </dx:ASPxCheckBoxList>
                                             </div>
-                                            <div style="display: none">
-                                                <div class="draggable_field" id="draggable_field8">
-                                                    <i class="fa fa-long-arrow-left draggable_icon"></i>
-                                                    <span class="drappable_field_text">Call Attemps</span>
-                                                </div>
-                                                <div class="draggable_field draggable_field_margin" id="draggable_field0">
-                                                    <i class="fa fa-long-arrow-left draggable_icon "></i>
-                                                    <span class="drappable_field_text">Door Knock</span>
-                                                </div>
-                                                <div class="draggable_field draggable_field_margin" id="draggable_field">
-                                                    <i class="fa fa-long-arrow-left draggable_icon "></i>
-                                                    <span class="drappable_field_text">Attempts</span>
-                                                </div>
-                                                <div class="draggable_field draggable_field_margin" id="draggable_field1">
-                                                    <i class="fa fa-long-arrow-left draggable_icon "></i>
-                                                    <span class="drappable_field_text">Most Recent</span>
-                                                </div>
-                                                <div class="draggable_field draggable_field_margin" id="draggable_field2">
-                                                    <i class="fa fa-long-arrow-left draggable_icon "></i>
-                                                    <span class="drappable_field_text">Comment</span>
-                                                </div>
-                                                <div class="draggable_field draggable_field_margin" id="draggable_field3">
-                                                    <i class="fa fa-long-arrow-left draggable_icon "></i>
-                                                    <span class="drappable_field_text">FAR</span>
-                                                </div>
-                                                <div class="draggable_field draggable_field_margin" id="draggable_field4">
-                                                    <i class="fa fa-long-arrow-left draggable_icon "></i>
-                                                    <span class="drappable_field_text">Data</span>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
 
@@ -874,20 +625,6 @@
                 </dx:SplitterPane>
             </Panes>
         </dx:ASPxSplitter>
-
-        <div style="width: 1630px; height: 960px">
-
-            <%--left div--%>
-            <div style="width: 310px; color: #999ca1;" class="agent_layout_float">
-            </div>
-
-            <%--splite bar--%>
-            <div class="agent_layout_float" style="background: #e7e9ee; width: 10px;"></div>
-
-            <%--center containter--%>
-        </div>
-
-
     </form>
 
     <!-- custom scrollbar plugin -->

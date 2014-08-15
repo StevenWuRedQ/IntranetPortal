@@ -4,10 +4,10 @@ Imports DevExpress.Web.ASPxEditors
 
 Public Class AgentOverview
     Inherits System.Web.UI.Page
-    Public report_data As String
 
     Public Property CurrentEmployee As Employee
     Public Property CurrentStatus As LeadStatus
+    Public Property CurrentOffice As String
     Public portalDataContext As New Entities
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -27,112 +27,6 @@ Public Class AgentOverview
 
             gridEmps.GroupBy(gridEmps.Columns("Department"))
         End If
-
-        report_data = report_data_f()
-    End Sub
-
-    Function GetTemplates() As StringDictionary
-        Dim up = Employee.GetProfile(User.Identity.Name)
-        Return up.ReportTemplates
-    End Function
-
-    Sub BindEmp()
-        If User.IsInRole("Admin") Then
-            gridEmps.DataSource = portalDataContext.Employees.OrderBy(Function(em) em.Name).ToList
-            Return
-        End If
-
-        Dim emps As New List(Of Employee)
-
-        Dim offices = "Bronx,Patchen,Queens,Rockaway"
-
-        For Each office In offices.Split(",")
-            If User.IsInRole("OfficeManager-" & office) Then
-                emps.AddRange(Employee.GetDeptUsersList(office))
-            End If
-        Next
-
-        If Employee.HasSubordinates(User.Identity.Name) Then
-            emps.AddRange(Employee.GetManagedEmployeeList(User.Identity.Name))
-        End If
-
-        gridEmps.DataSource = emps.Distinct.OrderBy(Function(em) em.Name).ToList
-    End Sub
-
-    Sub BindGridReport()
-        If Not String.IsNullOrEmpty(hfMode.Value) AndAlso hfMode.Value = "Status" Then
-            Dim reports = (From li In portalDataContext.LeadsInfoes Join
-                                  ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
-                                  Where ld.Status = CurrentStatus
-                                  Select li).ToList
-            gridReport.DataSource = reports
-        Else
-            Dim name = hfEmpName.Value
-
-            Dim reports = (From li In portalDataContext.LeadsInfoes Join
-                                       ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
-                                       Where ld.EmployeeName = name
-                                       Select li).ToList
-            gridReport.DataSource = reports
-        End If
-    End Sub
-
-    Sub BindChart()
-
-
-    End Sub
-
-    'retrun the report data fields
-    Function report_fields() As String
-        Dim serializer As New System.Web.Script.Serialization.JavaScriptSerializer()
-        Dim D_report_data As New List(Of String)
-        'From()
-        '    {"property", "date", "call_atpt"
-        '        }
-        D_report_data.Add("property")
-        D_report_data.Add("date")
-
-        D_report_data.Add("call_atpt")
-
-        Return serializer.Serialize(D_report_data)
-    End Function
-    'retrun the report data
-    Function report_data_f() As String
-        Dim serializer As New System.Web.Script.Serialization.JavaScriptSerializer()
-        Dim D_report_data As New List(Of Dictionary(Of String, String))
-
-
-        For i As Integer = 1 To 20
-            Dim item As New Dictionary(Of String, String) From
-            {
-                {"property", "123 Main St, Brooklyn, NY 12345"},
-                {"date", "4/23/2014"},
-                {"call_atpt", "12"},
-                {"doorknk_atpt", "3"},
-                {"Comment", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at porta justo, vitae ultrices orci."},
-                {"data", "3"}
-            }
-            If i Mod 2 = 0 Then
-                Dim item2 As New Dictionary(Of String, String) From
-            {
-                {"property", "5732 Jamaica Ave, Jamaica, NY 11456"},
-                {"date", "5/17/2014"},
-                {"call atpt", "20"},
-                {"doorknk_atpt", "9"},
-                {"Comment", "Phasellus enim libero, pulvinar sit amet felis at, rutrum rhoncus ante."},
-                {"data", " "}
-            }
-                item = item2
-            End If
-            D_report_data.Add(item)
-        Next
-        Return serializer.Serialize(D_report_data)
-
-    End Function
-    Public Sub click_report_index(ByVal sender As System.Object)
-        Dim index As Integer = sender
-        'Request.QueryString("index")
-        MsgBox("index =" & index)
     End Sub
 
     Protected Sub gridReport_DataBinding(sender As Object, e As EventArgs) Handles gridReport.DataBinding
@@ -148,14 +42,26 @@ Public Class AgentOverview
     End Sub
 
     Protected Sub gridReport_CustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs)
+        If e.Parameters.StartsWith("BindEmp") Then
+            CurrentEmployee = Employee.GetInstance(CInt(e.Parameters.Split("|")(1)))
+            'AgentCharts.current_employee = CurrentEmployee.Name
+            'AgentCharts.Agent_leads_activity_source()
+            hfEmpName.Value = CurrentEmployee.Name
+            gridReport.DataBind()
+        End If
+
         If e.Parameters.StartsWith("LoadLayout") Then
             Dim report = e.Parameters.Split("|")(1)
             Dim up = Employee.GetProfile(User.Identity.Name)
             gridReport.LoadClientLayout(up.ReportTemplates(report))
+            SetFlieds(GetReportColumns())
         End If
-       
+
         If e.Parameters.StartsWith("FieldChange") Then
-            show_grid_by_items(False)
+            'show_grid_by_items(True)
+            Dim columns = e.Parameters.Split("|")(1)
+            LoadGridColumn(columns)
+            gridReport.DataBind()
         End If
 
         If e.Parameters.StartsWith("BindStatus") Then
@@ -166,6 +72,12 @@ Public Class AgentOverview
             gridReport.DataBind()
         End If
 
+        If e.Parameters.StartsWith("BindOffice") Then
+            hfMode.Value = "Office"
+            CurrentOffice = e.Parameters.Split("|")(1)
+            gridReport.DataBind()
+        End If
+
         'gridReport.DataBind()
     End Sub
 
@@ -173,64 +85,16 @@ Public Class AgentOverview
         gridExport.WriteXlsToResponse()
     End Sub
 
-    Protected Sub contentCallback_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    Protected Sub infoCallback_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         If e.Parameter.StartsWith("EMP") Then
             If Not String.IsNullOrEmpty(e.Parameter) Then
                 CurrentEmployee = Employee.GetInstance(CInt(e.Parameter.Split("|")(1)))
-                'AgentCharts.current_employee = CurrentEmployee.Name
-                'AgentCharts.Agent_leads_activity_source()
                 hfEmpName.Value = CurrentEmployee.Name
-                gridReport.DataBind()
             End If
         End If
 
         If e.Parameter.StartsWith("Status") Then
             hfMode.Value = "Status"
-            Dim status = e.Parameter.Split("|")(1)
-            CurrentStatus = CType(status, LeadStatus)
-            AgentCharts.LeadsCategory = CurrentStatus
-            gridReport.DataBind()
-        End If
-    End Sub
-
-    Protected Sub gridReport_Load(sender As Object, e As EventArgs)
-       
-    End Sub
-
-    Protected Sub gridReport_Init(sender As Object, e As EventArgs)
-        Dim s = hfEmpName.Value
-
-       
-        gridReport.Columns.Clear()
-        show_grid_by_items(True)
-
-    End Sub
-    Protected Sub show_grid_by_items(isInit As Boolean)
-        init_grid_by_items(chkFields.Items, isInit)
-        init_grid_by_items(chkFields2.Items, isInit)
-    End Sub
-
-
-    Protected Sub init_grid_by_items(collectItems As ListEditItemCollection, isAdd As Boolean)
-        If collectItems.Count > 0 Then
-            For Each item As ListEditItem In collectItems
-                Dim gridCol = New GridViewDataColumn
-                If Not isAdd Then
-                    gridCol = gridReport.Columns(item.Value)
-                Else
-                    gridCol.FieldName = item.Value
-                End If
-
-                If item.Selected Then
-                    gridCol.Visible = True
-                Else
-                    gridCol.Visible = False
-                End If
-                If isAdd Then
-                    gridReport.Columns.Add(gridCol)
-                End If
-
-            Next
         End If
     End Sub
 
@@ -267,5 +131,160 @@ Public Class AgentOverview
             Employee.SaveProfile(User.Identity.Name, up)
         End If
     End Sub
+
+    Protected Sub gridReport_Init(sender As Object, e As EventArgs)
+        LoadGridColumn()
+    End Sub
+
+    Function GetTemplates() As StringDictionary
+        Dim up = Employee.GetProfile(User.Identity.Name)
+        Return up.ReportTemplates
+    End Function
+
+    Sub BindEmp()
+        If User.IsInRole("Admin") Then
+            gridEmps.DataSource = portalDataContext.Employees.OrderBy(Function(em) em.Name).ToList
+            Return
+        End If
+
+        Dim emps As New List(Of Employee)
+
+        Dim offices = "Bronx,Patchen,Queens,Rockaway"
+
+        For Each office In offices.Split(",")
+            If User.IsInRole("OfficeManager-" & office) Then
+                emps.AddRange(Employee.GetDeptUsersList(office))
+            End If
+        Next
+
+        If Employee.HasSubordinates(User.Identity.Name) Then
+            emps.AddRange(Employee.GetManagedEmployeeList(User.Identity.Name))
+        End If
+
+        gridEmps.DataSource = emps.Distinct.OrderBy(Function(em) em.Name).ToList
+    End Sub
+
+    Sub BindGridReport()
+        If Not String.IsNullOrEmpty(hfMode.Value) Then
+            'Load lead by Status
+            If hfMode.Value = "Status" Then
+
+                Dim reports = (From li In portalDataContext.LeadsInfoes Join
+                                      ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
+                                      Where ld.Status = CurrentStatus
+                                      Select li).ToList
+                gridReport.DataSource = reports
+            End If
+
+            'Load lead by Office
+            If hfMode.Value = "Office" Then
+
+                Dim emps = Employee.GetAllDeptUsers(CurrentOffice)
+
+                Dim reports = (From li In portalDataContext.LeadsInfoes Join
+                                    ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
+                                    Where emps.Contains(ld.EmployeeName)
+                                    Select li).ToList
+                gridReport.DataSource = reports
+            End If
+        Else
+            Dim name = hfEmpName.Value
+            Dim reports = (From li In portalDataContext.LeadsInfoes Join
+                                       ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
+                                       Where ld.EmployeeName = name
+                                       Select li).ToList
+            gridReport.DataSource = reports
+        End If
+    End Sub
+
+    Protected Sub show_grid_by_items(isInit As Boolean)
+        'init_grid_by_items(chkFields.Items, isInit)
+        'init_grid_by_items(chkFields2.Items, isInit)
+        'LoadGridColumn(chkFields.Items)
+        'LoadGridColumn(chkFields2.Items)
+    End Sub
+
+    Sub LoadGridColumn()
+        Dim fields = GetFlieds()
+
+        If String.IsNullOrEmpty(fields) Then
+            fields = "PropertyAddress,BBLE"
+        End If
+
+        LoadGridColumn(fields)
+    End Sub
+
+    Sub LoadGridColumn(collectItems As String)
+        SetFlieds(collectItems)
+
+        gridReport.Columns.Clear()
+        For Each item In collectItems.Split(",")
+            Dim gridCol = New GridViewDataColumn
+            gridCol.FieldName = item
+            gridReport.Columns.Add(gridCol)
+        Next
+    End Sub
+
+    Protected Sub init_grid_by_items(collectItems As ListEditItemCollection, isAdd As Boolean)
+        If collectItems.Count > 0 Then
+            For Each item As ListEditItem In collectItems
+                Dim gridCol = New GridViewDataColumn
+                If Not isAdd Then
+                    gridCol = gridReport.Columns(item.Value)
+
+                    If gridCol Is Nothing Then
+                        gridCol = New GridViewDataColumn
+                        gridCol.FieldName = item.Value
+                    End If
+                Else
+                    gridCol.FieldName = item.Value
+                End If
+
+                If item.Selected Then
+                    gridCol.Visible = True
+                    If gridReport.Columns(item.Value) Is Nothing Then
+                        gridReport.Columns.Add(gridCol)
+                    End If
+                Else
+                    If gridReport.Columns(item.Value) IsNot Nothing Then
+                        gridReport.Columns.Remove(gridCol)
+                    End If
+                End If
+
+                If isAdd Then
+                    'gridReport.Columns.Add(gridCol)
+                End If
+            Next
+        End If
+    End Sub
+
+#Region "Helper methods"
+
+    Function GetReportColumns() As String
+        Dim cols As New List(Of String)
+
+        For Each col As GridViewDataColumn In gridReport.Columns
+            cols.Add(col.FieldName)
+        Next
+
+        Return String.Join(",", cols)
+    End Function
+
+    Function GetFlieds() As String
+        If Request.Cookies("ReportFields") Is Nothing Then
+            Return ""
+        Else
+            Return Request.Cookies.Item("ReportFields").Value
+        End If
+    End Function
+
+    Sub SetFlieds(fields As String)
+        If Response.Cookies("ReportFields") Is Nothing Then
+            Response.Cookies.Add(New HttpCookie("ReportFields", fields))
+        Else
+            Response.Cookies.Item("ReportFields").Value = fields
+        End If
+    End Sub
+#End Region
 
 End Class

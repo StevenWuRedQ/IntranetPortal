@@ -628,6 +628,13 @@
       <DependentUpon>PreviewFile.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Proiority\ActivityLog.aspx.designer.vb">
+      <DependentUpon>ActivityLog.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Proiority\ActivityLog.aspx.vb">
+      <DependentUpon>ActivityLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Proiority\Priority.aspx.designer.vb">
       <DependentUpon>Priority.aspx</DependentUpon>
     </Compile>
@@ -966,6 +973,7 @@
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
     <Content Include="PreviewFile.aspx" />
+    <Content Include="Proiority\ActivityLog.aspx" />
     <Content Include="Proiority\Priority.aspx" />
     <Content Include="scripts\Chart.js" />
     <Content Include="scripts\devextreme-localization\dx.webappjs.de.js" />

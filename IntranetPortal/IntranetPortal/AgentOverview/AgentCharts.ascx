@@ -181,6 +181,10 @@
     {
         callbackDsClient.PerformCallback(status);
     }
+    function LoadOfficeBarChart(office)
+    {
+        callbackOfficeLeads.PerformCallback(office);
+    }
 
     function LoadEmployeeBarChart(empId)
     {
@@ -191,8 +195,7 @@
         callbackAgentClinet.PerformCallback(empId);
     }
     function AgentDateSourceLoadedComplete(s, e)
-    {
-        
+    {        
         show_bar_chart($.parseJSON(e.result));
     }
     function DataSourceLoadedComplete(s, e)
@@ -227,4 +230,7 @@
 </dx:ASPxCallback>
 <dx:ASPxCallback runat="server" ID="loadAgentZoning" OnCallback="loadAgentZoning_Callback" ClientInstanceName="callbackAgentZoning">
     <ClientSideEvents CallbackComplete="AgentDateSourceZoningComplete" />
+</dx:ASPxCallback>
+<dx:ASPxCallback runat="server" ID="loadOfficeLeadsCallback" OnCallback="loadOfficeLeadsCallback_Callback" ClientInstanceName="callbackOfficeLeads">
+    <ClientSideEvents CallbackComplete="DataSourceLoadedComplete" />
 </dx:ASPxCallback>
