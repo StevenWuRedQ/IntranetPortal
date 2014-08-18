@@ -3,10 +3,7 @@
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
- 
-<link href="styles/stevencss.css" rel='stylesheet' type='text/css' />
-<%--add this link use Source Sans Pro font--%>  
-<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
+
 <%-------end-------%>
 <style type="text/css">
     .Header {
@@ -91,7 +88,7 @@
 </style>
 
 <%--change it to color sytle by steven--%>
-<div style="overflow:hidden">
+<div style="overflow: hidden">
 
 
     <div style="display: inline-table; font-family: 'Source Sans Pro'; margin-left: 19px; margin-top: 15px;">
@@ -125,19 +122,19 @@
     </div>
     <%------end------%>
 
-    <table style="width: 100%; vertical-align: top;height: 700px; margin-top: -21px; margin-left: 35px;">
+    <table style="width: 100%; vertical-align: top; height: 700px; margin-top: -21px; margin-left: 35px;">
         <tr style="height: 240px">
             <td style="width: 380px; vertical-align: top" class="under_line">
-                 <%--add image by steven--%>
+                <%--add image by steven--%>
                 <%--ments--%>
                 <h4>
-                   <img src="../images/grid_upcoming_icon.png" class="vertical-img"><span class="heading_text">Upcoming Appointments</span></h4>
+                    <img src="../images/grid_upcoming_icon.png" class="vertical-img"><span class="heading_text">Upcoming Appointments</span></h4>
                 <div class="div-underline">
                     <dx:ASPxGridView runat="server" Width="100%" ID="gridAppointment" ClientInstanceName="gridAppointmentClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" SettingsPager-PageSize="5">
                         <Columns>
                             <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                 <DataItemTemplate>
-                                     <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Task", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName")) %>  </div>
+                                    <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Task", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName")) %>  </div>
 
                                 </DataItemTemplate>
                             </dx:GridViewDataTextColumn>
@@ -185,7 +182,7 @@
                     </dx:ASPxGridView>
                 </div>
             </td>
-             <%--fix the disteance between the two grid by steven--%>
+            <%--fix the disteance between the two grid by steven--%>
             <td rowspan="2" style="width: 50px"></td>
             <td style="width: 380px; vertical-align: top" class="under_line ">
                 <%--add icon by steven--%>
@@ -193,7 +190,7 @@
                     <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Priority</span>
                 </h4>
                 <div class="div-underline">
-                    <dx:ASPxGridView runat="server" Width="100%" ID="gridPriority" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px"  SettingsPager-PageSize="5">
+                    <dx:ASPxGridView runat="server" Width="100%" ID="gridPriority" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="5">
                         <Columns>
                             <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                 <DataItemTemplate>
@@ -217,7 +214,7 @@
             </td>
             <td rowspan="2" style="width: 50px"></td>
             <td rowspan="2" style="vertical-align: top;" class="auto-style1 ">
-               <h4>
+                <h4>
                     <img src="../images/grid_calendar.png" class="vertical-img" /><span class="heading_text">Today's Calendar</span></h4>
                 <div style="border: 1px solid #efefef; height: 615px">
                     <dx:ASPxScheduler ID="todayScheduler" runat="server" Width="100%" ActiveViewType="Day"
@@ -266,11 +263,11 @@
 
             </td>
             <td rowspan="2" style="width: 50px"></td>
-            <td rowspan="2" >
+            <td rowspan="2">
                 <%--<div class="Header" style="width: 90%; text-align: center; left: 20px;">
                     <%= Quote%>
                 </div>--%>
-                <div style="width:290px;height:95%;background:#EFF2F5;visibility:hidden;">
+                <div style="width: 290px; height: 100%; background: #EFF2F5;">
                     <%--/*the showlder box*--%>
                     <div style="width: 30px; height: 100%; float: left; position: relative; left: 0px; top: 0px; box-shadow: inset 20px -10px 13px -15px rgba(2, 2, 2, 0.3);"></div>
                     <div style="width: 100%; height: 100%;">
@@ -282,7 +279,7 @@
                         <div style="background: #f53e0d; color: white; height: 270px;">
                             <div style="margin-left: 30px; margin-right: 15px;">
                                 <h2 style="font-size: 30px; font-weight: 400; margin: 0px; padding-top: 35px; padding-bottom: 35px;">Just An Idea</h2>
-                                <div style="font-size: 14px;line-height: 24px;background:transparent !important;margin-bottom:0px">
+                                <div style="font-size: 14px; line-height: 24px; background: transparent !important; margin-bottom: 0px">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales vel orci volutpat fringilla.
                                 </div>
                                 <div style="padding-top: 40px;">
@@ -291,7 +288,7 @@
                             </div>
 
                         </div>
-                        <div style="margin-top: 10px;font-size:18px">
+                        <div style="margin-top: 10px; font-size: 18px">
                             <lu>
                             <li  class="right_palne_menu" >
                             Note Tile1
@@ -363,11 +360,11 @@
                 </div>
             </td>
             <td style="vertical-align: top" class="under_line">
-               <%--add icon by steven--%>
+                <%--add icon by steven--%>
                 <h4>
                     <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Call Backs</span> </h4>
                 <%--------end-------%>
-               <div class="div-underline">
+                <div class="div-underline">
                     <dx:ASPxGridView runat="server" Width="100%" ID="gridCallback" ClientInstanceName="gridCallbackClient" KeyFieldName="BBLE" AutoGenerateColumns="false" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="5">
                         <Columns>
                             <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1" CellStyle-CssClass="cell_hover">
