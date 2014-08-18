@@ -35,7 +35,7 @@
                 <div id="default-example" data-collapse="">
                     <h3 class="doc_list_title  open color_balck"><%# Eval("Key")%> &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>
                     <div>
-                       
+
                         <%--<h4><%# Eval("Key")%></h4>--%>
                         <asp:Repeater runat="server" ID="rptFiles">
 
@@ -43,15 +43,19 @@
                                 <%--                <tr onclick="PreviewDocument('<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>', '<%# Eval("ContentType")%>');" style="cursor:pointer" onmouseover="this.bgColor = '#D1DEFB';" onmouseout="this.bgColor = '';">--%>
 
                                 <div class="clearfix">
-                                    <input type="checkbox" name="vehicle" value="Bike" id="doc_list_id1" />
-                                    <label class="doc_list_checks check_margin" for="doc_list_id1">
-                                        <span class="color_balck"><dx:ASPxHyperLink runat="server" NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>' Text='<%# Eval("Name")%>' Target="_blank"></dx:ASPxHyperLink>  </span>(Financials)
-                                                        <span class="checks_data_text">  <dx:ASPxLabel runat="server" Text='<%# String.Format("{0:g}", Eval("CreateDate")) %>'></dx:ASPxLabel></span>
+                                    <input type="checkbox" name="vehicle" value="Bike" id="<%# String.Format("doc_list_id_{0}", Eval("FileID"))%>" />
+                                    <label class="doc_list_checks check_margin" for='<%# String.Format("doc_list_id_{0}", Eval("FileID"))%>'>
+                                        <span class="color_balck">
+                                            <dx:ASPxHyperLink runat="server" NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>' Text='<%# Eval("Name")%>' Target="_blank"></dx:ASPxHyperLink>
+                                        </span>(Financials)
+                                                        <span class="checks_data_text">
+                                                            <dx:ASPxLabel runat="server" Text='<%# String.Format("{0:g}", Eval("CreateDate")) %>'></dx:ASPxLabel>
+                                                        </span>
 
                                     </label>
                                 </div>
-                               <%-- onclick="window.open('/pdfViewer/web/viewer.html?file=' + encodeURIComponent('<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))  %>'), '_blank');"--%>
-                               <%-- <tr>
+                                <%-- onclick="window.open('/pdfViewer/web/viewer.html?file=' + encodeURIComponent('<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))  %>'), '_blank');"--%>
+                                <%-- <tr>
                                     <td style="width: 20px;">
                                         <dx:ASPxCheckBox runat="server"></dx:ASPxCheckBox>
                                     </td>
@@ -64,9 +68,6 @@
                                     </td>
                                 </tr>--%>
                             </ItemTemplate>
-                            <FooterTemplate>
-                                </table>
-                            </FooterTemplate>
                         </asp:Repeater>
 
                     </div>
