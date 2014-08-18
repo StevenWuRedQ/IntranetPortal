@@ -415,15 +415,7 @@
             <span style="color: #234b60; font-size: 30px;">
                 <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" Font-Bold="true" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
             </span>
-            <i class="fa fa-sort-amount-desc icon_right_s" onclick="SortLeadsList"></i>
-        </div>
-
-        <div style="float: right; font-size: 30px;">
-            <%--<asp:LinkButton ID="LinkButton1" runat="server">LinkButton</asp:LinkButton>--%>
-            <%--  <dx:ASPxHyperLink runat="server" ID="btnSort" Text='<i class="fa fa-sort-amount-desc"></i>'  Cursor="pointer">
-                <ClientSideEvents Click="SortLeadsList" />
-                
-            </dx:ASPxHyperLink>--%>
+            <i class="fa fa-sort-amount-desc icon_right_s" style="cursor:pointer" onclick="SortLeadsList"></i>
         </div>
     </div>
     <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
@@ -900,6 +892,6 @@
     <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
         <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
     </dx:ASPxCallback>
-
+    
 </div>
 

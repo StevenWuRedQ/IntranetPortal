@@ -390,7 +390,7 @@
                                             <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
                                         </div>
 
-                                      <%--  <div id="divLeftContent" style="width: 100%; height: 100%; float: left">
+                                        <%--  <div id="divLeftContent" style="width: 100%; height: 100%; float: left">
                                             <div style="text-align: right; float: right; margin-bottom: -21px; z-index: 100; margin-right: 15px; position: relative;">
                                                 <dx:ASPxButton Text="Schedule" UseSubmitBehavior="false" FocusRectPaddings-PaddingLeft="0" FocusRectPaddings-PaddingRight="0" Paddings-PaddingLeft="0" Paddings-PaddingRight="0" ID="ASPxButton2" Image-Url="/images/upcomming.jpg" AutoPostBack="false" Image-Width="16px" Image-Height="16px" runat="server">
                                                     <FocusRectPaddings PaddingLeft="2" PaddingRight="2" />
@@ -575,7 +575,9 @@
                                                 </dx:PopupControlContentControl>
                                             </ContentCollection>
                                         </dx:ASPxPopupControl>
+
                                     </dx:SplitterContentControl>
+
                                 </ContentCollection>
                             </dx:SplitterPane>
                         </Panes>
@@ -618,8 +620,32 @@
                     </dx:PopupControlContentControl>
                 </ContentCollection>
             </dx:ASPxPopupControl>
+            <%--now is woring place--%>
+            <div style="position: absolute; bottom: 0; padding-left: 32px; margin-bottom: 100px">
+
+                <div style="position: relative; float: left">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="priority_info_label priority_info_lable_org">
+                                        <span class="font_black">1,796 </span><span class="font_extra_light">Leads</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="priority_info_label priority_info_label_blue" style="float: left; margin-left: 5px;">
+                                        <span class="font_black">0 </span><span class="font_extra_light">Deals</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
         </dx:PanelContent>
     </PanelCollection>
     <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>
     <Border BorderStyle="None"></Border>
+
 </dx:ASPxCallbackPanel>

@@ -158,24 +158,6 @@ Partial Public Class LeadsInfo1
     Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
 
     '''<summary>
-    '''ASPxButton2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''btnCallBack control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnCallBack As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
     '''leadStatusCallback control.
     '''</summary>
     '''<remarks>
