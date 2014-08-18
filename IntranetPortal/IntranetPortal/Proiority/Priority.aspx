@@ -657,7 +657,6 @@
                                     <%--left side--%>
                                     <div style="width: 330px; float: left" class="border_right">
 
-
                                         <div class="doc_list_section">
                                             <div id="default-example" data-collapse="">
                                                 <h3 class="doc_list_title  open color_balck">Helpful Docs &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>

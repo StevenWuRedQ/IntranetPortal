@@ -59,6 +59,11 @@
                 theme: "minimal-dark"
             }
          );
+        $("#ctl00_MainContentPH_ASPxSplitter1_LeadsInfo_ASPxCallbackPanel2_contentSplitter_ownerInfoCallbackPanel").mCustomScrollbar(
+            {
+                theme: "minimal-dark"
+            }
+         );
     }
 
     var mapContentframeID = "MapContent";

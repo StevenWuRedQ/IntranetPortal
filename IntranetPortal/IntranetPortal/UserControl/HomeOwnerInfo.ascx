@@ -30,7 +30,7 @@
     <% If TLOLocateReport IsNot Nothing Then%>
     <table style="list-style: none; margin-left: 5px; padding-left: 0px;">
         <tr>
-            <td>
+            <td class="border_under_line">
                 <div class="form_div_node form_div_no_float" style="width: 100%">
                     <span class="form_input_title">age</span>
 
@@ -41,15 +41,6 @@
                     <%  End If%>">
                 </div>
             </td>
-
-            <%--<td style="width: 100px;">Age:</td>
-            <td>
-                <% If TLOLocateReport.dateOfBirthField IsNot Nothing Then%>
-                <% = TLOLocateReport.dateOfBirthField.currentAgeField%>
-                <% Else%>
-                <%= "Unknow" %>
-                <%  End If%> 
-            </td>--%>
         </tr>
         <tr>
             <td>
@@ -60,8 +51,7 @@
                 </div>
             </td>
 
-            <%--<td>Death Indicator:</td>
-            <td><%= IIf(TLOLocateReport.dateOfDeathField Is Nothing, "Alive", "Death")%></td>--%>
+
         </tr>
         <tr>
             <td>
@@ -73,9 +63,7 @@
                     </div>
                 </div>
             </td>
-            <%--<td>Bankruptcy:</td>
-            <td><%= TLOLocateReport.numberOfBankruptciesField > 0%>               
-            </td>--%>
+
         </tr>
     </table>
 
@@ -102,14 +90,7 @@
             </div>
         </div>
     </div>
-    <%-- <h5>Possible Employer Info</h5>
-    <ul>
-        <% For Each item In TLOLocateReport.employersField%>
-        <%If Not String.IsNullOrEmpty(item.businessNameField) Then%>
-        <li><%= item.businessNameField%></li>
-        <%End If%>
-        <% Next%>
-    </ul>--%>
+
     <%End If%>
 
     <!-- Email info -->
@@ -135,14 +116,7 @@
             </div>
         </div>
     </div>
-    <%--<h5>Best Emails</h5>
-    <ul style="list-style: none; margin-left: 5px; padding-left: 0px; margin-top: 0px;">
-        <% For Each email In TLOLocateReport.emailAddressesField%>
-        <% If Not String.IsNullOrEmpty(email) Then%>
-        <li><%= email %></li>
-        <%End If%>
-        <% Next%>
-    </ul>--%>
+
     <%End If%>
 
     <!--Best Phone info -->
@@ -158,11 +132,11 @@
                     <% If phone IsNot Nothing Then%>
 
                     <div class="color_gray filed_margin_top clearfix">
-                        <i class="fa fa-phone homeowner_info_icon"></i>
 
                         <div class="form_div_node homeowner_info_text">
+                            <i class="fa fa-phone homeowner_info_icon"></i>
                             <div class="color_blue">
-                                <a href='#' onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>><%=FormatPhoneNumber(phone.Phone).ToString.Split("(ET)")(0)%></a>
+                                <a href='#' onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>><%=FormatPhoneNumber(phone.Phone)%></a>
                             </div>
                             <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                 (ET) <%=FormatPhoneNumber(phone.Phone).ToString.Split("(ET)")(1)%>
@@ -173,15 +147,18 @@
                     <% Next%>
                     <% For Each phone In TLOLocateReport.phonesField%>
                     <% If phone IsNot Nothing Then%>
-                    <div class="form_div_node homeowner_info_text">
-                        <div class="color_blue">
-                            <a href='#' onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
-                                <%= BuilderPhone(phone).ToString.Split("(ET)")(0)%>
 
-                            </a>
-                        </div>
-                        <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                            (ET)  <%= BuilderPhone(phone).ToString.Split("(ET)")(1)%>
+                    <div class="color_gray clearfix">
+                        <i class="fa fa-phone homeowner_info_icon"></i>
+                        <div class="form_div_node homeowner_info_text ">
+                            <div>
+                                <a href='#' onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
+                                    <%= FormatPhoneNumber(phone.phoneField)%>
+                                </a>
+                            </div>
+                            <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
+                                (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
+                            </div>
                         </div>
                     </div>
                     <% End If%>
@@ -191,29 +168,8 @@
             </div>
 
         </div>
-
     </div>
 
-    <%--<h5 style="clear: both;">Best Phone Numbers <a href="#" onclick="<%= String.Format("AddBestPhoneNum('{0}','{1}','{2}', this)", BBLE, OwnerName, ulBestPhones.ClientID)%>">
-        <img src="/images/add-button-hi.png" width="16" height="16" /></a></h5>--%>
-    <%-- <ul style="list-style: none; margin-left: 5px; padding-left: 0px; margin-top: 0px;" runat="server" id="ulBestPhones">
-        <% For Each phone In BestNums%>
-        <% If phone IsNot Nothing Then%>
-        <li>
-        <a href='#' onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>><%=FormatPhoneNumber(phone.Phone)%></a>
-        </li>
-        <% End If%>
-        <% Next%>
-
-        <% For Each phone In TLOLocateReport.phonesField%>
-        <% If phone IsNot Nothing Then%>
-        <li>
-        <a href='#' onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
-        <%= BuilderPhone(phone)%></a>
-        </li>
-        <% End If%>
-        <% Next%>
-    </ul>--%>
     <%End If%>
 
     <!--Best Mail Address info -->
@@ -289,20 +245,20 @@
                             <div class="form_div_node homeowner_info_text ">
 
                                 <div class="color_blue">
-                                    <%= BuilderPhone(phone) %>
+                                    <%= FormatPhoneNumber(phone.phoneField) %>
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                                    (ET) ActiveLandLine (100%)
+                                    (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
                                 </div>
                             </div>
                         </div>
                         <% Next%>
                         <% End If%>
                         <% Next%>
-                      
+
 
                         <div>
-                            <span class="time_buttons more_buttom"><a href="#" style="color:white" onclick="document.getElementById('<%= divRelatives.ClientID%>').style.display='block';">Load More Info</a>
+                            <span class="time_buttons more_buttom"><a href="#" style="color: white" onclick="document.getElementById('<%= divRelatives.ClientID%>').style.display='block';">Load More Info</a>
                             </span>
                         </div>
                     </div>
@@ -313,59 +269,100 @@
         </div>
 
     </div>
-    <%-- <h5>First Degree Relatives</h5>
-    (<a href="#" onclick="document.getElementById('<%= divRelatives.ClientID%>').style.display='block';">More Info</a>)  
-    <ul style="list-style: none; margin-left: 5px; padding-left: 0px; margin-top: 0px;">
-        <% For Each relative In TLOLocateReport.relatives1stDegreeField%>
-        <li><%= BuilderRelativeName(relative) %>
-            <% If relative.phonesField.Length > 0 Then%>
-            <ul>
-                <% For Each phone In relative.phonesField%>
-                <li><a href='#' onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>><%= BuilderPhone(phone) %></a></li>
-                <%Next%>
-            </ul>
-            <% End If%>
-        </li>
-        <% Next%>
-    </ul>--%>
+
 
     <div id="divRelatives" runat="server" style="display: none;">
-        <% If TLOLocateReport.numberOfRelatives3rdDegreeField = 0 AndAlso TLOLocateReport.numberOfRelatives2ndDegreeField = 0 Then%>
-            No more info to display.
-        <%  End If%>
+        <div>
+            <div class="form_head homeowner_section_margin">
+                <span>Second Degree Relatives &nbsp;</span>
+            </div>
+            <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
+                <i class="fa fa-chain color_gray homeowner_info_icon"></i>
+                <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
+                    <span class="font_black color_balck font_black upcase_text">Kang, Boon Chang</span><br />
+                    <span style="font-size: 14px">Age <span class="color_balck">74</span></span>
+                </div>
 
-        <% If TLOLocateReport.numberOfRelatives2ndDegreeField > 0 Then%>
-        <h5>Second Degree Relatives</h5>
-        <ul style="list-style: none; margin-left: 5px; padding-left: 0px; margin-top: 0px;">
-            <% For Each relative In TLOLocateReport.relatives2ndDegreeField%>
-            <li><%=BuilderRelativeName(relative)%>
-                <% If relative.phonesField.Length > 0 Then%>
-                <ul>
-                    <% For Each phone In relative.phonesField%>
-                    <li><a href='#' onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>><%= BuilderPhone(phone) %></a></li>
-                    <%Next%>
-                </ul>
-                <% End If%>
-            </li>
-            <% Next%>
-        </ul>
-        <% End If%>
+            </div>
+            <div class="homeowner_expanll_border" style="margin-left: 20px">
+                <div>
+                    <div class="clearfix homeowner_info_label" style="margin-left: 17px;">
+                        <div>
+                            <% For Each relative In TLOLocateReport.relatives2ndDegreeField%>
+                            <%= BuilderRelativeName(relative) %>
+                            <% If relative.phonesField.Length > 0 Then%>
+                            <% For Each phone In relative.phonesField%>
+                            <div class="color_gray clearfix">
+                                <i class="fa fa-phone homeowner_info_icon"></i>
+                                <div class="form_div_node homeowner_info_text ">
+
+                                    <div class="color_blue">
+                                        <%= FormatPhoneNumber(phone.phoneField) %>
+                                    </div>
+                                    <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
+                                        (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
+                                    </div>
+                                </div>
+                            </div>
+                            <% Next%>
+                            <% End If%>
+                            <% Next%>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
 
         <% If TLOLocateReport.numberOfRelatives3rdDegreeField > 0 Then%>
-        <h5>Third Degree Relatives</h5>
-        <ul style="list-style: none; margin-left: 5px; padding-left: 0px; margin-top: 0px;">
-            <% For Each relative In TLOLocateReport.relatives3rdDegreeField%>
-            <li><%= BuilderRelativeName(relative)%>
-                <% If relative.phonesField.Length > 0 Then%>
-                <ul>
-                    <% For Each phone In relative.phonesField%>
-                    <li><a href='#' onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>><%= BuilderPhone(phone) %></a></li>
-                    <%Next%>
-                </ul>
-                <% End If%>
-            </li>
-            <% Next%>
-        </ul>
+
+        <div>
+            <div class="form_head homeowner_section_margin">
+                <span>Third Degree Relatives &nbsp;</span>
+            </div>
+            <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
+                <i class="fa fa-chain color_gray homeowner_info_icon"></i>
+                <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
+                    <span class="font_black color_balck font_black upcase_text">Kang, Boon Chang</span><br />
+                    <span style="font-size: 14px">Age <span class="color_balck">74</span></span>
+                </div>
+
+            </div>
+            <div class="homeowner_expanll_border" style="margin-left: 20px">
+                <div>
+                    <div class="clearfix homeowner_info_label" style="margin-left: 17px;">
+                        <div>
+                            <% For Each relative In TLOLocateReport.relatives3rdDegreeField%>
+                            <%= BuilderRelativeName(relative) %>
+                            <% If relative.phonesField.Length > 0 Then%>
+                            <% For Each phone In relative.phonesField%>
+                            <div class="color_gray clearfix">
+                                <i class="fa fa-phone homeowner_info_icon"></i>
+                                <div class="form_div_node homeowner_info_text ">
+
+                                    <div class="color_blue">
+                                        <%= FormatPhoneNumber(phone.phoneField) %>
+                                    </div>
+                                    <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
+                                        (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
+                                    </div>
+                                </div>
+                            </div>
+                            <% Next%>
+                            <% End If%>
+                            <% Next%>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
         <% End If%>
     </div>
 

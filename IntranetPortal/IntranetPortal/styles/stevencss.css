@@ -1211,7 +1211,10 @@ li.active {
 activity_button {
     color: #7396a9;
 }
-
+#ASPxSplitter1_LeadsInfo_ASPxCallbackPanel2_contentSplitter_ActivityLogs_gridTracking_DXHeadersRow0
+{
+    background:#F5F5F5 !important;
+}
 .acitivty_short_button {
     width: 32px;
     height: 32px;
