@@ -283,6 +283,13 @@
       <DependentUpon>Calendar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Content.Master.designer.vb">
+      <DependentUpon>Content.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Content.Master.vb">
+      <DependentUpon>Content.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="DataAPITesting.aspx.designer.vb">
       <DependentUpon>DataAPITesting.aspx</DependentUpon>
     </Compile>
@@ -1358,6 +1365,7 @@
     <Content Include="scripts\globalize\cultures\globalize.culture.zu.js" />
     <Content Include="scripts\globalize\cultures\globalize.cultures.js" />
     <Content Include="scripts\globalize\globalize.js" />
+    <Content Include="Content.Master" />
     <None Include="scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />

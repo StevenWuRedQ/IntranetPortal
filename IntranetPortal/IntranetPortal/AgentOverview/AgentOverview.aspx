@@ -1,42 +1,10 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="AgentOverview.aspx.vb" Inherits="IntranetPortal.AgentOverview" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="AgentOverview.aspx.vb" Inherits="IntranetPortal.AgentOverview" MasterPageFile="~/Content.Master" %>
 
 <%@ Register Src="~/AgentOverview/AgentCharts.ascx" TagPrefix="uc1" TagName="AgentCharts" %>
 
 
-<%--<%@ Register Assembly="DevExtreme.WebForms.v14.1, Version=14.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExtreme.WebForms" TagPrefix="devextreme" %>--%>
-
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
-    <link href="../styles/stevencss.css" rel='stylesheet' type='text/css' />
-    <link href="../css/font-awesome.css" type="text/css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap-tooltip.js"></script>
-
-    <script src="../scripts/Chart.js"></script>
-    <link rel="stylesheet" href="../scrollbar/jquery.mCustomScrollbar.css" />
-    <%-- <style>
-        #draggable_field2
-        {
-            width:100px;
-            height:30px;
-        }
-    </style>--%>
-    <style>
-        canvas {
-        }
-    </style>
-    <script type="text/javascript">
+<asp:Content ContentPlaceHolderID="head" runat="server">
+ <script type="text/javascript">
 
         var empId = null;
 
@@ -147,12 +115,12 @@
         }
 
     </script>
-</head>
-<body style="font: 12px 'Source Sans Pro'" id="test">
-    <form id="form1" runat="server">
-        <%--test drag--%>
-        <%--<div id="draggable_field2">drap</div>--%>
-        <%--angent overview ui--%>
+</asp:Content>
+
+<asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
+
+
+
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" FullscreenMode="true">
             <Styles>
                 <Pane Paddings-Padding="0">
@@ -625,8 +593,7 @@
                 </dx:SplitterPane>
             </Panes>
         </dx:ASPxSplitter>
-    </form>
-
+   
     <!-- custom scrollbar plugin -->
 
     <script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -663,5 +630,6 @@
         empId = '<%= CurrentEmployee.EmployeeID %>';
     </script>
     <%-----------end-------%>
-</body>
-</html>
+</asp:Content>
+
+
