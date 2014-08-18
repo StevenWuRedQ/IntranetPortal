@@ -94,6 +94,6 @@ Public Class TroubleShooting
 
     Protected Sub ASPxButton1_Click(sender As Object, e As EventArgs) Handles ASPxButton1.Click
         Dim bble = txtBble.Text
-        DataWCFService.UpdateHomeOwner(bble, 1)
+        DataWCFService.UpdateHomeOwner(bble, 12354)
     End Sub
 End Class

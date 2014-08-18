@@ -418,7 +418,6 @@
                                                     </div>
                                                     <%-----end chart ui-----%>
                                                 </div>
-
                                             </dx:SplitterContentControl>
                                         </ContentCollection>
                                     </dx:SplitterPane>

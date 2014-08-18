@@ -271,6 +271,7 @@
     <Compile Include="CodeFolder\OwnerContact.vb" />
     <Compile Include="CodeFolder\PortalLisPen.vb" />
     <Compile Include="CodeFolder\PortalMembership.vb" />
+    <Compile Include="CodeFolder\PortalNavItem.vb" />
     <Compile Include="CodeFolder\PortalRoleProvider.vb" />
     <Compile Include="CodeFolder\UserAppointment.vb" />
     <Compile Include="CodeFolder\UserMessage.vb" />
@@ -795,6 +796,13 @@
     </Compile>
     <Compile Include="UserControl\LeadsSubMenu.ascx.vb">
       <DependentUpon>LeadsSubMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControl\NavMenu.ascx.designer.vb">
+      <DependentUpon>NavMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\NavMenu.ascx.vb">
+      <DependentUpon>NavMenu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\PropertyInfo.ascx.designer.vb">
@@ -1475,6 +1483,7 @@
     <Content Include="UserControl\LeadsList.ascx" />
     <Content Include="UserControl\LeadsStatisticSummary.ascx" />
     <Content Include="UserControl\LeadsSubMenu.ascx" />
+    <Content Include="UserControl\NavMenu.ascx" />
     <Content Include="UserControl\PropertyInfo.ascx" />
     <Content Include="UserControl\UserSummary.ascx" />
     <Content Include="ViewLeadsInfo.aspx" />

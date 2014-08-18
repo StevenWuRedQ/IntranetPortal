@@ -277,8 +277,8 @@
                 <label for="sex" class="font_12">
                     <span class="upcase_text">Internal update</span>
                 </label>
-                <input type="radio" id="sexf" name="sex" value="FHA" class="font_12" />
-                <label for="sexf" class="font_12">
+                <input type="radio" id="sexf11" name="sex" value="FHA" class="font_12" />
+                <label for="sexf11" class="font_12">
                     <span class="upcase_text">Public update</span>
                 </label>
             </div>

@@ -23,6 +23,15 @@ Partial Public Class UserSummary
     Protected WithEvents LeadsSubMenu As Global.IntranetPortal.LeadsSubMenu
 
     '''<summary>
+    '''contentSplitter control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+
+    '''<summary>
     '''gridAppointment control.
     '''</summary>
     '''<remarks>

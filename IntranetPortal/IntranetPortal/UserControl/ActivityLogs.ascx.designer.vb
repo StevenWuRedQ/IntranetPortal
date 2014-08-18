@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class ActivityLogs
 
     '''<summary>
-    '''pageActivitylog control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pageActivitylog As Global.DevExpress.Web.ASPxTabControl.ASPxPageControl
-
-    '''<summary>
     '''popupFilters control.
     '''</summary>
     '''<remarks>
@@ -246,13 +237,4 @@ Partial Public Class ActivityLogs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''formLayoutActivityLog control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents formLayoutActivityLog As Global.DevExpress.Web.ASPxFormLayout.ASPxFormLayout
 End Class
