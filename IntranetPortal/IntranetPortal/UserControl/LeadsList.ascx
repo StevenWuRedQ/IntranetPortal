@@ -25,10 +25,8 @@
     }
 
     var IsAddNewLead = false;
-    function OnGridLeadsEndCallback(s, e)
-    {
-        if(IsAddNewLead)
-        {
+    function OnGridLeadsEndCallback(s, e) {
+        if (IsAddNewLead) {
             IsAddNewLead = false;
             OnGridFocusedRowChanged();
         }
@@ -48,7 +46,7 @@
         if (postponedCallbackRequired) {
             gridLeads.GetRowValues(gridLeads.GetFocusedRowIndex(), 'BBLE', OnGetRowValues);
             postponedCallbackRequired = false;
-        }  
+        }
         $("#prioity_content").mCustomScrollbar(
                {
                    theme: "minimal-dark"
@@ -79,7 +77,7 @@
             mapWin.RemoveAddress(bble);
         }
     }
-    
+
     var tmpBBLE = null;
     function ShowCateMenu(s, bble) {
         ASPxPopupMenuCategory.Hide();
@@ -195,8 +193,7 @@
         }
 
         if (e.tab.index == 3) {
-            if (tmpBBLE != null)
-            {
+            if (tmpBBLE != null) {
                 var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + tmpBBLE;
                 window.open(url, "_blank");
             }
@@ -319,9 +316,9 @@
     function SearchGridLeads() {
         var filterCondition = "";
         var key = txtkeyWordClient.GetText();
-       
+
         filterCondition = "[LeadsName] LIKE '%" + key + "%' OR [Neighborhood] LIKE '%" + key + "%'";
-        filterCondition += " OR [EmployeeName] LIKE '%" + key + "%'";        
+        filterCondition += " OR [EmployeeName] LIKE '%" + key + "%'";
         gridLeads.PerformCallback("Search|" + key);
         //gridLeads.ApplyFilter(filterCondition);
     }
@@ -370,11 +367,10 @@
     function OnBoroughChanged(cbBorough) {
         if (cbStreetlookupClient.InCallback())
             lastBorough = cbBorough.GetValue().toString();
-        else
-        {
+        else {
             loadedBorough = cbBorough.GetValue().toString();
             cbStreetlookupClient.PerformCallback(loadedBorough);
-        }            
+        }
     }
 
     function OnStreetlookupEndCallback(s, e) {
@@ -385,34 +381,49 @@
         }
     }
 
-    function SortLeadsList(s, e)
-    {
+    function SortLeadsList(s, e) {
         var sort = s.GetText();
 
-        if (sort == "Newest")
-        {
+        if (sort == "Newest") {
             s.SetText('Oldest');
             gridLeads.SortBy("LastUpdate", "ASC");
         }
-        else
-        {
-            if(sort == "Oldest")
-            {
+        else {
+            if (sort == "Oldest") {
                 s.SetText("Newest");
                 gridLeads.SortBy("LastUpdate", "DSC");
             }
         }
     }
+    $(document).ready(function () {
+        // Handler for .ready() called.
+        $("#leads_list_left").mCustomScrollbar(
+            {
+                theme: "minimal-dark"
+            }
+        );
+    });
+
+
     // ]]> 
 </script>
 
-<div style="width: 100%; height: 100%; border: 1px solid gray; border-bottom: 1px solid gray; overflow-y: scroll;">
-    <div style="background-color: #efefef; border-bottom: 1px solid gray; text-align: left; padding-left: 5px">
-        <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" Font-Bold="true" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
-        <div style="float:right">
-            <dx:ASPxHyperLink runat="server" ID="btnSort" Text="Newest" Cursor="pointer">
+<div style="width: 100%; height: 100%; overflow-y: scroll;" id="leads_list_left" class="color_gray">
+    <div style="margin: 30px 20px 30px 0px; text-align: left; padding-left: 5px" class="clearfix">
+        <div style="font-size: 24px;">
+            <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;&nbsp;
+            <span style="color: #234b60; font-size: 30px;">
+                <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" Font-Bold="true" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
+            </span>
+            <i class="fa fa-sort-amount-desc icon_right_s" onclick="SortLeadsList"></i>
+        </div>
+
+        <div style="float: right; font-size: 30px;">
+            <%--<asp:LinkButton ID="LinkButton1" runat="server">LinkButton</asp:LinkButton>--%>
+            <%--  <dx:ASPxHyperLink runat="server" ID="btnSort" Text='<i class="fa fa-sort-amount-desc"></i>'  Cursor="pointer">
                 <ClientSideEvents Click="SortLeadsList" />
-            </dx:ASPxHyperLink>
+                
+            </dx:ASPxHyperLink>--%>
         </div>
     </div>
     <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
@@ -430,19 +441,20 @@
                 </GroupRowTemplate>--%>
             </dx:GridViewDataTextColumn>
             <dx:GridViewDataColumn FieldName="Neighborhood" Visible="false" VisibleIndex="3">
-               <%-- <GroupRowTemplate>
+                <%-- <GroupRowTemplate>
                     Neighborhood: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
                 </GroupRowTemplate>--%>
             </dx:GridViewDataColumn>
-            <dx:GridViewDataColumn FieldName="EmployeeName" Visible="false" VisibleIndex="4">                
-               <%-- <GroupRowTemplate>
+            <dx:GridViewDataColumn FieldName="EmployeeName" Visible="false" VisibleIndex="4">
+                <%-- <GroupRowTemplate>
                     Employee Name: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
                 </GroupRowTemplate>--%>
             </dx:GridViewDataColumn>
             <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false" VisibleIndex="5"></dx:GridViewDataColumn>
             <dx:GridViewDataColumn Width="25px" VisibleIndex="6">
                 <DataItemTemplate>
-                    <img src="/images/flag1.png" style="width: 16px; height: 16px; vertical-align: bottom" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>" />
+                    <i class="fa fa-list-alt employee_list_item_icon" style="vertical-align: bottom" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>"></i>
+                    <%-- <img src="/images/flag1.png" style="width: 16px; height: 16px; vertical-align: bottom" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>" />--%>
                 </DataItemTemplate>
             </dx:GridViewDataColumn>
         </Columns>
@@ -687,9 +699,9 @@
             <Row Cursor="pointer" />
             <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
         </Styles>
-        <GroupSummary>                        
+        <GroupSummary>
             <dx:ASPxSummaryItem FieldName="LeadsName" SummaryType="Count" />
-        </GroupSummary>        
+        </GroupSummary>
         <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" EndCallback="OnGridLeadsEndCallback" />
         <Border BorderStyle="None"></Border>
     </dx:ASPxGridView>
@@ -726,7 +738,7 @@
             <dx:MenuItem GroupName="Sort" Text="Closed" Name="Closed" Image-Url="/images/Closed.png">
                 <Image Url="/images/Closed.png"></Image>
             </dx:MenuItem>
-             <dx:MenuItem GroupName="Sort" Text="Shared" Name="Shared">
+            <dx:MenuItem GroupName="Sort" Text="Shared" Name="Shared">
                 <Image IconID="actions_add_16x16"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="Delete" Name="Delete" Visible="false">
@@ -752,7 +764,7 @@
         runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
         <HeaderTemplate>
             <div>
-                <div style="float: right; position: relative; margin-right: 10px; margin-bottom:-27px;">
+                <div style="float: right; position: relative; margin-right: 10px; margin-bottom: -27px;">
                     <dx:ASPxImage ID="img" runat="server" ImageUrl="~/images/x_close.png" Height="15" Width="14" Cursor="pointer" AlternateText="[Close]">
                         <ClientSideEvents Click="function(s, e){
                         ASPxPopupMapControl.Hide();

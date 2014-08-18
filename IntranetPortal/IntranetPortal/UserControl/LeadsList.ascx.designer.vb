@@ -23,15 +23,6 @@ Partial Public Class LeadsList
     Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
-    '''btnSort control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSort As Global.DevExpress.Web.ASPxEditors.ASPxHyperLink
-
-    '''<summary>
     '''gridLeads control.
     '''</summary>
     '''<remarks>
