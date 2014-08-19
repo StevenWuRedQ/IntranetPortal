@@ -139,7 +139,7 @@
                                 <a href='#' onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>><%=FormatPhoneNumber(phone.Phone)%></a>
                             </div>
                             <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                                (ET) <%=FormatPhoneNumber(phone.Phone).ToString.Split("(ET)")(1)%>
+                                &nbsp;
                             </div>
                         </div>
                     </div>
