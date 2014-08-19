@@ -30,7 +30,7 @@
                             </dx:SplitterPane>
                         </Panes>
                     </dx:SplitterPane>
-                    <dx:SplitterPane Name="SummaryPanel" Size="18px" MinSize="1px" Separator-Visible="False" PaneStyle-Paddings-Padding="0px" CollapsedStyle-Border-BorderStyle="None" AutoHeight="false">
+                    <dx:SplitterPane Name="SummaryPanel" Size="0px" MinSize="1px" Separator-Visible="False" PaneStyle-Paddings-Padding="0px" CollapsedStyle-Border-BorderStyle="None" AutoHeight="false">
                         <Separator Visible="False"></Separator>
                         <PaneStyle>
                             <Border BorderStyle="None" />
@@ -41,7 +41,7 @@
                         </CollapsedStyle>
                         <ContentCollection>
                             <dx:SplitterContentControl>
-                                <uc1:LeadsStatisticSummary runat="server" ID="LeadsStatisticSummary" />
+                                <%--<uc1:LeadsStatisticSummary runat="server" ID="LeadsStatisticSummary" />--%>
                             </dx:SplitterContentControl>
                         </ContentCollection>
                     </dx:SplitterPane>

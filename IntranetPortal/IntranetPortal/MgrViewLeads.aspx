@@ -38,7 +38,7 @@
                     </CollapsedStyle>
                     <ContentCollection>
                         <dx:SplitterContentControl>
-                            <uc1:LeadsStatisticSummary runat="server" ID="LeadsStatisticSummary" />
+                            <%--<uc1:LeadsStatisticSummary runat="server" ID="LeadsStatisticSummary" />--%>
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>

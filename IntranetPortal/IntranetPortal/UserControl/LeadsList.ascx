@@ -403,11 +403,11 @@
             }
         );
     });
-    
+
     // ]]> 
 </script>
 <%--id="leads_list_left"--%>
-<div style="width: 100%; height: 960px; overflow:auto"  class="color_gray">
+<div style="width: 100%; height:100%;" class="color_gray">
     <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px" class="clearfix">
         <div style="font-size: 24px;" class="clearfix">
             <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;&nbsp;
@@ -417,287 +417,290 @@
             <i class="fa fa-sort-amount-desc icon_right_s" style="cursor: pointer" onclick="SortLeadsList"></i>
         </div>
     </div>
-    <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
-        <Columns>
-            <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
-            </dx:GridViewCommandColumn>
-            <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
-                <Settings AutoFilterCondition="Contains" />
-            </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn FieldName="CallbackDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">
-                <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
-                <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
-                <%--<GroupRowTemplate>
+    <div style="overflow: auto;height:800px;padding:0px 10px;" id="leads_list_left">
+        <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
+            <Columns>
+                <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
+                </dx:GridViewCommandColumn>
+                <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                    <Settings AutoFilterCondition="Contains" />
+                </dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="CallbackDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">
+                    <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
+                    <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
+                    <%--<GroupRowTemplate>
                     Date: <%# GroupText(Container.GroupText) & Container.SummaryText.Replace("Count=","")%>
                 </GroupRowTemplate>--%>
-            </dx:GridViewDataTextColumn>
-            <dx:GridViewDataColumn FieldName="Neighborhood" Visible="false" VisibleIndex="3">
-                <%-- <GroupRowTemplate>
+                </dx:GridViewDataTextColumn>
+                <dx:GridViewDataColumn FieldName="Neighborhood" Visible="false" VisibleIndex="3">
+                    <%-- <GroupRowTemplate>
                     Neighborhood: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
                 </GroupRowTemplate>--%>
-            </dx:GridViewDataColumn>
-            <dx:GridViewDataColumn FieldName="EmployeeName" Visible="false" VisibleIndex="4">
-                <%-- <GroupRowTemplate>
+                </dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="EmployeeName" Visible="false" VisibleIndex="4">
+                    <%-- <GroupRowTemplate>
                     Employee Name: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
                 </GroupRowTemplate>--%>
-            </dx:GridViewDataColumn>
-            <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false" VisibleIndex="5"></dx:GridViewDataColumn>
-            <dx:GridViewDataColumn Width="25px" VisibleIndex="6">
-                <DataItemTemplate>
-                    <i class="fa fa-list-alt employee_list_item_icon" style="vertical-align: bottom" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>"></i>
-                    <%-- <img src="/images/flag1.png" style="width: 16px; height: 16px; vertical-align: bottom" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>" />--%>
-                </DataItemTemplate>
-            </dx:GridViewDataColumn>
-        </Columns>
-        <Templates>
-            <EditForm>
-                <dx:ASPxPageControl Width="100%" EnableViewState="false" ID="pageControlNewLeads" ClientInstanceName="pageControlNewLeads"
-                    runat="server" ActiveTabIndex="0" TabSpacing="0px" EnableHierarchyRecreation="True" ShowTabs="false" OnCallback="pageControlNewLeads_Callback">
-                    <TabPages>
-                        <dx:TabPage Text="First" Name="tabStreet">
-                            <ContentCollection>
-                                <dx:ContentControl runat="server">
-                                    <table style="width: 490px; margin: 10px; border-spacing: 2px;">
-                                        <tr style="margin-bottom: 3px; height: 30px" hidden="hidden">
-                                            <td>BBLE</td>
-                                            <td>
-                                                <dx:ASPxTextBox ID="txtNewBBLE" runat="server" Width="100%" ClientInstanceName="txtNewBBLEClient"></dx:ASPxTextBox>
-                                            </td>
-                                        </tr>
-                                        <tr style="margin-bottom: 3px" hidden="hidden">
-                                            <td>Leads Name</td>
-                                            <td>
-                                                <dx:ASPxTextBox runat="server" ID="txtNewLeadsName" Width="100%" ClientInstanceName="txtNewLeadsName"></dx:ASPxTextBox>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <dx:ASPxPageControl Width="100%" EnableViewState="false" ID="pageControlInputData" Height="260px"
-                                                    runat="server" ActiveTabIndex="0" TabSpacing="3px" EnableHierarchyRecreation="True">
-                                                    <TabPages>
-                                                        <dx:TabPage Text="Address" Name="tabStreet">
-                                                            <ContentCollection>
-                                                                <dx:ContentControl runat="server">
-                                                                    <table style="width: 100%;">
-                                                                        <tr style="height: 30px">
-                                                                            <td>Borough:</td>
-                                                                            <td>
-                                                                                <dx:ASPxComboBox runat="server" ID="cbStreetBorough" ClientInstanceName="cbStreetBoroughClient" Width="100%">
-                                                                                    <Items>
-                                                                                        <dx:ListEditItem Text="Manhattan" Value="1" />
-                                                                                        <dx:ListEditItem Text="Bronx" Value="2" />
-                                                                                        <dx:ListEditItem Text="Brooklyn" Value="3" />
-                                                                                        <dx:ListEditItem Text="Queens" Value="4" />
-                                                                                        <dx:ListEditItem Text="Staten Island" Value="5" />
-                                                                                    </Items>
-                                                                                    <ClientSideEvents SelectedIndexChanged="function(s, e){ OnBoroughChanged(s); }" />
-                                                                                </dx:ASPxComboBox>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr style="margin-bottom: 3px; height: 30px">
-                                                                            <td>Number:</td>
-                                                                            <td>
-                                                                                <dx:ASPxTextBox runat="server" ID="txtHouseNum" Width="100%"></dx:ASPxTextBox>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr style="margin-bottom: 3px; height: 30px">
-                                                                            <td>Street:</td>
-                                                                            <td>
-                                                                                <dx:ASPxComboBox runat="server" Width="100%" ID="cbStreetlookup" ClientInstanceName="cbStreetlookupClient" DropDownStyle="DropDown" FilterMinLength="2" IncrementalFilteringMode="StartsWith" OnCallback="cbStreetlookup_Callback" TextField="st_name" ValueField="st_name" EnableCallbackMode="true" CallbackPageSize="10">
-                                                                                    <ClientSideEvents EndCallback="OnStreetlookupEndCallback" />
-                                                                                </dx:ASPxComboBox>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </dx:ContentControl>
-                                                            </ContentCollection>
-                                                        </dx:TabPage>
-                                                        <dx:TabPage Text="Legal" Name="tabLegal">
-                                                            <ContentCollection>
-                                                                <dx:ContentControl runat="server">
-                                                                    <table style="width: 100%;">
-                                                                        <tr style="height: 30px">
-                                                                            <td>Borough:</td>
-                                                                            <td>
-                                                                                <dx:ASPxComboBox runat="server" ID="cblegalBorough" Width="100%">
-                                                                                    <Items>
-                                                                                        <dx:ListEditItem Text="Manhattan" Value="1" />
-                                                                                        <dx:ListEditItem Text="Bronx" Value="2" />
-                                                                                        <dx:ListEditItem Text="Brooklyn" Value="3" />
-                                                                                        <dx:ListEditItem Text="Queens" Value="4" />
-                                                                                        <dx:ListEditItem Text="Staten Island" Value="5" />
-                                                                                    </Items>
-                                                                                </dx:ASPxComboBox>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr style="margin-bottom: 3px; height: 30px">
-                                                                            <td>Block:</td>
-                                                                            <td>
-                                                                                <dx:ASPxTextBox runat="server" ID="txtLegalBlock" Width="100%"></dx:ASPxTextBox>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr style="margin-bottom: 3px; height: 30px">
-                                                                            <td>Lot:</td>
-                                                                            <td>
-                                                                                <dx:ASPxTextBox runat="server" ID="txtLegalLot" Width="100%"></dx:ASPxTextBox>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </dx:ContentControl>
-                                                            </ContentCollection>
-                                                        </dx:TabPage>
-                                                        <dx:TabPage Text="Name" Name="tabName">
-                                                            <ContentCollection>
-                                                                <dx:ContentControl runat="server">
-                                                                    <table style="width: 100%;">
-                                                                        <tr style="height: 30px">
-                                                                            <td>Borough:</td>
-                                                                            <td>
-                                                                                <dx:ASPxComboBox runat="server" ID="cbNameBorough" Width="100%">
-                                                                                    <Items>
-                                                                                        <dx:ListEditItem Text="Manhattan" Value="1" />
-                                                                                        <dx:ListEditItem Text="Bronx" Value="2" />
-                                                                                        <dx:ListEditItem Text="Brooklyn" Value="3" />
-                                                                                        <dx:ListEditItem Text="Queens" Value="4" />
-                                                                                        <dx:ListEditItem Text="Staten Island" Value="5" />
-                                                                                    </Items>
-                                                                                </dx:ASPxComboBox>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr style="height: 30px">
-                                                                            <td>First:</td>
-                                                                            <td>
-                                                                                <dx:ASPxTextBox ID="txtNameFirst" runat="server" Width="100%"></dx:ASPxTextBox>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr style="margin-bottom: 3px; height: 30px">
-                                                                            <td>Last:</td>
-                                                                            <td>
-                                                                                <dx:ASPxTextBox runat="server" ID="txtNameLast" Width="100%"></dx:ASPxTextBox>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </dx:ContentControl>
-                                                            </ContentCollection>
-                                                        </dx:TabPage>
-                                                    </TabPages>
-                                                </dx:ASPxPageControl>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" style="text-align: right; height: 30px;">
-                                                <dx:ASPxButton RenderMode="Button" Text="Next" AutoPostBack="false" runat="server">
-                                                    <ClientSideEvents Click="function(){
+                </dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false" VisibleIndex="5"></dx:GridViewDataColumn>
+                <dx:GridViewDataColumn Width="25px" VisibleIndex="6">
+                    <DataItemTemplate>
+                        <i class="fa fa-list-alt employee_list_item_icon" style="vertical-align: bottom" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>"></i>
+                        <%-- <img src="/images/flag1.png" style="width: 16px; height: 16px; vertical-align: bottom" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>" />--%>
+                    </DataItemTemplate>
+                </dx:GridViewDataColumn>
+            </Columns>
+            <Templates>
+                <EditForm>
+                    <dx:ASPxPageControl Width="100%" EnableViewState="false" ID="pageControlNewLeads" ClientInstanceName="pageControlNewLeads"
+                        runat="server" ActiveTabIndex="0" TabSpacing="0px" EnableHierarchyRecreation="True" ShowTabs="false" OnCallback="pageControlNewLeads_Callback">
+                        <TabPages>
+                            <dx:TabPage Text="First" Name="tabStreet">
+                                <ContentCollection>
+                                    <dx:ContentControl runat="server">
+                                        <table style="width: 490px; margin: 10px; border-spacing: 2px;">
+                                            <tr style="margin-bottom: 3px; height: 30px" hidden="hidden">
+                                                <td>BBLE</td>
+                                                <td>
+                                                    <dx:ASPxTextBox ID="txtNewBBLE" runat="server" Width="100%" ClientInstanceName="txtNewBBLEClient"></dx:ASPxTextBox>
+                                                </td>
+                                            </tr>
+                                            <tr style="margin-bottom: 3px" hidden="hidden">
+                                                <td>Leads Name</td>
+                                                <td>
+                                                    <dx:ASPxTextBox runat="server" ID="txtNewLeadsName" Width="100%" ClientInstanceName="txtNewLeadsName"></dx:ASPxTextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <dx:ASPxPageControl Width="100%" EnableViewState="false" ID="pageControlInputData" Height="260px"
+                                                        runat="server" ActiveTabIndex="0" TabSpacing="3px" EnableHierarchyRecreation="True">
+                                                        <TabPages>
+                                                            <dx:TabPage Text="Address" Name="tabStreet">
+                                                                <ContentCollection>
+                                                                    <dx:ContentControl runat="server">
+                                                                        <table style="width: 100%;">
+                                                                            <tr style="height: 30px">
+                                                                                <td>Borough:</td>
+                                                                                <td>
+                                                                                    <dx:ASPxComboBox runat="server" ID="cbStreetBorough" ClientInstanceName="cbStreetBoroughClient" Width="100%">
+                                                                                        <Items>
+                                                                                            <dx:ListEditItem Text="Manhattan" Value="1" />
+                                                                                            <dx:ListEditItem Text="Bronx" Value="2" />
+                                                                                            <dx:ListEditItem Text="Brooklyn" Value="3" />
+                                                                                            <dx:ListEditItem Text="Queens" Value="4" />
+                                                                                            <dx:ListEditItem Text="Staten Island" Value="5" />
+                                                                                        </Items>
+                                                                                        <ClientSideEvents SelectedIndexChanged="function(s, e){ OnBoroughChanged(s); }" />
+                                                                                    </dx:ASPxComboBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr style="margin-bottom: 3px; height: 30px">
+                                                                                <td>Number:</td>
+                                                                                <td>
+                                                                                    <dx:ASPxTextBox runat="server" ID="txtHouseNum" Width="100%"></dx:ASPxTextBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr style="margin-bottom: 3px; height: 30px">
+                                                                                <td>Street:</td>
+                                                                                <td>
+                                                                                    <dx:ASPxComboBox runat="server" Width="100%" ID="cbStreetlookup" ClientInstanceName="cbStreetlookupClient" DropDownStyle="DropDown" FilterMinLength="2" IncrementalFilteringMode="StartsWith" OnCallback="cbStreetlookup_Callback" TextField="st_name" ValueField="st_name" EnableCallbackMode="true" CallbackPageSize="10">
+                                                                                        <ClientSideEvents EndCallback="OnStreetlookupEndCallback" />
+                                                                                    </dx:ASPxComboBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </dx:ContentControl>
+                                                                </ContentCollection>
+                                                            </dx:TabPage>
+                                                            <dx:TabPage Text="Legal" Name="tabLegal">
+                                                                <ContentCollection>
+                                                                    <dx:ContentControl runat="server">
+                                                                        <table style="width: 100%;">
+                                                                            <tr style="height: 30px">
+                                                                                <td>Borough:</td>
+                                                                                <td>
+                                                                                    <dx:ASPxComboBox runat="server" ID="cblegalBorough" Width="100%">
+                                                                                        <Items>
+                                                                                            <dx:ListEditItem Text="Manhattan" Value="1" />
+                                                                                            <dx:ListEditItem Text="Bronx" Value="2" />
+                                                                                            <dx:ListEditItem Text="Brooklyn" Value="3" />
+                                                                                            <dx:ListEditItem Text="Queens" Value="4" />
+                                                                                            <dx:ListEditItem Text="Staten Island" Value="5" />
+                                                                                        </Items>
+                                                                                    </dx:ASPxComboBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr style="margin-bottom: 3px; height: 30px">
+                                                                                <td>Block:</td>
+                                                                                <td>
+                                                                                    <dx:ASPxTextBox runat="server" ID="txtLegalBlock" Width="100%"></dx:ASPxTextBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr style="margin-bottom: 3px; height: 30px">
+                                                                                <td>Lot:</td>
+                                                                                <td>
+                                                                                    <dx:ASPxTextBox runat="server" ID="txtLegalLot" Width="100%"></dx:ASPxTextBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </dx:ContentControl>
+                                                                </ContentCollection>
+                                                            </dx:TabPage>
+                                                            <dx:TabPage Text="Name" Name="tabName">
+                                                                <ContentCollection>
+                                                                    <dx:ContentControl runat="server">
+                                                                        <table style="width: 100%;">
+                                                                            <tr style="height: 30px">
+                                                                                <td>Borough:</td>
+                                                                                <td>
+                                                                                    <dx:ASPxComboBox runat="server" ID="cbNameBorough" Width="100%">
+                                                                                        <Items>
+                                                                                            <dx:ListEditItem Text="Manhattan" Value="1" />
+                                                                                            <dx:ListEditItem Text="Bronx" Value="2" />
+                                                                                            <dx:ListEditItem Text="Brooklyn" Value="3" />
+                                                                                            <dx:ListEditItem Text="Queens" Value="4" />
+                                                                                            <dx:ListEditItem Text="Staten Island" Value="5" />
+                                                                                        </Items>
+                                                                                    </dx:ASPxComboBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr style="height: 30px">
+                                                                                <td>First:</td>
+                                                                                <td>
+                                                                                    <dx:ASPxTextBox ID="txtNameFirst" runat="server" Width="100%"></dx:ASPxTextBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr style="margin-bottom: 3px; height: 30px">
+                                                                                <td>Last:</td>
+                                                                                <td>
+                                                                                    <dx:ASPxTextBox runat="server" ID="txtNameLast" Width="100%"></dx:ASPxTextBox>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </dx:ContentControl>
+                                                                </ContentCollection>
+                                                            </dx:TabPage>
+                                                        </TabPages>
+                                                    </dx:ASPxPageControl>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="text-align: right; height: 30px;">
+                                                    <dx:ASPxButton RenderMode="Button" Text="Next" AutoPostBack="false" runat="server">
+                                                        <ClientSideEvents Click="function(){
                                                           var indexTab = (pageControlNewLeads.GetActiveTab()).index;
                                                             pageControlNewLeads.PerformCallback();
                                                         lbNewBBLEClient.PerformCallback();
                                                           pageControlNewLeads.SetActiveTab(pageControlNewLeads.GetTab(indexTab + 1));
                                                         }" />
-                                                </dx:ASPxButton>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </dx:ContentControl>
-                            </ContentCollection>
-                        </dx:TabPage>
-                        <dx:TabPage Text="BBLE">
-                            <ContentCollection>
-                                <dx:ContentControl>
-                                    <table style="width: 490px; margin: 10px; border-spacing: 2px;">
-                                        <tr style="margin-bottom: 3px;">
-                                            <td colspan="2">
-                                                <dx:ASPxListBox runat="server" Height="260px" Width="485px" ID="lbNewBBLE" ClientInstanceName="lbNewBBLEClient" OnCallback="lbNewBBLE_Callback">
-                                                    <Columns>
-                                                        <dx:ListBoxColumn Name="BBLE" FieldName="BBLE" Caption="BBLE" Width="100px" />
-                                                        <dx:ListBoxColumn Name="LeadsName" FieldName="LeadsName" Caption="Leads Name" Width="385px" />
-                                                    </Columns>
-                                                    <ClientSideEvents SelectedIndexChanged="function(s, e){
+                                                    </dx:ASPxButton>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </dx:ContentControl>
+                                </ContentCollection>
+                            </dx:TabPage>
+                            <dx:TabPage Text="BBLE">
+                                <ContentCollection>
+                                    <dx:ContentControl>
+                                        <table style="width: 490px; margin: 10px; border-spacing: 2px;">
+                                            <tr style="margin-bottom: 3px;">
+                                                <td colspan="2">
+                                                    <dx:ASPxListBox runat="server" Height="260px" Width="485px" ID="lbNewBBLE" ClientInstanceName="lbNewBBLEClient" OnCallback="lbNewBBLE_Callback">
+                                                        <Columns>
+                                                            <dx:ListBoxColumn Name="BBLE" FieldName="BBLE" Caption="BBLE" Width="100px" />
+                                                            <dx:ListBoxColumn Name="LeadsName" FieldName="LeadsName" Caption="Leads Name" Width="385px" />
+                                                        </Columns>
+                                                        <ClientSideEvents SelectedIndexChanged="function(s, e){
                                                         var item = s.GetSelectedItem();
                                                         txtNewBBLEClient.SetText(item.GetColumnText(0));
                                                         txtNewLeadsName.SetText(item.GetColumnText(1));
                                                         }" />
-                                                </dx:ASPxListBox>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: left; height: 30px;">
-                                                <dx:ASPxButton RenderMode="Button" Text="Back" AutoPostBack="false" runat="server">
-                                                    <ClientSideEvents Click="function(){
+                                                    </dx:ASPxListBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: left; height: 30px;">
+                                                    <dx:ASPxButton RenderMode="Button" Text="Back" AutoPostBack="false" runat="server">
+                                                        <ClientSideEvents Click="function(){
                                                           var indexTab = (pageControlNewLeads.GetActiveTab()).index;                                                        
                                                           pageControlNewLeads.SetActiveTab(pageControlNewLeads.GetTab(indexTab - 1));
                                                           cbStreetlookupClient.PerformCallback(cbStreetBoroughClient.GetValue().toString());
                                                         }" />
-                                                </dx:ASPxButton>
-                                            </td>
-                                            <td style="text-align: right; height: 30px;">
-                                                <dx:ASPxButton RenderMode="Button" Text="OK" AutoPostBack="false" runat="server">
-                                                    <ClientSideEvents Click="function(){
+                                                    </dx:ASPxButton>
+                                                </td>
+                                                <td style="text-align: right; height: 30px;">
+                                                    <dx:ASPxButton RenderMode="Button" Text="OK" AutoPostBack="false" runat="server">
+                                                        <ClientSideEvents Click="function(){
                                                           IsAddNewLead = true;
                                                           gridLeads.UpdateEdit();                                                                                                                                                                                                                                      
                                                         }" />
-                                                </dx:ASPxButton>
-                                                <dx:ASPxButton RenderMode="Button" Text="Cancel" AutoPostBack="false" runat="server">
-                                                    <ClientSideEvents Click="function(){
+                                                    </dx:ASPxButton>
+                                                    <dx:ASPxButton RenderMode="Button" Text="Cancel" AutoPostBack="false" runat="server">
+                                                        <ClientSideEvents Click="function(){
                                                            gridLeads.CancelEdit();                                                           
                                                         }" />
-                                                </dx:ASPxButton>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </dx:ContentControl>
-                            </ContentCollection>
-                        </dx:TabPage>
-                    </TabPages>
-                </dx:ASPxPageControl>
-            </EditForm>
-            <FilterRow>
-                <table>
-                    <tr>
-                        <td>
-                            <dx:ASPxTextBox runat="server" ID="txtkeyword" Width="320" ClientInstanceName="txtkeyWordClient"></dx:ASPxTextBox>
-                        </td>
-                        <td>
-                            <dx:ASPxButton runat="server" RenderMode="Button" Image-Url="/images/Search.png" Image-Height="16px" Text="Search" Image-Width="16px" AutoPostBack="false">
-                                <FocusRectPaddings PaddingLeft="2" PaddingRight="2" PaddingBottom="0" PaddingTop="0" />
-                                <ClientSideEvents Click="function(){SearchGridLeads();}" />
-                            </dx:ASPxButton>
-                        </td>
-                    </tr>
-                </table>
-            </FilterRow>
-        </Templates>
-        <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
-            EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
-        <SettingsPager Mode="ShowAllRecords"></SettingsPager>
-        <Settings ShowColumnHeaders="False" VerticalScrollableHeight="50"></Settings>
-        <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
-        <SettingsCommandButton CancelButton-ButtonType="Button" UpdateButton-ButtonType="Button">
-            <UpdateButton ButtonType="Button" Text="OK"></UpdateButton>
-            <CancelButton ButtonType="Button"></CancelButton>
-        </SettingsCommandButton>
-        <SettingsText CommandUpdate="OK" PopupEditFormCaption="Create New Leads" />
-        <SettingsPopup EditForm-Modal="true" EditForm-Width="300px">
-            <EditForm HorizontalAlign="WindowCenter" VerticalAlign="WindowCenter" VerticalOffset="0" Width="500px" />
-            <CustomizationWindow Width="400px" />
-        </SettingsPopup>
-        <Styles>
-            <Table Border-BorderStyle="None">
-                <Border BorderStyle="None"></Border>
-            </Table>
-            <Cell Border-BorderStyle="none">
-                <Border BorderStyle="None"></Border>
-            </Cell>
-            <Row Cursor="pointer" />
-            <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
-        </Styles>
-        <GroupSummary>
-            <dx:ASPxSummaryItem FieldName="LeadsName" SummaryType="Count" />
-        </GroupSummary>
-        <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" EndCallback="OnGridLeadsEndCallback" />
-        <Border BorderStyle="None"></Border>
-    </dx:ASPxGridView>
+                                                    </dx:ASPxButton>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </dx:ContentControl>
+                                </ContentCollection>
+                            </dx:TabPage>
+                        </TabPages>
+                    </dx:ASPxPageControl>
+                </EditForm>
+                <FilterRow>
+                    <table>
+                        <tr>
+                            <td>
+                                <dx:ASPxTextBox runat="server" ID="txtkeyword" Width="320" ClientInstanceName="txtkeyWordClient"></dx:ASPxTextBox>
+                            </td>
+                            <td>
+                                <dx:ASPxButton runat="server" RenderMode="Button" Image-Url="/images/Search.png" Image-Height="16px" Text="Search" Image-Width="16px" AutoPostBack="false">
+                                    <FocusRectPaddings PaddingLeft="2" PaddingRight="2" PaddingBottom="0" PaddingTop="0" />
+                                    <ClientSideEvents Click="function(){SearchGridLeads();}" />
+                                </dx:ASPxButton>
+                            </td>
+                        </tr>
+                    </table>
+                </FilterRow>
+            </Templates>
+            <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
+                EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
+            <SettingsPager Mode="ShowAllRecords"></SettingsPager>
+            <Settings ShowColumnHeaders="False" VerticalScrollableHeight="50"></Settings>
+            <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
+            <SettingsCommandButton CancelButton-ButtonType="Button" UpdateButton-ButtonType="Button">
+                <UpdateButton ButtonType="Button" Text="OK"></UpdateButton>
+                <CancelButton ButtonType="Button"></CancelButton>
+            </SettingsCommandButton>
+            <SettingsText CommandUpdate="OK" PopupEditFormCaption="Create New Leads" />
+            <SettingsPopup EditForm-Modal="true" EditForm-Width="300px">
+                <EditForm HorizontalAlign="WindowCenter" VerticalAlign="WindowCenter" VerticalOffset="0" Width="500px" />
+                <CustomizationWindow Width="400px" />
+            </SettingsPopup>
+            <Styles>
+                <Table Border-BorderStyle="None">
+                    <Border BorderStyle="None"></Border>
+                </Table>
+                <Cell Border-BorderStyle="none">
+                    <Border BorderStyle="None"></Border>
+                </Cell>
+                <Row Cursor="pointer" />
+                <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
+            </Styles>
+            <GroupSummary>
+                <dx:ASPxSummaryItem FieldName="LeadsName" SummaryType="Count" />
+            </GroupSummary>
+            <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" EndCallback="OnGridLeadsEndCallback" />
+            <Border BorderStyle="None"></Border>
+        </dx:ASPxGridView>
+    </div>
+
     <%--now is wrong place--%>
-    <div style="position: absolute; bottom: 0; padding-left: 32px; margin-bottom: 100px">
+    <div style="position: absolute; bottom: 0; padding-left: 34px; margin-bottom: 20px">
 
         <div style="position: relative; float: left">
             <table>
