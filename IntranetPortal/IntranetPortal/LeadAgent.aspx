@@ -7,11 +7,12 @@
 
    <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">  
         <div style="background: url(/images/MyIdealProptery.png) no-repeat center fixed; background-size: 260px, 280px; background-color: #dddddd; width: 100%; height: 100%;">
+            <!-- Be careful with Padding  -->
             <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientVisible="false" ClientInstanceName="splitter" Orientation="Vertical" FullscreenMode="true">
                 <Panes>
                     <dx:SplitterPane Name="leadContent">
                         <Panes>
-                            <dx:SplitterPane Name="leadPanel" Collapsed="true" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px">
+                            <dx:SplitterPane Name="leadPanel" Collapsed="true" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="2px">
                                 <ContentCollection>
                                     <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
                                         <uc1:LeadsList runat="server" ID="LeadsList" />

@@ -403,8 +403,7 @@
             }
         );
     });
-
-
+    
     // ]]> 
 </script>
 <%--id="leads_list_left"--%>

@@ -46,7 +46,7 @@
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" FullscreenMode="true">
         <Styles>
             <Pane>
-                <Paddings Padding="5px" />
+                <Paddings Padding="2px" />
             </Pane>
             <Separator>
                 <Border BorderStyle="None" />

@@ -11,7 +11,7 @@
             <Panes>
                 <dx:SplitterPane Name="leadContent">
                     <Panes>
-                        <dx:SplitterPane Name="leadPanel" Collapsed="true" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="800px" Size="260px" PaneStyle-Border-BorderStyle="None">
+                        <dx:SplitterPane Name="leadPanel" Collapsed="true" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="800px" Size="280px" PaneStyle-Border-BorderStyle="None" PaneStyle-Paddings-Padding="2px">
                             <ContentCollection>
                                 <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
                                     <uc1:LeadsList runat="server" ID="LeadsList" LeadsListView="ManagerView" />
