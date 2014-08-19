@@ -53,7 +53,7 @@
         }
         $(document).ready(function () {
             // Handler for .ready() called.
-            alert("on ready go");
+           
             onInitScorllBar();
         });
     </script>
