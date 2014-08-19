@@ -90,7 +90,18 @@ Public Class AgentOverview
             If Not String.IsNullOrEmpty(e.Parameter) Then
                 CurrentEmployee = Employee.GetInstance(CInt(e.Parameter.Split("|")(1)))
                 hfEmpName.Value = CurrentEmployee.Name
+
+                AgentInfoPanel.Visible = True
+                OfficeInfoPanel.Visible = False
             End If
+        End If
+
+        If e.Parameter.StartsWith("OFFICE") Then
+            hfMode.Value = "Office"
+            CurrentOffice = e.Parameter.Split("|")(1)
+
+            AgentInfoPanel.Visible = False
+            OfficeInfoPanel.Visible = True
         End If
 
         If e.Parameter.StartsWith("Status") Then
@@ -135,6 +146,11 @@ Public Class AgentOverview
     Protected Sub gridReport_Init(sender As Object, e As EventArgs)
         LoadGridColumn()
     End Sub
+
+    Function GetOfficeMgr() As String
+        Dim users = Roles.GetUsersInRole("OfficeManager-" & CurrentOffice)
+        Return String.Join(",", users)
+    End Function
 
     Function GetTemplates() As StringDictionary
         Dim up = Employee.GetProfile(User.Identity.Name)

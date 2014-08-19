@@ -50,6 +50,15 @@ Partial Public Class AgentOverview
     Protected WithEvents infoCallback As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
 
     '''<summary>
+    '''AgentInfoPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AgentInfoPanel As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
     '''profile_image control.
     '''</summary>
     '''<remarks>
@@ -57,6 +66,24 @@ Partial Public Class AgentOverview
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents profile_image As Global.DevExpress.Web.ASPxEditors.ASPxImage
+
+    '''<summary>
+    '''OfficeInfoPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents OfficeInfoPanel As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''ASPxImage1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxImage1 As Global.DevExpress.Web.ASPxEditors.ASPxImage
 
     '''<summary>
     '''hfEmpName control.

@@ -67,7 +67,9 @@
     End Function
 
     Public Overrides Function GetUsersInRole(roleName As String) As String()
-        Throw New NotImplementedException()
+        Using context As New Entities
+            Return context.UsersInRoles.Where(Function(r) r.ApplicationName = ApplicationName And r.Rolename = roleName).Select(Function(r) r.Username).ToArray
+        End Using
     End Function
 
     Public Overrides Function IsUserInRole(username As String, roleName As String) As Boolean

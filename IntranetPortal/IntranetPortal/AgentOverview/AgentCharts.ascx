@@ -95,12 +95,15 @@
             }
         });
     }
-    function show_bar_chart(ds) {
-        var dataFormSever = ds!=null?ds:$.parseJSON('<%=ChartSource()%>');
-        clear_chart()
+    function show_bar_chart(ds) {        
+        var dataFormSever = ds != null ? ds : $.parseJSON('<%=ChartSource()%>');
+        clear_chart();
         
+        var chartData = dataFormSever.DataSource;
+        var chartTitle = dataFormSever.Title == null ? "Leads" : dataFormSever.Title;
+
         var charts = $("#container").dxChart({
-            dataSource: dataFormSever,
+            dataSource: chartData,
 
             series: {
                 argumentField: "Name",
@@ -109,7 +112,7 @@
                 type: "bar",
                 color: '#ffa500'
             },
-            title: "In the last 6 months",
+            title: chartTitle,
             legend: {
                 visible: false,
                 verticalAlignment: "bottom",
@@ -129,6 +132,8 @@
         });     
     }
 
+    
+
     function show_pie_chart( ds ) {
         clear_chart(true);
        
@@ -143,13 +148,15 @@
           { Name: "South Korea", Count: 31 }
         ];
        
+        var chartTitle = "Pie Chart";
         if (ds)
         {
-            dataSource = ds;
+            dataSource = ds.DataSource;
+            chartTitle = ds.Title;
         }
         $("#pieChart").dxPieChart({
             dataSource: dataSource,
-            title: "Chart of last 6 months",
+            title: chartTitle,
             legend: {
                 orientation: "horizontal",
                 itemTextPosition: "right",
@@ -177,10 +184,12 @@
             }]
         });
     }
+
     function LoadStatusBarChart(status)
     {
         callbackDsClient.PerformCallback(status);
     }
+
     function LoadOfficeBarChart(office)
     {
         callbackOfficeLeads.PerformCallback(office);
@@ -198,10 +207,12 @@
     {        
         show_bar_chart($.parseJSON(e.result));
     }
+
     function DataSourceLoadedComplete(s, e)
     {
-        show_bar_chart( $.parseJSON(e.result) );
+        show_bar_chart( $.parseJSON(e.result));
     }
+
     function AgentZoningData(empId)
     {
         callbackAgentZoning.PerformCallback(empId);
@@ -216,8 +227,7 @@
         show_bar_chart(ds);
     }
 
-   
-            show_bar_chart();
+    show_bar_chart();
 </script>
 <dx:ASPxCallback runat="server" ID="callbackDs" OnCallback="callbackDs_Callback" ClientInstanceName="callbackDsClient">
     <ClientSideEvents CallbackComplete="DataSourceLoadedComplete" />
