@@ -127,8 +127,6 @@
             </dx:SplitterPane>
             <dx:SplitterPane Name="ContentUrlPane" Size="260px">
                 <PaneStyle Border-BorderStyle="None"></PaneStyle>
-
-
                 <ContentCollection>
                     <dx:SplitterContentControl runat="server">
                         <div style="width: 100%; height: 100%; /*border: 1px solid gray; border-bottom: 1px solid gray; */">
