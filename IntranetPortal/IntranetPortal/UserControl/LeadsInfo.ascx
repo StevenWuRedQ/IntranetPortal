@@ -620,29 +620,7 @@
                     </dx:PopupControlContentControl>
                 </ContentCollection>
             </dx:ASPxPopupControl>
-            <%--now is woring place--%>
-            <div style="position: absolute; bottom: 0; padding-left: 32px; margin-bottom: 100px">
-
-                <div style="position: relative; float: left">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="priority_info_label priority_info_lable_org">
-                                        <span class="font_black">1,796 </span><span class="font_extra_light">Leads</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="priority_info_label priority_info_label_blue" style="float: left; margin-left: 5px;">
-                                        <span class="font_black">0 </span><span class="font_extra_light">Deals</span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
+           
         </dx:PanelContent>
     </PanelCollection>
     <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>

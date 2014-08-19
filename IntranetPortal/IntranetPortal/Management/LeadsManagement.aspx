@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="LeadsManagement.aspx.vb" Inherits="IntranetPortal.LeadsManagement" MasterPageFile="~/Content.Master" %>
+
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
@@ -50,7 +51,7 @@
             <Separator>
                 <Border BorderStyle="None" />
             </Separator>
-            <VerticalSeparator BackColor="White">
+            <VerticalSeparator>
                 <Border BorderStyle="None" />
             </VerticalSeparator>
         </Styles>
@@ -61,8 +62,28 @@
                 </PaneStyle>
                 <ContentCollection>
                     <dx:SplitterContentControl runat="server">
-                        <div style="width: 100%; height: 100%; border: 1px solid gray; border-bottom: 1px solid gray; overflow-y: scroll;">
-                            <div style="background-color: #efefef; border-bottom: 1px solid gray; text-align: left;">
+                        <div style="width: 100%; height: 100%; /*border: 1px solid gray; */ /*border-bottom: 1px solid gray; */ overflow-y: scroll;">
+                            <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px" class="clearfix">
+                                <div style="font-size: 24px;" class="clearfix">
+
+                                    <span style="color: #234b60; font-size: 30px;">
+                                        <dx:ASPxCheckBox runat="server" ID="chkAll">
+                                            <ClientSideEvents CheckedChanged="function(s,e)
+                                         {
+                                              if (s.GetChecked())
+                                                  gridLeads.SelectRows();
+                                              else
+                                                  gridLeads.UnselectRows();
+
+                                         }" />
+                                        </dx:ASPxCheckBox>
+                                        <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
+                                    </span>
+
+                                </div>
+                            </div>
+                            <%--<div style="/*background-color: #efefef; border-bottom: 1px solid gray; */ text-align: left;">
+
                                 <dx:ASPxCheckBox runat="server" ID="chkAll">
                                     <ClientSideEvents CheckedChanged="function(s,e)
                                          {
@@ -73,8 +94,8 @@
 
                                          }" />
                                 </dx:ASPxCheckBox>
-                                <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Bold="true" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
-                            </div>
+                                <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
+                            </div>--%>
                             <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsBehavior-AutoExpandAllGroups="True" SettingsPager-Mode="ShowAllRecords" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared">
                                 <Columns>
                                     <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
@@ -94,7 +115,8 @@
                                 <Settings ShowColumnHeaders="False" VerticalScrollableHeight="50"></Settings>
                                 <Styles>
                                     <Row Cursor="pointer" />
-                                    <AlternatingRow BackColor="#f9f9f9"></AlternatingRow>
+                                    <AlternatingRow BackColor="#F5F5F5"></AlternatingRow>
+                                    <RowHotTrack BackColor="#FF400D"></RowHotTrack>
                                 </Styles>
                                 <Border BorderStyle="None"></Border>
                                 <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
@@ -105,12 +127,23 @@
             </dx:SplitterPane>
             <dx:SplitterPane Name="ContentUrlPane" Size="260px">
                 <PaneStyle Border-BorderStyle="None"></PaneStyle>
+
+
                 <ContentCollection>
                     <dx:SplitterContentControl runat="server">
-                        <div style="width: 100%; height: 100%; border: 1px solid gray; border-bottom: 1px solid gray;">
-                            <div style="background-color: #efefef; border-bottom: 1px solid gray; text-align: left; padding-left: 5px">
-                                <dx:ASPxLabel Text="Select Employee" ID="ASPxLabel1" Font-Bold="true" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
+                        <div style="width: 100%; height: 100%; /*border: 1px solid gray; border-bottom: 1px solid gray; */">
+                            <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px" class="clearfix">
+                                <div style="font-size: 24px;" class="clearfix">
+                                    <i class="fa fa-group with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
+                                    <span style="color: #234b60; font-size: 30px;">
+                                        <dx:ASPxLabel Text="Select Employee" ID="ASPxLabel1" Font-Size="16px"  ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
+                                    </span>
+                                    
+                                </div>
                             </div>
+                            <%--<div style="/*background-color: #efefef; border-bottom: 1px solid gray; */ text-align: left; padding-left: 5px">
+                                <dx:ASPxLabel Text="Select Employee" ID="ASPxLabel1" Font-Bold="true" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
+                            </div>--%>
                             <dx:ASPxListBox runat="server" ID="listboxEmployee" Height="450" TextField="Name" ValueField="EmployeeID"
                                 SelectedIndex="0" Width="100%" Border-BorderStyle="None">
                                 <Border BorderStyle="None"></Border>

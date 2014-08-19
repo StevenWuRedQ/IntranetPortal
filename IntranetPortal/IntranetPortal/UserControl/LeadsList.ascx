@@ -407,15 +407,15 @@
 
     // ]]> 
 </script>
-
-<div style="width: 100%; height: 100%; overflow-y: scroll;" id="leads_list_left" class="color_gray">
-    <div style="margin: 30px 20px 30px 0px; text-align: left; padding-left: 5px" class="clearfix">
-        <div style="font-size: 24px;">
+<%--id="leads_list_left"--%>
+<div style="width: 100%; height: 960px; overflow:auto"  class="color_gray">
+    <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px" class="clearfix">
+        <div style="font-size: 24px;" class="clearfix">
             <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;&nbsp;
             <span style="color: #234b60; font-size: 30px;">
                 <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" Font-Bold="true" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
             </span>
-            <i class="fa fa-sort-amount-desc icon_right_s" style="cursor:pointer" onclick="SortLeadsList"></i>
+            <i class="fa fa-sort-amount-desc icon_right_s" style="cursor: pointer" onclick="SortLeadsList"></i>
         </div>
     </div>
     <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
@@ -697,8 +697,30 @@
         <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" EndCallback="OnGridLeadsEndCallback" />
         <Border BorderStyle="None"></Border>
     </dx:ASPxGridView>
+    <%--now is wrong place--%>
+    <div style="position: absolute; bottom: 0; padding-left: 32px; margin-bottom: 100px">
+
+        <div style="position: relative; float: left">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="priority_info_label priority_info_lable_org">
+                                <span class="font_black"><%= IntranetPortal.Utility.TotalLeadsCount.ToString %> </span><span class="font_extra_light">Leads</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="priority_info_label priority_info_label_blue" style="float: left; margin-left: 5px;">
+                                <span class="font_black"><%= IntranetPortal.Utility.TotalDealsCount.ToString%> </span><span class="font_extra_light">Deals</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <asp:HiddenField ID="hfView" runat="server" EnableViewState="true" />
-    <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory" PopupHorizontalAlign="OutsideLeft" PopupVerticalAlign="TopSides" PopupAction="LeftMouseClick" ItemImage-Height="16" ItemImage-Width="16">
+    <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ItemImage-Height="16" ItemImage-Width="16">
         <Items>
             <dx:MenuItem GroupName="Sort" Text="View Map" Name="GoogleStreet">
                 <Image Url="/images/Street-view.png"></Image>
@@ -892,6 +914,6 @@
     <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
         <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
     </dx:ASPxCallback>
-    
+
 </div>
 
