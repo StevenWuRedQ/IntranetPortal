@@ -69,7 +69,11 @@
 
     Public ReadOnly Property CallAttemps As Integer
         Get
-            Return Lead.LeadsActivityLogs.Where(Function(log) log.ActionType IsNot Nothing AndAlso log.ActionType = LeadsActivityLog.EnumActionType.CallOwner).Count
+            Using context As New Entities
+                Return context.LeadsActivityLogs.Where(Function(log) log.BBLE = BBLE And (log.ActionType.HasValue AndAlso log.ActionType = 0)).Count
+            End Using
+
+            'Return Lead.LeadsActivityLogs.Where(Function(log) log.ActionType.HasValue AndAlso log.ActionType = LeadsActivityLog.EnumActionType.CallOwner).Count
         End Get
     End Property
 

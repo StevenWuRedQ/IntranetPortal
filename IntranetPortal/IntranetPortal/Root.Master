@@ -5,12 +5,10 @@
 <%--<%@ Register Assembly="DevExpress.Web.v13.2, Version=13.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxRibbon" TagPrefix="dx" %>--%>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Agent Portal (beta) - My Ideal Property</title>
-    <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
 
     <%--add font image by steven--%>
     <%--<link href="css/bootstrap.min.css"  type="text/css" rel="stylesheet"/>--%>
@@ -19,6 +17,14 @@
     <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
+   
+    <link rel="stylesheet" href="css/normalize.min.css" />
+    <link rel="stylesheet" href="/scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.css" />
+    <link rel="stylesheet" href="css/main.css" />
+
+    
+
+
     <style>
         html, body, #form1 {
             margin: 0;
@@ -72,55 +78,36 @@
                 <Pane>
                     <Paddings Padding="0px" />
                     <Border BorderWidth="0px" />
-                    
                 </Pane>
             </Styles>
-            
+
             <Panes>
                 <dx:SplitterPane Name="leftNavPane" Size="280">
                     <Panes>
-                        <dx:SplitterPane Name="logoPane" Size="70">
-                            <ContentCollection>
-                                <dx:SplitterContentControl>
-                                    <div style="float: left; display: table-cell; width: 280px;">
-                                        <%--<div class="title" style="font-weight: bold">My Ideal Property Portal</div>--%>
-                                        <div class="under-line-head" style="padding-left: 13px; padding-top: 17px; background: #163240; font-size: 24px; font-weight: 900; color: white;">
-                                            <img style="width: 66px; height: 52px; vertical-align: middle" src="images/logo.png" /><span style="padding-left: 10px; /*font-weight: 900; */">PORTAL</span>
-                                        </div>
-                                    </div>
-                                </dx:SplitterContentControl>
-                            </ContentCollection>
-                        </dx:SplitterPane>
-
                         <dx:SplitterPane Name="NavPane">
                             <Separator Visible="False"></Separator>
                             <ContentCollection>
-                                <dx:SplitterContentControl BackColor="#234b60">
-                                    <asp:ContentPlaceHolder ID="NavContentHolder" runat="server"></asp:ContentPlaceHolder>
-                                </dx:SplitterContentControl>
-                            </ContentCollection>
-                        </dx:SplitterPane>
-                        <dx:SplitterPane Name="FootPane" Separator-Visible="False" Size="70">
-                            <Separator Visible="False"></Separator>
-                            <PaneStyle>
-                                <BorderTop BorderWidth="1" />
-                            </PaneStyle>
-                            <ContentCollection>
-                                <dx:SplitterContentControl BackColor="#1c4154">
-                                   
-                                    <div style="width: 100%; height: 90px; padding-left: 27px; color: #446576; font-size: 12px;">
-                                        <img src="images/demo_logo.png" style="visibility: hidden;height:10px" />
-                                        <div>
-                                            DEMO LOGO / VESION:
-                                        <dx:ASPxLabel ID="lblVersion" runat="server" ForeColor="#446576" Font-Size="12px"></dx:ASPxLabel>
-                                        </div>
-                                        <%--2.0--%>
-                                        <div>
-                                            ©2014 MYIDEL PROPERTY
-                                        </div>
-                                        <div id="errorMsg">
-
-                                        </div>
+                                <dx:SplitterContentControl>
+                                    <div id="global-nav-container">
+                                        <nav id="global-nav" class="navbar" role="navigation">
+                                            <div class="navbar-header">
+                                                <a href="#" class="clearfix">
+                                                    <img id="logo" src="Images/logo.png" alt="My Ideal Property" class="go-retina" />
+                                                    <span>Portal</span>
+                                                </a>
+                                            </div>
+                                            <div id="main-nav" class="main-nav-panel">
+                                                <asp:ContentPlaceHolder ID="NavContentHolder" runat="server"></asp:ContentPlaceHolder>
+                                            </div>
+                                        </nav>
+                                        <footer id="global-footer">
+                                            <p>
+                                                Application Version:
+                                                <dx:ASPxLabel ID="lblVersion" runat="server" ForeColor="#446576" Font-Size="12px"></dx:ASPxLabel>
+                                            </p>
+                                            <p>&copy; 2014 My Ideal Property</p>
+                                            <div id="errorMsg" style="color:transparent"></div>
+                                        </footer>                                        
                                     </div>
                                 </dx:SplitterContentControl>
                             </ContentCollection>
@@ -135,10 +122,9 @@
                             </PaneStyle>
                             <ContentCollection>
                                 <dx:SplitterContentControl>
-                                    <div class="header under-line-header" style="width: 100%; display: table; height: 100%; margin-top: -1px; background-color:white; ">
+                                    <div class="header under-line-header" style="width: 100%; display: table; height: 100%; margin-top: -1px; background-color: white;">
                                         <div style="display: table-row" class="clear-fix">
                                             <div style="float: left; display: table-cell; width: 260px;">
-                                              
                                             </div>
                                             <div style="display: table-cell; width: 700px">
                                                 <table style="margin-top: 10px; float: right">
@@ -204,9 +190,9 @@
                                                 </table>
                                             </div>
                                             <%--change the pop search screen UI style by steven--%>
-                                             <%--MinHeight="150px"--%> 
+                                            <%--MinHeight="150px"--%>
                                             <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSearchPanel" Width="600px" Height="250px"
-                                                MaxWidth="800px" MaxHeight="800px" MinWidth="150px"  ID="pcMain"
+                                                MaxWidth="800px" MaxHeight="800px" MinWidth="150px" ID="pcMain"
                                                 ShowHeader="false" CloseAction="CloseButton"
                                                 runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True" CssClass="rand-pop">
                                                 <ContentCollection>
@@ -217,7 +203,7 @@
                                                                     <Settings AutoFilterCondition="Contains" />
                                                                     <DataItemTemplate>
                                                                         <%--add data row height and font color  by steven--%>
-                                                                        <div  class="search_pop_data_s" >
+                                                                        <div class="search_pop_data_s">
                                                                             <div href="#" class="pop_search_data"
                                                                                 onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))  %>'>
                                                                                 <%# Eval("LeadsName")%>
@@ -286,10 +272,10 @@
                                                 </ContentCollection>
                                             </dx:ASPxPopupControl>
                                             <%---------------------end---------------%>
-                                            <div style="overflow:auto">
+                                            <div style="overflow: auto">
                                                 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
                                             </div>
-                                            
+
                                         </div>
                                     </div>
 
@@ -394,7 +380,6 @@
                                             <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
                                         </div>
                                     </div>--%>
-
                                 </dx:SplitterContentControl>
                             </ContentCollection>
                         </dx:SplitterPane>
@@ -474,5 +459,17 @@
              });
     </script>--%>
     </form>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="/Scripts/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+    <script src="/Scripts/js/jquery.easing.1.3.js"></script>
+    <script src="/Scripts/js/jquery.debouncedresize.js"></script>
+    <script src="/Scripts/js/jquery.throttledresize.js"></script>
+    <script src="/Scripts/js/jquery.mousewheel.js"></script>
+    <script src="/Scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>
+    <script src="/Scripts/jquery.collapse.js"></script>
+    <script src="/Scripts/jquery.collapse_storage.js"></script>
+    <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>
+    <script src="/Scripts/js/main.js"></script>
+    <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </body>
 </html>

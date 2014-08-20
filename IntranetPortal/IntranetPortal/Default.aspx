@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Main.Master" CodeBehind="Default.aspx.vb" Inherits="IntranetPortal.Default2" %>
 
 <%@ Register Src="~/UserControl/UserSummary.ascx" TagPrefix="uc1" TagName="UserSummary" %>
+<%@ Register Src="~/UserControl/NavMenu.ascx" TagPrefix="uc1" TagName="NavMenu" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Left" runat="server">
-    <%--ifjasodfjosa--%>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
-    <link href="styles/stevencss.css" rel='stylesheet' type='text/css' />
-    <style type="text/css">
+  
+      <style type="text/css">
         /*have scrollbar content class add by steven*/
         .scorllbar_content {
             /*it can' don't need postion relative by this class  in tree view it add atuo*/
@@ -16,10 +16,12 @@
         }
         /*-----end-------*/
     </style>
-    <dx:ASPxCallbackPanel runat="server" ID="agentTreeCallbackPanel" ClientInstanceName="agentTreeCallbackPanel" OnCallback="agentTreeCallbackPanel_Callback">
+
+    <uc1:NavMenu runat="server" ID="NavMenu" />
+
+    <dx:ASPxCallbackPanel runat="server" ID="agentTreeCallbackPanel" ClientInstanceName="agentTreeCallbackPanel" OnCallback="agentTreeCallbackPanel_Callback" Visible="false">
         <PanelCollection>
-            <dx:PanelContent>
-                 
+            <dx:PanelContent>                 
                   <dx:ASPxTreeView ID="AgentTree" AllowSelectNode="True" runat="server" ClientInstanceName="agentTree" Font-Size="Medium" Target="contentUrlPane" Images-NodeImage-Height="20" Images-NodeImage-Width="20" EncodeHtml="False" CssClass="scorllbar_content">
                     <Nodes>                       
                         <dx:TreeViewNode Text="Agent - Bob Harry" Name="LeadsNode" Expanded="True" Image-Url="/images/summary.png" NavigateUrl="/SummaryPage.aspx" AllowCheck="True">

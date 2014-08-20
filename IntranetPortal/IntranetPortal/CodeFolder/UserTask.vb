@@ -64,10 +64,14 @@
         End Using
     End Sub
 
-    Public Shared Function GetTaskCount(empName As String) As Integer
+    Public Shared Function GetTaskCount(empName As String, Optional userContext As HttpContext = Nothing) As Integer
+        If userContext Is Nothing AndAlso HttpContext.Current IsNot Nothing Then
+            userContext = HttpContext.Current
+        End If
+
         Using context As New Entities
             'Dim count = context.UserTasks.Where(Function(t) t.EmployeeName.Contains(empName) And t.Status = TaskStatus.Active).Select(Function(t) t.BBLE).Distinct().Count
-            Dim emps = Employee.GetSubOrdinateWithoutMgr(HttpContext.Current.User.Identity.Name)
+            Dim emps = Employee.GetSubOrdinateWithoutMgr(userContext.User.Identity.Name)
 
             Dim count = (From lead In context.Leads
                                       Join task In context.UserTasks On task.BBLE Equals lead.BBLE

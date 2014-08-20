@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class Main
 
     '''<summary>
-    '''LeftSplitter control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents LeftSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
-
-    '''<summary>
     '''Left control.
     '''</summary>
     '''<remarks>
@@ -30,6 +21,15 @@ Partial Public Class Main
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Left As Global.System.Web.UI.WebControls.ContentPlaceHolder
+
+    '''<summary>
+    '''LeftSplitter control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LeftSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
 
     '''<summary>
     '''MenuCorner control.

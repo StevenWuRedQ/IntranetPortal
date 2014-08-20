@@ -130,14 +130,17 @@ Public Class Utility
         Return GetMgrLeadsCount(status, emps)
     End Function
 
-    Public Shared Function GetUnAssignedLeadsCount() As Integer
+    Public Shared Function GetUnAssignedLeadsCount(Optional userContext As HttpContext = Nothing) As Integer
         Using context As New Entities
+            If userContext Is Nothing AndAlso HttpContext.Current IsNot Nothing Then
+                userContext = HttpContext.Current
+            End If
 
-            If HttpContext.Current.User.IsInRole("Admin") Then
+            If userContext.User.IsInRole("Admin") Then
                 Return context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing).Count
             Else
-                If Employee.IsManager(HttpContext.Current.User.Identity.Name) Then
-                    Dim name = HttpContext.Current.User.Identity.Name
+                If Employee.IsManager(userContext.User.Identity.Name) Then
+                    Dim name = userContext.User.Identity.Name
                     Return context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = name And li.Lead.Status = LeadStatus.NewLead).Count
                 End If
             End If

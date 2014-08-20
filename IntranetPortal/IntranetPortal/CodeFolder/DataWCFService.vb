@@ -25,6 +25,18 @@ Public Class DataWCFService
 
         Using client As New DataAPI.WCFMacrosClient
             Dim result = client.Get_LocateReport(apiOrderNum, bble, owner.Name, owner.Address1, owner.Address2, owner.City, owner.State, owner.Zip, owner.Country, "", "")
+
+            If result Is Nothing Then
+                Dim propOwners = client.NYC_NameAndAddress(bble)
+                If propOwners IsNot Nothing And propOwners.Count > 0 Then
+                    Dim newAds = propOwners(0)
+                    If newAds.Owner1.Trim = owner.Name Or newAds.Owner2.Trim = owner.Name Then
+                        Dim add1 = String.Format("{0} {1}", newAds.Mail_Num.Trim, newAds.Mail_ST1.Trim).TrimStart.TrimEnd
+                        result = client.Get_LocateReport(apiOrderNum, bble, owner.Name, add1, newAds.Mail_ST2, newAds.Mail_City, newAds.Mail_State, newAds.Mail_Zip, "US", "", "")
+                    End If
+                End If
+            End If
+
             Return result
         End Using
     End Function

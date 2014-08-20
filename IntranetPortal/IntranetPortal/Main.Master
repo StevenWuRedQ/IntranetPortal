@@ -2,12 +2,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <script type="text/javascript" src="/scripts/script.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="scrollbar/jquery.mCustomScrollbar.css" />
 </asp:Content>
 
 <asp:Content ID="navContent" ContentPlaceHolderID="NavContentHolder" runat="server" >
-    <dx:ASPxSplitter ID="LeftSplitter" runat="server" Height="100%" Orientation="Vertical" Width="100%" >
+  <asp:ContentPlaceHolder ID="Left" runat="server" />
+    <dx:ASPxSplitter ID="LeftSplitter" runat="server" Height="100%" Orientation="Vertical" Width="100%" Visible="false">
         <Styles>
             <Pane>
                 <Paddings Padding="0px" />
@@ -19,7 +18,7 @@
                 <ContentCollection>
                     <dx:SplitterContentControl BackColor="#234b60">
                         <div style="overflow: auto; overflow-x: hidden; height: 100%;" id="treeViewDiv">
-                            <asp:ContentPlaceHolder ID="Left" runat="server" />
+                          
                         </div>
                     </dx:SplitterContentControl>
                 </ContentCollection>
@@ -83,7 +82,7 @@
     <script>
         (function ($) {
             $(window).load(function () {
-               
+
                 $("#treeViewDiv").mCustomScrollbar({
                     theme: "minimal"
                 });

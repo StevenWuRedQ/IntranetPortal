@@ -10,14 +10,47 @@
     //send.addEventListener('click', function () { send(); }, false);
 
     window.setTimeout(function () { hook() }, 500);
-    //window.setTimeout(function () { RefreshLeadsCount()}, 3000);
+    window.setTimeout(function () { RefreshLeadsCount()}, 1000);
 }
 
-function RefreshLeadsCount()
-{
-    //alert("Refresh");
-    agentTreeCallbackPanel.PerformCallback("");
-    //window.setTimeout(function () { RefreshLeadsCount() }, 1000);
+function RefreshLeadsCount() {
+
+    var url = 'RefreshLeadsCountHandler.ashx';
+    var request = getRequestObject();
+
+    request.onreadystatechange = function () {
+        try {
+            if (request.readyState == 4) {
+                if (request.status == 200) {
+                    var leadsCounts = null;
+                    if (request.responseText != "") {
+                        leadsCounts = eval("(" + request.responseText + ")");
+                        //alert(msg);
+                        if (leadsCounts != null) {
+                            for (var i = 0; i < leadsCounts.length; i++)
+                            {
+                                var item = leadsCounts[i];
+                                if(item.Count > 0)
+                                    document.getElementById(item.Name).innerText = item.Count;
+
+                            }                            
+                        }
+                    }
+                    else
+                        window.setTimeout(function () { RefreshLeadsCount(); }, 1000);
+                }
+                else {
+                    document.getElementById('errorMsg').innerHTML +=
+                              request.responseText + '< br />';
+                }
+            }
+        }
+        catch (e) {
+            document.getElementById('errorMsg').innerHTML = "Error: " + e.message;
+        }
+    };
+    request.open('POST', url, true);
+    request.send(null);
 }
 
 var currentMsgId = null;
