@@ -89,8 +89,7 @@
             LoadEmployeeBarChart(empId);
         }
 
-        function BindOffice(office)
-        {
+        function BindOffice(office) {
             gridReportClient.PerformCallback("BindOffice|" + office);
             infoCallbackClient.PerformCallback("OFFICE|" + office);
             LoadOfficeBarChart(office);
@@ -165,18 +164,24 @@
                                             </dx:GridViewDataTextColumn>
                                             <dx:GridViewDataColumn FieldName="Department" VisibleIndex="5">
                                                 <GroupRowTemplate>
+                                                    <%-- <div>
+                                                        <span class="font_black"><%# Container.GroupText%></td></span>&nbsp;&nbsp;&nbsp;
+                                                        
+                                                    </div>--%>
                                                     <table style="height: 30px">
                                                         <tr>
-                                                            <td></td>
-                                                            <td style="font-weight: 900; width: 80px; text-align: center;">Department: <%# Container.GroupText%></td>
+                                                            <td style="width: 80px;"><span class="font_black">Department: <%# Container.GroupText%>
+                                                            </span></td>
                                                             <td style="padding-left: 10px">
-                                                                <div class="raund-label">
+                                                                <span class="employee_lest_head_number_label"><%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %></span>
+                                                               <%-- <div class="raund-label">
                                                                     <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                </div>
+                                                                </div>--%>
                                                             </td>
-                                                            <%--the round div--%>
                                                         </tr>
                                                     </table>
+
+
                                                     </div>
                                                 </GroupRowTemplate>
                                             </dx:GridViewDataColumn>
@@ -356,7 +361,7 @@
                                                                         <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"><%= CurrentOffice %>&nbsp;Office </div>
                                                                         <div style="margin-top: 8px; font-size: 16px; color: #234b60; font-weight: 900" class="agnet_info_text"><%= GetOfficeMgr() %></div>
                                                                         <%--info detial--%>
-                                                                        <div style="font-size: 14px; margin-top: 25px; display:none">
+                                                                        <div style="font-size: 14px; margin-top: 25px; display: none">
                                                                             <%--items--%>
                                                                             <div class="agent_info_detial_left">Address</div>
                                                                             <div class="agent_info_detial_space">&nbsp;</div>

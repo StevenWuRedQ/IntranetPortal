@@ -31,7 +31,11 @@
     {
         var time = $(e).text();
         var chart = $("#container").dxChart("instance");
+        var datePass = new Date();
+        datePass.setDate(datePass.getDate() - 30);
+        alert(datePass);
         chart.option("title", time);
+
     }
     function clear_chart(show_pie)
     {
@@ -110,7 +114,7 @@
                 valueField: "Count",
                 name: "name",
                 type: "bar",
-                color: '#ffa500'
+                color: '#B0BF1A'
             },
             title: chartTitle,
             legend: {

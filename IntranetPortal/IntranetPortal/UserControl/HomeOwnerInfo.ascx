@@ -224,20 +224,21 @@
         <div class="form_head homeowner_section_margin">
             <span>First Degree Relatives &nbsp;</span>
         </div>
+        <% For Each relative In TLOLocateReport.relatives1stDegreeField%>
         <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
             <i class="fa fa-chain color_gray homeowner_info_icon"></i>
             <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
-                <span class="font_black color_balck font_black upcase_text">Kang, Boon Chang</span><br />
-                <span style="font-size: 14px">Age <span class="color_balck">74</span></span>
+                <span class="font_black color_balck font_black upcase_text"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") & relative.nameField.lastNameField %></span><br />
+                <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
             </div>
 
         </div>
+
+
         <div class="homeowner_expanll_border" style="margin-left: 20px">
             <div>
                 <div class="clearfix homeowner_info_label" style="margin-left: 17px;">
                     <div>
-                        <% For Each relative In TLOLocateReport.relatives1stDegreeField%>
-                        <%= BuilderRelativeName(relative) %>
                         <% If relative.phonesField.Length > 0 Then%>
                         <% For Each phone In relative.phonesField%>
                         <div class="color_gray clearfix">
@@ -254,20 +255,17 @@
                         </div>
                         <% Next%>
                         <% End If%>
-                        <% Next%>
-
-
-                        <div>
-                            <span class="time_buttons more_buttom"><a href="#" style="color: white" onclick="document.getElementById('<%= divRelatives.ClientID%>').style.display='block';">Load More Info</a>
-                            </span>
-                        </div>
                     </div>
 
                 </div>
 
             </div>
         </div>
-
+        <% Next%>
+        <div>
+            <span class="time_buttons more_buttom"><a href="#" style="color: white" onclick="document.getElementById('<%= divRelatives.ClientID%>').style.display='block';">Load More Info</a>
+            </span>
+        </div>
     </div>
 
 
@@ -276,20 +274,21 @@
             <div class="form_head homeowner_section_margin">
                 <span>Second Degree Relatives &nbsp;</span>
             </div>
+            <% For Each relative In TLOLocateReport.relatives2ndDegreeField%>
             <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
                 <i class="fa fa-chain color_gray homeowner_info_icon"></i>
                 <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
-                    <span class="font_black color_balck font_black upcase_text">Kang, Boon Chang</span><br />
-                    <span style="font-size: 14px">Age <span class="color_balck">74</span></span>
+                    <span class="font_black color_balck font_black upcase_text"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") & relative.nameField.lastNameField %></span><br />
+                    <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
                 </div>
 
             </div>
+
+
             <div class="homeowner_expanll_border" style="margin-left: 20px">
                 <div>
                     <div class="clearfix homeowner_info_label" style="margin-left: 17px;">
                         <div>
-                            <% For Each relative In TLOLocateReport.relatives2ndDegreeField%>
-                            <%= BuilderRelativeName(relative) %>
                             <% If relative.phonesField.Length > 0 Then%>
                             <% For Each phone In relative.phonesField%>
                             <div class="color_gray clearfix">
@@ -306,14 +305,13 @@
                             </div>
                             <% Next%>
                             <% End If%>
-                            <% Next%>
                         </div>
 
                     </div>
 
                 </div>
             </div>
-
+            <% Next%>
         </div>
 
 
@@ -323,20 +321,21 @@
             <div class="form_head homeowner_section_margin">
                 <span>Third Degree Relatives &nbsp;</span>
             </div>
+           <% For Each relative In TLOLocateReport.relatives3rdDegreeField%>
             <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
                 <i class="fa fa-chain color_gray homeowner_info_icon"></i>
                 <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
-                    <span class="font_black color_balck font_black upcase_text">Kang, Boon Chang</span><br />
-                    <span style="font-size: 14px">Age <span class="color_balck">74</span></span>
+                    <span class="font_black color_balck font_black upcase_text"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") & relative.nameField.lastNameField %></span><br />
+                    <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
                 </div>
 
             </div>
+
+
             <div class="homeowner_expanll_border" style="margin-left: 20px">
                 <div>
                     <div class="clearfix homeowner_info_label" style="margin-left: 17px;">
                         <div>
-                            <% For Each relative In TLOLocateReport.relatives3rdDegreeField%>
-                            <%= BuilderRelativeName(relative) %>
                             <% If relative.phonesField.Length > 0 Then%>
                             <% For Each phone In relative.phonesField%>
                             <div class="color_gray clearfix">
@@ -353,13 +352,13 @@
                             </div>
                             <% Next%>
                             <% End If%>
-                            <% Next%>
                         </div>
 
                     </div>
 
                 </div>
             </div>
+            <% Next%>
 
         </div>
 

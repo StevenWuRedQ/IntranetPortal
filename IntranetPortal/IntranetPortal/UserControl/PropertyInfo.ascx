@@ -1,10 +1,10 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PropertyInfo.ascx.vb" Inherits="IntranetPortal.PropertyInfo" %>
-<div class="tab-pane active" id="property_info" style="padding-top:5px">
+<div class="tab-pane active" id="property_info" style="padding-top: 5px">
     <%--witch scroll bar--%>
     <%--/*display:none need delete when realse--%>
     <div style="height: 800px; overflow: auto;" id="prioity_content">
         <%--refresh label--%>
-        
+
         <dx:ASPxPanel ID="UpatingPanel" runat="server">
             <PanelCollection>
                 <dx:PanelContent runat="server">
@@ -57,117 +57,117 @@
         <div style="margin: 20px" class="clearfix">
             <div class="form_head">General</div>
 
-            
-                <%--line 1--%>
-                <div class="form_div_node" style="width: 405px">
-                    <span class="form_input_title">address</span>
 
-                    <input class="text_input" value="<%= LeadsInfoData.PropertyAddress%>" />
-                </div>
+            <%--line 1--%>
+            <div class="form_div_node" style="width: 405px">
+                <span class="form_input_title">address</span>
 
-                <div class="form_div_node form_div_node_margin">
-                    <span class="form_input_title">bble</span>
+                <input class="text_input" value="<%= LeadsInfoData.PropertyAddress%>" />
+            </div>
 
-                    <input class="text_input font_black" value="<%= LeadsInfoData.BBLE%>" />
-                </div>
-                <%--end line 1--%>
-                <%--line 2--%>
-                <div class="form_div_node form_div_node_line_margin">
-                    <span class="form_input_title">Neighborhood</span>
-                    <input class="text_input" value="<%=LeadsInfoData.Neighborhood%>" />
-                </div>
+            <div class="form_div_node form_div_node_margin">
+                <span class="form_input_title">bble</span>
 
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                    <span class="form_input_title">Borough</span>
+                <input class="text_input font_black" value="<%= LeadsInfoData.BBLE%>" />
+            </div>
+            <%--end line 1--%>
+            <%--line 2--%>
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Neighborhood</span>
+                <input class="text_input" value="<%=LeadsInfoData.Neighborhood%>" />
+            </div>
 
-                    <input class="text_input" value="<%=LeadsInfoData.Borough%>" />
-                </div>
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Borough</span>
 
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                    <span class="form_input_title">Block</span>
+                <input class="text_input" value="<%=LeadsInfoData.Borough%>" />
+            </div>
 
-                    <input class="text_input" value="<%=LeadsInfoData.Block%>" />
-                </div>
-                <%--end line 2--%>
-                <%--line 3--%>
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Block</span>
 
-                <div class="form_div_node form_div_node_line_margin">
-                    <span class="form_input_title">Lot</span>
-                    <input class="text_input" value="<%= LeadsInfoData.Lot%>" />
-                </div>
+                <input class="text_input" value="<%=LeadsInfoData.Block%>" />
+            </div>
+            <%--end line 2--%>
+            <%--line 3--%>
 
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                    <span class="form_input_title">NYC SQFT</span>
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Lot</span>
+                <input class="text_input" value="<%= LeadsInfoData.Lot%>" />
+            </div>
 
-                    <input class="text_input" value="<%=LeadsInfoData.NYCSqft%>" />
-                </div>
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">NYC SQFT</span>
 
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                    <span class="form_input_title">Year Built</span>
+                <input class="text_input" value="<%=LeadsInfoData.NYCSqft%>" />
+            </div>
 
-                    <input class="text_input" value="<%=LeadsInfoData.YearBuilt%>" />
-                </div>
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Year Built</span>
 
-                <%----end line 3----%>
+                <input class="text_input" value="<%=LeadsInfoData.YearBuilt%>" />
+            </div>
 
-                <%--line 4--%>
+            <%----end line 3----%>
 
-                <div class="form_div_node form_div_node_line_margin">
-                    <span class="form_input_title">Building dem</span>
-                    <input class="text_input" value="<%=LeadsInfoData.BuildingDem%>" />
-                </div>
+            <%--line 4--%>
 
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                    <span class="form_input_title">Lot Dem</span>
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Building dem</span>
+                <input class="text_input" value="<%=LeadsInfoData.BuildingDem%>" />
+            </div>
 
-                    <input class="text_input" value="<%=LeadsInfoData.LotDem%>" />
-                </div>
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Lot Dem</span>
 
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                    <span class="form_input_title">stories</span>
+                <input class="text_input" value="<%=LeadsInfoData.LotDem%>" />
+            </div>
 
-                    <input class="text_input" value="<%= LeadsInfoData.NumFloors %>" />
-                </div>
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">stories</span>
 
-                <%----end line 4----%>
+                <input class="text_input" value="<%= LeadsInfoData.NumFloors %>" />
+            </div>
 
-                <%-----line 5-----%>
-                <div class="form_div_node form_div_node_line_margin">
-                    <span class="form_input_title">Tax class</span>
-                    <input class="text_input" value="<%=LeadsInfoData.TaxClass%>" />
-                </div>
+            <%----end line 4----%>
 
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                    <span class="form_input_title">Zoning (<span style="color: #0e9ee9">PDF</span>)</span>
+            <%-----line 5-----%>
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Tax class</span>
+                <input class="text_input" value="<%=LeadsInfoData.TaxClass%>" />
+            </div>
 
-                    <input class="text_input" value="<%=LeadsInfoData.Zoning%>" />
-                </div>
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Zoning (<span style="color: #0e9ee9">PDF</span>)</span>
 
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                    <span class="form_input_title">Unbuilt sqft</span>
+                <input class="text_input" value="<%=LeadsInfoData.Zoning%>" />
+            </div>
 
-                    <input class="text_input" value="<%=LeadsInfoData.UnbuiltSqft%>" />
-                </div>
-                <%----end line 5--%>
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Unbuilt sqft</span>
 
-                <%-----line 6-----%>
-                <div class="form_div_node form_div_node_line_margin">
-                    <span class="form_input_title">Max Far</span>
-                    <input class="text_input" value="<%=LeadsInfoData.MaxFar%>" />
-                </div>
+                <input class="text_input" value="<%=LeadsInfoData.UnbuiltSqft%>" />
+            </div>
+            <%----end line 5--%>
 
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                    <span class="form_input_title">axtual far</span>
+            <%-----line 6-----%>
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Max Far</span>
+                <input class="text_input" value="<%=LeadsInfoData.MaxFar%>" />
+            </div>
 
-                    <input class="text_input" value="<%= LeadsInfoData.ActualFar%>" />
-                </div>
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">axtual far</span>
 
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                    <span class="form_input_title">Zestimate</span>
+                <input class="text_input" value="<%= LeadsInfoData.ActualFar%>" />
+            </div>
 
-                    <input class="text_input" value="<%=LeadsInfoData.EstValue %>" />
-                </div>
-                <%----end line --%>       
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Zestimate</span>
+
+                <input class="text_input" value="<%=LeadsInfoData.EstValue %>" />
+            </div>
+            <%----end line --%>
         </div>
         <%-------end-----%>
 
@@ -175,129 +175,134 @@
         <div style="margin: 20px;" class="clearfix">
             <div class="form_head" style="margin-top: 40px;">MORTGAGE AND VIOLATIONS</div>
 
-        
 
-                <%--line 1--%>
+
+            <%--line 1--%>
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">1st Mortgage</span>
+                <input class="text_input" value="$<%= LeadsInfoData.C1stMotgrAmt%>" />
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
+                <span class="form_input_title"></span>
+                <br />
+
+                <%--class="circle-radio-boxes"--%>
+                <input type="radio" id="sex" name="sex" value="Fannie" />
+                <label for="sex" class=" form_div_radio_group">
+                    <span class="form_span_group_text">Fannie</span>
+                </label>
+                <input type="radio" id="sexf" name="sex" value="FHA" style="margin-left: 66px" />
+                <label for="sexf" class=" form_div_radio_group form_div_node_margin">
+                    <span class="form_span_group_text">FHA</span>
+                </label>
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Servicer</span>
+
+                <input class="text_input" value=" " />
+            </div>
+            <%--end line --%>
+            <%--line 2--%>
+
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">2nd Mortgage</span>
+                <input class="text_input" value="$<%=LeadsInfoData.C2ndMotgrAmt%>" />
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
+                <span class="form_input_title"></span>
+                <br />
+
+                <%--class="circle-radio-boxes"--%>
+                <input type="radio" id="sex1" name="sex" value="Fannie" />
+                <label for="sex1" class=" form_div_radio_group">
+                    <span class="form_span_group_text">Fannie</span>
+                </label>
+                <input type="radio" id="sexf1" name="sex" value="FHA" style="margin-left: 66px" />
+                <label for="sexf1" class=" form_div_radio_group form_div_node_margin">
+                    <span class="form_span_group_text">FHA</span>
+                </label>
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Servicer</span>
+
+                <input class="text_input" value=" " />
+            </div>
+
+            <%----end line ----%>
+
+            <%--line 3--%>
+
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">3nd Mortgage</span>
+                <input class="text_input" value=" " />
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
+                <span class="form_input_title"></span>
+                <br />
+
+                <%--class="circle-radio-boxes"--%>
+                <input type="radio" id="sex2" name="sex" value="Fannie" />
+                <label for="sex2" class=" form_div_radio_group">
+                    <span class="form_span_group_text">Fannie</span>
+                </label>
+                <input type="radio" id="sexf2" name="sex" value="FHA" style="margin-left: 66px" />
+                <label for="sexf2" class=" form_div_radio_group form_div_node_margin">
+                    <span class="form_span_group_text">FHA</span>
+                </label>
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Servicer</span>
+
+                <input class="text_input" value=" " />
+            </div>
+
+            <%----end line ----%>
+            <div style="width: 230px" class="clearfix">
+                <%--line 4--%>
+                <script>
+                    function formatAsDollars(el) {
+                        el.value = el.value.replace('$','');
+                        el.value = '$' + el.value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+                    }
+                </script>
                 <div class="form_div_node form_div_node_line_margin">
-                    <span class="form_input_title">1st Mortgage</span>
-                    <input class="text_input" value="$<%= LeadsInfoData.C1stMotgrAmt%>" />
+                    <span class="form_input_title">Taxes</span>
+                    <input onkeyup="formatAsDollars(this);" class="text_input" value="$<%=LeadsInfoData.TaxesAmt%>" />
                 </div>
 
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
-                    <span class="form_input_title"></span>
-                    <br />
 
-                    <%--class="circle-radio-boxes"--%>
-                    <input type="radio" id="sex" name="sex" value="Fannie" />
-                    <label for="sex" class=" form_div_radio_group">
-                        <span class="form_span_group_text">Fannie</span>
-                    </label>
-                    <input type="radio" id="sexf" name="sex" value="FHA" style="margin-left: 66px" />
-                    <label for="sexf" class=" form_div_radio_group form_div_node_margin">
-                        <span class="form_span_group_text">FHA</span>
-                    </label>
-                </div>
-
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                    <span class="form_input_title">Servicer</span>
-
-                    <input class="text_input" value=" " />
-                </div>
-                <%--end line --%>
-                <%--line 2--%>
+                <%----end line ----%>
+                <%--line 5--%>
 
                 <div class="form_div_node form_div_node_line_margin">
-                    <span class="form_input_title">2nd Mortgage</span>
-                    <input class="text_input" value="$<%=LeadsInfoData.C2ndMotgrAmt%>" />
+                    <span class="form_input_title">water</span>
+                    <input class="text_input" value="$<%= LeadsInfoData.WaterAmt%>" />
                 </div>
+                <%----end line ----%>
+                <%--line 6--%>
 
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
-                    <span class="form_input_title"></span>
-                    <br />
-
-                    <%--class="circle-radio-boxes"--%>
-                    <input type="radio" id="sex1" name="sex" value="Fannie" />
-                    <label for="sex1" class=" form_div_radio_group">
-                        <span class="form_span_group_text">Fannie</span>
-                    </label>
-                    <input type="radio" id="sexf1" name="sex" value="FHA" style="margin-left: 66px" />
-                    <label for="sexf1" class=" form_div_radio_group form_div_node_margin">
-                        <span class="form_span_group_text">FHA</span>
-                    </label>
+                <div class="form_div_node form_div_node_line_margin">
+                    <span class="form_input_title">ecb/dob</span>
+                    <input class="text_input" value="<%= LeadsInfoData.ViolationAmount %>" />
                 </div>
+                <%--line 7--%>
 
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                    <span class="form_input_title">Servicer</span>
-
-                    <input class="text_input" value=" " />
+                <div class="form_div_node form_div_node_line_margin">
+                    <span class="form_input_title" style="color: #ff400d">Total debt</span>
+                    <input class="text_input" value="$ <%= LeadsInfoData.C1stMotgrAmt+LeadsInfoData.C2ndMotgrAmt+LeadsInfoData.TaxesAmt+LeadsInfoData.WaterAmt %>" />
                 </div>
 
                 <%----end line ----%>
+            </div>
 
-                <%--line 3--%>
-
-                <div class="form_div_node form_div_node_line_margin">
-                    <span class="form_input_title">3nd Mortgage</span>
-                    <input class="text_input" value=" " />
-                </div>
-
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
-                    <span class="form_input_title"></span>
-                    <br />
-
-                    <%--class="circle-radio-boxes"--%>
-                    <input type="radio" id="sex2" name="sex" value="Fannie" />
-                    <label for="sex2" class=" form_div_radio_group">
-                        <span class="form_span_group_text">Fannie</span>
-                    </label>
-                    <input type="radio" id="sexf2" name="sex" value="FHA" style="margin-left: 66px" />
-                    <label for="sexf2" class=" form_div_radio_group form_div_node_margin">
-                        <span class="form_span_group_text">FHA</span>
-                    </label>
-                </div>
-
-                <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                    <span class="form_input_title">Servicer</span>
-
-                    <input class="text_input" value=" " />
-                </div>
-
-                <%----end line ----%>
-                <div style="width: 230px" class="clearfix">
-                    <%--line 4--%>
-
-                    <div class="form_div_node form_div_node_line_margin">
-                        <span class="form_input_title">Taxes</span>
-                        <input class="text_input" value="$<%=LeadsInfoData.TaxesAmt%>" />
-                    </div>
-
-
-                    <%----end line ----%>
-                    <%--line 5--%>
-
-                    <div class="form_div_node form_div_node_line_margin">
-                        <span class="form_input_title">water</span>
-                        <input class="text_input" value="$<%= LeadsInfoData.WaterAmt%>" />
-                    </div>
-                    <%----end line ----%>
-                    <%--line 6--%>
-
-                    <div class="form_div_node form_div_node_line_margin">
-                        <span class="form_input_title">ecb/dob</span>
-                        <input class="text_input" value="<%= LeadsInfoData.ViolationAmount %>" />
-                    </div>
-                    <%--line 7--%>
-
-                    <div class="form_div_node form_div_node_line_margin">
-                        <span class="form_input_title" style="color: #ff400d">Total debt</span>
-                        <input class="text_input" value="$ <%= LeadsInfoData.C1stMotgrAmt+LeadsInfoData.C2ndMotgrAmt+LeadsInfoData.TaxesAmt+LeadsInfoData.WaterAmt %>" />
-                    </div>
-
-                    <%----end line ----%>
-                </div>
-
-                <%----end line ----%>
-          
+            <%----end line ----%>
         </div>
         <%-------end-----%>
 
@@ -305,16 +310,16 @@
         <div style="margin: 20px;" class="clearfix">
             <div class="form_head" style="margin-top: 40px;">Liens</div>
             <dx:ASPxGridView runat="server" ID="gridLiens" KeyFieldName="LisPenID" Width="100%">
-            <Columns>
-                <dx:GridViewDataTextColumn FieldName="Type" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="Effective" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="Expiration" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="Plaintiff" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="Defendant" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="Index" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
-            </Columns>
-        </dx:ASPxGridView>
-            <table class="table table-condensed" style="width:100%;display:none">
+                <Columns>
+                    <dx:GridViewDataTextColumn FieldName="Type" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Effective" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Expiration" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Plaintiff" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Defendant" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Index" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                </Columns>
+            </dx:ASPxGridView>
+            <table class="table table-condensed" style="width: 100%; display: none">
                 <thead>
                     <tr>
                         <th class="report_head">Effective</th>

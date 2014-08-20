@@ -410,9 +410,9 @@
 <div style="width: 100%; height:100%;" class="color_gray">
     <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px" class="clearfix">
         <div style="font-size: 24px;" class="clearfix">
-            <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;&nbsp;
+            <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
             <span style="color: #234b60; font-size: 30px;">
-                <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" Font-Bold="true" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
+                <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
             </span>
             <i class="fa fa-sort-amount-desc icon_right_s" style="cursor: pointer" onclick="SortLeadsList"></i>
         </div>
@@ -445,7 +445,9 @@
                 <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false" VisibleIndex="5"></dx:GridViewDataColumn>
                 <dx:GridViewDataColumn Width="25px" VisibleIndex="6">
                     <DataItemTemplate>
-                        <i class="fa fa-list-alt employee_list_item_icon" style="vertical-align: bottom" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>"></i>
+                        <div class="hidden_icon">
+                            <i class="fa fa-list-alt employee_list_item_icon" style="width:30px"  onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>"></i>
+                        </div>
                         <%-- <img src="/images/flag1.png" style="width: 16px; height: 16px; vertical-align: bottom" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>" />--%>
                     </DataItemTemplate>
                 </dx:GridViewDataColumn>
@@ -722,57 +724,57 @@
         </div>
     </div>
     <asp:HiddenField ID="hfView" runat="server" EnableViewState="true" />
-    <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ItemImage-Height="16" ItemImage-Width="16">
+    <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
         <Items>
             <dx:MenuItem GroupName="Sort" Text="View Map" Name="GoogleStreet">
-                <Image Url="/images/Street-view.png"></Image>
+                <Image Url="/images/drap_map_icons.png"></Image>
             </dx:MenuItem>
-            <dx:MenuItem GroupName="Sort" Text="Google Map View" Name="GoogleMap" Image-Url="/images/Street-view.png" ClientVisible="false">
-                <Image Url="/images/Street-view.png"></Image>
+            <dx:MenuItem GroupName="Sort" Text="Google Map View" Name="GoogleMap"  ClientVisible="false">
+                <Image Url="/images/drap_map_icons.png"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="Bing Bird View" Name="BingBird" Image-Url="/images/Street-view.png" ClientVisible="false">
-                <Image Url="/images/Street-view.png"></Image>
+                <Image Url="/images/drap_map_icons.png"></Image>
             </dx:MenuItem>
-            <dx:MenuItem GroupName="Sort" Text="Priority" Name="Priority" Image-Url="/images/priority.jpg">
-                <Image Url="/images/priority.jpg"></Image>
+            <dx:MenuItem GroupName="Sort" Text="Priority" Name="Priority" >
+                <Image Url="/images/drap_prority_icons.png"></Image>
             </dx:MenuItem>
-            <dx:MenuItem GroupName="Sort" Text="Door Knock" Name="DoorKnock" Image-Url="/images/door_knocks.png">
-                <Image Url="/images/door_knocks.png"></Image>
+            <dx:MenuItem GroupName="Sort" Text="Door Knock" Name="DoorKnock" >
+                <Image Url="/images/drap_doorknock_icons.png"></Image>
             </dx:MenuItem>
-            <dx:MenuItem GroupName="Sort" Text="Follow Up" Name="Callback" Image-Url="/images/callback.png">
-                <Image Url="/images/callback.png"></Image>
+            <dx:MenuItem GroupName="Sort" Text="Follow Up" Name="Callback" >
+                <Image Url="/images/drap_follow_up_icons.png"></Image>
             </dx:MenuItem>
-            <dx:MenuItem GroupName="Sort" Text="Dead Lead" Name="DeadLead" Image-Url="/images/dead.png">
-                <Image Url="/images/dead.png"></Image>
+            <dx:MenuItem GroupName="Sort" Text="Dead Lead" Name="DeadLead">
+                <Image Url="/images/drap_deadlead_icons.png"></Image>
             </dx:MenuItem>
-            <dx:MenuItem GroupName="Sort" Text="In Process" Name="InProcess" Image-Url="/images/process-icon2.jpg">
-                <Image Url="/images/process-icon2.jpg"></Image>
+            <dx:MenuItem GroupName="Sort" Text="In Process" Name="InProcess" >
+                <Image Url="/images/drap_inprocess_icons.png"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="View Lead" Name="ViewLead" Visible="false">
-                <Image IconID="miscellaneous_viewonweb_16x16"></Image>
+                <Image Url="/images/drap_closed_icons.png"></Image>
             </dx:MenuItem>
-            <dx:MenuItem GroupName="Sort" Text="Closed" Name="Closed" Image-Url="/images/Closed.png">
-                <Image Url="/images/Closed.png"></Image>
+            <dx:MenuItem GroupName="Sort" Text="Closed" Name="Closed" >
+                <Image Url="/images/drap_closed_icons.png"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="Shared" Name="Shared">
-                <Image IconID="actions_add_16x16"></Image>
+                <Image Url="/images/drap_shared_icons.png"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="Delete" Name="Delete" Visible="false">
-                <Image IconID="edit_delete_16x16"></Image>
+                <Image Url="/images/drap_closed_icons.png"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="Reassign" Name="Reassign" Visible="false">
                 <Image Url="/images/assigned.png"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="View Files" Name="ViewFiles">
-                <Image IconID="mail_attach_16x16"></Image>
+                <Image Url="/images/drap_viewfile_icons.png"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="Upload Docs/Pics" Name="Upload">
-                <Image IconID="print_preview_16x16"></Image>
+                <Image Url="/images/drap_upload_icons.png"></Image>
             </dx:MenuItem>
         </Items>
         <ClientSideEvents ItemClick="OnLeadsCategoryClick" />
-        <ItemImage Height="16px" Width="16px"></ItemImage>
-        <ItemStyle Width="143px"></ItemStyle>
+       
+         <ItemStyle Width="190px" Height="30px"></ItemStyle>
     </dx:ASPxPopupMenu>
     <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMapControl" Width="500px" Height="500px"
         MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"

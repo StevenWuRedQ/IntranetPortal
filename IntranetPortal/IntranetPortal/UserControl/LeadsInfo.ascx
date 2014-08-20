@@ -309,16 +309,18 @@
                                             <dx:ASPxCallbackPanel runat="server" ID="ownerInfoCallbackPanel" ClientInstanceName="ownerInfoCallbackPanel" OnCallback="ownerInfoCallbackPanel_Callback" Height="780px" ScrollBars="Auto" Paddings-Padding="0px">
                                                 <PanelCollection>
                                                     <dx:PanelContent>
-                                                        <table style="width: 100%; margin: 0px; padding: 0px;">
-                                                            <tr>
-                                                                <td style="width: 50%; vertical-align: top">
-                                                                    <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo2" />
-                                                                </td>
-                                                                <td style="vertical-align: top">
-                                                                    <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo3" />
-                                                                </td>
-                                                            </tr>
-                                                        </table>
+                                                        <div style="padding: 20px 20px 0px 20px">
+                                                            <table style="width: 100%; margin: 0px; padding: 0px;">
+                                                                <tr>
+                                                                    <td style="width: 50%; vertical-align: top">
+                                                                        <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo2" />
+                                                                    </td>
+                                                                    <td style="vertical-align: top">
+                                                                        <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo3" />
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
                                                     </dx:PanelContent>
                                                 </PanelCollection>
                                             </dx:ASPxCallbackPanel>
@@ -620,7 +622,7 @@
                     </dx:PopupControlContentControl>
                 </ContentCollection>
             </dx:ASPxPopupControl>
-           
+
         </dx:PanelContent>
     </PanelCollection>
     <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>

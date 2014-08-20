@@ -33,7 +33,7 @@
         <ItemTemplate>
             <div class="doc_list_section">
                 <div id="default-example" data-collapse="">
-                    <h3 class="doc_list_title  open color_balck"><%# Eval("Key")%> &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>
+                    <h3 class="doc_list_title  color_balck"><%# Eval("Key")%> &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>
                     <div>
 
                         <%--<h4><%# Eval("Key")%></h4>--%>

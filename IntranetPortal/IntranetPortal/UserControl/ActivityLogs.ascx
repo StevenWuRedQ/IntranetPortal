@@ -273,8 +273,8 @@
         <div style="float: left; height: 110px; width: 460px; margin-top: 10px;">
             <div class="clearfix">
                 <span style="color: #295268;" class="upcase_text">Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
-                <input type="radio" id="sex" name="sex" value="Fannie" class="font_12" />
-                <label for="sex" class="font_12">
+                <input type="radio" id="sex12" name="sex" value="Fannie" class="font_12" />
+                <label for="sex12" class="font_12">
                     <span class="upcase_text">Internal update</span>
                 </label>
                 <input type="radio" id="sexf11" name="sex" value="FHA" class="font_12" />

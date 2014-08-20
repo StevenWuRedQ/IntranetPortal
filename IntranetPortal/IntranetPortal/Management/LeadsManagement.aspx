@@ -150,18 +150,16 @@
                 <ContentCollection>
                     <dx:SplitterContentControl runat="server">
                         <div style="width: 100%; height: 100%; /*border: 1px solid gray; border-bottom: 1px solid gray; */">
-                            <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px" class="clearfix">
+                            <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px;white-space:nowrap" class="clearfix">
                                 <div style="font-size: 24px;" class="clearfix">
                                     <i class="fa fa-group with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
                                     <span style="color: #234b60; font-size: 30px;">
-                                        <dx:ASPxLabel Text="Select Employee" ID="ASPxLabel1" Font-Size="16px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
+                                        <dx:ASPxLabel Text="Select Employee" ID="ASPxLabel1" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
                                     </span>
 
                                 </div>
                             </div>
-                            <%--<div style="/*background-color: #efefef; border-bottom: 1px solid gray; */ text-align: left; padding-left: 5px">
-                                <dx:ASPxLabel Text="Select Employee" ID="ASPxLabel1" Font-Bold="true" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
-                            </div>--%>
+                         
                             <dx:ASPxListBox runat="server" ID="listboxEmployee" Height="450" TextField="Name" ValueField="EmployeeID"
                                 SelectedIndex="0" Width="100%" Border-BorderStyle="None">
                                 <Border BorderStyle="None"></Border>

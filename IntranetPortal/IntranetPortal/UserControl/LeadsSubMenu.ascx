@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LeadsSubMenu.ascx.vb" Inherits="IntranetPortal.LeadsSubMenu" %>
  <script type="text/javascript" src="/scripts/LeadsSubMenu.js"></script>
-<dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory"  PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ItemImage-Height="16" ItemImage-Width="16" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+<dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory"  PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
     <Items>
         <dx:MenuItem GroupName="Sort" Text="View Map" Name="GoogleStreet">
             <Image Url="../images/drap_map_icons.png"></Image>
@@ -46,7 +46,6 @@
         </dx:MenuItem>
     </Items>
     <ClientSideEvents ItemClick="OnLeadsCategoryClick" />
-    <ItemImage Height="16px" Width="16px"></ItemImage>
     <ItemStyle Width="190px" Height="30px"></ItemStyle>
 </dx:ASPxPopupMenu>
 <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">

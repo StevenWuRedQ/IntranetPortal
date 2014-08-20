@@ -17,7 +17,7 @@
 }
 
 .div-underline {
-    height: 230px;
+    height: 275px;
 }
 
 /*test steven  ssss  ddddd added*/
@@ -758,6 +758,14 @@ i.with_circle {
 .dxgvDataRow_MetropolisBlue1:hover img {
     visibility: visible;
 }
+
+.gridAlternatingRow .hidden_icon
+{
+    visibility:hidden;
+}
+.gridAlternatingRow:hover .hidden_icon {
+    visibility: visible;
+}
 /*charts css*/
 .legend {
     text-align: center;
@@ -1274,3 +1282,8 @@ i.log_item_hl_buttons:hover
     color:#2e2f31;
 }
 /*-----end----*/
+
+.dxm-image
+{
+    /*padding-left:10px !important;*/
+}
