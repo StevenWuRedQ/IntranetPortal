@@ -4,8 +4,8 @@
 <script src="/Scripts/globalize/globalize.js"></script>
 <script src="/Scripts/dx.chartjs.js"></script>
 <div style="overflow: auto;width:871px">
-    <div id="container" style="height: 400px; width: 100%"></div>
-    <div id="pieChart" style="height: 400px; width: 100%"></div>
+    <div id="container" style="height: 400px;"></div>
+    <div id="pieChart" style="height: 400px;"></div>
 </div>
 <script type="text/javascript">
 
@@ -104,7 +104,16 @@
         
         var chartData = dataFormSever.DataSource;
         var chartTitle = dataFormSever.Title == null ? "Leads" : dataFormSever.Title;
-        $("#container").width(40 * chartData.length +80 )
+        $("#container").width(600);
+        var charsWidth = $("#container").width();
+        var tagertWidth = 40 * chartData.length + 80;
+       
+        if (charsWidth < tagertWidth)
+        {
+           
+            $("#container").width(tagertWidth);
+        }
+            
         var charts = $("#container").dxChart({
             dataSource: chartData,
             commonSeriesSettings: {

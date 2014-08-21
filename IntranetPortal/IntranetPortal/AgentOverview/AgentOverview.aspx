@@ -51,7 +51,7 @@
         function onGetAgentLogButtonClick() {
             if (empId != null) {
 
-                LoadAngentTodayReport(empId);
+                LoadAngentTodayReport(empId+",1");
             } else {
                 alert('EmpId is null');
             }
