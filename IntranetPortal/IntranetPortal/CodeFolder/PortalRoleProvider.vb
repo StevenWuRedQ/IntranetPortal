@@ -5,7 +5,7 @@
         Throw New NotImplementedException()
     End Sub
 
-    Public Overrides Property ApplicationName As String
+    Public Overrides Property ApplicationName As String = ""
 
     Public Overrides Sub Initialize(name As String, config As NameValueCollection)
         If config Is Nothing Then _

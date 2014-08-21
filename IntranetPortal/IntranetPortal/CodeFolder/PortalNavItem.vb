@@ -19,13 +19,19 @@ Public Class PortalNavItem
     Public Property Items As List(Of PortalNavItem)
     Public Property level As Integer = 1
     Public Property FrontButton As String = ""
+
+    <XmlAttribute()>
+    Public Property Office As String = ""
+
     <XmlAttribute()>
     Public Property Expanded As Boolean
 
     Private rootItemFormat As String = "<li><a href=""{0}"" class=""category {3}"" target=""contentUrlPane"">{1} - {2}</a>"
+    Private rootOfficeItemFormat As String = "<li><a href=""{0}"" class=""category {2}"" target=""contentUrlPane"">{1}</a>"
     Private itemFormat As String = "<li>{3}<a href=""{1}"" target=""contentUrlPane"">{0}{2}</a>"
     Private itemWithChildrenFormat As String = "<li>{4}<a href=""{1}"" class=""{3}"" target=""contentUrlPane""><i class=""fa fa-caret-right""></i>{0}{2}</a>"
-    Private itemWithNumFormat As String = "<li>{5}<a href=""{1}"" target=""contentUrlPane"">{0}{2}<span class=""notification"" id=""{3}"">{4}</span></a>"
+    Private itemWithNumFormat As String = "<li>{5}<a href=""{1}"" target=""contentUrlPane"" class=""{6}"">{0}{2}<span class=""notification"" id=""{3}"">{4}</span></a>"
+    Private itemWithNumChildrenFormat = "<li>{5}<a href=""{1}"" class=""{6}"" target=""contentUrlPane""><i class=""fa fa-caret-right""></i>{0}{2}<span class=""notification"" id=""{3}"">{4}</span></a>"
     Private childrenWrapFormat As String = "<ul class=""nav-level-{0}"">{1}</ul>"
     Private level2WrapFormat As String = " <div class=""nav-level-{0}-container"">{1}</div>"
     Private itemEndFormat As String = "</li>"
@@ -71,12 +77,18 @@ Public Class PortalNavItem
     End Function
 
     Function RenderRootNode() As String
+        If ItemType = "Office" Then
+            Return String.Format(rootOfficeItemFormat, NavigationUrl, Text, If(Expanded, "current", ""))
+        End If
         Return String.Format(rootItemFormat, NavigationUrl, Text, HttpContext.Current.User.Identity.Name, If(Expanded, "current", ""))
     End Function
 
     Function RenderNode() As String
         If ShowAmount Then
-            Return String.Format(itemWithNumFormat, FontClass, NavigationUrl, Text, LeadsCountSpanId, "", FrontButton)
+            If Items.Count > 0 Then
+                Return String.Format(itemWithNumChildrenFormat, FontClass, NavigationUrl, Text, LeadsCountSpanId, "", FrontButton, "has-level-" & level + 1 & "-menu")
+            End If
+            Return String.Format(itemWithNumFormat, FontClass, NavigationUrl, Text, LeadsCountSpanId, "", FrontButton, If(Items.Count > 0, "has-level-" & level + 1 & "-menu", ""))
         Else
             If Items.Count > 0 Then
                 Return String.Format(itemWithChildrenFormat, FontClass, NavigationUrl, Text, "has-level-" & level + 1 & "-menu", FrontButton)
@@ -89,7 +101,10 @@ Public Class PortalNavItem
     Function Visible(Optional userContext As HttpContext = Nothing) As Boolean
         If userContext Is Nothing AndAlso HttpContext.Current IsNot Nothing Then
             userContext = HttpContext.Current
+        Else
+            HttpContext.Current = userContext
         End If
+
         Dim userName = userContext.User.Identity.Name
 
         If String.IsNullOrEmpty(ItemType) Then
@@ -117,8 +132,13 @@ Public Class PortalNavItem
     End Function
 
     Function IsUserRoles(userName As String) As Boolean
+        If Roles.IsUserInRole(userName, "Admin") Then
+            Return True
+        End If
+
         If Not String.IsNullOrEmpty(UserRoles) Then
             For Each rl In UserRoles.Split(",")
+
                 If Roles.IsUserInRole(userName, rl) Then
                     Return True
                 End If

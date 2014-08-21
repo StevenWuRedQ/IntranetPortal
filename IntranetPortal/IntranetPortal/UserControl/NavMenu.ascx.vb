@@ -117,44 +117,26 @@ Public Class RefreshLeadsCountHandler
         End If
 
         If name.StartsWith("Office") Then
-            Return ""
+            Return GetOfficeLeadsCount(name, itemText)
         End If
+    End Function
 
-        'Select Case name
-        '    Case "AgentNewLeads"
-        '        Return Utility.GetLeadsCount(LeadStatus.NewLead, userName)
-        '    Case "AgentHotLeads"
-        '        Return Utility.GetLeadsCount(LeadStatus.Priority, userName)
-        '    Case "AgentFollowUp"
-        '        Return Utility.GetLeadsCount(LeadStatus.Callback, userName)
-        '    Case "AgentDoorKnock"
-        '        Return Utility.GetLeadsCount(LeadStatus.DoorKnocks, userName)
-        '    Case "AgentInProcess"
-        '        Return Utility.GetLeadsCount(LeadStatus.InProcess, userName)
-        '    Case "AgentDeadLead"
-        '        Return Utility.GetLeadsCount(LeadStatus.DeadEnd, userName)
-        '    Case "AgentClosed"
-        '        Return Utility.GetLeadsCount(LeadStatus.Closed, userName)
-        'End Select
+    Function GetOfficeLeadsCount(name As String, itemText As String) As Integer
+        Dim tmpStr = name.Split("-")
 
-        'Dim emps = Employee.GetManagedEmployees(userName)
+        If tmpStr.Length > 2 Then
+            Dim office = tmpStr(1)
+            Dim type = tmpStr(2)
 
-        'Select Case name
-        '    Case "MgrNewLeads"
-        '        Return Utility.GetMgrLeadsCount(LeadStatus.NewLead, emps)
-        '    Case "MgrHotLeads"
-        '        Return Utility.GetMgrLeadsCount(LeadStatus.Priority, emps)
-        '    Case "MgrFollowUp"
-        '        Return Utility.GetMgrLeadsCount(LeadStatus.Callback, emps)
-        '    Case "MgrDoorKnock"
-        '        Return Utility.GetMgrLeadsCount(LeadStatus.DoorKnocks, emps)
-        '    Case "MgrInProcess"
-        '        Return Utility.GetMgrLeadsCount(LeadStatus.InProcess, emps)
-        '    Case "MgrDeadLead"
-        '        Return Utility.GetMgrLeadsCount(LeadStatus.DeadEnd, emps)
-        '    Case "MgrClosed"
-        '        Return Utility.GetMgrLeadsCount(LeadStatus.Closed, emps)
-        'End Select
+            Select Case type
+                Case "AssignLeads"
+                    Return Utility.GetUnAssignedLeadsCount(office)
+                Case "Management"
+                    Return Utility.GetOfficeLeadsCount(LeadStatus.ALL, office) + Utility.GetUnAssignedLeadsCount(office)
+                Case Else
+                    Return Utility.GetOfficeLeadsCount(Utility.GetLeadStatus(itemText), office)
+            End Select
+        End If
 
     End Function
 
