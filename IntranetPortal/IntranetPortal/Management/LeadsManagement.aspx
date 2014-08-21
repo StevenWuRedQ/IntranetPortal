@@ -124,7 +124,7 @@
                                         <dx:GridViewDataTextColumn FieldName="Neighborhood" Visible="false"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Type" Width="30px" CellStyle-HorizontalAlign="Center" CellStyle-VerticalAlign="Middle">
                                             <DataItemTemplate>
-                                                <dx:ASPxImage runat="server" ID="imgType" ImageUrl="~/images/Opportunities-icon.jpg" Width="24" Height="24" Visible="false"></dx:ASPxImage>
+                                                <dx:ASPxImage runat="server" ID="imgType" ImageUrl="~/images/Opportunities-icon.jpg" Width="24" Height="24" Visible="false" CssClass="always_show"></dx:ASPxImage>
                                             </DataItemTemplate>
                                         </dx:GridViewDataTextColumn>
                                     </Columns>

@@ -1296,3 +1296,7 @@ i.log_item_hl_buttons:hover
 {
     /*padding-left:10px !important;*/
 }
+.always_show
+{
+    visibility:visible !important;
+}

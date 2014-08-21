@@ -3,8 +3,10 @@
 <%--<script src="/Scripts/jquery-2.1.1.min.js"></script>--%>
 <script src="/Scripts/globalize/globalize.js"></script>
 <script src="/Scripts/dx.chartjs.js"></script>
-<div id="container" style=" max-width: 1200px; height: 400px; width:100%" ></div>
-<div id="pieChart" style="max-width: 1200px; height: 400px;width:100%"></div>
+<div style="overflow: auto">
+    <div id="container" style="max-width: 1200px; height: 400px; width: 100%"></div>
+    <div id="pieChart" style="max-width: 1200px; height: 400px; width: 100%"></div>
+</div>
 <script type="text/javascript">
 
     //var dataSource = [
@@ -27,8 +29,7 @@
         //alert(functions[type])
         functions[type]();
     };
-    function change_chart_time(e)
-    {
+    function change_chart_time(e) {
         var time = $(e).text();
         var chart = $("#container").dxChart("instance");
         var datePass = new Date();
@@ -37,10 +38,8 @@
         chart.option("title", time);
 
     }
-    function clear_chart(show_pie)
-    {
-        if (show_pie)
-        {
+    function clear_chart(show_pie) {
+        if (show_pie) {
             $('#pieChart').show();
 
             $('#container').hide();
@@ -50,7 +49,7 @@
 
             $('#container').show();
         }
-       
+
     }
     function show_line_chart() {
         clear_chart()
@@ -99,10 +98,10 @@
             }
         });
     }
-    function show_bar_chart(ds) {        
+    function show_bar_chart(ds) {
         var dataFormSever = ds != null ? ds : $.parseJSON('<%=ChartSource()%>');
         clear_chart();
-        
+
         var chartData = dataFormSever.DataSource;
         var chartTitle = dataFormSever.Title == null ? "Leads" : dataFormSever.Title;
 
@@ -143,14 +142,14 @@
             pointClick: function (point) {
                 this.select();
             }
-        });     
+        });
     }
 
-    
 
-    function show_pie_chart( ds ) {
+
+    function show_pie_chart(ds) {
         clear_chart(true);
-       
+
         var dataSource = [
           { Name: "USA", Count: 110 },
           { Name: "China", Count: 100 },
@@ -161,10 +160,9 @@
           { Name: "France", Count: 40 },
           { Name: "South Korea", Count: 31 }
         ];
-       
+
         var chartTitle = "Pie Chart";
-        if (ds)
-        {
+        if (ds) {
             dataSource = ds.DataSource;
             chartTitle = ds.Title;
         }
@@ -199,45 +197,36 @@
         });
     }
 
-    function LoadStatusBarChart(status)
-    {
+    function LoadStatusBarChart(status) {
         callbackDsClient.PerformCallback(status);
     }
 
-    function LoadOfficeBarChart(office)
-    {
+    function LoadOfficeBarChart(office) {
         callbackOfficeLeads.PerformCallback(office);
     }
 
-    function LoadEmployeeBarChart(empId)
-    {
+    function LoadEmployeeBarChart(empId) {
         callbackEmployeeClient.PerformCallback(empId);
     }
-    function LoadAngentTodayReport(empId)
-    {
+    function LoadAngentTodayReport(empId) {
         callbackAgentClinet.PerformCallback(empId);
     }
-    function AgentDateSourceLoadedComplete(s, e)
-    {        
+    function AgentDateSourceLoadedComplete(s, e) {
         show_bar_chart($.parseJSON(e.result));
     }
 
-    function DataSourceLoadedComplete(s, e)
-    {
-        show_bar_chart( $.parseJSON(e.result));
+    function DataSourceLoadedComplete(s, e) {
+        show_bar_chart($.parseJSON(e.result));
     }
 
-    function AgentZoningData(empId)
-    {
+    function AgentZoningData(empId) {
         callbackAgentZoning.PerformCallback(empId);
     }
-    function AgentDateSourceZoningComplete(s, e)
-    {
+    function AgentDateSourceZoningComplete(s, e) {
         show_pie_chart($.parseJSON(e.result))
     }
-    function ChangeDataSource()
-    {
-        var ds = eval('<% ChartSource()%>');        
+    function ChangeDataSource() {
+        var ds = eval('<% ChartSource()%>');
         show_bar_chart(ds);
     }
 

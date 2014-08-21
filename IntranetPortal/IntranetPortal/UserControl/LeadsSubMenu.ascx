@@ -46,7 +46,7 @@
         </dx:MenuItem>
     </Items>
     <ClientSideEvents ItemClick="OnLeadsCategoryClick" />
-    <ItemStyle Width="190px" Height="30px"></ItemStyle>
+    <ItemStyle Height="30px"></ItemStyle>
 </dx:ASPxPopupMenu>
 <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
     <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
