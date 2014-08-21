@@ -969,6 +969,7 @@
     <Content Include="images\shortsale.gif" />
     <Content Include="images\Short_Sale_Sign.jpg" />
     <Content Include="images\Street-view.png" />
+    <Content Include="images\submenu_shadow.png" />
     <Content Include="images\summary.png" />
     <Content Include="images\summary_icon.png" />
     <Content Include="images\task.png" />
