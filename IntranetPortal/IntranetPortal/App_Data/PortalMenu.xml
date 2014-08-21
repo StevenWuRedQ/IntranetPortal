@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPortalNavItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PortalNavItem Name="Agent" Text="Agent" NavigationUrl="/SummaryPage.aspx" ShowAmount="false" ItemType="Agent">
+    <level>1</level>
+    <FontClass>
+      <![CDATA[
+      ]]>
+    </FontClass>
+    <Items>
+      <PortalNavItem Name="Summary" Text="Summary" NavigationUrl="/SummaryPage.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-bar-chart-o"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="AgentNewLeads" Text="New Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-star"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="AgentHotLeads" Text="Hot Leads" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-sun-o"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="AgentFollowUp" Text="Follow Up" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-rotate-right"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="AgentDoorKnock" Text="Door Knock" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-sign-in"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="AgentShared" Text="Shared" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="false">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-share"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="AgentInProcess" Text="In Process" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-refresh"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="AgentDeadLead" Text="Dead Lead" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-times-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="AgentClosed" Text="Closed" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-times-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+  </PortalNavItem>
+  <PortalNavItem Name="Manager" Text="Manager" NavigationUrl="/summary.aspx" ShowAmount="false" Amount="0" Expanded="true">
+    <Items>
+      <PortalNavItem Name="Summary" Text="Summary" NavigationUrl="/summary.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-bar-chart-o"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+
+      <PortalNavItem Name="Agent" Text="My Leads" NavigationUrl="#" ShowAmount="false">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-suitcase"></i>]]>
+        </FontClass>
+        <Items>        
+          <PortalNavItem Name="AgentNewLeads" Text="New Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
+            <FontClass>
+              <![CDATA[ <i class="fa fa-star"></i>]]>
+            </FontClass>
+            <FrontButton>
+              <![CDATA[ <a href="#" class="add-button"><i class="fa fa-plus-circle"></i></a>]]>
+            </FrontButton>
+          </PortalNavItem>
+          <PortalNavItem Name="AgentHotLeads" Text="Hot Leads" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+            <FontClass>
+              <![CDATA[ <i class="fa fa-sun-o"></i>]]>
+            </FontClass>
+          </PortalNavItem>
+          <PortalNavItem Name="AgentFollowUp" Text="Follow Up" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+            <FontClass>
+              <![CDATA[ <i class="fa fa-rotate-right"></i>]]>
+            </FontClass>
+          </PortalNavItem>
+          <PortalNavItem Name="AgentDoorKnock" Text="Door Knock" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+            <FontClass>
+              <![CDATA[ <i class="fa fa-sign-in"></i>]]>
+            </FontClass>
+          </PortalNavItem>
+          <PortalNavItem Name="Shared" Text="Shared" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="false">
+            <FontClass>
+              <![CDATA[ <i class="fa fa-share"></i>]]>
+            </FontClass>
+          </PortalNavItem>
+          <PortalNavItem Name="AgentInProcess" Text="In Process" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+            <FontClass>
+              <![CDATA[ <i class="fa fa-refresh"></i>]]>
+            </FontClass>
+          </PortalNavItem>
+          <PortalNavItem Name="AgentDeadLead" Text="Dead Lead" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+            <FontClass>
+              <![CDATA[ <i class="fa fa-times-circle"></i>]]>
+            </FontClass>
+          </PortalNavItem>
+        </Items>
+      </PortalNavItem>
+      <PortalNavItem Name="AssignLeads" Text="Assign Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-square-o"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Task" Text="Task" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-tasks"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="MgrNewLeads" Text="New Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-star"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="MgrHotLeads" Text="Hot Leads" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-sun-o"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="MgrFollowUp" Text="Follow Up" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-rotate-right"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="MgrDoorKnock" Text="Door Knock" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-sign-in"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="MgrInProcess" Text="In Process" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-refresh"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="MgrDeadLead" Text="Dead Lead" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-times-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+  </PortalNavItem>
+</ArrayOfPortalNavItem>

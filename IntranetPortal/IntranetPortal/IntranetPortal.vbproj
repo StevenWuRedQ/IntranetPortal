@@ -842,6 +842,7 @@
     <Content Include="Account\Login2.aspx" />
     <Content Include="AgentOverview\AgentCharts.ascx" />
     <Content Include="AgentOverview\AgentOverview.aspx" />
+    <Content Include="App_Data\PortalMenu.xml" />
     <Content Include="App_Themes\PortalTheme2.dll" />
     <Content Include="BingViewMap.aspx" />
     <Content Include="Content\dx.android.holo-dark.css" />
@@ -867,6 +868,9 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\main.css" />
+    <Content Include="css\normalize.css" />
+    <Content Include="css\normalize.min.css" />
     <Content Include="DataAPITesting.aspx" />
     <Content Include="DevExpress\ASPxSchedulerForms\AppointmentDragToolTip.ascx" />
     <Content Include="DevExpress\ASPxSchedulerForms\AppointmentForm.ascx" />
@@ -1380,6 +1384,16 @@
     <Content Include="scripts\jquery.collapse.js" />
     <Content Include="scripts\jquery.collapse_cookie_storage.js" />
     <Content Include="scripts\jquery.collapse_storage.js" />
+    <Content Include="scripts\js\jquery.debouncedresize.js" />
+    <Content Include="scripts\js\jquery.easing.1.3.js" />
+    <Content Include="scripts\js\jquery.mCustomScrollbar\jquery.mCustomScrollbar.css" />
+    <Content Include="scripts\js\jquery.mCustomScrollbar\jquery.mCustomScrollbar.min.js" />
+    <Content Include="scripts\js\jquery.mCustomScrollbar\mCSB_buttons.png" />
+    <Content Include="scripts\js\jquery.mousewheel.js" />
+    <Content Include="scripts\js\jquery.throttledresize.js" />
+    <Content Include="scripts\js\main.js" />
+    <Content Include="scripts\js\vendor\jquery-1.11.0.min.js" />
+    <Content Include="scripts\js\vendor\modernizr-2.6.2-respond-1.1.0.min.js" />
     <Content Include="scripts\LeadsSubMenu.js" />
     <Content Include="scripts\PortalMessager.js" />
     <Content Include="scripts\prototype.js" />
@@ -1414,6 +1428,8 @@
     <Content Include="scss\_stacked.scss" />
     <Content Include="scss\_variables.scss" />
     <Content Include="scripts\jquery-2.1.1.min.map" />
+    <Content Include="scripts\js\.DS_Store" />
+    <Content Include="scripts\js\jquery.mCustomScrollbar\.DS_Store" />
     <None Include="Service References\DataAPI\Arrays1.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1615,7 +1631,6 @@
     <WCFMetadataStorage Include="Service References\DataAPI\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="scripts\jquery.globalize\cultures\" />
   </ItemGroup>
   <!--<ItemGroup>
