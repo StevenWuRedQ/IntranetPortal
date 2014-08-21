@@ -311,6 +311,9 @@
     <div style="width: 100%; padding: 0px; display: block;">
         <asp:HiddenField ID="hfBBLE" runat="server" />
         <dx:ASPxGridView ID="gridTracking" Width="100%" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true" SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID" SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback">
+            <Styles>
+                <Cell VerticalAlign="Top"></Cell>
+            </Styles>
             <Templates>
                 <EditForm>
                     <table style="width: 100%; margin: 0;">
@@ -334,6 +337,7 @@
                             <i class='<%# GetCommentsIconClass(Eval("ActionType"))%>'></i>
                         </div>
                     </DataItemTemplate>
+                    <CellStyle VerticalAlign="Top"></CellStyle>
                 </dx:GridViewDataColumn>
                 <dx:GridViewDataTextColumn FieldName="Comments" PropertiesTextEdit-EncodeHtml="false" VisibleIndex="1" FilterCellStyle-Wrap="Default" EditCellStyle-Wrap="False">
                     <HeaderTemplate>
@@ -342,17 +346,80 @@
                     <PropertiesTextEdit EncodeHtml="False"></PropertiesTextEdit>
                     <EditCellStyle Wrap="False"></EditCellStyle>
                     <DataItemTemplate>
-                        <asp:Panel runat="server" Visible='<%# Eval("Category").ToString.StartsWith("Task") Or Eval("Category").ToString.StartsWith("Appointment") or Eval("Category").ToString.StartsWith("Approval")%>' ID="panelTask">
+                        <asp:Panel runat="server" ID="pnlAppointment" Visible='<%# Eval("Category").ToString.StartsWith("Appointment")%>'>
+                            <div class="log_item_col1">
+                                <div class="font_black color_balck clearfix">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 200px">Appointment with
+                                                <asp:Label runat="server" ID="lblOwnerName"></asp:Label></td>
+                                            <td>
+                                                <div style="float: right; font-size: 18px">
+                                                    <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" runat="server" id="btnAccept" title="Accept" onclick='<%# String.Format("AcceptAppointment(""{0}"")", Eval("LogID"))%>'></i>
+                                                    <i class="fa fa-times-circle-o log_item_hl_buttons" title="Decline" runat="server" id="btnDecline" onclick='<%# String.Format("DeclineAppointment(""{0}"")", Eval("LogID"))%>'></i>
+                                                    <i class="fa fa-history log_item_hl_buttons" title="Reschedule" runat="server" id="btnReschedule" onclick='<%# String.Format("ReScheduledAppointment(""{0}"")", Eval("LogID"))%>'></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <table style="margin-top: 5px;">
+                                    <tr>
+                                        <td><i class="fa fa-info-circle log_item_icon"></i></td>
+                                        <td>
+                                            <asp:Literal runat="server" ID="ltAptType"></asp:Literal></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-clock-o log_item_icon"></i></td>
+                                        <td>
+                                            <asp:Literal runat="server" ID="ltStartTime"></asp:Literal>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-clock-o log_item_icon"></i></td>
+                                        <td>
+                                            <asp:Literal runat="server" ID="ltEndTime"></asp:Literal></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-map-marker log_item_icon"></i></td>
+                                        <td>
+                                            <asp:Literal runat="server" ID="ltAptLocation"></asp:Literal></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-hand-o-right log_item_icon"></i></td>
+                                        <td>
+                                            <asp:Literal runat="server" ID="ltAptMgr"></asp:Literal></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-comment log_item_icon"></i></td>
+                                        <td>
+                                            <asp:Literal runat="server" ID="ltAptComments"></asp:Literal></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </asp:Panel>
+
+
+                        <asp:Panel runat="server" Visible='<%# Eval("Category").ToString.StartsWith("Task") or Eval("Category").ToString.StartsWith("Approval")%>' ID="panelTask">
                             <table style="width: 100%">
                                 <thead>
                                     <tr>
                                         <td style="font-weight: bold"><%# Eval("Category")%> </td>
-                                        <td style="text-align: right; width: 80px;">
+                                        <td style="text-align: right; width: 120px;">
                                             <div style="float: right">
                                                 <dx:ASPxCheckBox Text="Completed" runat="server" TextAlign="Left" ID="chkComplete" Visible="false"></dx:ASPxCheckBox>
                                                 <dx:ASPxCheckBox Text="Accepted" runat="server" TextAlign="Left" ID="chkAccepted" Visible="false"></dx:ASPxCheckBox>
                                                 <dx:ASPxCheckBox Text="Declined&nbsp;" runat="server" TextAlign="Left" ID="chkDeclined" Visible="false"></dx:ASPxCheckBox>
                                                 <dx:ASPxCheckBox Text="Scheduled" runat="server" TextAlign="Left" ID="chkReschedule" Visible="false"></dx:ASPxCheckBox>
+
+                                                <asp:Panel runat="server" ID="pnlAptButton" Visible="false">
+                                                    <div style="float: right; font-size: 18px">
+                                                        <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" title="Accept" onclick='<%# String.Format("AcceptAppointment(""{0}"")", Eval("LogID"))%>'></i>
+                                                        <i class="fa fa-times-circle-o log_item_hl_buttons" title="Decline" onclick='<%# String.Format("DeclineAppointment(""{0}"")", Eval("LogID"))%>'></i>
+                                                        <i class="fa fa-history log_item_hl_buttons" title="Reschedule" onclick='<%# String.Format("ReScheduledAppointment(""{0}"")", Eval("LogID"))%>'></i>
+                                                    </div>
+                                                </asp:Panel>
+
                                                 <dx:ASPxComboBox runat="server" ID="cbAppointAction" Visible="false" Width="85px">
                                                     <Items>
                                                         <dx:ListEditItem Text="Accepted" Value="Accepted" />
@@ -404,8 +471,8 @@
                 <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
             </Styles>
             <Settings VerticalScrollBarMode="Auto" VerticalScrollableHeight="670" />
-            <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="false"
-                EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
+            <SettingsBehavior AllowFocusedRow="false" AllowClientEventsOnLoad="false"
+                EnableRowHotTrack="false" ColumnResizeMode="NextColumn" />
             <ClientSideEvents EndCallback="function(){dateActivityClient.SetDate(new Date());}" />
         </dx:ASPxGridView>
 

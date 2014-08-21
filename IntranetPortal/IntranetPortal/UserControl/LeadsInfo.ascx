@@ -253,7 +253,7 @@
                     </Pane>
                 </Styles>
                 <Panes>
-                    <dx:SplitterPane ShowCollapseBackwardButton="True" MinSize="700px">
+                    <dx:SplitterPane ShowCollapseBackwardButton="True" MinSize="675px">
                         <PaneStyle Paddings-Padding="0">
                             <Paddings Padding="0px"></Paddings>
                         </PaneStyle>
@@ -577,15 +577,10 @@
                                                 </dx:PopupControlContentControl>
                                             </ContentCollection>
                                         </dx:ASPxPopupControl>
-
                                     </dx:SplitterContentControl>
-
                                 </ContentCollection>
                             </dx:SplitterPane>
-                        </Panes>
-                        <ContentCollection>
-                            <dx:SplitterContentControl runat="server" SupportsDisabledAttribute="True"></dx:SplitterContentControl>
-                        </ContentCollection>
+                        </Panes>                     
                     </dx:SplitterPane>
                 </Panes>
             </dx:ASPxSplitter>

@@ -318,7 +318,6 @@ Public Class ActivityLogs
 
             chkDeclined.Visible = True
             chkDeclined.ClientSideEvents.CheckedChanged = String.Format("function(s, e){{DeclineNewLead({0});}}", logId)
-
         End If
 
         If category = "Task" Then
@@ -373,41 +372,59 @@ Public Class ActivityLogs
             Dim userAppoint = UserAppointment.GetAppointmentBylogID(logId)
 
             If userAppoint IsNot Nothing Then
-                Dim chkAccepted = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "chkAccepted"), ASPxCheckBox)
-                Dim chkDeclined = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "chkDeclined"), ASPxCheckBox)
-                Dim chkReschedule = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "chkReschedule"), ASPxCheckBox)
-                Dim cbAppointAction = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "cbAppointAction"), ASPxComboBox)
+
+                Dim pnlAppointment = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "pnlAppointment"), Panel)
+
+                'Bind Data
+                Dim lblOwnerName = TryCast(pnlAppointment.FindControl("lblOwnerName"), Label)
+                lblOwnerName.Text = LeadsInfo.GetInstance(userAppoint.BBLE).Owner
+                Dim ltAptType = TryCast(pnlAppointment.FindControl("ltAptType"), Literal)
+                ltAptType.Text = userAppoint.Type
+                Dim ltStartTime = TryCast(pnlAppointment.FindControl("ltStartTime"), Literal)
+                ltStartTime.Text = userAppoint.ScheduleDate
+                Dim ltEndTime = TryCast(pnlAppointment.FindControl("ltEndTime"), Literal)
+                ltEndTime.Text = userAppoint.EndDate
+                Dim ltAptLocation = TryCast(pnlAppointment.FindControl("ltAptLocation"), Literal)
+                ltAptLocation.Text = userAppoint.Location
+                Dim ltAptMgr = TryCast(pnlAppointment.FindControl("ltAptMgr"), Literal)
+                ltAptMgr.Text = userAppoint.Manager
+                Dim ltAptComments = TryCast(pnlAppointment.FindControl("ltAptComments"), Literal)
+                ltAptComments.Text = userAppoint.Description
+
+                Dim btnAccept = TryCast(pnlAppointment.FindControl("btnAccept"), HtmlControl)
+                Dim btnDecline = TryCast(pnlAppointment.FindControl("btnDecline"), HtmlControl)
+                Dim btnReschedule = TryCast(pnlAppointment.FindControl("btnReschedule"), HtmlControl)
 
                 If userAppoint.Status = UserAppointment.AppointmentStatus.NewAppointment Then
                     'e.Row.BackColor = Drawing.Color.FromArgb(204, 255, 200)
-                    e.Row.CssClass = "AppointLogStyle"
-
-                    cbAppointAction.Visible = True
-                    cbAppointAction.ClientSideEvents.SelectedIndexChanged = String.Format("function(s, e){{AppointmentAction(s, {0});}}", logId)
-
-                    'chkAccepted.Visible = True
-                    'chkAccepted.ClientSideEvents.CheckedChanged = String.Format("function(s, e){{AcceptAppointment({0});}}", logId)
-
-                    'chkDeclined.Visible = True
-                    'chkDeclined.ClientSideEvents.CheckedChanged = String.Format("function(s, e){{DeclineAppointment({0});}}", logId)
+                    e.Row.CssClass = "activity_log_high_light dxgvDataRow_MetropolisBlue1"
                 End If
 
                 If userAppoint.Status = UserAppointment.AppointmentStatus.Accepted Then
-                    chkAccepted.Visible = True
-                    chkAccepted.Checked = True
-                    chkAccepted.ReadOnly = True
+                    btnAccept.Visible = True
+                    btnAccept.Attributes("onclick") = ""
+                    btnAccept.Disabled = True
+
+                    btnDecline.Visible = False
+                    btnReschedule.Visible = False
                 End If
 
                 If userAppoint.Status = UserAppointment.AppointmentStatus.Declined Then
-                    chkDeclined.Visible = True
-                    chkDeclined.Checked = True
-                    chkDeclined.ReadOnly = True
+                    btnDecline.Visible = True
+                    btnDecline.Attributes("onclick") = ""
+                    btnDecline.Disabled = True
+
+                    btnAccept.Visible = False
+                    btnReschedule.Visible = False
                 End If
 
                 If userAppoint.Status = UserAppointment.AppointmentStatus.ReScheduled Then
-                    chkReschedule.Visible = True
-                    chkReschedule.Checked = True
-                    chkReschedule.ReadOnly = True
+                    btnReschedule.Visible = True
+                    btnReschedule.Attributes("onclick") = ""
+                    btnReschedule.Disabled = True
+
+                    btnAccept.Visible = False
+                    btnDecline.Visible = False
                 End If
             End If
         End If

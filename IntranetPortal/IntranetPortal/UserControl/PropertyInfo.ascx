@@ -1,8 +1,16 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PropertyInfo.ascx.vb" Inherits="IntranetPortal.PropertyInfo" %>
+<script type="text/javascript">
+    function ShowAcrisMap(propBBLE) {
+        var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + propBBLE;
+        aspxAcrisControl.SetContentUrl(url);
+        aspxAcrisControl.Show();
+    }
+</script>
+
 <div class="tab-pane active" id="property_info" style="padding-top: 5px">
     <%--witch scroll bar--%>
     <%--/*display:none need delete when realse--%>
-    <div style="height: 800px; overflow: auto;" id="prioity_content">
+    <div style="height: 850px; overflow: auto;" id="prioity_content">
         <%--refresh label--%>
 
         <dx:ASPxPanel ID="UpatingPanel" runat="server">
@@ -22,8 +30,8 @@
                 <span style="margin-left: 19px;"><%= LeadsInfoData.LastUpdate.ToString%></span>
                 <span class="time_buttons" style="margin-right: 30px">eCourts</span>
                 <span class="time_buttons">DOB</span>
-                <span class="time_buttons">Acris</span>
-                <span class="time_buttons">Maps</span>
+                <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>")'>Acris</span>
+                <span class="time_buttons" onclick='ShowPropertyMap("<%= LeadsInfoData.BBLE %>")'>Maps</span>
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
             <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;">Started on <%= LeadsInfoData.CreateDate%></span>
@@ -267,7 +275,7 @@
                 <%--line 4--%>
                 <script>
                     function formatAsDollars(el) {
-                        el.value = el.value.replace('$','');
+                        el.value = el.value.replace('$', '');
                         el.value = '$' + el.value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
                     }
@@ -357,6 +365,15 @@
     </div>
 </div>
 <!-- custom scrollbar plugin -->
+
+<dx:ASPxPopupControl ClientInstanceName="aspxAcrisControl" Width="1000px" Height="800px"
+    ID="ASPxPopupControl1" HeaderText="Acris" Modal="true" CloseAction="CloseButton"
+    runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server">
+        </dx:PopupControlContentControl>
+    </ContentCollection>   
+</dx:ASPxPopupControl>
 
 <script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 

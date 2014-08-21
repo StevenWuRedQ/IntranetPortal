@@ -195,7 +195,32 @@
         if (e.tab.index == 3) {
             if (tmpBBLE != null) {
                 var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + tmpBBLE;
-                window.open(url, "_blank");
+                //window.open(url, "_blank");    
+                var streetViewFrm = "streetViewFrm";
+                var iframe = document.getElementById(streetViewFrm);
+                iframe.src = url;
+            }
+        }
+    }   
+
+    function ShowPropertyMap(propBBLE)
+    {
+        tmpBBLE = propBBLE;
+        if (propBBLE != null) {
+            if (getAddressCallback.InCallback()) {
+                alert("Server is busy, try later!");
+            }
+            else {
+                var streetViewFrm = "streetViewFrm";
+                var iframe = document.getElementById(streetViewFrm);
+                if (iframe.src == "") {
+                    iframe.src = "/StreetView.aspx";
+                    iframe.onload = function () {
+                        getAddressCallback.PerformCallback(propBBLE);
+                    };
+                } else {
+                    getAddressCallback.PerformCallback(propBBLE);
+                }
             }
         }
     }
@@ -203,23 +228,24 @@
     function OnLeadsCategoryClick(s, e) {
         if (tmpBBLE != null) {
             if (e.item.index == 0) {
-                if (tmpBBLE != null) {
-                    if (getAddressCallback.InCallback()) {
-                        alert("Server is busy, try later!");
-                    }
-                    else {
-                        var streetViewFrm = "streetViewFrm";
-                        var iframe = document.getElementById(streetViewFrm);
-                        if (iframe.src == "") {
-                            iframe.src = "/StreetView.aspx";
-                            iframe.onload = function () {
-                                getAddressCallback.PerformCallback(tmpBBLE);
-                            };
-                        } else {
-                            getAddressCallback.PerformCallback(tmpBBLE);
-                        }
-                    }
-                }
+                ShowPropertyMap(tmpBBLE);
+                //if (tmpBBLE != null) {
+                //    if (getAddressCallback.InCallback()) {
+                //        alert("Server is busy, try later!");
+                //    }
+                //    else {
+                //        var streetViewFrm = "streetViewFrm";
+                //        var iframe = document.getElementById(streetViewFrm);
+                //        if (iframe.src == "") {
+                //            iframe.src = "/StreetView.aspx";
+                //            iframe.onload = function () {
+                //                getAddressCallback.PerformCallback(tmpBBLE);
+                //            };
+                //        } else {
+                //            getAddressCallback.PerformCallback(tmpBBLE);
+                //        }
+                //    }
+                //}
             }
 
             //if (e.item.index == 1) {
@@ -395,14 +421,14 @@
             }
         }
     }
-    $(document).ready(function () {
+    //$(document).ready(function () {
         // Handler for .ready() called.
-        $("#leads_list_left").mCustomScrollbar(
-            {
-                theme: "minimal-dark"
-            }
-        );
-    });
+        //$("#leads_list_left").mCustomScrollbar(
+        //    {
+        //        theme: "minimal-dark"
+        //    }
+      //  );
+   // });
 
     // ]]> 
 </script>

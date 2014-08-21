@@ -8,9 +8,9 @@
     //}
 
     //send.addEventListener('click', function () { send(); }, false);
-
-    window.setTimeout(function () { hook() }, 500);
-    window.setTimeout(function () { RefreshLeadsCount()}, 1000);
+    RefreshLeadsCount();
+    AwayMsg();
+    //window.setTimeout(function () { hook() }, 500);    
 }
 
 function RefreshLeadsCount() {
@@ -36,8 +36,8 @@ function RefreshLeadsCount() {
                             }                            
                         }
                     }
-                    else
-                        window.setTimeout(function () { RefreshLeadsCount(); }, 1000);
+                    
+                    window.setTimeout(function () { RefreshLeadsCount(); }, 1000);
                 }
                 else {
                     document.getElementById('errorMsg').innerHTML +=
@@ -52,6 +52,41 @@ function RefreshLeadsCount() {
     request.open('POST', url, true);
     request.send(null);
 }
+
+function AwayMsg() {
+    var url = 'WhileImAwayMessagerHandler.ashx';
+    var request = getRequestObject();
+
+    request.onreadystatechange = function () {
+        try {
+            if (request.readyState == 4) {
+                if (request.status == 200) {
+                    if (request.responseText != "") {
+                        if (request.responseText != null) {
+
+                            if (!ASPxPopupAwayControlClient.GetVisible()) {
+                                ASPxPopupAwayControlClient.SetContentUrl("/PopupControl/WhileAwayMsgs.aspx");
+                                ASPxPopupAwayControlClient.Show();
+                            }
+                        }
+                    }
+                    else
+                        window.setTimeout(function () { hook(); }, 1000);
+                }
+                else {
+                    document.getElementById('errorMsg').innerHTML +=
+                              request.responseText + '< br />';
+                }
+            }
+        }
+        catch (e) {
+            document.getElementById('errorMsg').innerHTML = "Error: " + e.message;
+        }
+    };
+    request.open('POST', url, true);
+    request.send(null);
+}
+
 
 var currentMsgId = null;
 var popupBBLE = null;

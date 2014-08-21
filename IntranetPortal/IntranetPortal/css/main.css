@@ -182,7 +182,7 @@ a:focus {
 }
 
 #main-nav .nav .nav-level-2-container {
-	background: #234b60 url("../img/submenu_shadow.png") no-repeat right bottom;
+	background: #234b60 url("/images/submenu_shadow.png") no-repeat right bottom;
 	-moz-background-size: 30px 10px;
 	-o-background-size: 30px 10px;
 	-webkit-background-size: 30px 10px;
