@@ -154,6 +154,11 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="MgrReport" Text="Agent Report" NavigationUrl="/AgentOverview/AgentOverview.aspx" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-group"></i>]]>
+        </FontClass>
+      </PortalNavItem>
     </Items>
   </PortalNavItem>
 

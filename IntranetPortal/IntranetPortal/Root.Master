@@ -464,9 +464,9 @@
     <script src="/Scripts/js/jquery.throttledresize.js"></script>
     <script src="/Scripts/js/jquery.mousewheel.js"></script>
     <script src="/Scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>
-    <script src="/Scripts/jquery.collapse.js"></script>
+ <%--   <script src="/Scripts/jquery.collapse.js"></script>
     <script src="/Scripts/jquery.collapse_storage.js"></script>
-    <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>
+    <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>--%>
     <script src="/Scripts/js/main.js"></script>
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </body>

@@ -3,8 +3,8 @@ Public Class Main
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Page.User.IsInRole("Admin") Then
-            Dim item = MenuCorner.Items.FindByName("manageNode")
-            item.Visible = True
+            'Dim item = MenuCorner.Items.FindByName("manageNode")
+            'item.Visible = True
 
         End If
     End Sub
