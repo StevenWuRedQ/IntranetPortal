@@ -30,12 +30,12 @@
         functions[type]();
     };
     function change_chart_time(e) {
-        var time = $(e).text();
-        var chart = $("#container").dxChart("instance");
-        var datePass = new Date();
-        datePass.setDate(datePass.getDate() - 30);
-        alert(datePass);
-        chart.option("title", time);
+        var time = e;
+        alert(" " + e + "," + empId);
+        LoadAngentTodayReport(empId+","+time);
+        //var chart = $("#container").dxChart("instance");
+       
+        //chart.option("title", time);
 
     }
     function clear_chart(show_pie) {

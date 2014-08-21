@@ -66,11 +66,11 @@ Public Class AgentCharts
             'Page.ClientScript.RegisterStartupScript(Me.GetType, "ShowReport", cstext1)
         End Using
     End Function
-    Public Function AgentActivityToday() As String
+    Public Function AgentActivityToday(ByVal formdays As Date) As String
         'current_employee
-        Dim today = DateTime.Today
+        Dim today = formdays
         Using Context As New Entities
-            Dim source = (From ld In Context.LeadsActivityLogs.ToList.Where(Function(ld) ld.ActivityDate.HasValue AndAlso ld.ActivityDate.Value.Date = today And ld.EmployeeID = current_employee And ld.ActionType IsNot Nothing).ToList
+            Dim source = (From ld In Context.LeadsActivityLogs.ToList.Where(Function(ld) ld.ActivityDate.HasValue AndAlso ld.ActivityDate.Value.Date > today And ld.EmployeeID = current_employee And ld.ActionType IsNot Nothing).ToList
                           Group ld By Name = CType(ld.ActionType, EnumActionType).ToString Into Count()).ToList
 
             Dim chart = New With {.Title = String.Format("{0}'s Activity on {1}", Employee.GetInstance(CInt(current_employee)).Name, today.ToShortDateString),
@@ -108,12 +108,17 @@ Public Class AgentCharts
     End Sub
 
     Protected Sub loadAgentCallBack_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
-        current_employee = e.Parameter
-        e.Result = AgentActivityToday()
+        current_employee = e.Parameter.Split(",")(0)
+        Dim days = e.Parameter.Split(",")(1)
+        Dim formeDate = Date.Today
+        formeDate = formeDate.AddDays(-1 * Convert.ToInt32(days))
+
+        e.Result = AgentActivityToday(formeDate)
     End Sub
 
     Protected Sub loadAgentZoning_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         current_employee = e.Parameter
+
         e.Result = AgentZoningData()
     End Sub
 
