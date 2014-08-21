@@ -1119,13 +1119,22 @@ input + label.font_12 {
     padding-top: 28px;
     padding-left: 9px;
 }
+.save_report_list
+{
 
+}
+.save_report_list:hover
+{
+    color:black;
+    font-weight:700;
+}
 .icon_right_s {
     float: right;
     margin-top: 10px;
+    
 }
 
-#ASPxSplitter1_chkFields, #ASPxSplitter1_chkFields2 {
+#ctl00_MainContentPH_ASPxSplitter1_chkFields, #ctl00_MainContentPH_ASPxSplitter1_chkFields2 {
     border: 0px;
     border-left: 3px solid #b1b2b7;
 }

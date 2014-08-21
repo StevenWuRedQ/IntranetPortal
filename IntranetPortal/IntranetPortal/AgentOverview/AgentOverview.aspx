@@ -120,7 +120,19 @@
 
             initScrollbars();
         }
+      
+        $(document).ready(function () {
 
+            if ($(".tooltip-examples").tooltip) {
+                $(".tooltip-examples").tooltip({
+                    placement: 'bottom'
+                });
+            } else {
+                alert('tooltip function can not found' + $(".tooltip-examples").tooltip);
+            }
+
+        });
+    </script>
     </script>
 </asp:Content>
 
@@ -168,20 +180,17 @@
                                                         <span class="font_black"><%# Container.GroupText%></td></span>&nbsp;&nbsp;&nbsp;
                                                         
                                                     </div>--%>
-                                                    <table style="height: 30px">
-                                                        <tr>
-                                                            <td style="width: 80px;"><span class="font_black">Department: <%# Container.GroupText%>
-                                                            </span></td>
-                                                            <td style="padding-left: 10px">
-                                                                <span class="employee_lest_head_number_label"><%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %></span>
-                                                               <%-- <div class="raund-label">
-                                                                    <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                </div>--%>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                    <div>
+                                                        <table style="height: 30px">
+                                                            <tr>
+                                                                <td style="width: 80px;"><span class="font_black">Department: <%# Container.GroupText%>
+                                                                </span></td>
+                                                                <td style="padding-left: 10px">
+                                                                    <span class="employee_lest_head_number_label"><%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %></span>
 
-
+                                                                </td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
                                                 </GroupRowTemplate>
                                             </dx:GridViewDataColumn>
@@ -430,7 +439,7 @@
                                                     <div style="padding-left: 370px; padding-top: 10px; height: 325px;" class="clearfix">
                                                         <div class="layout_float_right clearfix">
 
-                                                            <div class="dropdown layout_float_right">
+                                                            <div class="dropdown layout_float_right" style="display:none">
                                                                 <button class="btn btn-default dropdown-toggle" type="button" id="chart_line_select" data-toggle="dropdown" style="background: transparent">
                                                                     Line & Point Chart <span class="caret"></span>
 
@@ -442,7 +451,8 @@
 
                                                                 </ul>
                                                             </div>
-                                                            <div class="dropdown layout_float_right" style="margin-right: 20px">
+
+                                                            <div class="dropdown layout_float_right" style="margin-right: 20px;">
                                                                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="background: transparent">
                                                                     Change Stat Range <span class="caret"></span>
 
@@ -501,8 +511,9 @@
                                                                 <CellStyle Font-Bold="True"></CellStyle>
                                                             </dx:GridViewDataColumn>
                                                         </Columns>
-                                                        <SettingsPager PageSize="10" PageSizeItemSettings-Visible="true" PageSizeItemSettings-ShowAllItem="true" Mode="ShowAllRecords">
-                                                            <PageSizeItemSettings ShowAllItem="True" Visible="True"></PageSizeItemSettings>
+                                                        <%-- Mode="ShowAllRecords" ShowAllItem="True"--%>
+                                                        <SettingsPager PageSize="10" PageSizeItemSettings-Visible="true" PageSizeItemSettings-ShowAllItem="true">
+                                                            <PageSizeItemSettings  Visible="True"></PageSizeItemSettings>
                                                         </SettingsPager>
                                                         <Settings VerticalScrollableHeight="290" />
                                                         <GroupSummary>
@@ -551,7 +562,7 @@
                                                 <ul class="list-group" style="font-size: 14px; box-shadow: none">
 
                                                     <% For Each key In GetTemplates().Keys%>
-                                                    <li class="list-group-item color_gray" style="background-color: transparent; border: 0px;">
+                                                    <li class="list-group-item color_gray save_report_list" style="background-color: transparent; border: 0px;">
                                                         <i class="fa fa-file-o" style="font-size: 18px"></i>
                                                         <span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor: pointer; width: 140px;"><% = key%></span>
                                                         <button type="button" value="delete" onclick='RemoveReport("<%= key %>")'>Delete</button>
@@ -666,12 +677,12 @@
                     theme: "minimal-dark"
                 }
             );
-
-            $('.dxgvCSD').mCustomScrollbar(
-               {
-                   theme: "minimal-dark"
-               }
-           );
+           //use page filter to disable the custom scorllbar that can fix the expand the right spliter panel
+           // $('.dxgvCSD').mCustomScrollbar(
+           //    {
+           //        theme: "minimal-dark"
+           //    }
+           //);
         }
         empId = '<%= CurrentEmployee.EmployeeID %>';
     </script>

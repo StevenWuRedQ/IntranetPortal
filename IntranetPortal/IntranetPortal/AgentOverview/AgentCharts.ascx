@@ -3,8 +3,8 @@
 <%--<script src="/Scripts/jquery-2.1.1.min.js"></script>--%>
 <script src="/Scripts/globalize/globalize.js"></script>
 <script src="/Scripts/dx.chartjs.js"></script>
-<div id="container" style=" max-width: 1200px; height: 400px;"></div>
-<div id="pieChart" style="max-width: 1200px; height: 400px;"></div>
+<div id="container" style=" max-width: 1200px; height: 400px; width:100%" ></div>
+<div id="pieChart" style="max-width: 1200px; height: 400px;width:100%"></div>
 <script type="text/javascript">
 
     //var dataSource = [
@@ -108,7 +108,17 @@
 
         var charts = $("#container").dxChart({
             dataSource: chartData,
-
+            commonSeriesSettings: {
+                argumentField: "state",
+                type: "bar",
+                hoverMode: "allArgumentPoints",
+                selectionMode: "allArgumentPoints",
+                label: {
+                    visible: true,
+                    format: "fixedPoint",
+                    precision: 0
+                }
+            },
             series: {
                 argumentField: "Name",
                 valueField: "Count",

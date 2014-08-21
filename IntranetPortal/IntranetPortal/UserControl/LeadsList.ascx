@@ -407,7 +407,7 @@
     // ]]> 
 </script>
 <%--id="leads_list_left"--%>
-<div style="width: 100%; height:100%;" class="color_gray">
+<div style="width: 100%; height: 100%;" class="color_gray">
     <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px" class="clearfix">
         <div style="font-size: 24px;" class="clearfix">
             <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
@@ -417,7 +417,7 @@
             <i class="fa fa-sort-amount-desc icon_right_s" style="cursor: pointer" onclick="SortLeadsList"></i>
         </div>
     </div>
-    <div style="overflow: auto;height:800px;padding:0px 10px;" id="leads_list_left">
+    <div style="overflow: auto; height: 800px; padding: 0px 10px;" id="leads_list_left">
         <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
             <Columns>
                 <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
@@ -428,25 +428,58 @@
                 <dx:GridViewDataTextColumn FieldName="CallbackDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">
                     <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
                     <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
-                    <%--<GroupRowTemplate>
-                    Date: <%# GroupText(Container.GroupText) & Container.SummaryText.Replace("Count=","")%>
-                </GroupRowTemplate>--%>
+                    <GroupRowTemplate>
+                       <%-- Date: <%# GroupText(Container.GroupText) & Container.SummaryText.Replace("Count=","")%>--%>
+                        <div>
+                            <table style="height: 30px">
+                                <tr>
+                                    <td style="width: 80px;"><span class="font_black">Date:<%#  Container.GroupText  %>
+                                    </span></td>
+                                    <td style="padding-left: 10px">
+                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")","")%></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </GroupRowTemplate>
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataColumn FieldName="Neighborhood" Visible="false" VisibleIndex="3">
-                    <%-- <GroupRowTemplate>
-                    Neighborhood: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
-                </GroupRowTemplate>--%>
+                    <GroupRowTemplate>
+                        <%-- Neighborhood: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
+                        <div>
+                            <table style="height: 30px">
+                                <tr>
+                                    <td style="width: 80px;"><span class="font_black">Neighborhood:<%#  Container.GroupText  %>
+                                    </span></td>
+                                    <td style="padding-left: 10px">
+                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </GroupRowTemplate>
                 </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="EmployeeName" Visible="false" VisibleIndex="4">
-                    <%-- <GroupRowTemplate>
-                    Employee Name: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
-                </GroupRowTemplate>--%>
+                    <GroupRowTemplate>
+                        <div>
+                            <table style="height: 30px">
+                                <tr>
+                                    <td style="width: 80px;"><span class="font_black">Employee Name:<%#  Container.GroupText  %>
+                                    </span></td>
+                                    <td style="padding-left:10px">
+                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </GroupRowTemplate>
+
                 </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false" VisibleIndex="5"></dx:GridViewDataColumn>
                 <dx:GridViewDataColumn Width="25px" VisibleIndex="6">
                     <DataItemTemplate>
                         <div class="hidden_icon">
-                            <i class="fa fa-list-alt employee_list_item_icon" style="width:30px"  onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>"></i>
+                            <i class="fa fa-list-alt employee_list_item_icon" style="width: 30px" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>"></i>
                         </div>
                         <%-- <img src="/images/flag1.png" style="width: 16px; height: 16px; vertical-align: bottom" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>" />--%>
                     </DataItemTemplate>
@@ -729,31 +762,31 @@
             <dx:MenuItem GroupName="Sort" Text="View Map" Name="GoogleStreet">
                 <Image Url="/images/drap_map_icons.png"></Image>
             </dx:MenuItem>
-            <dx:MenuItem GroupName="Sort" Text="Google Map View" Name="GoogleMap"  ClientVisible="false">
+            <dx:MenuItem GroupName="Sort" Text="Google Map View" Name="GoogleMap" ClientVisible="false">
                 <Image Url="/images/drap_map_icons.png"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="Bing Bird View" Name="BingBird" Image-Url="/images/Street-view.png" ClientVisible="false">
                 <Image Url="/images/drap_map_icons.png"></Image>
             </dx:MenuItem>
-            <dx:MenuItem GroupName="Sort" Text="Priority" Name="Priority" >
+            <dx:MenuItem GroupName="Sort" Text="Priority" Name="Priority">
                 <Image Url="/images/drap_prority_icons.png"></Image>
             </dx:MenuItem>
-            <dx:MenuItem GroupName="Sort" Text="Door Knock" Name="DoorKnock" >
+            <dx:MenuItem GroupName="Sort" Text="Door Knock" Name="DoorKnock">
                 <Image Url="/images/drap_doorknock_icons.png"></Image>
             </dx:MenuItem>
-            <dx:MenuItem GroupName="Sort" Text="Follow Up" Name="Callback" >
+            <dx:MenuItem GroupName="Sort" Text="Follow Up" Name="Callback">
                 <Image Url="/images/drap_follow_up_icons.png"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="Dead Lead" Name="DeadLead">
                 <Image Url="/images/drap_deadlead_icons.png"></Image>
             </dx:MenuItem>
-            <dx:MenuItem GroupName="Sort" Text="In Process" Name="InProcess" >
+            <dx:MenuItem GroupName="Sort" Text="In Process" Name="InProcess">
                 <Image Url="/images/drap_inprocess_icons.png"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="View Lead" Name="ViewLead" Visible="false">
                 <Image Url="/images/drap_closed_icons.png"></Image>
             </dx:MenuItem>
-            <dx:MenuItem GroupName="Sort" Text="Closed" Name="Closed" >
+            <dx:MenuItem GroupName="Sort" Text="Closed" Name="Closed">
                 <Image Url="/images/drap_closed_icons.png"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="Shared" Name="Shared">
@@ -763,7 +796,7 @@
                 <Image Url="/images/drap_closed_icons.png"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="Reassign" Name="Reassign" Visible="false">
-                <Image Url="/images/assigned.png"></Image>
+                <Image Url="/images/drap_closed_icons.png"></Image>
             </dx:MenuItem>
             <dx:MenuItem GroupName="Sort" Text="View Files" Name="ViewFiles">
                 <Image Url="/images/drap_viewfile_icons.png"></Image>
@@ -773,8 +806,8 @@
             </dx:MenuItem>
         </Items>
         <ClientSideEvents ItemClick="OnLeadsCategoryClick" />
-       
-         <ItemStyle Width="190px" Height="30px"></ItemStyle>
+
+        <ItemStyle Width="190px" Height="30px"></ItemStyle>
     </dx:ASPxPopupMenu>
     <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMapControl" Width="500px" Height="500px"
         MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
