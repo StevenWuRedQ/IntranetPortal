@@ -476,7 +476,7 @@
 
                 </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false" VisibleIndex="5"></dx:GridViewDataColumn>
-                <dx:GridViewDataColumn Width="25px" VisibleIndex="6">
+                <dx:GridViewDataColumn Width="40px" VisibleIndex="6">
                     <DataItemTemplate>
                         <div class="hidden_icon">
                             <i class="fa fa-list-alt employee_list_item_icon" style="width: 30px" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>"></i>

@@ -149,28 +149,25 @@
                                                     <GroupRowTemplate>
                                                         <%--Date: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
                                                         <%--change group template UI by steven--%>
-                                                        <grouprowtemplate>
-                                    <div style="height:30px">
-                                        <table style="height:30px">
-                                            <tr>
-                                              <td><img src="../images/grid_call_backs_canlender.png"/></td>
-                                            <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
-                                            <td style="padding-left: 10px">
-                                                <div  class="raund-label" >
-                                                 <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                </div>
-                                            </td>
-                                        <%--the round div--%>
-                                    
-                                            </tr>
-                                            </table>
-                                    </div>
-                                
-                                </grouprowtemplate>
+                                                        <div style="height: 30px">
+                                                            <table style="height: 30px">
+                                                                <tr>
+                                                                    <td>
+                                                                        <img src="../images/grid_call_backs_canlender.png" /></td>
+                                                                    <td style="font-weight: 900; width: 80px; text-align: center;">Date: <%# Container.GroupText%></td>
+                                                                    <td style="padding-left: 10px">
+                                                                        <div class="raund-label">
+                                                                            <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
+                                                                        </div>
+                                                                    </td>
+                                                                    <%--the round div--%>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
                                                         <%-------end---------%>
                                                     </GroupRowTemplate>
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataColumn Width="32px" VisibleIndex="5">
+                                                <dx:GridViewDataColumn Width="40px" VisibleIndex="5">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
                                                         <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
@@ -202,7 +199,7 @@
                                                         <div style="cursor: pointer; height: 40px; padding-left: 20px; line-height: 40px;" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Priority", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataColumn Width="32px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
+                                                <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
                                                         <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
@@ -286,27 +283,27 @@
                                                         <%--Date: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
                                                         <%--change group template UI by steven--%>
                                                         <grouprowtemplate>
-                                    <div >
-                                        <table>
-                                            <tr>
-                                              <td><img src="../images/grid_call_backs_canlender.png"/></td>
-                                            <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
-                                            <td style="padding-left: 10px">
-                                                <div  class="raund-label">
-                                                 <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                </div>
-                                            </td>
-                                        <%--the round div--%>
+                                                        <div >
+                                                            <table>
+                                                                <tr>
+                                                                  <td><img src="../images/grid_call_backs_canlender.png"/></td>
+                                                                <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
+                                                                <td style="padding-left: 10px">
+                                                                    <div  class="raund-label">
+                                                                     <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
+                                                                    </div>
+                                                                </td>
+                                                            <%--the round div--%>
                                     
-                                            </tr>
-                                            </table>
-                                    </div>
+                                                                </tr>
+                                                                </table>
+                                                        </div>
                                 
-                                </grouprowtemplate>
+                                                       </grouprowtemplate>
                                                         <%-------end---------%>
                                                     </GroupRowTemplate>
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataColumn Width="32px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
+                                                <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
                                                         <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
@@ -360,7 +357,7 @@
                                                     </GroupRowTemplate>
                                                     <%-------end---------%>
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataColumn Width="32px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
+                                                <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
                                                         <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
@@ -410,7 +407,7 @@
                             <div style="height: 70px;">
                                 <div style="color: #b2b4b7; padding-top: 35px; margin-left: 26px; font-size: 30px; font-weight: 300;">Notes</div>
                             </div>
-                            <div style="background: #f53e0d; color: white; height: 270px; margin-top:35px">
+                            <div style="background: #f53e0d; color: white; height: 270px; margin-top: 35px">
                                 <div style="margin-left: 30px; margin-right: 15px;">
                                     <h2 style="font-size: 30px; font-weight: 400; margin: 0px; padding-top: 35px; padding-bottom: 35px;">Just An Idea</h2>
                                     <div style="font-size: 14px; line-height: 24px; background: transparent !important; margin-bottom: 0px">

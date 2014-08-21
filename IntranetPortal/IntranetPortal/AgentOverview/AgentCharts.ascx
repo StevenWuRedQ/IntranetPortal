@@ -3,9 +3,9 @@
 <%--<script src="/Scripts/jquery-2.1.1.min.js"></script>--%>
 <script src="/Scripts/globalize/globalize.js"></script>
 <script src="/Scripts/dx.chartjs.js"></script>
-<div style="overflow: auto">
-    <div id="container" style="max-width: 1200px; height: 400px; width: 100%"></div>
-    <div id="pieChart" style="max-width: 1200px; height: 400px; width: 100%"></div>
+<div style="overflow: auto;width:871px">
+    <div id="container" style="height: 400px; width: 100%"></div>
+    <div id="pieChart" style="height: 400px; width: 100%"></div>
 </div>
 <script type="text/javascript">
 
@@ -101,10 +101,10 @@
     function show_bar_chart(ds) {
         var dataFormSever = ds != null ? ds : $.parseJSON('<%=ChartSource()%>');
         clear_chart();
-
+        
         var chartData = dataFormSever.DataSource;
         var chartTitle = dataFormSever.Title == null ? "Leads" : dataFormSever.Title;
-
+        $("#container").width(40 * chartData.length +80 )
         var charts = $("#container").dxChart({
             dataSource: chartData,
             commonSeriesSettings: {
