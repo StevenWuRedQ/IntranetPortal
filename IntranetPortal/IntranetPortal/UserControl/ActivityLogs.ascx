@@ -313,9 +313,9 @@
         <dx:ASPxGridView ID="gridTracking" Width="100%" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true" SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID" SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" Styles-FilterBuilderHeader-BackColor="Gray">
             <Styles>
                 <Cell VerticalAlign="Top"></Cell>
-                
+                <Header BackColor="#F5F5F5" ></Header>                
             </Styles>
-            <Templates>
+            <Templates>                
                 <EditForm>
                     <table style="width: 100%; margin: 0;">
                         <tr>
@@ -492,13 +492,17 @@
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn Caption="by" VisibleIndex="2" Width="120" FieldName="EmployeeName">
+                    <HeaderTemplate>
+                        BY
+                    </HeaderTemplate>
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn Caption="Category" VisibleIndex="3" FieldName="Category" Width="100" Visible="false">
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="ActivityDate" Width="140" Caption="Date" VisibleIndex="4" PropertiesTextEdit-DisplayFormatString="d">
                     <PropertiesTextEdit DisplayFormatString="g"></PropertiesTextEdit>
-                    <EditItemTemplate>
-                    </EditItemTemplate>
+                    <HeaderTemplate>
+                        Date
+                    </HeaderTemplate>
                 </dx:GridViewDataTextColumn>
             </Columns>
             <SettingsEditing Mode="EditForm"></SettingsEditing>
@@ -518,8 +522,8 @@
                 <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
             </Styles>
             <Settings VerticalScrollBarMode="Auto" VerticalScrollableHeight="670" />
-            <SettingsBehavior AllowFocusedRow="false" AllowClientEventsOnLoad="false"
-                EnableRowHotTrack="false" ColumnResizeMode="NextColumn" />
+            <SettingsBehavior AllowFocusedRow="false" AllowClientEventsOnLoad="false" AllowDragDrop="false"
+                EnableRowHotTrack="false" ColumnResizeMode="Disabled" />
             <ClientSideEvents EndCallback="function(){dateActivityClient.SetDate(new Date());}" />
         </dx:ASPxGridView>
 
