@@ -37,6 +37,16 @@
         }
 
         function OnEndCallback(s, e) {
+            $("#prioity_content").mCustomScrollbar(
+             {
+                 theme: "minimal-dark"
+             }
+             );
+            $("#ctl00_MainContentPH_ASPxSplitter1_LeadsInfo_ASPxCallbackPanel2_contentSplitter_ownerInfoCallbackPanel").mCustomScrollbar(
+                {
+                    theme: "minimal-dark"
+                }
+             );
         }
         function onInitScorllBar() {
             $('#assign_leads_list').mCustomScrollbar(
@@ -50,6 +60,16 @@
                   theme: "minimal-dark"
               }
             );
+            $("#prioity_content").mCustomScrollbar(
+             {
+                 theme: "minimal-dark"
+             }
+             );
+            $("#ctl00_MainContentPH_ASPxSplitter1_LeadsInfo_ASPxCallbackPanel2_contentSplitter_ownerInfoCallbackPanel").mCustomScrollbar(
+                {
+                    theme: "minimal-dark"
+                }
+             );
         }
         $(document).ready(function () {
             // Handler for .ready() called.
@@ -145,7 +165,7 @@
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-            <dx:SplitterPane Name="ContentUrlPane" Size="260px">
+            <dx:SplitterPane Name="ContentUrlPane" Size="300px">
                 <PaneStyle Border-BorderStyle="None"></PaneStyle>
                 <ContentCollection>
                     <dx:SplitterContentControl runat="server">
@@ -190,7 +210,7 @@
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-            <dx:SplitterPane Name="RightPane" Size="730px" ScrollBars="None">
+            <dx:SplitterPane Name="RightPane" Size="730px" ScrollBars="None">                
                 <ContentCollection>
                     <dx:SplitterContentControl>
                         <uc1:LeadsInfo runat="server" ID="LeadsInfo" ShowLogPanel="false" />
