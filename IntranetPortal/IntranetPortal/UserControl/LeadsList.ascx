@@ -10,6 +10,8 @@
         // The values will be returned to the OnGetRowValues() function 
         if (gridLeads.GetFocusedRowIndex() >= 0) {
 
+
+
             if (ContentCallbackPanel.InCallback()) {
                 postponedCallbackRequired = true;
             }
@@ -21,6 +23,18 @@
                         OnGetRowValues(rowKey);
                 }
             }
+        }
+    }
+
+    function ExpandOrCollapseGroupRow(rowIndex) {
+        if (gridLeads.IsGroupRow(rowIndex)) {
+            if (gridLeads.IsGroupRowExpanded(rowIndex)) {
+                gridLeads.CollapseRow(rowIndex);
+            } else {
+                gridLeads.ExpandRow(rowIndex);
+            }
+
+            return
         }
     }
 
@@ -415,15 +429,15 @@
 
     // to do by steven
     function SortLeadsList(s) {
-        var sort = s.attributes;
+        var sort = s.getAttribute("class");
 
-        if (sort == "Newest") {
-            s.SetText('Oldest');
+        if (sort == "fa fa-sort-amount-desc icon_right_s") {
+            s.setAttribute("class", "fa fa-sort-amount-asc icon_right_s");
             gridLeads.SortBy("LastUpdate", "ASC");
         }
         else {
-            if (sort == "Oldest") {
-                s.SetText("Newest");
+            if (sort == "fa fa-sort-amount-asc icon_right_s") {
+                s.setAttribute("class", "fa fa-sort-amount-desc icon_right_s");
                 gridLeads.SortBy("LastUpdate", "DSC");
             }
         }
@@ -454,6 +468,8 @@
             </span>
             <i class="fa fa-sort-amount-desc icon_right_s" style="cursor: pointer" onclick="SortLeadsList(this)"></i>
         </div>
+        <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
+        <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
     </div>
     <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
         <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
@@ -470,8 +486,9 @@
                        <%-- Date: <%# GroupText(Container.GroupText) & Container.SummaryText.Replace("Count=","")%>--%>
                         <div>
                             <table style="height: 30px">
-                                <tr>
-                                    <td style="width: 80px;"><span class="font_black"><i class="fa fa-calendar-o"></i>  <%#  Container.GroupText  %>
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor:pointer">
+                                    <td style="width: 80px;">
+                                        <span class="font_black"><i class="fa fa-calendar-o"></i> <%#  Container.GroupText  %>
                                     </span></td>
                                     <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")","")%></span>
@@ -486,7 +503,7 @@
                         <%-- Neighborhood: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
                         <div>
                             <table style="height: 30px">
-                                <tr>
+                                  <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor:pointer">
                                     <td style="width: 80px;"><span class="font_black">Neighborhood:<%#  Container.GroupText  %>
                                     </span></td>
                                     <td style="padding-left: 10px">
@@ -501,8 +518,8 @@
                     <GroupRowTemplate>
                         <div>
                             <table style="height: 30px">
-                                <tr>
-                                    <td style="width: 80px;"><span class="font_black"> <i class="fa fa-user "></i> <%#  Container.GroupText  %>
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor:pointer">
+                                    <td style="width: 80px;"><span class="font_black"><i class="fa fa-user "></i> <%#  Container.GroupText  %>
                                     </span></td>
                                     <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
@@ -511,7 +528,6 @@
                             </table>
                         </div>
                     </GroupRowTemplate>
-
                 </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false" VisibleIndex="5"></dx:GridViewDataColumn>
                 <dx:GridViewDataColumn Width="40px" VisibleIndex="6">
