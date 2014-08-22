@@ -170,15 +170,33 @@
                 <input class="text_input" value="<%= LeadsInfoData.ActualFar%>" />
             </div>
 
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+            <%--<div class="form_div_node form_div_node_margin form_div_node_line_margin">
                 <span class="form_input_title">Zestimate</span>
 
-                <input class="text_input" value="<%=LeadsInfoData.EstValue %>" />
-            </div>
+                <input class="text_input" value="$<%=LeadsInfoData.EstValue %>" />
+            </div>--%>
             <%----end line --%>
         </div>
         <%-------end-----%>
 
+        <%--zestimat form--%>
+         <div style="margin: 20px;" class="clearfix">
+            <div class="form_head" style="margin-top: 40px;">ZESTIMATE</div>
+
+
+
+            <%--line 1--%>
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Zestimate</span>
+                <input class="text_input" value="$<%=LeadsInfoData.EstValue %>" />
+            </div>
+
+            
+
+            <%----end line ----%>
+         
+        </div>
+        <%-------end-----------%>
         <%--Mortgage form--%>
         <div style="margin: 20px;" class="clearfix">
             <div class="form_head" style="margin-top: 40px;">MORTGAGE AND VIOLATIONS</div>

@@ -3,7 +3,7 @@
 <%--<script src="/Scripts/jquery-2.1.1.min.js"></script>--%>
 <script src="/Scripts/globalize/globalize.js"></script>
 <script src="/Scripts/dx.chartjs.js"></script>
-<div style="overflow: auto;width:871px">
+<div style="overflow: auto;width:871px" id="chars_with_scorll">
     <div id="container" style="height: 400px;"></div>
     <div id="pieChart" style="height: 400px;"></div>
 </div>

@@ -200,6 +200,55 @@
                             </div>
                         </td>
                     </tr>
+
+                    <tr style="height: 40px;" class="activity_log_high_light " valign="top">
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon" style="margin-left: -3px;background:#eb7171">
+                                <i class="fa fa-tasks" ></i>
+                            </div>
+
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
+                                <div class="font_black color_balck clearfix">
+                                    Task completed  Mr.Ulric 
+                                    <div style="float: right; font-size: 18px">
+                                        <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" title="Completed"></i>
+                                        <i class="fa fa-history log_item_hl_buttons"></i>
+                                    </div>
+                                </div>
+                                <table style="margin-top: 5px;">
+                                    <tr>
+                                        <td><i class="fa fa-group log_item_icon"></i></td>
+                                        <td>123 Ron</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-hand-o-right log_item_icon"></i></td>
+                                        <td>Lookup Request</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-sort-numeric-asc log_item_icon"></i></td>
+                                        <td>Important</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td><i class="fa fa-comment log_item_icon"></i></td>
+                                        <td>TEstdddd</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
                 </table>
             </div>
             <%------end-------%>
