@@ -32,6 +32,8 @@ function RefreshLeadsCount() {
                                 var item = leadsCounts[i];
                                 if(item.Count > 0)
                                     document.getElementById(item.Name).innerText = item.Count;
+                                else
+                                    document.getElementById(item.Name).innerText = "";
 
                             }                            
                         }
