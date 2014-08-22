@@ -445,7 +445,7 @@
     $(document).ready(function () {
         //Handler for .ready() called.
         var leads_list_grid = $("#leads_list_left");
-        alert("scrollHeight =" + document.getElementById("leads_list_left").scrollHeight + "height =" + leads_list_grid.height())
+        //alert("scrollHeight =" + document.getElementById("leads_list_left").scrollHeight + "height =" + leads_list_grid.height())
         if (document.getElementById("leads_list_left").scrollHeight > leads_list_grid.height()) {
             $("#leads_list_left").mCustomScrollbar(
             {
