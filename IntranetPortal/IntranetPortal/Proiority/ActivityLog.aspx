@@ -203,8 +203,8 @@
 
                     <tr style="height: 40px;" class="activity_log_high_light " valign="top">
                         <td class="log_item_padding">
-                            <div class="activity_log_item_icon" style="margin-left: -3px;background:#eb7171">
-                                <i class="fa fa-tasks" ></i>
+                            <div class="activity_log_item_icon" style="margin-left: -3px; background: #eb7171">
+                                <i class="fa fa-tasks"></i>
                             </div>
 
                         </td>
@@ -230,7 +230,7 @@
                                         <td><i class="fa fa-sort-numeric-asc log_item_icon"></i></td>
                                         <td>Important</td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <td><i class="fa fa-comment log_item_icon"></i></td>
                                         <td>TEstdddd</td>
@@ -249,6 +249,292 @@
                             </div>
                         </td>
                     </tr>
+                    <%--check--%>
+                    <tr>
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon activity_color_check">
+                                <i class="fa fa-check"></i>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
+                                Deal closed
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
+
+                    <%--info--%>
+                    <tr>
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon activity_color_info">
+                                <i class="fa fa-info"></i>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
+                                Priority > Priority
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
+                    <%--comment--%>
+                    <tr>
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon activity_color_comment">
+                                <i class="fa fa-comment"></i>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
+                                The appointment with Mr.Ulric has been moved to 6/12/14 @3pm.
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
+
+                     <%--clock-o--%>
+                    <tr>
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon activity_color_clock-o">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
+                               Appointment accepted
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
+                   
+                     <%--cubes--%>
+                    <tr>
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon activity_color_cubes">
+                                <i class="fa fa-cubes"></i>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
+                               Construction began
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
+                     <%--refresh--%>
+                    <tr>
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon activity_color_refresh">
+                                <i class="fa fa-refresh"></i>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
+                               Homeowner info updated
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
+
+                     <%--usd--%>
+                    <tr>
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon activity_color_usd">
+                                <i class="fa fa-usd"></i>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
+                               Accounting information
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
+
+                     <%--tasks--%>
+                    <tr>
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon activity_color_tasks">
+                                <i class="fa fa-tasks"></i>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
+                               Task completed
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
+
+                     <%--fax--%>
+                    <tr>
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon activity_color_fax">
+                                <i class="fa fa-fax"></i>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
+                                Contract faxed to Mr.Ulric (347-123-4567)
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
+
+                     <%--envelope--%>
+                    <tr>
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon activity_color_envelope">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
+                                Document A emailed to Mr.Ulric (example@email.com)
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
+
+                     <%--print--%>
+                    <tr>
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon activity_color_print">
+                                <i class="fa fa-print"></i>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
+                               Document B printed
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
+
+                     <%--sign-out--%>
+                    <tr>
+                        <td class="log_item_padding">
+                            <div class="activity_log_item_icon activity_color_sign-out">
+                                <i class="fa fa-sign-out"></i>
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col1">
+                                Eviction
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col2">
+                                Andrea Taylor
+                            </div>
+                        </td>
+                        <td class="log_item_padding">
+                            <div class="log_item_col3">
+                                Jun 12, 2014 5:08 pm
+                            </div>
+                        </td>
+                    </tr>
+
                 </table>
             </div>
             <%------end-------%>

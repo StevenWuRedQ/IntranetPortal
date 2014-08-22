@@ -1300,3 +1300,52 @@ i.log_item_hl_buttons:hover
 {
     visibility:visible !important;
 }
+.activity_color_check
+{
+    background:#80c02c;
+}
+.activity_color_info
+{
+    background:#f46464;
+}
+.activity_color_comment
+{
+    background:#ff974a;
+}
+.activity_color_cubes
+{
+    background:#8c4f3f;
+}
+.activity_color_clock-o
+{
+    background:#31d9c3;
+}
+.activity_color_refresh
+{
+    background:#52c1fd;
+}
+.activity_color_usd
+{
+    background:#174cae;
+}
+.activity_color_tasks
+{
+    background:#eb7171;
+}
+.activity_color_fax
+{
+    background:#e6b713;
+}
+.activity_color_envelope
+{
+    background:#7495a4;
+}
+
+.activity_color_print
+{
+    background:#9068ad;
+}
+.activity_color_sign-out
+{
+    background:#5d5d5d;
+}
