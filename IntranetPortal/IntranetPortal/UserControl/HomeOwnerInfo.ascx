@@ -190,7 +190,7 @@
                         <i class="fa fa-map-marker homeowner_info_icon"></i>
                         <div class="form_div_node homeowner_info_text">
                             <div class="color_blue">
-                                <%= FormatAddress(add.addressField)%>
+                                <a href="#" onclick="OnAddressLinkClick(this, '<%= FormatAddress(add.addressField)%>')" <%= CssStyle(FormatAddress(add.addressField))%>> <%= FormatAddress(add.addressField)%> </a>
                             </div>
                             <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                 <%=BuilderDate(add.dateFirstSeenField) %> to  <%=BuilderDate(add.dateLastSeenField) %>
@@ -246,7 +246,8 @@
                             <div class="form_div_node homeowner_info_text ">
 
                                 <div class="color_blue">
-                                    <%= FormatPhoneNumber(phone.phoneField) %>
+                                    <a href='#' onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>> <%= FormatPhoneNumber(phone.phoneField) %></a>
+                                   
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
@@ -278,7 +279,10 @@
             <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
                 <i class="fa fa-chain color_gray homeowner_info_icon"></i>
                 <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
-                    <span class="font_black color_balck font_black upcase_text"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") & relative.nameField.lastNameField %></span><br />
+                    <span class="font_black color_balck font_black upcase_text">
+                        <%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") & relative.nameField.lastNameField %>
+
+                    </span><br />
                     <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
                 </div>
 
@@ -296,7 +300,7 @@
                                 <div class="form_div_node homeowner_info_text ">
 
                                     <div class="color_blue">
-                                        <%= FormatPhoneNumber(phone.phoneField) %>
+                                         <a href='#' onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>> <%= FormatPhoneNumber(phone.phoneField) %></a>
                                     </div>
                                     <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                         (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
@@ -343,7 +347,7 @@
                                 <div class="form_div_node homeowner_info_text ">
 
                                     <div class="color_blue">
-                                        <%= FormatPhoneNumber(phone.phoneField) %>
+                                         <a href='#' onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>> <%= FormatPhoneNumber(phone.phoneField) %></a>
                                     </div>
                                     <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                         (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)

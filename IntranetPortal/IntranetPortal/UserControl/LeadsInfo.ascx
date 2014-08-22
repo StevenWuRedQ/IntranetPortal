@@ -331,7 +331,8 @@
                                     </div>
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="ASPxPopupMenuPhone"
                                         PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
-                                        PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="TopSides" PopupAction="LeftMouseClick">
+                                        PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+                                        ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
                                         <Items>
                                             <dx:MenuItem Text="Call Phone" Name="Call">
                                             </dx:MenuItem>
@@ -342,12 +343,15 @@
                                             <dx:MenuItem Text="Undo" Name="Undo">
                                             </dx:MenuItem>
                                         </Items>
-                                        <ItemStyle Width="143px"></ItemStyle>
+                                        <%--disable the width by steven--%>
+                                        <%--<ItemStyle Width="143px"></ItemStyle>--%>
+                                        <%------end------%>
                                         <ClientSideEvents ItemClick="OnPhoneNumberClick" />
                                     </dx:ASPxPopupMenu>
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="AspxPopupMenuAddress"
                                         ShowPopOutImages="false" AutoPostBack="false"
-                                        PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="TopSides" PopupAction="LeftMouseClick">
+                                        ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px"
+                                        PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
                                         <Items>
                                             <dx:MenuItem Text="Door knock" Name="doorKnock">
                                             </dx:MenuItem>
@@ -358,7 +362,9 @@
                                             <dx:MenuItem Text="Undo" Name="Undo">
                                             </dx:MenuItem>
                                         </Items>
-                                        <ItemStyle Width="143px"></ItemStyle>
+                                        <%--disable the width by steven--%>
+                                        <%--<ItemStyle Width="143px"></ItemStyle>--%>
+                                        <%------end------%>
                                         <ClientSideEvents ItemClick="OnAddressPopupMenuClick" />
                                     </dx:ASPxPopupMenu>
                                 </div>
@@ -438,7 +444,8 @@
                                             <ClientSideEvents CallbackComplete="OnCallPhoneCallbackComplete" />
                                         </dx:ASPxCallback>
                                         <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
-                                            AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
+                                            AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+                                            ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
                                             <Items>
                                                 <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
                                                 <dx:MenuItem Text="Next Week" Name="nextWeek"></dx:MenuItem>
@@ -580,7 +587,7 @@
                                     </dx:SplitterContentControl>
                                 </ContentCollection>
                             </dx:SplitterPane>
-                        </Panes>                     
+                        </Panes>
                     </dx:SplitterPane>
                 </Panes>
             </dx:ASPxSplitter>
@@ -608,9 +615,9 @@
                                         <ClientSideEvents Click="SaveBestPhoneNo" />
                                     </dx:ASPxButton>
                                     &nbsp;
-                                                                <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false">
-                                                                    <ClientSideEvents Click="function(s,e){aspxPopupAddPhoneNum.Hide();}" />
-                                                                </dx:ASPxButton>
+                                    <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false">
+                                        <ClientSideEvents Click="function(s,e){aspxPopupAddPhoneNum.Hide();}" />
+                                    </dx:ASPxButton>
                                 </td>
                             </tr>
                         </table>

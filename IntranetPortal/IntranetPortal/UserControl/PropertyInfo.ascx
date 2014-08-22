@@ -169,7 +169,17 @@
 
                 <input class="text_input" value="<%= LeadsInfoData.ActualFar%>" />
             </div>
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Property Class</span>
 
+                <input class="text_input" value="<%=LeadsInfoData.PropertyClassCode %>" />
+            </div>
+            <%-----end line -----%>
+
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Sale Date</span>
+                <input class="text_input" value="<%=LeadsInfoData.SaleDate%>" />
+            </div>
             <%--<div class="form_div_node form_div_node_margin form_div_node_line_margin">
                 <span class="form_input_title">Zestimate</span>
 
