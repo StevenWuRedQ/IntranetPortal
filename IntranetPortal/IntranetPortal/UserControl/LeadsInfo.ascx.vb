@@ -82,7 +82,7 @@ Public Class LeadsInfo1
                 'formlayoutLeadsInfo.DataBind()
 
                 PropertyInfo.LeadsInfoData = leadsinfodata
-
+                PropertyInfo.BindData()
 
                 If leadsinfodata.C2ndMotgrAmt > leadsinfodata.C1stMotgrAmt Then
                     'CType(formlayoutLeadsInfo.FindNestedControlByFieldName("C1stMotgrAmt"), ASPxTextBox).Text = leadsinfodata.C2ndMotgrAmt

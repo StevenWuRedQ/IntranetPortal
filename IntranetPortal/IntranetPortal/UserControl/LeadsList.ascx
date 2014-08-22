@@ -414,8 +414,9 @@
         }
     }
 
-    function SortLeadsList(s, e) {
-        var sort = s.GetText();
+    // to do by steven
+    function SortLeadsList(s) {
+        var sort = s.attributes;
 
         if (sort == "Newest") {
             s.SetText('Oldest');
@@ -447,7 +448,7 @@
             <span style="color: #234b60; font-size: 30px;">
                 <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
             </span>
-            <i class="fa fa-sort-amount-desc icon_right_s" style="cursor: pointer" onclick="SortLeadsList"></i>
+            <i class="fa fa-sort-amount-desc icon_right_s" style="cursor: pointer" onclick="SortLeadsList(this)"></i>
         </div>
     </div>
     <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
