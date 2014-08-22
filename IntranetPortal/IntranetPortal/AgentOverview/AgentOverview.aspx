@@ -458,7 +458,7 @@
 
                                                                 </button>
                                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(1)">Log toady</a></li>
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(1)">Log today</a></li>
                                                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(3)">Logs 3 days</a></li>
                                                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(7)">Logs 1 week</a></li>
                                                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(30)">Logs 1 month</a></li>

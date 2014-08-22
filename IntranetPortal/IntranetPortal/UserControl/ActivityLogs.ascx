@@ -310,9 +310,10 @@
     <%-- log tables--%>
     <div style="width: 100%; padding: 0px; display: block;">
         <asp:HiddenField ID="hfBBLE" runat="server" />
-        <dx:ASPxGridView ID="gridTracking" Width="100%" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true" SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID" SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback">
+        <dx:ASPxGridView ID="gridTracking" Width="100%" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true" SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID" SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" Styles-FilterBuilderHeader-BackColor="Gray">
             <Styles>
                 <Cell VerticalAlign="Top"></Cell>
+                
             </Styles>
             <Templates>
                 <EditForm>
@@ -327,7 +328,9 @@
                         </tr>
                     </table>
                 </EditForm>
+               
             </Templates>
+            
             <Columns>
                 <dx:GridViewDataColumn FieldName="ActionType" VisibleIndex="0" Caption="" Width="40px">
                     <HeaderTemplate>

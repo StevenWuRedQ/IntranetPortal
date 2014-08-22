@@ -31,7 +31,7 @@
     };
     function change_chart_time(e) {
         var time = e;
-        alert(" " + e + "," + empId);
+        //alert(" " + e + "," + empId);
         LoadAngentTodayReport(empId+","+time);
         //var chart = $("#container").dxChart("instance");
        

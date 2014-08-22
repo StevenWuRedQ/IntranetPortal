@@ -62,6 +62,13 @@
                 theme: "minimal-dark"
             }
          );
+        
+        $(".dxgvCSD").mCustomScrollbar(
+            {
+                theme: "minimal-dark"
+            }
+         );
+        
     }
 
     var mapContentframeID = "MapContent";
@@ -443,7 +450,7 @@
             <i class="fa fa-sort-amount-desc icon_right_s" style="cursor: pointer" onclick="SortLeadsList"></i>
         </div>
     </div>
-    <div style="overflow: auto; height: 800px; padding: 0px 10px;" id="leads_list_left">
+    <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
         <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
             <Columns>
                 <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">

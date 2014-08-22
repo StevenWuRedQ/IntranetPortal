@@ -306,7 +306,7 @@
                                     <div class="tab-content">
                                         <uc1:PropertyInfo runat="server" ID="PropertyInfo" />
                                         <div class="tab-pane clearfix" id="home_owner">
-                                            <dx:ASPxCallbackPanel runat="server" ID="ownerInfoCallbackPanel" ClientInstanceName="ownerInfoCallbackPanel" OnCallback="ownerInfoCallbackPanel_Callback" Height="780px" ScrollBars="Auto" Paddings-Padding="0px">
+                                            <dx:ASPxCallbackPanel runat="server" ID="ownerInfoCallbackPanel" ClientInstanceName="ownerInfoCallbackPanel" OnCallback="ownerInfoCallbackPanel_Callback" Height="850px" ScrollBars="Auto" Paddings-Padding="0px">
                                                 <PanelCollection>
                                                     <dx:PanelContent>
                                                         <div style="padding: 20px 20px 0px 20px">
@@ -334,15 +334,20 @@
                                         PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                         ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
                                         <Items>
-                                            <dx:MenuItem Text="Call Phone" Name="Call">
+                                            <dx:MenuItem Text="Call Phone" Name="Call" >
                                             </dx:MenuItem>
-                                            <dx:MenuItem Text="# doesn't work" Name="nonWork">
+                                            <dx:MenuItem Text="# doesn't work" Name="nonWork" >
                                             </dx:MenuItem>
                                             <dx:MenuItem Text="Working Phone number" Name="Work">
                                             </dx:MenuItem>
                                             <dx:MenuItem Text="Undo" Name="Undo">
                                             </dx:MenuItem>
                                         </Items>
+                                        <%--<ItemTemplate>
+                                            <div style="width:200px">
+                                                <i class="fa <%# Container.Item.ItemStyle.CssClass %>"></i> <%# Container.Item.Text %>
+                                            </div>
+                                        </ItemTemplate>--%>
                                         <%--disable the width by steven--%>
                                         <%--<ItemStyle Width="143px"></ItemStyle>--%>
                                         <%------end------%>
