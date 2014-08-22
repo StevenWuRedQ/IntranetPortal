@@ -68,7 +68,7 @@
                 theme: "minimal-dark"
             }
          );
-        
+        init_currency();
     }
 
     var mapContentframeID = "MapContent";
@@ -210,8 +210,7 @@
         }
     }   
 
-    function ShowPropertyMap(propBBLE)
-    {
+    function ShowPropertyMap(propBBLE) {
         tmpBBLE = propBBLE;
         if (propBBLE != null) {
             if (getAddressCallback.InCallback()) {
@@ -429,14 +428,19 @@
             }
         }
     }
-    //$(document).ready(function () {
-    //    // Handler for .ready() called.
-    //    $("#leads_list_left").mCustomScrollbar(
-    //        {
-    //            theme: "minimal-dark"
-    //        }
-    //    );
-    //});
+    $(document).ready(function () {
+        //Handler for .ready() called.
+        var leads_list_grid = $("#leads_list_left");
+        alert("scrollHeight =" + document.getElementById("leads_list_left").scrollHeight + "height =" + leads_list_grid.height())
+        if (document.getElementById("leads_list_left").scrollHeight > leads_list_grid.height()) {
+            $("#leads_list_left").mCustomScrollbar(
+            {
+                theme: "minimal-dark"
+            }
+            );
+        }
+
+    });
 
     // ]]> 
 </script>
@@ -467,7 +471,7 @@
                         <div>
                             <table style="height: 30px">
                                 <tr>
-                                    <td style="width: 80px;"><span class="font_black">Date:<%#  Container.GroupText  %>
+                                    <td style="width: 80px;"><span class="font_black"><i class="fa fa-calendar-o"></i>  <%#  Container.GroupText  %>
                                     </span></td>
                                     <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")","")%></span>
@@ -498,9 +502,9 @@
                         <div>
                             <table style="height: 30px">
                                 <tr>
-                                    <td style="width: 80px;"><span class="font_black">Employee Name:<%#  Container.GroupText  %>
+                                    <td style="width: 80px;"><span class="font_black"> <i class="fa fa-user "></i> <%#  Container.GroupText  %>
                                     </span></td>
-                                    <td style="padding-left:10px">
+                                    <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
                                     </td>
                                 </tr>

@@ -27,6 +27,13 @@
     <script src="/scripts/jquery.collapse_storage.js"></script>
     <script src="/scripts/jquery.collapse_cookie_storage.js"></script>
     
+    <script src="../scripts/jquery.formatCurrency-1.1.0.js"></script>
+    <script>
+        $('.currency_input').blur(function () {
+            alert('blur runned');
+            $('.currency_input').formatCurrency();
+        });
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -163,6 +170,7 @@
 
                     <!-- Tab panes -->
                     <div class="tab-content">
+                        
                         <uc1:PropertyInfo runat="server" ID="PropertyInfo" />
                         
                         <div class="tab-pane clearfix" id="home_owner">
@@ -181,7 +189,7 @@
                                         <div class="form_div_node form_div_no_float" style="width: 100%">
                                             <span class="form_input_title">age</span>
 
-                                            <input class="text_input" value="09/1939 Born 74 Years Ago" />
+                                            <input class="text_input currency_input" value="09/1939 Born 74 Years Ago" />
                                         </div>
                                         <div class="form_div_node form_div_no_float" style="width: 100%">
                                             <span class="form_input_title">Death Indicator</span>

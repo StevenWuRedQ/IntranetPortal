@@ -59,7 +59,9 @@
                     <span class="form_input_title">bankruptcy</span>
                     <div class="clearfix">
                         <span><%= TLOLocateReport.numberOfBankruptciesField > 0%> </span>
+                        <% If TLOLocateReport.numberOfBankruptciesField > 0 Then  %>
                         <i class="fa fa-minus-square-o" style="float: right; color: #b1b2b7"></i>
+                        <% End If%>
                     </div>
                 </div>
             </td>

@@ -1,11 +1,19 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PropertyInfo.ascx.vb" Inherits="IntranetPortal.PropertyInfo" %>
+<script src="scripts/jquery.formatCurrency-1.1.0.js"></script>
 <script type="text/javascript">
     function ShowAcrisMap(propBBLE) {
         var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + propBBLE;
         aspxAcrisControl.SetContentUrl(url);
         aspxAcrisControl.Show();
     }
+    function init_currency()
+    {
+       
+        
+    }
+    //init_currency();
 </script>
+
 
 <div class="tab-pane active" id="property_info" style="padding-top: 5px">
     <%--witch scroll bar--%>
@@ -190,7 +198,7 @@
         <%-------end-----%>
 
         <%--zestimat form--%>
-         <div style="margin: 20px;" class="clearfix">
+        <div style="margin: 20px;" class="clearfix">
             <div class="form_head" style="margin-top: 40px;">ZESTIMATE</div>
 
 
@@ -198,13 +206,12 @@
             <%--line 1--%>
             <div class="form_div_node form_div_node_line_margin">
                 <span class="form_input_title">Zestimate</span>
-                <input class="text_input" value="$<%=LeadsInfoData.EstValue %>" />
+                <input class="text_input " onblur="$(this).formatCurrency();" type="text"  value="$<%=LeadsInfoData.EstValue %>" />
             </div>
 
-            
+
 
             <%----end line ----%>
-         
         </div>
         <%-------end-----------%>
         <%--Mortgage form--%>
@@ -216,7 +223,7 @@
             <%--line 1--%>
             <div class="form_div_node form_div_node_line_margin">
                 <span class="form_input_title">1st Mortgage</span>
-                <input class="text_input" value="$<%= LeadsInfoData.C1stMotgrAmt%>" />
+                <input class="text_input" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.C1stMotgrAmt%>" />
             </div>
 
             <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
@@ -244,7 +251,7 @@
 
             <div class="form_div_node form_div_node_line_margin">
                 <span class="form_input_title">2nd Mortgage</span>
-                <input class="text_input" value="$<%=LeadsInfoData.C2ndMotgrAmt%>" />
+                <input class="text_input" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.C2ndMotgrAmt%>" />
             </div>
 
             <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
@@ -310,7 +317,7 @@
                 </script>
                 <div class="form_div_node form_div_node_line_margin">
                     <span class="form_input_title">Taxes</span>
-                    <input onkeyup="formatAsDollars(this);" class="text_input" value="$<%=LeadsInfoData.TaxesAmt%>" />
+                    <input onblur="$(this).formatCurrency();" class="text_input" value="$<%=LeadsInfoData.TaxesAmt%>" />
                 </div>
 
 
@@ -319,7 +326,7 @@
 
                 <div class="form_div_node form_div_node_line_margin">
                     <span class="form_input_title">water</span>
-                    <input class="text_input" value="$<%= LeadsInfoData.WaterAmt%>" />
+                    <input class="text_input" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.WaterAmt%>" />
                 </div>
                 <%----end line ----%>
                 <%--line 6--%>
@@ -332,7 +339,7 @@
 
                 <div class="form_div_node form_div_node_line_margin">
                     <span class="form_input_title" style="color: #ff400d">Total debt</span>
-                    <input class="text_input" value="$ <%= LeadsInfoData.C1stMotgrAmt+LeadsInfoData.C2ndMotgrAmt+LeadsInfoData.TaxesAmt+LeadsInfoData.WaterAmt %>" />
+                    <input class="text_input" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.C1stMotgrAmt+LeadsInfoData.C2ndMotgrAmt+LeadsInfoData.TaxesAmt+LeadsInfoData.WaterAmt %>" />
                 </div>
 
                 <%----end line ----%>
@@ -400,8 +407,13 @@
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">
         </dx:PopupControlContentControl>
-    </ContentCollection>   
+    </ContentCollection>
 </dx:ASPxPopupControl>
 
 <script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 
+<script type="text/javascript">
+    
+   
+    init_currency();
+</script>
