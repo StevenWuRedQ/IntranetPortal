@@ -9,7 +9,7 @@ Public Class Calendar
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         BindCalendar()
 
-        CType(Master, Main).LeftPanelSize = 310
+        'CType(Master, Main).LeftPanelSize = 310
     End Sub
 
     Sub BindCalendar()

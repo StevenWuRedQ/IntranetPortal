@@ -214,7 +214,7 @@
                                     Task completed  Mr.Ulric 
                                     <div style="float: right; font-size: 18px">
                                         <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" title="Completed"></i>
-                                        <i class="fa fa-history log_item_hl_buttons"></i>
+                                        <i class="fa fa-history log_item_hl_buttons" onclick=""></i>
                                     </div>
                                 </div>
                                 <table style="margin-top: 5px;">
@@ -472,7 +472,8 @@
                         </td>
                         <td class="log_item_padding">
                             <div class="log_item_col1">
-                                Document A emailed to Mr.Ulric (example@email.com)
+                                Document A emailed to Mr.Ulric 
+(example@email.com)
                             </div>
                         </td>
                         <td class="log_item_padding">

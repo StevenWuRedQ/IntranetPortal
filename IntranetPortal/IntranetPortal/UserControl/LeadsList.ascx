@@ -429,13 +429,13 @@
         }
     }
     //$(document).ready(function () {
-        // Handler for .ready() called.
-        //$("#leads_list_left").mCustomScrollbar(
-        //    {
-        //        theme: "minimal-dark"
-        //    }
-      //  );
-   // });
+    //    // Handler for .ready() called.
+    //    $("#leads_list_left").mCustomScrollbar(
+    //        {
+    //            theme: "minimal-dark"
+    //        }
+    //    );
+    //});
 
     // ]]> 
 </script>

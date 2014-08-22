@@ -335,10 +335,8 @@
                 <dx:GridViewDataColumn FieldName="ActionType" VisibleIndex="0" Caption="" Width="40px">
                     <HeaderTemplate>
                     </HeaderTemplate>
-                    <DataItemTemplate>
-                        <div class="activity_log_item_icon activity_green_bg">
-                            <i class='<%# GetCommentsIconClass(Eval("ActionType"))%>'></i>
-                        </div>
+                    <DataItemTemplate>                     
+                          <%# GetCommentsIconClass(Eval("ActionType"))%>                      
                     </DataItemTemplate>
                     <CellStyle VerticalAlign="Top"></CellStyle>
                 </dx:GridViewDataColumn>
@@ -358,6 +356,9 @@
                                                 <asp:Label runat="server" ID="lblOwnerName"></asp:Label></td>
                                             <td>
                                                 <div style="float: right; font-size: 18px">
+                                                    <dx:ASPxCheckBox Text="Accepted" runat="server" TextAlign="Left" ID="chkAptAccept" Visible="false"></dx:ASPxCheckBox>
+                                                    <dx:ASPxCheckBox Text="Declined&nbsp;" runat="server" TextAlign="Left" ID="chkAptDecline" Visible="false"></dx:ASPxCheckBox>
+                                                    <dx:ASPxCheckBox Text="Scheduled" runat="server" TextAlign="Left" ID="chkAptReschedule" Visible="false"></dx:ASPxCheckBox>
                                                     <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" runat="server" id="btnAccept" title="Accept" onclick='<%# String.Format("AcceptAppointment(""{0}"")", Eval("LogID"))%>'></i>
                                                     <i class="fa fa-times-circle-o log_item_hl_buttons" title="Decline" runat="server" id="btnDecline" onclick='<%# String.Format("DeclineAppointment(""{0}"")", Eval("LogID"))%>'></i>
                                                     <i class="fa fa-history log_item_hl_buttons" title="Reschedule" runat="server" id="btnReschedule" onclick='<%# String.Format("ReScheduledAppointment(""{0}"")", Eval("LogID"))%>'></i>
@@ -366,7 +367,8 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <table style="margin-top: 5px;">
+                                <asp:Literal runat="server" ID="ltApt"></asp:Literal>
+                                <table style="margin-top: 5px;" runat="server" id="tblApt">
                                     <tr>
                                         <td><i class="fa fa-info-circle log_item_icon"></i></td>
                                         <td>
@@ -402,8 +404,50 @@
                             </div>
                         </asp:Panel>
 
+                        <asp:Panel runat="server" ID="pnlTask" Visible='<%# Eval("Category").ToString.StartsWith("Task")%>'>
+                            <div class="log_item_col1">
+                                <div class="font_black color_balck clearfix">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 200px">Task</td>
+                                            <td>
+                                                <div style="float: right; font-size: 18px">
+                                                    <dx:ASPxCheckBox Text="Completed" runat="server" TextAlign="Left" ID="chkTaskComplete" Visible="false"></dx:ASPxCheckBox>
+                                                    <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" onclick='<%# String.Format("CompleteTask(""{0}"")", Eval("LogID"))%>' title="Completed" runat="server" id="btnTaskComplete" visible="false"></i>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <asp:Literal runat="server" ID="ltTasklogData"></asp:Literal>
+                                <table style="margin-top: 5px;" runat="server" id="tblTask">
+                                    <tr>
+                                        <td><i class="fa fa-group log_item_icon"></i></td>
+                                        <td>
+                                            <asp:Literal runat="server" ID="ltTaskEmp"></asp:Literal></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-hand-o-right log_item_icon"></i></td>
+                                        <td>
+                                            <asp:Literal runat="server" ID="ltTaskAction"></asp:Literal></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-sort-numeric-asc log_item_icon"></i></td>
+                                        <td>
+                                            <asp:Literal runat="server" ID="ltTaskImpt"></asp:Literal></td>
+                                    </tr>
 
-                        <asp:Panel runat="server" Visible='<%# Eval("Category").ToString.StartsWith("Task") or Eval("Category").ToString.StartsWith("Approval")%>' ID="panelTask">
+                                    <tr>
+                                        <td><i class="fa fa-comment log_item_icon"></i></td>
+                                        <td>
+                                            <asp:Literal runat="server" ID="ltTaskComments"></asp:Literal></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </asp:Panel>
+
+
+                        <asp:Panel runat="server" Visible='<%# Eval("Category").ToString.StartsWith("Approval")%>' ID="panelTask">
                             <table style="width: 100%">
                                 <thead>
                                     <tr>

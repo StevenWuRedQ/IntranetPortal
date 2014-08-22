@@ -157,9 +157,14 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="MgrReport" Text="Agent Report" NavigationUrl="/AgentOverview/AgentOverview.aspx" ShowAmount="true">
+      <PortalNavItem Name="MgrReport" Text="Agent Report" NavigationUrl="/AgentOverview/AgentOverview.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-group"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Calendar" Text="Calendar" NavigationUrl="/Calendar.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
       </PortalNavItem>
     </Items>
@@ -354,5 +359,5 @@
         </Items>
       </PortalNavItem>
     </Items>
-  </PortalNavItem>
+  </PortalNavItem> 
 </ArrayOfPortalNavItem>

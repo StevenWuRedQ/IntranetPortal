@@ -68,6 +68,8 @@
         SetAsTask = 6
         UpdateInfo = 7
         DealClosed = 8
+        HotLeads = 9
+        Print = 10
     End Enum
 
 End Class
