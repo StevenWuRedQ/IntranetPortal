@@ -133,7 +133,7 @@
 
         });
     </script>
-    </script>
+    
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
@@ -183,7 +183,7 @@
                                                     <div>
                                                         <table style="height: 30px">
                                                             <tr>
-                                                                <td style="width: 80px;"><span class="font_black">Department: <%# Container.GroupText%>
+                                                                <td style="width: 80px;"><span class="font_black"> <i class="fa fa-caret-right font_16" onclick="gridEmpsClient.ExpandRow(1)" style="cursor:pointer"></i> &nbsp; <i class="fa fa-bank font_16"></i> &nbsp; <%# Container.GroupText%>
                                                                 </span></td>
                                                                 <td style="padding-left: 10px">
                                                                     <span class="employee_lest_head_number_label"><%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %></span>
@@ -531,7 +531,9 @@
                                                     </dx:ASPxGridView>
                                                     <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridReport"></dx:ASPxGridViewExporter>
                                                     <%--</div>--%>
+                                                    
                                                 </div>
+                                                
                                             </div>
                                         </dx:SplitterContentControl>
                                     </ContentCollection>
@@ -693,6 +695,9 @@
            //    }
            //);
         }
+        
+        $('#ctl00_MainContentPH_ASPxSplitter1_contentSplitter_gridReport_DXPagerBottom_PSP_DXME_').addClass('no_before_and_after');
+       
         empId = '<%= CurrentEmployee.EmployeeID %>';
     </script>
     <%-----------end-------%>

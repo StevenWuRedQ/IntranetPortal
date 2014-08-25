@@ -662,3 +662,16 @@
 .dxsplControl_Moderno .dxscControl_Moderno {
     border-top: 0;
 }
+
+.no_before_and_after
+{
+    
+}
+.no_before_and_after:before
+{
+    border:0px !important;
+}
+.no_before_and_after:after
+{
+    border:0px !important;
+}

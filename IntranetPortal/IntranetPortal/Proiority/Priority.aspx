@@ -74,7 +74,7 @@
                             </ul>
 
                             <div class="employee_list_group_margin">
-                                <i class="fa fa-user font_black color_balck"></i>
+                                <i class="fa fa-user color_balck font_16"></i>
                                 <span class="font_black color_balck">&nbsp;John Smith</span>&nbsp;&nbsp;&nbsp;
                                 <span class="employee_lest_head_number_label">3</span>
                             </div>
