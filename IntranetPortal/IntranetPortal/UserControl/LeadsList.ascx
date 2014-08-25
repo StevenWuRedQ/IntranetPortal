@@ -518,7 +518,7 @@
                     <GroupRowTemplate>
                         <div>
                             <table style="height: 30px">
-                                <tr>
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor:pointer">
                                     <td style="width: 80px;"><span class="font_black"> <i class="fa fa-user "></i> <%#  Container.GroupText  %>
                                     </span></td>
                                     <td style="padding-left: 10px">

@@ -26,7 +26,7 @@ Public Class PortalNavItem
     <XmlAttribute()>
     Public Property Expanded As Boolean
 
-    Private rootItemFormat As String = "<li><a href=""{0}"" class=""category {3}"" target=""contentUrlPane"">{1} - {2}</a>"
+    Private rootItemFormat As String = "<li><a href=""{0}"" class=""category {2}"" target=""contentUrlPane"">{1}</a>"
     Private rootOfficeItemFormat As String = "<li><a href=""{0}"" class=""category {2}"" target=""contentUrlPane"">{1}</a>"
     Private itemFormat As String = "<li>{3}<a href=""{1}"" target=""contentUrlPane"">{0}{2}</a>"
     Private itemWithChildrenFormat As String = "<li>{4}<a href=""{1}"" class=""{3}"" target=""contentUrlPane""><i class=""fa fa-caret-right""></i>{0}{2}</a>"
@@ -80,7 +80,7 @@ Public Class PortalNavItem
         If ItemType = "Office" Then
             Return String.Format(rootOfficeItemFormat, NavigationUrl, Text, If(Expanded, "current", ""))
         End If
-        Return String.Format(rootItemFormat, NavigationUrl, Text, HttpContext.Current.User.Identity.Name, If(Expanded, "current", ""))
+        Return String.Format(rootItemFormat, NavigationUrl, Text, If(Expanded, "current", ""))
     End Function
 
     Function RenderNode() As String

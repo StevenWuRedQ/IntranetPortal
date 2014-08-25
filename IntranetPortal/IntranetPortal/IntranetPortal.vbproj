@@ -334,6 +334,9 @@
     <Compile Include="DataModel\NYC_St_Names.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\Office.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\OrderRespons.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
