@@ -228,4 +228,13 @@ Partial Public Class AgentOverview
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents chkFields2 As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
+
+    '''<summary>
+    '''getEmployeeIDByName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents getEmployeeIDByName As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class

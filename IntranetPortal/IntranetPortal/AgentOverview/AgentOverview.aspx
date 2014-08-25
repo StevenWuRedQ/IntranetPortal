@@ -83,12 +83,18 @@
         }
 
         function BindEmployee(employeeId) {
+          
             empId = employeeId;
-            infoCallbackClient.PerformCallback("EMP|" + employeeId);
+           
+            infoCallbackClient.PerformCallback("EMP|" + empId);
             gridReportClient.PerformCallback("BindEmp|" + employeeId);
             LoadEmployeeBarChart(empId);
         }
-
+        function getEmplyeeIDComplete(s,e)
+        {
+           
+            BindEmployee(parseInt(e.result));
+        }
         function BindOffice(office) {
             gridReportClient.PerformCallback("BindOffice|" + office);
             infoCallbackClient.PerformCallback("OFFICE|" + office);
@@ -719,6 +725,9 @@
         empId = '<%= CurrentEmployee.EmployeeID %>';
     </script>
     <%-----------end-------%>
+    <dx:ASPxCallback runat="server" ID="getEmployeeIDByName" OnCallback="getEmployeeIDByName_Callback" ClientInstanceName="getEmployeeIDByNameClinet">
+        <ClientSideEvents CallbackComplete="getEmplyeeIDComplete" />
+    </dx:ASPxCallback>
 </asp:Content>
 
 

@@ -40,10 +40,21 @@ Public Class AgentOverview
             BindEmp()
         End If
     End Sub
+    Function getEmployeeByName(ByVal parametersStrg As String) As Employee
+        Dim employeeID = CInt(parametersStrg.Split("|")(1))
+        If (employeeID < 0) Then
+            Return Employee.GetInstance(parametersStrg.Split("|")(2))
 
+        End If
+        Return Employee.GetInstance(employeeID)
+    End Function
+    Function EmployeeIDToName(parametersStrg As String) As String
+        Dim employeeID = Employee.GetInstance(parametersStrg).EmployeeID
+        Return employeeID.ToString
+    End Function
     Protected Sub gridReport_CustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs)
         If e.Parameters.StartsWith("BindEmp") Then
-            CurrentEmployee = Employee.GetInstance(CInt(e.Parameters.Split("|")(1)))
+            CurrentEmployee = getEmployeeByName(e.Parameters)
             'AgentCharts.current_employee = CurrentEmployee.Name
             'AgentCharts.Agent_leads_activity_source()
             hfEmpName.Value = CurrentEmployee.Name
@@ -89,7 +100,7 @@ Public Class AgentOverview
         If e.Parameter.StartsWith("EMP") Then
             If Not String.IsNullOrEmpty(e.Parameter) Then
                 hfMode.Value = ""
-                CurrentEmployee = Employee.GetInstance(CInt(e.Parameter.Split("|")(1)))
+                CurrentEmployee = getEmployeeByName(e.Parameter)
                 hfEmpName.Value = CurrentEmployee.Name
 
                 AgentInfoPanel.Visible = True
@@ -304,4 +315,7 @@ Public Class AgentOverview
     End Sub
 #End Region
 
+    Protected Sub getEmployeeIDByName_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        e.Result = EmployeeIDToName(e.Parameter)
+    End Sub
 End Class

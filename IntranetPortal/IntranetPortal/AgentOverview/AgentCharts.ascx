@@ -149,7 +149,10 @@
             }
         ,
             pointClick: function (point) {
-                this.select();
+                //this.select();
+                //alert('-1|' + point.originalArgument)
+                //BindEmployee('-1|' + point.originalArgument);
+                getEmployeeIDByNameClinet.PerformCallback(point.originalArgument);
             }
         });
     }
