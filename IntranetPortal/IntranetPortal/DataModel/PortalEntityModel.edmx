@@ -243,6 +243,17 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="st_name" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="BOROUGH" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
+        <EntityType Name="Offices">
+          <Key>
+            <PropertyRef Name="OfficeId" />
+          </Key>
+          <Property Name="OfficeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="120" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="FaxNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="OrderResponses">
           <Key>
             <PropertyRef Name="ResponseID" />
@@ -416,6 +427,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="LeadsActivityLog" EntityType="Self.LeadsActivityLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsInfo" EntityType="Self.LeadsInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginLogs" EntityType="Self.LoginLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderResponses" EntityType="Self.OrderResponses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OwnerContacts" EntityType="Self.OwnerContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PortalLisPen" EntityType="Self.PortalLisPen" Schema="dbo" store:Type="Tables" />
@@ -486,6 +498,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
             <Parameter Name="NewName" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="BuildingCodes" EntityType="IntranetPortalModel.BuildingCode" />
+          <EntitySet Name="Offices" EntityType="IntranetPortalModel.Office" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -952,6 +965,17 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Code" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Office">
+          <Key>
+            <PropertyRef Name="OfficeId" />
+          </Key>
+          <Property Name="OfficeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1368,6 +1392,18 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
               <MappingFragment StoreEntitySet="BuildingCodes">
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offices">
+            <EntityTypeMapping TypeName="IntranetPortalModel.Office">
+              <MappingFragment StoreEntitySet="Offices">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
