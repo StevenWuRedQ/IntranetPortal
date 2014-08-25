@@ -83,6 +83,7 @@
             }
          );
         init_currency();
+        initToolTips();
     }
 
     var mapContentframeID = "MapContent";

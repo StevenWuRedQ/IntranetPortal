@@ -223,7 +223,17 @@
         aspxPopupAddPhoneNum.Hide();
         txtPhoneNoClient.SetText("");
     }
-
+    function initToolTips()
+    {
+        if ($(".tooltip-examples").tooltip) {
+            $(".tooltip-examples").tooltip({
+                placement: 'bottom'
+            });
+        } else {
+            alert('tooltip function can not found' + $(".tooltip-examples").tooltip);
+        }
+    }
+    //initToolTips();
     // ]]> 
 </script>
 <style type="text/css">
@@ -297,10 +307,10 @@
 
                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                         <li style="margin-left: 48px; color: #ffa484">
-                                            <i class="fa fa-refresh sale_head_button" onclick="popupMenuRefreshClient.ShowAtElement(this)"></i>
-                                            <i class="fa fa-envelope sale_head_button sale_head_button_left"></i>
-                                            <i class="fa fa-fax  sale_head_button sale_head_button_left" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
-                                            <i class="fa fa-print sale_head_button sale_head_button_left" onclick="PrintLeadInfo()"></i>
+                                            <i class="fa fa-refresh sale_head_button tooltip-examples" title="Refresh" onclick="popupMenuRefreshClient.ShowAtElement(this)"></i>
+                                            <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail"></i>
+                                            <i class="fa fa-fax  sale_head_button sale_head_button_left tooltip-examples" title="Fax" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
+                                            <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
@@ -394,10 +404,10 @@
                                                 <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                 <li style="margin-right: 30px; color: #7396a9; float: right">
                                                     <i class="fa fa-calendar-o sale_head_button tooltip-examples" title="Schedule" onclick="ASPxPopupScheduleClient.ShowAtElement(this);"></i>
-                                                    <i class="fa fa-phone sale_head_button sale_head_button_left" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
-                                                    <i class="fa fa-sign-in  sale_head_button sale_head_button_left" onclick="SetLeadStatus(4)"></i>
-                                                    <i class="fa fa-list-ol sale_head_button sale_head_button_left" onclick="SetLeadStatus(5)"></i>
-                                                    <i class="fa fa-print sale_head_button sale_head_button_left" onclick="PrintLogInfo()"></i>
+                                                    <i class="fa fa-phone sale_head_button sale_head_button_left tooltip-examples" title="Call Back" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
+                                                    <i class="fa fa-sign-in  sale_head_button sale_head_button_left tooltip-examples" title="Door Knock" onclick="SetLeadStatus(4)"></i>
+                                                    <i class="fa fa-list-ol sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus(5)"></i>
+                                                    <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                                 </li>
                                             </ul>
                                             <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
@@ -634,5 +644,5 @@
     </PanelCollection>
     <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>
     <Border BorderStyle="None"></Border>
-
+    
 </dx:ASPxCallbackPanel>
