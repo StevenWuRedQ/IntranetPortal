@@ -120,6 +120,22 @@
 
             initScrollbars();
         }
+
+        function ExpandOrCollapseGroupRow(s, rowIndex) {
+            //alert("dd");
+            if (gridEmpsClient.IsGroupRow(rowIndex)) {
+                if (gridEmpsClient.IsGroupRowExpanded(rowIndex)) {                  
+                    gridEmpsClient.CollapseRow(rowIndex);
+                    //s.setAttribute("class", "fa fa-caret-right font_16");
+                } else {
+                 
+                    gridEmpsClient.ExpandRow(rowIndex);
+                   // s.setAttribute("class", "fa fa-caret-down font_16");
+                }
+
+                return
+            }
+        }
       
         $(document).ready(function () {
 
@@ -183,7 +199,7 @@
                                                     <div>
                                                         <table style="height: 30px">
                                                             <tr>
-                                                                <td style="width: 80px;"><span class="font_black"> <i class="fa fa-caret-right font_16" onclick="gridEmpsClient.ExpandRow(1)" style="cursor:pointer"></i> &nbsp; <i class="fa fa-bank font_16"></i> &nbsp; <%# Container.GroupText%>
+                                                                <td style="width: 80px;"><span class="font_black"> <i class="fa fa-caret-<%#If(Container.Expanded,"down","right") %> font_16" onclick="ExpandOrCollapseGroupRow(this, <%# Container.VisibleIndex%>)" style="cursor:pointer"></i> &nbsp; <i class="fa fa-bank font_16"></i> &nbsp; <%# Container.GroupText%>
                                                                 </span></td>
                                                                 <td style="padding-left: 10px">
                                                                     <span class="employee_lest_head_number_label"><%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %></span>
@@ -510,6 +526,9 @@
                                                         <Columns>
                                                             <dx:GridViewDataColumn FieldName="PropertyAddress">
                                                                 <CellStyle Font-Bold="True"></CellStyle>
+                                                                <DataItemTemplate>
+
+                                                                </DataItemTemplate>
                                                             </dx:GridViewDataColumn>
                                                         </Columns>
                                                         <%-- Mode="ShowAllRecords" ShowAllItem="True"--%>
@@ -524,9 +543,7 @@
                                                             <Cell>
                                                                 <BorderLeft BorderWidth="0px"></BorderLeft>
                                                                 <BorderRight BorderWidth="0px"></BorderRight>
-                                                            </Cell>
-                                                            <Table>
-                                                            </Table>
+                                                            </Cell>                                                           
                                                         </Styles>
                                                         <ClientSideEvents EndCallback="CustomizRefershEnd" />
                                                     </dx:ASPxGridView>
