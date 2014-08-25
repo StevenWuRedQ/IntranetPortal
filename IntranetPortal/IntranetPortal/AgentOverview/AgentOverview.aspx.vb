@@ -88,6 +88,7 @@ Public Class AgentOverview
     Protected Sub infoCallback_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         If e.Parameter.StartsWith("EMP") Then
             If Not String.IsNullOrEmpty(e.Parameter) Then
+                hfMode.Value = ""
                 CurrentEmployee = Employee.GetInstance(CInt(e.Parameter.Split("|")(1)))
                 hfEmpName.Value = CurrentEmployee.Name
 

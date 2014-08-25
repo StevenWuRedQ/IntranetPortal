@@ -617,14 +617,23 @@
                                                 <Items>
                                                     <dx:ListEditItem Text="BBLE" Value="BBLE" Selected="true" />
                                                     <dx:ListEditItem Text="Status" Value="Status" />
+                                                    <dx:ListEditItem Text="Neighborhood" Value="NeighName" />
+                                                    <dx:ListEditItem Text="Borough" Value="Borough" />                                                    
                                                     <dx:ListEditItem Text="Sale Date" Value="SaleDate" />
                                                     <dx:ListEditItem Text="Tax Class" Value="TaxClass" />
+                                                    <dx:ListEditItem Text="Propety Class" Value="PropertyClassCode" />
                                                     <dx:ListEditItem Text="Block" Value="Block" />
                                                     <dx:ListEditItem Text="Lot" Value="Lot" />
                                                     <dx:ListEditItem Text="Year Build" Value="YearBuilt" />
                                                     <dx:ListEditItem Text="# of floor" Value="NumFloors" />
                                                     <dx:ListEditItem Text="Building Dem" Value="BuildingDem" />
                                                     <dx:ListEditItem Text="Lot Dem" Value="LotDem" />
+                                                    <dx:ListEditItem Text="1st Mortgage" Value="C1stMortgrAmt" />
+                                                    <dx:ListEditItem Text="2nd Mortgage" Value="C2ndMortgrAmt" />
+                                                    <dx:ListEditItem Text="Taxes" Value="TaxesAmt" />
+                                                    <dx:ListEditItem Text="Water" Value="WaterAmt" />
+                                                    <dx:ListEditItem Text="Taxes" Value="TaxesAmt" />
+                                                    <dx:ListEditItem Text="ECB/DOB" Value="ViolationAmount" />
                                                     <dx:ListEditItem Text="Est Value" Value="EstValue" />
                                                     <dx:ListEditItem Text="Zoning" Value="Zoning" />
                                                     <dx:ListEditItem Text="MaxFar" Value="MaxFar" />
