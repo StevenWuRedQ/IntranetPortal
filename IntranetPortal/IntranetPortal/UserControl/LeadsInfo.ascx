@@ -271,7 +271,7 @@
                             <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
                                 <div style="width: 100%; align-content: center; height: 100%">
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu3" runat="server" ClientInstanceName="popupMenuRefreshClient"
-                                        AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
+                                        AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"  ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
                                         <Items>
                                             <dx:MenuItem Text="All" Name="All"></dx:MenuItem>
                                             <dx:MenuItem Text="General Property Info" Name="Assessment"></dx:MenuItem>
@@ -280,7 +280,7 @@
                                             </dx:MenuItem>
                                         </Items>
                                         <ClientSideEvents ItemClick="OnRefreshMenuClick" />
-                                        <ItemStyle Width="143px"></ItemStyle>
+                                        <%--<ItemStyle Width="143px"></ItemStyle>--%>
                                     </dx:ASPxPopupMenu>
                                     <asp:HiddenField ID="hfBBLE" runat="server" />
 
