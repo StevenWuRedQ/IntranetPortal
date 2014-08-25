@@ -285,6 +285,7 @@
 
                             <%--menu list--%>
                             <div style="margin: 13px 30px 30px 30px">
+                                <div class="agent_menu_list_item" onclick="ShowLeadstatus(0)">New Leads</div>
                                 <div class="agent_menu_list_item" onclick="ShowLeadstatus(1)">Hot Leads</div>
                                 <div class="agent_menu_list_item" onclick="ShowLeadstatus(3)">Follow Up</div>
                                 <div class="agent_menu_list_item" onclick="ShowLeadstatus(5)">In Negotiation</div>
