@@ -28,10 +28,10 @@ Public Class PortalNavItem
 
     Private rootItemFormat As String = "<li><a href=""{0}"" class=""category {2}"" target=""contentUrlPane"">{1}</a>"
     Private rootOfficeItemFormat As String = "<li><a href=""{0}"" class=""category {2}"" target=""contentUrlPane"">{1}</a>"
-    Private itemFormat As String = "<li>{3}<a href=""{1}"" target=""contentUrlPane"">{0}{2}</a>"
-    Private itemWithChildrenFormat As String = "<li>{4}<a href=""{1}"" class=""{3}"" target=""contentUrlPane""><i class=""fa fa-caret-right""></i>{0}{2}</a>"
-    Private itemWithNumFormat As String = "<li>{5}<a href=""{1}"" target=""contentUrlPane"" class=""{6}"">{0}{2}<span class=""notification"" id=""{3}"">{4}</span></a>"
-    Private itemWithNumChildrenFormat = "<li>{5}<a href=""{1}"" class=""{6}"" target=""contentUrlPane""><i class=""fa fa-caret-right""></i>{0}{2}<span class=""notification"" id=""{3}"">{4}</span></a>"
+    Private itemFormat As String = "<li class=""{4}"">{3}<a href=""{1}"" target=""contentUrlPane"">{0}{2}</a>"
+    Private itemWithChildrenFormat As String = "<li class=""{5}"">{4}<a href=""{1}"" class=""{3}"" target=""contentUrlPane""><i class=""fa fa-caret-right""></i>{0}{2}</a>"
+    Private itemWithNumFormat As String = "<li class=""{7}"">{5}<a href=""{1}"" target=""contentUrlPane"" class=""{6}"">{0}{2}<span class=""notification"" id=""{3}"">{4}</span></a>"
+    Private itemWithNumChildrenFormat = "<li class=""{7}"">{5}<a href=""{1}"" class=""{6}"" target=""contentUrlPane""><i class=""fa fa-caret-right""></i>{0}{2}<span class=""notification"" id=""{3}"">{4}</span></a>"
     Private childrenWrapFormat As String = "<ul class=""nav-level-{0}"">{1}</ul>"
     Private level2WrapFormat As String = " <div class=""nav-level-{0}-container"">{1}</div>"
     Private itemEndFormat As String = "</li>"
@@ -86,15 +86,15 @@ Public Class PortalNavItem
     Function RenderNode() As String
         If ShowAmount Then
             If Items.Count > 0 Then
-                Return String.Format(itemWithNumChildrenFormat, FontClass, NavigationUrl, Text, LeadsCountSpanId, "", FrontButton, "has-level-" & level + 1 & "-menu")
+                Return String.Format(itemWithNumChildrenFormat, FontClass, NavigationUrl, Text, LeadsCountSpanId, "", FrontButton, "has-level-" & level + 1 & "-menu", If(String.IsNullOrEmpty(FrontButton), "", "has-add-button"))
             End If
-            Return String.Format(itemWithNumFormat, FontClass, NavigationUrl, Text, LeadsCountSpanId, "", FrontButton, If(Items.Count > 0, "has-level-" & level + 1 & "-menu", ""))
+            Return String.Format(itemWithNumFormat, FontClass, NavigationUrl, Text, LeadsCountSpanId, "", FrontButton, If(Items.Count > 0, "has-level-" & level + 1 & "-menu", ""), If(String.IsNullOrEmpty(FrontButton), "", "has-add-button"))
         Else
             If Items.Count > 0 Then
-                Return String.Format(itemWithChildrenFormat, FontClass, NavigationUrl, Text, "has-level-" & level + 1 & "-menu", FrontButton)
+                Return String.Format(itemWithChildrenFormat, FontClass, NavigationUrl, Text, "has-level-" & level + 1 & "-menu", FrontButton, If(String.IsNullOrEmpty(FrontButton), "", "has-add-button"))
             End If
 
-            Return String.Format(itemFormat, FontClass, NavigationUrl, Text, FrontButton)
+            Return String.Format(itemFormat, FontClass, NavigationUrl, Text, FrontButton, If(String.IsNullOrEmpty(FrontButton), "", "has-add-button"))
         End If
     End Function
 

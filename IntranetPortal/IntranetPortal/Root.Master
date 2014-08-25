@@ -89,7 +89,7 @@
                                     <div id="global-nav-container">
                                         <nav id="global-nav" class="navbar" role="navigation">
                                             <div class="navbar-header">
-                                                <a href="#" class="clearfix">
+                                                <a href="/SummaryPage.aspx" class="clearfix" target="contentUrlPane">
                                                     <img id="logo" src="Images/logo.png" alt="My Ideal Property" class="go-retina" />
                                                     <span>Portal</span>
                                                 </a>

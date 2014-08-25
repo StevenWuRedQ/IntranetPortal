@@ -380,7 +380,7 @@
                                             <asp:Literal runat="server" ID="ltStartTime"></asp:Literal>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <tr style="display:none">
                                         <td><i class="fa fa-clock-o log_item_icon"></i></td>
                                         <td>
                                             <asp:Literal runat="server" ID="ltEndTime"></asp:Literal></td>

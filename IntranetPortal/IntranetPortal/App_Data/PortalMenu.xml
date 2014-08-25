@@ -9,37 +9,40 @@
     <Items>
       <PortalNavItem Name="Summary" Text="Summary" NavigationUrl="/SummaryPage.aspx" ShowAmount="false">
         <FontClass>
-          <![CDATA[ <i class="fa fa-bar-chart-o"></i>]]>
+          <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="AgentNewLeads" Text="New Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
         <FontClass>
-          <![CDATA[ <i class="fa fa-star"></i>]]>
+          <![CDATA[<i class="fa fa-star"></i>]]>
         </FontClass>
+        <FrontButton>
+          <![CDATA[<a href="/LeadAgent.aspx?c=Create" class="add-button" target="contentUrlPane"><i class="fa fa-plus-circle"></i></a>]]>
+        </FrontButton>
       </PortalNavItem>
       <PortalNavItem Name="AgentHotLeads" Text="Hot Leads" NavigationUrl="/LeadAgent.aspx?c=Priority" ShowAmount="true">
         <FontClass>
-          <![CDATA[ <i class="fa fa-sun-o"></i>]]>
+          <![CDATA[<i class="fa fa-sun-o"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="AgentFollowUp" Text="Follow Up" NavigationUrl="/LeadAgent.aspx?c=Call Back" ShowAmount="true">
         <FontClass>
-          <![CDATA[ <i class="fa fa-rotate-right"></i>]]>
+          <![CDATA[<i class="fa fa-rotate-right"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="AgentDoorKnock" Text="Door Knock" NavigationUrl="/LeadAgent.aspx?c=Door Knock" ShowAmount="true">
         <FontClass>
-          <![CDATA[ <i class="fa fa-sign-in"></i>]]>
+          <![CDATA[<i class="fa fa-sign-in"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="AgentShared" Text="Shared" NavigationUrl="/LeadAgent.aspx?c=Shared" ShowAmount="false">
         <FontClass>
-          <![CDATA[ <i class="fa fa-share"></i>]]>
+          <![CDATA[<i class="fa fa-share"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="AgentInProcess" Text="In Process" NavigationUrl="/LeadAgent.aspx?c=In Process" ShowAmount="true">
         <FontClass>
-          <![CDATA[ <i class="fa fa-refresh"></i>]]>
+          <![CDATA[<i class="fa fa-refresh"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="AgentDeadLead" Text="Dead Lead" NavigationUrl="/LeadAgent.aspx?c=Dead Lead" ShowAmount="true">
@@ -59,12 +62,12 @@
     <Items>
       <PortalNavItem Name="Summary" Text="Summary" NavigationUrl="/SummaryPage.aspx" ShowAmount="false">
         <FontClass>
-          <![CDATA[ <i class="fa fa-bar-chart-o"></i>]]>
+          <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="Agent" Text="My Leads" NavigationUrl="#" ShowAmount="false">
         <FontClass>
-          <![CDATA[ <i class="fa fa-suitcase"></i>]]>
+          <![CDATA[<i class="fa fa-suitcase"></i>]]>
         </FontClass>
         <Items>
           <PortalNavItem Name="AgentNewLeads" Text="New Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
@@ -82,22 +85,22 @@
           </PortalNavItem>
           <PortalNavItem Name="AgentFollowUp" Text="Follow Up" NavigationUrl="/LeadAgent.aspx?c=Call Back" ShowAmount="true">
             <FontClass>
-              <![CDATA[ <i class="fa fa-rotate-right"></i>]]>
+              <![CDATA[<i class="fa fa-rotate-right"></i>]]>
             </FontClass>
           </PortalNavItem>
           <PortalNavItem Name="AgentDoorKnock" Text="Door Knock" NavigationUrl="/LeadAgent.aspx?c=Door Knock" ShowAmount="true">
             <FontClass>
-              <![CDATA[ <i class="fa fa-sign-in"></i>]]>
+              <![CDATA[<i class="fa fa-sign-in"></i>]]>
             </FontClass>
           </PortalNavItem>
           <PortalNavItem Name="AgentShared" Text="Shared" NavigationUrl="/LeadAgent.aspx?c=Shared" ShowAmount="false">
             <FontClass>
-              <![CDATA[ <i class="fa fa-share"></i>]]>
+              <![CDATA[<i class="fa fa-share"></i>]]>
             </FontClass>
           </PortalNavItem>
           <PortalNavItem Name="AgentInProcess" Text="In Process" NavigationUrl="/LeadAgent.aspx?c=In Process" ShowAmount="true">
             <FontClass>
-              <![CDATA[ <i class="fa fa-refresh"></i>]]>
+              <![CDATA[<i class="fa fa-refresh"></i>]]>
             </FontClass>
           </PortalNavItem>
           <PortalNavItem Name="AgentDeadLead" Text="Dead Lead" NavigationUrl="/LeadAgent.aspx?c=Dead Lead" ShowAmount="true">

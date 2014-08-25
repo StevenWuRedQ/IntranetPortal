@@ -3,13 +3,26 @@
 <script type="text/javascript">
     function ShowAcrisMap(propBBLE) {
         var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + propBBLE;
+        ShowPopupMap(url, "Acris");
+    }
+
+    function ShowDOBWindow(boro, houseNo, street)
+    {
+        var url = "http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=" + boro + "&houseno=" + encodeURIComponent(houseNo) + "&street=" + encodeURIComponent(street);
+        ShowPopupMap(url, "DOB");
+    }
+
+    function ShowPopupMap(url, header)
+    {
+        aspxAcrisControl.SetContentHtml("Loading...");
         aspxAcrisControl.SetContentUrl(url);
+        aspxAcrisControl.SetHeaderText(header);
         aspxAcrisControl.Show();
     }
+
     function init_currency()
     {
-       
-        
+               
     }
     //init_currency();
 </script>
@@ -36,8 +49,8 @@
             <div style="font-size: 30px">
                 <i class="fa fa-refresh"></i>
                 <span style="margin-left: 19px;"><%= LeadsInfoData.LastUpdate.ToString%></span>
-                <span class="time_buttons" style="margin-right: 30px">eCourts</span>
-                <span class="time_buttons">DOB</span>
+                <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
+                <span class="time_buttons" onclick='ShowDOBWindow(<%= LeadsInfoData.Borough%>,"<%= LeadsInfoData.Number%>", "<%= LeadsInfoData.StreetName%>")'>DOB</span>
                 <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>")'>Acris</span>
                 <span class="time_buttons" onclick='ShowPropertyMap("<%= LeadsInfoData.BBLE %>")'>Maps</span>
             </div>
