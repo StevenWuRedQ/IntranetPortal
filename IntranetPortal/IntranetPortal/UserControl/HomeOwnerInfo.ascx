@@ -166,9 +166,7 @@
                     <% End If%>
                     <% Next%>
                 </div>
-
             </div>
-
         </div>
     </div>
 

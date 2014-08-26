@@ -21,6 +21,14 @@
     function init_currency() {
 
     }
+
+    function SaveLeadsComments(s, e) {
+        var comments = txtLeadsComments.GetText();
+        leadsCommentsCallbackPanel.PerformCallback(comments);
+        txtLeadsComments.SetText("");
+        aspxAddLeadsComments.Hide();
+    }
+
     //init_currency();
 </script>
 
@@ -71,19 +79,53 @@
             </div>
             <% End If%>
 
-            <% For Each comment In LeadsInfoData.UserComments%>
-            <div class="note_item" style="background: #e8e8e8">
-                <i class="fa fa-exclamation-circle note_img"></i>
-                <span class="note_text"><%= comment.Comments%></span>
-                <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7"></i>
-                <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7"></i>
-            </div>
-            <% Next%>
-                      
+            <dx:ASPxCallbackPanel runat="server" ID="leadsCommentsCallbackPanel" ClientInstanceName="leadsCommentsCallbackPanel" OnCallback="leadsCommentsCallbackPanel_Callback">
+                <PanelCollection>
+                    <dx:PanelContent>
+                        <asp:HiddenField ID="hfBBLE" runat="server"/>
+                        <% For Each comment In LeadsInfoData.UserComments%>
+                        <div class="note_item" style="background: #e8e8e8">
+                            <i class="fa fa-exclamation-circle note_img"></i>
+                            <span class="note_text"><%= comment.Comments%></span>
+                            <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7"></i>
+                            <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7"></i>
+                        </div>
+                        <% Next%>
+                    </dx:PanelContent>
+                </PanelCollection>
+            </dx:ASPxCallbackPanel>
+
             <div class="note_item" style="background: white">
-                <i class="fa fa-plus-circle note_img" style="color: #3993c1"></i>
+                <i class="fa fa-plus-circle note_img" style="color: #3993c1" onclick="aspxAddLeadsComments.ShowAtElement(this)"></i>
             </div>
         </div>
+
+        <dx:ASPxPopupControl ClientInstanceName="aspxAddLeadsComments" Width="200px" Height="80px" ID="ASPxPopupControl2"
+            HeaderText="Add Comments" ShowHeader="false"
+            runat="server" EnableViewState="false" PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="Middle" EnableHierarchyRecreation="True">
+            <ContentCollection>
+                <dx:PopupControlContentControl>
+                    <table>
+                        <tr style="padding-top: 3px;">
+                            <td>
+                                <dx:ASPxTextBox runat="server" ID="txtLeadsComments" ClientInstanceName="txtLeadsComments"></dx:ASPxTextBox>
+                            </td>
+                        </tr>
+                        <tr style="margin-top: 3px; line-height: 30px;">
+                            <td>
+                                <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false">
+                                    <ClientSideEvents Click="SaveLeadsComments" />
+                                </dx:ASPxButton>
+                                &nbsp;
+                                    <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false">
+                                        <ClientSideEvents Click="function(s,e){aspxAddLeadsComments.Hide();}" />
+                                    </dx:ASPxButton>
+                            </td>
+                        </tr>
+                    </table>
+                </dx:PopupControlContentControl>
+            </ContentCollection>
+        </dx:ASPxPopupControl>
 
         <%--------%>
         <%--property form--%>
