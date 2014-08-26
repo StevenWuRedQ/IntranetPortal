@@ -97,7 +97,7 @@
                       
             <div class="note_item" style="background: white">
                 <%--<button class="btn" data-container="body" type="button" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">--%>
-                      <i class="fa fa-plus-circle note_img" style="color: #3993c1" onclick="aspxAddLeadsComments.ShowAtElement(this)"></i>
+                      <i class="fa fa-plus-circle note_img" style="color: #3993c1;cursor:pointer" onclick="aspxAddLeadsComments.ShowAtElement(this)"></i>
 
                 <%--</button>--%>
             </div>
@@ -116,11 +116,11 @@
                         </tr>
                         <tr style="margin-top: 3px; line-height: 30px;">
                             <td>
-                                <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false">
+                                <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button"  BackColor="#3993c1">
                                     <ClientSideEvents Click="SaveLeadsComments" />
                                 </dx:ASPxButton>
                                 &nbsp;
-                                    <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false">
+                                    <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false" CssClass="rand-button"  BackColor="#77787b">
                                         <ClientSideEvents Click="function(s,e){aspxAddLeadsComments.Hide();}" />
                                     </dx:ASPxButton>
                             </td>

@@ -15,10 +15,10 @@
     border-bottom: 1px solid #2b586f;
     height: 60px;
 }
-.currency_input
-{
 
+.currency_input {
 }
+
 .div-underline {
     height: 320px;
 }
@@ -100,9 +100,16 @@
     color: white;
     font-size: 14px;
     padding: 5px 10px;
-    border:0px;
+    border: 0px;
 }
-
+.rand-button-blue
+{
+    background:#3993c1;
+}
+.rand_button-gray
+{
+    background:#77787b;
+}
 .rand-pop {
     box-shadow: 2.5px 4.33px 40px 0px rgba(2, 2, 2, 0.3);
     border-radius: 5px;
@@ -553,7 +560,14 @@ label {
     line-height: 40px;
     background: #f5f5f5;
 }
-
+.note_button_margin
+{
+    margin-left:5px;
+}
+.icon_btn
+{
+    cursor:pointer;
+}
 i.note_img {
     margin-left: 30px;
 }
@@ -587,10 +601,30 @@ i.with_circle {
     cursor: pointer;
     border-bottom: 1px solid #eceef3;
 }
+/*pop up class*/
+.pop_up_header_icon {
+    font-size: 24px;
+    color: #3993c1;
+    width:48px;
+    height:48px;
+    line-height:48px !important;
+    text-align:center;
+}
 
-    .agent_menu_list_item:hover {
-        background: #f0f2f6;
-    }
+.pop_up_header_text {
+    margin-left: 10px;
+    font-size: 34px;
+    font-weight:300;
+    color:#b1b2b7;
+}
+.pop_up_header_margin
+{
+    margin-top:10px;
+}
+/*end pop up*/
+.agent_menu_list_item:hover {
+    background: #f0f2f6;
+}
 
 .agnet_info_text {
     width: 100%;
@@ -763,10 +797,10 @@ i.with_circle {
     visibility: visible;
 }
 
-.gridAlternatingRow .hidden_icon
-{
-    visibility:hidden;
+.gridAlternatingRow .hidden_icon {
+    visibility: hidden;
 }
+
 .gridAlternatingRow:hover .hidden_icon {
     visibility: visible;
 }
@@ -1123,19 +1157,18 @@ input + label.font_12 {
     padding-top: 28px;
     padding-left: 9px;
 }
-.save_report_list
-{
 
+.save_report_list {
 }
-.save_report_list:hover
-{
-    color:black;
-    font-weight:700;
-}
+
+    .save_report_list:hover {
+        color: black;
+        font-weight: 700;
+    }
+
 .icon_right_s {
     float: right;
     margin-top: 10px;
-    
 }
 
 #ctl00_MainContentPH_ASPxSplitter1_chkFields, #ctl00_MainContentPH_ASPxSplitter1_chkFields2 {
@@ -1232,10 +1265,11 @@ li.active {
 activity_button {
     color: #7396a9;
 }
-#ASPxSplitter1_LeadsInfo_ASPxCallbackPanel2_contentSplitter_ActivityLogs_gridTracking_DXHeadersRow0
-{
-    background:#F5F5F5 !important;
+
+#ASPxSplitter1_LeadsInfo_ASPxCallbackPanel2_contentSplitter_ActivityLogs_gridTracking_DXHeadersRow0 {
+    background: #F5F5F5 !important;
 }
+
 .acitivty_short_button {
     width: 32px;
     height: 32px;
@@ -1266,90 +1300,90 @@ i.log_item_icon {
     width: 30px;
     text-align: center;
 }
-td.log_item_padding
-{
-    padding:10px;
-}
-div.log_item_col1
-{
-    width:300px;
 
+td.log_item_padding {
+    padding: 10px;
 }
-div.log_item_col2
-{
-    width:100px;
 
+div.log_item_col1 {
+    width: 300px;
 }
-div.log_item_col3
-{
-    width:135px;
 
+div.log_item_col2 {
+    width: 100px;
 }
-i.log_item_hl_buttons
-{
-    margin-right:10px;
-    color:#b1b2b7;
+
+div.log_item_col3 {
+    width: 135px;
 }
-i.log_item_hl_buttons:hover
-{
-    color:#2e2f31;
+
+i.log_item_hl_buttons {
+    margin-right: 10px;
+    color: #b1b2b7;
 }
+
+    i.log_item_hl_buttons:hover {
+        color: #2e2f31;
+    }
 /*-----end----*/
 
-.dxm-image
-{
+.dxm-image {
     /*padding-left:10px !important;*/
 }
-.always_show
-{
-    visibility:visible !important;
-}
-.activity_color_check
-{
-    background:#80c02c;
-}
-.activity_color_info
-{
-    background:#f46464;
-}
-.activity_color_comment
-{
-    background:#ff974a;
-}
-.activity_color_cubes
-{
-    background:#8c4f3f;
-}
-.activity_color_clock-o
-{
-    background:#31d9c3;
-}
-.activity_color_refresh
-{
-    background:#52c1fd;
-}
-.activity_color_usd
-{
-    background:#174cae;
-}
-.activity_color_tasks
-{
-    background:#eb7171;
-}
-.activity_color_fax
-{
-    background:#e6b713;
-}
-.activity_color_envelope
-{
-    background:#7495a4;
+
+.always_show {
+    visibility: visible !important;
 }
 
-.activity_color_print
-{
-    background:#9068ad;
+.activity_color_check {
+    background: #80c02c;
 }
-.activity_color_sign-out
-{
-    background:#5d5d5d;
+
+.activity_color_info {
+    background: #f46464;
+}
+
+.activity_color_comment {
+    background: #ff974a;
+}
+
+.activity_color_cubes {
+    background: #8c4f3f;
+}
+
+.activity_color_clock-o {
+    background: #31d9c3;
+}
+
+.activity_color_refresh {
+    background: #52c1fd;
+}
+
+.activity_color_usd {
+    background: #174cae;
+}
+
+.activity_color_tasks {
+    background: #eb7171;
+}
+
+.activity_color_fax {
+    background: #e6b713;
+}
+
+.activity_color_envelope {
+    background: #7495a4;
+}
+
+.activity_color_print {
+    background: #9068ad;
+}
+
+.activity_color_sign-out {
+    background: #5d5d5d;
+}
+
+/*change the pop up radius*/
+.dxpc-mainDiv {
+    border-radius: 10px;
 }

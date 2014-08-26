@@ -223,8 +223,7 @@
         aspxPopupAddPhoneNum.Hide();
         txtPhoneNoClient.SetText("");
     }
-    function initToolTips()
-    {
+    function initToolTips() {
         if ($(".tooltip-examples").tooltip) {
             $(".tooltip-examples").tooltip({
                 placement: 'bottom'
@@ -271,7 +270,7 @@
                             <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
                                 <div style="width: 100%; align-content: center; height: 100%">
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu3" runat="server" ClientInstanceName="popupMenuRefreshClient"
-                                        AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"  ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                        AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
                                         <Items>
                                             <dx:MenuItem Text="All" Name="All"></dx:MenuItem>
                                             <dx:MenuItem Text="General Property Info" Name="Assessment"></dx:MenuItem>
@@ -344,9 +343,9 @@
                                         PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                         ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
                                         <Items>
-                                            <dx:MenuItem Text="Call Phone" Name="Call" >
+                                            <dx:MenuItem Text="Call Phone" Name="Call">
                                             </dx:MenuItem>
-                                            <dx:MenuItem Text="# doesn't work" Name="nonWork" >
+                                            <dx:MenuItem Text="# doesn't work" Name="nonWork">
                                             </dx:MenuItem>
                                             <dx:MenuItem Text="Working Phone number" Name="Work">
                                             </dx:MenuItem>
@@ -513,6 +512,12 @@
                                             MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
                                             HeaderText="Appointment" Modal="true"
                                             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+                                            <HeaderTemplate>
+                                                <div class="pop_up_header_margin">
+                                                    <i class="fa fa-clock-o with_circle pop_up_header_icon"></i>
+                                                    <span class="pop_up_header_text">Appointment</span>
+                                                </div>
+                                            </HeaderTemplate>
                                             <ContentCollection>
                                                 <dx:PopupControlContentControl runat="server">
                                                     <dx:ASPxCallbackPanel runat="server" ID="appointmentCallpanel" ClientInstanceName="appointmentCallpanel" OnCallback="appointmentCallpanel_Callback">
@@ -580,11 +585,11 @@
                                                                 <table style="width: 100%">
                                                                     <tr>
                                                                         <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                                                            <dx:ASPxButton ID="ASPxButton3" runat="server" Text="OK" AutoPostBack="false">
+                                                                            <dx:ASPxButton ID="ASPxButton3" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1">
                                                                                 <ClientSideEvents Click="OnSaveAppointment"></ClientSideEvents>
                                                                             </dx:ASPxButton>
                                                                             &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
+                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button" BackColor="#77787b">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupScheduleClient.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>
@@ -606,13 +611,21 @@
                     </dx:SplitterPane>
                 </Panes>
             </dx:ASPxSplitter>
-            <dx:ASPxPopupControl ClientInstanceName="AspxPopupShareleadClient" Width="260px" Height="400px" ID="aspxPopupShareleads"
+            <dx:ASPxPopupControl ClientInstanceName="AspxPopupShareleadClient" Width="356px" Height="450px" ID="aspxPopupShareleads"
                 HeaderText="Share Lead" Modal="true" ContentUrl="~/PopupControl/ShareLeads.aspx"
                 runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+                 <HeaderTemplate>
+                    <div class="pop_up_header_margin">
+                        <i class="fa fa-mail-forward with_circle pop_up_header_icon"></i>
+                        <span class="pop_up_header_text">Share Lead</span>
+                    </div>
+                </HeaderTemplate>
             </dx:ASPxPopupControl>
+
             <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddPhoneNum" Width="200px" Height="80px" ID="ASPxPopupControl2"
                 HeaderText="Add Phone Number" ShowHeader="false"
                 runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
+               
                 <ContentCollection>
                     <dx:PopupControlContentControl>
                         <table>
@@ -644,5 +657,5 @@
     </PanelCollection>
     <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>
     <Border BorderStyle="None"></Border>
-    
+
 </dx:ASPxCallbackPanel>
