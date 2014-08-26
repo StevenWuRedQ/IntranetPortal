@@ -83,20 +83,23 @@
                 <PanelCollection>
                     <dx:PanelContent>
                         <asp:HiddenField ID="hfBBLE" runat="server"/>
-                        <% For Each comment In LeadsInfoData.UserComments%>
-                        <div class="note_item" style="background: #e8e8e8">
-                            <i class="fa fa-exclamation-circle note_img"></i>
-                            <span class="note_text"><%= comment.Comments%></span>
-                            <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7"></i>
-                            <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7"></i>
-                        </div>
-                        <% Next%>
+            <% For Each comment In LeadsInfoData.UserComments%>
+            <div class="note_item" style="background: #e8e8e8">
+                <i class="fa fa-exclamation-circle note_img"></i>
+                <span class="note_text"><%= comment.Comments%></span>
+                <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7"></i>
+                <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7"></i>
+            </div>
+            <% Next%>
                     </dx:PanelContent>
                 </PanelCollection>
             </dx:ASPxCallbackPanel>
-
+                      
             <div class="note_item" style="background: white">
-                <i class="fa fa-plus-circle note_img" style="color: #3993c1" onclick="aspxAddLeadsComments.ShowAtElement(this)"></i>
+                <%--<button class="btn" data-container="body" type="button" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">--%>
+                      <i class="fa fa-plus-circle note_img" style="color: #3993c1" onclick="aspxAddLeadsComments.ShowAtElement(this)"></i>
+
+                <%--</button>--%>
             </div>
         </div>
 

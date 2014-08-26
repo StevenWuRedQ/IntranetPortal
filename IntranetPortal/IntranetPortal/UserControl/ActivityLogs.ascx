@@ -282,7 +282,7 @@
                     <span class="upcase_text">Public update</span>
                 </label>
             </div>
-            <textarea style="border-radius: 5px; width: 100%; height: 90px; border: 2px solid #dde0e7;" id="txtComments"></textarea>
+            <textarea style="border-radius: 5px; width: 100%; height: 90px; border: 2px solid #dde0e7;padding:5px;outline:none;resize:none" id="txtComments"></textarea>
         </div>
         <div class="clearfix" style="width: 100%">
             <div style="float: right">
