@@ -364,6 +364,9 @@
     <Compile Include="DataModel\PortalLisPen.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\PortalNote.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\PortalQuote.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>

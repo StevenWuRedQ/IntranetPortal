@@ -319,6 +319,21 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Terms" Type="nvarchar" MaxLength="50" />
           <Property Name="CollectedOn" Type="datetime" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IntranetPortal.dbo.PortalNotes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PortalNotes">
+          <Key>
+            <PropertyRef Name="NoteId" />
+          </Key>
+          <Property Name="NoteId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="120" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Createby" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateTime" Type="datetime" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
         <EntityType Name="PortalQuotes">
           <Key>
             <PropertyRef Name="QuoteID" />
@@ -457,6 +472,18 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
     [NYC_St_Names].[BOROUGH] AS [BOROUGH]
     FROM [dbo].[NYC_St_Names] AS [NYC_St_Names]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="PortalNotes" EntityType="Self.PortalNotes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PortalNotes].[NoteId] AS [NoteId], 
+    [PortalNotes].[Title] AS [Title], 
+    [PortalNotes].[Description] AS [Description], 
+    [PortalNotes].[Createby] AS [Createby], 
+    [PortalNotes].[CreateTime] AS [CreateTime], 
+    [PortalNotes].[UpdateBy] AS [UpdateBy], 
+    [PortalNotes].[UpdateTime] AS [UpdateTime], 
+    [PortalNotes].[Status] AS [Status]
+    FROM [dbo].[PortalNotes] AS [PortalNotes]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -512,6 +539,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="BuildingCodes" EntityType="IntranetPortalModel.BuildingCode" />
           <EntitySet Name="Offices" EntityType="IntranetPortalModel.Office" />
           <EntitySet Name="LeadsComments" EntityType="IntranetPortalModel.LeadsComment" />
+          <EntitySet Name="PortalNotes" EntityType="IntranetPortalModel.PortalNote" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1000,6 +1028,19 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="CreateBy" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="PortalNote">
+          <Key>
+            <PropertyRef Name="NoteId" />
+          </Key>
+          <Property Name="NoteId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Createby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1440,6 +1481,20 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalNotes">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PortalNote">
+              <MappingFragment StoreEntitySet="PortalNotes">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Createby" ColumnName="Createby" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="NoteId" ColumnName="NoteId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

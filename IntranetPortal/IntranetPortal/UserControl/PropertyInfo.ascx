@@ -24,9 +24,13 @@
 
     function SaveLeadsComments(s, e) {
         var comments = txtLeadsComments.GetText();
-        leadsCommentsCallbackPanel.PerformCallback(comments);
+        leadsCommentsCallbackPanel.PerformCallback("Add|" + comments);
         txtLeadsComments.SetText("");
         aspxAddLeadsComments.Hide();
+    }
+
+    function DeleteComments(commentId) {
+        leadsCommentsCallbackPanel.PerformCallback("Delete|" + commentId);
     }
 
     //init_currency();
@@ -82,13 +86,13 @@
             <dx:ASPxCallbackPanel runat="server" ID="leadsCommentsCallbackPanel" ClientInstanceName="leadsCommentsCallbackPanel" OnCallback="leadsCommentsCallbackPanel_Callback">
                 <PanelCollection>
                     <dx:PanelContent>
-                        <asp:HiddenField ID="hfBBLE" runat="server"/>
+                        <asp:HiddenField ID="hfBBLE" runat="server" />
             <% For Each comment In LeadsInfoData.UserComments%>
             <div class="note_item" style="background: #e8e8e8">
                 <i class="fa fa-exclamation-circle note_img"></i>
                 <span class="note_text"><%= comment.Comments%></span>
-                <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7"></i>
-                <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7"></i>
+                            <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7;display:none"></i>
+                            <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7; cursor:pointer" onclick="DeleteComments(<%= comment.CommentId %>)"></i>
             </div>
             <% Next%>
                     </dx:PanelContent>

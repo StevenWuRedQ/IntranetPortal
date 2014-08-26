@@ -21,15 +21,29 @@
             LeadsInfoData = LeadsInfo.GetInstance(hfBBLE.Value)
         End If
 
-        Using Context As New Entities
-            Dim lc As New LeadsComment
-            lc.Comments = e.Parameter
-            lc.CreateBy = Page.User.Identity.Name
-            lc.CreateTime = DateTime.Now
-            lc.BBLE = LeadsInfoData.BBLE
+        If e.Parameter.StartsWith("Add") Then
+            Using Context As New Entities
+                Dim lc As New LeadsComment
+                lc.Comments = e.Parameter.Split("|")(1)
+                lc.CreateBy = Page.User.Identity.Name
+                lc.CreateTime = DateTime.Now
+                lc.BBLE = LeadsInfoData.BBLE
 
-            Context.LeadsComments.Add(lc)
-            Context.SaveChanges()
-        End Using
+                Context.LeadsComments.Add(lc)
+                Context.SaveChanges()
+            End Using
+        End If
+
+        If e.Parameter.StartsWith("Delete") Then
+            Using Context As New Entities
+                Dim commentId = CInt(e.Parameter.Split("|")(1))
+                Dim lc = Context.LeadsComments.Find(commentId)
+                If lc IsNot Nothing Then
+                    Context.LeadsComments.Remove(lc)
+                    Context.SaveChanges()
+                End If
+            End Using
+        End If
+        
     End Sub
 End Class
