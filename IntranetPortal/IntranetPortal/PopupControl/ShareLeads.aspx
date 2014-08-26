@@ -16,7 +16,7 @@
             <dx:ASPxComboBox runat="server" Width="100%" ID="cbEmps"></dx:ASPxComboBox>
             <div style="margin-top:10px">
                 <dx:ASPxButton runat="server" Text="Add" ID="btnAddEmp" CssClass="rand-button rand-button-blue" ></dx:ASPxButton>
-                <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveEmp" CssClass="rand-button rand_button-gray"></dx:ASPxButton>
+                <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveEmp" CssClass="rand-button rand-button-gray"></dx:ASPxButton>
             </div>
             
         </div>

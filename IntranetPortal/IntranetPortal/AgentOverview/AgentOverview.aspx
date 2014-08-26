@@ -51,7 +51,7 @@
         function onGetAgentLogButtonClick() {
             if (empId != null) {
 
-                LoadAngentTodayReport(empId+",1");
+                LoadAngentTodayReport(empId + ",1");
             } else {
                 alert('EmpId is null');
             }
@@ -83,16 +83,15 @@
         }
 
         function BindEmployee(employeeId) {
-          
+
             empId = employeeId;
-           
+
             infoCallbackClient.PerformCallback("EMP|" + empId);
             gridReportClient.PerformCallback("BindEmp|" + employeeId);
             LoadEmployeeBarChart(empId);
         }
-        function getEmplyeeIDComplete(s,e)
-        {
-           
+        function getEmplyeeIDComplete(s, e) {
+
             BindEmployee(parseInt(e.result));
         }
         function BindOffice(office) {
@@ -130,19 +129,19 @@
         function ExpandOrCollapseGroupRow(s, rowIndex) {
             //alert("dd");
             if (gridEmpsClient.IsGroupRow(rowIndex)) {
-                if (gridEmpsClient.IsGroupRowExpanded(rowIndex)) {                  
+                if (gridEmpsClient.IsGroupRowExpanded(rowIndex)) {
                     gridEmpsClient.CollapseRow(rowIndex);
                     //s.setAttribute("class", "fa fa-caret-right font_16");
                 } else {
-                 
+
                     gridEmpsClient.ExpandRow(rowIndex);
-                   // s.setAttribute("class", "fa fa-caret-down font_16");
+                    // s.setAttribute("class", "fa fa-caret-down font_16");
                 }
 
                 return
             }
         }
-      
+
         $(document).ready(function () {
 
             if ($(".tooltip-examples").tooltip) {
@@ -155,7 +154,7 @@
 
         });
     </script>
-    
+
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
@@ -205,7 +204,7 @@
                                                     <div>
                                                         <table style="height: 30px">
                                                             <tr>
-                                                                <td style="width: 80px;"><span class="font_black"> <i class="fa fa-caret-<%#If(Container.Expanded,"down","right") %> font_16" onclick="ExpandOrCollapseGroupRow(this, <%# Container.VisibleIndex%>)" style="cursor:pointer"></i> &nbsp; <i class="fa fa-bank font_16"></i> &nbsp; <%# Container.GroupText%>
+                                                                <td style="width: 80px;"><span class="font_black"><i class="fa fa-caret-<%#If(Container.Expanded,"down","right") %> font_16" onclick="ExpandOrCollapseGroupRow(this, <%# Container.VisibleIndex%>)" style="cursor: pointer"></i>&nbsp; <i class="fa fa-bank font_16"></i>&nbsp; <%# Container.GroupText%>
                                                                 </span></td>
                                                                 <td style="padding-left: 10px">
                                                                     <span class="employee_lest_head_number_label"><%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %></span>
@@ -441,16 +440,25 @@
                                                     </ContentCollection>
                                                 </dx:ASPxPopupControl>
 
-                                                <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" HeaderText="Report Name" ClientInstanceName="SaveReportPopup" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
+                                                <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" HeaderText="Save Report" ClientInstanceName="SaveReportPopup" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
+                                                    <HeaderTemplate>
+                                                        <div class="pop_up_header_margin">
+                                                            <i class="fa fa-save with_circle pop_up_header_icon"></i>
+                                                            <span class="pop_up_header_text">Set as Task</span>
+                                                        </div>
+                                                    </HeaderTemplate>
                                                     <ContentCollection>
                                                         <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol1" runat="server">
                                                             <dx:ASPxTextBox runat="server" ID="txtReportName" ClientInstanceName="txtClientReportName"></dx:ASPxTextBox>
-                                                            <dx:ASPxButton runat="server" ID="btnSave" AutoPostBack="false" Text="Add">
-                                                                <ClientSideEvents Click="function(s, e){
+                                                            <div style="margin-top:20px">
+                                                                <dx:ASPxButton runat="server" ID="btnSave" AutoPostBack="false" Text="Save" CssClass="rand-button rand-button-blue">
+                                                                    <ClientSideEvents Click="function(s, e){
                                                                 SaveReportPopup.Hide();
                                                                 Savelayout(txtClientReportName.GetText());
                                                                 }" />
-                                                            </dx:ASPxButton>
+                                                                </dx:ASPxButton>
+                                                            </div>
+
                                                         </dx:PopupControlContentControl>
                                                     </ContentCollection>
                                                 </dx:ASPxPopupControl>
@@ -462,7 +470,7 @@
                                                     <div style="padding-left: 370px; padding-top: 10px; height: 325px;" class="clearfix">
                                                         <div class="layout_float_right clearfix">
 
-                                                            <div class="dropdown layout_float_right" style="display:none">
+                                                            <div class="dropdown layout_float_right" style="display: none">
                                                                 <button class="btn btn-default dropdown-toggle" type="button" id="chart_line_select" data-toggle="dropdown" style="background: transparent">
                                                                     Line & Point Chart <span class="caret"></span>
 
@@ -533,13 +541,12 @@
                                                             <dx:GridViewDataColumn FieldName="PropertyAddress">
                                                                 <CellStyle Font-Bold="True"></CellStyle>
                                                                 <DataItemTemplate>
-
                                                                 </DataItemTemplate>
                                                             </dx:GridViewDataColumn>
                                                         </Columns>
                                                         <%-- Mode="ShowAllRecords" ShowAllItem="True"--%>
                                                         <SettingsPager PageSize="10" PageSizeItemSettings-Visible="true" PageSizeItemSettings-ShowAllItem="true">
-                                                            <PageSizeItemSettings  Visible="True"></PageSizeItemSettings>
+                                                            <PageSizeItemSettings Visible="True"></PageSizeItemSettings>
                                                         </SettingsPager>
                                                         <Settings VerticalScrollableHeight="290" />
                                                         <GroupSummary>
@@ -549,15 +556,14 @@
                                                             <Cell>
                                                                 <BorderLeft BorderWidth="0px"></BorderLeft>
                                                                 <BorderRight BorderWidth="0px"></BorderRight>
-                                                            </Cell>                                                           
+                                                            </Cell>
                                                         </Styles>
                                                         <ClientSideEvents EndCallback="CustomizRefershEnd" />
                                                     </dx:ASPxGridView>
                                                     <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridReport"></dx:ASPxGridViewExporter>
                                                     <%--</div>--%>
-                                                    
                                                 </div>
-                                                
+
                                             </div>
                                         </dx:SplitterContentControl>
                                     </ContentCollection>
@@ -644,7 +650,7 @@
                                                     <dx:ListEditItem Text="BBLE" Value="BBLE" Selected="true" />
                                                     <dx:ListEditItem Text="Status" Value="Status" />
                                                     <dx:ListEditItem Text="Neighborhood" Value="NeighName" />
-                                                    <dx:ListEditItem Text="Borough" Value="Borough" />                                                    
+                                                    <dx:ListEditItem Text="Borough" Value="Borough" />
                                                     <dx:ListEditItem Text="Sale Date" Value="SaleDate" />
                                                     <dx:ListEditItem Text="Tax Class" Value="TaxClass" />
                                                     <dx:ListEditItem Text="Propety Class" Value="PropertyClassCode" />
@@ -712,16 +718,16 @@
                     theme: "minimal-dark"
                 }
             );
-           //use page filter to disable the custom scorllbar that can fix the expand the right spliter panel
-           // $('.dxgvCSD').mCustomScrollbar(
-           //    {
-           //        theme: "minimal-dark"
-           //    }
-           //);
+            //use page filter to disable the custom scorllbar that can fix the expand the right spliter panel
+            // $('.dxgvCSD').mCustomScrollbar(
+            //    {
+            //        theme: "minimal-dark"
+            //    }
+            //);
         }
-        
+
         $('#ctl00_MainContentPH_ASPxSplitter1_contentSplitter_gridReport_DXPagerBottom_PSP_DXME_').addClass('no_before_and_after');
-       
+
         empId = '<%= CurrentEmployee.EmployeeID %>';
     </script>
     <%-----------end-------%>

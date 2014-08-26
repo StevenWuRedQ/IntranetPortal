@@ -106,7 +106,7 @@
 {
     background:#3993c1;
 }
-.rand_button-gray
+.rand-button-gray
 {
     background:#77787b;
 }
@@ -1387,3 +1387,13 @@ i.log_item_hl_buttons {
 .dxpc-mainDiv {
     border-radius: 10px;
 }
+.popup_tab_text
+{
+    font-size:18px;
+    font-weight:700;
+}
+/*li.active 
+{
+    border:0px;
+    border-top:5px solid #ff400d;
+}*/

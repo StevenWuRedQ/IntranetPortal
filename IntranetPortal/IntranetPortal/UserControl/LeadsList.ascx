@@ -76,7 +76,7 @@
                 theme: "minimal-dark"
             }
          );
-        
+
         $(".dxgvCSD").mCustomScrollbar(
             {
                 theme: "minimal-dark"
@@ -139,7 +139,91 @@
 
         ASPxPopupMapControl.Show();
     }
+    function popupControlMapTabClick(index)
+    {
+        if (index == 0) {
+            if (tmpBBLE != null) {
+                if (getAddressCallback.InCallback()) {
+                    alert("Server is busy, try later!");
+                }
+                else {
+                    var streetViewFrm = "streetViewFrm";
 
+                    var iframe = document.getElementById(streetViewFrm);
+                    if (iframe.src != "/StreetView.aspx") {
+                        iframe.src = "/StreetView.aspx";
+                        iframe.onload = function () {
+                            var mapDocument = (iframe.contentWindow || iframe.contentDocument);
+                            if (mapDocument.showAddress) {
+                                mapDocument.showAddress(tempAddress);
+                            }
+                        };
+                    } else {
+                        getAddressCallback.PerformCallback(tmpBBLE);
+                    }
+                }
+            }
+        }
+
+        if (index == 1) {
+            if (tmpBBLE != null) {
+                if (getAddressCallback.InCallback()) {
+                    alert("Server is busy, try later!");
+                }
+                else {
+                    var streetViewFrm = "streetViewFrm";
+
+                    var iframe = document.getElementById(streetViewFrm);
+                    if (iframe.src != "/StreetView.aspx?t=map") {
+                        iframe.src = "/StreetView.aspx?t=map";
+                        iframe.onload = function () {
+                            var mapDocument = (iframe.contentWindow || iframe.contentDocument);
+                            if (mapDocument.showAddress) {
+                                mapDocument.showAddress(tempAddress);
+                            }
+                        };
+                    } else {
+                        getAddressCallback.PerformCallback(tmpBBLE);
+                    }
+                }
+            }
+        }
+
+        if (index == 2) {
+            if (tmpBBLE != null) {
+                if (getAddressCallback.InCallback()) {
+                    alert("Server is busy, try later!");
+                }
+                else {
+                    var streetViewFrm = "streetViewFrm";
+
+                    var iframe = document.getElementById(streetViewFrm);
+                    if (iframe.src != "/BingViewMap.aspx") {
+                        iframe.src = "/BingViewMap.aspx";
+                        iframe.onload = function () {
+                            var mapDocument = (iframe.contentWindow || iframe.contentDocument);
+                            if (mapDocument.showAddress) {
+                                mapDocument.showAddress(tempAddress);
+                            }
+                        };
+
+                    } else {
+                        getAddressCallback.PerformCallback(tmpBBLE);
+                    }
+                }
+            }
+        }
+
+        if (index == 3) {
+            if (tmpBBLE != null) {
+                var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + tmpBBLE;
+                //window.open(url, "_blank");    
+                var streetViewFrm = "streetViewFrm";
+                var iframe = document.getElementById(streetViewFrm);
+                iframe.src = url;
+            }
+        }
+    }
     function PopupControlMapTabChange(s, e) {
         if (e.tab.index == 0) {
             if (tmpBBLE != null) {
@@ -223,7 +307,7 @@
                 iframe.src = url;
             }
         }
-    }   
+    }
 
     function ShowPropertyMap(propBBLE) {
         tmpBBLE = propBBLE;
@@ -484,13 +568,13 @@
                     <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
                     <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
                     <GroupRowTemplate>
-                       <%-- Date: <%# GroupText(Container.GroupText) & Container.SummaryText.Replace("Count=","")%>--%>
+                        <%-- Date: <%# GroupText(Container.GroupText) & Container.SummaryText.Replace("Count=","")%>--%>
                         <div>
                             <table style="height: 30px">
-                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor:pointer">
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
                                     <td style="width: 80px;">
-                                        <span class="font_black"><i class="fa fa-calendar-o"></i> <%#  Container.GroupText  %>
-                                    </span></td>
+                                        <span class="font_black"><i class="fa fa-calendar-o"></i><%#  Container.GroupText  %>
+                                        </span></td>
                                     <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")","")%></span>
                                     </td>
@@ -504,7 +588,7 @@
                         <%-- Neighborhood: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
                         <div>
                             <table style="height: 30px">
-                                  <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor:pointer">
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
                                     <td style="width: 80px;"><span class="font_black">Neighborhood:<%#  Container.GroupText  %>
                                     </span></td>
                                     <td style="padding-left: 10px">
@@ -519,8 +603,8 @@
                     <GroupRowTemplate>
                         <div>
                             <table style="height: 30px">
-                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor:pointer">
-                                    <td style="width: 80px;"><span class="font_black"> <i class="fa fa-user "></i> <%#  Container.GroupText  %>
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
+                                    <td style="width: 80px;"><span class="font_black"><i class="fa fa-user "></i><%#  Container.GroupText  %>
                                     </span></td>
                                     <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
@@ -871,13 +955,31 @@
         <HeaderTemplate>
             <div>
                 <div style="float: right; position: relative; margin-right: 10px; margin-bottom: -27px;">
+                    <i class="fa fa-expand icon_btn" onclick="#"></i>
                     <dx:ASPxImage ID="img" runat="server" ImageUrl="~/images/x_close.png" Height="15" Width="14" Cursor="pointer" AlternateText="[Close]">
                         <ClientSideEvents Click="function(s, e){
                         ASPxPopupMapControl.Hide();
                     }" />
                     </dx:ASPxImage>
+                    
                 </div>
-                <dx:ASPxTabControl ID="ASPxTabControl1" runat="server" Width="100%">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" style="border:0px" role="tablist">
+                    <li class="active"><a href="#streetView" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(0)">Street View</a></li>
+                    <li><a href="#mapView" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(1)">Map View</a></li>
+                    <li><a href="#BingBird" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(2)">Bing Bird</a></li>
+                    <li><a href="#Oasis" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(3)">Oasis</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content" style="display:none">
+                    <div class="tab-pane active" id="streetView">streetView</div>
+                    <div class="tab-pane" id="mapView">mapView</div>
+                    <div class="tab-pane" id="BingBird">BingBird</div>
+                    <div class="tab-pane" id="Oasis">Oasis</div>
+                </div>
+                <%-- change tab control to the bootstap tabs --%>
+                <%--<dx:ASPxTabControl ID="ASPxTabControl1" runat="server" Width="100%">
                     <Tabs>
                         <dx:Tab Text="Street View" Name="streetView" />
                         <dx:Tab Text="Map View" Name="mapView" />
@@ -885,7 +987,7 @@
                         <dx:Tab Text="Oasis" Name="Oasis" />
                     </Tabs>
                     <ClientSideEvents ActiveTabChanged="PopupControlMapTabChange" />
-                </dx:ASPxTabControl>
+                </dx:ASPxTabControl>--%>
             </div>
         </HeaderTemplate>
         <ContentCollection>

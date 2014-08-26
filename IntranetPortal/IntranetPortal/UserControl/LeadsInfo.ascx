@@ -487,15 +487,15 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                                                    <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" ClientSideEvents-Click="function(){ASPxPopupSelectDateControl.Hide();}">
+                                                                <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
+                                                                    <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" ClientSideEvents-Click="function(){ASPxPopupSelectDateControl.Hide();}" CssClass="rand-button rand-button-blue">
                                                                         <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                       
                                                                                                                         SetLeadStatus('customDays');
                                                                                                                         }"></ClientSideEvents>
                                                                     </dx:ASPxButton>
                                                                     &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
+                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>

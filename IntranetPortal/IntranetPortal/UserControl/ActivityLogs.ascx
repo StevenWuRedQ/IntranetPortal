@@ -282,7 +282,7 @@
                     <span class="upcase_text">Public update</span>
                 </label>
             </div>
-            <textarea style="border-radius: 5px; width: 100%; height: 90px; border: 2px solid #dde0e7;padding:5px;outline:none;resize:none" id="txtComments"></textarea>
+            <textarea style="border-radius: 5px; width: 100%; height: 90px; border: 2px solid #dde0e7; padding: 5px; outline: none; resize: none" id="txtComments"></textarea>
         </div>
         <div class="clearfix" style="width: 100%">
             <div style="float: right">
@@ -313,9 +313,9 @@
         <dx:ASPxGridView ID="gridTracking" Width="100%" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true" SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID" SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" Styles-FilterBuilderHeader-BackColor="Gray">
             <Styles>
                 <Cell VerticalAlign="Top"></Cell>
-                <Header BackColor="#F5F5F5" ></Header>                
+                <Header BackColor="#F5F5F5"></Header>
             </Styles>
-            <Templates>                
+            <Templates>
                 <EditForm>
                     <table style="width: 100%; margin: 0;">
                         <tr>
@@ -328,15 +328,15 @@
                         </tr>
                     </table>
                 </EditForm>
-               
+
             </Templates>
-            
+
             <Columns>
                 <dx:GridViewDataColumn FieldName="ActionType" VisibleIndex="0" Caption="" Width="40px">
                     <HeaderTemplate>
                     </HeaderTemplate>
-                    <DataItemTemplate>                     
-                          <%# GetCommentsIconClass(Eval("ActionType"))%>                      
+                    <DataItemTemplate>
+                        <%# GetCommentsIconClass(Eval("ActionType"))%>
                     </DataItemTemplate>
                     <CellStyle VerticalAlign="Top"></CellStyle>
                 </dx:GridViewDataColumn>
@@ -380,7 +380,7 @@
                                             <asp:Literal runat="server" ID="ltStartTime"></asp:Literal>
                                         </td>
                                     </tr>
-                                    <tr style="display:none">
+                                    <tr style="display: none">
                                         <td><i class="fa fa-clock-o log_item_icon"></i></td>
                                         <td>
                                             <asp:Literal runat="server" ID="ltEndTime"></asp:Literal></td>
@@ -653,6 +653,12 @@
             MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl1"
             HeaderText="Set as Task" Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+            <HeaderTemplate>
+                <div class="pop_up_header_margin">
+                    <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
+                    <span class="pop_up_header_text">Set as Task</span>
+                </div>
+            </HeaderTemplate>
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server">
                     <dx:ASPxFormLayout ID="taskFormlayout" runat="server" Width="100%">
@@ -709,7 +715,7 @@
                                                     </TabPages>
                                                 </dx:ASPxPageControl>
                                                 <div style="float: right; margin-top: -25px; display: block; margin-right: 3px;">
-                                                    <dx:ASPxButton ID="ASPxButton1" AutoPostBack="False" runat="server" Text="Close" Style="float: right" Paddings-Padding="0">
+                                                    <dx:ASPxButton ID="ASPxButton1" AutoPostBack="False" runat="server" Text="Close" Style="float: right" Paddings-Padding="0" CssClass="rand-button rand-button-gray" >
                                                         <ClientSideEvents Click="function(s, e){ empCheckComboBox.HideDropDown(); }" />
                                                     </dx:ASPxButton>
                                                 </div>
@@ -772,14 +778,14 @@
                             <dx:LayoutItem Caption="Description" ShowCaption="False" HorizontalAlign="Right">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                        <dx:ASPxButton ID="ASPxButton4" runat="server" Text="OK" AutoPostBack="false" ClientSideEvents-Click="function(){ASPxPopupSelectDateControl.Hide();}">
+                                        <dx:ASPxButton ID="ASPxButton4" runat="server" Text="OK" AutoPostBack="false" ClientSideEvents-Click="function(){ASPxPopupSelectDateControl.Hide();}"  CssClass="rand-button rand-button-blue">
                                             <ClientSideEvents Click="function(){
                                                                                                                         gridTrackingClient.PerformCallback('Task');
                                                                                                                         ASPxPopupSetAsTaskControl.Hide();                                                                                                                                                                                                                                         
                                                                                                                         }"></ClientSideEvents>
                                         </dx:ASPxButton>
                                         &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
+                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSetAsTaskControl.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>

@@ -204,7 +204,7 @@
                                     CssClass="border_under_line" />
                             </dx:ASPxListBox>
                             <div style="margin-left: 10px; margin-top: 10px">
-                                <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign"></dx:ASPxButton>
+                                <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" CssClass="rand-button rand-button-blue"></dx:ASPxButton>
                             </div>
                         </div>
                     </dx:SplitterContentControl>
