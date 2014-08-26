@@ -954,8 +954,9 @@
         runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
         <HeaderTemplate>
             <div>
-                <div style="float: right; position: relative; margin-right: 10px; margin-bottom: -27px;">
-                    <i class="fa fa-expand icon_btn" onclick="#"></i>
+                <div style="float: right; position: relative; margin-right: 10px; margin-bottom: -27px; color:#2e2f31">
+                    <i class="fa fa-expand icon_btn" style="margin-right:10px" onclick="#"></i>
+                    <%--<i class="fa fa-remove  icon_btn" onclick="ASPxPopupMapControl.Hide()"></i>--%>
                     <dx:ASPxImage ID="img" runat="server" ImageUrl="~/images/x_close.png" Height="15" Width="14" Cursor="pointer" AlternateText="[Close]">
                         <ClientSideEvents Click="function(s, e){
                         ASPxPopupMapControl.Hide();
