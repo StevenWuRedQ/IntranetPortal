@@ -407,21 +407,21 @@
                             <div style="height: 70px;">
                                 <div style="color: #b2b4b7; padding-top: 35px; margin-left: 26px; font-size: 30px; font-weight: 300;">Notes</div>
                             </div>
+
                             <div style="background: #f53e0d; color: white; height: 270px; margin-top: 35px">
                                 <div style="margin-left: 30px; margin-right: 15px;">
                                     <h2 style="font-size: 30px; font-weight: 400; margin: 0px; padding-top: 35px; padding-bottom: 35px;">Just An Idea</h2>
                                     <div style="font-size: 14px; line-height: 24px; background: transparent !important; margin-bottom: 0px">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales vel orci volutpat fringilla.
                                     </div>
-                                    <div style="padding-top: 40px;font-size:24px;color:white">
+                                    <div style="padding-top: 40px; font-size: 24px; color: white">
                                         <i class="fa fa-check-circle icon_btn" onclick="#"></i>
                                         <i class="fa fa-times-circle icon_btn note_button_margin" onclick="#"></i>
                                         <i class="fa fa-trash-o icon_btn note_button_margin" onclick="#"></i>
                                     </div>
                                 </div>
-
                             </div>
-                            <div style="margin-top: 10px; margin-left:-35px; font-size: 18px">
+                            <div style="margin-top: 10px; margin-left: -35px; font-size: 18px">
                                 <ul>
                                     <li class="right_palne_menu">Note Tile1
                                     </li>
@@ -429,10 +429,10 @@
                                     </li>
                                 </ul>
                             </div>
-                            <i class="fa fa-plus-circle icon_btn" style="color:#999ca1;font-size:24px" onclick="#"></i>
-
+                            <i class="fa fa-plus-circle icon_btn" style="color: #999ca1; font-size: 24px" onclick="#"></i>
                         </div>
                     </div>
+
                 </dx:SplitterContentControl>
             </ContentCollection>
         </dx:SplitterPane>
