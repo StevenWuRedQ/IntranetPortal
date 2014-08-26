@@ -512,6 +512,22 @@
         }
     }
 
+    function AdjustPopupSize(popup)
+    {
+        if (popup.GetMaximized())
+        {
+            popup.SetWindowMaximized(false);
+            popup.SetMaximized(false);
+        }            
+        else
+        {            
+            popup.SetWindowMaximized(true);
+            popup.SetMaximized(true);
+        }
+    }
+
+ 
+
     // to do by steven
     function SortLeadsList(s) {
         var sort = s.getAttribute("class");
@@ -945,17 +961,16 @@
             </dx:MenuItem>
         </Items>
         <ClientSideEvents ItemClick="OnLeadsCategoryClick" />
-
         <ItemStyle Width="190px" Height="30px"></ItemStyle>
     </dx:ASPxPopupMenu>
     <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMapControl" Width="500px" Height="500px"
-        MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
+        MaxWidth="1200px" MaxHeight="900px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
         HeaderText="Street View" AutoUpdatePosition="true" Modal="true"
         runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
         <HeaderTemplate>
             <div>
                 <div style="float: right; position: relative; margin-right: 10px; margin-bottom: -27px; color:#2e2f31">
-                    <i class="fa fa-expand icon_btn" style="margin-right:10px" onclick="#"></i>
+                    <i class="fa fa-expand icon_btn" style="margin-right:10px" onclick="AdjustPopupSize(ASPxPopupMapControl)"></i>
                     <%--<i class="fa fa-remove  icon_btn" onclick="ASPxPopupMapControl.Hide()"></i>--%>
                     <dx:ASPxImage ID="img" runat="server" ImageUrl="~/images/x_close.png" Height="15" Width="14" Cursor="pointer" AlternateText="[Close]">
                         <ClientSideEvents Click="function(s, e){
