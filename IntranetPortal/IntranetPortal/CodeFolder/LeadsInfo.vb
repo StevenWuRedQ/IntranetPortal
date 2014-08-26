@@ -24,6 +24,14 @@
         End Get
     End Property
 
+    Public ReadOnly Property UserComments As List(Of LeadsComment)
+        Get
+            Using context As New Entities
+                Return context.LeadsComments.Where(Function(li) li.BBLE = BBLE).OrderBy(Function(li) li.OrderIndex).ToList
+            End Using
+        End Get
+    End Property
+
     Public ReadOnly Property OwnerPhoneNo As String
         Get
             Using context As New Entities
@@ -136,21 +144,21 @@
 
     Public ReadOnly Property IndicatorOfLiens As String
         Get
-            If Me.C1stMotgrAmt = 0 Then
-                Return ""
+            If Me.C1stMotgrAmt.HasValue AndAlso C1stMotgrAmt > 0 Then
+                Return "HasLiens"
             End If
 
-            Return "<span style=""color:red"">Liens higher than Value</span>"
+            Return ""
         End Get
     End Property
 
     Public ReadOnly Property IndicatorOfWater As String
         Get
-            If Me.WaterAmt = 0 Then
-                Return ""
+            If Me.WaterAmt.HasValue AndAlso WaterAmt > 0 Then
+                Return "HasWaterLiens"
             End If
 
-            Return "<span style=""color:red"">High Water Indicator</span>"
+            Return ""
         End Get
     End Property
 

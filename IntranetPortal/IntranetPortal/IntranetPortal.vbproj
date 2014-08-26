@@ -325,6 +325,9 @@
     <Compile Include="DataModel\LeadsActivityLog.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\LeadsComment.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\LeadsInfo.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>

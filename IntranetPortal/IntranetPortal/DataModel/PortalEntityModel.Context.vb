@@ -48,6 +48,7 @@ Partial Public Class Entities
     Public Overridable Property UserProfileDatas() As DbSet(Of UserProfileData)
     Public Overridable Property BuildingCodes() As DbSet(Of BuildingCode)
     Public Overridable Property Offices() As DbSet(Of Office)
+    Public Overridable Property LeadsComments() As DbSet(Of LeadsComment)
 
     Public Overridable Function UpdateEmployeeName(oldName As String, newName As String) As Integer
         Dim oldNameParameter As ObjectParameter = If(oldName IsNot Nothing, New ObjectParameter("OldName", oldName), New ObjectParameter("OldName", GetType(String)))

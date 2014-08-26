@@ -146,6 +146,17 @@
           <Property Name="ActivityDate" Type="datetime" />
           <Property Name="Comments" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="LeadsComments">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="200" />
+          <Property Name="OrderIndex" Type="int" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="120" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="LeadsInfo">
           <Key>
             <PropertyRef Name="BBLE" />
@@ -425,6 +436,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="HomeOwners" EntityType="Self.HomeOwners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Leads" EntityType="Self.Leads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsActivityLog" EntityType="Self.LeadsActivityLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeadsComments" EntityType="Self.LeadsComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsInfo" EntityType="Self.LeadsInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginLogs" EntityType="Self.LoginLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
@@ -499,6 +511,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           </FunctionImport>
           <EntitySet Name="BuildingCodes" EntityType="IntranetPortalModel.BuildingCode" />
           <EntitySet Name="Offices" EntityType="IntranetPortalModel.Office" />
+          <EntitySet Name="LeadsComments" EntityType="IntranetPortalModel.LeadsComment" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -976,6 +989,17 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="FaxNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="LeadsComment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OrderIndex" Type="Int32" />
+          <Property Name="CreateBy" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1404,6 +1428,18 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadsComments">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LeadsComment">
+              <MappingFragment StoreEntitySet="LeadsComments">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="OrderIndex" ColumnName="OrderIndex" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
