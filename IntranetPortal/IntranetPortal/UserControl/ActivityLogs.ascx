@@ -360,8 +360,8 @@
                                                     <dx:ASPxCheckBox Text="Declined&nbsp;" runat="server" TextAlign="Left" ID="chkAptDecline" Visible="false"></dx:ASPxCheckBox>
                                                     <dx:ASPxCheckBox Text="Scheduled" runat="server" TextAlign="Left" ID="chkAptReschedule" Visible="false"></dx:ASPxCheckBox>
                                                     <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" runat="server" id="btnAccept" title="Accept" onclick='<%# String.Format("AcceptAppointment(""{0}"")", Eval("LogID"))%>'></i>
-                                                    <i class="fa fa-times-circle-o log_item_hl_buttons" title="Decline" runat="server" id="btnDecline" onclick='<%# String.Format("DeclineAppointment(""{0}"")", Eval("LogID"))%>'></i>
-                                                    <i class="fa fa-history log_item_hl_buttons" title="Reschedule" runat="server" id="btnReschedule" onclick='<%# String.Format("ReScheduledAppointment(""{0}"")", Eval("LogID"))%>'></i>
+                                                    <i class="fa fa-times-circle-o log_item_hl_buttons tooltip-examples" title="Decline" runat="server" id="btnDecline" onclick='<%# String.Format("DeclineAppointment(""{0}"")", Eval("LogID"))%>'></i>
+                                                    <i class="fa fa-history log_item_hl_buttons tooltip-examples" title="Reschedule" runat="server" id="btnReschedule" onclick='<%# String.Format("ReScheduledAppointment(""{0}"")", Eval("LogID"))%>'></i>
                                                 </div>
                                             </td>
                                         </tr>

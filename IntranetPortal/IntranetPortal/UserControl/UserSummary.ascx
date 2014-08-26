@@ -264,7 +264,7 @@
                                     </div>
 
                                 </td>
-                                <td rowspan="4" style="width: 50px"></td>
+                                <td rowspan="4" style="width: 80px"></td>
                             </tr>
                             <tr style="height: 240px">
                                 <td style="vertical-align: top" class="under_line">
