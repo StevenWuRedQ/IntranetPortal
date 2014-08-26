@@ -6,23 +6,20 @@
         ShowPopupMap(url, "Acris");
     }
 
-    function ShowDOBWindow(boro, houseNo, street)
-    {
+    function ShowDOBWindow(boro, houseNo, street) {
         var url = "http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=" + boro + "&houseno=" + encodeURIComponent(houseNo) + "&street=" + encodeURIComponent(street);
         ShowPopupMap(url, "DOB");
     }
 
-    function ShowPopupMap(url, header)
-    {
+    function ShowPopupMap(url, header) {
         aspxAcrisControl.SetContentHtml("Loading...");
         aspxAcrisControl.SetContentUrl(url);
         aspxAcrisControl.SetHeaderText(header);
         aspxAcrisControl.Show();
     }
 
-    function init_currency()
-    {
-               
+    function init_currency() {
+
     }
     //init_currency();
 </script>
@@ -60,22 +57,29 @@
 
         <%--note list--%>
         <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
+            <% If Not String.IsNullOrEmpty(LeadsInfoData.IndicatorOfLiens) Then%>
+            <div class="note_item">
+                <i class="fa fa-exclamation-circle note_img"></i>
+                <span class="note_text">Liens higher than Value</span>
+            </div>
+            <% End If%>
+
+            <% If Not String.IsNullOrEmpty(LeadsInfoData.IndicatorOfWater) Then%>
             <div class="note_item">
                 <i class="fa fa-exclamation-circle note_img"></i>
                 <span class="note_text">Water Lien is High - Possible Tenant Issues</span>
             </div>
+            <% End If%>
+
+            <% For Each comment In LeadsInfoData.UserComments%>
             <div class="note_item" style="background: #e8e8e8">
                 <i class="fa fa-exclamation-circle note_img"></i>
-                <span class="note_text">Property Has Approx $150,000 Equity</span>
-            </div>
-            <div class="note_item" style="border-left: 5px solid #ff400d">
-
-                <i class="fa fa-exclamation-circle note_img" style="margin-left: 25px;"></i>
-                <span class="note_text">Property Has Approx 3,124 Unbuilt Sqft</span>
+                <span class="note_text"><%= comment.Comments%></span>
                 <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7"></i>
                 <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7"></i>
-
             </div>
+            <% Next%>
+                      
             <div class="note_item" style="background: white">
                 <i class="fa fa-plus-circle note_img" style="color: #3993c1"></i>
             </div>
@@ -219,7 +223,7 @@
             <%--line 1--%>
             <div class="form_div_node form_div_node_line_margin">
                 <span class="form_input_title">Zestimate</span>
-                <input class="text_input " onblur="$(this).formatCurrency();" type="text"  value="$<%=LeadsInfoData.EstValue %>" />
+                <input class="text_input " onblur="$(this).formatCurrency();" type="text" value="$<%=LeadsInfoData.EstValue %>" />
             </div>
 
 
@@ -426,7 +430,7 @@
 <script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 
 <script type="text/javascript">
-    
-   
+
+
     init_currency();
 </script>
