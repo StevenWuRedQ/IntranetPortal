@@ -6,8 +6,37 @@ Public Class UserSummary
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         BindData()
         BindCalendar()
-       
+
+        If Not IsPostBack Then
+            BindNotes()
+        End If
     End Sub
+
+    Public ReadOnly Property PortalNotes As List(Of PortalNote)
+        Get
+            Using Context As New Entities
+                Return Context.PortalNotes.ToList
+            End Using
+        End Get
+    End Property
+
+    Public Property CurrentNote As PortalNote
+
+    Public Sub BindNotes()
+        Using Context As New Entities
+            gridNotes.DataSource = Context.PortalNotes.ToList
+            gridNotes.DataBind()
+        End Using
+
+        Dim notes = PortalNotes
+
+        If notes IsNot Nothing Then
+            CurrentNote = notes(0)
+            txtTitle.Text = notes(0).Title
+            txtNotesDescription.Text = notes(0).Description
+        End If
+    End Sub
+
 
     Public ReadOnly Property Quote As String
         Get
@@ -141,7 +170,7 @@ Public Class UserSummary
     'Change to span let it show the blod font by steven <span style="font-weight: 900;"> 720 QUINCY ST</span> by steven
     Public Function HtmlBlackInfo(leadData As String) As String
         Dim symble = "-"
-       
+
         Dim strArry As String() = leadData.Split(New Char() {symble})
         If strArry Is Nothing Or strArry.Length < 2 Then
             Return leadData
@@ -290,5 +319,63 @@ Public Class UserSummary
         If e.Column.FieldName = "ScheduleDate" Or e.Column.FieldName = "CallbackDate" Then
             e.DisplayText = GroupText(e.Value)
         End If
+    End Sub
+
+    Protected Sub notesCallbackPanel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        Using Context As New Entities
+
+            If e.Parameter.StartsWith("Show") Then
+                Dim note = Context.PortalNotes.Find(CInt(e.Parameter.Split("|")(1)))
+                If note IsNot Nothing Then
+                    CurrentNote = note
+                    txtTitle.Text = note.Title
+                    txtNotesDescription.Text = note.Description
+                End If
+            End If
+
+            If e.Parameter.StartsWith("Save") Then
+                Dim noteId = CInt(e.Parameter.Split("|")(1))
+
+                If noteId = -1 Then
+                    Dim newNote = New PortalNote
+                    newNote.Title = txtTitle.Text
+                    newNote.Description = txtNotesDescription.Text
+                    newNote.Createby = Page.User.Identity.Name
+                    newNote.CreateTime = DateTime.Now
+
+                    Context.PortalNotes.Add(newNote)
+                    Context.SaveChanges()
+                    CurrentNote = newNote
+                Else
+                    Dim note = Context.PortalNotes.Find(CInt(e.Parameter.Split("|")(1)))
+                    If note IsNot Nothing Then
+                        note.Title = txtTitle.Text
+                        note.Description = txtNotesDescription.Text
+
+                        Context.SaveChanges()
+                        CurrentNote = note
+                    End If
+                End If
+            End If
+
+            If e.Parameter.StartsWith("Delete") Then
+                Dim note = Context.PortalNotes.Find(CInt(e.Parameter.Split("|")(1)))
+                If note IsNot Nothing Then
+                    Context.PortalNotes.Remove(note)
+                    Context.SaveChanges()
+
+                    BindNotes()
+                End If
+            End If
+
+            If e.Parameter.StartsWith("Add") Then
+                Dim note As New PortalNote
+                note.NoteId = -1
+                CurrentNote = note
+
+                txtTitle.Text = ""
+                txtNotesDescription.Text = ""
+            End If
+        End Using
     End Sub
 End Class

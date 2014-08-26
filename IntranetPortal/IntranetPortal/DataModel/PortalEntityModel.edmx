@@ -319,13 +319,11 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Terms" Type="nvarchar" MaxLength="50" />
           <Property Name="CollectedOn" Type="datetime" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'IntranetPortal.dbo.PortalNotes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PortalNotes">
           <Key>
             <PropertyRef Name="NoteId" />
           </Key>
-          <Property Name="NoteId" Type="int" Nullable="false" />
+          <Property Name="NoteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="120" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="Createby" Type="nvarchar" MaxLength="50" />
@@ -458,6 +456,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.PortalNotes' does not have a pr
           <EntitySet Name="OrderResponses" EntityType="Self.OrderResponses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OwnerContacts" EntityType="Self.OwnerContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PortalLisPen" EntityType="Self.PortalLisPen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortalNotes" EntityType="Self.PortalNotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PortalQuotes" EntityType="Self.PortalQuotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SharedLeads" EntityType="Self.SharedLeads" Schema="dbo" store:Type="Tables" />
@@ -471,18 +470,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.PortalNotes' does not have a pr
     [NYC_St_Names].[st_name] AS [st_name], 
     [NYC_St_Names].[BOROUGH] AS [BOROUGH]
     FROM [dbo].[NYC_St_Names] AS [NYC_St_Names]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="PortalNotes" EntityType="Self.PortalNotes" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [PortalNotes].[NoteId] AS [NoteId], 
-    [PortalNotes].[Title] AS [Title], 
-    [PortalNotes].[Description] AS [Description], 
-    [PortalNotes].[Createby] AS [Createby], 
-    [PortalNotes].[CreateTime] AS [CreateTime], 
-    [PortalNotes].[UpdateBy] AS [UpdateBy], 
-    [PortalNotes].[UpdateTime] AS [UpdateTime], 
-    [PortalNotes].[Status] AS [Status]
-    FROM [dbo].[PortalNotes] AS [PortalNotes]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>

@@ -84,4 +84,31 @@ Partial Public Class UserSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridNotes As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''notesCallbackPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents notesCallbackPanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+
+    '''<summary>
+    '''txtTitle control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtTitle As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+
+    '''<summary>
+    '''txtNotesDescription control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtNotesDescription As Global.DevExpress.Web.ASPxEditors.ASPxMemo
 End Class
