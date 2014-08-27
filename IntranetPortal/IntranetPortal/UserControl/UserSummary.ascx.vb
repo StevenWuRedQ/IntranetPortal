@@ -23,11 +23,6 @@ Public Class UserSummary
     Public Property CurrentNote As PortalNote
 
     Public Sub BindNotes()
-        Using Context As New Entities
-            gridNotes.DataSource = Context.PortalNotes.ToList
-            gridNotes.DataBind()
-        End Using
-
         Dim notes = PortalNotes
 
         If notes IsNot Nothing Then

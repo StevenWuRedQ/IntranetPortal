@@ -77,15 +77,6 @@ Partial Public Class UserSummary
     Protected WithEvents gridCallback As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
-    '''gridNotes control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents gridNotes As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-
-    '''<summary>
     '''notesCallbackPanel control.
     '''</summary>
     '''<remarks>

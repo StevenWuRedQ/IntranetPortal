@@ -119,8 +119,8 @@
             return;
         }
         tempAddress = e.result;
-        var streetViewFrm = "streetViewFrm";
-        var streenViewWinFrm = document.getElementById(streetViewFrm);
+        //var streetViewFrm = "streetViewFrm";
+        var streenViewWinFrm = ASPxPopupMapControl.GetContentIFrame(); //document.getElementById(streetViewFrm);
 
         var streenViewWin = (streenViewWinFrm.contentWindow || streenViewWinFrm.contentDocument);
 
@@ -139,420 +139,369 @@
 
         ASPxPopupMapControl.Show();
     }
-    function popupControlMapTabClick(index) {
-        if (index == 0) {
-            if (tmpBBLE != null) {
-                if (getAddressCallback.InCallback()) {
-                    alert("Server is busy, try later!");
-                }
-                else {
-                    var streetViewFrm = "streetViewFrm";
+    //function popupControlMapTabClick(index)
+    //{
+    //    if (index == 0) {
+    //        if (tmpBBLE != null) {
+    //            if (getAddressCallback.InCallback()) {
+    //                alert("Server is busy, try later!");
+    //            }
+    //            else {
+    //                var streetViewFrm = "streetViewFrm";
 
-                    var iframe = document.getElementById(streetViewFrm);
-                    if (iframe.src != "/StreetView.aspx") {
-                        iframe.src = "/StreetView.aspx";
-                        iframe.onload = function () {
-                            var mapDocument = (iframe.contentWindow || iframe.contentDocument);
-                            if (mapDocument.showAddress) {
-                                mapDocument.showAddress(tempAddress);
-                            }
-                        };
-                    } else {
-                        getAddressCallback.PerformCallback(tmpBBLE);
+                    function SetPopupControlMapURL(url)
+                    {
+                        var iframe = ASPxPopupMapControl.GetContentIFrame(); //document.getElementById(streetViewFrm);
+                        if (ASPxPopupMapControl.GetContentUrl() != url) {
+                            ASPxPopupMapControl.SetContentUrl(url);
+                            iframe.onload = function () {
+                                var mapDocument = (iframe.contentWindow || iframe.contentDocument);
+                                if (mapDocument.showAddress) {
+                                    mapDocument.showAddress(tempAddress);
+                                }
+                            };
+                        } else {
+                            getAddressCallback.PerformCallback(tmpBBLE);
+                        }
                     }
-                }
-            }
-        }
 
-        if (index == 1) {
-            if (tmpBBLE != null) {
-                if (getAddressCallback.InCallback()) {
-                    alert("Server is busy, try later!");
-                }
-                else {
-                    var streetViewFrm = "streetViewFrm";
-
-                    var iframe = document.getElementById(streetViewFrm);
-                    if (iframe.src != "/StreetView.aspx?t=map") {
-                        iframe.src = "/StreetView.aspx?t=map";
-                        iframe.onload = function () {
-                            var mapDocument = (iframe.contentWindow || iframe.contentDocument);
-                            if (mapDocument.showAddress) {
-                                mapDocument.showAddress(tempAddress);
+                    function popupControlMapTabClick(index) {
+                        if (index == 0) {
+                            if (tmpBBLE != null) {
+                                if (getAddressCallback.InCallback()) {
+                                    alert("Server is busy, try later!");
+                                }
+                                else {
+                                    var url = "/StreetView.aspx"
+                                    SetPopupControlMapURL(url);              
+                                }
                             }
-                        };
-                    } else {
-                        getAddressCallback.PerformCallback(tmpBBLE);
-                    }
-                }
-            }
-        }
+                        }
 
-        if (index == 2) {
-            if (tmpBBLE != null) {
-                if (getAddressCallback.InCallback()) {
-                    alert("Server is busy, try later!");
-                }
-                else {
-                    var streetViewFrm = "streetViewFrm";
-
-                    var iframe = document.getElementById(streetViewFrm);
-                    if (iframe.src != "/BingViewMap.aspx") {
-                        iframe.src = "/BingViewMap.aspx";
-                        iframe.onload = function () {
-                            var mapDocument = (iframe.contentWindow || iframe.contentDocument);
-                            if (mapDocument.showAddress) {
-                                mapDocument.showAddress(tempAddress);
+                        if (index == 1) {
+                            if (tmpBBLE != null) {
+                                if (getAddressCallback.InCallback()) {
+                                    alert("Server is busy, try later!");
+                                }
+                                else {
+                                    var url = "/StreetView.aspx?t=map";
+                                    SetPopupControlMapURL(url);
+                                }
                             }
-                        };
+                        }
 
-                    } else {
-                        getAddressCallback.PerformCallback(tmpBBLE);
-                    }
-                }
-            }
-        }
-
-        if (index == 3) {
-            if (tmpBBLE != null) {
-                var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + tmpBBLE;
-                //window.open(url, "_blank");    
-                var streetViewFrm = "streetViewFrm";
-                var iframe = document.getElementById(streetViewFrm);
-                iframe.src = url;
-            }
-        }
-    }
-    function PopupControlMapTabChange(s, e) {
-        if (e.tab.index == 0) {
-            if (tmpBBLE != null) {
-                if (getAddressCallback.InCallback()) {
-                    alert("Server is busy, try later!");
-                }
-                else {
-                    var streetViewFrm = "streetViewFrm";
-
-                    var iframe = document.getElementById(streetViewFrm);
-                    if (iframe.src != "/StreetView.aspx") {
-                        iframe.src = "/StreetView.aspx";
-                        iframe.onload = function () {
-                            var mapDocument = (iframe.contentWindow || iframe.contentDocument);
-                            if (mapDocument.showAddress) {
-                                mapDocument.showAddress(tempAddress);
+                        if (index == 2) {
+                            if (tmpBBLE != null) {
+                                if (getAddressCallback.InCallback()) {
+                                    alert("Server is busy, try later!");
+                                }
+                                else {
+                                    var url = "/BingViewMap.aspx";
+                                    SetPopupControlMapURL(url);                 
+                                }
                             }
-                        };
-                    } else {
-                        getAddressCallback.PerformCallback(tmpBBLE);
-                    }
-                }
-            }
-        }
+                        }
 
-        if (e.tab.index == 1) {
-            if (tmpBBLE != null) {
-                if (getAddressCallback.InCallback()) {
-                    alert("Server is busy, try later!");
-                }
-                else {
-                    var streetViewFrm = "streetViewFrm";
-
-                    var iframe = document.getElementById(streetViewFrm);
-                    if (iframe.src != "/StreetView.aspx?t=map") {
-                        iframe.src = "/StreetView.aspx?t=map";
-                        iframe.onload = function () {
-                            var mapDocument = (iframe.contentWindow || iframe.contentDocument);
-                            if (mapDocument.showAddress) {
-                                mapDocument.showAddress(tempAddress);
+                        if (index == 3) {
+                            if (tmpBBLE != null) {
+                                var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + tmpBBLE;
+                                ASPxPopupMapControl.SetContentUrl(url);            
                             }
-                        };
-                    } else {
-                        getAddressCallback.PerformCallback(tmpBBLE);
+                        }
                     }
-                }
-            }
-        }
+                    //function PopupControlMapTabChange(s, e) {
+                    //    if (e.tab.index == 0) {
+                    //        if (tmpBBLE != null) {
+                    //            if (getAddressCallback.InCallback()) {
+                    //                alert("Server is busy, try later!");
+                    //            }
+                    //            else {
+                    //                var streetViewFrm = "streetViewFrm";
 
-        if (e.tab.index == 2) {
-            if (tmpBBLE != null) {
-                if (getAddressCallback.InCallback()) {
-                    alert("Server is busy, try later!");
-                }
-                else {
-                    var streetViewFrm = "streetViewFrm";
+                    //                var iframe = document.getElementById(streetViewFrm);
+                    //                if (iframe.src != "/StreetView.aspx") {
+                    //                    iframe.src = "/StreetView.aspx";
+                    //                    iframe.onload = function () {
+                    //                        var mapDocument = (iframe.contentWindow || iframe.contentDocument);
+                    //                        if (mapDocument.showAddress) {
+                    //                            mapDocument.showAddress(tempAddress);
+                    //                        }
+                    //                    };
+                    //                } else {
+                    //                    getAddressCallback.PerformCallback(tmpBBLE);
+                    //                }
+                    //            }
+                    //        }
+                    //    }
 
-                    var iframe = document.getElementById(streetViewFrm);
-                    if (iframe.src != "/BingViewMap.aspx") {
-                        iframe.src = "/BingViewMap.aspx";
-                        iframe.onload = function () {
-                            var mapDocument = (iframe.contentWindow || iframe.contentDocument);
-                            if (mapDocument.showAddress) {
-                                mapDocument.showAddress(tempAddress);
+                    //    if (e.tab.index == 1) {
+                    //        if (tmpBBLE != null) {
+                    //            if (getAddressCallback.InCallback()) {
+                    //                alert("Server is busy, try later!");
+                    //            }
+                    //            else {
+                    //                var streetViewFrm = "streetViewFrm";
+
+                    //                var iframe = document.getElementById(streetViewFrm);
+                    //                if (iframe.src != "/StreetView.aspx?t=map") {
+                    //                    iframe.src = "/StreetView.aspx?t=map";
+                    //                    iframe.onload = function () {
+                    //                        var mapDocument = (iframe.contentWindow || iframe.contentDocument);
+                    //                        if (mapDocument.showAddress) {
+                    //                            mapDocument.showAddress(tempAddress);
+                    //                        }
+                    //                    };
+                    //                } else {
+                    //                    getAddressCallback.PerformCallback(tmpBBLE);
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+
+                    //    if (e.tab.index == 2) {
+                    //        if (tmpBBLE != null) {
+                    //            if (getAddressCallback.InCallback()) {
+                    //                alert("Server is busy, try later!");
+                    //            }
+                    //            else {
+                    //                var streetViewFrm = "streetViewFrm";
+
+                    //                var iframe = document.getElementById(streetViewFrm);
+                    //                if (iframe.src != "/BingViewMap.aspx") {
+                    //                    iframe.src = "/BingViewMap.aspx";
+                    //                    iframe.onload = function () {
+                    //                        var mapDocument = (iframe.contentWindow || iframe.contentDocument);
+                    //                        if (mapDocument.showAddress) {
+                    //                            mapDocument.showAddress(tempAddress);
+                    //                        }
+                    //                    };
+
+                    //                } else {
+                    //                    getAddressCallback.PerformCallback(tmpBBLE);
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+
+                    //    if (e.tab.index == 3) {
+                    //        if (tmpBBLE != null) {
+                    //            var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + tmpBBLE;
+                    //            //window.open(url, "_blank");    
+                    //            var streetViewFrm = "streetViewFrm";
+                    //            var iframe = document.getElementById(streetViewFrm);
+                    //            iframe.src = url;
+                    //        }
+                    //    }
+                    //}
+
+                    //function ShowPropertyMap(propBBLE) {
+                    //    tmpBBLE = propBBLE;
+                    //    if (propBBLE != null) {
+                    //        if (getAddressCallback.InCallback()) {
+                    //            alert("Server is busy, try later!");
+                    //        }
+                    //        else {
+                    //            var streetViewFrm = "streetViewFrm";
+                    //            var iframe = document.getElementById(streetViewFrm);
+                    //            if (iframe.src == "") {
+                    //                iframe.src = "/StreetView.aspx";
+                    //                iframe.onload = function () {
+                    //                    getAddressCallback.PerformCallback(propBBLE);
+                    //                };
+                    //            } else {
+                    //                getAddressCallback.PerformCallback(propBBLE);
+                    //            }
+                    //        }
+                    //    }
+                    //}
+
+                    function ShowPropertyMap(propBBLE) {
+                        tmpBBLE = propBBLE;
+                        if (propBBLE != null) {
+                            if (getAddressCallback.InCallback()) {
+                                alert("Server is busy, try later!");
                             }
-                        };
-
-                    } else {
-                        getAddressCallback.PerformCallback(tmpBBLE);
+                            else {
+                                var url = "/StreetView.aspx"
+                                ASPxPopupMapControl.SetContentUrl(url);
+                                //var streetViewFrm = "streetViewFrm";
+                                var iframe = ASPxPopupMapControl.GetContentIFrame();
+                                if (iframe.src == "") {
+                                    ASPxPopupMapControl.SetContentUrl(url);
+                                    iframe.onload = function () {
+                                        getAddressCallback.PerformCallback(propBBLE);
+                                    };
+                                } else {
+                                    getAddressCallback.PerformCallback(propBBLE);
+                                }
+                            }
+                        }
                     }
-                }
-            }
-        }
 
-        if (e.tab.index == 3) {
-            if (tmpBBLE != null) {
-                var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + tmpBBLE;
-                //window.open(url, "_blank");    
-                var streetViewFrm = "streetViewFrm";
-                var iframe = document.getElementById(streetViewFrm);
-                iframe.src = url;
-            }
-        }
-    }
+                    function OnLeadsCategoryClick(s, e) {
+                        if (tmpBBLE != null) {
+                            if (e.item.index == 0) {
+                                ShowPropertyMap(tmpBBLE);
+                            }
 
-    function ShowPropertyMap(propBBLE) {
-        tmpBBLE = propBBLE;
-        if (propBBLE != null) {
-            if (getAddressCallback.InCallback()) {
-                alert("Server is busy, try later!");
-            }
-            else {
-                var streetViewFrm = "streetViewFrm";
-                var iframe = document.getElementById(streetViewFrm);
-                if (iframe.src == "") {
-                    iframe.src = "/StreetView.aspx";
-                    iframe.onload = function () {
-                        getAddressCallback.PerformCallback(propBBLE);
-                    };
-                } else {
-                    getAddressCallback.PerformCallback(propBBLE);
-                }
-            }
-        }
-    }
+                            if (e.item.name == "Priority") {
+                                SetLeadStatus('5' + '|' + tmpBBLE);
+                            }
 
-    function OnLeadsCategoryClick(s, e) {
-        if (tmpBBLE != null) {
-            if (e.item.index == 0) {
-                ShowPropertyMap(tmpBBLE);
-                //if (tmpBBLE != null) {
-                //    if (getAddressCallback.InCallback()) {
-                //        alert("Server is busy, try later!");
-                //    }
-                //    else {
-                //        var streetViewFrm = "streetViewFrm";
-                //        var iframe = document.getElementById(streetViewFrm);
-                //        if (iframe.src == "") {
-                //            iframe.src = "/StreetView.aspx";
-                //            iframe.onload = function () {
-                //                getAddressCallback.PerformCallback(tmpBBLE);
-                //            };
-                //        } else {
-                //            getAddressCallback.PerformCallback(tmpBBLE);
-                //        }
-                //    }
-                //}
-            }
+                            if (e.item.name == "DoorKnock")
+                                SetLeadStatus('4' + '|' + tmpBBLE);
 
-            //if (e.item.index == 1) {
-            //    if (tmpBBLE != null) {
-            //        if (getAddressCallback.InCallback()) {
-            //            alert("Server is busy, try later!");
-            //        }
-            //        else {
+                            if (e.item.name == "Callback")
+                                SetLeadStatus('Tomorrow' + '|' + tmpBBLE);
 
-            //            var streetViewFrm = "streetViewFrm";
-            //            if (ASPxPopupMapControl.GetHeaderText() != e.item.GetText()) {
-            //                var iframe = document.getElementById(streetViewFrm);
-            //                iframe.src = "/StreetView.aspx?t=map";
-            //                iframe.onload = function () {
-            //                    getAddressCallback.PerformCallback(tmpBBLE);
-            //                };
-            //                ASPxPopupMapControl.SetHeaderText(e.item.GetText());
-            //            } else {
-            //                getAddressCallback.PerformCallback(tmpBBLE);
-            //            }
-            //        }
-            //    }
-            //}
+                            if (e.item.name == "DeadLead")
+                                SetLeadStatus('6' + '|' + tmpBBLE);
 
-            //if (e.item.index == 2) {
-            //    if (tmpBBLE != null) {
-            //        if (getAddressCallback.InCallback()) {
-            //            alert("Server is busy, try later!");
-            //        }
-            //        else {
-            //            var streetViewFrm = "streetViewFrm";
-            //            if (ASPxPopupMapControl.GetHeaderText() != e.item.GetText()) {
-            //                var iframe = document.getElementById(streetViewFrm);
-            //                iframe.src = "/BingViewMap.aspx";
-            //                iframe.onload = function () {
-            //                    getAddressCallback.PerformCallback(tmpBBLE);
-            //                };
-            //                ASPxPopupMapControl.SetHeaderText(e.item.GetText());
-            //            } else {
-            //                getAddressCallback.PerformCallback(tmpBBLE);
-            //            }
-            //        }
-            //    }
-            //}
+                            if (e.item.name == "InProcess")
+                                SetLeadStatus('7' + '|' + tmpBBLE)
 
+                            if (e.item.name == "Closed")
+                                SetLeadStatus('8' + '|' + tmpBBLE)
 
-            if (e.item.name == "Priority") {
-                SetLeadStatus('5' + '|' + tmpBBLE);
-            }
+                            if (e.item.name == "ViewLead") {
+                                var url = '/ViewLeadsInfo.aspx?id=' + tmpBBLE;
+                                window.showModalDialog(url, 'View Leads Info', 'dialogWidth:1350px;dialogHeight:810px');
+                            }
 
-            if (e.item.name == "DoorKnock")
-                SetLeadStatus('4' + '|' + tmpBBLE);
+                            if (e.item.name == "Delete") {
+                                SetLeadStatus('11' + '|' + tmpBBLE)
+                            }
 
-            if (e.item.name == "Callback")
-                SetLeadStatus('Tomorrow' + '|' + tmpBBLE);
+                            if (e.item.name == "Shared") {
+                                var url = '/PopupControl/ShareLeads.aspx?bble=' + tmpBBLE;
+                                AspxPopupShareleadClient.SetContentUrl(url);
+                                AspxPopupShareleadClient.Show();
+                            }
 
-            if (e.item.name == "DeadLead")
-                SetLeadStatus('6' + '|' + tmpBBLE);
+                            if (e.item.name == "Reassign") {
+                                popupCtrReassignEmployeeListCtr.ShowAtElement(s.GetMainElement());
+                            }
 
-            if (e.item.name == "InProcess")
-                SetLeadStatus('7' + '|' + tmpBBLE)
+                            if (e.item.name == "Upload") {
+                                var url = '/UploadFilePage.aspx?b=' + tmpBBLE;
+                                window.showModalDialog(url, 'Upload Files', 'dialogWidth:640px;dialogHeight:400px');
+                            }
+                        }
 
-            if (e.item.name == "Closed")
-                SetLeadStatus('8' + '|' + tmpBBLE)
+                        e.item.SetChecked(false);
+                    }
 
-            if (e.item.name == "ViewLead") {
-                var url = '/ViewLeadsInfo.aspx?id=' + tmpBBLE;
-                window.showModalDialog(url, 'View Leads Info', 'dialogWidth:1350px;dialogHeight:810px');
-            }
+                    function SearchGridLeads() {
+                        var filterCondition = "";
+                        var key = txtkeyWordClient.GetText();
 
-            if (e.item.name == "Delete") {
-                SetLeadStatus('11' + '|' + tmpBBLE)
-            }
+                        filterCondition = "[LeadsName] LIKE '%" + key + "%' OR [Neighborhood] LIKE '%" + key + "%'";
+                        filterCondition += " OR [EmployeeName] LIKE '%" + key + "%'";
+                        gridLeads.PerformCallback("Search|" + key);
+                        //gridLeads.ApplyFilter(filterCondition);
+                    }
 
-            if (e.item.name == "Shared") {
-                var url = '/PopupControl/ShareLeads.aspx?bble=' + tmpBBLE;
-                AspxPopupShareleadClient.SetContentUrl(url);
-                AspxPopupShareleadClient.Show();
-            }
+                    var streets = null;
+                    function BindStreetValues(result) {
+                        cbStreetlookupClient.SetEnabled(false);
+                        streets = result.split(';');
+                        //alert(cbStreetlookupClient.GetEnabled());
+                        cbStreetlookupClient.BeginUpdate();
+                        cbStreetlookupClient.ClearItems();
+                        for (var i = 0; i < streets.length - 1; i++)
+                            cbStreetlookupClient.AddItem(streets[i], streets[i]);
+                        cbStreetlookupClient.EndUpdate();
+                        cbStreetlookupClient.SetEnabled(true);
+                        //alert(cbStreetlookupClient.GetEnabled());
+                    }
 
-            if (e.item.name == "Reassign") {
-                popupCtrReassignEmployeeListCtr.ShowAtElement(s.GetMainElement());
-            }
+                    function OnRequestUpdate(bble) {
+                        // ASPxPopupSetAsTaskControl.ShowAtElement(s.GetMainElement());
+                        //if (typeof (ASPxPopupSetAsTaskControl) != "undefined") {
+                        //    ASPxPopupSetAsTaskControl.Show();
+                        //}
+                        isSendRequest = false;
+                        if (cbPanelRequestUpdate.InCallback()) {
 
-            if (e.item.name == "Upload") {
-                var url = '/UploadFilePage.aspx?b=' + tmpBBLE;
-                window.showModalDialog(url, 'Upload Files', 'dialogWidth:640px;dialogHeight:400px');
-            }
-        }
+                        }
+                        else {
+                            ASPxPopupRequestUpdateControl.SetHeaderText("Request Update - " + bble);
+                            ASPxPopupRequestUpdateControl.Show();
+                            cbPanelRequestUpdate.PerformCallback(bble);
+                        }
+                    }
 
-        e.item.SetChecked(false);
-    }
+                    var isSendRequest = false;
+                    function OnEndCallbackPanelRequestUpdate(s, e) {
+                        if (isSendRequest) {
+                            gridLeads.CancelEdit();
+                            //gridLeads.Refresh();
+                            alert("Request update is send.");
+                        }
+                    }
 
-    function SearchGridLeads() {
-        var filterCondition = "";
-        var key = txtkeyWordClient.GetText();
+                    var lastBorough = null;
+                    var loadedBorough = null;
+                    function OnBoroughChanged(cbBorough) {
+                        if (cbStreetlookupClient.InCallback())
+                            lastBorough = cbBorough.GetValue().toString();
+                        else {
+                            loadedBorough = cbBorough.GetValue().toString();
+                            cbStreetlookupClient.PerformCallback(loadedBorough);
+                        }
+                    }
 
-        filterCondition = "[LeadsName] LIKE '%" + key + "%' OR [Neighborhood] LIKE '%" + key + "%'";
-        filterCondition += " OR [EmployeeName] LIKE '%" + key + "%'";
-        gridLeads.PerformCallback("Search|" + key);
-        //gridLeads.ApplyFilter(filterCondition);
-    }
+                    function OnStreetlookupEndCallback(s, e) {
+                        if (lastBorough) {
+                            loadedBorough = lastBorough;
+                            cbStreetlookupClient.PerformCallback(lastBorough);
+                            lastBorough = null;
+                        }
+                    }
 
-    var streets = null;
-    function BindStreetValues(result) {
-        cbStreetlookupClient.SetEnabled(false);
-        streets = result.split(';');
-        //alert(cbStreetlookupClient.GetEnabled());
-        cbStreetlookupClient.BeginUpdate();
-        cbStreetlookupClient.ClearItems();
-        for (var i = 0; i < streets.length - 1; i++)
-            cbStreetlookupClient.AddItem(streets[i], streets[i]);
-        cbStreetlookupClient.EndUpdate();
-        cbStreetlookupClient.SetEnabled(true);
-        //alert(cbStreetlookupClient.GetEnabled());
-    }
+                    function AdjustPopupSize(popup) {
+                        if (popup.GetMaximized()) {
+                            //popup.SetWindowMaximized(false);
+                            popup.SetMaximized(false);
+                        }            
+                        else {
+                            //popup.SetWindowMaximized(true);
+                            popup.SetMaximized(true);
+                        }
 
-    function OnRequestUpdate(bble) {
-        // ASPxPopupSetAsTaskControl.ShowAtElement(s.GetMainElement());
-        //if (typeof (ASPxPopupSetAsTaskControl) != "undefined") {
-        //    ASPxPopupSetAsTaskControl.Show();
-        //}
-        isSendRequest = false;
-        if (cbPanelRequestUpdate.InCallback()) {
+                        popup.AdjustControl();
+                    }
 
-        }
-        else {
-            ASPxPopupRequestUpdateControl.SetHeaderText("Request Update - " + bble);
-            ASPxPopupRequestUpdateControl.Show();
-            cbPanelRequestUpdate.PerformCallback(bble);
-        }
-    }
+ 
 
-    var isSendRequest = false;
-    function OnEndCallbackPanelRequestUpdate(s, e) {
-        if (isSendRequest) {
-            gridLeads.CancelEdit();
-            //gridLeads.Refresh();
-            alert("Request update is send.");
-        }
-    }
+                    // to do by steven
+                    function SortLeadsList(s) {
+                        var sort = s.getAttribute("class");
 
-    var lastBorough = null;
-    var loadedBorough = null;
-    function OnBoroughChanged(cbBorough) {
-        if (cbStreetlookupClient.InCallback())
-            lastBorough = cbBorough.GetValue().toString();
-        else {
-            loadedBorough = cbBorough.GetValue().toString();
-            cbStreetlookupClient.PerformCallback(loadedBorough);
-        }
-    }
+                        if (sort == "fa fa-sort-amount-desc icon_right_s") {
+                            s.setAttribute("class", "fa fa-sort-amount-asc icon_right_s");
+                            gridLeads.SortBy("LastUpdate", "ASC");
+                        }
+                        else {
+                            if (sort == "fa fa-sort-amount-asc icon_right_s") {
+                                s.setAttribute("class", "fa fa-sort-amount-desc icon_right_s");
+                                gridLeads.SortBy("LastUpdate", "DSC");
+                            }
+                        }
+                    }
+                    $(document).ready(function () {
+                        //Handler for .ready() called.
+                        var leads_list_grid = $("#leads_list_left");
+                        //alert("scrollHeight =" + document.getElementById("leads_list_left").scrollHeight + "height =" + leads_list_grid.height())
+                        if (document.getElementById("leads_list_left").scrollHeight > leads_list_grid.height()) {
+                            $("#leads_list_left").mCustomScrollbar(
+                            {
+                                theme: "minimal-dark"
+                            }
+                            );
+                        }
 
-    function OnStreetlookupEndCallback(s, e) {
-        if (lastBorough) {
-            loadedBorough = lastBorough;
-            cbStreetlookupClient.PerformCallback(lastBorough);
-            lastBorough = null;
-        }
-    }
-
-    function AdjustPopupSize(popup) {
-        if (popup.GetMaximized()) {
-            popup.SetWindowMaximized(false);
-            popup.SetMaximized(false);
-        }
-        else {
-            popup.SetWindowMaximized(true);
-            popup.SetMaximized(true);
-        }
-    }
-
-
-
-    // to do by steven
-    function SortLeadsList(s) {
-        var sort = s.getAttribute("class");
-
-        if (sort == "fa fa-sort-amount-desc icon_right_s") {
-            s.setAttribute("class", "fa fa-sort-amount-asc icon_right_s");
-            gridLeads.SortBy("LastUpdate", "ASC");
-        }
-        else {
-            if (sort == "fa fa-sort-amount-asc icon_right_s") {
-                s.setAttribute("class", "fa fa-sort-amount-desc icon_right_s");
-                gridLeads.SortBy("LastUpdate", "DSC");
-            }
-        }
-    }
-    $(document).ready(function () {
-        //Handler for .ready() called.
-        var leads_list_grid = $("#leads_list_left");
-        //alert("scrollHeight =" + document.getElementById("leads_list_left").scrollHeight + "height =" + leads_list_grid.height())
-        if (document.getElementById("leads_list_left").scrollHeight > leads_list_grid.height()) {
-            $("#leads_list_left").mCustomScrollbar(
-            {
-                theme: "minimal-dark"
-            }
-            );
-        }
-
-    });
-
+                    });                
     // ]]> 
 </script>
 <%--id="leads_list_left"--%>
@@ -969,9 +918,9 @@
         <ClientSideEvents ItemClick="OnLeadsCategoryClick" />
         <ItemStyle Width="190px" Height="30px"></ItemStyle>
     </dx:ASPxPopupMenu>
-    <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMapControl" Width="500px" Height="500px"
-        MaxWidth="1200px" MaxHeight="900px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
-        HeaderText="Street View" AutoUpdatePosition="true" Modal="true"
+    <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMapControl" Width="900px" Height="700px"
+        ID="ASPxPopupControl1"
+        HeaderText="Street View" AutoUpdatePosition="true" Modal="true" ContentUrlIFrameTitle="streetViewFrm"
         runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
         <HeaderTemplate>
             <div>
@@ -1008,7 +957,6 @@
         </HeaderTemplate>
         <ContentCollection>
             <dx:PopupControlContentControl runat="server">
-                <iframe width="950" height="650" id="streetViewFrm" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
             </dx:PopupControlContentControl>
         </ContentCollection>
     </dx:ASPxPopupControl>

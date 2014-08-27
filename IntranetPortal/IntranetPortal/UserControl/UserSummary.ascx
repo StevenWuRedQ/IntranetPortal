@@ -450,43 +450,7 @@
                         <div style="width: 100%; height: 100%;">
                             <div style="height: 70px;">
                                 <div style="color: #b2b4b7; padding-top: 35px; margin-left: 26px; font-size: 30px; font-weight: 300;">Notes</div>
-                            </div>
-                            <div>
-                                <dx:ASPxGridView runat="server" ID="gridNotes" KeyFieldName="NoteId" ClientInstanceName="gridNotes" Width="100%" Visible="false">
-                                    <Settings ShowColumnHeaders="false" />
-                                    <Columns>
-                                        <dx:GridViewDataColorEditColumn>
-                                        </dx:GridViewDataColorEditColumn>
-                                    </Columns>
-                                    <Templates>
-                                        <Header></Header>
-                                        <EmptyDataRow>
-                                        </EmptyDataRow>
-                                        <DataItem>
-                                            <div style="margin-top: 10px; margin-left: -35px; font-size: 18px">
-                                                <div class="right_palne_menu">
-                                                    <%# Eval("Title")%>
-                                                </div>
-                                            </div>
-                                        </DataItem>
-                                        <EditForm>
-                                            <div style="background: #f53e0d; color: white; height: 270px; margin-top: 35px">
-                                                <div style="margin-left: 30px; margin-right: 15px;">
-                                                    <h2 style="font-size: 30px; font-weight: 400; margin: 0px; padding-top: 35px; padding-bottom: 35px;">Just An Idea</h2>
-                                                    <div style="font-size: 14px; line-height: 24px; background: transparent !important; margin-bottom: 0px">
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sodales vel orci volutpat fringilla.
-                                                    </div>
-                                                    <div style="padding-top: 40px; font-size: 24px; color: white">
-                                                        <i class="fa fa-check-circle icon_btn" onclick="#"></i>
-                                                        <i class="fa fa-times-circle icon_btn note_button_margin" onclick="#"></i>
-                                                        <i class="fa fa-trash-o icon_btn note_button_margin" onclick="#"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </EditForm>
-                                    </Templates>
-                                </dx:ASPxGridView>
-                            </div>
+                            </div>                            
                             <dx:ASPxCallbackPanel runat="server" ID="notesCallbackPanel" ClientInstanceName="notesCallbackPanel" OnCallback="notesCallbackPanel_Callback">
                                 <PanelCollection>
                                     <dx:PanelContent>
@@ -510,8 +474,8 @@
                                                 </div>
                                                 <div style="padding-top: 40px; font-size: 24px; color: white">
                                                     <i class="fa fa-check-circle icon_btn" onclick="notesCallbackPanel.PerformCallback('Save|<%= CurrentNote.NoteId%>')"></i>
-                                                    <i class="fa fa-times-circle icon_btn note_button_margin" onclick="#"></i>
-                                                    <i class="fa fa-trash-o icon_btn note_button_margin" onclick="notesCallbackPanel.PerformCallback('Delete|<%= CurrentNote.NoteId%>')"></i>
+                                                    <i class="fa fa-times-circle icon_btn note_button_margin"></i>
+                                                    <i class="fa fa-trash-o icon_btn note_button_margin" onclick='notesCallbackPanel.PerformCallback("Delete|<%= CurrentNote.NoteId%>")'></i>
                                                 </div>
                                             </div>
                                         </div>

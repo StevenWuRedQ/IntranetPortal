@@ -48,38 +48,48 @@
     <ClientSideEvents ItemClick="OnLeadsCategoryClick" />
     <ItemStyle Height="30px"></ItemStyle>
 </dx:ASPxPopupMenu>
-<dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
-    <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
-</dx:ASPxCallback>
-<dx:ASPxPopupControl ClientInstanceName="ASPxPopupMapControl" Width="500px" Height="500px"
-    MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
-    HeaderText="Street View" AutoUpdatePosition="true" Modal="true"
-    runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-     <HeaderTemplate>
+
+ <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMapControl" Width="900px" Height="700px"
+        ID="ASPxPopupControl1"
+        HeaderText="Street View" AutoUpdatePosition="true" Modal="true" ContentUrlIFrameTitle="streetViewFrm"
+        runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+        <HeaderTemplate>
             <div>
-                <div style="float: right; position: relative; margin-right: 10px; margin-bottom:-27px;">
+                <div style="float: right; position: relative; margin-right: 10px; margin-bottom: -27px; color: #2e2f31">
+                    <i class="fa fa-expand icon_btn" style="margin-right: 10px" onclick="AdjustPopupSize(ASPxPopupMapControl)"></i>
+                    <%--<i class="fa fa-remove  icon_btn" onclick="ASPxPopupMapControl.Hide()"></i>--%>
                     <dx:ASPxImage ID="img" runat="server" ImageUrl="~/images/x_close.png" Height="15" Width="14" Cursor="pointer" AlternateText="[Close]">
                         <ClientSideEvents Click="function(s, e){
                         ASPxPopupMapControl.Hide();
                     }" />
                     </dx:ASPxImage>
+
                 </div>
-                <dx:ASPxTabControl ID="ASPxTabControl1" runat="server" Width="100%">
-                    <Tabs>
-                        <dx:Tab Text="Street View" Name="streetView" />
-                        <dx:Tab Text="Map View" Name="mapView" />
-                        <dx:Tab Text="Bing Bird" Name="BingBird" />
-                    </Tabs>
-                    <ClientSideEvents ActiveTabChanged="PopupControlMapTabChange" />
-                </dx:ASPxTabControl>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" style="border: 0px" role="tablist">
+                    <li class="active"><a href="#streetView" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(0)">Street View</a></li>
+                    <li><a href="#mapView" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(1)">Map View</a></li>
+                    <li><a href="#BingBird" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(2)">Bing Bird</a></li>
+                    <li><a href="#Oasis" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(3)">Oasis</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content" style="display: none">
+                    <div class="tab-pane active" id="streetView">streetView</div>
+                    <div class="tab-pane" id="mapView">mapView</div>
+                    <div class="tab-pane" id="BingBird">BingBird</div>
+                    <div class="tab-pane" id="Oasis">Oasis</div>
+                </div>               
             </div>
         </HeaderTemplate>
-    <ContentCollection>
-        <dx:PopupControlContentControl runat="server">
-            <iframe width="950" height="650" id="streetViewFrm" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-        </dx:PopupControlContentControl>
-    </ContentCollection>
-</dx:ASPxPopupControl>
+        <ContentCollection>
+            <dx:PopupControlContentControl runat="server">            
+            </dx:PopupControlContentControl>
+        </ContentCollection>
+    </dx:ASPxPopupControl>
 <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
     <ClientSideEvents CallbackComplete="OnSetStatusComplete" />
+</dx:ASPxCallback>
+<dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
+    <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
 </dx:ASPxCallback>
