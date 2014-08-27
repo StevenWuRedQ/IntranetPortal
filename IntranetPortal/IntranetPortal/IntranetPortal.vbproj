@@ -1451,6 +1451,7 @@
     <Content Include="scss\_stacked.scss" />
     <Content Include="scss\_variables.scss" />
     <Content Include="scripts\jquery-2.1.1.min.map" />
+    <Content Include="scripts\Web.config" />
     <None Include="Service References\DataAPI\Arrays1.xsd">
       <SubType>Designer</SubType>
     </None>
