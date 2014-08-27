@@ -49,6 +49,7 @@
                         Select Agent to Import:
                         <dx:ASPxComboBox runat="server" ID="cbImportAgent" TextField="Name" ValueField="EmployeeID"></dx:ASPxComboBox>
                         <dx:ASPxButton runat="server" ID="btnImport" Text="Import" OnClick="btnImport_Click"></dx:ASPxButton>
+                        <dx:ASPxCheckBox runat="server" ID="chkReplace" Text="Replace Exsited"></dx:ASPxCheckBox>
                         <dx:ASPxLabel runat="server" ID="lblMsg"></dx:ASPxLabel>
                     </dx:PanelContent>
                 </PanelCollection>

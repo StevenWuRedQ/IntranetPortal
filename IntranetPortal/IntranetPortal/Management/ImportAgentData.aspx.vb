@@ -71,6 +71,7 @@ Public Class ImportAgentData
                     End If
 
                     prop.Active = False
+                    Dim replaceExsited = chkReplace.Checked
 
                     If Not String.IsNullOrEmpty(cbImportAgent.Value) Then
                         Dim bble = prop.BBLE
@@ -91,13 +92,15 @@ Public Class ImportAgentData
                                 Context.Leads.Add(newlead)
                             End If
                         Else
-                            newlead.LeadsName = li.LeadsName
-                            newlead.Neighborhood = li.NeighName
-                            newlead.EmployeeID = CInt(cbImportAgent.SelectedItem.Value)
-                            newlead.EmployeeName = cbImportAgent.SelectedItem.Text
-                            newlead.Status = LeadStatus.NewLead
-                            newlead.AssignDate = DateTime.Now
-                            newlead.AssignBy = User.Identity.Name
+                            If replaceExsited Then
+                                newlead.LeadsName = li.LeadsName
+                                newlead.Neighborhood = li.NeighName
+                                newlead.EmployeeID = CInt(cbImportAgent.SelectedItem.Value)
+                                newlead.EmployeeName = cbImportAgent.SelectedItem.Text
+                                newlead.Status = LeadStatus.NewLead
+                                newlead.AssignDate = DateTime.Now
+                                newlead.AssignBy = User.Identity.Name
+                            End If
                         End If
                     End If
                 Next
