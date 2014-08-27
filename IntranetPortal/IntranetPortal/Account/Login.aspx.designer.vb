@@ -75,4 +75,13 @@ Partial Public Class Login
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''LogInCallBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LogInCallBack As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class

@@ -36,4 +36,15 @@ Public Class Login
             tbUserName.IsValid = False
         End If
     End Sub
+
+    Protected Sub LogInCallBack_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        Dim name = e.Parameter.Split("|")(0)
+        Dim password = e.Parameter.Split("|")(1)
+        If Membership.ValidateUser(name, password) Then
+            Dim names = StrConv(name, VbStrConv.ProperCase)
+            OnlineUser.Refresh(HttpContext.Current)
+            FormsAuthentication.RedirectFromLoginPage(names, False)
+        End If
+
+    End Sub
 End Class

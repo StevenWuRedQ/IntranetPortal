@@ -16,9 +16,16 @@
     <link rel="stylesheet" href="/css/main.css" />
 
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script>
+        function onLogIn()
+        {
+            alert("run on log in -> " + $('#username').val() + '|' + $('#password').val());
+            LogInCallBackClinet.PerformCallback($('#username').val() + '|' + $('#password').val())
+        }
+    </script>
 </head>
 <body style="min-height: 100%;">
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" >
 
         <div style="height: 100%; left: 0; position: fixed; top: 0; width: 100%;background-color:#f9f9f9; display:none ">
             <div style="top: 22%; left: 40%; position: absolute; z-index: 10; background-color:#efefef;">
@@ -89,32 +96,34 @@
             <article class="sign-in">
                 <section id="sign-in-box" class="sign-in-box-ani">
                     <header class="logo-landing">
-                        <img id="logo-landing" src="/img/logo_landing.png" alt="My Ideal Property Portal" class="go-retina logo-ani" width="114"/>
+                        <img id="logo-landing" src="/images/img/logo_landing.png" alt="My Ideal Property Portal" class="go-retina logo-ani" width="114"/>
                     </header>
                     <div class="sign-in-form-wrapper">
-                        <form class="sign-in-form fade-in" id="portal-sign-in-form" name="portal-sign-in-form" action="login-processor.html" method="post">
+                        <div class="sign-in-form fade-in" id="portal-sign-in-form" name="portal-sign-in-form" action="login-processor.html" >
                             <input class="sif-username" id="username" name="username" type="text" placeholder="Username" autofocus required/>
                             <input class="sif-password" id="password" name="password" type="password" placeholder="Password" required/>
                             <div class="sif-remember">
                                 <input id="remember-me" name="remember-me" type="checkbox"/>
                                 <label for="remember-me">Remember Me</label>
                             </div>
-                            <input class="sif-button" type="submit" value="Sign In"/>
-                        </form>
+                            <input class="sif-button" type="submit" value="Sign In" onclick="onLogIn()"/>
+                        </div>
                     </div>
                 </section>
                 <footer class="sign-in-footnote fade-in">
-                    <p><a href=""><i class="fa fa-lock"></i>Forgot your password?</a></p>
+                    <p><a href="#"><i class="fa fa-lock"></i>Forgot your password?</a></p>
                 </footer>
             </article>
         </div>
+        <dx:ASPxCallback runat="server" ID="LogInCallBack" ClientInstanceName="LogInCallBackClinet" OnCallback="LogInCallBack_Callback">
 
+        </dx:ASPxCallback>
 
     </form>
     <!--END LANDING-->
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+    <script>window.jQuery || document.write('<script src="/scripts/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
     <script src="/scripts/js/jquery.easing.1.3.js"></script>
     <script src="/scripts/js/jquery.debouncedresize.js"></script>
     <script src="/scripts/js/jquery.throttledresize.js"></script>

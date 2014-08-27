@@ -68,7 +68,8 @@ function mip() {
 
 	$('div.landing').append('<div class="form-validation-message"><i class="fa fa-exclamation-circle fa-lg"></i> Incorrect username or password. Please try again.</div>');
 
-	var form_options = { 
+	var form_options = {
+	    beforeSubmit: onLogIn,
 		success: afterloginsubmission
 	}
 	$('#portal-sign-in-form').ajaxForm(form_options); 
@@ -85,13 +86,14 @@ function mip() {
 	$(window).load(function() {
 		$('#landing-loader').fadeOut('slow', function() {
 			setTimeout(function () {
-				$('.landing').show();
+			    $('.landing').show();
+			    
 				$('.landing-bg').backstretch([
-					  '/img/landing_bg/1.jpg'
-					, '/img/landing_bg/2.jpg'
-					, '/img/landing_bg/3.jpg'
-					, '/img/landing_bg/4.jpg'
-					, '/img/landing_bg/5.jpg'
+					  '/images/img/landing_bg/1.jpg'
+					, '/images/img/landing_bg/2.jpg'
+					, '/images/img/landing_bg/3.jpg'
+					, '/images/img/landing_bg/4.jpg'
+					, '/images/img/landing_bg/5.jpg'
 				], {duration: 2000, fade: 4000});
 			}, 0);
 		});
