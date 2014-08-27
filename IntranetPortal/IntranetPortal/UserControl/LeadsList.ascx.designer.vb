@@ -41,22 +41,13 @@ Partial Public Class LeadsList
     Protected WithEvents hfView As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
-    '''popupMenuLeads control.
+    '''LeadsSubMenu control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents popupMenuLeads As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
-
-    '''<summary>
-    '''ASPxPopupControl1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents LeadsSubMenu As Global.IntranetPortal.LeadsSubMenu
 
     '''<summary>
     '''ASPxPopupControl2 control.
@@ -183,13 +174,4 @@ Partial Public Class LeadsList
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents reassignCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
-
-    '''<summary>
-    '''getAddressCallback control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents getAddressCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class

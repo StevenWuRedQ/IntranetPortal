@@ -6,11 +6,10 @@ function ShowCateMenu(s, bble) {
    
     
     ASPxPopupMenuCategory.ShowAtElement(s);
-    var popmenu = document.getElementById('ctl00_MainContentPH_UserSummary_LeadsSubMenu_popupMenuLeads'); //document.getElementById("UserSummary_LeadsSubMenu_popupMenuLeads");
+    var popmenu = ASPxPopupMenuCategory.GetMainElement();    
     var pop_postion = popmenu.getBoundingClientRect();
     var target_top = s.getBoundingClientRect().bottom;
-    var pop_content = document.getElementById('ctl00_MainContentPH_UserSummary_LeadsSubMenu_popupMenuLeads_DXME_');//document.getElementById('UserSummary_LeadsSubMenu_popupMenuLeads_DXME_');
-    //alert("Top: " + pop_postion.top + "  Target Top: "  +  target_top);
+    var pop_content = (popmenu.firstElementChild || popmenu.firstChild);    
     if (Math.ceil(pop_postion.top) < Math.ceil(target_top))
     {        
         popmenu.style.top = target_top + 5;

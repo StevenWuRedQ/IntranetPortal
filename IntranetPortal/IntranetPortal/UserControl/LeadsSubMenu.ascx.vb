@@ -1,9 +1,17 @@
-﻿Public Class LeadsSubMenu
+﻿Imports DevExpress.Web.ASPxMenu
+
+Public Class LeadsSubMenu
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
     End Sub
+
+    Public ReadOnly Property PopupMenu As ASPxPopupMenu
+        Get
+            Return popupMenuLeads
+        End Get
+    End Property
 
     Protected Sub getAddressCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         Using Context As New Entities

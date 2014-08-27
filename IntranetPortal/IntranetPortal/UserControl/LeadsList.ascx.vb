@@ -45,7 +45,7 @@ Public Class LeadsList
                 gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
 
                 'Show View Lead Menu
-                popupMenuLeads.Items.FindByName("ViewLead").Visible = True
+                LeadsSubMenu.PopupMenu.Items.FindByName("ViewLead").Visible = True
             Else
                 gridLeads.Columns("colSelect").Visible = False
             End If
@@ -53,7 +53,7 @@ Public Class LeadsList
             gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
 
             'Show Manager Menu
-            popupMenuLeads.Items.FindByName("Reassign").Visible = True
+            LeadsSubMenu.PopupMenu.Items.FindByName("Reassign").Visible = True
             BindEmployeeList()
         End If
     End Sub
@@ -94,7 +94,7 @@ Public Class LeadsList
                 gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
 
                 'Show View Lead Menu
-                popupMenuLeads.Items.FindByName("ViewLead").Visible = True
+                LeadsSubMenu.PopupMenu.Items.FindByName("ViewLead").Visible = True
             Else
                 gridLeads.Columns("colSelect").Visible = False
             End If
@@ -102,7 +102,7 @@ Public Class LeadsList
             gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
 
             'Show Manager Menu
-            popupMenuLeads.Items.FindByName("Reassign").Visible = True
+            LeadsSubMenu.PopupMenu.Items.FindByName("Reassign").Visible = True
             BindEmployeeList()
         End If
     End Sub
@@ -150,7 +150,7 @@ Public Class LeadsList
 
         gridLeads.FocusedRowIndex = -1
         'Show Manager Menu
-        popupMenuLeads.Items.FindByName("Reassign").Visible = True
+        LeadsSubMenu.PopupMenu.Items.FindByName("Reassign").Visible = True
         BindEmployeeList()
     End Sub
 
@@ -274,7 +274,7 @@ Public Class LeadsList
             gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
 
             'Show View Lead Menu
-            popupMenuLeads.Items.FindByName("ViewLead").Visible = True
+            LeadsSubMenu.PopupMenu.Items.FindByName("ViewLead").Visible = True
         Else
             gridLeads.Columns("colSelect").Visible = False
         End If

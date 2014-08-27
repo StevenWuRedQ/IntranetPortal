@@ -23,15 +23,6 @@ Partial Public Class LeadsSubMenu
     Protected WithEvents popupMenuLeads As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
 
     '''<summary>
-    '''getAddressCallback control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents getAddressCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
-
-    '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>
@@ -48,4 +39,13 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents leadStatusCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+
+    '''<summary>
+    '''getAddressCallback control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents getAddressCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class
