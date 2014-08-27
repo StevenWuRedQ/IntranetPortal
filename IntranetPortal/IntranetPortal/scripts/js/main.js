@@ -1,6 +1,4 @@
 function mip() {
-
-
 	if (window.devicePixelRatio > 1) {
 		$('.go-retina').each(function(i) {
 			var lowres = $(this).attr('src');
@@ -60,6 +58,43 @@ function mip() {
 			else current_menu_item.find('.fa-caret-down').removeClass('fa-caret-down').addClass('fa-caret-right');
 		});
 		return false;
+	});
+
+
+
+	$('.landing').hide();
+
+// FORM HANDLING
+
+	$('div.landing').append('<div class="form-validation-message"><i class="fa fa-exclamation-circle fa-lg"></i> Incorrect username or password. Please try again.</div>');
+
+	var form_options = { 
+		success: afterloginsubmission
+	}
+	$('#portal-sign-in-form').ajaxForm(form_options); 
+
+	function afterloginsubmission() {
+		$('.form-validation-message').animate({"top" : "0"}, 500, 'easeOutCirc');
+		$(':input').focus(function() {
+			if ($('.form-validation-message').is(':visible')) $('.form-validation-message').animate({"top" : "-80px"}, 500, 'easeOutCirc');
+		});
+	}
+
+
+
+	$(window).load(function() {
+		$('#landing-loader').fadeOut('slow', function() {
+			setTimeout(function () {
+				$('.landing').show();
+				$('.landing-bg').backstretch([
+					  '/img/landing_bg/1.jpg'
+					, '/img/landing_bg/2.jpg'
+					, '/img/landing_bg/3.jpg'
+					, '/img/landing_bg/4.jpg'
+					, '/img/landing_bg/5.jpg'
+				], {duration: 2000, fade: 4000});
+			}, 0);
+		});
 	});
 }
 

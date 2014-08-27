@@ -990,6 +990,16 @@
     <Content Include="images\User Group.png" />
     <Content Include="images\User-Empty-icon.png" />
     <Content Include="images\x_close.png" />
+    <Content Include="img\landing_bg\1.jpg" />
+    <Content Include="img\landing_bg\2.jpg" />
+    <Content Include="img\landing_bg\3.jpg" />
+    <Content Include="img\landing_bg\4.jpg" />
+    <Content Include="img\landing_bg\5.jpg" />
+    <Content Include="img\logo%402x.png" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\logo_landing%402x.png" />
+    <Content Include="img\logo_landing.png" />
+    <Content Include="img\submenu_shadow.png" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />
     <Content Include="Management\Management.aspx" />
@@ -1394,8 +1404,10 @@
     <Content Include="scripts\jquery.collapse.js" />
     <Content Include="scripts\jquery.collapse_cookie_storage.js" />
     <Content Include="scripts\jquery.collapse_storage.js" />
+    <Content Include="scripts\js\jquery.backstretch.min.js" />
     <Content Include="scripts\js\jquery.debouncedresize.js" />
     <Content Include="scripts\js\jquery.easing.1.3.js" />
+    <Content Include="scripts\js\jquery.form.min.js" />
     <Content Include="scripts\js\jquery.mCustomScrollbar\jquery.mCustomScrollbar.css" />
     <Content Include="scripts\js\jquery.mCustomScrollbar\jquery.mCustomScrollbar.min.js" />
     <Content Include="scripts\js\jquery.mCustomScrollbar\mCSB_buttons.png" />
@@ -1438,8 +1450,6 @@
     <Content Include="scss\_stacked.scss" />
     <Content Include="scss\_variables.scss" />
     <Content Include="scripts\jquery-2.1.1.min.map" />
-    <Content Include="scripts\js\.DS_Store" />
-    <Content Include="scripts\js\jquery.mCustomScrollbar\.DS_Store" />
     <None Include="Service References\DataAPI\Arrays1.xsd">
       <SubType>Designer</SubType>
     </None>
