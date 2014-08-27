@@ -22,6 +22,18 @@
             alert("run on log in -> " + $('#username').val() + '|' + $('#password').val());
             LogInCallBackClinet.PerformCallback($('#username').val() + '|' + $('#password').val())
         }
+
+        function LogInComplete(result)
+        {          
+            if(result)
+            {
+                window.location.replace("/default.aspx");
+            }
+            else
+            {
+                alert("log in failed!");
+            }
+        }
     </script>
 </head>
 <body style="min-height: 100%;">
@@ -106,7 +118,7 @@
                                 <input id="remember-me" name="remember-me" type="checkbox"/>
                                 <label for="remember-me">Remember Me</label>
                             </div>
-                            <input class="sif-button" type="submit" value="Sign In" onclick="onLogIn()"/>
+                            <input class="sif-button" type="button" value="Sign In" onclick="onLogIn()"/>
                         </div>
                     </div>
                 </section>
@@ -116,13 +128,12 @@
             </article>
         </div>
         <dx:ASPxCallback runat="server" ID="LogInCallBack" ClientInstanceName="LogInCallBackClinet" OnCallback="LogInCallBack_Callback">
-
+            <ClientSideEvents CallbackComplete="function(s,e){LogInComplete(e.result);}" />
         </dx:ASPxCallback>
-
     </form>
     <!--END LANDING-->
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/scripts/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
     <script src="/scripts/js/jquery.easing.1.3.js"></script>
     <script src="/scripts/js/jquery.debouncedresize.js"></script>

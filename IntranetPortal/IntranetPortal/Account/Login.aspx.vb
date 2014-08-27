@@ -43,8 +43,10 @@ Public Class Login
         If Membership.ValidateUser(name, password) Then
             Dim names = StrConv(name, VbStrConv.ProperCase)
             OnlineUser.Refresh(HttpContext.Current)
-            FormsAuthentication.RedirectFromLoginPage(names, False)
+            FormsAuthentication.SetAuthCookie(name, False)
+            e.Result = True
+        Else
+            e.Result = False
         End If
-
     End Sub
 End Class
