@@ -22,7 +22,7 @@
             LogInCallBackClinet.PerformCallback($('#username').val() + '|' + $('#password').val())
         }
         function LogInComplete(result) {
-           
+
             //alert('mid ' + mid + 'afterloginsubmission' + afterloginsubmission);
             if (result != 'False') {
                 window.location.replace("/default.aspx");
@@ -31,6 +31,13 @@
 
                 afterloginsubmission();
 
+            }
+        }
+
+        function EnterInput(e)
+        {
+            if (e.keyCode == 13) {
+                onLogIn();           
             }
         }
 
@@ -72,6 +79,7 @@
                                             <ValidationSettings ValidationGroup="LoginUserValidationGroup" Display="Dynamic" ErrorTextPosition="Bottom">
                                                 <RequiredField ErrorText="Password is required." IsRequired="true" />
                                             </ValidationSettings>
+
                                         </dx:ASPxTextBox>
                                     </td>
                                 </tr>
@@ -111,14 +119,14 @@
                         <img id="logo-landing" src="/images/img/logo_landing.png" alt="My Ideal Property Portal" class="go-retina logo-ani" width="114"/>
                     </header>
                     <div class="sign-in-form-wrapper">
-                        <div class="sign-in-form fade-in" id="portal-sign-in-form" name="portal-sign-in-form" action="login-processor.html" >
-                            <input class="sif-username" id="username" name="username" type="text" placeholder="Username" autofocus required/>
-                            <input class="sif-password" id="password" name="password" type="password" placeholder="Password" required/>
+                        <div class="sign-in-form fade-in" id="portal-sign-in-form">
+                            <input class="sif-username" id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" required="required"/>
+                            <input class="sif-password" id="password" name="password" type="password" placeholder="Password" required="required" onkeydown="return EnterInput(event)" />
                             <div class="sif-remember">
                                 <input id="remember-me" name="remember-me" type="checkbox"/>
                                 <label for="remember-me">Remember Me</label>
                             </div>
-                            <input id="sign-in-button" class="sif-button" type="button" value="Sign In" />
+                            <input id="sign-in-button" class="sif-button" type="button" value="Sign In" autofocus="autofocus" />
                         </div>
                     </div>
                 </section>
@@ -144,6 +152,6 @@
     <script src="/scripts/js/jquery.backstretch.min.js"></script>
 
     <script src="/scripts/js/main.js"></script>
-    
+
 </body>
 </html>

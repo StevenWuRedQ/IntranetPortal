@@ -38,13 +38,16 @@ Public Class Login
     End Sub
 
     Protected Sub LogInCallBack_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
-        Dim name = e.Parameter.Split("|")(0)
+       Dim name = e.Parameter.Split("|")(0)
         Dim password = e.Parameter.Split("|")(1)
         If Membership.ValidateUser(name, password) Then
-           
+            Dim names = StrConv(name, VbStrConv.ProperCase)
+            OnlineUser.Refresh(HttpContext.Current)
+            FormsAuthentication.SetAuthCookie(name, False)
             e.Result = True
         Else
             e.Result = False
         End If
+
     End Sub
 End Class
