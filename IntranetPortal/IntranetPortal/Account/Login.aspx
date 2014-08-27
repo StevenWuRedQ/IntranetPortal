@@ -48,7 +48,7 @@
     </script>
 </head>
 <body >
-    <form id="form1" runat="server" style="height:100%">
+    <form id="form1" runat="server" style="height:100%" method="post">
 
        
         <!--[if lt IE 7]>

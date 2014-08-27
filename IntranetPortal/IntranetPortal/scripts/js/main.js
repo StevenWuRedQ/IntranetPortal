@@ -64,7 +64,7 @@ function mip() {
 
     // FORM HANDLING
 
-    $('div.landing').append('<div class="form-validation-message"><i class="fa fa-exclamation-circle fa-lg"></i> Incorrect username or password. Please try again.</div>');
+    $('div.landing').append('<div class="form-validation-message"><i class="fa fa-exclamation-circle fa-lg"></i> Authentication failed, please check your username and password.</div>');
 
     var form_options = {
         
