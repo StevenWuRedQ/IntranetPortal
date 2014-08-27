@@ -126,7 +126,7 @@
                                 <input id="remember-me" name="remember-me" type="checkbox"/>
                                 <label for="remember-me">Remember Me</label>
                             </div>
-                            <input id="sign-in-button" class="sif-button" type="button" value="Sign In" autofocus="autofocus" />
+                            <input id="sign-in-button" class="sif-button" type="button" value="Sign In" />
                         </div>
                     </div>
                 </section>
