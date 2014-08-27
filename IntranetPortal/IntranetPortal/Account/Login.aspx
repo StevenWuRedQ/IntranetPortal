@@ -19,25 +19,28 @@
     <script>
         function onLogIn()
         {
-            alert("run on log in -> " + $('#username').val() + '|' + $('#password').val());
+           
             LogInCallBackClinet.PerformCallback($('#username').val() + '|' + $('#password').val())
         }
 
         function LogInComplete(result)
-        {          
-            if(result)
+        {
+           
+            if (result !='False')
             {
                 window.location.replace("/default.aspx");
             }
             else
             {
-                alert("log in failed!");
+                
+                afterloginsubmission();
+                
             }
         }
     </script>
 </head>
-<body style="min-height: 100%;">
-    <form id="form1" runat="server" >
+<body >
+    <form id="form1" runat="server" style="height:100%">
 
         <div style="height: 100%; left: 0; position: fixed; top: 0; width: 100%;background-color:#f9f9f9; display:none ">
             <div style="top: 22%; left: 40%; position: absolute; z-index: 10; background-color:#efefef;">

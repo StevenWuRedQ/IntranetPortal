@@ -87,7 +87,8 @@ function mip() {
 		$('#landing-loader').fadeOut('slow', function() {
 			setTimeout(function () {
 			    $('.landing').show();
-			    
+			    $('#username').focus();
+
 				$('.landing-bg').backstretch([
 					  '/images/img/landing_bg/1.jpg'
 					, '/images/img/landing_bg/2.jpg'

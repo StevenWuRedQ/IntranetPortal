@@ -41,9 +41,7 @@ Public Class Login
         Dim name = e.Parameter.Split("|")(0)
         Dim password = e.Parameter.Split("|")(1)
         If Membership.ValidateUser(name, password) Then
-            Dim names = StrConv(name, VbStrConv.ProperCase)
-            OnlineUser.Refresh(HttpContext.Current)
-            FormsAuthentication.SetAuthCookie(name, False)
+           
             e.Result = True
         Else
             e.Result = False
