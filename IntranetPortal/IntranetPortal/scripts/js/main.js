@@ -59,7 +59,7 @@ function mip() {
         });
         return false;
     });
-    
+
     $('.landing').hide();
 
     // FORM HANDLING
@@ -72,9 +72,7 @@ function mip() {
     }
     $('#portal-sign-in-form').ajaxForm(form_options);
 
-    $('#sign-in-button').click(function () {
-        onLogIn();
-    });
+   
     
 
 

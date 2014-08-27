@@ -18,7 +18,11 @@
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script>
         function onLogIn() {
-           
+            if ($('#username').val().length == 0 || $('#password').val().length == 0)
+            {
+                alert('plase input user name or password');
+                return;
+            }
             LogInCallBackClinet.PerformCallback($('#username').val() + '|' + $('#password').val())
         }
         function LogInComplete(result) {
@@ -46,60 +50,7 @@
 <body >
     <form id="form1" runat="server" style="height:100%">
 
-        <div style="height: 100%; left: 0; position: fixed; top: 0; width: 100%;background-color:#f9f9f9; display:none ">
-            <div style="top: 22%; left: 40%; position: absolute; z-index: 10; background-color:#efefef;">
-                <dx:ASPxRoundPanel runat="server" HeaderText="Log In" HorizontalAlign="Center">
-                    <PanelCollection>
-                        <dx:PanelContent>
-                            <div class="accountHeader">
-                                <img src="/images/MyIdealProptery.png" style="height: 152px; width: 137px" />
-                                <p>
-                                    Please enter your username and password. 	
-                                </p>
-                            </div>
-                            <table style="width: 100%; padding: 2px;text-align:left;">
-                                <tr>
-                                    <td style="padding:2px;">
-                                        <dx:ASPxLabel ID="lblUserName" runat="server" AssociatedControlID="tbUserName" Text="User Name:" />
-                                    </td>
-                                    <td style="padding:2px;">
-                                        <dx:ASPxTextBox ID="tbUserName" runat="server" Width="200px">
-                                            <ValidationSettings ValidationGroup="LoginUserValidationGroup" Display="Dynamic" ErrorTextPosition="Bottom">
-                                                <RequiredField ErrorText="User Name is required." IsRequired="true" />
-                                            </ValidationSettings>
-                                        </dx:ASPxTextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding:2px;">
-                                        <dx:ASPxLabel ID="lblPassword" runat="server" AssociatedControlID="tbPassword" Text="Password:" />
-                                    </td>
-                                    <td style="padding:2px;">
-                                        <dx:ASPxTextBox ID="tbPassword" runat="server" Password="true" Width="200px">
-                                            <ValidationSettings ValidationGroup="LoginUserValidationGroup" Display="Dynamic" ErrorTextPosition="Bottom">
-                                                <RequiredField ErrorText="Password is required." IsRequired="true" />
-                                            </ValidationSettings>
-
-                                        </dx:ASPxTextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" style="text-align:center;padding:2px;"">
-                                        <dx:ASPxButton ID="btnLogin" runat="server" Text="Log In" ValidationGroup="LoginUserValidationGroup"
-                                            OnClick="btnLogin_Click">
-                                        </dx:ASPxButton>
-                                        &nbsp;
-                                        <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Clear" AutoPostBack="false">
-                                            <ClientSideEvents Click="function(){ASPxClientEdit.ClearEditorsInContainer(form1);}" />
-                                        </dx:ASPxButton>
-                                    </td>
-                                </tr>
-                            </table>
-                        </dx:PanelContent>
-                    </PanelCollection>
-                </dx:ASPxRoundPanel>
-            </div>
-        </div>
+       
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -126,7 +77,7 @@
                                 <input id="remember-me" name="remember-me" type="checkbox"/>
                                 <label for="remember-me">Remember Me</label>
                             </div>
-                            <input id="sign-in-button" class="sif-button" type="button" value="Sign In" />
+                            <input id="sign-in-button" class="sif-button" type="button" value="Sign In" onclick="onLogIn()" />
                         </div>
                     </div>
                 </section>
