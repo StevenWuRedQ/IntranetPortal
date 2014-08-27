@@ -138,7 +138,7 @@
         </Pane>
     </Styles>
     <Panes>
-        <dx:SplitterPane>
+        <dx:SplitterPane MinSize="1000px">
             <ContentCollection>
                 <dx:SplitterContentControl>
                     <div style="display: inline-table; font-family: 'Source Sans Pro'; margin-left: 19px; margin-top: 15px;">

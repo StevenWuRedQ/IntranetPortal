@@ -471,7 +471,7 @@
 <!-- custom scrollbar plugin -->
 
 <dx:ASPxPopupControl ClientInstanceName="aspxAcrisControl" Width="1000px" Height="800px"
-    ID="ASPxPopupControl1" HeaderText="Acris" Modal="true" CloseAction="CloseButton"
+    ID="ASPxPopupControl1" HeaderText="Acris" Modal="true" CloseAction="CloseButton" ShowMaximizeButton="true"
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">

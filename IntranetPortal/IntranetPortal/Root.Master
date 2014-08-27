@@ -90,7 +90,7 @@
                                         <nav id="global-nav" class="navbar" role="navigation">
                                             <div class="navbar-header">
                                                 <a href="/SummaryPage.aspx" class="clearfix" target="contentUrlPane">
-                                                    <img id="logo" src="Images/logo.png" alt="My Ideal Property" class="go-retina" />
+                                                    <img id="logo" src="/Images/logo.png" alt="My Ideal Property" class="go-retina" />
                                                     <span>Portal</span>
                                                 </a>
                                             </div>
@@ -175,7 +175,7 @@
                                                                     Good morning, <span style="font-weight: 900">
                                                                         <asp:LoginName ID="HeadLoginName" runat="server" />
                                                                     </span>
-                                                                    <img src="images/arrow_down.png" />
+                                                                    <img src="/images/arrow_down.png" />
                                                                     <div style="display: none">
                                                                         [<asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />
                                                                         |<a href="/Account/ChangePassword.aspx" visible="false">Setting</a>]
