@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfPortalNavItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <PortalNavItem Name="Agent" Text="Agent" NavigationUrl="/SummaryPage.aspx" ShowAmount="false" ItemType="Agent">
+  <PortalNavItem Name="Agent" Text="Agent" NavigationUrl="/SummaryPage.aspx" ShowAmount="false" ItemType="Agent" Expanded="true">
     <level>1</level>
     <FontClass>
       <![CDATA[
@@ -53,6 +53,11 @@
       <PortalNavItem Name="AgentClosed" Text="Closed" NavigationUrl="/LeadAgent.aspx?c=Closed" ShowAmount="true">
         <FontClass>
           <![CDATA[ <i class="fa fa-check-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Calendar" Text="Calendar" NavigationUrl="/Calendar.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
       </PortalNavItem>
     </Items>
