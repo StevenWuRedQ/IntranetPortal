@@ -1398,6 +1398,7 @@
     <Content Include="scripts\globalize\cultures\globalize.cultures.js" />
     <Content Include="scripts\globalize\globalize.js" />
     <Content Include="Content.Master" />
+    <Content Include="css\Web.config" />
     <None Include="scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />
