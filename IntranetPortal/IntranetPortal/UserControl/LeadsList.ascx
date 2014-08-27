@@ -139,8 +139,7 @@
 
         ASPxPopupMapControl.Show();
     }
-    function popupControlMapTabClick(index)
-    {
+    function popupControlMapTabClick(index) {
         if (index == 0) {
             if (tmpBBLE != null) {
                 if (getAddressCallback.InCallback()) {
@@ -512,21 +511,18 @@
         }
     }
 
-    function AdjustPopupSize(popup)
-    {
-        if (popup.GetMaximized())
-        {
+    function AdjustPopupSize(popup) {
+        if (popup.GetMaximized()) {
             popup.SetWindowMaximized(false);
             popup.SetMaximized(false);
-        }            
-        else
-        {            
+        }
+        else {
             popup.SetWindowMaximized(true);
             popup.SetMaximized(true);
         }
     }
 
- 
+
 
     // to do by steven
     function SortLeadsList(s) {
@@ -589,8 +585,11 @@
                             <table style="height: 30px">
                                 <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
                                     <td style="width: 80px;">
-                                        <span class="font_black"><i class="fa fa-calendar-o"></i><%#  Container.GroupText  %>
-                                        </span></td>
+                                         <span class="font_black">
+                                            <i class="fa fa-calendar-o font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                        </span>
+                                    </td>
+                                   
                                     <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")","")%></span>
                                     </td>
@@ -605,8 +604,11 @@
                         <div>
                             <table style="height: 30px">
                                 <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
-                                    <td style="width: 80px;"><span class="font_black">Neighborhood:<%#  Container.GroupText  %>
-                                    </span></td>
+                                    <td style="width: 80px;">
+                                        <span class="font_black">
+                                            <i class="fa fa-university font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                        </span>
+                                    </td>
                                     <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
                                     </td>
@@ -620,8 +622,12 @@
                         <div>
                             <table style="height: 30px">
                                 <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
-                                    <td style="width: 80px;"><span class="font_black"><i class="fa fa-user "></i><%#  Container.GroupText  %>
-                                    </span></td>
+
+                                    <td style="width: 80px;">
+                                         <span class="font_black">
+                                            <i class="fa fa-user font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                        </span>
+                                    </td>
                                     <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
                                     </td>
@@ -969,18 +975,12 @@
         runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
         <HeaderTemplate>
             <div>
-                <div style="float: right; position: relative; margin-right: 10px; margin-bottom: -27px; color:#2e2f31">
-                    <i class="fa fa-expand icon_btn" style="margin-right:10px" onclick="AdjustPopupSize(ASPxPopupMapControl)"></i>
-                    <%--<i class="fa fa-remove  icon_btn" onclick="ASPxPopupMapControl.Hide()"></i>--%>
-                    <dx:ASPxImage ID="img" runat="server" ImageUrl="~/images/x_close.png" Height="15" Width="14" Cursor="pointer" AlternateText="[Close]">
-                        <ClientSideEvents Click="function(s, e){
-                        ASPxPopupMapControl.Hide();
-                    }" />
-                    </dx:ASPxImage>
-                    
+                <div style="float: right; position: relative; margin-right: 10px; margin-bottom: -27px; color: #2e2f31">
+                    <i class="fa fa-expand icon_btn" style="margin-right: 10px" onclick="AdjustPopupSize(ASPxPopupMapControl)"></i>
+                    <i class="fa fa-times icon_btn" onclick="ASPxPopupMapControl.Hide()"></i>
                 </div>
                 <!-- Nav tabs -->
-                <ul class="nav nav-tabs" style="border:0px" role="tablist">
+                <ul class="nav nav-tabs" style="border: 0px" role="tablist">
                     <li class="active"><a href="#streetView" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(0)">Street View</a></li>
                     <li><a href="#mapView" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(1)">Map View</a></li>
                     <li><a href="#BingBird" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(2)">Bing Bird</a></li>
@@ -988,7 +988,7 @@
                 </ul>
 
                 <!-- Tab panes -->
-                <div class="tab-content" style="display:none">
+                <div class="tab-content" style="display: none">
                     <div class="tab-pane active" id="streetView">streetView</div>
                     <div class="tab-pane" id="mapView">mapView</div>
                     <div class="tab-pane" id="BingBird">BingBird</div>
