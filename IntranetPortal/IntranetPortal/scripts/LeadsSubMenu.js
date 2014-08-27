@@ -76,6 +76,19 @@ function popupControlMapTabClick(index) {
     if (index == 3) {
         if (tmpBBLE != null) {
             var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + tmpBBLE;
+
+            var iframe = ASPxPopupMapControl.GetContentIFrame();
+            iframe.onload = function () { };
+            ASPxPopupMapControl.SetContentUrl(url);
+        }
+    }
+
+    if (index == 4) {
+        if (tmpBBLE != null) {
+            var url = "http://gis.nyc.gov/doitt/nycitymap/template?applicationName=ZOLA";
+         
+            var iframe = ASPxPopupMapControl.GetContentIFrame();
+            iframe.onload = function () { };            
             ASPxPopupMapControl.SetContentUrl(url);
         }
     }

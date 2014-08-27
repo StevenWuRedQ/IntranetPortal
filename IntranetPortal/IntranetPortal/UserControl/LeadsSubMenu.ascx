@@ -65,6 +65,7 @@
                     <li><a href="#mapView" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(1)">Map View</a></li>
                     <li><a href="#BingBird" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(2)">Bing Bird</a></li>
                     <li><a href="#Oasis" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(3)">Oasis</a></li>
+                    <li><a href="#ZOLA" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(4)">ZOLA</a></li>
                 </ul>
 
                 <!-- Tab panes -->
@@ -73,6 +74,7 @@
                     <div class="tab-pane" id="mapView">mapView</div>
                     <div class="tab-pane" id="BingBird">BingBird</div>
                     <div class="tab-pane" id="Oasis">Oasis</div>
+                    <div class="tab-pane" id="ZOLA">ZOLA</div>
                 </div>               
             </div>
         </HeaderTemplate>

@@ -59,9 +59,7 @@ function mip() {
         });
         return false;
     });
-
-
-
+    
     $('.landing').hide();
 
     // FORM HANDLING
