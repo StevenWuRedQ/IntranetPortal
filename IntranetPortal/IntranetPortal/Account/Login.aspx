@@ -17,26 +17,23 @@
 
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script>
-        function onLogIn()
-        {
+        function onLogIn() {
            
             LogInCallBackClinet.PerformCallback($('#username').val() + '|' + $('#password').val())
         }
-
-        function LogInComplete(result)
-        {
+        function LogInComplete(result) {
            
-            if (result !='False')
-            {
+            //alert('mid ' + mid + 'afterloginsubmission' + afterloginsubmission);
+            if (result != 'False') {
                 window.location.replace("/default.aspx");
             }
-            else
-            {
-                
+            else {
+
                 afterloginsubmission();
-                
+
             }
         }
+
     </script>
 </head>
 <body >
@@ -121,7 +118,7 @@
                                 <input id="remember-me" name="remember-me" type="checkbox"/>
                                 <label for="remember-me">Remember Me</label>
                             </div>
-                            <input class="sif-button" type="button" value="Sign In" onclick="onLogIn()"/>
+                            <input id="sign-in-button" class="sif-button" type="button" value="Sign In" />
                         </div>
                     </div>
                 </section>
@@ -147,6 +144,6 @@
     <script src="/scripts/js/jquery.backstretch.min.js"></script>
 
     <script src="/scripts/js/main.js"></script>
-
+    
 </body>
 </html>
