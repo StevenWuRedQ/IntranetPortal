@@ -3,9 +3,10 @@
 <%--<script src="/Scripts/jquery-2.1.1.min.js"></script>--%>
 <script src="/Scripts/globalize/globalize.js"></script>
 <script src="/Scripts/dx.chartjs.js"></script>
+ <div style="padding-top: 50px; font-size: 30px; color: #ff400d; text-align: center;" id="chartsTitle">Charts Title</div>
 <div style="overflow: auto;width:871px" id="chars_with_scorll">
-    <div id="container" style="height: 400px;"></div>
-    <div id="pieChart" style="height: 400px;"></div>
+    <div id="container" style="height: 350px;"></div>
+    <div id="pieChart" style="height: 350px;"></div>
 </div>
 <script type="text/javascript">
 
@@ -104,9 +105,11 @@
         
         var chartData = dataFormSever.DataSource;
         var chartTitle = dataFormSever.Title == null ? "Leads" : dataFormSever.Title;
-        $("#container").width(600);
+        $('#chartsTitle').text(chartTitle);
+        //$("#container").width(600);
+        $("#container").width(40);
         var charsWidth = $("#container").width();
-        var tagertWidth = 40 * chartData.length + 80;
+        var tagertWidth = 40 * chartData.length  +40 ;
        
         if (charsWidth < tagertWidth)
         {
@@ -134,7 +137,7 @@
                 type: "bar",
                 color: '#B0BF1A'
             },
-            title: chartTitle,
+            //title: chartTitle,
             legend: {
                 visible: false,
                 verticalAlignment: "bottom",
