@@ -25,10 +25,12 @@ Public Class UserSummary
     Public Sub BindNotes()
         Dim notes = PortalNotes
 
-        If notes IsNot Nothing Then
+        If notes IsNot Nothing AndAlso notes.Count > 0 Then
             CurrentNote = notes(0)
             txtTitle.Text = notes(0).Title
             txtNotesDescription.Text = notes(0).Description
+        Else
+            CurrentNote = New PortalNote
         End If
     End Sub
 
