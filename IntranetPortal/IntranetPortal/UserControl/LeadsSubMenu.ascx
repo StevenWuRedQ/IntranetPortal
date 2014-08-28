@@ -27,16 +27,16 @@
             <Image Url="/images/drap_inprocess_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="View Lead" Name="ViewLead" Visible="false">
-            <Image IconID="miscellaneous_viewonweb_16x16"></Image>
+             <Image Url="/images/drap_view_leads.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Closed" Name="Closed" Image-Url="/images/drap_closed_icons.png">
             <Image Url="/images/drap_closed_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Delete" Name="Delete" Visible="false">
-            <Image Url="/images/drap_closed_icons.png"></Image>
+            <Image Url="/images/drap_deadlead_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Reassign" Name="Reassign" Visible="false">
-            <Image Url="/images/assign_leads_icon.png"></Image>
+            <Image Url="/images/drap_reassign_icon.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="View Files" Name="ViewFiles">
             <Image Url="/images/drap_viewfile_icons.png"></Image>

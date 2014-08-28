@@ -931,9 +931,11 @@
     <Content Include="images\drap_inprocess_icons.png" />
     <Content Include="images\drap_map_icons.png" />
     <Content Include="images\drap_prority_icons.png" />
+    <Content Include="images\drap_reassign_icon.png" />
     <Content Include="images\drap_shared_icons.png" />
     <Content Include="images\drap_upload_icons.png" />
     <Content Include="images\drap_viewfile_icons.png" />
+    <Content Include="images\drap_view_leads.png" />
     <Content Include="images\Evication.jpg" />
     <Content Include="images\Evication.png" />
     <Content Include="images\flag.png" />
