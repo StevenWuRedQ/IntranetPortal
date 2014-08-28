@@ -75,4 +75,9 @@ Public Class Root
     Protected Sub gridSearch_AfterPerformCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewAfterPerformCallbackEventArgs) Handles gridSearch.AfterPerformCallback
         BindSearchGrid("")
     End Sub
+
+    Protected Sub btnLogOut_Click(sender As Object, e As EventArgs)
+        FormsAuthentication.SignOut()
+        FormsAuthentication.RedirectToLoginPage()
+    End Sub
 End Class
