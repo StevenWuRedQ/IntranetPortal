@@ -51,7 +51,7 @@ Public Class LeadsList
             End If
 
             gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
-
+            divExpand.Visible = True
             'Show Manager Menu
             LeadsSubMenu.PopupMenu.Items.FindByName("Reassign").Visible = True
             BindEmployeeList()
@@ -100,6 +100,7 @@ Public Class LeadsList
             End If
 
             gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
+            divExpand.Visible = True
 
             'Show Manager Menu
             LeadsSubMenu.PopupMenu.Items.FindByName("Reassign").Visible = True
@@ -173,6 +174,7 @@ Public Class LeadsList
             gridLeads.DataBind()
 
             gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
+            divExpand.Visible = True
         End Using
     End Sub
 
@@ -263,6 +265,7 @@ Public Class LeadsList
         If category = LeadStatus.Callback Then
             gridLeads.GroupBy(gridLeads.Columns("CallbackDate"))
             gridLeads.ExpandAll()
+            divExpand.Visible = True
         Else
             gridLeads.UnGroup(gridLeads.Columns("CallbackDate"))
         End If
@@ -270,6 +273,8 @@ Public Class LeadsList
         If category = LeadStatus.DoorKnocks Then
             gridLeads.Columns("colSelect").Visible = True
             gridLeads.GroupBy(gridLeads.Columns("Neighborhood"))
+            divExpand.Visible = True
+
             gridLeads.ClientSideEvents.FocusedRowChanged = ""
             gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
 

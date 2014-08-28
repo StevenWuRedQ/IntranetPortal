@@ -304,15 +304,15 @@
     <div style="float: left; width: 1000px; display: block; height: 100%;">
         <div id="map-canvas" style="height: 100%; width: 100%;"></div>
     </div>
-    <div id="directionsPanel" style="float: left; width: 300px; height: 100%; right: 0px; overflow: auto; z-index: 999;">
-        <table style="width: 100%">
+    <div id="directionsPanel" style="float: left; width: 300px; height: 100%; right: 0px; overflow: auto; z-index: 999; padding:5px">
+        <table style="">
             <tr>
                 <td style="width: 160px;">Total Distance: <span id="total"></span></td>
                 <td>
-                    <dx:ASPxButton runat="server" RenderMode="Button" Image-Height="16px" Text="Print" Image-Width="16px" AutoPostBack="false">
-                        <FocusRectPaddings PaddingLeft="2" PaddingRight="2" PaddingBottom="0" PaddingTop="0" />
+                    <dx:ASPxButton runat="server" RenderMode="Button"  Text="Print" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                       
                         <ClientSideEvents Click="function(){window.print();}" />
-                        <Image Height="16px" Width="16px" Url="/images/imprimir.png"></Image>
+                      
                     </dx:ASPxButton>
                 </td>
             </tr>

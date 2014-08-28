@@ -23,6 +23,15 @@ Partial Public Class LeadsList
     Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
+    '''divExpand control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents divExpand As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
     '''gridLeads control.
     '''</summary>
     '''<remarks>

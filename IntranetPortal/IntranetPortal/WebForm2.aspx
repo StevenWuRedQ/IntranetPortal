@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="WebForm2.aspx.vb" Inherits="IntranetPortal.WebForm2" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="WebForm2.aspx.vb" Inherits="IntranetPortal.WebForm2"  %>
 
 <%@ Register Src="~/UserControl/DoorKnockMap.ascx" TagPrefix="uc1" TagName="DoorKnockMap" %>
 
@@ -8,6 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+     <link href="/styles/stevencss.css" rel='stylesheet' type='text/css' />
     <style>
     html, body, #form1, #map_canvas
     {
@@ -16,6 +17,7 @@
         padding: 0;
         height: 100%;
     }
+
 </style>
 </head>
 <body>
