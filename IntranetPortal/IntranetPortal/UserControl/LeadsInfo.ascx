@@ -470,8 +470,7 @@
                                                 <dx:MenuItem Text="Custom" Name="Custom">
                                                 </dx:MenuItem>
                                             </Items>
-                                            <ClientSideEvents ItemClick="OnCallbackMenuClick" />
-                                            <ItemStyle Width="143px"></ItemStyle>
+                                            <ClientSideEvents ItemClick="OnCallbackMenuClick" />                                          
                                         </dx:ASPxPopupMenu>
                                         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="260px" Height="250px"
                                             MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="pcMain"

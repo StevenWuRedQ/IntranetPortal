@@ -424,7 +424,10 @@ Public Class ActivityLogs
 
                     If userAppoint.Status = UserAppointment.AppointmentStatus.NewAppointment Then
                         'e.Row.BackColor = Drawing.Color.FromArgb(204, 255, 200)
-                        e.Row.CssClass = "activity_log_high_light dxgvDataRow_MetropolisBlue1"
+                    e.Row.CssClass = "activity_log_high_light dxgvDataRow_MetropolisBlue1"
+                    btnAccept.Visible = True
+                    btnDecline.Visible = True
+                    btnReschedule.Visible = True
                     Else
                         btnAccept.Visible = False
                         btnDecline.Visible = False
