@@ -355,7 +355,7 @@ and dependencies (minified).
 			*/
 			
 			init:function(options){
-				
+
 				var options=$.extend(true,{},defaults,options),
 					selector=functions._selector.call(this); /* validate selector */
 				
@@ -2047,21 +2047,27 @@ and dependencies (minified).
 	
 	/* plugin constructor functions */
 	$.fn[pluginNS]=function(method){ /* usage: $(selector).mCustomScrollbar(); */
-		if(methods[method]){
+	   
+	    if (methods[method]) {
+	        
 			return methods[method].apply(this,Array.prototype.slice.call(arguments,1));
-		}else if(typeof method==="object" || !method){
+	    } else if (typeof method === "object" || !method) {
+	       
 			return methods.init.apply(this,arguments);
 		}else{
 			$.error("Method "+method+" does not exist");
 		}
 	};
-	$[pluginNS]=function(method){ /* usage: $.mCustomScrollbar(); */
-		if(methods[method]){
+	$[pluginNS] = function (method) { /* usage: $.mCustomScrollbar(); */
+	    
+	    if (methods[method]) {
+	       
 			return methods[method].apply(this,Array.prototype.slice.call(arguments,1));
-		}else if(typeof method==="object" || !method){
+	    } else if (typeof method === "object" || !method) {
+	       
 			return methods.init.apply(this,arguments);
 		}else{
-			$.error("Method "+method+" does not exist");
+			
 		}
 	};
 	

@@ -70,7 +70,7 @@ function mip() {
         
         success: afterloginsubmission
     }
-    $('#portal-sign-in-form').ajaxForm(form_options);
+    //$('#portal-sign-in-form').ajaxForm(form_options);
     
     $(window).load(function () {
         $('#landing-loader').fadeOut('slow', function () {

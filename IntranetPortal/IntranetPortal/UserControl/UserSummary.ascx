@@ -4,10 +4,13 @@
 
 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 
+<link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
+<script src="/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
 <script type="text/javascript">
     function OnNotesKeyDown(s, e) {
         var textArea = s.GetInputElement();
-       
+
         if (textArea.scrollHeight + 2 > s.GetHeight()) {
             //alert(textArea.scrollHeight + "|" + s.GetHeight());
             s.SetHeight(textArea.scrollHeight + 2);
@@ -34,7 +37,21 @@
             tbl.style.backgroundColor = 'transparent';
         }
     }
-
+    function initScrollbar_summary() {
+        
+        $("#ctl00_MainContentPH_UserSummary_contentSplitter_0_CC").mCustomScrollbar(
+            {
+                theme: "minimal-dark",
+                axis:"yx"
+            }
+         );
+        
+    }
+    $(document).ready(function () {
+        // Handler for .ready() called.
+        initScrollbar_summary();
+    });
+   
 </script>
 
 <%-------end-------%>
@@ -116,16 +133,17 @@
         padding-top: 20px;
     }
 
-    .notesTitleStyle
-    {
-        font-size: 30px; font-weight: 400;
-        color:white;
-    }
-    .notesDescriptionStyle{
-        font-size: 14px; line-height: 24px;
-        color:white;
+    .notesTitleStyle {
+        font-size: 30px;
+        font-weight: 400;
+        color: white;
     }
 
+    .notesDescriptionStyle {
+        font-size: 14px;
+        line-height: 24px;
+        color: white;
+    }
 </style>
 
 <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" FullscreenMode="true">
@@ -139,6 +157,7 @@
             <ContentCollection>
                 <dx:SplitterContentControl>
                     <div style="display: inline-table; font-family: 'Source Sans Pro'; margin-left: 19px; margin-top: 15px;">
+                       
                         <div style="float: left; font-weight: 300; font-size: 48px; color: #234b60">
                             <%= Page.User.Identity.Name %>'s Summary &nbsp;
                         </div>
@@ -167,7 +186,7 @@
                         </div>
                     </div>
                     <%------end------%>
-                    <div style="float: left;margin-right: 10px;margin-left: 35px;min-width: 1200px;">
+                    <div style="float: left; margin-right: 10px; margin-left: 35px; min-width: 1200px;">
                         <table style="vertical-align: top; height: 700px; margin-top: -21px;">
                             <tr style="height: 240px">
                                 <td style="width: 380px; vertical-align: top" class="under_line">
@@ -256,7 +275,7 @@
                                     </div>
                                 </td>
                                 <td rowspan="3" style="width: 50px"></td>
-                                <td rowspan="3" style="vertical-align: top; width:380px">
+                                <td rowspan="3" style="vertical-align: top; width: 380px">
                                     <h4>
                                         <img src="../images/grid_calendar.png" class="vertical-img" /><span class="heading_text">Today's Calendar</span></h4>
                                     <div style="border: 1px solid #efefef; height: 615px">
@@ -305,7 +324,7 @@
                                     </div>
 
                                 </td>
-                                <td rowspan="4" style="width:0px"></td>
+                                <td rowspan="4" style="width: 0px"></td>
                             </tr>
                             <tr style="height: 240px">
                                 <td style="vertical-align: top" class="under_line">
@@ -447,31 +466,32 @@
                         <div style="width: 100%; height: 100%;">
                             <div style="height: 70px;">
                                 <div style="color: #b2b4b7; padding-top: 35px; margin-left: 26px; font-size: 30px; font-weight: 300;">Notes</div>
-                            </div>                            
+                            </div>
                             <dx:ASPxCallbackPanel runat="server" ID="notesCallbackPanel" ClientInstanceName="notesCallbackPanel" OnCallback="notesCallbackPanel_Callback">
                                 <PanelCollection>
                                     <dx:PanelContent>
                                         <div style="background: #f53e0d; color: white; min-height: 270px; margin-top: 35px">
-                                            <div style="margin-left: 30px; margin-right: 15px; padding-bottom:30px">
+                                            <div style="margin-left: 30px; margin-right: 15px; padding-bottom: 30px">
                                                 <h2 style="font-size: 30px; font-weight: 400; margin: 0px; padding-top: 35px; padding-bottom: 35px;">
                                                     <dx:ASPxMemo runat="server" ID="txtTitle" CssClass="notesTitleStyle" BackColor="Transparent" Border-BorderColor="Transparent" Font-Size="30px" ForeColor="White" NullText="Input Title" Height="35px" MaxLength="50">
                                                         <ClientSideEvents KeyDown="OnNotesKeyDown" Init="function(s,e){
                                                                                         s.GetInputElement().style.overflowY='hidden';
                                                                                         OnNotesKeyDown(s,e);}"
-                                                               GotFocus="function(s,e){ShowBorder(s);}" LostFocus="function(s,e){ShowBorder(s);}"  />
-                                                    </dx:ASPxMemo>                                                    
+                                                            GotFocus="function(s,e){ShowBorder(s);}" LostFocus="function(s,e){ShowBorder(s);}" />
+                                                    </dx:ASPxMemo>
                                                 </h2>
                                                 <div style="font-size: 14px; line-height: 24px; background: transparent !important; margin-bottom: 0px">
                                                     <dx:ASPxMemo runat="server" ID="txtNotesDescription" Border-BorderStyle="solid" Border-BorderColor="Transparent" BackColor="Transparent" Font-Size="14px" ForeColor="White" Width="100%" Height="13px" NullText="Description">
                                                         <ClientSideEvents KeyDown="OnNotesKeyDown" Init="function(s,e){
                                                                                         s.GetInputElement().style.overflowY='hidden';
                                                                                         OnNotesKeyDown(s,e);                                                               
-                                                                                    }" GotFocus="function(s,e){ShowBorder(s);}" LostFocus="function(s,e){ShowBorder(s);}"  />
+                                                                                    }"
+                                                            GotFocus="function(s,e){ShowBorder(s);}" LostFocus="function(s,e){ShowBorder(s);}" />
                                                     </dx:ASPxMemo>
                                                 </div>
                                                 <div style="padding-top: 40px; font-size: 24px; color: white">
                                                     <i class="fa fa-check-circle icon_btn" onclick="notesCallbackPanel.PerformCallback('Save|<%= CurrentNote.NoteId%>')"></i>
-                                                    <i class="fa fa-times-circle icon_btn note_button_margin" style="display:none"></i>
+                                                    <i class="fa fa-times-circle icon_btn note_button_margin" style="display: none"></i>
                                                     <i class="fa fa-trash-o icon_btn note_button_margin" onclick='notesCallbackPanel.PerformCallback("Delete|<%= CurrentNote.NoteId%>")'></i>
                                                 </div>
                                             </div>
@@ -479,7 +499,7 @@
                                         <div style="margin-top: 10px; margin-left: -35px; font-size: 18px">
                                             <ul>
                                                 <% For Each note In PortalNotes%>
-                                                <li class="right_palne_menu" style="cursor:pointer" onclick="notesCallbackPanel.PerformCallback('Show|<%= note.NoteId%>')"><%= note.Title%>
+                                                <li class="right_palne_menu" style="cursor: pointer" onclick="notesCallbackPanel.PerformCallback('Show|<%= note.NoteId%>')"><%= note.Title%>
                                                 </li>
                                                 <%Next%>
                                             </ul>
