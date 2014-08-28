@@ -181,7 +181,7 @@
                             </div>
                          
                             <dx:ASPxListBox runat="server" ID="listboxEmployee" Height="450" TextField="Name" ValueField="EmployeeID"
-                                SelectedIndex="0" Width="100%" Border-BorderStyle="None">
+                                SelectedIndex="0" Width="100%" Border-BorderStyle="None" Font-Size="14px">
                                 <Border BorderStyle="None"></Border>
                                 <Items>
                                     <dx:ListEditItem Text="Allen Glover" Value="1" />
