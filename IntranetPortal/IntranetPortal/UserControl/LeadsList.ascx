@@ -364,15 +364,17 @@
 
     // to do by steven
     function SortLeadsList(s) {
+        var classDesc = "fa fa-sort-amount-desc icon_btn tooltip-examples";
+        var classAsc = "fa fa-sort-amount-asc icon_btn tooltip-examples";
         var sort = s.getAttribute("class");
-       
-        if (sort == "fa fa-sort-amount-desc") {
-            s.setAttribute("class", "fa fa-sort-amount-asc");
+
+        if (sort.indexOf("-desc")>0) {
+            s.setAttribute("class", classAsc);
             gridLeads.SortBy("LastUpdate", "ASC");
         }
         else {
-            if (sort == "fa fa-sort-amount-asc") {
-                s.setAttribute("class", "fa fa-sort-amount-desc");
+            if (sort.indexOf("-asc")>0) {
+                s.setAttribute("class", classDesc);
                 gridLeads.SortBy("LastUpdate", "DSC");
             }
         }
@@ -413,7 +415,7 @@
                     <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
                 </span>
                 <div class="icon_right_s">
-                    <i class="fa fa-sort-amount-desc" style="cursor: pointer; font-size: 18px" onclick="SortLeadsList(this)"></i>
+                    <i class="fa fa-sort-amount-desc icon_btn tooltip-examples" title="Sort" style="cursor: pointer; font-size: 18px" onclick="SortLeadsList(this)"></i>
                     <i class="fa fa-compress icon_btn tooltip-examples" style="font-size: 18px;" title="Expand or Collapse All" onclick="expandAllClick(this)" runat="server" id="divExpand"></i>
                 </div>
             </div>
