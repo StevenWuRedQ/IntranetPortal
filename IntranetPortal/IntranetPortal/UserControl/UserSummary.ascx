@@ -422,8 +422,8 @@
                             <tr>
                                 <td colspan="3">
                                     <div style="width: 815px; height: auto; background: #fff5e7; border-left: 5px solid #ff400d; margin-top: 5px; padding-top: 0px; color: #2b586f; font: 14px 'PT Serif'; font-style: italic; margin-left: 35px;">
-                                        <div style="float: left; font-size: 60px; margin-left: 30px; margin-top: 18px;">“</div>
-                                        <p style="width: 74%; padding-top: 35px; padding-bottom: 30px; padding-left: 65px;">
+                                        <div style="float: left; font-size: 60px; margin-left: 30px; margin-top: 5px;">“</div>
+                                        <p style="width: 90%; padding-top: 20px; padding-bottom: 20px; padding-left: 65px;">
                                             <%= HtmlBlackQuote(Quote)%>
                                             <%--To accomplish great things, we must not only act, but also dream, not only plan, but also believe.”
         - Anatole France--%>
