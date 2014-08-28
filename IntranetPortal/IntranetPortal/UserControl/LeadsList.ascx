@@ -407,20 +407,20 @@
 </script>
 <%--id="leads_list_left"--%>
 <div style="width: 100%; height: 100%;" class="color_gray">
-    <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px" class="clearfix">
+    <div style="margin: 30px 10px 10px 10px; text-align: left;" class="clearfix">
         <div style="font-size: 24px;" class="clearfix">
             <div class="clearfix">
                 <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
                 <span style="color: #234b60; font-size: 30px;">
                     <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
                 </span>
-                <i class="fa fa-sort-amount-desc icon_right_s" style="cursor: pointer" onclick="SortLeadsList(this)"></i>
+                <div class="icon_right_s">
+                     <i class="fa fa-sort-amount-desc " style="cursor: pointer; font-size:18px" onclick="SortLeadsList(this)"></i>
+                <i runat="server" id="divExpand" visible="false" class="fa fa-<%= If(gridLeads.IsRowExpanded(0),"expand","compress") %> icon_btn tooltip-examples " style="font-size:18px;" title="Expand or Collapse All" onclick="expandAllClick(this)"></i>
+                </div>
+               
             </div>
-            <div style="float:right" runat="server" id="divExpand" visible="false">
-                <i class="fa fa-<%= If(gridLeads.IsRowExpanded(0),"expand","compress") %> icon_btn tooltip-examples color_black" title="Expand or Collapse All" onclick="expandAllClick(this)"></i>
-                <%--<i class="fa fa-compress icon_btn tooltip-examples" style="margin-left:10px" title="Collapse All" onclick="gridLeads.CollapseAll()"></i>--%>
-                
-            </div>
+            
         </div>
         <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>

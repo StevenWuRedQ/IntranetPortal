@@ -52,6 +52,7 @@ Public Class LeadsList
 
             gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
             divExpand.Visible = True
+
             'Show Manager Menu
             LeadsSubMenu.PopupMenu.Items.FindByName("Reassign").Visible = True
             BindEmployeeList()
