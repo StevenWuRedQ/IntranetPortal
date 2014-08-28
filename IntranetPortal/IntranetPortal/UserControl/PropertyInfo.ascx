@@ -46,7 +46,7 @@
         <dx:ASPxPanel ID="UpatingPanel" runat="server">
             <PanelCollection>
                 <dx:PanelContent runat="server">
-                    <div style="margin: 30px 20px; height: 30px; background: #ffefe4; color: #ff400d; border-radius: 15px; font-size: 14px; line-height: 30px;">
+                    <div style="margin: 30px 20px;margin-bottom:0px; height: 30px; background: #ffefe4; color: #ff400d; border-radius: 15px; font-size: 14px; line-height: 30px;">
                         <i class="fa fa-spinner fa-spin" style="margin-left: 30px"></i>
                         <span style="padding-left: 22px">Lead is being updated, it will take a few minutes to complete.</span>
                     </div>
@@ -54,7 +54,7 @@
             </PanelCollection>
         </dx:ASPxPanel>
         <%--time label--%>
-        <div style="height: 80px; font-size: 30px; margin-left: 30px;" class="font_gray">
+        <div style="height: 80px; font-size: 30px; margin-left: 30px;margin-top:20px;" class="font_gray">
             <div style="font-size: 30px">
                 <i class="fa fa-refresh"></i>
                 <span style="margin-left: 19px;"><%= LeadsInfoData.LastUpdate.ToString%></span>
