@@ -378,30 +378,28 @@
         }
     }
     function expandAllClick(s) {
-        if(gridLeads.IsGroupRowExpanded(0))
-        {
+        if (gridLeads.IsGroupRowExpanded(0)) {
             gridLeads.CollapseAll();
-            $(s).attr("class", 'fa fa-compress icon_btn tooltip-examples color_black');
+            $(s).attr("class", 'fa fa-compress icon_btn tooltip-examples');
         }
-        else
-        {
+        else {
             gridLeads.ExpandAll();
-            $(s).attr("class", 'fa fa-expand icon_btn tooltip-examples color_black');
+            $(s).attr("class", 'fa fa-expand icon_btn tooltip-examples');
         }
     }
-       
-    $(document).ready(function () {
+
+    $(document).ready(function () {        
         //Handler for .ready() called.
         var leads_list_grid = $("#leads_list_left");
         //alert("scrollHeight =" + document.getElementById("leads_list_left").scrollHeight + "height =" + leads_list_grid.height())
-        if (document.getElementById("leads_list_left").scrollHeight > leads_list_grid.height()) {
+                
+        if (LeadCategory.GetText() != "Create") {//document.getElementById("leads_list_left").scrollHeight > leads_list_grid.height()) {
             $("#leads_list_left").mCustomScrollbar(
             {
                 theme: "minimal-dark"
             }
             );
         }
-
     });
 
 </script>
@@ -415,18 +413,18 @@
                     <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
                 </span>
                 <div class="icon_right_s">
-                     <i class="fa fa-sort-amount-desc " style="cursor: pointer; font-size:18px" onclick="SortLeadsList(this)"></i>
-                <i runat="server" id="divExpand" visible="false" class="fa fa-<%= If(gridLeads.IsRowExpanded(0),"expand","compress") %> icon_btn tooltip-examples " style="font-size:18px;" title="Expand or Collapse All" onclick="expandAllClick(this)"></i>
+                    <i class="fa fa-sort-amount-desc " style="cursor: pointer; font-size: 18px" onclick="SortLeadsList(this)"></i>
+                    <i class="fa fa-compress icon_btn tooltip-examples" style="font-size: 18px;" title="Expand or Collapse All" onclick="expandAllClick(this)" runat="server" id="divExpand"></i>
                 </div>
-               
+
             </div>
-            
+
         </div>
         <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
     </div>
     <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
-        <dx:ASPxGridView runat="server"  EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
+        <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
             <Columns>
                 <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
                 </dx:GridViewCommandColumn>

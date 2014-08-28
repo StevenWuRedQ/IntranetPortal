@@ -208,7 +208,7 @@ Public Class LeadsList
         If CategoryName = "Create" AndAlso Not Page.IsCallback Then
             gridLeads.SettingsBehavior.AllowClientEventsOnLoad = False
             gridLeads.AddNewRow()
-            lblLeadCategory.Text = "New Leads"
+            lblLeadCategory.Text = "Create"
 
             'Show Delete Leads Menu
             'popupMenuLeads.Items.FindByName("Delete").Visible = True
