@@ -480,7 +480,5 @@
 <script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 
 <script type="text/javascript">
-
-
     init_currency();
 </script>

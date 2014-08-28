@@ -17,7 +17,6 @@
     <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
-
     <link rel="stylesheet" href="css/normalize.min.css" />
     <link rel="stylesheet" href="/scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="css/main.css" />
@@ -62,9 +61,8 @@
         //    } else {
         //        alert('tooltip function can not found' + $(".tooltip-examples").tooltip);
         //    }
-
         //}
-        //inittooltips();
+
     </script>
 </head>
 <body onload="init();">
@@ -188,10 +186,10 @@
                                                                     </span>
                                                                     <img src="/images/arrow_down.png" />
                                                                     <%--<asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />--%>
-                                                                    <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click"  Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>' >                                                                
+                                                                    <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>'>                                                                
                                                                     </asp:LinkButton>
 
-                                                                    
+
                                                                     <div style="display: none">
                                                                         [<asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />
                                                                         |<a href="/Account/ChangePassword.aspx" visible="false">Setting</a>]
@@ -485,5 +483,9 @@
     <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>--%>
     <script src="/Scripts/js/main.js"></script>
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    
+    <script type="text/javascript">
+        //inittooltips();
+    </script>
 </body>
 </html>
