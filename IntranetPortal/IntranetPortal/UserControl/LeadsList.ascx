@@ -381,12 +381,12 @@
         if(gridLeads.IsGroupRowExpanded(0))
         {
             gridLeads.CollapseAll();
-            $(s).attr("class", 'fa fa-compress icon_btn tooltip-examples');
+            $(s).attr("class", 'fa fa-compress icon_btn tooltip-examples color_black');
         }
         else
         {
             gridLeads.ExpandAll();
-            $(s).attr("class", 'fa fa-expand icon_btn tooltip-examples');
+            $(s).attr("class", 'fa fa-expand icon_btn tooltip-examples color_black');
         }
     }
        
@@ -417,7 +417,7 @@
                 <i class="fa fa-sort-amount-desc icon_right_s" style="cursor: pointer" onclick="SortLeadsList(this)"></i>
             </div>
             <div style="float:right">
-                <i class="fa fa-<%= If(gridLeads.IsRowExpanded(0),"expand","compress") %> icon_btn tooltip-examples" title="Expand or Collapse All" onclick="expandAllClick(this)"></i>
+                <i class="fa fa-<%= If(gridLeads.IsRowExpanded(0),"expand","compress") %> icon_btn tooltip-examples color_black" title="Expand or Collapse All" onclick="expandAllClick(this)"></i>
                 <%--<i class="fa fa-compress icon_btn tooltip-examples" style="margin-left:10px" title="Collapse All" onclick="gridLeads.CollapseAll()"></i>--%>
                 
             </div>

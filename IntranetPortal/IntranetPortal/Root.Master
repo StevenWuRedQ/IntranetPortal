@@ -53,7 +53,18 @@
             splitterRightDefaultPage.AdjustControl();
             alert('splitterRightDefaultPage resize');
         }
+        //function inittooltips() {
+        //    alert("runed two times ?");
+        //    if ($(".tooltip-examples").tooltip) {
+        //        $(".tooltip-examples").tooltip({
+        //            placement: 'bottom'
+        //        });
+        //    } else {
+        //        alert('tooltip function can not found' + $(".tooltip-examples").tooltip);
+        //    }
 
+        //}
+        //inittooltips();
     </script>
 </head>
 <body onload="init();">
@@ -177,7 +188,7 @@
                                                                     </span>
                                                                     <img src="/images/arrow_down.png" />
                                                                     <%--<asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />--%>
-                                                                    <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click"  Text='<i class="fa fa-sign-out icon_btn color_black" style="margin-left:10px;color: black;"></i>' >                                                                
+                                                                    <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click"  Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>' >                                                                
                                                                     </asp:LinkButton>
 
                                                                     
