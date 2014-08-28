@@ -460,7 +460,7 @@ a:focus {
 	color: #446576;
 	height: 100%;
 	margin: 0;
-	max-width: 280px;
+	min-width: 280px;
 }
 
 #global-nav ul,

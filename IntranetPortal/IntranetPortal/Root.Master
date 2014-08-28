@@ -184,7 +184,7 @@
                                                                     Good morning, <span style="font-weight: 900;">
                                                                         <asp:LoginName ID="HeadLoginName" runat="server" />
                                                                     </span>
-                                                                    <img src="/images/arrow_down.png" />
+                                                                   <%-- <img src="/images/arrow_down.png" />--%>
                                                                     <%--<asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />--%>
                                                                     <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>'>                                                                
                                                                     </asp:LinkButton>

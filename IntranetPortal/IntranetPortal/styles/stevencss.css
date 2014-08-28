@@ -377,7 +377,7 @@ div.form_head {
     }
 
 .form_div_node {
-    width: 190px;
+    width: 30%;
     height: 45px;
     border-bottom: 1px solid #dde0e7;
     float: left;
@@ -1416,4 +1416,26 @@ i.log_item_hl_buttons {
 .group_text_margin
 {
     margin-left:10px;
+}
+.dxgvFocusedRow_MetropolisBlue1 .search_pop_data_s {
+    color: #fff;
+}
+
+#ctl00_ctl00_MainSplitter_pcMain_gridSearch_col0
+{
+    background: transparent;
+}
+
+#ctl00_ctl00_MainSplitter_pcMain_gridSearch_col3
+{
+    background: transparent;
+}
+
+#ctl00_ctl00_MainSplitter_pcMain_gridSearch_DXMainTable
+{
+    background: transparent;
+}
+#ctl00_ctl00_MainSplitter_pcMain_gridSearch
+{
+    background: transparent;
 }

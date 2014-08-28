@@ -32,7 +32,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="font-size: 12px; color: #9fa1a8; font-family: 'Source Sans Pro'; width: 640px">
+        <div style="font-size: 12px; color: #9fa1a8;">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
                 <li class="short_sale_head_tab activity_light_blue">

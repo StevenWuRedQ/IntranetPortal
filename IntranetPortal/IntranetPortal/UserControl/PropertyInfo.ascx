@@ -142,7 +142,7 @@
 
 
             <%--line 1--%>
-            <div class="form_div_node" style="width: 405px">
+            <div class="form_div_node" style="width:63%">
                 <span class="form_input_title">address</span>
 
                 <input class="text_input" value="<%= LeadsInfoData.PropertyAddress%>" />
