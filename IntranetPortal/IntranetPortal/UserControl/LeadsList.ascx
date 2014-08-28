@@ -2,7 +2,7 @@
 
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
-<script type="text/javascript">           
+<script type="text/javascript">
 
     var postponedCallbackRequired = false;
     var leadsInfoBBLE = null;
@@ -201,7 +201,7 @@
     //        }
     //    }
     //}
-                   
+
 
     //function ShowPropertyMap(propBBLE) {
     //    tmpBBLE = propBBLE;
@@ -279,134 +279,154 @@
     //    e.item.SetChecked(false);
     //}
 
-                    function SearchGridLeads() {
-                        var filterCondition = "";
-                        var key = txtkeyWordClient.GetText();
+    function SearchGridLeads() {
+        var filterCondition = "";
+        var key = txtkeyWordClient.GetText();
 
-                        filterCondition = "[LeadsName] LIKE '%" + key + "%' OR [Neighborhood] LIKE '%" + key + "%'";
-                        filterCondition += " OR [EmployeeName] LIKE '%" + key + "%'";
-                        gridLeads.PerformCallback("Search|" + key);
-                        //gridLeads.ApplyFilter(filterCondition);
-                    }
+        filterCondition = "[LeadsName] LIKE '%" + key + "%' OR [Neighborhood] LIKE '%" + key + "%'";
+        filterCondition += " OR [EmployeeName] LIKE '%" + key + "%'";
+        gridLeads.PerformCallback("Search|" + key);
+        //gridLeads.ApplyFilter(filterCondition);
+    }
 
-                    var streets = null;
-                    function BindStreetValues(result) {
-                        cbStreetlookupClient.SetEnabled(false);
-                        streets = result.split(';');
-                        //alert(cbStreetlookupClient.GetEnabled());
-                        cbStreetlookupClient.BeginUpdate();
-                        cbStreetlookupClient.ClearItems();
-                        for (var i = 0; i < streets.length - 1; i++)
-                            cbStreetlookupClient.AddItem(streets[i], streets[i]);
-                        cbStreetlookupClient.EndUpdate();
-                        cbStreetlookupClient.SetEnabled(true);
-                        //alert(cbStreetlookupClient.GetEnabled());
-                    }
+    var streets = null;
+    function BindStreetValues(result) {
+        cbStreetlookupClient.SetEnabled(false);
+        streets = result.split(';');
+        //alert(cbStreetlookupClient.GetEnabled());
+        cbStreetlookupClient.BeginUpdate();
+        cbStreetlookupClient.ClearItems();
+        for (var i = 0; i < streets.length - 1; i++)
+            cbStreetlookupClient.AddItem(streets[i], streets[i]);
+        cbStreetlookupClient.EndUpdate();
+        cbStreetlookupClient.SetEnabled(true);
+        //alert(cbStreetlookupClient.GetEnabled());
+    }
 
-                    function OnRequestUpdate(bble) {
-                        // ASPxPopupSetAsTaskControl.ShowAtElement(s.GetMainElement());
-                        //if (typeof (ASPxPopupSetAsTaskControl) != "undefined") {
-                        //    ASPxPopupSetAsTaskControl.Show();
-                        //}
-                        isSendRequest = false;
-                        if (cbPanelRequestUpdate.InCallback()) {
+    function OnRequestUpdate(bble) {
+        // ASPxPopupSetAsTaskControl.ShowAtElement(s.GetMainElement());
+        //if (typeof (ASPxPopupSetAsTaskControl) != "undefined") {
+        //    ASPxPopupSetAsTaskControl.Show();
+        //}
+        isSendRequest = false;
+        if (cbPanelRequestUpdate.InCallback()) {
 
-                        }
-                        else {
-                            ASPxPopupRequestUpdateControl.SetHeaderText("Request Update - " + bble);
-                            ASPxPopupRequestUpdateControl.Show();
-                            cbPanelRequestUpdate.PerformCallback(bble);
-                        }
-                    }
+        }
+        else {
+            ASPxPopupRequestUpdateControl.SetHeaderText("Request Update - " + bble);
+            ASPxPopupRequestUpdateControl.Show();
+            cbPanelRequestUpdate.PerformCallback(bble);
+        }
+    }
 
-                    var isSendRequest = false;
-                    function OnEndCallbackPanelRequestUpdate(s, e) {
-                        if (isSendRequest) {
-                            gridLeads.CancelEdit();
-                            //gridLeads.Refresh();
-                            alert("Request update is send.");
-                        }
-                    }
+    var isSendRequest = false;
+    function OnEndCallbackPanelRequestUpdate(s, e) {
+        if (isSendRequest) {
+            gridLeads.CancelEdit();
+            //gridLeads.Refresh();
+            alert("Request update is send.");
+        }
+    }
 
-                    var lastBorough = null;
-                    var loadedBorough = null;
-                    function OnBoroughChanged(cbBorough) {
-                        if (cbStreetlookupClient.InCallback())
-                            lastBorough = cbBorough.GetValue().toString();
-                        else {
-                            loadedBorough = cbBorough.GetValue().toString();
-                            cbStreetlookupClient.PerformCallback(loadedBorough);
-                        }
-                    }
+    var lastBorough = null;
+    var loadedBorough = null;
+    function OnBoroughChanged(cbBorough) {
+        if (cbStreetlookupClient.InCallback())
+            lastBorough = cbBorough.GetValue().toString();
+        else {
+            loadedBorough = cbBorough.GetValue().toString();
+            cbStreetlookupClient.PerformCallback(loadedBorough);
+        }
+    }
 
-                    function OnStreetlookupEndCallback(s, e) {
-                        if (lastBorough) {
-                            loadedBorough = lastBorough;
-                            cbStreetlookupClient.PerformCallback(lastBorough);
-                            lastBorough = null;
-                        }
-                    }
+    function OnStreetlookupEndCallback(s, e) {
+        if (lastBorough) {
+            loadedBorough = lastBorough;
+            cbStreetlookupClient.PerformCallback(lastBorough);
+            lastBorough = null;
+        }
+    }
 
-                    function AdjustPopupSize(popup) {
-                        if (popup.GetMaximized()) {
-                            //popup.SetWindowMaximized(false);
-                            popup.SetMaximized(false);
-                        }            
-                        else {
-                            //popup.SetWindowMaximized(true);
-                            popup.SetMaximized(true);
-                        }
+    function AdjustPopupSize(popup) {
+        if (popup.GetMaximized()) {
+            //popup.SetWindowMaximized(false);
+            popup.SetMaximized(false);
+        }
+        else {
+            //popup.SetWindowMaximized(true);
+            popup.SetMaximized(true);
+        }
 
-                        popup.AdjustControl();
-                    }
+        popup.AdjustControl();
+    }
 
- 
 
-                    // to do by steven
-                    function SortLeadsList(s) {
-                        var sort = s.getAttribute("class");
 
-                        if (sort == "fa fa-sort-amount-desc icon_right_s") {
-                            s.setAttribute("class", "fa fa-sort-amount-asc icon_right_s");
-                            gridLeads.SortBy("LastUpdate", "ASC");
-                        }
-                        else {
-                            if (sort == "fa fa-sort-amount-asc icon_right_s") {
-                                s.setAttribute("class", "fa fa-sort-amount-desc icon_right_s");
-                                gridLeads.SortBy("LastUpdate", "DSC");
-                            }
-                        }
-                    }
-                    $(document).ready(function () {
-                        //Handler for .ready() called.
-                        var leads_list_grid = $("#leads_list_left");
-                        //alert("scrollHeight =" + document.getElementById("leads_list_left").scrollHeight + "height =" + leads_list_grid.height())
-                        if (document.getElementById("leads_list_left").scrollHeight > leads_list_grid.height()) {
-                            $("#leads_list_left").mCustomScrollbar(
-                            {
-                                theme: "minimal-dark"
-                            }
-                            );
-                        }
+    // to do by steven
+    function SortLeadsList(s) {
+        var sort = s.getAttribute("class");
 
-                    });
-  
+        if (sort == "fa fa-sort-amount-desc icon_right_s") {
+            s.setAttribute("class", "fa fa-sort-amount-asc icon_right_s");
+            gridLeads.SortBy("LastUpdate", "ASC");
+        }
+        else {
+            if (sort == "fa fa-sort-amount-asc icon_right_s") {
+                s.setAttribute("class", "fa fa-sort-amount-desc icon_right_s");
+                gridLeads.SortBy("LastUpdate", "DSC");
+            }
+        }
+    }
+    function expandAllClick(s) {
+        if(gridLeads.IsGroupRowExpanded(0))
+        {
+            gridLeads.CollapseAll();
+            $(s).attr("class", 'fa fa-compress icon_btn tooltip-examples');
+        }
+        else
+        {
+            gridLeads.ExpandAll();
+            $(s).attr("class", 'fa fa-expand icon_btn tooltip-examples');
+        }
+    }
+       
+    $(document).ready(function () {
+        //Handler for .ready() called.
+        var leads_list_grid = $("#leads_list_left");
+        //alert("scrollHeight =" + document.getElementById("leads_list_left").scrollHeight + "height =" + leads_list_grid.height())
+        if (document.getElementById("leads_list_left").scrollHeight > leads_list_grid.height()) {
+            $("#leads_list_left").mCustomScrollbar(
+            {
+                theme: "minimal-dark"
+            }
+            );
+        }
+
+    });
+
 </script>
 <%--id="leads_list_left"--%>
 <div style="width: 100%; height: 100%;" class="color_gray">
     <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px" class="clearfix">
         <div style="font-size: 24px;" class="clearfix">
-            <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
-            <span style="color: #234b60; font-size: 30px;">
-                <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
-            </span>
-            <i class="fa fa-sort-amount-desc icon_right_s" style="cursor: pointer" onclick="SortLeadsList(this)"></i>
+            <div class="clearfix">
+                <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
+                <span style="color: #234b60; font-size: 30px;">
+                    <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
+                </span>
+                <i class="fa fa-sort-amount-desc icon_right_s" style="cursor: pointer" onclick="SortLeadsList(this)"></i>
+            </div>
+            <div style="float:right">
+                <i class="fa fa-<%= If(gridLeads.IsRowExpanded(0),"expand","compress") %> icon_btn tooltip-examples" title="Expand or Collapse All" onclick="expandAllClick(this)"></i>
+                <%--<i class="fa fa-compress icon_btn tooltip-examples" style="margin-left:10px" title="Collapse All" onclick="gridLeads.CollapseAll()"></i>--%>
+                
+            </div>
         </div>
         <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
     </div>
     <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
-        <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
+        <dx:ASPxGridView runat="server"  EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
             <Columns>
                 <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
                 </dx:GridViewCommandColumn>
@@ -422,11 +442,11 @@
                             <table style="height: 30px">
                                 <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
                                     <td style="width: 80px;">
-                                         <span class="font_black">
+                                        <span class="font_black">
                                             <i class="fa fa-calendar-o font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
                                         </span>
                                     </td>
-                                   
+
                                     <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")","")%></span>
                                     </td>
@@ -461,7 +481,7 @@
                                 <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
 
                                     <td style="width: 80px;">
-                                         <span class="font_black">
+                                        <span class="font_black">
                                             <i class="fa fa-user font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
                                         </span>
                                     </td>
@@ -867,9 +887,8 @@
     <dx:ASPxCallback runat="server" ClientInstanceName="reassignCallback" ID="reassignCallback" OnCallback="reassignCallback_Callback">
         <ClientSideEvents CallbackComplete="function(s,e){ gridLeads.Refresh();}" />
     </dx:ASPxCallback>
-  <%--  <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
+    <%--  <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
         <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
     </dx:ASPxCallback>--%>
-
 </div>
 
