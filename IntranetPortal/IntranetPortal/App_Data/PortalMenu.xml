@@ -367,5 +367,31 @@
         </Items>
       </PortalNavItem>
     </Items>
-  </PortalNavItem> 
+  </PortalNavItem>
+  <PortalNavItem Name="PortalManagement" Text="Management" NavigationUrl="#" ShowAmount="false"  ItemType="Manager" Expanded="false">
+    <UserRoles>Admin</UserRoles>
+    <Items>
+      <PortalNavItem Name="PortalEmployee" Text="Employee List" NavigationUrl="/Management/MgrEmployee.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="PortalRole" Text="Roles" NavigationUrl="/Management/MgrRole.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="PortalImportData" Text="Import Leads" NavigationUrl="/Management/ImportAgentData.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="PortalStatus" Text="Portal Status" NavigationUrl="/Management/PortalStatus.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+  </PortalNavItem>
+  
 </ArrayOfPortalNavItem>

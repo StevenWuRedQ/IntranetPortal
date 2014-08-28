@@ -3,46 +3,46 @@
 <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory"  PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
     <Items>
         <dx:MenuItem GroupName="Sort" Text="View Map" Name="GoogleStreet">
-            <Image Url="../images/drap_map_icons.png"></Image>
+            <Image Url="/images/drap_map_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="Google Map View" Name="GoogleMap" Image-Url="../images/drap_map_icons.png" ClientVisible="false">
-            <Image Url="../images/drap_map_icons.png"></Image>
+        <dx:MenuItem GroupName="Sort" Text="Google Map View" Name="GoogleMap" Image-Url="/images/drap_map_icons.png" ClientVisible="false">
+            <Image Url="/images/drap_map_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="Bing Bird View" Name="BingBird" Image-Url="../images/drap_map_icons.png" ClientVisible="false">
-            <Image Url="../images/drap_map_icons.png"></Image>
+        <dx:MenuItem GroupName="Sort" Text="Bing Bird View" Name="BingBird" Image-Url="/images/drap_map_icons.png" ClientVisible="false">
+            <Image Url="/images/drap_map_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="Priority" Name="Priority" Image-Url="../images/drap_prority_icons.png">
-            <Image Url="../images/drap_prority_icons.png"></Image>
+        <dx:MenuItem GroupName="Sort" Text="Priority" Name="Priority" Image-Url="/images/drap_prority_icons.png">
+            <Image Url="/images/drap_prority_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="Door Knock" Name="DoorKnock" Image-Url="../images/drap_prority_icons.png">
-            <Image Url="../images/drap_doorknock_icons.png"></Image>
+        <dx:MenuItem GroupName="Sort" Text="Door Knock" Name="DoorKnock" Image-Url="/images/drap_prority_icons.png">
+            <Image Url="/images/drap_doorknock_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="Follow Up" Name="Callback" Image-Url="../images/drap_follow_up_icons.png">
-            <Image Url="../images/drap_follow_up_icons.png"></Image>
+        <dx:MenuItem GroupName="Sort" Text="Follow Up" Name="Callback" Image-Url="/images/drap_follow_up_icons.png">
+            <Image Url="/images/drap_follow_up_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="Dead Lead" Name="DeadLead" Image-Url="../images/drap_deadlead_icons.png">
-            <Image Url="../images/drap_deadlead_icons.png"></Image>
+        <dx:MenuItem GroupName="Sort" Text="Dead Lead" Name="DeadLead" Image-Url="/images/drap_deadlead_icons.png">
+            <Image Url="/images/drap_deadlead_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="In Process" Name="InProcess" Image-Url="../images/drap_inprocess_icons.png">
-            <Image Url="../images/drap_inprocess_icons.png"></Image>
+        <dx:MenuItem GroupName="Sort" Text="In Process" Name="InProcess" Image-Url="/images/drap_inprocess_icons.png">
+            <Image Url="/images/drap_inprocess_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="View Lead" Name="ViewLead" Visible="false">
             <Image IconID="miscellaneous_viewonweb_16x16"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="Closed" Name="Closed" Image-Url="../images/drap_closed_icons.png">
-            <Image Url="../images/drap_closed_icons.png"></Image>
+        <dx:MenuItem GroupName="Sort" Text="Closed" Name="Closed" Image-Url="/images/drap_closed_icons.png">
+            <Image Url="/images/drap_closed_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Delete" Name="Delete" Visible="false">
-            <Image Url="../images/drap_closed_icons.png"></Image>
+            <Image Url="/images/drap_closed_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Reassign" Name="Reassign" Visible="false">
-            <Image Url="/images/assigned.png"></Image>
+            <Image Url="/images/assign_leads_icon.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="View Files" Name="ViewFiles">
-            <Image Url="../images/drap_viewfile_icons.png"></Image>
+            <Image Url="/images/drap_viewfile_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Upload Docs/Pics" Name="Upload">
-            <Image Url="../images/drap_upload_icons.png"></Image>
+            <Image Url="/images/drap_upload_icons.png"></Image>
         </dx:MenuItem>
     </Items>
     <ClientSideEvents ItemClick="OnLeadsCategoryClick" />

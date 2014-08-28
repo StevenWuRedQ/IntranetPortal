@@ -71,12 +71,7 @@ function mip() {
         success: afterloginsubmission
     }
     $('#portal-sign-in-form').ajaxForm(form_options);
-
-   
     
-
-
-
     $(window).load(function () {
         $('#landing-loader').fadeOut('slow', function () {
             setTimeout(function () {

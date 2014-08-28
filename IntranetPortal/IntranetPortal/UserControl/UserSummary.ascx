@@ -99,9 +99,6 @@
         background-color: #eff2f5 !important;
     }*/
     /*-------end-------------*/
-    .auto-style1 {
-        width: 400px;
-    }
 
     td.dxgv {
         border-bottom: 0px !important;
@@ -138,7 +135,7 @@
         </Pane>
     </Styles>
     <Panes>
-        <dx:SplitterPane MinSize="1000px">
+        <dx:SplitterPane ScrollBars="Auto">
             <ContentCollection>
                 <dx:SplitterContentControl>
                     <div style="display: inline-table; font-family: 'Source Sans Pro'; margin-left: 19px; margin-top: 15px;">
@@ -170,8 +167,8 @@
                         </div>
                     </div>
                     <%------end------%>
-                    <div style="float: left">
-                        <table style="width: 100%; vertical-align: top; height: 700px; margin-top: -21px; margin-left: 35px;">
+                    <div style="float: left;margin-right: 10px;margin-left: 35px;min-width: 1200px;">
+                        <table style="vertical-align: top; height: 700px; margin-top: -21px;">
                             <tr style="height: 240px">
                                 <td style="width: 380px; vertical-align: top" class="under_line">
                                     <%--add image by steven--%>
@@ -259,7 +256,7 @@
                                     </div>
                                 </td>
                                 <td rowspan="3" style="width: 50px"></td>
-                                <td rowspan="3" style="vertical-align: top;" class="auto-style1 ">
+                                <td rowspan="3" style="vertical-align: top; width:380px">
                                     <h4>
                                         <img src="../images/grid_calendar.png" class="vertical-img" /><span class="heading_text">Today's Calendar</span></h4>
                                     <div style="border: 1px solid #efefef; height: 615px">
@@ -308,7 +305,7 @@
                                     </div>
 
                                 </td>
-                                <td rowspan="4" style="width: 80px"></td>
+                                <td rowspan="4" style="width:0px"></td>
                             </tr>
                             <tr style="height: 240px">
                                 <td style="vertical-align: top" class="under_line">
@@ -424,7 +421,7 @@
                             </tr>
                             <tr>
                                 <td colspan="3">
-                                    <div style="width: 815px; height: auto; background: #fff5e7; border-left: 5px solid #ff400d; margin-top: 30px; padding-top: 0px; color: #2b586f; font: 14px 'PT Serif'; font-style: italic; margin-left: 35px;">
+                                    <div style="width: 815px; height: auto; background: #fff5e7; border-left: 5px solid #ff400d; margin-top: 5px; padding-top: 0px; color: #2b586f; font: 14px 'PT Serif'; font-style: italic; margin-left: 35px;">
                                         <div style="float: left; font-size: 60px; margin-left: 30px; margin-top: 18px;">“</div>
                                         <p style="width: 74%; padding-top: 35px; padding-bottom: 30px; padding-left: 65px;">
                                             <%= HtmlBlackQuote(Quote)%>
@@ -439,7 +436,7 @@
                 </dx:SplitterContentControl>
             </ContentCollection>
         </dx:SplitterPane>
-        <dx:SplitterPane Size="290px">
+        <dx:SplitterPane Size="290px" MinSize="280px">
             <PaneStyle BackColor="#EFF2F5"></PaneStyle>
             <Separator Visible="False"></Separator>
             <ContentCollection>
