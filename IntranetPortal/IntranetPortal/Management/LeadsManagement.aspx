@@ -93,7 +93,7 @@
             </VerticalSeparator>
         </Styles>
         <Panes>
-            <dx:SplitterPane Size="300px" MinSize="180px" ShowCollapseBackwardButton="True">
+            <dx:SplitterPane Size="300px" MinSize="300px" ShowCollapseBackwardButton="True">
                 <PaneStyle>
                     <Border BorderStyle="None" />
                 </PaneStyle>
@@ -165,7 +165,7 @@
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-            <dx:SplitterPane Name="ContentUrlPane" Size="300px">
+            <dx:SplitterPane Name="ContentUrlPane" Size="300px" MinSize="300px">
                 <PaneStyle Border-BorderStyle="None"></PaneStyle>
                 <ContentCollection>
                     <dx:SplitterContentControl runat="server">
@@ -210,14 +210,14 @@
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-            <dx:SplitterPane Name="RightPane" Size="730px" ScrollBars="None">                
+            <dx:SplitterPane Name="RightPane" Size="730px" MinSize="700px">                
                 <ContentCollection>
                     <dx:SplitterContentControl>
                         <uc1:LeadsInfo runat="server" ID="LeadsInfo" ShowLogPanel="false" />
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-            <dx:SplitterPane AllowResize="False" Separator-Visible="False">
+            <dx:SplitterPane Separator-Visible="False">
             </dx:SplitterPane>
         </Panes>
     </dx:ASPxSplitter>

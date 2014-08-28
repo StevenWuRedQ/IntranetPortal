@@ -89,7 +89,7 @@
             </Styles>
 
             <Panes>
-                <dx:SplitterPane Name="leftNavPane" Size="280">
+                <dx:SplitterPane Name="leftNavPane" Size="280" AllowResize="False">
                     <Panes>
                         <dx:SplitterPane Name="NavPane">
                             <Separator Visible="False"></Separator>

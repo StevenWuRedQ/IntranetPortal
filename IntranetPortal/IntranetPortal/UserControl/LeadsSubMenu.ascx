@@ -11,7 +11,7 @@
         <dx:MenuItem GroupName="Sort" Text="Bing Bird View" Name="BingBird" Image-Url="/images/drap_map_icons.png" ClientVisible="false">
             <Image Url="/images/drap_map_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="Priority" Name="Priority" Image-Url="/images/drap_prority_icons.png">
+        <dx:MenuItem GroupName="Sort" Text="Hot Leads" Name="Priority" Image-Url="/images/drap_prority_icons.png">
             <Image Url="/images/drap_prority_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Door Knock" Name="DoorKnock" Image-Url="/images/drap_prority_icons.png">
