@@ -20,7 +20,7 @@ Public Class UserSummary
         End Get
     End Property
 
-    Public Property CurrentNote As PortalNote
+    Public Property CurrentNote As New PortalNote
 
     Public Sub BindNotes()
         Dim notes = PortalNotes
@@ -31,6 +31,8 @@ Public Class UserSummary
             txtNotesDescription.Text = notes(0).Description
         Else
             CurrentNote = New PortalNote
+            txtTitle.Text = CurrentNote.Title
+            txtNotesDescription.Text = CurrentNote.Description
         End If
     End Sub
 
@@ -333,7 +335,7 @@ Public Class UserSummary
             If e.Parameter.StartsWith("Save") Then
                 Dim noteId = CInt(e.Parameter.Split("|")(1))
 
-                If noteId = -1 Then
+                If noteId <= 0 Then
                     Dim newNote = New PortalNote
                     newNote.Title = txtTitle.Text
                     newNote.Description = txtNotesDescription.Text
@@ -348,6 +350,8 @@ Public Class UserSummary
                     If note IsNot Nothing Then
                         note.Title = txtTitle.Text
                         note.Description = txtNotesDescription.Text
+                        note.UpdateBy = Page.User.Identity.Name
+                        note.UpdateTime = DateTime.Now
 
                         Context.SaveChanges()
                         CurrentNote = note

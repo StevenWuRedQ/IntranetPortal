@@ -107,20 +107,18 @@
             </div>
         </div>
 
-        <dx:ASPxPopupControl ClientInstanceName="aspxAddLeadsComments" Width="200px" Height="80px" ID="ASPxPopupControl2"
+        <dx:ASPxPopupControl ClientInstanceName="aspxAddLeadsComments" Width="550px" Height="50px" ID="ASPxPopupControl2"
             HeaderText="Add Comments" ShowHeader="false"
             runat="server" EnableViewState="false" PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="Middle" EnableHierarchyRecreation="True">
             <ContentCollection>
                 <dx:PopupControlContentControl>
                     <table>
                         <tr style="padding-top: 3px;">
-                            <td>
-                                <dx:ASPxTextBox runat="server" ID="txtLeadsComments" ClientInstanceName="txtLeadsComments"></dx:ASPxTextBox>
+                            <td style="width: 380px; vertical-align: central">
+                                <dx:ASPxTextBox runat="server" ID="txtLeadsComments" ClientInstanceName="txtLeadsComments" Width="360px"></dx:ASPxTextBox>
                             </td>
-                        </tr>
-                        <tr style="margin-top: 3px; line-height: 30px;">
-                            <td>
-                                <div style="margin-top:20px">
+                            <td style="text-align:right">
+                                <div>
                                     <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1">
                                         <ClientSideEvents Click="SaveLeadsComments" />
                                     </dx:ASPxButton>
