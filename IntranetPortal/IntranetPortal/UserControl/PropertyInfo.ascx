@@ -417,6 +417,7 @@
         <div style="margin: 20px;" class="clearfix">
             <div class="form_head" style="margin-top: 40px;">Liens</div>
             <dx:ASPxGridView runat="server" ID="gridLiens" KeyFieldName="LisPenID" Width="100%">
+                <SettingsBehavior AllowDragDrop="false" AllowSort="false" AllowGroup="false" />
                 <Columns>
                     <dx:GridViewDataTextColumn FieldName="Type" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Effective" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
