@@ -281,8 +281,6 @@ Public Class ActivityLogs
             BindData(hfBBLE.Value)
         End Sub
 
-
-
         Function GetCommentsIconClass(type As String)
             If String.IsNullOrEmpty(type) Then
             Return GetIcon("activity_green_bg", "fa fa-info")
