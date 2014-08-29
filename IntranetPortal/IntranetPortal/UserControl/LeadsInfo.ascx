@@ -302,13 +302,14 @@
                                                 <i class="fa fa-file head_tab_icon_padding"></i>
                                                 <div class="font_size_bold">Documents</div>
                                             </a>
+
                                         </li>
 
                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                         <li style="margin-left: 48px; color: #ffa484">
                                             <i class="fa fa-refresh sale_head_button tooltip-examples" title="Refresh" onclick="popupMenuRefreshClient.ShowAtElement(this)"></i>
-                                            <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail"></i>
-                                            <i class="fa fa-fax  sale_head_button sale_head_button_left tooltip-examples" title="Fax" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
+                                            <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" style="display:none"></i>
+                                            <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Share Leads" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
                                             <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>
                                         </li>
                                     </ul>
@@ -470,7 +471,7 @@
                                                 <dx:MenuItem Text="Custom" Name="Custom">
                                                 </dx:MenuItem>
                                             </Items>
-                                            <ClientSideEvents ItemClick="OnCallbackMenuClick" />                                          
+                                            <ClientSideEvents ItemClick="OnCallbackMenuClick" />
                                         </dx:ASPxPopupMenu>
                                         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="260px" Height="250px"
                                             MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="pcMain"
@@ -512,9 +513,16 @@
                                             HeaderText="Appointment" Modal="true"
                                             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
                                             <HeaderTemplate>
-                                                <div class="pop_up_header_margin">
-                                                    <i class="fa fa-clock-o with_circle pop_up_header_icon"></i>
-                                                    <span class="pop_up_header_text">Appointment</span>
+                                                <div class="clearfix">
+
+
+                                                    <div class="pop_up_header_margin">
+                                                        <i class="fa fa-clock-o with_circle pop_up_header_icon"></i>
+                                                        <span class="pop_up_header_text">Appointment</span>
+                                                    </div>
+                                                    <div class="pop_up_buttons_div">
+                                                        <i class="fa fa-times icon_btn" onclick="ASPxPopupScheduleClient.Hide()"></i>
+                                                    </div>
                                                 </div>
                                             </HeaderTemplate>
                                             <ContentCollection>
@@ -613,18 +621,24 @@
             <dx:ASPxPopupControl ClientInstanceName="AspxPopupShareleadClient" Width="356px" Height="450px" ID="aspxPopupShareleads"
                 HeaderText="Share Lead" Modal="true" ContentUrl="~/PopupControl/ShareLeads.aspx"
                 runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-                 <HeaderTemplate>
-                    <div class="pop_up_header_margin">
-                        <i class="fa fa-mail-forward with_circle pop_up_header_icon"></i>
-                        <span class="pop_up_header_text">Share Lead</span>
+                <HeaderTemplate>
+                    <div class="clearfix">
+                        <div class="pop_up_header_margin">
+                            <i class="fa fa-mail-forward with_circle pop_up_header_icon"></i>
+                            <span class="pop_up_header_text">Share Lead</span>
+                        </div>
+                        <div class="pop_up_buttons_div">
+                            <i class="fa fa-times icon_btn" onclick="AspxPopupShareleadClient.Hide()"></i>
+                        </div>
                     </div>
+
                 </HeaderTemplate>
             </dx:ASPxPopupControl>
 
             <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddPhoneNum" Width="200px" Height="80px" ID="ASPxPopupControl2"
                 HeaderText="Add Phone Number" ShowHeader="false"
                 runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
-               
+
                 <ContentCollection>
                     <dx:PopupControlContentControl>
                         <table>
@@ -656,5 +670,5 @@
     </PanelCollection>
     <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>
     <Border BorderStyle="None"></Border>
-    
+
 </dx:ASPxCallbackPanel>

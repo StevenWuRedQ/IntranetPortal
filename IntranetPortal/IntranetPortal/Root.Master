@@ -184,7 +184,7 @@
                                                                     Good morning, <span style="font-weight: 900;">
                                                                         <asp:LoginName ID="HeadLoginName" runat="server" />
                                                                     </span>
-                                                                   <%-- <img src="/images/arrow_down.png" />--%>
+                                                                    <%-- <img src="/images/arrow_down.png" />--%>
                                                                     <%--<asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />--%>
                                                                     <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>'>                                                                
                                                                     </asp:LinkButton>
@@ -265,7 +265,8 @@
                                                             </Styles>
                                                         </dx:ASPxGridView>
                                                         <asp:Panel ID="Panel1" runat="server">
-                                                            <table style="width: 100%; margin-top: -48px;">
+                                                            <%--margin-top: -48px; don't show button right side--%>
+                                                            <table style="width: 100%;">
                                                                 <tr>
                                                                     <td style="width: 79%"></td>
                                                                     <td>
@@ -410,8 +411,16 @@
         </dx:ASPxSplitter>
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMessagerControlClient" Width="460px" Height="350px"
             MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl2"
-            HeaderText="New Message" Modal="true"
+            Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+            <HeaderTemplate>
+                             
+                <div class="pop_up_header_margin">
+                    <i class="fa fa-envelope with_circle pop_up_header_icon"></i>
+                    <span class="pop_up_header_text">New Message</span>
+                </div>
+
+            </HeaderTemplate>
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server">
                     <dx:ASPxPageControl Width="100%" runat="server" ActiveTabIndex="0" TabSpacing="0px" EnableHierarchyRecreation="True" ShowTabs="false">
@@ -430,13 +439,13 @@
                                             </tr>
                                             <tr>
                                                 <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                                    <dx:ASPxButton ID="ASPxButton2" runat="server" Text="OK" AutoPostBack="false">
+                                                    <dx:ASPxButton ID="ASPxButton2" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
                                                         <ClientSideEvents Click="function(){
                                                                                                                         ReadMsg();                                                                                                                     
                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>
                                                     </dx:ASPxButton>
-                                                    <dx:ASPxButton ID="ASPxButton3" runat="server" Text="Go to Lead" AutoPostBack="false">
+                                                    <dx:ASPxButton ID="ASPxButton3" runat="server" Text="Go to Lead" AutoPostBack="false" CssClass="rand-button rand-button-blue">
                                                         <ClientSideEvents Click="function(){
                                                                                                                       PopupViewLead();                                                                                                                  
                                                                                                                                                                                                                                               
@@ -483,7 +492,7 @@
     <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>--%>
     <script src="/Scripts/js/main.js"></script>
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    
+
     <script type="text/javascript">
         //inittooltips();
     </script>

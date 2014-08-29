@@ -270,7 +270,7 @@
     <div style="padding: 20px; background: #f5f5f5" class="clearfix">
         <%--comment box and text--%>
 
-        <div style="float: left; height: 110px; min-width: 460px; width:60%; margin-top: 10px;">
+        <div style="float: left; height: 110px; min-width: 460px; width: 60%; margin-top: 10px;">
             <div class="clearfix">
                 <span style="color: #295268;" class="upcase_text">Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
                 <input type="radio" id="sex12" name="sex" value="Fannie" class="font_12" />
@@ -654,10 +654,16 @@
             HeaderText="Set as Task" Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
             <HeaderTemplate>
-                <div class="pop_up_header_margin">
-                    <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
-                    <span class="pop_up_header_text">Set as Task</span>
+                <div class="clearfix">
+                    <div class="pop_up_header_margin">
+                        <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
+                        <span class="pop_up_header_text">Set as Task</span>
+                    </div>
+                    <div class="pop_up_buttons_div">
+                        <i class="fa fa-times icon_btn" onclick="ASPxPopupSetAsTaskControl.Hide()"></i>
+                    </div>
                 </div>
+
             </HeaderTemplate>
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server">
@@ -715,7 +721,7 @@
                                                     </TabPages>
                                                 </dx:ASPxPageControl>
                                                 <div style="float: right; margin-top: -25px; display: block; margin-right: 3px;">
-                                                    <dx:ASPxButton ID="ASPxButton1" AutoPostBack="False" runat="server" Text="Close" Style="float: right" Paddings-Padding="0" CssClass="rand-button rand-button-gray" >
+                                                    <dx:ASPxButton ID="ASPxButton1" AutoPostBack="False" runat="server" Text="Close" Style="float: right" Paddings-Padding="0" CssClass="rand-button rand-button-gray">
                                                         <ClientSideEvents Click="function(s, e){ empCheckComboBox.HideDropDown(); }" />
                                                     </dx:ASPxButton>
                                                 </div>
@@ -778,7 +784,7 @@
                             <dx:LayoutItem Caption="Description" ShowCaption="False" HorizontalAlign="Right">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                        <dx:ASPxButton ID="ASPxButton4" runat="server" Text="OK" AutoPostBack="false" ClientSideEvents-Click="function(){ASPxPopupSelectDateControl.Hide();}"  CssClass="rand-button rand-button-blue">
+                                        <dx:ASPxButton ID="ASPxButton4" runat="server" Text="OK" AutoPostBack="false" ClientSideEvents-Click="function(){ASPxPopupSelectDateControl.Hide();}" CssClass="rand-button rand-button-blue">
                                             <ClientSideEvents Click="function(){
                                                                                                                         gridTrackingClient.PerformCallback('Task');
                                                                                                                         ASPxPopupSetAsTaskControl.Hide();                                                                                                                                                                                                                                         

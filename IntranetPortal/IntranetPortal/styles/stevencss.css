@@ -22,19 +22,18 @@
 .div-underline {
     height: 320px;
 }
-.color_black
-{
-    color:black;
+
+.color_black {
+    color: black;
 }
 /*test steven  ssss  ddddd added*/
-.tooltip-examples
-{
+.tooltip-examples {
+}
 
+.font_18 {
+    font-size: 18px;
 }
-.font_18
-{
-    font-size:18px;
-}
+
 .under-line-menu {
     border-bottom: 1px solid #2b586f;
     height: 47px;
@@ -382,7 +381,10 @@ div.form_head {
     border-bottom: 1px solid #dde0e7;
     float: left;
 }
-
+.form_div_node_small
+{
+    width:190px;
+}
 .border_under_line {
     border-bottom: 1px solid #dde0e7;
 }
@@ -632,6 +634,7 @@ i.with_circle {
 
 .pop_up_header_margin {
     margin-top: 10px;
+    float:left;
 }
 /*end pop up*/
 .agent_menu_list_item:hover {
@@ -1413,29 +1416,38 @@ i.log_item_hl_buttons {
     border:0px;
     border-top:5px solid #ff400d;
 }*/
-.group_text_margin
-{
-    margin-left:10px;
+.group_text_margin {
+    margin-left: 10px;
 }
+
 .dxgvFocusedRow_MetropolisBlue1 .search_pop_data_s {
     color: #fff;
 }
 
-#ctl00_ctl00_MainSplitter_pcMain_gridSearch_col0
-{
+#ctl00_ctl00_MainSplitter_pcMain_gridSearch_col0 {
     background: transparent;
 }
 
-#ctl00_ctl00_MainSplitter_pcMain_gridSearch_col3
-{
+#ctl00_ctl00_MainSplitter_pcMain_gridSearch_col3 {
     background: transparent;
 }
 
-#ctl00_ctl00_MainSplitter_pcMain_gridSearch_DXMainTable
-{
+#ctl00_ctl00_MainSplitter_pcMain_gridSearch_DXMainTable {
     background: transparent;
 }
-#ctl00_ctl00_MainSplitter_pcMain_gridSearch
-{
+
+#ctl00_ctl00_MainSplitter_pcMain_gridSearch {
     background: transparent;
+}
+
+.pop_up_buttons_div {
+    float: right;
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: -27px;
+    color: #2e2f31;
+}
+.input_currency
+{
+
 }

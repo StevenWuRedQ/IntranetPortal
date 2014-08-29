@@ -54,7 +54,7 @@
         HeaderText="Street View" AutoUpdatePosition="true" Modal="true" ContentUrlIFrameTitle="streetViewFrm"
         runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
         <HeaderTemplate>
-            <div>
+            <div class="clearfix">
                  <div style="float: right; position: relative; margin-right: 10px; margin-bottom: -27px; color: #2e2f31">
                     <i class="fa fa-expand icon_btn" style="margin-right: 10px" onclick="AdjustPopupSize(ASPxPopupMapControl)"></i>
                     <i class="fa fa-times icon_btn" onclick="ASPxPopupMapControl.Hide()"></i>

@@ -19,7 +19,7 @@
     }
 
     function init_currency() {
-
+        $('.input_currency').formatCurrency();
     }
 
     function SaveLeadsComments(s, e) {
@@ -32,7 +32,10 @@
     function DeleteComments(commentId) {
         leadsCommentsCallbackPanel.PerformCallback("Delete|" + commentId);
     }
-
+    $(document).ready(function () {
+        // Handler for .ready() called.
+        init_currency();
+    });
     //init_currency();
 </script>
 
@@ -221,7 +224,7 @@
             </div>
 
             <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Zoning (<span style="color: #0e9ee9">PDF</span>)</span>
+                <span class="form_input_title">Zoning (<span style="color: #0e9ee9;cursor:pointer">PDF</span>)</span>
 
                 <input class="text_input" value="<%=LeadsInfoData.Zoning%>" />
             </div>
@@ -273,7 +276,7 @@
             <%--line 1--%>
             <div class="form_div_node form_div_node_line_margin">
                 <span class="form_input_title">Zestimate</span>
-                <input class="text_input " onblur="$(this).formatCurrency();" type="text" value="$<%=LeadsInfoData.EstValue %>" />
+                <input class="text_input input_currency" onblur="$(this).formatCurrency();" type="text" value="$<%=LeadsInfoData.EstValue %>" />
             </div>
 
 
@@ -290,7 +293,7 @@
             <%--line 1--%>
             <div class="form_div_node form_div_node_line_margin">
                 <span class="form_input_title">1st Mortgage</span>
-                <input class="text_input" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.C1stMotgrAmt%>" />
+                <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.C1stMotgrAmt%>" />
             </div>
 
             <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
@@ -318,7 +321,7 @@
 
             <div class="form_div_node form_div_node_line_margin">
                 <span class="form_input_title">2nd Mortgage</span>
-                <input class="text_input" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.C2ndMotgrAmt%>" />
+                <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.C2ndMotgrAmt%>" />
             </div>
 
             <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
@@ -375,38 +378,32 @@
             <%----end line ----%>
             <div style="width: 230px" class="clearfix">
                 <%--line 4--%>
-                <script>
-                    function formatAsDollars(el) {
-                        el.value = el.value.replace('$', '');
-                        el.value = '$' + el.value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-                    }
-                </script>
-                <div class="form_div_node form_div_node_line_margin">
+                
+                <div class="form_div_node form_div_node_line_margin form_div_node_small">
                     <span class="form_input_title">Taxes</span>
-                    <input onblur="$(this).formatCurrency();" class="text_input" value="$<%=LeadsInfoData.TaxesAmt%>" />
+                    <input class="text_input input_currency" onblur="$(this).formatCurrency();"  value="$<%=LeadsInfoData.TaxesAmt%>" />
                 </div>
-
+              
 
                 <%----end line ----%>
                 <%--line 5--%>
 
-                <div class="form_div_node form_div_node_line_margin">
+                <div class="form_div_node form_div_node_line_margin form_div_node_small" >
                     <span class="form_input_title">water</span>
-                    <input class="text_input" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.WaterAmt%>" />
+                    <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.WaterAmt%>" />
                 </div>
                 <%----end line ----%>
                 <%--line 6--%>
 
-                <div class="form_div_node form_div_node_line_margin">
+                <div class="form_div_node form_div_node_line_margin form_div_node_small" >
                     <span class="form_input_title">ecb/dob</span>
                     <input class="text_input" value="<%= LeadsInfoData.ViolationAmount %>" />
                 </div>
                 <%--line 7--%>
 
-                <div class="form_div_node form_div_node_line_margin">
+                <div class="form_div_node form_div_node_line_margin form_div_node_small" >
                     <span class="form_input_title" style="color: #ff400d">Total debt</span>
-                    <input class="text_input" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.C1stMotgrAmt+LeadsInfoData.C2ndMotgrAmt+LeadsInfoData.TaxesAmt+LeadsInfoData.WaterAmt %>" />
+                    <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.C1stMotgrAmt+LeadsInfoData.C2ndMotgrAmt+LeadsInfoData.TaxesAmt+LeadsInfoData.WaterAmt %>" />
                 </div>
 
                 <%----end line ----%>

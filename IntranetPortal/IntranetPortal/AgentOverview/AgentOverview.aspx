@@ -442,9 +442,10 @@
 
                                                 <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" HeaderText="Save Report" ClientInstanceName="SaveReportPopup" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
                                                     <HeaderTemplate>
-                                                        <div class="pop_up_header_margin">
+                                                       
+                                                         <div class="pop_up_header_margin">
                                                             <i class="fa fa-save with_circle pop_up_header_icon"></i>
-                                                            <span class="pop_up_header_text">Set as Task</span>
+                                                            <span class="pop_up_header_text">Save Report</span>
                                                         </div>
                                                     </HeaderTemplate>
                                                     <ContentCollection>
