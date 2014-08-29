@@ -45,10 +45,20 @@ Public Class Login
             Dim names = StrConv(name, VbStrConv.ProperCase)
             OnlineUser.Refresh(HttpContext.Current)
             FormsAuthentication.SetAuthCookie(name, CBool(rememberMe))
-            e.Result = True
-        Else
-            e.Result = False
-        End If
 
+            If password = System.Configuration.ConfigurationManager.AppSettings("DefaultPassword").ToString Then
+                e.Result = LoginStatus.FIRSTLOGIN
+            Else
+                e.Result = LoginStatus.SUCCESS
+            End If
+        Else
+            e.Result = LoginStatus.FAILED
+        End If
     End Sub
+
+    Enum LoginStatus
+        SUCCESS = 1
+        FAILED = 2
+        FIRSTLOGIN = 3
+    End Enum
 End Class

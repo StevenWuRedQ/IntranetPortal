@@ -27,16 +27,18 @@
             
             LogInCallBackClinet.PerformCallback($('#username').val() + '|' + $('#password').val() + '|' + rbMe)
         }
+
         function LogInComplete(result) {
 
             //alert('mid ' + mid + 'afterloginsubmission' + afterloginsubmission);
-            if (result != 'False') {
+            if (result == 1) {
                 window.location.replace("/default.aspx");
             }
             else {
-
-                afterloginsubmission();
-
+                if (result == 3)
+                    window.location.replace("/account/changepassword.aspx")
+                else
+                    afterloginsubmission();
             }
         }
 
@@ -79,7 +81,7 @@
                                 <input id="remember-me" name="remember-me" type="checkbox" />
                                 <label for="remember-me">Remember Me</label>
                             </div>
-                            <input id="sign-in-button" class="sif-button" type="button" value="Sign In" onclick="onLogIn()" />
+                            <input id="sign-in-button" class="sif-button" type="button" value="Sign In" onclick="onLogIn()" />                          
                         </div>
                     </div>
                 </section>
@@ -91,7 +93,7 @@
         <dx:ASPxCallback runat="server" ID="LogInCallBack" ClientInstanceName="LogInCallBackClinet" OnCallback="LogInCallBack_Callback">
             <ClientSideEvents CallbackComplete="function(s,e){LogInComplete(e.result);}" />
         </dx:ASPxCallback>
-    </form>
+   
     <!--END LANDING-->
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -103,8 +105,7 @@
     <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
     <script src="/scripts/js/jquery.form.min.js"></script>
     <script src="/scripts/js/jquery.backstretch.min.js"></script>
-
     <script src="/scripts/js/main.js"></script>
-
+ </form>
 </body>
 </html>
