@@ -1,15 +1,42 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ViewLeadsInfo.aspx.vb" Inherits="IntranetPortal.ViewLeadsInfo" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ViewLeadsInfo.aspx.vb" Inherits="IntranetPortal.ViewLeadsInfo" MasterPageFile="~/Content.Master" %>
 
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>
 
+<asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
+    <div style="height: 100%">
+        <uc1:LeadsInfo runat="server" ID="LeadsInfo" />
+    </div>
+    <script type="text/javascript">
 
-<!DOCTYPE html>
+        function AttachScrollbar()
+        {
+            $("#prioity_content").mCustomScrollbar(
+              {
+                  theme: "minimal-dark"
+              }
+              );
+            $("#home_owner_content").mCustomScrollbar(
+                {
+                    theme: "minimal-dark"
+                }
+             );           
+
+            $(".dxgvCSD").mCustomScrollbar(
+                {
+                    theme: "minimal-dark"
+                }
+             );
+        }
+    </script>
+</asp:Content>
+
+<%--<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>View Leads Info</title>    
+    <title>View Leads Info</title>
     <base target="_self" />
-        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
     <link href="../styles/stevencss.css" rel='stylesheet' type='text/css' />
     <link href="../css/font-awesome.css" type="text/css" rel="stylesheet" />
 
@@ -27,9 +54,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="height:800px">
-       <uc1:LeadsInfo runat="server" ID="LeadsInfo" />    
-            </div>
+        
     </form>
 </body>
-</html>
+</html>--%>

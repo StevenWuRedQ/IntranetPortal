@@ -96,6 +96,9 @@
         }
         else
             gridLeads.Refresh();
+     
+        if (typeof gridTrackingClient != "undefined")
+            gridTrackingClient.Refresh();
 
         if (typeof window.parent.agentTreeCallbackPanel == "undefined")
             return;
@@ -262,7 +265,7 @@
                     </Pane>
                 </Styles>
                 <Panes>
-                    <dx:SplitterPane ShowCollapseBackwardButton="True" MinSize="675px">
+                    <dx:SplitterPane ShowCollapseBackwardButton="True" MinSize="665px" AutoHeight="true">
                         <PaneStyle Paddings-Padding="0">
                             <Paddings Padding="0px"></Paddings>
                         </PaneStyle>
@@ -386,7 +389,7 @@
                             </dx:SplitterContentControl>
                         </ContentCollection>
                     </dx:SplitterPane>
-                    <dx:SplitterPane ShowCollapseForwardButton="True" Name="LogPanel" MinSize="545px">
+                    <dx:SplitterPane ShowCollapseForwardButton="True" Name="LogPanel" MinSize="645px">
                         <Panes>
                             <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9">
                                 <PaneStyle BackColor="#F9F9F9"></PaneStyle>

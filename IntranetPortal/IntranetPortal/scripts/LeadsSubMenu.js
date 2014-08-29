@@ -158,9 +158,9 @@ function OnLeadsCategoryClick(s, e) {
         if (e.item.name == "Closed")
             SetLeadStatus('8' + '|' + tmpBBLE)
 
-        if (e.item.name == "ViewLead") {
+        if (e.item.name == "ViewLead") {           
             var url = '/ViewLeadsInfo.aspx?id=' + tmpBBLE;
-            window.showModalDialog(url, 'View Leads Info', 'dialogWidth:1350px;dialogHeight:810px');
+            window.showModalDialog(url, 'View Leads Info', 'dialogWidth:1350px;dialogHeight:930px');
         }
 
         if (e.item.name == "Delete") {
