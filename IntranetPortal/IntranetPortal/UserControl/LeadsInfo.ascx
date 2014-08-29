@@ -96,7 +96,7 @@
         }
         else
             gridLeads.Refresh();
-     
+
         if (typeof gridTrackingClient != "undefined")
             gridTrackingClient.Refresh();
 
@@ -274,6 +274,7 @@
                                 <div style="width: 100%; align-content: center; height: 100%">
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu3" runat="server" ClientInstanceName="popupMenuRefreshClient"
                                         AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                        <ItemStyle Paddings-PaddingLeft="20px" />
                                         <Items>
                                             <dx:MenuItem Text="All" Name="All"></dx:MenuItem>
                                             <dx:MenuItem Text="General Property Info" Name="Assessment"></dx:MenuItem>
@@ -311,7 +312,7 @@
                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                         <li style="margin-left: 48px; color: #ffa484">
                                             <i class="fa fa-refresh sale_head_button tooltip-examples" title="Refresh" onclick="popupMenuRefreshClient.ShowAtElement(this)"></i>
-                                            <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" style="display:none"></i>
+                                            <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" style="display: none"></i>
                                             <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Share Leads" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
                                             <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>
                                         </li>
@@ -346,6 +347,7 @@
                                         PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
                                         PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                         ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                        <ItemStyle Paddings-PaddingLeft="20px" />
                                         <Items>
                                             <dx:MenuItem Text="Call Phone" Name="Call">
                                             </dx:MenuItem>
@@ -370,6 +372,7 @@
                                         ShowPopOutImages="false" AutoPostBack="false"
                                         ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px"
                                         PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
+                                        <ItemStyle Paddings-PaddingLeft="20px" />
                                         <Items>
                                             <dx:MenuItem Text="Door knock" Name="doorKnock">
                                             </dx:MenuItem>
@@ -464,6 +467,7 @@
                                         <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
                                             AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                             ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                            <ItemStyle Paddings-PaddingLeft="20px" />
                                             <Items>
                                                 <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
                                                 <dx:MenuItem Text="Next Week" Name="nextWeek"></dx:MenuItem>
@@ -653,15 +657,18 @@
                                     <dx:ASPxTextBox runat="server" ID="txtPhoneNo" ClientInstanceName="txtPhoneNoClient"></dx:ASPxTextBox>
                                 </td>
                             </tr>
-                            <tr style="margin-top: 3px; line-height: 30px;">
+                            <tr style="margin-top: 3px; line-height: 30px; margin-top: 10px">
                                 <td>
-                                    <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false">
-                                        <ClientSideEvents Click="SaveBestPhoneNo" />
-                                    </dx:ASPxButton>
-                                    &nbsp;
-                                    <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false">
-                                        <ClientSideEvents Click="function(s,e){aspxPopupAddPhoneNum.Hide();}" />
-                                    </dx:ASPxButton>
+                                    <div style="margin-top:10px">
+                                        <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                            <ClientSideEvents Click="SaveBestPhoneNo" />
+                                        </dx:ASPxButton>
+                                        &nbsp;
+                                        <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                            <ClientSideEvents Click="function(s,e){aspxPopupAddPhoneNum.Hide();}" />
+                                        </dx:ASPxButton>
+                                    </div>
+
                                 </td>
                             </tr>
                         </table>

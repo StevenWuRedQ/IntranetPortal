@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NavMenu.ascx.vb" Inherits="IntranetPortal.NavMenu" %>
+
 <ul class="nav navbar-nav">
     <% For Each item In PortalMenuItems%>
     <%= item.ToHtml %>

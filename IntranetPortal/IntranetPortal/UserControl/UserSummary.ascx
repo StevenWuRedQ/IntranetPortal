@@ -278,7 +278,7 @@
                                 <td rowspan="3" style="vertical-align: top; width: 380px">
                                     <h4>
                                         <img src="../images/grid_calendar.png" class="vertical-img" /><span class="heading_text">Today's Calendar</span></h4>
-                                    <div style="border: 1px solid #efefef; height: 615px">
+                                    <div style="height: 615px">
                                         <dx:ASPxScheduler ID="todayScheduler" runat="server" Width="100%" ActiveViewType="Day"
                                             ClientInstanceName="ASPxClientScheduler1">
                                             <Views>
