@@ -288,7 +288,7 @@
                                     <asp:HiddenField ID="hfBBLE" runat="server" />
 
                                     <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white">
+                                    <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white">
                                         <li class="active short_sale_head_tab">
                                             <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
                                                 <i class="fa fa-info-circle head_tab_icon_padding"></i>
@@ -310,7 +310,7 @@
                                         </li>
 
                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
-                                        <li style="margin-left: 48px; color: #ffa484">
+                                        <li style="margin-right: 30px; color: #ffa484;float:right">
                                             <i class="fa fa-refresh sale_head_button tooltip-examples" title="Refresh" onclick="popupMenuRefreshClient.ShowAtElement(this)"></i>
                                             <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" style="display: none"></i>
                                             <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Share Leads" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
