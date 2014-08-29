@@ -23,7 +23,9 @@
                 alert('plase input user name or password');
                 return;
             }
-            LogInCallBackClinet.PerformCallback($('#username').val() + '|' + $('#password').val())
+            var rbMe = document.getElementById('remember-me').checked ? true : false;
+            
+            LogInCallBackClinet.PerformCallback($('#username').val() + '|' + $('#password').val() + '|' + rbMe)
         }
         function LogInComplete(result) {
 
@@ -74,7 +76,7 @@
                             <input class="sif-username" id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" required="required"/>
                             <input class="sif-password" id="password" name="password" type="password" placeholder="Password" required="required" onkeydown="return EnterInput(event)" />
                             <div class="sif-remember">
-                                <input id="remember-me" name="remember-me" type="checkbox"/>
+                                <input id="remember-me" name="remember-me" type="checkbox" />
                                 <label for="remember-me">Remember Me</label>
                             </div>
                             <input id="sign-in-button" class="sif-button" type="button" value="Sign In" onclick="onLogIn()" />

@@ -40,10 +40,11 @@ Public Class Login
     Protected Sub LogInCallBack_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         Dim name = e.Parameter.Split("|")(0)
         Dim password = e.Parameter.Split("|")(1)
+        Dim rememberMe = e.Parameter.Split("|")(2)
         If Membership.ValidateUser(name, password) Then
             Dim names = StrConv(name, VbStrConv.ProperCase)
             OnlineUser.Refresh(HttpContext.Current)
-            FormsAuthentication.SetAuthCookie(name, False)
+            FormsAuthentication.SetAuthCookie(name, CBool(rememberMe))
             e.Result = True
         Else
             e.Result = False
