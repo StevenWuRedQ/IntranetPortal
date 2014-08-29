@@ -11,7 +11,12 @@
         <FontClass>
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
-      </PortalNavItem>      
+      </PortalNavItem>
+      <PortalNavItem Name="Task" Text="Task" NavigationUrl="/LeadAgent.aspx?c=Task" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-tasks"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <PortalNavItem Name="AgentNewLeads" Text="New Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-star"></i>]]>

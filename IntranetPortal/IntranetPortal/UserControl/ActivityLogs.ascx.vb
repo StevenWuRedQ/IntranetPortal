@@ -228,17 +228,29 @@ Public Class ActivityLogs
             Dim employees = Page.User.Identity.Name & ";" & empsDropDownEdit.Text
 
             Dim scheduleDate = DateTime.Now
-            If cbTaskSchedule.Text = "1 Day" Then
-                scheduleDate = scheduleDate.AddDays(1)
-            End If
+        'If cbTaskSchedule.Text = "1 Day" Then
+        '    scheduleDate = scheduleDate.AddDays(1)
+        'End If
 
-            If cbTaskSchedule.Text = "2 Day" Then
-                scheduleDate = scheduleDate.AddDays(2)
-            End If
+        'If cbTaskSchedule.Text = "2 Day" Then
+        '    scheduleDate = scheduleDate.AddDays(2)
+        'End If
 
-            If cbTaskSchedule.Text = "Custom" Then
-                scheduleDate = CDate(cbTaskSchedule.Text)
-            End If
+        'If cbTaskSchedule.Text = "Custom" Then
+        '    scheduleDate = CDate(cbTaskSchedule.Text)
+        'End If
+
+        If cbTaskImportant.Text = "Normal" Then
+            scheduleDate = scheduleDate.AddDays(3)
+        End If
+
+        If cbTaskImportant.Text = "Important" Then
+            scheduleDate = scheduleDate.AddDays(1)
+        End If
+
+        If cbTaskImportant.Text = "Urgent" Then
+            scheduleDate = scheduleDate.AddHours(2)
+        End If
 
             Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Employees:</td>" &
                                          "<td>{0}</td></tr>" &
