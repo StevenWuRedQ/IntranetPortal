@@ -379,4 +379,8 @@ Public Class UserSummary
             End If
         End Using
     End Sub
+
+    Protected Sub todayScheduler_PopupMenuShowing(sender As Object, e As DevExpress.Web.ASPxScheduler.PopupMenuShowingEventArgs)
+        e.Menu.Items.Clear()
+    End Sub
 End Class
