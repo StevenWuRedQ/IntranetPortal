@@ -117,6 +117,7 @@
         }
 
         function ShowLeadstatus(status) {
+            char_show_status = chart_status_enum.status_system;
             gridReportClient.PerformCallback("BindStatus|" + status);
             //ContentCallbackPanel.PerformCallback("Status|" + status)
             LoadStatusBarChart(status);
@@ -379,7 +380,7 @@
 
                                                                             <%----end item--%>
                                                                             <div style="margin-left: 69px; margin-top: 10px;">
-                                                                                <button class="btn btn-default button_transparent" type="button" onclick="onGetAgentLogButtonClick()">Today's Log</button>
+                                                                                <button class="btn btn-default button_transparent" type="button"  id="id_activity_log" onclick="onGetAgentLogButtonClick()">Activity Log</button>
 
                                                                                 <button class="btn btn-default button_transparent" type="button" onclick="onGetAgentZoningDateClick()" style="margin-left: 20px">Leads's Tax</button>
                                                                             </div>
@@ -475,7 +476,7 @@
                                                                 </ul>
                                                             </div>
 
-                                                            <div class="dropdown layout_float_right" style="margin-right: 20px;">
+                                                            <div class="dropdown layout_float_right" style="margin-right: 20px;" id="id_change_range_drop_down">
                                                                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="background: transparent">
                                                                     Change Stat Range <span class="caret"></span>
 
@@ -588,8 +589,9 @@
                                                     <% For Each key In GetTemplates().Keys%>
                                                     <li class="list-group-item color_gray save_report_list" style="background-color: transparent; border: 0px;">
                                                         <i class="fa fa-file-o" style="font-size: 18px"></i>
-                                                        <span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor: pointer; width: 140px;"><% = key%></span>
-                                                        <button type="button" value="delete" onclick='RemoveReport("<%= key %>")'>Delete</button>
+                                                        <span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor: pointer; width:178px;"><% = key%></span>
+                                                        <i class="fa fa-times icon_btn tooltip-examples" title="Delete"  onclick='RemoveReport("<%= key %>")'></i>
+                                                        <%--<button type="button" value="delete" onclick='RemoveReport("<%= key %>")'>Delete</button>--%>
                                                     </li>
                                                     <% Next%>
                                                 </ul>
@@ -652,8 +654,8 @@
                                                     <dx:ListEditItem Text="# of floor" Value="NumFloors" />
                                                     <dx:ListEditItem Text="Building Dem" Value="BuildingDem" />
                                                     <dx:ListEditItem Text="Lot Dem" Value="LotDem" />
-                                                    <dx:ListEditItem Text="1st Mortgage" Value="C1stMortgrAmt" />
-                                                    <dx:ListEditItem Text="2nd Mortgage" Value="C2ndMortgrAmt" />
+                                                    <dx:ListEditItem Text="1st Mortgage" Value="C1stMotgrAmt" />
+                                                    <dx:ListEditItem Text="2nd Mortgage" Value="C2ndMotgrAmt" />
                                                     <dx:ListEditItem Text="Taxes" Value="TaxesAmt" />
                                                     <dx:ListEditItem Text="Water" Value="WaterAmt" />
                                                     <dx:ListEditItem Text="Taxes" Value="TaxesAmt" />

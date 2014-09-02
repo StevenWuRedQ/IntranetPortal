@@ -538,7 +538,7 @@
                                                         <PanelCollection>
                                                             <dx:PanelContent>
                                                                 <dx:ASPxHiddenField runat="server" ID="HiddenFieldLogId" ClientInstanceName="hfLogIDClient"></dx:ASPxHiddenField>
-                                                                <dx:ASPxFormLayout ID="formLayout" runat="server" Width="100%">
+                                                                <dx:ASPxFormLayout ID="formLayout" runat="server" Width="100%" SettingsItemCaptions-Location="Top">
                                                                     <Items>
                                                                         <dx:LayoutItem Caption="Type">
                                                                             <LayoutItemNestedControlCollection>

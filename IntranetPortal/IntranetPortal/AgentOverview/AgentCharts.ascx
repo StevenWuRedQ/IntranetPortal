@@ -8,17 +8,22 @@
     <div id="container" style="height: 350px;"></div>
     <div id="pieChart" style="height: 350px;"></div>
 </div>
-<script type="text/javascript">
 
-    //var dataSource = [
-    //    {day: "Monday", oranges: 3},
-    //    {day: "Tuesday", oranges: 2},
-    //    {day: "Wednesday", oranges: 3},
-    //    {day: "Thursday", oranges: 4},
-    //    {day: "Friday", oranges: 6},
-    //    {day: "Saturday", oranges: 11},
-    //    {day: "Sunday", oranges: 4} 
-    //];
+<script type="text/javascript">
+    /*
+       show UI elemnt and function with diffrent stauts 
+       1. when status user or offices provide activity log function 
+       2. system or office and y-axis is employees name status show bar click function
+    */
+    var chart_status_enum =
+        {
+            status_user: 0,
+            status_office: 1,
+            status_system: 2
+
+        };
+    var char_show_status = chart_status_enum.status_office;
+   
     function change_chart_type(e) {
         //alert($(e).text());
         var type = $(e).text();
@@ -99,17 +104,25 @@
             }
         });
     }
+    function show_element()
+    {
+        var provide_activity = char_show_status == chart_status_enum.status_office || char_show_status == chart_status_enum.status_user;
+        var display_style = provide_activity ? 'inline' : 'none';
+        $('#id_activity_log').css('display', display_style);
+        $('#id_change_range_drop_down').css('display',display_style);
+    }
     function show_bar_chart(ds) {
         var dataFormSever = ds != null ? ds : $.parseJSON('<%=ChartSource()%>');
         clear_chart();
-        
+        show_element();
+
         var chartData = dataFormSever.DataSource;
         var chartTitle = dataFormSever.Title == null ? "Leads" : dataFormSever.Title;
         $('#chartsTitle').text(chartTitle);
         //$("#container").width(600);
         $("#container").width(40);
         var charsWidth = $("#container").width();
-        var tagertWidth = 40 * chartData.length  +40 ;
+        var tagertWidth = 40 * chartData.length  +80 ;
        
         if (charsWidth < tagertWidth)
         {
@@ -155,9 +168,17 @@
                 //this.select();
                 //alert('-1|' + point.originalArgument)
                 //BindEmployee('-1|' + point.originalArgument);
+                char_show_status = chart_status_enum.status_user
                 getEmployeeIDByNameClinet.PerformCallback(point.originalArgument);
             }
         });
+        if (char_show_status == chart_status_enum.status_user)
+        {
+            $("#container").dxChart("instance").option({
+                pointClick:null
+            });
+        }
+        //alert('char_show_status' + char_show_status);
     }
 
 
