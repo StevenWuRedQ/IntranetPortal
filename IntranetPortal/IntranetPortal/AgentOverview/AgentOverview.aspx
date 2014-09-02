@@ -389,34 +389,25 @@
                                                                     <asp:Panel runat="server" ID="OfficeInfoPanel" Visible="false">
                                                                         <dx:ASPxImage runat="server" ID="ASPxImage1" CssClass="img-circle class_profile_image" ImageUrl="/images/user-empty-icon.png">
                                                                         </dx:ASPxImage>
-                                                                        <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"><%= CurrentOffice %>&nbsp;Office </div>
-                                                                        <div style="margin-top: 8px; font-size: 16px; color: #234b60; font-weight: 900" class="agnet_info_text"><%= GetOfficeMgr() %></div>
+                                                                        <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"><%= CurrentOffice.OfficeDescription %></div>
+                                                                        <div style="margin-top: 8px; font-size: 16px; color: #234b60; font-weight: 900" class="agnet_info_text"><%=  CurrentOffice.OfficeManagers  %></div>
                                                                         <%--info detial--%>
-                                                                        <div style="font-size: 14px; margin-top: 25px; display: none">
+                                                                        <div style="font-size: 14px; margin-top: 25px;">
                                                                             <%--items--%>
                                                                             <div class="agent_info_detial_left">Address</div>
                                                                             <div class="agent_info_detial_space">&nbsp;</div>
-                                                                            <div class="agent_info_detial_right">&nbsp;</div>
+                                                                            <div class="agent_info_detial_right"><%= CurrentOffice.Address %>&nbsp;</div>
                                                                             <%----end item--%>
                                                                             <%--items--%>
-                                                                            <div class="agent_info_detial_left">Office</div>
+                                                                            <div class="agent_info_detial_left">Phone</div>
                                                                             <div class="agent_info_detial_space">&nbsp;</div>
-                                                                            <div class="agent_info_detial_right"><%= CurrentEmployee.Position %>(<%= CurrentEmployee.Department%>)&nbsp; </div>
+                                                                            <div class="agent_info_detial_right"><%= CurrentOffice.PhoneNo %>&nbsp; </div>
                                                                             <%----end item--%>
                                                                             <%--items--%>
-                                                                            <div class="agent_info_detial_left">Employee Since</div>
+                                                                            <div class="agent_info_detial_left">Fax</div>
                                                                             <div class="agent_info_detial_space">&nbsp;</div>
-                                                                            <div class="agent_info_detial_right"><%=String.Format("{0:d}", CurrentEmployee.EmployeeSince) %>&nbsp;</div>
-                                                                            <%----end item--%>
-                                                                            <%--items--%>
-                                                                            <div class="agent_info_detial_left">Cell</div>
-                                                                            <div class="agent_info_detial_space">&nbsp;</div>
-                                                                            <div class="agent_info_detial_right"><%= String.Format("{0:(###) ###-####}", CurrentEmployee.Cellphone) %>&nbsp;</div>
-                                                                            <%----end item--%>
-                                                                            <%--items--%>
-                                                                            <div class="agent_info_detial_left">Email</div>
-                                                                            <div class="agent_info_detial_space">&nbsp;</div>
-                                                                            <div class="agent_info_detial_right" style="color: #3993c1"><%= CurrentEmployee.Email%>&nbsp;</div>
+                                                                            <div class="agent_info_detial_right"><%= CurrentOffice.FaxNo %>&nbsp;</div>
+                                                                            <%----end item--%>                                                                          
                                                                         </div>
                                                                     </asp:Panel>
                                                                     <%-----end info detial-----%>

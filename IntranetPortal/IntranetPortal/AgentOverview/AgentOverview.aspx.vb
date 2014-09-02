@@ -7,7 +7,7 @@ Public Class AgentOverview
 
     Public Property CurrentEmployee As Employee
     Public Property CurrentStatus As LeadStatus
-    Public Property CurrentOffice As String
+    Public Property CurrentOffice As Office
     Public portalDataContext As New Entities
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -55,6 +55,7 @@ Public Class AgentOverview
     Protected Sub gridReport_CustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs)
         If e.Parameters.StartsWith("BindEmp") Then
             CurrentEmployee = getEmployeeByName(e.Parameters)
+            hfMode.Value = ""
             'AgentCharts.current_employee = CurrentEmployee.Name
             'AgentCharts.Agent_leads_activity_source()
             hfEmpName.Value = CurrentEmployee.Name
@@ -85,7 +86,8 @@ Public Class AgentOverview
 
         If e.Parameters.StartsWith("BindOffice") Then
             hfMode.Value = "Office"
-            CurrentOffice = e.Parameters.Split("|")(1)
+            CurrentOffice = Office.GetInstance(e.Parameters.Split("|")(1))
+
             gridReport.DataBind()
         End If
 
@@ -110,7 +112,7 @@ Public Class AgentOverview
 
         If e.Parameter.StartsWith("OFFICE") Then
             hfMode.Value = "Office"
-            CurrentOffice = e.Parameter.Split("|")(1)
+            CurrentOffice = Office.GetInstance(e.Parameter.Split("|")(1))
 
             AgentInfoPanel.Visible = False
             OfficeInfoPanel.Visible = True
@@ -159,10 +161,10 @@ Public Class AgentOverview
         LoadGridColumn()
     End Sub
 
-    Function GetOfficeMgr() As String
-        Dim users = Roles.GetUsersInRole("OfficeManager-" & CurrentOffice)
-        Return String.Join(",", users)
-    End Function
+    'Function GetOfficeMgr() As String
+    '    Dim users = Roles.GetUsersInRole("OfficeManager-" & CurrentOffice.Name)
+    '    Return String.Join(",", users)
+    'End Function
 
     Function GetTemplates() As StringDictionary
         Dim up = Employee.GetProfile(User.Identity.Name)
@@ -207,7 +209,7 @@ Public Class AgentOverview
             'Load lead by Office
             If hfMode.Value = "Office" Then
 
-                Dim emps = Employee.GetAllDeptUsers(CurrentOffice)
+                Dim emps = CurrentOffice.Users
 
                 Dim reports = (From li In portalDataContext.LeadsInfoes Join
                                     ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
@@ -286,6 +288,10 @@ Public Class AgentOverview
         End If
     End Sub
 
+    Protected Sub getEmployeeIDByName_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        e.Result = EmployeeIDToName(e.Parameter)
+    End Sub
+
 #Region "Helper methods"
 
     Function GetReportColumns() As String
@@ -315,7 +321,5 @@ Public Class AgentOverview
     End Sub
 #End Region
 
-    Protected Sub getEmployeeIDByName_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
-        e.Result = EmployeeIDToName(e.Parameter)
-    End Sub
+
 End Class

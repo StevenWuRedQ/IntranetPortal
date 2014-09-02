@@ -2,8 +2,8 @@
 <script src="scripts/jquery.formatCurrency-1.1.0.js"></script>
 <script type="text/javascript">
     function ShowAcrisMap(propBBLE) {
-        var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + propBBLE;
-        ShowPopupMap(url, "Acris");
+        //var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + propBBLE;
+        ShowPopupMap("https://a836-acris.nyc.gov/DS/DocumentSearch/BBL", "Acris");
     }
 
     function ShowDOBWindow(boro, houseNo, street) {
