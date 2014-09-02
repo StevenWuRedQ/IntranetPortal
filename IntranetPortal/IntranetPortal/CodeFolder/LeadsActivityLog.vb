@@ -70,6 +70,10 @@
         DealClosed = 8
         HotLeads = 9
         Print = 10
+        Approval = 11
+        Approved = 12
+        Declined = 13
+        Reassign = 14
     End Enum
 
 End Class

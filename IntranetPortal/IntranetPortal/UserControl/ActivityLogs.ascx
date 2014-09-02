@@ -356,6 +356,7 @@
                                                 <asp:Label runat="server" ID="lblOwnerName"></asp:Label></td>
                                             <td>
                                                 <div style="float: right; font-size: 18px">
+                                                    <asp:Literal runat="server" id="ltResult"></asp:Literal>
                                                     <dx:ASPxCheckBox Text="Accepted" runat="server" TextAlign="Left" ID="chkAptAccept" Visible="false"></dx:ASPxCheckBox>
                                                     <dx:ASPxCheckBox Text="Declined&nbsp;" runat="server" TextAlign="Left" ID="chkAptDecline" Visible="false"></dx:ASPxCheckBox>
                                                     <dx:ASPxCheckBox Text="Scheduled" runat="server" TextAlign="Left" ID="chkAptReschedule" Visible="false"></dx:ASPxCheckBox>
@@ -412,6 +413,7 @@
                                             <td style="width: 200px">Task</td>
                                             <td>
                                                 <div style="float: right; font-size: 18px">
+                                                     <asp:Literal runat="server" id="ltTaskResult"></asp:Literal>
                                                     <dx:ASPxCheckBox Text="Completed" runat="server" TextAlign="Left" ID="chkTaskComplete" Visible="false"></dx:ASPxCheckBox>
                                                     <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" onclick='<%# String.Format("CompleteTask(""{0}"")", Eval("LogID"))%>' title="Completed" runat="server" id="btnTaskComplete" visible="false"></i>
                                                 </div>
@@ -453,27 +455,18 @@
                                     <tr>
                                         <td style="font-weight: bold"><%# Eval("Category")%> </td>
                                         <td style="text-align: right; width: 120px;">
-                                            <div style="float: right">
+                                            <div style="float: right">                                               
                                                 <dx:ASPxCheckBox Text="Completed" runat="server" TextAlign="Left" ID="chkComplete" Visible="false"></dx:ASPxCheckBox>
                                                 <dx:ASPxCheckBox Text="Accepted" runat="server" TextAlign="Left" ID="chkAccepted" Visible="false"></dx:ASPxCheckBox>
                                                 <dx:ASPxCheckBox Text="Declined&nbsp;" runat="server" TextAlign="Left" ID="chkDeclined" Visible="false"></dx:ASPxCheckBox>
                                                 <dx:ASPxCheckBox Text="Scheduled" runat="server" TextAlign="Left" ID="chkReschedule" Visible="false"></dx:ASPxCheckBox>
 
-                                                <asp:Panel runat="server" ID="pnlAptButton" Visible="false">
+                                                <asp:Panel runat="server" ID="pnlAptButton">
                                                     <div style="float: right; font-size: 18px">
-                                                        <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" title="Accept" onclick='<%# String.Format("AcceptAppointment(""{0}"")", Eval("LogID"))%>'></i>
-                                                        <i class="fa fa-times-circle-o log_item_hl_buttons" title="Decline" onclick='<%# String.Format("DeclineAppointment(""{0}"")", Eval("LogID"))%>'></i>
-                                                        <i class="fa fa-history log_item_hl_buttons" title="Reschedule" onclick='<%# String.Format("ReScheduledAppointment(""{0}"")", Eval("LogID"))%>'></i>
+                                                        <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" title="Accept" onclick='<%# String.Format("ApproveNewLead(""{0}"")", Eval("LogID"))%>'></i>
+                                                        <i class="fa fa-times-circle-o log_item_hl_buttons" title="Decline" onclick='<%# String.Format("DeclineNewLead(""{0}"")", Eval("LogID"))%>'></i>                                                        
                                                     </div>
-                                                </asp:Panel>
-
-                                                <dx:ASPxComboBox runat="server" ID="cbAppointAction" Visible="false" Width="85px">
-                                                    <Items>
-                                                        <dx:ListEditItem Text="Accepted" Value="Accepted" />
-                                                        <dx:ListEditItem Text="Declined" Value="Declined" />
-                                                        <dx:ListEditItem Text="ReSchedule" Value="ReSchedule" />
-                                                    </Items>
-                                                </dx:ASPxComboBox>
+                                                </asp:Panel>                                             
                                             </div>
                                         </td>
                                     </tr>

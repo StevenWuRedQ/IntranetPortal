@@ -120,7 +120,7 @@ Public Class ActivityLogs
 
                         Context.SaveChanges()
 
-                        LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is approved by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is approved by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Approved)
 
                         'Add Notify Message
                         Dim title = "New lead is Approved"
@@ -145,7 +145,7 @@ Public Class ActivityLogs
 
                         Context.SaveChanges()
 
-                        LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is declined by " & Page.User.Identity.Name, log.BBLE, LeadsActivityLog.LogCategory.Status.ToString)
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is declined by " & Page.User.Identity.Name, log.BBLE, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Declined)
 
                         'Add Notify Message
                         Dim title = "Your lead is declined"
@@ -326,16 +326,16 @@ Public Class ActivityLogs
 
             If category = "Approval" Then
                 Dim logId = CInt(e.GetValue("LogID"))
-                Dim chkAccepted = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "chkAccepted"), ASPxCheckBox)
-                Dim chkDeclined = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "chkDeclined"), ASPxCheckBox)
+            '    Dim chkAccepted = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "chkAccepted"), ASPxCheckBox)
+            'Dim chkDeclined = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "chkDeclined"), ASPxCheckBox)
+            'chkAccepted.Text = " Approve"
+            '    chkAccepted.Visible = True
+            '    chkAccepted.ClientSideEvents.CheckedChanged = String.Format("function(s, e){{ApproveNewLead({0});}}", logId)
 
-                chkAccepted.Text = " Approve"
-                chkAccepted.Visible = True
-                chkAccepted.ClientSideEvents.CheckedChanged = String.Format("function(s, e){{ApproveNewLead({0});}}", logId)
+            '    chkDeclined.Visible = True
+            '    chkDeclined.ClientSideEvents.CheckedChanged = String.Format("function(s, e){{DeclineNewLead({0});}}", logId)
+        End If
 
-                chkDeclined.Visible = True
-                chkDeclined.ClientSideEvents.CheckedChanged = String.Format("function(s, e){{DeclineNewLead({0});}}", logId)
-            End If
 
             If category = "Task" Then
                 If e.GetValue("LogID") IsNot Nothing Then
@@ -346,32 +346,35 @@ Public Class ActivityLogs
                     Dim pnlTask = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "pnlTask"), Panel)
                     Dim btnTaskComplete = TryCast(pnlTask.FindControl("btnTaskComplete"), HtmlControl)
 
-                    If task Is Nothing Then
-                        If chkTaskComplete IsNot Nothing Then
-                            chkTaskComplete.Visible = False
-                        End If
+                Dim ltTaskResult = TryCast(pnlTask.FindControl("ltTaskResult"), Literal)
 
-                        Dim tblTask = TryCast(pnlTask.FindControl("tblTask"), HtmlControl)
-                        tblTask.Visible = False
+                If task Is Nothing Then
 
-                        Dim ltTasklogData = TryCast(pnlTask.FindControl("ltTasklogData"), Literal)
-                        ltTasklogData.Text = e.GetValue("Comments")
-                        Return
-                    Else
-                        'Bind task data
-                        Dim ltTaskEmp = TryCast(pnlTask.FindControl("ltTaskEmp"), Literal)
-                        ltTaskEmp.Text = task.EmployeeName
-
-                        Dim ltTaskAction = TryCast(pnlTask.FindControl("ltTaskAction"), Literal)
-                        ltTaskAction.Text = task.Action
-
-                        Dim ltTaskImpt = TryCast(pnlTask.FindControl("ltTaskImpt"), Literal)
-                        ltTaskImpt.Text = task.Important
-
-                        Dim ltTaskComments = TryCast(pnlTask.FindControl("ltTaskComments"), Literal)
-                        ltTaskComments.Text = task.Description
-                        chkTaskComplete.Visible = True
+                    If chkTaskComplete IsNot Nothing Then
+                        chkTaskComplete.Visible = False
                     End If
+
+                    Dim tblTask = TryCast(pnlTask.FindControl("tblTask"), HtmlControl)
+                    tblTask.Visible = False
+
+                    Dim ltTasklogData = TryCast(pnlTask.FindControl("ltTasklogData"), Literal)
+                    ltTasklogData.Text = e.GetValue("Comments")
+                    Return
+                Else
+                    'Bind task data
+                    Dim ltTaskEmp = TryCast(pnlTask.FindControl("ltTaskEmp"), Literal)
+                    ltTaskEmp.Text = task.EmployeeName
+
+                    Dim ltTaskAction = TryCast(pnlTask.FindControl("ltTaskAction"), Literal)
+                    ltTaskAction.Text = task.Action
+
+                    Dim ltTaskImpt = TryCast(pnlTask.FindControl("ltTaskImpt"), Literal)
+                    ltTaskImpt.Text = task.Important
+
+                    Dim ltTaskComments = TryCast(pnlTask.FindControl("ltTaskComments"), Literal)
+                    ltTaskComments.Text = task.Description
+                    chkTaskComplete.Visible = True
+                End If
 
                     If task.Status = UserTask.TaskStatus.Active Then
                         If btnTaskComplete IsNot Nothing Then
@@ -389,17 +392,21 @@ Public Class ActivityLogs
                         If task.Status = UserTask.TaskStatus.Complete Then
                             btnTaskComplete.Visible = False
 
-                            If chkTaskComplete IsNot Nothing Then
-                                chkTaskComplete.Checked = True
-                                chkTaskComplete.ReadOnly = True
-                                chkTaskComplete.Visible = True
-                            End If
-                        Else
-                            btnTaskComplete.Visible = False
+                        If ltTaskResult IsNot Nothing Then
+                            ltTaskResult.Text = "Complete"
+                            'chkTaskComplete.Checked = True
+                            'chkTaskComplete.ReadOnly = True
+                            'chkTaskComplete.Visible = True
                         End If
+
+                    Else
+                        btnTaskComplete.Visible = False
+                    End If
+
                     End If
                 End If
-            End If
+        End If
+
 
             If category = "Appointment" Then
                 Dim logId = CInt(e.GetValue("LogID"))
@@ -428,9 +435,12 @@ Public Class ActivityLogs
                     Dim btnDecline = TryCast(pnlAppointment.FindControl("btnDecline"), HtmlControl)
                     Dim btnReschedule = TryCast(pnlAppointment.FindControl("btnReschedule"), HtmlControl)
 
-                    Dim chkAptAccept = TryCast(pnlAppointment.FindControl("chkAptAccept"), ASPxCheckBox)
-                    Dim chkAptDecline = TryCast(pnlAppointment.FindControl("chkAptDecline"), ASPxCheckBox)
-                    Dim chkAptReschedule = TryCast(pnlAppointment.FindControl("chkAptReschedule"), ASPxCheckBox)
+                'Dim chkAptAccept = TryCast(pnlAppointment.FindControl("chkAptAccept"), ASPxCheckBox)
+                'Dim chkAptDecline = TryCast(pnlAppointment.FindControl("chkAptDecline"), ASPxCheckBox)
+                'Dim chkAptReschedule = TryCast(pnlAppointment.FindControl("chkAptReschedule"), ASPxCheckBox)
+
+                Dim ltResult = TryCast(pnlAppointment.FindControl("ltResult"), Literal)
+
 
                     If userAppoint.Status = UserAppointment.AppointmentStatus.NewAppointment Then
                         'e.Row.BackColor = Drawing.Color.FromArgb(204, 255, 200)
@@ -444,23 +454,26 @@ Public Class ActivityLogs
                         btnReschedule.Visible = False
                     End If
 
-                    If userAppoint.Status = UserAppointment.AppointmentStatus.Accepted Then
-                        chkAptAccept.Visible = True
-                        chkAptAccept.ReadOnly = True
-                        chkAptAccept.Checked = True
-                    End If
+                If userAppoint.Status = UserAppointment.AppointmentStatus.Accepted Then
+                    ltResult.Text = "Accepted"
+                    'chkAptAccept.Visible = True
+                    'chkAptAccept.ReadOnly = True
+                    'chkAptAccept.Checked = True
+                End If
 
-                    If userAppoint.Status = UserAppointment.AppointmentStatus.Declined Then
-                        chkAptDecline.Visible = True
-                        chkAptDecline.ReadOnly = True
-                        chkAptDecline.Checked = True
-                    End If
+                If userAppoint.Status = UserAppointment.AppointmentStatus.Declined Then
+                    ltResult.Text = "Declined"
+                    'chkAptDecline.Visible = True
+                    'chkAptDecline.ReadOnly = True
+                    'chkAptDecline.Checked = True
+                End If
 
-                    If userAppoint.Status = UserAppointment.AppointmentStatus.ReScheduled Then
-                        chkAptReschedule.Visible = True
-                        chkAptReschedule.ReadOnly = True
-                        chkAptReschedule.Checked = True
-                    End If
+                If userAppoint.Status = UserAppointment.AppointmentStatus.ReScheduled Then
+                    ltResult.Text = "ReScheduled"
+                    'chkAptReschedule.Visible = True
+                    'chkAptReschedule.ReadOnly = True
+                    'chkAptReschedule.Checked = True
+                End If
                 Else
                     Dim tblApt = TryCast(pnlAppointment.FindControl("tblApt"), HtmlControl)
                     Dim ltApt = TryCast(pnlAppointment.FindControl("ltApt"), Literal)
