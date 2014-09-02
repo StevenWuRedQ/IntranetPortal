@@ -4,6 +4,12 @@
 
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .InforPanel {
+            float: left;
+            width: 340px;
+        }
+    </style>
     <script type="text/javascript">
 
         var empId = null;
@@ -85,7 +91,7 @@
         function BindEmployee(employeeId) {
 
             empId = employeeId;
-
+            infoCallbackClient.SetVisible(true);
             infoCallbackClient.PerformCallback("EMP|" + empId);
             gridReportClient.PerformCallback("BindEmp|" + employeeId);
             LoadEmployeeBarChart(empId);
@@ -95,7 +101,9 @@
             BindEmployee(parseInt(e.result));
         }
         function BindOffice(office) {
+
             gridReportClient.PerformCallback("BindOffice|" + office);
+            infoCallbackClient.SetVisible(true);
             infoCallbackClient.PerformCallback("OFFICE|" + office);
             LoadOfficeBarChart(office);
         }
@@ -117,6 +125,7 @@
         }
 
         function ShowLeadstatus(status) {
+            infoCallbackClient.SetVisible(false);
             char_show_status = chart_status_enum.status_system;
             gridReportClient.PerformCallback("BindStatus|" + status);
             //ContentCallbackPanel.PerformCallback("Status|" + status)
@@ -335,10 +344,14 @@
                                 <dx:SplitterPane ShowCollapseBackwardButton="True" Size="480">
                                     <ContentCollection>
                                         <dx:SplitterContentControl runat="server">
-                                            <div style="width: 1272px;" class="agent_layout_float clear-fix">
-                                                <dx:ASPxCallbackPanel runat="server" ID="infoCallback" ClientInstanceName="infoCallbackClient" OnCallback="infoCallback_Callback">
+                                            <div style="width: 100%" class="agent_layout_float clear-fix">
+                                                <table style="width: 100%; vertical-align:top">
+                                                    <tr>
+                                                        <td style="vertical-align:top">
+                                                            <dx:ASPxCallbackPanel runat="server" ID="infoCallback" ClientInstanceName="infoCallbackClient" OnCallback="infoCallback_Callback" CssClass="InforPanel">
                                                     <PanelCollection>
                                                         <dx:PanelContent>
+
                                                             <div style="height: 480px; float: left; border-right: 1px solid #dde0e7;">
                                                                 <%--angent info--%>
 
@@ -422,51 +435,15 @@
                                                     </PanelCollection>
                                                     <ClientSideEvents EndCallback="OnEndCallback" />
                                                 </dx:ASPxCallbackPanel>
-                                                <%--center top--%>
-
-
-                                                <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" HeaderText="Select Photo" ClientInstanceName="selectImgs" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
-                                                    <ContentCollection>
-                                                        <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol2" runat="server">
-                                                        </dx:PopupControlContentControl>
-                                                    </ContentCollection>
-                                                </dx:ASPxPopupControl>
-
-                                                <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" HeaderText="Save Report" ClientInstanceName="SaveReportPopup" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
-                                                    <HeaderTemplate>
-                                                       
-                                                         <div class="pop_up_header_margin">
-                                                            <i class="fa fa-save with_circle pop_up_header_icon"></i>
-                                                            <span class="pop_up_header_text">Save Report</span>
-                                                        </div>
-                                                    </HeaderTemplate>
-                                                    <ContentCollection>
-                                                        <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol1" runat="server">
-                                                            <dx:ASPxTextBox runat="server" ID="txtReportName" ClientInstanceName="txtClientReportName"></dx:ASPxTextBox>
-                                                            <div style="margin-top:20px">
-                                                                <dx:ASPxButton runat="server" ID="btnSave" AutoPostBack="false" Text="Save" CssClass="rand-button rand-button-blue">
-                                                                    <ClientSideEvents Click="function(s, e){
-                                                                SaveReportPopup.Hide();
-                                                                Savelayout(txtClientReportName.GetText());
-                                                                }" />
-                                                                </dx:ASPxButton>
-                                                            </div>
-
-                                                        </dx:PopupControlContentControl>
-                                                    </ContentCollection>
-                                                </dx:ASPxPopupControl>
+                                                            <%--center top--%></td>
+                                                        <td style="vertical-align:top">
                                                 <%--chart UI--%>
-                                                <div style="height: 490px;" class="clearfix">
-
-                                                    <div style="padding-top: 50px; font-size: 30px; color: #ff400d; text-align: center; display: none">In the last 6 months</div>
-
-                                                    <div style="padding-left: 370px; padding-top: 10px; height: 325px;" class="clearfix">
+                                                            <div style="height: 490px; float: left; width: 100%" class="clearfix">
+                                                                <div style="padding-top: 10px; height: 325px;" class="clearfix">
                                                         <div class="layout_float_right clearfix">
-
                                                             <div class="dropdown layout_float_right" style="display: none">
                                                                 <button class="btn btn-default dropdown-toggle" type="button" id="chart_line_select" data-toggle="dropdown" style="background: transparent">
                                                                     Line & Point Chart <span class="caret"></span>
-
                                                                 </button>
                                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="chart_line_select">
                                                                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Line</a></li>
@@ -498,6 +475,44 @@
                                                     </div>
                                                 </div>
                                                 <%-----end chart ui-----%>
+
+                                                        </td>
+                                                    </tr>
+                                                </table>
+
+
+
+                                                <dx:ASPxPopupControl ID="ASPxPopupControl2" runat="server" HeaderText="Select Photo" ClientInstanceName="selectImgs" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
+                                                    <ContentCollection>
+                                                        <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol2" runat="server">
+                                                        </dx:PopupControlContentControl>
+                                                    </ContentCollection>
+                                                </dx:ASPxPopupControl>
+
+                                                <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" HeaderText="Save Report" ClientInstanceName="SaveReportPopup" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
+                                                    <HeaderTemplate>
+
+                                                        <div class="pop_up_header_margin">
+                                                            <i class="fa fa-save with_circle pop_up_header_icon"></i>
+                                                            <span class="pop_up_header_text">Save Report</span>
+                                                        </div>
+                                                    </HeaderTemplate>
+                                                    <ContentCollection>
+                                                        <dx:PopupControlContentControl ID="Popupcontrolcontentcontrol1" runat="server">
+                                                            <dx:ASPxTextBox runat="server" ID="txtReportName" ClientInstanceName="txtClientReportName"></dx:ASPxTextBox>
+                                                            <div style="margin-top: 20px">
+                                                                <dx:ASPxButton runat="server" ID="btnSave" AutoPostBack="false" Text="Save" CssClass="rand-button rand-button-blue">
+                                                                    <ClientSideEvents Click="function(s, e){
+                                                                SaveReportPopup.Hide();
+                                                                Savelayout(txtClientReportName.GetText());
+                                                                }" />
+                                                                </dx:ASPxButton>
+                                                            </div>
+
+                                                        </dx:PopupControlContentControl>
+                                                    </ContentCollection>
+                                                </dx:ASPxPopupControl>
+
                                             </div>
                                         </dx:SplitterContentControl>
                                     </ContentCollection>

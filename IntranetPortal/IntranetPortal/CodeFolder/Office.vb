@@ -31,6 +31,7 @@
 
     Public Shared Function GetInstance(name As String) As Office
         Using context As New Entities
+
             Dim office = context.Offices.Where(Function(ofc) ofc.Name = name).FirstOrDefault
             If office Is Nothing Then
                 Return New Office()

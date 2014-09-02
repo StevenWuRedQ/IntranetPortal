@@ -113,6 +113,15 @@ Partial Public Class AgentOverview
     Protected WithEvents hfReports As Global.DevExpress.Web.ASPxHiddenField.ASPxHiddenField
 
     '''<summary>
+    '''AgentCharts control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AgentCharts As Global.IntranetPortal.AgentCharts
+
+    '''<summary>
     '''ASPxPopupControl2 control.
     '''</summary>
     '''<remarks>
@@ -165,15 +174,6 @@ Partial Public Class AgentOverview
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnSave As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''AgentCharts control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents AgentCharts As Global.IntranetPortal.AgentCharts
 
     '''<summary>
     '''btnExport control.

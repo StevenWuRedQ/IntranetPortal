@@ -17,6 +17,7 @@ Public Class AgentOverview
         Else
             CurrentEmployee = Employee.GetInstance(hfEmpName.Value)
         End If
+
         If Not String.IsNullOrEmpty(CurrentEmployee.Picture) Then
             profile_image.ImageUrl = CurrentEmployee.Picture
         End If
@@ -133,9 +134,9 @@ Public Class AgentOverview
             End If
 
             If up.ReportTemplates.ContainsKey(name) Then
-                up.ReportTemplates(name) = gridReport.SaveClientLayout
+                up.ReportTemplates(name) = GetReportColumns()
             Else
-                up.ReportTemplates.Add(name, gridReport.SaveClientLayout)
+                up.ReportTemplates.Add(name, GetReportColumns())
             End If
 
             Employee.SaveProfile(User.Identity.Name, up)
