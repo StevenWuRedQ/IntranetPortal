@@ -57,4 +57,13 @@ Partial Public Class AgentCharts
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents loadOfficeLeadsCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+
+    '''<summary>
+    '''char_change_x_axis_id control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents char_change_x_axis_id As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class

@@ -441,6 +441,18 @@
                                                             <div style="height: 490px; float: left; width: 100%" class="clearfix">
                                                                 <div style="padding-top: 10px; height: 325px;" class="clearfix">
                                                         <div class="layout_float_right clearfix">
+                                                            <div class="dropdown layout_float_right" >
+                                                                <button class="btn btn-default dropdown-toggle" type="button" id="id_detail_x_axis" data-toggle="dropdown" style="background: transparent">
+                                                                    Choice Field<span class="caret"></span>
+
+                                                                </button>
+                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="chart_line_select">
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">Status</a></li>
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">ZipCode</a></li>
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">Zoning</a></li>
+
+                                                                </ul>
+                                                            </div>
                                                             <div class="dropdown layout_float_right" style="display: none">
                                                                 <button class="btn btn-default dropdown-toggle" type="button" id="chart_line_select" data-toggle="dropdown" style="background: transparent">
                                                                     Line & Point Chart <span class="caret"></span>

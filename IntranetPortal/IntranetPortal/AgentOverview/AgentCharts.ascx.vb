@@ -1,5 +1,6 @@
 ﻿Imports System.Web.Script.Serialization
 Imports IntranetPortal.LeadsActivityLog
+Imports System.Data.SqlClient
 
 Public Class AgentCharts
     Inherits System.Web.UI.UserControl
@@ -60,10 +61,7 @@ Public Class AgentCharts
             Dim json As New JavaScriptSerializer
             Return json.Serialize(chart)
 
-            'Dim cstext1 As String = "<script type=""text/javascript"">" & _
-            '              String.Format("show_bar_chart({0})", jsonString) & "</script>"
-
-            'Page.ClientScript.RegisterStartupScript(Me.GetType, "ShowReport", cstext1)
+            
         End Using
     End Function
     Public Function AgentActivityToday(ByVal formdays As Date) As String
@@ -72,8 +70,11 @@ Public Class AgentCharts
         Using Context As New Entities
             Dim source = (From ld In Context.LeadsActivityLogs.ToList.Where(Function(ld) ld.ActivityDate.HasValue AndAlso ld.ActivityDate.Value.Date > today And ld.EmployeeID = current_employee And ld.ActionType IsNot Nothing).ToList
                           Group ld By Name = CType(ld.ActionType, EnumActionType).ToString Into Count()).ToList
-
-            Dim chart = New With {.Title = String.Format("{0}'s Activity on {1}", Employee.GetInstance(CInt(current_employee)).Name, today.ToShortDateString),
+            Dim dateStr = today.ToShortDateString
+            If today <> DateTime.Today Then
+                dateStr += " - " + DateTime.Today.Date.ToShortDateString
+            End If
+            Dim chart = New With {.Title = String.Format("{0}'s Activity on {1}", Employee.GetInstance(CInt(current_employee)).Name, dateStr),
                                   .DataSource = source}
 
             Dim json As New JavaScriptSerializer
@@ -124,5 +125,61 @@ Public Class AgentCharts
 
     Protected Sub loadOfficeLeadsCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         e.Result = OfficeLeadsSource(e.Parameter)
+    End Sub
+    Public Function map_x_axis(x_axis As String) As String
+        Dim dataBaseCounsMap = New Dictionary(Of String, String)
+        'dataBaseCounsMap.Add("")
+        Return x_axis
+    End Function
+    Public Function char_change_axis(x_axis As String, empId As String) As String
+        Using Context As New Entities
+            Dim source = New List(Of Dictionary(Of String, String))
+
+            x_axis = map_x_axis(x_axis)
+
+            Dim sqlConnection1 As New SqlConnection(Context.Database.Connection.ConnectionString)
+            Dim cmd As New SqlCommand
+            Dim reader As SqlDataReader
+
+            cmd.CommandText = "SELECT Count(" + x_axis + ") As Count," + x_axis + " as Name FROM [IntranetPortal].[dbo].[LeadsInfo] ld left join [IntranetPortal].[dbo].[Leads] li on ld.BBLE=li.BBLE  where " + x_axis + " is not null and li.EmployeeID=" + empId + " group by " + x_axis
+            '"SELECT COUNT(" + x_axis + ") as Count, " + x_axis + " as Name FROM [IntranetPortal].[dbo].[LeadsInfo] where " + x_axis + " is not null group by " + x_axis
+            cmd.CommandType = CommandType.Text
+            cmd.Connection = sqlConnection1
+
+            sqlConnection1.Open()
+
+            reader = cmd.ExecuteReader()
+            While (reader.Read())
+                Dim item = New Dictionary(Of String, String)
+                item.Add("Count", reader.GetInt32(0).ToString)
+                Dim name = ""
+                Try
+                    name = reader.GetString(1)
+                Catch ex As Exception
+                    name = reader.GetInt32(0).ToString
+                End Try
+                item.Add("Name", name)
+                source.Add(item)
+
+            End While
+            ' Data is accessible through the DataReader object here.
+
+            sqlConnection1.Close()
+            'Dim source = (From ld In Context.LeadsInfoes Where ld[x_axis] isnot nothing  group ld by name = ld[x_axis] into count() ).ToList()
+            ' Employee.GetInstance(CInt(current_employee)).Name can't get employee instance
+            Dim chart = New With {.Title = String.Format("{0}'s Leads data by {1}", "123", x_axis),
+                                  .DataSource = source}
+
+            Dim json As New JavaScriptSerializer
+            Dim jsonString = json.Serialize(chart)
+            Return jsonString
+        End Using
+    End Function
+
+    Protected Sub char_change_x_axis_id_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        Dim a_x_axis = e.Parameter.Split("|")(0)
+        Dim a_empID = e.Parameter.Split("|")(1)
+        current_employee = a_empID
+        e.Result = char_change_axis(a_x_axis, a_empID)
     End Sub
 End Class

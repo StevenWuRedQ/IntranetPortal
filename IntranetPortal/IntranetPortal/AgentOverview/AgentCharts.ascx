@@ -13,7 +13,8 @@
     /*
        show UI elemnt and function with diffrent stauts 
        1. when status user or offices provide activity log function 
-       2. system or office and y-axis is employees name status show bar click function
+       2. system or office and x-axis is employees name status show bar click function
+       3.status user could choice most fild x-axis in dropdown menu
     */
     var chart_status_enum =
         {
@@ -35,6 +36,17 @@
         //alert(functions[type])
         functions[type]();
     };
+    function change_chart_x_axis(e)
+    {
+        
+        if (empId == null)
+        {
+            alert("empId is null")
+            return;
+        }
+        var x_axis = $(e).text();
+        change_x_axis_clinet.PerformCallback(x_axis + "|" + empId)
+    }
     function change_chart_time(e) {
         var time = e;
         //alert(" " + e + "," + empId);
@@ -265,7 +277,10 @@
         var ds = eval('<% ChartSource()%>');
         show_bar_chart(ds);
     }
-
+    function change_x_axis_complete(s, e)
+    {
+        show_bar_chart($.parseJSON(e.result))
+    }
     show_bar_chart();
 </script>
 <dx:ASPxCallback runat="server" ID="callbackDs" OnCallback="callbackDs_Callback" ClientInstanceName="callbackDsClient">
@@ -282,4 +297,7 @@
 </dx:ASPxCallback>
 <dx:ASPxCallback runat="server" ID="loadOfficeLeadsCallback" OnCallback="loadOfficeLeadsCallback_Callback" ClientInstanceName="callbackOfficeLeads">
     <ClientSideEvents CallbackComplete="DataSourceLoadedComplete" />
+</dx:ASPxCallback>
+<dx:ASPxCallback runat="server" ID="char_change_x_axis_id" OnCallback="char_change_x_axis_id_Callback" ClientInstanceName="change_x_axis_clinet">
+    <ClientSideEvents CallbackComplete="change_x_axis_complete" />
 </dx:ASPxCallback>
