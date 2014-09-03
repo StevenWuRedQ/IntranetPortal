@@ -70,7 +70,7 @@
         <script type="text/javascript">
             function ShowSearchLeadsInfo(bble) {
                 var url = '/ViewLeadsInfo.aspx?id=' + bble;
-                window.showModalDialog(url, 'View Leads Info', 'dialogWidth:1350px;dialogHeight:930px');
+                window.open(url, 'View Leads Info', 'Width=1350px,Height=930px');
             }
             function GoToLead(bble) {
                 window.location.href = "/default.aspx?t=search&key=" + encodeURIComponent(txtSearchKeyClient.GetText()) + "&id=" + bble;

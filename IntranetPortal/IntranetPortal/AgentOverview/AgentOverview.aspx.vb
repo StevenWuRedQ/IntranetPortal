@@ -66,8 +66,9 @@ Public Class AgentOverview
         If e.Parameters.StartsWith("LoadLayout") Then
             Dim report = e.Parameters.Split("|")(1)
             Dim up = Employee.GetProfile(User.Identity.Name)
-            gridReport.LoadClientLayout(up.ReportTemplates(report))
+            LoadGridColumn(up.ReportTemplates(report))
             SetFlieds(GetReportColumns())
+            gridReport.DataBind()
         End If
 
         If e.Parameters.StartsWith("FieldChange") Then

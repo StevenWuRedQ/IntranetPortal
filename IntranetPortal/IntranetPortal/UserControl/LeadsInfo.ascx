@@ -108,15 +108,15 @@
 
     function PrintLeadInfo() {
         if (leadsInfoBBLE != null) {
-            var url = '/ShowReport.aspx?id=' + leadsInfoBBLE;
-            window.showModalDialog(url, 'Show Report', 'dialogWidth:800px;dialogHeight:800px');
+            var url = '/ShowReport.aspx?id=' + leadsInfoBBLE;           
+            window.open(url, 'Show Report', 'Width=800px,Height=800px');
         }
     }
 
     function PrintLogInfo() {
         if (leadsInfoBBLE != null) {
             var url = '/ShowReport.aspx?id=' + leadsInfoBBLE + "&t=log";
-            window.showModalDialog(url, 'Show Report', 'dialogWidth:800px;dialogHeight:800px');
+            window.open(url, 'Show Report', 'Width=800px,Height=800px');
         }
     }
 
