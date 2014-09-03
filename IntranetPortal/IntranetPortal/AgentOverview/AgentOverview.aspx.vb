@@ -97,7 +97,7 @@ Public Class AgentOverview
     End Sub
 
     Protected Sub Unnamed_ServerClick(sender As Object, e As EventArgs)
-        gridExport.WriteXlsToResponse()
+        gridExport.WritePdfToResponse()
     End Sub
 
     Protected Sub infoCallback_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)

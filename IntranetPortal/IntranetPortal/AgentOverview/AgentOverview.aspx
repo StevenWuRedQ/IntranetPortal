@@ -505,7 +505,6 @@
 
                                                 <dx:ASPxPopupControl ID="ASPxPopupControl1" runat="server" HeaderText="Save Report" ClientInstanceName="SaveReportPopup" Modal="true" Width="500px" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
                                                     <HeaderTemplate>
-
                                                         <div class="pop_up_header_margin">
                                                             <i class="fa fa-save with_circle pop_up_header_icon"></i>
                                                             <span class="pop_up_header_text">Save Report</span>
@@ -544,12 +543,12 @@
                                                         <i class="fa fa-question-circle tooltip-examples" style="color: #999ca1" title="Check items from the pane on the right side to view the customized report."></i>
                                                         <div style="float: right; padding-right: 40px; font-size: 18px;">
 
-                                                            <i class="fa fa-save report_head_button report_head_button_padding" onclick="SaveReportPopup.Show()" style="cursor: pointer"></i>
+                                                            <i class="fa fa-save report_head_button report_head_button_padding tooltip-examples" onclick="SaveReportPopup.Show()" title="Save Report"  style="cursor: pointer"></i>
                                                             <i class="fa fa-exchange report_head_button tooltip-examples report_head_button_padding" title="Compare"></i>
-                                                            <asp:LinkButton ID="btnExport" runat="server" OnClick="Unnamed_ServerClick" Text='<i class="fa fa-print  report_head_button report_head_button_padding"></i>'>                                                                
+                                                            <asp:LinkButton ID="btnExport" runat="server" OnClick="Unnamed_ServerClick" Text='<i class="fa fa-print  report_head_button report_head_button_padding tooltip-examples" title="Save PDF"></i>'>                                                                
                                                             </asp:LinkButton>
-                                                            <i class="fa fa-envelope  report_head_button report_head_button_padding"></i>
-                                                            <i class="fa fa-file-pdf-o  report_head_button"></i>
+                                                    <%--        <i class="fa fa-envelope  report_head_button report_head_button_padding"></i>
+                                                            <i class="fa fa-file-pdf-o  report_head_button"></i>--%>
                                                         </div>
                                                     </div>
 
