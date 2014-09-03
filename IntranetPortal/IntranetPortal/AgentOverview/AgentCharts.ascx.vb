@@ -137,7 +137,7 @@ Public Class AgentCharts
 
     Public Function char_change_axis(x_axis As String, empId As String) As String
         Using Context As New Entities
-            Dim source = New List(Of Dictionary(Of String, String))
+            Dim source = New List(Of Dictionary(Of String, Object))
 
             x_axis = map_x_axis(x_axis)
 
@@ -154,8 +154,8 @@ Public Class AgentCharts
 
             reader = cmd.ExecuteReader()
             While (reader.Read())
-                Dim item = New Dictionary(Of String, String)
-                item.Add("Count", reader.GetInt32(0).ToString)
+                Dim item = New Dictionary(Of String, Object)
+                item.Add("Count", reader.GetInt32(0))
                 Dim name = ""
                 Try
                     name = reader.GetString(1)
