@@ -93,13 +93,14 @@
             empId = employeeId;
             infoCallbackClient.SetVisible(true);
             infoCallbackClient.PerformCallback("EMP|" + empId);
-            gridReportClient.PerformCallback("BindEmp|" + employeeId);
+            gridReportClient.PerformCallback("BindEmp|" + employeeId);                       
             LoadEmployeeBarChart(empId);
         }
-        function getEmplyeeIDComplete(s, e) {
 
+        function getEmplyeeIDComplete(s, e) {
             BindEmployee(parseInt(e.result));
         }
+
         function BindOffice(office) {
 
             gridReportClient.PerformCallback("BindOffice|" + office);
@@ -126,11 +127,12 @@
 
         function ShowLeadstatus(status) {
             infoCallbackClient.SetVisible(false);
-            char_show_status = chart_status_enum.status_system;
+          
             gridReportClient.PerformCallback("BindStatus|" + status);
             //ContentCallbackPanel.PerformCallback("Status|" + status)
             LoadStatusBarChart(status);
         }
+
         function CustomizRefershEnd() {
 
             initScrollbars();

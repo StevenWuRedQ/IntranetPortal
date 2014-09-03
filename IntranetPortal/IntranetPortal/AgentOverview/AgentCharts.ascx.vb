@@ -64,6 +64,7 @@ Public Class AgentCharts
             
         End Using
     End Function
+
     Public Function AgentActivityToday(ByVal formdays As Date) As String
         'current_employee
         Dim today = formdays
@@ -83,6 +84,7 @@ Public Class AgentCharts
         End Using
 
     End Function
+
     Public Function AgentZoningData() As String
         Using Context As New Entities
             Dim source = (From li In Context.LeadsInfoes Join
@@ -126,11 +128,13 @@ Public Class AgentCharts
     Protected Sub loadOfficeLeadsCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         e.Result = OfficeLeadsSource(e.Parameter)
     End Sub
+
     Public Function map_x_axis(x_axis As String) As String
         Dim dataBaseCounsMap = New Dictionary(Of String, String)
         'dataBaseCounsMap.Add("")
         Return x_axis
     End Function
+
     Public Function char_change_axis(x_axis As String, empId As String) As String
         Using Context As New Entities
             Dim source = New List(Of Dictionary(Of String, String))
@@ -167,7 +171,7 @@ Public Class AgentCharts
             sqlConnection1.Close()
             'Dim source = (From ld In Context.LeadsInfoes Where ld[x_axis] isnot nothing  group ld by name = ld[x_axis] into count() ).ToList()
             ' Employee.GetInstance(CInt(current_employee)).Name can't get employee instance
-            Dim chart = New With {.Title = String.Format("{0}'s Leads data by {1}", "123", x_axis),
+            Dim chart = New With {.Title = String.Format("{0}'s Leads data by {1}", Employee.GetInstance(CInt(current_employee)).Name, x_axis),
                                   .DataSource = source}
 
             Dim json As New JavaScriptSerializer

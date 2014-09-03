@@ -281,8 +281,7 @@
 
     function SearchGridLeads() {
         var filterCondition = "";
-        var key = txtkeyWordClient.GetText();
-        alert(key);
+        var key = txtkeyWordClient.GetText();       
         filterCondition = "[LeadsName] LIKE '%" + key + "%' OR [Neighborhood] LIKE '%" + key + "%'";
         filterCondition += " OR [EmployeeName] LIKE '%" + key + "%'";
         gridLeads.PerformCallback("Search|" + key);

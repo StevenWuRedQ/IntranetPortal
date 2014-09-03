@@ -246,14 +246,17 @@
     }
 
     function LoadStatusBarChart(status) {
+        char_show_status = chart_status_enum.status_system;
         callbackDsClient.PerformCallback(status);
     }
 
     function LoadOfficeBarChart(office) {
+        char_show_status = chart_status_enum.status_office;
         callbackOfficeLeads.PerformCallback(office);
     }
 
     function LoadEmployeeBarChart(empId) {
+        char_show_status = chart_status_enum.status_user;
         callbackEmployeeClient.PerformCallback(empId);
     }
     function LoadAngentTodayReport(empId) {
