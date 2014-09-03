@@ -12,7 +12,7 @@
 
     <%--add font image by steven--%>
     <%--<link href="css/bootstrap.min.css"  type="text/css" rel="stylesheet"/>--%>
-    <link href="css/font-awesome.css" type="text/css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
     <%--------end--------%>
     <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
