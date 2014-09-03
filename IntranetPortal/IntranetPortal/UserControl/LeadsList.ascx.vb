@@ -146,7 +146,7 @@ Public Class LeadsList
         gridLeads.Settings.ShowFilterRow = True
 
         Dim txtkeyword = TryCast(gridLeads.FindFilterRowTemplateControl("txtkeyword"), ASPxTextBox)
-        If txtkeyword.Text = "" Then
+        If txtkeyword IsNot Nothing AndAlso txtkeyword.Text = "" Then
             txtkeyword.Text = key
         End If
 

@@ -282,7 +282,7 @@
     function SearchGridLeads() {
         var filterCondition = "";
         var key = txtkeyWordClient.GetText();
-
+        alert(key);
         filterCondition = "[LeadsName] LIKE '%" + key + "%' OR [Neighborhood] LIKE '%" + key + "%'";
         filterCondition += " OR [EmployeeName] LIKE '%" + key + "%'";
         gridLeads.PerformCallback("Search|" + key);
@@ -707,12 +707,12 @@
                     <table>
                         <tr>
                             <td>
-                                <dx:ASPxTextBox runat="server" ID="txtkeyword" Width="320" ClientInstanceName="txtkeyWordClient"></dx:ASPxTextBox>
+                                <dx:ASPxTextBox runat="server" ID="txtkeyword" Width="240" ClientInstanceName="txtkeyWordClient"></dx:ASPxTextBox>
                             </td>
                             <td>
                                 <dx:ASPxButton runat="server" RenderMode="Button" Image-Url="/images/Search.png" Image-Height="16px" Text="Search" Image-Width="16px" AutoPostBack="false">
                                     <FocusRectPaddings PaddingLeft="2" PaddingRight="2" PaddingBottom="0" PaddingTop="0" />
-                                    <ClientSideEvents Click="function(){SearchGridLeads();}" />
+                                    <ClientSideEvents Click="function(s,e){SearchGridLeads();}" />
                                 </dx:ASPxButton>
                             </td>
                         </tr>

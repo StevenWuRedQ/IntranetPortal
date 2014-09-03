@@ -13,7 +13,12 @@ Public Class LeadAgent
             If Not Page.IsPostBack Then
 
                 ASPxSplitter1.ClientVisible = True
-                ASPxSplitter1.GetPaneByName("leadPanel").Collapsed = False
+                Dim leadPanel = ASPxSplitter1.GetPaneByName("leadPanel")
+                leadPanel.Collapsed = False
+
+                If CategoryName = "Search" Then
+                    leadPanel.Size = 350
+                End If
 
                 LeadsList.BindLeadsList(CategoryName)
 
