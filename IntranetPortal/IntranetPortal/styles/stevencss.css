@@ -381,10 +381,11 @@ div.form_head {
     border-bottom: 1px solid #dde0e7;
     float: left;
 }
-.form_div_node_small
-{
-    width:190px;
+
+.form_div_node_small {
+    width: 190px;
 }
+
 .border_under_line {
     border-bottom: 1px solid #dde0e7;
 }
@@ -433,26 +434,27 @@ input[type='checkbox'] {
     display: none;
     font-size: 18px !important;
 }
+
     input[type='checkbox'] + label,
     input[type=radio] + label {
         display: inline-block;
         font-size: 18px !important;
     }
 
-    input[type='checkbox'] + label:before,
-    input[type='radio'] + label:before {
-        display: inline-block;
-        font-family: FontAwesome;
-        font-style: normal;
-        font-weight: normal;
-        line-height: 1;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        margin-top: 1px;
-        padding-right: 8px;
-        width: 20px !important;
-        float: left;
-    }
+        input[type='checkbox'] + label:before,
+        input[type='radio'] + label:before {
+            display: inline-block;
+            font-family: FontAwesome;
+            font-style: normal;
+            font-weight: normal;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin-top: 1px;
+            padding-right: 8px;
+            width: 20px !important;
+            float: left;
+        }
 
     input[type="checkbox"]:checked + label:before {
         padding-right: 6px;
@@ -634,7 +636,7 @@ i.with_circle {
 
 .pop_up_header_margin {
     margin-top: 10px;
-    float:left;
+    float: left;
 }
 /*end pop up*/
 .agent_menu_list_item:hover {
@@ -1447,7 +1449,52 @@ i.log_item_hl_buttons {
     margin-bottom: -27px;
     color: #2e2f31;
 }
-.input_currency
-{
 
+.input_currency {
+}
+/*compare popup ui*/
+.compare_titles_field {
+    width: 150px;
+}
+
+.compare_profile_img {
+    width: 100px;
+    height: 100px;
+    margin-top: 15px;
+}
+
+.compare_agent_name {
+    margin-top: 15px;
+    color: #234b60;
+    font-size: 24px;
+}
+
+.compare_table_title {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 30px;
+    height: 25px;
+    border-bottom: 2px solid #dde0e7;
+    font-size: 12px;
+}
+.compare_agent_field
+{
+    width:230px;
+}
+.compare_table_info {
+    padding: 5px 30px;
+}
+
+span.with_width {
+    float: left;
+}
+
+div.compare_table_row {
+    width: 100%;
+    border-bottom: 1px solid #dde0e7;
+    
+}
+div.compare_table_row_title
+{
+    color:#dde0e7;
 }

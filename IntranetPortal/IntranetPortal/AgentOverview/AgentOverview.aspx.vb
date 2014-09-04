@@ -6,6 +6,7 @@ Public Class AgentOverview
     Inherits System.Web.UI.Page
 
     Public Property CurrentEmployee As Employee
+    Public Property eID As Integer
     Public Property CurrentStatus As LeadStatus
     Public Property CurrentOffice As Office
     Public portalDataContext As New Entities
@@ -37,7 +38,11 @@ Public Class AgentOverview
             BindGridReport()
         End If
     End Sub
-
+    Function getProfileImage(empID As Integer) As String
+        Dim e = Employee.GetInstance(empID)
+       
+        Return If(e.Picture Is Nothing, "/images/user-empty-icon.png", e.Picture)
+    End Function
     Protected Sub gridEmps_DataBinding(sender As Object, e As EventArgs) Handles gridEmps.DataBinding, gridEmpsCompare.DataBinding
         If gridEmps.DataSource Is Nothing Then
             BindEmp()

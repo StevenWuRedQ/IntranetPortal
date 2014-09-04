@@ -333,8 +333,7 @@
 
             <Columns>
                 <dx:GridViewDataColumn FieldName="ActionType" VisibleIndex="0" Caption="" Width="40px">
-                    <HeaderTemplate>
-                    </HeaderTemplate>
+                    
                     <DataItemTemplate>
                         <%# GetCommentsIconClass(Eval("ActionType"))%>
                     </DataItemTemplate>

@@ -447,8 +447,8 @@
                                                             <div style="height: 490px; float: left; width: 100%" class="clearfix">
                                                                 <div style="padding-top: 10px; height: 325px;" class="clearfix">
                                                                     <div class="layout_float_right clearfix">
-                                                                        <div class="layout_float_right" style="margin-left:20px;margin-right:20px">
-                                                                           
+                                                                        <div class="layout_float_right" style="margin-left: 20px; margin-right: 20px">
+
                                                                             <button class="btn btn-default button_transparent" type="button" onclick="$('#container').printElement();">Print Chart</button>
                                                                         </div>
 
@@ -553,7 +553,7 @@
                                                             <i class="fa fa-exchange report_head_button tooltip-examples report_head_button_padding" title="Compare" onclick="popupControlCompareList.Show()"></i>
                                                             <asp:LinkButton ID="btnExport" runat="server" OnClick="Unnamed_ServerClick" Text='<i class="fa fa-print  report_head_button report_head_button_padding tooltip-examples" title="Save PDF"></i>'>                                                                
                                                             </asp:LinkButton>
-                                                    <%--        <i class="fa fa-envelope  report_head_button report_head_button_padding"></i>
+                                                            <%--        <i class="fa fa-envelope  report_head_button report_head_button_padding"></i>
                                                             <i class="fa fa-file-pdf-o  report_head_button"></i>--%>
                                                         </div>
                                                     </div>
@@ -762,8 +762,27 @@
     <dx:ASPxCallback runat="server" ID="getEmployeeIDByName" OnCallback="getEmployeeIDByName_Callback" ClientInstanceName="getEmployeeIDByNameClinet">
         <ClientSideEvents CallbackComplete="getEmplyeeIDComplete" />
     </dx:ASPxCallback>
-    <dx:ASPxPopupControl ClientInstanceName="popupControlCompareList" Width="500px" Height="300px" MaxWidth="800px" MaxHeight="400px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
+    <dx:ASPxPopupControl ClientInstanceName="popupControlCompareList" Width="950px" Height="800px" MaxWidth="1000px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
         HeaderText="Compare" AutoUpdatePosition="true" Modal="true" runat="server" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
+        <HeaderTemplate>
+            <div class="clearfix">
+                <div class="pop_up_header_margin">
+                    <i class="fa fa-exchange with_circle pop_up_header_icon"></i>
+                    <span class="pop_up_header_text">Compare Agents</span>
+                </div>
+                <div class="pop_up_buttons_div clearfix">
+                    <i class="fa fa-times icon_btn" style="float: right" onclick="popupControlCompareList.Hide()"></i>
+                    <div style="margin-top: 14px; margin-right: 13px">
+                        <i class="fa fa-save report_head_button report_head_button_padding tooltip-examples" title="Save"></i>
+                        <i class="fa fa-print report_head_button tooltip-examples report_head_button_padding" title="Print"></i>
+                        <i class="fa fa-envelope report_head_button tooltip-examples report_head_button_padding" title="E-mail"></i>
+                        <i class="fa fa-file-pdf-o report_head_button tooltip-examples report_head_button_padding" title="PDF"></i>
+                    </div>
+
+                </div>
+            </div>
+
+        </HeaderTemplate>
         <ContentCollection>
             <dx:PopupControlContentControl runat="server">
                 <script type="text/javascript">
@@ -785,73 +804,75 @@
                     }
                     // ]]> 
                 </script>
-                <table>
-                    <tr>
-                        <td style="width:300px">
-                            <dx:ASPxGridView runat="server" Width="100%" ID="gridEmpsCompare" KeyFieldName="EmployeeID" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" ClientInstanceName="gridEmpsCompareClient" CssClass="font_source_sans_pro">
-                                <Columns>
-                                    <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Width="25px">
-                                    </dx:GridViewCommandColumn>
-                                    <dx:GridViewDataTextColumn FieldName="Name" Settings-AllowHeaderFilter="False" VisibleIndex="1">
-                                        <Settings AllowHeaderFilter="False"></Settings>
-                                        <DataItemTemplate>
-                                            <div class="employee_list_item clearfix">
-                                                <div class="employee_list_item_div">
-                                                    <span class="font_black"><%# Eval("Name")%></span><br />
-                                                    <%# Eval("Position")%>
-                                                </div>                                             
-                                            </div>
-                                        </DataItemTemplate>
-                                    </dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataColumn FieldName="Department" VisibleIndex="5">
-                                        <GroupRowTemplate>
-                                            <div>
-                                                <table style="height: 30px">
-                                                    <tr>
-                                                        <td style="width: 80px;"><span class="font_black"><i class="fa fa-caret-<%#If(Container.Expanded,"down","right") %> font_16" onclick="ExpandOrCollapseGroupRow(this, gridEmpsCompareClient,  <%# Container.VisibleIndex%>)" style="cursor: pointer"></i>&nbsp;<i class="fa fa-bank font_16"></i>&nbsp; <%# Container.GroupText%>
-                                                        </span></td>
-                                                        <td style="padding-left: 10px">
-                                                            <span class="employee_lest_head_number_label"><%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %></span>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </GroupRowTemplate>
-                                    </dx:GridViewDataColumn>
+                <%--old one--%>
+                <div style="display:none">
+                    <table>
+                        <tr>
+                            <td style="width: 300px">
+                                <dx:ASPxGridView runat="server" Width="100%" ID="gridEmpsCompare" KeyFieldName="EmployeeID" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" ClientInstanceName="gridEmpsCompareClient" CssClass="font_source_sans_pro">
+                                    <Columns>
+                                        <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Width="25px">
+                                        </dx:GridViewCommandColumn>
+                                        <dx:GridViewDataTextColumn FieldName="Name" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                                            <Settings AllowHeaderFilter="False"></Settings>
+                                            <DataItemTemplate>
+                                                <div class="employee_list_item clearfix">
+                                                    <div class="employee_list_item_div">
+                                                        <span class="font_black"><%# Eval("Name")%></span><br />
+                                                        <%# Eval("Position")%>
+                                                    </div>
+                                                </div>
+                                            </DataItemTemplate>
+                                        </dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataColumn FieldName="Department" VisibleIndex="5">
+                                            <GroupRowTemplate>
+                                                <div>
+                                                    <table style="height: 30px">
+                                                        <tr>
+                                                            <td style="width: 80px;"><span class="font_black"><i class="fa fa-caret-<%#If(Container.Expanded,"down","right") %> font_16" onclick="ExpandOrCollapseGroupRow(this, gridEmpsCompareClient,  <%# Container.VisibleIndex%>)" style="cursor: pointer"></i>&nbsp;<i class="fa fa-bank font_16"></i>&nbsp; <%# Container.GroupText%>
+                                                            </span></td>
+                                                            <td style="padding-left: 10px">
+                                                                <span class="employee_lest_head_number_label"><%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %></span>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </GroupRowTemplate>
+                                        </dx:GridViewDataColumn>
 
-                                </Columns>
-                                <Styles>
-                                    <SelectedRow BackColor="#FF400D"></SelectedRow>
-                                    <Cell>
-                                        <Paddings Padding="0px"></Paddings>
-                                    </Cell>
-                                </Styles>
-                                <GroupSummary>
-                                    <dx:ASPxSummaryItem SummaryType="Count" />
-                                </GroupSummary>
-                                <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" AllowClientEventsOnLoad="false" />
-                                <SettingsPager Mode="ShowAllRecords">
-                                </SettingsPager>
-                                <Settings ShowColumnHeaders="False" GridLines="None" VerticalScrollableHeight="290" VerticalScrollBarMode="Auto"></Settings>
-                                <Border BorderStyle="None"></Border>
-                                <ClientSideEvents SelectionChanged="grid_SelectionChanged" />
-                            </dx:ASPxGridView>
-                        </td>
-                        <td style="width:200px">
-                            <div>
-                                Selected Employees:
-                            </div>
-                            <dx:ASPxListBox ID="ASPxListBox1" ClientInstanceName="selList" runat="server" Height="250px" SelectionMode="Multiple"
-                                Width="100%" />
-                            <div>
-                                Selected count: <span id="selCount" style="font-weight: bold">0</span>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                                    </Columns>
+                                    <Styles>
+                                        <SelectedRow BackColor="#FF400D"></SelectedRow>
+                                        <Cell>
+                                            <Paddings Padding="0px"></Paddings>
+                                        </Cell>
+                                    </Styles>
+                                    <GroupSummary>
+                                        <dx:ASPxSummaryItem SummaryType="Count" />
+                                    </GroupSummary>
+                                    <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" AllowClientEventsOnLoad="false" />
+                                    <SettingsPager Mode="ShowAllRecords">
+                                    </SettingsPager>
+                                    <Settings ShowColumnHeaders="False" GridLines="None" VerticalScrollableHeight="290" VerticalScrollBarMode="Auto"></Settings>
+                                    <Border BorderStyle="None"></Border>
+                                    <ClientSideEvents SelectionChanged="grid_SelectionChanged" />
+                                </dx:ASPxGridView>
+                            </td>
+                            <td style="width: 200px">
+                                <div>
+                                    Selected Employees:
+                                </div>
+                                <dx:ASPxListBox ID="ASPxListBox1" ClientInstanceName="selList" runat="server" Height="250px" SelectionMode="Multiple"
+                                    Width="100%" />
+                                <div>
+                                    Selected count: <span id="selCount" style="font-weight: bold">0</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
 
-                <dx:ASPxButton Text="OK" runat="server" ID="btnShowCompare" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                    <ClientSideEvents Click="function(s,e){                                                                
+                    <dx:ASPxButton Text="OK" runat="server" ID="btnShowCompare" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                        <ClientSideEvents Click="function(s,e){                                                                
                                         var empitems =  gridEmpsCompareClient.GetSelectedKeysOnPage();                                    
                                         
                                         if(empitems == null)
@@ -862,7 +883,110 @@
                                         CompareEmp(empitems);
                                         popupControlCompareList.Hide();                                                                        
                                         }" />
-                </dx:ASPxButton>
+                    </dx:ASPxButton>
+                </div>
+
+                <%--new compare agnets UI by steven--%>
+                <div style="margin-top: 25px;font-size:14px">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="compare_titles_field">
+                                    <%--style="visibility: hidden"--%>
+                                    <div>
+                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button1" style="background: transparent">
+                                          <span style="padding-right:100px"> Been Martin</span><span class="caret"></span>
+
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="button1">
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Status</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ZipCode</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Zoning</a></li>
+
+                                        </ul>
+                                        <img src="<%=getProfileImage(58) %>" class="img-circle compare_profile_img " />
+                                        <span class="compare_agent_name">Benn Martin</span>
+                                    </div>
+                                    <div>
+                                        <%--table title--%>
+                                        <div class="compare_table_title">Basic Information</div>
+                                        <%--info items--%>
+                                        <%--only the first table row have title--%> 
+                                        <div align="right" class="compare_table_row compare_table_row_title">
+                                            <label class="compare_table_info">Role</label>
+                                        </div>
+                                         <div align="right" class="compare_table_row compare_table_row_title">
+                                            <span class="compare_table_info">Role</span>
+                                        </div>
+                                         <div align="right" class="compare_table_row compare_table_row_title">
+                                            <span class="compare_table_info">Role</span>
+                                        </div>
+                                       
+                                    </div>
+                                    <div>
+                                         <%--table title--%>
+                                        <div class="compare_table_title">Performance</div>
+                                         <%--only the first table row have title--%> 
+                                        <div align="right" class="compare_table_row compare_table_row_title">
+                                            <span class="compare_table_info">Call Attemps</span>
+                                        </div>
+                                         <div align="right" class="compare_table_row compare_table_row_title">
+                                            <span class="compare_table_info">Door Knock</span>
+                                        </div>
+                                         
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                 <div class="compare_agent_field">
+                                    <%--style="visibility: hidden"--%>
+                                    <div>
+                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button1" style="background: transparent">
+                                          <span style="padding-right:100px"> Been Martin</span><span class="caret"></span>
+
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="button1">
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Status</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ZipCode</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Zoning</a></li>
+
+                                        </ul>
+                                        <img src="<%=getProfileImage(58) %>" class="img-circle compare_profile_img " />
+                                        <span class="compare_agent_name">Benn Martin</span>
+                                    </div>
+                                    <div>
+                                        <%--table title--%>
+                                        <div class="compare_table_title">Basic Information</div>
+                                        <%--info items--%>
+                                        <%--only the first table row have title--%> 
+                                        <div align="right" class="compare_table_row compare_table_row_title">
+                                            <label class="compare_table_info">Role</label>
+                                        </div>
+                                         <div align="right" class="compare_table_row compare_table_row_title">
+                                            <span class="compare_table_info">Role</span>
+                                        </div>
+                                         <div align="right" class="compare_table_row compare_table_row_title">
+                                            <span class="compare_table_info">Role</span>
+                                        </div>
+                                       
+                                    </div>
+                                    <div>
+                                         <%--table title--%>
+                                        <div class="compare_table_title">Performance</div>
+                                         <%--only the first table row have title--%> 
+                                        <div align="right" class="compare_table_row compare_table_row_title">
+                                            <span class="compare_table_info">Call Attemps</span>
+                                        </div>
+                                         <div align="right" class="compare_table_row compare_table_row_title">
+                                            <span class="compare_table_info">Door Knock</span>
+                                        </div>
+                                         
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </dx:PopupControlContentControl>
         </ContentCollection>
     </dx:ASPxPopupControl>
