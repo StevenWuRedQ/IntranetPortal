@@ -129,10 +129,43 @@ Public Class AgentCharts
     Public Function map_x_axis(x_axis As String) As String
         Dim dataBaseCounsMap = New Dictionary(Of String, String)
         'dataBaseCounsMap.Add("")
+
+        Try
+            Dim field = dataBaseCounsMap.Item(x_axis)
+            x_axis = If(field Is Nothing, x_axis, field)
+        Catch ex As Exception
+
+        End Try
         Return x_axis
     End Function
+
+    Interface ConvertEnum
+        Function Convert(value As Integer) As String
+    End Interface
+
+    Public Class converLeadStatus
+        Implements ConvertEnum
+
+        Function Convert(value As Integer) As String Implements ConvertEnum.Convert
+            Return CType(value, LeadStatus).ToString
+        End Function
+    End Class
+
+
     Public Function map_value(x_axis As String, value As String) As String
-        Convert.ToInt32(value)
+        Dim convers = New Dictionary(Of String, ConvertEnum)
+        convers.Add("Status",  New converLeadStatus)
+      
+        Try
+            Dim covert = convers.Item(x_axis)
+            If covert IsNot Nothing Then
+                Dim intValue = Convert.ToInt32(value)
+                Return covert.Convert(intValue)
+            End If
+        Catch ex As Exception
+
+        End Try
+       
         Return value
     End Function
     Public Function char_change_axis(x_axis As String, empId As String) As String
@@ -162,6 +195,7 @@ Public Class AgentCharts
                 Catch ex As Exception
                     name = reader.GetInt32(0).ToString
                 End Try
+                name = map_value(x_axis, name)
                 item.Add("Name", name)
                 source.Add(item)
 
