@@ -50,6 +50,7 @@
     $(document).ready(function () {
         // Handler for .ready() called.
         initScrollbar_summary();
+       
     });
    
 </script>
@@ -159,7 +160,7 @@
                     <div style="display: inline-table; font-family: 'Source Sans Pro'; margin-left: 19px; margin-top: 15px;">
                        
                         <div style="float: left; font-weight: 300; font-size: 48px; color: #234b60">
-                            <%= Page.User.Identity.Name %>'s Summary &nbsp;
+                            <span style="text-transform:capitalize"><%= Page.User.Identity.Name %></span>'s Summary &nbsp;
                         </div>
                         <div align="center" style="background-color: #ff400d;" class="label-summary-info">
                             <table>
@@ -441,7 +442,7 @@
                             </tr>
                             <tr>
                                 <td colspan="3">
-                                    <div style="width: 815px; height: auto; background: #fff5e7; border-left: 5px solid #ff400d; margin-top: 5px; padding-top: 0px; color: #2b586f; font: 14px 'PT Serif'; font-style: italic; margin-left: 35px;">
+                                    <div style="width: 815px; height: auto; background: #fff5e7; border-left: 5px solid #ff400d; margin-top: 30px; padding-top: 0px; color: #2b586f; font: 14px 'PT Serif'; font-style: italic; margin-left: 19px;">
                                         <div style="float: left; font-size: 60px; margin-left: 30px; margin-top: 5px;">“</div>
                                         <p style="width: 90%; padding-top: 20px; padding-bottom: 20px; padding-left: 65px;">
                                             <%= HtmlBlackQuote(Quote)%>

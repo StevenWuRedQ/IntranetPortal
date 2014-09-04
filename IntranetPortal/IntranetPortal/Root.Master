@@ -24,9 +24,11 @@
 
     <style>
         html, body, #form1 {
-            margin: 0;
+            /*margin: 0;
             padding: 0;
             height: 100%;
+            width:100%;*/
+             width:100% !important;
         }
     </style>
     <%--/*add by steven*/--%>
@@ -65,8 +67,8 @@
 
     </script>
 </head>
-<body onload="init();">
-    <form id="form1" runat="server">
+<body onload="init();" id="testIDbody">
+    <form id="form1"  runat="server">
         <script type="text/javascript">
             function ShowSearchLeadsInfo(bble) {
                 var url = '/ViewLeadsInfo.aspx?id=' + bble;
@@ -181,7 +183,8 @@
                                                                     <a id="registerLink" href="~/Account/Register.aspx" runat="server" visible="false">|Register</a>
                                                                 </AnonymousTemplate>
                                                                 <LoggedInTemplate>
-                                                                    Good morning, <span style="font-weight: 900;">
+                                                                   
+                                                                    Good  <%=If(DateTime.now.ToString.IndexOf("AM")>0,"morning","afternoon") %>, <span style="font-weight: 900;text-transform:capitalize">
                                                                         <asp:LoginName ID="HeadLoginName" runat="server" />
                                                                     </span>
                                                                     <%-- <img src="/images/arrow_down.png" />--%>

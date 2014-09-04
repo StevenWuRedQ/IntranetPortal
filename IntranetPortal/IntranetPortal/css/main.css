@@ -364,28 +364,28 @@ a:focus {
 @-moz-keyframes sign-in-box-ani-keyframes {
 	0% { opacity: 0; height: 490px; -moz-transform: scale(0,1); }
 	20% { opacity: 1; height: 490px; -moz-transform: scale(1,1); }
-	80% { opacity: 1; height: 490px; -moz-transform: scale(1,1); }
+	60% { opacity: 1; height: 490px; -moz-transform: scale(1,1); }
 	100% { opacity: 1; height: 415px; -moz-transform: scale(1,1); }
 }
 
 @-o-keyframes sign-in-box-ani-keyframes {
 	0% { opacity: 0; height: 490px; -o-transform: scale(0,1); }
 	20% { opacity: 1; height: 490px; -o-transform: scale(1,1); }
-	80% { opacity: 1; height: 490px; -o-transform: scale(1,1); }
+	60% { opacity: 1; height: 490px; -o-transform: scale(1,1); }
 	100% { opacity: 1; height: 415px; -o-transform: scale(1,1); }
 }
 
 @-webkit-keyframes sign-in-box-ani-keyframes {
 	0% { opacity: 0; height: 490px; -webkit-transform: scale(0,1); }
 	20% { opacity: 1; height: 490px; -webkit-transform: scale(1,1); }
-	80% { opacity: 1; height: 490px; -webkit-transform: scale(1,1); }
+	60% { opacity: 1; height: 490px; -webkit-transform: scale(1,1); }
 	100% { opacity: 1; height: 415px; -webkit-transform: scale(1,1); }
 }
 
 @keyframes sign-in-box-ani-keyframes {
 	0% { opacity: 0; height: 490px; transform: scale(0,1); }
 	20% { opacity: 1; height: 490px; transform: scale(1,1); }
-	80% { opacity: 1; height: 490px; transform: scale(1,1); }
+	60% { opacity: 1; height: 490px; transform: scale(1,1); }
 	100% { opacity: 1; height: 415px; transform: scale(1,1); }
 }
 

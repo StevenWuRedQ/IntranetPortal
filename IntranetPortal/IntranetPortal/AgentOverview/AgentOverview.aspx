@@ -4,6 +4,7 @@
 
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
+    <script src="../scripts/jquery.printElement.js"></script>
     <style type="text/css">
         .InforPanel {
             float: left;
@@ -93,7 +94,7 @@
             empId = employeeId;
             infoCallbackClient.SetVisible(true);
             infoCallbackClient.PerformCallback("EMP|" + empId);
-            gridReportClient.PerformCallback("BindEmp|" + employeeId);
+            gridReportClient.PerformCallback("BindEmp|" + employeeId);                       
             LoadEmployeeBarChart(empId);
         }
 
@@ -127,7 +128,7 @@
 
         function ShowLeadstatus(status) {
             infoCallbackClient.SetVisible(false);
-
+          
             gridReportClient.PerformCallback("BindStatus|" + status);
             //ContentCallbackPanel.PerformCallback("Status|" + status)
             LoadStatusBarChart(status);
@@ -351,144 +352,149 @@
                                                     <tr>
                                                         <td style="vertical-align: top">
                                                             <dx:ASPxCallbackPanel runat="server" ID="infoCallback" ClientInstanceName="infoCallbackClient" OnCallback="infoCallback_Callback" CssClass="InforPanel">
-                                                                <PanelCollection>
-                                                                    <dx:PanelContent>
+                                                    <PanelCollection>
+                                                        <dx:PanelContent>
 
-                                                                        <div style="height: 480px; float: left; border-right: 1px solid #dde0e7;">
-                                                                            <%--angent info--%>
+                                                            <div style="height: 480px; float: left; border-right: 1px solid #dde0e7;">
+                                                                <%--angent info--%>
 
-                                                                            <div style="width: 370px; background: url('../images/profile_bg.png')">
-                                                                                <%--width:201 height:201--%>
-                                                                                <asp:Panel runat="server" ID="AgentInfoPanel" Visible="true">
-                                                                                    <dx:ASPxImage runat="server" ID="profile_image" CssClass="img-circle class_profile_image" ImageUrl="/images/user-empty-icon.png">
-                                                                                    </dx:ASPxImage>
-                                                                                    <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"><%= CurrentEmployee.Name %></div>
-                                                                                    <div style="margin-top: 8px; font-size: 16px; color: #234b60; font-weight: 900" class="agnet_info_text"><%= CurrentEmployee.Position %></div>
-                                                                                    <%--info detial--%>
-                                                                                    <div style="font-size: 14px; margin-top: 25px">
-                                                                                        <%--items--%>
-                                                                                        <div class="agent_info_detial_left">Manger</div>
-                                                                                        <div class="agent_info_detial_space">&nbsp;</div>
-                                                                                        <div class="agent_info_detial_right"><%= CurrentEmployee.Manager%>&nbsp;</div>
-                                                                                        <%----end item--%>
-                                                                                        <%--items--%>
-                                                                                        <div class="agent_info_detial_left">Office</div>
-                                                                                        <div class="agent_info_detial_space">&nbsp;</div>
-                                                                                        <div class="agent_info_detial_right"><%= CurrentEmployee.Position %>(<%= CurrentEmployee.Department%>)&nbsp; </div>
-                                                                                        <%----end item--%>
-                                                                                        <%--items--%>
-                                                                                        <div class="agent_info_detial_left">Employee Since</div>
-                                                                                        <div class="agent_info_detial_space">&nbsp;</div>
-                                                                                        <div class="agent_info_detial_right"><%=String.Format("{0:d}", CurrentEmployee.EmployeeSince) %>&nbsp;</div>
-                                                                                        <%----end item--%>
-                                                                                        <%--items--%>
-                                                                                        <div class="agent_info_detial_left">Cell</div>
-                                                                                        <div class="agent_info_detial_space">&nbsp;</div>
-                                                                                        <div class="agent_info_detial_right"><%= String.Format("{0:(###) ###-####}", CurrentEmployee.Cellphone) %>&nbsp;</div>
-                                                                                        <%----end item--%>
-                                                                                        <%--items--%>
-                                                                                        <div class="agent_info_detial_left">Email</div>
-                                                                                        <div class="agent_info_detial_space">&nbsp;</div>
-                                                                                        <div class="agent_info_detial_right" style="color: #3993c1"><%= CurrentEmployee.Email%>&nbsp;</div>
-                                                                                        <%----end item--%>
-                                                                                        <%--items--%>
+                                                                <div style="width: 370px; background: url('../images/profile_bg.png')">
+                                                                    <%--width:201 height:201--%>
+                                                                    <asp:Panel runat="server" ID="AgentInfoPanel" Visible="true">
+                                                                        <dx:ASPxImage runat="server" ID="profile_image" CssClass="img-circle class_profile_image" ImageUrl="/images/user-empty-icon.png">
+                                                                        </dx:ASPxImage>
+                                                                        <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"><%= CurrentEmployee.Name %></div>
+                                                                        <div style="margin-top: 8px; font-size: 16px; color: #234b60; font-weight: 900" class="agnet_info_text"><%= CurrentEmployee.Position %></div>
+                                                                        <%--info detial--%>
+                                                                        <div style="font-size: 14px; margin-top: 25px">
+                                                                            <%--items--%>
+                                                                            <div class="agent_info_detial_left">Manger</div>
+                                                                            <div class="agent_info_detial_space">&nbsp;</div>
+                                                                            <div class="agent_info_detial_right"><%= CurrentEmployee.Manager%>&nbsp;</div>
+                                                                            <%----end item--%>
+                                                                            <%--items--%>
+                                                                            <div class="agent_info_detial_left">Office</div>
+                                                                            <div class="agent_info_detial_space">&nbsp;</div>
+                                                                            <div class="agent_info_detial_right"><%= CurrentEmployee.Position %>(<%= CurrentEmployee.Department%>)&nbsp; </div>
+                                                                            <%----end item--%>
+                                                                            <%--items--%>
+                                                                            <div class="agent_info_detial_left">Employee Since</div>
+                                                                            <div class="agent_info_detial_space">&nbsp;</div>
+                                                                            <div class="agent_info_detial_right"><%=String.Format("{0:d}", CurrentEmployee.EmployeeSince) %>&nbsp;</div>
+                                                                            <%----end item--%>
+                                                                            <%--items--%>
+                                                                            <div class="agent_info_detial_left">Cell</div>
+                                                                            <div class="agent_info_detial_space">&nbsp;</div>
+                                                                            <div class="agent_info_detial_right"><%= String.Format("{0:(###) ###-####}", CurrentEmployee.Cellphone) %>&nbsp;</div>
+                                                                            <%----end item--%>
+                                                                            <%--items--%>
+                                                                            <div class="agent_info_detial_left">Email</div>
+                                                                            <div class="agent_info_detial_space">&nbsp;</div>
+                                                                            <div class="agent_info_detial_right" style="color: #3993c1"><%= CurrentEmployee.Email%>&nbsp;</div>
+                                                                            <%----end item--%>
+                                                                            <%--items--%>
 
-                                                                                        <%----end item--%>
-                                                                                        <div style="margin-left: 69px; margin-top: 10px;">
+                                                                            <%----end item--%>
+                                                                            <div style="margin-left: 69px; margin-top: 10px;">
                                                                                             <button class="btn btn-default button_transparent" type="button" id="id_activity_log" onclick="onGetAgentLogButtonClick()">Activity Log</button>
 
-                                                                                            <button class="btn btn-default button_transparent" type="button" onclick="onGetAgentZoningDateClick()" style="margin-left: 20px">Leads's Tax</button>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </asp:Panel>
-
-                                                                                <asp:Panel runat="server" ID="OfficeInfoPanel" Visible="false">
-                                                                                    <dx:ASPxImage runat="server" ID="ASPxImage1" CssClass="img-circle class_profile_image" ImageUrl="/images/user-empty-icon.png">
-                                                                                    </dx:ASPxImage>
-                                                                                    <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"><%= CurrentOffice.OfficeDescription %></div>
-                                                                                    <div style="margin-top: 8px; font-size: 16px; color: #234b60; font-weight: 900" class="agnet_info_text"><%=  CurrentOffice.OfficeManagers  %></div>
-                                                                                    <%--info detial--%>
-                                                                                    <div style="font-size: 14px; margin-top: 25px;">
-                                                                                        <%--items--%>
-                                                                                        <div class="agent_info_detial_left">Address</div>
-                                                                                        <div class="agent_info_detial_space">&nbsp;</div>
-                                                                                        <div class="agent_info_detial_right"><%= CurrentOffice.Address %>&nbsp;</div>
-                                                                                        <%----end item--%>
-                                                                                        <%--items--%>
-                                                                                        <div class="agent_info_detial_left">Phone</div>
-                                                                                        <div class="agent_info_detial_space">&nbsp;</div>
-                                                                                        <div class="agent_info_detial_right"><%= CurrentOffice.PhoneNo %>&nbsp; </div>
-                                                                                        <%----end item--%>
-                                                                                        <%--items--%>
-                                                                                        <div class="agent_info_detial_left">Fax</div>
-                                                                                        <div class="agent_info_detial_space">&nbsp;</div>
-                                                                                        <div class="agent_info_detial_right"><%= CurrentOffice.FaxNo %>&nbsp;</div>
-                                                                                        <%----end item--%>
-                                                                                    </div>
-                                                                                </asp:Panel>
-                                                                                <%-----end info detial-----%>
-                                                                                <%-----end info detial-----%>
+                                                                                <button class="btn btn-default button_transparent" type="button" onclick="onGetAgentZoningDateClick()" style="margin-left: 20px">Leads's Tax</button>
                                                                             </div>
-                                                                            <asp:HiddenField runat="server" ID="hfEmpName" />
-                                                                            <asp:HiddenField runat="server" ID="hfMode" />
-                                                                            <dx:ASPxHiddenField runat="server" ID="hfReports"></dx:ASPxHiddenField>
                                                                         </div>
-                                                                    </dx:PanelContent>
-                                                                </PanelCollection>
-                                                                <ClientSideEvents EndCallback="OnEndCallback" />
-                                                            </dx:ASPxCallbackPanel>
+                                                                    </asp:Panel>
+
+                                                                    <asp:Panel runat="server" ID="OfficeInfoPanel" Visible="false">
+                                                                        <dx:ASPxImage runat="server" ID="ASPxImage1" CssClass="img-circle class_profile_image" ImageUrl="/images/user-empty-icon.png">
+                                                                        </dx:ASPxImage>
+                                                                        <div style="margin-top: 28px; font-size: 30px; color: #234b60; line-height: 16px" class="agnet_info_text"><%= CurrentOffice.OfficeDescription %></div>
+                                                                        <div style="margin-top: 8px; font-size: 16px; color: #234b60; font-weight: 900" class="agnet_info_text"><%=  CurrentOffice.OfficeManagers  %></div>
+                                                                        <%--info detial--%>
+                                                                        <div style="font-size: 14px; margin-top: 25px;">
+                                                                            <%--items--%>
+                                                                            <div class="agent_info_detial_left">Address</div>
+                                                                            <div class="agent_info_detial_space">&nbsp;</div>
+                                                                            <div class="agent_info_detial_right"><%= CurrentOffice.Address %>&nbsp;</div>
+                                                                            <%----end item--%>
+                                                                            <%--items--%>
+                                                                            <div class="agent_info_detial_left">Phone</div>
+                                                                            <div class="agent_info_detial_space">&nbsp;</div>
+                                                                            <div class="agent_info_detial_right"><%= CurrentOffice.PhoneNo %>&nbsp; </div>
+                                                                            <%----end item--%>
+                                                                            <%--items--%>
+                                                                            <div class="agent_info_detial_left">Fax</div>
+                                                                            <div class="agent_info_detial_space">&nbsp;</div>
+                                                                            <div class="agent_info_detial_right"><%= CurrentOffice.FaxNo %>&nbsp;</div>
+                                                                            <%----end item--%>                                                                          
+                                                                        </div>
+                                                                    </asp:Panel>
+                                                                    <%-----end info detial-----%>
+                                                                    <%-----end info detial-----%>
+                                                                </div>
+                                                                <asp:HiddenField runat="server" ID="hfEmpName" />
+                                                                <asp:HiddenField runat="server" ID="hfMode" />
+                                                                <dx:ASPxHiddenField runat="server" ID="hfReports"></dx:ASPxHiddenField>
+                                                            </div>
+                                                        </dx:PanelContent>
+                                                    </PanelCollection>
+                                                    <ClientSideEvents EndCallback="OnEndCallback" />
+                                                </dx:ASPxCallbackPanel>
                                                             <%--center top--%></td>
                                                         <td style="vertical-align: top">
-                                                            <%--chart UI--%>
+                                                <%--chart UI--%>
                                                             <div style="height: 490px; float: left; width: 100%" class="clearfix">
                                                                 <div style="padding-top: 10px; height: 325px;" class="clearfix">
-                                                                    <div class="layout_float_right clearfix">
+                                                        <div class="layout_float_right clearfix">
+                                                                        <div class="layout_float_right" style="margin-left:20px;margin-right:20px">
+                                                                           
+                                                                            <button class="btn btn-default button_transparent" type="button" onclick="$('#container').printElement();">Print Chart</button>
+                                                                        </div>
+
                                                                         <div class="dropdown layout_float_right">
-                                                                            <button class="btn btn-default dropdown-toggle" type="button" id="id_detail_x_axis" data-toggle="dropdown" style="background: transparent">
-                                                                                Choice Field<span class="caret"></span>
+                                                                <button class="btn btn-default dropdown-toggle" type="button" id="id_detail_x_axis" data-toggle="dropdown" style="background: transparent">
+                                                                    Choice Field<span class="caret"></span>
 
-                                                                            </button>
-                                                                            <ul class="dropdown-menu" role="menu" aria-labelledby="chart_line_select">
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">Status</a></li>
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">ZipCode</a></li>
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">Zoning</a></li>
+                                                                </button>
+                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="chart_line_select">
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">Status</a></li>
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">ZipCode</a></li>
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">Zoning</a></li>
 
-                                                                            </ul>
-                                                                        </div>
-                                                                        <div class="dropdown layout_float_right" style="display: none">
-                                                                            <button class="btn btn-default dropdown-toggle" type="button" id="chart_line_select" data-toggle="dropdown" style="background: transparent">
-                                                                                Line & Point Chart <span class="caret"></span>
-                                                                            </button>
-                                                                            <ul class="dropdown-menu" role="menu" aria-labelledby="chart_line_select">
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Line</a></li>
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Bar</a></li>
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Pie</a></li>
-
-                                                                            </ul>
-                                                                        </div>
-
-                                                                        <div class="dropdown layout_float_right" style="margin-right: 20px;" id="id_change_range_drop_down">
-                                                                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="background: transparent">
-                                                                                Change Stat Range <span class="caret"></span>
-
-                                                                            </button>
-                                                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(1)">Log today</a></li>
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(3)">Logs 3 days</a></li>
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(7)">Logs 1 week</a></li>
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(30)">Logs 1 month</a></li>
-                                                                            </ul>
-                                                                        </div>
-
-
-                                                                    </div>
-                                                                    <div style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px; /*background: blue; */ color: white; height: 100%;">
-                                                                        <uc1:AgentCharts runat="server" ID="AgentCharts" />
-                                                                    </div>
-
-                                                                </div>
+                                                                </ul>
                                                             </div>
-                                                            <%-----end chart ui-----%>
+                                                            <div class="dropdown layout_float_right" style="display: none">
+                                                                <button class="btn btn-default dropdown-toggle" type="button" id="chart_line_select" data-toggle="dropdown" style="background: transparent">
+                                                                    Line & Point Chart <span class="caret"></span>
+                                                                </button>
+                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="chart_line_select">
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Line</a></li>
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Bar</a></li>
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_type(this)">Pie</a></li>
+
+                                                                </ul>
+                                                            </div>
+
+                                                            <div class="dropdown layout_float_right" style="margin-right: 20px;" id="id_change_range_drop_down">
+                                                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="background: transparent">
+                                                                    Change Stat Range <span class="caret"></span>
+
+                                                                </button>
+                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(1)">Log today</a></li>
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(3)">Logs 3 days</a></li>
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(7)">Logs 1 week</a></li>
+                                                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(30)">Logs 1 month</a></li>
+                                                                </ul>
+                                                            </div>
+
+
+                                                        </div>
+                                                        <div style="margin-left: 50px; margin-right: 50px; margin-bottom: 30px; /*background: blue; */ color: white; height: 100%;">
+                                                            <uc1:AgentCharts runat="server" ID="AgentCharts" />
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <%-----end chart ui-----%>
 
                                                         </td>
                                                     </tr>

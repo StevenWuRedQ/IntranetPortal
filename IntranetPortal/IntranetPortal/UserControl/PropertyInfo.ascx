@@ -303,11 +303,11 @@
                 <br />
 
                 <%--class="circle-radio-boxes"--%>
-                <input type="radio" id="sex" name="sex" value="Fannie" />
+                <input type="checkbox" id="sex" name="sex" value="Fannie" />
                 <label for="sex" class=" form_div_radio_group">
                     <span class="form_span_group_text">Fannie</span>
                 </label>
-                <input type="radio" id="sexf" name="sex" value="FHA" style="margin-left: 66px" />
+                <input type="checkbox" id="sexf" name="sex" value="FHA" style="margin-left: 66px" />
                 <label for="sexf" class=" form_div_radio_group form_div_node_margin">
                     <span class="form_span_group_text">FHA</span>
                 </label>
@@ -331,11 +331,11 @@
                 <br />
 
                 <%--class="circle-radio-boxes"--%>
-                <input type="radio" id="sex1" name="sex" value="Fannie" />
+                <input type="checkbox" id="sex1" name="sex" value="Fannie" />
                 <label for="sex1" class=" form_div_radio_group">
                     <span class="form_span_group_text">Fannie</span>
                 </label>
-                <input type="radio" id="sexf1" name="sex" value="FHA" style="margin-left: 66px" />
+                <input type="checkbox" id="sexf1" name="sex" value="FHA" style="margin-left: 66px" />
                 <label for="sexf1" class=" form_div_radio_group form_div_node_margin">
                     <span class="form_span_group_text">FHA</span>
                 </label>
@@ -361,11 +361,11 @@
                 <br />
 
                 <%--class="circle-radio-boxes"--%>
-                <input type="radio" id="sex2" name="sex" value="Fannie" />
+                <input type="checkbox" id="sex2" name="sex" value="Fannie" />
                 <label for="sex2" class=" form_div_radio_group">
                     <span class="form_span_group_text">Fannie</span>
                 </label>
-                <input type="radio" id="sexf2" name="sex" value="FHA" style="margin-left: 66px" />
+                <input type="checkbox" id="sexf2" name="sex" value="FHA" style="margin-left: 66px" />
                 <label for="sexf2" class=" form_div_radio_group form_div_node_margin">
                     <span class="form_span_group_text">FHA</span>
                 </label>

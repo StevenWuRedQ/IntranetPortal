@@ -20,7 +20,7 @@
         function onLogIn() {
             if ($('#username').val().length == 0 || $('#password').val().length == 0)
             {
-                alert('plase input user name or password');
+                afterloginsubmission();
                 return;
             }
             var rbMe = document.getElementById('remember-me').checked ? true : false;

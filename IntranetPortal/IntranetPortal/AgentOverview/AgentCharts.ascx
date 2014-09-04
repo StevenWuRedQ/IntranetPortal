@@ -3,8 +3,9 @@
 <%--<script src="/Scripts/jquery-2.1.1.min.js"></script>--%>
 <script src="/Scripts/globalize/globalize.js"></script>
 <script src="/Scripts/dx.chartjs.js"></script>
- <div style="padding-top: 50px; font-size: 30px; color: #ff400d; text-align: center;" id="chartsTitle">Charts Title</div>
-<div style="overflow: auto;width:871px" id="chars_with_scorll">
+<div style="padding-top: 43px;padding-bottom:20px; font-size: 30px; color: #ff400d; text-align: center;" id="chartsTitle">Charts Title</div>
+
+<div style="overflow: auto; width: 871px" id="chars_with_scorll">
     <div id="container" style="height: 350px;"></div>
     <div id="pieChart" style="height: 350px;"></div>
 </div>
@@ -23,8 +24,20 @@
             status_system: 2
 
         };
+    $(document).ready(function () {
+
+        //$(window).resize(function () {
+        //    var chart_div = $('#chars_with_scorll')
+        //    $('#chars_with_scorll').width(chart_div.width());
+        //    $("#chars_with_scorll_wh").html("w =" + chart_div.width() + ";h =" + chart_div.height());
+        //})
+    });
     var char_show_status = chart_status_enum.status_office;
-   
+    function chart_resize() {
+        var chart_div = $('#chars_with_scorll')
+        alert(chart_div);
+        $("#chars_with_scorll_wh").html("w =" + chart_div.width() + ";h =" + chart_div.height());
+    }
     function change_chart_type(e) {
         //alert($(e).text());
         var type = $(e).text();
@@ -36,11 +49,9 @@
         //alert(functions[type])
         functions[type]();
     };
-    function change_chart_x_axis(e)
-    {
-        
-        if (empId == null)
-        {
+    function change_chart_x_axis(e) {
+
+        if (empId == null) {
             alert("empId is null")
             return;
         }
@@ -50,9 +61,9 @@
     function change_chart_time(e) {
         var time = e;
         //alert(" " + e + "," + empId);
-        LoadAngentTodayReport(empId+","+time);
+        LoadAngentTodayReport(empId + "," + time);
         //var chart = $("#container").dxChart("instance");
-       
+
         //chart.option("title", time);
 
     }
@@ -116,12 +127,11 @@
             }
         });
     }
-    function show_element()
-    {
+    function show_element() {
         var provide_activity = char_show_status == chart_status_enum.status_office || char_show_status == chart_status_enum.status_user;
         var display_style = provide_activity ? 'inline' : 'none';
         $('#id_activity_log').css('display', display_style);
-        $('#id_change_range_drop_down').css('display',display_style);
+        $('#id_change_range_drop_down').css('display', display_style);
     }
     function show_bar_chart(ds) {
         var dataFormSever = ds != null ? ds : $.parseJSON('<%=ChartSource()%>');
@@ -129,19 +139,28 @@
         show_element();
 
         var chartData = dataFormSever.DataSource;
+        //var item = chartData[0]
+        //for (var i = 1; i < 30; i++) {
+        //    var addItem =
+        //        {
+        //            Name: item["Name"] + i,
+        //            Count: item["Count"] + i
+        //        }
+        //    chartData.push(addItem);
+        //}
         var chartTitle = dataFormSever.Title == null ? "Leads" : dataFormSever.Title;
         $('#chartsTitle').text(chartTitle);
         //$("#container").width(600);
         $("#container").width(40);
         var charsWidth = $("#container").width();
-        var tagertWidth = 40 * chartData.length  +80 ;
-       
-        if (charsWidth < tagertWidth)
-        {
-           
+        var tagertWidth = 40 * chartData.length + 80;
+
+        if (charsWidth < tagertWidth) {
+
             $("#container").width(tagertWidth);
         }
-            
+       
+       
         var charts = $("#container").dxChart({
             dataSource: chartData,
             commonSeriesSettings: {
@@ -181,13 +200,17 @@
                 //alert('-1|' + point.originalArgument)
                 //BindEmployee('-1|' + point.originalArgument);
                 char_show_status = chart_status_enum.status_user
+                /* only with name get if all status then remove it*/
+                if (parseInt(point.originalArgument) > 0) {
+                    alert("can't find employee " + point.originalArgument)
+                    return;
+                }
                 getEmployeeIDByNameClinet.PerformCallback(point.originalArgument);
             }
         });
-        if (char_show_status == chart_status_enum.status_user)
-        {
+        if (char_show_status == chart_status_enum.status_user) {
             $("#container").dxChart("instance").option({
-                pointClick:null
+                pointClick: null
             });
         }
         //alert('char_show_status' + char_show_status);
@@ -278,13 +301,12 @@
     }
     function ChangeDataSource() {
         var ds = eval('<% ChartSource()%>');
-        show_bar_chart(ds);
-    }
-    function change_x_axis_complete(s, e)
-    {
-        show_bar_chart($.parseJSON(e.result))
-    }
-    show_bar_chart();
+            show_bar_chart(ds);
+        }
+        function change_x_axis_complete(s, e) {
+            show_bar_chart($.parseJSON(e.result))
+        }
+        show_bar_chart();
 </script>
 <dx:ASPxCallback runat="server" ID="callbackDs" OnCallback="callbackDs_Callback" ClientInstanceName="callbackDsClient">
     <ClientSideEvents CallbackComplete="DataSourceLoadedComplete" />

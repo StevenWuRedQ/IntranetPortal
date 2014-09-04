@@ -357,6 +357,9 @@ Public Class UserSummary
                         CurrentNote = note
                     End If
                 End If
+                'Side Notes: Input area should always be at default status (always clear), List should be pushed below. When clicked on a existing item, should be able to edit directly.
+                txtTitle.Text = ""
+                txtNotesDescription.Text = ""
             End If
 
             If e.Parameter.StartsWith("Delete") Then

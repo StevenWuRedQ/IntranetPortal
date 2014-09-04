@@ -433,7 +433,7 @@ input[type='checkbox'] {
     display: none;
     font-size: 18px !important;
 }
-
+    input[type='checkbox'] + label,
     input[type=radio] + label {
         display: inline-block;
         font-size: 18px !important;
