@@ -24,9 +24,11 @@ Public Class AgentOverview
 
         If Not IsPostBack Then
             gridEmps.DataBind()
+            gridEmpsCompare.DataBind()
             gridReport.DataBind()
 
             gridEmps.GroupBy(gridEmps.Columns("Department"))
+            gridEmpsCompare.GroupBy(gridEmpsCompare.Columns("Department"))
         End If
     End Sub
 
@@ -36,11 +38,16 @@ Public Class AgentOverview
         End If
     End Sub
 
-    Protected Sub gridEmps_DataBinding(sender As Object, e As EventArgs) Handles gridEmps.DataBinding
+    Protected Sub gridEmps_DataBinding(sender As Object, e As EventArgs) Handles gridEmps.DataBinding, gridEmpsCompare.DataBinding
         If gridEmps.DataSource Is Nothing Then
             BindEmp()
         End If
+
+        If gridEmpsCompare.DataSource Is Nothing Then
+            BindEmp()
+        End If
     End Sub
+
     Function getEmployeeByName(ByVal parametersStrg As String) As Employee
         Dim employeeID = CInt(parametersStrg.Split("|")(1))
         If (employeeID < 0) Then
@@ -173,10 +180,9 @@ Public Class AgentOverview
         Return up.ReportTemplates
     End Function
 
-    Sub BindEmp()
+    Function GetEmpDataSource()
         If User.IsInRole("Admin") Then
-            gridEmps.DataSource = portalDataContext.Employees.OrderBy(Function(em) em.Name).ToList
-            Return
+            Return portalDataContext.Employees.OrderBy(Function(em) em.Name).ToList
         End If
 
         Dim emps As New List(Of Employee)
@@ -193,7 +199,13 @@ Public Class AgentOverview
             emps.AddRange(Employee.GetManagedEmployeeList(User.Identity.Name))
         End If
 
-        gridEmps.DataSource = emps.Distinct.OrderBy(Function(em) em.Name).ToList
+        Return emps.Distinct.OrderBy(Function(em) em.Name).ToList
+    End Function
+
+    Sub BindEmp()
+        Dim ds = GetEmpDataSource()
+        gridEmps.DataSource = ds
+        gridEmpsCompare.DataSource = ds
     End Sub
 
     Sub BindGridReport()
