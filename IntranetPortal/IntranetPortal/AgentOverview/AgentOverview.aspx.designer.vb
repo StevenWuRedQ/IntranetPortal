@@ -248,6 +248,33 @@ Partial Public Class AgentOverview
     Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
+    '''gridEmpsCompare control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridEmpsCompare As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''ASPxListBox1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxListBox1 As Global.DevExpress.Web.ASPxEditors.ASPxListBox
+
+    '''<summary>
+    '''btnShowCompare control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnShowCompare As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
     '''cbPnlCompare control.
     '''</summary>
     '''<remarks>

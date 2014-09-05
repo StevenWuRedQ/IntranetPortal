@@ -21,9 +21,9 @@ Public Class AgentOverview
             CurrentEmployee = Employee.GetInstance(hfEmpName.Value)
         End If
 
-        If Not ComparedEmps.Contains(CurrentEmployee) Then
-            ComparedEmps.Add(CurrentEmployee)
-        End If
+        'If Not ComparedEmps.Contains(CurrentEmployee) Then
+        '    ComparedEmps.Add(CurrentEmployee)
+        'End If
 
         If Not String.IsNullOrEmpty(CurrentEmployee.Picture) Then
             profile_image.ImageUrl = CurrentEmployee.Picture
@@ -332,6 +332,15 @@ Public Class AgentOverview
     End Sub
 
     Protected Sub cbPnlCompare_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        If e.Parameter = "CompareEmp" Then
+            If String.IsNullOrEmpty(hfComparedEmps.Value) Or Not hfComparedEmps.Value.StartsWith(CurrentEmployee.EmployeeID) Then
+                ComparedEmps.Add(CurrentEmployee)
+                SaveComparedEmps()
+            Else
+                LoadComparedEmps()
+            End If
+        End If
+
         If e.Parameter = "AddNewEmp" Then
             LoadComparedEmps()
             Dim emp = New Employee
