@@ -33,19 +33,19 @@
 
     Public ReadOnly Property CallAttemps As Integer
         Get
-            Return _empLogs.Where(Function(log) log.ActionType.HasValue AndAlso log.ActionType = 0).Count
+            Return EmpLogs.Where(Function(log) log.ActionType.HasValue AndAlso log.ActionType = 0).Count
         End Get
     End Property
 
     Public ReadOnly Property Doorknock As Integer
         Get
-            Return _empLogs.Where(Function(log) log.ActionType IsNot Nothing AndAlso log.ActionType = LeadsActivityLog.EnumActionType.DoorKnock).Count
+            Return EmpLogs.Where(Function(log) log.ActionType IsNot Nothing AndAlso log.ActionType = LeadsActivityLog.EnumActionType.DoorKnock).Count
         End Get
     End Property
 
     Public ReadOnly Property FollowUp As Integer
         Get
-            Return _empLogs.Where(Function(log) log.ActionType IsNot Nothing AndAlso log.ActionType = LeadsActivityLog.EnumActionType.FollowUp).Count
+            Return EmpLogs.Where(Function(log) log.ActionType IsNot Nothing AndAlso log.ActionType = LeadsActivityLog.EnumActionType.FollowUp).Count
         End Get
     End Property
 

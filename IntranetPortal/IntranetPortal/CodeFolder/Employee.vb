@@ -66,9 +66,14 @@ Partial Public Class Employee
         End Get
     End Property
 
+    Private _performance As EmployeePerformance
     Public ReadOnly Property Performance As EmployeePerformance
         Get
-            Return New EmployeePerformance(Me)
+            If _performance Is Nothing Then
+                _performance = New EmployeePerformance(Me)
+            End If
+
+            Return _performance
         End Get
     End Property
 
