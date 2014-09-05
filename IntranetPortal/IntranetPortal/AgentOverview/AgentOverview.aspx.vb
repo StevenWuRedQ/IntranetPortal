@@ -10,6 +10,7 @@ Public Class AgentOverview
     Public Property CurrentStatus As LeadStatus
     Public Property CurrentOffice As Office
     Public portalDataContext As New Entities
+
     Public Property ComparedEmps As New List(Of Employee)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -18,6 +19,10 @@ Public Class AgentOverview
             hfEmpName.Value = CurrentEmployee.Name
         Else
             CurrentEmployee = Employee.GetInstance(hfEmpName.Value)
+        End If
+
+        If Not ComparedEmps.Contains(CurrentEmployee) Then
+            ComparedEmps.Add(CurrentEmployee)
         End If
 
         If Not String.IsNullOrEmpty(CurrentEmployee.Picture) Then
@@ -64,6 +69,7 @@ Public Class AgentOverview
         End If
         Return Employee.GetInstance(employeeID)
     End Function
+
     Function EmployeeIDToName(parametersStrg As String) As String
         Dim employeeID = Employee.GetInstance(parametersStrg).EmployeeID
         Return employeeID.ToString
@@ -355,7 +361,10 @@ Public Class AgentOverview
             If empId = 0 Then
                 ComparedEmps.Add(New Employee)
             Else
-                ComparedEmps.Add(Employee.GetInstance(CInt(empId)))
+                Dim emp = Employee.GetInstance(CInt(empId))
+                If ComparedEmps.Contains(emp) Then
+                    ComparedEmps.Add(Employee.GetInstance(CInt(empId)))
+                End If
             End If
         Next
     End Sub
