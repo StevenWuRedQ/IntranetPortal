@@ -26,11 +26,11 @@ Public Class AgentOverview
 
         If Not IsPostBack Then
             gridEmps.DataBind()
-            gridEmpsCompare.DataBind()
+
             gridReport.DataBind()
 
             gridEmps.GroupBy(gridEmps.Columns("Department"))
-            gridEmpsCompare.GroupBy(gridEmpsCompare.Columns("Department"))
+
         End If
     End Sub
 
@@ -47,14 +47,13 @@ Public Class AgentOverview
 
         Return "/images/user-empty-icon.png"
     End Function
-    Protected Sub gridEmps_DataBinding(sender As Object, e As EventArgs) Handles gridEmps.DataBinding, gridEmpsCompare.DataBinding
+
+    Protected Sub gridEmps_DataBinding(sender As Object, e As EventArgs) Handles gridEmps.DataBinding
         If gridEmps.DataSource Is Nothing Then
             BindEmp()
         End If
 
-        If gridEmpsCompare.DataSource Is Nothing Then
-            BindEmp()
-        End If
+
     End Sub
 
     Function getEmployeeByName(ByVal parametersStrg As String) As Employee
@@ -214,7 +213,7 @@ Public Class AgentOverview
     Sub BindEmp()
         Dim ds = GetEmpDataSource()
         gridEmps.DataSource = ds
-        gridEmpsCompare.DataSource = ds
+
     End Sub
 
     Sub BindGridReport()

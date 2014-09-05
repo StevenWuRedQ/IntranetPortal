@@ -773,7 +773,7 @@
                     <i class="fa fa-times icon_btn" style="float: right" onclick="popupControlCompareList.Hide()"></i>
                     <div style="margin-top: 14px; margin-right: 13px">
                         <i class="fa fa-save report_head_button report_head_button_padding tooltip-examples" title="Save"></i>
-                        <i class="fa fa-print report_head_button tooltip-examples report_head_button_padding" title="Print"></i>
+                        <i class="fa fa-print report_head_button tooltip-examples report_head_button_padding" title="Print" onclick="$('#compare_table').printElement();"></i>
                         <i class="fa fa-envelope report_head_button tooltip-examples report_head_button_padding" title="E-mail"></i>
                         <i class="fa fa-file-pdf-o report_head_button tooltip-examples report_head_button_padding" title="PDF"></i>
                     </div>
@@ -803,87 +803,7 @@
                     }
                     // ]]> 
                 </script>
-                <%--old one--%>
-                <div style="display: none">
-                    <table>
-                        <tr>
-                            <td style="width: 300px">
-                                <dx:ASPxGridView runat="server" Width="100%" ID="gridEmpsCompare" KeyFieldName="EmployeeID" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" ClientInstanceName="gridEmpsCompareClient" CssClass="font_source_sans_pro">
-                                    <Columns>
-                                        <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Width="25px">
-                                        </dx:GridViewCommandColumn>
-                                        <dx:GridViewDataTextColumn FieldName="Name" Settings-AllowHeaderFilter="False" VisibleIndex="1">
-                                            <Settings AllowHeaderFilter="False"></Settings>
-                                            <DataItemTemplate>
-                                                <div class="employee_list_item clearfix">
-                                                    <div class="employee_list_item_div">
-                                                        <span class="font_black"><%# Eval("Name")%></span><br />
-                                                        <%# Eval("Position")%>
-                                                    </div>
-                                                </div>
-                                            </DataItemTemplate>
-                                        </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataColumn FieldName="Department" VisibleIndex="5">
-                                            <GroupRowTemplate>
-                                                <div>
-                                                    <table style="height: 30px">
-                                                        <tr>
-                                                            <td style="width: 80px;"><span class="font_black"><i class="fa fa-caret-<%#If(Container.Expanded,"down","right") %> font_16" onclick="ExpandOrCollapseGroupRow(this, gridEmpsCompareClient,  <%# Container.VisibleIndex%>)" style="cursor: pointer"></i>&nbsp;<i class="fa fa-bank font_16"></i>&nbsp; <%# Container.GroupText%>
-                                                            </span></td>
-                                                            <td style="padding-left: 10px">
-                                                                <span class="employee_lest_head_number_label"><%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %></span>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
-                                            </GroupRowTemplate>
-                                        </dx:GridViewDataColumn>
-
-                                    </Columns>
-                                    <Styles>
-                                        <SelectedRow BackColor="#FF400D"></SelectedRow>
-                                        <Cell>
-                                            <Paddings Padding="0px"></Paddings>
-                                        </Cell>
-                                    </Styles>
-                                    <GroupSummary>
-                                        <dx:ASPxSummaryItem SummaryType="Count" />
-                                    </GroupSummary>
-                                    <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" AllowClientEventsOnLoad="false" />
-                                    <SettingsPager Mode="ShowAllRecords">
-                                    </SettingsPager>
-                                    <Settings ShowColumnHeaders="False" GridLines="None" VerticalScrollableHeight="290" VerticalScrollBarMode="Auto"></Settings>
-                                    <Border BorderStyle="None"></Border>
-                                    <ClientSideEvents SelectionChanged="grid_SelectionChanged" />
-                                </dx:ASPxGridView>
-                            </td>
-                            <td style="width: 200px">
-                                <div>
-                                    Selected Employees:
-                                </div>
-                                <dx:ASPxListBox ID="ASPxListBox1" ClientInstanceName="selList" runat="server" Height="250px" SelectionMode="Multiple"
-                                    Width="100%" />
-                                <div>
-                                    Selected count: <span id="selCount" style="font-weight: bold">0</span>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-
-                    <dx:ASPxButton Text="OK" runat="server" ID="btnShowCompare" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                        <ClientSideEvents Click="function(s,e){                                                                
-                                        var empitems =  gridEmpsCompareClient.GetSelectedKeysOnPage();                                    
-                                        
-                                        if(empitems == null)
-                                        {
-                                             alert('Please select items to compare.');
-                                             return;
-                                         }
-                                        CompareEmp(empitems);
-                                        popupControlCompareList.Hide();                                                                        
-                                        }" />
-                    </dx:ASPxButton>
-                </div>
+               
 
                 <dx:ASPxCallbackPanel runat="server" ID="cbPnlCompare" ClientInstanceName="cbPnlCompareClient" OnCallback="cbPnlCompare_Callback">
                     <PanelCollection>
@@ -894,7 +814,7 @@
                                 <div style="float: right">
                                     <i class="fa fa-plus with_circle icon_btn compare_add_button" onclick="cbPnlCompareClient.PerformCallback('AddNewEmp')"></i>
                                 </div>
-                                <table>
+                                <table id="compare_table">
                                     <tr>
                                         <td>
                                             <div class="compare_titles_field">
@@ -906,7 +826,7 @@
                                                     <ul class="dropdown-menu" role="menu" aria-labelledby="button2">
                                                         <%For Each empName In allEmpoyeeName()%>
                                                         <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%=empName.Name %></a></li>
-                                                        <%Next %>
+                                                        <%Next%>
                                                     </ul>
                                                     <img src="<%=getProfileImage(58) %>" class="img-circle compare_profile_img " />
                                                     <span class="compare_agent_name">Benn Martin</span>
@@ -946,6 +866,13 @@
                                                     <div align="right" class="compare_table_row compare_table_row_title">
                                                         <label class="compare_table_info font_normal">Door Knock</label>
                                                     </div>
+                                                    <div align="right" class="compare_table_row compare_table_row_title">
+                                                        <label class="compare_table_info font_normal">Follow Up</label>
+                                                    </div>
+                                                    <div align="right" class="compare_table_row compare_table_row_title">
+                                                        <label class="compare_table_info font_normal">Leads Count</label>
+                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </td>
@@ -955,18 +882,16 @@
                                             <div class="compare_agent_field">
                                                 <%--style="visibility: hidden"--%>
                                                 <div>
-                                                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button1" style="background: #f5f5f5; color: #3993c1">
-                                                        <span style="padding-right: 50px"><%= CurrentEmployee.Name %></span><span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" role="menu" aria-labelledby="button1" style="top: initial;">
-                                                        <%For Each empName In allEmpoyeeName()  %>
-                                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%=empName.Name %></a></li>
-                                                        <%Next %>
-                                                        <%-- <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ZipCode</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Zoning</a></li>--%>
-                                                    </ul>
-                                                    <img src="<%=getProfileImage(58) %>" class="img-circle compare_profile_img " />
-                                                    <span class="compare_agent_name">Benn Martin</span>
+                                                    <div style="visibility: hidden">
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button1" style="background: #f5f5f5; color: #3993c1">
+                                                            <span style="padding-right: 50px"><%= CurrentEmployee.Name %> &nbsp;</span><span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="button1" style="top: initial;">
+                                                        </ul>
+                                                    </div>
+
+                                                    <img src="<%=getProfileImage( CurrentEmployee.EmployeeID) %>" class="img-circle compare_profile_img " />
+                                                    <span class="compare_agent_name"><%= CurrentEmployee.Name %>&nbsp;</span>
                                                 </div>
                                                 <div>
                                                     <%--table title--%>
@@ -974,22 +899,22 @@
                                                     <%--info items--%>
                                                     <%--only the first table row have title--%>
                                                     <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck">Sales Agent</label>
+                                                        <label class="compare_table_info color_balck"><%=CurrentEmployee.Position %> &nbsp;</label>
                                                     </div>
                                                     <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal">Ron Rorovinsky</label>
+                                                        <label class="compare_table_info color_balck font_normal"><%= CurrentEmployee.Manager %> &nbsp;</label>
                                                     </div>
                                                     <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal">Sales(Brooklyn)</label>
+                                                        <label class="compare_table_info color_balck font_normal"><%=CurrentEmployee.Office %>&nbsp;</label>
                                                     </div>
                                                     <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal">Jan 7,2014</label>
+                                                        <label class="compare_table_info color_balck font_normal"><%= CurrentEmployee.EmployeeSince %> &nbsp;</label>
                                                     </div>
                                                     <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal">718 123-456</label>
+                                                        <label class="compare_table_info color_balck font_normal"><%= CurrentEmployee.CellPhone %> &nbsp;</label>
                                                     </div>
                                                     <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal" style="color: #3993c1">email@example.com</label>
+                                                        <label class="compare_table_info color_balck font_normal" style="color: #3993c1"><%= CurrentEmployee.Email %> &nbsp;</label>
                                                     </div>
 
                                                 </div>
@@ -998,10 +923,16 @@
                                                     <div class="compare_table_title">&nbsp;</div>
                                                     <%--only the first table row have title--%>
                                                     <div class="compare_table_row compare_table_row_title">
-                                                        <label class="compare_table_info color_balck font_normal">1</label>
+                                                        <label class="compare_table_info color_balck font_normal"><%=CurrentEmployee.Performance.CallAttemps %> &nbsp;</label>
                                                     </div>
                                                     <div class="compare_table_row compare_table_row_title">
-                                                        <label class="compare_table_info color_balck font_normal">2</label>
+                                                        <label class="compare_table_info color_balck font_normal"><%=CurrentEmployee.Performance.Doorknock %> &nbsp;</label>
+                                                    </div>
+                                                    <div class="compare_table_row compare_table_row_title">
+                                                        <label class="compare_table_info color_balck font_normal"><%=CurrentEmployee.Performance.FollowUp %> &nbsp;</label>
+                                                    </div>
+                                                    <div class="compare_table_row compare_table_row_title">
+                                                        <label class="compare_table_info color_balck font_normal"><%=CurrentEmployee.Performance.LeadsCount%> &nbsp;</label>
                                                     </div>
 
                                                 </div>
@@ -1013,14 +944,17 @@
                                             <div class="compare_agent_field">
                                                 <%--style="visibility: hidden"--%>
                                                 <div>
-                                                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="background: #f5f5f5; color: #3993c1">
-                                                        <span style="padding-right: 50px"><%= emp.Name %></span><span class="caret"></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu" role="menu" aria-labelledby="button1" style="top: initial;">
-                                                        <%For Each item In allEmpoyeeName()  %>
-                                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="cbPnlCompareClient.PerformCallback('ChangeEmp|<%= emp.EmployeeID %>|<%= item.EmployeeID %>')"><%= item.Name %></a></li>
-                                                        <%Next %>
-                                                    </ul>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="background: #f5f5f5; color: #3993c1">
+                                                            <span style="padding-right: 50px"><%= emp.Name %></span><span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="button1" style="top: initial;">
+                                                            <%For Each item In allEmpoyeeName()%>
+                                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="cbPnlCompareClient.PerformCallback('ChangeEmp|<%= emp.EmployeeID %>|<%= item.EmployeeID %>')"><%= item.Name %></a></li>
+                                                            <%Next%>
+                                                        </ul>
+                                                    </div>
+
                                                     <img src="<%=getProfileImage(emp.EmployeeID) %>" class="img-circle compare_profile_img " />
                                                     <span class="compare_agent_name"><%= emp.Name %>&nbsp;</span>
                                                 </div>
@@ -1030,22 +964,22 @@
                                                     <%--info items--%>
                                                     <%--only the first table row have title--%>
                                                     <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck">Sales Agent</label>
+                                                        <label class="compare_table_info color_balck"><%=emp.Position%> &nbsp;</label>
                                                     </div>
                                                     <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal">Ron Rorovinsky</label>
+                                                        <label class="compare_table_info color_balck font_normal"><%=emp.Position%> &nbsp;</label>
                                                     </div>
                                                     <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal">Sales(Brooklyn)</label>
+                                                        <label class="compare_table_info color_balck font_normal"><%=emp.Office%> &nbsp;</label>
                                                     </div>
                                                     <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal">Jan 7,2014</label>
+                                                        <label class="compare_table_info color_balck font_normal"><%=emp.EmployeeSince%> &nbsp;</label>
                                                     </div>
                                                     <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal">718 123-456</label>
+                                                        <label class="compare_table_info color_balck font_normal"><%=emp.CellPhone%> &nbsp;</label>
                                                     </div>
                                                     <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal" style="color: #3993c1">email@example.com</label>
+                                                        <label class="compare_table_info color_balck font_normal" style="color: #3993c1"><%=emp.Email%> &nbsp;</label>
                                                     </div>
                                                 </div>
                                                 <div>
@@ -1053,12 +987,17 @@
                                                     <div class="compare_table_title">&nbsp;</div>
                                                     <%--only the first table row have title--%>
                                                     <div class="compare_table_row compare_table_row_title">
-                                                        <label class="compare_table_info color_balck font_normal">1</label>
+                                                        <label class="compare_table_info color_balck font_normal"><%=emp.Performance.CallAttemps %> &nbsp;</label>
                                                     </div>
                                                     <div class="compare_table_row compare_table_row_title">
-                                                        <label class="compare_table_info color_balck font_normal">2</label>
+                                                        <label class="compare_table_info color_balck font_normal"><%=emp.Performance.Doorknock %> &nbsp;</label>
                                                     </div>
-
+                                                    <div class="compare_table_row compare_table_row_title">
+                                                        <label class="compare_table_info color_balck font_normal"><%=emp.Performance.FollowUp %> &nbsp;</label>
+                                                    </div>
+                                                    <div class="compare_table_row compare_table_row_title">
+                                                        <label class="compare_table_info color_balck font_normal"><%=emp.Performance.LeadsCount %> &nbsp;</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </td>

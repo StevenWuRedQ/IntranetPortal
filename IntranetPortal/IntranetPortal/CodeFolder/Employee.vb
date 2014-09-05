@@ -44,6 +44,12 @@ Partial Public Class Employee
         End If
     End Sub
 
+    Public ReadOnly Property Office As String
+        Get
+
+            Return Position & "(" & Department & ")"
+        End Get
+    End Property
 
     Public ReadOnly Property Manager As String
         Get
