@@ -960,7 +960,7 @@
                                           <span style="padding-right:50px"> Been Martin</span><span class="caret"></span>
 
                                         </button>
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="button1">
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="button1" style="top:initial;">
                                             <%For Each empName As String In allEmpoyeeName()  %>
                                                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%=empName %></a></li>
                                             <%Next %>
