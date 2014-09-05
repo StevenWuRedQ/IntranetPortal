@@ -306,7 +306,12 @@ Public Class AgentOverview
             Next
         End If
     End Sub
+    Public Function allEmpoyeeName() As List(Of String)
+        Using Context As New Entities
+            Return (From p In Context.Employees Select p.Name).ToList
+        End Using
 
+    End Function
     Protected Sub getEmployeeIDByName_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         e.Result = EmployeeIDToName(e.Parameter)
     End Sub

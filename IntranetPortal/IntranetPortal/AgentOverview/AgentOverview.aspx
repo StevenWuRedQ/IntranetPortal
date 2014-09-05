@@ -887,21 +887,24 @@
                 </div>
 
                 <%--new compare agnets UI by steven--%>
-                <div style="margin-top: 25px;font-size:14px">
+                <div style="margin-top: 25px;font-size:14px" class="clearfix">
+                    <div style="float:right">
+                        <i class="fa fa-plus with_circle icon_btn compare_add_button" ></i>
+                    </div>
                     <table>
                         <tr>
                             <td>
-                                <div class="compare_titles_field">
-                                    <%--style="visibility: hidden"--%>
-                                    <div>
-                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button1" style="background: transparent">
-                                          <span style="padding-right:100px"> Been Martin</span><span class="caret"></span>
+                                <div class="compare_titles_field" >
+                                    <%--style="visibility: hidden" not show it on the frist column--%>
+                                    <div style="visibility: hidden" >
+                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button2" style="background: transparent">
+                                          <span > Been Martin</span><span class="caret"></span>
 
                                         </button>
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="button1">
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Status</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ZipCode</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Zoning</a></li>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="button2">
+                                             <%For Each empName As String In allEmpoyeeName()  %>
+                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%=empName %></a></li>
+                                            <%Next %>
 
                                         </ul>
                                         <img src="<%=getProfileImage(58) %>" class="img-circle compare_profile_img " />
@@ -913,79 +916,107 @@
                                         <%--info items--%>
                                         <%--only the first table row have title--%> 
                                         <div align="right" class="compare_table_row compare_table_row_title">
-                                            <label class="compare_table_info">Role</label>
+                                            <label class="compare_table_info font_normal">Role</label>
                                         </div>
                                          <div align="right" class="compare_table_row compare_table_row_title">
-                                            <span class="compare_table_info">Role</span>
+                                            <label class="compare_table_info font_normal">Manager</label>
                                         </div>
                                          <div align="right" class="compare_table_row compare_table_row_title">
-                                            <span class="compare_table_info">Role</span>
+                                            <label class="compare_table_info font_normal">Office</label>
                                         </div>
-                                       
+                                         <div align="right" class="compare_table_row compare_table_row_title">
+                                            <label class="compare_table_info font_normal">Employee Since</label>
+                                        </div>
+                                         <div align="right" class="compare_table_row compare_table_row_title">
+                                            <label class="compare_table_info font_normal">Cell</label>
+                                        </div>
+                                        <div align="right" class="compare_table_row compare_table_row_title">
+                                            <label class="compare_table_info font_normal">Emal</label>
+                                        </div>
+                                        
                                     </div>
                                     <div>
                                          <%--table title--%>
                                         <div class="compare_table_title">Performance</div>
                                          <%--only the first table row have title--%> 
                                         <div align="right" class="compare_table_row compare_table_row_title">
-                                            <span class="compare_table_info">Call Attemps</span>
+                                            <label class="compare_table_info font_normal">Call Attemps</label>
                                         </div>
                                          <div align="right" class="compare_table_row compare_table_row_title">
-                                            <span class="compare_table_info">Door Knock</span>
+                                            <label class="compare_table_info font_normal">Door Knock</label>
                                         </div>
                                          
                                     </div>
                                 </div>
                             </td>
+
+                            <%--run this td in loop here--%>
                             <td>
+
                                  <div class="compare_agent_field">
                                     <%--style="visibility: hidden"--%>
                                     <div>
-                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button1" style="background: transparent">
-                                          <span style="padding-right:100px"> Been Martin</span><span class="caret"></span>
+                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button1" style="background: #f5f5f5;color:#3993c1">
+                                          <span style="padding-right:50px"> Been Martin</span><span class="caret"></span>
 
                                         </button>
                                         <ul class="dropdown-menu" role="menu" aria-labelledby="button1">
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Status</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ZipCode</a></li>
-                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Zoning</a></li>
+                                            <%For Each empName As String In allEmpoyeeName()  %>
+                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#"><%=empName %></a></li>
+                                            <%Next %>
+                                           
+                                           <%-- <li role="presentation"><a role="menuitem" tabindex="-1" href="#">ZipCode</a></li>
+                                            <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Zoning</a></li>--%>
 
                                         </ul>
                                         <img src="<%=getProfileImage(58) %>" class="img-circle compare_profile_img " />
                                         <span class="compare_agent_name">Benn Martin</span>
                                     </div>
-                                    <div>
+                                    <div >
                                         <%--table title--%>
-                                        <div class="compare_table_title">Basic Information</div>
+                                        <div class="compare_table_title">&nbsp;</div>
                                         <%--info items--%>
                                         <%--only the first table row have title--%> 
-                                        <div align="right" class="compare_table_row compare_table_row_title">
-                                            <label class="compare_table_info">Role</label>
+                                        <div  class="compare_table_row compare_table_row_title ">
+                                            <label class="compare_table_info color_balck">Sales Agent</label>
                                         </div>
-                                         <div align="right" class="compare_table_row compare_table_row_title">
-                                            <span class="compare_table_info">Role</span>
+                                         <div class="compare_table_row compare_table_row_title ">
+                                            <label class="compare_table_info color_balck font_normal">Ron Rorovinsky</label>
                                         </div>
-                                         <div align="right" class="compare_table_row compare_table_row_title">
-                                            <span class="compare_table_info">Role</span>
+                                         <div  class="compare_table_row compare_table_row_title ">
+                                            <label class="compare_table_info color_balck font_normal">Sales(Brooklyn)</label>
                                         </div>
-                                       
+                                         <div  class="compare_table_row compare_table_row_title ">
+                                            <label class="compare_table_info color_balck font_normal">Jan 7,2014</label>
+                                        </div>
+                                         <div  class="compare_table_row compare_table_row_title ">
+                                            <label class="compare_table_info color_balck font_normal">718 123-456</label>
+                                        </div>
+                                         <div  class="compare_table_row compare_table_row_title ">
+                                            <label class="compare_table_info color_balck font_normal" style="color:#3993c1">email@example.com</label>
+                                        </div>
+                                         
                                     </div>
                                     <div>
                                          <%--table title--%>
-                                        <div class="compare_table_title">Performance</div>
+                                        <div class="compare_table_title">&nbsp;</div>
                                          <%--only the first table row have title--%> 
-                                        <div align="right" class="compare_table_row compare_table_row_title">
-                                            <span class="compare_table_info">Call Attemps</span>
+                                        <div class="compare_table_row compare_table_row_title">
+                                            <label class="compare_table_info color_balck font_normal">1</label>
                                         </div>
-                                         <div align="right" class="compare_table_row compare_table_row_title">
-                                            <span class="compare_table_info">Door Knock</span>
+                                         <div  class="compare_table_row compare_table_row_title">
+                                            <label class="compare_table_info color_balck font_normal">2</label>
                                         </div>
                                          
                                     </div>
                                 </div>
                             </td>
+
                         </tr>
                     </table>
+                    
+                    
+                    
                 </div>
             </dx:PopupControlContentControl>
         </ContentCollection>

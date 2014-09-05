@@ -1461,6 +1461,7 @@ i.log_item_hl_buttons {
     width: 100px;
     height: 100px;
     margin-top: 15px;
+    display: block;
 }
 
 .compare_agent_name {
@@ -1477,12 +1478,15 @@ i.log_item_hl_buttons {
     border-bottom: 2px solid #dde0e7;
     font-size: 12px;
 }
-.compare_agent_field
-{
-    width:230px;
+
+.compare_agent_field {
+    width: 230px;
 }
+
 .compare_table_info {
-    padding: 5px 30px;
+    padding: 0px 30px;
+    margin-top: 5px;
+    white-space: nowrap;
 }
 
 span.with_width {
@@ -1492,9 +1496,23 @@ span.with_width {
 div.compare_table_row {
     width: 100%;
     border-bottom: 1px solid #dde0e7;
-    
+    height: 30px;
 }
-div.compare_table_row_title
-{
-    color:#dde0e7;
+
+div.compare_table_row_title {
+    color: #dde0e7;
+}
+
+.font_normal {
+    font-weight: 400;
+}
+
+.compare_add_button {
+    width: 40px;
+    height: 40px;
+    line-height: 40px !important;
+    color: #3993c1;
+    background: #999ca1;
+    font-size: 20px;
+    border-color:#d3d5da;
 }
