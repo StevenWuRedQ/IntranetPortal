@@ -10,6 +10,7 @@ Public Class AgentOverview
     Public Property CurrentStatus As LeadStatus
     Public Property CurrentOffice As Office
     Public portalDataContext As New Entities
+    Public Property ComparedEmps As New List(Of Employee)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If String.IsNullOrEmpty(hfEmpName.Value) Then
@@ -40,8 +41,11 @@ Public Class AgentOverview
     End Sub
     Function getProfileImage(empID As Integer) As String
         Dim e = Employee.GetInstance(empID)
-       
-        Return If(e.Picture Is Nothing, "/images/user-empty-icon.png", e.Picture)
+        If e IsNot Nothing Then
+            Return If(e.Picture Is Nothing, "/images/user-empty-icon.png", e.Picture)
+        End If
+
+        Return "/images/user-empty-icon.png"
     End Function
     Protected Sub gridEmps_DataBinding(sender As Object, e As EventArgs) Handles gridEmps.DataBinding, gridEmpsCompare.DataBinding
         If gridEmps.DataSource Is Nothing Then
@@ -306,14 +310,55 @@ Public Class AgentOverview
             Next
         End If
     End Sub
-    Public Function allEmpoyeeName() As List(Of String)
-        Using Context As New Entities
-            Return (From p In Context.Employees Select p.Name).ToList
-        End Using
 
+    Public _allEmps As List(Of Employee)
+    Public Function allEmpoyeeName() As List(Of Employee)
+        If _allEmps Is Nothing Then
+            Using Context As New Entities
+                _allEmps = (From p In Context.Employees Select p).ToList
+            End Using
+        End If
+
+        Return _allEmps
     End Function
+
     Protected Sub getEmployeeIDByName_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         e.Result = EmployeeIDToName(e.Parameter)
+    End Sub
+
+    Protected Sub cbPnlCompare_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        If e.Parameter = "AddNewEmp" Then
+            LoadComparedEmps()
+            Dim emp = New Employee
+            ComparedEmps.Add(emp)
+            SaveComparedEmps()
+        End If
+
+        If e.Parameter.StartsWith("ChangeEmp") Then
+            Dim oldEmp = e.Parameter.Split("|")(1)
+            Dim newEmp = e.Parameter.Split("|")(2)
+
+            hfComparedEmps.Value = hfComparedEmps.Value.Replace(oldEmp, newEmp)
+            LoadComparedEmps()
+        End If
+    End Sub
+
+    Sub SaveComparedEmps()
+        hfComparedEmps.Value = String.Join(",", ComparedEmps.Select(Function(em) em.EmployeeID).ToArray)
+    End Sub
+
+    Sub LoadComparedEmps()
+        If String.IsNullOrEmpty(hfComparedEmps.Value) Then
+            Return
+        End If
+
+        For Each empId In hfComparedEmps.Value.Split(",")
+            If empId = 0 Then
+                ComparedEmps.Add(New Employee)
+            Else
+                ComparedEmps.Add(Employee.GetInstance(CInt(empId)))
+            End If
+        Next
     End Sub
 
 #Region "Helper methods"
@@ -344,6 +389,7 @@ Public Class AgentOverview
         End If
     End Sub
 #End Region
+
 
 
 End Class

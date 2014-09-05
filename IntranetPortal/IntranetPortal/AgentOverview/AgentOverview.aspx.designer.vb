@@ -273,4 +273,22 @@ Partial Public Class AgentOverview
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnShowCompare As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''cbPnlCompare control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbPnlCompare As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+
+    '''<summary>
+    '''hfComparedEmps control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfComparedEmps As Global.System.Web.UI.WebControls.HiddenField
 End Class
