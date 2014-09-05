@@ -1516,3 +1516,8 @@ div.compare_table_row_title {
     font-size: 20px;
     border-color:#d3d5da;
 }
+.emplyees_drop
+{
+    height:500px;
+    overflow:auto;
+}

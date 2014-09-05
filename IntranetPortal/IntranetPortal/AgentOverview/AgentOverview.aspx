@@ -948,7 +948,7 @@
                                                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="background: #f5f5f5; color: #3993c1">
                                                             <span style="padding-right: 50px"><%= emp.Name %></span><span class="caret"></span>
                                                         </button>
-                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="button1" style="top: initial;">
+                                                        <ul class="dropdown-menu emplyees_drop" role="menu" >
                                                             <%For Each item In allEmpoyeeName()%>
                                                             <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="cbPnlCompareClient.PerformCallback('ChangeEmp|<%= emp.EmployeeID %>|<%= item.EmployeeID %>')"><%= item.Name %></a></li>
                                                             <%Next%>

@@ -46,8 +46,11 @@ Partial Public Class Employee
 
     Public ReadOnly Property Office As String
         Get
+            If Position IsNot Nothing AndAlso Position.Length > 0 Then
+                Return Position & "(" & Department & ")"
+            End If
 
-            Return Position & "(" & Department & ")"
+            Return ""
         End Get
     End Property
 
