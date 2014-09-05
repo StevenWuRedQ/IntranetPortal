@@ -342,10 +342,23 @@ Public Class AgentOverview
         If e.Parameter.StartsWith("ChangeEmp") Then
             Dim oldEmp = e.Parameter.Split("|")(1)
             Dim newEmp = e.Parameter.Split("|")(2)
-
-            hfComparedEmps.Value = hfComparedEmps.Value.Replace(oldEmp, newEmp)
+            ChangeId(oldEmp, newEmp)
             LoadComparedEmps()
         End If
+    End Sub
+
+    Sub ChangeId(oldEmp As String, newEmp As String)
+        Dim empIds = hfComparedEmps.Value.Split(",")
+
+        For i = 0 To empIds.Length - 1
+            If empIds(i) = oldEmp Then
+                empIds(i) = newEmp
+
+                Exit For
+            End If
+        Next
+
+        hfComparedEmps.Value = String.Join(",", empIds)
     End Sub
 
     Sub SaveComparedEmps()
@@ -362,8 +375,8 @@ Public Class AgentOverview
                 ComparedEmps.Add(New Employee)
             Else
                 Dim emp = Employee.GetInstance(CInt(empId))
-                If ComparedEmps.Contains(emp) Then
-                    ComparedEmps.Add(Employee.GetInstance(CInt(empId)))
+                If ComparedEmps.Where(Function(em) em.EmployeeID = emp.EmployeeID).Count = 0 Then
+                    ComparedEmps.Add(emp)
                 End If
             End If
         Next
