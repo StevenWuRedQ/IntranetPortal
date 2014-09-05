@@ -60,6 +60,12 @@ Partial Public Class Employee
         End Get
     End Property
 
+    Public ReadOnly Property Performance As EmployeePerformance
+        Get
+            Return New EmployeePerformance(Me)
+        End Get
+    End Property
+
     Public Shared Function HasControlLeads(name As String, bble As String) As Boolean
         Using context As New Entities
             If Roles.IsUserInRole(name, "Admin") Then
