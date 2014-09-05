@@ -354,6 +354,14 @@ Public Class AgentOverview
             ChangeId(oldEmp, newEmp)
             LoadComparedEmps()
         End If
+
+        If e.Parameter.StartsWith("ChangeDate") Then
+            LoadComparedEmps()
+
+            For Each emp In ComparedEmps
+                emp.Performance.DateRange = e.Parameter.Split("|")(1)
+            Next
+        End If
     End Sub
 
     Sub ChangeId(oldEmp As String, newEmp As String)

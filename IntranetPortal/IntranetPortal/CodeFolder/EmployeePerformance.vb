@@ -1,12 +1,20 @@
 ﻿Public Class EmployeePerformance
     Public Property Employee As Employee
 
+    Public Property DateRange As Integer
+
     Private _empLogs As List(Of LeadsActivityLog)
     Private ReadOnly Property EmpLogs As List(Of LeadsActivityLog)
         Get
             If _empLogs Is Nothing Then
                 Using context As New Entities
-                    _empLogs = context.LeadsActivityLogs.Where(Function(log) log.EmployeeID = Employee.EmployeeID).ToList
+                    'chech date range
+                    If (DateRange = 0) Then
+                        _empLogs = context.LeadsActivityLogs.Where(Function(log) log.EmployeeID = Employee.EmployeeID).ToList
+                        Return _empLogs
+                    End If
+                    Dim now = Date.Now.AddDays(-1 * DateRange)
+                    _empLogs = context.LeadsActivityLogs.Where(Function(log) log.EmployeeID = Employee.EmployeeID AndAlso log.ActivityDate > now).ToList
                 End Using
             End If
 
