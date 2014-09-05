@@ -536,6 +536,13 @@
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Management\LeadsDataManage.aspx.designer.vb">
+      <DependentUpon>LeadsDataManage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\LeadsDataManage.aspx.vb">
+      <DependentUpon>LeadsDataManage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\Management.aspx.designer.vb">
       <DependentUpon>Management.aspx</DependentUpon>
     </Compile>
@@ -1005,6 +1012,7 @@
     <Content Include="images\img\submenu_shadow.png" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />
+    <Content Include="Management\LeadsDataManage.aspx" />
     <Content Include="Management\Management.aspx" />
     <Content Include="Management\MgrEmployee.aspx" />
     <Content Include="Management\MgrRole.aspx" />
@@ -1660,6 +1668,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scripts\jquery.globalize\cultures\" />
+    <Folder Include="TempDataFile\" />
   </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />

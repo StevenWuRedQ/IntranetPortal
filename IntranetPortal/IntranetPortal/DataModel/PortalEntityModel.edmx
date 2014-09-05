@@ -22,6 +22,7 @@
           <Property Name="Out_Zipcode" Type="nvarchar" MaxLength="50" />
           <Property Name="Longitude" Type="float" />
           <Property Name="Latitude" Type="float" />
+          <Property Name="ScheduleDate" Type="date" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="Active" Type="bit" />
         </EntityType>
@@ -547,9 +548,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Active" Type="Boolean" />
           <NavigationProperty Name="Leads" Relationship="IntranetPortalModel.EmployeeLead" FromRole="Employee" ToRole="Lead" />
           <NavigationProperty Name="LeadsActivityLogs" Relationship="IntranetPortalModel.EmployeeLeadsActivityLog" FromRole="Employee" ToRole="LeadsActivityLog" />
-          <Property Name="Cellphone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeSince" Type="DateTime" Precision="0" />
           <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CellPhone" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="LeadsActivityLog">
           <Key>
@@ -922,6 +923,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Latitude" Type="Double" />
           <Property Name="Active" Type="Boolean" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ScheduleDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="HomeOwner">
           <Key>
@@ -1037,9 +1039,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="IntranetPortalModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="CellPhone" ColumnName="Cellphone" />
                 <ScalarProperty Name="Picture" ColumnName="Picture" />
                 <ScalarProperty Name="EmployeeSince" ColumnName="EmployeeSince" />
-                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -1352,6 +1354,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySetMapping Name="Agent_Properties">
             <EntityTypeMapping TypeName="IntranetPortalModel.Agent_Properties">
               <MappingFragment StoreEntitySet="Agent_Properties">
+                <ScalarProperty Name="ScheduleDate" ColumnName="ScheduleDate" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />

@@ -11,6 +11,12 @@
         End Using
     End Function
 
+    Public Shared Function GetUserMessages(createUser As String) As List(Of UserMessage)
+        Using context As New Entities
+            Return context.UserMessages.Where(Function(msg) msg.Createby = createUser And msg.Status = MsgStatus.Active).OrderByDescending(Function(msg) msg.NotifyTime).ToList
+        End Using
+    End Function
+
     Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String)
         Return AddNewMessage(userName, title, message, bble, DateTime.Now)
     End Function
