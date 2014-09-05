@@ -878,73 +878,14 @@
                                         </td>
 
                                         <%--run this td in loop here--%>
-                                        <td>
-                                            <div class="compare_agent_field">
-                                                <%--style="visibility: hidden"--%>
-                                                <div>
-                                                    <div style="visibility: hidden">
-                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" id="button1" style="background: #f5f5f5; color: #3993c1">
-                                                            <span style="padding-right: 50px"><%= CurrentEmployee.Name %> &nbsp;</span><span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="button1" style="top: initial;">
-                                                        </ul>
-                                                    </div>
-
-                                                    <img src="<%=getProfileImage( CurrentEmployee.EmployeeID) %>" class="img-circle compare_profile_img " />
-                                                    <span class="compare_agent_name"><%= CurrentEmployee.Name %>&nbsp;</span>
-                                                </div>
-                                                <div>
-                                                    <%--table title--%>
-                                                    <div class="compare_table_title">&nbsp;</div>
-                                                    <%--info items--%>
-                                                    <%--only the first table row have title--%>
-                                                    <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck"><%=CurrentEmployee.Position %> &nbsp;</label>
-                                                    </div>
-                                                    <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal"><%= CurrentEmployee.Manager %> &nbsp;</label>
-                                                    </div>
-                                                    <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal"><%=CurrentEmployee.Office %>&nbsp;</label>
-                                                    </div>
-                                                    <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal"><%= CurrentEmployee.EmployeeSince %> &nbsp;</label>
-                                                    </div>
-                                                    <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal"><%= CurrentEmployee.CellPhone %> &nbsp;</label>
-                                                    </div>
-                                                    <div class="compare_table_row compare_table_row_title ">
-                                                        <label class="compare_table_info color_balck font_normal" style="color: #3993c1"><%= CurrentEmployee.Email %> &nbsp;</label>
-                                                    </div>
-
-                                                </div>
-                                                <div>
-                                                    <%--table title--%>
-                                                    <div class="compare_table_title">&nbsp;</div>
-                                                    <%--only the first table row have title--%>
-                                                    <div class="compare_table_row compare_table_row_title">
-                                                        <label class="compare_table_info color_balck font_normal"><%=CurrentEmployee.Performance.CallAttemps %> &nbsp;</label>
-                                                    </div>
-                                                    <div class="compare_table_row compare_table_row_title">
-                                                        <label class="compare_table_info color_balck font_normal"><%=CurrentEmployee.Performance.Doorknock %> &nbsp;</label>
-                                                    </div>
-                                                    <div class="compare_table_row compare_table_row_title">
-                                                        <label class="compare_table_info color_balck font_normal"><%=CurrentEmployee.Performance.FollowUp %> &nbsp;</label>
-                                                    </div>
-                                                    <div class="compare_table_row compare_table_row_title">
-                                                        <label class="compare_table_info color_balck font_normal"><%=CurrentEmployee.Performance.LeadsCount%> &nbsp;</label>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </td>
+                                        
 
                                         <% For Each emp In ComparedEmps%>
                                         <td>
                                             <div class="compare_agent_field">
                                                 <%--style="visibility: hidden"--%>
                                                 <div>
-                                                    <div class="dropdown">
+                                                    <div class="dropdown" <%=If(emp.EmployeeID=CurrentEmployee.EmployeeID,"style=""visibility: hidden""","") %>>
                                                         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="background: #f5f5f5; color: #3993c1">
                                                             <span style="padding-right: 50px"><%= emp.Name %></span><span class="caret"></span>
                                                         </button>
