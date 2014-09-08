@@ -49,6 +49,43 @@
     <ItemStyle Height="30px"></ItemStyle>
 </dx:ASPxPopupMenu>
 
+<dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="680px" Height="410px" ID="ASPxPopupControl2"
+        HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true" 
+        runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">       
+        <ContentCollection>
+            <dx:PopupControlContentControl runat="server">            
+            </dx:PopupControlContentControl>
+        </ContentCollection>
+    </dx:ASPxPopupControl>
+ <dx:ASPxPopupControl ClientInstanceName="popupCtrReassignEmployeeListCtr" Width="300px" Height="300px"
+        MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
+        HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true"
+        runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
+        <ContentCollection>
+            <dx:PopupControlContentControl runat="server">
+                <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" TextField="Name" ValueField="EmployeeID"
+                    SelectedIndex="0" Width="100%">
+                </dx:ASPxListBox>
+                <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
+                    <ClientSideEvents Click="function(s,e){
+                                        var item = listboxEmployeeClient.GetSelectedItem();
+                                        if(item == null)
+                                        {
+                                             alert('Please select employee.');
+                                             return;
+                                         }
+                                        reassignCallback.PerformCallback(tmpBBLE + '|' + item.value + '|' + item.text);
+                                        popupCtrReassignEmployeeListCtr.Hide();                                       
+                                        }" />
+                </dx:ASPxButton>
+            </dx:PopupControlContentControl>
+        </ContentCollection>
+    </dx:ASPxPopupControl>
+
+ <dx:ASPxCallback runat="server" ClientInstanceName="reassignCallback" ID="reassignCallback" OnCallback="reassignCallback_Callback">
+        <ClientSideEvents CallbackComplete="function(s,e){ if(typeof gridleads != 'undefined') gridLeads.Refresh();}" />
+    </dx:ASPxCallback>
+
  <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMapControl" Width="900px" Height="700px"
         ID="ASPxPopupControl1"
         HeaderText="Street View" AutoUpdatePosition="true" Modal="true" ContentUrlIFrameTitle="streetViewFrm"

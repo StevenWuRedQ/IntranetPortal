@@ -776,30 +776,7 @@
 
     <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 
-    <dx:ASPxPopupControl ClientInstanceName="popupCtrReassignEmployeeListCtr" Width="300px" Height="300px"
-        MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl2"
-        HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true"
-        runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
-        <ContentCollection>
-            <dx:PopupControlContentControl runat="server">
-                <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" TextField="Name" ValueField="EmployeeID"
-                    SelectedIndex="0" Width="100%">
-                </dx:ASPxListBox>
-                <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
-                    <ClientSideEvents Click="function(s,e){
-                                        var item = listboxEmployeeClient.GetSelectedItem();
-                                        if(item == null)
-                                        {
-                                             alert('Please select employee.');
-                                             return;
-                                         }
-                                        reassignCallback.PerformCallback(tmpBBLE + '|' + item.value + '|' + item.text);
-                                        popupCtrReassignEmployeeListCtr.Hide();                                       
-                                        }" />
-                </dx:ASPxButton>
-            </dx:PopupControlContentControl>
-        </ContentCollection>
-    </dx:ASPxPopupControl>
+   
     <dx:ASPxPopupControl ClientInstanceName="ASPxPopupRequestUpdateControl" Width="500px" Height="420px"
         MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl3"
         HeaderText="Request Update" Modal="true"
@@ -882,9 +859,7 @@
             </dx:PopupControlContentControl>
         </ContentCollection>
     </dx:ASPxPopupControl>
-    <dx:ASPxCallback runat="server" ClientInstanceName="reassignCallback" ID="reassignCallback" OnCallback="reassignCallback_Callback">
-        <ClientSideEvents CallbackComplete="function(s,e){ gridLeads.Refresh();}" />
-    </dx:ASPxCallback>
+   
     <%--  <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
         <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
     </dx:ASPxCallback>--%>

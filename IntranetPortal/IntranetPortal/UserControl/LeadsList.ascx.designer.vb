@@ -59,33 +59,6 @@ Partial Public Class LeadsList
     Protected WithEvents LeadsSubMenu As Global.IntranetPortal.LeadsSubMenu
 
     '''<summary>
-    '''ASPxPopupControl2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
-
-    '''<summary>
-    '''listboxEmployee control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents listboxEmployee As Global.DevExpress.Web.ASPxEditors.ASPxListBox
-
-    '''<summary>
-    '''btnAssign control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAssign As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
     '''ASPxPopupControl3 control.
     '''</summary>
     '''<remarks>
@@ -174,13 +147,4 @@ Partial Public Class LeadsList
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''reassignCallback control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents reassignCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class

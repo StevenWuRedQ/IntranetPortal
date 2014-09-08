@@ -160,7 +160,7 @@ function OnLeadsCategoryClick(s, e) {
 
         if (e.item.name == "ViewLead") {           
             var url = '/ViewLeadsInfo.aspx?id=' + tmpBBLE;
-            window.showModalDialog(url, 'View Leads Info', 'dialogWidth:1350px;dialogHeight:930px');
+            window.open(url, 'View Leads Info', 'Width=1350px,Height=930px');
         }
 
         if (e.item.name == "Delete") {
@@ -179,11 +179,30 @@ function OnLeadsCategoryClick(s, e) {
 
         if (e.item.name == "Upload") {
             var url = '/UploadFilePage.aspx?b=' + tmpBBLE;
-            window.showModalDialog(url, 'Upload Files', 'dialogWidth:640px;dialogHeight:400px');
+            //var centerLeft = parseInt((window.screen.availWidth - 640) / 2);
+            //var centerTop = parseInt(((window.screen.availHeight - 400) / 2) - 50);          
+            if (popupCtrUploadFiles)
+            {
+                popupCtrUploadFiles.SetContentUrl(url);
+                popupCtrUploadFiles.Show();
+            }
+            else
+                window.open(url, 'Upload Files', popup_params(640, 400)); //'Width=640px,Height=400px,top=' + centerTop + ",left=" + centerLeft);            
         }
     }
 
     e.item.SetChecked(false);
+}
+
+function popup_params(width, height) {
+    var a = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft;
+    var i = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop;
+    var g = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.documentElement.clientWidth;
+    var f = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.documentElement.clientHeight - 22);
+    var h = (a < 0) ? window.screen.width + a : a;
+    var left = parseInt(h + ((g - width) / 2), 10);
+    var top = parseInt(i + ((f - height) / 2.5), 10);
+    return 'width=' + width + ',height=' + height + ',left=' + left + ',top=' + top + ',scrollbars=1';
 }
 
 function SetLeadStatus(status) {
