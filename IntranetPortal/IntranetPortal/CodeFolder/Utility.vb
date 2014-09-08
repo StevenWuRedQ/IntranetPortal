@@ -12,7 +12,7 @@ Public Enum LeadStatus
     Deleted = 11
     MgrApproval = 12
     ALL = 13
-    d
+
 End Enum
 
 Public Class Utility

@@ -37,6 +37,7 @@ function SetPopupControlMapURL(url) {
 }
 
 function popupControlMapTabClick(index) {
+    $("#leads_address_popup").css("display", index == 4 ? "inherit" : "none");
     if (index == 0) {
         if (tmpBBLE != null) {
             if (getAddressCallback.InCallback()) {
@@ -82,8 +83,9 @@ function popupControlMapTabClick(index) {
             ASPxPopupMapControl.SetContentUrl(url);
         }
     }
-
+   
     if (index == 4) {
+       
         if (tmpBBLE != null) {
             var url = "http://gis.nyc.gov/doitt/nycitymap/template?applicationName=ZOLA";
          

@@ -108,7 +108,7 @@
 
     function PrintLeadInfo() {
         if (leadsInfoBBLE != null) {
-            var url = '/ShowReport.aspx?id=' + leadsInfoBBLE;           
+            var url = '/ShowReport.aspx?id=' + leadsInfoBBLE;
             window.open(url, 'Show Report', 'Width=800px,Height=800px');
         }
     }
@@ -310,7 +310,7 @@
                                         </li>
 
                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
-                                        <li style="margin-right: 30px; color: #ffa484;float:right">
+                                        <li style="margin-right: 30px; color: #ffa484; float: right">
                                             <i class="fa fa-refresh sale_head_button tooltip-examples" title="Refresh" onclick="popupMenuRefreshClient.ShowAtElement(this)"></i>
                                             <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" style="display: none"></i>
                                             <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Share Leads" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
@@ -410,9 +410,10 @@
                                                 <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                 <li style="margin-right: 30px; color: #7396a9; float: right">
                                                     <i class="fa fa-calendar-o sale_head_button tooltip-examples" title="Schedule" onclick="ASPxPopupScheduleClient.ShowAtElement(this);"></i>
-                                                    <i class="fa fa-phone sale_head_button sale_head_button_left tooltip-examples" title="Call Back" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
+                                                    <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus(1)"></i>
+                                                    <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
                                                     <i class="fa fa-sign-in  sale_head_button sale_head_button_left tooltip-examples" title="Door Knock" onclick="SetLeadStatus(4)"></i>
-                                                    <i class="fa fa-list-ol sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus(5)"></i>
+                                                    <i class="fa fa-refresh sale_head_button sale_head_button_left tooltip-examples" title="In Process" onclick="SetLeadStatus(5)"></i>    
                                                     <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                                 </li>
                                             </ul>
@@ -659,7 +660,7 @@
                             </tr>
                             <tr style="margin-top: 3px; line-height: 30px; margin-top: 10px">
                                 <td>
-                                    <div style="margin-top:10px">
+                                    <div style="margin-top: 10px">
                                         <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button rand-button-blue">
                                             <ClientSideEvents Click="SaveBestPhoneNo" />
                                         </dx:ASPxButton>

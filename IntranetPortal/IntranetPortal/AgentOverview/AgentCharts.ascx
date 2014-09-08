@@ -36,7 +36,7 @@
     var char_show_status = chart_status_enum.status_office;
     function chart_resize() {
         var chart_div = $('#chars_with_scorll')
-        alert(chart_div);
+      
         $("#chars_with_scorll_wh").html("w =" + chart_div.width() + ";h =" + chart_div.height());
     }
     function change_chart_type(e) {
@@ -152,14 +152,15 @@
         var chartTitle = dataFormSever.Title == null ? "Leads" : dataFormSever.Title;
         $('#chartsTitle').text(chartTitle);
         //$("#container").width(600);
-        $("#container").width(40);
-        var charsWidth = $("#container").width();
-        var tagertWidth = 40 * chartData.length + 80;
+        /*let width auto */
+        //$("#container").width(40);
+        //var charsWidth = $("#container").width();
+        //var tagertWidth = 40 * chartData.length + 80;
 
-        if (charsWidth < tagertWidth) {
+        //if (charsWidth < tagertWidth) {
 
-            $("#container").width(tagertWidth);
-        }
+        //    $("#container").width(tagertWidth);
+        //}
        
        
         var charts = $("#container").dxChart({
@@ -180,7 +181,7 @@
                 valueField: "Count",
                 name: "name",
                 type: "bar",
-                color: '#B0BF1A'
+                color: '#99bdcf'
             },
             //title: chartTitle,
             legend: {

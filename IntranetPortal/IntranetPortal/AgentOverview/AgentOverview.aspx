@@ -172,6 +172,16 @@
             }
 
         });
+        function expandAllClick(s) {
+            if (gridEmpsClient.IsGroupRowExpanded(0)) {
+                gridEmpsClient.CollapseAll();
+                $(s).attr("class", 'fa fa-compress icon_btn tooltip-examples');
+            }
+            else {
+                gridEmpsClient.ExpandAll();
+                $(s).attr("class", 'fa fa-expand icon_btn tooltip-examples');
+            }
+        }
     </script>
 
 </asp:Content>
@@ -195,8 +205,8 @@
                         <div style="height: 459px; border-bottom: 1px solid #dde0e7">
                             <div style="margin: 30px 20px 30px 30px">
                                 <div style="font-size: 24px;">
-                                    <i class="fa fa-group with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;&nbsp;<span style="color: #234b60; font-size: 30px;">Employees</span>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-sort-amount-desc"></i>
+                                    <i class="fa fa-group with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;<span style="color: #234b60; font-size: 30px;">Employees</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="fa fa-sort-amount-desc" style="display:none"></i> <i class="fa fa-expand icon_btn tooltip-examples" title="Expand or Collapse All" onclick="expandAllClick(this)"  id="divExpand"></i>
                                 </div>
                                 <input type="text" data-var="@btn-info-color" class="form-control" style="width: 250px; margin-top: 25px; height: 30px; color: #b1b2b7" placeholder="Type employee’s name" onchange="SearchNames(this)" />
                                 <div style="margin-top: 27px; height: 290px; overflow: auto" id="employees_grid">
@@ -317,7 +327,7 @@
                                 <div style="padding: 0px 20px;">
                                     <div style="font-size: 24px;" class="clearfix">
                                         <i class="fa fa-suitcase with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;<span style="color: #234b60; font-size: 30px;">Lead Status</span>
-                                        <i class="fa fa-sort-amount-desc icon_right_s"></i>
+                                        <i class="fa fa-sort-amount-desc icon_right_s" style="display:none"></i>
                                     </div>
                                 </div>
 

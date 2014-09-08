@@ -15,6 +15,7 @@
         aspxAcrisControl.SetContentHtml("Loading...");
         aspxAcrisControl.SetContentUrl(url);
         aspxAcrisControl.SetHeaderText(header);
+        $('#pop_up_header_text').html(header)
         aspxAcrisControl.Show();
     }
 
@@ -49,7 +50,7 @@
         <dx:ASPxPanel ID="UpatingPanel" runat="server">
             <PanelCollection>
                 <dx:PanelContent runat="server">
-                    <div style="margin: 30px 20px;margin-bottom:0px; height: 30px; background: #ffefe4; color: #ff400d; border-radius: 15px; font-size: 14px; line-height: 30px;">
+                    <div style="margin: 30px 20px; margin-bottom: 0px; height: 30px; background: #ffefe4; color: #ff400d; border-radius: 15px; font-size: 14px; line-height: 30px;">
                         <i class="fa fa-spinner fa-spin" style="margin-left: 30px"></i>
                         <span style="padding-left: 22px">Lead is being updated, it will take a few minutes to complete.</span>
                     </div>
@@ -57,12 +58,12 @@
             </PanelCollection>
         </dx:ASPxPanel>
         <%--time label--%>
-        <div style="height: 80px; font-size: 30px; margin-left: 30px;margin-top:20px;" class="font_gray">
+        <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
             <div style="font-size: 30px">
                 <span style='<%= If(LeadsInfoData.LastUpdate.HasValue, "visibility:visible", "visibility:hidden")%>'>
                     <i class="fa fa-refresh"></i>
                     <span style="margin-left: 19px;"><%= LeadsInfoData.LastUpdate.ToString%></span>
-                </span>                
+                </span>
                 <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
                 <span class="time_buttons" onclick='ShowDOBWindow("<%= LeadsInfoData.Borough%>","<%= LeadsInfoData.Number%>", "<%= LeadsInfoData.StreetName%>")'>DOB</span>
                 <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>")'>Acris</span>
@@ -122,7 +123,7 @@
                             <td style="width: 380px; vertical-align: central">
                                 <dx:ASPxTextBox runat="server" ID="txtLeadsComments" ClientInstanceName="txtLeadsComments" Width="360px"></dx:ASPxTextBox>
                             </td>
-                            <td style="text-align:right">
+                            <td style="text-align: right">
                                 <div>
                                     <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1">
                                         <ClientSideEvents Click="SaveLeadsComments" />
@@ -147,7 +148,7 @@
 
 
             <%--line 1--%>
-            <div class="form_div_node" style="width:63%">
+            <div class="form_div_node" style="width: 63%">
                 <span class="form_input_title">address</span>
 
                 <input class="text_input" value="<%= LeadsInfoData.PropertyAddress%>" />
@@ -226,7 +227,7 @@
             </div>
 
             <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Zoning (<span style="color: #0e9ee9;cursor:pointer">PDF</span>)</span>
+                <span class="form_input_title">Zoning (<span style="color: #0e9ee9; cursor: pointer">PDF</span>)</span>
 
                 <input class="text_input" value="<%=LeadsInfoData.Zoning%>" />
             </div>
@@ -271,7 +272,7 @@
 
         <%--zestimat form--%>
         <div style="margin: 20px;" class="clearfix">
-            <div class="form_head" style="margin-top: 40px;">ZESTIMATE</div>
+            <div class="form_head" style="margin-top: 40px;">Value</div>
 
 
 
@@ -380,30 +381,30 @@
             <%----end line ----%>
             <div style="width: 230px" class="clearfix">
                 <%--line 4--%>
-                
+
                 <div class="form_div_node form_div_node_line_margin form_div_node_small">
                     <span class="form_input_title">Taxes</span>
-                    <input class="text_input input_currency" onblur="$(this).formatCurrency();"  value="$<%=LeadsInfoData.TaxesAmt%>" />
+                    <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.TaxesAmt%>" />
                 </div>
-              
+
 
                 <%----end line ----%>
                 <%--line 5--%>
 
-                <div class="form_div_node form_div_node_line_margin form_div_node_small" >
+                <div class="form_div_node form_div_node_line_margin form_div_node_small">
                     <span class="form_input_title">water</span>
                     <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.WaterAmt%>" />
                 </div>
                 <%----end line ----%>
                 <%--line 6--%>
 
-                <div class="form_div_node form_div_node_line_margin form_div_node_small" >
+                <div class="form_div_node form_div_node_line_margin form_div_node_small">
                     <span class="form_input_title">ecb/dob</span>
                     <input class="text_input" value="<%= LeadsInfoData.ViolationAmount %>" />
                 </div>
                 <%--line 7--%>
 
-                <div class="form_div_node form_div_node_line_margin form_div_node_small" >
+                <div class="form_div_node form_div_node_line_margin form_div_node_small">
                     <span class="form_input_title" style="color: #ff400d">Total debt</span>
                     <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.C1stMotgrAmt+LeadsInfoData.C2ndMotgrAmt+LeadsInfoData.TaxesAmt+LeadsInfoData.WaterAmt %>" />
                 </div>
@@ -471,6 +472,18 @@
 <dx:ASPxPopupControl ClientInstanceName="aspxAcrisControl" Width="1000px" Height="800px"
     ID="ASPxPopupControl1" HeaderText="Acris" Modal="true" CloseAction="CloseButton" ShowMaximizeButton="true"
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <HeaderTemplate>
+        <div class="clearfix">
+            <div class="pop_up_header_margin">
+                <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
+                <span class="pop_up_header_text" id="pop_up_header_text">Acris </span> <span class="pop_up_header_text"><%= LeadsInfoData.PropertyAddress%> </span>
+            </div>
+            <div class="pop_up_buttons_div">
+                <i class="fa fa-times icon_btn" onclick="aspxAcrisControl.Hide()"></i>
+            </div>
+        </div>
+
+    </HeaderTemplate>
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">
         </dx:PopupControlContentControl>
