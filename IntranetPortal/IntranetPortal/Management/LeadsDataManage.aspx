@@ -65,7 +65,7 @@
             var logs = eval("(" + result + ")");
 
             var table = document.getElementById("tblServiceLogs");
-                       
+            
             for(var i=0; i<logs.length;i++)
             {
                 var log = logs[i];
@@ -109,11 +109,11 @@
                 </Pane>
             </Styles>
             <Panes>
-                <dx:SplitterPane ScrollBars="Auto">
+                <dx:SplitterPane ScrollBars="Auto" PaneStyle-Paddings-Padding="5px">
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <h3>Leads Data</h3>
-                            <table style="width: 820px; text-align: left; margin: 10px,10px,0,0;">
+                            <table style="width: 720px; text-align: left; margin: 10px,10px,0,0;">
                                 <tr>
                                     <td class="caption" style="width: 100px;">
                                         <dx:ASPxLabel ID="lblSelectImage" runat="server" Text="Select File:">
@@ -178,7 +178,7 @@
                 </dx:SplitterPane>
                 <dx:SplitterPane>
                     <Panes>
-                        <dx:SplitterPane>
+                        <dx:SplitterPane PaneStyle-Paddings-Padding="5px">
                             <ContentCollection>
                                 <dx:SplitterContentControl>
                                     <h3>Service Status</h3>
@@ -199,7 +199,7 @@
                                     <table>
                                         <tr>
                                             <td style="width: 80px">
-                                                <dx:ASPxLabel runat="server" Text="Leads:"></dx:ASPxLabel>
+                                                <dx:ASPxLabel runat="server" Text="Leads Type:"></dx:ASPxLabel>
                                             </td>
                                             <td style="width: 150px;">
                                                 <dx:ASPxComboBox runat="server" ID="cbLeadsType" ClientInstanceName="cbLeadsType">

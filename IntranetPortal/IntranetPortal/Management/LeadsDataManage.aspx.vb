@@ -196,11 +196,7 @@ Public Class LeadsDataManage
 
         Public Sub Start()
             Status = ServiceStatus.Runing
-            LoadLeadsData()
-            For Each prop In LeadsData
-                AssginLeads(prop)
-            Next
-
+            AssginLeads()
             DataLoop("New")
         End Sub
 
@@ -252,7 +248,7 @@ Public Class LeadsDataManage
         End Function
 
         Public Sub DataLoop(datatype As String)
-
+            UserMessage.AddNewMessage("Service Message", "Data Loop", "Data loop start. Type: " & datatype, "", DateTime.Now, KEY)
             Dim bbles = LeadDataSource(datatype).Select(Function(b) b.BBLE).ToArray
 
             If Not Status = ServiceStatus.InLoop Then
@@ -353,55 +349,68 @@ InitialLine:
         End Sub
 
         Private Sub LoadLeadsData()
+
             Using Context As New Entities
                 LeadsData = Context.Agent_Properties.Where(Function(ap) ap.BBLE IsNot Nothing And (ap.Active = True Or Not ap.Active.HasValue) And (ap.ScheduleDate Is Nothing Or ap.ScheduleDate < DateTime.Now)).ToList
             End Using
+            UserMessage.AddNewMessage("Service Message", "Load Leads Data finish. Total count: " + LeadsData.Count, "Load Leads Data", "", DateTime.Now, KEY)
         End Sub
 
-        Private Sub AssginLeads(prop As Agent_Properties)
+        Private Sub AssginLeads()
+            UserMessage.AddNewMessage("Service Message", "AssignLeads Start", "AssignLeads start.", "", DateTime.Now, KEY)
             Using Context As New Entities
-                Dim li = Context.LeadsInfoes.Where(Function(l) l.BBLE = prop.BBLE).SingleOrDefault
-                If li Is Nothing Then
-                    li = New LeadsInfo
-                    li.PropertyAddress = prop.Property_Address
-                    li.BBLE = prop.BBLE
-                    li.CreateBy = KEY
-                    li.CreateDate = DateTime.Now
+                Dim count = 0
+                For Each prop In Context.Agent_Properties.Where(Function(ap) ap.BBLE IsNot Nothing And (ap.Active = True Or Not ap.Active.HasValue) And (ap.ScheduleDate Is Nothing Or ap.ScheduleDate < DateTime.Now))
+                    Try
+                        Dim li = Context.LeadsInfoes.Where(Function(l) l.BBLE = prop.BBLE).SingleOrDefault
+                        If li Is Nothing Then
 
-                    If Not String.IsNullOrEmpty(prop.Type) Then
-                        li.Type = li.GetLeadsType(prop.Type)
-                    End If
+                            li = New LeadsInfo
+                            li.PropertyAddress = prop.Property_Address
+                            li.BBLE = prop.BBLE
+                            li.CreateBy = KEY
+                            li.CreateDate = DateTime.Now
 
-                    If Context.LeadsInfoes.Local.Where(Function(tmp) tmp.BBLE = li.BBLE).Count = 0 Then
-                        Context.LeadsInfoes.Add(li)
-                    End If
+                            If Not String.IsNullOrEmpty(prop.Type) Then
+                                li.Type = li.GetLeadsType(prop.Type)
+                            End If
 
-                    If Not String.IsNullOrEmpty(prop.Agent_Name) Then
-                        Dim emp = Employee.GetInstance(prop.Agent_Name)
+                            If Context.LeadsInfoes.Local.Where(Function(tmp) tmp.BBLE = li.BBLE).Count = 0 Then
+                                Context.LeadsInfoes.Add(li)
+                                count += 1
+                            End If
 
-                        If emp IsNot Nothing Then
-                            Dim newlead = Context.Leads.Where(Function(ld) ld.BBLE = prop.BBLE).SingleOrDefault
-                            If newlead Is Nothing Then
-                                newlead = New Lead() With {
-                                                  .BBLE = prop.BBLE,
-                                                  .LeadsName = li.LeadsName,
-                                                  .Neighborhood = li.NeighName,
-                                                  .EmployeeID = emp.EmployeeID,
-                                                  .EmployeeName = emp.Name,
-                                                  .Status = LeadStatus.NewLead,
-                                                  .AssignDate = DateTime.Now,
-                                                  .AssignBy = KEY
-                                                  }
+                            If Not String.IsNullOrEmpty(prop.Agent_Name) Then
+                                Dim emp = Employee.GetInstance(prop.Agent_Name)
 
-                                If Context.Leads.Local.Where(Function(tmp) tmp.BBLE = prop.BBLE).Count = 0 Then
-                                    Context.Leads.Add(newlead)
+                                If emp IsNot Nothing Then
+                                    Dim newlead = Context.Leads.Where(Function(ld) ld.BBLE = prop.BBLE).SingleOrDefault
+                                    If newlead Is Nothing Then
+                                        newlead = New Lead() With {
+                                                          .BBLE = prop.BBLE,
+                                                          .LeadsName = li.LeadsName,
+                                                          .Neighborhood = li.NeighName,
+                                                          .EmployeeID = emp.EmployeeID,
+                                                          .EmployeeName = emp.Name,
+                                                          .Status = LeadStatus.NewLead,
+                                                          .AssignDate = DateTime.Now,
+                                                          .AssignBy = KEY
+                                                          }
+
+                                        If Context.Leads.Local.Where(Function(tmp) tmp.BBLE = prop.BBLE).Count = 0 Then
+                                            Context.Leads.Add(newlead)
+                                        End If
+                                    End If
                                 End If
                             End If
                         End If
-                    End If
-
-                    Context.SaveChanges()
-                End If
+                        prop.Active = False
+                    Catch ex As Exception
+                        UserMessage.AddNewMessage("Service Error", "Assign Leads Data", "Create Leadsinfo error. BBLE: " & prop.BBLE, "", DateTime.Now, KEY)
+                    End Try
+                Next
+                Context.SaveChanges()
+                UserMessage.AddNewMessage("Service Message", "Assign Leads Data End", "Assign Leads Data Finish. Total Leads Count: " & count, "", DateTime.Now, KEY)
             End Using
         End Sub
 
