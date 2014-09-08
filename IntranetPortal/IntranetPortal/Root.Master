@@ -220,7 +220,7 @@
                                                                         <%--add data row height and font color  by steven--%>
                                                                         <div class="search_pop_data_s">
                                                                             <div href="#" class="pop_search_data"
-                                                                                onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))  %>'>
+                                                                                onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"), StringComparer.OrdinalIgnoreCase)  %>'>
                                                                                 <%# Eval("LeadsName")%>
                                                                             </div>
                                                                             <div class="pop_search_data"
@@ -248,11 +248,10 @@
                                                                 </dx:GridViewDataColumn>
                                                                 <dx:GridViewDataColumn Width="35px" VisibleIndex="5">
                                                                     <DataItemTemplate>
-
                                                                         <%--use font image to change the image--%>
-                                                                        <i class="fa fa-external-link-square" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To Lead" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>'></i>
+                                                                        <i class="fa fa-external-link-square" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To Lead" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"), StringComparer.OrdinalIgnoreCase)%>'></i>
                                                                         <span style="width: 10px">&nbsp;&nbsp;</span>
-                                                                        <i class="fa fa-list-alt" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>'></i>
+                                                                        <i class="fa fa-list-alt" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"), StringComparer.OrdinalIgnoreCase)%>'></i>
                                                                         <%--change image to beaty style by steven--%>
                                                                         <%--<img src="~/images/search_pop_go_leads.png" title="Go To Lead" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />
                                                                         <img src="~/images/search_pop_menu.png" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />--%>

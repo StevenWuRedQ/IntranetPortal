@@ -341,18 +341,13 @@ Public Class ActivityLogs
                 If e.GetValue("LogID") IsNot Nothing Then
                     Dim logId = CInt(e.GetValue("LogID"))
 
-                    Dim task = UserTask.GetTaskByLogID(logId)
-                    Dim chkTaskComplete = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "chkTaskComplete"), ASPxCheckBox)
+                Dim task = UserTask.GetTaskByLogID(logId)
                     Dim pnlTask = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "pnlTask"), Panel)
                     Dim btnTaskComplete = TryCast(pnlTask.FindControl("btnTaskComplete"), HtmlControl)
 
                 Dim ltTaskResult = TryCast(pnlTask.FindControl("ltTaskResult"), Literal)
 
                 If task Is Nothing Then
-
-                    If chkTaskComplete IsNot Nothing Then
-                        chkTaskComplete.Visible = False
-                    End If
 
                     Dim tblTask = TryCast(pnlTask.FindControl("tblTask"), HtmlControl)
                     tblTask.Visible = False
@@ -373,13 +368,11 @@ Public Class ActivityLogs
 
                     Dim ltTaskComments = TryCast(pnlTask.FindControl("ltTaskComments"), Literal)
                     ltTaskComments.Text = task.Description
-                    chkTaskComplete.Visible = True
                 End If
 
                     If task.Status = UserTask.TaskStatus.Active Then
                         If btnTaskComplete IsNot Nothing Then
-                            btnTaskComplete.Visible = True
-                            chkTaskComplete.Visible = False
+                        btnTaskComplete.Visible = True
                         End If
 
                         'e.Row.BackColor = System.Drawing.Color.FromArgb(255, 197, 197)
@@ -394,9 +387,6 @@ Public Class ActivityLogs
 
                         If ltTaskResult IsNot Nothing Then
                             ltTaskResult.Text = "Complete"
-                            'chkTaskComplete.Checked = True
-                            'chkTaskComplete.ReadOnly = True
-                            'chkTaskComplete.Visible = True
                         End If
 
                     Else

@@ -355,10 +355,7 @@
                                                 <asp:Label runat="server" ID="lblOwnerName"></asp:Label></td>
                                             <td>
                                                 <div style="float: right; font-size: 18px">
-                                                    <asp:Literal runat="server" id="ltResult"></asp:Literal>
-                                                    <dx:ASPxCheckBox Text="Accepted" runat="server" TextAlign="Left" ID="chkAptAccept" Visible="false"></dx:ASPxCheckBox>
-                                                    <dx:ASPxCheckBox Text="Declined&nbsp;" runat="server" TextAlign="Left" ID="chkAptDecline" Visible="false"></dx:ASPxCheckBox>
-                                                    <dx:ASPxCheckBox Text="Scheduled" runat="server" TextAlign="Left" ID="chkAptReschedule" Visible="false"></dx:ASPxCheckBox>
+                                                    <span style="font-size:14px;"><asp:Literal runat="server" id="ltResult"></asp:Literal></span>                                                    
                                                     <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" runat="server" id="btnAccept" title="Accept" onclick='<%# String.Format("AcceptAppointment(""{0}"")", Eval("LogID"))%>' visible="false"></i>
                                                     <i class="fa fa-times-circle-o log_item_hl_buttons tooltip-examples" title="Decline" runat="server" id="btnDecline" onclick='<%# String.Format("DeclineAppointment(""{0}"")", Eval("LogID"))%>' visible="false"></i>
                                                     <i class="fa fa-history log_item_hl_buttons tooltip-examples" title="Reschedule" runat="server" id="btnReschedule" onclick='<%# String.Format("ReScheduledAppointment(""{0}"")", Eval("LogID"))%>' visible="false"></i>
@@ -412,8 +409,7 @@
                                             <td style="width: 200px">Task</td>
                                             <td>
                                                 <div style="float: right; font-size: 18px">
-                                                     <asp:Literal runat="server" id="ltTaskResult"></asp:Literal>
-                                                    <dx:ASPxCheckBox Text="Completed" runat="server" TextAlign="Left" ID="chkTaskComplete" Visible="false"></dx:ASPxCheckBox>
+                                                     <span style="font-size:14px;"><asp:Literal runat="server" id="ltTaskResult"></asp:Literal></span>                                                    
                                                     <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" onclick='<%# String.Format("CompleteTask(""{0}"")", Eval("LogID"))%>' title="Completed" runat="server" id="btnTaskComplete" visible="false"></i>
                                                 </div>
                                             </td>
@@ -446,23 +442,17 @@
                                 </table>
                             </div>
                         </asp:Panel>
-
-
+                        
                         <asp:Panel runat="server" Visible='<%# Eval("Category").ToString.StartsWith("Approval")%>' ID="panelTask">
                             <table style="width: 100%">
                                 <thead>
                                     <tr>
                                         <td style="font-weight: bold"><%# Eval("Category")%> </td>
                                         <td style="text-align: right; width: 120px;">
-                                            <div style="float: right">                                               
-                                                <dx:ASPxCheckBox Text="Completed" runat="server" TextAlign="Left" ID="chkComplete" Visible="false"></dx:ASPxCheckBox>
-                                                <dx:ASPxCheckBox Text="Accepted" runat="server" TextAlign="Left" ID="chkAccepted" Visible="false"></dx:ASPxCheckBox>
-                                                <dx:ASPxCheckBox Text="Declined&nbsp;" runat="server" TextAlign="Left" ID="chkDeclined" Visible="false"></dx:ASPxCheckBox>
-                                                <dx:ASPxCheckBox Text="Scheduled" runat="server" TextAlign="Left" ID="chkReschedule" Visible="false"></dx:ASPxCheckBox>
-
+                                            <div style="float: right">
                                                 <asp:Panel runat="server" ID="pnlAptButton">
                                                     <div style="float: right; font-size: 18px">
-                                                        <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" title="Accept" onclick='<%# String.Format("ApproveNewLead(""{0}"")", Eval("LogID"))%>'></i>
+                                                        <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" title="Approve" onclick='<%# String.Format("ApproveNewLead(""{0}"")", Eval("LogID"))%>'></i>
                                                         <i class="fa fa-times-circle-o log_item_hl_buttons" title="Decline" onclick='<%# String.Format("DeclineNewLead(""{0}"")", Eval("LogID"))%>'></i>                                                        
                                                     </div>
                                                 </asp:Panel>                                             

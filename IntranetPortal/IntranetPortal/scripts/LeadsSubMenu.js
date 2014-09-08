@@ -228,6 +228,7 @@ function OnGetAddressCallbackComplete(s, e) {
         return;
     }
     tempAddress = e.result;
+    $('#leads_address_popup').html(tempAddress);
     //var streetViewFrm = "streetViewFrm";
     var streenViewWinFrm = ASPxPopupMapControl.GetContentIFrame(); //document.getElementById(streetViewFrm);
 

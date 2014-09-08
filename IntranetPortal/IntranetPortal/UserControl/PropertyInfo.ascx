@@ -75,31 +75,36 @@
 
         <%--note list--%>
         <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
-            <% If Not String.IsNullOrEmpty(LeadsInfoData.IndicatorOfLiens) Then%>
-            <div class="note_item">
-                <i class="fa fa-exclamation-circle note_img"></i>
-                <span class="note_text">Liens higher than Value</span>
-            </div>
-            <% End If%>
-
-            <% If Not String.IsNullOrEmpty(LeadsInfoData.IndicatorOfWater) Then%>
-            <div class="note_item">
-                <i class="fa fa-exclamation-circle note_img"></i>
-                <span class="note_text">Water Lien is High - Possible Tenant Issues</span>
-            </div>
-            <% End If%>
-
             <dx:ASPxCallbackPanel runat="server" ID="leadsCommentsCallbackPanel" ClientInstanceName="leadsCommentsCallbackPanel" OnCallback="leadsCommentsCallbackPanel_Callback">
                 <PanelCollection>
                     <dx:PanelContent>
+                        <% Dim i = 0%>
+                        <% If LeadsInfoData.IsHighLiens Then%>
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
+                            <i class="fa fa-exclamation-circle note_img"></i>
+                            <span class="note_text">Liens higher than Value</span>
+                        </div>
+                        <% i += 1%>
+                        <% End If%>
+
+                        <% If Not String.IsNullOrEmpty(LeadsInfoData.IndicatorOfWater) Then%>
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
+                            <i class="fa fa-exclamation-circle note_img"></i>
+                            <span class="note_text">Water Lien is High - Possible Tenant Issues</span>
+                        </div>
+                        <% i += 1%>
+                        <% End If%>
+
                         <asp:HiddenField ID="hfBBLE" runat="server" />
+
                         <% For Each comment In LeadsInfoData.UserComments%>
-                        <div class="note_item" style="background: #e8e8e8">
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
                             <span class="note_text"><%= comment.Comments%></span>
                             <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7; display: none"></i>
                             <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7; cursor: pointer" onclick="DeleteComments(<%= comment.CommentId %>)"></i>
                         </div>
+                        <% i += 1%>
                         <% Next%>
                     </dx:PanelContent>
                 </PanelCollection>
@@ -406,7 +411,7 @@
 
                 <div class="form_div_node form_div_node_line_margin form_div_node_small">
                     <span class="form_input_title" style="color: #ff400d">Total debt</span>
-                    <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.C1stMotgrAmt+LeadsInfoData.C2ndMotgrAmt+LeadsInfoData.TaxesAmt+LeadsInfoData.WaterAmt %>" />
+                    <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.TotalDebt %>" />
                 </div>
 
                 <%----end line ----%>

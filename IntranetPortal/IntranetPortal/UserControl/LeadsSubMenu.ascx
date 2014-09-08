@@ -113,7 +113,7 @@
                     <div class="tab-pane" id="Oasis">Oasis</div>
                     <div class="tab-pane" id="ZOLA">ZOLA</div>
                 </div>
-                <div style="width:100%;text-align: center; display:none" id="leads_address_popup"> show  PropertyAddress </div>               
+                <div style="width:100%;text-align: center; display:none" id="leads_address_popup"> </div>               
             </div>
         </HeaderTemplate>
         <ContentCollection>

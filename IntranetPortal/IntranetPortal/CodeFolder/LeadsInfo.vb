@@ -142,6 +142,40 @@
         End Get
     End Property
 
+    Public ReadOnly Property TotalDebt As Double
+        Get
+            Dim debt = 0
+
+            If C1stMotgrAmt.HasValue Then
+                debt += C1stMotgrAmt
+            End If
+
+            If C2ndMotgrAmt.HasValue Then
+                debt += C2ndMotgrAmt
+            End If
+
+            If TaxesAmt.HasValue Then
+                debt += TaxesAmt
+            End If
+
+            If WaterAmt.HasValue Then
+                debt += WaterAmt
+            End If
+
+            Return debt
+        End Get
+    End Property
+
+    Public ReadOnly Property IsHighLiens As Boolean
+        Get
+            If EstValue.HasValue Then
+                Return TotalDebt > EstValue
+            Else
+                Return False
+            End If
+        End Get
+    End Property
+
     Public ReadOnly Property IndicatorOfLiens As String
         Get
             If Me.C1stMotgrAmt.HasValue AndAlso C1stMotgrAmt > 0 Then

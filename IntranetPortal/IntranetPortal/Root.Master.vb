@@ -31,6 +31,10 @@ Public Class Root
         End Get
     End Property
 
+    Public Function HasControl(bble As String)
+        Return Employee.HasControlLeads(Page.User.Identity.Name, bble)
+    End Function
+
     Sub BindSearchGrid(key As String)
         key = txtSearchKey.Text
         If String.IsNullOrEmpty(key) Then
