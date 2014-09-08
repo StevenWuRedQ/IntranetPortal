@@ -596,9 +596,10 @@
 
                                             </div>
                                         </dx:SplitterContentControl>
-                                    </ContentCollection>
+                                    </ContentCollection>                                    
                                 </dx:SplitterPane>
                             </Panes>
+                            <ClientSideEvents PaneResized="function(s,e){alert('ddd');}" />
                         </dx:ASPxSplitter>
 
                     </dx:SplitterContentControl>

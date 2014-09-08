@@ -94,7 +94,11 @@ Public Class MgrEmployee
             Dim emp = Context.Employees.Where(Function(em) em.EmployeeID = empID).FirstOrDefault
 
             emp.Password = cnpsw.Text
-            Context.SaveChanges()
+            If Context.GetValidationErrors().Count = 0 Then
+                Context.SaveChanges()
+            Else
+
+            End If
         End Using
 
         ASPxPopupControl1.ShowOnPageLoad = False

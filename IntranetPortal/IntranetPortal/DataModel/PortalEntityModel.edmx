@@ -550,7 +550,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <NavigationProperty Name="LeadsActivityLogs" Relationship="IntranetPortalModel.EmployeeLeadsActivityLog" FromRole="Employee" ToRole="LeadsActivityLog" />
           <Property Name="EmployeeSince" Type="DateTime" Precision="0" />
           <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CellPhone" Type="String" Nullable="false" />
+          <Property Name="CellPhone" Type="String" />
         </EntityType>
         <EntityType Name="LeadsActivityLog">
           <Key>
