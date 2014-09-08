@@ -152,7 +152,11 @@
                 return
             }
         }
-
+        function contentSplitterClinet_resize(s, e)
+        {
+            $('#showPanesize').html('size =' + contentSplitterClinet.GetWidth() - 540);
+            $('#chars_with_scorll').width(contentSplitterClinet.GetWidth() - 540);
+        }
         function CompareEmp(emps) {
             //alert(emps);
         }
@@ -338,7 +342,7 @@
             <dx:SplitterPane>
                 <ContentCollection>
                     <dx:SplitterContentControl>
-                        <dx:ASPxSplitter runat="server" ID="contentSplitter" Orientation="Vertical" Width="100%" Height="100%">
+                        <dx:ASPxSplitter runat="server" ID="contentSplitter" Orientation="Vertical" Width="100%" Height="100%" ClientInstanceName="contentSplitterClinet">
                             <Styles>
                                 <Pane Paddings-Padding="0">
                                     <Paddings Padding="0px"></Paddings>
@@ -346,7 +350,7 @@
                                 <Separator BackColor=" #e7e9ee"></Separator>
                             </Styles>
                             <Panes>
-                                <dx:SplitterPane ShowCollapseBackwardButton="True" Size="480">
+                                <dx:SplitterPane ShowCollapseBackwardButton="True" Size="480" >
                                     <ContentCollection>
                                         <dx:SplitterContentControl runat="server">
                                             <div style="width: 100%" class="agent_layout_float clear-fix">
@@ -717,6 +721,7 @@
                 </ContentCollection>
             </dx:SplitterPane>
         </Panes>
+        <ClientSideEvents PaneResized="contentSplitterClinet_resize" />
     </dx:ASPxSplitter>
 
     <!-- custom scrollbar plugin -->
