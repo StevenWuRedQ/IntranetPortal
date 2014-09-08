@@ -19,7 +19,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-
         <div class="clearfix" style="width: 980px;height:980px;">
             <%--left div--%>
             <div style="width: 310px; color: #999ca1; position: relative" class="agent_layout_float">
