@@ -77,7 +77,6 @@
             if (gridEmpsClient.IsGroupRow(rowIndex)) {
                 gridEmpsClient.GetRowValues(rowIndex + 1, "Department", OnGetRowValues);
             }
-
             if (rowKey != null) {
                 //ContentCallbackPanel.PerformCallback("EMP|" + rowKey);
                 BindEmployee(rowKey);
@@ -89,7 +88,7 @@
         }
 
         function BindEmployee(employeeId) {
-
+            currentOffice = null;
             empId = employeeId;
             infoCallbackClient.SetVisible(true);
             infoCallbackClient.PerformCallback("EMP|" + empId);
@@ -101,8 +100,9 @@
             BindEmployee(parseInt(e.result));
         }
 
+        var currentOffice = null;
         function BindOffice(office) {
-
+            currentOffice = office;
             gridReportClient.PerformCallback("BindOffice|" + office);
             infoCallbackClient.SetVisible(true);
             infoCallbackClient.PerformCallback("OFFICE|" + office);
@@ -128,9 +128,16 @@
         function ShowLeadstatus(status) {
             infoCallbackClient.SetVisible(false);
 
+            if (currentOffice != null) {               
+                gridReportClient.PerformCallback("OfficeStatus|" + currentOffice + "|" + status);
+                //ContentCallbackPanel.PerformCallback("Status|" + status)
+                //LoadStatusBarChartByOffice(status, currentOffice);
+            }
+            else {
             gridReportClient.PerformCallback("BindStatus|" + status);
             //ContentCallbackPanel.PerformCallback("Status|" + status)
             LoadStatusBarChart(status);
+        }
         }
 
         function CustomizRefershEnd() {
@@ -207,7 +214,7 @@
                             <div style="margin: 30px 20px 30px 30px">
                                 <div style="font-size: 24px;">
                                     <i class="fa fa-group with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;<span style="color: #234b60; font-size: 30px;">Employees</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <i class="fa fa-sort-amount-desc" style="display:none"></i> <i class="fa fa-expand icon_btn tooltip-examples" title="Expand or Collapse All" onclick="expandAllClick(this)"  id="divExpand"></i>
+                                    <i class="fa fa-sort-amount-desc" style="display: none"></i><i class="fa fa-expand icon_btn tooltip-examples" title="Expand or Collapse All" onclick="expandAllClick(this)" id="divExpand"></i>
                                 </div>
                                 <input type="text" data-var="@btn-info-color" class="form-control" style="width: 250px; margin-top: 25px; height: 30px; color: #b1b2b7" placeholder="Type employee’s name" onchange="SearchNames(this)" />
                                 <div style="margin-top: 27px; height: 290px; overflow: auto" id="employees_grid">
@@ -328,7 +335,7 @@
                                 <div style="padding: 0px 20px;">
                                     <div style="font-size: 24px;" class="clearfix">
                                         <i class="fa fa-suitcase with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;<span style="color: #234b60; font-size: 30px;">Lead Status</span>
-                                        <i class="fa fa-sort-amount-desc icon_right_s" style="display:none"></i>
+                                        <i class="fa fa-sort-amount-desc icon_right_s" style="display: none"></i>
                                     </div>
                                 </div>
 
@@ -361,7 +368,7 @@
                                 <Separator BackColor=" #e7e9ee"></Separator>
                             </Styles>
                             <Panes>
-                                <dx:SplitterPane ShowCollapseBackwardButton="True" Size="480" >
+                                <dx:SplitterPane ShowCollapseBackwardButton="True" Size="480">
                                     <ContentCollection>
                                         <dx:SplitterContentControl runat="server">
                                             <div style="width: 100%" class="agent_layout_float clear-fix">
@@ -588,7 +595,7 @@
                                                                 <CellStyle Font-Bold="True"></CellStyle>
                                                                 <DataItemTemplate>
                                                                      <a href="#" onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server">
-                                                                                <div style="color:rgb(119, 120, 123);"><%# Eval("LeadsName")%></div>
+                                                                        <div style="color: rgb(119, 120, 123);"><%# Eval("LeadsName")%></div>
                                                                             </a>
                                                                 </DataItemTemplate>
                                                             </dx:GridViewDataColumn>
@@ -989,8 +996,8 @@
                                                 </tr>
                                             </table>
                                         </td>
-                                        <td style="vertical-align:top">
-                                             <div style="margin-left:20px;margin-top:-12px;">
+                                        <td style="vertical-align: top">
+                                            <div style="margin-left: 20px; margin-top: -12px;">
                                                 <i class="fa fa-plus with_circle icon_btn compare_add_button" onclick="cbPnlCompareClient.PerformCallback('AddNewEmp')"></i>
                                             </div>
                                         </td>

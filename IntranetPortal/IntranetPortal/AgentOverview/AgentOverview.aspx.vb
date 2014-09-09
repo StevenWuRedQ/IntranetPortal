@@ -114,6 +114,14 @@ Public Class AgentOverview
             gridReport.DataBind()
         End If
 
+        If e.Parameters.StartsWith("OfficeStatus") Then
+            hfMode.Value = "OfficeStatus"
+            CurrentOffice = Office.GetInstance(e.Parameters.Split("|")(1))
+            CurrentStatus = CType(e.Parameters.Split("|")(2), LeadStatus)
+
+            gridReport.DataBind()
+        End If
+
         'gridReport.DataBind()
     End Sub
 
@@ -243,6 +251,16 @@ Public Class AgentOverview
                                     ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
                                     Where emps.Contains(ld.EmployeeName)
                                     Select li).ToList
+                gridReport.DataSource = reports
+            End If
+
+            If hfMode.Value = "OfficeStatus" Then
+                Dim emps = CurrentOffice.Users
+
+                Dim reports = (From li In portalDataContext.LeadsInfoes Join
+                                  ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
+                                  Where emps.Contains(ld.EmployeeName) And ld.Status = CurrentStatus
+                                  Select li).ToList
                 gridReport.DataSource = reports
             End If
         Else
