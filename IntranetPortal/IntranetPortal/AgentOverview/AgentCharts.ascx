@@ -3,9 +3,9 @@
 <%--<script src="/Scripts/jquery-2.1.1.min.js"></script>--%>
 <script src="/Scripts/globalize/globalize.js"></script>
 <script src="/Scripts/dx.chartjs.js"></script>
-<div style="padding-top: 43px;padding-bottom:20px; font-size: 30px; color: #ff400d; text-align: center;" id="chartsTitle">Charts Title</div>
+<div style="padding-top: 43px; padding-bottom: 20px; font-size: 30px; color: #ff400d; text-align: center;" id="chartsTitle">Charts Title</div>
 <%--use for debug chart width--%>
-<div style="padding-top: 43px;padding-bottom:20px; font-size: 30px; color: #ff400d; text-align: center;display:none" id="showPanesize">0px</div>
+<div style="padding-top: 43px; padding-bottom: 20px; font-size: 30px; color: #ff400d; text-align: center;display:none" id="showPanesize">0px</div>
 <div style="overflow: auto; width: 871px" id="chars_with_scorll">
     <div id="container" style="height: 350px;"></div>
     <div id="pieChart" style="height: 350px;"></div>
@@ -36,7 +36,7 @@
     var char_show_status = chart_status_enum.status_office;
     function chart_resize() {
         var chart_div = $('#chars_with_scorll')
-      
+
         $("#chars_with_scorll_wh").html("w =" + chart_div.width() + ";h =" + chart_div.height());
     }
     function change_chart_type(e) {
@@ -136,7 +136,11 @@
     }
     function show_bar_chart(ds) {
         var dataFormSever = ds != null ? ds : $.parseJSON('<%=ChartSource()%>');
+        var chart = '<div id="container" style="height: 350px;"></div>'
+        $("#container").remove();
+        $("#chars_with_scorll").append(chart)
         clear_chart();
+        
         show_element();
 
         var chartData = dataFormSever.DataSource;
@@ -155,14 +159,14 @@
         /*let width auto */
         //$("#container").width(40);
         //var charsWidth = $("#container").width();
-        //var tagertWidth = 40 * chartData.length + 80;
+        var tagertWidth = 40 * chartData.length + 80;
 
-        //if (charsWidth < tagertWidth) {
+        if (chartData.length>10) {
 
-        //    $("#container").width(tagertWidth);
-        //}
-       
-       
+            $("#container").width(tagertWidth);
+        }
+
+
         var charts = $("#container").dxChart({
             dataSource: chartData,
             commonSeriesSettings: {
@@ -197,6 +201,7 @@
                 }
             }
         ,
+            
             pointClick: function (point) {
                 //this.select();
                 //alert('-1|' + point.originalArgument)
@@ -303,12 +308,12 @@
     }
     function ChangeDataSource() {
         var ds = eval('<% ChartSource()%>');
-            show_bar_chart(ds);
-        }
-        function change_x_axis_complete(s, e) {
-            show_bar_chart($.parseJSON(e.result))
-        }
-        show_bar_chart();
+        show_bar_chart(ds);
+    }
+    function change_x_axis_complete(s, e) {
+        show_bar_chart($.parseJSON(e.result))
+    }
+    show_bar_chart();
 </script>
 <dx:ASPxCallback runat="server" ID="callbackDs" OnCallback="callbackDs_Callback" ClientInstanceName="callbackDsClient">
     <ClientSideEvents CallbackComplete="DataSourceLoadedComplete" />

@@ -428,7 +428,11 @@
                 <SettingsBehavior AllowDragDrop="false" AllowSort="false" AllowGroup="false" />
                 <Columns>
                     <dx:GridViewDataTextColumn FieldName="Type" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="Effective" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Effective" Settings-AllowSort="False">
+                       <DataItemTemplate>
+                           <%# DateTime.Parse(Eval("Effective")).ToShortDateString %>
+                       </DataItemTemplate>
+                    </dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Expiration" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Plaintiff" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Defendant" Settings-AllowSort="False"></dx:GridViewDataTextColumn>

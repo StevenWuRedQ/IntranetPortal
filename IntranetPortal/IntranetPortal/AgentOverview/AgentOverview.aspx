@@ -154,8 +154,9 @@
         }
         function contentSplitterClinet_resize(s, e)
         {
-            $('#showPanesize').html('size =' + contentSplitterClinet.GetWidth() - 540);
-            $('#chars_with_scorll').width(contentSplitterClinet.GetWidth() - 540);
+            
+            $('#showPanesize').html('size = ' + contentSplitterClinet.GetWidth() - 430);
+            $('#chars_with_scorll').width(contentSplitterClinet.GetWidth() - 430);
         }
         function CompareEmp(emps) {
             //alert(emps);
