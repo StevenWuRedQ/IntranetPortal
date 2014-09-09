@@ -151,11 +151,25 @@ Public Class AgentCharts
         End Function
     End Class
 
+    Public Function map_LeadStatus(stauts As Integer) As String
+        Dim convers = New Dictionary(Of Integer, String)
+        convers.Add(LeadStatus.Priority, "Hot leads")
+        convers.Add(LeadStatus.InProcess, "In Negotiation")
 
+        Try
+            Dim stautsStr = convers.Item(stauts)
+            If (stautsStr IsNot Nothing AndAlso stautsStr.Length > 0) Then
+                Return stautsStr
+            End If
+        Catch ex As Exception
+
+        End Try
+        Return CType(stauts, LeadStatus).ToString
+    End Function
     Public Function map_value(x_axis As String, value As String) As String
         Dim convers = New Dictionary(Of String, ConvertEnum)
-        convers.Add("Status",  New converLeadStatus)
-      
+        convers.Add("Status", New converLeadStatus)
+
         Try
             Dim covert = convers.Item(x_axis)
             If covert IsNot Nothing Then
@@ -165,7 +179,7 @@ Public Class AgentCharts
         Catch ex As Exception
 
         End Try
-       
+
         Return value
     End Function
     Public Function char_change_axis(x_axis As String, empId As String) As String
@@ -219,5 +233,26 @@ Public Class AgentCharts
         Dim a_empID = e.Parameter.Split("|")(1)
         current_employee = a_empID
         e.Result = char_change_axis(a_x_axis, a_empID)
+    End Sub
+
+    Public Function getStatusBarChartByOffice(status As Integer, officeName As String) As String
+        Using Context As New Entities
+            Dim source = (From e In Context.Employees Join
+                                 ld In Context.Leads On ld.EmployeeID Equals e.EmployeeID Where e.Department = officeName And ld.Status = status Group ld By Name = ld.EmployeeName Into Count()).ToList
+
+            Dim chart = New With {.Title = String.Format("{0}'s Employees {1} Leads data ", officeName, map_LeadStatus(status)),
+                              .DataSource = source}
+
+            Dim json As New JavaScriptSerializer
+            Dim jsonString = json.Serialize(chart)
+            Return jsonString
+        End Using
+
+    End Function
+
+    Protected Sub LoadStatusBarChartByOffice_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        Dim status = Convert.ToInt32(e.Parameter.Split("|")(0))
+        Dim office = e.Parameter.Split("|")(1)
+        e.Result = getStatusBarChartByOffice(status, office)
     End Sub
 End Class

@@ -6,6 +6,8 @@
 <div style="padding-top: 43px; padding-bottom: 20px; font-size: 30px; color: #ff400d; text-align: center;" id="chartsTitle">Charts Title</div>
 <%--use for debug chart width--%>
 <div style="padding-top: 43px; padding-bottom: 20px; font-size: 30px; color: #ff400d; text-align: center;display:none" id="showPanesize">0px</div>
+<%--test LoadStatusBarChartByOffice function--%> 
+<%--<button style="color: #ff400d;" onclick="LoadStatusBarChartByOffice(1 ,'Bronx')" type="button">Click</button>--%>
 <div style="overflow: auto; width: 871px" id="chars_with_scorll">
     <div id="container" style="height: 350px;"></div>
     <div id="pieChart" style="height: 350px;"></div>
@@ -282,7 +284,7 @@
     /* call like this LoadStatusBarChartByOffice(1 ,'Bronx') */
     function LoadStatusBarChartByOffice(status ,office)
     {
-        
+        LoadStatusChartByOfficeClinet.PerformCallback("" + status + "|" + office);
     }
 
     function LoadOfficeBarChart(office) {
@@ -318,6 +320,10 @@
     function change_x_axis_complete(s, e) {
         show_bar_chart($.parseJSON(e.result))
     }
+    function LoadStatusChartByOfficeComplate(s,e)
+    {
+        show_bar_chart($.parseJSON(e.result))
+    }
     show_bar_chart();
 </script>
 <dx:ASPxCallback runat="server" ID="callbackDs" OnCallback="callbackDs_Callback" ClientInstanceName="callbackDsClient">
@@ -337,4 +343,7 @@
 </dx:ASPxCallback>
 <dx:ASPxCallback runat="server" ID="char_change_x_axis_id" OnCallback="char_change_x_axis_id_Callback" ClientInstanceName="change_x_axis_clinet">
     <ClientSideEvents CallbackComplete="change_x_axis_complete" />
+</dx:ASPxCallback>
+<dx:ASPxCallback runat="server" ID="LoadStatusBarChartByOffice" OnCallback="LoadStatusBarChartByOffice_Callback" ClientInstanceName="LoadStatusChartByOfficeClinet">
+    <ClientSideEvents CallbackComplete="LoadStatusChartByOfficeComplate" />
 </dx:ASPxCallback>
