@@ -572,7 +572,12 @@
                                                     </div>
 
                                                     <%--grid view--%>
-
+                                                    <script type="text/javascript">
+                                                        function ShowSearchLeadsInfo(bble) {
+                                                            var url = '/ViewLeadsInfo.aspx?id=' + bble;
+                                                            window.open(url, 'View Leads Info', 'Width=1350px,Height=930px');
+                                                        }
+                                                    </script>
                                                     <%--<div style="overflow-x:scroll;overflow-y:scroll;max-height:900px;">--%>
                                                     <dx:ASPxGridView ID="gridReport" runat="server" KeyFieldName="BBLE" Width="100%" AutoGenerateColumns="false" ClientInstanceName="gridReportClient" OnCustomCallback="gridReport_CustomCallback" Settings-ShowGroupPanel="false" OnInit="gridReport_Init" CssClass="font_source_sans_pro" Settings-VerticalScrollBarMode="Auto">
                                                         <%--Settings-HorizontalScrollBarMode="Auto"--%>
@@ -581,6 +586,9 @@
                                                             <dx:GridViewDataColumn FieldName="PropertyAddress">
                                                                 <CellStyle Font-Bold="True"></CellStyle>
                                                                 <DataItemTemplate>
+                                                                     <a href="#" onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server">
+                                                                                <div style="color:rgb(119, 120, 123);"><%# Eval("LeadsName")%></div>
+                                                                            </a>
                                                                 </DataItemTemplate>
                                                             </dx:GridViewDataColumn>
                                                         </Columns>

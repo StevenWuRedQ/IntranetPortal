@@ -275,11 +275,17 @@ Public Class AgentOverview
     Sub LoadGridColumn(collectItems As String)
         SetFlieds(collectItems)
 
+        Dim colProp = gridReport.Columns("PropertyAddress")
         gridReport.Columns.Clear()
         For Each item In collectItems.Split(",")
+
             Dim gridCol = New GridViewDataColumn
-            gridCol.FieldName = item
-            gridReport.Columns.Add(gridCol)
+            If item = "PropertyAddress" Then
+                gridReport.Columns.Add(colProp)
+            Else
+                gridCol.FieldName = item
+                gridReport.Columns.Add(gridCol)
+            End If
         Next
     End Sub
 
