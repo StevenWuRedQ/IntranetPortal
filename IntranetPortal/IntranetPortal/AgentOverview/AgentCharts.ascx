@@ -279,6 +279,11 @@
         char_show_status = chart_status_enum.status_system;
         callbackDsClient.PerformCallback(status);
     }
+    /* call like this LoadStatusBarChartByOffice(1 ,'Bronx') */
+    function LoadStatusBarChartByOffice(status ,office)
+    {
+        
+    }
 
     function LoadOfficeBarChart(office) {
         char_show_status = chart_status_enum.status_office;
