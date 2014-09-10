@@ -33,7 +33,7 @@
                                             <Columns>
                                                 <dx:TreeListTextColumn FieldName="Name" ShowInCustomizationForm="True" VisibleIndex="0">
                                                     <PropertiesTextEdit>
-                                                        <ValidationSettings ErrorDisplayMode="None">
+                                                        <ValidationSettings ErrorDisplayMode="ImageWithTooltip">
                                                             <RequiredField IsRequired="True"></RequiredField>
                                                         </ValidationSettings>
                                                     </PropertiesTextEdit>
@@ -49,7 +49,7 @@
                                                     <EditCellTemplate>
                                                         <dx:ASPxTextBox ID="pswtextbox" runat="server" Text='<%#Bind("Password")%>'
                                                             Visible='<%#treeList.IsNewNodeEditing%>' Password="True">
-                                                            <ValidationSettings ErrorDisplayMode="None"></ValidationSettings>
+                                                            <ValidationSettings ErrorDisplayMode="ImageWithTooltip"></ValidationSettings>
                                                             <ClientSideEvents Validation="function(s,e){e.isValid = s.GetText()>5;}" />
                                                         </dx:ASPxTextBox>
                                                         <asp:LinkButton ID="LinkButton1" runat="server" OnClientClick="popup.ShowAtElement(); return false;" Visible='<%#Not treeList.IsNewNodeEditing%>'>Edit password</asp:LinkButton>
@@ -62,7 +62,7 @@
                                                 <dx:TreeListDateTimeColumn FieldName="EmployeeSince" ShowInCustomizationForm="true" VisibleIndex="5"></dx:TreeListDateTimeColumn>
                                                 <dx:TreeListTextColumn FieldName="Email" ShowInCustomizationForm="True" VisibleIndex="6" PropertiesTextEdit-ValidationSettings-RequiredField-IsRequired="true">
                                                     <PropertiesTextEdit>
-                                                        <ValidationSettings ErrorDisplayMode="None">
+                                                        <ValidationSettings ErrorDisplayMode="ImageWithTooltip">
                                                             <RequiredField IsRequired="True"></RequiredField>
                                                         </ValidationSettings>
                                                     </PropertiesTextEdit>
