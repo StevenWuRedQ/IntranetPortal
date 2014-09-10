@@ -1522,3 +1522,11 @@ div.compare_table_row_title {
     height:500px;
     overflow:auto;
 }
+.collapse_btn
+{
+    content:"\f196";
+}
+.collapsed collapse_btn
+{
+    content:"\f196";
+}

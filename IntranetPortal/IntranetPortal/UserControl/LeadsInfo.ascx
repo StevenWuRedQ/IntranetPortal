@@ -258,7 +258,7 @@
                     </dx:PanelContent>
                 </PanelCollection>
             </dx:ASPxPanel>
-            <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter">
+            <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="800px" Width="100%" ClientInstanceName="contentSplitter">
                 <Styles>
                     <Pane Paddings-Padding="0">
                         <Paddings Padding="0px"></Paddings>

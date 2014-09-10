@@ -31,6 +31,42 @@
     <%--<h3>Documents - <%= LeadsName %></h3>--%>
     <asp:DataList runat="server" ID="datalistCategory" RepeatColumns="2" RepeatDirection="Horizontal" Width="100%">
         <ItemTemplate>
+            <%-- <div class="doc_list_section">
+                <div class="panel-group" id="accordion<%# Eval("Key")%>">
+                    <div class="panel panel-default" style="border:0">
+                        <div class="panel-heading" style="background:transparent">
+                            <h4 class="panel-title doc_list_title  color_balck" style="cursor:pointer" data-toggle="collapse" data-parent="#accordion<%# Eval("Key")%>" href="#collapse<%# Eval("Key")%>">
+                                <%# Eval("Key")%>
+                                  &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue collapse_btn"></i>
+                              
+                            </h4>
+                        </div>
+                        <div id="collapse<%# Eval("Key")%>"" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <asp:Repeater runat="server" ID="rptFiles">
+                                    <ItemTemplate>
+
+                                        <div class="clearfix">
+                                            <input type="checkbox" name="vehicle" value="Bike" id="<%# String.Format("doc_list_id_{0}", Eval("FileID"))%>" />
+                                            <label class="doc_list_checks check_margin" for='<%# String.Format("doc_list_id_{0}", Eval("FileID"))%>'>
+                                                <span class="color_balck">
+                                                    <dx:ASPxHyperLink runat="server" NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>' Text='<%# Eval("Name")%>' Target="_blank"></dx:ASPxHyperLink>
+                                                </span>(Financials)
+                                                            <span class="checks_data_text">
+                                                                <dx:ASPxLabel runat="server" Text='<%# String.Format("{0:g}", Eval("CreateDate")) %>'></dx:ASPxLabel>
+                                                            </span>
+
+                                            </label>
+                                        </div>
+
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+           </div>--%>
             <div class="doc_list_section">
                 <div id="default-example" data-collapse="">
                     <h3 class="doc_list_title  color_balck"><%# Eval("Key")%> &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>
@@ -75,7 +111,6 @@
                 </div>
 
             </div>
-
         </ItemTemplate>
     </asp:DataList>
     <dx:ASPxPopupControl ClientInstanceName="aspxPopupDocumentControl" Width="680px" Height="630px"

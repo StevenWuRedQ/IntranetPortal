@@ -170,7 +170,13 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="MgrReport" Text="Agent Report" NavigationUrl="/AgentOverview/AgentOverview.aspx" ShowAmount="false">
+      <PortalNavItem Name="MgrReport" Text="Reports" NavigationUrl="/AgentOverview/AgentOverview.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-group"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      
+      <PortalNavItem Name="ShortSale" Text="Cases" NavigationUrl="/ShortSale/ShortSale.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-group"></i>]]>
         </FontClass>
