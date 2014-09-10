@@ -112,19 +112,27 @@ Public Class LeadsDataManage
 
     Sub ImportLeads(dt As DataTable)
         Using Context As New Entities
-            For Each dr In dt.Rows
+            For Each dr As DataRow In dt.Rows
                 Dim prop As New Agent_Properties
-                prop.BBLE = dr("BBLE")
-                prop.Agent_Name = dr("Agent")
-                prop.Type = dr("Type")
+                If Not IsDBNull(dr("BBLE")) Then
+                    prop.BBLE = dr("BBLE")
 
-                If Not IsDBNull(dr("Schedule")) Then
-                    prop.ScheduleDate = CDate(dr("Schedule"))
+                    If Not IsDBNull(dr("Agent")) Then
+                        prop.Agent_Name = dr("Agent")
+                    End If
+
+                    If Not IsDBNull(dr("Type")) Then
+                        prop.Type = dr("Type")
+                    End If
+
+                    If Not IsDBNull(dr("Schedule")) Then
+                        prop.ScheduleDate = CDate(dr("Schedule"))
+                    End If
+
+                    prop.Active = True
+
+                    Context.Agent_Properties.Add(prop)
                 End If
-
-                prop.Active = True
-
-                Context.Agent_Properties.Add(prop)
             Next
 
             Context.SaveChanges()
