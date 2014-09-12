@@ -24,7 +24,6 @@
                 <span style="font-size: 14px;"><%= LeadsName %></span>
                 <span class="color_blue expand_button" style="padding-right: 25px">Collapse All</span>
                 <span class="color_blue expand_button">Expand All&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-
             </div>
         </div>
     </div>

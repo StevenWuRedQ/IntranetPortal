@@ -3,6 +3,8 @@
 <%@ Register Src="~/UserControl/HomeOwnerInfo.ascx" TagPrefix="uc1" TagName="HomeOwnerInfo" %>
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
 <%@ Register Src="~/UserControl/PropertyInfo.ascx" TagPrefix="uc1" TagName="PropertyInfo" %>
+<%@ Register Src="~/OneDrive/LeadsDocumentOneDrive.ascx" TagPrefix="uc1" TagName="LeadsDocumentOneDrive" %>
+
 
 
 <script type="text/javascript">
@@ -340,7 +342,8 @@
                                             </dx:ASPxCallbackPanel>
                                         </div>
                                         <div class="tab-pane " id="documents">
-                                            <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
+                                            <uc1:DocumentsUI runat="server" ID="DocumentsUI" Visible="false" />
+                                            <uc1:LeadsDocumentOneDrive runat="server" id="LeadsDocumentOneDrive" />
                                         </div>
                                     </div>
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="ASPxPopupMenuPhone"
@@ -623,6 +626,9 @@
                                 </ContentCollection>
                             </dx:SplitterPane>
                         </Panes>
+                    </dx:SplitterPane>
+                    <dx:SplitterPane Name="PreviewPanle" Collapsed="true" ContentUrl="javascript:false">
+                        <Separator Visible="False"></Separator>
                     </dx:SplitterPane>
                 </Panes>
             </dx:ASPxSplitter>

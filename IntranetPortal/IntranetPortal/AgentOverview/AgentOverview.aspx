@@ -794,7 +794,7 @@
         <ClientSideEvents CallbackComplete="getEmplyeeIDComplete" />
     </dx:ASPxCallback>
     <dx:ASPxPopupControl ClientInstanceName="popupControlCompareList" Width="600px" Height="800px" MaxWidth="1000px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
-        HeaderText="Compare" AutoUpdatePosition="true" Modal="true" runat="server" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter">
+        HeaderText="Compare" AutoUpdatePosition="true" Modal="true" runat="server" PopupVerticalAlign="WindowCenter" PopupHorizontalAlign="WindowCenter" AllowDragging="true">
         <HeaderTemplate>
             <div class="clearfix">
                 <div class="pop_up_header_margin">

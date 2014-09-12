@@ -732,6 +732,13 @@
       <DependentUpon>UploadFilePage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="OneDrive\UploadToOneDrive.aspx.designer.vb">
+      <DependentUpon>UploadToOneDrive.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OneDrive\UploadToOneDrive.aspx.vb">
+      <DependentUpon>UploadToOneDrive.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="UserControl\ActivityLogs.ascx.designer.vb">
       <DependentUpon>ActivityLogs.ascx</DependentUpon>
     </Compile>
@@ -786,6 +793,13 @@
     </Compile>
     <Compile Include="UserControl\HomeOwnerInfo.ascx.vb">
       <DependentUpon>HomeOwnerInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OneDrive\LeadsDocumentOneDrive.ascx.designer.vb">
+      <DependentUpon>LeadsDocumentOneDrive.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="OneDrive\LeadsDocumentOneDrive.ascx.vb">
+      <DependentUpon>LeadsDocumentOneDrive.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControl\LeadsInfo.ascx.designer.vb">
@@ -1021,6 +1035,8 @@
     <Content Include="Management\TaskList.aspx" />
     <Content Include="Management\TroubleShooting.aspx" />
     <Content Include="MapTest.aspx" />
+    <Content Include="OneDrive\constants.js" />
+    <Content Include="OneDrive\Callback.html" />
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
     <Content Include="PreviewFile.aspx" />
@@ -1525,6 +1541,7 @@
     <Content Include="SummaryPage.aspx" />
     <Content Include="Test.aspx" />
     <Content Include="UploadFilePage.aspx" />
+    <Content Include="OneDrive\UploadToOneDrive.aspx" />
     <Content Include="UserControl\ActivityLogs.ascx" />
     <Content Include="UserControl\Devexpress\CustomAppointmentForm.ascx" />
     <Content Include="UserControl\Devexpress\CustomVerticalAppointmentTemplate.ascx" />
@@ -1532,6 +1549,7 @@
     <Content Include="UserControl\DocumentsUI.ascx" />
     <Content Include="UserControl\DoorKnockMap.ascx" />
     <Content Include="UserControl\HomeOwnerInfo.ascx" />
+    <Content Include="OneDrive\LeadsDocumentOneDrive.ascx" />
     <Content Include="UserControl\LeadsInfo.ascx" />
     <Content Include="UserControl\LeadsList.ascx" />
     <Content Include="UserControl\LeadsStatisticSummary.ascx" />

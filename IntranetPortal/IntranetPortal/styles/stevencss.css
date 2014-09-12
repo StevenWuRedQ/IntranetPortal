@@ -1046,9 +1046,7 @@ h2 + div,
 
 /* Pre hide sections with JavaScript on
 --- */
-h3 + div {
-    display: none;
-}
+
 
 /* CSS3 Animation example
 --- */

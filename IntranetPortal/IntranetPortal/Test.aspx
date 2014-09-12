@@ -10,14 +10,12 @@
     <title></title>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
     <link href="/css/font-awesome.css" type="text/css" rel="stylesheet" />
-
     <script src="/scripts/jquery.collapse.js"></script>
     <script src="/scripts/jquery.collapse_storage.js"></script>
     <script src="/scripts/jquery.collapse_cookie_storage.js"></script>
     <link rel="stylesheet" href="css/normalize.min.css" />
     <link rel="stylesheet" href="/scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="css/main.css" />
-
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <body>
