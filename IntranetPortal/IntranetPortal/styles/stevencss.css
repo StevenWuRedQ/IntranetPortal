@@ -727,8 +727,12 @@ i.with_circle {
     font-family: 'Source Sans Pro';
 }
 
+.font_14 {
+    font-size: 14px;
+}
+
 .employee_list_item_no_broder {
-    border: 0px;
+    border: 0px !important;
 }
 
 .employee_list_item:hover {
@@ -1485,7 +1489,7 @@ i.log_item_hl_buttons {
     padding: 0px 30px;
     margin-top: 5px;
     white-space: nowrap;
-    cursor:default;
+    cursor: default;
 }
 
 span.with_width {
@@ -1513,18 +1517,130 @@ div.compare_table_row_title {
     color: #3993c1;
     background: #999ca1;
     font-size: 20px;
-    border-color:#d3d5da;
+    border-color: #d3d5da;
 }
-.emplyees_drop
-{
-    height:500px;
-    overflow:auto;
+
+.emplyees_drop {
+    height: 500px;
+    overflow: auto;
 }
+
+.collapse_btn {
+    content: "\f196";
+}
+
+.collapsed collapse_btn {
+    content: "\f196";
+}
+
+/*short sale */
+.short_sale_tab {
+    height: 35px !important;
+    border: 0px !important;
+    border-bottom: #eeeeee solid 5px;
+    width: 16.6%;
+    font-weight: 700;
+    font-size: 16px;
+    color: #2e2f31;
+    white-space: nowrap;
+}
+
+ul.noborder {
+    border: 0px;
+}
+
+a.shot_sale_tab_a {
+    color: #2e2f31;
+    border: 0px !important;
+    border-bottom: #eeeeee solid 5px !important;
+    margin: 0px !important;
+    border-radius: 0 !important;
+}
+
+    a.shot_sale_tab_a:hover {
+        background: white !important;
+        /*color:#2e2f31 !important;*/
+        border-color: #ff400d !important;
+    }
+
+    a.shot_sale_tab_a:active {
+        border-color: #ff400d !important;
+    }
+
+.activie > a.shot_sale_tab_a {
+    border-color: #ff400d !important;
+}
+
+div.short_sale_content {
+    margin: 20px;
+    margin-top: 30px;
+}
+
+/*ss short for short sale*/
+ul.ss_form_box {
+    padding: 0px;
+}
+
+li.ss_form_item {
+    list-style: none;
+    width: 33.33%;
+    float: left;
+}
+
+.ss_form_input_title {
+    font-size: 12px;
+    color: rgb(177, 178, 183);
+    text-transform: uppercase;
+    display: block;
+    margin: 0px;
+    margin-top: 15px;
+}
+
+.ss_form_input {
+    font-size: 18px;
+    color: rgb(46, 47, 49);
+    height: 40px;
+    border: 0px;
+    border-bottom: 1px solid #dde0e7;
+    width: 80%;
+}
+
+    .ss_form_input:focus {
+        border-color: #0e9ee9;
+        outline: none;
+        color: #0e9ee9;
+    }
+
+.ss_form_title {
+    color: rgb(177, 178, 183);
+    text-transform: uppercase;
+    font-weight: 900;
+    margin-bottom: 0px;
+}
+
+.link_pdf {
+    cursor: pointer;
+    color: #0e9ee9;
+}
+
+.input_with_check {
+    margin-top: 10px;
+    width: 49%;
+    font-weight: 400;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.ss_form {
+    margin-top: 30px;
+}
+
 .collapse_btn
 {
-    content:"\f196";
+    margin-left:10px;
+    cursor:pointer;
 }
-.collapsed collapse_btn
+.ss_form_hidden
 {
-    content:"\f196";
+    visibility:hidden;
 }

@@ -335,7 +335,7 @@
                                 <div style="padding: 0px 20px;">
                                     <div style="font-size: 24px;" class="clearfix">
                                         <i class="fa fa-suitcase with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;<span style="color: #234b60; font-size: 30px;">Lead Status</span>
-                                        <i class="fa fa-sort-amount-desc icon_right_s" style="display: none"></i>
+                                        <i class="fa fa-sort-amount-desc icon_right_s" style="display:none"></i>
                                     </div>
                                 </div>
 
@@ -420,9 +420,9 @@
 
                                                                                         <%----end item--%>
                                                                                         <div style="margin-left: 69px; margin-top: 10px;">
-                                                                                            <button class="btn btn-default button_transparent" type="button" id="id_activity_log" onclick="onGetAgentLogButtonClick()">Activity Log</button>
+                                                                                            <button class="btn btn-default button_transparent" type="button" id="id_activity_log" onclick="onGetAgentLogButtonClick()">See my activity</button>
 
-                                                                                            <button class="btn btn-default button_transparent" type="button" onclick="onGetAgentZoningDateClick()" style="margin-left: 20px">Leads's Tax</button>
+                                                                                            <button class="btn btn-default button_transparent" type="button" onclick="onGetAgentZoningDateClick()" style="margin-left: 20px">View my leads</button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </asp:Panel>
@@ -482,6 +482,7 @@
                                                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">Status</a></li>
                                                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">ZipCode</a></li>
                                                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">Zoning</a></li>
+                                                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">Neighborhood</a></li>
 
                                                                             </ul>
                                                                         </div>
@@ -499,13 +500,13 @@
 
                                                                         <div class="dropdown layout_float_right" style="margin-right: 20px;" id="id_change_range_drop_down">
                                                                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="background: transparent">
-                                                                                Change Stat Range <span class="caret"></span>
+                                                                                Select Range <span class="caret"></span>
                                                                             </button>
                                                                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(1)">Log today</a></li>
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(3)">Logs 3 days</a></li>
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(7)">Logs 1 week</a></li>
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(30)">Logs 1 month</a></li>
+                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(1)">Custom today</a></li>
+                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(3)">Custom 3 days</a></li>
+                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(7)">Custom 1 week</a></li>
+                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(30)">Custom 1 month</a></li>
                                                                             </ul>
                                                                         </div>
 

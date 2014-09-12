@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="DocumentsUI.ascx.vb" Inherits="IntranetPortal.DocumentsUI" %>
+
+
 <script type="text/javascript">
     function PreviewDocument(url, type) {
         aspxPopupDocumentControl.ShowAtElementByID("divLeftContent");
@@ -15,6 +17,7 @@
 </script>
 <div style="color: #999ca1;">
     <div style="padding: 35px 20px 35px 20px;" class="border_under_line">
+        
         <div style="width: 100%">
             <div class="font_30">
                 <i class="fa fa-file"></i>&nbsp;

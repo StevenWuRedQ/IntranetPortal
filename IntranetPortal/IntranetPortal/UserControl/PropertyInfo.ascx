@@ -485,7 +485,7 @@
         <div class="clearfix">
             <div class="pop_up_header_margin">
                 <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
-                <span class="pop_up_header_text" id="pop_up_header_text">Acris </span> <span class="pop_up_header_text"><%= LeadsInfoData.PropertyAddress%> </span>
+                <span class="pop_up_header_text" id="pop_up_header_text">Acris</span> <span class="pop_up_header_text"><%= LeadsInfoData.PropertyAddress%> </span>
             </div>
             <div class="pop_up_buttons_div">
                 <i class="fa fa-times icon_btn" onclick="aspxAcrisControl.Hide()"></i>

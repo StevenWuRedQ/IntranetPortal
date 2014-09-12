@@ -128,7 +128,7 @@ Public Class AgentCharts
     End Sub
     Public Function map_x_axis(x_axis As String) As String
         Dim dataBaseCounsMap = New Dictionary(Of String, String)
-        'dataBaseCounsMap.Add("")
+        dataBaseCounsMap.Add("Neighborhood", "NeighName")
 
         Try
             Dim field = dataBaseCounsMap.Item(x_axis)
@@ -185,7 +185,7 @@ Public Class AgentCharts
     Public Function char_change_axis(x_axis As String, empId As String) As String
         Using Context As New Entities
             Dim source = New List(Of Dictionary(Of String, Object))
-
+            Dim Oldx_axis = x_axis
             x_axis = map_x_axis(x_axis)
 
             Dim sqlConnection1 As New SqlConnection(Context.Database.Connection.ConnectionString)
@@ -219,7 +219,7 @@ Public Class AgentCharts
             sqlConnection1.Close()
             'Dim source = (From ld In Context.LeadsInfoes Where ld[x_axis] isnot nothing  group ld by name = ld[x_axis] into count() ).ToList()
             ' Employee.GetInstance(CInt(current_employee)).Name can't get employee instance
-            Dim chart = New With {.Title = String.Format("{0}'s Leads data by {1}", "123", x_axis),
+            Dim chart = New With {.Title = String.Format("{0}'s Leads data by {1}", "123", Oldx_axis),
                                   .DataSource = source}
 
             Dim json As New JavaScriptSerializer
