@@ -45,7 +45,7 @@
                     <i class="fa fa-refresh"></i>
                     <span style="margin-left: 19px;">Jun 9,2014 1:12PM</span>
                 </span>
-                <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
+                <span class="time_buttons" style="margin-right: 30px;font-weight:300;" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
                 <span class="time_buttons">DOB</span>
                 <span class="time_buttons">Acris</span>
                 <span class="time_buttons">Maps</span>
