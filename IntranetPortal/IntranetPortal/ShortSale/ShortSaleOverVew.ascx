@@ -18,15 +18,10 @@
     $(document).ready(function () {
         // Handler for .ready() called.
         init_currency();
+        
+        
     });
-    function selectTab(e)
-    {
-       
-        $(".shot_sale_tab_a").css("border-color", "#eeeeee")
-        //alert("before"+ $(e).css("border-color"));
-        $(e).css("border-color", "#ff400d !important")
-        //alert($(e).css("border-color"));
-    }
+   
 </script>
 
 <div id="property_info" style="padding-top: 5px">
@@ -124,12 +119,13 @@
         <div>
             <!--detial Nav tabs -->
             <ul class="nav nav-tabs noborder" role="tablist">
-                <li class="active short_sale_tab"><a class="shot_sale_tab_a" onclick="selectTab(this)" href="#home" role="tab" data-toggle="tab">Summary</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a " onclick="selectTab(this)" href="#Property" role="tab" data-toggle="tab">Property Info</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a " onclick="selectTab(this)" href="#Mortgages" role="tab" data-toggle="tab">Mortgages</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a " onclick="selectTab(this)" href="#Homewoner" role="tab" data-toggle="tab">Homewoner</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a " onclick="selectTab(this)" href="#Eviction" role="tab" data-toggle="tab">Eviction</a></li>
-                <li class="short_sale_tab"><a class="shot_sale_tab_a " onclick="selectTab(this)" href="#Parties" role="tab" data-toggle="tab">Parties</a></li>
+                <li class="active short_sale_tab">
+                    <a class="shot_sale_tab_a" href="#home" role="tab" data-toggle="tab">Summary</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Property" role="tab" data-toggle="tab">Property Info</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Mortgages" role="tab" data-toggle="tab">Mortgages</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Homewoner" role="tab" data-toggle="tab">Homewoner</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Eviction" role="tab" data-toggle="tab">Eviction</a></li>
+                <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Parties" role="tab" data-toggle="tab">Parties</a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -147,22 +143,22 @@
                 </div>
                 <div class="tab-pane" id="Mortgages">
                     <div class="short_sale_content">
-                        <uc1:ShortSaleMortgageTab runat="server" id="ShortSaleMortgageTab" />
+                        <uc1:ShortSaleMortgageTab runat="server" ID="ShortSaleMortgageTab" />
                     </div>
                 </div>
                 <div class="tab-pane" id="Homewoner">
                     <div class="short_sale_content">
-                        <uc1:ShortSaleHomewonerTab runat="server" id="ShortSaleHomewonerTab" />
+                        <uc1:ShortSaleHomewonerTab runat="server" ID="ShortSaleHomewonerTab" />
                     </div>
                 </div>
                 <div class="tab-pane" id="Eviction">
                     <div class="short_sale_content">
-                        <uc1:ShortSaleEvictionTab runat="server" id="ShortSaleEvictionTab" />
+                        <uc1:ShortSaleEvictionTab runat="server" ID="ShortSaleEvictionTab" />
                     </div>
                 </div>
                 <div class="tab-pane" id="Parties">
                     <div class="short_sale_content">
-                        <uc1:ShortSalePartiesTab runat="server" id="ShortSalePartiesTab" />
+                        <uc1:ShortSalePartiesTab runat="server" ID="ShortSalePartiesTab" />
                     </div>
 
                 </div>

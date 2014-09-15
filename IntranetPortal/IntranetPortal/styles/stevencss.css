@@ -1644,3 +1644,7 @@ li.ss_form_item {
 {
     visibility:hidden;
 }
+.nav-tabs>li.active>a.shot_sale_tab_a
+{
+    border-color:#ff400d !important;
+}
