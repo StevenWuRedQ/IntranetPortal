@@ -35,7 +35,7 @@
             <div class="ss_form">
                 <h4 class="ss_form_title">Property <i class="fa fa-plus-circle  color_blue_edit collapse_btn"></i></h4>
                 <ul class="ss_form_box clearfix">
-                    <li class="ss_form_item" style="width: 117%">
+                    <li class="ss_form_item" style="width: 100%">
                         <label class="ss_form_input_title">Address</label>
                         <input class="ss_form_input" value="151-04 Main St, Flushing, NY 11367">
                     </li>

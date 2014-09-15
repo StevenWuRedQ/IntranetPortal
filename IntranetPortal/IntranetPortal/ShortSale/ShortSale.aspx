@@ -18,7 +18,6 @@
             } else {
                 alert('tooltip function can not found' + $(".tooltip-examples").tooltip);
             }
-
         });
     </script>
     <div style="background: url(/images/MyIdealProptery.png) no-repeat center fixed; background-size: 260px, 280px; background-color: #dddddd; width: 100%; height: 100%;">

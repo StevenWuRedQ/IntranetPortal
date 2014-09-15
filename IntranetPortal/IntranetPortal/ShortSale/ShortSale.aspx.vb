@@ -8,9 +8,5 @@
             leadPanel.Collapsed = False
             LeadsList.BindLeadsList("Cases")
         End If
-
-        
-
     End Sub
-
 End Class
