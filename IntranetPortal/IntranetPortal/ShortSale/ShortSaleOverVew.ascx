@@ -24,14 +24,14 @@
    
 </script>
 
-<div id="property_info" style="padding-top: 5px">
+<div style="padding-top: 5px">
     <div style="height: 850px; overflow: auto;" id="prioity_content">
         <%--refresh label--%>
 
         <dx:ASPxPanel ID="UpatingPanel" runat="server">
             <PanelCollection>
                 <dx:PanelContent runat="server">
-                    <div style="margin: 30px 20px; margin-bottom: 0px; height: 30px; background: #ffefe4; color: #ff400d; border-radius: 15px; font-size: 14px; line-height: 30px;">
+                    <div class="update_panel">
                         <i class="fa fa-spinner fa-spin" style="margin-left: 30px"></i>
                         <span style="padding-left: 22px">Lead is being updated, it will take a few minutes to complete.</span>
                     </div>

@@ -89,50 +89,50 @@
         <li class="ss_form_item">
             <label class="ss_form_input_title">bankruptcy</label>
 
-            <input type="radio" id="check_yes44" name="1" value="YES">
+            <input type="radio"  id="check_yes44" name="44" value="YES">
             <label for="check_yes44" class="input_with_check">Yes</label>
 
-            <input type="radio" id="check_no44" name="1" value="NO">
+            <input type="radio"  id="check_no44" name="44" value="NO">
             <label for="check_no44" class="input_with_check">No</label>
 
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">bank account</label>
 
-            <input type="radio" id="check_yes45" name="1" value="YES">
+            <input type="radio" id="check_yes45"  value="YES">
             <label for="check_yes45" class="input_with_check">Yes</label>
 
-            <input type="radio" id="check_no45" name="1" value="NO">
+            <input type="radio" id="check_no45"  value="NO">
             <label for="check_no45" class="input_with_check">No</label>
 
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">tax returns</label>
              
-            <input type="radio" id="check_yes46" name="1" value="YES">
+            <input type="radio" id="check_yes46"  value="YES">
             <label for="check_yes46" class="input_with_check">Yes</label>
 
-            <input type="radio" id="check_no46" name="1" value="NO">
+            <input type="radio" id="check_no46"  value="NO">
             <label for="check_no46" class="input_with_check">No</label>
 
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">estate documents</label>
 
-            <input type="radio" id="check_yes47" name="1" value="YES">
+            <input type="radio" id="check_yes47"  value="YES">
             <label for="check_yes47" class="input_with_check">Yes</label>
 
-            <input type="radio" id="check_no47" name="1" value="NO">
+            <input type="radio" id="check_no47"  value="NO">
             <label for="check_no47" class="input_with_check">No</label>
 
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">also acting as seller attorney</label>
 
-            <input type="radio" id="check_yes48" name="1" value="YES">
+            <input type="radio" id="check_yes48"  value="YES">
             <label for="check_yes48" class="input_with_check">Yes</label>
 
-            <input type="radio" id="check_no48" name="1" value="NO">
+            <input type="radio" id="check_no48"  value="NO">
             <label for="check_no48" class="input_with_check">No</label>
 
         </li>

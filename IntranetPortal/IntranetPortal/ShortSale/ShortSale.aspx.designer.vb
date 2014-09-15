@@ -95,6 +95,15 @@ Partial Public Class ShortSale
     Protected WithEvents ShortSaleOverVew As Global.IntranetPortal.ShortSaleOverVew
 
     '''<summary>
+    '''Title control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Title As Global.IntranetPortal.Title
+
+    '''<summary>
     '''DocumentsUI control.
     '''</summary>
     '''<remarks>

@@ -1635,16 +1635,38 @@ li.ss_form_item {
     margin-top: 30px;
 }
 
-.collapse_btn
-{
-    margin-left:10px;
-    cursor:pointer;
+.collapse_btn {
+    margin-left: 10px;
+    cursor: pointer;
 }
-.ss_form_hidden
-{
-    visibility:hidden;
+
+.ss_form_hidden {
+    visibility: hidden;
 }
-.nav-tabs>li.active>a.shot_sale_tab_a
+
+.nav-tabs > li.active > a.shot_sale_tab_a {
+    border-color: #ff400d !important;
+}
+
+.update_panel {
+    margin: 30px 20px;
+    margin-bottom: 0px;
+    height: 30px;
+    background: #ffefe4;
+    color: #ff400d;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.judgment_search_td
 {
-    border-color:#ff400d !important;
+    font-weight:900;
+    text-align:right;
+}
+.table_head
+{
+    text-transform:uppercase;
+    color:#b1b2b7;
+    font-weight:400;
 }

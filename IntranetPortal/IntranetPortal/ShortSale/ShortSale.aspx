@@ -4,6 +4,8 @@
 <%@ Register Src="~/UserControl/LeadsList.ascx" TagPrefix="uc1" TagName="LeadsList" %>
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
 <%@ Register Src="~/ShortSale/ShortSaleOverVew.ascx" TagPrefix="uc1" TagName="ShortSaleOverVew" %>
+<%@ Register Src="~/ShortSale/Title.ascx" TagPrefix="uc1" TagName="Title" %>
+
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script>
@@ -100,7 +102,7 @@
                                                            <uc1:ShortSaleOverVew runat="server" id="ShortSaleOverVew" />
                                                         </div>
                                                         <div class="tab-pane" id="home_owner">
-                                                            titile
+                                                            <uc1:Title runat="server" id="Title" />
                                                         </div>
                                                         <div class="tab-pane " id="documents">
                                                             <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
