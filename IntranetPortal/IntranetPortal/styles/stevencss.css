@@ -1670,3 +1670,69 @@ li.ss_form_item {
     color:#b1b2b7;
     font-weight:400;
 }
+
+.clearence_list_item
+{
+    border-bottom:1px solid #dde0e7;
+    width:100%;
+    margin-top: 10px;
+}
+
+.clearence_list_content
+{
+    margin-bottom:20px;
+}
+.clearence_list_index
+{
+    color:#b1b2b7;
+    font-weight:900;
+    font-size:50px;
+    float:left;
+    margin-left:15px;
+    
+}
+
+.clearence_list_title
+{
+    font-size:12px;
+    color:#b1b2b7;
+    text-transform:uppercase;
+}
+.clearence_list_text18
+{
+    font-size:18px;
+    color:#2e2f31;
+}
+.clearence_list_text12
+{
+    font-size:12px;
+    color:#b1b2b7;
+}
+.clearence_list_text14
+{
+    font-size:14px;
+    color:#2e2f31;
+}
+
+.clearence_list_text
+{
+    margin-left:15px;
+    margin-top:13px;
+}
+
+.clearence_list_right
+{
+    padding-left:40px;
+}
+.clearence_table_td
+{
+    width:180px;
+}
+.clearence_caret_right_icon
+{
+    width:20px;
+}
+.color_blue_edit
+{
+    color:#0e9ee9;
+}
