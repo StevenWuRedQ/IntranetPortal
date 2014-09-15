@@ -133,13 +133,13 @@
                     <%Dim index = 0%>
                     <% For Each phone In BestNums%>
                     <% If phone IsNot Nothing Then%>
-                    <%index = index+1 %>
+                    <%index = index + 1%>
                     <div class="color_gray <%= If(index = 1, "filed_margin_top", "")%> clearfix">
                         <div class="color_gray clearfix">
                             <i class="fa fa-phone homeowner_info_icon"></i>
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
-                                    <a href='#' onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>>
+                                    <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>>
                                         <%=FormatPhoneNumber(phone.Phone)%>
                                     </a>
                                 </div>
@@ -148,8 +148,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        
                     </div>
                     <% End If%>
                     <% Next%>
@@ -160,7 +158,7 @@
                         <i class="fa fa-phone homeowner_info_icon"></i>
                         <div class="form_div_node homeowner_info_text ">
                             <div>
-                                <a href='#' onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
+                                <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
                                     <%= FormatPhoneNumber(phone.phoneField)%>
                                 </a>
                             </div>
@@ -197,7 +195,7 @@
                         <i class="fa fa-map-marker homeowner_info_icon"></i>
                         <div class="form_div_node homeowner_info_text">
                             <div class="color_blue">
-                                <a href="#" onclick="OnAddressLinkClick(this, '<%= FormatAddress(add.addressField)%>')" <%= CssStyle(FormatAddress(add.addressField))%>><%= FormatAddress(add.addressField)%> </a>
+                                <a href="#" class="AddressLink" onclick="OnAddressLinkClick(this, '<%= FormatAddress(add.addressField)%>')" <%= CssStyle(FormatAddress(add.addressField))%>><%= FormatAddress(add.addressField)%> </a>
                             </div>
                             <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                 <%=BuilderDate(add.dateFirstSeenField) %> to  <%=BuilderDate(add.dateLastSeenField) %>
@@ -253,11 +251,11 @@
                             <div class="form_div_node homeowner_info_text ">
 
                                 <div class="color_blue">
-                                    <a href='#' onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>><%= FormatPhoneNumber(phone.phoneField) %></a>
+                                    <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>><%= FormatPhoneNumber(phone.phoneField) %></a>
 
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                                    (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
+                                    (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>)
                                 </div>
                             </div>
                         </div>
@@ -271,11 +269,10 @@
         </div>
         <% Next%>
         <div>
-            <span class="time_buttons more_buttom"><a href="#" style="color: white" onclick="document.getElementById('<%= divRelatives.ClientID%>').style.display='block';">Load More Info</a>
-            </span>
+            <span class="time_buttons more_buttom"><a href="#" style="color: white" onclick="document.getElementById('<%= divRelatives.ClientID %>').style.display='block';">More Info</a>
+            </span>            
         </div>
     </div>
-
 
     <div id="divRelatives" runat="server" style="display: none;">
         <div>
@@ -308,7 +305,7 @@
                                 <div class="form_div_node homeowner_info_text ">
 
                                     <div class="color_blue">
-                                        <a href='#' onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>><%= FormatPhoneNumber(phone.phoneField) %></a>
+                                        <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>><%= FormatPhoneNumber(phone.phoneField) %></a>
                                     </div>
                                     <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                         (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
@@ -355,7 +352,7 @@
                                 <div class="form_div_node homeowner_info_text ">
 
                                     <div class="color_blue">
-                                        <a href='#' onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>><%= FormatPhoneNumber(phone.phoneField) %></a>
+                                        <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this,"<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>><%= FormatPhoneNumber(phone.phoneField) %></a>
                                     </div>
                                     <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                         (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)

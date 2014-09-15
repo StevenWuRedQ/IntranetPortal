@@ -10,6 +10,7 @@
     Public Property TLOLocateReport As DataAPI.TLOLocateReportOutput
     Public Property BestNums As List(Of HomeOwnerPhone)
 
+
     Private _contacts As List(Of OwnerContact)
     Public ReadOnly Property Contacts As List(Of OwnerContact)
         Get
