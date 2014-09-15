@@ -22,12 +22,15 @@
             document.getElementById("btnConnect").innerHTML = "Connected";
             getFolderList(LeadsFolderId);
         } else {
-            WL.login({ scope: "wl.signin" });
+            WL.login({ scope: "wl.signin" }).then(function (response) {
+                document.getElementById("btnConnect").innerHTML = "Connected";
+                getFolderList(LeadsFolderId);
+            });
         }
     }
 
     function onLogin(session) {
-
+        
         if (!session.error) {
 
             WL.api({
@@ -72,6 +75,7 @@
                     overwrite: "rename"
                 }).then(
                     function (response) {
+                        alert("Upload Finish.");
                         popupCtrUploadFiles.Hide();
                         getFolderList(LeadsFolderId);
                     },
@@ -110,7 +114,7 @@
 
     function LoadResult(result) {
         var files = result.data
-
+        
         var table = document.getElementById("tblResult");
         var category = document.getElementById("fileCategory");
         var rowCount = table.rows.length;
@@ -118,6 +122,9 @@
         for (var x = rowCount - 1; x > 0; x--) {
             table.deleteRow(x);
         }
+
+        var divContent = document.getElementById("divFileContent");
+        divContent.innerHTML = "";
 
         for (var i = 0; i < files.length; i++) {
             var file = files[i];
@@ -187,7 +194,8 @@
         html += "<input type=\"checkbox\" name=\"vehicle\" id=\"doc_list_id_" + file.id + "\" />";
         html += "   <label class=\"doc_list_checks check_margin\" for=\"doc_list_id_" + file.id + "\">";
         html += "       <span class=\"color_balck\">"
-        html += "           <a href='#' onclick=\"PreviewDocument('" + file.link + "')\">" + file.name + "</a>";
+        //html += "           <a href='#' onclick=\"PreviewDocument('" + file.link + "')\">" + file.name + "</a>";
+        html += "           <a href='"+ file.link +"' target=\"_blank\">" + file.name + "</a>";
         html += "       </span>"
         html += "   </label>"
         html += "</div>"
@@ -207,7 +215,7 @@
         var width = logPanel.GetClientWidth();
         var height = logPanel.GetClientHeight();
 
-        var pamas = "Width=" + width + "px,Height=" + height + "px,top=" + position.top + "px,left=" + position.left + "px,menubar=no;titlebar=no,location=no,resizable=no";
+        var pamas = "Width=" + width + "px,Height=" + height + "px,top=" + position.top + "px,left=" + position.left + "px,menubar=no;titlebar=no,location=no";
 
         window.open(link, "Preview", pamas, true);
     }
