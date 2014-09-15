@@ -28,13 +28,16 @@
             if (e.item.index == 1) {
                 //telphoneLine.style.textDecoration = "line-through";
                 //telphoneLine.style.color = "red";
+
                 OnCallPhoneCallback("BadPhone|" + tmpPhoneNo);
+                SetSameStyle("PhoneLink", "color:red;text-decoration:line-through;", tmpPhoneNo);
             }
 
             if (e.item.index == 2) {
                 //telphoneLine.style.color = "green";
-                //telphoneLine.style.textDecoration = "none";
+                //telphoneLine.style.textDecoration = "none";                
                 OnCallPhoneCallback("RightPhone|" + tmpPhoneNo);
+                SetSameStyle("PhoneLink", "color:green;text-decoration:none;", tmpPhoneNo);
             }
 
 
@@ -42,16 +45,28 @@
                 //telphoneLine.style.color = "green";
                 //telphoneLine.style.textDecoration = "none";
                 OnCallPhoneCallback("UndoPhone|" + tmpPhoneNo);
+                SetSameStyle("PhoneLink", "", tmpPhoneNo);
             }
         }
-
         e.item.SetChecked(false);
+    }
+
+    function SetSameStyle(className, style, value) {
+        var list = document.getElementsByClassName(className)
+
+        for (var i = 0; i < list.length; i++) {
+            var item = list[i];
+            if (item.innerText == value) {
+                item.setAttribute("style", style);
+            }
+        }
     }
 
     function OnCallPhoneCallback(e) {
         if (callPhoneCallbackClient.InCallback()) {
             alert("Server is busy! Please wait!")
         } else {
+
             callPhoneCallbackClient.PerformCallback(e);
         }
     }
@@ -64,7 +79,8 @@
             }
         }
         else {
-            ownerInfoCallbackPanel.PerformCallback("");
+            //disable call back, use clint script to format same phone num or address
+            //ownerInfoCallbackPanel.PerformCallback("");
         }
     }
 
@@ -162,14 +178,17 @@
 
             if (e.item.index == 1) {
                 OnCallPhoneCallback("BadAddress|" + tmpAddress);
+                SetSameStyle("AddressLink", "color:red;text-decoration:line-through;", tmpAddress);
             }
 
             if (e.item.index == 2) {
                 OnCallPhoneCallback("RightAddress|" + tmpAddress);
+                SetSameStyle("AddressLink", "color:green;text-decoration:none;", tmpAddress);
             }
 
             if (e.item.index == 3) {
                 OnCallPhoneCallback("UndoAddress|" + tmpAddress);
+                SetSameStyle("AddressLink", "", tmpAddress);
             }
 
             e.item.SetChecked(false);
@@ -416,7 +435,7 @@
                                                     <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus(1)"></i>
                                                     <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
                                                     <i class="fa fa-sign-in  sale_head_button sale_head_button_left tooltip-examples" title="Door Knock" onclick="SetLeadStatus(4)"></i>
-                                                    <i class="fa fa-refresh sale_head_button sale_head_button_left tooltip-examples" title="In Process" onclick="SetLeadStatus(5)"></i>    
+                                                    <i class="fa fa-refresh sale_head_button sale_head_button_left tooltip-examples" title="In Process" onclick="SetLeadStatus(5)"></i>
                                                     <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                                 </li>
                                             </ul>
@@ -611,7 +630,6 @@
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupScheduleClient.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>
-
                                                             </dx:ASPxButton>
                                                                         </td>
                                                                     </tr>
@@ -627,7 +645,7 @@
                             </dx:SplitterPane>
                         </Panes>
                     </dx:SplitterPane>
-                    <dx:SplitterPane Name="PreviewPanle" Collapsed="true" ContentUrl="javascript:false">
+                    <dx:SplitterPane Name="PreviewPanle" Collapsed="true" ContentUrl="javascript:false" Visible="false">
                         <Separator Visible="False"></Separator>
                     </dx:SplitterPane>
                 </Panes>
