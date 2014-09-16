@@ -174,8 +174,7 @@
         <FontClass>
           <![CDATA[<i class="fa fa-group"></i>]]>
         </FontClass>
-      </PortalNavItem>
-      
+      </PortalNavItem>      
       <PortalNavItem Name="ShortSale" Text="Cases" NavigationUrl="/ShortSale/ShortSale.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-folder-open"></i>]]>
@@ -188,7 +187,6 @@
       </PortalNavItem>
     </Items>
   </PortalNavItem>
-
   <PortalNavItem Name="OfficeManagement" Text="Offices" NavigationUrl="#" ShowAmount="false" ItemType="Office">
     <UserRoles>OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen</UserRoles>
     <Items>
