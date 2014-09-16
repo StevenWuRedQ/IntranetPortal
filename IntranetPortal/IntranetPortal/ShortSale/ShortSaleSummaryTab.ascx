@@ -2,7 +2,7 @@
 
 
 <div class="clearfix">
-    <div style="float:right">
+    <div style="float: right">
         <dx:ASPxButton runat="server" Text="Edit" AutoPostBack="false" CssClass="rand-button" HoverStyle-BackColor="#3993c1" BackColor="#99bdcf">
         </dx:ASPxButton>
     </div>
@@ -23,12 +23,13 @@
             <input class="ss_form_input" value="1795548554">
         </li>
         <li class="ss_form_item">
-            <label class="ss_form_input_title">Tax class</label>
-            <input class="ss_form_input" value="1">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title"># of families</label>
-            <input class="ss_form_input" value="Choose number">
+            <label class="ss_form_input_title">Accessibility</label>
+            <select class="ss_form_input">
+                <option value="volvo">Lockbox - LOC</option>
+                <option value="saab">Master Key</option>
+                <option value="mercedes">Homeowner's key</option>
+                
+            </select>
         </li>
         <li class="ss_form_item">
             <span class="ss_form_input_title">c/o(<span class="link_pdf">pdf</span>)</span>
@@ -40,11 +41,17 @@
             <label for="pdf_check_no" class="input_with_check">No</label>
 
         </li>
-
-        <li class="ss_form_item" style="visibility: hidden">
-            <label class="ss_form_input_title">Block</label>
-            <input class="ss_form_input" value="1795548554">
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">Tax class</label>
+            <input class="ss_form_input" value="1">
         </li>
+
+        <li class="ss_form_item">
+            <label class="ss_form_input_title"># of families</label>
+            <input class="ss_form_input" value="Choose number">
+        </li>
+
+
 
     </ul>
 </div>
@@ -102,7 +109,10 @@
             <span class="ss_form_input_title">&nbsp;</span>
 
             <input type="checkbox" id="pdf_check_yes1" name="1" value="YES">
-            <label for="pdf_check_yes1" class="input_with_check">Fannie</label>
+            <label for="pdf_check_yes1" class="input_with_check">
+                <span class="box_text">Fannie</span>
+
+            </label>
 
             <input type="checkbox" id="pdf_check_no2" name="1" value="NO">
             <label for="pdf_check_no2" class="input_with_check">FHA</label>
@@ -159,10 +169,9 @@
         <li class="ss_form_item">
             <label class="ss_form_input_title">Status</label>
             <select class="ss_form_input">
-                <option value="volvo">Conter offer</option>
-                <option value="saab">Conter offer1</option>
-                <option value="mercedes">Conter offer2</option>
-                <option value="audi">Conter offer3</option>
+                <option value="volvo">Counter offer</option>
+                <option value="saab">Approved</option>
+                <option value="mercedes">Negotiator Assigned</option>
             </select>
         </li>
     </ul>
@@ -180,7 +189,7 @@
             <label class="ss_form_input_title">Phone #</label>
             <input class="ss_form_input" value="718-205-0200 Ext. 235">
         </li>
-       
+
 
     </ul>
 </div>
@@ -196,7 +205,7 @@
             <label class="ss_form_input_title">Cell phone #</label>
             <input class="ss_form_input" value="718-600-2961">
         </li>
-         <li class="ss_form_item">
+        <li class="ss_form_item">
             <label class="ss_form_input_title ">&nbsp;</label>
             <input class="ss_form_input ss_form_hidden" value=" ">
         </li>
@@ -204,11 +213,11 @@
             <label class="ss_form_input_title">Manager</label>
             <input class="ss_form_input" value="Some One">
         </li>
-         <li class="ss_form_item">
+        <li class="ss_form_item">
             <label class="ss_form_input_title">Cell phone #</label>
             <input class="ss_form_input" value="718-600-2961">
         </li>
-         <li class="ss_form_item">
+        <li class="ss_form_item">
             <label class="ss_form_input_title">&nbsp;</label>
             <input class="ss_form_input ss_form_hidden" value=" ">
         </li>
@@ -216,11 +225,11 @@
             <label class="ss_form_input_title">Office</label>
             <input class="ss_form_input" value="Office Information">
         </li>
-         <li class="ss_form_item">
+        <li class="ss_form_item">
             <label class="ss_form_input_title">Offie phone #</label>
             <input class="ss_form_input" value="347-123-456">
         </li>
-         
+
     </ul>
 </div>
 
@@ -236,6 +245,6 @@
             <label class="ss_form_input_title">Phone #</label>
             <input class="ss_form_input" value="347-723-4458">
         </li>
-        
+
     </ul>
 </div>

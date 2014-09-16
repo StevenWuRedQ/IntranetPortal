@@ -1747,3 +1747,8 @@ li.ss_form_item {
 {
     background:#3993c1;
 }
+input[type='checkbox'] + label, input[type=radio] + label .box_text
+{
+    font-size:14px !important;
+    margin-top:-5px;
+}

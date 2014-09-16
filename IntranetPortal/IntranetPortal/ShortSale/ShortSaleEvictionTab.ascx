@@ -13,9 +13,10 @@
         <li class="ss_form_item">
             <label class="ss_form_input_title">Occupied by </label>
             <select class="ss_form_input">
+                <option value="volvo">Vacant</option>
                 <option value="volvo">Homeowner</option>
-                <option value="saab">Court</option>
-                <option value="mercedes">3</option>
+                <option value="saab">Tenant (Coop)</option>
+                <option value="mercedes">Tenant (Non Coop)</option>
                 <option value="audi">4</option>
             </select>
         </li>
@@ -29,8 +30,8 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Lock box code</label>
-            <input class="ss_form_input" value="14321"">
+            <input class="ss_form_input" value="14321">
         </li>
-       
+
     </ul>
 </div>
