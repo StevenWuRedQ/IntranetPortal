@@ -168,12 +168,29 @@ Public Class LeadsManagement
             Return
         End If
 
+        Dim imgType = TryCast(gridLeads.FindRowCellTemplateControl(e.VisibleIndex, gridLeads.Columns("Type"), "imgType"), ASPxImage)
+        imgType.ClientSideEvents.Click = String.Format("function(s,e){{tempBBLE={0};leadsTypeMenu.ShowAtElement(s.GetMainElement());}}", e.GetValue("BBLE"))
+
         If e.GetValue("Type") IsNot Nothing Then
             Dim type = CType(e.GetValue("Type"), LeadsInfo.LeadsType)
-            Dim imgType = TryCast(gridLeads.FindRowCellTemplateControl(e.VisibleIndex, gridLeads.Columns("Type"), "imgType"), ASPxImage)
             imgType.ToolTip = type.ToString
             imgType.Visible = True
             imgType.ImageUrl = TypeImages(e.GetValue("Type"))
+        End If
+    End Sub
+
+    Protected Sub updateLeadsType_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        If Not String.IsNullOrEmpty(e.Parameter) Then
+            Dim bble = e.Parameter.Split("|")(0)
+            Dim type = e.Parameter.Split("|")(1)
+
+            Using Context As New Entities
+                Dim ld = Context.LeadsInfoes.Find(bble)
+                If ld IsNot Nothing Then
+                    ld.Type = ld.GetLeadsType(type)
+                    Context.SaveChanges()
+                End If
+            End Using
         End If
     End Sub
 
@@ -191,4 +208,6 @@ Public Class LeadsManagement
             Return _typeImages
         End Get
     End Property
+
+    
 End Class

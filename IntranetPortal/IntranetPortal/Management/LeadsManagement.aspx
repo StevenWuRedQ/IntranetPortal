@@ -6,6 +6,7 @@
     <script type="text/javascript">
         var postponedCallbackRequired = false;
         var leadsInfoBBLE = null;
+        var tempBBLE = null;
 
         //function is called on changing focused row
         function OnGridFocusedRowChanged() {
@@ -36,6 +37,12 @@
             }
         }
 
+        function OnChangeLeadsType(s, e) {
+            if (tempBBLE != null) {
+                updateLeadsType.PerformCallback(tempBBLE + "|" + e.item.name);
+            }
+        }
+
         function OnEndCallback(s, e) {
             $("#prioity_content").mCustomScrollbar(
              {
@@ -54,7 +61,7 @@
                   theme: "minimal-dark"
               }
             );
-            
+
             $('#ctl00_MainContentPH_ASPxSplitter1_listboxEmployee_D').mCustomScrollbar(
               {
                   theme: "minimal-dark"
@@ -73,7 +80,6 @@
         }
         $(document).ready(function () {
             // Handler for .ready() called.
-           
             onInitScorllBar();
         });
     </script>
@@ -116,7 +122,6 @@
                                         </dx:ASPxCheckBox>
                                         <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
                                     </span>
-
                                 </div>
                             </div>
                             <%--<div style="/*background-color: #efefef; border-bottom: 1px solid gray; */ text-align: left;">
@@ -133,6 +138,19 @@
                                 </dx:ASPxCheckBox>
                                 <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
                             </div>--%>
+                            <dx:ASPxPopupMenu ID="ASPxPopupMenu3" runat="server" ClientInstanceName="leadsTypeMenu"
+                                AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                <Items>
+                                    <dx:MenuItem Text="Development" Name="DevelopmentOpportunity" Image-Url="/images/lr_dev_opportunity.png">
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Foreclosure" Name="Foreclosure" Image-Url="/images/lr_forecosure.png">
+                                    </dx:MenuItem>
+                                    <dx:MenuItem Text="Has Equity" Name="HasEquity" Image-Url="/images/lr_has_equity.png"></dx:MenuItem>
+                                    <dx:MenuItem Text="Tax Lien" Name="TaxLien" Image-Url="/images/lr_tax_lien.png">
+                                    </dx:MenuItem>
+                                </Items>
+                                <ClientSideEvents ItemClick="OnChangeLeadsType" />
+                            </dx:ASPxPopupMenu>
                             <div style="overflow: auto; height: 823px;" id="assign_leads_list">
                                 <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsBehavior-AutoExpandAllGroups="True" SettingsPager-Mode="ShowAllRecords" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared">
                                     <Columns>
@@ -142,9 +160,10 @@
                                             <Settings AllowHeaderFilter="False"></Settings>
                                         </dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Neighborhood" Visible="false"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="Type" Width="30px" CellStyle-HorizontalAlign="Center" CellStyle-VerticalAlign="Middle">
+                                        <dx:GridViewDataTextColumn FieldName="Type" Width="40px" CellStyle-HorizontalAlign="Center" CellStyle-VerticalAlign="Middle">
                                             <DataItemTemplate>
-                                                <dx:ASPxImage runat="server" ID="imgType" ImageUrl="~/images/Opportunities-icon.jpg" Width="24" Height="24" Visible="false" CssClass="always_show"></dx:ASPxImage>
+                                                <dx:ASPxImage EmptyImage-Url="~/images/ide.png" EmptyImage-Width="16" EmptyImage-Height="16" runat="server" ID="imgType" Width="24" Height="24" CssClass="always_show">
+                                                </dx:ASPxImage>
                                             </DataItemTemplate>
                                         </dx:GridViewDataTextColumn>
                                     </Columns>
@@ -160,7 +179,6 @@
                                     <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
                                 </dx:ASPxGridView>
                             </div>
-
                         </div>
                     </dx:SplitterContentControl>
                 </ContentCollection>
@@ -170,7 +188,7 @@
                 <ContentCollection>
                     <dx:SplitterContentControl runat="server">
                         <div style="width: 100%; height: 100%; /*border: 1px solid gray; border-bottom: 1px solid gray; */">
-                            <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px;white-space:nowrap" class="clearfix">
+                            <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px; white-space: nowrap" class="clearfix">
                                 <div style="font-size: 24px;" class="clearfix">
                                     <i class="fa fa-group with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
                                     <span style="color: #234b60; font-size: 30px;">
@@ -179,7 +197,7 @@
 
                                 </div>
                             </div>
-                         
+
                             <dx:ASPxListBox runat="server" ID="listboxEmployee" Height="450" TextField="Name" ValueField="EmployeeID"
                                 SelectedIndex="0" Width="100%" Border-BorderStyle="None" Font-Size="14px">
                                 <Border BorderStyle="None"></Border>
@@ -210,7 +228,7 @@
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-            <dx:SplitterPane Name="RightPane" Size="730px" MinSize="700px">                
+            <dx:SplitterPane Name="RightPane" Size="730px" MinSize="700px">
                 <ContentCollection>
                     <dx:SplitterContentControl>
                         <uc1:LeadsInfo runat="server" ID="LeadsInfo" ShowLogPanel="false" />
@@ -221,4 +239,7 @@
             </dx:SplitterPane>
         </Panes>
     </dx:ASPxSplitter>
+    <dx:ASPxCallback runat="server" ID="updateLeadsType" ClientInstanceName="updateLeadsType" OnCallback="updateLeadsType_Callback">
+        <ClientSideEvents EndCallback="function(){gridLeads.Refresh();}" />
+    </dx:ASPxCallback>
 </asp:Content>

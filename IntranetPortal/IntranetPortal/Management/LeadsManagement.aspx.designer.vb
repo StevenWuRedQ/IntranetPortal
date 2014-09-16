@@ -41,6 +41,15 @@ Partial Public Class LeadsManagement
     Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
+    '''ASPxPopupMenu3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupMenu3 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+
+    '''<summary>
     '''gridLeads control.
     '''</summary>
     '''<remarks>
@@ -84,4 +93,13 @@ Partial Public Class LeadsManagement
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LeadsInfo As Global.IntranetPortal.LeadsInfo1
+
+    '''<summary>
+    '''updateLeadsType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents updateLeadsType As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class
