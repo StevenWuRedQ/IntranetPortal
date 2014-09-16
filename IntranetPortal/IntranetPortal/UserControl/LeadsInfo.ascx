@@ -39,8 +39,7 @@
                 OnCallPhoneCallback("RightPhone|" + tmpPhoneNo);
                 SetSameStyle("PhoneLink", "color:green;text-decoration:none;", tmpPhoneNo);
             }
-
-
+            
             if (e.item.index == 3) {
                 //telphoneLine.style.color = "green";
                 //telphoneLine.style.textDecoration = "none";
@@ -323,7 +322,7 @@
                                             </a>
                                         </li>
                                         <li class="short_sale_head_tab">
-                                            <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a">
+                                            <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="ConnectToOneDrive()">
                                                 <i class="fa fa-file head_tab_icon_padding"></i>
                                                 <div class="font_size_bold">Documents</div>
                                             </a>
@@ -360,7 +359,7 @@
                                                 </PanelCollection>
                                             </dx:ASPxCallbackPanel>
                                         </div>
-                                        <div class="tab-pane " id="documents">
+                                        <div class="tab-pane" id="documents">
                                             <uc1:DocumentsUI runat="server" ID="DocumentsUI" Visible="false" />
                                             <uc1:LeadsDocumentOneDrive runat="server" id="LeadsDocumentOneDrive" />
                                         </div>
