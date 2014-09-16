@@ -16,12 +16,12 @@
 </script>
 <div class="clearfix">
     <div style="float: right">
-        <dx:ASPxButton runat="server" Text="Eidt" AutoPostBack="false" CssClass="rand-button" BackColor="#99bdcf">
+        <dx:ASPxButton runat="server" Text="Edit" AutoPostBack="false" CssClass="rand-button short_sale_edit" HoverStyle-BackColor="#3993c1" BackColor="#99bdcf">
         </dx:ASPxButton>
     </div>
 </div>
 <div class="ss_form">
-    <h4 class="ss_form_title">1st Mortgage<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i></h4>
+    <h4 class="ss_form_title">1st Mortgage<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue"></i></h4>
     <ul class="ss_form_box clearfix" id="mortgage1">
 
         <li class="ss_form_item">
@@ -163,7 +163,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input ss_form_hidden" value="">
+            <input class="ss_form_input" value="">
         </li>
     </ul>
 

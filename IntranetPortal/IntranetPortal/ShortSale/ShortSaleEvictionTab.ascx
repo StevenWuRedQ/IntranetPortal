@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleEvictionTab.ascx.vb" Inherits="IntranetPortal.ShortSaleEvictionTab" %>
 <div class="clearfix">
     <div style="float: right">
-        <dx:ASPxButton runat="server" Text="Eidt" AutoPostBack="false" CssClass="rand-button" BackColor="#99bdcf">
+        <dx:ASPxButton runat="server" Text="Edit" AutoPostBack="false" CssClass="rand-button" HoverStyle-BackColor="#3993c1" BackColor="#99bdcf">
         </dx:ASPxButton>
     </div>
 </div>

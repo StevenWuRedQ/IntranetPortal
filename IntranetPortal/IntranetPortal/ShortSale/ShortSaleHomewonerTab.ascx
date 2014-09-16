@@ -1,12 +1,12 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleHomewonerTab.ascx.vb" Inherits="IntranetPortal.ShortSaleHomewonerTab" %>
 <div class="clearfix">
     <div style="float: right">
-        <dx:ASPxButton runat="server" Text="Eidt" AutoPostBack="false" CssClass="rand-button" BackColor="#99bdcf">
+        <dx:ASPxButton runat="server" Text="Edit" AutoPostBack="false" CssClass="rand-button" HoverStyle-BackColor="#3993c1" BackColor="#99bdcf">
         </dx:ASPxButton>
     </div>
 </div>
 <div class="ss_form">
-    <h4 class="ss_form_title">Seller</h4>
+    <h4 class="ss_form_title">Seller &nbsp;<i class="fa fa-plus-circle icon_btn color_blue"></i></h4>
     <ul class="ss_form_box clearfix">
 
         <li class="ss_form_item">

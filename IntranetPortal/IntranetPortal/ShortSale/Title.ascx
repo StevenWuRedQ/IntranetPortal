@@ -33,7 +33,7 @@
         </div>
         <div class="short_sale_content">
             <div class="ss_form">
-                <h4 class="ss_form_title">Property <i class="fa fa-plus-circle  color_blue_edit collapse_btn"></i></h4>
+                <h4 class="ss_form_title">Property</h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item" style="width: 100%">
                         <label class="ss_form_input_title">Address</label>
@@ -88,7 +88,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">&nbsp;</label>
-                        <input class="ss_form_input" value=" ">
+                        <input class="ss_form_input ss_form_hidden" value=" ">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Ordered</label>
@@ -118,7 +118,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">&nbsp;</label>
-                        <input class="ss_form_input" value=" ">
+                        <input class="ss_form_input ss_form_hidden" value=" ">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Ordered</label>
@@ -362,7 +362,7 @@
                     <div class="clearence_list_item">
                         <div class="clearence_list_content clearfix">
                             <div class="clearence_list_index">
-                                4
+                                3
                             </div>
 
                             <div class="clearence_list_right">
@@ -458,7 +458,7 @@
                     <div class="clearence_list_item">
                         <div class="clearence_list_content clearfix">
                             <div class="clearence_list_index  color_blue_edit">
-                                3
+                                4
                             </div>
 
                             <div class="clearence_list_right">
@@ -504,7 +504,7 @@
 
                                 <div class="clearence_list_text">
                                     <div class="clearence_list_title">
-                                        notes
+                                        notes &nbsp;<i class="fa fa-plus-circle color_blue_edit icon_btn"></i>
                                     </div>
                                     <div class="clearence_list_text14">
                                         <i class="fa fa-caret-right clearence_caret_right_icon"></i>

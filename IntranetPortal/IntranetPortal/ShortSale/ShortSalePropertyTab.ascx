@@ -1,13 +1,13 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSalePropertyTab.ascx.vb" Inherits="IntranetPortal.ShortSalePropertyTab" %>
 <div class="clearfix">
     <div style="float: right">
-        <dx:ASPxButton runat="server" Text="Eidt" AutoPostBack="false" CssClass="rand-button" BackColor="#99bdcf">
+        <dx:ASPxButton runat="server" Text="Edit" AutoPostBack="false" CssClass="rand-button" HoverStyle-BackColor="#3993c1" BackColor="#99bdcf">
         </dx:ASPxButton>
     </div>
 </div>
 
 <div>
-    <h4 class="ss_form_title">Propety</h4>
+    <h4 class="ss_form_title">Property</h4>
     <ul class="ss_form_box clearfix">
 
         <li class="ss_form_item">

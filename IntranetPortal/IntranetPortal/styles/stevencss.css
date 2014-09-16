@@ -1556,7 +1556,10 @@ a.shot_sale_tab_a {
     margin: 0px !important;
     border-radius: 0 !important;
 }
-
+a.shot_sale_tab_a:focus
+{
+    outline:none;
+}
     a.shot_sale_tab_a:hover {
         background: white !important;
         /*color:#2e2f31 !important;*/
@@ -1735,4 +1738,12 @@ li.ss_form_item {
 .color_blue_edit
 {
     color:#0e9ee9;
+}
+.short_sale_edit
+{
+    background:#99bdcf;
+}
+.short_sale_edit:hover
+{
+    background:#3993c1;
 }
