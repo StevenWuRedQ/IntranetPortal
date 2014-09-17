@@ -222,13 +222,15 @@ function OnGetAddressCallbackError(s, e) {
 
 var tempAddress = null;
 function OnGetAddressCallbackComplete(s, e) {
-
+    
     if (e.result == null) {
         alert("Property Address is empty!");
         return;
     }
-    tempAddress = e.result;
-    $('#leads_address_popup').html(tempAddress);
+   
+    tempAddress = e.result.split("|")[0];
+
+    $('#leads_address_popup').html(tempAddress + "(" + e.result.split("|")[1]+")");
     //var streetViewFrm = "streetViewFrm";
     var streenViewWinFrm = ASPxPopupMapControl.GetContentIFrame(); //document.getElementById(streetViewFrm);
 

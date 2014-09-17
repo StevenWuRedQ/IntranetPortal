@@ -2,6 +2,7 @@
 <div class="clearfix">
     <div style="float: right">
         <dx:ASPxButton runat="server" Text="Edit" AutoPostBack="false" CssClass="rand-button" HoverStyle-BackColor="#3993c1" BackColor="#99bdcf">
+            <ClientSideEvents Click="swich_edit_model" />
         </dx:ASPxButton>
     </div>
 </div>
@@ -69,8 +70,67 @@
     <ul class="ss_form_box clearfix">
 
         <li class="ss_form_item">
+            <label class="ss_form_input_title">bankruptcy</label>
+
+            <input type="radio"  id="check_yes44" name="44" value="YES">
+            <label for="check_yes44" class="input_with_check"> <span class="box_text">Yes</span></label>
+
+            <input type="radio"  id="check_no44" name="44" value="NO">
+            <label for="check_no44" class="input_with_check"><span class="box_text">No</span></label>
+
+        </li>
+
+        <li class="ss_form_item">
             <label class="ss_form_input_title">employed</label>
             <input class="ss_form_input" value="Self Employeed">
+        </li>
+         <li class="ss_form_item">
+            <label class="ss_form_input_title">bank account</label>
+
+            <input type="radio" id="check_yes451" name="45"  value="YES">
+            <label for="check_yes451" class="input_with_check"> <span class="box_text">Yes</span></label>
+
+            <input type="radio" id="check_no452" name="45" value="NO">
+            <label for="check_no452" class="input_with_check"><span class="box_text">No</span></label>
+
+        </li>
+        
+         <li class="ss_form_item">
+            <label class="ss_form_input_title">Tax Returns</label>
+
+            <input type="radio" id="check_yes471" name="47"  value="YES">
+            <label for="check_yes471" class="input_with_check"> <span class="box_text">Yes</span></label>
+
+            <input type="radio" id="check_no472"  name="47" value="NO">
+            <label for="check_no472" class="input_with_check"><span class="box_text">No</span></label>
+
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">&nbsp;</label>
+            <input class="ss_form_input ss_form_hidden" value=" ">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">&nbsp;</label>
+            <input class="ss_form_input ss_form_hidden" value=" ">
+        </li>
+         <li class="ss_form_item">
+            <label class="ss_form_input_title">estate documents</label>
+
+            <input type="radio" id="check_yes47" name="49" value="YES">
+            <label for="check_yes47" class="input_with_check"> <span class="box_text">Yes</span></label>
+
+            <input type="radio" id="check_no47" name="49" value="NO">
+            <label for="check_no47" class="input_with_check"><span class="box_text">No</span></label>
+
+        </li>
+        
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">&nbsp;</label>
+            <input class="ss_form_input ss_form_hidden" value=" ">
+        </li>
+        <li class="ss_form_item">
+            <label class="ss_form_input_title">&nbsp;</label>
+            <input class="ss_form_input ss_form_hidden" value=" ">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">estate attorney</label>
@@ -85,55 +145,15 @@
             <input class="ss_form_input" value="email@examile.com">
         </li>
         
-       
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">bankruptcy</label>
-
-            <input type="radio"  id="check_yes44" name="44" value="YES">
-            <label for="check_yes44" class="input_with_check">Yes</label>
-
-            <input type="radio"  id="check_no44" name="44" value="NO">
-            <label for="check_no44" class="input_with_check">No</label>
-
-        </li>
-         <li class="ss_form_item">
-            <label class="ss_form_input_title">bank account</label>
-
-            <input type="radio" id="check_yes45"  value="YES">
-            <label for="check_yes45" class="input_with_check">Yes</label>
-
-            <input type="radio" id="check_no45"  value="NO">
-            <label for="check_no45" class="input_with_check">No</label>
-
-        </li>
-         <li class="ss_form_item">
-            <label class="ss_form_input_title">tax returns</label>
-             
-            <input type="radio" id="check_yes46"  value="YES">
-            <label for="check_yes46" class="input_with_check">Yes</label>
-
-            <input type="radio" id="check_no46"  value="NO">
-            <label for="check_no46" class="input_with_check">No</label>
-
-        </li>
-         <li class="ss_form_item">
-            <label class="ss_form_input_title">estate documents</label>
-
-            <input type="radio" id="check_yes47"  value="YES">
-            <label for="check_yes47" class="input_with_check">Yes</label>
-
-            <input type="radio" id="check_no47"  value="NO">
-            <label for="check_no47" class="input_with_check">No</label>
-
-        </li>
+     
         <li class="ss_form_item">
             <label class="ss_form_input_title">also acting as seller attorney</label>
 
-            <input type="radio" id="check_yes48"  value="YES">
-            <label for="check_yes48" class="input_with_check">Yes</label>
+            <input type="radio" id="check_yes48" name="48"  value="YES">
+            <label for="check_yes48" class="input_with_check"> <span class="box_text">Yes</span></label>
 
-            <input type="radio" id="check_no48"  value="NO">
-            <label for="check_no48" class="input_with_check">No</label>
+            <input type="radio" id="check_no48" name="48" value="NO">
+            <label for="check_no48" class="input_with_check"><span class="box_text">No</span></label>
 
         </li>
     </ul>

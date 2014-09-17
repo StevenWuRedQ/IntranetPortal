@@ -1,7 +1,11 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSalePropertyTab.ascx.vb" Inherits="IntranetPortal.ShortSalePropertyTab" %>
+<script>
+
+</script>
 <div class="clearfix">
     <div style="float: right">
         <dx:ASPxButton runat="server" Text="Edit" AutoPostBack="false" CssClass="rand-button" HoverStyle-BackColor="#3993c1" BackColor="#99bdcf">
+            <ClientSideEvents Click="swich_edit_model" />
         </dx:ASPxButton>
     </div>
 </div>
@@ -76,6 +80,20 @@
                 <option value="0">Accessibility type 2</option>
             </select>
         </li>
+         <li class="ss_form_item">
+            <span class="ss_form_input_title">c/o(<span class="link_pdf">pdf</span>)</span>
+
+            <input type="radio" id="pdf_check_yes21" name="pdf" value="YES">
+            <label for="pdf_check_yes21" class="input_with_check">
+                 <span class="box_text">Yes</span>
+            </label>
+
+            <input type="radio" id="pdf_check_no21" name="pdf" value="NO">
+            <label for="pdf_check_no21" class="input_with_check">
+                <span class="box_text"> <span class="box_text">No</span></span>
+                </label>
+
+        </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Tax Class</label>
             <input class="ss_form_input" value="1">
@@ -84,44 +102,35 @@
             <label class="ss_form_input_title"># of Families</label>
             <input class="ss_form_input" value="1">
         </li>
-        <li class="ss_form_item">
-            <span class="ss_form_input_title">c/o(<span class="link_pdf">pdf</span>)</span>
-
-            <input type="radio" id="pdf_check_yes21" name="1" value="YES">
-            <label for="pdf_check_yes21" class="input_with_check">Yes</label>
-
-            <input type="radio" id="pdf_check_no21" name="1" value="NO">
-            <label for="pdf_check_no21" class="input_with_check">No</label>
-
-        </li>
+       
         <li class="ss_form_item">
             <span class="ss_form_input_title">FHA</span>
 
-            <input type="radio" id="pdf_check_yes25" name="1" value="YES">
-            <label for="pdf_check_yes25" class="input_with_check">Yes</label>
+            <input type="radio" id="pdf_check_yes25" name="FHA1" value="YES">
+            <label for="pdf_check_yes25" class="input_with_check"> <span class="box_text">Yes</span></label>
 
-            <input type="radio" id="pdf_check_no25" name="1" value="NO">
-            <label for="pdf_check_no25" class="input_with_check">No</label>
+            <input type="radio" id="pdf_check_no25" name="FHA1" value="NO">
+            <label for="pdf_check_no25" class="input_with_check"> <span class="box_text">No</span></label>
 
         </li>
         <li class="ss_form_item">
             <span class="ss_form_input_title">Fannie MAE</span>
 
-            <input type="radio" id="pdf_check_yes22" name="1" value="YES">
-            <label for="pdf_check_yes22" class="input_with_check">Yes</label>
+            <input type="radio" id="pdf_check_yes22" name="Fannie_Mae1" value="YES">
+            <label for="pdf_check_yes22" class="input_with_check"> <span class="box_text">Yes</span></label>
 
-            <input type="radio" id="pdf_check_no23" name="1" value="NO">
-            <label for="pdf_check_no23" class="input_with_check">No</label>
+            <input type="radio" id="pdf_check_no23" name="Fannie_Mae1" value="NO">
+            <label for="pdf_check_no23" class="input_with_check"> <span class="box_text">No</span></label>
 
         </li>
         <li class="ss_form_item">
             <span class="ss_form_input_title">Freddie Mac</span>
 
-            <input type="radio" id="pdf_check_yes24" name="1" value="YES">
-            <label for="pdf_check_yes24" class="input_with_check">Yes</label>
+            <input type="radio" id="pdf_check_yes24" name="Freddie_Mac1" value="YES">
+            <label for="pdf_check_yes24" class="input_with_check"> <span class="box_text">Yes</span></label>
 
-            <input type="radio" id="pdf_check_no24" name="1" value="NO">
-            <label for="pdf_check_no24" class="input_with_check">No</label>
+            <input type="radio" id="pdf_check_no24" name="Freddie_Mac1" value="NO">
+            <label for="pdf_check_no24" class="input_with_check"> <span class="box_text">No</span></label>
 
         </li>
 

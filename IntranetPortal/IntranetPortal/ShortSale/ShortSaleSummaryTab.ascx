@@ -1,9 +1,12 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleSummaryTab.ascx.vb" Inherits="IntranetPortal.ShortSaleSummaryTab" %>
-
+<script>
+   
+</script>
 
 <div class="clearfix">
     <div style="float: right">
         <dx:ASPxButton runat="server" Text="Edit" AutoPostBack="false" CssClass="rand-button" HoverStyle-BackColor="#3993c1" BackColor="#99bdcf">
+            <ClientSideEvents Click="swich_edit_model" />
         </dx:ASPxButton>
     </div>
 </div>
@@ -28,17 +31,22 @@
                 <option value="volvo">Lockbox - LOC</option>
                 <option value="saab">Master Key</option>
                 <option value="mercedes">Homeowner's key</option>
-                
+
             </select>
         </li>
         <li class="ss_form_item">
             <span class="ss_form_input_title">c/o(<span class="link_pdf">pdf</span>)</span>
 
             <input type="radio" id="pdf_check_yes" name="1" value="YES">
-            <label for="pdf_check_yes" class="input_with_check">Yes</label>
+            <label for="pdf_check_yes" class="input_with_check">
+                <span class="box_text">Yes </span>
+
+            </label>
 
             <input type="radio" id="pdf_check_no" name="1" value="NO">
-            <label for="pdf_check_no" class="input_with_check">No</label>
+            <label for="pdf_check_no" class="input_with_check">
+                <span class="box_text">No </span>
+            </label>
 
         </li>
         <li class="ss_form_item">
@@ -111,18 +119,21 @@
             <input type="checkbox" id="pdf_check_yes1" name="1" value="YES">
             <label for="pdf_check_yes1" class="input_with_check">
                 <span class="box_text">Fannie</span>
-
             </label>
 
             <input type="checkbox" id="pdf_check_no2" name="1" value="NO">
-            <label for="pdf_check_no2" class="input_with_check">FHA</label>
+            <label for="pdf_check_no2" class="input_with_check">
+                <span class="box_text">FHA</span>
+                </label>
 
         </li>
         <li class="ss_form_item">
             <span class="ss_form_input_title">&nbsp;</span>
 
             <input type="checkbox" id="pdf_check_yes2" name="1" value="YES">
-            <label for="pdf_check_yes2" class="input_with_check">Freddie Mac</label>
+            <label for="pdf_check_yes2" class="input_with_check">
+                <span class="box_text">Freddie Mac </span>
+                </label>
 
         </li>
     </ul>
@@ -153,17 +164,23 @@
             <span class="ss_form_input_title">&nbsp;</span>
 
             <input type="checkbox" id="pdf_check_yes3" name="1" value="YES">
-            <label for="pdf_check_yes3" class="input_with_check">Fannie</label>
+            <label for="pdf_check_yes3" class="input_with_check">
+                <span class="box_text">Fannie</span>
+            </label>
 
             <input type="checkbox" id="pdf_check_no3" name="1" value="NO">
-            <label for="pdf_check_no3" class="input_with_check">FHA</label>
+            <label for="pdf_check_no3" class="input_with_check">
+                <span class="box_text">FHA </span>
+            </label>
 
         </li>
         <li class="ss_form_item">
             <span class="ss_form_input_title">&nbsp;</span>
 
             <input type="checkbox" id="pdf_check_yes4" name="1" value="YES">
-            <label for="pdf_check_yes4" class="input_with_check">Freddie Mac</label>
+            <label for="pdf_check_yes4" class="input_with_check">
+                <span class="box_text">Freddie Mac </span>
+            </label>
 
         </li>
         <li class="ss_form_item">

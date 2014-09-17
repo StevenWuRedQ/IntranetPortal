@@ -118,7 +118,7 @@
         <%--detial tabs--%>
         <div>
             <!--detial Nav tabs -->
-            <ul class="nav nav-tabs noborder" role="tablist">
+            <ul class="nav nav-tabs overview_tabs" role="tablist">
                 <li class="active short_sale_tab">
                     <a class="shot_sale_tab_a" href="#home" role="tab" data-toggle="tab">Summary</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Property" role="tab" data-toggle="tab">Property Info</a></li>

@@ -247,8 +247,11 @@
             </div>
             <div style="padding-left: 39px;" class="clearfix">
                 <span style="font-size: 14px;"><%= LeadsName %></span>
-                <button onclick="ConnectToOneDrive()" id="btnConnect" type="button">Not Connected</button>
-                <button onclick="ShowUploadControl()" type="button">Upload</button>
+
+                <span class="time_buttons" style="float:none" onclick="ConnectToOneDrive()" id="btnConnect">Not Connected</span>
+                <span class="time_buttons" style="float:none" onclick="ShowUploadControl()">Upload </span>
+               <%-- <button onclick="ConnectToOneDrive()" id="btnConnect" type="button">Not Connected</button>
+                <button onclick="ShowUploadControl()" type="button">Upload</button>--%>
                 <span class="color_blue expand_button" style="padding-right: 25px">Collapse All</span>
                 <span class="color_blue expand_button">Expand All&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             </div>

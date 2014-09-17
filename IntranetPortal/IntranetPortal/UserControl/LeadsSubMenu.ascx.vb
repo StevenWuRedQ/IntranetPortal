@@ -63,7 +63,7 @@ Public Class LeadsSubMenu
     Protected Sub getAddressCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         Using Context As New Entities
             Dim lead = Context.LeadsInfoes.Where(Function(ld) ld.BBLE = e.Parameter).SingleOrDefault
-            e.Result = lead.PropertyAddress
+            e.Result = lead.PropertyAddress + "|Block:" + lead.Block + " Lot:" + lead.Lot
         End Using
     End Sub
 

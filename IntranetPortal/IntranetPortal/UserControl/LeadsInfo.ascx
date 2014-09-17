@@ -349,6 +349,9 @@
                                                                     <td style="width: 50%; vertical-align: top">
                                                                         <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo2" />
                                                                     </td>
+                                                                    <td style="border-left:1px solid #b1b2b7;width:8px;">
+                                                                       &nbsp;
+                                                                    </td>
                                                                     <td style="vertical-align: top">
                                                                         <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo3" />
                                                                     </td>

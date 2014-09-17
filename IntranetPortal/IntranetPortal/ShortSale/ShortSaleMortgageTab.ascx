@@ -17,6 +17,7 @@
 <div class="clearfix">
     <div style="float: right">
         <dx:ASPxButton runat="server" Text="Edit" AutoPostBack="false" CssClass="rand-button short_sale_edit" HoverStyle-BackColor="#3993c1" BackColor="#99bdcf">
+            <ClientSideEvents Click="swich_edit_model" />
         </dx:ASPxButton>
     </div>
 </div>
