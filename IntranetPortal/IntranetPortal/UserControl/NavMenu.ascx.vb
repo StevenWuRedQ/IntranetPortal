@@ -11,6 +11,7 @@ Public Class NavMenu
         PortalMenuItems = LoadMenuFromXml(HttpContext.Current)
         'InitialMenu()
         'WriteXML()
+
     End Sub
 
     Public Sub InitialMenu()

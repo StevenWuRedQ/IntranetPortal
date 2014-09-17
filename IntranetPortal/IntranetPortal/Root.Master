@@ -11,24 +11,23 @@
     <title>Agent Portal (beta) - My Ideal Property</title>
 
     <%--add font image by steven--%>
-    <%--<link href="css/bootstrap.min.css"  type="text/css" rel="stylesheet"/>--%>
+    <link href="css/bootstrap.min.css"  type="text/css" rel="stylesheet"/>
     <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
     <%--------end--------%>
     <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />       
     <link rel="stylesheet" href="css/normalize.min.css" />
     <link rel="stylesheet" href="/scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="css/main.css" />
-
-
+    
     <style>
         html, body, #form1 {
             /*margin: 0;
             padding: 0;
             height: 100%;
             width:100%;*/
-             width:100% !important;
+            width: 100% !important;
         }
     </style>
     <%--/*add by steven*/--%>
@@ -68,7 +67,7 @@
     </script>
 </head>
 <body onload="init();" id="testIDbody">
-    <form id="form1"  runat="server">
+    <form id="form1" runat="server">
         <script type="text/javascript">
             function ShowSearchLeadsInfo(bble) {
                 var url = '/ViewLeadsInfo.aspx?id=' + bble;
@@ -98,8 +97,8 @@
                             <ContentCollection>
                                 <dx:SplitterContentControl>
                                     <div id="global-nav-container">
-                                        <nav id="global-nav" class="navbar" role="navigation">
-                                            <div class="navbar-header">
+                                        <nav id="global-nav" class="mip-navbar" role="navigation">
+                                            <div class="mip-navbar-header">
                                                 <a href="/SummaryPage.aspx" class="clearfix" target="contentUrlPane">
                                                     <img id="logo" src="/Images/logo.png" alt="My Ideal Property" class="go-retina" />
                                                     <span>Portal</span>
@@ -109,7 +108,7 @@
                                                 <asp:ContentPlaceHolder ID="NavContentHolder" runat="server"></asp:ContentPlaceHolder>
                                             </div>
                                         </nav>
-                                        <footer id="global-footer">
+                                        <footer id="side-footer">
                                             <p>
                                                 Application Version:
                                                 <dx:ASPxLabel ID="lblVersion" runat="server" ForeColor="#446576" Font-Size="12px"></dx:ASPxLabel>
@@ -183,8 +182,7 @@
                                                                     <a id="registerLink" href="~/Account/Register.aspx" runat="server" visible="false">|Register</a>
                                                                 </AnonymousTemplate>
                                                                 <LoggedInTemplate>
-                                                                   
-                                                                    Good  <%=If(DateTime.now.ToString.IndexOf("AM")>0,"morning","afternoon") %>, <span style="font-weight: 900;text-transform:capitalize">
+                                                                    Good  <%=If(DateTime.now.ToString.IndexOf("AM")>0,"morning","afternoon") %>, <span style="font-weight: 900; text-transform: capitalize">
                                                                         <asp:LoginName ID="HeadLoginName" runat="server" />
                                                                     </span>
                                                                     <%-- <img src="/images/arrow_down.png" />--%>
@@ -416,7 +414,7 @@
             Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
             <HeaderTemplate>
-                             
+
                 <div class="pop_up_header_margin">
                     <i class="fa fa-envelope with_circle pop_up_header_icon"></i>
                     <span class="pop_up_header_text">New Message</span>

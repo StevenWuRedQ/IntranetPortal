@@ -228,8 +228,6 @@ Public Class LeadsList
             End If
         End If
 
-
-
         If CategoryName = "Search" Then
             SearchLeadsList()
             Return
@@ -251,19 +249,20 @@ Public Class LeadsList
             'popupMenuLeads.Items.FindByName("Delete").Visible = True
         End If
 
-        If LeadsListView = ControlView.OfficeView Or Not String.IsNullOrEmpty(hfView.Value) Then
+        If LeadsListView = ControlView.OfficeView Or (Not String.IsNullOrEmpty(hfView.Value) And hfView.Value = "2") Then
             hfView.Value = ControlView.OfficeView
             BindLeadsListByOffice(category)
             Return
         End If
 
-        If LeadsListView = ControlView.ManagerView Then
-            BindLeadsListMgr(category)
+        If LeadsListView = ControlView.TeamView Or (Not String.IsNullOrEmpty(hfView.Value) And hfView.Value = "3") Then
+            hfView.Value = ControlView.TeamView
+            BindLeadsListMgr(category, TeamMgr)
             Return
         End If
 
-        If LeadsListView = ControlView.TeamView Then
-            BindLeadsListMgr(category, TeamMgr)
+        If LeadsListView = ControlView.ManagerView Then
+            BindLeadsListMgr(category)
             Return
         End If
 
@@ -612,6 +611,11 @@ Public Class LeadsList
             If Not String.IsNullOrEmpty(Request.QueryString("o")) Then
                 LeadsListView = ControlView.OfficeView
                 OfficeName = Request.QueryString("o")
+            End If
+
+            If Not String.IsNullOrEmpty(Request.QueryString("mgr")) Then
+                LeadsListView = ControlView.TeamView
+                TeamMgr = Employee.GetInstance(CInt(Request.QueryString("mgr"))).Name
             End If
 
             BindLeadsList(lblLeadCategory.Text)

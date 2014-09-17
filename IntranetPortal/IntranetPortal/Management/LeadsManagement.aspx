@@ -183,7 +183,7 @@
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-            <dx:SplitterPane Name="ContentUrlPane" Size="300px" MinSize="300px">
+            <dx:SplitterPane Name="ContentUrlPane" Size="240px" MinSize="240px">
                 <PaneStyle Border-BorderStyle="None"></PaneStyle>
                 <ContentCollection>
                     <dx:SplitterContentControl runat="server">
@@ -192,7 +192,7 @@
                                 <div style="font-size: 24px;" class="clearfix">
                                     <i class="fa fa-group with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
                                     <span style="color: #234b60; font-size: 30px;">
-                                        <dx:ASPxLabel Text="Select Employee" ID="ASPxLabel1" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
+                                        <dx:ASPxLabel Text="Employee" ID="ASPxLabel1" Font-Size="30px" runat="server"></dx:ASPxLabel>
                                     </span>
 
                                 </div>
@@ -228,15 +228,13 @@
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-            <dx:SplitterPane Name="RightPane" Size="730px" MinSize="700px">
+            <dx:SplitterPane Name="RightPane" ScrollBars="Auto">
                 <ContentCollection>
                     <dx:SplitterContentControl>
-                        <uc1:LeadsInfo runat="server" ID="LeadsInfo" ShowLogPanel="false" />
+                        <uc1:LeadsInfo runat="server" ID="LeadsInfo" />
                     </dx:SplitterContentControl>
                 </ContentCollection>
-            </dx:SplitterPane>
-            <dx:SplitterPane Separator-Visible="False">
-            </dx:SplitterPane>
+            </dx:SplitterPane>         
         </Panes>
     </dx:ASPxSplitter>
     <dx:ASPxCallback runat="server" ID="updateLeadsType" ClientInstanceName="updateLeadsType" OnCallback="updateLeadsType_Callback">

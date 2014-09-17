@@ -1,19 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleMortgageTab.ascx.vb" Inherits="IntranetPortal.ShortSaleMortgageTab" %>
-<script>
-    function clickCollapse(e, id) {
-        var buttonClassName = e.className;
-        var openClass = "-minus";
-        var clossClass = "-plus";
-
-        var isOpen = buttonClassName.indexOf(openClass) > 0;
-        var toSwich = !isOpen;
-        var changeToClass = isOpen ? buttonClassName.replace(openClass, clossClass) : buttonClassName.replace(clossClass, openClass);
-        e.className = changeToClass;
-
-        $("#" + id).css("display", toSwich ? "initial" : "none");
-
-    }
-</script>
+<script src="/scripts/stevenjs.js"></script>
 <div class="clearfix">
     <div style="float: right">
         <dx:ASPxButton runat="server" Text="Edit" AutoPostBack="false" CssClass="rand-button short_sale_edit" HoverStyle-BackColor="#3993c1" BackColor="#99bdcf">

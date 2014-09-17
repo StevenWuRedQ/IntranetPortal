@@ -22,7 +22,6 @@
                 </span>
                 <span class="time_buttons" style="margin-right: 30px; font-weight: 300;" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">Mark As Urgent</span>
                 <span class="time_buttons">See Titile Report</span>
-
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
             <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;">Started on June 2,1014</span>
@@ -60,7 +59,6 @@
                         <input type="radio" id="check_no51" name="check51" value="NO">
                         <label for="check_no51" class="input_with_check">No</label>
                     </li>
-
                 </ul>
             </div>
             <div class="ss_form">

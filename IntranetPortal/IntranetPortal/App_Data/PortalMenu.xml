@@ -188,7 +188,7 @@
     </Items>
   </PortalNavItem>
 
-  <PortalNavItem Name="OfficeManagement" Text="Offices" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="false">
+  <PortalNavItem Name="OfficeManagement" Text="Offices" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
     <UserRoles>OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen</UserRoles>
     <Items>
       <PortalNavItem Name="Office-Bronx-Management" Text="Bronx Offices" NavigationUrl="#" ShowAmount="true" ItemType="Office">
