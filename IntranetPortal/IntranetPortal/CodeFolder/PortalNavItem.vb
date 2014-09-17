@@ -7,6 +7,8 @@ Public Class PortalNavItem
     <XmlAttribute()>
     Public Property Text As String
     <XmlAttribute()>
+    Public Property Visible As Boolean = True
+    <XmlAttribute()>
     Public Property NavigationUrl As String
     Public Property FontClass As String
     <XmlAttribute()>
@@ -45,7 +47,7 @@ Public Class PortalNavItem
     End Property
 
     Public Function ToHtml() As String
-        If Visible() Then
+        If IsVisible() Then
             Dim htmlNode = ""
             If level = 1 Then
                 htmlNode = RenderRootNode()
@@ -98,7 +100,11 @@ Public Class PortalNavItem
         End If
     End Function
 
-    Function Visible(Optional userContext As HttpContext = Nothing) As Boolean
+    Function IsVisible(Optional userContext As HttpContext = Nothing) As Boolean
+        If Not Visible Then
+            Return False
+        End If
+
         If userContext Is Nothing AndAlso HttpContext.Current IsNot Nothing Then
             userContext = HttpContext.Current
         Else

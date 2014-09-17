@@ -86,7 +86,7 @@ Public Class RefreshLeadsCountHandler
         End If
 
         For Each item In navMenu
-            If item.Visible(userContext) Then
+            If item.IsVisible(userContext) Then
                 results.Add(item)
 
                 If item.Items IsNot Nothing AndAlso item.Items.Count > 0 Then
@@ -119,6 +119,31 @@ Public Class RefreshLeadsCountHandler
         If name.StartsWith("Office") Then
             Return GetOfficeLeadsCount(name, itemText)
         End If
+
+        If name.StartsWith("Team") Then
+            Return GetTeamLeadsCount(name, itemText)
+        End If
+    End Function
+
+    Function GetTeamLeadsCount(name As String, itemText As String) As Integer
+        'Dim mgrId = CInt(name.Split("-")(1))
+
+        Dim tmpStr = name.Split("-")
+
+        If tmpStr.Length > 2 Then
+            Dim mgrId = CInt(tmpStr(1))
+            Dim type = tmpStr(2)
+            Dim mgrName = Employee.GetInstance(mgrId).Name
+            Select Case type
+                Case "AssignLeads"
+                    Return Utility.GetTeamUnAssignedLeadsCount(mgrName)
+                Case "Management"
+                    Return Utility.GetMgrLeadsCount(LeadStatus.ALL, Employee.GetManagedEmployees(mgrName))
+                Case Else
+                    Return Utility.GetMgrLeadsCount(Utility.GetLeadStatus(itemText), Employee.GetManagedEmployees(mgrName))
+            End Select
+        End If
+
     End Function
 
     Function GetOfficeLeadsCount(name As String, itemText As String) As Integer

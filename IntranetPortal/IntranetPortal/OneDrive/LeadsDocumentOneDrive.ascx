@@ -194,8 +194,8 @@
         html += "<input type=\"checkbox\" name=\"vehicle\" id=\"doc_list_id_" + file.id + "\" />";
         html += "   <label class=\"doc_list_checks check_margin\" for=\"doc_list_id_" + file.id + "\">";
         html += "       <span class=\"color_balck\">"
-        //html += "           <a href='#' onclick=\"PreviewDocument('" + file.link + "')\">" + file.name + "</a>";
-        html += "           <a href='"+ file.link +"' target=\"_blank\">" + file.name + "</a>";
+        html += "           <a href='#' onclick=\"PreviewDocument('" + file.link + "')\">" + file.name + "</a>";
+        //html += "           <a href='"+ file.link +"' target=\"_blank\">" + file.name + "</a>";
         html += "       </span>"
         html += "   </label>"
         html += "</div>"

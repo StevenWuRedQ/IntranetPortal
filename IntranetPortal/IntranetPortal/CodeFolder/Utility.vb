@@ -131,6 +131,12 @@ Public Class Utility
         Return GetMgrLeadsCount(status, emps)
     End Function
 
+    Public Shared Function GetTeamUnAssignedLeadsCount(teamMgr As String) As Integer
+        Using context As New Entities
+            Return context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = teamMgr And li.Lead.Status = LeadStatus.NewLead).Count
+        End Using
+    End Function
+
     Public Shared Function GetUnAssignedLeadsCount(Optional userContext As HttpContext = Nothing) As Integer
         Using context As New Entities
             If userContext Is Nothing AndAlso HttpContext.Current IsNot Nothing Then

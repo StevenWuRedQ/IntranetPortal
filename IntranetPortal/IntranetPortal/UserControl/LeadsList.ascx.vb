@@ -7,18 +7,24 @@ Public Class LeadsList
 
     Public Property LeadsListView As ControlView = ControlView.UserView
     Public Property OfficeName As String
+    Public Property TeamMgr As String
 
     ' Dim CategoryName As String
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
     End Sub
 
-    Sub BindLeadsListMgr(category As LeadStatus)
+    Sub BindLeadsListMgr(category As LeadStatus, mgrName As String)
+
+        If String.IsNullOrEmpty(mgrName) Then
+            Return
+        End If
+
         Using Context As New Entities
-            Dim subOridates = Employee.GetManagedEmployees(Page.User.Identity.Name)
+            Dim subOridates = Employee.GetManagedEmployees(mgrName)
 
             If category = LeadStatus.InProcess Then
-                subOridates = Employee.GetManagedEmployees(Page.User.Identity.Name, False)
+                subOridates = Employee.GetManagedEmployees(mgrName, False)
                 Dim leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
                 gridLeads.DataSource = leads
                 gridLeads.DataBind()
@@ -57,6 +63,54 @@ Public Class LeadsList
             LeadsSubMenu.PopupMenu.Items.FindByName("Reassign").Visible = True
             'BindEmployeeList()
         End If
+    End Sub
+
+    Sub BindLeadsListMgr(category As LeadStatus)
+        BindLeadsListMgr(category, Page.User.Identity.Name)
+
+        'Using Context As New Entities
+        '    Dim subOridates = Employee.GetManagedEmployees(Page.User.Identity.Name)
+
+        '    If category = LeadStatus.InProcess Then
+        '        subOridates = Employee.GetManagedEmployees(Page.User.Identity.Name, False)
+        '        Dim leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
+        '        gridLeads.DataSource = leads
+        '        gridLeads.DataBind()
+
+        '    Else
+        '        Dim leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
+        '        gridLeads.DataSource = leads
+        '        gridLeads.DataBind()
+        '    End If
+        'End Using
+
+        'If Not Page.IsPostBack Then
+        '    If category = LeadStatus.Callback Then
+        '        gridLeads.GroupBy(gridLeads.Columns("CallbackDate"))
+        '        gridLeads.ExpandAll()
+        '    Else
+        '        gridLeads.UnGroup(gridLeads.Columns("CallbackDate"))
+        '    End If
+
+        '    If category = LeadStatus.DoorKnocks Then
+        '        gridLeads.Columns("colSelect").Visible = True
+        '        gridLeads.GroupBy(gridLeads.Columns("Neighborhood"))
+        '        gridLeads.ClientSideEvents.FocusedRowChanged = ""
+        '        gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
+
+        '        'Show View Lead Menu
+        '        LeadsSubMenu.PopupMenu.Items.FindByName("ViewLead").Visible = True
+        '    Else
+        '        gridLeads.Columns("colSelect").Visible = False
+        '    End If
+
+        '    gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
+        '    divExpand.Visible = True
+
+        '    'Show Manager Menu
+        '    LeadsSubMenu.PopupMenu.Items.FindByName("Reassign").Visible = True
+        '    'BindEmployeeList()
+        'End If
     End Sub
 
     Sub BindLeadsListByOffice(category As LeadStatus)
@@ -205,6 +259,11 @@ Public Class LeadsList
 
         If LeadsListView = ControlView.ManagerView Then
             BindLeadsListMgr(category)
+            Return
+        End If
+
+        If LeadsListView = ControlView.TeamView Then
+            BindLeadsListMgr(category, TeamMgr)
             Return
         End If
 
@@ -574,4 +633,5 @@ Public Enum ControlView
     UserView
     ManagerView
     OfficeView
+    TeamView
 End Enum
