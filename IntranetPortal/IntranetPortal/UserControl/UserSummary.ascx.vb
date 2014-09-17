@@ -260,6 +260,11 @@ Public Class UserSummary
 
     Public Function GroupText(groupDateText As String) As String
         Dim today = DateTime.Now.Date
+
+        If String.IsNullOrEmpty(groupDateText) Then
+            Return "Today"
+        End If
+
         Dim groupDate = Date.Parse(groupDateText).Date
         If today >= groupDate Then
             Return "Today"
