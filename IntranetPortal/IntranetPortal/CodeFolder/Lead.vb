@@ -23,7 +23,6 @@
         End Get
     End Property
 
-
     Public Shared Function GetInstance(bble As String) As Lead
         Using context As New Entities
             Return context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault
