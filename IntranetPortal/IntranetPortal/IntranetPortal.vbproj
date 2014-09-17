@@ -1540,6 +1540,7 @@
     <Content Include="less\spinning.less" />
     <Content Include="less\stacked.less" />
     <Content Include="less\variables.less" />
+    <Content Include="scripts\stevenjs.js" />
     <Content Include="scss\font-awesome.scss" />
     <Content Include="scss\_bordered-pulled.scss" />
     <Content Include="scss\_core.scss" />

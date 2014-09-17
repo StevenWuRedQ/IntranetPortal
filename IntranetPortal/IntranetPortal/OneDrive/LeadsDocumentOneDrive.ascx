@@ -2,7 +2,7 @@
 
 <script src="/OneDrive/constants.js"></script>
 <script src="//js.live.net/v5.0/wl.js"></script>
-
+<script src="/scripts/stevenjs.js"></script>
 <label id="info"></label>
 
 <script type="text/javascript">
@@ -61,6 +61,7 @@
     function uploadFile() {
         var category = document.getElementById("fileCategory");
         var folderId = LeadsFolderId;
+        
         if (category.value != null) {
             folderId = category.value;
         }
@@ -164,9 +165,11 @@
     function BuildFolder(foler) {
         WL.api({ path: foler.id + "/files", method: "GET" }).then(
             function (response) {
+                var docId = "divfolder_" + foler.id;
+                docId = docId.replace(/\./g, "_").replace("!", "_");
                 var html = "<div class=\"doc_list_section\"><div id=\"default-example\">";
-                html += "<h3 class=\"doc_list_title  color_balck\">" + foler.name + " &nbsp;&nbsp;<i class=\"fa fa-minus-square-o color_blue\"></i></h3>";
-                html += "<div id=\"divfolder_" + foler.id + "\">"
+                html += "<h3 class=\"doc_list_title  color_balck\">" + foler.name + " &nbsp;&nbsp;<i class=\"fa fa-minus-square-o color_blue\" onclick=\"clickCollapse(this, '"+docId+"')\"></i></h3>";
+                html += "<div id=\""+docId+"\">"
 
                 var files = response.data;
                 for (var i = 0; i < files.length; i++) {

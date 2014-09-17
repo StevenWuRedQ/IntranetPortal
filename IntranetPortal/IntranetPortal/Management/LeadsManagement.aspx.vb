@@ -14,6 +14,13 @@ Public Class LeadsManagement
     End Sub
 
     Sub BindData()
+        If Not String.IsNullOrEmpty(Request.QueryString("mgr")) Then
+            Dim mgrName = Employee.GetInstance(CInt(Request.QueryString("mgr"))).Name
+            BindTeamList(mgrName)
+            BindTeamEmployees(mgrName)
+            Return
+        End If
+
         If Not String.IsNullOrEmpty(Request.QueryString("office")) Then
             Dim office = Request.QueryString("office").ToString
             BindOfficeLeads(office)
@@ -54,6 +61,13 @@ Public Class LeadsManagement
                     gridLeads.DataBind()
                 End If
             End If
+        End Using
+    End Sub
+
+    Sub BindTeamList(mgrName As String)
+        Using Context As New Entities
+            gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = mgrName And li.Lead.Status = LeadStatus.NewLead).ToList
+            gridLeads.DataBind()
         End Using
     End Sub
 
@@ -105,6 +119,15 @@ Public Class LeadsManagement
             listboxEmployee.DataSource = emps
             listboxEmployee.DataBind()
         End Using
+    End Sub
+
+    Sub BindTeamEmployees(teamMgr As String)
+        Dim mgr = Employee.GetInstance(teamMgr)
+        Dim emps = Employee.GetSubOrdinate(mgr.EmployeeID)
+        emps.Add(mgr)
+
+        listboxEmployee.DataSource = emps
+        listboxEmployee.DataBind()
     End Sub
 
     Protected Sub btnAssign_Click(sender As Object, e As EventArgs) Handles btnAssign.Click

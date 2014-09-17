@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="DocumentsUI.ascx.vb" Inherits="IntranetPortal.DocumentsUI" %>
 
-
+<script src="/scripts/stevenjs.js"></script>
 <script type="text/javascript">
     function PreviewDocument(url, type) {
         aspxPopupDocumentControl.ShowAtElementByID("divLeftContent");
@@ -15,6 +15,7 @@
 
     }
 </script>
+
 <div style="color: #999ca1;">
     <div style="padding: 35px 20px 35px 20px;" class="border_under_line">
         
@@ -71,8 +72,8 @@
            </div>--%>
             <div class="doc_list_section">
                 <div id="default-example" data-collapse="">
-                    <h3 class="doc_list_title  color_balck"><%# Eval("Key")%> &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue"></i></h3>
-                    <div>
+                    <h3 class="doc_list_title  color_balck"><%# Eval("Key")%> &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue" onclick="clickCollapse(this, '<%# Eval("Key")%>')"></i> </h3>
+                    <div id="<%# Eval("Key")%>">
 
                         <%--<h4><%# Eval("Key")%></h4>--%>
                         <asp:Repeater runat="server" ID="rptFiles">
