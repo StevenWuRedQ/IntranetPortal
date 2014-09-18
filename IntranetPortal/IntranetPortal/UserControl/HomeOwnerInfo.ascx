@@ -21,24 +21,6 @@
         margin-top: 10px;
     }
 </style>
-<dx:ASPxPopupMenu ID="ASPxPopupMenu11" runat="server" ClientInstanceName="Asp"
-    PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
-    PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
-    ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
-    <ItemStyle Paddings-PaddingLeft="20px" />
-    <Items>
-        <dx:MenuItem Text="Call Phone" Name="Call">
-        </dx:MenuItem>
-        <dx:MenuItem Text="# doesn't work" Name="nonWork">
-        </dx:MenuItem>
-        <dx:MenuItem Text="Working Phone number" Name="Work">
-        </dx:MenuItem>
-        <dx:MenuItem Text="Undo" Name="Undo">
-        </dx:MenuItem>
-    </Items>
-    
-    <ClientSideEvents ItemClick="OnPhoneNumberClick" />
-</dx:ASPxPopupMenu>
 <div style="vertical-align: top; margin: 0; font-size: 18px;">
     <div style="font-size: 30px; color: #2e2f31">
         <i class="fa fa-file">&nbsp;</i>
@@ -288,7 +270,7 @@
         <% Next%>
         <div>
             <span class="time_buttons more_buttom"><a href="#" style="color: white" onclick="document.getElementById('<%= divRelatives.ClientID %>').style.display='block';">More Info</a>
-            </span>
+            </span>            
         </div>
     </div>
 

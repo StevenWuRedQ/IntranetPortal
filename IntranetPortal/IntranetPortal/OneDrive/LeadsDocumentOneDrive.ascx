@@ -192,12 +192,15 @@
     }
 
     function BuildFile(file) {
-
+        /*use JSON.stringify() debug objects*/
+        var dataStr = new Date(file.updated_time).toDateString();
         var html = "<div class=\"clearfix\">"
         html += "<input type=\"checkbox\" name=\"vehicle\" id=\"doc_list_id_" + file.id + "\" />";
         html += "   <label class=\"doc_list_checks check_margin\" for=\"doc_list_id_" + file.id + "\">";
         html += "       <span class=\"color_balck\">"
-        html += "           <a href='#' onclick=\"PreviewDocument('" + file.link + "')\">" + file.name + "</a>";
+        html += "           <a href='#' onclick=\"clickFileLink('" + file.link + "','" + file.source + "',this)\">" + file.name + "</a>";
+        html += "               <span class='checks_data_text'> " + "Date:" + dataStr + "&nbsp;" + "Size:" + file.size / 1000 + "Mb </span>"
+
         //html += "           <a href='"+ file.link +"' target=\"_blank\">" + file.name + "</a>";
         html += "       </span>"
         html += "   </label>"
@@ -205,11 +208,39 @@
 
         return html;
     }
-
+    var currentFile = null;
+    var currentSource = null;
     function ShowInfo(msg) {
         document.getElementById("info").innerText = msg;
     }
-
+    function clickFileLink(file,source,e) {
+        currentFile = file;
+        currentSource = source;
+        AspFilePopupMenu.ShowAtElement(e);
+    }
+    function OnFilePopUpClick(s,e)
+    {
+       
+        
+        if (e.item.index == 0)
+        {
+            if(currentFile!=null)
+            {
+                PreviewDocument(currentFile)
+            }
+        } else if (e.item.index == 1)
+        {
+            /*download*/
+            if(currentSource!=null)
+            {
+                //$('a').preventDefault();
+                window.location.href = currentSource;
+            }
+        }
+        else {
+            alert("no view history function yet!");
+        }
+    }
     function PreviewDocument(link) {
         var logPanel = contentSplitter.GetPaneByName("LogPanel");
         var panel = logPanel.GetElement();
@@ -233,9 +264,25 @@
         }
         return { top: _y, left: _x };
     }
-
+   
 
 </script>
+<dx:ASPxPopupMenu ID="ASPxPopupMenu11" runat="server" ClientInstanceName="AspFilePopupMenu"
+    PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
+    PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+    ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+    <ItemStyle Paddings-PaddingLeft="20px" />
+    <Items>
+        <dx:MenuItem Text="Preview" Name="Preview">
+        </dx:MenuItem>
+        <dx:MenuItem Text="Download" Name="Download">
+        </dx:MenuItem>
+        <dx:MenuItem Text="Preview History" Name="History">
+        </dx:MenuItem>
+    </Items>
+
+    <ClientSideEvents ItemClick="OnFilePopUpClick" />
+</dx:ASPxPopupMenu>
 
 <div style="color: #999ca1;">
     <div style="padding: 35px 20px 35px 20px;" class="border_under_line">
