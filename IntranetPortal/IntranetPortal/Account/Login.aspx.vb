@@ -43,9 +43,9 @@ Public Class Login
         Dim rememberMe = e.Parameter.Split("|")(2)
         If Membership.ValidateUser(name, password) Then
             Dim names = StrConv(name, VbStrConv.ProperCase)
-            OnlineUser.Refresh(HttpContext.Current)
-            FormsAuthentication.SetAuthCookie(name, CBool(rememberMe))
+            FormsAuthentication.SetAuthCookie(names, CBool(rememberMe))
 
+            OnlineUser.Refresh(HttpContext.Current)
             If password = System.Configuration.ConfigurationManager.AppSettings("DefaultPassword").ToString Then
                 e.Result = LoginStatus.FIRSTLOGIN
             Else

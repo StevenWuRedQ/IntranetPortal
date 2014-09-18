@@ -188,10 +188,10 @@
     </Items>
   </PortalNavItem>
 
-  <PortalNavItem Name="OfficeManagement" Text="Offices" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
+  <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
     <UserRoles>OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen</UserRoles>
     <Items>
-      <PortalNavItem Name="Office-Bronx-Management" Text="Bronx Offices" NavigationUrl="#" ShowAmount="true" ItemType="Office">
+      <PortalNavItem Name="Office-Bronx-Management" Text="Bronx Team" NavigationUrl="#" ShowAmount="true" ItemType="Office">
         <UserRoles>OfficeManager-Bronx</UserRoles>
         <Items>
           <PortalNavItem Name="Office-Bronx-AssignLeads" Text="Assign Leads" NavigationUrl="/Management/LeadsManagement.aspx?office=Bronx" ShowAmount="true">
@@ -237,7 +237,7 @@
         </Items>
       </PortalNavItem>
 
-      <PortalNavItem Name="Office-Queens-Management" Text="Queens Offices" NavigationUrl="#" ShowAmount="true" ItemType="Office">
+      <PortalNavItem Name="Office-Queens-Management" Text="Queens Team" NavigationUrl="#" ShowAmount="true" ItemType="Office">
         <UserRoles>OfficeManager-Queens</UserRoles>
         <Items>
           <PortalNavItem Name="Office-Queens-AssignLeads" Text="Assign Leads" NavigationUrl="/Management/LeadsManagement.aspx?office=Queens" ShowAmount="true">
@@ -281,56 +281,9 @@
             </FontClass>
           </PortalNavItem>
         </Items>
-      </PortalNavItem>
+      </PortalNavItem>    
 
-      <PortalNavItem Name="Office-Patchen-Management" Text="Patchen Offices" NavigationUrl="#" ShowAmount="true" ItemType="Office">
-        <UserRoles>OfficeManager-Patchen</UserRoles>
-        <Items>
-          <PortalNavItem Name="Office-Patchen-AssignLeads" Text="Assign Leads" NavigationUrl="/Management/LeadsManagement.aspx?office=Patchen" ShowAmount="true">
-            <FontClass>
-              <![CDATA[<i class="fa fa-check-square-o"></i>]]>
-            </FontClass>
-          </PortalNavItem>
-          <PortalNavItem Name="Office-Patchen-NewLeads" Text="New Leads" NavigationUrl="/MgrViewLeads.aspx?c=New Leads&amp;o=Patchen" ShowAmount="true">
-            <FontClass>
-              <![CDATA[ <i class="fa fa-star"></i>]]>
-            </FontClass>
-          </PortalNavItem>
-          <PortalNavItem Name="Office-Patchen-HotLeads" Text="Hot Leads" NavigationUrl="/MgrViewLeads.aspx?c=Priority&amp;o=Patchen" ShowAmount="true">
-            <FontClass>
-              <![CDATA[ <i class="fa fa-sun-o"></i>]]>
-            </FontClass>
-          </PortalNavItem>
-          <PortalNavItem Name="Office-Patchen-FollowUp" Text="Follow Up" NavigationUrl="/MgrViewLeads.aspx?c=Call Back&amp;o=Patchen" ShowAmount="true">
-            <FontClass>
-              <![CDATA[ <i class="fa fa-rotate-right"></i>]]>
-            </FontClass>
-          </PortalNavItem>
-          <PortalNavItem Name="Office-Patchen-DoorKnock" Text="Door Knock" NavigationUrl="/MgrViewLeads.aspx?c=Door Knock&amp;o=Patchen" ShowAmount="true">
-            <FontClass>
-              <![CDATA[ <i class="fa fa-sign-in"></i>]]>
-            </FontClass>
-          </PortalNavItem>
-          <PortalNavItem Name="Office-Patchen-InProcess" Text="In Process" NavigationUrl="/MgrViewLeads.aspx?c=In Process&amp;o=Patchen" ShowAmount="true">
-            <FontClass>
-              <![CDATA[ <i class="fa fa-refresh"></i>]]>
-            </FontClass>
-          </PortalNavItem>
-          <PortalNavItem Name="Office-Patchen-DeadLead" Text="Dead Lead" NavigationUrl="/MgrViewLeads.aspx?c=Dead Lead&amp;o=Patchen" ShowAmount="true">
-            <FontClass>
-              <![CDATA[ <i class="fa fa-times-circle"></i>]]>
-            </FontClass>
-          </PortalNavItem>
-          <PortalNavItem Name="Office-Patchen-Closed" Text="Closed" NavigationUrl="/MgrViewLeads.aspx?c=Closed&amp;o=Patchen" ShowAmount="true">
-            <FontClass>
-              <![CDATA[<i class="fa fa-check-circle"></i>]]>
-            </FontClass>
-          </PortalNavItem>
-
-        </Items>
-      </PortalNavItem>
-
-      <PortalNavItem Name="Office-Rockaway-Management" Text="Rockaway Offices" NavigationUrl="#" ShowAmount="true" ItemType="Office">
+      <PortalNavItem Name="Office-Rockaway-Management" Text="Rockaway Team" NavigationUrl="#" ShowAmount="true" ItemType="Office">
         <UserRoles>OfficeManager-Rockaway</UserRoles>
         <Items>
           <PortalNavItem Name="Office-Rockaway-AssignLeads" Text="Assign Leads" NavigationUrl="/Management/LeadsManagement.aspx?office=Rockaway" ShowAmount="true">
@@ -376,15 +329,9 @@
 
         </Items>
       </PortalNavItem>
-    </Items>
-  </PortalNavItem>
 
-  <PortalNavItem Name="TeamManagement" Text="Teams" NavigationUrl="#" ShowAmount="false">
-    <UserRoles>Admin</UserRoles>
-    <Items>
-      
-      <PortalNavItem Name="Team-31-Management" Text="Team Gendin" NavigationUrl="#" ShowAmount="true" ItemType="Manager">
-        <UserRoles>OfficeManager-Bronx</UserRoles>
+      <PortalNavItem Name="Team-31-Management" Text="Gendin Team" NavigationUrl="#" ShowAmount="true" ItemType="Manager">
+        <UserRoles>OfficeManager-Patchen</UserRoles>
         <Items>
           <PortalNavItem Name="Team-31-AssignLeads" Text="Assign Leads" NavigationUrl="/Management/LeadsManagement.aspx?mgr=31" ShowAmount="true">
             <FontClass>
@@ -429,8 +376,8 @@
         </Items>
       </PortalNavItem>
 
-      <PortalNavItem Name="Team-41-Management" Text="Team Ron" NavigationUrl="#" ShowAmount="true" ItemType="Manager">
-        <UserRoles>OfficeManager-Bronx</UserRoles>
+      <PortalNavItem Name="Team-41-Management" Text="Ron Team" NavigationUrl="#" ShowAmount="true" ItemType="Manager">
+        <UserRoles>OfficeManager-Patchen</UserRoles>
         <Items>
           <PortalNavItem Name="Team-41-AssignLeads" Text="Assign Leads" NavigationUrl="/Management/LeadsManagement.aspx?mgr=41" ShowAmount="true">
             <FontClass>
@@ -474,7 +421,13 @@
           </PortalNavItem>
         </Items>
       </PortalNavItem>
+      
+    </Items>
+  </PortalNavItem>
 
+  <PortalNavItem Name="TeamManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" Visible="false">
+    <UserRoles>Admin</UserRoles>
+    <Items>
       <PortalNavItem Name="Team-34-Management" Text="Team Mo" NavigationUrl="#" ShowAmount="true" ItemType="Manager">
         <UserRoles>OfficeManager-Bronx</UserRoles>
         <Items>
@@ -566,7 +519,6 @@
           </PortalNavItem>
         </Items>
       </PortalNavItem>
-
     </Items>
   </PortalNavItem>
 

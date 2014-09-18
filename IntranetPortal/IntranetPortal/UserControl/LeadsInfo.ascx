@@ -252,7 +252,7 @@
                 placement: 'bottom'
             });
         } else {
-            alert('tooltip function can not found' + $(".tooltip-examples").tooltip);
+            //alert('tooltip function can not found' + $(".tooltip-examples").tooltip);
         }
     }
     //initToolTips();

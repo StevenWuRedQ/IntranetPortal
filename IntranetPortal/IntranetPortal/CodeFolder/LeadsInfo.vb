@@ -168,7 +168,7 @@
 
     Public ReadOnly Property IsHighLiens As Boolean
         Get
-            If EstValue.HasValue Then
+            If EstValue.HasValue And EstValue > 0 Then
                 Return TotalDebt > EstValue
             Else
                 Return False
@@ -176,19 +176,19 @@
         End Get
     End Property
 
-    Public ReadOnly Property IndicatorOfLiens As String
-        Get
-            If Me.C1stMotgrAmt.HasValue AndAlso C1stMotgrAmt > 0 Then
-                Return "HasLiens"
-            End If
+    'Public ReadOnly Property IndicatorOfLiens As String
+    '    Get
+    '        If Me.C1stMotgrAmt.HasValue AndAlso C1stMotgrAmt > 0 Then
+    '            Return "HasLiens"
+    '        End If
 
-            Return ""
-        End Get
-    End Property
+    '        Return ""
+    '    End Get
+    'End Property
 
     Public ReadOnly Property IndicatorOfWater As String
         Get
-            If Me.WaterAmt.HasValue AndAlso WaterAmt > 0 Then
+            If Me.WaterAmt.HasValue AndAlso WaterAmt > 1000 Then
                 Return "HasWaterLiens"
             End If
 

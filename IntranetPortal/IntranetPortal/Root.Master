@@ -11,16 +11,16 @@
     <title>Agent Portal (beta) - My Ideal Property</title>
 
     <%--add font image by steven--%>
-    <link href="css/bootstrap.min.css"  type="text/css" rel="stylesheet"/>
+    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
     <%--------end--------%>
     <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />       
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="css/normalize.min.css" />
     <link rel="stylesheet" href="/scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="css/main.css" />
-    
+
     <style>
         html, body, #form1 {
             /*margin: 0;
@@ -56,7 +56,7 @@
        
 
     </script>
-   
+
 </head>
 <body onload="init();" id="testIDbody">
     <form id="form1" runat="server">
@@ -484,8 +484,8 @@
     <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>--%>
     <script src="/Scripts/js/main.js"></script>
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-     <%-- init tooltips --%>
-    <script src="/scripts/stevenjs.js"></script>
-   
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="scripts/stevenjs.js"></script>
+    <%-- init tooltips --%>
 </body>
 </html>

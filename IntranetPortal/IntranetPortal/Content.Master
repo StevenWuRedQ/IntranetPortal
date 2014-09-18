@@ -11,26 +11,19 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />    
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
-   <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
+    <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body style="width:100%">
-    <form id="form1" runat="server">    
-        <asp:ContentPlaceHolder ID="MainContentPH" runat="server">        
-        </asp:ContentPlaceHolder>  
-        <script type="text/javascript">            
-            function AddTooltips()
-            {              
-                if (typeof initToolTips != "undefined")
-                    initToolTips();
-            }
-            
-            AddTooltips();
-        </script>
+<body style="width: 100%">
+    <form id="form1" runat="server">
+        <asp:ContentPlaceHolder ID="MainContentPH" runat="server">
+        </asp:ContentPlaceHolder>
     </form>
+    <script src="scripts/stevenjs.js"></script>
 </body>
 </html>
