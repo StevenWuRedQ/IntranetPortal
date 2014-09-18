@@ -88,11 +88,11 @@ function mip() {
                 $('.landing').show();
                 $('#username').focus();
                 $('.landing-bg').backstretch([
-					  'img/landing_bg/1.jpg'
-					, 'img/landing_bg/2.jpg'
-					, 'img/landing_bg/3.jpg'
-					, 'img/landing_bg/4.jpg'
-					, 'img/landing_bg/5.jpg'
+					  '/images/img/landing_bg/1.jpg'
+					, '/images/img/landing_bg/2.jpg'
+					, '/images/img/landing_bg/3.jpg'
+					, '/images/img/landing_bg/4.jpg'
+					, '/images/img/landing_bg/5.jpg'
                 ], { duration: 2000, fade: 4000 });
             }, 0);
         });
