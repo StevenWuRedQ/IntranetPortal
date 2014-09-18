@@ -53,18 +53,10 @@
             splitterRightDefaultPage.AdjustControl();
             alert('splitterRightDefaultPage resize');
         }
-        //function inittooltips() {
-        //    alert("runed two times ?");
-        //    if ($(".tooltip-examples").tooltip) {
-        //        $(".tooltip-examples").tooltip({
-        //            placement: 'bottom'
-        //        });
-        //    } else {
-        //        alert('tooltip function can not found' + $(".tooltip-examples").tooltip);
-        //    }
-        //}
+       
 
     </script>
+   
 </head>
 <body onload="init();" id="testIDbody">
     <form id="form1" runat="server">
@@ -492,9 +484,8 @@
     <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>--%>
     <script src="/Scripts/js/main.js"></script>
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-
-    <script type="text/javascript">
-        //inittooltips();
-    </script>
+     <%-- init tooltips --%>
+    <script src="/scripts/stevenjs.js"></script>
+   
 </body>
 </html>

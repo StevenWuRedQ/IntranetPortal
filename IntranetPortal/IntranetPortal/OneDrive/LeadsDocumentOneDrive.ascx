@@ -30,7 +30,7 @@
     }
 
     function onLogin(session) {
-        
+
         if (!session.error) {
 
             WL.api({
@@ -61,7 +61,7 @@
     function uploadFile() {
         var category = document.getElementById("fileCategory");
         var folderId = LeadsFolderId;
-        
+
         if (category.value != null) {
             folderId = category.value;
         }
@@ -115,7 +115,7 @@
 
     function LoadResult(result) {
         var files = result.data
-        
+
         var table = document.getElementById("tblResult");
         var category = document.getElementById("fileCategory");
         var rowCount = table.rows.length;
@@ -168,8 +168,8 @@
                 var docId = "divfolder_" + foler.id;
                 docId = docId.replace(/\./g, "_").replace("!", "_");
                 var html = "<div class=\"doc_list_section\"><div id=\"default-example\">";
-                html += "<h3 class=\"doc_list_title  color_balck\">" + foler.name + " &nbsp;&nbsp;<i class=\"fa fa-minus-square-o color_blue\" onclick=\"clickCollapse(this, '"+docId+"')\"></i></h3>";
-                html += "<div id=\""+docId+"\">"
+                html += "<h3 class=\"doc_list_title  color_balck\">" + foler.name + " &nbsp;&nbsp;<i class=\"fa fa-minus-square-o color_blue\" onclick=\"clickCollapse(this, '" + docId + "')\"></i></h3>";
+                html += "<div id=\"" + docId + "\">"
 
                 var files = response.data;
                 for (var i = 0; i < files.length; i++) {
@@ -248,9 +248,9 @@
             <div style="padding-left: 39px;" class="clearfix">
                 <span style="font-size: 14px;"><%= LeadsName %></span>
 
-                <span class="time_buttons" style="float:none" onclick="ConnectToOneDrive()" id="btnConnect">Not Connected</span>
-                <span class="time_buttons" style="float:none" onclick="ShowUploadControl()">Upload </span>
-               <%-- <button onclick="ConnectToOneDrive()" id="btnConnect" type="button">Not Connected</button>
+                <span class="time_buttons" style="float: none" onclick="ConnectToOneDrive()" id="btnConnect">Not Connected</span>
+                <span class="time_buttons" style="float: none" onclick="ShowUploadControl()">Upload </span>
+                <%-- <button onclick="ConnectToOneDrive()" id="btnConnect" type="button">Not Connected</button>
                 <button onclick="ShowUploadControl()" type="button">Upload</button>--%>
                 <span class="color_blue expand_button" style="padding-right: 25px">Collapse All</span>
                 <span class="color_blue expand_button">Expand All&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -283,20 +283,20 @@
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">
             <table>
-                <tr style="height:30px">
-                    <td style="width:90px">Select File:
+                <tr style="height: 30px">
+                    <td style="width: 90px">Select File:
                     </td>
                     <td>
                         <input id="file" name="file" type="file" /></td>
                 </tr>
-                <tr style="height:30px">
+                <tr style="height: 30px">
                     <td>Category:</td>
                     <td>
                         <select id="fileCategory">
                             <option></option>
                         </select></td>
                 </tr>
-                <tr style="height:30px">
+                <tr style="height: 30px">
                     <td></td>
                     <td>
                         <button onclick="uploadFile()" type="button">Upload</button></td>
