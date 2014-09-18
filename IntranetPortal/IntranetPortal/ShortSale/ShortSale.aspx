@@ -6,7 +6,6 @@
 <%@ Register Src="~/ShortSale/ShortSaleOverVew.ascx" TagPrefix="uc1" TagName="ShortSaleOverVew" %>
 <%@ Register Src="~/ShortSale/Title.ascx" TagPrefix="uc1" TagName="Title" %>
 
-
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script src="/scripts/stevenjs.js"></script>
   
