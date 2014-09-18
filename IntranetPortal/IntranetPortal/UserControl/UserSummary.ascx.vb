@@ -57,7 +57,7 @@ Public Class UserSummary
             'Bind Appointment
             Dim leads = (From al In Context.Leads
                                          Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
-                                        Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (appoint.Agent = Page.User.Identity.Name Or appoint.Manager = Page.User.Identity.Name)
+                                        Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (appoint.Agent = Page.User.Identity.Name Or appoint.Manager = Page.User.Identity.Name) And appoint.ScheduleDate >= Today
                                           Select New With {
                                               .BBLE = al.BBLE,
                                               .LeadsName = al.LeadsName,
