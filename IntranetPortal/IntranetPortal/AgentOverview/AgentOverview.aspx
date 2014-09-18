@@ -4,6 +4,7 @@
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <script src="../scripts/jquery.printElement.js"></script>
+    <script src="/scripts/stevenjs.js"></script>
     <style type="text/css">
         .InforPanel {
             float: left;
@@ -169,17 +170,7 @@
             //alert(emps);
         }
 
-        $(document).ready(function () {
-
-            if ($(".tooltip-examples").tooltip) {
-                $(".tooltip-examples").tooltip({
-                    placement: 'bottom'
-                });
-            } else {
-                alert('tooltip function can not found' + $(".tooltip-examples").tooltip);
-            }
-
-        });
+       
         function expandAllClick(s) {
             if (gridEmpsClient.IsGroupRowExpanded(0)) {
                 gridEmpsClient.CollapseAll();

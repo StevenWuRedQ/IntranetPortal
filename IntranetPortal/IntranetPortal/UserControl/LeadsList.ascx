@@ -63,11 +63,13 @@
             gridLeads.GetRowValues(gridLeads.GetFocusedRowIndex(), 'BBLE', OnGetRowValues);
             postponedCallbackRequired = false;
         }
+       
         $("#prioity_content").mCustomScrollbar(
                {
                    theme: "minimal-dark"
                }
                );
+
         $("#home_owner_content").mCustomScrollbar(
             {
                 theme: "minimal-dark"
@@ -281,7 +283,7 @@
 
     function SearchGridLeads() {
         var filterCondition = "";
-        var key = txtkeyWordClient.GetText();       
+        var key = txtkeyWordClient.GetText();
         filterCondition = "[LeadsName] LIKE '%" + key + "%' OR [Neighborhood] LIKE '%" + key + "%'";
         filterCondition += " OR [EmployeeName] LIKE '%" + key + "%'";
         gridLeads.PerformCallback("Search|" + key);
@@ -367,12 +369,12 @@
         var classAsc = "fa fa-sort-amount-asc icon_btn tooltip-examples";
         var sort = s.getAttribute("class");
 
-        if (sort.indexOf("-desc")>0) {
+        if (sort.indexOf("-desc") > 0) {
             s.setAttribute("class", classAsc);
             gridLeads.SortBy("LastUpdate", "ASC");
         }
         else {
-            if (sort.indexOf("-asc")>0) {
+            if (sort.indexOf("-asc") > 0) {
                 s.setAttribute("class", classDesc);
                 gridLeads.SortBy("LastUpdate", "DSC");
             }
@@ -389,19 +391,20 @@
         }
     }
 
-    $(document).ready(function () {        
+    $(document).ready(function () {
         //Handler for .ready() called.
-    //    var leads_list_grid = $("#leads_list_left");
-    //    //alert("scrollHeight =" + document.getElementById("leads_list_left").scrollHeight + "height =" + leads_list_grid.height())
-                
-    //    if (LeadCategory.GetText() != "Create") {//document.getElementById("leads_list_left").scrollHeight > leads_list_grid.height()) {
-    //        $("#leads_list_left").mCustomScrollbar(
-    //        {
-    //            theme: "minimal-dark"
-    //        }
-    //        );
-    //    }
-  });
+        var leads_list_grid = $("#leads_list_left");
+        //alert("scrollHeight =" + document.getElementById("leads_list_left").scrollHeight + "height =" + leads_list_grid.height())
+
+        if (LeadCategory.GetText() != "Create") {//document.getElementById("leads_list_left").scrollHeight > leads_list_grid.height()) {
+
+            $("#leads_list_left").mCustomScrollbar(
+            {
+                theme: "minimal-dark"
+            }
+            );
+        }
+    });
 
 </script>
 <%--id="leads_list_left"--%>
@@ -776,7 +779,7 @@
 
     <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 
-   
+
     <dx:ASPxPopupControl ClientInstanceName="ASPxPopupRequestUpdateControl" Width="500px" Height="420px"
         MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl3"
         HeaderText="Request Update" Modal="true"
@@ -859,7 +862,7 @@
             </dx:PopupControlContentControl>
         </ContentCollection>
     </dx:ASPxPopupControl>
-   
+
     <%--  <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
         <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
     </dx:ASPxCallback>--%>

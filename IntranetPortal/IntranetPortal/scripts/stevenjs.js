@@ -28,9 +28,8 @@ function swich_edit_model(s, e) {
 
 
 }
-
-$(document).ready(function () {
-
+function initToolTips()
+{
     if ($(".tooltip-examples").tooltip) {
         $(".tooltip-examples").tooltip({
             placement: 'bottom'
@@ -38,4 +37,8 @@ $(document).ready(function () {
     } else {
         alert('tooltip function can not found' + $(".tooltip-examples").tooltip);
     }
+}
+$(document).ready(function () {
+    initToolTips();
+    
 });

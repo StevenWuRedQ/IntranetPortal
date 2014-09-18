@@ -246,18 +246,9 @@
         aspxPopupAddPhoneNum.Hide();
         txtPhoneNoClient.SetText("");
     }
-    function initToolTips() {
-        if ($(".tooltip-examples").tooltip) {
-            $(".tooltip-examples").tooltip({
-                placement: 'bottom'
-            });
-        } else {
-            //alert('tooltip function can not found' + $(".tooltip-examples").tooltip);
-        }
-    }
-    //initToolTips();
-    // ]]> 
+   
 </script>
+<script src="/scripts/stevenjs.js"></script>
 <style type="text/css">
     .UpdateInfoAlign {
         text-align: right;
