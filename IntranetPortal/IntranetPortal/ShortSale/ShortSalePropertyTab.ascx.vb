@@ -1,4 +1,5 @@
 ﻿Imports Newtonsoft.Json
+Imports IntranetPortal.ShortSale
 Public Class ShortSalePropertyTab
     Inherits System.Web.UI.UserControl
     Public Property propertyInfo As PropertyBaseInfo
@@ -15,7 +16,7 @@ Public Class ShortSalePropertyTab
     End Sub
     Sub initPropertyInfo()
         Using Context As New Entities
-            propertyInfo = Context.PropertyBaseInfoes.Where(Function(pi) pi.BBLE = "123").FirstOrDefault()
+            ' propertyInfo = Context.PropertyBaseInfoes.Where(Function(pi) pi.BBLE = "123").FirstOrDefault()
         End Using
     End Sub
     Class simplePropertyBaseInfo
