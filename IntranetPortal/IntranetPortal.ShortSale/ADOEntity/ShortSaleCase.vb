@@ -25,5 +25,9 @@ Partial Public Class ShortSaleCase
     Public Property Status As String
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
+    Public Property OccupiedBy As String
+    Public Property Evivtion As String
+    Public Property DateStarted As Nullable(Of Date)
+    Public Property LockBoxCode As String
 
 End Class

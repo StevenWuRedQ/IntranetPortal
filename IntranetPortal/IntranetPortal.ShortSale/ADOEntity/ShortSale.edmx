@@ -52,10 +52,6 @@
           <Property Name="FHA" Type="bit" />
           <Property Name="FannieMae" Type="bit" />
           <Property Name="FreddieMac" Type="bit" />
-          <Property Name="OccupiedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="Evivtion" Type="nvarchar" MaxLength="50" />
-          <Property Name="DateStarted" Type="datetime" />
-          <Property Name="LockBoxCode" Type="nchar" MaxLength="5" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
@@ -163,6 +159,10 @@
           <Property Name="TitleCompany" Type="int" />
           <Property Name="ClosingDate" Type="date" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="OccupiedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Evivtion" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateStarted" Type="datetime" />
+          <Property Name="LockBoxCode" Type="nchar" MaxLength="5" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -197,13 +197,13 @@
         <EntityContainer Name="ShortSaleEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="CleareneceNotes" EntityType="IntranetPortalModel.CleareneceNote" />
           <EntitySet Name="PartyContacts" EntityType="IntranetPortalModel.PartyContact" />
-          <EntitySet Name="PropertyBaseInfoes" EntityType="IntranetPortalModel.PropertyBaseInfo" />
           <EntitySet Name="PropertyFloors" EntityType="IntranetPortalModel.PropertyFloor" />
           <EntitySet Name="PropertyMortgages" EntityType="IntranetPortalModel.PropertyMortgage" />
           <EntitySet Name="PropertyOwners" EntityType="IntranetPortalModel.PropertyOwner" />
           <EntitySet Name="PropertyTitles" EntityType="IntranetPortalModel.PropertyTitle" />
           <EntitySet Name="ShortSaleCases" EntityType="IntranetPortalModel.ShortSaleCase" />
           <EntitySet Name="TitleClearences" EntityType="IntranetPortalModel.TitleClearence" />
+          <EntitySet Name="PropertyBaseInfoes" EntityType="IntranetPortalModel.PropertyBaseInfo" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -229,37 +229,6 @@
           <Property Name="Address" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="PropertyBaseInfo">
-          <Key>
-            <PropertyRef Name="BBLE" />
-          </Key>
-          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Zipcode" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="Block" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="Lot" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
-          <Property Name="BuildingType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NumOfStories" Type="Int32" />
-          <Property Name="NumOfUnit" Type="Int32" />
-          <Property Name="Accessibility" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TaxClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="NumOfFamilies" Type="Int32" />
-          <Property Name="CO" Type="Boolean" />
-          <Property Name="FHA" Type="Boolean" />
-          <Property Name="FannieMae" Type="Boolean" />
-          <Property Name="FreddieMac" Type="Boolean" />
-          <Property Name="OccupiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Evivtion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DateStarted" Type="DateTime" Precision="3" />
-          <Property Name="LockBoxCode" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyFloor">
           <Key>
@@ -365,6 +334,10 @@
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OccupiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Evivtion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateStarted" Type="DateTime" Precision="3" />
+          <Property Name="LockBoxCode" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>
@@ -378,6 +351,33 @@
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PropertyBaseInfo">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Zipcode" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Block" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Lot" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="BuildingType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumOfStories" Type="Int32" />
+          <Property Name="NumOfUnit" Type="Int32" />
+          <Property Name="Accessibility" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumOfFamilies" Type="Int32" />
+          <Property Name="CO" Type="Boolean" />
+          <Property Name="FHA" Type="Boolean" />
+          <Property Name="FannieMae" Type="Boolean" />
+          <Property Name="FreddieMac" Type="Boolean" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -409,38 +409,6 @@
                 <ScalarProperty Name="OfficeNO" ColumnName="OfficeNO" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ContactId" ColumnName="ContactId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PropertyBaseInfoes">
-            <EntityTypeMapping TypeName="IntranetPortalModel.PropertyBaseInfo">
-              <MappingFragment StoreEntitySet="PropertyBaseInfo">
-                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="LockBoxCode" ColumnName="LockBoxCode" />
-                <ScalarProperty Name="DateStarted" ColumnName="DateStarted" />
-                <ScalarProperty Name="Evivtion" ColumnName="Evivtion" />
-                <ScalarProperty Name="OccupiedBy" ColumnName="OccupiedBy" />
-                <ScalarProperty Name="FreddieMac" ColumnName="FreddieMac" />
-                <ScalarProperty Name="FannieMae" ColumnName="FannieMae" />
-                <ScalarProperty Name="FHA" ColumnName="FHA" />
-                <ScalarProperty Name="CO" ColumnName="CO" />
-                <ScalarProperty Name="NumOfFamilies" ColumnName="NumOfFamilies" />
-                <ScalarProperty Name="TaxClass" ColumnName="TaxClass" />
-                <ScalarProperty Name="Accessibility" ColumnName="Accessibility" />
-                <ScalarProperty Name="NumOfUnit" ColumnName="NumOfUnit" />
-                <ScalarProperty Name="NumOfStories" ColumnName="NumOfStories" />
-                <ScalarProperty Name="BuildingType" ColumnName="BuildingType" />
-                <ScalarProperty Name="Lot" ColumnName="Lot" />
-                <ScalarProperty Name="Block" ColumnName="Block" />
-                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -534,6 +502,10 @@
           <EntitySetMapping Name="ShortSaleCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCase">
               <MappingFragment StoreEntitySet="ShortSaleCases">
+                <ScalarProperty Name="LockBoxCode" ColumnName="LockBoxCode" />
+                <ScalarProperty Name="DateStarted" ColumnName="DateStarted" />
+                <ScalarProperty Name="Evivtion" ColumnName="Evivtion" />
+                <ScalarProperty Name="OccupiedBy" ColumnName="OccupiedBy" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
@@ -562,6 +534,34 @@
                 <ScalarProperty Name="SeqNum" ColumnName="SeqNum" />
                 <ScalarProperty Name="CaseId" ColumnName="CaseId" />
                 <ScalarProperty Name="ClearenceId" ColumnName="ClearenceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyBaseInfoes">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PropertyBaseInfo">
+              <MappingFragment StoreEntitySet="PropertyBaseInfo">
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="FreddieMac" ColumnName="FreddieMac" />
+                <ScalarProperty Name="FannieMae" ColumnName="FannieMae" />
+                <ScalarProperty Name="FHA" ColumnName="FHA" />
+                <ScalarProperty Name="CO" ColumnName="CO" />
+                <ScalarProperty Name="NumOfFamilies" ColumnName="NumOfFamilies" />
+                <ScalarProperty Name="TaxClass" ColumnName="TaxClass" />
+                <ScalarProperty Name="Accessibility" ColumnName="Accessibility" />
+                <ScalarProperty Name="NumOfUnit" ColumnName="NumOfUnit" />
+                <ScalarProperty Name="NumOfStories" ColumnName="NumOfStories" />
+                <ScalarProperty Name="BuildingType" ColumnName="BuildingType" />
+                <ScalarProperty Name="Lot" ColumnName="Lot" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

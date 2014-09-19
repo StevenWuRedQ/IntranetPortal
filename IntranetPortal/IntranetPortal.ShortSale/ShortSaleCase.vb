@@ -12,10 +12,23 @@
     Public ReadOnly Property PropertyInfo As PropertyBaseInfo
         Get
             If _propInfo Is Nothing Then
-                _propInfo = New PropertyBaseInfo
+                _propInfo = PropertyBaseInfo.GetInstance(BBLE)
             End If
 
             Return _propInfo
+        End Get
+    End Property
+
+    Private _mortgages As List(Of PropertyMortgage)
+    Public ReadOnly Property Mortgages As List(Of PropertyMortgage)
+        Get
+            If _mortgages Is Nothing Then
+                Using context As New ShortSaleEntities
+                    Return context.PropertyMortgages.Where(Function(mg) mg.CaseId = CaseId).ToList
+                End Using
+            End If
+
+            Return _mortgages
         End Get
     End Property
 

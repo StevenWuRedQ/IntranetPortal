@@ -1,5 +1,7 @@
 ﻿
 
-Public Class ShortSaleService
-   
+Public Class ShortSaleUtility
+
+
+
 End Class

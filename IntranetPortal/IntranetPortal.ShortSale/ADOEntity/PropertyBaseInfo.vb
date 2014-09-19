@@ -29,10 +29,6 @@ Partial Public Class PropertyBaseInfo
     Public Property FHA As Nullable(Of Boolean)
     Public Property FannieMae As Nullable(Of Boolean)
     Public Property FreddieMac As Nullable(Of Boolean)
-    Public Property OccupiedBy As String
-    Public Property Evivtion As String
-    Public Property DateStarted As Nullable(Of Date)
-    Public Property LockBoxCode As String
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
     Public Property UpdateDate As Nullable(Of Date)
