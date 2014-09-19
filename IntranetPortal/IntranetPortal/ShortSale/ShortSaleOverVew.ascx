@@ -18,10 +18,10 @@
     $(document).ready(function () {
         // Handler for .ready() called.
         init_currency();
-        
-        
+
+
     });
-   
+
 </script>
 
 <div style="padding-top: 5px">
@@ -45,7 +45,7 @@
                     <i class="fa fa-refresh"></i>
                     <span style="margin-left: 19px;">Jun 9,2014 1:12PM</span>
                 </span>
-                <span class="time_buttons" style="margin-right: 30px;font-weight:300;" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
+                <span class="time_buttons" style="margin-right: 30px; font-weight: 300;" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
                 <span class="time_buttons">DOB</span>
                 <span class="time_buttons">Acris</span>
                 <span class="time_buttons">Maps</span>
@@ -100,7 +100,7 @@
                             <td style="text-align: right">
                                 <div>
                                     <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1">
-                                        <ClientSideEvents Click="SaveLeadsComments" />
+                                        <%--<ClientSideEvents Click="SaveLeadsComments" />--%>
                                     </dx:ASPxButton>
                                     &nbsp;
                                     <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false" CssClass="rand-button" BackColor="#77787b">
@@ -127,42 +127,44 @@
                 <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Eviction" role="tab" data-toggle="tab">Eviction</a></li>
                 <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Parties" role="tab" data-toggle="tab">Parties</a></li>
             </ul>
+            <%--<dx:ASPxCallbackPanel ID="overviewCallbackPanel" runat="server" ClientInstanceName="overviewCallbackPanelClinet" OnCallback="overviewCallbackPanel_Callback">--%>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <div class="short_sale_content">
 
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane active" id="home">
-                    <div class="short_sale_content">
+                            <uc1:ShortSaleSummaryTab runat="server" ID="ShortSaleSummaryTab" />
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="Property">
+                        <div class="short_sale_content">
+                            <uc1:ShortSalePropertyTab runat="server" ID="ShortSalePropertyTab" />
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="Mortgages">
+                        <div class="short_sale_content">
+                            <uc1:ShortSaleMortgageTab runat="server" ID="ShortSaleMortgageTab" />
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="Homewoner">
+                        <div class="short_sale_content">
+                            <uc1:ShortSaleHomewonerTab runat="server" ID="ShortSaleHomewonerTab" />
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="Eviction">
+                        <div class="short_sale_content">
+                            <uc1:ShortSaleEvictionTab runat="server" ID="ShortSaleEvictionTab" />
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="Parties">
+                        <div class="short_sale_content">
+                            <uc1:ShortSalePartiesTab runat="server" ID="ShortSalePartiesTab" />
+                        </div>
 
-                        <uc1:ShortSaleSummaryTab runat="server" ID="ShortSaleSummaryTab" />
                     </div>
                 </div>
-                <div class="tab-pane" id="Property">
-                    <div class="short_sale_content">
-                        <uc1:ShortSalePropertyTab runat="server" ID="ShortSalePropertyTab" />
-                    </div>
-                </div>
-                <div class="tab-pane" id="Mortgages">
-                    <div class="short_sale_content">
-                        <uc1:ShortSaleMortgageTab runat="server" ID="ShortSaleMortgageTab" />
-                    </div>
-                </div>
-                <div class="tab-pane" id="Homewoner">
-                    <div class="short_sale_content">
-                        <uc1:ShortSaleHomewonerTab runat="server" ID="ShortSaleHomewonerTab" />
-                    </div>
-                </div>
-                <div class="tab-pane" id="Eviction">
-                    <div class="short_sale_content">
-                        <uc1:ShortSaleEvictionTab runat="server" ID="ShortSaleEvictionTab" />
-                    </div>
-                </div>
-                <div class="tab-pane" id="Parties">
-                    <div class="short_sale_content">
-                        <uc1:ShortSalePartiesTab runat="server" ID="ShortSalePartiesTab" />
-                    </div>
+            <%--</dx:ASPxCallbackPanel>--%>
 
-                </div>
-            </div>
         </div>
     </div>
 </div>

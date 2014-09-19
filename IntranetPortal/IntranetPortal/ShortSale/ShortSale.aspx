@@ -49,7 +49,7 @@
                                                             <dx:MenuItem Text="Home Owner" Name="TLO">
                                                             </dx:MenuItem>
                                                         </Items>
-                                                        <ClientSideEvents ItemClick="OnRefreshMenuClick" />
+                                                       <%-- <ClientSideEvents ItemClick="OnRefreshMenuClick" />--%>
 
                                                     </dx:ASPxPopupMenu>
                                                     <asp:HiddenField ID="hfBBLE" runat="server" />
@@ -112,7 +112,7 @@
                                                             </dx:MenuItem>
                                                         </Items>
 
-                                                        <ClientSideEvents ItemClick="OnPhoneNumberClick" />
+                                                        <%--<ClientSideEvents ItemClick="OnPhoneNumberClick" />--%>
                                                     </dx:ASPxPopupMenu>
                                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="AspxPopupMenuAddress"
                                                         ShowPopOutImages="false" AutoPostBack="false"
@@ -129,10 +129,8 @@
                                                             <dx:MenuItem Text="Undo" Name="Undo">
                                                             </dx:MenuItem>
                                                         </Items>
-                                                        <%--disable the width by steven--%>
-                                                        <%--<ItemStyle Width="143px"></ItemStyle>--%>
-                                                        <%------end------%>
-                                                        <ClientSideEvents ItemClick="OnAddressPopupMenuClick" />
+                                                       
+                                                       <%-- <ClientSideEvents ItemClick="OnAddressPopupMenuClick" />--%>
                                                     </dx:ASPxPopupMenu>
                                                 </div>
                                             </dx:SplitterContentControl>
@@ -182,7 +180,7 @@
                                                                 <dx:MenuItem Text="Custom" Name="Custom">
                                                                 </dx:MenuItem>
                                                             </Items>
-                                                            <ClientSideEvents ItemClick="OnCallbackMenuClick" />
+                                                            <%--<ClientSideEvents ItemClick="OnCallbackMenuClick" />--%>
                                                         </dx:ASPxPopupMenu>
                                                         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="260px" Height="250px"
                                                             MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="pcMain"

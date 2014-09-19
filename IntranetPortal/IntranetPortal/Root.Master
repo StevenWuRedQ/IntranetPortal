@@ -483,7 +483,7 @@
     <script src="/Scripts/js/main.js"></script>
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="scripts/stevenjs.js"></script>
+    <script src="/scripts/stevenjs.js"></script>
     <%-- init tooltips --%>
 </body>
 </html>

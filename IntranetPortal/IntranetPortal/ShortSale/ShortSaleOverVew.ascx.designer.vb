@@ -68,6 +68,15 @@ Partial Public Class ShortSaleOverVew
     Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
+    '''overviewCallbackPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents overviewCallbackPanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+
+    '''<summary>
     '''ShortSaleSummaryTab control.
     '''</summary>
     '''<remarks>
