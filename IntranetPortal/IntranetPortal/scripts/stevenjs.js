@@ -38,29 +38,7 @@ function collectDate()
 
         }
     });
-   
-    //for(var ele in inputs)
-    //{
-    //    var id = ele.id;
-       
-    //    if(id!=null &&id.length>0)
-    //    {
-    //        alert(id);
-    //        var t_id = null;
-    //        var t_data = id.text();
-    //        if(id.startsWith("select_"))
-    //        {
-    //            t_id = id.split("_")[1];
-    //            t_data = $(ele).find(":selected").text();
-    //        }
-    //        else
-    //        {
-    //            t_id = id;
-    //        }
-    //        obj[t_id] = t_data;
-
-    //    }
-    //}
+    delete obj.pdf_check_no21;
     return obj;
 }
 

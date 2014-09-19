@@ -29,7 +29,7 @@ Public Class ShortSalePropertyTab
     End Class
     Protected Sub propertyTablCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         Dim par = e.Parameter
-        Dim res = JsonConvert.DeserializeObject(Of simplePropertyBaseInfo)(e.Parameter)
+        Dim res = JsonConvert.DeserializeObject(Of PropertyBaseInfo)(e.Parameter)
         par = ""
     End Sub
 
