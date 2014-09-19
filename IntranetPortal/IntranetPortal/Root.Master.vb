@@ -23,9 +23,10 @@ Public Class Root
                 If Page.User.IsInRole("Admin") Then
                     _empUnderMgred = Employee.GetAllEmps()
                 Else
-                    _empUnderMgred = Employee.GetManagedEmployees(Page.User.Identity.Name)
+                    Dim emps = Employee.GetManagedEmployees(Page.User.Identity.Name).ToList
+                    emps.AddRange(Employee.GetControledDeptEmployees(Page.User.Identity.Name).ToList)
+                    _empUnderMgred = emps.ToArray
                 End If
-
             End If
             Return _empUnderMgred
         End Get

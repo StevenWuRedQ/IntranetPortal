@@ -220,7 +220,6 @@
                                                                         </div>
                                                                         <%------end------%>
                                                                     </DataItemTemplate>
-
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewDataTextColumn FieldName="Status" Caption="STATUS" Settings-AllowHeaderFilter="False" VisibleIndex="2" Width="80px" CellStyle-HorizontalAlign="left">
                                                                     <Settings AllowHeaderFilter="False"></Settings>
@@ -233,7 +232,6 @@
                                                                     <GroupRowTemplate>
                                                                         Employee Name: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
                                                                     </GroupRowTemplate>
-
                                                                     <CellStyle HorizontalAlign="left"></CellStyle>
                                                                 </dx:GridViewDataColumn>
                                                                 <dx:GridViewDataColumn Width="35px" VisibleIndex="5">
