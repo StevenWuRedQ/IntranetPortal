@@ -366,9 +366,6 @@
     <Compile Include="DataModel\OwnerContact.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\PartyContact.vb">
-      <DependentUpon>PortalEntityModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataModel\PortalEntityModel.Context.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -391,9 +388,6 @@
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\PortalQuote.vb">
-      <DependentUpon>PortalEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel\PropertyBaseInfo.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\Role.vb">
