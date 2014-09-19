@@ -73,7 +73,7 @@ function mip() {
     if ($('#portal-sign-in-form').ajaxForm)
     {
         $('#portal-sign-in-form').ajaxForm(form_options);
-    }    
+    }
 
     function afterloginsubmission() {
         $('.form-validation-message').animate({ "top": "0" }, 500, 'easeOutCirc');
