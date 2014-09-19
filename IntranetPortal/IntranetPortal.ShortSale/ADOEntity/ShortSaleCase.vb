@@ -13,6 +13,7 @@ Imports System.Collections.Generic
 Partial Public Class ShortSaleCase
     Public Property CaseId As Integer
     Public Property BBLE As String
+    Public Property CaseName As String
     Public Property Processor As Nullable(Of Integer)
     Public Property Referral As Nullable(Of Integer)
     Public Property ListingAgent As Nullable(Of Integer)

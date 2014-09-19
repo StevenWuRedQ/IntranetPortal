@@ -12,7 +12,7 @@
     <h4 class="ss_form_title">Property</h4>
     <ul class="ss_form_box clearfix">
 
-         <li class="ss_form_item">
+        <li class="ss_form_item">
             <label class="ss_form_input_title">Street Number</label>
             <input class="ss_form_input" id="Number" value="<%= propertyInfo.Number %>">
         </li>
@@ -84,18 +84,18 @@
                 <option value="0">Accessibility type 2</option>
             </select>
         </li>
-        <li class="ss_form_item">
+         <li class="ss_form_item">
             <span class="ss_form_input_title">c/o(<span class="link_pdf">pdf</span>)</span>
 
             <input type="radio" class="ss_form_input" id="checkYes_CO" name="pdf" value="YES" <%=If(propertyInfo.CO,"checked","") %>>
             <label for="checkYes_CO" class="input_with_check" >
-                <span class="box_text">Yes</span>
+                 <span class="box_text">Yes</span>
             </label>
 
             <input type="radio"  class="ss_form_input" id="pdf_check_no21" name="pdf" value="NO" <%=If(Not propertyInfo.CO,"checked","") %>>
             <label for="pdf_check_no21" class="input_with_check">
                 <span class="box_text"><span class="box_text">No</span></span>
-            </label>
+                </label>
 
         </li>
         <li class="ss_form_item">
@@ -106,7 +106,7 @@
             <label class="ss_form_input_title"># of Families</label>
             <input class="ss_form_input" value="1">
         </li>
-
+       
         <li class="ss_form_item">
             <span class="ss_form_input_title">FHA</span>
 
@@ -233,7 +233,7 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <tr class="font_14">
+                 <tr class="font_14">
                     <td>Boiler Room</td>
                     <td>1</td>
                     <td></td>
@@ -243,7 +243,7 @@
                 </tr>
             </tbody>
         </table>
-
+       
     </div>
     <%------end-------%>
 </div>

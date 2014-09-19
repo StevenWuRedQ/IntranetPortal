@@ -11,7 +11,7 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Name</label>
-            <input class="ss_form_input" value="John Smith">
+            <input class="ss_form_input" value="">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Phone #</label>

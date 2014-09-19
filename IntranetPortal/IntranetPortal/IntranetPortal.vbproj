@@ -327,9 +327,6 @@
     <Compile Include="DataModel\BuildingCode.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\CleareneceNote.vb">
-      <DependentUpon>PortalEntityModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataModel\Employee.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
@@ -399,28 +396,10 @@
     <Compile Include="DataModel\PropertyBaseInfo.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataModel\PropertyFloor.vb">
-      <DependentUpon>PortalEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel\PropertyMortgage.vb">
-      <DependentUpon>PortalEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel\PropertyOwner.vb">
-      <DependentUpon>PortalEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel\PropertyTitle.vb">
-      <DependentUpon>PortalEntityModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DataModel\Role.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\SharedLead.vb">
-      <DependentUpon>PortalEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel\ShortSaleCase.vb">
-      <DependentUpon>PortalEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel\TitleClearence.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\UserAppointment.vb">
@@ -735,12 +714,18 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Settings.vb" />
-    <Compile Include="ShortSale\CodeFolder\ShortSaleCase.vb" />
     <Compile Include="ShortSale\ShortSale.aspx.designer.vb">
       <DependentUpon>ShortSale.aspx</DependentUpon>
     </Compile>
     <Compile Include="ShortSale\ShortSale.aspx.vb">
       <DependentUpon>ShortSale.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShortSale\ShortSaleCaseList.ascx.designer.vb">
+      <DependentUpon>ShortSaleCaseList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ShortSaleCaseList.ascx.vb">
+      <DependentUpon>ShortSaleCaseList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ShortSale\ShortSaleEvictionTab.ascx.designer.vb">
@@ -1639,6 +1624,7 @@
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
     <Content Include="ShortSale\ShortSale.aspx" />
+    <Content Include="ShortSale\ShortSaleCaseList.ascx" />
     <Content Include="ShortSale\ShortSaleEvictionTab.ascx" />
     <Content Include="ShortSale\ShortSaleHomewonerTab.ascx" />
     <Content Include="ShortSale\ShortSaleMortgageTab.ascx" />
@@ -1800,6 +1786,12 @@
     <Folder Include="Controllers\" />
     <Folder Include="scripts\jquery.globalize\cultures\" />
     <Folder Include="TempDataFile\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IntranetPortal.ShortSale\IntranetPortal.ShortSale.vbproj">
+      <Project>{fc0c5f0d-f387-48ed-a96c-6d4e1914fd0b}</Project>
+      <Name>IntranetPortal.ShortSale</Name>
+    </ProjectReference>
   </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />

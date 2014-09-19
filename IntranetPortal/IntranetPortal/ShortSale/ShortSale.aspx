@@ -1,10 +1,12 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ShortSale.aspx.vb" Inherits="IntranetPortal.ShortSale" MasterPageFile="~/Content.Master" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ShortSale.aspx.vb" Inherits="IntranetPortal.ShortSalePage" MasterPageFile="~/Content.Master" %>
 
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
 <%@ Register Src="~/UserControl/LeadsList.ascx" TagPrefix="uc1" TagName="LeadsList" %>
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
 <%@ Register Src="~/ShortSale/ShortSaleOverVew.ascx" TagPrefix="uc1" TagName="ShortSaleOverVew" %>
 <%@ Register Src="~/ShortSale/Title.ascx" TagPrefix="uc1" TagName="Title" %>
+<%@ Register Src="~/ShortSale/ShortSaleCaseList.ascx" TagPrefix="uc1" TagName="ShortSaleCaseList" %>
+
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script src="/scripts/stevenjs.js"></script>
@@ -15,7 +17,8 @@
                 <dx:SplitterPane Name="leadPanel" Collapsed="true" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="2px">
                     <ContentCollection>
                         <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
-                            <uc1:LeadsList runat="server" ID="LeadsList" />
+                            <%--<uc1:LeadsList runat="server" ID="LeadsList" />--%>
+                            <uc1:ShortSaleCaseList runat="server" ID="ShortSaleCaseList" />
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
@@ -25,6 +28,9 @@
                     </PaneStyle>
                     <ContentCollection>
                         <dx:SplitterContentControl ID="SplitterContentControl2" runat="server">
+                            <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel2" Height="100%" ClientInstanceName="ContentCallbackPanel" EnableCallbackAnimation="true" CssClass="LeadsContentPanel">
+                                <PanelCollection>
+                                    <dx:PanelContent ID="PanelContent1" runat="server">
                             <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="800px" Width="100%" ClientInstanceName="contentSplitter">
                                 <Styles>
                                     <Pane Paddings-Padding="0">
@@ -78,8 +84,8 @@
 
                                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                         <li style="margin-right: 30px; color: #ffa484; float: right">
-                                                            <i class="fa fa-comments sale_head_button tooltip-examples" title="Chat" ></i>
-                                                            <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Email" ></i>
+                                                                        <i class="fa fa-comments sale_head_button tooltip-examples" title="Chat"></i>
+                                                                        <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Email"></i>
                                                             <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Report" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
                                                             <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>
                                                         </li>
@@ -87,10 +93,10 @@
                                                     <div class="tab-content">
                                                         <%--<uc1:PropertyInfo runat="server" ID="PropertyInfo" />--%>
                                                         <div class="tab-pane active" id="property_info">
-                                                           <uc1:ShortSaleOverVew runat="server" id="ShortSaleOverVew" />
+                                                                        <uc1:ShortSaleOverVew runat="server" ID="ShortSaleOverVew" />
                                                         </div>
                                                         <div class="tab-pane" id="home_owner">
-                                                            <uc1:Title runat="server" id="Title" />
+                                                                        <uc1:Title runat="server" ID="Title" />
                                                         </div>
                                                         <div class="tab-pane " id="documents">
                                                             <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
@@ -246,6 +252,9 @@
                                     </dx:SplitterPane>
                                 </Panes>
                             </dx:ASPxSplitter>
+                                    </dx:PanelContent>
+                                </PanelCollection>
+                            </dx:ASPxCallbackPanel>
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>

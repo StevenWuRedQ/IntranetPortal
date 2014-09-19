@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ShortSale
+Partial Public Class ShortSalePage
 
     '''<summary>
     '''ASPxSplitter1 control.
@@ -32,13 +32,13 @@ Partial Public Class ShortSale
     Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
 
     '''<summary>
-    '''LeadsList control.
+    '''ShortSaleCaseList control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LeadsList As Global.IntranetPortal.LeadsList
+    Protected WithEvents ShortSaleCaseList As Global.IntranetPortal.ShortSaleCaseList
 
     '''<summary>
     '''SplitterContentControl2 control.
@@ -48,6 +48,24 @@ Partial Public Class ShortSale
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SplitterContentControl2 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
+
+    '''<summary>
+    '''ASPxCallbackPanel2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxCallbackPanel2 As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+
+    '''<summary>
+    '''PanelContent1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PanelContent1 As Global.DevExpress.Web.ASPxPanel.PanelContent
 
     '''<summary>
     '''contentSplitter control.
