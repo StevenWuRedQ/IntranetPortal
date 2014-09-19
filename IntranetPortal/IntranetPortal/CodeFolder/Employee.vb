@@ -114,6 +114,18 @@ Partial Public Class Employee
         End Using
     End Function
 
+    Public Shared Function GetControledDeptEmployees(userName As String) As String()
+        Dim emps As New List(Of String)
+        For Each rl In Roles.GetRolesForUser(userName)
+            If rl.StartsWith("OfficeManager") Then
+                Dim dept = rl.Split("-")(1)
+                emps.AddRange(GetDeptUsers(dept).ToList)
+            End If
+        Next
+
+        Return emps.Distinct.ToArray
+    End Function
+
     Public Shared Function GetInstance(id As Integer) As Employee
         Using context As New Entities
             Dim emp = context.Employees.Where(Function(em) em.EmployeeID = id).FirstOrDefault
