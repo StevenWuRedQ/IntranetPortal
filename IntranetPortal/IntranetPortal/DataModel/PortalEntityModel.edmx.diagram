@@ -35,16 +35,9 @@
         <EntityTypeShape EntityType="IntranetPortalModel.BuildingCode" Width="1.5" PointX="14.25" PointY="6.625" />
         <EntityTypeShape EntityType="IntranetPortalModel.Office" Width="1.5" PointX="14.25" PointY="8.375" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsComment" Width="1.5" PointX="10.5" PointY="8.5" />
-        <EntityTypeShape EntityType="IntranetPortalModel.PortalNote" Width="1.5" PointX="13.125" PointY="19.375" />
-        <EntityTypeShape EntityType="IntranetPortalModel.CleareneceNote" Width="1.5" PointX="13" PointY="16.875" />
         <EntityTypeShape EntityType="IntranetPortalModel.PartyContact" Width="1.5" PointX="16.375" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyBaseInfo" Width="1.5" PointX="16.375" PointY="4.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.PropertyFloor" Width="1.5" PointX="5.375" PointY="16.875" />
-        <EntityTypeShape EntityType="IntranetPortalModel.PropertyMortgage" Width="1.5" PointX="7.25" PointY="16.875" />
-        <EntityTypeShape EntityType="IntranetPortalModel.PropertyOwner" Width="1.5" PointX="9.125" PointY="16.875" />
-        <EntityTypeShape EntityType="IntranetPortalModel.PropertyTitle" Width="1.5" PointX="15" PointY="19.875" />
-        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCase" Width="1.5" PointX="11" PointY="16.875" />
-        <EntityTypeShape EntityType="IntranetPortalModel.TitleClearence" Width="1.5" PointX="15" PointY="16.875" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PortalNote" Width="1.5" PointX="15.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
