@@ -1,10 +1,11 @@
 ﻿Partial Public Class ShortSaleCase
 
-    Private _propInfo As PropertyInfo
-    Public ReadOnly Property PropertyInfo As PropertyInfo
+    Private _propInfo As PropertyBaseInfo
+    Public ReadOnly Property PropertyInfo As PropertyBaseInfo
         Get
+
             If _propInfo Is Nothing Then
-                _propInfo = New PropertyInfo
+                _propInfo = New PropertyBaseInfo
             End If
 
             Return _propInfo
