@@ -59,9 +59,7 @@ function mip() {
         });
         return false;
     });
-
-
-
+    
     $('.landing').hide();
 
     // FORM HANDLING
@@ -71,7 +69,11 @@ function mip() {
     var form_options = {
         success: afterloginsubmission
     }
-    $('#portal-sign-in-form').ajaxForm(form_options);
+
+    if ($('#portal-sign-in-form').ajaxForm)
+    {
+        $('#portal-sign-in-form').ajaxForm(form_options);
+    }    
 
     function afterloginsubmission() {
         $('.form-validation-message').animate({ "top": "0" }, 500, 'easeOutCirc');
