@@ -73,7 +73,7 @@
         End If
     End Sub
 
-    Public Function SaveChangesObj(oldObj As Object, newObj As Object) As Object
+    Private Function SaveChangesObj(oldObj As Object, newObj As Object) As Object
         Dim type = oldObj.GetType()
 
         For Each prop In type.GetProperties
