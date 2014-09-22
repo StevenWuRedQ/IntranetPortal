@@ -1,7 +1,7 @@
 ﻿Partial Public Class PortalLisPen
     Public ReadOnly Property Type As String
         Get
-            Return "ForeClosure"
+            Return "Foreclosure"
         End Get
     End Property
 
