@@ -23,7 +23,8 @@
     });
 
 </script>
-
+<dx:ASPxCallback ID="SaveClicklCallback" ClientInstanceName="SaveClicklCallbackCallbackClinet" runat="server" OnCallback="SaveClicklCallback_Callback"></dx:ASPxCallback>
+<input type="hidden" value="<%= shortSaleCaseData.CaseId%>" id="short_sale_case_id"/>
 <div style="padding-top: 5px">
     <div style="height: 850px; overflow: auto;" id="prioity_content">
         <%--refresh label--%>

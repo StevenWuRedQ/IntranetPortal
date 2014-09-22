@@ -18,4 +18,11 @@ Public Class ShortSalePage
         ShortSaleCaseData = ShortSaleCase.GetCase(e.Parameter)
         ShortSaleOverVew.BindData(ShortSaleCaseData)
     End Sub
+
+    Public Shared Function CheckBox(isChecked As Boolean?) As String
+        If isChecked Is Nothing Then
+            Return ""
+        End If
+        Return If(isChecked, "checked", "")
+    End Function
 End Class

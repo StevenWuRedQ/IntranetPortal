@@ -5,7 +5,7 @@
 
 
 <div>
-    <h4 class="ss_form_title">Propety</h4>
+    <h4 class="ss_form_title">Property</h4>
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item" style="width: 100%">
             <label class="ss_form_input_title">address</label>

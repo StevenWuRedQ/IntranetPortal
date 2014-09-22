@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleMortgageTab.ascx.vb" Inherits="IntranetPortal.ShortSaleMortgageTab" %>
+<%@ Import Namespace="IntranetPortal.ShortSale" %>
 <script src="/scripts/stevenjs.js"></script>
 <div class="clearfix">
     <div style="float: right">
@@ -7,30 +8,28 @@
         </dx:ASPxButton>
     </div>
 </div>
+
+<% For Each mortgageData As PropertyMortgage In mortgagesData%>
+
 <div class="ss_form">
     <h4 class="ss_form_title">1st Mortgage<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue"></i></h4>
     <ul class="ss_form_box clearfix" id="mortgage1">
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">LENDER</label>
-            <input class="ss_form_input" value="Bank of America">
+            <input class="ss_form_input" id="Lender" value="<%=mortgageData.Lender %>">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Loan #</label>
-            <input class="ss_form_input" value="123425436">
+            <input class="ss_form_input" id="Loan" value="<%=mortgageData.Loan %>">">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Loan Amount</label>
-            <input class="ss_form_input currency_input" onblur="$(this).formatCurrency();" value="$482,000.00">
+            <input class="ss_form_input currency_input" id="LoanAmount" onblur="$(this).formatCurrency();" value="<%=mortgageData.LoanAmount %>">">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Authorization Sent</label>
-            <select class="ss_form_input">
-                <option value="volvo">Dropdown1</option>
-                <option value="saab">Dropdown1</option>
-                <option value="mercedes">Dropdown3</option>
-                <option value="audi">DropDown3</option>
-            </select>
+           <input class="ss_form_input" id="AuthorizationSent" value="<%= mortgageData.AuthorizationSent %>">" />
         </li>
 
         <li class="ss_form_item">
@@ -49,6 +48,9 @@
                 <option value="mercedes">3 rd</option>
                 <option value="audi">4 th</option>
             </select>
+            <script>
+                initSelect("select_BuildingType", '<%=mortgageData.LienPosition%>');
+            </script>
         </li>
     </ul>
 </div>
@@ -59,7 +61,7 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">phone #</label>
-            <input class="ss_form_input" value="866-880-1232">
+            <input class="ss_form_input" id="ShortSaleContact" value="<%=mortgageData.ShortSaleContact%>">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Extension</label>
@@ -113,7 +115,7 @@
     <ul class="ss_form_box clearfix" id="processor_list">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Name</label>
-            <input class="ss_form_input" value="John Smith">
+            <input class="ss_form_input" id="Processor" value="<%= mortgageData.Processor%>">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Date Assigned to Processor</label>
@@ -161,7 +163,7 @@
     <ul class="ss_form_box clearfix" id="negotiator_list">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Name</label>
-            <input class="ss_form_input" value="Michale">
+            <input class="ss_form_input" id="" value="<%=mortgageData.Negotiator %>">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">&nbsp;</label>
@@ -208,7 +210,7 @@
     <ul class="ss_form_box clearfix" id="supervisor_list">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Name</label>
-            <input class="ss_form_input" value="John Simth">
+            <input class="ss_form_input" id="" value="<%=mortgageData.Supervisor %>">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">extension</label>
@@ -258,7 +260,7 @@
     <ul class="ss_form_box clearfix" id="closer_list">
         <li class="ss_form_item">
             <label class="ss_form_input_title">closer</label>
-            <input class="ss_form_input" value="John Simth">
+            <input class="ss_form_input" id="Closer" value="<%=mortgageData.Closer %>">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">extension</label>
@@ -299,3 +301,4 @@
         </li>
     </ul>
 </div>
+<%Next %>

@@ -15,6 +15,7 @@
 function collectDate()
 {
     var obj = new Object();
+    obj.CaseId = $('#short_sale_case_id').val();
     $('.ss_form_input').each(function () {
         
         var id = $(this).attr("id");
@@ -22,7 +23,16 @@ function collectDate()
             
             var t_id = null;
             var t_data = $(this).val();
-          
+            var t_key = null;
+            if (id.indexOf("key_") == 0)
+            {
+                id = id.replace("key_", "");
+               
+                t_key = id.split("_")[0];
+                id = id.split("_")[1];
+
+            }
+
             if (id.indexOf("select_")==0) {
                 t_id = id.split("_")[1];
                 t_data = $(this).find(":selected").text();
@@ -31,10 +41,28 @@ function collectDate()
                 t_id = id.split("_")[1];
                 t_data = $(this).prop("checked");
             }
+           
             else {
                 t_id = id;
             }
-            obj[t_id] = t_data;
+            /*when id start with none_ then don't add it in backend data*/
+            if (id.indexOf("none_") != 0)
+            {
+                if (t_key != null)
+                {
+                    if(obj[t_key]==null)
+                    {
+                        obj[t_key] = new Object();
+                    }
+                    obj[t_key][t_id] = t_data
+                    
+                } else
+                {
+                    obj[t_id] = t_data;
+                }
+                
+            }
+           
 
         }
     });
@@ -52,7 +80,7 @@ function swich_edit_model(s, e) {
         s.SetText("Save");
     } else {
         alert(JSON.stringify( collectDate()));
-        propertyTablCallbackClinet.PerformCallback(JSON.stringify(collectDate()));
+        SaveClicklCallbackCallbackClinet.PerformCallback(JSON.stringify(collectDate()));
 
         //inputs.removeClass("color_blue_edit");
         //checks.removeClass("color_blue_edit");

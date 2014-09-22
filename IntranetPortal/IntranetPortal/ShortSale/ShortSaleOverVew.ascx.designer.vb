@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class ShortSaleOverVew
 
     '''<summary>
+    '''SaveClicklCallback control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SaveClicklCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+
+    '''<summary>
     '''UpatingPanel control.
     '''</summary>
     '''<remarks>
@@ -66,15 +75,6 @@ Partial Public Class ShortSaleOverVew
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''overviewCallbackPanel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents overviewCallbackPanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
 
     '''<summary>
     '''ShortSaleSummaryTab control.

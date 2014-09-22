@@ -12,13 +12,4 @@ Option Explicit On
 
 
 Partial Public Class ShortSalePropertyTab
-
-    '''<summary>
-    '''propertyTablCallback control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents propertyTablCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class
