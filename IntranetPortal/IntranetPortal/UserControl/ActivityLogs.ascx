@@ -287,7 +287,7 @@
         <div class="clearfix" style="width: 100%">
             <div style="float: right">
                 <div style="color: #2e2f31; float: right">
-                    FILTER BY:&nbsp;&nbsp<i class="fa fa-filter acitivty_short_button" style="color: #444547; font-size: 14px;" onclick="popupFilterControl.ShowAtElement(this)"></i>
+                    FILTER BY:&nbsp;&nbsp<i class="fa fa-filter acitivty_short_button tooltip-examples" title="Filter" style="color: #444547; font-size: 14px;" onclick="popupFilterControl.ShowAtElement(this)"></i>
                 </div>
                 <dx:ASPxPopupControl runat="server" ID="popupFilters">
                 </dx:ASPxPopupControl>
@@ -297,8 +297,8 @@
                     </div>
                 </div>
                 <div style="margin-top: 15px; float: right">
-                    <i class="fa fa-plus-circle activity_add_buttons" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
-                    <i class="fa fa-tasks activity_add_buttons" style="cursor: pointer" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this)"></i>
+                    <i class="fa fa-plus-circle activity_add_buttons tooltip-examples" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
+                    <i class="fa fa-tasks activity_add_buttons tooltip-examples" title="Create Task" style="cursor: pointer" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this)"></i>
                 </div>
             </div>
         </div>

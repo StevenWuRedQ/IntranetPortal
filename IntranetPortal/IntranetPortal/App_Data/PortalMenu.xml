@@ -175,7 +175,7 @@
           <![CDATA[<i class="fa fa-group"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ShortSale" Text="Cases" NavigationUrl="/ShortSale/ShortSale.aspx" ShowAmount="false">
+      <PortalNavItem Name="ShortSale" Text="Short Sales" NavigationUrl="/ShortSale/ShortSale.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-folder-open"></i>]]>
         </FontClass>
