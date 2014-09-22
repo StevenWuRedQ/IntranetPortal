@@ -25,7 +25,7 @@ Public Class ShortSaleOverVew
     Protected Sub SaveClicklCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         Dim res = JsonConvert.DeserializeObject(Of ShortSaleCase)(e.Parameter)
        
-        res.Save()
+        res.SaveChanges()
     End Sub
    
 End Class
