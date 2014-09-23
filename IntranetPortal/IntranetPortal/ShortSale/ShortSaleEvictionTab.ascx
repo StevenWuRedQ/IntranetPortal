@@ -1,9 +1,8 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleEvictionTab.ascx.vb" Inherits="IntranetPortal.ShortSaleEvictionTab" %>
 <div class="clearfix">
     <div style="float: right">
-        <dx:ASPxButton runat="server" Text="Edit" AutoPostBack="false" CssClass="rand-button" HoverStyle-BackColor="#3993c1" BackColor="#99bdcf">
-            <ClientSideEvents Click="swich_edit_model" />
-        </dx:ASPxButton>
+        <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='swich_edit_model(this, short_sale_case_data)' />
+       
     </div>
 </div>
 
@@ -18,7 +17,7 @@
                 <option value="volvo">Homeowner</option>
                 <option value="saab">Tenant (Coop)</option>
                 <option value="mercedes">Tenant (Non Coop)</option>
-               
+
             </select>
             <script>
                 initSelect("OccupiedBy", '<%= evictionData.OccupiedBy%>');

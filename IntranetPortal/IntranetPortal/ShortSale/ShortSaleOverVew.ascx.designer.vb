@@ -23,6 +23,15 @@ Partial Public Class ShortSaleOverVew
     Protected WithEvents SaveClicklCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 
     '''<summary>
+    '''getShortSaleInstance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents getShortSaleInstance As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+
+    '''<summary>
     '''UpatingPanel control.
     '''</summary>
     '''<remarks>

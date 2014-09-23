@@ -3,9 +3,7 @@
 
 <div class="clearfix">
     <div style="float: right">
-        <dx:ASPxButton runat="server" Text="Edit" AutoPostBack="false" CssClass="rand-button" HoverStyle-BackColor="#3993c1" BackColor="#99bdcf">
-            <ClientSideEvents Click="swich_edit_model" />
-        </dx:ASPxButton>
+       <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='swich_edit_model(this, short_sale_case_data)' />
     </div>
 </div>
 
@@ -127,8 +125,8 @@
             <input type="radio" id="key_PropertyInfo_checkYes_FannieMae" name="Fannie_Mae1" value="YES" <%=ShortSalePage.CheckBox(propertyInfo.FannieMae)%>>
             <label for="checkYes_FannieMae" class="input_with_check"><span class="box_text">Yes</span></label>
 
-            <input type="radio" id="pdf_checkey_no23" name="Fannie_Mae1" value="NO" <%=ShortSalePage.CheckBox(Not propertyInfo.FannieMae)%>>
-            <label for="pdf_checkey_no23" class="input_with_check"><span class="box_text">No</span></label>
+            <input type="radio" id="none_pdf_checkey_no23" name="Fannie_Mae1" value="NO" <%=ShortSalePage.CheckBox(Not propertyInfo.FannieMae)%>>
+            <label for="none_pdf_checkey_no23" class="input_with_check"><span class="box_text">No</span></label>
 
         </li>
         <li class="ss_form_item">

@@ -1737,13 +1737,6 @@ li.ss_form_item {
     color: #0e9ee9;
 }
 
-.short_sale_edit {
-    background: #99bdcf;
-}
-
-    .short_sale_edit:hover {
-        background: #3993c1;
-    }
 
 input[type='checkbox'] + label, input[type=radio] + label .box_text {
     font-size: 14px !important;
@@ -1754,4 +1747,13 @@ input[type='checkbox'] + label, input[type=radio] + label .box_text {
     border-bottom: 5px solid #eee !important;
     height: 47px;
 
+}
+.short_sale_edit
+{
+    background:#99bdcf;
+    padding:9px 20px;
+}
+.short_sale_edit:hover
+{
+    background:#3993c1;
 }

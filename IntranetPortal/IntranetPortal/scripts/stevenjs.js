@@ -12,57 +12,57 @@
 
 }
 
-function collectDate()
-{
+function collectDate(objCase) {
     var obj = new Object();
-    obj.CaseId = $('#short_sale_case_id').val();
+    alert(JSON.stringify(objCase))
+    if (objCase) {
+        obj = objCase;
+    }
+    else {
+        alert("objCase is null")
+    }
+
     $('.ss_form_input').each(function () {
-        
+
         var id = $(this).attr("id");
         if (id != null && id.length > 0) {
-            
+
             var t_id = null;
             var t_data = $(this).val();
             var t_key = null;
-            if (id.indexOf("key_") == 0)
-            {
+            if (id.indexOf("key_") == 0) {
                 id = id.replace("key_", "");
-               
+
                 t_key = id.split("_")[0];
                 id = id.split("_")[1];
 
             }
 
-            if (id.indexOf("select_")==0) {
+            if (id.indexOf("select_") == 0) {
                 t_id = id.split("_")[1];
                 t_data = $(this).find(":selected").text();
-            } else if (id.indexOf("checkYes_") == 0)
-            {
+            } else if (id.indexOf("checkYes_") == 0) {
                 t_id = id.split("_")[1];
                 t_data = $(this).prop("checked");
             }
-           
+
             else {
                 t_id = id;
             }
             /*when id start with none_ then don't add it in backend data*/
-            if (id.indexOf("none_") != 0)
-            {
-                if (t_key != null)
-                {
-                    if(obj[t_key]==null)
-                    {
+            if (id.indexOf("none_") != 0) {
+                if (t_key != null) {
+                    if (obj[t_key] == null) {
                         obj[t_key] = new Object();
                     }
                     obj[t_key][t_id] = t_data
-                    
-                } else
-                {
+
+                } else {
                     obj[t_id] = t_data;
                 }
-                
+
             }
-           
+
 
         }
     });
@@ -70,27 +70,26 @@ function collectDate()
     return obj;
 }
 
-function swich_edit_model(s, e) {
+function swich_edit_model(s, objCase) {
     var inputs = $(".ss_form_input");
-    inputs.addClass("color_blue_edit");
+
     var checks = $(".input_with_check");
-    if (s.GetText() == "Edit") {
+    if ($(s).val() == "Edit") {
         inputs.addClass("color_blue_edit");
         checks.addClass("color_blue_edit");
-        s.SetText("Save");
+        $(s).val("Save");
     } else {
-        alert(JSON.stringify( collectDate()));
-        SaveClicklCallbackCallbackClinet.PerformCallback(JSON.stringify(collectDate()));
+
+        getShortSaleInstanceClient.PerformCallback($("#short_sale_case_id").val());
 
         //inputs.removeClass("color_blue_edit");
         //checks.removeClass("color_blue_edit");
-        //s.SetText("Edit");
+        //s.val("Edit");
     }
 
 
 }
-function initToolTips()
-{
+function initToolTips() {
     if ($(".tooltip-examples").tooltip) {
         $(".tooltip-examples").tooltip({
             placement: 'bottom'
@@ -99,15 +98,14 @@ function initToolTips()
         alert('tooltip function can not found' + $(".tooltip-examples").tooltip);
     }
 }
-function initSelect(id,dValue)
-{
-    for (var i = 0; i < $('#'+id).children('option').length; i++) {
+function initSelect(id, dValue) {
+    for (var i = 0; i < $('#' + id).children('option').length; i++) {
 
-        var option = $('#'+id+' :nth-child(' + i + ')');
+        var option = $('#' + id + ' :nth-child(' + i + ')');
         option.prop('selected', option.text() == dValue);
     }
 }
 $(document).ready(function () {
     initToolTips();
-    
+
 });

@@ -8,8 +8,6 @@
 
 
 
-
-
 <script src="/scripts/jquery.formatCurrency-1.1.0.js"></script>
 <script type="text/javascript">
     function init_currency() {
@@ -21,10 +19,22 @@
 
 
     });
-
+    var short_sale_case_data = null;
+    
+    function getShortSaleInstanceComplete(s,e)
+    {
+        short_sale_case_data = $.parseJSON(e.result);
+        
+        var strJson = JSON.stringify(collectDate(short_sale_case_data));
+        alert(strJson);
+        SaveClicklCallbackCallbackClinet.PerformCallback(strJson);
+    }
 </script>
 <dx:ASPxCallback ID="SaveClicklCallback" ClientInstanceName="SaveClicklCallbackCallbackClinet" runat="server" OnCallback="SaveClicklCallback_Callback"></dx:ASPxCallback>
-<input type="hidden" value="<%= shortSaleCaseData.CaseId%>" id="short_sale_case_id"/>
+<dx:ASPxCallback ID="getShortSaleInstance" ClientInstanceName="getShortSaleInstanceClient" runat="server" OnCallback="getShortSaleInstance_Callback">
+    <ClientSideEvents CallbackComplete="getShortSaleInstanceComplete"/>
+</dx:ASPxCallback>
+<input hidden id="short_sale_case_id" value="<%=shortSaleCaseData.CaseId %>"/>
 <div style="padding-top: 5px">
     <div style="height: 850px; overflow: auto;" id="prioity_content">
         <%--refresh label--%>
