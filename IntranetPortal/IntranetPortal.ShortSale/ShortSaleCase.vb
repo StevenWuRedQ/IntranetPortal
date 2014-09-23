@@ -13,6 +13,11 @@
         Get
             If _propInfo Is Nothing Then
                 _propInfo = PropertyBaseInfo.GetInstance(BBLE)
+
+                If _propInfo Is Nothing Then
+                    _propInfo = New PropertyBaseInfo
+                End If
+
             End If
 
             Return _propInfo
@@ -23,19 +28,16 @@
     End Property
 
     Private _mortgages As List(Of PropertyMortgage)
-    Public Property Mortgages As List(Of PropertyMortgage)
+    Public ReadOnly Property Mortgages As List(Of PropertyMortgage)
         Get
             If _mortgages Is Nothing Then
                 Using context As New ShortSaleEntities
-                    Return context.PropertyMortgages.Where(Function(mg) mg.CaseId = CaseId).ToList
+                    _mortgages = context.PropertyMortgages.Where(Function(mg) mg.CaseId = CaseId).ToList
                 End Using
             End If
 
             Return _mortgages
         End Get
-        Set(value As List(Of PropertyMortgage))
-            _mortgages = value
-        End Set
     End Property
 
     Private _processorContact As PartyContact
@@ -65,6 +67,10 @@
 
             If _mortgages IsNot Nothing Then
                 For Each mg In _mortgages
+                    If mg.CaseId = 0 Then
+                        mg.CaseId = CaseId
+                    End If
+
                     mg.Save()
                 Next
             End If
