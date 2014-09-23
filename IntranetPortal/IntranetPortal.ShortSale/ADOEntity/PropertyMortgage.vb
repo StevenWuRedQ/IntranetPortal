@@ -12,7 +12,7 @@ Imports System.Collections.Generic
 
 Partial Public Class PropertyMortgage
     Public Property MortgageId As Integer
-    Public Property CaseId As Nullable(Of Integer)
+    Public Property CaseId As Integer
     Public Property Lender As String
     Public Property Loan As String
     Public Property LoanAmount As Nullable(Of Decimal)

@@ -81,8 +81,8 @@
           <Key>
             <PropertyRef Name="MortgageId" />
           </Key>
-          <Property Name="MortgageId" Type="int" Nullable="false" />
-          <Property Name="CaseId" Type="int" />
+          <Property Name="MortgageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaseId" Type="int" Nullable="false" />
           <Property Name="Lender" Type="nvarchar" MaxLength="50" />
           <Property Name="Loan" Type="nvarchar" MaxLength="50" />
           <Property Name="LoanAmount" Type="numeric" Precision="18" Scale="2" />
@@ -257,7 +257,7 @@
             <PropertyRef Name="MortgageId" />
           </Key>
           <Property Name="MortgageId" Type="Int32" Nullable="false" />
-          <Property Name="CaseId" Type="Int32" />
+          <Property Name="CaseId" Type="Int32" Nullable="false" />
           <Property Name="Lender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Loan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LoanAmount" Type="Decimal" Precision="18" Scale="2" />
