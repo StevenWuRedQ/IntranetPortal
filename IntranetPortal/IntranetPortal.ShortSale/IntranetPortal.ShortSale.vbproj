@@ -134,8 +134,12 @@
     </Compile>
     <Compile Include="PartyContact.vb" />
     <Compile Include="PropertyBaseInfo.vb" />
+    <Compile Include="PropertyFloor.vb" />
+    <Compile Include="PropertyMortgage.vb" />
+    <Compile Include="PropertyOwner.vb" />
     <Compile Include="ShortSaleCase.vb" />
     <Compile Include="ShortSaleService.vb" />
+    <Compile Include="Utility.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

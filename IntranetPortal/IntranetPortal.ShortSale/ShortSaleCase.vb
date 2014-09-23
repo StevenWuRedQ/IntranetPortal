@@ -56,38 +56,35 @@
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-                context.Entry(Me).State = Entity.EntityState.Modified
+                Dim obj = context.ShortSaleCases.Find(CaseId)
+                obj = Utility.SaveChangesObj(obj, Me)
+                context.SaveChanges()
             End If
 
             context.SaveChanges()
+
+            If _mortgages IsNot Nothing Then
+                For Each mg In _mortgages
+                    mg.Save()
+                Next
+            End If
+
+            If _propInfo IsNot Nothing Then
+                _propInfo.Save()
+            End If
         End Using
     End Sub
 
     Public Sub SaveChanges()
-        If CaseId > 0 Then
-            Using context As New ShortSaleEntities
-                Dim origCase = context.ShortSaleCases.Find(CaseId)
-                origCase = SaveChangesObj(origCase, Me)
-                context.SaveChanges()
-            End Using
-        End If
+        Save()
+        'If CaseId > 0 Then
+        '    Using context As New ShortSaleEntities
+        '        Dim origCase = context.ShortSaleCases.Find(CaseId)
+        '        origCase = Utility.SaveChangesObj(origCase, Me)
+        '        context.SaveChanges()
+        '    End Using
+        'End If
     End Sub
-
-    Private Function SaveChangesObj(oldObj As Object, newObj As Object) As Object
-        Dim type = oldObj.GetType()
-
-        For Each prop In type.GetProperties
-            Dim newValue = prop.GetValue(newObj)
-            If newValue IsNot Nothing Then
-                Dim oldValue = prop.GetValue(oldObj)
-                If newValue IsNot oldValue Then
-                    prop.SetValue(oldObj, newValue)
-                End If
-            End If
-        Next
-
-        Return oldObj
-    End Function
 
     Public Shared Function SaveCase(ssCase As ShortSaleCase) As Boolean
         Try

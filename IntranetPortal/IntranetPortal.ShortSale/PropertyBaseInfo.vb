@@ -33,11 +33,23 @@
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-                UpdateDate = DateTime.Now
-                context.Entry(Me).State = Entity.EntityState.Modified
+                pbi = Utility.SaveChangesObj(pbi, Me)
+                pbi.UpdateDate = DateTime.Now
             End If
 
             context.SaveChanges()
+
+            If _propFloors IsNot Nothing Then
+                For Each floor In _propFloors
+                    floor.Save()
+                Next
+            End If
+
+            If _owners IsNot Nothing Then
+                For Each owner In _owners
+                    owner.Save()
+                Next
+            End If
         End Using
     End Sub
 
