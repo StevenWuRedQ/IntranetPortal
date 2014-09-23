@@ -25,7 +25,9 @@
         short_sale_case_data = $.parseJSON(e.result);
         short_sale_case_data.PropertyInfo.UpdateBy = "<%=Page.User.Identity.Name%>";
         var strJson = JSON.stringify(collectDate(short_sale_case_data));
-        alert(strJson);
+        if (wx_deubg)
+            alert(strJson);
+
         SaveClicklCallbackCallbackClinet.PerformCallback(strJson);
     }
     function saveComplete(s,e)

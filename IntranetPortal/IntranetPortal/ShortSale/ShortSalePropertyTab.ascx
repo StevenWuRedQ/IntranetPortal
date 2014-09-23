@@ -60,7 +60,7 @@
                 <option value="12">Land</option>
             </select>
             <script>
-                alert('<%=propertyInfo.BuildingType%>')
+                
                 initSelect("key_PropertyInfo_select_BuildingType", '<%=propertyInfo.BuildingType%>');
                 
             </script>

@@ -11,10 +11,11 @@
     $("#" + id).css("display", toSwich ? "initial" : "none");
 
 }
-
+var wx_deubg = false;
 function collectDate(objCase) {
     var obj = new Object();
-    alert(JSON.stringify(objCase))
+    if (wx_deubg)
+        alert(JSON.stringify(objCase));
     if (objCase) {
         obj = objCase;
     }
@@ -25,7 +26,7 @@ function collectDate(objCase) {
     $('.ss_form_input').each(function () {
 
         var id = $(this).attr("id");
-        var debug = id == "key_PropertyInfo_select_BuildingType"; //debug switch
+        var debug = wx_deubg&&id == "key_PropertyInfo_select_BuildingType"; //debug switch
         if (id != null && id.length > 0) {
 
             var t_id = null;
