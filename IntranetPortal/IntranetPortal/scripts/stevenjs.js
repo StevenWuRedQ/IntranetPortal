@@ -25,6 +25,7 @@ function collectDate(objCase) {
     $('.ss_form_input').each(function () {
 
         var id = $(this).attr("id");
+        var debug = id == "key_PropertyInfo_select_BuildingType"; //debug switch
         if (id != null && id.length > 0) {
 
             var t_id = null;
@@ -34,13 +35,16 @@ function collectDate(objCase) {
                 id = id.replace("key_", "");
 
                 t_key = id.split("_")[0];
-                id = id.split("_")[1];
+                id = id.replace(t_key + "_", "");
 
             }
-
+            if (debug)
+                alert("id after repleace ="+id)
             if (id.indexOf("select_") == 0) {
                 t_id = id.split("_")[1];
                 t_data = $(this).find(":selected").text();
+                if (debug)
+                    alert("id = " + id + "is checked =" + t_data)
             } else if (id.indexOf("checkYes_") == 0) {
                 t_id = id.split("_")[1];
                 t_data = $(this).prop("checked");

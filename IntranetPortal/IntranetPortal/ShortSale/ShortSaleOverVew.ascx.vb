@@ -21,11 +21,12 @@ Public Class ShortSaleOverVew
         ShortSaleHomewonerTab.homeOwners = shortSaleCaseData.PropertyInfo.Owners
         ShortSaleMortgageTab.mortgagesData = shortSaleCaseData.Mortgages
         ShortSaleEvictionTab.evictionData = shortSaleCaseData
+        ShortSaleSummaryTab.summaryCase = shortSaleCaseData
     End Sub
 
     Protected Sub SaveClicklCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         Dim res = JsonConvert.DeserializeObject(Of ShortSaleCase)(e.Parameter)
-       
+
         res.SaveChanges()
     End Sub
     Public Function getShortSaleJson(data As ShortSaleCase) As String

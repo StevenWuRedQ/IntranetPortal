@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleSummaryTab.ascx.vb" Inherits="IntranetPortal.ShortSaleSummaryTab" %>
+<%@ Import Namespace="IntranetPortal" %>
 <script>
    
 </script>
@@ -9,35 +10,39 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item" style="width: 100%">
             <label class="ss_form_input_title">address</label>
-            <input class="ss_form_input" style="width: 93.5%;" name="lender" value="151-04 Main St, Flushing,NY 11367">
+           
+            <input class="ss_form_input" style="width: 93.5%;" name="lender"
+                 value="<%=summaryCase.PropertyInfo.Number + summaryCase.PropertyInfo.StreetName+","+ summaryCase.PropertyInfo.City+","+ summaryCase.PropertyInfo.State+","+summaryCase.PropertyInfo.Zipcode%>">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Block</label>
-            <input class="ss_form_input" value="3341">
+            <input class="ss_form_input" value="<%=summaryCase.PropertyInfo.Block%>">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">lot</label>
-            <input class="ss_form_input" value="1795548554">
+            <input class="ss_form_input" value="<%=summaryCase.PropertyInfo.Block%>">
         </li>
         <li class="ss_form_item">
-            <label class="ss_form_input_title">Accessibility</label>
+            <label class="ss_form_input_title" id="none_summary_accessibity">Accessibility</label>
             <select class="ss_form_input">
                 <option value="volvo">Lockbox - LOC</option>
                 <option value="saab">Master Key</option>
                 <option value="mercedes">Homeowner's key</option>
-
             </select>
+            <script>
+                initSelect("none_summary_accessibity",'<%=summaryCase.PropertyInfo.Accessibility%>');
+            </script>
         </li>
         <li class="ss_form_item">
             <span class="ss_form_input_title">c/o(<span class="link_pdf">pdf</span>)</span>
 
-            <input type="radio" id="pdf_check_yes" name="1" value="YES">
+            <input type="radio" id="pdf_check_yes" name="1" <%= ShortSalePage.CheckBox(summaryCase.PropertyInfo.CO)%> value="YES">
             <label for="pdf_check_yes" class="input_with_check">
                 <span class="box_text">Yes </span>
 
             </label>
 
-            <input type="radio" id="pdf_check_no" name="1" value="NO">
+            <input type="radio" id="pdf_check_no" name="1" <%= ShortSalePage.CheckBox( Not summaryCase.PropertyInfo.CO)%> value="NO">
             <label for="pdf_check_no" class="input_with_check">
                 <span class="box_text">No </span>
             </label>
@@ -45,15 +50,13 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Tax class</label>
-            <input class="ss_form_input" value="1">
+            <input class="ss_form_input" value="<%= summaryCase.PropertyInfo.TaxClass%>">
         </li>
 
         <li class="ss_form_item">
             <label class="ss_form_input_title"># of families</label>
-            <input class="ss_form_input" value="Choose number">
+            <input class="ss_form_input" value="<%= summaryCase.PropertyInfo.NumOfFamilies%>">
         </li>
-
-
 
     </ul>
 </div>

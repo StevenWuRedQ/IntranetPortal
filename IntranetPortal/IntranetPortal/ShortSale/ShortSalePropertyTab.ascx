@@ -60,7 +60,7 @@
                 <option value="12">Land</option>
             </select>
             <script>
-
+                alert('<%=propertyInfo.BuildingType%>')
                 initSelect("key_PropertyInfo_select_BuildingType", '<%=propertyInfo.BuildingType%>');
                 
             </script>
@@ -112,7 +112,7 @@
         <li class="ss_form_item">
             <span class="ss_form_input_title">FHA</span>
 
-            <input type="radio" id="key_PropertyInfo_checkYes_FHA" name="FHA1" value="YES" <%=ShortSalePage.CheckBox(propertyInfo.FHA) %>>
+            <input type="radio" id="key_PropertyInfo_checkYes_FHA"  class="ss_form_input" name="FHA1" value="YES" <%=ShortSalePage.CheckBox(propertyInfo.FHA) %>>
             <label for="checkYes_FHA" class="input_with_check"><span class="box_text">Yes</span></label>
 
             <input type="radio" id="none_pdf_checkey_no25" name="FHA1" value="NO"  <%=ShortSalePage.CheckBox( Not propertyInfo.FHA) %> >
