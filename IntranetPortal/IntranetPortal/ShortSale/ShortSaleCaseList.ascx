@@ -31,6 +31,14 @@
         }
     }
 
+    function RefreshContent()
+    {
+        if(caseId != null)
+        {
+            ContentCallbackPanel.PerformCallback(caseId);
+        }
+    }
+
 </script>
 
 <div style="width: 100%; height: 100%;" class="color_gray">
