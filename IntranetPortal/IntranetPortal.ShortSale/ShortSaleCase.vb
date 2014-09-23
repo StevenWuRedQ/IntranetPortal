@@ -9,7 +9,7 @@
     End Sub
 
     Private _propInfo As PropertyBaseInfo
-    Public Property PropertyInfo As PropertyBaseInfo
+    Public ReadOnly Property PropertyInfo As PropertyBaseInfo
         Get
             If _propInfo Is Nothing Then
                 _propInfo = PropertyBaseInfo.GetInstance(BBLE)
@@ -17,9 +17,9 @@
 
             Return _propInfo
         End Get
-        Set(value As PropertyBaseInfo)
-            _propInfo = value
-        End Set
+        'Set(value As PropertyBaseInfo)
+        '    _propInfo = value
+        'End Set
     End Property
 
     Private _mortgages As List(Of PropertyMortgage)
