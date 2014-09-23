@@ -29,5 +29,7 @@ Partial Public Class ShortSaleCase
     Public Property Evivtion As String
     Public Property DateStarted As Nullable(Of Date)
     Public Property LockBoxCode As String
+    Public Property UpdateDate As Nullable(Of Date)
+    Public Property UpdateBy As String
 
 End Class
