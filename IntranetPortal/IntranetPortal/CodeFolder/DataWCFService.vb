@@ -604,7 +604,7 @@ Public Class DataWCFService
 
     Private Shared Function BuildPropertyAddress(asessment As DataAPI.NYC_Assessment) As String
         Try
-            Return Utility.BuildPropertyAddress(asessment.NUMBER, asessment.ST_NAME, asessment.BOROUGH, asessment.NEIGH_NAME, asessment.ZIP)
+            Return IntranetPortal.Core.PropertyHelper.BuildPropertyAddress(asessment.NUMBER, asessment.ST_NAME, asessment.BOROUGH, asessment.NEIGH_NAME, asessment.ZIP)
         Catch ex As Exception
             Throw New Exception("Exception Occured in BuildPropertyAddress: " + ex.Message)
         End Try

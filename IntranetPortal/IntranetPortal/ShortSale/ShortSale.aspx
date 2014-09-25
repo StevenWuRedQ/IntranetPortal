@@ -4,7 +4,7 @@
 <%@ Register Src="~/UserControl/LeadsList.ascx" TagPrefix="uc1" TagName="LeadsList" %>
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
 <%@ Register Src="~/ShortSale/ShortSaleOverVew.ascx" TagPrefix="uc1" TagName="ShortSaleOverVew" %>
-<%@ Register Src="~/ShortSale/Title.ascx" TagPrefix="uc1" TagName="Title" %>
+<%@ Register Src="~/ShortSale/TitleControl.ascx" TagPrefix="uc1" TagName="Title" %>
 <%@ Register Src="~/ShortSale/ShortSaleCaseList.ascx" TagPrefix="uc1" TagName="ShortSaleCaseList" %>
 
 
@@ -94,7 +94,7 @@
                                                                         <uc1:ShortSaleOverVew runat="server" ID="ShortSaleOverVew" />
                                                                     </div>
                                                                     <div class="tab-pane" id="home_owner">
-                                                                        <uc1:Title runat="server" ID="Title" />
+                                                                        <uc1:Title runat="server" ID="ucTitle" />
                                                                     </div>
                                                                     <div class="tab-pane " id="documents">
                                                                         <uc1:DocumentsUI runat="server" ID="DocumentsUI" />

@@ -332,12 +332,10 @@
                         </tr>
                     </table>
                 </EditForm>
-
             </Templates>
-
             <Columns>
                 <dx:GridViewDataColumn FieldName="ActionType" VisibleIndex="0" Caption="" Width="40px">
-                    
+                    <HeaderTemplate></HeaderTemplate>
                     <DataItemTemplate>
                         <%# GetCommentsIconClass(Eval("ActionType"))%>
                     </DataItemTemplate>
@@ -345,7 +343,7 @@
                 </dx:GridViewDataColumn>
                 <dx:GridViewDataTextColumn FieldName="Comments" PropertiesTextEdit-EncodeHtml="false" VisibleIndex="1" FilterCellStyle-Wrap="Default" EditCellStyle-Wrap="False">
                     <HeaderTemplate>
-                        What Happended
+                        Activity History
                     </HeaderTemplate>
                     <PropertiesTextEdit EncodeHtml="False"></PropertiesTextEdit>
                     <EditCellStyle Wrap="False"></EditCellStyle>

@@ -65,7 +65,7 @@ Partial Public Class CustomVerticalAppointmentTemplate
         LayoutAppointmentImages()
     End Sub
     Private Sub PrepareImageContainer()
-        RenderUtils.SetTableSpacings(imageContainer, 1, 0)
+        DevExpress.Web.ASPxClasses.Internal.RenderUtils.SetTableSpacings(imageContainer, 1, 0)
     End Sub
     Private Sub PrepareImageCell(ByVal targetCell As HtmlTableCell)
         targetCell.Attributes.Add("class", "dxscCellWithPadding")

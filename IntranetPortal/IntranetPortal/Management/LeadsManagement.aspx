@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="LeadsManagement.aspx.vb" Inherits="IntranetPortal.LeadsManagement" MasterPageFile="~/Content.Master" %>
 
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>
+<%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
+
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
@@ -240,4 +242,6 @@
     <dx:ASPxCallback runat="server" ID="updateLeadsType" ClientInstanceName="updateLeadsType" OnCallback="updateLeadsType_Callback">
         <ClientSideEvents EndCallback="function(){gridLeads.Refresh();}" />
     </dx:ASPxCallback>
+    
+    <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 </asp:Content>

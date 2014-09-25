@@ -102,4 +102,13 @@ Partial Public Class LeadsManagement
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents updateLeadsType As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+
+    '''<summary>
+    '''LeadsSubMenu control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LeadsSubMenu As Global.IntranetPortal.LeadsSubMenu
 End Class

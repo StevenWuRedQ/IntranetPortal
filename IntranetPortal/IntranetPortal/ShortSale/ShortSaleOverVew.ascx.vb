@@ -10,7 +10,6 @@ Public Class ShortSaleOverVew
 
     End Sub
 
-
     Protected Sub overviewCallbackPanel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
 
     End Sub

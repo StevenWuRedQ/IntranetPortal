@@ -46,7 +46,7 @@
     <%--/*display:none need delete when realse--%>
     <div style="height: 850px; overflow: auto;" id="prioity_content">
         <%--refresh label--%>
-
+        
         <dx:ASPxPanel ID="UpatingPanel" runat="server">
             <PanelCollection>
                 <dx:PanelContent runat="server">
@@ -91,6 +91,14 @@
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
                             <span class="note_text">Water Lien is High - Possible Tenant Issues</span>
+                        </div>
+                        <% i += 1%>
+                        <% End If%>
+
+                        <% If LeadsInfoData.Type.HasValue Then%>
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
+                            <i class="fa fa-exclamation-circle note_img"></i>
+                            <span class="note_text">Leads type: <b> <%= CType(LeadsInfoData.Type, IntranetPortal.LeadsInfo.LeadsType).ToString %></b></span>
                         </div>
                         <% i += 1%>
                         <% End If%>
@@ -429,9 +437,9 @@
                 <Columns>
                     <dx:GridViewDataTextColumn FieldName="Type" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Effective" Settings-AllowSort="False">
-                       <DataItemTemplate>
-                           <%# DateTime.Parse(Eval("Effective")).ToShortDateString %>
-                       </DataItemTemplate>
+                        <DataItemTemplate>
+                            <%# DateTime.Parse(Eval("Effective")).ToShortDateString %>
+                        </DataItemTemplate>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Expiration" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Plaintiff" Settings-AllowSort="False"></dx:GridViewDataTextColumn>

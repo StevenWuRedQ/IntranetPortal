@@ -17,6 +17,7 @@ Public Class ShortSalePage
     Protected Sub ASPxCallbackPanel2_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         ShortSaleCaseData = ShortSaleCase.GetCase(e.Parameter)
         ShortSaleOverVew.BindData(ShortSaleCaseData)
+        ucTitle.BindData(ShortSaleCaseData)
     End Sub
 
     Public Shared Function CheckBox(isChecked As Boolean?) As String

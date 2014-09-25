@@ -62,8 +62,8 @@ Partial Public Class CustomInplaceEditor
         memSubject.Focus()
     End Sub
     Private Sub PrepareMainContainer()
-        RenderUtils.SetTableSpacings(mainContainer, 2, 0)
-        RenderUtils.SetAlignAttributes(buttonContainer, Nothing, "top")
+        DevExpress.Web.ASPxClasses.Internal.RenderUtils.SetTableSpacings(mainContainer, 2, 0)
+        DevExpress.Web.ASPxClasses.Internal.RenderUtils.SetAlignAttributes(buttonContainer, Nothing, "top")
     End Sub
     Private Sub Localize()
         btnSave.ToolTip = ASPxSchedulerLocalizer.GetString(ASPxSchedulerStringId.Form_Save)

@@ -68,8 +68,8 @@ Partial Public Class HorizontalSameDayAppointmentTemplate
 		endTimeClockContainer.Controls.Add(Container.Items.EndTimeClock)
     End Sub
     Private Sub PrepareContainers()
-        RenderUtils.SetTableSpacings(imageContainer, 1, 0)
-        RenderUtils.SetAlignAttributes(statusContainer, Nothing, "top")
+        DevExpress.Web.ASPxClasses.Internal.RenderUtils.SetTableSpacings(imageContainer, 1, 0)
+        DevExpress.Web.ASPxClasses.Internal.RenderUtils.SetAlignAttributes(statusContainer, Nothing, "top")
     End Sub
     Private Sub LayoutAppointmentImages()
         Dim count As Integer = Items.Images.Count

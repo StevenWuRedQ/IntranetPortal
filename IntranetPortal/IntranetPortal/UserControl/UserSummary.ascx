@@ -165,8 +165,8 @@
                         <div align="center" style="background-color: #ff400d;" class="label-summary-info">
                             <table>
                                 <tr>
-                                    <td style="font-weight: 900">
-                                        <%= IntranetPortal.Utility.TotalLeadsCount %>
+                                    <td style="font-weight: 900">                                        
+                                        <%= IntranetPortal.Utility.TotalLeadsCount%>
                                     </td>
                                     <td style="font-weight: 200">&nbsp;Leads
                                     </td>

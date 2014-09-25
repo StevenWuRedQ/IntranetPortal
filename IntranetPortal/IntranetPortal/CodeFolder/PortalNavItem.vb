@@ -132,6 +132,8 @@ Public Class PortalNavItem
                 If IsUserRoles(userName) Then
                     Return True
                 End If
+            Case NavItemType.ShortSale
+                Return True
         End Select
 
         Return False
@@ -160,5 +162,6 @@ Public Class PortalNavItem
         Agent
         Manager
         Office
+        ShortSale
     End Enum
 End Class

@@ -229,7 +229,7 @@ InitialLine:
         Using Context As New Entities
             Dim ld = Context.LeadsInfoes.Find(bble)
             If ld IsNot Nothing Then
-                ld.PropertyAddress = Utility.BuildPropertyAddress(ld.Number, ld.StreetName, ld.Borough, ld.NeighName, ld.ZipCode)
+                ld.PropertyAddress = IntranetPortal.Core.PropertyHelper.BuildPropertyAddress(ld.Number, ld.StreetName, ld.Borough, ld.NeighName, ld.ZipCode)
                 Context.SaveChanges()
             End If
         End Using
