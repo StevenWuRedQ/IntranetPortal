@@ -131,6 +131,8 @@ Public Class DataWCFService
                     'result.ORIG_SQFT as NYC_GLA
                     If result.LAND_SQFT.HasValue AndAlso Not String.IsNullOrEmpty(result.MAX_FAR) AndAlso result.ORIG_SQFT.HasValue Then
                         li.UnbuiltSqft = result.LAND_SQFT * CDbl(result.MAX_FAR) - result.ORIG_SQFT
+
+                        LeadsInfo.AddIndicator("UnderBuilt", li)
                     End If
 
                     'Dim salesInfo = client.Acris_Get_LatestSale(bble)

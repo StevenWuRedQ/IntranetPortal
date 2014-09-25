@@ -79,7 +79,7 @@
                 <PanelCollection>
                     <dx:PanelContent>
                         <% Dim i = 0%>
-                        <% If LeadsInfoData.IsHighLiens Then%>
+                       <%-- <% If LeadsInfoData.IsHighLiens Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
                             <span class="note_text">Liens higher than Value</span>
@@ -93,7 +93,7 @@
                             <span class="note_text">Water Lien is High - Possible Tenant Issues</span>
                         </div>
                         <% i += 1%>
-                        <% End If%>
+                        <% End If%>--%>
 
                         <% If LeadsInfoData.Type.HasValue Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>

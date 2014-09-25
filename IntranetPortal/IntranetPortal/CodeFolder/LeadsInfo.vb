@@ -232,6 +232,19 @@
         End Using
     End Function
 
+    Public Sub AddComments(comments As String, userName As String)
+        Using Context As New Entities
+            Dim lc As New LeadsComment
+            lc.Comments = comments
+            lc.CreateBy = userName
+            lc.CreateTime = DateTime.Now
+            lc.BBLE = BBLE
+
+            Context.LeadsComments.Add(lc)
+            Context.SaveChanges()
+        End Using
+    End Sub
+
     Public ReadOnly Property Violation As String
         Get
             If ECBViolationsAmt.HasValue AndAlso ECBViolationsAmt.Value > 0 Then
@@ -259,4 +272,65 @@
             Return Nothing
         End Get
     End Property
+
+    Public Shared Sub AddIndicator(name As String, li As LeadsInfo)
+        Indicators.Where(Function(indi) indi.Name = name).FirstOrDefault.AddIndicator(li)
+    End Sub
+
+    Public Shared ReadOnly Property Indicators As List(Of Indicator)
+        Get
+            Dim str As New List(Of Indicator)
+            str.Add(New Indicator("Mortgage", "Liens higher than Value", Function(li)
+                                                                             Return li.IsHighLiens
+                                                                         End Function))
+
+            str.Add(New Indicator("Water", "Water Lien is High - Possible Tenant Issues", Function(li)
+                                                                                              If li.WaterAmt.HasValue AndAlso li.WaterAmt > 1000 Then
+                                                                                                  Return True
+                                                                                              End If
+
+                                                                                              Return False
+                                                                                          End Function))
+            str.Add(New Indicator("LeadsType", "Leads type: ", Function(li)
+                                                                   If li.Type.HasValue Then
+                                                                       Return True
+                                                                   End If
+
+                                                                   Return False
+                                                               End Function))
+
+            str.Add(New Indicator("UnderBuilt", "The hourse has more underbuilt", Function(li)
+                                                                                      If li.UnbuiltSqft.HasValue And li.NYCSqft.HasValue Then
+                                                                                          Return li.UnbuiltSqft / li.NYCSqft >= 0.5
+                                                                                      End If
+
+                                                                                      Return False
+                                                                                  End Function))
+
+            Return str
+        End Get
+    End Property
+
+    Public Class Indicator
+        Public Property Name As String
+        Public Property Message As String
+        Public Property Formular As IndicatorFormular
+
+        Public Delegate Function IndicatorFormular(li As LeadsInfo) As Boolean
+
+        Public Sub New(indicatorName As String, indicatorMessage As String, visible As IndicatorFormular)
+            Name = indicatorName
+            Message = indicatorMessage
+            Formular = visible
+        End Sub
+
+        Public Sub AddIndicator(leadsData As LeadsInfo)
+            If Formular(leadsData) Then
+                If leadsData.UserComments.Where(Function(um) um.Comments = Message And um.BBLE = leadsData.BBLE).Count = 0 Then
+                    leadsData.AddComments(Message, HttpContext.Current.User.Identity.Name)
+                End If
+            End If
+        End Sub
+    End Class
+
 End Class
