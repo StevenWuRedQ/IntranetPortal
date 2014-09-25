@@ -1,0 +1,28 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <system.web xdt:Transform="InsertIfMissing">
+    <compilation xdt:Transform="InsertIfMissing">
+      <assemblies xdt:Transform="InsertIfMissing">
+        <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(assembly)" assembly="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
+      </assemblies>
+    </compilation>
+    <httpHandlers xdt:Transform="InsertIfMissing">
+      <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(path)" path="handlers/exchange.axd" verb="*" type="ActiveDatabaseSoftware.ActiveQueryBuilder.Web.Server.Handlers.Exchange, ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Server"/>
+    </httpHandlers>
+    <httpModules xdt:Transform="InsertIfMissing">
+      <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" name="ActiveQueryBuilderHttpModule" type="ActiveDatabaseSoftware.ActiveQueryBuilder.Web.Server.HttpModule, ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Server"/>
+    </httpModules>
+  </system.web>
+  <system.webServer xdt:Transform="InsertIfMissing">
+  	<validation xdt:Transform="InsertIfMissing" xdt:Locator="Match(validateIntegratedModeConfiguration)" validateIntegratedModeConfiguration="false" />
+    <handlers xdt:Transform="InsertIfMissing">
+      <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" name="handlers/exchange.axd_*" preCondition="integratedMode" path="handlers/exchange.axd" verb="*" type="ActiveDatabaseSoftware.ActiveQueryBuilder.Web.Server.Handlers.Exchange, ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Server"/>
+    </handlers>
+    <modules xdt:Transform="InsertIfMissing">
+      <remove xdt:Transform="RemoveAll" name="Session" xdt:Locator="Match(name)" />
+      <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(type)" name="Session" type="System.Web.SessionState.SessionStateModule" preCondition="managedHandler"/>
+      <add xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" name="ActiveQueryBuilderHttpModule" type="ActiveDatabaseSoftware.ActiveQueryBuilder.Web.Server.HttpModule, ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Server"/>
+      <remove name="Session"  xdt:Transform="InsertBefore(/configuration/system.webServer/modules/add[@name='Session'])" />
+    </modules>
+  </system.webServer>
+</configuration>

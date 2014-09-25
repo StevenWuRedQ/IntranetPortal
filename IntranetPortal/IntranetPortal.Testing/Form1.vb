@@ -39,8 +39,30 @@ Public Class Form1
         Return propBase
     End Function
 
+    Public Sub SaveChanges()
+        Dim ssCase As New ShortSaleCase
+        ssCase.CaseId = 1
+        ssCase.BBLE = "3080090064"
+        ssCase.CaseName = "testing"
+        ssCase.PropertyInfo.Number = "700"
+
+        Dim mg As New PropertyMortgage
+        mg.Lender = "Bank of America"
+        mg.Loan = "testing"
+        mg.LoanAmount = 750000
+        mg.AuthorizationSent = "test"
+        mg.CreateBy = "Testing"
+
+        ssCase.Mortgages.Add(mg)
+
+        ssCase.Save()
+    End Sub
+
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         SaveProp(txtBBLE.Text)
     End Sub
 
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        SaveChanges()
+    End Sub
 End Class
