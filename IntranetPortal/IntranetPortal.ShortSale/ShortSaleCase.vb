@@ -40,6 +40,35 @@
         End Get
     End Property
 
+    Private _sellerTitle As PropertyTitle
+    Public ReadOnly Property SellerTitle As PropertyTitle
+        Get
+            If _sellerTitle Is Nothing Then
+                _sellerTitle = PropertyTitle.GetTitle(CaseId, PropertyTitle.TitleType.Seller)
+            End If
+
+            Return _sellerTitle
+        End Get
+    End Property
+
+    Private _buyerTitle As PropertyTitle
+    Public ReadOnly Property BuyerTitle As PropertyTitle
+        Get
+            If _buyerTitle Is Nothing Then
+                _buyerTitle = PropertyTitle.GetTitle(CaseId, PropertyTitle.TitleType.Buyer)
+            End If
+
+            Return _buyerTitle
+        End Get
+    End Property
+
+    Private _clearences As List(Of TitleClearence)
+    Public ReadOnly Property Clearences As List(Of TitleClearence)
+        Get
+            Return TitleClearence.GetCaseClearences(CaseId)
+        End Get
+    End Property
+
     Private _processorContact As PartyContact
     Public ReadOnly Property ProcessorContact As PartyContact
         Get
@@ -59,7 +88,7 @@
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
                 Dim obj = context.ShortSaleCases.Find(CaseId)
-                obj = Utility.SaveChangesObj(obj, Me)
+                obj = ShortSaleUtility.SaveChangesObj(obj, Me)
                 context.SaveChanges()
             End If
 

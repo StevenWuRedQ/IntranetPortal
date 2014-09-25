@@ -19,7 +19,7 @@
           <Key>
             <PropertyRef Name="ContactId" />
           </Key>
-          <Property Name="ContactId" Type="int" Nullable="false" />
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="OfficeNO" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
@@ -27,6 +27,7 @@
           <Property Name="Office" Type="nvarchar" MaxLength="50" />
           <Property Name="Cell" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="120" />
+          <Property Name="Type" Type="int" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
@@ -37,6 +38,7 @@
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="50" />
           <Property Name="StreetName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Borough" Type="nvarchar" MaxLength="50" />
           <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="State" Type="nvarchar" MaxLength="50" />
           <Property Name="Zipcode" Type="nchar" MaxLength="5" />
@@ -135,6 +137,7 @@
           <Property Name="TitleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CaseId" Type="int" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactId" Type="int" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="ReportOrderDate" Type="date" />
@@ -177,6 +180,9 @@
           <Property Name="SeqNum" Type="int" Nullable="false" />
           <Property Name="Issue" Type="nvarchar" MaxLength="200" />
           <Property Name="ContactId" Type="int" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactEmail" Type="nvarchar" MaxLength="50" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
@@ -231,6 +237,7 @@
           <Property Name="Address" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Type" Type="Int32" />
         </EntityType>
         <EntityType Name="PropertyFloor">
           <Key>
@@ -317,6 +324,7 @@
           <Property Name="OrderNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ContactId" Type="Int32" />
         </EntityType>
         <EntityType Name="ShortSaleCase">
           <Key>
@@ -355,6 +363,9 @@
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyBaseInfo">
           <Key>
@@ -382,6 +393,7 @@
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Borough" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -403,6 +415,7 @@
           <EntitySetMapping Name="PartyContacts">
             <EntityTypeMapping TypeName="IntranetPortalModel.PartyContact">
               <MappingFragment StoreEntitySet="PartyContacts">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
@@ -490,6 +503,7 @@
           <EntitySetMapping Name="PropertyTitles">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyTitle">
               <MappingFragment StoreEntitySet="PropertyTitles">
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
@@ -532,6 +546,9 @@
           <EntitySetMapping Name="TitleClearences">
             <EntityTypeMapping TypeName="IntranetPortalModel.TitleClearence">
               <MappingFragment StoreEntitySet="TitleClearences">
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
@@ -546,6 +563,7 @@
           <EntitySetMapping Name="PropertyBaseInfoes">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyBaseInfo">
               <MappingFragment StoreEntitySet="PropertyBaseInfo">
+                <ScalarProperty Name="Borough" ColumnName="Borough" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />

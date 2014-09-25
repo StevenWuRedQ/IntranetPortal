@@ -21,5 +21,6 @@ Partial Public Class PartyContact
     Public Property Address As String
     Public Property CreateBy As String
     Public Property CreateDate As Nullable(Of Date)
+    Public Property Type As Nullable(Of Integer)
 
 End Class

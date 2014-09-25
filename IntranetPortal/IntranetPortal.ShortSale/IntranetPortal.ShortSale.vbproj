@@ -117,6 +117,7 @@
     <Compile Include="ADOEntity\TitleClearence.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="CleareneceNote.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -137,8 +138,9 @@
     <Compile Include="PropertyFloor.vb" />
     <Compile Include="PropertyMortgage.vb" />
     <Compile Include="PropertyOwner.vb" />
+    <Compile Include="PropertyTitle.vb" />
     <Compile Include="ShortSaleCase.vb" />
-    <Compile Include="ShortSaleService.vb" />
+    <Compile Include="TitleClearence.vb" />
     <Compile Include="Utility.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +183,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IntranetPortal.Core\IntranetPortal.Core.vbproj">
+      <Project>{5da9a152-6e61-4cde-baf5-6309ed56539a}</Project>
+      <Name>IntranetPortal.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

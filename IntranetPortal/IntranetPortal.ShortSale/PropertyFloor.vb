@@ -7,7 +7,7 @@
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-                obj = Utility.SaveChangesObj(obj, Me)
+                obj = ShortSaleUtility.SaveChangesObj(obj, Me)
             End If
 
             context.SaveChanges()

@@ -21,5 +21,6 @@ Partial Public Class PropertyTitle
     Public Property OrderNumber As String
     Public Property CreateBy As String
     Public Property CreateDate As Nullable(Of Date)
+    Public Property ContactId As Nullable(Of Integer)
 
 End Class

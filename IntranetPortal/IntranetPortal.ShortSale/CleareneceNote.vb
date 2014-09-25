@@ -1,14 +1,13 @@
-﻿Partial Public Class PropertyMortgage
-
+﻿Public Class CleareneceNote
     Public Sub Save()
         Using context As New ShortSaleEntities
-            Dim pbi = context.PropertyMortgages.Find(MortgageId)
+            Dim obj = context.CleareneceNotes.Find(NoteId)
 
-            If pbi Is Nothing Then
+            If obj Is Nothing Then
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-                pbi = ShortSaleUtility.SaveChangesObj(pbi, Me)
+                obj = ShortSaleUtility.SaveChangesObj(obj, Me)
             End If
 
             context.SaveChanges()

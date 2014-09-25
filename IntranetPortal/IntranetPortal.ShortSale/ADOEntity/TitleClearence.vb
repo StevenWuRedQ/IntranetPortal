@@ -19,5 +19,8 @@ Partial Public Class TitleClearence
     Public Property Amount As Nullable(Of Decimal)
     Public Property Status As String
     Public Property Description As String
+    Public Property ContactName As String
+    Public Property ContactNumber As String
+    Public Property ContactEmail As String
 
 End Class

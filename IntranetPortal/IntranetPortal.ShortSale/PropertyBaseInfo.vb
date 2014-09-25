@@ -1,5 +1,11 @@
 ﻿Partial Public Class PropertyBaseInfo
 
+    Public ReadOnly Property PropertyAddress
+        Get
+            Return IntranetPortal.Core.PropertyHelper.BuildPropertyAddress(Number, StreetName, "", City, Zipcode)
+        End Get
+    End Property
+
     Private _propFloors As List(Of PropertyFloor)
     Public ReadOnly Property PropFloors As List(Of PropertyFloor)
         Get
@@ -33,7 +39,7 @@
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-                pbi = Utility.SaveChangesObj(pbi, Me)
+                pbi = ShortSaleUtility.SaveChangesObj(pbi, Me)
                 pbi.UpdateDate = DateTime.Now
             End If
 

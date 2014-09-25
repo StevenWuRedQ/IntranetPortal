@@ -33,5 +33,6 @@ Partial Public Class PropertyBaseInfo
     Public Property CreateBy As String
     Public Property UpdateDate As Nullable(Of Date)
     Public Property UpdateBy As String
+    Public Property Borough As String
 
 End Class
