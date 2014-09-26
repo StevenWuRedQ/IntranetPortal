@@ -63,7 +63,7 @@
             gridLeads.GetRowValues(gridLeads.GetFocusedRowIndex(), 'BBLE', OnGetRowValues);
             postponedCallbackRequired = false;
         }
-       
+
         $("#prioity_content").mCustomScrollbar(
                {
                    theme: "minimal-dark"
@@ -364,22 +364,45 @@
 
 
     // to do by steven
-    function SortLeadsList(s) {
+    function SortLeadsList(s, field) {
         var classDesc = "fa fa-sort-amount-desc icon_btn tooltip-examples";
         var classAsc = "fa fa-sort-amount-asc icon_btn tooltip-examples";
         var sort = s.getAttribute("class");
 
         if (sort.indexOf("-desc") > 0) {
             s.setAttribute("class", classAsc);
-            gridLeads.SortBy("LastUpdate", "ASC");
+            gridLeads.SortBy(field, "ASC");
         }
         else {
             if (sort.indexOf("-asc") > 0) {
                 s.setAttribute("class", classDesc);
-                gridLeads.SortBy("LastUpdate", "DSC");
+                gridLeads.SortBy(field, "DSC");
             }
         }
     }
+
+    function OnSortMenuClick(s,e)
+    {
+        var icon = document.getElementById("btnSortIcon");
+        if (e.item.index == 0) {
+            SortLeadsList(icon, "LastUpdate");
+        }
+
+        if(e.item.index == 1)
+        {
+            SortLeadsList(icon, "LeadsName");
+        }
+
+        if(e.item.index ==2)
+        {           
+            gridLeads.GroupBy("Neighborhood", 0);
+        }
+
+        if (e.item.index == 3) {            
+            gridLeads.GroupBy("EmployeeName", 0);
+        }
+    }
+    
     function expandAllClick(s) {
         if (gridLeads.IsGroupRowExpanded(0)) {
             gridLeads.CollapseAll();
@@ -416,13 +439,13 @@
                 <span style="color: #234b60; font-size: 30px;">
                     <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
                 </span>
-                <div class="icon_right_s">
-                    <i class="fa fa-sort-amount-desc icon_btn tooltip-examples" title="Sort" style="cursor: pointer; font-size: 18px" onclick="SortLeadsList(this)"></i>
+                <div class="icon_right_s">   <%--onclick="SortLeadsList(this)"--%>
+                    <i class="fa fa-sort-amount-desc icon_btn tooltip-examples" title="Sort" style="cursor: pointer; font-size: 18px" id="btnSortIcon" onclick="aspxPopupSortMenu.ShowAtElement(this);"></i>
                     <i class="fa fa-compress icon_btn tooltip-examples" style="font-size: 18px;" title="Expand or Collapse All" onclick="expandAllClick(this)" runat="server" id="divExpand"></i>
                 </div>
             </div>
-
         </div>
+       
         <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
     </div>
@@ -862,6 +885,28 @@
             </dx:PopupControlContentControl>
         </ContentCollection>
     </dx:ASPxPopupControl>
+
+     <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="aspxPopupSortMenu"
+            ShowPopOutImages="false" AutoPostBack="false"
+            ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px"
+            PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
+            <ItemStyle Paddings-PaddingLeft="20px" />
+            <Items>                
+                <dx:MenuItem Text="Date" Name="Date">
+                </dx:MenuItem>
+                <dx:MenuItem Text="Name" Name="Name">
+                </dx:MenuItem>
+                <dx:MenuItem Text="Borough" Name="Borough">
+                </dx:MenuItem>
+                <dx:MenuItem Text="Employee" Name="Employee">
+                </dx:MenuItem>
+                <dx:MenuItem Text="Zip" Name="Zip">
+                </dx:MenuItem>
+                <dx:MenuItem Text="Type" Name="LeadsType">
+                </dx:MenuItem>
+            </Items>
+         <ClientSideEvents ItemClick="OnSortMenuClick" />
+        </dx:ASPxPopupMenu>
 
     <%--  <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
         <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />

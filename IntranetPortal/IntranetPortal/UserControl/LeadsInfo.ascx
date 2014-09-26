@@ -39,7 +39,7 @@
                 OnCallPhoneCallback("RightPhone|" + tmpPhoneNo);
                 SetSameStyle("PhoneLink", "color:green;text-decoration:none;", tmpPhoneNo);
             }
-            
+
             if (e.item.index == 3) {
                 //telphoneLine.style.color = "green";
                 //telphoneLine.style.textDecoration = "none";
@@ -246,7 +246,7 @@
         aspxPopupAddPhoneNum.Hide();
         txtPhoneNoClient.SetText("");
     }
-   
+
 </script>
 <script src="/scripts/stevenjs.js"></script>
 <style type="text/css">
@@ -340,8 +340,7 @@
                                                                     <td style="width: 50%; vertical-align: top">
                                                                         <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo2" />
                                                                     </td>
-                                                                    <td style="border-left:1px solid #b1b2b7;width:8px;">
-                                                                       &nbsp;
+                                                                    <td style="border-left: 1px solid #b1b2b7; width: 8px;">&nbsp;
                                                                     </td>
                                                                     <td style="vertical-align: top">
                                                                         <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo3" />
@@ -355,7 +354,7 @@
                                         </div>
                                         <div class="tab-pane" id="documents">
                                             <uc1:DocumentsUI runat="server" ID="DocumentsUI" Visible="false" />
-                                            <uc1:LeadsDocumentOneDrive runat="server" id="LeadsDocumentOneDrive" />
+                                            <uc1:LeadsDocumentOneDrive runat="server" ID="LeadsDocumentOneDrive" />
                                         </div>
                                     </div>
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="ASPxPopupMenuPhone"
