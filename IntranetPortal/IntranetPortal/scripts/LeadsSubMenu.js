@@ -3,8 +3,7 @@ function ShowCateMenu(s, bble) {
     ASPxPopupMenuCategory.Hide();
     tmpBBLE = bble;
     s.getBoundingClientRect();
-   
-    
+       
     ASPxPopupMenuCategory.ShowAtElement(s);
     var popmenu = ASPxPopupMenuCategory.GetMainElement();    
     var pop_postion = popmenu.getBoundingClientRect();
@@ -18,7 +17,7 @@ function ShowCateMenu(s, bble) {
     }
     else {
         pop_content.className = "dxm-popupMain dxm-popup fix_pop_postion_s";
-    }  
+    }
 }
 
 function SetPopupControlMapURL(url) {
@@ -218,7 +217,6 @@ function SetLeadStatus(status) {
 function OnGetAddressCallbackError(s, e) {
     alert(e.message);
 }
-
 
 var tempAddress = null;
 function OnGetAddressCallbackComplete(s, e) {

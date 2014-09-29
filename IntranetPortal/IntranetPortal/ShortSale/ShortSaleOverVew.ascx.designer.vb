@@ -41,22 +41,31 @@ Partial Public Class ShortSaleOverVew
     Protected WithEvents ShortSaleCaseSavePanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
 
     '''<summary>
-    '''UpatingPanel control.
+    '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UpatingPanel As Global.DevExpress.Web.ASPxPanel.ASPxPanel
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
-    '''hfBBLE control.
+    '''leadsCommentsCallbackPanel control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hfBBLE As Global.System.Web.UI.WebControls.HiddenField
+    Protected WithEvents leadsCommentsCallbackPanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+
+    '''<summary>
+    '''hfCaseId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfCaseId As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
     '''ASPxPopupControl2 control.

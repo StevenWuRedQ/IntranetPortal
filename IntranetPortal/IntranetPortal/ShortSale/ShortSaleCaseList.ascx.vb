@@ -11,4 +11,18 @@ Public Class ShortSaleCaseList
         gridCase.DataSource = IntranetPortal.ShortSale.ShortSaleCase.GetAllCase()
         gridCase.DataBind()
     End Sub
+
+    Public Sub BindCaseList(status As CaseStatus)
+        hfCaseStatus.Value = status
+        gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status)
+        gridCase.DataBind()
+    End Sub
+
+    Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)
+        If gridCase.DataSource Is Nothing Then
+            If Not String.IsNullOrEmpty(hfCaseStatus.Value) Then
+                BindCaseList(hfCaseStatus.Value)
+            End If
+        End If
+    End Sub
 End Class

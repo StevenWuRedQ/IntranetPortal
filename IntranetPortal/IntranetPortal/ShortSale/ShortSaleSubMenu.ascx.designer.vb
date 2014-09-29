@@ -11,50 +11,41 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ShortSaleCaseList
+Partial Public Class ShortSaleSubMenu
 
     '''<summary>
-    '''lblLeadCategory control.
+    '''popupMenuLeads control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+    Protected WithEvents popupMenuLeads As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
 
     '''<summary>
-    '''divExpand control.
+    '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents divExpand As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
-    '''hfCaseStatus control.
+    '''getAddressCallback control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents hfCaseStatus As Global.System.Web.UI.WebControls.HiddenField
+    Protected WithEvents getAddressCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 
     '''<summary>
-    '''gridCase control.
+    '''statusCallback control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridCase As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-
-    '''<summary>
-    '''ShortSaleSubMenu control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ShortSaleSubMenu As Global.IntranetPortal.ShortSaleSubMenu
+    Protected WithEvents statusCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class

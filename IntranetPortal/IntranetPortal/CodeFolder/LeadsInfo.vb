@@ -4,6 +4,12 @@
         Foreclosure = 1
         HasEquity = 2
         TaxLien = 3
+        VacantLand = 4
+        WaterLien = 5
+        UnbuiltProperty = 6
+        VacantHouse = 7
+        StalledProject = 8
+        AEP = 9
     End Enum
 
     'Get assign leads type

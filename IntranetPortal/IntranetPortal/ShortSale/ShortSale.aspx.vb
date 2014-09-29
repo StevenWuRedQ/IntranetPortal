@@ -7,17 +7,19 @@ Public Class ShortSalePage
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
-            ASPxSplitter1.ClientVisible = True
-            Dim leadPanel = ASPxSplitter1.GetPaneByName("leadPanel")
-            leadPanel.Collapsed = False
-            ShortSaleCaseList.BindCaseList()
+            If Not String.IsNullOrEmpty(Request.QueryString("s")) Then
+                Dim status = CType(Request.QueryString("s"), CaseStatus)
+                ShortSaleCaseList.BindCaseList(status)
+            End If
         End If
     End Sub
 
     Protected Sub ASPxCallbackPanel2_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         ShortSaleCaseData = ShortSaleCase.GetCase(e.Parameter)
+        contentSplitter.ClientVisible = True
         ShortSaleOverVew.BindData(ShortSaleCaseData)
         ucTitle.BindData(ShortSaleCaseData)
+        ActivityLogs.BindData(ShortSaleCaseData.BBLE)
     End Sub
 
     Public Shared Function CheckBox(isChecked As Boolean?) As String

@@ -798,6 +798,13 @@
       <DependentUpon>ShortSalePropertyTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ShortSale\ShortSaleSubMenu.ascx.designer.vb">
+      <DependentUpon>ShortSaleSubMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\ShortSaleSubMenu.ascx.vb">
+      <DependentUpon>ShortSaleSubMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ShortSale\ShortSaleSummaryTab.ascx.designer.vb">
       <DependentUpon>ShortSaleSummaryTab.ascx</DependentUpon>
     </Compile>
@@ -1872,6 +1879,7 @@
     <Content Include="ShortSale\ShortSaleOverVew.ascx" />
     <Content Include="ShortSale\ShortSalePartiesTab.ascx" />
     <Content Include="ShortSale\ShortSalePropertyTab.ascx" />
+    <Content Include="ShortSale\ShortSaleSubMenu.ascx" />
     <Content Include="ShortSale\ShortSaleSummaryTab.ascx" />
     <Content Include="ShortSale\TitleControl.ascx" />
     <Content Include="StreetView.aspx" />

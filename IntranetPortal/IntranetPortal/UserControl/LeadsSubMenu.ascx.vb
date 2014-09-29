@@ -53,9 +53,7 @@ Public Class LeadsSubMenu
                 lead.EmployeeID = empId
                 lead.EmployeeName = name
                 Context.SaveChanges()
-
                 LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} reassign this lead from {1} to {2}.", Page.User.Identity.Name, oldOwner, name), bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
-
             End Using
         End If
     End Sub

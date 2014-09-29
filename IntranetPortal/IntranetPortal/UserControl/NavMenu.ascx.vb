@@ -124,6 +124,10 @@ Public Class RefreshLeadsCountHandler
         If name.StartsWith("Team") Then
             Return GetTeamLeadsCount(name, itemText)
         End If
+
+        If name.StartsWith("ShortSale") Then
+            Return GetShortSaleCaseCount(name, itemText)
+        End If
     End Function
 
     Function GetTeamLeadsCount(name As String, itemText As String) As Integer
@@ -166,4 +170,25 @@ Public Class RefreshLeadsCountHandler
 
     End Function
 
+
+    Function GetShortSaleCaseCount(name As String, itemText As String) As Integer
+        Dim tmpStr = name.Split("-")
+
+        If tmpStr.Length > 1 Then
+            Dim type = tmpStr(1)
+
+            Select Case type
+                Case "AssignLeads"
+                    Return 0 'Utility.GetUnAssignedLeadsCount(Office)                
+                Case Else
+                    Dim status As ShortSale.CaseStatus
+
+                    If [Enum].TryParse(Of ShortSale.CaseStatus)(type, status) Then
+                        Return ShortSale.ShortSaleCase.GetCaseCount(status)
+                    Else
+                        Return 0
+                    End If
+            End Select
+        End If
+    End Function
 End Class

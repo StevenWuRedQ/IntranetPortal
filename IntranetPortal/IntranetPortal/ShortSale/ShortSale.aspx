@@ -12,9 +12,9 @@
     <script src="/scripts/stevenjs.js"></script>
 
     <div style="background: url(/images/MyIdealProptery.png) no-repeat center fixed; background-size: 260px, 280px; background-color: #dddddd; width: 100%; height: 100%;">
-        <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientVisible="false" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
+        <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
-                <dx:SplitterPane Name="leadPanel" Collapsed="true" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="2px">
+                <dx:SplitterPane Name="leadPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="2px">
                     <ContentCollection>
                         <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
                             <%--<uc1:LeadsList runat="server" ID="LeadsList" />--%>
@@ -30,7 +30,7 @@
                             <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel2" Height="100%" ClientInstanceName="ContentCallbackPanel" OnCallback="ASPxCallbackPanel2_Callback" EnableCallbackAnimation="true" CssClass="LeadsContentPanel">
                                 <PanelCollection>
                                     <dx:PanelContent ID="PanelContent1" runat="server">
-                                        <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="800px" Width="100%" ClientInstanceName="contentSplitter">
+                                        <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" ClientVisible="false">
                                             <Styles>
                                                 <Pane Paddings-Padding="0">
                                                     <Paddings Padding="0px"></Paddings>

@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleCaseList.ascx.vb" Inherits="IntranetPortal.ShortSaleCaseList" %>
+<%@ Register Src="~/ShortSale/ShortSaleSubMenu.ascx" TagPrefix="uc1" TagName="ShortSaleSubMenu" %>
+
 <script type="text/javascript">
     var postponedCallbackRequired = false;
     var caseId = null;
@@ -59,7 +61,8 @@
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
     </div>
     <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
-        <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="CaseId" SettingsPager-Mode="ShowAllRecords">
+        <asp:HiddenField runat="server" ID="hfCaseStatus" />
+        <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="CaseId" SettingsPager-Mode="ShowAllRecords" OnDataBinding="gridCase_DataBinding">
             <Columns>             
                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
@@ -68,7 +71,7 @@
                 <dx:GridViewDataColumn Width="40px" VisibleIndex="6">
                     <DataItemTemplate>
                         <div class="hidden_icon">
-                            <i class="fa fa-list-alt employee_list_item_icon" style="width: 30px" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>"></i>
+                            <i class="fa fa-list-alt employee_list_item_icon" style="width: 30px" onclick="<%#String.Format("ShowCateMenu(this,{0},'{1}')", Eval("CaseId"), Eval("BBLE"))%>"></i>
                         </div>
                         <%-- <img src="/images/flag1.png" style="width: 16px; height: 16px; vertical-align: bottom" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>" />--%>
                     </DataItemTemplate>
@@ -95,4 +98,5 @@
             <Border BorderStyle="None"></Border>
         </dx:ASPxGridView>
     </div>
+    <uc1:ShortSaleSubMenu runat="server" id="ShortSaleSubMenu" />
    </div>

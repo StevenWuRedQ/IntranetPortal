@@ -11,9 +11,7 @@
     function OnGridFocusedRowChanged() {
         // The values will be returned to the OnGetRowValues() function 
         if (gridLeads.GetFocusedRowIndex() >= 0) {
-
-
-
+            
             if (ContentCallbackPanel.InCallback()) {
                 postponedCallbackRequired = true;
             }
@@ -470,7 +468,6 @@
                                             <i class="fa fa-calendar-o font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
                                         </span>
                                     </td>
-
                                     <td style="padding-left: 10px">
                                         <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")","")%></span>
                                     </td>
