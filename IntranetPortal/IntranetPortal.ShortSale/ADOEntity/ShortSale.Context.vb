@@ -31,5 +31,6 @@ Partial Public Class ShortSaleEntities
     Public Overridable Property ShortSaleCases() As DbSet(Of ShortSaleCase)
     Public Overridable Property TitleClearences() As DbSet(Of TitleClearence)
     Public Overridable Property PropertyBaseInfoes() As DbSet(Of PropertyBaseInfo)
+    Public Overridable Property ShortSaleCaseComments() As DbSet(Of ShortSaleCaseComment)
 
 End Class

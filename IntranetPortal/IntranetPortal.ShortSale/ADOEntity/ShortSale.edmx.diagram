@@ -14,6 +14,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCase" Width="1.5" PointX="8.75" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.TitleClearence" Width="1.5" PointX="10.625" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyBaseInfo" Width="1.5" PointX="4.75" PointY="2.25" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCaseComment" Width="1.5" PointX="6.625" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

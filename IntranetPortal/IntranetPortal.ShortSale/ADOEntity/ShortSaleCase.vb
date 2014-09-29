@@ -22,7 +22,7 @@ Partial Public Class ShortSaleCase
     Public Property BuyerAttorney As Nullable(Of Integer)
     Public Property TitleCompany As Nullable(Of Integer)
     Public Property ClosingDate As Nullable(Of Date)
-    Public Property Status As String
+    Public Property Status As Nullable(Of Integer)
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
     Public Property OccupiedBy As String

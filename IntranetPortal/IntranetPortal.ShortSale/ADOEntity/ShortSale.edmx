@@ -146,6 +146,17 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="ShortSaleCaseComments">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaseId" Type="int" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="200" />
+          <Property Name="OrderIndex" Type="int" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="ShortSaleCases">
           <Key>
             <PropertyRef Name="CaseId" />
@@ -161,7 +172,7 @@
           <Property Name="BuyerAttorney" Type="int" />
           <Property Name="TitleCompany" Type="int" />
           <Property Name="ClosingDate" Type="date" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
           <Property Name="OccupiedBy" Type="nvarchar" MaxLength="50" />
           <Property Name="Evivtion" Type="nvarchar" MaxLength="50" />
           <Property Name="DateStarted" Type="datetime" />
@@ -195,6 +206,7 @@
           <EntitySet Name="PropertyMortgages" EntityType="Self.PropertyMortgages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyOwners" EntityType="Self.PropertyOwners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyTitles" EntityType="Self.PropertyTitles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShortSaleCaseComments" EntityType="Self.ShortSaleCaseComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleCases" EntityType="Self.ShortSaleCases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleClearences" EntityType="Self.TitleClearences" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -212,6 +224,7 @@
           <EntitySet Name="ShortSaleCases" EntityType="IntranetPortalModel.ShortSaleCase" />
           <EntitySet Name="TitleClearences" EntityType="IntranetPortalModel.TitleClearence" />
           <EntitySet Name="PropertyBaseInfoes" EntityType="IntranetPortalModel.PropertyBaseInfo" />
+          <EntitySet Name="ShortSaleCaseComments" EntityType="IntranetPortalModel.ShortSaleCaseComment" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -341,7 +354,7 @@
           <Property Name="BuyerAttorney" Type="Int32" />
           <Property Name="TitleCompany" Type="Int32" />
           <Property Name="ClosingDate" Type="DateTime" Precision="0" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OccupiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -394,6 +407,17 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Borough" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ShortSaleCaseComment">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseId" Type="Int32" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OrderIndex" Type="Int32" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -586,6 +610,18 @@
                 <ScalarProperty Name="StreetName" ColumnName="StreetName" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShortSaleCaseComments">
+            <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCaseComment">
+              <MappingFragment StoreEntitySet="ShortSaleCaseComments">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="OrderIndex" ColumnName="OrderIndex" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="CommentId" ColumnName="CommentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

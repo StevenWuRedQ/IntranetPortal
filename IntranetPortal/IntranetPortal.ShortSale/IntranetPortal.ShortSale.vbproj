@@ -114,6 +114,9 @@
     <Compile Include="ADOEntity\ShortSaleCase.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\ShortSaleCaseComment.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\TitleClearence.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
@@ -140,6 +143,7 @@
     <Compile Include="PropertyOwner.vb" />
     <Compile Include="PropertyTitle.vb" />
     <Compile Include="ShortSaleCase.vb" />
+    <Compile Include="ShortSaleCaseComment.vb" />
     <Compile Include="TitleClearence.vb" />
     <Compile Include="Utility.vb" />
   </ItemGroup>

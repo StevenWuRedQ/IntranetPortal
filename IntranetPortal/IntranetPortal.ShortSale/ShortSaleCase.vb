@@ -80,6 +80,17 @@
         End Get
     End Property
 
+    Private _comments As List(Of ShortSaleCaseComment)
+    Public ReadOnly Property Comments As List(Of ShortSaleCaseComment)
+        Get
+            If _comments Is Nothing Then
+                _comments = ShortSaleCaseComment.GetCaseComments(CaseId)
+            End If
+
+            Return _comments
+        End Get
+    End Property
+
     Public Sub Save()
         Using context As New ShortSaleEntities
             'context.ShortSaleCases.Attach(Me)
@@ -108,6 +119,11 @@
                 _propInfo.Save()
             End If
         End Using
+    End Sub
+
+    Public Sub SaveStatus(status As CaseStatus)
+        Me.Status = status
+        Save()
     End Sub
 
     Public Sub SaveChanges()
@@ -145,4 +161,23 @@
             Return context.ShortSaleCases.ToList
         End Using
     End Function
+
+    Public Shared Function GetCaseByStatus(status As CaseStatus) As List(Of ShortSaleCase)
+        Using context As New ShortSaleEntities
+            Return context.ShortSaleCases.Where(Function(ss) ss.Status = status).ToList
+        End Using
+    End Function
+
+    Public Shared Function GetCaseCount(status As CaseStatus)
+        Return GetCaseByStatus(status).Count
+    End Function
 End Class
+
+Public Enum CaseStatus
+    NewFile = 0
+    FollowUp = 1
+    Active = 2
+    Eviction = 3
+    OnHold = 4
+    Closed = 5
+End Enum
