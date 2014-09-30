@@ -446,7 +446,7 @@ a {
         -moz-transform: scale(1,1);
     }
 
-    80% {
+    60% {
         opacity: 1;
         height: 490px;
         -moz-transform: scale(1,1);
@@ -472,7 +472,7 @@ a {
         -o-transform: scale(1,1);
     }
 
-    80% {
+    60% {
         opacity: 1;
         height: 490px;
         -o-transform: scale(1,1);
@@ -498,7 +498,7 @@ a {
         -webkit-transform: scale(1,1);
     }
 
-    80% {
+    60% {
         opacity: 1;
         height: 490px;
         -webkit-transform: scale(1,1);
@@ -524,7 +524,7 @@ a {
         transform: scale(1,1);
     }
 
-    80% {
+    60% {
         opacity: 1;
         height: 490px;
         transform: scale(1,1);
