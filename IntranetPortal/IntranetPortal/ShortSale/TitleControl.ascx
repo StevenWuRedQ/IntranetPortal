@@ -34,15 +34,6 @@
             document.getElementById("txtBuyerCompanyName").value = titleCompany[0];
             document.getElementById("txtBuyerTitlePhone").value = titleCompany[1];
         }
-
-
-        //for (i = 0; i < selectedValues.length; i++) {
-        //    s = "";
-        //    for (j = 0; j < selectedValues[i].length; j++) {
-        //        s = s + selectedValues[i][j] + "&nbsp;";
-        //    }
-        //    listBox.AddItem(s);
-        //}
     }
 
     var tmpClearenceId = null;
