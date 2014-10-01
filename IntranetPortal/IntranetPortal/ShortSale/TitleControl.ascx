@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TitleControl.ascx.vb" Inherits="IntranetPortal.TitleControl" %>
 <script type="text/javascript">
-    function SelectTitleCompany() {
+    var selectSellerTitle = null;
+    function SelectTitleCompany(isSeleteSellerTitle) {
+        selectSellerTitle = isSeleteSellerTitle;
         ASPxPopupTitleControl.Show();
         gridTitleCompany.Refresh();
     }
@@ -23,8 +25,16 @@
         if (selectedValues.length == 0) return;
 
         var titleCompany = selectedValues[0];
-        document.getElementById("txtSellerCompanyName").value = titleCompany[0];
-        document.getElementById("txtSellerTitlePhone").value = titleCompany[1];
+
+        if (selectSellerTitle) {
+            document.getElementById("txtSellerCompanyName").value = titleCompany[0];
+            document.getElementById("txtSellerTitlePhone").value = titleCompany[1];
+        }
+        else {
+            document.getElementById("txtBuyerCompanyName").value = titleCompany[0];
+            document.getElementById("txtBuyerTitlePhone").value = titleCompany[1];
+        }
+
 
         //for (i = 0; i < selectedValues.length; i++) {
         //    s = "";
@@ -40,6 +50,13 @@
         tmpClearenceId = clearenceId;
         aspxAddNotes.ShowAtElement(element);
     }
+
+    //function BindData()
+    //{       
+    //    var field = ($("input[data-source='case']").attr("data-field"));
+    //    alert(ShortSaleCaseData.CaseId);
+    //    $("input[data-source='case']").val(ShortSaleCaseData[field]);
+    //}
 
 </script>
 <div style="padding-top: 5px">
@@ -65,7 +82,7 @@
                     <span style="margin-left: 19px; font-weight: 300">Jun 9,2014 1:12PM</span>
                 </span>
                 <span class="time_buttons" style="margin-right: 30px; font-weight: 300;" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">Mark As Urgent</span>
-                <span class="time_buttons">See Titile Report</span>
+                <span class="time_buttons">See Title Report</span>
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
             <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;">Started on June 2,1014</span>
@@ -74,8 +91,14 @@
         <%--note list--%>
         <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
         </div>
+
         <div class="short_sale_content">
-            <div class="ss_form">
+            <div class="clearfix">
+                <div style="float: right">
+                    <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='BindData()' />
+                </div>
+            </div>
+            <div class="ss_form" style="display: none">
                 <h4 class="ss_form_title">Property</h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item" style="width: 100%">
@@ -105,23 +128,22 @@
                     </li>
                 </ul>
             </div>
-
-            <div class="ss_form">
-                <h4 class="ss_form_title">Proposed Closeing date</h4>
+            <div class="ss_form" id="ddd">
+                <h4 class="ss_form_title">Proposed Closing date</h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Proposed Closing Date</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.ClosingDate %>">
+                        <input class="ss_form_input" data-field="CaseId" value="<%= ShortSaleCaseData.ClosingDate %>">
                     </li>
                 </ul>
             </div>
 
             <div class="ss_form">
-                <h4 class="ss_form_title">Sellers Title Company <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="SelectTitleCompany()"></i></h4>
+                <h4 class="ss_form_title">Sellers Title Company <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="SelectTitleCompany(true)"></i></h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Company Name</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.SellerTitle.CompanyName%>" id="txtSellerCompanyName">
+                        <input class="ss_form_input" data-field="SellerTitle.CompanyName" value="<%= ShortSaleCaseData.SellerTitle.CompanyName%>" id="txtSellerCompanyName">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
@@ -147,15 +169,15 @@
             </div>
 
             <div class="ss_form">
-                <h4 class="ss_form_title">Buyers Title Company  <i class="fa fa-plus-circle  color_blue_edit collapse_btn"></i></h4>
+                <h4 class="ss_form_title">Buyers Title Company  <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="SelectTitleCompany(false)"></i></h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Company Name</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.BuyerTitle.CompanyName%>">
+                        <input class="ss_form_input" value="<%= ShortSaleCaseData.BuyerTitle.CompanyName%>" id="txtBuyerCompanyName">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.BuyerTitle.Phone%>">
+                        <input class="ss_form_input" value="<%= ShortSaleCaseData.BuyerTitle.Phone%>" id="txtBuyerTitlePhone">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">&nbsp;</label>
@@ -171,13 +193,13 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Order Number</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.BuyerTitle.OrderNumber%>">
+                        <input class="ss_form_input" data-flied="BuyerTitle.OrderNumber" value="<%= ShortSaleCaseData.BuyerTitle.OrderNumber%>">
                     </li>
                 </ul>
             </div>
 
             <div class="ss_form">
-                <h4 class="ss_form_title">Judgment Search </h4>
+                <h4 class="ss_form_title">Judgement Search </h4>
                 <%-- log tables--%>
                 <div>
                     <table class="table">
@@ -550,7 +572,6 @@
                                             </td>
                                         </tr>
                                     </table>
-
                                 </div>
 
                                 <div class="clearence_list_text">
@@ -687,27 +708,27 @@
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">name</label>
-                                    <input class="ss_form_input" value="patrick p." runat="server" id="txtContact">
+                                    <input class="ss_form_input" value="" runat="server" id="txtContact">
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">Office</label>
-                                    <input class="ss_form_input" value="Title Company" runat="server" id="txtCompanyName">
+                                    <input class="ss_form_input" value="" runat="server" id="txtCompanyName">
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">address</label>
-                                    <input class="ss_form_input" value="12-12 45th st,Flushing" runat="server" id="txtAddress">
+                                    <input class="ss_form_input" value="" runat="server" id="txtAddress">
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">office #</label>
-                                    <input class="ss_form_input" value="718-123-123" runat="server" id="txtOffice">
+                                    <input class="ss_form_input" value="" runat="server" id="txtOffice">
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">Cell #</label>
-                                    <input class="ss_form_input" value="347-123-456" runat="server" id="txtCell">
+                                    <input class="ss_form_input" value="" runat="server" id="txtCell">
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">email</label>
-                                    <input class="ss_form_input" value="ttc@example.com" runat="server" id="txtEmail">
+                                    <input class="ss_form_input" value="" runat="server" id="txtEmail">
                                 </li>
                             </ul>
                         </div>
@@ -725,8 +746,8 @@
     </ContentCollection>
     <FooterContentTemplate>
         <div style="height: 30px; vertical-align: central">
-            <span class="time_buttons" onclick="ASPxPopupTitleControl.Hide()">Cancel Select</span>
-            <span class="time_buttons" onclick="SelectCompany()">Confirm Select</span>
+            <span class="time_buttons" onclick="ASPxPopupTitleControl.Hide()">Cancel</span>
+            <span class="time_buttons" onclick="SelectCompany()">Confirm</span>
             <span class="time_buttons" onclick="ShowEditForm()">Add Company</span>
         </div>
     </FooterContentTemplate>
@@ -775,15 +796,30 @@
                         </td>
                     </tr>
                 </table>
-
             </div>
             <div class="clearence_list_text">
-                <div class="clearence_list_title">
-                    Amounts
-                </div>
-                <div class="clearence_list_text14">
-                    <input class="ss_form_input" value="" runat="server" id="txtAmount" style="width: 90%">
-                </div>
+                <table>
+                    <tr>
+                        <td class="clearence_table_td">
+                            <div class="clearence_list_title">
+                                Company Name
+                            </div>
+                            <div class="clearence_list_text14  color_blue_edit">
+                                <input class="ss_form_input" value="" runat="server" id="Text1">
+                            </div>
+                        </td>
+                        <td class="clearence_table_td">
+                            <div class="clearence_list_title">
+                                Amounts
+                            </div>
+                            <div class="clearence_list_text14  color_blue_edit">
+                                <input class="ss_form_input" value="" runat="server" id="txtAmount">
+                            </div>
+                        </td>
+
+                        <td class="clearence_table_td"></td>
+                    </tr>
+                </table>
             </div>
         </dx:PopupControlContentControl>
     </ContentCollection>
@@ -810,7 +846,7 @@
                         <div>
                             <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1">
                                 <ClientSideEvents Click="function(s,e){aspxAddNotes.PerformCallback(tmpClearenceId);}" />
-                            </dx:ASPxButton>                         
+                            </dx:ASPxButton>
                         </div>
 
                     </td>

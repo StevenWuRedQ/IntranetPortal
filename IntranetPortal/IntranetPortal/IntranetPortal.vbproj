@@ -320,6 +320,7 @@
     <Compile Include="CodeFolder\PortalMembership.vb" />
     <Compile Include="CodeFolder\PortalNavItem.vb" />
     <Compile Include="CodeFolder\PortalRoleProvider.vb" />
+    <Compile Include="CodeFolder\ShortSaleManage.vb" />
     <Compile Include="CodeFolder\UserAppointment.vb" />
     <Compile Include="CodeFolder\UserMessage.vb" />
     <Compile Include="CodeFolder\UserTask.vb" />

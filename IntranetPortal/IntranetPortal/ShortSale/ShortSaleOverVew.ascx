@@ -102,7 +102,6 @@
                                             <i class="fa fa-times icon_btn" onclick="aspxAcrisControl.Hide()"></i>
                                         </div>
                                     </div>
-
                                 </HeaderTemplate>
                                 <ContentCollection>
                                     <dx:PopupControlContentControl runat="server">
@@ -182,7 +181,7 @@
                                 <a class="shot_sale_tab_a" href="#home" role="tab" data-toggle="tab">Summary</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Property" role="tab" data-toggle="tab">Property Info</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Mortgages" role="tab" data-toggle="tab">Mortgages</a></li>
-                            <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Homewoner" role="tab" data-toggle="tab">Homewoner</a></li>
+                            <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Homewoner" role="tab" data-toggle="tab">Homeowner</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Eviction" role="tab" data-toggle="tab">Eviction</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Parties" role="tab" data-toggle="tab">Parties</a></li>
                         </ul>

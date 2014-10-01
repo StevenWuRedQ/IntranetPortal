@@ -19,6 +19,11 @@
         aspxAcrisControl.Show();
     }
 
+    function ViewLeads(propBBLE) {
+        var url = '/ViewLeadsInfo.aspx?id=' + propBBLE;
+        window.open(url, 'View Leads Info', 'Width=1350px,Height=930px');
+    }
+
     function init_currency() {
         $('.input_currency').formatCurrency();
     }
@@ -46,7 +51,7 @@
     <%--/*display:none need delete when realse--%>
     <div style="height: 850px; overflow: auto;" id="prioity_content">
         <%--refresh label--%>
-        
+
         <dx:ASPxPanel ID="UpatingPanel" runat="server">
             <PanelCollection>
                 <dx:PanelContent runat="server">
@@ -79,7 +84,7 @@
                 <PanelCollection>
                     <dx:PanelContent>
                         <% Dim i = 0%>
-                       <%-- <% If LeadsInfoData.IsHighLiens Then%>
+                        <%-- <% If LeadsInfoData.IsHighLiens Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
                             <span class="note_text">Liens higher than Value</span>
@@ -95,10 +100,22 @@
                         <% i += 1%>
                         <% End If%>--%>
 
+                        <% If LeadsInfoData.OtherProperties IsNot Nothing AndAlso LeadsInfoData.OtherProperties.Count > 0 Then%>
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8;height:inherit","height:inherit")%>'>
+                            <i class="fa fa-exclamation-circle note_img"></i>
+                            <span class="note_text">Other properties of current owner: </span>
+                            <br />
+                            <% For Each li In LeadsInfoData.OtherProperties%>
+                            <i class="note_img"></i><a href="#" style="font-size: 14px" onclick="ViewLeads(<%= li.BBLE %>);"><%= li.LeadsName %></a><br />
+                            <%Next%>
+                        </div>
+                        <% i += 1%>
+                        <% End If%>
+
                         <% If LeadsInfoData.Type.HasValue Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
-                            <span class="note_text">Leads type: <b> <%= CType(LeadsInfoData.Type, IntranetPortal.LeadsInfo.LeadsType).ToString %></b></span>
+                            <span class="note_text">Leads type: <b><%= CType(LeadsInfoData.Type, IntranetPortal.LeadsInfo.LeadsType).ToString %></b></span>
                         </div>
                         <% i += 1%>
                         <% End If%>

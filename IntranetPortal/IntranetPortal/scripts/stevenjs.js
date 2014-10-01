@@ -9,8 +9,8 @@
     e.className = changeToClass;
 
     $("#" + id).css("display", toSwich ? "initial" : "none");
-
 }
+
 var wx_deubg = false;
 function collectDate(objCase) {
     var obj = new Object();

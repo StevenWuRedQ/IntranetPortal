@@ -32,6 +32,20 @@ Public Class Root
         End Get
     End Property
 
+    Private _sharedBBLEs As String()
+    Public ReadOnly Property SharedBBLEs As String()
+        Get
+            Using Context As New Entities
+                If _sharedBBLEs Is Nothing Then
+                    _sharedBBLEs = Context.SharedLeads.Where(Function(sl) sl.UserName = Page.User.Identity.Name).Select(Function(sl) sl.BBLE).ToArray
+                End If
+
+                Return _sharedBBLEs
+            End Using
+        End Get
+    End Property
+
+
     Public Function HasControl(bble As String)
         Return Employee.HasControlLeads(Page.User.Identity.Name, bble)
     End Function

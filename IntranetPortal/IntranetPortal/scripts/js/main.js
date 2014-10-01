@@ -75,12 +75,7 @@ function mip() {
         $('#portal-sign-in-form').ajaxForm(form_options);
     }
 
-    function afterloginsubmission() {
-        $('.form-validation-message').animate({ "top": "0" }, 500, 'easeOutCirc');
-        $(':input').focus(function () {
-            if ($('.form-validation-message').is(':visible')) $('.form-validation-message').animate({ "top": "-80px" }, 500, 'easeOutCirc');
-        });
-    }
+  
 
 
 
@@ -101,4 +96,10 @@ function mip() {
     });
 }
 
+function afterloginsubmission() {
+    $('.form-validation-message').animate({ "top": "0" }, 500, 'easeOutCirc');
+    $(':input').focus(function () {
+        if ($('.form-validation-message').is(':visible')) $('.form-validation-message').animate({ "top": "-80px" }, 500, 'easeOutCirc');
+    });
+}
 $(document).ready(mip);

@@ -4,6 +4,7 @@
 <script type="text/javascript">
     var postponedCallbackRequired = false;
     var caseId = null;
+    var ShortSaleCaseData = null;
 
     //function is called on changing focused row
     function OnGridFocusedRowChanged() {
@@ -23,12 +24,35 @@
         }
     }
 
+    function GetShortSaleData(caseId) {
+        $.ajax({
+            type: "POST",
+            url: "ShortSale.aspx/GetCase",
+            data: '{caseId: ' + caseId + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccess,
+            failure: function (response) {
+                alert(response);
+            },
+            error: function (response) {
+                alert(response);
+            }
+        });
+    }
+
+    function OnSuccess(response) {        
+        ShortSaleCaseData = response;      
+    }
+
     function OnGetRowValues(values) {
         if (values == null) {
             //gridCase.GetValuesOnCustomCallback(gridCase.GetFocusedRowIndex(), OnGetRowValues);
         }
         else {
             caseId = values;
+            GetShortSaleData(caseId);
+
             ContentCallbackPanel.PerformCallback(values);
         }
     }

@@ -1,4 +1,6 @@
 ﻿Imports IntranetPortal.ShortSale
+Imports System.Web.Services
+Imports System.Web.Script.Serialization
 
 Public Class ShortSalePage
     Inherits System.Web.UI.Page
@@ -21,6 +23,14 @@ Public Class ShortSalePage
         ucTitle.BindData(ShortSaleCaseData)
         ActivityLogs.BindData(ShortSaleCaseData.BBLE)
     End Sub
+
+    <WebMethod()> _
+    Public Shared Function GetCase(caseId As String) As String
+        Dim ssCase = ShortSaleCase.GetCase(caseId)
+
+        Dim json As New JavaScriptSerializer
+        Return json.Serialize(ssCase)
+    End Function
 
     Public Shared Function CheckBox(isChecked As Boolean?) As String
         If isChecked Is Nothing Then

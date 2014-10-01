@@ -258,8 +258,14 @@ Public Class LeadsInfo1
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)
                     UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing)
+
+                    'Add leads to short sale section
+                    ShortSaleManage.MoveLeadsToShortSale(bble, Page.User.Identity.Name)
                 Else
                     UpdateLeadStatus(hfBBLE.Value, LeadStatus.InProcess, Nothing)
+
+                    'Add leads to short sale section
+                    ShortSaleManage.MoveLeadsToShortSale(hfBBLE.Value, Page.User.Identity.Name)
                 End If
             End If
 

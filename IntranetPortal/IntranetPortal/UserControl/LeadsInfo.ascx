@@ -424,11 +424,11 @@
                                                 <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                 <li style="margin-right: 30px; color: #7396a9; float: right">
                                                     <i class="fa fa-calendar-o sale_head_button tooltip-examples" title="Schedule" onclick="ASPxPopupScheduleClient.ShowAtElement(this);"></i>
-                                                    <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus(1)"></i>
+                                                    <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus(5)"></i>
                                                     <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
-                                                    <i class="fa fa-sign-in  sale_head_button sale_head_button_left tooltip-examples" title="Door Knock" onclick="SetLeadStatus(2)"></i>
-                                                    <i class="fa fa-refresh sale_head_button sale_head_button_left tooltip-examples" title="In Process" onclick="SetLeadStatus(5)"></i>
-                                                    <i class="fa fa-times-circle sale_head_button sale_head_button_left tooltip-examples" title="Dead Lead" onclick="SetLeadStatus(4)"></i>
+                                                    <i class="fa fa-sign-in  sale_head_button sale_head_button_left tooltip-examples" title="Door Knock" onclick="SetLeadStatus(4)"></i>
+                                                    <i class="fa fa-refresh sale_head_button sale_head_button_left tooltip-examples" title="In Process" onclick="aspxPopupInprocessClient.Show();"></i>
+                                                    <i class="fa fa-times-circle sale_head_button sale_head_button_left tooltip-examples" title="Dead Lead" onclick="SetLeadStatus(6)"></i>
                                                     <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                                 </li>
                                             </ul>
@@ -643,6 +643,7 @@
                     </dx:SplitterPane>
                 </Panes>
             </dx:ASPxSplitter>
+
             <dx:ASPxPopupControl ClientInstanceName="AspxPopupShareleadClient" Width="356px" Height="450px" ID="aspxPopupShareleads"
                 HeaderText="Share Lead" Modal="true" ContentUrl="~/PopupControl/ShareLeads.aspx"
                 runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -658,6 +659,39 @@
                     </div>
 
                 </HeaderTemplate>
+            </dx:ASPxPopupControl>
+
+            <dx:ASPxPopupControl ClientInstanceName="aspxPopupInprocessClient" Width="356px" Height="350px" ID="ASPxPopupControl3"
+                HeaderText="Share Lead" Modal="true" ShowFooter="true"
+                runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+                <HeaderTemplate>
+                    <div class="clearfix">
+                        <div class="pop_up_header_margin">
+                            <i class="fa fa-mail-forward with_circle pop_up_header_icon"></i>
+                            <span class="pop_up_header_text">In Process</span>
+                        </div>
+                        <div class="pop_up_buttons_div">
+                            <i class="fa fa-times icon_btn" onclick="aspxPopupInprocessClient.Hide()"></i>
+                        </div>
+                    </div>
+                </HeaderTemplate>
+                <ContentCollection>
+                    <dx:PopupControlContentControl>
+                        <dx:ASPxCheckBoxList  ID="lbSelectionMode" runat="server" AutoPostBack="false" Border-BorderStyle="None">
+                            <Items>                                
+                                <dx:ListEditItem Text="Short Sale" Value="0" />
+                                <dx:ListEditItem Text="Evition" Value="1" />
+                                <dx:ListEditItem Text="Construction" Value="2" />
+                            </Items>
+                        </dx:ASPxCheckBoxList>
+                    </dx:PopupControlContentControl>
+                </ContentCollection>
+                <FooterContentTemplate>
+                    <div style="height: 30px; vertical-align: central">
+                        <span class="time_buttons" onclick="aspxPopupInprocessClient.Hide()">Cancel</span>
+                        <span class="time_buttons" onclick="aspxPopupInprocessClient.Hide();SetLeadStatus(7);">Confirm</span>
+                    </div>
+                </FooterContentTemplate>
             </dx:ASPxPopupControl>
 
             <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddPhoneNum" Width="200px" Height="80px" ID="ASPxPopupControl2"

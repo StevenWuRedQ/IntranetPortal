@@ -232,6 +232,18 @@
         End Get
     End Property
 
+    Public ReadOnly Property OtherProperties As List(Of LeadsInfo)
+        Get
+            Using context As New Entities
+                If Not String.IsNullOrEmpty(Owner) Then
+                    Return context.LeadsInfoes.Where(Function(li) (li.Owner = Owner) And li.BBLE <> BBLE).ToList
+                End If
+
+                Return Nothing
+            End Using
+        End Get
+    End Property
+
     Public Shared Function GetInstance(bble As String) As LeadsInfo
         Using context As New Entities
             Return context.LeadsInfoes.Where(Function(b) b.BBLE = bble).SingleOrDefault

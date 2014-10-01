@@ -109,7 +109,7 @@
                                                                         <dx:MenuItem Text="Call Phone" Name="Call">
                                                                         </dx:MenuItem>
                                                                         <dx:MenuItem Text="# doesn't work" Name="nonWork">
-                                                                        </dx:MenuItem>
+                                                                       </dx:MenuItem>
                                                                         <dx:MenuItem Text="Working Phone number" Name="Work">
                                                                         </dx:MenuItem>
                                                                         <dx:MenuItem Text="Undo" Name="Undo">
@@ -167,9 +167,7 @@
                                                                         </ul>
                                                                         <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
                                                                     </div>
-
-
-
+                                                                    
                                                                     <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
                                                                         AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                                                         ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">

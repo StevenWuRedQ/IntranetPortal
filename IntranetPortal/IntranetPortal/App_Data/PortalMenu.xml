@@ -197,28 +197,33 @@
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="ShortSale-FollowUp" Text="Follow Up" NavigationUrl="/ShortSale/ShortSale.aspx?s=1" ShowAmount="true">
+        <UserRoles>ShortSale-Processor;ShortSale-Negotiator</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-rotate-right"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="ShortSale-ActiveCase" Text="Active Cases" NavigationUrl="/ShortSale/ShortSale.aspx?s=2" ShowAmount="false">
+        <UserRoles>ShortSale-Processor;ShortSale-Negotiator</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-rotate-right"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="ShortSale-NewFile" Text="New File" NavigationUrl="/ShortSale/ShortSale.aspx?s=0" ShowAmount="true">
+        <UserRoles>ShortSale-Processor;ShortSale-Negotiator</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-rotate-right"></i>]]>
         </FontClass>
       </PortalNavItem>
 
       <PortalNavItem Name="ShortSale-Upcoming" Text="Upcoming Approvals" NavigationUrl="/ShortSale/ShortSale.aspx" ShowAmount="false">
+        <UserRoles>ShortSale-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-rotate-right"></i>]]>
         </FontClass>
       </PortalNavItem>
 
       <PortalNavItem Name="ShortSale-AssignNewCase" Text="Assign New Case" NavigationUrl="/ShortSale/ShortSale.aspx" ShowAmount="false">
+        <UserRoles>ShortSale-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-rotate-right"></i>]]>
         </FontClass>
