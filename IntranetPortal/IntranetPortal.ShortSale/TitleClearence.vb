@@ -15,7 +15,7 @@
     Public ReadOnly Property Notes As List(Of CleareneceNote)
         Get
             Using context As New ShortSaleEntities
-                Return context.CleareneceNotes.Where(Function(nt) nt.ClearenceId = ClearenceId).ToList
+                Return context.CleareneceNotes.Where(Function(nt) nt.ClearenceId = ClearenceId).OrderByDescending(Function(nt) nt.CreateDate).ToList
             End Using
         End Get
     End Property

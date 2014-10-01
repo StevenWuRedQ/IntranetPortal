@@ -93,7 +93,15 @@
 
     Public Sub Save()
         Using context As New ShortSaleEntities
-            'context.ShortSaleCases.Attach(Me)
+            If CaseId = 0 Then
+                If Not String.IsNullOrEmpty(BBLE) Then
+                    Dim tmpCase = context.ShortSaleCases.Where(Function(ss) ss.BBLE = BBLE).FirstOrDefault
+                    If tmpCase IsNot Nothing Then
+                        CaseId = tmpCase.CaseId
+                    End If
+                End If
+            End If
+
             If CaseId = 0 Then
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
