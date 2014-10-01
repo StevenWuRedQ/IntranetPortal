@@ -42,7 +42,8 @@
     }
 
     function OnSuccess(response) {        
-        ShortSaleCaseData = JSON.parse(response.d);      
+        ShortSaleCaseData = JSON.parse(response.d);
+        ShortSaleDataBand();
     }
 
     function OnGetRowValues(values) {

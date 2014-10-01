@@ -175,11 +175,7 @@
           <![CDATA[<i class="fa fa-group"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ShortSale" Text="Short Sales" NavigationUrl="/ShortSale/ShortSale.aspx" ShowAmount="false">
-        <FontClass>
-          <![CDATA[<i class="fa fa-folder-open"></i>]]>
-        </FontClass>
-      </PortalNavItem>
+      
       <PortalNavItem Name="Calendar" Text="Calendar" NavigationUrl="/Calendar.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-calendar"></i>]]>
