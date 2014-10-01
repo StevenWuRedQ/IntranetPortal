@@ -18,11 +18,11 @@
 
 <div style="color: #999ca1;">
     <div style="padding: 35px 20px 35px 20px;" class="border_under_line">
-        
+
         <div style="width: 100%">
             <div class="font_30">
                 <i class="fa fa-file"></i>&nbsp;
-                                            <span class="font_light">Documents</span>
+                <span class="font_light">Documents</span>
             </div>
             <div style="padding-left: 39px;" class="clearfix">
                 <span style="font-size: 14px;"><%= LeadsName %></span>

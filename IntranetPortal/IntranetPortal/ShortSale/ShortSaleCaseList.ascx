@@ -42,7 +42,7 @@
     }
 
     function OnSuccess(response) {        
-        ShortSaleCaseData = response;      
+        ShortSaleCaseData = JSON.parse(response.d);      
     }
 
     function OnGetRowValues(values) {
@@ -53,7 +53,7 @@
             caseId = values;
             GetShortSaleData(caseId);
 
-            ContentCallbackPanel.PerformCallback(values);
+            //ContentCallbackPanel.PerformCallback(values);
         }
     }
 

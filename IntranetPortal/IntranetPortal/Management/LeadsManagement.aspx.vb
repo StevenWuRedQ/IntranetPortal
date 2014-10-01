@@ -96,6 +96,8 @@ Public Class LeadsManagement
 
             listboxEmployee.DataSource = Employee.GetDeptUsersList(office)
             listboxEmployee.DataBind()
+
+            AddDeadLeadsFolderToEmpList()
         End Using
     End Sub
 
@@ -104,6 +106,8 @@ Public Class LeadsManagement
             If Page.User.IsInRole("Admin") Then
                 listboxEmployee.DataSource = Context.Employees.Where(Function(emp) emp.Active = True Or emp.Name.EndsWith("Office")).ToList.OrderBy(Function(em) em.Name)
                 listboxEmployee.DataBind()
+                AddDeadLeadsFolderToEmpList()
+
                 Return
             End If
 
@@ -118,6 +122,8 @@ Public Class LeadsManagement
 
             listboxEmployee.DataSource = emps
             listboxEmployee.DataBind()
+
+            AddDeadLeadsFolderToEmpList()
         End Using
     End Sub
 
@@ -128,6 +134,13 @@ Public Class LeadsManagement
 
         listboxEmployee.DataSource = emps
         listboxEmployee.DataBind()
+
+        AddDeadLeadsFolderToEmpList()
+    End Sub
+
+    Sub AddDeadLeadsFolderToEmpList()
+        Dim dealleads = Employee.GetInstance("Dead Leads")
+        listboxEmployee.Items.Add(New ListEditItem(dealleads.Name, dealleads.EmployeeID))
     End Sub
 
     Protected Sub btnAssign_Click(sender As Object, e As EventArgs) Handles btnAssign.Click
@@ -232,5 +245,5 @@ Public Class LeadsManagement
         End Get
     End Property
 
-    
+
 End Class

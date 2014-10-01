@@ -302,21 +302,39 @@
 
         <%--zestimat form--%>
         <div style="margin: 20px;" class="clearfix">
+            <div class="form_head" style="margin-top: 40px;">REFERRAL</div>
+            
+            <%--line 1--%>
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Name</span>
+                <input class="text_input" value="" />
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Phone No.</span>
+                <input class="text_input" value="" />
+            </div>
+
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Email</span>
+                <input class="text_input" value="" />
+            </div>
+
+            <%----end line ----%>
+        </div>
+        <%-------end-----------%>
+
+         <%--zestimat form--%>
+        <div style="margin: 20px;" class="clearfix">
             <div class="form_head" style="margin-top: 40px;">Value</div>
-
-
-
             <%--line 1--%>
             <div class="form_div_node form_div_node_line_margin">
                 <span class="form_input_title">Zestimate</span>
                 <input class="text_input input_currency" onblur="$(this).formatCurrency();" type="text" value="$<%=LeadsInfoData.EstValue %>" />
             </div>
-
-
-
             <%----end line ----%>
         </div>
-        <%-------end-----------%>
+
         <%--Mortgage form--%>
         <div style="margin: 20px;" class="clearfix">
             <div class="form_head" style="margin-top: 40px;">MORTGAGE AND VIOLATIONS</div>

@@ -39,7 +39,10 @@ Public Class QueryBuilder
     End Sub
 
     Public Sub BindGrid()
-        Dim sql = SQLEditor1.SQL
+        Dim sql = QueryBuilderControl1.QueryBuilder.SQL   ' SQLEditor1.SQL
+        If String.IsNullOrEmpty(sql) Then
+            Return
+        End If
 
         Dim sqlConn As New SqlConnection(connStr)
         Dim sqlCmd As New SqlCommand(sql, sqlConn)
@@ -63,4 +66,7 @@ Public Class QueryBuilder
         End If
     End Sub
 
+    Protected Sub btnExport_Click(sender As Object, e As EventArgs)
+        gridExport.WriteXlsToResponse()
+    End Sub
 End Class

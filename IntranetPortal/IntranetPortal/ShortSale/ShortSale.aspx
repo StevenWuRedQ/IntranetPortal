@@ -30,7 +30,7 @@
                             <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel2" Height="100%" ClientInstanceName="ContentCallbackPanel" OnCallback="ASPxCallbackPanel2_Callback" EnableCallbackAnimation="true" CssClass="LeadsContentPanel">
                                 <PanelCollection>
                                     <dx:PanelContent ID="PanelContent1" runat="server">
-                                        <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" ClientVisible="false">
+                                        <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" ClientVisible="true">
                                             <Styles>
                                                 <Pane Paddings-Padding="0">
                                                     <Paddings Padding="0px"></Paddings>
@@ -270,7 +270,6 @@
                     </div>
 
                     <div style="margin-top: 27px; height: 290px; /*background: blue*/">
-
                         <ul style="margin-left: -40px; margin-top: 10px;">
                             <li class="employee_list_item employee_list_item_no_broder">
                                 <div class="employee_list_item_div">

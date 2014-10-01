@@ -22,6 +22,8 @@ Public Class ShortSalePage
         ShortSaleOverVew.BindData(ShortSaleCaseData)
         ucTitle.BindData(ShortSaleCaseData)
         ActivityLogs.BindData(ShortSaleCaseData.BBLE)
+        DocumentsUI.BindFileList(ShortSaleCaseData.BBLE)
+        DocumentsUI.LeadsName = ShortSaleCaseData.CaseName
     End Sub
 
     <WebMethod()> _

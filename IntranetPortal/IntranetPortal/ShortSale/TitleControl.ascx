@@ -42,12 +42,11 @@
         aspxAddNotes.ShowAtElement(element);
     }
 
-    //function BindData()
-    //{       
-    //    var field = ($("input[data-source='case']").attr("data-field"));
-    //    alert(ShortSaleCaseData.CaseId);
-    //    $("input[data-source='case']").val(ShortSaleCaseData[field]);
-    //}
+    function BindData()
+    {
+        var field = ($("input[data-source='ShortSaleCase']").attr("data-field"));     
+        $("input[data-source='ShortSaleCase']").val(ShortSaleCaseData[field]);
+    }
 
 </script>
 <div style="padding-top: 5px">
@@ -124,7 +123,7 @@
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Proposed Closing Date</label>
-                        <input class="ss_form_input" data-field="CaseId" value="<%= ShortSaleCaseData.ClosingDate %>">
+                        <input class="ss_form_input" data-source="ShortSaleCase" data-field="CaseId" value="<%= ShortSaleCaseData.ClosingDate %>">
                     </li>
                 </ul>
             </div>
@@ -348,7 +347,15 @@
                                                                 <%= clearence.Contact.Email%>
                                                             </div>
                                                         </td>
-                                                    </tr>
+                                                        <td class="clearence_table_td">
+                                                            <div class="clearence_list_title">
+                                                                Company Name
+                                                            </div>
+                                                            <div class="clearence_list_text14">
+                                                                <%= clearence.Contact.CorpName%>
+                                                            </div>
+                                                        </td>
+                                                    </tr>                                                   
                                                 </table>
                                             </div>
                                             <% End If%>
@@ -389,288 +396,7 @@
                                     </div>
                                 </div>
                                 <% Next%>
-
-                                <%--    <div class="clearence_list_item">
-                        <div class="clearence_list_content clearfix">
-                            <div class="clearence_list_index">
-                                2
-                            </div>
-
-                            <div class="clearence_list_right">
-                                <div class="clearence_list_text">
-                                    <div class="clearence_list_title">
-                                        Issue(Cleared)
-                                    </div>
-                                    <div class="clearence_list_text18" style="text-decoration: line-through">
-                                        Title in Jaime Torres and Tahnee Torres
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="clearence_list_text">
-                                    <div class="clearence_list_title">
-                                        Amounts
-                                    </div>
-                                    <div class="clearence_list_text14" style="text-decoration: line-through">
-                                        $191,500.00
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>--%>
-
-                                <%--       <div class="clearence_list_item">
-                        <div class="clearence_list_content clearfix">
-                            <div class="clearence_list_index">
-                                3
-                            </div>
-
-                            <div class="clearence_list_right">
-                                <div class="clearence_list_text">
-                                    <div class="clearence_list_title">
-                                        Issue
-                                    </div>
-                                    <div class="clearence_list_text18">
-                                        One open mortgage
-                                    </div>
-                                </div>
-                                <div class="clearence_list_text">
-                                    <table>
-                                        <tr>
-                                            <td class="clearence_table_td">
-                                                <div class="clearence_list_title">
-                                                    Contact Name
-                                                </div>
-                                                <div class="clearence_list_text14">
-                                                    Michael Moore
-                                                </div>
-                                            </td>
-                                            <td class="clearence_table_td">
-                                                <div class="clearence_list_title">
-                                                    Contact Number
-                                                </div>
-                                                <div class="clearence_list_text14">
-                                                    718-123-4567
-                                                </div>
-                                            </td>
-                                            <td class="clearence_table_td">
-                                                <div class="clearence_list_title">
-                                                    Contact Email
-                                                </div>
-                                                <div class="clearence_list_text14">
-                                                    &nbsp;
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-
-                                </div>
-
-                                <div class="clearence_list_text">
-                                    <div class="clearence_list_title">
-                                        notes
-                                    </div>
-                                    <div class="clearence_list_text14">
-                                        <i class="fa fa-caret-right clearence_caret_right_icon"></i>
-                                        <span class="clearence_list_text14">Contacted lenders attorney and requested payoff
-                                            <br />
-                                            <i class="fa fa-caret-right clearence_caret_right_icon" style="visibility: hidden"></i>
-                                            <span class="clearence_list_text12">7/23/2014 by Ron Borovinsky
-                                            </span>
-
-                                        </span>
-                                        <br />
-
-                                        <i class="fa fa-caret-right clearence_caret_right_icon"></i>
-                                        <span class="clearence_list_text14">Followed up, no payoff provided yet
-                                            <br />
-                                            <i class="fa fa-caret-right clearence_caret_right_icon" style="visibility: hidden"></i>
-                                            <span class="clearence_list_text12">7/24/2014 by Ron Borovinsky
-                                            </span>
-
-                                        </span>
-                                        <br />
-                                        <i class="fa fa-caret-right clearence_caret_right_icon"></i>
-                                        <span class="clearence_list_text14">Payoff received
-                                            <br />
-                                            <i class="fa fa-caret-right clearence_caret_right_icon" style="visibility: hidden"></i>
-                                            <span class="clearence_list_text12">7/25/2014 by Ron Borovinsky
-                                            </span>
-
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="clearence_list_text">
-                                    <div class="clearence_list_title">
-                                        Amounts
-                                    </div>
-                                    <div class="clearence_list_text14">
-                                        $1,768.50
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                    <%--index 4 edit model--%>
-                                <%--         <div class="clearence_list_item">
-                        <div class="clearence_list_content clearfix">
-                            <div class="clearence_list_index  color_blue_edit">
-                                4
-                            </div>
-
-                            <div class="clearence_list_right">
-                                <div class="clearence_list_text">
-                                    <div class="clearence_list_title">
-                                        Issue
-                                    </div>
-                                    <div class="clearence_list_text18  color_blue_edit">
-                                        2561 Morgan Avenue, Bronx NY
-                                    </div>
-                                </div>
-                                <div class="clearence_list_text">
-                                    <table>
-                                        <tr>
-                                            <td class="clearence_table_td">
-                                                <div class="clearence_list_title">
-                                                    Contact Name
-                                                </div>
-                                                <div class="clearence_list_text14  color_blue_edit">
-                                                    Michael Moore
-                                                </div>
-                                            </td>
-                                            <td class="clearence_table_td">
-                                                <div class="clearence_list_title">
-                                                    Contact Number
-                                                </div>
-                                                <div class="clearence_list_text14  color_blue_edit">
-                                                    718-123-4567
-                                                </div>
-                                            </td>
-                                            <td class="clearence_table_td">
-                                                <div class="clearence_list_title">
-                                                    Contact Email
-                                                </div>
-                                                <div class="clearence_list_text14  color_blue_edit">
-                                                    &nbsp;
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-
-                                <div class="clearence_list_text">
-                                    <div class="clearence_list_title">
-                                        notes &nbsp;<i class="fa fa-plus-circle color_blue_edit icon_btn"></i>
-                                    </div>
-                                    <div class="clearence_list_text14">
-                                        <i class="fa fa-caret-right clearence_caret_right_icon"></i>
-                                        <span class="clearence_list_text14  color_blue_edit">Contacted lenders attorney and requested payoff
-                                            <br />
-                                            <i class="fa fa-caret-right clearence_caret_right_icon" style="visibility: hidden"></i>
-                                            <span class="clearence_list_text12">7/23/2014 by Ron Borovinsky
-                                            </span>
-
-                                        </span>
-                                        <br />
-                                        <i class="fa fa-caret-right clearence_caret_right_icon"></i>
-                                        <span class="clearence_list_text14  color_blue_edit">Entering note text |
-                                            <br />
-                                            <i class="fa fa-caret-right clearence_caret_right_icon" style="visibility: hidden"></i>
-                                            <span class="clearence_list_text12">7/23/2014 by Ron Borovinsky
-                                            </span>
-
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="clearence_list_text">
-                                    <div class="clearence_list_title">
-                                        Amounts
-                                    </div>
-                                    <div class="clearence_list_text14  color_blue_edit">
-                                        $1,768.50
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                   
-                    <div class="clearence_list_item">
-                        <div class="clearence_list_content clearfix">
-                            <div class="clearence_list_index">
-                                5
-                            </div>
-
-                            <div class="clearence_list_right">
-                                <div class="clearence_list_text">
-                                    <div class="clearence_list_title">
-                                        Issue
-                                    </div>
-                                    <div class="clearence_list_text18">
-                                        One contract of sale recorded
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-                  
-                    <div class="clearence_list_item">
-                        <div class="clearence_list_content clearfix">
-                            <div class="clearence_list_index">
-                                6
-                            </div>
-
-                            <div class="clearence_list_right">
-                                <div class="clearence_list_text">
-                                    <div class="clearence_list_title">
-                                        Issue
-                                    </div>
-                                    <div class="clearence_list_text18">
-                                        Numerous judgments, PVB'Sand ECB'S vs. Jaime Torres
-                                    </div>
-                                </div>
-
-
-                                <div class="clearence_list_text">
-                                    <div class="clearence_list_title">
-                                        notes
-                                    </div>
-                                    <div class="clearence_list_text14">
-                                        <i class="fa fa-caret-right clearence_caret_right_icon"></i>
-                                        <span class="clearence_list_text14">Verified all judments against adress on ID, drop box and last deed (none o.h)
-                                            <br />
-                                            <i class="fa fa-caret-right clearence_caret_right_icon" style="visibility: hidden"></i>
-                                            <span class="clearence_list_text12">7/23/2014 by Ron Borovinsky
-                                            </span>
-
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="clearence_list_text">
-                                    <div class="clearence_list_title">
-                                        Amounts
-                                    </div>
-                                    <div class="clearence_list_text14">
-                                        $1,768.50
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>--%>
+                                  
                             </div>
                         </dx:PanelContent>
                     </PanelCollection>

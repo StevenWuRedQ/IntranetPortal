@@ -261,6 +261,14 @@
 
         addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + comments.value);
     }
+
+    function OnCommentsKeyDown(e)
+    {
+        if (e.ctrlKey && e.keyCode == 13) {
+            // Ctrl-Enter pressed
+            InsertNewComments();
+        }
+    }
     // ]]>
 </script>
 
@@ -272,7 +280,7 @@
 
         <div style="float: left; height: 110px; min-width: 460px; width: 60%; margin-top: 10px;">
             <div class="clearfix">
-                <span style="color: #295268;" class="upcase_text">Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
+                <span style="color: #295268;" class="upcase_text" >Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
                 <input type="radio" id="sex12" name="sex" value="Fannie" class="font_12" />
                 <label for="sex12" class="font_12">
                     <span class="upcase_text">Internal update</span>
@@ -282,7 +290,7 @@
                     <span class="upcase_text">Public update</span>
                 </label>
             </div>
-            <textarea style="border-radius: 5px; width: 100%; height: 90px; border: 2px solid #dde0e7; padding: 5px; outline: none; resize: none" id="txtComments"></textarea>
+            <textarea title="Press CTRL+ENTER to submit." style="border-radius: 5px; width: 100%; height: 90px; border: 2px solid #dde0e7; padding: 5px; outline: none; resize: none" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
         </div>
         <div class="clearfix" style="width: 100%">
             <div style="float: right">

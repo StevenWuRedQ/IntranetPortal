@@ -10,9 +10,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <dx:ASPxSplitter runat="server" ID="splitter" Width="100%" Height="100%" FullscreenMode="true">
+        <dx:ASPxSplitter runat="server" ID="splitter" Width="100%" Height="100%" FullscreenMode="true" Orientation="Vertical">
             <Panes>
-                <dx:SplitterPane>
+                <dx:SplitterPane Size="570px">
                     <ContentCollection>
                         <dx:SplitterContentControl runat="server">                            
                             <AQB:QueryBuilderControl ID="QueryBuilderControl1" runat="server" OnInit="QueryBuilderControl1_Init" />
@@ -23,15 +23,18 @@
                                         <div id="center">
                                             <AQB:Canvas ID="Canvas1" runat="server" />
                                             <AQB:Grid ID="Grid1" runat="server" />
-                                            <AQB:StatusBar ID="StatusBar1" runat="server" />
+                                            <AQB:StatusBar ID="StatusBar1" runat="server" /> 
+                                            <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Query" OnClick="ASPxButton1_Click">
+                            </dx:ASPxButton>
+                                             <dx:ASPxButton ID="btnExport" runat="server" Text="Export to Excel" OnClick="btnExport_Click">
+                            </dx:ASPxButton>
                                         </div>
                                         <div class="clear"></div>
                                     </div>
                                 </div>
-                                <AQB:SqlEditor ID="SQLEditor1" runat="server"></AQB:SqlEditor>
+                                <AQB:SqlEditor ID="SQLEditor1" runat="server" Visible="false"></AQB:SqlEditor>
                             </div>
-                            <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Query" OnClick="ASPxButton1_Click">
-                            </dx:ASPxButton>
+                           
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
@@ -43,6 +46,7 @@
                                     <dx:GridViewDataColumn></dx:GridViewDataColumn>
                                 </Columns>
                             </dx:ASPxGridView>
+                             <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridResult2"></dx:ASPxGridViewExporter>
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>

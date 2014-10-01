@@ -3,7 +3,6 @@
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
-
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
         var postponedCallbackRequired = false;

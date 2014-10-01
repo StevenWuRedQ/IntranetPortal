@@ -77,15 +77,6 @@ Partial Public Class QueryBuilder
     Protected WithEvents StatusBar1 As Global.ActiveDatabaseSoftware.ActiveQueryBuilder.Web.Control.StatusBar
 
     '''<summary>
-    '''SQLEditor1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SQLEditor1 As Global.ActiveDatabaseSoftware.ActiveQueryBuilder.Web.Control.SqlEditor
-
-    '''<summary>
     '''ASPxButton1 control.
     '''</summary>
     '''<remarks>
@@ -95,6 +86,24 @@ Partial Public Class QueryBuilder
     Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
+    '''btnExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExport As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''SQLEditor1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SQLEditor1 As Global.ActiveDatabaseSoftware.ActiveQueryBuilder.Web.Control.SqlEditor
+
+    '''<summary>
     '''gridResult2 control.
     '''</summary>
     '''<remarks>
@@ -102,4 +111,13 @@ Partial Public Class QueryBuilder
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridResult2 As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''gridExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
 End Class

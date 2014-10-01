@@ -8,8 +8,6 @@
         '    Dim bble = Request.QueryString("bble").ToString
         '    BindFileList(bble)
         'End If
-
-
     End Sub
 
     Public Property LeadsName As String
