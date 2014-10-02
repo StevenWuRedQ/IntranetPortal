@@ -176,19 +176,17 @@
         <div style="margin: 20px" class="clearfix">
             <div class="form_head">General</div>
 
-
             <%--line 1--%>
             <div class="form_div_node" style="width: 63%">
                 <span class="form_input_title">address</span>
-
                 <input class="text_input" value="<%= LeadsInfoData.PropertyAddress%>" />
             </div>
 
             <div class="form_div_node form_div_node_margin">
                 <span class="form_input_title">bble</span>
-
                 <input class="text_input font_black" value="<%= LeadsInfoData.BBLE%>" />
             </div>
+
             <%--end line 1--%>
             <%--line 2--%>
             <div class="form_div_node form_div_node_line_margin">
@@ -298,33 +296,37 @@
             </div>--%>
             <%----end line --%>
         </div>
+
         <%-------end-----%>
+        <dx:ASPxCallbackPanel runat="server" ID="callPanelReferrel" ClientInstanceName="callPanelClientReferrel" OnCallback="callPanelReferrel_Callback">
+            <PanelCollection>
+                <dx:PanelContent>                    
+                    <div style="margin: 20px;" class="clearfix">
+                        <div class="form_head" style="margin-top: 40px;">REFERRAL <i class="fa fa-save  color_blue_edit collapse_btn" onclick="callPanelClientReferrel.PerformCallback('Save')" ></i></div>
+
+                        <%--line 1--%>
+                        <div class="form_div_node form_div_node_line_margin">
+                            <span class="form_input_title">Name</span>
+                            <input class="text_input" value="<%# LeadsInfoData.Referrel.ReferrelName %>" runat="server" id="txtReferrelName" />
+                        </div>
+
+                        <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                            <span class="form_input_title">Phone No.</span>
+                            <input class="text_input" value="<%# LeadsInfoData.Referrel.PhoneNo %>"  runat="server" id="txtReferrelPhone" />
+                        </div>
+
+                        <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                            <span class="form_input_title">Email</span>
+                            <input class="text_input" value="<%# LeadsInfoData.Referrel.Email %>" runat="server" id="txtReferrelEmail" />
+                        </div>
+                        <%----end line ----%>
+                    </div>
+                </dx:PanelContent>
+            </PanelCollection>
+            <ClientSideEvents EndCallback="function(s,e){alert('Saved.');}" />
+        </dx:ASPxCallbackPanel>
 
         <%--zestimat form--%>
-        <div style="margin: 20px;" class="clearfix">
-            <div class="form_head" style="margin-top: 40px;">REFERRAL</div>
-            
-            <%--line 1--%>
-            <div class="form_div_node form_div_node_line_margin">
-                <span class="form_input_title">Name</span>
-                <input class="text_input" value="" />
-            </div>
-
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Phone No.</span>
-                <input class="text_input" value="" />
-            </div>
-
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Email</span>
-                <input class="text_input" value="" />
-            </div>
-
-            <%----end line ----%>
-        </div>
-        <%-------end-----------%>
-
-         <%--zestimat form--%>
         <div style="margin: 20px;" class="clearfix">
             <div class="form_head" style="margin-top: 40px;">Value</div>
             <%--line 1--%>
@@ -338,8 +340,6 @@
         <%--Mortgage form--%>
         <div style="margin: 20px;" class="clearfix">
             <div class="form_head" style="margin-top: 40px;">MORTGAGE AND VIOLATIONS</div>
-
-
 
             <%--line 1--%>
             <div class="form_div_node form_div_node_line_margin">

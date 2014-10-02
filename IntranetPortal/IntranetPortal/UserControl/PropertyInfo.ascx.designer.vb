@@ -77,6 +77,42 @@ Partial Public Class PropertyInfo
     Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
+    '''callPanelReferrel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents callPanelReferrel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+
+    '''<summary>
+    '''txtReferrelName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtReferrelName As Global.System.Web.UI.HtmlControls.HtmlInputText
+
+    '''<summary>
+    '''txtReferrelPhone control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtReferrelPhone As Global.System.Web.UI.HtmlControls.HtmlInputText
+
+    '''<summary>
+    '''txtReferrelEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtReferrelEmail As Global.System.Web.UI.HtmlControls.HtmlInputText
+
+    '''<summary>
     '''gridLiens control.
     '''</summary>
     '''<remarks>

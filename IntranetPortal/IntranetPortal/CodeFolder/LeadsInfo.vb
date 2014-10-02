@@ -52,6 +52,25 @@
         End Get
     End Property
 
+    Private _referrel As PropertyReferrel
+    Public ReadOnly Property Referrel As PropertyReferrel
+        Get
+            If _referrel Is Nothing Then
+                Using context As New Entities
+                    Dim tmpRef = context.PropertyReferrels.Find(BBLE)
+
+                    If tmpRef Is Nothing Then
+                        _referrel = New PropertyReferrel
+                    Else
+                        _referrel = tmpRef
+                    End If
+                End Using
+            End If
+
+            Return _referrel
+        End Get
+    End Property
+
     Public Property HomeOwners As List(Of HomeOwner)
     Public ReadOnly Property LeadsName As String
         Get

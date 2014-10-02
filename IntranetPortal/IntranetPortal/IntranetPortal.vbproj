@@ -397,6 +397,9 @@
     <Compile Include="DataModel\PortalQuote.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\PropertyReferrel.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\Role.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>

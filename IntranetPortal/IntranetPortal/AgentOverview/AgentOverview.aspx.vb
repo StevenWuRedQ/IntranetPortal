@@ -31,11 +31,8 @@ Public Class AgentOverview
 
         If Not IsPostBack Then
             gridEmps.DataBind()
-
             gridReport.DataBind()
-
             gridEmps.GroupBy(gridEmps.Columns("Department"))
-
         End If
     End Sub
 
@@ -44,6 +41,7 @@ Public Class AgentOverview
             BindGridReport()
         End If
     End Sub
+
     Function getProfileImage(empID As Integer) As String
         Dim e = Employee.GetInstance(empID)
         If e IsNot Nothing Then
@@ -57,8 +55,6 @@ Public Class AgentOverview
         If gridEmps.DataSource Is Nothing Then
             BindEmp()
         End If
-
-
     End Sub
 
     Function getEmployeeByName(ByVal parametersStrg As String) As Employee

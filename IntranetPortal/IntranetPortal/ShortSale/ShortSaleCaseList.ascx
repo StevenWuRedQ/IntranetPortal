@@ -53,11 +53,10 @@
         else {
             caseId = values;
             GetShortSaleData(caseId);
-
             //ContentCallbackPanel.PerformCallback(values);
         }
     }
-
+    
     function RefreshContent()
     {
         if(caseId != null)

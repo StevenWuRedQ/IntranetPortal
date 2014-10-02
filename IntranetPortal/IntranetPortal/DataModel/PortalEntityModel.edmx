@@ -342,6 +342,17 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Author" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="PropertyReferrels">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="ReferrelId" Type="int" />
+          <Property Name="ReferrelName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="Rolename" />
@@ -459,6 +470,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="PortalLisPen" EntityType="Self.PortalLisPen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PortalNotes" EntityType="Self.PortalNotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PortalQuotes" EntityType="Self.PortalQuotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyReferrels" EntityType="Self.PropertyReferrels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SharedLeads" EntityType="Self.SharedLeads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAppointments" EntityType="Self.UserAppointments" Schema="dbo" store:Type="Tables" />
@@ -528,6 +540,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="Offices" EntityType="IntranetPortalModel.Office" />
           <EntitySet Name="LeadsComments" EntityType="IntranetPortalModel.LeadsComment" />
           <EntitySet Name="PortalNotes" EntityType="IntranetPortalModel.PortalNote" />
+          <EntitySet Name="PropertyReferrels" EntityType="IntranetPortalModel.PropertyReferrel" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1030,6 +1043,17 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="UpdateTime" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="Int32" />
         </EntityType>
+        <EntityType Name="PropertyReferrel">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="ReferrelId" Type="Int32" />
+          <Property Name="ReferrelName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1485,6 +1509,18 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="NoteId" ColumnName="NoteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyReferrels">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PropertyReferrel">
+              <MappingFragment StoreEntitySet="PropertyReferrels">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="ReferrelName" ColumnName="ReferrelName" />
+                <ScalarProperty Name="ReferrelId" ColumnName="ReferrelId" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

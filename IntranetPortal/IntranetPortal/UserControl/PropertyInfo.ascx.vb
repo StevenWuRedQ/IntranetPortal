@@ -9,7 +9,7 @@
     Public Function BindData() As Boolean
         UpatingPanel.Visible = LeadsInfoData.IsUpdating
         hfBBLE.Value = LeadsInfoData.BBLE
-
+        Me.DataBind()
         If LeadsInfoData.LisPens IsNot Nothing Then
             gridLiens.DataSource = LeadsInfoData.LisPens
             gridLiens.DataBind()
@@ -45,5 +45,31 @@
             End Using
         End If
         
+    End Sub
+
+    Protected Sub callPanelReferrel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        If e.Parameter = "Save" Then
+            Dim bble = hfBBLE.Value
+
+            Using Context As New Entities
+                Dim prop = Context.PropertyReferrels.Find(bble)
+
+                If prop Is Nothing Then
+                    prop = New PropertyReferrel
+                    prop.BBLE = bble
+                    prop.ReferrelName = txtReferrelName.Value
+                    prop.PhoneNo = txtReferrelPhone.Value
+                    prop.Email = txtReferrelEmail.Value
+
+                    Context.PropertyReferrels.Add(prop)
+                Else
+                    prop.ReferrelName = txtReferrelName.Value
+                    prop.PhoneNo = txtReferrelPhone.Value
+                    prop.Email = txtReferrelEmail.Value
+                End If
+
+                Context.SaveChanges()
+            End Using
+        End If
     End Sub
 End Class
