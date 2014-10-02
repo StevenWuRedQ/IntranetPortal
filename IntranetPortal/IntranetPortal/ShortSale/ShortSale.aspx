@@ -250,6 +250,7 @@
                                         </dx:ASPxSplitter>
                                     </dx:PanelContent>
                                 </PanelCollection>
+                                <ClientSideEvents EndCallback="function(s,e){ GetShortSaleData(caseId);}" />
                             </dx:ASPxCallbackPanel>
                         </dx:SplitterContentControl>
                     </ContentCollection>

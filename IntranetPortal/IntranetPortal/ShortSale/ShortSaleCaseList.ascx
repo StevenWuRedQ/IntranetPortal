@@ -52,8 +52,8 @@
         }
         else {
             caseId = values;
-            GetShortSaleData(caseId);
-            //ContentCallbackPanel.PerformCallback(values);
+            //GetShortSaleData(caseId);
+            ContentCallbackPanel.PerformCallback(values);
         }
     }
     
