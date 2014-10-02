@@ -7,7 +7,6 @@
 <%@ Register Src="~/ShortSale/TitleControl.ascx" TagPrefix="uc1" TagName="Title" %>
 <%@ Register Src="~/ShortSale/ShortSaleCaseList.ascx" TagPrefix="uc1" TagName="ShortSaleCaseList" %>
 
-
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script src="/scripts/stevenjs.js"></script>
 
@@ -30,7 +29,7 @@
                             <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel2" Height="100%" ClientInstanceName="ContentCallbackPanel" OnCallback="ASPxCallbackPanel2_Callback" EnableCallbackAnimation="true" CssClass="LeadsContentPanel">
                                 <PanelCollection>
                                     <dx:PanelContent ID="PanelContent1" runat="server">
-                                        <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" ClientVisible="true">
+                                        <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" ClientVisible="false">
                                             <Styles>
                                                 <Pane Paddings-Padding="0">
                                                     <Paddings Padding="0px"></Paddings>
