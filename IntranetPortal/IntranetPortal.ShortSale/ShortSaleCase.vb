@@ -91,6 +91,76 @@
         End Get
     End Property
 
+    Public ReadOnly Property AssignedProcessor As PartyContact
+        Get
+            If Processor.HasValue Then
+                Return PartyContact.GetContact(Processor)
+            Else
+                Return New PartyContact()
+            End If
+        End Get
+    End Property
+
+    Public ReadOnly Property ReferralContact As PartyContact
+        Get
+            If Referral.HasValue Then
+                Return PartyContact.GetContact(Referral)
+            Else
+                Return New PartyContact
+            End If
+        End Get
+    End Property
+
+    Public ReadOnly Property ListingAgentContact As PartyContact
+        Get
+            If ListingAgent.HasValue Then
+                Return PartyContact.GetContact(ListingAgent)
+            Else
+                Return New PartyContact
+            End If
+        End Get
+    End Property
+
+    Public ReadOnly Property BuyerContact As PartyContact
+        Get
+            If Buyer.HasValue Then
+                Return PartyContact.GetContact(Buyer)
+            Else
+                Return New PartyContact
+            End If
+        End Get
+    End Property
+
+    Public ReadOnly Property SellerAttorneyContact As PartyContact
+        Get
+            If SellerAttorney.HasValue Then
+                Return PartyContact.GetContact(SellerAttorney)
+            Else
+                Return New PartyContact
+            End If
+        End Get
+    End Property
+
+    Public ReadOnly Property BuyerAttorneyContact As PartyContact
+        Get
+            If BuyerAttorney.HasValue Then
+                Return PartyContact.GetContact(BuyerAttorney)
+            Else
+                Return New PartyContact
+            End If
+        End Get
+    End Property
+
+    Public ReadOnly Property TitleCompanyContact As PartyContact
+        Get
+            If TitleCompany.HasValue Then
+                Return PartyContact.GetContact(TitleCompany)
+            Else
+                Return New PartyContact
+            End If
+        End Get
+    End Property
+
     Public Sub Save()
         Using context As New ShortSaleEntities
             If CaseId = 0 Then
