@@ -729,6 +729,13 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Settings.vb" />
+    <Compile Include="ShortSale\SelectPartyUC.ascx.designer.vb">
+      <DependentUpon>SelectPartyUC.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ShortSale\SelectPartyUC.ascx.vb">
+      <DependentUpon>SelectPartyUC.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ShortSale\ShortSale.aspx.designer.vb">
       <DependentUpon>ShortSale.aspx</DependentUpon>
     </Compile>
@@ -1661,6 +1668,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
+    <Content Include="ShortSale\SelectPartyUC.ascx" />
     <Content Include="ShortSale\ShortSale.aspx" />
     <Content Include="ShortSale\ShortSaleCaseList.ascx" />
     <Content Include="ShortSale\ShortSaleEvictionTab.ascx" />

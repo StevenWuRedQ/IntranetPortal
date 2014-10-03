@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TitleControl.ascx.vb" Inherits="IntranetPortal.TitleControl" %>
 <script type="text/javascript">
     var selectSellerTitle = null;
-    function SelectTitleCompany(isSeleteSellerTitle) {
+    function SelectTitleCompany(isSeleteSellerTitle) {     
         selectSellerTitle = isSeleteSellerTitle;
         ASPxPopupTitleControl.Show();
         gridTitleCompany.Refresh();

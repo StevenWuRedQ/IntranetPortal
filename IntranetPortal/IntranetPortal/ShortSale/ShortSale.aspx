@@ -6,6 +6,8 @@
 <%@ Register Src="~/ShortSale/ShortSaleOverVew.ascx" TagPrefix="uc1" TagName="ShortSaleOverVew" %>
 <%@ Register Src="~/ShortSale/TitleControl.ascx" TagPrefix="uc1" TagName="Title" %>
 <%@ Register Src="~/ShortSale/ShortSaleCaseList.ascx" TagPrefix="uc1" TagName="ShortSaleCaseList" %>
+<%@ Register Src="~/ShortSale/SelectPartyUC.ascx" TagPrefix="uc1" TagName="SelectPartyUC" %>
+
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script src="/scripts/stevenjs.js"></script>
@@ -135,6 +137,7 @@
 
                                                                     <%-- <ClientSideEvents ItemClick="OnAddressPopupMenuClick" />--%>
                                                                 </dx:ASPxPopupMenu>
+                                                                <uc1:SelectPartyUC runat="server" id="SelectPartyUC" />
                                                             </div>
                                                         </dx:SplitterContentControl>
                                                     </ContentCollection>
