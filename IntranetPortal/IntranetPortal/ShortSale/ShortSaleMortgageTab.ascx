@@ -7,40 +7,42 @@
     </div>
 </div>
 
-
+<script>
+   
+</script>
 
 <div data-array-index="0" data-field="Mortgages" class="ss_array" >
-    <h2>1St Mortgages</h2>
+    <%--<h3 class="title_with_line"><span class="title_index title_span">Mortgages </span></h3>--%>
     <div class="ss_form">
-        <h4 class="ss_form_title">1st Mortgage<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue" title="Add"></i></h4>
+        <h4 class="ss_form_title title_with_line"><span class="title_index title_span">Mortgage 1</span> <i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue" onclick="AddArraryItem(this)" title="Add"></i></h4>
         <ul class="ss_form_box clearfix" id="mortgage1">
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">LENDER</label>
-                <input class="ss_form_input" data-item="Lender" data-item-type="1" id="Lender" >
+                <input class="ss_form_input" data-item="Lender" data-item-type="1"  >
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Loan #</label>
-                <input class="ss_form_input" data-item="Loan" data-item-type="1" id="Loan">
+                <input class="ss_form_input" data-item="Loan" data-item-type="1" >
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Loan Amount</label>
-                <input class="ss_form_input currency_input" data-item="LoanAmount" data-item-type="1" id="LoanAmount" onblur="$(this).formatCurrency();">
+                <input class="ss_form_input currency_input" data-item="LoanAmount" data-item-type="1" onblur="$(this).formatCurrency();">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Authorization Sent</label>
-                <input class="ss_form_input" id="AuthorizationSent">
+                <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
-                <input class="ss_form_input ss_form_hidden" value="">
+                <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
-                <input class="ss_form_input ss_form_hidden" value="">
+                <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
             </li>
-            <li class="ss_form_item">
+            <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">Lien Postion</label>
                 <select class="ss_form_input">
                     <option value="volvo">1 st</option>
@@ -49,7 +51,7 @@
                     <option value="audi">4 th</option>
                 </select>
 
-            </li>
+            </li>--%>
         </ul>
     </div>
 
@@ -59,11 +61,11 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">phone #</label>
-                <input class="ss_form_input" id="ShortSaleContact">
+                <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Extension</label>
-                <input class="ss_form_input" value="123">
+                <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
@@ -71,19 +73,19 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">customer service</label>
-                <input class="ss_form_input" value="346-123-456">
+                <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Extension</label>
-                <input class="ss_form_input" value="12">
+                <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
-                <input class="ss_form_input ss_form_hidden" value="">
+                <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Fax #</label>
-                <input class="ss_form_input" value="347-123-456">
+                <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
@@ -95,11 +97,11 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" value="example@email.com">
+                <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
-                <input class="ss_form_input ss_form_hidden" value="">
+                <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>

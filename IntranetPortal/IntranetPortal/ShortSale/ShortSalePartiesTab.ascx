@@ -1,9 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSalePartiesTab.ascx.vb" Inherits="IntranetPortal.ShortSalePartiesTab" %>
 <div class="clearfix">
     <div style="float: right">
-        <dx:ASPxButton runat="server" Text="Edit" AutoPostBack="false" CssClass="rand-button" HoverStyle-BackColor="#3993c1" BackColor="#99bdcf">
-            <ClientSideEvents Click="swich_edit_model" />
-        </dx:ASPxButton>
+        <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='swich_edit_model(this, short_sale_case_data)' />
     </div>
 </div>
 <div >

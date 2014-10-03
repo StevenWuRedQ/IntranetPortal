@@ -23,15 +23,13 @@
             <input class="ss_form_input" value="<%=summaryCase.PropertyInfo.Block%>">
         </li>
         <li class="ss_form_item">
-            <label class="ss_form_input_title" id="none_summary_accessibity">Accessibility</label>
-            <select class="ss_form_input">
+            <label class="ss_form_input_title"  >Accessibility</label>
+            <select class="ss_form_input" data-field="PropertyInfo.Accessibility">
                 <option value="volvo">Lockbox - LOC</option>
                 <option value="saab">Master Key</option>
                 <option value="mercedes">Homeowner's key</option>
             </select>
-            <script>
-                initSelect("none_summary_accessibity",'<%=summaryCase.PropertyInfo.Accessibility%>');
-            </script>
+            
         </li>
         <li class="ss_form_item">
             <span class="ss_form_input_title">c/o(<span class="link_pdf">pdf</span>)</span>
@@ -88,107 +86,55 @@
 
     </ul>
 </div>
+<div data-array-index="0" data-field="Mortgages" class="ss_array" >
 
-<div class="ss_form">
-    <h4 class="ss_form_title">1st Mortgage</h4>
-    <ul class="ss_form_box clearfix">
+    <div class="ss_form">
+        <h4 class="ss_form_title"> <span class="title_index ">Mortgage 1</span></h4>
+        <ul class="ss_form_box clearfix">
 
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Lender</label>
-            <input class="ss_form_input" value="Bank of America">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Loan #</label>
-            <input class="ss_form_input" value="1795548554">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Loan Amount</label>
-            <input class="ss_form_input input_currency" onblur="$(this).formatCurrency();" value="$482,000.00">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Short Sale Dept</label>
-            <input class="ss_form_input" value="866-880-1232">
-        </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Lender</label>
+                <input class="ss_form_input" data-item="Lender" data-item-type="1" >
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Loan #</label>
+                <input class="ss_form_input"  data-item="Loan" data-item-type="1">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Loan Amount</label>
+                <input class="ss_form_input input_currency" onblur="$(this).formatCurrency();"  data-item="LoanAmount" data-item-type="1">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Short Sale Dept</label>
+                <input class="ss_form_input" value="866-880-1232">
+            </li>
 
-        <li class="ss_form_item">
-            <span class="ss_form_input_title">&nbsp;</span>
+            <li class="ss_form_item">
+                <span class="ss_form_input_title">&nbsp;</span>
 
-            <input type="checkbox" id="pdf_check_yes1" name="1" value="YES">
-            <label for="pdf_check_yes1" class="input_with_check">
-                <span class="box_text">Fannie</span>
-            </label>
-
-            <input type="checkbox" id="pdf_check_no2" name="1" value="NO">
-            <label for="pdf_check_no2" class="input_with_check">
-                <span class="box_text">FHA</span>
+                <input type="checkbox" id="pdf_check_yes1" name="1"  value="YES">
+                <label for="pdf_check_yes1" class="input_with_check">
+                    <span class="box_text">Fannie</span>
                 </label>
 
-        </li>
-        <li class="ss_form_item">
-            <span class="ss_form_input_title">&nbsp;</span>
+                <input type="checkbox" id="pdf_check_no2" name="1" value="NO">
+                <label for="pdf_check_no2" class="input_with_check">
+                    <span class="box_text">FHA</span>
+                    </label>
 
-            <input type="checkbox" id="pdf_check_yes2" name="1" value="YES">
-            <label for="pdf_check_yes2" class="input_with_check">
-                <span class="box_text">Freddie Mac </span>
-                </label>
+            </li>
+            <li class="ss_form_item">
+                <span class="ss_form_input_title">&nbsp;</span>
 
-        </li>
-    </ul>
-</div>
+                <input type="checkbox" id="pdf_check_yes2" name="1" value="YES">
+                <label for="pdf_check_yes2" class="input_with_check">
+                    <span class="box_text">Freddie Mac </span>
+                    </label>
 
-<div class="ss_form">
-    <h4 class="ss_form_title">1st Mortgage</h4>
-    <ul class="ss_form_box clearfix">
+            </li>
+        </ul>
+    </div>
 
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Lender</label>
-            <input class="ss_form_input" value="Bank of America">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Loan #</label>
-            <input class="ss_form_input" value="1795548554">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Loan Amount</label>
-            <input class="ss_form_input input_currency" onblur="$(this).formatCurrency();" value="$482,000.00">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Short Sale Dept</label>
-            <input class="ss_form_input" value="866-880-1232">
-        </li>
-
-        <li class="ss_form_item">
-            <span class="ss_form_input_title">&nbsp;</span>
-
-            <input type="checkbox" id="pdf_check_yes3" name="1" value="YES">
-            <label for="pdf_check_yes3" class="input_with_check">
-                <span class="box_text">Fannie</span>
-            </label>
-
-            <input type="checkbox" id="pdf_check_no3" name="1" value="NO">
-            <label for="pdf_check_no3" class="input_with_check">
-                <span class="box_text">FHA </span>
-            </label>
-
-        </li>
-        <li class="ss_form_item">
-            <span class="ss_form_input_title">&nbsp;</span>
-
-            <input type="checkbox" id="pdf_check_yes4" name="1" value="YES">
-            <label for="pdf_check_yes4" class="input_with_check">
-                <span class="box_text">Freddie Mac </span>
-            </label>
-
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Status</label>
-            <select class="ss_form_input">
-                <option value="volvo">Counter offer</option>
-                <option value="saab">Approved</option>
-                <option value="mercedes">Negotiator Assigned</option>
-            </select>
-        </li>
-    </ul>
 </div>
 
 <div class="ss_form">

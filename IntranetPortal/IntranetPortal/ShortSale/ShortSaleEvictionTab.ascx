@@ -12,28 +12,26 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Occupied by </label>
-            <select class="ss_form_input" id="select_OccupiedBy">
+            <select class="ss_form_input" data-field="OccupiedBy">
                 <option value="volvo">Vacant</option>
                 <option value="volvo">Homeowner</option>
                 <option value="saab">Tenant (Coop)</option>
                 <option value="mercedes">Tenant (Non Coop)</option>
 
             </select>
-            <script>
-                initSelect("OccupiedBy", '<%= evictionData.OccupiedBy%>');
-            </script>
+            
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Eviction</label>
-            <input class="ss_form_input" id="Evivtion" value="<%=evictionData.Evivtion %>">
+            <input class="ss_form_input" data-field="Evivtion"  >
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Date started</label>
-            <input class="ss_form_input" value="<%=evictionData.DateStarted %>">
+            <input class="ss_form_input" data-field="DateStarted">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Lock box code</label>
-            <input class="ss_form_input" value="<%= evictionData.LockBoxCode %>">
+            <input class="ss_form_input" data-field="LockBoxCode">
         </li>
 
     </ul>

@@ -20,11 +20,15 @@
     var short_sale_case_data = null;
 
     function getShortSaleInstanceComplete(s, e) {
-        short_sale_case_data = $.parseJSON(e.result);
+        short_sale_case_data = ShortSaleCaseData;//$.parseJSON(e.result);
+        //ShortSaleCaseData = short_sale_case_data;
         short_sale_case_data.PropertyInfo.UpdateBy = "<%=Page.User.Identity.Name%>";
-        var strJson = JSON.stringify(collectDate(short_sale_case_data));
-        if (wx_deubg)
-            alert(strJson);
+
+        ShortSaleDataBand(true);
+        
+        var strJson = JSON.stringify(ShortSaleCaseData);
+        
+        //d_alert(strJson);
 
         SaveClicklCallbackCallbackClinet.PerformCallback(strJson);
     }

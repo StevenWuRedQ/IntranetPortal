@@ -1761,3 +1761,20 @@ input[type='checkbox'] + label, input[type=radio] + label .box_text {
 {
 
 }
+.title_index
+{
+
+}
+.title_with_line
+{
+    margin:0px;
+    border-bottom:1px solid #ff400d;
+    height: 24px;
+}
+.title_span
+{
+    color:white;
+    font-weight:900;
+    background:#ff400d;
+    padding: 2px 8px;
+}

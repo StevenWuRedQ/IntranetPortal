@@ -14,23 +14,23 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Street Number</label>
-            <input class="ss_form_input" data-field="PropertyInfo.Number" id="key_PropertyInfo_Number">
+            <input class="ss_form_input" data-field="PropertyInfo.Number" >
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Street Name</label>
-            <input class="ss_form_input" id="key_PropertyInfo_StreetName" value="<%= propertyInfo.StreetName %>">
+            <input class="ss_form_input" data-field="PropertyInfo.StreetName">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">City</label>
-            <input class="ss_form_input" id="key_PropertyInfo_City" value="<%= propertyInfo.City %>">
+            <input class="ss_form_input" data-field="PropertyInfo.City" >
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">State</label>
-            <input class="ss_form_input" id="key_PropertyInfo_State" value="<%= propertyInfo.State %>">
+            <input class="ss_form_input" data-field="PropertyInfo.State">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Zip</label>
-            <input class="ss_form_input" id="key_PropertyInfo_Zipcode" value="<%= propertyInfo.Zipcode %>">
+            <input class="ss_form_input"  data-field="PropertyInfo.Zipcode" >
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">&nbsp;</label>
@@ -38,45 +38,45 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">BLOCK</label>
-            <input class="ss_form_input" id="key_PropertyInfo_Block" value="<%= propertyInfo.Block %>">
+            <input class="ss_form_input" data-field="PropertyInfo.Block" >
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Lot</label>
-            <input class="ss_form_input" id="key_PropertyInfo_Lot" value="<%=propertyInfo.Lot%>">
+            <input class="ss_form_input" data-field="PropertyInfo.Lot" >
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Building type</label>
-            <select class="ss_form_input" data-field="PropertyInfo.BuildingType" id="key_PropertyInfo_select_BuildingType">
-                <option value="0">House</option>
-                <option value="1">Apartment</option>
-                <option value="2">Condo</option>
-                <option value="3">Cottage/cabin</option>
-                <option value="4">Duplex</option>
-                <option value="5">Flat</option>
-                <option value="7">In-Law</option>
-                <option value="8">Loft</option>
-                <option value="9">Townhouse</option>
-                <option value="10">Manufactured</option>
-                <option value="11">Assisted living</option>
-                <option value="12">Land</option>
+            <select class="ss_form_input" data-field="PropertyInfo.BuildingType">
+                <option value="House">House</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Condo">Condo</option>
+                <option value="Cottage/cabin">Cottage/cabin</option>
+                <option value="Duplex">Duplex</option>
+                <option value="Flat">Flat</option>
+                <option value="In-Law">In-Law</option>
+                <option value="Loft">Loft</option>
+                <option value="Townhouse">Townhouse</option>
+                <option value="Manufactured">Manufactured</option>
+                <option value="Assisted living">Assisted living</option>
+                <option value="Land">Land</option>
             </select>
 
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title"># Of stories</label>
-            <input class="ss_form_input" type="number" value="<%=propertyInfo.NumOfStories%>">
+            <input class="ss_form_input" type="number" data-field="PropertyInfo.NumOfStories">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title"># Of Unit</label>
-            <input class="ss_form_input" value="<%=propertyInfo.NumOfUnit%>">
+            <input class="ss_form_input" data-field="PropertyInfo.NumOfUnit">
         </li>
-        <li class="ss_form_item">
+        <li class="ss_form_item" >
             <label class="ss_form_input_title">Accessibility</label>
 
-            <select class="ss_form_input" data-feild="PropertyInfo.Accessibility" id="key_PropertyInfo_select_Accessibility">
-                <option value="0">Lockbox-LOC</option>
-                <option value="0">Master Key</option>
-                <option value="0">Homeowner's key</option>
+            <select class="ss_form_input" data-field="PropertyInfo.Accessibility" >
+                <option value="Lockbox-LOC">Lockbox-LOC</option>
+                <option value="Master Key">Master Key</option>
+                <option value="Homeowner's key">Homeowner's key</option>
 
             </select>
 
@@ -97,40 +97,40 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Tax Class</label>
-            <input class="ss_form_input" id="key_PropertyInfo_TaxClass" value="<%=propertyInfo.TaxClass %>">
+            <input class="ss_form_input" data-field="PropertyInfo.TaxClass" >
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title"># of Families</label>
-            <input class="ss_form_input" value="<%=propertyInfo.NumOfFamilies %>">
+            <input class="ss_form_input" data-field="PropertyInfo.NumOfFamilies">
         </li>
 
         <li class="ss_form_item">
             <span class="ss_form_input_title">FHA</span>
 
-            <input type="radio" id="key_PropertyInfo_checkYes_FHA" class="ss_form_input" name="FHA1" value="YES" <%=ShortSalePage.CheckBox(propertyInfo.FHA) %>>
+            <input type="radio" id="key_PropertyInfo_checkYes_FHA" data-field="PropertyInfo.FHA" data-radio="Y" class="ss_form_input" name="FHA1" value="YES" >
             <label for="checkYes_FHA" class="input_with_check"><span class="box_text">Yes</span></label>
 
-            <input type="radio" id="none_pdf_checkey_no25" name="FHA1" value="NO" <%=ShortSalePage.CheckBox( Not propertyInfo.FHA) %>>
+            <input type="radio" id="none_pdf_checkey_no25" data-field="PropertyInfo.FHA" name="FHA1" value="NO">
             <label for="none_pdf_checkey_no25" class="input_with_check"><span class="box_text">No</span></label>
 
         </li>
         <li class="ss_form_item">
             <span class="ss_form_input_title">Fannie MAE</span>
 
-            <input type="radio" id="key_PropertyInfo_checkYes_FannieMae" name="Fannie_Mae1" value="YES" <%=ShortSalePage.CheckBox(propertyInfo.FannieMae)%>>
+            <input type="radio" id="key_PropertyInfo_checkYes_FannieMae" data-field="PropertyInfo.FannieMae" data-radio="Y" name="Fannie_Mae1" value="YES" >
             <label for="checkYes_FannieMae" class="input_with_check"><span class="box_text">Yes</span></label>
 
-            <input type="radio" id="none_pdf_checkey_no23" name="Fannie_Mae1" value="NO" <%=ShortSalePage.CheckBox(Not propertyInfo.FannieMae)%>>
+            <input type="radio" id="none_pdf_checkey_no23" data-field="PropertyInfo.FannieMae" name="Fannie_Mae1" value="NO">
             <label for="none_pdf_checkey_no23" class="input_with_check"><span class="box_text">No</span></label>
 
         </li>
         <li class="ss_form_item">
             <span class="ss_form_input_title">Freddie Mac</span>
 
-            <input type="radio" id="key_PropertyInfo_checkYes_FreddieMac" name="Freddie_Mac1" <%=ShortSalePage.CheckBox(propertyInfo.FreddieMac) %> value="YES">
+            <input type="radio" id="key_PropertyInfo_checkYes_FreddieMac" data-field="PropertyInfo.FreddieMac" data-radio="Y" name="Freddie_Mac1" value="YES">
             <label for="checkYes_FreddieMac" class="input_with_check"><span class="box_text">Yes</span></label>
 
-            <input type="radio" id="none_pdf_checkey_no24" name="Freddie_Mac1" <%=ShortSalePage.CheckBox(Not propertyInfo.FreddieMac) %> value="NO">
+            <input type="radio" id="none_pdf_checkey_no24" data-field="PropertyInfo.FreddieMac" name="Freddie_Mac1" value="NO">
             <label for="none_pdf_checkey_no24" class="input_with_check"><span class="box_text">No</span></label>
 
         </li>
