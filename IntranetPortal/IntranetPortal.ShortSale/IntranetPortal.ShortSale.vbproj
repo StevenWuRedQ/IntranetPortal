@@ -90,6 +90,9 @@
     <Compile Include="ADOEntity\PropertyMortgage.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\PropertyOccupant.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\PropertyOwner.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
@@ -140,6 +143,7 @@
     <Compile Include="PropertyBaseInfo.vb" />
     <Compile Include="PropertyFloor.vb" />
     <Compile Include="PropertyMortgage.vb" />
+    <Compile Include="PropertyOccupant.vb" />
     <Compile Include="PropertyOwner.vb" />
     <Compile Include="PropertyTitle.vb" />
     <Compile Include="ShortSaleCase.vb" />

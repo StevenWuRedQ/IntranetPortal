@@ -161,6 +161,20 @@
         End Get
     End Property
 
+    Private _occupants As List(Of PropertyOccupant)
+    Public Property Occupants As List(Of PropertyOccupant)
+        Get
+            If _occupants Is Nothing Then
+                _occupants = PropertyOccupant.GetOccupantsByCase(CaseId)
+            End If
+
+            Return _occupants
+        End Get
+        Set(value As List(Of PropertyOccupant))
+            _occupants = value
+        End Set
+    End Property
+
     Public Sub Save()
         Using context As New ShortSaleEntities
             If CaseId = 0 Then

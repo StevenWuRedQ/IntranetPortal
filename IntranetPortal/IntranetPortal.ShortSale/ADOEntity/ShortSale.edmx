@@ -102,6 +102,34 @@
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="PropertyOccupants">
+          <Key>
+            <PropertyRef Name="OccupantId" />
+          </Key>
+          <Property Name="OccupantId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaseId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Floor" Type="int" />
+          <Property Name="AptNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lease" Type="nvarchar" MaxLength="50" />
+          <Property Name="Program" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastRent" Type="datetime" />
+          <Property Name="Military" Type="bit" />
+          <Property Name="Notice30Day" Type="bit" />
+          <Property Name="CFK" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TypeOfPayment" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateToVacate" Type="datetime" />
+          <Property Name="Completed" Type="bit" />
+          <Property Name="Attorney" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttorneyPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateServed" Type="datetime" />
+          <Property Name="CourtDate" Type="datetime" />
+          <Property Name="StipDate" Type="datetime" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="PropertyOwners">
           <Key>
             <PropertyRef Name="BBLE" />
@@ -204,6 +232,7 @@
           <EntitySet Name="PropertyBaseInfo" EntityType="Self.PropertyBaseInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyFloors" EntityType="Self.PropertyFloors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyMortgages" EntityType="Self.PropertyMortgages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyOccupants" EntityType="Self.PropertyOccupants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyOwners" EntityType="Self.PropertyOwners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyTitles" EntityType="Self.PropertyTitles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleCaseComments" EntityType="Self.ShortSaleCaseComments" Schema="dbo" store:Type="Tables" />
@@ -225,6 +254,7 @@
           <EntitySet Name="TitleClearences" EntityType="IntranetPortalModel.TitleClearence" />
           <EntitySet Name="PropertyBaseInfoes" EntityType="IntranetPortalModel.PropertyBaseInfo" />
           <EntitySet Name="ShortSaleCaseComments" EntityType="IntranetPortalModel.ShortSaleCaseComment" />
+          <EntitySet Name="PropertyOccupants" EntityType="IntranetPortalModel.PropertyOccupant" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -416,6 +446,34 @@
           <Property Name="CaseId" Type="Int32" Nullable="false" />
           <Property Name="Comments" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="OrderIndex" Type="Int32" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PropertyOccupant">
+          <Key>
+            <PropertyRef Name="OccupantId" />
+          </Key>
+          <Property Name="OccupantId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Floor" Type="Int32" />
+          <Property Name="AptNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lease" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Program" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastRent" Type="DateTime" Precision="3" />
+          <Property Name="Military" Type="Boolean" />
+          <Property Name="Notice30Day" Type="Boolean" />
+          <Property Name="CFK" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TypeOfPayment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateToVacate" Type="DateTime" Precision="3" />
+          <Property Name="Completed" Type="Boolean" />
+          <Property Name="Attorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AttorneyPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateServed" Type="DateTime" Precision="3" />
+          <Property Name="CourtDate" Type="DateTime" Precision="3" />
+          <Property Name="StipDate" Type="DateTime" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
@@ -622,6 +680,35 @@
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="CaseId" ColumnName="CaseId" />
                 <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyOccupants">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PropertyOccupant">
+              <MappingFragment StoreEntitySet="PropertyOccupants">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="StipDate" ColumnName="StipDate" />
+                <ScalarProperty Name="CourtDate" ColumnName="CourtDate" />
+                <ScalarProperty Name="DateServed" ColumnName="DateServed" />
+                <ScalarProperty Name="AttorneyPhone" ColumnName="AttorneyPhone" />
+                <ScalarProperty Name="Attorney" ColumnName="Attorney" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="DateToVacate" ColumnName="DateToVacate" />
+                <ScalarProperty Name="TypeOfPayment" ColumnName="TypeOfPayment" />
+                <ScalarProperty Name="CFK" ColumnName="CFK" />
+                <ScalarProperty Name="Notice30Day" ColumnName="Notice30Day" />
+                <ScalarProperty Name="Military" ColumnName="Military" />
+                <ScalarProperty Name="LastRent" ColumnName="LastRent" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="Lease" ColumnName="Lease" />
+                <ScalarProperty Name="AptNo" ColumnName="AptNo" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="OccupantId" ColumnName="OccupantId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
