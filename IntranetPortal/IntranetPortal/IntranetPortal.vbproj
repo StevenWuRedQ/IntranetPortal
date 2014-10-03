@@ -52,10 +52,13 @@
     <Reference Include="ActiveDatabaseSoftware.ActiveQueryBuilder2, Version=2.8.3.681, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL" />
     <Reference Include="ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Control, Version=2.5.13.0, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL" />
     <Reference Include="ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Server, Version=2.5.13.0, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL" />
+    <Reference Include="ActiveDatabaseSoftware.AdvantageMetadataProvider2, Version=2.8.3.681, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL" />
+    <Reference Include="ActiveDatabaseSoftware.MSSQLCEMetadataProvider2, Version=2.8.3.681, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL" />
     <Reference Include="ActiveDatabaseSoftware.MSSQLMetadataProvider2, Version=2.8.3.683, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.5.14\lib\net45\ActiveDatabaseSoftware.MSSQLMetadataProvider2.dll</HintPath>
     </Reference>
+    <Reference Include="ActiveDatabaseSoftware.MySQLMetadataProvider2, Version=2.8.3.681, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Charts.v14.1.Core, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>False</Private>
     </Reference>
@@ -1569,6 +1572,7 @@
     <Content Include="scripts\js\vendor\jquery-1.11.0.min.js" />
     <Content Include="scripts\js\vendor\modernizr-2.6.2-respond-1.1.0.min.js" />
     <Content Include="scripts\LeadsSubMenu.js" />
+    <Content Include="scripts\mindmup-editabletable.js" />
     <Content Include="scripts\PortalMessager.js" />
     <Content Include="scripts\prototype.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />

@@ -137,7 +137,7 @@
 
     </ul>
 </div>
-<div class="ss_form">
+<div class="ss_form" id="home_breakdown_table">
     <h4 class="ss_form_title">Home Breakdown</h4>
     <%-- log tables--%>
     <div>
@@ -239,3 +239,18 @@
     </div>
     <%------end-------%>
 </div>
+
+<script src="/scripts/mindmup-editabletable.js"></script>
+<script>
+   function onRefreashDone ()
+    {
+       
+        $("#home_breakdown_table").editableTableWidget();
+    }
+    //$(document).ready(function () {
+    //    // Handler for .ready() called.
+    //    d_alert("rund edit ");
+    //    $("#home_breakdown_table").editableTableWidget();
+    //});
+   
+</script>

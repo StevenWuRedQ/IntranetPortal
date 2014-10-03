@@ -13,11 +13,11 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">First name</label>
-                <input class="ss_form_input"  data-item="FirstName" data-item-type="1">
+                <input class="ss_form_input" data-item="FirstName" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Last name</label>
-                <input class="ss_form_input"  data-item="LastName" data-item-type="1" >
+                <input class="ss_form_input" data-item="LastName" data-item-type="1" >
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">ssn</label>
@@ -25,7 +25,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">dob</label>
-                <input class="ss_form_input" data-item="DOB" data-item-type="1" >
+                <input class="ss_form_input" type="date" data-item="DOB" data-item-type="1" >
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Phone #1</label>

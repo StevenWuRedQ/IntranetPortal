@@ -11,7 +11,7 @@
     $("#" + id).css("display", toSwich ? "initial" : "none");
 }
 
-var wx_deubg = false;
+var wx_deubg = true;
 /*band data in short Sale*/
 function d_alert(s) {
     if (wx_deubg) {
@@ -42,6 +42,7 @@ function get_sub_property(obj, id_str, value) {
         }
         
     }
+
     var t_obj = obj;
     for (var i = 0; i < props.length; i++) {
         var prop = props[i];
@@ -60,7 +61,11 @@ function get_sub_property(obj, id_str, value) {
         if (i == props.length - 1)
         {
             if (value != null) {
-               // d_alert("value a new value to " + id_str + " = " + value);
+                // d_alert("value a new value to " + id_str + " = " + value);
+                if (value instanceof "data")
+                {
+                    alert("the date is data");
+                }
                 t_obj[prop] = value;
             }
         }
@@ -72,6 +77,9 @@ function get_sub_property(obj, id_str, value) {
 }
 
 function ShortSaleDataBand(is_save) {
+    /*use for ui*/
+    onRefreashDone();
+    /**/
     if (ShortSaleCaseData == null) {
         d_alert("ShortSaleCaseData is null");
         return;
@@ -168,7 +176,7 @@ function ShorSaleArrayDataBand(is_save) {
         elem.find("[data-item-type=1]").each(function (ind) {
             var item_field = $(this).attr("data-item");
             if (is_save) {
-                d_assert(_index == 4, "the data_value is " + JSON.stringify(data_value));
+                //d_assert(_index == 4, "the data_value is " + JSON.stringify(data_value));
                 get_sub_property(data_value, item_field, $(this).val());
             }
             var item_value = data_value[item_field]
@@ -234,6 +242,7 @@ function setArraryTitle(div,a_index)
         $(this).text($(this).text().replace( /[0-9]/g, ""+_idx));
     });
 }
+
 function collectDate(objCase) {
     var obj = new Object();
    
