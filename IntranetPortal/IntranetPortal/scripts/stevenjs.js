@@ -110,15 +110,7 @@ function ShortSaleDataBand(is_save) {
     /*band short sale arrary item*/
     ShorSaleArrayDataBand(is_save)
 }
-function testrefreshDiv()
-{
-    data = {
-        Name:"test name",
-        Cell: "test cell",
-        Email:"testmail@email.com"
-    }
-    refreshDiv("AssignedProcessor", data);
-}
+
 function refreshDiv(field,obj)
 {
     get_sub_property(ShortSaleCaseData, field, obj);

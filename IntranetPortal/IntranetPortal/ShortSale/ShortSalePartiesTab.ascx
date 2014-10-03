@@ -4,6 +4,16 @@
         <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='swich_edit_model(this, short_sale_case_data)' />
     </div>
 </div>
+<script>
+    function testrefreshDiv() {
+        data = {
+            Name: "test name",
+            Cell: "test cell",
+            Email: "testmail@email.com"
+        }
+        refreshDiv("AssignedProcessor", data);
+    }
+</script>
 <div >
     <h4 class="ss_form_title">Assigned Processor <input type="button" class="rand-button short_sale_edit" value="Choise" onclick='testrefreshDiv()' /> </h4>
     <ul class="ss_form_box clearfix">
