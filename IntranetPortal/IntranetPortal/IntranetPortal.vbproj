@@ -56,7 +56,7 @@
     <Reference Include="ActiveDatabaseSoftware.MSSQLCEMetadataProvider2, Version=2.8.3.681, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL" />
     <Reference Include="ActiveDatabaseSoftware.MSSQLMetadataProvider2, Version=2.8.3.683, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.5.14\lib\net45\ActiveDatabaseSoftware.MSSQLMetadataProvider2.dll</HintPath>
+      <HintPath>..\..\..\QueryBuilderSite\packages\ActiveQueryBuilder.ASPNET.2.5.13\lib\net45\ActiveDatabaseSoftware.MSSQLMetadataProvider2.dll</HintPath>
     </Reference>
     <Reference Include="ActiveDatabaseSoftware.MySQLMetadataProvider2, Version=2.8.3.681, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Charts.v14.1.Core, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
