@@ -5,7 +5,7 @@
     </div>
 </div>
 <div >
-    <h4 class="ss_form_title">Assigned Processor</h4>
+    <h4 class="ss_form_title">Assigned Processor <input type="button" class="rand-button short_sale_edit" value="Choise" onclick='testrefreshDiv()' /> </h4>
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Name</label>
@@ -24,7 +24,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Referral</h4>
+    <h4 class="ss_form_title">Referral </h4>
     <ul class="ss_form_box clearfix">
 
         <li class="ss_form_item">
@@ -33,23 +33,23 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">manager</label>
-            <input class="ss_form_input" data-field="ReferralContact.Name">
+            <input class="ss_form_input" value="Manager ?">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office</label>
-            <input class="ss_form_input" data-field="ReferralContact.Name">
+            <input class="ss_form_input" data-field="ReferralContact.Office">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">office #</label>
-            <input class="ss_form_input" data-field="ReferralContact.Name">
+            <input class="ss_form_input" data-field="ReferralContact.OfficeNO">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" data-field="ReferralContact.Name">
+            <input class="ss_form_input" data-field="ReferralContact.Cell">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input" data-field="ReferralContact.Name">
+            <input class="ss_form_input" data-field="ReferralContact.Email">
         </li>
     </ul>
 </div>
@@ -60,24 +60,24 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>
-            <input class="ss_form_input" value="name exmaple">
+            <input class="ss_form_input" data-field="ListingAgentContact.Name">
         </li>
       
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office</label>
-            <input class="ss_form_input" value="Office">
+            <input class="ss_form_input" data-field="ListingAgentContact.Office">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">office #</label>
-            <input class="ss_form_input" value="718-123-123">
+            <input class="ss_form_input" data-field="ListingAgentContact.OfficeNO">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" value="347-123-456">
+            <input class="ss_form_input" data-field="ListingAgentContact.Cell">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input" value="refferral@example.com">
+            <input class="ss_form_input" data-field="ListingAgentContact.Email">
         </li>
     </ul>
 </div>
@@ -88,27 +88,27 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>
-            <input class="ss_form_input" value="name exmaple">
+            <input class="ss_form_input"  data-field="BuyerContact.Name" >
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">corp name</label>
-            <input class="ss_form_input" value="corp name">
+            <input class="ss_form_input" data-field="BuyerContact.CorpName" >
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office</label>
-            <input class="ss_form_input" value="bronx">
+            <input class="ss_form_input" data-field="BuyerContact.Office">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">office #</label>
-            <input class="ss_form_input" value="718-123-123">
+            <input class="ss_form_input" data-field="BuyerContact.OfficeNO">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" value="347-123-456">
+            <input class="ss_form_input" data-field="BuyerContact.Cell">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input" value="refferral@example.com">
+            <input class="ss_form_input" data-field="BuyerContact.Email">
         </li>
     </ul>
 </div>
@@ -118,28 +118,28 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>
-            <input class="ss_form_input" value="name exmaple">
+            <input class="ss_form_input" data-field="SellerAttorneyContact.Name">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">office</label>
-            <input class="ss_form_input" value="Seller Law  Office">
+            <input class="ss_form_input" data-field="SellerAttorneyContact.Office">
         </li>
        
         <li class="ss_form_item">
-            <label class="ss_form_input_title">adress</label>
-            <input class="ss_form_input" value="12-21 45TH ST, Flushing,">
+            <label class="ss_form_input_title">Address</label>
+            <input class="ss_form_input" data-field="SellerAttorneyContact.Address">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office #</label>
-            <input class="ss_form_input" value="347-123-456">
+            <input class="ss_form_input" data-field="SellerAttorneyContact.OfficeNO">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" value="718-123-456">
+            <input class="ss_form_input" data-field="SellerAttorneyContact.Cell">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input" value="seller@example.com">
+            <input class="ss_form_input" data-field="SellerAttorneyContact.Email">
         </li>
     </ul>
 </div>
@@ -149,28 +149,28 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>
-            <input class="ss_form_input" value="name exmaple">
+            <input class="ss_form_input" data-field="BuyerContact.Name">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">office</label>
-            <input class="ss_form_input" value="Seller Law  Office">
+            <input class="ss_form_input"  data-field="BuyerContact.Office">
         </li>
        
         <li class="ss_form_item">
-            <label class="ss_form_input_title">adress</label>
-            <input class="ss_form_input" value="65-21 112TH AVE, Brookl">
+            <label class="ss_form_input_title">address</label>
+            <input class="ss_form_input"  data-field="BuyerContact.Address">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office #</label>
-            <input class="ss_form_input" value="347-123-456">
+            <input class="ss_form_input"  data-field="BuyerContact.OfficeNO">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" value="718-123-456">
+            <input class="ss_form_input"  data-field="BuyerContact.Cell">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input" value="byer@example.com">
+            <input class="ss_form_input" data-field="BuyerContact.Email">
         </li>
     </ul>
 </div>
@@ -180,28 +180,28 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>
-            <input class="ss_form_input" value="patrick p.">
+            <input class="ss_form_input" data-field="TitleCompanyContact.Name">
         </li>
         
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office</label>
-            <input class="ss_form_input" value="Title Company">
+            <input class="ss_form_input" data-field="TitleCompanyContact.Office">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">address</label>
-            <input class="ss_form_input" value="12-12 45th st,Flushing">
+            <input class="ss_form_input" data-field="TitleCompanyContact.Address">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">office #</label>
-            <input class="ss_form_input" value="718-123-123">
+            <input class="ss_form_input" data-field="TitleCompanyContact.OfficeNO">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" value="347-123-456">
+            <input class="ss_form_input" data-field="TitleCompanyContact.Cell">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input" value="ttc@example.com">
+            <input class="ss_form_input" data-field="TitleCompanyContact.Email">
         </li>
     </ul>
 </div>
