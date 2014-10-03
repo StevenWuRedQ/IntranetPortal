@@ -90,7 +90,7 @@
           <Property Name="LoanAmount" Type="numeric" Precision="18" Scale="2" />
           <Property Name="AuthorizationSent" Type="nvarchar" MaxLength="50" />
           <Property Name="LienPosition" Type="nvarchar" MaxLength="50" />
-          <Property Name="ShortSaleContact" Type="int" />
+          <Property Name="ShortSaleDept" Type="int" />
           <Property Name="Processor" Type="int" />
           <Property Name="Negotiator" Type="int" />
           <Property Name="Closer" Type="int" />
@@ -313,7 +313,6 @@
           <Property Name="LoanAmount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="AuthorizationSent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LienPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ShortSaleContact" Type="Int32" />
           <Property Name="Processor" Type="Int32" />
           <Property Name="Negotiator" Type="Int32" />
           <Property Name="Closer" Type="Int32" />
@@ -324,6 +323,7 @@
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShortSaleDept" Type="Int32" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -534,6 +534,7 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="ShortSaleDept" ColumnName="ShortSaleDept" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
@@ -544,7 +545,6 @@
                 <ScalarProperty Name="Closer" ColumnName="Closer" />
                 <ScalarProperty Name="Negotiator" ColumnName="Negotiator" />
                 <ScalarProperty Name="Processor" ColumnName="Processor" />
-                <ScalarProperty Name="ShortSaleContact" ColumnName="ShortSaleContact" />
                 <ScalarProperty Name="LienPosition" ColumnName="LienPosition" />
                 <ScalarProperty Name="AuthorizationSent" ColumnName="AuthorizationSent" />
                 <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />

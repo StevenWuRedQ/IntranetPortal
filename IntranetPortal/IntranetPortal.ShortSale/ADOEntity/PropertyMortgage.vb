@@ -18,7 +18,6 @@ Partial Public Class PropertyMortgage
     Public Property LoanAmount As Nullable(Of Decimal)
     Public Property AuthorizationSent As String
     Public Property LienPosition As String
-    Public Property ShortSaleContact As Nullable(Of Integer)
     Public Property Processor As Nullable(Of Integer)
     Public Property Negotiator As Nullable(Of Integer)
     Public Property Closer As Nullable(Of Integer)
@@ -29,5 +28,6 @@ Partial Public Class PropertyMortgage
     Public Property CreateBy As String
     Public Property UpdateDate As Nullable(Of Date)
     Public Property UpdateBy As String
+    Public Property ShortSaleDept As Nullable(Of Integer)
 
 End Class
