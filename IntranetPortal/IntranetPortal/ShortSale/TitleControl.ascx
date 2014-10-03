@@ -123,7 +123,7 @@
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Proposed Closing Date</label>
-                        <input class="ss_form_input" data-source="ShortSaleCase" data-field="CaseId" value="<%= ShortSaleCaseData.ClosingDate %>">
+                        <input class="ss_form_input" data-field="ClosingDate" value="<%= ShortSaleCaseData.ClosingDate %>">
                     </li>
                 </ul>
             </div>
