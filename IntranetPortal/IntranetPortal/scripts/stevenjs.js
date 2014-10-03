@@ -64,7 +64,7 @@ function get_sub_property(obj, id_str, value) {
                 // d_alert("value a new value to " + id_str + " = " + value);
                 if (value instanceof Date)
                 {
-                    alert("the date is data");
+                    d_alert("the date is data" + value);
                 }
                 t_obj[prop] = value;
             }
@@ -86,7 +86,7 @@ function ShortSaleDataBand(is_save) {
     }
 
     if (ShortSaleCaseData.PropertyInfo == null) {
-        d_alert("ShortSaleCaseData.PropertyInfo  is null");
+        d_alert("ShortSaleCaseData.PropertyInfo is null");
         return;
     }
     var ss_data = ShortSaleCaseData;
@@ -172,7 +172,7 @@ function ShorSaleArrayDataBand(is_save) {
             return;
         }
         var elem = $(this);
-        
+       
         var data_value = get_sub_property(ShortSaleCaseData, field);
         var _index = $(this).attr("data-array-index");
 
@@ -180,11 +180,13 @@ function ShorSaleArrayDataBand(is_save) {
 
         elem.find("[data-item-type=1]").each(function (ind) {
             var item_field = $(this).attr("data-item");
+            
             if (is_save) {
                 //d_assert(_index == 4, "the data_value is " + JSON.stringify(data_value));
                 get_sub_property(data_value, item_field, $(this).val());
             }
-            var item_value = data_value[item_field]
+           
+            var item_value = get_sub_property(data_value, item_field);
             
             $(this).val(item_value);
         });

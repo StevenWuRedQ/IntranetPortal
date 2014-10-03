@@ -305,7 +305,7 @@
                 <div style="margin-top: 50px">
                      Date of Comment:
                     <div class="border_under_line">
-                        <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="110px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
+                        <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px"  runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
                 </div>
                 <div style="margin-top: 15px; float: right">
