@@ -170,7 +170,7 @@
                     <td>2</td>
                 </tr>
                 <tr class="font_14">
-                    <td>Livint Room</td>
+                    <td>Living Room</td>
                     <td>3</td>
                     <td>3</td>
                     <td>3</td>
@@ -178,7 +178,7 @@
                     <td>3</td>
                 </tr>
                 <tr class="font_14">
-                    <td>Kicken</td>
+                    <td>Kitcken</td>
                     <td>4</td>
                     <td>4</td>
                     <td>4</td>

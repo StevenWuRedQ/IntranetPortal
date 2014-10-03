@@ -9,15 +9,15 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Name</label>
-            <input class="ss_form_input" value="">
+            <input class="ss_form_input" data-field="AssignedProcessor.Name" >
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Phone #</label>
-            <input class="ss_form_input" value="718-123-456">
+            <input class="ss_form_input" data-field="AssignedProcessor.Cell">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" value="email@examplecom">
+            <input class="ss_form_input" data-field="AssignedProcessor.Email">
         </li>
      
     </ul>
@@ -29,27 +29,27 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>
-            <input class="ss_form_input" value="name exmaple">
+            <input class="ss_form_input" data-field="ReferralContact.Name">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">manager</label>
-            <input class="ss_form_input" value="Ron borovinsky">
+            <input class="ss_form_input" data-field="ReferralContact.Name">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office</label>
-            <input class="ss_form_input" value="bronx">
+            <input class="ss_form_input" data-field="ReferralContact.Name">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">office #</label>
-            <input class="ss_form_input" value="718-123-123">
+            <input class="ss_form_input" data-field="ReferralContact.Name">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" value="347-123-456">
+            <input class="ss_form_input" data-field="ReferralContact.Name">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input" value="refferral@example.com">
+            <input class="ss_form_input" data-field="ReferralContact.Name">
         </li>
     </ul>
 </div>

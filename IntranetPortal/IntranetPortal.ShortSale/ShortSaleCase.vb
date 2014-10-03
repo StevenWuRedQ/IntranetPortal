@@ -35,9 +35,10 @@
                     _mortgages = context.PropertyMortgages.Where(Function(mg) mg.CaseId = CaseId).ToList
                 End Using
             End If
-
+            Me.ReferralContact.Name
             Return _mortgages
         End Get
+
     End Property
 
     Private _sellerTitle As PropertyTitle

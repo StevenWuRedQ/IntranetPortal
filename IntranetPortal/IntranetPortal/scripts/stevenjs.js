@@ -62,7 +62,7 @@ function get_sub_property(obj, id_str, value) {
         {
             if (value != null) {
                 // d_alert("value a new value to " + id_str + " = " + value);
-                if (value instanceof "data")
+                if (value instanceof Date)
                 {
                     alert("the date is data");
                 }
@@ -104,7 +104,7 @@ function ShortSaleDataBand(is_save) {
             data_value = get_sub_property(ShortSaleCaseData, field, ss_field_data(elem, null));
         }
         data_value = get_sub_property(ss_data, field, null);
-        ss_field_data(elem, data_value)
+        ss_field_data(elem, data_value);
     });
 
     /*band short sale arrary item*/

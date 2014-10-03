@@ -29,13 +29,12 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Phone #1</label>
-                <input class="ss_form_input" data-item="Phone" data-item-type="1">
+                <input class="ss_form_input" id="home_owner_phone" data-item="Phone" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Email</label>
                 <input class="ss_form_input" data-item="Email" data-item-type="1" >
             </li>
-
 
         </ul>
     </div>
