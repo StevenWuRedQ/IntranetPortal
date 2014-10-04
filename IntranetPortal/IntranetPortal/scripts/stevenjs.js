@@ -11,7 +11,7 @@
     $("#" + id).css("display", toSwich ? "initial" : "none");
 }
 
-var wx_deubg = true;
+var wx_deubg = false;
 /*band data in short Sale*/
 function d_alert(s) {
     if (wx_deubg) {
@@ -46,13 +46,19 @@ function get_sub_property(obj, id_str, value) {
     var t_obj = obj;
     for (var i = 0; i < props.length; i++) {
         var prop = props[i];
+        //d_assert(prop == "Lender", "find object is " + JSON.stringify(t_obj))
+        //if (t_obj == null)
+        //{
+        //    t_obj = new Object();
+        //}
         if (t_obj[prop] == null) {
+            
             if (value != null) {
                 //d_alert("create new property" + prop);
                 t_obj[prop] = new Object();
             } else
             {
-                return wx_deubg ? "null" : " ";
+                return wx_deubg ? "null" : "";
             }
             
         }
@@ -116,6 +122,7 @@ function refreshDiv(field,obj)
     get_sub_property(ShortSaleCaseData, field, obj);
     ShortSaleDataBand(false);
 }
+wx_show_bug = false;
 /*set or get short sale data if value is null get data*/
 function ss_field_data(elem, value) {
 
@@ -148,18 +155,33 @@ function ss_field_data(elem, value) {
             elem.prop("checked", value);
         }
         else {
-
+           
             if (value == null) {
                 //d_alert("number value is= " + elem.val());
                 return elem.val();
             }
+            
+            if (elem.attr("type") == "date")
+            {
+                if (!wx_show_bug)
+                    value = toDateValue(new Date(parseInt(value.substr(6))));
+               
+            }
+
             elem.val(value);
         }
 
     }
     return null;
 }
+function toDateValue(date)
+{
+    var now = date;
 
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    return now.getFullYear() + "-" + (month) + "-" + (day);
+}
 function ShorSaleArrayDataBand(is_save) {
     if (!is_save)
         prepareArrayDivs();
@@ -174,8 +196,16 @@ function ShorSaleArrayDataBand(is_save) {
         var elem = $(this);
        
         var data_value = get_sub_property(ShortSaleCaseData, field);
+        //d_assert(data_value.length == 0, "create new field" + field + "data" + data_value);
+        /*prepare frist element frist */
+        if (data_value.length == 0)
+        {
+            data_value = new Array();
+            get_sub_property(ShortSaleCaseData, field, data_value);
+            data_value[0] = new Object();
+        }
         var _index = $(this).attr("data-array-index");
-
+        
         data_value = data_value[_index];
 
         elem.find("[data-item-type=1]").each(function (ind) {

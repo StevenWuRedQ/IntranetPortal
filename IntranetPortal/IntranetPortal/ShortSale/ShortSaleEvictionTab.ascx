@@ -27,7 +27,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Date started</label>
-            <input class="ss_form_input"  type="date" data-field="DateStarted">
+            <input class="ss_form_input"  type="date" id="Date_started" data-field="DateStarted">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Lock box code</label>
