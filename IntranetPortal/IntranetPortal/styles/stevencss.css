@@ -1753,6 +1753,7 @@ input[type='checkbox'] + label, input[type=radio] + label .box_text {
 {
     background:#99bdcf;
     padding:9px 20px;
+    outline:none;
 }
 .short_sale_edit:hover
 {
