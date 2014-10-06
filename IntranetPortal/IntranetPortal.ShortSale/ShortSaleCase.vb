@@ -17,7 +17,6 @@
                 If _propInfo Is Nothing Then
                     _propInfo = New PropertyBaseInfo
                 End If
-
             End If
 
             Return _propInfo

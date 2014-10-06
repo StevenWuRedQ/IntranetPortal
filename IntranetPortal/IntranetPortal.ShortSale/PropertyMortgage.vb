@@ -80,7 +80,11 @@
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-                pbi = ShortSaleUtility.SaveChangesObj(pbi, Me)
+                If DataStatus = ModelStatus.Deleted Then
+                    context.PropertyMortgages.Remove(pbi)
+                Else
+                    pbi = ShortSaleUtility.SaveChangesObj(pbi, Me)
+                End If
             End If
 
             context.SaveChanges()
