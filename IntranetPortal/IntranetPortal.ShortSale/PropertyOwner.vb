@@ -1,4 +1,7 @@
 ﻿Partial Public Class PropertyOwner
+
+    Public Property DataStatus As ModelStatus
+
     Public Sub Save()
         Using context As New ShortSaleEntities
             Dim obj = context.PropertyOwners.Find(BBLE, FirstName, LastName)
@@ -7,7 +10,12 @@
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-                obj = ShortSaleUtility.SaveChangesObj(obj, Me)
+
+                If DataStatus = ModelStatus.Deleted Then
+                    context.PropertyOwners.Remove(obj)
+                Else
+                    obj = ShortSaleUtility.SaveChangesObj(obj, Me)
+                End If
             End If
 
             context.SaveChanges()
