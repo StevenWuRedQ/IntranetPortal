@@ -293,5 +293,5 @@
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">
         </dx:PopupControlContentControl>
-    </ContentCollection>
+    </ContentCollection>   
 </dx:ASPxPopupControl>

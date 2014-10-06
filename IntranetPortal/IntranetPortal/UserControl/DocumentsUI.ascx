@@ -36,7 +36,7 @@
             <div class="font_30">
                 <i class="fa fa-file"></i>&nbsp;
                 <span class="font_light">Documents</span>
-                 <span class="time_buttons" onclick="">Upload File</span>
+                 <span class="time_buttons" onclick="UploadFiles()">Upload File</span>
             </div>
             <div style="padding-left: 39px;" class="clearfix">
                 <span style="font-size: 14px;"><%= LeadsName %></span>
