@@ -3,7 +3,7 @@
 
 <div class="clearfix">
     <div style="float: right">
-        <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='swich_edit_model(this, short_sale_case_data)' />
+        <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
     </div>
 </div>
 
@@ -107,8 +107,8 @@
         <li class="ss_form_item">
             <span class="ss_form_input_title">FHA</span>
 
-            <input type="radio" id="key_PropertyInfo_checkYes_FHA" data-field="PropertyInfo.FHA" data-radio="Y" class="ss_form_input" name="FHA1" value="YES" >
-            <label for="checkYes_FHA" class="input_with_check"><span class="box_text">Yes</span></label>
+            <input type="radio" id="key_PropertyInfo_checkYes_FHA" data-field="PropertyInfo.FHA"  data-radio="Y" class="ss_form_input" name="FHA1" value="YES" >
+            <label for="key_PropertyInfo_checkYes_FHA" class="input_with_check"><span class="box_text">Yes</span></label>
 
             <input type="radio" id="none_pdf_checkey_no25" data-field="PropertyInfo.FHA" name="FHA1" value="NO">
             <label for="none_pdf_checkey_no25" class="input_with_check"><span class="box_text">No</span></label>
@@ -118,7 +118,7 @@
             <span class="ss_form_input_title">Fannie MAE</span>
 
             <input type="radio" id="key_PropertyInfo_checkYes_FannieMae" data-field="PropertyInfo.FannieMae" data-radio="Y" name="Fannie_Mae1" value="YES" >
-            <label for="checkYes_FannieMae" class="input_with_check"><span class="box_text">Yes</span></label>
+            <label for="key_PropertyInfo_checkYes_FannieMae" class="input_with_check"><span class="box_text">Yes</span></label>
 
             <input type="radio" id="none_pdf_checkey_no23" data-field="PropertyInfo.FannieMae" name="Fannie_Mae1" value="NO">
             <label for="none_pdf_checkey_no23" class="input_with_check"><span class="box_text">No</span></label>
@@ -128,7 +128,7 @@
             <span class="ss_form_input_title">Freddie Mac</span>
 
             <input type="radio" id="key_PropertyInfo_checkYes_FreddieMac" data-field="PropertyInfo.FreddieMac" data-radio="Y" name="Freddie_Mac1" value="YES">
-            <label for="checkYes_FreddieMac" class="input_with_check"><span class="box_text">Yes</span></label>
+            <label for="key_PropertyInfo_checkYes_FreddieMac" class="input_with_check"><span class="box_text">Yes</span></label>
 
             <input type="radio" id="none_pdf_checkey_no24" data-field="PropertyInfo.FreddieMac" name="Freddie_Mac1" value="NO">
             <label for="none_pdf_checkey_no24" class="input_with_check"><span class="box_text">No</span></label>
@@ -244,8 +244,8 @@
 <script>
    function onRefreashDone ()
     {
-       
-        $("#home_breakdown_table").editableTableWidget();
+       $("#home_breakdown_table").editableTableWidget();
+       $(".ss_form_input").prop("disabled", true);
     }
     //$(document).ready(function () {
     //    // Handler for .ready() called.

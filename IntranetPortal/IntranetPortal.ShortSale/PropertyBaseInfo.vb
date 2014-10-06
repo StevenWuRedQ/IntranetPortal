@@ -19,7 +19,7 @@
         End Get
     End Property
 
-    Private _owners As List(Of PropertyOwner)
+    Private _owners As New List(Of PropertyOwner)
     Public ReadOnly Property Owners As List(Of PropertyOwner)
         Get
             If _owners Is Nothing Then

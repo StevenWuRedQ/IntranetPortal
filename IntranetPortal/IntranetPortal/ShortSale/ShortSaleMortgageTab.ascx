@@ -3,7 +3,7 @@
 <script src="/scripts/stevenjs.js"></script>
 <div class="clearfix">
     <div style="float: right">
-        <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='swich_edit_model(this, short_sale_case_data)' />
+        <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
     </div>
 </div>
 

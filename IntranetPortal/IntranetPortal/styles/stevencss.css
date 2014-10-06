@@ -1600,6 +1600,7 @@ li.ss_form_item {
     display: block;
     margin: 0px;
     margin-top: 15px;
+    font-weight:normal !important;
 }
 
 .ss_form_input {

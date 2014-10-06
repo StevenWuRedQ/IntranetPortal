@@ -192,7 +192,7 @@ function delete_array_item(button)
     var index = $(arr_item).attr("data-array-index")
     data_value[index].DataStatus = 3;
     arr_item.remove();
-    getShortSaleInstanceComplete(null, null);
+    //getShortSaleInstanceComplete(null, null);
 }
 function ShorSaleArrayDataBand(is_save) {
     if (!is_save)
@@ -356,13 +356,14 @@ function collectDate(objCase) {
     return obj;
 }
 
-function swich_edit_model(s, objCase) {
+function switch_edit_model(s, objCase) {
     var inputs = $(".ss_form_input");
 
     var checks = $(".input_with_check");
     if ($(s).val() == "Edit") {
         inputs.addClass("color_blue_edit");
         checks.addClass("color_blue_edit");
+        $(".ss_form_input").prop("disabled", false);
         $(s).val("Save");
     } else {
         getShortSaleInstanceComplete(null, null);

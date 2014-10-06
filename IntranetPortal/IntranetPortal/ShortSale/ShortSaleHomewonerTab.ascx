@@ -3,7 +3,7 @@
 <%@ Import Namespace="IntranetPortal" %>
 <div class="clearfix">
     <div style="float: right">
-       <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='swich_edit_model(this, short_sale_case_data)' />
+       <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
     </div>
 </div>
 <div data-array-index="0" data-field="PropertyInfo.Owners" class="ss_array">
@@ -67,7 +67,7 @@
         </ul>
     </div>
     <div class="ss_form">
-        <h4 class="ss_form_title">ohter info</h4>
+        <h4 class="ss_form_title">other info</h4>
         <ul class="ss_form_box clearfix">
 
             <li class="ss_form_item">
