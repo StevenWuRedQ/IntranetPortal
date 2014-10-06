@@ -212,6 +212,17 @@
                 _propInfo.Save()
             End If
 
+            If _sellerTitle IsNot Nothing Then
+                _sellerTitle.CaseId = CaseId
+                _sellerTitle.Type = PropertyTitle.TitleType.Seller
+                _sellerTitle.Save()
+            End If
+
+            If _buyerTitle IsNot Nothing Then
+                _buyerTitle.CaseId = CaseId
+                _buyerTitle.Type = PropertyTitle.TitleType.Buyer
+                _buyerTitle.Save()
+            End If
 
 
         End Using
@@ -276,4 +287,11 @@ Public Enum CaseStatus
     Eviction = 3
     OnHold = 4
     Closed = 5
+End Enum
+
+Public Enum ModelStatus
+    Original = 0
+    Added = 1
+    Modified = 2
+    Deleted = 3
 End Enum

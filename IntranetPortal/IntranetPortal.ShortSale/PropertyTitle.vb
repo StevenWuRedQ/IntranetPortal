@@ -14,4 +14,20 @@
             Return title
         End Using
     End Function
+
+    Public Sub Save()
+        Using context As New ShortSaleEntities
+            'context.ShortSaleCases.Attach(Me)
+            If TitleId = 0 Then
+                CreateDate = DateTime.Now
+                context.Entry(Me).State = Entity.EntityState.Added
+            Else
+                Dim obj = context.PropertyTitles.Find(TitleId)
+                obj = ShortSaleUtility.SaveChangesObj(obj, Me)
+            End If
+
+            context.SaveChanges()
+        End Using
+
+    End Sub
 End Class

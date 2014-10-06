@@ -70,6 +70,8 @@
         End Set
     End Property
 
+    Public Property DataStatus As ModelStatus
+
     Public Sub Save()
         Using context As New ShortSaleEntities
             Dim pbi = context.PropertyMortgages.Find(MortgageId)
