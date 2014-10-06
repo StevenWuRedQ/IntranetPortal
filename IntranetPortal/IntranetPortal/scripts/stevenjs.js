@@ -243,7 +243,7 @@ function AddArraryItem(e) {
     }
 
     var field = array_div.attr("data-field");
-    alert("get field is " + field);
+    
     var data_value = get_sub_property(ShortSaleCaseData, field, null);
     var len = data_value.length;
     data_value[len] = new Object();

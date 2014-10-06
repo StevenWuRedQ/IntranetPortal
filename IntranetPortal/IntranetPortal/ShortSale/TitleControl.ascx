@@ -123,7 +123,7 @@
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Proposed Closing Date</label>
-                        <input class="ss_form_input" data-field="ClosingDate" value="<%= ShortSaleCaseData.ClosingDate %>">
+                        <input class="ss_form_input" data-field="ClosingDate" type="date" value="<%= ShortSaleCaseData.ClosingDate %>">
                     </li>
                 </ul>
             </div>
@@ -145,11 +145,11 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Ordered</label>
-                        <input class="ss_form_input" data-field="SellerTitle.ReportOrderDate" value="<%= ShortSaleCaseData.SellerTitle.ReportOrderDate%>">
+                        <input class="ss_form_input" data-field="SellerTitle.ReportOrderDate" type="date" value="<%= ShortSaleCaseData.SellerTitle.ReportOrderDate%>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Received</label>
-                        <input class="ss_form_input" data-field="SellerTitle.ReceivedDate" value="<%= ShortSaleCaseData.SellerTitle.ReceivedDate%>">
+                        <input class="ss_form_input" data-field="SellerTitle.ReceivedDate" type="date" value="<%= ShortSaleCaseData.SellerTitle.ReceivedDate%>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Order Number</label>
@@ -175,15 +175,15 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Ordered</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.ReportOrderDate" value="<%= ShortSaleCaseData.BuyerTitle.ReportOrderDate%>">
+                        <input class="ss_form_input" data-field="BuyerTitle.ReportOrderDate" type="date" value="<%= ShortSaleCaseData.BuyerTitle.ReportOrderDate%>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Received</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.ReceivedDate" value="<%= ShortSaleCaseData.BuyerTitle.ReceivedDate%>">
+                        <input class="ss_form_input" data-field="BuyerTitle.ReceivedDate" type="date" value="<%= ShortSaleCaseData.BuyerTitle.ReceivedDate%>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Order Number</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.OrderNumber" value="<%= ShortSaleCaseData.BuyerTitle.OrderNumber%>">
+                        <input class="ss_form_input" data-field="BuyerTitle.OrderNumber"  value="<%= ShortSaleCaseData.BuyerTitle.OrderNumber%>">
                     </li>
                 </ul>
             </div>
