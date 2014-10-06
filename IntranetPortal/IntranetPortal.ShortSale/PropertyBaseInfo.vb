@@ -19,12 +19,12 @@
         End Get
     End Property
 
-    Private _owners As New List(Of PropertyOwner)
+    Private _owners As List(Of PropertyOwner)
     Public ReadOnly Property Owners As List(Of PropertyOwner)
         Get
             If _owners Is Nothing Then
                 Using context As New ShortSaleEntities
-                    Return context.PropertyOwners.Where(Function(po) po.BBLE = BBLE).ToList
+                    _owners = context.PropertyOwners.Where(Function(po) po.BBLE = BBLE).ToList
                 End Using
             End If
 
@@ -53,6 +53,7 @@
 
             If _owners IsNot Nothing Then
                 For Each owner In _owners
+                    owner.BBLE = BBLE
                     owner.Save()
                 Next
             End If
