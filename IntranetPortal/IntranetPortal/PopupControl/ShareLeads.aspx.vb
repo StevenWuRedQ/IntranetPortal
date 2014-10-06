@@ -35,15 +35,23 @@
             Throw New Exception("Unknow BBLE! Please check.")
         End If
 
-        Using Context As New Entities
-            Dim sharedItem As New SharedLead
-            sharedItem.BBLE = hfbble.Value
-            sharedItem.UserName = cbEmps.Text
-            sharedItem.CreateBy = User.Identity.Name
-            sharedItem.CreateDate = DateTime.Now
+        If String.IsNullOrEmpty(cbEmps.Text) Then
+            Throw New Exception("Please select employee.")
+        End If
 
-            Context.SharedLeads.Add(sharedItem)
-            Context.SaveChanges()
+        Using Context As New Entities
+            Dim item = Context.SharedLeads.Where(Function(sl) sl.BBLE = hfbble.Value And sl.UserName = cbEmps.Text).FirstOrDefault
+
+            If item Is Nothing Then
+                Dim sharedItem As New SharedLead
+                sharedItem.BBLE = hfbble.Value
+                sharedItem.UserName = cbEmps.Text
+                sharedItem.CreateBy = User.Identity.Name
+                sharedItem.CreateDate = DateTime.Now
+
+                Context.SharedLeads.Add(sharedItem)
+                Context.SaveChanges()
+            End If
         End Using
         LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} share lead to {1}.", User.Identity.Name, cbEmps.Text), hfbble.Value, LeadsActivityLog.LogCategory.Status.ToString)
         BindShareList(hfbble.Value)

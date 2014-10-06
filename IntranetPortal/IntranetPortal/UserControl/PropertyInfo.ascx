@@ -302,7 +302,7 @@
             <PanelCollection>
                 <dx:PanelContent>                    
                     <div style="margin: 20px;" class="clearfix">
-                        <div class="form_head" style="margin-top: 40px;">REFERRAL <i class="fa fa-save  color_blue_edit collapse_btn" onclick="callPanelClientReferrel.PerformCallback('Save')" ></i></div>
+                        <div class="form_head" style="margin-top: 40px;">REFERRAL <i class="fa fa-save  color_blue_edit collapse_btn" title="Save Referral" onclick="callPanelClientReferrel.PerformCallback('Save')" ></i></div>
 
                         <%--line 1--%>
                         <div class="form_div_node form_div_node_line_margin">

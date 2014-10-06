@@ -14,6 +14,19 @@
     function SetChange() {
 
     }
+
+    function UploadFiles()
+    {
+        var url = '/UploadFilePage.aspx?b=' + tmpBBLE;
+        //var centerLeft = parseInt((window.screen.availWidth - 640) / 2);
+        //var centerTop = parseInt(((window.screen.availHeight - 400) / 2) - 50);          
+        if (popupCtrUploadFiles) {
+            popupCtrUploadFiles.SetContentUrl(url);
+            popupCtrUploadFiles.Show();
+        }
+        else
+            window.open(url, 'Upload Files', popup_params(640, 400));
+    }
 </script>
 
 <div style="color: #999ca1;">
@@ -23,6 +36,7 @@
             <div class="font_30">
                 <i class="fa fa-file"></i>&nbsp;
                 <span class="font_light">Documents</span>
+                 <span class="time_buttons" onclick="">Upload File</span>
             </div>
             <div style="padding-left: 39px;" class="clearfix">
                 <span style="font-size: 14px;"><%= LeadsName %></span>

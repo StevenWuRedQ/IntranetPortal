@@ -7,7 +7,6 @@
     </div>
 </div>
 
-
 <div>
     <h4 class="ss_form_title">Property</h4>
     <ul class="ss_form_box clearfix">
@@ -245,7 +244,7 @@
    function onRefreashDone ()
     {
        $("#home_breakdown_table").editableTableWidget();
-       $(".ss_form_input").prop("disabled", true);
+       //$(".ss_form_input").prop("disabled", true);
     }
     //$(document).ready(function () {
     //    // Handler for .ready() called.

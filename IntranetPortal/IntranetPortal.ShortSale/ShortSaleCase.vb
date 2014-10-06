@@ -223,6 +223,16 @@
                 _buyerTitle.Save()
             End If
 
+            If _occupants IsNot Nothing Then
+                For Each opt In _occupants
+                    If Not opt.CaseId.HasValue Then
+                        opt.CaseId = CaseId
+                    End If
+
+
+                Next
+
+            End If
 
         End Using
     End Sub

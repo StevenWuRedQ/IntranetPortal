@@ -12,7 +12,7 @@
             <label class="ss_form_input_title">address</label>
            
             <input class="ss_form_input" style="width: 93.5%;" name="lender"
-                 value="<%=summaryCase.PropertyInfo.Number + summaryCase.PropertyInfo.StreetName+","+ summaryCase.PropertyInfo.City+","+ summaryCase.PropertyInfo.State+","+summaryCase.PropertyInfo.Zipcode%>">
+                 value="<%= summaryCase.PropertyInfo.PropertyAddress%>">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Block</label>

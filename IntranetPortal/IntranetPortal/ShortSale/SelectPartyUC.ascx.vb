@@ -25,6 +25,10 @@ Public Class SelectPartyUC
         Dim contact As New PartyContact
         contact.Name = name
         contact.CorpName = companyname
+        contact.Address = CType(grid.FindEditFormTemplateControl("txtAddress"), HtmlInputText).Value
+        contact.OfficeNO = CType(grid.FindEditFormTemplateControl("txtOffice"), HtmlInputText).Value
+        contact.Cell = CType(grid.FindEditFormTemplateControl("txtCell"), HtmlInputText).Value
+        contact.Email = CType(grid.FindEditFormTemplateControl("txtEmail"), HtmlInputText).Value
         contact.Type = PartyContact.ContactType.TitleCompany
         contact.Save()
         e.Cancel = True

@@ -85,7 +85,7 @@
         <div class="short_sale_content">
             <div class="clearfix">
                 <div style="float: right">
-                    <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='BindData()' />
+                     <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
                 </div>
             </div>
             <div class="ss_form" style="display: none">
@@ -137,7 +137,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.SellerTitle.Phone%>" id="txtSellerTitlePhone">
+                        <input class="ss_form_input" data-field="SellerTitle.Phone" value="<%= ShortSaleCaseData.SellerTitle.Phone%>" id="txtSellerTitlePhone">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">&nbsp;</label>
@@ -145,15 +145,15 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Ordered</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.SellerTitle.ReportOrderDate%>">
+                        <input class="ss_form_input" data-field="SellerTitle.ReportOrderDate" value="<%= ShortSaleCaseData.SellerTitle.ReportOrderDate%>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Received</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.SellerTitle.ReceivedDate%>">
+                        <input class="ss_form_input" data-field="SellerTitle.ReceivedDate" value="<%= ShortSaleCaseData.SellerTitle.ReceivedDate%>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Order Number</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.SellerTitle.OrderNumber%>">
+                        <input class="ss_form_input" data-field="SellerTitle.OrderNumber" value="<%= ShortSaleCaseData.SellerTitle.OrderNumber%>">
                     </li>
                 </ul>
             </div>
@@ -163,11 +163,11 @@
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Company Name</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.BuyerTitle.CompanyName%>" id="txtBuyerCompanyName">
+                        <input class="ss_form_input" data-field="BuyerTitle.CompanyName" value="<%= ShortSaleCaseData.BuyerTitle.CompanyName%>" id="txtBuyerCompanyName">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.BuyerTitle.Phone%>" id="txtBuyerTitlePhone">
+                        <input class="ss_form_input" data-field="BuyerTitle.Phone" value="<%= ShortSaleCaseData.BuyerTitle.Phone%>" id="txtBuyerTitlePhone">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">&nbsp;</label>
@@ -175,15 +175,15 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Ordered</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.BuyerTitle.ReportOrderDate%>">
+                        <input class="ss_form_input" data-field="BuyerTitle.ReportOrderDate" value="<%= ShortSaleCaseData.BuyerTitle.ReportOrderDate%>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Received</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.BuyerTitle.ReceivedDate%>">
+                        <input class="ss_form_input" data-field="BuyerTitle.ReceivedDate" value="<%= ShortSaleCaseData.BuyerTitle.ReceivedDate%>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Order Number</label>
-                        <input class="ss_form_input" data-flied="BuyerTitle.OrderNumber" value="<%= ShortSaleCaseData.BuyerTitle.OrderNumber%>">
+                        <input class="ss_form_input" data-field="BuyerTitle.OrderNumber" value="<%= ShortSaleCaseData.BuyerTitle.OrderNumber%>">
                     </li>
                 </ul>
             </div>
@@ -302,7 +302,6 @@
                             <h4 class="ss_form_title">Clearence <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="AspxPopupClearence.Show()"></i></h4>
                             <%--clearence list--%>
                             <div>
-
                                 <% For Each clearence In ShortSaleCaseData.Clearences%>
                                 <div class="clearence_list_item">
                                     <div class="clearence_list_content clearfix">

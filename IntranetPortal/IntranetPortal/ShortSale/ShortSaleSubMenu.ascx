@@ -7,7 +7,7 @@
         tmpCaseId = caseId;
         tmpBBLE = bble;
         s.getBoundingClientRect();
-        
+
         ASPxPopupMenuCategory.ShowAtElement(s);
         var popmenu = ASPxPopupMenuCategory.GetMainElement();
         var pop_postion = popmenu.getBoundingClientRect();
@@ -22,26 +22,33 @@
             pop_content.className = "dxm-popupMain dxm-popup fix_pop_postion_s";
         }
     }
-    
-    function OnMenuItemClick(s,e)
-    {
+
+    function OnMenuItemClick(s, e) {
         e.item.SetChecked(false);
-        if (tmpCaseId != null && tmpBBLE != null)
-        {
-            if(e.item.index == 0)
-            {
+        if (tmpCaseId != null && tmpBBLE != null) {
+            if (e.item.index == 0) {
                 ShowPropertyMap(tmpBBLE);
             }
 
-            if(e.item.index > 0 && e.item.index <=6)
-            {
+            if (e.item.index > 0 && e.item.index <= 6) {
                 SaveStatus(e.item.name, tmpCaseId);
+            }
+
+            if (e.item.index == 8) {
+                var url = '/UploadFilePage.aspx?b=' + tmpBBLE;
+                //var centerLeft = parseInt((window.screen.availWidth - 640) / 2);
+                //var centerTop = parseInt(((window.screen.availHeight - 400) / 2) - 50);          
+                if (popupCtrUploadFiles) {
+                    popupCtrUploadFiles.SetContentUrl(url);
+                    popupCtrUploadFiles.Show();
+                }
+                else
+                    window.open(url, 'Upload Files', popup_params(640, 400));
             }
         }
     }
 
-    function SaveStatus(status, caseId)
-    {
+    function SaveStatus(status, caseId) {
         if (caseStatusCallbackClient.InCallback()) {
             alert("Server is busy! Please wait!")
         } else {
@@ -192,8 +199,7 @@
         popup.AdjustControl();
     }
 
-    function OnSetStatusComplete(s,e)
-    {
+    function OnSetStatusComplete(s, e) {
         if (typeof gridCase == "undefined") {
             //alert("undefined");
         }
@@ -207,11 +213,11 @@
 
 </script>
 
-<dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory"  PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+<dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
     <Items>
         <dx:MenuItem GroupName="Sort" Text="View Map" Name="GoogleStreet">
             <Image Url="/images/drap_map_icons.png"></Image>
-        </dx:MenuItem>     
+        </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Follow Up" Name="FollowUp" Image-Url="/images/drap_follow_up_icons.png">
             <Image Url="/images/drap_follow_up_icons.png"></Image>
         </dx:MenuItem>
@@ -220,13 +226,13 @@
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Active Cases" Name="Active" Image-Url="/images/drap_prority_icons.png">
             <Image Url="/images/drap_doorknock_icons.png"></Image>
-        </dx:MenuItem>      
+        </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Eviction" Name="Eviction" Image-Url="/images/drap_deadlead_icons.png">
             <Image Url="/images/drap_deadlead_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="On Hold" Name="OnHold" Image-Url="/images/drap_inprocess_icons.png">
             <Image Url="/images/drap_inprocess_icons.png"></Image>
-        </dx:MenuItem>        
+        </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Closed" Name="Closed" Image-Url="/images/drap_closed_icons.png">
             <Image Url="/images/drap_closed_icons.png"></Image>
         </dx:MenuItem>
@@ -240,44 +246,52 @@
     <ClientSideEvents ItemClick="OnMenuItemClick" />
     <ItemStyle Height="30px"></ItemStyle>
 </dx:ASPxPopupMenu>
- <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMapControl" Width="900px" Height="700px"
-        ID="ASPxPopupControl1"
-        HeaderText="Street View" AutoUpdatePosition="true" Modal="true" ContentUrlIFrameTitle="streetViewFrm"
-        runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-        <HeaderTemplate>
-            <div class="clearfix">
-                 <div style="float: right; position: relative; margin-right: 10px; margin-bottom: -27px; color: #2e2f31">
-                    <i class="fa fa-expand icon_btn" style="margin-right: 10px" onclick="AdjustPopupSize(ASPxPopupMapControl)"></i>
-                    <i class="fa fa-times icon_btn" onclick="ASPxPopupMapControl.Hide()"></i>
-                </div>
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" style="border: 0px" role="tablist">
-                    <li class="active"><a href="#streetView" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(0)">Street View</a></li>
-                    <li><a href="#mapView" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(1)">Map View</a></li>
-                    <li><a href="#BingBird" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(2)">Bing Bird</a></li>
-                    <li><a href="#Oasis" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(3)">Oasis</a></li>
-                    <li><a href="#ZOLA" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(4)">ZOLA</a></li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content" style="display: none">
-                    <div class="tab-pane active" id="streetView">streetView</div>
-                    <div class="tab-pane" id="mapView">mapView</div>
-                    <div class="tab-pane" id="BingBird">BingBird</div>
-                    <div class="tab-pane" id="Oasis">Oasis</div>
-                    <div class="tab-pane" id="ZOLA">ZOLA</div>
-                </div>
-                <div style="width:100%;text-align: center; display:none" id="leads_address_popup"> </div>               
+<dx:ASPxPopupControl ClientInstanceName="ASPxPopupMapControl" Width="900px" Height="700px"
+    ID="ASPxPopupControl1"
+    HeaderText="Street View" AutoUpdatePosition="true" Modal="true" ContentUrlIFrameTitle="streetViewFrm"
+    runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <HeaderTemplate>
+        <div class="clearfix">
+            <div style="float: right; position: relative; margin-right: 10px; margin-bottom: -27px; color: #2e2f31">
+                <i class="fa fa-expand icon_btn" style="margin-right: 10px" onclick="AdjustPopupSize(ASPxPopupMapControl)"></i>
+                <i class="fa fa-times icon_btn" onclick="ASPxPopupMapControl.Hide()"></i>
             </div>
-        </HeaderTemplate>
-        <ContentCollection>
-            <dx:PopupControlContentControl runat="server">            
-            </dx:PopupControlContentControl>
-        </ContentCollection>
-    </dx:ASPxPopupControl>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" style="border: 0px" role="tablist">
+                <li class="active"><a href="#streetView" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(0)">Street View</a></li>
+                <li><a href="#mapView" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(1)">Map View</a></li>
+                <li><a href="#BingBird" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(2)">Bing Bird</a></li>
+                <li><a href="#Oasis" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(3)">Oasis</a></li>
+                <li><a href="#ZOLA" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(4)">ZOLA</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content" style="display: none">
+                <div class="tab-pane active" id="streetView">streetView</div>
+                <div class="tab-pane" id="mapView">mapView</div>
+                <div class="tab-pane" id="BingBird">BingBird</div>
+                <div class="tab-pane" id="Oasis">Oasis</div>
+                <div class="tab-pane" id="ZOLA">ZOLA</div>
+            </div>
+            <div style="width: 100%; text-align: center; display: none" id="leads_address_popup"></div>
+        </div>
+    </HeaderTemplate>
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server">
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+</dx:ASPxPopupControl>
 <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback">
     <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
 </dx:ASPxCallback>
 <dx:ASPxCallback ID="statusCallback" runat="server" ClientInstanceName="caseStatusCallbackClient" OnCallback="statusCallback_Callback">
     <ClientSideEvents CallbackComplete="OnSetStatusComplete" />
 </dx:ASPxCallback>
+<dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="680px" Height="410px" ID="ASPxPopupControl2"
+    HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true"
+    runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server">
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+</dx:ASPxPopupControl>
