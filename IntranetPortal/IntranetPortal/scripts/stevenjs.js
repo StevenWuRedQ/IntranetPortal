@@ -182,6 +182,18 @@ function toDateValue(date)
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
     return now.getFullYear() + "-" + (month) + "-" + (day);
 }
+function delete_array_item(button)
+{
+    var ss_obj = ShortSaleCaseData;
+    var arr_item = $(button).parents(".ss_array");
+    
+    var field = $(arr_item).attr("data-field");
+    var data_value = get_sub_property(ss_obj, field);
+    var index = $(arr_item).attr("data-array-index")
+    data_value[index].DataStatus = 3;
+    arr_item.remove();
+    getShortSaleInstanceComplete(null, null);
+}
 function ShorSaleArrayDataBand(is_save) {
     if (!is_save)
         prepareArrayDivs();
