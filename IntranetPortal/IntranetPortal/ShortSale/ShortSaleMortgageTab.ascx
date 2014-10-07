@@ -11,13 +11,13 @@
    
 </script>
 
-<div data-array-index="0" data-field="Mortgages" class="ss_array" >
+<div data-array-index="0" data-field="Mortgages" class="ss_array" style="display:none">
     <%--<h3 class="title_with_line"><span class="title_index title_span">Mortgages </span></h3>--%>
     <div class="ss_form">
-        <h4 class="ss_form_title title_with_line"><span class="title_index title_span">Mortgage 1</span> <i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(this)" title="Add"></i>
+        <h4 class="ss_form_title title_with_line"><span class="title_index title_span">Mortgage __index__</span>  <i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(this)" title="Add"></i>
             <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" onclick="delete_array_item(this)" title="Delete"></i> 
         </h4>
-        <ul class="ss_form_box clearfix" id="mortgage1">
+        <ul class="ss_form_box clearfix" id="mortgage__index__">
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">LENDER</label>
@@ -29,7 +29,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Loan Amount</label>
-                <input class="ss_form_input currency_input" data-item="LoanAmount" data-item-type="1" onblur="$(this).formatCurrency();">
+                <input class="ss_form_input currency_input"  id="LoanAmount_id_Mortgages" data-item="LoanAmount" data-item-type="1" onblur="$(this).formatCurrency();">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Authorization Sent</label>

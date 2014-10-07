@@ -24,16 +24,18 @@
         //ShortSaleCaseData = short_sale_case_data;
         short_sale_case_data.PropertyInfo.UpdateBy = "<%=Page.User.Identity.Name%>";
 
-        ShortSaleDataBand(true);
+        ShortSaleDataBand(1);
         
         var strJson = JSON.stringify(ShortSaleCaseData);
         
         //d_alert(strJson);
 
         SaveClicklCallbackCallbackClinet.PerformCallback(strJson);
+
     }
     function saveComplete(s, e) {
-        RefreshContent();
+        //RefreshContent();
+        ShortSaleDataBand(2);
     }
 
     function ShowAcrisMap(propBBLE) {

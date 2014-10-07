@@ -16,11 +16,11 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Block</label>
-            <input class="ss_form_input" value="<%=summaryCase.PropertyInfo.Block%>">
+            <input class="ss_form_input" data-field="PropertyInfo.Block" >
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">lot</label>
-            <input class="ss_form_input" value="<%=summaryCase.PropertyInfo.Block%>">
+            <input class="ss_form_input"  data-field="PropertyInfo.Lot">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title"  >Accessibility</label>
@@ -86,10 +86,10 @@
 
     </ul>
 </div>
-<div data-array-index="0" data-field="Mortgages" class="ss_array" >
+<div data-array-index="0" data-field="Mortgages" class="ss_array" style="display:none" >
 
     <div class="ss_form">
-        <h4 class="ss_form_title"> <span class="title_index ">Mortgage 1</span></h4>
+        <h4 class="ss_form_title"> <span class="title_index ">Mortgage __index__ </span></h4>
         <ul class="ss_form_box clearfix">
 
             <li class="ss_form_item">

@@ -28,7 +28,11 @@ function d_assert(cond,s)
 }
 /*when has value then is send object by value */
 function get_sub_property(obj, id_str, value) {
-
+    
+    if (value != null)
+    {
+        value = currency2Number(value)
+    }
     var props = id_str.split(".");
 
     if (props.length < 1) {
@@ -82,10 +86,15 @@ function get_sub_property(obj, id_str, value) {
     return t_obj;
 }
 
-function ShortSaleDataBand(is_save) {
+/*
+*data_stauts == 1 then save data
+*/
+function ShortSaleDataBand(data_stauts) {
+
     /*use for ui*/
     onRefreashDone();
     /**/
+    var is_save = data_stauts == 1;
     if (ShortSaleCaseData == null) {
         d_alert("ShortSaleCaseData is null");
         return;
@@ -114,13 +123,13 @@ function ShortSaleDataBand(is_save) {
     });
 
     /*band short sale arrary item*/
-    ShorSaleArrayDataBand(is_save)
+    ShorSaleArrayDataBand(data_stauts)
 }
 
 function refreshDiv(field,obj)
 {
     get_sub_property(ShortSaleCaseData, field, obj);
-    ShortSaleDataBand(false);
+    ShortSaleDataBand(2);
 }
 wx_show_bug = false;
 /*set or get short sale data if value is null get data*/
@@ -151,13 +160,16 @@ function ss_field_data(elem, value) {
         else if (elem.attr("type") == "checkbox") {
             if (value == null) {
                 return elem.prop("checked");
-            }
+            } 
             elem.prop("checked", value);
         }
         else {
            
             if (value == null) {
                 //d_alert("number value is= " + elem.val());
+                
+
+              
                 return elem.val();
             }
             
@@ -167,12 +179,27 @@ function ss_field_data(elem, value) {
                     value = toDateValue(new Date(parseInt(value.substr(6))));
                
             }
-
+           
             elem.val(value);
         }
 
     }
     return null;
+}
+
+function currency2Number(value)
+{
+    if (typeof (value) == "string")
+    {
+        if (value.indexOf("$")==0)
+        {
+            var r_val = value
+            r_val = r_val.replace(/\$/g, "");
+            r_val = r_val.replace(/\,/g, "");
+            return parseFloat(r_val);
+        }
+    }
+    return value;
 }
 function toDateValue(date)
 {
@@ -194,10 +221,11 @@ function delete_array_item(button)
     arr_item.remove();
     //getShortSaleInstanceComplete(null, null);
 }
-function ShorSaleArrayDataBand(is_save) {
-    if (!is_save)
+function ShorSaleArrayDataBand(data_stauts) {
+    if (data_stauts == 0)
         prepareArrayDivs();
 
+    var is_save = data_stauts == 1;
     var array_divs = $(".ss_array");
 
     array_divs.each(function (index) {
@@ -229,7 +257,8 @@ function ShorSaleArrayDataBand(is_save) {
             }
            
             var item_value = get_sub_property(data_value, item_field);
-            
+            $(this).val("");
+            //if (!$(this).parents(".ss_array").css("display")=="none")
             $(this).val(item_value);
         });
 
@@ -247,8 +276,11 @@ function AddArraryItem(e) {
     var data_value = get_sub_property(ShortSaleCaseData, field, null);
     var len = data_value.length;
     data_value[len] = new Object();
-    addCloneTo($(".ss_array[data-field='" + field + "']:last"), len);
-
+    var lastdiv =  $(".ss_array[data-field='" + field + "']:last");
+    var add_div = addCloneTo(lastdiv, lastdiv, len);
+    add_div.find("ss_form_input").each(function (ind) {
+        $(this).val("");
+    });
 
 }
 function prepareArrayDivs() {
@@ -259,37 +291,46 @@ function prepareArrayDivs() {
             return;
         }
         var elem = $(this);
-        setArraryTitle(elem, 0);
-
+       
         var data_value = get_sub_property(ShortSaleCaseData, field);
 
         /*there default have a empty div start add div below */
         var add_div = elem;
-        for (var i = 1; i < data_value.length; i++) {
+        /*when there is no data new a data */
+        if (data_value.length == 0)
+        {
+            addCloneTo(elem, elem, 0);
+        }
+        for (var i = 0; i < data_value.length; i++) {
             
-            var clone_div = addCloneTo(add_div, i);
+            var clone_div = addCloneTo(elem, add_div, i);
             add_div = clone_div;
         }
     });
 }
-function addCloneTo(add_div,index)
+function addCloneTo(elem,add_div, index)
 {
-    var clone_div = add_div.clone();
+    var clone_div = elem.clone();
     var i = index;
     clone_div.attr("data-array-index", i);
-    setArraryTitle(clone_div, i);
+    clone_div = setArraryTitle(clone_div, i);
+   
+    var last
     clone_div.insertAfter(add_div);
     return clone_div
 }
 
 function setArraryTitle(div,a_index)
 {
-    var titles = div.find(".title_index");
-    titles.each(function (index) {
-        var _idx = parseInt(a_index) + 1;
-        //alert("_idx =" + _idx + "a_index = " + a_index);
-        $(this).text($(this).text().replace( /[0-9]/g, ""+_idx));
-    });
+    var oldhtml = div.html();
+    var _idx = parseInt(a_index) + 1;
+    
+    var newhtml = oldhtml.replace(/__index__/g, " " + _idx);
+    
+    div.html(newhtml);
+    div.css("display", "inline");
+    return div;
+   
 }
 
 function collectDate(objCase) {
@@ -357,21 +398,20 @@ function collectDate(objCase) {
 }
 
 function switch_edit_model(s, objCase) {
-    var inputs = $(".ss_form_input");
+    var inputs = $(".ss_form_input, .input_with_check");
 
-    var checks = $(".input_with_check");
     if ($(s).val() == "Edit") {
         inputs.addClass("color_blue_edit");
-        checks.addClass("color_blue_edit");
+       
         $(".ss_form_input").prop("disabled", false);
         $(s).val("Save");
     } else {
         getShortSaleInstanceComplete(null, null);
         //getShortSaleInstanceClient.PerformCallback($("#short_sale_case_id").val());
 
-        //inputs.removeClass("color_blue_edit");
-        //checks.removeClass("color_blue_edit");
-        //s.val("Edit");
+        inputs.removeClass("color_blue_edit");
+       
+        $(s).val("Edit");
     }
 
 
