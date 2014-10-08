@@ -458,6 +458,7 @@
                                                             <%--chart UI--%>
                                                             <div style="height: 490px; float: left; width: 100%" class="clearfix">
                                                                 <div style="padding-top: 10px; height: 325px;" class="clearfix">
+                                                                     <span style=" font-size: 30px; color: #ff400d;margin-left: 50px " id="chartsTitle">Charts Title</span>
                                                                     <div class="layout_float_right clearfix">
                                                                         <div class="layout_float_right" style="margin-left: 20px; margin-right: 20px">
 
@@ -488,8 +489,9 @@
 
                                                                             </ul>
                                                                         </div>
-
+                                                                        
                                                                         <div class="dropdown layout_float_right" style="margin-right: 20px;" id="id_change_range_drop_down">
+                                                                           
                                                                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="background: transparent">
                                                                                 Select Range <span class="caret"></span>
                                                                             </button>

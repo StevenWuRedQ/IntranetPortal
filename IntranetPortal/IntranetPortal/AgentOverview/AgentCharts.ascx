@@ -3,14 +3,14 @@
 <%--<script src="/Scripts/jquery-2.1.1.min.js"></script>--%>
 <script src="/Scripts/globalize/globalize.js"></script>
 <script src="/Scripts/dx.chartjs.js"></script>
-<div style="padding-top: 43px; padding-bottom: 20px; font-size: 30px; color: #ff400d; text-align: center;" id="chartsTitle">Charts Title</div>
+<%--<div style="padding-top: 43px; padding-bottom: 20px; font-size: 30px; color: #ff400d; text-align: center;" id="chartsTitle">Charts Title</div>--%>
 <%--use for debug chart width--%>
 <div style="padding-top: 43px; padding-bottom: 20px; font-size: 30px; color: #ff400d; text-align: center;display:none" id="showPanesize">0px</div>
 <%--test LoadStatusBarChartByOffice function--%> 
 <%--<button style="color: #ff400d;" onclick="LoadStatusBarChartByOffice(1 ,'Bronx')" type="button">Click</button>--%>
-<div style="overflow: auto; width: 871px" id="chars_with_scorll">
-    <div id="container" style="height: 350px;"></div>
-    <div id="pieChart" style="height: 350px;"></div>
+<div style="overflow: auto;margin-top:26px; width: 871px" id="chars_with_scorll">
+    <div id="container" style="height: 400px;"></div>
+    <div id="pieChart" style="height: 400px;"></div>
 </div>
 
 <script type="text/javascript">
