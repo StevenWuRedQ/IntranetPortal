@@ -40,9 +40,15 @@
             Else
                 Return AssignDate
             End If
+
+        End Get
+
+    End Property
+    Public ReadOnly Property ReferrelName As String
+        Get
+            Return Me.LeadsInfo.ReferrelName
         End Get
     End Property
-
     Public Shared Function UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime) As Boolean
 
         Using Context As New Entities

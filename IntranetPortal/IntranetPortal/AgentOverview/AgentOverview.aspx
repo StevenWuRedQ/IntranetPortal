@@ -702,9 +702,12 @@
                                                     <dx:ListEditItem Text="Neighborhood" Value="NeighName" />
                                                     <dx:ListEditItem Text="Borough" Value="Borough" />
                                                     <dx:ListEditItem Text="Sale Date" Value="SaleDate" />
-                                                    <dx:ListEditItem Text="Tax Class" Value="TaxClass" />
+                                                    <%--no tax class--%>
+                                                    <%--<dx:ListEditItem Text="Tax Class" Value="TaxClass" />--%>
                                                     <dx:ListEditItem Text="Propety Class" Value="PropertyClassCode" />
                                                     <dx:ListEditItem Text="Block" Value="Block" />
+                                                    <dx:ListEditItem Text="Referrel" Value="ReferrelName" />
+                                                    
                                                     <dx:ListEditItem Text="Lot" Value="Lot" />
                                                     <dx:ListEditItem Text="Year Build" Value="YearBuilt" />
                                                     <dx:ListEditItem Text="# of floor" Value="NumFloors" />

@@ -1780,3 +1780,7 @@ input[type='checkbox'] + label, input[type=radio] + label .box_text {
     background:#ff400d;
     padding: 2px 8px;
 }
+.collapse_div
+{
+    display:none;
+}

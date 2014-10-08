@@ -35,7 +35,11 @@
     }
     function saveComplete(s, e) {
         //RefreshContent();
+        clearArray(ShortSaleCaseData.Mortgages);
+        clearArray(ShortSaleCaseData.PropertyInfo.Owners);
+
         ShortSaleDataBand(2);
+      
     }
 
     function ShowAcrisMap(propBBLE) {

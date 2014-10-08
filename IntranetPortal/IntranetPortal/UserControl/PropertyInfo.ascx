@@ -249,10 +249,11 @@
             <%----end line 4----%>
 
             <%-----line 5-----%>
-            <div class="form_div_node form_div_node_line_margin">
+            <%--remove tax class--%>
+           <%-- <div class="form_div_node form_div_node_line_margin">
                 <span class="form_input_title">Tax class</span>
                 <input class="text_input" value="<%=LeadsInfoData.TaxClass%>" />
-            </div>
+            </div>--%>
 
             <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                 <span class="form_input_title">Zoning (<span style="color: #0e9ee9; cursor: pointer">PDF</span>)</span>
@@ -281,7 +282,7 @@
             <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                 <span class="form_input_title">Property Class</span>
 
-                <input class="text_input" value="<%=LeadsInfoData.PropertyClassCode %>" />
+                <input class="text_input" value="<%=LeadsInfoData.TaxClass %>" />
             </div>
             <%-----end line -----%>
 

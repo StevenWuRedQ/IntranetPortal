@@ -11,40 +11,45 @@
    
 </script>
 
-<div data-array-index="0" data-field="Mortgages" class="ss_array" style="display:none">
+<div data-array-index="0" data-field="Mortgages" class="ss_array" style="display: none">
     <%--<h3 class="title_with_line"><span class="title_index title_span">Mortgages </span></h3>--%>
-    <div class="ss_form">
-        <h4 class="ss_form_title title_with_line"><span class="title_index title_span">Mortgage __index__</span>  <i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(this)" title="Add"></i>
+    <h3 class="ss_form_title title_with_line" style="cursor:pointer" onclick="expand_array_item(this)"><span class="title_index title_span">Mortgage __index__</span>  <%--<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i>--%> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(this)" title="Add"></i>
+        <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" onclick="delete_array_item(this)" title="Delete"></i>
+    </h3>
+    <div class="collapse_div">
+
+        <div class="ss_form">
+            <%--<h4 class="ss_form_title title_with_line"><span class="title_index title_span">Mortgage __index__</span>  <i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(this)" title="Add"></i>
             <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" onclick="delete_array_item(this)" title="Delete"></i> 
-        </h4>
-        <ul class="ss_form_box clearfix" id="mortgage__index__">
+        </h4>--%>
+            <ul class="ss_form_box clearfix" id="mortgage__index__">
 
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">LENDER</label>
-                <input class="ss_form_input" data-item="Lender" data-item-type="1"  >
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Loan #</label>
-                <input class="ss_form_input" data-item="Loan" data-item-type="1" >
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Loan Amount</label>
-                <input class="ss_form_input currency_input"  id="LoanAmount_id_Mortgages" data-item="LoanAmount" data-item-type="1" onblur="$(this).formatCurrency();">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Authorization Sent</label>
-                <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
-            </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">LENDER</label>
+                    <input class="ss_form_input" data-item="Lender" data-item-type="1">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Loan #</label>
+                    <input class="ss_form_input" data-item="Loan" data-item-type="1">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Loan Amount</label>
+                    <input class="ss_form_input currency_input" data-item="LoanAmount" data-item-type="1" onblur="$(this).formatCurrency();">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Authorization Sent</label>
+                    <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
+                </li>
 
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">&nbsp;</label>
-                <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">&nbsp;</label>
-                <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
-            </li>
-            <%--<li class="ss_form_item">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">&nbsp;</label>
+                    <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">&nbsp;</label>
+                    <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
+                </li>
+                <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">Lien Postion</label>
                 <select class="ss_form_input">
                     <option value="volvo">1 st</option>
@@ -54,18 +59,18 @@
                 </select>
 
             </li>--%>
-        </ul>
-    </div>
+            </ul>
+        </div>
 
-    <div class="ss_form">
-        <h4 class="ss_form_title">Short sale dept <i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'short_sale_dept')"></i></h4>
-        <ul class="ss_form_box clearfix" id="short_sale_dept">
+        <div class="ss_form">
+            <h4 class="ss_form_title">Short sale dept <i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'short_sale_dept')"></i></h4>
+            <ul class="ss_form_box clearfix" id="short_sale_dept">
 
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">phone #</label>
-                <input class="ss_form_input" data-item="ShortSaleDeptContact.Cell"  data-item-type="1">
-            </li>
-            <%--<li class="ss_form_item">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">phone #</label>
+                    <input class="ss_form_input" data-item="ShortSaleDeptContact.Cell" data-item-type="1">
+                </li>
+                <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">Extension</label>
                 <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
             </li>
@@ -73,11 +78,11 @@
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">customer service</label>
-                <input class="ss_form_input" data-item="ShortSaleDeptContact.OfficeNO" data-item-type="1">
-            </li>
-           <%-- <li class="ss_form_item">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">customer service</label>
+                    <input class="ss_form_input" data-item="ShortSaleDeptContact.OfficeNO" data-item-type="1">
+                </li>
+                <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">Extension</label>
                 <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
             </li>
@@ -85,11 +90,11 @@
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
             </li>--%>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Fax #</label>
-                <input class="ss_form_input" data-item="ShortSaleDeptContact.OfficeNO" data-item-type="1">
-            </li>
-            <%--<li class="ss_form_item">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Fax #</label>
+                    <input class="ss_form_input" data-item="ShortSaleDeptContact.OfficeNO" data-item-type="1">
+                </li>
+                <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>
@@ -97,11 +102,11 @@
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Email</label>
-                <input class="ss_form_input" data-item="ShortSaleDeptContact.Email" data-item-type="1">
-            </li>
-            <%--<li class="ss_form_item">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Email</label>
+                    <input class="ss_form_input" data-item="ShortSaleDeptContact.Email" data-item-type="1">
+                </li>
+                <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
             </li>
@@ -109,30 +114,30 @@
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
-        </ul>
-    </div>
+            </ul>
+        </div>
 
-    <div class="ss_form">
-        <h4 class="ss_form_title">Processor<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'processor_list')"></i></h4>
-        <ul class="ss_form_box clearfix" id="processor_list">
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Name</label>
-                <input class="ss_form_input" data-item="ProcessorContact.Name" data-item-type="1">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Date Assigned to Processor</label>
-                <input class="ss_form_input " value="Date Assigned ??">
-            </li>
-           <%-- <li class="ss_form_item">
+        <div class="ss_form">
+            <h4 class="ss_form_title">Processor<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'processor_list')"></i></h4>
+            <ul class="ss_form_box clearfix" id="processor_list">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Name</label>
+                    <input class="ss_form_input" data-item="ProcessorContact.Name" data-item-type="1">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Date Assigned to Processor</label>
+                    <input class="ss_form_input " value="Date Assigned ??">
+                </li>
+                <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" data-item="ProcessorContact.Email" data-item-type="1">
             </li>--%>
 
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Phone #</label>
-                <input class="ss_form_input" data-item="ProcessorContact.Cell" data-item-type="1">
-            </li>
-           <%-- <li class="ss_form_item">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Phone #</label>
+                    <input class="ss_form_input" data-item="ProcessorContact.Cell" data-item-type="1">
+                </li>
+                <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">Extension</label>
                 <input class="ss_form_input " data-item="ProcessorContact.Email" data-item-type="1">
             </li>
@@ -140,11 +145,11 @@
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Fax #</label>
-                <input class="ss_form_input " data-item="ProcessorContact.OfficeNO" data-item-type="1">
-            </li>
-           <%-- <li class="ss_form_item">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Fax #</label>
+                    <input class="ss_form_input " data-item="ProcessorContact.OfficeNO" data-item-type="1">
+                </li>
+                <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>
@@ -152,22 +157,22 @@
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">email</label>
-                <input class="ss_form_input" data-item="ProcessorContact.Email" data-item-type="1">
-            </li>
-        </ul>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">email</label>
+                    <input class="ss_form_input" data-item="ProcessorContact.Email" data-item-type="1">
+                </li>
+            </ul>
 
-    </div>
+        </div>
 
-    <div class="ss_form">
-        <h4 class="ss_form_title">Negotiator<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'negotiator_list')"></i></h4>
-        <ul class="ss_form_box clearfix" id="negotiator_list">
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Name</label>
-                <input class="ss_form_input"  data-item="NegotiatorContact.Name" data-item-type="1">
-            </li>
-           <%-- <li class="ss_form_item">
+        <div class="ss_form">
+            <h4 class="ss_form_title">Negotiator<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'negotiator_list')"></i></h4>
+            <ul class="ss_form_box clearfix" id="negotiator_list">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Name</label>
+                    <input class="ss_form_input" data-item="NegotiatorContact.Name" data-item-type="1">
+                </li>
+                <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>
@@ -176,11 +181,11 @@
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
 
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Phone #</label>
-                <input class="ss_form_input" data-item="NegotiatorContact.Cell" data-item-type="1">
-            </li>
-            <%--<li class="ss_form_item">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Phone #</label>
+                    <input class="ss_form_input" data-item="NegotiatorContact.Cell" data-item-type="1">
+                </li>
+                <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">Extension</label>
                 <input class="ss_form_input " value="616">
             </li>
@@ -188,11 +193,11 @@
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Fax #</label>
-                <input class="ss_form_input " data-item="NegotiatorContact.OfficeNO" data-item-type="1">
-            </li>
-            <%--<li class="ss_form_item">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Fax #</label>
+                    <input class="ss_form_input " data-item="NegotiatorContact.OfficeNO" data-item-type="1">
+                </li>
+                <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>
@@ -200,21 +205,21 @@
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">email</label>
-                <input class="ss_form_input" data-item="NegotiatorContact.Email" data-item-type="1">
-            </li>
-        </ul>
-    </div>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">email</label>
+                    <input class="ss_form_input" data-item="NegotiatorContact.Email" data-item-type="1">
+                </li>
+            </ul>
+        </div>
 
-    <div class="ss_form">
-        <h4 class="ss_form_title">Supervisor<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'supervisor_list')"></i></h4>
-        <ul class="ss_form_box clearfix" id="supervisor_list">
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Name</label>
-                <input class="ss_form_input" data-item="SupervisorContact.Name" data-item-type="1" >
-            </li>
-           <%-- <li class="ss_form_item">
+        <div class="ss_form">
+            <h4 class="ss_form_title">Supervisor<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'supervisor_list')"></i></h4>
+            <ul class="ss_form_box clearfix" id="supervisor_list">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Name</label>
+                    <input class="ss_form_input" data-item="SupervisorContact.Name" data-item-type="1">
+                </li>
+                <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">extension</label>
                 <input class="ss_form_input " value="">
             </li>
@@ -223,11 +228,11 @@
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
 
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Phone #</label>
-                <input class="ss_form_input"  data-item="SupervisorContact.Cell" data-item-type="1">
-            </li>
-           <%-- <li class="ss_form_item">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Phone #</label>
+                    <input class="ss_form_input" data-item="SupervisorContact.Cell" data-item-type="1">
+                </li>
+                <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">Extension</label>
                 <input class="ss_form_input " value="616">
             </li>
@@ -235,11 +240,11 @@
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Fax #</label>
-                <input class="ss_form_input " data-item="SupervisorContact.OfficeNO" data-item-type="1">
-            </li>
-           <%-- <li class="ss_form_item">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Fax #</label>
+                    <input class="ss_form_input " data-item="SupervisorContact.OfficeNO" data-item-type="1">
+                </li>
+                <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>
@@ -247,24 +252,24 @@
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">email</label>
-                <input class="ss_form_input" data-item="SupervisorContact.Email" data-item-type="1">
-            </li>
-        </ul>
-    </div>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">email</label>
+                    <input class="ss_form_input" data-item="SupervisorContact.Email" data-item-type="1">
+                </li>
+            </ul>
+        </div>
 
-    <div class="ss_form">
-        <h4 class="ss_form_title">Closer
+        <div class="ss_form">
+            <h4 class="ss_form_title">Closer
         <i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'closer_list')"></i>
 
-        </h4>
-        <ul class="ss_form_box clearfix" id="closer_list">
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">closer</label>
-                <input class="ss_form_input" data-item="CloserContact.Name" data-item-type="1">
-            </li>
-            <%--<li class="ss_form_item">
+            </h4>
+            <ul class="ss_form_box clearfix" id="closer_list">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">closer</label>
+                    <input class="ss_form_input" data-item="CloserContact.Name" data-item-type="1">
+                </li>
+                <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">extension</label>
                 <input class="ss_form_input " value="56">
             </li>
@@ -273,23 +278,23 @@
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
 
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Phone #</label>
-                <input class="ss_form_input" data-item="CloserContact.Cell" data-item-type="1">
-            </li>
-            <li class="ss_form_item">
-            <%--    <label class="ss_form_input_title">Extension</label>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Phone #</label>
+                    <input class="ss_form_input" data-item="CloserContact.Cell" data-item-type="1">
+                </li>
+                <li class="ss_form_item">
+                    <%--    <label class="ss_form_input_title">Extension</label>
                 <input class="ss_form_input " value="616">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">Fax #</label>
-                <input class="ss_form_input" data-item="CloserContact.OfficeNO" data-item-type="1">
-            </li>
-           <%-- <li class="ss_form_item">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Fax #</label>
+                    <input class="ss_form_input" data-item="CloserContact.OfficeNO" data-item-type="1">
+                </li>
+                <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>
@@ -297,13 +302,13 @@
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">email</label>
-                <input class="ss_form_input" data-item="CloserContact.Email" data-item-type="1">
-            </li>
-        </ul>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">email</label>
+                    <input class="ss_form_input" data-item="CloserContact.Email" data-item-type="1">
+                </li>
+            </ul>
+        </div>
     </div>
-
 </div>
 
 
