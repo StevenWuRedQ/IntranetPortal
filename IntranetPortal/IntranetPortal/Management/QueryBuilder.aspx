@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="QueryBuilder.aspx.vb" Inherits="IntranetPortal.QueryBuilder" %>
 
-<%@ Register Assembly="ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Control, Version=2.5.14.0, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde" Namespace="ActiveDatabaseSoftware.ActiveQueryBuilder.Web.Control" TagPrefix="AQB" %>
+<%@ Register Assembly="ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Control, Version=2.5.16.0, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde" Namespace="ActiveDatabaseSoftware.ActiveQueryBuilder.Web.Control" TagPrefix="AQB" %>
 
 <!DOCTYPE html>
 
@@ -14,7 +14,7 @@
             <Panes>
                 <dx:SplitterPane Size="570px">
                     <ContentCollection>
-                        <dx:SplitterContentControl runat="server">                            
+                        <dx:SplitterContentControl runat="server">                       
                             <AQB:QueryBuilderControl ID="QueryBuilderControl1" runat="server" OnInit="QueryBuilderControl1_Init" />
                             <div id="all">
                                 <div id="content-container">

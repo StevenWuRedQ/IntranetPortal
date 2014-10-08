@@ -349,8 +349,8 @@
                                             </dx:ASPxCallbackPanel>
                                         </div>
                                         <div class="tab-pane" id="documents">
-                                            <uc1:DocumentsUI runat="server" ID="DocumentsUI"  Visible="false"/>
-                                            <uc1:LeadsDocumentOneDrive runat="server" ID="LeadsDocumentOneDrive" />
+                                            <uc1:DocumentsUI runat="server" ID="DocumentsUI"/>
+                                            <%--<uc1:LeadsDocumentOneDrive runat="server" ID="LeadsDocumentOneDrive" />--%>
                                         </div>
                                     </div>
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="ASPxPopupMenuPhone"
