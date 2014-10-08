@@ -81,9 +81,11 @@ function get_sub_property(obj, id_str, value) {
 }
 function expand_array_item(e)
 {
-    $(".collapse_div").css("display:none");
     var current_div = $(e).parents(".ss_array").find(".collapse_div");
-    d_alert("find collapse_div " + current_div.length);
+    var isopen = current_div.css("display") == "inline";
+    $(".collapse_div").css("display","none");
+   
+    if (!isopen)
     current_div.css("display", "inline");
 }
 /*

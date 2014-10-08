@@ -1771,7 +1771,7 @@ input[type='checkbox'] + label, input[type=radio] + label .box_text {
 {
     margin:0px;
     border-bottom:1px solid #ff400d;
-    height: 24px;
+    /*height: 33px;*/
 }
 .title_span
 {

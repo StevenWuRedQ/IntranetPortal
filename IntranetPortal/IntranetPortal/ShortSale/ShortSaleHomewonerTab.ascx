@@ -6,9 +6,13 @@
        <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
     </div>
 </div>
-<div data-array-index="0" data-field="PropertyInfo.Owners" class="ss_array">
+<div data-array-index="0" data-field="PropertyInfo.Owners" class="ss_array" style="display:none">
+     <h3 class="ss_form_title title_with_line" style="cursor:pointer" onclick="expand_array_item(this)"><label class="title_index title_span">Seller __index__</label>  <%--<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i>--%> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(this)" title="Add"></i>
+        <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" onclick="delete_array_item(this)" title="Delete"></i>
+    </h3>
+   
     <div class="ss_form">
-        <h4 class="ss_form_title">Seller &nbsp;<i class="fa fa-plus-circle icon_btn color_blue"></i></h4>
+       
         <ul class="ss_form_box clearfix">
 
             <li class="ss_form_item">
@@ -73,11 +77,11 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">bankruptcy</label>
 
-                <input type="radio" id="checkYes_Bankruptcy" name="44" data-radio="Y" data-item="Bankruptcy" data-item-type="1" value="YES">
-                <label for="checkYes_Bankruptcy" class="input_with_check"><span class="box_text">Yes</span></label>
+                <input type="radio" id="checkYes_Bankruptcy__index__" name="44__index__" data-radio="Y" data-item="Bankruptcy" data-item-type="1" value="YES">
+                <label for="checkYes_Bankruptcy__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                <input type="radio" id="none_check_no44" name="44" data-item="Bankruptcy" data-item-type="1" value="NO">
-                <label for="none_check_no44" class="input_with_check"><span class="box_text">No</span></label>
+                <input type="radio" id="none_check_no__index__" name="44__index__" data-item="Bankruptcy" data-item-type="1" value="NO">
+                <label for="none_check_no__index__" class="input_with_check"><span class="box_text">No</span></label>
 
             </li>
 
@@ -88,22 +92,22 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">bank account</label>
 
-                <input type="radio" id="checkYes_Bankaccount" data-item="Bankaccount" data-radio="Y" data-item-type="1" name="45" value="YES">
-                <label for="checkYes_Bankaccount" class="input_with_check"><span class="box_text">Yes</span></label>
+                <input type="radio" id="checkYes_Bankaccount__index__" data-item="Bankaccount" data-radio="Y" data-item-type="1" name="45__index__" value="YES">
+                <label for="checkYes_Bankaccount__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                <input type="radio" id="none_check_no452" data-item="Bankaccount" data-item-type="1"   name="45" value="NO">
-                <label for="none_check_no452" class="input_with_check"><span class="box_text">No</span></label>
+                <input type="radio" id="none_check_no452__index__" data-item="Bankaccount" data-item-type="1"   name="45__index__" value="NO">
+                <label for="none_check_no452__index__" class="input_with_check"><span class="box_text">No</span></label>
 
             </li>
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Tax Returns</label>
 
-                <input type="radio" id="checkYes_TaxReturn" name="47" data-item="TaxReturn" data-item-type="1"  value="YES">
-                <label for="checkYes_TaxReturn" class="input_with_check"><span class="box_text">Yes</span></label>
+                <input type="radio" id="checkYes_TaxReturn__index__" name="47__index__" data-item="TaxReturn" data-item-type="1"  value="YES">
+                <label for="checkYes_TaxReturn__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                <input type="radio" id="none_check_no472" name="47" data-item="TaxReturn" data-item-type="1" value="NO">
-                <label for="none_check_no472" class="input_with_check"><span class="box_text">No</span></label>
+                <input type="radio" id="none_check_no472__index__" name="47__index__" data-item="TaxReturn" data-item-type="1" value="NO">
+                <label for="none_check_no472__index__" class="input_with_check"><span class="box_text">No</span></label>
 
             </li>
             <li class="ss_form_item">
@@ -117,11 +121,11 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">estate documents</label>
 
-                <input type="radio" id="checkYes_EstateDocument" name="49" data-item="EstateDocument" data-radio="Y" data-item-type="1"  value="YES">
-                <label for="checkYes_EstateDocument" class="input_with_check"><span class="box_text">Yes</span></label>
+                <input type="radio" id="checkYes_EstateDocument__index__" name="49__index__" data-item="EstateDocument" data-radio="Y" data-item-type="1"  value="YES">
+                <label for="checkYes_EstateDocument__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                <input type="radio" id="none_check_no47" name="49" data-item="EstateDocument" data-item-type="1" value="NO">
-                <label for="none_check_no47" class="input_with_check"><span class="box_text">No</span></label>
+                <input type="radio" id="none_check_no47__index__" name="49__index__" data-item="EstateDocument" data-item-type="1" value="NO">
+                <label for="none_check_no47__index__" class="input_with_check"><span class="box_text">No</span></label>
 
             </li>
 
@@ -150,11 +154,11 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">also acting as seller attorney</label>
 
-                <input type="radio" id="checkYes_ActingAsSellerAttorney" data-item="ActingAsSellerAttorney" data-item-type="1" data-radio="Y"  name="48" value="YES">
-                <label for="checkYes_ActingAsSellerAttorney" class="input_with_check"><span class="box_text">Yes</span></label>
+                <input type="radio" id="checkYes_ActingAsSellerAttorney__index__" data-item="ActingAsSellerAttorney" data-item-type="1" data-radio="Y"  name="48__index__" value="YES">
+                <label for="checkYes_ActingAsSellerAttorney__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                <input type="radio" id="none_check_no48" data-item="ActingAsSellerAttorney" data-item-type="1"  name="48" value="NO">
-                <label for="none_check_no48" class="input_with_check"><span class="box_text">No</span></label>
+                <input type="radio" id="none_check_no48__index__" data-item="ActingAsSellerAttorney" data-item-type="1"  name="48__index__" value="NO">
+                <label for="none_check_no48__index__" class="input_with_check"><span class="box_text">No</span></label>
 
             </li>
         </ul>

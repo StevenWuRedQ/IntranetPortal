@@ -13,7 +13,7 @@
 
 <div data-array-index="0" data-field="Mortgages" class="ss_array" style="display: none">
     <%--<h3 class="title_with_line"><span class="title_index title_span">Mortgages </span></h3>--%>
-    <h3 class="ss_form_title title_with_line" style="cursor:pointer" onclick="expand_array_item(this)"><span class="title_index title_span">Mortgage __index__</span>  <%--<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i>--%> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(this)" title="Add"></i>
+    <h3 class="ss_form_title title_with_line" style="cursor:pointer" onclick="expand_array_item(this)"><label class="title_index title_span">Mortgage __index__</label>  <%--<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i>--%> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(this)" title="Add"></i>
         <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" onclick="delete_array_item(this)" title="Delete"></i>
     </h3>
     <div class="collapse_div">
