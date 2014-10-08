@@ -52,6 +52,12 @@
         End Get
     End Property
 
+    Public ReadOnly Property ReferrelName As String
+        Get
+            Return _referrel.ReferrelName
+        End Get
+    End Property
+
     Private _referrel As PropertyReferrel
     Public ReadOnly Property Referrel As PropertyReferrel
         Get
