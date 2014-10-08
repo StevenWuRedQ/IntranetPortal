@@ -54,7 +54,7 @@
 
     Public ReadOnly Property ReferrelName As String
         Get
-            Return _referrel.ReferrelName
+            Return Referrel.ReferrelName
         End Get
     End Property
 
