@@ -11,7 +11,7 @@
     function OnGridFocusedRowChanged() {
         // The values will be returned to the OnGetRowValues() function 
         if (gridLeads.GetFocusedRowIndex() >= 0) {
-            
+
             if (ContentCallbackPanel.InCallback()) {
                 postponedCallbackRequired = true;
             }
@@ -62,30 +62,60 @@
             postponedCallbackRequired = false;
         }
 
+        InitScrollBar();
+        init_currency();
+        initToolTips();
+    }
+
+    function InitScrollBar()
+    {
         $("#prioity_content").mCustomScrollbar(
-               {
-                   theme: "minimal-dark"
-               }
-               );
+       {
+           theme: "minimal-dark"
+       }
+       );
 
         $("#home_owner_content").mCustomScrollbar(
             {
                 theme: "minimal-dark"
             }
          );
+
         $("#ctl00_MainContentPH_ASPxSplitter1_LeadsInfo_ASPxCallbackPanel2_contentSplitter_ownerInfoCallbackPanel").mCustomScrollbar(
             {
                 theme: "minimal-dark"
             }
          );
 
-        $(".dxgvCSD").mCustomScrollbar(
-            {
-                theme: "minimal-dark"
+        $(".dxgvCSD").each(function (ind) {
+            var is_list = $(this).parents("#leads_list_left").length > 0;
+
+            var ladfucntion = {
+                onScroll: function () {
+                    var position = this.mcs.topPct;
+                    if (position > 90) {
+                        gridLeads.NextPage();
+                    }
+                }
             }
-         );
-        init_currency();
-        initToolTips();
+
+
+            if (is_list) {
+                $(this).mCustomScrollbar(
+                    {
+                        theme: "minimal-dark",
+                        callbacks: ladfucntion
+                    }
+                 );
+            } else {
+                $(this).mCustomScrollbar(
+                    {
+                        theme: "minimal-dark",
+
+                    }
+                );
+            }
+        });
     }
 
     var mapContentframeID = "MapContent";
@@ -103,181 +133,10 @@
     }
 
     var tmpBBLE = null;
-    //function ShowCateMenu(s, bble) {
-    //    ASPxPopupMenuCategory.Hide();
-    //    tmpBBLE = bble;
-    //    ASPxPopupMenuCategory.ShowAtElement(s);
-    //}
 
-    //function OnGetAddressCallbackError(s, e) {
-    //    alert(e.message);
-    //}
 
     var tempAddress = null;
-    //function OnGetAddressCallbackComplete(s, e) {
 
-    //    if (e.result == null) {
-    //        alert("Property Address is empty!");
-    //        return;
-    //    }
-    //    tempAddress = e.result;
-    //    //var streetViewFrm = "streetViewFrm";
-    //    var streenViewWinFrm = ASPxPopupMapControl.GetContentIFrame(); //document.getElementById(streetViewFrm);
-
-    //    var streenViewWin = (streenViewWinFrm.contentWindow || streenViewWinFrm.contentDocument);
-
-
-    //    if (streenViewWin != null) {
-    //        //alert(streenViewWin);
-    //        if (streenViewWin.showAddress) {
-    //            //alert(streenViewWin);
-    //            streenViewWin.showAddress(e.result);
-    //        }
-    //        else {
-    //            //alert(streenViewWin.showAddress)
-    //            setTimeout(function () { OnGetAddressCallbackComplete(s, e); }, 1000);
-    //        }
-    //    }
-
-    //    ASPxPopupMapControl.Show();
-    //}
-
-    //function SetPopupControlMapURL(url) {
-    //    var iframe = ASPxPopupMapControl.GetContentIFrame(); //document.getElementById(streetViewFrm);
-    //    if (ASPxPopupMapControl.GetContentUrl() != url) {
-    //        ASPxPopupMapControl.SetContentUrl(url);
-    //        iframe.onload = function () {
-    //            var mapDocument = (iframe.contentWindow || iframe.contentDocument);
-    //            if (mapDocument.showAddress) {
-    //                mapDocument.showAddress(tempAddress);
-    //            }
-    //        };
-    //    } else {
-    //        getAddressCallback.PerformCallback(tmpBBLE);
-    //    }
-    //}
-
-    //function popupControlMapTabClick(index) {
-    //    if (index == 0) {
-    //        if (tmpBBLE != null) {
-    //            if (getAddressCallback.InCallback()) {
-    //                alert("Server is busy, try later!");
-    //            }
-    //            else {
-    //                var url = "/StreetView.aspx"
-    //                SetPopupControlMapURL(url);
-    //            }
-    //        }
-    //    }
-
-    //    if (index == 1) {
-    //        if (tmpBBLE != null) {
-    //            if (getAddressCallback.InCallback()) {
-    //                alert("Server is busy, try later!");
-    //            }
-    //            else {
-    //                var url = "/StreetView.aspx?t=map";
-    //                SetPopupControlMapURL(url);
-    //            }
-    //        }
-    //    }
-
-    //    if (index == 2) {
-    //        if (tmpBBLE != null) {
-    //            if (getAddressCallback.InCallback()) {
-    //                alert("Server is busy, try later!");
-    //            }
-    //            else {
-    //                var url = "/BingViewMap.aspx";
-    //                SetPopupControlMapURL(url);
-    //            }
-    //        }
-    //    }
-
-    //    if (index == 3) {
-    //        if (tmpBBLE != null) {
-    //            var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + tmpBBLE;
-    //            ASPxPopupMapControl.SetContentUrl(url);
-    //        }
-    //    }
-    //}
-
-
-    //function ShowPropertyMap(propBBLE) {
-    //    tmpBBLE = propBBLE;
-    //    if (propBBLE != null) {
-    //        if (getAddressCallback.InCallback()) {
-    //            alert("Server is busy, try later!");
-    //        }
-    //        else {
-    //            var url = "/StreetView.aspx"
-    //            ASPxPopupMapControl.SetContentUrl(url);
-    //            //var streetViewFrm = "streetViewFrm";
-    //            var iframe = ASPxPopupMapControl.GetContentIFrame();
-    //            if (iframe.src == "") {
-    //                ASPxPopupMapControl.SetContentUrl(url);
-    //                iframe.onload = function () {
-    //                    getAddressCallback.PerformCallback(propBBLE);
-    //                };
-    //            } else {
-    //                getAddressCallback.PerformCallback(propBBLE);
-    //            }
-    //        }
-    //    }
-    //}
-
-    //function OnLeadsCategoryClick(s, e) {
-    //    if (tmpBBLE != null) {
-    //        if (e.item.index == 0) {
-    //            ShowPropertyMap(tmpBBLE);
-    //        }
-
-    //        if (e.item.name == "Priority") {
-    //            SetLeadStatus('5' + '|' + tmpBBLE);
-    //        }
-
-    //        if (e.item.name == "DoorKnock")
-    //            SetLeadStatus('4' + '|' + tmpBBLE);
-
-    //        if (e.item.name == "Callback")
-    //            SetLeadStatus('Tomorrow' + '|' + tmpBBLE);
-
-    //        if (e.item.name == "DeadLead")
-    //            SetLeadStatus('6' + '|' + tmpBBLE);
-
-    //        if (e.item.name == "InProcess")
-    //            SetLeadStatus('7' + '|' + tmpBBLE)
-
-    //        if (e.item.name == "Closed")
-    //            SetLeadStatus('8' + '|' + tmpBBLE)
-
-    //        if (e.item.name == "ViewLead") {
-    //            var url = '/ViewLeadsInfo.aspx?id=' + tmpBBLE;
-    //            window.showModalDialog(url, 'View Leads Info', 'dialogWidth:1350px;dialogHeight:810px');
-    //        }
-
-    //        if (e.item.name == "Delete") {
-    //            SetLeadStatus('11' + '|' + tmpBBLE)
-    //        }
-
-    //        if (e.item.name == "Shared") {
-    //            var url = '/PopupControl/ShareLeads.aspx?bble=' + tmpBBLE;
-    //            AspxPopupShareleadClient.SetContentUrl(url);
-    //            AspxPopupShareleadClient.Show();
-    //        }
-
-    //        if (e.item.name == "Reassign") {
-    //            popupCtrReassignEmployeeListCtr.ShowAtElement(s.GetMainElement());
-    //        }
-
-    //        if (e.item.name == "Upload") {
-    //            var url = '/UploadFilePage.aspx?b=' + tmpBBLE;
-    //            window.showModalDialog(url, 'Upload Files', 'dialogWidth:640px;dialogHeight:400px');
-    //        }
-    //    }
-
-    //    e.item.SetChecked(false);
-    //}
 
     function SearchGridLeads() {
         var filterCondition = "";
@@ -303,18 +162,13 @@
     }
 
     function OnRequestUpdate(bble) {
-        // ASPxPopupSetAsTaskControl.ShowAtElement(s.GetMainElement());
-        //if (typeof (ASPxPopupSetAsTaskControl) != "undefined") {
-        //    ASPxPopupSetAsTaskControl.Show();
-        //}
         isSendRequest = false;
-        if (cbPanelRequestUpdate.InCallback()) {
+        if (ASPxPopupRequestUpdateControl.InCallback()) {
 
         }
         else {
             ASPxPopupRequestUpdateControl.SetHeaderText("Request Update - " + bble);
-            ASPxPopupRequestUpdateControl.Show();
-            cbPanelRequestUpdate.PerformCallback(bble);
+            ASPxPopupRequestUpdateControl.PerformCallback(bble);
         }
     }
 
@@ -324,6 +178,9 @@
             gridLeads.CancelEdit();
             //gridLeads.Refresh();
             alert("Request update is send.");
+        }
+        else {
+            s.Show();
         }
     }
 
@@ -359,8 +216,6 @@
         popup.AdjustControl();
     }
 
-
-
     // to do by steven
     function SortLeadsList(s, field) {
         var classDesc = "fa fa-sort-amount-desc icon_btn tooltip-examples";
@@ -379,28 +234,29 @@
         }
     }
 
-    function OnSortMenuClick(s,e)
-    {
+    function OnSortMenuClick(s, e) {
         var icon = document.getElementById("btnSortIcon");
         if (e.item.index == 0) {
             SortLeadsList(icon, "LastUpdate");
         }
 
-        if(e.item.index == 1)
-        {
+        if (e.item.index == 1) {
             SortLeadsList(icon, "LeadsName");
         }
 
-        if(e.item.index ==2)
-        {           
+        if (e.item.index == 2) {
             gridLeads.GroupBy("Neighborhood", 0);
         }
 
-        if (e.item.index == 3) {            
+        if (e.item.index == 3) {
             gridLeads.GroupBy("EmployeeName", 0);
         }
+
+        if (e.item.index == 4) {
+
+        }
     }
-    
+
     function expandAllClick(s) {
         if (gridLeads.IsGroupRowExpanded(0)) {
             gridLeads.CollapseAll();
@@ -414,16 +270,28 @@
 
     $(document).ready(function () {
         //Handler for .ready() called.
-        var leads_list_grid = $("#leads_list_left");
-        //alert("scrollHeight =" + document.getElementById("leads_list_left").scrollHeight + "height =" + leads_list_grid.height())
-
         if (LeadCategory.GetText() != "Create") {//document.getElementById("leads_list_left").scrollHeight > leads_list_grid.height()) {
+            $("#leads_list_left .dxgvCSD").each(function (ind) {
+                var is_list = $(this).parents("#leads_list_left").length > 0;
 
-            $("#leads_list_left").mCustomScrollbar(
-            {
-                theme: "minimal-dark"
-            }
-            );
+                var ladfucntion = {
+                    onScroll: function () {
+                        var position = this.mcs.topPct;
+                        if (position > 95) {
+                            gridLeads.NextPage();
+                        }
+                    }
+                }
+
+                if (is_list) {
+                    $(this).mCustomScrollbar(
+                        {
+                            theme: "minimal-dark",
+                            callbacks: ladfucntion
+                        }
+                     );
+                }
+            });
         }
     });
 
@@ -437,18 +305,19 @@
                 <span style="color: #234b60; font-size: 30px;">
                     <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
                 </span>
-                <div class="icon_right_s">   <%--onclick="SortLeadsList(this)"--%>
+                <div class="icon_right_s">
+                    <%--onclick="SortLeadsList(this)"--%>
                     <i class="fa fa-sort-amount-desc icon_btn tooltip-examples" title="Sort" style="cursor: pointer; font-size: 18px" id="btnSortIcon" onclick="aspxPopupSortMenu.ShowAtElement(this);"></i>
                     <i class="fa fa-compress icon_btn tooltip-examples" style="font-size: 18px;" title="Expand or Collapse All" onclick="expandAllClick(this)" runat="server" id="divExpand"></i>
                 </div>
             </div>
         </div>
-       
+
         <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
     </div>
-    <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
-        <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsPager-Mode="ShowAllRecords">
+    <div style="height: 768px; padding: 0px 10px;" id="leads_list_left">
+        <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" AutoGenerateColumns="False" KeyFieldName="BBLE">
             <Columns>
                 <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
                 </dx:GridViewCommandColumn>
@@ -500,7 +369,6 @@
                         <div>
                             <table style="height: 30px">
                                 <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
-
                                     <td style="width: 80px;">
                                         <span class="font_black">
                                             <i class="fa fa-user font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
@@ -743,8 +611,10 @@
             </Templates>
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
                 EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
-            <SettingsPager Mode="ShowAllRecords"></SettingsPager>
-            <Settings ShowColumnHeaders="False" VerticalScrollableHeight="50"></Settings>
+            <%--<SettingsPager Mode="ShowPager" PageSize="17" Position="Bottom" Summary-Visible="false" ShowDisabledButtons="false" NumericButtonCount="4"></SettingsPager>--%>
+            <SettingsPager Mode="EndlessPaging" PageSize="17"></SettingsPager>
+            <%--   <SettingsPager Mode="ShowAllRecords"></SettingsPager>--%>
+            <Settings ShowColumnHeaders="False" VerticalScrollableHeight="767"></Settings>
             <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
             <SettingsCommandButton CancelButton-ButtonType="Button" UpdateButton-ButtonType="Button">
                 <UpdateButton ButtonType="Button" Text="OK"></UpdateButton>
@@ -799,111 +669,104 @@
 
     <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 
-
     <dx:ASPxPopupControl ClientInstanceName="ASPxPopupRequestUpdateControl" Width="500px" Height="420px"
         MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl3"
-        HeaderText="Request Update" Modal="true"
+        HeaderText="Request Update" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
         runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
         <ContentCollection>
-            <dx:PopupControlContentControl runat="server">
-                <dx:ASPxCallbackPanel runat="server" ID="callbackPanelRequestUpdate" ClientInstanceName="cbPanelRequestUpdate" OnCallback="callbackPanelRequestUpdate_Callback">
-                    <ClientSideEvents EndCallback="OnEndCallbackPanelRequestUpdate" />
-                    <PanelCollection>
-                        <dx:PanelContent>
-                            <asp:HiddenField runat="server" ID="hfRequestUpdateBBLE" />
-                            <dx:ASPxFormLayout ID="requestUpdateFormlayout" runat="server" Width="100%">
-                                <Items>
-                                    <dx:LayoutItem Caption="Leads Name">
-                                        <LayoutItemNestedControlCollection>
-                                            <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                <dx:ASPxTextBox runat="server" Width="100%" ID="txtRequestUpdateLeadsName" ReadOnly="true"></dx:ASPxTextBox>
-                                            </dx:LayoutItemNestedControlContainer>
-                                        </LayoutItemNestedControlCollection>
-                                    </dx:LayoutItem>
-                                    <dx:LayoutItem Caption="Create By">
-                                        <LayoutItemNestedControlCollection>
-                                            <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                <dx:ASPxTextBox runat="server" Width="100%" ID="txtRequestUpdateCreateby" ReadOnly="true"></dx:ASPxTextBox>
-                                            </dx:LayoutItemNestedControlContainer>
-                                        </LayoutItemNestedControlCollection>
-                                    </dx:LayoutItem>
-                                    <dx:LayoutItem Caption="Manager">
-                                        <LayoutItemNestedControlCollection>
-                                            <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                <dx:ASPxTextBox runat="server" Width="100%" ID="txtRequestUpdateManager" ReadOnly="true"></dx:ASPxTextBox>
-                                            </dx:LayoutItemNestedControlContainer>
-                                        </LayoutItemNestedControlCollection>
-                                    </dx:LayoutItem>
-                                    <dx:LayoutItem Caption="Importance">
-                                        <LayoutItemNestedControlCollection>
-                                            <dx:LayoutItemNestedControlContainer runat="server" Width="100%" SupportsDisabledAttribute="True">
-                                                <dx:ASPxComboBox runat="server" Width="100%" ID="cbTaskImportant">
-                                                    <Items>
-                                                        <dx:ListEditItem Text="Normal" Value="Normal" />
-                                                        <dx:ListEditItem Text="Important" Value="Important" />
-                                                        <dx:ListEditItem Text="Urgent" Value="Urgent" />
-                                                    </Items>
-                                                </dx:ASPxComboBox>
-                                            </dx:LayoutItemNestedControlContainer>
-                                        </LayoutItemNestedControlCollection>
-                                    </dx:LayoutItem>
-                                    <dx:LayoutItem Caption="Description">
-                                        <LayoutItemNestedControlCollection>
-                                            <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                <dx:ASPxMemo runat="server" Width="100%" Height="80px" ID="txtTaskDes"></dx:ASPxMemo>
-                                            </dx:LayoutItemNestedControlContainer>
-                                        </LayoutItemNestedControlCollection>
-                                    </dx:LayoutItem>
-                                    <dx:LayoutItem Caption="Description" ShowCaption="False" HorizontalAlign="Right">
-                                        <LayoutItemNestedControlCollection>
-                                            <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                <dx:ASPxButton ID="ASPxButton4" runat="server" Text="Send Request" AutoPostBack="false">
-                                                    <ClientSideEvents Click="function(){                                                                                                                      
+            <dx:PopupControlContentControl runat="server" Visible="false" ID="popContentRequestUpdate">
+                <asp:HiddenField runat="server" ID="hfRequestUpdateBBLE" />
+                <dx:ASPxFormLayout ID="requestUpdateFormlayout" runat="server" Width="100%">
+                    <Items>
+                        <dx:LayoutItem Caption="Leads Name">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                    <dx:ASPxTextBox runat="server" Width="100%" ID="txtRequestUpdateLeadsName" ReadOnly="true"></dx:ASPxTextBox>
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+                        <dx:LayoutItem Caption="Create By">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                    <dx:ASPxTextBox runat="server" Width="100%" ID="txtRequestUpdateCreateby" ReadOnly="true"></dx:ASPxTextBox>
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+                        <dx:LayoutItem Caption="Manager">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                    <dx:ASPxTextBox runat="server" Width="100%" ID="txtRequestUpdateManager" ReadOnly="true"></dx:ASPxTextBox>
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+                        <dx:LayoutItem Caption="Importance">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server" Width="100%" SupportsDisabledAttribute="True">
+                                    <dx:ASPxComboBox runat="server" Width="100%" ID="cbTaskImportant">
+                                        <Items>
+                                            <dx:ListEditItem Text="Normal" Value="Normal" />
+                                            <dx:ListEditItem Text="Important" Value="Important" />
+                                            <dx:ListEditItem Text="Urgent" Value="Urgent" />
+                                        </Items>
+                                    </dx:ASPxComboBox>
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+                        <dx:LayoutItem Caption="Description">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                    <dx:ASPxMemo runat="server" Width="100%" Height="80px" ID="txtTaskDes"></dx:ASPxMemo>
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+                        <dx:LayoutItem Caption="Description" ShowCaption="False" HorizontalAlign="Right">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                    <dx:ASPxButton ID="ASPxButton4" runat="server" Text="Send Request" AutoPostBack="false">
+                                        <ClientSideEvents Click="function(){                                                                                                                      
                                                                                                                         ASPxPopupRequestUpdateControl.Hide();
-                                                                                                                        cbPanelRequestUpdate.PerformCallback('SendRequest');
+                                                                                                                        ASPxPopupRequestUpdateControl.PerformCallback('SendRequest');
                                                                                                                         isSendRequest =true;                                                                                                                                                                                                                                         
                                                                                                                         }"></ClientSideEvents>
-                                                </dx:ASPxButton>
-                                                &nbsp;
+                                    </dx:ASPxButton>
+                                    &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupRequestUpdateControl.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>
 
                                                             </dx:ASPxButton>
-                                            </dx:LayoutItemNestedControlContainer>
-                                        </LayoutItemNestedControlCollection>
-                                    </dx:LayoutItem>
-                                </Items>
-                            </dx:ASPxFormLayout>
-                        </dx:PanelContent>
-                    </PanelCollection>
-                </dx:ASPxCallbackPanel>
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+                    </Items>
+                </dx:ASPxFormLayout>
             </dx:PopupControlContentControl>
         </ContentCollection>
+        <ClientSideEvents EndCallback="OnEndCallbackPanelRequestUpdate" />
     </dx:ASPxPopupControl>
 
-     <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="aspxPopupSortMenu"
-            ShowPopOutImages="false" AutoPostBack="false"
-            ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px"
-            PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
-            <ItemStyle Paddings-PaddingLeft="20px" />
-            <Items>                
-                <dx:MenuItem Text="Date" Name="Date">
-                </dx:MenuItem>
-                <dx:MenuItem Text="Name" Name="Name">
-                </dx:MenuItem>
-                <dx:MenuItem Text="Borough" Name="Borough">
-                </dx:MenuItem>
-                <dx:MenuItem Text="Employee" Name="Employee">
-                </dx:MenuItem>
-                <dx:MenuItem Text="Zip" Name="Zip">
-                </dx:MenuItem>
-                <dx:MenuItem Text="Type" Name="LeadsType">
-                </dx:MenuItem>
-            </Items>
-         <ClientSideEvents ItemClick="OnSortMenuClick" />
-        </dx:ASPxPopupMenu>
+    <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="aspxPopupSortMenu"
+        ShowPopOutImages="false" AutoPostBack="false"
+        ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px"
+        PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
+        <ItemStyle Paddings-PaddingLeft="20px" />
+        <Items>
+            <dx:MenuItem Text="Date" Name="Date">
+            </dx:MenuItem>
+            <dx:MenuItem Text="Name" Name="Name">
+            </dx:MenuItem>
+            <dx:MenuItem Text="Borough" Name="Borough">
+            </dx:MenuItem>
+            <dx:MenuItem Text="Employee" Name="Employee">
+            </dx:MenuItem>
+            <dx:MenuItem Text="Zip" Name="Zip">
+            </dx:MenuItem>
+            <dx:MenuItem Text="Type" Name="LeadsType">
+            </dx:MenuItem>
+        </Items>
+        <ClientSideEvents ItemClick="OnSortMenuClick" />
+    </dx:ASPxPopupMenu>
 
     <%--  <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
         <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />

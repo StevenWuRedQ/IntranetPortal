@@ -52,7 +52,9 @@ Public Class TitleControl
         clearence.Issue = issue
         clearence.ContactId = contact.ContactId
         clearence.CaseId = CInt(e.Parameter)
-        clearence.Amount = CDec(txtAmount.Value)
+        If Not String.IsNullOrEmpty(txtAmount.Value) Then
+            clearence.Amount = CDec(txtAmount.Value)
+        End If
 
         clearence.Save()
     End Sub

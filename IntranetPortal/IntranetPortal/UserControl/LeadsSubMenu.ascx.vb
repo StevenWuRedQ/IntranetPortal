@@ -14,7 +14,6 @@ Public Class LeadsSubMenu
     Sub MenuControl()
         If Employee.IsManager(Page.User.Identity.Name) Then
             popupMenuLeads.Items.FindByName("Reassign").Visible = True
-            BindEmployeeList()
         End If
     End Sub
 
@@ -126,4 +125,8 @@ Public Class LeadsSubMenu
         Lead.UpdateLeadStatus(bble, status, callbackDate)
     End Sub
 
+    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        PopupContentReAssign.Visible = True
+        BindEmployeeList()
+    End Sub
 End Class

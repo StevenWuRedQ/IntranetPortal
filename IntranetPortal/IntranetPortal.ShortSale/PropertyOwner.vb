@@ -10,7 +10,6 @@
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-
                 If DataStatus = ModelStatus.Deleted Then
                     context.PropertyOwners.Remove(obj)
                 Else

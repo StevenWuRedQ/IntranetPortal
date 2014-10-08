@@ -1,6 +1,7 @@
 ﻿Imports DevExpress.Web.ASPxEditors
 Imports System.Globalization
 Imports DevExpress.Web.ASPxCallbackPanel
+Imports DevExpress.Web.ASPxPopupControl
 
 Public Class ActivityLogs
     Inherits System.Web.UI.UserControl
@@ -29,7 +30,7 @@ Public Class ActivityLogs
             'End If
         End Using
 
-        BindEmpList()
+
     End Sub
 
     Sub BindEmpList()
@@ -529,5 +530,12 @@ Public Class ActivityLogs
         LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)
 
         'BindData(hfBBLE.Value)
+    End Sub
+
+    'Set as task popup call back
+    Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        Dim popup = CType(source, ASPxPopupControl)
+        PopupContentSetAsTask.Visible = True
+        BindEmpList()
     End Sub
 End Class

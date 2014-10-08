@@ -262,8 +262,7 @@
         addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + comments.value);
     }
 
-    function OnCommentsKeyDown(e)
-    {
+    function OnCommentsKeyDown(e) {
         if (e.ctrlKey && e.keyCode == 13) {
             // Ctrl-Enter pressed
             InsertNewComments();
@@ -280,7 +279,7 @@
 
         <div style="float: left; height: 110px; min-width: 460px; width: 60%; margin-top: 10px;">
             <div class="clearfix">
-                <span style="color: #295268;" class="upcase_text" >Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
+                <span style="color: #295268;" class="upcase_text">Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
                 <input type="radio" id="sex12" name="sex" value="Fannie" class="font_12" />
                 <label for="sex12" class="font_12">
                     <span class="upcase_text">Internal update</span>
@@ -299,18 +298,18 @@
                 </div>
                 <dx:ASPxPopupControl runat="server" ID="popupFilters">
                 </dx:ASPxPopupControl>
-                
-                   
-                
+
+
+
                 <div style="margin-top: 50px">
-                     Date of Comment:
+                    Date of Comment:
                     <div class="border_under_line">
-                        <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px"  runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
+                        <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
                 </div>
                 <div style="margin-top: 15px; float: right">
                     <i class="fa fa-plus-circle activity_add_buttons tooltip-examples" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
-                    <i class="fa fa-tasks activity_add_buttons tooltip-examples" title="Create Task" style="cursor: pointer" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this)"></i>
+                    <i class="fa fa-tasks activity_add_buttons tooltip-examples" title="Create Task" style="cursor: pointer" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this);ASPxPopupSetAsTaskControl.PerformCallback();"></i>
                 </div>
             </div>
         </div>
@@ -365,7 +364,8 @@
                                                 <asp:Label runat="server" ID="lblOwnerName"></asp:Label></td>
                                             <td>
                                                 <div style="float: right; font-size: 18px">
-                                                    <span style="font-size:14px;"><asp:Literal runat="server" id="ltResult"></asp:Literal></span>                                                    
+                                                    <span style="font-size: 14px;">
+                                                        <asp:Literal runat="server" ID="ltResult"></asp:Literal></span>
                                                     <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" runat="server" id="btnAccept" title="Accept" onclick='<%# String.Format("AcceptAppointment(""{0}"")", Eval("LogID"))%>' visible="false"></i>
                                                     <i class="fa fa-times-circle-o log_item_hl_buttons tooltip-examples" title="Decline" runat="server" id="btnDecline" onclick='<%# String.Format("DeclineAppointment(""{0}"")", Eval("LogID"))%>' visible="false"></i>
                                                     <i class="fa fa-history log_item_hl_buttons tooltip-examples" title="Reschedule" runat="server" id="btnReschedule" onclick='<%# String.Format("ReScheduledAppointment(""{0}"")", Eval("LogID"))%>' visible="false"></i>
@@ -419,7 +419,8 @@
                                             <td style="width: 200px">Task</td>
                                             <td>
                                                 <div style="float: right; font-size: 18px">
-                                                     <span style="font-size:14px;"><asp:Literal runat="server" id="ltTaskResult"></asp:Literal></span>                                                    
+                                                    <span style="font-size: 14px;">
+                                                        <asp:Literal runat="server" ID="ltTaskResult"></asp:Literal></span>
                                                     <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" onclick='<%# String.Format("CompleteTask(""{0}"")", Eval("LogID"))%>' title="Completed" runat="server" id="btnTaskComplete" visible="false"></i>
                                                 </div>
                                             </td>
@@ -452,7 +453,7 @@
                                 </table>
                             </div>
                         </asp:Panel>
-                        
+
                         <asp:Panel runat="server" Visible='<%# Eval("Category").ToString.StartsWith("Approval")%>' ID="panelTask">
                             <table style="width: 100%">
                                 <thead>
@@ -463,9 +464,9 @@
                                                 <asp:Panel runat="server" ID="pnlAptButton">
                                                     <div style="float: right; font-size: 18px">
                                                         <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" title="Approve" onclick='<%# String.Format("ApproveNewLead(""{0}"")", Eval("LogID"))%>'></i>
-                                                        <i class="fa fa-times-circle-o log_item_hl_buttons" title="Decline" onclick='<%# String.Format("DeclineNewLead(""{0}"")", Eval("LogID"))%>'></i>                                                        
+                                                        <i class="fa fa-times-circle-o log_item_hl_buttons" title="Decline" onclick='<%# String.Format("DeclineNewLead(""{0}"")", Eval("LogID"))%>'></i>
                                                     </div>
-                                                </asp:Panel>                                             
+                                                </asp:Panel>
                                             </div>
                                         </td>
                                     </tr>
@@ -551,41 +552,38 @@
             runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server">
-                    <asp:Panel ID="Panel1" runat="server">
-                        <table>
-                            <tr>
-                                <td>
-                                    <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="TaskScheduleCalendar" ShowClearButton="False" ShowTodayButton="False"></dx:ASPxCalendar>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                    <dx:ASPxButton ID="ASPxButton2" runat="server" Text="OK" AutoPostBack="false" ClientSideEvents-Click="function(){ASPxPopupSelectDateControl.Hide();}">
-                                        <ClientSideEvents Click="function(){
+                    <table>
+                        <tr>
+                            <td>
+                                <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="TaskScheduleCalendar" ShowClearButton="False" ShowTodayButton="False"></dx:ASPxCalendar>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
+                                <dx:ASPxButton ID="ASPxButton2" runat="server" Text="OK" AutoPostBack="false">
+                                    <ClientSideEvents Click="function(){
                                                                                                                         cbTaskScheduleClient.SetText(TaskScheduleCalendar.GetSelectedDate().toLocaleDateString());
                                                                                                                         ASPxPopupScheduleSelectDateControl.Hide();                                                                                                                         
                                                                                                                         }"></ClientSideEvents>
-                                    </dx:ASPxButton>
-                                    &nbsp;
+                                </dx:ASPxButton>
+                                &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupScheduleSelectDateControl.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>
 
                                                             </dx:ASPxButton>
-                                </td>
-                            </tr>
-                        </table>
-                    </asp:Panel>
+                            </td>
+                        </tr>
+                    </table>
                 </dx:PopupControlContentControl>
             </ContentCollection>
         </dx:ASPxPopupControl>
-        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectUserControl" Width="260px" Height="250px"
-            MaxWidth="800px" MinWidth="150px" ID="pcMain"
-            HeaderText="Select Employees:" Modal="true"
+
+        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectUserControl" Width="260px" Height="250px" MaxWidth="800px" MinWidth="150px" ID="pcMain"  HeaderText="Select Employees:" Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="RightSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
             <ContentCollection>
-                <dx:PopupControlContentControl runat="server">
+                <dx:PopupControlContentControl runat="server" Visible="false">
                     <table style="width: 100%">
                         <tr>
                             <td>
@@ -621,7 +619,7 @@
                         </tr>
                         <tr>
                             <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" ClientSideEvents-Click="function(){ASPxPopupSelectDateControl.Hide();}">
+                                <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false">
                                     <ClientSideEvents Click="function(){
                                                                                                                         OnSelectedEmpComplete();
                                                                                                                         ASPxPopupSelectUserControl.Hide();                                                                                                                        
@@ -641,7 +639,7 @@
             </ContentCollection>
         </dx:ASPxPopupControl>
 
-        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSetAsTaskControl" Width="500px" Height="420px"
+        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSetAsTaskControl" Width="500px" Height="420px" OnWindowCallback="ASPxPopupControl1_WindowCallback"
             MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl1"
             HeaderText="Set as Task" Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -655,10 +653,9 @@
                         <i class="fa fa-times icon_btn" onclick="ASPxPopupSetAsTaskControl.Hide()"></i>
                     </div>
                 </div>
-
             </HeaderTemplate>
             <ContentCollection>
-                <dx:PopupControlContentControl runat="server">
+                <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentSetAsTask">
                     <dx:ASPxFormLayout ID="taskFormlayout" runat="server" Width="100%">
                         <Items>
                             <dx:LayoutItem Caption="Employees">
@@ -776,7 +773,7 @@
                             <dx:LayoutItem Caption="Description" ShowCaption="False" HorizontalAlign="Right">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                        <dx:ASPxButton ID="ASPxButton4" runat="server" Text="OK" AutoPostBack="false" ClientSideEvents-Click="function(){ASPxPopupSelectDateControl.Hide();}" CssClass="rand-button rand-button-blue">
+                                        <dx:ASPxButton ID="ASPxButton4" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
                                             <ClientSideEvents Click="function(){
                                                                                                                         gridTrackingClient.PerformCallback('Task');
                                                                                                                         ASPxPopupSetAsTaskControl.Hide();                                                                                                                                                                                                                                         

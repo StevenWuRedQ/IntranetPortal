@@ -1,16 +1,12 @@
-﻿function init() {
-    //var send = document.getElementById('btnSend');
+﻿var EnableClientRefresh = true;
+var callIntervalTime = 3000;
 
-    //if (!send.addEventListener) {
-    //    send.addEventListener = function (type, listener, useCapture) {
-    //        attachEvent('on' + type, function () { listener(event) });
-    //    }
-    //}
-
-    //send.addEventListener('click', function () { send(); }, false);
-    RefreshLeadsCount();
-    AwayMsg();
-    //window.setTimeout(function () { hook() }, 500);    
+function init() {
+    if (EnableClientRefresh)
+    {
+        RefreshLeadsCount();
+        AwayMsg();
+    }
 }
 
 function RefreshLeadsCount() {
@@ -37,9 +33,9 @@ function RefreshLeadsCount() {
 
                             }                            
                         }
-                    }
+                    }                   
                     
-                    window.setTimeout(function () { RefreshLeadsCount(); }, 1000);
+                    window.setTimeout(function () { RefreshLeadsCount(); }, callIntervalTime);
                 }
                 else {
                     document.getElementById('errorMsg').innerHTML +=
@@ -73,7 +69,7 @@ function AwayMsg() {
                         }
                     }
                     else
-                        window.setTimeout(function () { hook(); }, 1000);
+                        window.setTimeout(function () { hook(); }, callIntervalTime);
                 }
                 else {
                     document.getElementById('errorMsg').innerHTML +=
@@ -117,7 +113,7 @@ function hook() {
                         }
                     }
                     else
-                        window.setTimeout(function () { hook(); }, 1000);
+                        window.setTimeout(function () { hook(); }, callIntervalTime);
                 }
                 else {
                     document.getElementById('errorMsg').innerHTML +=

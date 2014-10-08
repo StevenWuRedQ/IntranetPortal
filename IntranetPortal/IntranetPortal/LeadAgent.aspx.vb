@@ -11,8 +11,8 @@ Public Class LeadAgent
             CategoryName = Request.QueryString("c")
 
             If Not Page.IsPostBack Then
-
                 ASPxSplitter1.ClientVisible = True
+
                 Dim leadPanel = ASPxSplitter1.GetPaneByName("leadPanel")
                 leadPanel.Collapsed = False
 
@@ -34,6 +34,12 @@ Public Class LeadAgent
                     LeadsList.DisableClientEventOnLoad()
                     LeadsInfo.ClientVisible = True
                     LeadsInfo.BindData(Request.QueryString("id").ToString)
+
+                    If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
+                        Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                                        String.Format("leadsInfoBBLE = ""{0}"";", Request.QueryString("id")) & "</script>"
+                        Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
+                    End If
                 End If
             End If
 

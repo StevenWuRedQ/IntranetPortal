@@ -175,6 +175,7 @@ function OnLeadsCategoryClick(s, e) {
         }
 
         if (e.item.name == "Reassign") {
+            popupCtrReassignEmployeeListCtr.PerformCallback();
             popupCtrReassignEmployeeListCtr.ShowAtElement(s.GetMainElement());
         }
 

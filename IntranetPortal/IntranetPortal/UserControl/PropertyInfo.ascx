@@ -282,7 +282,7 @@
             <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                 <span class="form_input_title">Property Class</span>
 
-                <input class="text_input" value="<%=LeadsInfoData.TaxClass %>" />
+                <input class="text_input" value="<%=LeadsInfoData.TaxClass%>" />
             </div>
             <%-----end line -----%>
 

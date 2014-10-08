@@ -122,6 +122,15 @@ Partial Public Class LeadsInfo1
     Protected WithEvents DocumentsUI As Global.IntranetPortal.DocumentsUI
 
     '''<summary>
+    '''LeadsDocumentOneDrive control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LeadsDocumentOneDrive As Global.IntranetPortal.LeadsDocumentOneDrive
+
+    '''<summary>
     '''ASPxPopupMenu1 control.
     '''</summary>
     '''<remarks>
@@ -221,13 +230,22 @@ Partial Public Class LeadsInfo1
     Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
-    '''ASPxPopupControl1 control.
+    '''aspxPopupSchedule control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents aspxPopupSchedule As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''popupContentSchedule control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents popupContentSchedule As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
 
     '''<summary>
     '''appointmentCallpanel control.

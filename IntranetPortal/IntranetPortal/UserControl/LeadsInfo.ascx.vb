@@ -567,4 +567,8 @@ Public Class LeadsInfo1
 
         End If
     End Sub
+
+    Protected Sub aspxPopupSchedule_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        popupContentSchedule.Visible = True
+    End Sub
 End Class

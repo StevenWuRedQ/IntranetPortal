@@ -68,13 +68,13 @@ Partial Public Class LeadsList
     Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
-    '''callbackPanelRequestUpdate control.
+    '''popContentRequestUpdate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents callbackPanelRequestUpdate As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+    Protected WithEvents popContentRequestUpdate As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
 
     '''<summary>
     '''hfRequestUpdateBBLE control.

@@ -631,6 +631,32 @@ Public Class LeadsList
             e.Text = e.Value
         End If
     End Sub
+
+    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        popContentRequestUpdate.Visible = True
+        If e.Parameter = "SendRequest" Then
+            Dim bble = hfRequestUpdateBBLE.Value
+
+            If Not String.IsNullOrEmpty(bble) Then
+                SendRequest(bble)
+
+                'Cancel Edit, Notify User
+                'gridLeads.CancelEdit()
+            End If
+        Else
+            Dim bble = e.Parameter
+            hfRequestUpdateBBLE.Value = bble
+
+            Using Context As New Entities
+                Dim lead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
+
+                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateLeadsName"), ASPxTextBox).Text = lead.LeadsName
+                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateCreateby"), ASPxTextBox).Text = lead.EmployeeName
+                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateManager"), ASPxTextBox).Text = Employee.GetReportToManger(Page.User.Identity.Name).Name
+
+            End Using
+        End If
+    End Sub
 End Class
 
 Public Enum ControlView

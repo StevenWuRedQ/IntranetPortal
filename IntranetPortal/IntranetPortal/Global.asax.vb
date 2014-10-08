@@ -28,19 +28,25 @@ Imports System.Web.SessionState
     End Sub
 
 
-		Sub Application_BeginRequest(ByVal sender As Object, ByVal e As EventArgs)
+    Sub Application_BeginRequest(ByVal sender As Object, ByVal e As EventArgs)
         ' Fires at the beginning of each request
-        'Response.Redirect("http://portal1.myidealprop.com")
-		End Sub
+        Context.Items("LoadStartTime") = DateTime.Now
+    End Sub
 
-		Sub Application_AuthenticateRequest(ByVal sender As Object, ByVal e As EventArgs)
-			' Fires upon attempting to authenticate the use
-		End Sub
+    Sub Application_EndRequest(ByVal sender As Object, ByVal e As EventArgs)
+        Dim endDt = CDate(Context.Items("LoadStartTime"))
+        Dim ts = DateTime.Now - endDt
+        'Response.Write("<h3>This page took " + ts.TotalMilliseconds.ToString + "ms to load</h3>")
+    End Sub
 
-		Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
+    Sub Application_AuthenticateRequest(ByVal sender As Object, ByVal e As EventArgs)
+        ' Fires upon attempting to authenticate the use
+    End Sub
+
+    Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
         ' Fires when an error occurs
 
-		End Sub
+    End Sub
 
     Sub Session_End(ByVal sender As Object, ByVal e As EventArgs)
 

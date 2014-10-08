@@ -5,8 +5,6 @@
 <%@ Register Src="~/UserControl/PropertyInfo.ascx" TagPrefix="uc1" TagName="PropertyInfo" %>
 <%@ Register Src="~/OneDrive/LeadsDocumentOneDrive.ascx" TagPrefix="uc1" TagName="LeadsDocumentOneDrive" %>
 
-
-
 <script type="text/javascript">
     // <![CDATA[
     function OnClick(s, e) {
@@ -317,9 +315,7 @@
                                                 <i class="fa fa-file head_tab_icon_padding"></i>
                                                 <div class="font_size_bold">Documents</div>
                                             </a>
-
                                         </li>
-
                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                         <li style="margin-right: 30px; color: #ffa484; float: right">
                                             <i class="fa fa-refresh sale_head_button tooltip-examples" title="Refresh" onclick="popupMenuRefreshClient.ShowAtElement(this)"></i>
@@ -353,8 +349,8 @@
                                             </dx:ASPxCallbackPanel>
                                         </div>
                                         <div class="tab-pane" id="documents">
-                                            <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
-                                         <%--   <uc1:LeadsDocumentOneDrive runat="server" ID="LeadsDocumentOneDrive" />--%>
+                                            <uc1:DocumentsUI runat="server" ID="DocumentsUI"  Visible="false"/>
+                                            <uc1:LeadsDocumentOneDrive runat="server" ID="LeadsDocumentOneDrive" />
                                         </div>
                                     </div>
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="ASPxPopupMenuPhone"
@@ -423,7 +419,7 @@
 
                                                 <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                 <li style="margin-right: 30px; color: #7396a9; float: right">
-                                                    <i class="fa fa-calendar-o sale_head_button tooltip-examples" title="Schedule" onclick="ASPxPopupScheduleClient.ShowAtElement(this);"></i>
+                                                    <i class="fa fa-calendar-o sale_head_button tooltip-examples" title="Schedule" onclick="ASPxPopupScheduleClient.PerformCallback();"></i>
                                                     <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus(5)"></i>
                                                     <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
                                                     <i class="fa fa-sign-in  sale_head_button sale_head_button_left tooltip-examples" title="Door Knock" onclick="SetLeadStatus(4)"></i>
@@ -433,47 +429,7 @@
                                                 </li>
                                             </ul>
                                             <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
-                                        </div>
-
-                                        <%--  <div id="divLeftContent" style="width: 100%; height: 100%; float: left">
-                                            <div style="text-align: right; float: right; margin-bottom: -21px; z-index: 100; margin-right: 15px; position: relative;">
-                                                <dx:ASPxButton Text="Schedule" UseSubmitBehavior="false" FocusRectPaddings-PaddingLeft="0" FocusRectPaddings-PaddingRight="0" Paddings-PaddingLeft="0" Paddings-PaddingRight="0" ID="ASPxButton2" Image-Url="/images/upcomming.jpg" AutoPostBack="false" Image-Width="16px" Image-Height="16px" runat="server">
-                                                    <FocusRectPaddings PaddingLeft="2" PaddingRight="2" />
-                                                    <Image Height="16px" Width="16px" Url="/images/upcomming.jpg"></Image>
-                                                    <Paddings PaddingLeft="2" PaddingRight="2" />
-                                                    <ClientSideEvents Click="function(s,e){ASPxPopupScheduleClient.ShowAtElement(s.GetMainElement());}" />
-                                                </dx:ASPxButton>
-                                                <dx:ASPxButton Text="Follow Up" UseSubmitBehavior="false" ID="btnCallBack" Image-Url="/images/callback.png" AutoPostBack="false" Image-Width="16px" Image-Height="16px" runat="server">
-                                                    <FocusRectPaddings PaddingLeft="2" PaddingRight="2" />
-                                                    <Image Height="16px" Width="16px" Url="/images/callback.png"></Image>
-                                                    <Paddings PaddingLeft="2" PaddingRight="2" />
-                                                    <ClientSideEvents Click="OnCallBackButtonClick" />
-                                                </dx:ASPxButton>
-                                                <dx:ASPxButton Text="Door Knock" UseSubmitBehavior="false" Image-Url="/images/door_knocks.jpg" AutoPostBack="false" Image-Width="16px" Image-Height="16px" runat="server">
-                                                    <FocusRectPaddings PaddingLeft="2" PaddingRight="2" />
-
-                                                    <Image Height="16px" Width="16px" Url="/images/door_knocks.jpg"></Image>
-
-                                                    <Paddings PaddingLeft="2" PaddingRight="2" />
-                                                    <ClientSideEvents Click="function(){SetLeadStatus(4);}" />
-                                                </dx:ASPxButton>
-                                                <dx:ASPxButton Text="Priority" UseSubmitBehavior="false" Image-Url="/images/priority.jpg" AutoPostBack="false" Image-Width="16px" Image-Height="16px" runat="server">
-                                                    <FocusRectPaddings PaddingLeft="2" PaddingRight="2" />
-
-                                                    <Image Height="16px" Width="16px" Url="/images/priority.jpg"></Image>
-
-                                                    <Paddings PaddingLeft="2" PaddingRight="2" />
-                                                    <ClientSideEvents Click="function(){SetLeadStatus(5);}" />
-                                                </dx:ASPxButton>
-                                                <dx:ASPxButton Text="Print" UseSubmitBehavior="false" Image-Url="/images/imprimir.png" Image-Width="16px" AutoPostBack="false" Image-Height="16px" runat="server">
-                                                    <FocusRectPaddings PaddingLeft="2" PaddingRight="2" />
-                                                    <Image Height="16px" Width="16px" Url="/images/imprimir.png"></Image>
-                                                    <Paddings PaddingLeft="2" PaddingRight="2" />
-                                                    <ClientSideEvents Click="function(){PrintLogInfo(formlayoutActivityLogClient);}" />
-                                                </dx:ASPxButton>
-                                            </div>
-
-                                        </div>--%>
+                                        </div>                                     
                                         <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
                                             <ClientSideEvents CallbackComplete="OnSetStatusComplete" />
                                         </dx:ASPxCallback>
@@ -532,13 +488,11 @@
                                             </ContentCollection>
                                         </dx:ASPxPopupControl>
                                         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupScheduleClient" Width="400px" Height="280px"
-                                            MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl1"
-                                            HeaderText="Appointment" Modal="true"
+                                            MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="aspxPopupSchedule"
+                                            HeaderText="Appointment" Modal="true" OnWindowCallback="aspxPopupSchedule_WindowCallback"
                                             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
                                             <HeaderTemplate>
                                                 <div class="clearfix">
-
-
                                                     <div class="pop_up_header_margin">
                                                         <i class="fa fa-clock-o with_circle pop_up_header_icon"></i>
                                                         <span class="pop_up_header_text">Appointment</span>
@@ -549,7 +503,7 @@
                                                 </div>
                                             </HeaderTemplate>
                                             <ContentCollection>
-                                                <dx:PopupControlContentControl runat="server">
+                                                <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentSchedule">
                                                     <dx:ASPxCallbackPanel runat="server" ID="appointmentCallpanel" ClientInstanceName="appointmentCallpanel" OnCallback="appointmentCallpanel_Callback">
                                                         <PanelCollection>
                                                             <dx:PanelContent>
@@ -632,6 +586,7 @@
                                                     </dx:ASPxCallbackPanel>
                                                 </dx:PopupControlContentControl>
                                             </ContentCollection>
+                                            <ClientSideEvents EndCallback="function(s,e){s.Show();}" />
                                         </dx:ASPxPopupControl>
                                     </dx:SplitterContentControl>
                                 </ContentCollection>
@@ -657,7 +612,6 @@
                             <i class="fa fa-times icon_btn" onclick="AspxPopupShareleadClient.Hide()"></i>
                         </div>
                     </div>
-
                 </HeaderTemplate>
             </dx:ASPxPopupControl>
 

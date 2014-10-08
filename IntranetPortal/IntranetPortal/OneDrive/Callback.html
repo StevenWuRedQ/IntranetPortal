@@ -3,8 +3,90 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <style>
+        div {
+            scrollbar-base-color: white;
+            scrollbar-3dlight-color: white;
+            scrollbar-highlight-color: white;
+            scrollbar-track-color: white;
+            scrollbar-arrow-color: white;
+            scrollbar-shadow-color: white;
+        }
+
+            div:hover {
+                scrollbar-base-color: #C0C0C0;
+            }
+
+            div:focus {
+                scrollbar-base-color: #393812;
+            }
+
+         ::-webkit-scrollbar {
+            height: 10px;
+            width: 5px;
+            background: white;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #393812;
+            -webkit-border-radius: 1ex;
+            /*-webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75);*/
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: white;
+        }
+    </style>
+    <!--[if !IE]>
+        <style>
+            .scrollBarAdapter{
+                display:none;
+            }
+        </style>
+    <![endif]-->
+    <script type="text/javascript">
+        function msieversion() {
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE ");
+
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer, return version number
+            {
+                return true
+            }
+            else                 // If another browser, return 0
+            {               
+                return false;
+            }
+
+            return false;
+        }
+
+        function DisplayScrollbarAdapter() {
+            if (msieversion()) {
+                document.getElementById("scrollBarAdapter").style.display = "block";
+            }
+        }
+    </script>
 </head>
-<body>
-    <script src="//js.live.net/v5.0/wl.js"></script>   
+<body onload="DisplayScrollbarAdapter()">
+    <script src="//js.live.net/v5.0/wl.js"></script>
+
+    <div style="width:500px; height:500px; overflow:scroll;float:left">
+        <div style="height:1000px">
+            123<br />
+            123
+            123
+            123
+        </div>
+    </div>
+    <div id="scrollBarAdapter" style="float:left; background-color:white;height:500px; margin-left:-10px; display:none; width:10px">
+
+    </div>
+
+
+    <p>A paragraph that all browsers display</p>
+    <!--[if IE]>
+     <p>Only IE shows this paragraph.</p>
+     <![endif]-->
 </body>
 </html>

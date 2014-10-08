@@ -312,7 +312,7 @@
                                         <div class="clearence_list_right">
                                             <div class="clearence_list_text">
                                                 <div class="clearence_list_title">
-                                                    Issue
+                                                    Issue <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" style="font-size:14px"  title="Delete"></i><i class="fa fa-check  color_blue_edit collapse_btn" style="font-size:14px" title="Clear" onclick=""></i>
                                                 </div>
                                                 <div class="clearence_list_text18">
                                                     <%= clearence.Issue%>

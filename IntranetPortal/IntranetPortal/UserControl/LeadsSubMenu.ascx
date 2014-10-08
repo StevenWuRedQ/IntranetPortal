@@ -59,10 +59,10 @@
     </dx:ASPxPopupControl>
  <dx:ASPxPopupControl ClientInstanceName="popupCtrReassignEmployeeListCtr" Width="300px" Height="300px"
         MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
-        HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true"
+        HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
         runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
         <ContentCollection>
-            <dx:PopupControlContentControl runat="server">
+            <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentReAssign">
                 <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" TextField="Name" ValueField="EmployeeID"
                     SelectedIndex="0" Width="100%">
                 </dx:ASPxListBox>

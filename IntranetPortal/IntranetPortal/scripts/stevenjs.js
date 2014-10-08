@@ -447,9 +447,8 @@ function switch_edit_model(s, objCase) {
 
         $(s).val("Edit");
     }
-
-
 }
+
 function initToolTips() {
     if ($(".tooltip-examples").tooltip) {
         $(".tooltip-examples").tooltip({
