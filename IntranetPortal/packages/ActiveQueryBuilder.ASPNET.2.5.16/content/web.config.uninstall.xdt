@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <system.web>
+    <httpHandlers>
+      <add xdt:Transform="RemoveAll" xdt:Locator="Condition(contains(@type,'ActiveDatabaseSoftware'))"/>
+    </httpHandlers>
+    <httpModules>
+      <add xdt:Transform="RemoveAll" xdt:Locator="Condition(contains(@type,'ActiveDatabaseSoftware'))"/>
+    </httpModules>
+  </system.web>
+  <system.webServer>
+    <handlers>
+      <add xdt:Transform="RemoveAll" xdt:Locator="Condition(contains(@type,'ActiveDatabaseSoftware'))"/>
+    </handlers>
+    <modules>
+      <add xdt:Transform="RemoveAll" xdt:Locator="Condition(contains(@type,'ActiveDatabaseSoftware'))"/>
+    </modules>
+  </system.webServer>
+</configuration>
