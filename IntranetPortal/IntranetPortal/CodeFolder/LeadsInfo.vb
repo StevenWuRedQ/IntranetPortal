@@ -67,7 +67,10 @@
 
                     If tmpRef Is Nothing Then
                         _referrel = New PropertyReferrel
-                        _referrel.ReferrelName = Lead.AssignBy
+
+                        If Lead IsNot Nothing Then
+                            _referrel.ReferrelName = Lead.AssignBy
+                        End If
                     Else
                         _referrel = tmpRef
                     End If
