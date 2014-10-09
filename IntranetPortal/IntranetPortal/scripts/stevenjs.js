@@ -136,9 +136,38 @@ function ShortSaleDataBand(data_stauts) {
 }
 
 function refreshDiv(field, obj) {
+    var ss_data = ShortSaleCaseData;
+    get_sub_property(ss_data, field, obj);
+    var inputs = $(".ss_form_input[data-field*='" + field + "']")
+    /*is array */
+    var is_arry = field.indexOf("[") > 0;
+    if (is_arry)
+    {
+        var arr = field.split("[");
+        var array = arr[0];
+
+        var i = arr[1].split("]")[0];
+        var obj_field = arr[1].split("]")[1].replace(/\./g, "");
+        d_alert("obj_field = " + obj_field)
+        inputs = $(".ss_array[data-field='" + array + "'][data-array-index=" + i + "]:last").find(".ss_form_input[data-item*='" + obj_field + "']");
+        ss_data = get_sub_property(ss_data, array, null)[i];
+        
+    }
+
+    inputs.each(function (ind) {
+        var _field = $(this).attr("data-field");
+       
+        if (is_arry)
+        {
+            _field = $(this).attr("data-item");
+        }
+        
+        var _val = get_sub_property(ss_data, _field,null);
+       
+        ss_field_data($(this), _val);
+    });
    
-    get_sub_property(ShortSaleCaseData, field, obj);
-    ShortSaleDataBand(2);
+    //ShortSaleDataBand(2);
     
 }
 wx_show_bug = false;
