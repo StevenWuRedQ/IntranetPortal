@@ -148,7 +148,7 @@ function refreshDiv(field, obj) {
 
         var i = arr[1].split("]")[0];
         var obj_field = arr[1].split("]")[1].replace(/\./g, "");
-        d_alert("obj_field = " + obj_field)
+        
         inputs = $(".ss_array[data-field='" + array + "'][data-array-index=" + i + "]:last").find(".ss_form_input[data-item*='" + obj_field + "']");
         ss_data = get_sub_property(ss_data, array, null)[i];
         
@@ -398,6 +398,10 @@ function prepareArrayDivs(is_save) {
         for (var i = 0; i < data_value.length; i++) {
 
             var clone_div = addCloneTo(elem, add_div, i);
+            if (i == 0)
+            {
+                clone_div.find(".collapse_div").css("display", "inline")
+            }
             add_div = clone_div;
         }
     });

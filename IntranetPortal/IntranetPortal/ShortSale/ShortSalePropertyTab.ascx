@@ -245,6 +245,7 @@
     {
        $("#home_breakdown_table").editableTableWidget();
        //$(".ss_form_input").prop("disabled", true);
+      
     }
     //$(document).ready(function () {
     //    // Handler for .ready() called.

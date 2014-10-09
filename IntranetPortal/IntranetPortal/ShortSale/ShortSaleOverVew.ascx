@@ -37,7 +37,7 @@
         //RefreshContent();
         clearArray(ShortSaleCaseData.Mortgages);
         clearArray(ShortSaleCaseData.PropertyInfo.Owners);
-
+        
         ShortSaleDataBand(2);
       
     }
