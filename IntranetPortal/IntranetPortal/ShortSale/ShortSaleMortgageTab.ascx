@@ -13,7 +13,9 @@
 
 <div data-array-index="0" data-field="Mortgages" class="ss_array" style="display: none">
     <%--<h3 class="title_with_line"><span class="title_index title_span">Mortgages </span></h3>--%>
-    <h3 class="ss_form_title title_with_line" style="cursor:pointer" onclick="expand_array_item(this)"><label class="title_index title_span">Mortgage __index__</label>  <%--<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i>--%> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(this)" title="Add"></i>
+    <h3 class="ss_form_title title_with_line" style="cursor: pointer" onclick="expand_array_item(this)">
+        <label class="title_index title_span">Mortgage __index__1</label>
+        <%--<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i>--%> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(this)" title="Add"></i>
         <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" onclick="delete_array_item(this)" title="Delete"></i>
     </h3>
     <div class="collapse_div">
@@ -63,7 +65,10 @@
         </div>
 
         <div class="ss_form">
-            <h4 class="ss_form_title">Short sale dept <i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'short_sale_dept')"></i></h4>
+            <h4 class="ss_form_title">Short sale dept 
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('Mortgages[__index__].ShortSaleDeptContact', function(party){ShortSaleCaseData.Mortgages[__index__].ShortSaleDept =party.ContactId})"></i>
+
+            </h4>
             <ul class="ss_form_box clearfix" id="short_sale_dept">
 
                 <li class="ss_form_item">
@@ -118,7 +123,10 @@
         </div>
 
         <div class="ss_form">
-            <h4 class="ss_form_title">Processor<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'processor_list')"></i></h4>
+            <h4 class="ss_form_title">Processor 
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('Mortgages[__index__].ProcessorContact', function(party){ShortSaleCaseData.Mortgages[__index__].Processor =party.ContactId})"></i>
+
+            </h4>
             <ul class="ss_form_box clearfix" id="processor_list">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Name</label>
@@ -166,7 +174,9 @@
         </div>
 
         <div class="ss_form">
-            <h4 class="ss_form_title">Negotiator<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'negotiator_list')"></i></h4>
+            <h4 class="ss_form_title">Negotiator 
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('Mortgages[__index__].NegotiatorContact', function(party){ShortSaleCaseData.Mortgages[__index__].Negotiator =party.ContactId})"></i>
+            </h4>
             <ul class="ss_form_box clearfix" id="negotiator_list">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Name</label>
@@ -213,7 +223,10 @@
         </div>
 
         <div class="ss_form">
-            <h4 class="ss_form_title">Supervisor<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'supervisor_list')"></i></h4>
+            <h4 class="ss_form_title">Supervisor 
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('Mortgages[__index__].SupervisorContact', function(party){ShortSaleCaseData.Mortgages[__index__].Supervisor =party.ContactId})"></i>
+
+            </h4>
             <ul class="ss_form_box clearfix" id="supervisor_list">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Name</label>
@@ -261,7 +274,7 @@
 
         <div class="ss_form">
             <h4 class="ss_form_title">Closer
-        <i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'closer_list')"></i>
+      <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('Mortgages[__index__].CloserContact', function(party){ShortSaleCaseData.Mortgages[__index__].Closer =party.ContactId})"></i>
 
             </h4>
             <ul class="ss_form_box clearfix" id="closer_list">

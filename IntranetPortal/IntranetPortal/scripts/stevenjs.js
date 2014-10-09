@@ -46,11 +46,14 @@ function get_sub_property(obj, id_str, value) {
     var t_obj = obj;
     for (var i = 0; i < props.length; i++) {
         var prop = props[i];
-        //d_assert(prop == "Lender", "find object is " + JSON.stringify(t_obj))
-        //if (t_obj == null)
-        //{
-        //    t_obj = new Object();
-        //}
+        if (prop.indexOf("[") > 0)
+        {
+            var arr = prop.split("[");
+            prop = parseInt(arr[1].replace("]", ""));
+
+            //d_alert("get prop with " + arr[0] + "index  =" + prop);
+            t_obj = t_obj[arr[0]];
+        }
         if (t_obj[prop] == null) {
 
             if (value != null) {
@@ -70,6 +73,7 @@ function get_sub_property(obj, id_str, value) {
                 if (value instanceof Date) {
                     d_alert("the date is data" + value);
                 }
+                
                 t_obj[prop] = value;
             }
         }
@@ -79,14 +83,13 @@ function get_sub_property(obj, id_str, value) {
 
     return t_obj;
 }
-function expand_array_item(e)
-{
+function expand_array_item(e) {
     var current_div = $(e).parents(".ss_array").find(".collapse_div");
     var isopen = current_div.css("display") == "inline";
-    $(".collapse_div").css("display","none");
+    $(".collapse_div").css("display", "none");
    
     if (!isopen)
-    current_div.css("display", "inline");
+        current_div.css("display", "inline");
 }
 /*
 *data_stauts == 1 then save data
@@ -118,7 +121,11 @@ function ShortSaleDataBand(data_stauts) {
         var elem = $(this);
         var data_value = null;
         if (is_save) {
-            data_value = get_sub_property(ShortSaleCaseData, field, ss_field_data(elem, null));
+            /* if radio box not check then*/
+            if (!fieldNotChange(ShortSaleCaseData, field)) {
+                data_value = get_sub_property(ShortSaleCaseData, field, ss_field_data(elem, null));
+            }
+
         }
         data_value = get_sub_property(ss_data, field, null);
         ss_field_data(elem, data_value);
@@ -129,8 +136,10 @@ function ShortSaleDataBand(data_stauts) {
 }
 
 function refreshDiv(field, obj) {
+   
     get_sub_property(ShortSaleCaseData, field, obj);
     ShortSaleDataBand(2);
+    
 }
 wx_show_bug = false;
 /*set or get short sale data if value is null get data*/
@@ -143,18 +152,24 @@ function ss_field_data(elem, value) {
     else {
         /*input type*/
 
-        if (elem.attr("type") == "radio") {
+        if (is_radio(elem)) {
             /*radio input*/
             /*in radio check box there need add a data-radio="1" in middle*/
-
             if (value == null) {
-                if (elem.attr("data-radio") != "Y") {
+                var checkYes = elem.parent().find("[data-radio='Y']");
+                if (radio_check_no_edit(elem))
+                {
                     return null;
                 }
-                return elem.prop("checked");
+               
+                return checkYes.prop("checked");
             }
             //d_alert("elem.attr radio id = " + elem.attr("id") + "set value is " + elem.prop("checked"));
-            elem.prop("checked", elem.attr("data-radio") == "Y" ? value : !value)
+            //d_assert(elem.attr("id") == "checkYes_Bankaccount1", "checkYes_Bankaccount1 value is " + value +"getting "+ typeof (value));
+            if (typeof (value) != "string")
+            {
+                elem.prop("checked", elem.attr("data-radio") == "Y" ? value : !value)
+            }
 
         }
         else if (elem.attr("type") == "checkbox") {
@@ -183,7 +198,9 @@ function ss_field_data(elem, value) {
     }
     return null;
 }
-
+function is_radio(e) {
+    return e.attr("type") == "radio";
+}
 function currency2Number(value) {
     if (typeof (value) == "string") {
         if (value.indexOf("$") == 0) {
@@ -202,6 +219,7 @@ function toDateValue(date) {
     var month = ("0" + (now.getMonth() + 1)).slice(-2);
     return now.getFullYear() + "-" + (month) + "-" + (day);
 }
+
 function delete_array_item(button) {
     var ss_obj = ShortSaleCaseData;
     var arr_item = $(button).parents(".ss_array");
@@ -213,28 +231,24 @@ function delete_array_item(button) {
     arr_item.remove();
     //getShortSaleInstanceComplete(null, null);
 }
-function clearArray(array)
-{
-    if (array == null || array.length == 0)
-    {
+
+function clearArray(array) {
+    if (array == null || array.length == 0) {
         d_alert("clear empty array");
         return;
     }
-    if (!(array instanceof Array))
-    {
+    if (!(array instanceof Array)) {
         d_alert("array is not array");
         return;
     }
-   
-    for (var i = array.length; i >= 0; i--)
-    {
+
+    for (var i = array.length; i >= 0; i--) {
         var obj = array[i];
-        if(obj!=null && obj.DataStatus &&obj.DataStatus==3)
-        {
+        if (obj != null && obj.DataStatus && obj.DataStatus == 3) {
             array.splice(i, 1);
         }
     }
-    
+
 }
 function ShorSaleArrayDataBand(data_stauts) {
 
@@ -244,6 +258,7 @@ function ShorSaleArrayDataBand(data_stauts) {
     }
 
     var array_divs = $(".ss_array");
+    var ss_data = ShortSaleCaseData;
 
     array_divs.each(function (index) {
         var field = ($(this).attr("data-field"));
@@ -252,12 +267,12 @@ function ShorSaleArrayDataBand(data_stauts) {
         }
         var elem = $(this);
 
-        var data_value = get_sub_property(ShortSaleCaseData, field);
+        var data_value = get_sub_property(ss_data, field, null);
         //d_assert(data_value.length == 0, "create new field" + field + "data" + data_value);
         /*prepare frist element frist */
         if (data_value.length == 0) {
             data_value = new Array();
-            get_sub_property(ShortSaleCaseData, field, data_value);
+            get_sub_property(ss_data, field, data_value);
             data_value[0] = new Object();
         }
         var _index = $(this).attr("data-array-index");
@@ -269,18 +284,58 @@ function ShorSaleArrayDataBand(data_stauts) {
 
             if (is_save) {
                 //d_assert(_index == 4, "the data_value is " + JSON.stringify(data_value));
-                get_sub_property(data_value, item_field, $(this).val());
+               
+                if (!radio_check_no_edit($(this)))
+                {
+                    get_sub_property(data_value, item_field, ss_field_data($(this), null));
+                }
+               
             }
 
-            var item_value = get_sub_property(data_value, item_field);
-            $(this).val("");
+            var item_value = get_sub_property(data_value, item_field,null);
+            //$(this).val("");
+          
             //if (!$(this).parents(".ss_array").css("display")=="none")
-            $(this).val(item_value);
+            //if (!fieldNotChange(data_value, item_field))
+            //{
+                ss_field_data($(this), item_value);
+            //}
         });
 
     });
 }
+function testClick()
+{
+    d_alert("the radio_check_no_edit is " + radio_check_no_edit($("#checkYes_Bankaccount1")));
+}
+/*when is radio check no edit */
+function radio_check_no_edit(e) {
+    if (is_radio(e)) {
+        var is_checked = false
+        var radios = e.parent().find("input")
+        radios.each(function (ind) {
+           // d_assert(e.attr("id") == "checkYes_Bankaccount1", "is_checked = " + is_checked);
+            if($(this).prop("checked"))
+            {
+              //  d_assert(e.attr("id") == "checkYes_Bankaccount1", "find checked elemnt");
+                is_checked = true;
+            }
+           
+        });
+        if(!is_checked)
+        {
+            return true;
+        }
 
+    }
+    
+    return false;
+}
+function fieldNotChange(data_value, item_field) {
+    var save_item_val = get_sub_property(data_value, item_field, null);
+    return save_item_val == "";
+
+}
 function prepareArrayDivs(is_save) {
     if (!is_save) {
         var needDelete = $(".ss_array");
@@ -335,7 +390,7 @@ function AddArraryItem(e) {
 
     var template = get_template_div(field);
 
-    var add_div = addCloneTo(template, lastdiv, len );
+    var add_div = addCloneTo(template, lastdiv, len);
     add_div.find("ss_form_input").each(function (ind) {
         $(this).val("");
     });
@@ -343,7 +398,7 @@ function AddArraryItem(e) {
 }
 
 function get_template_div(field) {
-    var template = $(".ss_array[data-field='" + field + "']:contains('__index__'):last");
+    var template = $(".ss_array[data-field='" + field + "']:contains('__index__1'):last");
     return template;
 }
 function addCloneTo(elem, add_div, index) {
@@ -361,8 +416,8 @@ function setArraryTitle(div, a_index) {
     var oldhtml = div.html();
     var _idx = parseInt(a_index) + 1;
 
-    var newhtml = oldhtml.replace(/__index__/g, " " + _idx);
-
+    var newhtml = oldhtml.replace(/__index__1/g, "" + _idx);
+    newhtml = newhtml.replace(/__index__/g, "" + _idx-1);
     div.html(newhtml);
     div.css("display", "inline");
     return div;

@@ -10,26 +10,26 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item" style="width: 100%">
             <label class="ss_form_input_title">address</label>
-           
+
             <input class="ss_form_input" style="width: 93.5%;" name="lender"
-                 value="<%= summaryCase.PropertyInfo.PropertyAddress%>">
+                value="<%= summaryCase.PropertyInfo.PropertyAddress%>">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Block</label>
-            <input class="ss_form_input" data-field="PropertyInfo.Block" >
+            <input class="ss_form_input" data-field="PropertyInfo.Block">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">lot</label>
-            <input class="ss_form_input"  data-field="PropertyInfo.Lot">
+            <input class="ss_form_input" data-field="PropertyInfo.Lot">
         </li>
         <li class="ss_form_item">
-            <label class="ss_form_input_title"  >Accessibility</label>
+            <label class="ss_form_input_title">Accessibility</label>
             <select class="ss_form_input" data-field="PropertyInfo.Accessibility">
                 <option value="volvo">Lockbox - LOC</option>
                 <option value="saab">Master Key</option>
                 <option value="mercedes">Homeowner's key</option>
             </select>
-            
+
         </li>
         <li class="ss_form_item">
             <span class="ss_form_input_title">c/o(<span class="link_pdf">pdf</span>)</span>
@@ -59,50 +59,49 @@
     </ul>
 </div>
 
+<div data-array-index="0" data-field="PropertyInfo.Owners" class="ss_array" style="display: none">
+    <div class="ss_form">
+        <h4 class="ss_form_title">Seller __index__</h4>
+        <ul class="ss_form_box clearfix">
 
-<div class="ss_form">
-    <h4 class="ss_form_title">Seller 1</h4>
-    <ul class="ss_form_box clearfix">
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">name</label>
+                <input class="ss_form_input" data-item="FirstName" value="John Smith">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">SSn</label>
+                <input class="ss_form_input" data-item="SSN" value="XXX-XX-7713">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Tax class</label>
+                <input class="ss_form_input"  value="No Tax class">
+            </li>
+            <li class="ss_form_item" style="width: 100%">
+                <label class="ss_form_input_title">Mailing address</label>
+                <input class="ss_form_input" data-item="MailCity" style="width: 93.5%;" name="lender" value="147-06 Eldert Rd, Flushing, NY 11367">
+            </li>
 
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">name</label>
-            <input class="ss_form_input" value="John Smith">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">SSn</label>
-            <input class="ss_form_input" value="XXX-XX-7713">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Tax class</label>
-            <input class="ss_form_input" value="1">
-        </li>
-        <li class="ss_form_item" style="width: 100%">
-            <label class="ss_form_input_title">Mailing address</label>
-            <input class="ss_form_input" style="width: 93.5%;" name="lender" value="147-06 Eldert Rd, Flushing, NY 11367">
-        </li>
-
-
-
-
-    </ul>
+        </ul>
+    </div>
 </div>
-<div data-array-index="0" data-field="Mortgages" class="ss_array" style="display:none" >
+
+<div data-array-index="0" data-field="Mortgages" class="ss_array" style="display: none">
 
     <div class="ss_form">
-        <h4 class="ss_form_title"> <span class="title_index ">Mortgage __index__ </span></h4>
+        <h4 class="ss_form_title"><span class="title_index ">Mortgage __index__ </span></h4>
         <ul class="ss_form_box clearfix">
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Lender</label>
-                <input class="ss_form_input" data-item="Lender" data-item-type="1" >
+                <input class="ss_form_input" data-item="Lender" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Loan #</label>
-                <input class="ss_form_input"  data-item="Loan" data-item-type="1">
+                <input class="ss_form_input" data-item="Loan" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Loan Amount</label>
-                <input class="ss_form_input input_currency" onblur="$(this).formatCurrency();"  data-item="LoanAmount" data-item-type="1">
+                <input class="ss_form_input input_currency" onblur="$(this).formatCurrency();" data-item="LoanAmount" data-item-type="1">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Short Sale Dept</label>
@@ -112,7 +111,7 @@
             <li class="ss_form_item">
                 <span class="ss_form_input_title">&nbsp;</span>
 
-                <input type="checkbox" id="pdf_check_yes1" name="1"  value="YES">
+                <input type="checkbox" id="pdf_check_yes1" name="1" value="YES">
                 <label for="pdf_check_yes1" class="input_with_check">
                     <span class="box_text">Fannie</span>
                 </label>
@@ -120,7 +119,7 @@
                 <input type="checkbox" id="pdf_check_no2" name="1" value="NO">
                 <label for="pdf_check_no2" class="input_with_check">
                     <span class="box_text">FHA</span>
-                    </label>
+                </label>
 
             </li>
             <li class="ss_form_item">
@@ -129,7 +128,7 @@
                 <input type="checkbox" id="pdf_check_yes2" name="1" value="YES">
                 <label for="pdf_check_yes2" class="input_with_check">
                     <span class="box_text">Freddie Mac </span>
-                    </label>
+                </label>
 
             </li>
         </ul>
