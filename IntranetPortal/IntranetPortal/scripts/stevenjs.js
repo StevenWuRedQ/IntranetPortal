@@ -84,6 +84,7 @@ function get_sub_property(obj, id_str, value) {
     return t_obj;
 }
 function expand_array_item(e) {
+   
     var current_div = $(e).parents(".ss_array").find(".collapse_div");
     var isopen = current_div.css("display") == "inline";
     $(".collapse_div").css("display", "none");
@@ -393,22 +394,26 @@ function prepareArrayDivs(is_save) {
         var add_div = elem;
         /*when there is no data new a data */
         if (data_value.length == 0) {
-            addCloneTo(elem, elem, 0);
+            expland_div(addCloneTo(elem, elem, 0));
         }
         for (var i = 0; i < data_value.length; i++) {
 
             var clone_div = addCloneTo(elem, add_div, i);
             if (i == 0)
             {
-                clone_div.find(".collapse_div").css("display", "inline")
+                expland_div(clone_div)
             }
             add_div = clone_div;
         }
     });
 }
 
+function expland_div(div)
+{
+    div.find(".collapse_div").css("display", "inline")
+}
 /*add item in div array */
-function AddArraryItem(e) {
+function AddArraryItem(event ,e) {
     var array_div = $(e).parents(".ss_array");
     if (array_div == null) {
         d_alert(" can't find arrary" + $(e).attr("class"));
@@ -419,15 +424,21 @@ function AddArraryItem(e) {
     var data_value = get_sub_property(ShortSaleCaseData, field, null);
     var len = data_value.length;
     data_value[len] = new Object();
+    array_div.parent().find(".collapse_div").css("display", "none");
     var lastdiv = $(".ss_array[data-field='" + field + "']:last");
-
+    
+    
     var template = get_template_div(field);
 
     var add_div = addCloneTo(template, lastdiv, len);
-    add_div.find("ss_form_input").each(function (ind) {
+    
+    array_div.parent().find(".collapse_div:last").css("display", "inline");
+   
+    add_div.find(".ss_form_input").each(function (ind) {
         $(this).val("");
     });
-
+    event.cancelBubble = true;
+    return true;
 }
 
 function get_template_div(field) {

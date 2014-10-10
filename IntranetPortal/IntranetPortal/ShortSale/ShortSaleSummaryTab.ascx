@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleSummaryTab.ascx.vb" Inherits="IntranetPortal.ShortSaleSummaryTab" %>
+<%@ Import Namespace="IntranetPortal.ShortSale" %>
 <%@ Import Namespace="IntranetPortal" %>
 <script>
     function refreshSummary()
@@ -70,36 +71,40 @@
                 </ul>
             </div>
 
-            <div data-array-index="0" data-field="PropertyInfo.Owners" class="ss_array" style="display: none">
+            <%--<div data-array-index="0" data-field="PropertyInfo.Owners" class="ss_array" style="display: none">--%>
+                <%Dim i=0 %>
+                <%For Each owner As PropertyOwner In summaryCase.PropertyInfo.Owners%>
+                <%i = i+1 %>
                 <div class="ss_form">
-                    <h4 class="ss_form_title">Seller __index__</h4>
+                    <h4 class="ss_form_title">Seller <%=i %></h4>
                     <ul class="ss_form_box clearfix">
 
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">name</label>
-                            <input class="ss_form_input" data-item="FirstName" value="John Smith">
+                            <input class="ss_form_input" value="<%=owner.FullName %>" >
                         </li>
                         <li class="ss_form_item">
-                            <label class="ss_form_input_title">SSn</label>
-                            <input class="ss_form_input" data-item="SSN" value="XXX-XX-7713">
+                            <label class="ss_form_input_title">SSN</label>
+                            <input class="ss_form_input" value="<%=owner.SSN %>" >
                         </li>
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Tax class</label>
-                            <input class="ss_form_input" value="No Tax class">
+                            <input class="ss_form_input" value="No Tax class ??">
                         </li>
                         <li class="ss_form_item" style="width: 100%">
                             <label class="ss_form_input_title">Mailing address</label>
-                            <input class="ss_form_input" data-item="MailCity" style="width: 93.5%;" name="lender" value="147-06 Eldert Rd, Flushing, NY 11367">
+                            <input class="ss_form_input"  value="<%=owner.MailingAddress %>" style="width: 93.5%;" name="lender" >
                         </li>
 
                     </ul>
                 </div>
-            </div>
+                <%Next %>
+            <%--</div>--%>
 
             <div data-array-index="0" data-field="Mortgages" class="ss_array" style="display: none">
 
                 <div class="ss_form">
-                    <h4 class="ss_form_title"><span class="title_index ">Mortgage __index__ </span></h4>
+                    <h4 class="ss_form_title"><span class="title_index ">Mortgage __index__1 </span></h4>
                     <ul class="ss_form_box clearfix">
 
                         <li class="ss_form_item">
@@ -153,11 +158,11 @@
 
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">name</label>
-                        <input class="ss_form_input" value="Angela Meade">
+                        <input class="ss_form_input" value="<%=summaryCase.AssignedProcessor.Name%>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input" value="718-205-0200 Ext. 235">
+                        <input class="ss_form_input" value="<%=summaryCase.AssignedProcessor.Cell%>">
                     </li>
 
 
@@ -170,11 +175,11 @@
 
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">name</label>
-                        <input class="ss_form_input" value="Mo Isaacs">
+                        <input class="ss_form_input" value="<%=summaryCase.ReferralContact.Name %>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Cell phone #</label>
-                        <input class="ss_form_input" value="718-600-2961">
+                        <input class="ss_form_input" value="<%=summaryCase.ReferralContact.Cell%>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title ">&nbsp;</label>
@@ -182,11 +187,11 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Manager</label>
-                        <input class="ss_form_input" value="Some One">
+                        <input class="ss_form_input" value="Manager ??">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Cell phone #</label>
-                        <input class="ss_form_input" value="718-600-2961">
+                        <input class="ss_form_input" value="Manager's cell phone ??">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">&nbsp;</label>
@@ -194,11 +199,11 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Office</label>
-                        <input class="ss_form_input" value="Office Information">
+                        <input class="ss_form_input" value="<%=summaryCase.ReferralContact.Office %>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Offie phone #</label>
-                        <input class="ss_form_input" value="347-123-456">
+                        <input class="ss_form_input" value="<%=summaryCase.ReferralContact.OfficeNO %>">
                     </li>
 
                 </ul>
@@ -210,11 +215,11 @@
 
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">name</label>
-                        <input class="ss_form_input" value="Yariv Katz">
+                        <input class="ss_form_input" value="<%=summaryCase.SellerAttorneyContact.Name %>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input" value="347-723-4458">
+                        <input class="ss_form_input" value="<%=summaryCase.SellerAttorneyContact.Cell %>">
                     </li>
 
                 </ul>
