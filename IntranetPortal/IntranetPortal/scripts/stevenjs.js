@@ -97,9 +97,7 @@ function expand_array_item(e) {
 */
 function ShortSaleDataBand(data_stauts) {
 
-    /*use for ui*/
-    onRefreashDone();
-    /**/
+    
     var is_save = data_stauts == 1;
     if (ShortSaleCaseData == null) {
         d_alert("ShortSaleCaseData is null");
@@ -134,6 +132,10 @@ function ShortSaleDataBand(data_stauts) {
 
     /*band short sale arrary item*/
     ShorSaleArrayDataBand(data_stauts)
+
+    /*use for ui*/
+    onRefreashDone();
+    /**/
 }
 
 function refreshDiv(field, obj) {
@@ -212,14 +214,16 @@ function ss_field_data(elem, value) {
 
             if (value == null) {
                 //d_alert("number value is= " + elem.val());
-
+               
                 return elem.val();
             }
 
             if (elem.attr("type") == "date") {
-                if (!wx_show_bug)
+                if (value.indexOf("(") > 0)
+                {
                     value = toDateValue(new Date(parseInt(value.substr(6))));
-
+                }
+                
             }
 
             elem.val(value);
