@@ -11,8 +11,8 @@ Public Class Root
     End Sub
 
     Protected Sub gridSearch_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
-        Dim key = e.Parameters
-        BindSearchGrid(key)
+        'Dim key = e.Parameters
+        'BindSearchGrid(key)
     End Sub
 
     Private _empUnderMgred As String()
@@ -98,5 +98,10 @@ Public Class Root
     Protected Sub btnLogOut_Click(sender As Object, e As EventArgs)
         FormsAuthentication.SignOut()
         FormsAuthentication.RedirectToLoginPage()
+    End Sub
+
+    Protected Sub pcMain_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        popupContentSearchPanel.Visible = True
+        BindSearchGrid(e.Parameter)
     End Sub
 End Class

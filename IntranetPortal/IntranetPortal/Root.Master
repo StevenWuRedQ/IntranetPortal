@@ -53,7 +53,7 @@
             splitterRightDefaultPage.AdjustControl();
             alert('splitterRightDefaultPage resize');
         }
-       
+
 
     </script>
 
@@ -150,8 +150,9 @@
 
                                                                 <%--<Image Url="/images/search_btn.png"></Image>--%>
                                                                 <ClientSideEvents Click="function(s,e){
+                                                                    ASPxPopupSearchPanel.PerformCallback(txtSearchKeyClient.GetText());
                                                              ASPxPopupSearchPanel.ShowAtElement(txtSearchKeyClient.GetMainElement());
-                                                               gridSearchLeads.PerformCallback(txtSearchKeyClient.GetText());                                                           
+                                                               gridSearchLeads.PerformCallback();                                                           
                                                             }" />
 
                                                                 <%--<Image Url="/images/search_btn.png"></Image>--%>
@@ -197,11 +198,11 @@
                                             <%--change the pop search screen UI style by steven--%>
                                             <%--MinHeight="150px"--%>
                                             <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSearchPanel" Width="600px" Height="250px"
-                                                MaxWidth="800px" MaxHeight="800px" MinWidth="150px" ID="pcMain"
+                                                MaxWidth="800px" MaxHeight="800px" MinWidth="150px" ID="pcMain" OnWindowCallback="pcMain_WindowCallback"
                                                 ShowHeader="false" CloseAction="CloseButton"
                                                 runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True" CssClass="rand-pop">
                                                 <ContentCollection>
-                                                    <dx:PopupControlContentControl runat="server">
+                                                    <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentSearchPanel">
                                                         <dx:ASPxGridView runat="server" KeyFieldName="BBLE" ClientInstanceName="gridSearchLeads" ID="gridSearch" OnCustomCallback="gridSearch_CustomCallback" Width="100%" SettingsPager-PageSize="5">
                                                             <Columns>
                                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Caption="LEADS NAME" Settings-AllowHeaderFilter="False" VisibleIndex="1" Width="260px">
@@ -255,7 +256,6 @@
                                                             </Styles>
                                                         </dx:ASPxGridView>
                                                         <asp:Panel ID="Panel1" runat="server">
-                                                            <%--margin-top: -48px; don't show button right side--%>
                                                             <table style="width: 100%;">
                                                                 <tr>
                                                                     <td style="width: 79%"></td>
@@ -273,6 +273,7 @@
                                                         </asp:Panel>
                                                     </dx:PopupControlContentControl>
                                                 </ContentCollection>
+                                                <ClientSideEvents EndCallback="function(s,e){s.ShowAtElement(txtSearchKeyClient.GetMainElement());}" />
                                             </dx:ASPxPopupControl>
                                             <%---------------------end---------------%>
                                             <div style="overflow: auto">

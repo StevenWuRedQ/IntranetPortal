@@ -104,6 +104,15 @@ Partial Public Class Root
     Protected WithEvents pcMain As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
+    '''popupContentSearchPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents popupContentSearchPanel As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+
+    '''<summary>
     '''gridSearch control.
     '''</summary>
     '''<remarks>

@@ -2,9 +2,16 @@
 <script type="text/javascript">
     var tmpPartyName = null;
     var onSelectCallback;
+    var isloaded = false;
 
     function ShowSelectParty(partyName, selectPartyCallback) {
-        ASPxPopupSelectParty.PerformCallback();        
+        if (isloaded)
+            ASPxPopupSelectParty.Show();
+        else {
+            ASPxPopupSelectParty.PerformCallback();
+            isloaded = true;
+        }
+
         tmpPartyName = partyName;
         onSelectCallback = selectPartyCallback;
     }
@@ -14,7 +21,10 @@
     }
 
     function AddNewCompany() {
-        gridParties.UpdateEdit();
+        if (ASPxClientEdit.ValidateGroup("Contact"))
+            gridParties.UpdateEdit();
+        else {            
+        }
     }
 
     function SelectParty() {
@@ -23,18 +33,18 @@
     }
 
     function EndSelectParty(party) {
-        var data = JSON.parse(party);        
+        var data = JSON.parse(party);
         refreshDiv(tmpPartyName, data);
         onSelectCallback(data);
     }
 </script>
 
 <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectParty" Width="700px" Height="420px"
-    MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl3" OnWindowCallback="ASPxPopupControl3_WindowCallback"    
+    MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl3" OnWindowCallback="ASPxPopupControl3_WindowCallback"
     HeaderText="Title Company" Modal="true" ShowFooter="true"
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <ContentCollection>
-        <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentSelectParty">
+        <dx:PopupControlContentControl runat="server" ID="popupContentSelectParty">
             <dx:ASPxRadioButtonList runat="server" ID="rblType" RepeatDirection="Horizontal">
                 <Border BorderStyle="None" />
                 <Items>
@@ -46,7 +56,7 @@
                 </Items>
                 <ClientSideEvents SelectedIndexChanged="function(s,e){gridParties.Refresh();}" />
             </dx:ASPxRadioButtonList>
-            <dx:ASPxGridView runat="server" ID="gridParties" ClientInstanceName="gridParties" KeyFieldName="ContactId" OnDataBinding="gridParties_DataBinding" Width="100%" OnRowInserting="gridParties_RowInserting" OnCustomDataCallback="gridParties_CustomDataCallback" OnRowDeleting="gridParties_RowDeleting">
+            <dx:ASPxGridView runat="server" ID="gridParties" ClientInstanceName="gridParties" KeyFieldName="ContactId" OnDataBinding="gridParties_DataBinding" Width="100%" OnRowInserting="gridParties_RowInserting" OnCustomDataCallback="gridParties_CustomDataCallback" OnRowDeleting="gridParties_RowDeleting" OnRowUpdating="gridParties_RowUpdating">
                 <Columns>
                     <dx:GridViewCommandColumn ShowSelectCheckbox="true" Caption="#"></dx:GridViewCommandColumn>
                     <dx:GridViewDataTextColumn FieldName="CorpName" Caption="Company Name"></dx:GridViewDataTextColumn>
@@ -61,27 +71,42 @@
                             <ul class="ss_form_box clearfix">
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">name</label>
-                                    <input class="ss_form_input" value="" runat="server" id="txtContact">
+                                    <%--<input class="ss_form_input" value='<%# Bind("Name")%>' runat="server" id="txtContact">--%>
+                                    <dx:ASPxTextBox runat="server" ID="txtContact" CssClass="ss_form_input" Native="true" Text='<%# Bind("Name")%>'>
+                                        <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
+                                    </dx:ASPxTextBox>
                                 </li>
                                 <li class="ss_form_item">
-                                    <label class="ss_form_input_title">Office</label>
-                                    <input class="ss_form_input" value="" runat="server" id="txtCompanyName">
+                                    <label class="ss_form_input_title">Company Name</label>
+                                    <dx:ASPxTextBox runat="server" ID="txtCompanyName" CssClass="ss_form_input" Native="true" Text='<%# Bind("CorpName")%>'>
+                                        <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
+                                    </dx:ASPxTextBox>
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">address</label>
-                                    <input class="ss_form_input" value="" runat="server" id="txtAddress">
+                                    <input class="ss_form_input" value='<%# Bind("Address")%>' runat="server" id="txtAddress">
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">office #</label>
-                                    <input class="ss_form_input" value="" runat="server" id="txtOffice">
+                                    <dx:ASPxTextBox runat="server" ID="txtOffice" CssClass="ss_form_input" Native="true" Text='<%# Bind("OfficeNO")%>'>
+                                        <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
+                                        <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
+                                    </dx:ASPxTextBox>
                                 </li>
                                 <li class="ss_form_item">
-                                    <label class="ss_form_input_title">Cell #</label>
-                                    <input class="ss_form_input" value="" runat="server" id="txtCell">
+                                    <label class="ss_form_input_title">Cell #</label>                                    
+                                    <dx:ASPxTextBox runat="server" ID="txtCell" CssClass="ss_form_input" Native="true" Text='<%#Bind("Cell")%>'>
+                                        <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
+                                         <ValidationSettings CausesValidation="false" RequiredField-IsRequired="false" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
+                                    </dx:ASPxTextBox>
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">email</label>
-                                    <input class="ss_form_input" value="" runat="server" id="txtEmail">
+                                    <dx:ASPxTextBox runat="server" ID="txtEmail" CssClass="ss_form_input" Native="true" Text='<%# Bind("Email")%>'>
+                                        <ValidationSettings ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact">
+                                            <RegularExpression ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorText="Email isnot valid." />
+                                        </ValidationSettings>
+                                    </dx:ASPxTextBox>
                                 </li>
                             </ul>
                         </div>

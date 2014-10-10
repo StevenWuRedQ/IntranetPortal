@@ -149,15 +149,6 @@ Partial Public Class ShortSalePage
     Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
 
     '''<summary>
-    '''SelectPartyUC control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents SelectPartyUC As Global.IntranetPortal.SelectPartyUC
-
-    '''<summary>
     '''SplitterContentControl4 control.
     '''</summary>
     '''<remarks>
@@ -230,11 +221,11 @@ Partial Public Class ShortSalePage
     Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
-    '''TextBox1 control.
+    '''SelectPartyUC control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents SelectPartyUC As Global.IntranetPortal.SelectPartyUC
 End Class

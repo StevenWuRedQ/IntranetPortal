@@ -15,29 +15,6 @@ Public Class TitleControl
         ShortSaleCaseData = ssCase
     End Sub
 
-    'Protected Sub titleCompanyGrid_DataBinding(sender As Object, e As EventArgs)
-    '    Dim grid = CType(sender, ASPxGridView)
-
-    '    If grid.DataSource Is Nothing Then
-    '        grid.DataSource = PartyContact.GetTitleCompanies("")
-    '    End If
-    'End Sub
-
-    'Protected Sub gridTitleCompany_RowInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs)
-    '    Dim grid = CType(sender, ASPxGridView)
-    '    Dim name = CType(grid.FindEditFormTemplateControl("txtContact"), HtmlInputText).Value
-    '    Dim companyname = CType(grid.FindEditFormTemplateControl("txtCompanyName"), HtmlInputText).Value
-
-    '    Dim contact As New PartyContact
-    '    contact.Name = name
-    '    contact.CorpName = companyname
-    '    contact.Type = PartyContact.ContactType.TitleCompany
-    '    contact.Save()
-    '    e.Cancel = True
-    '    grid.CancelEdit()
-    '    grid.DataBind()
-    'End Sub
-
     Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         Dim popup = CType(source, ASPxPopupControl)
         Dim issue = txtIssue.Value

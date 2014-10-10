@@ -1,6 +1,7 @@
 ﻿Imports DevExpress.Web.ASPxGridView
 Imports IntranetPortal.ShortSale
 Imports System.Web.Script.Serialization
+Imports DevExpress.Web.ASPxEditors
 
 Public Class SelectPartyUC
     Inherits System.Web.UI.UserControl
@@ -20,22 +21,39 @@ Public Class SelectPartyUC
 
     Protected Sub gridParties_RowInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs)
         Dim grid = CType(sender, ASPxGridView)
-        Dim name = CType(grid.FindEditFormTemplateControl("txtContact"), HtmlInputText).Value
-        Dim companyname = CType(grid.FindEditFormTemplateControl("txtCompanyName"), HtmlInputText).Value
 
         Dim contact As New PartyContact
-        contact.Name = name
-        contact.CorpName = companyname
-        contact.Address = CType(grid.FindEditFormTemplateControl("txtAddress"), HtmlInputText).Value
-        contact.OfficeNO = CType(grid.FindEditFormTemplateControl("txtOffice"), HtmlInputText).Value
-        contact.Cell = CType(grid.FindEditFormTemplateControl("txtCell"), HtmlInputText).Value
-        contact.Email = CType(grid.FindEditFormTemplateControl("txtEmail"), HtmlInputText).Value
-        contact.Type = PartyContact.ContactType.TitleCompany
+        contact = BindContactFromGrid(contact, grid)
+        contact.Type = If(String.IsNullOrEmpty(rblType.Value), Nothing, CInt(rblType.Value))
         contact.Save()
+
         e.Cancel = True
         grid.CancelEdit()
         grid.DataBind()
     End Sub
+
+    Protected Sub gridParties_RowUpdating(sender As Object, e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs)
+        Dim grid = CType(sender, ASPxGridView)
+        Dim contact = PartyContact.GetContact(CInt(e.Keys("ContactId")))
+        contact = BindContactFromGrid(contact, grid)
+        contact.Save()
+
+        e.Cancel = True
+        grid.CancelEdit()
+        grid.DataBind()
+    End Sub
+
+    Private Function BindContactFromGrid(contact As PartyContact, grid As ASPxGridView) As PartyContact
+        Dim name = CType(grid.FindEditFormTemplateControl("txtContact"), ASPxTextBox).Value
+        Dim companyname = CType(grid.FindEditFormTemplateControl("txtCompanyName"), ASPxTextBox).Value
+        contact.Name = name
+        contact.CorpName = companyname
+        contact.Address = CType(grid.FindEditFormTemplateControl("txtAddress"), HtmlInputText).Value
+        contact.OfficeNO = CType(grid.FindEditFormTemplateControl("txtOffice"), ASPxTextBox).Value
+        contact.Cell = CType(grid.FindEditFormTemplateControl("txtCell"), ASPxTextBox).Value
+        contact.Email = CType(grid.FindEditFormTemplateControl("txtEmail"), ASPxTextBox).Value
+        Return contact
+    End Function
 
     Protected Sub gridParties_CustomDataCallback(sender As Object, e As ASPxGridViewCustomDataCallbackEventArgs)
         Dim contactId = gridParties.GetSelectedFieldValues("ContactId")(0)
