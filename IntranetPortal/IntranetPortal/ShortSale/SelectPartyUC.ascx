@@ -3,8 +3,7 @@
     var tmpPartyName = null;
     var onSelectCallback;
 
-    function ShowSelectParty(partyName, selectPartyCallback)
-    {
+    function ShowSelectParty(partyName, selectPartyCallback) {
         ASPxPopupSelectParty.Show();
         gridParties.Refresh();
         tmpPartyName = partyName;
@@ -37,6 +36,16 @@
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">
+            <dx:ASPxRadioButtonList runat="server" ID="rblType" RepeatDirection="Horizontal">
+                <Border BorderStyle="None" />
+                <Items>
+                    <dx:ListEditItem Value="" Text="All" />
+                    <dx:ListEditItem Text="Title Company" Value="0" />
+                    <dx:ListEditItem Text="Attorney" Value="1" />
+                    <dx:ListEditItem Text="Seller" Value="2" />
+                    <dx:ListEditItem Text="Employee" Value="3" />
+                </Items>
+            </dx:ASPxRadioButtonList>
             <dx:ASPxGridView runat="server" ID="gridParties" ClientInstanceName="gridParties" KeyFieldName="ContactId" OnDataBinding="gridParties_DataBinding" Width="100%" OnRowInserting="gridParties_RowInserting" OnCustomDataCallback="gridParties_CustomDataCallback">
                 <Columns>
                     <dx:GridViewCommandColumn ShowSelectCheckbox="true" Caption="#"></dx:GridViewCommandColumn>
@@ -83,7 +92,7 @@
                 <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
                 <SettingsPopup>
                 </SettingsPopup>
-                <SettingsText PopupEditFormCaption="Add Title Company" />               
+                <SettingsText PopupEditFormCaption="Add Title Company" />
             </dx:ASPxGridView>
         </dx:PopupControlContentControl>
     </ContentCollection>

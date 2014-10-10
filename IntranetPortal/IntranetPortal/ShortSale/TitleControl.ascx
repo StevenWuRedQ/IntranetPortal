@@ -78,7 +78,7 @@
             </div>
 
             <div class="ss_form">
-                <h4 class="ss_form_title">Sellers Title Company <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="SelectTitleCompany(true)"></i></h4>
+                <h4 class="ss_form_title">Sellers Title Company <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('SellerTitle', function(party){SellerTitle.ContactId=party.ContactId})"></i></h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Company Name</label>
@@ -108,7 +108,7 @@
             </div>
 
             <div class="ss_form">
-                <h4 class="ss_form_title">Buyers Title Company  <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="SelectTitleCompany(false)"></i></h4>
+                <h4 class="ss_form_title">Buyers Title Company  <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('BuyerTitle', function(party){BuyerTitle.ContactId=party.ContactId})"></i></h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Company Name</label>
@@ -357,10 +357,11 @@
 
 <dx:ASPxPopupControl ClientInstanceName="ASPxPopupTitleControl" Width="700px" Height="420px"
     MaxWidth="800px" MinWidth="150px" ID="popupTitleControl" OnWindowCallback="popupTitleControl_WindowCallback"
-    HeaderText="Title Company" Modal="true" ShowFooter="true" 
+    HeaderText="Select Contact" Modal="true" ShowFooter="true" 
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <ContentCollection>
         <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentTitle">
+              
             <dx:ASPxGridView runat="server" ID="gridTitleCompany" ClientInstanceName="gridTitleCompany" KeyFieldName="ContactId" OnDataBinding="titleCompanyGrid_DataBinding" Width="100%" OnRowInserting="gridTitleCompany_RowInserting">
                 <Columns>
                     <dx:GridViewCommandColumn ShowSelectCheckbox="true" Caption="#"></dx:GridViewCommandColumn>
