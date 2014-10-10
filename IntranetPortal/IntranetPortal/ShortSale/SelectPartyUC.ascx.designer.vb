@@ -23,6 +23,15 @@ Partial Public Class SelectPartyUC
     Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
+    '''popupContentSelectParty control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents popupContentSelectParty As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+
+    '''<summary>
     '''rblType control.
     '''</summary>
     '''<remarks>

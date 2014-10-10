@@ -1,45 +1,45 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TitleControl.ascx.vb" Inherits="IntranetPortal.TitleControl" %>
 <script type="text/javascript">
-    var selectSellerTitle = null;
-    function SelectTitleCompany(isSeleteSellerTitle) {     
-        selectSellerTitle = isSeleteSellerTitle;
-        ASPxPopupTitleControl.PerformCallback();      
-    }
+    //var selectSellerTitle = null;
+    //function SelectTitleCompany(isSeleteSellerTitle) {     
+    //    selectSellerTitle = isSeleteSellerTitle;
+    //    ASPxPopupTitleControl.PerformCallback();      
+    //}
 
-    function ShowEditForm() {
-        gridTitleCompany.AddNewRow();
-    }
+    //function ShowEditForm() {
+    //    gridTitleCompany.AddNewRow();      
+    //}
 
-    function AddNewCompany() {
-        gridTitleCompany.UpdateEdit();
-    }
+    //function AddNewCompany() {
+    //    gridTitleCompany.UpdateEdit();
+    //}
 
-    function SelectCompany() {
-        gridTitleCompany.GetSelectedFieldValues('CorpName;OfficeNO;', OnGetSelectedFieldValues);
-        ASPxPopupTitleControl.Hide();
-    }
+    //function SelectCompany() {
+    //    gridTitleCompany.GetSelectedFieldValues('CorpName;OfficeNO;', OnGetSelectedFieldValues);
+    //    ASPxPopupTitleControl.Hide();
+    //}
 
-    function OnGetSelectedFieldValues(selectedValues) {
+    //function OnGetSelectedFieldValues(selectedValues) {
 
-        if (selectedValues.length == 0) return;
+    //    if (selectedValues.length == 0) return;
 
-        var titleCompany = selectedValues[0];
+    //    var titleCompany = selectedValues[0];
 
-        if (selectSellerTitle) {
-            document.getElementById("txtSellerCompanyName").value = titleCompany[0];
-            document.getElementById("txtSellerTitlePhone").value = titleCompany[1];
-        }
-        else {
-            document.getElementById("txtBuyerCompanyName").value = titleCompany[0];
-            document.getElementById("txtBuyerTitlePhone").value = titleCompany[1];
-        }
-    }
+    //    if (selectSellerTitle) {
+    //        document.getElementById("txtSellerCompanyName").value = titleCompany[0];
+    //        document.getElementById("txtSellerTitlePhone").value = titleCompany[1];
+    //    }
+    //    else {
+    //        document.getElementById("txtBuyerCompanyName").value = titleCompany[0];
+    //        document.getElementById("txtBuyerTitlePhone").value = titleCompany[1];
+    //    }
+    //}
 
-    var tmpClearenceId = null;
-    function AddNotes(clearenceId, element) {
-        tmpClearenceId = clearenceId;
-        aspxAddNotes.ShowAtElement(element);
-    }
+    //var tmpClearenceId = null;
+    //function AddNotes(clearenceId, element) {
+    //    tmpClearenceId = clearenceId;
+    //    aspxAddNotes.ShowAtElement(element);
+    //}
 </script>
 <div style="padding-top: 5px">
     <div style="height: 850px; overflow: auto;" id="prioity_content">      
@@ -78,15 +78,15 @@
             </div>
 
             <div class="ss_form">
-                <h4 class="ss_form_title">Sellers Title Company <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('SellerTitle', function(party){SellerTitle.ContactId=party.ContactId})"></i></h4>
+                <h4 class="ss_form_title">Sellers Title Company <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('SellerTitle.TitleContact', function(party){ShortSaleCaseData.SellerTitle.ContactId=party.ContactId;$('#dateSellerOrderDate').val('');$('#dateSellerReceivedDate').val('');$('#txtSellerOrderNum').val('');})"></i></h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Company Name</label>
-                        <input class="ss_form_input" data-field="SellerTitle.CompanyName" value="<%= ShortSaleCaseData.SellerTitle.CompanyName%>" id="txtSellerCompanyName">
+                        <input class="ss_form_input" data-field="SellerTitle.TitleContact.CorpName" value="<%= ShortSaleCaseData.SellerTitle.TitleContact.CorpName%>" id="txtSellerCompanyName">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input" data-field="SellerTitle.Phone" value="<%= ShortSaleCaseData.SellerTitle.Phone%>" id="txtSellerTitlePhone">
+                        <input class="ss_form_input" data-field="SellerTitle.TitleContact.OfficeNO" value="<%= ShortSaleCaseData.SellerTitle.TitleContact.OfficeNO%>" id="txtSellerTitlePhone">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">&nbsp;</label>
@@ -94,29 +94,29 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Ordered</label>
-                        <input class="ss_form_input" data-field="SellerTitle.ReportOrderDate" type="date" value="<%= ShortSaleCaseData.SellerTitle.ReportOrderDate%>">
+                        <input class="ss_form_input" data-field="SellerTitle.ReportOrderDate" type="date" value="<%= ShortSaleCaseData.SellerTitle.ReportOrderDate%>" id="dateSellerOrderDate">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Received</label>
-                        <input class="ss_form_input" data-field="SellerTitle.ReceivedDate" type="date" value="<%= ShortSaleCaseData.SellerTitle.ReceivedDate%>">
+                        <input class="ss_form_input" data-field="SellerTitle.ReceivedDate" type="date" value="<%= ShortSaleCaseData.SellerTitle.ReceivedDate%>" id="dateSellerReceivedDate">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Order Number</label>
-                        <input class="ss_form_input" data-field="SellerTitle.OrderNumber" value="<%= ShortSaleCaseData.SellerTitle.OrderNumber%>">
+                        <input class="ss_form_input" data-field="SellerTitle.OrderNumber" value="<%= ShortSaleCaseData.SellerTitle.OrderNumber%>" id="txtSellerOrderNum">
                     </li>
                 </ul>
             </div>
 
             <div class="ss_form">
-                <h4 class="ss_form_title">Buyers Title Company  <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('BuyerTitle', function(party){BuyerTitle.ContactId=party.ContactId})"></i></h4>
+                <h4 class="ss_form_title">Buyers Title Company  <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('BuyerTitle.TitleContact', function(party){ShortSaleCaseData.BuyerTitle.ContactId=party.ContactId;$('#dateBuyerOrderDate').val('');$('#dateBuyerReceivedDate').val('');$('#txtBuyerOrderNumber').val('');})"></i></h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Company Name</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.CompanyName" value="<%= ShortSaleCaseData.BuyerTitle.CompanyName%>" id="txtBuyerCompanyName">
+                        <input class="ss_form_input" data-field="BuyerTitle.TitleContact.CorpName" value="<%= ShortSaleCaseData.BuyerTitle.TitleContact.CorpName%>" id="txtBuyerCompanyName">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.Phone" value="<%= ShortSaleCaseData.BuyerTitle.Phone%>" id="txtBuyerTitlePhone">
+                        <input class="ss_form_input" data-field="BuyerTitle.TitleContact.OfficeNO" value="<%= ShortSaleCaseData.BuyerTitle.TitleContact.OfficeNO%>" id="txtBuyerTitlePhone">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">&nbsp;</label>
@@ -124,15 +124,15 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Ordered</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.ReportOrderDate" type="date" value="<%= ShortSaleCaseData.BuyerTitle.ReportOrderDate%>">
+                        <input class="ss_form_input" data-field="BuyerTitle.ReportOrderDate" type="date" value="<%= ShortSaleCaseData.BuyerTitle.ReportOrderDate%>" id="dateBuyerOrderDate">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Received</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.ReceivedDate" type="date" value="<%= ShortSaleCaseData.BuyerTitle.ReceivedDate%>">
+                        <input class="ss_form_input" data-field="BuyerTitle.ReceivedDate" type="date" value="<%= ShortSaleCaseData.BuyerTitle.ReceivedDate%>" id="dateBuyerReceivedDate">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Order Number</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.OrderNumber"  value="<%= ShortSaleCaseData.BuyerTitle.OrderNumber%>">
+                        <input class="ss_form_input" data-field="BuyerTitle.OrderNumber"  value="<%= ShortSaleCaseData.BuyerTitle.OrderNumber%>" id="txtBuyerOrderNumber">
                     </li>
                 </ul>
             </div>
@@ -355,13 +355,12 @@
     </div>
 </div>
 
-<dx:ASPxPopupControl ClientInstanceName="ASPxPopupTitleControl" Width="700px" Height="420px"
+<%--<dx:ASPxPopupControl ClientInstanceName="ASPxPopupTitleControl" Width="700px" Height="420px" AllowDragging="true" DragElement="Header"
     MaxWidth="800px" MinWidth="150px" ID="popupTitleControl" OnWindowCallback="popupTitleControl_WindowCallback"
     HeaderText="Select Contact" Modal="true" ShowFooter="true" 
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <ContentCollection>
-        <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentTitle">
-              
+        <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentTitle">              
             <dx:ASPxGridView runat="server" ID="gridTitleCompany" ClientInstanceName="gridTitleCompany" KeyFieldName="ContactId" OnDataBinding="titleCompanyGrid_DataBinding" Width="100%" OnRowInserting="gridTitleCompany_RowInserting">
                 <Columns>
                     <dx:GridViewCommandColumn ShowSelectCheckbox="true" Caption="#"></dx:GridViewCommandColumn>
@@ -420,7 +419,7 @@
         </div>
     </FooterContentTemplate>
     <ClientSideEvents EndCallback="function(s,e){s.Show();}" />
-</dx:ASPxPopupControl>
+</dx:ASPxPopupControl>--%>
 
 <dx:ASPxPopupControl ClientInstanceName="AspxPopupClearence" Width="600px" Height="320px"
     MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl1" OnWindowCallback="ASPxPopupControl1_WindowCallback"

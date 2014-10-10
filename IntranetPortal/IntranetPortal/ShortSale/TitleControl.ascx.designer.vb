@@ -23,33 +23,6 @@ Partial Public Class TitleControl
     Protected WithEvents callbackClearence As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
 
     '''<summary>
-    '''popupTitleControl control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents popupTitleControl As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
-
-    '''<summary>
-    '''popupContentTitle control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents popupContentTitle As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
-
-    '''<summary>
-    '''gridTitleCompany control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents gridTitleCompany As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-
-    '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>

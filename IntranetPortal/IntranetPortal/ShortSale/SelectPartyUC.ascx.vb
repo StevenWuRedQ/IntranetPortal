@@ -13,7 +13,8 @@ Public Class SelectPartyUC
         Dim grid = CType(sender, ASPxGridView)
 
         If grid.DataSource Is Nothing Then
-            grid.DataSource = PartyContact.GetTitleCompanies
+            Dim type = rblType.Value
+            grid.DataSource = PartyContact.GetTitleCompanies(rblType.Value)
         End If
     End Sub
 
@@ -41,5 +42,20 @@ Public Class SelectPartyUC
 
         Dim json As New JavaScriptSerializer
         e.Result = json.Serialize(PartyContact.GetContact(contactId))
+    End Sub
+
+    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        popupContentSelectParty.Visible = True
+        gridParties.DataBind()
+    End Sub
+
+    Protected Sub gridParties_RowDeleting(sender As Object, e As DevExpress.Web.Data.ASPxDataDeletingEventArgs)
+        Dim grid = CType(sender, ASPxGridView)
+        Dim contactId = e.Keys("ContactId")
+        PartyContact.DeleteContact(contactId)
+
+        e.Cancel = True
+
+        gridParties.DataBind()
     End Sub
 End Class

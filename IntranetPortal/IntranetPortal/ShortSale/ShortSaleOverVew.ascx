@@ -6,8 +6,6 @@
 <%@ Register Src="~/ShortSale/ShortSaleHomewonerTab.ascx" TagPrefix="uc1" TagName="ShortSaleHomewonerTab" %>
 <%@ Register Src="~/ShortSale/ShortSaleMortgageTab.ascx" TagPrefix="uc1" TagName="ShortSaleMortgageTab" %>
 
-
-
 <script src="/scripts/jquery.formatCurrency-1.1.0.js"></script>
 <script type="text/javascript">
     function init_currency() {

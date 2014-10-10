@@ -4,8 +4,7 @@
     var onSelectCallback;
 
     function ShowSelectParty(partyName, selectPartyCallback) {
-        ASPxPopupSelectParty.Show();
-        gridParties.Refresh();
+        ASPxPopupSelectParty.PerformCallback();        
         tmpPartyName = partyName;
         onSelectCallback = selectPartyCallback;
     }
@@ -24,18 +23,18 @@
     }
 
     function EndSelectParty(party) {
-        var data = JSON.parse(party);
+        var data = JSON.parse(party);        
         refreshDiv(tmpPartyName, data);
         onSelectCallback(data);
     }
 </script>
 
 <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectParty" Width="700px" Height="420px"
-    MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl3"
+    MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl3" OnWindowCallback="ASPxPopupControl3_WindowCallback"    
     HeaderText="Title Company" Modal="true" ShowFooter="true"
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <ContentCollection>
-        <dx:PopupControlContentControl runat="server">
+        <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentSelectParty">
             <dx:ASPxRadioButtonList runat="server" ID="rblType" RepeatDirection="Horizontal">
                 <Border BorderStyle="None" />
                 <Items>
@@ -45,14 +44,16 @@
                     <dx:ListEditItem Text="Seller" Value="2" />
                     <dx:ListEditItem Text="Employee" Value="3" />
                 </Items>
+                <ClientSideEvents SelectedIndexChanged="function(s,e){gridParties.Refresh();}" />
             </dx:ASPxRadioButtonList>
-            <dx:ASPxGridView runat="server" ID="gridParties" ClientInstanceName="gridParties" KeyFieldName="ContactId" OnDataBinding="gridParties_DataBinding" Width="100%" OnRowInserting="gridParties_RowInserting" OnCustomDataCallback="gridParties_CustomDataCallback">
+            <dx:ASPxGridView runat="server" ID="gridParties" ClientInstanceName="gridParties" KeyFieldName="ContactId" OnDataBinding="gridParties_DataBinding" Width="100%" OnRowInserting="gridParties_RowInserting" OnCustomDataCallback="gridParties_CustomDataCallback" OnRowDeleting="gridParties_RowDeleting">
                 <Columns>
                     <dx:GridViewCommandColumn ShowSelectCheckbox="true" Caption="#"></dx:GridViewCommandColumn>
                     <dx:GridViewDataTextColumn FieldName="CorpName" Caption="Company Name"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Name" Caption="Contact"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="OfficeNO" Caption="Phone"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Address"></dx:GridViewDataTextColumn>
+                    <dx:GridViewCommandColumn ShowEditButton="true" ShowDeleteButton="true"></dx:GridViewCommandColumn>
                 </Columns>
                 <Templates>
                     <EditForm>
@@ -84,7 +85,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <span class="time_buttons" onclick="gridTitleCompany.CancelEdit()">Cancel</span>
+                        <span class="time_buttons" onclick="gridParties.CancelEdit()">Cancel</span>
                         <span class="time_buttons" onclick="AddNewCompany()">OK</span>
                     </EditForm>
                 </Templates>
@@ -103,4 +104,5 @@
             <span class="time_buttons" onclick="ShowEditForm()">Add New</span>
         </div>
     </FooterContentTemplate>
+    <ClientSideEvents EndCallback="function(s,e){s.Show();}" />
 </dx:ASPxPopupControl>
