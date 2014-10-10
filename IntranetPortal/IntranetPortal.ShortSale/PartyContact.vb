@@ -39,7 +39,7 @@ Partial Public Class PartyContact
 
     Public Shared Sub DeleteContact(contactId As Integer)
         Using context As New ShortSaleEntities
-            Dim obj = context.PartyContacts.Find(contactId)
+            Dim obj = context.PartyContacts.Find(ContactId)
 
             If obj IsNot Nothing Then
                 context.PartyContacts.Remove(obj)

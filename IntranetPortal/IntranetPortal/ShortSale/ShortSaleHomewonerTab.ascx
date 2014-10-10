@@ -13,7 +13,7 @@
         <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" onclick="delete_array_item(this)" title="Delete"></i>
     </h3>
     <div class="collapse_div">
-        <div class="ss_form">
+        <div>
 
             <ul class="ss_form_box clearfix">
 

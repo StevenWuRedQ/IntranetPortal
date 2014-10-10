@@ -12,4 +12,22 @@ Option Explicit On
 
 
 Partial Public Class ShortSalePropertyTab
+
+    '''<summary>
+    '''hfBble control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfBble As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''home_breakdown_gridview control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents home_breakdown_gridview As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 End Class

@@ -1,6 +1,8 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSalePropertyTab.ascx.vb" Inherits="IntranetPortal.ShortSalePropertyTab" %>
 <%@ Import Namespace="IntranetPortal" %>
-
+<script>
+    
+</script>
 <div class="clearfix">
     <div style="float: right">
         <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
@@ -13,7 +15,7 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Street Number</label>
-            <input class="ss_form_input" data-field="PropertyInfo.Number" >
+            <input class="ss_form_input" data-field="PropertyInfo.Number">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Street Name</label>
@@ -21,7 +23,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">City</label>
-            <input class="ss_form_input" data-field="PropertyInfo.City" >
+            <input class="ss_form_input" data-field="PropertyInfo.City">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">State</label>
@@ -29,7 +31,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Zip</label>
-            <input class="ss_form_input"  data-field="PropertyInfo.Zipcode" >
+            <input class="ss_form_input" data-field="PropertyInfo.Zipcode">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">&nbsp;</label>
@@ -37,11 +39,11 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">BLOCK</label>
-            <input class="ss_form_input" data-field="PropertyInfo.Block" >
+            <input class="ss_form_input" data-field="PropertyInfo.Block">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Lot</label>
-            <input class="ss_form_input" data-field="PropertyInfo.Lot" >
+            <input class="ss_form_input" data-field="PropertyInfo.Lot">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Building type</label>
@@ -69,10 +71,10 @@
             <label class="ss_form_input_title"># Of Unit</label>
             <input class="ss_form_input" data-field="PropertyInfo.NumOfUnit">
         </li>
-        <li class="ss_form_item" >
+        <li class="ss_form_item">
             <label class="ss_form_input_title">Accessibility</label>
 
-            <select class="ss_form_input" data-field="PropertyInfo.Accessibility" >
+            <select class="ss_form_input" data-field="PropertyInfo.Accessibility">
                 <option value="Lockbox-LOC">Lockbox-LOC</option>
                 <option value="Master Key">Master Key</option>
                 <option value="Homeowner's key">Homeowner's key</option>
@@ -83,12 +85,12 @@
         <li class="ss_form_item">
             <span class="ss_form_input_title">c/o(<span class="linkey_pdf">pdf</span>)</span>
 
-            <input type="radio" class="ss_form_input" data-field="PropertyInfo.CO" data-radio="Y" id="key_PropertyInfo_checkYes_CO" name="pdf" value="YES" >
+            <input type="radio" class="ss_form_input" data-field="PropertyInfo.CO" data-radio="Y" id="key_PropertyInfo_checkYes_CO" name="pdf" value="YES">
             <label for="key_PropertyInfo_checkYes_CO" class="input_with_check">
                 <span class="box_text">Yes</span>
             </label>
 
-            <input type="radio" class="ss_form_input"  data-field="PropertyInfo.CO" id="none_pdf_checkey_no21" name="pdf" value="NO" >
+            <input type="radio" class="ss_form_input" data-field="PropertyInfo.CO" id="none_pdf_checkey_no21" name="pdf" value="NO">
             <label for="none_pdf_checkey_no21" class="input_with_check">
                 <span class="box_text"><span class="box_text">No</span></span>
             </label>
@@ -96,7 +98,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Tax Class</label>
-            <input class="ss_form_input" data-field="PropertyInfo.TaxClass" >
+            <input class="ss_form_input" data-field="PropertyInfo.TaxClass">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title"># of Families</label>
@@ -106,7 +108,7 @@
         <li class="ss_form_item">
             <span class="ss_form_input_title">FHA</span>
 
-            <input type="radio" id="key_PropertyInfo_checkYes_FHA" data-field="PropertyInfo.FHA"  data-radio="Y" class="ss_form_input" name="FHA1" value="YES" >
+            <input type="radio" id="key_PropertyInfo_checkYes_FHA" data-field="PropertyInfo.FHA" data-radio="Y" class="ss_form_input" name="FHA1" value="YES">
             <label for="key_PropertyInfo_checkYes_FHA" class="input_with_check"><span class="box_text">Yes</span></label>
 
             <input type="radio" id="none_pdf_checkey_no25" data-field="PropertyInfo.FHA" name="FHA1" value="NO">
@@ -116,7 +118,7 @@
         <li class="ss_form_item">
             <span class="ss_form_input_title">Fannie MAE</span>
 
-            <input type="radio" id="key_PropertyInfo_checkYes_FannieMae" data-field="PropertyInfo.FannieMae" data-radio="Y" name="Fannie_Mae1" value="YES" >
+            <input type="radio" id="key_PropertyInfo_checkYes_FannieMae" data-field="PropertyInfo.FannieMae" data-radio="Y" name="Fannie_Mae1" value="YES">
             <label for="key_PropertyInfo_checkYes_FannieMae" class="input_with_check"><span class="box_text">Yes</span></label>
 
             <input type="radio" id="none_pdf_checkey_no23" data-field="PropertyInfo.FannieMae" name="Fannie_Mae1" value="NO">
@@ -136,13 +138,38 @@
 
     </ul>
 </div>
+
 <div class="ss_form" id="home_breakdown_table">
     <h4 class="ss_form_title">Home Breakdown</h4>
     <%-- log tables--%>
+    <asp:HiddenField ID="hfBble" runat="server" />
     <div>
-        <table class="table">
+        <dx:ASPxGridView ID="home_breakdown_gridview" runat="server" OnRowInserting="home_breakdown_gridview_RowInserting" OnRowDeleting="home_breakdown_gridview_RowDeleting" OnRowUpdating="home_breakdown_gridview_RowUpdating">
+            
+            <Columns>
+                <dx:GridViewCommandColumn ShowNewButtonInHeader="true" ShowDeleteButton="True" />
+                <dx:GridViewDataColumn FieldName="FloorId" VisibleIndex="1" Caption="Floor" />
+                
+                <dx:GridViewDataColumn FieldName="Bedroom" VisibleIndex="1" />
+                <dx:GridViewDataColumn FieldName="Bathroom" VisibleIndex="2" />
+                <dx:GridViewDataColumn FieldName="Livingroom" VisibleIndex="3" />
+                <dx:GridViewDataColumn FieldName="Kitchen" VisibleIndex="4" />
+                <dx:GridViewDataColumn FieldName="Diningroom" VisibleIndex="5" />
+                <dx:GridViewDataColumn FieldName="Occupied" VisibleIndex="5" />
+                <dx:GridViewDataColumn FieldName="Lease" VisibleIndex="5" />
+                <dx:GridViewDataColumn FieldName="Type" VisibleIndex="5" />
+                <dx:GridViewDataColumn FieldName="BoilerRoom" VisibleIndex="5" />
+            </Columns>
+        </dx:ASPxGridView>
+        <%--   <table class="table">
             <thead>
                 <tr>
+                    <th>Bedrooms</th>
+                    <th>Bathrooms</th>
+                    <th>Living Room</th>
+                    <th>Kitcken</th>
+                    <th>Dining Room</th>
+                    <th>Whatever</th>
                     <th>Effective</th>
                     <th>Basement</th>
                     <th>1 st floor</th>
@@ -233,24 +260,22 @@
                     <td></td>
                 </tr>
             </tbody>
-        </table>
-
+        </table>--%>
     </div>
     <%------end-------%>
 </div>
 
 <script src="/scripts/mindmup-editabletable.js"></script>
 <script>
-   function onRefreashDone ()
-    {
-       $("#home_breakdown_table").editableTableWidget();
-       $(".ss_form_input, .input_with_check").prop("disabled", true);
-      
+    function onRefreashDone() {
+        //$("#home_breakdown_table").editableTableWidget();
+        $(".ss_form_input, .input_with_check").prop("disabled", true);
+
     }
     //$(document).ready(function () {
     //    // Handler for .ready() called.
     //    d_alert("rund edit ");
     //    $("#home_breakdown_table").editableTableWidget();
     //});
-   
+
 </script>

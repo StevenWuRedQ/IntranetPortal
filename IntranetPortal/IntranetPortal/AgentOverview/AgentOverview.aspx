@@ -219,7 +219,7 @@
                                                             <span class="font_black"><%# Eval("Name")%></span><br />
                                                             <%# Eval("Position")%>
                                                         </div>
-                                                        <i class="fa fa-list-alt employee_list_item_icon"></i>
+                                                       <%-- <i class="fa fa-list-alt employee_list_item_icon"></i>--%>
                                                     </div>
                                                 </DataItemTemplate>
                                             </dx:GridViewDataTextColumn>
