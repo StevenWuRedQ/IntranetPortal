@@ -37,9 +37,24 @@ Partial Public Class PartyContact
         End Using
     End Function
 
-    Public Shared Function GetTitleCompanies() As List(Of PartyContact)
+    Public Shared Sub DeleteContact(contactId As Integer)
         Using context As New ShortSaleEntities
-            Return context.PartyContacts.Where(Function(pc) pc.Type = ContactType.TitleCompany).ToList
+            Dim obj = context.PartyContacts.Find(contactId)
+
+            If obj IsNot Nothing Then
+                context.PartyContacts.Remove(obj)
+                context.SaveChanges()
+            End If
+        End Using
+    End Sub
+
+    Public Shared Function GetTitleCompanies(type As String) As List(Of PartyContact)
+        Using context As New ShortSaleEntities
+            If String.IsNullOrEmpty(type) Then
+                Return context.PartyContacts.ToList
+            Else
+                Return context.PartyContacts.Where(Function(pc) pc.Type = CInt(type)).ToList
+            End If
         End Using
     End Function
 End Class

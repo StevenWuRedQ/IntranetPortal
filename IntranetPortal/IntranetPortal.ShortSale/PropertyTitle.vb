@@ -4,6 +4,21 @@
         Buyer = 1
     End Enum
 
+    Private _titleContact As PartyContact
+    Public ReadOnly Property TitleContact As PartyContact
+        Get
+            If ContactId.HasValue Then
+                _titleContact = PartyContact.GetContact(ContactId)
+            End If
+
+            If _titleContact Is Nothing Then
+                _titleContact = New PartyContact
+            End If
+
+            Return _titleContact
+        End Get
+    End Property
+
     Public Shared Function GetTitle(caseId As Integer, type As TitleType) As PropertyTitle
         Using context As New ShortSaleEntities
             Dim title = context.PropertyTitles.Where(Function(pt) pt.CaseId = caseId And pt.Type = type).FirstOrDefault

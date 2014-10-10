@@ -13,4 +13,15 @@
             context.SaveChanges()
         End Using
     End Sub
+
+    Public Shared Sub Delete(bble As String, floorId As Integer)
+        Using context As New ShortSaleEntities
+            Dim obj = context.PropertyFloors.Find(bble, floorId)
+
+            If obj IsNot Nothing Then
+                context.PropertyFloors.Remove(obj)
+                context.SaveChanges()
+            End If
+        End Using
+    End Sub
 End Class

@@ -12,6 +12,10 @@
                 _contact = PartyContact.GetContact(ContactId)
             End If
 
+            If _contact Is Nothing Then
+                _contact = New PartyContact
+            End If
+
             Return _contact
         End Get
     End Property

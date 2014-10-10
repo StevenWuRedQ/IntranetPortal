@@ -1,4 +1,5 @@
-﻿Partial Public Class PropertyBaseInfo
+﻿
+Partial Public Class PropertyBaseInfo
 
     Public ReadOnly Property PropertyAddress
         Get
