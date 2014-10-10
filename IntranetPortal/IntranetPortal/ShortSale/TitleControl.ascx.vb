@@ -60,7 +60,22 @@ Public Class TitleControl
     End Sub
 
     Protected Sub callbackClearence_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
-        Dim caseId = CInt(e.Parameter)
+        Dim caseId = 0
+
+        If e.Parameter.StartsWith("Delete") Then
+            Dim clearenceId = e.Parameter.Split("|")(1)
+            caseId = e.Parameter.Split("|")(2)
+            TitleClearence.Delete(clearenceId)
+        Else
+            If e.Parameter.StartsWith("Clear") Then
+                Dim clearenceId = e.Parameter.Split("|")(1)
+                caseId = e.Parameter.Split("|")(2)
+                TitleClearence.Cleared(clearenceId)
+            Else
+                caseId = CInt(e.Parameter)
+            End If
+        End If
+
         ShortSaleCaseData = ShortSaleCase.GetCase(caseId)
     End Sub
 
@@ -73,5 +88,10 @@ Public Class TitleControl
         note.Save()
 
         txtNotes.Text = ""
+    End Sub
+
+    Protected Sub popupTitleControl_WindowCallback(source As Object, e As PopupWindowCallbackArgs)
+        popupContentTitle.Visible = True
+        gridTitleCompany.DataBind()
     End Sub
 End Class

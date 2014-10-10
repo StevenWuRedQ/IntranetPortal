@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class TitleControl
 
     '''<summary>
-    '''UpatingPanel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents UpatingPanel As Global.DevExpress.Web.ASPxPanel.ASPxPanel
-
-    '''<summary>
     '''callbackClearence control.
     '''</summary>
     '''<remarks>
@@ -32,13 +23,22 @@ Partial Public Class TitleControl
     Protected WithEvents callbackClearence As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
 
     '''<summary>
-    '''ASPxPopupControl3 control.
+    '''popupTitleControl control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxPopupControl3 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents popupTitleControl As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''popupContentTitle control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents popupContentTitle As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
 
     '''<summary>
     '''gridTitleCompany control.

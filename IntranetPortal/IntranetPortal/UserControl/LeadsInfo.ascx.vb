@@ -259,13 +259,16 @@ Public Class LeadsInfo1
                     Dim bble = e.Parameter.Split("|")(1)
                     UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing)
 
+
                     'Add leads to short sale section
-                    ShortSaleManage.MoveLeadsToShortSale(bble, Page.User.Identity.Name)
+                    'ShortSaleManage.MoveLeadsToShortSale(bble, Page.User.Identity.Name)
                 Else
                     UpdateLeadStatus(hfBBLE.Value, LeadStatus.InProcess, Nothing)
 
-                    'Add leads to short sale section
-                    ShortSaleManage.MoveLeadsToShortSale(hfBBLE.Value, Page.User.Identity.Name)
+                    If Not String.IsNullOrEmpty(lbSelectionMode.Value) AndAlso lbSelectionMode.Value = 0 Then
+                        'Add leads to short sale section
+                        ShortSaleManage.MoveLeadsToShortSale(hfBBLE.Value, Page.User.Identity.Name)
+                    End If
                 End If
             End If
 

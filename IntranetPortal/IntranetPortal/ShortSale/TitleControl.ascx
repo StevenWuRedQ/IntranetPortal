@@ -3,8 +3,7 @@
     var selectSellerTitle = null;
     function SelectTitleCompany(isSeleteSellerTitle) {     
         selectSellerTitle = isSeleteSellerTitle;
-        ASPxPopupTitleControl.Show();
-        gridTitleCompany.Refresh();
+        ASPxPopupTitleControl.PerformCallback();      
     }
 
     function ShowEditForm() {
@@ -41,29 +40,9 @@
         tmpClearenceId = clearenceId;
         aspxAddNotes.ShowAtElement(element);
     }
-
-    function BindData()
-    {
-        var field = ($("input[data-source='ShortSaleCase']").attr("data-field"));     
-        $("input[data-source='ShortSaleCase']").val(ShortSaleCaseData[field]);
-    }
-
 </script>
 <div style="padding-top: 5px">
-    <div style="height: 850px; overflow: auto;" id="prioity_content">
-        <%--refresh label--%>
-
-        <dx:ASPxPanel ID="UpatingPanel" runat="server">
-            <PanelCollection>
-                <dx:PanelContent runat="server">
-                    <div class="update_panel" style="display: none">
-                        <i class="fa fa-spinner fa-spin" style="margin-left: 30px"></i>
-                        <span style="padding-left: 22px">Lead is being updated, it will take a few minutes to complete.</span>
-                    </div>
-                </dx:PanelContent>
-            </PanelCollection>
-        </dx:ASPxPanel>
-
+    <div style="height: 850px; overflow: auto;" id="prioity_content">      
         <%--time label--%>
         <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
             <div style="font-size: 30px">
@@ -87,37 +66,7 @@
                 <div style="float: right">
                      <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
                 </div>
-            </div>
-            <div class="ss_form" style="display: none">
-                <h4 class="ss_form_title">Property</h4>
-                <ul class="ss_form_box clearfix">
-                    <li class="ss_form_item" style="width: 100%">
-                        <label class="ss_form_input_title">Address</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.PropertyInfo.PropertyAddress%>">
-                    </li>
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Block</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.PropertyInfo.Block%>">
-                    </li>
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Lot</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.PropertyInfo.Lot%>">
-                    </li>
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title"># Of Families</label>
-                        <input class="ss_form_input" value="<%= ShortSaleCaseData.PropertyInfo.NumOfFamilies%>">
-                    </li>
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">C/O (<span class="">PDF</span>) </label>
-
-                        <input type="radio" id="check_yes51" name="check51" value="YES">
-                        <label for="check_yes51" class="input_with_check">Yes</label>
-
-                        <input type="radio" id="check_no51" name="check51" value="NO">
-                        <label for="check_no51" class="input_with_check">No</label>
-                    </li>
-                </ul>
-            </div>
+            </div>           
             <div class="ss_form" id="ddd">
                 <h4 class="ss_form_title">Proposed Closing date</h4>
                 <ul class="ss_form_box clearfix">
@@ -289,7 +238,6 @@
                                 <td>May 1,2014
                                 </td>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -298,23 +246,24 @@
             <div class="ss_form">
                 <dx:ASPxCallbackPanel ID="callbackClearence" runat="server" ClientInstanceName="callbackClearence" OnCallback="callbackClearence_Callback">
                     <PanelCollection>
-                        <dx:PanelContent>
+                        <dx:PanelContent>                       
                             <h4 class="ss_form_title">Clearence <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="AspxPopupClearence.Show()"></i></h4>
                             <%--clearence list--%>
                             <div>
+                                <% Dim i = 1%>
                                 <% For Each clearence In ShortSaleCaseData.Clearences%>
                                 <div class="clearence_list_item">
                                     <div class="clearence_list_content clearfix">
                                         <div class="clearence_list_index">
-                                            <%= clearence.SeqNum%>
+                                            <%= i%>
                                         </div>
 
                                         <div class="clearence_list_right">
                                             <div class="clearence_list_text">
                                                 <div class="clearence_list_title">
-                                                    Issue <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" style="font-size:14px"  title="Delete"></i><i class="fa fa-check  color_blue_edit collapse_btn" style="font-size:14px" title="Clear" onclick=""></i>
+                                                    Issue <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" style="font-size:14px"  title="Delete" onclick="callbackClearence.PerformCallback('Delete|<%= clearence.ClearenceId%>|' + caseId)" ></i><i class="fa fa-check  color_blue_edit collapse_btn" style="font-size:14px" title="Clear" onclick="callbackClearence.PerformCallback('Clear|<%= clearence.ClearenceId%>|' + caseId)"></i>
                                                 </div>
-                                                <div class="clearence_list_text18">
+                                                <div class="clearence_list_text18" <%= If(Not String.IsNullOrEmpty(clearence.Status) AndAlso clearence.Status = IntranetPortal.ShortSale.TitleClearence.ClearenceStatus.Cleared, "style='text-decoration:line-through;'", "")%>>
                                                     <%= clearence.Issue%>
                                                 </div>
                                             </div>
@@ -394,6 +343,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <% i =i+1 %>
                                 <% Next%>
                                   
                             </div>
@@ -404,12 +354,13 @@
         </div>
     </div>
 </div>
+
 <dx:ASPxPopupControl ClientInstanceName="ASPxPopupTitleControl" Width="700px" Height="420px"
-    MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl3"
-    HeaderText="Title Company" Modal="true" ShowFooter="true"
+    MaxWidth="800px" MinWidth="150px" ID="popupTitleControl" OnWindowCallback="popupTitleControl_WindowCallback"
+    HeaderText="Title Company" Modal="true" ShowFooter="true" 
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <ContentCollection>
-        <dx:PopupControlContentControl runat="server">
+        <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentTitle">
             <dx:ASPxGridView runat="server" ID="gridTitleCompany" ClientInstanceName="gridTitleCompany" KeyFieldName="ContactId" OnDataBinding="titleCompanyGrid_DataBinding" Width="100%" OnRowInserting="gridTitleCompany_RowInserting">
                 <Columns>
                     <dx:GridViewCommandColumn ShowSelectCheckbox="true" Caption="#"></dx:GridViewCommandColumn>
@@ -467,6 +418,7 @@
             <span class="time_buttons" onclick="ShowEditForm()">Add Company</span>
         </div>
     </FooterContentTemplate>
+    <ClientSideEvents EndCallback="function(s,e){s.Show();}" />
 </dx:ASPxPopupControl>
 
 <dx:ASPxPopupControl ClientInstanceName="AspxPopupClearence" Width="600px" Height="320px"

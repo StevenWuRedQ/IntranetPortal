@@ -35,6 +35,17 @@
         aspxAddLeadsComments.Hide();
     }
 
+    function ShowDiv()
+    {
+        var display = document.getElementById("divOtherProperties").style.display;
+
+        if (display == "block") {
+            document.getElementById("divOtherProperties").style.display = "none";
+        }
+        else
+            document.getElementById("divOtherProperties").style.display = "block";
+    }
+
     function DeleteComments(commentId) {
         leadsCommentsCallbackPanel.PerformCallback("Delete|" + commentId);
     }
@@ -103,11 +114,12 @@
                         <% If LeadsInfoData.OtherProperties IsNot Nothing AndAlso LeadsInfoData.OtherProperties.Count > 0 Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8;height:inherit","height:inherit")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
-                            <span class="note_text">Other properties of current owner: </span>
-                            <br />
+                            <span class="note_text" style="cursor:pointer" onclick="ShowDiv()" >Other properties of current owner: </span>
+                            <div id="divOtherProperties" style="display:block">
                             <% For Each li In LeadsInfoData.OtherProperties%>
                             <i class="note_img"></i><a href="#" style="font-size: 14px" onclick="ViewLeads(<%= li.BBLE %>);"><%= li.LeadsName %></a><br />
                             <%Next%>
+                                </div>
                         </div>
                         <% i += 1%>
                         <% End If%>

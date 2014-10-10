@@ -33,7 +33,7 @@
             } else {
                 gridLeads.ExpandRow(rowIndex);
             }
-
+            AddScrollbarOnLeadsList();
             return
         }
     }
@@ -44,6 +44,8 @@
             IsAddNewLead = false;
             OnGridFocusedRowChanged();
         }
+
+        AddScrollbarOnLeadsList();
     }
 
     function OnGetRowValues(values) {
@@ -136,7 +138,6 @@
 
 
     var tempAddress = null;
-
 
     function SearchGridLeads() {
         var filterCondition = "";
@@ -268,30 +269,35 @@
         }
     }
 
+    function AddScrollbarOnLeadsList()
+    {
+        $("#leads_list_left .dxgvCSD").each(function (ind) {
+            var is_list = $(this).parents("#leads_list_left").length > 0;
+
+            var ladfucntion = {
+                onScroll: function () {
+                    var position = this.mcs.topPct;
+                    if (position > 95) {
+                        gridLeads.NextPage();
+                    }
+                }
+            }
+
+            if (is_list) {
+                $(this).mCustomScrollbar(
+                    {
+                        theme: "minimal-dark",
+                        callbacks: ladfucntion
+                    }
+                 );
+            }
+        });
+    }
+
     $(document).ready(function () {
         //Handler for .ready() called.
         if (LeadCategory.GetText() != "Create") {//document.getElementById("leads_list_left").scrollHeight > leads_list_grid.height()) {
-            $("#leads_list_left .dxgvCSD").each(function (ind) {
-                var is_list = $(this).parents("#leads_list_left").length > 0;
-
-                var ladfucntion = {
-                    onScroll: function () {
-                        var position = this.mcs.topPct;
-                        if (position > 95) {
-                            gridLeads.NextPage();
-                        }
-                    }
-                }
-
-                if (is_list) {
-                    $(this).mCustomScrollbar(
-                        {
-                            theme: "minimal-dark",
-                            callbacks: ladfucntion
-                        }
-                     );
-                }
-            });
+            AddScrollbarOnLeadsList();
         }
     });
 

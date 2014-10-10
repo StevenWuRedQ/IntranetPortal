@@ -56,12 +56,37 @@
                 }
              );
         }
-        function onInitScorllBar() {
-            $('#assign_leads_list').mCustomScrollbar(
-              {
-                  theme: "minimal-dark"
-              }
-            );
+
+        function onInitScorllBar() {            
+            $(".dxgvCSD").each(function (ind) {
+                var is_list = $(this).parents("#assign_leads_list").length > 0;
+
+                var ladfucntion = {
+                    onScroll: function () {
+                        var position = this.mcs.topPct;
+                        if (position > 90) {                            
+                            gridLeads.NextPage();
+                        }
+                    }
+                }
+
+
+                if (is_list) {
+                    $(this).mCustomScrollbar(
+                        {
+                            theme: "minimal-dark",
+                            callbacks: ladfucntion
+                        }
+                     );
+                } else {
+                    $(this).mCustomScrollbar(
+                        {
+                            theme: "minimal-dark",
+
+                        }
+                    );
+                }
+            });
 
             $('#ctl00_MainContentPH_ASPxSplitter1_listboxEmployee_D').mCustomScrollbar(
               {
@@ -152,8 +177,8 @@
                                 </Items>
                                 <ClientSideEvents ItemClick="OnChangeLeadsType" />
                             </dx:ASPxPopupMenu>
-                            <div style="overflow: auto; height: 823px;" id="assign_leads_list">
-                                <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsBehavior-AutoExpandAllGroups="True" SettingsPager-Mode="ShowAllRecords" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared">
+                            <div style="overflow:hidden; height: 823px;" id="assign_leads_list">
+                                <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsBehavior-AutoExpandAllGroups="True" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared">
                                     <Columns>
                                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
                                         </dx:GridViewCommandColumn>
@@ -170,7 +195,8 @@
                                     </Columns>
                                     <SettingsBehavior AllowClientEventsOnLoad="false" AllowFocusedRow="true"
                                         EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
-                                    <Settings ShowColumnHeaders="False" VerticalScrollableHeight="50"></Settings>
+                                    <Settings ShowColumnHeaders="False" VerticalScrollableHeight="810"></Settings>
+                                    <SettingsPager Mode="EndlessPaging" PageSize="50"></SettingsPager>
                                     <Styles>
                                         <Row Cursor="pointer" />
                                         <AlternatingRow BackColor="#F5F5F5"></AlternatingRow>
