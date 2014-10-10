@@ -538,7 +538,7 @@ function switch_edit_model(s, objCase) {
     if ($(s).val() == "Edit") {
         inputs.addClass("color_blue_edit");
 
-        $(".ss_form_input").prop("disabled", false);
+        inputs.prop("disabled", false);
         $(s).val("Save");
     } else {
         getShortSaleInstanceComplete(null, null);

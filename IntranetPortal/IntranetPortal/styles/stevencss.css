@@ -1611,7 +1611,10 @@ li.ss_form_item {
     border-bottom: 1px solid #dde0e7;
     width: 80%;
 }
-
+.ss_form_input:disabled
+{
+    background:transparent;
+}
     .ss_form_input:focus {
         border-color: #0e9ee9;
         outline: none;
