@@ -17,6 +17,23 @@
         Return oldObj
     End Function
 
+    Public Shared Function BuildPropertyAddress2(num As String, strName As String, city As String, state As String, zip As String) As String
+        If String.IsNullOrEmpty(num) AndAlso String.IsNullOrEmpty(strName) Then
+            Return ""
+        End If
+
+        Dim result = String.Format("{0} {1}, ", num, strName)
+
+        If Not String.IsNullOrEmpty(city) Then
+            result += city & ", "
+        End If
+
+        result = result & state & " " & zip
+
+        Return result.TrimStart.TrimEnd
+
+    End Function
+
     Public Shared Function BuildPropertyAddress(num As String, strname As String, borough As String, neighName As String, zip As String) As String
         If String.IsNullOrEmpty(num) AndAlso String.IsNullOrEmpty(strname) Then
             Return ""

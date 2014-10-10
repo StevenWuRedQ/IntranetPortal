@@ -2,6 +2,18 @@
 
     Public Property DataStatus As ModelStatus
 
+    Public ReadOnly Property FullName As String
+        Get
+            Return String.Format("{0} {1}", FirstName, LastName).Trim
+        End Get
+    End Property
+
+    Public ReadOnly Property MailingAddress As String
+        Get
+            Return ShortSaleUtility.BuildPropertyAddress2(MailNumber, MailStreetName, MailCity, MailState, MailZip)
+        End Get
+    End Property
+
     Public Sub Save()
         Using context As New ShortSaleEntities
             Dim obj = context.PropertyOwners.Find(BBLE, FirstName, LastName)

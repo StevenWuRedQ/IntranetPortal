@@ -1,5 +1,10 @@
 ﻿Partial Public Class TitleClearence
 
+    Public Enum ClearenceStatus
+        Process = 0
+        Cleared = 1
+    End Enum
+
     Private _contact As New PartyContact
     Public ReadOnly Property Contact As PartyContact
         Get
@@ -47,6 +52,28 @@
             End If
         End Using
     End Function
+
+    Public Shared Sub Delete(clearenceId As Integer)
+        Using Context As New ShortSaleEntities
+            Dim clearence = Context.TitleClearences.Find(clearenceId)
+
+            If clearence IsNot Nothing Then
+                Context.TitleClearences.Remove(clearence)
+                Context.SaveChanges()
+            End If
+        End Using
+    End Sub
+
+    Public Shared Sub Cleared(clearenceId As Integer)
+        Using Context As New ShortSaleEntities
+            Dim clearence = Context.TitleClearences.Find(clearenceId)
+
+            If clearence IsNot Nothing Then
+                clearence.Status = ClearenceStatus.Cleared
+                Context.SaveChanges()
+            End If
+        End Using
+    End Sub
 
     Public Shared Function GetCaseClearences(caseId As Integer) As List(Of TitleClearence)
         Using context As New ShortSaleEntities
