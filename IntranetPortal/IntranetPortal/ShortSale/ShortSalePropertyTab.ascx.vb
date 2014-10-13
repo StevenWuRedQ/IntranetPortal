@@ -16,37 +16,45 @@ Public Class ShortSalePropertyTab
         End Using
     End Sub
 
-    Sub BindData()
+    Sub BindData(caseID As Integer)
 
         home_breakdown_gridview.DataSource = propertyInfo.PropFloors
         hfBble.Value = propertyInfo.BBLE
+        hfCaseId.Value = caseID
         home_breakdown_gridview.DataBind()
         home_breakdown_gridview.SettingsEditing.BatchEditSettings.EditMode = GridViewBatchEditMode.Cell
         home_breakdown_gridview.SettingsEditing.BatchEditSettings.StartEditAction = GridViewBatchStartEditAction.Click
 
     End Sub
 
-    Protected Sub save_floors_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
-        Dim floors As List(Of PropertyFloor) = CType(home_breakdown_gridview.DataSource, List(Of PropertyFloor))
-        propertyInfo.PropFloors.Clear()
-        For Each floor As PropertyFloor In floors
-            propertyInfo.PropFloors.Add(floor)
-        Next
-        propertyInfo.Save()
-    End Sub
+   
 
     Protected Sub home_breakdown_gridview_RowInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs)
         Dim values = e.NewValues
         save_floor(values, True)
 
+        finishEdit(sender, e)
+
+
+    End Sub
+    Sub finishEdit(ByRef sender As Object, e As System.ComponentModel.CancelEventArgs)
+        Dim grid = CType(sender, ASPxGridView)
         e.Cancel = True
 
+        grid.CancelEdit()
+        If (grid.DataSource Is Nothing) Then
+
+            Dim newData = ShortSaleCase.GetCase(hfCaseId.Value)
+            grid.DataSource = newData.PropertyInfo.PropFloors
+        End If
+        
+        grid.DataBind()
     End Sub
     Sub save_floor(ByVal values As OrderedDictionary, ByVal is_insert As Boolean)
         Dim add_floor As PropertyFloor = New PropertyFloor()
         add_floor.BBLE = hfBble.Value
         If (is_insert) Then
-            Dim floors As List(Of PropertyFloor) = CType(home_breakdown_gridview.DataSource, List(Of PropertyFloor))
+            Dim floors = ShortSaleCase.GetCase(hfCaseId.Value).PropertyInfo.PropFloors
             If (floors Is Nothing) Then
                 add_floor.FloorId = 1
             Else
@@ -72,11 +80,11 @@ Public Class ShortSalePropertyTab
     Protected Sub home_breakdown_gridview_RowDeleting(sender As Object, e As DevExpress.Web.Data.ASPxDataDeletingEventArgs)
         Dim values = e.Values
         PropertyFloor.Delete(hfBble.Value, values.Item("FloorId"))
-        e.Cancel = True
+        finishEdit(sender, e)
     End Sub
 
     Protected Sub home_breakdown_gridview_RowUpdating(sender As Object, e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs)
         save_floor(e.NewValues, False)
-        e.Cancel = True
+        finishEdit(sender, e)
     End Sub
 End Class

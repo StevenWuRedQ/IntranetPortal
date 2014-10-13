@@ -19,7 +19,7 @@ Public Class ShortSaleOverVew
 
         shortSaleCaseData = shortSale
         ShortSalePropertyTab.propertyInfo = shortSaleCaseData.PropertyInfo
-        ShortSalePropertyTab.BindData()
+        ShortSalePropertyTab.BindData(shortSale.CaseId)
         ShortSaleHomewonerTab.homeOwners = shortSaleCaseData.PropertyInfo.Owners
         ShortSaleMortgageTab.mortgagesData = shortSaleCaseData.Mortgages
         ShortSaleEvictionTab.evictionData = shortSaleCaseData
