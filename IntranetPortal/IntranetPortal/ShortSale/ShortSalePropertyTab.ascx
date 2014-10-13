@@ -145,7 +145,7 @@
     <asp:HiddenField ID="hfBble" runat="server" />
     <asp:HiddenField ID="hfCaseId" runat="server" />
     <div>
-        <dx:ASPxGridView ID="home_breakdown_gridview" runat="server" KeyFieldName="BBLE;FloorId" OnRowInserting="home_breakdown_gridview_RowInserting" OnRowDeleting="home_breakdown_gridview_RowDeleting" OnRowUpdating="home_breakdown_gridview_RowUpdating">
+        <dx:ASPxGridView ID="home_breakdown_gridview" runat="server" KeyFieldName="BBLE;FloorId"  OnRowInserting="home_breakdown_gridview_RowInserting" OnRowDeleting="home_breakdown_gridview_RowDeleting" OnRowUpdating="home_breakdown_gridview_RowUpdating">
 
             <Columns>
 
@@ -153,10 +153,10 @@
                 <%--<dx:GridViewDataColumn FieldName="FloorId" VisibleIndex="1" Caption="Floor" 
                     
                     />--%>
-                <dx:GridViewDataTextColumn FieldName="FloorId" VisibleIndex="1" Caption="Floor">
-                   
-
-                </dx:GridViewDataTextColumn>
+               
+                <dx:GridViewDataColumn FieldName="FloorId" VisibleIndex="1" Caption="Floor" ReadOnly="true">
+                  
+                </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="Bedroom" VisibleIndex="1" />
                 <dx:GridViewDataColumn FieldName="Bathroom" VisibleIndex="2" />
                 <dx:GridViewDataColumn FieldName="Livingroom" VisibleIndex="3" />
