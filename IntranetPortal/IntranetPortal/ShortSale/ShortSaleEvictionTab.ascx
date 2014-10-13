@@ -87,7 +87,7 @@
                     <input type="radio" id="key_Military_yes___index__" data-item="Military" data-radio="Y" class="ss_form_input" name="Military___index__" value="YES">
                     <label for="key_Military_yes___index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_pdf_checkey_no___index__" data-item="Military" name="Military___index__" value="NO">
+                    <input type="radio" id="none_pdf_checkey_no___index__" data-item="Military" class="ss_form_input" name="Military___index__" value="NO">
                     <label for="none_pdf_checkey_no___index__" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>
@@ -119,9 +119,9 @@
                     <span class="ss_form_input_title">Completed</span>
 
                     <input type="radio" id="key_Completed_yes__index__" data-item="Completed" data-radio="Y" class="ss_form_input" name="Completed__index__" value="YES">
-                    <label for="none_Completed_no__index__" class="input_with_check"><span class="box_text">Yes</span></label>
+                    <label for="key_Completed_yes__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_Completed_no__index__" data-item="Completed" name="Completed__index__" value="NO">
+                    <input type="radio" id="none_Completed_no__index__" data-item="Completed" class="ss_form_input" name="Completed__index__" value="NO">
                     <label for="none_Completed_no__index__" class="input_with_check"><span class="box_text">No</span></label>
                 </li>
 

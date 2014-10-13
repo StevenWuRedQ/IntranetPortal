@@ -47,9 +47,15 @@ Public Class ShortSalePropertyTab
         add_floor.BBLE = hfBble.Value
         If (is_insert) Then
             Dim floors As List(Of PropertyFloor) = CType(home_breakdown_gridview.DataSource, List(Of PropertyFloor))
-            add_floor.FloorId = floors.Count + 1
+            If (floors Is Nothing) Then
+                add_floor.FloorId = 1
+            Else
+                add_floor.FloorId = floors.Count + 1
+            End If
+        Else
+            add_floor.FloorId = values.Item("FloorId")
         End If
-        add_floor.FloorId = values.Item("FloorId")
+
         add_floor.Bedroom = values.Item("Bedroom")
         add_floor.BoilerRoom = values.Item("BoilerRoom")
         add_floor.Bathroom = values.Item("Bathroom")

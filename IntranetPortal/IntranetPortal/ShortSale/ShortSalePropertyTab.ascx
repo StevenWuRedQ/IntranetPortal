@@ -144,7 +144,7 @@
     <%-- log tables--%>
     <asp:HiddenField ID="hfBble" runat="server" />
     <div>
-        <dx:ASPxGridView ID="home_breakdown_gridview" runat="server" OnRowInserting="home_breakdown_gridview_RowInserting" OnRowDeleting="home_breakdown_gridview_RowDeleting" OnRowUpdating="home_breakdown_gridview_RowUpdating">
+        <dx:ASPxGridView ID="home_breakdown_gridview" runat="server" KeyFieldName="BBLE;FloorId"  OnRowInserting="home_breakdown_gridview_RowInserting" OnRowDeleting="home_breakdown_gridview_RowDeleting" OnRowUpdating="home_breakdown_gridview_RowUpdating">
             
             <Columns>
                 <dx:GridViewCommandColumn ShowNewButtonInHeader="true" ShowDeleteButton="True" />
@@ -158,6 +158,8 @@
                 <dx:GridViewDataColumn FieldName="Occupied" VisibleIndex="5" />
                 <dx:GridViewDataColumn FieldName="Lease" VisibleIndex="5" />
                 <dx:GridViewDataColumn FieldName="Type" VisibleIndex="5" />
+                <dx:GridViewDataColumn FieldName="Rent" VisibleIndex="5" />
+                
                 <dx:GridViewDataColumn FieldName="BoilerRoom" VisibleIndex="5" />
             </Columns>
         </dx:ASPxGridView>
