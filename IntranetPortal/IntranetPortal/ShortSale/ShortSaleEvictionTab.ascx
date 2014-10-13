@@ -97,7 +97,7 @@
                     <input type="radio" id="key_Notice30Day_yes__index__" data-item="Notice30Day" data-radio="Y" class="ss_form_input" name="Notice30Day__index__" value="YES">
                     <label for="key_Notice30Day_yes__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_Notice30Day_no__index__" data-item="Notice30Day" name="Notice30Day__index__" value="NO">
+                    <input type="radio" id="none_Notice30Day_no__index__" data-item="Notice30Day" name="Notice30Day__index__" value="NO" class="ss_form_input">
                     <label for="none_Notice30Day_no__index__" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>

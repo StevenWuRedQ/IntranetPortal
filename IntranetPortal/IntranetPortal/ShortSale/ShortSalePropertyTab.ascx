@@ -145,7 +145,7 @@
     <asp:HiddenField ID="hfBble" runat="server" />
     <asp:HiddenField ID="hfCaseId" runat="server" />
     <div>
-        <dx:ASPxGridView ID="home_breakdown_gridview" runat="server" KeyFieldName="BBLE;FloorId"  OnRowInserting="home_breakdown_gridview_RowInserting" OnRowDeleting="home_breakdown_gridview_RowDeleting" OnRowUpdating="home_breakdown_gridview_RowUpdating">
+        <dx:ASPxGridView ID="home_breakdown_gridview" runat="server" KeyFieldName="BBLE;FloorId" SettingsBehavior-AllowDragDrop="false" SettingsBehavior-AllowSort="false" OnRowInserting="home_breakdown_gridview_RowInserting" OnRowDeleting="home_breakdown_gridview_RowDeleting" OnRowUpdating="home_breakdown_gridview_RowUpdating">
 
             <Columns>
 
@@ -169,8 +169,11 @@
 
                 <dx:GridViewDataColumn FieldName="BoilerRoom" VisibleIndex="5" />
             </Columns>
-            <SettingsEditing Mode="Batch" />
+            <SettingsEditing Mode="Batch"/>
+            
+
         </dx:ASPxGridView>
+        
         <%--   <table class="table">
             <thead>
                 <tr>

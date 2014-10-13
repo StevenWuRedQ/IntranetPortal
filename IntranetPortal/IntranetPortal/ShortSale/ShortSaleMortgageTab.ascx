@@ -36,8 +36,8 @@
                     <input class="ss_form_input currency_input" data-item="LoanAmount" data-item-type="1" onblur="$(this).formatCurrency();">
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Authorization Sent</label>
-                    <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
+                    <label class="ss_form_input_title">Authorization Sent On</label>
+                    <input class="ss_form_input" type="date" data-item="AuthorizationSent" data-item-type="1">
                 </li>
 
                 <li class="ss_form_item">

@@ -80,10 +80,10 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">bankruptcy</label>
 
-                    <input type="radio" id="checkYes_Bankruptcy__index__" data-test="1" name="44__index__" data-radio="Y" data-item="Bankruptcy" data-item-type="1" value="YES">
+                    <input type="radio" id="checkYes_Bankruptcy__index__" data-test="1" name="44__index__" data-radio="Y" data-item="Bankruptcy" data-item-type="1" value="YES" class="ss_form_input">
                     <label for="checkYes_Bankruptcy__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_check_no__index__" name="44__index__" data-test="1" data-item="Bankruptcy" data-item-type="1" value="NO">
+                    <input type="radio" id="none_check_no__index__" name="44__index__" data-test="1" data-item="Bankruptcy" data-item-type="1" value="NO" class="ss_form_input">
                     <label for="none_check_no__index__" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>
@@ -99,10 +99,10 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">bank account</label>
                     
-                    <input type="radio" id="checkYes_Bankaccount__index__" data-item="Bankaccount" data-radio="Y" data-item-type="1" name="45__index__" value="YES" >
+                    <input type="radio" id="checkYes_Bankaccount__index__" data-item="Bankaccount" data-radio="Y" data-item-type="1" name="45__index__" value="YES" class="ss_form_input">
                     <label for="checkYes_Bankaccount__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_check_no452__index__" data-item="Bankaccount" data-item-type="1" name="45__index__" value="NO">
+                    <input type="radio" id="none_check_no452__index__" data-item="Bankaccount" data-item-type="1" name="45__index__" value="NO" class="ss_form_input">
                     <label for="none_check_no452__index__" class="input_with_check"><span class="box_text">No</span></label>
                     
                 </li>
@@ -110,10 +110,10 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Tax Returns</label>
 
-                    <input type="radio" id="checkYes_TaxReturn__index__" name="47__index__" data-item="TaxReturn" data-item-type="1" data-radio="Y" value="YES">
+                    <input type="radio" id="checkYes_TaxReturn__index__" name="47__index__" data-item="TaxReturn" data-item-type="1" data-radio="Y" value="YES" class="ss_form_input">
                     <label for="checkYes_TaxReturn__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
-                    <input type="radio" id="none_check_no472__index__" name="47__index__" data-item="TaxReturn" data-item-type="1" value="NO">
+                    <input type="radio" id="none_check_no472__index__" name="47__index__" data-item="TaxReturn" data-item-type="1" value="NO" class="ss_form_input">
                     <label for="none_check_no472__index__" class="input_with_check"><span class="box_text">No</span></label>
 
                 </li>

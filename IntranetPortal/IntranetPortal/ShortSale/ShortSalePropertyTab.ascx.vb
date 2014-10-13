@@ -68,7 +68,7 @@ Public Class ShortSalePropertyTab
         add_floor.BoilerRoom = values.Item("BoilerRoom")
         add_floor.Bathroom = values.Item("Bathroom")
         add_floor.Diningroom = values.Item("Diningroom")
-
+        add_floor.Rent = values.Item("Rent")
         add_floor.Livingroom = values.Item("Livingroom")
         add_floor.Lease = values.Item("Lease")
         add_floor.Kitchen = values.Item("Kitchen")
