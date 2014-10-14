@@ -1,8 +1,16 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="NavMenu.ascx.vb" Inherits="IntranetPortal.NavMenu" %>
 
 <ul class="mip-nav mip-navbar-nav">
-    <% For Each item In PortalMenuItems%>
-    <%= item.ToHtml %>
+    <% Dim setCurrent = True%>
+    <% For Each item In PortalMenuItems
+            If item.IsVisible() Then
+                If setCurrent Then
+                    item.Expanded = True
+                    setCurrent = False
+                End If
+                %>
+                <%= item.ToHtml %>
+            <% End If%>        
     <% Next%>
 
   <%--  <li class="category current"><a href="#">Manager</a>
@@ -48,7 +56,3 @@
         </ul>
     </li>--%>
 </ul>
-<script type="text/javascript">
-   
-
-</script>

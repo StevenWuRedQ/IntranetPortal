@@ -53,7 +53,19 @@ Public Class UCTitleSummary
 
     Sub BindData()
         Using Context As New Entities
-            'Bind Appointment
+
+            'Bind Urgent Data
+            gridUrgent.DataSource = ShortSale.ShortSaleSummary.GetUrgentCases()
+            gridUrgent.DataBind()
+
+            'Bind Priority Data
+            Dim priorityData = ShortSale.ShortSaleSummary.GetUpcomingClosings()
+            gridUpcomingApproval.DataSource = priorityData
+            gridUpcomingApproval.DataBind()
+
+
+
+            ''Bind Appointment
             Dim leads = (From al In Context.Leads
                                          Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
                                         Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (appoint.Agent = Page.User.Identity.Name Or appoint.Manager = Page.User.Identity.Name) And appoint.ScheduleDate >= Today
@@ -63,9 +75,9 @@ Public Class UCTitleSummary
                                               .ScheduleDate = appoint.ScheduleDate
                                               }).Distinct.ToList.OrderByDescending(Function(li) li.ScheduleDate)
 
-            gridAppointment.DataSource = leads
-            gridAppointment.DataBind()
-            gridAppointment.GroupBy(gridAppointment.Columns("ScheduleDate"))
+            'gridAppointment.DataSource = leads
+            'gridAppointment.DataBind()
+            'gridAppointment.GroupBy(gridAppointment.Columns("ScheduleDate"))
 
             Dim emps = Employee.GetSubOrdinateWithoutMgr(Page.User.Identity.Name)
             'BindTask
@@ -96,11 +108,6 @@ Public Class UCTitleSummary
             gridTask.DataBind()
 
             gridTask.GroupBy(gridTask.Columns("ScheduleDate"))
-
-            'Bind Priority Data
-            Dim priorityData = ShortSale.ShortSaleSummary.GetUrgentCases()
-            gridPriority.DataSource = priorityData
-            gridPriority.DataBind()
 
             'Bind Callback data
             Dim callbackleads = ShortSale.ShortSaleSummary.GetFollowUpCases()
@@ -209,7 +216,7 @@ Public Class UCTitleSummary
     End Function
 
 
-    Protected Sub gridAppointment_CustomColumnGroup(sender As Object, e As CustomColumnSortEventArgs) Handles gridAppointment.CustomColumnGroup, gridTask.CustomColumnGroup, gridCallback.CustomColumnGroup
+    Protected Sub gridAppointment_CustomColumnGroup(sender As Object, e As CustomColumnSortEventArgs) Handles gridUrgent.CustomColumnGroup, gridTask.CustomColumnGroup, gridCallback.CustomColumnGroup
         If e.Column.FieldName = "ScheduleDate" Or e.Column.FieldName = "CallbackDate" Then
             Dim today = DateTime.Now.Date
             Dim day1 = CDate(e.Value1).Date
@@ -250,7 +257,7 @@ Public Class UCTitleSummary
         End If
     End Sub
 
-    Protected Sub gridAppointment_CustomColumnDisplayText(sender As Object, e As ASPxGridViewColumnDisplayTextEventArgs) Handles gridAppointment.CustomColumnDisplayText, gridTask.CustomColumnDisplayText, gridCallback.CustomColumnDisplayText
+    Protected Sub gridAppointment_CustomColumnDisplayText(sender As Object, e As ASPxGridViewColumnDisplayTextEventArgs) Handles gridUrgent.CustomColumnDisplayText, gridTask.CustomColumnDisplayText, gridCallback.CustomColumnDisplayText
         If e.Column.FieldName = "ScheduleDate" Or e.Column.FieldName = "CallbackDate" Then
             e.DisplayText = GroupText(e.Value)
         End If

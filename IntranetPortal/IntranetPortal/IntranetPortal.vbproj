@@ -172,6 +172,11 @@
     <Reference Include="Microsoft.AspNet.EntityDataSource">
       <HintPath>..\packages\Microsoft.AspNet.EntityDataSource.6.0.0\lib\net40\Microsoft.AspNet.EntityDataSource.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Online.SharePoint.Client.Tenant">
+      <HintPath>..\..\..\..\Office365\ProvisionO365PersonalSites-iSharePoint\Microsoft.Online.SharePoint.Client.Tenant.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.5.16\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -688,6 +693,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="OneDrive\LoadFileFromSharepoint.aspx.designer.vb">
+      <DependentUpon>LoadFileFromSharepoint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OneDrive\LoadFileFromSharepoint.aspx.vb">
+      <DependentUpon>LoadFileFromSharepoint.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PopupControl\ShareLeads.aspx.designer.vb">
       <DependentUpon>ShareLeads.aspx</DependentUpon>
@@ -1395,6 +1407,7 @@
     <Content Include="MapTest.aspx" />
     <Content Include="OneDrive\constants.js" />
     <Content Include="OneDrive\Callback.html" />
+    <Content Include="OneDrive\LoadFileFromSharepoint.aspx" />
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
     <Content Include="PreviewFile.aspx" />

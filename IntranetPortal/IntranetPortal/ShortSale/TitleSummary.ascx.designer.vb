@@ -32,22 +32,22 @@ Partial Public Class UCTitleSummary
     Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
 
     '''<summary>
-    '''gridAppointment control.
+    '''gridUrgent control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridAppointment As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridUrgent As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
-    '''gridPriority control.
+    '''gridUpcomingApproval control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridPriority As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridUpcomingApproval As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
     '''todayScheduler control.

@@ -1,4 +1,8 @@
-﻿Public Class DocumentsUI
+﻿Imports Microsoft.SharePoint.Client
+Imports System.Security
+Imports System.Web.Services
+
+Public Class DocumentsUI
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load

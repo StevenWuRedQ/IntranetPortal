@@ -160,8 +160,7 @@
                     <div style="display: inline-table; font-family: 'Source Sans Pro'; margin-left: 19px; margin-top: 15px;">
                         <div style="float: left; font-weight: 300; font-size: 48px; color: #234b60">
                             <span style="text-transform: capitalize"></span>Title Summary &nbsp;
-                        </div>
-                     
+                        </div>                     
                     </div>
                     <%------end------%>
                     <div style="float: left; margin-right: 10px; margin-left: 35px; min-width: 1200px;">
@@ -173,7 +172,7 @@
                                     <h4>
                                         <img src="../images/grid_upcoming_icon.png" class="vertical-img"><span class="heading_text">Urgent</span></h4>
                                     <div class="div-underline">
-                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridAppointment" ClientInstanceName="gridAppointmentClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" SettingsPager-PageSize="6">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridUrgent" ClientInstanceName="gridAppointmentClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
@@ -226,10 +225,10 @@
                                 <td style="width: 380px; vertical-align: top" class="under_line ">
                                     <%--add icon by steven--%>
                                     <h4>
-                                        <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Priority</span>
+                                        <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Upcoming Approval</span>
                                     </h4>
                                     <div class="div-underline">
-                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridPriority" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridUpcomingApproval" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
@@ -362,7 +361,7 @@
                                 <td style="vertical-align: top" class="under_line">
                                     <%--add icon by steven--%>
                                     <h4>
-                                        <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Call Backs</span> </h4>
+                                        <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Follow Up</span> </h4>
                                     <%--------end-------%>
                                     <div class="div-underline">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridCallback" ClientInstanceName="gridCallbackClient" KeyFieldName="BBLE" AutoGenerateColumns="false" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">

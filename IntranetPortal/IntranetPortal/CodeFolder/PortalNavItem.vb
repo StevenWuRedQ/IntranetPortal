@@ -121,19 +121,25 @@ Public Class PortalNavItem
 
         Select Case type
             Case NavItemType.Agent
-                If Not Employee.HasSubordinates(userName) Then
-                    Return True
+                If IsUserRoles(userName) Then
+                    If Not Employee.HasSubordinates(userName) Then
+                        Return True
+                    End If
                 End If
             Case NavItemType.Manager
-                If Employee.HasSubordinates(userName) Then
-                    Return True
+                If IsUserRoles(userName) Then
+                    If Employee.HasSubordinates(userName) Then
+                        Return True
+                    End If
                 End If
             Case NavItemType.Office
                 If IsUserRoles(userName) Then
                     Return True
                 End If
             Case NavItemType.ShortSale
-                Return True
+                If IsUserRoles(userName) Then
+                    Return True
+                End If
         End Select
 
         Return False
