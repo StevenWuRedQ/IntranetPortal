@@ -158,12 +158,13 @@
 
                                                                             <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                             <li style="margin-right: 30px; color: #7396a9; float: right">
-                                                                                <i class="fa fa-calendar-o sale_head_button tooltip-examples" title="Schedule" onclick="ASPxPopupScheduleClient.ShowAtElement(this);"></i>
-                                                                                <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus(1)"></i>
-                                                                                <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
-                                                                                <i class="fa fa-sign-in  sale_head_button sale_head_button_left tooltip-examples" title="Door Knock" onclick="SetLeadStatus(4)"></i>
-                                                                                <i class="fa fa-refresh sale_head_button sale_head_button_left tooltip-examples" title="In Process" onclick="SetLeadStatus(5)"></i>
-                                                                                <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
+                                                                                <i class="fa fa-phone sale_head_button tooltip-examples" title="Follow Up" onclick="LogClick('FollowUp')"></i>
+                                                                                <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>
+                                                                                <i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active Cases" onclick="LogClick('Active')"></i>
+                                                                                <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" onclick="LogClick('Eviction')"></i>
+                                                                                <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')"></i>
+                                                                                <i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="LogClick('Closed')"></i>
+                                                                                <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                                                             </li>
                                                                         </ul>
                                                                         <uc1:ActivityLogs runat="server" ID="ActivityLogs" />

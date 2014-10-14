@@ -27,7 +27,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Date started</label>
-            <input class="ss_form_input" type="date" id="Date_started" data-field="DateStarted">
+            <input class="ss_form_input ss_date" id="Date_started" data-field="DateStarted">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Lock box code</label>
@@ -62,7 +62,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Floor</label>
-                    <input class="ss_form_input currency_input" data-item="Floor" data-item-type="1">
+                    <input class="ss_form_input" data-item="Floor" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Apt #</label>
@@ -140,15 +140,15 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date Served</label>
-                    <input class="ss_form_input " data-item="DateServed" type="date" data-item-type="1">
+                    <input class="ss_form_input ss_date" data-item="DateServed"  data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Court Date</label>
-                    <input class="ss_form_input " data-item="CourtDate" type="date" data-item-type="1">
+                    <input class="ss_form_input ss_date" data-item="CourtDate" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Stip Date</label>
-                    <input class="ss_form_input " data-item="StipDate" type="date" data-item-type="1">
+                    <input class="ss_form_input ss_date" data-item="StipDate" type="date" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Amount</label>

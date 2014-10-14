@@ -42,7 +42,7 @@
     //}
 </script>
 <div style="padding-top: 5px">
-    <div style="height: 850px; overflow: auto;" id="prioity_content">      
+    <div style="height: 850px; overflow: auto;" id="prioity_content">
         <%--time label--%>
         <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
             <div style="font-size: 30px">
@@ -64,15 +64,15 @@
         <div class="short_sale_content">
             <div class="clearfix">
                 <div style="float: right">
-                     <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
+                    <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
                 </div>
-            </div>           
+            </div>
             <div class="ss_form" id="ddd">
                 <h4 class="ss_form_title">Proposed Closing date</h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Proposed Closing Date</label>
-                        <input class="ss_form_input" data-field="ClosingDate" type="date" value="<%= ShortSaleCaseData.ClosingDate %>">
+                        <input class="ss_form_input" data-field="ClosingDate ss_date"  value="<%= ShortSaleCaseData.ClosingDate %>">
                     </li>
                 </ul>
             </div>
@@ -94,15 +94,15 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Ordered</label>
-                        <input class="ss_form_input" data-field="SellerTitle.ReportOrderDate" type="date" value="<%= ShortSaleCaseData.SellerTitle.ReportOrderDate%>" id="dateSellerOrderDate">
+                        <input class="ss_form_input ss_date" data-field="SellerTitle.ReportOrderDate" value="<%= ShortSaleCaseData.SellerTitle.ReportOrderDate%>" id="dateSellerOrderDate">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Received</label>
-                        <input class="ss_form_input" data-field="SellerTitle.ReceivedDate" type="date" value="<%= ShortSaleCaseData.SellerTitle.ReceivedDate%>" id="dateSellerReceivedDate">
+                        <input class="ss_form_input ss_date" data-field="SellerTitle.ReceivedDate"  value="<%= ShortSaleCaseData.SellerTitle.ReceivedDate%>" id="dateSellerReceivedDate">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Order Number</label>
-                        <input class="ss_form_input" data-field="SellerTitle.OrderNumber" value="<%= ShortSaleCaseData.SellerTitle.OrderNumber%>" id="txtSellerOrderNum">
+                        <input class="ss_form_input ss_date" data-field="SellerTitle.OrderNumber" value="<%= ShortSaleCaseData.SellerTitle.OrderNumber%>" id="txtSellerOrderNum">
                     </li>
                 </ul>
             </div>
@@ -124,15 +124,15 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Ordered</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.ReportOrderDate" type="date" value="<%= ShortSaleCaseData.BuyerTitle.ReportOrderDate%>" id="dateBuyerOrderDate">
+                        <input class="ss_form_input ss_date" data-field="BuyerTitle.ReportOrderDate" value="<%= ShortSaleCaseData.BuyerTitle.ReportOrderDate%>" id="dateBuyerOrderDate">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Received</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.ReceivedDate" type="date" value="<%= ShortSaleCaseData.BuyerTitle.ReceivedDate%>" id="dateBuyerReceivedDate">
+                        <input class="ss_form_input ss_date" data-field="BuyerTitle.ReceivedDate" value="<%= ShortSaleCaseData.BuyerTitle.ReceivedDate%>" id="dateBuyerReceivedDate">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Order Number</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.OrderNumber"  value="<%= ShortSaleCaseData.BuyerTitle.OrderNumber%>" id="txtBuyerOrderNumber">
+                        <input class="ss_form_input" data-field="BuyerTitle.OrderNumber" value="<%= ShortSaleCaseData.BuyerTitle.OrderNumber%>" id="txtBuyerOrderNumber">
                     </li>
                 </ul>
             </div>
@@ -246,7 +246,7 @@
             <div class="ss_form">
                 <dx:ASPxCallbackPanel ID="callbackClearence" runat="server" ClientInstanceName="callbackClearence" OnCallback="callbackClearence_Callback">
                     <PanelCollection>
-                        <dx:PanelContent>                       
+                        <dx:PanelContent>
                             <h4 class="ss_form_title">Clearence <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="AspxPopupClearence.Show()"></i></h4>
                             <%--clearence list--%>
                             <div>
@@ -261,7 +261,7 @@
                                         <div class="clearence_list_right">
                                             <div class="clearence_list_text">
                                                 <div class="clearence_list_title">
-                                                    Issue <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" style="font-size:14px"  title="Delete" onclick="callbackClearence.PerformCallback('Delete|<%= clearence.ClearenceId%>|' + caseId)" ></i><i class="fa fa-check  color_blue_edit collapse_btn" style="font-size:14px" title="Clear" onclick="callbackClearence.PerformCallback('Clear|<%= clearence.ClearenceId%>|' + caseId)"></i>
+                                                    Issue <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" style="font-size: 14px" title="Delete" onclick="callbackClearence.PerformCallback('Delete|<%= clearence.ClearenceId%>|' + caseId)"></i><i class="fa fa-check  color_blue_edit collapse_btn" style="font-size: 14px" title="Clear" onclick="callbackClearence.PerformCallback('Clear|<%= clearence.ClearenceId%>|' + caseId)"></i>
                                                 </div>
                                                 <div class="clearence_list_text18" <%= If(Not String.IsNullOrEmpty(clearence.Status) AndAlso clearence.Status = IntranetPortal.ShortSale.TitleClearence.ClearenceStatus.Cleared, "style='text-decoration:line-through;'", "")%>>
                                                     <%= clearence.Issue%>
@@ -303,7 +303,7 @@
                                                                 <%= clearence.Contact.CorpName%>
                                                             </div>
                                                         </td>
-                                                    </tr>                                                   
+                                                    </tr>
                                                 </table>
                                             </div>
                                             <% End If%>
@@ -343,9 +343,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <% i =i+1 %>
+                                <% i = i + 1%>
                                 <% Next%>
-                                  
                             </div>
                         </dx:PanelContent>
                     </PanelCollection>
@@ -427,68 +426,71 @@
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">
-            <div class="clearence_list_text">
-                <div class="clearence_list_title">
-                    Issue
+            <div class="popup_padding">
+                <div class="clearence_list_text">
+                    <div class="clearence_list_title">
+                        Issue
+                    </div>
+                    <div class="clearence_list_text18  color_blue_edit">
+                        <input class="ss_form_input" value="" runat="server" id="txtIssue" style="width: 90%">
+                    </div>
                 </div>
-                <div class="clearence_list_text18  color_blue_edit">
-                    <input class="ss_form_input" value="" runat="server" id="txtIssue" style="width: 90%">
+                <div class="clearence_list_text">
+                    <table>
+                        <tr>
+                            <td class="clearence_table_td">
+                                <div class="clearence_list_title">
+                                    Contact Name
+                                </div>
+                                <div class="clearence_list_text14  color_blue_edit">
+                                    <input class="ss_form_input" value="" runat="server" id="txtContactName">
+                                </div>
+                            </td>
+                            <td class="clearence_table_td">
+                                <div class="clearence_list_title">
+                                    Contact Number
+                                </div>
+                                <div class="clearence_list_text14  color_blue_edit">
+                                    <input class="ss_form_input" value="" runat="server" id="txtContactNum">
+                                </div>
+                            </td>
+                            <td class="clearence_table_td">
+                                <div class="clearence_list_title">
+                                    Contact Email
+                                </div>
+                                <div class="clearence_list_text14  color_blue_edit">
+                                    <input class="ss_form_input" value="" runat="server" id="txtContactEmail">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-            </div>
-            <div class="clearence_list_text">
-                <table>
-                    <tr>
-                        <td class="clearence_table_td">
-                            <div class="clearence_list_title">
-                                Contact Name
-                            </div>
-                            <div class="clearence_list_text14  color_blue_edit">
-                                <input class="ss_form_input" value="" runat="server" id="txtContactName">
-                            </div>
-                        </td>
-                        <td class="clearence_table_td">
-                            <div class="clearence_list_title">
-                                Contact Number
-                            </div>
-                            <div class="clearence_list_text14  color_blue_edit">
-                                <input class="ss_form_input" value="" runat="server" id="txtContactNum">
-                            </div>
-                        </td>
-                        <td class="clearence_table_td">
-                            <div class="clearence_list_title">
-                                Contact Email
-                            </div>
-                            <div class="clearence_list_text14  color_blue_edit">
-                                <input class="ss_form_input" value="" runat="server" id="txtContactEmail">
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="clearence_list_text">
-                <table>
-                    <tr>
-                        <td class="clearence_table_td">
-                            <div class="clearence_list_title">
-                                Company Name
-                            </div>
-                            <div class="clearence_list_text14  color_blue_edit">
-                                <input class="ss_form_input" value="" runat="server" id="Text1">
-                            </div>
-                        </td>
-                        <td class="clearence_table_td">
-                            <div class="clearence_list_title">
-                                Amounts
-                            </div>
-                            <div class="clearence_list_text14  color_blue_edit">
-                                <input class="ss_form_input" value="" runat="server" id="txtAmount">
-                            </div>
-                        </td>
+                <div class="clearence_list_text">
+                    <table>
+                        <tr>
+                            <td class="clearence_table_td">
+                                <div class="clearence_list_title">
+                                    Company Name
+                                </div>
+                                <div class="clearence_list_text14  color_blue_edit">
+                                    <input class="ss_form_input" value="" runat="server" id="Text1">
+                                </div>
+                            </td>
+                            <td class="clearence_table_td">
+                                <div class="clearence_list_title">
+                                    Amounts
+                                </div>
+                                <div class="clearence_list_text14  color_blue_edit">
+                                    <input class="ss_form_input" value="" runat="server" id="txtAmount">
+                                </div>
+                            </td>
 
-                        <td class="clearence_table_td"></td>
-                    </tr>
-                </table>
+                            <td class="clearence_table_td"></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
+
         </dx:PopupControlContentControl>
     </ContentCollection>
     <FooterContentTemplate>

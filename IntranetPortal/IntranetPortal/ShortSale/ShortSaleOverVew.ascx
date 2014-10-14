@@ -23,7 +23,7 @@
         short_sale_case_data.PropertyInfo.UpdateBy = "<%=Page.User.Identity.Name%>";
 
         ShortSaleDataBand(1);
-        
+        //console.log("the data is give to save is 222", JSON.stringify(ShortSaleCaseData));
         var strJson = JSON.stringify(ShortSaleCaseData);
         
         //d_alert(strJson);
@@ -53,7 +53,9 @@
     function ShowPopupMap(url, header) {
         aspxAcrisControl.SetContentHtml("Loading...");
         aspxAcrisControl.SetContentUrl(url);
+
         aspxAcrisControl.SetHeaderText(header);
+        //header = header + "(Borough:" + ShortSaleCaseData.PropertyInfo.Borough + "Lot:" + ShortSaleCaseData.PropertyInfo.Lot + ")";
         $('#pop_up_header_text').html(header)
         aspxAcrisControl.Show();
     }
@@ -104,7 +106,7 @@
                                     <div class="clearfix">
                                         <div class="pop_up_header_margin">
                                             <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
-                                            <span class="pop_up_header_text" id="pop_up_header_text">Acris</span> <span class="pop_up_header_text"><%= shortSaleCaseData.PropertyInfo.PropertyAddress%> </span>
+                                            <span class="pop_up_header_text" id="pop_up_header_text">Acris</span> <span class="pop_up_header_text"><%= shortSaleCaseData.PropertyInfo.PropertyAddress%> <%--(Borough: <%= shortSaleCaseData.PropertyInfo.Borough%>&nbsp; Lot:<%= shortSaleCaseData.PropertyInfo.Lot%>)--%></span>
                                         </div>
                                         <div class="pop_up_buttons_div">
                                             <i class="fa fa-times icon_btn" onclick="aspxAcrisControl.Hide()"></i>

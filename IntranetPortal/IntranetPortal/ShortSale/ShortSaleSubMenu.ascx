@@ -48,6 +48,10 @@
         }
     }
 
+    function LogClick(itemName) {
+        
+        SaveStatus(itemName, ShortSaleCaseData.CaseId);
+    }
     function SaveStatus(status, caseId) {
         if (caseStatusCallbackClient.InCallback()) {
             alert("Server is busy! Please wait!")
@@ -219,19 +223,19 @@
             <Image Url="/images/drap_map_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Follow Up" Name="FollowUp" Image-Url="/images/drap_follow_up_icons.png">
-            <Image Url="/images/drap_follow_up_icons.png"></Image>
+            <Image Url="/images/drap_inprocess_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="New File" Name="NewFile" Image-Url="/images/drap_prority_icons.png">
-            <Image Url="/images/drap_prority_icons.png"></Image>
+            <Image Url="/images/drop_new_icon.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Active Cases" Name="Active" Image-Url="/images/drap_prority_icons.png">
-            <Image Url="/images/drap_doorknock_icons.png"></Image>
+            <Image Url="/images/drop_active_icon.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Eviction" Name="Eviction" Image-Url="/images/drap_deadlead_icons.png">
-            <Image Url="/images/drap_deadlead_icons.png"></Image>
+            <Image Url="/images/drap_doorknock_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="On Hold" Name="OnHold" Image-Url="/images/drap_inprocess_icons.png">
-            <Image Url="/images/drap_inprocess_icons.png"></Image>
+            <Image Url="/images/drop_on_hold_icon.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Closed" Name="Closed" Image-Url="/images/drap_closed_icons.png">
             <Image Url="/images/drap_closed_icons.png"></Image>
@@ -293,5 +297,5 @@
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">
         </dx:PopupControlContentControl>
-    </ContentCollection>   
+    </ContentCollection>
 </dx:ASPxPopupControl>

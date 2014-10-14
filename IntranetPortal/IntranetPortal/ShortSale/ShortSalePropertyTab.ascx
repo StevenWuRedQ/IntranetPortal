@@ -69,7 +69,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title"># Of Unit</label>
-            <input class="ss_form_input" data-field="PropertyInfo.NumOfUnit">
+            <input class="ss_form_input" type="number" data-field="PropertyInfo.NumOfUnit">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Accessibility</label>
@@ -283,7 +283,28 @@
     function onRefreashDone() {
         //$("#home_breakdown_table").editableTableWidget();
         $(".ss_form_input, .input_with_check").prop("disabled", true);
+        initToolTips();
+        $('.ss_date').datepicker({
+            
+        });
+        $(".currency_input").formatCurrency();
+        //$("#prioity_content").mCustomScrollbar(
+        //      {
+        //          theme: "minimal-dark"
+        //      }
+        //      );
+        //$("#home_owner_content").mCustomScrollbar(
+        //    {
+        //        theme: "minimal-dark"
+        //    }
+        // );
 
+        //$(".dxgvCSD").mCustomScrollbar(
+        //    {
+        //        theme: "minimal-dark",
+        //        axis:"yx"
+        //    }
+        // );
     }
     //$(document).ready(function () {
     //    // Handler for .ready() called.

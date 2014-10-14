@@ -31,6 +31,11 @@ function get_sub_property(obj, id_str, value) {
     if (value != null) {
         value = currency2Number(value)
     }
+    if (id_str == null)
+    {
+        d_alert("find id_str is null "+id_str);
+        return;
+    }
     var props = id_str.split(".");
 
     if (props.length < 1) {
@@ -214,11 +219,11 @@ function ss_field_data(elem, value) {
 
             if (value == null) {
                 //d_alert("number value is= " + elem.val());
-               
+                
                 return elem.val();
             }
 
-            if (elem.attr("type") == "date") {
+            if (elem.hasClass("ss_date")) {
                 if (value.indexOf("(") > 0)
                 {
                     value = toDateValue(new Date(parseInt(value.substr(6))));
@@ -321,7 +326,13 @@ function ShorSaleArrayDataBand(data_stauts) {
                
                 if (!radio_check_no_edit($(this)))
                 {
+                    //d_assert($(this).attr("id") == "phone_id0", item_field + "item value " + ss_field_data($(this), null));
                     get_sub_property(data_value, item_field, ss_field_data($(this), null));
+                    //if ($(this).attr("id") == "phone_id0")
+                    //{
+                    //    console.log("the data is give to save is ", JSON.stringify(ShortSaleCaseData));
+                    //}
+                    //d_assert($(this).attr("id") == "phone_id0", item_field + "item value " + JSON.stringify(data_value));
                 }
                
             }
@@ -332,6 +343,7 @@ function ShorSaleArrayDataBand(data_stauts) {
             //if (!$(this).parents(".ss_array").css("display")=="none")
             //if (!fieldNotChange(data_value, item_field))
             //{
+           
                 ss_field_data($(this), item_value);
             //}
         });
@@ -540,6 +552,8 @@ function switch_edit_model(s, objCase) {
     var inputs = $(".ss_form_input, .input_with_check");
 
     if ($(s).val() == "Edit") {
+        inputs = inputs.not(".ss_not_edit");/*filter element not allow edit */
+
         inputs.addClass("color_blue_edit");
 
         inputs.prop("disabled", false);
@@ -552,6 +566,27 @@ function switch_edit_model(s, objCase) {
 
         $(s).val("Edit");
     }
+}
+
+function format_phone(e)
+{
+    var phone = $(e).val();
+    if (phone == null || phone == "")
+    {
+        d_alert("phone is empty");
+        return null;
+    }
+    phone = phone.replace(/[^\d]/g, "");
+    if (phone.length < 10)
+    {
+        $(e).addClass("ss_input_error");
+        return;
+    }
+    $(e).removeClass("ss_input_error");
+    var numbers = phone.match(/\d{3}/g)
+    numbers[2] += phone[9];
+
+    $(e).val("(" + numbers[0] + ") " + numbers[1] +"-"+ numbers[2])
 }
 
 function initToolTips() {
@@ -587,3 +622,11 @@ $(document).ready(function () {
     initToolTips();
 
 });
+function phone_InitAndKeyUp(s, e) {
+    //d_alert("$(s.GetMainElement()) " + $(s.GetMainElement()).attr("id"));
+    //console.log("$(s.GetMainElement()) " + $(s.GetMainElement()).attr("id") + "value is " + s.GetValue());
+    $(s.GetMainElement()).val( s.GetValue());
+}
+function price_InitAndKeyUp(s, e) {
+    //$(s.GetMainElement()).val(s.GetValue());
+}

@@ -1789,3 +1789,17 @@ input[type='checkbox'] + label, input[type=radio] + label .box_text {
 {
     display:none;
 }
+
+.popup_padding
+{
+    padding:10px;
+}
+.ss_date
+{
+
+}
+.ss_input_error
+{
+    color:red;
+    border-color:red;
+}

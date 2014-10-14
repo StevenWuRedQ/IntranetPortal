@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>  
+    <title></title>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
     <link href="/styles/stevencss.css" rel="stylesheet" type="text/css" />
     <link href="/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
@@ -15,6 +15,8 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
     <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
+    <script src="/scripts/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css"/>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

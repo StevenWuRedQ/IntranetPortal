@@ -32,21 +32,27 @@
                     <input class="ss_form_input" data-item="Loan" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Loan Amount</label>
-                    <input class="ss_form_input currency_input" data-item="LoanAmount" data-item-type="1" onblur="$(this).formatCurrency();">
+                    <label class="ss_form_input_title">LOAN AMOUNT</label>
+                    <%--<dx:ASPxTextBox Native="true" runat="server" CssClass="ss_form_input" data-item="LoanAmount">
+                        <MaskSettings Mask="$<0..99999g>.<00..99>" IncludeLiterals="DecimalSymbol" />
+                        <ValidationSettings ErrorDisplayMode="ImageWithTooltip" />
+                        <ClientSideEvents Init="price_InitAndKeyUp" KeyUp="price_InitAndKeyUp" />
+                    </dx:ASPxTextBox>--%>
+
+                     <input class="ss_form_input currency_input" data-item="LoanAmount" data-item-type="1" onblur="$(this).formatCurrency();">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Authorization Sent On</label>
-                    <input class="ss_form_input" type="date" data-item="AuthorizationSent" data-item-type="1">
+                    <input class="ss_form_input ss_date"  data-item="AuthorizationSent" data-item-type="1">
                 </li>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
+                    <input class="ss_form_input ss_form_hidden">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
+                    <input class="ss_form_input ss_form_hidden">
                 </li>
                 <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">Lien Postion</label>

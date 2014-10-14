@@ -31,16 +31,24 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">dob</label>
-                    <input class="ss_form_input" type="date" data-item="DOB" data-item-type="1">
+                    <input class="ss_form_input ss_date" data-item="DOB" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Phone #1</label>
-                    <input class="ss_form_input" id="home_owner_phone" data-item="Phone" data-item-type="1">
+                    <label class="ss_form_input_title">Phone #</label>
+                    <input class="ss_form_input" id="phone_id__index__" data-item="Phone" onkeyup="format_phone(this)" onblur="format_phone(this)" data-item-type="1">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">ssn</label>
+                    <input class="ss_form_input" data-item="Email" data-item-type="1">
+                </li>
+               <%-- <li class="ss_form_item">
+                    <label class="ss_form_input_title">Phone #</label>
+                    <input class="ss_form_input" id="phone_id__index__" onblur="format_phone(this)" data-item="Phone" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Email</label>
                     <input class="ss_form_input" data-item="Email" data-item-type="1">
-                </li>
+                </li>--%>
 
             </ul>
         </div>
