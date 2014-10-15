@@ -175,8 +175,12 @@
     <Reference Include="Microsoft.Online.SharePoint.Client.Tenant">
       <HintPath>..\..\..\..\Office365\ProvisionO365PersonalSites-iSharePoint\Microsoft.Online.SharePoint.Client.Tenant.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.SharePoint.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Common Files\Microsoft Shared\Web Server Extensions\15\ISAPI\Microsoft.SharePoint.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Common Files\Microsoft Shared\Web Server Extensions\15\ISAPI\Microsoft.SharePoint.Client.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.5.16\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -700,14 +704,14 @@
     </Compile>
     <Compile Include="OneDrive\LoadFileFromSharepoint.aspx.vb">
       <DependentUpon>LoadFileFromSharepoint.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="OneDrive\UploadFileToSharepoint.aspx.designer.vb">
       <DependentUpon>UploadFileToSharepoint.aspx</DependentUpon>
     </Compile>
     <Compile Include="OneDrive\UploadFileToSharepoint.aspx.vb">
       <DependentUpon>UploadFileToSharepoint.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PopupControl\ShareLeads.aspx.designer.vb">
       <DependentUpon>ShareLeads.aspx</DependentUpon>

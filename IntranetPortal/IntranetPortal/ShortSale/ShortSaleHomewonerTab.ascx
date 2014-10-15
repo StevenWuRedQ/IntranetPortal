@@ -19,11 +19,11 @@
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">First name</label>
-                    <input class="ss_form_input" data-item="FirstName" data-item-type="1">
+                    <input class="ss_form_input ss_not_empty" data-item="FirstName" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Last name</label>
-                    <input class="ss_form_input" data-item="LastName" data-item-type="1">
+                    <input class="ss_form_input ss_not_empty" data-item="LastName" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">ssn</label>
@@ -35,11 +35,11 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Phone #</label>
-                    <input class="ss_form_input" id="phone_id__index__" data-item="Phone" onkeyup="format_phone(this)" onblur="format_phone(this)" data-item-type="1">
+                    <input class="ss_form_input ss_phone" id="phone_id__index__" data-item="Phone" <%--onkeyup="format_phone(this)" onblur="format_phone(this)"--%> data-item-type="1">
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">ssn</label>
-                    <input class="ss_form_input" data-item="Email" data-item-type="1">
+                    <label class="ss_form_input_title">Email</label>
+                    <input class="ss_form_input ss_email" data-item="Email" <%--onblur="format_email(this)" onkeydown="format_email(this)--%>" data-item-type="1">
                 </li>
                <%-- <li class="ss_form_item">
                     <label class="ss_form_input_title">Phone #</label>
@@ -75,7 +75,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">zip</label>
-                    <input class="ss_form_input" data-item="MailZip" data-item-type="1">
+                    <input class="ss_form_input ss_zip" data-item="MailZip" data-item-type="1">
                 </li>
 
             </ul>
@@ -158,11 +158,11 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">phone #</label>
-                    <input class="ss_form_input" data-item="Phone" data-item-type="1">
+                    <input class="ss_form_input" <%--data-item="Phone" data-item-type="1"--%>>
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">email address</label>
-                    <input class="ss_form_input" data-item="Email" data-item-type="1">
+                    <input class="ss_form_input" <%--data-item="Email" data-item-type="1"--%>>
                 </li>
 
 

@@ -283,10 +283,8 @@
         //$("#home_breakdown_table").editableTableWidget();
         $(".ss_form_input, .input_with_check").prop("disabled", true);
         initToolTips();
-        $('.ss_date').datepicker({
-            
-        });
-        $(".currency_input").formatCurrency();
+        
+        format_input();
         //$("#prioity_content").mCustomScrollbar(
         //      {
         //          theme: "minimal-dark"

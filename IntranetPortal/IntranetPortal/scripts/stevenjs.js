@@ -25,15 +25,26 @@ function d_assert(cond, s) {
     }
 }
 
+function d_log(s) {
+    if (wx_deubg) {
+        console.log(s);
+    }
+}
+
+function d_log_assert(cond, s) {
+    if (cond) {
+        d_log(s)
+    }
+}
+
 /*when has value then is send object by value */
 function get_sub_property(obj, id_str, value) {
 
     if (value != null) {
         value = currency2Number(value)
     }
-    if (id_str == null)
-    {
-        d_alert("find id_str is null "+id_str);
+    if (id_str == null) {
+        d_alert("find id_str is null " + id_str);
         return;
     }
     var props = id_str.split(".");
@@ -51,8 +62,7 @@ function get_sub_property(obj, id_str, value) {
     var t_obj = obj;
     for (var i = 0; i < props.length; i++) {
         var prop = props[i];
-        if (prop.indexOf("[") > 0)
-        {
+        if (prop.indexOf("[") > 0) {
             var arr = prop.split("[");
             prop = parseInt(arr[1].replace("]", ""));
 
@@ -78,7 +88,7 @@ function get_sub_property(obj, id_str, value) {
                 if (value instanceof Date) {
                     d_alert("the date is data" + value);
                 }
-                
+
                 t_obj[prop] = value;
             }
         }
@@ -89,11 +99,11 @@ function get_sub_property(obj, id_str, value) {
     return t_obj;
 }
 function expand_array_item(e) {
-   
+
     var current_div = $(e).parents(".ss_array").find(".collapse_div");
     var isopen = current_div.css("display") == "inline";
     $(".collapse_div").css("display", "none");
-   
+
     if (!isopen)
         current_div.css("display", "inline");
 }
@@ -102,7 +112,7 @@ function expand_array_item(e) {
 */
 function ShortSaleDataBand(data_stauts) {
 
-    
+
     var is_save = data_stauts == 1;
     if (ShortSaleCaseData == null) {
         d_alert("ShortSaleCaseData is null");
@@ -138,45 +148,100 @@ function ShortSaleDataBand(data_stauts) {
     /*band short sale arrary item*/
     ShorSaleArrayDataBand(data_stauts)
 
+    //d_log_assert(is_save, "the short sale after save " + JSON.stringify(ShortSaleCaseData));
     /*use for ui*/
     onRefreashDone();
     /**/
 }
+function format_input() {
+    $('.ss_date').datepicker({
 
+    });
+    $(".currency_input").formatCurrency();
+
+    //var is_pass = true;
+
+
+    $(".ss_not_empty").on("keyup", function () {
+        return format_not_allow_empty(this);
+    });
+    $(".ss_phone").on("keyup", function () {
+        return format_phone(this);
+    });
+
+    $(".ss_zip").on("keyup", function () {
+        return format_zip(this);
+    });
+
+    $(".ss_email").on("keyup", function () {
+        return format_email(this);
+    });
+
+    $(".ss_not_empty, .ss_zip, .ss_email, .ss_not_empty").each(function (index) {
+        $(this).on("blur", function () {
+
+            return $(this).keyup();
+        });
+    });
+    $(".ss_not_empty, .ss_zip,.ss_email, .ss_not_empty").blur();
+    // return is_pass;
+}
+
+function pass_format_test() {
+    var is_pass = true;
+    $(".ss_not_empty, .ss_zip, .ss_email, .ss_not_empty").each(function (ind) {
+        if (in_template(this))
+        {
+            return;
+        }
+        var is_not_pass = $(this).hasClass("ss_input_error");
+
+        if (is_pass && is_not_pass)
+        {
+            is_pass = false;
+        }
+    }
+    );
+    return is_pass;
+
+}
+
+function in_template(e)
+{
+    return $(e).parents(".ss_array").css("display") == "none";
+}
 function refreshDiv(field, obj) {
     var ss_data = ShortSaleCaseData;
     get_sub_property(ss_data, field, obj);
     var inputs = $(".ss_form_input[data-field*='" + field + "']")
     /*is array */
     var is_arry = field.indexOf("[") > 0;
-    if (is_arry)
-    {
+    if (is_arry) {
         var arr = field.split("[");
         var array = arr[0];
 
         var i = arr[1].split("]")[0];
         var obj_field = arr[1].split("]")[1].replace(/\./g, "");
-        
+
         inputs = $(".ss_array[data-field='" + array + "'][data-array-index=" + i + "]:last").find(".ss_form_input[data-item*='" + obj_field + "']");
         ss_data = get_sub_property(ss_data, array, null)[i];
-        
+
     }
 
     inputs.each(function (ind) {
         var _field = $(this).attr("data-field");
-       
-        if (is_arry)
-        {
+
+        if (is_arry) {
             _field = $(this).attr("data-item");
         }
-        
-        var _val = get_sub_property(ss_data, _field,null);
-       
+
+        var _val = get_sub_property(ss_data, _field, null);
+
         ss_field_data($(this), _val);
     });
-   
+
     //ShortSaleDataBand(2);
-    
+
 }
 wx_show_bug = false;
 /*set or get short sale data if value is null get data*/
@@ -194,17 +259,15 @@ function ss_field_data(elem, value) {
             /*in radio check box there need add a data-radio="1" in middle*/
             if (value == null) {
                 var checkYes = elem.parent().find("[data-radio='Y']");
-                if (radio_check_no_edit(elem))
-                {
+                if (radio_check_no_edit(elem)) {
                     return null;
                 }
-               
+
                 return checkYes.prop("checked");
             }
             //d_alert("elem.attr radio id = " + elem.attr("id") + "set value is " + elem.prop("checked"));
             //d_assert(elem.attr("id") == "checkYes_Bankaccount1", "checkYes_Bankaccount1 value is " + value +"getting "+ typeof (value));
-            if (typeof (value) != "string")
-            {
+            if (typeof (value) != "string") {
                 elem.prop("checked", elem.attr("data-radio") == "Y" ? value : !value)
             }
 
@@ -219,16 +282,15 @@ function ss_field_data(elem, value) {
 
             if (value == null) {
                 //d_alert("number value is= " + elem.val());
-                
+
                 return elem.val();
             }
 
             if (elem.hasClass("ss_date")) {
-                if (value.indexOf("(") > 0)
-                {
+                if (value.indexOf("(") > 0) {
                     value = toDateValue(new Date(parseInt(value.substr(6))));
                 }
-                
+
             }
 
             elem.val(value);
@@ -305,9 +367,13 @@ function ShorSaleArrayDataBand(data_stauts) {
             return;
         }
         var elem = $(this);
+        /*don't save temple element to array */
+        if (elem.css("display") == "none") {
+            return;
+        }
 
         var data_value = get_sub_property(ss_data, field, null);
-        //d_assert(data_value.length == 0, "create new field" + field + "data" + data_value);
+
         /*prepare frist element frist */
         if (data_value.length == 0) {
             data_value = new Array();
@@ -319,39 +385,29 @@ function ShorSaleArrayDataBand(data_stauts) {
         data_value = data_value[_index];
 
         elem.find("[data-item-type=1]").each(function (ind) {
+
             var item_field = $(this).attr("data-item");
 
             if (is_save) {
-                //d_assert(_index == 4, "the data_value is " + JSON.stringify(data_value));
-               
-                if (!radio_check_no_edit($(this)))
-                {
-                    //d_assert($(this).attr("id") == "phone_id0", item_field + "item value " + ss_field_data($(this), null));
-                    get_sub_property(data_value, item_field, ss_field_data($(this), null));
-                    //if ($(this).attr("id") == "phone_id0")
-                    //{
-                    //    console.log("the data is give to save is ", JSON.stringify(ShortSaleCaseData));
-                    //}
-                    //d_assert($(this).attr("id") == "phone_id0", item_field + "item value " + JSON.stringify(data_value));
-                }
-               
-            }
 
-            var item_value = get_sub_property(data_value, item_field,null);
-            //$(this).val("");
-          
-            //if (!$(this).parents(".ss_array").css("display")=="none")
-            //if (!fieldNotChange(data_value, item_field))
-            //{
-           
-                ss_field_data($(this), item_value);
-            //}
+                if (!radio_check_no_edit($(this))) {
+
+                    get_sub_property(data_value, item_field, ss_field_data($(this), null));
+
+                }
+
+            }
+            var item_value = get_sub_property(data_value, item_field, null);
+
+            ss_field_data($(this), item_value);
+
+
         });
 
     });
 }
-function testClick()
-{
+
+function testClick() {
     d_alert("the radio_check_no_edit is " + radio_check_no_edit($("#checkYes_Bankaccount1")));
 }
 /*when is radio check no edit */
@@ -360,21 +416,19 @@ function radio_check_no_edit(e) {
         var is_checked = false
         var radios = e.parent().find("input")
         radios.each(function (ind) {
-           // d_assert(e.attr("id") == "checkYes_Bankaccount1", "is_checked = " + is_checked);
-            if($(this).prop("checked"))
-            {
-              //  d_assert(e.attr("id") == "checkYes_Bankaccount1", "find checked elemnt");
+            // d_assert(e.attr("id") == "checkYes_Bankaccount1", "is_checked = " + is_checked);
+            if ($(this).prop("checked")) {
+                //  d_assert(e.attr("id") == "checkYes_Bankaccount1", "find checked elemnt");
                 is_checked = true;
             }
-           
+
         });
-        if(!is_checked)
-        {
+        if (!is_checked) {
             return true;
         }
 
     }
-    
+
     return false;
 }
 function fieldNotChange(data_value, item_field) {
@@ -415,8 +469,7 @@ function prepareArrayDivs(is_save) {
         for (var i = 0; i < data_value.length; i++) {
 
             var clone_div = addCloneTo(elem, add_div, i);
-            if (i == 0)
-            {
+            if (i == 0) {
                 expland_div(clone_div)
             }
             add_div = clone_div;
@@ -424,12 +477,11 @@ function prepareArrayDivs(is_save) {
     });
 }
 
-function expland_div(div)
-{
+function expland_div(div) {
     div.find(".collapse_div").css("display", "inline")
 }
 /*add item in div array */
-function AddArraryItem(event ,e) {
+function AddArraryItem(event, e) {
     var array_div = $(e).parents(".ss_array");
     if (array_div == null) {
         d_alert(" can't find arrary" + $(e).attr("class"));
@@ -442,20 +494,21 @@ function AddArraryItem(event ,e) {
     data_value[len] = new Object();
     array_div.parent().find(".collapse_div").css("display", "none");
     var lastdiv = $(".ss_array[data-field='" + field + "']:last");
-    
-    
+
+
     var template = get_template_div(field);
 
     var add_div = addCloneTo(template, lastdiv, len);
-    
+
     array_div.parent().find(".collapse_div:last").css("display", "inline");
-   
+
     add_div.find(".ss_form_input").each(function (ind) {
         $(this).val("");
     });
     event.cancelBubble = true;
     return true;
 }
+
 
 function get_template_div(field) {
     var template = $(".ss_array[data-field='" + field + "']:contains('__index__1'):last");
@@ -477,7 +530,7 @@ function setArraryTitle(div, a_index) {
     var _idx = parseInt(a_index) + 1;
 
     var newhtml = oldhtml.replace(/__index__1/g, "" + _idx);
-    newhtml = newhtml.replace(/__index__/g, "" + _idx-1);
+    newhtml = newhtml.replace(/__index__/g, "" + _idx - 1);
     div.html(newhtml);
     div.css("display", "inline");
     return div;
@@ -559,6 +612,11 @@ function switch_edit_model(s, objCase) {
         inputs.prop("disabled", false);
         $(s).val("Save");
     } else {
+        if (!pass_format_test())
+        {
+            alert("Some field you entered is incorrect please check.");
+            return;
+        }
         getShortSaleInstanceComplete(null, null);
         //getShortSaleInstanceClient.PerformCallback($("#short_sale_case_id").val());
 
@@ -568,25 +626,69 @@ function switch_edit_model(s, objCase) {
     }
 }
 
-function format_phone(e)
-{
+function format_phone(e) {
     var phone = $(e).val();
-    if (phone == null || phone == "")
-    {
-        d_alert("phone is empty");
-        return null;
+    if (phone == null || phone == "") {
+        //d_alert("phone is empty");
+        //format_error(e, false);
+        return true;
     }
     phone = phone.replace(/[^\d]/g, "");
-    if (phone.length < 10)
-    {
-        $(e).addClass("ss_input_error");
-        return;
+    if (phone.length < 10) {
+        format_error(e, true);
+        return false;
     }
-    $(e).removeClass("ss_input_error");
+    format_error(e, false);
     var numbers = phone.match(/\d{3}/g)
     numbers[2] += phone[9];
 
-    $(e).val("(" + numbers[0] + ") " + numbers[1] +"-"+ numbers[2])
+    $(e).val("(" + numbers[0] + ") " + numbers[1] + "-" + numbers[2])
+    return true;
+}
+
+function format_not_allow_empty(e) {
+    var is_empty = $(e).val() == null || $(e).val() == "";
+    format_error(e, is_empty);
+    return !is_empty;
+}
+
+function format_error(e, is_error) {
+    if (is_error) {
+        $(e).addClass("ss_input_error");
+    } else {
+        $(e).removeClass("ss_input_error");
+    }
+}
+
+function format_email(e) {
+    if (is_empty(e))
+    {
+        return true;
+    }
+    
+    var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    var match_mail = $(e).val().match(pattern);
+
+    var is_email = match_mail !== null && match_mail.length > 0;
+
+    format_error(e, !is_email);
+    return is_email;
+}
+function is_empty(e)
+{
+    return $(e).val() == null || $(e).val() == "";
+}
+function format_zip(e) {
+    if (is_empty(e)) {
+        return true;
+    }
+    var zip = $(e).val();
+    $(e).val(zip.replace(/[^\d]/g, ""));
+    var pattern = /^\d{5}(?:[-\s]\d{4})?$/
+    var match_zip = $(e).val().match(pattern);
+    var is_zip = match_zip !== null && match_zip.length > 0;
+    format_error(e, !is_zip);
+    return is_zip;
 }
 
 function initToolTips() {
@@ -625,7 +727,7 @@ $(document).ready(function () {
 function phone_InitAndKeyUp(s, e) {
     //d_alert("$(s.GetMainElement()) " + $(s.GetMainElement()).attr("id"));
     //console.log("$(s.GetMainElement()) " + $(s.GetMainElement()).attr("id") + "value is " + s.GetValue());
-    $(s.GetMainElement()).val( s.GetValue());
+    $(s.GetMainElement()).val(s.GetValue());
 }
 function price_InitAndKeyUp(s, e) {
     //$(s.GetMainElement()).val(s.GetValue());

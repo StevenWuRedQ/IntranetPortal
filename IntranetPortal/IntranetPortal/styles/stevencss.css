@@ -1796,10 +1796,18 @@ input[type='checkbox'] + label, input[type=radio] + label .box_text {
 }
 .ss_date
 {
+    
+}
+.ss_not_empty
+{
 
 }
 .ss_input_error
 {
-    color:red;
-    border-color:red;
+    color:red !important;
+    border-color:red !important;
+}
+.ss_email
+{
+
 }
