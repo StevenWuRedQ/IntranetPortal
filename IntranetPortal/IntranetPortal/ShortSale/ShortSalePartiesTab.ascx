@@ -9,7 +9,7 @@
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Name</label>
-            <input class="ss_form_input" data-field="AssignedProcessor.Name">
+            <input class="ss_form_input ss_not_edit" data-field="AssignedProcessor.Name">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Phone #</label>
@@ -18,11 +18,11 @@
                 <ValidationSettings ErrorDisplayMode="ImageWithTooltip" />
                 <ClientSideEvents Init="phone_InitAndKeyUp" KeyUp="phone_InitAndKeyUp" />
             </dx:ASPxTextBox>--%>
-            <input class="ss_form_input" data-field="AssignedProcessor.Cell">
+            <input class="ss_form_input ss_not_edit" data-field="AssignedProcessor.Cell">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
-            <input class="ss_form_input" type="email" data-field="AssignedProcessor.Email">
+            <input class="ss_form_input ss_not_edit" type="email" data-field="AssignedProcessor.Email">
         </li>
     </ul>
 </div>
@@ -33,27 +33,27 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>
-            <input class="ss_form_input" data-field="ReferralContact.Name">
+            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Name">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">manager</label>
-            <input class="ss_form_input" value="Manager ?">
+            <input class="ss_form_input ss_not_edit" value="Manager ?">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office</label>
-            <input class="ss_form_input" data-field="ReferralContact.Office">
+            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Office">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">office #</label>
-            <input class="ss_form_input" data-field="ReferralContact.OfficeNO">
+            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.OfficeNO">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Cell #</label>
-            <input class="ss_form_input" data-field="ReferralContact.Cell">
+            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Cell">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">email</label>
-            <input class="ss_form_input" data-field="ReferralContact.Email">
+            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Email">
         </li>
     </ul>
 </div>

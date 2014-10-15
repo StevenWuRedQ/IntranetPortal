@@ -161,13 +161,15 @@ function ShortSaleDataBand(data_stauts) {
         var data_value = null;
         if (is_save) {
             /* if radio box not check then*/
-            if (!fieldNotChange(ShortSaleCaseData, field)) {
-                data_value = get_sub_property(ShortSaleCaseData, field, ss_field_data(elem, null));
-            }
+            //if (!fieldNotChange(ShortSaleCaseData, field) && elem.attr("type")=="radio") {
+            data_value = get_sub_property(ShortSaleCaseData, field, ss_field_data(elem, null));
+               
+           // }
 
         }
         data_value = get_sub_property(ss_data, field, null);
         ss_field_data(elem, data_value);
+        //d_assert(field == "Evivtion", "get evition " + data_value);
     });
 
     /*band short sale arrary item*/

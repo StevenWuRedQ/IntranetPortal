@@ -13,10 +13,10 @@
         <li class="ss_form_item">
             <label class="ss_form_input_title">Occupied by </label>
             <select class="ss_form_input" data-field="OccupiedBy">
-                <option value="volvo">Vacant</option>
-                <option value="volvo">Homeowner</option>
-                <option value="saab">Tenant (Coop)</option>
-                <option value="mercedes">Tenant (Non Coop)</option>
+                <option value="Vacant">Vacant</option>
+                <option value="Homeowner">Homeowner</option>
+                <option value="Tenant (Coop)">Tenant (Coop)</option>
+                <option value="Tenant (Non Coop)">Tenant (Non Coop)</option>
             </select>
 
         </li>
