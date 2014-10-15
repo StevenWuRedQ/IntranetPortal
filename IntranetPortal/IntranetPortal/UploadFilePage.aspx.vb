@@ -6,6 +6,7 @@ Public Class UploadFilePage
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not String.IsNullOrEmpty(Request.QueryString("b")) Then
+            hfBBLEData.Value = Request.QueryString("b")
             hfBBLE("BBLE") = Request.QueryString("b")
             Bindfiles(Request.QueryString("b"))
         End If
@@ -48,6 +49,13 @@ Public Class UploadFilePage
         End Using
     End Function
 
+    Private Sub UploadFileToSharepoint()
+        Dim bble = hfBBLEData.Value
+        Dim category = cbCategory.Value
+
+        DocumentService.UploadFile(String.Format("{0}/{1}/", bble, category), uplImage.UploadedFiles(0).FileBytes, uplImage.UploadedFiles(0).FileName)
+    End Sub
+
     Protected Sub gridFiles_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
         If e.Parameters.StartsWith("UpdateCategory") Then
 
@@ -81,34 +89,6 @@ Public Class UploadFilePage
         End Using
     End Sub
 
-
-    'Protected Sub gridFiles_RowUpdating(sender As Object, e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs) Handles gridFiles.RowUpdating
-    '    Using Context As New Entities
-    '        Dim fileId = CInt(e.Keys(0))
-    '        Dim file = Context.FileAttachments.Where(Function(f) f.FileID = fileId).SingleOrDefault
-    '        file.Category = e.NewValues("Category").ToString
-
-    '        Context.SaveChanges()
-    '    End Using
-
-    '    e.Cancel = True
-    '    gridFiles.CancelEdit()
-
-    '    Bindfiles(hfBBLE("BBLE"))
-    'End Sub
-
-    'Protected Sub gridFiles_RowDeleting(sender As Object, e As DevExpress.Web.Data.ASPxDataDeletingEventArgs) Handles gridFiles.RowDeleting
-    '    Using Context As New Entities
-    '        Dim fileId = CInt(e.Keys(0))
-    '        Dim file = Context.FileAttachments.Where(Function(f) f.FileID = fileId).SingleOrDefault
-    '        Context.FileAttachments.Remove(file)
-    '        Context.SaveChanges()
-    '    End Using
-    '    e.Cancel = True
-
-    '    Bindfiles(hfBBLE("BBLE"))
-    'End Sub
-
     Protected Sub gridFiles_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs) Handles gridFiles.HtmlRowPrepared
         If Not e.RowType = DevExpress.Web.ASPxGridView.GridViewRowType.Data Then
             Return
@@ -129,5 +109,9 @@ Public Class UploadFilePage
 
             cbCategory.ClientSideEvents.SelectedIndexChanged = String.Format("function(s, e){{UpdateCategory({0}, s);}}", e.KeyValue.ToString)
         End If
+    End Sub
+
+    Protected Sub ASPxButton1_Click(sender As Object, e As EventArgs)
+        UploadFileToSharepoint()
     End Sub
 End Class

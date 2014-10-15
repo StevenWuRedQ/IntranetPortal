@@ -1,7 +1,18 @@
-﻿Public Class DownloadFile
+﻿Imports Microsoft.SharePoint.Client
+Imports System.Security
+Imports Microsoft.SharePoint.Client.Sharing
+
+Public Class DownloadFile
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If Not String.IsNullOrEmpty(Request.QueryString("spFile")) Then
+            Dim link = DocumentService.GetPreviewContentLink(Request.QueryString("spFile"))
+            If Not String.IsNullOrEmpty(link) Then
+                Response.Redirect(link)
+            End If
+        End If
+
         If Not String.IsNullOrEmpty(Request.QueryString("id")) Then
             ' Get the file id from the query string
             Dim id As Integer = Convert.ToInt16(Request.QueryString("id"))
@@ -26,5 +37,4 @@
             Return Context.FileAttachments.Where(Function(f) f.FileID = fileId).SingleOrDefault
         End Using
     End Function
-
 End Class

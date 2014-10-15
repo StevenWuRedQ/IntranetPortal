@@ -17,6 +17,9 @@ Public Class DocumentsUI
     Public Property LeadsName As String
 
     Sub BindFileList(bble As String)
+        BindFilesFromSharepoint(bble)
+        Return
+
         Using Context As New Entities
             Dim groups = (From file In Context.FileAttachments
                           Where file.BBLE = bble
@@ -35,5 +38,10 @@ Public Class DocumentsUI
             rptFiles.DataSource = DataBinder.Eval(e.Item.DataItem, "Group")
             rptFiles.DataBind()
         End If
+    End Sub
+
+    Public Sub BindFilesFromSharepoint(bble As String)
+        datalistCategory.DataSource = DocumentService.GetFilesByBBLE(bble)
+        datalistCategory.DataBind()
     End Sub
 End Class

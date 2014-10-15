@@ -15,9 +15,8 @@
 
     }
 
-    function UploadFiles()
-    {
-        var url = '/UploadFilePage.aspx?b=' + tmpBBLE;
+    function UploadFiles() {
+        var url = '/UploadFilePage.aspx?b=' + leadsInfoBBLE;
         //var centerLeft = parseInt((window.screen.availWidth - 640) / 2);
         //var centerTop = parseInt(((window.screen.availHeight - 400) / 2) - 50);          
         if (popupCtrUploadFiles) {
@@ -36,7 +35,7 @@
             <div class="font_30">
                 <i class="fa fa-file"></i>&nbsp;
                 <span class="font_light">Documents</span>
-                 <span class="time_buttons" onclick="UploadFiles()">Upload File</span>
+                <span class="time_buttons" onclick="UploadFiles()">Upload File</span>
             </div>
             <div style="padding-left: 39px;" class="clearfix">
                 <span style="font-size: 14px;"><%= LeadsName %></span>
@@ -99,7 +98,7 @@
                                     <input type="checkbox" name="vehicle" value="Bike" id="<%# String.Format("doc_list_id_{0}", Eval("FileID"))%>" />
                                     <label class="doc_list_checks check_margin" for='<%# String.Format("doc_list_id_{0}", Eval("FileID"))%>'>
                                         <span class="color_balck">
-                                            <dx:ASPxHyperLink runat="server" NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>' Text='<%# Eval("Name")%>' Target="_blank"></dx:ASPxHyperLink>
+                                            <dx:ASPxHyperLink runat="server" NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}&spFile={1}", Eval("FileID"), Eval("Description"))%>' Text='<%# Eval("Name")%>' Target="_blank"></dx:ASPxHyperLink>
                                         </span>(Financials)
                                                         <span class="checks_data_text">
                                                             <dx:ASPxLabel runat="server" Text='<%# String.Format("{0:g}", Eval("CreateDate")) %>'></dx:ASPxLabel>
@@ -122,11 +121,8 @@
                                 </tr>--%>
                             </ItemTemplate>
                         </asp:Repeater>
-
                     </div>
-
                 </div>
-
             </div>
         </ItemTemplate>
     </asp:DataList>
@@ -136,5 +132,5 @@
             <dx:PopupControlContentControl runat="server">
             </dx:PopupControlContentControl>
         </ContentCollection>
-    </dx:ASPxPopupControl>
+    </dx:ASPxPopupControl>    
 </div>

@@ -25,13 +25,12 @@
             return document.getElementById("previewImage");
         }
 
-        function UpdateCategory(logId, sender)
-        {
+        function UpdateCategory(logId, sender) {
             var newCategory = sender.GetValue();
             gridFilesClient.PerformCallback("UpdateCategory|" + logId + "|" + newCategory + "|" + hfBBLEClient.Get("BBLE"));
         }
 
-      
+
         // ]]> 
     </script>
 </head>
@@ -54,6 +53,7 @@
                         </ValidationSettings>
                     </dx:ASPxUploadControl>
                     <dx:ASPxHiddenField runat="server" ID="hfBBLE" ClientInstanceName="hfBBLEClient"></dx:ASPxHiddenField>
+                    <asp:HiddenField runat="server" ID="hfBBLEData" />
                 </td>
             </tr>
             <tr>
@@ -67,10 +67,35 @@
                 </td>
             </tr>
             <tr style="height: 40px;">
-                <td colspan="2" class="buttonCell" style="margin-bottom: 5px; text-align: right">
-                    <dx:ASPxButton ID="btnUpload" runat="server" AutoPostBack="False" Text="Upload" ClientInstanceName="btnUpload" Width="100px" ClientEnabled="False" Style="margin: 0 auto;">
-                        <ClientSideEvents Click="function(s, e) { uploader.Upload(); }" />
-                    </dx:ASPxButton>
+                <td>
+                    <dx:ASPxLabel ID="ASPxLabel1" runat="server" Text="Category:">
+                    </dx:ASPxLabel>
+                </td>
+                <td class="buttonCell" style="margin-bottom: 5px;" >
+                    <table style="width:100%">
+                        <tr>
+                            <td>
+                                 <dx:ASPxComboBox runat="server" ID="cbCategory">
+                                        <Items>
+                                            <dx:ListEditItem Text="Financials" Value="Financials" />
+                                            <dx:ListEditItem Text="Short Sale" Value="ShortSale" />
+                                            <dx:ListEditItem Text="Photos" Value="Photos" />
+                                            <dx:ListEditItem Text="Accounting" Value="Accounting" />
+                                            <dx:ListEditItem Text="Eviction" Value="Eviction" />
+                                            <dx:ListEditItem Text="Construction" Value="Construction" />
+                                        </Items>
+                                    </dx:ASPxComboBox>
+                            </td>
+                            <td  style="text-align: right">
+                                <dx:ASPxButton ID="btnUpload" runat="server" AutoPostBack="False" Text="Upload" ClientInstanceName="btnUpload" Width="100px" ClientEnabled="False" Style="margin: 0 auto;">
+                                    <ClientSideEvents Click="function(s, e) { uploader.Upload(); }" />
+                                </dx:ASPxButton>
+                                 <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Upload To Sharepoint" Width="100px" Style="margin: 0 auto;" OnClick="ASPxButton1_Click">
+                                </dx:ASPxButton>
+                            </td>
+                        </tr>
+                    </table>
+
                 </td>
             </tr>
             <tr>
@@ -109,16 +134,16 @@
                                         </Items>
                                     </dx:ASPxComboBox>
                                 </DataItemTemplate>
-                            </dx:GridViewDataColumn>                        
+                            </dx:GridViewDataColumn>
                             <dx:GridViewDataTextColumn FieldName="Description" VisibleIndex="5" Visible="false">
                                 <DataItemTemplate>
                                 </DataItemTemplate>
                             </dx:GridViewDataTextColumn>
-                        
+
                         </Columns>
                         <SettingsDataSecurity AllowInsert="False" />
                         <SettingsEditing Mode="Inline"></SettingsEditing>
-                       
+
                     </dx:ASPxGridView>
                 </td>
             </tr>

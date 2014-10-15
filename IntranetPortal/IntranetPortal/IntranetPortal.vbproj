@@ -312,6 +312,7 @@
     <Compile Include="CodeFolder\Agent_Properties.vb" />
     <Compile Include="CodeFolder\APIOrder.vb" />
     <Compile Include="CodeFolder\DataWCFService.vb" />
+    <Compile Include="CodeFolder\DocumentService.vb" />
     <Compile Include="CodeFolder\Employee.vb" />
     <Compile Include="CodeFolder\EmployeePerformance.vb" />
     <Compile Include="CodeFolder\EmployeeProfile.vb" />
@@ -699,6 +700,13 @@
     </Compile>
     <Compile Include="OneDrive\LoadFileFromSharepoint.aspx.vb">
       <DependentUpon>LoadFileFromSharepoint.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="OneDrive\UploadFileToSharepoint.aspx.designer.vb">
+      <DependentUpon>UploadFileToSharepoint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OneDrive\UploadFileToSharepoint.aspx.vb">
+      <DependentUpon>UploadFileToSharepoint.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PopupControl\ShareLeads.aspx.designer.vb">
@@ -1414,6 +1422,7 @@
     <Content Include="OneDrive\constants.js" />
     <Content Include="OneDrive\Callback.html" />
     <Content Include="OneDrive\LoadFileFromSharepoint.aspx" />
+    <Content Include="OneDrive\UploadFileToSharepoint.aspx" />
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
     <Content Include="PreviewFile.aspx" />

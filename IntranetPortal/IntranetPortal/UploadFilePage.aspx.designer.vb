@@ -50,6 +50,15 @@ Partial Public Class UploadFilePage
     Protected WithEvents hfBBLE As Global.DevExpress.Web.ASPxHiddenField.ASPxHiddenField
 
     '''<summary>
+    '''hfBBLEData control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfBBLEData As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''lblAllowebMimeType control.
     '''</summary>
     '''<remarks>
@@ -68,6 +77,24 @@ Partial Public Class UploadFilePage
     Protected WithEvents lblMaxFileSize As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
+    '''ASPxLabel1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxLabel1 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+
+    '''<summary>
+    '''cbCategory control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbCategory As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
     '''btnUpload control.
     '''</summary>
     '''<remarks>
@@ -75,6 +102,15 @@ Partial Public Class UploadFilePage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnUpload As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''ASPxButton1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
     '''gridFiles control.
