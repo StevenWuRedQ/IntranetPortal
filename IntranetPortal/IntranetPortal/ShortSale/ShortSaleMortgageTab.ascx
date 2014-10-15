@@ -11,11 +11,12 @@
 
 <div data-array-index="0" data-field="Mortgages" class="ss_array" style="display: none">
     <%--<h3 class="title_with_line"><span class="title_index title_span">Mortgages </span></h3>--%>
-    <h3 class="ss_form_title title_with_line" style="cursor: pointer" onclick="expand_array_item(this)">
-        <span class="title_index title_span">Mortgage __index__1</span>
-        <%--<i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i>--%> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(event,this)" title="Add"></i>
+    <h4 class="ss_form_title title_with_line" style="cursor: pointer" onclick="expand_array_item(this)">
+        <span class="title_index title_span">Mortgage __index__1</span>&nbsp;
+         <i class="fa fa-expand expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>
+          &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(event,this)" title="Add"></i>
         <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" onclick="delete_array_item(this)" title="Delete"></i>
-    </h3>
+    </h4>
     <div class="collapse_div">
         <div>
             <%--<h4 class="ss_form_title title_with_line"><span class="title_index title_span">Mortgage __index__</span>  <i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(event,this)" title="Add"></i>

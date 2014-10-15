@@ -100,12 +100,37 @@ function get_sub_property(obj, id_str, value) {
 }
 function expand_array_item(e) {
 
-    var current_div = $(e).parents(".ss_array").find(".collapse_div");
+    var div = $(e).parents(".ss_array");
+    var current_div = div.find(".collapse_div")
     var isopen = current_div.css("display") == "inline";
     $(".collapse_div").css("display", "none");
 
-    if (!isopen)
+    control_array_div(div, !isopen)
+
+    
+}
+function control_array_div(div,is_open)
+{
+    var current_div = div.find(".collapse_div");
+    if (is_open)
+    {
         current_div.css("display", "inline");
+    }
+
+    is_open = current_div.css("display") == "inline";
+    var btn = div.find(".expand_btn");
+    if (btn.length == 0)
+    {
+        return;
+    }
+    var e_class = btn.attr("class");
+
+    if (is_open) {
+        btn.attr("class", e_class.replace("-expand", "-compress"));
+    } else {
+        btn.attr("class", e_class.replace("-compress", "-expand"));
+
+    }
 }
 /*
 *data_stauts == 1 then save data
@@ -478,7 +503,7 @@ function prepareArrayDivs(is_save) {
 }
 
 function expland_div(div) {
-    div.find(".collapse_div").css("display", "inline")
+    control_array_div(div, true);
 }
 /*add item in div array */
 function AddArraryItem(event, e) {
@@ -493,6 +518,12 @@ function AddArraryItem(event, e) {
     var len = data_value.length;
     data_value[len] = new Object();
     array_div.parent().find(".collapse_div").css("display", "none");
+    array_div.parent().find(".ss_array").each(
+        function (ind) {
+            control_array_div($(this),false);
+        }
+        );
+   
     var lastdiv = $(".ss_array[data-field='" + field + "']:last");
 
 
@@ -500,7 +531,7 @@ function AddArraryItem(event, e) {
 
     var add_div = addCloneTo(template, lastdiv, len);
 
-    array_div.parent().find(".collapse_div:last").css("display", "inline");
+    control_array_div(array_div.parent().find(".collapse_div:last").parents(".ss_array"));
 
     add_div.find(".ss_form_input").each(function (ind) {
         $(this).val("");

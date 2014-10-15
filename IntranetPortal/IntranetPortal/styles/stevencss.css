@@ -1555,7 +1555,7 @@ a.shot_sale_tab_a {
     border-bottom: #eeeeee solid 5px !important;
     margin: 0px !important;
     border-radius: 0 !important;
-    height:47px;
+    height: 47px;
 }
 
     a.shot_sale_tab_a:focus {
@@ -1564,7 +1564,7 @@ a.shot_sale_tab_a {
 
     a.shot_sale_tab_a:hover {
         background: white !important;
-        color:#2e2f31 !important;
+        color: #2e2f31 !important;
         border-color: #ff400d !important;
     }
 
@@ -1590,7 +1590,7 @@ li.ss_form_item {
     list-style: none;
     width: 33.33%;
     float: left;
-    height:70px;
+    height: 70px;
 }
 
 .ss_form_input_title {
@@ -1600,7 +1600,7 @@ li.ss_form_item {
     display: block;
     margin: 0px;
     margin-top: 15px;
-    font-weight:normal !important;
+    font-weight: normal !important;
 }
 
 .ss_form_input {
@@ -1611,10 +1611,11 @@ li.ss_form_item {
     border-bottom: 1px solid #dde0e7;
     width: 80%;
 }
-.ss_form_input:disabled
-{
-    background:transparent;
-}
+
+    .ss_form_input:disabled {
+        background: transparent;
+    }
+
     .ss_form_input:focus {
         border-color: #0e9ee9;
         outline: none;
@@ -1656,7 +1657,7 @@ li.ss_form_item {
 
 .nav-tabs > li.active > a.shot_sale_tab_a {
     border-color: #ff400d !important;
-    color:#2e2f31 !important;
+    color: #2e2f31 !important;
 }
 
 .update_panel {
@@ -1750,64 +1751,57 @@ input[type='checkbox'] + label, input[type=radio] + label .box_text {
 .overview_tabs {
     border-bottom: 5px solid #eee !important;
     height: 47px;
+}
 
+.short_sale_edit {
+    background: #99bdcf;
+    padding: 9px 20px;
+    outline: none;
 }
-.short_sale_edit
-{
-    background:#99bdcf;
-    padding:9px 20px;
-    outline:none;
-}
-.short_sale_edit:hover
-{
-    background:#3993c1;
-}
-.ss_array
-{
 
-}
-.title_index
-{
+    .short_sale_edit:hover {
+        background: #3993c1;
+    }
 
+.ss_array {
 }
-.title_with_line
-{
-    margin:0 0 30px;
-    border-bottom:1px solid #ff400d;
+
+.title_index {
+}
+
+.title_with_line {
+    margin: 0 0 30px;
+    border-bottom: 1px solid #ff400d;
     /*height: 33px;*/
 }
-.title_span
-{
-    color:white;
-    font-weight:900;
-    background:#ff400d;
+
+.title_span {
+    color: #ff400d;
+    font-weight: 900;
+    /* background: #ff400d; */
     padding: 2px 8px;
-    margin:0px;
+    margin: 0px;
     display: inline-block;
 }
-.collapse_div
-{
-    display:none;
+
+.collapse_div {
+    display: none;
 }
 
-.popup_padding
-{
-    padding:10px;
+.popup_padding {
+    padding: 10px;
 }
-.ss_date
-{
-    
-}
-.ss_not_empty
-{
 
+.ss_date {
 }
-.ss_input_error
-{
-    color:red !important;
-    border-color:red !important;
-}
-.ss_email
-{
 
+.ss_not_empty {
+}
+
+.ss_input_error {
+    color: red !important;
+    border-color: red !important;
+}
+
+.ss_email {
 }

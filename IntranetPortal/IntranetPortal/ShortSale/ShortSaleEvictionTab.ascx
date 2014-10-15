@@ -11,7 +11,7 @@
     <ul class="ss_form_box clearfix">
 
         <li class="ss_form_item">
-            <label class="ss_form_input_title" >Occupied by </label>
+            <label class="ss_form_input_title">Occupied by </label>
             <select class="ss_form_input" data-field="OccupiedBy">
                 <option value="volvo">Vacant</option>
                 <option value="volvo">Homeowner</option>
@@ -35,15 +35,18 @@
 
     </ul>
 </div>
-<div style="margin-top:30px">&nbsp;</div>
+<div style="margin-top: 30px">&nbsp;</div>
 <div data-array-index="0" data-field="Occupants" class="ss_array" style="display: none">
     <%--<h3 class="title_with_line"><span class="title_index title_span">Mortgages </span></h3>--%>
-    <h3 class="ss_form_title title_with_line" style="cursor:pointer" onclick="expand_array_item(this)"><span class="title_index title_span">Occupant __index__1</span> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(event,this)" title="Add"></i>
+    <h4 class="ss_form_title title_with_line"  onclick="expand_array_item(this)">
+        <span class="title_index title_span">Occupant __index__1</span> &nbsp;
+        <i class="fa fa-expand expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>
+        <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(event,this)" title="Add"></i>
         <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" onclick="delete_array_item(this)" title="Delete"></i>
-    </h3>
+    </h4>
 
     <div class="collapse_div">
-        <div >
+        <div>
 
             <ul class="ss_form_box clearfix">
 
@@ -139,7 +142,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date Served</label>
-                    <input class="ss_form_input ss_date" data-item="DateServed"  data-item-type="1">
+                    <input class="ss_form_input ss_date" data-item="DateServed" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Court Date</label>
