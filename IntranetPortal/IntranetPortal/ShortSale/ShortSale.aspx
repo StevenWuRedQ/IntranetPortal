@@ -82,10 +82,10 @@
 
                                                                     <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                     <li style="margin-right: 30px; color: #ffa484; float: right">
-                                                                        <i class="fa fa-comments sale_head_button tooltip-examples" title="Chat"></i>
-                                                                        <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Email"></i>
+                                                                        <%--<i class="fa fa-comments sale_head_button tooltip-examples" title="Chat"></i>
+                                                                        <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Email"></i>--%>
                                                                         <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Report" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
-                                                                        <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>
+                                                                        <%--<i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>--%>
                                                                     </li>
                                                                 </ul>
                                                                 <div class="tab-content">

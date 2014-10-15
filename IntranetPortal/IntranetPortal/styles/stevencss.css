@@ -1638,7 +1638,7 @@ li.ss_form_item {
     margin-top: 10px;
     width: 49%;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 14px !important;
     white-space: nowrap;
 }
 
@@ -1743,9 +1743,9 @@ li.ss_form_item {
 }
 
 
-input[type='checkbox'] + label, input[type=radio] + label .box_text {
+input[type='checkbox'] + label, input[type='radio'] + label .box_text {
     font-size: 14px !important;
-    margin-top: -5px;
+    margin-top: -5px !important;
 }
 
 .overview_tabs {
