@@ -38,7 +38,7 @@
 <div style="margin-top: 30px">&nbsp;</div>
 <div data-array-index="0" data-field="Occupants" class="ss_array" style="display: none">
     <%--<h3 class="title_with_line"><span class="title_index title_span">Mortgages </span></h3>--%>
-    <h4 class="ss_form_title title_with_line"  onclick="expand_array_item(this)">
+    <h4 class="ss_form_title title_with_line">
         <span class="title_index title_span">Occupant __index__1</span> &nbsp;
         <i class="fa fa-expand expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>
         <i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(event,this)" title="Add"></i>
