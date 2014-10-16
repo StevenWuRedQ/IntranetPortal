@@ -1172,6 +1172,9 @@
     <Content Include="images\drap_upload_icons.png" />
     <Content Include="images\drap_viewfile_icons.png" />
     <Content Include="images\drap_view_leads.png" />
+    <Content Include="images\drop_active_icon.png" />
+    <Content Include="images\drop_new_icon.png" />
+    <Content Include="images\drop_on_hold_icon.png" />
     <Content Include="images\Evication.jpg" />
     <Content Include="images\Evication.png" />
     <Content Include="images\flag.png" />
