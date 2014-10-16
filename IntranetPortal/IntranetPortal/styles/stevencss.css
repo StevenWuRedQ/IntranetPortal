@@ -436,7 +436,7 @@ input[type='checkbox'] {
 }
 
     input[type='checkbox'] + label,
-    input[type=radio] + label {
+    input[type='radio'] + label {
         display: inline-block;
         font-size: 18px !important;
     }
@@ -1743,9 +1743,11 @@ li.ss_form_item {
 }
 
 
-input[type='checkbox'] + label, input[type='radio'] + label .box_text {
+input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio'] + label .box_text {
     font-size: 14px !important;
     margin-top: -5px !important;
+    padding: 15px 0 0;
+  
 }
 
 .overview_tabs {

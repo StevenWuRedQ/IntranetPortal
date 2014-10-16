@@ -103,7 +103,13 @@ function expand_array_item(e) {
     var div = $(e).parents(".ss_array");
     var current_div = div.find(".collapse_div")
     var isopen = current_div.css("display") == "inline";
-    $(".collapse_div").css("display", "none");
+    var field = div.attr("data-field");
+   
+    $(".ss_array[data-field='" + field + "']").each(
+        function (ind) {
+            control_array_div($(this), false);
+        }
+        );
 
     control_array_div(div, !isopen)
 
@@ -112,11 +118,13 @@ function expand_array_item(e) {
 function control_array_div(div,is_open)
 {
     var current_div = div.find(".collapse_div");
-    if (is_open)
+    if (current_div.length == 0)
     {
-        current_div.css("display", "inline");
+        return;
     }
-
+   
+    current_div.css("display", is_open ? "inline" : "none");
+  
     is_open = current_div.css("display") == "inline";
     var btn = div.find(".expand_btn");
     if (btn.length == 0)
