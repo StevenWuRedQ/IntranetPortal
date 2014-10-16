@@ -8,7 +8,7 @@
     <script type="text/javascript">       
 
         function CompleteTask(taskId) {
-            gridTaskClient.PerformCallback(taskId);
+            gridTaskClient.PerformCallback("CompleteTask|"+taskId);
         }
 
         function FilterLogs(s, e) {
@@ -62,6 +62,13 @@
             var comments = s.GetText();
             callbackSaveComments.PerformCallback(taskId + "|" + comments);
         }
+
+        function ChangeTaskPriority(s, taskId)
+        {
+            var priority = s.GetText();
+            gridTaskClient.PerformCallback("Priority|" + taskId + "|" + priority);
+        }
+
         function ShowBorder(s) {
             var tbl = s.GetMainElement();
             if (tbl.style.borderColor == 'transparent') {
@@ -77,6 +84,7 @@
                 tbl.style.backgroundColor = 'transparent';
             }
         }
+
     </script>
 </head>
 <body>
@@ -184,6 +192,8 @@
             </dx:ASPxFormLayout>
             <dx:ASPxGridView runat="server" ID="gridTask" Width="100%" KeyFieldName="ListId" ClientInstanceName="gridTaskClient" Paddings-Padding="5px" Settings-ShowFilterRow="true" SettingsBehavior-FilterRowMode="Auto">
                 <Columns>
+                    <dx:GridViewDataColumn FieldName="ListId" Caption="#" Width="50px">                                
+                    </dx:GridViewDataColumn>
                     <dx:GridViewDataDateColumn FieldName="CreateDate" Width="110px" PropertiesDateEdit-DisplayFormatString="g">
                         <PropertiesDateEdit DisplayFormatString="g"></PropertiesDateEdit>
                         <FilterTemplate>
@@ -214,6 +224,22 @@
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataDateColumn FieldName="DueDate" Caption="Due Date" PropertiesDateEdit-DisplayFormatString="d" Width="80px">
                     </dx:GridViewDataDateColumn>
+                  <dx:GridViewDataColumn FieldName="Priority" Caption="Priority" Width="40px">
+                        <FilterTemplate>                           
+                        </FilterTemplate>
+                        <DataItemTemplate>
+                             <dx:ASPxComboBox runat="server" ID="cbPriority" Width="100%" Border-BorderStyle="None">
+                                <Items>                                
+                                    <dx:ListEditItem Text="1" Value="1" />
+                                    <dx:ListEditItem Text="2" Value="2" />
+                                    <dx:ListEditItem Text="3" Value="3" />
+                                    <dx:ListEditItem Text="4" Value="4" />
+                                    <dx:ListEditItem Text="5" Value="5" />
+                                </Items>
+                                 <ClientSideEvents SelectedIndexChanged="PriorityChanges" />
+                            </dx:ASPxComboBox>
+                        </DataItemTemplate>
+                    </dx:GridViewDataColumn>
                     <dx:GridViewDataColumn FieldName="Category" Caption="Category" Width="80px">
                         <FilterTemplate>
                             <dx:ASPxComboBox runat="server" ID="cbFilter" Width="100%">
@@ -266,7 +292,7 @@
                 </Styles>
                 <SettingsPager Mode="ShowAllRecords"></SettingsPager>
             </dx:ASPxGridView>
-            <dx:ASPxCallback runat="server" ID="callbackSaveComments" ClientInstanceName="callbackSaveComments" OnCallback="callbackSaveComments_Callback"></dx:ASPxCallback>
+            <dx:ASPxCallback runat="server" ID="callbackSaveComments" ClientInstanceName="callbackSaveComments" OnCallback="callbackSaveComments_Callback"></dx:ASPxCallback>                  
         </div>
     </form>
 </body>

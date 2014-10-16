@@ -6,7 +6,6 @@ Partial Class TodoListPage
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-
         BindData()
         lblLoginUser.Text = Page.User.Identity.Name
         If Not Page.IsPostBack Then
@@ -53,17 +52,51 @@ Partial Class TodoListPage
 
         Dim txtComments = TryCast(gridTask.FindRowCellTemplateControl(e.VisibleIndex, gridTask.Columns("Comments"), "txtComments"), ASPxMemo)
         txtComments.ClientSideEvents.TextChanged = String.Format("function(s,e){{ SaveComments(s, {0}); }}", e.KeyValue)
+
+        Dim priority = e.GetValue("Priority")
+        Dim cbPriority = TryCast(gridTask.FindRowCellTemplateControl(e.VisibleIndex, gridTask.Columns("Priority"), "cbPriority"), ASPxComboBox)
+        cbPriority.Value = priority
+        cbPriority.ClientSideEvents.SelectedIndexChanged = String.Format("function(s,e){{ ChangeTaskPriority(s, {0}); }}", e.KeyValue)
+
+        Select Case priority
+            Case 1
+                e.Row.BackColor = Drawing.Color.OrangeRed
+            Case 2
+                e.Row.BackColor = Drawing.Color.IndianRed
+            Case 3
+                e.Row.BackColor = Drawing.Color.Orange
+            Case 4
+                e.Row.BackColor = Drawing.Color.PaleVioletRed
+            Case 5
+                e.Row.BackColor = Drawing.Color.MistyRose
+        End Select
+
     End Sub
 
     Protected Sub gridTask_CustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs) Handles gridTask.CustomCallback
-        Dim taskId = CInt(e.Parameters)
+        If e.Parameters.StartsWith("CompleteTask") Then
+            Dim taskId = CInt(e.Parameters.Split("|")(1))
 
-        Using Context As New DevAppEntities
-            Dim task = Context.TodoLists.Where(Function(t) t.ListId = taskId).SingleOrDefault
-            task.Status = TaskStatus.Completed
-            task.UpdateDate = DateTime.Now
-            Context.SaveChanges()
-        End Using
+            Using Context As New DevAppEntities
+                Dim task = Context.TodoLists.Where(Function(t) t.ListId = taskId).SingleOrDefault
+                task.Status = TaskStatus.Completed
+                task.UpdateDate = DateTime.Now
+                Context.SaveChanges()
+            End Using
+        End If
+
+        If e.Parameters.StartsWith("Priority") Then
+            Dim taskId = e.Parameters.Split("|")(1)
+            Dim priority = e.Parameters.Split("|")(2)
+
+            Using Context As New DevAppEntities
+                Dim task = Context.TodoLists.Where(Function(t) t.ListId = taskId).SingleOrDefault
+                If task IsNot Nothing Then
+                    task.Priority = priority
+                    Context.SaveChanges()
+                End If
+            End Using
+        End If
 
         BindData()
     End Sub

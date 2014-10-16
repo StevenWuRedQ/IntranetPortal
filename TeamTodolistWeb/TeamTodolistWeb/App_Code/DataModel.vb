@@ -22,5 +22,6 @@ Partial Public Class TodoList
     Public Property UpdateDate As Nullable(Of Date)
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
+    Public Property Priority As Nullable(Of Integer)
 
 End Class

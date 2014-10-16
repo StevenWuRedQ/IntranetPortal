@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DevAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DevAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TodoLists">
           <Key>
             <PropertyRef Name="ListId" />
@@ -17,6 +17,7 @@
           <Property Name="Comments" Type="nvarchar" MaxLength="1000" />
           <Property Name="Status" Type="int" />
           <Property Name="DueDate" Type="datetime" />
+          <Property Name="Priority" Type="int" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
@@ -24,8 +25,7 @@
         <EntityContainer Name="DevAppModelStoreContainer">
           <EntitySet Name="TodoLists" EntityType="Self.TodoLists" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DevAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -44,6 +44,7 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Priority" Type="Int32" />
         </EntityType>
         <EntityContainer Name="DevAppEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TodoLists" EntityType="Self.TodoList" />
@@ -57,6 +58,7 @@
           <EntitySetMapping Name="TodoLists">
             <EntityTypeMapping TypeName="DevAppModel.TodoList">
               <MappingFragment StoreEntitySet="TodoLists">
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
                 <ScalarProperty Name="ListId" ColumnName="ListId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
