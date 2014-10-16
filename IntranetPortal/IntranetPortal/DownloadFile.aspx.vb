@@ -13,6 +13,18 @@ Public Class DownloadFile
             End If
         End If
 
+        If Not String.IsNullOrEmpty(Request.QueryString("pdfUrl")) Then
+            Dim data = DocumentService.GetPDFContent(Request.QueryString("pdfUrl"))
+            Response.Clear()
+            Response.ClearHeaders()
+            Response.ContentType = "application/pdf"
+            Response.AddHeader("Content-Disposition", "attachment; filename=file.pdf")
+            'Response.AddHeader("Content-Disposition", String.Format("inline; filename=""{0}""", File.Name))
+            'Response.AddHeader("Content-Length", File.Size)
+            Response.BinaryWrite(data)
+            Response.[End]()
+        End If
+
         If Not String.IsNullOrEmpty(Request.QueryString("id")) Then
             ' Get the file id from the query string
             Dim id As Integer = Convert.ToInt16(Request.QueryString("id"))

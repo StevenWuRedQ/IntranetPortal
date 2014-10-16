@@ -95,7 +95,7 @@
             var ladfucntion = {
                 onScroll: function () {
                     var position = this.mcs.topPct;
-                    if (position > 90) {
+                    if (position > 90) {                        
                         gridLeads.NextPage();
                     }
                 }
@@ -277,7 +277,7 @@
             var ladfucntion = {
                 onScroll: function () {
                     var position = this.mcs.topPct;
-                    if (position > 95) {
+                    if (position > 95) {                    
                         gridLeads.NextPage();
                     }
                 }
@@ -618,7 +618,7 @@
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
                 EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
             <%--<SettingsPager Mode="ShowPager" PageSize="17" Position="Bottom" Summary-Visible="false" ShowDisabledButtons="false" NumericButtonCount="4"></SettingsPager>--%>
-            <SettingsPager Mode="EndlessPaging" PageSize="17"></SettingsPager>
+            <SettingsPager Mode="EndlessPaging" PageSize="16"></SettingsPager>
             <%--   <SettingsPager Mode="ShowAllRecords"></SettingsPager>--%>
             <Settings ShowColumnHeaders="False" VerticalScrollableHeight="767"></Settings>
             <SettingsEditing Mode="PopupEditForm"></SettingsEditing>

@@ -29,8 +29,6 @@
             var newCategory = sender.GetValue();
             gridFilesClient.PerformCallback("UpdateCategory|" + logId + "|" + newCategory + "|" + hfBBLEClient.Get("BBLE"));
         }
-
-
         // ]]> 
     </script>
 </head>
@@ -75,7 +73,8 @@
                     <table style="width:100%">
                         <tr>
                             <td>
-                                 <dx:ASPxComboBox runat="server" ID="cbCategory">
+                                 <dx:ASPxComboBox runat="server" ID="cbCategory" DropDownStyle="DropDown" NullText="Input New Category">
+                                     <Border BorderWidth="1" />
                                         <Items>
                                             <dx:ListEditItem Text="Financials" Value="Financials" />
                                             <dx:ListEditItem Text="Short Sale" Value="ShortSale" />
@@ -84,23 +83,23 @@
                                             <dx:ListEditItem Text="Eviction" Value="Eviction" />
                                             <dx:ListEditItem Text="Construction" Value="Construction" />
                                         </Items>
+                                     <ValidationSettings RequiredField-IsRequired="true"></ValidationSettings>
                                     </dx:ASPxComboBox>
                             </td>
                             <td  style="text-align: right">
-                                <dx:ASPxButton ID="btnUpload" runat="server" AutoPostBack="False" Text="Upload" ClientInstanceName="btnUpload" Width="100px" ClientEnabled="False" Style="margin: 0 auto;">
+                                <dx:ASPxButton ID="btnUpload" runat="server" AutoPostBack="False" Text="Upload" Visible="false"  Width="100px" ClientEnabled="False" Style="margin: 0 auto;">
                                     <ClientSideEvents Click="function(s, e) { uploader.Upload(); }" />
                                 </dx:ASPxButton>
-                                 <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Upload To Sharepoint" Width="100px" Style="margin: 0 auto;" OnClick="ASPxButton1_Click">
+                                 <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Upload To Sharepoint" Width="100px" Style="margin: 0 auto;" ClientInstanceName="btnUpload" ClientEnabled="False" OnClick="ASPxButton1_Click">
                                 </dx:ASPxButton>
                             </td>
                         </tr>
                     </table>
-
                 </td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <dx:ASPxGridView runat="server" Width="100%" ID="gridFiles" ClientInstanceName="gridFilesClient" OnCustomCallback="gridFiles_CustomCallback" KeyFieldName="FileID">
+                    <dx:ASPxGridView runat="server" Width="100%" ID="gridFiles" ClientInstanceName="gridFilesClient" OnCustomCallback="gridFiles_CustomCallback" KeyFieldName="FileID" Visible="false">
                         <Columns>
                             <dx:GridViewDataHyperLinkColumn FieldName="Name" Width="200px" Caption="File Name" VisibleIndex="1" ReadOnly="true">
                                 <DataItemTemplate>

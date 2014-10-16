@@ -5,6 +5,7 @@
         End Using
     End Function
 
+
     Public Shared Function GetUpcomingClosings() As List(Of ShortSaleCase)
         Return GetUrgentCases()
     End Function

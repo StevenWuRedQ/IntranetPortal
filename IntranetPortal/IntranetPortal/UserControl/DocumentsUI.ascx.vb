@@ -17,8 +17,9 @@ Public Class DocumentsUI
     Public Property LeadsName As String
 
     Sub BindFileList(bble As String)
-        BindFilesFromSharepoint(bble)
-        Return
+        'BindFilesFromSharepoint(bble)
+        'Return
+
 
         Using Context As New Entities
             Dim groups = (From file In Context.FileAttachments
@@ -43,5 +44,9 @@ Public Class DocumentsUI
     Public Sub BindFilesFromSharepoint(bble As String)
         datalistCategory.DataSource = DocumentService.GetFilesByBBLE(bble)
         datalistCategory.DataBind()
+    End Sub
+
+    Protected Sub cbpDocumentUI_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        BindFilesFromSharepoint(e.Parameter)
     End Sub
 End Class

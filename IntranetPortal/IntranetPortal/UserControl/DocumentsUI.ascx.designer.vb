@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class DocumentsUI
 
     '''<summary>
+    '''cbpDocumentUI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbpDocumentUI As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+
+    '''<summary>
     '''datalistCategory control.
     '''</summary>
     '''<remarks>
@@ -21,13 +30,4 @@ Partial Public Class DocumentsUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents datalistCategory As Global.System.Web.UI.WebControls.DataList
-
-    '''<summary>
-    '''ASPxPopupControl1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 End Class

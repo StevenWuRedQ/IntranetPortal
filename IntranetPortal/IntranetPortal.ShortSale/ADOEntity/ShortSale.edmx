@@ -150,6 +150,8 @@
           <Property Name="MailZip" Type="nchar" MaxLength="6" />
           <Property Name="Employed" Type="nvarchar" MaxLength="50" />
           <Property Name="EstateAttorney" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttorneyPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttorneyEmail" Type="nvarchar" MaxLength="50" />
           <Property Name="Bankruptcy" Type="bit" />
           <Property Name="Bankaccount" Type="bit" />
           <Property Name="TaxReturn" Type="bit" />
@@ -352,6 +354,8 @@
           <Property Name="ActingAsSellerAttorney" Type="Boolean" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="AttorneyPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AttorneyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyTitle">
           <Key>
@@ -558,6 +562,8 @@
           <EntitySetMapping Name="PropertyOwners">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyOwner">
               <MappingFragment StoreEntitySet="PropertyOwners">
+                <ScalarProperty Name="AttorneyEmail" ColumnName="AttorneyEmail" />
+                <ScalarProperty Name="AttorneyPhone" ColumnName="AttorneyPhone" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="ActingAsSellerAttorney" ColumnName="ActingAsSellerAttorney" />

@@ -311,7 +311,7 @@
                                             </a>
                                         </li>
                                         <li class="short_sale_head_tab">
-                                            <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="ConnectToOneDrive()">
+                                            <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
                                                 <i class="fa fa-file head_tab_icon_padding"></i>
                                                 <div class="font_size_bold">Documents</div>
                                             </a>

@@ -53,7 +53,10 @@
                 Context.SaveChanges()
             End If
         End Using
+
         LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} share lead to {1}.", User.Identity.Name, cbEmps.Text), hfbble.Value, LeadsActivityLog.LogCategory.Status.ToString)
+        UserMessage.AddNewMessage(cbEmps.Text, "You have a new shared leads.", String.Format("{0} share a lead to you.", User.Identity.Name, cbEmps.Text), hfbble.Value)
+
         BindShareList(hfbble.Value)
     End Sub
 

@@ -31,6 +31,18 @@ Public Class DocumentService
         End Using
     End Function
 
+    Public Shared Function GetPDFContent(fileUrl As String) As Byte()
+        Using ClientContext = GetClientContext()
+            Dim f = File.OpenBinaryDirect(ClientContext, fileUrl)
+            Dim reader = New IO.BinaryReader(f.Stream)
+
+            Using ms As New IO.MemoryStream()
+                f.Stream.CopyTo(ms)
+                Return ms.ToArray
+            End Using
+        End Using
+    End Function
+
     Public Shared Function GetPreviewContentLink(uniqueId As String) As String
         Using ClientContext = GetClientContext()
             Dim list = ClientContext.Web.Lists.GetByTitle(DocumentLibraryTitle)
@@ -43,15 +55,18 @@ Public Class DocumentService
 
             If items.Count = 1 Then
                 Dim link = GetAnonymousViewLink(ClientContext, items(0))
+                Dim file = items(0).File
+                ClientContext.Load(file, Function(f As File) f.ServerRelativeUrl, Function(f As File) f.Name)
+                ClientContext.ExecuteQuery()
                 If String.IsNullOrEmpty(link) Then
-                    Dim file = items(0).File
-                    ClientContext.Load(file, Function(f As File) f.ServerRelativeUrl)
-                    ClientContext.ExecuteQuery()
-
                     CreateSharingLink(ClientContext, file.ServerRelativeUrl)
                     link = GetAnonymousViewLink(ClientContext, items(0))
                 End If
 
+                If file.Name.EndsWith("pdf", StringComparison.OrdinalIgnoreCase) Then
+                    Dim fileLink = String.Format("/DownloadFile.aspx?pdfUrl={0}", file.ServerRelativeUrl)
+                    link = "/pdfViewer/web/viewer.html?file=" + HttpContext.Current.Server.UrlEncode(fileLink)
+                End If
                 Return link
             End If
 

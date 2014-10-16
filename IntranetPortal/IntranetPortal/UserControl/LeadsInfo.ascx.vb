@@ -97,7 +97,7 @@ Public Class LeadsInfo1
                 'End If
 
                 'Bind files info
-                DocumentsUI.BindFileList(bble)
+                'DocumentsUI.BindFileList(bble)
                 DocumentsUI.LeadsName = leadsinfodata.PropertyAddress
 
                 'Bind Owner info
