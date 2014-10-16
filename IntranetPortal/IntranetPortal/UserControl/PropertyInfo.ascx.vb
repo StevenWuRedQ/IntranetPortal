@@ -72,4 +72,53 @@
             End Using
         End If
     End Sub
+
+    Protected Sub cbpMortgageData_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        If e.Parameter = "Save" Then
+            Dim bble = hfBBLE.Value
+
+            Using Context As New Entities
+                Dim mort = Context.LeadsMortgageDatas.Find(bble)
+
+                If mort Is Nothing Then
+                    mort = New LeadsMortgageData
+                    mort.BBLE = bble
+                    mort.C1stFannie = cb1stFannie.Checked
+                    mort.C1stFHA = cb1stFHA.Checked
+                    mort.C1stServicer = txt1stServicer.Value
+
+                    mort.C2ndFannie = cb2ndFannie.Checked
+                    mort.C2ndFHA = cb2ndFHA.Checked
+                    mort.C2ndServicer = txt2ndServicer.Value
+
+                    mort.C3rdFannie = cb3rdFannie.Checked
+                    mort.C3rdFHA = cb3rdFHA.Checked
+                    mort.C3rdServicer = txt3rdServicer.Value
+
+                    mort.CreateBy = Page.User.Identity.Name
+                    mort.CreateDate = DateTime.Now
+
+                    Context.LeadsMortgageDatas.Add(mort)
+                Else
+                    mort.C1stFannie = cb1stFannie.Checked
+                    mort.C1stFHA = cb1stFHA.Checked
+                    mort.C1stServicer = txt1stServicer.Value
+
+                    mort.C2ndFannie = cb2ndFannie.Checked
+                    mort.C2ndFHA = cb2ndFHA.Checked
+                    mort.C2ndServicer = txt2ndServicer.Value
+
+                    mort.C3rdFannie = cb3rdFannie.Checked
+                    mort.C3rdFHA = cb3rdFHA.Checked
+                    mort.C3rdServicer = txt3rdServicer.Value
+                End If
+
+                Context.SaveChanges()
+            End Using
+
+            If LeadsInfoData.BBLE Is Nothing AndAlso hfBBLE.Value IsNot Nothing Then
+                LeadsInfoData = LeadsInfo.GetInstance(hfBBLE.Value)
+            End If
+        End If
+    End Sub
 End Class

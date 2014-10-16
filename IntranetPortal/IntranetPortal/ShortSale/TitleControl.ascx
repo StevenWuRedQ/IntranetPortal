@@ -257,11 +257,10 @@
                                         <div class="clearence_list_index">
                                             <%= i%>
                                         </div>
-
                                         <div class="clearence_list_right">
                                             <div class="clearence_list_text">
                                                 <div class="clearence_list_title">
-                                                    Issue <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" style="font-size: 14px" title="Delete" onclick="callbackClearence.PerformCallback('Delete|<%= clearence.ClearenceId%>|' + caseId)"></i><i class="fa fa-check  color_blue_edit collapse_btn" style="font-size: 14px" title="Clear" onclick="callbackClearence.PerformCallback('Clear|<%= clearence.ClearenceId%>|' + caseId)"></i>
+                                                    Issue <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" style="font-size: 14px" title="Delete" onclick="callbackClearence.PerformCallback('Delete|<%= clearence.ClearenceId%>|' + caseId)"></i><i class="fa fa-check  color_blue_edit collapse_btn tooltip-examples" style="font-size: 14px" title="Mark as Complete" onclick="callbackClearence.PerformCallback('Clear|<%= clearence.ClearenceId%>|' + caseId)"></i>
                                                 </div>
                                                 <div class="clearence_list_text18" <%= If(Not String.IsNullOrEmpty(clearence.Status) AndAlso clearence.Status = IntranetPortal.ShortSale.TitleClearence.ClearenceStatus.Cleared, "style='text-decoration:line-through;'", "")%>>
                                                     <%= clearence.Issue%>

@@ -100,8 +100,7 @@
                     }
                 }
             }
-
-
+            
             if (is_list) {
                 $(this).mCustomScrollbar(
                     {

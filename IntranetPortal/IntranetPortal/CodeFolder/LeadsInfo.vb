@@ -81,6 +81,25 @@
         End Get
     End Property
 
+    Private _mortgageData As LeadsMortgageData
+    Public ReadOnly Property MortgageData As LeadsMortgageData
+        Get
+            If _mortgageData Is Nothing Then
+                Using context As New Entities
+                    Dim tmpMort = context.LeadsMortgageDatas.Find(BBLE)
+
+                    If tmpMort IsNot Nothing Then
+                        _mortgageData = tmpMort
+                    Else
+                        _mortgageData = New LeadsMortgageData
+                    End If
+                End Using
+            End If
+
+            Return _mortgageData
+        End Get
+    End Property
+
     Public Property HomeOwners As List(Of HomeOwner)
     Public ReadOnly Property LeadsName As String
         Get

@@ -35,8 +35,7 @@
         aspxAddLeadsComments.Hide();
     }
 
-    function ShowDiv()
-    {
+    function ShowDiv() {
         var display = document.getElementById("divOtherProperties").style.display;
 
         if (display == "block") {
@@ -114,12 +113,12 @@
                         <% If LeadsInfoData.OtherProperties IsNot Nothing AndAlso LeadsInfoData.OtherProperties.Count > 0 Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8;height:inherit","height:inherit")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
-                            <span class="note_text" style="cursor:pointer" onclick="ShowDiv()" >Other properties of current owner: </span>
-                            <div id="divOtherProperties" style="display:block">
-                            <% For Each li In LeadsInfoData.OtherProperties%>
-                            <i class="note_img"></i><a href="#" style="font-size: 14px" onclick="ViewLeads(<%= li.BBLE %>);"><%= li.LeadsName %></a><br />
-                            <%Next%>
-                                </div>
+                            <span class="note_text" style="cursor: pointer" onclick="ShowDiv()">Other properties of current owner: </span>
+                            <div id="divOtherProperties" style="display: block">
+                                <% For Each li In LeadsInfoData.OtherProperties%>
+                                <i class="note_img"></i><a href="#" style="font-size: 14px" onclick="ViewLeads(<%= li.BBLE %>);"><%= li.LeadsName %></a><br />
+                                <%Next%>
+                            </div>
                         </div>
                         <% i += 1%>
                         <% End If%>
@@ -261,7 +260,7 @@
             <%----end line 4----%>
 
             <%-----line 5-----%>
-            
+
             <div class="form_div_node form_div_node_line_margin">
                 <span class="form_input_title">Property Class</span>
                 <input class="text_input" value="<%=LeadsInfoData.PropertyClassCode%>" />
@@ -292,7 +291,7 @@
                 <input class="text_input" value="<%= LeadsInfoData.ActualFar%>" />
             </div>
             <%--remove tax class--%>
-           <%-- <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+            <%-- <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                 <span class="form_input_title">Property Class</span>
 
                 <input class="text_input" value="<%=LeadsInfoData.TaxClass %>" />
@@ -314,9 +313,9 @@
         <%-------end-----%>
         <dx:ASPxCallbackPanel runat="server" ID="callPanelReferrel" ClientInstanceName="callPanelClientReferrel" OnCallback="callPanelReferrel_Callback">
             <PanelCollection>
-                <dx:PanelContent>                    
+                <dx:PanelContent>
                     <div style="margin: 20px;" class="clearfix">
-                        <div class="form_head" style="margin-top: 40px;">REFERRAL <i class="fa fa-save  color_blue_edit collapse_btn" title="Save Referral" onclick="callPanelClientReferrel.PerformCallback('Save')" ></i></div>
+                        <div class="form_head" style="margin-top: 40px;">REFERRAL <i class="fa fa-save  color_blue_edit collapse_btn" title="Save Referral" onclick="callPanelClientReferrel.PerformCallback('Save')"></i></div>
 
                         <%--line 1--%>
                         <div class="form_div_node form_div_node_line_margin">
@@ -326,7 +325,7 @@
 
                         <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                             <span class="form_input_title">Phone No.</span>
-                            <input class="text_input" value="<%# LeadsInfoData.Referrel.PhoneNo %>"  runat="server" id="txtReferrelPhone" />
+                            <input class="text_input" value="<%# LeadsInfoData.Referrel.PhoneNo %>" runat="server" id="txtReferrelPhone" />
                         </div>
 
                         <div class="form_div_node form_div_node_margin form_div_node_line_margin">
@@ -351,132 +350,134 @@
             <%----end line ----%>
         </div>
 
-        <%--Mortgage form--%>
-        <div style="margin: 20px;" class="clearfix">
-            <div class="form_head" style="margin-top: 40px;">MORTGAGE AND VIOLATIONS</div>
+        <dx:ASPxCallbackPanel runat="server" ID="cbpMortgageData" ClientInstanceName="callbackPanelMortgage" OnCallback="cbpMortgageData_Callback">
+            <PanelCollection>
+                <dx:PanelContent>
+                    <%--Mortgage form--%>
+                    <div style="margin: 20px;" class="clearfix">
+                        <div class="form_head" style="margin-top: 40px;">MORTGAGE AND VIOLATIONS <i class="fa fa-save  color_blue_edit collapse_btn" title="Save Mortgage" onclick="callbackPanelMortgage.PerformCallback('Save')"></i></div>
 
-            <%--line 1--%>
-            <div class="form_div_node form_div_node_line_margin">
-                <span class="form_input_title">1st Mortgage</span>
-                <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.C1stMotgrAmt%>" />
-            </div>
+                        <%--line 1--%>
+                        <div class="form_div_node form_div_node_line_margin">
+                            <span class="form_input_title">1st Mortgage</span>
+                            <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.C1stMotgrAmt%>" />
+                        </div>
 
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
-                <span class="form_input_title"></span>
-                <br />
+                        <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
+                            <span class="form_input_title"></span>
+                            <br />
 
-                <%--class="circle-radio-boxes"--%>
-                <input type="checkbox" id="sex" name="sex" value="Fannie" />
-                <label for="sex" class=" form_div_radio_group">
-                    <span class="form_span_group_text">Fannie</span>
-                </label>
-                <input type="checkbox" id="sexf" name="sex" value="FHA" style="margin-left: 66px" />
-                <label for="sexf" class=" form_div_radio_group form_div_node_margin">
-                    <span class="form_span_group_text">FHA</span>
-                </label>
-            </div>
+                            <%--class="circle-radio-boxes"--%>
+                            <input type="checkbox" id="cb1stFannie" value="Fannie" runat="server" checked='<%# LeadsInfoData.MortgageData.C1stFannie.HasValue andalso LeadsInfoData.MortgageData.C1stFannie %>' />
+                            <label for="<%= cb1stFannie.ClientID %>" class=" form_div_radio_group">
+                                <span class="form_span_group_text">Fannie</span>
+                            </label>
+                            <input type="checkbox" id="cb1stFHA"   style="margin-left: 66px" runat="server" checked='<%# LeadsInfoData.MortgageData.C1stFHA.HasValue andalso LeadsInfoData.MortgageData.C1stFHA %>' />
+                            <label for="<%= cb1stFHA.ClientID %>" class=" form_div_radio_group form_div_node_margin">
+                                <span class="form_span_group_text">FHA</span>
+                            </label>
+                        </div>
 
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Servicer</span>
+                        <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                            <span class="form_input_title">Servicer</span>
+                            <input class="text_input" value='<%# LeadsInfoData.MortgageData.C1stServicer %>' id="txt1stServicer" runat="server"/>
+                        </div>
+                        <%--end line --%>
+                        <%--line 2--%>
 
-                <input class="text_input" value=" " />
-            </div>
-            <%--end line --%>
-            <%--line 2--%>
+                        <div class="form_div_node form_div_node_line_margin">
+                            <span class="form_input_title">2nd Mortgage</span>
+                            <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.C2ndMotgrAmt%>" />
+                        </div>
 
-            <div class="form_div_node form_div_node_line_margin">
-                <span class="form_input_title">2nd Mortgage</span>
-                <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.C2ndMotgrAmt%>" />
-            </div>
+                        <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
+                            <span class="form_input_title"></span>
+                            <br />
 
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
-                <span class="form_input_title"></span>
-                <br />
+                            <%--class="circle-radio-boxes"--%>
+                            <input type="checkbox" id="cb2ndFannie" name="cb2ndFannie" value="Fannie" runat="server" checked='<%# LeadsInfoData.MortgageData.C2ndFannie.HasValue andalso LeadsInfoData.MortgageData.C2ndFannie %>' />
+                            <label for="<%= cb2ndFannie.ClientID %>" class=" form_div_radio_group">
+                                <span class="form_span_group_text">Fannie</span>
+                            </label>
+                            <input type="checkbox" id="cb2ndFHA" name="cb2ndFHA" value="FHA" style="margin-left: 66px" runat="server" checked='<%# LeadsInfoData.MortgageData.C2ndFHA.HasValue andalso LeadsInfoData.MortgageData.C2ndFHA %>' />
+                            <label for="<%= cb2ndFHA.ClientID %>" class=" form_div_radio_group form_div_node_margin">
+                                <span class="form_span_group_text">FHA</span>
+                            </label>
+                        </div>
 
-                <%--class="circle-radio-boxes"--%>
-                <input type="checkbox" id="sex1" name="sex" value="Fannie" />
-                <label for="sex1" class=" form_div_radio_group">
-                    <span class="form_span_group_text">Fannie</span>
-                </label>
-                <input type="checkbox" id="sexf1" name="sex" value="FHA" style="margin-left: 66px" />
-                <label for="sexf1" class=" form_div_radio_group form_div_node_margin">
-                    <span class="form_span_group_text">FHA</span>
-                </label>
-            </div>
+                        <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                            <span class="form_input_title">Servicer</span>
+                            <input class="text_input" value="<%# LeadsInfoData.MortgageData.C2ndServicer %>" id="txt2ndServicer" runat="server" />
+                        </div>
 
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Servicer</span>
+                        <%----end line ----%>
 
-                <input class="text_input" value=" " />
-            </div>
+                        <%--line 3--%>
 
-            <%----end line ----%>
+                        <div class="form_div_node form_div_node_line_margin">
+                            <span class="form_input_title">3nd Mortgage</span>
+                            <input class="text_input" value=" " />
+                        </div>
 
-            <%--line 3--%>
+                        <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
+                            <span class="form_input_title"></span>
+                            <br />
 
-            <div class="form_div_node form_div_node_line_margin">
-                <span class="form_input_title">3nd Mortgage</span>
-                <input class="text_input" value=" " />
-            </div>
+                            <%--class="circle-radio-boxes"--%>
+                            <input type="checkbox" id="cb3rdFannie" name="cb3rdFannie" value="Fannie" runat="server" checked='<%# LeadsInfoData.MortgageData.C3rdFannie.HasValue andalso LeadsInfoData.MortgageData.C3rdFannie %>' />
+                            <label for="<%= cb3rdFannie.ClientID %>" class=" form_div_radio_group">
+                                <span class="form_span_group_text">Fannie</span>
+                            </label>
+                            <input type="checkbox" id="cb3rdFHA" name="cb3rdFHA" value="" style="margin-left: 66px" runat="server" checked='<%# LeadsInfoData.MortgageData.C3rdFHA.HasValue AndAlso LeadsInfoData.MortgageData.C3rdFHA%>'  />
+                            <label for="<%= cb3rdFHA.ClientID %>" class=" form_div_radio_group form_div_node_margin">
+                                <span class="form_span_group_text">FHA</span>
+                            </label>
+                        </div>
 
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
-                <span class="form_input_title"></span>
-                <br />
+                        <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                            <span class="form_input_title">Servicer</span>
+                            <input class="text_input" value="<%# LeadsInfoData.MortgageData.C3rdServicer%>" id="txt3rdServicer" runat="server" />
+                        </div>
 
-                <%--class="circle-radio-boxes"--%>
-                <input type="checkbox" id="sex2" name="sex" value="Fannie" />
-                <label for="sex2" class=" form_div_radio_group">
-                    <span class="form_span_group_text">Fannie</span>
-                </label>
-                <input type="checkbox" id="sexf2" name="sex" value="FHA" style="margin-left: 66px" />
-                <label for="sexf2" class=" form_div_radio_group form_div_node_margin">
-                    <span class="form_span_group_text">FHA</span>
-                </label>
-            </div>
+                        <%----end line ----%>
+                        <div style="width: 230px" class="clearfix">
+                            <%--line 4--%>
 
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Servicer</span>
+                            <div class="form_div_node form_div_node_line_margin form_div_node_small">
+                                <span class="form_input_title">Taxes</span>
+                                <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.TaxesAmt%>" />
+                            </div>
+                            
+                            <%----end line ----%>
+                            <%--line 5--%>
 
-                <input class="text_input" value=" " />
-            </div>
+                            <div class="form_div_node form_div_node_line_margin form_div_node_small">
+                                <span class="form_input_title">water</span>
+                                <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.WaterAmt%>" />
+                            </div>
+                            <%----end line ----%>
+                            <%--line 6--%>
 
-            <%----end line ----%>
-            <div style="width: 230px" class="clearfix">
-                <%--line 4--%>
+                            <div class="form_div_node form_div_node_line_margin form_div_node_small">
+                                <span class="form_input_title">ecb/dob</span>
+                                <input class="text_input" value="<%= LeadsInfoData.ViolationAmount %>" />
+                            </div>
+                            <%--line 7--%>
 
-                <div class="form_div_node form_div_node_line_margin form_div_node_small">
-                    <span class="form_input_title">Taxes</span>
-                    <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.TaxesAmt%>" />
-                </div>
+                            <div class="form_div_node form_div_node_line_margin form_div_node_small">
+                                <span class="form_input_title" style="color: #ff400d">Total debt</span>
+                                <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.TotalDebt %>" />
+                            </div>
+                            <%----end line ----%>
+                        </div>
 
-
-                <%----end line ----%>
-                <%--line 5--%>
-
-                <div class="form_div_node form_div_node_line_margin form_div_node_small">
-                    <span class="form_input_title">water</span>
-                    <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.WaterAmt%>" />
-                </div>
-                <%----end line ----%>
-                <%--line 6--%>
-
-                <div class="form_div_node form_div_node_line_margin form_div_node_small">
-                    <span class="form_input_title">ecb/dob</span>
-                    <input class="text_input" value="<%= LeadsInfoData.ViolationAmount %>" />
-                </div>
-                <%--line 7--%>
-
-                <div class="form_div_node form_div_node_line_margin form_div_node_small">
-                    <span class="form_input_title" style="color: #ff400d">Total debt</span>
-                    <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.TotalDebt %>" />
-                </div>
-
-                <%----end line ----%>
-            </div>
-
-            <%----end line ----%>
-        </div>
-        <%-------end-----%>
+                        <%----end line ----%>
+                    </div>
+                    <%-------end-----%>
+                </dx:PanelContent>
+            </PanelCollection>
+            <ClientSideEvents EndCallback="function(s,e){alert('Saved.');}" />
+        </dx:ASPxCallbackPanel>       
 
         <%--Liens table--%>
         <div style="margin: 20px;" class="clearfix">
