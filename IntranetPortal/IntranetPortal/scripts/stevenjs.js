@@ -499,7 +499,7 @@ function prepareArrayDivs(is_save) {
         var add_div = elem;
         /*when there is no data new a data */
         if (data_value.length == 0) {
-            data_value[0].
+            //data_value[0].
             expland_div(addCloneTo(elem, elem, 0));
         }
         for (var i = 0; i < data_value.length; i++) {
