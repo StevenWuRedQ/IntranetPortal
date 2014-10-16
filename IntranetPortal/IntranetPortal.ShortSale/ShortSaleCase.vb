@@ -228,7 +228,7 @@
                     If Not opt.CaseId.HasValue Then
                         opt.CaseId = CaseId
                     End If
-
+                    opt.Save()
 
                 Next
 
