@@ -1,16 +1,40 @@
 ﻿function clickCollapse(e, id) {
+   
+    var buttonClassName = e.className;
+    var openClass = "-minus";
+    var isOpen = buttonClassName.indexOf(openClass) > 0;
+
+    collapse_doc_list($(e).parents(".doc_list_section"), isOpen);
+}
+
+function collapse_doc_list(div ,isOpen)
+{
+    var e = div.find(".collapse_btn_e");
+    if (e.length == 0)
+    {
+        return;
+    }
+    e = e[0];
     var buttonClassName = e.className;
     var openClass = "-minus";
     var clossClass = "-plus";
 
-    var isOpen = buttonClassName.indexOf(openClass) > 0;
+    
     var toSwich = !isOpen;
     var changeToClass = isOpen ? buttonClassName.replace(openClass, clossClass) : buttonClassName.replace(clossClass, openClass);
     e.className = changeToClass;
 
-    $("#" + id).css("display", toSwich ? "initial" : "none");
+    div.find(".doc_collapse_div").css("display", toSwich ? "block" : "none");
 }
 
+function collapse_all(collapse_all)
+{
+    $(".doc_list_section").each(function(ind)
+    {
+        collapse_doc_list($(this), collapse_all);
+    })
+    
+}
 var wx_deubg = true;
 /*band data in short Sale*/
 function d_alert(s) {

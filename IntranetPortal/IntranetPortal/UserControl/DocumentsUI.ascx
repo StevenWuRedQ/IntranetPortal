@@ -26,7 +26,41 @@
             isLoaded = true;
         }
     }
+    function OnFilePopUpClick(s, e) {
+
+
+        if (e.item.index == 0) {
+           
+        } else if (e.item.index == 1) {
+            /*download*/
+            
+        }
+        else {
+          
+        }
+    }
+    function clickFileLink(s, e) {
+        
+        AspFilePopupMenu.ShowAtElement(s.GetMainElement());
+    }
 </script>
+
+<dx:ASPxPopupMenu ID="ASPxPopupMenu11" runat="server" ClientInstanceName="AspFilePopupMenu"
+    PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
+    PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+    ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+    <ItemStyle Paddings-PaddingLeft="20px" />
+    <Items>
+        <dx:MenuItem Text="Preview" Name="Preview">
+        </dx:MenuItem>
+        <dx:MenuItem Text="Download" Name="Download">
+        </dx:MenuItem>
+        <dx:MenuItem Text="Preview History" Name="History">
+        </dx:MenuItem>
+    </Items>
+
+    <ClientSideEvents ItemClick="OnFilePopUpClick" />
+</dx:ASPxPopupMenu>
 
 <div style="color: #999ca1;">
     <div style="padding: 35px 20px 35px 20px;" class="border_under_line">
@@ -38,20 +72,21 @@
             </div>
             <div style="padding-left: 39px;" class="clearfix">
                 <span style="font-size: 14px;"><%= LeadsName %></span>
-                <span class="color_blue expand_button" style="padding-right: 25px">Collapse All</span>
-                <span class="color_blue expand_button">Expand All&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span class="color_blue expand_button" style="padding-right: 25px" onclick="collapse_all(true)">Collapse All</span>
+                <span class="color_blue expand_button"  onclick="collapse_all(false)">Expand All&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             </div>
         </div>
     </div>
     <dx:ASPxCallbackPanel runat="server" ID="cbpDocumentUI" ClientInstanceName="cbpDocumentUI" OnCallback="cbpDocumentUI_Callback">
         <PanelCollection>
             <dx:PanelContent>
-                <asp:DataList runat="server" ID="datalistCategory" RepeatColumns="2" RepeatDirection="Horizontal" Width="100%">
+                <asp:DataList runat="server" ID="datalistCategory" RepeatColumns="2" RepeatDirection="Horizontal" Width="100%" ItemStyle-VerticalAlign="Top">
                     <ItemTemplate>
-                        <div class="doc_list_section">
+                        <%--border_right add line right--%>
+                        <div class="doc_list_section ">
                             <div id="default-example" data-collapse="">
-                                <h3 class="doc_list_title  color_balck"><%# Eval("Key")%> &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue" onclick="clickCollapse(this, '<%# Eval("Key")%>')"></i> </h3>
-                                <div id="<%# Eval("Key")%>">
+                                <h3 class="doc_list_title  color_balck"><%# Eval("Key")%> &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue collapse_btn_e" onclick="clickCollapse(this, '<%# Eval("Key")%>')"></i> </h3>
+                                <div class="doc_collapse_div">
 
                                     <%--<h4><%# Eval("Key")%></h4>--%>
                                     <asp:Repeater runat="server" ID="rptFiles">
@@ -60,13 +95,14 @@
                                             <%--                <tr onclick="PreviewDocument('<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>', '<%# Eval("ContentType")%>');" style="cursor:pointer" onmouseover="this.bgColor = '#D1DEFB';" onmouseout="this.bgColor = '';">--%>
 
                                             <div class="clearfix">
-                                                <input type="checkbox" name="vehicle" value="Bike" id="<%# String.Format("doc_list_id_{0}", Eval("FileID"))%>" />
-                                                <label class="doc_list_checks check_margin" for='<%# String.Format("doc_list_id_{0}", Eval("FileID"))%>'>
-                                                    <span class="color_balck">
-                                                        <dx:ASPxHyperLink runat="server" NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}&spFile={1}", Eval("FileID"), Eval("Description"))%>' Text='<%# Eval("Name")%>' Target="_blank"></dx:ASPxHyperLink>
+                                                <input type="checkbox" name="vehicle" value="Bike" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
+                                                <label class="doc_list_checks check_margin" for='<%# String.Format("doc_list_id_{0}", Eval("Description"))%>'>
+                                                    <span class="color_balck ">
+                                                         <%-- NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}&spFile={1}", Eval("FileID"), Eval("Description"))%>' Text='<%# Eval("Name")%>'--%> 
+                                                        <dx:ASPxHyperLink runat="server" CssClass="doc_file_name" ClientSideEvents-Click="clickFileLink" Text='<%# Eval("Name")%>'  Target="_blank"></dx:ASPxHyperLink>
                                                     </span>
                                                     <span class="checks_data_text">
-                                                        <dx:ASPxLabel runat="server" Text='<%# String.Format("{0:g}", Eval("CreateDate")) %>'></dx:ASPxLabel>
+                                                        <dx:ASPxLabel runat="server" Text='<%# String.Format("{0:MMM d, yyyy}", Eval("CreateDate"))%>'></dx:ASPxLabel>
                                                     </span>
                                                 </label>
                                             </div>
@@ -84,7 +120,9 @@
                                     </td>
                                 </tr>--%>
                                         </ItemTemplate>
+                                        
                                     </asp:Repeater>
+                                    
                                 </div>
                             </div>
                         </div>

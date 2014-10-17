@@ -982,6 +982,7 @@ i.with_circle {
     float: right;
     font-size: 12px;
     font-weight: 400;
+    cursor:pointer;
 }
 
 /* collapse css*/
@@ -1138,8 +1139,16 @@ pre#event-log {
     margin-top: 0px;
     margin-bottom: 0px;
     text-transform: uppercase;
+    font-weight:900;
+    font-size:18px;
+    color:#b1b2b7;
 }
-
+.doc_file_name
+{
+    font-size:16px;
+    color:#2e2f31;
+    
+}
 .border_right {
     border-right: 1px solid #dde0e7;
 }
@@ -1815,4 +1824,8 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 .ss_control_btn
 {
     display:none !important;
+}
+.collapse_btn_e
+{
+    cursor:pointer;
 }

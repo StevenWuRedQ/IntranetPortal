@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class DocumentsUI
 
     '''<summary>
+    '''ASPxPopupMenu11 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupMenu11 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+
+    '''<summary>
     '''cbpDocumentUI control.
     '''</summary>
     '''<remarks>
