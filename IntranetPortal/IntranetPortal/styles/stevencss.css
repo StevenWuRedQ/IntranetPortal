@@ -291,14 +291,14 @@ i[title]:hover:after {
     background: transparent !important;
     color: white !important;
     border: 0px !important;
-    outline:none !important;
+    outline: none !important;
 }
 
     .tab_button_a:active {
         color: white !important;
         background: #e63000 !important;
     }
-   
+
 .short_sale_head_tab:hover {
     background: #e63000;
 }
@@ -982,7 +982,7 @@ i.with_circle {
     float: right;
     font-size: 12px;
     font-weight: 400;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 /* collapse css*/
@@ -1139,29 +1139,30 @@ pre#event-log {
     margin-top: 0px;
     margin-bottom: 0px;
     text-transform: uppercase;
-    font-weight:900;
-    font-size:18px;
-    color:#b1b2b7;
+    font-weight: 900;
+    font-size: 18px;
+    color: #b1b2b7;
 }
-.doc_file_name
-{
-    font-size:16px;
-    color:#2e2f31;
-    
+
+.doc_file_name {
+    font-size: 16px;
+    color: #2e2f31;
 }
+
 .border_right {
     border-right: 1px solid #dde0e7;
 }
 
 .doc_list_checks {
+    margin-top:0px !important;
     width: 290px;
     padding: 10px;
     font-weight: normal;
 }
 
-    .doc_list_checks:hover {
+.doc_list_checks:hover {
         background: #f0f2f6;
-    }
+}
 
 .font_16 {
     font-size: 16px;
@@ -1757,7 +1758,6 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
     font-size: 14px !important;
     margin-top: -5px !important;
     padding: 15px 0 0;
-  
 }
 
 .overview_tabs {
@@ -1817,15 +1817,14 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 
 .ss_email {
 }
-.ss_phone
-{
 
+.ss_phone {
 }
-.ss_control_btn
-{
-    display:none !important;
+
+.ss_control_btn {
+    display: none !important;
 }
-.collapse_btn_e
-{
-    cursor:pointer;
+
+.collapse_btn_e {
+    cursor: pointer;
 }

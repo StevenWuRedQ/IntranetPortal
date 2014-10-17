@@ -542,11 +542,9 @@
                                                                 }" />
                                                                 </dx:ASPxButton>
                                                             </div>
-
                                                         </dx:PopupControlContentControl>
                                                     </ContentCollection>
                                                 </dx:ASPxPopupControl>
-
                                             </div>
                                         </dx:SplitterContentControl>
                                     </ContentCollection>
@@ -577,7 +575,7 @@
                                                     <script type="text/javascript">
                                                         function ShowSearchLeadsInfo(bble) {
                                                             var url = '/ViewLeadsInfo.aspx?id=' + bble;
-                                                            window.open(url, 'View Leads Info', 'Width=1350px,Height=930px');
+                                                            window.open(url, 'View Leads Info ' + bble , 'Width=1350px,Height=930px');
                                                         }
                                                     </script>
                                                     <%--<div style="overflow-x:scroll;overflow-y:scroll;max-height:900px;">--%>

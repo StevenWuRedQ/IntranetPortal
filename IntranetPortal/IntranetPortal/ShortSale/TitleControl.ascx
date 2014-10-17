@@ -306,8 +306,7 @@
                                                 </table>
                                             </div>
                                             <% End If%>
-
-
+                                            
                                             <div class="clearence_list_text">
                                                 <div class="clearence_list_title">
                                                     notes <i class="fa fa-plus-circle note_img tooltip-examples ss_control_btn" title="Add Notes" style="color: #3993c1; cursor: pointer" onclick='AddNotes("<%= clearence.ClearenceId%>", this)'></i>
@@ -472,15 +471,16 @@
                                     Company Name
                                 </div>
                                 <div class="clearence_list_text14  color_blue_edit">
-                                    <input class="ss_form_input" value="" runat="server" id="Text1">
+                                    <input class="ss_form_input" value="" runat="server" id="txtCompanyName">
                                 </div>
                             </td>
                             <td class="clearence_table_td">
                                 <div class="clearence_list_title">
                                     Amounts
                                 </div>
-                                <div class="clearence_list_text14  color_blue_edit">
-                                    <input class="ss_form_input" value="" runat="server" id="txtAmount">
+                                <div class="clearence_list_text14  color_blue_edit">                                  
+                                    <dx:ASPxTextBox runat="server" ID="txtAmount" CssClass="ss_form_input" Native="true" DisplayFormatString="c2">
+                                 </dx:ASPxTextBox>
                                 </div>
                             </td>
 
@@ -489,7 +489,6 @@
                     </table>
                 </div>
             </div>
-
         </dx:PopupControlContentControl>
     </ContentCollection>
     <FooterContentTemplate>
@@ -517,7 +516,6 @@
                                 <ClientSideEvents Click="function(s,e){aspxAddNotes.PerformCallback(tmpClearenceId);}" />
                             </dx:ASPxButton>
                         </div>
-
                     </td>
                 </tr>
             </table>

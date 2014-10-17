@@ -27,20 +27,28 @@
         }
     }
     function OnFilePopUpClick(s, e) {
-
+        if (tmpFileId == null)
+            return;
 
         if (e.item.index == 0) {
-           
+            NavigateUrl("/DownloadFile.aspx?spFile=" + tmpFileId);
         } else if (e.item.index == 1) {
             /*download*/
-            
+            NavigateUrl("/DownloadFile.aspx?spFile=" + tmpFileId);
         }
         else {
           
         }
     }
-    function clickFileLink(s, e) {
-        
+
+    function NavigateUrl(url)
+    {
+        window.open(url, '_blank');
+    }
+
+    var tmpFileId = null;
+    function clickFileLink(s, docId) {
+        tmpFileId = docId;
         AspFilePopupMenu.ShowAtElement(s.GetMainElement());
     }
 </script>
@@ -80,17 +88,15 @@
     <dx:ASPxCallbackPanel runat="server" ID="cbpDocumentUI" ClientInstanceName="cbpDocumentUI" OnCallback="cbpDocumentUI_Callback">
         <PanelCollection>
             <dx:PanelContent>
-                <asp:DataList runat="server" ID="datalistCategory" RepeatColumns="2" RepeatDirection="Horizontal" Width="100%" ItemStyle-VerticalAlign="Top">
+                <asp:DataList runat="server" ID="datalistCategory" RepeatColumns="2" RepeatDirection="Horizontal" Width="100%" ItemStyle-VerticalAlign="Top" ItemStyle-Width="50%">
                     <ItemTemplate>
                         <%--border_right add line right--%>
                         <div class="doc_list_section ">
                             <div id="default-example" data-collapse="">
                                 <h3 class="doc_list_title  color_balck"><%# Eval("Key")%> &nbsp;&nbsp;<i class="fa fa-minus-square-o color_blue collapse_btn_e" onclick="clickCollapse(this, '<%# Eval("Key")%>')"></i> </h3>
-                                <div class="doc_collapse_div">
-
+                                <div class="doc_collapse_div" style="padding-top:5px">
                                     <%--<h4><%# Eval("Key")%></h4>--%>
                                     <asp:Repeater runat="server" ID="rptFiles">
-
                                         <ItemTemplate>
                                             <%--                <tr onclick="PreviewDocument('<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>', '<%# Eval("ContentType")%>');" style="cursor:pointer" onmouseover="this.bgColor = '#D1DEFB';" onmouseout="this.bgColor = '';">--%>
 
@@ -99,7 +105,7 @@
                                                 <label class="doc_list_checks check_margin" for='<%# String.Format("doc_list_id_{0}", Eval("Description"))%>'>
                                                     <span class="color_balck ">
                                                          <%-- NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}&spFile={1}", Eval("FileID"), Eval("Description"))%>' Text='<%# Eval("Name")%>'--%> 
-                                                        <dx:ASPxHyperLink runat="server" CssClass="doc_file_name" ClientSideEvents-Click="clickFileLink" Text='<%# Eval("Name")%>'  Target="_blank"></dx:ASPxHyperLink>
+                                                        <dx:ASPxHyperLink runat="server" CssClass="doc_file_name" ClientSideEvents-Click='<%# String.Format("function(s,e){{clickFileLink(s,""{0}"")}}", Eval("Description"))%>' Text='<%# Eval("Name")%>'  Target="_blank"></dx:ASPxHyperLink>
                                                     </span>
                                                     <span class="checks_data_text">
                                                         <dx:ASPxLabel runat="server" Text='<%# String.Format("{0:MMM d, yyyy}", Eval("CreateDate"))%>'></dx:ASPxLabel>

@@ -35,7 +35,6 @@ Public Class DocumentsUI
         If e.Item.ItemType = ListItemType.Item Or e.Item.ItemType = ListItemType.AlternatingItem Then
 
             Dim rptFiles = TryCast(e.Item.FindControl("rptFiles"), Repeater)
-
             rptFiles.DataSource = DataBinder.Eval(e.Item.DataItem, "Group")
             rptFiles.DataBind()
         End If

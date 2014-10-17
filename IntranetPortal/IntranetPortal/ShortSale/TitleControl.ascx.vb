@@ -23,6 +23,7 @@ Public Class TitleControl
         Dim email = txtContactEmail.Value
 
         Dim contact = New PartyContact(name, number, email)
+        contact.CorpName = txtCompanyName.Value
         contact.Save()
 
         Dim clearence As New TitleClearence

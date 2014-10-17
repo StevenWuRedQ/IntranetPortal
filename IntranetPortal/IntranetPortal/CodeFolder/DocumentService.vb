@@ -176,6 +176,7 @@ Public Class DocumentService
                                 .FileID = 1,
                                 .Description = file.UniqueId.ToString,
                                 .Name = file.Name,
+                                .Size = file.Length,
                                 .CreateDate = file.TimeCreated
                                 }).ToList
         Return result

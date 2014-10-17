@@ -68,13 +68,13 @@ Partial Public Class TitleControl
     Protected WithEvents txtContactEmail As Global.System.Web.UI.HtmlControls.HtmlInputText
 
     '''<summary>
-    '''Text1 control.
+    '''txtCompanyName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Text1 As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtCompanyName As Global.System.Web.UI.HtmlControls.HtmlInputText
 
     '''<summary>
     '''txtAmount control.
@@ -83,7 +83,7 @@ Partial Public Class TitleControl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtAmount As Global.System.Web.UI.HtmlControls.HtmlInputText
+    Protected WithEvents txtAmount As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
 
     '''<summary>
     '''ASPxPopupControl2 control.
