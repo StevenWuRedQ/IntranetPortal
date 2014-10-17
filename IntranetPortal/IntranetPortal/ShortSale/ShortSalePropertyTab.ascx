@@ -73,13 +73,13 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Accessibility</label>
-
-            <select class="ss_form_input" data-field="PropertyInfo.Accessibility">
+              <input class="ss_form_input" type="number"  data-field="PropertyInfo.Accessibility">
+            <%--<select class="ss_form_input" data-field="PropertyInfo.Accessibility">
                 <option value="Lockbox-LOC">Lockbox-LOC</option>
                 <option value="Master Key">Master Key</option>
                 <option value="Homeowner's key">Homeowner's key</option>
 
-            </select>
+            </select>--%>
 
         </li>
         <li class="ss_form_item">
@@ -162,11 +162,11 @@
                 <dx:GridViewDataColumn FieldName="Kitchen" VisibleIndex="4" />
                 <dx:GridViewDataColumn FieldName="Diningroom" VisibleIndex="5" />
                 <dx:GridViewDataColumn FieldName="Occupied" VisibleIndex="5" />
-                <dx:GridViewDataColumn FieldName="Lease" VisibleIndex="5" />
+                <%--<dx:GridViewDataColumn FieldName="Lease" VisibleIndex="5" />
                 <dx:GridViewDataColumn FieldName="Type" VisibleIndex="5" />
                 <dx:GridViewDataColumn FieldName="Rent" VisibleIndex="5" />
 
-                <dx:GridViewDataColumn FieldName="BoilerRoom" VisibleIndex="5" />
+                <dx:GridViewDataColumn FieldName="BoilerRoom" VisibleIndex="5" />--%>
             </Columns>
             <SettingsEditing Mode="Batch"/>
             
@@ -285,23 +285,23 @@
         initToolTips();
         
         format_input();
-        //$("#prioity_content").mCustomScrollbar(
-        //      {
-        //          theme: "minimal-dark"
-        //      }
-        //      );
-        //$("#home_owner_content").mCustomScrollbar(
-        //    {
-        //        theme: "minimal-dark"
-        //    }
-        // );
+        $("#prioity_content").mCustomScrollbar(
+              {
+                  theme: "minimal-dark"
+              }
+              );
+        $("#home_owner_content").mCustomScrollbar(
+            {
+                theme: "minimal-dark"
+            }
+         );
 
-        //$(".dxgvCSD").mCustomScrollbar(
-        //    {
-        //        theme: "minimal-dark",
-        //        axis:"yx"
-        //    }
-        // );
+        $(".dxgvCSD").mCustomScrollbar(
+            {
+                theme: "minimal-dark",
+              
+            }
+         );
     }
     //$(document).ready(function () {
     //    // Handler for .ready() called.

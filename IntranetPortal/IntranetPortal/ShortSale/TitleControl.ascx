@@ -42,7 +42,7 @@
     }
 </script>
 <div style="padding-top: 5px">
-    <div style="height: 850px; overflow: auto;" id="prioity_content">
+    <div style="height: 850px; overflow: auto;" id="home_owner_content">
         <%--time label--%>
         <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
             <div style="font-size: 30px">
@@ -72,21 +72,21 @@
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Proposed Closing Date</label>
-                        <input class="ss_form_input" data-field="ClosingDate ss_date"  value="<%= ShortSaleCaseData.ClosingDate %>">
+                        <input class="ss_form_input ss_date" data-field="ClosingDate"  value="<%= ShortSaleCaseData.ClosingDate %>">
                     </li>
                 </ul>
             </div>
 
             <div class="ss_form">
-                <h4 class="ss_form_title">Sellers Title Company <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('SellerTitle.TitleContact', function(party){ShortSaleCaseData.SellerTitle.ContactId=party.ContactId;$('#dateSellerOrderDate').val('');$('#dateSellerReceivedDate').val('');$('#txtSellerOrderNum').val('');})"></i></h4>
+                <h4 class="ss_form_title">Sellers Title Company <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('SellerTitle.TitleContact', function(party){ShortSaleCaseData.SellerTitle.ContactId=party.ContactId;$('#dateSellerOrderDate').val('');$('#dateSellerReceivedDate').val('');$('#txtSellerOrderNum').val('');})"></i></h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Company Name</label>
-                        <input class="ss_form_input" data-field="SellerTitle.TitleContact.CorpName" value="<%= ShortSaleCaseData.SellerTitle.TitleContact.CorpName%>" id="txtSellerCompanyName">
+                        <input class="ss_form_input ss_not_edit" data-field="SellerTitle.TitleContact.CorpName" value="<%= ShortSaleCaseData.SellerTitle.TitleContact.CorpName%>" id="txtSellerCompanyName">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input" data-field="SellerTitle.TitleContact.OfficeNO" value="<%= ShortSaleCaseData.SellerTitle.TitleContact.OfficeNO%>" id="txtSellerTitlePhone">
+                        <input class="ss_form_input ss_phone ss_not_edit" data-field="SellerTitle.TitleContact.OfficeNO" value="<%= ShortSaleCaseData.SellerTitle.TitleContact.OfficeNO%>" id="txtSellerTitlePhone">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">&nbsp;</label>
@@ -94,29 +94,29 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Ordered</label>
-                        <input class="ss_form_input ss_date" data-field="SellerTitle.ReportOrderDate" value="<%= ShortSaleCaseData.SellerTitle.ReportOrderDate%>" id="dateSellerOrderDate">
+                        <input class="ss_form_input ss_date ss_not_edit" data-field="SellerTitle.ReportOrderDate" value="<%= ShortSaleCaseData.SellerTitle.ReportOrderDate%>" id="dateSellerOrderDate">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Received</label>
-                        <input class="ss_form_input ss_date" data-field="SellerTitle.ReceivedDate"  value="<%= ShortSaleCaseData.SellerTitle.ReceivedDate%>" id="dateSellerReceivedDate">
+                        <input class="ss_form_input ss_date ss_not_edit" data-field="SellerTitle.ReceivedDate"  value="<%= ShortSaleCaseData.SellerTitle.ReceivedDate%>" id="dateSellerReceivedDate">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Order Number</label>
-                        <input class="ss_form_input ss_date" data-field="SellerTitle.OrderNumber" value="<%= ShortSaleCaseData.SellerTitle.OrderNumber%>" id="txtSellerOrderNum">
+                        <input class="ss_form_input ss_not_edit" data-field="SellerTitle.OrderNumber" value="<%= ShortSaleCaseData.SellerTitle.OrderNumber%>" id="txtSellerOrderNum">
                     </li>
                 </ul>
             </div>
 
             <div class="ss_form">
-                <h4 class="ss_form_title">Buyers Title Company  <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('BuyerTitle.TitleContact', function(party){ShortSaleCaseData.BuyerTitle.ContactId=party.ContactId;$('#dateBuyerOrderDate').val('');$('#dateBuyerReceivedDate').val('');$('#txtBuyerOrderNumber').val('');})"></i></h4>
+                <h4 class="ss_form_title">Buyers Title Company  <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('BuyerTitle.TitleContact', function(party){ShortSaleCaseData.BuyerTitle.ContactId=party.ContactId;$('#dateBuyerOrderDate').val('');$('#dateBuyerReceivedDate').val('');$('#txtBuyerOrderNumber').val('');})"></i></h4>
                 <ul class="ss_form_box clearfix">
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Company Name</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.TitleContact.CorpName" value="<%= ShortSaleCaseData.BuyerTitle.TitleContact.CorpName%>" id="txtBuyerCompanyName">
+                        <input class="ss_form_input ss_not_edit" data-field="BuyerTitle.TitleContact.CorpName" value="<%= ShortSaleCaseData.BuyerTitle.TitleContact.CorpName%>" id="txtBuyerCompanyName">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.TitleContact.OfficeNO" value="<%= ShortSaleCaseData.BuyerTitle.TitleContact.OfficeNO%>" id="txtBuyerTitlePhone">
+                        <input class="ss_form_input ss_not_edit" data-field="BuyerTitle.TitleContact.OfficeNO" value="<%= ShortSaleCaseData.BuyerTitle.TitleContact.OfficeNO%>" id="txtBuyerTitlePhone">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">&nbsp;</label>
@@ -124,15 +124,15 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Ordered</label>
-                        <input class="ss_form_input ss_date" data-field="BuyerTitle.ReportOrderDate" value="<%= ShortSaleCaseData.BuyerTitle.ReportOrderDate%>" id="dateBuyerOrderDate">
+                        <input class="ss_form_input ss_date ss_not_edit" data-field="BuyerTitle.ReportOrderDate" value="<%= ShortSaleCaseData.BuyerTitle.ReportOrderDate%>" id="dateBuyerOrderDate">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Report Received</label>
-                        <input class="ss_form_input ss_date" data-field="BuyerTitle.ReceivedDate" value="<%= ShortSaleCaseData.BuyerTitle.ReceivedDate%>" id="dateBuyerReceivedDate">
+                        <input class="ss_form_input ss_date ss_not_edit" data-field="BuyerTitle.ReceivedDate" value="<%= ShortSaleCaseData.BuyerTitle.ReceivedDate%>" id="dateBuyerReceivedDate">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Title Order Number</label>
-                        <input class="ss_form_input" data-field="BuyerTitle.OrderNumber" value="<%= ShortSaleCaseData.BuyerTitle.OrderNumber%>" id="txtBuyerOrderNumber">
+                        <input class="ss_form_input ss_not_edit" data-field="BuyerTitle.OrderNumber" value="<%= ShortSaleCaseData.BuyerTitle.OrderNumber%>" id="txtBuyerOrderNumber">
                     </li>
                 </ul>
             </div>
@@ -247,7 +247,7 @@
                 <dx:ASPxCallbackPanel ID="callbackClearence" runat="server" ClientInstanceName="callbackClearence" OnCallback="callbackClearence_Callback">
                     <PanelCollection>
                         <dx:PanelContent>
-                            <h4 class="ss_form_title">Clearence <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="AspxPopupClearence.Show()"></i></h4>
+                            <h4 class="ss_form_title">Clearence <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="AspxPopupClearence.Show()"></i></h4>
                             <%--clearence list--%>
                             <div>
                                 <% Dim i = 1%>
@@ -260,7 +260,7 @@
                                         <div class="clearence_list_right">
                                             <div class="clearence_list_text">
                                                 <div class="clearence_list_title">
-                                                    Issue <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" style="font-size: 14px" title="Delete" onclick="callbackClearence.PerformCallback('Delete|<%= clearence.ClearenceId%>|' + caseId)"></i><i class="fa fa-check  color_blue_edit collapse_btn tooltip-examples" style="font-size: 14px" title="Mark as Complete" onclick="callbackClearence.PerformCallback('Clear|<%= clearence.ClearenceId%>|' + caseId)"></i>
+                                                    Issue <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" style="font-size: 14px" title="Delete" onclick="callbackClearence.PerformCallback('Delete|<%= clearence.ClearenceId%>|' + caseId)"></i><i class="fa fa-check  color_blue_edit collapse_btn tooltip-examples ss_control_btn" style="font-size: 14px" title="Mark as Complete" onclick="callbackClearence.PerformCallback('Clear|<%= clearence.ClearenceId%>|' + caseId)"></i>
                                                 </div>
                                                 <div class="clearence_list_text18" <%= If(Not String.IsNullOrEmpty(clearence.Status) AndAlso clearence.Status = IntranetPortal.ShortSale.TitleClearence.ClearenceStatus.Cleared, "style='text-decoration:line-through;'", "")%>>
                                                     <%= clearence.Issue%>
@@ -310,7 +310,7 @@
 
                                             <div class="clearence_list_text">
                                                 <div class="clearence_list_title">
-                                                    notes <i class="fa fa-plus-circle note_img tooltip-examples" title="Add Notes" style="color: #3993c1; cursor: pointer" onclick='AddNotes("<%= clearence.ClearenceId%>", this)'></i>
+                                                    notes <i class="fa fa-plus-circle note_img tooltip-examples ss_control_btn" title="Add Notes" style="color: #3993c1; cursor: pointer" onclick='AddNotes("<%= clearence.ClearenceId%>", this)'></i>
                                                 </div>
                                                 <% If clearence.Notes IsNot Nothing AndAlso clearence.Notes.Count > 0 Then%>
                                                 <div class="clearence_list_text14">

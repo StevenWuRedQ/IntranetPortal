@@ -14,8 +14,8 @@
     <h4 class="ss_form_title title_with_line">
         <span class="title_index title_span">Mortgage __index__1</span>&nbsp;
          <i class="fa fa-expand expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>
-          &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(event,this)" title="Add"></i>
-        <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" onclick="delete_array_item(this)" title="Delete"></i>
+          &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="Add"></i>
+        <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="Delete"></i>
     </h4>
     <div class="collapse_div">
         <div>
@@ -70,7 +70,7 @@
 
         <div class="ss_form">
             <h4 class="ss_form_title">Short sale dept 
-                <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('Mortgages[__index__].ShortSaleDeptContact', function(party){ShortSaleCaseData.Mortgages[__index__].ShortSaleDept =party.ContactId})"></i>
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].ShortSaleDeptContact', function(party){ShortSaleCaseData.Mortgages[__index__].ShortSaleDept =party.ContactId})"></i>
 
             </h4>
             <ul class="ss_form_box clearfix" id="short_sale_dept">
@@ -128,7 +128,7 @@
 
         <div class="ss_form">
             <h4 class="ss_form_title">Processor 
-                <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('Mortgages[__index__].ProcessorContact', function(party){ShortSaleCaseData.Mortgages[__index__].Processor =party.ContactId})"></i>
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].ProcessorContact', function(party){ShortSaleCaseData.Mortgages[__index__].Processor =party.ContactId})"></i>
 
             </h4>
             <ul class="ss_form_box clearfix" id="processor_list">
@@ -179,7 +179,7 @@
 
         <div class="ss_form">
             <h4 class="ss_form_title">Negotiator 
-                <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('Mortgages[__index__].NegotiatorContact', function(party){ShortSaleCaseData.Mortgages[__index__].Negotiator =party.ContactId})"></i>
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].NegotiatorContact', function(party){ShortSaleCaseData.Mortgages[__index__].Negotiator =party.ContactId})"></i>
             </h4>
             <ul class="ss_form_box clearfix" id="negotiator_list">
                 <li class="ss_form_item">
@@ -228,7 +228,7 @@
 
         <div class="ss_form">
             <h4 class="ss_form_title">Supervisor 
-                <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('Mortgages[__index__].SupervisorContact', function(party){ShortSaleCaseData.Mortgages[__index__].Supervisor =party.ContactId})"></i>
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].SupervisorContact', function(party){ShortSaleCaseData.Mortgages[__index__].Supervisor =party.ContactId})"></i>
 
             </h4>
             <ul class="ss_form_box clearfix" id="supervisor_list">
@@ -278,7 +278,7 @@
 
         <div class="ss_form">
             <h4 class="ss_form_title">Closer
-      <i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('Mortgages[__index__].CloserContact', function(party){ShortSaleCaseData.Mortgages[__index__].Closer =party.ContactId})"></i>
+      <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].CloserContact', function(party){ShortSaleCaseData.Mortgages[__index__].Closer =party.ContactId})"></i>
 
             </h4>
             <ul class="ss_form_box clearfix" id="closer_list">

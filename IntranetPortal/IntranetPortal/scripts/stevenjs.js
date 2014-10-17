@@ -497,9 +497,11 @@ function prepareArrayDivs(is_save) {
 
         /*there default have a empty div start add div below */
         var add_div = elem;
+        
         /*when there is no data new a data */
         if (data_value.length == 0) {
             //data_value[0].
+            
             expland_div(addCloneTo(elem, elem, 0));
         }
         for (var i = 0; i < data_value.length; i++) {
@@ -644,15 +646,10 @@ function collectDate(objCase) {
 }
 
 function switch_edit_model(s, objCase) {
-    var inputs = $(".ss_form_input, .input_with_check");
+   
 
     if ($(s).val() == "Edit") {
-        inputs = inputs.not(".ss_not_edit");/*filter element not allow edit */
-
-        inputs.addClass("color_blue_edit");
-
-        inputs.prop("disabled", false);
-        $(s).val("Save");
+        set_edit_model(true);
     } else {
         if (!pass_format_test())
         {
@@ -660,12 +657,34 @@ function switch_edit_model(s, objCase) {
             return;
         }
         getShortSaleInstanceComplete(null, null);
-        //getShortSaleInstanceClient.PerformCallback($("#short_sale_case_id").val());
 
-        inputs.removeClass("color_blue_edit");
-
-        $(s).val("Edit");
+        set_edit_model(false);
     }
+}
+
+function set_edit_model(is_edit)
+{
+    var inputs = $(".ss_form_input, .input_with_check");
+    var control_btns = $(".ss_control_btn");
+    if (is_edit)
+    {
+        inputs = inputs.not(".ss_not_edit");
+    }
+
+    if (is_edit)
+    {
+        inputs.addClass("color_blue_edit");
+    } else
+    {
+        inputs.removeClass("color_blue_edit");
+    }
+    control_btns.each(function (index)
+    {
+        this.style.setProperty("display", is_edit ? "inline" : "none", "important")
+    });
+    inputs.prop("disabled", !is_edit);
+
+    $(".short_sale_edit").val(is_edit?  "Save": "Edit");
 }
 
 function format_phone(e) {

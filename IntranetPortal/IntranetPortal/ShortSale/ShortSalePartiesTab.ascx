@@ -5,7 +5,7 @@
     </div>
 </div>
 <div>
-    <h4 class="ss_form_title">Assigned Processor<i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('AssignedProcessor', function(party){ShortSaleCaseData.Processor=party.ContactId})"></i></h4>
+    <h4 class="ss_form_title">Assigned Processor<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('AssignedProcessor', function(party){ShortSaleCaseData.Processor=party.ContactId})"></i></h4>
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">Name</label>
@@ -28,7 +28,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Referral<i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('ReferralContact', function(party){ShortSaleCaseData.Referral=party.ContactId})"></i></h4>
+    <h4 class="ss_form_title">Referral<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('ReferralContact', function(party){ShortSaleCaseData.Referral=party.ContactId})"></i></h4>
     <ul class="ss_form_box clearfix">
 
         <li class="ss_form_item">
@@ -59,7 +59,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Listing agent<i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('ListingAgentContact', function(party){ShortSaleCaseData.ListingAgent=party.ContactId})"></i></h4>
+    <h4 class="ss_form_title">Listing agent<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('ListingAgentContact', function(party){ShortSaleCaseData.ListingAgent=party.ContactId})"></i></h4>
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>
@@ -87,7 +87,7 @@
 
 
 <div class="ss_form">
-    <h4 class="ss_form_title">Buyer<i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('BuyerContact', function(party){ShortSaleCaseData.Buyer=party.ContactId})"></i></h4>
+    <h4 class="ss_form_title">Buyer<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('BuyerContact', function(party){ShortSaleCaseData.Buyer=party.ContactId})"></i></h4>
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>
@@ -117,7 +117,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">seller attorney<i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('SellerAttorneyContact', function(party){ShortSaleCaseData.SellerAttorney=party.ContactId})"></i></h4>
+    <h4 class="ss_form_title">seller attorney<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('SellerAttorneyContact', function(party){ShortSaleCaseData.SellerAttorney=party.ContactId})"></i></h4>
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>
@@ -148,7 +148,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">buyer attorney<i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('BuyerAttorneyContact', function(party){ShortSaleCaseData.BuyerAttorney=party.ContactId})"></i></h4>
+    <h4 class="ss_form_title">buyer attorney<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('BuyerAttorneyContact', function(party){ShortSaleCaseData.BuyerAttorney=party.ContactId})"></i></h4>
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>
@@ -179,7 +179,7 @@
 </div>
 
 <div class="ss_form">
-    <h4 class="ss_form_title">title company<i class="fa fa-plus-circle  color_blue_edit collapse_btn" onclick="ShowSelectParty('TitleCompanyContact', function(party){ShortSaleCaseData.TitleCompany=party.ContactId})"></i></h4>
+    <h4 class="ss_form_title">title company<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('TitleCompanyContact', function(party){ShortSaleCaseData.TitleCompany=party.ContactId})"></i></h4>
     <ul class="ss_form_box clearfix">
         <li class="ss_form_item">
             <label class="ss_form_input_title">name</label>

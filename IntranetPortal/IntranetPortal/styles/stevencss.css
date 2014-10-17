@@ -291,13 +291,14 @@ i[title]:hover:after {
     background: transparent !important;
     color: white !important;
     border: 0px !important;
+    outline:none !important;
 }
 
     .tab_button_a:active {
         color: white !important;
         background: #e63000 !important;
     }
-
+   
 .short_sale_head_tab:hover {
     background: #e63000;
 }
@@ -1806,4 +1807,12 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 }
 
 .ss_email {
+}
+.ss_phone
+{
+
+}
+.ss_control_btn
+{
+    display:none !important;
 }
