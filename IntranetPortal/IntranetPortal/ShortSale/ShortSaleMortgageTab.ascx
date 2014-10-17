@@ -14,7 +14,7 @@
     <h4 class="ss_form_title title_with_line">
         <span class="title_index title_span">Mortgage __index__1</span>&nbsp;
          <i class="fa fa-expand expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>
-          &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="Add"></i>
+        &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="Add"></i>
         <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="Delete"></i>
     </h4>
     <div class="collapse_div">
@@ -22,7 +22,46 @@
             <%--<h4 class="ss_form_title title_with_line"><span class="title_index title_span">Mortgage __index__</span>  <i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(event,this)" title="Add"></i>
             <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" onclick="delete_array_item(this)" title="Delete"></i> 
         </h4>--%>
+
+
             <ul class="ss_form_box clearfix" id="mortgage__index__">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Stuats</label>
+                    <select class="ss_form_input" data-item="Status" data-item-type="1">
+                        <option value="NULL">NULL</option>
+                        <option value="Ready for Submission">Ready for Submission</option>
+                        <option value="Pending Service Release">Pending Service Release</option>
+                        <option value="Package Submitted">Package Submitted</option>
+                        <option value="Package Submitted in Equator">Package Submitted in Equator</option>
+                        <option value="Pending BPO Expiration">Pending BPO Expiration</option>
+                        <option value="Processor Assigned">Processor Assigned</option>
+                        <option value="Document Review">Document Review</option>
+                        <option value="Updated Docs Needed">Updated Docs Needed</option>
+                        <option value="Processor BPO Ordered">Processor BPO Ordered</option>
+                        <option value="Processor BPO Schdeduled">Processor BPO Schdeduled</option>
+                        <option value="Processor BPO Completed">Processor BPO Completed</option>
+                        <option value="Negotiator BPO Ordered">Negotiator BPO Ordered</option>
+                        <option value="Negotiator BPO Schdeduled">Negotiator BPO Schdeduled</option>
+                        <option value="Negotiator BPO Completed">Negotiator BPO Completed</option>
+                        <option value="Auction/Hubzu Opt Out">Auction/Hubzu Opt Out</option>
+                        <option value="Negotiator Assigned">Negotiator Assigned</option>
+                        <option value="Offer Review">Offer Review</option>
+                        <option value="Counter Offer">Counter Offer</option>
+                        <option value="Value Dispute">Value Dispute</option>
+                        <option value="Marketing W/ Price Reductions">Marketing W/ Price Reductions</option>
+                        <option value="Investor Review">Investor Review</option>
+
+                    </select>
+
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">&nbsp;</label>
+                    <input class="ss_form_input ss_form_hidden">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">&nbsp;</label>
+                    <input class="ss_form_input ss_form_hidden" value="">
+                </li>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">LENDER</label>
@@ -40,20 +79,51 @@
                         <ClientSideEvents Init="price_InitAndKeyUp" KeyUp="price_InitAndKeyUp" />
                     </dx:ASPxTextBox>--%>
 
-                     <input class="ss_form_input currency_input" data-item="LoanAmount" data-item-type="1" onblur="$(this).formatCurrency();">
+                    <input class="ss_form_input currency_input" data-item="LoanAmount" data-item-type="1" onblur="$(this).formatCurrency();">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Authorization Sent On</label>
-                    <input class="ss_form_input ss_date"  data-item="AuthorizationSent" data-item-type="1">
+                    <input class="ss_form_input ss_date" data-item="AuthorizationSent" data-item-type="1">
                 </li>
 
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden">
+                    <label class="ss_form_input_title">Tax Class</label>
+                    <input class="ss_form_input" data-field="PropertyInfo.TaxClass">
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden">
+                    <label class="ss_form_input_title"># of Families</label>
+                    <input class="ss_form_input" data-field="PropertyInfo.NumOfFamilies">
+                </li>
+
+                <li class="ss_form_item">
+                    <span class="ss_form_input_title">FHA</span>
+
+                    <input type="radio" id="checkYes_FHA__index__" name="FHAname__index__" data-item="FHA" data-item-type="1" data-radio="Y" value="YES" class="ss_form_input">
+                    <label for="checkYes_FHA__index__" class="input_with_check"><span class="box_text">Yes</span></label>
+
+                    <input type="radio" id="none_check_noFHA__index__" name="FHAname__index__" data-item="FHA" data-item-type="1" value="NO" class="ss_form_input">
+                    <label for="none_check_noFHA__index__" class="input_with_check"><span class="box_text">No</span></label>
+
+                </li>
+                <li class="ss_form_item">
+                    <span class="ss_form_input_title">FANNIE MAE</span>
+
+                    <input type="radio" id="checkYes_Fannie2__index__" name="Fannie__index__" data-item="Fannie" data-item-type="1" data-radio="Y" value="YES" class="ss_form_input">
+                    <label for="checkYes_Fannie2__index__" class="input_with_check"><span class="box_text">Yes</span></label>
+
+                    <input type="radio" id="none_check2_Fannie__index__" name="Fannie__index__" data-item="Fannie" data-item-type="1" value="NO" class="ss_form_input">
+                    <label for="none_check2_Fannie__index__" class="input_with_check"><span class="box_text">No</span></label>
+
+                </li>
+                <li class="ss_form_item">
+                    <span class="ss_form_input_title">FREDDIE MAC</span>
+
+                    <input type="radio" id="checkYes_FREDDIE_MAC__index__" name="FREDDIE_MAC__index__" data-item="Freddie" data-item-type="1" data-radio="Y" value="YES" class="ss_form_input">
+                    <label for="checkYes_FREDDIE_MAC__index__" class="input_with_check"><span class="box_text">Yes</span></label>
+
+                    <input type="radio" id="none_check_FREDDIE_MAC__index__" name="FREDDIE_MAC__index__" data-item="Freddie" data-item-type="1" value="NO" class="ss_form_input">
+                    <label for="none_check_FREDDIE_MAC__index__" class="input_with_check"><span class="box_text">No</span></label>
+
                 </li>
                 <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">Lien Postion</label>

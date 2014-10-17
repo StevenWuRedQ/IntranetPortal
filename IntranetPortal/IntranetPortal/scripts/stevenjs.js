@@ -249,6 +249,12 @@ function format_input() {
 function pass_format_test() {
     var is_pass = true;
     $(".ss_not_empty, .ss_zip, .ss_email, .ss_not_empty").each(function (ind) {
+        /*don't check frist in array */
+        if ($(this).parents(".ss_array").attr("data-array-index") == 0)
+        {
+            return;
+        }
+
         if (in_template(this))
         {
             return;
@@ -409,6 +415,23 @@ function clearArray(array) {
         }
     }
 
+}
+function clearHomeOwner()
+{
+    var owners = ShortSaleCaseData.PropertyInfo.Owners;
+    if (owners == null || !( owners instanceof Array))
+    {
+        d_alert("owners is null or not array");
+        return;
+    }
+    for(var i =0;i<owners.length;i++)
+    {
+        var owner = owners[i];
+        if (owner.FirstName==null||owner.FirstName == "")
+        {
+            owners.splice(owner, 1);
+        }
+    }
 }
 function ShorSaleArrayDataBand(data_stauts) {
 

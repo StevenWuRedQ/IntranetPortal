@@ -96,35 +96,7 @@
             </label>
 
         </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">Tax Class</label>
-            <input class="ss_form_input" data-field="PropertyInfo.TaxClass">
-        </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title"># of Families</label>
-            <input class="ss_form_input" data-field="PropertyInfo.NumOfFamilies">
-        </li>
-
-        <li class="ss_form_item">
-            <span class="ss_form_input_title">FHA</span>
-
-            <input type="radio" id="key_PropertyInfo_checkYes_FHA" data-field="PropertyInfo.FHA" data-radio="Y" class="ss_form_input" name="FHA1" value="YES">
-            <label for="key_PropertyInfo_checkYes_FHA" class="input_with_check"><span class="box_text">Yes</span></label>
-
-            <input type="radio" id="none_pdf_checkey_no25" data-field="PropertyInfo.FHA" name="FHA1" value="NO">
-            <label for="none_pdf_checkey_no25" class="input_with_check"><span class="box_text">No</span></label>
-
-        </li>
-        <li class="ss_form_item">
-            <span class="ss_form_input_title">Fannie MAE</span>
-
-            <input type="radio" id="key_PropertyInfo_checkYes_FannieMae" data-field="PropertyInfo.FannieMae" data-radio="Y" name="Fannie_Mae1" value="YES">
-            <label for="key_PropertyInfo_checkYes_FannieMae" class="input_with_check"><span class="box_text">Yes</span></label>
-
-            <input type="radio" id="none_pdf_checkey_no23" data-field="PropertyInfo.FannieMae" name="Fannie_Mae1" value="NO">
-            <label for="none_pdf_checkey_no23" class="input_with_check"><span class="box_text">No</span></label>
-
-        </li>
+        
         <li class="ss_form_item">
             <span class="ss_form_input_title">Freddie Mac</span>
 

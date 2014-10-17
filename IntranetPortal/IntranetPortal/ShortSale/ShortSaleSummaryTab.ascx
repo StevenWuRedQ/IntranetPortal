@@ -36,12 +36,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Accessibility</label>
-                        <select class="ss_form_input" data-field="PropertyInfo.Accessibility">
-                            <option value="volvo">Lockbox - LOC</option>
-                            <option value="saab">Master Key</option>
-                            <option value="mercedes">Homeowner's key</option>
-                        </select>
-
+                        <input class="ss_form_input"  data-field="PropertyInfo.Accessibility">
                     </li>
                     <li class="ss_form_item">
                         <span class="ss_form_input_title">c/o(<span class="link_pdf">pdf</span>)</span>
@@ -127,13 +122,13 @@
                         <li class="ss_form_item">
                             <span class="ss_form_input_title">&nbsp;</span>
 
-                            <input type="checkbox" id="pdf_check_yes1" name="1" value="YES">
-                            <label for="pdf_check_yes1" class="input_with_check">
+                            <input type="checkbox" id="pdf_check_yes1__index__" name="1" >
+                            <label for="pdf_check_yes1__index__" class="input_with_check">
                                 <span class="box_text">Fannie</span>
                             </label>
 
-                            <input type="checkbox" id="pdf_check_no2" name="1" value="NO">
-                            <label for="pdf_check_no2" class="input_with_check">
+                            <input type="checkbox" id="pdf_check_no2__index__" name="1">
+                            <label for="pdf_check_no2__index__" class="input_with_check">
                                 <span class="box_text">FHA</span>
                             </label>
 
@@ -141,8 +136,8 @@
                         <li class="ss_form_item">
                             <span class="ss_form_input_title">&nbsp;</span>
 
-                            <input type="checkbox" id="pdf_check_yes2" name="1" value="YES">
-                            <label for="pdf_check_yes2" class="input_with_check">
+                            <input type="checkbox" id="pdf_check_yes3__index__" name="1" value="YES">
+                            <label for="pdf_check_yes3__index__" class="input_with_check">
                                 <span class="box_text">Freddie Mac </span>
                             </label>
 
