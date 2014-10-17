@@ -1,5 +1,8 @@
 ﻿Imports DevExpress.Web.ASPxUploadControl
 Imports DevExpress.Web.ASPxEditors
+Imports System.Net.Http
+Imports System.Web.Services
+Imports System.IO
 
 Public Class UploadFilePage
     Inherits System.Web.UI.Page
@@ -8,7 +11,19 @@ Public Class UploadFilePage
         If Not String.IsNullOrEmpty(Request.QueryString("b")) Then
             hfBBLEData.Value = Request.QueryString("b")
             hfBBLE("BBLE") = Request.QueryString("b")
-            Bindfiles(Request.QueryString("b"))
+            'Bindfiles(Request.QueryString("b"))
+
+            If Request.Files IsNot Nothing AndAlso Request.Files.Count > 0 AndAlso Not String.IsNullOrEmpty(Request.QueryString("cate")) Then
+                Dim file = Request.Files(0)
+                Dim name = file.FileName
+                Dim ms = New MemoryStream()
+                file.InputStream.CopyTo(ms)
+
+                Dim bble = Request.QueryString("b")
+                Dim category = Request.QueryString("cate")
+
+                DocumentService.UploadFile(String.Format("{0}/{1}/", bble, category), ms.ToArray, name)
+            End If
         End If
     End Sub
 

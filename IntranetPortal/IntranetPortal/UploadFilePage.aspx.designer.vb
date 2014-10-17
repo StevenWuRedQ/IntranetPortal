@@ -68,15 +68,6 @@ Partial Public Class UploadFilePage
     Protected WithEvents lblAllowebMimeType As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
-    '''lblMaxFileSize control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblMaxFileSize As Global.DevExpress.Web.ASPxEditors.ASPxLabel
-
-    '''<summary>
     '''ASPxLabel1 control.
     '''</summary>
     '''<remarks>

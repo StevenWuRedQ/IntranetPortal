@@ -34,8 +34,7 @@ Public Class DocumentService
     Public Shared Function GetPDFContent(fileUrl As String) As Byte()
         Using ClientContext = GetClientContext()
             Dim f = File.OpenBinaryDirect(ClientContext, fileUrl)
-            Dim reader = New IO.BinaryReader(f.Stream)
-
+            'Dim reader = New IO.BinaryReader(f.Stream)
             Using ms As New IO.MemoryStream()
                 f.Stream.CopyTo(ms)
                 Return ms.ToArray
