@@ -591,7 +591,7 @@ function AddArraryItem(event, e) {
 
     var add_div = addCloneTo(template, lastdiv, len);
 
-    control_array_div(array_div.parent().find(".collapse_div:last").parents(".ss_array"));
+    control_array_div(array_div.parent().find(".collapse_div:last").parents(".ss_array"),true);
 
     add_div.find(".ss_form_input").each(function (ind) {
         $(this).val("");
