@@ -35,11 +35,11 @@
     //    }
     //}
 
-    //var tmpClearenceId = null;
-    //function AddNotes(clearenceId, element) {
-    //    tmpClearenceId = clearenceId;
-    //    aspxAddNotes.ShowAtElement(element);
-    //}
+    var tmpClearenceId = null;
+    function AddNotes(clearenceId, element) {
+        tmpClearenceId = clearenceId;
+        aspxAddNotes.ShowAtElement(element);
+    }
 </script>
 <div style="padding-top: 5px">
     <div style="height: 850px; overflow: auto;" id="prioity_content">
