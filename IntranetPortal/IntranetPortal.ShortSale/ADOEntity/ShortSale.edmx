@@ -97,6 +97,9 @@
           <Property Name="DateAssigned" Type="datetime" />
           <Property Name="Supervisor" Type="int" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fannie" Type="bit" />
+          <Property Name="FHA" Type="bit" />
+          <Property Name="Freddie" Type="bit" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
@@ -326,6 +329,9 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ShortSaleDept" Type="Int32" />
+          <Property Name="Fannie" Type="Boolean" />
+          <Property Name="FHA" Type="Boolean" />
+          <Property Name="Freddie" Type="Boolean" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -538,6 +544,9 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="Freddie" ColumnName="Freddie" />
+                <ScalarProperty Name="FHA" ColumnName="FHA" />
+                <ScalarProperty Name="Fannie" ColumnName="Fannie" />
                 <ScalarProperty Name="ShortSaleDept" ColumnName="ShortSaleDept" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />

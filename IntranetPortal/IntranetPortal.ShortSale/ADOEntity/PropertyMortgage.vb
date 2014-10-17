@@ -29,5 +29,8 @@ Partial Public Class PropertyMortgage
     Public Property UpdateDate As Nullable(Of Date)
     Public Property UpdateBy As String
     Public Property ShortSaleDept As Nullable(Of Integer)
+    Public Property Fannie As Nullable(Of Boolean)
+    Public Property FHA As Nullable(Of Boolean)
+    Public Property Freddie As Nullable(Of Boolean)
 
 End Class
