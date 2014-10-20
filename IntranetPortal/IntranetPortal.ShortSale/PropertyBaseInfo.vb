@@ -12,7 +12,7 @@ Partial Public Class PropertyBaseInfo
         Get
             If _propFloors Is Nothing Then
                 Using context As New ShortSaleEntities
-                    Return context.PropertyFloors.Where(Function(fl) fl.BBLE = BBLE).ToList
+                    _propFloors = context.PropertyFloors.Where(Function(fl) fl.BBLE = BBLE).ToList
                 End Using
             End If
 
