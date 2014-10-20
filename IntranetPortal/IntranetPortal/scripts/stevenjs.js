@@ -139,6 +139,7 @@ function expand_array_item(e) {
 
     
 }
+
 function control_array_div(div,is_open)
 {
     var current_div = div.find(".collapse_div");
@@ -147,6 +148,16 @@ function control_array_div(div,is_open)
         return;
     }
    
+    //if (is_open)
+    //{
+    //    open_ss_array_div(current_div)
+    //}
+    //else
+    //{
+    //    close_ss_array_div(current_div);
+    //}
+    //current_div.slideToggle();
+
     current_div.css("display", is_open ? "inline" : "none");
   
     is_open = current_div.css("display") == "inline";
@@ -164,6 +175,9 @@ function control_array_div(div,is_open)
 
     }
 }
+
+
+
 /*
 *data_stauts == 1 then save data
 */

@@ -2,19 +2,17 @@
 <%@ Import Namespace="IntranetPortal.ShortSale" %>
 <%@ Import Namespace="IntranetPortal" %>
 <script>
-    function refreshSummary()
-    {
+    function refreshSummary() {
         summary_call_back_panel_client.PerformCallback(ShortSaleCaseData.CaseId);
     }
-    function reinitClient(s,e)
-    {
+    function reinitClient(s, e) {
         ShortSaleDataBand(0);
     }
 </script>
 
 <dx:ASPxCallbackPanel ID="summary_call_back_panel" runat="server" ClientInstanceName="summary_call_back_panel_client" OnCallback="summary_call_back_panel_Callback">
-    <ClientSideEvents 
-         EndCallback="reinitClient"/>
+    <ClientSideEvents
+        EndCallback="reinitClient" />
     <PanelCollection>
         <dx:PanelContent>
             <div>
@@ -36,7 +34,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Accessibility</label>
-                        <input class="ss_form_input"  data-field="PropertyInfo.Accessibility">
+                        <input class="ss_form_input" data-field="PropertyInfo.Accessibility">
                     </li>
                     <li class="ss_form_item">
                         <span class="ss_form_input_title">c/o(<span class="link_pdf">pdf</span>)</span>
@@ -67,33 +65,33 @@
             </div>
 
             <%--<div data-array-index="0" data-field="PropertyInfo.Owners" class="ss_array" style="display: none">--%>
-                <%Dim i=0 %>
-                <%For Each owner As PropertyOwner In summaryCase.PropertyInfo.Owners%>
-                <%i = i+1 %>
-                <div class="ss_form">
-                    <h4 class="ss_form_title">Seller <%=i %></h4>
-                    <ul class="ss_form_box clearfix">
+            <%Dim i = 0%>
+            <%For Each owner As PropertyOwner In summaryCase.PropertyInfo.Owners%>
+            <%i = i + 1%>
+            <div class="ss_form">
+                <h4 class="ss_form_title">Seller <%=i %></h4>
+                <ul class="ss_form_box clearfix">
 
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">name</label>
-                            <input class="ss_form_input" value="<%=owner.FullName %>" >
-                        </li>
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">SSN</label>
-                            <input class="ss_form_input" value="<%=owner.SSN %>" >
-                        </li>
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">Tax class</label>
-                            <input class="ss_form_input" value="No Tax class ??">
-                        </li>
-                        <li class="ss_form_item" style="width: 100%">
-                            <label class="ss_form_input_title">Mailing address</label>
-                            <input class="ss_form_input"  value="<%=owner.MailingAddress %>" style="width: 93.5%;" name="lender" >
-                        </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">name</label>
+                        <input class="ss_form_input" value="<%=owner.FullName %>">
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">SSN</label>
+                        <input class="ss_form_input" value="<%=owner.SSN %>">
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Tax class</label>
+                        <input class="ss_form_input" value="No Tax class ??">
+                    </li>
+                    <li class="ss_form_item" style="width: 100%">
+                        <label class="ss_form_input_title">Mailing address</label>
+                        <input class="ss_form_input" value="<%=owner.MailingAddress %>" style="width: 93.5%;" name="lender">
+                    </li>
 
-                    </ul>
-                </div>
-                <%Next %>
+                </ul>
+            </div>
+            <%Next%>
             <%--</div>--%>
 
             <div data-array-index="0" data-field="Mortgages" class="ss_array" style="display: none">
@@ -102,6 +100,35 @@
                     <h4 class="ss_form_title"><span class="title_index ">Mortgage __index__1 </span></h4>
                     <ul class="ss_form_box clearfix">
 
+                        <li class="ss_form_item ss_mortages_stauts">
+                            <label class="ss_form_input_title">Stuats</label>
+                            <select class="ss_form_input " data-item="Status" data-item-type="1">
+                                <option value="NULL">NULL</option>
+                                <option value="Ready for Submission">Ready for Submission</option>
+                                <option value="Pending Service Release">Pending Service Release</option>
+                                <option value="Package Submitted">Package Submitted</option>
+                                <option value="Package Submitted in Equator">Package Submitted in Equator</option>
+                                <option value="Pending BPO Expiration">Pending BPO Expiration</option>
+                                <option value="Processor Assigned">Processor Assigned</option>
+                                <option value="Document Review">Document Review</option>
+                                <option value="Updated Docs Needed">Updated Docs Needed</option>
+                                <option value="Processor BPO Ordered">Processor BPO Ordered</option>
+                                <option value="Processor BPO Schdeduled">Processor BPO Schdeduled</option>
+                                <option value="Processor BPO Completed">Processor BPO Completed</option>
+                                <option value="Negotiator BPO Ordered">Negotiator BPO Ordered</option>
+                                <option value="Negotiator BPO Schdeduled">Negotiator BPO Schdeduled</option>
+                                <option value="Negotiator BPO Completed">Negotiator BPO Completed</option>
+                                <option value="Auction/Hubzu Opt Out">Auction/Hubzu Opt Out</option>
+                                <option value="Negotiator Assigned">Negotiator Assigned</option>
+                                <option value="Offer Review">Offer Review</option>
+                                <option value="Counter Offer">Counter Offer</option>
+                                <option value="Value Dispute">Value Dispute</option>
+                                <option value="Marketing W/ Price Reductions">Marketing W/ Price Reductions</option>
+                                <option value="Investor Review">Investor Review</option>
+
+                            </select>
+
+                        </li>
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Lender</label>
                             <input class="ss_form_input" data-item="Lender" data-item-type="1">
@@ -122,7 +149,7 @@
                         <li class="ss_form_item">
                             <span class="ss_form_input_title">&nbsp;</span>
 
-                            <input type="checkbox" id="pdf_check_yes1__index__" name="1" >
+                            <input type="checkbox" id="pdf_check_yes1__index__" name="1">
                             <label for="pdf_check_yes1__index__" class="input_with_check">
                                 <span class="box_text">Fannie</span>
                             </label>

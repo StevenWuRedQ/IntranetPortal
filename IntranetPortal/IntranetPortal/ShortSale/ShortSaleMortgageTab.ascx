@@ -25,9 +25,9 @@
 
 
             <ul class="ss_form_box clearfix" id="mortgage__index__">
-                <li class="ss_form_item">
+                <li class="ss_form_item ss_mortages_stauts">
                     <label class="ss_form_input_title">Stuats</label>
-                    <select class="ss_form_input" data-item="Status" data-item-type="1">
+                    <select class="ss_form_input " data-item="Status" data-item-type="1">
                         <option value="NULL">NULL</option>
                         <option value="Ready for Submission">Ready for Submission</option>
                         <option value="Pending Service Release">Pending Service Release</option>
@@ -54,15 +54,7 @@
                     </select>
 
                 </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden" value="">
-                </li>
-
+               
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">LENDER</label>
                     <input class="ss_form_input" data-item="Lender" data-item-type="1">
