@@ -1,6 +1,6 @@
-﻿Imports Microsoft.SharePoint.Client
-Imports System.Security
+﻿Imports System.Security
 Imports System.Web.Services
+Imports IntranetPortal.Document
 
 Public Class DocumentsUI
     Inherits System.Web.UI.UserControl
@@ -19,7 +19,6 @@ Public Class DocumentsUI
     Sub BindFileList(bble As String)
         'BindFilesFromSharepoint(bble)
         'Return
-
 
         Using Context As New Entities
             Dim groups = (From file In Context.FileAttachments

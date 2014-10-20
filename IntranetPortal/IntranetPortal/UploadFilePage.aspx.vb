@@ -3,6 +3,7 @@ Imports DevExpress.Web.ASPxEditors
 Imports System.Net.Http
 Imports System.Web.Services
 Imports System.IO
+Imports IntranetPortal.Document
 
 Public Class UploadFilePage
     Inherits System.Web.UI.Page
@@ -14,15 +15,17 @@ Public Class UploadFilePage
             'Bindfiles(Request.QueryString("b"))
 
             If Request.Files IsNot Nothing AndAlso Request.Files.Count > 0 AndAlso Not String.IsNullOrEmpty(Request.QueryString("cate")) Then
-                Dim file = Request.Files(0)
-                Dim name = file.FileName
-                Dim ms = New MemoryStream()
-                file.InputStream.CopyTo(ms)
+                For i = 0 To Request.Files.Count - 1
+                    Dim file = Request.Files(i)
+                    Dim name = file.FileName
+                    Dim ms = New MemoryStream()
+                    file.InputStream.CopyTo(ms)
 
-                Dim bble = Request.QueryString("b")
-                Dim category = Request.QueryString("cate")
+                    Dim bble = Request.QueryString("b")
+                    Dim category = Request.QueryString("cate")
 
-                DocumentService.UploadFile(String.Format("{0}/{1}/", bble, category), ms.ToArray, name)
+                    DocumentService.UploadFile(String.Format("{0}/{1}/", bble, category), ms.ToArray, name, User.Identity.Name)
+                Next
             End If
         End If
     End Sub
@@ -68,7 +71,7 @@ Public Class UploadFilePage
         Dim bble = hfBBLEData.Value
         Dim category = cbCategory.Value
 
-        DocumentService.UploadFile(String.Format("{0}/{1}/", bble, category), uplImage.UploadedFiles(0).FileBytes, uplImage.UploadedFiles(0).FileName)
+        DocumentService.UploadFile(String.Format("{0}/{1}/", bble, category), uplImage.UploadedFiles(0).FileBytes, uplImage.UploadedFiles(0).FileName, User.Identity.Name)
     End Sub
 
     Protected Sub gridFiles_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)

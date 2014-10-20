@@ -2,6 +2,7 @@
 Imports Microsoft.SharePoint.Client.Sharing
 Imports System.Security
 Imports System.IO
+Imports IntranetPortal.Document
 
 Public Class LoadFileFromSharepoint
     Inherits System.Web.UI.Page

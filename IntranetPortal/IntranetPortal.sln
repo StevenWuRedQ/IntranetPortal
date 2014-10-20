@@ -10,9 +10,11 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Testing", "I
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Core", "IntranetPortal.Core\IntranetPortal.Core.vbproj", "{5DA9A152-6E61-4CDE-BAF5-6309ED56539A}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Document", "IntranetPortal.Document\IntranetPortal.Document.vbproj", "{44062592-F25D-4424-A74D-44AC79BBDD4D}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://chrispc:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -28,6 +30,9 @@ Global
 		SccProjectUniqueName4 = IntranetPortal.Core\\IntranetPortal.Core.vbproj
 		SccProjectName4 = IntranetPortal.Core
 		SccLocalPath4 = IntranetPortal.Core
+		SccProjectUniqueName5 = IntranetPortal.Document\\IntranetPortal.Document.vbproj
+		SccProjectName5 = IntranetPortal.Document
+		SccLocalPath5 = IntranetPortal.Document
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +55,10 @@ Global
 		{5DA9A152-6E61-4CDE-BAF5-6309ED56539A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DA9A152-6E61-4CDE-BAF5-6309ED56539A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DA9A152-6E61-4CDE-BAF5-6309ED56539A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44062592-F25D-4424-A74D-44AC79BBDD4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44062592-F25D-4424-A74D-44AC79BBDD4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44062592-F25D-4424-A74D-44AC79BBDD4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44062592-F25D-4424-A74D-44AC79BBDD4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -35,7 +35,7 @@
     <script type="text/javascript">
        
         function OnDropBody(event) {
-            alert("Please drop the files into the textarea.");
+            alert("Please drop the files into the drag area.");
             return false;
         }
 
@@ -52,11 +52,10 @@
                 };
 
                 if (tests.progress) {
-                    xhr.upload.onprogress = function (event) {
-                        debugger;
+                    xhr.upload.onprogress = function (event) {                        
                         if (event.lengthComputable) {
                             var complete = (event.loaded / event.total * 100 | 0);
-                            progress.value = progress.innerHTML = complete;
+                            progress.value = progress.innerHTML = complete;                            
                         }
                     }
                 }
@@ -64,7 +63,7 @@
                 xhr.send(formData);
             }
             else {
-                alert("Your browser doesn't support FormData");
+                alert("You didn't select files.");
             }
         }
 
@@ -73,15 +72,19 @@
             if (event.dataTransfer) {
                 if (event.dataTransfer.files) {               
                     var files = event.dataTransfer.files;
-                    formData = tests.formdata ? new FormData() : null;
-                    fileTable.style.display = "";
-                    btnUpload.SetEnabled(true);
-                    btnUpload.Click.ClearHandlers();
-                    btnUpload.Click.AddHandler(function (s, e) {
-                        e.processOnServer = false;
-                        if (cbCategory.GetIsValid())
-                            UploadFiles();
-                    });
+
+                    if (formData == null) {
+                        formData = tests.formdata ? new FormData() : null;
+
+                        fileTable.style.display = "";
+                        btnUpload.SetEnabled(true);
+                        btnUpload.Click.ClearHandlers();
+                        btnUpload.Click.AddHandler(function (s, e) {
+                            e.processOnServer = false;
+                            if (cbCategory.GetIsValid())
+                                UploadFiles();
+                        });
+                    }                        
 
                     for (var i = 0; i < files.length; i++) {
                         AppendFileToTable(files[i]);
@@ -131,8 +134,7 @@
     </script>
     <style>
         #trFileHolder {            
-            border: 5px dashed #ccc;            
-            min-height: 300px;
+            border: 5px dashed #ccc;                      
             margin: 20px auto;
         }
 
@@ -308,7 +310,7 @@
                fileTable = document.getElementById("tblFiles"),
                progress = document.getElementById('uploadprogress');
 
-
+           debugger;
             if (tests.dnd) {               
                 holder.ondragover = function () { this.className = 'hover'; return false; };
                 holder.ondragend = function () { this.className = ''; return false; };

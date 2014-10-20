@@ -1,6 +1,7 @@
 ﻿Imports Microsoft.SharePoint.Client
 Imports System.Security
 Imports Microsoft.SharePoint.Client.Sharing
+Imports System.Web
 
 Public Class DocumentService
     Private Shared ReadOnly userName As String = System.Configuration.ConfigurationManager.AppSettings("Office365UserName")
@@ -75,11 +76,31 @@ Public Class DocumentService
 
     Public Shared Sub UploadFile(folderPath As String, fileBytes As Byte(), fileName As String)
         CreateFolder(folderPath)
-
         Dim fileUrl = String.Format("/{2}/{0}/{1}", folderPath, fileName, RootFolderName)
 
         Using fs As New IO.MemoryStream(fileBytes)
             Microsoft.SharePoint.Client.File.SaveBinaryDirect(GetClientContext, fileUrl, fs, True)
+        End Using
+
+        CreateSharingLink(GetClientContext, fileUrl)
+    End Sub
+
+    Public Shared Sub UploadFile(folderPath As String, fileBytes As Byte(), fileName As String, uploadBy As String)
+        CreateFolder(folderPath)
+        Dim fileUrl = String.Format("/{0}/{1}", RootFolderName, folderPath)
+
+        Using ctx = GetClientContext()
+            Dim folder = ctx.Web.GetFolderByServerRelativeUrl(fileUrl)
+
+            Dim fileCreateInfo As New FileCreationInformation
+            fileCreateInfo.Content = fileBytes
+            fileCreateInfo.Overwrite = True
+            fileCreateInfo.Url = fileName
+
+            Dim file = folder.Files.Add(fileCreateInfo)
+            file.ListItemAllFields("UploadBy") = uploadBy
+            file.ListItemAllFields.Update()
+            ctx.ExecuteQuery()
         End Using
 
         CreateSharingLink(GetClientContext, fileUrl)
@@ -132,7 +153,6 @@ Public Class DocumentService
         Return True
     End Function
 
-
     Private Shared Function GetAnonymousViewLink(clientContext As ClientContext, item As ListItem)
         Dim objInfo = ObjectSharingInformation.GetObjectSharingInformation(clientContext, item, True, True, True, True, True, True, True)
         clientContext.Load(objInfo, Function(a As ObjectSharingInformation) a.AnonymousViewLink)
@@ -164,20 +184,27 @@ Public Class DocumentService
         Return clientContext
     End Function
 
-    Private Shared Function GetFiles(clientContext As ClientContext, cate As Folder) As List(Of FileAttachment)
+    Private Shared Function GetFiles(clientContext As ClientContext, cate As Folder) As Object
         Dim files = cate.Files
         clientContext.Load(files)
         clientContext.ExecuteQuery()
 
         Dim result = (From file In files
-                     Select New FileAttachment With
+                     Select New With
                             {
                                 .FileID = 1,
                                 .Description = file.UniqueId.ToString,
                                 .Name = file.Name,
                                 .Size = file.Length,
-                                .CreateDate = file.TimeCreated
+                                .CreateDate = file.TimeCreated,
+                                .Createby = GetFileCreateBy(file, clientContext)
                                 }).ToList
         Return result
+    End Function
+
+    Private Shared Function GetFileCreateBy(file As File, ctx As ClientContext) As String
+        ctx.Load(file, Function(f As File) f.ListItemAllFields)
+        ctx.ExecuteQuery()
+        Return file.ListItemAllFields("UploadBy")
     End Function
 End Class

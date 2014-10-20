@@ -21,9 +21,6 @@
 
             Return _propInfo
         End Get
-        'Set(value As PropertyBaseInfo)
-        '    _propInfo = value
-        'End Set
     End Property
 
     Private _mortgages As List(Of PropertyMortgage)

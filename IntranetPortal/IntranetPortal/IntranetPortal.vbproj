@@ -318,7 +318,6 @@
     <Compile Include="CodeFolder\Agent_Properties.vb" />
     <Compile Include="CodeFolder\APIOrder.vb" />
     <Compile Include="CodeFolder\DataWCFService.vb" />
-    <Compile Include="CodeFolder\DocumentService.vb" />
     <Compile Include="CodeFolder\Employee.vb" />
     <Compile Include="CodeFolder\EmployeePerformance.vb" />
     <Compile Include="CodeFolder\EmployeeProfile.vb" />
@@ -2524,6 +2523,10 @@
     <ProjectReference Include="..\IntranetPortal.Core\IntranetPortal.Core.vbproj">
       <Project>{5da9a152-6e61-4cde-baf5-6309ed56539a}</Project>
       <Name>IntranetPortal.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IntranetPortal.Document\IntranetPortal.Document.vbproj">
+      <Project>{44062592-f25d-4424-a74d-44ac79bbdd4d}</Project>
+      <Name>IntranetPortal.Document</Name>
     </ProjectReference>
     <ProjectReference Include="..\IntranetPortal.ShortSale\IntranetPortal.ShortSale.vbproj">
       <Project>{fc0c5f0d-f387-48ed-a96c-6d4e1914fd0b}</Project>
