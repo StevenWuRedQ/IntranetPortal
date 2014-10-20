@@ -84,8 +84,8 @@
                             if (cbCategory.GetIsValid())
                                 UploadFiles();
                         });
-                    }                        
-
+                    }
+                 
                     for (var i = 0; i < files.length; i++) {
                         AppendFileToTable(files[i]);
 

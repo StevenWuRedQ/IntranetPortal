@@ -124,6 +124,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IntranetPortal.Core\IntranetPortal.Core.vbproj">
+      <Project>{5da9a152-6e61-4cde-baf5-6309ed56539a}</Project>
+      <Name>IntranetPortal.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IntranetPortal.ShortSale\IntranetPortal.ShortSale.vbproj">
       <Project>{fc0c5f0d-f387-48ed-a96c-6d4e1914fd0b}</Project>
       <Name>IntranetPortal.ShortSale</Name>

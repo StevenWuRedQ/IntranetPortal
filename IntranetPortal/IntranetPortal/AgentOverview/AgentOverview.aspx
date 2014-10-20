@@ -686,6 +686,7 @@
                                                     <dx:ListEditItem Text="Doorknock Attemps" Value="DoorKnockAttemps" />
                                                     <dx:ListEditItem Text="Follow Up Attemps" Value="FollowupAttemps" />
                                                     <dx:ListEditItem Text="Create Date" Value="CreateDate" />
+                                                     <dx:ListEditItem Text="Last Update" Value="LastUpdate2" />
                                                 </Items>
 
                                                 <%--<CheckBoxStyle  BackgroundImage-ImageUrl="../images/icon_checked_box.png"/>--%>
@@ -702,6 +703,7 @@
                                                     <dx:ListEditItem Text="Neighborhood" Value="NeighName" />
                                                     <dx:ListEditItem Text="Borough" Value="Borough" />
                                                     <dx:ListEditItem Text="Sale Date" Value="SaleDate" />
+                                                    
                                                     <%--no tax class--%>
                                                     <%--<dx:ListEditItem Text="Tax Class" Value="TaxClass" />--%>
                                                     <dx:ListEditItem Text="Propety Class" Value="PropertyClassCode" />

@@ -174,15 +174,13 @@
 
     Public ReadOnly Property Neighborhood As String
         Get
-            'Dim neighbor = ""
-            ''If Not String.IsNullOrEmpty(PropertyAddress) Then
-            ''    If PropertyAddress.Split(",").Count > 1 Then
-            ''        neighbor = PropertyAddress.Split(",")(1)
-            ''        Return neighbor
-            ''    End If
-            ''End If
-
             Return NeighName
+        End Get
+    End Property
+
+    Public ReadOnly Property LastUpdate2 As DateTime
+        Get
+            Return Lead.LastUpdate2
         End Get
     End Property
 
