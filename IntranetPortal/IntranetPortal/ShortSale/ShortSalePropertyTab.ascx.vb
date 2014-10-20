@@ -54,12 +54,8 @@ Public Class ShortSalePropertyTab
         Dim add_floor As PropertyFloor = New PropertyFloor()
         add_floor.BBLE = hfBble.Value
         If (is_insert) Then
-            Dim floors = ShortSaleCase.GetCase(hfCaseId.Value).PropertyInfo.PropFloors
-            If (floors Is Nothing) Then
-                add_floor.FloorId = 1
-            Else
-                add_floor.FloorId = floors.Count + 1
-            End If
+           
+            add_floor.FloorId = get_floor_id()
         Else
             add_floor.FloorId = values.Item("FloorId")
         End If
@@ -77,6 +73,21 @@ Public Class ShortSalePropertyTab
         add_floor.Save()
     End Sub
 
+    Function get_floor_id() As Integer
+        Dim ss_case As ShortSaleCase = ShortSaleCase.GetCase(hfCaseId.Value)
+
+        If (ss_case Is Nothing) Then
+            Return 1
+        End If
+        Dim floors = ss_case.PropertyInfo.PropFloors
+        If (floors Is Nothing) Then
+            Return 1
+        Else
+            Return floors.Count + 1
+        End If
+
+    End Function
+
     Protected Sub home_breakdown_gridview_RowDeleting(sender As Object, e As DevExpress.Web.Data.ASPxDataDeletingEventArgs)
         Dim values = e.Values
         PropertyFloor.Delete(hfBble.Value, values.Item("FloorId"))
@@ -87,4 +98,12 @@ Public Class ShortSalePropertyTab
         save_floor(e.NewValues, False)
         finishEdit(sender, e)
     End Sub
+
+    Function GetFloorId(floorId) As Integer
+        If floorId = 0 Then
+            Return get_floor_id()
+        Else
+            Return floorId
+        End If
+    End Function
 End Class

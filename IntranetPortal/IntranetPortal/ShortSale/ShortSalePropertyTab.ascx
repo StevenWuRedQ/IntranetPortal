@@ -73,7 +73,7 @@
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Accessibility</label>
-              <input class="ss_form_input" type="number"  data-field="PropertyInfo.Accessibility">
+            <input class="ss_form_input" type="number" data-field="PropertyInfo.Accessibility">
             <%--<select class="ss_form_input" data-field="PropertyInfo.Accessibility">
                 <option value="Lockbox-LOC">Lockbox-LOC</option>
                 <option value="Master Key">Master Key</option>
@@ -96,7 +96,7 @@
             </label>
 
         </li>
-        
+
         <li class="ss_form_item">
             <span class="ss_form_input_title">Freddie Mac</span>
 
@@ -117,20 +117,23 @@
     <asp:HiddenField ID="hfBble" runat="server" />
     <asp:HiddenField ID="hfCaseId" runat="server" />
     <div>
-        <dx:ASPxGridView ID="home_breakdown_gridview" runat="server" KeyFieldName="BBLE;FloorId" SettingsBehavior-AllowDragDrop="false" SettingsBehavior-AllowSort="false" OnRowInserting="home_breakdown_gridview_RowInserting" OnRowDeleting="home_breakdown_gridview_RowDeleting" OnRowUpdating="home_breakdown_gridview_RowUpdating">
+        <dx:ASPxGridView ID="home_breakdown_gridview" runat="server" KeyFieldName="BBLE;FloorId" SettingsBehavior-AllowDragDrop="false" SettingsBehavior-AllowSort="false" OnRowInserting="home_breakdown_gridview_RowInserting" OnRowDeleting="home_breakdown_gridview_RowDeleting" OnRowUpdating="home_breakdown_gridview_RowUpdating" >
 
             <Columns>
 
-                <dx:GridViewCommandColumn ShowNewButtonInHeader="true" ShowDeleteButton="True" />
+                <dx:GridViewCommandColumn ShowEditButton="true" ShowNewButtonInHeader="true" ShowDeleteButton="True" />
                 <%--<dx:GridViewDataColumn FieldName="FloorId" VisibleIndex="1" Caption="Floor" 
                     
                     />--%>
-                
-               
-                <dx:GridViewDataColumn FieldName="FloorId" VisibleIndex="1" Caption="Floor" ReadOnly="true">     
-                    <DataItemTemplate>
-                        <% %>
-                    </DataItemTemplate>             
+
+
+                <dx:GridViewDataColumn FieldName="FloorId" VisibleIndex="1" Caption="Floor" ReadOnly="true">
+                    <EditItemTemplate>
+                        <span>
+                            <%# GetFloorId(Eval("FloorId"))%>
+                        </span>
+                    </EditItemTemplate>
+                    
                 </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="Bedroom" VisibleIndex="1" />
                 <dx:GridViewDataColumn FieldName="Bathroom" VisibleIndex="2" />
@@ -144,11 +147,11 @@
 
                 <dx:GridViewDataColumn FieldName="BoilerRoom" VisibleIndex="5" />--%>
             </Columns>
-            <SettingsEditing Mode="Batch"/>
-            
+            <SettingsEditing Mode="PopupEditForm" />
+
 
         </dx:ASPxGridView>
-        
+
         <%--   <table class="table">
             <thead>
                 <tr>
@@ -259,7 +262,7 @@
         //$("#home_breakdown_table").editableTableWidget();
         $(".ss_form_input, .input_with_check").prop("disabled", true);
         initToolTips();
-        
+
         format_input();
         $("#prioity_content").mCustomScrollbar(
               {
@@ -275,7 +278,7 @@
         $(".dxgvCSD").mCustomScrollbar(
             {
                 theme: "minimal-dark",
-              
+
             }
          );
     }

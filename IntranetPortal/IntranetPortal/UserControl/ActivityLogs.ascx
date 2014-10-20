@@ -255,7 +255,11 @@
             return;
         }
 
-        var addDate = dateActivityClient.GetDate();
+        var addDate = null;
+        if (typeof dateActivityClient != 'undefined')
+        {
+            addDate = dateActivityClient.GetDate();
+        }
         if (addDate == null)
             addDate = new Date();
 
@@ -300,12 +304,14 @@
                 </dx:ASPxPopupControl>
 
 
-
-                <div style="margin-top: 50px">
-                    Date of Comment:
+                
+                <%-- 50px --%>
+                <div style="margin-top: -16px">
+                    &nbsp;
+                   <%-- Date of Comment:
                     <div class="border_under_line">
                         <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
-                    </div>
+                    </div>--%>
                 </div>
                 <div style="margin-top: 15px; float: right">
                     <i class="fa fa-plus-circle activity_add_buttons tooltip-examples" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
@@ -517,7 +523,7 @@
             <Settings VerticalScrollBarMode="Auto" VerticalScrollableHeight="670" />
             <SettingsBehavior AllowFocusedRow="false" AllowClientEventsOnLoad="false" AllowDragDrop="false"
                 EnableRowHotTrack="false" ColumnResizeMode="Disabled" />
-            <ClientSideEvents EndCallback="function(){dateActivityClient.SetDate(new Date());AddTooltips();$('.dxgvCSD').mCustomScrollbar({theme: 'minimal-dark'});}" />
+            <ClientSideEvents EndCallback="function(){/*dateActivityClient.SetDate(new Date());*/AddTooltips();$('.dxgvCSD').mCustomScrollbar({theme: 'minimal-dark'});}" />
         </dx:ASPxGridView>
 
         <dx:ASPxPopupControl ClientInstanceName="popupFilterControl" Width="160px" Height="200px"

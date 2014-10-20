@@ -47,19 +47,25 @@ Public Class ActivityLogs
     Protected Sub gridTracking_RowInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs) Handles gridTracking.RowInserting
         Dim aspxdate = TryCast(gridTracking.FindEditFormTemplateControl("dateActivity"), ASPxDateEdit)
         Dim txtComments = TryCast(gridTracking.FindEditFormTemplateControl("txtComments"), ASPxMemo)
-        If aspxdate.Date.Date = DateTime.Now.Date Then
-            aspxdate.Date = DateTime.Now
-        End If
+        Dim getdate As DateTime = DateTime.Now
 
-        If aspxdate.Date < DateTime.Now Then
-            aspxdate.Date = aspxdate.Date.Date
+        If (aspxdate IsNot Nothing) Then
+            If aspxdate.Date.Date = DateTime.Now.Date Then
+                aspxdate.Date = DateTime.Now
+            End If
+
+            If aspxdate.Date < DateTime.Now Then
+                aspxdate.Date = aspxdate.Date.Date
+            End If
+            getdate = aspxdate.Date
         End If
+       
 
         If String.IsNullOrEmpty(txtComments.Text) Then
             Throw New Exception("Comments can not be empty.")
         End If
 
-        LeadsActivityLog.AddActivityLog(aspxdate.Date, txtComments.Text, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)
+        LeadsActivityLog.AddActivityLog(getdate, txtComments.Text, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)
         'AddActivityLog(aspxdate.Date, txtComments.Text, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString)
         e.Cancel = True
 
