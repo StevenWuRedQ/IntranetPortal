@@ -125,8 +125,12 @@
                 <%--<dx:GridViewDataColumn FieldName="FloorId" VisibleIndex="1" Caption="Floor" 
                     
                     />--%>
+                
                
-                <dx:GridViewDataColumn FieldName="FloorId" VisibleIndex="1" Caption="Floor" ReadOnly="true">                  
+                <dx:GridViewDataColumn FieldName="FloorId" VisibleIndex="1" Caption="Floor" ReadOnly="true">     
+                    <DataItemTemplate>
+                        <% %>
+                    </DataItemTemplate>             
                 </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="Bedroom" VisibleIndex="1" />
                 <dx:GridViewDataColumn FieldName="Bathroom" VisibleIndex="2" />

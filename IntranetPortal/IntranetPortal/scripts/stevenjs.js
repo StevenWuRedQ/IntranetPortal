@@ -400,7 +400,7 @@ function delete_array_item(button) {
 
 function clearArray(array) {
     if (array == null || array.length == 0) {
-        d_alert("clear empty array");
+        //d_alert("clear empty array");
         return;
     }
     if (!(array instanceof Array)) {

@@ -22,8 +22,10 @@
         //ShortSaleCaseData = short_sale_case_data;
         short_sale_case_data.PropertyInfo.UpdateBy = "<%=Page.User.Identity.Name%>";
 
-        clearHomeOwner();
+       
         ShortSaleDataBand(1);
+
+        clearHomeOwner();
         //console.log("the data is give to save is 222", JSON.stringify(ShortSaleCaseData));
         var strJson = JSON.stringify(ShortSaleCaseData);
         
