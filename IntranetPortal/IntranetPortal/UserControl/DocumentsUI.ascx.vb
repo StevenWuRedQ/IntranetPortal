@@ -1,6 +1,6 @@
 ﻿Imports System.Security
 Imports System.Web.Services
-Imports IntranetPortal.Document
+Imports IntranetPortal.Core
 
 Public Class DocumentsUI
     Inherits System.Web.UI.UserControl

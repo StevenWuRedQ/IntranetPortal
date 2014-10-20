@@ -1,7 +1,7 @@
 ﻿Imports Microsoft.SharePoint.Client
 Imports System.Security
 Imports Microsoft.SharePoint.Client.Sharing
-Imports IntranetPortal.Document
+Imports IntranetPortal.Core
 
 Public Class DownloadFile
     Inherits System.Web.UI.Page

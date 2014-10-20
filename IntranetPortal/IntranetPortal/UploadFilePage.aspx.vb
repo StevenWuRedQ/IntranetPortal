@@ -3,7 +3,7 @@ Imports DevExpress.Web.ASPxEditors
 Imports System.Net.Http
 Imports System.Web.Services
 Imports System.IO
-Imports IntranetPortal.Document
+Imports IntranetPortal.Core
 
 Public Class UploadFilePage
     Inherits System.Web.UI.Page
