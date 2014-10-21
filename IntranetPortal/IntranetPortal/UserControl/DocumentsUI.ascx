@@ -126,8 +126,7 @@
                                         <dx:ASPxLabel runat="server" Text='<%# String.Format("{0:g}", Eval("CreateDate")) %>'></dx:ASPxLabel>
                                     </td>
                                 </tr>--%>
-                                        </ItemTemplate>
-                                        
+                                        </ItemTemplate>                                        
                                     </asp:Repeater>
                                     
                                 </div>

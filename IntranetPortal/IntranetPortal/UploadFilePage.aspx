@@ -140,8 +140,8 @@
 
             #trFileHolder.hover {
                 background-color:#efefef;
-                border: 10px dashed #0c0;
-            }        
+                border: 5px dashed #0c0;
+            }
 
         progress {
             width: 100%;
