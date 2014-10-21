@@ -27,6 +27,10 @@ Public Class EmailService
 
     Public Shared Sub SendMail(toAddress As String, ccAddress As String, subject As String, body As String, attchments As String())
         Dim Message As New Mail.MailMessage()
+        If String.IsNullOrEmpty(toAddress) Then
+            Throw New Exception("To address can't be empty.")
+        End If
+
         Message.To.Add(New MailAddress(toAddress))
         If Not String.IsNullOrEmpty(ccAddress) Then
             Dim adds = ccAddress.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries)
@@ -51,8 +55,7 @@ Public Class EmailService
         Try
             client.Send(Message)
         Catch ex As Exception
-
-            ' ...
+            Throw ex
         End Try
     End Sub
 End Class

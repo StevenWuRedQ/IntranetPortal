@@ -68,11 +68,11 @@ Partial Public Class SendMailControl
     Protected WithEvents EmailAttachments As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
 
     '''<summary>
-    '''EamilBody control.
+    '''EmailBody control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents EamilBody As Global.DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor
+    Protected WithEvents EmailBody As Global.DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor
 End Class

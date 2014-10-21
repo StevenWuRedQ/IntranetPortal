@@ -15,6 +15,16 @@ Public Class UploadFilePage
             'Bindfiles(Request.QueryString("b"))
 
             If Request.Files IsNot Nothing AndAlso Request.Files.Count > 0 AndAlso Not String.IsNullOrEmpty(Request.QueryString("cate")) Then
+                Dim categories = New StringDictionary()
+                If Not String.IsNullOrEmpty(Request.Form("Category")) Then
+                    Dim cateArray = Request.Form("Category").Split(",")
+
+                    For Each cate In cateArray
+                        Dim item = cate.Split("=")
+                        categories.Add(item(0), item(1))
+                    Next
+                End If
+
                 For i = 0 To Request.Files.Count - 1
                     Dim file = Request.Files(i)
                     Dim name = file.FileName
@@ -22,7 +32,7 @@ Public Class UploadFilePage
                     file.InputStream.CopyTo(ms)
 
                     Dim bble = Request.QueryString("b")
-                    Dim category = Request.QueryString("cate")
+                    Dim category = categories(name)  'Request.QueryString("cate")
 
                     DocumentService.UploadFile(String.Format("{0}/{1}/", bble, category), ms.ToArray, name, User.Identity.Name)
                 Next

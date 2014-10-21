@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Upload Files</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
         // <![CDATA[
         function Uploader_OnUploadStart() {
@@ -33,17 +34,23 @@
     </script>
 
     <script type="text/javascript">
-       
+
         function OnDropBody(event) {
             alert("Please drop the files into the drag area.");
             return false;
         }
 
-        function UploadFiles()
-        {
+        function UploadFiles() {
             if (!!tests.formdata && formData != null) {
                 var xhr = new XMLHttpRequest();
                 var url = form1.action + "&cate=" + cbCategory.GetText();
+                
+                var categories = GetSelectedCategory();
+                if (categories != null)
+                {
+                    formData.append("Category", categories);                   
+                }
+
                 xhr.open('POST', url)
                 xhr.onload = function () {
                     progress.value = progress.innerHTML = 100;
@@ -52,10 +59,10 @@
                 };
 
                 if (tests.progress) {
-                    xhr.upload.onprogress = function (event) {                        
+                    xhr.upload.onprogress = function (event) {
                         if (event.lengthComputable) {
                             var complete = (event.loaded / event.total * 100 | 0);
-                            progress.value = progress.innerHTML = complete;                            
+                            progress.value = progress.innerHTML = complete;
                         }
                     }
                 }
@@ -70,7 +77,7 @@
         var formData = null;
         function OnDropTextarea(event) {
             if (event.dataTransfer) {
-                if (event.dataTransfer.files) {               
+                if (event.dataTransfer.files) {
                     var files = event.dataTransfer.files;
 
                     if (formData == null) {
@@ -85,14 +92,14 @@
                                 UploadFiles();
                         });
                     }
-                 
+
                     for (var i = 0; i < files.length; i++) {
                         AppendFileToTable(files[i]);
 
                         if (tests.formdata)
                             formData.append('file', files[i]);
                         //previewfile(files[i]);
-                    }                    
+                    }
                 }
                 else {
                     alert("Your browser does not support the files property.");
@@ -100,7 +107,7 @@
             }
             else {
                 alert("Your browser does not support the dataTransfer property.");
-            }                      
+            }
         }
 
         function AppendFileToTable(file) {
@@ -122,6 +129,9 @@
             cell1.innerHTML = fileName;
 
             cell1 = row.insertCell(2);
+            cell1.appendChild(GetCategoryElement(fileName));
+
+            cell1 = row.insertCell(3);
             if ('size' in file) {
                 var fileSize = file.size;
             }
@@ -131,15 +141,38 @@
             cell1.innerHTML = fileSize;
         }
 
+        function GetCategoryElement(fileName) {
+            var cates = ["Financials", "Short Sale", "Photos", "Accounting", "Eviction", "Construction"];
+            var x = document.createElement("SELECT");
+            x.setAttribute("data-filename", fileName);
+            for (var i = 0; i < cates.length; i++) {
+                var option = document.createElement("option");
+                option.text = cates[i];
+                x.add(option);
+            }
+
+            return x;
+        }
+
+        function GetSelectedCategory() {
+            var allCategories = [];
+            $('#tblFiles select').each(function () {
+                var cate = $(this).attr("data-filename") + "=" + $(this).val();               
+                allCategories.push(cate);
+            });
+
+            return allCategories.toString();
+        }
+
     </script>
     <style>
-        #trFileHolder {            
-            border: 5px dashed #ccc;                      
+        #trFileHolder {
+            border: 5px dashed #ccc;
             margin: 20px auto;
         }
 
             #trFileHolder.hover {
-                background-color:#efefef;
+                background-color: #efefef;
                 border: 5px dashed #0c0;
             }
 
@@ -190,12 +223,13 @@
                     <dx:ASPxLabel ID="lblAllowebMimeType" runat="server" Text="Allowed types: jpeg, gif, doc, pdf;Maximum file size: 4Mb"
                         Font-Size="8pt">
                     </dx:ASPxLabel>
-                    <table style="width:70%;display:none" id="tblFiles" class="dxeBase_MetropolisBlue1">
+                    <table style="width: 90%; display: none; line-height: 25px" id="tblFiles" class="dxeBase_MetropolisBlue1">
                         <thead>
                             <tr>
-                                <td style="width:25px">#</td>
+                                <td style="width: 25px">#</td>
                                 <td>Name</td>
-                                <td style="width:80px">Size(KB)</td>
+                                <td style="width: 120px">Category</td>
+                                <td style="width: 80px">Size(KB)</td>
                             </tr>
                         </thead>
                     </table>
@@ -234,7 +268,7 @@
                     </table>
                 </td>
             </tr>
-            <tr id="trFileHolder" style="height:100px">
+            <tr id="trFileHolder" style="height: 100px">
                 <td colspan="2">
                     <dx:ASPxGridView runat="server" Width="100%" ID="gridFiles" ClientInstanceName="gridFilesClient" OnCustomCallback="gridFiles_CustomCallback" KeyFieldName="FileID" Visible="false">
                         <Columns>
@@ -282,7 +316,7 @@
                 </td>
             </tr>
             <tr id="trProgress">
-                <td colspan="2" class="dxeBase_MetropolisBlue1">                 
+                <td colspan="2" class="dxeBase_MetropolisBlue1">
                     <p>Upload progress: <progress id="uploadprogress" min="0" max="100" value="0">0</progress></p>
                     <p>Drag a document from your desktop on to the drop zone above to upload.</p>
                 </td>
@@ -290,34 +324,34 @@
         </table>
         <script>
 
-           var holder = document.getElementById('trFileHolder'),
-               tests = {
-                   filereader: typeof FileReader != 'undefined',
-                   dnd: 'draggable' in document.createElement('span'),
-                   formdata: !!window.FormData,
-                   progress: "upload" in new XMLHttpRequest
-               },
-               support = {
-                   filereader: document.getElementById('filereader'),
-                   formdata: document.getElementById('formdata'),
-                   progress: document.getElementById('progress')
-               },
-               acceptedTypes = {
-                   'image/png': true,
-                   'image/jpeg': true,
-                   'image/gif': true
-               },
-               fileTable = document.getElementById("tblFiles"),
-               progress = document.getElementById('uploadprogress');
+            var holder = document.getElementById('trFileHolder'),
+                tests = {
+                    filereader: typeof FileReader != 'undefined',
+                    dnd: 'draggable' in document.createElement('span'),
+                    formdata: !!window.FormData,
+                    progress: "upload" in new XMLHttpRequest
+                },
+                support = {
+                    filereader: document.getElementById('filereader'),
+                    formdata: document.getElementById('formdata'),
+                    progress: document.getElementById('progress')
+                },
+                acceptedTypes = {
+                    'image/png': true,
+                    'image/jpeg': true,
+                    'image/gif': true
+                },
+                fileTable = document.getElementById("tblFiles"),
+                progress = document.getElementById('uploadprogress');
 
-           debugger;
-            if (tests.dnd) {               
+            debugger;
+            if (tests.dnd) {
                 holder.ondragover = function () { this.className = 'hover'; return false; };
                 holder.ondragend = function () { this.className = ''; return false; };
                 holder.ondrop = function (e) {
                     this.className = '';
                     e.preventDefault();
-                    OnDropTextarea(e);                   
+                    OnDropTextarea(e);
                 };
             } else {
                 holder.style.display = "none";
