@@ -43,24 +43,74 @@ Public Class DocumentService
         End Using
     End Function
 
+    Public Shared Function DownLoadFile(uniqueId As String) As Object
+        'Using ClientContext = GetClientContext()
+        '    Dim item = GetFileById(uniqueId, ClientContext)
+        '    If item IsNot Nothing Then
+        '        Dim tmpfile = item.File
+        '        ClientContext.Load(tmpfile, Function(f As File) f.ServerRelativeUrl, Function(f As File) f.Name)
+
+        '        Using ms As New IO.MemoryStream
+        '            Dim str = tmpfile.OpenBinaryStream()
+        '            ClientContext.ExecuteQuery()
+
+        '            str.Value.CopyTo(ms)
+        '            Return New With {
+        '            .Stream = ms.ToArray,
+        '            .Name = tmpfile.Name
+        '        }
+        '        End Using
+        '    End If
+
+        '    Return Nothing
+        'End Using
+
+        Dim file = DownLoadFileStream(uniqueId)
+        If file IsNot Nothing Then
+            Return New With {
+                .Stream = CType(file.Stream, IO.MemoryStream).ToArray,
+                .Name = file.Name.ToString
+                }
+        End If
+
+        Return Nothing
+    End Function
+
+    Public Shared Function DownLoadFileStream(uniqueId As String) As Object
+        Using ClientContext = GetClientContext()
+            Dim item = GetFileById(uniqueId, ClientContext)
+            If item IsNot Nothing Then
+                Dim tmpfile = item.File
+                ClientContext.Load(tmpfile, Function(f As File) f.ServerRelativeUrl, Function(f As File) f.Name)
+
+                Dim ms As New IO.MemoryStream
+                Dim str = tmpfile.OpenBinaryStream()
+                ClientContext.ExecuteQuery()
+
+                str.Value.CopyTo(ms)
+                ms.Position = 0
+                Return New With {
+                .Stream = ms,
+                .Name = tmpfile.Name
+            }
+            End If
+
+            Return Nothing
+        End Using
+    End Function
+
     Public Shared Function GetPreviewContentLink(uniqueId As String) As String
         Using ClientContext = GetClientContext()
-            Dim list = ClientContext.Web.Lists.GetByTitle(DocumentLibraryTitle)
 
-            Dim camlQuery As New CamlQuery
-            camlQuery.ViewXml = String.Format("<View Scope='RecursiveAll'><RowLimit>1</RowLimit><Query><Where><Eq><FieldRef Name='UniqueId'/><Value Type='Guid'>{0}</Value></Eq></Where></Query></View>", uniqueId)
-            Dim items = list.GetItems(camlQuery)
-            ClientContext.Load(items)
-            ClientContext.ExecuteQuery()
-
-            If items.Count = 1 Then
-                Dim link = GetAnonymousViewLink(ClientContext, items(0))
-                Dim file = items(0).File
+            Dim item = GetFileById(uniqueId, ClientContext)
+            If item IsNot Nothing Then
+                Dim link = GetAnonymousViewLink(ClientContext, item)
+                Dim file = item.File
                 ClientContext.Load(file, Function(f As File) f.ServerRelativeUrl, Function(f As File) f.Name)
                 ClientContext.ExecuteQuery()
                 If String.IsNullOrEmpty(link) Then
                     CreateSharingLink(ClientContext, file.ServerRelativeUrl)
-                    link = GetAnonymousViewLink(ClientContext, items(0))
+                    link = GetAnonymousViewLink(ClientContext, item)
                 End If
 
                 If file.Name.EndsWith("pdf", StringComparison.OrdinalIgnoreCase) Then
@@ -72,6 +122,21 @@ Public Class DocumentService
 
             Return ""
         End Using
+    End Function
+
+    Private Shared Function GetFileById(uniqueId As String, clientContext As ClientContext) As ListItem
+        Dim list = clientContext.Web.Lists.GetByTitle(DocumentLibraryTitle)
+        Dim camlQuery As New CamlQuery
+        camlQuery.ViewXml = String.Format("<View Scope='RecursiveAll'><RowLimit>1</RowLimit><Query><Where><Eq><FieldRef Name='UniqueId'/><Value Type='Guid'>{0}</Value></Eq></Where></Query></View>", uniqueId)
+        Dim items = list.GetItems(camlQuery)
+        clientContext.Load(items)
+        clientContext.ExecuteQuery()
+
+        If items.Count = 1 Then
+            Return items(0)
+        End If
+
+        Return Nothing
     End Function
 
     Public Shared Sub UploadFile(folderPath As String, fileBytes As Byte(), fileName As String)
