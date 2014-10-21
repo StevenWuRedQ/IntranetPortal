@@ -1154,15 +1154,15 @@ pre#event-log {
 }
 
 .doc_list_checks {
-    margin-top:0px !important;
+    margin-top: 0px !important;
     width: 290px;
     padding: 10px;
     font-weight: normal;
 }
 
-.doc_list_checks:hover {
+    .doc_list_checks:hover {
         background: #f0f2f6;
-}
+    }
 
 .font_16 {
     font-size: 16px;
@@ -1829,40 +1829,46 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
     cursor: pointer;
 }
 
-.dxgvCommandColumn_MetropolisBlue1 a:hover
-{
-    color:black !important;
+.dxgvCommandColumn_MetropolisBlue1 a:hover {
+    color: black !important;
 }
-.ss_mortages_stauts
-{
-    width:76% !important;
+
+.ss_mortages_stauts {
+    width: 76% !important;
 }
-.email_input
-{
-    margin-left:15px;
-   
-    
+
+.email_input {
+    margin-left: 15px;
 }
-.email_input tbody tr td
-{
-    margin-top:10px;
-    border-radius:5px !important;
-    border-color:#ecedf1 !important;
+
+    .email_input tbody tr td {
+        margin-top: 10px;
+        border-radius: 5px !important;
+        border-color: #ecedf1 !important;
+    }
+
+        .email_input tbody tr td input {
+            width: 400px !important;
+            height: 30px !important;
+            padding-left: 5px !important;
+            font-size: 18px !important;
+        }
+
+.mail_edits {
+    line-height: 48px;
 }
-.email_input tbody tr td input
-{
-  
-    width:400px !important;
-    height:35px !important;
-    padding-left:5px !important;
-    font-size:18px !important;
-   
+
+    .mail_edits tbody tr {
+        padding-top: 10px;
+    }
+
+.popup_btns {
+    float: right;
+    margin-right: 20px;
+    position: relative;
+    bottom: -28px;
 }
-.mail_edits
+.bg_color_blue
 {
-    line-height: 55px;
-}
-.mail_edits tbody tr
-{
-    padding-top:10px;
+    background:#3993c1;
 }
