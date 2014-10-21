@@ -8,9 +8,23 @@ Public Class DownloadFile
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not String.IsNullOrEmpty(Request.QueryString("spFile")) Then
-            Dim link = DocumentService.GetPreviewContentLink(Request.QueryString("spFile"))
-            If Not String.IsNullOrEmpty(link) Then
-                Response.Redirect(link)
+            Dim fileId = Request.QueryString("spFile")
+
+            If String.IsNullOrEmpty(Request.QueryString("o")) Then
+                Dim link = DocumentService.GetPreviewContentLink(fileId)
+                If Not String.IsNullOrEmpty(link) Then
+                    Response.Redirect(link)
+                End If
+            Else
+                Dim data = DocumentService.DownLoadFile(fileId)
+
+                If data IsNot Nothing Then
+                    Response.Clear()
+                    Response.ClearHeaders()
+                    Response.AddHeader("Content-Disposition", "attachment; filename=" & data.Name)
+                    Response.BinaryWrite(data.Stream)
+                    Response.[End]()
+                End If
             End If
         End If
 

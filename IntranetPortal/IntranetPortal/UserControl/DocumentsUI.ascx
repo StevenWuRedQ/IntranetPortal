@@ -34,7 +34,7 @@
             NavigateUrl("/DownloadFile.aspx?spFile=" + tmpFileId);
         } else if (e.item.index == 1) {
             /*download*/
-            NavigateUrl("/DownloadFile.aspx?spFile=" + tmpFileId);
+            NavigateUrl("/DownloadFile.aspx?spFile=" + tmpFileId + "&o=1");
         }
         else {
           
@@ -77,6 +77,7 @@
                 <i class="fa fa-file"></i>&nbsp;
                 <span class="font_light">Documents</span>
                 <span class="time_buttons" onclick="UploadFiles()">Upload File</span>
+                <span class="time_buttons" onclick="UploadFiles()">Send Email</span>
             </div>
             <div style="padding-left: 39px;" class="clearfix">
                 <span style="font-size: 14px;"><%= LeadsName %></span>
@@ -101,7 +102,7 @@
                                             <%--                <tr onclick="PreviewDocument('<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>', '<%# Eval("ContentType")%>');" style="cursor:pointer" onmouseover="this.bgColor = '#D1DEFB';" onmouseout="this.bgColor = '';">--%>
 
                                             <div class="clearfix">
-                                                <input type="checkbox" name="vehicle" value="Bike" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
+                                                <input type="checkbox" name="vehicle" value="<%# Eval("Name")%>" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
                                                 <label class="doc_list_checks check_margin" for='<%# String.Format("doc_list_id_{0}", Eval("Description"))%>'>
                                                     <span class="color_balck ">
                                                          <%-- NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}&spFile={1}", Eval("FileID"), Eval("Description"))%>' Text='<%# Eval("Name")%>'--%> 

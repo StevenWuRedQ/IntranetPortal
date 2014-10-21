@@ -717,6 +717,13 @@
       <DependentUpon>UploadFileToSharepoint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PopupControl\SendMail.aspx.designer.vb">
+      <DependentUpon>SendMail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\SendMail.aspx.vb">
+      <DependentUpon>SendMail.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="PopupControl\ShareLeads.aspx.designer.vb">
       <DependentUpon>ShareLeads.aspx</DependentUpon>
     </Compile>
@@ -1519,6 +1526,7 @@
     <Content Include="pdfViewer\web\viewer.css" />
     <Content Include="pdfViewer\web\viewer.html" />
     <Content Include="pdfViewer\web\viewer.js" />
+    <Content Include="PopupControl\SendMail.aspx" />
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
     <Content Include="PreviewFile.aspx" />
