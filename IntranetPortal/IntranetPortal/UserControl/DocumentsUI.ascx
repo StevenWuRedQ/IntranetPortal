@@ -51,6 +51,24 @@
         tmpFileId = docId;
         AspFilePopupMenu.ShowAtElement(s.GetMainElement());
     }
+
+    function GetSelectedAttachment()
+    {
+        var allFiles = [];
+        $('input:checkbox.FileCheckbox').each(function () {
+            if (this.checked)
+            {
+                var file = {
+                    "Name": $(this).val(),
+                    "UniqueId": $(this).attr("data-UniqueId")
+                }
+                allFiles.push(file);
+            }
+        });
+
+        return allFiles;
+    }
+
 </script>
 
 <dx:ASPxPopupMenu ID="ASPxPopupMenu11" runat="server" ClientInstanceName="AspFilePopupMenu"
@@ -66,7 +84,6 @@
         <dx:MenuItem Text="Preview History" Name="History">
         </dx:MenuItem>
     </Items>
-
     <ClientSideEvents ItemClick="OnFilePopUpClick" />
 </dx:ASPxPopupMenu>
 
@@ -77,7 +94,7 @@
                 <i class="fa fa-file"></i>&nbsp;
                 <span class="font_light">Documents</span>
                 <span class="time_buttons" onclick="UploadFiles()">Upload File</span>
-                <span class="time_buttons" onclick="UploadFiles()">Send Email</span>
+                <span class="time_buttons" onclick="GetSelectedFiles()">Send Email</span>
             </div>
             <div style="padding-left: 39px;" class="clearfix">
                 <span style="font-size: 14px;"><%= LeadsName %></span>
@@ -102,7 +119,7 @@
                                             <%--                <tr onclick="PreviewDocument('<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>', '<%# Eval("ContentType")%>');" style="cursor:pointer" onmouseover="this.bgColor = '#D1DEFB';" onmouseout="this.bgColor = '';">--%>
 
                                             <div class="clearfix">
-                                                <input type="checkbox" name="vehicle" value="<%# Eval("Name")%>" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
+                                                <input type="checkbox" name="vehicle" data-UniqueId="<%# Eval("Description")%>" class="FileCheckbox" value="<%# Eval("Name")%>" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
                                                 <label class="doc_list_checks check_margin" for='<%# String.Format("doc_list_id_{0}", Eval("Description"))%>'>
                                                     <span class="color_balck ">
                                                          <%-- NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}&spFile={1}", Eval("FileID"), Eval("Description"))%>' Text='<%# Eval("Name")%>'--%> 
