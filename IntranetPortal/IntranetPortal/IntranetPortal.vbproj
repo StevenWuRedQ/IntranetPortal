@@ -729,7 +729,7 @@
     </Compile>
     <Compile Include="PopupControl\SendMail.aspx.vb">
       <DependentUpon>SendMail.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="PopupControl\ShareLeads.aspx.designer.vb">
       <DependentUpon>ShareLeads.aspx</DependentUpon>

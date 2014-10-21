@@ -1837,3 +1837,32 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 {
     width:76% !important;
 }
+.email_input
+{
+    margin-left:15px;
+   
+    
+}
+.email_input tbody tr td
+{
+    margin-top:10px;
+    border-radius:5px !important;
+    border-color:#ecedf1 !important;
+}
+.email_input tbody tr td input
+{
+  
+    width:400px !important;
+    height:35px !important;
+    padding-left:5px !important;
+    font-size:18px !important;
+   
+}
+.mail_edits
+{
+    line-height: 55px;
+}
+.mail_edits tbody tr
+{
+    padding-top:10px;
+}

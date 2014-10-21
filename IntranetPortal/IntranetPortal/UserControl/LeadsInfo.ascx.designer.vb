@@ -381,4 +381,13 @@ Partial Public Class LeadsInfo1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''SendMail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SendMail As Global.IntranetPortal.SendMailControl
 End Class

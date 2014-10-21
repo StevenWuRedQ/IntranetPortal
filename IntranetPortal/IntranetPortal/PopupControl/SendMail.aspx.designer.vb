@@ -12,4 +12,40 @@ Option Explicit On
 
 
 Partial Public Class SendMailPage
+
+    '''<summary>
+    '''EmailToIDs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents EmailToIDs As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''EmailCCIDs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents EmailCCIDs As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''EmailSuject control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents EmailSuject As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''EmailAttachments control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents EmailAttachments As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
 End Class
