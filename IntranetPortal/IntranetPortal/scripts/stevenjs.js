@@ -126,7 +126,7 @@ function expand_array_item(e) {
 
     var div = $(e).parents(".ss_array");
     var current_div = div.find(".collapse_div")
-    var isopen = current_div.css("display") == "inline";
+    var isopen = current_div.css("display") != "none";
     var field = div.attr("data-field");
    
     $(".ss_array[data-field='" + field + "']").each(
@@ -140,30 +140,11 @@ function expand_array_item(e) {
     
 }
 
-function control_array_div(div,is_open)
+function control_array_btn(div, current_div)
 {
-    var current_div = div.find(".collapse_div");
-    if (current_div.length == 0)
-    {
-        return;
-    }
-   
-    //if (is_open)
-    //{
-    //    open_ss_array_div(current_div)
-    //}
-    //else
-    //{
-    //    close_ss_array_div(current_div);
-    //}
-    //current_div.slideToggle();
-
-    current_div.css("display", is_open ? "inline" : "none");
-  
-    is_open = current_div.css("display") == "inline";
+    var is_open = current_div.css("display") != "none";
     var btn = div.find(".expand_btn");
-    if (btn.length == 0)
-    {
+    if (btn.length == 0) {
         return;
     }
     var e_class = btn.attr("class");
@@ -174,6 +155,30 @@ function control_array_div(div,is_open)
         btn.attr("class", e_class.replace("-compress", "-expand"));
 
     }
+}
+function control_array_div(div,is_open)
+{
+    var current_div = div.find(".collapse_div");
+    if (current_div.length == 0)
+    {
+        return;
+    }
+    var btn_func = function()
+    {
+        control_array_btn(div, current_div)
+    }
+    if (is_open)
+    {
+        current_div.slideDown(btn_func);
+    } else {
+        current_div.slideUp(btn_func);
+        //current_div.hide();
+    }
+
+    //control_array_btn(div, current_div);
+   // current_div.css("display", is_open ? "inline" : "none");
+  
+    
 }
 
 
@@ -568,9 +573,8 @@ function prepareArrayDivs(is_save) {
         for (var i = 0; i < data_value.length; i++) {
 
             var clone_div = addCloneTo(elem, add_div, i);
-            if (i == 0) {
-                expland_div(clone_div)
-            }
+            control_array_div(clone_div, i == 0);
+            
             add_div = clone_div;
         }
     });
@@ -591,7 +595,7 @@ function AddArraryItem(event, e) {
     var data_value = get_sub_property(ShortSaleCaseData, field, null);
     var len = data_value.length;
     data_value[len] = new Object();
-    array_div.parent().find(".collapse_div").css("display", "none");
+    
     array_div.parent().find(".ss_array").each(
         function (ind) {
             control_array_div($(this),false);
@@ -605,7 +609,7 @@ function AddArraryItem(event, e) {
 
     var add_div = addCloneTo(template, lastdiv, len);
 
-    control_array_div(array_div.parent().find(".collapse_div:last").parents(".ss_array"),true);
+    control_array_div(add_div, true);
 
     add_div.find(".ss_form_input").each(function (ind) {
         $(this).val("");
