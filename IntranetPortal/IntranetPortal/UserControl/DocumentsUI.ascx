@@ -3,7 +3,12 @@
 <script src="/scripts/stevenjs.js"></script>
 <script type="text/javascript">
     function UploadFiles() {
-        var url = '/UploadFilePage.aspx?b=' + leadsInfoBBLE;
+        var url = "";
+        if (typeof leadsInfoBBLE == undefined)
+            url = '/UploadFilePage.aspx?b=<%= LeadsBBLE%>';
+        else
+            url = '/UploadFilePage.aspx?b=' + leadsInfoBBLE;
+
         //var centerLeft = parseInt((window.screen.availWidth - 640) / 2);
         //var centerTop = parseInt(((window.screen.availHeight - 400) / 2) - 50);          
         if (popupCtrUploadFiles) {
@@ -93,8 +98,7 @@
             <div class="font_30">
                 <i class="fa fa-file"></i>&nbsp;
                 <span class="font_light">Documents</span>
-                <span class="time_buttons" onclick="UploadFiles()">Upload File</span>
-                <span class="time_buttons" onclick="GetSelectedFiles()">Send Email</span>
+                <span class="time_buttons" onclick="UploadFiles()">Upload File</span>                
             </div>
             <div style="padding-left: 39px;" class="clearfix">
                 <span style="font-size: 14px;"><%= LeadsName %></span>

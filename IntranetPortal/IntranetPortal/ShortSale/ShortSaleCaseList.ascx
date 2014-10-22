@@ -5,7 +5,7 @@
     var postponedCallbackRequired = false;
     var caseId = null;
     var ShortSaleCaseData = null;
-
+    var leadsInfoBBLE = null;
     //function is called on changing focused row
     function OnGridFocusedRowChanged() {
         // The values will be returned to the OnGetRowValues() function 
@@ -43,8 +43,7 @@
 
     function OnSuccess(response) {        
         ShortSaleCaseData = JSON.parse(response.d);
-        ShortSaleDataBand(0);
-        
+        ShortSaleDataBand(0);        
     }
 
     function OnGetRowValues(values) {

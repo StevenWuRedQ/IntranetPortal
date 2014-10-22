@@ -111,4 +111,13 @@ Partial Public Class UploadFilePage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridFiles As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''LoadingPanel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LoadingPanel As Global.DevExpress.Web.ASPxLoadingPanel.ASPxLoadingPanel
 End Class

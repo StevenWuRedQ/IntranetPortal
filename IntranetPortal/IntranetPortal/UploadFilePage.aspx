@@ -7,33 +7,25 @@
     <title>Upload Files</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
-        // <![CDATA[
-        function Uploader_OnUploadStart() {
-            btnUpload.SetEnabled(false);
-        }
-        function Uploader_OnFileUploadComplete(args) {
-            if (args.isValid) {
-                gridFilesClient.PerformCallback(args.callbackData + "|" + hfBBLEClient.Get("BBLE"));
-            }
-        }
-        function Uploader_OnFilesUploadComplete(args) {
-            UpdateUploadButton();
-        }
-        function UpdateUploadButton() {
-            btnUpload.SetEnabled(uploader.GetText(0) != "");
-        }
-        function getPreviewImageElement() {
-            return document.getElementById("previewImage");
-        }
-
-        function UpdateCategory(logId, sender) {
-            var newCategory = sender.GetValue();
-            gridFilesClient.PerformCallback("UpdateCategory|" + logId + "|" + newCategory + "|" + hfBBLEClient.Get("BBLE"));
-        }
+        // <![CDATA[       
+        
         // ]]> 
     </script>
 
     <script type="text/javascript">
+        function OnAddFileButtonClick() {
+            $("input:file").each(function () {
+                var myFile = this;
+                if ('files' in myFile) {
+                    if (myFile.files.length == 0) {
+                        //alert("please select file");
+                    } else {
+                        AddFilesToForm(myFile.files);
+                        $(this).val("");
+                    }
+                }
+            });
+        }
 
         function OnDropBody(event) {
             alert("Please drop the files into the drag area.");
@@ -43,12 +35,11 @@
         function UploadFiles() {
             if (!!tests.formdata && formData != null) {
                 var xhr = new XMLHttpRequest();
-                var url = form1.action + "&cate=" + cbCategory.GetText();
-                
+                var url = form1.action + "&cate=1";
+
                 var categories = GetSelectedCategory();
-                if (categories != null)
-                {
-                    formData.append("Category", categories);                   
+                if (categories != null) {
+                    formData.append("Category", categories);
                 }
 
                 xhr.open('POST', url)
@@ -56,6 +47,8 @@
                     progress.value = progress.innerHTML = 100;
                     alert("Upload Completed!");
                     formData = null;
+                    ClearFilesTable();
+                    LoadingPanel.Hide();
                 };
 
                 if (tests.progress) {
@@ -68,6 +61,7 @@
                 }
 
                 xhr.send(formData);
+                LoadingPanel.Show();
             }
             else {
                 alert("You didn't select files.");
@@ -79,27 +73,7 @@
             if (event.dataTransfer) {
                 if (event.dataTransfer.files) {
                     var files = event.dataTransfer.files;
-
-                    if (formData == null) {
-                        formData = tests.formdata ? new FormData() : null;
-
-                        fileTable.style.display = "";
-                        btnUpload.SetEnabled(true);
-                        btnUpload.Click.ClearHandlers();
-                        btnUpload.Click.AddHandler(function (s, e) {
-                            e.processOnServer = false;
-                            if (cbCategory.GetIsValid())
-                                UploadFiles();
-                        });
-                    }
-
-                    for (var i = 0; i < files.length; i++) {
-                        AppendFileToTable(files[i]);
-
-                        if (tests.formdata)
-                            formData.append('file', files[i]);
-                        //previewfile(files[i]);
-                    }
+                    AddFilesToForm(files);
                 }
                 else {
                     alert("Your browser does not support the files property.");
@@ -107,6 +81,29 @@
             }
             else {
                 alert("Your browser does not support the dataTransfer property.");
+            }
+        }
+
+        function AddFilesToForm(files) {
+            if (formData == null) {
+                formData = tests.formdata ? new FormData() : null;
+
+                fileTable.style.display = "";
+                btnUpload.SetEnabled(true);
+                btnUpload.Click.ClearHandlers();
+                btnUpload.Click.AddHandler(function (s, e) {
+                    e.processOnServer = false;
+                    //if (cbCategory.GetIsValid())
+                    UploadFiles();
+                });
+            }
+
+            for (var i = 0; i < files.length; i++) {
+                AppendFileToTable(files[i]);
+
+                if (tests.formdata)
+                    formData.append('file', files[i]);
+                //previewfile(files[i]);
             }
         }
 
@@ -141,8 +138,16 @@
             cell1.innerHTML = fileSize;
         }
 
+        function ClearFilesTable()
+        {
+            var rowCount = fileTable.rows.length;
+            for (var x = rowCount - 1; x > 0; x--) {
+                fileTable.deleteRow(x);
+            }
+        }
+
         function GetCategoryElement(fileName) {
-            var cates = ["Financials", "Short Sale", "Photos", "Accounting", "Eviction", "Construction"];
+            var cates = ["Financials", "Short Sale", "Photos", "Accounting", "Eviction", "Construction","Others"];
             var x = document.createElement("SELECT");
             x.setAttribute("data-filename", fileName);
             for (var i = 0; i < cates.length; i++) {
@@ -157,7 +162,7 @@
         function GetSelectedCategory() {
             var allCategories = [];
             $('#tblFiles select').each(function () {
-                var cate = $(this).attr("data-filename") + "=" + $(this).val();               
+                var cate = $(this).attr("data-filename") + "=" + $(this).val();
                 allCategories.push(cate);
             });
 
@@ -167,13 +172,13 @@
     </script>
     <style>
         #trFileHolder {
-            border: 5px dashed #ccc;
+            border: 2px dashed #ccc;
             margin: 20px auto;
         }
 
             #trFileHolder.hover {
                 background-color: #efefef;
-                border: 5px dashed #0c0;
+                border: 2px dashed #0c0;
             }
 
         progress {
@@ -199,20 +204,15 @@
     <form id="form1" runat="server">
         <table style="width: 620px; text-align: left; margin: 10px,10px,0,0;">
             <tr>
-                <td class="caption" style="width: 100px;">
+                <td class="caption" style="width: 5px;"></td>
+                <td>
                     <dx:ASPxLabel ID="lblSelectImage" runat="server" Text="Select File:">
                     </dx:ASPxLabel>
-                </td>
-                <td>
-                    <dx:ASPxUploadControl ID="uplImage" runat="server" ClientInstanceName="uploader" ShowProgressPanel="True" ShowAddRemoveButtons="true" AddUploadButtonsHorizontalPosition="Left"
-                        NullText="Click here to browse files..." Size="35" OnFileUploadComplete="uplImage_FileUploadComplete" Width="100%">
-                        <ClientSideEvents FileUploadComplete="function(s, e) { Uploader_OnFileUploadComplete(e); }"
-                            FilesUploadComplete="function(s, e) { Uploader_OnFilesUploadComplete(e); }"
-                            FileUploadStart="function(s, e) { Uploader_OnUploadStart(); }"
-                            TextChanged="function(s, e) { UpdateUploadButton(); }"></ClientSideEvents>
+                    <dx:ASPxUploadControl ID="uplImage" AdvancedModeSettings-EnableMultiSelect="true" runat="server" ClientInstanceName="uploader" NullText="Click here to browse files..." Size="35" Width="100%">                   
                         <ValidationSettings MaxFileSize="4194304">
                         </ValidationSettings>
                     </dx:ASPxUploadControl>
+                    <a class="dxucButton_MetropolisBlue1" style="font-size: 14px" href="javascript:" onclick="OnAddFileButtonClick()">Add</a>
                     <dx:ASPxHiddenField runat="server" ID="hfBBLE" ClientInstanceName="hfBBLEClient"></dx:ASPxHiddenField>
                     <asp:HiddenField runat="server" ID="hfBBLEData" />
                 </td>
@@ -236,15 +236,14 @@
                 </td>
             </tr>
             <tr style="height: 40px;">
-                <td>
-                    <dx:ASPxLabel ID="ASPxLabel1" runat="server" Text="Category:">
-                    </dx:ASPxLabel>
-                </td>
+                <td></td>
                 <td class="buttonCell" style="margin-bottom: 5px;">
+                    <dx:ASPxLabel ID="ASPxLabel1" runat="server" Text="Category:" Visible="false">
+                    </dx:ASPxLabel>
                     <table style="width: 100%">
                         <tr>
                             <td>
-                                <dx:ASPxComboBox runat="server" ID="cbCategory" ClientInstanceName="cbCategory" DropDownStyle="DropDown" NullText="Input New Category">
+                                <dx:ASPxComboBox runat="server" ID="cbCategory" ClientInstanceName="cbCategory" DropDownStyle="DropDown" ClientVisible="false" NullText="Input New Category">
                                     <Border BorderWidth="1" />
                                     <Items>
                                         <dx:ListEditItem Text="Financials" Value="Financials" />
@@ -269,59 +268,18 @@
                 </td>
             </tr>
             <tr id="trFileHolder" style="height: 100px">
-                <td colspan="2">
-                    <dx:ASPxGridView runat="server" Width="100%" ID="gridFiles" ClientInstanceName="gridFilesClient" OnCustomCallback="gridFiles_CustomCallback" KeyFieldName="FileID" Visible="false">
-                        <Columns>
-                            <dx:GridViewDataHyperLinkColumn FieldName="Name" Width="200px" Caption="File Name" VisibleIndex="1" ReadOnly="true">
-                                <DataItemTemplate>
-                                    <a href='<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>' target="_blank"><%# Eval("Name")%></a>
-                                </DataItemTemplate>
-                                <EditItemTemplate>
-                                    <a href='<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>' target="_blank"><%# Eval("Name")%></a>
-                                </EditItemTemplate>
-                            </dx:GridViewDataHyperLinkColumn>
-                            <dx:GridViewDataTextColumn FieldName="Createby" Width="60px" VisibleIndex="2" ReadOnly="true">
-                                <EditItemTemplate>
-                                    <%# Eval("Createby")%>
-                                </EditItemTemplate>
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="CreateDate" Width="120px" PropertiesTextEdit-DisplayFormatString="g" VisibleIndex="3" ReadOnly="true">
-                                <PropertiesTextEdit DisplayFormatString="g"></PropertiesTextEdit>
-                                <EditItemTemplate>
-                                    <%# Eval("CreateDate", "{0:g}")%>
-                                </EditItemTemplate>
-                            </dx:GridViewDataTextColumn>
-                            <dx:GridViewDataColumn FieldName="Category" VisibleIndex="4" Width="120px">
-                                <DataItemTemplate>
-                                    <dx:ASPxComboBox runat="server" ID="cbCategory">
-                                        <Items>
-                                            <dx:ListEditItem Text="Financials" Value="Financials" />
-                                            <dx:ListEditItem Text="Short Sale" Value="ShortSale" />
-                                            <dx:ListEditItem Text="Photos" Value="Photos" />
-                                            <dx:ListEditItem Text="Accounting" Value="Accounting" />
-                                            <dx:ListEditItem Text="Eviction" Value="Eviction" />
-                                            <dx:ListEditItem Text="Construction" Value="Construction" />
-                                        </Items>
-                                    </dx:ASPxComboBox>
-                                </DataItemTemplate>
-                            </dx:GridViewDataColumn>
-                            <dx:GridViewDataTextColumn FieldName="Description" VisibleIndex="5" Visible="false">
-                                <DataItemTemplate>
-                                </DataItemTemplate>
-                            </dx:GridViewDataTextColumn>
-                        </Columns>
-                        <SettingsDataSecurity AllowInsert="False" />
-                        <SettingsEditing Mode="Inline"></SettingsEditing>
-                    </dx:ASPxGridView>
+                <td colspan="2" style="text-align: center;" class="dxeBase_MetropolisBlue1">Drag documents here to upload.                    
                 </td>
             </tr>
-            <tr id="trProgress">
+            <tr id="trProgress" style="display: none">
                 <td colspan="2" class="dxeBase_MetropolisBlue1">
                     <p>Upload progress: <progress id="uploadprogress" min="0" max="100" value="0">0</progress></p>
-                    <p>Drag a document from your desktop on to the drop zone above to upload.</p>
                 </td>
             </tr>
         </table>
+        <dx:ASPxLoadingPanel ID="LoadingPanel" runat="server" ClientInstanceName="LoadingPanel" Text="Uploading..."
+            Modal="True">
+        </dx:ASPxLoadingPanel>
         <script>
 
             var holder = document.getElementById('trFileHolder'),

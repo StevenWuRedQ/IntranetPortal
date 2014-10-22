@@ -15,6 +15,7 @@ Public Class DocumentsUI
     End Sub
 
     Public Property LeadsName As String
+    Public Property LeadsBBLE As String
 
     Sub BindFileList(bble As String)
         'BindFilesFromSharepoint(bble)

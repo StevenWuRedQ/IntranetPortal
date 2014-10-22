@@ -7,6 +7,8 @@
 <%@ Register Src="~/ShortSale/TitleControl.ascx" TagPrefix="uc1" TagName="Title" %>
 <%@ Register Src="~/ShortSale/ShortSaleCaseList.ascx" TagPrefix="uc1" TagName="ShortSaleCaseList" %>
 <%@ Register Src="~/ShortSale/SelectPartyUC.ascx" TagPrefix="uc1" TagName="SelectPartyUC" %>
+<%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
+
 
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
@@ -73,21 +75,22 @@
                                                                         </a>
                                                                     </li>
                                                                     <li class="short_sale_head_tab">
-                                                                        <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a">
+                                                                        <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
                                                                             <i class="fa fa-file head_tab_icon_padding"></i>
                                                                             <div class="font_size_bold">Documents</div>
                                                                         </a>
-
                                                                     </li>
 
                                                                     <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                     <li style="margin-right: 30px; color: #ffa484; float: right">
                                                                         <%--<i class="fa fa-comments sale_head_button tooltip-examples" title="Chat"></i>
                                                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Email"></i>--%>
+                                                                        <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup()"></i>
                                                                         <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Report" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
                                                                         <%--<i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>--%>
                                                                     </li>
                                                                 </ul>
+                                                                <uc1:SendMail runat="server" ID="SendMail" />
                                                                 <div class="tab-content">
                                                                     <%--<uc1:PropertyInfo runat="server" ID="PropertyInfo" />--%>
                                                                     <div class="tab-pane active" id="property_info">

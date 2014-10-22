@@ -292,7 +292,7 @@
     <ClientSideEvents CallbackComplete="OnSetStatusComplete" />
 </dx:ASPxCallback>
 <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="680px" Height="410px" ID="ASPxPopupControl2"
-    HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true"
+    HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true" CloseAction="CloseButton"
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">

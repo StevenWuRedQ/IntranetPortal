@@ -24,6 +24,7 @@ Public Class ShortSalePage
         ActivityLogs.BindData(ShortSaleCaseData.BBLE)
         'DocumentsUI.BindFileList(ShortSaleCaseData.BBLE)
         DocumentsUI.LeadsName = ShortSaleCaseData.CaseName
+        DocumentsUI.LeadsBBLE = ShortSaleCaseData.BBLE
     End Sub
 
     <WebMethod()> _

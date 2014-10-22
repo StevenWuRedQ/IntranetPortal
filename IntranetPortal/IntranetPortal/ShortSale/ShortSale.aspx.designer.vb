@@ -104,6 +104,15 @@ Partial Public Class ShortSalePage
     Protected WithEvents hfBBLE As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
+    '''SendMail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SendMail As Global.IntranetPortal.SendMailControl
+
+    '''<summary>
     '''ShortSaleOverVew control.
     '''</summary>
     '''<remarks>

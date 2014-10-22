@@ -132,7 +132,9 @@
                     </tr>
                 </table>
                 <div style="margin-top: 10px">
-                    <dx:ASPxHtmlEditor ID="EmailBody" runat="server" Height="300px" Width="100%"></dx:ASPxHtmlEditor>
+                    <dx:ASPxHtmlEditor ID="EmailBody" runat="server" Height="300px" Width="100%">
+                        <Settings AllowHtmlView="false" AllowPreview="false" />
+                    </dx:ASPxHtmlEditor>
                 </div>
 
                 <div class="popup_btns">                  
