@@ -5,10 +5,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <script type="text/javascript">       
+    <script type="text/javascript">
 
         function CompleteTask(taskId) {
-            gridTaskClient.PerformCallback("CompleteTask|"+taskId);
+            gridTaskClient.PerformCallback("CompleteTask|" + taskId);
+        }
+
+        function ChangeOwner(s, taskId) {
+            gridTaskClient.PerformCallback("ChangeOwner|" + taskId + "|" + s.GetText());
         }
 
         function FilterLogs(s, e) {
@@ -58,13 +62,13 @@
                 s.SetHeight(textArea.scrollHeight + 2);
             }
         }
+
         function SaveComments(s, taskId) {
             var comments = s.GetText();
             callbackSaveComments.PerformCallback(taskId + "|" + comments);
         }
 
-        function ChangeTaskPriority(s, taskId)
-        {
+        function ChangeTaskPriority(s, taskId) {
             var priority = s.GetText();
             gridTaskClient.PerformCallback("Priority|" + taskId + "|" + priority);
         }
@@ -107,7 +111,6 @@
                                 </LayoutItemNestedControlCollection>
                                 <CaptionSettings Location="Top"></CaptionSettings>
                             </dx:LayoutItem>
-
                             <dx:LayoutItem Caption="By:">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
@@ -181,7 +184,6 @@
                                               <ClientSideEvents Click="function(s, e) {
 		ASPxClientEdit.ClearEditorsInContainer(AddTaskFormLayout.GetMainElement ());
 	}" />
-
                                           </dx:ASPxButton>
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
@@ -192,7 +194,7 @@
             </dx:ASPxFormLayout>
             <dx:ASPxGridView runat="server" ID="gridTask" Width="100%" KeyFieldName="ListId" ClientInstanceName="gridTaskClient" Paddings-Padding="5px" Settings-ShowFilterRow="true" SettingsBehavior-FilterRowMode="Auto">
                 <Columns>
-                    <dx:GridViewDataColumn FieldName="ListId" Caption="#" Width="50px">                                
+                    <dx:GridViewDataColumn FieldName="ListId" Caption="#" Width="50px">
                     </dx:GridViewDataColumn>
                     <dx:GridViewDataDateColumn FieldName="CreateDate" Width="110px" PropertiesDateEdit-DisplayFormatString="g">
                         <PropertiesDateEdit DisplayFormatString="g"></PropertiesDateEdit>
@@ -221,22 +223,38 @@
                                 <ClientSideEvents SelectedIndexChanged="FilterOwnerLogs" />
                             </dx:ASPxComboBox>
                         </FilterTemplate>
+                        <DataItemTemplate>
+                            <dx:ASPxComboBox runat="server" ID="cbOwner" Visible="false" Width="100%">
+                                <Items>
+                                    <dx:ListEditItem Text="Ron" Value="Ron" />
+                                    <dx:ListEditItem Text="George" Value="George" />
+                                    <dx:ListEditItem Text="Sujie" Value="Sujie" />
+                                    <dx:ListEditItem Text="Steven" Value="Steven" />
+                                    <dx:ListEditItem Text="Chris" Value="Chris" />
+                                </Items>
+                                <ValidationSettings ErrorDisplayMode="None">
+                                    <RequiredField IsRequired="True" />
+                                </ValidationSettings>
+                            </dx:ASPxComboBox>
+                            <dx:ASPxLabel ID="lblOwner" runat="server" Text='<%#String.Format("{0}", Eval("Owner"))%>' Visible='<%# Eval("Status") = TaskStatus.Completed%>'></dx:ASPxLabel>
+                        </DataItemTemplate>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataDateColumn FieldName="DueDate" Caption="Due Date" PropertiesDateEdit-DisplayFormatString="d" Width="80px">
                     </dx:GridViewDataDateColumn>
-                  <dx:GridViewDataColumn FieldName="Priority" Caption="Priority" Width="40px">
-                        <FilterTemplate>                           
+                    <dx:GridViewDataColumn FieldName="Priority" Caption="Priority" Width="60px">
+                        <FilterTemplate>
                         </FilterTemplate>
                         <DataItemTemplate>
-                             <dx:ASPxComboBox runat="server" ID="cbPriority" Width="100%" Border-BorderStyle="None">
-                                <Items>                                
+                            <dx:ASPxComboBox runat="server" ID="cbPriority" Width="100%" Visible='<%# Eval("Status") = TaskStatus.NewTask %>'>
+                                <Items>
+                                    <dx:ListEditItem Text="" Value="" />
                                     <dx:ListEditItem Text="1" Value="1" />
                                     <dx:ListEditItem Text="2" Value="2" />
                                     <dx:ListEditItem Text="3" Value="3" />
                                     <dx:ListEditItem Text="4" Value="4" />
                                     <dx:ListEditItem Text="5" Value="5" />
                                 </Items>
-                                 <ClientSideEvents SelectedIndexChanged="PriorityChanges" />
+                                <ClientSideEvents SelectedIndexChanged="PriorityChanges" />
                             </dx:ASPxComboBox>
                         </DataItemTemplate>
                     </dx:GridViewDataColumn>
@@ -283,16 +301,17 @@
                     </dx:GridViewDataColumn>
                     <dx:GridViewDataColumn Caption="Days" Width="50px">
                         <DataItemTemplate>
-                            <dx:ASPxLabel ID="lblHours" runat="server" Text='<%# CalculateWorkingDays(Eval("UpdateDate"), Eval("CreateDate"))%>'></dx:ASPxLabel>
+                            <dx:ASPxLabel ID="lblHours" runat="server" Text='<%# CalculateWorkingDays(Eval("UpdateDate"), Eval("CreateDate"))%>' Visible='<%# Eval("Status") = TaskStatus.Completed%>'></dx:ASPxLabel>
                         </DataItemTemplate>
                     </dx:GridViewDataColumn>
                 </Columns>
                 <Styles>
                     <AlternatingRow BackColor="#f9f9f9"></AlternatingRow>
                 </Styles>
-                <SettingsPager Mode="ShowAllRecords"></SettingsPager>
+                <Settings VerticalScrollableHeight="600" />
+                <SettingsPager Mode="EndlessPaging" PageSize="30"></SettingsPager>
             </dx:ASPxGridView>
-            <dx:ASPxCallback runat="server" ID="callbackSaveComments" ClientInstanceName="callbackSaveComments" OnCallback="callbackSaveComments_Callback"></dx:ASPxCallback>                  
+            <dx:ASPxCallback runat="server" ID="callbackSaveComments" ClientInstanceName="callbackSaveComments" OnCallback="callbackSaveComments_Callback"></dx:ASPxCallback>
         </div>
     </form>
 </body>

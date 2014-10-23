@@ -48,29 +48,45 @@ Partial Class TodoListPage
         If status = TaskStatus.NewTask Then
             Dim chkCompleted = TryCast(gridTask.FindRowCellTemplateControl(e.VisibleIndex, gridTask.Columns("Status"), "chkCompleted"), ASPxCheckBox)
             chkCompleted.ClientSideEvents.CheckedChanged = String.Format("function(s,e){{CompleteTask({0});}}", e.KeyValue)
+
+            Dim cbOwner = TryCast(gridTask.FindRowCellTemplateControl(e.VisibleIndex, gridTask.Columns("Owner"), "cbOwner"), ASPxComboBox)
+            cbOwner.Value = e.GetValue("Owner")
+            cbOwner.ClientSideEvents.SelectedIndexChanged = String.Format("function(s,e){{ChangeOwner(s, {0});}}", e.KeyValue)
+            cbOwner.Visible = True
+
+            Dim priority = e.GetValue("Priority")
+            Dim cbPriority = TryCast(gridTask.FindRowCellTemplateControl(e.VisibleIndex, gridTask.Columns("Priority"), "cbPriority"), ASPxComboBox)
+            cbPriority.Items.Clear()
+            For i = 0 To 30
+                If i = 0 Then
+                    cbPriority.Items.Add("")
+                Else
+                    cbPriority.Items.Add(i.ToString)
+                End If
+
+            Next
+
+            cbPriority.Value = priority
+            cbPriority.ClientSideEvents.SelectedIndexChanged = String.Format("function(s,e){{ ChangeTaskPriority(s, {0}); }}", e.KeyValue)
+
+            Select Case priority
+                Case 1
+                    e.Row.BackColor = Drawing.Color.OrangeRed
+                Case 2
+                    e.Row.BackColor = Drawing.Color.IndianRed
+                Case 3
+                    e.Row.BackColor = Drawing.Color.Orange
+                Case 4
+                    e.Row.BackColor = Drawing.Color.PaleVioletRed
+                Case 5
+                    e.Row.BackColor = Drawing.Color.MistyRose
+            End Select
+        Else
+
         End If
 
         Dim txtComments = TryCast(gridTask.FindRowCellTemplateControl(e.VisibleIndex, gridTask.Columns("Comments"), "txtComments"), ASPxMemo)
         txtComments.ClientSideEvents.TextChanged = String.Format("function(s,e){{ SaveComments(s, {0}); }}", e.KeyValue)
-
-        Dim priority = e.GetValue("Priority")
-        Dim cbPriority = TryCast(gridTask.FindRowCellTemplateControl(e.VisibleIndex, gridTask.Columns("Priority"), "cbPriority"), ASPxComboBox)
-        cbPriority.Value = priority
-        cbPriority.ClientSideEvents.SelectedIndexChanged = String.Format("function(s,e){{ ChangeTaskPriority(s, {0}); }}", e.KeyValue)
-
-        Select Case priority
-            Case 1
-                e.Row.BackColor = Drawing.Color.OrangeRed
-            Case 2
-                e.Row.BackColor = Drawing.Color.IndianRed
-            Case 3
-                e.Row.BackColor = Drawing.Color.Orange
-            Case 4
-                e.Row.BackColor = Drawing.Color.PaleVioletRed
-            Case 5
-                e.Row.BackColor = Drawing.Color.MistyRose
-        End Select
-
     End Sub
 
     Protected Sub gridTask_CustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs) Handles gridTask.CustomCallback
@@ -92,13 +108,70 @@ Partial Class TodoListPage
             Using Context As New DevAppEntities
                 Dim task = Context.TodoLists.Where(Function(t) t.ListId = taskId).SingleOrDefault
                 If task IsNot Nothing Then
-                    task.Priority = priority
+                    Dim isUp = False
+                    If String.IsNullOrEmpty(priority) Then
+                        task.Priority = Nothing
+                    Else
+                        If task.Priority < CInt(priority) Then
+                            isUp = True
+                        End If
+                        task.Priority = priority
+                    End If
+                    task.UpdateDate = DateTime.Now
+                    Context.SaveChanges()
+
+                    RefreshTaskPriority(task.Owner, isUp)
+                End If
+            End Using
+        End If
+
+        If e.Parameters.StartsWith("ChangeOwner") Then
+            Dim taskId = e.Parameters.Split("|")(1)
+            Dim owner = e.Parameters.Split("|")(2)
+
+            Using Context As New DevAppEntities
+                Dim task = Context.TodoLists.Where(Function(t) t.ListId = taskId).SingleOrDefault
+                If task IsNot Nothing Then
+
+                    If Not String.IsNullOrEmpty(owner) Then
+                        task.Owner = owner
+                        task.Priority = Nothing
+                    End If
+
+                    task.UpdateDate = DateTime.Now
                     Context.SaveChanges()
                 End If
             End Using
         End If
 
         BindData()
+    End Sub
+
+    Sub RefreshTaskPriority(owner As String, isUp As Boolean)
+        Using Context As New DevAppEntities
+            Dim index = 1
+            Dim tasks = Nothing
+
+            If isUp Then
+                tasks = Context.TodoLists.Where(Function(t) t.Owner = owner And t.Status = TaskStatus.NewTask And t.Priority > 0).OrderBy(Function(s) s.Priority).ThenBy(Function(s) s.UpdateDate)
+            Else
+                tasks = Context.TodoLists.Where(Function(t) t.Owner = owner And t.Status = TaskStatus.NewTask And t.Priority > 0).OrderBy(Function(s) s.Priority).ThenByDescending(Function(s) s.UpdateDate)
+            End If
+
+            For Each task In tasks
+                If task.Priority <> index And index <= 5 Then
+                    task.Priority = index
+                End If
+
+                If index > 30 Then
+                    task.Priority = Nothing
+                End If
+
+                index = index + 1
+            Next
+
+            Context.SaveChanges()
+        End Using
     End Sub
 
     Function CalculateWorkingDays(completeDate As Date?, createDate As Date) As String
