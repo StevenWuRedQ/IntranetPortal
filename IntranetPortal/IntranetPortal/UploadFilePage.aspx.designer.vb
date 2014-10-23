@@ -68,6 +68,15 @@ Partial Public Class UploadFilePage
     Protected WithEvents lblAllowebMimeType As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
+    '''ASPxLabel2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxLabel2 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+
+    '''<summary>
     '''ASPxLabel1 control.
     '''</summary>
     '''<remarks>
@@ -102,15 +111,6 @@ Partial Public Class UploadFilePage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''gridFiles control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents gridFiles As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
     '''LoadingPanel control.

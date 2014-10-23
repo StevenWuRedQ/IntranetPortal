@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Upload Files</title>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
     <link href="/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
@@ -12,25 +13,24 @@
     <link href="/styles/stevencss.css" rel="stylesheet" type="text/css" />
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        // <![CDATA[       
-
-        // ]]> 
-    </script>
-
-    <script type="text/javascript">
-        function OnAddFileButtonClick() {
-            $("input:file").each(function () {
-                var myFile = this;
-                if ('files' in myFile) {
-                    if (myFile.files.length == 0) {
-                        //alert("please select file");
-                    } else {
-                        AddFilesToForm(myFile.files);
-                        $(this).val("");
+        // <![CDATA[                     
+            function OnAddFileButtonClick() {
+                var hasFile = false;
+                $("input:file").each(function () {
+                    var myFile = this;
+                    if ('files' in myFile) {
+                        if (myFile.files.length == 0) {
+                            //alert("please select file");
+                        } else {
+                            AddFilesToForm(myFile.files);
+                            hasFile = true;
+                        }
                     }
-                }
-            });
-        }
+                });
+
+                if (!hasFile)
+                    alert("Please choose files.");
+            }
 
         function OnDropBody(event) {
             alert("Please drop the files into the drag area.");
@@ -38,6 +38,16 @@
         }
 
         function UploadFiles() {
+            //refresh formdata
+            if (formFiles != null)
+            {
+                formData = tests.formdata ? new FormData() : null;
+                
+                for (var key in formFiles) {
+                    formData.append('file', formFiles[key]);
+                }
+            }
+
             if (!!tests.formdata && formData != null) {
                 var xhr = new XMLHttpRequest();
                 var url = form1.action + "&cate=1";
@@ -74,6 +84,7 @@
         }
 
         var formData = null;
+        var formFiles = {};
         function OnDropTextarea(event) {
             if (event.dataTransfer) {
                 if (event.dataTransfer.files) {
@@ -86,6 +97,31 @@
             }
             else {
                 alert("Your browser does not support the dataTransfer property.");
+            }
+        }
+
+        function RemoveFileFromForm(fileName)
+        {            
+            if(formFiles != null)
+            {
+                for(var key in formFiles)
+                {
+                    if(key == fileName)
+                    {
+                        delete formFiles[key];
+                    }
+                }
+
+                RefreshFileTable();
+            }
+        }
+
+        function RefreshFileTable()
+        {
+            ClearFilesTable();
+            for(var key in formFiles)
+            {
+                AppendFileToTable(formFiles[key]);
             }
         }
 
@@ -105,19 +141,29 @@
 
             for (var i = 0; i < files.length; i++) {
                 AppendFileToTable(files[i]);
-
-                if (tests.formdata)
-                    formData.append('file', files[i]);
-                //previewfile(files[i]);
+                var file = files[i];
+                if ('name' in file) {
+                    var fileName = file.name;
+                }
+                else {
+                    var fileName = file.fileName;
+                }
+                formFiles[fileName] = file;
+                
+                //if (tests.formdata)
+                //{
+                //    formData.append('file', files[i]);
+                //}               
             }
         }
 
         function AppendFileToTable(file) {
-            var index = fileTable.rows.length;
-            var row = fileTable.insertRow();
+            var tableRef = fileTable.getElementsByTagName('tbody')[0];
+            var index = tableRef.rows.length;
+            var row = tableRef.insertRow(index);
 
             var cell0 = row.insertCell(0);
-            cell0.innerHTML = "" + index;
+            cell0.innerHTML = "" + (index +1);
 
             var cell1 = row.insertCell(1);
 
@@ -140,11 +186,10 @@
             else {
                 var fileSize = file.fileSize;
             }
-            cell1.innerHTML = fileSize;
+            cell1.innerHTML = Math.round(fileSize / 1000);
 
             cell1 = row.insertCell(4);
-            cell1.innerHTML = "<i class='fa fa-times color_blue icon_btn' style='font-size:18px;'>";
-
+            cell1.innerHTML = "<i class='fa fa-times color_blue icon_btn' style='font-size:18px;' onclick='RemoveFileFromForm(\"" + fileName  + "\")'>";          
         }
 
         function ClearFilesTable() {
@@ -218,7 +263,7 @@
                     <div style="height: 200px; overflow: auto">
                         <table <%--style="width: 90%; display: none; line-height: 25px" --%>id="tblFiles" class="table table-striped" style="font-size: 14px;">
                             <thead>
-                                <tr style="text-transform: uppercase;color:#b1b2b7">
+                                <tr style="text-transform: uppercase; color: #b1b2b7">
                                     <td style="width: 25px">#</td>
                                     <td>Name</td>
                                     <td style="width: 200px">File Category</td>
@@ -226,6 +271,8 @@
                                     <td style="width: 60px">Delete</td>
                                 </tr>
                             </thead>
+                            <tbody>                                
+                            </tbody>
                         </table>
                     </div>
 
@@ -264,12 +311,11 @@
 
             <tr>
                 <td>
-                    <span class="color_gray" style="line-height:50px;">
-                        Or... Simply drag your documents from your computer on to this drop zone:
+                    <span class="color_gray" style="line-height: 50px;">Or... Simply drag your documents from your computer on to this drop zone:
                     </span>
                 </td>
             </tr>
-            <tr id="trFileHolder" style="height: 230px; width: 100%;margin-top:20px;">
+            <tr id="trFileHolder" style="height: 230px; width: 100%; margin-top: 20px;">
                 <td colspan="2" style="text-align: center;" class="dxeBase_MetropolisBlue1"><i class="fa fa-upload" style="font-size: 90px; color: #dddddd"></i>
                 </td>
             </tr>
