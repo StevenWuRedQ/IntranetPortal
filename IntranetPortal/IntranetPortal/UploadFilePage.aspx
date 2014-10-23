@@ -5,10 +5,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Upload Files</title>
+    <link href="/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="/styles/stevencss.css" rel="stylesheet" type="text/css" />
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         // <![CDATA[       
-        
+
         // ]]> 
     </script>
 
@@ -136,10 +141,13 @@
                 var fileSize = file.fileSize;
             }
             cell1.innerHTML = fileSize;
+
+            cell1 = row.insertCell(4);
+            cell1.innerHTML = "<i class='fa fa-times color_blue icon_btn' style='font-size:18px;'>";
+                
         }
 
-        function ClearFilesTable()
-        {
+        function ClearFilesTable() {
             var rowCount = fileTable.rows.length;
             for (var x = rowCount - 1; x > 0; x--) {
                 fileTable.deleteRow(x);
@@ -147,7 +155,7 @@
         }
 
         function GetCategoryElement(fileName) {
-            var cates = ["Financials", "Short Sale", "Photos", "Accounting", "Eviction", "Construction","Others"];
+            var cates = ["Financials", "Short Sale", "Photos", "Accounting", "Eviction", "Construction", "Others"];
             var x = document.createElement("SELECT");
             x.setAttribute("data-filename", fileName);
             for (var i = 0; i < cates.length; i++) {
@@ -172,7 +180,7 @@
     </script>
     <style>
         #trFileHolder {
-            border: 2px dashed #ccc;
+            border: 2px dashed #ccc !important;
             margin: 20px auto;
         }
 
@@ -200,15 +208,39 @@
         }
     </style>
 </head>
-<body style="margin-top: 10px; margin-left: 10px;">
+<body style="padding: 20px;">
     <form id="form1" runat="server">
-        <table style="width: 620px; text-align: left; margin: 10px,10px,0,0;">
+        <table style="width: 100%; text-align: left;">
+
             <tr>
-                <td class="caption" style="width: 5px;"></td>
+
+                <td class="note">
+                    <div style="height:200px;overflow:auto">
+                        <table <%--style="width: 90%; display: none; line-height: 25px" --%>id="tblFiles" class="table table-striped" style="font-size: 14px;">
+                            <thead>
+                                <tr style="text-transform: uppercase">
+                                    <td style="width: 25px">#</td>
+                                    <td>Name</td>
+                                    <td style="width: 200px">File Category</td>
+                                    <td style="width: 80px">Size(KB)</td>
+                                    <td style="width: 60px">Delete</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                </td>
+            </tr>
+
+            <tr>
+
                 <td>
-                    <dx:ASPxLabel ID="lblSelectImage" runat="server" Text="Select File:">
-                    </dx:ASPxLabel>
-                    <dx:ASPxUploadControl ID="uplImage" AdvancedModeSettings-EnableMultiSelect="true" runat="server" ClientInstanceName="uploader" NullText="Click here to browse files..." Size="35" Width="100%">                   
+                    <div style="padding-bottom: 15px">
+                        <dx:ASPxLabel ID="lblSelectImage" runat="server" Text="Select file to upload:" Font-Size="18px" ForeColor="#C4C3C9">
+                        </dx:ASPxLabel>
+                    </div>
+
+                    <dx:ASPxUploadControl ID="uplImage" AdvancedModeSettings-EnableMultiSelect="true" runat="server" ClientInstanceName="uploader" CssClass="email_input input_files" NullText="Click here to browse files..." Size="35" Width="100%">
                         <ValidationSettings MaxFileSize="4194304">
                         </ValidationSettings>
                     </dx:ASPxUploadControl>
@@ -216,23 +248,30 @@
                     <dx:ASPxHiddenField runat="server" ID="hfBBLE" ClientInstanceName="hfBBLEClient"></dx:ASPxHiddenField>
                     <asp:HiddenField runat="server" ID="hfBBLEData" />
                 </td>
+
+            </tr>
+
+
+
+            <tr id="trFileHolder" style="height: 230px; width: 100%">
+                <td colspan="2" style="text-align: center;" class="dxeBase_MetropolisBlue1"><i class="fa fa-upload" style="font-size: 90px; color: #dddddd"></i>
+                </td>
+            </tr>
+            <tr id="trProgress" style="display: none">
+                <td colspan="2" class="dxeBase_MetropolisBlue1">
+                    <p>Upload progress: <progress id="uploadprogress" min="0" max="100" value="0">0</progress></p>
+                </td>
             </tr>
             <tr>
-                <td></td>
-                <td class="note">
-                    <dx:ASPxLabel ID="lblAllowebMimeType" runat="server" Text="Allowed types: jpeg, gif, doc, pdf;Maximum file size: 4Mb"
-                        Font-Size="8pt">
-                    </dx:ASPxLabel>
-                    <table style="width: 90%; display: none; line-height: 25px" id="tblFiles" class="dxeBase_MetropolisBlue1">
-                        <thead>
-                            <tr>
-                                <td style="width: 25px">#</td>
-                                <td>Name</td>
-                                <td style="width: 120px">Category</td>
-                                <td style="width: 80px">Size(KB)</td>
-                            </tr>
-                        </thead>
-                    </table>
+                <td style="font-size: 10px">
+                    <div style="padding-top: 20px; color: #A7A7A9">
+                        <dx:ASPxLabel ID="lblAllowebMimeType" runat="server" Text="Allowed  file types: jpeg, gif, doc, pdf">
+                        </dx:ASPxLabel>
+                        <br />
+                        <dx:ASPxLabel ID="ASPxLabel2" runat="server" Text="Maximum file size: 4Mb">
+                        </dx:ASPxLabel>
+                    </div>
+
                 </td>
             </tr>
             <tr style="height: 40px;">
@@ -256,26 +295,22 @@
                                     <ValidationSettings RequiredField-IsRequired="true"></ValidationSettings>
                                 </dx:ASPxComboBox>
                             </td>
-                            <td style="text-align: right">
-                                <dx:ASPxButton ID="btnUpload" runat="server" AutoPostBack="False" Text="Upload" Visible="false" Width="100px" ClientEnabled="False" Style="margin: 0 auto;">
-                                    <ClientSideEvents Click="function(s, e) { uploader.Upload(); }" />
-                                </dx:ASPxButton>
-                                <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Upload" Width="100px" Style="margin: 0 auto;" ClientInstanceName="btnUpload" ClientEnabled="False" OnClick="ASPxButton1_Click">
-                                </dx:ASPxButton>
-                            </td>
+
                         </tr>
                     </table>
                 </td>
             </tr>
-            <tr id="trFileHolder" style="height: 100px">
-                <td colspan="2" style="text-align: center;" class="dxeBase_MetropolisBlue1">Drag documents here to upload.                    
+            <tr>
+                <td style="text-align: right">
+                    <dx:ASPxButton ID="btnUpload" runat="server" AutoPostBack="False" Text="Upload" Visible="false" ClientEnabled="False" CssClass="rand-button rand-button-blue" Style="margin: 0 auto; background: #3993c1" ForeColor="White">
+                        <ClientSideEvents Click="function(s, e) { uploader.Upload(); }" />
+                    </dx:ASPxButton>
+                    <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Upload" Style="margin: 0 auto; background: #3993c1" ClientInstanceName="btnUpload" ForeColor="White" CssClass="rand-button" ClientEnabled="False" OnClick="ASPxButton1_Click">
+                    </dx:ASPxButton>
                 </td>
             </tr>
-            <tr id="trProgress" style="display: none">
-                <td colspan="2" class="dxeBase_MetropolisBlue1">
-                    <p>Upload progress: <progress id="uploadprogress" min="0" max="100" value="0">0</progress></p>
-                </td>
-            </tr>
+
+
         </table>
         <dx:ASPxLoadingPanel ID="LoadingPanel" runat="server" ClientInstanceName="LoadingPanel" Text="Uploading..."
             Modal="True">
@@ -302,7 +337,7 @@
                 fileTable = document.getElementById("tblFiles"),
                 progress = document.getElementById('uploadprogress');
 
-            debugger;
+            //debugger;
             if (tests.dnd) {
                 holder.ondragover = function () { this.className = 'hover'; return false; };
                 holder.ondragend = function () { this.className = ''; return false; };

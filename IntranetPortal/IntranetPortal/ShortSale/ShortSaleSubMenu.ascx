@@ -291,7 +291,7 @@
 <dx:ASPxCallback ID="statusCallback" runat="server" ClientInstanceName="caseStatusCallbackClient" OnCallback="statusCallback_Callback">
     <ClientSideEvents CallbackComplete="OnSetStatusComplete" />
 </dx:ASPxCallback>
-<dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="680px" Height="410px" ID="ASPxPopupControl2"
+<dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
     HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true" CloseAction="CloseButton"
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <ContentCollection>

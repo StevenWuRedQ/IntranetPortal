@@ -1091,9 +1091,7 @@ pre#event-log {
 /* Responsive design
 --- */
 @media screen and (max-width: 1056px) {
-    body {
-        width: 672px;
-    }
+    
 
     .c2 {
         margin-right: 0;
@@ -1871,4 +1869,14 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 .bg_color_blue
 {
     background:#3993c1;
+}
+
+.input_files
+{
+    margin:0px;
+    /*border:  dashed*/
+}
+.input_files tbody tr td table tbody td.dxCB 
+{
+    border: 0;
 }

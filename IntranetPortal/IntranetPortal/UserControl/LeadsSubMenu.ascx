@@ -49,9 +49,20 @@
     <ItemStyle Height="30px"></ItemStyle>
 </dx:ASPxPopupMenu>
 
-<dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="680px" Height="410px" ID="ASPxPopupControl2"
+<dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
     HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true" CloseAction="CloseButton"
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+     <HeaderTemplate>
+        <div class="clearfix">
+            <div class="pop_up_header_margin">
+                <i class="fa fa-cloud-upload with_circle pop_up_header_icon"></i>
+                <span class="pop_up_header_text">Upload Files</span>
+            </div>
+            <div class="pop_up_buttons_div">
+                <i class="fa fa-times icon_btn" onclick="popupCtrUploadFiles.Hide()"></i>
+            </div>
+        </div>
+    </HeaderTemplate>
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">
         </dx:PopupControlContentControl>
