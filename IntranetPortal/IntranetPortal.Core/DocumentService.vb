@@ -44,27 +44,6 @@ Public Class DocumentService
     End Function
 
     Public Shared Function DownLoadFile(uniqueId As String) As Object
-        'Using ClientContext = GetClientContext()
-        '    Dim item = GetFileById(uniqueId, ClientContext)
-        '    If item IsNot Nothing Then
-        '        Dim tmpfile = item.File
-        '        ClientContext.Load(tmpfile, Function(f As File) f.ServerRelativeUrl, Function(f As File) f.Name)
-
-        '        Using ms As New IO.MemoryStream
-        '            Dim str = tmpfile.OpenBinaryStream()
-        '            ClientContext.ExecuteQuery()
-
-        '            str.Value.CopyTo(ms)
-        '            Return New With {
-        '            .Stream = ms.ToArray,
-        '            .Name = tmpfile.Name
-        '        }
-        '        End Using
-        '    End If
-
-        '    Return Nothing
-        'End Using
-
         Dim file = DownLoadFileStream(uniqueId)
         If file IsNot Nothing Then
             Return New With {

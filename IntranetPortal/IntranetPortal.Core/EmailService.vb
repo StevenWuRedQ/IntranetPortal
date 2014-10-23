@@ -2,6 +2,8 @@
 Imports System.Net.Mail
 Imports System.Net
 Imports System.IO
+Imports System.Data.SqlClient
+Imports System.Data.Entity.Core.EntityClient
 
 Public Class EmailService
     Public Shared Sub SendMail()
@@ -25,13 +27,24 @@ Public Class EmailService
         End Try
     End Sub
 
-    Public Shared Sub SendMail(toAddress As String, ccAddress As String, subject As String, body As String, attchments As String())
+    Public Shared Function SendMail(toAddress As String, ccAddress As String, subject As String, body As String, attachments As String()) As Integer
+        Dim mailmsg As New EmailMessage
+        mailmsg.ToAddress = toAddress
+        mailmsg.CcAddress = ccAddress
+        mailmsg.Subject = subject
+        mailmsg.Body = body
+        mailmsg.Attachments = String.Join(";", attachments)
+
         Dim Message As New Mail.MailMessage()
         If String.IsNullOrEmpty(toAddress) Then
             Throw New Exception("To address can't be empty.")
+        Else
+            Dim adds = toAddress.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries)
+            For Each add In adds
+                Message.To.Add(add)
+            Next
         End If
 
-        Message.To.Add(New MailAddress(toAddress))
         If Not String.IsNullOrEmpty(ccAddress) Then
             Dim adds = ccAddress.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries)
             For Each add In adds
@@ -43,8 +56,8 @@ Public Class EmailService
         Message.Body = body
         Message.IsBodyHtml = True
 
-        If attchments IsNot Nothing AndAlso attchments.Length > 0 Then
-            For Each att In attchments
+        If attachments IsNot Nothing AndAlso attachments.Length > 0 Then
+            For Each att In attachments
                 Dim file = DocumentService.DownLoadFileStream(att)
                 Message.Attachments.Add(New Attachment(CType(file.Stream, MemoryStream), file.Name.ToString))
             Next
@@ -54,8 +67,17 @@ Public Class EmailService
 
         Try
             client.Send(Message)
+            Return SaveEmail(mailmsg)
         Catch ex As Exception
             Throw ex
         End Try
-    End Sub
+    End Function
+
+    Private Shared Function SaveEmail(msg As EmailMessage) As Integer
+        Using ctx As New CoreEntities
+            msg = ctx.EmailMessages.Add(msg)
+            ctx.SaveChanges()
+            Return msg.EmailId
+        End Using
+    End Function
 End Class
