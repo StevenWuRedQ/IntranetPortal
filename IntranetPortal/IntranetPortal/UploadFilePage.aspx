@@ -218,7 +218,7 @@
                     <div style="height: 200px; overflow: auto">
                         <table <%--style="width: 90%; display: none; line-height: 25px" --%>id="tblFiles" class="table table-striped" style="font-size: 14px;">
                             <thead>
-                                <tr style="text-transform: uppercase">
+                                <tr style="text-transform: uppercase;color:#b1b2b7">
                                     <td style="width: 25px">#</td>
                                     <td>Name</td>
                                     <td style="width: 200px">File Category</td>
@@ -248,7 +248,7 @@
                                 </dx:ASPxUploadControl>
                             </td>
                             <td>
-                                <a class="dxucButton_MetropolisBlue1" style="font-size: 14px; padding-left: 20px; color: #3993c1" href="javascript:" onclick="OnAddFileButtonClick()">Add</a>
+                                <a class="dxucButton_MetropolisBlue1" style="font-size: 16px; padding-left: 20px; color: #3993c1" href="javascript:" onclick="OnAddFileButtonClick()">Add</a>
                             </td>
                         </tr>
 
