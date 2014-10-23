@@ -10,10 +10,12 @@
             PopupContentSendMail.Visible = True
         End If
 
-        If e.Parameter = "SendMail" Then
+        If e.Parameter.StartsWith("SendMail") Then
+            Dim bble = e.Parameter.Split("|")(1)
             Dim attachments = EmailAttachments.Text.Split(",")
-            IntranetPortal.Core.EmailService.SendMail(EmailToIDs.Text, EmailCCIDs.Text, EmailSuject.Text, EmailBody.Html, attachments)
-
+            Dim mailId = IntranetPortal.Core.EmailService.SendMail(EmailToIDs.Text, EmailCCIDs.Text, EmailSuject.Text, EmailBody.Html, attachments)
+            'Dim comments = String.Format("{0} send an email.", Page.User.Identity.Name)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, mailId, bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Email)
             EmailToIDs.Text = ""
             EmailCCIDs.Text = ""
             EmailSuject.Text = ""

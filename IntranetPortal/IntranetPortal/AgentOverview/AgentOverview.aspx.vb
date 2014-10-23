@@ -200,7 +200,7 @@ Public Class AgentOverview
 
     Function GetEmpDataSource()
         If User.IsInRole("Admin") Then
-            Return portalDataContext.Employees.OrderBy(Function(em) em.Name).ToList
+            Return portalDataContext.Employees.Where(Function(em) em.Active = True).OrderBy(Function(em) em.Name).ToList
         End If
 
         Dim emps As New List(Of Employee)
@@ -217,7 +217,7 @@ Public Class AgentOverview
             emps.AddRange(Employee.GetManagedEmployeeList(User.Identity.Name))
         End If
 
-        Return emps.Distinct.OrderBy(Function(em) em.Name).ToList
+        Return emps.Distinct(New EmployeeItemComparer()).OrderBy(Function(em) em.Name).ToList
     End Function
 
     Sub BindEmp()
@@ -270,10 +270,7 @@ Public Class AgentOverview
     End Sub
 
     Protected Sub show_grid_by_items(isInit As Boolean)
-        'init_grid_by_items(chkFields.Items, isInit)
-        'init_grid_by_items(chkFields2.Items, isInit)
-        'LoadGridColumn(chkFields.Items)
-        'LoadGridColumn(chkFields2.Items)
+       
     End Sub
 
     Sub LoadGridColumn()

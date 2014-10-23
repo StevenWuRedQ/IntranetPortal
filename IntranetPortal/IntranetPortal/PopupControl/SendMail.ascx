@@ -1,7 +1,10 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="SendMail.ascx.vb" Inherits="IntranetPortal.SendMailControl" %>
 <script type="text/javascript">
     var loaded = false;
-    function ShowEmailPopup() {
+    var emailBBLE = null;
+    function ShowEmailPopup(bble) {
+        emailBBLE = bble;
+
         if (!loaded) {
             popupSendEmailClient.PerformCallback("Show");
             //loaded = true;
@@ -43,8 +46,9 @@
         if (!popupSendEmailClient.InCallback())
         {
             sendingMail = true;
-            popupSendEmailClient.PerformCallback('SendMail');           
-        }            
+            if(emailBBLE != null)
+                popupSendEmailClient.PerformCallback('SendMail|' + emailBBLE);
+        }
         else
         {
             alert("Server is busy. Please try later.");
@@ -55,7 +59,7 @@
     {
         s.Show();
 
-        if(sendingMail)
+        if (sendingMail)
         {
             alert("Your mail is sent.");
             sendingMail = false;
@@ -138,7 +142,7 @@
                 </div>
 
                 <div class="popup_btns">                  
-                    <input type="button" class="rand-button short_sale_edit bg_color_blue" value="Send" onclick="popupSendEmailClient.PerformCallback('SendMail')">
+                    <input type="button" class="rand-button short_sale_edit bg_color_blue" value="Send" onclick="SendMail()">
                     <input type="button" class="rand-button short_sale_edit" style="background: #77787b" value="Cancel" onclick="popupSendEmailClient.Hide()">
                 </div>
             </div>
