@@ -144,7 +144,7 @@
 
             cell1 = row.insertCell(4);
             cell1.innerHTML = "<i class='fa fa-times color_blue icon_btn' style='font-size:18px;'>";
-                
+
         }
 
         function ClearFilesTable() {
@@ -215,7 +215,7 @@
             <tr>
 
                 <td class="note">
-                    <div style="height:200px;overflow:auto">
+                    <div style="height: 200px; overflow: auto">
                         <table <%--style="width: 90%; display: none; line-height: 25px" --%>id="tblFiles" class="table table-striped" style="font-size: 14px;">
                             <thead>
                                 <tr style="text-transform: uppercase">
@@ -239,12 +239,22 @@
                         <dx:ASPxLabel ID="lblSelectImage" runat="server" Text="Select file to upload:" Font-Size="18px" ForeColor="#C4C3C9">
                         </dx:ASPxLabel>
                     </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <dx:ASPxUploadControl ID="uplImage" AdvancedModeSettings-EnableMultiSelect="true" runat="server" ClientInstanceName="uploader" CssClass="email_input input_files" NullText="Click here to browse files..." Size="35" Width="10%">
+                                    <ValidationSettings MaxFileSize="4194304">
+                                    </ValidationSettings>
+                                </dx:ASPxUploadControl>
+                            </td>
+                            <td>
+                                <a class="dxucButton_MetropolisBlue1" style="font-size: 14px; padding-left: 20px; color: #3993c1" href="javascript:" onclick="OnAddFileButtonClick()">Add</a>
+                            </td>
+                        </tr>
 
-                    <dx:ASPxUploadControl ID="uplImage" AdvancedModeSettings-EnableMultiSelect="true" runat="server" ClientInstanceName="uploader" CssClass="email_input input_files" NullText="Click here to browse files..." Size="35" Width="100%">
-                        <ValidationSettings MaxFileSize="4194304">
-                        </ValidationSettings>
-                    </dx:ASPxUploadControl>
-                    <a class="dxucButton_MetropolisBlue1" style="font-size: 14px" href="javascript:" onclick="OnAddFileButtonClick()">Add</a>
+                    </table>
+
+
                     <dx:ASPxHiddenField runat="server" ID="hfBBLE" ClientInstanceName="hfBBLEClient"></dx:ASPxHiddenField>
                     <asp:HiddenField runat="server" ID="hfBBLEData" />
                 </td>
@@ -252,8 +262,14 @@
             </tr>
 
 
-
-            <tr id="trFileHolder" style="height: 230px; width: 100%">
+            <tr>
+                <td>
+                    <span class="color_gray" style="line-height:50px;">
+                        Or... Simply drag your documents from your computer on to this drop zone:
+                    </span>
+                </td>
+            </tr>
+            <tr id="trFileHolder" style="height: 230px; width: 100%;margin-top:20px;">
                 <td colspan="2" style="text-align: center;" class="dxeBase_MetropolisBlue1"><i class="fa fa-upload" style="font-size: 90px; color: #dddddd"></i>
                 </td>
             </tr>
