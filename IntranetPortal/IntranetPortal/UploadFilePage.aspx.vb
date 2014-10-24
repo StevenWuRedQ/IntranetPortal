@@ -4,6 +4,7 @@ Imports System.Net.Http
 Imports System.Web.Services
 Imports System.IO
 Imports IntranetPortal.Core
+Imports System.Web.Script.Serialization
 
 Public Class UploadFilePage
     Inherits System.Web.UI.Page
@@ -25,14 +26,20 @@ Public Class UploadFilePage
                     Next
                 End If
 
+                Dim fileNewNames As New Dictionary(Of String, String)
+                If Not String.IsNullOrEmpty(Request.Form("FileNames")) Then
+                    Dim names = Request.Form("FileNames").ToString
+                    fileNewNames = New JavaScriptSerializer().Deserialize(Of Dictionary(Of String, String))(names)
+                End If
+
                 For i = 0 To Request.Files.Count - 1
                     Dim file = Request.Files(i)
-                    Dim name = file.FileName
+                    Dim name = fileNewNames(file.FileName)
                     Dim ms = New MemoryStream()
                     file.InputStream.CopyTo(ms)
 
                     Dim bble = Request.QueryString("b")
-                    Dim category = categories(name)  'Request.QueryString("cate")
+                    Dim category = categories(file.FileName)  'Request.QueryString("cate")
 
                     DocumentService.UploadFile(String.Format("{0}/{1}/", bble, category), ms.ToArray, name, User.Identity.Name)
                 Next

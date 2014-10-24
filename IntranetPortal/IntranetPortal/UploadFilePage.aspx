@@ -57,6 +57,12 @@
                     formData.append("Category", categories);
                 }
 
+                var names = GetFileNames();
+                if (name != null)
+                {
+                    formData.append("FileNames", names);
+                }
+
                 xhr.open('POST', url)
                 xhr.onload = function () {
                     progress.value = progress.innerHTML = 100;
@@ -174,7 +180,8 @@
                 var fileName = file.fileName;
             }
 
-            cell1.innerHTML = fileName;
+            //cell1.innerHTML = fileName;
+            cell1.appendChild(GetFilenameElement(fileName));
 
             cell1 = row.insertCell(2);
             cell1.appendChild(GetCategoryElement(fileName));
@@ -199,6 +206,18 @@
             }
         }
 
+        function GetFilenameElement(fileName)
+        {
+            var x = document.createElement("INPUT");
+            x.setAttribute("type", "text");
+            x.setAttribute("style","width:100%")
+            x.setAttribute("class", "email_input")
+            x.setAttribute("value", fileName);
+            x.setAttribute("data-filename", fileName);
+
+            return x;
+        }
+
         function GetCategoryElement(fileName) {
             var cates = ["Financials", "Short Sale", "Photos", "Accounting", "Eviction", "Construction", "Others"];
             var x = document.createElement("SELECT");
@@ -220,6 +239,15 @@
             });
 
             return allCategories.toString();
+        }
+
+        function GetFileNames() {
+            var allNames = {};
+            $('#tblFiles input').each(function () {
+                allNames[$(this).attr("data-filename")] = $(this).val();                
+            });
+
+            return JSON.stringify(allNames);
         }
 
     </script>

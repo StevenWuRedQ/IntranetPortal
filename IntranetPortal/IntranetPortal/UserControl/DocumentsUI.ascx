@@ -31,6 +31,7 @@
             isLoaded = true;
         }
     }
+
     function OnFilePopUpClick(s, e) {
         if (tmpFileId == null)
             return;
