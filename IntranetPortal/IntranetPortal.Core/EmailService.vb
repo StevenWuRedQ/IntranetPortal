@@ -4,6 +4,7 @@ Imports System.Net
 Imports System.IO
 Imports System.Data.SqlClient
 Imports System.Data.Entity.Core.EntityClient
+Imports System.Web.Script.Serialization
 
 Public Class EmailService
     Public Shared Sub SendMail()
@@ -12,19 +13,19 @@ Public Class EmailService
         'Dim pass As String = System.Configuration.ConfigurationManager.AppSettings("SmtpPassword")
         'Dim server As String = System.Configuration.ConfigurationManager.AppSettings("SmtpServer")
 
-        Dim Message As New Mail.MailMessage()
-        Message.To.Add(New MailAddress("chris@gvs4u.com"))
-        Message.Subject = "test"
-        Message.Body = "testing mail"
-        Dim file = DocumentService.DownLoadFileStream("b70ddcff-8d22-4b65-8fc8-42b46f8b1380")
+        'Dim Message As New Mail.MailMessage()
+        'Message.To.Add(New MailAddress("chris@gvs4u.com"))
+        'Message.Subject = "test"
+        'Message.Body = "testing mail"
+        'Dim file = DocumentService.DownLoadFileStream("b70ddcff-8d22-4b65-8fc8-42b46f8b1380")
 
-        Message.Attachments.Add(New Attachment(CType(file.Stream, IO.MemoryStream), file.Name.ToString))
-        Dim client As New SmtpClient()
-        Try
-            client.Send(Message)
-        Catch ex As Exception
-            ' ...
-        End Try
+        'Message.Attachments.Add(New Attachment(CType(file.Stream, IO.MemoryStream), file.Name.ToString))
+        'Dim client As New SmtpClient()
+        'Try
+        '    client.Send(Message)
+        'Catch ex As Exception
+        '    ' ...
+        'End Try
     End Sub
 
     Public Shared Function SendMail(toAddress As String, ccAddress As String, subject As String, body As String, attachments As String()) As Integer
@@ -33,7 +34,8 @@ Public Class EmailService
         mailmsg.CcAddress = ccAddress
         mailmsg.Subject = subject
         mailmsg.Body = body
-        mailmsg.Attachments = String.Join(";", attachments)
+        'mailmsg.Attachments = String.Join(";", attachments)
+        Dim tmpAttachs As New Dictionary(Of String, String)
 
         Dim Message As New Mail.MailMessage()
         If String.IsNullOrEmpty(toAddress) Then
@@ -60,7 +62,15 @@ Public Class EmailService
             For Each att In attachments
                 Dim file = DocumentService.DownLoadFileStream(att)
                 Message.Attachments.Add(New Attachment(CType(file.Stream, MemoryStream), file.Name.ToString))
+                tmpAttachs.Add(att, file.Name.ToString)
             Next
+
+            If tmpAttachs.Count > 0 Then
+                'Dim items = From kvp In tmpAttachs
+                '            Select kvp.Key & "=" & kvp.Value
+
+                mailmsg.Attachments = New JavaScriptSerializer().Serialize(tmpAttachs)
+            End If
         End If
 
         Dim client As New SmtpClient()
@@ -71,6 +81,13 @@ Public Class EmailService
         Catch ex As Exception
             Throw ex
         End Try
+    End Function
+
+    Public Shared Function GetMailMessage(mailId As Integer) As EmailMessage
+        Using ctx As New CoreEntities
+            Dim msg = ctx.EmailMessages.Find(mailId)
+            Return msg
+        End Using
     End Function
 
     Private Shared Function SaveEmail(msg As EmailMessage) As Integer

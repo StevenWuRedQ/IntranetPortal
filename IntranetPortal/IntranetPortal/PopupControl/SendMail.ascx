@@ -2,6 +2,8 @@
 <script type="text/javascript">
     var loaded = false;
     var emailBBLE = null;
+    var ShowEmail = false;
+
     function ShowEmailPopup(bble) {
         emailBBLE = bble;
 
@@ -14,12 +16,31 @@
         }
     }
 
-    function InitAttachments() {
-        var attachmentHoder = document.getElementById("divAttachment");
 
+    function InitAttachments() {
+        
+        var attachmentHoder = document.getElementById("divAttachment");
         attachmentHoder.innerHTML = "";
+
+        if (ShowEmail) {
+            var attachFiles = txtAttachments.GetText();
+            if (attachFiles != "")
+            {
+                var attachments = JSON.parse(attachFiles);
+                var docIds = [];
+                for (var key in attachments) {
+                    attachmentHoder.appendChild(GetAttachmentElement(attachments[key]));
+                    docIds.push(key);
+                }
+
+                txtAttachments.SetText(docIds.toString());
+            }
+            
+            return;
+        }
+
         if (typeof GetSelectedAttachment != undefined) {
-            attachments = GetSelectedAttachment();
+            var attachments = GetSelectedAttachment();
             var docIds = [];
 
             for (var i = 0; i < attachments.length; i++) {
@@ -41,29 +62,40 @@
     }
 
     var sendingMail = false;
-    function SendMail()
-    {
-        if (!popupSendEmailClient.InCallback())
-        {
+    function SendMail() {
+        if (!popupSendEmailClient.InCallback()) {
             sendingMail = true;
-            if(emailBBLE != null)
+            if (emailBBLE != null)
                 popupSendEmailClient.PerformCallback('SendMail|' + emailBBLE);
         }
-        else
-        {
+        else {
             alert("Server is busy. Please try later.");
         }
     }
 
-    function SendMailEndCallback(s,e)
-    {
+    function SendMailEndCallback(s, e) {
         s.Show();
 
-        if (sendingMail)
-        {
+        if (ShowEmail) {
+            document.getElementById("btnSend").style.display = "none";
+
+            ShowEmail = false;
+        }
+
+        if (sendingMail) {
             alert("Your mail is sent.");
             sendingMail = false;
+            s.Hide();
         }
+    }
+
+    function BindAttachments() {
+       
+    }
+
+    function ShowMailmessage(mailId) {
+        ShowEmail = true;
+        popupSendEmailClient.PerformCallback("ShowMail|" + mailId);
     }
 
 </script>
@@ -94,7 +126,7 @@
         </div>
     </HeaderTemplate>
     <ContentCollection>
-        <dx:PopupControlContentControl runat="server" ID="PopupContentSendMail" Visible="false">          
+        <dx:PopupControlContentControl runat="server" ID="PopupContentSendMail" Visible="false">
             <div class="clearfix">
                 <table class="mail_edits">
                     <tr>
@@ -141,13 +173,13 @@
                     </dx:ASPxHtmlEditor>
                 </div>
 
-                <div class="popup_btns">                  
-                    <input type="button" class="rand-button short_sale_edit bg_color_blue" value="Send" onclick="SendMail()">
+                <div class="popup_btns">
+                    <input type="button" class="rand-button short_sale_edit bg_color_blue" value="Send" onclick="SendMail()" id="btnSend">
                     <input type="button" class="rand-button short_sale_edit" style="background: #77787b" value="Cancel" onclick="popupSendEmailClient.Hide()">
                 </div>
             </div>
         </dx:PopupControlContentControl>
     </ContentCollection>
-    <ClientSideEvents Shown="function(s,e){}" EndCallback="SendMailEndCallback" PopUp="function(s,e){InitAttachments();}" />
+    <ClientSideEvents EndCallback="SendMailEndCallback" PopUp="function(s,e){InitAttachments();}" />
 </dx:ASPxPopupControl>
 

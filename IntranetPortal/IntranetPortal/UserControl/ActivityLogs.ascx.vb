@@ -29,8 +29,6 @@ Public Class ActivityLogs
             '    gridTracking.AddNewRow()
             'End If
         End Using
-
-
     End Sub
 
     Sub BindEmpList()
