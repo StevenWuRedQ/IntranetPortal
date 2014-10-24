@@ -169,7 +169,7 @@
                 </table>
                 <div style="margin-top: 10px">
                     <dx:ASPxHtmlEditor ID="EmailBody" runat="server" Height="300px" Width="100%">
-                        <Settings AllowHtmlView="false" AllowPreview="false" />
+                        <Settings AllowHtmlView="false" AllowPreview="false" AllowContextMenu="False" AllowInsertDirectImageUrls="false" />
                     </dx:ASPxHtmlEditor>
                 </div>
 
