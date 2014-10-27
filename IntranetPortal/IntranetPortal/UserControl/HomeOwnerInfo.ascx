@@ -46,12 +46,9 @@
             <td>
                 <div class="form_div_node form_div_no_float" style="width: 100%">
                     <span class="form_input_title">Death Indicator</span>
-
                     <input class="text_input" value="<%= IIf(TLOLocateReport.dateOfDeathField Is Nothing, "Alive", "Death")%>">
                 </div>
             </td>
-
-
         </tr>
         <tr>
             <td>
@@ -70,7 +67,7 @@
     </table>
 
     <!-- Employer info -->
-    <% If TLOLocateReport.employersField.Length > 0 Then%>
+    <% If TLOLocateReport.employersField IsNot Nothing AndAlso TLOLocateReport.employersField.Length > 0 Then%>
     <div class="form_head homeowner_section_margin">
         <span>Possible Employer Info </span>
     </div>
@@ -96,7 +93,7 @@
     <%End If%>
 
     <!-- Email info -->
-    <% If TLOLocateReport.emailAddressesField.Length > 0 Then%>
+    <% If TLOLocateReport.emailAddressesField IsNot Nothing AndAlso TLOLocateReport.emailAddressesField.Length > 0 Then%>
     <div class="form_head homeowner_section_margin">
         <span>Best Emails </span>
     </div>
@@ -122,7 +119,7 @@
     <%End If%>
 
     <!--Best Phone info -->
-    <% If TLOLocateReport.phonesField.Length > 0 Then%>
+
     <div>
         <div class="form_head homeowner_section_margin">
             <span runat="server" id="ulBestPhones">Best Phone Numbers &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color" style="cursor: pointer" onclick="<%= String.Format("AddBestPhoneNum('{0}','{1}','{2}', this)", BBLE, OwnerName, ulBestPhones.ClientID)%>"></i>
@@ -151,9 +148,10 @@
                     </div>
                     <% End If%>
                     <% Next%>
+
+                    <% If TLOLocateReport.phonesField IsNot Nothing AndAlso TLOLocateReport.phonesField.Length > 0 Then%>
                     <% For Each phone In TLOLocateReport.phonesField%>
                     <% If phone IsNot Nothing Then%>
-
                     <div class="color_gray clearfix">
                         <i class="fa fa-phone homeowner_info_icon"></i>
                         <div class="form_div_node homeowner_info_text ">
@@ -167,26 +165,22 @@
                             </div>
                         </div>
                     </div>
-
                     <% End If%>
                     <% Next%>
+                    <% End If%>
                 </div>
             </div>
         </div>
     </div>
-
-    <%End If%>
-
-    <!--Best Mail Address info -->
-    <% If TLOLocateReport.addressesField.Length > 0 Then%>
-    <%-----best address section info--%>
     <div>
         <div class="form_head homeowner_section_margin">
-            <span>Best Addresses &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color" style="display: none"></i>
+            <span>Best Addresses &nbsp;</span> <i class="fa fa-plus-circle homeowner_plus_color" style="cursor: pointer" onclick="<%= String.Format("AddBestAddress('{0}','{1}', this)", BBLE, OwnerName)%>"></i>
         </div>
         <div>
             <div class="clearfix homeowner_info_label">
                 <div>
+                    <!--Best Mail Address info -->
+                    <% If TLOLocateReport.addressesField IsNot Nothing AndAlso TLOLocateReport.addressesField.Length > 0 Then%>
                     <% For Each add In TLOLocateReport.addressesField%>
                     <% If add.addressField IsNot Nothing Then
                             Dim address = BuilderAddress(add)
@@ -204,25 +198,12 @@
                     </div>
                     <% End If%>
                     <% Next%>
+                    <%End If%>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-    <%----end-----%>
-    <%-- <h5>Best Address</h5>
-    <ul style="list-style: none; margin-left: 5px; padding-left: 0px; margin-top: 0px;">
-        <% For Each add In TLOLocateReport.addressesField%>
-        <% If add.addressField IsNot Nothing Then
-                Dim address = BuilderAddress(add)
-        %>
-        <li><a href="#" onclick="OnAddressLinkClick(this, '<%= FormatAddress(add.addressField)%>')" <%= CssStyle(FormatAddress(add.addressField))%>><%= address%></a></li>
-        <% End If%>
-        <% Next%>
-    </ul>--%>
-    <%End If%>
+
 
     <% If TLOLocateReport.numberOfRelatives1stDegreeField > 0 Then%>
     <div>
@@ -233,7 +214,7 @@
         <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
             <i class="fa fa-chain color_gray homeowner_info_icon"></i>
             <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
-                <span class="font_black color_balck font_black upcase_text " style="white-space:nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField %></span><br />
+                <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField %></span><br />
                 <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
             </div>
 
@@ -270,7 +251,7 @@
         <% Next%>
         <div>
             <span class="time_buttons more_buttom"><a href="#" style="color: white" onclick="document.getElementById('<%= divRelatives.ClientID %>').style.display='block';">More Info</a>
-            </span>            
+            </span>
         </div>
     </div>
 
@@ -283,7 +264,7 @@
             <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
                 <i class="fa fa-chain color_gray homeowner_info_icon"></i>
                 <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
-                    <span class="font_black color_balck font_black upcase_text " style="white-space:nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField %></span><br />
+                    <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField %></span><br />
                     <br />
                     <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField Is Nothing, ";", relative.dateOfBirthField.currentAgeField)%></span></span>
                 </div>
@@ -331,7 +312,7 @@
             <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
                 <i class="fa fa-chain color_gray homeowner_info_icon"></i>
                 <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
-                   <span class="font_black color_balck font_black upcase_text " style="white-space:nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField %></span><br />
+                    <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField %></span><br />
                     <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
                 </div>
 

@@ -240,6 +240,13 @@
         aspxPopupAddPhoneNum.ShowAtElement(addButton);
     }
 
+    var isSave = false;
+    function AddBestAddress(bble, ownerName, addButton) {        
+        currOwner = ownerName;
+        isSave = true;
+        aspxPopupAddAddress.PerformCallback(addButton);
+    }
+
     function SaveBestPhoneNo(s, e) {
         var phoneNo = txtPhoneNoClient.GetText();
         ownerInfoCallbackPanel.PerformCallback(phoneNo + "|" + currOwner);
@@ -325,7 +332,7 @@
                                             <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Share Leads" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
                                             <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>
                                         </li>
-                                    </ul>                                
+                                    </ul>
                                     <div class="tab-content">
                                         <uc1:PropertyInfo runat="server" ID="PropertyInfo" />
                                         <div class="tab-pane clearfix" id="home_owner">
@@ -351,7 +358,7 @@
                                             </dx:ASPxCallbackPanel>
                                         </div>
                                         <div class="tab-pane" id="documents">
-                                            <uc1:DocumentsUI runat="server" ID="DocumentsUI"/>
+                                            <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
                                             <%--<uc1:LeadsDocumentOneDrive runat="server" ID="LeadsDocumentOneDrive" />--%>
                                         </div>
                                     </div>
@@ -431,7 +438,7 @@
                                                 </li>
                                             </ul>
                                             <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
-                                        </div>                                     
+                                        </div>
                                         <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
                                             <ClientSideEvents CallbackComplete="OnSetStatusComplete" />
                                         </dx:ASPxCallback>
@@ -633,8 +640,8 @@
                 </HeaderTemplate>
                 <ContentCollection>
                     <dx:PopupControlContentControl>
-                        <dx:ASPxCheckBoxList  ID="lbSelectionMode" runat="server" AutoPostBack="false" Border-BorderStyle="None">
-                            <Items>                                
+                        <dx:ASPxCheckBoxList ID="lbSelectionMode" runat="server" AutoPostBack="false" Border-BorderStyle="None">
+                            <Items>
                                 <dx:ListEditItem Text="Short Sale" Value="0" />
                                 <dx:ListEditItem Text="Evition" Value="1" />
                                 <dx:ListEditItem Text="Construction" Value="2" />
@@ -676,17 +683,54 @@
                                             <ClientSideEvents Click="function(s,e){aspxPopupAddPhoneNum.Hide();}" />
                                         </dx:ASPxButton>
                                     </div>
-
                                 </td>
                             </tr>
                         </table>
                     </dx:PopupControlContentControl>
                 </ContentCollection>
             </dx:ASPxPopupControl>
-            <uc1:SendMail runat="server" id="SendMail" />
+            <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddAddress" Width="400px" Height="80px" ID="ASPxPopupControl1"
+                HeaderText="Add Address" OnWindowCallback="ASPxPopupControl1_WindowCallback" Modal="true"
+                runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter">
+                <ContentCollection>
+                    <dx:PopupControlContentControl Visible="false" ID="popupContentAddAddress">
+                        <table class="mail_edits">
+                            <tr style="padding-top: 3px;">
+                                <td><span class="font_12 color_gray upcase_text">Address:</span></td>
+                                <td>
+                                    <dx:ASPxTextBox runat="server" ID="txtUserAddress" CssClass="email_input"></dx:ASPxTextBox>
+                                </td>
+                            </tr>
+                            <tr style="padding-top: 3px;">
+                                <td><span class="font_12 color_gray upcase_text">Description:</span></td>
+                                <td>
+                                    <dx:ASPxTextBox runat="server" ID="txtAdrDes" CssClass="email_input"></dx:ASPxTextBox>
+                                </td>
+                            </tr>
+                            <tr style="margin-top: 3px; line-height: 30px; margin-top: 10px">
+                                <td></td>
+                                <td>
+                                    <div style="margin-top: 10px">
+                                        <dx:ASPxButton runat="server" ID="ASPxButton2" Text="Add" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                            <ClientSideEvents Click="function(s,e){
+                                                aspxPopupAddAddress.PerformCallback('Save|' + currOwner);
+                                                }" />
+                                        </dx:ASPxButton>
+                                        &nbsp;
+                                        <dx:ASPxButton runat="server" ID="ASPxButton5" Text="Close" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                            <ClientSideEvents Click="function(s,e){aspxPopupAddAddress.Hide();}" />
+                                        </dx:ASPxButton>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </dx:PopupControlContentControl>
+                </ContentCollection>
+                <ClientSideEvents EndCallback="function(s,e){if(!isSave){s.Show();}else{s.Hide();}}" />
+            </dx:ASPxPopupControl>
+            <uc1:SendMail runat="server" ID="SendMail" />
         </dx:PanelContent>
     </PanelCollection>
     <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>
     <Border BorderStyle="None"></Border>
-
 </dx:ASPxCallbackPanel>

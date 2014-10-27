@@ -38,6 +38,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.PortalNote" Width="1.5" PointX="15.375" PointY="11.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyReferrel" Width="1.5" PointX="6.25" PointY="16.875" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsMortgageData" Width="1.5" PointX="8.625" PointY="16.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.HomeOwnerAddress" Width="1.75" PointX="11.5" PointY="17" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

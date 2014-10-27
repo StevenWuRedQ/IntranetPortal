@@ -210,12 +210,32 @@
         {
             var x = document.createElement("INPUT");
             x.setAttribute("type", "text");
-            x.setAttribute("style","width:100%")
-            x.setAttribute("class", "email_input")
+            x.setAttribute("style", "width:90%;border-color:transparent;background-color:transparent;border-style:solid;")
+            x.setAttribute("class", "")
             x.setAttribute("value", fileName);
             x.setAttribute("data-filename", fileName);
+            //x.addEventListener("focus", function () {
+            //    ShowBorder(x);
+            //});
 
+            //x.addEventListener("blur", function () {
+            //    ShowBorder(x);
+            //});
+            
             return x;
+        }
+
+        function ShowBorder(s) {
+            return;
+            var tbl = s;
+            if (tbl.style.borderColor == 'transparent') {              
+                tbl.style.borderColor = "#9da0aa";
+                tbl.style.backgroundColor = 'white';
+            }
+            else {
+                tbl.style.borderColor = 'transparent';
+                tbl.style.backgroundColor = 'transparent';
+            }
         }
 
         function GetCategoryElement(fileName) {
@@ -255,6 +275,7 @@
         #trFileHolder {
             border: 2px dashed #ccc !important;
             margin: 20px auto;
+            
         }
 
             #trFileHolder.hover {
@@ -282,9 +303,8 @@
     </style>
 </head>
 <body style="padding: 20px;">
-    <form id="form1" runat="server">
-        <table style="width: 100%; text-align: left;">
-
+    <form id="form1" runat="server">      
+        <table style="width: 100%; text-align: left;">           
             <tr>
 
                 <td class="note">
@@ -293,7 +313,7 @@
                             <thead>
                                 <tr style="text-transform: uppercase; color: #b1b2b7">
                                     <td style="width: 25px">#</td>
-                                    <td>Name</td>
+                                    <td>Name (click to change)</td>
                                     <td style="width: 200px">File Category</td>
                                     <td style="width: 80px">Size(KB)</td>
                                     <td style="width: 60px">Delete</td>
@@ -303,12 +323,9 @@
                             </tbody>
                         </table>
                     </div>
-
                 </td>
             </tr>
-
             <tr>
-
                 <td>
                     <div style="padding-bottom: 15px">
                         <dx:ASPxLabel ID="lblSelectImage" runat="server" Text="Select file to upload:" Font-Size="18px" ForeColor="#C4C3C9">

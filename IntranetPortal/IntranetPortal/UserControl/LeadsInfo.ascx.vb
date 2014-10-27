@@ -563,9 +563,7 @@ Public Class LeadsInfo1
                         End If
                     End Using
                 End If
-
             End If
-            
         Else
 
         End If
@@ -573,5 +571,33 @@ Public Class LeadsInfo1
 
     Protected Sub aspxPopupSchedule_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         popupContentSchedule.Visible = True
+    End Sub
+
+    Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        popupContentAddAddress.Visible = True
+
+        If e.Parameter = "Save" Then
+            Dim bble = hfBBLE.Value
+            Dim ownerName = e.Parameter.Split("|")(1)
+            Dim address = txtUserAddress.Text
+
+            Using context As New Entities
+                Dim p = context.HomeOwnerAddresses.Where(Function(ph) ph.BBLE = bble And ph.OwnerName = ownerName And ph.Address = address).SingleOrDefault
+
+                If p Is Nothing Then
+                    p = New HomeOwnerAddress
+                    p.BBLE = bble
+                    p.OwnerName = ownerName
+                    p.Address = address
+                    p.Description = txtAdrDes.Text
+                    p.Source = AddressSource.UserAdded
+
+                    context.HomeOwnerAddresses.Add(p)
+                    context.SaveChanges()
+                Else
+                    Throw New Exception("This Phone NO. already exist.")
+                End If
+            End Using
+        End If
     End Sub
 End Class

@@ -52,6 +52,7 @@ Partial Public Class Entities
     Public Overridable Property PortalNotes() As DbSet(Of PortalNote)
     Public Overridable Property PropertyReferrels() As DbSet(Of PropertyReferrel)
     Public Overridable Property LeadsMortgageDatas() As DbSet(Of LeadsMortgageData)
+    Public Overridable Property HomeOwnerAddresses() As DbSet(Of HomeOwnerAddress)
 
     Public Overridable Function UpdateEmployeeName(oldName As String, newName As String) As Integer
         Dim oldNameParameter As ObjectParameter = If(oldName IsNot Nothing, New ObjectParameter("OldName", oldName), New ObjectParameter("OldName", GetType(String)))

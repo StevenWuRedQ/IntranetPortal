@@ -44,6 +44,14 @@ Partial Public Class HomeOwner
         End Get
     End Property
 
+    Public ReadOnly Property BestAddress As List(Of HomeOwnerAddress)
+        Get
+            Using context As New Entities
+                Return context.HomeOwnerAddresses.Where(Function(add) add.BBLE = BBLE And add.OwnerName = Name And add.Source = AddressSource.UserAdded).ToList
+            End Using
+        End Get
+    End Property
+
     Public Sub AddPhones(phone As String)
         Using context As New Entities
             Dim p = context.HomeOwnerPhones.Where(Function(ph) ph.BBLE = BBLE And ph.OwnerName = Name And ph.Phone = phone).SingleOrDefault
@@ -147,6 +155,11 @@ Partial Public Class HomeOwner
 End Class
 
 Enum PhoneSource
+    TLOLocateReport
+    UserAdded
+End Enum
+
+Enum AddressSource
     TLOLocateReport
     UserAdded
 End Enum

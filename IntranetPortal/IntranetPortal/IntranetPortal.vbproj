@@ -376,6 +376,9 @@
     <Compile Include="DataModel\HomeOwner.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\HomeOwnerAddress.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\HomeOwnerPhone.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>

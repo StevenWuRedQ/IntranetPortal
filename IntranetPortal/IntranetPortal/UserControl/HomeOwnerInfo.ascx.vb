@@ -9,7 +9,7 @@
     Public Property BBLE As String
     Public Property TLOLocateReport As DataAPI.TLOLocateReportOutput
     Public Property BestNums As List(Of HomeOwnerPhone)
-
+    Public Property BestAddress As List(Of HomeOwnerAddress)
 
     Private _contacts As List(Of OwnerContact)
     Public ReadOnly Property Contacts As List(Of OwnerContact)
@@ -48,6 +48,9 @@
             Dim homeOwner = Context.HomeOwners.Where(Function(h) h.BBLE = bble And h.Name = OwnerName).FirstOrDefault
             If homeOwner IsNot Nothing Then
                 TLOLocateReport = homeOwner.TLOLocateReport
+                If TLOLocateReport Is Nothing Then
+                    TLOLocateReport = New DataAPI.TLOLocateReportOutput
+                End If
                 BestNums = homeOwner.BestPhoneNo
             End If
         End Using
