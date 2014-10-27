@@ -4,7 +4,7 @@
 <script type="text/javascript">
     function UploadFiles() {
         var url = "";
-        if (typeof leadsInfoBBLE == undefined)
+        if (typeof leadsInfoBBLE == undefined || leadsInfoBBLE == null)
             url = '/UploadFilePage.aspx?b=<%= LeadsBBLE%>';
         else
             url = '/UploadFilePage.aspx?b=' + leadsInfoBBLE;

@@ -34,10 +34,15 @@
                 SaveStatus(e.item.name, tmpCaseId);
             }
 
-            if (e.item.index == 8) {
+            if (e.item.name == "Reassign")
+            {
+                popupCtrReassignEmployeeListCtr.PerformCallback();
+                popupCtrReassignEmployeeListCtr.ShowAtElement(s.GetMainElement());
+            }
+
+            if (e.item.name == "Upload") {
                 var url = '/UploadFilePage.aspx?b=' + tmpBBLE;
-                //var centerLeft = parseInt((window.screen.availWidth - 640) / 2);
-                //var centerTop = parseInt(((window.screen.availHeight - 400) / 2) - 50);          
+              
                 if (popupCtrUploadFiles) {
                     popupCtrUploadFiles.SetContentUrl(url);
                     popupCtrUploadFiles.Show();
@@ -49,7 +54,7 @@
     }
 
     function LogClick(itemName) {
-        
+
         SaveStatus(itemName, ShortSaleCaseData.CaseId);
     }
     function SaveStatus(status, caseId) {
@@ -213,8 +218,6 @@
         if (typeof gridTrackingClient != "undefined")
             gridTrackingClient.Refresh();
     }
-
-
 </script>
 
 <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -240,9 +243,9 @@
         <dx:MenuItem GroupName="Sort" Text="Closed" Name="Closed" Image-Url="/images/drap_closed_icons.png">
             <Image Url="/images/drap_closed_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="View Files" Name="ViewFiles">
-            <Image Url="/images/drap_viewfile_icons.png"></Image>
-        </dx:MenuItem>
+        <dx:MenuItem GroupName="Sort" Text="Reassign" Name="Reassign">
+            <Image Url="/images/drap_reassign_icon.png"></Image>
+        </dx:MenuItem>     
         <dx:MenuItem GroupName="Sort" Text="Upload Docs/Pics" Name="Upload">
             <Image Url="/images/drap_upload_icons.png"></Image>
         </dx:MenuItem>
@@ -285,6 +288,33 @@
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
+
+<dx:ASPxPopupControl ClientInstanceName="popupCtrReassignEmployeeListCtr" Width="300px" Height="300px"
+    MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
+    HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
+    runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentReAssign">
+            <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270"
+                SelectedIndex="0" Width="100%">
+            </dx:ASPxListBox>
+            <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
+                <ClientSideEvents Click="function(s,e){
+                                        var item = listboxEmployeeClient.GetSelectedItem();
+                                        if(item == null)
+                                        {
+                                             alert('Please select employee.');
+                                             return;
+                                         }
+                                        popupCtrReassignEmployeeListCtr.PerformCallback(tmpBBLE + '|' + item.text);
+                                        popupCtrReassignEmployeeListCtr.Hide();   
+                                        OnSetStatusComplete(s,e);                    
+                                        }" />
+            </dx:ASPxButton>
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+</dx:ASPxPopupControl>
+
 <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback">
     <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
 </dx:ASPxCallback>

@@ -7,15 +7,26 @@ Public Class ShortSaleCaseList
         'BindCaseList()
     End Sub
 
-    Public Sub BindCaseList()
-        gridCase.DataSource = IntranetPortal.ShortSale.ShortSaleCase.GetAllCase()
-        gridCase.DataBind()
-    End Sub
+    'Public Sub BindCaseList()
+    '    gridCase.DataSource = IntranetPortal.ShortSale.ShortSaleCase.GetAllCase()
+    '    gridCase.DataBind()
+    'End Sub
 
     Public Sub BindCaseList(status As CaseStatus)
         hfCaseStatus.Value = status
-        gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status)
-        gridCase.DataBind()
+
+        If Employee.IsShortSaleManager(Page.User.Identity.Name) Then
+            gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status)
+            gridCase.DataBind()
+
+            If Not Page.IsPostBack Then
+                gridCase.GroupBy(gridCase.Columns("Owner"))
+            End If
+        Else
+            gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status, Page.User.Identity.Name)
+            gridCase.DataBind()
+        End If
+
     End Sub
 
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)
@@ -25,4 +36,8 @@ Public Class ShortSaleCaseList
             End If
         End If
     End Sub
+
+    Private Function GetDataSource(status As CaseStatus) As List(Of ShortSaleCase)
+        
+    End Function
 End Class

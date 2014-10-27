@@ -293,4 +293,18 @@ Partial Public Class Employee
             End If
         End Using
     End Function
+
+    Public Shared Function IsShortSaleManager(userName As String) As Boolean
+        Dim rs = Roles.GetRolesForUser(userName)
+
+        If rs.Contains("Admin") Then
+            Return True
+        End If
+
+        If rs.Where(Function(r) r = "ShortSale-Manager").Count > 0 Then
+            Return True
+        End If
+
+        Return False
+    End Function
 End Class

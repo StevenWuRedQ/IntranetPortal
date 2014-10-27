@@ -126,7 +126,7 @@ Public Class RefreshLeadsCountHandler
         End If
 
         If name.StartsWith("ShortSale") Then
-            Return GetShortSaleCaseCount(name, itemText)
+            Return GetShortSaleCaseCount(name, itemText, userName)
         End If
     End Function
 
@@ -171,7 +171,7 @@ Public Class RefreshLeadsCountHandler
     End Function
 
 
-    Function GetShortSaleCaseCount(name As String, itemText As String) As Integer
+    Function GetShortSaleCaseCount(name As String, itemText As String, userName As String) As Integer
         Dim tmpStr = name.Split("-")
 
         If tmpStr.Length > 1 Then
@@ -184,7 +184,11 @@ Public Class RefreshLeadsCountHandler
                     Dim status As ShortSale.CaseStatus
 
                     If [Enum].TryParse(Of ShortSale.CaseStatus)(type, status) Then
-                        Return ShortSale.ShortSaleCase.GetCaseCount(status)
+                        If (Employee.IsShortSaleManager(userName)) Then
+                            Return ShortSale.ShortSaleCase.GetCaseCount(status)
+                        End If
+
+                        Return ShortSale.ShortSaleCase.GetCaseCount(status, userName)
                     Else
                         Return 0
                     End If

@@ -31,5 +31,6 @@ Partial Public Class ShortSaleCase
     Public Property LockBoxCode As String
     Public Property UpdateDate As Nullable(Of Date)
     Public Property UpdateBy As String
+    Public Property Owner As String
 
 End Class

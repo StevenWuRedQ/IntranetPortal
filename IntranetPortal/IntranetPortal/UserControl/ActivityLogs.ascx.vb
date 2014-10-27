@@ -500,6 +500,8 @@ Public Class ActivityLogs
                 _commentIconList.Add(LeadsActivityLog.EnumActionType.DealClosed, GetIcon("activity_color_check", "fa fa-check"))
                 _commentIconList.Add(LeadsActivityLog.EnumActionType.HotLeads, GetIcon("activity_color_info", "fa fa-info"))
                 _commentIconList.Add(LeadsActivityLog.EnumActionType.Print, GetIcon("activity_color_print", "fa fa-print"))
+                _commentIconList.Add(LeadsActivityLog.EnumActionType.Reassign, GetIcon("activity_color_check", "fa fa-mail-forward"))
+
             End If
 
             Return _commentIconList

@@ -43,6 +43,7 @@
 
     function OnSuccess(response) {        
         ShortSaleCaseData = JSON.parse(response.d);
+        leadsInfoBBLE = ShortSaleCaseData.BBLE;
         ShortSaleDataBand(0);        
     }
 
@@ -92,6 +93,24 @@
                     <Settings AutoFilterCondition="Contains" />
                 </dx:GridViewDataTextColumn>                                
                 <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false" VisibleIndex="5"></dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="Owner" Visible="false" VisibleIndex="4">
+                    <GroupRowTemplate>
+                        <div>
+                            <table style="height: 30px">
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
+                                    <td style="width: 80px;">
+                                        <span class="font_black">
+                                            <i class="fa fa-user font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                        </span>
+                                    </td>
+                                    <td style="padding-left: 10px">
+                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </GroupRowTemplate>
+                </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn Width="40px" VisibleIndex="6">
                     <DataItemTemplate>
                         <div class="hidden_icon">

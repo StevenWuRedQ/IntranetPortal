@@ -250,6 +250,30 @@
         'End If
     End Sub
 
+    Public Shared Sub ReassignOwner(caseId As Integer, owner As String)
+        Dim ssCase = GetCase(caseId)
+        If ssCase Is Nothing Then
+            Throw New Exception("Can't find short sale case. Case Id is " & caseId)
+        End If
+
+        ssCase.ReassignOwner(owner)
+    End Sub
+
+    Public Shared Sub ReassignOwner(bble As String, owner As String)
+        Dim ssCase = GetCaseByBBLE(bble)
+        If ssCase Is Nothing Then
+            Throw New Exception("Can't find short sale case. BBLE is " & bble)
+        End If
+
+         ssCase.ReassignOwner(owner)
+    End Sub
+
+    Private Sub ReAssignOwner(owner As String)
+        Me.Owner = owner
+        Me.Status = CaseStatus.NewFile
+        Save()
+    End Sub
+
     Public Shared Function SaveCase(ssCase As ShortSaleCase) As Boolean
         Try
             ssCase.Save()
@@ -269,6 +293,12 @@
         End Using
     End Function
 
+    Public Shared Function GetCaseByBBLE(bble As String) As ShortSaleCase
+        Using context As New ShortSaleEntities
+            Return context.ShortSaleCases.Where(Function(ss) ss.BBLE = bble).SingleOrDefault
+        End Using
+    End Function
+
     Public Shared Function GetAllCase() As List(Of ShortSaleCase)
         Using context As New ShortSaleEntities
             Return context.ShortSaleCases.ToList
@@ -281,7 +311,17 @@
         End Using
     End Function
 
-    Public Shared Function GetCaseCount(status As CaseStatus)
+    Public Shared Function GetCaseByStatus(status As CaseStatus, owner As String) As List(Of ShortSaleCase)
+        Using context As New ShortSaleEntities
+            Return context.ShortSaleCases.Where(Function(ss) ss.Status = status AndAlso ss.Owner = owner).ToList
+        End Using
+    End Function
+
+    Public Shared Function GetCaseCount(status As CaseStatus, owner As String) As Integer
+        Return GetCaseByStatus(status, owner).Count
+    End Function
+
+    Public Shared Function GetCaseCount(status As CaseStatus) As Integer
         Return GetCaseByStatus(status).Count
     End Function
 End Class

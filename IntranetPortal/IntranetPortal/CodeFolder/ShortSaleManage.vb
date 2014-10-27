@@ -11,6 +11,7 @@ Public Class ShortSaleManage
             ssCase.BBLE = bble
             ssCase.CaseName = li.LeadsName
             ssCase.Status = ShortSale.CaseStatus.NewFile
+            ssCase.Owner = GetIntaker()
             ssCase.CreateBy = createBy
             ssCase.CreateDate = DateTime.Now
             ssCase.Save()
@@ -38,5 +39,9 @@ Public Class ShortSaleManage
         End If
 
         Return propBase
+    End Function
+
+    Private Shared Function GetIntaker() As String
+        Return System.Configuration.ConfigurationManager.AppSettings("ShortSaleIntake").ToString
     End Function
 End Class
