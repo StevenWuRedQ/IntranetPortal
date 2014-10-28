@@ -1112,6 +1112,7 @@
     <Content Include="css\qb\qb.ui.grid.css" />
     <Content Include="css\qb\qb.ui.table.css" />
     <Content Include="css\qb\qb.ui.tree.css" />
+    <Content Include="css\right-pane.css" />
     <Content Include="css\RightToLeft.css" />
     <Content Include="css\themes\images\animated-overlay.gif" />
     <Content Include="css\themes\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
@@ -1229,6 +1230,7 @@
     <Content Include="images\new_lead1.png" />
     <Content Include="images\new_leads_icon.png" />
     <Content Include="images\note_more_icon.png" />
+    <Content Include="images\offices_events_background.png" />
     <Content Include="images\Opportunities-icon.jpg" />
     <Content Include="images\priority.jpg" />
     <Content Include="images\priority_icon.png" />

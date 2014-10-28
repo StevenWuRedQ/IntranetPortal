@@ -333,4 +333,12 @@ Public Class UCTitleSummary
     Protected Sub todayScheduler_PopupMenuShowing(sender As Object, e As DevExpress.Web.ASPxScheduler.PopupMenuShowingEventArgs)
         e.Menu.Items.Clear()
     End Sub
+
+    Protected Sub ExportExcel_Click(sender As Object, e As EventArgs)
+        AllLeadGridViewExporter.WriteXlsToResponse()
+    End Sub
+
+    Protected Sub ExportPdf_Click(sender As Object, e As EventArgs)
+        AllLeadGridViewExporter.WritePdfToResponse()
+    End Sub
 End Class

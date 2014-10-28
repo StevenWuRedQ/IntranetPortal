@@ -1,0 +1,38 @@
+#right-pane-container {
+	height: 100%;
+	position: absolute;
+	right: -290px;
+	top: 0;
+	-moz-transition: right .2s ease;
+	-o-transition: right .2s ease;
+	-webkit-transition: right .2s ease;
+	transition: right .2s ease;
+	width: 335px;
+	z-index: 1000; /* change this number if necessary */
+}
+
+#right-pane-container:hover {
+	right: 0;
+}
+
+#right-pane-button {
+	background:url(/images/offices_events_background.png) no-repeat;
+	float: left;
+	height: 170px;
+	margin-top: 105px;
+	width: 41px;
+}
+
+#right-pane-button-full {
+	background-color: #da370b;
+	float: left;
+	height: 100%;
+	width: 45px;
+}
+
+#right-pane {
+	background-color: #ff400d;
+	float: left;
+	height: 100%;
+	width: 290px;
+}

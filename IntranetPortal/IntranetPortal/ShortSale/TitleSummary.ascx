@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
 <script src="/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
+<link rel="stylesheet" href="/css/right-pane.css" />
 <script type="text/javascript">
     function OnNotesKeyDown(s, e) {
         var textArea = s.GetInputElement();
@@ -161,8 +162,28 @@
                         <table style="vertical-align: top;">
                             <tr>
                                 <td colspan="10">
-                                    <div >
-                                        <dx:ASPxGridView ID="AllLeadsGrid" runat="server" SettingsPager-PageSize="6"></dx:ASPxGridView>
+                                    <div style="max-width: 1570px; overflow: auto;" class="under_line_div ">
+                                        <div class="clearfix" style="margin-bottom: 20px;">
+                                            <h4>
+                                                <i class="fa fa-folder-open with_circle title_summary_icon" style=""></i><span class="heading_text2">Leads and Active Files</span>
+                                                <span class="table_tips" style="margin-left: 40px;">Shows all files that haven’t closed or been archived.
+                                                </span>
+                                            </h4>
+                                            <div style="float: right; margin-top: -35px;" class="form-inline">
+
+                                                <input style="margin-right: 20px; width: 250px; height: 30px;" class="form-control" id="exampleInputEmail2" placeholder="Quik Search">
+
+                                                <i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-right: 20px"></i>
+                                                <i class="fa fa-filter tooltip-examples icon_btn grid_buttons" style="margin-right: 40px"></i>
+                                                <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" ></i>'></asp:LinkButton>
+                                                <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-pdf-o report_head_button report_head_button_padding tooltip-examples"></i>'></asp:LinkButton>
+
+
+                                            </div>
+                                        </div>
+
+                                        <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="4"></dx:ASPxGridView>
+                                        <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
                                     </div>
                                 </td>
                             </tr>
@@ -223,7 +244,7 @@
                                 </td>
                                 <%--fix the disteance between the two grid by steven--%>
 
-                                <td style="width: 300px; vertical-align: top;" class="under_line">
+                                <td style="width: 300px; vertical-align: top;" >
                                     <%--add icon by steven--%>
                                     <h4>
                                         <i class="fa fa-exclamation-triangle with_circle title_summary_icon" style=""></i><span class="heading_text2">Urgent</span>
@@ -284,7 +305,7 @@
 
 
 
-                                <td style="width: 300px; vertical-align: top;" class="under_line">
+                                <td style="width: 300px; vertical-align: top;" >
                                     <%--add icon by steven--%>
                                     <h4>
                                         <i class="fa fa-university with_circle title_summary_icon" style=""></i><span class="heading_text2">Upcoming BPO's</span>
@@ -315,7 +336,7 @@
                                 </td>
                                 <td rowspan="5" style="width: 30px;"></td>
 
-                                 <td style="width: 300px; vertical-align: top;" class="under_line">
+                                <td style="width: 300px; vertical-align: top;" >
                                     <%--add icon by steven--%>
                                     <h4>
                                         <i class="fa fa-check with_circle title_summary_icon" style=""></i><span class="heading_text2">Counter Offer</span>
@@ -376,13 +397,13 @@
 
 
 
-                                <td style="width: 300px; vertical-align: top;" class="under_line">
+                                <td style="width: 300px; vertical-align: top;">
                                     <%--add icon by steven--%>
                                     <h4>
                                         <i class="fa fa-thumbs-up with_circle title_summary_icon" style=""></i><span class="heading_text2">Investor Review</span>
                                     </h4>
                                     <div class="div-underline " style="height: 240px;">
-                                         <dx:ASPxGridView runat="server" Width="100%" ID="InvestorReviewGrid" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="InvestorReviewGrid" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
@@ -439,7 +460,7 @@
                                         <i class="fa fa-files-o with_circle title_summary_icon" style=""></i><span class="heading_text2">Document Requests</span>
                                     </h4>
                                     <div class="div-underline " style="height: 240px;">
-                                         <dx:ASPxGridView runat="server" Width="100%" ID="DocumentRequestsGrid" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="DocumentRequestsGrid" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
@@ -670,56 +691,65 @@
                     <div style="width: 290px; height: 100%; background: #EFF2F5;">
                         <%--/*the showlder box*--%>
                         <div style="width: 30px; height: 100%; float: left; position: relative; left: 0px; top: 0px; box-shadow: inset 20px -10px 13px -15px rgba(2, 2, 2, 0.3);"></div>
-                        <div style="width: 100%; height: 100%;">
-                            <div style="height: 70px;">
-                                <div style="color: #b2b4b7; padding-top: 35px; margin-left: 26px; font-size: 30px; font-weight: 300;">Notes</div>
-                            </div>
-                            <dx:ASPxCallbackPanel runat="server" ID="notesCallbackPanel" ClientInstanceName="notesCallbackPanel" OnCallback="notesCallbackPanel_Callback">
-                                <PanelCollection>
-                                    <dx:PanelContent>
-                                        <div style="background: #f53e0d; color: white; min-height: 270px; margin-top: 35px">
-                                            <div style="margin-left: 30px; margin-right: 15px; padding-bottom: 30px">
-                                                <h2 style="font-size: 30px; font-weight: 400; margin: 0px; padding-top: 35px; padding-bottom: 35px;">
-                                                    <dx:ASPxMemo runat="server" ID="txtTitle" CssClass="notesTitleStyle" BackColor="Transparent" Border-BorderColor="Transparent" Font-Size="30px" ForeColor="White" NullText="Input Title" Height="35px" MaxLength="50">
-                                                        <ClientSideEvents KeyDown="OnNotesKeyDown" Init="function(s,e){
-                                                                                        s.GetInputElement().style.overflowY='hidden';
-                                                                                        OnNotesKeyDown(s,e);}"
-                                                            GotFocus="function(s,e){ShowBorder(s);}" LostFocus="function(s,e){ShowBorder(s);}" />
-                                                    </dx:ASPxMemo>
-                                                </h2>
-                                                <div style="font-size: 14px; line-height: 24px; background: transparent !important; margin-bottom: 0px">
-                                                    <dx:ASPxMemo runat="server" ID="txtNotesDescription" Border-BorderStyle="solid" Border-BorderColor="Transparent" BackColor="Transparent" Font-Size="14px" ForeColor="White" Width="100%" Height="13px" NullText="Description">
-                                                        <ClientSideEvents KeyDown="OnNotesKeyDown" Init="function(s,e){
-                                                                                        s.GetInputElement().style.overflowY='hidden';
-                                                                                        OnNotesKeyDown(s,e);                                                               
-                                                                                    }"
-                                                            GotFocus="function(s,e){ShowBorder(s);}" LostFocus="function(s,e){ShowBorder(s);}" />
-                                                    </dx:ASPxMemo>
-                                                </div>
-                                                <div style="padding-top: 40px; font-size: 24px; color: white">
-                                                    <i class="fa fa-check-circle icon_btn" onclick="notesCallbackPanel.PerformCallback('Save|<%= CurrentNote.NoteId%>')"></i>
-                                                    <i class="fa fa-times-circle icon_btn note_button_margin" style="display: none"></i>
-                                                    <i class="fa fa-trash-o icon_btn note_button_margin" onclick='notesCallbackPanel.PerformCallback("Delete|<%= CurrentNote.NoteId%>")'></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div style="margin-top: 10px; margin-left: -35px; font-size: 18px">
-                                            <ul>
-                                                <% For Each note In PortalNotes%>
-                                                <li class="right_palne_menu" style="cursor: pointer" onclick="notesCallbackPanel.PerformCallback('Show|<%= note.NoteId%>')"><%= note.Title%>
-                                                </li>
-                                                <%Next%>
-                                            </ul>
-                                        </div>
-                                    </dx:PanelContent>
-                                </PanelCollection>
-                            </dx:ASPxCallbackPanel>
-                            <i class="fa fa-plus-circle icon_btn" style="color: #999ca1; font-size: 24px" onclick="notesCallbackPanel.PerformCallback('Add')"></i>
-                        </div>
+
                     </div>
                 </dx:SplitterContentControl>
             </ContentCollection>
         </dx:SplitterPane>
     </Panes>
 </dx:ASPxSplitter>
+
+<div id="right-pane-container" class="clearfix">
+    <div id="right-pane-button"></div>
+    <div id="right-pane">
+        <div style="height: 100%; background: #EFF2F5;">
+            <div style="width: 100%; height: 100%;">
+                <div style="height: 70px;">
+                    <div style="color: #b2b4b7; padding-top: 35px; margin-left: 26px; font-size: 30px; font-weight: 300;">Notes</div>
+                </div>
+                <dx:ASPxCallbackPanel runat="server" ID="notesCallbackPanel" ClientInstanceName="notesCallbackPanel" OnCallback="notesCallbackPanel_Callback">
+                    <PanelCollection>
+                        <dx:PanelContent>
+                            <div style="background: #f53e0d; color: white; min-height: 270px; margin-top: 35px">
+                                <div style="margin-left: 30px; margin-right: 15px; padding-bottom: 30px">
+                                    <h2 style="font-size: 30px; font-weight: 400; margin: 0px; padding-top: 35px; padding-bottom: 35px;">
+                                        <dx:ASPxMemo runat="server" ID="txtTitle" CssClass="notesTitleStyle" BackColor="Transparent" Border-BorderColor="Transparent" Font-Size="30px" ForeColor="White" NullText="Input Title" Height="35px" MaxLength="50">
+                                            <ClientSideEvents KeyDown="OnNotesKeyDown" Init="function(s,e){
+                                                                                        s.GetInputElement().style.overflowY='hidden';
+                                                                                        OnNotesKeyDown(s,e);}"
+                                                GotFocus="function(s,e){ShowBorder(s);}" LostFocus="function(s,e){ShowBorder(s);}" />
+                                        </dx:ASPxMemo>
+                                    </h2>
+                                    <div style="font-size: 14px; line-height: 24px; background: transparent !important; margin-bottom: 0px">
+                                        <dx:ASPxMemo runat="server" ID="txtNotesDescription" Border-BorderStyle="solid" Border-BorderColor="Transparent" BackColor="Transparent" Font-Size="14px" ForeColor="White" Width="100%" Height="13px" NullText="Description">
+                                            <ClientSideEvents KeyDown="OnNotesKeyDown" Init="function(s,e){
+                                                                                        s.GetInputElement().style.overflowY='hidden';
+                                                                                        OnNotesKeyDown(s,e);                                                               
+                                                                                    }"
+                                                GotFocus="function(s,e){ShowBorder(s);}" LostFocus="function(s,e){ShowBorder(s);}" />
+                                        </dx:ASPxMemo>
+                                    </div>
+                                    <div style="padding-top: 40px; font-size: 24px; color: white">
+                                        <i class="fa fa-check-circle icon_btn" onclick="notesCallbackPanel.PerformCallback('Save|<%= CurrentNote.NoteId%>')"></i>
+                                        <i class="fa fa-times-circle icon_btn note_button_margin" style="display: none"></i>
+                                        <i class="fa fa-trash-o icon_btn note_button_margin" onclick='notesCallbackPanel.PerformCallback("Delete|<%= CurrentNote.NoteId%>")'></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 10px; margin-left: -35px; font-size: 18px">
+                                <ul>
+                                    <% For Each note In PortalNotes%>
+                                    <li class="right_palne_menu" style="cursor: pointer" onclick="notesCallbackPanel.PerformCallback('Show|<%= note.NoteId%>')"><%= note.Title%>
+                                    </li>
+                                    <%Next%>
+                                </ul>
+                            </div>
+                        </dx:PanelContent>
+                    </PanelCollection>
+                </dx:ASPxCallbackPanel>
+                <i class="fa fa-plus-circle icon_btn" style="color: #999ca1; font-size: 24px;margin-left:20px" onclick="notesCallbackPanel.PerformCallback('Add')"></i>
+            </div>
+        </div>
+    </div>
+</div>
 <%--change it to color sytle by steven--%>
