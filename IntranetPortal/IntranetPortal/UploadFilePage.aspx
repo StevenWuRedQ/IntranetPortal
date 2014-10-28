@@ -208,22 +208,42 @@
 
         function GetFilenameElement(fileName)
         {
+            var isValid = (function () {
+            var rg1 = /^[^\\/:\*\?"<>\|]+$/; // forbidden characters \ / : * ? " < > |
+            //var rg2 = /^\./; // cannot start with dot (.)
+            var rg2 = /[^\\/]+\.[^\\/]+$/;
+            var rg3 = /^(nul|prn|con|lpt[0-9]|com[0-9])(\.|$)/i; // forbidden file names
+            return function isValid(fname) {
+                return rg1.test(fname) && rg2.test(fname) && !rg3.test(fname);
+            }
+            })();
+
             var x = document.createElement("INPUT");
             x.setAttribute("type", "text");
             x.setAttribute("style", "width:90%;border-color:transparent;background-color:transparent;border-style:solid;")
             x.setAttribute("class", "")
             x.setAttribute("value", fileName);
             x.setAttribute("data-filename", fileName);
-            //x.addEventListener("focus", function () {
-            //    ShowBorder(x);
-            //});
-
+            x.addEventListener("change", function () {
+               // alert(isValid(x.value));
+                if (!isValid(x.value))
+                {
+                    alert("File name is invalid.")
+                    x.focus();
+                }
+            });
             //x.addEventListener("blur", function () {
-            //    ShowBorder(x);
+            //    if (!isValid(x.value)) {
+            //        alert("File name is invalid.")
+            //        x.focus();
+            //    }
             //});
-            
+         
             return x;
         }
+
+       
+
 
         function ShowBorder(s) {
             return;

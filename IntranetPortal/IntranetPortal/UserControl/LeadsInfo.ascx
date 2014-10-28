@@ -241,9 +241,9 @@
     }
 
     var isSave = false;
-    function AddBestAddress(bble, ownerName, addButton) {        
+    function AddBestAddress(bble, ownerName, addButton) {
+        isSave = false;
         currOwner = ownerName;
-        isSave = true;
         aspxPopupAddAddress.PerformCallback(addButton);
     }
 
@@ -713,6 +713,7 @@
                                     <div style="margin-top: 10px">
                                         <dx:ASPxButton runat="server" ID="ASPxButton2" Text="Add" AutoPostBack="false" CssClass="rand-button rand-button-blue">
                                             <ClientSideEvents Click="function(s,e){
+                                                isSave = true;
                                                 aspxPopupAddAddress.PerformCallback('Save|' + currOwner);
                                                 }" />
                                         </dx:ASPxButton>
@@ -726,7 +727,7 @@
                         </table>
                     </dx:PopupControlContentControl>
                 </ContentCollection>
-                <ClientSideEvents EndCallback="function(s,e){if(!isSave){s.Show();}else{s.Hide();}}" />
+                <ClientSideEvents EndCallback="function(s,e){if(!isSave){s.Show();}else{s.Hide();ownerInfoCallbackPanel.PerformCallback();}}" />
             </dx:ASPxPopupControl>
             <uc1:SendMail runat="server" ID="SendMail" />
         </dx:PanelContent>

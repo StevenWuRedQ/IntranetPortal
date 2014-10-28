@@ -52,6 +52,7 @@
                     TLOLocateReport = New DataAPI.TLOLocateReportOutput
                 End If
                 BestNums = homeOwner.BestPhoneNo
+                BestAddress = homeOwner.BestAddress
             End If
         End Using
     End Sub

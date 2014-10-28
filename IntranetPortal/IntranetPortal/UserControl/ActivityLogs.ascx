@@ -61,7 +61,6 @@
     // <![CDATA[
     var textSeparator = "; ";
     function OnEmpComboBoxSelectionChanged(listBox, args) {
-
         UpdateText();
         SynchronizeRecentlyComboBox();
     }
@@ -100,7 +99,6 @@
                 firstIndex = i;
                 break;
             }
-
         }
         //alert(firstIndex);
         empListBox.MakeItemVisible(firstIndex);

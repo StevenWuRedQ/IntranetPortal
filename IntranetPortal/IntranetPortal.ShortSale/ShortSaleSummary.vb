@@ -5,7 +5,6 @@
         End Using
     End Function
 
-
     Public Shared Function GetUpcomingClosings() As List(Of ShortSaleCase)
         Return GetUrgentCases()
     End Function
@@ -14,5 +13,9 @@
         Using context As New ShortSaleEntities
             Return context.ShortSaleCases.Where(Function(ss) ss.Status = CaseStatus.FollowUp).ToList
         End Using
+    End Function
+
+    Public Shared Function GetAllCass() As List(Of ShortSaleCase)
+        Return Nothing
     End Function
 End Class

@@ -576,7 +576,7 @@ Public Class LeadsInfo1
     Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         popupContentAddAddress.Visible = True
 
-        If e.Parameter = "Save" Then
+        If e.Parameter.StartsWith("Save") Then
             Dim bble = hfBBLE.Value
             Dim ownerName = e.Parameter.Split("|")(1)
             Dim address = txtUserAddress.Text
@@ -594,8 +594,11 @@ Public Class LeadsInfo1
 
                     context.HomeOwnerAddresses.Add(p)
                     context.SaveChanges()
+
+                    txtUserAddress.Text = ""
+                    txtAdrDes.Text = ""
                 Else
-                    Throw New Exception("This Phone NO. already exist.")
+                    Throw New Exception("This address already exist.")
                 End If
             End Using
         End If

@@ -180,6 +180,24 @@
             <div class="clearfix homeowner_info_label">
                 <div>
                     <!--Best Mail Address info -->
+                     <%index = 0%>
+                    <% For Each add In BestAddress%>
+                    <% If add IsNot Nothing Then%>
+                    <%index = index + 1%>
+                   <div class="color_gray clearfix">
+                        <i class="fa fa-map-marker homeowner_info_icon"></i>
+                        <div class="form_div_node homeowner_info_text">
+                            <div class="color_blue">
+                                <a href="#" class="AddressLink" onclick="OnAddressLinkClick(this, '<%= add.Address%>')" <%= CssStyle(add.Address)%>><%= add.Address%> </a>
+                            </div>
+                            <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
+                                <%= add.Description%>
+                            </div>
+                        </div>
+                    </div>
+                    <% End If%>
+                    <% Next%>
+                    
                     <% If TLOLocateReport.addressesField IsNot Nothing AndAlso TLOLocateReport.addressesField.Length > 0 Then%>
                     <% For Each add In TLOLocateReport.addressesField%>
                     <% If add.addressField IsNot Nothing Then

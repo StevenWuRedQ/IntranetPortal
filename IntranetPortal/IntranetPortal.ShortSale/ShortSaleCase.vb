@@ -1,5 +1,7 @@
 ﻿Partial Public Class ShortSaleCase
 
+#Region "Constructor"
+
     Public Sub New(propBaseinfo As PropertyBaseInfo)
         _propInfo = propBaseinfo
     End Sub
@@ -8,6 +10,9 @@
 
     End Sub
 
+#End Region
+
+#Region "Properties"
     Private _propInfo As PropertyBaseInfo
     Public ReadOnly Property PropertyInfo As PropertyBaseInfo
         Get
@@ -171,6 +176,9 @@
             _occupants = value
         End Set
     End Property
+#End Region
+
+#Region "Methods"
 
     Public Sub Save()
         Using context As New ShortSaleEntities
@@ -250,6 +258,7 @@
         'End If
     End Sub
 
+
     Public Shared Sub ReassignOwner(caseId As Integer, owner As String)
         Dim ssCase = GetCase(caseId)
         If ssCase Is Nothing Then
@@ -265,7 +274,7 @@
             Throw New Exception("Can't find short sale case. BBLE is " & bble)
         End If
 
-         ssCase.ReassignOwner(owner)
+        ssCase.ReassignOwner(owner)
     End Sub
 
     Private Sub ReAssignOwner(owner As String)
@@ -324,6 +333,9 @@
     Public Shared Function GetCaseCount(status As CaseStatus) As Integer
         Return GetCaseByStatus(status).Count
     End Function
+#End Region
+
+
 End Class
 
 Public Enum CaseStatus
