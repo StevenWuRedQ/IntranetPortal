@@ -43,7 +43,7 @@
       </PortalNavItem>
       <PortalNavItem Name="AgentShared" Text="Shared" NavigationUrl="/LeadAgent.aspx?c=Shared" ShowAmount="false">
         <FontClass>
-          <![CDATA[<i class="fa fa-share"></i>]]>
+          <![CDATA[<i class="fa fa-share-alt"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="AgentInProcess" Text="In Process" NavigationUrl="/LeadAgent.aspx?c=In Process" ShowAmount="true">
@@ -106,7 +106,7 @@
           </PortalNavItem>
           <PortalNavItem Name="AgentShared" Text="Shared" NavigationUrl="/LeadAgent.aspx?c=Shared" ShowAmount="false">
             <FontClass>
-              <![CDATA[<i class="fa fa-share"></i>]]>
+              <![CDATA[<i class="fa fa-share-alt"></i>]]>
             </FontClass>
           </PortalNavItem>
           <PortalNavItem Name="AgentInProcess" Text="In Process" NavigationUrl="/LeadAgent.aspx?c=In Process" ShowAmount="true">

@@ -348,6 +348,7 @@ Public Class ActivityLogs
                 Dim task = UserTask.GetTaskByLogID(logId)
                 Dim pnlTask = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "pnlTask"), Panel)
                 Dim btnTaskComplete = TryCast(pnlTask.FindControl("btnTaskComplete"), HtmlControl)
+                Dim btnResend = TryCast(pnlTask.FindControl("btnResend"), HtmlControl)
 
                 Dim ltTaskResult = TryCast(pnlTask.FindControl("ltTaskResult"), Literal)
 
@@ -379,6 +380,9 @@ Public Class ActivityLogs
                         btnTaskComplete.Visible = True
                     End If
 
+                    If btnResend IsNot Nothing Then
+                        btnResend.Visible = True
+                    End If
                     'e.Row.BackColor = System.Drawing.Color.FromArgb(255, 197, 197)
                     e.Row.CssClass = "activity_log_high_light dxgvDataRow_MetropolisBlue1"
 
@@ -386,16 +390,32 @@ Public Class ActivityLogs
                         e.Row.ForeColor = Drawing.Color.Red
                     End If
                 Else
-                    If task.Status = UserTask.TaskStatus.Complete Then
-                        btnTaskComplete.Visible = False
+                    btnTaskComplete.Visible = False
 
-                        If ltTaskResult IsNot Nothing Then
-                            ltTaskResult.Text = "Complete"
-                        End If
-
-                    Else
-                        btnTaskComplete.Visible = False
+                    If ltTaskResult IsNot Nothing Then
+                        Select Case task.Status
+                            Case UserTask.TaskStatus.Complete
+                                ltTaskResult.Text = "Complete"
+                            Case UserTask.TaskStatus.Resend
+                                ltTaskResult.Text = "Resend"
+                        End Select
                     End If
+
+                    'If task.Status = UserTask.TaskStatus.Complete Or task.Status = UserTask.TaskStatus.Resend Then
+                    '    btnTaskComplete.Visible = False
+
+                    '    If ltTaskResult IsNot Nothing Then
+                    '        If task.Status = UserTask.TaskStatus.Complete Then
+                    '            ltTaskResult.Text = "Complete"
+                    '        End If
+
+                    '        If task.Status = UserTask.TaskStatus.Resend Then
+                    '            ltTaskResult.Text = "Resend"
+                    '        End If
+                    '    End If
+                    'Else
+                    '    btnTaskComplete.Visible = False
+                    'End If
 
                 End If
             End If
@@ -463,7 +483,7 @@ Public Class ActivityLogs
                 End If
 
                 If userAppoint.Status = UserAppointment.AppointmentStatus.ReScheduled Then
-                    ltResult.Text = "ReScheduled"
+                    ltResult.Text = "Rescheduled"
                     'chkAptReschedule.Visible = True
                     'chkAptReschedule.ReadOnly = True
                     'chkAptReschedule.Checked = True
@@ -543,5 +563,31 @@ Public Class ActivityLogs
         Dim popup = CType(source, ASPxPopupControl)
         PopupContentSetAsTask.Visible = True
         BindEmpList()
+
+        If e.Parameter.StartsWith("ResendTask") Then
+            Dim logId = e.Parameter.Split("|")(1)
+            Dim task = UserTask.GetTaskByLogID(logId)
+            empsDropDownEdit.Text = task.CreateBy
+            cbTaskAction.Text = task.Action
+            cbTaskImportant.Text = task.Important
+            txtTaskDes.Text = task.Description
+
+            ResendTask(logId)
+        End If
+    End Sub
+
+
+    Private Sub ResendTask(logId As Integer)
+        Using Context As New Entities
+            Dim task = Context.UserTasks.Where(Function(t) t.LogID = logId).SingleOrDefault
+
+            If task IsNot Nothing Then
+                task.Status = UserTask.TaskStatus.Resend
+                Context.SaveChanges()
+            End If
+            LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is Resend by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
+
+        End Using
+
     End Sub
 End Class

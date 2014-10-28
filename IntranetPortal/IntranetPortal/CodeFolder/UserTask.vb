@@ -98,5 +98,6 @@
     Public Enum TaskStatus
         Active
         Complete
+        Resend
     End Enum
 End Class

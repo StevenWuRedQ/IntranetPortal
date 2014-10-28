@@ -14,23 +14,23 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         // <![CDATA[                     
-            function OnAddFileButtonClick() {
-                var hasFile = false;
-                $("input:file").each(function () {
-                    var myFile = this;
-                    if ('files' in myFile) {
-                        if (myFile.files.length == 0) {
-                            //alert("please select file");
-                        } else {
-                            AddFilesToForm(myFile.files);
-                            hasFile = true;
-                        }
+        function OnAddFileButtonClick() {
+            var hasFile = false;
+            $("input:file").each(function () {
+                var myFile = this;
+                if ('files' in myFile) {
+                    if (myFile.files.length == 0) {
+                        //alert("please select file");
+                    } else {
+                        AddFilesToForm(myFile.files);
+                        hasFile = true;
                     }
-                });
+                }
+            });
 
-                if (!hasFile)
-                    alert("Please choose files.");
-            }
+            if (!hasFile)
+                alert("Please choose files.");
+        }
 
         function OnDropBody(event) {
             alert("Please drop the files into the drag area.");
@@ -39,10 +39,9 @@
 
         function UploadFiles() {
             //refresh formdata
-            if (formFiles != null)
-            {
+            if (formFiles != null) {
                 formData = tests.formdata ? new FormData() : null;
-                
+
                 for (var key in formFiles) {
                     formData.append('file', formFiles[key]);
                 }
@@ -58,8 +57,7 @@
                 }
 
                 var names = GetFileNames();
-                if (name != null)
-                {
+                if (name != null) {
                     formData.append("FileNames", names);
                 }
 
@@ -106,14 +104,10 @@
             }
         }
 
-        function RemoveFileFromForm(fileName)
-        {            
-            if(formFiles != null)
-            {
-                for(var key in formFiles)
-                {
-                    if(key == fileName)
-                    {
+        function RemoveFileFromForm(fileName) {
+            if (formFiles != null) {
+                for (var key in formFiles) {
+                    if (key == fileName) {
                         delete formFiles[key];
                     }
                 }
@@ -122,11 +116,9 @@
             }
         }
 
-        function RefreshFileTable()
-        {
+        function RefreshFileTable() {
             ClearFilesTable();
-            for(var key in formFiles)
-            {
+            for (var key in formFiles) {
                 AppendFileToTable(formFiles[key]);
             }
         }
@@ -155,7 +147,7 @@
                     var fileName = file.fileName;
                 }
                 formFiles[fileName] = file;
-                
+
                 //if (tests.formdata)
                 //{
                 //    formData.append('file', files[i]);
@@ -169,7 +161,7 @@
             var row = tableRef.insertRow(index);
 
             var cell0 = row.insertCell(0);
-            cell0.innerHTML = "" + (index +1);
+            cell0.innerHTML = "" + (index + 1);
 
             var cell1 = row.insertCell(1);
 
@@ -196,7 +188,7 @@
             cell1.innerHTML = Math.round(fileSize / 1000);
 
             cell1 = row.insertCell(4);
-            cell1.innerHTML = "<i class='fa fa-times color_blue icon_btn' style='font-size:18px;' onclick='RemoveFileFromForm(\"" + fileName  + "\")'>";          
+            cell1.innerHTML = "<i class='fa fa-times color_blue icon_btn' style='font-size:18px;' onclick='RemoveFileFromForm(\"" + fileName + "\")'>";
         }
 
         function ClearFilesTable() {
@@ -206,16 +198,15 @@
             }
         }
 
-        function GetFilenameElement(fileName)
-        {
+        function GetFilenameElement(fileName) {
             var isValid = (function () {
-            var rg1 = /^[^\\/:\*\?"<>\|]+$/; // forbidden characters \ / : * ? " < > |
-            //var rg2 = /^\./; // cannot start with dot (.)
-            var rg2 = /[^\\/]+\.[^\\/]+$/;
-            var rg3 = /^(nul|prn|con|lpt[0-9]|com[0-9])(\.|$)/i; // forbidden file names
-            return function isValid(fname) {
-                return rg1.test(fname) && rg2.test(fname) && !rg3.test(fname);
-            }
+                var rg1 = /^[^\\/:\*\?"<>\|]+$/; // forbidden characters \ / : * ? " < > |
+                var rg2 = /^\./; // cannot start with dot (.)
+                //var rg2 = /[^\\/]+\.[^\\/]+$/;
+                var rg3 = /^(nul|prn|con|lpt[0-9]|com[0-9])(\.|$)/i; // forbidden file names
+                return function isValid(fname) {
+                    return rg1.test(fname) && !rg2.test(fname) && !rg3.test(fname);
+                }
             })();
 
             var x = document.createElement("INPUT");
@@ -225,9 +216,18 @@
             x.setAttribute("value", fileName);
             x.setAttribute("data-filename", fileName);
             x.addEventListener("change", function () {
-               // alert(isValid(x.value));
-                if (!isValid(x.value))
-                {
+                if (isValid(x.value)) {
+                    var newName = x.value;
+                    var ext = GetFileExtention(fileName);
+                    if(!endsWith(newName, ext))
+                    {
+                        if (endsWith(newName, "."))
+                            x.value = newName + ext;
+                        else
+                            x.value = newName + "." + ext;
+                    }
+                }
+                else {
                     alert("File name is invalid.")
                     x.focus();
                 }
@@ -238,17 +238,26 @@
             //        x.focus();
             //    }
             //});
-         
+
             return x;
         }
 
-       
+        function endsWith(str, suffix) {
+            return str.indexOf(suffix, str.length - suffix.length) !== -1;
+        }
 
+        function GetFileExtention(filename) {
+            var a = filename.split(".");
+            if (a.length === 1 || (a[0] === "" && a.length === 2)) {
+                return "";
+            }
+            return a.pop();
+        }
 
         function ShowBorder(s) {
             return;
             var tbl = s;
-            if (tbl.style.borderColor == 'transparent') {              
+            if (tbl.style.borderColor == 'transparent') {
                 tbl.style.borderColor = "#9da0aa";
                 tbl.style.backgroundColor = 'white';
             }
@@ -284,7 +293,7 @@
         function GetFileNames() {
             var allNames = {};
             $('#tblFiles input').each(function () {
-                allNames[$(this).attr("data-filename")] = $(this).val();                
+                allNames[$(this).attr("data-filename")] = $(this).val();
             });
 
             return JSON.stringify(allNames);
@@ -295,7 +304,6 @@
         #trFileHolder {
             border: 2px dashed #ccc !important;
             margin: 20px auto;
-            
         }
 
             #trFileHolder.hover {
@@ -323,8 +331,8 @@
     </style>
 </head>
 <body style="padding: 20px;">
-    <form id="form1" runat="server">      
-        <table style="width: 100%; text-align: left;">           
+    <form id="form1" runat="server">
+        <table style="width: 100%; text-align: left;">
             <tr>
 
                 <td class="note">
@@ -339,7 +347,7 @@
                                     <td style="width: 60px">Delete</td>
                                 </tr>
                             </thead>
-                            <tbody>                                
+                            <tbody>
                             </tbody>
                         </table>
                     </div>

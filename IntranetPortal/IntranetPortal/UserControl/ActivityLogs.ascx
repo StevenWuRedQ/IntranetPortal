@@ -153,6 +153,20 @@
         if (typeof gridLeads != 'undefined')
             gridLeads.Refresh();
     }
+    
+    function ResendTask(logID) {
+        ASPxPopupSetAsTaskControl.PerformCallback("ResendTask|" + logID);
+        ASPxPopupSetAsTaskControl.EndCallback.AddHandler(function (s, e) {
+            s.Show();
+
+            if (typeof gridLeads != 'undefined')
+                gridLeads.Refresh();
+        });
+
+        //gridTrackingClient.PerformCallback("ResendTask|" + logID);
+
+      
+    }
 
     function ApproveNewLead(logID) {
         gridTrackingClient.PerformCallback("ApproveNewLead|" + logID);
@@ -496,6 +510,7 @@
                                                     <span style="font-size: 14px;">
                                                         <asp:Literal runat="server" ID="ltTaskResult"></asp:Literal></span>
                                                     <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" onclick='<%# String.Format("CompleteTask(""{0}"")", Eval("LogID"))%>' title="Completed" runat="server" id="btnTaskComplete" visible="false"></i>
+                                                    <i class="fa fa-history log_item_hl_buttons tooltip-examples" title="Resend" runat="server" id="btnResend" onclick='<%# String.Format("ResendTask(""{0}"")", Eval("LogID"))%>' visible="false"></i>
                                                 </div>
                                             </td>
                                         </tr>

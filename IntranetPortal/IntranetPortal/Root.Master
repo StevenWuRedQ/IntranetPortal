@@ -54,7 +54,6 @@
             alert('splitterRightDefaultPage resize');
         }
 
-
     </script>
 
 </head>
@@ -63,7 +62,9 @@
         <script type="text/javascript">
             function ShowSearchLeadsInfo(bble) {
                 var url = '/ViewLeadsInfo.aspx?id=' + bble;
-                window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px');
+                var left = (screen.width / 2) - (1350 / 2);
+                var top = (screen.height / 2) - (930 / 2);
+                window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
             }
             function GoToLead(bble) {
                 window.location.href = "/default.aspx?t=search&key=" + encodeURIComponent(txtSearchKeyClient.GetText()) + "&id=" + bble;

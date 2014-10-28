@@ -177,12 +177,15 @@
                                                 <i class="fa fa-filter tooltip-examples icon_btn grid_buttons" style="margin-right: 40px"></i>
                                                 <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" ></i>'></asp:LinkButton>
                                                 <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-pdf-o report_head_button report_head_button_padding tooltip-examples"></i>'></asp:LinkButton>
-
-
                                             </div>
                                         </div>
-
-                                        <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="4"></dx:ASPxGridView>
+                                        <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="4" KeyFieldName="CaseId">
+                                            <Columns>
+                                                <dx:GridViewDataTextColumn FieldName="CaseId" ></dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.StreetName" >                                                 
+                                                </dx:GridViewDataTextColumn>
+                                            </Columns>
+                                        </dx:ASPxGridView>
                                         <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
                                     </div>
                                 </td>

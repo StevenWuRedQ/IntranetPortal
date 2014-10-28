@@ -243,7 +243,7 @@ function OnGetAddressCallbackComplete(s, e) {
         //alert(streenViewWin);
         if (streenViewWin.showAddress) {
             //alert(streenViewWin);
-            streenViewWin.showAddress(e.result);
+            streenViewWin.showAddress(tempAddress);
         }
         else {
             //alert(streenViewWin.showAddress)

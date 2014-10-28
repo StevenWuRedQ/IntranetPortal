@@ -329,7 +329,7 @@
                                         <li style="margin-right: 30px; color: #ffa484; float: right">
                                             <i class="fa fa-refresh sale_head_button tooltip-examples" title="Refresh" onclick="popupMenuRefreshClient.ShowAtElement(this)"></i>
                                             <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i>
-                                            <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Share Leads" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
+                                            <i class="fa fa-share-alt  sale_head_button sale_head_button_left tooltip-examples" title="Share Leads" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
                                             <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>
                                         </li>
                                     </ul>
@@ -614,7 +614,7 @@
                 <HeaderTemplate>
                     <div class="clearfix">
                         <div class="pop_up_header_margin">
-                            <i class="fa fa-mail-forward with_circle pop_up_header_icon"></i>
+                            <i class="fa fa-share-alt with_circle pop_up_header_icon"></i>
                             <span class="pop_up_header_text">Share Lead</span>
                         </div>
                         <div class="pop_up_buttons_div">

@@ -80,7 +80,7 @@ Public Class UCTitleSummary
             'gridAppointment.GroupBy(gridAppointment.Columns("ScheduleDate"))
 
             'Bind All Leads Grid
-            AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetUpcomingClosings()
+            AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetUrgentCases()
             AllLeadsGrid.DataBind()
 
             Dim emps = Employee.GetSubOrdinateWithoutMgr(Page.User.Identity.Name)
