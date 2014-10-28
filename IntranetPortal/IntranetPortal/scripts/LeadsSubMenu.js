@@ -161,7 +161,10 @@ function OnLeadsCategoryClick(s, e) {
 
         if (e.item.name == "ViewLead") {           
             var url = '/ViewLeadsInfo.aspx?id=' + tmpBBLE;
-            window.open(url, 'View Leads Info', 'Width=1350px,Height=930px');
+            var left = (screen.width / 2) - (1350 / 2);
+            var top = (screen.height / 2) - (930 / 2);
+            window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+            //window.open(url, 'View Leads Info', 'Width=1350px,Height=930px');
         }
 
         if (e.item.name == "Delete") {
