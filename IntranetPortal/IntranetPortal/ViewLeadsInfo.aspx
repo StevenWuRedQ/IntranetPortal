@@ -11,8 +11,7 @@
     <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
     <script type="text/javascript">
 
-        function AttachScrollbar()
-        {
+        function AttachScrollbar() {
             $("#prioity_content").mCustomScrollbar(
               {
                   theme: "minimal-dark"
@@ -22,13 +21,14 @@
                 {
                     theme: "minimal-dark"
                 }
-             );           
+             );
 
             $(".dxgvCSD").mCustomScrollbar(
                 {
                     theme: "minimal-dark"
                 }
              );
+           
         }
     </script>
 </asp:Content>

@@ -1090,6 +1090,8 @@
     <Content Include="Content\dx.tizen.white.css" />
     <Content Include="Content\dx.win8.black.css" />
     <Content Include="Content\dx.win8.white.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\layouts\Desktop\DesktopLayout.css" />
     <Content Include="Content\layouts\Desktop\DesktopLayout.html" />
     <Content Include="Content\layouts\Desktop\DesktopLayout.js" />
@@ -2579,7 +2581,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:62858/</IISUrl>
+          <IISUrl>http://localhost:61504/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

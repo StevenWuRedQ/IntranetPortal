@@ -64,7 +64,7 @@ Public Class UCTitleSummary
             gridUpcomingApproval.DataBind()
 
 
-
+            
             ''Bind Appointment
             Dim leads = (From al In Context.Leads
                                          Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
@@ -78,6 +78,10 @@ Public Class UCTitleSummary
             'gridAppointment.DataSource = leads
             'gridAppointment.DataBind()
             'gridAppointment.GroupBy(gridAppointment.Columns("ScheduleDate"))
+
+            'Bind All Leads Grid
+            AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetUpcomingClosings()
+            AllLeadsGrid.DataBind()
 
             Dim emps = Employee.GetSubOrdinateWithoutMgr(Page.User.Identity.Name)
             'BindTask

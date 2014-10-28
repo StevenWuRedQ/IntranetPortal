@@ -20,6 +20,8 @@
         border: 2px solid #dde0e7;
     }
 </style>
+
+
 <script type="text/javascript">
     function OnlogSelectedIndexChanged(s, e) {
         var selectedItems = cbCateLogClient.GetSelectedItems();
@@ -254,8 +256,7 @@
         }
 
         var addDate = null;
-        if (typeof dateActivityClient != 'undefined')
-        {
+        if (typeof dateActivityClient != 'undefined') {
             addDate = dateActivityClient.GetDate();
         }
         if (addDate == null)
@@ -291,7 +292,43 @@
                     <span class="upcase_text">Public update</span>
                 </label>
             </div>
-            <textarea title="Press CTRL+ENTER to submit." style="border-radius: 5px; width: 100%; height: 90px; border: 2px solid #dde0e7; padding: 5px; outline: none; resize: none" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
+            <textarea title="Press CTRL+ENTER to submit." style="border-radius: 5px; width: 100%; height: 90px; border: 2px solid #dde0e7; padding: 5px; outline: none; resize: none;" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
+            <div class="html_edit_div" style="display: none">
+                <dx:ASPxHtmlEditor ID="EmailBody" runat="server" Height="130px" Width="100%">
+                    <Settings AllowHtmlView="false" AllowPreview="false" />
+                    <Toolbars>
+                        <dx:HtmlEditorToolbar>
+                            <Items>
+                                <dx:ToolbarBoldButton>
+                                </dx:ToolbarBoldButton>
+                                <dx:ToolbarItalicButton></dx:ToolbarItalicButton>
+                                <dx:ToolbarUnderlineButton></dx:ToolbarUnderlineButton>
+                                <dx:ToolbarStrikethroughButton></dx:ToolbarStrikethroughButton>
+                                <dx:ToolbarSuperscriptButton>
+                                </dx:ToolbarSuperscriptButton>
+                                <dx:ToolbarSubscriptButton></dx:ToolbarSubscriptButton>
+                                <dx:ToolbarInsertOrderedListButton></dx:ToolbarInsertOrderedListButton>
+                                <dx:ToolbarInsertUnorderedListButton></dx:ToolbarInsertUnorderedListButton>
+                                <dx:ToolbarIndentButton></dx:ToolbarIndentButton>
+                                <dx:ToolbarOutdentButton></dx:ToolbarOutdentButton>
+
+
+                                <dx:ToolbarBackColorButton></dx:ToolbarBackColorButton>
+                                <%--<dx:ToolbarFontSizeEdit>
+                                </dx:ToolbarFontSizeEdit>--%>
+                                <dx:ToolbarFontColorButton></dx:ToolbarFontColorButton>
+
+
+                                <dx:ToolbarJustifyLeftButton></dx:ToolbarJustifyLeftButton>
+                                <dx:ToolbarJustifyCenterButton></dx:ToolbarJustifyCenterButton>
+                                <dx:ToolbarJustifyRightButton></dx:ToolbarJustifyRightButton>
+                                <dx:ToolbarJustifyFullButton></dx:ToolbarJustifyFullButton>
+                                <dx:ToolbarFullscreenButton></dx:ToolbarFullscreenButton>
+                            </Items>
+                        </dx:HtmlEditorToolbar>
+                    </Toolbars>
+                </dx:ASPxHtmlEditor>
+            </div>
         </div>
         <div class="clearfix" style="width: 100%">
             <div style="float: right">
@@ -300,18 +337,53 @@
                 </div>
                 <dx:ASPxPopupControl runat="server" ID="popupFilters">
                 </dx:ASPxPopupControl>
-                                
+
                 <%-- 50px --%>
                 <div style="margin-top: 50px">
-                    
-                    Date of Comment:
+                    <div >Date of Comment:</div>
                     <div class="border_under_line">
                         <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
+                    <div style="display:none">
+
+
+                        <div class="color_gray upcase_text">Type of update</div>
+                        <select class="select_bootstrap select_margin">
+                            <option>Document Request</option>
+                            <option>Type 2 </option>
+                            <option>Type 3</option>
+                        </select>
+
+                        <div class="color_gray upcase_text">Status Update</div>
+                        <select class="select_bootstrap select_margin">
+                            <option value="Ready for Submission">Ready for Submission</option>
+                            <option value="Pending Service Release">Pending Service Release</option>
+                            <option value="Package Submitted">Package Submitted</option>
+                            <option value="Package Submitted in Equator">Package Submitted in Equator</option>
+                            <option value="Pending BPO Expiration">Pending BPO Expiration</option>
+                            <option value="Processor Assigned">Processor Assigned</option>
+                            <option value="Document Review">Document Review</option>
+                            <option value="Updated Docs Needed">Updated Docs Needed</option>
+                            <option value="Processor BPO Ordered">Processor BPO Ordered</option>
+                            <option value="Processor BPO Schdeduled">Processor BPO Schdeduled</option>
+                            <option value="Processor BPO Completed">Processor BPO Completed</option>
+                            <option value="Negotiator BPO Ordered">Negotiator BPO Ordered</option>
+                            <option value="Negotiator BPO Schdeduled">Negotiator BPO Schdeduled</option>
+                            <option value="Negotiator BPO Completed">Negotiator BPO Completed</option>
+                            <option value="Auction/Hubzu Opt Out">Auction/Hubzu Opt Out</option>
+                            <option value="Negotiator Assigned">Negotiator Assigned</option>
+                            <option value="Offer Review">Offer Review</option>
+                            <option value="Counter Offer">Counter Offer</option>
+                            <option value="Value Dispute">Value Dispute</option>
+                            <option value="Marketing W/ Price Reductions">Marketing W/ Price Reductions</option>
+                            <option value="Investor Review">Investor Review</option>
+                        </select>
+                    </div>
                 </div>
                 <div style="margin-top: 15px; float: right">
-                    <i class="fa fa-plus-circle activity_add_buttons tooltip-examples" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
-                    <i class="fa fa-tasks activity_add_buttons tooltip-examples" title="Create Task" style="cursor: pointer" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this);ASPxPopupSetAsTaskControl.PerformCallback();"></i>
+                    <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
+                    <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this);ASPxPopupSetAsTaskControl.PerformCallback();"></i>
+                    <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Refresh" style="display:none"></i>
                 </div>
             </div>
         </div>
@@ -582,7 +654,7 @@
             </ContentCollection>
         </dx:ASPxPopupControl>
 
-        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectUserControl" Width="260px" Height="250px" MaxWidth="800px" MinWidth="150px" ID="pcMain"  HeaderText="Select Employees:" Modal="true"
+        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectUserControl" Width="260px" Height="250px" MaxWidth="800px" MinWidth="150px" ID="pcMain" HeaderText="Select Employees:" Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="RightSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server" Visible="false">

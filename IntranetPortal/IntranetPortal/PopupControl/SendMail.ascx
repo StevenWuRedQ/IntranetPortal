@@ -18,7 +18,7 @@
 
 
     function InitAttachments() {
-        
+
         var attachmentHoder = document.getElementById("divAttachment");
         attachmentHoder.innerHTML = "";
 
@@ -91,7 +91,7 @@
 
     function BindAttachments() {
        
-    }
+        }
 
     function ShowMailmessage(mailId) {
         ShowEmail = true;
@@ -110,7 +110,7 @@
 </style>
 
 <dx:ASPxPopupControl ID="PopupSendMail" runat="server" ClientInstanceName="popupSendEmailClient"
-    Width="560px" Height="700px" CloseAction="CloseButton"
+    Width="630px" Height="700px" CloseAction="CloseButton"
     MaxWidth="800px" MinWidth="150px" OnWindowCallback="PopupSendMail_WindowCallback"
     HeaderText="Email" Modal="true" AllowResize="true"
     EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -126,7 +126,7 @@
         </div>
     </HeaderTemplate>
     <ContentCollection>
-        <dx:PopupControlContentControl runat="server" ID="PopupContentSendMail" Visible="false">
+        <dx:PopupControlContentControl runat="server" ID="PopupContentSendMail" Visible="false">          
             <div class="clearfix">
                 <table class="mail_edits">
                     <tr>
@@ -167,13 +167,15 @@
                         </td>
                     </tr>
                 </table>
-                <div style="margin-top: 10px">
+                <div style="margin-top: 10px" class="html_edit_div">
                     <dx:ASPxHtmlEditor ID="EmailBody" runat="server" Height="300px" Width="100%">
-                        <Settings AllowHtmlView="false" AllowPreview="false" AllowContextMenu="False" AllowInsertDirectImageUrls="false" />
+                        <Settings AllowHtmlView="false" AllowPreview="false" />
+                        
+ <Settings AllowHtmlView="false" AllowPreview="false" AllowContextMenu="False" AllowInsertDirectImageUrls="false" />
                     </dx:ASPxHtmlEditor>
                 </div>
 
-                <div class="popup_btns">
+                <div class="popup_btns">                  
                     <input type="button" class="rand-button short_sale_edit bg_color_blue" value="Send" onclick="SendMail()" id="btnSend">
                     <input type="button" class="rand-button short_sale_edit" style="background: #77787b" value="Cancel" onclick="popupSendEmailClient.Hide()">
                 </div>

@@ -32,6 +32,15 @@ Partial Public Class UCTitleSummary
     Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
 
     '''<summary>
+    '''AllLeadsGrid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AllLeadsGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
     '''gridUrgent control.
     '''</summary>
     '''<remarks>
@@ -41,6 +50,15 @@ Partial Public Class UCTitleSummary
     Protected WithEvents gridUrgent As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
+    '''UrgentGrid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UrgentGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
     '''gridUpcomingApproval control.
     '''</summary>
     '''<remarks>
@@ -48,6 +66,33 @@ Partial Public Class UCTitleSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridUpcomingApproval As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''CounterOfferGrid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CounterOfferGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''InvestorReviewGrid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents InvestorReviewGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''DocumentRequestsGrid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DocumentRequestsGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
     '''todayScheduler control.

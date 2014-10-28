@@ -102,12 +102,6 @@
         border-radius: 5px;
     }
 
-    /*@import url(http://fonts.googleapis.com/css?family=PT+Serif:400,400italic);*/
-
-    .dxgv {
-        font: 14px 'Source Sans Pro';
-        /*height: 40px;*/
-    }
 
     .dxgvFocusedGroupRow_MetropolisBlue {
         border-bottom: 0px !important;
@@ -160,13 +154,20 @@
                     <div style="display: inline-table; font-family: 'Source Sans Pro'; margin-left: 19px; margin-top: 15px;">
                         <div style="float: left; font-weight: 300; font-size: 48px; color: #234b60">
                             <span style="text-transform: capitalize"></span>Title Summary &nbsp;
-                        </div>                     
+                        </div>
                     </div>
                     <%------end------%>
-                    <div style="float: left; margin-right: 10px; margin-left: 35px; min-width: 1200px;">
-                        <table style="vertical-align: top; height: 700px; margin-top: -21px;">
-                            <tr style="height: 240px">
-                                <td style="width: 380px; vertical-align: top" class="under_line">
+                    <div style="margin-right: 10px; margin-left: 35px; min-width: 1200px;">
+                        <table style="vertical-align: top;">
+                            <tr>
+                                <td colspan="10">
+                                    <div >
+                                        <dx:ASPxGridView ID="AllLeadsGrid" runat="server" SettingsPager-PageSize="6"></dx:ASPxGridView>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="height: 240px;">
+                                <td style="width: 380px; vertical-align: top; display: none" class="under_line">
                                     <%--add image by steven--%>
                                     <%--ments--%>
                                     <h4>
@@ -221,14 +222,75 @@
                                     </div>
                                 </td>
                                 <%--fix the disteance between the two grid by steven--%>
-                                <td rowspan="2" style="width: 50px"></td>
-                                <td style="width: 380px; vertical-align: top" class="under_line ">
+
+                                <td style="width: 300px; vertical-align: top;" class="under_line">
                                     <%--add icon by steven--%>
                                     <h4>
-                                        <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Upcoming Approval</span>
+                                        <i class="fa fa-exclamation-triangle with_circle title_summary_icon" style=""></i><span class="heading_text2">Urgent</span>
                                     </h4>
-                                    <div class="div-underline">
-                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridUpcomingApproval" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                    <div class="div-underline " style="height: 240px;">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="UrgentGrid" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                            <Columns>
+                                                <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                                                    <DataItemTemplate>
+                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Task", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
+                                                    <GroupRowTemplate>
+                                                        <%--Date: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
+                                                        <%--change group template UI by steven--%>
+                                                        <grouprowtemplate>
+                                                        <div >
+                                                            <table>
+                                                                <tr>
+                                                                  <td><img src="../images/grid_call_backs_canlender.png"/></td>
+                                                                <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
+                                                                <td style="padding-left: 10px">
+                                                                    <div  class="raund-label">
+                                                                     <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
+                                                                    </div>
+                                                                </td>
+                                                            <%--the round div--%>
+                                    
+                                                                </tr>
+                                                                </table>
+                                                        </div>
+                                
+                                                       </grouprowtemplate>
+                                                        <%-------end---------%>
+                                                    </GroupRowTemplate>
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
+                                                    <DataItemTemplate>
+                                                        <%--change the image and the size by steven--%>
+                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataColumn>
+                                            </Columns>
+                                            <GroupSummary>
+                                                <dx:ASPxSummaryItem SummaryType="Count" />
+                                            </GroupSummary>
+                                            <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
+                                            <Styles>
+                                                <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
+                                                <RowHotTrack BackColor="#ff400d" ForeColor="White"></RowHotTrack>
+                                            </Styles>
+                                        </dx:ASPxGridView>
+                                    </div>
+                                </td>
+
+                                <td rowspan="3" style="width: 30px;"></td>
+
+
+
+                                <td style="width: 300px; vertical-align: top;" class="under_line">
+                                    <%--add icon by steven--%>
+                                    <h4>
+                                        <i class="fa fa-university with_circle title_summary_icon" style=""></i><span class="heading_text2">Upcoming BPO's</span>
+                                    </h4>
+                                    <div class="div-underline " style="height: 240px;">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridUpcomingApproval" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="4">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
@@ -251,8 +313,185 @@
                                         </dx:ASPxGridView>
                                     </div>
                                 </td>
-                                <td rowspan="3" style="width: 50px"></td>
-                                <td rowspan="3" style="vertical-align: top; width: 380px">
+                                <td rowspan="5" style="width: 30px;"></td>
+
+                                 <td style="width: 300px; vertical-align: top;" class="under_line">
+                                    <%--add icon by steven--%>
+                                    <h4>
+                                        <i class="fa fa-check with_circle title_summary_icon" style=""></i><span class="heading_text2">Counter Offer</span>
+                                    </h4>
+                                    <div class="div-underline " style="height: 240px;">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="CounterOfferGrid" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                            <Columns>
+                                                <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                                                    <DataItemTemplate>
+                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Task", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
+                                                    <GroupRowTemplate>
+                                                        <%--Date: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
+                                                        <%--change group template UI by steven--%>
+                                                        <grouprowtemplate>
+                                                        <div >
+                                                            <table>
+                                                                <tr>
+                                                                  <td><img src="../images/grid_call_backs_canlender.png"/></td>
+                                                                <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
+                                                                <td style="padding-left: 10px">
+                                                                    <div  class="raund-label">
+                                                                     <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
+                                                                    </div>
+                                                                </td>
+                                                            <%--the round div--%>
+                                    
+                                                                </tr>
+                                                                </table>
+                                                        </div>
+                                
+                                                       </grouprowtemplate>
+                                                        <%-------end---------%>
+                                                    </GroupRowTemplate>
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
+                                                    <DataItemTemplate>
+                                                        <%--change the image and the size by steven--%>
+                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataColumn>
+                                            </Columns>
+                                            <GroupSummary>
+                                                <dx:ASPxSummaryItem SummaryType="Count" />
+                                            </GroupSummary>
+                                            <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
+                                            <Styles>
+                                                <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
+                                                <RowHotTrack BackColor="#ff400d" ForeColor="White"></RowHotTrack>
+                                            </Styles>
+                                        </dx:ASPxGridView>
+                                    </div>
+                                </td>
+
+                                <td rowspan="3" style="width: 30px;"></td>
+
+
+
+                                <td style="width: 300px; vertical-align: top;" class="under_line">
+                                    <%--add icon by steven--%>
+                                    <h4>
+                                        <i class="fa fa-thumbs-up with_circle title_summary_icon" style=""></i><span class="heading_text2">Investor Review</span>
+                                    </h4>
+                                    <div class="div-underline " style="height: 240px;">
+                                         <dx:ASPxGridView runat="server" Width="100%" ID="InvestorReviewGrid" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                            <Columns>
+                                                <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                                                    <DataItemTemplate>
+                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Task", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
+                                                    <GroupRowTemplate>
+                                                        <%--Date: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
+                                                        <%--change group template UI by steven--%>
+                                                        <grouprowtemplate>
+                                                        <div >
+                                                            <table>
+                                                                <tr>
+                                                                  <td><img src="../images/grid_call_backs_canlender.png"/></td>
+                                                                <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
+                                                                <td style="padding-left: 10px">
+                                                                    <div  class="raund-label">
+                                                                     <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
+                                                                    </div>
+                                                                </td>
+                                                            <%--the round div--%>
+                                    
+                                                                </tr>
+                                                                </table>
+                                                        </div>
+                                
+                                                       </grouprowtemplate>
+                                                        <%-------end---------%>
+                                                    </GroupRowTemplate>
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
+                                                    <DataItemTemplate>
+                                                        <%--change the image and the size by steven--%>
+                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataColumn>
+                                            </Columns>
+                                            <GroupSummary>
+                                                <dx:ASPxSummaryItem SummaryType="Count" />
+                                            </GroupSummary>
+                                            <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
+                                            <Styles>
+                                                <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
+                                                <RowHotTrack BackColor="#ff400d" ForeColor="White"></RowHotTrack>
+                                            </Styles>
+                                        </dx:ASPxGridView>
+                                    </div>
+                                </td>
+                                <td rowspan="5" style="width: 30px;"></td>
+                                <td style="width: 300px; vertical-align: top;" class="under_line">
+                                    <%--add icon by steven--%>
+                                    <h4>
+                                        <i class="fa fa-files-o with_circle title_summary_icon" style=""></i><span class="heading_text2">Document Requests</span>
+                                    </h4>
+                                    <div class="div-underline " style="height: 240px;">
+                                         <dx:ASPxGridView runat="server" Width="100%" ID="DocumentRequestsGrid" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                            <Columns>
+                                                <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                                                    <DataItemTemplate>
+                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Task", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
+                                                    <GroupRowTemplate>
+                                                        <%--Date: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
+                                                        <%--change group template UI by steven--%>
+                                                        <grouprowtemplate>
+                                                        <div >
+                                                            <table>
+                                                                <tr>
+                                                                  <td><img src="../images/grid_call_backs_canlender.png"/></td>
+                                                                <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
+                                                                <td style="padding-left: 10px">
+                                                                    <div  class="raund-label">
+                                                                     <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
+                                                                    </div>
+                                                                </td>
+                                                            <%--the round div--%>
+                                    
+                                                                </tr>
+                                                                </table>
+                                                        </div>
+                                
+                                                       </grouprowtemplate>
+                                                        <%-------end---------%>
+                                                    </GroupRowTemplate>
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
+                                                    <DataItemTemplate>
+                                                        <%--change the image and the size by steven--%>
+                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataColumn>
+                                            </Columns>
+                                            <GroupSummary>
+                                                <dx:ASPxSummaryItem SummaryType="Count" />
+                                            </GroupSummary>
+                                            <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
+                                            <Styles>
+                                                <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
+                                                <RowHotTrack BackColor="#ff400d" ForeColor="White"></RowHotTrack>
+                                            </Styles>
+                                        </dx:ASPxGridView>
+                                    </div>
+                                </td>
+                                <td rowspan="5" style="width: 30px;"></td>
+
+                                <td rowspan="3" style="vertical-align: top; width: 380px; display: none">
                                     <h4>
                                         <img src="../images/grid_calendar.png" class="vertical-img" /><span class="heading_text">Today's Calendar</span>
 
@@ -301,9 +540,11 @@
                                         </dx:ASPxScheduler>
                                     </div>
                                 </td>
-                                <td rowspan="4" style="width: 0px"></td>
+
+
+                                <td rowspan="4" style="width: 0px; display: none"></td>
                             </tr>
-                            <tr style="height: 240px">
+                            <tr style="height: 240px; display: none">
                                 <td style="vertical-align: top" class="under_line">
                                     <h4>
                                         <img src="../images/grid_task_icon.png" class="vertical-img" /><span class="heading_text">Task</span> </h4>
@@ -415,24 +656,13 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td colspan="3">
-                                    <div style="width: 815px; height: auto; background: #fff5e7; border-left: 5px solid #ff400d; margin-top: 30px; padding-top: 0px; color: #2b586f; font: 14px 'PT Serif'; font-style: italic; margin-left: 19px;">
-                                        <div style="float: left; font-size: 60px; margin-left: 30px; margin-top: 5px;">“</div>
-                                        <p style="width: 90%; padding-top: 20px; padding-bottom: 20px; padding-left: 65px;">
-                                            <%= HtmlBlackQuote(Quote)%>
-                                            <%--To accomplish great things, we must not only act, but also dream, not only plan, but also believe.”
-        - Anatole France--%>
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
+
                         </table>
                     </div>
                 </dx:SplitterContentControl>
             </ContentCollection>
         </dx:SplitterPane>
-        <dx:SplitterPane Size="290px" MinSize="280px">
+        <dx:SplitterPane Size="290px" MinSize="280px" Visible="false">
             <PaneStyle BackColor="#EFF2F5"></PaneStyle>
             <Separator Visible="False"></Separator>
             <ContentCollection>

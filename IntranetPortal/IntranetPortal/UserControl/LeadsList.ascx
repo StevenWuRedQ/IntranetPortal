@@ -112,11 +112,19 @@
                 $(this).mCustomScrollbar(
                     {
                         theme: "minimal-dark",
-
+                       
                     }
                 );
             }
         });
+
+        
+        /*init the center panle's scrollbar */
+        $("#ctl00_MainContentPH_ASPxSplitter1_0i1_CC").mCustomScrollbar(
+            {
+                theme: "minimal-dark",
+                axis: "yx"
+            });
     }
 
     var mapContentframeID = "MapContent";

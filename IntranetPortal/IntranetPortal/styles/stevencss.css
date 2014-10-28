@@ -1091,7 +1091,7 @@ pre#event-log {
 /* Responsive design
 --- */
 @media screen and (max-width: 1056px) {
-    
+
 
     .c2 {
         margin-right: 0;
@@ -1854,6 +1854,7 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 
 .mail_edits {
     line-height: 48px;
+    width: 100%;
 }
 
     .mail_edits tbody tr {
@@ -1866,17 +1867,56 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
     position: relative;
     bottom: -28px;
 }
-.bg_color_blue
-{
-    background:#3993c1;
+
+.bg_color_blue {
+    background: #3993c1;
 }
 
-.input_files
-{
-    margin:0px;
+.input_files {
+    margin: 0px;
     /*border:  dashed*/
 }
-.input_files tbody tr td table tbody td.dxCB 
-{
-    border: 0;
+
+    .input_files tbody tr td table tbody td.dxCB {
+        border: 0;
+    }
+
+.html_edit_div {
+    border: 2px solid #dde0e7;
+    border-radius: 10px;
+}
+
+    .html_edit_div div {
+        /*padding-top:3px;*/
+    }
+
+.select_bootstrap {
+    padding: 5px;
+    min-width: 120px;
+    max-width: 130px;
+    border-radius: 5px;
+    border: 1px solid #dde0e7;
+    color: #2e2f31;
+    outline: none;
+}
+
+    .select_bootstrap::outside {
+        border: none;
+    }
+
+.select_margin {
+    margin-top: 5px;
+}
+
+.heading_text2 {
+    margin-left: 10px;
+    font-size:18px;
+}
+
+.title_summary_icon {
+    width: 38px;
+    height: 38px;
+    line-height: 38px !important;
+    color:#999ca1;
+    font-size: 18px;
 }
