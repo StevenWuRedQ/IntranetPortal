@@ -133,6 +133,25 @@
         End Get
     End Property
 
+    Public ReadOnly Property FristMortageProgress As String
+        Get
+            Return GetMortageStauts(0)
+        End Get
+    End Property
+    Function GetMortageStauts(ByVal index As Integer) As String
+        If (Mortgages IsNot Nothing AndAlso Mortgages.Count > index) Then
+
+            Return Mortgages(index).Status
+        End If
+        Return Nothing
+    End Function
+
+    Public ReadOnly Property SencondMortageProgress As String
+        Get
+            Return GetMortageStauts(1)
+        End Get
+    End Property
+
     Public ReadOnly Property SellerAttorneyContact As PartyContact
         Get
             If SellerAttorney.HasValue Then

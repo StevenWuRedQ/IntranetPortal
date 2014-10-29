@@ -181,9 +181,38 @@
                                         </div>
                                         <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="4" KeyFieldName="CaseId">
                                             <Columns>
-                                                <dx:GridViewDataTextColumn FieldName="CaseId" ></dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.StreetName" >                                                 
+                                             
+                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.StreetName" Caption="Street address">                                                 
                                                 </dx:GridViewDataTextColumn>
+                                                 <dx:GridViewDataTextColumn FieldName="PropertyInfo.City" >                                                 
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.State" >                                                 
+                                                </dx:GridViewDataTextColumn>
+                                                
+                                                <dx:GridViewDataTextColumn FieldName="Owner" Caption="Last Name">                                                 
+                                                </dx:GridViewDataTextColumn>
+                                               
+                                                 <dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="File Progress" >                                                 
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1nd Mortgage Progress" >                                                 
+                                                </dx:GridViewDataTextColumn>
+
+                                                <dx:GridViewDataTextColumn FieldName="SencondMortageProgress" Caption="2nd Mortgage Progress" >                                                 
+                                                </dx:GridViewDataTextColumn>
+
+                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.City"  Caption="Office Price">                                                 
+                                                </dx:GridViewDataTextColumn>
+
+                                                <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">                                                 
+                                                </dx:GridViewDataTextColumn>
+                                                 <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name"  Caption="Listing agent">                                                 
+                                                </dx:GridViewDataTextColumn>
+                                                 <dx:GridViewDataTextColumn FieldName="PropertyInfo.UpdateDate"  Caption="Last Activity">                                                 
+                                                </dx:GridViewDataTextColumn>
+                                               
+                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="Next Task" >                                                 
+                                                </dx:GridViewDataTextColumn>
+                                                
                                             </Columns>
                                         </dx:ASPxGridView>
                                         <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
