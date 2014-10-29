@@ -15,7 +15,7 @@
         aspxAcrisControl.SetContentHtml("Loading...");
         aspxAcrisControl.SetContentUrl(url);
         aspxAcrisControl.SetHeaderText(header);
-        $('#pop_up_header_text').html(header)
+        $('#pop_up_header_text').html(header);
         aspxAcrisControl.Show();
     }
 
