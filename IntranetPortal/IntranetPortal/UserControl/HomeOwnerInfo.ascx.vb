@@ -45,6 +45,7 @@
 
     Public Sub BindData(bble As String)
         Using Context As New Entities
+            Me.BBLE = bble
             Dim homeOwner = Context.HomeOwners.Where(Function(h) h.BBLE = bble And h.Name = OwnerName).FirstOrDefault
             If homeOwner IsNot Nothing Then
                 TLOLocateReport = homeOwner.TLOLocateReport

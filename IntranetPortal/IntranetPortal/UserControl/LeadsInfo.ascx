@@ -5,6 +5,8 @@
 <%@ Register Src="~/UserControl/PropertyInfo.ascx" TagPrefix="uc1" TagName="PropertyInfo" %>
 <%@ Register Src="~/OneDrive/LeadsDocumentOneDrive.ascx" TagPrefix="uc1" TagName="LeadsDocumentOneDrive" %>
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
+<%@ Register Src="~/PopupControl/EditHomeOwner.ascx" TagPrefix="uc1" TagName="EditHomeOwner" %>
+
 
 
 <script type="text/javascript">
@@ -730,6 +732,7 @@
                 <ClientSideEvents EndCallback="function(s,e){if(!isSave){s.Show();}else{s.Hide();ownerInfoCallbackPanel.PerformCallback();}}" />
             </dx:ASPxPopupControl>
             <uc1:SendMail runat="server" ID="SendMail" />
+            <uc1:EditHomeOwner runat="server" id="EditHomeOwner" />
         </dx:PanelContent>
     </PanelCollection>
     <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>

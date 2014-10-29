@@ -23,8 +23,10 @@
 </style>
 <div style="vertical-align: top; margin: 0; font-size: 18px;">
     <div style="font-size: 30px; color: #2e2f31">
-        <i class="fa fa-file">&nbsp;</i>
-        <span class="homeowner_name">&nbsp;<%= OwnerName %></span>
+        <i class="fa fa-edit" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
+        <span class="homeowner_name">
+            <input type="text" style="border-color: transparent; background-color: transparent; width: 245px" value="<%= OwnerName %>" />
+        </span>
     </div>
 
     <% If TLOLocateReport IsNot Nothing Then%>
@@ -33,7 +35,6 @@
             <td class="border_under_line">
                 <div class="form_div_node form_div_no_float" style="width: 100%">
                     <span class="form_input_title">age</span>
-
                     <input class="text_input" value="<% If TLOLocateReport.dateOfBirthField IsNot Nothing Then%>
                     <% = TLOLocateReport.dateOfBirthField.currentAgeField%>
                     <% Else%>
@@ -180,11 +181,11 @@
             <div class="clearfix homeowner_info_label">
                 <div>
                     <!--Best Mail Address info -->
-                     <%index = 0%>
+                    <%index = 0%>
                     <% For Each add In BestAddress%>
                     <% If add IsNot Nothing Then%>
                     <%index = index + 1%>
-                   <div class="color_gray clearfix">
+                    <div class="color_gray clearfix">
                         <i class="fa fa-map-marker homeowner_info_icon"></i>
                         <div class="form_div_node homeowner_info_text">
                             <div class="color_blue">
@@ -197,7 +198,7 @@
                     </div>
                     <% End If%>
                     <% Next%>
-                    
+
                     <% If TLOLocateReport.addressesField IsNot Nothing AndAlso TLOLocateReport.addressesField.Length > 0 Then%>
                     <% For Each add In TLOLocateReport.addressesField%>
                     <% If add.addressField IsNot Nothing Then

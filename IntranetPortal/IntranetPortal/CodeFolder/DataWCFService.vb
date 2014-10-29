@@ -190,6 +190,7 @@ Public Class DataWCFService
                 If result IsNot Nothing Then
                     loaded = True
                     owner.TLOLocateReport = result
+                    owner.UserModified = False
                 End If
             Next
 
@@ -201,9 +202,9 @@ Public Class DataWCFService
                     If result IsNot Nothing Then
                         loaded = True
                         owner.TLOLocateReport = result
+                        owner.UserModified = False
                     End If
                 Next
-
             End If
 
             Dim contextError = context.GetValidationErrors()

@@ -444,4 +444,13 @@ Partial Public Class LeadsInfo1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SendMail As Global.IntranetPortal.SendMailControl
+
+    '''<summary>
+    '''EditHomeOwner control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents EditHomeOwner As Global.IntranetPortal.EditHomeOwner
 End Class

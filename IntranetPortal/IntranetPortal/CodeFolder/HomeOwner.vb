@@ -30,7 +30,6 @@ Partial Public Class HomeOwner
                     serializer.Serialize(writer, value)
                     writer.Flush()
                     LocateReport = writer.ToArray
-
                 End Using
             End If
         End Set

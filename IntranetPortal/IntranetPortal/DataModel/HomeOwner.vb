@@ -25,5 +25,7 @@ Partial Public Class HomeOwner
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
     Public Property Active As Nullable(Of Boolean)
+    Public Property Description As String
+    Public Property UserModified As Nullable(Of Boolean)
 
 End Class
