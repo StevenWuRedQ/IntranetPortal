@@ -1,4 +1,6 @@
-﻿Partial Public Class ShortSaleCase
+﻿Imports System.Text.RegularExpressions
+
+Partial Public Class ShortSaleCase
 
 #Region "Constructor"
 
@@ -136,6 +138,17 @@
     Public ReadOnly Property FristMortageProgress As String
         Get
             Return GetMortageStauts(0)
+        End Get
+    End Property
+    Public ReadOnly Property OwnerLastName As String
+        Get
+            If (Owner IsNot Nothing AndAlso Owner.Length > 0) Then
+                Dim mathces = Regex.Matches(Owner, "\s(\w+)$")
+                If (mathces.Count > 0) Then
+                    Return mathces(0).Value
+                End If
+            End If
+            Return Nothing
         End Get
     End Property
     Function GetMortageStauts(ByVal index As Integer) As String

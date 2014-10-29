@@ -113,9 +113,9 @@
     }*/
     /*-------end-------------*/
 
-    td.dxgv {
+    /*td.dxgv {
         border-bottom: 0px !important;
-    }
+    }*/
 
     td.dxgvIndentCell {
         border-right: 3px Solid #dde0e7 !important;
@@ -162,7 +162,7 @@
                         <table style="vertical-align: top;">
                             <tr>
                                 <td colspan="10">
-                                    <div style="max-width: 1570px; overflow: auto;" class="under_line_div ">
+                                    <div style="max-width: 1570px; overflow: auto;height:450px" class="under_line_div ">
                                         <div class="clearfix" style="margin-bottom: 20px;">
                                             <h4>
                                                 <i class="fa fa-folder-open with_circle title_summary_icon" style=""></i><span class="heading_text2">Leads and Active Files</span>
@@ -176,32 +176,41 @@
                                                 <i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-right: 20px"></i>
                                                 <i class="fa fa-filter tooltip-examples icon_btn grid_buttons" style="margin-right: 40px"></i>
                                                 <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" ></i>'></asp:LinkButton>
-                                                <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-pdf-o report_head_button report_head_button_padding tooltip-examples"></i>'></asp:LinkButton>
+                                                <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-pdf-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;"></i>'></asp:LinkButton>
                                             </div>
                                         </div>
-                                        <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="4" KeyFieldName="CaseId">
+                                        <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="6" KeyFieldName="CaseId">
+                                            
+                                            <Styles>
+                                                <Row CssClass="summary_row">
+                                                   
+                                                </Row>
+                                            </Styles>
                                             <Columns>
                                              
-                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.StreetName" Caption="Street address">                                                 
+                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.StreetName" Caption="Street address">
+                                                  <DataItemTemplate>
+                                                      <div style="min-width:600px" class="font_black"> <%# Eval("PropertyInfo.StreetName")%></div>
+                                                  </DataItemTemplate>                                                 
                                                 </dx:GridViewDataTextColumn>
                                                  <dx:GridViewDataTextColumn FieldName="PropertyInfo.City" >                                                 
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn FieldName="PropertyInfo.State" >                                                 
                                                 </dx:GridViewDataTextColumn>
                                                 
-                                                <dx:GridViewDataTextColumn FieldName="Owner" Caption="Last Name">                                                 
+                                                <dx:GridViewDataTextColumn FieldName="OwnerLastName" Caption="Last Name">                                                 
                                                 </dx:GridViewDataTextColumn>
                                                
-                                                 <dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="File Progress" >                                                 
-                                                </dx:GridViewDataTextColumn>
+                                                 <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="File Progress" >                                                 
+                                                </dx:GridViewDataTextColumn>--%>
                                                 <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1nd Mortgage Progress" >                                                 
                                                 </dx:GridViewDataTextColumn>
 
                                                 <dx:GridViewDataTextColumn FieldName="SencondMortageProgress" Caption="2nd Mortgage Progress" >                                                 
                                                 </dx:GridViewDataTextColumn>
 
-                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.City"  Caption="Office Price">                                                 
-                                                </dx:GridViewDataTextColumn>
+                                                <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City"  Caption="Office Price">                                                 
+                                                </dx:GridViewDataTextColumn>--%>
 
                                                 <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">                                                 
                                                 </dx:GridViewDataTextColumn>
@@ -210,10 +219,11 @@
                                                  <dx:GridViewDataTextColumn FieldName="PropertyInfo.UpdateDate"  Caption="Last Activity">                                                 
                                                 </dx:GridViewDataTextColumn>
                                                
-                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="Next Task" >                                                 
-                                                </dx:GridViewDataTextColumn>
+                                                <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="Next Task" >                                                 
+                                                </dx:GridViewDataTextColumn>--%>
                                                 
                                             </Columns>
+                                            
                                         </dx:ASPxGridView>
                                         <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
                                     </div>
@@ -337,7 +347,7 @@
 
 
 
-                                <td style="width: 300px; vertical-align: top;" >
+                                <td style="width: 300px; vertical-align: top;" class="gray_background">
                                     <%--add icon by steven--%>
                                     <h4>
                                         <i class="fa fa-university with_circle title_summary_icon" style=""></i><span class="heading_text2">Upcoming BPO's</span>
@@ -429,7 +439,7 @@
 
 
 
-                                <td style="width: 300px; vertical-align: top;">
+                                <td style="width: 300px; vertical-align: top;" class="gray_background">
                                     <%--add icon by steven--%>
                                     <h4>
                                         <i class="fa fa-thumbs-up with_circle title_summary_icon" style=""></i><span class="heading_text2">Investor Review</span>
@@ -486,7 +496,7 @@
                                     </div>
                                 </td>
                                 <td rowspan="5" style="width: 30px;"></td>
-                                <td style="width: 300px; vertical-align: top;" class="under_line">
+                                <td style="width: 300px; vertical-align: top;">
                                     <%--add icon by steven--%>
                                     <h4>
                                         <i class="fa fa-files-o with_circle title_summary_icon" style=""></i><span class="heading_text2">Document Requests</span>
