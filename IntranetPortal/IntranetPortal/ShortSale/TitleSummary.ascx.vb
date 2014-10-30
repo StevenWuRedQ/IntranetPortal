@@ -63,7 +63,6 @@ Public Class UCTitleSummary
             gridUpcomingApproval.DataSource = priorityData
             gridUpcomingApproval.DataBind()
 
-
             
             ''Bind Appointment
             Dim leads = (From al In Context.Leads

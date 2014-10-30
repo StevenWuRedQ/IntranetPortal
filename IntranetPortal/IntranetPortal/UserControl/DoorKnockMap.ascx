@@ -66,8 +66,7 @@
         }
         else
             return;
-
-
+        
         var request = {
             //origin: 'Westbury, NY',
             //destination: 'Woodhaven, NY',

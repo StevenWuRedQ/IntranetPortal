@@ -71,72 +71,80 @@ Partial Public Class HomeOwner
     Public Sub SavePhoneField(ownerInfo As DataAPI.TLOLocateReportOutput)
         Using context As New Entities
 
-            'Owner phones info
-            For Each item In ownerInfo.phonesField
-                Dim phone = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = Name And p.Phone = item.phoneField).FirstOrDefault
-
-                If phone Is Nothing Then
-
-                    phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = Name And p.Phone = item.phoneField).SingleOrDefault
+            If ownerInfo.phonesField IsNot Nothing Then
+                'Owner phones info
+                For Each item In ownerInfo.phonesField
+                    Dim phone = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = Name And p.Phone = item.phoneField).FirstOrDefault
 
                     If phone Is Nothing Then
-                        phone = GetOwnerPhone(BBLE, Name, item)
-                        context.HomeOwnerPhones.Add(phone)
+
+                        phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = Name And p.Phone = item.phoneField).SingleOrDefault
+
+                        If phone Is Nothing Then
+                            phone = GetOwnerPhone(BBLE, Name, item)
+                            context.HomeOwnerPhones.Add(phone)
+                        End If
                     End If
-                End If
-            Next
+                Next
+            End If
 
             'Owner first relatives info
-            For Each relative In ownerInfo.relatives1stDegreeField
-                Dim name = String.Format("{0} {1}{2}", relative.nameField.firstNameField, relative.nameField.middleNameField & " ", relative.nameField.lastNameField)
+            If ownerInfo.relatives1stDegreeField IsNot Nothing Then
+                For Each relative In ownerInfo.relatives1stDegreeField
+                    Dim name = String.Format("{0} {1}{2}", relative.nameField.firstNameField, relative.nameField.middleNameField & " ", relative.nameField.lastNameField)
 
-                For Each item In relative.phonesField
-                    Dim phone = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).FirstOrDefault
-
-                    If phone Is Nothing Then
-                        phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).SingleOrDefault
+                    For Each item In relative.phonesField
+                        Dim phone = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).FirstOrDefault
 
                         If phone Is Nothing Then
-                            phone = GetOwnerPhone(BBLE, name, item)
-                            context.HomeOwnerPhones.Add(phone)
+                            phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).SingleOrDefault
+
+                            If phone Is Nothing Then
+                                phone = GetOwnerPhone(BBLE, name, item)
+                                context.HomeOwnerPhones.Add(phone)
+                            End If
                         End If
-                    End If
+                    Next
                 Next
-            Next
+            End If
 
             'Owner Second relatives info
-            For Each relative In ownerInfo.relatives2ndDegreeField
-                Dim name = String.Format("{0} {1}{2}", relative.nameField.firstNameField, relative.nameField.middleNameField & " ", relative.nameField.lastNameField)
+            If ownerInfo.relatives2ndDegreeField IsNot Nothing Then
+                For Each relative In ownerInfo.relatives2ndDegreeField
+                    Dim name = String.Format("{0} {1}{2}", relative.nameField.firstNameField, relative.nameField.middleNameField & " ", relative.nameField.lastNameField)
 
-                For Each item In relative.phonesField
-                    Dim phone = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).FirstOrDefault
+                    For Each item In relative.phonesField
+                        Dim phone = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).FirstOrDefault
 
-                    If phone Is Nothing Then
+                        If phone Is Nothing Then
+                            phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).SingleOrDefault
+
+                            If phone Is Nothing Then
+                                phone = GetOwnerPhone(BBLE, name, item)
+                                context.HomeOwnerPhones.Add(phone)
+                            End If
+                        End If
+                    Next
+                Next
+            End If
+
+            'Owner third relatives info
+            If ownerInfo.relatives3rdDegreeField IsNot Nothing Then
+                For Each relative In ownerInfo.relatives3rdDegreeField
+                    Dim name = String.Format("{0} {1}{2}", relative.nameField.firstNameField, relative.nameField.middleNameField & " ", relative.nameField.lastNameField)
+
+                    For Each item In relative.phonesField
+                        Dim phone = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).SingleOrDefault
+
                         phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).SingleOrDefault
 
                         If phone Is Nothing Then
                             phone = GetOwnerPhone(BBLE, name, item)
                             context.HomeOwnerPhones.Add(phone)
                         End If
-                    End If
+                    Next
                 Next
-            Next
-
-            'Owner third relatives info
-            For Each relative In ownerInfo.relatives3rdDegreeField
-                Dim name = String.Format("{0} {1}{2}", relative.nameField.firstNameField, relative.nameField.middleNameField & " ", relative.nameField.lastNameField)
-
-                For Each item In relative.phonesField
-                    Dim phone = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).SingleOrDefault
-
-                    phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).SingleOrDefault
-
-                    If phone Is Nothing Then
-                        phone = GetOwnerPhone(BBLE, name, item)
-                        context.HomeOwnerPhones.Add(phone)
-                    End If
-                Next
-            Next
+            End If
 
             context.SaveChanges()
         End Using

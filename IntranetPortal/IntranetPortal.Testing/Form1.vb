@@ -69,4 +69,12 @@ Public Class Form1
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         IntranetPortal.Core.EmailService.SendMail("chris@gvs4u.com", "stevenwu@gvs4u.com", "testing mail", "<span style='color:red'>testing mail</span>", New String() {"b70ddcff-8d22-4b65-8fc8-42b46f8b1380", "326926da-d5c9-419a-b8b0-57b6d09b6043"})
     End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Using ctx As New Entities
+            For Each t In ctx.UserTasks.Where(Function(tk) tk.Status = UserTask.TaskStatus.Active)
+                IntranetPortal.RulesEngine.TaskEscalationRule.Excute(t)
+            Next
+        End Using
+    End Sub
 End Class

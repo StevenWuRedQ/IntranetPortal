@@ -1,4 +1,8 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="EditHomeOwner.ascx.vb" Inherits="IntranetPortal.EditHomeOwner" %>
+<script type="text/javascript">
+
+</script>
+
 <dx:ASPxPopupControl ID="popupEditHomeOwner" runat="server" ClientInstanceName="popupEditHomeOwner"
     Width="600px" Height="400px" CloseAction="CloseButton" OnWindowCallback="popupEditHomeOwner_WindowCallback"
     Modal="true" ShowFooter="true" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -15,6 +19,8 @@
     </HeaderTemplate>
     <ContentCollection>
         <dx:PopupControlContentControl runat="server" ID="PopupContentHomeOwner" Visible="false">
+            <asp:HiddenField ID="hfBBLE" runat="server" />
+            <asp:HiddenField ID="hfOwnerName" runat="server" />
             <div class="popup_padding">
                 <div class="clearence_list_text">
                     <div class="clearence_list_title">
@@ -73,7 +79,7 @@
     </ContentCollection>
     <FooterContentTemplate>
         <div style="height: 40px; vertical-align: central; float:right; margin-right:30px;">
-            <input type="button" class="rand-button short_sale_edit bg_color_blue" value="Save" onclick="popupEditHomeOwner.PerformCallback('Save')" id="btnSend">
+            <input type="button" class="rand-button short_sale_edit bg_color_blue" value="Save" onclick="popupEditHomeOwner.PerformCallback('Save'); popupEditHomeOwner.Hide(); if (typeof ownerInfoCallbackPanel != undefined) { ownerInfoCallbackPanel.PerformCallback();}" id="btnSend">
             <input type="button" class="rand-button short_sale_edit" style="background: #77787b" value="Cancel" onclick="popupEditHomeOwner.Hide()">
         </div>
     </FooterContentTemplate>

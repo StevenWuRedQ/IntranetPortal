@@ -32,6 +32,24 @@ Partial Public Class EditHomeOwner
     Protected WithEvents PopupContentHomeOwner As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
 
     '''<summary>
+    '''hfBBLE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfBBLE As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''hfOwnerName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfOwnerName As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''txtOwnerName control.
     '''</summary>
     '''<remarks>

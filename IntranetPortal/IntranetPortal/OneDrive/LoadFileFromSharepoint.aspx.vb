@@ -64,9 +64,9 @@ Public Class LoadFileFromSharepoint
     End Function
 
     Sub GetServerClient()
-        Dim userName = "georgev@gvs4u.org"
-        Dim passwordstr = "Pupamutata1234$"
-        Dim serverUrl = "https://gvs4uinc.sharepoint.com"
+        Dim userName = "ron@MyIdealPropertyInc.onmicrosoft.com"
+        Dim passwordstr = "Unlock12"
+        Dim serverUrl = "https://myidealpropertyinc.sharepoint.com"
 
         Using ClientContext As New ClientContext(serverUrl)
             Dim password As New SecureString
@@ -76,6 +76,19 @@ Public Class LoadFileFromSharepoint
 
             Dim credentials As New SharePointOnlineCredentials(userName, password)
             ClientContext.Credentials = credentials
+
+            Dim docs = ClientContext.Web.Lists
+            ClientContext.Load(docs)
+            ClientContext.ExecuteQuery()
+
+            For Each File In docs
+                ClientContext.Load(File)
+                ClientContext.ExecuteQuery()
+
+                Response.Write(File.Title + "<br />")
+            Next
+
+            Return
 
             Dim lists = ClientContext.Web.Lists.GetByTitle("Documents")
             ClientContext.Load(lists)

@@ -10,13 +10,10 @@ Public Class ActivityLogs
                                                         "<i class=""{1}""></i>" &
                                                     "</div>"
 
+    Public Property DispalyMode As ActivityLogMode = ActivityLogMode.Leads
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        'If Page.IsCallback Then
-        '    If Not String.IsNullOrEmpty(hfBBLE.Value) Then
-        '        BindData(hfBBLE.Value)
-        '    End If
-        'End If
     End Sub
 
     Public Sub BindData(bble As String)
@@ -57,7 +54,6 @@ Public Class ActivityLogs
             End If
             getdate = aspxdate.Date
         End If
-       
 
         If String.IsNullOrEmpty(txtComments.Text) Then
             Throw New Exception("Comments can not be empty.")
@@ -553,7 +549,15 @@ Public Class ActivityLogs
             Throw New Exception("Comments can not be empty.")
         End If
 
-        LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)
+        If Me.DispalyMode = ActivityLogMode.ShortSale Then
+            aspxdate = DateTime.Now
+            Dim typeOfUpdate = e.Parameter.Split("|")(2)
+            Dim statusOfUpdate = e.Parameter.Split("|")(3)
+            txtComments = String.Format("Type of Update: {0}<br />Status of Update: {1} <br />{2}", typeOfUpdate, statusOfUpdate, txtComments)
+            LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent, LeadsActivityLog.EnumActionType.Comments)
+        Else
+            LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)
+        End If
 
         'BindData(hfBBLE.Value)
     End Sub
@@ -590,4 +594,10 @@ Public Class ActivityLogs
         End Using
 
     End Sub
+
+    Enum ActivityLogMode
+        Leads
+        ShortSale
+    End Enum
+
 End Class

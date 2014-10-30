@@ -275,8 +275,8 @@
         }
         if (addDate == null)
             addDate = new Date();
-
-        addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + comments.value);
+        
+        addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + comments.value + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate").val());
     }
 
     function OnCommentsKeyDown(e) {
@@ -325,14 +325,8 @@
                                 <dx:ToolbarInsertUnorderedListButton></dx:ToolbarInsertUnorderedListButton>
                                 <dx:ToolbarIndentButton></dx:ToolbarIndentButton>
                                 <dx:ToolbarOutdentButton></dx:ToolbarOutdentButton>
-
-
-                                <dx:ToolbarBackColorButton></dx:ToolbarBackColorButton>
-                                <%--<dx:ToolbarFontSizeEdit>
-                                </dx:ToolbarFontSizeEdit>--%>
+                                <dx:ToolbarBackColorButton></dx:ToolbarBackColorButton>                            
                                 <dx:ToolbarFontColorButton></dx:ToolbarFontColorButton>
-
-
                                 <dx:ToolbarJustifyLeftButton></dx:ToolbarJustifyLeftButton>
                                 <dx:ToolbarJustifyCenterButton></dx:ToolbarJustifyCenterButton>
                                 <dx:ToolbarJustifyRightButton></dx:ToolbarJustifyRightButton>
@@ -354,22 +348,20 @@
 
                 <%-- 50px --%>
                 <div style="margin-top: 50px">
-                    <div >Date of Comment:</div>
-                    <div class="border_under_line">
+                    <div <%= If(DispalyMode = ActivityLogMode.ShortSale, "style='display:none'", "")%>>Date of Comment:</div>
+                    <div class="border_under_line" <%= If(DispalyMode = ActivityLogMode.ShortSale, "style='display:none'", "")%>>
                         <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
-                    <div style="display:none">
-
-
+                    <div <%= If(DispalyMode = ActivityLogMode.Leads, "style='display:none'", "")%>>
                         <div class="color_gray upcase_text">Type of update</div>
-                        <select class="select_bootstrap select_margin">
+                        <select class="select_bootstrap select_margin" id="selType1">
                             <option>Document Request</option>
                             <option>Type 2 </option>
                             <option>Type 3</option>
                         </select>
 
                         <div class="color_gray upcase_text">Status Update</div>
-                        <select class="select_bootstrap select_margin">
+                        <select class="select_bootstrap select_margin" id="selStatusUpdate">
                             <option value="Ready for Submission">Ready for Submission</option>
                             <option value="Pending Service Release">Pending Service Release</option>
                             <option value="Package Submitted">Package Submitted</option>

@@ -20,7 +20,7 @@ Partial Public Class ShortSaleCase
         Get
             If _propInfo Is Nothing Then
                 _propInfo = PropertyBaseInfo.GetInstance(BBLE)
-
+                '_propInfo.StreetName
                 If _propInfo Is Nothing Then
                     _propInfo = New PropertyBaseInfo
                 End If

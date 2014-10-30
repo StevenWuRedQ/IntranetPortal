@@ -169,7 +169,7 @@
                                                                                 <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                                                             </li>
                                                                         </ul>
-                                                                        <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
+                                                                        <uc1:ActivityLogs runat="server" ID="ActivityLogs" DispalyMode="ShortSale" />
                                                                     </div>
                                                                     
                                                                     <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"

@@ -23,9 +23,9 @@
 </style>
 <div style="vertical-align: top; margin: 0; font-size: 18px;">
     <div style="font-size: 30px; color: #2e2f31">
-        <i class="fa fa-edit" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
+        <i class="fa fa-edit" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}","Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
         <span class="homeowner_name">
-            <input type="text" style="border-color: transparent; background-color: transparent; width: 245px" value="<%= OwnerName %>" />
+            <%= OwnerName %>
         </span>
     </div>
 
@@ -63,8 +63,19 @@
                     </div>
                 </div>
             </td>
-
         </tr>
+        <% If Not String.IsNullOrEmpty(HomeOwnerInfo.Description) Then%>
+        <tr>
+            <td>
+                <div class="form_div_node form_div_no_float form_div_node_no_under_line" style="width: 100%">
+                    <span class="form_input_title">Description</span>
+                    <div class="clearfix">
+                        <%= HomeOwnerInfo.Description %>&nbsp;
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <% End If%>
     </table>
 
     <!-- Employer info -->
