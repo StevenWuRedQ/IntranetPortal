@@ -15,7 +15,17 @@
             gridLiens.DataBind()
         End If
     End Function
-
+    Public Function LinesDefendantAndIndex() As String
+        Dim add_info = ""
+        If LeadsInfoData.LisPens IsNot Nothing Then
+            Dim index = 1
+            For Each lens As PortalLisPen In LeadsInfoData.LisPens
+                add_info += "Defendant Name: " + lens.Defendant + " Index: " + lens.Index + "<br>"
+                index += 1
+            Next
+        End If
+        Return add_info
+    End Function
     Protected Sub leadsCommentsCallbackPanel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         If LeadsInfoData.BBLE Is Nothing AndAlso hfBBLE.Value IsNot Nothing Then
             LeadsInfoData = LeadsInfo.GetInstance(hfBBLE.Value)

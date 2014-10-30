@@ -4,14 +4,21 @@
     function ShowAcrisMap(propBBLE) {
         //var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + propBBLE;
         ShowPopupMap("https://a836-acris.nyc.gov/DS/DocumentSearch/BBL", "Acris");
+        $("#addition_info").html($("#borugh_block_lot_data").val());
     }
 
     function ShowDOBWindow(boro, houseNo, street) {
         var url = "http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=" + boro + "&houseno=" + encodeURIComponent(houseNo) + "&street=" + encodeURIComponent(street);
         ShowPopupMap(url, "DOB");
+        $("#addition_info").html(' ');
     }
 
     function ShowPopupMap(url, header) {
+        if (header == "eCourts")
+        {
+            $("#addition_info").html($('#LinesDefendantAndIndex').val());
+        }
+
         aspxAcrisControl.SetContentHtml("Loading...");
         aspxAcrisControl.SetContentUrl(url);
         aspxAcrisControl.SetHeaderText(header);
@@ -55,7 +62,8 @@
     //init_currency();
 </script>
 
-
+<input type="hidden" id="borugh_block_lot_data" value='(Borough:<%=LeadsInfoData.Block %> , Block:<%=LeadsInfoData.Block %> ,Lot:<%=LeadsInfoData.Lot %>)'/>
+<input type="hidden" id="LinesDefendantAndIndex" value='<%= LinesDefendantAndIndex()%>' />
 <div class="tab-pane active" id="property_info" style="padding-top: 5px">
     <%--witch scroll bar--%>
     <%--/*display:none need delete when realse--%>
@@ -549,7 +557,7 @@
                 <i class="fa fa-times icon_btn" onclick="aspxAcrisControl.Hide()"></i>
             </div>
         </div>
-
+        <div style="text-align:center" id="addition_info"></div>
     </HeaderTemplate>
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">

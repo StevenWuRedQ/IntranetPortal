@@ -47,7 +47,7 @@
     }
 </style>
 <div style="padding-top: 5px">
-    <div style="height: 850px; overflow: auto;" id="home_owner_content">
+    <div style="height: 850px; overflow:auto" id="home_owner_content">
         <%--time label--%>
         <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
             <div style="font-size: 30px">
@@ -158,31 +158,31 @@
                             <tr class="font_14">
                                 <td class="judgment_search_td">Emergency Repair Taxes
                                 </td>
-                                <td>Auto
+                                <td> <input type="text" class="table_input"  value="Auto"/>
                                 </td>
-                                <td>May 1,2014
+                                <td><input type="text" class="table_input"  value="May 1,2014"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">Open Property Taxes
                                 </td>
-                                <td>Auto
+                                <td><input type="text" class="table_input"  value="Auto"/>
                                 </td>
-                                <td>May 1,2014
+                                <td><input type="text" class="table_input"  value="May 1,2014"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">Open Water
                                 </td>
-                                <td>Auto
+                                <td><input type="text" class="table_input"  value="Auto"/>
                                 </td>
-                                <td>May 1,2014
+                                <td><input type="text" class="table_input"  value="May 1,2014"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">ECB Tickets
                                 </td>
-                                <td>Need to Analyze judgement search to obtain info
+                                <td><input type="text" class="table_input"  value="Need to Analyze judgement search to obtain info"/>
                                 </td>
                                 <td>May 15,2014
                                 </td>
@@ -190,57 +190,58 @@
                             <tr class="font_14">
                                 <td class="judgment_search_td">ECB DOB Violations
                                 </td>
-                                <td>Auto
+                                <td><input type="text" class="table_input"  value="Auto"/>
                                 </td>
-                                <td>May 1,2014
+                                <td> <input type="text" class="table_input"  value="May 1,2014"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">PVB
                                 </td>
-                                <td>Auto
+                                <td><input type="text" class="table_input"  value="Auto"/>
                                 </td>
-                                <td>May 1,2014
+                                <td><input type="text" class="table_input"  value="May 1,2014"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">IRS Lien
                                 </td>
-                                <td>Need to Analyze judgement search to obtain info
+                                <td><input type="text" class="table_input"  value="Need to Analyze judgement search to obtain info"/>
                                 </td>
-                                <td>May 1,2014
+                                <td><input type="text" class="table_input"  value="May 1,2014"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">NYC Lien
                                 </td>
-                                <td>Need to Analyze judgement search to obtain info
+                                <td><input type="text" class="table_input"  value="Need to Analyze judgement search to obtain info"/>
                                 </td>
-                                <td>May 1,2014
+                                <td><input type="text" class="table_input"  value="May 1,2014"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">Add Federal Liens
                                 </td>
-                                <td>Need to Analyze judgement search to obtain info
+                                <td>
+                                    <input type="text" class="table_input"  value="Need to Analyze judgement search to obtain info"/>
                                 </td>
-                                <td>May 1,2014
+                                <td><input type="text" class="table_input"  value="May 1,2014"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">NYC Lien
                                 </td>
-                                <td>Need to Analyze judgement search to obtain info
+                                <td><input type="text" class="table_input"  value="Need to Analyze judgement search to obtain info"/>
                                 </td>
-                                <td>May 1,2014
+                                <td><input type="text" class="table_input"  value="May 1,2014"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">Add Criminal
                                 </td>
-                                <td>Need to Analyze judgement search to obtain info
+                                <td><input type="text" class="table_input"  value="Need to Analyze judgement search to obtain info"/>
                                 </td>
-                                <td>May 1,2014
+                                <td><input type="text" class="table_input"  value="May 1,2014"/>
                                 </td>
                             </tr>
                         </tbody>
