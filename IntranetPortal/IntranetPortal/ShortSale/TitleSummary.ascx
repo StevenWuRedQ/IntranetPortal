@@ -162,7 +162,7 @@
                         <table style="vertical-align: top;">
                             <tr>
                                 <td colspan="10">
-                                    <div style="max-width: 1570px; overflow: auto;height:450px" class="under_line_div ">
+                                    <div style="max-width: 1570px; overflow: auto; height: 450px" class="under_line_div ">
                                         <div class="clearfix" style="margin-bottom: 20px;">
                                             <h4>
                                                 <i class="fa fa-folder-open with_circle title_summary_icon" style=""></i><span class="heading_text2">Leads and Active Files</span>
@@ -180,50 +180,47 @@
                                             </div>
                                         </div>
                                         <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="6" KeyFieldName="CaseId">
-                                            
+
                                             <Styles>
                                                 <Row CssClass="summary_row">
-                                                   
                                                 </Row>
                                             </Styles>
                                             <Columns>
-                                             
                                                 <dx:GridViewDataTextColumn FieldName="PropertyInfo.StreetName" Caption="Street address">
-                                                  <DataItemTemplate>
-                                                      <div style="min-width:600px" class="font_black"> <%# Eval("PropertyInfo.StreetName")%></div>
-                                                  </DataItemTemplate>                                                 
+                                                    <DataItemTemplate>
+                                                        <div style="min-width: 600px" class="font_black"><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
+                                                    </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
-                                                 <dx:GridViewDataTextColumn FieldName="PropertyInfo.City" >                                                 
+                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.City">
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.State" >                                                 
-                                                </dx:GridViewDataTextColumn>
-                                                
-                                                <dx:GridViewDataTextColumn FieldName="OwnerLastName" Caption="Last Name">                                                 
-                                                </dx:GridViewDataTextColumn>
-                                               
-                                                 <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="File Progress" >                                                 
-                                                </dx:GridViewDataTextColumn>--%>
-                                                <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1nd Mortgage Progress" >                                                 
+                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.State">
                                                 </dx:GridViewDataTextColumn>
 
-                                                <dx:GridViewDataTextColumn FieldName="SencondMortageProgress" Caption="2nd Mortgage Progress" >                                                 
+                                                <dx:GridViewDataTextColumn FieldName="OwnerLastName" Caption="Last Name">
+                                                </dx:GridViewDataTextColumn>
+
+                                                <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="File Progress" >                                                 
+                                                </dx:GridViewDataTextColumn>--%>
+                                                <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1st Mortgage Progress">
+                                                </dx:GridViewDataTextColumn>
+
+                                                <dx:GridViewDataTextColumn FieldName="SencondMortageProgress" Caption="2nd Mortgage Progress">
                                                 </dx:GridViewDataTextColumn>
 
                                                 <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City"  Caption="Office Price">                                                 
                                                 </dx:GridViewDataTextColumn>--%>
 
-                                                <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">                                                 
+                                                <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">
                                                 </dx:GridViewDataTextColumn>
-                                                 <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name"  Caption="Listing agent">                                                 
+                                                <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name" Caption="Listing agent">
                                                 </dx:GridViewDataTextColumn>
-                                                 <dx:GridViewDataTextColumn FieldName="PropertyInfo.UpdateDate"  Caption="Last Activity">                                                 
+                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.UpdateDate" Caption="Last Activity">
                                                 </dx:GridViewDataTextColumn>
-                                               
+
                                                 <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="Next Task" >                                                 
                                                 </dx:GridViewDataTextColumn>--%>
-                                                
                                             </Columns>
-                                            
+
                                         </dx:ASPxGridView>
                                         <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
                                     </div>
@@ -286,7 +283,7 @@
                                 </td>
                                 <%--fix the disteance between the two grid by steven--%>
 
-                                <td style="width: 300px; vertical-align: top;" >
+                                <td style="width: 300px; vertical-align: top;">
                                     <%--add icon by steven--%>
                                     <h4>
                                         <i class="fa fa-exclamation-triangle with_circle title_summary_icon" style=""></i><span class="heading_text2">Urgent</span>
@@ -378,7 +375,7 @@
                                 </td>
                                 <td rowspan="5" style="width: 30px;"></td>
 
-                                <td style="width: 300px; vertical-align: top;" >
+                                <td style="width: 300px; vertical-align: top;">
                                     <%--add icon by steven--%>
                                     <h4>
                                         <i class="fa fa-check with_circle title_summary_icon" style=""></i><span class="heading_text2">Counter Offer</span>
@@ -789,7 +786,7 @@
                         </dx:PanelContent>
                     </PanelCollection>
                 </dx:ASPxCallbackPanel>
-                <i class="fa fa-plus-circle icon_btn" style="color: #999ca1; font-size: 24px;margin-left:20px" onclick="notesCallbackPanel.PerformCallback('Add')"></i>
+                <i class="fa fa-plus-circle icon_btn" style="color: #999ca1; font-size: 24px; margin-left: 20px" onclick="notesCallbackPanel.PerformCallback('Add')"></i>
             </div>
         </div>
     </div>

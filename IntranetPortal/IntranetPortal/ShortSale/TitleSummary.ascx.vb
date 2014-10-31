@@ -1,4 +1,5 @@
 ﻿Imports DevExpress.Web.ASPxGridView
+Imports IntranetPortal.ShortSale
 
 Public Class UCTitleSummary
     Inherits System.Web.UI.UserControl
@@ -19,6 +20,15 @@ Public Class UCTitleSummary
             End Using
         End Get
     End Property
+
+    Public Function GetAddress(ssCase As ShortSaleCase) As String
+        ' Return ssCase.PropertyInfo.StreetName
+        If ssCase IsNot Nothing Then
+            Dim shortsale = CType(ssCase, ShortSaleCase)
+            Return shortsale.PropertyInfo.StreetName
+        End If
+        Return "bad data"
+    End Function
 
     Public Property CurrentNote As New PortalNote
 
@@ -63,7 +73,7 @@ Public Class UCTitleSummary
             gridUpcomingApproval.DataSource = priorityData
             gridUpcomingApproval.DataBind()
 
-            
+
             ''Bind Appointment
             Dim leads = (From al In Context.Leads
                                          Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE

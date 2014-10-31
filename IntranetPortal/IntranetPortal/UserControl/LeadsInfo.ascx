@@ -7,8 +7,6 @@
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
 <%@ Register Src="~/PopupControl/EditHomeOwner.ascx" TagPrefix="uc1" TagName="EditHomeOwner" %>
 
-
-
 <script type="text/javascript">
     // <![CDATA[
     function OnClick(s, e) {

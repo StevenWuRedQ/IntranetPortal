@@ -37,8 +37,6 @@ Public Class LeadsEscalationRule
                                          Return ld.LastUpdate2 <= ld.AssignDate
                                      End Function, 2))
 
-
-
         Return rules
     End Function
 End Class
