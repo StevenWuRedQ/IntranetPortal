@@ -25,7 +25,7 @@ Public Class UCTitleSummary
         ' Return ssCase.PropertyInfo.StreetName
         If ssCase IsNot Nothing Then
             Dim shortsale = CType(ssCase, ShortSaleCase)
-            Return shortsale.PropertyInfo.StreetName
+            Return shortsale.PropertyInfo.PropertyAddress
         End If
         Return "bad data"
     End Function
@@ -65,14 +65,14 @@ Public Class UCTitleSummary
         Using Context As New Entities
 
             'Bind Urgent Data
-            gridUrgent.DataSource = ShortSale.ShortSaleSummary.GetUrgentCases()
-            gridUrgent.DataBind()
+            'gridUrgent.DataSource = ShortSale.ShortSaleSummary.GetUrgentCases()
+            'gridUrgent.DataBind()
 
             'Bind Priority Data
             Dim priorityData = ShortSale.ShortSaleSummary.GetUpcomingClosings()
             gridUpcomingApproval.DataSource = priorityData
             gridUpcomingApproval.DataBind()
-
+            'gridUpcomingApproval.GroupBy(gridUpcomingApproval.Columns("CreateDate"))
 
             ''Bind Appointment
             Dim leads = (From al In Context.Leads
@@ -230,7 +230,7 @@ Public Class UCTitleSummary
     End Function
 
 
-    Protected Sub gridAppointment_CustomColumnGroup(sender As Object, e As CustomColumnSortEventArgs) Handles gridUrgent.CustomColumnGroup, gridTask.CustomColumnGroup, gridCallback.CustomColumnGroup
+    Protected Sub gridAppointment_CustomColumnGroup(sender As Object, e As CustomColumnSortEventArgs) Handles gridTask.CustomColumnGroup, gridCallback.CustomColumnGroup
         If e.Column.FieldName = "ScheduleDate" Or e.Column.FieldName = "CallbackDate" Then
             Dim today = DateTime.Now.Date
             Dim day1 = CDate(e.Value1).Date
@@ -271,7 +271,7 @@ Public Class UCTitleSummary
         End If
     End Sub
 
-    Protected Sub gridAppointment_CustomColumnDisplayText(sender As Object, e As ASPxGridViewColumnDisplayTextEventArgs) Handles gridUrgent.CustomColumnDisplayText, gridTask.CustomColumnDisplayText, gridCallback.CustomColumnDisplayText
+    Protected Sub gridAppointment_CustomColumnDisplayText(sender As Object, e As ASPxGridViewColumnDisplayTextEventArgs) Handles gridTask.CustomColumnDisplayText, gridCallback.CustomColumnDisplayText
         If e.Column.FieldName = "ScheduleDate" Or e.Column.FieldName = "CallbackDate" Then
             e.DisplayText = GroupText(e.Value)
         End If

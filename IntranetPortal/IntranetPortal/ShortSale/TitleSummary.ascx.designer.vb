@@ -32,51 +32,6 @@ Partial Public Class UCTitleSummary
     Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
 
     '''<summary>
-    '''ExportExcel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ExportExcel As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''ExportPdf control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ExportPdf As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''AllLeadsGrid control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents AllLeadsGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-
-    '''<summary>
-    '''AllLeadGridViewExporter control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents AllLeadGridViewExporter As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
-
-    '''<summary>
-    '''gridUrgent control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents gridUrgent As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-
-    '''<summary>
     '''UrgentGrid control.
     '''</summary>
     '''<remarks>
@@ -147,6 +102,42 @@ Partial Public Class UCTitleSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridCallback As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''AllLeadsGrid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AllLeadsGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''AllLeadGridViewExporter control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AllLeadGridViewExporter As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+
+    '''<summary>
+    '''ExportExcel control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ExportExcel As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
+    '''ExportPdf control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ExportPdf As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
     '''notesCallbackPanel control.

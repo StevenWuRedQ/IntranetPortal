@@ -1556,6 +1556,9 @@
     <Content Include="PreviewFile.aspx" />
     <Content Include="Proiority\ActivityLog.aspx" />
     <Content Include="Proiority\Priority.aspx" />
+    <Content Include="scripts\angular-mocks.js" />
+    <Content Include="scripts\angular.js" />
+    <Content Include="scripts\angular.min.js" />
     <Content Include="scripts\bootstrap-datepicker.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
@@ -2222,6 +2225,7 @@
     <Content Include="pdfViewer\web\locale\zh-CN\viewer.properties" />
     <Content Include="pdfViewer\web\locale\zh-TW\viewer.properties" />
     <Content Include="pdfViewer\web\locale\zu\viewer.properties" />
+    <Content Include="scripts\angular.min.js.map" />
     <None Include="scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />

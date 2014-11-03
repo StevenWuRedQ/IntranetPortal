@@ -101,7 +101,7 @@
                     <ul class="ss_form_box clearfix">
 
                         <li class="ss_form_item ss_mortages_stauts">
-                            <label class="ss_form_input_title">Stuats</label>
+                            <label class="ss_form_input_title">Status</label>
                             <select class="ss_form_input " data-item="Status" data-item-type="1">
                                 <option value="NULL">NULL</option>
                                 <option value="Ready for Submission">Ready for Submission</option>

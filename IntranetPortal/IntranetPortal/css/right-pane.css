@@ -35,4 +35,5 @@
 	float: left;
 	height: 100%;
 	width: 290px;
+    box-shadow: 0 0px 30px -4px #999;
 }

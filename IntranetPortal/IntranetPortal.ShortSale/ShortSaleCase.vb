@@ -138,6 +138,7 @@ Partial Public Class ShortSaleCase
     Public ReadOnly Property FristMortageProgress As String
         Get
             Return GetMortageStauts(0)
+
         End Get
     End Property
     Public ReadOnly Property OwnerLastName As String
@@ -158,7 +159,24 @@ Partial Public Class ShortSaleCase
         End If
         Return Nothing
     End Function
+    Public ReadOnly Property FristMortageLender()
+        Get
+            Return GetMortageLonder(0)
+        End Get
+    End Property
+    Public ReadOnly Property SencondMortageLender()
+        Get
+            Return GetMortageLonder(1)
+        End Get
+    End Property
 
+    Function GetMortageLonder(ByVal index As Integer) As String
+        If (Mortgages IsNot Nothing AndAlso Mortgages.Count > index) Then
+
+            Return Mortgages(index).Lender
+        End If
+        Return Nothing
+    End Function
     Public ReadOnly Property SencondMortageProgress As String
         Get
             Return GetMortageStauts(1)
