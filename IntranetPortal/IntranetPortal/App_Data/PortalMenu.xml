@@ -388,45 +388,45 @@
         </Items>
       </PortalNavItem>
 
-      <PortalNavItem Name="Team-31-Management" Text="Gendin Team" NavigationUrl="#" ShowAmount="true" ItemType="Manager">
+      <PortalNavItem Name="Office-GendinTeam-Management" Text="Gendin Team" NavigationUrl="#" ShowAmount="true" ItemType="Manager">
         <UserRoles>OfficeManager-Patchen</UserRoles>
         <Items>
-          <PortalNavItem Name="Team-31-AssignLeads" Text="Assign Leads" NavigationUrl="/Management/LeadsManagement.aspx?mgr=31" ShowAmount="true">
+          <PortalNavItem Name="Office-GendinTeam-AssignLeads" Text="Assign Leads" NavigationUrl="/Management/LeadsManagement.aspx?office=GendinTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[<i class="fa fa-check-square-o"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-31-NewLeads" Text="New Leads" NavigationUrl="/MgrViewLeads.aspx?c=New Leads&amp;mgr=31" ShowAmount="true">
+          <PortalNavItem Name="Office-GendinTeam-NewLeads" Text="New Leads" NavigationUrl="/MgrViewLeads.aspx?c=New Leads&amp;o=GendinTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[ <i class="fa fa-star"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-31-HotLeads" Text="Hot Leads" NavigationUrl="/MgrViewLeads.aspx?c=Priority&amp;mgr=31" ShowAmount="true">
+          <PortalNavItem Name="Office-GendinTeam-HotLeads" Text="Hot Leads" NavigationUrl="/MgrViewLeads.aspx?c=Priority&amp;o=GendinTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[ <i class="fa fa-sun-o"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-31-FollowUp" Text="Follow Up" NavigationUrl="/MgrViewLeads.aspx?c=Call Back&amp;mgr=31" ShowAmount="true">
+          <PortalNavItem Name="Office-GendinTeam-FollowUp" Text="Follow Up" NavigationUrl="/MgrViewLeads.aspx?c=Call Back&amp;o=GendinTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[ <i class="fa fa-rotate-right"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-31-DoorKnock" Text="Door Knock" NavigationUrl="/MgrViewLeads.aspx?c=Door Knock&amp;mgr=31" ShowAmount="true">
+          <PortalNavItem Name="Office-GendinTeam-DoorKnock" Text="Door Knock" NavigationUrl="/MgrViewLeads.aspx?c=Door Knock&amp;o=GendinTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[ <i class="fa fa-sign-in"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-31-InProcess" Text="In Process" NavigationUrl="/MgrViewLeads.aspx?c=In Process&amp;mgr=31" ShowAmount="true">
+          <PortalNavItem Name="Office-GendinTeam-InProcess" Text="In Process" NavigationUrl="/MgrViewLeads.aspx?c=In Process&amp;o=GendinTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[ <i class="fa fa-refresh"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-31-DeadLead" Text="Dead Lead" NavigationUrl="/MgrViewLeads.aspx?c=Dead Lead&amp;mgr=31" ShowAmount="true">
+          <PortalNavItem Name="Office-GendinTeam-DeadLead" Text="Dead Lead" NavigationUrl="/MgrViewLeads.aspx?c=Dead Lead&amp;o=GendinTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[ <i class="fa fa-times-circle"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-31-Closed" Text="Closed" NavigationUrl="/MgrViewLeads.aspx?c=Closed&amp;mgr=31" ShowAmount="true">
+          <PortalNavItem Name="Office-GendinTeam-Closed" Text="Closed" NavigationUrl="/MgrViewLeads.aspx?c=Closed&amp;o=GendinTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[<i class="fa fa-check-circle"></i>]]>
             </FontClass>
@@ -434,45 +434,45 @@
         </Items>
       </PortalNavItem>
 
-      <PortalNavItem Name="Team-41-Management" Text="Ron Team" NavigationUrl="#" ShowAmount="true" ItemType="Manager">
+      <PortalNavItem Name="Office-RonTeam-Management" Text="Ron Team" NavigationUrl="#" ShowAmount="true" ItemType="Manager">
         <UserRoles>OfficeManager-Patchen</UserRoles>
         <Items>
-          <PortalNavItem Name="Team-41-AssignLeads" Text="Assign Leads" NavigationUrl="/Management/LeadsManagement.aspx?mgr=41" ShowAmount="true">
+          <PortalNavItem Name="Office-RonTeam-AssignLeads" Text="Assign Leads" NavigationUrl="/Management/LeadsManagement.aspx?office=RonTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[<i class="fa fa-check-square-o"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-41-NewLeads" Text="New Leads" NavigationUrl="/MgrViewLeads.aspx?c=New Leads&amp;mgr=41" ShowAmount="true">
+          <PortalNavItem Name="Office-RonTeam-NewLeads" Text="New Leads" NavigationUrl="/MgrViewLeads.aspx?c=New Leads&amp;o=RonTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[ <i class="fa fa-star"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-41-HotLeads" Text="Hot Leads" NavigationUrl="/MgrViewLeads.aspx?c=Priority&amp;mgr=41" ShowAmount="true">
+          <PortalNavItem Name="Office-RonTeam-HotLeads" Text="Hot Leads" NavigationUrl="/MgrViewLeads.aspx?c=Priority&amp;o=RonTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[ <i class="fa fa-sun-o"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-41-FollowUp" Text="Follow Up" NavigationUrl="/MgrViewLeads.aspx?c=Call Back&amp;mgr=41" ShowAmount="true">
+          <PortalNavItem Name="Office-RonTeam-FollowUp" Text="Follow Up" NavigationUrl="/MgrViewLeads.aspx?c=Call Back&amp;o=RonTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[ <i class="fa fa-rotate-right"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-41-DoorKnock" Text="Door Knock" NavigationUrl="/MgrViewLeads.aspx?c=Door Knock&amp;mgr=41" ShowAmount="true">
+          <PortalNavItem Name="Office-RonTeam-DoorKnock" Text="Door Knock" NavigationUrl="/MgrViewLeads.aspx?c=Door Knock&amp;o=RonTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[ <i class="fa fa-sign-in"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-41-InProcess" Text="In Process" NavigationUrl="/MgrViewLeads.aspx?c=In Process&amp;mgr=41" ShowAmount="true">
+          <PortalNavItem Name="Office-RonTeam-InProcess" Text="In Process" NavigationUrl="/MgrViewLeads.aspx?c=In Process&amp;o=RonTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[ <i class="fa fa-refresh"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-41-DeadLead" Text="Dead Lead" NavigationUrl="/MgrViewLeads.aspx?c=Dead Lead&amp;mgr=41" ShowAmount="true">
+          <PortalNavItem Name="Office-RonTeam-DeadLead" Text="Dead Lead" NavigationUrl="/MgrViewLeads.aspx?c=Dead Lead&amp;o=RonTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[ <i class="fa fa-times-circle"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="Team-41-Closed" Text="Closed" NavigationUrl="/MgrViewLeads.aspx?c=Closed&amp;mgr=41" ShowAmount="true">
+          <PortalNavItem Name="Office-RonTeam-Closed" Text="Closed" NavigationUrl="/MgrViewLeads.aspx?c=Closed&amp;o=RonTeam" ShowAmount="true">
             <FontClass>
               <![CDATA[<i class="fa fa-check-circle"></i>]]>
             </FontClass>

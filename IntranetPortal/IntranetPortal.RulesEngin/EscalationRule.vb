@@ -48,7 +48,7 @@ End Class
 
 Public Class EscalationRule
     Public Property Name As String
-    Public Property CreateDate As DateTime
+    Public Property StartDate As RuleStartDate
     Public Property EscalationAfter As TimeSpan
     Public Property Action As RuleAction
     Public Property Sequence As Integer
@@ -56,6 +56,7 @@ Public Class EscalationRule
 
     Public Delegate Sub RuleAction(objData As Object)
     Public Delegate Function RuleCondition(objData As Object) As Boolean
+    Public Delegate Function RuleStartDate(objedata As Object) As DateTime
 
     Public Sub New(name As String, escalationAfterTimeSpan As String, act As RuleAction)
         Me.Name = name
@@ -69,12 +70,27 @@ Public Class EscalationRule
         Me.Sequence = seq
     End Sub
 
+    Public Sub New(name As String, escalationAfterTimeSpan As String, act As RuleAction, condition As RuleCondition, seq As Integer, sDate As RuleStartDate)
+        Me.New(name, escalationAfterTimeSpan, act)
+        Me.Condition = condition
+        Me.Sequence = seq
+        Me.StartDate = sDate
+    End Sub
+
     Public Function IsDateDue(dt As DateTime) As Boolean
         Return WorkingHours.GetWorkingDays(dt, DateTime.Now) > EscalationAfter
     End Function
 
-    Public Sub Execute(objData As Object)
+    Public Function IsDateDue(dt As DateTime, objData As Object) As Boolean
+        If StartDate Is Nothing Then
+            Return IsDateDue(dt)
+        End If
 
+        dt = Me.StartDate(objData)
+        Return WorkingHours.GetWorkingDays(dt, DateTime.Now) > EscalationAfter
+    End Function
+
+    Public Sub Execute(objData As Object)
         If Condition IsNot Nothing Then
             If Condition(objData) Then
                 Action.Invoke(objData)
@@ -86,8 +102,3 @@ Public Class EscalationRule
     End Sub
 End Class
 
-Public Class WorkingHours
-    Public Shared Function GetWorkingDays(startDate As DateTime, endDate As DateTime) As TimeSpan
-        Return endDate - startDate
-    End Function
-End Class

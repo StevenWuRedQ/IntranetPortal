@@ -77,4 +77,13 @@ Public Class Form1
             Next
         End Using
     End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        MessageBox.Show(IntranetPortal.RulesEngine.WorkingHours.GetWorkingDays(startDt.Value, DateTime.Now).ToString)
+
+    End Sub
+
+    Private Sub DateTimePicker2_ValueChanged(sender As Object, e As EventArgs)
+
+    End Sub
 End Class

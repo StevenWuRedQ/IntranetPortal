@@ -282,6 +282,45 @@ Public Class ActivityLogs
         BindData(hfBBLE.Value)
     End Sub
 
+    Public Sub SetAsTask(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String)
+        Dim scheduleDate = DateTime.Now
+
+        If taskPriority = "Normal" Then
+            scheduleDate = scheduleDate.AddDays(3)
+        End If
+
+        If taskPriority = "Important" Then
+            scheduleDate = scheduleDate.AddDays(1)
+        End If
+
+        If taskPriority = "Urgent" Then
+            scheduleDate = scheduleDate.AddHours(2)
+        End If
+
+        Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Employees:</td>" &
+                                     "<td>{0}</td></tr>" &
+                                     "<tr><td>Action:</td><td>{1}</td></tr>" &
+                                     "<tr><td>Important:</td><td>{2}</td></tr>" &
+                                   "<tr><td>Description:</td><td>{3}</td></tr>" &
+                                   "</table>", employees, taskAction, taskPriority, taskDescription)
+
+        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
+
+        Using Context As New Entities
+            Context.UserTasks.Add(AddTask(hfBBLE.Value, employees, taskAction, taskPriority, scheduleDate, taskDescription, log.LogID, createUser))
+            Context.SaveChanges()
+        End Using
+
+        Dim emps = employees.Split(";").Distinct.ToArray
+        Dim ld = LeadsInfo.GetInstance(bble)
+        For i = 0 To emps.Count - 1
+            If Not emps(i) = createUser Then
+                Dim title = String.Format("A New Task has been assigned by {0}  regarding {1} for {2}", createUser, taskAction, ld.PropertyAddress)
+                UserMessage.AddNewMessage(emps(i), title, comments, bble)
+            End If
+        Next
+    End Sub
+
     Function GetCommentsIconClass(type As String)
         If String.IsNullOrEmpty(type) Then
             Return GetIcon("activity_green_bg", "fa fa-info")
@@ -295,6 +334,10 @@ Public Class ActivityLogs
     End Function
 
     Function AddTask(bble As String, name As String, action As String, important As String, schedule As Date, description As String, logid As Integer) As UserTask
+        Return AddTask(bble, name, action, important, schedule, description, logid, Page.User.Identity.Name)
+    End Function
+
+    Function AddTask(bble As String, name As String, action As String, important As String, schedule As Date, description As String, logid As Integer, createUser As String) As UserTask
 
         Dim task As New UserTask
         task.BBLE = bble
@@ -307,7 +350,7 @@ Public Class ActivityLogs
         task.Description = description
         task.Status = UserTask.TaskStatus.Active
         task.CreateDate = DateTime.Now
-        task.CreateBy = Page.User.Identity.Name
+        task.CreateBy = createUser
         task.LogID = logid
 
         Return task

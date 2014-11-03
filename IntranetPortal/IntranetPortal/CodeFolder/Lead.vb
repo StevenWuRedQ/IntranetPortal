@@ -80,7 +80,42 @@
                 End If
             End If
         End Using
-
     End Function
+
+    Public Sub ReAssignLeads(empName As String)
+        Dim emp = IntranetPortal.Employee.GetInstance(empName)
+
+        If emp IsNot Nothing Then
+            Dim originator = emp.Name
+            Using ctx As New Entities
+                Me.EmployeeID = emp.EmployeeID
+                Me.EmployeeName = emp.Name
+                Me.AssignDate = DateTime.Now
+                Me.LastUpdate = DateTime.Now
+
+                ctx.Entry(Me).State = Entity.EntityState.Modified
+                ctx.SaveChanges()
+
+                Dim comments = String.Format("Leads Reassign from {0} to {1}.", originator, empName)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, comments, BBLE, LeadsActivityLog.LogCategory.Status.ToString)
+            End Using
+        End If
+    End Sub
+
+    Public ReadOnly Property Task As UserTask
+        Get
+            Using ctx As New Entities
+                Return ctx.UserTasks.Where(Function(t) t.BBLE = BBLE And t.Status = UserTask.TaskStatus.Active).Take(0).FirstOrDefault
+            End Using
+        End Get
+    End Property
+
+    Public ReadOnly Property Appointment As UserAppointment
+        Get
+            Using ctx As New Entities
+                Return ctx.UserAppointments.Where(Function(t) t.BBLE = BBLE And t.Status = UserAppointment.AppointmentStatus.NewAppointment).Take(0).FirstOrDefault
+            End Using
+        End Get
+    End Property
 
 End Class
