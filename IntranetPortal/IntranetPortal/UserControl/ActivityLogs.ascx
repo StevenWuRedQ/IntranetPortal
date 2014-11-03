@@ -153,7 +153,7 @@
         if (typeof gridLeads != 'undefined')
             gridLeads.Refresh();
     }
-    
+
     function ResendTask(logID) {
         ASPxPopupSetAsTaskControl.PerformCallback("ResendTask|" + logID);
         ASPxPopupSetAsTaskControl.EndCallback.AddHandler(function (s, e) {
@@ -165,7 +165,7 @@
 
         //gridTrackingClient.PerformCallback("ResendTask|" + logID);
 
-      
+
     }
 
     function ApproveNewLead(logID) {
@@ -275,7 +275,7 @@
         }
         if (addDate == null)
             addDate = new Date();
-        
+
         addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + comments.value + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate").val());
     }
 
@@ -325,7 +325,7 @@
                                 <dx:ToolbarInsertUnorderedListButton></dx:ToolbarInsertUnorderedListButton>
                                 <dx:ToolbarIndentButton></dx:ToolbarIndentButton>
                                 <dx:ToolbarOutdentButton></dx:ToolbarOutdentButton>
-                                <dx:ToolbarBackColorButton></dx:ToolbarBackColorButton>                            
+                                <dx:ToolbarBackColorButton></dx:ToolbarBackColorButton>
                                 <dx:ToolbarFontColorButton></dx:ToolbarFontColorButton>
                                 <dx:ToolbarJustifyLeftButton></dx:ToolbarJustifyLeftButton>
                                 <dx:ToolbarJustifyCenterButton></dx:ToolbarJustifyCenterButton>
@@ -389,7 +389,7 @@
                 <div style="margin-top: 15px; float: right">
                     <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
                     <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this);ASPxPopupSetAsTaskControl.PerformCallback();"></i>
-                    <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Refresh" style="display:none"></i>
+                    <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Refresh" style="display: none"></i>
                 </div>
             </div>
         </div>
@@ -854,19 +854,26 @@
                             <dx:LayoutItem Caption="Description" ShowCaption="False" HorizontalAlign="Right">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                        <dx:ASPxButton ID="ASPxButton4" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                            <ClientSideEvents Click="function(){
+                                        <div class="row" style="margin-top: 87px;">
+                                            <div class="col-md-7">&nbsp;</div>
+                                            <div class="col-md-5">
+                                                <dx:ASPxButton ID="ASPxButton4" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                                    <ClientSideEvents Click="function(){
                                                                                                                         gridTrackingClient.PerformCallback('Task');
                                                                                                                         ASPxPopupSetAsTaskControl.Hide();                                                                                                                                                                                                                                         
                                                                                                                         }"></ClientSideEvents>
-                                        </dx:ASPxButton>
-                                        &nbsp;
+                                                </dx:ASPxButton>
+                                                &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSetAsTaskControl.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>
 
                                                             </dx:ASPxButton>
+                                            </div>
+
+                                        </div>
+
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
