@@ -69,7 +69,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activity.vb" />
+    <Compile Include="AssignLeadsRule.vb" />
     <Compile Include="EscalationRule.vb" />
     <Compile Include="LeadsEscalationRule.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

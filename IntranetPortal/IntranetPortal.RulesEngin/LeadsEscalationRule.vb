@@ -102,17 +102,17 @@ Public Class LeadsEscalationRule
                                        Return True
                                    End Function, 2))
 
-        rules.Add(New EscalationRule("HotLeads", "2.00:00:00",
-                                   Sub(leads)
-                                       Dim ld = CType(leads, Lead)
-                                       Dim emps = ld.EmployeeName & ";" & ld.Employee.Manager
-                                       Dim log As New ActivityLogs
-                                       log.SetAsTask(emps, "Urgent", "Doorknock Due", String.Format("The leads {0} need doorknock.", ld.LeadsName), ld.BBLE, "System")
-                                   End Sub,
-                                   Function(leads)
-                                       Dim ld = CType(leads, Lead)
-                                       Return ld.Task Is Nothing And ld.Appointment Is Nothing
-                                   End Function, 2))
+        'rules.Add(New EscalationRule("HotLeads", "2.00:00:00",
+        '                           Sub(leads)
+        '                               Dim ld = CType(leads, Lead)
+        '                               Dim emps = ld.EmployeeName & ";" & ld.Employee.Manager
+        '                               Dim log As New ActivityLogs
+        '                               log.SetAsTask(emps, "Urgent", "Doorknock Due", String.Format("The leads {0} need doorknock.", ld.LeadsName), ld.BBLE, "System")
+        '                           End Sub,
+        '                           Function(leads)
+        '                               Dim ld = CType(leads, Lead)
+        '                               Return ld.Task Is Nothing And ld.Appointment Is Nothing
+        '                           End Function, 2))
 
         rules.Add(New EscalationRule("HotLeads", "2.00:00:00",
                                    Sub(leads)
