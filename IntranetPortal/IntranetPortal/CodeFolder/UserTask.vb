@@ -64,6 +64,12 @@
         End Using
     End Sub
 
+    Public Shared Function GetActiveTasks() As List(Of UserTask)
+        Using ctx As New Entities
+            Return ctx.UserTasks.Where(Function(t) t.Status = TaskStatus.Active).ToList
+        End Using
+    End Function
+
     Public Shared Function GetTaskCount(empName As String, Optional userContext As HttpContext = Nothing) As Integer
         If userContext Is Nothing AndAlso HttpContext.Current IsNot Nothing Then
             userContext = HttpContext.Current

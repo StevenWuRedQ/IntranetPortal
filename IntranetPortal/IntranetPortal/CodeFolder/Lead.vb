@@ -44,11 +44,13 @@
         End Get
 
     End Property
+
     Public ReadOnly Property ReferrelName As String
         Get
             Return Me.LeadsInfo.ReferrelName
         End Get
     End Property
+
     Public Shared Function UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime) As Boolean
 
         Using Context As New Entities
@@ -79,6 +81,18 @@
                     'UserTask.AddUserTask(bble, empName, comments)
                 End If
             End If
+        End Using
+    End Function
+
+    Public Shared Function GetAllActiveLeads() As List(Of Lead)
+        Using ctx As New Entities
+            Dim emps = Employee.GetAllActiveEmps()
+
+            Dim results = (From ld In ctx.Leads
+                          Where emps.Contains(ld.EmployeeName) And (ld.Status <> LeadStatus.DeadEnd And ld.Status <> LeadStatus.InProcess)
+                          Select ld).ToList
+
+            Return results
         End Using
     End Function
 

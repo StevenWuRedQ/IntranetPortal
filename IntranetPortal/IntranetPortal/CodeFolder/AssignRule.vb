@@ -21,6 +21,11 @@
         End Get
     End Property
 
+    Public Shared Function GetAllRules() As List(Of AssignRule)
+        Using ctx As New Entities
+            Return ctx.AssignRules.ToList
+        End Using
+    End Function
 
     Public Sub Execute()
         Dim logdata = GetLogData(CType(IntervalType, RuleInterval))
