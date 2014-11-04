@@ -86,6 +86,24 @@ Partial Public Class LeadsManagement
     Protected WithEvents btnAssign As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
+    '''ASPxButton1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''popupAssignRules control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents popupAssignRules As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
     '''LeadsInfo control.
     '''</summary>
     '''<remarks>

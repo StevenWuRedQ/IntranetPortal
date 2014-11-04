@@ -2,6 +2,8 @@
 
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
+<%@ Register Src="~/UserControl/AssignRulesControl.ascx" TagPrefix="uc1" TagName="AssignRulesControl" %>
+
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
@@ -58,14 +60,14 @@
 
         }
 
-        function onInitScorllBar() {            
+        function onInitScorllBar() {
             $(".dxgvCSD").each(function (ind) {
                 var is_list = $(this).parents("#assign_leads_list").length > 0;
 
                 var ladfucntion = {
                     onScroll: function () {
                         var position = this.mcs.topPct;
-                        if (position > 90) {                            
+                        if (position > 90) {
                             gridLeads.NextPage();
                         }
                     }
@@ -178,7 +180,7 @@
                                 </Items>
                                 <ClientSideEvents ItemClick="OnChangeLeadsType" />
                             </dx:ASPxPopupMenu>
-                            <div style="overflow:hidden; height: 823px;" id="assign_leads_list">
+                            <div style="overflow: hidden; height: 823px;" id="assign_leads_list">
                                 <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsBehavior-AutoExpandAllGroups="True" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared">
                                     <Columns>
                                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
@@ -251,8 +253,18 @@
                             </dx:ASPxListBox>
                             <div style="margin-left: 10px; margin-top: 10px">
                                 <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" CssClass="rand-button rand-button-blue"></dx:ASPxButton>
+                                &nbsp;&nbsp;
+                                <dx:ASPxButton Text="Rules" runat="server" ID="ASPxButton1" CssClass="rand-button rand-button-blue" AutoPostBack="false">
+                                    <ClientSideEvents Click="function(s,e){popupAssignRules.Show();}" />
+                                </dx:ASPxButton>
                             </div>
                         </div>
+                        <dx:ASPxPopupControl ID="popupAssignRules" runat="server" ClientInstanceName="popupAssignRules"
+                            Width="630px" Height="700px" CloseAction="CloseButton" MaxWidth="800px" MinWidth="150px"
+                            HeaderText="Assign Leads Rules" Modal="true" AllowResize="true" ContentUrl="~/AssignLeadsRulesPage.aspx"
+                            EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">                          
+                        </dx:ASPxPopupControl>
+
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
@@ -262,12 +274,11 @@
                         <uc1:LeadsInfo runat="server" ID="LeadsInfo" />
                     </dx:SplitterContentControl>
                 </ContentCollection>
-            </dx:SplitterPane>         
+            </dx:SplitterPane>
         </Panes>
     </dx:ASPxSplitter>
     <dx:ASPxCallback runat="server" ID="updateLeadsType" ClientInstanceName="updateLeadsType" OnCallback="updateLeadsType_Callback">
         <ClientSideEvents EndCallback="function(){gridLeads.Refresh();}" />
     </dx:ASPxCallback>
-    
     <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 </asp:Content>

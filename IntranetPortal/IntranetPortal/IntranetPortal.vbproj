@@ -308,6 +308,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="App_Start\WebApiConfig.vb" />
+    <Compile Include="AssignLeadsRulesPage.aspx.designer.vb">
+      <DependentUpon>AssignLeadsRulesPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AssignLeadsRulesPage.aspx.vb">
+      <DependentUpon>AssignLeadsRulesPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="BingViewMap.aspx.designer.vb">
       <DependentUpon>BingViewMap.aspx</DependentUpon>
     </Compile>
@@ -317,6 +324,7 @@
     </Compile>
     <Compile Include="CodeFolder\Agent_Properties.vb" />
     <Compile Include="CodeFolder\APIOrder.vb" />
+    <Compile Include="CodeFolder\AssignRule.vb" />
     <Compile Include="CodeFolder\DataWCFService.vb" />
     <Compile Include="CodeFolder\Employee.vb" />
     <Compile Include="CodeFolder\EmployeeItemComparer.vb" />
@@ -362,6 +370,12 @@
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\APIOrder.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AssginRulesLog.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\AssignRule.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\BuildingCode.vb">
@@ -946,6 +960,13 @@
       <DependentUpon>ActivityLogs.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\AssignRulesControl.ascx.designer.vb">
+      <DependentUpon>AssignRulesControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\AssignRulesControl.ascx.vb">
+      <DependentUpon>AssignRulesControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControl\CompanyTree.ascx.designer.vb">
       <DependentUpon>CompanyTree.ascx</DependentUpon>
     </Compile>
@@ -1076,6 +1097,7 @@
     <Content Include="AgentOverview\AgentOverview.aspx" />
     <Content Include="App_Data\PortalMenu.xml" />
     <Content Include="App_Themes\PortalTheme2.dll" />
+    <Content Include="AssignLeadsRulesPage.aspx" />
     <Content Include="BingViewMap.aspx" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
@@ -2408,6 +2430,7 @@
     <Content Include="UploadFilePage.aspx" />
     <Content Include="OneDrive\UploadToOneDrive.aspx" />
     <Content Include="UserControl\ActivityLogs.ascx" />
+    <Content Include="UserControl\AssignRulesControl.ascx" />
     <Content Include="UserControl\Devexpress\CustomAppointmentForm.ascx" />
     <Content Include="UserControl\Devexpress\CustomVerticalAppointmentTemplate.ascx" />
     <Content Include="UserControl\Devexpress\CustomInplaceEditor.ascx" />

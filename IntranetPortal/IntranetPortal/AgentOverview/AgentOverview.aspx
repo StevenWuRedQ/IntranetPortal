@@ -186,9 +186,7 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-
-
-
+    
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" FullscreenMode="true">
         <Styles>
             <Pane Paddings-Padding="0">

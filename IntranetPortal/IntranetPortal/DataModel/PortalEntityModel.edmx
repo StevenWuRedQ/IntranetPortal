@@ -43,6 +43,31 @@
           <Property Name="OrderTime" Type="datetime" />
           <Property Name="Orderby" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="AssginRulesLogs">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogData" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeadsAmount" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="AssignRules">
+          <Key>
+            <PropertyRef Name="RuleId" />
+          </Key>
+          <Property Name="RuleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LeadsType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Count" Type="int" />
+          <Property Name="IntervalType" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="BuildingCodes">
           <Key>
             <PropertyRef Name="Code" />
@@ -486,6 +511,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
         <EntityContainer Name="IntranetPortalModelStoreContainer">
           <EntitySet Name="Agent_Properties" EntityType="Self.Agent_Properties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APIOrders" EntityType="Self.APIOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AssginRulesLogs" EntityType="Self.AssginRulesLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AssignRules" EntityType="Self.AssignRules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BuildingCodes" EntityType="Self.BuildingCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FileAttachments" EntityType="Self.FileAttachments" Schema="dbo" store:Type="Tables" />
@@ -577,6 +604,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="PropertyReferrels" EntityType="IntranetPortalModel.PropertyReferrel" />
           <EntitySet Name="LeadsMortgageDatas" EntityType="IntranetPortalModel.LeadsMortgageData" />
           <EntitySet Name="HomeOwnerAddresses" EntityType="IntranetPortalModel.HomeOwnerAddress" />
+          <EntitySet Name="AssginRulesLogs" EntityType="IntranetPortalModel.AssginRulesLog" />
+          <EntitySet Name="AssignRules" EntityType="IntranetPortalModel.AssignRule" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1122,6 +1151,31 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Source" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="AssginRulesLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogData" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeadsAmount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="AssignRule">
+          <Key>
+            <PropertyRef Name="RuleId" />
+          </Key>
+          <Property Name="RuleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LeadsType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="IntervalType" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1623,6 +1677,33 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
                 <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssginRulesLogs">
+            <EntityTypeMapping TypeName="IntranetPortalModel.AssginRulesLog">
+              <MappingFragment StoreEntitySet="AssginRulesLogs">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LeadsAmount" ColumnName="LeadsAmount" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="LogData" ColumnName="LogData" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssignRules">
+            <EntityTypeMapping TypeName="IntranetPortalModel.AssignRule">
+              <MappingFragment StoreEntitySet="AssignRules">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IntervalType" ColumnName="IntervalType" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="LeadsType" ColumnName="LeadsType" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="RuleId" ColumnName="RuleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

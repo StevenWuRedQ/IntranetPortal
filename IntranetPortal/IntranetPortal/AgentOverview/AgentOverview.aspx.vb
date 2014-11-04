@@ -61,7 +61,6 @@ Public Class AgentOverview
         Dim employeeID = CInt(parametersStrg.Split("|")(1))
         If (employeeID < 0) Then
             Return Employee.GetInstance(parametersStrg.Split("|")(2))
-
         End If
         Return Employee.GetInstance(employeeID)
     End Function
@@ -199,25 +198,26 @@ Public Class AgentOverview
     End Function
 
     Function GetEmpDataSource()
-        If User.IsInRole("Admin") Then
-            Return portalDataContext.Employees.Where(Function(em) em.Active = True).OrderBy(Function(em) em.Name).ToList
-        End If
+        Return Employee.GetMyEmployees(Page.User.Identity.Name)
+        'If User.IsInRole("Admin") Then
+        '    Return portalDataContext.Employees.Where(Function(em) em.Active = True).OrderBy(Function(em) em.Name).ToList
+        'End If
 
-        Dim emps As New List(Of Employee)
+        'Dim emps As New List(Of Employee)
 
-        Dim offices = "Bronx,Patchen,Queens,Rockaway"
+        'Dim offices = "Bronx,Patchen,Queens,Rockaway"
 
-        For Each office In offices.Split(",")
-            If User.IsInRole("OfficeManager-" & office) Then
-                emps.AddRange(Employee.GetDeptUsersList(office))
-            End If
-        Next
+        'For Each office In offices.Split(",")
+        '    If User.IsInRole("OfficeManager-" & office) Then
+        '        emps.AddRange(Employee.GetDeptUsersList(office))
+        '    End If
+        'Next
 
-        If Employee.HasSubordinates(User.Identity.Name) Then
-            emps.AddRange(Employee.GetManagedEmployeeList(User.Identity.Name))
-        End If
+        'If Employee.HasSubordinates(User.Identity.Name) Then
+        '    emps.AddRange(Employee.GetManagedEmployeeList(User.Identity.Name))
+        'End If
 
-        Return emps.Distinct(New EmployeeItemComparer()).OrderBy(Function(em) em.Name).ToList
+        'Return emps.Distinct(New EmployeeItemComparer()).OrderBy(Function(em) em.Name).ToList
     End Function
 
     Sub BindEmp()

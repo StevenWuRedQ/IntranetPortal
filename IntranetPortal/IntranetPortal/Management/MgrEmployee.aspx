@@ -1,6 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="MgrEmployee.aspx.vb" Inherits="IntranetPortal.MgrEmployee" %>
 
 <%@ Register Src="~/UserControl/CompanyTree.ascx" TagPrefix="uc1" TagName="CompanyTree" %>
+<%@ Register Src="~/UserControl/AssignRulesControl.ascx" TagPrefix="uc1" TagName="AssignRulesControl" %>
+
 
 <!DOCTYPE html>
 
@@ -249,23 +251,12 @@
                                                 </dx:PopupControlContentControl>
                                             </ContentCollection>
                                         </dx:ASPxPopupControl>
-
                                     </dx:PanelContent>
                                 </PanelCollection>
                             </dx:ASPxRoundPanel>
                         </dx:SplitterContentControl>
                     </ContentCollection>
-                </dx:SplitterPane>
-                <dx:SplitterPane>
-                    <PaneStyle Border-BorderStyle="None">
-                        <Border BorderStyle="None"></Border>
-                    </PaneStyle>
-                    <ContentCollection>
-                        <dx:SplitterContentControl runat="server">
-                            <div></div>
-                        </dx:SplitterContentControl>
-                    </ContentCollection>
-                </dx:SplitterPane>
+                </dx:SplitterPane>                             
             </Panes>
         </dx:ASPxSplitter>
     </form>
