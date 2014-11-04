@@ -1,6 +1,6 @@
 ﻿
 Public Class LeadsEscalationRule
-    Public Sub Execute(ld As Lead)
+    Public Shared Sub Execute(ld As Lead)
         For Each Rule In GetRule(ld)
             If Rule.IsDateDue(ld.LastUpdate2, ld) Then
                 Rule.Execute(ld)
@@ -9,7 +9,7 @@ Public Class LeadsEscalationRule
         Next
     End Sub
 
-    Private Function GetRule(ld As Lead) As List(Of EscalationRule)
+    Private Shared Function GetRule(ld As Lead) As List(Of EscalationRule)
         Return TaskRules.Where(Function(r) r.Name = CType(ld.Status, LeadStatus).ToString).OrderByDescending(Function(r) r.Sequence).ToList
     End Function
 
@@ -37,7 +37,7 @@ Public Class LeadsEscalationRule
                                          Return ld.LastUpdate2 <= ld.AssignDate
                                      End Function, 2))
 
-        rules.Add(New EscalationRule("CallBack", "24:00:00",
+        rules.Add(New EscalationRule("Callback", "24:00:00",
                                      Sub(leads)
                                          Dim ld = CType(leads, Lead)
                                          UserMessage.AddNewMessage(ld.EmployeeName, "You missed a Callback", String.Format("The Call back of Leads ({0}) need to hanlder. BBLE:{1}", ld.LeadsName, ld.BBLE), ld.BBLE)
@@ -51,7 +51,7 @@ Public Class LeadsEscalationRule
                                          Return ld.CallbackDate
                                      End Function))
 
-        rules.Add(New EscalationRule("CallBack", "2.00:00:00",
+        rules.Add(New EscalationRule("Callback", "2.00:00:00",
                                 Sub(leads)
                                     Dim ld = CType(leads, Lead)
                                     'generate Urgent Task and include Manager and Agent
@@ -68,7 +68,7 @@ Public Class LeadsEscalationRule
                                     Return ld.CallbackDate
                                 End Function))
 
-        rules.Add(New EscalationRule("CallBack", "3.00:00:00",
+        rules.Add(New EscalationRule("Callback", "3.00:00:00",
                                 Sub(leads)
                                     Dim ld = CType(leads, Lead)
                                     'generate Urgent Task and include Manager and Agent
@@ -83,7 +83,7 @@ Public Class LeadsEscalationRule
                                     Return ld.CallbackDate
                                 End Function))
 
-        rules.Add(New EscalationRule("Doorknock", "7.00:00:00",
+        rules.Add(New EscalationRule("DoorKnocks", "7.00:00:00",
                              Sub(leads)
                                  Dim ld = CType(leads, Lead)
                                  Dim emps = ld.EmployeeName & ";" & ld.Employee.Manager
@@ -93,7 +93,7 @@ Public Class LeadsEscalationRule
                                           Return True
                                       End Function, 1))
 
-        rules.Add(New EscalationRule("Doorknock", "10.00:00:00",
+        rules.Add(New EscalationRule("DoorKnocks", "10.00:00:00",
                           Sub(leads)
                               Dim ld = CType(leads, Lead)
                               ld.ReAssignLeads(ld.Employee.Department & " Office")
@@ -113,7 +113,7 @@ Public Class LeadsEscalationRule
         '                               Return ld.Task Is Nothing And ld.Appointment Is Nothing
         '                           End Function, 2))
 
-        rules.Add(New EscalationRule("HotLeads", "2.00:00:00",
+        rules.Add(New EscalationRule("Priority", "2.00:00:00",
                                    Sub(leads)
                                        Dim ld = CType(leads, Lead)
                                        Dim emps = ld.EmployeeName & ";" & ld.Employee.Manager
@@ -125,7 +125,7 @@ Public Class LeadsEscalationRule
                                        Return ld.Task Is Nothing And ld.Appointment Is Nothing
                                    End Function, 1))
 
-        rules.Add(New EscalationRule("HotLeads", "4.00:00:00",
+        rules.Add(New EscalationRule("Priority", "4.00:00:00",
                                Sub(leads)
                                    Dim ld = CType(leads, Lead)
                                    ld.ReAssignLeads(ld.Employee.Department & " Office")

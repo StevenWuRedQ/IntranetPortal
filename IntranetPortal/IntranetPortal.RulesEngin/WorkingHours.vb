@@ -27,7 +27,23 @@
         Return (endDate - startDate).Add(TimeSpan.Parse(dayCount & ".00:00:00"))
     End Function
 
-    Public Shared Function IsHoliday(startDate As DateTime) As Boolean
+    Private Shared Function IsHoliday(startDate As DateTime) As Boolean
         Return False
+    End Function
+
+    Public Shared Function IsWorkingHour(dt As DateTime) As Boolean
+        If dt.DayOfWeek = DayOfWeek.Sunday Or dt.DayOfWeek = DayOfWeek.Saturday Then
+            Return False
+        End If
+
+        If IsHoliday(dt) Then
+            Return False
+        End If
+
+        If dt.Hour > 18 Or dt.Hour < 9 Then
+            Return False
+        End If
+
+        Return True
     End Function
 End Class
