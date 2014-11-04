@@ -1,5 +1,4 @@
 ﻿
-
 Public Class LeadsEscalationRule
     Public Sub Execute(ld As Lead)
         For Each Rule In GetRule(ld)

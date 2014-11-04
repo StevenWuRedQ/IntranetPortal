@@ -199,31 +199,11 @@ Public Class AgentOverview
 
     Function GetEmpDataSource()
         Return Employee.GetMyEmployees(Page.User.Identity.Name)
-        'If User.IsInRole("Admin") Then
-        '    Return portalDataContext.Employees.Where(Function(em) em.Active = True).OrderBy(Function(em) em.Name).ToList
-        'End If
-
-        'Dim emps As New List(Of Employee)
-
-        'Dim offices = "Bronx,Patchen,Queens,Rockaway"
-
-        'For Each office In offices.Split(",")
-        '    If User.IsInRole("OfficeManager-" & office) Then
-        '        emps.AddRange(Employee.GetDeptUsersList(office))
-        '    End If
-        'Next
-
-        'If Employee.HasSubordinates(User.Identity.Name) Then
-        '    emps.AddRange(Employee.GetManagedEmployeeList(User.Identity.Name))
-        'End If
-
-        'Return emps.Distinct(New EmployeeItemComparer()).OrderBy(Function(em) em.Name).ToList
     End Function
 
     Sub BindEmp()
         Dim ds = GetEmpDataSource()
         gridEmps.DataSource = ds
-
     End Sub
 
     Sub BindGridReport()

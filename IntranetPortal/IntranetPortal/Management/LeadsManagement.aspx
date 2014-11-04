@@ -137,7 +137,6 @@
                         <div style="width: 100%; height: 100%; /*border: 1px solid gray; */ /*border-bottom: 1px solid gray; */">
                             <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px" class="clearfix">
                                 <div style="font-size: 24px;" class="clearfix">
-
                                     <span style="color: #234b60; font-size: 30px;">
                                         <dx:ASPxCheckBox runat="server" ID="chkAll">
                                             <ClientSideEvents CheckedChanged="function(s,e)
@@ -248,8 +247,7 @@
                                     <dx:ListEditItem Text="Alon Zeituny" Value="2" />
                                     <dx:ListEditItem Text="Andrea Taylor" Value="3" />
                                 </Items>
-                                <ItemStyle
-                                    CssClass="border_under_line" />
+                                <ItemStyle CssClass="border_under_line" />
                             </dx:ASPxListBox>
                             <div style="margin-left: 10px; margin-top: 10px">
                                 <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" CssClass="rand-button rand-button-blue"></dx:ASPxButton>
@@ -260,9 +258,14 @@
                             </div>
                         </div>
                         <dx:ASPxPopupControl ID="popupAssignRules" runat="server" ClientInstanceName="popupAssignRules"
-                            Width="630px" Height="700px" CloseAction="CloseButton" MaxWidth="800px" MinWidth="150px"
-                            HeaderText="Assign Leads Rules" Modal="true" AllowResize="true" ContentUrl="~/AssignLeadsRulesPage.aspx"
-                            EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">                          
+                            Width="630px" Height="700px" CloseAction="CloseButton" MaxWidth="800px" MinWidth="150px" ShowFooter="true"
+                            HeaderText="Assign Leads Rules" Modal="true" ContentUrl="~/AssignLeadsRulesPage.aspx"
+                            EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+                            <FooterContentTemplate>
+                                <div style="height: 30px; vertical-align: central">
+                                    <span class="time_buttons" onclick="popupAssignRules.Hide()">Close</span>                                  
+                                </div>
+                            </FooterContentTemplate>
                         </dx:ASPxPopupControl>
 
                     </dx:SplitterContentControl>

@@ -2,19 +2,21 @@
     Public Property rule As AssignRule
 
     Public Sub Execute()
-        Dim emp = Employee.GetInstance(rule.EmployeeName)
+        rule.Execute()
 
-        Using ctx As New Entities
-            Dim lds = ctx.Leads.Where(Function(li) li.EmployeeName = emp.Department & " Office").Take(rule.Count)
+        'Dim emp = Employee.GetInstance(rule.EmployeeName)
 
-            For Each ld In lds
-                ld.EmployeeID = emp.EmployeeID
-                ld.EmployeeName = emp.Name
-                ld.AssignDate = DateTime.Now
-                ld.AssignBy = "System"
-            Next
+        'Using ctx As New Entities
+        '    Dim lds = ctx.Leads.Where(Function(li) li.EmployeeName = emp.Department & " Office").Take(rule.Count)
 
-            ctx.SaveChanges()
-        End Using
+        '    For Each ld In lds
+        '        ld.EmployeeID = emp.EmployeeID
+        '        ld.EmployeeName = emp.Name
+        '        ld.AssignDate = DateTime.Now
+        '        ld.AssignBy = "System"
+        '    Next
+
+        '    ctx.SaveChanges()
+        'End Using
     End Sub
 End Class

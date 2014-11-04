@@ -24,8 +24,7 @@
 
         if (ShowEmail) {
             var attachFiles = txtAttachments.GetText();
-            if (attachFiles != "")
-            {
+            if (attachFiles != "") {
                 var attachments = JSON.parse(attachFiles);
                 var docIds = [];
                 for (var key in attachments) {
@@ -35,7 +34,7 @@
 
                 txtAttachments.SetText(docIds.toString());
             }
-            
+
             return;
         }
 
@@ -90,8 +89,8 @@
     }
 
     function BindAttachments() {
-       
-        }
+
+    }
 
     function ShowMailmessage(mailId) {
         ShowEmail = true;
@@ -126,7 +125,7 @@
         </div>
     </HeaderTemplate>
     <ContentCollection>
-        <dx:PopupControlContentControl runat="server" ID="PopupContentSendMail" Visible="false">          
+        <dx:PopupControlContentControl runat="server" ID="PopupContentSendMail" Visible="false">
             <div class="clearfix">
                 <table class="mail_edits">
                     <tr>
@@ -168,14 +167,12 @@
                     </tr>
                 </table>
                 <div style="margin-top: 10px" class="html_edit_div">
-                    <dx:ASPxHtmlEditor ID="EmailBody" runat="server" Height="300px" Width="100%">
-                        <Settings AllowHtmlView="false" AllowPreview="false" />
-                        
- <Settings AllowHtmlView="false" AllowPreview="false" AllowContextMenu="False" AllowInsertDirectImageUrls="false" />
+                    <dx:ASPxHtmlEditor ID="EmailBody" runat="server" Height="300px" Width="100%">                        
+                        <Settings AllowHtmlView="false" AllowPreview="false" AllowContextMenu="False" AllowInsertDirectImageUrls="false" />
                     </dx:ASPxHtmlEditor>
                 </div>
 
-                <div class="popup_btns">                  
+                <div class="popup_btns">
                     <input type="button" class="rand-button short_sale_edit bg_color_blue" value="Send" onclick="SendMail()" id="btnSend">
                     <input type="button" class="rand-button short_sale_edit" style="background: #77787b" value="Cancel" onclick="popupSendEmailClient.Hide()">
                 </div>
