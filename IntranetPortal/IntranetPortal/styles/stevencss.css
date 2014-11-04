@@ -1872,6 +1872,10 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 .bg_color_blue {
     background: #3993c1;
 }
+.bg_color_gray
+{
+    background: #77787b;
+}
 
 .input_files {
     margin: 0px;
@@ -1953,4 +1957,37 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
     width:100%;
 }
 
+.popup_menu_list_item
+{
+    border:0 !important;
+    cursor:pointer;
+}
+.popup_menu_list_item:hover
+{
+    background:#d9f1fd;
+}
 
+.popup_employee_list_item
+{
+    border-left:3px solid #eee !important;
+    cursor:default;
+    margin-left: 18px;
+    color:#77787b;
+}
+.popup_employee_list_item:hover
+{
+    color:white;
+    background:#ff400d;
+}
+.detail_right
+{
+    margin-left:20px;
+}
+tr.vendor_info
+{
+    font-size: 14px ;
+}
+td.vendor_info_left
+{
+    text-align: right; color: #b1b2b7;
+}

@@ -355,9 +355,10 @@
                     <div <%= If(DispalyMode = ActivityLogMode.Leads, "style='display:none'", "")%>>
                         <div class="color_gray upcase_text">Type of update</div>
                         <select class="select_bootstrap select_margin" id="selType1">
-                            <option>Document Request</option>
-                            <option>Type 2 </option>
-                            <option>Type 3</option>
+                            <option>Documents Request</option>
+                            <option>Lookup Request</option>
+                            <option>Incentive Offer Needed</option>
+                            
                         </select>
 
                         <div class="color_gray upcase_text">Status Update</div>

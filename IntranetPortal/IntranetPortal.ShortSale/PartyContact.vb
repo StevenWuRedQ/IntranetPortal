@@ -9,7 +9,11 @@ Partial Public Class PartyContact
     Public Sub New()
 
     End Sub
-
+    Public Shared Function getAllContact() As List(Of PartyContact)
+        Using context As New ShortSaleEntities
+            Return context.PartyContacts.ToList
+        End Using
+    End Function
     Public Sub New(contactName As String, contactNumber As String, contactEmail As String)
         Me.Name = contactName
         Me.OfficeNO = contactNumber

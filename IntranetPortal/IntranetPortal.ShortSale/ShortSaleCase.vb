@@ -177,6 +177,7 @@ Partial Public Class ShortSaleCase
         End If
         Return Nothing
     End Function
+    
     Public ReadOnly Property SencondMortageProgress As String
         Get
             Return GetMortageStauts(1)

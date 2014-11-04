@@ -322,6 +322,13 @@
       <DependentUpon>BingViewMap.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="CallBackSevices.aspx.designer.vb">
+      <DependentUpon>CallBackSevices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CallBackSevices.aspx.vb">
+      <DependentUpon>CallBackSevices.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="CodeFolder\Agent_Properties.vb" />
     <Compile Include="CodeFolder\APIOrder.vb" />
     <Compile Include="CodeFolder\AssignRule.vb" />
@@ -763,6 +770,20 @@
       <DependentUpon>ShareLeads.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="PopupControl\testPopup.aspx.designer.vb">
+      <DependentUpon>testPopup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\testPopup.aspx.vb">
+      <DependentUpon>testPopup.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="PopupControl\VendorsPopup.ascx.designer.vb">
+      <DependentUpon>VendorsPopup.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\VendorsPopup.ascx.vb">
+      <DependentUpon>VendorsPopup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="PopupControl\WhileAwayMsgs.aspx.designer.vb">
       <DependentUpon>WhileAwayMsgs.aspx</DependentUpon>
     </Compile>
@@ -1099,6 +1120,7 @@
     <Content Include="App_Themes\PortalTheme2.dll" />
     <Content Include="AssignLeadsRulesPage.aspx" />
     <Content Include="BingViewMap.aspx" />
+    <Content Include="CallBackSevices.aspx" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
     <Content Include="Content\bootstrap-responsive.css" />
@@ -1574,6 +1596,8 @@
     <Content Include="PopupControl\SendMail.ascx" />
     <Content Include="PopupControl\SendMail.aspx" />
     <Content Include="PopupControl\ShareLeads.aspx" />
+    <Content Include="PopupControl\testPopup.aspx" />
+    <Content Include="PopupControl\VendorsPopup.ascx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
     <Content Include="PreviewFile.aspx" />
     <Content Include="Proiority\ActivityLog.aspx" />
@@ -2321,6 +2345,7 @@
     <Content Include="scripts\locales\bootstrap-datepicker.zh-CN.js" />
     <Content Include="scripts\locales\bootstrap-datepicker.zh-TW.js" />
     <Content Include="scripts\mindmup-editabletable.js" />
+    <Content Include="scripts\PortalApp.js" />
     <Content Include="scripts\PortalMessager.js" />
     <Content Include="scripts\prototype.js" />
     <Content Include="fonts\fontawesome-webfont.eot" />
