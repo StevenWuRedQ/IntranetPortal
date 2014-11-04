@@ -137,8 +137,7 @@
                 });
             }
 
-            for (var i = 0; i < files.length; i++) {
-                AppendFileToTable(files[i]);
+            for (var i = 0; i < files.length; i++) {                             
                 var file = files[i];
                 if ('name' in file) {
                     var fileName = file.name;
@@ -146,12 +145,15 @@
                 else {
                     var fileName = file.fileName;
                 }
-                formFiles[fileName] = file;
-
-                //if (tests.formdata)
-                //{
-                //    formData.append('file', files[i]);
-                //}               
+                if (formFiles[fileName] != null)
+                {
+                    formFiles[fileName] = file;
+                }
+                else
+                {
+                    formFiles[fileName] = file;
+                    AppendFileToTable(files[i]);
+                }              
             }
         }
 
@@ -365,23 +367,18 @@
                                 <dx:ASPxUploadControl ID="uplImage" AdvancedModeSettings-EnableMultiSelect="true" runat="server" ClientInstanceName="uploader" CssClass="email_input input_files" NullText="Click here to browse files..." Size="35" Width="10%">
                                     <ValidationSettings MaxFileSize="4194304">
                                     </ValidationSettings>
+                                    <ClientSideEvents TextChanged="function(s,e){if(s.GetText()!=''){OnAddFileButtonClick();}}" />
                                 </dx:ASPxUploadControl>
                             </td>
                             <td>
                                 <a class="dxucButton_MetropolisBlue1" style="font-size: 16px; padding-left: 20px; color: #3993c1" href="javascript:" onclick="OnAddFileButtonClick()">Add</a>
                             </td>
                         </tr>
-
-                    </table>
-
-
+                    </table> 
                     <dx:ASPxHiddenField runat="server" ID="hfBBLE" ClientInstanceName="hfBBLEClient"></dx:ASPxHiddenField>
                     <asp:HiddenField runat="server" ID="hfBBLEData" />
                 </td>
-
             </tr>
-
-
             <tr>
                 <td>
                     <span class="color_gray" style="line-height: 50px;">Or... Simply drag your documents from your computer on to this drop zone:
