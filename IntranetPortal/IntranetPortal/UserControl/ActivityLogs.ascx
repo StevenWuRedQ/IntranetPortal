@@ -284,16 +284,16 @@
             InsertNewComments();
         }
     }
-
+    var filter_popup_show = false;
     function clickfilterBtn(e) {
         
-        if (!popupFilterControl.GetVisible()) {
+        if (!filter_popup_show) {
             popupFilterControl.ShowAtElement(e);
-            popupFilterControl.SetVisible(true);
+            filter_popup_show = true;
             return;
         }
         popupFilterControl.Hide();
-        popupFilterControl.SetVisible(false);
+        filter_popup_show = false;
     }
     // ]]>
 </script>
