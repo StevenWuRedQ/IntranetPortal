@@ -181,7 +181,8 @@
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
-                                                        <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
+                                                        <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'>
+                                                        <%# HtmlBlackInfo(Eval("CaseName"))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
@@ -249,20 +250,20 @@
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
                                                     <GroupRowTemplate>
-                                                        <div >
+                                                        <div>
                                                             <table>
                                                                 <tr>
-                                                                  <td><img src="../images/grid_call_backs_canlender.png"/></td>
-                                                                <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
-                                                                <td style="padding-left: 10px">
-                                                                    <div  class="raund-label">
-                                                                     <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                    </div>
-                                                                </td>
-                                                            <%--the round div--%>
-                                    
+                                                                    <td>
+                                                                        <img src="../images/grid_call_backs_canlender.png" /></td>
+                                                                    <td style="font-weight: 900; width: 80px; text-align: center;">Date: <%# Container.GroupText%></td>
+                                                                    <td style="padding-left: 10px">
+                                                                        <div class="raund-label">
+                                                                            <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
+                                                                        </div>
+                                                                    </td>
+                                                                    <%--the round div--%>
                                                                 </tr>
-                                                                </table>
+                                                            </table>
                                                         </div>
                                                     </GroupRowTemplate>
                                                 </dx:GridViewDataTextColumn>
@@ -304,20 +305,20 @@
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
                                                     <GroupRowTemplate>
-                                                        <div >
+                                                        <div>
                                                             <table>
                                                                 <tr>
-                                                                  <td><img src="../images/grid_call_backs_canlender.png"/></td>
-                                                                <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
-                                                                <td style="padding-left: 10px">
-                                                                    <div  class="raund-label">
-                                                                     <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                    </div>
-                                                                </td>
-                                                            <%--the round div--%>
-                                    
+                                                                    <td>
+                                                                        <img src="../images/grid_call_backs_canlender.png" /></td>
+                                                                    <td style="font-weight: 900; width: 80px; text-align: center;">Date: <%# Container.GroupText%></td>
+                                                                    <td style="padding-left: 10px">
+                                                                        <div class="raund-label">
+                                                                            <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
+                                                                        </div>
+                                                                    </td>
+                                                                    <%--the round div--%>
                                                                 </tr>
-                                                                </table>
+                                                            </table>
                                                         </div>
                                                     </GroupRowTemplate>
                                                 </dx:GridViewDataTextColumn>
@@ -355,20 +356,20 @@
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
                                                     <GroupRowTemplate>
-                                                        <div >
+                                                        <div>
                                                             <table>
                                                                 <tr>
-                                                                  <td><img src="../images/grid_call_backs_canlender.png"/></td>
-                                                                <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
-                                                                <td style="padding-left: 10px">
-                                                                    <div  class="raund-label">
-                                                                     <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                    </div>
-                                                                </td>
-                                                            <%--the round div--%>
-                                    
+                                                                    <td>
+                                                                        <img src="../images/grid_call_backs_canlender.png" /></td>
+                                                                    <td style="font-weight: 900; width: 80px; text-align: center;">Date: <%# Container.GroupText%></td>
+                                                                    <td style="padding-left: 10px">
+                                                                        <div class="raund-label">
+                                                                            <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
+                                                                        </div>
+                                                                    </td>
+                                                                    <%--the round div--%>
                                                                 </tr>
-                                                                </table>
+                                                            </table>
                                                         </div>
                                                     </GroupRowTemplate>
                                                 </dx:GridViewDataTextColumn>
@@ -558,8 +559,8 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="10">
-                                    <div style="max-width: 1570px; ">
+                                <td colspan="10" style="border-bottom: 3px solid white">
+                                    <div style="max-width: 1570px;margin-right:30px;">
                                         <div class="clearfix" style="margin-bottom: 20px;">
                                             <h4 style="padding-top: 20px">
                                                 <i class="fa fa-folder-open with_circle title_summary_icon" style=""></i><span class="heading_text2"><%--Leads and Active--%> Files</span>
@@ -570,62 +571,62 @@
                                             <%--margin-top: -35px;--%>
                                             <div style="float: right; margin-top: -35px;" class="form-inline">
 
-                                                <input style="margin-right: 20px; width: 250px; height: 30px;" class="form-control" id="exampleInputEmail2" placeholder="Quik Search">
+                                                <input style="margin-right: 20px; width: 250px; height: 30px;" class="form-control" runat="server" id="QuickSearch" placeholder="Quik Search">
+                                                <asp:LinkButton ID="SearchBtn" OnClick="SearchBtn_Click" runat="server" Text='<i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-right: 20px"></i>'></asp:LinkButton>
 
-                                                <i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-right: 20px"></i>
                                                 <%-- <i class="fa fa-filter tooltip-examples icon_btn grid_buttons" style="margin-right: 40px"></i>--%>
                                                 <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" ></i>'></asp:LinkButton>
                                                 <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-pdf-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;"></i>'></asp:LinkButton>
+                                            </div>
+                                            <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="6" KeyFieldName="CaseId" Width="100%" Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300" ForeColor="#b1b2b7">
+                                                <Styles>
+
+                                                    <Row CssClass="summary_row">
+                                                    </Row>
+                                                </Styles>
+                                                <Columns>
+                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.StreetName" Caption="Street address" SortOrder="Ascending">
+                                                        <DataItemTemplate>
+                                                            <div style="cursor: pointer" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
+                                                        </DataItemTemplate>
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="Owner" Caption="Name">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1st Mortgage Progress">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FristMortageLender" Caption="Servicer (1st Mort)">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="SencondMortageProgress" Caption="2nd Mortgage Progress">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="SencondMortageLender" Caption="Servicer (2nd Mort)">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City"  Caption="Office Price">                                                 
+                                                </dx:GridViewDataTextColumn>--%>
+                                                    <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name" Caption="Listing agent">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.UpdateDate" Caption="Last Activity">
+                                                        <DataItemTemplate>
+                                                            <%# GetLastActivity(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%>
+                                                        </DataItemTemplate>
+                                                    </dx:GridViewDataTextColumn>
+                                                    <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="Next Task" >                                                 
+                                                </dx:GridViewDataTextColumn>--%>
+                                                </Columns>
+                                                <Settings ShowFooter="True" ShowHeaderFilterButton="true" />
+                                                <SettingsPager>
+                                                    <PageSizeItemSettings Visible="true"></PageSizeItemSettings>
+                                                </SettingsPager>
+                                                <SettingsPopup>
+                                                    <HeaderFilter Height="200" />
+                                                </SettingsPopup>
+                                            </dx:ASPxGridView>
+                                            <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
+
                                         </div>
-                                        <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="6" KeyFieldName="CaseId"  Width="100%"  Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300" ForeColor="#b1b2b7">
-                                            <Styles>
-
-                                                <Row CssClass="summary_row">
-                                                </Row>
-                                            </Styles>
-                                            <Columns>
-                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.StreetName" Caption="Street address" SortOrder="Ascending">
-                                                    <DataItemTemplate>
-                                                        <div style="cursor: pointer" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
-                                                    </DataItemTemplate>
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="Owner" Caption="Name">
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1st Mortgage Progress">
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="FristMortageLender" Caption="Servicer (1st Mort)">
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="SencondMortageProgress" Caption="2nd Mortgage Progress">
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="SencondMortageLender" Caption="Servicer (2nd Mort)">
-                                                </dx:GridViewDataTextColumn>
-                                                <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City"  Caption="Office Price">                                                 
-                                                </dx:GridViewDataTextColumn>--%>
-                                                <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name" Caption="Listing agent">
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="PropertyInfo.UpdateDate" Caption="Last Activity">
-                                                    <DataItemTemplate>
-                                                        <%# GetLastActivity(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%>
-                                                        
-                                                    </DataItemTemplate>
-                                                </dx:GridViewDataTextColumn>
-                                                <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="Next Task" >                                                 
-                                                </dx:GridViewDataTextColumn>--%>
-                                            </Columns>
-                                            <Settings ShowFooter="True" ShowHeaderFilterButton="true" />
-                                            <SettingsPager>
-                                                <PageSizeItemSettings Visible="true"></PageSizeItemSettings>
-                                            </SettingsPager>
-                                            <SettingsPopup>
-                                                <HeaderFilter Height="200" />
-                                            </SettingsPopup>
-                                        </dx:ASPxGridView>
-                                        <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
-
                                     </div>
                                 </td>
                             </tr>

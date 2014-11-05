@@ -95,6 +95,24 @@ Partial Public Class UCTitleSummary
     Protected WithEvents gridCallback As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
+    '''QuickSearch control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents QuickSearch As Global.System.Web.UI.HtmlControls.HtmlInputText
+
+    '''<summary>
+    '''SearchBtn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SearchBtn As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''ExportExcel control.
     '''</summary>
     '''<remarks>
