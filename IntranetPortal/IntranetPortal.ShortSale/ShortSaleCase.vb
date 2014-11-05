@@ -30,6 +30,21 @@ Partial Public Class ShortSaleCase
         End Get
     End Property
 
+    Private _judgementInfo As TitleJudgementSearch
+    Public ReadOnly Property JudgementInfo
+        Get
+            If _judgementInfo Is Nothing Then
+                _judgementInfo = TitleJudgementSearch.GetInstance(CaseId)
+
+                If _judgementInfo Is Nothing Then
+                    _judgementInfo = New TitleJudgementSearch
+                End If
+            End If
+
+            Return _judgementInfo
+        End Get
+    End Property
+
     Private _mortgages As List(Of PropertyMortgage)
     Public ReadOnly Property Mortgages As List(Of PropertyMortgage)
         Get
@@ -267,6 +282,10 @@ Partial Public Class ShortSaleCase
                 _propInfo.Save()
             End If
 
+            If _judgementInfo IsNot Nothing Then
+                _judgementInfo.Save()
+            End If
+
             If _sellerTitle IsNot Nothing Then
                 _sellerTitle.CaseId = CaseId
                 _sellerTitle.Type = PropertyTitle.TitleType.Seller
@@ -287,7 +306,6 @@ Partial Public Class ShortSaleCase
                     opt.Save()
 
                 Next
-
             End If
 
         End Using
@@ -295,6 +313,12 @@ Partial Public Class ShortSaleCase
 
     Public Sub SaveStatus(status As CaseStatus)
         Me.Status = status
+        Save()
+    End Sub
+
+    Public Sub SaveFollowUp(dt As DateTime)
+        Me.Status = CaseStatus.FollowUp
+        Me.CallbackDate = dt
         Save()
     End Sub
 

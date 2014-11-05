@@ -123,6 +123,9 @@
     <Compile Include="ADOEntity\TitleClearence.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\TitleJudgementSearch.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="CleareneceNote.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -150,6 +153,7 @@
     <Compile Include="ShortSaleCaseComment.vb" />
     <Compile Include="ShortSaleSummary.vb" />
     <Compile Include="TitleClearence.vb" />
+    <Compile Include="TitleJudgementSearch.vb" />
     <Compile Include="Utility.vb" />
   </ItemGroup>
   <ItemGroup>

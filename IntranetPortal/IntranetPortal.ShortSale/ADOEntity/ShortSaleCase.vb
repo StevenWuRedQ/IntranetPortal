@@ -33,5 +33,6 @@ Partial Public Class ShortSaleCase
     Public Property UpdateBy As String
     Public Property Owner As String
     Public Property IsUrgent As Nullable(Of Boolean)
+    Public Property CallbackDate As Nullable(Of Date)
 
 End Class

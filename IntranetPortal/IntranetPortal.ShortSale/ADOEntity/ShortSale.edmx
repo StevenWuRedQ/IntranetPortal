@@ -213,6 +213,7 @@
           <Property Name="LockBoxCode" Type="nchar" MaxLength="5" />
           <Property Name="Owner" Type="nvarchar" MaxLength="50" />
           <Property Name="IsUrgent" Type="bit" />
+          <Property Name="CallbackDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
@@ -234,6 +235,36 @@
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
         </EntityType>
+        <EntityType Name="TitleJudgementSearch">
+          <Key>
+            <PropertyRef Name="JudgementId" />
+          </Key>
+          <Property Name="JudgementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaseId" Type="int" Nullable="false" />
+          <Property Name="RepairTax" Type="nvarchar" MaxLength="50" />
+          <Property Name="RepairTaxDate" Type="datetime" />
+          <Property Name="PropertyTax" Type="nvarchar" MaxLength="50" />
+          <Property Name="PropertyTaxDate" Type="datetime" />
+          <Property Name="OpenWater" Type="nvarchar" MaxLength="50" />
+          <Property Name="OpenWaterDate" Type="datetime" />
+          <Property Name="ECBTickets" Type="nvarchar" MaxLength="50" />
+          <Property Name="ECBTicketsDate" Type="datetime" />
+          <Property Name="DOBViolation" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOBViolationDate" Type="datetime" />
+          <Property Name="PVB" Type="nvarchar" MaxLength="50" />
+          <Property Name="PVBDate" Type="datetime" />
+          <Property Name="IRSLien" Type="nvarchar" MaxLength="50" />
+          <Property Name="IRSLienDate" Type="datetime" />
+          <Property Name="NYCLien" Type="nvarchar" MaxLength="50" />
+          <Property Name="NYCLienDate" Type="datetime" />
+          <Property Name="FederalLien" Type="nvarchar" MaxLength="50" />
+          <Property Name="FederalLienDate" Type="datetime" />
+          <Property Name="Criminal" Type="nvarchar" MaxLength="50" />
+          <Property Name="CriminalDate" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
         <EntityContainer Name="IntranetPortalModelStoreContainer">
           <EntitySet Name="CleareneceNotes" EntityType="Self.CleareneceNotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PartyContacts" EntityType="Self.PartyContacts" Schema="dbo" store:Type="Tables" />
@@ -246,6 +277,7 @@
           <EntitySet Name="ShortSaleCaseComments" EntityType="Self.ShortSaleCaseComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleCases" EntityType="Self.ShortSaleCases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleClearences" EntityType="Self.TitleClearences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TitleJudgementSearch" EntityType="Self.TitleJudgementSearch" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -263,6 +295,7 @@
           <EntitySet Name="PropertyBaseInfoes" EntityType="IntranetPortalModel.PropertyBaseInfo" />
           <EntitySet Name="ShortSaleCaseComments" EntityType="IntranetPortalModel.ShortSaleCaseComment" />
           <EntitySet Name="PropertyOccupants" EntityType="IntranetPortalModel.PropertyOccupant" />
+          <EntitySet Name="TitleJudgementSearches" EntityType="IntranetPortalModel.TitleJudgementSearch" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -409,6 +442,7 @@
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IsUrgent" Type="Boolean" />
+          <Property Name="CallbackDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>
@@ -490,6 +524,36 @@
           <Property Name="CourtDate" Type="DateTime" Precision="3" />
           <Property Name="StipDate" Type="DateTime" Precision="3" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="TitleJudgementSearch">
+          <Key>
+            <PropertyRef Name="JudgementId" />
+          </Key>
+          <Property Name="JudgementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseId" Type="Int32" Nullable="false" />
+          <Property Name="RepairTax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RepairTaxDate" Type="DateTime" Precision="3" />
+          <Property Name="PropertyTax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyTaxDate" Type="DateTime" Precision="3" />
+          <Property Name="OpenWater" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OpenWaterDate" Type="DateTime" Precision="3" />
+          <Property Name="ECBTickets" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ECBTicketsDate" Type="DateTime" Precision="3" />
+          <Property Name="DOBViolation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOBViolationDate" Type="DateTime" Precision="3" />
+          <Property Name="PVB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PVBDate" Type="DateTime" Precision="3" />
+          <Property Name="IRSLien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IRSLienDate" Type="DateTime" Precision="3" />
+          <Property Name="NYCLien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NYCLienDate" Type="DateTime" Precision="3" />
+          <Property Name="FederalLien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FederalLienDate" Type="DateTime" Precision="3" />
+          <Property Name="Criminal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CriminalDate" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
@@ -624,6 +688,7 @@
           <EntitySetMapping Name="ShortSaleCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCase">
               <MappingFragment StoreEntitySet="ShortSaleCases">
+                <ScalarProperty Name="CallbackDate" ColumnName="CallbackDate" />
                 <ScalarProperty Name="IsUrgent" ColumnName="IsUrgent" />
                 <ScalarProperty Name="Owner" ColumnName="Owner" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
@@ -733,6 +798,37 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CaseId" ColumnName="CaseId" />
                 <ScalarProperty Name="OccupantId" ColumnName="OccupantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TitleJudgementSearches">
+            <EntityTypeMapping TypeName="IntranetPortalModel.TitleJudgementSearch">
+              <MappingFragment StoreEntitySet="TitleJudgementSearch">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CriminalDate" ColumnName="CriminalDate" />
+                <ScalarProperty Name="Criminal" ColumnName="Criminal" />
+                <ScalarProperty Name="FederalLienDate" ColumnName="FederalLienDate" />
+                <ScalarProperty Name="FederalLien" ColumnName="FederalLien" />
+                <ScalarProperty Name="NYCLienDate" ColumnName="NYCLienDate" />
+                <ScalarProperty Name="NYCLien" ColumnName="NYCLien" />
+                <ScalarProperty Name="IRSLienDate" ColumnName="IRSLienDate" />
+                <ScalarProperty Name="IRSLien" ColumnName="IRSLien" />
+                <ScalarProperty Name="PVBDate" ColumnName="PVBDate" />
+                <ScalarProperty Name="PVB" ColumnName="PVB" />
+                <ScalarProperty Name="DOBViolationDate" ColumnName="DOBViolationDate" />
+                <ScalarProperty Name="DOBViolation" ColumnName="DOBViolation" />
+                <ScalarProperty Name="ECBTicketsDate" ColumnName="ECBTicketsDate" />
+                <ScalarProperty Name="ECBTickets" ColumnName="ECBTickets" />
+                <ScalarProperty Name="OpenWaterDate" ColumnName="OpenWaterDate" />
+                <ScalarProperty Name="OpenWater" ColumnName="OpenWater" />
+                <ScalarProperty Name="PropertyTaxDate" ColumnName="PropertyTaxDate" />
+                <ScalarProperty Name="PropertyTax" ColumnName="PropertyTax" />
+                <ScalarProperty Name="RepairTaxDate" ColumnName="RepairTaxDate" />
+                <ScalarProperty Name="RepairTax" ColumnName="RepairTax" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="JudgementId" ColumnName="JudgementId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
