@@ -286,9 +286,8 @@
     }
 
     function clickfilterBtn(e) {
-        
-        if (!popupFilterControl.GetVisible())
-        {
+
+        if (!popupFilterControl.GetVisible()) {
             popupFilterControl.ShowAtElement(e);
             popupFilterControl.SetVisible(true);
             return;
@@ -317,10 +316,10 @@
                     <span class="upcase_text">Public</span>
                 </label>
             </div>
-            <textarea title="Press CTRL+ENTER to submit." style=" display:none; border-radius: 5px; width: 100%; height:148px; border: 2px solid #dde0e7; padding: 5px; outline: none; resize: none;" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
-            <div class="html_edit_div" >
+            <textarea title="Press CTRL+ENTER to submit." style="display: none; border-radius: 5px; width: 100%; height: 148px; border: 2px solid #dde0e7; padding: 5px; outline: none; resize: none;" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
+            <div class="html_edit_div">
                 <dx:ASPxHtmlEditor ID="EmailBody2" runat="server" Height="148px" Width="100%" ClientInstanceName="EmailBody" OnLoad="EmailBody2_Load">
-                    <Settings AllowHtmlView="false" AllowPreview="false" />                   
+                    <Settings AllowHtmlView="false" AllowPreview="false" />
                 </dx:ASPxHtmlEditor>
             </div>
         </div>
@@ -347,8 +346,8 @@
                             <option>Title</option>
                             <option>Documents Request</option>
                             <option>Evictions</option>
-                                                     
-                            
+
+
                         </select>
 
                         <div class="color_gray upcase_text">Status Update</div>
@@ -377,7 +376,7 @@
                         </select>
                     </div>
                 </div>
-                <div style="margin-top: 15px; float: right;margin-right: 14px;">
+                <div style="margin-top: 15px; float: right; margin-right: 14px;">
                     <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
                     <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this);ASPxPopupSetAsTaskControl.PerformCallback();"></i>
                     <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Follow Up"></i>
@@ -711,7 +710,7 @@
             </ContentCollection>
         </dx:ASPxPopupControl>
 
-        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSetAsTaskControl" Width="500px" Height="420px" OnWindowCallback="ASPxPopupControl1_WindowCallback"
+        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSetAsTaskControl" Width="450px" Height="550px" OnWindowCallback="ASPxPopupControl1_WindowCallback"
             MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl1"
             HeaderText="Set as Task" Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -728,7 +727,7 @@
             </HeaderTemplate>
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentSetAsTask">
-                    <dx:ASPxFormLayout ID="taskFormlayout" runat="server" Width="100%">
+                    <dx:ASPxFormLayout ID="taskFormlayout" runat="server" Width="100%" Visible="false">
                         <Items>
                             <dx:LayoutItem Caption="Employees">
                                 <LayoutItemNestedControlCollection>
@@ -842,10 +841,11 @@
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
+
                             <dx:LayoutItem Caption="Description" ShowCaption="False" HorizontalAlign="Right">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                        <div class="row" style="margin-top: 87px;">
+                                        <%-- <div class="row" style="margin-top: 87px;">
                                             <div class="col-md-7">&nbsp;</div>
                                             <div class="col-md-5">
                                                 <dx:ASPxButton ID="ASPxButton4" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
@@ -863,13 +863,51 @@
                                                             </dx:ASPxButton>
                                             </div>
 
-                                        </div>
-
+                                        </div>--%>
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
                         </Items>
                     </dx:ASPxFormLayout>
+                    <div style="color: #b1b2b7; padding: 10px">
+                        <div class="form-group ">
+                            <label class="upcase_text">employees</label>
+                            <input class="form-control">
+                        </div>
+                        <div class="form-group ">
+                            <label class="upcase_text">Action</label>
+                            <input class="form-control">
+                        </div>
+                        <div class="form-group ">
+                            <label class="upcase_text">Importance</label>
+                            <input class="form-control">
+                        </div>
+                        <div class="form-group ">
+                            <label class="upcase_text" style="display: block">Description</label>
+                            <textarea class="edit_text_area" style="height: 115px"></textarea>
+                        </div>
+                        <div>
+                            <div class="row" style="margin-top: 33px;">
+                                <div class="col-md-7">&nbsp;</div>
+                                <div class="col-md-5">
+                                    <dx:ASPxButton ID="ASPxButton4" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                        <ClientSideEvents Click="function(){
+                                                                                                                        gridTrackingClient.PerformCallback('Task');
+                                                                                                                        ASPxPopupSetAsTaskControl.Hide();                                                                                                                                                                                                                                         
+                                                                                                                        }"></ClientSideEvents>
+                                    </dx:ASPxButton>
+                                    &nbsp;
+                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                                                <ClientSideEvents Click="function(){
+                                                                                                                        ASPxPopupSetAsTaskControl.Hide();                                                                                                                                                                                                                                               
+                                                                                                                        }"></ClientSideEvents>
+
+                                                            </dx:ASPxButton>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </dx:PopupControlContentControl>
             </ContentCollection>
         </dx:ASPxPopupControl>
