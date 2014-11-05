@@ -225,8 +225,6 @@ Public Class ActivityLogs
         End If
     End Sub
 
-
-
     Sub SetAsTask()
 
         Dim employees = Page.User.Identity.Name & ";" & empsDropDownEdit.Text

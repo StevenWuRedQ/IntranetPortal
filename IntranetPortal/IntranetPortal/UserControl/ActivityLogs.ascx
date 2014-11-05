@@ -334,7 +334,7 @@
                 <%-- 50px --%>
                 <div style="margin-top: 50px">
                     <div <%= If(DispalyMode = ActivityLogMode.ShortSale, "style='display:none'", "")%>>Date of Comment:</div>
-                    <div class="border_under_line" <%= If(DispalyMode = ActivityLogMode.ShortSale, "style='display:none'", "")%>>
+                    <div class="border_under_line"  <%= If(DispalyMode = ActivityLogMode.ShortSale, "style='display:none'", "style='height:80px'")%>>
                         <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
                     <div <%= If(DispalyMode = ActivityLogMode.Leads, "style='display:none'", "")%>>
@@ -347,7 +347,6 @@
                             <option>Documents Request</option>
                             <option>Evictions</option>
                         </select>
-
                         <div class="color_gray upcase_text">Status Update</div>
                         <select class="select_bootstrap select_margin" id="selStatusUpdate">
                             <option value="Ready for Submission">Ready for Submission</option>
@@ -377,7 +376,7 @@
                 <div style="margin-top: 15px; float: right; margin-right: 14px;">
                     <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
                     <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this);ASPxPopupSetAsTaskControl.PerformCallback();"></i>
-                    <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Follow Up"></i>
+                    <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
                 </div>
             </div>
         </div>

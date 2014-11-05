@@ -15,9 +15,33 @@ Public Class ShortSaleSubMenu
     Protected Sub statusCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         Dim status As ShortSale.CaseStatus
         If [Enum].TryParse(Of ShortSale.CaseStatus)(e.Parameter.Split("|")(0), status) Then
-            'Dim status = [Enum].Parse(GetType(ShortSale.CaseStatus), e.Parameter.Split("|")(0))
             Dim caseId = CInt(e.Parameter.Split("|")(1))
-            ShortSale.ShortSaleCase.GetCase(caseId).SaveStatus(status)
+            Dim ssCase = ShortSaleCase.GetCase(caseId)
+            Dim originStatus = CType(ssCase.Status, CaseStatus).ToString
+
+            If status = CaseStatus.FollowUp Then
+                Dim dt As DateTime
+                Dim objData = e.Parameter.Split("|")(2)
+                Select Case objData
+                    Case "Tomorrow"
+                        dt = DateTime.Now.AddDays(1)
+                    Case "NextWeek"
+                        dt = DateTime.Now.AddDays(7)
+                    Case "ThirtyDays"
+                        dt = DateTime.Now.AddDays(30)
+                    Case "SixtyDays"
+                        dt = DateTime.Now.AddDays(60)
+                    Case Else
+                        If Not DateTime.TryParse(objData, dt) Then
+                            dt = DateTime.Now.AddDays(7)
+                        End If
+                End Select
+                ssCase.SaveFollowUp(dt)
+            Else
+                ShortSale.ShortSaleCase.GetCase(caseId).SaveStatus(status)
+            End If
+
+            LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} change the case from {1} to {2}.", Page.User.Identity.Name, originStatus, status.ToString), ssCase.BBLE, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.UpdateInfo)
         End If
     End Sub
 

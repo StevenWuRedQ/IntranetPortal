@@ -140,24 +140,6 @@ Partial Public Class ShortSalePage
     Protected WithEvents DocumentsUI As Global.IntranetPortal.DocumentsUI
 
     '''<summary>
-    '''ASPxPopupMenu1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxPopupMenu1 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
-
-    '''<summary>
-    '''ASPxPopupMenu2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
-
-    '''<summary>
     '''SplitterContentControl4 control.
     '''</summary>
     '''<remarks>

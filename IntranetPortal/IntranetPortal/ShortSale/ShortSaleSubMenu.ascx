@@ -30,7 +30,12 @@
                 ShowPropertyMap(tmpBBLE);
             }
 
-            if (e.item.index > 0 && e.item.index <= 6) {
+            if (e.item.index == 1)
+            {
+                SaveStatus(e.item.name, tmpCaseId, "NextWeek");
+            }
+
+            if (e.item.index > 1 && e.item.index <= 6) {
                 SaveStatus(e.item.name, tmpCaseId);
             }
 
@@ -53,15 +58,15 @@
         }
     }
 
-    function LogClick(itemName) {
-
-        SaveStatus(itemName, ShortSaleCaseData.CaseId);
+    function LogClick(itemName, objData) {
+        SaveStatus(itemName, ShortSaleCaseData.CaseId, objData);
     }
-    function SaveStatus(status, caseId) {
+
+    function SaveStatus(status, caseId, objData) {
         if (caseStatusCallbackClient.InCallback()) {
             alert("Server is busy! Please wait!")
         } else {
-            caseStatusCallbackClient.PerformCallback(status + "|" + caseId);
+            caseStatusCallbackClient.PerformCallback(status + "|" + caseId + "|" + objData);
         }
     }
 

@@ -12,7 +12,18 @@
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script src="/scripts/stevenjs.js"></script>
+    <script type="text/javascript">
+        function OnCallbackMenuClick(s, e) {                       
+            if (e.item.name == "Custom") {
+                ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
+                e.processOnServer = false;
+                return;
+            }
 
+            LogClick("FollowUp",e.item.name);
+            e.processOnServer = false;
+        }
+    </script>
     <div style="background: url(/images/MyIdealProptery.png) no-repeat center fixed; background-size: 260px, 280px; background-color: #dddddd; width: 100%; height: 100%;">
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
@@ -101,43 +112,6 @@
                                                                         <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
                                                                     </div>
                                                                 </div>
-                                                                <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="ASPxPopupMenuPhone"
-                                                                    PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
-                                                                    PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
-                                                                    ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
-                                                                    <ItemStyle Paddings-PaddingLeft="20px" />
-                                                                    <Items>
-                                                                        <dx:MenuItem Text="Call Phone" Name="Call">
-                                                                        </dx:MenuItem>
-                                                                        <dx:MenuItem Text="# doesn't work" Name="nonWork">
-                                                                        </dx:MenuItem>
-                                                                        <dx:MenuItem Text="Working Phone number" Name="Work">
-                                                                        </dx:MenuItem>
-                                                                        <dx:MenuItem Text="Undo" Name="Undo">
-                                                                        </dx:MenuItem>
-                                                                    </Items>
-
-                                                                    <%--<ClientSideEvents ItemClick="OnPhoneNumberClick" />--%>
-                                                                </dx:ASPxPopupMenu>
-                                                                <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="AspxPopupMenuAddress"
-                                                                    ShowPopOutImages="false" AutoPostBack="false"
-                                                                    ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px"
-                                                                    PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
-                                                                    <ItemStyle Paddings-PaddingLeft="20px" />
-                                                                    <Items>
-                                                                        <dx:MenuItem Text="Door knock" Name="doorKnock">
-                                                                        </dx:MenuItem>
-                                                                        <dx:MenuItem Text="Wrong Property" Name="wrongProperty">
-                                                                        </dx:MenuItem>
-                                                                        <dx:MenuItem Text="Correct Property" Name="correctProperty">
-                                                                        </dx:MenuItem>
-                                                                        <dx:MenuItem Text="Undo" Name="Undo">
-                                                                        </dx:MenuItem>
-                                                                    </Items>
-
-                                                                    <%-- <ClientSideEvents ItemClick="OnAddressPopupMenuClick" />--%>
-                                                                </dx:ASPxPopupMenu>
-
                                                             </div>
                                                         </dx:SplitterContentControl>
                                                     </ContentCollection>
@@ -159,7 +133,7 @@
 
                                                                             <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                             <li style="margin-right: 30px; color: #7396a9; float: right">
-                                                                                <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="LogClick('FollowUp')"></i>
+                                                                                <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
                                                                                 <%-- <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>
                                                                                 <i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active Cases" onclick="LogClick('Active')"></i>
                                                                                 <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" onclick="LogClick('Eviction')"></i>--%>
@@ -177,15 +151,15 @@
                                                                         <ItemStyle Paddings-PaddingLeft="20px" />
                                                                         <Items>
                                                                             <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
-                                                                            <dx:MenuItem Text="Next Week" Name="nextWeek"></dx:MenuItem>
-                                                                            <dx:MenuItem Text="30 Days" Name="thirtyDays">
+                                                                            <dx:MenuItem Text="Next Week" Name="NextWeek"></dx:MenuItem>
+                                                                            <dx:MenuItem Text="30 Days" Name="ThirtyDays">
                                                                             </dx:MenuItem>
-                                                                            <dx:MenuItem Text="60 Days" Name="sixtyDays">
+                                                                            <dx:MenuItem Text="60 Days" Name="SixtyDays">
                                                                             </dx:MenuItem>
                                                                             <dx:MenuItem Text="Custom" Name="Custom">
                                                                             </dx:MenuItem>
                                                                         </Items>
-                                                                        <%--<ClientSideEvents ItemClick="OnCallbackMenuClick" />--%>
+                                                                        <ClientSideEvents ItemClick="OnCallbackMenuClick" />
                                                                     </dx:ASPxPopupMenu>
                                                                     <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="260px" Height="250px"
                                                                         MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="pcMain"
@@ -202,10 +176,10 @@
                                                                                         </tr>
                                                                                         <tr>
                                                                                             <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                                                                                <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" ClientSideEvents-Click="function(){ASPxPopupSelectDateControl.Hide();}" CssClass="rand-button rand-button-blue">
+                                                                                                <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
                                                                                                     <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                       
-                                                                                                                        SetLeadStatus('customDays');
+                                                                                                                        LogClick('FollowUp', callbackCalendar.GetSelectedDate().toLocaleString());
                                                                                                                         }"></ClientSideEvents>
                                                                                                 </dx:ASPxButton>
                                                                                                 &nbsp;
