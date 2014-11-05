@@ -1957,6 +1957,7 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
     background-color: transparent;
     border-style: solid;
     width: 100%;
+    font-size:14px;
 }
 
 .popup_menu_list_item {

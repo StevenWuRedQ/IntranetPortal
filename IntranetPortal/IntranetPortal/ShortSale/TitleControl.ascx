@@ -182,8 +182,8 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th class="table_head" style="text-align: right">Date Ran</th>
-                                <th>&nbsp;</th>
+                                <th class="table_head" style="text-align: right">&nbsp;</th>
+                                <th>Date Ran</th>
                                 <th class="table_head">AS of DATE</th>
                             </tr>
                         </thead>
@@ -191,90 +191,83 @@
                             <tr class="font_14">
                                 <td class="judgment_search_td">Emergency Repair Taxes
                                 </td>
-                                <td> <input type="text" class="table_input"  value="Auto"/>
+                                <td> <input type="text" class="ss_form_input table_input" data-field="JudgementInfo.RepairTax" placeholder="Click to input"/>
                                 </td>
-                                <td><input type="text" class="table_input"  value="May 1,2014"/>
+                                <td><input type="text" class="ss_form_input table_input ss_date" data-field="JudgementInfo.RepairTaxDate" placeholder="Click to select date"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">Open Property Taxes
                                 </td>
-                                <td><input type="text" class="table_input"  value="Auto"/>
+                                <td><input type="text" class="ss_form_input table_input" data-field="JudgementInfo.PropertyTax"  placeholder="Click to input"/>
                                 </td>
-                                <td><input type="text" class="table_input"  value="May 1,2014"/>
+                                <td><input type="text" class="ss_form_input table_input ss_date"  data-field="JudgementInfo.PropertyTaxDate" placeholder="Click to select date"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">Open Water
                                 </td>
-                                <td><input type="text" class="table_input"  value="Auto"/>
+                                <td><input type="text" class="ss_form_input table_input" data-field="JudgementInfo.OpenWater"  placeholder="Click to input"/>
                                 </td>
-                                <td><input type="text" class="table_input"  value="May 1,2014"/>
+                                <td><input type="text"class="ss_form_input table_input ss_date" data-field="JudgementInfo.OpenWaterDate" placeholder="Click to select date"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">ECB Tickets
                                 </td>
-                                <td><input type="text" class="table_input"  value="Need to Analyze judgement search to obtain info"/>
+                                <td><input type="text" class="ss_form_input table_input" data-field="JudgementInfo.ECBTickets" placeholder="Click to input"/>
                                 </td>
-                                <td>May 15,2014
+                                <td><input type="text"class="ss_form_input table_input ss_date" data-field="JudgementInfo.ECBTicketsDate"  placeholder="Click to select date"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">ECB DOB Violations
                                 </td>
-                                <td><input type="text" class="table_input"  value="Auto"/>
+                                <td><input type="text" class="ss_form_input table_input" data-field="JudgementInfo.DOBViolation" placeholder="Click to input"/>
                                 </td>
-                                <td> <input type="text" class="table_input"  value="May 1,2014"/>
+                                <td> <input type="text"class="ss_form_input table_input ss_date" data-field="JudgementInfo.DOBViolationDate" placeholder="Click to select date"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">PVB
                                 </td>
-                                <td><input type="text" class="table_input"  value="Auto"/>
+                                <td><input type="text" class="ss_form_input table_input" data-field="JudgementInfo.PVB" placeholder="Click to input"/>
                                 </td>
-                                <td><input type="text" class="table_input"  value="May 1,2014"/>
+                                <td><input type="text"class="ss_form_input table_input ss_date" data-field="JudgementInfo.PVBDate" placeholder="Click to select date"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">IRS Lien
                                 </td>
-                                <td><input type="text" class="table_input"  value="Need to Analyze judgement search to obtain info"/>
+                                <td><input type="text" class="ss_form_input table_input" data-field="JudgementInfo.IRSLien" placeholder="Click to input"/>
                                 </td>
-                                <td><input type="text" class="table_input"  value="May 1,2014"/>
+                                <td><input type="text"class="ss_form_input table_input ss_date" data-field="JudgementInfo.IRSLienDate" placeholder="Click to select date"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">NYC Lien
                                 </td>
-                                <td><input type="text" class="table_input"  value="Need to Analyze judgement search to obtain info"/>
+                                <td><input type="text" class="ss_form_input table_input" data-field="JudgementInfo.RepairTaxDate" placeholder="Click to input"/>
                                 </td>
-                                <td><input type="text" class="table_input"  value="May 1,2014"/>
+                                <td><input type="text"class="ss_form_input table_input ss_date" data-field="JudgementInfo.RepairTaxDate" placeholder="Click to select date"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
                                 <td class="judgment_search_td">Add Federal Liens
                                 </td>
                                 <td>
-                                    <input type="text" class="table_input"  value="Need to Analyze judgement search to obtain info"/>
+                                    <input type="text" class="ss_form_input table_input" data-field="JudgementInfo.FederalLien" placeholder="Click to input"/>
                                 </td>
-                                <td><input type="text" class="table_input"  value="May 1,2014"/>
-                                </td>
-                            </tr>
-                            <tr class="font_14">
-                                <td class="judgment_search_td">NYC Lien
-                                </td>
-                                <td><input type="text" class="table_input"  value="Need to Analyze judgement search to obtain info"/>
-                                </td>
-                                <td><input type="text" class="table_input"  value="May 1,2014"/>
+                                <td><input type="text"class="ss_form_input table_input ss_date" data-field="JudgementInfo.FederalLienDate" placeholder="Click to select date"/>
                                 </td>
                             </tr>
+                           
                             <tr class="font_14">
                                 <td class="judgment_search_td">Add Criminal
                                 </td>
-                                <td><input type="text" class="table_input"  value="Need to Analyze judgement search to obtain info"/>
+                                <td><input type="text" class="ss_form_input table_input" data-field="JudgementInfo.Criminal" placeholder="Click to input"/>
                                 </td>
-                                <td><input type="text" class="table_input"  value="May 1,2014"/>
+                                <td><input type="text"class="ss_form_input table_input ss_date" data-field="JudgementInfo.CriminalDate" placeholder="Click to select date"/>
                                 </td>
                             </tr>
                         </tbody>
