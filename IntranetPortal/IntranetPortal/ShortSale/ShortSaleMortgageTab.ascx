@@ -56,7 +56,7 @@
                 </li>
                <li class="ss_form_item">
                     <label class="ss_form_input_title">Last BPO completed on</label>
-                    <input class="ss_form_input ss_date" data-item="BPOconpleted" data-item-type="1">
+                    <input class="ss_form_input ss_date" data-item="LastBPOUpdate" data-item-type="1">
                 </li>
 
                 <li class="ss_form_item">
