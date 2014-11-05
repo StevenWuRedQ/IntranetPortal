@@ -286,7 +286,7 @@
     }
     var filter_popup_show = false;
     function clickfilterBtn(e) {
-        
+
         if (!filter_popup_show) {
             popupFilterControl.ShowAtElement(e);
             filter_popup_show = true;
@@ -316,10 +316,10 @@
                     <span class="upcase_text">Public</span>
                 </label>
             </div>
-            <textarea title="Press CTRL+ENTER to submit." style="display: none; border-radius: 5px; width: 100%; height: 148px; border: 2px solid #dde0e7; padding: 5px; outline: none; resize: none;" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
+            <textarea title="Press CTRL+ENTER to submit." class="edit_text_area" style="display: none; height: 148px;" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
             <div class="html_edit_div">
                 <dx:ASPxHtmlEditor ID="EmailBody2" runat="server" Height="148px" Width="100%" ClientInstanceName="EmailBody" OnLoad="EmailBody2_Load">
-                    <Settings AllowHtmlView="false" AllowPreview="false" />                   
+                    <Settings AllowHtmlView="false" AllowPreview="false" />
                 </dx:ASPxHtmlEditor>
             </div>
         </div>
@@ -725,164 +725,105 @@
             </HeaderTemplate>
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentSetAsTask">
-                    <dx:ASPxFormLayout ID="taskFormlayout" runat="server" Width="100%" Visible="false">
-                        <Items>
-                            <dx:LayoutItem Caption="Employees">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                        <dx:ASPxDropDownEdit ClientInstanceName="empCheckComboBox" ID="empsDropDownEdit" Width="100%" runat="server" AnimationType="None">
-                                            <DropDownWindowStyle BackColor="#EDEDED" />
-                                            <DropDownWindowTemplate>
-                                                <dx:ASPxPageControl runat="server" TabPosition="Bottom" Width="100%" ID="tabPageEmpSelect" ActiveTabIndex="1">
-                                                    <TabPages>
-                                                        <dx:TabPage Text="Recently" Name="tabRecent">
-                                                            <ContentCollection>
-                                                                <dx:ContentControl runat="server">
-                                                                    <dx:ASPxListBox Width="100%" ID="ASPxListBox1" Height="240px" ClientInstanceName="empRecentlyListbox" SelectionMode="CheckColumn"
-                                                                        runat="server">
-                                                                        <Items>
-                                                                            <dx:ListEditItem Text="Ron Borovinsky" Value="Ron Borovinsky" />
-                                                                            <dx:ListEditItem Text="Allen Glover" Value="Allen Glover" />
-                                                                        </Items>
-                                                                        <Border BorderStyle="None" />
-                                                                        <BorderBottom BorderStyle="Solid" BorderWidth="1px" BorderColor="#DCDCDC" />
-                                                                        <ClientSideEvents SelectedIndexChanged="OnEmpRecentlyComboBoxSelectionChanged" />
-                                                                    </dx:ASPxListBox>
-                                                                </dx:ContentControl>
-                                                            </ContentCollection>
-                                                        </dx:TabPage>
-                                                        <dx:TabPage Text="Employees" Name="tabRecent">
-                                                            <ContentCollection>
-                                                                <dx:ContentControl runat="server">
-                                                                    <table style="width: 100%">
-                                                                        <tr>
-                                                                            <td>
-                                                                                <dx:ASPxTextBox runat="server" ID="txtTaskEmpSearch" ClientInstanceName="txtTaskEmpSearchClient" Width="100%" NullText="Type Employees Name">
-                                                                                    <ClientSideEvents KeyDown="function(s,e){                                                                                                                                     
-                                                                                                                                        OnEmplistSearch(s.GetText());                                                                                                                                    
-                                                                                                                                    }" />
-
-                                                                                </dx:ASPxTextBox>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                    <dx:ASPxListBox Width="100%" ID="lbEmps" Height="220px" ClientInstanceName="empListBox" SelectionMode="CheckColumn" TextField="Name" ValueField="Name"
-                                                                        runat="server">
-                                                                        <Border BorderStyle="None" />
-                                                                        <BorderBottom BorderStyle="Solid" BorderWidth="1px" BorderColor="#DCDCDC" />
-                                                                        <ClientSideEvents SelectedIndexChanged="OnEmpComboBoxSelectionChanged" />
-                                                                    </dx:ASPxListBox>
-
-                                                                </dx:ContentControl>
-                                                            </ContentCollection>
-                                                        </dx:TabPage>
-                                                    </TabPages>
-                                                </dx:ASPxPageControl>
-                                                <div style="float: right; margin-top: -25px; display: block; margin-right: 3px;">
-                                                    <dx:ASPxButton ID="ASPxButton1" AutoPostBack="False" runat="server" Text="Close" Style="float: right" Paddings-Padding="0" CssClass="rand-button rand-button-gray">
-                                                        <ClientSideEvents Click="function(s, e){ empCheckComboBox.HideDropDown(); }" />
-                                                    </dx:ASPxButton>
-                                                </div>
-                                            </DropDownWindowTemplate>
-                                            <ClientSideEvents TextChanged="SynchronizeEmpListBoxValues" DropDown="SynchronizeEmpListBoxValues" />
-                                        </dx:ASPxDropDownEdit>
-
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-                            <dx:LayoutItem Caption="Action">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                        <dx:ASPxComboBox runat="server" Width="100%" DropDownStyle="DropDown" ID="cbTaskAction">
-                                            <Items>
-                                                <dx:ListEditItem Text="" Value="" />
-                                                <dx:ListEditItem Text="Documents Request" Value="Documents Request" />
-                                                <dx:ListEditItem Text="Lookup Request" Value="Lookup Request" />
-                                                <dx:ListEditItem Text="Incentive Offer Needed" Value="Incentive Offer Needed" />
-                                            </Items>
-                                        </dx:ASPxComboBox>
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-                            <dx:LayoutItem Caption="Importance">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server" Width="100%" SupportsDisabledAttribute="True">
-                                        <dx:ASPxComboBox runat="server" Width="100%" ID="cbTaskImportant">
-                                            <Items>
-                                                <dx:ListEditItem Text="Normal" Value="Normal" />
-                                                <dx:ListEditItem Text="Important" Value="Important" />
-                                                <dx:ListEditItem Text="Urgent" Value="Urgent" />
-                                            </Items>
-                                        </dx:ASPxComboBox>
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-                            <dx:LayoutItem Caption="Reminder" Visible="false">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                        <dx:ASPxComboBox runat="server" DropDownStyle="DropDown" ID="cbTaskSchedule" ClientInstanceName="cbTaskScheduleClient">
-                                            <Items>
-                                                <dx:ListEditItem Text="None" Value="None" />
-                                                <dx:ListEditItem Text="1 Day" Value="1 Day" />
-                                                <dx:ListEditItem Text="2 Day" Value="2 Day" />
-                                                <dx:ListEditItem Text="Custom" Value="Custom" />
-                                            </Items>
-                                            <ClientSideEvents SelectedIndexChanged="OnCbTaskScheduleSelectedIndexChanged" />
-                                        </dx:ASPxComboBox>
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-                            <dx:LayoutItem Caption="Description">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                        <dx:ASPxMemo runat="server" Width="100%" Height="80px" ID="txtTaskDes"></dx:ASPxMemo>
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-
-                            <dx:LayoutItem Caption="Description" ShowCaption="False" HorizontalAlign="Right">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                        <%-- <div class="row" style="margin-top: 87px;">
-                                            <div class="col-md-7">&nbsp;</div>
-                                            <div class="col-md-5">
-                                                <dx:ASPxButton ID="ASPxButton4" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                                    <ClientSideEvents Click="function(){
-                                                                                                                        gridTrackingClient.PerformCallback('Task');
-                                                                                                                        ASPxPopupSetAsTaskControl.Hide();                                                                                                                                                                                                                                         
-                                                                                                                        }"></ClientSideEvents>
-                                                </dx:ASPxButton>
-                                                &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
-                                                                <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupSetAsTaskControl.Hide();                                                                                                                                                                                                                                               
-                                                                                                                        }"></ClientSideEvents>
-
-                                                            </dx:ASPxButton>
-                                            </div>
-
-                                        </div>--%>
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-                        </Items>
-                    </dx:ASPxFormLayout>
+                   
                     <div style="color: #b1b2b7; padding: 10px">
                         <div class="form-group ">
                             <label class="upcase_text">employees</label>
-                            <input class="form-control">
+                            <dx:ASPxDropDownEdit ClientInstanceName="empCheckComboBox" ID="empsDropDownEdit" Width="100%" runat="server" CssClass="edit_drop" AnimationType="None">
+                                <DropDownWindowStyle BackColor="#EDEDED" />
+                                <DropDownWindowTemplate>
+                                    <dx:ASPxPageControl runat="server" TabPosition="Bottom" Width="100%" ID="tabPageEmpSelect" ActiveTabIndex="1">
+                                        <TabPages>
+                                            <dx:TabPage Text="Recently" Name="tabRecent">
+                                                <ContentCollection>
+                                                    <dx:ContentControl runat="server">
+                                                        <dx:ASPxListBox Width="100%" ID="ASPxListBox1" Height="240px" ClientInstanceName="empRecentlyListbox" SelectionMode="CheckColumn"
+                                                            runat="server">
+                                                            <Items>
+                                                                <dx:ListEditItem Text="Ron Borovinsky" Value="Ron Borovinsky" />
+                                                                <dx:ListEditItem Text="Allen Glover" Value="Allen Glover" />
+                                                            </Items>
+                                                            <Border BorderStyle="None" />
+                                                            <BorderBottom BorderStyle="Solid" BorderWidth="1px" BorderColor="#DCDCDC" />
+                                                            <ClientSideEvents SelectedIndexChanged="OnEmpRecentlyComboBoxSelectionChanged" />
+                                                        </dx:ASPxListBox>
+                                                    </dx:ContentControl>
+                                                </ContentCollection>
+                                            </dx:TabPage>
+                                            <dx:TabPage Text="Employees" Name="tabRecent">
+                                                <ContentCollection>
+                                                    <dx:ContentControl runat="server">
+                                                        <table style="width: 100%">
+                                                            <tr>
+                                                                <td>
+                                                                    <dx:ASPxTextBox runat="server" ID="txtTaskEmpSearch" ClientInstanceName="txtTaskEmpSearchClient" Width="100%" NullText="Type Employees Name">
+                                                                        <ClientSideEvents KeyDown="function(s,e){                                                                                                                                     
+                                                                                                                                        OnEmplistSearch(s.GetText());                                                                                                                                    
+                                                                                                                                    }" />
+
+                                                                    </dx:ASPxTextBox>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <dx:ASPxListBox Width="100%" ID="lbEmps" Height="220px" ClientInstanceName="empListBox" SelectionMode="CheckColumn" TextField="Name" ValueField="Name"
+                                                            runat="server">
+                                                            <Border BorderStyle="None" />
+                                                            <BorderBottom BorderStyle="Solid" BorderWidth="1px" BorderColor="#DCDCDC" />
+                                                            <ClientSideEvents SelectedIndexChanged="OnEmpComboBoxSelectionChanged" />
+                                                        </dx:ASPxListBox>
+
+                                                    </dx:ContentControl>
+                                                </ContentCollection>
+                                            </dx:TabPage>
+                                        </TabPages>
+                                    </dx:ASPxPageControl>
+                                    <div style="float: right; margin-top: -25px; display: block; margin-right: 3px;">
+                                        <dx:ASPxButton ID="ASPxButton1" AutoPostBack="False" runat="server" Text="Close" Style="float: right" Paddings-Padding="0" CssClass="rand-button rand-button-gray">
+                                            <ClientSideEvents Click="function(s, e){ empCheckComboBox.HideDropDown(); }" />
+                                        </dx:ASPxButton>
+                                    </div>
+                                </DropDownWindowTemplate>
+                                <ClientSideEvents TextChanged="SynchronizeEmpListBoxValues" DropDown="SynchronizeEmpListBoxValues" />
+                            </dx:ASPxDropDownEdit>
                         </div>
                         <div class="form-group ">
                             <label class="upcase_text">Action</label>
-                            <input class="form-control">
+                            <dx:ASPxComboBox runat="server" Width="100%" DropDownStyle="DropDown" ID="cbTaskAction" CssClass="edit_drop">
+                                <Items>
+                                    <dx:ListEditItem Text="" Value="" />
+                                    <dx:ListEditItem Text="Documents Request" Value="Documents Request" />
+                                    <dx:ListEditItem Text="Lookup Request" Value="Lookup Request" />
+                                    <dx:ListEditItem Text="Incentive Offer Needed" Value="Incentive Offer Needed" />
+                                </Items>
+                            </dx:ASPxComboBox>
                         </div>
                         <div class="form-group ">
                             <label class="upcase_text">Importance</label>
-                            <input class="form-control">
+                            <dx:ASPxComboBox runat="server" Width="100%" ID="cbTaskImportant" CssClass="edit_drop">
+                                <Items>
+                                    <dx:ListEditItem Text="Normal" Value="Normal" />
+                                    <dx:ListEditItem Text="Important" Value="Important" />
+                                    <dx:ListEditItem Text="Urgent" Value="Urgent" />
+                                </Items>
+                            </dx:ASPxComboBox>
+                        </div>
+
+                        <div class="form-group ">
+                            <label class="upcase_text">Reminder</label>
+                            <dx:ASPxComboBox runat="server" DropDownStyle="DropDown" ID="cbTaskSchedule" Width="100%" ClientInstanceName="cbTaskScheduleClient" CssClass="edit_drop">
+                                <Items>
+                                    <dx:ListEditItem Text="None" Value="None" />
+                                    <dx:ListEditItem Text="1 Day" Value="1 Day" />
+                                    <dx:ListEditItem Text="2 Day" Value="2 Day" />
+                                    <dx:ListEditItem Text="Custom" Value="Custom" />
+                                </Items>
+                                <ClientSideEvents SelectedIndexChanged="OnCbTaskScheduleSelectedIndexChanged" />
+                            </dx:ASPxComboBox>
                         </div>
                         <div class="form-group ">
                             <label class="upcase_text" style="display: block">Description</label>
-                            <textarea class="edit_text_area" style="height: 115px"></textarea>
+                            <dx:ASPxMemo runat="server" Width="100%" Height="115px" ID="txtTaskDes" CssClass="edit_text_area"></dx:ASPxMemo>
+                           <%-- <textarea class="edit_text_area" style="height: 115px"></textarea>--%>
                         </div>
                         <div>
                             <div class="row" style="margin-top: 33px;">

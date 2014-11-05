@@ -194,6 +194,15 @@ Partial Public Class ActivityLogs
     Protected WithEvents taskFormlayout As Global.DevExpress.Web.ASPxFormLayout.ASPxFormLayout
 
     '''<summary>
+    '''txtTaskDes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtTaskDes As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+
+    '''<summary>
     '''empsDropDownEdit control.
     '''</summary>
     '''<remarks>
@@ -228,15 +237,6 @@ Partial Public Class ActivityLogs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbTaskSchedule As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
-
-    '''<summary>
-    '''txtTaskDes control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtTaskDes As Global.DevExpress.Web.ASPxEditors.ASPxMemo
 
     '''<summary>
     '''ASPxButton4 control.

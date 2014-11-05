@@ -1998,12 +1998,21 @@ td.vendor_info_left {
 }
 
 .edit_text_area {
-    
     border-radius: 5px;
     width: 100%;
-    
     border: 2px solid #dde0e7;
     padding: 5px;
     outline: none;
     resize: none;
+}
+
+.edit_drop
+{
+    border:1px solid #dde0e7;
+    border-radius:5px;
+    padding:7px;
+}
+.edit_drop tbody tr td 
+{
+    border:none !important;
 }

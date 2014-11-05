@@ -28,7 +28,7 @@
                 <li class="ss_form_item ss_mortages_stauts">
                     <label class="ss_form_input_title">Status</label>
                     <select class="ss_form_input " data-item="Status" data-item-type="1">
-                        <option value="NULL">NULL</option>
+                        <option value="None">None</option>
                         <option value="Ready for Submission">Ready for Submission</option>
                         <option value="Pending Service Release">Pending Service Release</option>
                         <option value="Package Submitted">Package Submitted</option>

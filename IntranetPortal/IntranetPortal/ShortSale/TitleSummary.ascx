@@ -124,13 +124,11 @@
         border-bottom: 0px !important;
     }*/
 
-    td.dxgvIndentCell {
-        border-right: 3px Solid #dde0e7 !important;
-    }
+    
+    /*
 
-    td.under_line {
-        border-bottom: 3px solid #dde0e7;
-    }
+        */
+   
 
     td.grid_padding {
         padding-top: 20px;
