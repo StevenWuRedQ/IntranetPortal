@@ -48,13 +48,4 @@ Partial Public Class ShortSaleCaseList
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridCase As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-
-    '''<summary>
-    '''ShortSaleSubMenu control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ShortSaleSubMenu As Global.IntranetPortal.ShortSaleSubMenu
 End Class

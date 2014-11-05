@@ -100,6 +100,7 @@
           <Property Name="Fannie" Type="bit" />
           <Property Name="FHA" Type="bit" />
           <Property Name="Freddie" Type="bit" />
+          <Property Name="LastBPOUpdate" Type="datetime" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
@@ -211,6 +212,7 @@
           <Property Name="DateStarted" Type="datetime" />
           <Property Name="LockBoxCode" Type="nchar" MaxLength="5" />
           <Property Name="Owner" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsUrgent" Type="bit" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
@@ -333,6 +335,7 @@
           <Property Name="Fannie" Type="Boolean" />
           <Property Name="FHA" Type="Boolean" />
           <Property Name="Freddie" Type="Boolean" />
+          <Property Name="LastBPOUpdate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -405,6 +408,7 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsUrgent" Type="Boolean" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>
@@ -546,6 +550,7 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="LastBPOUpdate" ColumnName="LastBPOUpdate" />
                 <ScalarProperty Name="Freddie" ColumnName="Freddie" />
                 <ScalarProperty Name="FHA" ColumnName="FHA" />
                 <ScalarProperty Name="Fannie" ColumnName="Fannie" />
@@ -619,6 +624,7 @@
           <EntitySetMapping Name="ShortSaleCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCase">
               <MappingFragment StoreEntitySet="ShortSaleCases">
+                <ScalarProperty Name="IsUrgent" ColumnName="IsUrgent" />
                 <ScalarProperty Name="Owner" ColumnName="Owner" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />

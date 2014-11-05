@@ -40,10 +40,37 @@
         tmpClearenceId = clearenceId;
         aspxAddNotes.ShowAtElement(element);
     }
+
+    function MakeAsUrgent(caseId)
+    {
+        callbackMakeUrgent.PerformCallback(caseId);
+    }
+
+    function MakeUrgentComplate(result)
+    {
+        var span = document.getElementById("spanUrgent");
+        
+        if (result === "True")
+        {
+            span.className = "time_buttons Urgent";
+            span.innerText = "Urgent";
+        }
+        else
+        {
+            span.className = "time_buttons";
+            span.innerText = "Make As Urgent";
+        }
+    }
+
 </script>
 <style type="text/css">
     .TitleCleared .TitleContent {
         color: green;
+    }
+
+    .Urgent{
+        background-color:orangered;
+        color:white;
     }
 </style>
 <div style="padding-top: 5px">
@@ -54,8 +81,14 @@
                 <span>
                     <i class="fa fa-refresh"></i>
                     <span style="margin-left: 19px; font-weight: 300">Jun 9,2014 1:12PM</span>
-                </span>
-                <span class="time_buttons" style="margin-right: 30px; font-weight: 300;" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">Mark As Urgent</span>
+                </span>                
+                <span class="time_buttons" id="spanUrgent" style="margin-right: 30px; font-weight: 300;" onclick="MakeAsUrgent(<%=ShortSaleCaseData.CaseId%>)">
+                    <% If ShortSaleCaseData.IsUrgent.HasValue AndAlso ShortSaleCaseData.IsUrgent Then %>
+                        Urgent
+                    <%Else%>
+                        Mark As Urgent
+                    <%End If%>
+                </span>                
                 <span class="time_buttons">See Title Report</span>
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
@@ -365,72 +398,6 @@
     </div>
 </div>
 
-<%--<dx:ASPxPopupControl ClientInstanceName="ASPxPopupTitleControl" Width="700px" Height="420px" AllowDragging="true" DragElement="Header"
-    MaxWidth="800px" MinWidth="150px" ID="popupTitleControl" OnWindowCallback="popupTitleControl_WindowCallback"
-    HeaderText="Select Contact" Modal="true" ShowFooter="true" 
-    runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-    <ContentCollection>
-        <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentTitle">              
-            <dx:ASPxGridView runat="server" ID="gridTitleCompany" ClientInstanceName="gridTitleCompany" KeyFieldName="ContactId" OnDataBinding="titleCompanyGrid_DataBinding" Width="100%" OnRowInserting="gridTitleCompany_RowInserting">
-                <Columns>
-                    <dx:GridViewCommandColumn ShowSelectCheckbox="true" Caption="#"></dx:GridViewCommandColumn>
-                    <dx:GridViewDataTextColumn FieldName="CorpName" Caption="Company Name"></dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="Name" Caption="Contact"></dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="OfficeNO" Caption="Phone"></dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="Address"></dx:GridViewDataTextColumn>
-                </Columns>
-                <Templates>
-                    <EditForm>
-                        <div class="ss_form" style="margin-top: 0px;">
-                            <ul class="ss_form_box clearfix">
-                                <li class="ss_form_item">
-                                    <label class="ss_form_input_title">name</label>
-                                    <input class="ss_form_input" value="" runat="server" id="txtContact">
-                                </li>
-                                <li class="ss_form_item">
-                                    <label class="ss_form_input_title">Office</label>
-                                    <input class="ss_form_input" value="" runat="server" id="txtCompanyName">
-                                </li>
-                                <li class="ss_form_item">
-                                    <label class="ss_form_input_title">address</label>
-                                    <input class="ss_form_input" value="" runat="server" id="txtAddress">
-                                </li>
-                                <li class="ss_form_item">
-                                    <label class="ss_form_input_title">office #</label>
-                                    <input class="ss_form_input" value="" runat="server" id="txtOffice">
-                                </li>
-                                <li class="ss_form_item">
-                                    <label class="ss_form_input_title">Cell #</label>
-                                    <input class="ss_form_input" value="" runat="server" id="txtCell">
-                                </li>
-                                <li class="ss_form_item">
-                                    <label class="ss_form_input_title">email</label>
-                                    <input class="ss_form_input" value="" runat="server" id="txtEmail">
-                                </li>
-                            </ul>
-                        </div>
-                        <span class="time_buttons" onclick="gridTitleCompany.CancelEdit()">Cancel</span>
-                        <span class="time_buttons" onclick="AddNewCompany()">OK</span>
-                    </EditForm>
-                </Templates>
-                <SettingsBehavior AllowSelectSingleRowOnly="true" />
-                <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
-                <SettingsPopup>
-                </SettingsPopup>
-                <SettingsText PopupEditFormCaption="Add Title Company" />
-            </dx:ASPxGridView>
-        </dx:PopupControlContentControl>
-    </ContentCollection>
-    <FooterContentTemplate>
-        <div style="height: 30px; vertical-align: central">
-            <span class="time_buttons" onclick="ASPxPopupTitleControl.Hide()">Cancel</span>
-            <span class="time_buttons" onclick="SelectCompany()">Confirm</span>
-            <span class="time_buttons" onclick="ShowEditForm()">Add Company</span>
-        </div>
-    </FooterContentTemplate>
-    <ClientSideEvents EndCallback="function(s,e){s.Show();}" />
-</dx:ASPxPopupControl>--%>
-
 <dx:ASPxPopupControl ClientInstanceName="AspxPopupClearence" Width="600px" Height="320px"
     MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl1" OnWindowCallback="ASPxPopupControl1_WindowCallback"
     HeaderText="Clearence" Modal="true" ShowFooter="true"
@@ -536,3 +503,7 @@
     </ContentCollection>
     <ClientSideEvents EndCallback="function(s,e){aspxAddNotes.Hide();callbackClearence.PerformCallback(caseId);}" />
 </dx:ASPxPopupControl>
+
+<dx:ASPxCallback runat="server" ID="callbackMakeUrgent" OnCallback="callbackMakeUrgent_Callback" ClientInstanceName="callbackMakeUrgent" >
+    <ClientSideEvents CallbackComplete="function(s,e){MakeUrgentComplate(e.result);}" />
+</dx:ASPxCallback>

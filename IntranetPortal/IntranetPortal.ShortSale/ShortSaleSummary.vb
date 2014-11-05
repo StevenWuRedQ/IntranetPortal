@@ -1,16 +1,16 @@
 ﻿Public Class ShortSaleSummary
     Public Shared Function GetUrgentCases() As List(Of ShortSaleCase)
         Using context As New ShortSaleEntities
-            Return context.ShortSaleCases.ToList
+            Return context.ShortSaleCases.Where(Function(ss) ss.IsUrgent = True).ToList
         End Using
     End Function
 
     Public Shared Function GetCaseByStatus(status As String) As List(Of ShortSaleCase)
-        Return GetUrgentCases()
+        Return GetAllCase()
     End Function
 
     Public Shared Function GetUpcomingClosings() As List(Of ShortSaleCase)
-        Return GetUrgentCases()
+        Return GetAllCase()
     End Function
 
     Public Shared Function GetFollowUpCases() As List(Of ShortSaleCase)
@@ -19,7 +19,7 @@
         End Using
     End Function
 
-    Public Shared Function GetAllCass() As List(Of ShortSaleCase)
+    Public Shared Function GetAllCase() As List(Of ShortSaleCase)
         'Using ctx As New ShortSaleEntities
         '    Dim result = From ssCase In ctx.ShortSaleCases
         '                 Join prop In ctx.PropertyBaseInfoes On prop.BBLE Equals ssCase.BBLE

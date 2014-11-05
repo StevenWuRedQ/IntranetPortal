@@ -32,5 +32,6 @@ Partial Public Class PropertyMortgage
     Public Property Fannie As Nullable(Of Boolean)
     Public Property FHA As Nullable(Of Boolean)
     Public Property Freddie As Nullable(Of Boolean)
+    Public Property LastBPOUpdate As Nullable(Of Date)
 
 End Class

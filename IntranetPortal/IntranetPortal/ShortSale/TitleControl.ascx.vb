@@ -67,4 +67,26 @@ Public Class TitleControl
 
         txtNotes.Text = ""
     End Sub
+
+    Protected Sub callbackMakeUrgent_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        If Not String.IsNullOrEmpty(e.Parameter) Then
+            Dim caseId = CInt(e.Parameter)
+
+            Dim ssCase = ShortSaleCase.GetCase(caseId)
+
+            If ssCase.IsUrgent.HasValue Then
+                If ssCase.IsUrgent Then
+                    ssCase.IsUrgent = False
+                Else
+                    ssCase.IsUrgent = True
+                End If
+            Else
+                ssCase.IsUrgent = True
+            End If
+
+            ssCase.Save()
+
+            e.Result = ssCase.IsUrgent
+        End If
+    End Sub
 End Class

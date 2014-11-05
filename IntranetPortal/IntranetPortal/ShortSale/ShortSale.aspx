@@ -8,7 +8,7 @@
 <%@ Register Src="~/ShortSale/ShortSaleCaseList.ascx" TagPrefix="uc1" TagName="ShortSaleCaseList" %>
 <%@ Register Src="~/ShortSale/SelectPartyUC.ascx" TagPrefix="uc1" TagName="SelectPartyUC" %>
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
-
+<%@ Register Src="~/ShortSale/ShortSaleSubMenu.ascx" TagPrefix="uc1" TagName="ShortSaleSubMenu" %>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script src="/scripts/stevenjs.js"></script>
@@ -16,11 +16,10 @@
     <div style="background: url(/images/MyIdealProptery.png) no-repeat center fixed; background-size: 260px, 280px; background-color: #dddddd; width: 100%; height: 100%;">
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
-                <dx:SplitterPane Name="leadPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="2px">
+                <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="2px">
                     <ContentCollection>
                         <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
-                            <%--<uc1:LeadsList runat="server" ID="LeadsList" />--%>
-                            <uc1:ShortSaleCaseList runat="server" ID="ShortSaleCaseList" />                         
+                            <uc1:ShortSaleCaseList runat="server" ID="ShortSaleCaseList" />
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
@@ -29,7 +28,7 @@
                     </PaneStyle>
                     <ContentCollection>
                         <dx:SplitterContentControl ID="SplitterContentControl2" runat="server">
-                            <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel2" Height="100%" ClientInstanceName="ContentCallbackPanel"  OnCallback="ASPxCallbackPanel2_Callback" EnableCallbackAnimation="true" CssClass="LeadsContentPanel">
+                            <dx:ASPxCallbackPanel runat="server" ID="ASPxCallbackPanel2" Height="100%" ClientInstanceName="ContentCallbackPanel" OnCallback="ASPxCallbackPanel2_Callback" EnableCallbackAnimation="true" CssClass="LeadsContentPanel">
                                 <PanelCollection>
                                     <dx:PanelContent ID="PanelContent1" runat="server">
                                         <dx:ASPxSplitter ID="contentSplitter" PaneStyle-BackColor="#f9f9f9" runat="server" Height="100%" Width="100%" ClientInstanceName="contentSplitter" ClientVisible="false">
@@ -55,7 +54,7 @@
                                                                         <dx:MenuItem Text="Mortgage and Violations" Name="PropData"></dx:MenuItem>
                                                                         <dx:MenuItem Text="Home Owner" Name="TLO">
                                                                         </dx:MenuItem>
-                                                                    </Items>                                                              
+                                                                    </Items>
                                                                 </dx:ASPxPopupMenu>
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
 
@@ -85,7 +84,7 @@
                                                                         <%--<i class="fa fa-comments sale_head_button tooltip-examples" title="Chat"></i>
                                                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Email"></i>--%>
                                                                         <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Re-Assign" onclick="tmpBBLE=leadsInfoBBLE; popupCtrReassignEmployeeListCtr.PerformCallback();popupCtrReassignEmployeeListCtr.ShowAtElement(this);"></i>
-                                                                        <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup()"></i>                                                                        
+                                                                        <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup()"></i>
                                                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick=""></i>
                                                                     </li>
                                                                 </ul>
@@ -111,7 +110,7 @@
                                                                         <dx:MenuItem Text="Call Phone" Name="Call">
                                                                         </dx:MenuItem>
                                                                         <dx:MenuItem Text="# doesn't work" Name="nonWork">
-                                                                       </dx:MenuItem>
+                                                                        </dx:MenuItem>
                                                                         <dx:MenuItem Text="Working Phone number" Name="Work">
                                                                         </dx:MenuItem>
                                                                         <dx:MenuItem Text="Undo" Name="Undo">
@@ -138,7 +137,7 @@
 
                                                                     <%-- <ClientSideEvents ItemClick="OnAddressPopupMenuClick" />--%>
                                                                 </dx:ASPxPopupMenu>
-                                                               
+
                                                             </div>
                                                         </dx:SplitterContentControl>
                                                     </ContentCollection>
@@ -161,7 +160,7 @@
                                                                             <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                             <li style="margin-right: 30px; color: #7396a9; float: right">
                                                                                 <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="LogClick('FollowUp')"></i>
-                                                                               <%-- <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>
+                                                                                <%-- <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>
                                                                                 <i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active Cases" onclick="LogClick('Active')"></i>
                                                                                 <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" onclick="LogClick('Eviction')"></i>--%>
                                                                                 <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')"></i>
@@ -171,7 +170,7 @@
                                                                         </ul>
                                                                         <uc1:ActivityLogs runat="server" ID="ActivityLogs" DispalyMode="ShortSale" />
                                                                     </div>
-                                                                    
+
                                                                     <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
                                                                         AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                                                         ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -262,7 +261,8 @@
             </Panes>
         </dx:ASPxSplitter>
     </div>
-    <uc1:SelectPartyUC runat="server" id="SelectPartyUC" />  
+    <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
+    <uc1:SelectPartyUC runat="server" ID="SelectPartyUC" />
 </asp:Content>
 
 

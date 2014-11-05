@@ -286,7 +286,7 @@
     }
 
     function clickfilterBtn(e) {
-
+        
         if (!popupFilterControl.GetVisible()) {
             popupFilterControl.ShowAtElement(e);
             popupFilterControl.SetVisible(true);
@@ -319,7 +319,7 @@
             <textarea title="Press CTRL+ENTER to submit." style="display: none; border-radius: 5px; width: 100%; height: 148px; border: 2px solid #dde0e7; padding: 5px; outline: none; resize: none;" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
             <div class="html_edit_div">
                 <dx:ASPxHtmlEditor ID="EmailBody2" runat="server" Height="148px" Width="100%" ClientInstanceName="EmailBody" OnLoad="EmailBody2_Load">
-                    <Settings AllowHtmlView="false" AllowPreview="false" />
+                    <Settings AllowHtmlView="false" AllowPreview="false" />                   
                 </dx:ASPxHtmlEditor>
             </div>
         </div>
@@ -346,8 +346,6 @@
                             <option>Title</option>
                             <option>Documents Request</option>
                             <option>Evictions</option>
-
-
                         </select>
 
                         <div class="color_gray upcase_text">Status Update</div>

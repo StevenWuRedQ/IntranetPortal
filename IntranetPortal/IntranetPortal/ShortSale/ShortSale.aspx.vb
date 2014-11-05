@@ -13,11 +13,32 @@ Public Class ShortSalePage
                 Dim status = CType(Request.QueryString("s"), CaseStatus)
                 ShortSaleCaseList.BindCaseList(status)
             End If
+
+            If Not String.IsNullOrEmpty(Request.QueryString("CaseId")) Then
+                Dim caseId = CInt(Request.QueryString("CaseId"))
+                BindCaseData(caseId)
+
+                ASPxSplitter1.Panes("listPanel").Collapsed = True
+                contentSplitter.ClientVisible = True
+            End If
+
+            If Not String.IsNullOrEmpty(Request.QueryString("ShowList")) Then
+                ASPxSplitter1.Panes("listPanel").Collapsed = False
+
+                If ShortSaleCaseData IsNot Nothing Then
+                    ShortSaleCaseList.BindCaseList(ShortSaleCaseData.Status)
+                    ShortSaleCaseList.AutoLoadCase = False
+                End If
+            End If
         End If
     End Sub
 
     Protected Sub ASPxCallbackPanel2_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
-        ShortSaleCaseData = ShortSaleCase.GetCase(e.Parameter)
+        BindCaseData(e.Parameter)
+    End Sub
+
+    Private Sub BindCaseData(caseId As Integer)
+        ShortSaleCaseData = ShortSaleCase.GetCase(caseId)
         contentSplitter.ClientVisible = True
         ShortSaleOverVew.BindData(ShortSaleCaseData)
         ucTitle.BindData(ShortSaleCaseData)

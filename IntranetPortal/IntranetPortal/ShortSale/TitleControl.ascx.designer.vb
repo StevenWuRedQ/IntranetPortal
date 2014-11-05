@@ -111,4 +111,13 @@ Partial Public Class TitleControl
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnAdd As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''callbackMakeUrgent control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents callbackMakeUrgent As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class

@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class UCTitleSummary
 
     '''<summary>
-    '''LeadsSubMenu control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents LeadsSubMenu As Global.IntranetPortal.LeadsSubMenu
-
-    '''<summary>
     '''contentSplitter control.
     '''</summary>
     '''<remarks>
@@ -32,13 +23,13 @@ Partial Public Class UCTitleSummary
     Protected WithEvents contentSplitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
 
     '''<summary>
-    '''UrgentGrid control.
+    '''gridUrgent control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UrgentGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents gridUrgent As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
     '''gridUpcomingApproval control.
@@ -138,6 +129,15 @@ Partial Public Class UCTitleSummary
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents AllLeadGridViewExporter As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+
+    '''<summary>
+    '''ShortSaleSubMenu control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ShortSaleSubMenu As Global.IntranetPortal.ShortSaleSubMenu
 
     '''<summary>
     '''notesCallbackPanel control.

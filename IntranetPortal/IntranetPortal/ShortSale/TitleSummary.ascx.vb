@@ -76,63 +76,17 @@ Public Class UCTitleSummary
         Using Context As New Entities
 
             'Bind Urgent Data
-            'gridUrgent.DataSource = ShortSale.ShortSaleSummary.GetUrgentCases()
-            'gridUrgent.DataBind()
+            gridUrgent.DataSource = ShortSaleSummary.GetUrgentCases()
+            gridUrgent.DataBind()
 
             'Bind Priority Data
             Dim priorityData = ShortSale.ShortSaleSummary.GetUpcomingClosings()
             gridUpcomingApproval.DataSource = priorityData
             gridUpcomingApproval.DataBind()
-            'gridUpcomingApproval.GroupBy(gridUpcomingApproval.Columns("CreateDate"))
-
-            ''Bind Appointment
-            Dim leads = (From al In Context.Leads
-                                         Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
-                                        Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (appoint.Agent = Page.User.Identity.Name Or appoint.Manager = Page.User.Identity.Name) And appoint.ScheduleDate >= Today
-                                          Select New With {
-                                              .BBLE = al.BBLE,
-                                              .LeadsName = al.LeadsName,
-                                              .ScheduleDate = appoint.ScheduleDate
-                                              }).Distinct.ToList.OrderByDescending(Function(li) li.ScheduleDate)
-
-            'gridAppointment.DataSource = leads
-            'gridAppointment.DataBind()
-            'gridAppointment.GroupBy(gridAppointment.Columns("ScheduleDate"))
 
             'Bind All Leads Grid
-
-            AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetUrgentCases()
+            AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase()
             AllLeadsGrid.DataBind()
-
-            Dim emps = Employee.GetSubOrdinateWithoutMgr(Page.User.Identity.Name)
-            'BindTask
-            leads = (From lead In Context.Leads
-                                                   Join task In Context.UserTasks On task.BBLE Equals lead.BBLE
-                                                   Where task.Status = UserTask.TaskStatus.Active And task.EmployeeName.Contains(Page.User.Identity.Name)
-                                                   Select New With {
-                                                                    .BBLE = lead.BBLE,
-                                                                    .LeadsName = lead.LeadsName,
-                                                                    .ScheduleDate = task.Schedule
-                                                                   }).Union(
-                    From al In Context.Leads
-                                       Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
-                                       Where appoint.Status = UserAppointment.AppointmentStatus.NewAppointment And (appoint.Agent = Page.User.Identity.Name Or appoint.Manager = Page.User.Identity.Name)
-                                        Select New With {
-                                                                    .BBLE = al.BBLE,
-                                                                    .LeadsName = al.LeadsName,
-                                                                    .ScheduleDate = appoint.ScheduleDate
-                                                                   }).Union(
-                                       From lead In Context.Leads.Where(Function(ld) ld.Status = LeadStatus.MgrApproval And emps.Contains(ld.EmployeeID))
-                                        Select New With {
-                                                                    .BBLE = lead.BBLE,
-                                                                    .LeadsName = lead.LeadsName,
-                                                                    .ScheduleDate = lead.AssignDate
-                                                                   }
-                                       ).Distinct.ToList.OrderByDescending(Function(li) li.ScheduleDate)
-            gridTask.DataSource = leads
-            gridTask.DataBind()
-
-            gridTask.GroupBy(gridTask.Columns("ScheduleDate"))
 
             'Bind Callback data
             Dim callbackleads = ShortSale.ShortSaleSummary.GetFollowUpCases()

@@ -1,8 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TitleSummary.ascx.vb" Inherits="IntranetPortal.UCTitleSummary" %>
 <%@ Register Src="~/UserControl/Devexpress/CustomVerticalAppointmentTemplate.ascx" TagName="CustomVerticalAppointmentTemplate" TagPrefix="uc1" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
-
-<uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
+<%@ Register Src="~/ShortSale/ShortSaleSubMenu.ascx" TagPrefix="uc1" TagName="ShortSaleSubMenu" %>
 
 <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
 <script src="/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -26,10 +25,6 @@
     function ShowBorder(s) {
         var tbl = s.GetMainElement();
         if (tbl.style.borderColor == 'transparent') {
-            //border-top: 1px solid #9da0aa;
-            //border-right: 1px solid #c2c4cb;
-            //border-bottom: 1px solid #d9dae0;
-            //border-left: 1px solid #c2c4cb;
             tbl.style.borderColor = "white";
             tbl.style.backgroundColor = 'transparent';
         }
@@ -46,13 +41,25 @@
                 axis: "yx"
             }
          );
-
     }
+
     $(document).ready(function () {
         // Handler for .ready() called.
         initScrollbar_summary();
-
     });
+
+    function ShowCaseInfo(CaseId) {
+        var url = '/ShortSale/ShortSale.aspx?CaseId=' + CaseId;
+        var left = (screen.width / 2) - (1350 / 2);
+        var top = (screen.height / 2) - (930 / 2);
+        debugger;
+        window.open(url, 'View Case Info ' + CaseId, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+    }
+
+    function GoToCase(CaseId) {
+        var url = '/ShortSale/ShortSale.aspx?ShowList=1&CaseId=' + CaseId;
+        window.location.href = url;
+    }
 
 </script>
 
@@ -164,51 +171,25 @@
                     <%------end------%>
                     <div style="margin-right: 10px; margin-left: 35px; min-width: 1200px;">
                         <table style="vertical-align: top;">
-
                             <tr style="height: 240px;" class="under_line_div ">
-
                                 <%--fix the disteance between the two grid by steven--%>
-
                                 <td style="width: 300px; vertical-align: top;">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
                                         <i class="fa fa-exclamation-triangle with_circle title_summary_icon" style=""></i><span class="heading_text2">Urgent</span>
                                     </h4>
                                     <div class="div-underline " style="height: 260px;">
-                                        <dx:ASPxGridView runat="server" Width="100%" ID="UrgentGrid" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridUrgent" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
-                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Task", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                        <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
                                                     </DataItemTemplate>
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
-                                                    <GroupRowTemplate>
-
-                                                        <grouprowtemplate>
-                                                        <div >
-                                                            <table>
-                                                                <tr>
-                                                                  <td><img src="../images/grid_call_backs_canlender.png"/></td>
-                                                                <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
-                                                                <td style="padding-left: 10px">
-                                                                    <div  class="raund-label">
-                                                                     <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                    </div>
-                                                                </td>
-                                                           
-                                                                </tr>
-                                                                </table>
-                                                        </div>
-                                
-                                                       </grouprowtemplate>
-                                                        <%-------end---------%>
-                                                    </GroupRowTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
-                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
+                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick="<%#String.Format("ShowCateMenu(this,{0},'{1}')", Eval("CaseId"), Eval("BBLE"))%>" />
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataColumn>
                                             </Columns>
@@ -223,11 +204,7 @@
                                         </dx:ASPxGridView>
                                     </div>
                                 </td>
-
                                 <td rowspan="3" style="width: 30px;"></td>
-
-
-
                                 <td style="width: 300px; vertical-align: top;" class="gray_background">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
@@ -236,31 +213,9 @@
                                     <div class="div-underline " style="height: 240px;">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridUpcomingApproval" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="4">
                                             <Columns>
-                                                <%--use create date right now but not write--%>
-                                                <%--<dx:GridViewDataTextColumn FieldName="CreateDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
-                                                    <GroupRowTemplate>
-                                                       
-                                                        <grouprowtemplate>
-                                                        <div >
-                                                            <table>
-                                                                <tr>
-                                                                  <td><img src="../images/grid_call_backs_canlender.png"/></td>
-                                                                <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
-                                                                <td style="padding-left: 10px">
-                                                                    <div  class="raund-label">
-                                                                     <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                    </div>
-                                                                </td>
-                                                                </tr>
-                                                                </table>
-                                                        </div>
-                                
-                                                       </grouprowtemplate>
-                                                      </GroupRowTemplate>
-                                                </dx:GridViewDataTextColumn>--%>
                                                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
-                                                        <div style="cursor: pointer; height: 40px; padding-left: 20px; line-height: 40px;" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Priority", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
+                                                        <div style="cursor: pointer; height: 40px; padding-left: 20px; line-height: 40px;" onclick='<%# String.Format("GoToCase(""{0}"")",Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
@@ -287,18 +242,15 @@
                                         <i class="fa fa-check with_circle title_summary_icon" style=""></i><span class="heading_text2">Counter Offer</span>
                                     </h4>
                                     <div class="div-underline " style="height: 240px;">
-                                        <dx:ASPxGridView runat="server" Width="100%" ID="CounterOfferGrid" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="CounterOfferGrid" KeyFieldName="CaseId" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
-                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Task", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                        <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
                                                     <GroupRowTemplate>
-                                                        <%--Date: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
-                                                        <%--change group template UI by steven--%>
-                                                        <grouprowtemplate>
                                                         <div >
                                                             <table>
                                                                 <tr>
@@ -314,15 +266,12 @@
                                                                 </tr>
                                                                 </table>
                                                         </div>
-                                
-                                                       </grouprowtemplate>
-                                                        <%-------end---------%>
                                                     </GroupRowTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
-                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
+                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick="<%#String.Format("ShowCateMenu(this,{0},'{1}')", Eval("CaseId"), Eval("BBLE"))%>" />
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataColumn>
                                             </Columns>
@@ -348,18 +297,15 @@
                                         <i class="fa fa-thumbs-up with_circle title_summary_icon" style=""></i><span class="heading_text2">Investor Review</span>
                                     </h4>
                                     <div class="div-underline " style="height: 240px;">
-                                        <dx:ASPxGridView runat="server" Width="100%" ID="InvestorReviewGrid" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="InvestorReviewGrid" KeyFieldName="CaseId" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
-                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Task", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                        <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
                                                     <GroupRowTemplate>
-                                                        <%--Date: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
-                                                        <%--change group template UI by steven--%>
-                                                        <grouprowtemplate>
                                                         <div >
                                                             <table>
                                                                 <tr>
@@ -375,15 +321,12 @@
                                                                 </tr>
                                                                 </table>
                                                         </div>
-                                
-                                                       </grouprowtemplate>
-                                                        <%-------end---------%>
                                                     </GroupRowTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
-                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
+                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick="<%#String.Format("ShowCateMenu(this,{0},'{1}')", Eval("CaseId"), Eval("BBLE"))%>" />
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataColumn>
                                             </Columns>
@@ -405,18 +348,15 @@
                                         <i class="fa fa-files-o with_circle title_summary_icon" style=""></i><span class="heading_text2">Document Requests</span>
                                     </h4>
                                     <div class="div-underline " style="height: 240px;">
-                                        <dx:ASPxGridView runat="server" Width="100%" ID="DocumentRequestsGrid" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="DocumentRequestsGrid" KeyFieldName="CaseId" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
-                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Task", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                        <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
                                                     <GroupRowTemplate>
-                                                        <%--Date: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
-                                                        <%--change group template UI by steven--%>
-                                                        <grouprowtemplate>
                                                         <div >
                                                             <table>
                                                                 <tr>
@@ -432,15 +372,12 @@
                                                                 </tr>
                                                                 </table>
                                                         </div>
-                                
-                                                       </grouprowtemplate>
-                                                        <%-------end---------%>
                                                     </GroupRowTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
-                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
+                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick="<%#String.Format("ShowCateMenu(this,{0},'{1}')", Eval("CaseId"), Eval("BBLE"))%>" />
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataColumn>
                                             </Columns>
@@ -641,31 +578,23 @@
                                                 <%-- <i class="fa fa-filter tooltip-examples icon_btn grid_buttons" style="margin-right: 40px"></i>--%>
                                                 <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" ></i>'></asp:LinkButton>
                                                 <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-pdf-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;"></i>'></asp:LinkButton>
-                                            </div>
                                         </div>
-                                        <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="6" KeyFieldName="CaseId" Width="100%"  Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300">
-
+                                        <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="6" KeyFieldName="CaseId">
                                             <Styles>
 
                                                 <Row CssClass="summary_row">
                                                 </Row>
                                             </Styles>
                                             <Columns>
-
                                                 <dx:GridViewDataTextColumn FieldName="PropertyInfo.StreetName" Caption="Street address" SortOrder="Ascending">
                                                     <DataItemTemplate>
-                                                        <div style="cursor: pointer" class="font_black"><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
+                                                        <div style="cursor: pointer" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
-
-
                                                 <dx:GridViewDataTextColumn FieldName="Owner" Caption="Name">
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
                                                 </dx:GridViewDataTextColumn>
-
-                                                <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="File Progress" >                                                 
-                                                </dx:GridViewDataTextColumn>--%>
                                                 <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1st Mortgage Progress">
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn FieldName="FristMortageLender" Caption="Servicer (1st Mort)">
@@ -676,7 +605,6 @@
                                                 </dx:GridViewDataTextColumn>
                                                 <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City"  Caption="Office Price">                                                 
                                                 </dx:GridViewDataTextColumn>--%>
-
                                                 <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name" Caption="Listing agent">
@@ -687,7 +615,6 @@
                                                         
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
-
                                                 <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="Next Task" >                                                 
                                                 </dx:GridViewDataTextColumn>--%>
                                             </Columns>
@@ -717,14 +644,13 @@
                     <div style="width: 290px; height: 100%; background: #EFF2F5;">
                         <%--/*the showlder box*--%>
                         <div style="width: 30px; height: 100%; float: left; position: relative; left: 0px; top: 0px; box-shadow: inset 20px -10px 13px -15px rgba(2, 2, 2, 0.3);"></div>
-
                     </div>
                 </dx:SplitterContentControl>
             </ContentCollection>
         </dx:SplitterPane>
     </Panes>
 </dx:ASPxSplitter>
-
+<uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
 <div id="right-pane-container" class="clearfix">
     <div id="right-pane-button"></div>
     <div id="right-pane">

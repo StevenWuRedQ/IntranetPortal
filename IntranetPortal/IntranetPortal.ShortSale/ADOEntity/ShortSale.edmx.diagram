@@ -11,10 +11,10 @@
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyMortgage" Width="1.5" PointX="6.625" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyOwner" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyTitle" Width="1.5" PointX="2.75" PointY="4.875" />
-        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCase" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCase" Width="1.5" PointX="8.625" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.TitleClearence" Width="1.5" PointX="10.625" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyBaseInfo" Width="1.5" PointX="4.75" PointY="0.5" />
-        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCaseComment" Width="1.5" PointX="6.625" PointY="5.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCaseComment" Width="1.5" PointX="6.625" PointY="6.125" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyOccupant" Width="1.5" PointX="8.75" PointY="6" />
       </Diagram>
     </edmx:Diagrams>

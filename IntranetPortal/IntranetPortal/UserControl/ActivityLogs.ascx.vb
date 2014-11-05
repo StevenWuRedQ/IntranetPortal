@@ -599,7 +599,7 @@ Public Class ActivityLogs
             aspxdate = DateTime.Now
             Dim typeOfUpdate = e.Parameter.Split("|")(2)
             Dim statusOfUpdate = e.Parameter.Split("|")(3)
-            txtComments = String.Format("Type of Update: {0}<br />Status of Update: {1} <br />{2}", typeOfUpdate, statusOfUpdate, txtComments)
+            txtComments = String.Format("Type of Update: {0}<br />{1}", typeOfUpdate, txtComments)
             LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent, LeadsActivityLog.EnumActionType.Comments)
         Else
             LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)

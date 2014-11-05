@@ -26,7 +26,6 @@ Public Class ShortSaleCaseList
             gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status, Page.User.Identity.Name)
             gridCase.DataBind()
         End If
-
     End Sub
 
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)
@@ -37,7 +36,13 @@ Public Class ShortSaleCaseList
         End If
     End Sub
 
-    Private Function GetDataSource(status As CaseStatus) As List(Of ShortSaleCase)
-        
-    End Function
+    Public Property AutoLoadCase As Boolean
+        Get
+            Return gridCase.SettingsBehavior.AllowClientEventsOnLoad
+        End Get
+        Set(value As Boolean)
+            gridCase.SettingsBehavior.AllowClientEventsOnLoad = value
+        End Set
+    End Property
+   
 End Class

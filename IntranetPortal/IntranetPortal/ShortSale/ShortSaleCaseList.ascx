@@ -140,6 +140,5 @@
             <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
             <Border BorderStyle="None"></Border>
         </dx:ASPxGridView>
-    </div>
-    <uc1:ShortSaleSubMenu runat="server" id="ShortSaleSubMenu" />
+    </div> 
    </div>

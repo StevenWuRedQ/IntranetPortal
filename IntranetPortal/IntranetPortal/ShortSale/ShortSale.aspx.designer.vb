@@ -230,6 +230,15 @@ Partial Public Class ShortSalePage
     Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
+    '''ShortSaleSubMenu control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ShortSaleSubMenu As Global.IntranetPortal.ShortSaleSubMenu
+
+    '''<summary>
     '''SelectPartyUC control.
     '''</summary>
     '''<remarks>

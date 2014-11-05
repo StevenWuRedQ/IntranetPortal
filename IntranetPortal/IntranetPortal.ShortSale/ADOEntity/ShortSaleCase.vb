@@ -32,5 +32,6 @@ Partial Public Class ShortSaleCase
     Public Property UpdateDate As Nullable(Of Date)
     Public Property UpdateBy As String
     Public Property Owner As String
+    Public Property IsUrgent As Nullable(Of Boolean)
 
 End Class
