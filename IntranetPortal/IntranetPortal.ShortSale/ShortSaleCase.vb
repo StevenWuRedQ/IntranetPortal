@@ -38,6 +38,7 @@ Partial Public Class ShortSaleCase
 
                 If _judgementInfo Is Nothing Then
                     _judgementInfo = New TitleJudgementSearch
+                    _judgementInfo.CaseId = CaseId
                 End If
             End If
 
