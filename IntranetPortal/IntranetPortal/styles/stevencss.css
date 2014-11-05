@@ -1958,6 +1958,7 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
     border-style: solid;
     width: 100%;
     font-size:14px;
+    height:20px;
 }
 
 .popup_menu_list_item {
