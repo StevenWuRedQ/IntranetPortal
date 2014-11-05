@@ -9,7 +9,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http) {
             // this callback will be called asynchronously
             // when the response is available
             $scope.hello = "333333"
-            debugger;
+            //debugger;
             $scope.allContacts = data;
             var allContacts = $scope.allContacts;
             if (allContacts.length > 0) {

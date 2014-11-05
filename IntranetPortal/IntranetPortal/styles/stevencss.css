@@ -1833,7 +1833,7 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 }
 
 .ss_mortages_stauts {
-    width: 76% !important;
+    width: 66% !important;
 }
 
 .email_input {
@@ -1889,6 +1889,8 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 .html_edit_div {
     border: 2px solid #dde0e7;
     border-radius: 10px;
+    background:white;
+    padding:3px;
 }
 
     .html_edit_div div {
@@ -1990,4 +1992,8 @@ tr.vendor_info
 td.vendor_info_left
 {
     text-align: right; color: #b1b2b7;
+}
+.grid_head
+{
+    color:#b1b2b7;
 }

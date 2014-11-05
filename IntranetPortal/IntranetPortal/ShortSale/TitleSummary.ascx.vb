@@ -29,7 +29,18 @@ Public Class UCTitleSummary
         End If
         Return "bad data"
     End Function
+    Public Function GetLastActivity(ssCase As ShortSaleCase) As String
+        ' Return ssCase.PropertyInfo.StreetName
+        If ssCase IsNot Nothing Then
+            Dim shortsaled = CType(ssCase, ShortSaleCase)
+            Dim lastActivity = shortsaled.PropertyInfo.UpdateDate
+            If (lastActivity IsNot Nothing) Then
+                Return CType(lastActivity, DateTime).ToString("MM/dd/yy hh:mm tt")
+            End If
 
+        End If
+        Return "bad data"
+    End Function
     Public Property CurrentNote As New PortalNote
 
     Public Sub BindNotes()

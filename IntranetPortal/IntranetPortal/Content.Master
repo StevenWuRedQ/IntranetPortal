@@ -28,5 +28,6 @@
         </asp:ContentPlaceHolder>
     </form>
     <script src="/scripts/stevenjs.js"></script>
+    <script src="/scripts/PortalApp.js?v=<%=DateTime.Now.Millisecond.ToString %>>"></script>
 </body>
 </html>

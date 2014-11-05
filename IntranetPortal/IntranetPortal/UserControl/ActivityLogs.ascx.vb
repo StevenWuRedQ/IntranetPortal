@@ -14,7 +14,9 @@ Public Class ActivityLogs
     Public Property DispalyMode As ActivityLogMode = ActivityLogMode.Leads
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        'If (DispalyMode <> ActivityLogMode.ShortSale) Then
+        '    EmailBody2.setHeight = 130
+        'End If
     End Sub
 
     Public Sub BindData(bble As String)

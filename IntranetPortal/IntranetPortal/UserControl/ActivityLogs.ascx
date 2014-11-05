@@ -284,6 +284,18 @@
             InsertNewComments();
         }
     }
+
+    function clickfilterBtn(e) {
+        
+        if (!popupFilterControl.GetVisible())
+        {
+            popupFilterControl.ShowAtElement(e);
+            popupFilterControl.SetVisible(true);
+            return;
+        }
+        popupFilterControl.Hide();
+        popupFilterControl.SetVisible(false);
+    }
     // ]]>
 </script>
 
@@ -306,7 +318,7 @@
                 </label>
             </div>
             <textarea title="Press CTRL+ENTER to submit." style=" display:none; border-radius: 5px; width: 100%; height:148px; border: 2px solid #dde0e7; padding: 5px; outline: none; resize: none;" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
-            <div class="html_edit_div" style="background:white;padding:3px">
+            <div class="html_edit_div" >
                 <dx:ASPxHtmlEditor ID="EmailBody2" runat="server" Height="148px" Width="100%" ClientInstanceName="EmailBody" OnLoad="EmailBody2_Load">
                     <Settings AllowHtmlView="false" AllowPreview="false" />                   
                 </dx:ASPxHtmlEditor>
@@ -315,7 +327,7 @@
         <div class="clearfix" style="width: 100%">
             <div style="float: right">
                 <div style="color: #2e2f31; float: right">
-                    FILTER BY:&nbsp;&nbsp<i class="fa fa-filter acitivty_short_button tooltip-examples" title="Filter" style="color: #444547; font-size: 14px;" onclick="popupFilterControl.ShowAtElement(this)"></i>
+                    FILTER BY:&nbsp;&nbsp<i class="fa fa-filter acitivty_short_button tooltip-examples" title="Filter" style="color: #444547; font-size: 14px;" onclick="clickfilterBtn(this)"></i>
                 </div>
                 <dx:ASPxPopupControl runat="server" ID="popupFilters">
                 </dx:ASPxPopupControl>

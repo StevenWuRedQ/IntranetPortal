@@ -551,7 +551,7 @@
                                     <ContentCollection>
                                         <dx:SplitterContentControl runat="server">
                                             <%--report UI--%>
-                                            <div style="margin-top: 10px;max-height:100%;overflow:auto">
+                                            <div style="margin-top: 10px;max-height:100%;">
                                                 <%--tool head--%>
                                                 <div style="margin-left: 40px; margin-right: 40px;">
                                                     <%--head--%>
@@ -577,7 +577,7 @@
                                                         }
                                                     </script>
                                                     <%--<div style="overflow-x:scroll;overflow-y:scroll;max-height:900px;">--%>
-                                                    <dx:ASPxGridView ID="gridReport" runat="server" KeyFieldName="BBLE" Width="100%" AutoGenerateColumns="false" ClientInstanceName="gridReportClient" OnCustomCallback="gridReport_CustomCallback" Settings-ShowGroupPanel="false" OnInit="gridReport_Init" CssClass="font_source_sans_pro" >
+                                                    <dx:ASPxGridView ID="gridReport" runat="server" KeyFieldName="BBLE" Width="100%" AutoGenerateColumns="false" ClientInstanceName="gridReportClient" OnCustomCallback="gridReport_CustomCallback" Settings-ShowGroupPanel="false" OnInit="gridReport_Init" CssClass="font_source_sans_pro" Settings-VerticalScrollBarMode="Auto">
                                                         <%--Settings-HorizontalScrollBarMode="Auto"--%>
                                                         <Settings ShowFilterBar="Visible" ShowHeaderFilterButton="true" ShowGroupPanel="true" />
                                                         <Columns>

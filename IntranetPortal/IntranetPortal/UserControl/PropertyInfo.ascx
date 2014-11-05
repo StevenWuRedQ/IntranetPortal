@@ -93,7 +93,7 @@
                 <span class="time_buttons" onclick='ShowDOBWindow("<%= LeadsInfoData.Borough%>","<%= LeadsInfoData.Number%>", "<%= LeadsInfoData.StreetName%>")'>DOB</span>
                 <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>")'>Acris</span>
                 <span class="time_buttons" onclick='ShowPropertyMap("<%= LeadsInfoData.BBLE %>")'>Maps</span>
-                <span class="time_buttons" onclick='VendorsPopupClient.Show()'>VendorsPopUp</span>
+                <span class="time_buttons" onclick='VendorsPopupClient.Show()' style="display:none">VendorsPopUp</span>
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
             <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; <%= If( LeadsInfoData.CreateDate.HasValue,"visibility:visible","visibility:hidden")%>">Started on <%= LeadsInfoData.CreateDate.ToString%></span>

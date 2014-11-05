@@ -11,9 +11,9 @@
 	z-index: 1000; /* change this number if necessary */
 }
 
-#right-pane-container:hover {
+/*#right-pane-container:hover {
 	right: 0;
-}
+}*/
 
 #right-pane-button {
 	background:url(/images/offices_events_background.png) no-repeat;

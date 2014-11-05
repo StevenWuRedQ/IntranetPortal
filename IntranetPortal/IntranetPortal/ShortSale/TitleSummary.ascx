@@ -624,18 +624,29 @@
                             </tr>
                             <tr>
                                 <td colspan="10">
-                                    <div style="max-width: 1570px; overflow: auto;">
+                                    <div style="max-width: 1570px; ">
                                         <div class="clearfix" style="margin-bottom: 20px;">
                                             <h4 style="padding-top: 20px">
                                                 <i class="fa fa-folder-open with_circle title_summary_icon" style=""></i><span class="heading_text2"><%--Leads and Active--%> Files</span>
                                                 <%--<span class="table_tips" style="margin-left: 40px;">Shows all files that haven’t closed or been archived.
                                                 </span>--%>
-                                            </h4>
 
+                                            </h4>
+                                            <%--margin-top: -35px;--%>
+                                            <div style="float: right; margin-top: -35px;" class="form-inline">
+
+                                                <input style="margin-right: 20px; width: 250px; height: 30px;" class="form-control" id="exampleInputEmail2" placeholder="Quik Search">
+
+                                                <i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-right: 20px"></i>
+                                                <%-- <i class="fa fa-filter tooltip-examples icon_btn grid_buttons" style="margin-right: 40px"></i>--%>
+                                                <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" ></i>'></asp:LinkButton>
+                                                <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-pdf-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;"></i>'></asp:LinkButton>
+                                            </div>
                                         </div>
-                                        <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="6" KeyFieldName="CaseId">
+                                        <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="6" KeyFieldName="CaseId" Width="100%"  Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300">
 
                                             <Styles>
+
                                                 <Row CssClass="summary_row">
                                                 </Row>
                                             </Styles>
@@ -671,6 +682,10 @@
                                                 <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name" Caption="Listing agent">
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn FieldName="PropertyInfo.UpdateDate" Caption="Last Activity">
+                                                    <DataItemTemplate>
+                                                        <%# GetLastActivity(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%>
+                                                        
+                                                    </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
 
                                                 <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="Next Task" >                                                 
@@ -685,16 +700,7 @@
                                             </SettingsPopup>
                                         </dx:ASPxGridView>
                                         <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
-                                        <%--margin-top: -35px;--%>
-                                        <div style="float: right;" class="form-inline">
 
-                                            <input style="margin-right: 20px; width: 250px; height: 30px;" class="form-control" id="exampleInputEmail2" placeholder="Quik Search">
-
-                                            <i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-right: 20px"></i>
-                                            <%-- <i class="fa fa-filter tooltip-examples icon_btn grid_buttons" style="margin-right: 40px"></i>--%>
-                                            <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" ></i>'></asp:LinkButton>
-                                            <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-pdf-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;"></i>'></asp:LinkButton>
-                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -772,4 +778,5 @@
         </div>
     </div>
 </div>
+<script src="/scripts/js/right_pane.js" type="text/javascript"></script>
 <%--change it to color sytle by steven--%>

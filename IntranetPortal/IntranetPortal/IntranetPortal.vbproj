@@ -2290,6 +2290,7 @@
     <Content Include="scripts\js\jquery.mousewheel.js" />
     <Content Include="scripts\js\jquery.throttledresize.js" />
     <Content Include="scripts\js\main.js" />
+    <Content Include="scripts\js\right_pane.js" />
     <Content Include="scripts\js\vendor\jquery-1.11.0.min.js" />
     <Content Include="scripts\js\vendor\modernizr-2.6.2-respond-1.1.0.min.js" />
     <Content Include="scripts\LeadsSubMenu.js" />
