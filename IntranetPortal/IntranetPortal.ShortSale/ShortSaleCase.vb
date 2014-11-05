@@ -243,6 +243,13 @@ Partial Public Class ShortSaleCase
             _occupants = value
         End Set
     End Property
+
+    Public ReadOnly Property LastComments As String
+        Get
+            Return ""
+        End Get
+    End Property
+
 #End Region
 
 #Region "Methods"

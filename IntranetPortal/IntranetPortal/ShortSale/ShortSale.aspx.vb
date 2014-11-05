@@ -33,6 +33,30 @@ Public Class ShortSalePage
         End If
     End Sub
 
+    Sub MortgageStatusUpdate(mortageType As String, status As String, bble As String) Handles ActivityLogs.MortgageStatusUpdateEvent
+        Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
+
+        If mortageType = "1st Mortgage" Then
+            If ssCase.Mortgages.Count > 0 Then
+                Dim obj = ssCase.Mortgages(0)
+                If obj IsNot Nothing Then
+                    obj.Status = status
+                    obj.Save()
+                End If
+            End If
+        End If
+
+        If mortageType = "2nd Mortgage" Then
+            If ssCase.Mortgages.Count > 1 Then
+                Dim obj = ssCase.Mortgages(1)
+                If obj IsNot Nothing Then
+                    obj.Status = status
+                    obj.Save()
+                End If
+            End If
+        End If
+    End Sub
+
     Protected Sub ASPxCallbackPanel2_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         BindCaseData(e.Parameter)
     End Sub

@@ -12,6 +12,8 @@ Public Class ActivityLogs
                                                     "</div>"
 
     Public Property DispalyMode As ActivityLogMode = ActivityLogMode.Leads
+    Public Event MortgageStatusUpdateEvent As OnMortgageStatusUpdate
+    Public Delegate Sub OnMortgageStatusUpdate(updateType As String, status As String, bble As String)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'If (DispalyMode <> ActivityLogMode.ShortSale) Then
@@ -572,7 +574,6 @@ Public Class ActivityLogs
         Return String.Format(CommentTypeIconFormat, bgColor, fontClass)
     End Function
 
-
     Protected Sub addCommentsCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         If String.IsNullOrEmpty(e.Parameter) Then
             Return
@@ -597,6 +598,9 @@ Public Class ActivityLogs
             aspxdate = DateTime.Now
             Dim typeOfUpdate = e.Parameter.Split("|")(2)
             Dim statusOfUpdate = e.Parameter.Split("|")(3)
+
+            RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, hfBBLE.Value)
+
             txtComments = String.Format("Type of Update: {0}<br />{1}", typeOfUpdate, txtComments)
             LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent, LeadsActivityLog.EnumActionType.Comments)
         Else

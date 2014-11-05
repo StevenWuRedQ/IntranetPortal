@@ -61,6 +61,21 @@
         window.location.href = url;
     }
 
+    function SearchGrid() {
+        var filterCondition = "";
+        var key = document.getElementById("QuickSearch").value;
+
+        if (key.trim() == "")
+        {
+            AllLeadsGridClient.ClearFilter();            
+            return;
+        }
+
+        filterCondition = "[PropertyInfo.PropertyAddress] LIKE '%" + key + "%' OR [Owner] LIKE '%" + key + "%'";
+        filterCondition += " OR [OccupiedBy] LIKE '%" + key + "%'";        
+        AllLeadsGridClient.ApplyFilter(filterCondition);
+    }
+
 </script>
 
 <%-------end-------%>
@@ -570,22 +585,19 @@
                                             </h4>
                                             <%--margin-top: -35px;--%>
                                             <div style="float: right; margin-top: -35px;" class="form-inline">
-
-                                                <input style="margin-right: 20px; width: 250px; height: 30px;" class="form-control" runat="server" id="QuickSearch" placeholder="Quik Search">
-                                                <asp:LinkButton ID="SearchBtn" OnClick="SearchBtn_Click" runat="server" Text='<i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-right: 20px"></i>'></asp:LinkButton>
-
+                                                <input style="margin-right: 20px; width: 250px; height: 30px;" class="form-control" id="QuickSearch" placeholder="Quik Search" onkeydown="javascript:if(event.keyCode == 13){ SearchGrid(); }">
+                                                <i class="fa fa-search tooltip-examples icon_btn grid_buttons" style="margin-right: 20px" onclick="SearchGrid()"></i>
                                                 <%-- <i class="fa fa-filter tooltip-examples icon_btn grid_buttons" style="margin-right: 40px"></i>--%>
                                                 <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" ></i>'></asp:LinkButton>
                                                 <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-pdf-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;"></i>'></asp:LinkButton>
                                             </div>
                                             <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="6" KeyFieldName="CaseId" Width="100%" Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300" ForeColor="#b1b2b7">
                                                 <Styles>
-
                                                     <Row CssClass="summary_row">
                                                     </Row>
                                                 </Styles>
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.StreetName" Caption="Street address" SortOrder="Ascending">
+                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Street address" SortOrder="Ascending">
                                                         <DataItemTemplate>
                                                             <div style="cursor: pointer" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
                                                         </DataItemTemplate>

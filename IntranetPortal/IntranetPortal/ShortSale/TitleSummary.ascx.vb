@@ -317,11 +317,11 @@ Public Class UCTitleSummary
         AllLeadGridViewExporter.WritePdfToResponse()
     End Sub
 
-    Protected Sub SearchBtn_Click(sender As Object, e As EventArgs)
-        If QuickSearch.Value IsNot Nothing AndAlso QuickSearch.Value.Length > 0 Then
-            AllLeadsGrid.DataColumns("PropertyInfo.StreetName").Settings.AllowAutoFilter = AutoFilterCondition.Like
+    'Protected Sub SearchBtn_Click(sender As Object, e As EventArgs)
+    '    If QuickSearch.Value IsNot Nothing AndAlso QuickSearch.Value.Length > 0 Then
+    '        AllLeadsGrid.DataColumns("PropertyInfo.StreetName").Settings.AllowAutoFilter = AutoFilterCondition.Like
 
-            AllLeadsGrid.AutoFilterByColumn(AllLeadsGrid.Columns("PropertyInfo.StreetName"), QuickSearch.Value)
-        End If
-    End Sub
+    '        AllLeadsGrid.AutoFilterByColumn(AllLeadsGrid.Columns("PropertyInfo.StreetName"), QuickSearch.Value)
+    '    End If
+    'End Sub
 End Class
