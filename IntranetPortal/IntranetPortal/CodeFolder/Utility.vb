@@ -1,4 +1,5 @@
-﻿
+﻿Imports DevExpress.Web.ASPxHtmlEditor
+
 Public Enum LeadStatus
     NewLead = 0
     Priority = 1
@@ -106,6 +107,20 @@ Public Class Utility
         Using context As New Entities
             Return context.Leads.Where(Function(l) l.EmployeeName = emp And l.Status = status).Count
         End Using
+    End Function
+
+    Public Shared Function CreateCustomToolbar(ByVal name As String) As HtmlEditorToolbar
+        Return New HtmlEditorToolbar(name,
+                                     New ToolbarFontSizeEdit(),
+                                     New ToolbarJustifyLeftButton(True),
+                                     New ToolbarJustifyCenterButton(),
+                                     New ToolbarJustifyRightButton(),
+                                     New ToolbarJustifyFullButton(),
+                                     New ToolbarBoldButton(),
+                                     New ToolbarItalicButton(),
+                                     New ToolbarUnderlineButton(),
+                                     New ToolbarBackColorButton(),
+                                     New ToolbarFontColorButton()).CreateDefaultItems()
     End Function
 
     Public Shared Function GetMgrLeadsCount(status As LeadStatus, emp As String()) As Integer

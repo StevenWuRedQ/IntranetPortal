@@ -4,12 +4,12 @@ Public Class SendMailControl
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        EmailBody.Toolbars.Add(CreateDemoCustomToolbar("Custom"))
+        EmailBody.Toolbars.Add(Utility.CreateCustomToolbar("Custom"))
     End Sub
 
-    Protected Function CreateDemoCustomToolbar(ByVal name As String) As HtmlEditorToolbar
-        Return New HtmlEditorToolbar(name, New ToolbarFontSizeEdit(), New ToolbarJustifyLeftButton(True), New ToolbarJustifyCenterButton(), New ToolbarJustifyRightButton(), New ToolbarJustifyFullButton(), New ToolbarBoldButton(), New ToolbarItalicButton(), New ToolbarUnderlineButton()).CreateDefaultItems()
-    End Function
+    'Protected Function CreateDemoCustomToolbar(ByVal name As String) As HtmlEditorToolbar
+    '    Return New HtmlEditorToolbar(name, New ToolbarFontSizeEdit(), New ToolbarJustifyLeftButton(True), New ToolbarJustifyCenterButton(), New ToolbarJustifyRightButton(), New ToolbarJustifyFullButton(), New ToolbarBoldButton(), New ToolbarItalicButton(), New ToolbarUnderlineButton()).CreateDefaultItems()
+    'End Function
 
     Protected Sub PopupSendMail_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         If Not PopupContentSendMail.Visible Then

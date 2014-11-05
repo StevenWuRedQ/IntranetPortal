@@ -20,23 +20,14 @@ Public Class RulesService
         GetInstance.StateObj.TimerCanceled = True
     End Sub
 
-    Public Sub RunTimer()
+    Private Sub RunTimer()
         StateObj.TimerCanceled = False
         StateObj.SomeValue = 1
         Dim TimerDelegate As New System.Threading.TimerCallback(AddressOf TimerTask)
-        ' Create a timer that calls a procedure every 2 seconds. 
-        ' Note: There is no Start method; the timer starts running as soon as  
-        ' the instance is created. 
         Dim TimerItem As New System.Threading.Timer(TimerDelegate, StateObj, New TimeSpan(1000), New TimeSpan(1, 0, 0))
 
         ' Save a reference for Dispose.
         StateObj.TimerReference = TimerItem
-
-        '' Run for ten loops. 
-        'While StateObj.SomeValue < 10
-        '    ' Wait one second.
-        '    System.Threading.Thread.Sleep(New TimeSpan(1, 0, 0))
-        'End While
     End Sub
 
     Private Sub TimerTask(ByVal StateObj As Object)

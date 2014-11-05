@@ -21,7 +21,6 @@
     }
 </style>
 
-
 <script type="text/javascript">
     function OnlogSelectedIndexChanged(s, e) {
         var selectedItems = cbCateLogClient.GetSelectedItems();
@@ -262,13 +261,13 @@
     }
 
     function InsertNewComments() {
-        var comments = document.getElementById("txtComments");
+        //var comments = document.getElementById("txtComments");
 
-        if (comments.value == "") {
-            alert("Comments can not be empty.")
-            return;
-        }
-
+        //if (comments.value == "") {
+        //    alert("Comments can not be empty.")
+        //    return;
+        //}
+        var commentHtml = EmailBody.GetHtml();
         var addDate = null;
         if (typeof dateActivityClient != 'undefined') {
             addDate = dateActivityClient.GetDate();
@@ -276,7 +275,7 @@
         if (addDate == null)
             addDate = new Date();
 
-        addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + comments.value + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate").val());
+        addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + commentHtml + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate").val());
     }
 
     function OnCommentsKeyDown(e) {
@@ -299,42 +298,17 @@
                 <span style="color: #295268;" class="upcase_text">Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
                 <input type="radio" id="sex12" name="sex" value="Fannie" class="font_12" />
                 <label for="sex12" class="font_12">
-                    <span class="upcase_text">Internal update</span>
+                    <span class="upcase_text">Private</span>
                 </label>
                 <input type="radio" id="sexf11" name="sex" value="FHA" class="font_12" />
                 <label for="sexf11" class="font_12">
-                    <span class="upcase_text">Public update</span>
+                    <span class="upcase_text">Public</span>
                 </label>
             </div>
-            <textarea title="Press CTRL+ENTER to submit." style="border-radius: 5px; width: 100%; height: 90px; border: 2px solid #dde0e7; padding: 5px; outline: none; resize: none;" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
-            <div class="html_edit_div" style="display: none">
-                <dx:ASPxHtmlEditor ID="EmailBody" runat="server" Height="130px" Width="100%">
-                    <Settings AllowHtmlView="false" AllowPreview="false" />
-                    <Toolbars>
-                        <dx:HtmlEditorToolbar>
-                            <Items>
-                                <dx:ToolbarBoldButton>
-                                </dx:ToolbarBoldButton>
-                                <dx:ToolbarItalicButton></dx:ToolbarItalicButton>
-                                <dx:ToolbarUnderlineButton></dx:ToolbarUnderlineButton>
-                                <dx:ToolbarStrikethroughButton></dx:ToolbarStrikethroughButton>
-                                <dx:ToolbarSuperscriptButton>
-                                </dx:ToolbarSuperscriptButton>
-                                <dx:ToolbarSubscriptButton></dx:ToolbarSubscriptButton>
-                                <dx:ToolbarInsertOrderedListButton></dx:ToolbarInsertOrderedListButton>
-                                <dx:ToolbarInsertUnorderedListButton></dx:ToolbarInsertUnorderedListButton>
-                                <dx:ToolbarIndentButton></dx:ToolbarIndentButton>
-                                <dx:ToolbarOutdentButton></dx:ToolbarOutdentButton>
-                                <dx:ToolbarBackColorButton></dx:ToolbarBackColorButton>
-                                <dx:ToolbarFontColorButton></dx:ToolbarFontColorButton>
-                                <dx:ToolbarJustifyLeftButton></dx:ToolbarJustifyLeftButton>
-                                <dx:ToolbarJustifyCenterButton></dx:ToolbarJustifyCenterButton>
-                                <dx:ToolbarJustifyRightButton></dx:ToolbarJustifyRightButton>
-                                <dx:ToolbarJustifyFullButton></dx:ToolbarJustifyFullButton>
-                                <dx:ToolbarFullscreenButton></dx:ToolbarFullscreenButton>
-                            </Items>
-                        </dx:HtmlEditorToolbar>
-                    </Toolbars>
+            <textarea title="Press CTRL+ENTER to submit." style=" display:none; border-radius: 5px; width: 100%; height:148px; border: 2px solid #dde0e7; padding: 5px; outline: none; resize: none;" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
+            <div class="html_edit_div" style="background:white;padding:3px">
+                <dx:ASPxHtmlEditor ID="EmailBody2" runat="server" Height="148px" Width="100%" ClientInstanceName="EmailBody" OnLoad="EmailBody2_Load">
+                    <Settings AllowHtmlView="false" AllowPreview="false" />                   
                 </dx:ASPxHtmlEditor>
             </div>
         </div>
@@ -355,9 +329,13 @@
                     <div <%= If(DispalyMode = ActivityLogMode.Leads, "style='display:none'", "")%>>
                         <div class="color_gray upcase_text">Type of update</div>
                         <select class="select_bootstrap select_margin" id="selType1">
+                            <option>1st Mortgage</option>
+                            <option>2nd Mortgage</option>
+                            <option>BPO/Appraisal</option>
+                            <option>Title</option>
                             <option>Documents Request</option>
-                            <option>Lookup Request</option>
-                            <option>Incentive Offer Needed</option>
+                            <option>Evictions</option>
+                                                     
                             
                         </select>
 
@@ -387,10 +365,10 @@
                         </select>
                     </div>
                 </div>
-                <div style="margin-top: 15px; float: right">
+                <div style="margin-top: 15px; float: right;margin-right: 14px;">
                     <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
                     <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this);ASPxPopupSetAsTaskControl.PerformCallback();"></i>
-                    <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Refresh" style="display: none"></i>
+                    <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Follow Up"></i>
                 </div>
             </div>
         </div>

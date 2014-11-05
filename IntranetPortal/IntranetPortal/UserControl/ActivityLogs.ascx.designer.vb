@@ -14,13 +14,13 @@ Option Explicit On
 Partial Public Class ActivityLogs
 
     '''<summary>
-    '''EmailBody control.
+    '''EmailBody2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents EmailBody As Global.DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor
+    Protected WithEvents EmailBody2 As Global.DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor
 
     '''<summary>
     '''popupFilters control.

@@ -2,6 +2,7 @@
 Imports System.Globalization
 Imports DevExpress.Web.ASPxCallbackPanel
 Imports DevExpress.Web.ASPxPopupControl
+Imports DevExpress.Web.ASPxHtmlEditor
 
 Public Class ActivityLogs
     Inherits System.Web.UI.UserControl
@@ -643,4 +644,10 @@ Public Class ActivityLogs
         ShortSale
     End Enum
 
+    Protected Sub EmailBody2_Load(sender As Object, e As EventArgs)
+        Dim htmlEditor = CType(sender, ASPxHtmlEditor)
+        If htmlEditor.Toolbars.Count = 0 Then
+            htmlEditor.Toolbars.Add(Utility.CreateCustomToolbar("Custom"))
+        End If
+    End Sub
 End Class
