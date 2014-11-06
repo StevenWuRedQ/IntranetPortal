@@ -345,8 +345,7 @@
                                             
                                             <div class="clearence_list_text">
                                                 <div class="clearence_list_title">
-                                                    notes 
-                                                                                                      
+                                                    notes                                                                                                       
                                                     <i class="fa fa-plus-circle note_img tooltip-examples " title="Add Notes" style="color: #3993c1; cursor: pointer" onclick='AddNotes("<%= clearence.ClearenceId%>", this)'></i>
                                                         </div>
                                                

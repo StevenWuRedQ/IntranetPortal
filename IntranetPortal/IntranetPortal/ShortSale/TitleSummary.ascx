@@ -45,7 +45,7 @@
 
     $(document).ready(function () {
         // Handler for .ready() called.
-        initScrollbar_summary();
+        initScrollbar_summary();       
     });
 
     function ShowCaseInfo(CaseId) {
@@ -62,17 +62,17 @@
     }
 
     function SearchGrid() {
+        
         var filterCondition = "";
         var key = document.getElementById("QuickSearch").value;
 
-        if (key.trim() == "")
-        {
-            AllLeadsGridClient.ClearFilter();            
+        if (key.trim() == "") {
+            AllLeadsGridClient.ClearFilter();
             return;
         }
 
         filterCondition = "[PropertyInfo.PropertyAddress] LIKE '%" + key + "%' OR [Owner] LIKE '%" + key + "%'";
-        filterCondition += " OR [OccupiedBy] LIKE '%" + key + "%'";        
+        filterCondition += " OR [OccupiedBy] LIKE '%" + key + "%'";
         AllLeadsGridClient.ApplyFilter(filterCondition);
     }
 
@@ -139,11 +139,11 @@
         border-bottom: 0px !important;
     }*/
 
-    
+
     /*
 
         */
-   
+
 
     td.grid_padding {
         padding-top: 20px;
@@ -182,8 +182,8 @@
                         </div>
                     </div>
                     <%------end------%>
-                    <div style="margin-right: 10px; margin-left: 35px; min-width: 1200px;">
-                        <table style="vertical-align: top;">
+                    <div style="margin-right: 10px; margin-left: 35px; min-width: 1200px; height:85%">
+                        <table style="vertical-align: top;height:100%">
                             <tr style="height: 240px;" class="under_line_div ">
                                 <%--fix the disteance between the two grid by steven--%>
                                 <td style="width: 300px; vertical-align: top;">
@@ -197,7 +197,8 @@
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
                                                         <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'>
-                                                        <%# HtmlBlackInfo(Eval("CaseName"))%></div>
+                                                            <%# HtmlBlackInfo(Eval("CaseName"))%>
+                                                        </div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
@@ -573,9 +574,9 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td colspan="10" style="border-bottom: 3px solid white">
-                                    <div style="max-width: 1570px;margin-right:30px;">
+                            <tr style="height:100%">
+                                <td colspan="10" style="border-bottom: 3px solid white" id="tdGrid">
+                                    <div style="max-width: 1570px; margin-right: 30px;">
                                         <div class="clearfix" style="margin-bottom: 20px;">
                                             <h4 style="padding-top: 20px">
                                                 <i class="fa fa-folder-open with_circle title_summary_icon" style=""></i><span class="heading_text2"><%--Leads and Active--%> Files</span>
@@ -602,7 +603,7 @@
                                                             <div style="cursor: pointer" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
                                                         </DataItemTemplate>
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="Owner" Caption="Name">
+                                                    <dx:GridViewDataTextColumn FieldName="OwnerLastName" Caption="Name">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
                                                     </dx:GridViewDataTextColumn>
@@ -620,15 +621,24 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name" Caption="Listing agent">
                                                     </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="Manager" Caption="Manager">
+                                                    </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="PropertyInfo.UpdateDate" Caption="Last Activity">
                                                         <DataItemTemplate>
                                                             <%# GetLastActivity(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%>
                                                         </DataItemTemplate>
                                                     </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="Owner" Caption="Assgin To">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="BBLE" Caption="Last Comments">
+                                                        <DataItemTemplate>
+                                                            <%# IntranetPortal.LeadsActivityLog.GetLastComments(Eval("BBLE"))%>
+                                                        </DataItemTemplate>
+                                                    </dx:GridViewDataTextColumn>
                                                     <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="Next Task" >                                                 
                                                 </dx:GridViewDataTextColumn>--%>
                                                 </Columns>
-                                                <Settings ShowFooter="True" ShowHeaderFilterButton="true" />
+                                                <Settings ShowHeaderFilterButton="true" />
                                                 <SettingsPager>
                                                     <PageSizeItemSettings Visible="true"></PageSizeItemSettings>
                                                 </SettingsPager>
@@ -716,4 +726,10 @@
     </div>
 </div>
 <script src="/scripts/js/right_pane.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var height = $("#tdGrid").height();
+    //debugger;
+    //AllLeadsGridClient.SetHeight(height-45);
+    //AllLeadsGridClient.AdjustControl();
+</script>
 <%--change it to color sytle by steven--%>

@@ -46,6 +46,17 @@
         Return AddActivityLog(logDate, comments, bble, category, empId, empName)
     End Function
 
+    Public Shared Function GetLastComments(bble As String) As String
+        Using Context As New Entities
+            Dim log = Context.LeadsActivityLogs.Where(Function(lg) lg.BBLE = bble).OrderByDescending(Function(lg) lg.ActivityDate).FirstOrDefault
+            If log IsNot Nothing Then
+                Return log.Comments
+            End If
+
+            Return ""
+        End Using
+    End Function
+
     Enum LogCategory
         SalesAgent
         Finder
