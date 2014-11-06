@@ -29,6 +29,7 @@ Public Class UCTitleSummary
         End If
         Return "bad data"
     End Function
+
     Public Function GetLastActivity(ssCase As ShortSaleCase) As String
         ' Return ssCase.PropertyInfo.StreetName
         If ssCase IsNot Nothing Then
@@ -83,6 +84,15 @@ Public Class UCTitleSummary
             Dim priorityData = ShortSale.ShortSaleSummary.GetUpcomingClosings()
             gridUpcomingApproval.DataSource = priorityData
             gridUpcomingApproval.DataBind()
+
+            CounterOfferGrid.DataSource = ShortSaleSummary.GetCaseByMortStatus("Counter Offer")
+            CounterOfferGrid.DataBind()
+
+            InvestorReviewGrid.DataSource = ShortSaleSummary.GetCaseByMortStatus("Investor Review")
+            InvestorReviewGrid.DataBind()
+
+            DocumentRequestsGrid.DataSource = ShortSaleSummary.GetCaseByMortStatus("Document Request")
+            DocumentRequestsGrid.DataBind()
 
             'Bind All Leads Grid
             AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase()

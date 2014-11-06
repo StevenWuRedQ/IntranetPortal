@@ -261,28 +261,9 @@
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
-                                                        <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                        <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
                                                     </DataItemTemplate>
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
-                                                    <GroupRowTemplate>
-                                                        <div>
-                                                            <table>
-                                                                <tr>
-                                                                    <td>
-                                                                        <img src="../images/grid_call_backs_canlender.png" /></td>
-                                                                    <td style="font-weight: 900; width: 80px; text-align: center;">Date: <%# Container.GroupText%></td>
-                                                                    <td style="padding-left: 10px">
-                                                                        <div class="raund-label">
-                                                                            <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                        </div>
-                                                                    </td>
-                                                                    <%--the round div--%>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                    </GroupRowTemplate>
-                                                </dx:GridViewDataTextColumn>
+                                                </dx:GridViewDataTextColumn>                                               
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
@@ -316,28 +297,9 @@
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
-                                                        <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                        <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
                                                     </DataItemTemplate>
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
-                                                    <GroupRowTemplate>
-                                                        <div>
-                                                            <table>
-                                                                <tr>
-                                                                    <td>
-                                                                        <img src="../images/grid_call_backs_canlender.png" /></td>
-                                                                    <td style="font-weight: 900; width: 80px; text-align: center;">Date: <%# Container.GroupText%></td>
-                                                                    <td style="padding-left: 10px">
-                                                                        <div class="raund-label">
-                                                                            <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                        </div>
-                                                                    </td>
-                                                                    <%--the round div--%>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                    </GroupRowTemplate>
-                                                </dx:GridViewDataTextColumn>
+                                                </dx:GridViewDataTextColumn>                                                
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
@@ -367,28 +329,9 @@
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
-                                                        <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                        <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
                                                     </DataItemTemplate>
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
-                                                    <GroupRowTemplate>
-                                                        <div>
-                                                            <table>
-                                                                <tr>
-                                                                    <td>
-                                                                        <img src="../images/grid_call_backs_canlender.png" /></td>
-                                                                    <td style="font-weight: 900; width: 80px; text-align: center;">Date: <%# Container.GroupText%></td>
-                                                                    <td style="padding-left: 10px">
-                                                                        <div class="raund-label">
-                                                                            <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                        </div>
-                                                                    </td>
-                                                                    <%--the round div--%>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                    </GroupRowTemplate>
-                                                </dx:GridViewDataTextColumn>
+                                                </dx:GridViewDataTextColumn>                                               
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
@@ -598,7 +541,7 @@
                                                     </Row>
                                                 </Styles>
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Street address" SortOrder="Ascending">
+                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Street address" SortOrder="Ascending" Width="450px">
                                                         <DataItemTemplate>
                                                             <div style="cursor: pointer;width:600px" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
                                                         </DataItemTemplate>
