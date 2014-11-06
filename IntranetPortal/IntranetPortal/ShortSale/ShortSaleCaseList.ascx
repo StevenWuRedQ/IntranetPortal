@@ -33,18 +33,18 @@
             dataType: "json",
             success: OnSuccess,
             failure: function (response) {
-                alert(response);
+                alert("Get ShortSaleData failed" + response);
             },
             error: function (response) {
-                alert(response);
+                alert("Get ShortSaleData error" + response);
             }
         });
     }
 
-    function OnSuccess(response) {        
+    function OnSuccess(response) {
         ShortSaleCaseData = JSON.parse(response.d);
         leadsInfoBBLE = ShortSaleCaseData.BBLE;
-        ShortSaleDataBand(0);        
+        ShortSaleDataBand(0);
     }
 
     function OnGetRowValues(values) {
@@ -57,15 +57,40 @@
             ContentCallbackPanel.PerformCallback(values);
         }
     }
-    
-    function RefreshContent()
-    {
-        if(caseId != null)
-        {
+
+    function RefreshContent() {
+        if (caseId != null) {
             ContentCallbackPanel.PerformCallback(caseId);
         }
     }
 
+    function AddScrollbarOnLeadsList() {
+        $("#leads_list_left").each(function (ind) {
+         
+
+            var ladfucntion = {
+                onScroll: function () {
+                    var position = this.mcs.topPct;
+                    if (position > 95) {
+                        //gridCase.NextPage();
+                    }
+                }
+            }
+         
+                $(this).mCustomScrollbar(
+                    {
+                        theme: "minimal-dark",
+                        callbacks: ladfucntion
+                    }
+                 );
+            
+        });
+    }
+
+    $(document).ready(function () {
+        AddScrollbarOnLeadsList();
+    });
+    
 </script>
 
 <div style="width: 100%; height: 100%;" class="color_gray">
@@ -88,10 +113,10 @@
     <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
         <asp:HiddenField runat="server" ID="hfCaseStatus" />
         <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="CaseId" SettingsPager-Mode="ShowAllRecords" OnDataBinding="gridCase_DataBinding">
-            <Columns>             
+            <Columns>
                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
-                </dx:GridViewDataTextColumn>                                
+                </dx:GridViewDataTextColumn>
                 <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false" VisibleIndex="5"></dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="Owner" Visible="false" VisibleIndex="4">
                     <GroupRowTemplate>
@@ -115,15 +140,14 @@
                     <DataItemTemplate>
                         <div class="hidden_icon">
                             <i class="fa fa-list-alt employee_list_item_icon" style="width: 30px" onclick="<%#String.Format("ShowCateMenu(this,{0},'{1}')", Eval("CaseId"), Eval("BBLE"))%>"></i>
-                        </div>
-                        <%-- <img src="/images/flag1.png" style="width: 16px; height: 16px; vertical-align: bottom" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>" />--%>
+                        </div>                        
                     </DataItemTemplate>
                 </dx:GridViewDataColumn>
-            </Columns>         
+            </Columns>
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
                 EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
             <SettingsPager Mode="ShowAllRecords"></SettingsPager>
-            <Settings ShowColumnHeaders="False" VerticalScrollableHeight="50"></Settings>            
+            <Settings ShowColumnHeaders="False" VerticalScrollableHeight="767"></Settings>
             <Styles>
                 <Table Border-BorderStyle="None">
                     <Border BorderStyle="None"></Border>
@@ -135,10 +159,10 @@
                 <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
             </Styles>
             <GroupSummary>
-                <dx:ASPxSummaryItem FieldName="LeadsName" SummaryType="Count" />
+                <dx:ASPxSummaryItem FieldName="CaseName" SummaryType="Count" />
             </GroupSummary>
             <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
             <Border BorderStyle="None"></Border>
         </dx:ASPxGridView>
-    </div> 
-   </div>
+    </div>
+</div>

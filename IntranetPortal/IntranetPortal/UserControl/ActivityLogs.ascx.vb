@@ -656,7 +656,6 @@ Public Class ActivityLogs
             End If
 
             LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is Resend by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
-
         End Using
     End Sub
 

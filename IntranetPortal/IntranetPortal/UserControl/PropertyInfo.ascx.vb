@@ -124,12 +124,12 @@
 
                 Dim li = Context.LeadsInfoes.Find(bble)
                 If li IsNot Nothing Then
-                    li.C1stMotgrAmt = CDec(txtC1stMotgr.Text)
-                    li.C2ndMotgrAmt = CDec(txtC2ndMotgr.Text)
-                    li.C3rdMortgrAmt = CDec(txtC3rdMotgr.Text)
-                    li.TaxesAmt = CDec(txtTaxesAmt.Text)
-                    li.WaterAmt = CDec(txtWaterAmt.Text)
-                    li.DOBViolationsAmt = CDec(txtViolationAmt.Text)
+                    li.C1stMotgrAmt = ParseDec(txtC1stMotgr.Text)
+                    li.C2ndMotgrAmt = ParseDec(txtC2ndMotgr.Text)
+                    li.C3rdMortgrAmt = ParseDec(txtC3rdMotgr.Text)
+                    li.TaxesAmt = ParseDec(txtTaxesAmt.Text)
+                    li.WaterAmt = ParseDec(txtWaterAmt.Text)
+                    li.DOBViolationsAmt = ParseDec(txtViolationAmt.Text)
                 End If
 
                 Context.SaveChanges()
@@ -137,7 +137,18 @@
 
             If LeadsInfoData.BBLE Is Nothing AndAlso hfBBLE.Value IsNot Nothing Then
                 LeadsInfoData = LeadsInfo.GetInstance(hfBBLE.Value)
+                Me.DataBind()
             End If
         End If
     End Sub
+
+    Function ParseDec(num As String) As Decimal
+        Dim result As Decimal
+
+        If Decimal.TryParse(num, result) Then
+            Return result
+        End If
+
+        Return 0
+    End Function
 End Class
