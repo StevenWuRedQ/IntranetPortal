@@ -589,8 +589,7 @@
                                                     <HeaderFilter Height="200" />
                                                 </SettingsPopup>
                                             </dx:ASPxGridView>
-                                            <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
-
+                                            <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>                                            
                                         </div>
                                     </div>
                                 </td>
