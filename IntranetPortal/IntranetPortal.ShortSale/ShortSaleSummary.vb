@@ -5,8 +5,14 @@
         End Using
     End Function
 
-    Public Shared Function GetCaseByStatus(status As String) As List(Of ShortSaleCase)
-        Return GetAllCase()
+    Public Shared Function GetCaseByMortStatus(status As String) As List(Of ShortSaleCase)
+        Using ctx As New ShortSaleEntities
+            Dim result = (From ssCase In ctx.ShortSaleCases
+                         Join mort In ctx.PropertyMortgages On mort.CaseId Equals ssCase.CaseId
+                         Where mort.Status = status
+                         Select ssCase).Distinct.ToList
+            Return result
+        End Using
     End Function
 
     Public Shared Function GetUpcomingClosings() As List(Of ShortSaleCase)
