@@ -35,12 +35,16 @@ Public Class ActivityLogs
 
     Sub BindEmpList()
         Using Context As New Entities
-            cbEmps.DataSource = Context.Employees.ToList
-            cbEmps.DataBind()
+            'cbEmps.DataSource = Context.Employees.ToList
+            'cbEmps.DataBind()
 
             Dim lbEmps = TryCast(empsDropDownEdit.FindControl("tabPageEmpSelect").FindControl("lbEmps"), ASPxListBox)
-            lbEmps.DataSource = Context.Employees.ToList
+            lbEmps.DataSource = Employee.GetAllActiveEmps()
             lbEmps.DataBind()
+
+            Dim lbRecentEmps = TryCast(empsDropDownEdit.FindControl("tabPageEmpSelect").FindControl("lbRecentEmps"), ASPxListBox)
+            lbRecentEmps.DataSource = Employee.GetProfile(Page.User.Identity.Name).RecentEmps
+            lbRecentEmps.DataBind()
         End Using
     End Sub
 
@@ -228,6 +232,10 @@ Public Class ActivityLogs
     End Sub
 
     Sub SetAsTask()
+        If Not String.IsNullOrEmpty(hfResend.Value) Then
+            Dim logId = CInt(hfResend.Value)
+            ResendTask(logId)
+        End If
 
         Dim employees = Page.User.Identity.Name & ";" & empsDropDownEdit.Text
 
@@ -266,12 +274,13 @@ Public Class ActivityLogs
         Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
 
         Using Context As New Entities
-
             Context.UserTasks.Add(AddTask(hfBBLE.Value, employees, cbTaskAction.Text, cbTaskImportant.Text, scheduleDate, txtTaskDes.Text, log.LogID))
             Context.SaveChanges()
         End Using
 
         Dim emps = employees.Split(";").Distinct.ToArray
+
+        Dim upData = Employee.GetProfile(Page.User.Identity.Name)
 
         Dim ld = LeadsInfo.GetInstance(hfBBLE.Value)
         For i = 0 To emps.Count - 1
@@ -279,9 +288,15 @@ Public Class ActivityLogs
                 Dim title = String.Format("A New Task has been assigned by {0}  regarding {1} for {2}", Page.User.Identity.Name, cbTaskAction.Text, ld.PropertyAddress)
                 UserMessage.AddNewMessage(emps(i), title, comments, hfBBLE.Value)
 
+                'Add recently choose employee list
+                If upData.RecentEmps.Contains(emps(i)) Then
+                    upData.RecentEmps.Remove(emps(i))
+                End If
+                upData.RecentEmps.Insert(0, emps(i))
             End If
         Next
 
+        Employee.SaveProfile(Page.User.Identity.Name, upData)
         BindData(hfBBLE.Value)
     End Sub
 
@@ -614,6 +629,7 @@ Public Class ActivityLogs
     Protected Sub ASPxPopupControl1_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         Dim popup = CType(source, ASPxPopupControl)
         PopupContentSetAsTask.Visible = True
+        hfResend.Value = ""
         BindEmpList()
 
         If e.Parameter.StartsWith("ResendTask") Then
@@ -623,8 +639,9 @@ Public Class ActivityLogs
             cbTaskAction.Text = task.Action
             cbTaskImportant.Text = task.Important
             txtTaskDes.Text = task.Description
+            hfResend.Value = logId
 
-            ResendTask(logId)
+            'ResendTask(logId)
         End If
     End Sub
 
@@ -634,13 +651,13 @@ Public Class ActivityLogs
             Dim task = Context.UserTasks.Where(Function(t) t.LogID = logId).SingleOrDefault
 
             If task IsNot Nothing Then
-                task.Status = UserTask.TaskStatus.Resend
+                task.Status = UserTask.TaskStatus.Complete
                 Context.SaveChanges()
             End If
+
             LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is Resend by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
 
         End Using
-
     End Sub
 
     Enum ActivityLogMode

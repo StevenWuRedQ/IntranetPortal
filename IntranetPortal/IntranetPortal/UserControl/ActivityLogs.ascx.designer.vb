@@ -113,60 +113,6 @@ Partial Public Class ActivityLogs
     Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
-    '''pcMain control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pcMain As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
-
-    '''<summary>
-    '''lbEmployees control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbEmployees As Global.DevExpress.Web.ASPxEditors.ASPxListBox
-
-    '''<summary>
-    '''cbEmps control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cbEmps As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
-
-    '''<summary>
-    '''btnAddEmp control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAddEmp As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''btnRemoveEmp control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnRemoveEmp As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''ASPxButton1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>
@@ -183,6 +129,15 @@ Partial Public Class ActivityLogs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PopupContentSetAsTask As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+
+    '''<summary>
+    '''hfResend control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfResend As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
     '''empsDropDownEdit control.

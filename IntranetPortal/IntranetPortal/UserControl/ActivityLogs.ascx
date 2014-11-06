@@ -648,7 +648,7 @@
             </ContentCollection>
         </dx:ASPxPopupControl>
 
-        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectUserControl" Width="260px" Height="250px" MaxWidth="800px" MinWidth="150px" ID="pcMain" HeaderText="Select Employees:" Modal="true"
+      <%--  <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectUserControl" Width="260px" Height="250px" MaxWidth="800px" MinWidth="150px" ID="pcMain" HeaderText="Select Employees:" Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="RightSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server" Visible="false">
@@ -705,7 +705,7 @@
                     </table>
                 </dx:PopupControlContentControl>
             </ContentCollection>
-        </dx:ASPxPopupControl>
+        </dx:ASPxPopupControl>--%>
 
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSetAsTaskControl" Width="450px" Height="550px" OnWindowCallback="ASPxPopupControl1_WindowCallback"
             MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl1"
@@ -724,7 +724,7 @@
             </HeaderTemplate>
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentSetAsTask">
-                   
+                   <asp:HiddenField runat="server" ID="hfResend" />
                     <div style="color: #b1b2b7; padding: 10px">
                         <div class="form-group ">
                             <label class="upcase_text">employees</label>
@@ -736,7 +736,7 @@
                                             <dx:TabPage Text="Recently" Name="tabRecent">
                                                 <ContentCollection>
                                                     <dx:ContentControl runat="server">
-                                                        <dx:ASPxListBox Width="100%" ID="ASPxListBox1" Height="240px" ClientInstanceName="empRecentlyListbox" SelectionMode="CheckColumn"
+                                                        <dx:ASPxListBox Width="100%" ID="lbRecentEmps" Height="240px" ClientInstanceName="empRecentlyListbox" SelectionMode="CheckColumn"
                                                             runat="server">
                                                             <Items>
                                                                 <dx:ListEditItem Text="Ron Borovinsky" Value="Ron Borovinsky" />
@@ -764,7 +764,7 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                        <dx:ASPxListBox Width="100%" ID="lbEmps" Height="220px" ClientInstanceName="empListBox" SelectionMode="CheckColumn" TextField="Name" ValueField="Name"
+                                                        <dx:ASPxListBox Width="100%" ID="lbEmps" Height="220px" ClientInstanceName="empListBox" SelectionMode="CheckColumn"
                                                             runat="server">
                                                             <Border BorderStyle="None" />
                                                             <BorderBottom BorderStyle="Solid" BorderWidth="1px" BorderColor="#DCDCDC" />
@@ -807,7 +807,7 @@
                             </dx:ASPxComboBox>
                         </div>
 
-                        <div class="form-group ">
+                        <div class="form-group " style="display:none">
                             <label class="upcase_text">Reminder</label>
                             <dx:ASPxComboBox runat="server" DropDownStyle="DropDown" ID="cbTaskSchedule" Width="100%" ClientInstanceName="cbTaskScheduleClient" CssClass="edit_drop">
                                 <Items>
