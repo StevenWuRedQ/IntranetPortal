@@ -211,6 +211,7 @@
           <Property Name="IsDOBViolations" Type="bit" />
           <Property Name="C1stMotgrAmt" Type="decimal" Precision="18" Scale="2" />
           <Property Name="C2ndMotgrAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="C3rdMortgrAmt" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TaxesAmt" Type="decimal" Precision="18" Scale="2" />
           <Property Name="TaxesOrderStatus" Type="nvarchar" MaxLength="50" />
           <Property Name="TaxesOrderTime" Type="datetime" />
@@ -740,6 +741,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="UnbuiltSqft" Type="Double" />
           <Property Name="PropertyClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="Int32" />
+          <Property Name="C3rdMortgrAmt" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <Association Name="LeadLeadsInfo">
           <End Type="IntranetPortalModel.Lead" Role="Lead" Multiplicity="0..1" />
@@ -1239,6 +1241,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySetMapping Name="LeadsInfoes">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadsInfo">
               <MappingFragment StoreEntitySet="LeadsInfo">
+                <ScalarProperty Name="C3rdMortgrAmt" ColumnName="C3rdMortgrAmt" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="PropertyClass" ColumnName="PropertyClass" />
                 <ScalarProperty Name="UnbuiltSqft" ColumnName="UnbuiltSqft" />

@@ -122,6 +122,15 @@ Partial Public Class PropertyInfo
     Protected WithEvents cbpMortgageData As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
 
     '''<summary>
+    '''txtC1stMotgr control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtC1stMotgr As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
     '''cb1stFannie control.
     '''</summary>
     '''<remarks>
@@ -147,6 +156,15 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txt1stServicer As Global.System.Web.UI.HtmlControls.HtmlInputText
+
+    '''<summary>
+    '''txtC2ndMotgr control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtC2ndMotgr As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
 
     '''<summary>
     '''cb2ndFannie control.
@@ -176,6 +194,15 @@ Partial Public Class PropertyInfo
     Protected WithEvents txt2ndServicer As Global.System.Web.UI.HtmlControls.HtmlInputText
 
     '''<summary>
+    '''txtC3rdMotgr control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtC3rdMotgr As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
     '''cb3rdFannie control.
     '''</summary>
     '''<remarks>
@@ -201,6 +228,42 @@ Partial Public Class PropertyInfo
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txt3rdServicer As Global.System.Web.UI.HtmlControls.HtmlInputText
+
+    '''<summary>
+    '''txtTaxesAmt control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtTaxesAmt As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''txtWaterAmt control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtWaterAmt As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''txtViolationAmt control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtViolationAmt As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''ASPxTextBox1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxTextBox1 As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
 
     '''<summary>
     '''gridLiens control.

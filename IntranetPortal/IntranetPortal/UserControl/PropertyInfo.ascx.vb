@@ -122,6 +122,16 @@
                     mort.C3rdServicer = txt3rdServicer.Value
                 End If
 
+                Dim li = Context.LeadsInfoes.Find(bble)
+                If li IsNot Nothing Then
+                    li.C1stMotgrAmt = CDec(txtC1stMotgr.Text)
+                    li.C2ndMotgrAmt = CDec(txtC2ndMotgr.Text)
+                    li.C3rdMortgrAmt = CDec(txtC3rdMotgr.Text)
+                    li.TaxesAmt = CDec(txtTaxesAmt.Text)
+                    li.WaterAmt = CDec(txtWaterAmt.Text)
+                    li.DOBViolationsAmt = CDec(txtViolationAmt.Text)
+                End If
+
                 Context.SaveChanges()
             End Using
 

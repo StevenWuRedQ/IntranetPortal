@@ -81,6 +81,7 @@ Partial Public Class LeadsInfo
     Public Property UnbuiltSqft As Nullable(Of Double)
     Public Property PropertyClass As String
     Public Property Type As Nullable(Of Integer)
+    Public Property C3rdMortgrAmt As Nullable(Of Decimal)
 
     Public Overridable Property Lead As Lead
 

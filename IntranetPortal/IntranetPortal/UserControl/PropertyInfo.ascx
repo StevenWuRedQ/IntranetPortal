@@ -16,8 +16,7 @@
     }
 
     function ShowPopupMap(url, header) {
-        if (header == "eCourts")
-        {
+        if (header == "eCourts") {
             $("#addition_info").html($('#LinesDefendantAndIndex').val());
         }
 
@@ -64,7 +63,7 @@
     //init_currency();
 </script>
 
-<input type="hidden" id="borugh_block_lot_data" value='(Borough:<%=LeadsInfoData.Block %> , Block:<%=LeadsInfoData.Block %> ,Lot:<%=LeadsInfoData.Lot %>)'/>
+<input type="hidden" id="borugh_block_lot_data" value='(Borough:<%=LeadsInfoData.Block %> , Block:<%=LeadsInfoData.Block %> ,Lot:<%=LeadsInfoData.Lot %>)' />
 <input type="hidden" id="LinesDefendantAndIndex" value='<%= LinesDefendantAndIndex()%>' />
 <div class="tab-pane active" id="property_info" style="padding-top: 5px">
     <%--witch scroll bar--%>
@@ -93,7 +92,7 @@
                 <span class="time_buttons" onclick='ShowDOBWindow("<%= LeadsInfoData.Borough%>","<%= LeadsInfoData.Number%>", "<%= LeadsInfoData.StreetName%>")'>DOB</span>
                 <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>")'>Acris</span>
                 <span class="time_buttons" onclick='ShowPropertyMap("<%= LeadsInfoData.BBLE %>")'>Maps</span>
-                <span class="time_buttons" onclick='VendorsPopupClient.Show()' style="display:none">VendorsPopUp</span>
+                <span class="time_buttons" onclick='VendorsPopupClient.Show()' style="display: none">VendorsPopUp</span>
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
             <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; <%= If( LeadsInfoData.CreateDate.HasValue,"visibility:visible","visibility:hidden")%>">Started on <%= LeadsInfoData.CreateDate.ToString%></span>
@@ -315,7 +314,6 @@
             </div>
             <%--<div class="form_div_node form_div_node_margin form_div_node_line_margin">
                 <span class="form_input_title">Zestimate</span>
-
                 <input class="text_input" value="$<%=LeadsInfoData.EstValue %>" />
             </div>--%>
             <%----end line --%>
@@ -370,8 +368,9 @@
 
                         <%--line 1--%>
                         <div class="form_div_node form_div_node_line_margin">
-                            <span class="form_input_title">1st Mortgage</span>
-                            <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.C1stMotgrAmt%>" />
+                            <span class="form_input_title">1st Mortgage</span>                           
+                            <dx:ASPxTextBox runat="server" ID="txtC1stMotgr" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.C1stMotgrAmt  %>'></dx:ASPxTextBox>
+                            <%--<input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.C1stMotgrAmt%>" style="display: none" />--%>
                         </div>
 
                         <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
@@ -383,7 +382,7 @@
                             <label for="<%= cb1stFannie.ClientID %>" class=" form_div_radio_group">
                                 <span class="form_span_group_text">Fannie</span>
                             </label>
-                            <input type="checkbox" id="cb1stFHA"   style="margin-left: 66px" runat="server" checked='<%# LeadsInfoData.MortgageData.C1stFHA.HasValue andalso LeadsInfoData.MortgageData.C1stFHA %>' />
+                            <input type="checkbox" id="cb1stFHA" style="margin-left: 66px" runat="server" checked='<%# LeadsInfoData.MortgageData.C1stFHA.HasValue andalso LeadsInfoData.MortgageData.C1stFHA %>' />
                             <label for="<%= cb1stFHA.ClientID %>" class=" form_div_radio_group form_div_node_margin">
                                 <span class="form_span_group_text">FHA</span>
                             </label>
@@ -391,14 +390,15 @@
 
                         <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                             <span class="form_input_title">Servicer</span>
-                            <input class="text_input" value='<%# LeadsInfoData.MortgageData.C1stServicer %>' id="txt1stServicer" runat="server"/>
+                            <input class="text_input" value='<%# LeadsInfoData.MortgageData.C1stServicer %>' id="txt1stServicer" runat="server" />
                         </div>
                         <%--end line --%>
                         <%--line 2--%>
 
                         <div class="form_div_node form_div_node_line_margin">
                             <span class="form_input_title">2nd Mortgage</span>
-                            <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.C2ndMotgrAmt%>" />
+                            <dx:ASPxTextBox runat="server" ID="txtC2ndMotgr" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.C2ndMotgrAmt  %>'></dx:ASPxTextBox>
+                            <%--                            <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.C2ndMotgrAmt%>" />--%>
                         </div>
 
                         <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
@@ -427,7 +427,7 @@
 
                         <div class="form_div_node form_div_node_line_margin">
                             <span class="form_input_title">3nd Mortgage</span>
-                            <input class="text_input" value=" " />
+                            <dx:ASPxTextBox runat="server" ID="txtC3rdMotgr" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.C3rdMortgrAmt  %>'></dx:ASPxTextBox>
                         </div>
 
                         <div class="form_div_node form_div_node_margin form_div_node_line_margin form_div_node_no_under_line clearfix">
@@ -439,7 +439,7 @@
                             <label for="<%= cb3rdFannie.ClientID %>" class=" form_div_radio_group">
                                 <span class="form_span_group_text">Fannie</span>
                             </label>
-                            <input type="checkbox" id="cb3rdFHA" name="cb3rdFHA" value="" style="margin-left: 66px" runat="server" checked='<%# LeadsInfoData.MortgageData.C3rdFHA.HasValue AndAlso LeadsInfoData.MortgageData.C3rdFHA%>'  />
+                            <input type="checkbox" id="cb3rdFHA" name="cb3rdFHA" value="" style="margin-left: 66px" runat="server" checked='<%# LeadsInfoData.MortgageData.C3rdFHA.HasValue AndAlso LeadsInfoData.MortgageData.C3rdFHA%>' />
                             <label for="<%= cb3rdFHA.ClientID %>" class=" form_div_radio_group form_div_node_margin">
                                 <span class="form_span_group_text">FHA</span>
                             </label>
@@ -456,28 +456,31 @@
 
                             <div class="form_div_node form_div_node_line_margin form_div_node_small">
                                 <span class="form_input_title">Taxes</span>
-                                <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.TaxesAmt%>" />
+                                <dx:ASPxTextBox runat="server" ID="txtTaxesAmt" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.TaxesAmt  %>'></dx:ASPxTextBox>
+                                <%--<input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.TaxesAmt%>" />--%>
                             </div>
-                            
+
                             <%----end line ----%>
                             <%--line 5--%>
 
                             <div class="form_div_node form_div_node_line_margin form_div_node_small">
                                 <span class="form_input_title">water</span>
-                                <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.WaterAmt%>" />
+                                <dx:ASPxTextBox runat="server" ID="txtWaterAmt" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.WaterAmt  %>'></dx:ASPxTextBox>
+                                <%--<input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.WaterAmt%>" />--%>
                             </div>
                             <%----end line ----%>
                             <%--line 6--%>
 
                             <div class="form_div_node form_div_node_line_margin form_div_node_small">
                                 <span class="form_input_title">ecb/dob</span>
-                                <input class="text_input" value="<%= LeadsInfoData.ViolationAmount %>" />
+                                <dx:ASPxTextBox runat="server" ID="txtViolationAmt" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.ViolationAmount  %>'></dx:ASPxTextBox>
+                                <%--<input class="text_input" value="<%= LeadsInfoData.ViolationAmount %>" />--%>
                             </div>
                             <%--line 7--%>
 
                             <div class="form_div_node form_div_node_line_margin form_div_node_small">
                                 <span class="form_input_title" style="color: #ff400d">Total debt</span>
-                                <input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.TotalDebt %>" />
+                                <dx:ASPxTextBox runat="server" ID="ASPxTextBox1" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.TotalDebt  %>'></dx:ASPxTextBox>
                             </div>
                             <%----end line ----%>
                         </div>
@@ -488,7 +491,7 @@
                 </dx:PanelContent>
             </PanelCollection>
             <ClientSideEvents EndCallback="function(s,e){alert('Saved.');}" />
-        </dx:ASPxCallbackPanel>       
+        </dx:ASPxCallbackPanel>
 
         <%--Liens table--%>
         <div style="margin: 20px;" class="clearfix">
@@ -560,14 +563,14 @@
                 <i class="fa fa-times icon_btn" onclick="aspxAcrisControl.Hide()"></i>
             </div>
         </div>
-        <div style="text-align:center" id="addition_info"></div>
+        <div style="text-align: center" id="addition_info"></div>
     </HeaderTemplate>
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
-<uc1:VendorsPopup runat="server" id="VendorsPopup" />
+<uc1:VendorsPopup runat="server" ID="VendorsPopup" />
 <script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 
 <script type="text/javascript">
