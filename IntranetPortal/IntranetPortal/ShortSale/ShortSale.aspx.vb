@@ -20,6 +20,13 @@ Public Class ShortSalePage
 
                 ASPxSplitter1.Panes("listPanel").Collapsed = True
                 contentSplitter.ClientVisible = True
+
+                If Not Page.ClientScript.IsStartupScriptRegistered("RefreshCaseContent") Then
+                    Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                                    String.Format("OnGetRowValues({0});", caseId) & "</script>"
+                    Page.ClientScript.RegisterStartupScript(Me.GetType, "RefreshCaseContent", cstext1)
+                End If
+
             End If
 
             If Not String.IsNullOrEmpty(Request.QueryString("ShowList")) Then
