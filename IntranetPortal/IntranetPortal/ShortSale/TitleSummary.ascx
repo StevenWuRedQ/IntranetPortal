@@ -576,8 +576,8 @@
                             </tr>
                             <tr style="height:100%">
                                 <td colspan="10" style="border-bottom: 3px solid white" id="tdGrid">
-                                    <div style="max-width: 1570px; margin-right: 30px;">
-                                        <div class="clearfix" style="margin-bottom: 20px;">
+                                    <div style="max-width: 1570px; margin-right:30px;">
+                                        <div class="clearfix" style="margin-bottom: 20px;overflow:auto">
                                             <h4 style="padding-top: 20px">
                                                 <i class="fa fa-folder-open with_circle title_summary_icon" style=""></i><span class="heading_text2"><%--Leads and Active--%> Files</span>
                                                 <%--<span class="table_tips" style="margin-left: 40px;">Shows all files that haven’t closed or been archived.
@@ -592,7 +592,7 @@
                                                 <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" ></i>'></asp:LinkButton>
                                                 <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-pdf-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;"></i>'></asp:LinkButton>
                                             </div>
-                                            <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="6" KeyFieldName="CaseId" Width="100%" Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300" ForeColor="#b1b2b7">
+                                            <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="10" KeyFieldName="CaseId" Width="100%" Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300" ForeColor="#b1b2b7">
                                                 <Styles>
                                                     <Row CssClass="summary_row">
                                                     </Row>
@@ -600,20 +600,20 @@
                                                 <Columns>
                                                     <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Street address" SortOrder="Ascending">
                                                         <DataItemTemplate>
-                                                            <div style="cursor: pointer" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
+                                                            <div style="cursor: pointer;width:600px" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
                                                         </DataItemTemplate>
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OwnerLastName" Caption="Name">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1st Mortgage Progress">
+                                                    <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1st Mort Prog">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="FristMortageLender" Caption="Servicer (1st Mort)">
+                                                    <dx:GridViewDataTextColumn FieldName="FristMortageLender" Caption="1st Mort Ser ">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="SencondMortageProgress" Caption="2nd Mortgage Progress">
+                                                    <dx:GridViewDataTextColumn FieldName="SencondMortageProgress" Caption="2nd Mort Prog">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="SencondMortageLender" Caption="Servicer (2nd Mort)">
+                                                    <dx:GridViewDataTextColumn FieldName="SencondMortageLender" Caption="2nd Mort Ser">
                                                     </dx:GridViewDataTextColumn>
                                                     <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City"  Caption="Office Price">                                                 
                                                 </dx:GridViewDataTextColumn>--%>
@@ -632,7 +632,7 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="BBLE" Caption="Last Comments">
                                                         <DataItemTemplate>
-                                                            <%# IntranetPortal.LeadsActivityLog.GetLastComments(Eval("BBLE"))%>
+                                                            <i class="fa fa-info-circle tooltip-examples" style="font-size:18px" data-toggle="tooltip" data-placement="bottom" title="<%# IntranetPortal.LeadsActivityLog.GetLastComments(Eval("BBLE"))%>"></i>
                                                         </DataItemTemplate>
                                                     </dx:GridViewDataTextColumn>
                                                     <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="Next Task" >                                                 
