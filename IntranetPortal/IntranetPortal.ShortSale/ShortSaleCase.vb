@@ -57,7 +57,6 @@ Partial Public Class ShortSaleCase
 
             Return _mortgages
         End Get
-
     End Property
 
     Private _sellerTitle As PropertyTitle
@@ -138,6 +137,12 @@ Partial Public Class ShortSaleCase
             Else
                 Return New PartyContact
             End If
+        End Get
+    End Property
+
+    Public ReadOnly Property Manager As String
+        Get
+            Return ""
         End Get
     End Property
 
