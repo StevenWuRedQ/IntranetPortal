@@ -156,4 +156,13 @@ Partial Public Class ShortSaleOverVew
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ShortSalePartiesTab As Global.IntranetPortal.ShortSalePartiesTab
+
+    '''<summary>
+    '''VendorsPopup control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents VendorsPopup As Global.IntranetPortal.VendorsPopup
 End Class

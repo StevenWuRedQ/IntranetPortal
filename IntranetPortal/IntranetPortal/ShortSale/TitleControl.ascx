@@ -65,7 +65,7 @@
 </script>
 <style type="text/css">
     .TitleCleared .TitleContent {
-        color: green;
+        color: #98ba50;
     }
 
     .Urgent{

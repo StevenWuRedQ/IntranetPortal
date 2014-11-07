@@ -5,6 +5,8 @@
 <%@ Register Src="~/ShortSale/ShortSaleEvictionTab.ascx" TagPrefix="uc1" TagName="ShortSaleEvictionTab" %>
 <%@ Register Src="~/ShortSale/ShortSaleHomewonerTab.ascx" TagPrefix="uc1" TagName="ShortSaleHomewonerTab" %>
 <%@ Register Src="~/ShortSale/ShortSaleMortgageTab.ascx" TagPrefix="uc1" TagName="ShortSaleMortgageTab" %>
+<%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
+
 
 <script src="/scripts/jquery.formatCurrency-1.1.0.js"></script>
 <script type="text/javascript">
@@ -101,7 +103,7 @@
                             <span class="time_buttons" onclick='ShowDOBWindow("<%= shortSaleCaseData.PropertyInfo.Borough%>","<%= shortSaleCaseData.PropertyInfo.Number%>", "<%= shortSaleCaseData.PropertyInfo.StreetName%>")'>DOB</span>
                             <span class="time_buttons" onclick='ShowAcrisMap("<%= shortSaleCaseData.BBLE %>")'>Acris</span>
                             <span class="time_buttons" onclick='ShowPropertyMap("<%= shortSaleCaseData.BBLE %>")'>Maps</span>
-
+                            <span class="time_buttons" onclick='VendorsPopupClient.Show()' >VendorsPopUp</span>
                             <dx:ASPxPopupControl ClientInstanceName="aspxAcrisControl" Width="1000px" Height="800px"
                                 ID="ASPxPopupControl1" HeaderText="Acris" Modal="true" CloseAction="CloseButton" ShowMaximizeButton="true"
                                 runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -242,4 +244,4 @@
     </PanelCollection>
 
 </dx:ASPxCallbackPanel>
-
+<uc1:VendorsPopup runat="server" ID="VendorsPopup" />
