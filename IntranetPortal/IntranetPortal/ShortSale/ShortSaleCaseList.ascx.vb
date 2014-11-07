@@ -7,11 +7,6 @@ Public Class ShortSaleCaseList
         'BindCaseList()
     End Sub
 
-    'Public Sub BindCaseList()
-    '    gridCase.DataSource = IntranetPortal.ShortSale.ShortSaleCase.GetAllCase()
-    '    gridCase.DataBind()
-    'End Sub
-
     Public Sub BindCaseList(status As CaseStatus)
         hfCaseStatus.Value = status
 

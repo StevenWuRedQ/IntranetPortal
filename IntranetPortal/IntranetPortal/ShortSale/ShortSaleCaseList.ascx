@@ -41,6 +41,58 @@
         });
     }
 
+    function expandAllClick(s) {
+        if (gridCase.IsGroupRowExpanded(0)) {
+            gridCase.CollapseAll();
+            $(s).attr("class", 'fa fa-compress icon_btn tooltip-examples');
+        }
+        else {
+            gridCase.ExpandAll();
+            $(s).attr("class", 'fa fa-expand icon_btn tooltip-examples');
+        }
+    }
+
+    // to do by steven
+    function SortLeadsList(s, field) {
+        var classDesc = "fa fa-sort-amount-desc icon_btn tooltip-examples";
+        var classAsc = "fa fa-sort-amount-asc icon_btn tooltip-examples";
+        var sort = s.getAttribute("class");
+
+        if (sort.indexOf("-desc") > 0) {
+            s.setAttribute("class", classAsc);
+            gridCase.SortBy(field, "ASC");
+        }
+        else {
+            if (sort.indexOf("-asc") > 0) {
+                s.setAttribute("class", classDesc);
+                gridCase.SortBy(field, "DSC");
+            }
+        }
+    }
+
+    function OnSortMenuClick(s, e) {
+        var icon = document.getElementById("btnSortIcon");
+        if (e.item.index == 0) {
+            SortLeadsList(icon, "LastUpdate");
+        }
+
+        if (e.item.index == 1) {
+            SortLeadsList(icon, "CaseName");
+        }
+
+        if (e.item.index == 2) {
+            gridCase.GroupBy("Neighborhood", 0);
+        }
+
+        if (e.item.index == 3) {
+            gridCase.GroupBy("EmployeeName", 0);
+        }
+
+        if (e.item.index == 4) {
+
+        }
+    }
+
     function OnSuccess(response) {
         ShortSaleCaseData = JSON.parse(response.d);
         leadsInfoBBLE = ShortSaleCaseData.BBLE;
@@ -65,25 +117,26 @@
     }
 
     function AddScrollbarOnLeadsList() {
-        $("#leads_list_left").each(function (ind) {
-         
+        $("#leads_list_left .dxgvCSD").each(function (ind) {
+            var is_list = $(this).parents("#leads_list_left").length > 0;
 
             var ladfucntion = {
                 onScroll: function () {
                     var position = this.mcs.topPct;
                     if (position > 95) {
-                        //gridCase.NextPage();
+                        gridCase.NextPage();
                     }
                 }
             }
-         
+
+            if (is_list) {
                 $(this).mCustomScrollbar(
                     {
                         theme: "minimal-dark",
                         callbacks: ladfucntion
                     }
                  );
-            
+            }
         });
     }
 
@@ -102,7 +155,7 @@
                     <dx:ASPxLabel Text="Cases" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
                 </span>
                 <div class="icon_right_s">
-                    <i class="fa fa-sort-amount-desc icon_btn tooltip-examples" title="Sort" style="cursor: pointer; font-size: 18px" onclick="SortLeadsList(this)"></i>
+                    <i class="fa fa-sort-amount-desc icon_btn tooltip-examples" title="Sort" style="cursor: pointer; font-size: 18px" id="btnSortIcon" onclick="aspxPopupSortMenu.ShowAtElement(this);"></i>
                     <i class="fa fa-compress icon_btn tooltip-examples" style="font-size: 18px;" title="Expand or Collapse All" onclick="expandAllClick(this)" runat="server" id="divExpand"></i>
                 </div>
             </div>
@@ -112,7 +165,7 @@
     </div>
     <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
         <asp:HiddenField runat="server" ID="hfCaseStatus" />
-        <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="CaseId" SettingsPager-Mode="ShowAllRecords" OnDataBinding="gridCase_DataBinding">
+        <dx:ASPxGridView runat="server"  SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" KeyFieldName="CaseId" OnDataBinding="gridCase_DataBinding">
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
@@ -146,7 +199,7 @@
             </Columns>
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
                 EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
-            <SettingsPager Mode="ShowAllRecords"></SettingsPager>
+            <SettingsPager Mode="EndlessPaging" PageSize="10"></SettingsPager>
             <Settings ShowColumnHeaders="False" VerticalScrollableHeight="767"></Settings>
             <Styles>
                 <Table Border-BorderStyle="None">
@@ -161,8 +214,29 @@
             <GroupSummary>
                 <dx:ASPxSummaryItem FieldName="CaseName" SummaryType="Count" />
             </GroupSummary>
-            <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
+            <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" EndCallback="function(s,e){AddScrollbarOnLeadsList();}" />
             <Border BorderStyle="None"></Border>
         </dx:ASPxGridView>
     </div>
 </div>
+  <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="aspxPopupSortMenu"
+        ShowPopOutImages="false" AutoPostBack="false"
+        ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px"
+        PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
+        <ItemStyle Paddings-PaddingLeft="20px" />
+        <Items>
+            <dx:MenuItem Text="Date" Name="Date">
+            </dx:MenuItem>
+            <dx:MenuItem Text="Name" Name="Name">
+            </dx:MenuItem>
+            <dx:MenuItem Text="Borough" Name="Borough">
+            </dx:MenuItem>
+            <dx:MenuItem Text="Employee" Name="Employee">
+            </dx:MenuItem>
+            <dx:MenuItem Text="Zip" Name="Zip">
+            </dx:MenuItem>
+            <dx:MenuItem Text="Type" Name="LeadsType">
+            </dx:MenuItem>
+        </Items>
+        <ClientSideEvents ItemClick="OnSortMenuClick" />
+    </dx:ASPxPopupMenu>
