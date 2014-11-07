@@ -593,6 +593,11 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="PortalRole" Text="Teams" NavigationUrl="/Management/MgrTeam.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <PortalNavItem Name="LeadsDataManagement" Text="Data Service" NavigationUrl="/Management/LeadsDataManage.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
