@@ -101,6 +101,7 @@
           <Property Name="FHA" Type="bit" />
           <Property Name="Freddie" Type="bit" />
           <Property Name="LastBPOUpdate" Type="datetime" />
+          <Property Name="UpcomingBPODate" Type="datetime" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
@@ -369,6 +370,7 @@
           <Property Name="FHA" Type="Boolean" />
           <Property Name="Freddie" Type="Boolean" />
           <Property Name="LastBPOUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UpcomingBPODate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -614,6 +616,7 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="UpcomingBPODate" ColumnName="UpcomingBPODate" />
                 <ScalarProperty Name="LastBPOUpdate" ColumnName="LastBPOUpdate" />
                 <ScalarProperty Name="Freddie" ColumnName="Freddie" />
                 <ScalarProperty Name="FHA" ColumnName="FHA" />

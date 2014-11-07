@@ -4,12 +4,14 @@ Imports IntranetPortal.ShortSale
 Public Class UCTitleSummary
     Inherits System.Web.UI.UserControl
 
-    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        BindData()
-        BindCalendar()
+    Public CurrentUserRole As ShortSaleRole
 
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
+            CurrentUserRole = Employee.GetShortSaleRole(Page.User.Identity.Name)
             BindNotes()
+
+            BindData()
         End If
     End Sub
 
@@ -74,64 +76,120 @@ Public Class UCTitleSummary
     End Property
 
     Sub BindData()
-        Using Context As New Entities
+        Select Case CurrentUserRole
+            Case ShortSaleRole.Manager
+                BindUrgent()
+                BindUpcomingBPO()
+                BindCounterOffer()
+                BindInvestorReview()
+                BindDocumentRequest()
+            Case ShortSaleRole.Negotiator
+                BindFollowUp()
+                BindUpcomingBPO()
+                BindCounterOffer()
+                BindInvestorReview()
+            Case ShortSaleRole.Processor
+                BindUpcomingBPO()
+                BindDocumentRequest()
+                BindFollowUp()
+                BindTask()
+        End Select
 
-            'Bind Urgent Data
-            gridUrgent.DataSource = ShortSaleSummary.GetUrgentCases()
-            gridUrgent.DataBind()
-
-            'Bind Priority Data
-            Dim priorityData = ShortSale.ShortSaleSummary.GetUpcomingClosings()
-            gridUpcomingApproval.DataSource = priorityData
-            gridUpcomingApproval.DataBind()
-
-            CounterOfferGrid.DataSource = ShortSaleSummary.GetCaseByMortStatus("Counter Offer")
-            CounterOfferGrid.DataBind()
-
-            InvestorReviewGrid.DataSource = ShortSaleSummary.GetCaseByMortStatus("Investor Review")
-            InvestorReviewGrid.DataBind()
-
-            DocumentRequestsGrid.DataSource = ShortSaleSummary.GetCaseByMortStatus("Document Request")
-            DocumentRequestsGrid.DataBind()
-
-            'Bind All Leads Grid
-            AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase()
-            AllLeadsGrid.DataBind()
-
-            'Bind Callback data
-            Dim callbackleads = ShortSale.ShortSaleSummary.GetFollowUpCases()
-            gridCallback.DataSource = callbackleads
-            gridCallback.DataBind()
-            CType(gridCallback.Columns("UpdateDate"), GridViewDataColumn).GroupBy()
-            'gridCallback.GroupBy(gridCallback.Columns("CallbackDate"))
-
-        End Using
+        'Bind All Leads Grid
+        AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase()
+        AllLeadsGrid.DataBind()
     End Sub
 
-    Sub BindCalendar()
-        Using Context As New Entities
-            Dim user = Page.User.Identity.Name
-            Dim users = Employee.GetManagedEmployees(user)
-            Dim appoints = (From appoint In Context.UserAppointments
-                           Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (users.Contains(appoint.Agent) Or appoint.Manager = user)
-                           Select New With {
-                               .AppointmentId = appoint.LogID,
-                               .Subject = appoint.Subject,
-                               .Start = appoint.ScheduleDate,
-                               .End = appoint.EndDate,
-                               .Description = appoint.Description,
-                               .Location = appoint.Location,
-                               .Agent = appoint.Agent,
-                               .Manager = appoint.Manager,
-                               .Status = 0,
-                               .Label = 0,
-                               .Type = 0,
-                               .AppointType = appoint.Type}).Distinct.ToList
-
-            todayScheduler.AppointmentDataSource = appoints
-            todayScheduler.DataBind()
-        End Using
+#Region "Bind Datagridview"
+    Private Sub BindUrgent()
+        tdUrgent.Visible = True
+        'Bind Urgent Data
+        gridUrgent.DataSource = ShortSaleSummary.GetUrgentCases()
+        gridUrgent.DataBind()
     End Sub
+
+    Private Sub BindUpcomingBPO()
+        tdUpcomingBPO.Visible = True
+        'Bind Priority Data
+        Dim priorityData = ShortSale.ShortSaleSummary.GetUpcomingClosings()
+        gridUpcomingApproval.DataSource = priorityData
+        gridUpcomingApproval.DataBind()
+
+        If Not Page.IsPostBack Then
+            gridUpcomingApproval.GroupBy(gridUpcomingApproval.Columns("UpComingBPODate"))
+        End If
+    End Sub
+
+    Private Sub BindCounterOffer()
+        tdCounterOffer.Visible = True
+        CounterOfferGrid.DataSource = ShortSaleSummary.GetCaseByMortStatus("Counter Offer")
+        CounterOfferGrid.DataBind()
+    End Sub
+
+    Private Sub BindInvestorReview()
+        tdInvestorReview.Visible = True
+        InvestorReviewGrid.DataSource = ShortSaleSummary.GetCaseByMortStatus("Investor Review")
+        InvestorReviewGrid.DataBind()
+    End Sub
+
+    Private Sub BindDocumentRequest()
+        tdDocumentReq.Visible = True
+        DocumentRequestsGrid.DataSource = ShortSaleSummary.GetCaseByMortStatus("Document Request")
+        DocumentRequestsGrid.DataBind()
+    End Sub
+
+    Private Sub BindTask()
+        tdTask.Visible = True
+    End Sub
+
+    Private Sub BindFollowUp()
+        tdFollowup.Visible = True
+        'Bind Callback data
+        Dim callbackleads = ShortSale.ShortSaleSummary.GetFollowUpCases()
+        gridFollowUp.DataSource = callbackleads
+        gridFollowUp.DataBind()
+        CType(gridFollowUp.Columns("UpdateDate"), GridViewDataColumn).GroupBy()
+        'gridCallback.GroupBy(gridCallback.Columns("CallbackDate"))
+    End Sub
+
+    Private Sub gridview_OnDataBinding(sender As Object, e As EventArgs) Handles gridUrgent.DataBinding, gridUpcomingApproval.DataBinding, CounterOfferGrid.DataBinding, InvestorReviewGrid.DataBinding, DocumentRequestsGrid.DataBinding, gridTask.DataBinding, gridFollowUp.DataBinding
+        Dim grid = CType(sender, ASPxGridView)
+        If grid.DataSource Is Nothing Then
+            If grid Is gridUrgent Then
+                BindUrgent()
+            End If
+
+            If grid Is gridUpcomingApproval Then
+                BindUpcomingBPO()
+            End If
+
+            If grid Is CounterOfferGrid Then
+                BindCounterOffer()
+            End If
+
+            If grid Is InvestorReviewGrid Then
+                BindInvestorReview()
+            End If
+
+            If grid Is DocumentRequestsGrid Then
+                BindDocumentRequest()
+            End If
+
+            If grid Is gridTask Then
+                BindTask()
+            End If
+
+            If grid Is gridFollowUp Then
+                BindFollowUp()
+            End If
+        End If
+    End Sub
+#End Region
+
+
+    Public Function CaseNameOfDocumentRequest() As String
+        Return ""
+    End Function
 
     'change the quote to the UI by steven
     Public Function HtmlBlackQuote(quote As String) As String
@@ -205,7 +263,7 @@ Public Class UCTitleSummary
     End Function
 
 
-    Protected Sub gridAppointment_CustomColumnGroup(sender As Object, e As CustomColumnSortEventArgs) Handles gridTask.CustomColumnGroup, gridCallback.CustomColumnGroup
+    Protected Sub gridAppointment_CustomColumnGroup(sender As Object, e As CustomColumnSortEventArgs) Handles gridTask.CustomColumnGroup, gridFollowUp.CustomColumnGroup
         If e.Column.FieldName = "ScheduleDate" Or e.Column.FieldName = "CallbackDate" Then
             Dim today = DateTime.Now.Date
             Dim day1 = CDate(e.Value1).Date
@@ -246,7 +304,7 @@ Public Class UCTitleSummary
         End If
     End Sub
 
-    Protected Sub gridAppointment_CustomColumnDisplayText(sender As Object, e As ASPxGridViewColumnDisplayTextEventArgs) Handles gridTask.CustomColumnDisplayText, gridCallback.CustomColumnDisplayText
+    Protected Sub gridAppointment_CustomColumnDisplayText(sender As Object, e As ASPxGridViewColumnDisplayTextEventArgs) Handles gridTask.CustomColumnDisplayText, gridFollowUp.CustomColumnDisplayText
         If e.Column.FieldName = "ScheduleDate" Or e.Column.FieldName = "CallbackDate" Then
             e.DisplayText = GroupText(e.Value)
         End If
@@ -333,5 +391,5 @@ Public Class UCTitleSummary
 
     '        AllLeadsGrid.AutoFilterByColumn(AllLeadsGrid.Columns("PropertyInfo.StreetName"), QuickSearch.Value)
     '    End If
-    'End Sub
+    'End Sub  
 End Class

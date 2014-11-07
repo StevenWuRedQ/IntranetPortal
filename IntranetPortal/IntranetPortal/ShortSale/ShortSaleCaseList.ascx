@@ -73,7 +73,7 @@
     function OnSortMenuClick(s, e) {
         var icon = document.getElementById("btnSortIcon");
         if (e.item.index == 0) {
-            SortLeadsList(icon, "LastUpdate");
+            SortLeadsList(icon, "UpdateDate");
         }
 
         if (e.item.index == 1) {
@@ -85,7 +85,7 @@
         }
 
         if (e.item.index == 3) {
-            gridCase.GroupBy("EmployeeName", 0);
+            gridCase.GroupBy("Owner", 0);
         }
 
         if (e.item.index == 4) {
@@ -140,10 +140,22 @@
         });
     }
 
+    function ExpandOrCollapseGroupRow(rowIndex) {
+        if (gridCase.IsGroupRow(rowIndex)) {
+            if (gridCase.IsGroupRowExpanded(rowIndex)) {
+                gridCase.CollapseRow(rowIndex);
+            } else {
+                gridCase.ExpandRow(rowIndex);
+            }
+            AddScrollbarOnLeadsList();
+            return
+        }
+    }
+
     $(document).ready(function () {
         AddScrollbarOnLeadsList();
     });
-    
+
 </script>
 
 <div style="width: 100%; height: 100%;" class="color_gray">
@@ -165,12 +177,33 @@
     </div>
     <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
         <asp:HiddenField runat="server" ID="hfCaseStatus" />
-        <dx:ASPxGridView runat="server"  SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" KeyFieldName="CaseId" OnDataBinding="gridCase_DataBinding">
+        <dx:ASPxGridView runat="server" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" KeyFieldName="CaseId" OnDataBinding="gridCase_DataBinding">
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
                 </dx:GridViewDataTextColumn>
-                <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false" VisibleIndex="5"></dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="UpdateDate" Visible="false"></dx:GridViewDataColumn>
+                <dx:GridViewDataTextColumn FieldName="CallbackDate" Visible="false" VisibleIndex="5">
+                    <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
+                    <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
+                    <GroupRowTemplate>
+                        <%-- Date: <%# GroupText(Container.GroupText) & Container.SummaryText.Replace("Count=","")%>--%>
+                        <div>
+                            <table style="height: 30px">
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
+                                    <td style="width: 80px;">
+                                        <span class="font_black">
+                                            <i class="fa fa-calendar-o font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                        </span>
+                                    </td>
+                                    <td style="padding-left: 10px">
+                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")","")%></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </GroupRowTemplate>
+                </dx:GridViewDataTextColumn>
                 <dx:GridViewDataColumn FieldName="Owner" Visible="false" VisibleIndex="4">
                     <GroupRowTemplate>
                         <div>
@@ -193,7 +226,7 @@
                     <DataItemTemplate>
                         <div class="hidden_icon">
                             <i class="fa fa-list-alt employee_list_item_icon" style="width: 30px" onclick="<%#String.Format("ShowCateMenu(this,{0},'{1}')", Eval("CaseId"), Eval("BBLE"))%>"></i>
-                        </div>                        
+                        </div>
                     </DataItemTemplate>
                 </dx:GridViewDataColumn>
             </Columns>
@@ -219,24 +252,24 @@
         </dx:ASPxGridView>
     </div>
 </div>
-  <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="aspxPopupSortMenu"
-        ShowPopOutImages="false" AutoPostBack="false"
-        ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px"
-        PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
-        <ItemStyle Paddings-PaddingLeft="20px" />
-        <Items>
-            <dx:MenuItem Text="Date" Name="Date">
-            </dx:MenuItem>
-            <dx:MenuItem Text="Name" Name="Name">
-            </dx:MenuItem>
-            <dx:MenuItem Text="Borough" Name="Borough">
-            </dx:MenuItem>
-            <dx:MenuItem Text="Employee" Name="Employee">
-            </dx:MenuItem>
-            <dx:MenuItem Text="Zip" Name="Zip">
-            </dx:MenuItem>
-            <dx:MenuItem Text="Type" Name="LeadsType">
-            </dx:MenuItem>
-        </Items>
-        <ClientSideEvents ItemClick="OnSortMenuClick" />
-    </dx:ASPxPopupMenu>
+<dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="aspxPopupSortMenu"
+    ShowPopOutImages="false" AutoPostBack="false"
+    ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px"
+    PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
+    <ItemStyle Paddings-PaddingLeft="20px" />
+    <Items>
+        <dx:MenuItem Text="Date" Name="Date">
+        </dx:MenuItem>
+        <dx:MenuItem Text="Name" Name="Name">
+        </dx:MenuItem>
+        <dx:MenuItem Text="Borough" Name="Borough">
+        </dx:MenuItem>
+        <dx:MenuItem Text="Employee" Name="Employee">
+        </dx:MenuItem>
+        <dx:MenuItem Text="Zip" Name="Zip">
+        </dx:MenuItem>
+        <dx:MenuItem Text="Type" Name="LeadsType">
+        </dx:MenuItem>
+    </Items>
+    <ClientSideEvents ItemClick="OnSortMenuClick" />
+</dx:ASPxPopupMenu>

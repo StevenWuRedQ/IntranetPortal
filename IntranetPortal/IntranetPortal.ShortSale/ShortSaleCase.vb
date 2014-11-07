@@ -110,6 +110,17 @@ Partial Public Class ShortSaleCase
         End Get
     End Property
 
+    Private _upComingDate As DateTime
+    Public ReadOnly Property UpComingBPODate As DateTime?
+        Get
+            If Mortgages IsNot Nothing AndAlso Mortgages.Count > 0 Then
+                Return Mortgages(0).UpcomingBPODate
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
     Public ReadOnly Property AssignedProcessor As PartyContact
         Get
             If Processor.HasValue Then

@@ -86,4 +86,9 @@ Public Class Form1
     Private Sub DateTimePicker2_ValueChanged(sender As Object, e As EventArgs)
 
     End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Dim client As New IntranetPortal.DataAPI.WCFMacrosClient
+
+    End Sub
 End Class

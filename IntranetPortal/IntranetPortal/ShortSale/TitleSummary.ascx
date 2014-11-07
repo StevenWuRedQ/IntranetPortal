@@ -82,7 +82,6 @@
         filterCondition += " OR [OccupiedBy] LIKE '%" + key + "%'";
         AllLeadsGridClient.ApplyFilter(filterCondition);
     }
-
 </script>
 
 <%-------end-------%>
@@ -189,11 +188,11 @@
                         </div>
                     </div>
                     <%------end------%>
-                    <div style="margin-right: 10px; margin-left: 35px; min-width: 1200px; height:85%">
-                        <table style="vertical-align: top;height:100%">
+                    <div style="margin-right: 10px; margin-left: 35px; min-width: 1200px; height: 85%">
+                        <table style="vertical-align: top; height: 100%">
                             <tr style="height: 240px;" class="under_line_div ">
                                 <%--fix the disteance between the two grid by steven--%>
-                                <td style="width: 300px; vertical-align: top;">
+                                <td style="width: 300px; vertical-align: top;" runat="server" id="tdUrgent" visible="false">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
                                         <i class="fa fa-exclamation-triangle with_circle title_summary_icon" style=""></i><span class="heading_text2">Urgent</span>
@@ -227,7 +226,7 @@
                                     </div>
                                 </td>
                                 <td rowspan="3" style="width: 30px;"></td>
-                                <td style="width: 300px; vertical-align: top;" class="gray_background">
+                                <td style="width: 300px; vertical-align: top;" class="gray_background" runat="server" id="tdUpcomingBPO" visible="false">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
                                         <i class="fa fa-university with_circle title_summary_icon" style=""></i><span class="heading_text2">Upcoming BPO's</span>
@@ -240,6 +239,30 @@
                                                         <div style="cursor: pointer; height: 40px; padding-left: 20px; line-height: 40px;" onclick='<%# String.Format("GoToCase(""{0}"")",Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn FieldName="UpComingBPODate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" GroupIndex="0" Settings-SortMode="Custom">
+                                                    <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
+                                                    <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
+                                                    <GroupRowTemplate>
+                                                        <%--Date: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
+                                                        <%--change group template UI by steven--%>
+                                                        <div style="height: 30px">
+                                                            <table style="height: 30px">
+                                                                <tr>
+                                                                    <td>
+                                                                        <img src="../images/grid_call_backs_canlender.png" /></td>
+                                                                    <td style="font-weight: 900; width: 80px; text-align: center;">Date: <%# Container.GroupText%></td>
+                                                                    <td style="padding-left: 10px">
+                                                                        <div class="raund-label">
+                                                                            <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
+                                                                        </div>
+                                                                    </td>
+                                                                    <%--the round div--%>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <%-------end---------%>
+                                                    </GroupRowTemplate>
+                                                </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <div class="hidden_icon">
@@ -248,7 +271,11 @@
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataColumn>
                                             </Columns>
-                                            <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
+                                            <GroupSummary>
+                                                <dx:ASPxSummaryItem SummaryType="Count" />
+                                            </GroupSummary>
+                                            <SettingsBehavior EnableRowHotTrack="True" ColumnResizeMode="NextColumn" AutoExpandAllGroups="true" />
+                                            <SettingsPager ShowNumericButtons="false"></SettingsPager>
                                             <Styles>
                                                 <AlternatingRow BackColor="#eff2f5"></AlternatingRow>
                                                 <RowHotTrack BackColor="#ff400d"></RowHotTrack>
@@ -258,7 +285,7 @@
                                 </td>
                                 <td rowspan="5" style="width: 30px;"></td>
 
-                                <td style="width: 300px; vertical-align: top;">
+                                <td style="width: 300px; vertical-align: top;" runat="server" id="tdCounterOffer" visible="false">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
                                         <i class="fa fa-check with_circle title_summary_icon" style=""></i><span class="heading_text2">Counter Offer</span>
@@ -289,12 +316,8 @@
                                         </dx:ASPxGridView>
                                     </div>
                                 </td>
-
                                 <td rowspan="3" style="width: 30px;"></td>
-
-
-
-                                <td style="width: 300px; vertical-align: top;" class="gray_background">
+                                <td style="width: 300px; vertical-align: top;" class="gray_background" runat="server" id="tdInvestorReview" visible="false">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
                                         <i class="fa fa-thumbs-up with_circle title_summary_icon" style=""></i><span class="heading_text2">Investor Review</span>
@@ -326,7 +349,7 @@
                                     </div>
                                 </td>
                                 <td rowspan="5" style="width: 30px;"></td>
-                                <td style="width: 300px; vertical-align: top;">
+                                <td style="width: 300px; vertical-align: top;" runat="server" id="tdDocumentReq" visible="false">
                                     <%--add icon by steven--%>
                                     <h4 class="top_h4">
                                         <i class="fa fa-files-o with_circle title_summary_icon" style=""></i><span class="heading_text2">Document Requests</span>
@@ -358,65 +381,10 @@
                                     </div>
                                 </td>
                                 <td rowspan="5" style="width: 30px;"></td>
-
-                                <td rowspan="3" style="vertical-align: top; width: 380px; display: none">
+                                <td style="width: 300px; vertical-align: top;" runat="server" id="tdTask" visible="false">
                                     <h4 class="top_h4">
-                                        <img src="../images/grid_calendar.png" class="vertical-img" /><span class="heading_text">Today's Calendar</span>
-
-                                    </h4>
-                                    <div style="height: 615px; margin-top: 60px">
-                                        <dx:ASPxScheduler ID="todayScheduler" runat="server" Width="100%" ActiveViewType="Day" OnPopupMenuShowing="todayScheduler_PopupMenuShowing"
-                                            ClientInstanceName="ASPxClientScheduler1">
-                                            <Views>
-                                                <DayView ShowAllDayArea="False" ShowWorkTimeOnly="True" NavigationButtonVisibility="Never">
-                                                    <WorkTime End="23:00:00" Start="08:00:00" />
-                                                    <TimeRulers>
-                                                        <dx:TimeRuler />
-                                                    </TimeRulers>
-                                                    <Templates>
-                                                        <VerticalAppointmentTemplate>
-                                                            <uc1:CustomVerticalAppointmentTemplate ID="CustomVerticalAppointmentTemplate1" runat="server" />
-                                                        </VerticalAppointmentTemplate>
-                                                    </Templates>
-                                                </DayView>
-                                                <WorkWeekView Enabled="False">
-                                                    <TimeRulers>
-                                                        <dx:TimeRuler />
-                                                    </TimeRulers>
-                                                </WorkWeekView>
-                                                <WeekView Enabled="False" />
-                                                <MonthView Enabled="False" />
-                                                <TimelineView Enabled="False">
-                                                </TimelineView>
-                                            </Views>
-                                            <OptionsBehavior ShowViewSelector="False" ShowViewNavigator="False" ShowViewNavigatorGotoDateButton="False" ShowViewVisibleInterval="False" />
-                                            <OptionsCustomization AllowAppointmentDelete="None" AllowAppointmentDrag="None" AllowAppointmentDragBetweenResources="None" AllowAppointmentMultiSelect="False" AllowAppointmentResize="None" AllowAppointmentCreate="None" />
-                                            <OptionsForms AppointmentFormVisibility="PopupWindow" AppointmentFormTemplateUrl="~/UserControl/Devexpress/CustomAppointmentForm.ascx" GotoDateFormVisibility="None" RecurrentAppointmentDeleteFormVisibility="None" RecurrentAppointmentEditFormVisibility="None" AppointmentInplaceEditorFormTemplateUrl="~/UserControl/Devexpress/CustomInplaceEditor.ascx" GotoDateFormTemplateUrl="~/DevExpress/ASPxSchedulerForms/GotoDateForm.ascx" RecurrentAppointmentDeleteFormTemplateUrl="~/DevExpress/ASPxSchedulerForms/RecurrentAppointmentDeleteForm.ascx" RecurrentAppointmentEditFormTemplateUrl="~/DevExpress/ASPxSchedulerForms/RecurrentAppointmentEditForm.ascx" RemindersFormTemplateUrl="~/DevExpress/ASPxSchedulerForms/ReminderForm.ascx" />
-                                            <OptionsToolTips AppointmentDragToolTipUrl="~/DevExpress/ASPxSchedulerForms/AppointmentDragToolTip.ascx" AppointmentToolTipUrl="~/DevExpress/ASPxSchedulerForms/AppointmentToolTip.ascx" SelectionToolTipUrl="~/DevExpress/ASPxSchedulerForms/SelectionToolTip.ascx" />
-                                            <Storage EnableReminders="False" Appointments-ResourceSharing="true">
-                                                <Appointments>
-                                                    <%-- DXCOMMENT: Configure appointment mappings --%>
-                                                    <Mappings AppointmentId="AppointmentId" Start="Start" End="End" Location="Location"
-                                                        Subject="Subject" Description="Description" Status="Status" Label="Label" Type="Type" />
-                                                    <CustomFieldMappings>
-                                                        <dx:ASPxAppointmentCustomFieldMapping Name="Agent" ValueType="String" Member="Agent" />
-                                                        <dx:ASPxAppointmentCustomFieldMapping Name="Manager" ValueType="String" Member="Manager" />
-                                                        <dx:ASPxAppointmentCustomFieldMapping Name="AppointType" ValueType="String" Member="AppointType" />
-                                                    </CustomFieldMappings>
-                                                </Appointments>
-                                            </Storage>
-                                        </dx:ASPxScheduler>
-                                    </div>
-                                </td>
-
-
-                                <td rowspan="4" style="width: 0px; display: none"></td>
-                            </tr>
-                            <tr style="height: 240px; display: none">
-                                <td style="vertical-align: top" class="under_line">
-                                    <h4>
                                         <img src="../images/grid_task_icon.png" class="vertical-img" /><span class="heading_text">Task</span> </h4>
-                                    <div class="div-underline">
+                                    <div class="div-underline " style="height: 240px;">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridTask" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -444,7 +412,6 @@
                                                                 </tr>
                                                                 </table>
                                                         </div>
-                                
                                                        </grouprowtemplate>
                                                         <%-------end---------%>
                                                     </GroupRowTemplate>
@@ -467,13 +434,13 @@
                                         </dx:ASPxGridView>
                                     </div>
                                 </td>
-                                <td style="vertical-align: top" class="under_line">
-                                    <%--add icon by steven--%>
-                                    <h4>
+                                <td rowspan="5" style="width: 30px;"></td>
+                                <td style="width: 300px; vertical-align: top;" runat="server" id="tdFollowup" visible="false">
+                                    <h4 class="top_h4">
                                         <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Follow Up</span> </h4>
                                     <%--------end-------%>
-                                    <div class="div-underline">
-                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridCallback" ClientInstanceName="gridCallbackClient" KeyFieldName="BBLE" AutoGenerateColumns="false" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                    <div class="div-underline " style="height: 240px;">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridFollowUp" ClientInstanceName="gridCallbackClient" KeyFieldName="BBLE" AutoGenerateColumns="false" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1" CellStyle-CssClass="cell_hover">
                                                     <DataItemTemplate>
@@ -523,11 +490,12 @@
                                         </dx:ASPxGridView>
                                     </div>
                                 </td>
+                                <td rowspan="5" style="width: 30px;"></td>
                             </tr>
-                            <tr style="height:100%">
-                                <td colspan="10" style="border-bottom: 3px solid white" id="tdGrid">
-                                    <div style="max-width: 1570px; margin-right:30px;">
-                                        <div class="clearfix" style="margin-bottom: 20px;overflow:auto">
+                            <tr style="height: 100%">
+                                <td colspan="14" style="border-bottom: 3px solid white" id="tdGrid">
+                                    <div style="margin-right: 30px;">
+                                        <div class="clearfix" style="margin-bottom: 20px; overflow: auto">
                                             <h4 style="padding-top: 20px">
                                                 <i class="fa fa-folder-open with_circle title_summary_icon" style=""></i><span class="heading_text2"><%--Leads and Active--%> Files</span>
                                                 <%--<span class="table_tips" style="margin-left: 40px;">Shows all files that haven’t closed or been archived.
@@ -550,7 +518,7 @@
                                                 <Columns>
                                                     <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Street address" SortOrder="Ascending" Width="430px">
                                                         <DataItemTemplate>
-                                                            <div style="cursor: pointer;width:600px" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
+                                                            <div style="cursor: pointer; width: 600px" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
                                                         </DataItemTemplate>
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OwnerLastName" Caption="Name">

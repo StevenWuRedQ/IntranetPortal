@@ -336,4 +336,32 @@ Partial Public Class Employee
 
         Return False
     End Function
+
+    Public Shared Function GetShortSaleRole(userName As String) As ShortSaleRole
+        Dim rs = Roles.GetRolesForUser(userName)
+
+        If rs.Contains("Admin") Then
+            Return ShortSaleRole.Manager
+        End If
+
+        If rs.Where(Function(r) r = "ShortSale-Manager").Count > 0 Then
+            Return ShortSaleRole.Manager
+        End If
+
+        If rs.Where(Function(r) r = "ShortSale-Processor").Count > 0 Then
+            Return ShortSaleRole.Processor
+        End If
+
+        If rs.Where(Function(r) r = "ShortSale-Negotiator").Count > 0 Then
+            Return ShortSaleRole.Negotiator
+        End If
+
+        Return Nothing
+    End Function
 End Class
+
+Public Enum ShortSaleRole
+    Processor
+    Negotiator
+    Manager
+End Enum

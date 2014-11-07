@@ -21,6 +21,12 @@ Public Class ShortSaleCaseList
             gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status, Page.User.Identity.Name)
             gridCase.DataBind()
         End If
+
+        If Not Page.IsPostBack Then
+            If status = CaseStatus.FollowUp Then
+                gridCase.GroupBy(gridCase.Columns("CallbackDate"))
+            End If
+        End If
     End Sub
 
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)
