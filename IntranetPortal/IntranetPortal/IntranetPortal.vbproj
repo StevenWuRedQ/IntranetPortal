@@ -184,7 +184,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\ActiveQueryBuilder.ASPNET.2.5.16\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PortalTheme2">
       <HintPath>App_Themes\PortalTheme2.dll</HintPath>
@@ -783,6 +783,13 @@
     <Compile Include="PopupControl\VendorsPopup.ascx.vb">
       <DependentUpon>VendorsPopup.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupControl\VendorsPopUpContent.aspx.designer.vb">
+      <DependentUpon>VendorsPopUpContent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\VendorsPopUpContent.aspx.vb">
+      <DependentUpon>VendorsPopUpContent.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PopupControl\WhileAwayMsgs.aspx.designer.vb">
       <DependentUpon>WhileAwayMsgs.aspx</DependentUpon>
@@ -1598,6 +1605,7 @@
     <Content Include="PopupControl\ShareLeads.aspx" />
     <Content Include="PopupControl\testPopup.aspx" />
     <Content Include="PopupControl\VendorsPopup.ascx" />
+    <Content Include="PopupControl\VendorsPopUpContent.aspx" />
     <Content Include="PopupControl\WhileAwayMsgs.aspx" />
     <Content Include="PreviewFile.aspx" />
     <Content Include="Proiority\ActivityLog.aspx" />

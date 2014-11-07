@@ -1957,8 +1957,8 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
     background-color: transparent;
     border-style: solid;
     width: 100%;
-    font-size:14px;
-    height:20px;
+    font-size: 14px;
+    height: 20px;
 }
 
 .popup_menu_list_item {
@@ -1966,7 +1966,7 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
     cursor: pointer;
 }
 
-    .popup_menu_list_item:hover {
+    .popup_menu_list_item_active, .popup_menu_list_item:hover {
         background: #d9f1fd;
     }
 
@@ -1977,7 +1977,7 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
     color: #77787b;
 }
 
-    .popup_employee_list_item:hover {
+    .popup_employee_list_item_active, .popup_employee_list_item:hover {
         color: white;
         background: #ff400d;
     }
@@ -2008,13 +2008,21 @@ td.vendor_info_left {
     resize: none;
 }
 
-.edit_drop
-{
-    border:1px solid #dde0e7;
-    border-radius:5px;
-    padding:7px;
+.edit_drop {
+    border: 1px solid #dde0e7;
+    border-radius: 5px;
+    padding: 7px;
 }
-.edit_drop tbody tr td 
-{
-    border:none !important;
+
+    .edit_drop tbody tr td {
+        border: none !important;
+    }
+
+.contact_info_eidt {
+    padding: 3px;
+    height: 26px;
+    margin: 0;
+    border: 0;
+    margin-bottom:2px;
+    box-shadow: none;
 }

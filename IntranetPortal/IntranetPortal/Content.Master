@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml"  ng-app="PortalApp">
+<html xmlns="http://www.w3.org/1999/xhtml"  >
 <head runat="server">
     <title></title>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
@@ -17,17 +17,17 @@
     <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
     <script src="/scripts/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css"/>
-    <script src="/scripts/angular.js"></script>
+    
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body style="width: 100%" ng-controller="PortalCtrl">
+<body style="width: 100%" >
     <form id="form1" runat="server">
         <link href="/styles/stevencss.css?v=<%=DateTime.Now.Millisecond.ToString %>>" rel="stylesheet" type="text/css" />
         <asp:ContentPlaceHolder ID="MainContentPH" runat="server">
         </asp:ContentPlaceHolder>
     </form>
     <script src="/scripts/stevenjs.js"></script>
-    <script src="/scripts/PortalApp.js?v=<%=DateTime.Now.Millisecond.ToString %>>"></script>
+    
 </body>
 </html>

@@ -1,6 +1,7 @@
 ﻿Imports System.Web.Services
 Imports System.Web.Script.Serialization
 Imports IntranetPortal.ShortSale
+Imports Newtonsoft.Json
 Public Class CallBackSevices
     Inherits System.Web.UI.Page
 
@@ -16,8 +17,15 @@ Public Class CallBackSevices
     <WebMethod()> _
     Public Shared Function GetContact() As String
         Dim allContact = PartyContact.getAllContact
-
-        Dim json As New JavaScriptSerializer
-        Return json.Serialize(allContact)
+        Dim json = JsonConvert.SerializeObject(allContact)
+        'Dim json As New JavaScriptSerializer
+        Return json
     End Function
+
+    <WebMethod()> _
+    Public Shared Sub SaveContact(json As String)
+        Dim json_serializer As New JavaScriptSerializer()
+        Dim contact = json_serializer.Deserialize(Of PartyContact)(json)
+        contact.Save()
+    End Sub
 End Class
