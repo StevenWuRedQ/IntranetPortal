@@ -387,16 +387,34 @@ Public Class ActivityLogs
 
         If category = "Approval" Then
             Dim logId = CInt(e.GetValue("LogID"))
-            '    Dim chkAccepted = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "chkAccepted"), ASPxCheckBox)
-            'Dim chkDeclined = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "chkDeclined"), ASPxCheckBox)
-            'chkAccepted.Text = " Approve"
-            '    chkAccepted.Visible = True
-            '    chkAccepted.ClientSideEvents.CheckedChanged = String.Format("function(s, e){{ApproveNewLead({0});}}", logId)
-
-            '    chkDeclined.Visible = True
-            '    chkDeclined.ClientSideEvents.CheckedChanged = String.Format("function(s, e){{DeclineNewLead({0});}}", logId)
         End If
 
+        If category = "DoorknockTask" Then
+            If e.GetValue("LogID") IsNot Nothing Then
+                Dim logId = CInt(e.GetValue("LogID"))
+
+                Dim task = UserTask.GetTaskByLogID(logId)
+                Dim pnlTask = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "pnlDoorknockTask"), Panel)
+                Dim btnTaskComplete = TryCast(pnlTask.FindControl("btnDoorkncokComplete"), HtmlControl)
+                Dim ltDoorknockResult = TryCast(pnlTask.FindControl("ltDoorknockResult"), Literal)
+                Dim ltDoorknockAddress = TryCast(pnlTask.FindControl("ltDoorknockAddress"), Literal)
+
+
+                If task Is Nothing Then
+                    ltDoorknockAddress.Text = e.GetValue("Comments")
+                Else
+                    ltDoorknockAddress.Text = task.Description
+                End If
+
+                If task.Status = UserTask.TaskStatus.Active Then
+                    btnTaskComplete.Visible = True
+                Else
+                    btnTaskComplete.Visible = False
+                    ltDoorknockResult.Visible = True
+                    ltDoorknockResult.Text = "Complete"
+                End If
+            End If
+        End If
 
         If category = "Task" Then
             If e.GetValue("LogID") IsNot Nothing Then
@@ -457,23 +475,6 @@ Public Class ActivityLogs
                                 ltTaskResult.Text = "Resend"
                         End Select
                     End If
-
-                    'If task.Status = UserTask.TaskStatus.Complete Or task.Status = UserTask.TaskStatus.Resend Then
-                    '    btnTaskComplete.Visible = False
-
-                    '    If ltTaskResult IsNot Nothing Then
-                    '        If task.Status = UserTask.TaskStatus.Complete Then
-                    '            ltTaskResult.Text = "Complete"
-                    '        End If
-
-                    '        If task.Status = UserTask.TaskStatus.Resend Then
-                    '            ltTaskResult.Text = "Resend"
-                    '        End If
-                    '    End If
-                    'Else
-                    '    btnTaskComplete.Visible = False
-                    'End If
-
                 End If
             End If
         End If

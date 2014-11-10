@@ -219,4 +219,21 @@ Public Class Utility
         Return GetLeadsCount(LeadStatus.InProcess, HttpContext.Current.User.Identity.Name)
     End Function
 
+
+    Public Shared Function FormatPhoneNumber(ByVal myNumber As String)
+        Dim mynewNumber As String
+        mynewNumber = ""
+        myNumber = myNumber.Replace("(", "").Replace(")", "").Replace("-", "")
+        If myNumber.Length < 10 Then
+            mynewNumber = myNumber
+        ElseIf myNumber.Length = 10 Then
+            mynewNumber = "(" & myNumber.Substring(0, 3) & ") " &
+                    myNumber.Substring(3, 3) & "-" & myNumber.Substring(6, 4)
+        ElseIf myNumber.Length > 10 Then
+            mynewNumber = "(" & myNumber.Substring(0, 3) & ") " &
+                    myNumber.Substring(3, 3) & "-" & myNumber.Substring(6, 4) & " " &
+                    myNumber.Substring(10)
+        End If
+        Return mynewNumber
+    End Function
 End Class

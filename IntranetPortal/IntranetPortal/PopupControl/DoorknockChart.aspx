@@ -34,7 +34,7 @@
                             <span class="upcase_text">Door Knock chart</span>
                         </div>
                         <div style="font-size: 14px;">
-                            <i class="fa fa-map-marker" style="border: 2px solid; padding: 4px 6px; border-radius: 14px;"></i>&nbsp;&nbsp; Homes to visit: <span style="font-weight: 900">5</span>
+                            <i class="fa fa-map-marker" style="border: 2px solid; padding: 4px 6px; border-radius: 14px;"></i>&nbsp;&nbsp; Homes to visit: <span style="font-weight: 900"><%= BBLEs.Count %></span>
                         </div>
                         <table class="table table-striped" style="font-size: 10px; margin-top: 25px;">
                             <thead class="upcase_text">
@@ -51,50 +51,67 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <% For i = 0 To BBLEs.Length - 1%>
+                                <% Dim li = IntranetPortal.LeadsInfo.GetInstance(BBLEs(i))
+                                %>
                                 <tr>
-                                    <td></td>
                                     <td>
-                                        <span class="font_black">123 Main St,
-                                        </span>
-                                        <br />
-                                        Bellerose, NY 12345
+                                        <input type="checkbox" /></td>
+                                    <td>
+                                        <% 
+                                            Dim adds = Addresses(i)
+                                            Dim strName = adds.Split(",")(0)
+                                            Dim restAdd = adds.Replace(strName & ",", "")
+                                        %>
+                                        <span class="font_black"><%= strName %></span><br />
+                                        <%= restAdd %>
                                     </td>
-                                    <td>Matha Cantey (43)</td>
-                                    <td><span class="font_black">(718) 123-1234</span><br />
-                                        (ET) Land line (28%)                                </td>
-                                    <td>&nbsp;</td>
-                                    <td>$593,012.12</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
+                                    <td>
+                                        <%= String.Format("{0}({1})", li.Owner, li.GetOwnerAge(li.Owner))%>
+                                        <% If Not String.IsNullOrEmpty(li.CoOwner) Then%>
+                                        <br />
+                                        <%= String.Format("{0}({1})", li.CoOwner, li.GetOwnerAge(li.CoOwner))%>
+                                        <% End If%>
+                                    </td>
+                                    <td>
+                                        <%                                            
+                                            If Not String.IsNullOrEmpty(li.OwnerPhoneNo) Then
+                                        %>
+                                        <% For Each phone In li.OwnerPhoneNo.Split(",")%>
+                                        <% If phone IsNot Nothing Then%>
+                                        <span class="font_black"><%= IntranetPortal.Utility.FormatPhoneNumber(phone) %></span><br />
+                                        <% End If%>
+                                        <% Next%>
+                                        <%  End If%>                                 
+                                    </td>
+                                    <td>&nbsp;
+                                        <%                                            
+                                            If li.OwnerAddress IsNot Nothing Then
+                                        %>
+                                        <% For Each add In li.OwnerAddress%>
+                                        <% If add IsNot Nothing Then%>
+                                        <%                                          
+                                            strName = add.Split(",")(0)
+                                            restAdd = add.Replace(strName & ",", "")
+                                        %>
+                                        <span class="font_black"><%= strName %></span><br />
+                                        <%= restAdd %><br />
+                                        <% End If%>
+                                        <% Next%>
+                                        <%  End If%>  
+                                    </td>
+                                    <td>
+                                        <%=String.Format("{0:C}", li.C1stMotgrAmt)%>
+                                    </td>
+                                    <td>
+                                        <%=String.Format("{0:C}", li.ViolationAmount)%>
+                                    </td>
+                                    <td>
+                                        <%= String.Format("{0:C}", li.TaxesAmt)%>
+                                    </td>
                                     <td>&nbsp;</td>
                                 </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>
-                                        <span class="font_black">22-06 101 Avenue
-                                        </span>
-                                        <br />
-                                        Flushing, NY 11353
-                                    </td>
-                                    <td>Slyburn Sowell (45)<br />
-                                        Ruth Sowell (51)<br />
-                                        Anne Sowell (34)<br />
-                                    </td>
-                                    <td>
-                                        <span class="font_black">(718) 123-1234</span><br />
-                                        (ET) Land line (28%)
-                                    </td>
-                                    <td>929 Saint Johns Pl,<br />
-                                        Brooklyn, NY 11213</td>
-                                    <td>$670,000.00<br />
-                                        $123,123.12
-
-                                    </td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-
+                                <% Next%>
                             </tbody>
                         </table>
                     </div>

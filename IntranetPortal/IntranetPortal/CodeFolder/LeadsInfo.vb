@@ -41,16 +41,58 @@
     Public ReadOnly Property OwnerPhoneNo As String
         Get
             Using context As New Entities
-                Dim phones = context.OwnerContacts.Where(Function(hp) hp.BBLE = BBLE And hp.ContactType = OwnerContact.OwnerContactType.Phone And hp.Status = OwnerContact.ContactStatus.Right).Select(Function(hp) hp.Contact).ToArray
-
-                If phones.Length > 0 Then
-                    Return String.Join(",", phones)
+                Dim phones = context.OwnerContacts.Where(Function(hp) hp.BBLE = BBLE And hp.ContactType = OwnerContact.OwnerContactType.Phone And hp.Status = OwnerContact.ContactStatus.Right).Select(Function(hp) hp.Contact).ToList
+                phones.AddRange(context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.Source = PhoneSource.UserAdded).Select(Function(p) p.Phone).ToList)
+                If phones.Count > 0 Then
+                    Return String.Join(",", phones.ToArray)
                 End If
 
             End Using
             Return ""
         End Get
     End Property
+
+    Public ReadOnly Property OwnerAddress As List(Of String)
+        Get
+            Using context As New Entities
+                Dim adds = context.OwnerContacts.Where(Function(hp) hp.BBLE = BBLE And hp.ContactType = OwnerContact.OwnerContactType.MailAddress And hp.Status = OwnerContact.ContactStatus.DoorKnock).Select(Function(hp) hp.Contact).ToList
+                adds.AddRange(context.HomeOwnerAddresses.Where(Function(p) p.BBLE = BBLE And p.Source = PhoneSource.UserAdded).Select(Function(p) p.Address).ToList)
+                If adds.Count > 0 Then
+                    Return adds
+                End If
+            End Using
+            Return Nothing
+        End Get
+    End Property
+
+    'Public ReadOnly Property OwnerAddress As List(Of
+
+    Public Function GetHomeOwner(ownerName As String) As HomeOwner
+        Using ctx As New Entities
+            Return ctx.HomeOwners.Where(Function(ho) ho.BBLE = BBLE And ho.Name = ownerName And ho.Active = True).FirstOrDefault
+        End Using
+    End Function
+
+    Public Function GetOwnerAge(ownerName As String) As String
+        Dim tlo = GetHomeOwner(ownerName).TLOLocateReport
+
+        If tlo IsNot Nothing Then
+            If tlo.dateOfBirthField IsNot Nothing Then
+                Return tlo.dateOfBirthField.currentAgeField
+            End If
+        End If
+        Return ""
+    End Function
+
+    Public Function GetBestPhones() As String()
+        Dim tlo = GetHomeOwner(Owner).TLOLocateReport
+
+        If tlo IsNot Nothing Then
+            Return tlo.BestPhones
+        End If
+
+        Return Nothing
+    End Function
 
     Public ReadOnly Property ReferrelName As String
         Get

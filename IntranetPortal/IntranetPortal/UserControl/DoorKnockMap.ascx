@@ -271,6 +271,27 @@
         calcRoute();
     }
 
+    function PrintDetails()
+    {
+        var table = document.getElementById("target_table");
+        var tBody = table.getElementsByTagName('tbody')[0];
+
+        var bbles = [];
+        var adds = [];
+
+        for(var i=1; i<tBody.rows.length; i++)
+        {
+            var row = tBody.rows[i];
+            bbles.push(row.cells[3].innerHTML);
+            adds.push(row.cells[1].innerHTML);
+        }
+
+        var url = "/popupcontrol/doorknockchart.aspx?p=" + encodeURIComponent(bbles.join(";")) + "&a=" + encodeURIComponent(adds.join(";"));
+        var left = (screen.width / 2) - (1350 / 2);
+        var top = (screen.height / 2) - (930 / 2);
+        window.open(url, 'Print Details', 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+    }
+
 </script>
 <div style="position: relative; width: 100%; height: 100%" id="mapContent">
     <div style="width: 350px; position: absolute; z-index: 20; margin-top: 10px; margin-left: 80px; background-color: white;">
@@ -310,6 +331,9 @@
                 <td>
                     <dx:ASPxButton runat="server" RenderMode="Button"  Text="Print" AutoPostBack="false" CssClass="rand-button rand-button-blue">                       
                         <ClientSideEvents Click="function(){window.print();}" />                      
+                    </dx:ASPxButton>
+                      <dx:ASPxButton runat="server" RenderMode="Button"  Text="Details" AutoPostBack="false" CssClass="rand-button rand-button-blue">                       
+                        <ClientSideEvents Click="function(){PrintDetails();}" />
                     </dx:ASPxButton>
                 </td>
             </tr>

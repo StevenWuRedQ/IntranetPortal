@@ -62,6 +62,7 @@
         Finder
         Manager
         Task
+        DoorknockTask
         Appointment
         Status
         Approval

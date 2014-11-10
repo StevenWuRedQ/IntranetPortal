@@ -521,6 +521,26 @@
                                 </table>
                             </div>
                         </asp:Panel>
+                                                
+                        <asp:Panel runat="server" ID="pnlDoorknockTask" Visible='<%# Eval("Category").ToString.StartsWith("DoorknockTask")%>'>
+                            <div class="log_item_col1">
+                                <div class="clearfix">
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <td style="width: 350px"><asp:Literal runat="server" ID="ltDoorknockAddress"></asp:Literal> </td>
+                                            <td>
+                                                <div style="float: right; font-size: 18px">
+                                                    <span style="font-size: 14px;">
+                                                        <asp:Literal runat="server" ID="ltDoorknockResult"></asp:Literal></span>
+                                                    <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" onclick='<%# String.Format("CompleteTask(""{0}"")", Eval("LogID"))%>' title="Completed" runat="server" id="btnDoorkncokComplete" visible="false"></i>                                                    
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                                             
+                            </div>
+                        </asp:Panel>
 
                         <asp:Panel runat="server" Visible='<%# Eval("Category").ToString.StartsWith("Approval")%>' ID="panelTask">
                             <table style="width: 100%">

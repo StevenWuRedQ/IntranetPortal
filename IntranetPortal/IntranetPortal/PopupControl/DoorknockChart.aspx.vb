@@ -14,9 +14,9 @@
     Sub CreateTasks()
         Dim logs As New ActivityLogs
         For i = 0 To BBLEs.Length - 1
-            'logs.AddActivityLog2(DateTime.Now, "Set Comments logs")
-
-
+            Dim bble = BBLEs(i)
+            Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, "Door Knock: " & Addresses(i), bble, LeadsActivityLog.LogCategory.DoorknockTask.ToString, LeadsActivityLog.EnumActionType.DoorKnock)
+            UserTask.AddUserTask(bble, Page.User.Identity.Name, "Doorknock", "Normal", "In Office", DateTime.Now.AddDays(3), "Door Knock: " & Addresses(i), log.LogID)
         Next
     End Sub
 End Class
