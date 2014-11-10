@@ -66,7 +66,7 @@
         }
         else
             return;
-        
+
         var request = {
             //origin: 'Westbury, NY',
             //destination: 'Woodhaven, NY',
@@ -193,12 +193,12 @@
             for (var i = 1; i < tableObj.rows.length; i++) {
                 tableObj.rows[i].cells[0].innerHTML = i;
             }
-        }        
+        }
         calcRoute();
     }
 
     var saveAddress = false;
-    function OnGetAddressComplete(s, e) {     
+    function OnGetAddressComplete(s, e) {
 
         var address = e.result;
 
@@ -213,21 +213,19 @@
             calcRoute();
         }
         else {
-                listboxAddressClient.BeginUpdate();
-                listboxAddressClient.ClearItems();
+            listboxAddressClient.BeginUpdate();
+            listboxAddressClient.ClearItems();
             for (var i = 0; i < adds.length; i++) {
-                listboxAddressClient.AddItem(adds[i]);              
+                listboxAddressClient.AddItem(adds[i]);
             }
             listboxAddressClient.EndUpdate();
             popupSelectDoornockAddress.Show();
-        }    
+        }
     }
 
-    function AddSelectedAddress()
-    {
+    function AddSelectedAddress() {
         var items = listboxAddressClient.GetSelectedItems();
-        for(var i=0; i<items.length;i++)
-        {
+        for (var i = 0; i < items.length; i++) {
             AddAddressToTable(items[i].text);
         }
 
@@ -264,23 +262,22 @@
     }
 
     function SetOriginPoint() {
-    
+
         var data = 'OriginPoint|' + originPoint.GetText();
         SaveAddressCallback.PerformCallback(data);
         //document.cookie = 'OriginPoint=' + originPoint.GetText() + ';';
         calcRoute();
     }
 
-    function PrintDetails()
-    {
+    function PrintDetails() {
+        debugger;
         var table = document.getElementById("target_table");
         var tBody = table.getElementsByTagName('tbody')[0];
 
         var bbles = [];
         var adds = [];
 
-        for(var i=1; i<tBody.rows.length; i++)
-        {
+        for (var i = 1; i < tBody.rows.length; i++) {
             var row = tBody.rows[i];
             bbles.push(row.cells[3].innerHTML);
             adds.push(row.cells[1].innerHTML);
@@ -304,33 +301,33 @@
                     <td hidden="hidden">BBLE</td>
                 </tr>
             </thead>
-            <tr>
-                <td>1</td>
-                <td>
-                    <dx:ASPxTextBox runat="server" ID="txtOriginPoint" ClientInstanceName="originPoint" Width="100%" Text=""></dx:ASPxTextBox>
-                </td>
-                <td style="vertical-align: middle">
-                    <dx:ASPxButton runat="server" RenderMode="Button" Image-Height="16px" Text="Set" Image-Width="16px" AutoPostBack="false">
-                        <FocusRectPaddings PaddingLeft="2" PaddingRight="2" PaddingBottom="0" PaddingTop="0" />
-                        <ClientSideEvents Click="function() {SetOriginPoint();}" />
-                    </dx:ASPxButton>
-                </td>
-                <td hidden="hidden"></td>
-            </tr>
             <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        <dx:ASPxTextBox runat="server" ID="txtOriginPoint" ClientInstanceName="originPoint" Width="100%" Text=""></dx:ASPxTextBox>
+                    </td>
+                    <td style="vertical-align: middle">
+                        <dx:ASPxButton runat="server" RenderMode="Button" Image-Height="16px" Text="Set" Image-Width="16px" AutoPostBack="false">
+                            <FocusRectPaddings PaddingLeft="2" PaddingRight="2" PaddingBottom="0" PaddingTop="0" />
+                            <ClientSideEvents Click="function() {SetOriginPoint();}" />
+                        </dx:ASPxButton>
+                    </td>
+                    <td hidden="hidden"></td>
+                </tr>
             </tbody>
         </table>
     </div>
     <div style="float: left; width: 1000px; display: block; height: 100%;">
         <div id="map-canvas" style="height: 100%; width: 100%;"></div>
     </div>
-    <div id="directionsPanel" style="float: left; width: 300px; height: 100%; right: 0px; overflow: auto; z-index: 999; padding:5px">
+    <div id="directionsPanel" style="float: left; width: 300px; height: 100%; right: 0px; overflow: auto; z-index: 999; padding: 5px">
         <table style="">
             <tr>
                 <td style="width: 160px;">Total: <span id="total"></span></td>
                 <td>
-                    <input type="button" class="rand-button rand-button-blue" value="Print" onclick="window.print()"  />                   
-                    <input type="button" class="rand-button rand-button-blue" value="Details" onclick="PrintDetails()"  />
+                    <input type="button" class="rand-button rand-button-blue" value="Print" onclick="window.print()" />
+                    <input type="button" class="rand-button rand-button-blue" value="Details" onclick="PrintDetails()" />
                 </td>
             </tr>
         </table>
@@ -339,7 +336,7 @@
 <dx:ASPxCallback runat="server" ClientInstanceName="GetAddressCallback" ID="callbackGetAddress" OnCallback="callbackGetAddress_Callback">
     <ClientSideEvents CallbackComplete="OnGetAddressComplete" />
 </dx:ASPxCallback>
-<dx:ASPxCallback runat="server" ClientInstanceName="SaveAddressCallback" ID="ASPxCallback1" OnCallback="callbackGetAddress_Callback">    
+<dx:ASPxCallback runat="server" ClientInstanceName="SaveAddressCallback" ID="ASPxCallback1" OnCallback="callbackGetAddress_Callback">
 </dx:ASPxCallback>
 <dx:ASPxPopupControl ClientInstanceName="popupSelectDoornockAddress" Width="300px" Height="300px"
     MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl2"
