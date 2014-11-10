@@ -63,11 +63,20 @@
 
                 xhr.open('POST', url)
                 xhr.onload = function () {
-                    progress.value = progress.innerHTML = 100;
-                    alert("Upload Completed!");
-                    formData = null;
-                    ClearFilesTable();
-                    LoadingPanel.Hide();
+                    debugger;
+                    if (xhr.readyState==4 && xhr.status == 200)
+                    {
+                        progress.value = progress.innerHTML = 100;
+                        alert("Upload Completed!");
+                        formData = null;
+                        ClearFilesTable();
+                        LoadingPanel.Hide();
+                    }
+                    else
+                    {
+                        LoadingPanel.Hide();
+                        alert("Error in upload file. Please try later.");
+                    }
                 };
 
                 if (tests.progress) {
@@ -365,7 +374,7 @@
                         <tr>
                             <td>
                                 <dx:ASPxUploadControl ID="uplImage" AdvancedModeSettings-EnableMultiSelect="true" runat="server" ClientInstanceName="uploader" CssClass="email_input input_files" NullText="Click here to browse files..." Size="35" Width="10%">
-                                    <ValidationSettings MaxFileSize="4194304">
+                                    <ValidationSettings MaxFileSize="6194304">
                                     </ValidationSettings>
                                     <ClientSideEvents TextChanged="function(s,e){if(s.GetText()!=''){OnAddFileButtonClick();}}" />
                                 </dx:ASPxUploadControl>

@@ -27,7 +27,7 @@
                     <dx:PanelContent>
                         <dx:ASPxListBox runat="server" ID="lbEmployees" Width="100%" Height="350px"></dx:ASPxListBox>
                         <br />
-                        <dx:ASPxComboBox runat="server" Width="100%" ID="cbEmps"></dx:ASPxComboBox>
+                        <dx:ASPxTokenBox runat="server" Width="100%" ID="cbEmps" TextSeparator=";"></dx:ASPxTokenBox>
                         <dx:ASPxButton runat="server" Text="Add" ID="btnAddEmp"></dx:ASPxButton>
                         <dx:ASPxButton runat="server" Text="Remove" ID="btnRemoveEmp"></dx:ASPxButton>
                     </dx:PanelContent>

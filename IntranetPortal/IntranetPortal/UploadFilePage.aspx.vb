@@ -41,7 +41,7 @@ Public Class UploadFilePage
                     Dim bble = Request.QueryString("b")
                     Dim category = categories(file.FileName)  'Request.QueryString("cate")
 
-                    DocumentService.UploadFile(String.Format("{0}/{1}/", bble, category), ms.ToArray, name, User.Identity.Name)
+                    DocumentService.UploadFile(String.Format("{0}/{1}", bble, category), ms.ToArray, name, User.Identity.Name)
                 Next
             End If
         End If

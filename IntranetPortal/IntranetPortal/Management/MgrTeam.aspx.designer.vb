@@ -74,7 +74,7 @@ Partial Public Class MgrTeamPage
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbEmps As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+    Protected WithEvents cbEmps As Global.DevExpress.Web.ASPxEditors.ASPxTokenBox
 
     '''<summary>
     '''btnAddEmp control.

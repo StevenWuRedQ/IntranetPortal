@@ -86,17 +86,25 @@
     Protected Sub btnAddEmp_Click(sender As Object, e As EventArgs) Handles btnAddEmp.Click
         If Not cbEmps.Value = Nothing AndAlso Not String.IsNullOrEmpty(cbEmps.Value) Then
             Using Context As New Entities
-                Dim ur As New UserInTeam
-                ur.TeamId = CInt(lbRoles.Value)
-                ur.EmployeeName = cbEmps.Text.ToString
+                Dim teamId = CInt(lbRoles.Value)
+                For Each name In cbEmps.Text.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries)
+
+                    Dim ur = Context.UserInTeams.Where(Function(u) u.TeamId = teamId And u.EmployeeName = name).FirstOrDefault
+                    If ur Is Nothing Then
+                        ur = New UserInTeam
+                        ur.TeamId = teamId
+                        ur.EmployeeName = name
+                        Context.UserInTeams.Add(ur)
+                    End If
+                Next
 
                 Try
-                    Context.UserInTeams.Add(ur)
                     Context.SaveChanges()
                 Catch ex As Exception
                     lblError.Text = ex.Message
                 Finally
                     BindUserInTeam()
+                    cbEmps.Text = ""
                 End Try
             End Using
         End If

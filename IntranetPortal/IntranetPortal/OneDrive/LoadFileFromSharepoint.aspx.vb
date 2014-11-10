@@ -119,7 +119,7 @@ Public Class LoadFileFromSharepoint
 
     Protected Sub btnUpload_Click(sender As Object, e As EventArgs)
         Dim cate = "7945614444/Sales"
-        DocumentService.UploadFile(cate, fileUpload.FileBytes, fileUpload.FileName)
+        DocumentService.UploadFile(cate, fileUpload.FileBytes, fileUpload.FileName, "123")
         Return
 
         Dim userName = "georgev@gvs4u.org"
