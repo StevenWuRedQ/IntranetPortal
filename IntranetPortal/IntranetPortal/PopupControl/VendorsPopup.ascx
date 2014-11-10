@@ -20,8 +20,8 @@
 
     <FooterContentTemplate>
         <div style="float: right; margin-right: 20px; margin-bottom: 10px;">
-            <input style="margin-left: 20px;" type="button" class="rand-button short_sale_edit bg_color_blue" value="Ok" onclick="">
-            <input type="button" class="rand-button short_sale_edit bg_color_gray" value="Cancel" onclick="VendorsPopupClient.Hide()">
+            <input style="margin-left: 20px;" type="button" class="rand-button rand-button-padding bg_color_blue" value="Ok" onclick="NGSelectPartry()">
+            <input type="button" class="rand-button rand-button-padding bg_color_gray" value="Cancel" onclick="VendorsPopupClient.Hide()">
         </div>
     </FooterContentTemplate>
     <ContentCollection>

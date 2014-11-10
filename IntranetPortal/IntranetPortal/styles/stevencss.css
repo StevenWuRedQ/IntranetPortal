@@ -2026,3 +2026,7 @@ td.vendor_info_left {
     margin-bottom:2px;
     box-shadow: none;
 }
+.rand-button-padding
+{
+    padding:9px 20px;
+}

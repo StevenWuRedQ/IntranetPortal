@@ -5,15 +5,16 @@
     var isloaded = false;
 
     function ShowSelectParty(partyName, selectPartyCallback) {
-        if (isloaded)
-            ASPxPopupSelectParty.Show();
-        else {
-            ASPxPopupSelectParty.PerformCallback();
-            isloaded = true;
-        }
-
+        //if (isloaded)
+        //    ASPxPopupSelectParty.Show();
+        //else {
+        //    ASPxPopupSelectParty.PerformCallback();
+        //    isloaded = true;
+        //}
+        VendorsPopupClient.Show();
         tmpPartyName = partyName;
-        onSelectCallback = selectPartyCallback;
+
+        //onSelectCallback = selectPartyCallback;
     }
 
     function ShowEditForm() {
@@ -34,8 +35,31 @@
 
     function EndSelectParty(party) {
         var data = JSON.parse(party);
+
         refreshDiv(tmpPartyName, data);
         onSelectCallback(data);
+    }
+
+    function NGSelectPartry() {
+
+        var iframe = VendorsPopupClient.GetContentIFrame();
+        if (iframe != null)
+        {
+            contactDocument = (iframe.contentWindow || iframe.contentDocument);
+            if (contactDocument == null || contactDocument.m_current_contact==null)
+            {
+               
+                return;
+            }
+            var m_Current_contatct = contactDocument.m_current_contact;
+          
+            
+            refreshDiv(tmpPartyName, m_Current_contatct);
+        }
+        VendorsPopupClient.Hide();
+        //var  m_Current_contatct = 
+        
+
     }
 </script>
 

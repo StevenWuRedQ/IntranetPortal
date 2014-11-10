@@ -24,7 +24,7 @@
     <form id="form1" runat="server">
         <link href="/styles/stevencss.css?v=<%=DateTime.Now.Millisecond.ToString %>>" rel="stylesheet" type="text/css" />
         <div style="color: #b1b2b7" class="clearfix">
-            <div class="row">
+            <div class="row" style="margin:0px;">
                 <div class="col-md-3">
                     <div style="font-size: 16px; color: #3993c1; font-weight: 700">
                         <ul class="list-group" style="box-shadow: none">

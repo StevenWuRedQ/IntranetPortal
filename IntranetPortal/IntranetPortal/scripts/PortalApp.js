@@ -24,7 +24,7 @@ function groupBy(array, f) {
     return groups;
    
 }
-
+var m_current_contact = null;
 
 var portalApp = angular.module('PortalApp', []);
 function Fomart_data_String(json)
@@ -50,6 +50,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http) {
             var allContacts = $scope.allContacts;
             if (allContacts.length > 0) {
                 $scope.currentContact = $scope.allContacts[0].data[0]
+                m_current_contact = $scope.currentContact;
                 $scope.showingContacts = $scope.allContacts
             }
         }).error(function (data, status, headers, config) {
@@ -97,6 +98,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http) {
     }
     $scope.selectCurrent = function (selectContact) {
         $scope.currentContact = selectContact;
+        m_current_contact = selectContact;
     }
     //$.ajax({
     //    type: "POST",
