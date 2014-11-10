@@ -23,7 +23,7 @@
 
         <div style="color: #231f20">
             <div class="bs-docs-grid">
-                <div class="row" >
+                <div class="row">
                     <div class="col-md-1">
                         <div style="background: #158ccd; height: 60px; width: 40px;">
                             &nbsp;
@@ -86,7 +86,10 @@
                                     </td>
                                     <td>929 Saint Johns Pl,<br />
                                         Brooklyn, NY 11213</td>
-                                    <td>$593,012.12</td>
+                                    <td>$670,000.00<br />
+                                        $123,123.12
+
+                                    </td>
                                     <td>&nbsp;</td>
                                     <td>&nbsp;</td>
                                     <td>&nbsp;</td>
