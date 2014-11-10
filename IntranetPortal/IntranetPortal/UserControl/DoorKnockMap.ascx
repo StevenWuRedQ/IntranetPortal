@@ -327,18 +327,13 @@
     <div id="directionsPanel" style="float: left; width: 300px; height: 100%; right: 0px; overflow: auto; z-index: 999; padding:5px">
         <table style="">
             <tr>
-                <td style="width: 160px;">Total Distance: <span id="total"></span></td>
+                <td style="width: 160px;">Total: <span id="total"></span></td>
                 <td>
-                    <dx:ASPxButton runat="server" RenderMode="Button"  Text="Print" AutoPostBack="false" CssClass="rand-button rand-button-blue">                       
-                        <ClientSideEvents Click="function(){window.print();}" />                      
-                    </dx:ASPxButton>
-                      <dx:ASPxButton runat="server" RenderMode="Button"  Text="Details" AutoPostBack="false" CssClass="rand-button rand-button-blue">                       
-                        <ClientSideEvents Click="function(){PrintDetails();}" />
-                    </dx:ASPxButton>
+                    <input type="button" class="rand-button rand-button-blue" value="Print" onclick="window.print()"  />                   
+                    <input type="button" class="rand-button rand-button-blue" value="Details" onclick="PrintDetails()"  />
                 </td>
             </tr>
         </table>
-
     </div>
 </div>
 <dx:ASPxCallback runat="server" ClientInstanceName="GetAddressCallback" ID="callbackGetAddress" OnCallback="callbackGetAddress_Callback">
