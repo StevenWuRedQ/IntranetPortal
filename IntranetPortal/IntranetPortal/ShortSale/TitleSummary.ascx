@@ -134,14 +134,14 @@
     }*/
     /*-------end-------------*/
 
-    /*td.dxgv {
+   .no_border_head tbody tr td table tbody tr td.dxgv {
         border-bottom: 0px !important;
-    }*/
+    }
+   td.dxgvIndentCell {
+        border-right: 3px Solid #dde0e7 !important;
+    }
 
-
-    /*
-
-        */
+   
 
 
     td.grid_padding {
@@ -225,7 +225,7 @@
                                         <i class="fa fa-university with_circle title_summary_icon" style=""></i><span class="heading_text2">Upcoming BPO's</span>
                                     </h4>
                                     <div class="div-underline " style="height: 240px;">
-                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridUpcomingApproval" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="4">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridUpcomingApproval" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" CssClass="no_border_head" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="4">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>

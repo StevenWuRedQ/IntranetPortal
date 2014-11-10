@@ -5,12 +5,11 @@
 
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
-    
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <span class="time_buttons" onclick="VendorsPopupClient.Show()">VendorsPopUp</span>
     <h1>{{hello}}</h1>
     <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
-    
+   
 </asp:Content>
 
