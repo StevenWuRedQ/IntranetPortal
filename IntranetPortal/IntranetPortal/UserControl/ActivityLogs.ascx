@@ -537,8 +537,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                </div>
-                                                             
+                                </div>                                                             
                             </div>
                         </asp:Panel>
 
@@ -568,7 +567,7 @@
                                 </tbody>
                             </table>
                         </asp:Panel>
-                        <asp:Literal runat="server" Visible='<%# Not (Eval("Category").ToString.StartsWith("Task") Or Eval("Category").ToString.StartsWith("Appointment") or  Eval("Category").ToString.StartsWith("Approval"))%>' Text='<%# Eval("Comments")%>'>                                                
+                        <asp:Literal runat="server" Visible='<%# Not (Eval("Category").ToString.StartsWith("Task") Or Eval("Category").ToString.StartsWith("Appointment") Or Eval("Category").ToString.StartsWith("Approval") Or Eval("Category").ToString.StartsWith("DoorknockTask"))%>' Text='<%# Eval("Comments")%>'>                                                
                         </asp:Literal>
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>

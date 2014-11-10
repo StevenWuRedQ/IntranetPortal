@@ -25,7 +25,7 @@ Public Class NavMenu
                 item.Text = t.Name
                 item.NavigationUrl = "#"
                 item.ShowAmount = True
-                BuildTeamMenu(item, t.TeamId)
+                BuildTeamMenu(item, t.TeamId, t.Name)
                 item.UserRoles = "TeamManager-" & t.Name
 
                 teamList.Add(item)
@@ -36,12 +36,12 @@ Public Class NavMenu
         teamMgr.Items.AddRange(teamList)
     End Sub
 
-    Shared Sub BuildTeamMenu(item As PortalNavItem, teamId As Integer)
+    Shared Sub BuildTeamMenu(item As PortalNavItem, teamId As Integer, teamName As String)
         If item.Items Is Nothing Then
             item.Items = New List(Of PortalNavItem)
         End If
 
-        item.Items.Add(GetTeamAssignItem(teamId, "fa-check-square-o"))
+        item.Items.Add(GetTeamAssignItem(teamId, teamName, "fa-check-square-o"))
         item.Items.Add(GetTeamNavItem("New Leads", teamId, "fa-star"))
         item.Items.Add(GetTeamNavItem("Hot Leads", teamId, "fa-sun-o"))
         item.Items.Add(GetTeamNavItem("Follow Up", teamId, "fa-rotate-right"))
@@ -62,11 +62,11 @@ Public Class NavMenu
         Return item
     End Function
 
-    Shared Function GetTeamAssignItem(teamId As Integer, fontClass As String)
+    Shared Function GetTeamAssignItem(teamId As Integer, teamName As String, fontClass As String)
         Dim item As New PortalNavItem
         item.Name = String.Format("Team-{0}-AssignLeads", teamId)
         item.Text = "Assign Leads"
-        item.NavigationUrl = String.Format("/Management/LeadsManagement.aspx?team={0}", teamId)
+        item.NavigationUrl = String.Format("/Management/LeadsManagement.aspx?office={0}", teamName)
         item.ShowAmount = True
         item.FontClass = String.Format("<i class=""fa {0}""></i>", fontClass)
 
