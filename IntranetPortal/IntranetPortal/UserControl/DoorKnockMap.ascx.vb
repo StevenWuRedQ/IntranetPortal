@@ -2,7 +2,6 @@
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
         If Not Page.IsPostBack Then
             Dim originPoint = Employee.GetProfile(Page.User.Identity.Name).DoornockAddress
             If Not String.IsNullOrEmpty(originPoint) Then
@@ -23,7 +22,6 @@
         End If
 
         Using Context As New Entities
-
             Dim addresses = Context.OwnerContacts.Where(Function(c) c.BBLE = e.Parameter And c.ContactType = OwnerContact.OwnerContactType.MailAddress And c.Status = OwnerContact.ContactStatus.DoorKnock).ToList
             If addresses IsNot Nothing AndAlso addresses.Count > 0 Then
                 Dim result = addresses.Select(Function(a) a.Contact).ToArray

@@ -214,6 +214,10 @@
                 debt += WaterAmt
             End If
 
+            If ViolationAmount > 0 Then
+                debt += ViolationAmount
+            End If
+
             Return debt
         End Get
     End Property

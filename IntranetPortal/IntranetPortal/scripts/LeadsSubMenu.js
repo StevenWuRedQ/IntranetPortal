@@ -163,7 +163,7 @@ function OnLeadsCategoryClick(s, e) {
             var url = '/ViewLeadsInfo.aspx?id=' + tmpBBLE;
             var left = (screen.width / 2) - (1350 / 2);
             var top = (screen.height / 2) - (930 / 2);
-            window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+            window.open(url, 'View Leads Info ' + tmpBBLE, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
             //window.open(url, 'View Leads Info', 'Width=1350px,Height=930px');
         }
 

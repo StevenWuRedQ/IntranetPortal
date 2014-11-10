@@ -9,10 +9,69 @@ Public Class NavMenu
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         PortalMenuItems = LoadMenuFromXml(HttpContext.Current)
+
         'InitialMenu()
         'WriteXML()
 
     End Sub
+
+    Shared Sub AddTeamsMenu(menus As List(Of PortalNavItem))
+        Dim teamList As New List(Of PortalNavItem)
+
+        Using ctx As New Entities
+            For Each t In ctx.Teams.OrderBy(Function(r) r.Name)
+                Dim item As New PortalNavItem
+                item.Name = String.Format("Team-{0}-Management", t.TeamId)
+                item.Text = t.Name
+                item.NavigationUrl = "#"
+                item.ShowAmount = True
+                BuildTeamMenu(item, t.TeamId)
+                item.UserRoles = "TeamManager-" & t.Name
+
+                teamList.Add(item)
+            Next
+        End Using
+
+        Dim teamMgr = menus.Where(Function(mi) mi.Name = "OfficeManagement").Single
+        teamMgr.Items.AddRange(teamList)
+    End Sub
+
+    Shared Sub BuildTeamMenu(item As PortalNavItem, teamId As Integer)
+        If item.Items Is Nothing Then
+            item.Items = New List(Of PortalNavItem)
+        End If
+
+        item.Items.Add(GetTeamAssignItem(teamId, "fa-check-square-o"))
+        item.Items.Add(GetTeamNavItem("New Leads", teamId, "fa-star"))
+        item.Items.Add(GetTeamNavItem("Hot Leads", teamId, "fa-sun-o"))
+        item.Items.Add(GetTeamNavItem("Follow Up", teamId, "fa-rotate-right"))
+        item.Items.Add(GetTeamNavItem("Door Knock", teamId, "fa-sign-in"))
+        item.Items.Add(GetTeamNavItem("In Process", teamId, "fa-refresh"))
+        item.Items.Add(GetTeamNavItem("Dead Lead", teamId, "fa-times-circle"))
+        item.Items.Add(GetTeamNavItem("Closed", teamId, "fa-check-circle"))
+    End Sub
+
+    Shared Function GetTeamNavItem(type As String, teamId As Integer, fontClass As String)
+        Dim item As New PortalNavItem
+        item.Name = String.Format("Team-{0}-{1}", teamId, type.Replace(" ", ""))
+        item.Text = type
+        item.NavigationUrl = String.Format("/MgrViewLeads.aspx?c={0}&amp;team={1}", type, teamId)
+        item.ShowAmount = True
+        item.FontClass = String.Format("<i class=""fa {0}""></i>", fontClass)
+
+        Return item
+    End Function
+
+    Shared Function GetTeamAssignItem(teamId As Integer, fontClass As String)
+        Dim item As New PortalNavItem
+        item.Name = String.Format("Team-{0}-AssignLeads", teamId)
+        item.Text = "Assign Leads"
+        item.NavigationUrl = String.Format("/Management/LeadsManagement.aspx?team={0}", teamId)
+        item.ShowAmount = True
+        item.FontClass = String.Format("<i class=""fa {0}""></i>", fontClass)
+
+        Return item
+    End Function
 
     Public Sub InitialMenu()
         Dim item As New PortalNavItem
@@ -36,7 +95,7 @@ Public Class NavMenu
         Dim file As New System.IO.StreamReader(context.Server.MapPath(XmlDataFile))
         Dim menuItems = CType(reader.Deserialize(file), List(Of PortalNavItem))
         file.Close()
-
+        AddTeamsMenu(menuItems)
         Return menuItems
     End Function
 End Class
@@ -122,12 +181,33 @@ Public Class RefreshLeadsCountHandler
         End If
 
         If name.StartsWith("Team") Then
-            Return GetTeamLeadsCount(name, itemText)
+            Return GetTeam2LeadsCount(name, itemText)
         End If
 
         If name.StartsWith("ShortSale") Then
             Return GetShortSaleCaseCount(name, itemText, userName)
         End If
+    End Function
+
+    Function GetTeam2LeadsCount(name As String, itemText As String) As Integer
+        'Dim mgrId = CInt(name.Split("-")(1))
+
+        Dim tmpStr = name.Split("-")
+
+        If tmpStr.Length > 2 Then
+            Dim teamId = CInt(tmpStr(1))
+            Dim type = tmpStr(2)
+
+            Select Case type
+                Case "AssignLeads"
+                    Return Utility.GetTeamUnAssignedLeadsCount(teamId)
+                Case "Management"
+                    Return Utility.GetTeamLeadsCount(LeadStatus.ALL, teamId) + Utility.GetUnAssignedLeadsCount(teamId)
+                Case Else
+                    Return Utility.GetTeamLeadsCount(Utility.GetLeadStatus(itemText), teamId)
+            End Select
+        End If
+
     End Function
 
     Function GetTeamLeadsCount(name As String, itemText As String) As Integer
@@ -148,7 +228,6 @@ Public Class RefreshLeadsCountHandler
                     Return Utility.GetMgrLeadsCount(Utility.GetLeadStatus(itemText), Employee.GetManagedEmployees(mgrName))
             End Select
         End If
-
     End Function
 
     Function GetOfficeLeadsCount(name As String, itemText As String) As Integer

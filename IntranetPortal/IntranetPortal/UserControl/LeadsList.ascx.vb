@@ -8,6 +8,7 @@ Public Class LeadsList
     Public Property LeadsListView As ControlView = ControlView.UserView
     Public Property OfficeName As String
     Public Property TeamMgr As String
+    Public Property TeamId As Integer
 
     ' Dim CategoryName As String
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -67,7 +68,55 @@ Public Class LeadsList
 
     Sub BindLeadsListMgr(category As LeadStatus)
         BindLeadsListMgr(category, Page.User.Identity.Name)
+    End Sub
 
+    Sub BindLeadsListByTeam(category As LeadStatus)
+        If TeamId = 0 Then
+            Return
+        End If
+
+        Using Context As New Entities
+            Dim subOridates = Employee.GetTeamUsers(TeamId)
+
+            Dim leads As Object
+
+            If category = LeadStatus.InProcess Then
+                subOridates = Employee.GetAllDeptUsers(OfficeName)
+                leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
+            Else
+                leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
+            End If
+
+            gridLeads.DataSource = leads
+            gridLeads.DataBind()
+        End Using
+
+        If Not Page.IsPostBack Then
+            If category = LeadStatus.Callback Then
+                gridLeads.GroupBy(gridLeads.Columns("CallbackDate"))
+                gridLeads.ExpandAll()
+            Else
+                gridLeads.UnGroup(gridLeads.Columns("CallbackDate"))
+            End If
+
+            If category = LeadStatus.DoorKnocks Then
+                gridLeads.Columns("colSelect").Visible = True
+                gridLeads.GroupBy(gridLeads.Columns("Neighborhood"))
+                gridLeads.ClientSideEvents.FocusedRowChanged = ""
+                gridLeads.ClientSideEvents.SelectionChanged = "OnGridLeadsSelectionChanged"
+
+                'Show View Lead Menu
+                LeadsSubMenu.PopupMenu.Items.FindByName("ViewLead").Visible = True
+            Else
+                gridLeads.Columns("colSelect").Visible = False
+            End If
+
+            gridLeads.GroupBy(gridLeads.Columns("EmployeeName"))
+            divExpand.Visible = True
+
+            'Show Manager Menu
+            LeadsSubMenu.PopupMenu.Items.FindByName("Reassign").Visible = True
+        End If
     End Sub
 
     Sub BindLeadsListByOffice(category As LeadStatus)
@@ -216,6 +265,12 @@ Public Class LeadsList
         If LeadsListView = ControlView.TeamView Or (Not String.IsNullOrEmpty(hfView.Value) And hfView.Value = "3") Then
             hfView.Value = ControlView.TeamView
             BindLeadsListMgr(category, TeamMgr)
+            Return
+        End If
+
+        If LeadsListView = ControlView.TeamView2 Or (Not String.IsNullOrEmpty(hfView.Value) And hfView.Value = "4") Then
+            hfView.Value = ControlView.TeamView2
+            BindLeadsListByTeam(category)
             Return
         End If
 
@@ -576,6 +631,11 @@ Public Class LeadsList
                 TeamMgr = Employee.GetInstance(CInt(Request.QueryString("mgr"))).Name
             End If
 
+            If Not String.IsNullOrEmpty(Request.QueryString("team")) Then
+                LeadsListView = ControlView.TeamView2
+                TeamId = CInt(Request.QueryString("team"))
+            End If
+
             BindLeadsList(lblLeadCategory.Text)
         End If
     End Sub
@@ -622,4 +682,5 @@ Public Enum ControlView
     ManagerView
     OfficeView
     TeamView
+    TeamView2
 End Enum

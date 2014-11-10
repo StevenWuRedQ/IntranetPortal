@@ -466,7 +466,13 @@
     <Compile Include="DataModel\SharedLead.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\Team.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\UserAppointment.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\UserInTeam.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\UserMessage.vb">
@@ -646,6 +652,13 @@
       <DependentUpon>MgrEmployee.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Management\MgrTeam.aspx.designer.vb">
+      <DependentUpon>MgrTeam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\MgrTeam.aspx.vb">
+      <DependentUpon>MgrTeam.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\MgrRole.aspx.designer.vb">
       <DependentUpon>MgrRole.aspx</DependentUpon>
     </Compile>
@@ -741,6 +754,13 @@
     <Compile Include="OneDrive\UploadFileToSharepoint.aspx.vb">
       <DependentUpon>UploadFileToSharepoint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupControl\DoorknockChart.aspx.designer.vb">
+      <DependentUpon>DoorknockChart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\DoorknockChart.aspx.vb">
+      <DependentUpon>DoorknockChart.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="PopupControl\EditHomeOwner.ascx.designer.vb">
       <DependentUpon>EditHomeOwner.ascx</DependentUpon>
@@ -1504,6 +1524,7 @@
     <Content Include="Management\LeadsDataManage.aspx" />
     <Content Include="Management\Management.aspx" />
     <Content Include="Management\MgrEmployee.aspx" />
+    <Content Include="Management\MgrTeam.aspx" />
     <Content Include="Management\MgrRole.aspx" />
     <Content Include="Management\PortalStatus.aspx" />
     <Content Include="Management\QueryBuilder.aspx" />
@@ -1599,6 +1620,7 @@
     <Content Include="pdfViewer\web\viewer.css" />
     <Content Include="pdfViewer\web\viewer.html" />
     <Content Include="pdfViewer\web\viewer.js" />
+    <Content Include="PopupControl\DoorknockChart.aspx" />
     <Content Include="PopupControl\EditHomeOwner.ascx" />
     <Content Include="PopupControl\SendMail.ascx" />
     <Content Include="PopupControl\SendMail.aspx" />

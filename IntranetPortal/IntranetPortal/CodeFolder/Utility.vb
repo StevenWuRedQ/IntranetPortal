@@ -146,6 +146,31 @@ Public Class Utility
         Return GetMgrLeadsCount(status, emps)
     End Function
 
+    Public Shared Function GetTeamLeadsCount(status As LeadStatus, teamId As Integer) As Integer
+        If status = LeadStatus.InProcess Then
+            Return GetMgrLeadsCount(status, Employee.GetTeamUsers(teamId))
+        End If
+
+        If status = LeadStatus.ALL Then
+            Return GetMgrLeadsCount(status, Employee.GetTeamUsers(teamId))
+        End If
+
+        Dim emps = Employee.GetTeamUsers(teamId)
+        Return GetMgrLeadsCount(status, emps)
+    End Function
+
+    Public Shared Function GetTeamUnAssignedLeadsCount(teamId As Integer) As Integer
+        Using context As New Entities
+            Dim t = context.Teams.Find(teamId)
+            Dim officeName = t.Name & " Office"
+
+            Dim count = (From ld In context.Leads
+                                   Where ld.EmployeeName = officeName
+                                   Select ld).Count
+            Return count
+        End Using
+    End Function
+
     Public Shared Function GetTeamUnAssignedLeadsCount(teamMgr As String) As Integer
         Using context As New Entities
             Return context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = teamMgr And li.Lead.Status = LeadStatus.NewLead).Count

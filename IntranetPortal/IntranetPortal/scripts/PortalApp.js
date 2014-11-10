@@ -38,9 +38,7 @@ function Fomart_data_String(json)
 }
 
 portalApp.controller('PortalCtrl', function ($scope, $http) {
-
-
-
+    
     $http.get('/CallBackSevices.aspx').
         success(function (data, status, headers, config) {
             // this callback will be called asynchronously
@@ -48,7 +46,6 @@ portalApp.controller('PortalCtrl', function ($scope, $http) {
             //debugger;
             var gropData = groupBy(data, function (item) { return getNameFirst(item.Name); })
             
-
             $scope.allContacts = gropData;
             var allContacts = $scope.allContacts;
             if (allContacts.length > 0) {

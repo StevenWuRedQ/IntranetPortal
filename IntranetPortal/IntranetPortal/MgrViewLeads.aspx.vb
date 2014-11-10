@@ -22,6 +22,12 @@ Public Class MgrViewLeads
                 LeadsList.TeamMgr = Employee.GetInstance(CInt(Request.QueryString("mgr"))).Name
             End If
 
+            If Not String.IsNullOrEmpty(Request.QueryString("team")) Then
+                Dim teamId = Request.QueryString("team").ToString
+                LeadsList.LeadsListView = ControlView.TeamView2
+                LeadsList.TeamId = CInt(teamId)
+            End If
+
             If Not Page.IsPostBack Then
                 LeadsList.BindLeadsList(CategoryName)
 

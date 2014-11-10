@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="MgrRole.aspx.vb" Inherits="IntranetPortal.MgrRole" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="MgrTeam.aspx.vb" Inherits="IntranetPortal.MgrTeamPage" %>
 
 <!DOCTYPE html>
 
@@ -10,7 +10,7 @@
     <form id="form1" runat="server">
         <div>
             <div style="float: left; width: 300px; margin-right: 10px;">
-                <dx:ASPxRoundPanel runat="server" HeaderText="Roles" Width="100%">
+                <dx:ASPxRoundPanel runat="server" HeaderText="Teams" Width="100%">
                     <PanelCollection>
                         <dx:PanelContent>
                             <dx:ASPxListBox runat="server" ID="lbRoles" Width="100%" Height="350px" AutoPostBack="true"></dx:ASPxListBox>

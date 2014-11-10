@@ -308,10 +308,8 @@
             <tr>
                 <td style="width: 160px;">Total Distance: <span id="total"></span></td>
                 <td>
-                    <dx:ASPxButton runat="server" RenderMode="Button"  Text="Print" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                       
-                        <ClientSideEvents Click="function(){window.print();}" />
-                      
+                    <dx:ASPxButton runat="server" RenderMode="Button"  Text="Print" AutoPostBack="false" CssClass="rand-button rand-button-blue">                       
+                        <ClientSideEvents Click="function(){window.print();}" />                      
                     </dx:ASPxButton>
                 </td>
             </tr>

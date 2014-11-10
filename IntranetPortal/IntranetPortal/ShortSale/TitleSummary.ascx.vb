@@ -152,7 +152,7 @@ Public Class UCTitleSummary
         'gridCallback.GroupBy(gridCallback.Columns("CallbackDate"))
     End Sub
 
-    Private Sub gridview_OnDataBinding(sender As Object, e As EventArgs) Handles gridUrgent.DataBinding, gridUpcomingApproval.DataBinding, CounterOfferGrid.DataBinding, InvestorReviewGrid.DataBinding, DocumentRequestsGrid.DataBinding, gridTask.DataBinding, gridFollowUp.DataBinding
+    Private Sub gridview_OnDataBinding(sender As Object, e As EventArgs) Handles gridUrgent.DataBinding, gridUpcomingApproval.DataBinding, CounterOfferGrid.DataBinding, InvestorReviewGrid.DataBinding, DocumentRequestsGrid.DataBinding, gridTask.DataBinding, gridFollowUp.DataBinding, AllLeadsGrid.DataBinding
         Dim grid = CType(sender, ASPxGridView)
         If grid.DataSource Is Nothing Then
             If grid Is gridUrgent Then
@@ -181,6 +181,11 @@ Public Class UCTitleSummary
 
             If grid Is gridFollowUp Then
                 BindFollowUp()
+            End If
+
+            If grid Is AllLeadsGrid Then
+                'Bind All Leads Grid
+                AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase()
             End If
         End If
     End Sub

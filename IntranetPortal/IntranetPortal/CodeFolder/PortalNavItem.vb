@@ -87,12 +87,12 @@ Public Class PortalNavItem
 
     Function RenderNode() As String
         If ShowAmount Then
-            If Items.Count > 0 Then
+            If Items IsNot Nothing AndAlso Items.Count > 0 Then
                 Return String.Format(itemWithNumChildrenFormat, FontClass, NavigationUrl, Text, LeadsCountSpanId, "", FrontButton, "has-level-" & level + 1 & "-menu", If(String.IsNullOrEmpty(FrontButton), "", "has-add-button"))
             End If
-            Return String.Format(itemWithNumFormat, FontClass, NavigationUrl, Text, LeadsCountSpanId, "", FrontButton, If(Items.Count > 0, "has-level-" & level + 1 & "-menu", ""), If(String.IsNullOrEmpty(FrontButton), "", "has-add-button"))
+            Return String.Format(itemWithNumFormat, FontClass, NavigationUrl, Text, LeadsCountSpanId, "", FrontButton, If(Items IsNot Nothing AndAlso Items.Count > 0, "has-level-" & level + 1 & "-menu", ""), If(String.IsNullOrEmpty(FrontButton), "", "has-add-button"))
         Else
-            If Items.Count > 0 Then
+            If Items IsNot Nothing AndAlso Items.Count > 0 Then
                 Return String.Format(itemWithChildrenFormat, FontClass, NavigationUrl, Text, "has-level-" & level + 1 & "-menu", FrontButton, If(String.IsNullOrEmpty(FrontButton), "", "has-add-button"))
             End If
 
