@@ -1,26 +1,22 @@
 <%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Root.master.vb" Inherits="IntranetPortal.Root" %>
-
 <%@ Import Namespace="System.ComponentModel" %>
-
-<%--<%@ Register Assembly="DevExpress.Web.v13.2, Version=13.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.ASPxRibbon" TagPrefix="dx" %>--%>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Agent Portal (beta) - My Ideal Property</title>
-
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
     <%--add font image by steven--%>
-    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-    <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
     <%--------end--------%>
     <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="css/normalize.min.css" />
+    <link rel="stylesheet" href="/css/normalize.min.css" />
     <link rel="stylesheet" href="/scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.css" />
-    <link rel="stylesheet" href="css/main.css" />
-
+    <link rel="stylesheet" href="/css/main.css" />
     <style>
         html, body, #form1 {
             /*margin: 0;
@@ -238,9 +234,9 @@
                                                                 <dx:GridViewDataColumn Width="35px" VisibleIndex="5">
                                                                     <DataItemTemplate>
                                                                         <%--use font image to change the image--%>
-                                                                        <i class="fa fa-external-link-square tooltip-examples" data-toggle="tooltip" data-placement="bottom"  style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To Lead" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"), StringComparer.OrdinalIgnoreCase) or SharedBBLEs.Contains(Eval("BBLE"))%>'></i>
+                                                                        <i class="fa fa-external-link-square tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To Lead" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"), StringComparer.OrdinalIgnoreCase) or SharedBBLEs.Contains(Eval("BBLE"))%>'></i>
                                                                         <span style="width: 10px">&nbsp;&nbsp;</span>
-                                                                        <i class="fa fa-list-alt tooltip-examples" data-toggle="tooltip" data-placement="bottom"  style="font-size: 18px; vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"), StringComparer.OrdinalIgnoreCase) or SharedBBLEs.Contains(Eval("BBLE"))%>'></i>
+                                                                        <i class="fa fa-list-alt tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"), StringComparer.OrdinalIgnoreCase) or SharedBBLEs.Contains(Eval("BBLE"))%>'></i>
                                                                         <%--change image to beaty style by steven--%>
                                                                         <%--<img src="~/images/search_pop_go_leads.png" title="Go To Lead" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />
                                                                         <img src="~/images/search_pop_menu.png" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />--%>
@@ -282,108 +278,6 @@
 
                                         </div>
                                     </div>
-
-                                    <%--<div class="header" style="width: 100%; display: table; height: 100%; background-color: #EDEDED;">
-                                        <div style="display: table-row">
-                                            <div style="display: table-cell; float: left; margin-left: auto; margin-right: 0px; text-align: center; align-content: center;">
-                                            </div>
-                                            <div style="display: table-cell; width: 700px; float: right">
-                                                <table style="margin-top: 8px; float: right">
-                                                    <tr>
-                                                        <td>
-                                                            <dx:ASPxTextBox runat="server" ID="txtSearchKey" Width="300px" ClientInstanceName="txtSearchKeyClient" AutoPostBack="false">
-                                                                <ClientSideEvents KeyDown="function(s,e){
-                                                                if(e.htmlEvent.keyCode == 13)
-                                                                {
-                                                                    btnSearchClient.DoClick();                                                                                                                                     
-                                                                }                                                               
-                                                            }" />
-                                                            </dx:ASPxTextBox>
-                                                        </td>
-                                                        <td>
-                                                            <dx:ASPxButton runat="server" RenderMode="Button" ID="btnSearch" ClientInstanceName="btnSearchClient" UseSubmitBehavior="false" Image-Url="/images/Search.png" Image-Height="16px" Text="Search" Image-Width="16px" AutoPostBack="false">
-                                                                <Image Height="16px" Width="16px" Url="/images/Search.png"></Image>
-                                                                <FocusRectPaddings PaddingLeft="2" PaddingRight="2" PaddingBottom="0" PaddingTop="0" />
-                                                                <ClientSideEvents Click="function(s,e){
-                                                            ASPxPopupSearchPanel.ShowAtElement(s.GetMainElement());
-                                                            gridSearchLeads.PerformCallback(txtSearchKeyClient.GetText());                                                           
-                                                            }" />
-                                                            </dx:ASPxButton>
-                                                        </td>
-                                                        <td style="margin-left: 20px;" class="login">
-                                                            <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
-                                                                <AnonymousTemplate>
-                                                                    <a id="loginLink" href="~/Account/Login.aspx" runat="server">Log In</a>
-                                                                    <a id="registerLink" href="~/Account/Register.aspx" runat="server" visible="false">|Register</a>
-                                                                </AnonymousTemplate>
-                                                                <LoggedInTemplate>
-                                                                    Welcome <span>
-                                                                        <asp:LoginName ID="HeadLoginName" runat="server" />
-                                                                    </span>!
-                                                [<asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />
-                                                                    |<a href="/Account/ChangePassword.aspx">Setting</a>]
-                                                                </LoggedInTemplate>
-                                                            </asp:LoginView>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSearchPanel" Width="570px" Height="250px"
-                                                MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="pcMain"
-                                                ShowHeader="false" CloseAction="CloseButton"
-                                                runat="server" EnableViewState="false" PopupHorizontalAlign="RightSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
-                                                <ContentCollection>
-                                                    <dx:PopupControlContentControl runat="server">
-                                                        <dx:ASPxGridView runat="server" KeyFieldName="BBLE" ClientInstanceName="gridSearchLeads" ID="gridSearch" OnCustomCallback="gridSearch_CustomCallback" Width="100%" OnAfterPerformCallback="gridSearch_AfterPerformCallback">
-                                                            <Columns>
-                                                                <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1" Width="260px">
-                                                                    <Settings AutoFilterCondition="Contains" />
-                                                                    <DataItemTemplate>
-                                                                        <a href="#" onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>'><%# Eval("LeadsName")%></a>
-                                                                        <span runat="server" visible='<%# Not EmpUnderManaged.Contains(Eval("EmployeeName"))%>'><%# Eval("LeadsName") %></span>
-                                                                    </DataItemTemplate>
-                                                                </dx:GridViewDataTextColumn>
-                                                                <dx:GridViewDataTextColumn FieldName="Status" Settings-AllowHeaderFilter="False" VisibleIndex="2" Width="80px">
-                                                                    <Settings AllowHeaderFilter="False"></Settings>
-                                                                    <DataItemTemplate>
-                                                                        <%# DirectCast(Eval("Status"), IntranetPortal.LeadStatus).ToString %>
-                                                                    </DataItemTemplate>
-                                                                </dx:GridViewDataTextColumn>
-                                                                <dx:GridViewDataColumn FieldName="EmployeeName" VisibleIndex="4" Width="150px">
-                                                                    <GroupRowTemplate>
-                                                                        Employee Name: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
-                                                                    </GroupRowTemplate>
-                                                                </dx:GridViewDataColumn>
-                                                                <dx:GridViewDataColumn Width="35px" VisibleIndex="5">
-                                                                    <DataItemTemplate>
-                                                                        <img src="/images/goto.png" title="Go To Lead" style="width: 16px; height: 16px; vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />
-                                                                        <img src="/images/flag1.png" style="width: 16px; height: 16px; vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />
-                                                                    </DataItemTemplate>
-                                                                </dx:GridViewDataColumn>
-                                                            </Columns>
-                                                            <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true"
-                                                                EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
-                                                            <SettingsPager NumericButtonCount="5"></SettingsPager>
-                                                        </dx:ASPxGridView>
-                                                        <asp:Panel ID="Panel1" runat="server">
-                                                            <table style="width: 100%">
-                                                                <tr>
-                                                                    <td style="color: #666666; font-family: Tahoma; font-size: 10px; text-align: right; padding-top: 2px;">
-                                                                        <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Close" AutoPostBack="false" UseSubmitBehavior="false">
-                                                                            <ClientSideEvents Click="function(){
-                                                                                                                        ASPxPopupSearchPanel.Hide();                                                                                                                                                                                                                                            
-                                                                                                                        }"></ClientSideEvents>
-                                                                        </dx:ASPxButton>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </asp:Panel>
-                                                    </dx:PopupControlContentControl>
-                                                </ContentCollection>
-                                            </dx:ASPxPopupControl>
-                                            <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
-                                        </div>
-                                    </div>--%>
                                 </dx:SplitterContentControl>
                             </ContentCollection>
                         </dx:SplitterPane>
@@ -463,13 +357,6 @@
             </ContentCollection>
             <ClientSideEvents Closing="function(){hook();}" />
         </dx:ASPxPopupControl>
-
-        <%--<script type="text/javascript">
-             attachEventHandler(window, "onresize", function () {
-                  //splitterOnMainMaster.AdjustControl();
-                 //alert("resize");
-             });
-    </script>--%>
     </form>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/Scripts/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
@@ -478,9 +365,6 @@
     <script src="/Scripts/js/jquery.throttledresize.js"></script>
     <script src="/Scripts/js/jquery.mousewheel.js"></script>
     <script src="/Scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>
-    <%--   <script src="/Scripts/jquery.collapse.js"></script>
-    <script src="/Scripts/jquery.collapse_storage.js"></script>
-    <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>--%>
     <script src="/Scripts/js/main.js"></script>
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
