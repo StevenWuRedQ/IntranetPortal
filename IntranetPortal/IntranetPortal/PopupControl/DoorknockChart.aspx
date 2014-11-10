@@ -56,7 +56,11 @@
                                 %>
                                 <tr>
                                     <td>
-                                        <input type="checkbox" /></td>
+
+                                        <input type="checkbox" />
+                                        <label >&nbsp;</label>
+                                    </td>
+                                   
                                     <td>
                                         <% 
                                             Dim adds = Addresses(i)
