@@ -45,7 +45,68 @@
                             <div class="clearfix" style="color: #234b60; font-size: 20px">
                                 Employees
                                 <div style="float: right">
-                                    <i class="fa fa-sort-amount-desc icon_btn" ng-class="predicate=='Name'?'fa-sort-amount-desc':'fa-sort-amount-asc'" ng-click="group_text_order = group_text_order=='group_text'?'-group_text':'group_text'; " style="color: #999ca1"></i>
+                                    <div style="display:inline-block">
+                                        <i class="fa fa-plus-circle tooltip-examples icon_btn" title="Add" style="color: #3993c1; font-size: 24px" data-toggle="modal" data-target="#myModal"></i>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                        <h4 class="modal-title" id="myModalLabel">New Vendors</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <ul class="ss_form_box clearfix">
+                                                            <li class="ss_form_item">
+                                                                <label class="ss_form_input_title">name</label>
+                                                                <%--<input class="ss_form_input" value='<%# Bind("Name")%>' runat="server" id="txtContact">--%>
+                                                                <dx:ASPxTextBox runat="server" ID="txtContact" ng-model="addContact.Name" CssClass="ss_form_input" Native="true">
+                                                                    <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
+                                                                </dx:ASPxTextBox>
+                                                            </li>
+                                                            <li class="ss_form_item">
+                                                                <label class="ss_form_input_title">Company Name</label>
+                                                                <dx:ASPxTextBox runat="server" ID="txtCompanyName" ng-model="addContact.CorpName" CssClass="ss_form_input" Native="true">
+                                                                    <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
+                                                                </dx:ASPxTextBox>
+                                                            </li>
+                                                            <li class="ss_form_item">
+                                                                <label class="ss_form_input_title">address</label>
+                                                                <input class="ss_form_input" ng-model="addContact.Address" runat="server" id="txtAddress">
+                                                            </li>
+                                                            <li class="ss_form_item">
+                                                                <label class="ss_form_input_title">office #</label>
+                                                                <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input" Native="true">
+                                                                    <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
+                                                                    <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
+                                                                </dx:ASPxTextBox>
+                                                            </li>
+                                                            <li class="ss_form_item">
+                                                                <label class="ss_form_input_title">Cell #</label>
+                                                                <dx:ASPxTextBox runat="server" ID="txtCell" ng-model="addContact.Cell" CssClass="ss_form_input" Native="true">
+                                                                    <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
+                                                                    <ValidationSettings CausesValidation="false" RequiredField-IsRequired="false" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
+                                                                </dx:ASPxTextBox>
+                                                            </li>
+                                                            <li class="ss_form_item">
+                                                                <label class="ss_form_input_title">email</label>
+                                                                <dx:ASPxTextBox runat="server" ID="txtEmail" ng-model="addContact.Email" CssClass="ss_form_input" Native="true">
+                                                                    <ValidationSettings ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact">
+                                                                        <RegularExpression ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorText="Email isnot valid." />
+                                                                    </ValidationSettings>
+                                                                </dx:ASPxTextBox>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary" ng-click="addContactFunc()" data-dismiss="modal">Add</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <i class="fa fa-sort-amount-desc tooltip-examples icon_btn" title="Sort" ng-class="predicate=='Name'?'fa-sort-amount-desc':'fa-sort-amount-asc'" ng-click="group_text_order = group_text_order=='group_text'?'-group_text':'group_text'; " style="color: #999ca1"></i>
                                 </div>
                             </div>
                             <input style="margin-top: 20px;" type="text" class="form-control" placeholder="Type employee's name" ng-model="query.Name">
@@ -71,67 +132,7 @@
                                 <%--Press ‘Ctrl’ or ‘Command’ for multiple selections.--%>
                                     Check to muliple selections.
                             </div>
-                            <div style="margin-top: 20px">
-                                <i class="fa fa-plus-circle tooltip-examples icon_btn" title="Add" style="color: #3993c1; font-size: 24px" data-toggle="modal" data-target="#myModal"></i>
-                                <!-- Modal -->
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">New Vendors</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <ul class="ss_form_box clearfix">
-                                                    <li class="ss_form_item">
-                                                        <label class="ss_form_input_title">name</label>
-                                                        <%--<input class="ss_form_input" value='<%# Bind("Name")%>' runat="server" id="txtContact">--%>
-                                                        <dx:ASPxTextBox runat="server" ID="txtContact" ng-model="addContact.Name" CssClass="ss_form_input" Native="true">
-                                                            <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
-                                                        </dx:ASPxTextBox>
-                                                    </li>
-                                                    <li class="ss_form_item">
-                                                        <label class="ss_form_input_title">Company Name</label>
-                                                        <dx:ASPxTextBox runat="server" ID="txtCompanyName" ng-model="addContact.CorpName" CssClass="ss_form_input" Native="true" >
-                                                            <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
-                                                        </dx:ASPxTextBox>
-                                                    </li>
-                                                    <li class="ss_form_item">
-                                                        <label class="ss_form_input_title">address</label>
-                                                        <input class="ss_form_input" ng-model="addContact.Address" runat="server" id="txtAddress">
-                                                    </li>
-                                                    <li class="ss_form_item">
-                                                        <label class="ss_form_input_title">office #</label>
-                                                        <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input" Native="true">
-                                                            <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
-                                                            <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
-                                                        </dx:ASPxTextBox>
-                                                    </li>
-                                                    <li class="ss_form_item">
-                                                        <label class="ss_form_input_title">Cell #</label>
-                                                        <dx:ASPxTextBox runat="server" ID="txtCell" ng-model="addContact.Cell" CssClass="ss_form_input" Native="true">
-                                                            <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
-                                                            <ValidationSettings CausesValidation="false" RequiredField-IsRequired="false" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
-                                                        </dx:ASPxTextBox>
-                                                    </li>
-                                                    <li class="ss_form_item">
-                                                        <label class="ss_form_input_title">email</label>
-                                                        <dx:ASPxTextBox runat="server" ID="txtEmail" ng-model="addContact.Email" CssClass="ss_form_input" Native="true" >
-                                                            <ValidationSettings ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact">
-                                                                <RegularExpression ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorText="Email isnot valid." />
-                                                            </ValidationSettings>
-                                                        </dx:ASPxTextBox>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" ng-click="addContactFunc()" data-dismiss="modal">Add</button>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
 
                     </div>

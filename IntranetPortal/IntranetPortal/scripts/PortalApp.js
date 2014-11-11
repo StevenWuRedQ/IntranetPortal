@@ -39,7 +39,9 @@ function group_func(item) {
     return getNameFirst(item.Name);
 }
 portalApp.controller('PortalCtrl', function ($scope, $http) {
-    
+    $(".tooltip-examples").tooltip({
+        placement: 'bottom'
+    });
     $scope.InitData = function (data) {
         $scope.allContacts = data.slice();
         var gropData = groupBy(data, group_func)
@@ -54,7 +56,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http) {
             //debugger;
 
             var gropData = $scope.InitData(data.d);
-            debugger;
+            //debugger;
             var allContacts = gropData;
             if (allContacts.length > 0) {
                 $scope.currentContact = gropData[0].data[0]
