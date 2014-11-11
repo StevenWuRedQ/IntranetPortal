@@ -10,9 +10,9 @@
     <link href="/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>   
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-    
+
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
     <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
@@ -24,17 +24,17 @@
     <form id="form1" runat="server">
         <link href="/styles/stevencss.css?v=<%=DateTime.Now.Millisecond.ToString %>>" rel="stylesheet" type="text/css" />
         <div style="color: #b1b2b7" class="clearfix">
-            <div class="row" style="margin:0px;">
+            <div class="row" style="margin: 0px;">
                 <div class="col-md-3">
                     <div style="font-size: 16px; color: #3993c1; font-weight: 700">
                         <ul class="list-group" style="box-shadow: none">
 
-                            <li class="list-group-item popup_menu_list_item"  ng-class="query.Type===''?'popup_menu_list_item_active':''" ng-click="query.Type=''">All Vendors</li>
-                            <li class="list-group-item popup_menu_list_item"  >Employees</li>
+                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===''?'popup_menu_list_item_active':''" ng-click="query.Type=''">All Vendors</li>
+                            <li class="list-group-item popup_menu_list_item">Employees</li>
                             <li class="list-group-item popup_menu_list_item" ng-class="query.Type===0?'popup_menu_list_item_active':''" ng-click="query.Type=0">Title Companies</li>
                             <li class="list-group-item popup_menu_list_item" ng-class="query.Type===2?'popup_menu_list_item_active':''" ng-click="query.Type=2">Attorneys</li>
                             <li class="list-group-item popup_menu_list_item" ng-class="query.Type===1?'popup_menu_list_item_active':''" ng-click="query.Type=1">Sellers</li>
-                            
+
                         </ul>
                     </div>
                 </div>
@@ -45,26 +45,26 @@
                             <div class="clearfix" style="color: #234b60; font-size: 20px">
                                 Employees
                                 <div style="float: right">
-                                    <i class="fa fa-sort-amount-desc icon_btn"  ng-class="predicate=='Name'?'fa-sort-amount-desc':'fa-sort-amount-asc'" ng-click="group_text_order = group_text_order=='group_text'?'-group_text':'group_text'; "  style="color: #999ca1"></i>
+                                    <i class="fa fa-sort-amount-desc icon_btn" ng-class="predicate=='Name'?'fa-sort-amount-desc':'fa-sort-amount-asc'" ng-click="group_text_order = group_text_order=='group_text'?'-group_text':'group_text'; " style="color: #999ca1"></i>
                                 </div>
                             </div>
                             <input style="margin-top: 20px;" type="text" class="form-control" placeholder="Type employee's name" ng-model="query.Name">
                             <div style="margin-top: 10px; height: 350px; overflow: auto" id="employee_list">
                                 <div>
-                                    <ul class="list-group" style="box-shadow: none" ng-repeat="groupedcontact in showingContacts|orderBy:group_text_order">                                        
+                                    <ul class="list-group" style="box-shadow: none" ng-repeat="groupedcontact in showingContacts|orderBy:group_text_order">
                                         <li class="list-group-item popup_menu_list_item" style="font-size: 18px; width: 80px; cursor: default; font-weight: 900">{{groupedcontact.group_text}}
                                             <span class="badge" style="font-size: 18px; border-radius: 18px;">{{groupedcontact.data.length}}</span>
                                         </li>
                                         <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.Name==currentContact.Name? 'popup_employee_list_item_active':''" ng-repeat="contact in groupedcontact.data| filter:query |orderBy:predicate">
                                             <div>
                                                 <div style="font-weight: 900; font-size: 16px">
-                                                    <span class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}}</span>                                                    
+                                                    <span class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}}</span>
                                                     <i class="fa fa-list-alt icon_btn" style="float: right; margin-right: 20px; margin-top: 0px; font-size: 18px;"></i>
                                                 </div>
                                                 <%--<div style="font-size: 14px">Eviction</div>--%>
                                             </div>
                                         </li>
-                                    </ul>                                    
+                                    </ul>
                                 </div>
                             </div>
                             <div style="margin-top: 20px">
@@ -72,7 +72,65 @@
                                     Check to muliple selections.
                             </div>
                             <div style="margin-top: 20px">
-                                <i class="fa fa-plus-circle tooltip-examples icon_btn" title="Add" style="color: #3993c1; font-size: 24px" onclick=""></i>
+                                <i class="fa fa-plus-circle tooltip-examples icon_btn" title="Add" style="color: #3993c1; font-size: 24px" data-toggle="modal" data-target="#myModal"></i>
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">New Vendors</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul class="ss_form_box clearfix">
+                                                    <li class="ss_form_item">
+                                                        <label class="ss_form_input_title">name</label>
+                                                        <%--<input class="ss_form_input" value='<%# Bind("Name")%>' runat="server" id="txtContact">--%>
+                                                        <dx:ASPxTextBox runat="server" ID="txtContact" ng-model="addContact.Name" CssClass="ss_form_input" Native="true">
+                                                            <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
+                                                        </dx:ASPxTextBox>
+                                                    </li>
+                                                    <li class="ss_form_item">
+                                                        <label class="ss_form_input_title">Company Name</label>
+                                                        <dx:ASPxTextBox runat="server" ID="txtCompanyName" ng-model="addContact.CorpName" CssClass="ss_form_input" Native="true" >
+                                                            <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
+                                                        </dx:ASPxTextBox>
+                                                    </li>
+                                                    <li class="ss_form_item">
+                                                        <label class="ss_form_input_title">address</label>
+                                                        <input class="ss_form_input" ng-model="addContact.Address" runat="server" id="txtAddress">
+                                                    </li>
+                                                    <li class="ss_form_item">
+                                                        <label class="ss_form_input_title">office #</label>
+                                                        <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input" Native="true">
+                                                            <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
+                                                            <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
+                                                        </dx:ASPxTextBox>
+                                                    </li>
+                                                    <li class="ss_form_item">
+                                                        <label class="ss_form_input_title">Cell #</label>
+                                                        <dx:ASPxTextBox runat="server" ID="txtCell" ng-model="addContact.Cell" CssClass="ss_form_input" Native="true">
+                                                            <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
+                                                            <ValidationSettings CausesValidation="false" RequiredField-IsRequired="false" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
+                                                        </dx:ASPxTextBox>
+                                                    </li>
+                                                    <li class="ss_form_item">
+                                                        <label class="ss_form_input_title">email</label>
+                                                        <dx:ASPxTextBox runat="server" ID="txtEmail" ng-model="addContact.Email" CssClass="ss_form_input" Native="true" >
+                                                            <ValidationSettings ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact">
+                                                                <RegularExpression ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorText="Email isnot valid." />
+                                                            </ValidationSettings>
+                                                        </dx:ASPxTextBox>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" ng-click="addContactFunc()" data-dismiss="modal">Add</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -89,7 +147,7 @@
                                     <td>
                                         <div class="detail_right">
                                             <div style="font-size: 30px; color: #234b60">{{currentContact.Name}}</div>
-                                           <%-- <div style="font-size: 16px; color: #234b60; font-weight: 900">Sales Agent</div>--%>
+                                            <%-- <div style="font-size: 16px; color: #234b60; font-weight: 900">Sales Agent</div>--%>
                                         </div>
                                     </td>
                                     <td valign="top">
@@ -103,7 +161,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                               <%-- <tr class="vendor_info">
+                                <%-- <tr class="vendor_info">
                                     <td class="vendor_info_left">Manager
                                     </td>
                                     <td>
@@ -115,8 +173,8 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input  class="form-control contact_info_eidt" ng-model="currentContact.Office"  placeholder="Click to input">
-                                           </div>
+                                            <input class="form-control contact_info_eidt" ng-model="currentContact.Office" placeholder="Click to input">
+                                        </div>
                                     </td>
                                 </tr>
                                 <%--<tr class="vendor_info">
@@ -131,22 +189,23 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input  class="form-control contact_info_eidt" ng-model="currentContact.Cell"  placeholder="Click to input">
-                                            </div>
+                                            <input class="form-control contact_info_eidt" ng-model="currentContact.Cell" placeholder="Click to input">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr class="vendor_info">
                                     <td class="vendor_info_left">Email
                                     </td>
                                     <td>
-                                        <div class="detail_right"><span style="color: #3993c1">
-                                             <input  class="form-control contact_info_eidt" style="color: #3993c1" ng-model="currentContact.Email"  placeholder="Click to input">
+                                        <div class="detail_right">
+                                            <span style="color: #3993c1">
+                                                <input class="form-control contact_info_eidt" style="color: #3993c1" ng-model="currentContact.Email" placeholder="Click to input">
                                             </span>
 
                                         </div>
                                     </td>
                                 </tr>
-                               <%-- <tr class="vendor_info">
+                                <%-- <tr class="vendor_info">
                                     <td class="vendor_info_left">Closed deals
                                     </td>
                                     <td>
@@ -167,5 +226,6 @@
         </div>
     </form>
     <script src="/scripts/PortalApp.js?v=<%=DateTime.Now.Millisecond.ToString %>>"></script>
+    <script src="/scripts/bootstrap.min.js"></script>
 </body>
 </html>

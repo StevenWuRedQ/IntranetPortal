@@ -209,12 +209,12 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Manager</label>
-                        <input class="ss_form_input" value="Manager ??">
+                        <input class="ss_form_input" value="<%=summaryCase.Manager %>">
                     </li>
-                    <li class="ss_form_item">
+                    <%--<li class="ss_form_item">
                         <label class="ss_form_input_title">Cell phone #</label>
                         <input class="ss_form_input" value="Manager's cell phone ??">
-                    </li>
+                    </li>--%>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">&nbsp;</label>
                         <input class="ss_form_input ss_form_hidden" value=" ">

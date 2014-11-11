@@ -31,3 +31,7 @@
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
+<dx:ASPxPopupControl ID="AddNewVendorPopUp" runat="server"
+>
+
+</dx:ASPxPopupControl>

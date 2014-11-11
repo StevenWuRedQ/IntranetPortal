@@ -322,17 +322,15 @@
       <DependentUpon>BingViewMap.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="CallBackSevices.aspx.designer.vb">
-      <DependentUpon>CallBackSevices.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="CallBackSevices.aspx.vb">
-      <DependentUpon>CallBackSevices.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+    <Compile Include="CallBackServices.asmx.vb">
+      <DependentUpon>CallBackServices.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CodeFolder\Agent_Properties.vb" />
     <Compile Include="CodeFolder\APIOrder.vb" />
     <Compile Include="CodeFolder\AssignRule.vb" />
     <Compile Include="CodeFolder\DataWCFService.vb" />
+    <Compile Include="CodeFolder\DateTimeJavaScriptConverter .vb" />
     <Compile Include="CodeFolder\Employee.vb" />
     <Compile Include="CodeFolder\EmployeeItemComparer.vb" />
     <Compile Include="CodeFolder\EmployeePerformance.vb" />
@@ -1147,7 +1145,7 @@
     <Content Include="App_Themes\PortalTheme2.dll" />
     <Content Include="AssignLeadsRulesPage.aspx" />
     <Content Include="BingViewMap.aspx" />
-    <Content Include="CallBackSevices.aspx" />
+    <Content Include="CallBackServices.asmx" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
     <Content Include="Content\bootstrap-responsive.css" />
