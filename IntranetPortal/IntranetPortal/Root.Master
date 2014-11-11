@@ -7,31 +7,21 @@
 <head id="Head1" runat="server">
     <title>Agent Portal (beta) - My Ideal Property</title>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
-    <%--add font image by steven--%>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <%--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />--%>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-    <%--------end--------%>
-    <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
-    <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css" />        
     <link rel="stylesheet" href="/css/normalize.min.css" />
     <link rel="stylesheet" href="/scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/stevencss.css" />
     <style>
-        html, body, #form1 {
-            /*margin: 0;
-            padding: 0;
-            height: 100%;
-            width:100%;*/
+        html, body, #form1 {            
             width: 100% !important;
         }
     </style>
-    <%--/*add by steven*/--%>
-    <link rel="stylesheet" type="text/css" href="/styles/stevencss.css" />
-
-    <%--/*-------end------*/--%>
     <script type="text/javascript" src="/scripts/PortalMessager.js"></script>
-    <script type="text/javascript">
+   <%-- <script type="text/javascript">
         // here is a cross-browser compatible way of connecting 
         // handlers to events, in case you don't have one
         function attachEventHandler(element, eventToHandle, eventHandler) {
@@ -42,16 +32,9 @@
             } else {
                 element[eventToHandle] = eventHandler;
             }
-        }
-        function Resize() {
-            splitterOnMainMaster.AdjustControl();
-            alert('splitterOnMainMaster resize');
-            splitterRightDefaultPage.AdjustControl();
-            alert('splitterRightDefaultPage resize');
-        }
-
-    </script>
-
+        }       
+    </script>--%>
+    <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body onload="init();" id="testIDbody">
     <form id="form1" runat="server">
@@ -368,7 +351,6 @@
     <script src="/Scripts/js/main.js"></script>
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="/scripts/stevenjs.js"></script>
-    <%-- init tooltips --%>
+    <script src="/scripts/stevenjs.js"></script> 
 </body>
 </html>
