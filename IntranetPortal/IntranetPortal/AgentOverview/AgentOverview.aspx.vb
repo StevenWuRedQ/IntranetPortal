@@ -275,6 +275,11 @@ Public Class AgentOverview
                 gridReport.Columns.Add(colProp)
             Else
                 gridCol.FieldName = item
+
+                If item = "LastUpdate2" Then
+                    gridCol.Caption = "Last Update"
+                End If
+
                 gridReport.Columns.Add(gridCol)
             End If
         Next

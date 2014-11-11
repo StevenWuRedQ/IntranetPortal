@@ -601,10 +601,10 @@
                 <Row Cursor="pointer" />
                 <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
             </Styles>
-            <Settings VerticalScrollBarMode="Auto" VerticalScrollableHeight="670" />
+            <Settings VerticalScrollBarMode="Auto" VerticalScrollableHeight="600" />
             <SettingsBehavior AllowFocusedRow="false" AllowClientEventsOnLoad="false" AllowDragDrop="false"
                 EnableRowHotTrack="false" ColumnResizeMode="Disabled" />
-            <ClientSideEvents EndCallback="function(){dateActivityClient.SetDate(new Date());AddTooltips();$('.dxgvCSD').mCustomScrollbar({theme: 'minimal-dark'});}" />
+            <ClientSideEvents EndCallback="function(){dateActivityClient.SetDate(new Date());AddTooltips();}" />
         </dx:ASPxGridView>
 
         <dx:ASPxPopupControl ClientInstanceName="popupFilterControl" Width="160px" Height="200px"

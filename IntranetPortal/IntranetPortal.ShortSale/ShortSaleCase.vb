@@ -434,7 +434,6 @@ Partial Public Class ShortSaleCase
     End Function
 #End Region
 
-
 End Class
 
 Public Enum CaseStatus

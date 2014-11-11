@@ -597,7 +597,7 @@
                                             </ContentCollection>
                                             <ClientSideEvents EndCallback="function(s,e){s.Show();}" />
                                         </dx:ASPxPopupControl>
-                                    </dx:SplitterContentControl>
+                                    </dx:SplitterContentControl>                                    
                                 </ContentCollection>
                             </dx:SplitterPane>
                         </Panes>
@@ -606,6 +606,7 @@
                         <Separator Visible="False"></Separator>
                     </dx:SplitterPane>
                 </Panes>
+                <ClientSideEvents PaneCollapsed="function(s,e){}" />
             </dx:ASPxSplitter>
 
             <dx:ASPxPopupControl ClientInstanceName="AspxPopupShareleadClient" Width="356px" Height="450px" ID="aspxPopupShareleads"

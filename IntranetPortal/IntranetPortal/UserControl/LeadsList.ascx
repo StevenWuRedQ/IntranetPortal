@@ -109,12 +109,12 @@
                     }
                  );
             } else {
-                $(this).mCustomScrollbar(
-                    {
-                        theme: "minimal-dark",
+                //$(this).mCustomScrollbar(
+                //    {
+                //        theme: "minimal-dark",
                        
-                    }
-                );
+                //    }
+                //);
             }
         });
 

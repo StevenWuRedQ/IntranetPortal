@@ -275,12 +275,12 @@
             }
          );
 
-        $(".dxgvCSD").mCustomScrollbar(
-            {
-                theme: "minimal-dark",
+        //$(".dxgvCSD").mCustomScrollbar(
+        //    {
+        //        theme: "minimal-dark",
 
-            }
-         );
+        //    }
+        // );
     }
     //$(document).ready(function () {
     //    // Handler for .ready() called.

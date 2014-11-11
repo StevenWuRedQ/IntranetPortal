@@ -23,7 +23,7 @@
 </style>
 <div style="vertical-align: top; margin: 0; font-size: 18px;">
     <div style="font-size: 30px; color: #2e2f31">
-        <i class="fa fa-edit" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}","Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
+        <i class="fa fa-edit tooltip-examples" title="Edit Homeowner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}","Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
         <span class="homeowner_name">
             <%= OwnerName %>
         </span>
