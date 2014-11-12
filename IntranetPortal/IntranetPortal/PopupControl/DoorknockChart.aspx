@@ -1,24 +1,7 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="DoorknockChart.aspx.vb" Inherits="IntranetPortal.DoorknockChart" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="DoorknockChart.aspx.vb" Inherits="IntranetPortal.DoorknockChart" MasterPageFile="~/Content.Master" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
-    <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
-    <link href="/styles/stevencss.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div style="color: #231f20">
+<asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
+     <div style="color: #231f20">
             <div class="bs-docs-grid">
                 <div class="row">
                     <div class="col-md-1" style="width:40px">
@@ -130,6 +113,27 @@
         <dx:ASPxCallback runat="server" ID="cpPrint" ClientInstanceName="cpPrint" OnCallback="cpPrint_Callback">
             <ClientSideEvents EndCallback="function(s,e){window.print();}" />
         </dx:ASPxCallback>
+</asp:Content>
+
+<%--<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
+    <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
+    <link href="/styles/stevencss.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+   
     </form>
 </body>
-</html>
+</html>--%>

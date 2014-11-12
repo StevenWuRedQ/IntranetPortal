@@ -1232,7 +1232,6 @@
     <Content Include="DevExpress\ASPxSchedulerForms\SelectionToolTip.ascx" />
     <Content Include="DevExpress\ASPxSchedulerForms\VerticalAppointmentTemplate.ascx" />
     <Content Include="DownloadFile.aspx" />
-    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />
     <Content Include="images\add-button-hi.png" />
@@ -2377,37 +2376,7 @@
     <Content Include="scripts\PortalApp.js" />
     <Content Include="scripts\PortalMessager.js" />
     <Content Include="scripts\prototype.js" />
-    <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="fonts\fontawesome-webfont.ttf" />
-    <Content Include="fonts\fontawesome-webfont.woff" />
-    <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="less\bordered-pulled.less" />
-    <Content Include="less\core.less" />
-    <Content Include="less\fixed-width.less" />
-    <Content Include="less\font-awesome.less" />
-    <Content Include="less\icons.less" />
-    <Content Include="less\larger.less" />
-    <Content Include="less\list.less" />
-    <Content Include="less\mixins.less" />
-    <Content Include="less\path.less" />
-    <Content Include="less\rotated-flipped.less" />
-    <Content Include="less\spinning.less" />
-    <Content Include="less\stacked.less" />
-    <Content Include="less\variables.less" />
     <Content Include="scripts\stevenjs.js" />
-    <Content Include="scss\font-awesome.scss" />
-    <Content Include="scss\_bordered-pulled.scss" />
-    <Content Include="scss\_core.scss" />
-    <Content Include="scss\_fixed-width.scss" />
-    <Content Include="scss\_icons.scss" />
-    <Content Include="scss\_larger.scss" />
-    <Content Include="scss\_list.scss" />
-    <Content Include="scss\_mixins.scss" />
-    <Content Include="scss\_path.scss" />
-    <Content Include="scss\_rotated-flipped.scss" />
-    <Content Include="scss\_spinning.scss" />
-    <Content Include="scss\_stacked.scss" />
-    <Content Include="scss\_variables.scss" />
     <Content Include="scripts\jquery-2.1.1.min.map" />
     <Content Include="scripts\Web.config" />
     <Content Include="scrollbar\Web.config" />
@@ -2478,7 +2447,7 @@
     <Content Include="ShortSale\TitleControl.ascx" />
     <Content Include="ShortSale\TitleSummary.ascx" />
     <Content Include="StreetView.aspx" />
-    <Content Include="styles\stevencss.css" />
+    <Content Include="css\stevencss.css" />
     <Content Include="SummaryPage.aspx" />
     <Content Include="Test.aspx" />
     <Content Include="UploadFilePage.aspx" />
@@ -2569,7 +2538,7 @@
     <Content Include="Account\Web.config" />
     <Content Include="scripts\script.js" />
     <Content Include="ShowReport.aspx" />
-    <Content Include="styles\styles.css" />
+    <Content Include="css\styles.css" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -2630,6 +2599,7 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="scripts\jquery.globalize\cultures\" />
+    <Folder Include="styles\" />
     <Folder Include="TempDataFile\" />
   </ItemGroup>
   <ItemGroup>
