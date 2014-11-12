@@ -43,6 +43,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.AssignRule" Width="1.5" PointX="16.375" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.Team" Width="1.5" PointX="15.375" PointY="15.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.UserInTeam" Width="1.5" PointX="16.5" PointY="6.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LeadsTaxLien" Width="1.5" PointX="16.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

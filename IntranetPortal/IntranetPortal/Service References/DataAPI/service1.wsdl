@@ -125,6 +125,12 @@
   <wsdl:message name="IWCFMacros_NYC_NameAndAddress_OutputMessage">
     <wsdl:part name="parameters" element="tns:NYC_NameAndAddressResponse" />
   </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_Acris_TaxLien_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_Acris_TaxLien" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_Acris_TaxLien_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_Acris_TaxLienResponse" />
+  </wsdl:message>
   <wsdl:portType name="IWCFMacros">
     <wsdl:operation name="DoWork">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DoWork" message="tns:IWCFMacros_DoWork_InputMessage" />
@@ -201,6 +207,10 @@
     <wsdl:operation name="NYC_NameAndAddress">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/NYC_NameAndAddress" message="tns:IWCFMacros_NYC_NameAndAddress_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/NYC_NameAndAddressResponse" message="tns:IWCFMacros_NYC_NameAndAddress_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Acris_TaxLien">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien" message="tns:IWCFMacros_Get_Acris_TaxLien_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_Acris_TaxLienResponse" message="tns:IWCFMacros_Get_Acris_TaxLien_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WCFMacros_Http" type="tns:IWCFMacros">
@@ -369,6 +379,15 @@
     </wsdl:operation>
     <wsdl:operation name="NYC_NameAndAddress">
       <soap:operation soapAction="http://tempuri.org/IWCFMacros/NYC_NameAndAddress" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Acris_TaxLien">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -405,10 +405,10 @@
             <tr>
                 <td style="font-size: 10px">
                     <div style="padding-top: 20px; color: #A7A7A9">
-                        <dx:ASPxLabel ID="lblAllowebMimeType" runat="server" Text="Allowed  file types: jpeg, gif, doc, pdf">
+                        <dx:ASPxLabel ID="lblAllowebMimeType" runat="server" Text="Allowed  file types: JPEG, GIF, DOC, PDF, XLSX">
                         </dx:ASPxLabel>
                         <br />
-                        <dx:ASPxLabel ID="ASPxLabel2" runat="server" Text="Maximum file size: 4Mb">
+                        <dx:ASPxLabel ID="ASPxLabel2" runat="server" Text="Maximum file size: 6Mb">
                         </dx:ASPxLabel>
                     </div>
 

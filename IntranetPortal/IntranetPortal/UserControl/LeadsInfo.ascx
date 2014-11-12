@@ -304,7 +304,6 @@
                                         <%--<ItemStyle Width="143px"></ItemStyle>--%>
                                     </dx:ASPxPopupMenu>
                                     <asp:HiddenField ID="hfBBLE" runat="server" />
-
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white">
                                         <li class="active short_sale_head_tab">

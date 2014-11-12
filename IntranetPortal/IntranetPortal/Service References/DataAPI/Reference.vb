@@ -3045,6 +3045,30 @@ Namespace DataAPI
         Private BBLEField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Bill_Line1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Bill_Line2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Bill_Line3Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Bill_Line4Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Bill_Line5Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BillingOrderDeliveryTimeField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BillingOrderStatusField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BillingOrderTimeField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private BlockField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
@@ -3126,7 +3150,7 @@ Namespace DataAPI
         Private LotField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
-        Private NYCTypeOfCoField As DataAPI.NYCTypeOfCo
+        Private NeedCollectionField As System.Nullable(Of Boolean)
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private OwnerField As String
@@ -3147,6 +3171,9 @@ Namespace DataAPI
         Private Remark4Field As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SaleAmtField As System.Nullable(Of Decimal)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private SaleDateField As System.Nullable(Of Date)
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
@@ -3154,6 +3181,12 @@ Namespace DataAPI
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private TaxClassField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TaxLienAmtField As System.Nullable(Of Decimal)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TaxLienCertDateField As System.Nullable(Of Date)
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private TaxesAmtField As System.Nullable(Of Decimal)
@@ -3245,6 +3278,86 @@ Namespace DataAPI
             End Get
             Set
                 Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Bill_Line1() As String
+            Get
+                Return Me.Bill_Line1Field
+            End Get
+            Set
+                Me.Bill_Line1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Bill_Line2() As String
+            Get
+                Return Me.Bill_Line2Field
+            End Get
+            Set
+                Me.Bill_Line2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Bill_Line3() As String
+            Get
+                Return Me.Bill_Line3Field
+            End Get
+            Set
+                Me.Bill_Line3Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Bill_Line4() As String
+            Get
+                Return Me.Bill_Line4Field
+            End Get
+            Set
+                Me.Bill_Line4Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Bill_Line5() As String
+            Get
+                Return Me.Bill_Line5Field
+            End Get
+            Set
+                Me.Bill_Line5Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BillingOrderDeliveryTime() As System.Nullable(Of Date)
+            Get
+                Return Me.BillingOrderDeliveryTimeField
+            End Get
+            Set
+                Me.BillingOrderDeliveryTimeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BillingOrderStatus() As String
+            Get
+                Return Me.BillingOrderStatusField
+            End Get
+            Set
+                Me.BillingOrderStatusField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BillingOrderTime() As System.Nullable(Of Date)
+            Get
+                Return Me.BillingOrderTimeField
+            End Get
+            Set
+                Me.BillingOrderTimeField = value
             End Set
         End Property
         
@@ -3519,12 +3632,12 @@ Namespace DataAPI
         End Property
         
         <System.Runtime.Serialization.DataMemberAttribute()>  _
-        Public Property NYCTypeOfCo() As DataAPI.NYCTypeOfCo
+        Public Property NeedCollection() As System.Nullable(Of Boolean)
             Get
-                Return Me.NYCTypeOfCoField
+                Return Me.NeedCollectionField
             End Get
             Set
-                Me.NYCTypeOfCoField = value
+                Me.NeedCollectionField = value
             End Set
         End Property
         
@@ -3589,6 +3702,16 @@ Namespace DataAPI
         End Property
         
         <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property SaleAmt() As System.Nullable(Of Decimal)
+            Get
+                Return Me.SaleAmtField
+            End Get
+            Set
+                Me.SaleAmtField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
         Public Property SaleDate() As System.Nullable(Of Date)
             Get
                 Return Me.SaleDateField
@@ -3615,6 +3738,26 @@ Namespace DataAPI
             End Get
             Set
                 Me.TaxClassField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TaxLienAmt() As System.Nullable(Of Decimal)
+            Get
+                Return Me.TaxLienAmtField
+            End Get
+            Set
+                Me.TaxLienAmtField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TaxLienCertDate() As System.Nullable(Of Date)
+            Get
+                Return Me.TaxLienCertDateField
+            End Get
+            Set
+                Me.TaxLienCertDateField = value
             End Set
         End Property
         
@@ -3725,54 +3868,6 @@ Namespace DataAPI
             End Get
             Set
                 Me.zEstimateDeliveryTimeField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="NYCTypeOfCo", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class NYCTypeOfCo
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
-        Private ALL_NYC_Tax_Liens_CO_InfoField() As DataAPI.ALL_NYC_Tax_Liens_CO_Info
-        
-        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
-        Private CoTypeField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute()>  _
-        Public Property ALL_NYC_Tax_Liens_CO_Info() As DataAPI.ALL_NYC_Tax_Liens_CO_Info()
-            Get
-                Return Me.ALL_NYC_Tax_Liens_CO_InfoField
-            End Get
-            Set
-                Me.ALL_NYC_Tax_Liens_CO_InfoField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute()>  _
-        Public Property CoType() As String
-            Get
-                Return Me.CoTypeField
-            End Get
-            Set
-                Me.CoTypeField = value
             End Set
         End Property
     End Class
@@ -37466,6 +37561,67 @@ Namespace DataAPI
         End Property
     End Class
     
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TaxLien_Info", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TaxLien_Info
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TaxLienAmtField As System.Nullable(Of Double)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TaxLienCertDateField As System.Nullable(Of Date)
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TaxLienAmt() As System.Nullable(Of Double)
+            Get
+                Return Me.TaxLienAmtField
+            End Get
+            Set
+                Me.TaxLienAmtField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TaxLienCertDate() As System.Nullable(Of Date)
+            Get
+                Return Me.TaxLienCertDateField
+            End Get
+            Set
+                Me.TaxLienCertDateField = value
+            End Set
+        End Property
+    End Class
+    
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
      System.ServiceModel.ServiceContractAttribute(ConfigurationName:="DataAPI.IWCFMacros")>  _
     Public Interface IWCFMacros
@@ -37583,6 +37739,12 @@ Namespace DataAPI
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_NameAndAddress", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_NameAndAddressResponse")>  _
         Function NYC_NameAndAddressAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.NYC_NameAndAddress_View())
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLienResponse")>  _
+        Function Get_Acris_TaxLien(ByVal BBLE As String) As DataAPI.TaxLien_Info
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLienResponse")>  _
+        Function Get_Acris_TaxLienAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.TaxLien_Info)
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -37766,6 +37928,14 @@ Namespace DataAPI
         
         Public Function NYC_NameAndAddressAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.NYC_NameAndAddress_View()) Implements DataAPI.IWCFMacros.NYC_NameAndAddressAsync
             Return MyBase.Channel.NYC_NameAndAddressAsync(BBLE)
+        End Function
+        
+        Public Function Get_Acris_TaxLien(ByVal BBLE As String) As DataAPI.TaxLien_Info Implements DataAPI.IWCFMacros.Get_Acris_TaxLien
+            Return MyBase.Channel.Get_Acris_TaxLien(BBLE)
+        End Function
+        
+        Public Function Get_Acris_TaxLienAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.TaxLien_Info) Implements DataAPI.IWCFMacros.Get_Acris_TaxLienAsync
+            Return MyBase.Channel.Get_Acris_TaxLienAsync(BBLE)
         End Function
     End Class
 End Namespace

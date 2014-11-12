@@ -201,6 +201,42 @@
         End Get
     End Property
 
+    Private _taxLiensInfo As LeadsTaxLien
+    Public ReadOnly Property TaxLiensInfo As LeadsTaxLien
+        Get
+            If _taxLiensInfo Is Nothing Then
+                Using ctx As New Entities
+                    _taxLiensInfo = ctx.LeadsTaxLiens.Where(Function(lt) lt.BBLE = BBLE).FirstOrDefault
+                End Using
+            End If
+            Return _taxLiensInfo
+        End Get
+    End Property
+
+    Public ReadOnly Property TaxLiensDateText As String
+        Get
+            If TaxLiensInfo IsNot Nothing Then
+                Return TaxLiensInfo.TaxLiensYear
+            End If
+
+            Return ""
+        End Get
+    End Property
+
+    Public ReadOnly Property TaxLiensAmount As String
+        Get
+            If TaxLiensInfo IsNot Nothing Then
+                If TaxLiensInfo.Amount > 0 Then
+                    Return TaxLiensInfo.Amount
+                Else
+                    Return "Not Avaiable"
+                End If
+            End If
+
+            Return ""
+        End Get
+    End Property
+
     Public ReadOnly Property PropertyClassCode As String
         Get
             Using context As New Entities

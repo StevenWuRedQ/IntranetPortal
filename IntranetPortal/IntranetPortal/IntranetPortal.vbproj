@@ -416,6 +416,9 @@
     <Compile Include="DataModel\LeadsMortgageData.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\LeadsTaxLien.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\LoginLog.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
@@ -2426,6 +2429,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_NameAndAddress_View.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TaxLien_Info.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\DataAPI\Reference.svcmap">

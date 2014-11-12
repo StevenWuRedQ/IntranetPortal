@@ -289,6 +289,14 @@
       <xs:element minOccurs="0" name="AcrisOrderStatus" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="AcrisOrderTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Bill_Line1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Bill_Line2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Bill_Line3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Bill_Line4" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Bill_Line5" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BillingOrderDeliveryTime" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="BillingOrderStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BillingOrderTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Block" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="C1stMotgrAmt" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="C2ndMotgrAmt" nillable="true" type="xs:decimal" />
@@ -316,16 +324,19 @@
       <xs:element minOccurs="0" name="LastPaid" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="LastUpdated" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Lot" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="NYCTypeOfCo" nillable="true" type="tns:NYCTypeOfCo" />
+      <xs:element minOccurs="0" name="NeedCollection" nillable="true" type="xs:boolean" />
       <xs:element minOccurs="0" name="Owner" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="PropertyAddress" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Remark1" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Remark2" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Remark3" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Remark4" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SaleAmt" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="SaleDate" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="SaleType" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TaxClass" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaxLienAmt" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TaxLienCertDate" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="TaxesAmt" nillable="true" type="xs:decimal" />
       <xs:element minOccurs="0" name="TaxesOrderDeliveryTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="TaxesOrderStatus" nillable="true" type="xs:string" />
@@ -340,13 +351,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ALL_NYC_Tax_Liens_CO_Info" nillable="true" type="tns:ALL_NYC_Tax_Liens_CO_Info" />
-  <xs:complexType name="NYCTypeOfCo">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ALL_NYC_Tax_Liens_CO_Info" nillable="true" type="tns:ArrayOfALL_NYC_Tax_Liens_CO_Info" />
-      <xs:element minOccurs="0" name="CoType" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="NYCTypeOfCo" nillable="true" type="tns:NYCTypeOfCo" />
   <xs:complexType name="ArrayOfAcris_LatestOwner_View">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Acris_LatestOwner_View" nillable="true" type="tns:Acris_LatestOwner_View" />
@@ -614,4 +618,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="NYC_NameAndAddress_View" nillable="true" type="tns:NYC_NameAndAddress_View" />
+  <xs:complexType name="TaxLien_Info">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaxLienAmt" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="TaxLienCertDate" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TaxLien_Info" nillable="true" type="tns:TaxLien_Info" />
 </xs:schema>

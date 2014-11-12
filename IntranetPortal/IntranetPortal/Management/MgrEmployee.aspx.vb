@@ -11,7 +11,12 @@ Public Class MgrEmployee
 
     Sub BindTreeList()
         Using Context As New Entities
-            treeList.DataSource = Context.Employees.ToList
+            If chkActive.Checked Then
+                treeList.DataSource = Context.Employees.Where(Function(em) em.Active = True).ToList
+            Else
+                treeList.DataSource = Context.Employees.ToList
+            End If
+
             treeList.DataBind()
         End Using
     End Sub

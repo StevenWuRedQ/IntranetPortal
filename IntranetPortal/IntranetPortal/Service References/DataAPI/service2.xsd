@@ -300,4 +300,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="Get_Acris_TaxLien">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_Acris_TaxLienResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_Acris_TaxLienResult" nillable="true" type="q21:TaxLien_Info" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -312,7 +312,6 @@ Partial Public Class Employee
     End Function
 
     Public Shared Function HasSubordinates(employeeName As String) As Boolean
-
         Using context As New Entities
             Dim emp = GetInstance(employeeName)
             If emp IsNot Nothing Then

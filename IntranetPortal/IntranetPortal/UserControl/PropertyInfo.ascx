@@ -92,7 +92,7 @@
                 <span class="time_buttons" onclick='ShowDOBWindow("<%= LeadsInfoData.Borough%>","<%= LeadsInfoData.Number%>", "<%= LeadsInfoData.StreetName%>")'>DOB</span>
                 <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>")'>Acris</span>
                 <span class="time_buttons" onclick='ShowPropertyMap("<%= LeadsInfoData.BBLE %>")'>Maps</span>
-                
+
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
             <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; <%= If( LeadsInfoData.CreateDate.HasValue,"visibility:visible","visibility:hidden")%>">Started on <%= LeadsInfoData.CreateDate.ToString%></span>
@@ -368,7 +368,7 @@
 
                         <%--line 1--%>
                         <div class="form_div_node form_div_node_line_margin">
-                            <span class="form_input_title">1st Mortgage</span>                           
+                            <span class="form_input_title">1st Mortgage</span>
                             <dx:ASPxTextBox runat="server" ID="txtC1stMotgr" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.C1stMotgrAmt  %>'></dx:ASPxTextBox>
                             <%--<input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.C1stMotgrAmt%>" style="display: none" />--%>
                         </div>
@@ -484,8 +484,23 @@
                             </div>
                             <%----end line ----%>
                         </div>
-
                         <%----end line ----%>
+
+                        <div style="width: 66%; float: right; margin-top: -34%;">
+                            <div style="width: 40%;float:left; margin-top:10px" class="form_head">
+                                Tax Liens:
+                            </div>
+                            <div style="float: right;width: 54%;">
+                                <div class="form_div_node form_div_node_margin form_div_node_line_margin" style="width:87%">
+                                    <span class="form_input_title">Tax Liens Date</span>
+                                    <input class="text_input" value="<%= LeadsInfoData.TaxLiensDateText %>" id="Text1"/>
+                                </div>
+                                <div class="form_div_node form_div_node_margin form_div_node_line_margin" style="width:87%">
+                                    <span class="form_input_title">Tax Liens Amount</span>
+                                    <input class="text_input" value="<%= LeadsInfoData.TaxLiensAmount %>" id="Text2" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <%-------end-----%>
                 </dx:PanelContent>

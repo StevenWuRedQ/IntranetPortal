@@ -41,6 +41,15 @@ Partial Public Class MgrEmployee
     Protected WithEvents ASPxRoundPanel1 As Global.DevExpress.Web.ASPxRoundPanel.ASPxRoundPanel
 
     '''<summary>
+    '''chkActive control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkActive As Global.DevExpress.Web.ASPxEditors.ASPxCheckBox
+
+    '''<summary>
     '''treeList control.
     '''</summary>
     '''<remarks>

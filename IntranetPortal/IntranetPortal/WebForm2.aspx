@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-     <link href="/styles/stevencss.css" rel='stylesheet' type='text/css' />
+     <link href="/css/stevencss.css" rel='stylesheet' type='text/css' />
     <style>
     html, body, #form1, #map_canvas
     {

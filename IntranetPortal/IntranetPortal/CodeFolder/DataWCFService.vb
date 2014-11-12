@@ -99,6 +99,35 @@ Public Class DataWCFService
         End If
     End Function
 
+    Public Shared Function GetTaxlien(bble As String) As DataAPI.TaxLien_Info
+        Using client As New DataAPI.WCFMacrosClient
+            'Dim data = client.Get_Acris_TaxLien(bble)
+            'Return data
+            Return Nothing
+        End Using
+    End Function
+
+    Public Shared Sub UpdateTaxLiens(bble As String)
+        Using client As New DataAPI.WCFMacrosClient
+            Dim taxLiens = client.Get_Acris_TaxLien(bble)
+
+            If taxLiens IsNot Nothing Then
+                Using ctx As New Entities
+                    Dim liens = ctx.LeadsTaxLiens.Where(Function(lt) lt.BBLE = bble)
+                    ctx.LeadsTaxLiens.RemoveRange(liens)
+
+                    Dim newLien As New LeadsTaxLien
+                    newLien.BBLE = bble
+                    newLien.TaxLiensYear = taxLiens.TaxLienCertDate
+                    newLien.Amount = taxLiens.TaxLienAmt
+                    ctx.LeadsTaxLiens.Add(newLien)
+
+                    ctx.SaveChanges()
+                End Using
+            End If
+        End Using
+    End Sub
+
     Public Shared Function GetFullAssessInfo(bble As String, Optional li As LeadsInfo = Nothing) As LeadsInfo
 
         Try
@@ -108,13 +137,11 @@ Public Class DataWCFService
                 If li Is Nothing Then
                     li = New LeadsInfo
                     li.CreateDate = DateTime.Now
-
                     li.CreateBy = GetCurrentIdentityName()
                 End If
 
                 If result IsNot Nothing Then
                     li.BBLE = result.BBLE
-
                     li.Number = result.NUMBER
                     li.StreetName = result.ST_NAME
                     li.NeighName = result.NEIGH_NAME
@@ -264,6 +291,9 @@ Public Class DataWCFService
 
                 'Get latest sale info
                 GetLatestSalesInfo(bble)
+
+                'Update Taxliens data
+                UpdateTaxLiens(bble)
 
                 'Update leads neighborhood info
                 Dim lead = context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault

@@ -57,6 +57,7 @@ Partial Public Class Entities
     Public Overridable Property AssignRules() As DbSet(Of AssignRule)
     Public Overridable Property Teams() As DbSet(Of Team)
     Public Overridable Property UserInTeams() As DbSet(Of UserInTeam)
+    Public Overridable Property LeadsTaxLiens() As DbSet(Of LeadsTaxLien)
 
     Public Overridable Function UpdateEmployeeName(oldName As String, newName As String) As Integer
         Dim oldNameParameter As ObjectParameter = If(oldName IsNot Nothing, New ObjectParameter("OldName", oldName), New ObjectParameter("OldName", GetType(String)))

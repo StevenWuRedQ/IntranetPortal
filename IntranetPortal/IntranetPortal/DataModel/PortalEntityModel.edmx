@@ -291,6 +291,16 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="LeadsTaxLiens">
+          <Key>
+            <PropertyRef Name="TaxLienId" />
+          </Key>
+          <Property Name="TaxLienId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="TaxLiensYear" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+        </EntityType>
         <EntityType Name="LoginLogs">
           <Key>
             <PropertyRef Name="LogID" />
@@ -544,6 +554,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="LeadsComments" EntityType="Self.LeadsComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsInfo" EntityType="Self.LeadsInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsMortgageData" EntityType="Self.LeadsMortgageData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeadsTaxLiens" EntityType="Self.LeadsTaxLiens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginLogs" EntityType="Self.LoginLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderResponses" EntityType="Self.OrderResponses" Schema="dbo" store:Type="Tables" />
@@ -630,6 +641,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="AssignRules" EntityType="IntranetPortalModel.AssignRule" />
           <EntitySet Name="Teams" EntityType="IntranetPortalModel.Team" />
           <EntitySet Name="UserInTeams" EntityType="IntranetPortalModel.UserInTeam" />
+          <EntitySet Name="LeadsTaxLiens" EntityType="IntranetPortalModel.LeadsTaxLien" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1220,6 +1232,16 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="EmployeeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="LeadsTaxLien">
+          <Key>
+            <PropertyRef Name="TaxLienId" />
+          </Key>
+          <Property Name="TaxLienId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="TaxLiensYear" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1769,6 +1791,17 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
                 <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadsTaxLiens">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LeadsTaxLien">
+              <MappingFragment StoreEntitySet="LeadsTaxLiens">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TaxLiensYear" ColumnName="TaxLiensYear" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="TaxLienId" ColumnName="TaxLienId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

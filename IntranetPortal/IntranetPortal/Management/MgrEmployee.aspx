@@ -31,6 +31,9 @@
                             <dx:ASPxRoundPanel ID="ASPxRoundPanel1" runat="server" Width="100%" HeaderText="Employee Tree" Height="100%">
                                 <PanelCollection>
                                     <dx:PanelContent>
+                                        <div>                                            
+                                            <dx:ASPxCheckBox runat="server" ID="chkActive" Text="Only Active User:" TextAlign="Left" Checked="true" AutoPostBack="true"></dx:ASPxCheckBox>
+                                        </div>
                                         <dx:ASPxTreeList ID="treeList" runat="server" SettingsEditing-Mode="EditForm" Width="100%" Height="100%" ParentFieldName="ReportTo" KeyFieldName="EmployeeID">
                                             <Columns>
                                                 <dx:TreeListTextColumn FieldName="Name" ShowInCustomizationForm="True" VisibleIndex="0">
