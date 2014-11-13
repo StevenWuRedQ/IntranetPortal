@@ -445,13 +445,16 @@
                                                                    Return False
                                                                End Function))
 
-            str.Add(New Indicator("UnderBuilt", "The hourse has more underbuilt", Function(li)
-                                                                                      If li.UnbuiltSqft.HasValue And li.NYCSqft.HasValue Then
-                                                                                          Return li.UnbuiltSqft / li.NYCSqft >= 0.5
-                                                                                      End If
+            str.Add(New Indicator("UnderBuilt", "The house has more underbuilt", Function(li)
+                                                                                     If li.UnbuiltSqft.HasValue And li.NYCSqft.HasValue Then
+                                                                                         Return li.UnbuiltSqft / li.NYCSqft >= 0.5
+                                                                                     End If
 
-                                                                                      Return False
-                                                                                  End Function))
+                                                                                     Return False
+                                                                                 End Function))
+            str.Add(New Indicator("TaxLiens", "This property has tas liens.", Function(li)
+                                                                                  Return Not String.IsNullOrEmpty(li.TaxLiensAmount)
+                                                                              End Function))
 
             Return str
         End Get

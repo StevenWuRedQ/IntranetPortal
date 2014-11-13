@@ -128,7 +128,7 @@
             </VerticalSeparator>
         </Styles>
         <Panes>
-            <dx:SplitterPane Size="300px" MinSize="300px" ShowCollapseBackwardButton="True">
+            <dx:SplitterPane Size="850px" MinSize="300px" ShowCollapseBackwardButton="True">
                 <PaneStyle>
                     <Border BorderStyle="None" />
                 </PaneStyle>
@@ -179,7 +179,7 @@
                                 </Items>
                                 <ClientSideEvents ItemClick="OnChangeLeadsType" />
                             </dx:ASPxPopupMenu>
-                            <div style="overflow: hidden; height: 823px;" id="assign_leads_list">
+                            <div style="overflow: hidden; height: 770px;" id="assign_leads_list">
                                 <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsBehavior-AutoExpandAllGroups="True" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared">
                                     <Columns>
                                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
@@ -187,7 +187,14 @@
                                         <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False">
                                             <Settings AllowHeaderFilter="False"></Settings>
                                         </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="Neighborhood" Visible="false"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="Neighborhood"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataSpinEditColumn FieldName="NYCSqft"></dx:GridViewDataSpinEditColumn>
+                                        <dx:GridViewDataTextColumn FieldName="LotDem"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="C1stMotgrAmt"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="MortgageData.C1stServicer" Caption="Servicer"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="C2ndMotgrAmt" Visible="false"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="MortgageData.C2ndServicer" Visible="false"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="TaxLiensAmount"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Type" Width="40px" CellStyle-HorizontalAlign="Center" CellStyle-VerticalAlign="Middle">
                                             <DataItemTemplate>
                                                 <dx:ASPxImage EmptyImage-Url="~/images/ide.png" EmptyImage-Width="16" EmptyImage-Height="16" runat="server" ID="imgType" Width="24" Height="24" CssClass="always_show">
@@ -195,9 +202,9 @@
                                             </DataItemTemplate>
                                         </dx:GridViewDataTextColumn>
                                     </Columns>
-                                    <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true"
+                                    <SettingsBehavior AllowClientEventsOnLoad="false" AllowFocusedRow="true"
                                         EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
-                                    <Settings ShowColumnHeaders="False" VerticalScrollableHeight="810"></Settings>
+                                    <Settings ShowColumnHeaders="true" VerticalScrollableHeight="750"></Settings>
                                     <SettingsPager Mode="EndlessPaging" PageSize="50"></SettingsPager>
                                     <Styles>
                                         <Row Cursor="pointer" />
@@ -208,66 +215,25 @@
                                     <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
                                 </dx:ASPxGridView>
                             </div>
-                        </div>
-                    </dx:SplitterContentControl>
-                </ContentCollection>
-            </dx:SplitterPane>
-            <dx:SplitterPane Name="ContentUrlPane" Size="240px" MinSize="240px">
-                <PaneStyle Border-BorderStyle="None"></PaneStyle>
-                <ContentCollection>
-                    <dx:SplitterContentControl runat="server">
-                        <div style="width: 100%; height: 100%; /*border: 1px solid gray; border-bottom: 1px solid gray; */">
-                            <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px; white-space: nowrap" class="clearfix">
-                                <div style="font-size: 24px;" class="clearfix">
-                                    <i class="fa fa-group with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
-                                    <span style="color: #234b60; font-size: 30px;">
-                                        <dx:ASPxLabel Text="Employee" ID="ASPxLabel1" Font-Size="30px" runat="server"></dx:ASPxLabel>
-                                    </span>
-
-                                </div>
-                            </div>
-
-                            <dx:ASPxListBox runat="server" ID="listboxEmployee" Height="450" TextField="Name" ValueField="EmployeeID"
-                                SelectedIndex="0" Width="100%" Border-BorderStyle="None" Font-Size="14px">
-                                <Border BorderStyle="None"></Border>
-                                <Items>
-                                    <dx:ListEditItem Text="Allen Glover" Value="1" />
-                                    <dx:ListEditItem Text="Alon Zeituny" Value="2" />
-                                    <dx:ListEditItem Text="Andrea Taylor" Value="3" />
-                                    <dx:ListEditItem Text="Allen Glover" Value="1" />
-                                    <dx:ListEditItem Text="Alon Zeituny" Value="2" />
-                                    <dx:ListEditItem Text="Andrea Taylor" Value="3" />
-                                    <dx:ListEditItem Text="Allen Glover" Value="1" />
-                                    <dx:ListEditItem Text="Alon Zeituny" Value="2" />
-                                    <dx:ListEditItem Text="Andrea Taylor" Value="3" />
-                                    <dx:ListEditItem Text="Allen Glover" Value="1" />
-                                    <dx:ListEditItem Text="Alon Zeituny" Value="2" />
-                                    <dx:ListEditItem Text="Andrea Taylor" Value="3" />
-                                    <dx:ListEditItem Text="Allen Glover" Value="1" />
-                                    <dx:ListEditItem Text="Alon Zeituny" Value="2" />
-                                    <dx:ListEditItem Text="Andrea Taylor" Value="3" />
-                                </Items>
-                                <ItemStyle CssClass="border_under_line" />
-                            </dx:ASPxListBox>
-                            <div style="margin-left: 10px; margin-top: 10px">
-                                <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" CssClass="rand-button rand-button-blue"></dx:ASPxButton>
-                                &nbsp;&nbsp;
+                            <table style="width: 500px; float:right; margin-top:10px;">
+                                <tr>
+                                    <td>
+                                        <dx:ASPxLabel Text="Select Employee:" ID="ASPxLabel1" runat="server" Font-Size="Large"></dx:ASPxLabel>
+                                    </td>
+                                    <td>
+                                        <dx:ASPxComboBox runat="server" ID="listboxEmployee" TextField="Name" ValueField="EmployeeID" DropDownStyle="DropDownList" IncrementalFilteringMode="StartsWith">
+                                        </dx:ASPxComboBox>
+                                    </td>
+                                    <td>
+                                        <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" CssClass="rand-button rand-button-blue"></dx:ASPxButton>
+                                        &nbsp;&nbsp;
                                 <dx:ASPxButton Text="Rules" runat="server" ID="ASPxButton1" CssClass="rand-button rand-button-blue" AutoPostBack="false">
                                     <ClientSideEvents Click="function(s,e){popupAssignRules.Show();}" />
                                 </dx:ASPxButton>
-                            </div>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
-                        <dx:ASPxPopupControl ID="popupAssignRules" runat="server" ClientInstanceName="popupAssignRules"
-                            Width="630px" Height="700px" CloseAction="CloseButton" MaxWidth="800px" MinWidth="150px" ShowFooter="true"
-                            HeaderText="Assign Leads Rules" Modal="true" ContentUrl="~/AssignLeadsRulesPage.aspx"
-                            EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-                            <FooterContentTemplate>
-                                <div style="height: 30px; vertical-align: central">
-                                    <span class="time_buttons" onclick="popupAssignRules.Hide()">Close</span>                                  
-                                </div>
-                            </FooterContentTemplate>
-                        </dx:ASPxPopupControl>
-
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
@@ -283,5 +249,15 @@
     <dx:ASPxCallback runat="server" ID="updateLeadsType" ClientInstanceName="updateLeadsType" OnCallback="updateLeadsType_Callback">
         <ClientSideEvents EndCallback="function(){gridLeads.Refresh();}" />
     </dx:ASPxCallback>
+    <dx:ASPxPopupControl ID="popupAssignRules" runat="server" ClientInstanceName="popupAssignRules"
+        Width="630px" Height="700px" CloseAction="CloseButton" MaxWidth="800px" MinWidth="150px" ShowFooter="true"
+        HeaderText="Assign Leads Rules" Modal="true" ContentUrl="~/AssignLeadsRulesPage.aspx"
+        EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+        <FooterContentTemplate>
+            <div style="height: 30px; vertical-align: central">
+                <span class="time_buttons" onclick="popupAssignRules.Hide()">Close</span>
+            </div>
+        </FooterContentTemplate>
+    </dx:ASPxPopupControl>
     <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 </asp:Content>
