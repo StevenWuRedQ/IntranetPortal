@@ -365,8 +365,6 @@ Public Class LeadsList
         'BindLeadsList("")
     End Sub
 
- 
-
     Protected Sub gridLeads_RowInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs) Handles gridLeads.RowInserting
         Dim pageRootControl = TryCast(gridLeads.FindEditFormTemplateControl("pageControlNewLeads"), ASPxPageControl)
         Dim lbNewBBLE = TryCast(pageRootControl.FindControl("lbNewBBLE"), ASPxListBox)

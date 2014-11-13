@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfPortalNavItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <PortalNavItem Name="Agent" Text="Leads" NavigationUrl="/SummaryPage.aspx" ShowAmount="false" ItemType="Agent" Expanded="true">
-    
+
     <level>1</level>
     <FontClass>
       <![CDATA[
@@ -66,8 +66,8 @@
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
       </PortalNavItem>
-      
-      
+
+
     </Items>
   </PortalNavItem>
 
@@ -178,18 +178,18 @@
           <![CDATA[<i class="fa fa-group"></i>]]>
         </FontClass>
       </PortalNavItem>
-      
+
       <PortalNavItem Name="Calendar" Text="Calendar" NavigationUrl="/Calendar.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="AdvanceQuery" Text="Advanced Query" NavigationUrl="/LeadsGenerator/LeadsGenerator.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-search-plus"></i>]]>
+        </FontClass>
+      </PortalNavItem>
     </Items>
-    <PortalNavItem Name="AdvanceQuery" Text="Advanced Query" NavigationUrl="/LeadsGenerator/LeadsGenerator.aspx" ShowAmount="false">
-      <FontClass>
-        <![CDATA[<i class="fa fa-search-plus"></i>]]>
-      </FontClass>
-    </PortalNavItem>
   </PortalNavItem>
 
   <PortalNavItem Name="ShortSale" Text="Short Sale" NavigationUrl="#" ShowAmount="false" ItemType="ShortSale" Visible="true">
@@ -205,7 +205,7 @@
         <FontClass>
           <![CDATA[<i class="fa fa-rotate-right"></i>]]>
         </FontClass>
-      </PortalNavItem>   
+      </PortalNavItem>
       <PortalNavItem Name="ShortSale-NewFile" Text="New File" NavigationUrl="/ShortSale/ShortSale.aspx?s=0" ShowAmount="true">
         <UserRoles>ShortSale-Processor,ShortSale-Negotiator</UserRoles>
         <FontClass>
@@ -225,7 +225,7 @@
           <![CDATA[<i class="fa fa-check-square-o"></i>]]>
         </FontClass>
       </PortalNavItem>
-      
+
       <PortalNavItem Name="ShortSale-Active" Text="Active" NavigationUrl="/ShortSale/ShortSale.aspx?s=2" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-folder-open"></i>]]>
@@ -248,11 +248,11 @@
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
-      </PortalNavItem>      
+      </PortalNavItem>
     </Items>
   </PortalNavItem>
-  
-  
+
+
   <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
     <UserRoles>OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen</UserRoles>
     <Items>
@@ -346,7 +346,7 @@
             </FontClass>
           </PortalNavItem>
         </Items>
-      </PortalNavItem>    
+      </PortalNavItem>
 
       <PortalNavItem Name="Office-Rockaway-Management" Text="Rockaway Team" NavigationUrl="#" ShowAmount="true" ItemType="Office">
         <UserRoles>OfficeManager-Rockaway</UserRoles>
@@ -486,7 +486,7 @@
           </PortalNavItem>
         </Items>
       </PortalNavItem>
-      
+
     </Items>
   </PortalNavItem>
 

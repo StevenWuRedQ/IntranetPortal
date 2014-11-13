@@ -671,6 +671,39 @@
                 </FooterContentTemplate>
             </dx:ASPxPopupControl>
 
+            <dx:ASPxPopupControl ClientInstanceName="aspxPopupDeadLeadsClient" Width="356px" Height="350px" ID="ASPxPopupControl4"
+                HeaderText="Share Lead" Modal="true" ShowFooter="true"
+                runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+                <HeaderTemplate>
+                    <div class="clearfix">
+                        <div class="pop_up_header_margin">
+                            <i class="fa fa-mail-forward with_circle pop_up_header_icon"></i>
+                            <span class="pop_up_header_text">Dead Leads</span>
+                        </div>
+                        <div class="pop_up_buttons_div">
+                            <i class="fa fa-times icon_btn" onclick="aspxPopupDeadLeadsClient.Hide()"></i>
+                        </div>
+                    </div>
+                </HeaderTemplate>
+                <ContentCollection>
+                    <dx:PopupControlContentControl>
+                        <dx:ASPxCheckBoxList ID="ASPxCheckBoxList1" runat="server" AutoPostBack="false" Border-BorderStyle="None">
+                            <Items>
+                                <dx:ListEditItem Text="Short Sale" Value="0" />
+                                <dx:ListEditItem Text="Evition" Value="1" />
+                                <dx:ListEditItem Text="Construction" Value="2" />
+                            </Items>
+                        </dx:ASPxCheckBoxList>
+                    </dx:PopupControlContentControl>
+                </ContentCollection>
+                <FooterContentTemplate>
+                    <div style="height: 30px; vertical-align: central">
+                        <span class="time_buttons" onclick="aspxPopupDeadLeadsClient.Hide()">Cancel</span>
+                        <span class="time_buttons" onclick="aspxPopupDeadLeadsClient.Hide();SetLeadStatus(7);">Confirm</span>
+                    </div>
+                </FooterContentTemplate>
+            </dx:ASPxPopupControl>
+
             <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddPhoneNum" Width="200px" Height="80px" ID="ASPxPopupControl2"
                 HeaderText="Add Phone Number" ShowHeader="false"
                 runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">

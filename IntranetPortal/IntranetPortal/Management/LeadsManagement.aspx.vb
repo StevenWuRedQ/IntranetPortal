@@ -40,7 +40,6 @@ Public Class LeadsManagement
                 If Employee.IsManager(User.Identity.Name) Then
                     Dim name = User.Identity.Name
                     Return Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = name And li.Lead.Status = LeadStatus.NewLead).ToList
-
                 End If
             End If
 
