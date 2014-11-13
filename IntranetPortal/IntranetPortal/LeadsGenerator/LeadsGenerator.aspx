@@ -325,13 +325,17 @@
                                                     <i class="fa fa-folder-open color_gray"></i>&nbsp;<span class="font_black">5 Results</span>
                                                 </div>
                                                 <div style="margin-top: 30px">
-                                                    <dx:ASPxGridView ID="QueryResultsGrid" runat="server" Width="100%">
+                                                    <dx:ASPxGridView ID="QueryResultsGrid" runat="server" Width="100%"  KeyFieldName="BBLE">
                                                         <Columns>
                                                             <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" SelectAllCheckboxMode="AllPages">
                                                             </dx:GridViewCommandColumn>
                                                             <dx:GridViewDataColumn FieldName="LeadsName" VisibleIndex="1" />
                                                         </Columns>
+                                                        <Styles>
+                                                            <SelectedRow BackColor="#d9f1fd" ForeColor="#3993c1">
 
+                                                            </SelectedRow>
+                                                        </Styles>
                                                     </dx:ASPxGridView>
                                                 </div>
                                             </div>
