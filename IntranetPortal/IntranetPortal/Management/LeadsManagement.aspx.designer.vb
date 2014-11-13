@@ -23,15 +23,6 @@ Partial Public Class LeadsManagement
     Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
 
     '''<summary>
-    '''chkAll control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents chkAll As Global.DevExpress.Web.ASPxEditors.ASPxCheckBox
-
-    '''<summary>
     '''lblLeadCategory control.
     '''</summary>
     '''<remarks>

@@ -23,9 +23,9 @@ Public Class LeadsInfo1
             End If
 
             If Not ShowLogPanel Then
-                contentSplitter.GetPaneByName("LogPanel").Visible = False
-                contentSplitter.GetPaneByName("LogPanel").Separator.Visible = DevExpress.Utils.DefaultBoolean.False
-                ActivityLogs.Visible = False
+                contentSplitter.GetPaneByName("LogPanel").Collapsed = True
+                'contentSplitter.GetPaneByName("paneInfo").Separator.Visible = DevExpress.Utils.DefaultBoolean.False
+                'ActivityLogs.Visible = False
             End If
         End If
     End Sub
@@ -33,9 +33,9 @@ Public Class LeadsInfo1
     Sub BindLeadsInfo(bble As String)
 
         If Not ShowLogPanel Then
-            contentSplitter.GetPaneByName("LogPanel").Visible = False
-            contentSplitter.GetPaneByName("LogPanel").Separator.Visible = DevExpress.Utils.DefaultBoolean.False
-            ActivityLogs.Visible = False
+            contentSplitter.GetPaneByName("LogPanel").Collapsed = True
+            'contentSplitter.GetPaneByName("paneInfo").Separator.Visible = DevExpress.Utils.DefaultBoolean.False
+            'ActivityLogs.Visible = False
         End If
 
         Using Context As New Entities

@@ -1,9 +1,7 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="LeadsManagement.aspx.vb" Inherits="IntranetPortal.LeadsManagement" MasterPageFile="~/Content.Master" %>
-
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 <%@ Register Src="~/UserControl/AssignRulesControl.ascx" TagPrefix="uc1" TagName="AssignRulesControl" %>
-
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
@@ -135,37 +133,15 @@
                 <ContentCollection>
                     <dx:SplitterContentControl runat="server">
                         <div style="width: 100%; height: 100%; /*border: 1px solid gray; */ /*border-bottom: 1px solid gray; */">
-                            <div style="margin: 30px 20px 30px 10px; text-align: left; padding-left: 5px" class="clearfix">
+                            <div style="margin: 10px 20px 10px 10px; text-align: left; padding-left: 5px" class="clearfix">
                                 <div style="font-size: 24px;" class="clearfix">
+                                    <i class="fa fa-check-square-o with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
                                     <span style="color: #234b60; font-size: 30px;">
-                                        <dx:ASPxCheckBox runat="server" ID="chkAll">
-                                            <ClientSideEvents CheckedChanged="function(s,e)
-                                         {
-                                              if (s.GetChecked())
-                                                  gridLeads.SelectRows();
-                                              else
-                                                  gridLeads.UnselectRows();
-
-                                         }" />
-                                        </dx:ASPxCheckBox>
                                         <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
                                     </span>
                                 </div>
+                          
                             </div>
-                            <%--<div style="/*background-color: #efefef; border-bottom: 1px solid gray; */ text-align: left;">
-
-                                <dx:ASPxCheckBox runat="server" ID="chkAll">
-                                    <ClientSideEvents CheckedChanged="function(s,e)
-                                         {
-                                              if (s.GetChecked())
-                                                  gridLeads.SelectRows();
-                                              else
-                                                  gridLeads.UnselectRows();
-
-                                         }" />
-                                </dx:ASPxCheckBox>
-                                <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
-                            </div>--%>
                             <dx:ASPxPopupMenu ID="ASPxPopupMenu3" runat="server" ClientInstanceName="leadsTypeMenu"
                                 AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
                                 <Items>
@@ -180,21 +156,19 @@
                                 <ClientSideEvents ItemClick="OnChangeLeadsType" />
                             </dx:ASPxPopupMenu>
                             <div style="overflow: hidden; height: 770px;" id="assign_leads_list">
-                                <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" Settings-VerticalScrollableHeight="0" AutoGenerateColumns="False" KeyFieldName="BBLE" SettingsBehavior-AutoExpandAllGroups="True" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared">
+                                <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" KeyFieldName="BBLE" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared">
                                     <Columns>
-                                        <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
+                                        <dx:GridViewCommandColumn ShowSelectCheckbox="True" SelectAllCheckboxMode="Page" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
                                         </dx:GridViewCommandColumn>
                                         <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False">
                                             <Settings AllowHeaderFilter="False"></Settings>
                                         </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="Neighborhood"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataSpinEditColumn FieldName="NYCSqft"></dx:GridViewDataSpinEditColumn>
-                                        <dx:GridViewDataTextColumn FieldName="LotDem"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="C1stMotgrAmt"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="MortgageData.C1stServicer" Caption="Servicer"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="C2ndMotgrAmt" Visible="false"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="MortgageData.C2ndServicer" Visible="false"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="TaxLiensAmount"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="Neighborhood" Width="120px"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataSpinEditColumn FieldName="NYCSqft" Width="80px"></dx:GridViewDataSpinEditColumn>
+                                        <dx:GridViewDataTextColumn FieldName="LotDem" Width="100px"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="C1stMotgrAmt" Width="80px" Caption="1st Mtga" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="MortgageData.C1stServicer" Caption="Servicer" Width="100px"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="TaxLiensAmount" Caption="Tax Liens" Width="80px" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Type" Width="40px" CellStyle-HorizontalAlign="Center" CellStyle-VerticalAlign="Middle">
                                             <DataItemTemplate>
                                                 <dx:ASPxImage EmptyImage-Url="~/images/ide.png" EmptyImage-Width="16" EmptyImage-Height="16" runat="server" ID="imgType" Width="24" Height="24" CssClass="always_show">
@@ -204,9 +178,10 @@
                                     </Columns>
                                     <SettingsBehavior AllowClientEventsOnLoad="false" AllowFocusedRow="true"
                                         EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
-                                    <Settings ShowColumnHeaders="true" VerticalScrollableHeight="750"></Settings>
+                                    <Settings ShowColumnHeaders="true" VerticalScrollableHeight="750" GridLines="Both"></Settings>
                                     <SettingsPager Mode="EndlessPaging" PageSize="50"></SettingsPager>
                                     <Styles>
+                                        <Header HorizontalAlign="Center"></Header>
                                         <Row Cursor="pointer" />
                                         <AlternatingRow BackColor="#F5F5F5"></AlternatingRow>
                                         <RowHotTrack BackColor="#FF400D"></RowHotTrack>
@@ -215,7 +190,7 @@
                                     <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
                                 </dx:ASPxGridView>
                             </div>
-                            <table style="width: 500px; float:right; margin-top:10px;">
+                            <table style="width: 500px; float: right; margin-top: 10px;">
                                 <tr>
                                     <td>
                                         <dx:ASPxLabel Text="Select Employee:" ID="ASPxLabel1" runat="server" Font-Size="Large"></dx:ASPxLabel>
@@ -240,7 +215,7 @@
             <dx:SplitterPane Name="RightPane" ScrollBars="Auto">
                 <ContentCollection>
                     <dx:SplitterContentControl>
-                        <uc1:LeadsInfo runat="server" ID="LeadsInfo" />
+                        <uc1:LeadsInfo runat="server" ID="LeadsInfo" ShowLogPanel="false" />
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>

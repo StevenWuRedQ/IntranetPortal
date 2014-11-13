@@ -254,6 +254,21 @@
         txtPhoneNoClient.SetText("");
     }
 
+    function ShowLogPanel() {
+        var paneInfo = contentSplitter.GetPaneByName("paneInfo");
+        var paneLog = contentSplitter.GetPaneByName("LogPanel");
+
+        if (paneInfo.IsCollapsed()) {
+            paneInfo.Expand();
+            paneLog.Collapse(paneInfo);
+        }
+        else {
+            paneLog.Expand();
+            paneInfo.Collapse(paneLog);
+        }
+
+        contentSplitter.AdjustControl();
+    }
 </script>
 <script src="/scripts/stevenjs.js"></script>
 <style type="text/css">
@@ -283,7 +298,7 @@
                     </Pane>
                 </Styles>
                 <Panes>
-                    <dx:SplitterPane ShowCollapseBackwardButton="True" MinSize="665px" AutoHeight="true">
+                    <dx:SplitterPane ShowCollapseBackwardButton="True" MinSize="665px" AutoHeight="true" Name="paneInfo">
                         <PaneStyle Paddings-Padding="0">
                             <Paddings Padding="0px"></Paddings>
                         </PaneStyle>
@@ -326,7 +341,10 @@
                                         </li>
                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                         <li style="margin-right: 30px; color: #ffa484; float: right">
-                                            <i class="fa fa-refresh sale_head_button tooltip-examples" title="Refresh" onclick="popupMenuRefreshClient.ShowAtElement(this)"></i>
+                                            <% If Not ShowLogPanel Then%>
+                                            <i class="fa fa-history sale_head_button tooltip-examples" title="Show Logs" onclick="ShowLogPanel()"></i>
+                                            <% End If%>
+                                            <i class="fa fa-refresh sale_head_button sale_head_button_left tooltip-examples" title="Refresh" onclick="popupMenuRefreshClient.ShowAtElement(this)"></i>
                                             <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i>
                                             <i class="fa fa-share-alt  sale_head_button sale_head_button_left tooltip-examples" title="Share Leads" onclick="var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;AspxPopupShareleadClient.SetContentUrl(url);AspxPopupShareleadClient.Show();"></i>
                                             <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>
@@ -410,199 +428,195 @@
                             </dx:SplitterContentControl>
                         </ContentCollection>
                     </dx:SplitterPane>
-                    <dx:SplitterPane ShowCollapseForwardButton="True" Name="LogPanel" MinSize="645px">
-                        <Panes>
-                            <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9">
-                                <PaneStyle BackColor="#F9F9F9"></PaneStyle>
-                                <ContentCollection>
-                                    <dx:SplitterContentControl ID="SplitterContentControl4" runat="server">
-                                        <div style="font-size: 12px; color: #9fa1a8;">
-                                            <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
-                                                <li class="short_sale_head_tab activity_light_blue">
-                                                    <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
-                                                        <i class="fa fa-history head_tab_icon_padding"></i>
-                                                        <div class="font_size_bold">Activity Log</div>
-                                                    </a>
-                                                </li>
+                    <dx:SplitterPane ShowCollapseBackwardButton="True" Name="LogPanel">
+                        <PaneStyle BackColor="#F9F9F9"></PaneStyle>
+                        <ContentCollection>
+                            <dx:SplitterContentControl ID="SplitterContentControl4" runat="server">
+                                <div style="font-size: 12px; color: #9fa1a8;">
+                                    <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
+                                        <li class="short_sale_head_tab activity_light_blue">
+                                            <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
+                                                <i class="fa fa-history head_tab_icon_padding"></i>
+                                                <div class="font_size_bold">Activity Log</div>
+                                            </a>
+                                        </li>
 
-                                                <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
-                                                <li style="margin-right: 30px; color: #7396a9; float: right">
-                                                    <i class="fa fa-calendar-o sale_head_button tooltip-examples" title="Schedule" onclick="ASPxPopupScheduleClient.PerformCallback();"></i>
-                                                    <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus(5)"></i>
-                                                    <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
-                                                    <i class="fa fa-sign-in  sale_head_button sale_head_button_left tooltip-examples" title="Door Knock" onclick="SetLeadStatus(4)"></i>
-                                                    <i class="fa fa-refresh sale_head_button sale_head_button_left tooltip-examples" title="In Process" onclick="aspxPopupInprocessClient.Show();"></i>
-                                                    <i class="fa fa-times-circle sale_head_button sale_head_button_left tooltip-examples" title="Dead Lead" onclick="SetLeadStatus(6)"></i>
-                                                    <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
-                                                </li>
-                                            </ul>
-                                            <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
-                                        </div>
-                                        <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
-                                            <ClientSideEvents CallbackComplete="OnSetStatusComplete" />
-                                        </dx:ASPxCallback>
-                                        <dx:ASPxCallback ID="callPhoneCallback" runat="server" ClientInstanceName="callPhoneCallbackClient" OnCallback="callPhoneCallback_Callback">
-                                            <ClientSideEvents CallbackComplete="OnCallPhoneCallbackComplete" />
-                                        </dx:ASPxCallback>
-                                        <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
-                                            AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
-                                            ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
-                                            <ItemStyle Paddings-PaddingLeft="20px" />
-                                            <Items>
-                                                <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
-                                                <dx:MenuItem Text="Next Week" Name="nextWeek"></dx:MenuItem>
-                                                <dx:MenuItem Text="30 Days" Name="thirtyDays">
-                                                </dx:MenuItem>
-                                                <dx:MenuItem Text="60 Days" Name="sixtyDays">
-                                                </dx:MenuItem>
-                                                <dx:MenuItem Text="Custom" Name="Custom">
-                                                </dx:MenuItem>
-                                            </Items>
-                                            <ClientSideEvents ItemClick="OnCallbackMenuClick" />
-                                        </dx:ASPxPopupMenu>
-                                        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="260px" Height="250px"
-                                            MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="pcMain"
-                                            HeaderText="Select Date" Modal="true"
-                                            runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
-                                            <ContentCollection>
-                                                <dx:PopupControlContentControl runat="server">
-                                                    <asp:Panel ID="Panel1" runat="server">
-                                                        <table>
-                                                            <tr>
-                                                                <td>
-                                                                    <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False"></dx:ASPxCalendar>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                                                    <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" ClientSideEvents-Click="function(){ASPxPopupSelectDateControl.Hide();}" CssClass="rand-button rand-button-blue">
-                                                                        <ClientSideEvents Click="function(){
+                                        <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
+                                        <li style="margin-right: 30px; color: #7396a9; float: right">
+                                            <% If Not ShowLogPanel Then%>
+                                            <i class="fa fa-info-circle sale_head_button tooltip-examples" title="Show Property Info" onclick="ShowLogPanel()"></i>
+                                            <% End If%>
+                                            <i class="fa fa-calendar-o sale_head_button sale_head_button_left tooltip-examples" title="Schedule" onclick="ASPxPopupScheduleClient.PerformCallback();"></i>
+                                            <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus(5)"></i>
+                                            <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
+                                            <i class="fa fa-sign-in  sale_head_button sale_head_button_left tooltip-examples" title="Door Knock" onclick="SetLeadStatus(4)"></i>
+                                            <i class="fa fa-refresh sale_head_button sale_head_button_left tooltip-examples" title="In Process" onclick="aspxPopupInprocessClient.Show();"></i>
+                                            <i class="fa fa-times-circle sale_head_button sale_head_button_left tooltip-examples" title="Dead Lead" onclick="SetLeadStatus(6)"></i>
+                                            <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
+                                        </li>
+                                    </ul>
+                                    <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
+                                </div>
+                                <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
+                                    <ClientSideEvents CallbackComplete="OnSetStatusComplete" />
+                                </dx:ASPxCallback>
+                                <dx:ASPxCallback ID="callPhoneCallback" runat="server" ClientInstanceName="callPhoneCallbackClient" OnCallback="callPhoneCallback_Callback">
+                                    <ClientSideEvents CallbackComplete="OnCallPhoneCallbackComplete" />
+                                </dx:ASPxCallback>
+                                <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
+                                    AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+                                    ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                    <ItemStyle Paddings-PaddingLeft="20px" />
+                                    <Items>
+                                        <dx:MenuItem Text="Tomorrow" Name="Tomorrow"></dx:MenuItem>
+                                        <dx:MenuItem Text="Next Week" Name="nextWeek"></dx:MenuItem>
+                                        <dx:MenuItem Text="30 Days" Name="thirtyDays">
+                                        </dx:MenuItem>
+                                        <dx:MenuItem Text="60 Days" Name="sixtyDays">
+                                        </dx:MenuItem>
+                                        <dx:MenuItem Text="Custom" Name="Custom">
+                                        </dx:MenuItem>
+                                    </Items>
+                                    <ClientSideEvents ItemClick="OnCallbackMenuClick" />
+                                </dx:ASPxPopupMenu>
+                                <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="260px" Height="250px"
+                                    MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="pcMain"
+                                    HeaderText="Select Date" Modal="true"
+                                    runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
+                                    <ContentCollection>
+                                        <dx:PopupControlContentControl runat="server">
+                                            <asp:Panel ID="Panel1" runat="server">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False"></dx:ASPxCalendar>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
+                                                            <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" ClientSideEvents-Click="function(){ASPxPopupSelectDateControl.Hide();}" CssClass="rand-button rand-button-blue">
+                                                                <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                       
                                                                                                                         SetLeadStatus('customDays');
                                                                                                                         }"></ClientSideEvents>
-                                                                    </dx:ASPxButton>
-                                                                    &nbsp;
+                                                            </dx:ASPxButton>
+                                                            &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>
 
                                                             </dx:ASPxButton>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </asp:Panel>
-                                                </dx:PopupControlContentControl>
-                                            </ContentCollection>
-                                        </dx:ASPxPopupControl>
-                                        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupScheduleClient" Width="400px" Height="280px"
-                                            MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="aspxPopupSchedule"
-                                            HeaderText="Appointment" Modal="true" OnWindowCallback="aspxPopupSchedule_WindowCallback"
-                                            runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-                                            <HeaderTemplate>
-                                                <div class="clearfix">
-                                                    <div class="pop_up_header_margin">
-                                                        <i class="fa fa-clock-o with_circle pop_up_header_icon"></i>
-                                                        <span class="pop_up_header_text">Appointment</span>
-                                                    </div>
-                                                    <div class="pop_up_buttons_div">
-                                                        <i class="fa fa-times icon_btn" onclick="ASPxPopupScheduleClient.Hide()"></i>
-                                                    </div>
-                                                </div>
-                                            </HeaderTemplate>
-                                            <ContentCollection>
-                                                <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentSchedule">
-                                                    <dx:ASPxCallbackPanel runat="server" ID="appointmentCallpanel" ClientInstanceName="appointmentCallpanel" OnCallback="appointmentCallpanel_Callback">
-                                                        <PanelCollection>
-                                                            <dx:PanelContent>
-                                                                <dx:ASPxHiddenField runat="server" ID="HiddenFieldLogId" ClientInstanceName="hfLogIDClient"></dx:ASPxHiddenField>
-                                                                <dx:ASPxFormLayout ID="formLayout" runat="server" Width="100%" SettingsItemCaptions-Location="Top">
-                                                                    <Items>
-                                                                        <dx:LayoutItem Caption="Type">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                                                    <dx:ASPxComboBox runat="server" Width="100%" DropDownStyle="DropDown" ID="cbScheduleType">
-                                                                                        <Items>
-                                                                                            <dx:ListEditItem Text="Consultation" Value="Consultation" />
-                                                                                            <dx:ListEditItem Text="Signing" Value="Signing" />
-                                                                                        </Items>
-                                                                                    </dx:ASPxComboBox>
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Date">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                                                    <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="dateEditSchedule" ClientInstanceName="ScheduleDateClientCtr" TimeSectionProperties-Visible="True">
-                                                                                        <TimeSectionProperties Visible="True"></TimeSectionProperties>
-                                                                                        <ClientSideEvents DropDown="function(s,e){ 
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                        </dx:PopupControlContentControl>
+                                    </ContentCollection>
+                                </dx:ASPxPopupControl>
+                                <dx:ASPxPopupControl ClientInstanceName="ASPxPopupScheduleClient" Width="400px" Height="280px"
+                                    MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="aspxPopupSchedule"
+                                    HeaderText="Appointment" Modal="true" OnWindowCallback="aspxPopupSchedule_WindowCallback"
+                                    runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+                                    <HeaderTemplate>
+                                        <div class="clearfix">
+                                            <div class="pop_up_header_margin">
+                                                <i class="fa fa-clock-o with_circle pop_up_header_icon"></i>
+                                                <span class="pop_up_header_text">Appointment</span>
+                                            </div>
+                                            <div class="pop_up_buttons_div">
+                                                <i class="fa fa-times icon_btn" onclick="ASPxPopupScheduleClient.Hide()"></i>
+                                            </div>
+                                        </div>
+                                    </HeaderTemplate>
+                                    <ContentCollection>
+                                        <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentSchedule">
+                                            <dx:ASPxCallbackPanel runat="server" ID="appointmentCallpanel" ClientInstanceName="appointmentCallpanel" OnCallback="appointmentCallpanel_Callback">
+                                                <PanelCollection>
+                                                    <dx:PanelContent>
+                                                        <dx:ASPxHiddenField runat="server" ID="HiddenFieldLogId" ClientInstanceName="hfLogIDClient"></dx:ASPxHiddenField>
+                                                        <dx:ASPxFormLayout ID="formLayout" runat="server" Width="100%" SettingsItemCaptions-Location="Top">
+                                                            <Items>
+                                                                <dx:LayoutItem Caption="Type">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                                                            <dx:ASPxComboBox runat="server" Width="100%" DropDownStyle="DropDown" ID="cbScheduleType">
+                                                                                <Items>
+                                                                                    <dx:ListEditItem Text="Consultation" Value="Consultation" />
+                                                                                    <dx:ListEditItem Text="Signing" Value="Signing" />
+                                                                                </Items>
+                                                                            </dx:ASPxComboBox>
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Date">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                                                            <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="dateEditSchedule" ClientInstanceName="ScheduleDateClientCtr" TimeSectionProperties-Visible="True">
+                                                                                <TimeSectionProperties Visible="True"></TimeSectionProperties>
+                                                                                <ClientSideEvents DropDown="function(s,e){ 
                                                                     var d = new Date('May 1 2014 12:00:00');                                                                    
                                                                     s.GetTimeEdit().SetValue(d);
                                                                     }" />
-                                                                                    </dx:ASPxDateEdit>
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Location">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                                                    <dx:ASPxTextBox ID="txtLocation" runat="server" Width="100%" Text="In Office"></dx:ASPxTextBox>
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Manager">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                                                    <dx:ASPxComboBox runat="server" Width="100%" ID="cbMgr">
-                                                                                        <Items>
-                                                                                            <dx:ListEditItem Text="Any Manager" Value="*" />
-                                                                                            <dx:ListEditItem Text="Ron Borovinsky" Value="Ron Borovinsky" />
-                                                                                            <dx:ListEditItem Text="Michael Gendin" Value="Michael Gendin" />
-                                                                                            <dx:ListEditItem Text="Allen Glover" Value="Allen Glover" />
-                                                                                            <dx:ListEditItem Text="No Manager Needed" Value="" />
-                                                                                        </Items>
-                                                                                    </dx:ASPxComboBox>
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Comments">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                                                    <dx:ASPxMemo runat="server" ID="txtScheduleDescription" Width="100%" Height="180px" ClientInstanceName="ScheduleCommentsClientCtr"></dx:ASPxMemo>
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                        </dx:LayoutItem>
-                                                                    </Items>
-                                                                </dx:ASPxFormLayout>
-                                                                <table style="width: 100%">
-                                                                    <tr>
-                                                                        <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                                                            <dx:ASPxButton ID="ASPxButton3" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1">
-                                                                                <ClientSideEvents Click="OnSaveAppointment"></ClientSideEvents>
-                                                                            </dx:ASPxButton>
-                                                                            &nbsp;
+                                                                            </dx:ASPxDateEdit>
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Location">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                                                            <dx:ASPxTextBox ID="txtLocation" runat="server" Width="100%" Text="In Office"></dx:ASPxTextBox>
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Manager">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                                                            <dx:ASPxComboBox runat="server" Width="100%" ID="cbMgr">
+                                                                                <Items>
+                                                                                    <dx:ListEditItem Text="Any Manager" Value="*" />
+                                                                                    <dx:ListEditItem Text="Ron Borovinsky" Value="Ron Borovinsky" />
+                                                                                    <dx:ListEditItem Text="Michael Gendin" Value="Michael Gendin" />
+                                                                                    <dx:ListEditItem Text="Allen Glover" Value="Allen Glover" />
+                                                                                    <dx:ListEditItem Text="No Manager Needed" Value="" />
+                                                                                </Items>
+                                                                            </dx:ASPxComboBox>
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                                <dx:LayoutItem Caption="Comments">
+                                                                    <LayoutItemNestedControlCollection>
+                                                                        <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                                                            <dx:ASPxMemo runat="server" ID="txtScheduleDescription" Width="100%" Height="180px" ClientInstanceName="ScheduleCommentsClientCtr"></dx:ASPxMemo>
+                                                                        </dx:LayoutItemNestedControlContainer>
+                                                                    </LayoutItemNestedControlCollection>
+                                                                </dx:LayoutItem>
+                                                            </Items>
+                                                        </dx:ASPxFormLayout>
+                                                        <table style="width: 100%">
+                                                            <tr>
+                                                                <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
+                                                                    <dx:ASPxButton ID="ASPxButton3" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1">
+                                                                        <ClientSideEvents Click="OnSaveAppointment"></ClientSideEvents>
+                                                                    </dx:ASPxButton>
+                                                                    &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button" BackColor="#77787b">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupScheduleClient.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>
                                                             </dx:ASPxButton>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </dx:PanelContent>
-                                                        </PanelCollection>
-                                                    </dx:ASPxCallbackPanel>
-                                                </dx:PopupControlContentControl>
-                                            </ContentCollection>
-                                            <ClientSideEvents EndCallback="function(s,e){s.Show();}" />
-                                        </dx:ASPxPopupControl>
-                                    </dx:SplitterContentControl>                                    
-                                </ContentCollection>
-                            </dx:SplitterPane>
-                        </Panes>
-                    </dx:SplitterPane>
-                    <dx:SplitterPane Name="PreviewPanle" Collapsed="true" ContentUrl="javascript:false" Visible="false">
-                        <Separator Visible="False"></Separator>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </dx:PanelContent>
+                                                </PanelCollection>
+                                            </dx:ASPxCallbackPanel>
+                                        </dx:PopupControlContentControl>
+                                    </ContentCollection>
+                                    <ClientSideEvents EndCallback="function(s,e){s.Show();}" />
+                                </dx:ASPxPopupControl>
+                            </dx:SplitterContentControl>
+                        </ContentCollection>
                     </dx:SplitterPane>
                 </Panes>
                 <ClientSideEvents PaneCollapsed="function(s,e){}" />
@@ -730,7 +744,7 @@
                 <ClientSideEvents EndCallback="function(s,e){if(!isSave){s.Show();}else{s.Hide();ownerInfoCallbackPanel.PerformCallback();}}" />
             </dx:ASPxPopupControl>
             <uc1:SendMail runat="server" ID="SendMail" />
-            <uc1:EditHomeOwner runat="server" id="EditHomeOwner" />
+            <uc1:EditHomeOwner runat="server" ID="EditHomeOwner" />
         </dx:PanelContent>
     </PanelCollection>
     <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>

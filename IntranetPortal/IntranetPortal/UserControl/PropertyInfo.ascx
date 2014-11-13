@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PropertyInfo.ascx.vb" Inherits="IntranetPortal.PropertyInfo" %>
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 
-<script src="scripts/jquery.formatCurrency-1.1.0.js"></script>
+<script src="/scripts/jquery.formatCurrency-1.1.0.js"></script>
 <script type="text/javascript">
     function ShowAcrisMap(propBBLE) {
         //var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + propBBLE;
@@ -33,7 +33,10 @@
     }
 
     function init_currency() {
-        $('.input_currency').formatCurrency();
+        if(typeof $('.input_currency').formatCurrency != "undefined")
+        {
+            $('.input_currency').formatCurrency();
+        }
     }
 
     function SaveLeadsComments(s, e) {
@@ -486,11 +489,11 @@
                         </div>
                         <%----end line ----%>
 
-                        <div style="width: 66%; float: right; margin-top: -34%;">
+                        <div style="width: 66.5%; float: right; margin-top: -211px;margin-right:5px">
                             <div style="width: 40%;float:left; margin-top:10px" class="form_head">
                                 Tax Liens:
                             </div>
-                            <div style="float: right;width: 54%;">
+                            <div style="float: right;width: 53%;">
                                 <div class="form_div_node form_div_node_margin form_div_node_line_margin" style="width:87%">
                                     <span class="form_input_title">Tax Liens Date</span>
                                     <input class="text_input" value="<%= LeadsInfoData.TaxLiensDateText %>" id="Text1"/>
