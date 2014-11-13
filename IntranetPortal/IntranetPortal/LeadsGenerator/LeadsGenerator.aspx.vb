@@ -3,9 +3,9 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-        If (Not IsPostBack) Then
-            'DataBinds()
-        End If
+
+        DataBinds()
+
     End Sub
     Private Sub DataBinds()
         Using context As New Entities

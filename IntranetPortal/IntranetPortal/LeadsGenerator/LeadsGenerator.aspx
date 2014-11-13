@@ -324,8 +324,14 @@
                                                 <div style="margin: 0 10px; font-size: 36px">
                                                     <i class="fa fa-folder-open color_gray"></i>&nbsp;<span class="font_black">5 Results</span>
                                                 </div>
-                                                <div style="margin-top:30px">
+                                                <div style="margin-top: 30px">
                                                     <dx:ASPxGridView ID="QueryResultsGrid" runat="server" Width="100%">
+                                                        <Columns>
+                                                            <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" SelectAllCheckboxMode="AllPages">
+                                                            </dx:GridViewCommandColumn>
+                                                            <dx:GridViewDataColumn FieldName="LeadsName" VisibleIndex="1" />
+                                                        </Columns>
+
                                                     </dx:ASPxGridView>
                                                 </div>
                                             </div>
