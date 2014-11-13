@@ -11,14 +11,23 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class DoorknockChart
+Partial Public Class LeadsGenerator
 
     '''<summary>
-    '''cpPrint control.
+    '''ASPxSplitter1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cpPrint As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+
+    '''<summary>
+    '''QueryResultsGrid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents QueryResultsGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 End Class

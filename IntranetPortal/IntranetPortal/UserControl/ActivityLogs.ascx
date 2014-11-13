@@ -276,7 +276,7 @@
             addDate = new Date();
 
         addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + commentHtml + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate").val());
-        EmailBody.setHtml(" ");
+        EmailBody.SetHtml("");
     }
 
     function OnCommentsKeyDown(e) {

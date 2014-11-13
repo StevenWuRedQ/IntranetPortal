@@ -1897,6 +1897,14 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
         /*padding-top:3px;*/
     }
 
+        .html_edit_div div div table tbody tr td table tbody tr td table tbody tr td {
+            border: none;
+        }
+
+.dxheDesignViewArea_MetropolisBlue1 {
+    border: none !important;
+}
+
 .select_bootstrap {
     padding: 5px;
     min-width: 120px;
@@ -2023,10 +2031,54 @@ td.vendor_info_left {
     height: 26px;
     margin: 0;
     border: 0;
-    margin-bottom:2px;
+    margin-bottom: 2px;
     box-shadow: none;
 }
-.rand-button-padding
+
+.rand-button-padding {
+    padding: 9px 20px;
+}
+
+.title_icon {
+    line-height: 48px;
+    border: 1px solid;
+    border-radius: 24px;
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.title_text {
+    font-size: 37px;
+    font-weight: 300;
+    color: #234b60;
+    margin-left: 10px;
+}
+
+.selectpicker,.query_input
 {
-    padding:9px 20px;
+    background:#f5f5f5;
+}
+.query_input_40percent
+{
+    width:38% !important;
+}
+
+.query_input_60percent
+{
+    width:58% !important;
+    
+}
+.query_input_30percent
+{
+    width: 32.6% !important;
+}
+.query_input_60percent,.query_input_margin
+{
+    margin-left:10px;
+}
+.query_input_10percent
+{
+    width:10% !important;
 }

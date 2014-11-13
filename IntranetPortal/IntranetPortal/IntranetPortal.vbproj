@@ -596,6 +596,13 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LeadsGenerator\LeadsGenerator.aspx.designer.vb">
+      <DependentUpon>LeadsGenerator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LeadsGenerator\LeadsGenerator.aspx.vb">
+      <DependentUpon>LeadsGenerator.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\ImportAgentData.aspx.designer.vb">
       <DependentUpon>ImportAgentData.aspx</DependentUpon>
     </Compile>
@@ -1295,6 +1302,7 @@
     <Content Include="images\imprimir.png" />
     <Content Include="images\inprogess_icon_s.png" />
     <Content Include="images\logo.png" />
+    <Content Include="images\logo_black.jpg" />
     <Content Include="images\lr_dev_opportunity.png" />
     <Content Include="images\lr_forecosure.png" />
     <Content Include="images\lr_has_equity.png" />
@@ -1519,6 +1527,7 @@
     <Content Include="js\release\jquery-ui.js" />
     <Content Include="js\release\jquery.js" />
     <Content Include="js\release\usr_v2_5_16.js" />
+    <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />
     <Content Include="Management\LeadsDataManage.aspx" />
