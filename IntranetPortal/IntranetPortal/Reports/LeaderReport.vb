@@ -638,7 +638,6 @@ Public Class LeaderReport
         '
         'chkOtherLiensYes
         '
-        Me.chkOtherLiensYes.DataBindings.AddRange(New DevExpress.XtraReports.UI.XRBinding() {New DevExpress.XtraReports.UI.XRBinding("CheckState", Nothing, "ALL_NYC_Tax_Liens_CO_Info.IsOtherLiens")})
         Me.chkOtherLiensYes.LocationFloat = New DevExpress.Utils.PointFloat(112.625!, 162.5!)
         Me.chkOtherLiensYes.Name = "chkOtherLiensYes"
         Me.chkOtherLiensYes.SizeF = New System.Drawing.SizeF(49.87501!, 23.0!)

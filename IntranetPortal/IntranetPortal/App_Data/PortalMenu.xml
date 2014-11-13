@@ -66,6 +66,8 @@
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
       </PortalNavItem>
+      
+      
     </Items>
   </PortalNavItem>
 
@@ -183,6 +185,11 @@
         </FontClass>
       </PortalNavItem>
     </Items>
+    <PortalNavItem Name="AdvanceQuery" Text="Advanced Query" NavigationUrl="/LeadsGenerator/LeadsGenerator.aspx" ShowAmount="false">
+      <FontClass>
+        <![CDATA[<i class="fa fa-search-plus"></i>]]>
+      </FontClass>
+    </PortalNavItem>
   </PortalNavItem>
 
   <PortalNavItem Name="ShortSale" Text="Short Sale" NavigationUrl="#" ShowAmount="false" ItemType="ShortSale" Visible="true">
