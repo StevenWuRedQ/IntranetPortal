@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Threading
 Imports System.Web.Script.Serialization
+Imports System.Reflection
 
 Public Class LeadsDataManage
     Inherits System.Web.UI.Page
@@ -97,7 +98,7 @@ Public Class LeadsDataManage
 
     Protected Sub checkProgress_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         Dim leadsDs = LeadsDataService.GetInstance()
-        e.Result = jsonString(leadsDs)
+        e.Result = JSONString(leadsDs)
     End Sub
 
     Sub StartService()
@@ -432,6 +433,5 @@ InitialLine:
         End Enum
     End Class
 
- 
-    
+  
 End Class

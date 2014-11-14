@@ -3,6 +3,7 @@ Public Class LeadsEscalationRule
     Public Shared Sub Execute(ld As Lead)
         For Each Rule In GetRule(ld)
             If Rule.IsDateDue(ld.LastUpdate2, ld) Then
+                ServiceLog.Log("Execute Leaeds Rule: " & ld.BBLE)
                 Rule.Execute(ld)
                 Return
             End If

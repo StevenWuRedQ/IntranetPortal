@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="LeadsManagement.aspx.vb" Inherits="IntranetPortal.LeadsManagement" MasterPageFile="~/Content.Master" %>
+
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 <%@ Register Src="~/UserControl/AssignRulesControl.ascx" TagPrefix="uc1" TagName="AssignRulesControl" %>
@@ -140,7 +141,7 @@
                                         <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
                                     </span>
                                 </div>
-                          
+
                             </div>
                             <dx:ASPxPopupMenu ID="ASPxPopupMenu3" runat="server" ClientInstanceName="leadsTypeMenu"
                                 AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -196,7 +197,7 @@
                                         <dx:ASPxLabel Text="Select Employee:" ID="ASPxLabel1" runat="server" Font-Size="Large"></dx:ASPxLabel>
                                     </td>
                                     <td>
-                                        <dx:ASPxComboBox runat="server" ID="listboxEmployee" TextField="Name" ValueField="EmployeeID" DropDownStyle="DropDownList" IncrementalFilteringMode="StartsWith">
+                                        <dx:ASPxComboBox runat="server" CssClass="edit_drop" ID="listboxEmployee" TextField="Name" ValueField="EmployeeID" DropDownStyle="DropDownList" IncrementalFilteringMode="StartsWith">
                                         </dx:ASPxComboBox>
                                     </td>
                                     <td>

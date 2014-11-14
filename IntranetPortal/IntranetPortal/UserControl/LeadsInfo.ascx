@@ -439,9 +439,9 @@
                                             <i class="fa fa-info-circle sale_head_button tooltip-examples" title="Show Property Info" onclick="ShowLogPanel()"></i>
                                             <% End If%>
                                             <i class="fa fa-calendar-o sale_head_button sale_head_button_left tooltip-examples" title="Schedule" onclick="ASPxPopupScheduleClient.PerformCallback();"></i>
-                                            <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus('5|' + leadsInfoBBLE);"></i>
+                                            <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus(5);"></i>
                                             <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
-                                            <i class="fa fa-sign-in  sale_head_button sale_head_button_left tooltip-examples" title="Door Knock" onclick="SetLeadStatus('4|' + leadsInfoBBLE);"></i>
+                                            <i class="fa fa-sign-in  sale_head_button sale_head_button_left tooltip-examples" title="Door Knock" onclick="SetLeadStatus(4);"></i>
                                             <i class="fa fa-refresh sale_head_button sale_head_button_left tooltip-examples" title="In Process" onclick="ShowInProcessPopup(leadsInfoBBLE);"></i>
                                             <i class="fa fa-times-circle sale_head_button sale_head_button_left tooltip-examples" title="Dead Lead" onclick="ShowDeadLeadsPopup(leadsInfoBBLE);"></i>
                                             <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>

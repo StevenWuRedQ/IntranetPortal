@@ -3,6 +3,7 @@ Public Class TaskEscalationRule
     Public Shared Sub Excute(t As UserTask)
         Dim rule = GetRule(t)
         If rule.IsDateDue(If(t.NotifyDate.HasValue, t.NotifyDate, t.CreateDate)) Then
+            ServiceLog.Log("Execute Task Rule: " & t.BBLE & ", Task Id: " & t.TaskID)
             rule.Execute(t)
         End If
     End Sub

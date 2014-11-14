@@ -45,29 +45,26 @@
         function RefreshProgress(result) {
             //alert(result);
             var leadsDataService = eval("(" + result + ")");
-            if (leadsDataService)
-            {
+            if (leadsDataService) {
                 lblServiceStatus.SetText("Leads Data Service Status: " + leadsDataService.StatusString);
 
                 if (leadsDataService.Status == 1) {
                     var percent = parseInt((leadsDataService.CurrentIndex + 1) / leadsDataService.TotalCount)
-                    ProgressBar.SetValue(percent);                   
+                    ProgressBar.SetValue(percent);
                     callbackLogs.PerformCallback();
-                }                
+                }
             }
             //alert(leadsDataService.Status);
-                      
+
             window.setTimeout(function () { CheckProgress.PerformCallback(); }, 1000);
         }
 
-        function BindLogs(result)
-        {
+        function BindLogs(result) {
             var logs = eval("(" + result + ")");
 
             var table = document.getElementById("tblServiceLogs");
-            
-            for(var i=0; i<logs.length;i++)
-            {
+
+            for (var i = 0; i < logs.length; i++) {
                 var log = logs[i];
                 // Create an empty <tr> element and add it to the 1st position of the table:
                 var row = table.insertRow(1);
@@ -157,7 +154,7 @@
                                         <dx:ASPxButton Text="Import" RenderMode="Link" runat="server" ID="ASPxButton2" AutoPostBack="false">
                                             <ClientSideEvents Click="function(s,e){ImportFile();}" />
                                         </dx:ASPxButton>
-                                        <dx:ASPxButton Text="Refresh" RenderMode="Link"  runat="server" ID="btnRefresh" AutoPostBack="false">
+                                        <dx:ASPxButton Text="Refresh" RenderMode="Link" runat="server" ID="btnRefresh" AutoPostBack="false">
                                             <ClientSideEvents Click="function(s,e){ gridLeadsData.Refresh();}" />
                                         </dx:ASPxButton>
                                     </td>
@@ -168,7 +165,7 @@
                                     <dx:GridViewDataTextColumn FieldName="BBLE"></dx:GridViewDataTextColumn>
                                     <dx:GridViewDataTextColumn FieldName="Type"></dx:GridViewDataTextColumn>
                                     <dx:GridViewDataTextColumn FieldName="Agent_Name"></dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataDateColumn FieldName="ScheduleDate">                                        
+                                    <dx:GridViewDataDateColumn FieldName="ScheduleDate">
                                     </dx:GridViewDataDateColumn>
                                 </Columns>
                                 <SettingsEditing Mode="Batch"></SettingsEditing>
@@ -181,21 +178,29 @@
                         <dx:SplitterPane PaneStyle-Paddings-Padding="5px">
                             <ContentCollection>
                                 <dx:SplitterContentControl>
-                                    <h3>Service Status</h3>
-                                    <div style="float: left">
-                                        <dx:ASPxButton runat="server" ID="btnStart" Text="Start" AutoPostBack="false">
-                                            <ClientSideEvents  Click="function(s,e){ RunService('Start'); }" />
-                                        </dx:ASPxButton>
-                                        <dx:ASPxButton runat="server" ID="ASPxButton3" Text="Suspend" AutoPostBack="false">
-                                            <ClientSideEvents  Click="function(s,e){ RunService('Suspend'); }" />
-                                        </dx:ASPxButton>
-                                        <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Stop" AutoPostBack="false">
-                                            <ClientSideEvents  Click="function(s,e){ RunService('Stop'); }" />
-                                        </dx:ASPxButton>
-                                    </div>
-                                    <div style="clear: both">
-                                        <dx:ASPxLabel runat="server" Text="Service Status: " ClientInstanceName="lblServiceStatus"></dx:ASPxLabel>
-                                    </div>
+                                    <table style="width:100%">
+                                        <tr>
+                                            <td>
+                                                <h3>Data Loop Service Status</h3>
+                                                <div style="float: left">
+                                                    <dx:ASPxButton runat="server" ID="btnStart" Text="Start" AutoPostBack="false">
+                                                        <ClientSideEvents Click="function(s,e){ RunService('Start'); }" />
+                                                    </dx:ASPxButton>
+                                                    <dx:ASPxButton runat="server" ID="ASPxButton3" Text="Suspend" AutoPostBack="false">
+                                                        <ClientSideEvents Click="function(s,e){ RunService('Suspend'); }" />
+                                                    </dx:ASPxButton>
+                                                    <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Stop" AutoPostBack="false">
+                                                        <ClientSideEvents Click="function(s,e){ RunService('Stop'); }" />
+                                                    </dx:ASPxButton>
+                                                </div>
+                                                <div style="clear: both">
+                                                    <dx:ASPxLabel runat="server" Text="Service Status: " ClientInstanceName="lblServiceStatus"></dx:ASPxLabel>
+                                                </div>
+                                            </td>
+                                            <td>                                            
+                                            </td>
+                                        </tr>
+                                    </table>
                                     <table>
                                         <tr>
                                             <td style="width: 80px">
@@ -238,37 +243,36 @@
                                     </dx:ASPxProgressBar>
                                     <dx:ASPxCallback runat="server" ID="checkProgress" ClientInstanceName="CheckProgress" OnCallback="checkProgress_Callback">
                                         <ClientSideEvents CallbackComplete="function(s,e){ RefreshProgress(e.result); }" />
-                                    </dx:ASPxCallback>                                   
+                                    </dx:ASPxCallback>
                                 </dx:SplitterContentControl>
                             </ContentCollection>
                         </dx:SplitterPane>
                         <dx:SplitterPane ScrollBars="Auto" PaneStyle-Paddings-Padding="5px">
                             <ContentCollection>
                                 <dx:SplitterContentControl>
-                                     <h3>Service Logs</h3>                                   
-                                    <table style="width:100%; overflow:scroll;" id="tblServiceLogs">
-                                        <thead style="background-color:#efefef;">
-                                            <tr style="height:30px">
-                                                <td style="width:50px">#Id</td>
-                                                <td style="width:120px">BBLE</td>
-                                                <td style="width:200px">Title</td>
+                                    <h3>Service Logs</h3>
+                                    <table style="width: 100%; overflow: scroll;" id="tblServiceLogs">
+                                        <thead style="background-color: #efefef;">
+                                            <tr style="height: 30px">
+                                                <td style="width: 50px">#Id</td>
+                                                <td style="width: 120px">BBLE</td>
+                                                <td style="width: 200px">Title</td>
                                                 <td>Message</td>
-                                                <td style="width:150px">Date Time</td>
+                                                <td style="width: 150px">Date Time</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-
                                             </tr>
                                         </tbody>
-                                    </table>                                      
+                                    </table>
                                 </dx:SplitterContentControl>
                             </ContentCollection>
                         </dx:SplitterPane>
                     </Panes>
                 </dx:SplitterPane>
             </Panes>
-        </dx:ASPxSplitter>
+        </dx:ASPxSplitter>       
         <dx:ASPxCallback runat="server" ID="callBackService" ClientInstanceName="callBackService" OnCallback="callBackService_Callback">
         </dx:ASPxCallback>
         <dx:ASPxCallback runat="server" ID="ASPxCallback1" ClientInstanceName="CheckProgress" OnCallback="checkProgress_Callback">

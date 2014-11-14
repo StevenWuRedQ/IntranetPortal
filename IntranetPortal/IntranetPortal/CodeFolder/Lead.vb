@@ -84,15 +84,13 @@
     End Function
 
     Public Shared Function GetAllActiveLeads() As List(Of Lead)
-        Using ctx As New Entities
-            Dim emps = Employee.GetAllActiveEmps()
+        Dim ctx As New Entities
+        Dim emps = Employee.GetAllActiveEmps()
 
-            Dim results = (From ld In ctx.Leads
-                          Where emps.Contains(ld.EmployeeName) And (ld.Status <> LeadStatus.DeadEnd And ld.Status <> LeadStatus.InProcess)
-                          Select ld).ToList
-
-            Return results
-        End Using
+        Dim results = (From ld In ctx.Leads
+                      Where emps.Contains(ld.EmployeeName) And (ld.Status <> LeadStatus.DeadEnd And ld.Status <> LeadStatus.InProcess)
+                      Select ld).ToList
+        Return results
     End Function
 
     Public Sub ReAssignLeads(empName As String)
