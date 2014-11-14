@@ -250,6 +250,9 @@ Public Class LeadsInfo1
                     Dim bble = e.Parameter.Split("|")(1)
                     UpdateLeadStatus(bble, LeadStatus.DeadEnd, Nothing)
                 Else
+                    Dim reason = cbDeadReasons.Text
+                    Dim description = txtDeadLeadDescription.Text
+
                     UpdateLeadStatus(hfBBLE.Value, LeadStatus.DeadEnd, Nothing)
                 End If
             End If

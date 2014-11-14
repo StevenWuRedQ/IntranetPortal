@@ -356,13 +356,22 @@ Partial Public Class LeadsInfo1
     Protected WithEvents ASPxPopupControl4 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
-    '''ASPxCheckBoxList1 control.
+    '''cbDeadReasons control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxCheckBoxList1 As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
+    Protected WithEvents cbDeadReasons As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
+    '''txtDeadLeadDescription control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDeadLeadDescription As Global.DevExpress.Web.ASPxEditors.ASPxMemo
 
     '''<summary>
     '''ASPxPopupControl2 control.

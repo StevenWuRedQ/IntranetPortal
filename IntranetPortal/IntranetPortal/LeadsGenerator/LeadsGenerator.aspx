@@ -29,6 +29,10 @@
                                 <label class="upcase_text">Location and Neighborhood </label>
                                 <div class="form-inline">
                                     <select class="selectpicker form-control query_input_40percent" multiple>
+                                        <optgroup label="Borough">
+                                            <option value="Borough">All</option>
+                                            <option value="Borough">Bronx</option>
+                                        </optgroup>
                                         <option value="Borough">Borough</option>
                                         <option value="Zip">Zip</option>
                                     </select>
