@@ -52,7 +52,7 @@
 <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
     HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true" CloseAction="CloseButton"
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-     <HeaderTemplate>
+    <HeaderTemplate>
         <div class="clearfix">
             <div class="pop_up_header_margin">
                 <i class="fa fa-cloud-upload with_circle pop_up_header_icon"></i>
@@ -134,6 +134,104 @@
         </dx:PopupControlContentControl>
     </ContentCollection>
 </dx:ASPxPopupControl>
+
+<dx:ASPxPopupControl ClientInstanceName="aspxPopupInprocessClient" Width="356px" Height="350px" ID="ASPxPopupControl4"
+   Modal="true" ShowFooter="true" OnWindowCallback="ASPxPopupControl4_WindowCallback"  runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <HeaderTemplate>
+        <div class="clearfix">
+            <div class="pop_up_header_margin">
+                <i class="fa fa-mail-forward with_circle pop_up_header_icon"></i>
+                <span class="pop_up_header_text">In Process</span>
+            </div>
+            <div class="pop_up_buttons_div">
+                <i class="fa fa-times icon_btn" onclick="aspxPopupInprocessClient.Hide()"></i>
+            </div>
+        </div>
+    </HeaderTemplate>
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server" ID="popupContentInProcess" Visible="false">
+            <asp:HiddenField runat="server" ID="hfInProcessBBLE" />
+            <dx:ASPxCheckBoxList ID="lbSelectionMode" runat="server" AutoPostBack="false" Border-BorderStyle="None">
+                <Items>
+                    <dx:ListEditItem Text="Short Sale" Value="0" />
+                    <dx:ListEditItem Text="Evition" Value="1" />
+                    <dx:ListEditItem Text="Construction" Value="2" />
+                </Items>
+            </dx:ASPxCheckBoxList>
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+    <FooterContentTemplate>
+        <div style="height: 30px; vertical-align: central">
+            <span class="time_buttons" onclick="aspxPopupInprocessClient.Hide()">Cancel</span>
+            <span class="time_buttons" onclick="popupShow=false; aspxPopupInprocessClient.PerformCallback('Save');">Confirm</span>
+        </div>
+    </FooterContentTemplate>
+    <ClientSideEvents EndCallback="function(s,e){
+        if(popupShow)
+            s.Show();
+        else{
+            s.Hide();
+            OnSetStatusComplete(s,e);
+        }
+        }" />
+</dx:ASPxPopupControl>
+
+<dx:ASPxPopupControl ClientInstanceName="aspxPopupDeadLeadsClient" Width="356px" Height="350px" ID="ASPxPopupControl5" Modal="true" ShowFooter="true" OnWindowCallback="ASPxPopupControl5_WindowCallback"
+    runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <HeaderTemplate>
+        <div class="clearfix">
+            <div class="pop_up_header_margin">
+                <i class="fa fa-mail-forward with_circle pop_up_header_icon"></i>
+                <span class="pop_up_header_text">Dead Leads</span>
+            </div>
+            <div class="pop_up_buttons_div">
+                <i class="fa fa-times icon_btn" onclick="aspxPopupDeadLeadsClient.Hide()"></i>
+            </div>
+        </div>
+    </HeaderTemplate>
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server" ID="popupContentDeadLeads" Visible="false">
+            <asp:HiddenField runat="server" ID="hfBBLE" />
+            <div style="color: #b1b2b7;">
+                <div class="form-group ">
+                    <label class="upcase_text">Select Reason</label>
+                    <dx:ASPxComboBox ID="cbDeadReasons" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">
+                        <Items>
+                            <dx:ListEditItem Text="Deed Recorded with Other Party" Value="0" />
+                            <dx:ListEditItem Text="Working towards a Loan MOD" Value="1" />
+                            <dx:ListEditItem Text="Working towards a short sale with another company" Value="2" />
+                            <dx:ListEditItem Text="MOD Completed" Value="2" />
+                            <dx:ListEditItem Text="Not Interested" Value="2" />
+                            <dx:ListEditItem Text="Unable to contact" Value="2" />
+                            <dx:ListEditItem Text="Manager disapproved" Value="2" />
+                        </Items>
+                        <ClientSideEvents SelectedIndexChanged="function(s,e){}" />
+                    </dx:ASPxComboBox>
+                </div>
+                <div class="form-group ">
+                    <label class="upcase_text" style="display: block">Description</label>
+                    <dx:ASPxMemo runat="server" Width="100%" Height="115px" ID="txtDeadLeadDescription" CssClass="edit_text_area"></dx:ASPxMemo>
+                </div>
+            </div>
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+    <FooterContentTemplate>
+        <div style="height: 30px; vertical-align: central">
+            <span class="time_buttons" onclick="aspxPopupDeadLeadsClient.Hide()">Cancel</span>
+            <span class="time_buttons" onclick="popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('Save');">Confirm</span>
+        </div>
+    </FooterContentTemplate>
+    <ClientSideEvents EndCallback="function(s,e){
+        if(popupShow)
+            s.Show();
+        else{
+            s.Hide();
+            OnSetStatusComplete(s,e);
+        }
+        }" />
+</dx:ASPxPopupControl>
+
+
 <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
     <ClientSideEvents CallbackComplete="OnSetStatusComplete" />
 </dx:ASPxCallback>

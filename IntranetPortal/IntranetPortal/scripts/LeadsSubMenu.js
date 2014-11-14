@@ -151,10 +151,17 @@ function OnLeadsCategoryClick(s, e) {
             SetLeadStatus('Tomorrow' + '|' + tmpBBLE);
 
         if (e.item.name == "DeadLead")
-            SetLeadStatus('6' + '|' + tmpBBLE);
+        {
+            debugger;
+            ShowDeadLeadsPopup(tmpBBLE);
+            //SetLeadStatus('6' + '|' + tmpBBLE);
+        }
 
         if (e.item.name == "InProcess")
-            SetLeadStatus('7' + '|' + tmpBBLE)
+        {
+            //SetLeadStatus('7' + '|' + tmpBBLE);
+            ShowInProcessPopup(tmpBBLE);
+        }        
 
         if (e.item.name == "Closed")
             SetLeadStatus('8' + '|' + tmpBBLE)
@@ -197,6 +204,19 @@ function OnLeadsCategoryClick(s, e) {
     }
 
     e.item.SetChecked(false);
+}
+
+var popupShow = true;
+function ShowDeadLeadsPopup(tmpBBLE)
+{
+    popupShow = true;
+    aspxPopupDeadLeadsClient.PerformCallback("Show|" + tmpBBLE);
+}
+
+function ShowInProcessPopup(tmpBBLE)
+{
+    popupShow = true;
+    aspxPopupInprocessClient.PerformCallback("Show|" + tmpBBLE);  
 }
 
 function popup_params(width, height) {
@@ -266,6 +286,12 @@ function OnSetStatusComplete(s, e) {
 
     if (typeof gridCallbackClient != "undefined")
         gridCallbackClient.Refresh();
+
+    if (typeof gridLeads != "undefined")        
+        gridLeads.Refresh();
+
+    if (typeof gridTrackingClient != "undefined")
+        gridTrackingClient.Refresh();
 }
 
 function NavigateURL(type, bble) {

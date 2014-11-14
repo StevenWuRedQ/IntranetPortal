@@ -780,9 +780,5 @@
         </Items>
         <ClientSideEvents ItemClick="OnSortMenuClick" />
     </dx:ASPxPopupMenu>
-
-    <%--  <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
-        <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
-    </dx:ASPxCallback>--%>
 </div>
 

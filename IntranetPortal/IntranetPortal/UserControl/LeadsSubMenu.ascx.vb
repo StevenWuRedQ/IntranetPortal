@@ -100,6 +100,11 @@ Public Class LeadsSubMenu
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)
                     UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing)
+
+                    If Not String.IsNullOrEmpty(lbSelectionMode.Value) AndAlso lbSelectionMode.Value = 0 Then
+                        'Add leads to short sale section
+                        ShortSaleManage.MoveLeadsToShortSale(hfBBLE.Value, Page.User.Identity.Name)
+                    End If
                 End If
             End If
 
@@ -128,5 +133,49 @@ Public Class LeadsSubMenu
     Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         PopupContentReAssign.Visible = True
         BindEmployeeList()
+    End Sub
+
+    'Dead Leads Popup
+    Protected Sub ASPxPopupControl5_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        popupContentDeadLeads.Visible = True
+        If (e.Parameter.StartsWith("Show")) Then
+            Dim bble = e.Parameter.Split("|")(1)
+            hfBBLE.Value = bble
+        End If
+
+        If e.Parameter.StartsWith("Save") Then
+            Dim reason = cbDeadReasons.Text
+            Dim description = txtDeadLeadDescription.Text
+
+            UpdateLeadStatus(hfBBLE.Value, LeadStatus.DeadEnd, Nothing)
+
+            Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Dead Reason:</td>" &
+                            "<td>{0}</td></tr>" &
+                            "<tr><td>Description:</td><td>{1}</td></tr>" &
+                          "</table>", reason, description)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.DeadLead)
+
+            cbDeadReasons.Text = ""
+            txtDeadLeadDescription.Text = ""
+        End If
+    End Sub
+
+    'In Process Popup
+    Protected Sub ASPxPopupControl4_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        popupContentInProcess.Visible = True
+        If (e.Parameter.StartsWith("Show")) Then
+            Dim bble = e.Parameter.Split("|")(1)
+            hfInProcessBBLE.Value = bble
+        End If
+
+        If e.Parameter.StartsWith("Save") Then
+            Dim bble = hfInProcessBBLE.Value
+            UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing)
+
+            If Not String.IsNullOrEmpty(lbSelectionMode.Value) AndAlso lbSelectionMode.Value = 0 Then
+                'Add leads to short sale section
+                ShortSaleManage.MoveLeadsToShortSale(hfInProcessBBLE.Value, Page.User.Identity.Name)
+            End If
+        End If
     End Sub
 End Class

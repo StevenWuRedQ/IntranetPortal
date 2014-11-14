@@ -579,7 +579,7 @@ Public Class ActivityLogs
                 _commentIconList.Add(LeadsActivityLog.EnumActionType.HotLeads, GetIcon("activity_color_info", "fa fa-info"))
                 _commentIconList.Add(LeadsActivityLog.EnumActionType.Print, GetIcon("activity_color_print", "fa fa-print"))
                 _commentIconList.Add(LeadsActivityLog.EnumActionType.Reassign, GetIcon("activity_color_check", "fa fa-mail-forward"))
-
+                _commentIconList.Add(LeadsActivityLog.EnumActionType.DeadLead, GetIcon("activity_red_bg", "fa fa-times-circle"))
             End If
 
             Return _commentIconList

@@ -86,6 +86,7 @@
         Approved = 12
         Declined = 13
         Reassign = 14
+        DeadLead = 15
     End Enum
 
 End Class

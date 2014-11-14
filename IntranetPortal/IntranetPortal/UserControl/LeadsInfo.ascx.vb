@@ -78,9 +78,6 @@ Public Class LeadsInfo1
                     End If
                 End If
 
-                'formlayoutLeadsInfo.DataSource = leadsinfodata
-                'formlayoutLeadsInfo.DataBind()
-
                 PropertyInfo.LeadsInfoData = leadsinfodata
                 PropertyInfo.BindData()
 
@@ -88,13 +85,6 @@ Public Class LeadsInfo1
                     'CType(formlayoutLeadsInfo.FindNestedControlByFieldName("C1stMotgrAmt"), ASPxTextBox).Text = leadsinfodata.C2ndMotgrAmt
                     'CType(formlayoutLeadsInfo.FindNestedControlByFieldName("C2ndMotgrAmt"), ASPxTextBox).Text = leadsinfodata.C1stMotgrAmt
                 End If
-
-                'formlayoutOwnerInfo.DataSource = lead.LeadsInfo
-                'formlayoutOwnerInfo.DataBind()
-
-                'If leadsinfodata.UpdateInfo = "" Then
-                '    'formlayoutLeadsInfo.FindItemByFieldName("UpdateInfo").Visible = False
-                'End If
 
                 'Bind files info
                 'DocumentsUI.BindFileList(bble)
@@ -250,10 +240,16 @@ Public Class LeadsInfo1
                     Dim bble = e.Parameter.Split("|")(1)
                     UpdateLeadStatus(bble, LeadStatus.DeadEnd, Nothing)
                 Else
-                    Dim reason = cbDeadReasons.Text
-                    Dim description = txtDeadLeadDescription.Text
+                    'Dim reason = cbDeadReasons.Text
+                    'Dim description = txtDeadLeadDescription.Text
 
-                    UpdateLeadStatus(hfBBLE.Value, LeadStatus.DeadEnd, Nothing)
+                    'UpdateLeadStatus(hfBBLE.Value, LeadStatus.DeadEnd, Nothing)
+
+                    'Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Dead Reason:</td>" &
+                    '                "<td>{0}</td></tr>" &
+                    '                "<tr><td>Description:</td><td>{1}</td></tr>" &
+                    '              "</table>", reason, description)
+                    'LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.DeadLead)
                 End If
             End If
 
@@ -268,10 +264,7 @@ Public Class LeadsInfo1
                 Else
                     UpdateLeadStatus(hfBBLE.Value, LeadStatus.InProcess, Nothing)
 
-                    If Not String.IsNullOrEmpty(lbSelectionMode.Value) AndAlso lbSelectionMode.Value = 0 Then
-                        'Add leads to short sale section
-                        ShortSaleManage.MoveLeadsToShortSale(hfBBLE.Value, Page.User.Identity.Name)
-                    End If
+                  
                 End If
             End If
 
