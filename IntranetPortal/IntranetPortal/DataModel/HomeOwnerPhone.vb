@@ -18,5 +18,19 @@ Partial Public Class HomeOwnerPhone
     Public Property Type As String
     Public Property Source As Nullable(Of Integer)
     Public Property Description As String
+    Public Property _stuats As Integer
+
+    Public ReadOnly Property Stuats As Integer
+        Get
+            Using Context As New Entities
+                Dim con = Context.OwnerContacts.Where(Function(c) c.BBLE = BBLE And Regex.Replace(c.Contact, "[^\d]", "") = Phone).FirstOrDefault
+                If (con IsNot Nothing) Then
+                    Return con.Status
+                End If
+            End Using
+
+            Return 100
+        End Get
+    End Property
 
 End Class

@@ -48,6 +48,10 @@
             }
         }
         e.item.SetChecked(false);
+        if(sortPhones)
+        {
+            sortPhones();
+        }
     }
 
     function SetSameStyle(className, style, value) {
@@ -532,7 +536,7 @@
                                                                 <dx:LayoutItem Caption="Type">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                                            <dx:ASPxComboBox runat="server" Width="100%" DropDownStyle="DropDown" ID="cbScheduleType">
+                                                                            <dx:ASPxComboBox runat="server" Width="100%" DropDownStyle="DropDown" ID="cbScheduleType" CssClass="edit_drop">
                                                                                 <Items>
                                                                                     <dx:ListEditItem Text="Consultation" Value="Consultation" />
                                                                                     <dx:ListEditItem Text="Signing" Value="Signing" />
@@ -544,7 +548,7 @@
                                                                 <dx:LayoutItem Caption="Date">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                                            <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="dateEditSchedule" ClientInstanceName="ScheduleDateClientCtr" TimeSectionProperties-Visible="True">
+                                                                            <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="dateEditSchedule" ClientInstanceName="ScheduleDateClientCtr" TimeSectionProperties-Visible="True" CssClass="edit_drop">
                                                                                 <TimeSectionProperties Visible="True"></TimeSectionProperties>
                                                                                 <ClientSideEvents DropDown="function(s,e){ 
                                                                     var d = new Date('May 1 2014 12:00:00');                                                                    
@@ -557,14 +561,14 @@
                                                                 <dx:LayoutItem Caption="Location">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                                            <dx:ASPxTextBox ID="txtLocation" runat="server" Width="100%" Text="In Office"></dx:ASPxTextBox>
+                                                                            <dx:ASPxTextBox ID="txtLocation" runat="server" Width="100%" Text="In Office" CssClass="edit_drop"></dx:ASPxTextBox>
                                                                         </dx:LayoutItemNestedControlContainer>
                                                                     </LayoutItemNestedControlCollection>
                                                                 </dx:LayoutItem>
                                                                 <dx:LayoutItem Caption="Manager">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                                            <dx:ASPxComboBox runat="server" Width="100%" ID="cbMgr">
+                                                                            <dx:ASPxComboBox runat="server" Width="100%" ID="cbMgr" CssClass="edit_drop">
                                                                                 <Items>
                                                                                     <dx:ListEditItem Text="Any Manager" Value="*" />
                                                                                     <dx:ListEditItem Text="Ron Borovinsky" Value="Ron Borovinsky" />
@@ -579,7 +583,7 @@
                                                                 <dx:LayoutItem Caption="Comments">
                                                                     <LayoutItemNestedControlCollection>
                                                                         <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                                            <dx:ASPxMemo runat="server" ID="txtScheduleDescription" Width="100%" Height="180px" ClientInstanceName="ScheduleCommentsClientCtr"></dx:ASPxMemo>
+                                                                            <dx:ASPxMemo runat="server" ID="txtScheduleDescription" Width="100%" Height="180px" ClientInstanceName="ScheduleCommentsClientCtr" CssClass="edit_text_area"></dx:ASPxMemo>
                                                                         </dx:LayoutItemNestedControlContainer>
                                                                     </LayoutItemNestedControlCollection>
                                                                 </dx:LayoutItem>

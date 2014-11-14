@@ -38,7 +38,9 @@ Partial Public Class HomeOwner
     Public ReadOnly Property BestPhoneNo As List(Of HomeOwnerPhone)
         Get
             Using context As New Entities
-                Return context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = Name And p.Source = PhoneSource.UserAdded).ToList
+                Dim list = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = Name And p.Source = PhoneSource.UserAdded).ToList
+                list.Sort(Function(x, y) x.Stuats < y.Stuats)
+                Return list
             End Using
         End Get
     End Property

@@ -67,6 +67,10 @@
         InitScrollBar();
         init_currency();
         initToolTips();
+        if(sortPhones)
+        {
+            sortPhones();
+        }
     }
 
     function InitScrollBar()

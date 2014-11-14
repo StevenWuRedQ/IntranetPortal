@@ -435,8 +435,8 @@
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\PortalEntityModel.Context.vb">
-      <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>PortalEntityModel.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\PortalEntityModel.Designer.vb">

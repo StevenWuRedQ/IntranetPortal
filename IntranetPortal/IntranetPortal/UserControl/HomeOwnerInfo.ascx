@@ -1,7 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="HomeOwnerInfo.ascx.vb" Inherits="IntranetPortal.HomeOwnerInfo" %>
-<script type="text/javascript">
- 
-</script>
+
 <style type="text/css">
     h4 {
         font: 16px 'Segoe UI', Helvetica, 'Droid Sans', Tahoma, Geneva, sans-serif;
@@ -22,6 +20,7 @@
     }
 </style>
 <div style="vertical-align: top; margin: 0; font-size: 18px;">
+   
     <div style="font-size: 30px; color: #2e2f31">
         <i class="fa fa-edit tooltip-examples" title="Edit Homeowner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}","Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
         <span class="homeowner_name">
@@ -385,3 +384,50 @@
 
     <%End If%>
 </div>
+<script type="text/javascript">
+    function hashStr(str) {
+        /*rgb(0,128,0) green 799
+        *rgb(255,0,0) 800 red
+        *rgb(66,139,202) 961 blue
+        */
+
+        var hash = 0;
+        for (i = 0; i < str.length; i++) {
+            char = str.charCodeAt(i);
+            hash += char;
+        }
+
+        if (hash == 800) {
+            return 1000
+        }
+        return hash;
+    }
+    function sortPhones() {
+        var colors = {}
+        var phones_div = $(".homeowner_info_label:has(.PhoneLink)")
+            .each(function (id) {
+                var phones = $(this).find("div").children(".color_gray");
+
+                phones.sort(function (a, b) {
+                    var dis = $(a);
+
+                    var color = $(a).find(".PhoneLink:first").css("color");
+                    var colorB = $(b).find(".PhoneLink:first").css("color");
+                    var hcolor = hashStr(color);
+                    var hcolorB = hashStr(colorB);
+                    colors["cc" + hcolor] = hcolor + "-" + color;
+                    colors["cc" + hcolorB] = hcolorB + "-" + colorB;
+                    return hcolor - hcolorB;
+                });
+                var html = ""
+                phones.each(function (ind) {
+                    html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
+                });
+
+                phones.parent().html('<div>' + html + '</div>')
+            });
+        debugger;
+
+    }
+    
+</script>

@@ -45,7 +45,7 @@
 
     $(document).ready(function () {
         // Handler for .ready() called.
-        initScrollbar_summary();       
+        initScrollbar_summary();
     });
 
     function ShowCaseInfo(CaseId) {
@@ -62,7 +62,7 @@
     }
 
     function SearchGrid() {
-        
+
         var filterCondition = "";
         var key = document.getElementById("QuickSearch").value;
 
@@ -134,14 +134,15 @@
     }*/
     /*-------end-------------*/
 
-   .no_border_head tbody tr td table tbody tr td.dxgv {
+    .no_border_head tbody tr td table tbody tr td.dxgv {
         border-bottom: 0px !important;
     }
-   td.dxgvIndentCell {
+
+    td.dxgvIndentCell {
         border-right: 3px Solid #dde0e7 !important;
     }
 
-   
+
 
 
     td.grid_padding {
@@ -290,7 +291,7 @@
                                                     <DataItemTemplate>
                                                         <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
                                                     </DataItemTemplate>
-                                                </dx:GridViewDataTextColumn>                                               
+                                                </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
@@ -322,7 +323,7 @@
                                                     <DataItemTemplate>
                                                         <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
                                                     </DataItemTemplate>
-                                                </dx:GridViewDataTextColumn>                                                
+                                                </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
@@ -354,7 +355,7 @@
                                                     <DataItemTemplate>
                                                         <div class="group_lable" onclick='<%# String.Format("GoToCase(""{0}"")", Eval("CaseId"))%>'><%# HtmlBlackInfo(Eval("CaseName"))%></div>
                                                     </DataItemTemplate>
-                                                </dx:GridViewDataTextColumn>                                               
+                                                </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
@@ -503,7 +504,7 @@
                                                 <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" ></i>'></asp:LinkButton>
                                                 <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-pdf-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;"></i>'></asp:LinkButton>
                                             </div>
-                                            <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="8" KeyFieldName="CaseId" Width="100%" Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300" ForeColor="#b1b2b7"  Settings-HorizontalScrollBarMode="Auto">
+                                            <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="8" KeyFieldName="CaseId" Width="100%" Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300" ForeColor="#b1b2b7" Settings-HorizontalScrollBarMode="Auto">
                                                 <Styles>
                                                     <Row CssClass="summary_row">
                                                     </Row>
@@ -543,10 +544,10 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="BBLE" Width="75px" Caption="Comments">
                                                         <DataItemTemplate>
-                                                            <div style="text-align:center;width:100%">
-                                                                <i class="fa fa-info-circle tooltip-examples icon_btn" style="font-size:18px" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<%# IntranetPortal.LeadsActivityLog.GetLastComments(Eval("BBLE"))%>"></i>
+                                                            <div style="text-align: center; width: 100%">
+                                                                <i class="fa fa-info-circle tooltip-examples icon_btn" style="font-size: 18px" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<%# IntranetPortal.LeadsActivityLog.GetLastComments(Eval("BBLE"))%>"></i>
                                                             </div>
-                                                            
+
                                                         </DataItemTemplate>
                                                     </dx:GridViewDataTextColumn>
                                                     <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="Next Task" >                                                 
@@ -560,7 +561,7 @@
                                                     <HeaderFilter Height="200" />
                                                 </SettingsPopup>
                                             </dx:ASPxGridView>
-                                            <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>                                            
+                                            <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
                                         </div>
                                     </div>
                                 </td>

@@ -29,7 +29,9 @@
     Public Function IsWrongAddress(address As String) As Boolean
         Return Contacts.Where(Function(c) c.Contact = address And c.Status = OwnerContact.ContactStatus.Wrong And c.ContactType = OwnerContact.OwnerContactType.MailAddress).Count > 0
     End Function
+    Public Sub sortPhone()
 
+    End Sub
     Public Function CssStyle(contact As String)
         Dim ct = Contacts.Where(Function(c) c.Contact.Contains(contact)).FirstOrDefault
         If ct IsNot Nothing Then

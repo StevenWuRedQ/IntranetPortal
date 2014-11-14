@@ -336,7 +336,7 @@
                 <div style="margin-top: 50px">
                     <div <%= If(DispalyMode = ActivityLogMode.ShortSale, "style='display:none'", "")%>>Date of Comment:</div>
                     <div class="border_under_line"  <%= If(DispalyMode = ActivityLogMode.ShortSale, "style='display:none'", "style='height:80px'")%>>
-                        <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
+                        <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d" ></dx:ASPxDateEdit>
                     </div>
                     <div <%= If(DispalyMode = ActivityLogMode.Leads, "style='display:none'", "")%>>
                         <div class="color_gray upcase_text">Type of update</div>
@@ -389,7 +389,7 @@
     <%-- log tables--%>
     <div style="width: 100%; padding: 0px; display: block;">
         <asp:HiddenField ID="hfBBLE" runat="server" />
-        <dx:ASPxGridView ID="gridTracking" Width="100%" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true" SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID" SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" Styles-FilterBuilderHeader-BackColor="Gray">
+        <dx:ASPxGridView ID="gridTracking" Width="100%" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true"  SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID" SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" Styles-FilterBuilderHeader-BackColor="Gray">
             <Styles>
                 <Cell VerticalAlign="Top"></Cell>
                 <Header BackColor="#F5F5F5"></Header>
@@ -602,7 +602,7 @@
                 <Row Cursor="pointer" />
                 <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
             </Styles>
-            <Settings VerticalScrollBarMode="Auto" VerticalScrollableHeight="600" />
+            <Settings VerticalScrollBarMode="Auto" VerticalScrollableHeight="600" ShowHeaderFilterButton="true" />
             <SettingsBehavior AllowFocusedRow="false" AllowClientEventsOnLoad="false" AllowDragDrop="false"
                 EnableRowHotTrack="false" ColumnResizeMode="Disabled" />
             <ClientSideEvents EndCallback="function(){dateActivityClient.SetDate(new Date());AddTooltips();}" />

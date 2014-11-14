@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="AgentOverview.aspx.vb" Inherits="IntranetPortal.AgentOverview" MasterPageFile="~/Content.Master" %>
 
 <%@ Register Src="~/AgentOverview/AgentCharts.ascx" TagPrefix="uc1" TagName="AgentCharts" %>
-
 <asp:Content ContentPlaceHolderID="head" runat="server">
+    <link rel="stylesheet" href="/css/right-pane.css" />
     <script src="../scripts/jquery.printElement.js"></script>
     <script src="/scripts/stevenjs.js"></script>
     <style type="text/css">
@@ -129,16 +129,16 @@
         function ShowLeadstatus(status) {
             infoCallbackClient.SetVisible(false);
 
-            if (currentOffice != null) {               
+            if (currentOffice != null) {
                 gridReportClient.PerformCallback("OfficeStatus|" + currentOffice + "|" + status);
                 //ContentCallbackPanel.PerformCallback("Status|" + status)
                 //LoadStatusBarChartByOffice(status, currentOffice);
             }
             else {
-            gridReportClient.PerformCallback("BindStatus|" + status);
-            //ContentCallbackPanel.PerformCallback("Status|" + status)
-            LoadStatusBarChart(status);
-        }
+                gridReportClient.PerformCallback("BindStatus|" + status);
+                //ContentCallbackPanel.PerformCallback("Status|" + status)
+                LoadStatusBarChart(status);
+            }
         }
 
         function CustomizRefershEnd() {
@@ -160,9 +160,8 @@
                 return
             }
         }
-        function contentSplitterClinet_resize(s, e)
-        {
-            
+        function contentSplitterClinet_resize(s, e) {
+
             $('#showPanesize').html('size = ' + contentSplitterClinet.GetWidth() - 430);
             $('#chars_with_scorll').width(contentSplitterClinet.GetWidth() - 430);
         }
@@ -170,7 +169,7 @@
             //alert(emps);
         }
 
-       
+
         function expandAllClick(s) {
             if (gridEmpsClient.IsGroupRowExpanded(0)) {
                 gridEmpsClient.CollapseAll();
@@ -186,7 +185,7 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-    
+
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" FullscreenMode="true">
         <Styles>
             <Pane Paddings-Padding="0">
@@ -217,7 +216,7 @@
                                                             <span class="font_black"><%# Eval("Name")%></span><br />
                                                             <%# Eval("Position")%>
                                                         </div>
-                                                       <%-- <i class="fa fa-list-alt employee_list_item_icon"></i>--%>
+                                                        <%-- <i class="fa fa-list-alt employee_list_item_icon"></i>--%>
                                                     </div>
                                                 </DataItemTemplate>
                                             </dx:GridViewDataTextColumn>
@@ -324,7 +323,7 @@
                                 <div style="padding: 0px 20px;">
                                     <div style="font-size: 24px;" class="clearfix">
                                         <i class="fa fa-suitcase with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;&nbsp;<span style="color: #234b60; font-size: 30px;">Lead Status</span>
-                                        <i class="fa fa-sort-amount-desc icon_right_s" style="display:none"></i>
+                                        <i class="fa fa-sort-amount-desc icon_right_s" style="display: none"></i>
                                     </div>
                                 </div>
 
@@ -456,7 +455,7 @@
                                                             <%--chart UI--%>
                                                             <div style="height: 490px; float: left; width: 100%" class="clearfix">
                                                                 <div style="padding-top: 10px; height: 325px;" class="clearfix">
-                                                                     <span style=" font-size: 30px; color: #ff400d;margin-left: 50px " id="chartsTitle">Charts Title</span>
+                                                                    <span style="font-size: 30px; color: #ff400d; margin-left: 50px" id="chartsTitle">Charts Title</span>
                                                                     <div class="layout_float_right clearfix">
                                                                         <div class="layout_float_right" style="margin-left: 20px; margin-right: 20px">
 
@@ -472,7 +471,7 @@
                                                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">Status</a></li>
                                                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">ZipCode</a></li>
                                                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">Zoning</a></li>
-                                                                                 <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">Neighborhood</a></li>
+                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_x_axis(this)">Neighborhood</a></li>
 
                                                                             </ul>
                                                                         </div>
@@ -487,9 +486,9 @@
 
                                                                             </ul>
                                                                         </div>
-                                                                        
+
                                                                         <div class="dropdown layout_float_right" style="margin-right: 20px;" id="id_change_range_drop_down">
-                                                                           
+
                                                                             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" style="background: transparent">
                                                                                 Select Range <span class="caret"></span>
                                                                             </button>
@@ -551,7 +550,7 @@
                                     <ContentCollection>
                                         <dx:SplitterContentControl runat="server">
                                             <%--report UI--%>
-                                            <div style="margin-top: 10px;max-height:100%;">
+                                            <div style="margin-top: 10px; max-height: 100%;">
                                                 <%--tool head--%>
                                                 <div style="margin-left: 40px; margin-right: 40px;">
                                                     <%--head--%>
@@ -573,7 +572,7 @@
                                                     <script type="text/javascript">
                                                         function ShowSearchLeadsInfo(bble) {
                                                             var url = '/ViewLeadsInfo.aspx?id=' + bble;
-                                                            window.open(url, 'View Leads Info ' + bble , 'Width=1350px,Height=930px');
+                                                            window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px');
                                                         }
                                                     </script>
                                                     <%--<div style="overflow-x:scroll;overflow-y:scroll;max-height:900px;">--%>
@@ -584,9 +583,9 @@
                                                             <dx:GridViewDataColumn FieldName="PropertyAddress">
                                                                 <CellStyle Font-Bold="True"></CellStyle>
                                                                 <DataItemTemplate>
-                                                                     <a href="#" onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server">
+                                                                    <a href="#" onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server">
                                                                         <div style="color: rgb(119, 120, 123);"><%# Eval("LeadsName")%></div>
-                                                                            </a>
+                                                                    </a>
                                                                 </DataItemTemplate>
                                                             </dx:GridViewDataColumn>
                                                         </Columns>
@@ -612,140 +611,140 @@
 
                                             </div>
                                         </dx:SplitterContentControl>
-                                    </ContentCollection>                                    
+                                    </ContentCollection>
                                 </dx:SplitterPane>
                             </Panes>
-                          
+
                         </dx:ASPxSplitter>
 
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-            <dx:SplitterPane Size="310px" ShowCollapseForwardButton="True" CollapsedStyle-CssClass="clearfix" Name="RightPane" Collapsed="true">
-                <CollapsedStyle CssClass="clearfix"></CollapsedStyle>
-                <ContentCollection>
-                    <dx:SplitterContentControl>
-                        <div style="width: 310px; background: #f5f5f5" class="agent_layout_float">
-                            <div style="margin-left: 30px; margin-top: 30px; margin-right: 20px; font-size: 24px; float: none;">
-                                <div style="height: 460px" class="border_under_line">
-                                    <div style="padding-bottom: 20px;" class="border_under_line">
-                                        <span style="color: #234b60">Saved Reports</span>
-                                        <i class="fa fa-question-circle tooltip-examples" title="Select item view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
-
-                                    </div>
-
-                                    <dx:ASPxCallbackPanel runat="server" ID="callbackPnlTemplates" ClientInstanceName="callbackPnlTemplatesClient" OnCallback="callbackPnlTemplates_Callback">
-                                        <PanelCollection>
-                                            <dx:PanelContent>
-                                                <% If Not GetTemplates() Is Nothing Then%>
-                                                <ul class="list-group" style="font-size: 14px; box-shadow: none">
-
-                                                    <% For Each key In GetTemplates().Keys%>
-                                                    <li class="list-group-item color_gray save_report_list" style="background-color: transparent; border: 0px;">
-                                                        <i class="fa fa-file-o" style="font-size: 18px"></i>
-                                                        <span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor: pointer; width: 178px;"><% = key%></span>
-                                                        <i class="fa fa-times icon_btn tooltip-examples" title="Delete" onclick='RemoveReport("<%= key %>")'></i>
-                                                        <%--<button type="button" value="delete" onclick='RemoveReport("<%= key %>")'>Delete</button>--%>
-                                                    </li>
-                                                    <% Next%>
-                                                </ul>
-                                                <% Else%>
-                                                    No template saved.
-                                                    <% End If%>
-                                            </dx:PanelContent>
-                                        </PanelCollection>
-                                    </dx:ASPxCallbackPanel>
-
-                                </div>
-                                <div style="height: 450px;">
-
-                                    <div style="padding-top: 19px; padding-bottom: 14px;" class="border_under_line">
-                                        <span style="color: #234b60">Custom Fields</span>
-                                        <i class="fa fa-question-circle tooltip-examples" title="Check items view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
-                                    </div>
-
-                                    <div style="margin-top: 20px; overflow: auto; height: 346px;" id="custom_fields_div">
-
-                                        <script type="text/javascript">
-                                            function Fields_ValueChanged(s, e) {
-                                                var values = filed_CheckBoxList1.GetSelectedValues() + ',' + filed_CheckBoxList2.GetSelectedValues();
-
-                                                gridReportClient.PerformCallback("FieldChange|" + values);
-                                                e.processOnServer = false;
-                                            }
-                                        </script>
-                                        <div>
-                                            <div class="color_gray upcase_text" style="font-size: 12px; padding-bottom: 10px;">Category 1</div>
-                                            <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" Width="100%" ClientInstanceName="filed_CheckBoxList1">
-                                                <Items>
-
-                                                    <dx:ListEditItem Text="Property Address" Value="PropertyAddress" Selected="true" />
-                                                    <dx:ListEditItem Text="Call Attemps" Value="CallAttemps" />
-                                                    <dx:ListEditItem Text="Doorknock Attemps" Value="DoorKnockAttemps" />
-                                                    <dx:ListEditItem Text="Follow Up Attemps" Value="FollowupAttemps" />
-                                                    <dx:ListEditItem Text="Create Date" Value="CreateDate" />
-                                                     <dx:ListEditItem Text="Last Update" Value="LastUpdate2" />
-                                                </Items>
-
-                                                <%--<CheckBoxStyle  BackgroundImage-ImageUrl="../images/icon_checked_box.png"/>--%>
-                                                <%--<CheckedImage Url="../images/icon_checked_box.png"></CheckedImage>--%>
-                                                <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
-                                            </dx:ASPxCheckBoxList>
-                                        </div>
-                                        <div>
-                                            <div class="color_gray upcase_text" style="font-size: 12px; padding-bottom: 10px; padding-top: 20px">Category 2</div>
-                                            <dx:ASPxCheckBoxList ID="chkFields2" runat="server" ValueType="System.String" Width="100%" ClientInstanceName="filed_CheckBoxList2">
-                                                <Items>
-                                                    <dx:ListEditItem Text="BBLE" Value="BBLE" Selected="true" />
-                                                    <dx:ListEditItem Text="Status" Value="Status" />
-                                                    <dx:ListEditItem Text="Neighborhood" Value="NeighName" />
-                                                    <dx:ListEditItem Text="Borough" Value="Borough" />
-                                                    <dx:ListEditItem Text="Sale Date" Value="SaleDate" />
-                                                    
-                                                    <%--no tax class--%>
-                                                    <%--<dx:ListEditItem Text="Tax Class" Value="TaxClass" />--%>
-                                                    <dx:ListEditItem Text="Propety Class" Value="PropertyClassCode" />
-                                                    <dx:ListEditItem Text="Block" Value="Block" />
-                                                    <dx:ListEditItem Text="Referrel" Value="ReferrelName" />
-                                                    
-                                                    <dx:ListEditItem Text="Lot" Value="Lot" />
-                                                    <dx:ListEditItem Text="Year Build" Value="YearBuilt" />
-                                                    <dx:ListEditItem Text="# of floor" Value="NumFloors" />
-                                                    <dx:ListEditItem Text="Building Dem" Value="BuildingDem" />
-                                                    <dx:ListEditItem Text="Lot Dem" Value="LotDem" />
-                                                    <dx:ListEditItem Text="1st Mortgage" Value="C1stMotgrAmt" />
-                                                    <dx:ListEditItem Text="2nd Mortgage" Value="C2ndMotgrAmt" />
-                                                    <dx:ListEditItem Text="Taxes" Value="TaxesAmt" />
-                                                    <dx:ListEditItem Text="Water" Value="WaterAmt" />
-                                                    <dx:ListEditItem Text="Taxes" Value="TaxesAmt" />
-                                                    <dx:ListEditItem Text="ECB/DOB" Value="ViolationAmount" />
-                                                    <dx:ListEditItem Text="Est Value" Value="EstValue" />
-                                                    <dx:ListEditItem Text="Zoning" Value="Zoning" />
-                                                    <dx:ListEditItem Text="MaxFar" Value="MaxFar" />
-                                                    <dx:ListEditItem Text="Actual Far" Value="ActualFar" />
-                                                    <dx:ListEditItem Text="NYCSqft" Value="NYCSqft" />
-                                                    <dx:ListEditItem Text="Unbuilt Sqft" Value="UnbuiltSqft" />
-                                                    <dx:ListEditItem Text="Home Owner" Value="Owner" />
-                                                    <dx:ListEditItem Text="Co-Owner" Value="CoOwner" />
-                                                    <dx:ListEditItem Text="Good Phones" Value="OwnerPhoneNo" />
-                                                </Items>
-                                                <%--<CheckBoxStyle  BackgroundImage-ImageUrl="../images/icon_checked_box.png"/>--%>
-                                                <%--<CheckedImage Url="../images/icon_checked_box.png"></CheckedImage>--%>
-                                                <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
-                                            </dx:ASPxCheckBoxList>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </dx:SplitterContentControl>
-                </ContentCollection>
-            </dx:SplitterPane>
+            
         </Panes>
         <ClientSideEvents PaneResized="contentSplitterClinet_resize" />
     </dx:ASPxSplitter>
+    <div id="right-pane-container" class="clearfix">
+        <div id="right-pane-button"></div>
+        <div id="right-pane">
+            <div style="height: 100%; background: #EFF2F5;">
+                <div style="width: 310px; background: #f5f5f5" class="agent_layout_float">
+                    <div style="margin-left: 30px; margin-top: 30px; margin-right: 20px; font-size: 24px; float: none;">
+                        <div style="height: 460px" class="border_under_line">
+                            <div style="padding-bottom: 20px;" class="border_under_line">
+                                <span style="color: #234b60">Saved Reports</span>
+                                <i class="fa fa-question-circle tooltip-examples" title="Select item view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
 
+                            </div>
+
+                            <dx:ASPxCallbackPanel runat="server" ID="callbackPnlTemplates" ClientInstanceName="callbackPnlTemplatesClient" OnCallback="callbackPnlTemplates_Callback">
+                                <PanelCollection>
+                                    <dx:PanelContent>
+                                        <% If Not GetTemplates() Is Nothing Then%>
+                                        <ul class="list-group" style="font-size: 14px; box-shadow: none">
+
+                                            <% For Each key In GetTemplates().Keys%>
+                                            <li class="list-group-item color_gray save_report_list" style="background-color: transparent; border: 0px;">
+                                                <i class="fa fa-file-o" style="font-size: 18px"></i>
+                                                <span class="drappable_field_text" onclick='LoadLayout(this.innerHTML)' style="cursor: pointer; width: 178px;"><% = key%></span>
+                                                <i class="fa fa-times icon_btn tooltip-examples" title="Delete" onclick='RemoveReport("<%= key %>")'></i>
+                                                <%--<button type="button" value="delete" onclick='RemoveReport("<%= key %>")'>Delete</button>--%>
+                                            </li>
+                                            <% Next%>
+                                        </ul>
+                                        <% Else%>
+                                                    No template saved.
+                                                    <% End If%>
+                                    </dx:PanelContent>
+                                </PanelCollection>
+                            </dx:ASPxCallbackPanel>
+
+                        </div>
+                        <div style="height: 450px;">
+
+                            <div style="padding-top: 19px; padding-bottom: 14px;" class="border_under_line">
+                                <span style="color: #234b60">Custom Fields</span>
+                                <i class="fa fa-question-circle tooltip-examples" title="Check items view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
+                            </div>
+
+                            <div style="margin-top: 20px; overflow: auto; height: 346px;" id="custom_fields_div">
+
+                                <script type="text/javascript">
+                                    function Fields_ValueChanged(s, e) {
+                                        var values = filed_CheckBoxList1.GetSelectedValues() + ',' + filed_CheckBoxList2.GetSelectedValues();
+
+                                        gridReportClient.PerformCallback("FieldChange|" + values);
+                                        e.processOnServer = false;
+                                    }
+                                </script>
+                                <div>
+                                    <div class="color_gray upcase_text" style="font-size: 12px; padding-bottom: 10px;">Category 1</div>
+                                    <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" Width="100%" ClientInstanceName="filed_CheckBoxList1">
+                                        <Items>
+
+                                            <dx:ListEditItem Text="Property Address" Value="PropertyAddress" Selected="true" />
+                                            <dx:ListEditItem Text="Call Attemps" Value="CallAttemps" />
+                                            <dx:ListEditItem Text="Doorknock Attemps" Value="DoorKnockAttemps" />
+                                            <dx:ListEditItem Text="Follow Up Attemps" Value="FollowupAttemps" />
+                                            <dx:ListEditItem Text="Create Date" Value="CreateDate" />
+                                            <dx:ListEditItem Text="Last Update" Value="LastUpdate2" />
+                                        </Items>
+
+                                        <%--<CheckBoxStyle  BackgroundImage-ImageUrl="../images/icon_checked_box.png"/>--%>
+                                        <%--<CheckedImage Url="../images/icon_checked_box.png"></CheckedImage>--%>
+                                        <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
+                                    </dx:ASPxCheckBoxList>
+                                </div>
+                                <div>
+                                    <div class="color_gray upcase_text" style="font-size: 12px; padding-bottom: 10px; padding-top: 20px">Category 2</div>
+                                    <dx:ASPxCheckBoxList ID="chkFields2" runat="server" ValueType="System.String" Width="100%" ClientInstanceName="filed_CheckBoxList2">
+                                        <Items>
+                                            <dx:ListEditItem Text="BBLE" Value="BBLE" Selected="true" />
+                                            <dx:ListEditItem Text="Status" Value="Status" />
+                                            <dx:ListEditItem Text="Neighborhood" Value="NeighName" />
+                                            <dx:ListEditItem Text="Borough" Value="Borough" />
+                                            <dx:ListEditItem Text="Sale Date" Value="SaleDate" />
+
+                                            <%--no tax class--%>
+                                            <%--<dx:ListEditItem Text="Tax Class" Value="TaxClass" />--%>
+                                            <dx:ListEditItem Text="Propety Class" Value="PropertyClassCode" />
+                                            <dx:ListEditItem Text="Block" Value="Block" />
+                                            <dx:ListEditItem Text="Referrel" Value="ReferrelName" />
+
+                                            <dx:ListEditItem Text="Lot" Value="Lot" />
+                                            <dx:ListEditItem Text="Year Build" Value="YearBuilt" />
+                                            <dx:ListEditItem Text="# of floor" Value="NumFloors" />
+                                            <dx:ListEditItem Text="Building Dem" Value="BuildingDem" />
+                                            <dx:ListEditItem Text="Lot Dem" Value="LotDem" />
+                                            <dx:ListEditItem Text="1st Mortgage" Value="C1stMotgrAmt" />
+                                            <dx:ListEditItem Text="2nd Mortgage" Value="C2ndMotgrAmt" />
+                                            <dx:ListEditItem Text="Taxes" Value="TaxesAmt" />
+                                            <dx:ListEditItem Text="Water" Value="WaterAmt" />
+                                            <dx:ListEditItem Text="Taxes" Value="TaxesAmt" />
+                                            <dx:ListEditItem Text="ECB/DOB" Value="ViolationAmount" />
+                                            <dx:ListEditItem Text="Est Value" Value="EstValue" />
+                                            <dx:ListEditItem Text="Zoning" Value="Zoning" />
+                                            <dx:ListEditItem Text="MaxFar" Value="MaxFar" />
+                                            <dx:ListEditItem Text="Actual Far" Value="ActualFar" />
+                                            <dx:ListEditItem Text="NYCSqft" Value="NYCSqft" />
+                                            <dx:ListEditItem Text="Unbuilt Sqft" Value="UnbuiltSqft" />
+                                            <dx:ListEditItem Text="Home Owner" Value="Owner" />
+                                            <dx:ListEditItem Text="Co-Owner" Value="CoOwner" />
+                                            <dx:ListEditItem Text="Good Phones" Value="OwnerPhoneNo" />
+                                        </Items>
+                                        <%--<CheckBoxStyle  BackgroundImage-ImageUrl="../images/icon_checked_box.png"/>--%>
+                                        <%--<CheckedImage Url="../images/icon_checked_box.png"></CheckedImage>--%>
+                                        <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
+                                    </dx:ASPxCheckBoxList>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- custom scrollbar plugin -->
 
     <script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -857,7 +856,7 @@
 
                                                 </div>
                                             </div>
-                                           
+
 
                                             <table id="compare_table" style="float: left">
                                                 <tr>
@@ -1009,6 +1008,7 @@
             </dx:PopupControlContentControl>
         </ContentCollection>
     </dx:ASPxPopupControl>
+    <script src="/scripts/js/right_pane.js" type="text/javascript"></script>
 </asp:Content>
 
 
