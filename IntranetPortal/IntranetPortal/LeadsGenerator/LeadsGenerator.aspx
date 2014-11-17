@@ -126,7 +126,7 @@
                                                         <option>Townhome </option>
                                                         <option>TIC  </option>
                                                     </select>
-                                                    <button type="button" id="btn" onclick="AddOption()" value="Add" >Add</button>
+                                                   <%-- <button type="button" id="btn" onclick="AddOption()" value="Add" >Add</button>
                                                     <script type="text/javascript">
                                                         function AddOption()
                                                         {
@@ -142,7 +142,7 @@
                                                            var vas= $(e).val();
                                                            debugger;
                                                         }
-                                                    </script>
+                                                    </script>--%>
                                                 </div>
                                                 <div class="inline_block  " style="width: 28%">
                                                     <label class="upcase_text font_black" style="display: block">Zoning</label>
