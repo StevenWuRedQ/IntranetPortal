@@ -43,7 +43,7 @@ Public Class RulesService
         StateObj.SomeValue = 1
 
         Dim TimerDelegate As New System.Threading.TimerCallback(AddressOf TimerTask)
-        Dim TimerItem As New System.Threading.Timer(TimerDelegate, StateObj, New TimeSpan(1000), New TimeSpan(1, 0, 0))
+        Dim TimerItem As New System.Threading.Timer(TimerDelegate, StateObj, New TimeSpan(1000), New TimeSpan(0, 1, 0))
 
         ' Save a reference for Dispose.
         StateObj.TimerReference = TimerItem
@@ -54,7 +54,7 @@ Public Class RulesService
         ' Use the interlocked class to increment the counter variable.
         System.Threading.Interlocked.Increment(State.SomeValue)
 
-        Log("Launched new task")
+        Log("Launched new task ")
 
         If WorkingHours.IsWorkingHour(DateTime.Now) Then
             'Run Rules
@@ -69,8 +69,6 @@ Public Class RulesService
             Log("Service is stop.")
             Status = ServiceStatus.Stopped
         End If
-
-
     End Sub
 
     Private Sub RunRules()
@@ -84,8 +82,9 @@ Public Class RulesService
             Catch ex As Exception
                 Log("Exception when execute task rule. BBLE: " & t.BBLE & ", Task Id: " & t.TaskID & ", Exception: " & ex.Message)
             End Try
-
         Next
+        Log("Task Rules Finished.")
+
 
         Dim lds = Lead.GetAllActiveLeads()
         Log("Total Active Leads: " & lds.Count)
@@ -97,8 +96,8 @@ Public Class RulesService
             Catch ex As Exception
                 Log("Exception when execute Leads Rule. BBLE: " & ld.BBLE & ", Employee: " & ld.EmployeeName & ", Exception: " & ex.Message)
             End Try
-
         Next
+        Log("Leads Rule finished.")
 
         Dim rules = AssignRule.GetAllRules()
         Log("Assign Rules count: " & rules.Count)
@@ -110,6 +109,7 @@ Public Class RulesService
                 Log("Exception when execute assign Leads Rule. Exception: " & ex.Message)
             End Try
         Next
+        Log("Assign Rules Finished")
     End Sub
 
     Private Sub Log(msg As String)

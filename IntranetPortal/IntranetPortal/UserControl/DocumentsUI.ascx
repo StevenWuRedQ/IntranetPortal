@@ -131,7 +131,7 @@
                                                         <dx:ASPxHyperLink runat="server" CssClass="doc_file_name" ClientSideEvents-Click='<%# String.Format("function(s,e){{clickFileLink(s,""{0}"")}}", Eval("Description"))%>' Text='<%# Eval("Name")%>'  Target="_blank"></dx:ASPxHyperLink>
                                                     </span>
                                                     <span class="checks_data_text">
-                                                        <dx:ASPxLabel runat="server" Text='<%# String.Format("{0:MMM d, yyyy}", Eval("CreateDate"))%>'></dx:ASPxLabel>
+                                                        <dx:ASPxLabel runat="server" Text='<%# String.Format("{0}", Eval("CreateBy"))%>'></dx:ASPxLabel>&nbsp;<dx:ASPxLabel runat="server" Text='<%# String.Format("{0:MMM d, yyyy}", Eval("CreateDate"))%>'></dx:ASPxLabel>
                                                     </span>
                                                 </label>
                                             </div>

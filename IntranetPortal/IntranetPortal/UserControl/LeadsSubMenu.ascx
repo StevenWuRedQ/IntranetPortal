@@ -197,13 +197,13 @@
                     <label class="upcase_text">Select Reason</label>
                     <dx:ASPxComboBox ID="cbDeadReasons" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">
                         <Items>
-                            <dx:ListEditItem Text="Deed Recorded with Other Party" Value="0" />
-                            <dx:ListEditItem Text="Working towards a Loan MOD" Value="1" />
-                            <dx:ListEditItem Text="Working towards a short sale with another company" Value="2" />
-                            <dx:ListEditItem Text="MOD Completed" Value="2" />
-                            <dx:ListEditItem Text="Not Interested" Value="2" />
-                            <dx:ListEditItem Text="Unable to contact" Value="2" />
-                            <dx:ListEditItem Text="Manager disapproved" Value="2" />
+                            <dx:ListEditItem Text="Dead Recorded with Other Party" Value="1" />
+                            <dx:ListEditItem Text="Working towards a Loan MOD" Value="2" />
+                            <dx:ListEditItem Text="Working towards a short sale with another company" Value="3" />
+                            <dx:ListEditItem Text="MOD Completed" Value="4" />
+                            <dx:ListEditItem Text="Not Interested" Value="5" />
+                            <dx:ListEditItem Text="Unable to contact" Value="6" />
+                            <dx:ListEditItem Text="Manager disapproved" Value="7" />
                         </Items>
                         <ClientSideEvents SelectedIndexChanged="function(s,e){}" />
                     </dx:ASPxComboBox>

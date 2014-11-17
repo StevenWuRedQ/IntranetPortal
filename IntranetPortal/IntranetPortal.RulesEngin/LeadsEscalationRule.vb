@@ -3,8 +3,9 @@ Public Class LeadsEscalationRule
     Public Shared Sub Execute(ld As Lead)
         For Each Rule In GetRule(ld)
             If Rule.IsDateDue(ld.LastUpdate2, ld) Then
-                ServiceLog.Log("Execute Leaeds Rule: " & ld.BBLE)
+                ServiceLog.Log("Execute Leads Rule: " & ld.BBLE)
                 Rule.Execute(ld)
+                ServiceLog.Log("Finish Leads Rule: " & ld.BBLE)
                 Return
             End If
         Next
@@ -136,6 +137,53 @@ Public Class LeadsEscalationRule
                                    Return ld.Task Is Nothing And ld.Appointment Is Nothing
                                End Function, 2))
 
+        rules.Add(New EscalationRule("DeadEnd", "00:00:00",
+                  Sub(leads)
+                      Dim ld = CType(leads, Lead)
+                      ld.ReAssignLeads(ld.Employee.Department & " Office")
+                  End Sub,
+                  Function(leads)
+                      Dim ld = CType(leads, Lead)
+                      Select Case ld.DeadReason
+                          Case 2, 3, 6
+                              Return True
+                      End Select
+
+                      Return False
+                  End Function,
+                  1))
+
+        rules.Add(New EscalationRule("DeadEnd", "30.00:00:00",
+                     Sub(leads)
+                         Dim ld = CType(leads, Lead)
+                         ld.ReAssignLeads(ld.Employee.Department & " Office")
+                     End Sub,
+                     Function(leads)
+                         Dim ld = CType(leads, Lead)
+                         Select Case ld.DeadReason
+                             Case 5
+                                 Return True
+                         End Select
+
+                         Return False
+                     End Function,
+                     2))
+
+        rules.Add(New EscalationRule("DeadEnd", "120.00:00:00",
+                            Sub(leads)
+                         Dim ld = CType(leads, Lead)
+                         ld.ReAssignLeads(ld.Employee.Department & " Office")
+                     End Sub,
+                            Function(leads)
+                         Dim ld = CType(leads, Lead)
+                         Select Case ld.DeadReason
+                             Case 4
+                                 Return True
+                         End Select
+
+                         Return False
+                     End Function,
+                            3))
         Return rules
     End Function
 

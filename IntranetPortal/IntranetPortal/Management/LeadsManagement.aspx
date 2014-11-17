@@ -177,7 +177,7 @@
                                             </DataItemTemplate>
                                         </dx:GridViewDataTextColumn>
                                     </Columns>
-                                    <SettingsBehavior AllowClientEventsOnLoad="false" AllowFocusedRow="true"
+                                    <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true"
                                         EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
                                     <Settings ShowColumnHeaders="true" VerticalScrollableHeight="750" GridLines="Both"></Settings>
                                     <SettingsPager Mode="EndlessPaging" PageSize="50"></SettingsPager>

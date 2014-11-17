@@ -74,13 +74,17 @@
     End Function
 
     Public Function GetOwnerAge(ownerName As String) As String
-        Dim tlo = GetHomeOwner(ownerName).TLOLocateReport
+        Dim owner = GetHomeOwner(ownerName)
+        If owner IsNot Nothing Then
+            Dim tlo = owner.TLOLocateReport
 
-        If tlo IsNot Nothing Then
-            If tlo.dateOfBirthField IsNot Nothing Then
-                Return tlo.dateOfBirthField.currentAgeField
+            If tlo IsNot Nothing Then
+                If tlo.dateOfBirthField IsNot Nothing Then
+                    Return tlo.dateOfBirthField.currentAgeField
+                End If
             End If
         End If
+
         Return ""
     End Function
 
@@ -110,11 +114,12 @@
                     If tmpRef Is Nothing Then
                         _referrel = New PropertyReferrel
 
-                        If Lead IsNot Nothing Then
-                            _referrel.ReferrelName = Lead.AssignBy
+                        Dim ld = context.Leads.Find(BBLE)
+                        If ld IsNot Nothing Then
+                            _referrel.ReferrelName = ld.AssignBy
                         End If
                     Else
-                        _referrel = tmpRef
+                    _referrel = tmpRef
                     End If
                 End Using
             End If
@@ -294,6 +299,10 @@
 
             If ViolationAmount > 0 Then
                 debt += ViolationAmount
+            End If
+
+            If TaxLiensInfo IsNot Nothing Then
+                debt += TaxLiensInfo.Amount
             End If
 
             Return debt

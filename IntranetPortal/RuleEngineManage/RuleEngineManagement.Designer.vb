@@ -60,16 +60,16 @@ Partial Class RuleEngineManagement
         '
         Me.lblStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(133, 22)
-        Me.lblStatus.Text = "Current Status: Running"
+        Me.lblStatus.Size = New System.Drawing.Size(112, 22)
+        Me.lblStatus.Text = "Current Status: Stop"
         '
         'lbLogs
         '
         Me.lbLogs.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lbLogs.FormattingEnabled = True
         Me.lbLogs.Location = New System.Drawing.Point(0, 25)
-        Me.lbLogs.MultiColumn = True
         Me.lbLogs.Name = "lbLogs"
+        Me.lbLogs.ScrollAlwaysVisible = True
         Me.lbLogs.Size = New System.Drawing.Size(624, 226)
         Me.lbLogs.TabIndex = 1
         '

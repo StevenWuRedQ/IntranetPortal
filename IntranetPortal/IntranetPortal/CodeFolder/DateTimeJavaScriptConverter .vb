@@ -99,7 +99,7 @@ Public Class DateTimeJavaScriptConverter
         End Property
 
         Public Function GetEnumerator() As IEnumerator(Of KeyValuePair(Of String, Object)) Implements IEnumerable(Of KeyValuePair(Of String, Object)).GetEnumerator
-
+            Throw New NotImplementedException
         End Function
 
         Public Function GetEnumerator1() As IEnumerator Implements IEnumerable.GetEnumerator

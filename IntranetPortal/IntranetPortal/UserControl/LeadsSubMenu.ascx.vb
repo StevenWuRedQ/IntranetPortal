@@ -1,4 +1,5 @@
 ﻿Imports DevExpress.Web.ASPxMenu
+Imports System.ComponentModel
 
 Public Class LeadsSubMenu
     Inherits System.Web.UI.UserControl
@@ -141,13 +142,34 @@ Public Class LeadsSubMenu
         If (e.Parameter.StartsWith("Show")) Then
             Dim bble = e.Parameter.Split("|")(1)
             hfBBLE.Value = bble
+
+            cbDeadReasons.DataSource = GetType(Lead.DeadReasonEnum).GetEnumValues().OfType(Of Lead.DeadReasonEnum).ToDictionary(
+              Function(key)
+                  Return CInt(key).ToString
+              End Function,
+              Function(val)
+                  Dim type = val.GetType()
+                  Dim fi = type.GetField(val.ToString)
+                  Dim attrs = fi.GetCustomAttributes(GetType(DescriptionAttribute), False)
+                  If attrs.Length > 0 Then
+                      Dim att = CType(attrs(0), DescriptionAttribute)
+                      Return att.Description
+                  End If
+                  Return ""
+              End Function
+              )
+
+            cbDeadReasons.TextField = "Value"
+            cbDeadReasons.ValueField = "Key"
+            cbDeadReasons.DataBind()
         End If
 
         If e.Parameter.StartsWith("Save") Then
             Dim reason = cbDeadReasons.Text
             Dim description = txtDeadLeadDescription.Text
 
-            UpdateLeadStatus(hfBBLE.Value, LeadStatus.DeadEnd, Nothing)
+            Lead.SetDeadLeadsStatus(hfBBLE.Value, cbDeadReasons.Value, description)
+            'UpdateLeadStatus(hfBBLE.Value, LeadStatus.DeadEnd, Nothing)
 
             Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Dead Reason:</td>" &
                             "<td>{0}</td></tr>" &
