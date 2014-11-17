@@ -110,8 +110,12 @@
     font-size: 14px;
     padding: 5px 10px;
     border: 0px;
-}
-
+}.rand-button-pad
+ {
+     padding:9px 20px;
+     outline:none;
+ }
+ 
 .rand-button-blue {
     background: #3993c1;
 }
@@ -2037,6 +2041,7 @@ td.vendor_info_left {
 
 .rand-button-padding {
     padding: 9px 20px;
+    outline:none;
 }
 
 .title_icon {
@@ -2056,9 +2061,13 @@ td.vendor_info_left {
     margin-left: 10px;
 }
 
-.selectpicker,.query_input
+/*.selectpicker,.query_input
 {
     background:#f5f5f5;
+}*/
+.bg_orange
+{
+    background:#ff400d;
 }
 .query_input_40percent
 {
@@ -2067,7 +2076,7 @@ td.vendor_info_left {
 
 .query_input_60percent
 {
-    width:58% !important;
+    width:56% !important;
     
 }
 .query_input_30percent
@@ -2085,4 +2094,20 @@ td.vendor_info_left {
 .dxeCheckBoxList_MetropolisBlue1
 {
     border:none !important;
+}
+.button_margin
+{
+    margin-left:5px;
+}
+.width_100percent
+{
+    width:98% !important;
+}
+.inline_block
+{
+    display:inline-block;
+}
+.query_input_50_percent
+{
+    width:49% !important;
 }

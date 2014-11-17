@@ -7,18 +7,18 @@
       <Diagram DiagramId="aa1dbe47eff54603a23941d0def4ef3e" Name="Diagram1" ZoomLevel="91">
         <EntityTypeShape EntityType="IntranetPortalModel.Employee" Width="1.5" PointX="1.125" PointY="1.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsActivityLog" Width="2.5" PointX="3.75" PointY="1.375" />
-        <EntityTypeShape EntityType="IntranetPortalModel.Lead" Width="1.75" PointX="3.625" PointY="4.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.LeadsInfo" Width="1.5" PointX="8.5" PointY="1.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.Lead" Width="1.75" PointX="3.625" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LeadsInfo" Width="1.5" PointX="8.75" PointY="1.625" IsExpanded="false" />
         <AssociationConnector Association="IntranetPortalModel.LeadLeadsInfo" />
         <AssociationConnector Association="IntranetPortalModel.EmployeeLead" />
         <AssociationConnector Association="IntranetPortalModel.LeadsActivityLogLead" />
         <AssociationConnector Association="IntranetPortalModel.EmployeeLeadsActivityLog" />
-        <EntityTypeShape EntityType="IntranetPortalModel.Role" Width="1.5" PointX="3" PointY="8.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.UsersInRole" Width="1.75" PointX="0.75" PointY="8.625" />
+        <EntityTypeShape EntityType="IntranetPortalModel.Role" Width="1.5" PointX="3.625" PointY="7" IsExpanded="false" />
+        <EntityTypeShape EntityType="IntranetPortalModel.UsersInRole" Width="1.75" PointX="1.25" PointY="7" IsExpanded="false" />
         <AssociationConnector Association="IntranetPortalModel.RoleUsersInRole" />
-        <EntityTypeShape EntityType="IntranetPortalModel.FileAttachment" Width="1.5" PointX="6.375" PointY="8.125" />
-        <EntityTypeShape EntityType="IntranetPortalModel.UserTask" Width="1.5" PointX="6.625" PointY="1.375" />
-        <EntityTypeShape EntityType="IntranetPortalModel.UserAppointment" Width="1.5" PointX="10.375" PointY="1.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.FileAttachment" Width="1.5" PointX="6.375" PointY="8.125" IsExpanded="false" />
+        <EntityTypeShape EntityType="IntranetPortalModel.UserTask" Width="1.5" PointX="6.625" PointY="1.375" IsExpanded="false" />
+        <EntityTypeShape EntityType="IntranetPortalModel.UserAppointment" Width="1.5" PointX="10.625" PointY="1.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.OrderRespons" Width="1.5" PointX="0.75" PointY="11.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.APIOrder" Width="1.5" PointX="3.375" PointY="11.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.UserMessage" Width="1.5" PointX="5.375" PointY="11.75" />
