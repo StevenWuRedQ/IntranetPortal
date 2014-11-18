@@ -486,9 +486,10 @@
                                                 <div class="inline_block query_input_50_percent">
                                                     <label class="upcase_text font_black" style="display: block">Docket / Year</label>
                                                     <select class="selectpicker form-control width_100percent" multiple>
-                                                        <option>1900</option>
-                                                        <option>1901</option>
-                                                        <option>1902</option>
+                                                         
+                                                       <% For i  =1900 to 2014%>
+                                                         <option><%=i %></option>
+                                                        <% Next%>
                                                     </select>
                                                 </div>
 
