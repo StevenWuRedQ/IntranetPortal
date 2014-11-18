@@ -7,6 +7,11 @@
         }
 
         @media print {
+            .logo {
+                right: 0px;
+                float: right;
+            }
+
             img {
                 margin-left: 10px;
                 color: red;
@@ -127,12 +132,11 @@
             </div>
         </div>
     </div>
-
     <dx:ASPxCallback runat="server" ID="cpPrint" ClientInstanceName="cpPrint" OnCallback="cpPrint_Callback">
         <ClientSideEvents EndCallback="function(s,e){window.print();}" />
     </dx:ASPxCallback>
     <div style="position: fixed; height: 90px; width: 170px; bottom: 0; right: 0;" class="logo">
-        <img src="../images/logo_black.jpg" class="logo" />
+        <img src="/images/logo_black.jpg" class="logo" />
     </div>
 </asp:Content>
 

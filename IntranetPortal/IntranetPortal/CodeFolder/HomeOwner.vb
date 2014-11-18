@@ -39,7 +39,7 @@ Partial Public Class HomeOwner
         Get
             Using context As New Entities
                 Dim list = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = Name And p.Source = PhoneSource.UserAdded).ToList
-                list.Sort(Function(x, y) x.Stuats < y.Stuats)
+                'list.Sort(Function(x, y) x.Stuats < y.Stuats)
                 Return list
             End Using
         End Get

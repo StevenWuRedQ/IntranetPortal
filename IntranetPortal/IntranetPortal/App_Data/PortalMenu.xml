@@ -184,7 +184,7 @@
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="AdvanceQuery" Text="Advanced Query" NavigationUrl="/LeadsGenerator/LeadsGenerator.aspx" ShowAmount="false">
+      <PortalNavItem Name="AdvanceQuery" Text="Leads Search" NavigationUrl="/LeadsGenerator/LeadsGenerator.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-search-plus"></i>]]>
         </FontClass>
