@@ -290,7 +290,7 @@
     }
 
 </script>
-<div style="position: relative; width: 100%; height: 100%" id="mapContent">
+<div style=" width: 100%; height: 100%" id="mapContent">
     <div style="width: 350px; position: absolute; z-index: 20; margin-top: 10px; margin-left: 80px; background-color: white;">
         <table id="target_table" style="width: 100%; font-size: 12px; border-spacing: 0px; border-collapse: collapse; line-height: 24px;">
             <thead>
@@ -318,20 +318,37 @@
             </tbody>
         </table>
     </div>
-    <div style="float: left; width: 1000px; display: block; height: 100%;">
-        <div id="map-canvas" style="height: 100%; width: 100%;"></div>
+    <div style="height:100%;width:100%;overflow:auto;">
+        <table style="height:100%;width:100%">
+        <tr>
+            <td>
+                <div style=" width: 1000px; display: inline-block; height: 100%;">
+
+                    <div id="map-canvas" style="height: 100%; width: 100%;"></div>
+                </div>
+            </td>
+            <td valign="top">
+                <div id="directionsPanel" style="width: 300px; right: 0px; z-index: 999; padding: 5px">
+                    <table style="">
+                        <tr>
+                            <td style="width: 160px;">Total: <span id="total"></span></td>
+                            <td>
+                                <input type="button" class="rand-button rand-button-padding rand-button-blue" value="Print" onclick="window.print()" />
+
+                            </td>
+                            <td>
+                                <input type="button" class="rand-button  rand-button-padding rand-button-blue" value="Details" onclick="PrintDetails()" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
     </div>
-    <div id="directionsPanel" style="float: left; width: 300px; height: 100%; right: 0px; overflow: auto; z-index: 999; padding: 5px">
-        <table style="">
-            <tr>
-                <td style="width: 160px;">Total: <span id="total"></span></td>
-                <td>
-                    <input type="button" class="rand-button rand-button-blue" value="Print" onclick="window.print()" />
-                    <input type="button" class="rand-button rand-button-blue" value="Details" onclick="PrintDetails()" />
-                </td>
-            </tr>
-        </table>
-    </div>
+    
+
+
 </div>
 <dx:ASPxCallback runat="server" ClientInstanceName="GetAddressCallback" ID="callbackGetAddress" OnCallback="callbackGetAddress_Callback">
     <ClientSideEvents CallbackComplete="OnGetAddressComplete" />

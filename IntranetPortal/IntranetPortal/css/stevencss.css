@@ -110,6 +110,7 @@
     font-size: 14px;
     padding: 5px 10px;
     border: 0px;
+    cursor:pointer;
 }.rand-button-pad
  {
      padding:9px 20px;
