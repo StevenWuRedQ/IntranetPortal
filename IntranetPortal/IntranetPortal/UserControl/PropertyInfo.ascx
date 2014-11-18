@@ -299,7 +299,7 @@
             </div>
 
             <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">axtual far</span>
+                <span class="form_input_title">actual far</span>
 
                 <input class="text_input" value="<%= LeadsInfoData.ActualFar%>" />
             </div>

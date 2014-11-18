@@ -318,7 +318,7 @@
             </tbody>
         </table>
     </div>
-    <div style="height:100%;width:100%;overflow:auto;">
+    <div style="height:100%;width:100%;min-height:650px;overflow-x:auto;overflow-y:hidden">
         <table style="height:100%;width:100%">
         <tr>
             <td>
@@ -328,7 +328,7 @@
                 </div>
             </td>
             <td valign="top">
-                <div id="directionsPanel" style="width: 300px; right: 0px; z-index: 999; padding: 5px">
+                <div id="directionsPanel" style="width: 300px; z-index: 999; padding: 5px">
                     <table style="">
                         <tr>
                             <td style="width: 160px;">Total: <span id="total"></span></td>

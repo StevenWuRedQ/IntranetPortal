@@ -18,13 +18,12 @@
             <dx:SplitterPane Size="520px" MinSize="520px" Name="listBoxContainer" ShowCollapseBackwardButton="True">
                 <ContentCollection>
                     <dx:SplitterContentControl runat="server">
-                        <div style="padding: 30px; color: #2e2f31; overflow: auto; height: 100%" id="lead_search_left">
+                        <div style="padding: 30px; color: #2e2f31; height: 100%">
                             <div style="margin-bottom: 30px;">
                                 <i class="fa fa-search-plus title_icon color_gray"></i>
                                 <span class="title_text">Leads Search</span>
                             </div>
                             <span class="font_18" style="color: #234b60;">Load a previously saved search</span>
-
                             <div class="form-group under_line_div" style="margin-top: 10px; padding-bottom: 20px; border-width: 2px">
 
                                 <div class="form-inline">
@@ -41,8 +40,7 @@
                                 </div>
 
                             </div>
-
-                            <div style="margin-top: 30px">
+                            <div style="margin-top: 30px;padding-bottom:10px;">
                                 <div>
                                     <div style="display: inline-block; padding-right: 10px; border-right: 1px solid #dde0e7; color: #234b60; font-size: 18px;">Or... create new search criteria below</div>
                                     <div style="font-size: 12px; display: inline-block; line-height: 18px;">
@@ -52,81 +50,83 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div style="margin-top: 30px" class="clearfix">
-                                <div style="float: right">
-                                    <button type="button" class="rand-button rand-button-padding bg_color_gray">Clear All</button>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="ss_array">
-                                    <h4 class="ss_form_title title_with_line">
-                                        <span class="title_index title_span upcase_text">Location</span>&nbsp;
-                                        <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>
-
-                                    </h4>
-                                    <div class="collapse_div">
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Borough</label>
-                                                    <select class=" selectpicker form-control width_100percent" multiple>
-                                                        <option>Manhattan</option>
-                                                        <option>The Bronx</option>
-                                                        <option>Brooklyn</option>
-                                                        <option>Queens</option>
-                                                        <option>Staten Island</option>
-                                                    </select>
-                                                </div>
-                                                <div class="inline_block  query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Zip</label>
-                                                    <select class=" selectpicker form-control width_100percent" multiple>
-                                                        <option>10001</option>
-                                                        <option>10002</option>
-                                                        <option>10003</option>
-
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Neighborhood</label>
-                                                    <select class="selectpicker form-control width_100percent" multiple>
-                                                        <option>Westbury</option>
-                                                        <option>Neighborhood2</option>
-                                                    </select>
-                                                </div>
-
-                                            </div>
-
+                            <div style="height: 75%; padding-right: 15px;" id="lead_search_left">
+                                <div>
+                                    <div style="margin-top: 30px" class="clearfix">
+                                        <div style="float: right">
+                                            <button class="rand-button bg_color_blue rand-button-padding" type="button" style="margin-right: 10px">Search</button>
+                                            <button type="button" class="rand-button rand-button-padding bg_color_gray">Clear All</button>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="ss_array " style="/*background: #f5f5f5; */padding-top: 10px">
-                                    <h4 class="ss_form_title title_with_line">
-                                        <span class="title_index title_span upcase_text">Property Characteristics</span>&nbsp;
+                                    <div>
+                                        <div class="ss_array">
+                                            <h4 class="ss_form_title title_with_line">
+                                                <span class="title_index title_span upcase_text">Location</span>&nbsp;
                                         <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>
 
-                                    </h4>
-                                    <div class="collapse_div">
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block " style="width: 68%">
-                                                    <label class="upcase_text font_black" style="display: block">Property Class</label>
-                                                    <select class="selectpicker form-control width_100percent" id="selOption" onchange="changeValue(this)" multiple>
-                                                        
-                                                        <option>All</option>
-                                                        <option>Condo</option>
-                                                        <option>Loft</option>
-                                                        <option>Single Family Home</option>
-                                                        <option>Coop</option>
-                                                        <option>Townhome </option>
-                                                        <option>TIC  </option>
-                                                    </select>
-                                                   <%-- <button type="button" id="btn" onclick="AddOption()" value="Add" >Add</button>
+                                            </h4>
+                                            <div class="collapse_div">
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">Borough</label>
+                                                            <select class=" selectpicker form-control width_100percent" multiple>
+                                                                <option>Manhattan</option>
+                                                                <option>The Bronx</option>
+                                                                <option>Brooklyn</option>
+                                                                <option>Queens</option>
+                                                                <option>Staten Island</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="inline_block  query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">Zip</label>
+                                                            <select class=" selectpicker form-control width_100percent" multiple>
+                                                                <option>10001</option>
+                                                                <option>10002</option>
+                                                                <option>10003</option>
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">Neighborhood</label>
+                                                            <select class="selectpicker form-control width_100percent" multiple>
+                                                                <option>Westbury</option>
+                                                                <option>Neighborhood2</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ss_array " style="/*background: #f5f5f5; */padding-top: 10px">
+                                            <h4 class="ss_form_title title_with_line">
+                                                <span class="title_index title_span upcase_text">Property Characteristics</span>&nbsp;
+                                                <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>
+
+                                            </h4>
+                                            <div class="collapse_div">
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block " style="width: 68%">
+                                                            <label class="upcase_text font_black" style="display: block">Property Class</label>
+                                                            <select class="selectpicker form-control width_100percent" id="selOption" onchange="changeValue(this)" multiple>
+
+                                                                <option>All</option>
+                                                                <option>Condo</option>
+                                                                <option>Loft</option>
+                                                                <option>Single Family Home</option>
+                                                                <option>Coop</option>
+                                                                <option>Townhome </option>
+                                                                <option>TIC  </option>
+                                                            </select>
+                                                            <%-- <button type="button" id="btn" onclick="AddOption()" value="Add" >Add</button>
                                                     <script type="text/javascript">
                                                         function AddOption()
                                                         {
@@ -143,370 +143,306 @@
                                                            debugger;
                                                         }
                                                     </script>--%>
-                                                </div>
-                                                <div class="inline_block  " style="width: 28%">
-                                                    <label class="upcase_text font_black" style="display: block">Zoning</label>
-                                                    <select class=" selectpicker form-control width_100percent" multiple>
-                                                        <option>24d</option>
-                                                        <option>25d</option>
-                                                        <option>26d</option>
-                                                        <option>Zoning 4</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                                        </div>
+                                                        <div class="inline_block  " style="width: 28%">
+                                                            <label class="upcase_text font_black" style="display: block">Zoning</label>
+                                                            <select class=" selectpicker form-control width_100percent" multiple>
+                                                                <option>24d</option>
+                                                                <option>25d</option>
+                                                                <option>26d</option>
+                                                                <option>Zoning 4</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
 
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Unbuilt Sqft</label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Min Sqft</option>
-                                                        <option>1000</option>
-                                                        <option>2000</option>
-                                                        <option>3000</option>
-                                                    </select>
                                                 </div>
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block"></label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Max Sqft</option>
-                                                        <option>1000</option>
-                                                        <option>2000</option>
-                                                        <option>3000</option>
-                                                    </select>
+                                                
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">Unbuilt Sqft</label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Min Sqft</option>
+                                                                <option>1000</option>
+                                                                <option>2000</option>
+                                                                <option>3000</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block"></label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Max Sqft</option>
+                                                                <option>1000</option>
+                                                                <option>2000</option>
+                                                                <option>3000</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Unbuilt Sqft</label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Min Sqft</option>
-                                                        <option>1000</option>
-                                                        <option>2000</option>
-                                                        <option>3000</option>
-                                                    </select>
-                                                </div>
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block"></label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Max Sqft</option>
-                                                        <option>1000</option>
-                                                        <option>2000</option>
-                                                        <option>3000</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Unbuilt Sqft</label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Min Sqft</option>
-                                                        <option>1000</option>
-                                                        <option>2000</option>
-                                                        <option>3000</option>
-                                                    </select>
-                                                </div>
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block"></label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Max Sqft</option>
-                                                        <option>1000</option>
-                                                        <option>2000</option>
-                                                        <option>3000</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">NYC Sqft</label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Min Sqft</option>
-                                                        <option>250 sqft</option>
-                                                        <option>1000 sqft</option>
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">NYC Sqft</label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Min Sqft</option>
+                                                                <option>250 sqft</option>
+                                                                <option>1000 sqft</option>
 
-                                                    </select>
+                                                            </select>
+                                                        </div>
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block"></label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Max Sqft</option>
+                                                                <option>1000 sqft</option>
+                                                                <option>2000 sqft</option>
+                                                                <option>3000 sqft</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block"></label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Max Sqft</option>
-                                                        <option>1000 sqft</option>
-                                                        <option>2000 sqft</option>
-                                                        <option>3000 sqft</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Lot Sqft</label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Min Sqft</option>
-                                                        <option>250 sqft</option>
-                                                        <option>1000 sqft</option>
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">Lot Sqft</label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Min Sqft</option>
+                                                                <option>250 sqft</option>
+                                                                <option>1000 sqft</option>
 
-                                                    </select>
+                                                            </select>
+                                                        </div>
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block"></label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Max Sqft</option>
+                                                                <option>1000 sqft</option>
+                                                                <option>2000 sqft</option>
+                                                                <option>3000 sqft</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block"></label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Max Sqft</option>
-                                                        <option>1000 sqft</option>
-                                                        <option>2000 sqft</option>
-                                                        <option>3000 sqft</option>
-                                                    </select>
+
+                                                <div class="form-group">
+
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">YEAR BUILT</label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>From</option>
+                                                                <%For i = 1900 To Date.Now.Year%>
+                                                                <option><%=i %></option>
+
+                                                                <%Next%>
+                                                            </select>
+                                                        </div>
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block"></label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>To</option>
+                                                                <%For i = 1900 To Date.Now.Year%>
+                                                                <option><%=i %></option>
+
+                                                                <%Next%>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="form-group">
-                                            <div class="inline_block query_input_50_percent">
-                                                <label class="upcase_text font_black" style="display: block">Year built</label>
-                                                <select class="selectpicker form-control width_100percent" multiple>
-
-                                                    <option>1900</option>
-                                                    <option>1901</option>
-                                                    <option>1902</option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="ss_array">
-                                    <h4 class="ss_form_title title_with_line">
-                                        <span class="title_index title_span upcase_text">Financial</span>&nbsp;
+                                        <div class="ss_array">
+                                            <h4 class="ss_form_title title_with_line">
+                                                <span class="title_index title_span upcase_text">Financial</span>&nbsp;
                                         <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>
 
-                                    </h4>
-                                    <div class="collapse_div">
+                                            </h4>
+                                            <div class="collapse_div">
 
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Servicer</label>
-                                                    <select class="selectpicker form-control width_100percent" multiple>
-                                                        <option>BOA</option>
-                                                        <option>Servicer 2</option>
-                                                    </select>
-                                                </div>
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">Servicer</label>
+                                                            <select class="selectpicker form-control width_100percent" multiple>
+                                                                <option>BOA</option>
+                                                                <option>Servicer 2</option>
+                                                            </select>
+                                                        </div>
 
-                                            </div>
+                                                    </div>
 
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Mortgages (Sum)</label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Mini Value</option>
-                                                        <option>$1000</option>
-                                                        <option>$2000</option>
-                                                    </select>
-                                                </div>
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block"></label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Max Value</option>
-                                                        <option>$3000</option>
-                                                        <option>$4000</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Mortgages (Sum)</label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Mini Value</option>
-                                                        <option>$1000</option>
-                                                        <option>$2000</option>
-                                                    </select>
                                                 </div>
 
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block"></label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Max Value</option>
-                                                        <option>$3000</option>
-                                                        <option>$4000</option>
-                                                    </select>
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">Mortgages (Sum)</label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Mini Value</option>
+                                                                <option>$1000</option>
+                                                                <option>$2000</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block"></label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Max Value</option>
+                                                                <option>$3000</option>
+                                                                <option>$4000</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Value</label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Mini Value</option>
-                                                        <option>$1000</option>
-                                                        <option>$2000</option>
-                                                    </select>
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">Mortgages (Sum)</label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Mini Value</option>
+                                                                <option>$1000</option>
+                                                                <option>$2000</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block"></label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Max Value</option>
+                                                                <option>$3000</option>
+                                                                <option>$4000</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block"></label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Max Value</option>
-                                                        <option>$3000</option>
-                                                        <option>$4000</option>
-                                                    </select>
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">Value</label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Mini Value</option>
+                                                                <option>$1000</option>
+                                                                <option>$2000</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block"></label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Max Value</option>
+                                                                <option>$3000</option>
+                                                                <option>$4000</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Equity</label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Mini Value</option>
-                                                        <option>$1000</option>
-                                                        <option>$2000</option>
-                                                    </select>
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">Equity</label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Mini Value</option>
+                                                                <option>$1000</option>
+                                                                <option>$2000</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block"></label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Max Value</option>
+                                                                <option>$3000</option>
+                                                                <option>$4000</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block"></label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Max Value</option>
-                                                        <option>$3000</option>
-                                                        <option>$4000</option>
-                                                    </select>
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">Taxes</label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Mini Value</option>
+                                                                <option>$1000</option>
+                                                                <option>$2000</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block"></label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Max Value</option>
+                                                                <option>$3000</option>
+                                                                <option>$4000</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Taxes</label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Mini Value</option>
-                                                        <option>$1000</option>
-                                                        <option>$2000</option>
-                                                    </select>
+                                                
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">ECB/DOB</label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Mini Value</option>
+                                                                <option>$1000</option>
+                                                                <option>$2000</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block"></label>
+                                                            <select class="selectpicker form-control width_100percent">
+                                                                <option>Max Value</option>
+                                                                <option>$3000</option>
+                                                                <option>$4000</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block"></label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Max Value</option>
-                                                        <option>$3000</option>
-                                                        <option>$4000</option>
-                                                    </select>
+                                                
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">Lis Pendens</label>
+                                                            <input id="Lis_Pendens_yes" type="radio" name="Lis_Pendens">
+                                                            <label for="Lis_Pendens_yes">
+                                                                <span class="box_text">Yes </span>
+                                                            </label>
+                                                            <input id="Lis_Pendens_No" type="radio" name="Lis_Pendens">
+                                                            <label for="Lis_Pendens_No" style="margin-left: 30px">
+                                                                <span class="box_text">No </span>
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Tax Liens</label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Mini Value</option>
-                                                        <option>$1000</option>
-                                                        <option>$2000</option>
-                                                    </select>
-                                                </div>
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block"></label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Max Value</option>
-                                                        <option>$3000</option>
-                                                        <option>$4000</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">ECB/DOB</label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Mini Value</option>
-                                                        <option>$1000</option>
-                                                        <option>$2000</option>
-                                                    </select>
-                                                </div>
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block"></label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Max Value</option>
-                                                        <option>$3000</option>
-                                                        <option>$4000</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Water</label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Mini Value</option>
-                                                        <option>$1000</option>
-                                                        <option>$2000</option>
-                                                    </select>
-                                                </div>
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block"></label>
-                                                    <select class="selectpicker form-control width_100percent">
-                                                        <option>Max Value</option>
-                                                        <option>$3000</option>
-                                                        <option>$4000</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Lis Pendens</label>
-                                                    <input id="Lis_Pendens_yes" type="radio" name="Lis_Pendens">
-                                                    <label for="Lis_Pendens_yes">
-                                                        <span class="box_text">Yes </span>
-                                                    </label>
-                                                    <input id="Lis_Pendens_No" type="radio" name="Lis_Pendens">
-                                                    <label for="Lis_Pendens_No" style="margin-left: 30px">
-                                                        <span class="box_text">No </span>
-                                                    </label>
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block query_input_50_percent">
+                                                            <label class="upcase_text font_black" style="display: block">Docket / Year</label>
+                                                            <select class="selectpicker form-control width_100percent" multiple>
+
+                                                                <% For i = Date.Now.Year-10 To Date.Now.Year%>
+                                                                <option><%=i %></option>
+                                                                <% Next%>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
 
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="form-inline">
-                                                <div class="inline_block query_input_50_percent">
-                                                    <label class="upcase_text font_black" style="display: block">Docket / Year</label>
-                                                    <select class="selectpicker form-control width_100percent" multiple>
-                                                         
-                                                       <% For i  =1900 to 2014%>
-                                                         <option><%=i %></option>
-                                                        <% Next%>
-                                                    </select>
-                                                </div>
-
+                                    </div>
+                                    <div class="clearfix">
+                                        <div style="float: right">
+                                            <div>
+                                                <button class="rand-button bg_color_blue rand-button-padding" type="button" style="margin-right: 10px">Search</button>
+                                                <button class="rand-button bg_color_gray rand-button-padding" type="button">Clear All</button>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
+
                             </div>
-                            <div class="clearfix">
-                                <div style="float: right">
-                                    <div>
-                                        <button class="rand-button bg_color_blue rand-button-padding" type="button" style="margin-right: 10px">Search</button>
-                                        <button class="rand-button bg_color_gray rand-button-padding" type="button">Clear All</button>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
 
 
@@ -573,12 +509,14 @@
 
 
     <script>
-        $(document).ready(
-            function () {
-                $('.selectpicker').selectpicker();
+        $(document).ready(function () {
+            $('.selectpicker').selectpicker();
+            $('#lead_search_left').mCustomScrollbar({
+                theme: "minimal-dark"
             });
-        $('#lead_search_left').mCustomScrollbar({
-            theme: "minimal-dark"
+            
         });
+       
+
     </script>
 </asp:Content>
