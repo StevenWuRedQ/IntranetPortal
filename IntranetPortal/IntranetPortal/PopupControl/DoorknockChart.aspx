@@ -5,6 +5,18 @@
         body {
             height: 100%;
         }
+
+        @media print {
+            img {
+                margin-left: 10px;
+                color: red;
+            }
+
+            P {
+                font-size: 48px;
+                color: red;
+            }
+        }
     </style>
     <div style="color: #231f20">
         <div class="bs-docs-grid">
@@ -119,10 +131,8 @@
     <dx:ASPxCallback runat="server" ID="cpPrint" ClientInstanceName="cpPrint" OnCallback="cpPrint_Callback">
         <ClientSideEvents EndCallback="function(s,e){window.print();}" />
     </dx:ASPxCallback>
-    <div style="position: fixed; height: 90px; width: 170px; bottom: 0; right: 0;">
-
-        <img src="../images/logo_black.jpg" />
-
+    <div style="position: fixed; height: 90px; width: 170px; bottom: 0; right: 0;" class="logo">
+        <img src="../images/logo_black.jpg" class="logo" />
     </div>
 </asp:Content>
 
