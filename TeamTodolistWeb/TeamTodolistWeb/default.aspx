@@ -12,7 +12,11 @@
         }
 
         function ChangeOwner(s, taskId) {
-            gridTaskClient.PerformCallback("ChangeOwner|" + taskId + "|" + s.GetText());
+            //gridTaskClient.PerformCallback("ChangeOwner|" + taskId + "|" + s.GetText());
+            if (!callbackChangeOwner.InCallback())
+                callbackChangeOwner.PerformCallback("ChangeOwner|" + taskId + "|" + s.GetText());
+            else
+                alert("Server is busy. Please try later");
         }
 
         function FilterLogs(s, e) {
@@ -39,18 +43,6 @@
         }
         function OnLogMemoKeyDown(s, e) {
             var textArea = s.GetInputElement();
-            //if (e.htmlEvent.keyCode == 13) {
-            //    //alert(textArea.scrollHeight + "|" + s.GetHeight());
-            //    var text = txtCommentsClient.GetText();
-            //    if (text.trim() == "") {
-            //        alert("Please input comments.");
-            //    }
-            //    else
-            //        gridTrackingClient.UpdateEdit();
-
-            //    e.htmlEvent.preventDefault();
-            //    return;
-            //}
 
             if (textArea.scrollHeight + 2 > s.GetHeight()) {
                 //alert(textArea.scrollHeight + "|" + s.GetHeight());
@@ -89,6 +81,19 @@
             }
         }
 
+        function OnDueDateChange(s, taskId)
+        {
+            if(confirm("Are you sure to change the due date?"))
+            {
+                var newDate = s.GetDate();
+                gridTaskClient.PerformCallback("DueDate|" + taskId + "|" + newDate.toISOString());
+            }
+            else
+            {
+                gridTaskClient.Refresh();
+            }
+        }
+
     </script>
 </head>
 <body>
@@ -115,7 +120,6 @@
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
                                         <dx:ASPxLabel runat="server" ID="lblLoginUser"></dx:ASPxLabel>
-
                                         <dx:ASPxComboBox runat="server" ID="cbUsers" Visible="false">
                                             <Items>
                                                 <dx:ListEditItem Text="Ron" Value="Ron" Selected="true" />
@@ -239,7 +243,14 @@
                             <dx:ASPxLabel ID="lblOwner" runat="server" Text='<%#String.Format("{0}", Eval("Owner"))%>' Visible='<%# Eval("Status") = TaskStatus.Completed%>'></dx:ASPxLabel>
                         </DataItemTemplate>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataDateColumn FieldName="DueDate" Caption="Due Date" PropertiesDateEdit-DisplayFormatString="d" Width="80px">
+                    <dx:GridViewDataDateColumn FieldName="DueDate" Caption="Due Date" PropertiesDateEdit-DisplayFormatString="d" Width="130px">
+                        <DataItemTemplate>
+                            <dx:ASPxDateEdit runat="server" ID="dateDue" Date='<%# Bind("DueDate")%>' Width="110px">
+                                <ValidationSettings ErrorDisplayMode="None">
+                                    <RequiredField IsRequired="True" />
+                                </ValidationSettings>                                
+                            </dx:ASPxDateEdit>
+                        </DataItemTemplate>
                     </dx:GridViewDataDateColumn>
                     <dx:GridViewDataColumn FieldName="Priority" Caption="Priority" Width="60px">
                         <FilterTemplate>
@@ -312,6 +323,7 @@
                 <SettingsPager Mode="EndlessPaging" PageSize="30"></SettingsPager>
             </dx:ASPxGridView>
             <dx:ASPxCallback runat="server" ID="callbackSaveComments" ClientInstanceName="callbackSaveComments" OnCallback="callbackSaveComments_Callback"></dx:ASPxCallback>
+            <dx:ASPxCallback runat="server" ID="callbackChangeOwner" ClientInstanceName="callbackChangeOwner" OnCallback="callbackChangeOwner_Callback"></dx:ASPxCallback>
         </div>
     </form>
 </body>

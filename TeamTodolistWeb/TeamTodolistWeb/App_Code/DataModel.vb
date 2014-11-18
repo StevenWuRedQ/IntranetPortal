@@ -10,6 +10,14 @@
 Imports System
 Imports System.Collections.Generic
 
+Partial Public Class TaskLog
+    Public Property LogId As Integer
+    Public Property UserName As String
+    Public Property CreateDate As Nullable(Of Date)
+    Public Property LogMsg As String
+    Public Property TaskId As Nullable(Of Integer)
+
+End Class
 Partial Public Class TodoList
     Public Property ListId As Integer
     Public Property Title As String

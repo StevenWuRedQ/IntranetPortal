@@ -33,6 +33,8 @@ Partial Class TodoListPage
             item.Status = TaskStatus.NewTask
             Context.TodoLists.Add(item)
             Context.SaveChanges()
+
+            Log("Create a new task.", item.ListId)
         End Using
 
         txtMemo.Text = ""
@@ -63,24 +65,33 @@ Partial Class TodoListPage
                 Else
                     cbPriority.Items.Add(i.ToString)
                 End If
-
             Next
 
             cbPriority.Value = priority
             cbPriority.ClientSideEvents.SelectedIndexChanged = String.Format("function(s,e){{ ChangeTaskPriority(s, {0}); }}", e.KeyValue)
 
-            Select Case priority
-                Case 1
-                    e.Row.BackColor = Drawing.Color.OrangeRed
-                Case 2
-                    e.Row.BackColor = Drawing.Color.IndianRed
-                Case 3
-                    e.Row.BackColor = Drawing.Color.Orange
-                Case 4
-                    e.Row.BackColor = Drawing.Color.PaleVioletRed
-                Case 5
-                    e.Row.BackColor = Drawing.Color.MistyRose
-            End Select
+
+            Dim dueDate = TryCast(gridTask.FindRowCellTemplateControl(e.VisibleIndex, gridTask.Columns("DueDate"), "dateDue"), ASPxDateEdit)
+            dueDate.ClientSideEvents.DateChanged = String.Format("function(s,e){{ OnDueDateChange(s, {0}); }}", e.KeyValue)
+
+            Dim colors = New String() {"#d9534f", "#f0ad4e", "#5bc0de", "#5cb85c", "#428bca"}
+
+            If priority > 0 AndAlso priority < 6 Then
+                e.Row.BackColor = Drawing.ColorTranslator.FromHtml(colors(priority - 1))
+            End If
+
+            'Select Case priority
+            '    Case 1
+            '        e.Row.BackColor = Drawing.ColorTranslator.FromHtml("#d9534f")
+            '    Case 2
+            '        e.Row.BackColor = Drawing.Color.IndianRed
+            '    Case 3
+            '        e.Row.BackColor = Drawing.Color.Orange
+            '    Case 4
+            '        e.Row.BackColor = Drawing.Color.PaleVioletRed
+            '    Case 5
+            '        e.Row.BackColor = Drawing.Color.MistyRose
+            'End Select
         Else
 
         End If
@@ -98,6 +109,10 @@ Partial Class TodoListPage
                 task.Status = TaskStatus.Completed
                 task.UpdateDate = DateTime.Now
                 Context.SaveChanges()
+
+                Log("Complete Task", taskId)
+
+                RefreshTaskPriority(task.Owner, True)
             End Using
         End If
 
@@ -119,27 +134,24 @@ Partial Class TodoListPage
                     End If
                     task.UpdateDate = DateTime.Now
                     Context.SaveChanges()
-
+                    Log("Change Priority to " & priority, taskId)
                     RefreshTaskPriority(task.Owner, isUp)
                 End If
             End Using
         End If
 
-        If e.Parameters.StartsWith("ChangeOwner") Then
+        If e.Parameters.StartsWith("DueDate") Then
             Dim taskId = e.Parameters.Split("|")(1)
-            Dim owner = e.Parameters.Split("|")(2)
+            Dim newDate = CDate(e.Parameters.Split("|")(2))
 
             Using Context As New DevAppEntities
                 Dim task = Context.TodoLists.Where(Function(t) t.ListId = taskId).SingleOrDefault
                 If task IsNot Nothing Then
-
-                    If Not String.IsNullOrEmpty(owner) Then
-                        task.Owner = owner
-                        task.Priority = Nothing
-                    End If
-
+                    task.DueDate = newDate
                     task.UpdateDate = DateTime.Now
                     Context.SaveChanges()
+
+                    Log("Due Date Change to " & newDate.ToShortDateString, taskId)
                 End If
             End Using
         End If
@@ -159,7 +171,7 @@ Partial Class TodoListPage
             End If
 
             For Each task In tasks
-                If task.Priority <> index And index <= 5 Then
+                If task.Priority <> index Then
                     task.Priority = index
                 End If
 
@@ -197,10 +209,47 @@ Partial Class TodoListPage
                 If task IsNot Nothing Then
                     task.Comments = comments '& String.Format("(Update by {0})" + Environment.NewLine, HttpContext.Current.User.Identity.Name)
                     Context.SaveChanges()
+
+                    Log("Change Comments. The new comments: " & comments, taskId)
                 End If
             End Using
-
         End If
+    End Sub
+
+    Protected Sub callbackChangeOwner_Callback(source As Object, e As CallbackEventArgs)
+        If e.Parameter.StartsWith("ChangeOwner") Then
+            Dim taskId = e.Parameter.Split("|")(1)
+            Dim owner = e.Parameter.Split("|")(2)
+
+            Using Context As New DevAppEntities
+                Dim task = Context.TodoLists.Where(Function(t) t.ListId = taskId).SingleOrDefault
+                If task IsNot Nothing Then
+
+                    If Not String.IsNullOrEmpty(owner) Then
+                        task.Owner = owner
+                        task.Priority = Nothing
+                    End If
+
+                    task.UpdateDate = DateTime.Now
+                    Context.SaveChanges()
+
+                    Log("Change Owner to " & owner, taskId)
+                End If
+            End Using
+        End If
+    End Sub
+
+    Private Sub Log(msg As String, taskId As Integer)
+        Using ctx As New DevAppEntities
+            Dim log As New TaskLog
+            log.CreateDate = DateTime.Now
+            log.UserName = Page.User.Identity.Name
+            log.LogMsg = msg
+            log.TaskId = taskId
+
+            ctx.TaskLogs.Add(log)
+            ctx.SaveChanges()
+        End Using
     End Sub
 End Class
 

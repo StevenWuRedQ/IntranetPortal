@@ -23,5 +23,6 @@ Partial Public Class DevAppEntities
     End Sub
 
     Public Overridable Property TodoLists() As DbSet(Of TodoList)
+    Public Overridable Property TaskLogs() As DbSet(Of TaskLog)
 
 End Class
