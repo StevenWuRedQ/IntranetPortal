@@ -12,7 +12,7 @@ Partial Class TodoListPage
             'dateDue.MinDate = DateTime.Now
             'dateDue.Date = DateTime.Now
             For j = 0 To dateneedItem
-                cbDateNeed.Items.Add(If(j = 0, "", j.ToString))
+                cbDateNeed.Items.Add(If(j = 0, "", j.ToString + " days"), If(j = 0, "", j.ToString))
             Next
         End If
     End Sub
@@ -88,6 +88,8 @@ Partial Class TodoListPage
 
             Next
             cbDateNeed.Value = e.GetValue("DateNeed")
+            cbDateNeed.Text = If(e.GetValue("DateNeed") Is Nothing, " ", e.GetValue("DateNeed") & " days")
+
             cbDateNeed.ClientSideEvents.SelectedIndexChanged = String.Format("function(s,e){{ChangeDateNeed(s,{0});}}", e.KeyValue)
             'Dim dueDate = TryCast(gridTask.FindRowCellTemplateControl(e.VisibleIndex, gridTask.Columns("DueDate"), "dateDue"), ASPxDateEdit)
             'dueDate.ClientSideEvents.DateChanged = String.Format("function(s,e){{ OnDueDateChange(s, {0}); }}", e.KeyValue)

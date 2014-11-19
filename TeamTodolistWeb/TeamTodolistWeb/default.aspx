@@ -251,7 +251,7 @@
                          <FilterTemplate>
                         </FilterTemplate>
                         <DataItemTemplate>
-                            <dx:ASPxComboBox runat="server" ID="cbDateNeed" Width="70px">
+                            <dx:ASPxComboBox runat="server" ID="cbDateNeed" Width="70px" Visible='<%# Eval("Status") = TaskStatus.NewTask%>'>
                                 <Items>
                                     <dx:ListEditItem Text="" Value="" />
                                     <dx:ListEditItem Text="1" Value="1" />
@@ -265,6 +265,7 @@
                                     <dx:ListEditItem Text="9" Value="9" />
                                 </Items>
                             </dx:ASPxComboBox>
+                            <dx:ASPxLabel runat="server" Text='<%# Eval("DateNeed") %>' Visible='<%# Eval("Status") <> TaskStatus.NewTask%>'></dx:ASPxLabel>
                         </DataItemTemplate>
                     </dx:GridViewDataDateColumn>
                     <dx:GridViewDataDateColumn FieldName="DueDate" Caption="Due Date" PropertiesDateEdit-DisplayFormatString="d" Width="100px">
