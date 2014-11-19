@@ -167,15 +167,15 @@
                                         <dx:GridViewDataTextColumn FieldName="Neighborhood" Width="120px"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataSpinEditColumn FieldName="NYCSqft" Width="80px"></dx:GridViewDataSpinEditColumn>
                                         <dx:GridViewDataTextColumn FieldName="LotDem" Width="100px"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="C1stMotgrAmt" Width="80px" Caption="1st Mtga" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="MortgageCombo" Width="80px" Caption="MtgCOMBO" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="MortgageData.C1stServicer" Caption="Servicer" Width="100px"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="TaxLiensAmount" Caption="Tax Liens" Width="80px" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="TaxLiensAmount" Caption="TaxCOMBO" Width="80px" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Type" Width="40px" CellStyle-HorizontalAlign="Center" CellStyle-VerticalAlign="Middle">
                                             <DataItemTemplate>
                                                 <dx:ASPxImage EmptyImage-Url="~/images/ide.png" EmptyImage-Width="16" EmptyImage-Height="16" runat="server" ID="imgType" Width="24" Height="24" CssClass="always_show">
                                                 </dx:ASPxImage>
                                             </DataItemTemplate>
-                                        </dx:GridViewDataTextColumn>
+                                        </dx:GridViewDataTextColumn>                                        
                                     </Columns>
                                     <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true"
                                         EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />

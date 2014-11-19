@@ -423,7 +423,7 @@
                             </dx:SplitterContentControl>
                         </ContentCollection>
                     </dx:SplitterPane>
-                    <dx:SplitterPane ShowCollapseBackwardButton="True" Name="LogPanel">
+                    <dx:SplitterPane ShowCollapseBackwardButton="True" Name="LogPanel" MinSize="665px">
                         <PaneStyle BackColor="#F9F9F9"></PaneStyle>
                         <ContentCollection>
                             <dx:SplitterContentControl ID="SplitterContentControl4" runat="server">

@@ -64,8 +64,6 @@
         End Get
     End Property
 
-    'Public ReadOnly Property OwnerAddress As List(Of
-
     Public Function GetHomeOwner(ownerName As String) As HomeOwner
         Using ctx As New Entities
             Return ctx.HomeOwners.Where(Function(ho) ho.BBLE = BBLE And ho.Name = ownerName And ho.Active = True).FirstOrDefault
@@ -273,6 +271,26 @@
             Else
                 Return ""
             End If
+        End Get
+    End Property
+
+    Public ReadOnly Property MortgageCombo As Decimal
+        Get
+            Dim debt As Decimal
+
+            If C1stMotgrAmt.HasValue Then
+                debt += C1stMotgrAmt
+            End If
+
+            If C2ndMotgrAmt.HasValue Then
+                debt += C2ndMotgrAmt
+            End If
+
+            If C3rdMortgrAmt.HasValue Then
+                debt += C3rdMortgrAmt
+            End If
+
+            Return debt
         End Get
     End Property
 
