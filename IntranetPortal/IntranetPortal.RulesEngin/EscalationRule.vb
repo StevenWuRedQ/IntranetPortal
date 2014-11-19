@@ -1,5 +1,4 @@
-﻿
-Public Class TaskEscalationRule
+﻿Public Class TaskEscalationRule
     Public Shared Sub Excute(t As UserTask)
         Dim rule = GetRule(t)
         If rule.IsDateDue(If(t.NotifyDate.HasValue, t.NotifyDate, t.CreateDate)) Then
@@ -96,10 +95,8 @@ Public Class EscalationRule
             If Condition(objData) Then
                 Action.Invoke(objData)
             End If
-
             Return
         End If
-
         Me.Action.Invoke(objData)
     End Sub
 End Class
