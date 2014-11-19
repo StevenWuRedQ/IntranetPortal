@@ -31,5 +31,6 @@ Partial Public Class TodoList
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
     Public Property Priority As Nullable(Of Integer)
-
+    Public Property DateNeed As Nullable(Of Integer)
+   
 End Class

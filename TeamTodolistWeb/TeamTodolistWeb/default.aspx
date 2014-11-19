@@ -64,6 +64,11 @@
             var priority = s.GetText();
             gridTaskClient.PerformCallback("Priority|" + taskId + "|" + priority);
         }
+        function ChangeDateNeed(s,taskId)
+        {
+            var dateNeed = s.GetText();
+            gridTaskClient.PerformCallback("DataNeedChange|" + taskId + "|" + dateNeed);
+        }
 
         function ShowBorder(s) {
             var tbl = s.GetMainElement();
@@ -81,15 +86,12 @@
             }
         }
 
-        function OnDueDateChange(s, taskId)
-        {
-            if(confirm("Are you sure to change the due date?"))
-            {
+        function OnDueDateChange(s, taskId) {
+            if (confirm("Are you sure to change the due date?")) {
                 var newDate = s.GetDate();
                 gridTaskClient.PerformCallback("DueDate|" + taskId + "|" + newDate.toISOString());
             }
-            else
-            {
+            else {
                 gridTaskClient.Refresh();
             }
         }
@@ -98,9 +100,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="width: 80%; background-color: #efefef; margin: 0 auto; padding: 10px;">
+        <div style="width: 1550px; background-color: #efefef; margin: 0 auto; padding: 10px; overflow:auto">
             <h2 style="font-family: Tahoma; font-size: 20px; margin-top: 15px; text-align: center; padding-top: 15px;">Team Task List</h2>
-            <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" Width="900px" ClientInstanceName="AddTaskFormLayout">
+            <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" Width="100%" ClientInstanceName="AddTaskFormLayout">
                 <Items>
                     <dx:LayoutGroup Caption="Add Task" ColCount="3">
                         <Items>
@@ -171,11 +173,13 @@
                             <dx:LayoutItem Caption="Due Date:">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
+                                        
                                         <dx:ASPxDateEdit runat="server" ID="dateDue">
                                             <ValidationSettings ErrorDisplayMode="None">
                                                 <RequiredField IsRequired="True" />
                                             </ValidationSettings>
                                         </dx:ASPxDateEdit>
+                                        
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
@@ -196,7 +200,7 @@
                     </dx:LayoutGroup>
                 </Items>
             </dx:ASPxFormLayout>
-            <dx:ASPxGridView runat="server" ID="gridTask" Width="100%" KeyFieldName="ListId" ClientInstanceName="gridTaskClient" Paddings-Padding="5px" Settings-ShowFilterRow="true" SettingsBehavior-FilterRowMode="Auto">
+            <dx:ASPxGridView runat="server" ID="gridTask" Width="1500" KeyFieldName="ListId" ClientInstanceName="gridTaskClient" Paddings-Padding="5px" Settings-ShowFilterRow="true" SettingsBehavior-FilterRowMode="Auto">
                 <Columns>
                     <dx:GridViewDataColumn FieldName="ListId" Caption="#" Width="50px">
                     </dx:GridViewDataColumn>
@@ -205,7 +209,7 @@
                         <FilterTemplate>
                         </FilterTemplate>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataTextColumn FieldName="Description">
+                    <dx:GridViewDataTextColumn FieldName="Description" Width="300px">
                         <FilterTemplate>
                         </FilterTemplate>
                     </dx:GridViewDataTextColumn>
@@ -243,13 +247,34 @@
                             <dx:ASPxLabel ID="lblOwner" runat="server" Text='<%#String.Format("{0}", Eval("Owner"))%>' Visible='<%# Eval("Status") = TaskStatus.Completed%>'></dx:ASPxLabel>
                         </DataItemTemplate>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataDateColumn FieldName="DueDate" Caption="Due Date" PropertiesDateEdit-DisplayFormatString="d" Width="130px">
+                    <dx:GridViewDataDateColumn FieldName="DateNeed" Caption="Day Need" Width="90px">
+                         <FilterTemplate>
+                        </FilterTemplate>
                         <DataItemTemplate>
-                            <dx:ASPxDateEdit runat="server" ID="dateDue" Date='<%# Bind("DueDate")%>' Width="110px">
+                            <dx:ASPxComboBox runat="server" ID="cbDateNeed" Width="70px">
+                                <Items>
+                                    <dx:ListEditItem Text="" Value="" />
+                                    <dx:ListEditItem Text="1" Value="1" />
+                                    <dx:ListEditItem Text="2" Value="2" />
+                                    <dx:ListEditItem Text="3" Value="3" />
+                                    <dx:ListEditItem Text="4" Value="4" />
+                                    <dx:ListEditItem Text="5" Value="5" />
+                                    <dx:ListEditItem Text="6" Value="6" />
+                                    <dx:ListEditItem Text="7" Value="7" />
+                                    <dx:ListEditItem Text="8" Value="8" />
+                                    <dx:ListEditItem Text="9" Value="9" />
+                                </Items>
+                            </dx:ASPxComboBox>
+                        </DataItemTemplate>
+                    </dx:GridViewDataDateColumn>
+                    <dx:GridViewDataDateColumn FieldName="DueDate" Caption="Due Date" PropertiesDateEdit-DisplayFormatString="d" Width="100px">
+                        <DataItemTemplate>
+                            <%--<dx:ASPxDateEdit runat="server" ID="dateDue" Date='<%# Bind("DueDate")%>'  Width="110px">
                                 <ValidationSettings ErrorDisplayMode="None">
                                     <RequiredField IsRequired="True" />
-                                </ValidationSettings>                                
-                            </dx:ASPxDateEdit>
+                                </ValidationSettings>
+                            </dx:ASPxDateEdit>--%>
+                            <dx:ASPxLabel runat="server" ID="dateDue"  Text='<%# String.Format("{0:d}", Eval("DueDate"))%>'></dx:ASPxLabel>
                         </DataItemTemplate>
                     </dx:GridViewDataDateColumn>
                     <dx:GridViewDataColumn FieldName="Priority" Caption="Priority" Width="60px">
@@ -281,7 +306,7 @@
                             </dx:ASPxComboBox>
                         </FilterTemplate>
                     </dx:GridViewDataColumn>
-                    <dx:GridViewDataTextColumn FieldName="Comments" Caption="Comments" Width="200px">
+                    <dx:GridViewDataTextColumn FieldName="Comments" Caption="Comments" Width="400px">
                         <FilterTemplate></FilterTemplate>
                         <DataItemTemplate>
                             <dx:ASPxMemo ID="txtComments" Width="100%" ClientInstanceName="txtCommentsClient" runat="server" Text='<%# Eval("Comments") %>' Height="13px" Border-BorderColor="Transparent" BackColor="Transparent">
@@ -323,7 +348,9 @@
                 <SettingsPager Mode="EndlessPaging" PageSize="30"></SettingsPager>
             </dx:ASPxGridView>
             <dx:ASPxCallback runat="server" ID="callbackSaveComments" ClientInstanceName="callbackSaveComments" OnCallback="callbackSaveComments_Callback"></dx:ASPxCallback>
-            <dx:ASPxCallback runat="server" ID="callbackChangeOwner" ClientInstanceName="callbackChangeOwner" OnCallback="callbackChangeOwner_Callback"></dx:ASPxCallback>
+            <dx:ASPxCallback runat="server" ID="callbackChangeOwner" ClientInstanceName="callbackChangeOwner" OnCallback="callbackChangeOwner_Callback" >
+                <ClientSideEvents EndCallback="function(s,e){gridTaskClient.Refresh()}"/>
+            </dx:ASPxCallback>
         </div>
     </form>
 </body>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DevAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DevAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TaskLogs">
           <Key>
             <PropertyRef Name="LogId" />
@@ -31,6 +31,7 @@
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateNeed" Type="int" />
         </EntityType>
         <EntityContainer Name="DevAppModelStoreContainer">
           <EntitySet Name="TaskLogs" EntityType="Self.TaskLogs" Schema="dbo" store:Type="Tables" />
@@ -56,6 +57,7 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Priority" Type="Int32" />
+          <Property Name="DateNeed" Type="Int32" />
         </EntityType>
         <EntityContainer Name="DevAppEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TodoLists" EntityType="Self.TodoList" />
@@ -80,6 +82,7 @@
           <EntitySetMapping Name="TodoLists">
             <EntityTypeMapping TypeName="DevAppModel.TodoList">
               <MappingFragment StoreEntitySet="TodoLists">
+                <ScalarProperty Name="DateNeed" ColumnName="DateNeed" />
                 <ScalarProperty Name="Priority" ColumnName="Priority" />
                 <ScalarProperty Name="ListId" ColumnName="ListId" />
                 <ScalarProperty Name="Title" ColumnName="Title" />

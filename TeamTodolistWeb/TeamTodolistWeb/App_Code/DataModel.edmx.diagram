@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b1f20ec9ca9c421c851b0824a4b92e97" Name="Diagram1">
-        <EntityTypeShape EntityType="DevAppModel.TodoList" Width="1.5" PointX="4.375" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DevAppModel.TodoList" Width="1.5" PointX="4.375" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DevAppModel.TaskLog" Width="1.5" PointX="6.5" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>

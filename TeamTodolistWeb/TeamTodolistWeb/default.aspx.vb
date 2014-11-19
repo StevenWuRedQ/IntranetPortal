@@ -9,14 +9,19 @@ Partial Class TodoListPage
         BindData()
         lblLoginUser.Text = Page.User.Identity.Name
         If Not Page.IsPostBack Then
-            dateDue.MinDate = DateTime.Now
-            dateDue.Date = DateTime.Now
+            'dateDue.MinDate = DateTime.Now
+            'dateDue.Date = DateTime.Now
         End If
     End Sub
 
     Sub BindData()
         Using Context As New DevAppEntities
-            gridTask.DataSource = Context.TodoLists.ToList.OrderByDescending(Function(t) t.CreateDate)
+            Dim myLists = Context.TodoLists.ToList.OrderByDescending(Function(t) t.CreateDate)
+            For Each tdlist In myLists
+                tdlist.UpdateDuDate()
+            Next
+            Context.SaveChanges()
+            gridTask.DataSource = myLists
             gridTask.DataBind()
         End Using
     End Sub
@@ -27,11 +32,11 @@ Partial Class TodoListPage
             item.Description = txtMemo.Text
             item.Category = cbCategory.Text
             item.CreateBy = lblLoginUser.Text  'cbUsers.Text
-            item.DueDate = dateDue.Date
+            'item.DueDate = dateDue.Date
             item.Owner = cbAssign.Text
             item.CreateDate = DateTime.Now
             item.Status = TaskStatus.NewTask
-            Context.TodoLists.Add(item)
+
             Context.SaveChanges()
 
             Log("Create a new task.", item.ListId)
@@ -70,9 +75,17 @@ Partial Class TodoListPage
             cbPriority.Value = priority
             cbPriority.ClientSideEvents.SelectedIndexChanged = String.Format("function(s,e){{ ChangeTaskPriority(s, {0}); }}", e.KeyValue)
 
+            Dim cbDateNeed = TryCast(gridTask.FindRowCellTemplateControl(e.VisibleIndex, gridTask.Columns("DateNeed"), "cbDateNeed"), ASPxComboBox)
+            cbDateNeed.Items.Clear()
+            For j = 0 To 15
 
-            Dim dueDate = TryCast(gridTask.FindRowCellTemplateControl(e.VisibleIndex, gridTask.Columns("DueDate"), "dateDue"), ASPxDateEdit)
-            dueDate.ClientSideEvents.DateChanged = String.Format("function(s,e){{ OnDueDateChange(s, {0}); }}", e.KeyValue)
+                cbDateNeed.Items.Add(If(j = 0, "", j.ToString))
+
+            Next
+            cbDateNeed.Value = e.GetValue("DateNeed")
+            cbDateNeed.ClientSideEvents.SelectedIndexChanged = String.Format("function(s,e){{ChangeDateNeed(s,{0});}}", e.KeyValue)
+            'Dim dueDate = TryCast(gridTask.FindRowCellTemplateControl(e.VisibleIndex, gridTask.Columns("DueDate"), "dateDue"), ASPxDateEdit)
+            'dueDate.ClientSideEvents.DateChanged = String.Format("function(s,e){{ OnDueDateChange(s, {0}); }}", e.KeyValue)
 
             Dim colors = New String() {"#d9534f", "#f0ad4e", "#5bc0de", "#5cb85c", "#428bca"}
 
@@ -99,7 +112,14 @@ Partial Class TodoListPage
         Dim txtComments = TryCast(gridTask.FindRowCellTemplateControl(e.VisibleIndex, gridTask.Columns("Comments"), "txtComments"), ASPxMemo)
         txtComments.ClientSideEvents.TextChanged = String.Format("function(s,e){{ SaveComments(s, {0}); }}", e.KeyValue)
     End Sub
-
+    Protected Sub UpDataAllDateNeed()
+        Using Context As New DevAppEntities
+            For Each mList As TodoList In Context.TodoLists.ToList()
+                mList.UpdateDuDate()
+            Next
+            Context.SaveChanges()
+        End Using
+    End Sub
     Protected Sub gridTask_CustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs) Handles gridTask.CustomCallback
         If e.Parameters.StartsWith("CompleteTask") Then
             Dim taskId = CInt(e.Parameters.Split("|")(1))
@@ -115,7 +135,25 @@ Partial Class TodoListPage
                 RefreshTaskPriority(task.Owner, True)
             End Using
         End If
+        If (e.Parameters.StartsWith("DataNeedChange")) Then
+            Dim taskId = CInt(e.Parameters.Split("|")(1))
 
+            Using Context As New DevAppEntities
+                Dim task = Context.TodoLists.Where(Function(t) t.ListId = taskId).SingleOrDefault
+                If (task IsNot Nothing) Then
+                    Dim dateNeed = CInt(e.Parameters.Split("|")(2))
+                    task.DateNeed = dateNeed
+                    task.UpdateDuDate()
+                    task.UpdateDate = DateTime.Now
+                    Context.SaveChanges()
+                    UpDataAllDateNeed()
+                End If
+              
+
+            End Using
+
+
+        End If
         If e.Parameters.StartsWith("Priority") Then
             Dim taskId = e.Parameters.Split("|")(1)
             Dim priority = e.Parameters.Split("|")(2)
@@ -136,6 +174,7 @@ Partial Class TodoListPage
                     Context.SaveChanges()
                     Log("Change Priority to " & priority, taskId)
                     RefreshTaskPriority(task.Owner, isUp)
+                    UpDataAllDateNeed()
                 End If
             End Using
         End If
@@ -231,9 +270,11 @@ Partial Class TodoListPage
                     End If
 
                     task.UpdateDate = DateTime.Now
+
                     Context.SaveChanges()
 
                     Log("Change Owner to " & owner, taskId)
+                    BindData()
                 End If
             End Using
         End If
