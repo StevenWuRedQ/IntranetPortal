@@ -9,7 +9,7 @@ Public Class TodoList
                 Dim frisTask = Context.TodoLists.Where(Function(td) td.Priority IsNot Nothing AndAlso td.Priority = 1 And td.Owner = Me.Owner).FirstOrDefault()
                 If (frisTask IsNot Nothing) Then
                     createDateTime = CType(frisTask.CreateDate, DateTime)
-                    If (Date.Now.Day - createDateTime.Day) > 20 Then
+                    If (Date.Now.DayOfYear - createDateTime.DayOfYear) > 20 Then
                         createDateTime = CType(Date.Now, DateTime)
                     End If
                 End If
