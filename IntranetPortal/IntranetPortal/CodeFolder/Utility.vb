@@ -223,7 +223,7 @@ Public Class Utility
     Public Shared Function FormatPhoneNumber(ByVal myNumber As String)
         Dim mynewNumber As String
         mynewNumber = ""
-        myNumber = myNumber.Replace("(", "").Replace(")", "").Replace("-", "")
+        myNumber = myNumber.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "")
         If myNumber.Length < 10 Then
             mynewNumber = myNumber
         ElseIf myNumber.Length = 10 Then

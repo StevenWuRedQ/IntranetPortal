@@ -111,15 +111,20 @@ Public Class DataWCFService
         Using client As New DataAPI.WCFMacrosClient
             Dim taxLiens = client.Get_Acris_TaxLien(bble)
 
-            If taxLiens IsNot Nothing Then
+            If taxLiens IsNot Nothing AndAlso taxLiens.TaxLienAmt.HasValue Then
                 Using ctx As New Entities
                     Dim liens = ctx.LeadsTaxLiens.Where(Function(lt) lt.BBLE = bble)
                     ctx.LeadsTaxLiens.RemoveRange(liens)
 
                     Dim newLien As New LeadsTaxLien
                     newLien.BBLE = bble
-                    newLien.TaxLiensYear = taxLiens.TaxLienCertDate
-                    newLien.Amount = taxLiens.TaxLienAmt
+                    If taxLiens.TaxLienCertDate.HasValue Then
+                        newLien.TaxLiensYear = taxLiens.TaxLienCertDate
+                    End If
+
+                    If taxLiens.TaxLienAmt.HasValue Then
+                        newLien.Amount = taxLiens.TaxLienAmt
+                    End If
                     ctx.LeadsTaxLiens.Add(newLien)
 
                     ctx.SaveChanges()

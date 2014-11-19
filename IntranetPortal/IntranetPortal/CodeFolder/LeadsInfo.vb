@@ -46,7 +46,6 @@
                 If phones.Count > 0 Then
                     Return String.Join(",", phones.ToArray)
                 End If
-
             End Using
             Return ""
         End Get
