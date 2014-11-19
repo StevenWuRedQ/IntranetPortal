@@ -31,6 +31,7 @@ Partial Class Form1
         Me.Button6 = New System.Windows.Forms.Button()
         Me.startDt = New System.Windows.Forms.DateTimePicker()
         Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Button1
@@ -110,11 +111,21 @@ Partial Class Form1
         Me.Button7.Text = "Data Service Check"
         Me.Button7.UseVisualStyleBackColor = True
         '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(172, 94)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(191, 23)
+        Me.Button8.TabIndex = 9
+        Me.Button8.Text = "Share Jay's New Leads to Karol"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(695, 261)
+        Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.startDt)
         Me.Controls.Add(Me.Button6)
@@ -139,5 +150,6 @@ Partial Class Form1
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents startDt As System.Windows.Forms.DateTimePicker
     Friend WithEvents Button7 As System.Windows.Forms.Button
+    Friend WithEvents Button8 As System.Windows.Forms.Button
 
 End Class

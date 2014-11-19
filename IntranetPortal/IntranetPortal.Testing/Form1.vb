@@ -91,4 +91,30 @@ Public Class Form1
         Dim client As New IntranetPortal.DataAPI.WCFMacrosClient
 
     End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Dim shareFrom = "Jay Gottlieb"
+        Dim shareTo = "Karol Rodriguez"
+
+        Using ctx As New Entities
+            Dim lds = ctx.Leads.Where(Function(ld) ld.EmployeeName = shareFrom And ld.Status = LeadStatus.NewLead).ToList
+
+            For Each ld In lds
+                Dim item = ctx.SharedLeads.Where(Function(sl) sl.BBLE = ld.BBLE And sl.UserName = shareTo).FirstOrDefault
+
+                If item Is Nothing Then
+                    Dim sharedItem As New SharedLead
+                    sharedItem.BBLE = ld.BBLE
+                    sharedItem.UserName = shareTo
+                    sharedItem.CreateBy = "System"
+                    sharedItem.CreateDate = DateTime.Now
+
+                    ctx.SharedLeads.Add(sharedItem)
+                End If
+            Next
+            ctx.SaveChanges()
+        End Using
+
+        MessageBox.Show("Compplete.")
+    End Sub
 End Class
