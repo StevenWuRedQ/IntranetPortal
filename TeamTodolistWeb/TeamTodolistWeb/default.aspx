@@ -64,8 +64,7 @@
             var priority = s.GetText();
             gridTaskClient.PerformCallback("Priority|" + taskId + "|" + priority);
         }
-        function ChangeDateNeed(s,taskId)
-        {
+        function ChangeDateNeed(s, taskId) {
             var dateNeed = s.GetValue();
             gridTaskClient.PerformCallback("DataNeedChange|" + taskId + "|" + dateNeed);
         }
@@ -100,11 +99,11 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="width: 1600px; background-color: #efefef; margin: 0 auto; padding: 10px; overflow:auto">
+        <div style="width: 1600px; background-color: #efefef; margin: 0 auto; padding: 10px; overflow: auto">
             <h2 style="font-family: Tahoma; font-size: 20px; margin-top: 15px; text-align: center; padding-top: 15px;">Team Task List</h2>
-            <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" Width="90%" ClientInstanceName="AddTaskFormLayout">
+            <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server"  ClientInstanceName="AddTaskFormLayout">
                 <Items>
-                    <dx:LayoutGroup Caption="Add Task" ColCount="3">
+                    <dx:LayoutGroup Caption="Add Task" ColCount="4">
                         <Items>
                             <dx:LayoutItem Caption="Description" RowSpan="4" CaptionSettings-Location="Top">
                                 <LayoutItemNestedControlCollection>
@@ -155,7 +154,57 @@
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
-                            <dx:LayoutItem Caption="Category:">
+                            <dx:LayoutItem Caption="Priority:" RowSpan="4" CaptionSettings-Location="Top">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer>
+
+                                        <table style="width:200px">
+                                            <tr>
+                                                <td>
+                                                    priority 1:
+                                                </td>
+                                                <td>
+                                                    <div style="background:#D9534F;width:30px;height:30px" ></div>
+                                                </td>
+                                            </tr>
+                                             <tr>
+                                                <td>
+                                                    priority 2:
+                                                </td>
+                                                <td>
+                                                    <div style="background:#F0AD4E;width:30px;height:30px" ></div>
+                                                </td>
+                                            </tr>
+                                             <tr>
+                                                <td>
+                                                    priority 3:
+                                                </td>
+                                                <td>
+                                                    <div style="background:#5BC0DE;width:30px;height:30px" ></div>
+                                                </td>
+                                            </tr>
+                                             <tr>
+                                                <td>
+                                                    priority 4:
+                                                </td>
+                                                <td>
+                                                    <div style="background:#5CB85C;width:30px;height:30px" ></div>
+                                                </td>
+                                            </tr>
+                                             <tr>
+                                                <td>
+                                                    priority 5:
+                                                </td>
+                                                <td>
+                                                    <div style="background:#428BCA;width:30px;height:30px" ></div>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+                            <dx:LayoutItem Caption="Category:" >
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
                                         <dx:ASPxComboBox runat="server" ID="cbCategory">
@@ -170,16 +219,17 @@
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
+
                             <dx:LayoutItem Caption="Days need:">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
-                                        
-                                       <dx:ASPxComboBox runat="server" ID="cbDateNeed">
-                                           <ValidationSettings ErrorDisplayMode="None">
+
+                                        <dx:ASPxComboBox runat="server" ID="cbDateNeed">
+                                            <ValidationSettings ErrorDisplayMode="None">
                                                 <RequiredField IsRequired="True" />
                                             </ValidationSettings>
-                                       </dx:ASPxComboBox>
-                                        
+                                        </dx:ASPxComboBox>
+
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
@@ -196,6 +246,8 @@
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
+
+                            
                         </Items>
                     </dx:LayoutGroup>
                 </Items>
@@ -248,7 +300,7 @@
                         </DataItemTemplate>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataDateColumn FieldName="DateNeed" Caption="Day Need" Width="90px">
-                         <FilterTemplate>
+                        <FilterTemplate>
                         </FilterTemplate>
                         <DataItemTemplate>
                             <dx:ASPxComboBox runat="server" ID="cbDateNeed" Width="70px" Visible='<%# Eval("Status") = TaskStatus.NewTask%>'>
@@ -275,7 +327,7 @@
                                     <RequiredField IsRequired="True" />
                                 </ValidationSettings>
                             </dx:ASPxDateEdit>--%>
-                            <dx:ASPxLabel runat="server" ID="dateDue"  Text='<%# String.Format("{0:d}", Eval("DueDate"))%>'></dx:ASPxLabel>
+                            <dx:ASPxLabel runat="server" ID="dateDue" Text='<%# String.Format("{0:d}", Eval("DueDate"))%>'></dx:ASPxLabel>
                         </DataItemTemplate>
                     </dx:GridViewDataDateColumn>
                     <dx:GridViewDataColumn FieldName="Priority" Caption="Priority" Width="60px">
@@ -307,7 +359,7 @@
                             </dx:ASPxComboBox>
                         </FilterTemplate>
                     </dx:GridViewDataColumn>
-                    <dx:GridViewDataTextColumn FieldName="Comments" Caption="Comments" Width="400px">
+                    <dx:GridViewDataTextColumn FieldName="Comments" Caption="Comments" Width="300px">
                         <FilterTemplate></FilterTemplate>
                         <DataItemTemplate>
                             <dx:ASPxMemo ID="txtComments" Width="100%" ClientInstanceName="txtCommentsClient" runat="server" Text='<%# Eval("Comments") %>' Height="13px" Border-BorderColor="Transparent" BackColor="Transparent">
@@ -349,8 +401,8 @@
                 <SettingsPager Mode="EndlessPaging" PageSize="30"></SettingsPager>
             </dx:ASPxGridView>
             <dx:ASPxCallback runat="server" ID="callbackSaveComments" ClientInstanceName="callbackSaveComments" OnCallback="callbackSaveComments_Callback"></dx:ASPxCallback>
-            <dx:ASPxCallback runat="server" ID="callbackChangeOwner" ClientInstanceName="callbackChangeOwner" OnCallback="callbackChangeOwner_Callback" >
-                <ClientSideEvents EndCallback="function(s,e){gridTaskClient.Refresh()}"/>
+            <dx:ASPxCallback runat="server" ID="callbackChangeOwner" ClientInstanceName="callbackChangeOwner" OnCallback="callbackChangeOwner_Callback">
+                <ClientSideEvents EndCallback="function(s,e){gridTaskClient.Refresh()}" />
             </dx:ASPxCallback>
         </div>
     </form>
