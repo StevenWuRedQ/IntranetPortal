@@ -35,8 +35,17 @@
     End Function
 
     Public Shared Function AddActivityLog(logDate As DateTime, comments As String, bble As String, category As String, actionType As EnumActionType) As LeadsActivityLog
-        Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
-        Dim empName = HttpContext.Current.User.Identity.Name
+        Dim empId As Integer
+        Dim empName As String
+
+        If HttpContext.Current Is Nothing Then
+            empId = Nothing
+            empName = "System"
+        Else
+            empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
+            empName = HttpContext.Current.User.Identity.Name
+        End If
+
         Return AddActivityLog(logDate, comments, bble, category, empId, empName, actionType)
     End Function
 

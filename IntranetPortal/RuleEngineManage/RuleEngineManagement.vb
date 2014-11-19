@@ -15,9 +15,13 @@
                                            Me.Invoke(New MethodInvoker(Sub()
                                                                            Me.lblStatus.Text = String.Format("Current Status: {0}", status.ToString)
                                                                        End Sub))
-
                                        End Sub
         Dim td As New Threading.Thread(New Threading.ThreadStart(AddressOf svr.Start))
         td.Start()
+    End Sub
+
+    Private Sub ToolStripButton3_Click(sender As Object, e As EventArgs) Handles ToolStripButton3.Click
+        Dim frm = New Troubleshooting
+        frm.Show()
     End Sub
 End Class

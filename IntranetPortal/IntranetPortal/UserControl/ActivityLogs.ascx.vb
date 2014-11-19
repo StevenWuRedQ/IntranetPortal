@@ -325,7 +325,7 @@ Public Class ActivityLogs
         Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
 
         Using Context As New Entities
-            Context.UserTasks.Add(AddTask(hfBBLE.Value, employees, taskAction, taskPriority, scheduleDate, taskDescription, log.LogID, createUser))
+            Context.UserTasks.Add(AddTask(bble, employees, taskAction, taskPriority, scheduleDate, taskDescription, log.LogID, createUser))
             Context.SaveChanges()
         End Using
 
@@ -334,7 +334,7 @@ Public Class ActivityLogs
         For i = 0 To emps.Count - 1
             If Not emps(i) = createUser Then
                 Dim title = String.Format("A New Task has been assigned by {0}  regarding {1} for {2}", createUser, taskAction, ld.PropertyAddress)
-                UserMessage.AddNewMessage(emps(i), title, comments, bble)
+                UserMessage.AddNewMessage(emps(i), title, comments, bble, DateTime.Now, createUser)
             End If
         Next
     End Sub

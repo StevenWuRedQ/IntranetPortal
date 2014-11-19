@@ -32,7 +32,7 @@
         <dx:MenuItem GroupName="Sort" Text="Closed" Name="Closed" Image-Url="/images/drap_closed_icons.png">
             <Image Url="/images/drap_closed_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="Delete" Name="Delete" Visible="false">
+        <dx:MenuItem GroupName="Sort" Text="Share Leads" Name="Shared">
             <Image Url="/images/drap_deadlead_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Reassign" Name="Reassign" Visible="false">
@@ -136,7 +136,7 @@
 </dx:ASPxPopupControl>
 
 <dx:ASPxPopupControl ClientInstanceName="aspxPopupInprocessClient" Width="356px" Height="350px" ID="ASPxPopupControl4"
-   Modal="true" ShowFooter="true" OnWindowCallback="ASPxPopupControl4_WindowCallback"  runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    Modal="true" ShowFooter="true" OnWindowCallback="ASPxPopupControl4_WindowCallback" runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <HeaderTemplate>
         <div class="clearfix">
             <div class="pop_up_header_margin">
@@ -231,6 +231,21 @@
         }" />
 </dx:ASPxPopupControl>
 
+<dx:ASPxPopupControl ClientInstanceName="AspxPopupShareleadClient" Width="356px" Height="450px" ID="aspxPopupShareleads"
+    HeaderText="Share Lead" Modal="true" ContentUrl="~/PopupControl/ShareLeads.aspx"
+    runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <HeaderTemplate>
+        <div class="clearfix">
+            <div class="pop_up_header_margin">
+                <i class="fa fa-share-alt with_circle pop_up_header_icon"></i>
+                <span class="pop_up_header_text">Share Lead</span>
+            </div>
+            <div class="pop_up_buttons_div">
+                <i class="fa fa-times icon_btn" onclick="AspxPopupShareleadClient.Hide()"></i>
+            </div>
+        </div>
+    </HeaderTemplate>
+</dx:ASPxPopupControl>
 
 <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
     <ClientSideEvents CallbackComplete="OnSetStatusComplete" />

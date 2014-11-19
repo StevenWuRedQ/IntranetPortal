@@ -28,12 +28,13 @@ Partial Class RuleEngineManagement
         Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
         Me.lblStatus = New System.Windows.Forms.ToolStripLabel()
         Me.lbLogs = New System.Windows.Forms.ListBox()
+        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStrip1
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2, Me.lblStatus})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripButton3, Me.lblStatus})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(624, 25)
@@ -73,6 +74,15 @@ Partial Class RuleEngineManagement
         Me.lbLogs.Size = New System.Drawing.Size(624, 226)
         Me.lbLogs.TabIndex = 1
         '
+        'ToolStripButton3
+        '
+        Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripButton3.Image = CType(resources.GetObject("ToolStripButton3.Image"), System.Drawing.Image)
+        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton3.Name = "ToolStripButton3"
+        Me.ToolStripButton3.Size = New System.Drawing.Size(103, 22)
+        Me.ToolStripButton3.Text = "Trouble Shooting"
+        '
         'RuleEngineManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -93,4 +103,5 @@ Partial Class RuleEngineManagement
     Friend WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
     Friend WithEvents lblStatus As System.Windows.Forms.ToolStripLabel
     Friend WithEvents lbLogs As System.Windows.Forms.ListBox
+    Friend WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
 End Class

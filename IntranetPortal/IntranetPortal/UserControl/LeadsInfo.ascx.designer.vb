@@ -320,15 +320,6 @@ Partial Public Class LeadsInfo1
     Protected WithEvents ASPxButton3 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
-    '''aspxPopupShareleads control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents aspxPopupShareleads As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
-
-    '''<summary>
     '''ASPxPopupControl2 control.
     '''</summary>
     '''<remarks>

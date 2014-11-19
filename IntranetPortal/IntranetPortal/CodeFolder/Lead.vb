@@ -10,9 +10,8 @@ Partial Public Class Lead
     End Property
 
     Public Shared Function GetInstance(bble As String) As Lead
-        Using context As New Entities
-            Return context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault
-        End Using
+        Dim context As New Entities
+        Return context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault
     End Function
 
     Public ReadOnly Property LastUpdate2 As DateTime
@@ -21,6 +20,7 @@ Partial Public Class Lead
             If log IsNot Nothing Then
                 Return log.ActivityDate
             End If
+
             If LastUpdate.HasValue Then
                 Return LastUpdate
             Else

@@ -95,8 +95,9 @@ Public Class EscalationRule
         If Condition IsNot Nothing Then
             If Condition(objData) Then
                 Action.Invoke(objData)
-                Return
             End If
+
+            Return
         End If
 
         Me.Action.Invoke(objData)

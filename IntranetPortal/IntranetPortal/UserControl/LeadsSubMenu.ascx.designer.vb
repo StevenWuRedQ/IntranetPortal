@@ -167,6 +167,15 @@ Partial Public Class LeadsSubMenu
     Protected WithEvents txtDeadLeadDescription As Global.DevExpress.Web.ASPxEditors.ASPxMemo
 
     '''<summary>
+    '''aspxPopupShareleads control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents aspxPopupShareleads As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
     '''leadStatusCallback control.
     '''</summary>
     '''<remarks>

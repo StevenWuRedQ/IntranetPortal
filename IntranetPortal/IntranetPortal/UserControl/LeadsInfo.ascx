@@ -69,7 +69,6 @@
         if (callPhoneCallbackClient.InCallback()) {
             alert("Server is busy! Please wait!")
         } else {
-
             callPhoneCallbackClient.PerformCallback(e);
         }
     }
@@ -618,21 +617,7 @@
                 <ClientSideEvents PaneCollapsed="function(s,e){}" />
             </dx:ASPxSplitter>
 
-            <dx:ASPxPopupControl ClientInstanceName="AspxPopupShareleadClient" Width="356px" Height="450px" ID="aspxPopupShareleads"
-                HeaderText="Share Lead" Modal="true" ContentUrl="~/PopupControl/ShareLeads.aspx"
-                runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-                <HeaderTemplate>
-                    <div class="clearfix">
-                        <div class="pop_up_header_margin">
-                            <i class="fa fa-share-alt with_circle pop_up_header_icon"></i>
-                            <span class="pop_up_header_text">Share Lead</span>
-                        </div>
-                        <div class="pop_up_buttons_div">
-                            <i class="fa fa-times icon_btn" onclick="AspxPopupShareleadClient.Hide()"></i>
-                        </div>
-                    </div>
-                </HeaderTemplate>
-            </dx:ASPxPopupControl>
+
             <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddPhoneNum" Width="200px" Height="80px" ID="ASPxPopupControl2"
                 HeaderText="Add Phone Number" ShowHeader="false"
                 runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">

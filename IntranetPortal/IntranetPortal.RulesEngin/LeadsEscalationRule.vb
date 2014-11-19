@@ -11,6 +11,20 @@ Public Class LeadsEscalationRule
         Next
     End Sub
 
+    Public Shared Sub Execute(bble As String)
+        Dim ld = Lead.GetInstance(bble)
+        If ld IsNot Nothing Then
+            For Each Rule In GetRule(ld)
+                If Rule.IsDateDue(ld.LastUpdate2, ld) Then
+                    ServiceLog.Log("Execute Leads Rule: " & ld.BBLE)
+                    Rule.Execute(ld)
+                    ServiceLog.Log("Finish Leads Rule: " & ld.BBLE)
+                    Return
+                End If
+            Next
+        End If
+    End Sub
+
     Private Shared Function GetRule(ld As Lead) As List(Of EscalationRule)
         Return TaskRules.Where(Function(r) r.Name = CType(ld.Status, LeadStatus).ToString).OrderByDescending(Function(r) r.Sequence).ToList
     End Function
@@ -42,7 +56,7 @@ Public Class LeadsEscalationRule
         rules.Add(New EscalationRule("Callback", "24:00:00",
                                      Sub(leads)
                                          Dim ld = CType(leads, Lead)
-                                         UserMessage.AddNewMessage(ld.EmployeeName, "You missed a Callback", String.Format("The Call back of Leads ({0}) need to hanlder. BBLE:{1}", ld.LeadsName, ld.BBLE), ld.BBLE)
+                                         UserMessage.AddNewMessage(ld.EmployeeName, "You missed a Callback", String.Format("The Call back of Leads ({0}) need to hanlder. BBLE:{1}", ld.LeadsName, ld.BBLE), ld.BBLE, DateTime.Now, "System")
                                      End Sub,
                                      Function(leads)
                                          Dim ld = CType(leads, Lead)
@@ -63,7 +77,7 @@ Public Class LeadsEscalationRule
                                 End Sub,
                                 Function(leads)
                                     Dim ld = CType(leads, Lead)
-                                    Return ld.LastUpdate2 <= ld.CallbackDate
+                                    Return ld.LastUpdate2 <= ld.CallbackDate.Value.AddDays(1)
                                 End Function, 2,
                                 Function(leads)
                                     Dim ld = CType(leads, Lead)
@@ -78,7 +92,7 @@ Public Class LeadsEscalationRule
                                 End Sub,
                                 Function(leads)
                                     Dim ld = CType(leads, Lead)
-                                    Return ld.LastUpdate2 <= ld.CallbackDate
+                                    Return ld.LastUpdate2 <= ld.CallbackDate.Value.AddDays(2)
                                 End Function, 2,
                                 Function(leads)
                                     Dim ld = CType(leads, Lead)
@@ -102,18 +116,6 @@ Public Class LeadsEscalationRule
                           End Sub, Function(leads)
                                        Return True
                                    End Function, 2))
-
-        'rules.Add(New EscalationRule("HotLeads", "2.00:00:00",
-        '                           Sub(leads)
-        '                               Dim ld = CType(leads, Lead)
-        '                               Dim emps = ld.EmployeeName & ";" & ld.Employee.Manager
-        '                               Dim log As New ActivityLogs
-        '                               log.SetAsTask(emps, "Urgent", "Doorknock Due", String.Format("The leads {0} need doorknock.", ld.LeadsName), ld.BBLE, "System")
-        '                           End Sub,
-        '                           Function(leads)
-        '                               Dim ld = CType(leads, Lead)
-        '                               Return ld.Task Is Nothing And ld.Appointment Is Nothing
-        '                           End Function, 2))
 
         rules.Add(New EscalationRule("Priority", "2.00:00:00",
                                    Sub(leads)
@@ -171,21 +173,21 @@ Public Class LeadsEscalationRule
 
         rules.Add(New EscalationRule("DeadEnd", "120.00:00:00",
                             Sub(leads)
-                         Dim ld = CType(leads, Lead)
-                         ld.ReAssignLeads(ld.Employee.Department & " Office")
-                     End Sub,
+                                Dim ld = CType(leads, Lead)
+                                ld.ReAssignLeads(ld.Employee.Department & " Office")
+                            End Sub,
                             Function(leads)
-                         Dim ld = CType(leads, Lead)
-                         Select Case ld.DeadReason
-                             Case 4
-                                 Return True
-                         End Select
+                                Dim ld = CType(leads, Lead)
+                                Select Case ld.DeadReason
+                                    Case 4
+                                        Return True
+                                End Select
 
-                         Return False
-                     End Function,
+                                Return False
+                            End Function,
                             3))
         Return rules
     End Function
 
-    
+
 End Class

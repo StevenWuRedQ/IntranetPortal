@@ -107,6 +107,12 @@
     <Compile Include="RuleEngineManagement.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Troubleshooting.Designer.vb">
+      <DependentUpon>Troubleshooting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Troubleshooting.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\licenses.licx" />
@@ -118,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RuleEngineManagement.resx">
       <DependentUpon>RuleEngineManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Troubleshooting.resx">
+      <DependentUpon>Troubleshooting.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

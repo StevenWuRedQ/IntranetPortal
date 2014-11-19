@@ -174,9 +174,11 @@ function OnLeadsCategoryClick(s, e) {
             //window.open(url, 'View Leads Info', 'Width=1350px,Height=930px');
         }
 
-        if (e.item.name == "Delete") {
-            SetLeadStatus('11' + '|' + tmpBBLE)
-        }
+        //if (e.item.name == "Shared") {
+        //    var url = '/PopupControl/ShareLeads.aspx?bble=' + leadsInfoBBLE;
+        //    AspxPopupShareleadClient.SetContentUrl(url);
+        //    AspxPopupShareleadClient.Show();
+        //}
 
         if (e.item.name == "Shared") {
             var url = '/PopupControl/ShareLeads.aspx?bble=' + tmpBBLE;
