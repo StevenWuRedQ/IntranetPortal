@@ -4,13 +4,16 @@ Imports DevExpress.Web.ASPxCallback
 
 Partial Class TodoListPage
     Inherits System.Web.UI.Page
-
+    Private dateneedItem As Integer = 15
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         BindData()
         lblLoginUser.Text = Page.User.Identity.Name
         If Not Page.IsPostBack Then
             'dateDue.MinDate = DateTime.Now
             'dateDue.Date = DateTime.Now
+            For j = 0 To dateneedItem
+                cbDateNeed.Items.Add(If(j = 0, "", j.ToString))
+            Next
         End If
     End Sub
 
@@ -36,9 +39,11 @@ Partial Class TodoListPage
             item.Owner = cbAssign.Text
             item.CreateDate = DateTime.Now
             item.Status = TaskStatus.NewTask
+            item.DateNeed = CInt(cbDateNeed.Text)
 
+            Context.TodoLists.Add(item)
             Context.SaveChanges()
-
+            UpDataAllDateNeed()
             Log("Create a new task.", item.ListId)
         End Using
 
@@ -79,7 +84,7 @@ Partial Class TodoListPage
             cbDateNeed.Items.Clear()
             For j = 0 To 15
 
-                cbDateNeed.Items.Add(If(j = 0, "", j.ToString))
+                cbDateNeed.Items.Add(If(j = 0, "", j.ToString + " days"), If(j = 0, "", j.ToString))
 
             Next
             cbDateNeed.Value = e.GetValue("DateNeed")

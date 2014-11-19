@@ -66,7 +66,7 @@
         }
         function ChangeDateNeed(s,taskId)
         {
-            var dateNeed = s.GetText();
+            var dateNeed = s.GetValue();
             gridTaskClient.PerformCallback("DataNeedChange|" + taskId + "|" + dateNeed);
         }
 
@@ -100,9 +100,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="width: 1550px; background-color: #efefef; margin: 0 auto; padding: 10px; overflow:auto">
+        <div style="width: 1600px; background-color: #efefef; margin: 0 auto; padding: 10px; overflow:auto">
             <h2 style="font-family: Tahoma; font-size: 20px; margin-top: 15px; text-align: center; padding-top: 15px;">Team Task List</h2>
-            <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" Width="100%" ClientInstanceName="AddTaskFormLayout">
+            <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" Width="90%" ClientInstanceName="AddTaskFormLayout">
                 <Items>
                     <dx:LayoutGroup Caption="Add Task" ColCount="3">
                         <Items>
@@ -170,15 +170,15 @@
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
-                            <dx:LayoutItem Caption="Due Date:">
+                            <dx:LayoutItem Caption="Days need:">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
                                         
-                                        <dx:ASPxDateEdit runat="server" ID="dateDue">
-                                            <ValidationSettings ErrorDisplayMode="None">
+                                       <dx:ASPxComboBox runat="server" ID="cbDateNeed">
+                                           <ValidationSettings ErrorDisplayMode="None">
                                                 <RequiredField IsRequired="True" />
                                             </ValidationSettings>
-                                        </dx:ASPxDateEdit>
+                                       </dx:ASPxComboBox>
                                         
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
@@ -200,7 +200,7 @@
                     </dx:LayoutGroup>
                 </Items>
             </dx:ASPxFormLayout>
-            <dx:ASPxGridView runat="server" ID="gridTask" Width="1500" KeyFieldName="ListId" ClientInstanceName="gridTaskClient" Paddings-Padding="5px" Settings-ShowFilterRow="true" SettingsBehavior-FilterRowMode="Auto">
+            <dx:ASPxGridView runat="server" ID="gridTask" Width="1100" KeyFieldName="ListId" ClientInstanceName="gridTaskClient" Paddings-Padding="5px" Settings-ShowFilterRow="true" SettingsBehavior-FilterRowMode="Auto">
                 <Columns>
                     <dx:GridViewDataColumn FieldName="ListId" Caption="#" Width="50px">
                     </dx:GridViewDataColumn>
@@ -209,7 +209,7 @@
                         <FilterTemplate>
                         </FilterTemplate>
                     </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataTextColumn FieldName="Description" Width="300px">
+                    <dx:GridViewDataTextColumn FieldName="Description" Width="400px">
                         <FilterTemplate>
                         </FilterTemplate>
                     </dx:GridViewDataTextColumn>
