@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+   
     <script type="text/javascript">
 
         function CompleteTask(taskId) {
@@ -96,12 +97,19 @@
         }
 
     </script>
+     <style>
+        .colors_ss {
+            margin: 5px;
+            width: 20px;
+            height: 20px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div style="width: 1600px; background-color: #efefef; margin: 0 auto; padding: 10px; overflow: auto">
             <h2 style="font-family: Tahoma; font-size: 20px; margin-top: 15px; text-align: center; padding-top: 15px;">Team Task List</h2>
-            <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server"  ClientInstanceName="AddTaskFormLayout">
+            <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" ClientInstanceName="AddTaskFormLayout">
                 <Items>
                     <dx:LayoutGroup Caption="Add Task" ColCount="4">
                         <Items>
@@ -154,49 +162,44 @@
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
-                            <dx:LayoutItem Caption="Priority:" RowSpan="4" CaptionSettings-Location="Top">
+                            <dx:LayoutItem  Caption=" " RowSpan="4" CaptionSettings-Location="Top">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
 
-                                        <table style="width:200px">
+                                        <table style="width:160px">
                                             <tr>
-                                                <td>
-                                                    priority 1:
+                                                <td>priority 1:
                                                 </td>
                                                 <td>
-                                                    <div style="background:#D9534F;width:30px;height:30px" ></div>
-                                                </td>
-                                            </tr>
-                                             <tr>
-                                                <td>
-                                                    priority 2:
-                                                </td>
-                                                <td>
-                                                    <div style="background:#F0AD4E;width:30px;height:30px" ></div>
+                                                    <div style="background: #D9534F;" class="colors_ss"></div>
                                                 </td>
                                             </tr>
-                                             <tr>
-                                                <td>
-                                                    priority 3:
+                                            <tr>
+                                                <td>priority 2:
                                                 </td>
                                                 <td>
-                                                    <div style="background:#5BC0DE;width:30px;height:30px" ></div>
-                                                </td>
-                                            </tr>
-                                             <tr>
-                                                <td>
-                                                    priority 4:
-                                                </td>
-                                                <td>
-                                                    <div style="background:#5CB85C;width:30px;height:30px" ></div>
+                                                    <div style="background: #F0AD4E;" class="colors_ss"></div>
                                                 </td>
                                             </tr>
-                                             <tr>
-                                                <td>
-                                                    priority 5:
+                                            <tr>
+                                                <td>priority 3:
                                                 </td>
                                                 <td>
-                                                    <div style="background:#428BCA;width:30px;height:30px" ></div>
+                                                    <div style="background: #5BC0DE;" class="colors_ss"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>priority 4:
+                                                </td>
+                                                <td>
+                                                    <div style="background: #5CB85C;" class="colors_ss"></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>priority 5:
+                                                </td>
+                                                <td>
+                                                    <div style="background: #428BCA;" class="colors_ss"></div>
                                                 </td>
                                             </tr>
                                         </table>
@@ -204,7 +207,7 @@
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
-                            <dx:LayoutItem Caption="Category:" >
+                            <dx:LayoutItem Caption="Category:">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
                                         <dx:ASPxComboBox runat="server" ID="cbCategory">
@@ -247,7 +250,7 @@
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
 
-                            
+
                         </Items>
                     </dx:LayoutGroup>
                 </Items>
