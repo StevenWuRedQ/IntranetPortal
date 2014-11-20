@@ -74,8 +74,16 @@ portalApp.controller('PortalCtrl', function ($scope, $http) {
     $scope.predicate = "Name"
     $scope.group_text_order = "group_text"
     $scope.addContact = {};
+    $scope.selectType = "All Vendors";
+    $scope.query = {};
     $scope.addContactFunc = function () {
+        var addType = $scope.query.Type;
+        if (addType != null)
+        {
+            $scope.addContact.Type = addType;
 
+        }
+        
         $http.post('/CallBackServices.asmx/addContact', { contact: $scope.addContact }).
         success(function (data, status, headers, config) {
             // this callback will be called asynchronously
@@ -96,7 +104,16 @@ portalApp.controller('PortalCtrl', function ($scope, $http) {
             alert("geting addContactFunc error" + status + "error:" + data);
         });
     }
-
+   
+    $scope.filterContactFunc = function (e,type)
+    {
+        //$(e).parent().find("li").removeClass("popup_menu_list_item_active");
+        //$(e).addClass("popup_menu_list_item_active");
+        debugger;
+        var text = e;
+        $scope.query.Type = type
+        $scope.selectType = text;
+    }
     $scope.SaveCurrent = function () {
         $http.post('/CallBackServices.asmx/SaveContact', { json: $scope.currentContact }).
         success(function (data, status, headers, config) {

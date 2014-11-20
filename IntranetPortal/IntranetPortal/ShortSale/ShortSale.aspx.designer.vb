@@ -158,6 +158,15 @@ Partial Public Class ShortSalePage
     Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
 
     '''<summary>
+    '''ShortSaleSubMenu control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ShortSaleSubMenu As Global.IntranetPortal.ShortSaleSubMenu
+
+    '''<summary>
     '''ASPxPopupCallBackMenu2 control.
     '''</summary>
     '''<remarks>
@@ -210,15 +219,6 @@ Partial Public Class ShortSalePage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
-
-    '''<summary>
-    '''ShortSaleSubMenu control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ShortSaleSubMenu As Global.IntranetPortal.ShortSaleSubMenu
 
     '''<summary>
     '''SelectPartyUC control.

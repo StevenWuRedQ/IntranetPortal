@@ -29,11 +29,11 @@
                     <div style="font-size: 16px; color: #3993c1; font-weight: 700">
                         <ul class="list-group" style="box-shadow: none">
 
-                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===''?'popup_menu_list_item_active':''" ng-click="query.Type=''">All Vendors</li>
-                            <li class="list-group-item popup_menu_list_item">Employees</li>
-                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===0?'popup_menu_list_item_active':''" ng-click="query.Type=0">Title Companies</li>
-                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===2?'popup_menu_list_item_active':''" ng-click="query.Type=2">Attorneys</li>
-                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===1?'popup_menu_list_item_active':''" ng-click="query.Type=1">Sellers</li>
+                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===''?'popup_menu_list_item_active':''" ng-click="filterContactFunc('All Vendors','')">All Vendors</li>
+                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===3?'popup_menu_list_item_active':''" ng-click="filterContactFunc('Employees',3)">Employees</li>
+                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===0?'popup_menu_list_item_active':''" ng-click="filterContactFunc('Title Companies',0)">Title Companies</li>
+                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===2?'popup_menu_list_item_active':''" ng-click="filterContactFunc('Attorneys',2)">Attorneys</li>
+                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===1?'popup_menu_list_item_active':''" ng-click="filterContactFunc('Sellers',1)">Sellers</li>
 
                         </ul>
                     </div>
@@ -43,7 +43,7 @@
                         <div>
 
                             <div class="clearfix" style="color: #234b60; font-size: 20px">
-                                Employees
+                                {{selectType}}
                                 <div style="float: right">
                                     <div style="display: inline-block">
                                         <i class="fa fa-plus-circle tooltip-examples icon_btn" title="Add" style="color: #3993c1; font-size: 24px" data-toggle="modal" data-target="#myModal"></i>
@@ -119,8 +119,8 @@
                                         <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.Name==currentContact.Name? 'popup_employee_list_item_active':''" ng-repeat="contact in groupedcontact.data| filter:query |orderBy:predicate">
                                             <div>
                                                 <div style="font-weight: 900; font-size: 16px">
-                                                    <span class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}}</span>
-                                                    <i class="fa fa-list-alt icon_btn" style="float: right; margin-right: 20px; margin-top: 0px; font-size: 18px;"></i>
+                                                    <label style="width:100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}}</label>
+                                                    <%--<i class="fa fa-list-alt icon_btn" style="float: right; margin-right: 20px; margin-top: 0px; font-size: 18px;"></i>--%>
                                                 </div>
                                                 <%--<div style="font-size: 14px">Eviction</div>--%>
                                             </div>
@@ -143,7 +143,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <img src="/images/agent_pic_defined.png" class="img-circle" style="width: 100px; height: 100px" />
+                                        <img src="/images/User-Empty-icon.png" class="img-circle" style="width: 100px; height: 100px" />
                                     </td>
                                     <td>
                                         <div class="detail_right">

@@ -24,13 +24,13 @@
         //ShortSaleCaseData = short_sale_case_data;
         short_sale_case_data.PropertyInfo.UpdateBy = "<%=Page.User.Identity.Name%>";
 
-       
+
         ShortSaleDataBand(1);
 
         clearHomeOwner();
         //console.log("the data is give to save is 222", JSON.stringify(ShortSaleCaseData));
         var strJson = JSON.stringify(ShortSaleCaseData);
-        
+
         //d_alert(strJson);
 
         SaveClicklCallbackCallbackClinet.PerformCallback(strJson);
@@ -40,9 +40,9 @@
         //RefreshContent();
         clearArray(ShortSaleCaseData.Mortgages);
         clearArray(ShortSaleCaseData.PropertyInfo.Owners);
-        
+
         ShortSaleDataBand(2);
-      
+
     }
 
     function ShowAcrisMap(propBBLE) {
@@ -103,26 +103,8 @@
                             <span class="time_buttons" onclick='ShowDOBWindow("<%= shortSaleCaseData.PropertyInfo.Borough%>","<%= shortSaleCaseData.PropertyInfo.Number%>", "<%= shortSaleCaseData.PropertyInfo.StreetName%>")'>DOB</span>
                             <span class="time_buttons" onclick='ShowAcrisMap("<%= shortSaleCaseData.BBLE %>")'>Acris</span>
                             <span class="time_buttons" onclick='ShowPropertyMap("<%= shortSaleCaseData.BBLE %>")'>Maps</span>
-                           
-                            <dx:ASPxPopupControl ClientInstanceName="aspxAcrisControl" Width="1000px" Height="800px"
-                                ID="ASPxPopupControl1" HeaderText="Acris" Modal="true" CloseAction="CloseButton" ShowMaximizeButton="true"
-                                runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-                                <HeaderTemplate>
-                                    <div class="clearfix">
-                                        <div class="pop_up_header_margin">
-                                            <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
-                                            <span class="pop_up_header_text" id="pop_up_header_text">Acris</span> <span class="pop_up_header_text"><%= shortSaleCaseData.PropertyInfo.PropertyAddress%> <%--(Borough: <%= shortSaleCaseData.PropertyInfo.Borough%>&nbsp; Lot:<%= shortSaleCaseData.PropertyInfo.Lot%>)--%></span>
-                                        </div>
-                                        <div class="pop_up_buttons_div">
-                                            <i class="fa fa-times icon_btn" onclick="aspxAcrisControl.Hide()"></i>
-                                        </div>
-                                    </div>
-                                </HeaderTemplate>
-                                <ContentCollection>
-                                    <dx:PopupControlContentControl runat="server">
-                                    </dx:PopupControlContentControl>
-                                </ContentCollection>
-                            </dx:ASPxPopupControl>
+
+
 
                             <% End If%>
                         </div>
@@ -245,3 +227,22 @@
 
 </dx:ASPxCallbackPanel>
 <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
+<dx:ASPxPopupControl ClientInstanceName="aspxAcrisControl" Width="1000px" Height="800px"
+    ID="ASPxPopupControl1" HeaderText="Acris" Modal="true" CloseAction="CloseButton" ShowMaximizeButton="true"
+    runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <HeaderTemplate>
+        <div class="clearfix">
+            <div class="pop_up_header_margin">
+                <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
+                <span class="pop_up_header_text" id="pop_up_header_text">Acris</span> <span class="pop_up_header_text"><%= shortSaleCaseData.PropertyInfo.PropertyAddress%> <%--(Borough: <%= shortSaleCaseData.PropertyInfo.Borough%>&nbsp; Lot:<%= shortSaleCaseData.PropertyInfo.Lot%>)--%></span>
+            </div>
+            <div class="pop_up_buttons_div">
+                <i class="fa fa-times icon_btn" onclick="aspxAcrisControl.Hide()"></i>
+            </div>
+        </div>
+    </HeaderTemplate>
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server">
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+</dx:ASPxPopupControl>
