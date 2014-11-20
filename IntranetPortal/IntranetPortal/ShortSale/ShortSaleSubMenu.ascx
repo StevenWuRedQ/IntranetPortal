@@ -183,6 +183,7 @@
                 ASPxPopupMapControl.SetContentUrl(url);
             }
         }
+       
     }
 
     function SetPopupControlMapURL(url) {

@@ -93,6 +93,16 @@ function popupControlMapTabClick(index) {
             ASPxPopupMapControl.SetContentUrl(url);
         }
     }
+    if (index == 5) {
+
+        if (tmpBBLE != null) {
+            var url = "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=" + encodeURIComponent(tempAddress);
+
+            var iframe = ASPxPopupMapControl.GetContentIFrame();
+            iframe.onload = function () { };
+            ASPxPopupMapControl.SetContentHtml('<img style="width:100%;height:600px" src="' + url + '"></img>');
+        }
+    }
 }
 
 function ShowPropertyMap(propBBLE) {

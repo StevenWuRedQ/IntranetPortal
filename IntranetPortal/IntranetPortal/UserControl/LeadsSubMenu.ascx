@@ -111,6 +111,8 @@
             </div>
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" style="border: 0px" role="tablist">
+                <li ><a href="#street_image" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(5)">Street View Image</a></li>
+
                 <li class="active"><a href="#streetView" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(0)">Street View</a></li>
                 <li><a href="#mapView" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(1)">Map View</a></li>
                 <li><a href="#BingBird" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(2)">Bing Bird</a></li>
@@ -119,12 +121,16 @@
             </ul>
 
             <!-- Tab panes -->
-            <div class="tab-content" style="display: none">
+            <div class="tab-content" style="display:none">
+                <div class="tab-pane" id="street_image" >
+                 
+                </div>
                 <div class="tab-pane active" id="streetView">streetView</div>
                 <div class="tab-pane" id="mapView">mapView</div>
                 <div class="tab-pane" id="BingBird">BingBird</div>
                 <div class="tab-pane" id="Oasis">Oasis</div>
                 <div class="tab-pane" id="ZOLA">ZOLA</div>
+                
             </div>
             <div style="width: 100%; text-align: center; display: none" id="leads_address_popup"></div>
         </div>

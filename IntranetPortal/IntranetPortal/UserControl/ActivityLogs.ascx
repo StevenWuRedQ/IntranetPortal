@@ -775,7 +775,7 @@
                                                         <table style="width: 100%">
                                                             <tr>
                                                                 <td>
-                                                                    <dx:ASPxTextBox runat="server" ID="txtTaskEmpSearch" ClientInstanceName="txtTaskEmpSearchClient" Width="100%" NullText="Type Employees Name">
+                                                                    <dx:ASPxTextBox runat="server" ID="txtTaskEmpSearch" CssClass="edit_drop" ClientInstanceName="txtTaskEmpSearchClient" Width="100%" NullText="Type Employees Name">
                                                                         <ClientSideEvents KeyDown="function(s,e){                                                                                                                                     
                                                                                                                                         OnEmplistSearch(s.GetText());                                                                                                                                    
                                                                                                                                     }" />

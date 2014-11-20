@@ -72,7 +72,7 @@
                                                             <label class="upcase_text font_black" style="display: block">Borough</label>
                                                             <select class=" selectpicker form-control width_100percent" multiple>
                                                                 <option>Manhattan</option>
-                                                                <option>The Bronx</option>
+                                                                <option>Bronx</option>
                                                                 <option>Brooklyn</option>
                                                                 <option>Queens</option>
                                                                 <option>Staten Island</option>
@@ -477,7 +477,7 @@
                                                     <i class="fa fa-folder-open color_gray"></i>&nbsp;<span class="font_black">5 Results</span>
                                                 </div>
                                                 <div style="margin-top: 30px">
-                                                    <dx:ASPxGridView ID="QueryResultsGrid" runat="server" Width="100%" KeyFieldName="BBLE">
+                                                    <dx:ASPxGridView ID="QueryResultsGrid" runat="server" Width="100%" KeyFieldName="BBLE" SettingsPager-PageSize="20">
                                                         <Columns>
                                                             <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" SelectAllCheckboxMode="AllPages">
                                                             </dx:GridViewCommandColumn>
@@ -487,6 +487,7 @@
                                                             <SelectedRow BackColor="#d9f1fd" ForeColor="#3993c1">
                                                             </SelectedRow>
                                                         </Styles>
+                                                        <Settings />
                                                     </dx:ASPxGridView>
                                                 </div>
                                             </div>
