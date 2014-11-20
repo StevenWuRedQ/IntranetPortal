@@ -350,7 +350,7 @@
                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                         <li style="margin-right: 30px; color: #ffa484; float: right">
                                             <% If Not ShowLogPanel Then%>
-                                            <i class="fa fa-history sale_head_button tooltip-examples" title="Show Logs" onclick="ShowLogPanel()"></i>
+                                            <i class="fa fa-history sale_head_button tooltip-examples" style="color:#295268" title="Show Logs" onclick="ShowLogPanel()"></i>
                                             <% End If%>
                                             <i class="fa fa-refresh sale_head_button sale_head_button_left tooltip-examples" title="Refresh" onclick="popupMenuRefreshClient.ShowAtElement(this)"></i>
                                             <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i>
@@ -444,7 +444,7 @@
                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                         <li style="margin-right: 30px; color: #7396a9; float: right">
                                             <% If Not ShowLogPanel Then%>
-                                            <i class="fa fa-info-circle sale_head_button tooltip-examples" title="Show Property Info" onclick="ShowLogPanel()"></i>
+                                            <i class="fa fa-info-circle sale_head_button tooltip-examples" style="color:#FF400D" title="Show Property Info" onclick="ShowLogPanel()"></i>
                                             <% End If%>
                                             <i class="fa fa-calendar-o sale_head_button sale_head_button_left tooltip-examples" title="Schedule" onclick="ASPxPopupScheduleClient.PerformCallback();"></i>
                                             <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus(5);"></i>
