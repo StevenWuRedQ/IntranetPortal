@@ -38,7 +38,7 @@ function Fomart_data_String(json) {
 function group_func(item) {
     return getNameFirst(item.Name);
 }
-portalApp.controller('PortalCtrl', function ($scope, $http) {
+portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
     $(".tooltip-examples").tooltip({
         placement: 'bottom'
     });
@@ -109,8 +109,9 @@ portalApp.controller('PortalCtrl', function ($scope, $http) {
     {
         //$(e).parent().find("li").removeClass("popup_menu_list_item_active");
         //$(e).addClass("popup_menu_list_item_active");
+        
+        var text = angular.element(e.currentTarget).html();
         debugger;
-        var text = e;
         $scope.query.Type = type
         $scope.selectType = text;
     }

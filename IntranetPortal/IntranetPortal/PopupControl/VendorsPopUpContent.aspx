@@ -29,12 +29,12 @@
                     <div style="font-size: 16px; color: #3993c1; font-weight: 700">
                         <ul class="list-group" style="box-shadow: none">
 
-                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===''?'popup_menu_list_item_active':''" ng-click="filterContactFunc('All Vendors','')">All Vendors</li>
-                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===3?'popup_menu_list_item_active':''" ng-click="filterContactFunc('Employees',3)">Employees</li>
-                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===0?'popup_menu_list_item_active':''" ng-click="filterContactFunc('Title Companies',0)">Title Companies</li>
-                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===2?'popup_menu_list_item_active':''" ng-click="filterContactFunc('Attorneys',2)">Attorneys</li>
-                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===1?'popup_menu_list_item_active':''" ng-click="filterContactFunc('Sellers',1)">Sellers</li>
-
+                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===''?'popup_menu_list_item_active':''" ng-click="filterContactFunc($event,'')">All Vendors</li>
+                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===3?'popup_menu_list_item_active':''" ng-click="filterContactFunc($event,3)">Employees</li>
+                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===0?'popup_menu_list_item_active':''" ng-click="filterContactFunc($event,0)">Title Companies</li>
+                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===2?'popup_menu_list_item_active':''" ng-click="filterContactFunc($event,2)">Attorneys</li>
+                            <li class="list-group-item popup_menu_list_item" ng-class="query.Type===1?'popup_menu_list_item_active':''" ng-click="filterContactFunc($event,1)">Sellers</li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div style="margin-top: 20px">
+                            <div style="margin-top: 20px;display:none">
                                 <%--Press ‘Ctrl’ or ‘Command’ for multiple selections.--%>
                                     Check to muliple selections.
                             </div>

@@ -374,13 +374,12 @@ function ss_field_data(elem, value) {
                 if (value != '')
                 {
                     var t_date = new Date(value);
-                    debugger;
+                    
                     if (t_date != null)
                     {
                         value = fromatDateString(t_date)
                     }
-                    //value = value.substring(0, 10);
-                    debugger;
+                   
                 }
                
             }
