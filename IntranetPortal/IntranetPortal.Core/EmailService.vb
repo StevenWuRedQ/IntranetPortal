@@ -28,7 +28,7 @@ Public Class EmailService
         'End Try
     End Sub
 
-    Public Shared Function SendMail(toAddress As String, ccAddress As String, subject As String, body As String, attachments As String()) As Integer
+    Public Shared Function SendMail(toAddress As String, ccAddress As String, subject As String, body As String, attachments As List(Of String)) As Integer
         Dim mailmsg As New EmailMessage
         mailmsg.ToAddress = toAddress
         mailmsg.CcAddress = ccAddress
@@ -58,7 +58,7 @@ Public Class EmailService
         Message.Body = body
         Message.IsBodyHtml = True
 
-        If attachments IsNot Nothing AndAlso attachments.Length > 0 Then
+        If attachments IsNot Nothing AndAlso attachments.Count > 0 Then
             For Each att In attachments
                 Dim file = DocumentService.DownLoadFileStream(att)
                 Message.Attachments.Add(New Attachment(CType(file.Stream, MemoryStream), file.Name.ToString))
