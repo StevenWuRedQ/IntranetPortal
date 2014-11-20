@@ -11,10 +11,11 @@
         //    ASPxPopupSelectParty.PerformCallback();
         //    isloaded = true;
         //}
+       
         VendorsPopupClient.Show();
         tmpPartyName = partyName;
 
-        //onSelectCallback = selectPartyCallback;
+        onSelectCallback = selectPartyCallback;
     }
 
     function ShowEditForm() {
@@ -55,6 +56,12 @@
           
             
             refreshDiv(tmpPartyName, m_Current_contatct);
+            if (onSelectCallback != null)
+            {
+                onSelectCallback(m_Current_contatct)
+                debugger;
+            }
+            
         }
         VendorsPopupClient.Hide();
         //var  m_Current_contatct = 

@@ -226,7 +226,7 @@
     </PanelCollection>
 
 </dx:ASPxCallbackPanel>
-<uc1:VendorsPopup runat="server" ID="VendorsPopup" />
+
 <dx:ASPxPopupControl ClientInstanceName="aspxAcrisControl" Width="1000px" Height="800px"
     ID="ASPxPopupControl1" HeaderText="Acris" Modal="true" CloseAction="CloseButton" ShowMaximizeButton="true"
     runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
