@@ -111,7 +111,7 @@
             </div>
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" style="border: 0px" role="tablist">
-                <li ><a href="#street_image" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(5)">Street View Image</a></li>
+                <li ><a href="#street_image" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(5)"  style="display:none">Street View Image</a></li>
 
                 <li class="active"><a href="#streetView" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(0)">Street View</a></li>
                 <li><a href="#mapView" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(1)">Map View</a></li>
