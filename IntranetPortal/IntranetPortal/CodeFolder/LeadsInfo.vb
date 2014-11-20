@@ -369,6 +369,14 @@
         End Get
     End Property
 
+    Public ReadOnly Property IsRecycled As Boolean
+        Get
+            Using ctx As New Entities
+                Return ctx.LeadsActivityLogs.Where(Function(log) log.BBLE = BBLE).Count > 0
+            End Using
+        End Get
+    End Property
+
     Public ReadOnly Property UpdateInfo As String
         Get
             Using context As New Entities

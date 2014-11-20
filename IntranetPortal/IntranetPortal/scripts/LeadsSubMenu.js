@@ -267,10 +267,8 @@ function OnGetAddressCallbackComplete(s, e) {
     $('#leads_address_popup').html(tempAddress + "(" + e.result.split("|")[1]+")");
     //var streetViewFrm = "streetViewFrm";
     var streenViewWinFrm = ASPxPopupMapControl.GetContentIFrame(); //document.getElementById(streetViewFrm);
-
     var streenViewWin = (streenViewWinFrm.contentWindow || streenViewWinFrm.contentDocument);
-
-
+    
     if (streenViewWin != null) {
         //alert(streenViewWin);
         if (streenViewWin.showAddress) {

@@ -140,8 +140,11 @@
                                     <span style="color: #234b60; font-size: 30px;">
                                         <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
                                     </span>
+                                    <div style="float:right">
+                                        <a href="/LeadsGenerator/LeadsGenerator.aspx" target="_self" class="rand-button rand-button-blue">Create Leads</a>
+                                        <%--<input type="button" value="Create Leads" Class="rand-button rand-button-blue" onclick=""/>   --%>
+                                    </div>
                                 </div>
-
                             </div>
                             <dx:ASPxPopupMenu ID="ASPxPopupMenu3" runat="server" ClientInstanceName="leadsTypeMenu"
                                 AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -163,6 +166,9 @@
                                         </dx:GridViewCommandColumn>
                                         <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False">
                                             <Settings AllowHeaderFilter="False"></Settings>
+                                            <DataItemTemplate>
+                                                <%#IntranetPortal.Utility.HtmlBlackInfo(Eval("LeadsName"))%>
+                                            </DataItemTemplate>
                                         </dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Neighborhood" Width="120px"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataSpinEditColumn FieldName="NYCSqft" Width="80px"></dx:GridViewDataSpinEditColumn>
@@ -175,7 +181,12 @@
                                                 <dx:ASPxImage EmptyImage-Url="~/images/ide.png" EmptyImage-Width="16" EmptyImage-Height="16" runat="server" ID="imgType" Width="24" Height="24" CssClass="always_show">
                                                 </dx:ASPxImage>
                                             </DataItemTemplate>
-                                        </dx:GridViewDataTextColumn>                                        
+                                        </dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataColumn FieldName="IsRecycled" Width="50px" Caption="Recycle">
+                                            <DataItemTemplate>
+                                                <dx:ASPxCheckBox runat="server" ID="chkRecycled" Checked='<%# Eval("IsRecycled")%>' ReadOnly="true" Visible='<%# Eval("IsRecycled")%>'></dx:ASPxCheckBox>
+                                            </DataItemTemplate>
+                                        </dx:GridViewDataColumn>
                                     </Columns>
                                     <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true"
                                         EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />

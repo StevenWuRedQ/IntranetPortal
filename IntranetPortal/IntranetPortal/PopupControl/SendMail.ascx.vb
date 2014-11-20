@@ -18,10 +18,15 @@ Public Class SendMailControl
 
         If e.Parameter.StartsWith("SendMail") Then
             Dim bble = e.Parameter.Split("|")(1)
-            Dim attachments = EmailAttachments.Text.Split(",")
+            Dim attachments As New List(Of String)
+
+            If Not String.IsNullOrEmpty(EmailAttachments.Text) Then
+                attachments = EmailAttachments.Text.Split(",").ToList
+            End If
+
             Dim mailId = IntranetPortal.Core.EmailService.SendMail(EmailToIDs.Text, EmailCCIDs.Text, EmailSuject.Text, EmailBody.Html, attachments)
             Dim comments = String.Format("{0} send an email.&nbsp;<a href='#' onclick='ShowMailmessage({1})'>Email Message</a>", Page.User.Identity.Name, mailId)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Email)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Email.ToString, LeadsActivityLog.EnumActionType.Email)
             EmailToIDs.Text = ""
             EmailCCIDs.Text = ""
             EmailSuject.Text = ""
@@ -35,7 +40,7 @@ Public Class SendMailControl
             EmailToIDs.Text = msg.ToAddress
             EmailCCIDs.Text = msg.CcAddress
             EmailSuject.Text = msg.Subject
-            EmailBody.ErrorText = msg.Body
+            EmailBody.Html = msg.Body
             EmailAttachments.Text = msg.Attachments
         End If
     End Sub

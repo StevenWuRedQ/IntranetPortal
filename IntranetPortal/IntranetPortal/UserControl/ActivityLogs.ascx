@@ -161,10 +161,6 @@
             if (typeof gridLeads != 'undefined')
                 gridLeads.Refresh();
         });
-
-        //gridTrackingClient.PerformCallback("ResendTask|" + logID);
-
-
     }
 
     function ApproveNewLead(logID) {
@@ -335,8 +331,8 @@
                 <%-- 50px --%>
                 <div style="margin-top: 50px">
                     <div <%= If(DispalyMode = ActivityLogMode.ShortSale, "style='display:none'", "")%>>Date of Comment:</div>
-                    <div class="border_under_line"  <%= If(DispalyMode = ActivityLogMode.ShortSale, "style='display:none'", "style='height:80px'")%>>
-                        <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d" ></dx:ASPxDateEdit>
+                    <div class="border_under_line" <%= If(DispalyMode = ActivityLogMode.ShortSale, "style='display:none'", "style='height:80px'")%>>
+                        <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
                     <div <%= If(DispalyMode = ActivityLogMode.Leads, "style='display:none'", "")%>>
                         <div class="color_gray upcase_text">Type of update</div>
@@ -389,7 +385,7 @@
     <%-- log tables--%>
     <div style="width: 100%; padding: 0px; display: block;">
         <asp:HiddenField ID="hfBBLE" runat="server" />
-        <dx:ASPxGridView ID="gridTracking" Width="100%" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true"  SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID" SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" Styles-FilterBuilderHeader-BackColor="Gray">
+        <dx:ASPxGridView ID="gridTracking" Width="100%" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true" SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID" SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" Styles-FilterBuilderHeader-BackColor="Gray">
             <Styles>
                 <Cell VerticalAlign="Top"></Cell>
                 <Header BackColor="#F5F5F5"></Header>
@@ -522,23 +518,25 @@
                                 </table>
                             </div>
                         </asp:Panel>
-                                                
+
                         <asp:Panel runat="server" ID="pnlDoorknockTask" Visible='<%# Eval("Category").ToString.StartsWith("DoorknockTask")%>'>
                             <div class="log_item_col1">
                                 <div class="clearfix">
                                     <table style="width: 100%">
                                         <tr>
-                                            <td style="width: 350px"><asp:Literal runat="server" ID="ltDoorknockAddress"></asp:Literal> </td>
+                                            <td style="width: 350px">
+                                                <asp:Literal runat="server" ID="ltDoorknockAddress"></asp:Literal>
+                                            </td>
                                             <td>
                                                 <div style="float: right; font-size: 18px">
                                                     <span style="font-size: 14px;">
                                                         <asp:Literal runat="server" ID="ltDoorknockResult"></asp:Literal></span>
-                                                    <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" onclick='<%# String.Format("CompleteTask(""{0}"")", Eval("LogID"))%>' title="Completed" runat="server" id="btnDoorkncokComplete" visible="false"></i>                                                    
+                                                    <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" onclick='<%# String.Format("CompleteTask(""{0}"")", Eval("LogID"))%>' title="Completed" runat="server" id="btnDoorkncokComplete" visible="false"></i>
                                                 </div>
                                             </td>
                                         </tr>
                                     </table>
-                                </div>                                                             
+                                </div>
                             </div>
                         </asp:Panel>
 
@@ -626,6 +624,7 @@
                             <dx:ListEditItem Text="Task" Value="Task" />
                             <dx:ListEditItem Text="Sales Agent" Value="SalesAgent" />
                             <dx:ListEditItem Text="Status" Value="Status" />
+                            <dx:ListEditItem Text="Email" Value="Email" />
                         </Items>
                         <Border BorderStyle="None"></Border>
                         <ClientSideEvents SelectedIndexChanged="OnlogSelectedIndexChanged" />
@@ -668,7 +667,7 @@
             </ContentCollection>
         </dx:ASPxPopupControl>
 
-      <%--  <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectUserControl" Width="260px" Height="250px" MaxWidth="800px" MinWidth="150px" ID="pcMain" HeaderText="Select Employees:" Modal="true"
+        <%--  <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectUserControl" Width="260px" Height="250px" MaxWidth="800px" MinWidth="150px" ID="pcMain" HeaderText="Select Employees:" Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="RightSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server" Visible="false">
@@ -744,7 +743,7 @@
             </HeaderTemplate>
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentSetAsTask">
-                   <asp:HiddenField runat="server" ID="hfResend" />
+                    <asp:HiddenField runat="server" ID="hfResend" />
                     <div style="color: #b1b2b7; padding: 10px">
                         <div class="form-group ">
                             <label class="upcase_text">employees</label>
@@ -827,7 +826,7 @@
                             </dx:ASPxComboBox>
                         </div>
 
-                        <div class="form-group " style="display:none">
+                        <div class="form-group " style="display: none">
                             <label class="upcase_text">Reminder</label>
                             <dx:ASPxComboBox runat="server" DropDownStyle="DropDown" ID="cbTaskSchedule" Width="100%" ClientInstanceName="cbTaskScheduleClient" CssClass="edit_drop">
                                 <Items>
@@ -842,7 +841,7 @@
                         <div class="form-group ">
                             <label class="upcase_text" style="display: block">Description</label>
                             <dx:ASPxMemo runat="server" Width="100%" Height="115px" ID="txtTaskDes" CssClass="edit_text_area"></dx:ASPxMemo>
-                           <%-- <textarea class="edit_text_area" style="height: 115px"></textarea>--%>
+                            <%-- <textarea class="edit_text_area" style="height: 115px"></textarea>--%>
                         </div>
                         <div>
                             <div class="row" style="margin-top: 33px;">

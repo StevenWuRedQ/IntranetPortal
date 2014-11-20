@@ -268,6 +268,11 @@
         else {
             paneLog.Expand();
             paneInfo.Collapse(paneLog);
+
+            if(typeof EmailBody != undefined)
+            {
+                EmailBody.SetHeight(148);
+            }
         }
 
         contentSplitter.AdjustControl();

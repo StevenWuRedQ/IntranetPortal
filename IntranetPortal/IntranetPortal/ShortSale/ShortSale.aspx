@@ -13,14 +13,14 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script src="/scripts/stevenjs.js"></script>
     <script type="text/javascript">
-        function OnCallbackMenuClick(s, e) {                       
+        function OnCallbackMenuClick(s, e) {
             if (e.item.name == "Custom") {
                 ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
                 e.processOnServer = false;
                 return;
             }
 
-            LogClick("FollowUp",e.item.name);
+            LogClick("FollowUp", e.item.name);
             e.processOnServer = false;
         }
     </script>
@@ -95,7 +95,7 @@
                                                                         <%--<i class="fa fa-comments sale_head_button tooltip-examples" title="Chat"></i>
                                                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Email"></i>--%>
                                                                         <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="Re-Assign" onclick="tmpBBLE=leadsInfoBBLE; popupCtrReassignEmployeeListCtr.PerformCallback();popupCtrReassignEmployeeListCtr.ShowAtElement(this);"></i>
-                                                                        <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup()"></i>
+                                                                        <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="Mail" onclick="ShowEmailPopup(leadsInfoBBLE)"></i>
                                                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick=""></i>
                                                                     </li>
                                                                 </ul>

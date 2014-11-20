@@ -66,6 +66,8 @@
             sendingMail = true;
             if (emailBBLE != null)
                 popupSendEmailClient.PerformCallback('SendMail|' + emailBBLE);
+            else
+                alert("Can't send mail without related property.")
         }
         else {
             alert("Server is busy. Please try later.");

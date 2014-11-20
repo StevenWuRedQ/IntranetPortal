@@ -77,6 +77,7 @@
         Approval
         Approved
         Declined
+        Email
     End Enum
 
     Enum EnumActionType

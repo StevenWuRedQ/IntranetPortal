@@ -62,6 +62,30 @@ Public Class Utility
         Return leadsName
     End Function
 
+    Public Shared Function HtmlBlackInfo(leadData As String) As String
+        Dim symble = "-"
+
+        Dim strArry As String() = leadData.Split(New Char() {symble})
+        If strArry Is Nothing Or strArry.Length < 2 Then
+            Return leadData
+        End If
+        Dim FontStr As String = ""
+        Dim EndStr As String = ""
+
+        FontStr = strArry(0)
+
+        EndStr = strArry(1)
+
+        If strArry.Length > 2 Then
+            FontStr = FontStr + "-" + EndStr
+            EndStr = strArry(2)
+        End If
+
+        Return String.Format("<span style=""font-weight: 900;"">{0}</span>-{1}", FontStr, EndStr)
+        'Return "<span style=""font-weight: 900;""> 720 QUINCY ST</span> - " & leadData
+    End Function
+
+
     'Public Shared Function BuildPropertyAddress(num As String, strname As String, borough As String, neighName As String, zip As String) As String
     '    If String.IsNullOrEmpty(num) AndAlso String.IsNullOrEmpty(strname) Then
     '        Return ""
