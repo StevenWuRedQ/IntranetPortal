@@ -107,7 +107,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="width: 1600px; background-color: #efefef; margin: 0 auto; padding: 10px; overflow: auto">
+        <div style="width: 1500px; background-color: #efefef; margin: 0 auto; padding: 10px; overflow: auto">
             <h2 style="font-family: Tahoma; font-size: 20px; margin-top: 15px; text-align: center; padding-top: 15px;">Team Task List</h2>
             <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" ClientInstanceName="AddTaskFormLayout">
                 <Items>
@@ -166,7 +166,7 @@
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
 
-                                        <table style="width:160px">
+                                        <table style="width: 100px;">
                                             <tr>
                                                 <td>priority 1:
                                                 </td>
