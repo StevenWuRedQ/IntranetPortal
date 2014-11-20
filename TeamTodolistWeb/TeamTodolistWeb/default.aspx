@@ -103,6 +103,10 @@
             width: 20px;
             height: 20px;
         }
+        .margin_top
+        {
+            padding-top:5px;
+        }
     </style>
 </head>
 <body>
@@ -116,11 +120,17 @@
                             <dx:LayoutItem Caption="Description" RowSpan="4" CaptionSettings-Location="Top">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
-                                        <dx:ASPxMemo runat="server" ID="txtMemo" Width="600px" Height="100px">
+                                         <dx:ASPxHtmlEditor runat="server" ID="txtMemo" Width="700px" Height="200px">
+                                             <Settings AllowHtmlView="false" AllowPreview="false"/>
+                                             <SettingsValidation>
+                                                 <RequiredField IsRequired="true" />
+                                             </SettingsValidation>
+                                         </dx:ASPxHtmlEditor>
+                                        <%--<dx:ASPxMemo runat="server" ID="txtMemo" Width="600px" Height="100px">
                                             <ValidationSettings ErrorDisplayMode="None">
                                                 <RequiredField IsRequired="True" />
                                             </ValidationSettings>
-                                        </dx:ASPxMemo>
+                                        </dx:ASPxMemo>--%>
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                                 <CaptionSettings Location="Top"></CaptionSettings>
@@ -267,6 +277,12 @@
                     <dx:GridViewDataTextColumn FieldName="Description" Width="400px">
                         <FilterTemplate>
                         </FilterTemplate>
+                       <DataItemTemplate>
+                           <div>
+                               <%# Eval("Description") %>
+                           </div>
+                       </DataItemTemplate>
+
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="CreateBy" Width="80px">
                         <FilterTemplate>
@@ -399,7 +415,11 @@
                 </Columns>
                 <Styles>
                     <AlternatingRow BackColor="#f9f9f9"></AlternatingRow>
+                    <Row VerticalAlign="Top" CssClass="margin_top">
+                        
+                    </Row>
                 </Styles>
+                
                 <Settings VerticalScrollableHeight="600" />
                 <SettingsPager Mode="EndlessPaging" PageSize="30"></SettingsPager>
             </dx:ASPxGridView>

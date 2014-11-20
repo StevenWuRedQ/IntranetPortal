@@ -32,7 +32,7 @@ Partial Class TodoListPage
     Protected Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Using Context As New DevAppEntities
             Dim item As New TodoList
-            item.Description = txtMemo.Text
+            item.Description = txtMemo.Html
             item.Category = cbCategory.Text
             item.CreateBy = lblLoginUser.Text  'cbUsers.Text
             'item.DueDate = dateDue.Date
@@ -47,7 +47,7 @@ Partial Class TodoListPage
             Log("Create a new task.", item.ListId)
         End Using
 
-        txtMemo.Text = ""
+        txtMemo.Html = ""
         BindData()
     End Sub
 
