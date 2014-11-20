@@ -260,7 +260,7 @@
 <script>
     function onRefreashDone() {
         //$("#home_breakdown_table").editableTableWidget();
-        $(".ss_form_input, .input_with_check").prop("disabled", true);
+        $(".ss_form_input, .input_with_check").not(".ss_allow_eidt").prop("disabled", true);
         initToolTips();
 
         format_input();

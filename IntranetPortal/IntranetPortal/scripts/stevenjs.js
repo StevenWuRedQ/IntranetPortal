@@ -371,10 +371,18 @@ function ss_field_data(elem, value) {
             }
 
             if (elem.hasClass("ss_date")) {
-                if (value.indexOf("(") > 0) {
-                    value = toDateValue(new Date(parseInt(value.substr(6))));
+                if (value != '')
+                {
+                    var t_date = new Date(value);
+                    debugger;
+                    if (t_date != null)
+                    {
+                        value = fromatDateString(t_date)
+                    }
+                    //value = value.substring(0, 10);
+                    debugger;
                 }
-
+               
             }
 
             elem.val(value);
@@ -382,6 +390,10 @@ function ss_field_data(elem, value) {
 
     }
     return null;
+}
+function fromatDateString(date)
+{
+    return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
 }
 function is_radio(e) {
     return e.attr("type") == "radio";
@@ -729,6 +741,7 @@ function switch_edit_model(s, objCase) {
 
 function set_edit_model(is_edit)
 {
+    
     var inputs = $(".ss_form_input, .input_with_check");
     var control_btns = $(".ss_control_btn");
     if (is_edit)
@@ -748,7 +761,8 @@ function set_edit_model(is_edit)
         this.style.setProperty("display", is_edit ? "inline" : "none", "important")
     });
     inputs.prop("disabled", !is_edit);
-
+    $(".ss_allow_eidt").prop("disabled", false);// allow alweays edit
+    debugger;
     $(".short_sale_edit").val(is_edit?  "Save": "Edit");
 }
 
@@ -848,7 +862,7 @@ function initSelectByElem(e, dValue) {
 
 $(document).ready(function () {
     initToolTips();
-
+    $(".ss_allow_eidt").prop("disabled", false);// allow alweays edit
 });
 function phone_InitAndKeyUp(s, e) {
     //d_alert("$(s.GetMainElement()) " + $(s.GetMainElement()).attr("id"));
