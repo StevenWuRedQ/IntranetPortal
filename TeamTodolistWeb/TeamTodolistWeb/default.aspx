@@ -120,7 +120,7 @@
                             <dx:LayoutItem Caption="Description" RowSpan="4" CaptionSettings-Location="Top">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
-                                         <dx:ASPxHtmlEditor runat="server" ID="txtMemo" Width="700px" Height="200px">
+                                         <dx:ASPxHtmlEditor runat="server" ID="txtMemo" Width="700px" Height="200px" ClientInstanceName="DescriptionClient">
                                              <Settings AllowHtmlView="false" AllowPreview="false"/>
                                              <SettingsValidation>
                                                  <RequiredField IsRequired="true" />
@@ -254,6 +254,7 @@
                                           <dx:ASPxButton Text="Reset" runat="server" ID="ASPxButton1" AutoPostBack="false">
                                               <ClientSideEvents Click="function(s, e) {
 		ASPxClientEdit.ClearEditorsInContainer(AddTaskFormLayout.GetMainElement ());
+                                                  DescriptionClient.SetHtml('');
 	}" />
                                           </dx:ASPxButton>
                                     </dx:LayoutItemNestedControlContainer>
