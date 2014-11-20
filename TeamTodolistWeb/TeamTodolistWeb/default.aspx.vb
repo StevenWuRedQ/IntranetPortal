@@ -39,7 +39,7 @@ Partial Class TodoListPage
             item.Owner = cbAssign.Text
             item.CreateDate = DateTime.Now
             item.Status = TaskStatus.NewTask
-            item.DateNeed = CInt(cbDateNeed.Text)
+            item.DateNeed = CInt(cbDateNeed.Value)
 
             Context.TodoLists.Add(item)
             Context.SaveChanges()
