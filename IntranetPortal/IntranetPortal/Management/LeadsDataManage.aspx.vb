@@ -84,6 +84,11 @@ Public Class LeadsDataManage
             Dim type = e.Parameter.Split("|")(1)
             LeadsDataService.GetInstance.DataLoop(type)
         End If
+
+        If e.Parameter.StartsWith("GeneralInfoLoop") Then
+            Dim type = e.Parameter.Split("|")(1)
+            LeadsDataService.GetInstance.DataLoop(type, True)
+        End If
     End Sub
 
     Protected Sub callbackLogs_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs) Handles callbackLogs.Callback
@@ -256,7 +261,7 @@ Public Class LeadsDataManage
             Return newLeads
         End Function
 
-        Public Sub DataLoop(datatype As String)
+        Public Sub DataLoop(datatype As String, Optional onlyGeneralInfo As Boolean = False)
             UserMessage.AddNewMessage("Service Message", "Data Loop", "Data loop start. Type: " & datatype, "", DateTime.Now, KEY)
             Dim bbles = LeadDataSource(datatype).Select(Function(b) b.BBLE).ToArray
 
@@ -271,7 +276,7 @@ Public Class LeadsDataManage
                 For i = 0 To 1
                     Dim TestThread As New System.Threading.Thread(New ThreadStart(Sub()
                                                                                       HttpContext.Current = ctx
-                                                                                      InitialData(bbles)
+                                                                                      InitialData(bbles, onlyGeneralInfo)
                                                                                   End Sub))
                     ThreadPool.Add(TestThread)
                     TestThread.Start()
@@ -279,7 +284,7 @@ Public Class LeadsDataManage
             End If
         End Sub
 
-        Public Sub InitialData(bbles As String())
+        Public Sub InitialData(bbles As String(), Optional onlyGeneralInfo As Boolean = False)
             Dim count = 0
 
             While count < bbles.Length
@@ -299,14 +304,18 @@ Public Class LeadsDataManage
 InitialLine:
                 attemps += 1
                 Try
+                    'check if server is busy
+                    While DataWCFService.IsServerBusy
+                        Thread.Sleep(30000)
+                    End While
 
-                    'UpdatePropertyAddress(bble)
+                    If onlyGeneralInfo Then
+                        DataWCFService.UpdateAssessInfo(bble)
+                        UserMessage.AddNewMessage("Service Message", "Initial Data Message " & bble, String.Format("General info BBLE: {0} data is Update. ", bble), bble, DateTime.Now, KEY)
+                        Continue While
+                    End If
+
                     Dim lead = LeadsInfo.GetInstance(bble)
-
-                    'If String.IsNullOrEmpty(lead.Owner) Then
-                    '    DataWCFService.UpdateAssessInfo(bble)
-                    'End If
-
                     If String.IsNullOrEmpty(lead.Owner) Then
                         If DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True) Then
                             UserMessage.AddNewMessage("Service Message", "Initial Data Message " & bble, String.Format("All BBLE: {0} data is loaded. ", bble), bble, DateTime.Now, KEY)

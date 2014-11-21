@@ -8,5 +8,6 @@ Public Interface IPortalDataService
     <OperationContract()>
     Function CompleteDataLoad(bble As String, apiOrderNo As Integer, infoType As String, status As String, updateTime As DateTime, C1stMotgrAmt As Double, C2ndMotgrAmt As Double, TaxesAmt As Double, WaterAmt As Double, ECBViolationsAmt As Double, DOBViolationsAmt As Double, zEstimate As Integer, salesInfo As DataAPI.Acris_Last_Sales_Info) As Boolean
 
-
+    <OperationContract()>
+    Function CompleteServicer(bble As String, billLine1 As String, billLine2 As String, billLine3 As String, billLine4 As String) As Boolean
 End Interface

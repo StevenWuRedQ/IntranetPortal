@@ -37745,6 +37745,18 @@ Namespace DataAPI
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLienResponse")>  _
         Function Get_Acris_TaxLienAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.TaxLien_Info)
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Servicer", ReplyAction:="http://tempuri.org/IWCFMacros/Get_ServicerResponse")>  _
+        Function Get_Servicer(ByVal APIorderNum As Integer, ByVal BBLE As String) As String
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Servicer", ReplyAction:="http://tempuri.org/IWCFMacros/Get_ServicerResponse")>  _
+        Function Get_ServicerAsync(ByVal APIorderNum As Integer, ByVal BBLE As String) As System.Threading.Tasks.Task(Of String)
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Requests_Waiting", ReplyAction:="http://tempuri.org/IWCFMacros/Requests_WaitingResponse")>  _
+        Function Requests_Waiting() As Integer
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Requests_Waiting", ReplyAction:="http://tempuri.org/IWCFMacros/Requests_WaitingResponse")>  _
+        Function Requests_WaitingAsync() As System.Threading.Tasks.Task(Of Integer)
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -37936,6 +37948,22 @@ Namespace DataAPI
         
         Public Function Get_Acris_TaxLienAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.TaxLien_Info) Implements DataAPI.IWCFMacros.Get_Acris_TaxLienAsync
             Return MyBase.Channel.Get_Acris_TaxLienAsync(BBLE)
+        End Function
+        
+        Public Function Get_Servicer(ByVal APIorderNum As Integer, ByVal BBLE As String) As String Implements DataAPI.IWCFMacros.Get_Servicer
+            Return MyBase.Channel.Get_Servicer(APIorderNum, BBLE)
+        End Function
+        
+        Public Function Get_ServicerAsync(ByVal APIorderNum As Integer, ByVal BBLE As String) As System.Threading.Tasks.Task(Of String) Implements DataAPI.IWCFMacros.Get_ServicerAsync
+            Return MyBase.Channel.Get_ServicerAsync(APIorderNum, BBLE)
+        End Function
+        
+        Public Function Requests_Waiting() As Integer Implements DataAPI.IWCFMacros.Requests_Waiting
+            Return MyBase.Channel.Requests_Waiting
+        End Function
+        
+        Public Function Requests_WaitingAsync() As System.Threading.Tasks.Task(Of Integer) Implements DataAPI.IWCFMacros.Requests_WaitingAsync
+            Return MyBase.Channel.Requests_WaitingAsync
         End Function
     End Class
 End Namespace

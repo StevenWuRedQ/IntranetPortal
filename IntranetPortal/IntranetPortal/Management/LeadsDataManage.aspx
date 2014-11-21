@@ -235,8 +235,11 @@
                                             </dx:GridViewDataTextColumn>
                                         </Columns>
                                     </dx:ASPxGridView>
-                                    <dx:ASPxButton runat="server" ID="ASPxButton6" Text="Run Data Loop" AutoPostBack="false">
+                                    <dx:ASPxButton runat="server" ID="ASPxButton6" Text="Run All Data Loop" AutoPostBack="false">
                                         <ClientSideEvents Click="function(s,e){ RunService('Loop|' + cbLeadsType.GetText());  }" />
+                                    </dx:ASPxButton>&nbsp;
+                                    <dx:ASPxButton runat="server" ID="ASPxButton5" Text="Run General Info Loop" AutoPostBack="false">
+                                        <ClientSideEvents Click="function(s,e){ RunService('GeneralInfoLoop|' + cbLeadsType.GetText());  }" />
                                     </dx:ASPxButton>
                                     <dx:ASPxLabel runat="server" ID="ASPxLabel1"></dx:ASPxLabel>
                                     <dx:ASPxProgressBar runat="server" ClientInstanceName="ProgressBar" ID="RefreshBar" Maximum="1" Width="300px" Caption="Progress" Position="0.5">

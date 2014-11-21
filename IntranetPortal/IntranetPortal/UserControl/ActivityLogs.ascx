@@ -801,6 +801,9 @@
                                         </dx:ASPxButton>
                                     </div>
                                 </DropDownWindowTemplate>
+                                <ValidationSettings ErrorDisplayMode="None">
+                                    <RequiredField IsRequired="true" />
+                                </ValidationSettings>
                                 <ClientSideEvents TextChanged="SynchronizeEmpListBoxValues" DropDown="SynchronizeEmpListBoxValues" />
                             </dx:ASPxDropDownEdit>
                         </div>
@@ -813,6 +816,9 @@
                                     <dx:ListEditItem Text="Lookup Request" Value="Lookup Request" />
                                     <dx:ListEditItem Text="Incentive Offer Needed" Value="Incentive Offer Needed" />
                                 </Items>
+                                  <ValidationSettings ErrorDisplayMode="None">
+                                    <RequiredField IsRequired="true" />
+                                </ValidationSettings>
                             </dx:ASPxComboBox>
                         </div>
                         <div class="form-group ">
@@ -823,6 +829,9 @@
                                     <dx:ListEditItem Text="Important" Value="Important" />
                                     <dx:ListEditItem Text="Urgent" Value="Urgent" />
                                 </Items>
+                                  <ValidationSettings ErrorDisplayMode="None">
+                                    <RequiredField IsRequired="true" />
+                                </ValidationSettings>
                             </dx:ASPxComboBox>
                         </div>
 
@@ -849,8 +858,12 @@
                                 <div class="col-md-5">
                                     <dx:ASPxButton ID="ASPxButton4" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
                                         <ClientSideEvents Click="function(){
-                                                                                                                        gridTrackingClient.PerformCallback('Task');
-                                                                                                                        ASPxPopupSetAsTaskControl.Hide();                                                                                                                                                                                                                                         
+                                                                                                                        var container = ASPxPopupSetAsTaskControl.GetMainElement();
+                                                                                                                        if (ASPxClientEdit.ValidateEditorsInContainer(container))
+                                                                                                                        {
+                                                                                                                            gridTrackingClient.PerformCallback('Task');
+                                                                                                                            ASPxPopupSetAsTaskControl.Hide(); 
+                                                                                                                        }                                                                                                                                                                                                                                        
                                                                                                                         }"></ClientSideEvents>
                                     </dx:ASPxButton>
                                     &nbsp;

@@ -131,6 +131,18 @@
   <wsdl:message name="IWCFMacros_Get_Acris_TaxLien_OutputMessage">
     <wsdl:part name="parameters" element="tns:Get_Acris_TaxLienResponse" />
   </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_Servicer_InputMessage">
+    <wsdl:part name="parameters" element="tns:Get_Servicer" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Get_Servicer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Get_ServicerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Requests_Waiting_InputMessage">
+    <wsdl:part name="parameters" element="tns:Requests_Waiting" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_Requests_Waiting_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Requests_WaitingResponse" />
+  </wsdl:message>
   <wsdl:portType name="IWCFMacros">
     <wsdl:operation name="DoWork">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DoWork" message="tns:IWCFMacros_DoWork_InputMessage" />
@@ -211,6 +223,14 @@
     <wsdl:operation name="Get_Acris_TaxLien">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien" message="tns:IWCFMacros_Get_Acris_TaxLien_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_Acris_TaxLienResponse" message="tns:IWCFMacros_Get_Acris_TaxLien_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Servicer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Get_Servicer" message="tns:IWCFMacros_Get_Servicer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Get_ServicerResponse" message="tns:IWCFMacros_Get_Servicer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Requests_Waiting">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/Requests_Waiting" message="tns:IWCFMacros_Requests_Waiting_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/Requests_WaitingResponse" message="tns:IWCFMacros_Requests_Waiting_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WCFMacros_Http" type="tns:IWCFMacros">
@@ -388,6 +408,24 @@
     </wsdl:operation>
     <wsdl:operation name="Get_Acris_TaxLien">
       <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Servicer">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Get_Servicer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Requests_Waiting">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/Requests_Waiting" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

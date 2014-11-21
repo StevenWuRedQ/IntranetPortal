@@ -108,7 +108,7 @@
         }
         $(document).ready(function () {
             // Handler for .ready() called.
-            onInitScorllBar();
+            //onInitScorllBar();
         });
     </script>
 </asp:Content>
@@ -160,7 +160,9 @@
                                 <ClientSideEvents ItemClick="OnChangeLeadsType" />
                             </dx:ASPxPopupMenu>
                             <div style="overflow: hidden; height: 770px;" id="assign_leads_list">
-                                <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" KeyFieldName="BBLE" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared">
+                                <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" 
+                                    ID="gridLeads" ClientInstanceName="gridLeads" Width="100%" KeyFieldName="BBLE" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared" OnCustomCallback="gridLeads_CustomCallback" 
+                                    EnableViewState="true">
                                     <Columns>
                                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" SelectAllCheckboxMode="Page" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
                                         </dx:GridViewCommandColumn>
@@ -209,11 +211,20 @@
                                         <dx:ASPxLabel Text="Select Employee:" ID="ASPxLabel1" runat="server" Font-Size="Large"></dx:ASPxLabel>
                                     </td>
                                     <td>
-                                        <dx:ASPxComboBox runat="server" CssClass="edit_drop" ID="listboxEmployee" TextField="Name" ValueField="EmployeeID" DropDownStyle="DropDownList" IncrementalFilteringMode="StartsWith">
+                                        <dx:ASPxComboBox runat="server" CssClass="edit_drop" ClientInstanceName="listboxEmployee" ID="listboxEmployee" TextField="Name" ValueField="EmployeeID" DropDownStyle="DropDownList" IncrementalFilteringMode="StartsWith">
+                                            <ValidationSettings ErrorDisplayMode="None">
+                                                <RequiredField IsRequired="true" />
+                                            </ValidationSettings>
                                         </dx:ASPxComboBox>
                                     </td>
                                     <td>
-                                        <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" CssClass="rand-button rand-button-blue"></dx:ASPxButton>
+                                        <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" CssClass="rand-button rand-button-blue" AutoPostBack="false">
+                                            <ClientSideEvents Click="function(s,e){
+                                                   if(listboxEmployee.GetIsValid())
+                                                        gridLeads.PerformCallback('AssignLeads');
+                                                }
+                                                " />
+                                        </dx:ASPxButton>
                                         &nbsp;&nbsp;
                                 <dx:ASPxButton Text="Rules" runat="server" ID="ASPxButton1" CssClass="rand-button rand-button-blue" AutoPostBack="false">
                                     <ClientSideEvents Click="function(s,e){popupAssignRules.Show();}" />

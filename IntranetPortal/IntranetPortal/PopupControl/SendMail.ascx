@@ -141,7 +141,7 @@
                         </td>
                         <td>
                             <dx:ASPxTextBox ID="EmailToIDs" runat="server" CssClass="email_input">
-                                <ValidationSettings RequiredField-IsRequired="true"></ValidationSettings>
+                                <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="None"></ValidationSettings>
                             </dx:ASPxTextBox>
                             <%--<asp:TextBox ID="ToTextBox" runat="server" CssClass="form-control"></asp:TextBox>--%>
                         </td>
@@ -162,7 +162,7 @@
                         </td>
                         <td>
                             <dx:ASPxTextBox ID="EmailSuject" runat="server" CssClass="email_input">
-                                 <ValidationSettings RequiredField-IsRequired="true"></ValidationSettings>
+                                 <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="None"></ValidationSettings>
                             </dx:ASPxTextBox>
                             <%--<asp:TextBox ID="ToTextBox" runat="server" CssClass="form-control"></asp:TextBox>--%>
                         </td>

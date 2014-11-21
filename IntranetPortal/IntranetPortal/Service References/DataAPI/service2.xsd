@@ -314,4 +314,31 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="Get_Servicer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="APIorderNum" type="xs:int" />
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_ServicerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Get_ServicerResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Requests_Waiting">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Requests_WaitingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Requests_WaitingResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

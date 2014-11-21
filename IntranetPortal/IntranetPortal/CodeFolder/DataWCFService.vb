@@ -99,6 +99,17 @@ Public Class DataWCFService
         End If
     End Function
 
+    Public Shared Function IsServerBusy() As Boolean
+        Using client As New DataAPI.WCFMacrosClient
+            Try
+                Dim waitingRequest = client.Requests_Waiting
+                Return waitingRequest > 100
+            Catch ex As Exception
+                Return True
+            End Try
+        End Using
+    End Function
+
     Public Shared Function GetTaxlien(bble As String) As DataAPI.TaxLien_Info
         Using client As New DataAPI.WCFMacrosClient
             'Dim data = client.Get_Acris_TaxLien(bble)
@@ -275,8 +286,12 @@ Public Class DataWCFService
                 'Get latest sale info
                 GetLatestSalesInfo(bble)
 
-                'Update Taxliens data
-                UpdateTaxLiens(bble)
+                Try
+                    'Update Taxliens data
+                    UpdateTaxLiens(bble)
+                Catch ex As Exception
+
+                End Try
 
                 'Update leads neighborhood info
                 Dim lead = context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault
@@ -533,18 +548,19 @@ Public Class DataWCFService
 
                     If needCallService Then
                         Try
-                            client.GetPropdata(bble,
-                                               apiOrder.ApiOrderID,
-                                               apiOrder.Acris = apiOrder.ItemStatus.Calling,
-                                               apiOrder.TaxBill = apiOrder.ItemStatus.Calling,
-                                               apiOrder.ECBViolation = apiOrder.ItemStatus.Calling,
-                                               apiOrder.WaterBill = apiOrder.ItemStatus.Calling,
-                                                apiOrder.Zillow = apiOrder.ItemStatus.Calling, False)
+                            'client.GetPropdata(bble,
+                            '                   apiOrder.ApiOrderID,
+                            '                   apiOrder.Acris = apiOrder.ItemStatus.Calling,
+                            '                   apiOrder.TaxBill = apiOrder.ItemStatus.Calling,
+                            '                   apiOrder.ECBViolation = apiOrder.ItemStatus.Calling,
+                            '                   apiOrder.WaterBill = apiOrder.ItemStatus.Calling,
+                            '                    apiOrder.Zillow = apiOrder.ItemStatus.Calling, False)
+
+                            client.Get_Servicer(apiOrder.ApiOrderID, bble)
+
                         Catch ex As System.TimeoutException
                             Throw New Exception("Time is out. The data services is busy now. Please try later. Data Service: GetPropdata " & ex.Message)
                         End Try
-
-                        'Dim owner = client.Get_TLO(apiOrder.ApiOrderID, bble, )
 
                     End If
 
@@ -564,6 +580,12 @@ Public Class DataWCFService
             Throw New Exception("Data Services isnot avaiable now. Please try later. Error messager: " & ex.Message)
         End Try
     End Function
+
+    Public Shared Sub RefreshServicer(bble)
+        Using client As New DataAPI.WCFMacrosClient
+            client.Get_Servicer(1, bble)
+        End Using
+    End Sub
 
     Private Shared Function FieldMap(li As LeadsInfo, leadResult As DataAPI.ALL_NYC_Tax_Liens_CO_Info) As LeadsInfo
         'li.BBLE = leadResult.BBLE

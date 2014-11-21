@@ -8,9 +8,9 @@ Public Class LeadsManagement
     End Sub
 
     Protected Sub page_init(ByVal sender As Object, e As EventArgs) Handles Me.Init
-        'If (Not IsPostBack) Then
-        BindData()
-        'End If
+        If (Not IsPostBack) Then
+            BindData()
+        End If
     End Sub
 
     Sub BindData()
@@ -32,20 +32,19 @@ Public Class LeadsManagement
         End If
     End Sub
 
-    Function GetDataSource() As List(Of LeadsInfo)
-        Using Context As New Entities
-            If User.IsInRole("Admin") Then
-                Return Context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing).ToList
-            Else
-                If Employee.IsManager(User.Identity.Name) Then
-                    Dim name = User.Identity.Name
-                    Return Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = name And li.Lead.Status = LeadStatus.NewLead).ToList
-                End If
-            End If
+    Sub BindLeads()
+        If Not String.IsNullOrEmpty(Request.QueryString("mgr")) Then
+            Dim mgrName = Employee.GetInstance(CInt(Request.QueryString("mgr"))).Name
+            BindTeamList(mgrName)
+        End If
 
-            Return New List(Of LeadsInfo)
-        End Using
-    End Function
+        If Not String.IsNullOrEmpty(Request.QueryString("office")) Then
+            Dim office = Request.QueryString("office").ToString
+            BindOfficeLeads(office)
+        Else
+            BindNewestLeads()
+        End If
+    End Sub
 
     Sub BindNewestLeads()
         Using Context As New Entities
@@ -142,7 +141,7 @@ Public Class LeadsManagement
         listboxEmployee.Items.Add(New ListEditItem(dealleads.Name, dealleads.EmployeeID))
     End Sub
 
-    Protected Sub btnAssign_Click(sender As Object, e As EventArgs) Handles btnAssign.Click
+    Protected Sub btnAssign_Click(sender As Object, e As EventArgs)
         If gridLeads.Selection.Count > 0 AndAlso listboxEmployee.SelectedItem IsNot Nothing Then
             Dim selectedLeads = gridLeads.GetSelectedFieldValues("BBLE", "LeadsName", "Neighborhood")
 
@@ -195,7 +194,9 @@ Public Class LeadsManagement
     End Sub
 
     Protected Sub gridLeads_DataBinding(sender As Object, e As EventArgs)
-        'gridLeads.DataSource = GetDataSource()
+        If gridLeads.DataSource Is Nothing Then
+            BindLeads()
+        End If
     End Sub
 
     Protected Sub gridLeads_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs)
@@ -244,6 +245,46 @@ Public Class LeadsManagement
         End Get
     End Property
 
+    Protected Sub gridLeads_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+        If e.Parameters.StartsWith("AssignLeads") Then
+            If gridLeads.Selection.Count > 0 AndAlso listboxEmployee.SelectedItem IsNot Nothing Then
+                Dim selectedLeads = gridLeads.GetSelectedFieldValues("BBLE", "LeadsName", "Neighborhood")
 
+                Using Context As New Entities
+                    For Each lead In selectedLeads
+                        Dim bble = lead(0).ToString
+                        Dim newlead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
+                        If newlead Is Nothing Then
+                            newlead = New Lead() With {
+                                              .BBLE = lead(0).ToString,
+                                              .LeadsName = lead(1).ToString,
+                                              .Neighborhood = lead(2),
+                                              .EmployeeID = CInt(listboxEmployee.SelectedItem.Value),
+                                              .EmployeeName = listboxEmployee.SelectedItem.Text,
+                                              .Status = LeadStatus.NewLead,
+                                              .AssignDate = DateTime.Now,
+                                            .AssignBy = User.Identity.Name
+                                              }
+                            Context.Leads.Add(newlead)
+                        Else
+                            newlead.LeadsName = lead(1)
+                            newlead.Neighborhood = lead(2)
+                            newlead.EmployeeID = CInt(listboxEmployee.SelectedItem.Value)
+                            newlead.EmployeeName = listboxEmployee.SelectedItem.Text
+                            newlead.Status = LeadStatus.NewLead
+                            newlead.AssignDate = DateTime.Now
+                            newlead.AssignBy = User.Identity.Name
+                        End If
+                    Next
+                    If Context.GetValidationErrors().Count > 0 Then
+                        Throw New Exception("Exception Occured in Assign: " & Context.GetValidationErrors()(0).ValidationErrors(0).ErrorMessage)
+                    Else
+                        Context.SaveChanges()
+                    End If
+                End Using
 
+                gridLeads.DataBind()
+            End If
+        End If
+    End Sub
 End Class

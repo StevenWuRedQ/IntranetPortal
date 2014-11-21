@@ -5,6 +5,55 @@ Public Class PortalDataService
 
     Public Shared Orderid As Integer
 
+    Function CompleteServicer(bble As String, billLine1 As String, billLine2 As String, billLine3 As String, billLine4 As String) As Boolean Implements IPortalDataService.CompleteServicer
+        Dim address As New StringBuilder
+        If Not String.IsNullOrEmpty(billLine1) Then
+            address.Append(billLine1 + ",")
+        End If
+
+        If Not String.IsNullOrEmpty(billLine2) Then
+            address.Append(billLine2 & ",")
+        End If
+
+        If Not String.IsNullOrEmpty(billLine3) Then
+            address.Append(billLine3 & ",")
+        End If
+
+        If Not String.IsNullOrEmpty(billLine4) Then
+            address.Append(billLine4)
+        End If
+
+        Dim servicer = address.ToString
+
+        If servicer.EndsWith(",") Then
+            servicer = servicer.Remove(servicer.Length - 1)
+        End If
+
+        Try
+            Using ctx As New Entities
+                Dim lmd = ctx.LeadsMortgageDatas.Find(bble)
+
+                If lmd IsNot Nothing Then
+                    lmd.C1stServicer = servicer
+                Else
+                    lmd = New LeadsMortgageData
+                    lmd.BBLE = bble
+                    lmd.C1stServicer = servicer
+                    lmd.CreateBy = "DataService"
+                    lmd.CreateDate = DateTime.Now
+
+                    ctx.LeadsMortgageDatas.Add(lmd)
+                End If
+
+                ctx.SaveChanges()
+            End Using
+
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Public Function CompleteDataLoad(bble As String, apiOrderNo As Integer, infoType As String, status As String, updateTime As DateTime, C1stMotgrAmt As Double, C2ndMotgrAmt As Double, TaxesAmt As Double, WaterAmt As Double, ECBViolationsAmt As Double, DOBViolationsAmt As Double, zEstimate As Integer, salesInfo As DataAPI.Acris_Last_Sales_Info) As Boolean Implements IPortalDataService.CompleteDataLoad
         Orderid = apiOrderNo
 
@@ -120,7 +169,6 @@ Public Class PortalDataService
         End If
 
         Return homeOwner
-
     End Function
 
 

@@ -80,10 +80,10 @@
             <PropertyRef Name="EmployeeID" />
           </Key>
           <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmployeeNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Position" Type="nvarchar" MaxLength="50" />
           <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Extension" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Cellphone" Type="nvarchar" MaxLength="50" />
@@ -283,13 +283,13 @@
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="C1stFannie" Type="bit" />
           <Property Name="C1stFHA" Type="bit" />
-          <Property Name="C1stServicer" Type="nvarchar" MaxLength="50" />
+          <Property Name="C1stServicer" Type="nvarchar" MaxLength="500" />
           <Property Name="C2ndFannie" Type="bit" />
           <Property Name="C2ndFHA" Type="bit" />
-          <Property Name="C2ndServicer" Type="nvarchar" MaxLength="50" />
+          <Property Name="C2ndServicer" Type="nvarchar" MaxLength="500" />
           <Property Name="C3rdFannie" Type="bit" />
           <Property Name="C3rdFHA" Type="bit" />
-          <Property Name="C3rdServicer" Type="nvarchar" MaxLength="50" />
+          <Property Name="C3rdServicer" Type="nvarchar" MaxLength="500" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
@@ -463,9 +463,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="ScheduleDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
           <Property Name="Location" Type="nvarchar" MaxLength="120" />
-          <Property Name="Manager" Type="nvarchar" MaxLength="50" />
-          <Property Name="Agent" Type="nvarchar" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="200" />
+          <Property Name="Agent" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="Status" Type="int" />
           <Property Name="Label" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
@@ -909,9 +909,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="ScheduleDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Location" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="Manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Manager" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Agent" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1169,13 +1169,13 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
           <Property Name="C1stFannie" Type="Boolean" />
           <Property Name="C1stFHA" Type="Boolean" />
-          <Property Name="C1stServicer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C1stServicer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="C2ndFannie" Type="Boolean" />
           <Property Name="C2ndFHA" Type="Boolean" />
-          <Property Name="C2ndServicer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C2ndServicer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="C3rdFannie" Type="Boolean" />
           <Property Name="C3rdFHA" Type="Boolean" />
-          <Property Name="C3rdServicer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C3rdServicer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
