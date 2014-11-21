@@ -105,7 +105,7 @@
                                                                 <div class="tab-content">
                                                                     <%--<uc1:PropertyInfo runat="server" ID="PropertyInfo" />--%>
                                                                     <div class="tab-pane active" id="property_info">
-                                                                        <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
+
                                                                         <uc1:ShortSaleOverVew runat="server" ID="ShortSaleOverVew" />
                                                                     </div>
                                                                     <div class="tab-pane" id="home_owner">
@@ -147,7 +147,7 @@
                                                                         </ul>
                                                                         <uc1:ActivityLogs runat="server" ID="ActivityLogs" DispalyMode="ShortSale" />
                                                                     </div>
-                                                                    
+
                                                                     <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
                                                                         AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                                                         ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -190,7 +190,6 @@
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>
-
                                                             </dx:ASPxButton>
                                                                                             </td>
                                                                                         </tr>
@@ -240,7 +239,7 @@
     </div>
     <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
     <uc1:SelectPartyUC runat="server" ID="SelectPartyUC" />
-    
+    <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
 </asp:Content>
 
 

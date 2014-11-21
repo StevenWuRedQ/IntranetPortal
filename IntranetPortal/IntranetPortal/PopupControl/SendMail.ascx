@@ -63,9 +63,16 @@
     var sendingMail = false;
     function SendMail() {
         if (!popupSendEmailClient.InCallback()) {
-            sendingMail = true;
+            
             if (emailBBLE != null)
-                popupSendEmailClient.PerformCallback('SendMail|' + emailBBLE);
+            {
+                var container = popupSendEmailClient.GetMainElement();
+                if (ASPxClientEdit.ValidateEditorsInContainer(container))
+                {
+                    sendingMail = true;
+                    popupSendEmailClient.PerformCallback('SendMail|' + emailBBLE);
+                }
+            }                
             else
                 alert("Can't send mail without related property.")
         }
@@ -76,10 +83,8 @@
 
     function SendMailEndCallback(s, e) {
         s.Show();
-
         if (ShowEmail) {
             document.getElementById("btnSend").style.display = "none";
-
             ShowEmail = false;
         }
 
@@ -135,7 +140,9 @@
                             <span class="font_12 color_gray upcase_text">TO</span>
                         </td>
                         <td>
-                            <dx:ASPxTextBox ID="EmailToIDs" runat="server" CssClass="email_input"></dx:ASPxTextBox>
+                            <dx:ASPxTextBox ID="EmailToIDs" runat="server" CssClass="email_input">
+                                <ValidationSettings RequiredField-IsRequired="true"></ValidationSettings>
+                            </dx:ASPxTextBox>
                             <%--<asp:TextBox ID="ToTextBox" runat="server" CssClass="form-control"></asp:TextBox>--%>
                         </td>
                     </tr>
@@ -154,7 +161,9 @@
                             <span class="font_12 color_gray upcase_text">Subject</span>
                         </td>
                         <td>
-                            <dx:ASPxTextBox ID="EmailSuject" runat="server" CssClass="email_input"></dx:ASPxTextBox>
+                            <dx:ASPxTextBox ID="EmailSuject" runat="server" CssClass="email_input">
+                                 <ValidationSettings RequiredField-IsRequired="true"></ValidationSettings>
+                            </dx:ASPxTextBox>
                             <%--<asp:TextBox ID="ToTextBox" runat="server" CssClass="form-control"></asp:TextBox>--%>
                         </td>
                     </tr>

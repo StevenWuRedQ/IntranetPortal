@@ -15,6 +15,27 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cellphone" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeSince" Type="date" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReportTo" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+          <Property Name="CreateDate" Type="date" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
         <EntityType Name="PartyContacts">
           <Key>
             <PropertyRef Name="ContactId" />
@@ -268,6 +289,7 @@
         </EntityType>
         <EntityContainer Name="IntranetPortalModelStoreContainer">
           <EntitySet Name="CleareneceNotes" EntityType="Self.CleareneceNotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PartyContacts" EntityType="Self.PartyContacts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyBaseInfo" EntityType="Self.PropertyBaseInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyFloors" EntityType="Self.PropertyFloors" Schema="dbo" store:Type="Tables" />
@@ -297,6 +319,7 @@
           <EntitySet Name="ShortSaleCaseComments" EntityType="IntranetPortalModel.ShortSaleCaseComment" />
           <EntitySet Name="PropertyOccupants" EntityType="IntranetPortalModel.PropertyOccupant" />
           <EntitySet Name="TitleJudgementSearches" EntityType="IntranetPortalModel.TitleJudgementSearch" />
+          <EntitySet Name="Employees" EntityType="IntranetPortalModel.Employee" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -558,6 +581,27 @@
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cellphone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeSince" Type="DateTime" Precision="0" />
+          <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReportTo" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -832,6 +876,28 @@
                 <ScalarProperty Name="RepairTax" ColumnName="RepairTax" />
                 <ScalarProperty Name="CaseId" ColumnName="CaseId" />
                 <ScalarProperty Name="JudgementId" ColumnName="JudgementId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="IntranetPortalModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ReportTo" ColumnName="ReportTo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="EmployeeSince" ColumnName="EmployeeSince" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

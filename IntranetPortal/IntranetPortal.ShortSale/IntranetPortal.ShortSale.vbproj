@@ -78,6 +78,9 @@
     <Compile Include="ADOEntity\CleareneceNote.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\Employee.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\PartyContact.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>

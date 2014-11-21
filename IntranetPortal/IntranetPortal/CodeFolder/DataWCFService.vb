@@ -262,28 +262,6 @@ Public Class DataWCFService
                     li = GetFullAssessInfo(bble, li)
                 End If
 
-                'If li.HomeOwners IsNot Nothing Then
-                '    If context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Active = True).Count = 0 Then
-                '        context.HomeOwners.AddRange(li.HomeOwners)
-                '    Else
-                '        For Each owner In li.HomeOwners
-                '            Dim localOwner = context.HomeOwners.Where(Function(ho) ho.BBLE = owner.BBLE And ho.Name = owner.Name And ho.Active = True).SingleOrDefault
-
-                '            If localOwner IsNot Nothing Then
-                '                localOwner.Name = owner.Name
-                '                localOwner.Address1 = owner.Address1
-                '                localOwner.Address2 = owner.Address2
-                '                localOwner.City = owner.City
-                '                localOwner.Country = owner.Country
-                '                localOwner.State = owner.State
-                '                localOwner.Zip = owner.Zip
-                '            Else
-                '                context.HomeOwners.Add(owner)
-                '            End If
-                '        Next
-                '    End If
-                'End If
-
                 'Update Liens Info
                 Dim lisPens = GetLiensInfo(bble)
                 If lisPens IsNot Nothing And lisPens.Count > 0 Then

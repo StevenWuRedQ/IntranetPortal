@@ -113,15 +113,6 @@ Partial Public Class ShortSalePage
     Protected WithEvents SendMail As Global.IntranetPortal.SendMailControl
 
     '''<summary>
-    '''ShortSaleSubMenu control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ShortSaleSubMenu As Global.IntranetPortal.ShortSaleSubMenu
-
-    '''<summary>
     '''ShortSaleOverVew control.
     '''</summary>
     '''<remarks>
@@ -237,4 +228,13 @@ Partial Public Class ShortSalePage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SelectPartyUC As Global.IntranetPortal.SelectPartyUC
+
+    '''<summary>
+    '''ShortSaleSubMenu control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ShortSaleSubMenu As Global.IntranetPortal.ShortSaleSubMenu
 End Class

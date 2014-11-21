@@ -24,6 +24,7 @@ Public Class ShortSaleManage
         If propBase Is Nothing Then
             propBase = New IntranetPortal.ShortSale.PropertyBaseInfo
             propBase.BBLE = li.BBLE
+            propBase.Borough = li.Borough
             propBase.Block = li.Block
             propBase.Lot = li.Lot
             propBase.Number = li.Number

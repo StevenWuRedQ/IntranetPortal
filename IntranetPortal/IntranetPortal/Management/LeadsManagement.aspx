@@ -141,8 +141,8 @@
                                         <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
                                     </span>
                                     <div style="float:right">
-                                        <a href="/LeadsGenerator/LeadsGenerator.aspx" target="_self" class="rand-button rand-button-blue">Create Leads</a>
-                                        <%--<input type="button" value="Create Leads" Class="rand-button rand-button-blue" onclick=""/>   --%>
+                                      <%--  <a href="/LeadsGenerator/LeadsGenerator.aspx" target="_self" class="rand-button rand-button-blue">Create Leads</a>--%>
+                                        <input type="button" value="Create Leads" class="rand-button rand-button-blue" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'"/>   
                                     </div>
                                 </div>
                             </div>
@@ -170,12 +170,13 @@
                                                 <%#IntranetPortal.Utility.HtmlBlackInfo(Eval("LeadsName"))%>
                                             </DataItemTemplate>
                                         </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="Neighborhood" Width="120px"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataSpinEditColumn FieldName="NYCSqft" Width="80px"></dx:GridViewDataSpinEditColumn>
+                                        <dx:GridViewDataTextColumn FieldName="Neighborhood" Width="80px" Caption="Neighbor"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataSpinEditColumn FieldName="NYCSqft" Width="60px" Caption="SQFT"></dx:GridViewDataSpinEditColumn>
                                         <dx:GridViewDataTextColumn FieldName="LotDem" Width="100px"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="PropertyClass" Caption="Class" Width="50px"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="MortgageCombo" Width="80px" Caption="MtgCOMBO" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="MortgageData.C1stServicer" Caption="Servicer" Width="100px"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="TaxLiensAmount" Caption="TaxCOMBO" Width="80px" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="MortgageData.C1stServicer" Caption="Servicer" Width="80px"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="TaxLiensAmount" Caption="TaxCOMBO" Width="60px" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Type" Width="40px" CellStyle-HorizontalAlign="Center" CellStyle-VerticalAlign="Middle">
                                             <DataItemTemplate>
                                                 <dx:ASPxImage EmptyImage-Url="~/images/ide.png" EmptyImage-Width="16" EmptyImage-Height="16" runat="server" ID="imgType" Width="24" Height="24" CssClass="always_show">
@@ -184,7 +185,7 @@
                                         </dx:GridViewDataTextColumn>
                                         <dx:GridViewDataColumn FieldName="IsRecycled" Width="50px" Caption="Recycle">
                                             <DataItemTemplate>
-                                                <dx:ASPxCheckBox runat="server" ID="chkRecycled" Checked='<%# Eval("IsRecycled")%>' ReadOnly="true" Visible='<%# Eval("IsRecycled")%>'></dx:ASPxCheckBox>
+                                                <dx:ASPxCheckBox runat="server" ID="chkRecycled" ToolTip="Recycled" Checked='<%# Eval("IsRecycled")%>' ReadOnly="true" Visible='<%# Eval("IsRecycled")%>'></dx:ASPxCheckBox>
                                             </DataItemTemplate>
                                         </dx:GridViewDataColumn>
                                     </Columns>

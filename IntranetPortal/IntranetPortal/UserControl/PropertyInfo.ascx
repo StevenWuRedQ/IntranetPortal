@@ -9,8 +9,14 @@
         $("#addition_info").html($("#borugh_block_lot_data").val());
     }
 
-    function ShowDOBWindow(boro, houseNo, street) {
-        var url = "http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=" + boro + "&houseno=" + encodeURIComponent(houseNo) + "&street=" + encodeURIComponent(street);
+    function ShowDOBWindow(boro, block, lot) {
+        if (block == null || block == "" || lot == null || lot == "" || boro == null || boro == "")
+        {
+            alert("The property info isn't complete. Please try to refresh data.");
+            return;
+        }
+
+        var url = "http://a810-bisweb.nyc.gov/bisweb/PropertyProfileOverviewServlet?boro=" + boro + "&block=" + encodeURIComponent(block) + "&lot=" + encodeURIComponent(lot);
         ShowPopupMap(url, "DOB");
         $("#addition_info").html(' ');
     }
@@ -92,7 +98,7 @@
                     <span style="margin-left: 19px;"><%= LeadsInfoData.LastUpdate.ToString%></span>
                 </span>
                 <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
-                <span class="time_buttons" onclick='ShowDOBWindow("<%= LeadsInfoData.Borough%>","<%= LeadsInfoData.Number%>", "<%= LeadsInfoData.StreetName%>")'>DOB</span>
+                <span class="time_buttons" onclick='ShowDOBWindow("<%= LeadsInfoData.Borough%>","<%= LeadsInfoData.Block%>", "<%= LeadsInfoData.Lot%>")'>DOB</span>
                 <span class="time_buttons" onclick='ShowAcrisMap("<%= LeadsInfoData.BBLE %>")'>Acris</span>
                 <span class="time_buttons" onclick='ShowPropertyMap("<%= LeadsInfoData.BBLE %>")'>Maps</span>
 

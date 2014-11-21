@@ -10,6 +10,7 @@
         VacantHouse = 7
         StalledProject = 8
         AEP = 9
+        ShortSale = 10
     End Enum
 
     'Get assign leads type
