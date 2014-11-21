@@ -548,16 +548,18 @@ Public Class DataWCFService
 
                     If needCallService Then
                         Try
-                            'client.GetPropdata(bble,
-                            '                   apiOrder.ApiOrderID,
-                            '                   apiOrder.Acris = apiOrder.ItemStatus.Calling,
-                            '                   apiOrder.TaxBill = apiOrder.ItemStatus.Calling,
-                            '                   apiOrder.ECBViolation = apiOrder.ItemStatus.Calling,
-                            '                   apiOrder.WaterBill = apiOrder.ItemStatus.Calling,
-                            '                    apiOrder.Zillow = apiOrder.ItemStatus.Calling, False)
+                            client.GetPropdata(bble,
+                                               apiOrder.ApiOrderID,
+                                               apiOrder.Acris = apiOrder.ItemStatus.Calling,
+                                               apiOrder.TaxBill = apiOrder.ItemStatus.Calling,
+                                               apiOrder.ECBViolation = apiOrder.ItemStatus.Calling,
+                                               apiOrder.WaterBill = apiOrder.ItemStatus.Calling,
+                                                apiOrder.Zillow = apiOrder.ItemStatus.Calling, False)
+                            Try
+                                client.Get_Servicer(apiOrder.ApiOrderID, bble)
+                            Catch ex As Exception
 
-                            client.Get_Servicer(apiOrder.ApiOrderID, bble)
-
+                            End Try
                         Catch ex As System.TimeoutException
                             Throw New Exception("Time is out. The data services is busy now. Please try later. Data Service: GetPropdata " & ex.Message)
                         End Try
