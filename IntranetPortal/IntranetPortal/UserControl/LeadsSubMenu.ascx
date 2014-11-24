@@ -162,6 +162,7 @@
                     <dx:ListEditItem Text="Short Sale" Value="0" />
                     <dx:ListEditItem Text="Evition" Value="1" />
                     <dx:ListEditItem Text="Construction" Value="2" />
+                    <dx:ListEditItem Text="Litigation" Value="3" />
                 </Items>
             </dx:ASPxCheckBoxList>
         </dx:PopupControlContentControl>
