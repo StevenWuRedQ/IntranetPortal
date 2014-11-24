@@ -163,11 +163,5 @@
                 </ContentCollection>
             </dx:SplitterPane>
         </Panes>
-    </dx:ASPxSplitter>
-    <%-- <script type="text/javascript">
-         attachEventHandler(window, "onresize", function () {
-             splitterRightDefaultPage.AdjustControl();
-             alert("splitterRightDefaultPage Resize");
-         });
-    </script>--%>
+    </dx:ASPxSplitter>   
 </asp:Content>
