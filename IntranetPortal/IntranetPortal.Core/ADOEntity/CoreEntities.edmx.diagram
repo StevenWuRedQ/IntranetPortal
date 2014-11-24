@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="4ab396a5c6f143b6b621f04044528053" Name="Diagram1">
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.EmailMessage" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntranetPortal.Core.Model.SpecialDay" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

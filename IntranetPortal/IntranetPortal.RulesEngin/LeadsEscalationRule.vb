@@ -2,7 +2,7 @@
 Public Class LeadsEscalationRule
     Public Shared Sub Execute(ld As Lead)
         For Each Rule In GetRule(ld)
-            If Rule.IsDateDue(ld.LastUpdate2, ld) Then
+            If Rule.IsDateDue(ld.LastUpdate2, ld, ld.EmployeeName) Then
                 ServiceLog.Log("Execute Leads Rule: " & ld.BBLE)
                 Rule.Execute(ld)
                 ServiceLog.Log("Finish Leads Rule: " & ld.BBLE)
@@ -15,7 +15,7 @@ Public Class LeadsEscalationRule
         Dim ld = Lead.GetInstance(bble)
         If ld IsNot Nothing Then
             For Each Rule In GetRule(ld)
-                If Rule.IsDateDue(ld.LastUpdate2, ld) Then
+                If Rule.IsDateDue(ld.LastUpdate2, ld, ld.EmployeeName) Then
                     ServiceLog.Log("Execute Leads Rule: " & ld.BBLE)
                     Rule.Execute(ld)
                     ServiceLog.Log("Finish Leads Rule: " & ld.BBLE)

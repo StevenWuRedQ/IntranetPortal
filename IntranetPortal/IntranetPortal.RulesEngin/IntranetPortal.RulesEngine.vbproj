@@ -112,6 +112,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IntranetPortal.Core\IntranetPortal.Core.vbproj">
+      <Project>{5da9a152-6e61-4cde-baf5-6309ed56539a}</Project>
+      <Name>IntranetPortal.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IntranetPortal\IntranetPortal.vbproj">
       <Project>{6ca9f52b-c8d7-4098-8fb4-0626d61a9e32}</Project>
       <Name>IntranetPortal</Name>

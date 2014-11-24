@@ -9,7 +9,7 @@
     ''' for hours: 2:00:00
     ''' </returns>
     ''' <remarks></remarks>
-    Public Shared Function GetWorkingDays(startDate As DateTime, endDate As DateTime) As TimeSpan
+    Public Shared Function GetWorkingDays(startDate As DateTime, endDate As DateTime, emp As String) As TimeSpan
         Dim dayCount = 0
 
         If startDate.Date = endDate.Date Then
@@ -17,7 +17,7 @@
         End If
 
         While startDate.Date < endDate.Date
-            If startDate.DayOfWeek <> DayOfWeek.Sunday AndAlso startDate.DayOfWeek <> DayOfWeek.Saturday AndAlso Not IsHoliday(startDate) Then
+            If startDate.DayOfWeek <> DayOfWeek.Sunday AndAlso startDate.DayOfWeek <> DayOfWeek.Saturday AndAlso Not IsHoliday(startDate, emp) Then
                 dayCount += 1
             End If
 
@@ -27,8 +27,8 @@
         Return (endDate - startDate).Add(TimeSpan.Parse(dayCount & ".00:00:00"))
     End Function
 
-    Private Shared Function IsHoliday(startDate As DateTime) As Boolean
-        Return False
+    Private Shared Function IsHoliday(startDate As DateTime, emp As String) As Boolean
+        Return IntranetPortal.Core.HolidayService.IsHoliday(startDate.Date, emp)
     End Function
 
     Public Shared Function IsWorkingHour(dt As DateTime) As Boolean
@@ -36,7 +36,7 @@
             Return False
         End If
 
-        If IsHoliday(dt) Then
+        If IntranetPortal.Core.HolidayService.IsPublicHoliday(dt) Then
             Return False
         End If
 

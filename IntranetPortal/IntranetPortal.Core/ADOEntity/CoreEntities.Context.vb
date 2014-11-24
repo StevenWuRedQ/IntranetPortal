@@ -23,5 +23,6 @@ Partial Public Class CoreEntities
     End Sub
 
     Public Overridable Property EmailMessages() As DbSet(Of EmailMessage)
+    Public Overridable Property SpecialDays() As DbSet(Of SpecialDay)
 
 End Class

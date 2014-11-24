@@ -1,7 +1,7 @@
 ﻿Public Class TaskEscalationRule
     Public Shared Sub Excute(t As UserTask)
         Dim rule = GetRule(t)
-        If rule.IsDateDue(If(t.NotifyDate.HasValue, t.NotifyDate, t.CreateDate)) Then
+        If rule.IsDateDue(If(t.NotifyDate.HasValue, t.NotifyDate, t.CreateDate), Nothing) Then
             ServiceLog.Log("Execute Task Rule: " & t.BBLE & ", Task Id: " & t.TaskID)
             rule.Execute(t)
         End If
@@ -77,17 +77,17 @@ Public Class EscalationRule
         Me.StartDate = sDate
     End Sub
 
-    Public Function IsDateDue(dt As DateTime) As Boolean
-        Return WorkingHours.GetWorkingDays(dt, DateTime.Now) > EscalationAfter
+    Public Function IsDateDue(dt As DateTime, emp As String) As Boolean
+        Return WorkingHours.GetWorkingDays(dt, DateTime.Now, emp) > EscalationAfter
     End Function
 
-    Public Function IsDateDue(dt As DateTime, objData As Object) As Boolean
+    Public Function IsDateDue(dt As DateTime, objData As Object, emp As String) As Boolean
         If StartDate Is Nothing Then
-            Return IsDateDue(dt)
+            Return IsDateDue(dt, emp)
         End If
 
         dt = Me.StartDate(objData)
-        Return WorkingHours.GetWorkingDays(dt, DateTime.Now) > EscalationAfter
+        Return IsDateDue(dt, emp)
     End Function
 
     Public Sub Execute(objData As Object)

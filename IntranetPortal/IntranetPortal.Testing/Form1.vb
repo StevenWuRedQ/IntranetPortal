@@ -79,7 +79,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        MessageBox.Show(IntranetPortal.RulesEngine.WorkingHours.GetWorkingDays(startDt.Value, DateTime.Now).ToString)
+        'MessageBox.Show(IntranetPortal.RulesEngine.WorkingHours.GetWorkingDays(startDt.Value, DateTime.Now).ToString)
 
     End Sub
 
