@@ -202,7 +202,7 @@ Public Class RefreshLeadsCountHandler
                 Case "AssignLeads"
                     Return Utility.GetTeamUnAssignedLeadsCount(teamId)
                 Case "Management"
-                    Return Utility.GetTeamLeadsCount(LeadStatus.ALL, teamId) + Utility.GetUnAssignedLeadsCount(teamId)
+                    Return Utility.GetTeamLeadsCount(LeadStatus.ALL, teamId) + Utility.GetTeamUnAssignedLeadsCount(teamId)
                 Case Else
                     Return Utility.GetTeamLeadsCount(Utility.GetLeadStatus(itemText), teamId)
             End Select

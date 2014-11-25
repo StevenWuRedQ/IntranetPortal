@@ -105,7 +105,7 @@ Public Class DataWCFService
                 Dim waitingRequest = client.Requests_Waiting
                 Return waitingRequest > 100
             Catch ex As Exception
-                Return True
+                Return False
             End Try
         End Using
     End Function
