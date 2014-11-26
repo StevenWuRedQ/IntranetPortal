@@ -619,9 +619,11 @@ function AddArraryItem(event, e) {
     var template = get_template_div(field);
 
     var add_div = addCloneTo(template, lastdiv, len);
-
+    add_div.find(".collapse_div").removeAttr('style');
     control_array_div(add_div, true);
-
+    add_div.find(".collapse_div").removeAttr('style');
+    //var height = add_div.find(".collapse_div").height();
+    //debugger;
     add_div.find(".ss_form_input").each(function (ind) {
         $(this).val("");
     });
