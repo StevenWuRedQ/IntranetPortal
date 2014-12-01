@@ -3,6 +3,8 @@
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 <%@ Register Src="~/UserControl/AssignRulesControl.ascx" TagPrefix="uc1" TagName="AssignRulesControl" %>
+<%@ Register Src="~/PopupControl/AssignLeadsPopup.ascx" TagPrefix="uc1" TagName="AssignLeadsPopup" %>
+
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
@@ -140,9 +142,9 @@
                                     <span style="color: #234b60; font-size: 30px;">
                                         <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
                                     </span>
-                                    <div style="float:right">
-                                      <%--  <a href="/LeadsGenerator/LeadsGenerator.aspx" target="_self" class="rand-button rand-button-blue">Create Leads</a>--%>
-                                        <input type="button" value="Create Leads" class="rand-button rand-button-blue" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'"/>   
+                                    <div style="float: right">
+                                        <%--  <a href="/LeadsGenerator/LeadsGenerator.aspx" target="_self" class="rand-button rand-button-blue">Create Leads</a>--%>
+                                        <input type="button" value="Create Leads" class="rand-button rand-button-blue" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'" />
                                     </div>
                                 </div>
                             </div>
@@ -159,9 +161,9 @@
                                 </Items>
                                 <ClientSideEvents ItemClick="OnChangeLeadsType" />
                             </dx:ASPxPopupMenu>
-                            <div style="overflow: hidden; height: 770px;" id="assign_leads_list">
-                                <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding" 
-                                    ID="gridLeads" ClientInstanceName="gridLeads" Width="100%" KeyFieldName="BBLE" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared" OnCustomCallback="gridLeads_CustomCallback" 
+                            <div style="overflow: auto; height: 680px;" id="assign_leads_list">
+                                <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding"
+                                    ID="gridLeads" ClientInstanceName="gridLeads" Width="100%" KeyFieldName="BBLE" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared" OnCustomCallback="gridLeads_CustomCallback"
                                     EnableViewState="true">
                                     <Columns>
                                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" SelectAllCheckboxMode="Page" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
@@ -193,8 +195,8 @@
                                     </Columns>
                                     <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true"
                                         EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
-                                    <Settings ShowColumnHeaders="true" VerticalScrollableHeight="750" GridLines="Both"></Settings>
-                                    <SettingsPager Mode="EndlessPaging" PageSize="50"></SettingsPager>
+                                    <Settings ShowColumnHeaders="true" VerticalScrollableHeight="650" GridLines="Both"></Settings>
+                                    <SettingsPager Mode="EndlessPaging" PageSize="45"></SettingsPager>
                                     <Styles>
                                         <Header HorizontalAlign="Center"></Header>
                                         <Row Cursor="pointer" />
@@ -225,10 +227,12 @@
                                                 }
                                                 " />
                                         </dx:ASPxButton>
+
                                         &nbsp;&nbsp;
                                 <dx:ASPxButton Text="Rules" runat="server" ID="ASPxButton1" CssClass="rand-button rand-button-blue" AutoPostBack="false">
-                                    <ClientSideEvents Click="function(s,e){popupAssignRules.Show();}" />
+                                    <ClientSideEvents Click="function(s,e){AssignLeadsPopupClient.Show(); }" />
                                 </dx:ASPxButton>
+                                        <button type="button" onclick="popupAssignRules.Show();" style="display:none">Rules Old</button>
                                     </td>
                                 </tr>
                             </table>
@@ -258,5 +262,6 @@
             </div>
         </FooterContentTemplate>
     </dx:ASPxPopupControl>
+    <uc1:AssignLeadsPopup runat="server" ID="AssignLeadsPopup" />
     <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 </asp:Content>

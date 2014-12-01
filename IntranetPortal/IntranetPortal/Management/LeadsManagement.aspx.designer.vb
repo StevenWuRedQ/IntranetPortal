@@ -113,6 +113,15 @@ Partial Public Class LeadsManagement
     Protected WithEvents popupAssignRules As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
+    '''AssignLeadsPopup control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AssignLeadsPopup As Global.IntranetPortal.AssignLeadsPopup
+
+    '''<summary>
     '''LeadsSubMenu control.
     '''</summary>
     '''<remarks>

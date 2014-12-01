@@ -729,6 +729,13 @@
       <DependentUpon>UploadFileToSharepoint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PopupControl\AssignLeadsPopup.ascx.designer.vb">
+      <DependentUpon>AssignLeadsPopup.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupControl\AssignLeadsPopup.ascx.vb">
+      <DependentUpon>AssignLeadsPopup.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="PopupControl\DoorknockChart.aspx.designer.vb">
       <DependentUpon>DoorknockChart.aspx</DependentUpon>
     </Compile>
@@ -1384,6 +1391,7 @@
     <Content Include="pdfViewer\web\viewer.css" />
     <Content Include="pdfViewer\web\viewer.html" />
     <Content Include="pdfViewer\web\viewer.js" />
+    <Content Include="PopupControl\AssignLeadsPopup.ascx" />
     <Content Include="PopupControl\DoorknockChart.aspx" />
     <Content Include="PopupControl\EditHomeOwner.ascx" />
     <Content Include="PopupControl\SendMail.ascx" />

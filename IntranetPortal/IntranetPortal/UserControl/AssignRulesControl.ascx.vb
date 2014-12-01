@@ -56,6 +56,7 @@ Public Class AssignRulesControl
         rule.LeadsType = e.NewValues("LeadsType")
         rule.Count = CInt(e.NewValues("Count"))
         rule.IntervalType = CInt(e.NewValues("IntervalType"))
+        Dim ve = AssignLeadsPopup.ViewEventNewVlaue(e)
         rule.CreateBy = Page.User.Identity.Name
         rule.CreateDate = DateTime.Now
 

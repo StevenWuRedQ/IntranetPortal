@@ -7,7 +7,7 @@
 	-o-transition: right .2s ease;
 	-webkit-transition: right .2s ease;
 	transition: right .2s ease;
-	width: 335px;
+	width: 330px;
 	z-index: 1000; /* change this number if necessary */
 }
 
@@ -20,7 +20,7 @@
 	float: left;
 	height: 170px;
 	margin-top: 105px;
-	width: 41px;
+	width: 40px;
 }
 
 #right-pane-button-full {

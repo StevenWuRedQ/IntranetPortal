@@ -590,10 +590,10 @@
                                                             </dx:GridViewDataColumn>
                                                         </Columns>
                                                         <%-- Mode="ShowAllRecords" ShowAllItem="True"--%>
-                                                        <SettingsPager PageSize="10" PageSizeItemSettings-Visible="true" PageSizeItemSettings-ShowAllItem="true">
+                                                        <SettingsPager PageSize="8" PageSizeItemSettings-Visible="true" PageSizeItemSettings-ShowAllItem="true">
                                                             <PageSizeItemSettings Visible="True"></PageSizeItemSettings>
                                                         </SettingsPager>
-                                                        <Settings VerticalScrollableHeight="290" />
+                                                        <Settings VerticalScrollableHeight="200" />
                                                         <GroupSummary>
                                                             <dx:ASPxSummaryItem FieldName="BBLE" SummaryType="Count" />
                                                         </GroupSummary>

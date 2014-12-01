@@ -1,6 +1,6 @@
 ﻿Partial Public Class AssignRule
 
-    Public ReadOnly Property LeadsTypeText As String
+    Public Property LeadsTypeText As String
         Get
             Try
                 Return CType(LeadsType, LeadsInfo.LeadsType).ToString
@@ -9,9 +9,16 @@
             End Try
 
         End Get
+        Set(value As String)
+            If (IsNumeric(value)) Then
+                LeadsType = CType(CInt(value), LeadsInfo.LeadsType)
+                Return
+            End If
+            LeadsType = [Enum].Parse(GetType(LeadsInfo.LeadsType), value)
+        End Set
     End Property
 
-    Public ReadOnly Property IntervalTypeText As String
+    Public Property IntervalTypeText As String
         Get
             Try
                 Return CType(IntervalType, RuleInterval).ToString
@@ -19,6 +26,14 @@
                 Return ""
             End Try
         End Get
+        Set(value As String)
+            If (IsNumeric(value)) Then
+                IntervalType = CType(CInt(value), RuleInterval)
+                Return
+            End If
+
+            IntervalType = DirectCast([Enum].Parse(GetType(RuleInterval), value), RuleInterval)
+        End Set
     End Property
 
     Public Shared Function GetAllRules() As List(Of AssignRule)

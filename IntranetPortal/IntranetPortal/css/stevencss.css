@@ -110,13 +110,14 @@
     font-size: 14px;
     padding: 5px 10px;
     border: 0px;
-    cursor:pointer;
-}.rand-button-pad
- {
-     padding:9px 20px;
-     outline:none;
- }
- 
+    cursor: pointer;
+}
+
+.rand-button-pad {
+    padding: 9px 20px;
+    outline: none;
+}
+
 .rand-button-blue {
     background: #3993c1;
 }
@@ -1116,21 +1117,7 @@ pre#event-log {
         padding: 10px;
     }
 
-@media only screen and (max-width: 704px), only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {
-    body {
-        width: 320px;
-    }
 
-    .c1 {
-        margin-right: 0;
-        margin-bottom: 0;
-    }
-
-    h1 {
-        font-size: 28px;
-        text-shadow: 0px 0px 1px rgba(0,0,0,0.7);
-    }
-}
 
 @media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {
     body {
@@ -2021,6 +2008,7 @@ td.vendor_info_left {
     resize: none;
 }
 
+
 .edit_drop {
     border: 1px solid #dde0e7;
     border-radius: 5px;
@@ -2042,7 +2030,7 @@ td.vendor_info_left {
 
 .rand-button-padding {
     padding: 9px 20px;
-    outline:none;
+    outline: none;
 }
 
 .title_icon {
@@ -2066,49 +2054,56 @@ td.vendor_info_left {
 {
     background:#f5f5f5;
 }*/
-.bg_orange
-{
-    background:#ff400d;
-}
-.query_input_40percent
-{
-    width:38% !important;
+.bg_orange {
+    background: #ff400d;
 }
 
-.query_input_60percent
-{
-    width:56% !important;
-    
+.query_input_40percent {
+    width: 38% !important;
 }
-.query_input_30percent
-{
+
+.query_input_60percent {
+    width: 56% !important;
+}
+
+.query_input_30percent {
     width: 32.6% !important;
 }
-.query_input_60percent,.query_input_margin
-{
-    margin-left:10px;
+
+.query_input_60percent, .query_input_margin {
+    margin-left: 10px;
 }
-.query_input_10percent
-{
-    width:10% !important;
+
+.query_input_10percent {
+    width: 10% !important;
 }
-.dxeCheckBoxList_MetropolisBlue1
-{
-    border:none !important;
+
+.dxeCheckBoxList_MetropolisBlue1 {
+    border: none !important;
 }
-.button_margin
-{
-    margin-left:5px;
+
+.button_margin {
+    margin-left: 5px;
 }
-.width_100percent
-{
-    width:98% !important;
+
+.width_100percent {
+    width: 98% !important;
 }
-.inline_block
-{
-    display:inline-block;
+
+.inline_block {
+    display: inline-block;
 }
-.query_input_50_percent
-{
-    width:49% !important;
+
+.query_input_50_percent {
+    width: 49% !important;
+}
+
+.table_delete_row {
+    font-size: 18px;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.hidden_btn .dxgvStatusBar_MetropolisBlue1 tr.dxgv > td {
+    display: none !important;
 }
