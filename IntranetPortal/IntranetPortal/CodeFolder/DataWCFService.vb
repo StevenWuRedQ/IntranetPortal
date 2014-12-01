@@ -92,11 +92,16 @@ Public Class DataWCFService
     End Function
 
     Public Shared Function GetCurrentIdentityName() As String
-        If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.User IsNot Nothing AndAlso HttpContext.Current.User.Identity IsNot Nothing AndAlso Not String.IsNullOrEmpty(HttpContext.Current.User.Identity.Name) Then
-            Return HttpContext.Current.User.Identity.Name
-        Else
-            Return "Dataloop"
-        End If
+        Try
+            If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.User IsNot Nothing AndAlso HttpContext.Current.User.Identity IsNot Nothing AndAlso Not String.IsNullOrEmpty(HttpContext.Current.User.Identity.Name) Then
+                Return HttpContext.Current.User.Identity.Name
+            Else
+                Return "Dataloop"
+            End If
+        Catch ex As Exception
+            Throw New Exception("Get Current Identity Name: " & ex.Message)
+        End Try
+
     End Function
 
     Public Shared Function IsServerBusy() As Boolean
@@ -175,7 +180,7 @@ Public Class DataWCFService
                     If result.LAND_SQFT.HasValue AndAlso Not String.IsNullOrEmpty(result.MAX_FAR) AndAlso result.ORIG_SQFT.HasValue Then
                         li.UnbuiltSqft = result.LAND_SQFT * CDbl(result.MAX_FAR) - result.ORIG_SQFT
 
-                        LeadsInfo.AddIndicator("UnderBuilt", li)
+                        LeadsInfo.AddIndicator("UnderBuilt", li, GetCurrentIdentityName())
                     End If
 
                     'Dim salesInfo = client.Acris_Get_LatestSale(bble)

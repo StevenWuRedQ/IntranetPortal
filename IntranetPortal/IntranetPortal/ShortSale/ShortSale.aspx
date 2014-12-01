@@ -11,7 +11,6 @@
 <%@ Register Src="~/ShortSale/ShortSaleSubMenu.ascx" TagPrefix="uc1" TagName="ShortSaleSubMenu" %>
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 
-
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script src="/scripts/stevenjs.js"></script>
     <script type="text/javascript">
@@ -229,7 +228,7 @@
                                         </dx:ASPxSplitter>
                                     </dx:PanelContent>
                                 </PanelCollection>
-                                <ClientSideEvents EndCallback="function(s,e){ GetShortSaleData(caseId);}" />
+                                <ClientSideEvents EndCallback="function(s,e){GetShortSaleData(caseId);}" />
                             </dx:ASPxCallbackPanel>
                         </dx:SplitterContentControl>
                     </ContentCollection>

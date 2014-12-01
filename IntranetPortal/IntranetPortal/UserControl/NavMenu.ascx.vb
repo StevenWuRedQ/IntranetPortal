@@ -26,7 +26,7 @@ Public Class NavMenu
                 item.NavigationUrl = "#"
                 item.ShowAmount = True
                 BuildTeamMenu(item, t.TeamId, t.Name)
-                item.UserRoles = "TeamManager-" & t.Name
+                item.UserRoles = "OfficeManager-" & t.Name
 
                 teamList.Add(item)
             Next
@@ -66,7 +66,7 @@ Public Class NavMenu
         Dim item As New PortalNavItem
         item.Name = String.Format("Team-{0}-AssignLeads", teamId)
         item.Text = "Assign Leads"
-        item.NavigationUrl = String.Format("/Management/LeadsManagement.aspx?office={0}", teamName)
+        item.NavigationUrl = String.Format("/Management/LeadsManagement.aspx?office={0}&team={1}", teamName, teamId)
         item.ShowAmount = True
         item.FontClass = String.Format("<i class=""fa {0}""></i>", fontClass)
 

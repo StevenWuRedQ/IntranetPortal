@@ -52,6 +52,7 @@ Public Class LeadsSubMenu
                 Dim oldOwner = lead.EmployeeName
                 lead.EmployeeID = empId
                 lead.EmployeeName = name
+                lead.Status = LeadStatus.NewLead
                 Context.SaveChanges()
                 LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} reassign this lead from {1} to {2}.", Page.User.Identity.Name, oldOwner, name), bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
             End Using
@@ -123,7 +124,6 @@ Public Class LeadsSubMenu
                     UpdateLeadStatus(bble, LeadStatus.Deleted, Nothing)
                 End If
             End If
-
         End If
     End Sub
 

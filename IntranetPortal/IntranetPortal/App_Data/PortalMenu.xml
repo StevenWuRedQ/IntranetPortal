@@ -254,7 +254,7 @@
 
 
   <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
-    <UserRoles>OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen</UserRoles>
+    <UserRoles>OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen,OfficeManager-GalleriaTeam</UserRoles>
     <Items>
       <PortalNavItem Name="Office-Bronx-Management" Text="Bronx Team" NavigationUrl="#" ShowAmount="true" ItemType="Office">
         <UserRoles>OfficeManager-Bronx</UserRoles>

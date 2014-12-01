@@ -458,6 +458,10 @@
         Indicators.Where(Function(indi) indi.Name = name).FirstOrDefault.AddIndicator(li)
     End Sub
 
+    Public Shared Sub AddIndicator(name As String, li As LeadsInfo, userName As String)
+        Indicators.Where(Function(indi) indi.Name = name).FirstOrDefault.AddIndicator(li, userName)
+    End Sub
+
     Public Shared ReadOnly Property Indicators As List(Of Indicator)
         Get
             Dim str As New List(Of Indicator)
@@ -512,6 +516,14 @@
             If Formular(leadsData) Then
                 If leadsData.UserComments.Where(Function(um) um.Comments = Message And um.BBLE = leadsData.BBLE).Count = 0 Then
                     leadsData.AddComments(Message, HttpContext.Current.User.Identity.Name)
+                End If
+            End If
+        End Sub
+
+        Public Sub AddIndicator(leadsData As LeadsInfo, name As String)
+            If Formular(leadsData) Then
+                If leadsData.UserComments.Where(Function(um) um.Comments = Message And um.BBLE = leadsData.BBLE).Count = 0 Then
+                    leadsData.AddComments(Message, name)
                 End If
             End If
         End Sub

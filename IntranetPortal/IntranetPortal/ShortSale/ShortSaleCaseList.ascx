@@ -25,6 +25,7 @@
     }
 
     function GetShortSaleData(caseId) {
+        debugger;
         $.ajax({
             type: "POST",
             url: "ShortSale.aspx/GetCase",

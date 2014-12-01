@@ -92,8 +92,14 @@ Public Class LeadsManagement
                 Return
             End If
 
-            listboxEmployee.DataSource = Employee.GetDeptUsersList(office)
-            listboxEmployee.DataBind()
+            If String.IsNullOrEmpty(Request.QueryString("team")) Then
+                listboxEmployee.DataSource = Employee.GetDeptUsersList(office)
+                listboxEmployee.DataBind()
+            Else
+                Dim teamId = CInt(Request.QueryString("team"))
+                listboxEmployee.DataSource = Employee.GetTeamUserList(teamId)
+                listboxEmployee.DataBind()
+            End If
 
             AddDeadLeadsFolderToEmpList()
         End Using

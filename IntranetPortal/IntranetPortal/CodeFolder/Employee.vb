@@ -329,6 +329,13 @@ Partial Public Class Employee
         End Using
     End Function
 
+    Public Shared Function GetTeamUserList(teamId As Integer) As List(Of Employee)
+        Using ctx As New Entities
+            Dim emps = ctx.UserInTeams.Where(Function(ut) ut.TeamId = teamId).ToList.Select(Function(ut) Employee.GetInstance(ut.EmployeeName)).ToList
+            Return emps
+        End Using
+    End Function
+
     Public Shared Function IsShortSaleManager(userName As String) As Boolean
         Dim rs = Roles.GetRolesForUser(userName)
 
