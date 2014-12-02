@@ -7,7 +7,32 @@
 
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
+    <script>
+        function SearchLeads()
+        {
+            var filter = {}
+            filter.Location = $("#IdLocation").val();
+            filter.Zips = $("#IdZips").val();
+            filter.Neighborhoods = $("#IDNeighborhods").val();
+            filter.PeropertyClasses = $("#IDPeropertyClass").val();
+            filter.Zonings = $("#IdZoning").val();
+            filter.UnbuiltSqft = { min: $("#IdUnbuiltSqftmin").val(), max: $("#IdUnbuiltSqftmax").val() }
+            filter.NYCsqft = { min: $("#IdNYCsqftMin").val(), max: $("#IdNYCsqftMax").val() }
 
+            filter.LotSqft = { min: $("#IdLotSqftMin").val(), max: $("#IdLotSqftMax").val() }
+            filter.Servicers = $("#IdServicer").val();
+            filter.Mortgage = { min: $("#IdMortgageMin").val(), max: $("#IdMortgageMax").val() }
+
+            filter.Value = { min: $("#IDValueMin").val(), max: $("#IDValueMax").val() }
+            filter.Equity = { min: $("#IdEquityMin").val(), max: $("#IdEquityMax").val() }
+            
+            filter.Tax = { min: $("#IdTaxesMin").val(), max: $("#IdTaxesMax").val() }
+            filter.ECB_DOB = { min: $("#IdECB_DOBMin").val(), max: $("#IdECB_DOBMax").val() }
+            filter.isLis = $("#Lis_Pendens_yes").val();
+            filter.DocketYear = $("#IdDocket_Year").val();
+            debugger;
+        }
+    </script>
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Width="100%" Height="100%" ClientInstanceName="sampleSplitter" FullscreenMode="true">
         <Styles>
             <Pane>
@@ -54,7 +79,7 @@
                                 <div>
                                     <div style="margin-top: 30px" class="clearfix">
                                         <div style="float: right">
-                                            <button class="rand-button bg_color_blue rand-button-padding" type="button" style="margin-right: 10px">Search</button>
+                                            <button class="rand-button bg_color_blue rand-button-padding" type="button" style="margin-right: 10px" onclick="SearchLeads()">Search</button>
                                             <button type="button" class="rand-button rand-button-padding bg_color_gray">Clear All</button>
                                         </div>
                                     </div>
@@ -70,7 +95,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Borough</label>
-                                                            <select class=" selectpicker form-control width_100percent" multiple>
+                                                            <select class=" selectpicker form-control width_100percent" id="IdLocation" multiple>
                                                                 <option>Manhattan</option>
                                                                 <option>Bronx</option>
                                                                 <option>Brooklyn</option>
@@ -80,7 +105,7 @@
                                                         </div>
                                                         <div class="inline_block  query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Zip</label>
-                                                            <select class=" selectpicker form-control width_100percent" multiple>
+                                                            <select class=" selectpicker form-control width_100percent" id="IdZips" multiple>
                                                                 <option>10001</option>
                                                                 <option>10002</option>
                                                                 <option>10003</option>
@@ -94,7 +119,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Neighborhood</label>
-                                                            <select class="selectpicker form-control width_100percent" multiple>
+                                                            <select class="selectpicker form-control width_100percent" id="IDNeighborhods" multiple>
                                                                 <option>Westbury</option>
                                                                 <option>Neighborhood2</option>
                                                             </select>
@@ -116,7 +141,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block " style="width: 68%">
                                                             <label class="upcase_text font_black" style="display: block">Property Class</label>
-                                                            <select class="selectpicker form-control width_100percent" id="selOption" onchange="changeValue(this)" multiple>
+                                                            <select class="selectpicker form-control width_100percent" id="IDPeropertyClass"  multiple>
 
                                                                 <option>All</option>
                                                                 <option>Condo</option>
@@ -146,7 +171,7 @@
                                                         </div>
                                                         <div class="inline_block  " style="width: 28%">
                                                             <label class="upcase_text font_black" style="display: block">Zoning</label>
-                                                            <select class=" selectpicker form-control width_100percent" multiple>
+                                                            <select class=" selectpicker form-control width_100percent" id="IdZoning" multiple>
                                                                 <option>24d</option>
                                                                 <option>25d</option>
                                                                 <option>26d</option>
@@ -161,7 +186,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Unbuilt Sqft</label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdUnbuiltSqftmin">
                                                                 <option>Min Sqft</option>
                                                                 <option>1000</option>
                                                                 <option>2000</option>
@@ -170,7 +195,7 @@
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdUnbuiltSqftmax">
                                                                 <option>Max Sqft</option>
                                                                 <option>1000</option>
                                                                 <option>2000</option>
@@ -183,7 +208,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">NYC Sqft</label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdNYCsqftMin">
                                                                 <option>Min Sqft</option>
                                                                 <option>250 sqft</option>
                                                                 <option>1000 sqft</option>
@@ -192,7 +217,7 @@
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdNYCsqftMax">
                                                                 <option>Max Sqft</option>
                                                                 <option>1000 sqft</option>
                                                                 <option>2000 sqft</option>
@@ -206,7 +231,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Lot Sqft</label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdLotSqftMin">
                                                                 <option>Min Sqft</option>
                                                                 <option>250 sqft</option>
                                                                 <option>1000 sqft</option>
@@ -215,7 +240,7 @@
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdLotSqftMax">
                                                                 <option>Max Sqft</option>
                                                                 <option>1000 sqft</option>
                                                                 <option>2000 sqft</option>
@@ -230,7 +255,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">YEAR BUILT</label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdYearBuildMin">
                                                                 <option>From</option>
                                                                 <%For i = 1900 To Date.Now.Year%>
                                                                 <option><%=i %></option>
@@ -240,7 +265,7 @@
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdYearBuildMax">
                                                                 <option>To</option>
                                                                 <%For i = 1900 To Date.Now.Year%>
                                                                 <option><%=i %></option>
@@ -264,7 +289,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Servicer</label>
-                                                            <select class="selectpicker form-control width_100percent" multiple>
+                                                            <select class="selectpicker form-control width_100percent" id="IdServicer" multiple>
                                                                 <option>BOA</option>
                                                                 <option>Servicer 2</option>
                                                             </select>
@@ -278,7 +303,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Mortgages (Sum)</label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdMortgageMin">
                                                                 <option>Mini Value</option>
                                                                 <option>$1000</option>
                                                                 <option>$2000</option>
@@ -286,7 +311,7 @@
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdMortgageMax">
                                                                 <option>Max Value</option>
                                                                 <option>$3000</option>
                                                                 <option>$4000</option>
@@ -294,7 +319,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <%--<div class="form-group">
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Mortgages (Sum)</label>
@@ -307,19 +332,19 @@
 
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" >
                                                                 <option>Max Value</option>
                                                                 <option>$3000</option>
                                                                 <option>$4000</option>
                                                             </select>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>--%>
                                                 <div class="form-group">
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Value</label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IDValueMin">
                                                                 <option>Mini Value</option>
                                                                 <option>$1000</option>
                                                                 <option>$2000</option>
@@ -327,7 +352,7 @@
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent"id="IDValueMax">
                                                                 <option>Max Value</option>
                                                                 <option>$3000</option>
                                                                 <option>$4000</option>
@@ -339,7 +364,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Equity</label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdEquityMin">
                                                                 <option>Mini Value</option>
                                                                 <option>$1000</option>
                                                                 <option>$2000</option>
@@ -347,7 +372,7 @@
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdIdEquityMax">
                                                                 <option>Max Value</option>
                                                                 <option>$3000</option>
                                                                 <option>$4000</option>
@@ -359,7 +384,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Taxes</label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdTaxesMin">
                                                                 <option>Mini Value</option>
                                                                 <option>$1000</option>
                                                                 <option>$2000</option>
@@ -367,7 +392,7 @@
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdTaxesMax">
                                                                 <option>Max Value</option>
                                                                 <option>$3000</option>
                                                                 <option>$4000</option>
@@ -380,7 +405,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">ECB/DOB</label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdECB_DOBMin">
                                                                 <option>Mini Value</option>
                                                                 <option>$1000</option>
                                                                 <option>$2000</option>
@@ -388,7 +413,7 @@
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
-                                                            <select class="selectpicker form-control width_100percent">
+                                                            <select class="selectpicker form-control width_100percent" id="IdECB_DOBMax">
                                                                 <option>Max Value</option>
                                                                 <option>$3000</option>
                                                                 <option>$4000</option>
@@ -401,7 +426,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Lis Pendens</label>
-                                                            <input id="Lis_Pendens_yes" type="radio" name="Lis_Pendens">
+                                                            <input id="Lis_Pendens_yes"  type="radio" name="Lis_Pendens">
                                                             <label for="Lis_Pendens_yes">
                                                                 <span class="box_text">Yes </span>
                                                             </label>
@@ -417,7 +442,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Docket / Year</label>
-                                                            <select class="selectpicker form-control width_100percent" multiple>
+                                                            <select class="selectpicker form-control width_100percent" id="IdDocket_Year" multiple>
 
                                                                 <% For i = Date.Now.Year-10 To Date.Now.Year%>
                                                                 <option><%=i %></option>
@@ -434,7 +459,7 @@
                                     <div class="clearfix">
                                         <div style="float: right">
                                             <div>
-                                                <button class="rand-button bg_color_blue rand-button-padding" type="button" style="margin-right: 10px">Search</button>
+                                                <button class="rand-button bg_color_blue rand-button-padding" type="button" style="margin-right: 10px" onclick="SearchLeads()">Search</button>
                                                 <button class="rand-button bg_color_gray rand-button-padding" type="button">Clear All</button>
                                             </div>
                                         </div>

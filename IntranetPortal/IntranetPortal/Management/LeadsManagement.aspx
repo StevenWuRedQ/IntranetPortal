@@ -144,7 +144,7 @@
                                     </span>
                                     <div style="float: right">
                                         <%--  <a href="/LeadsGenerator/LeadsGenerator.aspx" target="_self" class="rand-button rand-button-blue">Create Leads</a>--%>
-                                        <input type="button" value="Create Leads" class="rand-button rand-button-blue" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'" />
+                                        <input type="button" value="Create Leads" class="rand-button rand-button-blue rand-button-pad" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'" />
                                     </div>
                                 </div>
                             </div>
@@ -229,10 +229,9 @@
                                         </dx:ASPxButton>
 
                                         &nbsp;&nbsp;
-                                <dx:ASPxButton Text="Rules" runat="server" ID="ASPxButton1" CssClass="rand-button rand-button-blue" AutoPostBack="false">
-                                    <ClientSideEvents Click="function(s,e){AssignLeadsPopupClient.Show(); }" />
-                                </dx:ASPxButton>
-                                        <button type="button" onclick="popupAssignRules.Show();" style="display:none">Rules Old</button>
+                                      <input type="button" value="Rules" class="rand-button rand-button-blue rand-button-pad" onclick="AssignLeadsPopupClient.Show();" />
+
+                                        <button type="button" onclick="popupAssignRules.Show();" style="display: none">Rules Old</button>
                                     </td>
                                 </tr>
                             </table>

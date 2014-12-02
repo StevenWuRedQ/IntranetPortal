@@ -202,10 +202,10 @@
                     <label class="ss_form_input_title">Name</label>
                     <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Name" data-item-type="1">
                 </li>
-                <li class="ss_form_item">
+               <%-- <li class="ss_form_item">
                     <label class="ss_form_input_title">Date Assigned to Processor</label>
                     <input class="ss_form_input " value="Date Assigned ??">
-                </li>
+                </li>--%>
                 <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" data-item="ProcessorContact.Email" data-item-type="1">
