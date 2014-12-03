@@ -65,7 +65,17 @@
     Public Function BuilderPhone(phone As DataAPI.BasicPhoneListing) As String
         Return String.Format("{0} ({1}) {2} ({3}%)", FormatPhoneNumber(phone.phoneField), phone.timeZoneField, phone.phoneTypeField, phone.scoreField)
     End Function
+    Public Function GetPhoneComment(phone As String) As String
+        Using Context As New Entities
+            Dim phoneStr = Regex.Replace(phone, "[^\d]+", "")
+            Dim ownerPhone As HomeOwnerPhone = Context.HomeOwnerPhones.Where(Function(p) p.Phone = phoneStr).FirstOrDefault
+            If (ownerPhone IsNot Nothing AndAlso ownerPhone.Comment IsNot Nothing) Then
+                Return ownerPhone.Comment
+            End If
+        End Using
 
+        Return ""
+    End Function
     Public Function BuilderAddress(add As DataAPI.BasicAddressRecord) As String
         Dim address = add.addressField
         Dim result = String.Format("{0} ({1} to {2})", FormatAddress(address), BuilderDate(add.dateFirstSeenField), BuilderDate(add.dateLastSeenField))

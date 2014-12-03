@@ -372,7 +372,20 @@ Public Class LeadsInfo1
             Dim phoneNo = e.Parameter.Split("|")(1)
             UpdateContact(OwnerContact.ContactStatus.Right, phoneNo, OwnerContact.OwnerContactType.Phone)
         End If
+        If e.Parameter.StartsWith("SaveComment") Then
+            Dim phoneNo As String = e.Parameter.Split("|")(1)
+            Dim phone As String = Regex.Replace(phoneNo, "[^\d]+", "")
+            Dim comment = e.Parameter.Split("|")(2)
+            Using Context As New Entities
+                Dim contact = Context.HomeOwnerPhones.Where(Function(c) c.BBLE = hfBBLE.Value And c.Phone = phone).FirstOrDefault()
+                If (contact IsNot Nothing) Then
+                    contact.Comment = comment
+                End If
 
+                Context.SaveChanges()
+            End Using
+
+        End If
         If e.Parameter.StartsWith("UndoPhone") Then
             Dim phoneNo = e.Parameter.Split("|")(1)
             UpdateContact(OwnerContact.ContactStatus.Undo, phoneNo, OwnerContact.OwnerContactType.Phone)
@@ -398,6 +411,7 @@ Public Class LeadsInfo1
             Dim address = e.Parameter.Split("|")(1)
             UpdateContact(OwnerContact.ContactStatus.Undo, address, OwnerContact.OwnerContactType.MailAddress)
         End If
+        
 
         e.Result = needRefesh
     End Sub

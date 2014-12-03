@@ -14,11 +14,38 @@
     }
 
     var tmpPhoneNo = null;
-    function OnTelphoneLinkClick(tellink, phoneNo) {
-        tmpPhoneNo = phoneNo;
-        ASPxPopupMenuPhone.ShowAtElement(tellink);
+
+    var temTelLink = null;
+    var temCommentSpan = null;
+    function onSavePhoneComment() {
+        
+        var comment = $("#phone_comment").val();
+        
+        var temCommentSpan = $(temTelLink).children("span:first")
+        
+        if (temCommentSpan != null) {
+            //$(".phone_comment").text("-" + comment);
+            temCommentSpan.text("-" + comment);
+        } else {
+            debugger
+        }
+        OnCallPhoneCallback("SaveComment|" + tmpPhoneNo + "|" + comment);
+        debugger;
     }
 
+    function OnTelphoneLinkClick(tellink, phoneNo) {
+        tmpPhoneNo = phoneNo;
+        temTelLink = tellink;
+        ASPxPopupMenuPhone.ShowAtElement(tellink);
+
+        
+     
+    }
+    function onBtn() {
+        //PhoneCommentPopUpClient.Hide();
+        temTelLink.innerText = "aaaaaa";
+        debugger;
+    }
     function OnPhoneNumberClick(s, e) {
         if (tmpPhoneNo != null) {
             if (e.item.index == 0) {
@@ -46,9 +73,16 @@
                 OnCallPhoneCallback("UndoPhone|" + tmpPhoneNo);
                 SetSameStyle("PhoneLink", "", tmpPhoneNo);
             }
+            if (e.item.index == 4) {
+                $("#phone_comment").val("")
+                $('#exampleModal').modal();
+                //PhoneCommentPopUpClient.Show();
+              
+            }
         }
         e.item.SetChecked(false);
-        if (sortPhones) {
+
+        if (sortPhones && e.item.index != 4) {
             sortPhones();
         }
     }
@@ -287,6 +321,7 @@
         /*min-width:1100px;*/
     }
 </style>
+<%--<button onclick="onBtn()" type="button">Onclick change text</button>--%>
 <dx:ASPxCallbackPanel runat="server" OnCallback="ASPxCallbackPanel2_Callback" ID="ASPxCallbackPanel2" Height="100%" ClientInstanceName="ContentCallbackPanel" EnableCallbackAnimation="true" CssClass="LeadsContentPanel">
     <PanelCollection>
         <dx:PanelContent ID="PanelContent1" runat="server">
@@ -403,7 +438,9 @@
                                             </dx:MenuItem>
                                             <dx:MenuItem Text="Undo" Name="Undo">
                                             </dx:MenuItem>
-                                        </Items>                                       
+                                            <dx:MenuItem Text="Comment" Name="Comment">
+                                            </dx:MenuItem>
+                                        </Items>
                                         <ClientSideEvents ItemClick="OnPhoneNumberClick" />
                                     </dx:ASPxPopupMenu>
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="AspxPopupMenuAddress"
@@ -448,7 +485,7 @@
                                             <i class="fa fa-info-circle sale_head_button tooltip-examples" style="background-color: #ff400d; color: white;" title="Show Property Info" onclick="ShowLogPanel()"></i>
                                             <div class="tooltip fade bottom in" style="top: 54px; left: -38px; display: block;">
                                                 <div class="tooltip-arrow" style="border-bottom-color: #ff400d;"></div>
-                                                <div class="tooltip-inner" style="background-color:#ff400d;">Show Property Info</div>
+                                                <div class="tooltip-inner" style="background-color: #ff400d;">Show Property Info</div>
                                             </div>
                                             <% End If%>
                                             <i class="fa fa-calendar-o sale_head_button sale_head_button_left tooltip-examples" title="Schedule" onclick="ASPxPopupScheduleClient.PerformCallback();"></i>
@@ -707,3 +744,45 @@
     <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>
     <Border BorderStyle="None"></Border>
 </dx:ASPxCallbackPanel>
+<%--<dx:ASPxPopupControl runat="server" ID="PhoneCommentPopup" ClientInstanceName="PhoneCommentPopUpClient"
+    PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" HeaderText="Phone Comments">
+    <ContentCollection>
+        <dx:PopupControlContentControl>
+
+            <div class="form-group">
+                <label for="phone_comment" class="control-label">Comments:</label>
+                <input type="text"  id="phone_comment">
+            </div>
+
+            <button type="button" onclick="onSavePhoneComment();">Save</button>
+            <button type="button" onclick="PhoneCommentPopUpClient.Hide();">Close</button>
+            <button type="button" onclick="onBtn()">Chagne Text</button>
+            
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+
+</dx:ASPxPopupControl>--%>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Phone Comments</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="phone_comment" class="control-label">Comments:</label>
+                    <input type="text" class="form-control" id="phone_comment">
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="onSavePhoneComment();">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>

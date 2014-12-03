@@ -18,5 +18,6 @@ Partial Public Class HomeOwnerPhone
     Public Property Type As String
     Public Property Source As Nullable(Of Integer)
     Public Property Description As String
+    Public Property Comment As String
 
 End Class
