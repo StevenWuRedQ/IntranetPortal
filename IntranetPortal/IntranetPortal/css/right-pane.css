@@ -22,7 +22,12 @@
 	margin-top: 105px;
 	width: 40px;
 }
-
+.right-pane_custom_reports
+{
+    background:url(/images/agent_reports_tab.png) no-repeat !important;
+    height: 180px !important;
+    
+}
 #right-pane-button-full {
 	background-color: #da370b;
 	float: left;

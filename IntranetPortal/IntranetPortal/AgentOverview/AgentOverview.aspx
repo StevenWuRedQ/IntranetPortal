@@ -625,7 +625,7 @@
         <ClientSideEvents PaneResized="contentSplitterClinet_resize" />
     </dx:ASPxSplitter>
     <div id="right-pane-container" class="clearfix">
-        <div id="right-pane-button"></div>
+        <div id="right-pane-button" class="right-pane_custom_reports"></div>
         <div id="right-pane">
             <div style="height: 100%; background: #EFF2F5;">
                 <div style="width: 310px; background: #f5f5f5" class="agent_layout_float">

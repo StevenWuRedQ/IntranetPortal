@@ -19,6 +19,10 @@
         height: 90px;
         border: 2px solid #dde0e7;
     }
+    .filited
+    {
+        background:url(/images/ic_filtered_bg.png) no-repeat;
+    }
 </style>
 
 <script type="text/javascript">
@@ -27,7 +31,8 @@
         //ddlCateLogClient.SetText(GetSelectedItemsText(selectedItems));
 
         var filterCondition = "";
-
+       
+        debugger
         for (var i = 0; i < cbCateLogClient.GetItemCount() ; i++) {
 
             var cate = cbCateLogClient.GetItem(i);
@@ -41,9 +46,16 @@
         }
 
         if (filterCondition == "")
+        {
             gridTrackingClient.ClearFilter();
+            $("#filter_btn").removeClass("filited");
+        }
         else
+        {
             gridTrackingClient.ApplyFilter(filterCondition);
+            $("#filter_btn").addClass("filited");
+        }
+           
     }
 
     var empTextBox = null;
@@ -323,7 +335,7 @@
         <div class="clearfix" style="width: 100%">
             <div style="float: right">
                 <div style="color: #2e2f31; float: right">
-                    FILTER BY:&nbsp;&nbsp<i class="fa fa-filter acitivty_short_button tooltip-examples" title="Filter" style="color: #444547; font-size: 14px;" onclick="clickfilterBtn(this)"></i>
+                    FILTER BY:&nbsp;&nbsp<i class="fa fa-filter acitivty_short_button tooltip-examples " id="filter_btn" title="Filter" style="color: #444547; font-size: 14px;" onclick="clickfilterBtn(this)"></i>
                 </div>
                 <dx:ASPxPopupControl runat="server" ID="popupFilters">
                 </dx:ASPxPopupControl>

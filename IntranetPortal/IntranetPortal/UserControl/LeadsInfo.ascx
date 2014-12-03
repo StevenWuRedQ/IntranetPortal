@@ -37,8 +37,6 @@
         tmpPhoneNo = phoneNo;
         temTelLink = tellink;
         ASPxPopupMenuPhone.ShowAtElement(tellink);
-
-        
      
     }
     function onBtn() {

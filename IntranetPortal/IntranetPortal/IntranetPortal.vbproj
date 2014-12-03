@@ -1184,6 +1184,7 @@
     <Content Include="images\add-button-hi.png" />
     <Content Include="images\agent_overview_icon.png" />
     <Content Include="images\agent_pic_defined.png" />
+    <Content Include="images\agent_reports_tab.png" />
     <Content Include="images\Arrows-Down-icon.png" />
     <Content Include="images\Arrows-Up-icon.png" />
     <Content Include="images\arrow_down.png" />
@@ -1236,6 +1237,7 @@
     <Content Include="images\icon_checked_box.png" />
     <Content Include="images\icon_short_sale.png" />
     <Content Include="images\icon_uncheked_box.png" />
+    <Content Include="images\ic_filtered_bg.png" />
     <Content Include="images\imprimir.png" />
     <Content Include="images\inprogess_icon_s.png" />
     <Content Include="images\logo.png" />

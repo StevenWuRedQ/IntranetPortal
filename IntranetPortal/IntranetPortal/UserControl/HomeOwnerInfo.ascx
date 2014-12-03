@@ -155,10 +155,7 @@
                                         <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span>
 
                                     </a>
-                                    <div style="display: none" class="input_group">
-                                        <input type="text" class="comment_input form-control" />
-                                        <button type="button" onclick="onSavePhoneComment()">Save</button>
-                                    </div>
+                                    
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     &nbsp;
@@ -180,10 +177,7 @@
                                     <%= FormatPhoneNumber(phone.phoneField)%>
                                     <span class="phone_comment"><%=GetPhoneComment(phone.phoneField) %></span>
                                 </a>
-                                <div style="display: none" class="input_group">
-                                    <input type="text" class="comment_input form-control" />
-                                    <button type="button" onclick="onSavePhoneComment()">Save</button>
-                                </div>
+                              
                             </div>
                             <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                 (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
@@ -280,10 +274,7 @@
                                         <%= FormatPhoneNumber(phone.phoneField) %>
                                         <span class="phone_comment"><%=GetPhoneComment(phone.phoneField) %></span>
                                     </a>
-                                    <div style="display: none" class="input_group">
-                                        <input type="text" class="comment_input form-control" />
-                                        <button type="button" onclick="onSavePhoneComment()">Save</button>
-                                    </div>
+                                 
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>)
@@ -388,10 +379,7 @@
                                             <%= FormatPhoneNumber(phone.phoneField) %>
                                             <span class="phone_comment"><%=GetPhoneComment(phone.phoneField) %></span>
                                         </a>
-                                        <div style="display: none" class="input_group">
-                                            <input type="text" class="comment_input form-control" />
-                                            <button type="button" onclick="onSavePhoneComment()">Save</button>
-                                        </div>
+                                      
                                     </div>
                                     <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                         (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
@@ -436,13 +424,16 @@
     }
     function sortPhones() {
         var colors = {}
+        var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
+        
         var phones_div = $(".homeowner_info_label:has(.PhoneLink)")
             .each(function (id) {
-                var phones = $(this).find("div").children(".color_gray");
-
+                var phones = $(this).find("div").children(".color_gray:has(.color_gray)");
+               
+              
+               
                 phones.sort(function (a, b) {
-                    var dis = $(a);
-
+                    
                     var color = $(a).find(".PhoneLink:first").css("color");
                     var colorB = $(b).find(".PhoneLink:first").css("color");
                     var hcolor = hashStr(color);
@@ -451,13 +442,19 @@
                     colors["cc" + hcolorB] = hcolorB + "-" + colorB;
                     return hcolor - hcolorB;
                 });
+                
                 var html = ""
                 phones.each(function (ind) {
+                    var ptext = $(this).text();
                     html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
+                   
                 });
+                
+                phones.parent().html('<div>' + html + '</div>');
 
-                phones.parent().html('<div>' + html + '</div>')
+               
             });
+
         //debugger;
 
     }
