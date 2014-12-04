@@ -426,13 +426,4 @@ Partial Public Class LeadsInfo1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents EditHomeOwner As Global.IntranetPortal.EditHomeOwner
-
-    '''<summary>
-    '''PhoneCommentPopup control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents PhoneCommentPopup As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 End Class

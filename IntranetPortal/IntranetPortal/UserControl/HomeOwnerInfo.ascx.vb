@@ -70,7 +70,7 @@
             Dim phoneStr = Regex.Replace(phone, "[^\d]+", "")
             Dim ownerPhone As HomeOwnerPhone = Context.HomeOwnerPhones.Where(Function(p) p.Phone = phoneStr).FirstOrDefault
             If (ownerPhone IsNot Nothing AndAlso ownerPhone.Comment IsNot Nothing) Then
-                Return ownerPhone.Comment
+                Return "-" + ownerPhone.Comment
             End If
         End Using
 

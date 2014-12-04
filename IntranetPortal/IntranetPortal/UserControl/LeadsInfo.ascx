@@ -90,7 +90,8 @@
 
         for (var i = 0; i < list.length; i++) {
             var item = list[i];
-            if (item.innerText == value) {
+          
+            if (item.innerText.indexOf(value)==0) {
                 item.setAttribute("style", style);
             }
         }
