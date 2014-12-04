@@ -545,7 +545,7 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="2" style="text-align: right; height: 45px;">
-                                                    <dx:ASPxButton RenderMode="Button" Text="Next" AutoPostBack="false" runat="server">
+                                                    <dx:ASPxButton RenderMode="Button" Text="Next" AutoPostBack="false" CssClass="rand-button rand-button-blue" runat="server">
                                                         <ClientSideEvents Click="function(){
                                                           var indexTab = (pageControlNewLeads.GetActiveTab()).index;
                                                             pageControlNewLeads.PerformCallback();
@@ -580,7 +580,7 @@
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left; height: 45px;">
-                                                    <dx:ASPxButton RenderMode="Button" Text="Back" AutoPostBack="false" runat="server">
+                                                    <dx:ASPxButton RenderMode="Button" Text="Back" CssClass="rand-button rand-button-gray" AutoPostBack="false" runat="server">
                                                         <ClientSideEvents Click="function(){
                                                           var indexTab = (pageControlNewLeads.GetActiveTab()).index;                                                        
                                                           pageControlNewLeads.SetActiveTab(pageControlNewLeads.GetTab(indexTab - 1));
@@ -589,13 +589,13 @@
                                                     </dx:ASPxButton>
                                                 </td>
                                                 <td style="text-align: right; height: 45px;">
-                                                    <dx:ASPxButton RenderMode="Button" Text="OK" AutoPostBack="false" runat="server">
+                                                    <dx:ASPxButton RenderMode="Button" Text="OK" CssClass="rand-button rand-button-blue" AutoPostBack="false" runat="server">
                                                         <ClientSideEvents Click="function(){
                                                           IsAddNewLead = true;
                                                           gridLeads.UpdateEdit();                                                                                                                                                                                                                                      
                                                         }" />
                                                     </dx:ASPxButton>
-                                                    <dx:ASPxButton RenderMode="Button" Text="Cancel" AutoPostBack="false" runat="server">
+                                                    <dx:ASPxButton RenderMode="Button" Text="Cancel" CssClass="rand-button rand-button-gray" AutoPostBack="false" runat="server">
                                                         <ClientSideEvents Click="function(){
                                                            gridLeads.CancelEdit();                                                           
                                                         }" />
