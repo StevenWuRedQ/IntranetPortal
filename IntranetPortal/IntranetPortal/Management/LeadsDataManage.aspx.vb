@@ -12,7 +12,10 @@ Public Class LeadsDataManage
     Const KEY As String = "DataService"
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
+        If Not Page.IsPostBack Then
+            cbEmployee.DataSource = Employee.GetAllEmps()
+            cbEmployee.DataBind()
+        End If
     End Sub
 
     Protected Sub uplImage_FileUploadComplete(sender As Object, e As DevExpress.Web.ASPxUploadControl.FileUploadCompleteEventArgs) Handles uplImage.FileUploadComplete
@@ -63,7 +66,12 @@ Public Class LeadsDataManage
     Protected Sub gridNewLeads_DataBinding(sender As Object, e As EventArgs) Handles gridNewLeads.DataBinding
         If gridNewLeads.DataSource Is Nothing Then
             Dim dataservice = LeadsDataService.GetInstance
-            gridNewLeads.DataSource = dataservice.LeadDataSource(cbLeadsType.Text)
+
+            If cbLeadsType.Text = "Employee" Then
+                gridNewLeads.DataSource = dataservice.LeadDataSource(cbEmployee.Text)
+            Else
+                gridNewLeads.DataSource = dataservice.LeadDataSource(cbLeadsType.Text)
+            End If
         End If
     End Sub
 
@@ -88,6 +96,11 @@ Public Class LeadsDataManage
         If e.Parameter.StartsWith("GeneralInfoLoop") Then
             Dim type = e.Parameter.Split("|")(1)
             LeadsDataService.GetInstance.DataLoop(type, True)
+        End If
+
+        If e.Parameter.StartsWith("ServicerLoop") Then
+            Dim type = e.Parameter.Split("|")(1)
+            LeadsDataService.GetInstance.DataLoop(type, False, True)
         End If
     End Sub
 
@@ -256,12 +269,17 @@ Public Class LeadsDataManage
                         newLeads = Context.LeadsInfoes.Where(Function(ld) ld.C1stMotgrAmt Is Nothing).OrderByDescending(Function(ld) ld.CreateDate).ToList
                     Case "Existed"
                         newLeads = Context.LeadsInfoes.Where(Function(ld) Not String.IsNullOrEmpty(ld.Owner)).ToList
+                    Case Else
+                        newLeads = (From li In Context.LeadsInfoes
+                                   Join ld In Context.Leads On ld.BBLE Equals li.BBLE
+                                   Where ld.EmployeeName = type
+                                   Select li).ToList
                 End Select
             End Using
             Return newLeads
         End Function
 
-        Public Sub DataLoop(datatype As String, Optional onlyGeneralInfo As Boolean = False)
+        Public Sub DataLoop(datatype As String, Optional onlyGeneralInfo As Boolean = False, Optional servicer As Boolean = False)
             UserMessage.AddNewMessage("Service Message", "Data Loop", "Data loop start. Type: " & datatype, "", DateTime.Now, KEY)
             Dim bbles = LeadDataSource(datatype).Select(Function(b) b.BBLE).ToArray
 
@@ -276,7 +294,7 @@ Public Class LeadsDataManage
                 For i = 0 To 1
                     Dim TestThread As New System.Threading.Thread(New ThreadStart(Sub()
                                                                                       HttpContext.Current = ctx
-                                                                                      InitialData(bbles, onlyGeneralInfo)
+                                                                                      InitialData(bbles, onlyGeneralInfo, servicer)
                                                                                   End Sub))
                     ThreadPool.Add(TestThread)
                     TestThread.Start()
@@ -284,7 +302,7 @@ Public Class LeadsDataManage
             End If
         End Sub
 
-        Public Sub InitialData(bbles As String(), Optional onlyGeneralInfo As Boolean = False)
+        Public Sub InitialData(bbles As String(), Optional onlyGeneralInfo As Boolean = False, Optional OnlyServicer As Boolean = False)
             Dim count = 0
 
             While count < bbles.Length
@@ -308,6 +326,13 @@ InitialLine:
                     While DataWCFService.IsServerBusy
                         Thread.Sleep(30000)
                     End While
+
+                    If OnlyServicer Then
+                        DataWCFService.UpdateServicer(bble)
+                        DataWCFService.UpdateTaxLiens(bble)
+                        UserMessage.AddNewMessage("Service Message", "Initial Data Message " & bble, String.Format("Servicer info and Taxlien BBLE: {0} data is Update. ", bble), bble, DateTime.Now, KEY)
+                        Continue While
+                    End If
 
                     If onlyGeneralInfo Then
                         DataWCFService.UpdateAssessInfo(bble)

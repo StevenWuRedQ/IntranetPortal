@@ -801,14 +801,13 @@
                                                             <BorderBottom BorderStyle="Solid" BorderWidth="1px" BorderColor="#DCDCDC" />
                                                             <ClientSideEvents SelectedIndexChanged="OnEmpComboBoxSelectionChanged" />
                                                         </dx:ASPxListBox>
-
                                                     </dx:ContentControl>
                                                 </ContentCollection>
                                             </dx:TabPage>
                                         </TabPages>
                                     </dx:ASPxPageControl>
                                     <div style="float: right; margin-top: -25px; display: block; margin-right: 3px;">
-                                        <dx:ASPxButton ID="ASPxButton1" AutoPostBack="False" runat="server" Text="Close" Style="float: right" Paddings-Padding="0" CssClass="rand-button rand-button-gray">
+                                        <dx:ASPxButton ID="ASPxButton1" AutoPostBack="False" runat="server" CausesValidation="false"  Text="Close" Style="float: right" Paddings-Padding="0" CssClass="rand-button rand-button-gray">
                                             <ClientSideEvents Click="function(s, e){ empCheckComboBox.HideDropDown(); }" />
                                         </dx:ASPxButton>
                                     </div>
@@ -893,9 +892,6 @@
                 </dx:PopupControlContentControl>
             </ContentCollection>
         </dx:ASPxPopupControl>
-
     </div>
-
-
     <%------end-------%>
 </div>

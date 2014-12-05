@@ -484,13 +484,13 @@
                                                                    Return False
                                                                End Function))
 
-            str.Add(New Indicator("UnderBuilt", "The house has more underbuilt", Function(li)
-                                                                                     If li.UnbuiltSqft.HasValue And li.NYCSqft.HasValue Then
-                                                                                         Return li.UnbuiltSqft / li.NYCSqft >= 0.5
-                                                                                     End If
+            str.Add(New Indicator("UnderBuilt", "This property is only built to 50% or less of its total allowable Sqft", Function(li)
+                                                                                                                              If li.UnbuiltSqft.HasValue And li.NYCSqft.HasValue Then
+                                                                                                                                  Return li.UnbuiltSqft / li.NYCSqft >= 0.5
+                                                                                                                              End If
 
-                                                                                     Return False
-                                                                                 End Function))
+                                                                                                                              Return False
+                                                                                                                          End Function))
             str.Add(New Indicator("TaxLiens", "This property has tas liens.", Function(li)
                                                                                   Return Not String.IsNullOrEmpty(li.TaxLiensAmount)
                                                                               End Function))

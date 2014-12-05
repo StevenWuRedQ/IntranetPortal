@@ -23,7 +23,8 @@ Public Class PortalDataService
             address.Append(billLine4)
         End If
 
-        Dim servicer = address.ToString
+        'Dim servicer = address.ToString
+        Dim servicer = billLine1
 
         If servicer.EndsWith(",") Then
             servicer = servicer.Remove(servicer.Length - 1)

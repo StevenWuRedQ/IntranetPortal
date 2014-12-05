@@ -101,7 +101,6 @@ Public Class DataWCFService
         Catch ex As Exception
             Throw New Exception("Get Current Identity Name: " & ex.Message)
         End Try
-
     End Function
 
     Public Shared Function IsServerBusy() As Boolean
@@ -122,6 +121,18 @@ Public Class DataWCFService
             Return Nothing
         End Using
     End Function
+
+    Public Shared Sub UpdateServicer(bble As String)
+        Using client As New DataAPI.WCFMacrosClient
+            Try
+                Dim orderId = New Random().Next(1000)
+                client.Get_Servicer(orderId, bble)
+            Catch ex As Exception
+                Throw New Exception("Exception Occured in get Servicer: " & ex.Message)
+            End Try
+        End Using
+    End Sub
+
 
     Public Shared Sub UpdateTaxLiens(bble As String)
         Using client As New DataAPI.WCFMacrosClient
@@ -177,8 +188,8 @@ Public Class DataWCFService
 
                     'result.LAND_SQFT  as Land_SF
                     'result.ORIG_SQFT as NYC_GLA
-                    If result.LAND_SQFT.HasValue AndAlso Not String.IsNullOrEmpty(result.MAX_FAR) AndAlso result.ORIG_SQFT.HasValue Then
-                        li.UnbuiltSqft = result.LAND_SQFT * CDbl(result.MAX_FAR) - result.ORIG_SQFT
+                    If result.LAND_SQFT.HasValue AndAlso Not String.IsNullOrEmpty(result.MAX_FAR) AndAlso result.GROSS_SQFT.HasValue Then
+                        li.UnbuiltSqft = result.LAND_SQFT * CDbl(result.MAX_FAR) - result.GROSS_SQFT
 
                         LeadsInfo.AddIndicator("UnderBuilt", li, GetCurrentIdentityName())
                     End If

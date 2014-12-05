@@ -167,6 +167,15 @@ Partial Public Class LeadsDataManage
     Protected WithEvents cbLeadsType As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
 
     '''<summary>
+    '''cbEmployee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbEmployee As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
     '''btnLoadData control.
     '''</summary>
     '''<remarks>
@@ -201,6 +210,15 @@ Partial Public Class LeadsDataManage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton5 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''ASPxButton7 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxButton7 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
     '''ASPxLabel1 control.

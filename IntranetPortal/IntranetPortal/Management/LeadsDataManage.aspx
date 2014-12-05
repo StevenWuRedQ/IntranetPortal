@@ -215,7 +215,10 @@
                                                         <dx:ListEditItem Text="HomeOwner" Value="HomeOwner" />
                                                         <dx:ListEditItem Text="MotgrAmt" Value="MotgrAmt" />
                                                         <dx:ListEditItem Text="Existed" Value="Existed" />
+                                                        <dx:ListEditItem Text="Employee" Value="Employee" />
                                                     </Items>
+                                                </dx:ASPxComboBox>
+                                                <dx:ASPxComboBox runat="server" ID="cbEmployee" ClientInstanceName="CbEmployee">                                                    
                                                 </dx:ASPxComboBox>
                                             </td>
                                             <td style="padding-left: 10px;">
@@ -236,10 +239,28 @@
                                         </Columns>
                                     </dx:ASPxGridView>
                                     <dx:ASPxButton runat="server" ID="ASPxButton6" Text="Run All Data Loop" AutoPostBack="false">
-                                        <ClientSideEvents Click="function(s,e){ RunService('Loop|' + cbLeadsType.GetText());  }" />
+                                        <ClientSideEvents Click="function(s,e){
+                                            if(cbLeadsType.GetText() == 'Employee')
+                                              {  RunService('Loop|' + CbEmployee.GetText()); }
+                                            else
+                                              {  RunService('Loop|' + cbLeadsType.GetText()); }
+                                            }" />
                                     </dx:ASPxButton>&nbsp;
                                     <dx:ASPxButton runat="server" ID="ASPxButton5" Text="Run General Info Loop" AutoPostBack="false">
-                                        <ClientSideEvents Click="function(s,e){ RunService('GeneralInfoLoop|' + cbLeadsType.GetText());  }" />
+                                        <ClientSideEvents Click="function(s,e){
+                                            if(cbLeadsType.GetText() == 'Employee')
+                                              {  RunService('GeneralInfoLoop|' + CbEmployee.GetText()); }
+                                            else {
+                                                RunService('GeneralInfoLoop|' + cbLeadsType.GetText()); }                                          
+                                             }" />
+                                    </dx:ASPxButton>
+                                    <dx:ASPxButton runat="server" ID="ASPxButton7" Text="Run Servicer Info Loop" AutoPostBack="false">
+                                        <ClientSideEvents Click="function(s,e){
+                                            if(cbLeadsType.GetText() == 'Employee')
+                                              {  RunService('ServicerLoop|' + CbEmployee.GetText()); }
+                                            else {
+                                                RunService('ServicerLoop|' + cbLeadsType.GetText()); }                                          
+                                             }" />
                                     </dx:ASPxButton>
                                     <dx:ASPxLabel runat="server" ID="ASPxLabel1"></dx:ASPxLabel>
                                     <dx:ASPxProgressBar runat="server" ClientInstanceName="ProgressBar" ID="RefreshBar" Maximum="1" Width="300px" Caption="Progress" Position="0.5">
