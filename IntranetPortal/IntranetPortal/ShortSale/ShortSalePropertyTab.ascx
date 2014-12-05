@@ -100,10 +100,10 @@
         <li class="ss_form_item">
             <span class="ss_form_input_title">Freddie Mac</span>
 
-            <input type="radio" id="key_PropertyInfo_checkYes_FreddieMac" data-field="PropertyInfo.FreddieMac" data-radio="Y" name="Freddie_Mac1" value="YES">
+            <input type="radio" id="key_PropertyInfo_checkYes_FreddieMac" class="ss_form_input" data-field="PropertyInfo.FreddieMac" data-radio="Y" name="Freddie_Mac1" value="YES">
             <label for="key_PropertyInfo_checkYes_FreddieMac" class="input_with_check"><span class="box_text">Yes</span></label>
 
-            <input type="radio" id="none_pdf_checkey_no24" data-field="PropertyInfo.FreddieMac" name="Freddie_Mac1" value="NO">
+            <input type="radio" id="none_pdf_checkey_no24" class="ss_form_input" data-field="PropertyInfo.FreddieMac" name="Freddie_Mac1" value="NO">
             <label for="none_pdf_checkey_no24" class="input_with_check"><span class="box_text">No</span></label>
 
         </li>

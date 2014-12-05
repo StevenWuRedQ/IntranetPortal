@@ -266,6 +266,12 @@
 
         if (e.item.index == 4) {
         }
+
+        if(e.item.index==6)
+        {
+            SortLeadsList(icon, "MarkColor");
+            debugger;
+        }
     }
 
     function expandAllClick(s) {
@@ -310,14 +316,25 @@
             AddScrollbarOnLeadsList();
         }
     });
-
+    var temBBLE = null;
+    function OnColorMark(s,e)
+    {
+        var index = e.item.index;
+        index++;
+        gridLeads.PerformCallback("MarkColor|" + temBBLE + "|" + index)
+    }
+    function PopupColorMark(e,BBLE)
+    {
+        temBBLE = BBLE;
+        AspPopupColorMark.ShowAtElement(e);
+    }
 </script>
 <%--id="leads_list_left"--%>
 <div style="width: 100%; height: 100%;" class="color_gray">
     <div style="margin: 30px 10px 10px 10px; text-align: left;" class="clearfix">
         <div style="font-size: 24px;" class="clearfix">
             <div class="clearfix">
-                <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
+                <i class="fa fa-list-ol with_circle"  style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
                 <span style="color: #234b60; font-size: 30px;">
                     <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
                 </span>
@@ -333,13 +350,24 @@
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
     </div>
     <div style="height: 768px; padding: 0px 10px;" id="leads_list_left">
-        <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText" OnSummaryDisplayText="gridLeads_SummaryDisplayText" OnCustomDataCallback="gridLeads_CustomDataCallback" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" AutoGenerateColumns="False" KeyFieldName="BBLE">
+        <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText"
+             OnSummaryDisplayText="gridLeads_SummaryDisplayText"
+             OnCustomDataCallback="gridLeads_CustomDataCallback" 
+            Settings-ShowColumnHeaders="false" 
+            SettingsBehavior-AutoExpandAllGroups="true"
+             ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" AutoGenerateColumns="False" KeyFieldName="BBLE">
             <Columns>
                 <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
                 </dx:GridViewCommandColumn>
                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
+                    <DataItemTemplate>
+                       <span class="icon_btn" style='color:<%#  GetMarkColor(Eval("MarkColor"))%>' onclick='PopupColorMark(this,<%# Eval("BBLE") %>)'><%# Eval("LeadsName")%></span>
+                    </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
+                 <dx:GridViewDataTextColumn FieldName="MarkColor" Visible="false">
+
+                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="CallbackDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">
                     <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
                     <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
@@ -779,6 +807,8 @@
             <dx:MenuItem Text="Zip" Name="Zip">
             </dx:MenuItem>
             <dx:MenuItem Text="Type" Name="LeadsType">
+            </dx:MenuItem>
+            <dx:MenuItem Text="Color" Name="MarkColor">
             </dx:MenuItem>
         </Items>
         <ClientSideEvents ItemClick="OnSortMenuClick" />

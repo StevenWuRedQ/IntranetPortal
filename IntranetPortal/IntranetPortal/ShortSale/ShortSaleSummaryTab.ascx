@@ -150,11 +150,11 @@
                             <span class="ss_form_input_title">&nbsp;</span>
 
                             <input type="checkbox" id="pdf_check_yes1__index__" name="1">
-                            <label for="pdf_check_yes1__index__" class="input_with_check">
+                            <label for="pdf_check_yes1__index__" class="ss_form_input input_with_check" >
                                 <span class="box_text">Fannie</span>
                             </label>
 
-                            <input type="checkbox" id="pdf_check_no2__index__" name="1">
+                            <input type="checkbox" id="pdf_check_no2__index__" class="ss_form_input" name="1">
                             <label for="pdf_check_no2__index__" class="input_with_check">
                                 <span class="box_text">FHA</span>
                             </label>
@@ -163,7 +163,7 @@
                         <li class="ss_form_item">
                             <span class="ss_form_input_title">&nbsp;</span>
 
-                            <input type="checkbox" id="pdf_check_yes3__index__" name="1" value="YES">
+                            <input type="checkbox" id="pdf_check_yes3__index__" name="1" class="ss_form_input" value="YES">
                             <label for="pdf_check_yes3__index__" class="input_with_check">
                                 <span class="box_text">Freddie Mac </span>
                             </label>

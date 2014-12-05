@@ -143,7 +143,10 @@ function AdjustPopupSize(popup) {
     popup.AdjustControl();
 }
 
-function OnLeadsCategoryClick(s, e) {   
+function OnLeadsCategoryClick(s, e) {
+    
+    var idx = e.item.index;
+    debugger
     if (tmpBBLE != null) {
        
         if (e.item.index == 0) {

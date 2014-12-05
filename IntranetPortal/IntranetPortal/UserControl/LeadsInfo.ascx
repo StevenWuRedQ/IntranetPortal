@@ -521,7 +521,7 @@
                                     <ClientSideEvents ItemClick="OnCallbackMenuClick" />
                                 </dx:ASPxPopupMenu>
                                 <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="260px" Height="250px"
-                                    MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="pcMain"
+                                    MaxWidth="800px" MaxHeight="150px" MinHeight="150px" MinWidth="150px" ID="pcMain"
                                     HeaderText="Select Date" Modal="true"
                                     runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
                                     <ContentCollection>
@@ -530,7 +530,14 @@
                                                 <table>
                                                     <tr>
                                                         <td>
-                                                            <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False"></dx:ASPxCalendar>
+                                                            <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="false"></dx:ASPxCalendar>
+                                                            <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" TimeSectionProperties-Visible="True" CssClass="edit_drop">
+                                                                                <TimeSectionProperties Visible="True"></TimeSectionProperties>
+                                                                                <ClientSideEvents DropDown="function(s,e){ 
+                                                                    var d = new Date('May 1 2014 12:00:00');                                                                    
+                                                                    s.GetTimeEdit().SetValue(d);
+                                                                    }" />
+                                                                            </dx:ASPxDateEdit>
                                                         </td>
                                                     </tr>
                                                     <tr>

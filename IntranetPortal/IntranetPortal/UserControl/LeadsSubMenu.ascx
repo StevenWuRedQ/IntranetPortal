@@ -3,7 +3,6 @@
 <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
     <Items>
         <dx:MenuItem GroupName="Sort" Text="View Map" Name="GoogleStreet">
-            <Image Url="/images/drap_map_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Google Map View" Name="GoogleMap" Image-Url="/images/drap_map_icons.png" ClientVisible="false">
             <Image Url="/images/drap_map_icons.png"></Image>
@@ -47,6 +46,16 @@
     </Items>
     <ClientSideEvents ItemClick="OnLeadsCategoryClick" />
     <ItemStyle Height="30px"></ItemStyle>
+</dx:ASPxPopupMenu>
+<dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="AspPopupColorMark" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+    <Items>
+        <dx:MenuItem Text="Urgent" ItemStyle-ForeColor="Red">
+        </dx:MenuItem>
+        <dx:MenuItem Text="Important" ItemStyle-ForeColor="Yellow"></dx:MenuItem>
+        <dx:MenuItem Text="Later" ItemStyle-ForeColor="Green"></dx:MenuItem>
+    </Items>
+    <ItemStyle Height="30px"></ItemStyle>
+    <ClientSideEvents ItemClick="OnColorMark" />
 </dx:ASPxPopupMenu>
 
 <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
@@ -111,7 +120,7 @@
             </div>
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" style="border: 0px" role="tablist">
-                <li ><a href="#street_image" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(5)"  style="display:none">Street View Image</a></li>
+                <li><a href="#street_image" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(5)" style="display: none">Street View Image</a></li>
 
                 <li class="active"><a href="#streetView" class="popup_tab_text" role="tab" data-toggle="tab" onclick="popupControlMapTabClick(0)">Street View</a></li>
                 <li><a href="#mapView" role="tab" class="popup_tab_text" data-toggle="tab" onclick="popupControlMapTabClick(1)">Map View</a></li>
@@ -121,16 +130,15 @@
             </ul>
 
             <!-- Tab panes -->
-            <div class="tab-content" style="display:none">
-                <div class="tab-pane" id="street_image" >
-                 
+            <div class="tab-content" style="display: none">
+                <div class="tab-pane" id="street_image">
                 </div>
                 <div class="tab-pane active" id="streetView">streetView</div>
                 <div class="tab-pane" id="mapView">mapView</div>
                 <div class="tab-pane" id="BingBird">BingBird</div>
                 <div class="tab-pane" id="Oasis">Oasis</div>
                 <div class="tab-pane" id="ZOLA">ZOLA</div>
-                
+
             </div>
             <div style="width: 100%; text-align: center; display: none" id="leads_address_popup"></div>
         </div>

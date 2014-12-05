@@ -208,7 +208,15 @@ Public Class LeadsList
             gridLeads.DataBind()
         End Using
     End Sub
+    Sub BindLeadsColor()
+        Using Context As New Entities
+            Dim subOridates = Employee.GetSubOrdinate(Page.User.Identity.Name)
 
+            Dim leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeID)).OrderBy(Function(e) e.MarkColor).ToList
+            gridLeads.DataSource = leads
+            gridLeads.DataBind()
+        End Using
+    End Sub
     Sub BindSharedList()
         Using Context As New Entities
             Dim leads = (From lead In Context.Leads
@@ -358,6 +366,8 @@ Public Class LeadsList
     Protected Sub gridLeads_CustomDataCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomDataCallbackEventArgs)
 
         e.Result = gridLeads.GetRowValues(CInt(e.Parameters), "BBLE")
+
+
         Return
     End Sub
 
@@ -607,9 +617,29 @@ Public Class LeadsList
         If e.Parameters.StartsWith("Search") Then
             Dim key = e.Parameters.Split("|")(1)
             BindLeadsListByKey(key)
+        ElseIf (e.Parameters.StartsWith("MarkColor")) Then
+            Dim BBLE = e.Parameters.Split("|")(1)
+            Dim Color = CInt(e.Parameters.Split("|")(2))
+            Using Context As New Entities
+                Dim leads = Context.Leads.Where(Function(l) l.BBLE = BBLE).FirstOrDefault
+                leads.MarkColor = Color
+                Context.SaveChanges()
+                BindLeadsColor()
+            End Using
+
+        Else
         End If
     End Sub
-
+    Public Function GetMarkColor(markColor As Integer)
+        If (markColor <= 0) Then
+            Return ""
+        End If
+        Dim colors As New Dictionary(Of Integer, String)
+        colors.Add(1, "red")
+        colors.Add(2, "yellow")
+        colors.Add(3, "green")
+        Return colors.Item(markColor)
+    End Function
     Protected Sub gridLeads_AfterPerformCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewAfterPerformCallbackEventArgs) Handles gridLeads.AfterPerformCallback
         'If gridLeads.DataSource Is Nothing Then
         '    BindLeadsList(lblLeadCategory.Text)
@@ -639,7 +669,7 @@ Public Class LeadsList
     End Sub
 
     Protected Sub gridLeads_CustomGroupDisplayText(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewColumnDisplayTextEventArgs)
-        
+
     End Sub
 
     Protected Sub gridLeads_SummaryDisplayText(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewSummaryDisplayTextEventArgs)

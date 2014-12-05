@@ -194,6 +194,15 @@ Partial Public Class ShortSalePage
     Protected WithEvents ASPxCalendar1 As Global.DevExpress.Web.ASPxEditors.ASPxCalendar
 
     '''<summary>
+    '''ASPxDateEdit1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxDateEdit1 As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
+
+    '''<summary>
     '''ASPxButton1 control.
     '''</summary>
     '''<remarks>

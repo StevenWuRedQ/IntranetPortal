@@ -13,7 +13,7 @@
         <AssociationConnector Association="IntranetPortalModel.EmployeeLead" />
         <AssociationConnector Association="IntranetPortalModel.LeadsActivityLogLead" />
         <AssociationConnector Association="IntranetPortalModel.EmployeeLeadsActivityLog" />
-        <EntityTypeShape EntityType="IntranetPortalModel.Role" Width="1.5" PointX="3.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntranetPortalModel.Role" Width="1.5" PointX="1.875" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="IntranetPortalModel.UsersInRole" Width="1.75" PointX="1.25" PointY="7" IsExpanded="false" />
         <AssociationConnector Association="IntranetPortalModel.RoleUsersInRole" />
         <EntityTypeShape EntityType="IntranetPortalModel.FileAttachment" Width="1.5" PointX="6.375" PointY="8.125" IsExpanded="true" />

@@ -126,6 +126,15 @@
     background: #77787b;
 }
 
+@media (max-width: 1199px) {
+	/*#ctl00_MainContentPH_UserSummary_contentSplitter_1 {
+		display: none;
+	}*/
+}
+.dxmLite_MetropolisBlue1.dxm-ltr .dxm-popup .dxm-image
+{
+    margin-top:4px;
+}
 .rand-pop {
     box-shadow: 2.5px 4.33px 40px 0px rgba(2, 2, 2, 0.3);
     border-radius: 5px;

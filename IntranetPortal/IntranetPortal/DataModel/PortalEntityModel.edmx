@@ -176,6 +176,7 @@
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="AssignDate" Type="datetime" />
           <Property Name="AssignBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="MarkColor" Type="int" />
         </EntityType>
         <EntityType Name="LeadsActivityLog">
           <Key>
@@ -705,6 +706,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DeadReason" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MarkColor" Type="Int32" />
         </EntityType>
         <EntityType Name="LeadsInfo">
           <Key>
@@ -1293,6 +1295,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySetMapping Name="Leads">
             <EntityTypeMapping TypeName="IntranetPortalModel.Lead">
               <MappingFragment StoreEntitySet="Leads">
+                <ScalarProperty Name="MarkColor" ColumnName="MarkColor" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="DeadReason" ColumnName="DeadReason" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />

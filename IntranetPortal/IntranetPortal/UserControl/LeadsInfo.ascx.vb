@@ -213,7 +213,8 @@ Public Class LeadsInfo1
             End If
 
             If e.Parameter = "customDays" Then
-                Dim tmpdate = ASPxCalendar1.SelectedDate
+
+                Dim tmpdate = If(ASPxDateEdit1 IsNot Nothing, ASPxDateEdit1.Value, ASPxCalendar1.SelectedDate)
                 UpdateLeadStatus(hfBBLE.Value, LeadStatus.Callback, tmpdate)
             End If
 
