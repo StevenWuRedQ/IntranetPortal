@@ -270,7 +270,7 @@
         if(e.item.index==6)
         {
             SortLeadsList(icon, "MarkColor");
-            debugger;
+           
         }
     }
 
@@ -320,7 +320,10 @@
     function OnColorMark(s,e)
     {
         var index = e.item.index;
-        index++;
+        if (index == 0)
+        {
+            index = 1000;
+        }
         gridLeads.PerformCallback("MarkColor|" + temBBLE + "|" + index)
     }
     function PopupColorMark(e,BBLE)
@@ -362,7 +365,7 @@
                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
                     <DataItemTemplate>
-                       <span class="icon_btn" style='color:<%#  GetMarkColor(Eval("MarkColor"))%>' onclick='PopupColorMark(this,<%# Eval("BBLE") %>)'><%# Eval("LeadsName")%></span>
+                       <div class="icon_btn list_text_border" style='border-color:<%#  GetMarkColor(Eval("MarkColor"))%>' onclick='PopupColorMark(this,<%# Eval("BBLE") %>)'><%# Eval("LeadsName")%></div>
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
                  <dx:GridViewDataTextColumn FieldName="MarkColor" Visible="false">
@@ -593,7 +596,7 @@
                                         <table style="width: 490px; margin: 10px; border-spacing: 2px;">
                                             <tr style="margin-bottom: 3px;">
                                                 <td colspan="2">
-                                                    <dx:ASPxListBox runat="server" Height="260px" Width="485px" ID="lbNewBBLE" ClientInstanceName="lbNewBBLEClient" OnCallback="lbNewBBLE_Callback">
+                                                    <dx:ASPxListBox runat="server" Height="260px"  Width="485px" ID="lbNewBBLE" ClientInstanceName="lbNewBBLEClient" OnCallback="lbNewBBLE_Callback">
                                                         <Columns>
                                                             <dx:ListBoxColumn Name="BBLE" FieldName="BBLE" Caption="BBLE" Width="100px" />
                                                             <dx:ListBoxColumn Name="LeadsName" FieldName="LeadsName" Caption="Leads Name" Width="385px" />
@@ -725,28 +728,28 @@
                         <dx:LayoutItem Caption="Leads Name">
                             <LayoutItemNestedControlCollection>
                                 <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxTextBox runat="server" Width="100%" ID="txtRequestUpdateLeadsName" ReadOnly="true"></dx:ASPxTextBox>
+                                    <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateLeadsName" ReadOnly="true"></dx:ASPxTextBox>
                                 </dx:LayoutItemNestedControlContainer>
                             </LayoutItemNestedControlCollection>
                         </dx:LayoutItem>
                         <dx:LayoutItem Caption="Create By">
                             <LayoutItemNestedControlCollection>
                                 <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxTextBox runat="server" Width="100%" ID="txtRequestUpdateCreateby" ReadOnly="true"></dx:ASPxTextBox>
+                                    <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateCreateby" ReadOnly="true"></dx:ASPxTextBox>
                                 </dx:LayoutItemNestedControlContainer>
                             </LayoutItemNestedControlCollection>
                         </dx:LayoutItem>
                         <dx:LayoutItem Caption="Manager">
                             <LayoutItemNestedControlCollection>
                                 <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxTextBox runat="server" Width="100%" ID="txtRequestUpdateManager" ReadOnly="true"></dx:ASPxTextBox>
+                                    <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateManager" ReadOnly="true"></dx:ASPxTextBox>
                                 </dx:LayoutItemNestedControlContainer>
                             </LayoutItemNestedControlCollection>
                         </dx:LayoutItem>
                         <dx:LayoutItem Caption="Importance">
                             <LayoutItemNestedControlCollection>
                                 <dx:LayoutItemNestedControlContainer runat="server" Width="100%" SupportsDisabledAttribute="True">
-                                    <dx:ASPxComboBox runat="server" Width="100%" ID="cbTaskImportant">
+                                    <dx:ASPxComboBox runat="server" Width="100%" CssClass="edit_drop" ID="cbTaskImportant">
                                         <Items>
                                             <dx:ListEditItem Text="Normal" Value="Normal" />
                                             <dx:ListEditItem Text="Important" Value="Important" />
@@ -759,7 +762,7 @@
                         <dx:LayoutItem Caption="Description">
                             <LayoutItemNestedControlCollection>
                                 <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxMemo runat="server" Width="100%" Height="80px" ID="txtTaskDes"></dx:ASPxMemo>
+                                    <dx:ASPxMemo runat="server" Width="100%" CssClass="edit_drop" Height="80px" ID="txtTaskDes"></dx:ASPxMemo>
                                 </dx:LayoutItemNestedControlContainer>
                             </LayoutItemNestedControlCollection>
                         </dx:LayoutItem>

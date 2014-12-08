@@ -49,12 +49,14 @@
 </dx:ASPxPopupMenu>
 <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="AspPopupColorMark" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
     <Items>
-        <dx:MenuItem Text="Urgent" ItemStyle-ForeColor="Red">
+        <dx:MenuItem Text="Normal">
         </dx:MenuItem>
-        <dx:MenuItem Text="Important" ItemStyle-ForeColor="Yellow"></dx:MenuItem>
-        <dx:MenuItem Text="Later" ItemStyle-ForeColor="Green"></dx:MenuItem>
+        <dx:MenuItem Text="Urgent" ItemStyle-ForeColor="#a820e1">
+        </dx:MenuItem>
+        <dx:MenuItem Text="Important" ItemStyle-ForeColor="#ec471b"></dx:MenuItem>
+        <dx:MenuItem Text="Later" ItemStyle-ForeColor="#7bb71b"></dx:MenuItem>
     </Items>
-    <ItemStyle Height="30px"></ItemStyle>
+    <ItemStyle Height="30px" Paddings-PaddingLeft="20px"></ItemStyle>
     <ClientSideEvents ItemClick="OnColorMark" />
 </dx:ASPxPopupMenu>
 

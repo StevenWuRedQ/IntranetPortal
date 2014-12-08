@@ -249,7 +249,7 @@
         <div class="color_gray clearfix filed_margin_top homeowner_title_margin">
             <i class="fa fa-chain color_gray homeowner_info_icon"></i>
             <div class="form_div_node form_div_node_no_under_line homeowner_title_text">
-                <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing," "&relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField %></span><br />
+                <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField IsNot Nothing, " " & relative.nameField.middleNameField, " ") & " " & relative.nameField.lastNameField%></span><br />
                 <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
             </div>
 

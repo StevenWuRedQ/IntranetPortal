@@ -2116,3 +2116,9 @@ td.vendor_info_left {
 .hidden_btn .dxgvStatusBar_MetropolisBlue1 tr.dxgv > td {
     display: none !important;
 }
+
+.list_text_border
+{
+    border-left: 3px solid;
+    padding-left:6px;
+}

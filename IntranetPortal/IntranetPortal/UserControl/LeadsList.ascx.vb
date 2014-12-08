@@ -631,14 +631,18 @@ Public Class LeadsList
         End If
     End Sub
     Public Function GetMarkColor(markColor As Integer)
-        If (markColor <= 0) Then
-            Return ""
+        If (markColor <= 0 Or markColor = 1000) Then
+            Return "transparent"
         End If
         Dim colors As New Dictionary(Of Integer, String)
-        colors.Add(1, "red")
-        colors.Add(2, "yellow")
-        colors.Add(3, "green")
-        Return colors.Item(markColor)
+        colors.Add(1, "#a820e1")
+        colors.Add(2, "#ec471b")
+        colors.Add(3, "#7bb71b")
+        Dim color = colors.Item(markColor)
+        If (color Is Nothing) Then
+            Throw New Exception("Can't find color " & markColor & "In GetMarkColor")
+        End If
+        Return color
     End Function
     Protected Sub gridLeads_AfterPerformCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewAfterPerformCallbackEventArgs) Handles gridLeads.AfterPerformCallback
         'If gridLeads.DataSource Is Nothing Then
