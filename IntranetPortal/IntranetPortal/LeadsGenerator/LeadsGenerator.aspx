@@ -465,12 +465,8 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
-
-
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
