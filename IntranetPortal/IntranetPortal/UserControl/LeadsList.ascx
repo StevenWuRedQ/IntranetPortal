@@ -362,20 +362,15 @@
             <Columns>
                 <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
                 </dx:GridViewCommandColumn>
-                 <dx:GridViewDataTextColumn FieldName="MarkColor" Width="20px" VisibleIndex="0">
-                     <DataItemTemplate>
-                          <div style=';color:<%#  GetMarkColor(Eval("MarkColor"))%>' onclick='PopupColorMark(this,<%# Eval("BBLE") %>)' class="icon_btn"> 
-                              <i class="fa fa-star" style="font-size:16px"></i> </div> 
-                     </DataItemTemplate>
-                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
                     <DataItemTemplate>
-                     
-                     <div ><%# Eval("LeadsName")%></div>
+                       <div class="icon_btn list_text_border" style='border-color:<%#  GetMarkColor(Eval("MarkColor"))%>' onclick='PopupColorMark(this,<%# Eval("BBLE") %>)'><%# Eval("LeadsName")%></div>
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
-                
+                 <dx:GridViewDataTextColumn FieldName="MarkColor" Visible="false">
+
+                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="CallbackDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">
                     <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
                     <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
