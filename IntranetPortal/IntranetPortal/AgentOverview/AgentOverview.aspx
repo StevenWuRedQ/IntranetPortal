@@ -4,7 +4,7 @@
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="/css/right-pane.css" />
     <script src="../scripts/jquery.printElement.js"></script>
-    <script src="/scripts/stevenjs.js"></script>
+    <script src="/scripts/stevenjs.js?v=1.0"></script>
     <style type="text/css">
         .InforPanel {
             float: left;

@@ -58,7 +58,11 @@
                         <span><%= TLOLocateReport.numberOfBankruptciesField > 0%> </span>
                         <% If TLOLocateReport.numberOfBankruptciesField > 0 Then%>
                         <i class="fa fa-minus-square-o" style="float: right; color: #b1b2b7"></i>
-                        <%= TLOLocateReport.bankruptciesField(0).attorneyNameField & "<Br />" & TLOLocateReport.bankruptciesField(0).attorneyPhoneField %>
+                        <% Dim info = TLOLocateReport.bankruptciesField(0) %>
+                        <% If info IsNot Nothing Then%>
+                         <%=info.attorneyAddressField.countyField &" "&info.attorneyAddressField.zipField &"<Br />" & info.attorneyNameField & "<Br />" & info.attorneyPhoneField & "<Br />" & info.claimDateField.ToString & "<Br />" & info.dischargeDateField.ToString & "<Br />" & info.lawFirmField & "<Br />" & info.nphIdField%>
+                        <% End If %>
+                       
                         <% End If%>
                     </div>
                 </div>

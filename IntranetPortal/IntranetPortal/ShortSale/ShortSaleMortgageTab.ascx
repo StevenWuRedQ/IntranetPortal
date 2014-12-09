@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleMortgageTab.ascx.vb" Inherits="IntranetPortal.ShortSaleMortgageTab" %>
 <%@ Import Namespace="IntranetPortal.ShortSale" %>
-<script src="/scripts/stevenjs.js"></script>
+<script src="/scripts/stevenjs.js?v=1.0"></script>
 <div class="clearfix">
     <div style="float: right">
         <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />

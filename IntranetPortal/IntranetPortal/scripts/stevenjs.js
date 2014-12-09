@@ -1,5 +1,5 @@
 ﻿function clickCollapse(e, id) {
-   
+
     var buttonClassName = e.className;
     var openClass = "-minus";
     var isOpen = buttonClassName.indexOf(openClass) > 0;
@@ -7,11 +7,9 @@
     collapse_doc_list($(e).parents(".doc_list_section"), isOpen);
 }
 
-function collapse_doc_list(div ,isOpen)
-{
+function collapse_doc_list(div, isOpen) {
     var e = div.find(".collapse_btn_e");
-    if (e.length == 0)
-    {
+    if (e.length == 0) {
         return;
     }
     e = e[0];
@@ -19,7 +17,7 @@ function collapse_doc_list(div ,isOpen)
     var openClass = "-minus";
     var clossClass = "-plus";
 
-    
+
     var toSwich = !isOpen;
     var changeToClass = isOpen ? buttonClassName.replace(openClass, clossClass) : buttonClassName.replace(clossClass, openClass);
     e.className = changeToClass;
@@ -27,13 +25,11 @@ function collapse_doc_list(div ,isOpen)
     div.find(".doc_collapse_div").css("display", toSwich ? "block" : "none");
 }
 
-function collapse_all(collapse_all)
-{
-    $(".doc_list_section").each(function(ind)
-    {
+function collapse_all(collapse_all) {
+    $(".doc_list_section").each(function (ind) {
         collapse_doc_list($(this), collapse_all);
     })
-    
+
 }
 var wx_deubg = true;
 /*band data in short Sale*/
@@ -128,7 +124,7 @@ function expand_array_item(e) {
     var current_div = div.find(".collapse_div")
     var isopen = current_div.css("display") != "none";
     var field = div.attr("data-field");
-   
+
     $(".ss_array[data-field='" + field + "']").each(
         function (ind) {
             control_array_div($(this), false);
@@ -137,11 +133,10 @@ function expand_array_item(e) {
 
     control_array_div(div, !isopen)
 
-    
+
 }
 
-function control_array_btn(div, current_div)
-{
+function control_array_btn(div, current_div) {
     var is_open = current_div.css("display") != "none";
     var btn = div.find(".expand_btn");
     if (btn.length == 0) {
@@ -156,19 +151,15 @@ function control_array_btn(div, current_div)
 
     }
 }
-function control_array_div(div,is_open)
-{
+function control_array_div(div, is_open) {
     var current_div = div.find(".collapse_div");
-    if (current_div.length == 0)
-    {
+    if (current_div.length == 0) {
         return;
     }
-    var btn_func = function()
-    {
+    var btn_func = function () {
         control_array_btn(div, current_div)
     }
-    if (is_open)
-    {
+    if (is_open) {
         current_div.slideDown(btn_func);
     } else {
         current_div.slideUp(btn_func);
@@ -176,9 +167,9 @@ function control_array_div(div,is_open)
     }
 
     //control_array_btn(div, current_div);
-   // current_div.css("display", is_open ? "inline" : "none");
-  
-    
+    // current_div.css("display", is_open ? "inline" : "none");
+
+
 }
 
 
@@ -214,8 +205,8 @@ function ShortSaleDataBand(data_stauts) {
             /* if radio box not check then*/
             //if (!fieldNotChange(ShortSaleCaseData, field) && elem.attr("type")=="radio") {
             data_value = get_sub_property(ShortSaleCaseData, field, ss_field_data(elem, null));
-               
-           // }
+
+            // }
 
         }
         data_value = get_sub_property(ss_data, field, null);
@@ -254,6 +245,9 @@ function format_input() {
     $(".ss_email").on("keyup", function () {
         return format_email(this);
     });
+    $(".ss_ssn").on("keyup", function () {
+        onkeyUpSSN(this);
+    });
 
     $(".ss_not_empty, .ss_zip, .ss_email, .ss_not_empty").each(function (index) {
         $(this).on("blur", function () {
@@ -269,19 +263,16 @@ function pass_format_test() {
     var is_pass = true;
     $(".ss_not_empty, .ss_zip, .ss_email, .ss_not_empty").each(function (ind) {
         /*don't check frist in array */
-        if ($(this).parents(".ss_array").attr("data-array-index") == 0)
-        {
+        if ($(this).parents(".ss_array").attr("data-array-index") == 0) {
             return;
         }
 
-        if (in_template(this))
-        {
+        if (in_template(this)) {
             return;
         }
         var is_not_pass = $(this).hasClass("ss_input_error");
 
-        if (is_pass && is_not_pass)
-        {
+        if (is_pass && is_not_pass) {
             is_pass = false;
         }
     }
@@ -290,8 +281,7 @@ function pass_format_test() {
 
 }
 
-function in_template(e)
-{
+function in_template(e) {
     return $(e).parents(".ss_array").css("display") == "none";
 }
 function refreshDiv(field, obj) {
@@ -366,23 +356,27 @@ function ss_field_data(elem, value) {
 
             if (value == null) {
                 //d_alert("number value is= " + elem.val());
-
+                if (elem.hasClass("ss_ssn")) {
+                    return elem.val().replace(/[^\d]/g, "");
+                }
                 return elem.val();
             }
 
             if (elem.hasClass("ss_date")) {
-                if (value != '')
-                {
+                if (value != '') {
                     var t_date = new Date(value);
-                    
-                    if (t_date != null)
-                    {
+
+                    if (t_date != null) {
                         value = fromatDateString(t_date)
                     }
-                   
+
                 }
-               
+
             }
+            if (elem.hasClass("ss_ssn")) {
+                value = fromatSSN(value);
+            }
+           
 
             elem.val(value);
         }
@@ -390,8 +384,24 @@ function ss_field_data(elem, value) {
     }
     return null;
 }
-function fromatDateString(date)
-{
+function onkeyUpSSN(e) {
+    var value = $(e).val();
+    $(e).val(fromatSSN(value));
+}
+function fromatSSN(value) {
+    var ssn = value.replace(/[^\d]/g, "");
+    var reslut = ""
+    if (ssn.length >= 9) {
+        reslut = ssn.substring(0, 3) + "-" + ssn.substring(3, 5) + "-" + ssn.substring(5, 9)
+    }
+
+    if (reslut.length == 0) {
+        return ssn;
+    }
+    debugger;
+    return reslut;
+}
+function fromatDateString(date) {
     return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
 }
 function is_radio(e) {
@@ -446,19 +456,15 @@ function clearArray(array) {
     }
 
 }
-function clearHomeOwner()
-{
+function clearHomeOwner() {
     var owners = ShortSaleCaseData.PropertyInfo.Owners;
-    if (owners == null || !( owners instanceof Array))
-    {
+    if (owners == null || !(owners instanceof Array)) {
         d_alert("owners is null or not array");
         return;
     }
-    for(var i =0;i<owners.length;i++)
-    {
+    for (var i = 0; i < owners.length; i++) {
         var owner = owners[i];
-        if (owner.FirstName==null||owner.FirstName == "")
-        {
+        if (owner.FirstName == null || owner.FirstName == "") {
             owners.splice(owner, 1);
         }
     }
@@ -574,18 +580,18 @@ function prepareArrayDivs(is_save) {
 
         /*there default have a empty div start add div below */
         var add_div = elem;
-        
+
         /*when there is no data new a data */
         if (data_value.length == 0) {
             //data_value[0].
-            
+
             expland_div(addCloneTo(elem, elem, 0));
         }
         for (var i = 0; i < data_value.length; i++) {
 
             var clone_div = addCloneTo(elem, add_div, i);
             control_array_div(clone_div, i == 0);
-            
+
             add_div = clone_div;
         }
     });
@@ -606,13 +612,13 @@ function AddArraryItem(event, e) {
     var data_value = get_sub_property(ShortSaleCaseData, field, null);
     var len = data_value.length;
     data_value[len] = new Object();
-    
+
     array_div.parent().find(".ss_array").each(
         function (ind) {
-            control_array_div($(this),false);
+            control_array_div($(this), false);
         }
         );
-   
+
     var lastdiv = $(".ss_array[data-field='" + field + "']:last");
 
 
@@ -628,6 +634,7 @@ function AddArraryItem(event, e) {
         $(this).val("");
     });
     event.cancelBubble = true;
+    format_input();
     return true;
 }
 
@@ -724,13 +731,12 @@ function collectDate(objCase) {
 }
 
 function switch_edit_model(s, objCase) {
-   
+
 
     if ($(s).val() == "Edit") {
         set_edit_model(true);
     } else {
-        if (!pass_format_test())
-        {
+        if (!pass_format_test()) {
             alert("Some field you entered is incorrect please check.");
             return;
         }
@@ -740,31 +746,26 @@ function switch_edit_model(s, objCase) {
     }
 }
 
-function set_edit_model(is_edit)
-{
-    
+function set_edit_model(is_edit) {
+
     var inputs = $(".ss_form_input, .input_with_check");
     var control_btns = $(".ss_control_btn");
-    if (is_edit)
-    {
+    if (is_edit) {
         inputs = inputs.not(".ss_not_edit");
     }
 
-    if (is_edit)
-    {
+    if (is_edit) {
         inputs.addClass("color_blue_edit");
-    } else
-    {
+    } else {
         inputs.removeClass("color_blue_edit");
     }
-    control_btns.each(function (index)
-    {
+    control_btns.each(function (index) {
         this.style.setProperty("display", is_edit ? "inline" : "none", "important")
     });
     inputs.prop("disabled", !is_edit);
     $(".ss_allow_eidt").prop("disabled", false);// allow alweays edit
     debugger;
-    $(".short_sale_edit").val(is_edit?  "Save": "Edit");
+    $(".short_sale_edit").val(is_edit ? "Save" : "Edit");
 }
 
 function format_phone(e) {
@@ -802,11 +803,10 @@ function format_error(e, is_error) {
 }
 
 function format_email(e) {
-    if (is_empty(e))
-    {
+    if (is_empty(e)) {
         return true;
     }
-    
+
     var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
     var match_mail = $(e).val().match(pattern);
 
@@ -815,8 +815,7 @@ function format_email(e) {
     format_error(e, !is_email);
     return is_email;
 }
-function is_empty(e)
-{
+function is_empty(e) {
     return $(e).val() == null || $(e).val() == "";
 }
 function format_zip(e) {

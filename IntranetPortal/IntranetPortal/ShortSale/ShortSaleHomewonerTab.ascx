@@ -27,7 +27,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">ssn</label>
-                    <input class="ss_form_input" data-item="SSN" data-item-type="1">
+                    <input class="ss_form_input ss_ssn" data-item="SSN" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">dob</label>

@@ -309,7 +309,7 @@
         contentSplitter.AdjustControl();
     }
 </script>
-<script src="/scripts/stevenjs.js"></script>
+<script src="/scripts/stevenjs.js?v=1.0"></script>
 <style type="text/css">
     .UpdateInfoAlign {
         text-align: right;
