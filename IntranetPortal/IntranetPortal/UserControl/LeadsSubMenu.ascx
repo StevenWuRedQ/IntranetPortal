@@ -57,7 +57,7 @@
         <dx:MenuItem Text="Later" ItemStyle-ForeColor="#7bb71b"></dx:MenuItem>
     </Items>
     <ItemStyle Height="30px" Paddings-PaddingLeft="20px"></ItemStyle>
-    <ClientSideEvents ItemClick="OnColorMark" />
+    <ClientSideEvents ItemClick="function(s,e){ if(OnColorMark){OnColorMark(s,e);} }" />
 </dx:ASPxPopupMenu>
 
 <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
