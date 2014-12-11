@@ -365,7 +365,7 @@
                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
                     <DataItemTemplate>
-                       <div class="icon_btn list_text_border" style='border-color:<%#  GetMarkColor(Eval("MarkColor"))%>' onclick='PopupColorMark(this,<%# Eval("BBLE") %>)'><%# Eval("LeadsName")%></div>
+                       <div class="icon_btn list_text_border" style='border-color:<%#  GetMarkColor(Eval("MarkColor"))%>' oncontextmenu='PopupColorMark(this,<%# Eval("BBLE") %>);return false;'><%# Eval("LeadsName")%></div>
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
                  <dx:GridViewDataTextColumn FieldName="MarkColor" Visible="false">

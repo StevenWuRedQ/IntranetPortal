@@ -50,6 +50,13 @@
         <FontClass>
           <![CDATA[<i class="fa fa-refresh"></i>]]>
         </FontClass>
+        <!--<Items>
+          <PortalNavItem Name="ShortSale-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="true">
+            <FontClass>
+              <![CDATA[<i class="fa fa-line-chart"></i>]]>
+            </FontClass>
+          </PortalNavItem>
+        </Items>-->
       </PortalNavItem>
       <PortalNavItem Name="AgentDeadLead" Text="Dead Lead" NavigationUrl="/LeadAgent.aspx?c=Dead Lead" ShowAmount="true">
         <FontClass>
@@ -115,6 +122,15 @@
             <FontClass>
               <![CDATA[<i class="fa fa-refresh"></i>]]>
             </FontClass>
+            <!-- use ID there some Conflict by steven-->
+            <!--<Items>
+              <PortalNavItem Name="ShortSale-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="true">
+                <FontClass>
+                  <![CDATA[<i class="fa fa-line-chart"></i>]]>
+                </FontClass>
+              </PortalNavItem>
+            </Items>-->
+            
           </PortalNavItem>
           <PortalNavItem Name="AgentDeadLead" Text="Dead Lead" NavigationUrl="/LeadAgent.aspx?c=Dead Lead" ShowAmount="true">
             <FontClass>
@@ -162,6 +178,13 @@
         <FontClass>
           <![CDATA[ <i class="fa fa-refresh"></i>]]>
         </FontClass>
+        <Items>
+          <PortalNavItem Name="ShortSale-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="true">
+            <FontClass>
+              <![CDATA[<i class="fa fa-line-chart"></i>]]>
+            </FontClass>
+          </PortalNavItem>
+        </Items>
       </PortalNavItem>
       <PortalNavItem Name="MgrDeadLead" Text="Dead Lead" NavigationUrl="/MgrViewLeads.aspx?c=Dead Lead" ShowAmount="true">
         <FontClass>
@@ -334,6 +357,13 @@
             <FontClass>
               <![CDATA[ <i class="fa fa-refresh"></i>]]>
             </FontClass>
+            <!--<Items>
+              <PortalNavItem Name="ShortSale-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="true">
+                <FontClass>
+                  <![CDATA[<i class="fa fa-line-chart"></i>]]>
+                </FontClass>
+              </PortalNavItem>
+            </Items>-->
           </PortalNavItem>
           <PortalNavItem Name="Office-Queens-DeadLead" Text="Dead Lead" NavigationUrl="/MgrViewLeads.aspx?c=Dead Lead&amp;o=Queens" ShowAmount="true">
             <FontClass>
@@ -380,6 +410,13 @@
             <FontClass>
               <![CDATA[ <i class="fa fa-refresh"></i>]]>
             </FontClass>
+            <!--<Items>
+              <PortalNavItem Name="ShortSale-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="true">
+                <FontClass>
+                  <![CDATA[<i class="fa fa-line-chart"></i>]]>
+                </FontClass>
+              </PortalNavItem>
+            </Items>-->
           </PortalNavItem>
           <PortalNavItem Name="Office-Rockaway-DeadLead" Text="Dead Lead" NavigationUrl="/MgrViewLeads.aspx?c=Dead Lead&amp;o=Rockaway" ShowAmount="true">
             <FontClass>
@@ -427,6 +464,13 @@
             <FontClass>
               <![CDATA[ <i class="fa fa-refresh"></i>]]>
             </FontClass>
+            <!--<Items>
+              <PortalNavItem Name="ShortSale-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="true">
+                <FontClass>
+                  <![CDATA[<i class="fa fa-line-chart"></i>]]>
+                </FontClass>
+              </PortalNavItem>
+            </Items>-->
           </PortalNavItem>
           <PortalNavItem Name="Office-GendinTeam-DeadLead" Text="Dead Lead" NavigationUrl="/MgrViewLeads.aspx?c=Dead Lead&amp;o=GendinTeam" ShowAmount="true">
             <FontClass>
@@ -473,6 +517,13 @@
             <FontClass>
               <![CDATA[ <i class="fa fa-refresh"></i>]]>
             </FontClass>
+            <!--<Items>
+              <PortalNavItem Name="ShortSale-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="true">
+                <FontClass>
+                  <![CDATA[<i class="fa fa-line-chart"></i>]]>
+                </FontClass>
+              </PortalNavItem>
+            </Items>-->
           </PortalNavItem>
           <PortalNavItem Name="Office-RonTeam-DeadLead" Text="Dead Lead" NavigationUrl="/MgrViewLeads.aspx?c=Dead Lead&amp;o=RonTeam" ShowAmount="true">
             <FontClass>
@@ -525,6 +576,13 @@
             <FontClass>
               <![CDATA[ <i class="fa fa-refresh"></i>]]>
             </FontClass>
+            <!--<Items>
+              <PortalNavItem Name="ShortSale-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="true">
+                <FontClass>
+                  <![CDATA[<i class="fa fa-line-chart"></i>]]>
+                </FontClass>
+              </PortalNavItem>
+            </Items>-->
           </PortalNavItem>
           <PortalNavItem Name="Team-34-DeadLead" Text="Dead Lead" NavigationUrl="/MgrViewLeads.aspx?c=Dead Lead&amp;mgr=34" ShowAmount="true">
             <FontClass>
@@ -571,6 +629,13 @@
             <FontClass>
               <![CDATA[ <i class="fa fa-refresh"></i>]]>
             </FontClass>
+            <!--<Items>
+              <PortalNavItem Name="ShortSale-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="true">
+                <FontClass>
+                  <![CDATA[<i class="fa fa-line-chart"></i>]]>
+                </FontClass>
+              </PortalNavItem>
+            </Items>-->
           </PortalNavItem>
           <PortalNavItem Name="Team-27-DeadLead" Text="Dead Lead" NavigationUrl="/MgrViewLeads.aspx?c=Dead Lead&amp;mgr=27" ShowAmount="true">
             <FontClass>

@@ -77,10 +77,10 @@
                         <input class="ss_form_input" value="<%=owner.FullName %>">
                     </li>
                     <li class="ss_form_item">
-                        <label class="ss_form_input_title">SSN</label>
+                        <label class="ss_form_input_title ss_ssn">SSN</label>
                         <input class="ss_form_input" value="<%=owner.SSN %>">
                     </li>
-                    <li class="ss_form_item">
+                    <li class="ss_form_item" style="visibility:hidden">
                         <label class="ss_form_input_title">Tax class</label>
                         <input class="ss_form_input" value="No Tax class ??">
                     </li>

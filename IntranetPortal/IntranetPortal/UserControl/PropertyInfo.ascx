@@ -367,7 +367,19 @@
             </div>
             <%----end line ----%>
         </div>
-
+        <%--Estimated Mortgage--%>
+        <% If (LeadsInfoData.LisPens IsNot Nothing AndAlso LeadsInfoData.LisPens.Count > 0) Then%>
+         <div style="margin: 20px;" class="clearfix">
+            <div class="form_head" style="margin-top: 40px;">Estimated Mortgage Default</div>
+            <%--line 1--%>
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Default</span>
+                <input class="text_input input_currency" onblur="$(this).formatCurrency();" type="text" value="$<%=LeadsInfoData.EstimatedMortageDefault %>" />
+            </div>
+            <%----end line ----%>
+        </div>
+          <%End If%>
+       
         <dx:ASPxCallbackPanel runat="server" ID="cbpMortgageData" ClientInstanceName="callbackPanelMortgage" OnCallback="cbpMortgageData_Callback">
             <PanelCollection>
                 <dx:PanelContent>

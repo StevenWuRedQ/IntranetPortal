@@ -274,7 +274,22 @@
             End If
         End Get
     End Property
+    Public ReadOnly Property EstimatedMortageDefault As Decimal
+        Get
+            Dim EMD As Decimal
+            If (LisPens IsNot Nothing AndAlso LisPens.Count > 0) Then
+                Dim years = 0
+                For Each lens In LisPens
+                    years += Date.Now.Year - lens.FileDate.Year
+                Next
+                EMD = MortgageCombo * Math.Pow((1.0 + 0.085), (years + 1))
+            Else
+                Return MortgageCombo
+            End If
 
+            Return EMD
+        End Get
+    End Property
     Public ReadOnly Property MortgageCombo As Decimal
         Get
             Dim debt As Decimal

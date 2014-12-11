@@ -688,6 +688,8 @@
                                             <dx:ListEditItem Text="Follow Up Attemps" Value="FollowupAttemps" />
                                             <dx:ListEditItem Text="Create Date" Value="CreateDate" />
                                             <dx:ListEditItem Text="Last Update" Value="LastUpdate2" />
+                                            <dx:ListEditItem Text="Servicer" Value="MortgageData.C1stServicer" />
+                                            
                                         </Items>
 
                                         <%--<CheckBoxStyle  BackgroundImage-ImageUrl="../images/icon_checked_box.png"/>--%>

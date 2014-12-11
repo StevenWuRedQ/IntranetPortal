@@ -8,23 +8,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>My Ideal Property Portal</title>
     <meta name="description" content="" />
-
+    <!-- Latest compiled and minified CSS -->
+    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">--%>
     <link rel="stylesheet" href="/css/normalize.min.css" />
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
     <%--<link href="/css/font-awesome.min.css" type="text/css" rel="stylesheet" />--%>
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="/css/main.css" />
+    <!-- Latest compiled and minified CSS -->
+
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script>
         function onLogIn() {
-            if ($('#username').val().length == 0 || $('#password').val().length == 0)
-            {
+            if ($('#username').val().length == 0 || $('#password').val().length == 0) {
                 afterloginsubmission();
                 return;
             }
             var rbMe = document.getElementById('remember-me').checked ? true : false;
-            
+
             LogInCallBackClinet.PerformCallback($('#username').val() + '|' + $('#password').val() + '|' + rbMe)
         }
 
@@ -42,24 +44,23 @@
             }
         }
 
-        function EnterInput(e)
-        {
+        function EnterInput(e) {
             if (e.keyCode == 13) {
-                onLogIn();           
+                onLogIn();
             }
         }
 
     </script>
 </head>
-<body >
-    <form id="form1" runat="server" style="height:100%" method="post">
-               
+<body>
+    <form id="form1" runat="server" style="height: 100%" method="post">
+
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
         <!--BEGIN LANDING-->
-        
+
         <%--  --%>
         <script>
             document.write('<div id="landing-loader"><i class="fa fa-spinner fa-spin"></i></div>');
@@ -70,17 +71,17 @@
             <article class="sign-in">
                 <section id="sign-in-box" class="sign-in-box-ani">
                     <header class="logo-landing">
-                        <img id="logo-landing" src="/images/img/logo_landing.png" alt="My Ideal Property Portal" class="go-retina logo-ani" width="114"/>
+                        <img id="logo-landing" src="/images/img/logo_landing.png" alt="My Ideal Property Portal" class="go-retina logo-ani" width="114" />
                     </header>
                     <div class="sign-in-form-wrapper">
                         <div class="sign-in-form fade-in" id="portal-sign-in-form">
-                            <input class="sif-username" id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" required="required"/>
+                            <input class="sif-username" id="username" name="username" type="text" placeholder="Username" autofocus="autofocus" required="required" />
                             <input class="sif-password" id="password" name="password" type="password" placeholder="Password" required="required" onkeydown="return EnterInput(event)" />
                             <div class="sif-remember">
                                 <input id="remember-me" name="remember-me" type="checkbox" />
                                 <label for="remember-me">Remember Me</label>
                             </div>
-                            <input id="sign-in-button" class="sif-button" type="button" value="Sign In" onclick="onLogIn()" />                          
+                            <input id="sign-in-button" class="sif-button" type="button" value="Sign In" onclick="onLogIn()" />
                         </div>
                     </div>
                 </section>
@@ -92,19 +93,39 @@
         <dx:ASPxCallback runat="server" ID="LogInCallBack" ClientInstanceName="LogInCallBackClinet" OnCallback="LogInCallBack_Callback">
             <ClientSideEvents CallbackComplete="function(s,e){LogInComplete(e.result);}" />
         </dx:ASPxCallback>
-   
-    <!--END LANDING-->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Okay</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal -->
+        <!--END LANDING-->
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/scripts/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
-    <script src="/scripts/js/jquery.easing.1.3.js"></script>
-    <script src="/scripts/js/jquery.debouncedresize.js"></script>
-    <script src="/scripts/js/jquery.throttledresize.js"></script>
-    <script src="/scripts/js/jquery.mousewheel.js"></script>
-    <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
-    <script src="/scripts/js/jquery.form.min.js"></script>
-    <script src="/scripts/js/jquery.backstretch.min.js"></script>
-    <script src="/scripts/js/main.js"></script>
- </form>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="/scripts/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+        <script src="/scripts/js/jquery.easing.1.3.js"></script>
+        <script src="/scripts/js/jquery.debouncedresize.js"></script>
+        <script src="/scripts/js/jquery.throttledresize.js"></script>
+        <script src="/scripts/js/jquery.mousewheel.js"></script>
+        <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
+        <script src="/scripts/js/jquery.form.min.js"></script>
+        <script src="/scripts/js/jquery.backstretch.min.js"></script>
+        <script src="/scripts/js/main.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+       <%-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>--%>
+    </form>
 </body>
 </html>

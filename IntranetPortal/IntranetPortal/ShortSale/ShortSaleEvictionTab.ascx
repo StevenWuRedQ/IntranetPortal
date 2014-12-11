@@ -156,8 +156,9 @@
                     <label class="ss_form_input_title">Amount</label>
                     <input class="ss_form_input " data-item="Amount" data-item-type="1">
                 </li>
-
+                 
             </ul>
+            
         </div>
     </div>
 
