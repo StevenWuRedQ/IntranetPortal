@@ -86,7 +86,7 @@
                     </div>
                 </section>
                 <footer class="sign-in-footnote fade-in">
-                    <p><a href="#"><i class="fa fa-lock"></i>Forgot your password?</a></p>
+                    <p><a href="mailto:chris@gvs4u.com"><i class="fa fa-lock"></i>Forgot your password?</a></p>
                 </footer>
             </article>
         </div>

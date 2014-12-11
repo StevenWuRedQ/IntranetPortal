@@ -193,8 +193,6 @@ Public Class PortalDataService
                             lead.C2ndMotgrAmt = C1stMotgrAmt
                         End If
 
-
-
                         lead.AcrisOrderDeliveryTime = updateTime
                         lead.AcrisOrderStatus = status
                     Case "ECB_Violations"
@@ -230,11 +228,11 @@ Public Class PortalDataService
                         lead.WaterOrderDeliveryTime = updateTime
                         lead.WaterOrderStatus = status
 
-                        LeadsInfo.AddIndicator("Water", lead)
+                        LeadsInfo.AddIndicator("Water", lead, "DataService")
                     Case "Zillow"
                         If zEstimate > 0 Then
                             lead.EstValue = zEstimate
-                            LeadsInfo.AddIndicator("UnderBuilt", lead)
+                            'LeadsInfo.AddIndicator("UnderBuilt", lead)
 
                         End If
                     Case "ACRIS_LatestSale"
@@ -246,7 +244,7 @@ Public Class PortalDataService
                 context.SaveChanges()
 
 
-                LeadsInfo.AddIndicator("Mortgage", lead)
+                LeadsInfo.AddIndicator("Mortgage", lead, "DataService")
                 Return True
             End If
         End Using

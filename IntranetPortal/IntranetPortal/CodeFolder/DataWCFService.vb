@@ -56,6 +56,28 @@ Public Class DataWCFService
         Return localObj
     End Function
 
+    Public Shared Function GetZillowValue(bble As String) As Boolean
+        Using ctx As New Entities
+            Dim li = ctx.LeadsInfoes.Find(bble)
+
+            If li IsNot Nothing Then
+                Using client As New DataAPI.WCFMacrosClient
+                    Try
+                        Dim value = client.Zillow_Estimate_By_BBLE(bble)
+                        li.EstValue = value
+                        ctx.SaveChanges()
+                        LeadsInfo.AddIndicator("Mortgage", li)
+                        Return True
+                    Catch ex As Exception
+                        Throw New Exception("Exception Occured in GetZillowValue. Exception: " & ex.Message)
+                    End Try
+                End Using
+            End If
+        End Using
+
+        Return False
+    End Function
+
     Public Shared Function GetLiensInfo(bble As String) As List(Of PortalLisPen)
         Dim lisPens As New List(Of PortalLisPen)
         Using client As New DataAPI.WCFMacrosClient
@@ -348,23 +370,29 @@ Public Class DataWCFService
         If acris Then
             apiOrder.Acris = apiOrder.ItemStatus.Calling
             needWait = True
+        Else
+            apiOrder.Acris = apiOrder.ItemStatus.NonCall
         End If
 
         If taxBill Then
             apiOrder.TaxBill = apiOrder.ItemStatus.Calling
             needWait = True
+        Else
+            apiOrder.TaxBill = apiOrder.ItemStatus.NonCall
         End If
 
         If EcbViolation Then
             apiOrder.ECBViolation = apiOrder.ItemStatus.Calling
             needWait = True
+        Else
+            apiOrder.ECBViolation = apiOrder.ItemStatus.NonCall
         End If
 
         If waterBill Then
             apiOrder.WaterBill = apiOrder.ItemStatus.Calling
             needWait = True
         Else
-
+            apiOrder.WaterBill = apiOrder.ItemStatus.NonCall
         End If
 
         If zillow Then
@@ -376,6 +404,8 @@ Public Class DataWCFService
 
         If TLO Then
             apiOrder.TLO = apiOrder.ItemStatus.Calling
+        Else
+            apiOrder.TLO = apiOrder.ItemStatus.NonCall
         End If
 
         If needWait Then
@@ -534,18 +564,24 @@ Public Class DataWCFService
                         needCallService = True
                         lead.AcrisOrderTime = DateTime.Now
                         lead.AcrisOrderStatus = apiOrder.ItemStatus.Calling.ToString
+                    Else
+                        apiOrder.Acris = apiOrder.ItemStatus.NonCall
                     End If
 
                     If apiOrder.TaxBill = apiOrder.ItemStatus.Calling Then
                         needCallService = True
                         lead.TaxesOrderTime = DateTime.Now
                         lead.TaxesOrderStatus = apiOrder.ItemStatus.Calling.ToString
+                    Else
+                        apiOrder.TaxBill = apiOrder.ItemStatus.NonCall
                     End If
 
                     If apiOrder.ECBViolation = apiOrder.ItemStatus.Calling Then
                         needCallService = True
                         lead.ECBOrderTime = DateTime.Now
                         lead.ECBOrderStatus = apiOrder.ItemStatus.Calling.ToString
+                    Else
+                        apiOrder.ECBViolation = apiOrder.ItemStatus.NonCall
                     End If
 
                     If apiOrder.WaterBill = apiOrder.ItemStatus.Calling Then

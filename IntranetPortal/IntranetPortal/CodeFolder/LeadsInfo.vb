@@ -352,16 +352,6 @@
         End Get
     End Property
 
-    'Public ReadOnly Property IndicatorOfLiens As String
-    '    Get
-    '        If Me.C1stMotgrAmt.HasValue AndAlso C1stMotgrAmt > 0 Then
-    '            Return "HasLiens"
-    '        End If
-
-    '        Return ""
-    '    End Get
-    'End Property
-
     Public ReadOnly Property IndicatorOfWater As String
         Get
             If Me.WaterAmt.HasValue AndAlso WaterAmt > 1000 Then

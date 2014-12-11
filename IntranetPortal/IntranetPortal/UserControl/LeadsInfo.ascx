@@ -14,15 +14,12 @@
     }
 
     var tmpPhoneNo = null;
-
     var temTelLink = null;
     var temCommentSpan = null;
     function onSavePhoneComment() {
         
-        var comment = $("#phone_comment").val();
-        
-        var temCommentSpan = $(temTelLink).children("span:first")
-        
+        var comment = $("#phone_comment").val();        
+        var temCommentSpan = $(temTelLink).children("span:first")        
         if (temCommentSpan != null) {
             //$(".phone_comment").text("-" + comment);
             temCommentSpan.text("-" + comment);
@@ -353,6 +350,8 @@
                                             <dx:MenuItem Text="General Property Info" Name="Assessment"></dx:MenuItem>
                                             <dx:MenuItem Text="Mortgage and Violations" Name="PropData"></dx:MenuItem>
                                             <dx:MenuItem Text="Home Owner" Name="TLO">
+                                            </dx:MenuItem>
+                                            <dx:MenuItem Text="ZEstimate" Name="ZEstimate">
                                             </dx:MenuItem>
                                         </Items>
                                         <ClientSideEvents ItemClick="OnRefreshMenuClick" />

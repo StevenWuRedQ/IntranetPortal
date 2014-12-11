@@ -105,13 +105,13 @@
                 </li>
 
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">CFK</label>
-                    <input class="ss_form_input " data-item="CFK" data-item-type="1">
+                    <label class="ss_form_input_title">Cash For Keys ($)</label>
+                    <input class="ss_form_input currency_input" data-item="CFK" data-item-type="1" onblur="$(this).formatCurrency();">
                 </li>
-                <li class="ss_form_item">
+               <%-- <li class="ss_form_item">
                     <label class="ss_form_input_title">Type of Payment</label>
                     <input class="ss_form_input " data-item="TypeOfPayment" data-item-type="1">
-                </li>
+                </li>--%>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date to Vacate</label>
                     <input class="ss_form_input " data-item="DateToVacate" data-item-type="1">

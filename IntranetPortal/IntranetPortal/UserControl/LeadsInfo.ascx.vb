@@ -500,6 +500,11 @@ Public Class LeadsInfo1
                 If Not DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
                     Throw New Exception("This Lead didn't have owner info in our database.")
                 End If
+            Case "ZEstimate"
+                comments = String.Format("ZEstimate info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                If Not DataWCFService.GetZillowValue(bble) Then
+                    Throw New Exception("The ZEstimate info failed refreshing.")
+                End If
         End Select
 
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString)

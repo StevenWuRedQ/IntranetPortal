@@ -51,9 +51,9 @@
     <Items>
         <dx:MenuItem Text="Normal">
         </dx:MenuItem>
+        <dx:MenuItem Text="Important" ItemStyle-ForeColor="#ec471b"></dx:MenuItem>
         <dx:MenuItem Text="Urgent" ItemStyle-ForeColor="#a820e1">
         </dx:MenuItem>
-        <dx:MenuItem Text="Important" ItemStyle-ForeColor="#ec471b"></dx:MenuItem>
         <dx:MenuItem Text="Later" ItemStyle-ForeColor="#7bb71b"></dx:MenuItem>
     </Items>
     <ItemStyle Height="30px" Paddings-PaddingLeft="20px"></ItemStyle>
