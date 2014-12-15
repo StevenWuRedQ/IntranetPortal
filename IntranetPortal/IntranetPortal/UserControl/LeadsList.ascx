@@ -366,14 +366,20 @@
     .diagonal {
         background: repeating-linear-gradient( 135deg, #fff, #fff 10px, #000 10px, #000 15px );
     }
+    .color_list
+    {
+        width:15px;
+        height:15px;
+        border:none;
+    }
 </style>
 <dx:ASPxCallback runat="server" ID="MarkColorCallBack" OnCallback="MarkColorCallBack_Callback" ClientInstanceName="MarkColorCallBack">  </dx:ASPxCallback>
-<div id="color_drop" style="position: absolute; left: -100px; top: -1000px; z-index: 10000">
+<div id="color_drop" style="position: absolute; left: -100px; top: -1000px; z-index: 10000;width:15px;">
 
-    <ul class="list-group">
-        <li class="list-group-item icon_btn" onclick="click_item(this)" style="background: #a820e1">&nbsp;</li>
-        <li class="list-group-item icon_btn" onclick="click_item(this)" style="background: #ec471b">&nbsp;</li>
-        <li class="list-group-item icon_btn diagonal" onclick="click_item(this)"  >&nbsp;</li>
+    <ul class="list-group" style="border:none;width:15px">
+        <li class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #a820e1">&nbsp;</li>
+        <li class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #ec471b">&nbsp;</li>
+        <li class="list-group-item icon_btn color_list diagonal" onclick="click_item(this)"  >&nbsp;</li>
     </ul>
 </div>
 
@@ -409,7 +415,7 @@
             <Columns>
                 <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
                 </dx:GridViewCommandColumn>
-                <dx:GridViewDataTextColumn FieldName="MarkColor" VisibleIndex="0" Width="30px">
+                <dx:GridViewDataTextColumn FieldName="MarkColor"  VisibleIndex="0" Width="30px">
                     <DataItemTemplate>
                         <div>
                         </div>
