@@ -364,7 +364,7 @@
 </script>
 <style>
     .diagonal {
-        background: repeating-linear-gradient( 135deg, #fff, #fff 10px, #000 10px, #000 20px );
+        background: repeating-linear-gradient( 135deg, #fff, #fff 10px, #000 10px, #000 15px );
     }
 </style>
 <dx:ASPxCallback runat="server" ID="MarkColorCallBack" OnCallback="MarkColorCallBack_Callback" ClientInstanceName="MarkColorCallBack">  </dx:ASPxCallback>
