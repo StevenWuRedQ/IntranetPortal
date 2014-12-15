@@ -17,6 +17,14 @@ Public Class ImportAgentData
             cbImportAgent.DataSource = Context.Employees.Where(Function(emp) emp.Active = True Or emp.Name.EndsWith("Office")).ToList.OrderBy(Function(em) em.Name)
             cbImportAgent.DataBind()
             cbImportAgent.Items.Insert(0, New ListEditItem())
+
+            cbEmpFrom.DataSource = Context.Employees.ToList.OrderBy(Function(em) em.Name)
+            cbEmpFrom.DataBind()
+            cbEmpFrom.Items.Insert(0, New ListEditItem())
+
+            cbEmpTo.DataSource = Context.Employees.ToList.OrderBy(Function(em) em.Name)
+            cbEmpTo.DataBind()
+            cbEmpTo.Items.Insert(0, New ListEditItem())
         End Using
     End Sub
 
@@ -27,13 +35,54 @@ Public Class ImportAgentData
     Sub BindGrid()
         Using Context As New Entities
             Dim agent = cbAgents.Text
-            If String.IsNullOrEmpty(agent) Then
-                Return
+            If Not String.IsNullOrEmpty(agent) Then
+                gridLead.DataSource = Context.Agent_Properties.Where(Function(ap) ap.Agent_Name = agent And ap.BBLE IsNot Nothing And (ap.Active = True Or Not ap.Active.HasValue)).ToList
+                gridLead.DataBind()
             End If
-
-            gridLead.DataSource = Context.Agent_Properties.Where(Function(ap) ap.Agent_Name = agent And ap.BBLE IsNot Nothing And (ap.Active = True Or Not ap.Active.HasValue)).ToList
-            gridLead.DataBind()
         End Using
+    End Sub
+
+    Protected Sub btnLoad2_Click(sender As Object, e As EventArgs)
+
+        Dim agent = cbEmpFrom.Text
+        If Not String.IsNullOrEmpty(agent) Then
+            Dim empId = CInt(cbEmpFrom.Value)
+            gridAgentLeads.DataSource = LoadAgentLeads(agent, empId)
+            gridAgentLeads.DataBind()
+        End If
+    End Sub
+
+    Private Function LoadAgentLeads(name As String, empId As Integer) As List(Of Lead)
+        Using Context As New Entities
+            Return Context.Leads.Where(Function(ap) ap.EmployeeName = name And ap.EmployeeID = empId).ToList
+        End Using
+    End Function
+
+    Protected Sub btnTransfer_Click(sender As Object, e As EventArgs)
+        Dim agent = cbEmpFrom.Text
+        If String.IsNullOrEmpty(agent) Then
+            ASPxLabel2.Text = "Please select agent for transfer from."
+            Return
+        End If
+
+        If String.IsNullOrEmpty(cbEmpTo.Text) Then
+            ASPxLabel2.Text = "Please select agent for transfer to."
+            Return
+        End If
+
+        Using ctx As New Entities
+            Dim empId = CInt(cbEmpFrom.Value)
+            For Each ld In ctx.Leads.Where(Function(ap) ap.EmployeeName = agent And ap.EmployeeID = empId).ToList
+                ld.EmployeeID = CInt(cbEmpTo.Value)
+                ld.EmployeeName = cbEmpTo.Text
+                ld.Status = LeadStatus.NewLead
+            Next
+
+            ctx.SaveChanges()
+        End Using
+
+        ASPxLabel2.Text = "Transfer finished."
+
     End Sub
 
     Protected Sub btnImport_Click(sender As Object, e As EventArgs) Handles btnImport.Click
@@ -273,4 +322,6 @@ InitialLine:
 
         e.Result = CDbl(count / total)
     End Sub
+
+ 
 End Class

@@ -103,11 +103,11 @@
                                         }" />
             </dx:ASPxButton>
         </dx:PopupControlContentControl>
-    </ContentCollection>
+    </ContentCollection>    
 </dx:ASPxPopupControl>
 
 <dx:ASPxCallback runat="server" ClientInstanceName="reassignCallback" ID="reassignCallback" OnCallback="reassignCallback_Callback">
-    <ClientSideEvents CallbackComplete="function(s,e){ if(typeof gridleads != 'undefined') gridLeads.Refresh();}" />
+    <ClientSideEvents EndCallback="function(s,e){ if(typeof gridLeads != undefined){gridLeads.Refresh();}}" />
 </dx:ASPxCallback>
 
 <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMapControl" Width="900px" Height="700px"

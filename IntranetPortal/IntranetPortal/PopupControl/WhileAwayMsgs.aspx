@@ -17,6 +17,9 @@
             }
         }
     </script>
+    <style type="text/css">
+
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -35,7 +38,7 @@
                             <a href="#" onclick='(<%# String.Format("ClearMsg({0})", Eval("MsgID")) %>)'>Clear</a>
                         </DataItemTemplate>
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn Width="50px" CellStyle-HorizontalAlign="Center">
+                    <dx:GridViewDataTextColumn Width="50px" CellStyle-HorizontalAlign="Center" Visible="false">
                         <DataItemTemplate>
                             <a href="#" onclick='(<%# String.Format("PopupViewLead({0})", Eval("BBLE"))%>)'>View</a>
                         </DataItemTemplate>

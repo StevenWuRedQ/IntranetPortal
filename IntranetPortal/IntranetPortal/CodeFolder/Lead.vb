@@ -56,6 +56,10 @@ Partial Public Class Lead
                     If status = LeadStatus.DoorKnocks Then
                         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName, LeadsActivityLog.EnumActionType.DoorKnock)
                     Else
+                        If status = LeadStatus.Callback Then
+                            comments = "Lead Status changed to Follow Up on " & callbackDate.ToString("MM/dd")
+                        End If
+
                         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName)
                     End If
                 End If

@@ -23,6 +23,12 @@
     {
         background:url(/images/ic_filtered_bg.png) no-repeat;
     }
+
+    /* for fix the email message link color hover bug in activty log*/
+   td.dxgv:hover a {
+       color:black !important;
+   }
+
 </style>
 
 <script type="text/javascript">

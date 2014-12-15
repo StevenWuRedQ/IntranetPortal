@@ -646,7 +646,6 @@ Public Class ActivityLogs
         End If
     End Sub
 
-
     Private Sub ResendTask(logId As Integer)
         Using Context As New Entities
             Dim task = Context.UserTasks.Where(Function(t) t.LogID = logId).SingleOrDefault

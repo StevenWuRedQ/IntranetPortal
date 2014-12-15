@@ -86,6 +86,60 @@ Partial Public Class ImportAgentData
     Protected WithEvents lblMsg As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
+    '''cbEmpFrom control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbEmpFrom As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
+    '''btnLoad2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnLoad2 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''gridAgentLeads control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridAgentLeads As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''cbEmpTo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbEmpTo As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
+    '''btnTransfer control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnTransfer As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''ASPxLabel2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxLabel2 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+
+    '''<summary>
     '''cbLeadsType control.
     '''</summary>
     '''<remarks>

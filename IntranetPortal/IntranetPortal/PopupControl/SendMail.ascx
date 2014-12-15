@@ -92,6 +92,10 @@
             alert("Your mail is sent.");
             sendingMail = false;
             s.Hide();
+
+            if (typeof gridTrackingClient != 'undefined')
+                gridTrackingClient.Refresh();
+
         }
     }
 

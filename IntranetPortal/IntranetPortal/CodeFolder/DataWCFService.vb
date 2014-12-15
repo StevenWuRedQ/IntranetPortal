@@ -155,7 +155,6 @@ Public Class DataWCFService
         End Using
     End Sub
 
-
     Public Shared Sub UpdateTaxLiens(bble As String)
         Using client As New DataAPI.WCFMacrosClient
             Dim taxLiens = client.Get_Acris_TaxLien(bble)
