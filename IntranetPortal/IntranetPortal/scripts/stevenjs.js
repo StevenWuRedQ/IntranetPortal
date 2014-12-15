@@ -227,7 +227,7 @@ function format_input() {
 
     });
     $(".currency_input").formatCurrency();
-
+    $(".currency_input").on("blur", function(){ $(this).formatCurrency()})
     //var is_pass = true;
 
 
@@ -259,9 +259,9 @@ function format_input() {
     // return is_pass;
 }
 
-function pass_format_test() {
+function pass_format_test(e_msg) {
     var is_pass = true;
-    $(".ss_not_empty, .ss_zip, .ss_email, .ss_not_empty").each(function (ind) {
+    $(".ss_not_empty").each(function (ind) {
         /*don't check frist in array */
         if ($(this).parents(".ss_array").attr("data-array-index") == 0) {
             return;
@@ -271,7 +271,12 @@ function pass_format_test() {
             return;
         }
         var is_not_pass = $(this).hasClass("ss_input_error");
-
+        if (is_not_pass)
+        {
+            e_msg.msg = e_msg.msg || ""
+           
+            e_msg.msg += "\n" + $(this).attr("data-error");
+        }
         if (is_pass && is_not_pass) {
             is_pass = false;
         }
@@ -736,8 +741,10 @@ function switch_edit_model(s, objCase) {
     if ($(s).val() == "Edit") {
         set_edit_model(true);
     } else {
-        if (!pass_format_test()) {
-            alert("Some field you entered is incorrect please check.");
+        var message = {}
+        if (!pass_format_test(message)) {
+            debugger;
+            alert("Some field you entered is incorrect please check bellow.\n" + message.msg?message.msg:"");
             return;
         }
         getShortSaleInstanceComplete(null, null);

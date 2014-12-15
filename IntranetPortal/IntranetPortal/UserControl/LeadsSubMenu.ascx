@@ -2,7 +2,7 @@
 <script type="text/javascript" src="/scripts/LeadsSubMenu.js"></script>
 <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
     <Items>
-        <dx:MenuItem GroupName="Sort" Text="View Map" Name="GoogleStreet">
+        <dx:MenuItem GroupName="Sort" Text="View Map" Image-Url="/images/drap_map_icons.png" Name="GoogleStreet">
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Google Map View" Name="GoogleMap" Image-Url="/images/drap_map_icons.png" ClientVisible="false">
             <Image Url="/images/drap_map_icons.png"></Image>

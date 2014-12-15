@@ -36,11 +36,7 @@
         ASPxPopupMenuPhone.ShowAtElement(tellink);
      
     }
-    function onBtn() {
-        //PhoneCommentPopUpClient.Hide();
-        temTelLink.innerText = "aaaaaa";
-        debugger;
-    }
+   
     function OnPhoneNumberClick(s, e) {
         if (tmpPhoneNo != null) {
             if (e.item.index == 0) {
@@ -306,7 +302,7 @@
         contentSplitter.AdjustControl();
     }
 </script>
-<script src="/scripts/stevenjs.js?v=1.0"></script>
+<script src="/scripts/stevenjs.js?v=1.01"></script>
 <style type="text/css">
     .UpdateInfoAlign {
         text-align: right;
@@ -317,7 +313,7 @@
         /*min-width:1100px;*/
     }
 </style>
-<%--<button onclick="onBtn()" type="button">Onclick change text</button>--%>
+
 <dx:ASPxCallbackPanel runat="server" OnCallback="ASPxCallbackPanel2_Callback" ID="ASPxCallbackPanel2" Height="100%" ClientInstanceName="ContentCallbackPanel" EnableCallbackAnimation="true" CssClass="LeadsContentPanel">
     <PanelCollection>
         <dx:PanelContent ID="PanelContent1" runat="server">

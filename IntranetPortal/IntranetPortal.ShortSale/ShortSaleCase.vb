@@ -418,7 +418,12 @@ Partial Public Class ShortSaleCase
             Return context.ShortSaleCases.Where(Function(ss) ss.Status = status).ToList
         End Using
     End Function
+    Public Shared Function GetCaseByOwner(owner As String) As List(Of ShortSaleCase)
+        Using Context As New ShortSaleEntities
+            Return Context.ShortSaleCases.Where(Function(ss) ss.Owner = owner).ToList
+        End Using
 
+    End Function
     Public Shared Function GetCaseByStatus(status As CaseStatus, owner As String) As List(Of ShortSaleCase)
         Using context As New ShortSaleEntities
             Return context.ShortSaleCases.Where(Function(ss) ss.Status = status AndAlso ss.Owner = owner).ToList
@@ -432,6 +437,13 @@ Partial Public Class ShortSaleCase
     Public Shared Function GetCaseCount(status As CaseStatus) As Integer
         Return GetCaseByStatus(status).Count
     End Function
+    Public Shared Function GetCaseByBBLEs(bbles As List(Of String)) As List(Of ShortSaleCase)
+        Using context As New ShortSaleEntities
+            Return context.ShortSaleCases.Where(Function(ss) bbles.Contains(ss.BBLE)).ToList
+        End Using
+
+    End Function
+
 #End Region
 
 End Class

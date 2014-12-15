@@ -19,11 +19,11 @@
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">First name</label>
-                    <input class="ss_form_input ss_not_empty" data-item="FirstName" data-item-type="1">
+                    <input class="ss_form_input ss_not_empty" data-item="FirstName" data-error="Seller __index__1 First name is Empty" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Last name</label>
-                    <input class="ss_form_input ss_not_empty" data-item="LastName" data-item-type="1">
+                    <input class="ss_form_input ss_not_empty" data-item="LastName" data-error="Seller __index__1 Last name is Empty" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">ssn</label>
@@ -39,7 +39,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Email</label>
-                    <input class="ss_form_input ss_email" data-item="Email" <%--onblur="format_email(this)" onkeydown="format_email(this)--%>" data-item-type="1">
+                    <input class="ss_form_input ss_email" data-item="Email" data-error="Seller __index__1 Email is Error" data-item-type="1">
                 </li>
                <%-- <li class="ss_form_item">
                     <label class="ss_form_input_title">Phone #</label>
@@ -75,7 +75,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">zip</label>
-                    <input class="ss_form_input ss_zip" data-item="MailZip" data-item-type="1">
+                    <input class="ss_form_input ss_zip" data-item="MailZip" data-error="Seller __index__1 Mail zip is not zip code" data-item-type="1">
                 </li>
 
             </ul>

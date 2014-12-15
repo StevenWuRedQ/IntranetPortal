@@ -26,6 +26,6 @@
         <asp:ContentPlaceHolder ID="MainContentPH" runat="server">
         </asp:ContentPlaceHolder>
     </form>
-    <script src="/scripts/stevenjs.js?v=1.0"></script>
+    <script src="/scripts/stevenjs.js?v=1.01"></script>
 </body>
 </html>

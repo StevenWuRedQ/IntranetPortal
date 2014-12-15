@@ -67,14 +67,12 @@
         InitScrollBar();
         init_currency();
         initToolTips();
-        if(sortPhones)
-        {
+        if (sortPhones) {
             sortPhones();
         }
     }
 
-    function InitScrollBar()
-    {
+    function InitScrollBar() {
         $("#prioity_content").mCustomScrollbar(
        {
            theme: "minimal-dark"
@@ -99,12 +97,12 @@
             var ladfucntion = {
                 onScroll: function () {
                     var position = this.mcs.topPct;
-                    if (position > 90) {                        
+                    if (position > 90) {
                         gridLeads.NextPage();
                     }
                 }
             }
-            
+
             if (is_list) {
                 $(this).mCustomScrollbar(
                     {
@@ -116,13 +114,13 @@
                 //$(this).mCustomScrollbar(
                 //    {
                 //        theme: "minimal-dark",
-                       
+
                 //    }
                 //);
             }
         });
 
-        
+
         /*init the center panle's scrollbar */
         $("#ctl00_MainContentPH_ASPxSplitter1_0i1_CC").mCustomScrollbar(
             {
@@ -267,10 +265,9 @@
         if (e.item.index == 4) {
         }
 
-        if(e.item.index==6)
-        {
+        if (e.item.index == 6) {
             SortLeadsList(icon, "MarkColor");
-           
+
         }
     }
 
@@ -285,15 +282,14 @@
         }
     }
 
-    function AddScrollbarOnLeadsList()
-    {
+    function AddScrollbarOnLeadsList() {
         $("#leads_list_left .dxgvCSD").each(function (ind) {
             var is_list = $(this).parents("#leads_list_left").length > 0;
 
             var ladfucntion = {
                 onScroll: function () {
                     var position = this.mcs.topPct;
-                    if (position > 95) {                    
+                    if (position > 95) {
                         gridLeads.NextPage();
                     }
                 }
@@ -317,27 +313,78 @@
         }
     });
     var temBBLE = null;
-    function OnColorMark(s,e)
-    {
+    function OnColorMark(s, e) {
         var index = e.item.index;
-        if (index == 0)
+        onColoMarkClick(index);
+    }
+    function GetMarkColor(markColor)
+    {
+        if(markColor <= 0 || markColor == 1000){
+            return "transparent";
+        }
+        colors = [
+
+        ]
+        colors[1] = '#a820e1'
+        colors[2] = '#ec471b'
+        colors[3] = '#7bb71b'
+        var color = colors[markColor]
+        if(color != null)
         {
+            return color;
+        }
+        return "";
+    }
+    var temStar = null;
+    function onColoMarkClick(index,e) {
+        if (index == 0) {
             index = 1000;
         }
-        gridLeads.PerformCallback("MarkColor|" + temBBLE + "|" + index)
+        $(temStar).css("color", GetMarkColor(index));
+        debugger;
+        //gridLeads.PerformCallback("MarkColor|" + temBBLE + "|" + index)
+        MarkColorCallBack.PerformCallback("MarkColor|" + temBBLE + "|" + index)
     }
-    function PopupColorMark(e,BBLE)
-    {
+    function PopupColorMark(e, BBLE) {
         temBBLE = BBLE;
         AspPopupColorMark.ShowAtElement(e);
     }
+    function click_item(e) {
+        var index = $("li").index(e)
+        index++;
+        if (index == $(e).parent().children().length) {
+            index = 0;
+        }
+        onColoMarkClick(index,e);
+       
+        $("#color_drop").css("top", "-1000px")
+    }
+
+
 </script>
+<style>
+    .diagonal {
+        background: repeating-linear-gradient( 135deg, #fff, #fff 10px, #000 10px, #000 20px );
+    }
+</style>
+<dx:ASPxCallback runat="server" ID="MarkColorCallBack" OnCallback="MarkColorCallBack_Callback" ClientInstanceName="MarkColorCallBack">  </dx:ASPxCallback>
+<div id="color_drop" style="position: absolute; left: -100px; top: -1000px; z-index: 10000">
+
+    <ul class="list-group">
+        <li class="list-group-item icon_btn" onclick="click_item(this)" style="background: #a820e1">&nbsp;</li>
+        <li class="list-group-item icon_btn" onclick="click_item(this)" style="background: #ec471b">&nbsp;</li>
+        <li class="list-group-item icon_btn diagonal" onclick="click_item(this)"  >&nbsp;</li>
+    </ul>
+</div>
+
+
+
 <%--id="leads_list_left"--%>
 <div style="width: 100%; height: 100%;" class="color_gray">
     <div style="margin: 30px 10px 10px 10px; text-align: left;" class="clearfix">
         <div style="font-size: 24px;" class="clearfix">
             <div class="clearfix">
-                <i class="fa fa-list-ol with_circle"  style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
+                <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
                 <span style="color: #234b60; font-size: 30px;">
                     <dx:ASPxLabel Text="New Leads" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
                 </span>
@@ -354,23 +401,29 @@
     </div>
     <div style="height: 768px; padding: 0px 10px;" id="leads_list_left">
         <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText"
-             OnSummaryDisplayText="gridLeads_SummaryDisplayText"
-             OnCustomDataCallback="gridLeads_CustomDataCallback" 
-            Settings-ShowColumnHeaders="false" 
+            OnSummaryDisplayText="gridLeads_SummaryDisplayText"
+            OnCustomDataCallback="gridLeads_CustomDataCallback"
+            Settings-ShowColumnHeaders="false"
             SettingsBehavior-AutoExpandAllGroups="true"
-             ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" AutoGenerateColumns="False" KeyFieldName="BBLE">
+            ID="gridLeads" Border-BorderStyle="None" ClientInstanceName="gridLeads" Width="100%" AutoGenerateColumns="False" KeyFieldName="BBLE">
             <Columns>
                 <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
                 </dx:GridViewCommandColumn>
+                <dx:GridViewDataTextColumn FieldName="MarkColor" VisibleIndex="0" Width="30px">
+                    <DataItemTemplate>
+                        <div>
+                        </div>
+                        <i class="fa fa-star color_star" onmouseenter="star_mouseenter(this,<%# Eval("BBLE") %>)" style="color: <%#  GetMarkColor(Eval("MarkColor"))%>">
+                    </DataItemTemplate>
+                </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
                     <DataItemTemplate>
-                       <div class="icon_btn list_text_border" style='border-color:<%#  GetMarkColor(Eval("MarkColor"))%>' oncontextmenu='PopupColorMark(this,<%# Eval("BBLE") %>);return false;'><%# Eval("LeadsName")%></div>
+                        <div><%# Eval("LeadsName")%></div>
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
-                 <dx:GridViewDataTextColumn FieldName="MarkColor" Visible="false">
-
-                 </dx:GridViewDataTextColumn>
+                <dx:GridViewDataTextColumn FieldName="MarkColor" Visible="false">
+                </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="CallbackDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">
                     <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
                     <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
@@ -457,7 +510,7 @@
                                             <tr style="margin-bottom: 3px" hidden="hidden">
                                                 <td>Leads Name</td>
                                                 <td>
-                                                    <dx:ASPxTextBox runat="server" ID="txtNewLeadsName" Width="100%" ClientInstanceName="txtNewLeadsName"  CssClass="edit_drop"></dx:ASPxTextBox>
+                                                    <dx:ASPxTextBox runat="server" ID="txtNewLeadsName" Width="100%" ClientInstanceName="txtNewLeadsName" CssClass="edit_drop"></dx:ASPxTextBox>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -472,7 +525,7 @@
                                                                             <tr style="height: 45px">
                                                                                 <td>Borough:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxComboBox runat="server" ID="cbStreetBorough" ClientInstanceName="cbStreetBoroughClient"  CssClass="edit_drop" Width="100%">
+                                                                                    <dx:ASPxComboBox runat="server" ID="cbStreetBorough" ClientInstanceName="cbStreetBoroughClient" CssClass="edit_drop" Width="100%">
                                                                                         <Items>
                                                                                             <dx:ListEditItem Text="Manhattan" Value="1" />
                                                                                             <dx:ListEditItem Text="Bronx" Value="2" />
@@ -487,13 +540,13 @@
                                                                             <tr style="margin-bottom: 3px; height: 45px">
                                                                                 <td>Number:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxTextBox runat="server" ID="txtHouseNum"  CssClass="edit_drop" Width="100%"></dx:ASPxTextBox>
+                                                                                    <dx:ASPxTextBox runat="server" ID="txtHouseNum" CssClass="edit_drop" Width="100%"></dx:ASPxTextBox>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr style="margin-bottom: 3px; height: 45px">
                                                                                 <td>Street:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxComboBox runat="server" Width="100%" ID="cbStreetlookup"  CssClass="edit_drop" ClientInstanceName="cbStreetlookupClient" DropDownStyle="DropDown" FilterMinLength="2" IncrementalFilteringMode="StartsWith" OnCallback="cbStreetlookup_Callback" TextField="st_name" ValueField="st_name" EnableCallbackMode="true" CallbackPageSize="10">
+                                                                                    <dx:ASPxComboBox runat="server" Width="100%" ID="cbStreetlookup" CssClass="edit_drop" ClientInstanceName="cbStreetlookupClient" DropDownStyle="DropDown" FilterMinLength="2" IncrementalFilteringMode="StartsWith" OnCallback="cbStreetlookup_Callback" TextField="st_name" ValueField="st_name" EnableCallbackMode="true" CallbackPageSize="10">
                                                                                         <ClientSideEvents EndCallback="OnStreetlookupEndCallback" />
                                                                                     </dx:ASPxComboBox>
                                                                                 </td>
@@ -509,7 +562,7 @@
                                                                             <tr style="height: 45px">
                                                                                 <td>Borough:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxComboBox  CssClass="edit_drop" runat="server" ID="cblegalBorough" Width="100%">
+                                                                                    <dx:ASPxComboBox CssClass="edit_drop" runat="server" ID="cblegalBorough" Width="100%">
                                                                                         <Items>
                                                                                             <dx:ListEditItem Text="Manhattan" Value="1" />
                                                                                             <dx:ListEditItem Text="Bronx" Value="2" />
@@ -523,13 +576,13 @@
                                                                             <tr style="margin-bottom: 3px; height: 45px">
                                                                                 <td>Block:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxTextBox  CssClass="edit_drop" runat="server" ID="txtLegalBlock" Width="100%"></dx:ASPxTextBox>
+                                                                                    <dx:ASPxTextBox CssClass="edit_drop" runat="server" ID="txtLegalBlock" Width="100%"></dx:ASPxTextBox>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr style="margin-bottom: 3px; height: 45px">
                                                                                 <td>Lot:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxTextBox runat="server"  CssClass="edit_drop" ID="txtLegalLot" Width="100%"></dx:ASPxTextBox>
+                                                                                    <dx:ASPxTextBox runat="server" CssClass="edit_drop" ID="txtLegalLot" Width="100%"></dx:ASPxTextBox>
                                                                                 </td>
                                                                             </tr>
                                                                         </table>
@@ -543,7 +596,7 @@
                                                                             <tr style="height: 45px">
                                                                                 <td>Borough:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxComboBox  CssClass="edit_drop" runat="server" ID="cbNameBorough" Width="100%">
+                                                                                    <dx:ASPxComboBox CssClass="edit_drop" runat="server" ID="cbNameBorough" Width="100%">
                                                                                         <Items>
                                                                                             <dx:ListEditItem Text="Manhattan" Value="1" />
                                                                                             <dx:ListEditItem Text="Bronx" Value="2" />
@@ -557,13 +610,13 @@
                                                                             <tr style="height: 45px">
                                                                                 <td>First:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxTextBox  CssClass="edit_drop" ID="txtNameFirst" runat="server" Width="100%"></dx:ASPxTextBox>
+                                                                                    <dx:ASPxTextBox CssClass="edit_drop" ID="txtNameFirst" runat="server" Width="100%"></dx:ASPxTextBox>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr style="margin-bottom: 3px; height: 45px">
                                                                                 <td>Last:</td>
                                                                                 <td>
-                                                                                    <dx:ASPxTextBox runat="server"  CssClass="edit_drop" ID="txtNameLast" Width="100%"></dx:ASPxTextBox>
+                                                                                    <dx:ASPxTextBox runat="server" CssClass="edit_drop" ID="txtNameLast" Width="100%"></dx:ASPxTextBox>
                                                                                 </td>
                                                                             </tr>
                                                                         </table>
@@ -596,7 +649,7 @@
                                         <table style="width: 490px; margin: 10px; border-spacing: 2px;">
                                             <tr style="margin-bottom: 3px;">
                                                 <td colspan="2">
-                                                    <dx:ASPxListBox runat="server" Height="260px"  Width="485px" ID="lbNewBBLE" ClientInstanceName="lbNewBBLEClient" OnCallback="lbNewBBLE_Callback">
+                                                    <dx:ASPxListBox runat="server" Height="260px" Width="485px" ID="lbNewBBLE" ClientInstanceName="lbNewBBLEClient" OnCallback="lbNewBBLE_Callback">
                                                         <Columns>
                                                             <dx:ListBoxColumn Name="BBLE" FieldName="BBLE" Caption="BBLE" Width="100px" />
                                                             <dx:ListBoxColumn Name="LeadsName" FieldName="LeadsName" Caption="Leads Name" Width="385px" />
@@ -818,3 +871,24 @@
     </dx:ASPxPopupMenu>
 </div>
 
+
+<script>
+
+    //mouse move function 
+    function star_mouseenter(e, bble) {
+        temBBLE = bble;
+        var p = $(e).position();
+
+        var color_drop = $("#color_drop");
+       
+        color_drop.css("left", p.left + "px");
+        color_drop.css("top", (p.top) + 110 + 'px');
+        temStar = e;
+    }
+    $(".color_star").mouseenter(function () {
+
+    });
+    $("#color_drop").mouseleave(function () {
+        $(this).css("top", '-1000px')
+    });
+</script>

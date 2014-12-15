@@ -43,7 +43,23 @@ Public Class Utility
 
         Return category
     End Function
+    Public Shared Function Borough2BoroughName(borough As String) As String
+        Dim boroughName = "undefine borough"
+        Dim arraryDic As New Dictionary(Of String, String)
+        arraryDic.Add("1", "Manhattan")
+        arraryDic.Add("2", "Bronx")
+        arraryDic.Add("3", "Brooklyn")
+        arraryDic.Add("4", "Queens")
+        arraryDic.Add("5", "Staten Island")
 
+        If (borough IsNot Nothing AndAlso arraryDic.Item(borough) IsNot Nothing) Then
+            Return arraryDic.Item(borough)
+        End If
+        Return boroughName
+    End Function
+    Public Shared Function IsAny(Of T)(data As IEnumerable(Of T)) As Boolean
+        Return data IsNot Nothing AndAlso data.Any()
+    End Function
     Public Shared Function GetLeadsName(leadData As LeadsInfo) As String
         Dim leadsName = ""
 

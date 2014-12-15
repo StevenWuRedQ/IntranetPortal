@@ -30,7 +30,11 @@
             End Using
         End Get
     End Property
-
+    Public ReadOnly Property BoroughName() As String
+        Get
+            Return Utility.Borough2BoroughName(Borough)
+        End Get
+    End Property
     Public ReadOnly Property UserComments As List(Of LeadsComment)
         Get
             Using context As New Entities

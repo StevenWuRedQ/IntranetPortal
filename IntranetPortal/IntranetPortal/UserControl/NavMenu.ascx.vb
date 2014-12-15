@@ -261,8 +261,8 @@ Public Class RefreshLeadsCountHandler
                 Case "AssignLeads"
                     Return 0 'Utility.GetUnAssignedLeadsCount(Office)  
                 Case "All"
-                    Dim count = GetAllShortSaleByOwner(userName)
-                    Return GetAllShortSaleByOwner(userName)
+                    Dim count = GetShortSaleCaseByOwner(userName)
+                    Return GetShortSaleCaseByOwner(userName)
                 Case Else
                     Dim status As ShortSale.CaseStatus
 
@@ -278,25 +278,33 @@ Public Class RefreshLeadsCountHandler
             End Select
         End If
     End Function
-
-    Function GetAllShortSaleByOwner(userName As String) As Integer
-        Dim count = 0
-        Using Context As New Entities
-            Dim sqlConnect As New SqlConnection(Context.Database.Connection.ConnectionString)
-            Dim cmd As New SqlCommand
-            Dim reader As SqlDataReader
-            cmd.CommandText = "SELECT COUNT(ShortSaleCases.BBLE) as Count FROM [ShortSaleCases] inner join Leads on Leads.BBLE  = ShortSaleCases.BBLE where leads.EmployeeName='" & userName & "' "
-            cmd.CommandType = CommandType.Text
-            cmd.Connection = sqlConnect
-
-            sqlConnect.Open()
-
-            reader = cmd.ExecuteReader()
-            While (reader.Read())
-                count = reader.GetInt32(0)
-            End While
-            sqlConnect.Close()
+    Function GetShortSaleCaseByOwner(userName As String) As Integer
+        Using context As New Entities
+            Dim bbles As List(Of String) = context.Leads.Where(Function(l) l.Status = LeadStatus.InProcess AndAlso l.EmployeeName = userName).Select(Function(l) l.BBLE).ToList
+            If Utility.IsAny(bbles) Then
+                Return ShortSale.ShortSaleCase.GetCaseByBBLEs(bbles).Count
+            End If
         End Using
-        Return count
+        Return 0
     End Function
+    'Function GetAllShortSaleByOwner(userName As String) As Integer
+    '    Dim count = 0
+    '    Using Context As New Entities
+    '        Dim sqlConnect As New SqlConnection(Context.Database.Connection.ConnectionString)
+    '        Dim cmd As New SqlCommand
+    '        Dim reader As SqlDataReader
+    '        cmd.CommandText = "SELECT COUNT(ShortSaleCases.BBLE) as Count FROM [ShortSaleCases] inner join Leads on Leads.BBLE  = ShortSaleCases.BBLE where leads.EmployeeName='" & userName & "' "
+    '        cmd.CommandType = CommandType.Text
+    '        cmd.Connection = sqlConnect
+
+    '        sqlConnect.Open()
+
+    '        reader = cmd.ExecuteReader()
+    '        While (reader.Read())
+    '            count = reader.GetInt32(0)
+    '        End While
+    '        sqlConnect.Close()
+    '    End Using
+    '    Return count
+    'End Function
 End Class

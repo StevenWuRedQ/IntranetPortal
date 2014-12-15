@@ -708,6 +708,17 @@ Public Class LeadsList
             End Using
         End If
     End Sub
+
+    Protected Sub MarkColorCallBack_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        Dim BBLE = e.Parameter.Split("|")(1)
+        Dim Color = CInt(e.Parameter.Split("|")(2))
+        Using Context As New Entities
+            Dim leads = Context.Leads.Where(Function(l) l.BBLE = BBLE).FirstOrDefault
+            leads.MarkColor = Color
+            Context.SaveChanges()
+
+        End Using
+    End Sub
 End Class
 
 Public Enum ControlView
