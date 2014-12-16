@@ -633,7 +633,7 @@ Public Class LeadsList
     End Sub
     Public Function GetMarkColor(markColor As Integer)
         If (markColor <= 0 Or markColor = 1000) Then
-            Return "transparent"
+            Return "gray"
         End If
         Dim colors As New Dictionary(Of Integer, String)
         colors.Add(1, "#a820e1")

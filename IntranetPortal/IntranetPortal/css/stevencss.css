@@ -1152,10 +1152,13 @@ pre#event-log {
 .border_right {
     border-right: 1px solid #dde0e7;
 }
-
+.doc_border_left 
+{
+    border-left:3px solid #dde0e7;
+}
 .doc_list_checks {
     margin-top: 0px !important;
-    width: 290px;
+    /*width: 290px;*/
     padding: 10px !important;
     font-weight: normal;
 }

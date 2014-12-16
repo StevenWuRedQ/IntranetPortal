@@ -320,7 +320,7 @@
     function GetMarkColor(markColor)
     {
         if(markColor <= 0 || markColor == 1000){
-            return "transparent";
+            return "blue";
         }
         colors = [
 
@@ -364,12 +364,18 @@
 </script>
 <style>
     .diagonal {
-        background: repeating-linear-gradient( 135deg, #fff, #fff 10px, #000 10px, #000 15px );
+        /*background: repeating-linear-gradient( 135deg, #fff, #fff 10px, #000 10px, #000 15px );*/
+        background:white;
+        text-align:center;
+        vertical-align:central;
+        font-size:15px;
     }
     .color_list
     {
-        width:15px;
-        height:15px;
+        /*width:15px;*/
+        width:40px;
+        padding:0px;
+        height:30px;
         border:none;
     }
 </style>
@@ -379,7 +385,7 @@
     <ul class="list-group" style="border:none;width:15px">
         <li class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #a820e1">&nbsp;</li>
         <li class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #ec471b">&nbsp;</li>
-        <li class="list-group-item icon_btn color_list diagonal" onclick="click_item(this)"  >&nbsp;</li>
+        <li class="list-group-item icon_btn color_list diagonal" onclick="click_item(this)"  > <span style="margin-top:5px;">Clear</span> </li>
     </ul>
 </div>
 
@@ -419,7 +425,7 @@
                     <DataItemTemplate>
                         <div>
                         </div>
-                        <i class="fa fa-star color_star" onmouseenter="star_mouseenter(this,<%# Eval("BBLE") %>)" style="color: <%#  GetMarkColor(Eval("MarkColor"))%>">
+                        <i class="fa fa-circle color_star" onmouseenter="star_mouseenter(this,<%# Eval("BBLE") %>)" style="color: <%#  GetMarkColor(Eval("MarkColor"))%>">
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
