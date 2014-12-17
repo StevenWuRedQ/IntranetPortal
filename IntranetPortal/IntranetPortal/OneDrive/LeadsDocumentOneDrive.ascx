@@ -277,8 +277,8 @@
         </dx:MenuItem>
         <dx:MenuItem Text="Download" Name="Download">
         </dx:MenuItem>
-        <dx:MenuItem Text="Preview History" Name="History">
-        </dx:MenuItem>
+       <%-- <dx:MenuItem Text="Preview History" Name="History">
+        </dx:MenuItem>--%>
     </Items>
 
     <ClientSideEvents ItemClick="OnFilePopUpClick" />

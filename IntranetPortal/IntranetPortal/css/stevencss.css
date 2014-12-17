@@ -1166,7 +1166,10 @@ pre#event-log {
     .doc_list_checks:hover {
         background: #f0f2f6;
     }
-
+    .doc_list_checks_sub
+    {
+        margin-left:8px;
+    }
 .font_16 {
     font-size: 16px;
 }
@@ -1191,7 +1194,10 @@ input + label.font_12 {
     padding-top: 28px;
     padding-left: 9px;
 }
-
+.doc_list_section_sub
+{
+     padding-top: 0px;
+}
 .save_report_list {
 }
 

@@ -10,7 +10,12 @@ Partial Public Class PartyContact
     Public Sub New()
 
     End Sub
+    Public Shared Function getAllEmail() As List(Of String)
 
+        Using context As New ShortSaleEntities
+            Return context.PartyContacts.Select(Function(e) e.Email).Where(Function(e) e.IndexOf("@") > 0).ToList
+        End Using
+    End Function
     Public Shared Function getAllContact() As List(Of PartyContact)
         Using context As New ShortSaleEntities
             Dim result = context.PartyContacts.Where(Function(pc) pc.Type = ContactType.TitleCompany Or pc.Type = ContactType.Client Or pc.Type = ContactType.Attorney).ToList

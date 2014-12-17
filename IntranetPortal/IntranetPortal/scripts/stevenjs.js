@@ -1,10 +1,10 @@
-﻿function clickCollapse(e, id) {
+﻿function clickCollapse(e) {
 
     var buttonClassName = e.className;
     var openClass = "-minus";
     var isOpen = buttonClassName.indexOf(openClass) > 0;
 
-    collapse_doc_list($(e).parents(".doc_list_section"), isOpen);
+    collapse_doc_list($(e).parents(".doc_list_section:first"), isOpen);
 }
 
 function collapse_doc_list(div, isOpen) {
@@ -21,8 +21,8 @@ function collapse_doc_list(div, isOpen) {
     var toSwich = !isOpen;
     var changeToClass = isOpen ? buttonClassName.replace(openClass, clossClass) : buttonClassName.replace(clossClass, openClass);
     e.className = changeToClass;
-
-    div.find(".doc_collapse_div").css("display", toSwich ? "block" : "none");
+    debugger;
+    div.find(".doc_collapse_div:first").css("display", toSwich ? "block" : "none");
 }
 
 function collapse_all(collapse_all) {

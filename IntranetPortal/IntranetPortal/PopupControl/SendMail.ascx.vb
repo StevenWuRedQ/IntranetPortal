@@ -1,10 +1,14 @@
 ﻿Imports DevExpress.Web.ASPxHtmlEditor
+Imports DevExpress.Web.ASPxEditors
 
 Public Class SendMailControl
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         EmailBody.Toolbars.Add(Utility.CreateCustomToolbar("Custom"))
+        If (Not IsPostBack) Then
+            'BindEmail()
+        End If
     End Sub
 
     'Protected Function CreateDemoCustomToolbar(ByVal name As String) As HtmlEditorToolbar
@@ -14,6 +18,7 @@ Public Class SendMailControl
     Protected Sub PopupSendMail_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         If Not PopupContentSendMail.Visible Then
             PopupContentSendMail.Visible = True
+            BindEmail()
         End If
 
         If e.Parameter.StartsWith("SendMail") Then
@@ -43,5 +48,21 @@ Public Class SendMailControl
             EmailBody.Html = msg.Body
             EmailAttachments.Text = msg.Attachments
         End If
+
+    End Sub
+    Protected Sub BindEmail()
+
+        'tabPageEmailSelect()
+        Dim emilList = TryCast(EmailToIDs.FindControl("tabPageEmailSelect").FindControl("lbEmails"), ASPxListBox)
+        Dim emailCClist = TryCast(EmailCCIDs.FindControl("tabPageEmailCCSelect").FindControl("lbEmailCCs"), ASPxListBox)
+        Using Context As New Entities
+            Dim emilListData = Context.Employees.Select(Function(e) e.Email).Where(Function(e) e IsNot Nothing And e.IndexOf("@") > 0).ToList
+            emilListData.AddRange(ShortSale.PartyContact.getAllEmail())
+            emilList.DataSource = emilListData
+            emilList.DataBind()
+            emailCClist.DataSource = emilListData
+            emailCClist.DataBind()
+        End Using
+
     End Sub
 End Class

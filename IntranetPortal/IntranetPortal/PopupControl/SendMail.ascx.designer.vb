@@ -38,7 +38,7 @@ Partial Public Class SendMailControl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents EmailToIDs As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents EmailToIDs As Global.DevExpress.Web.ASPxEditors.ASPxDropDownEdit
 
     '''<summary>
     '''EmailCCIDs control.
@@ -47,7 +47,7 @@ Partial Public Class SendMailControl
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents EmailCCIDs As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+    Protected WithEvents EmailCCIDs As Global.DevExpress.Web.ASPxEditors.ASPxDropDownEdit
 
     '''<summary>
     '''EmailSuject control.

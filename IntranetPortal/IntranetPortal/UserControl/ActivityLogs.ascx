@@ -768,12 +768,14 @@
                             <dx:ASPxDropDownEdit ClientInstanceName="empCheckComboBox" ID="empsDropDownEdit" Width="100%" runat="server" CssClass="edit_drop" AnimationType="None">
                                 <DropDownWindowStyle BackColor="#EDEDED" />
                                 <DropDownWindowTemplate>
-                                    <dx:ASPxPageControl runat="server" TabPosition="Bottom" Width="100%" ID="tabPageEmpSelect" ActiveTabIndex="1">
+                                    <dx:ASPxPageControl runat="server" TabPosition="Bottom" Width="100%" ID="tabPageEmpSelect" ActiveTabIndex="1" TabStyle-Height="35px">
+                                        
                                         <TabPages>
+                                            
                                             <dx:TabPage Text="Recently" Name="tabRecent">
                                                 <ContentCollection>
                                                     <dx:ContentControl runat="server">
-                                                        <dx:ASPxListBox Width="100%" ID="lbRecentEmps" Height="240px" ClientInstanceName="empRecentlyListbox" SelectionMode="CheckColumn"
+                                                        <dx:ASPxListBox Width="100%" ID="lbRecentEmps" Height="260px" ClientInstanceName="empRecentlyListbox" SelectionMode="CheckColumn"
                                                             runat="server">
                                                             <Items>
                                                                 <dx:ListEditItem Text="Ron Borovinsky" Value="Ron Borovinsky" />
@@ -812,8 +814,8 @@
                                             </dx:TabPage>
                                         </TabPages>
                                     </dx:ASPxPageControl>
-                                    <div style="float: right; margin-top: -25px; display: block; margin-right: 3px;">
-                                        <dx:ASPxButton ID="ASPxButton1" AutoPostBack="False" runat="server" CausesValidation="false"  Text="Close" Style="float: right" Paddings-Padding="0" CssClass="rand-button rand-button-gray">
+                                    <div style="float: right; margin-top: -37px; display: block; margin-right: 3px;">
+                                        <dx:ASPxButton ID="ASPxButton1" AutoPostBack="False" runat="server" CausesValidation="false"  Text="Close" Style="float: right" CssClass="rand-button rand-button-gray">
                                             <ClientSideEvents Click="function(s, e){ empCheckComboBox.HideDropDown(); }" />
                                         </dx:ASPxButton>
                                     </div>

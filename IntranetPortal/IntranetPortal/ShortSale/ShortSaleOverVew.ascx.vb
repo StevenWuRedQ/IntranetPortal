@@ -30,6 +30,8 @@ Public Class ShortSaleOverVew
         Dim res = JsonConvert.DeserializeObject(Of ShortSaleCase)(e.Parameter)
 
         res.SaveChanges()
+
+        e.Result = JsonConvert.SerializeObject(ShortSaleCase.GetCase(res.CaseId))
     End Sub
 
     Public Function getShortSaleJson(data As ShortSaleCase) As String
