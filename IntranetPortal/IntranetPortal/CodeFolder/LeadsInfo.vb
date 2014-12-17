@@ -282,11 +282,10 @@
         Get
             Dim EMD As Decimal
             If (LisPens IsNot Nothing AndAlso LisPens.Count > 0) Then
-                Dim years = 0
-                For Each lens In LisPens
-                    years += Date.Now.Year - lens.FileDate.Year
-                Next
-                EMD = MortgageCombo * Math.Pow((1.0 + 0.085), (years + 1))
+                Dim ListPensYear = LisPens.Select(Function(f) f.FileDate.Year).ToList
+
+                Dim oldestYear = ListPensYear.Min()
+                EMD = MortgageCombo * Math.Pow((1.0 + 0.085), (Date.Now.Year - oldestYear))
             Else
                 Return MortgageCombo
             End If

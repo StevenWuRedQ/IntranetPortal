@@ -887,15 +887,25 @@
 <script>
 
     //mouse move function 
+    var tmpCursor = null;
     function star_mouseenter(e, bble) {
         temBBLE = bble;
         var p = $(e).position();
-
+        if (tmpCursor != null)
+        {
+            p = tmpCursor;
+        }
         var color_drop = $("#color_drop");
        
-        color_drop.css("left", p.left + "px");
-        color_drop.css("top", (p.top) + 110 + 'px');
+        color_drop.css("left", (p.left -20) + "px");
+        color_drop.css("top", (p.top - 20)  + 'px');
         temStar = e;
+    }
+    document.onmousemove = function(e)
+    {
+        tmpCursor = tmpCursor || {}
+        tmpCursor.left = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);;
+        tmpCursor.top = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);
     }
     $(".color_star").mouseenter(function () {
 

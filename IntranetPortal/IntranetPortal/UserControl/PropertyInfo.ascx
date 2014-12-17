@@ -10,8 +10,7 @@
     }
 
     function ShowDOBWindow(boro, block, lot) {
-        if (block == null || block == "" || lot == null || lot == "" || boro == null || boro == "")
-        {
+        if (block == null || block == "" || lot == null || lot == "" || boro == null || boro == "") {
             alert("The property info isn't complete. Please try to refresh data.");
             return;
         }
@@ -39,8 +38,7 @@
     }
 
     function init_currency() {
-        if(typeof $('.input_currency').formatCurrency != "undefined")
-        {
+        if (typeof $('.input_currency').formatCurrency != "undefined") {
             $('.input_currency').formatCurrency();
         }
     }
@@ -367,19 +365,8 @@
             </div>
             <%----end line ----%>
         </div>
-        <%--Estimated Mortgage--%>
-        <% If (LeadsInfoData.LisPens IsNot Nothing AndAlso LeadsInfoData.LisPens.Count > 0) Then%>
-         <div style="margin: 20px;" class="clearfix">
-            <div class="form_head" style="margin-top: 40px;">Estimated Mortgage Default</div>
-            <%--line 1--%>
-            <div class="form_div_node form_div_node_line_margin">
-                <span class="form_input_title">Default</span>
-                <input class="text_input input_currency" onblur="$(this).formatCurrency();" type="text" value="$<%=LeadsInfoData.EstimatedMortageDefault %>" />
-            </div>
-            <%----end line ----%>
-        </div>
-          <%End If%>
-       
+        
+
         <dx:ASPxCallbackPanel runat="server" ID="cbpMortgageData" ClientInstanceName="callbackPanelMortgage" OnCallback="cbpMortgageData_Callback">
             <PanelCollection>
                 <dx:PanelContent>
@@ -507,16 +494,16 @@
                         </div>
                         <%----end line ----%>
 
-                        <div style="width: 66.5%; float: right; margin-top: -211px;margin-right:5px">
-                            <div style="width: 40%;float:left; margin-top:10px" class="form_head">
+                        <div style="width: 66.5%; float: right; margin-top: -211px; margin-right: 5px">
+                            <div style="width: 40%; float: left; margin-top: 10px" class="form_head">
                                 Tax Liens:
                             </div>
-                            <div style="float: right;width: 53%;">
-                                <div class="form_div_node form_div_node_margin form_div_node_line_margin" style="width:87%">
+                            <div style="float: right; width: 53%;">
+                                <div class="form_div_node form_div_node_margin form_div_node_line_margin" style="width: 87%">
                                     <span class="form_input_title">Tax Liens Date</span>
-                                    <input class="text_input" value="<%= LeadsInfoData.TaxLiensDateText %>" id="Text1"/>
+                                    <input class="text_input" value="<%= LeadsInfoData.TaxLiensDateText %>" id="Text1" />
                                 </div>
-                                <div class="form_div_node form_div_node_margin form_div_node_line_margin" style="width:87%">
+                                <div class="form_div_node form_div_node_margin form_div_node_line_margin" style="width: 87%">
                                     <span class="form_input_title">Tax Liens Amount</span>
                                     <input class="text_input" value="<%= LeadsInfoData.TaxLiensAmount %>" id="Text2" />
                                 </div>
@@ -528,6 +515,19 @@
             </PanelCollection>
             <ClientSideEvents EndCallback="function(s,e){alert('Saved.');}" />
         </dx:ASPxCallbackPanel>
+
+        <%--Estimated Mortgage--%>
+        <% If (LeadsInfoData.LisPens IsNot Nothing AndAlso LeadsInfoData.LisPens.Count > 0) Then%>
+        <div style="margin: 20px;" class="clearfix">
+            <div class="form_head" style="margin-top: 40px;">Estimated Mortgage Default</div>
+            <%--line 1--%>
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Default</span>
+                <input class="text_input input_currency" onblur="$(this).formatCurrency();" type="text" value="$<%=LeadsInfoData.EstimatedMortageDefault %>" />
+            </div>
+            <%----end line ----%>
+        </div>
+        <%End If%>
 
         <%--Liens table--%>
         <div style="margin: 20px;" class="clearfix">

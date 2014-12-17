@@ -83,7 +83,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
             $scope.addContact.Type = addType;
 
         }
-        
+        debugger;
         $http.post('/CallBackServices.asmx/addContact', { contact: $scope.addContact }).
         success(function (data, status, headers, config) {
             // this callback will be called asynchronously

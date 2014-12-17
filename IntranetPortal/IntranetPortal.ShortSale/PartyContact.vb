@@ -5,6 +5,7 @@ Partial Public Class PartyContact
         Client = 1
         Attorney = 2
         Employee = 3
+        Lender = 4
     End Enum
 
     Public Sub New()

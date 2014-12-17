@@ -50,15 +50,6 @@ Partial Public Class VendorsPopUpContent
     Protected WithEvents txtAddress As Global.System.Web.UI.HtmlControls.HtmlInputText
 
     '''<summary>
-    '''txtOffice control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtOffice As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
-
-    '''<summary>
     '''txtCell control.
     '''</summary>
     '''<remarks>
