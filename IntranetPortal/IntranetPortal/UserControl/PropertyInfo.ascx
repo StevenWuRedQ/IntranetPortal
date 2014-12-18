@@ -365,7 +365,7 @@
             </div>
             <%----end line ----%>
         </div>
-        
+
 
         <dx:ASPxCallbackPanel runat="server" ID="cbpMortgageData" ClientInstanceName="callbackPanelMortgage" OnCallback="cbpMortgageData_Callback">
             <PanelCollection>
@@ -457,25 +457,47 @@
                             <span class="form_input_title">Servicer</span>
                             <input class="text_input" value="<%# LeadsInfoData.MortgageData.C3rdServicer%>" id="txt3rdServicer" runat="server" />
                         </div>
+                        <div class="form_div_node form_div_node_line_margin form_div_node_small">
+                            <span class="form_input_title">Taxes</span>
+                            <dx:ASPxTextBox runat="server" ID="txtTaxesAmt" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.TaxesAmt  %>'></dx:ASPxTextBox>
+                            <%--<input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.TaxesAmt%>" />--%>
+                        </div>
+
+                        <div class="form_div_node form_div_node_line_margin form_div_node_small" style="border: none">
+                            <div class="form_head" style="margin-left:20px">
+                                Tax Liens:
+                            </div>
+                        </div>
+                        <div class="form_div_node form_div_node_line_margin form_div_node_small" style="border: none">
+                            <span class="form_input_title">&nbsp;</span>
+                            <input class="text_input" value=" " />
+                        </div>
+                        <div class="form_div_node form_div_node_line_margin">
+                            <span class="form_input_title">water</span>
+                             <dx:ASPxTextBox runat="server" ID="txtWaterAmt" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.WaterAmt  %>'></dx:ASPxTextBox>
+                        </div>
+
+                        <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                             <span class="form_input_title">Tax Liens Date</span>
+                            <input class="text_input" value="<%= LeadsInfoData.TaxLiensDateText %>" id="Text1" />
+                        </div>
+
+                        <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                            <span class="form_input_title">Tax Liens Amount</span>
+                            <input class="text_input" value="<%= LeadsInfoData.TaxLiensAmount %>" id="Text2" />
+                        </div>
+                       
+                        
 
                         <%----end line ----%>
                         <div style="width: 230px" class="clearfix">
                             <%--line 4--%>
 
-                            <div class="form_div_node form_div_node_line_margin form_div_node_small">
-                                <span class="form_input_title">Taxes</span>
-                                <dx:ASPxTextBox runat="server" ID="txtTaxesAmt" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.TaxesAmt  %>'></dx:ASPxTextBox>
-                                <%--<input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.TaxesAmt%>" />--%>
-                            </div>
-
+                           
                             <%----end line ----%>
                             <%--line 5--%>
 
-                            <div class="form_div_node form_div_node_line_margin form_div_node_small">
-                                <span class="form_input_title">water</span>
-                                <dx:ASPxTextBox runat="server" ID="txtWaterAmt" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.WaterAmt  %>'></dx:ASPxTextBox>
-                                <%--<input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%= LeadsInfoData.WaterAmt%>" />--%>
-                            </div>
+
                             <%----end line ----%>
                             <%--line 6--%>
 
@@ -493,22 +515,6 @@
                             <%----end line ----%>
                         </div>
                         <%----end line ----%>
-
-                        <div style="width: 66.5%; float: right; margin-top: -211px; margin-right: 5px">
-                            <div style="width: 40%; float: left; margin-top: 10px" class="form_head">
-                                Tax Liens:
-                            </div>
-                            <div style="float: right; width: 53%;">
-                                <div class="form_div_node form_div_node_margin form_div_node_line_margin" style="width: 87%">
-                                    <span class="form_input_title">Tax Liens Date</span>
-                                    <input class="text_input" value="<%= LeadsInfoData.TaxLiensDateText %>" id="Text1" />
-                                </div>
-                                <div class="form_div_node form_div_node_margin form_div_node_line_margin" style="width: 87%">
-                                    <span class="form_input_title">Tax Liens Amount</span>
-                                    <input class="text_input" value="<%= LeadsInfoData.TaxLiensAmount %>" id="Text2" />
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <%-------end-----%>
                 </dx:PanelContent>
