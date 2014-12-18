@@ -46,7 +46,7 @@ Public Class ShortSalePage
             If Not String.IsNullOrEmpty(Request.QueryString("isEviction")) Then
                 isEviction = True
                 'it should be Eviction not new file for test
-                ShortSaleCaseList.BindCaseList(CaseStatus.NewFile)
+                ShortSaleCaseList.BindCaseList(CaseStatus.Eviction)
             Else
                 isEviction = False
             End If
