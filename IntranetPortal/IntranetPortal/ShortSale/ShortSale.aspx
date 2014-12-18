@@ -71,20 +71,21 @@
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
 
                                                                 <!-- Nav tabs -->
-                                                                <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white">
+                                                                
+                                                                <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white; ">
                                                                     <li class="active short_sale_head_tab">
                                                                         <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
-                                                                            <i class="fa fa-info-circle head_tab_icon_padding"></i>
-                                                                            <div class="font_size_bold">Overview</div>
+                                                                            <i class="fa <%= If(isEviction,"fa-sign-out","fa-info-circle") %>  head_tab_icon_padding"></i>
+                                                                            <div class="font_size_bold"> <%= If(isEviction,"Eviction","Overview") %></div>
                                                                         </a>
                                                                     </li>
-                                                                    <li class="short_sale_head_tab">
+                                                                    <li class="short_sale_head_tab" style="<%= If(isEviction,"display:none","") %> ">
                                                                         <a href="#home_owner" role="tab" data-toggle="tab" class="tab_button_a">
                                                                             <i class="fa fa-key head_tab_icon_padding"></i>
                                                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;Title&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                                                         </a>
                                                                     </li>
-                                                                    <li class="short_sale_head_tab">
+                                                                    <li class="short_sale_head_tab" style="<%= If(isEviction,"display:none","") %> ">
                                                                         <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
                                                                             <i class="fa fa-file head_tab_icon_padding"></i>
                                                                             <div class="font_size_bold">Documents</div>

@@ -275,7 +275,18 @@
     </Items>
   </PortalNavItem>
 
-
+  <PortalNavItem Name="Eviction" Text="Eviction" NavigationUrl="#" ShowAmount="false" Expanded="false">
+    <!--Temporarily use Admin roles for Eviction-->
+    <UserRoles>Admin</UserRoles>
+    <Items>
+      <PortalNavItem Name="Eviction" Text="Eviction Leads" NavigationUrl="/ShortSale/ShortSale.aspx?isEviction=true" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-sign-out"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+  </PortalNavItem>
+  
   <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
     <UserRoles>OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen,OfficeManager-GalleriaTeam</UserRoles>
     <Items>
@@ -652,6 +663,8 @@
     </Items>
   </PortalNavItem>
 
+ 
+  
   <PortalNavItem Name="PortalManagement" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Admin</UserRoles>
     <Items>

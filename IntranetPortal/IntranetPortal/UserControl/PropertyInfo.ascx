@@ -141,7 +141,7 @@
                         <% End If%>
 
                         <% If LeadsInfoData.Type.HasValue Then%>
-                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8",)%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
                             <span class="note_text">Leads type: <b><%= CType(LeadsInfoData.Type, IntranetPortal.LeadsInfo.LeadsType).ToString %></b></span>
                         </div>
@@ -151,7 +151,7 @@
                         <asp:HiddenField ID="hfBBLE" runat="server" />
 
                         <% For Each comment In LeadsInfoData.UserComments%>
-                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
+                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8")%>'>
                             <i class="fa fa-exclamation-circle note_img"></i>
                             <span class="note_text"><%= comment.Comments%></span>
                             <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7; display: none"></i>

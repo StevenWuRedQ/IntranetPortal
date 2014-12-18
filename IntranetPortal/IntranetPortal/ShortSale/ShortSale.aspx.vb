@@ -7,7 +7,7 @@ Public Class ShortSalePage
     Inherits System.Web.UI.Page
 
     Public Property ShortSaleCaseData As ShortSaleCase
-
+    Public Shared isEviction = False
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
             If Not String.IsNullOrEmpty(Request.QueryString("s")) Then
@@ -43,6 +43,14 @@ Public Class ShortSalePage
                     Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
                 End If
             End If
+            If Not String.IsNullOrEmpty(Request.QueryString("isEviction")) Then
+                isEviction = True
+                'it should be Eviction not new file for test
+                ShortSaleCaseList.BindCaseList(CaseStatus.NewFile)
+            Else
+                isEviction = False
+            End If
+
         End If
     End Sub
 

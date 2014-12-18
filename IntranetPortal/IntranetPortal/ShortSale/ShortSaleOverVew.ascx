@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleOverVew.ascx.vb" Inherits="IntranetPortal.ShortSaleOverVew" %>
+<%@ Import Namespace="IntranetPortal" %>
 <%@ Register Src="~/ShortSale/ShortSaleSummaryTab.ascx" TagPrefix="uc1" TagName="ShortSaleSummaryTab" %>
 <%@ Register Src="~/ShortSale/ShortSalePropertyTab.ascx" TagPrefix="uc1" TagName="ShortSalePropertyTab" %>
 <%@ Register Src="~/ShortSale/ShortSalePartiesTab.ascx" TagPrefix="uc1" TagName="ShortSalePartiesTab" %>
@@ -183,19 +184,20 @@
                     <%--detial tabs--%>
                     <div>
                         <!--detial Nav tabs -->
-                        <ul class="nav nav-tabs overview_tabs" role="tablist">
+                       
+                        <ul class="nav nav-tabs overview_tabs" role="tablist" style="<%= If(ShortSalePage.isEviction,"display:none","") %>">
                             <li class="active short_sale_tab">
                                 <a class="shot_sale_tab_a" href="#home" role="tab" data-toggle="tab" onclick="refreshSummary()">Summary</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Property" role="tab" data-toggle="tab">Property Info</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Mortgages" role="tab" data-toggle="tab">Mortgages</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Homewoner" role="tab" data-toggle="tab">Homeowner</a></li>
-                            <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Eviction" role="tab" data-toggle="tab">Eviction</a></li>
+                            <li class="short_sale_tab"><a class="shot_sale_tab_a  " href="#Eviction" role="tab" data-toggle="tab">Eviction</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Parties" role="tab" data-toggle="tab">Parties</a></li>
                         </ul>
                         <%--<dx:ASPxCallbackPanel ID="overviewCallbackPanel" runat="server" ClientInstanceName="overviewCallbackPanelClinet" OnCallback="overviewCallbackPanel_Callback">--%>
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane active" id="home">
+                            <div class="tab-pane <%= If(ShortSalePage.isEviction,"","active") %>" id="home">
                                 <div class="short_sale_content">
 
                                     <uc1:ShortSaleSummaryTab runat="server" ID="ShortSaleSummaryTab" />
@@ -216,7 +218,7 @@
                                     <uc1:ShortSaleHomewonerTab runat="server" ID="ShortSaleHomewonerTab" />
                                 </div>
                             </div>
-                            <div class="tab-pane" id="Eviction">
+                            <div class="tab-pane  <%= If(ShortSalePage.isEviction,"active","") %>" id="Eviction">
                                 <div class="short_sale_content">
                                     <uc1:ShortSaleEvictionTab runat="server" ID="ShortSaleEvictionTab" />
                                 </div>

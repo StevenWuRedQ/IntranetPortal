@@ -455,6 +455,7 @@ Public Enum CaseStatus
     Eviction = 3
     OnHold = 4
     Closed = 5
+
 End Enum
 
 Public Enum ModelStatus
