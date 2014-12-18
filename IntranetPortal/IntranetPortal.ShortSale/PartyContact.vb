@@ -19,7 +19,7 @@ Partial Public Class PartyContact
     End Function
     Public Shared Function getAllContact() As List(Of PartyContact)
         Using context As New ShortSaleEntities
-            Dim result = context.PartyContacts.Where(Function(pc) pc.Type = ContactType.TitleCompany Or pc.Type = ContactType.Client Or pc.Type = ContactType.Attorney).ToList
+            Dim result = context.PartyContacts.Where(Function(pc) pc.Type = ContactType.TitleCompany Or pc.Type = ContactType.Client Or pc.Type = ContactType.Attorney Or pc.Type = ContactType.Lender).ToList
             result.AddRange(GetContactByType(ContactType.Employee))
             Return result
         End Using

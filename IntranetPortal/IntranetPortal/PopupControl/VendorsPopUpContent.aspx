@@ -78,21 +78,23 @@
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">office #</label>
-                                                                <input class="ss_form_input"  ng-model="addContact.OfficeNO" />
-                                                               <%-- <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input" Native="true">
-                                                                   
+                                                                <%--<input class="ss_form_input"  ng-model="addContact.OfficeNO" />--%>
+                                                                <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input" Native="true">
+                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
                                                                     <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
-                                                                </dx:ASPxTextBox>--%>
+                                                                </dx:ASPxTextBox>
                                                             </li>
-                                                            <li class="ss_form_item">
+                                                            <li class="ss_form_item" >
                                                                 <label class="ss_form_input_title">Cell #</label>
-                                                                <dx:ASPxTextBox runat="server" ID="txtCell" ng-model="addContact.Cell" CssClass="ss_form_input" Native="true">
+                                                                
+                                                                <dx:ASPxTextBox runat="server" ID="txtCell"  ng-model="addContact.Cell" CssClass="ss_form_input" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
                                                                     <ValidationSettings CausesValidation="false" RequiredField-IsRequired="false" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
                                                                 </dx:ASPxTextBox>
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">email</label>
+                                                              <%-- <input ng-model="addContact.Email" class="ss_form_input" />--%>
                                                                 <dx:ASPxTextBox runat="server" ID="txtEmail" ng-model="addContact.Email" CssClass="ss_form_input" Native="true">
                                                                     <ValidationSettings ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact">
                                                                         <RegularExpression ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorText="Email isnot valid." />
@@ -178,6 +180,15 @@
                                     <td>
                                         <div class="detail_right">
                                             <input class="form-control contact_info_eidt" ng-model="currentContact.Office" placeholder="Click to input">
+                                        </div>
+                                    </td>
+                                </tr>
+                                 <tr class="vendor_info">
+                                    <td class="vendor_info_left">Office #
+                                    </td>
+                                    <td>
+                                        <div class="detail_right">
+                                            <input class="form-control contact_info_eidt" ng-model="currentContact.OfficeNO" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>

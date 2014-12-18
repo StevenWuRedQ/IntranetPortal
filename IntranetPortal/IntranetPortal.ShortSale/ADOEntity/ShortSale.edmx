@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CleareneceNotes">
           <Key>
             <PropertyRef Name="NoteId" />
@@ -20,10 +20,10 @@
             <PropertyRef Name="EmployeeID" />
           </Key>
           <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmployeeNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Position" Type="nvarchar" MaxLength="50" />
           <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Extension" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Cellphone" Type="nvarchar" MaxLength="50" />
@@ -127,6 +127,7 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="LenderContactId" Type="int" />
         </EntityType>
         <EntityType Name="PropertyOccupants">
           <Key>
@@ -165,7 +166,7 @@
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="SSN" Type="nchar" MaxLength="9" />
+          <Property Name="SSN" Type="nchar" MaxLength="11" />
           <Property Name="DOB" Type="date" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
@@ -394,6 +395,7 @@
           <Property Name="Freddie" Type="Boolean" />
           <Property Name="LastBPOUpdate" Type="DateTime" Precision="3" />
           <Property Name="UpcomingBPODate" Type="DateTime" Precision="3" />
+          <Property Name="LenderContactId" Type="Int32" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -404,7 +406,7 @@
           <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SSN" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="SSN" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
           <Property Name="DOB" Type="DateTime" Precision="0" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -660,6 +662,7 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="LenderContactId" ColumnName="LenderContactId" />
                 <ScalarProperty Name="UpcomingBPODate" ColumnName="UpcomingBPODate" />
                 <ScalarProperty Name="LastBPOUpdate" ColumnName="LastBPOUpdate" />
                 <ScalarProperty Name="Freddie" ColumnName="Freddie" />

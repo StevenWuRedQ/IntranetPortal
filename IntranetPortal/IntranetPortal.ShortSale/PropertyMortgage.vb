@@ -70,6 +70,20 @@
         End Set
     End Property
 
+    Private _lenderContact As PartyContact
+
+    Public Property LenderContact As PartyContact
+        Get
+            If (LenderContactId.HasValue) Then
+                _lenderContact = PartyContact.GetContact(LenderContactId)
+            End If
+            Return _lenderContact
+        End Get
+        Set(value As PartyContact)
+            _lenderContact = value
+        End Set
+    End Property
+
     Public Property DataStatus As ModelStatus
 
     Public Sub Save()

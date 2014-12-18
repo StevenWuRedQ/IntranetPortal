@@ -28,7 +28,7 @@
                 <li class="ss_form_item ss_mortages_stauts">
                     <label class="ss_form_input_title">Status</label>
                     <select class="ss_form_input " data-item="Status" data-item-type="1">
-                        <option value=""> </option>
+                        <option value=""></option>
                         <option value="Ready for Submission">Ready for Submission</option>
                         <option value="Pending Service Release">Pending Service Release</option>
                         <option value="Package Submitted">Package Submitted</option>
@@ -54,7 +54,7 @@
                     </select>
 
                 </li>
-               <li class="ss_form_item">
+                <li class="ss_form_item">
                     <label class="ss_form_input_title">Last BPO completed on</label>
                     <input class="ss_form_input ss_date" data-item="LastBPOUpdate" data-item-type="1">
                 </li>
@@ -193,6 +193,66 @@
         </div>
 
         <div class="ss_form">
+            <h4 class="ss_form_title">Lender
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].LenderContact', function(party){ShortSaleCaseData.Mortgages[__index__].LenderContactId =party.ContactId})"></i>
+
+            </h4>
+            <ul class="ss_form_box clearfix" >
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Name</label>
+                    <input class="ss_form_input ss_not_edit" data-item="LenderContact.Name" data-item-type="1">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">phone #</label>
+                    <input class="ss_form_input ss_not_edit" data-item="LenderContact.Cell" data-item-type="1">
+                </li>
+                <%--<li class="ss_form_item">
+                <label class="ss_form_input_title">Extension</label>
+                <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">&nbsp;</label>
+                <input class="ss_form_input ss_form_hidden" value="">
+            </li>--%>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">customer service</label>
+                    <input class="ss_form_input ss_not_edit" data-item="LenderContact.OfficeNO" data-item-type="1">
+                </li>
+                <%-- <li class="ss_form_item">
+                <label class="ss_form_input_title">Extension</label>
+                <input class="ss_form_input" data-item="AuthorizationSent" data-item-type="1">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">&nbsp;</label>
+                <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
+            </li>--%>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Fax #</label>
+                    <input class="ss_form_input ss_not_edit" data-item="LenderContact.OfficeNO" data-item-type="1">
+                </li>
+                <%--<li class="ss_form_item">
+                <label class="ss_form_input_title">&nbsp;</label>
+                <input class="ss_form_input ss_form_hidden" value="">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">&nbsp;</label>
+                <input class="ss_form_input ss_form_hidden" value="">
+            </li>--%>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Email</label>
+                    <input class="ss_form_input ss_not_edit" data-item="LenderContact.Email" data-item-type="1">
+                </li>
+                <%--<li class="ss_form_item">
+                <label class="ss_form_input_title">&nbsp;</label>
+                <input class="ss_form_input ss_form_hidden" data-item="AuthorizationSent" data-item-type="1">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">&nbsp;</label>
+                <input class="ss_form_input ss_form_hidden" value="">
+            </li>--%>
+            </ul>
+        </div>
+        <div class="ss_form">
             <h4 class="ss_form_title">Processor 
                 <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].ProcessorContact', function(party){ShortSaleCaseData.Mortgages[__index__].Processor =party.ContactId})"></i>
 
@@ -202,7 +262,7 @@
                     <label class="ss_form_input_title">Name</label>
                     <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Name" data-item-type="1">
                 </li>
-               <%-- <li class="ss_form_item">
+                <%-- <li class="ss_form_item">
                     <label class="ss_form_input_title">Date Assigned to Processor</label>
                     <input class="ss_form_input " value="Date Assigned ??">
                 </li>--%>

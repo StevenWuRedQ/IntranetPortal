@@ -81,8 +81,14 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
         if (addType != null)
         {
             $scope.addContact.Type = addType;
+            
 
         }
+        var addC = $scope.addContact;
+        addC.OfficeNO = $('#txtOffice').val();
+        addC.Cell = $('#txtCell').val();
+        addC.Email = $('#txtEmail').val();
+
         debugger;
         $http.post('/CallBackServices.asmx/addContact', { contact: $scope.addContact }).
         success(function (data, status, headers, config) {
@@ -95,7 +101,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
            
             $scope.currentContact = _addContact;
             m_current_contact = $scope.currentContact;
-            debugger;
+            //debugger;
         }).
         error(function (data, status, headers, config) {
             // called asynchronously if an error occurs
@@ -111,7 +117,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
         //$(e).addClass("popup_menu_list_item_active");
         
         var text = angular.element(e.currentTarget).html();
-        debugger;
+        //debugger;
         $scope.query.Type = type
         $scope.selectType = text;
     }

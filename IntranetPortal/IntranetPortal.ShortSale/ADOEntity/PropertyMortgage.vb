@@ -34,5 +34,6 @@ Partial Public Class PropertyMortgage
     Public Property Freddie As Nullable(Of Boolean)
     Public Property LastBPOUpdate As Nullable(Of Date)
     Public Property UpcomingBPODate As Nullable(Of Date)
+    Public Property LenderContactId As Nullable(Of Integer)
 
 End Class
