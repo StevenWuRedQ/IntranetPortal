@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="MgrViewLeads.aspx.vb" Inherits="IntranetPortal.MgrViewLeads" MasterPageFile="~/Content.Master" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="MgrViewLeads.aspx.vb" Inherits="IntranetPortal.MgrViewLeads" MasterPageFile="~/Content.Master" Trace="false" %>
 
 <%@ Register Src="~/UserControl/LeadsList.ascx" TagPrefix="uc1" TagName="LeadsList" %>
 <%@ Register Src="~/UserControl/LeadsInfo.ascx" TagPrefix="uc1" TagName="LeadsInfo" %>
@@ -6,6 +6,17 @@
 <%@ Register Src="~/UserControl/LeadsStatisticSummary.ascx" TagPrefix="uc1" TagName="LeadsStatisticSummary" %>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
+     <style>
+        #__asptrace {
+            position: absolute;
+            height: 500px;
+            width: 1000px;
+            top: 10px;
+            right:10px;
+            overflow: scroll;
+            background-color: white;
+        }
+    </style>
     <div style="background: url(/images/Background2.png) no-repeat center fixed; background-size: auto, auto; background-color: #dddddd; width: 100%; height: 100%;">
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientVisible="false" ClientInstanceName="splitter" Orientation="Vertical" FullscreenMode="true">
             <Panes>

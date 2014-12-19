@@ -115,36 +115,56 @@
                             <div id="default-example" data-collapse="">
                                 <h3 class="doc_list_title  color_balck">&nbsp;<i class="fa fa-minus-square-o color_blue collapse_btn_e" onclick="clickCollapse(this)"></i> &nbsp;&nbsp; <%# Eval("Key")%> </h3>
                                 <div class="doc_collapse_div" style="padding-top: 5px">
-                                    <%--<h4><%# Eval("Key")%></h4>--%>
                                     <div class="doc_list_section doc_list_section_sub">
-                                        <h4 class="doc_list_title  color_balck" style="font-size:16px"><i class="fa fa-minus-square-o color_blue collapse_btn_e" onclick="clickCollapse(this)"></i> &nbsp;&nbsp;Sub Category</h4>
-                                        <div class="doc_collapse_div" style="padding-top: 5px">
-                                            <asp:Repeater runat="server" ID="rptFiles">
-                                                <ItemTemplate>
-                                                    <%--                <tr onclick="PreviewDocument('<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>', '<%# Eval("ContentType")%>');" style="cursor:pointer" onmouseover="this.bgColor = '#D1DEFB';" onmouseout="this.bgColor = '';">--%>
+                                        <asp:Repeater runat="server" ID="rptFolders" OnItemDataBound="rptFiles_ItemDataBound">
+                                            <ItemTemplate>
+                                                <h4 class="doc_list_title  color_balck" style="font-size: 16px"><i class="fa fa-minus-square-o color_blue collapse_btn_e" onclick="clickCollapse(this)"></i>&nbsp;&nbsp;<%# Eval("Key")%> </h4>
+                                                <div class="doc_collapse_div" style="padding-top: 5px">
+                                                    <asp:Repeater runat="server" ID="rptFiles">
+                                                        <ItemTemplate>
+                                                            <%--                <tr onclick="PreviewDocument('<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>', '<%# Eval("ContentType")%>');" style="cursor:pointer" onmouseover="this.bgColor = '#D1DEFB';" onmouseout="this.bgColor = '';">--%>
 
-                                                    <div class="clearfix ">
-                                                        <input type="checkbox" name="vehicle" data-uniqueid="<%# Eval("Description")%>" class="FileCheckbox" value="<%# Eval("Name")%>" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
-                                                        <label class="doc_list_checks doc_border_left check_margin doc_list_checks_sub" for='<%# String.Format("doc_list_id_{0}", Eval("Description"))%>' style="width: 94%">
-                                                            <span class="color_balck ">
-                                                                <%-- NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}&spFile={1}", Eval("FileID"), Eval("Description"))%>' Text='<%# Eval("Name")%>'--%>
-                                                                <dx:ASPxHyperLink runat="server" CssClass="doc_file_name" ClientSideEvents-Click='<%# String.Format("function(s,e){{clickFileLink(s,""{0}"")}}", Eval("Description"))%>' Text='<%# Eval("Name")%>' Target="_blank"></dx:ASPxHyperLink>
-                                                            </span>
-                                                            <span class="checks_data_text">
-                                                                <dx:ASPxLabel runat="server" Text='<%# String.Format("{0}", Eval("CreateBy"))%>'></dx:ASPxLabel>
-                                                                &nbsp;<dx:ASPxLabel runat="server" Text='<%# String.Format("{0:MMM d, yyyy}", Eval("CreateDate"))%>'></dx:ASPxLabel>
-                                                            </span>
-                                                        </label>
-                                                    </div>
+                                                            <div class="clearfix ">
+                                                                <input type="checkbox" name="vehicle" data-uniqueid="<%# Eval("Description")%>" class="FileCheckbox" value="<%# Eval("Name")%>" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
+                                                                <label class="doc_list_checks doc_border_left check_margin doc_list_checks_sub" for='<%# String.Format("doc_list_id_{0}", Eval("Description"))%>' style="width: 94%">
+                                                                    <span class="color_balck ">
+                                                                        <%-- NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}&spFile={1}", Eval("FileID"), Eval("Description"))%>' Text='<%# Eval("Name")%>'--%>
+                                                                        <dx:ASPxHyperLink runat="server" CssClass="doc_file_name" ClientSideEvents-Click='<%# String.Format("function(s,e){{clickFileLink(s,""{0}"")}}", Eval("Description"))%>' Text='<%# Eval("Name")%>' Target="_blank"></dx:ASPxHyperLink>
+                                                                    </span>
+                                                                    <span class="checks_data_text">
+                                                                        <dx:ASPxLabel runat="server" Text='<%# String.Format("{0}", Eval("CreateBy"))%>'></dx:ASPxLabel>
+                                                                        &nbsp;<dx:ASPxLabel runat="server" Text='<%# String.Format("{0:MMM d, yyyy}", Eval("CreateDate"))%>'></dx:ASPxLabel>
+                                                                    </span>
+                                                                </label>
+                                                            </div>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                        <asp:Repeater runat="server" ID="rptFiles">
+                                            <ItemTemplate>
+                                                <%--                <tr onclick="PreviewDocument('<%# String.Format("/DownloadFile.aspx?id={0}", Eval("FileID"))%>', '<%# Eval("ContentType")%>');" style="cursor:pointer" onmouseover="this.bgColor = '#D1DEFB';" onmouseout="this.bgColor = '';">--%>
 
-                                                </ItemTemplate>
-                                            </asp:Repeater>
-                                        </div>
-
-
+                                                <div class="clearfix ">
+                                                    <input type="checkbox" name="vehicle" data-uniqueid="<%# Eval("Description")%>" class="FileCheckbox" value="<%# Eval("Name")%>" id="<%# String.Format("doc_list_id_{0}", Eval("Description"))%>" />
+                                                    <label class="doc_list_checks doc_border_left check_margin doc_list_checks_sub" for='<%# String.Format("doc_list_id_{0}", Eval("Description"))%>' style="width: 94%">
+                                                        <span class="color_balck ">
+                                                            <%-- NavigateUrl='<%# String.Format("/DownloadFile.aspx?id={0}&spFile={1}", Eval("FileID"), Eval("Description"))%>' Text='<%# Eval("Name")%>'--%>
+                                                            <dx:ASPxHyperLink runat="server" CssClass="doc_file_name" ClientSideEvents-Click='<%# String.Format("function(s,e){{clickFileLink(s,""{0}"")}}", Eval("Description"))%>' Text='<%# Eval("Name")%>' Target="_blank"></dx:ASPxHyperLink>
+                                                        </span>
+                                                        <span class="checks_data_text">
+                                                            <dx:ASPxLabel runat="server" Text='<%# String.Format("{0}", Eval("CreateBy"))%>'></dx:ASPxLabel>
+                                                            &nbsp;<dx:ASPxLabel runat="server" Text='<%# String.Format("{0:MMM d, yyyy}", Eval("CreateDate"))%>'></dx:ASPxLabel>
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </ItemTemplate>
                 </asp:DataList>
             </dx:PanelContent>

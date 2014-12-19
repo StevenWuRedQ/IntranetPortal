@@ -37,6 +37,10 @@ Public Class DocumentsUI
             Dim rptFiles = TryCast(e.Item.FindControl("rptFiles"), Repeater)
             rptFiles.DataSource = DataBinder.Eval(e.Item.DataItem, "Group")
             rptFiles.DataBind()
+
+            Dim rptFolders = TryCast(e.Item.FindControl("rptFolders"), Repeater)
+            rptFolders.DataSource = DataBinder.Eval(e.Item.DataItem, "SubCategory")
+            rptFolders.DataBind()
         End If
     End Sub
 
@@ -47,5 +51,13 @@ Public Class DocumentsUI
 
     Protected Sub cbpDocumentUI_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         BindFilesFromSharepoint(e.Parameter)
+    End Sub
+
+    Protected Sub rptFiles_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
+        If e.Item.ItemType = ListItemType.Item Or e.Item.ItemType = ListItemType.AlternatingItem Then
+            Dim rptFiles = TryCast(e.Item.FindControl("rptFiles"), Repeater)
+            rptFiles.DataSource = DataBinder.Eval(e.Item.DataItem, "Group")
+            rptFiles.DataBind()
+        End If
     End Sub
 End Class

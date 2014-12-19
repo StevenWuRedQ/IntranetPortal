@@ -278,26 +278,31 @@
         }
 
         function GetCategoryElement(fileName) {
-            var cates = ["Financials", "Short Sale", "Photos", "Accounting", "Eviction", "Construction", "Others" ,"HasSub"];
+            var cates = ["Financials", ["Short Sale","Bank","Seller"], "Photos", "Accounting", "Eviction", "Construction", "Others" ,"HasSub"];
             var x = document.createElement("SELECT");
             x.setAttribute("data-filename", fileName);
             for (var i = 0; i < cates.length; i++) {
                 /*test add sub category by steven using HasSub for test  */
-                var e_option = cates[i]; 
-                if (e_option == "HasSub")
+                var e_option = cates[i];
+                debugger;
+                if (e_option.constructor == Array)
                 {
                     var opt_grop = document.createElement("optgroup");
-                    $(opt_grop).attr("label", e_option);
-                    var option = document.createElement("option");
-                    option.text = "Sub Category";
-                    
-                    opt_grop.appendChild(option);
+                    $(opt_grop).attr("label", e_option[0]);
+                    for (var j = 1; j < e_option.length; j++)
+                    {
+                        var option = document.createElement("option");
+                        option.text = e_option[j];
+                        option.value = e_option[0] + "/" + e_option[j];
+                        opt_grop.appendChild(option);
+                    }                    
                     x.add(opt_grop)
                 } else
                 {
                     var option = document.createElement("option");
 
                     option.text = cates[i];
+                    option.value = cates[i];
                     x.add(option);
                 }
                 

@@ -26,7 +26,6 @@ Partial Public Class Lead
             Else
                 Return AssignDate
             End If
-
         End Get
     End Property
 
@@ -57,7 +56,7 @@ Partial Public Class Lead
                         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName, LeadsActivityLog.EnumActionType.DoorKnock)
                     Else
                         If status = LeadStatus.Callback Then
-                            comments = "Lead Status changed to Follow Up on " & callbackDate.ToString("MM/dd")
+                            comments = "Lead Status changed to Follow Up on " & callbackDate.ToString("MM/dd/yyyy")
                         End If
 
                         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName)

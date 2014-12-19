@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfPortalNavItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PortalNavItem Name="UserTask" Text="Task" NavigationUrl="/Task/MyTask.aspx" ShowAmount="false" ItemType="" Expanded="false">
+    <level>1</level>
+    <FontClass>
+      <![CDATA[
+      ]]>
+    </FontClass>
+    <Items>
+      <PortalNavItem Name="IncomingTasks" Text="Incoming" NavigationUrl="/Task/MyTask.aspx" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-sign-in"></i>]]>
+        </FontClass>
+      </PortalNavItem>      
+      <PortalNavItem Name="PendingTask" Text="Pending" NavigationUrl="/Task/MyTask.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="CompletedTask" Text="Completed" NavigationUrl="/Task/MyTask.aspx" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-tasks"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+  </PortalNavItem>  
   <PortalNavItem Name="Agent" Text="Leads" NavigationUrl="/SummaryPage.aspx" ShowAmount="false" ItemType="Agent" Expanded="true">
-
     <level>1</level>
     <FontClass>
       <![CDATA[

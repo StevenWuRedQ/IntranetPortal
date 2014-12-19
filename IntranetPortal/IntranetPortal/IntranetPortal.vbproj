@@ -156,6 +156,9 @@
       <HintPath>..\..\..\..\..\..\..\Program Files\Common Files\Microsoft Shared\Web Server Extensions\15\ISAPI\Microsoft.SharePoint.Client.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MyIdealProp.Workflow.Client">
+      <HintPath>..\..\..\WorkFlow\SourceCode2\Client\MyIdealProp.Workflow.Client\bin\Debug\MyIdealProp.Workflow.Client.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -960,6 +963,20 @@
     <Compile Include="SummaryPage.aspx.vb">
       <DependentUpon>SummaryPage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Task\MyTask.aspx.designer.vb">
+      <DependentUpon>MyTask.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Task\MyTask.aspx.vb">
+      <DependentUpon>MyTask.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Task\TasklistControl.ascx.designer.vb">
+      <DependentUpon>TasklistControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Task\TasklistControl.ascx.vb">
+      <DependentUpon>TasklistControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Test.aspx.designer.vb">
       <DependentUpon>Test.aspx</DependentUpon>
@@ -2228,6 +2245,8 @@
     <Content Include="StreetView.aspx" />
     <Content Include="css\stevencss.css" />
     <Content Include="SummaryPage.aspx" />
+    <Content Include="Task\MyTask.aspx" />
+    <Content Include="Task\TasklistControl.ascx" />
     <Content Include="Test.aspx" />
     <Content Include="UploadFilePage.aspx" />
     <Content Include="OneDrive\UploadToOneDrive.aspx" />

@@ -58,11 +58,14 @@
                         <span><%= TLOLocateReport.numberOfBankruptciesField > 0%> </span>
                         <% If TLOLocateReport.numberOfBankruptciesField > 0 Then%>
                         <i class="fa fa-minus-square-o" style="float: right; color: #b1b2b7"></i>
-                        <% Dim info = TLOLocateReport.bankruptciesField(0) %>
+                        <% If TLOLocateReport.bankruptciesField IsNot Nothing AndAlso TLOLocateReport.bankruptciesField.Length > 0 Then
+                                Dim info = TLOLocateReport.bankruptciesField(0)%>
                         <% If info IsNot Nothing Then%>
-                         <%=info.attorneyAddressField.countyField &" "&info.attorneyAddressField.zipField &"<Br />" & info.attorneyNameField & "<Br />" & info.attorneyPhoneField & "<Br />" & info.claimDateField.ToString & "<Br />" & info.dischargeDateField.ToString & "<Br />" & info.lawFirmField & "<Br />" & info.nphIdField%>
-                        <% End If %>
-                       
+                        <%=info.attorneyAddressField.countyField &" "&info.attorneyAddressField.zipField &"<Br />" & info.attorneyNameField & "<Br />" & info.attorneyPhoneField & "<Br />" & info.claimDateField.ToString & "<Br />" & info.dischargeDateField.ToString & "<Br />" & info.lawFirmField & "<Br />" & info.nphIdField%>
+                        <% End If
+                        End If
+                        %>
+
                         <% End If%>
                     </div>
                 </div>
@@ -157,7 +160,7 @@
                                         <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span>
 
                                     </a>
-                                    
+
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     &nbsp;
@@ -179,7 +182,7 @@
                                     <%= FormatPhoneNumber(phone.phoneField)%>
                                     <span class="phone_comment"><%=GetPhoneComment(phone.phoneField) %></span>
                                 </a>
-                              
+
                             </div>
                             <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                 (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
@@ -244,7 +247,7 @@
         </div>
     </div>
 
-
+    <% If true Then%>
     <% If TLOLocateReport.numberOfRelatives1stDegreeField > 0 Then%>
     <div>
         <div class="form_head homeowner_section_margin">
@@ -276,7 +279,7 @@
                                         <%= FormatPhoneNumber(phone.phoneField) %>
                                         <span class="phone_comment"><%=GetPhoneComment(phone.phoneField) %></span>
                                     </a>
-                                 
+
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>)
@@ -330,7 +333,7 @@
                                             <%= FormatPhoneNumber(phone.phoneField) %>
                                             <span class="phone_comment"><%=GetPhoneComment(phone.phoneField) %></span>
                                         </a>
-                                       
+
                                     </div>
                                     <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                         (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
@@ -348,7 +351,6 @@
             <% Next%>
         </div>
 
-
         <% If TLOLocateReport.numberOfRelatives3rdDegreeField > 0 Then%>
 
         <div>
@@ -362,10 +364,7 @@
                     <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField %></span><br />
                     <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
                 </div>
-
             </div>
-
-
             <div class="homeowner_expanll_border" style="margin-left: 20px">
                 <div>
                     <div class="clearfix homeowner_info_label" style="margin-left: 17px;">
@@ -381,7 +380,7 @@
                                             <%= FormatPhoneNumber(phone.phoneField) %>
                                             <span class="phone_comment"><%=GetPhoneComment(phone.phoneField) %></span>
                                         </a>
-                                      
+
                                     </div>
                                     <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                         (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
@@ -403,7 +402,7 @@
     </div>
 
     <% End If%>
-
+    <% End If%>
     <%End If%>
 </div>
 <script type="text/javascript">
@@ -425,17 +424,18 @@
         return hash;
     }
     function sortPhones() {
+        debugger;
         var colors = {}
         var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
-        
+
         var phones_div = $(".homeowner_info_label:has(.PhoneLink)")
             .each(function (id) {
                 var phones = $(this).find("div").children(".color_gray:has(.color_gray)");
-               
-              
-               
+
+
+
                 phones.sort(function (a, b) {
-                    
+
                     var color = $(a).find(".PhoneLink:first").css("color");
                     var colorB = $(b).find(".PhoneLink:first").css("color");
                     var hcolor = hashStr(color);
@@ -444,20 +444,20 @@
                     colors["cc" + hcolorB] = hcolorB + "-" + colorB;
                     return hcolor - hcolorB;
                 });
-                
+
                 var html = ""
                 phones.each(function (ind) {
                     var ptext = $(this).text();
                     html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
-                   
+
                 });
-                
+
                 phones.parent().html('<div>' + html + '</div>');
 
-               
+
             });
 
-        //debugger;
+
 
     }
 

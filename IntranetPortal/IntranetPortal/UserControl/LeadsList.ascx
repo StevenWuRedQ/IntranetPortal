@@ -320,7 +320,7 @@
     function GetMarkColor(markColor)
     {
         if(markColor <= 0 || markColor == 1000){
-            return "blue";
+            return "gray";
         }
         colors = [
 
@@ -363,13 +363,7 @@
 
 </script>
 <style>
-    .diagonal {
-        /*background: repeating-linear-gradient( 135deg, #fff, #fff 10px, #000 10px, #000 15px );*/
-        background:white;
-        text-align:center;
-        vertical-align:central;
-        font-size:15px;
-    }
+   
     .color_list
     {
         /*width:15px;*/
@@ -377,6 +371,14 @@
         padding:0px;
         height:30px;
         border:none;
+    }
+     .diagonal {
+        /*background: repeating-linear-gradient( 135deg, #fff, #fff 10px, #000 10px, #000 15px );*/
+        background:white;
+        text-align:center;
+        vertical-align:central;
+        font-size:15px;
+        border:1px solid gray;
     }
 </style>
 <dx:ASPxCallback runat="server" ID="MarkColorCallBack" OnCallback="MarkColorCallBack_Callback" ClientInstanceName="MarkColorCallBack">  </dx:ASPxCallback>
