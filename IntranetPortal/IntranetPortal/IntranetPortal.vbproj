@@ -333,6 +333,7 @@
       <DependentUpon>Calendar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="CodeFolder\WorkflowService.vb" />
     <Compile Include="Content.Master.designer.vb">
       <DependentUpon>Content.Master</DependentUpon>
     </Compile>
@@ -970,6 +971,13 @@
     <Compile Include="Task\MyTask.aspx.vb">
       <DependentUpon>MyTask.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Task\OriginatedListControl.ascx.designer.vb">
+      <DependentUpon>OriginatedListControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Task\OriginatedListControl.ascx.vb">
+      <DependentUpon>OriginatedListControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Task\TasklistControl.ascx.designer.vb">
       <DependentUpon>TasklistControl.ascx</DependentUpon>
@@ -2246,6 +2254,7 @@
     <Content Include="css\stevencss.css" />
     <Content Include="SummaryPage.aspx" />
     <Content Include="Task\MyTask.aspx" />
+    <Content Include="Task\OriginatedListControl.ascx" />
     <Content Include="Task\TasklistControl.ascx" />
     <Content Include="Test.aspx" />
     <Content Include="UploadFilePage.aspx" />

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TasklistControl.ascx.vb" Inherits="IntranetPortal.TasklistControl" %>
+﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="OriginatedListControl.ascx.vb" Inherits="IntranetPortal.OriginatedListControl" %>
 <script type="text/javascript">
     function ShowWorklistItem(itemData, processName)
     {
@@ -27,7 +27,7 @@
     </div>
     <div style="height: 768px; padding: 0px 10px;" id="leads_list_left">
         <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true"
-            ID="gridTasks" Border-BorderStyle="None" ClientInstanceName="gridTasks" Width="100%" AutoGenerateColumns="False" KeyFieldName="ProcInstId;ActInstId">
+            ID="gridProcess" Border-BorderStyle="None" ClientInstanceName="gridProcess" Width="100%" AutoGenerateColumns="False" KeyFieldName="Id">
             <Columns>                
                 <dx:GridViewDataTextColumn FieldName="DisplayName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
@@ -39,7 +39,7 @@
                     <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
                     <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>                    
                 </dx:GridViewDataTextColumn>
-                <dx:GridViewDataColumn FieldName="ActivityName" Visible="false" VisibleIndex="3">                    
+                <dx:GridViewDataColumn FieldName="Status" Visible="false" VisibleIndex="3">                    
                 </dx:GridViewDataColumn>
                 <%--<dx:GridViewDataColumn FieldName="Originator" Visible="false" VisibleIndex="4">                  
                 </dx:GridViewDataColumn>--%>

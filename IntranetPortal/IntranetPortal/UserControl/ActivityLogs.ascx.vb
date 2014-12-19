@@ -110,6 +110,11 @@ Public Class ActivityLogs
 
                 LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is completed by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
 
+                If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                    Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+                    wli.ProcessInstance.DataFields("Result") = "Completed"
+                    wli.Finish()
+                End If
             End Using
 
             BindData(hfBBLE.Value)
@@ -236,8 +241,13 @@ Public Class ActivityLogs
             Dim logId = CInt(hfResend.Value)
             ResendTask(logId)
         End If
+        Dim employees = ""
 
-        Dim employees = Page.User.Identity.Name & ";" & empsDropDownEdit.Text
+        If empsDropDownEdit.Text.ToLower.Contains(Page.User.Identity.Name.ToLower) Then
+            employees = empsDropDownEdit.Text
+        Else
+            employees = Page.User.Identity.Name & ";" & empsDropDownEdit.Text
+        End If
 
         Dim scheduleDate = DateTime.Now
         'If cbTaskSchedule.Text = "1 Day" Then
@@ -273,9 +283,11 @@ Public Class ActivityLogs
 
         Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
 
+        Dim taskId As Integer
         Using Context As New Entities
-            Context.UserTasks.Add(AddTask(hfBBLE.Value, employees, cbTaskAction.Text, cbTaskImportant.Text, scheduleDate, txtTaskDes.Text, log.LogID))
+            Dim task = Context.UserTasks.Add(AddTask(hfBBLE.Value, employees, cbTaskAction.Text, cbTaskImportant.Text, scheduleDate, txtTaskDes.Text, log.LogID))
             Context.SaveChanges()
+            taskId = task.TaskID
         End Using
 
         Dim emps = employees.Split(";").Distinct.ToArray
@@ -283,6 +295,9 @@ Public Class ActivityLogs
         Dim upData = Employee.GetProfile(Page.User.Identity.Name)
 
         Dim ld = LeadsInfo.GetInstance(hfBBLE.Value)
+
+        WorkflowService.StartTaskProcess(ld.LeadsName, taskId, ld.BBLE, employees)
+
         For i = 0 To emps.Count - 1
             If Not emps(i) = Page.User.Identity.Name Then
                 Dim title = String.Format("A New Task has been assigned by {0}  regarding {1} for {2}", Page.User.Identity.Name, cbTaskAction.Text, ld.PropertyAddress)
@@ -653,6 +668,12 @@ Public Class ActivityLogs
             If task IsNot Nothing Then
                 task.Status = UserTask.TaskStatus.Complete
                 Context.SaveChanges()
+            End If
+
+            If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+                wli.ProcessInstance.DataFields("Result") = "Completed"
+                wli.Finish()
             End If
 
             LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is Resend by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
