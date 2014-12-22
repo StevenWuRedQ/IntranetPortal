@@ -445,8 +445,7 @@ Public Class LeadsInfo1
             End If
 
             Context.SaveChanges()
-            'HomeOwnerInfo2.HomeOwnerInfo.BestPhoneNo.Sort(Function(x, y) x.Stuats > y.Stuats)
-            'HomeOwnerInfo3.HomeOwnerInfo.BestPhoneNo.Sort(Function(x, y) x.Stuats > y.Stuats)
+            
         End Using
     End Sub
 

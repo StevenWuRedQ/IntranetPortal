@@ -272,6 +272,7 @@
     function AddBestAddress(bble, ownerName, addButton) {
         isSave = false;
         currOwner = ownerName;
+        
         aspxPopupAddAddress.PerformCallback(addButton);
     }
 
@@ -404,7 +405,11 @@
                                                                     <td style="border-left: 1px solid #b1b2b7; width: 8px;">&nbsp;
                                                                     </td>
                                                                     <td style="vertical-align: top">
+                                                                       
                                                                         <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo3" />
+                                                                        <% If(not HomeOwnerInfo3.Visible) Then %>
+                                                                         <i class="fa  fa-plus-circle icon_btn color_blue tooltip-examples" title="Add home owner" style="font-size:32px"></i>
+                                                                        <% End If %>
                                                                     </td>
                                                                 </tr>
                                                             </table>
