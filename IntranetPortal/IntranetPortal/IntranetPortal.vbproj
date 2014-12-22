@@ -1213,6 +1213,10 @@
     <Content Include="DevExpress\ASPxSchedulerForms\ReminderForm.ascx" />
     <Content Include="DevExpress\ASPxSchedulerForms\SelectionToolTip.ascx" />
     <Content Include="DevExpress\ASPxSchedulerForms\VerticalAppointmentTemplate.ascx" />
+    <Content Include="DLL\MyIdealProp.Common.dll" />
+    <Content Include="DLL\MyIdealProp.Workflow.Client.dll" />
+    <Content Include="DLL\MyIdealProp.Workflow.Core.dll" />
+    <Content Include="DLL\MyIdealProp.Workflow.DBPersistence.dll" />
     <Content Include="DownloadFile.aspx" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />
