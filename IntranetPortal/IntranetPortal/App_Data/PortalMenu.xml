@@ -12,7 +12,7 @@
           <![CDATA[<i class="fa fa-sign-in"></i>]]>
         </FontClass>
       </PortalNavItem>      
-      <PortalNavItem Name="PendingTask" Text="Pending" NavigationUrl="/Task/MyTask.aspx" ShowAmount="false">
+      <PortalNavItem Name="PendingTask" Text="Pending" NavigationUrl="/Task/MyApp.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>

@@ -159,6 +159,9 @@
     <Reference Include="MyIdealProp.Workflow.Client">
       <HintPath>..\..\..\WorkFlow\SourceCode2\Client\MyIdealProp.Workflow.Client\bin\Debug\MyIdealProp.Workflow.Client.dll</HintPath>
     </Reference>
+    <Reference Include="MyIdealProp.Workflow.DBPersistence">
+      <HintPath>..\..\..\WorkFlow\SourceCode2\MyIdealProp.Common\MyIdealProp.Workflow.DBPersistence\bin\Debug\MyIdealProp.Workflow.DBPersistence.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -963,6 +966,13 @@
     </Compile>
     <Compile Include="SummaryPage.aspx.vb">
       <DependentUpon>SummaryPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Task\MyApp.aspx.designer.vb">
+      <DependentUpon>MyApp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Task\MyApp.aspx.vb">
+      <DependentUpon>MyApp.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Task\MyTask.aspx.designer.vb">
@@ -2253,6 +2263,7 @@
     <Content Include="StreetView.aspx" />
     <Content Include="css\stevencss.css" />
     <Content Include="SummaryPage.aspx" />
+    <Content Include="Task\MyApp.aspx" />
     <Content Include="Task\MyTask.aspx" />
     <Content Include="Task\OriginatedListControl.ascx" />
     <Content Include="Task\TasklistControl.ascx" />

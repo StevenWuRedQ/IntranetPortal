@@ -1,11 +1,9 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="OriginatedListControl.ascx.vb" Inherits="IntranetPortal.OriginatedListControl" %>
 <script type="text/javascript">
-    function ShowWorklistItem(itemData, processName)
-    {
-        var frm = document.getElementById("FrmTaskContent");
+    function ViewProcess(link)
+    {    
         var contentPane = splitterTaskPage.GetPaneByName("contentPanel")
-        contentPane.SetContentUrl(itemData);
-        //alert(sn + " " + processName);
+        contentPane.SetContentUrl(link);     
     }
 
 </script>
@@ -16,7 +14,7 @@
             <div class="clearfix">
                 <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
                 <span style="color: #234b60; font-size: 30px;">
-                    <dx:ASPxLabel Text="Tasks" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
+                    <dx:ASPxLabel Text="Originated" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
                 </span>
                 <div class="icon_right_s">                    
                     <i class="fa fa-sort-amount-desc icon_btn tooltip-examples" title="Sort" style="cursor: pointer; font-size: 18px" id="btnSortIcon" onclick="aspxPopupSortMenu.ShowAtElement(this);"></i>
@@ -32,7 +30,7 @@
                 <dx:GridViewDataTextColumn FieldName="DisplayName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
                     <DataItemTemplate>
-                        <span onclick='ShowWorklistItem("<%# Eval("ItemData")%>", "<%# Eval("ProcessName")%>")'><%# Eval("DisplayName")%></span>
+                        <span onclick='ViewProcess("<%# GetViewLink(Eval("ProcessName")) & Eval("Id")%>")'><%# Eval("DisplayName")%></span>
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="StartDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">

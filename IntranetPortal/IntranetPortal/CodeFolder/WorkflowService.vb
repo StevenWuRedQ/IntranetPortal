@@ -1,4 +1,6 @@
 ﻿Imports MyIdealProp.Workflow.Client
+Imports MyIdealProp.Workflow
+
 
 Public Class WorkflowService
     Public Shared Sub StartTaskProcess(displayName As String, taskId As Integer, bble As String, approver As String)
@@ -19,6 +21,15 @@ Public Class WorkflowService
         Dim conn = GetConnection()
         Dim wli = conn.OpenWorklistItem(sn)
         Return wli
+    End Function
+
+    Public Shared Function GetMyOriginated(userName As String) As List(Of DBPersistence.ProcessInstance)
+        Return DBPersistence.ProcessInstance.GetMyApplication(userName)
+    End Function
+
+    Public Shared Function LoadProcInstById(procInstId As Integer) As DBPersistence.ProcessInstance
+        Dim procInst = DBPersistence.ProcessInstance.LoadProcInstById(procInstId)
+        Return procInst
     End Function
 
     Private Shared Function GetConnection() As Connection
