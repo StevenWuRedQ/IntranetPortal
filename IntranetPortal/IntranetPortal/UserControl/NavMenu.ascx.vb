@@ -188,6 +188,30 @@ Public Class RefreshLeadsCountHandler
         If name.StartsWith("ShortSale") Then
             Return GetShortSaleCaseCount(name, itemText, userName)
         End If
+
+        If name.StartsWith("MyTask") Then
+            Return GetMyTaskCount()
+        End If
+
+        If name.StartsWith("MyApplication") Then
+            Return GetMyApplicationCount(userName)
+        End If
+
+        If name.StartsWith("MyCompleted") Then
+            Return GetMyCompletedCount(userName)
+        End If
+    End Function
+
+    Function GetMyTaskCount() As Integer
+        Return WorkflowService.GetMyWorklist().Count
+    End Function
+
+    Function GetMyApplicationCount(userName As String) As Integer
+        Return WorkflowService.GetMyOriginated(userName).Count
+    End Function
+
+    Function GetMyCompletedCount(userName As String) As Integer
+        Return WorkflowService.GetMyCompleted(userName).Count
     End Function
 
     Function GetTeam2LeadsCount(name As String, itemText As String) As Integer

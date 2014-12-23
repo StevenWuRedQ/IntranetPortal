@@ -8,13 +8,11 @@ Public Class TasklistControl
     End Sub
 
     Public Sub BindTask()
-        Dim conn As New Connection("localhost")
-        conn.UserName = Page.User.Identity.Name
-        conn.Open()
-
-        gridTasks.DataSource = conn.OpenMyWorklist()
+        gridTasks.DataSource = WorkflowService.GetMyWorklist()
         gridTasks.DataBind()
 
-        gridTasks.GroupBy(gridTasks.Columns("ProcessName"))
+        If Not Page.IsPostBack Then
+            gridTasks.GroupBy(gridTasks.Columns("ProcessName"))
+        End If
     End Sub
 End Class

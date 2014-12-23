@@ -25,11 +25,25 @@ Public Class DocumentService
             Dim ds = (From cate In categories
                      Select New With {
                          .Key = cate.Name,
+                         .SubCategory = GetSubCategories(ClientContext, cate),
                          .Group = GetFiles(ClientContext, cate)
                          }).ToList
 
             Return ds
         End Using
+    End Function
+
+    Public Shared Function GetSubCategories(clientContext As ClientContext, cate As Folder) As Object
+        Dim categories = cate.Folders
+        clientContext.Load(categories)
+        clientContext.ExecuteQuery()
+
+        Dim ds = (From childCate In categories
+                 Select New With {
+                     .Key = childCate.Name,
+                    .Group = GetFiles(clientContext, childCate)
+                     }).ToList
+        Return ds
     End Function
 
     Public Shared Function GetPDFContent(fileUrl As String) As Byte()

@@ -15,6 +15,42 @@ Public Class ShortSalePage
                 ShortSaleCaseList.BindCaseList(status)
             End If
 
+            'process the task
+            If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
+                Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
+                BindCaseData2(bble)
+                ASPxSplitter1.Panes("listPanel").Collapsed = True
+                contentSplitter.ClientVisible = True
+
+                If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
+                    Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                                    String.Format("GetShortSaleData({0});", ShortSaleCaseData.CaseId) & "</script>"
+                    Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
+                End If
+                Return
+            End If
+
+            'View shortsale
+            If Not String.IsNullOrEmpty(Request.QueryString("ProcInstId")) Then
+                Dim procInst = WorkflowService.LoadProcInstById(CInt(Request.QueryString("ProcInstId")))
+                If procInst IsNot Nothing Then
+                    Dim bble = procInst.GetDataFieldValue("BBLE")
+                    If Not String.IsNullOrEmpty(bble) Then
+                        BindCaseData2(bble)
+                        ASPxSplitter1.Panes("listPanel").Collapsed = True
+                        contentSplitter.ClientVisible = True
+
+                        If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
+                            Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                                            String.Format("GetShortSaleData({0});", ShortSaleCaseData.CaseId) & "</script>"
+                            Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
+                        End If
+                        Return
+                    End If
+                End If
+            End If
+
             If Not String.IsNullOrEmpty(Request.QueryString("CaseId")) Then
                 Dim caseId = CInt(Request.QueryString("CaseId"))
                 BindCaseData(caseId)
@@ -50,7 +86,6 @@ Public Class ShortSalePage
             Else
                 isEviction = False
             End If
-
         End If
     End Sub
 
@@ -84,6 +119,17 @@ Public Class ShortSalePage
 
     Private Sub BindCaseData(caseId As Integer)
         ShortSaleCaseData = ShortSaleCase.GetCase(caseId)
+        contentSplitter.ClientVisible = True
+        ShortSaleOverVew.BindData(ShortSaleCaseData)
+        ucTitle.BindData(ShortSaleCaseData)
+        ActivityLogs.BindData(ShortSaleCaseData.BBLE)
+        'DocumentsUI.BindFileList(ShortSaleCaseData.BBLE)
+        DocumentsUI.LeadsName = ShortSaleCaseData.CaseName
+        DocumentsUI.LeadsBBLE = ShortSaleCaseData.BBLE
+    End Sub
+
+    Private Sub BindCaseData2(bble As String)
+        ShortSaleCaseData = ShortSaleCase.GetCaseByBBLE(bble)
         contentSplitter.ClientVisible = True
         ShortSaleOverVew.BindData(ShortSaleCaseData)
         ucTitle.BindData(ShortSaleCaseData)

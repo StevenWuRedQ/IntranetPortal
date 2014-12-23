@@ -968,6 +968,13 @@
       <DependentUpon>SummaryPage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Task\MyCompleted.aspx.designer.vb">
+      <DependentUpon>MyCompleted.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Task\MyCompleted.aspx.vb">
+      <DependentUpon>MyCompleted.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Task\MyApp.aspx.designer.vb">
       <DependentUpon>MyApp.aspx</DependentUpon>
     </Compile>
@@ -1159,7 +1166,9 @@
     <Content Include="Account\Login2.aspx" />
     <Content Include="AgentOverview\AgentCharts.ascx" />
     <Content Include="AgentOverview\AgentOverview.aspx" />
-    <Content Include="App_Data\PortalMenu.xml" />
+    <Content Include="App_Data\PortalMenu.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Themes\PortalTheme2.dll" />
     <Content Include="AssignLeadsRulesPage.aspx" />
     <Content Include="BingViewMap.aspx" />
@@ -2267,6 +2276,7 @@
     <Content Include="StreetView.aspx" />
     <Content Include="css\stevencss.css" />
     <Content Include="SummaryPage.aspx" />
+    <Content Include="Task\MyCompleted.aspx" />
     <Content Include="Task\MyApp.aspx" />
     <Content Include="Task\MyTask.aspx" />
     <Content Include="Task\OriginatedListControl.ascx" />

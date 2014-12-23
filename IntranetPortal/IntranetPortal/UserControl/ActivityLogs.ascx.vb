@@ -97,8 +97,13 @@ Public Class ActivityLogs
             SetAsTask()
         End If
 
+        'Complete Task
         If (e.Parameters.StartsWith("CompleteTask")) Then
             Dim logId = CInt(e.Parameters.Split("|")(1))
+
+            If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                Return
+            End If
 
             Using Context As New Entities
                 Dim task = Context.UserTasks.Where(Function(t) t.LogID = logId).SingleOrDefault
@@ -296,7 +301,11 @@ Public Class ActivityLogs
 
         Dim ld = LeadsInfo.GetInstance(hfBBLE.Value)
 
-        WorkflowService.StartTaskProcess(ld.LeadsName, taskId, ld.BBLE, employees)
+        If DispalyMode = ActivityLogMode.Leads Then
+            WorkflowService.StartTaskProcess("TaskProcess", ld.LeadsName, taskId, ld.BBLE, employees)
+        ElseIf DispalyMode = ActivityLogMode.ShortSale Then
+            WorkflowService.StartTaskProcess("ShortSaleTask", ld.LeadsName, taskId, ld.BBLE, employees)
+        End If
 
         For i = 0 To emps.Count - 1
             If Not emps(i) = Page.User.Identity.Name Then

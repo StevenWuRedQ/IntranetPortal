@@ -11,23 +11,32 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class OriginatedListControl
+Partial Public Class MyCompleted
 
     '''<summary>
-    '''divExpand control.
+    '''ASPxSplitter1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents divExpand As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
 
     '''<summary>
-    '''gridProcess control.
+    '''SplitterContentControl1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents gridProcess As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
+
+    '''<summary>
+    '''OriginatedListControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents OriginatedListControl As Global.IntranetPortal.OriginatedListControl
 End Class
