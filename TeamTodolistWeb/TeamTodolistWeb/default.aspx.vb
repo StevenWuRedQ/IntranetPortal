@@ -1,14 +1,16 @@
 ﻿Imports DevExpress.Web.ASPxGridView
 Imports DevExpress.Web.ASPxEditors
 Imports DevExpress.Web.ASPxCallback
+Imports DevExpress.XtraCharts
 
 Partial Class TodoListPage
     Inherits System.Web.UI.Page
     Private dateneedItem As Integer = 15
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
         BindData()
-        lblLoginUser.Text = Page.User.Identity.Name
         If Not Page.IsPostBack Then
+
+            lblLoginUser.Text = Page.User.Identity.Name
             'dateDue.MinDate = DateTime.Now
             'dateDue.Date = DateTime.Now
             For j = 0 To dateneedItem
@@ -20,10 +22,10 @@ Partial Class TodoListPage
     Sub BindData()
         Using Context As New DevAppEntities
             Dim myLists = Context.TodoLists.ToList.OrderByDescending(Function(t) t.CreateDate)
-            For Each tdlist In myLists
-                tdlist.UpdateDuDate()
-            Next
-            Context.SaveChanges()
+            'For Each tdlist In myLists
+            '    tdlist.UpdateDuDate()
+            'Next
+            'Context.SaveChanges()
             gridTask.DataSource = myLists
             gridTask.DataBind()
         End Using
@@ -32,6 +34,7 @@ Partial Class TodoListPage
     Protected Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Using Context As New DevAppEntities
             Dim item As New TodoList
+            item.Title = txtTitle.Text
             item.Description = txtMemo.Html
             item.Category = cbCategory.Text
             item.CreateBy = lblLoginUser.Text  'cbUsers.Text
@@ -121,7 +124,7 @@ Partial Class TodoListPage
     End Sub
     Protected Sub UpDataAllDateNeed()
         Using Context As New DevAppEntities
-            For Each mList As TodoList In Context.TodoLists.ToList()
+            For Each mList As TodoList In Context.TodoLists.Where(Function(log) log.Status = TaskStatus.NewTask).ToList()
                 mList.UpdateDuDate()
             Next
             Context.SaveChanges()
@@ -155,7 +158,7 @@ Partial Class TodoListPage
                     Context.SaveChanges()
                     UpDataAllDateNeed()
                 End If
-              
+
 
             End Using
 
@@ -196,7 +199,7 @@ Partial Class TodoListPage
                     task.DueDate = newDate
                     task.UpdateDate = DateTime.Now
                     Context.SaveChanges()
-
+                    UpDataAllDateNeed()
                     Log("Due Date Change to " & newDate.ToShortDateString, taskId)
                 End If
             End Using
@@ -299,6 +302,55 @@ Partial Class TodoListPage
             ctx.SaveChanges()
         End Using
     End Sub
+
+    Protected Sub btnViewChart_Click(sender As Object, e As EventArgs)
+        BuildChart(cbChartUser.Text)
+    End Sub
+
+    Private Sub BuildChart(userName As String)
+        Dim tasks = GetUserTask(userName)
+        ganttChart.Series.Clear()
+        ganttChart.Titles.Clear()
+        Dim title As New ChartTitle
+        title.Text = String.Format("{0}'s Plan", userName)
+        ganttChart.Titles.Add(title)
+
+        Dim planSeries As New DevExpress.XtraCharts.Series("Planned", DevExpress.XtraCharts.ViewType.Gantt)
+        planSeries.ValueScaleType = ScaleType.DateTime
+        Dim startDate = DateTime.Now
+
+        For Each t In tasks
+            Dim sp As New SeriesPoint
+            sp.DateTimeValues = {startDate.Date, t.DueDate.Value.Date}
+            sp.Argument = If(Not String.IsNullOrEmpty(t.Title), t.Title, t.Description.Substring(0, If(t.Description.Length > 10, 10, t.Description.Length)))
+            planSeries.Points.Add(sp)
+            startDate = t.DueDate
+        Next
+
+        ' Add task links for the first Gantt series.
+        CType(planSeries.View, GanttSeriesView).LinkOptions.ArrowHeight = 7
+        CType(planSeries.View, GanttSeriesView).LinkOptions.ArrowWidth = 11
+
+        For i As Integer = 1 To planSeries.Points.Count - 1
+            planSeries.Points(i).Relations.Add(planSeries.Points((i - 1)))
+        Next i
+
+        ganttChart.Series.Add(planSeries)
+
+        Dim ganttDiag = CType(ganttChart.Diagram, GanttDiagram)
+        ganttDiag.AxisY.WholeRange.Auto = True
+    End Sub
+
+    Public Function GetUserTask(userName As String) As List(Of TodoList)
+        Using ctx As New DevAppEntities
+            Dim tasks = ctx.TodoLists.Where(Function(todo) todo.Owner = userName And todo.Status = TaskStatus.NewTask And todo.Priority > 0).OrderBy(Function(todo) todo.Priority).ToList
+            'For Each t In tasks
+            '    t.UpdateDuDate()
+            'Next
+
+            Return tasks
+        End Using
+    End Function
 End Class
 
 Enum TaskStatus

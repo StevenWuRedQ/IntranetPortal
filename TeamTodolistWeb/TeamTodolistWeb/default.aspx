@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-   
+
     <script type="text/javascript">
 
         function CompleteTask(taskId) {
@@ -97,15 +97,15 @@
         }
 
     </script>
-     <style>
+    <style>
         .colors_ss {
             margin: 5px;
             width: 20px;
             height: 20px;
         }
-        .margin_top
-        {
-            padding-top:5px;
+
+        .margin_top {
+            padding-top: 5px;
         }
     </style>
 </head>
@@ -115,67 +115,31 @@
             <h2 style="font-family: Tahoma; font-size: 20px; margin-top: 15px; text-align: center; padding-top: 15px;">Team Task List</h2>
             <dx:ASPxFormLayout ID="ASPxFormLayout1" runat="server" ClientInstanceName="AddTaskFormLayout">
                 <Items>
-                    <dx:LayoutGroup Caption="Add Task" ColCount="4">
+                    <dx:LayoutGroup Caption="Add Task" ColCount="3">
                         <Items>
-                            <dx:LayoutItem Caption="Description" RowSpan="4" CaptionSettings-Location="Top">
+                            <dx:LayoutItem Caption="Title">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
-                                         <dx:ASPxHtmlEditor runat="server" ID="txtMemo" Width="700px" Height="200px" ClientInstanceName="DescriptionClient">
-                                             <Settings AllowHtmlView="false" AllowPreview="false"/>
-                                             <SettingsValidation>
-                                                 <RequiredField IsRequired="true" />
-                                             </SettingsValidation>
-                                         </dx:ASPxHtmlEditor>
-                                        <%--<dx:ASPxMemo runat="server" ID="txtMemo" Width="600px" Height="100px">
-                                            <ValidationSettings ErrorDisplayMode="None">
-                                                <RequiredField IsRequired="True" />
-                                            </ValidationSettings>
-                                        </dx:ASPxMemo>--%>
+                                        <dx:ASPxTextBox runat="server" ID="txtTitle"></dx:ASPxTextBox>
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+                            <dx:LayoutItem Caption="Description" RowSpan="6">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer>
+                                        <dx:ASPxHtmlEditor runat="server" ID="txtMemo" Width="700px" Height="200px" ClientInstanceName="DescriptionClient">
+                                            <Settings AllowHtmlView="false" AllowPreview="false" />
+                                            <SettingsValidation>
+                                                <RequiredField IsRequired="true" />
+                                            </SettingsValidation>
+                                        </dx:ASPxHtmlEditor>
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                                 <CaptionSettings Location="Top"></CaptionSettings>
                             </dx:LayoutItem>
-                            <dx:LayoutItem Caption="By:">
+                             <dx:LayoutItem Caption=" " RowSpan="6" CaptionSettings-Location="Top">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
-                                        <dx:ASPxLabel runat="server" ID="lblLoginUser"></dx:ASPxLabel>
-                                        <dx:ASPxComboBox runat="server" ID="cbUsers" Visible="false">
-                                            <Items>
-                                                <dx:ListEditItem Text="Ron" Value="Ron" Selected="true" />
-                                                <dx:ListEditItem Text="George" Value="George" />
-                                                <dx:ListEditItem Text="Sujie" Value="Sujie" />
-                                                <dx:ListEditItem Text="Steven" Value="Steven" />
-                                                <dx:ListEditItem Text="Chris" Value="Chris" />
-                                            </Items>
-                                            <ValidationSettings ErrorDisplayMode="None">
-                                                <RequiredField IsRequired="True" />
-                                            </ValidationSettings>
-                                        </dx:ASPxComboBox>
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-                            <dx:LayoutItem Caption="Assign to:">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer>
-                                        <dx:ASPxComboBox runat="server" ID="cbAssign">
-                                            <Items>
-                                                <dx:ListEditItem Text="Ron" Value="Ron" />
-                                                <dx:ListEditItem Text="George" Value="George" />
-                                                <dx:ListEditItem Text="Sujie" Value="Sujie" />
-                                                <dx:ListEditItem Text="Steven" Value="Steven" />
-                                                <dx:ListEditItem Text="Chris" Value="Chris" />
-                                            </Items>
-                                            <ValidationSettings ErrorDisplayMode="None">
-                                                <RequiredField IsRequired="True" />
-                                            </ValidationSettings>
-                                        </dx:ASPxComboBox>
-                                    </dx:LayoutItemNestedControlContainer>
-                                </LayoutItemNestedControlCollection>
-                            </dx:LayoutItem>
-                            <dx:LayoutItem  Caption=" " RowSpan="4" CaptionSettings-Location="Top">
-                                <LayoutItemNestedControlCollection>
-                                    <dx:LayoutItemNestedControlContainer>
-
                                         <table style="width: 100px;">
                                             <tr>
                                                 <td>priority 1:
@@ -213,10 +177,31 @@
                                                 </td>
                                             </tr>
                                         </table>
-
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
+                            
+                            <dx:LayoutItem Caption="Assign to:">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer>
+                                        <dx:ASPxComboBox runat="server" ID="cbAssign">
+                                            <Items>
+                                                <dx:ListEditItem Text="Ron" Value="Ron" />
+                                                <dx:ListEditItem Text="George" Value="George" />
+                                                <dx:ListEditItem Text="Sujie" Value="Sujie" />
+                                                <dx:ListEditItem Text="Steven" Value="Steven" />
+                                                <dx:ListEditItem Text="Chris" Value="Chris" />
+                                            </Items>
+                                            <ValidationSettings ErrorDisplayMode="None">
+                                                <RequiredField IsRequired="True" />
+                                            </ValidationSettings>
+                                        </dx:ASPxComboBox>
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+                           
+
+
                             <dx:LayoutItem Caption="Category:">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
@@ -236,13 +221,30 @@
                             <dx:LayoutItem Caption="Days need:">
                                 <LayoutItemNestedControlCollection>
                                     <dx:LayoutItemNestedControlContainer>
-
                                         <dx:ASPxComboBox runat="server" ID="cbDateNeed">
                                             <ValidationSettings ErrorDisplayMode="None">
                                                 <RequiredField IsRequired="True" />
                                             </ValidationSettings>
                                         </dx:ASPxComboBox>
-
+                                    </dx:LayoutItemNestedControlContainer>
+                                </LayoutItemNestedControlCollection>
+                            </dx:LayoutItem>
+                            <dx:LayoutItem Caption="By:">
+                                <LayoutItemNestedControlCollection>
+                                    <dx:LayoutItemNestedControlContainer>
+                                        <dx:ASPxLabel runat="server" ID="lblLoginUser"></dx:ASPxLabel>
+                                        <dx:ASPxComboBox runat="server" ID="cbUsers" Visible="false">
+                                            <Items>
+                                                <dx:ListEditItem Text="Ron" Value="Ron" Selected="true" />
+                                                <dx:ListEditItem Text="George" Value="George" />
+                                                <dx:ListEditItem Text="Sujie" Value="Sujie" />
+                                                <dx:ListEditItem Text="Steven" Value="Steven" />
+                                                <dx:ListEditItem Text="Chris" Value="Chris" />
+                                            </Items>
+                                            <ValidationSettings ErrorDisplayMode="None">
+                                                <RequiredField IsRequired="True" />
+                                            </ValidationSettings>
+                                        </dx:ASPxComboBox>
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
@@ -257,173 +259,231 @@
                                                   DescriptionClient.SetHtml('');
 	}" />
                                           </dx:ASPxButton>
+                                        &nbsp;
+                                
                                     </dx:LayoutItemNestedControlContainer>
                                 </LayoutItemNestedControlCollection>
                             </dx:LayoutItem>
-
-
                         </Items>
                     </dx:LayoutGroup>
                 </Items>
             </dx:ASPxFormLayout>
-            <dx:ASPxGridView runat="server" ID="gridTask" Width="1100" KeyFieldName="ListId" ClientInstanceName="gridTaskClient" Paddings-Padding="5px" Settings-ShowFilterRow="true" SettingsBehavior-FilterRowMode="Auto">
-                <Columns>
-                    <dx:GridViewDataColumn FieldName="ListId" Caption="#" Width="50px">
-                    </dx:GridViewDataColumn>
-                    <dx:GridViewDataDateColumn FieldName="CreateDate" Width="110px" PropertiesDateEdit-DisplayFormatString="g">
-                        <PropertiesDateEdit DisplayFormatString="g"></PropertiesDateEdit>
-                        <FilterTemplate>
-                        </FilterTemplate>
-                    </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataTextColumn FieldName="Description" Width="400px">
-                        <FilterTemplate>
-                        </FilterTemplate>
-                       <DataItemTemplate>
-                           <div>
-                               <%# Eval("Description") %>
-                           </div>
-                       </DataItemTemplate>
 
-                    </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="CreateBy" Width="80px">
-                        <FilterTemplate>
-                        </FilterTemplate>
-                    </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="Owner" Caption="Assign To" Width="80px">
-                        <FilterTemplate>
-                            <dx:ASPxComboBox runat="server" ID="cbOwner" Width="100%">
-                                <Items>
-                                    <dx:ListEditItem Text="All" Value="" />
-                                    <dx:ListEditItem Text="Ron" Value="Ron" />
-                                    <dx:ListEditItem Text="George" Value="George" />
-                                    <dx:ListEditItem Text="Sujie" Value="Sujie" />
-                                    <dx:ListEditItem Text="Steven" Value="Steven" />
-                                    <dx:ListEditItem Text="Chris" Value="Chris" />
-                                </Items>
-                                <ClientSideEvents SelectedIndexChanged="FilterOwnerLogs" />
-                            </dx:ASPxComboBox>
-                        </FilterTemplate>
-                        <DataItemTemplate>
-                            <dx:ASPxComboBox runat="server" ID="cbOwner" Visible="false" Width="100%">
-                                <Items>
-                                    <dx:ListEditItem Text="Ron" Value="Ron" />
-                                    <dx:ListEditItem Text="George" Value="George" />
-                                    <dx:ListEditItem Text="Sujie" Value="Sujie" />
-                                    <dx:ListEditItem Text="Steven" Value="Steven" />
-                                    <dx:ListEditItem Text="Chris" Value="Chris" />
-                                </Items>
-                                <ValidationSettings ErrorDisplayMode="None">
-                                    <RequiredField IsRequired="True" />
-                                </ValidationSettings>
-                            </dx:ASPxComboBox>
-                            <dx:ASPxLabel ID="lblOwner" runat="server" Text='<%#String.Format("{0}", Eval("Owner"))%>' Visible='<%# Eval("Status") = TaskStatus.Completed%>'></dx:ASPxLabel>
-                        </DataItemTemplate>
-                    </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataDateColumn FieldName="DateNeed" Caption="Day Need" Width="90px">
-                        <FilterTemplate>
-                        </FilterTemplate>
-                        <DataItemTemplate>
-                            <dx:ASPxComboBox runat="server" ID="cbDateNeed" Width="70px" Visible='<%# Eval("Status") = TaskStatus.NewTask%>'>
-                                <Items>
-                                    <dx:ListEditItem Text="" Value="" />
-                                    <dx:ListEditItem Text="1" Value="1" />
-                                    <dx:ListEditItem Text="2" Value="2" />
-                                    <dx:ListEditItem Text="3" Value="3" />
-                                    <dx:ListEditItem Text="4" Value="4" />
-                                    <dx:ListEditItem Text="5" Value="5" />
-                                    <dx:ListEditItem Text="6" Value="6" />
-                                    <dx:ListEditItem Text="7" Value="7" />
-                                    <dx:ListEditItem Text="8" Value="8" />
-                                    <dx:ListEditItem Text="9" Value="9" />
-                                </Items>
-                            </dx:ASPxComboBox>
-                            <dx:ASPxLabel runat="server" Text='<%# Eval("DateNeed") %>' Visible='<%# Eval("Status") <> TaskStatus.NewTask%>'></dx:ASPxLabel>
-                        </DataItemTemplate>
-                    </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataDateColumn FieldName="DueDate" Caption="Due Date" PropertiesDateEdit-DisplayFormatString="d" Width="100px">
-                        <DataItemTemplate>
-                            <%--<dx:ASPxDateEdit runat="server" ID="dateDue" Date='<%# Bind("DueDate")%>'  Width="110px">
+            <dx:ASPxPageControl runat="server">
+                <TabPages>
+                    <dx:TabPage Name="page1" Text="Tasks">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <dx:ASPxGridView runat="server" ID="gridTask" Width="1000" KeyFieldName="ListId" ClientInstanceName="gridTaskClient" Paddings-Padding="5px" Settings-ShowFilterRow="true" SettingsBehavior-FilterRowMode="Auto">
+                                    <Columns>
+                                        <dx:GridViewDataColumn FieldName="ListId" Caption="#" Width="50px">
+                                        </dx:GridViewDataColumn>
+                                        <dx:GridViewDataDateColumn FieldName="CreateDate" Width="110px" PropertiesDateEdit-DisplayFormatString="g">
+                                            <PropertiesDateEdit DisplayFormatString="g"></PropertiesDateEdit>
+                                            <FilterTemplate>
+                                            </FilterTemplate>
+                                        </dx:GridViewDataDateColumn>
+                                        <dx:GridViewDataTextColumn FieldName="Description" Width="400px">
+                                            <FilterTemplate>
+                                            </FilterTemplate>
+                                            <DataItemTemplate>
+                                                <%# String.Format("<h4>{0}</h4>", Eval("Title"))%>
+                                                <div>
+                                                    <%# Eval("Description") %>
+                                                </div>
+                                            </DataItemTemplate>
+                                        </dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="CreateBy" Width="80px">
+                                            <FilterTemplate>
+                                            </FilterTemplate>
+                                        </dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="Owner" Caption="Assign To" Width="80px">
+                                            <FilterTemplate>
+                                                <dx:ASPxComboBox runat="server" ID="cbOwner" Width="100%">
+                                                    <Items>
+                                                        <dx:ListEditItem Text="All" Value="" />
+                                                        <dx:ListEditItem Text="Ron" Value="Ron" />
+                                                        <dx:ListEditItem Text="George" Value="George" />
+                                                        <dx:ListEditItem Text="Sujie" Value="Sujie" />
+                                                        <dx:ListEditItem Text="Steven" Value="Steven" />
+                                                        <dx:ListEditItem Text="Chris" Value="Chris" />
+                                                    </Items>
+                                                    <ClientSideEvents SelectedIndexChanged="FilterOwnerLogs" />
+                                                </dx:ASPxComboBox>
+                                            </FilterTemplate>
+                                            <DataItemTemplate>
+                                                <dx:ASPxComboBox runat="server" ID="cbOwner" Visible="false" Width="100%">
+                                                    <Items>
+                                                        <dx:ListEditItem Text="Ron" Value="Ron" />
+                                                        <dx:ListEditItem Text="George" Value="George" />
+                                                        <dx:ListEditItem Text="Sujie" Value="Sujie" />
+                                                        <dx:ListEditItem Text="Steven" Value="Steven" />
+                                                        <dx:ListEditItem Text="Chris" Value="Chris" />
+                                                    </Items>
+                                                    <ValidationSettings ErrorDisplayMode="None">
+                                                        <RequiredField IsRequired="True" />
+                                                    </ValidationSettings>
+                                                </dx:ASPxComboBox>
+                                                <dx:ASPxLabel ID="lblOwner" runat="server" Text='<%#String.Format("{0}", Eval("Owner"))%>' Visible='<%# Eval("Status") = TaskStatus.Completed%>'></dx:ASPxLabel>
+                                            </DataItemTemplate>
+                                        </dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataDateColumn FieldName="DateNeed" Caption="Day Need" Width="90px">
+                                            <FilterTemplate>
+                                            </FilterTemplate>
+                                            <DataItemTemplate>
+                                                <dx:ASPxComboBox runat="server" ID="cbDateNeed" Width="70px" Visible='<%# Eval("Status") = TaskStatus.NewTask%>'>
+                                                    <Items>
+                                                        <dx:ListEditItem Text="" Value="" />
+                                                        <dx:ListEditItem Text="1" Value="1" />
+                                                        <dx:ListEditItem Text="2" Value="2" />
+                                                        <dx:ListEditItem Text="3" Value="3" />
+                                                        <dx:ListEditItem Text="4" Value="4" />
+                                                        <dx:ListEditItem Text="5" Value="5" />
+                                                        <dx:ListEditItem Text="6" Value="6" />
+                                                        <dx:ListEditItem Text="7" Value="7" />
+                                                        <dx:ListEditItem Text="8" Value="8" />
+                                                        <dx:ListEditItem Text="9" Value="9" />
+                                                    </Items>
+                                                </dx:ASPxComboBox>
+                                                <dx:ASPxLabel runat="server" Text='<%# Eval("DateNeed") %>' Visible='<%# Eval("Status") <> TaskStatus.NewTask%>'></dx:ASPxLabel>
+                                            </DataItemTemplate>
+                                        </dx:GridViewDataDateColumn>
+                                        <dx:GridViewDataDateColumn FieldName="DueDate" Caption="Due Date" PropertiesDateEdit-DisplayFormatString="d" Width="100px">
+                                            <DataItemTemplate>
+                                                <%--<dx:ASPxDateEdit runat="server" ID="dateDue" Date='<%# Bind("DueDate")%>'  Width="110px">
                                 <ValidationSettings ErrorDisplayMode="None">
                                     <RequiredField IsRequired="True" />
                                 </ValidationSettings>
                             </dx:ASPxDateEdit>--%>
-                            <dx:ASPxLabel runat="server" ID="dateDue" Text='<%# String.Format("{0:d}", Eval("DueDate"))%>'></dx:ASPxLabel>
-                        </DataItemTemplate>
-                    </dx:GridViewDataDateColumn>
-                    <dx:GridViewDataColumn FieldName="Priority" Caption="Priority" Width="60px">
-                        <FilterTemplate>
-                        </FilterTemplate>
-                        <DataItemTemplate>
-                            <dx:ASPxComboBox runat="server" ID="cbPriority" Width="100%" Visible='<%# Eval("Status") = TaskStatus.NewTask %>'>
-                                <Items>
-                                    <dx:ListEditItem Text="" Value="" />
-                                    <dx:ListEditItem Text="1" Value="1" />
-                                    <dx:ListEditItem Text="2" Value="2" />
-                                    <dx:ListEditItem Text="3" Value="3" />
-                                    <dx:ListEditItem Text="4" Value="4" />
-                                    <dx:ListEditItem Text="5" Value="5" />
-                                </Items>
-                                <ClientSideEvents SelectedIndexChanged="PriorityChanges" />
-                            </dx:ASPxComboBox>
-                        </DataItemTemplate>
-                    </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn FieldName="Category" Caption="Category" Width="80px">
-                        <FilterTemplate>
-                            <dx:ASPxComboBox runat="server" ID="cbFilter" Width="100%">
-                                <Items>
-                                    <dx:ListEditItem Text="All" Value="" />
-                                    <dx:ListEditItem Text="Functional" Value="Functional" />
-                                    <dx:ListEditItem Text="Improvement" Value="Improvement" />
-                                </Items>
-                                <ClientSideEvents SelectedIndexChanged="FilterCategoryLogs" />
-                            </dx:ASPxComboBox>
-                        </FilterTemplate>
-                    </dx:GridViewDataColumn>
-                    <dx:GridViewDataTextColumn FieldName="Comments" Caption="Comments" Width="300px">
-                        <FilterTemplate></FilterTemplate>
-                        <DataItemTemplate>
-                            <dx:ASPxMemo ID="txtComments" Width="100%" ClientInstanceName="txtCommentsClient" runat="server" Text='<%# Eval("Comments") %>' Height="13px" Border-BorderColor="Transparent" BackColor="Transparent">
-                                <ClientSideEvents KeyDown="OnLogMemoKeyDown" Init="function(s,e){
+                                                <dx:ASPxLabel runat="server" ID="dateDue" Text='<%# String.Format("{0:d}", Eval("DueDate"))%>'></dx:ASPxLabel>
+                                            </DataItemTemplate>
+                                        </dx:GridViewDataDateColumn>
+                                        <dx:GridViewDataColumn FieldName="Priority" Caption="Priority" Width="60px">
+                                            <FilterTemplate>
+                                            </FilterTemplate>
+                                            <DataItemTemplate>
+                                                <dx:ASPxComboBox runat="server" ID="cbPriority" Width="100%" Visible='<%# Eval("Status") = TaskStatus.NewTask %>'>
+                                                    <Items>
+                                                        <dx:ListEditItem Text="" Value="" />
+                                                        <dx:ListEditItem Text="1" Value="1" />
+                                                        <dx:ListEditItem Text="2" Value="2" />
+                                                        <dx:ListEditItem Text="3" Value="3" />
+                                                        <dx:ListEditItem Text="4" Value="4" />
+                                                        <dx:ListEditItem Text="5" Value="5" />
+                                                    </Items>
+                                                    <ClientSideEvents SelectedIndexChanged="PriorityChanges" />
+                                                </dx:ASPxComboBox>
+                                            </DataItemTemplate>
+                                        </dx:GridViewDataColumn>
+                                        <dx:GridViewDataColumn FieldName="Category" Caption="Category" Width="80px">
+                                            <FilterTemplate>
+                                                <dx:ASPxComboBox runat="server" ID="cbFilter" Width="100%">
+                                                    <Items>
+                                                        <dx:ListEditItem Text="All" Value="" />
+                                                        <dx:ListEditItem Text="Functional" Value="Functional" />
+                                                        <dx:ListEditItem Text="Improvement" Value="Improvement" />
+                                                    </Items>
+                                                    <ClientSideEvents SelectedIndexChanged="FilterCategoryLogs" />
+                                                </dx:ASPxComboBox>
+                                            </FilterTemplate>
+                                        </dx:GridViewDataColumn>
+                                        <dx:GridViewDataTextColumn FieldName="Comments" Caption="Comments" Width="275px">
+                                            <FilterTemplate></FilterTemplate>
+                                            <DataItemTemplate>
+                                                <dx:ASPxMemo ID="txtComments" Width="100%" ClientInstanceName="txtCommentsClient" runat="server" Text='<%# Eval("Comments") %>' Height="13px" Border-BorderColor="Transparent" BackColor="Transparent">
+                                                    <ClientSideEvents KeyDown="OnLogMemoKeyDown" Init="function(s,e){
                                                                                         s.GetInputElement().style.overflowY='hidden';
                                                                                         OnLogMemoKeyDown(s,e);
                                                                                     }"
-                                    GotFocus="function(s,e){ShowBorder(s);}" LostFocus="function(s,e){ShowBorder(s);}" />
-
-                            </dx:ASPxMemo>
-                        </DataItemTemplate>
-                    </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataColumn FieldName="Status" Caption="Completed" Width="80px">
-                        <DataItemTemplate>
-                            <dx:ASPxCheckBox ID="chkCompleted" runat="server" Visible='<%# Eval("Status") = TaskStatus.NewTask %>'></dx:ASPxCheckBox>
-                            <dx:ASPxLabel ID="lblComplete" runat="server" Text='<%#String.Format("{0:d}", Eval("UpdateDate"))%>' Visible='<%# Eval("Status") = TaskStatus.Completed%>'></dx:ASPxLabel>
-                        </DataItemTemplate>
-                        <FilterTemplate>
-                            <dx:ASPxComboBox runat="server" ID="cbFilter" Width="100%">
-                                <Items>
-                                    <dx:ListEditItem Text="All" Value="" />
-                                    <dx:ListEditItem Text="Completed" Value="1" />
-                                    <dx:ListEditItem Text="Non-Completed" Value="0" />
-                                </Items>
-                                <ClientSideEvents SelectedIndexChanged="FilterLogs" />
-                            </dx:ASPxComboBox>
-                        </FilterTemplate>
-                    </dx:GridViewDataColumn>
-                    <dx:GridViewDataColumn Caption="Days" Width="50px">
-                        <DataItemTemplate>
-                            <dx:ASPxLabel ID="lblHours" runat="server" Text='<%# CalculateWorkingDays(Eval("UpdateDate"), Eval("CreateDate"))%>' Visible='<%# Eval("Status") = TaskStatus.Completed%>'></dx:ASPxLabel>
-                        </DataItemTemplate>
-                    </dx:GridViewDataColumn>
-                </Columns>
-                <Styles>
-                    <AlternatingRow BackColor="#f9f9f9"></AlternatingRow>
-                    <Row VerticalAlign="Top" CssClass="margin_top">
-                        
-                    </Row>
-                </Styles>
-                
-                <Settings VerticalScrollableHeight="600" />
-                <SettingsPager Mode="EndlessPaging" PageSize="30"></SettingsPager>
-            </dx:ASPxGridView>
+                                                        GotFocus="function(s,e){ShowBorder(s);}" LostFocus="function(s,e){ShowBorder(s);}" />
+                                                </dx:ASPxMemo>
+                                            </DataItemTemplate>
+                                        </dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataColumn FieldName="Status" Caption="Completed" Width="80px">
+                                            <DataItemTemplate>
+                                                <dx:ASPxCheckBox ID="chkCompleted" runat="server" Visible='<%# Eval("Status") = TaskStatus.NewTask %>'></dx:ASPxCheckBox>
+                                                <dx:ASPxLabel ID="lblComplete" runat="server" Text='<%#String.Format("{0:d}", Eval("UpdateDate"))%>' Visible='<%# Eval("Status") = TaskStatus.Completed%>'></dx:ASPxLabel>
+                                            </DataItemTemplate>
+                                            <FilterTemplate>
+                                                <dx:ASPxComboBox runat="server" ID="cbFilter" Width="100%">
+                                                    <Items>
+                                                        <dx:ListEditItem Text="All" Value="" />
+                                                        <dx:ListEditItem Text="Completed" Value="1" />
+                                                        <dx:ListEditItem Text="Non-Completed" Value="0" />
+                                                    </Items>
+                                                    <ClientSideEvents SelectedIndexChanged="FilterLogs" />
+                                                </dx:ASPxComboBox>
+                                            </FilterTemplate>
+                                        </dx:GridViewDataColumn>
+                                        <dx:GridViewDataColumn Caption="Days" Width="50px">
+                                            <DataItemTemplate>
+                                                <dx:ASPxLabel ID="lblHours" runat="server" Text='<%# CalculateWorkingDays(Eval("UpdateDate"), Eval("CreateDate"))%>' Visible='<%# Eval("Status") = TaskStatus.Completed%>'></dx:ASPxLabel>
+                                            </DataItemTemplate>
+                                        </dx:GridViewDataColumn>
+                                    </Columns>
+                                    <Styles>
+                                        <AlternatingRow BackColor="#f9f9f9"></AlternatingRow>
+                                        <Row VerticalAlign="Top" CssClass="margin_top">
+                                        </Row>
+                                    </Styles>
+                                    <Settings VerticalScrollableHeight="600" />
+                                    <SettingsPager Mode="EndlessPaging" PageSize="30"></SettingsPager>
+                                </dx:ASPxGridView>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:TabPage>
+                    <dx:TabPage Text="Gantt Chart">
+                        <ContentCollection>
+                            <dx:ContentControl>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td style="vertical-align: top; padding-top: 10px; width: 110px;">
+                                            <ul style="list-style: none; padding-left: 1px; line-height: 30px">
+                                                <li>User:
+                                                        <dx:ASPxComboBox runat="server" ID="cbChartUser">
+                                                            <Items>
+                                                                <dx:ListEditItem Text="Ron" Value="Ron" />
+                                                                <dx:ListEditItem Text="George" Value="George" />
+                                                                <dx:ListEditItem Text="Sujie" Value="Sujie" />
+                                                                <dx:ListEditItem Text="Steven" Value="Steven" />
+                                                                <dx:ListEditItem Text="Chris" Value="Chris" />
+                                                            </Items>
+                                                        </dx:ASPxComboBox>
+                                                </li>
+                                                <li>
+                                                    <dx:ASPxButton Text="Gantt Chart" runat="server" ID="btnViewChart" OnClick="btnViewChart_Click" CausesValidation="false"></dx:ASPxButton>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td style="background-color: #efefef;">
+                                            <dx:WebChartControl runat="server" Height="400px" Width="800px" ID="ganttChart">
+                                                <legend alignmenthorizontal="Right" direction="LeftToRight">
+                                                    <margins bottom="10" left="10" right="10" top="10" />
+                                                </legend>
+                                                <diagramserializable>
+            <dx:GanttDiagram>                
+                <AxisX Title-Text="Tasks" VisibleInPanesSerializable="-1"> 
+                    <GridLines Visible="True"></GridLines>
+                </AxisX>
+                <AxisY Title-Text="Date" VisibleInPanesSerializable="-1" MinorCount="4" Interlaced="True">
+                    <DateTimeScaleOptions GridAlignment="Month" AutoGrid="False" GridSpacing="0.5"/>                    
+                    <WholeRange Auto="False" MinValueSerializable="12/10/2014 00:00:00.000" MaxValueSerializable="2/1/2015 00:00:00.000" AutoSideMargins="False" SideMarginsValue="0"></WholeRange>
+                    <GridLines MinorVisible="True"></GridLines>
+                    <Label TextPattern="{V:m}">
+                    </Label>
+                </AxisY>
+            </dx:GanttDiagram>
+        </diagramserializable>
+                                                <borderoptions visibility="False" />
+                                            </dx:WebChartControl>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </dx:ContentControl>
+                        </ContentCollection>
+                    </dx:TabPage>
+                </TabPages>
+            </dx:ASPxPageControl>
             <dx:ASPxCallback runat="server" ID="callbackSaveComments" ClientInstanceName="callbackSaveComments" OnCallback="callbackSaveComments_Callback"></dx:ASPxCallback>
             <dx:ASPxCallback runat="server" ID="callbackChangeOwner" ClientInstanceName="callbackChangeOwner" OnCallback="callbackChangeOwner_Callback">
                 <ClientSideEvents EndCallback="function(s,e){gridTaskClient.Refresh()}" />
