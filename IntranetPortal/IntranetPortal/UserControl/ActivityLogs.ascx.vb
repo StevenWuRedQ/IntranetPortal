@@ -142,6 +142,13 @@ Public Class ActivityLogs
 
                     LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is approved by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Approved)
 
+
+                    If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                        Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+                        wli.ProcessInstance.DataFields("Result") = "Approve"
+                        wli.Finish()
+                    End If
+
                     'Add Notify Message
                     Dim title = "New lead is Approved"
                     Dim msg = String.Format("New Lead (BBLE: {0}) is Approved by " & Page.User.Identity.Name, lead.BBLE)
@@ -167,6 +174,13 @@ Public Class ActivityLogs
 
                     LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is declined by " & Page.User.Identity.Name, log.BBLE, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Declined)
 
+                    'Connect to Workflow Server
+                    If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                        Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+                        wli.ProcessInstance.DataFields("Result") = "Decline"
+                        wli.Finish()
+                    End If
+
                     'Add Notify Message
                     Dim title = "Your lead is declined"
                     Dim msg = String.Format("New Lead (BBLE: {0}) is declined by " & Page.User.Identity.Name, log.BBLE)
@@ -177,7 +191,6 @@ Public Class ActivityLogs
                     Context.LeadsActivityLogs.RemoveRange(logs)
                     Context.Leads.Remove(lead)
                     Context.SaveChanges()
-
                 End If
             End Using
 
@@ -190,6 +203,13 @@ Public Class ActivityLogs
 
             UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.Accepted)
             LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is accepted by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+
+            'Connect to Workflow Server
+            If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+                wli.ProcessInstance.DataFields("Result") = "Approve"
+                wli.Finish()
+            End If
 
             'Add Notify Message
             Dim userApoint = UserAppointment.GetAppointmentBylogID(logId)
@@ -211,6 +231,13 @@ Public Class ActivityLogs
             UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.Declined)
             LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Decline by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
 
+            'Connect to Workflow Server
+            If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+                wli.ProcessInstance.DataFields("Result") = "Decline"
+                wli.Finish()
+            End If
+
             'Add Notify Message
             Dim userApoint = UserAppointment.GetAppointmentBylogID(logId)
             If userApoint IsNot Nothing Then
@@ -228,6 +255,13 @@ Public Class ActivityLogs
 
             UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.ReScheduled)
             LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Rescheduled by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+
+            'Connect to Workflow Server
+            If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+                wli.ProcessInstance.DataFields("Result") = "Reschedule"
+                wli.Finish()
+            End If
 
             'Add Notify Message
             Dim userApoint = UserAppointment.GetAppointmentBylogID(logId)

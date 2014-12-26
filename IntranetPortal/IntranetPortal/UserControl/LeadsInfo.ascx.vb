@@ -319,12 +319,16 @@ Public Class LeadsInfo1
                     If cbMgr.Value <> Page.User.Identity.Name Then
                         Dim title = String.Format("A New Appointment has been created by {0} regarding {1} for {2}", Page.User.Identity.Name, cbScheduleType.Text, ld.LeadsName)
                         UserMessage.AddNewMessage(cbMgr.Value, title, comments, hfBBLE.Value)
+
+                        WorkflowService.StartNewAppointmentProcess(ld.LeadsName, ld.BBLE, cbMgr.Value)
                     End If
                 End If
 
                 If Not Page.User.Identity.Name = ld.EmployeeName Then
                     Dim title = String.Format("A New Appointment has been created by {0} regarding {1} for {2}", Page.User.Identity.Name, cbScheduleType.Text, ld.LeadsName)
                     UserMessage.AddNewMessage(ld.EmployeeName, title, comments, hfBBLE.Value)
+
+                    WorkflowService.StartNewAppointmentProcess(ld.LeadsName, ld.BBLE, ld.EmployeeName)
                 End If
 
                 'Update status to Priority

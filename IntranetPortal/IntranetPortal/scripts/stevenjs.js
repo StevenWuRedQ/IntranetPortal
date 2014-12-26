@@ -368,15 +368,14 @@ function ss_field_data(elem, value) {
             }
 
             if (elem.hasClass("ss_date")) {
+                debugger;
                 if (value != '') {
                     var t_date = new Date(value);
 
                     if (t_date != null) {
                         value = fromatDateString(t_date)
                     }
-
                 }
-
             }
             if (elem.hasClass("ss_ssn")) {
                 value = fromatSSN(value);

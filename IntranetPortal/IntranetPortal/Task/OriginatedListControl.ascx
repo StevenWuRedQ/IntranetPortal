@@ -24,7 +24,7 @@
         </div>
     </div>
     <div style="height: 768px; padding: 0px 10px;" id="leads_list_left">
-        <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true"
+        <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" OnDataBinding="gridProcess_DataBinding"
             ID="gridProcess" Border-BorderStyle="None" ClientInstanceName="gridProcess" Width="100%" AutoGenerateColumns="False" KeyFieldName="Id">
             <Columns>                
                 <dx:GridViewDataTextColumn FieldName="DisplayName" Settings-AllowHeaderFilter="False" VisibleIndex="1">

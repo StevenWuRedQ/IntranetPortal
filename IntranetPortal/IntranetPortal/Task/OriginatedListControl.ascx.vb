@@ -7,7 +7,9 @@ Public Class OriginatedListControl
     Public Property HeaderText As String = "Originated"
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        BindList()
+        If Not Page.IsPostBack Then
+            BindList()
+        End If
     End Sub
 
     Private Sub BindList()
@@ -16,6 +18,12 @@ Public Class OriginatedListControl
 
         If Not IsPostBack Then
             gridProcess.GroupBy(gridProcess.Columns("ProcessName"))
+        End If
+    End Sub
+
+    Protected Sub gridProcess_DataBinding(sender As Object, e As EventArgs)
+        If gridProcess.DataSource Is Nothing Then
+            gridProcess.DataSource = GetDataSource()
         End If
     End Sub
 
@@ -32,7 +40,7 @@ Public Class OriginatedListControl
             Return ProcessViewLinks(procName)
         End If
 
-        Return ""
+        Return "/ViewLeadsInfo.aspx?ProcInstId="
     End Function
 
     Private _processViewLinks As Dictionary(Of String, String)
@@ -54,4 +62,5 @@ Public Class OriginatedListControl
         Completed
     End Enum
 
+    
 End Class

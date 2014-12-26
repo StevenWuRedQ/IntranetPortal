@@ -127,7 +127,6 @@ Public Class LeadsList
 
         Using Context As New Entities
             Dim subOridates = Employee.GetDeptUsers(OfficeName)
-
             Dim leads As Object
 
             If category = LeadStatus.InProcess Then
@@ -414,6 +413,7 @@ Public Class LeadsList
                 Context.Leads.Add(ld)
                 Context.SaveChanges()
             Else
+
                 ld.Status = LeadStatus.MgrApproval
                 Context.Leads.Add(ld)
                 Context.SaveChanges()
@@ -424,6 +424,9 @@ Public Class LeadsList
 
                 'Add notify message
                 Dim mgr = Employee.GetReportToManger(Page.User.Identity.Name).Name
+
+                WorkflowService.StartNewLeadsRequest(ld.LeadsName, bble, mgr)
+
                 UserMessage.AddNewMessage(Page.User.Identity.Name, "New Lead", String.Format("The new lead {1} is waiting manager ({0}) approval.", mgr, bble), bble)
                 UserMessage.AddNewMessage(mgr, "New Lead Approval", commtents, bble)
             End If
