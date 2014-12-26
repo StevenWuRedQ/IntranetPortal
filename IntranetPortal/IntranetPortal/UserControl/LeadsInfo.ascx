@@ -17,9 +17,9 @@
     var temTelLink = null;
     var temCommentSpan = null;
     function onSavePhoneComment() {
-        
-        var comment = $("#phone_comment").val();        
-        var temCommentSpan = $(temTelLink).children("span:first")        
+
+        var comment = $("#phone_comment").val();
+        var temCommentSpan = $(temTelLink).children("span:first")
         if (temCommentSpan != null) {
             //$(".phone_comment").text("-" + comment);
             temCommentSpan.text("-" + comment);
@@ -34,9 +34,9 @@
         tmpPhoneNo = phoneNo;
         temTelLink = tellink;
         ASPxPopupMenuPhone.ShowAtElement(tellink);
-     
+
     }
-   
+
     function OnPhoneNumberClick(s, e) {
         if (tmpPhoneNo != null) {
             if (e.item.index == 0) {
@@ -68,7 +68,7 @@
                 $("#phone_comment").val("")
                 $('#exampleModal').modal();
                 //PhoneCommentPopUpClient.Show();
-              
+
             }
         }
         e.item.SetChecked(false);
@@ -83,8 +83,8 @@
 
         for (var i = 0; i < list.length; i++) {
             var item = list[i];
-          
-            if (item.innerText.indexOf(value)==0) {
+
+            if (item.innerText.indexOf(value) == 0) {
                 item.setAttribute("style", style);
             }
         }
@@ -268,11 +268,15 @@
         aspxPopupAddPhoneNum.ShowAtElement(addButton);
     }
 
+    function AddBestEmail(bble, ownerName, ulClient, addButton) {
+        currOwner = ownerName;
+        aspxPopupAddEmail.ShowAtElement(addButton);
+    }
     var isSave = false;
     function AddBestAddress(bble, ownerName, addButton) {
         isSave = false;
         currOwner = ownerName;
-        
+
         aspxPopupAddAddress.PerformCallback(addButton);
     }
 
@@ -281,6 +285,13 @@
         ownerInfoCallbackPanel.PerformCallback(phoneNo + "|" + currOwner);
         aspxPopupAddPhoneNum.Hide();
         txtPhoneNoClient.SetText("");
+    }
+
+    function SaveBestEmail(s, e) {
+        var email = txtEmailClient.GetText();
+        ownerInfoCallbackPanel.PerformCallback("SaveEmail|"+email + "|" + currOwner);
+        aspxPopupAddEmail.Hide();
+        txtEmailClient.SetText("");
     }
 
     function ShowLogPanel() {
@@ -405,11 +416,11 @@
                                                                     <td style="border-left: 1px solid #b1b2b7; width: 8px;">&nbsp;
                                                                     </td>
                                                                     <td style="vertical-align: top">
-                                                                       
+
                                                                         <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo3" />
-                                                                        <% If(not HomeOwnerInfo3.Visible) Then %>
-                                                                         <i class="fa  fa-plus-circle icon_btn color_blue tooltip-examples" title="Add home owner" style="font-size:32px"></i>
-                                                                        <% End If %>
+                                                                        <% If (Not HomeOwnerInfo3.Visible) Then%>
+                                                                        <i class="fa  fa-plus-circle icon_btn color_blue tooltip-examples" title="Add home owner" style="font-size: 32px"></i>
+                                                                        <% End If%>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -532,12 +543,12 @@
                                                         <td>
                                                             <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="false"></dx:ASPxCalendar>
                                                             <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" TimeSectionProperties-Visible="True" CssClass="edit_drop">
-                                                                                <TimeSectionProperties Visible="True"></TimeSectionProperties>
-                                                                                <ClientSideEvents DropDown="function(s,e){ 
+                                                                <TimeSectionProperties Visible="True"></TimeSectionProperties>
+                                                                <ClientSideEvents DropDown="function(s,e){ 
                                                                     var d = new Date('May 1 2014 12:00:00');                                                                    
                                                                     s.GetTimeEdit().SetValue(d);
                                                                     }" />
-                                                                            </dx:ASPxDateEdit>
+                                                            </dx:ASPxDateEdit>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -671,7 +682,7 @@
             </dx:ASPxSplitter>
 
 
-            <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddPhoneNum" Width="200px" Height="80px" ID="ASPxPopupControl2"
+            <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddPhoneNum" Width="320px" Height="80px" ID="ASPxPopupControl2"
                 HeaderText="Add Phone Number" ShowHeader="false"
                 runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
 
@@ -679,26 +690,54 @@
                     <dx:PopupControlContentControl>
                         <table>
                             <tr>
-                                <td>Phone No.:</td>
-                            </tr>
-                            <tr style="padding-top: 3px;">
                                 <td>
-                                    <dx:ASPxTextBox runat="server" ID="txtPhoneNo" ClientInstanceName="txtPhoneNoClient"></dx:ASPxTextBox>
+                                    <dx:ASPxTextBox runat="server" ID="txtPhoneNo" ClientInstanceName="txtPhoneNoClient" CssClass="edit_drop"></dx:ASPxTextBox>
                                 </td>
-                            </tr>
-                            <tr style="margin-top: 3px; line-height: 30px; margin-top: 10px">
                                 <td>
-                                    <div style="margin-top: 10px">
+                                    <div style="margin:0px 10px;padding-top: 13px;">
                                         <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button rand-button-blue">
                                             <ClientSideEvents Click="SaveBestPhoneNo" />
                                         </dx:ASPxButton>
                                         &nbsp;
-                                        <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false" CssClass="rand-button rand-button-gray">
-                                            <ClientSideEvents Click="function(s,e){aspxPopupAddPhoneNum.Hide();}" />
-                                        </dx:ASPxButton>
+                                       
                                     </div>
                                 </td>
+                                <td> <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                            <ClientSideEvents Click="function(s,e){aspxPopupAddPhoneNum.Hide();}" />
+                                        </dx:ASPxButton></td>
                             </tr>
+
+                            
+                        </table>
+                    </dx:PopupControlContentControl>
+                </ContentCollection>
+            </dx:ASPxPopupControl>
+            <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddEmail" Width="320px" Height="80px" ID="PopupAddEmail"
+                HeaderText="Add Phone Number" ShowHeader="false"
+                runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
+
+                <ContentCollection>
+                    <dx:PopupControlContentControl>
+                        <table>
+                            <tr>
+                                <td>
+                                    <dx:ASPxTextBox runat="server" ID="txtEmail" ClientInstanceName="txtEmailClient" CssClass="edit_drop"></dx:ASPxTextBox>
+                                </td>
+                                <td>
+                                    <div style="margin:0px 10px;padding-top: 13px;">
+                                        <dx:ASPxButton runat="server" ID="BtnAddEmail" Text="Add" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                            <ClientSideEvents Click="SaveBestEmail" />
+                                        </dx:ASPxButton>
+                                        &nbsp;
+                                       
+                                    </div>
+                                </td>
+                                <td> <dx:ASPxButton runat="server" ID="ASPxButton7" Text="Close" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                            <ClientSideEvents Click="function(s,e){aspxPopupAddEmail.Hide();}" />
+                                        </dx:ASPxButton></td>
+                            </tr>
+
+                            
                         </table>
                     </dx:PopupControlContentControl>
                 </ContentCollection>

@@ -124,6 +124,19 @@
           <Property Name="Source" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="120" />
         </EntityType>
+        <EntityType Name="HomeOwnerEmail">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="EmailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="OwnerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Source" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+        </EntityType>
         <EntityType Name="HomeOwnerPhone">
           <Key>
             <PropertyRef Name="PhoneID" />
@@ -551,6 +564,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FileAttachments" EntityType="Self.FileAttachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HomeOwnerAddress" EntityType="Self.HomeOwnerAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeOwnerEmail" EntityType="Self.HomeOwnerEmail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HomeOwnerPhone" EntityType="Self.HomeOwnerPhone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HomeOwners" EntityType="Self.HomeOwners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Leads" EntityType="Self.Leads" Schema="dbo" store:Type="Tables" />
@@ -646,6 +660,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="Teams" EntityType="IntranetPortalModel.Team" />
           <EntitySet Name="UserInTeams" EntityType="IntranetPortalModel.UserInTeam" />
           <EntitySet Name="LeadsTaxLiens" EntityType="IntranetPortalModel.LeadsTaxLien" />
+          <EntitySet Name="HomeOwnerEmails" EntityType="IntranetPortalModel.HomeOwnerEmail" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1250,6 +1265,19 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="HomeOwnerEmail">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="EmailId" Type="Int32" Nullable="false" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="OwnerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1814,6 +1842,20 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
                 <ScalarProperty Name="TaxLiensYear" ColumnName="TaxLiensYear" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="TaxLienId" ColumnName="TaxLienId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeOwnerEmails">
+            <EntityTypeMapping TypeName="IntranetPortalModel.HomeOwnerEmail">
+              <MappingFragment StoreEntitySet="HomeOwnerEmail">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -5,7 +5,7 @@ Imports System.Runtime.Serialization.Formatters.Binary
 
 Partial Public Class HomeOwner
     Private objLocateReport As DataAPI.TLOLocateReportOutput
-
+    Public Shared EMPTY_HOMEOWNER As String = "Please Edit Owner"
     Public Property TLOLocateReport As DataAPI.TLOLocateReportOutput
         Get
             If objLocateReport Is Nothing And LocateReport IsNot Nothing AndAlso LocateReport.Length > 0 Then
@@ -45,6 +45,14 @@ Partial Public Class HomeOwner
         End Get
     End Property
 
+    Public ReadOnly Property BestEmail As List(Of HomeOwnerEmail)
+        Get
+            Using context As New Entities
+                Dim list = context.HomeOwnerEmails.Where(Function(e) e.BBLE = BBLE And e.OwnerName = Name And e.Source = PhoneSource.UserAdded).ToList
+                Return list
+            End Using
+        End Get
+    End Property
     Public ReadOnly Property BestAddress As List(Of HomeOwnerAddress)
         Get
             Using context As New Entities

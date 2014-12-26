@@ -406,7 +406,12 @@ function fromatSSN(value) {
     return reslut;
 }
 function fromatDateString(date) {
-    return (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+    var dateString = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+    if (dateString.indexOf("NaN")>=0)
+    {
+        return "";
+    }
+    return dateString;
 }
 function is_radio(e) {
     return e.attr("type") == "radio";

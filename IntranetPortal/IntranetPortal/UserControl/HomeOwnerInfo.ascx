@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="HomeOwnerInfo.ascx.vb" Inherits="IntranetPortal.HomeOwnerInfo" %>
+<%@ Import Namespace="IntranetPortal" %>
 
 <style type="text/css">
     h4 {
@@ -112,14 +113,21 @@
     <%End If%>
 
     <!-- Email info -->
-    <% If TLOLocateReport.emailAddressesField IsNot Nothing AndAlso TLOLocateReport.emailAddressesField.Length > 0 Then%>
+
     <div class="form_head homeowner_section_margin">
-        <span>Best Emails </span>
+        <span>Best Emails </span>&nbsp;<i class="fa fa-plus-circle homeowner_plus_color" style="cursor: pointer" onclick="<%= String.Format("AddBestEmail('{0}','{1}','{2}', this)", BBLE, OwnerName, ulBestPhones.ClientID)%>"></i>
     </div>
     <div>
+        <% If Utility.isAny(BestEmail) or Utility.IsAny(TLOLocateReport.emailAddressesField) Then%>
         <div class="clearfix homeowner_info_label">
             <div>
-                <% For Each email In TLOLocateReport.emailAddressesField%>
+                <% Dim emails = BestEmail.Select(Function(e) e.Email).ToList%>
+                <%If (Utility.IsAny(emails) And Utility.IsAny(TLOLocateReport.emailAddressesField)) Then%>
+                <% emails.AddRange(TLOLocateReport.emailAddressesField) %>
+                <%End If %>
+
+               
+                <% For Each email In emails %>
                 <% If Not String.IsNullOrEmpty(email) Then%>
                 <div class="color_gray clearfix">
                     <i class="fa fa-envelope homeowner_info_icon"></i>
@@ -133,9 +141,10 @@
                 <% Next%>
             </div>
         </div>
+
+        <%End If%>
     </div>
 
-    <%End If%>
 
     <!--Best Phone info -->
 
@@ -247,7 +256,7 @@
         </div>
     </div>
 
-    <% If true Then%>
+    <% If True Then%>
     <% If TLOLocateReport.numberOfRelatives1stDegreeField > 0 Then%>
     <div>
         <div class="form_head homeowner_section_margin">
@@ -424,7 +433,7 @@
         return hash;
     }
     function sortPhones() {
-        debugger;
+       
         var colors = {}
         var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
 

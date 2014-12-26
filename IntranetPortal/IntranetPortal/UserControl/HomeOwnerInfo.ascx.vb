@@ -10,6 +10,7 @@
     Public Property TLOLocateReport As DataAPI.TLOLocateReportOutput
     Public Property BestNums As List(Of HomeOwnerPhone)
     Public Property BestAddress As List(Of HomeOwnerAddress)
+    Public Property BestEmail As List(Of HomeOwnerEmail)
     Public Property HomeOwnerInfo As HomeOwner
 
     Private _contacts As List(Of OwnerContact)
@@ -50,6 +51,11 @@
         Using Context As New Entities
             Me.BBLE = bble
             Dim homeOwner = Context.HomeOwners.Where(Function(h) h.BBLE = bble And h.Name = OwnerName).FirstOrDefault
+            If (OwnerName = homeOwner.EMPTY_HOMEOWNER) Then
+                homeOwner = New HomeOwner
+                TLOLocateReport = New DataAPI.TLOLocateReportOutput
+            End If
+
             If homeOwner IsNot Nothing Then
                 HomeOwnerInfo = homeOwner
                 TLOLocateReport = homeOwner.TLOLocateReport
@@ -58,6 +64,7 @@
                 End If
                 BestNums = homeOwner.BestPhoneNo
                 BestAddress = homeOwner.BestAddress
+                BestEmail = homeOwner.BestEmail
             End If
         End Using
     End Sub

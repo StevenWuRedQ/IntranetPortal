@@ -96,13 +96,13 @@ Public Class LeadsInfo1
                 HomeOwnerInfo2.BindData(bble)
 
 
-                If String.IsNullOrEmpty(leadsinfodata.CoOwner) Then
-                    HomeOwnerInfo3.Visible = False
-                Else
-                    HomeOwnerInfo3.BBLE = bble
-                    HomeOwnerInfo3.OwnerName = leadsinfodata.CoOwner
-                    HomeOwnerInfo3.BindData(bble)
-                End If
+                'If String.IsNullOrEmpty(leadsinfodata.CoOwner) Then
+                '    HomeOwnerInfo3.Visible = False
+                'Else
+                HomeOwnerInfo3.BBLE = bble
+                HomeOwnerInfo3.OwnerName = CoOwnerName(leadsinfodata.CoOwner, leadsinfodata.Owner, bble)
+                HomeOwnerInfo3.BindData(bble)
+                'End If
 
                 'Bind Liens Info
                 'If lead IsNot Nothing Then
@@ -120,6 +120,20 @@ Public Class LeadsInfo1
             End If
         End Using
     End Sub
+
+    Protected Function CoOwnerName(CoOwner As String, ownerName As String, bble As String) As String
+        If (CoOwner IsNot Nothing) Then
+            Return CoOwner
+        End If
+        Using Context As New Entities
+            Dim coOwner2 = Context.HomeOwners.Where(Function(h) h.BBLE = bble AndAlso h.Name <> ownerName).Select(Function(h) h.Name).FirstOrDefault
+            If coOwner2 IsNot Nothing Then
+                Return coOwner2
+            End If
+        End Using
+        Return HomeOwner.EMPTY_HOMEOWNER
+    End Function
+
 
     'Protected Sub callbackSaveLeadsInfo_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
     '    Using Context As New Entities
@@ -416,7 +430,7 @@ Public Class LeadsInfo1
             Dim address = e.Parameter.Split("|")(1)
             UpdateContact(OwnerContact.ContactStatus.Undo, address, OwnerContact.OwnerContactType.MailAddress)
         End If
-        
+
 
         e.Result = needRefesh
     End Sub
@@ -449,7 +463,7 @@ Public Class LeadsInfo1
             End If
 
             Context.SaveChanges()
-            
+
         End Using
     End Sub
 
@@ -512,30 +526,52 @@ Public Class LeadsInfo1
 
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString)
     End Sub
+    Protected Sub SaveBestEmail(bble As String, ownerName As String, email As String)
+        Using Context As New Entities
+            Dim e = Context.HomeOwnerEmails.Where(Function(eh) eh.BBLE = bble And eh.OwnerName = ownerName And eh.Email = email).SingleOrDefault
 
+            If e Is Nothing Then
+                e = New HomeOwnerEmail
+                e.BBLE = bble
+                e.OwnerName = ownerName
+                e.Email = email
+                e.Source = PhoneSource.UserAdded
+                Context.HomeOwnerEmails.Add(e)
+                Context.SaveChanges()
+            Else
+                Throw New Exception("This email already exist.")
+            End If
+        End Using
+    End Sub
     Protected Sub ownerInfoCallbackPanel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         Dim bble = hfBBLE.Value
 
         If Not String.IsNullOrEmpty(e.Parameter) Then
-            Dim phoneNo = e.Parameter.Split("|")(0)
-            Dim ownerName = e.Parameter.Split("|")(1)
+            If (e.Parameter.StartsWith("SaveEmail")) Then
+                Dim paramters = e.Parameter.Split("|")
+                SaveBestEmail(bble, paramters(2), paramters(1))
+            Else
+                Dim phoneNo = e.Parameter.Split("|")(0)
+                Dim ownerName = e.Parameter.Split("|")(1)
 
-            Using context As New Entities
-                Dim p = context.HomeOwnerPhones.Where(Function(ph) ph.BBLE = bble And ph.OwnerName = ownerName And ph.Phone = phoneNo).SingleOrDefault
+                Using context As New Entities
+                    Dim p = context.HomeOwnerPhones.Where(Function(ph) ph.BBLE = bble And ph.OwnerName = ownerName And ph.Phone = phoneNo).SingleOrDefault
 
-                If p Is Nothing Then
-                    p = New HomeOwnerPhone
-                    p.BBLE = bble
-                    p.OwnerName = ownerName
-                    p.Phone = phoneNo
-                    p.Source = PhoneSource.UserAdded
+                    If p Is Nothing Then
+                        p = New HomeOwnerPhone
+                        p.BBLE = bble
+                        p.OwnerName = ownerName
+                        p.Phone = phoneNo
+                        p.Source = PhoneSource.UserAdded
 
-                    context.HomeOwnerPhones.Add(p)
-                    context.SaveChanges()
-                Else
-                    Throw New Exception("This Phone NO. already exist.")
-                End If
-            End Using
+                        context.HomeOwnerPhones.Add(p)
+                        context.SaveChanges()
+                    Else
+                        Throw New Exception("This Phone NO. already exist.")
+                    End If
+                End Using
+            End If
+
         End If
 
         Using context As New Entities
@@ -545,14 +581,12 @@ Public Class LeadsInfo1
             'HomeOwnerInfo2.Owner = context.HomeOwnerDatas.Where(Function(owner) owner.BBLE = bble And owner.Active = True And owner.OriginalSearchedName = li.Owner).FirstOrDefault
             HomeOwnerInfo2.BindData(bble)
 
-            If String.IsNullOrEmpty(li.CoOwner) Then
-                HomeOwnerInfo3.Visible = False
-            Else
-                HomeOwnerInfo3.BBLE = bble
-                HomeOwnerInfo3.OwnerName = li.CoOwner
-                'HomeOwnerInfo3.Owner = context.HomeOwnerDatas.Where(Function(owner) owner.BBLE = bble And owner.Active = True And owner.OriginalSearchedName = li.CoOwner).SingleOrDefault
-                HomeOwnerInfo3.BindData(bble)
-            End If
+
+            HomeOwnerInfo3.BBLE = bble
+            HomeOwnerInfo3.OwnerName = CoOwnerName(li.CoOwner, li.Owner, bble)
+            'HomeOwnerInfo3.Owner = context.HomeOwnerDatas.Where(Function(owner) owner.BBLE = bble And owner.Active = True And owner.OriginalSearchedName = li.CoOwner).SingleOrDefault
+            HomeOwnerInfo3.BindData(bble)
+
 
         End Using
     End Sub
