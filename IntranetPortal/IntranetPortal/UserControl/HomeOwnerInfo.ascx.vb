@@ -147,7 +147,9 @@
 
         Return name
     End Function
-
+    Function IsNeedAddHomeOwner() As Boolean
+        Return OwnerName = HomeOwner.EMPTY_HOMEOWNER
+    End Function
     Function FormatPhoneNumber(ByVal myNumber As String)
         Dim mynewNumber As String
         mynewNumber = ""

@@ -131,6 +131,15 @@ Partial Public Class LeadsInfo1
     Protected WithEvents ASPxPopupMenu1 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
 
     '''<summary>
+    '''EmailPopup control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents EmailPopup As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+
+    '''<summary>
     '''ASPxPopupMenu2 control.
     '''</summary>
     '''<remarks>

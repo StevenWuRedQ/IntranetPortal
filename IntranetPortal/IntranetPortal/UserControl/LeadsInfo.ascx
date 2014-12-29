@@ -36,7 +36,15 @@
         ASPxPopupMenuPhone.ShowAtElement(tellink);
 
     }
-
+    var tmpEmail = null;
+    var tempEmailLink = null;
+    function OnEmailLinkClick(EmailId, bble, ownerName,emailink)
+    {
+        tmpEmail = EmailId;
+        tempEmailLink = emailink;
+        currOwner = ownerName;
+        EmailPopupClient.ShowAtElement(emailink);
+    }
     function OnPhoneNumberClick(s, e) {
         if (tmpPhoneNo != null) {
             if (e.item.index == 0) {
@@ -267,7 +275,10 @@
         currOwner = ownerName;
         aspxPopupAddPhoneNum.ShowAtElement(addButton);
     }
-
+    function OnEmailPopupClick(s,e)
+    {
+        ownerInfoCallbackPanel.PerformCallback("DeleteEmail|" + tmpEmail + "|" + currOwner);
+    }
     function AddBestEmail(bble, ownerName, ulClient, addButton) {
         currOwner = ownerName;
         aspxPopupAddEmail.ShowAtElement(addButton);
@@ -312,6 +323,12 @@
         }
 
         contentSplitter.AdjustControl();
+    }
+    function addHomeOwnerClick(e)
+    {
+        var btn = $(e).parent().find('.fa fa-edit tooltip-examples:first')
+        
+        btn.onclick();
     }
 </script>
 <script src="/scripts/stevenjs.js?v=1.01"></script>
@@ -419,7 +436,7 @@
 
                                                                         <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo3" />
                                                                         <% If (Not HomeOwnerInfo3.Visible) Then%>
-                                                                        <i class="fa  fa-plus-circle icon_btn color_blue tooltip-examples" title="Add home owner" style="font-size: 32px"></i>
+                                                                        
                                                                         <% End If%>
                                                                     </td>
                                                                 </tr>
@@ -452,6 +469,18 @@
                                             </dx:MenuItem>
                                         </Items>
                                         <ClientSideEvents ItemClick="OnPhoneNumberClick" />
+                                    </dx:ASPxPopupMenu>
+                                     <dx:ASPxPopupMenu ID="EmailPopup" runat="server" ClientInstanceName="EmailPopupClient"
+                                        PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
+                                        PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+                                        ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                        <ItemStyle Paddings-PaddingLeft="20px" />
+                                        <Items>
+                                            <dx:MenuItem Text="Delete" Name="Delete">
+                                            </dx:MenuItem>
+                                            
+                                        </Items>
+                                        <ClientSideEvents ItemClick="OnEmailPopupClick" />
                                     </dx:ASPxPopupMenu>
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="AspxPopupMenuAddress"
                                         ShowPopOutImages="false" AutoPostBack="false"

@@ -101,6 +101,7 @@ Public Class LeadsInfo1
                 'Else
                 HomeOwnerInfo3.BBLE = bble
                 HomeOwnerInfo3.OwnerName = CoOwnerName(leadsinfodata.CoOwner, leadsinfodata.Owner, bble)
+               
                 HomeOwnerInfo3.BindData(bble)
                 'End If
 
@@ -122,12 +123,12 @@ Public Class LeadsInfo1
     End Sub
 
     Protected Function CoOwnerName(CoOwner As String, ownerName As String, bble As String) As String
-        If (CoOwner IsNot Nothing) Then
+        If Not String.IsNullOrEmpty(CoOwner) Then
             Return CoOwner
         End If
         Using Context As New Entities
             Dim coOwner2 = Context.HomeOwners.Where(Function(h) h.BBLE = bble AndAlso h.Name <> ownerName).Select(Function(h) h.Name).FirstOrDefault
-            If coOwner2 IsNot Nothing Then
+            If Not String.IsNullOrEmpty(coOwner2) Then
                 Return coOwner2
             End If
         End Using
@@ -543,6 +544,14 @@ Public Class LeadsInfo1
             End If
         End Using
     End Sub
+    Protected Sub DelteEmail(bble As String, email As String, ownerName As String)
+        Using Context As New Entities
+            Dim mEmail = Context.HomeOwnerEmails.Where(Function(e) e.BBLE = bble And e.Email = email And e.OwnerName = ownerName).ToList
+            Context.HomeOwnerEmails.RemoveRange(mEmail)
+            Context.SaveChanges()
+        End Using
+
+    End Sub
     Protected Sub ownerInfoCallbackPanel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         Dim bble = hfBBLE.Value
 
@@ -550,6 +559,9 @@ Public Class LeadsInfo1
             If (e.Parameter.StartsWith("SaveEmail")) Then
                 Dim paramters = e.Parameter.Split("|")
                 SaveBestEmail(bble, paramters(2), paramters(1))
+            ElseIf (e.Parameter.StartsWith("DeleteEmail")) Then
+                Dim paramters = e.Parameter.Split("|")
+                DelteEmail(bble, paramters(1), paramters(2))
             Else
                 Dim phoneNo = e.Parameter.Split("|")(0)
                 Dim ownerName = e.Parameter.Split("|")(1)

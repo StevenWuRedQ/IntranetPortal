@@ -20,8 +20,11 @@
         margin-top: 10px;
     }
 </style>
+<% If (IsNeedAddHomeOwner()) Then%>
+<i class="fa  fa-plus-circle icon_btn color_blue tooltip-examples" title="Add home owner"  onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}", "Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="font-size: 32px"></i>
+<% End If %>
 
-<div style="vertical-align: top; margin: 0; font-size: 18px;">
+<div style='vertical-align: top; margin: 0; font-size: 18px;<%= if(IsNeedAddHomeOwner(),"visibility:hidden","") %>'>
     <div style="font-size: 30px; color: #2e2f31">
         <i class="fa fa-edit tooltip-examples" title="Edit Homeowner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}","Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
         <span class="homeowner_name">
@@ -133,7 +136,7 @@
                     <i class="fa fa-envelope homeowner_info_icon"></i>
                     <div class="form_div_node homeowner_info_text homeowner_info_bottom">
                         <div class="color_blue">
-                            <%= email %>
+                           <a href="#" class="PhoneLink" onclick="OnEmailLinkClick('<%= email %>','<%= BBLE%>','<%= OwnerName%>',this)" ><%= email %></a> 
                         </div>
                     </div>
                 </div>

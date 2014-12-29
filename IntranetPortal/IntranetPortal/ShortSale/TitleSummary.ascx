@@ -545,7 +545,7 @@
                                                     <dx:GridViewDataTextColumn FieldName="BBLE" Width="75px" Caption="Comments">
                                                         <DataItemTemplate>
                                                             <div style="text-align: center; width: 100%">
-                                                                <i class="fa fa-info-circle tooltip-examples icon_btn" style="font-size: 18px" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<%# IntranetPortal.LeadsActivityLog.GetLastComments(Eval("BBLE"))%>"></i>
+                                                                <i class="fa fa-info-circle tooltip-examples icon_btn" style="font-size: 18px" data-toggle="tooltip" data-placement="bottom" data-html="true" title='<%# IntranetPortal.LeadsActivityLog.GetLastComments(Eval("BBLE"))%>'></i>
                                                             </div>
 
                                                         </DataItemTemplate>
