@@ -289,15 +289,17 @@ Public Class LeadsList
 
         Dim emps = Employee.GetSubOrdinateWithoutMgr(Page.User.Identity.Name)
 
+        Dim newVersionDate = DateTime.Parse("2014-12-28")
+
         If CategoryName = "Task" Then
             Using Context As New Entities
                 Dim leads = (From lead In Context.Leads
                                        Join task In Context.UserTasks On task.BBLE Equals lead.BBLE
-                                       Where task.Status = UserTask.TaskStatus.Active And task.EmployeeName.Contains(Page.User.Identity.Name)
+                                       Where task.Status = UserTask.TaskStatus.Active And task.EmployeeName.Contains(Page.User.Identity.Name) And task.CreateDate < newVersionDate
                                        Select lead).Union(
                                        From al In Context.Leads
                                        Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
-                                       Where appoint.Status = UserAppointment.AppointmentStatus.NewAppointment And (appoint.Agent = Page.User.Identity.Name Or appoint.Manager = Page.User.Identity.Name)
+                                       Where appoint.Status = UserAppointment.AppointmentStatus.NewAppointment And (appoint.Agent = Page.User.Identity.Name Or appoint.Manager = Page.User.Identity.Name) And appoint.CreateDate < newVersionDate
                                        Select al).Union(
                                        From lead In Context.Leads.Where(Function(ld) ld.Status = LeadStatus.MgrApproval And emps.Contains(ld.EmployeeID))
                                        Select lead
@@ -413,8 +415,10 @@ Public Class LeadsList
                 Context.Leads.Add(ld)
                 Context.SaveChanges()
             Else
+                'use workflow engine to approval 
+                ld.Status = LeadStatus.MgrApprovalInWf
+                'ld.Status = LeadStatus.MgrApproval
 
-                ld.Status = LeadStatus.MgrApproval
                 Context.Leads.Add(ld)
                 Context.SaveChanges()
 

@@ -29,7 +29,7 @@
             Return
         End If
 
-        If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+        If Not String.IsNullOrEmpty(Request.QueryString("sn")) AndAlso Not Page.IsPostBack Then
             Dim sn = Request.QueryString("sn").ToString
             Dim wli = WorkflowService.LoadTaskProcess(sn)
             Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
@@ -37,7 +37,7 @@
 
             If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
                 Dim cstext1 As String = "<script type=""text/javascript"">" & _
-                                String.Format("var leadsInfoBBLE = ""{0}"";AttachScrollbar();", Request.QueryString("id")) & "</script>"
+                                String.Format("var leadsInfoBBLE = ""{0}"";AttachScrollbar();", bble) & "</script>"
                 Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
             End If
 

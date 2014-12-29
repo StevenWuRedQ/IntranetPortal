@@ -101,7 +101,7 @@ Public Class ActivityLogs
         If (e.Parameters.StartsWith("CompleteTask")) Then
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
-            If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+            If String.IsNullOrEmpty(Request.QueryString("sn")) Then
                 Return
             End If
 
@@ -117,8 +117,10 @@ Public Class ActivityLogs
 
                 If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
                     Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
-                    wli.ProcessInstance.DataFields("Result") = "Completed"
-                    wli.Finish()
+                    If wli IsNot Nothing Then
+                        wli.ProcessInstance.DataFields("Result") = "Completed"
+                        wli.Finish()
+                    End If
                 End If
             End Using
 
@@ -509,13 +511,37 @@ Public Class ActivityLogs
                 End If
 
                 If task.Status = UserTask.TaskStatus.Active Then
-                    If btnTaskComplete IsNot Nothing Then
-                        btnTaskComplete.Visible = True
+                    Dim approvalView = False
+
+                    'check if it's approval page
+                    If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                        Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
+                        If wli IsNot Nothing Then
+                            If wli.ProcessName.ToString = "TaskProcess" OrElse wli.ProcessName = "ShortSaleTask" Then
+                                If CInt(wli.ProcessInstance.DataFields("TaskId")) = task.TaskID Then
+                                    If btnTaskComplete IsNot Nothing Then
+                                        btnTaskComplete.Visible = True
+                                    End If
+
+                                    If btnResend IsNot Nothing Then
+                                        btnResend.Visible = True
+                                    End If
+
+                                    approvalView = True
+                                End If
+                            End If
+                        End If
+                    Else
+
+
                     End If
 
-                    If btnResend IsNot Nothing Then
-                        btnResend.Visible = True
+                    If Not approvalView Then
+                        If ltTaskResult IsNot Nothing Then
+                            ltTaskResult.Text = "Waiting Process"
+                        End If
                     End If
+
                     'e.Row.BackColor = System.Drawing.Color.FromArgb(255, 197, 197)
                     e.Row.CssClass = "activity_log_high_light dxgvDataRow_MetropolisBlue1"
 
@@ -574,10 +600,23 @@ Public Class ActivityLogs
 
                 If userAppoint.Status = UserAppointment.AppointmentStatus.NewAppointment Then
                     'e.Row.BackColor = Drawing.Color.FromArgb(204, 255, 200)
-                    e.Row.CssClass = "activity_log_high_light dxgvDataRow_MetropolisBlue1"
-                    btnAccept.Visible = True
-                    btnDecline.Visible = True
-                    btnReschedule.Visible = True
+                    Dim approvalView = False
+                    If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                        If WorkflowService.IsAppointmentProcess(Request.QueryString("sn"), userAppoint.AppoitID) Then
+                            e.Row.CssClass = "activity_log_high_light dxgvDataRow_MetropolisBlue1"
+                            btnAccept.Visible = True
+                            btnDecline.Visible = True
+                            btnReschedule.Visible = True
+
+                            approvalView = True
+                        End If
+                    End If
+
+                    If Not approvalView Then
+                        ltResult.Text = "Waiting Process"
+                    End If
+
+                    Return
                 Else
                     btnAccept.Visible = False
                     btnDecline.Visible = False

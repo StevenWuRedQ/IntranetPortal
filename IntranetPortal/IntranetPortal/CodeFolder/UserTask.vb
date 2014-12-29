@@ -75,17 +75,19 @@
             userContext = HttpContext.Current
         End If
 
+        Dim newVersionDate = DateTime.Parse("2014-12-28")
+
         Using context As New Entities
             'Dim count = context.UserTasks.Where(Function(t) t.EmployeeName.Contains(empName) And t.Status = TaskStatus.Active).Select(Function(t) t.BBLE).Distinct().Count
             Dim emps = Employee.GetSubOrdinateWithoutMgr(userContext.User.Identity.Name)
 
             Dim count = (From lead In context.Leads
                                       Join task In context.UserTasks On task.BBLE Equals lead.BBLE
-                                      Where task.Status = UserTask.TaskStatus.Active And task.EmployeeName.Contains(empName)
+                                      Where task.Status = UserTask.TaskStatus.Active And task.EmployeeName.Contains(empName) And task.CreateDate < newVersionDate
                                       Select lead.BBLE).Union(
                                       From al In context.Leads
                                       Join appoint In context.UserAppointments On appoint.BBLE Equals al.BBLE
-                                      Where appoint.Status = UserAppointment.AppointmentStatus.NewAppointment And (appoint.Agent = empName Or appoint.Manager = empName)
+                                      Where appoint.Status = UserAppointment.AppointmentStatus.NewAppointment And (appoint.Agent = empName Or appoint.Manager = empName) And appoint.CreateDate < newVersionDate
                                       Select al.BBLE).Union(
                                     From lead In context.Leads.Where(Function(ld) ld.Status = LeadStatus.MgrApproval And emps.Contains(ld.EmployeeID))
                                      Select lead.BBLE

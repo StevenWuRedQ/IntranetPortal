@@ -28,7 +28,6 @@
    td.dxgv:hover a {
        color:black !important;
    }
-
 </style>
 
 <script type="text/javascript">
@@ -37,8 +36,7 @@
         //ddlCateLogClient.SetText(GetSelectedItemsText(selectedItems));
 
         var filterCondition = "";
-       
-        debugger
+
         for (var i = 0; i < cbCateLogClient.GetItemCount() ; i++) {
 
             var cate = cbCateLogClient.GetItem(i);
@@ -60,8 +58,7 @@
         {
             gridTrackingClient.ApplyFilter(filterCondition);
             $("#filter_btn").addClass("filited");
-        }
-           
+        }           
     }
 
     var empTextBox = null;
@@ -438,7 +435,7 @@
                     <EditCellStyle Wrap="False"></EditCellStyle>
                     <DataItemTemplate>
                         <asp:Panel runat="server" ID="pnlAppointment" Visible='<%# Eval("Category").ToString.StartsWith("Appointment")%>'>
-                            <div class="log_item_col1">
+                            <div class="log_item_col1" style="width:auto">
                                 <div class="font_black color_balck clearfix">
                                     <table style="width: 100%">
                                         <tr>
@@ -494,7 +491,7 @@
                         </asp:Panel>
 
                         <asp:Panel runat="server" ID="pnlTask" Visible='<%# Eval("Category").ToString.StartsWith("Task")%>'>
-                            <div class="log_item_col1">
+                            <div class="log_item_col1" style="width:auto">
                                 <div class="font_black color_balck clearfix">
                                     <table style="width: 100%">
                                         <tr>
@@ -538,7 +535,7 @@
                         </asp:Panel>
 
                         <asp:Panel runat="server" ID="pnlDoorknockTask" Visible='<%# Eval("Category").ToString.StartsWith("DoorknockTask")%>'>
-                            <div class="log_item_col1">
+                            <div class="log_item_col1" style="width:auto">
                                 <div class="clearfix">
                                     <table style="width: 100%">
                                         <tr>

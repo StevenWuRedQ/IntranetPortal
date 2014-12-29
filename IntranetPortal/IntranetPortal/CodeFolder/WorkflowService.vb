@@ -13,6 +13,7 @@ Public Class WorkflowService
         procInst.DataFields.Add("TaskId", taskId)
         procInst.DataFields.Add("BBLE", bble)
         procInst.DataFields.Add("Mgr", approver)
+
         conn.StartProcessInstance(procInst)
     End Sub
 
@@ -42,6 +43,19 @@ Public Class WorkflowService
         conn.StartProcessInstance(procInst)
     End Sub
 
+    Public Shared Function IsAppointmentProcess(sn As String, appointId As Integer) As Boolean
+        If Not IntegratedWithWorkflow() Then
+            Return True
+        End If
+
+        Dim wli = LoadTaskProcess(sn)
+        If wli IsNot Nothing AndAlso wli.ProcessName = "NewAppointmentRequest" Then
+            Return CInt(wli.ProcessInstance.DataFields("AppointmentId")) = appointId
+        End If
+
+        Return False
+    End Function
+
     Public Shared Function LoadTaskProcess(sn As String) As WorklistItem
         If Not IntegratedWithWorkflow() Then
             Return Nothing
@@ -67,7 +81,7 @@ Public Class WorkflowService
     End Function
 
     Public Shared Function GetMyCompleted(userName As String) As List(Of DBPersistence.ProcessInstance)
-        Return DBPersistence.ProcessInstance.getmyProcessed(userName)
+        Return DBPersistence.ProcessInstance.GetMyProcessed(userName)
     End Function
 
     Public Shared Function LoadProcInstById(procInstId As Integer) As DBPersistence.ProcessInstance
@@ -76,7 +90,7 @@ Public Class WorkflowService
     End Function
 
     Private Shared Function GetConnection() As Connection
-        Dim conn As New Connection("Chrispc")
+        Dim conn As New Connection(wfServer)
         conn.Integrated = True
         conn.UserName = HttpContext.Current.User.Identity.Name
         conn.Open()
@@ -84,6 +98,8 @@ Public Class WorkflowService
     End Function
 
     Private Shared Function IntegratedWithWorkflow() As Boolean
-        Return False
+        Return True
     End Function
+
+    Private Shared wfServer As String = System.Configuration.ConfigurationManager.AppSettings("WorkflowServer")
 End Class

@@ -203,15 +203,27 @@ Public Class RefreshLeadsCountHandler
     End Function
 
     Function GetMyTaskCount() As Integer
-        Return WorkflowService.GetMyWorklist().Count
+        Try
+            Return WorkflowService.GetMyWorklist().Count
+        Catch ex As Exception
+            Return 0
+        End Try
     End Function
 
     Function GetMyApplicationCount(userName As String) As Integer
-        Return WorkflowService.GetMyOriginated(userName).Count
+        Try
+            Return WorkflowService.GetMyOriginated(userName).Count
+        Catch ex As Exception
+            Return 0
+        End Try
     End Function
 
     Function GetMyCompletedCount(userName As String) As Integer
-        Return WorkflowService.GetMyCompleted(userName).Count
+        Try
+            Return WorkflowService.GetMyCompleted(userName).Count
+        Catch ex As Exception
+            Return 0
+        End Try
     End Function
 
     Function GetTeam2LeadsCount(name As String, itemText As String) As Integer
@@ -232,7 +244,6 @@ Public Class RefreshLeadsCountHandler
                     Return Utility.GetTeamLeadsCount(Utility.GetLeadStatus(itemText), teamId)
             End Select
         End If
-
     End Function
 
     Function GetTeamLeadsCount(name As String, itemText As String) As Integer
