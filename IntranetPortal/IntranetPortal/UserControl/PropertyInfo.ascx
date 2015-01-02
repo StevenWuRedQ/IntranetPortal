@@ -111,21 +111,7 @@
                 <PanelCollection>
                     <dx:PanelContent>
                         <% Dim i = 0%>
-                        <%-- <% If LeadsInfoData.IsHighLiens Then%>
-                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
-                            <i class="fa fa-exclamation-circle note_img"></i>
-                            <span class="note_text">Liens higher than Value</span>
-                        </div>
-                        <% i += 1%>
-                        <% End If%>
 
-                        <% If Not String.IsNullOrEmpty(LeadsInfoData.IndicatorOfWater) Then%>
-                        <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
-                            <i class="fa fa-exclamation-circle note_img"></i>
-                            <span class="note_text">Water Lien is High - Possible Tenant Issues</span>
-                        </div>
-                        <% i += 1%>
-                        <% End If%>--%>
 
                         <% If LeadsInfoData.OtherProperties IsNot Nothing AndAlso LeadsInfoData.OtherProperties.Count > 0 Then%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8;height:inherit","height:inherit")%>'>
@@ -152,11 +138,24 @@
 
                         <% For Each comment In LeadsInfoData.UserComments%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
-                            <i class="fa fa-exclamation-circle note_img"></i>
-                            <span class="note_text"><%= comment.Comments%></span>
-                            <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7; display: none"></i>
-                            <i class="fa fa-times" style="float: right; padding-right: 25px; line-height: 40px; font-size: 18px; color: #b1b2b7; cursor: pointer" onclick="DeleteComments(<%= comment.CommentId %>)"></i>
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:30px">
+                                        <i class="fa fa-exclamation-circle note_img"></i>
+                                    </td>
+                                    <td>
+                                        <div class="note_text"><%= comment.Comments%></div>
+                                    </td>
+                                    <td style="width:30px;padding-right: 25px;">
+                                        <i class="fa fa-times" style=" font-size: 18px; color: #b1b2b7; cursor: pointer" onclick="DeleteComments(<%= comment.CommentId %>)"></i>
+
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
+
+                        <%-- <i class="fa fa-arrows-v" style="float: right; line-height: 40px; padding-right: 20px; font-size: 18px; color: #b1b2b7; display: none"></i>--%>
+
                         <% i += 1%>
                         <% Next%>
                     </dx:PanelContent>
@@ -464,7 +463,7 @@
                         </div>
 
                         <div class="form_div_node form_div_node_line_margin form_div_node_small" style="border: none">
-                            <div class="form_head" style="margin-left:20px">
+                            <div class="form_head" style="margin-left: 20px">
                                 Tax Liens:
                             </div>
                         </div>
@@ -474,11 +473,11 @@
                         </div>
                         <div class="form_div_node form_div_node_line_margin">
                             <span class="form_input_title">water</span>
-                             <dx:ASPxTextBox runat="server" ID="txtWaterAmt" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.WaterAmt  %>'></dx:ASPxTextBox>
+                            <dx:ASPxTextBox runat="server" ID="txtWaterAmt" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.WaterAmt  %>'></dx:ASPxTextBox>
                         </div>
 
                         <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                             <span class="form_input_title">Tax Liens Date</span>
+                            <span class="form_input_title">Tax Liens Date</span>
                             <input class="text_input" value="<%= LeadsInfoData.TaxLiensDateText %>" id="Text1" />
                         </div>
 
@@ -486,14 +485,14 @@
                             <span class="form_input_title">Tax Liens Amount</span>
                             <input class="text_input" value="<%= LeadsInfoData.TaxLiensAmount %>" id="Text2" />
                         </div>
-                       
-                        
+
+
 
                         <%----end line ----%>
                         <div style="width: 230px" class="clearfix">
                             <%--line 4--%>
 
-                           
+
                             <%----end line ----%>
                             <%--line 5--%>
 

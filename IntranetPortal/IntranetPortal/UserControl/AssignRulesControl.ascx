@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="AssignRulesControl.ascx.vb" Inherits="IntranetPortal.AssignRulesControl" %>
-<link href="/css/stevencss.css" rel="stylesheet" type="text/css" />
+<link href="/css/stevencss.css?v=1.0" rel="stylesheet" type="text/css" />
 <dx:ASPxGridView runat="server" Width="100%" ID="gridAssignRules" KeyFieldName="RuleId"  OnDataBinding="gridAssignRules_DataBinding" OnRowInserting="gridAssignRules_RowInserting" OnRowDeleting="gridAssignRules_RowDeleting">
     <Columns>
         <dx:GridViewDataTextColumn FieldName="EmployeeName">

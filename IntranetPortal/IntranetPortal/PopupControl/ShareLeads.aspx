@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-     <link href="/css/stevencss.css" rel='stylesheet' type='text/css' />
+     <link href="/css/stevencss.css?v=1.0" rel='stylesheet' type='text/css' />
 </head>
 <body>
     <form id="form1" runat="server">
