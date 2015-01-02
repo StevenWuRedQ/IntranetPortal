@@ -80,7 +80,12 @@ Public Class ShortSalePage
                 End If
             End If
             If (Not String.IsNullOrEmpty(Request.QueryString("LeadsAgent"))) Then
-                Dim bbls
+                Using Context As New Entities
+                    Dim bbles As List(Of String) = Context.Leads.Where(Function(l) l.Status = LeadStatus.InProcess AndAlso l.EmployeeName = User.Identity.Name).Select(Function(l) l.BBLE).ToList
+                    ShortSaleCaseList.BindCaseByBBLEs(bbles)
+                End Using
+
+
             End If
 
             If Not String.IsNullOrEmpty(Request.QueryString("isEviction")) Then
