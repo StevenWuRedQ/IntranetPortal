@@ -19,15 +19,15 @@
         height: 90px;
         border: 2px solid #dde0e7;
     }
-    .filited
-    {
-        background:url(/images/ic_filtered_bg.png) no-repeat;
+
+    .filited {
+        background: url(/images/ic_filtered_bg.png) no-repeat;
     }
 
     /* for fix the email message link color hover bug in activty log*/
-   td.dxgv:hover a {
-       color:black !important;
-   }
+    td.dxgv:hover a {
+        color: black !important;
+    }
 </style>
 
 <script type="text/javascript">
@@ -49,16 +49,14 @@
             }
         }
 
-        if (filterCondition == "")
-        {
+        if (filterCondition == "") {
             gridTrackingClient.ClearFilter();
             $("#filter_btn").removeClass("filited");
         }
-        else
-        {
+        else {
             gridTrackingClient.ApplyFilter(filterCondition);
             $("#filter_btn").addClass("filited");
-        }           
+        }
     }
 
     var empTextBox = null;
@@ -435,7 +433,7 @@
                     <EditCellStyle Wrap="False"></EditCellStyle>
                     <DataItemTemplate>
                         <asp:Panel runat="server" ID="pnlAppointment" Visible='<%# Eval("Category").ToString.StartsWith("Appointment")%>'>
-                            <div class="log_item_col1" style="width:auto">
+                            <div class="log_item_col1" style="width: auto">
                                 <div class="font_black color_balck clearfix">
                                     <table style="width: 100%">
                                         <tr>
@@ -491,7 +489,7 @@
                         </asp:Panel>
 
                         <asp:Panel runat="server" ID="pnlTask" Visible='<%# Eval("Category").ToString.StartsWith("Task")%>'>
-                            <div class="log_item_col1" style="width:auto">
+                            <div class="log_item_col1" style="width: auto">
                                 <div class="font_black color_balck clearfix">
                                     <table style="width: 100%">
                                         <tr>
@@ -535,7 +533,7 @@
                         </asp:Panel>
 
                         <asp:Panel runat="server" ID="pnlDoorknockTask" Visible='<%# Eval("Category").ToString.StartsWith("DoorknockTask")%>'>
-                            <div class="log_item_col1" style="width:auto">
+                            <div class="log_item_col1" style="width: auto">
                                 <div class="clearfix">
                                     <table style="width: 100%">
                                         <tr>
@@ -761,14 +759,36 @@
                     <asp:HiddenField runat="server" ID="hfResend" />
                     <div style="color: #b1b2b7; padding: 10px">
                         <div class="form-group ">
+                            <label class="upcase_text">Action</label>
+                            <dx:ASPxComboBox runat="server" Width="100%" DropDownStyle="DropDown" ID="cbTaskAction" ClientInstanceName="cbTaskAction" CssClass="edit_drop">
+                                <Items>
+                                    <dx:ListEditItem Text="" Value="" />
+                                    <dx:ListEditItem Text="Documents Request" Value="Documents Request" />
+                                    <dx:ListEditItem Text="Lookup Request" Value="Lookup Request" />
+                                    <dx:ListEditItem Text="Incentive Offer Needed" Value="Incentive Offer Needed" />
+                                </Items>
+                                <ValidationSettings ErrorDisplayMode="None">
+                                    <RequiredField IsRequired="true" />
+                                </ValidationSettings>
+                                <ClientSideEvents SelectedIndexChanged="function(s,e){
+                                        if(cbTaskAction.GetText() == 'Lookup Request')
+                                        {
+                                            empCheckComboBox.SetText('Jamie Ventura');
+                                        }
+                                        else
+                                        {
+                                             empCheckComboBox.SetText('');
+                                        }
+                                    }" />
+                            </dx:ASPxComboBox>
+                        </div>
+                        <div class="form-group ">
                             <label class="upcase_text">employees</label>
                             <dx:ASPxDropDownEdit ClientInstanceName="empCheckComboBox" ID="empsDropDownEdit" Width="100%" runat="server" CssClass="edit_drop" AnimationType="None">
                                 <DropDownWindowStyle BackColor="#EDEDED" />
                                 <DropDownWindowTemplate>
                                     <dx:ASPxPageControl runat="server" TabPosition="Bottom" Width="100%" ID="tabPageEmpSelect" ActiveTabIndex="1" TabStyle-Height="35px">
-                                        
                                         <TabPages>
-                                            
                                             <dx:TabPage Text="Recently" Name="tabRecent">
                                                 <ContentCollection>
                                                     <dx:ContentControl runat="server">
@@ -795,7 +815,6 @@
                                                                         <ClientSideEvents KeyDown="function(s,e){                                                                                                                                     
                                                                                                                                         OnEmplistSearch(s.GetText());                                                                                                                                    
                                                                                                                                     }" />
-
                                                                     </dx:ASPxTextBox>
                                                                 </td>
                                                             </tr>
@@ -812,7 +831,7 @@
                                         </TabPages>
                                     </dx:ASPxPageControl>
                                     <div style="float: right; margin-top: -37px; display: block; margin-right: 3px;">
-                                        <dx:ASPxButton ID="ASPxButton1" AutoPostBack="False" runat="server" CausesValidation="false"  Text="Close" Style="float: right" CssClass="rand-button rand-button-gray">
+                                        <dx:ASPxButton ID="ASPxButton1" AutoPostBack="False" runat="server" CausesValidation="false" Text="Close" Style="float: right" CssClass="rand-button rand-button-gray">
                                             <ClientSideEvents Click="function(s, e){ empCheckComboBox.HideDropDown(); }" />
                                         </dx:ASPxButton>
                                     </div>
@@ -823,20 +842,7 @@
                                 <ClientSideEvents TextChanged="SynchronizeEmpListBoxValues" DropDown="SynchronizeEmpListBoxValues" />
                             </dx:ASPxDropDownEdit>
                         </div>
-                        <div class="form-group ">
-                            <label class="upcase_text">Action</label>
-                            <dx:ASPxComboBox runat="server" Width="100%" DropDownStyle="DropDown" ID="cbTaskAction" CssClass="edit_drop">
-                                <Items>
-                                    <dx:ListEditItem Text="" Value="" />
-                                    <dx:ListEditItem Text="Documents Request" Value="Documents Request" />
-                                    <dx:ListEditItem Text="Lookup Request" Value="Lookup Request" />
-                                    <dx:ListEditItem Text="Incentive Offer Needed" Value="Incentive Offer Needed" />
-                                </Items>
-                                  <ValidationSettings ErrorDisplayMode="None">
-                                    <RequiredField IsRequired="true" />
-                                </ValidationSettings>
-                            </dx:ASPxComboBox>
-                        </div>
+
                         <div class="form-group ">
                             <label class="upcase_text">Importance</label>
                             <dx:ASPxComboBox runat="server" Width="100%" ID="cbTaskImportant" CssClass="edit_drop">
@@ -845,7 +851,7 @@
                                     <dx:ListEditItem Text="Important" Value="Important" />
                                     <dx:ListEditItem Text="Urgent" Value="Urgent" />
                                 </Items>
-                                  <ValidationSettings ErrorDisplayMode="None">
+                                <ValidationSettings ErrorDisplayMode="None">
                                     <RequiredField IsRequired="true" />
                                 </ValidationSettings>
                             </dx:ASPxComboBox>

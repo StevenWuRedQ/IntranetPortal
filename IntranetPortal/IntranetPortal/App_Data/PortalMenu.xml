@@ -17,7 +17,7 @@
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="MyCompleted" Text="Completed" NavigationUrl="/Task/MyCompleted.aspx" ShowAmount="true">
+      <PortalNavItem Name="MyCompleted" Text="Ready for Review" NavigationUrl="/Task/MyCompleted.aspx" ShowAmount="true">
         <FontClass>
           <![CDATA[ <i class="fa fa-tasks"></i>]]>
         </FontClass>

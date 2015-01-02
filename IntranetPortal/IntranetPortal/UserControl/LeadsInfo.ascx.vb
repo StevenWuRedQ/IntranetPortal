@@ -101,7 +101,7 @@ Public Class LeadsInfo1
                 'Else
                 HomeOwnerInfo3.BBLE = bble
                 HomeOwnerInfo3.OwnerName = CoOwnerName(leadsinfodata.CoOwner, leadsinfodata.Owner, bble)
-               
+
                 HomeOwnerInfo3.BindData(bble)
                 'End If
 
@@ -329,21 +329,33 @@ Public Class LeadsInfo1
                 userAppoint.LogID = log.LogID
                 userAppoint.NewAppointment()
 
+                Dim needApproval = False
+                Dim approvers = New List(Of String)
                 'Add Message
                 If Not cbMgr.Value = "*" And Not cbMgr.Value = "" Then
                     If cbMgr.Value <> Page.User.Identity.Name Then
                         Dim title = String.Format("A New Appointment has been created by {0} regarding {1} for {2}", Page.User.Identity.Name, cbScheduleType.Text, ld.LeadsName)
                         UserMessage.AddNewMessage(cbMgr.Value, title, comments, hfBBLE.Value)
-
-                        WorkflowService.StartNewAppointmentProcess(ld.LeadsName, ld.BBLE, cbMgr.Value)
+                        approvers.Add(cbMgr.Value)
+                        'WorkflowService.StartNewAppointmentProcess(ld.LeadsName, ld.BBLE, userAppoint.AppoitID, cbMgr.Value)
+                        needApproval = True
                     End If
                 End If
 
                 If Not Page.User.Identity.Name = ld.EmployeeName Then
                     Dim title = String.Format("A New Appointment has been created by {0} regarding {1} for {2}", Page.User.Identity.Name, cbScheduleType.Text, ld.LeadsName)
                     UserMessage.AddNewMessage(ld.EmployeeName, title, comments, hfBBLE.Value)
+                    approvers.Add(ld.EmployeeName)
+                    needApproval = True
+                End If
 
-                    WorkflowService.StartNewAppointmentProcess(ld.LeadsName, ld.BBLE, ld.EmployeeName)
+                'Appointment set by agent self
+                If Not needApproval Then
+                    UserAppointment.UpdateAppointmentStatus(log.LogID, UserAppointment.AppointmentStatus.Accepted)
+                Else
+                    If approvers.Count > 0 Then
+                        WorkflowService.StartNewAppointmentProcess(ld.LeadsName, ld.BBLE, userAppoint.AppoitID, String.Join(";", approvers.ToArray))
+                    End If
                 End If
 
                 'Update status to Priority
@@ -359,7 +371,6 @@ Public Class LeadsInfo1
                     UpdateLeadStatus(hfBBLE.Value, LeadStatus.Deleted, Nothing)
                 End If
             End If
-
         End If
     End Sub
 
@@ -527,6 +538,7 @@ Public Class LeadsInfo1
 
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString)
     End Sub
+
     Protected Sub SaveBestEmail(bble As String, ownerName As String, email As String)
         Using Context As New Entities
             Dim e = Context.HomeOwnerEmails.Where(Function(eh) eh.BBLE = bble And eh.OwnerName = ownerName And eh.Email = email).SingleOrDefault
@@ -579,7 +591,7 @@ Public Class LeadsInfo1
                         context.HomeOwnerPhones.Add(p)
                         context.SaveChanges()
                     Else
-                        Throw New Exception("This Phone NO. already exist.")
+                        Throw New Exception("This Phone# already exist.")
                     End If
                 End Using
             End If

@@ -30,7 +30,7 @@ Public Class WorkflowService
         conn.StartProcessInstance(procInst)
     End Sub
 
-    Public Shared Sub StartNewAppointmentProcess(displayName As String, bble As String, approver As String)
+    Public Shared Sub StartNewAppointmentProcess(displayName As String, bble As String, appointId As Integer, approver As String)
         If Not IntegratedWithWorkflow() Then
             Return
         End If
@@ -40,6 +40,7 @@ Public Class WorkflowService
         procInst.DisplayName = displayName
         procInst.DataFields.Add("BBLE", bble)
         procInst.DataFields.Add("Mgr", approver)
+        procInst.DataFields.Add("AppointmentId", appointId)
         conn.StartProcessInstance(procInst)
     End Sub
 
@@ -70,7 +71,6 @@ Public Class WorkflowService
         If Not IntegratedWithWorkflow() Then
             Return New List(Of WorklistItem)
         End If
-
 
         Dim conn = GetConnection()
         Return conn.OpenMyWorklist()

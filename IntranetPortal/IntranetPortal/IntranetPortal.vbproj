@@ -1153,6 +1153,10 @@
       <DependentUpon>ViewLeadsInfo.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="WCFDataServices\CommonService.svc.vb">
+      <DependentUpon>CommonService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="WCFDataServices\ICommonService.vb" />
     <Compile Include="WCFDataServices\IPortalDataService.vb" />
     <Compile Include="WCFDataServices\PortalDataService.svc.vb">
       <DependentUpon>PortalDataService.svc</DependentUpon>
@@ -2304,6 +2308,7 @@
     <Content Include="UserControl\PropertyInfo.ascx" />
     <Content Include="UserControl\UserSummary.ascx" />
     <Content Include="ViewLeadsInfo.aspx" />
+    <Content Include="WCFDataServices\CommonService.svc" />
     <Content Include="WCFDataServices\PortalDataService.svc" />
     <Content Include="WebForm2.aspx" />
     <EmbeddedResource Include="My Project\licenses.licx" />

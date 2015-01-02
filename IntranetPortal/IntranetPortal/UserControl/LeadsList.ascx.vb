@@ -289,7 +289,7 @@ Public Class LeadsList
 
         Dim emps = Employee.GetSubOrdinateWithoutMgr(Page.User.Identity.Name)
 
-        Dim newVersionDate = DateTime.Parse("2014-12-28")
+        Dim newVersionDate = DateTime.Parse("2014-12-31")
 
         If CategoryName = "Task" Then
             Using Context As New Entities

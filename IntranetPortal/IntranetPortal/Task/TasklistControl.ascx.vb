@@ -12,7 +12,7 @@ Public Class TasklistControl
         gridTasks.DataBind()
 
         If Not Page.IsPostBack Then
-            gridTasks.GroupBy(gridTasks.Columns("ProcessName"))
+            gridTasks.GroupBy(gridTasks.Columns("ProcSchemeDisplayName"))
         End If
     End Sub
 End Class

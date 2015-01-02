@@ -43,7 +43,7 @@
                 </dx:GridViewDataColumn>
                 <%--<dx:GridViewDataColumn FieldName="Originator" Visible="false" VisibleIndex="4">                  
                 </dx:GridViewDataColumn>--%>
-                <dx:GridViewDataColumn FieldName="ProcessName" Visible="false" VisibleIndex="5">
+                <dx:GridViewDataColumn FieldName="ProcSchemeDisplayName" Visible="false" VisibleIndex="5">
                     <GroupRowTemplate>
                         <div>
                             <table style="height: 45px">

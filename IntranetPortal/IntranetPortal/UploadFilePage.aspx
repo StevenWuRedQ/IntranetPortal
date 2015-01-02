@@ -278,7 +278,7 @@
         }
 
         function GetCategoryElement(fileName) {
-            var cates = ["Financials", ["Short Sale","Bank","Seller"], "Photos", "Accounting", "Eviction", "Construction", "Others" ,"HasSub"];
+            var cates = ["Financials", ["Short Sale","Approval","Eviction Document","Financials-1st Seller","Finacial-2nd Seller","Offer","Package","Title Report"], "Photos", "Accounting", "Eviction", "Construction", "Others"];
             var x = document.createElement("SELECT");
             x.setAttribute("data-filename", fileName);
             for (var i = 0; i < cates.length; i++) {
@@ -304,8 +304,7 @@
                     option.text = cates[i];
                     option.value = cates[i];
                     x.add(option);
-                }
-                
+                }                
             }
 
             return x;

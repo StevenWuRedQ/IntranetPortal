@@ -9,7 +9,7 @@
             <dx:SplitterPane Name="leadPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="2px">
                 <ContentCollection>
                     <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
-                        <uc1:OriginatedListControl runat="server" ID="OriginatedListControl" DisplayMode="Completed" HeaderText="Completed" />
+                        <uc1:OriginatedListControl runat="server" ID="OriginatedListControl" DisplayMode="Completed" HeaderText="Review" />
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>

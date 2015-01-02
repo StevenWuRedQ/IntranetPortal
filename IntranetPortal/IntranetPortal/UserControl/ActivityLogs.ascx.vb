@@ -287,7 +287,7 @@ Public Class ActivityLogs
         If empsDropDownEdit.Text.ToLower.Contains(Page.User.Identity.Name.ToLower) Then
             employees = empsDropDownEdit.Text
         Else
-            employees = Page.User.Identity.Name & ";" & empsDropDownEdit.Text
+            employees = empsDropDownEdit.Text
         End If
 
         Dim scheduleDate = DateTime.Now
@@ -532,13 +532,22 @@ Public Class ActivityLogs
                             End If
                         End If
                     Else
+                        If task.CreateDate < DateTime.Parse("2014-12-31 12:59") Then
+                            If btnTaskComplete IsNot Nothing Then
+                                btnTaskComplete.Visible = True
+                            End If
 
+                            If btnResend IsNot Nothing Then
+                                btnResend.Visible = True
+                            End If
 
+                            approvalView = True
+                        End If
                     End If
 
                     If Not approvalView Then
                         If ltTaskResult IsNot Nothing Then
-                            ltTaskResult.Text = "Waiting Process"
+                            ltTaskResult.Text = "Waiting to Answer"
                         End If
                     End If
 

@@ -140,15 +140,6 @@ Partial Public Class ActivityLogs
     Protected WithEvents hfResend As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
-    '''empsDropDownEdit control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents empsDropDownEdit As Global.DevExpress.Web.ASPxEditors.ASPxDropDownEdit
-
-    '''<summary>
     '''cbTaskAction control.
     '''</summary>
     '''<remarks>
@@ -156,6 +147,15 @@ Partial Public Class ActivityLogs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbTaskAction As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
+    '''empsDropDownEdit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents empsDropDownEdit As Global.DevExpress.Web.ASPxEditors.ASPxDropDownEdit
 
     '''<summary>
     '''cbTaskImportant control.

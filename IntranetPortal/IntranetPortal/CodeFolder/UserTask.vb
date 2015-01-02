@@ -75,7 +75,7 @@
             userContext = HttpContext.Current
         End If
 
-        Dim newVersionDate = DateTime.Parse("2014-12-28")
+        Dim newVersionDate = DateTime.Parse("2014-12-31")
 
         Using context As New Entities
             'Dim count = context.UserTasks.Where(Function(t) t.EmployeeName.Contains(empName) And t.Status = TaskStatus.Active).Select(Function(t) t.BBLE).Distinct().Count
