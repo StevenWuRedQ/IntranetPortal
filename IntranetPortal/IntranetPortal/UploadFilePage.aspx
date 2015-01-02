@@ -281,22 +281,29 @@
             var cates = ["Financials", ["Short Sale","Approval","Eviction Document","Financials-1st Seller","Finacial-2nd Seller","Offer","Package","Title Report"], "Photos", "Accounting", "Eviction", "Construction", "Others"];
             var x = document.createElement("SELECT");
             x.setAttribute("data-filename", fileName);
+            var select_html = ""
             for (var i = 0; i < cates.length; i++) {
                 /*test add sub category by steven using HasSub for test  */
                 var e_option = cates[i];
-                debugger;
+               
                 if (e_option.constructor == Array)
                 {
                     var opt_grop = document.createElement("optgroup");
-                    $(opt_grop).attr("label", e_option[0]);
+                   
+
+                    opt_grop.setAttribute("label", e_option[0]);
                     for (var j = 1; j < e_option.length; j++)
                     {
                         var option = document.createElement("option");
                         option.text = e_option[j];
                         option.value = e_option[0] + "/" + e_option[j];
-                        opt_grop.appendChild(option);
-                    }                    
-                    x.add(opt_grop)
+                        $(opt_grop).last().append($(option));
+                    }
+                    var html = $(opt_grop).html();
+                    //debugger;
+                    //$(x).last().append('<optgroup label="' + e_option[0] + '">' + $(opt_grop).html() + '</optgroup>');
+                    select_html += $(opt_grop).prop('outerHTML');
+                    //x.add(opt_grop)
                 } else
                 {
                     var option = document.createElement("option");
@@ -304,8 +311,11 @@
                     option.text = cates[i];
                     option.value = cates[i];
                     x.add(option);
+                    select_html += $(option).prop('outerHTML');
                 }                
             }
+            debugger;
+            $(x).html(select_html);
 
             return x;
         }
