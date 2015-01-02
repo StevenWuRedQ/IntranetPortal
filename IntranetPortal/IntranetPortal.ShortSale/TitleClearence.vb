@@ -3,6 +3,7 @@
     Public Enum ClearenceStatus
         Process = 0
         Cleared = 1
+        Delete = 2
     End Enum
 
     Private _contact As New PartyContact

@@ -136,7 +136,8 @@
                     <i class="fa fa-envelope homeowner_info_icon"></i>
                     <div class="form_div_node homeowner_info_text homeowner_info_bottom">
                         <div class="color_blue">
-                           <a href="#" class="PhoneLink" onclick="OnEmailLinkClick('<%= email %>','<%= BBLE%>','<%= OwnerName%>',this)" ><%= email %></a> 
+                           <%-- onclick="OnEmailLinkClick('<%= email %>','<%= BBLE%>','<%= OwnerName%>',this)" --%>
+                           <a href="#" style="text-decoration:none" ><%= email %></a> 
                         </div>
                     </div>
                 </div>
@@ -187,6 +188,24 @@
                     <% For Each phone In TLOLocateReport.phonesField%>
                     <% If phone IsNot Nothing Then%>
                     <div class="color_gray clearfix">
+                        <div class="color_gray clearfix">
+                            <i class="fa fa-phone homeowner_info_icon"></i>
+                            <div class="form_div_node homeowner_info_text ">
+                                <div>
+                                    <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
+                                        <%=FormatPhoneNumber(phone.phoneField)%>
+                                        <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
+
+                                    </a>
+
+                                </div>
+                                <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
+                                   (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <%-- <div class="color_gray clearfix">
                         <i class="fa fa-phone homeowner_info_icon"></i>
                         <div class="form_div_node homeowner_info_text ">
                             <div>
@@ -200,7 +219,7 @@
                                 (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
                     <% End If%>
                     <% Next%>
                     <% End If%>
@@ -439,7 +458,7 @@
        
         var colors = {}
         var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
-
+        debugger;
         var phones_div = $(".homeowner_info_label:has(.PhoneLink)")
             .each(function (id) {
                 var phones = $(this).find("div").children(".color_gray:has(.color_gray)");
@@ -463,7 +482,7 @@
                     html += '<div class="color_gray clearfix">' + $(this).html() + '</div>';
 
                 });
-
+                //debugger;
                 phones.parent().html('<div>' + html + '</div>');
 
 

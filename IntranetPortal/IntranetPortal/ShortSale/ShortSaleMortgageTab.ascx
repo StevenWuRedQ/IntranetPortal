@@ -50,7 +50,7 @@
                         <option value="Value Dispute">Value Dispute</option>
                         <option value="Marketing W/ Price Reductions">Marketing W/ Price Reductions</option>
                         <option value="Investor Review">Investor Review</option>
-
+                        <option value="Approved">Approved</option>
                     </select>
 
                 </li>

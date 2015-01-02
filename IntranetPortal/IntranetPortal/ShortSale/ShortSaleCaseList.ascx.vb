@@ -12,6 +12,7 @@ Public Class ShortSaleCaseList
 
         If Employee.IsShortSaleManager(Page.User.Identity.Name) Then
             gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status)
+
             gridCase.DataBind()
 
             If Not Page.IsPostBack Then
@@ -27,6 +28,12 @@ Public Class ShortSaleCaseList
                 gridCase.GroupBy(gridCase.Columns("CallbackDate"))
             End If
         End If
+    End Sub
+
+    Public Sub BindCaseByBBLEs(bbles As List(Of String))
+        hfCaseStatus.Value = "Cases"
+        gridCase.DataSource = ShortSaleCase.GetCaseByBBLEs(bbles)
+        gridCase.DataBind()
     End Sub
 
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)

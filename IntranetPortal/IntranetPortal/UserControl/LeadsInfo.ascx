@@ -38,8 +38,7 @@
     }
     var tmpEmail = null;
     var tempEmailLink = null;
-    function OnEmailLinkClick(EmailId, bble, ownerName,emailink)
-    {
+    function OnEmailLinkClick(EmailId, bble, ownerName, emailink) {
         tmpEmail = EmailId;
         tempEmailLink = emailink;
         currOwner = ownerName;
@@ -114,7 +113,7 @@
             }
         }
         else {
-            //disable call back, use clint script to format same phone num or address
+            //disable call back, use client script to format same phone num or address
             //ownerInfoCallbackPanel.PerformCallback("");
         }
     }
@@ -275,8 +274,7 @@
         currOwner = ownerName;
         aspxPopupAddPhoneNum.ShowAtElement(addButton);
     }
-    function OnEmailPopupClick(s,e)
-    {
+    function OnEmailPopupClick(s, e) {
         ownerInfoCallbackPanel.PerformCallback("DeleteEmail|" + tmpEmail + "|" + currOwner);
     }
     function AddBestEmail(bble, ownerName, ulClient, addButton) {
@@ -300,7 +298,7 @@
 
     function SaveBestEmail(s, e) {
         var email = txtEmailClient.GetText();
-        ownerInfoCallbackPanel.PerformCallback("SaveEmail|"+email + "|" + currOwner);
+        ownerInfoCallbackPanel.PerformCallback("SaveEmail|" + email + "|" + currOwner);
         aspxPopupAddEmail.Hide();
         txtEmailClient.SetText("");
     }
@@ -324,10 +322,9 @@
 
         contentSplitter.AdjustControl();
     }
-    function addHomeOwnerClick(e)
-    {
+    function addHomeOwnerClick(e) {
         var btn = $(e).parent().find('.fa fa-edit tooltip-examples:first')
-        
+
         btn.onclick();
     }
 </script>
@@ -421,30 +418,33 @@
                                     <div class="tab-content">
                                         <uc1:PropertyInfo runat="server" ID="PropertyInfo" />
                                         <div class="tab-pane clearfix" id="home_owner">
-                                            <dx:ASPxCallbackPanel runat="server" ID="ownerInfoCallbackPanel" ClientInstanceName="ownerInfoCallbackPanel" OnCallback="ownerInfoCallbackPanel_Callback" Height="850px" ScrollBars="Auto" Paddings-Padding="0px">
-                                                <PanelCollection>
-                                                    <dx:PanelContent>
-                                                        <div style="padding: 20px 20px 0px 20px">
-                                                            <table style="width: 100%; margin: 0px; padding: 0px;">
-                                                                <tr>
-                                                                    <td style="width: 50%; vertical-align: top">
-                                                                        <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo2" />
-                                                                    </td>
-                                                                    <td style="border-left: 1px solid #b1b2b7; width: 8px;">&nbsp;
-                                                                    </td>
-                                                                    <td style="vertical-align: top">
+                                            <div style="height: 850px; overflow: auto" id="scrollbar_homeowner">
+                                                <dx:ASPxCallbackPanel runat="server" ID="ownerInfoCallbackPanel" ClientInstanceName="ownerInfoCallbackPanel" OnCallback="ownerInfoCallbackPanel_Callback" Paddings-Padding="0px">
+                                                    <PanelCollection>
+                                                        <dx:PanelContent>
+                                                            <div style="padding: 20px 20px 0px 20px">
+                                                                <table style="width: 100%; margin: 0px; padding: 0px;">
+                                                                    <tr>
+                                                                        <td style="width: 50%; vertical-align: top">
+                                                                            <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo2" />
+                                                                        </td>
+                                                                        <td style="border-left: 1px solid #b1b2b7; width: 8px;">&nbsp;
+                                                                        </td>
+                                                                        <td style="vertical-align: top">
 
-                                                                        <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo3" />
-                                                                        <% If (Not HomeOwnerInfo3.Visible) Then%>
-                                                                        
-                                                                        <% End If%>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </div>
-                                                    </dx:PanelContent>
-                                                </PanelCollection>
-                                            </dx:ASPxCallbackPanel>
+                                                                            <uc1:HomeOwnerInfo runat="server" ID="HomeOwnerInfo3" />
+                                                                            <% If (Not HomeOwnerInfo3.Visible) Then%>
+
+                                                                            <% End If%>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </dx:PanelContent>
+                                                    </PanelCollection>
+                                                </dx:ASPxCallbackPanel>
+                                            </div>
+
                                         </div>
                                         <div class="tab-pane" id="documents">
                                             <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
@@ -470,7 +470,7 @@
                                         </Items>
                                         <ClientSideEvents ItemClick="OnPhoneNumberClick" />
                                     </dx:ASPxPopupMenu>
-                                     <dx:ASPxPopupMenu ID="EmailPopup" runat="server" ClientInstanceName="EmailPopupClient"
+                                    <dx:ASPxPopupMenu ID="EmailPopup" runat="server" ClientInstanceName="EmailPopupClient"
                                         PopupElementID="numberLink" ShowPopOutImages="false" AutoPostBack="false"
                                         PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                         ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -478,7 +478,7 @@
                                         <Items>
                                             <dx:MenuItem Text="Delete" Name="Delete">
                                             </dx:MenuItem>
-                                            
+
                                         </Items>
                                         <ClientSideEvents ItemClick="OnEmailPopupClick" />
                                     </dx:ASPxPopupMenu>
@@ -723,7 +723,7 @@
                                     <dx:ASPxTextBox runat="server" ID="txtPhoneNo" ClientInstanceName="txtPhoneNoClient" CssClass="edit_drop"></dx:ASPxTextBox>
                                 </td>
                                 <td>
-                                    <div style="margin:0px 10px;padding-top: 13px;">
+                                    <div style="margin: 0px 10px; padding-top: 13px;">
                                         <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button rand-button-blue">
                                             <ClientSideEvents Click="SaveBestPhoneNo" />
                                         </dx:ASPxButton>
@@ -731,12 +731,14 @@
                                        
                                     </div>
                                 </td>
-                                <td> <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false" CssClass="rand-button rand-button-gray">
-                                            <ClientSideEvents Click="function(s,e){aspxPopupAddPhoneNum.Hide();}" />
-                                        </dx:ASPxButton></td>
+                                <td>
+                                    <dx:ASPxButton runat="server" ID="ASPxButton4" Text="Close" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                        <ClientSideEvents Click="function(s,e){aspxPopupAddPhoneNum.Hide();}" />
+                                    </dx:ASPxButton>
+                                </td>
                             </tr>
 
-                            
+
                         </table>
                     </dx:PopupControlContentControl>
                 </ContentCollection>
@@ -753,7 +755,7 @@
                                     <dx:ASPxTextBox runat="server" ID="txtEmail" ClientInstanceName="txtEmailClient" CssClass="edit_drop"></dx:ASPxTextBox>
                                 </td>
                                 <td>
-                                    <div style="margin:0px 10px;padding-top: 13px;">
+                                    <div style="margin: 0px 10px; padding-top: 13px;">
                                         <dx:ASPxButton runat="server" ID="BtnAddEmail" Text="Add" AutoPostBack="false" CssClass="rand-button rand-button-blue">
                                             <ClientSideEvents Click="SaveBestEmail" />
                                         </dx:ASPxButton>
@@ -761,12 +763,14 @@
                                        
                                     </div>
                                 </td>
-                                <td> <dx:ASPxButton runat="server" ID="ASPxButton7" Text="Close" AutoPostBack="false" CssClass="rand-button rand-button-gray">
-                                            <ClientSideEvents Click="function(s,e){aspxPopupAddEmail.Hide();}" />
-                                        </dx:ASPxButton></td>
+                                <td>
+                                    <dx:ASPxButton runat="server" ID="ASPxButton7" Text="Close" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                        <ClientSideEvents Click="function(s,e){aspxPopupAddEmail.Hide();}" />
+                                    </dx:ASPxButton>
+                                </td>
                             </tr>
 
-                            
+
                         </table>
                     </dx:PopupControlContentControl>
                 </ContentCollection>

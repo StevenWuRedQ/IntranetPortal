@@ -202,7 +202,7 @@
           <![CDATA[ <i class="fa fa-refresh"></i>]]>
         </FontClass>
         <Items>
-          <PortalNavItem Name="ShortSale-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="true">
+          <PortalNavItem Name="ShortSale-All" Text="Short Sale" NavigationUrl="/ShortSale/ShortSale.aspx" ShowAmount="true">
             <FontClass>
               <![CDATA[<i class="fa fa-line-chart"></i>]]>
             </FontClass>

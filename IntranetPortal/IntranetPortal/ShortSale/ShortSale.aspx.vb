@@ -79,6 +79,10 @@ Public Class ShortSalePage
                     Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
                 End If
             End If
+            If (Not String.IsNullOrEmpty(Request.QueryString("LeadsAgent"))) Then
+                Dim bbls
+            End If
+
             If Not String.IsNullOrEmpty(Request.QueryString("isEviction")) Then
                 isEviction = True
                 'it should be Eviction not new file for test

@@ -67,7 +67,10 @@
     .TitleCleared .TitleContent {
         color: #98ba50;
     }
-
+    .TitleDelete .TitleContent
+    {
+        text-decoration:line-through;
+    }
     .Urgent{
         background-color:orangered;
         color:white;

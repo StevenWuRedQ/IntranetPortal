@@ -8,8 +8,7 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script>
-        function SearchLeads()
-        {
+        function SearchLeads() {
             var filter = {}
             filter.Location = $("#IdLocation").val();
             filter.Zips = $("#IdZips").val();
@@ -25,11 +24,12 @@
 
             filter.Value = { min: $("#IDValueMin").val(), max: $("#IDValueMax").val() }
             filter.Equity = { min: $("#IdEquityMin").val(), max: $("#IdEquityMax").val() }
-            
+
             filter.Tax = { min: $("#IdTaxesMin").val(), max: $("#IdTaxesMax").val() }
             filter.ECB_DOB = { min: $("#IdECB_DOBMin").val(), max: $("#IdECB_DOBMax").val() }
             filter.isLis = $("#Lis_Pendens_yes").val();
             filter.DocketYear = $("#IdDocket_Year").val();
+
             debugger;
         }
     </script>
@@ -65,7 +65,7 @@
                                 </div>
 
                             </div>
-                            <div style="margin-top: 30px;padding-bottom:10px;">
+                            <div style="margin-top: 30px; padding-bottom: 10px;">
                                 <div>
                                     <div style="display: inline-block; padding-right: 10px; border-right: 1px solid #dde0e7; color: #234b60; font-size: 18px;">Or... create new search criteria below</div>
                                     <div style="font-size: 12px; display: inline-block; line-height: 18px;">
@@ -106,10 +106,10 @@
                                                         <div class="inline_block  query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Zip</label>
                                                             <select class=" selectpicker form-control width_100percent" id="IdZips" multiple>
-                                                                <option>10001</option>
-                                                                <option>10002</option>
-                                                                <option>10003</option>
+                                                                <% For Each zip In ZipCodes%>
+                                                                <option><%= zip %></option>
 
+                                                                <% Next%>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -120,8 +120,10 @@
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Neighborhood</label>
                                                             <select class="selectpicker form-control width_100percent" id="IDNeighborhods" multiple>
-                                                                <option>Westbury</option>
-                                                                <option>Neighborhood2</option>
+                                                                <%For Each neighName In AllNeighName%>
+                                                                <option><%= neighName%></option>
+
+                                                                <% Next%>
                                                             </select>
                                                         </div>
 
@@ -141,7 +143,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block " style="width: 68%">
                                                             <label class="upcase_text font_black" style="display: block">Property Class</label>
-                                                            <select class="selectpicker form-control width_100percent" id="IDPeropertyClass"  multiple>
+                                                            <select class="selectpicker form-control width_100percent" id="IDPeropertyClass" multiple>
 
                                                                 <option>All</option>
                                                                 <option>Condo</option>
@@ -172,34 +174,56 @@
                                                         <div class="inline_block  " style="width: 28%">
                                                             <label class="upcase_text font_black" style="display: block">Zoning</label>
                                                             <select class=" selectpicker form-control width_100percent" id="IdZoning" multiple>
-                                                                <option>24d</option>
-                                                                <option>25d</option>
-                                                                <option>26d</option>
-                                                                <option>Zoning 4</option>
+                                                                <% For Each zoning In AllZoning%>
+                                                                <option><%= zoning%> </option>
+
+                                                                <% Next%>
                                                             </select>
                                                         </div>
                                                     </div>
 
                                                 </div>
-                                                
+
                                                 <div class="form-group">
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Unbuilt Sqft</label>
                                                             <select class="selectpicker form-control width_100percent" id="IdUnbuiltSqftmin">
                                                                 <option>Min Sqft</option>
+                                                                <option>500</option>
+                                                                <option>600</option>
+                                                                <option>700</option>
+                                                                <option>800</option>
+                                                                <option>900</option>
                                                                 <option>1000</option>
+                                                                <option>1250</option>
+                                                                <option>1500</option>
                                                                 <option>2000</option>
+                                                                <option>2500</option>
                                                                 <option>3000</option>
+                                                                <option>3500</option>
+                                                                <option>4000</option>
+                                                                <option>5000</option>
                                                             </select>
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
                                                             <select class="selectpicker form-control width_100percent" id="IdUnbuiltSqftmax">
                                                                 <option>Max Sqft</option>
-                                                                <option>1000</option>
-                                                                <option>2000</option>
-                                                                <option>3000</option>
+                                                                <option>500 sqft</option>
+                                                                <option>600 sqft</option>
+                                                                <option>700 sqft</option>
+                                                                <option>800 sqft</option>
+                                                                <option>900 sqft</option>
+                                                                <option>1000 sqft</option>
+                                                                <option>1250 sqft</option>
+                                                                <option>1500 sqft</option>
+                                                                <option>2000 sqft</option>
+                                                                <option>2500 sqft</option>
+                                                                <option>3000 sqft</option>
+                                                                <option>3500 sqft</option>
+                                                                <option>4000 sqft</option>
+                                                                <option>5000 sqft</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -210,8 +234,20 @@
                                                             <label class="upcase_text font_black" style="display: block">NYC Sqft</label>
                                                             <select class="selectpicker form-control width_100percent" id="IdNYCsqftMin">
                                                                 <option>Min Sqft</option>
-                                                                <option>250 sqft</option>
+                                                                <option>500 sqft</option>
+                                                                <option>600 sqft</option>
+                                                                <option>700 sqft</option>
+                                                                <option>800 sqft</option>
+                                                                <option>900 sqft</option>
                                                                 <option>1000 sqft</option>
+                                                                <option>1250 sqft</option>
+                                                                <option>1500 sqft</option>
+                                                                <option>2000 sqft</option>
+                                                                <option>2500 sqft</option>
+                                                                <option>3000 sqft</option>
+                                                                <option>3500 sqft</option>
+                                                                <option>4000 sqft</option>
+                                                                <option>5000 sqft</option>
 
                                                             </select>
                                                         </div>
@@ -219,9 +255,20 @@
                                                             <label class="upcase_text font_black" style="display: block"></label>
                                                             <select class="selectpicker form-control width_100percent" id="IdNYCsqftMax">
                                                                 <option>Max Sqft</option>
+                                                                <option>500 sqft</option>
+                                                                <option>600 sqft</option>
+                                                                <option>700 sqft</option>
+                                                                <option>800 sqft</option>
+                                                                <option>900 sqft</option>
                                                                 <option>1000 sqft</option>
+                                                                <option>1250 sqft</option>
+                                                                <option>1500 sqft</option>
                                                                 <option>2000 sqft</option>
+                                                                <option>2500 sqft</option>
                                                                 <option>3000 sqft</option>
+                                                                <option>3500 sqft</option>
+                                                                <option>4000 sqft</option>
+                                                                <option>5000 sqft</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -233,8 +280,20 @@
                                                             <label class="upcase_text font_black" style="display: block">Lot Sqft</label>
                                                             <select class="selectpicker form-control width_100percent" id="IdLotSqftMin">
                                                                 <option>Min Sqft</option>
-                                                                <option>250 sqft</option>
+                                                                <option>500 sqft</option>
+                                                                <option>600 sqft</option>
+                                                                <option>700 sqft</option>
+                                                                <option>800 sqft</option>
+                                                                <option>900 sqft</option>
                                                                 <option>1000 sqft</option>
+                                                                <option>1250 sqft</option>
+                                                                <option>1500 sqft</option>
+                                                                <option>2000 sqft</option>
+                                                                <option>2500 sqft</option>
+                                                                <option>3000 sqft</option>
+                                                                <option>3500 sqft</option>
+                                                                <option>4000 sqft</option>
+                                                                <option>5000 sqft</option>
 
                                                             </select>
                                                         </div>
@@ -242,9 +301,20 @@
                                                             <label class="upcase_text font_black" style="display: block"></label>
                                                             <select class="selectpicker form-control width_100percent" id="IdLotSqftMax">
                                                                 <option>Max Sqft</option>
+                                                                <option>500 sqft</option>
+                                                                <option>600 sqft</option>
+                                                                <option>700 sqft</option>
+                                                                <option>800 sqft</option>
+                                                                <option>900 sqft</option>
                                                                 <option>1000 sqft</option>
+                                                                <option>1250 sqft</option>
+                                                                <option>1500 sqft</option>
                                                                 <option>2000 sqft</option>
+                                                                <option>2500 sqft</option>
                                                                 <option>3000 sqft</option>
+                                                                <option>3500 sqft</option>
+                                                                <option>4000 sqft</option>
+                                                                <option>5000 sqft</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -305,16 +375,43 @@
                                                             <label class="upcase_text font_black" style="display: block">Mortgages (Sum)</label>
                                                             <select class="selectpicker form-control width_100percent" id="IdMortgageMin">
                                                                 <option>Mini Value</option>
-                                                                <option>$1000</option>
-                                                                <option>$2000</option>
+
+                                                                <option value="500">$500</option>
+                                                                <option value="750">$750</option>
+                                                                <option value="1000">$1,000</option>
+                                                                <option value="1500">$1,500</option>
+                                                                <option value="2000">$2,000</option>
+                                                                <option value="2500">$2,500</option>
+                                                                <option value="3000">$3,000</option>
+                                                                <option value="4000">$4,000</option>
+                                                                <option value="5000">$5,000</option>
+                                                                <option value="6000">$6,000</option>
+                                                                <option value="7000">$7,000</option>
+                                                                <option value="8000">$8,000</option>
+                                                                <option value="9000">$9,000</option>
+                                                                <option value="10000">$10,000</option>
+                                                                <option value="15000">$15,000</option>
                                                             </select>
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
                                                             <select class="selectpicker form-control width_100percent" id="IdMortgageMax">
                                                                 <option>Max Value</option>
-                                                                <option>$3000</option>
-                                                                <option>$4000</option>
+                                                                <option value="500">$500</option>
+                                                                <option value="750">$750</option>
+                                                                <option value="1000">$1,000</option>
+                                                                <option value="1500">$1,500</option>
+                                                                <option value="2000">$2,000</option>
+                                                                <option value="2500">$2,500</option>
+                                                                <option value="3000">$3,000</option>
+                                                                <option value="4000">$4,000</option>
+                                                                <option value="5000">$5,000</option>
+                                                                <option value="6000">$6,000</option>
+                                                                <option value="7000">$7,000</option>
+                                                                <option value="8000">$8,000</option>
+                                                                <option value="9000">$9,000</option>
+                                                                <option value="10000">$10,000</option>
+                                                                <option value="15000">$15,000</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -346,16 +443,86 @@
                                                             <label class="upcase_text font_black" style="display: block">Value</label>
                                                             <select class="selectpicker form-control width_100percent" id="IDValueMin">
                                                                 <option>Mini Value</option>
-                                                                <option>$1000</option>
-                                                                <option>$2000</option>
+
+                                                                <option value="100000">$100,000</option>
+                                                                <option value="150000">$150,000</option>
+                                                                <option value="200000">$200,000</option>
+                                                                <option value="250000">$250,000</option>
+                                                                <option value="300000">$300,000</option>
+                                                                <option value="400000">$400,000</option>
+                                                                <option value="500000">$500,000</option>
+                                                                <option value="600000">$600,000</option>
+                                                                <option value="700000">$700,000</option>
+                                                                <option value="750000">$750,000</option>
+                                                                <option value="800000">$800,000</option>
+                                                                <option value="900000">$900,000</option>
+                                                                <option value="1000000">$1,000,000</option>
+                                                                <option value="1250000">$1,250,000</option>
+                                                                <option value="1500000">$1,500,000</option>
+                                                                <option value="1750000">$1,750,000</option>
+                                                                <option value="2000000">$2,000,000</option>
+                                                                <option value="2250000">$2,250,000</option>
+                                                                <option value="2500000">$2,500,000</option>
+                                                                <option value="2750000">$2,750,000</option>
+                                                                <option value="3000000">$3,000,000</option>
+                                                                <option value="3500000">$3,500,000</option>
+                                                                <option value="4000000">$4,000,000</option>
+                                                                <option value="4500000">$4,500,000</option>
+                                                                <option value="5000000">$5,000,000</option>
+                                                                <option value="6000000">$6,000,000</option>
+                                                                <option value="7000000">$7,000,000</option>
+                                                                <option value="8000000">$8,000,000</option>
+                                                                <option value="9000000">$9,000,000</option>
+                                                                <option value="10000000">$10,000,000</option>
+                                                                <option value="12000000">$12,000,000</option>
+                                                                <option value="14000000">$14,000,000</option>
+                                                                <option value="16000000">$16,000,000</option>
+                                                                <option value="20000000">$20,000,000</option>
+                                                                <option value="25000000">$25,000,000</option>
+                                                                <option value="30000000">$30,000,000</option>
                                                             </select>
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
-                                                            <select class="selectpicker form-control width_100percent"id="IDValueMax">
+                                                            <select class="selectpicker form-control width_100percent" id="IDValueMax">
                                                                 <option>Max Value</option>
-                                                                <option>$3000</option>
-                                                                <option>$4000</option>
+
+                                                                <option value="100000">$100,000</option>
+                                                                <option value="150000">$150,000</option>
+                                                                <option value="200000">$200,000</option>
+                                                                <option value="250000">$250,000</option>
+                                                                <option value="300000">$300,000</option>
+                                                                <option value="400000">$400,000</option>
+                                                                <option value="500000">$500,000</option>
+                                                                <option value="600000">$600,000</option>
+                                                                <option value="700000">$700,000</option>
+                                                                <option value="750000">$750,000</option>
+                                                                <option value="800000">$800,000</option>
+                                                                <option value="900000">$900,000</option>
+                                                                <option value="1000000">$1,000,000</option>
+                                                                <option value="1250000">$1,250,000</option>
+                                                                <option value="1500000">$1,500,000</option>
+                                                                <option value="1750000">$1,750,000</option>
+                                                                <option value="2000000">$2,000,000</option>
+                                                                <option value="2250000">$2,250,000</option>
+                                                                <option value="2500000">$2,500,000</option>
+                                                                <option value="2750000">$2,750,000</option>
+                                                                <option value="3000000">$3,000,000</option>
+                                                                <option value="3500000">$3,500,000</option>
+                                                                <option value="4000000">$4,000,000</option>
+                                                                <option value="4500000">$4,500,000</option>
+                                                                <option value="5000000">$5,000,000</option>
+                                                                <option value="6000000">$6,000,000</option>
+                                                                <option value="7000000">$7,000,000</option>
+                                                                <option value="8000000">$8,000,000</option>
+                                                                <option value="9000000">$9,000,000</option>
+                                                                <option value="10000000">$10,000,000</option>
+                                                                <option value="12000000">$12,000,000</option>
+                                                                <option value="14000000">$14,000,000</option>
+                                                                <option value="16000000">$16,000,000</option>
+                                                                <option value="20000000">$20,000,000</option>
+                                                                <option value="25000000">$25,000,000</option>
+                                                                <option value="30000000">$30,000,000</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -386,21 +553,47 @@
                                                             <label class="upcase_text font_black" style="display: block">Taxes</label>
                                                             <select class="selectpicker form-control width_100percent" id="IdTaxesMin">
                                                                 <option>Mini Value</option>
-                                                                <option>$1000</option>
-                                                                <option>$2000</option>
+                                                                <option value="500">$500</option>
+                                                                <option value="750">$750</option>
+                                                                <option value="1000">$1,000</option>
+                                                                <option value="1500">$1,500</option>
+                                                                <option value="2000">$2,000</option>
+                                                                <option value="2500">$2,500</option>
+                                                                <option value="3000">$3,000</option>
+                                                                <option value="4000">$4,000</option>
+                                                                <option value="5000">$5,000</option>
+                                                                <option value="6000">$6,000</option>
+                                                                <option value="7000">$7,000</option>
+                                                                <option value="8000">$8,000</option>
+                                                                <option value="9000">$9,000</option>
+                                                                <option value="10000">$10,000</option>
+                                                                <option value="15000">$15,000</option>
                                                             </select>
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
                                                             <select class="selectpicker form-control width_100percent" id="IdTaxesMax">
                                                                 <option>Max Value</option>
-                                                                <option>$3000</option>
-                                                                <option>$4000</option>
+                                                                <option value="500">$500</option>
+                                                                <option value="750">$750</option>
+                                                                <option value="1000">$1,000</option>
+                                                                <option value="1500">$1,500</option>
+                                                                <option value="2000">$2,000</option>
+                                                                <option value="2500">$2,500</option>
+                                                                <option value="3000">$3,000</option>
+                                                                <option value="4000">$4,000</option>
+                                                                <option value="5000">$5,000</option>
+                                                                <option value="6000">$6,000</option>
+                                                                <option value="7000">$7,000</option>
+                                                                <option value="8000">$8,000</option>
+                                                                <option value="9000">$9,000</option>
+                                                                <option value="10000">$10,000</option>
+                                                                <option value="15000">$15,000</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="form-group">
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
@@ -421,12 +614,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="form-group">
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Lis Pendens</label>
-                                                            <input id="Lis_Pendens_yes"  type="radio" name="Lis_Pendens">
+                                                            <input id="Lis_Pendens_yes" type="radio" name="Lis_Pendens">
                                                             <label for="Lis_Pendens_yes">
                                                                 <span class="box_text">Yes </span>
                                                             </label>
@@ -444,7 +637,7 @@
                                                             <label class="upcase_text font_black" style="display: block">Docket / Year</label>
                                                             <select class="selectpicker form-control width_100percent" id="IdDocket_Year" multiple>
 
-                                                                <% For i = Date.Now.Year-10 To Date.Now.Year%>
+                                                                <% For i = Date.Now.Year - 10 To Date.Now.Year%>
                                                                 <option><%=i %></option>
                                                                 <% Next%>
                                                             </select>
@@ -536,9 +729,9 @@
             $('#lead_search_left').mCustomScrollbar({
                 theme: "minimal-dark"
             });
-            
+
         });
-       
+
 
     </script>
 </asp:Content>

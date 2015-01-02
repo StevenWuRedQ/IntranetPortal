@@ -85,7 +85,7 @@
             }
          );
 
-        $("#ctl00_MainContentPH_ASPxSplitter1_LeadsInfo_ASPxCallbackPanel2_contentSplitter_ownerInfoCallbackPanel").mCustomScrollbar(
+        $("#scrollbar_homeowner").mCustomScrollbar(
             {
                 theme: "minimal-dark"
             }
