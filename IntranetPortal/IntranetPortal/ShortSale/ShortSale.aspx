@@ -12,7 +12,7 @@
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-    <script src="/scripts/stevenjs.js?v=1.01"></script>
+    <script src="/scripts/stevenjs.js?v=1.02"></script>
     <script type="text/javascript">
         function OnCallbackMenuClick(s, e) {
             if (e.item.name == "Custom") {

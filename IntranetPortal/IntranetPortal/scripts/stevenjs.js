@@ -221,6 +221,7 @@ function ShortSaleDataBand(data_stauts) {
     /*use for ui*/
     onRefreashDone();
     /**/
+    LoadOccupantNotes();
 }
 function format_input() {
     $('.ss_date').datepicker({

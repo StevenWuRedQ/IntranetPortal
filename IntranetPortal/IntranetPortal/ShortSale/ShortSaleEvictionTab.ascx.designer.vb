@@ -12,4 +12,22 @@ Option Explicit On
 
 
 Partial Public Class ShortSaleEvictionTab
+
+    '''<summary>
+    '''AddOccupantNotes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents AddOccupantNotes As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''btnAdd control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAdd As Global.DevExpress.Web.ASPxEditors.ASPxButton
 End Class

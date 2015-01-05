@@ -21,6 +21,7 @@
         }
     </style>
     <script type="text/javascript" src="/scripts/PortalMessager.js"></script>
+    
    <%-- <script type="text/javascript">
         // here is a cross-browser compatible way of connecting 
         // handlers to events, in case you don't have one

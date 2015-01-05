@@ -34,5 +34,6 @@ Partial Public Class PropertyOccupant
     Public Property Amount As Nullable(Of Decimal)
     Public Property CreateBy As String
     Public Property CreateDate As Nullable(Of Date)
+    Public Property Notes As String
 
 End Class

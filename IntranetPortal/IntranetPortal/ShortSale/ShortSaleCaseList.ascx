@@ -25,7 +25,7 @@
     }
 
     function GetShortSaleData(caseId) {
-        debugger;
+        //debugger;
         $.ajax({
             type: "POST",
             url: "ShortSale.aspx/GetCase",
@@ -99,6 +99,7 @@
         ShortSaleCaseData = response.d;  //JSON.parse(response.d);
         leadsInfoBBLE = ShortSaleCaseData.BBLE;
         ShortSaleDataBand(0);
+        
     }
 
     function OnGetRowValues(values) {

@@ -6,7 +6,8 @@
     End Function
 
     Public Property DataStatus As ModelStatus
-
+   
+      
     Public Sub Save()
         Using context As New ShortSaleEntities
             Dim pbi = context.PropertyOccupants.Find(OccupantId)
@@ -16,6 +17,7 @@
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
                 If DataStatus = ModelStatus.Deleted Then
+                    'When delete Occupate better delete notes also by steven.
                     context.PropertyOccupants.Remove(pbi)
                 Else
                     pbi = ShortSaleUtility.SaveChangesObj(pbi, Me)

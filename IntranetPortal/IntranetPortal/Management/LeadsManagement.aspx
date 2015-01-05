@@ -220,14 +220,15 @@
                                         </dx:ASPxComboBox>
                                     </td>
                                     <td>
-                                        <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" CssClass="rand-button rand-button-blue" AutoPostBack="false">
+                                       <%-- <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" CssClass="rand-button rand-button-blue" AutoPostBack="false">
                                             <ClientSideEvents Click="function(s,e){
                                                    if(listboxEmployee.GetIsValid())
                                                         gridLeads.PerformCallback('AssignLeads');
                                                 }
                                                 " />
-                                        </dx:ASPxButton>
-
+                                        </dx:ASPxButton>--%>
+                                        <input type="button" value="Rules" class="rand-button rand-button-blue rand-button-pad" onclick="{if(listboxEmployee.GetIsValid()) gridLeads.PerformCallback('AssignLeads');}" />
+}" />
                                         &nbsp;&nbsp;
                                       <input type="button" value="Rules" class="rand-button rand-button-blue rand-button-pad" onclick="AssignLeadsPopupClient.Show();" />
 

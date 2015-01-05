@@ -5,7 +5,7 @@
 
     </div>
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
 <div class="ss_form">
     <h4 class="ss_form_title">Occupancy</h4>
     <ul class="ss_form_box clearfix">
@@ -36,6 +36,7 @@
     </ul>
 </div>
 <div style="margin-top: 30px">&nbsp;</div>
+<input id="CurrentUser" type="hidden"  value='<%= Page.User.Identity.Name%>' />
 <div data-array-index="0" data-field="Occupants" class="ss_array" style="display: none">
     <%--<h3 class="title_with_line"><span class="title_index title_span">Mortgages </span></h3>--%>
     <h4 class="ss_form_title title_with_line">
@@ -56,7 +57,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Occupant #</label>
-                    <input class="ss_form_input" data-item="Phone" data-item-type="1">
+                    <input class="ss_form_input ss_phone" data-item="Phone" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">&nbsp;</label>
@@ -108,7 +109,7 @@
                     <label class="ss_form_input_title">Cash For Keys ($)</label>
                     <input class="ss_form_input currency_input" data-item="CFK" data-item-type="1" onblur="$(this).formatCurrency();">
                 </li>
-               <%-- <li class="ss_form_item">
+                <%-- <li class="ss_form_item">
                     <label class="ss_form_input_title">Type of Payment</label>
                     <input class="ss_form_input " data-item="TypeOfPayment" data-item-type="1">
                 </li>--%>
@@ -150,16 +151,143 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Stip Date</label>
-                    <input class="ss_form_input ss_date" data-item="StipDate"  data-item-type="1">
+                    <input class="ss_form_input ss_date" data-item="StipDate" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Amount</label>
                     <input class="ss_form_input " data-item="Amount" data-item-type="1">
                 </li>
-                 
+
+
+
+
             </ul>
-            
+            <div class="ss_form" style="padding-bottom:20px;">
+                <h4 class="ss_form_title">Notes <i class="fa fa-plus-circle  color_blue_edit collapse_btn tooltip-examples" title="Add" onclick="addOccupantNoteClick( __index__  ,this);"></i></h4>
+                <%--clearence list--%>
+
+                <div class="note_input" style="display: none" data-index="__index__">
+
+                    <%--index 1--%>
+                    {{#Notes}}
+                    <div class="clearence_list_item">
+                        <div class="clearence_list_content clearfix">
+                            <div class="clearence_list_text">
+                                <div class="clearence_list_text14">
+                                    <i class="fa fa-caret-right clearence_caret_right_icon"></i>
+                                    <i class="fa fa-times color_blue_edit icon_btn tooltip-examples" title="Delete" style="float:right" onclick="deleteAccoupantNote(__index__,{{id}})"></i>
+                                    <span class="clearence_list_text14">{{Notes}}
+                                            <br />
+                                        
+                                        <span class="clearence_list_text12">{{CreateDate}} by {{CreateBy}}
+                                        </span>
+                                    </span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/Notes}}
+                </div>
+                <div class="note_output">
+                </div>
+            </div>
         </div>
     </div>
-
 </div>
+<dx:ASPxPopupControl ClientInstanceName="aspxAddOccupantNotes" Width="500px" Height="50px" ID="AddOccupantNotes"
+    HeaderText="Add Notes" ShowHeader="false" OnWindowCallback="AddOccupantNotes_WindowCallback"
+    runat="server" EnableViewState="false" PopupHorizontalAlign="OutsideRight" PopupVerticalAlign="Middle" EnableHierarchyRecreation="True">
+    <ContentCollection>
+        <dx:PopupControlContentControl>
+            <table>
+                <tr style="padding-top: 3px;">
+                    <td style="width: 380px; vertical-align: central">
+                        <input type="text" class="form-control" id="txtAddOccupantNotes">
+                    </td>
+                    <td style="text-align: right">
+                        <div style="margin-left:10px">
+                            <dx:ASPxButton runat="server" ID="btnAdd" Text="Add" AutoPostBack="false" CssClass="rand-button" BackColor="#3993c1">
+                                <ClientSideEvents Click="function(s,e){AddOccupantsNote();}" />
+                            </dx:ASPxButton>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+    <ClientSideEvents EndCallback="function(s,e){aspxAddOccupantNotes.Hide();}" />
+</dx:ASPxPopupControl>
+<script>
+    
+    var tempOccupantIndx = null;
+    function addOccupantNoteClick(aIndex,e)
+    {
+        var Occupant = GetOccupant(aIndex);
+        if (Occupant == null || Occupant.OccupantId==null)
+        {
+            alert("Add Notes need save frist ! Please click save button above.")
+            return;
+        }
+        $("#txtAddOccupantNotes").val("");
+        tempOccupantIndx = aIndex;
+        aspxAddOccupantNotes.ShowAtElement(e);
+
+    }
+    function GetOccupant(aIndex)
+    {
+        ShortSaleCaseData.Occupants = ShortSaleCaseData.Occupants || []
+        var Occupant = ShortSaleCaseData.Occupants[aIndex]
+        return Occupant;
+    }
+    function AddOccupantsNote() {
+        //debugger;
+        //$("#txtAddOccupantNotes").val("");
+        //tempOccupantIndx = aIndex;
+        var aIndex = tempOccupantIndx;
+        var Occupant = GetOccupant(aIndex);
+        var tempOccupantID = 0
+        
+        tempOccupantID = Occupant.OccupantId;
+        var createDate = (new Date()).toLocaleDateString();
+        var notes = Occupant.Notes != null ? JSON.parse(Occupant.Notes) : [];
+        notes.push({ Notes: $("#txtAddOccupantNotes").val(), CreateDate: createDate, CreateBy: $("#CurrentUser").val(), id: notes.length });
+        Occupant.Notes = JSON.stringify(notes);
+        aspxAddOccupantNotes.PerformCallback(tempOccupantID + "|" + Occupant.Notes);
+        LoadOccupantNotes();
+    }
+    function deleteAccoupantNote(aIndex,noteId)
+    {
+        var Occupant = GetOccupant(aIndex);
+        tempOccupantID = Occupant.OccupantId;
+        var notes = Occupant.Notes != null ? JSON.parse(Occupant.Notes) : [];
+        for (var i = 0 ; i < notes.length; i++)
+        {
+            if (notes[i].id == noteId)
+            {
+                notes.splice(i, 1);
+            }
+           
+        }
+        
+        Occupant.Notes = JSON.stringify(notes);
+        aspxAddOccupantNotes.PerformCallback(tempOccupantID + "|" + Occupant.Notes);
+        LoadOccupantNotes();
+    }
+    function LoadOccupantNotes() {
+        var Occupants = ShortSaleCaseData.Occupants 
+        $(".note_input").each(function () {
+            var source = $(this).html();
+            var template = Handlebars.compile(source);
+            var index = $(this).attr("data-index");
+            var notes = (Occupants != null && Occupants[index] != null && Occupants[index].Notes != null) ? JSON.parse(Occupants[index].Notes) : null
+            var data = { Notes: notes } //{ Notes: [{ test: 1111 }, {test:222222}]};
+            var result = template(data);
+            $(this).parent().children(".note_output").html(result)
+        }
+        )
+
+    }
+    
+
+</script>
