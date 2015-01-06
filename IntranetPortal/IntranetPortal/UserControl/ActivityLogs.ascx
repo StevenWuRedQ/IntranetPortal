@@ -359,8 +359,10 @@
                         </select>
                         <div class="color_gray upcase_text">Status Update</div>
                         <select class="select_bootstrap select_margin" id="selStatusUpdate">
+
                             <option value="Ready for Submission">Ready for Submission</option>
                             <option value="Pending Service Release">Pending Service Release</option>
+                            <option value="Pending Vacancy">Pending Vacancy</option>
                             <option value="Package Submitted">Package Submitted</option>
                             <option value="Package Submitted in Equator">Package Submitted in Equator</option>
                             <option value="Pending BPO Expiration">Pending BPO Expiration</option>

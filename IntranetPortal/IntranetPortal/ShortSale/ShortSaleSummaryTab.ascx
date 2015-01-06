@@ -80,7 +80,7 @@
                         <label class="ss_form_input_title ss_ssn">SSN</label>
                         <input class="ss_form_input" value="<%=owner.SSN %>">
                     </li>
-                    <li class="ss_form_item" style="visibility:hidden">
+                    <li class="ss_form_item" style="visibility: hidden">
                         <label class="ss_form_input_title">Tax class</label>
                         <input class="ss_form_input" value="No Tax class ??">
                     </li>
@@ -106,6 +106,7 @@
                                 <option value=""></option>
                                 <option value="Ready for Submission">Ready for Submission</option>
                                 <option value="Pending Service Release">Pending Service Release</option>
+                                <option value="Pending Vacancy">Pending Vacancy</option>
                                 <option value="Package Submitted">Package Submitted</option>
                                 <option value="Package Submitted in Equator">Package Submitted in Equator</option>
                                 <option value="Pending BPO Expiration">Pending BPO Expiration</option>
@@ -125,6 +126,7 @@
                                 <option value="Value Dispute">Value Dispute</option>
                                 <option value="Marketing W/ Price Reductions">Marketing W/ Price Reductions</option>
                                 <option value="Investor Review">Investor Review</option>
+                                <option value="Approved">Approved</option>
 
                             </select>
 
@@ -150,7 +152,7 @@
                             <span class="ss_form_input_title">&nbsp;</span>
 
                             <input type="checkbox" id="pdf_check_yes1__index__" name="1">
-                            <label for="pdf_check_yes1__index__" class="ss_form_input input_with_check" >
+                            <label for="pdf_check_yes1__index__" class="ss_form_input input_with_check">
                                 <span class="box_text">Fannie</span>
                             </label>
 
