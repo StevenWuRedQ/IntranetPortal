@@ -228,7 +228,6 @@
                                                 " />
                                         </dx:ASPxButton>--%>
                                         <input type="button" value="Rules" class="rand-button rand-button-blue rand-button-pad" onclick="{if(listboxEmployee.GetIsValid()) gridLeads.PerformCallback('AssignLeads');}" />
-}" />
                                         &nbsp;&nbsp;
                                       <input type="button" value="Rules" class="rand-button rand-button-blue rand-button-pad" onclick="AssignLeadsPopupClient.Show();" />
 

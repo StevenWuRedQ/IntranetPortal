@@ -136,8 +136,13 @@
                     <i class="fa fa-envelope homeowner_info_icon"></i>
                     <div class="form_div_node homeowner_info_text homeowner_info_bottom">
                         <div class="color_blue">
-                           <%-- onclick="OnEmailLinkClick('<%= email %>','<%= BBLE%>','<%= OwnerName%>',this)" --%>
-                           <a href="#" style="text-decoration:none" ><%= email %></a> 
+                           <%--  --%>
+                            
+                           <a href="#" style="text-decoration:none" 
+                               <% If NOT (Utility.IsAny(TLOLocateReport.emailAddressesField) and TLOLocateReport.emailAddressesField.Contains(email)) Then %>
+                               onclick="OnEmailLinkClick('<%= email %>','<%= BBLE%>','<%= OwnerName%>',this)"
+                               <% End if %>
+                                ><%= email %></a> 
                         </div>
                     </div>
                 </div>
