@@ -6,6 +6,36 @@
         contentPane.SetContentUrl(link);     
     }
 
+    function InitScrollBar() {
+
+        $(".dxgvCSD").each(function (ind) {
+            var is_list = $(this).parents("#leads_list_left").length > 0;
+
+            var ladfucntion = {
+                onScroll: function () {
+                    var position = this.mcs.topPct;
+                    if (position > 90) {
+                        gridLeads.NextPage();
+                    }
+                }
+            }
+
+            if (is_list) {
+                $(this).mCustomScrollbar(
+                    {
+                        theme: "minimal-dark",
+                        callbacks: ladfucntion
+                    }
+                 );
+            } else {               
+            }
+        });
+    }
+    
+    $(document).ready(function () {
+        //Handler for .ready() called.       
+        InitScrollBar();
+    });
 </script>
 
 <div style="width: 100%; height: 100%;" class="color_gray">
@@ -41,7 +71,7 @@
                 </dx:GridViewDataColumn>
                 <%--<dx:GridViewDataColumn FieldName="Originator" Visible="false" VisibleIndex="4">                  
                 </dx:GridViewDataColumn>--%>
-                <dx:GridViewDataColumn FieldName="ProcessName" Visible="false" VisibleIndex="5">
+                <dx:GridViewDataColumn FieldName="ProcessSchemeDisplayName" Visible="false" VisibleIndex="5">
                     <GroupRowTemplate>
                         <div>
                             <table style="height: 45px">

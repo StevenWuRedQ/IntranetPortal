@@ -101,9 +101,9 @@ Public Class ActivityLogs
         If (e.Parameters.StartsWith("CompleteTask")) Then
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
-            If String.IsNullOrEmpty(Request.QueryString("sn")) Then
-                Return
-            End If
+            'If String.IsNullOrEmpty(Request.QueryString("sn")) Then
+            '    Return
+            'End If
 
             Using Context As New Entities
                 Dim task = Context.UserTasks.Where(Function(t) t.LogID = logId).SingleOrDefault
@@ -290,18 +290,10 @@ Public Class ActivityLogs
             employees = empsDropDownEdit.Text
         End If
 
+        'SetAsTask(employees, cbTaskImportant.Text, cbTaskAction.Text, txtTaskDes.Text, hfBBLE.Value, Page.User.Identity.Name)
+        'Return
+
         Dim scheduleDate = DateTime.Now
-        'If cbTaskSchedule.Text = "1 Day" Then
-        '    scheduleDate = scheduleDate.AddDays(1)
-        'End If
-
-        'If cbTaskSchedule.Text = "2 Day" Then
-        '    scheduleDate = scheduleDate.AddDays(2)
-        'End If
-
-        'If cbTaskSchedule.Text = "Custom" Then
-        '    scheduleDate = CDate(cbTaskSchedule.Text)
-        'End If
 
         If cbTaskImportant.Text = "Normal" Then
             scheduleDate = scheduleDate.AddDays(3)
@@ -338,9 +330,9 @@ Public Class ActivityLogs
         Dim ld = LeadsInfo.GetInstance(hfBBLE.Value)
 
         If DispalyMode = ActivityLogMode.Leads Then
-            WorkflowService.StartTaskProcess("TaskProcess", ld.LeadsName, taskId, ld.BBLE, employees)
+            WorkflowService.StartTaskProcess("TaskProcess", ld.LeadsName, taskId, ld.BBLE, employees, cbTaskImportant.Text)
         ElseIf DispalyMode = ActivityLogMode.ShortSale Then
-            WorkflowService.StartTaskProcess("ShortSaleTask", ld.LeadsName, taskId, ld.BBLE, employees)
+            WorkflowService.StartTaskProcess("ShortSaleTask", ld.LeadsName, taskId, ld.BBLE, employees, cbTaskImportant.Text)
         End If
 
         For i = 0 To emps.Count - 1
@@ -382,15 +374,19 @@ Public Class ActivityLogs
                                    "<tr><td>Description:</td><td>{3}</td></tr>" &
                                    "</table>", employees, taskAction, taskPriority, taskDescription)
 
-        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
+        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString, Nothing, createUser, LeadsActivityLog.EnumActionType.SetAsTask)
 
+        Dim taskId As Integer
         Using Context As New Entities
-            Context.UserTasks.Add(AddTask(bble, employees, taskAction, taskPriority, scheduleDate, taskDescription, log.LogID, createUser))
+            Dim task = Context.UserTasks.Add(AddTask(bble, employees, taskAction, taskPriority, scheduleDate, taskDescription, log.LogID, createUser))
             Context.SaveChanges()
+            taskId = task.TaskID
         End Using
 
-        Dim emps = employees.Split(";").Distinct.ToArray
         Dim ld = LeadsInfo.GetInstance(bble)
+        WorkflowService.StartTaskProcess("TaskProcess", ld.LeadsName, taskId, bble, employees, taskPriority)
+        
+        Dim emps = employees.Split(";").Distinct.ToArray
         For i = 0 To emps.Count - 1
             If Not emps(i) = createUser Then
                 Dim title = String.Format("A New Task has been assigned by {0}  regarding {1} for {2}", createUser, taskAction, ld.PropertyAddress)

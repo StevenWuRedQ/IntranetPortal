@@ -7,7 +7,6 @@
             Catch ex As Exception
                 Return ""
             End Try
-
         End Get
         Set(value As String)
             If (IsNumeric(value)) Then
@@ -31,7 +30,6 @@
                 IntervalType = CType(CInt(value), RuleInterval)
                 Return
             End If
-
             IntervalType = DirectCast([Enum].Parse(GetType(RuleInterval), value), RuleInterval)
         End Set
     End Property

@@ -31,32 +31,49 @@ Public Class LeadsEscalationRule
 
     Private Shared Function TaskRules() As List(Of EscalationRule)
         Dim rules As New List(Of EscalationRule)
-        rules.Add(New EscalationRule("NewLeads", "3.00:00:00",
+        rules.Add(New EscalationRule("NewLead", "3.00:00:00",
                                      Sub(leads)
                                          Dim ld = CType(leads, Lead)
-                                         UserMessage.AddNewMessage(ld.EmployeeName, "New Leads Handler Warning", String.Format("The new leads BBLE:{0} will be recycled.", ld.BBLE), ld.BBLE)
+                                         'UserMessage.AddNewMessage(ld.EmployeeName, "New Leads Handler Warning", String.Format("The new leads BBLE:{0} will be recycled.", ld.BBLE), ld.BBLE)
+                                         Dim log As New ActivityLogs
+                                         Dim description = "This lead has not been reviewed within 3 days. This lead will be recycled within 24 hours."
+                                         log.SetAsTask(ld.EmployeeName, "Important", "Review New Leads Reminder", description, ld.BBLE, "Portal")
                                      End Sub,
                                      Function(leads)
                                          Dim ld = CType(leads, Lead)
                                          Return ld.LastUpdate2 <= ld.AssignDate
                                      End Function,
-                                     1))
+                                     1,
+                                     Function(leads)
+                                         Dim ld = CType(leads, Lead)
+                                         If ld.LastUpdate2 <= ld.AssignDate Then
+                                             Return ld.AssignDate
+                                         End If
+                                         Return ld.LastUpdate2
+                                     End Function))
 
-        rules.Add(New EscalationRule("NewLeads", "4.00:00:00",
+        rules.Add(New EscalationRule("NewLead", "4.00:00:00",
                                      Sub(leads)
                                          Dim ld = CType(leads, Lead)
-                                         'insert to assign leads folder of this team
-                                         ld.ReAssignLeads(ld.Employee.Department & " Office")
+                                         'insert to assign leads folder of this team  -- need consider the UserinTeam situation
+                                         ld.Recycle()
                                      End Sub,
                                      Function(leads)
                                          Dim ld = CType(leads, Lead)
-                                         Return ld.LastUpdate2 <= ld.AssignDate
-                                     End Function, 2))
+                                         Return ld.LastUserUpdate <= ld.AssignDate
+                                     End Function, 2,
+                                      Function(leads)
+                                          Dim ld = CType(leads, Lead)
+                                          If ld.LastUpdate2 <= ld.AssignDate Then
+                                              Return ld.AssignDate
+                                          End If
+                                          Return ld.LastUpdate2
+                                      End Function))
 
-        rules.Add(New EscalationRule("Callback", "24:00:00",
+        rules.Add(New EscalationRule("Callback", "23:59:59",
                                      Sub(leads)
                                          Dim ld = CType(leads, Lead)
-                                         UserMessage.AddNewMessage(ld.EmployeeName, "You missed a Callback", String.Format("The Call back of Leads ({0}) need to hanlder. BBLE:{1}", ld.LeadsName, ld.BBLE), ld.BBLE, DateTime.Now, "System")
+                                         UserMessage.AddNewMessage(ld.EmployeeName, "You missed a Callback", String.Format("The Call back of Leads ({0}) need to hanlder. BBLE:{1}", ld.LeadsName, ld.BBLE), ld.BBLE, DateTime.Now, "Portal")
                                      End Sub,
                                      Function(leads)
                                          Dim ld = CType(leads, Lead)
@@ -73,7 +90,8 @@ Public Class LeadsEscalationRule
                                     'generate Urgent Task and include Manager and Agent
                                     Dim emps = ld.EmployeeName & ";" & ld.Employee.Manager
                                     Dim log As New ActivityLogs
-                                    log.SetAsTask(emps, "Urgent", "Callback Due", String.Format("The leads {0} need callback.", ld.LeadsName), ld.BBLE, "System")
+                                    Dim description = String.Format("A call back was scheduled for {0:d}, If no call back is made within 48 hours, this lead will be recycled.", ld.CallbackDate)
+                                    log.SetAsTask(emps, "Urgent", "Missed Callback Reminder", description, ld.BBLE, "Portal")
                                 End Sub,
                                 Function(leads)
                                     Dim ld = CType(leads, Lead)
@@ -87,13 +105,12 @@ Public Class LeadsEscalationRule
         rules.Add(New EscalationRule("Callback", "3.00:00:00",
                                 Sub(leads)
                                     Dim ld = CType(leads, Lead)
-                                    'generate Urgent Task and include Manager and Agent
-                                    ld.ReAssignLeads(ld.Employee.Department & " Office")
+                                    ld.Recycle()
                                 End Sub,
                                 Function(leads)
                                     Dim ld = CType(leads, Lead)
                                     Return ld.LastUpdate2 <= ld.CallbackDate.Value.AddDays(2)
-                                End Function, 2,
+                                End Function, 3,
                                 Function(leads)
                                     Dim ld = CType(leads, Lead)
                                     Return ld.CallbackDate
@@ -104,7 +121,8 @@ Public Class LeadsEscalationRule
                                  Dim ld = CType(leads, Lead)
                                  Dim emps = ld.EmployeeName & ";" & ld.Employee.Manager
                                  Dim log As New ActivityLogs
-                                 log.SetAsTask(emps, "Urgent", "Doorknock Due", String.Format("The leads {0} need doorknock.", ld.LeadsName), ld.BBLE, "System")
+                                 Dim description = String.Format("A Door Knock was initiated on {0:d}, If no door knock attempt is made within 72 hours, this lead will be recycled.", ld.LastUpdate2)
+                                 log.SetAsTask(emps, "Urgent", "Door Knock Reminder", description, ld.BBLE, "Portal")
                              End Sub, Function(leads)
                                           Return True
                                       End Function, 1))
@@ -112,7 +130,7 @@ Public Class LeadsEscalationRule
         rules.Add(New EscalationRule("DoorKnocks", "10.00:00:00",
                           Sub(leads)
                               Dim ld = CType(leads, Lead)
-                              ld.ReAssignLeads(ld.Employee.Department & " Office")
+                              ld.Recycle()
                           End Sub, Function(leads)
                                        Return True
                                    End Function, 2))
@@ -122,7 +140,7 @@ Public Class LeadsEscalationRule
                                        Dim ld = CType(leads, Lead)
                                        Dim emps = ld.EmployeeName & ";" & ld.Employee.Manager
                                        Dim log As New ActivityLogs
-                                       log.SetAsTask(emps, "Urgent", "HotLeads Due", String.Format("The hot leads {0} need take care.", ld.LeadsName), ld.BBLE, "System")
+                                       log.SetAsTask(emps, "Urgent", "HotLeads Reminder", String.Format("The hot leads {0} need take care.", ld.LeadsName), ld.BBLE, "Portal")
                                    End Sub,
                                    Function(leads)
                                        Dim ld = CType(leads, Lead)
@@ -132,7 +150,7 @@ Public Class LeadsEscalationRule
         rules.Add(New EscalationRule("Priority", "4.00:00:00",
                                Sub(leads)
                                    Dim ld = CType(leads, Lead)
-                                   ld.ReAssignLeads(ld.Employee.Department & " Office")
+                                   ld.Recycle()
                                End Sub,
                                Function(leads)
                                    Dim ld = CType(leads, Lead)
@@ -142,7 +160,7 @@ Public Class LeadsEscalationRule
         rules.Add(New EscalationRule("DeadEnd", "00:00:00",
                   Sub(leads)
                       Dim ld = CType(leads, Lead)
-                      ld.ReAssignLeads(ld.Employee.Department & " Office")
+                      ld.Recycle()
                   End Sub,
                   Function(leads)
                       Dim ld = CType(leads, Lead)
@@ -158,7 +176,7 @@ Public Class LeadsEscalationRule
         rules.Add(New EscalationRule("DeadEnd", "30.00:00:00",
                      Sub(leads)
                          Dim ld = CType(leads, Lead)
-                         ld.ReAssignLeads(ld.Employee.Department & " Office")
+                         ld.Recycle()
                      End Sub,
                      Function(leads)
                          Dim ld = CType(leads, Lead)
@@ -174,7 +192,7 @@ Public Class LeadsEscalationRule
         rules.Add(New EscalationRule("DeadEnd", "120.00:00:00",
                             Sub(leads)
                                 Dim ld = CType(leads, Lead)
-                                ld.ReAssignLeads(ld.Employee.Department & " Office")
+                                ld.Recycle()
                             End Sub,
                             Function(leads)
                                 Dim ld = CType(leads, Lead)

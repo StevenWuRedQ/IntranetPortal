@@ -2,7 +2,7 @@
 Imports MyIdealProp.Workflow
 
 Public Class WorkflowService
-    Public Shared Sub StartTaskProcess(procName As String, displayName As String, taskId As Integer, bble As String, approver As String)
+    Public Shared Sub StartTaskProcess(procName As String, displayName As String, taskId As Integer, bble As String, approver As String, priority As String)
         If Not IntegratedWithWorkflow() Then
             Return
         End If
@@ -10,11 +10,12 @@ Public Class WorkflowService
         Dim conn = GetConnection()
         Dim procInst = conn.CreateProcessInstance(procName)
         procInst.DisplayName = displayName
+        procInst.Priority = [Enum].Parse(GetType(ProcessPriority), priority)
         procInst.DataFields.Add("TaskId", taskId)
         procInst.DataFields.Add("BBLE", bble)
         procInst.DataFields.Add("Mgr", approver)
-
         conn.StartProcessInstance(procInst)
+        conn.Close()
     End Sub
 
     Public Shared Sub StartNewLeadsRequest(displayName As String, bble As String, approver As String)
@@ -22,12 +23,13 @@ Public Class WorkflowService
             Return
         End If
 
-        Dim conn = GetConnection()
-        Dim procInst = conn.CreateProcessInstance("NewLeadsRequest")
-        procInst.DisplayName = displayName
-        procInst.DataFields.Add("BBLE", bble)
-        procInst.DataFields.Add("Mgr", approver)
-        conn.StartProcessInstance(procInst)
+        Using conn = GetConnection()
+            Dim procInst = conn.CreateProcessInstance("NewLeadsRequest")
+            procInst.DisplayName = displayName
+            procInst.DataFields.Add("BBLE", bble)
+            procInst.DataFields.Add("Mgr", approver)
+            conn.StartProcessInstance(procInst)
+        End Using
     End Sub
 
     Public Shared Sub StartNewAppointmentProcess(displayName As String, bble As String, appointId As Integer, approver As String)
@@ -35,13 +37,14 @@ Public Class WorkflowService
             Return
         End If
 
-        Dim conn = GetConnection()
-        Dim procInst = conn.CreateProcessInstance("NewAppointmentRequest")
-        procInst.DisplayName = displayName
-        procInst.DataFields.Add("BBLE", bble)
-        procInst.DataFields.Add("Mgr", approver)
-        procInst.DataFields.Add("AppointmentId", appointId)
-        conn.StartProcessInstance(procInst)
+        Using conn = GetConnection()
+            Dim procInst = conn.CreateProcessInstance("NewAppointmentRequest")
+            procInst.DisplayName = displayName
+            procInst.DataFields.Add("BBLE", bble)
+            procInst.DataFields.Add("Mgr", approver)
+            procInst.DataFields.Add("AppointmentId", appointId)
+            conn.StartProcessInstance(procInst)
+        End Using
     End Sub
 
     Public Shared Function IsAppointmentProcess(sn As String, appointId As Integer) As Boolean
@@ -72,8 +75,9 @@ Public Class WorkflowService
             Return New List(Of WorklistItem)
         End If
 
-        Dim conn = GetConnection()
-        Return conn.OpenMyWorklist()
+        Using conn = GetConnection()
+            Return conn.OpenMyWorklist()
+        End Using
     End Function
 
     Public Shared Function GetMyOriginated(userName As String) As List(Of DBPersistence.ProcessInstance)
@@ -92,7 +96,12 @@ Public Class WorkflowService
     Private Shared Function GetConnection() As Connection
         Dim conn As New Connection(wfServer)
         conn.Integrated = True
-        conn.UserName = HttpContext.Current.User.Identity.Name
+        If HttpContext.Current Is Nothing Then
+            conn.UserName = "Portal"
+        Else
+            conn.UserName = HttpContext.Current.User.Identity.Name
+        End If
+
         conn.Open()
         Return conn
     End Function

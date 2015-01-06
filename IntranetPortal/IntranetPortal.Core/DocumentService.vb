@@ -273,6 +273,10 @@ Public Class DocumentService
     Private Shared Function GetFileCreateBy(file As File, ctx As ClientContext) As String
         ctx.Load(file, Function(f As File) f.ListItemAllFields)
         ctx.ExecuteQuery()
-        Return file.ListItemAllFields("UploadBy")
+        Try
+            Return file.ListItemAllFields("UploadBy")
+        Catch ex As Exception
+            Return ""
+        End Try
     End Function
 End Class

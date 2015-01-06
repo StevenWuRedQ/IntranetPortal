@@ -1,4 +1,5 @@
 ﻿Imports System.Threading
+
 Public Class RulesService
     Private Shared ServiceInstance As RulesService
     Private StateObj As New StateObjClass
@@ -78,9 +79,13 @@ Public Class RulesService
 
         For Each t In tasks
             Try
+                If t.BBLE = "4012270035 " Then
+                    Dim t2 = 1
+                End If
+
                 TaskEscalationRule.Excute(t)
             Catch ex As Exception
-                Log("Exception when execute task rule. BBLE: " & t.BBLE & ", Task Id: " & t.TaskID & ", Exception: " & ex.Message)
+                Log("Exception when execute task rule. BBLE: " & t.BBLE & ", Task Id: " & t.TaskID & ", Exception: " & ex.Message, ex)
             End Try
         Next
         Log("Task Rules Finished.")
@@ -94,10 +99,23 @@ Public Class RulesService
             Try
                 LeadsEscalationRule.Execute(ld)
             Catch ex As Exception
-                Log("Exception when execute Leads Rule. BBLE: " & ld.BBLE & ", Employee: " & ld.EmployeeName & ", Exception: " & ex.Message)
+                Log("Exception when execute Leads Rule. BBLE: " & ld.BBLE & ", Employee: " & ld.EmployeeName & ", Exception: " & ex.Message, ex)
             End Try
         Next
         Log("Leads Rule finished.")
+
+        'Run deal leads recycle rules
+        lds = Lead.GetAllDeadLeads()
+        Log("Dead leads recycle rules")
+
+        For Each ld In lds
+            Try
+                LeadsEscalationRule.Execute(ld)
+            Catch ex As Exception
+                Log("Exception when execute dead Leads Rule. BBLE: " & ld.BBLE & ", Exception: " & ex.Message, ex)
+            End Try
+        Next
+        Log("Dead leads recycle rules finished.")
 
         Dim rules = AssignRule.GetAllRules()
         Log("Assign Rules count: " & rules.Count)
@@ -106,7 +124,7 @@ Public Class RulesService
             Try
                 Rule.Execute()
             Catch ex As Exception
-                Log("Exception when execute assign Leads Rule. Exception: " & ex.Message)
+                Log("Exception when execute assign Leads Rule. Exception: " & ex.Message, ex)
             End Try
         Next
         Log("Assign Rules Finished")
@@ -114,6 +132,10 @@ Public Class RulesService
 
     Private Sub Log(msg As String)
         ServiceLog.Log(msg)
+    End Sub
+
+    Private Sub Log(msg As String, ex As Exception)
+        ServiceLog.Log(msg, ex)
     End Sub
 
     Private Class StateObjClass

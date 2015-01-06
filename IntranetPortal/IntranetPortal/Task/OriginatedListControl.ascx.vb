@@ -17,7 +17,7 @@ Public Class OriginatedListControl
         gridProcess.DataBind()
 
         If Not IsPostBack Then
-            gridProcess.GroupBy(gridProcess.Columns("ProcessName"))
+            gridProcess.GroupBy(gridProcess.Columns("ProcessSchemeDisplayName"))
         End If
     End Sub
 

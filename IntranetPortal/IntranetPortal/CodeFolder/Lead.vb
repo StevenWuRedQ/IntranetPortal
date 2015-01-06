@@ -29,6 +29,17 @@ Partial Public Class Lead
         End Get
     End Property
 
+    Public ReadOnly Property LastUserUpdate As DateTime
+        Get
+            Dim log = LeadsActivityLogs.Where(Function(l) l.EmployeeName = EmployeeName).OrderByDescending(Function(lg) lg.ActivityDate).FirstOrDefault
+            If log IsNot Nothing Then
+                Return log.ActivityDate
+            End If
+
+            Return AssignDate
+        End Get
+    End Property
+
     Public ReadOnly Property ReferrelName As String
         Get
             Return Me.LeadsInfo.ReferrelName
@@ -103,24 +114,54 @@ Partial Public Class Lead
         Return results
     End Function
 
+    Public Shared Function GetAllDeadLeads() As List(Of Lead)
+        Dim ctx As New Entities
+        Dim results = (From ld In ctx.Leads Where ld.Status = LeadStatus.DeadEnd).ToList
+        Return results
+    End Function
+
     Public Sub ReAssignLeads(empName As String)
         Dim emp = IntranetPortal.Employee.GetInstance(empName)
 
         If emp IsNot Nothing Then
-            Dim originator = emp.Name
+            Dim originator = EmployeeName
             Using ctx As New Entities
-                Me.EmployeeID = emp.EmployeeID
-                Me.EmployeeName = emp.Name
-                Me.AssignDate = DateTime.Now
-                Me.LastUpdate = DateTime.Now
-
-                ctx.Entry(Me).State = Entity.EntityState.Modified
+                Dim ld = ctx.Leads.Find(BBLE)
+                ld.EmployeeID = emp.EmployeeID
+                ld.EmployeeName = emp.Name
+                ld.Status = LeadStatus.NewLead
+                ld.AssignDate = DateTime.Now
+                ld.LastUpdate = DateTime.Now
                 ctx.SaveChanges()
 
                 Dim comments = String.Format("Leads Reassign from {0} to {1}.", originator, empName)
-                LeadsActivityLog.AddActivityLog(DateTime.Now, comments, BBLE, LeadsActivityLog.LogCategory.Status.ToString)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, comments, BBLE, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
             End Using
         End If
+    End Sub
+
+    Public Sub Recycle()
+        Dim recycleName = Employee.Department & " office"
+        If IntranetPortal.Employee.GetInstance(recycleName) IsNot Nothing Then
+            ReAssignLeads(recycleName)
+            Return
+        End If
+
+        Using ctx As New Entities
+            Dim team = (From t In ctx.Teams
+                       Join ut In ctx.UserInTeams On t.TeamId Equals ut.TeamId
+                       Where ut.EmployeeName = EmployeeName
+                       Select t.Name).FirstOrDefault
+
+            If team IsNot Nothing Then
+                recycleName = team & " office"
+
+                If IntranetPortal.Employee.GetInstance(recycleName) IsNot Nothing Then
+                    ReAssignLeads(recycleName)
+                    Return
+                End If
+            End If
+        End Using
     End Sub
 
     Public ReadOnly Property Task As UserTask

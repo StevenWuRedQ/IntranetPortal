@@ -1,7 +1,7 @@
 ﻿Public Class TaskEscalationRule
     Public Shared Sub Excute(t As UserTask)
         Dim rule = GetRule(t)
-        If rule.IsDateDue(If(t.NotifyDate.HasValue, t.NotifyDate, t.CreateDate), Nothing) Then
+        If rule.IsDateDue(If(t.Schedule.HasValue, t.Schedule, t.CreateDate), Nothing) Then
             ServiceLog.Log("Execute Task Rule: " & t.BBLE & ", Task Id: " & t.TaskID)
             rule.Execute(t)
         End If
@@ -18,6 +18,7 @@
                                                                  Using ctx As New Entities
                                                                      Dim tmpTask = ctx.UserTasks.Where(Function(obj) obj.TaskID = tk.TaskID).FirstOrDefault
                                                                      tmpTask.Important = "Important"
+                                                                     tmpTask.Schedule = DateTime.Now
                                                                      tmpTask.NotifyDate = DateTime.Now
                                                                      ctx.SaveChanges()
                                                                  End Using
@@ -28,6 +29,7 @@
                                                                     Using ctx As New Entities
                                                                         Dim tmpTask = ctx.UserTasks.Where(Function(obj) obj.TaskID = tk.TaskID).FirstOrDefault
                                                                         tmpTask.Important = "Urgent"
+                                                                        tmpTask.Schedule = DateTime.Now
                                                                         tmpTask.NotifyDate = DateTime.Now
                                                                         ctx.SaveChanges()
                                                                     End Using
@@ -35,13 +37,20 @@
 
         rules.Add(New EscalationRule("Urgent", "02:00:00", Sub(task)
                                                                Dim tk = CType(task, UserTask)
-                                                               Using ctx As New Entities
-                                                                   Dim tmpTask = ctx.UserTasks.Where(Function(obj) obj.TaskID = tk.TaskID).FirstOrDefault
-                                                                   tmpTask.NotifyDate = DateTime.Now
-                                                                   ctx.SaveChanges()
-                                                               End Using
+                                                               'Using ctx As New Entities
+                                                               '    Dim tmpTask = ctx.UserTasks.Where(Function(obj) obj.TaskID = tk.TaskID).FirstOrDefault
+                                                               '    tmpTask.NotifyDate = DateTime.Now
+                                                               '    tmpTask.Schedule = DateTime.Now
+                                                               '    ctx.SaveChanges()
+                                                               'End Using
+                                                               For Each empName In tk.EmployeeName.Split(";")
+                                                                   Dim emp = Employee.GetInstance(empName)
+                                                                   If Not String.IsNullOrEmpty(emp.Email) Then
+                                                                       IntranetPortal.Core.EmailService.SendMail(emp.Email, "", String.Format("The urgent Task ({0}) is due", tk.Action), tk.Description, Nothing)
+                                                                   End If
+                                                               Next
+                                                               'IntranetPortal.Core.EmailService.SendMail(tk.EmployeeName)
                                                            End Sub))
-
         Return rules
     End Function
 End Class
