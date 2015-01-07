@@ -124,6 +124,7 @@
         <% If Utility.isAny(BestEmail) or Utility.IsAny(TLOLocateReport.emailAddressesField) Then%>
         <div class="clearfix homeowner_info_label">
             <div>
+                <% Dim emails2 = BestEmail.Select(Function(e) e.Email).ToList%>
                 <% Dim emails = BestEmail.Select(Function(e) e.Email).ToList%>
                 <%If (Utility.IsAny(emails) And Utility.IsAny(TLOLocateReport.emailAddressesField)) Then%>
                 <% emails.AddRange(TLOLocateReport.emailAddressesField) %>
@@ -139,7 +140,7 @@
                            <%--  --%>
                             
                            <a href="#" style="text-decoration:none" 
-                               <% If NOT (Utility.IsAny(TLOLocateReport.emailAddressesField) and TLOLocateReport.emailAddressesField.Contains(email)) Then %>
+                               <% If (Utility.IsAny(emails2) Andalso emails2.Contains(email)) Then %>
                                onclick="OnEmailLinkClick('<%= email %>','<%= BBLE%>','<%= OwnerName%>',this)"
                                <% End if %>
                                 ><%= email %></a> 

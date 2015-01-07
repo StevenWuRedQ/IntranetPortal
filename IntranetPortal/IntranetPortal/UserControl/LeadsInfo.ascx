@@ -573,10 +573,7 @@
                                                             <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="false"></dx:ASPxCalendar>
                                                             <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" TimeSectionProperties-Visible="True" CssClass="edit_drop">
                                                                 <TimeSectionProperties Visible="True"></TimeSectionProperties>
-                                                                <ClientSideEvents DropDown="function(s,e){ 
-                                                                    var d = new Date('May 1 2014 12:00:00');                                                                    
-                                                                    s.GetTimeEdit().SetValue(d);
-                                                                    }" />
+                                                                <ClientSideEvents Init="function(s,e){ s.SetDate(new Date());}" /> 
                                                             </dx:ASPxDateEdit>
                                                         </td>
                                                     </tr>

@@ -1,4 +1,5 @@
 <%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Root.master.vb" Inherits="IntranetPortal.Root" %>
+
 <%@ Import Namespace="System.ComponentModel" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
@@ -10,19 +11,19 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <%--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />--%>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="/css/styles.css" />        
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/normalize.min.css" />
     <link rel="stylesheet" href="/scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/css/stevencss.css?v=1.0" />
     <style>
-        html, body, #form1 {            
+        html, body, #form1 {
             width: 100% !important;
         }
     </style>
     <script type="text/javascript" src="/scripts/PortalMessager.js"></script>
-    
-   <%-- <script type="text/javascript">
+
+    <%-- <script type="text/javascript">
         // here is a cross-browser compatible way of connecting 
         // handlers to events, in case you don't have one
         function attachEventHandler(element, eventToHandle, eventHandler) {
@@ -96,7 +97,7 @@
                 </dx:SplitterPane>
                 <dx:SplitterPane Name="RightContentPane">
                     <Panes>
-                        <dx:SplitterPane Name="HeaderPane" Size="50px">
+                        <dx:SplitterPane Name="HeaderPane" Size="52px">
                             <PaneStyle>
                                 <BorderBottom BorderWidth="1px" />
                             </PaneStyle>
@@ -162,7 +163,33 @@
                                                                     <%--<asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />--%>
                                                                     <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>'>                                                                
                                                                     </asp:LinkButton>
+                                                                    <style>
+                                                                        .badge-notify {
+                                                                            background: red;
+                                                                            position: relative;
+                                                                            top: -13px;
+                                                                            left: -22px;
+                                                                            padding: 2px 4px;
+                                                                            font-size: 11px;
+                                                                        }
+                                                                    </style>
+                                                                        
+                                                                    <script>
+                                                                        function PopupMessageList(e)
+                                                                        {
+                                                                            $(e).popover(
+                                                                                {
 
+                                                                                })
+                                                                        }
+                                                                    </script>
+                                                                    <div style="display: inline-block">
+                                                                        <button class="btn btn-default btn-sm btn-link" type="button" style="font-size: 18px; outline: none" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-html="true" data-content="<p>123456789</p>"
+                                                                             onclick='$("[data-toggle=popover]").popover();'>
+                                                                            <span class="glyphicon glyphicon-comment" style="color: black"></span>
+                                                                        </button>
+                                                                        <span class="badge badge-notify">&nbsp;&nbsp;&nbsp;</span>
+                                                                    </div>
 
                                                                     <div style="display: none">
                                                                         [<asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />
@@ -177,6 +204,15 @@
                                             </div>
                                             <%--change the pop search screen UI style by steven--%>
                                             <%--MinHeight="150px"--%>
+                                            <dx:ASPxPopupMenu runat="server" ID="messageList" ClientInstanceName="messageListClinet"
+                                                AutoPostBack="false"
+                                                PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
+                                                ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                                <ItemStyle Paddings-PaddingLeft="10px" />
+                                                <Items>
+                                                    <dx:MenuItem Text="Message1"></dx:MenuItem>
+                                                </Items>
+                                            </dx:ASPxPopupMenu>
                                             <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSearchPanel" Width="600px" Height="250px"
                                                 MaxWidth="800px" MaxHeight="800px" MinWidth="150px" ID="pcMain" OnWindowCallback="pcMain_WindowCallback"
                                                 ShowHeader="false" CloseAction="CloseButton"
@@ -352,6 +388,6 @@
     <script src="/Scripts/js/main.js"></script>
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="/scripts/stevenjs.js?v=1.0?v=1.0"></script> 
+    <script src="/scripts/stevenjs.js?v=1.0?v=1.0"></script>
 </body>
 </html>
