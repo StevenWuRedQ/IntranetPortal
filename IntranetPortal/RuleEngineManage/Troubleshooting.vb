@@ -4,4 +4,8 @@
         Dim bble = TextBox1.Text
         IntranetPortal.RulesEngine.LeadsEscalationRule.Execute(bble)
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        IntranetPortal.RulesEngine.TaskEscalationRule.Excute(CInt(txtTaskId.Text))
+    End Sub
 End Class

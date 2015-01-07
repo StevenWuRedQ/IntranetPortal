@@ -8,6 +8,8 @@ Public Class ServiceLog
     Public Event OnWriteException As WriteException
     Public Event OnWriteLog As WriteLog
 
+    Public Shared Property Debug As Boolean = CBool(System.Configuration.ConfigurationManager.AppSettings("Debug"))
+
     Private Sub New()
 
     End Sub

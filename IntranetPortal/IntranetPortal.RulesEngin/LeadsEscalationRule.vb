@@ -77,11 +77,19 @@ Public Class LeadsEscalationRule
                                      End Sub,
                                      Function(leads)
                                          Dim ld = CType(leads, Lead)
+                                         If Not ld.CallbackDate.HasValue Then
+                                             Return True
+                                         End If
                                          Return ld.LastUpdate2 <= ld.CallbackDate
+
                                      End Function, 1,
                                      Function(leads)
                                          Dim ld = CType(leads, Lead)
-                                         Return ld.CallbackDate
+                                         If ld.CallbackDate.HasValue Then
+                                             Return ld.CallbackDate
+                                         Else
+                                             Return ld.LastUpdate2
+                                         End If
                                      End Function))
 
         rules.Add(New EscalationRule("Callback", "2.00:00:00",
@@ -95,11 +103,19 @@ Public Class LeadsEscalationRule
                                 End Sub,
                                 Function(leads)
                                     Dim ld = CType(leads, Lead)
+                                    If Not ld.CallbackDate.HasValue Then
+                                        Return True
+                                    End If
+
                                     Return ld.LastUpdate2 <= ld.CallbackDate.Value.AddDays(1)
                                 End Function, 2,
                                 Function(leads)
                                     Dim ld = CType(leads, Lead)
-                                    Return ld.CallbackDate
+                                    If ld.CallbackDate.HasValue Then
+                                        Return ld.CallbackDate
+                                    Else
+                                        Return ld.LastUpdate2
+                                    End If
                                 End Function))
 
         rules.Add(New EscalationRule("Callback", "3.00:00:00",
@@ -109,11 +125,19 @@ Public Class LeadsEscalationRule
                                 End Sub,
                                 Function(leads)
                                     Dim ld = CType(leads, Lead)
+                                    If Not ld.CallbackDate.HasValue Then
+                                        Return True
+                                    End If
+
                                     Return ld.LastUpdate2 <= ld.CallbackDate.Value.AddDays(2)
                                 End Function, 3,
                                 Function(leads)
                                     Dim ld = CType(leads, Lead)
-                                    Return ld.CallbackDate
+                                    If ld.CallbackDate.HasValue Then
+                                        Return ld.CallbackDate
+                                    Else
+                                        Return ld.LastUpdate2
+                                    End If
                                 End Function))
 
         rules.Add(New EscalationRule("DoorKnocks", "7.00:00:00",

@@ -81,6 +81,10 @@
         Return ""
     End Function
 
+    Public Overrides Function ToString() As String
+        Return String.Format("Employee Name: {0}, Amount: {1}, LeadsType: {2}", EmployeeName, Count, LeadsTypeText)
+    End Function
+
     Private Function IsAssigned(logdata As String, empName As String) As Boolean
         Using ctx As New Entities
             Return ctx.AssginRulesLogs.Where(Function(log) log.LogData = logdata And log.EmployeeName = empName).Count > 0

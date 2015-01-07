@@ -37,14 +37,18 @@ Public Class RulesService
     Public Sub StopService()
         ' Request Dispose of the timer object.
         GetInstance.StateObj.TimerCanceled = True
+        If timerItem IsNot Nothing Then
+            timerItem.Dispose()
+        End If
     End Sub
 
+    Dim timerItem As Threading.Timer
     Private Sub RunTimer()
         StateObj.TimerCanceled = False
         StateObj.SomeValue = 1
 
         Dim TimerDelegate As New System.Threading.TimerCallback(AddressOf TimerTask)
-        Dim TimerItem As New System.Threading.Timer(TimerDelegate, StateObj, New TimeSpan(1000), New TimeSpan(0, 1, 0))
+        timerItem = New System.Threading.Timer(TimerDelegate, StateObj, New TimeSpan(1000), New TimeSpan(0, 1, 0))
 
         ' Save a reference for Dispose.
         StateObj.TimerReference = TimerItem
@@ -57,10 +61,14 @@ Public Class RulesService
 
         Log("Launched new task ")
 
-        If WorkingHours.IsWorkingHour(DateTime.Now) Then
-            'Run Rules
-            RunRules()
-        End If
+        Try
+            If WorkingHours.IsWorkingHour(DateTime.Now) Then
+                'Run Rules
+                RunRules()
+            End If
+        Catch ex As Exception
+            Log("Exception in Run Rules", ex)
+        End Try
 
         Status = ServiceStatus.Sleep
 
@@ -79,10 +87,6 @@ Public Class RulesService
 
         For Each t In tasks
             Try
-                If t.BBLE = "4012270035 " Then
-                    Dim t2 = 1
-                End If
-
                 TaskEscalationRule.Excute(t)
             Catch ex As Exception
                 Log("Exception when execute task rule. BBLE: " & t.BBLE & ", Task Id: " & t.TaskID & ", Exception: " & ex.Message, ex)
@@ -122,7 +126,10 @@ Public Class RulesService
         'Run Assign Leads rule
         For Each Rule In rules
             Try
-                Rule.Execute()
+                Log("Assign Rule: " & Rule.ToString)
+                If Not ServiceLog.Debug Then
+                    Rule.Execute()
+                End If
             Catch ex As Exception
                 Log("Exception when execute assign Leads Rule. Exception: " & ex.Message, ex)
             End Try

@@ -1,14 +1,25 @@
 ﻿Public Class TaskEscalationRule
     Public Shared Sub Excute(t As UserTask)
         Dim rule = GetRule(t)
+        
         If rule.IsDateDue(If(t.Schedule.HasValue, t.Schedule, t.CreateDate), Nothing) Then
             ServiceLog.Log("Execute Task Rule: " & t.BBLE & ", Task Id: " & t.TaskID)
             rule.Execute(t)
         End If
     End Sub
 
+    Public Shared Sub Excute(taskId As Integer)
+        Dim t = UserTask.GetTaskById(taskId)
+        Excute(t)
+    End Sub
+
     Private Shared Function GetRule(t As UserTask) As EscalationRule
-        Return TaskRules.Where(Function(r) r.Name = t.Important).FirstOrDefault
+        Dim rule = TaskRules.Where(Function(r) r.Name = t.Important).FirstOrDefault
+        If rule Is Nothing Then
+            rule = TaskRules.First
+        End If
+
+        Return rule
     End Function
 
     Private Shared Function TaskRules() As List(Of EscalationRule)
@@ -102,11 +113,18 @@ Public Class EscalationRule
     Public Sub Execute(objData As Object)
         If Condition IsNot Nothing Then
             If Condition(objData) Then
-                Action.Invoke(objData)
+                ServiceLog.Log("Execute Rule Action")
+                If Not ServiceLog.Debug Then
+                    Action.Invoke(objData)
+                End If
             End If
             Return
         End If
-        Me.Action.Invoke(objData)
+
+        ServiceLog.Log("Execute Rule Action")
+        If Not ServiceLog.Debug Then
+            Me.Action.Invoke(objData)
+        End If
     End Sub
 End Class
 

@@ -70,6 +70,12 @@
         End Using
     End Function
 
+    Public Shared Function GetTaskById(taskId As Integer) As UserTask
+        Using ctx As New Entities
+            Return ctx.UserTasks.Find(taskId)
+        End Using
+    End Function
+
     Public Shared Function GetTaskCount(empName As String, Optional userContext As HttpContext = Nothing) As Integer
         If userContext Is Nothing AndAlso HttpContext.Current IsNot Nothing Then
             userContext = HttpContext.Current
