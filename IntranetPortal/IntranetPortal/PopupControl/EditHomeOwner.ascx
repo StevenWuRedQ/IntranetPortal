@@ -24,6 +24,14 @@
             <div class="popup_padding">
                 <div class="clearence_list_text">
                     <div class="clearence_list_title">
+                        Unique TLO ID
+                    </div>
+                    <div class="clearence_list_text18  color_blue_edit">
+                        <input class="ss_form_input" value="" runat="server" id="txtUniqueTLOID" style="width: 90%">
+                    </div>
+                </div>
+                <div class="clearence_list_text">
+                    <div class="clearence_list_title">
                         OwnerName
                     </div>
                     <div class="clearence_list_text18  color_blue_edit">
@@ -71,7 +79,7 @@
                         Description
                     </div>
                     <div class="clearence_list_text18  color_blue_edit">
-                        <textarea class="ss_form_input" value="" runat="server" style="width: 90%; resize: none; height: 70px" id="txtDescription" />
+                        <textarea class="ss_form_input" value="" runat="server" style="width: 90%; resize: none; " id="txtDescription" />
                     </div>
                 </div>
             </div>

@@ -219,12 +219,13 @@
                                                                         }
                                                                         function AddItem(title,isRead,callBackid)
                                                                         {
-                                                                            debugger;
+                                                                            
                                                                             var link = $(".message_list:first").clone()
                                                                             var link = readLink(isRead, link.html(title))
                                                                            
                                                                             link.attr('onclick', 'GoToMassage(this,' + callBackid + ')');
                                                                             $("#ul_template ").append(link.prop("outerHTML"));
+                                                                            show_message_alert();
                                                                         }
                                                                         function testAddItem()
                                                                         {
@@ -235,17 +236,20 @@
                                                                         {
                                                                             debugger;
                                                                             readLink(false, $(e))
-                                                                            $("#message_alert").css("display", $(".un_readed_link").length == 0 ? "none" : "")
+                                                                            show_message_alert()
                                                                             //call function use id 
                                                                             ShowMassge(id);
                                                                         }
-
+                                                                        function show_message_alert()
+                                                                        {
+                                                                            $("#message_alert").css("display", $(".un_readed_link").length == 0 ? "none" : "");
+                                                                        }
                                                                         function ShowMassge(id)
                                                                         {
 
                                                                         }
                                                                     </script>
-                                                                    <button type="button" onclick="testAddItem()">test add</button>
+                                                                   <%-- <button type="button" onclick="testAddItem()">test add</button>--%>
                                                                     <div id="messageList" style="display:none">
                                                                         <ul class="list-group" id="ul_template" style="border-radius:0px;">
                                                                             <li class="list-group-item message_list" >Cras justo odio</li>
@@ -253,7 +257,7 @@
                                                                             
                                                                         </ul>
                                                                     </div>
-                                                                    <div style="display: inline-block">
+                                                                    <div style="display: inline-block;display:none">
                                                                         <button class="btn btn-default btn-sm btn-link" type="button" style="font-size: 18px; outline: none" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-html="true" 
                                                                             onclick='PopupMessageList(this);'>
                                                                             <span class="glyphicon glyphicon-comment"  style="color: black"></span>

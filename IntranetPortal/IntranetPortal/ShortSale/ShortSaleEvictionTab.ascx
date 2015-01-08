@@ -171,7 +171,7 @@
                     <%--index 1--%>
                     {{#Notes}}
                     <div class="clearence_list_item">
-                        <div class="clearence_list_content clearfix">
+                        <div class="clearence_list_content clearfix" style="margin-bottom:10px">
                             <div class="clearence_list_text">
                                 <div class="clearence_list_text14">
                                     <i class="fa fa-caret-right clearence_caret_right_icon"></i>
@@ -249,7 +249,8 @@
         var tempOccupantID = 0
         
         tempOccupantID = Occupant.OccupantId;
-        var createDate = (new Date()).toLocaleDateString();
+        var createDate = (new Date()).toLocaleString();
+        createDate = createDate.replace(",", "")
         var notes = Occupant.Notes != null ? JSON.parse(Occupant.Notes) : [];
         notes.push({ Notes: $("#txtAddOccupantNotes").val(), CreateDate: createDate, CreateBy: $("#CurrentUser").val(), id: notes.length });
         Occupant.Notes = JSON.stringify(notes);
