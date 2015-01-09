@@ -41,6 +41,15 @@ Partial Public Class ShortSaleCaseList
     Protected WithEvents hfCaseStatus As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
+    '''hfCaseBBLEs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfCaseBBLEs As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''gridCase control.
     '''</summary>
     '''<remarks>

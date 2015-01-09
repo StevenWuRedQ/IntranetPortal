@@ -180,6 +180,7 @@
     </div>
     <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
         <asp:HiddenField runat="server" ID="hfCaseStatus" />
+         <asp:HiddenField runat="server" ID="hfCaseBBLEs" />
         <dx:ASPxGridView runat="server" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" KeyFieldName="CaseId" OnDataBinding="gridCase_DataBinding">
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">

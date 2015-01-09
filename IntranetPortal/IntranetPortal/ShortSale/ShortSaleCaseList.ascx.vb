@@ -31,7 +31,7 @@ Public Class ShortSaleCaseList
     End Sub
 
     Public Sub BindCaseByBBLEs(bbles As List(Of String))
-        hfCaseStatus.Value = "Cases"
+        hfCaseBBLEs.Value = String.Join(";", bbles.ToArray)
         gridCase.DataSource = ShortSaleCase.GetCaseByBBLEs(bbles)
         gridCase.DataBind()
     End Sub
@@ -41,6 +41,10 @@ Public Class ShortSaleCaseList
             If Not String.IsNullOrEmpty(hfCaseStatus.Value) Then
                 BindCaseList(hfCaseStatus.Value)
             End If
+            If (Not String.IsNullOrEmpty(hfCaseBBLEs.Value)) Then
+                BindCaseByBBLEs(hfCaseBBLEs.Value.Split(";").ToList())
+            End If
+
         End If
     End Sub
 
