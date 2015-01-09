@@ -405,6 +405,9 @@
     <Compile Include="DataModel\LoginLog.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\NYC_DATA_COMMENT.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\NYC_St_Names.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>

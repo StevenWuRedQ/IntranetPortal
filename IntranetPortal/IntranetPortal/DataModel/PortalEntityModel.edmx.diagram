@@ -45,6 +45,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.UserInTeam" Width="1.5" PointX="16.5" PointY="6.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsTaxLien" Width="1.5" PointX="16.375" PointY="8.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.HomeOwnerEmail" Width="1.5" PointX="16.375" PointY="3.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.NYC_DATA_COMMENT" Width="1.5" PointX="17.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

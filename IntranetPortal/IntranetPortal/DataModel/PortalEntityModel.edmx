@@ -330,6 +330,14 @@
           <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="NYC_DATA_COMMENT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nchar" MaxLength="20" />
+          <Property Name="Data" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="NYC_St_Names">
@@ -574,6 +582,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="LeadsMortgageData" EntityType="Self.LeadsMortgageData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsTaxLiens" EntityType="Self.LeadsTaxLiens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginLogs" EntityType="Self.LoginLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NYC_DATA_COMMENT" EntityType="Self.NYC_DATA_COMMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderResponses" EntityType="Self.OrderResponses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OwnerContacts" EntityType="Self.OwnerContacts" Schema="dbo" store:Type="Tables" />
@@ -661,6 +670,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="UserInTeams" EntityType="IntranetPortalModel.UserInTeam" />
           <EntitySet Name="LeadsTaxLiens" EntityType="IntranetPortalModel.LeadsTaxLien" />
           <EntitySet Name="HomeOwnerEmails" EntityType="IntranetPortalModel.HomeOwnerEmail" />
+          <EntitySet Name="NYC_DATA_COMMENT" EntityType="IntranetPortalModel.NYC_DATA_COMMENT" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1278,6 +1288,14 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Source" Type="Int32" />
           <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="NYC_DATA_COMMENT">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Data" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1856,6 +1874,15 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
                 <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NYC_DATA_COMMENT">
+            <EntityTypeMapping TypeName="IntranetPortalModel.NYC_DATA_COMMENT">
+              <MappingFragment StoreEntitySet="NYC_DATA_COMMENT">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

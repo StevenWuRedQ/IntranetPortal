@@ -172,7 +172,7 @@
                     {{#Notes}}
                     <div class="clearence_list_item">
                         <div class="clearence_list_content clearfix" style="margin-bottom:10px">
-                            <div class="clearence_list_text">
+                            <div class="clearence_list_text" style="margin-top:0px;">
                                 <div class="clearence_list_text14">
                                     <i class="fa fa-caret-right clearence_caret_right_icon"></i>
                                     <i class="fa fa-times color_blue_edit icon_btn tooltip-examples" title="Delete" style="float:right" onclick="deleteAccoupantNote(__index__,{{id}})"></i>

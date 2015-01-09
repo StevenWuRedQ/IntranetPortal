@@ -29,8 +29,12 @@
             filter.ECB_DOB = { min: $("#IdECB_DOBMin").val(), max: $("#IdECB_DOBMax").val() }
             filter.isLis = $("#Lis_Pendens_yes").val();
             filter.DocketYear = $("#IdDocket_Year").val();
-
+            popUpSearch(filter);
             debugger;
+        }
+        function popUpSearch(filter)
+        {
+            SaveSearchPopupClient.Show();
         }
     </script>
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Width="100%" Height="100%" ClientInstanceName="sampleSplitter" FullscreenMode="true">
@@ -721,7 +725,47 @@
         </Panes>
 
     </dx:ASPxSplitter>
+    <dx:ASPxPopupControl ID="SaveSearchPopup" runat="server"
+        ClientInstanceName="SaveSearchPopupClient"
+        CloseAction="CloseButton" ShowFooter="true" Width="550"
+        HeaderText="Save Search " Modal="true"
+        PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableViewState="false" EnableHierarchyRecreation="True">
+        <HeaderTemplate>
+            <div class="clearfix">
 
+                <div class="pop_up_header_margin">
+                    <i class="fa fa-floppy-o with_circle pop_up_header_icon"></i>
+                    <span class="pop_up_header_text">Save Search</span>
+                    <%--<div style="display: inline-block; font-size: 12px;">
+                    <div>50 Leads</div>
+                    <div>to be assigned</div>
+                </div>--%>
+                </div>
+                <div class="pop_up_buttons_div">
+                    <i class="fa fa-times icon_btn" onclick="SaveSearchPopupClient.Hide()"></i>
+                </div>
+            </div>
+        </HeaderTemplate>
+        <ContentCollection>
+            <dx:PopupControlContentControl>
+                <div style="padding:0 10px;">
+                    <div class="input-group" style="width:100%">
+                        <label class="ss_form_input_title"> name the search</label>
+                        
+                        <input type="text" class="form-control"  style="border-radius:4px;margin-top:3px;">
+                    </div>
+                </div>
+            </dx:PopupControlContentControl>
+        </ContentCollection>
+        <FooterContentTemplate> 
+
+            <div style="float: right; padding-bottom: 20px;">
+                <input style="margin-right: 20px;" type="button" class="rand-button rand-button-padding bg_color_blue" value="Assign" onclick="OnSearchSaveClick()">
+                <input type="button" class="rand-button rand-button-padding bg_color_gray" value="Close" onclick="SaveSearchPopupClient.Hide()">
+            </div>
+
+        </FooterContentTemplate>
+    </dx:ASPxPopupControl>
 
     <script>
         $(document).ready(function () {

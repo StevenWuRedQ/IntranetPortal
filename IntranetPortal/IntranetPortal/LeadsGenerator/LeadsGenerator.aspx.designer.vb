@@ -30,4 +30,13 @@ Partial Public Class LeadsGenerator
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents QueryResultsGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''SaveSearchPopup control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SaveSearchPopup As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 End Class

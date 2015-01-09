@@ -6,7 +6,7 @@
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
-        'DataBinds()
+        DataBinds()
 
     End Sub
 
@@ -14,9 +14,10 @@
         Using context As New Entities
             QueryResultsGrid.DataSource = context.Leads.ToList()
             QueryResultsGrid.DataBind()
-            ZipCodes = context.LeadsInfoes.OrderBy(Function(o) o.ZipCode).Select(Function(l) l.ZipCode).Distinct().ToList
-            AllNeighName = context.LeadsInfoes.OrderBy(Function(l) l.NeighName).Select(Function(l) l.NeighName).Distinct().ToList
-            AllZoning = context.LeadsInfoes.Select(Function(l) l.Zoning).Distinct.ToList
+
+            ZipCodes = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "ZIP").Select(Function(c) c.Data).ToList
+            AllNeighName = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "Neighborhood").Select(Function(c) c.Data).ToList
+            AllZoning = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "ZONING_MAP").Select(Function(c) c.Data).ToList
         End Using
     End Sub
 
