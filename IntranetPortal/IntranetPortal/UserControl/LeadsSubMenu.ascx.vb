@@ -76,6 +76,35 @@ Public Class LeadsSubMenu
                 End If
             End If
 
+            If e.Parameter.StartsWith("nextWeek") Then
+                If e.Parameter.Contains("|") Then
+                    Dim bble = e.Parameter.Split("|")(1)
+                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(7))
+                End If
+            End If
+
+
+            If e.Parameter.StartsWith("thirtyDays") Then
+                If e.Parameter.Contains("|") Then
+                    Dim bble = e.Parameter.Split("|")(1)
+                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(30))
+                End If
+            End If
+
+            If e.Parameter.StartsWith("sixtyDays") Then
+                If e.Parameter.Contains("|") Then
+                    Dim bble = e.Parameter.Split("|")(1)
+                    UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(60))
+                End If
+            End If
+
+            If e.Parameter.StartsWith("customDays") Then
+                If e.Parameter.Contains("|") Then
+                    Dim bble = e.Parameter.Split("|")(1)
+                    Dim tmpdate = If(e.Parameter.Split("|").Count > 2, DateTime.Parse(e.Parameter.Split("|")(2)), DateTime.Now)
+                    UpdateLeadStatus(bble, LeadStatus.Callback, tmpdate)
+                End If
+            End If
 
             If e.Parameter.StartsWith(4) Then
                 If e.Parameter.Contains("|") Then

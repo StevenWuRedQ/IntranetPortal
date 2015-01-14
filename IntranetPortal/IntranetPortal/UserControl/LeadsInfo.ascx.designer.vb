@@ -167,15 +167,6 @@ Partial Public Class LeadsInfo1
     Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
 
     '''<summary>
-    '''leadStatusCallback control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents leadStatusCallback As Global.DevExpress.Web.ASPxCallback.ASPxCallback
-
-    '''<summary>
     '''callPhoneCallback control.
     '''</summary>
     '''<remarks>
@@ -255,15 +246,6 @@ Partial Public Class LeadsInfo1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents popupContentSchedule As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
-
-    '''<summary>
-    '''appointmentCallpanel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents appointmentCallpanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
 
     '''<summary>
     '''HiddenFieldLogId control.

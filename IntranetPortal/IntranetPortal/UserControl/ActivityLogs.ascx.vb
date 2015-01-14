@@ -147,8 +147,10 @@ Public Class ActivityLogs
 
                     If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
                         Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
-                        wli.ProcessInstance.DataFields("Result") = "Approve"
-                        wli.Finish()
+                        If wli IsNot Nothing Then
+                            wli.ProcessInstance.DataFields("Result") = "Approve"
+                            wli.Finish()
+                        End If
                     End If
 
                     'Add Notify Message
@@ -179,8 +181,10 @@ Public Class ActivityLogs
                     'Connect to Workflow Server
                     If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
                         Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
-                        wli.ProcessInstance.DataFields("Result") = "Decline"
-                        wli.Finish()
+                        If wli IsNot Nothing Then
+                            wli.ProcessInstance.DataFields("Result") = "Decline"
+                            wli.Finish()
+                        End If
                     End If
 
                     'Add Notify Message
@@ -209,8 +213,10 @@ Public Class ActivityLogs
             'Connect to Workflow Server
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
                 Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
-                wli.ProcessInstance.DataFields("Result") = "Approve"
-                wli.Finish()
+                If wli IsNot Nothing Then
+                    wli.ProcessInstance.DataFields("Result") = "Approve"
+                    wli.Finish()
+                End If
             End If
 
             'Add Notify Message
@@ -236,8 +242,10 @@ Public Class ActivityLogs
             'Connect to Workflow Server
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
                 Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
-                wli.ProcessInstance.DataFields("Result") = "Decline"
-                wli.Finish()
+                If wli IsNot Nothing Then
+                    wli.ProcessInstance.DataFields("Result") = "Decline"
+                    wli.Finish()
+                End If
             End If
 
             'Add Notify Message
@@ -261,8 +269,10 @@ Public Class ActivityLogs
             'Connect to Workflow Server
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
                 Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
-                wli.ProcessInstance.DataFields("Result") = "Reschedule"
-                wli.Finish()
+                If wli IsNot Nothing Then
+                    wli.ProcessInstance.DataFields("Result") = "Reschedule"
+                    wli.Finish()
+                End If
             End If
 
             'Add Notify Message

@@ -74,9 +74,13 @@ Public Class WorkflowService
             Return Nothing
         End If
 
-        Dim conn = GetConnection()
-        Dim wli = conn.OpenWorklistItem(sn)
-        Return wli
+        Try
+            Dim conn = GetConnection()
+            Dim wli = conn.OpenWorklistItem(sn)
+            Return wli
+        Catch ex As Exception
+            Return Nothing
+        End Try
     End Function
 
     Public Shared Function GetMyWorklist() As List(Of WorklistItem)
