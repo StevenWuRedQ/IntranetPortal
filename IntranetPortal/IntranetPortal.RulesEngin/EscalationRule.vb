@@ -3,8 +3,10 @@
         Dim rule = GetRule(t)
         
         If rule.IsDateDue(If(t.Schedule.HasValue, t.Schedule, t.CreateDate), Nothing) Then
-            ServiceLog.Log("Execute Task Rule: " & t.BBLE & ", Task Id: " & t.TaskID)
-            rule.Execute(t)
+
+            If (rule.Execute(t)) Then
+                ServiceLog.Log(String.Format("Task Rule, {3}, {4}, {0}, {1}, {2}", t.BBLE, t.TaskID, t.EmployeeName, rule.Name, rule.EscalationAfter))
+            End If
         End If
     End Sub
 
@@ -24,7 +26,7 @@
 
     Private Shared Function TaskRules() As List(Of EscalationRule)
         Dim rules As New List(Of EscalationRule)
-        rules.Add(New EscalationRule("Normal", "5.00:00:00", Sub(task)
+        rules.Add(New EscalationRule("Normal", "7.00:00:00", Sub(task)
                                                                  Dim tk = CType(task, UserTask)
                                                                  Using ctx As New Entities
                                                                      Dim tmpTask = ctx.UserTasks.Where(Function(obj) obj.TaskID = tk.TaskID).FirstOrDefault
@@ -35,7 +37,7 @@
                                                                  End Using
                                                              End Sub))
 
-        rules.Add(New EscalationRule("Important", "3.00:00:00", Sub(task)
+        rules.Add(New EscalationRule("Important", "5.00:00:00", Sub(task)
                                                                     Dim tk = CType(task, UserTask)
                                                                     Using ctx As New Entities
                                                                         Dim tmpTask = ctx.UserTasks.Where(Function(obj) obj.TaskID = tk.TaskID).FirstOrDefault
@@ -110,21 +112,24 @@ Public Class EscalationRule
         Return IsDateDue(dt, emp)
     End Function
 
-    Public Sub Execute(objData As Object)
+    Public Function Execute(objData As Object) As Boolean
         If Condition IsNot Nothing Then
             If Condition(objData) Then
-                ServiceLog.Log("Execute Rule Action")
+                'ServiceLog.Log("ExecuteAction")
                 If Not ServiceLog.Debug Then
                     Action.Invoke(objData)
                 End If
+                Return True
             End If
-            Return
+
+            Return False
         End If
 
-        ServiceLog.Log("Execute Rule Action")
+        'ServiceLog.Log("Execute Rule Action")
         If Not ServiceLog.Debug Then
             Me.Action.Invoke(objData)
         End If
-    End Sub
+        Return True
+    End Function
 End Class
 

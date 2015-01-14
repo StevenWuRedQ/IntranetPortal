@@ -6,6 +6,29 @@
         contentPane.SetContentUrl(link);     
     }
 
+    function expandAllClick(s) {
+        if (gridProcess.IsGroupRowExpanded(0)) {
+            gridProcess.CollapseAll();
+            $(s).attr("class", 'fa fa-compress icon_btn tooltip-examples');
+        }
+        else {
+            gridProcess.ExpandAll();
+            $(s).attr("class", 'fa fa-expand icon_btn tooltip-examples');
+        }
+    }
+
+    function ExpandOrCollapseGroupRow(rowIndex) {
+        if (gridProcess.IsGroupRow(rowIndex)) {
+            if (gridProcess.IsGroupRowExpanded(rowIndex)) {
+                gridProcess.CollapseRow(rowIndex);
+            } else {
+                gridProcess.ExpandRow(rowIndex);
+            }
+            //AddScrollbarOnLeadsList();
+            return
+        }
+    }
+
     function InitScrollBar() {
 
         $(".dxgvCSD").each(function (ind) {
@@ -15,7 +38,7 @@
                 onScroll: function () {
                     var position = this.mcs.topPct;
                     if (position > 90) {
-                        gridLeads.NextPage();
+                        gridProcess.NextPage();
                     }
                 }
             }
@@ -111,6 +134,7 @@
                 <dx:ASPxSummaryItem FieldName="DisplayName" SummaryType="Count" />
             </GroupSummary>            
             <Border BorderStyle="None"></Border>
+            <ClientSideEvents EndCallback="function(s,e){ InitScrollBar();}" />
         </dx:ASPxGridView>
     </div>
 </div>

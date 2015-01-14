@@ -58,11 +58,11 @@ Public Class SendMailControl
         Using Context As New Entities
             Dim emilListData = Context.Employees.Select(Function(e) e.Email).Where(Function(e) e IsNot Nothing And e.IndexOf("@") > 0).ToList
             emilListData.AddRange(ShortSale.PartyContact.getAllEmail())
+            emilListData = emilListData.Distinct.ToList
             emilList.DataSource = emilListData
             emilList.DataBind()
             emailCClist.DataSource = emilListData
             emailCClist.DataBind()
         End Using
-
     End Sub
 End Class

@@ -10,16 +10,25 @@ Public Class AssignLeadsPopup
     Inherits System.Web.UI.UserControl
     Public portalDataContext As New Entities
 
+    Public Property LeadsSource As String
+    Public Property EmployeeSource As String
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'If Not Page.IsPostBack Then
         BindRules()
         'End If
     End Sub
+
     Function GetDataSource()
-        Dim empNames = Employee.GetMyEmployees(Page.User.Identity.Name).Select(Function(em) em.Name).ToArray
+        If String.IsNullOrEmpty(hfSource.Value) Then
+            hfSource.Value = LeadsSource
+        End If
+
+        'Dim empNames = Employee.GetMyEmployees(Page.User.Identity.Name).Select(Function(em) em.Name).ToArray
         portalDataContext = New Entities
-        Return portalDataContext.AssignRules.Where(Function(rule) empNames.Contains(rule.EmployeeName)).ToList()
+        Return portalDataContext.AssignRules.Where(Function(rule) rule.Source = hfSource.Value).ToList()
     End Function
+
     Protected Sub BindRules()
         RulesGrid.DataSource = GetDataSource()
         RulesGrid.DataBind()
@@ -61,8 +70,14 @@ Public Class AssignLeadsPopup
         Return leadsTypeText
     End Function
 
-    Function GetAllEmps()
-        Return Employee.GetMyEmployees(Page.User.Identity.Name).Select(Function(em) em.Name).ToArray
+    Function GetAllEmps() As String()
+        If String.IsNullOrEmpty(hfEmployees.Value) Then
+            hfEmployees.Value = EmployeeSource
+        End If
+
+        Return hfEmployees.Value.Split(",")
+
+        'Return Employee.GetMyEmployees(Page.User.Identity.Name).Select(Function(em) em.Name).ToArray
     End Function
     Protected Sub cbIntervalType_DataBinding(sender As Object, e As EventArgs)
         Dim types = [Enum].GetValues(GetType(AssignRule.RuleInterval))
@@ -119,6 +134,7 @@ Public Class AssignLeadsPopup
         Dim rule As New AssignRule
 
         VarRule(rule, e)
+        rule.Source = LeadsSource
         rule.CreateBy = Page.User.Identity.Name
         rule.CreateDate = DateTime.Now
 

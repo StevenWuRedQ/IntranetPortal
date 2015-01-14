@@ -194,7 +194,7 @@ Public Class RefreshLeadsCountHandler
         End If
 
         If name.StartsWith("MyApplication") Then
-            Return GetMyApplicationCount(userName)
+            Return GetMyApplicationCount(name, userName)
         End If
 
         If name.StartsWith("MyCompleted") Then
@@ -210,9 +210,10 @@ Public Class RefreshLeadsCountHandler
         End Try
     End Function
 
-    Function GetMyApplicationCount(userName As String) As Integer
+    Function GetMyApplicationCount(name As String, userName As String) As Integer
         Try
-            Return WorkflowService.GetMyOriginated(userName).Count
+            Dim status = name.Split("_")(1)
+            Return WorkflowService.GetMyOriginated(userName).Where(Function(pi) pi.Status = status).Count
         Catch ex As Exception
             Return 0
         End Try

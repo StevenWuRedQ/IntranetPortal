@@ -76,6 +76,20 @@
         End Using
     End Function
 
+    Public Shared Sub ExpiredTasks(bble As String)
+        Using ctx As New Entities
+            Dim tasks = ctx.UserTasks.Where(Function(t) t.BBLE = bble And t.Status = TaskStatus.Active)
+
+            For Each task In tasks
+                If task IsNot Nothing Then
+                    task.Status = UserTask.TaskStatus.Complete
+                End If
+            Next
+
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
     Public Shared Function GetTaskCount(empName As String, Optional userContext As HttpContext = Nothing) As Integer
         If userContext Is Nothing AndAlso HttpContext.Current IsNot Nothing Then
             userContext = HttpContext.Current

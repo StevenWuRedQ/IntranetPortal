@@ -329,10 +329,11 @@ Public Class ActivityLogs
 
         Dim ld = LeadsInfo.GetInstance(hfBBLE.Value)
 
+        Dim taskName = String.Format("{0} {1}", cbTaskAction.Text, ld.StreetNameWithNo)
         If DispalyMode = ActivityLogMode.Leads Then
-            WorkflowService.StartTaskProcess("TaskProcess", ld.LeadsName, taskId, ld.BBLE, employees, cbTaskImportant.Text)
+            WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text)
         ElseIf DispalyMode = ActivityLogMode.ShortSale Then
-            WorkflowService.StartTaskProcess("ShortSaleTask", ld.LeadsName, taskId, ld.BBLE, employees, cbTaskImportant.Text)
+            WorkflowService.StartTaskProcess("ShortSaleTask", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text)
         End If
 
         For i = 0 To emps.Count - 1
@@ -384,7 +385,8 @@ Public Class ActivityLogs
         End Using
 
         Dim ld = LeadsInfo.GetInstance(bble)
-        WorkflowService.StartTaskProcess("TaskProcess", ld.LeadsName, taskId, bble, employees, taskPriority)
+        Dim taskName = String.Format("{0} {1}", cbTaskAction.Text, ld.StreetNameWithNo)
+        WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, bble, employees, taskPriority)
         
         Dim emps = employees.Split(";").Distinct.ToArray
         For i = 0 To emps.Count - 1
@@ -608,6 +610,15 @@ Public Class ActivityLogs
                     Dim approvalView = False
                     If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
                         If WorkflowService.IsAppointmentProcess(Request.QueryString("sn"), userAppoint.AppoitID) Then
+                            e.Row.CssClass = "activity_log_high_light dxgvDataRow_MetropolisBlue1"
+                            btnAccept.Visible = True
+                            btnDecline.Visible = True
+                            btnReschedule.Visible = True
+
+                            approvalView = True
+                        End If
+                    Else
+                        If userAppoint.CreateDate < DateTime.Parse("2014-12-31 12:59") Then
                             e.Row.CssClass = "activity_log_high_light dxgvDataRow_MetropolisBlue1"
                             btnAccept.Visible = True
                             btnDecline.Visible = True

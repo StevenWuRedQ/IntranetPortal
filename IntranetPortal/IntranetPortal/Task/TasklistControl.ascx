@@ -8,36 +8,38 @@
         //alert(sn + " " + processName);
     }
 
-    function InitScrollBar() {
-
-        $(".dxgvCSD").each(function (ind) {
-            var is_list = $(this).parents("#leads_list_left").length > 0;
-
-            var ladfucntion = {
-                onScroll: function () {
-                    var position = this.mcs.topPct;
-                    if (position > 90) {
-                        gridLeads.NextPage();
-                    }
-                }
+    function ExpandOrCollapseGroupRow(rowIndex) {
+        if (gridTasks.IsGroupRow(rowIndex)) {
+            if (gridTasks.IsGroupRowExpanded(rowIndex)) {
+                gridTasks.CollapseRow(rowIndex);
+            } else {
+                gridTasks.ExpandRow(rowIndex);
             }
+            //AddScrollbarOnLeadsList();
+            return
+        }
+    }
 
-            if (is_list) {
-                $(this).mCustomScrollbar(
+    function expandAllClick(s) {
+        if (gridTasks.IsGroupRowExpanded(0)) {
+            gridTasks.CollapseAll();
+            $(s).attr("class", 'fa fa-compress icon_btn tooltip-examples');
+        }
+        else {
+            gridTasks.ExpandAll();
+            $(s).attr("class", 'fa fa-expand icon_btn tooltip-examples');
+        }
+
+        InitScrollBar();
+    }
+
+    function InitScrollBar() {
+        $("#leads_list_left").mCustomScrollbar(
                     {
                         theme: "minimal-dark",
                         callbacks: ladfucntion
                     }
                  );
-            } else {
-                //$(this).mCustomScrollbar(
-                //    {
-                //        theme: "minimal-dark",
-
-                //    }
-                //);
-            }
-        });
     }
 
     $(document).ready(function () {
@@ -68,7 +70,7 @@
             <Columns>        
                  <dx:GridViewDataTextColumn FieldName="MarkColor"  VisibleIndex="0" Width="30px">
                     <DataItemTemplate>                        
-                        <i class="fa fa-circle color_star" style="color: <%#  GetMarkColor(Eval("Priority"))%>">
+                        <i class="fa fa-circle color_star" style="color: <%# GetMarkColor(Eval("Priority"))%>">
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>        
                 <dx:GridViewDataTextColumn FieldName="DisplayName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -107,7 +109,7 @@
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
                 EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
             <%--<SettingsPager Mode="ShowPager" PageSize="17" Position="Bottom" Summary-Visible="false" ShowDisabledButtons="false" NumericButtonCount="4"></SettingsPager>--%>
-            <SettingsPager Mode="EndlessPaging" PageSize="16"></SettingsPager>
+            <SettingsPager Mode="ShowAllRecords"></SettingsPager>
             <%--   <SettingsPager Mode="ShowAllRecords"></SettingsPager>--%>
             <Settings ShowColumnHeaders="False" VerticalScrollableHeight="767"></Settings>
             <SettingsEditing Mode="PopupEditForm"></SettingsEditing>                                   

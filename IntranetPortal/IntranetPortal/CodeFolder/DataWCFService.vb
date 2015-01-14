@@ -243,6 +243,8 @@ Public Class DataWCFService
     End Function
 
     Public Shared Function UpdateHomeOwner(bble As String, orderid As Integer) As Boolean
+        GetLatestSalesInfo(bble)
+
         Using context As New Entities
             Dim li = context.LeadsInfoes.Find(bble)
             'GetLatestSalesInfo(bble)
@@ -265,7 +267,7 @@ Public Class DataWCFService
             End If
 
             Dim loaded = False
-            For Each owner In context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Active = True).ToList
+            For Each owner In context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Active = True And (ho.Name = li.Owner Or ho.Name = li.CoOwner)).ToList
                 Dim result = GetLocateReport(orderid, bble, owner)
                 If result IsNot Nothing Then
                     loaded = True
@@ -421,7 +423,9 @@ Public Class DataWCFService
 
     Public Shared Sub GetLatestSalesInfo(bble As String)
         Try
-            SaveNameandAddress(bble)
+            'Get lastest owner through NameAndAddress, because the result is not latest in Acris (see email: 1/13/2015 from George), change to service "GetAcrisLatestOwner" -- add by Chris 1/13/2015
+            'SaveNameandAddress(bble)
+            GetAcrisLatestOwner(bble)
         Catch ex As Exception
             Throw New Exception("Erron occure in Get Latest Sales Info: " + ex.Message)
         End Try
@@ -443,6 +447,55 @@ Public Class DataWCFService
         '        client.Acris_Get_LatestSaleAsync(apiOrder.ApiOrderID, bble)
         '    End Using
         'End Using
+    End Sub
+
+    Private Shared Sub GetAcrisLatestOwner(bble As String)
+        Using context As New Entities
+            Dim li = context.LeadsInfoes.Where(Function(l) l.BBLE = bble).SingleOrDefault
+
+            If li Is Nothing Then
+                Return
+            End If
+
+            Using client As New DataAPI.WCFMacrosClient
+                Dim results = client.Get_Acris_Latest_OwnerName(bble)
+                If results IsNot Nothing AndAlso results.Count > 0 Then
+                    If Not String.IsNullOrEmpty(results(0).NAME) AndAlso Not String.IsNullOrEmpty(results(0).NAME.TrimStart.TrimEnd) Then
+                        li.Owner = results(0).NAME.Trim
+                        'Dim add1 = String.Format("{0} {1}", results(0).ADDRESS_1, results(0).Street).TrimStart.TrimEnd
+                        SaveHomeOwner(bble, results(0).NAME.Trim, results(0).ADDRESS_1, results(0).ADDRESS_2, results(0).CITY, results(0).STATE, results(0).COUNTRY, results(0).ZIP, context)
+                    End If
+
+                    If results.Count > 1 AndAlso Not String.IsNullOrEmpty(results(1).NAME) AndAlso Not String.IsNullOrEmpty(results(1).NAME.Trim) Then
+                        Dim coOwner = results(1).NAME.Trim
+                        If Not String.IsNullOrEmpty(coOwner) AndAlso coOwner <> li.Owner Then
+                            li.CoOwner = results(1).NAME.Trim
+                            SaveHomeOwner(bble, results(1).NAME.Trim, results(1).ADDRESS_1, results(1).ADDRESS_2, results(1).CITY, results(1).STATE, results(1).COUNTRY, results(1).ZIP, context)
+                        Else
+                            li.CoOwner = ""
+                        End If
+                    Else
+                        li.CoOwner = ""
+                    End If
+                Else
+                    Dim prop = client.NYC_Assessment_Full(bble).SingleOrDefault
+                    If prop IsNot Nothing AndAlso Not String.IsNullOrEmpty(prop.OWNER_NAME) Then
+                        li.Owner = prop.OWNER_NAME.Trim
+                        SaveHomeOwner(bble, prop.OWNER_NAME.Trim, prop.OWNER_ADDRESS1, prop.OWNER_ADDRESS2, prop.OWNER_CITY, prop.OWNER_STATE, prop.OWNER_COUNTRY, prop.OWNER_ZIP, context)
+                    End If
+                End If
+            End Using
+
+            Dim lead = context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault
+            If lead IsNot Nothing Then
+                lead.LeadsName = li.LeadsName
+                lead.LastUpdate = DateTime.Now
+                lead.UpdateBy = GetCurrentIdentityName()
+            End If
+
+            context.SaveChanges()
+        End Using
+
     End Sub
 
     Public Shared Sub SaveNameandAddress(bble As String)

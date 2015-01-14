@@ -5,6 +5,7 @@ Public Class OriginatedListControl
 
     Public Property DisplayMode As ListMode = ListMode.Originated
     Public Property HeaderText As String = "Originated"
+    Private sepatred As Boolean = True
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
@@ -29,7 +30,14 @@ Public Class OriginatedListControl
 
     Private Function GetDataSource() As List(Of ProcessInstance)
         If DisplayMode = ListMode.Originated Then
-            Return WorkflowService.GetMyOriginated(Page.User.Identity.Name)
+            Dim results = WorkflowService.GetMyOriginated(Page.User.Identity.Name)
+
+            If Not String.IsNullOrEmpty(Request.QueryString("c")) Then
+                Dim c = Request.QueryString("c")
+                results = results.Where(Function(pInst) pInst.Status = c).ToList
+            End If
+
+            Return results
         End If
 
         Return WorkflowService.GetMyCompleted(Page.User.Identity.Name)

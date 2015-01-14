@@ -18,6 +18,7 @@ Public Class LeadsManagement
             Dim mgrName = Employee.GetInstance(CInt(Request.QueryString("mgr"))).Name
             BindTeamList(mgrName)
             BindTeamEmployees(mgrName)
+            AssignLeadsPopup.LeadsSource = mgrName
             Return
         End If
 
@@ -25,6 +26,7 @@ Public Class LeadsManagement
             Dim office = Request.QueryString("office").ToString
             BindOfficeLeads(office)
             BindOfficeEmployee(office)
+            AssignLeadsPopup.LeadsSource = office & " Office"
         Else
             BindNewestLeads()
             'gridLeads.DataBind()
@@ -57,6 +59,8 @@ Public Class LeadsManagement
                     Dim name = User.Identity.Name
                     gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = name And li.Lead.Status = LeadStatus.NewLead).ToList
                     gridLeads.DataBind()
+
+                    AssignLeadsPopup.LeadsSource = name
                 End If
             End If
         End Using
@@ -86,19 +90,28 @@ Public Class LeadsManagement
 
     Sub BindOfficeEmployee(office As String)
         Using Context As New Entities
-            If Page.User.IsInRole("Admin") Then
-                listboxEmployee.DataSource = Context.Employees.Where(Function(emp) emp.Active = True Or emp.Name.EndsWith("Office")).ToList.OrderBy(Function(em) em.Name)
-                listboxEmployee.DataBind()
-                Return
-            End If
+            'If Page.User.IsInRole("Admin") Then
+            '    Dim emps = Context.Employees.Where(Function(emp) emp.Active = True Or emp.Name.EndsWith("Office")).ToList.OrderBy(Function(em) em.Name)
+            '    listboxEmployee.DataSource = emps
+            '    listboxEmployee.DataBind()
+
+            '    AssignLeadsPopup.LeadsSource = String.Join(",", emps.Select(Function(em) em.Name).ToArray)
+            '    Return
+            'End If
 
             If String.IsNullOrEmpty(Request.QueryString("team")) Then
-                listboxEmployee.DataSource = Employee.GetDeptUsersList(office)
+                Dim emps = Employee.GetDeptUsersList(office)
+                listboxEmployee.DataSource = emps
                 listboxEmployee.DataBind()
+
+                AssignLeadsPopup.EmployeeSource = String.Join(",", emps.Select(Function(em) em.Name).ToArray)
             Else
                 Dim teamId = CInt(Request.QueryString("team"))
-                listboxEmployee.DataSource = Employee.GetTeamUserList(teamId)
+                Dim emps = Employee.GetTeamUserList(teamId)
+                listboxEmployee.DataSource = emps
                 listboxEmployee.DataBind()
+
+                AssignLeadsPopup.EmployeeSource = String.Join(",", emps.Select(Function(em) em.Name).ToArray)
             End If
 
             AddDeadLeadsFolderToEmpList()
@@ -108,10 +121,11 @@ Public Class LeadsManagement
     Sub BindEmployeeList()
         Using Context As New Entities
             If Page.User.IsInRole("Admin") Then
-                listboxEmployee.DataSource = Context.Employees.Where(Function(emp) emp.Active = True Or emp.Name.EndsWith("Office")).ToList.OrderBy(Function(em) em.Name)
+                Dim emps1 = Context.Employees.Where(Function(emp) emp.Active = True Or emp.Name.EndsWith("Office")).ToList.OrderBy(Function(em) em.Name)
+                listboxEmployee.DataSource = emps1
                 listboxEmployee.DataBind()
-                AddDeadLeadsFolderToEmpList()
 
+                AssignLeadsPopup.EmployeeSource = String.Join(",", emps1.Select(Function(em) em.Name).ToArray)
                 Return
             End If
 
@@ -126,6 +140,7 @@ Public Class LeadsManagement
 
             listboxEmployee.DataSource = emps
             listboxEmployee.DataBind()
+            AssignLeadsPopup.EmployeeSource = String.Join(",", emps.Select(Function(em) em.Name).ToArray)
 
             AddDeadLeadsFolderToEmpList()
         End Using
@@ -138,6 +153,8 @@ Public Class LeadsManagement
 
         listboxEmployee.DataSource = emps
         listboxEmployee.DataBind()
+
+        AssignLeadsPopup.EmployeeSource = String.Join(",", emps)
 
         AddDeadLeadsFolderToEmpList()
     End Sub

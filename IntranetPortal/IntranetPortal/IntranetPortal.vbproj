@@ -1002,6 +1002,13 @@
       <DependentUpon>OriginatedListControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Task\ProcessReport.aspx.designer.vb">
+      <DependentUpon>ProcessReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Task\ProcessReport.aspx.vb">
+      <DependentUpon>ProcessReport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Task\TasklistControl.ascx.designer.vb">
       <DependentUpon>TasklistControl.ascx</DependentUpon>
     </Compile>
@@ -2290,6 +2297,7 @@
     <Content Include="Task\MyApp.aspx" />
     <Content Include="Task\MyTask.aspx" />
     <Content Include="Task\OriginatedListControl.ascx" />
+    <Content Include="Task\ProcessReport.aspx" />
     <Content Include="Task\TasklistControl.ascx" />
     <Content Include="Test.aspx" />
     <Content Include="UploadFilePage.aspx" />

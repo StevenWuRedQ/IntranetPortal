@@ -18,6 +18,15 @@ Public Class WorkflowService
         conn.Close()
     End Sub
 
+    Public Shared Sub ExpireTaskProcess(bble As String)
+        Using conn = GetConnection()
+            Dim pInsts = conn.GetProcessInstancesByDataFields("TaskProcess", "BBLE", bble)
+            For Each pInstId In pInsts
+                conn.ExpiredProcessInstance(pInstId)
+            Next
+        End Using
+    End Sub
+
     Public Shared Sub StartNewLeadsRequest(displayName As String, bble As String, approver As String)
         If Not IntegratedWithWorkflow() Then
             Return

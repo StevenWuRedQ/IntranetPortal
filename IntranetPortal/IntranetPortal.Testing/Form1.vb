@@ -88,7 +88,11 @@ Public Class Form1
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        Dim client As New IntranetPortal.DataAPI.WCFMacrosClient
+        Using client As New IntranetPortal.DataAPI.WCFMacrosClient
+            Dim result = client.Get_Acris_Latest_OwnerName("4013910001")
+
+        End Using
+
 
     End Sub
 

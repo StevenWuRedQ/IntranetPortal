@@ -127,7 +127,7 @@ Public Class LeadsInfo1
             Return CoOwner
         End If
         Using Context As New Entities
-            Dim coOwner2 = Context.HomeOwners.Where(Function(h) h.BBLE = bble AndAlso h.Name <> ownerName).Select(Function(h) h.Name).FirstOrDefault
+            Dim coOwner2 = Context.HomeOwners.Where(Function(h) h.BBLE = bble AndAlso h.Name <> ownerName And h.UserModified = True).Select(Function(h) h.Name).FirstOrDefault
             If Not String.IsNullOrEmpty(coOwner2) Then
                 Return coOwner2
             End If

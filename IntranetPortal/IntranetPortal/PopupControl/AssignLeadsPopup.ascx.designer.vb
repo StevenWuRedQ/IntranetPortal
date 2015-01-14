@@ -30,4 +30,22 @@ Partial Public Class AssignLeadsPopup
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RulesGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''hfSource control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfSource As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''hfEmployees control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfEmployees As Global.System.Web.UI.WebControls.HiddenField
 End Class

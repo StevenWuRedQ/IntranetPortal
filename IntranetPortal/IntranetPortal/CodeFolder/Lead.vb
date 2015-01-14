@@ -72,6 +72,13 @@ Partial Public Class Lead
 
                         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName)
                     End If
+                Else
+                    Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
+                    Dim empName = HttpContext.Current.User.Identity.Name
+                    If status = LeadStatus.Callback Then
+                        Dim comments = "Lead Status changed to Follow Up on " & callbackDate.ToString("MM/dd/yyyy")
+                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName)
+                    End If
                 End If
 
                 'copy to user task list
@@ -93,6 +100,10 @@ Partial Public Class Lead
                 lead.Description = description
 
                 Context.SaveChanges()
+
+                'Expired user Task
+                WorkflowService.ExpireTaskProcess(bble)
+                UserTask.ExpiredTasks(bble)
 
                 If Not originateStatus = LeadStatus.DeadEnd Then
                     Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
@@ -120,6 +131,33 @@ Partial Public Class Lead
         Return results
     End Function
 
+    Public Sub UpdateAssignDate()
+        Using ctx As New Entities
+            Dim ld = ctx.Leads.Find(BBLE)
+            ld.Status = LeadStatus.NewLead
+            ld.AssignDate = DateTime.Now
+            ld.LastUpdate = DateTime.Now
+            ld.UpdateBy = "Portal"
+            ctx.SaveChanges()
+
+            Dim comments = String.Format("New Leads need to review within 5 days. Otherwise, the leads will be recycled.")
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, BBLE, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
+        End Using
+    End Sub
+
+    Public Sub UpdateCallbackDate(dt As DateTime)
+        Using ctx As New Entities
+            Dim ld = ctx.Leads.Find(BBLE)
+            ld.CallbackDate = dt
+            ld.LastUpdate = DateTime.Now
+            ld.UpdateBy = "Portal"
+            ctx.SaveChanges()
+
+            Dim comments = String.Format("Callback date is update to {0}", dt.ToString("MM/dd/yyyy"))
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, BBLE, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.FollowUp)
+        End Using
+    End Sub
+
     Public Sub ReAssignLeads(empName As String)
         Dim emp = IntranetPortal.Employee.GetInstance(empName)
 
@@ -134,8 +172,13 @@ Partial Public Class Lead
                 ld.LastUpdate = DateTime.Now
                 ctx.SaveChanges()
 
+                'Expired the task on this bble
+                WorkflowService.ExpireTaskProcess(BBLE)
+                UserTask.ExpiredTasks(BBLE)
+
                 Dim comments = String.Format("Leads Reassign from {0} to {1}.", originator, empName)
                 LeadsActivityLog.AddActivityLog(DateTime.Now, comments, BBLE, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
+
             End Using
         End If
     End Sub
@@ -162,6 +205,8 @@ Partial Public Class Lead
                 End If
             End If
         End Using
+
+        UserMessage.AddNewMessage("Recycle Message", "Failed Recycle Leads: " & BBLE, String.Format("Failed Recycle Leads BBLE: {0}, Employee name:{1}. ", BBLE, EmployeeName), BBLE, DateTime.Now, "Recycle")
     End Sub
 
     Public ReadOnly Property Task As UserTask

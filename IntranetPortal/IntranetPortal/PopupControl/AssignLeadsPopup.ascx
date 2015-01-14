@@ -190,6 +190,8 @@
                 <div style="float: right">
                     <i class="fa fa-plus-circle tooltip-examples icon_btn color_blue" style="font-size: 24px; margin-right: 37px;" title="Add" onclick="OnNewClick()"></i>
                 </div>
+                <asp:HiddenField runat="server" ID="hfSource" />
+                <asp:HiddenField runat="server" ID="hfEmployees" />
             </div>
         </dx:PopupControlContentControl>
 

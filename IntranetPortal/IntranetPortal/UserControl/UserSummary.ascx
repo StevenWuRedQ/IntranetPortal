@@ -38,6 +38,11 @@
             tbl.style.backgroundColor = 'transparent';
         }
     }
+
+    function ShowWorklistItem(itemData, processName) {
+        window.location.href = "/Task/MyTask.aspx?page=" + encodeURIComponent(itemData);
+    }
+
     function initScrollbar_summary() {
 
         $("#ctl00_MainContentPH_UserSummary_contentSplitter_0_CC").mCustomScrollbar(
@@ -333,43 +338,37 @@
                                     <h4>
                                         <img src="../images/grid_task_icon.png" class="vertical-img" /><span class="heading_text">Task</span> </h4>
                                     <div class="div-underline">
-                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridTask" KeyFieldName="BBLE" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridTask" KeyFieldName="ProcInstId;ActInstId" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
-                                                <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                                                <dx:GridViewDataTextColumn FieldName="DisplayName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                                                    <Settings AutoFilterCondition="Contains" />
                                                     <DataItemTemplate>
-                                                        <div class="group_lable" onclick='<%# String.Format("NavigateURL(""{0}"",""{1}"")", "Task", Eval("BBLE"))%>'><%# HtmlBlackInfo(Eval("LeadsName"))%></div>
+                                                         <div style="cursor: pointer; height: 40px; padding-left: 20px; line-height: 40px;" onclick='ShowWorklistItem("<%# Eval("ItemData")%>", "<%# Eval("ProcessName")%>")'><%# Eval("DisplayName")%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn FieldName="ScheduleDate" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Settings-SortMode="Custom">
+                                                <dx:GridViewDataTextColumn FieldName="StartDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">
+                                                    <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
+                                                    <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataColumn FieldName="ActivityName" Visible="false" VisibleIndex="3">
+                                                </dx:GridViewDataColumn>                                               
+                                                <dx:GridViewDataColumn FieldName="ProcSchemeDisplayName" Visible="false" VisibleIndex="5">
                                                     <GroupRowTemplate>
-                                                        <%--Date: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>--%>
-                                                        <%--change group template UI by steven--%>
-                                                        <grouprowtemplate>
-                                                        <div >
-                                                            <table>
-                                                                <tr>
-                                                                  <td><img src="../images/grid_call_backs_canlender.png"/></td>
-                                                                <td style="font-weight:900;width:80px;text-align:center;"> Date: <%# Container.GroupText%></td>
-                                                                <td style="padding-left: 10px">
-                                                                    <div  class="raund-label">
-                                                                     <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
-                                                                    </div>
-                                                                </td>
-                                                            <%--the round div--%>
-                                    
+                                                        <div>
+                                                            <table style="height: 45px">
+                                                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
+                                                                    <td style="width: 80px;">
+                                                                        <span class="font_black">
+                                                                            <i class="fa fa-user font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td style="padding-left: 10px">
+                                                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                                                    </td>
                                                                 </tr>
-                                                                </table>
+                                                            </table>
                                                         </div>
-                                
-                                                       </grouprowtemplate>
-                                                        <%-------end---------%>
                                                     </GroupRowTemplate>
-                                                </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
-                                                    <DataItemTemplate>
-                                                        <%--change the image and the size by steven--%>
-                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' />
-                                                    </DataItemTemplate>
                                                 </dx:GridViewDataColumn>
                                             </Columns>
                                             <GroupSummary>

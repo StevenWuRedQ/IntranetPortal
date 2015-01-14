@@ -156,6 +156,14 @@
         End Get
     End Property
 
+    Public ReadOnly Property StreetNameWithNo
+        Get
+            Dim strName = String.Format("{0} {1}", Number, StreetName)
+            strName = strName.TrimStart(" ")
+            Return strName
+        End Get
+    End Property
+
     'Leadsinfo status
     Public ReadOnly Property Status As String
         Get

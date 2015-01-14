@@ -75,6 +75,7 @@
                     homeOwner = New HomeOwner
                     homeOwner.BBLE = bble
                     homeOwner.Name = txtOwnerName.Value
+                    'homeOwner.UserModified = True
                     homeOwner.CreateBy = Page.User.Identity.Name
                     homeOwner.CreateDate = DateTime.Now
                     Context.HomeOwners.Add(homeOwner)
@@ -82,7 +83,7 @@
 
                 If homeOwner IsNot Nothing Then
                     homeOwner.Name = txtOwnerName.Value
-
+                    homeOwner.UserModified = True
                     Dim TLOLocateReport = homeOwner.TLOLocateReport
                     If TLOLocateReport Is Nothing Then
                         TLOLocateReport = New DataAPI.TLOLocateReportOutput

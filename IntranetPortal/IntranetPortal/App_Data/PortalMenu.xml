@@ -12,16 +12,21 @@
           <![CDATA[<i class="fa fa-sign-in"></i>]]>
         </FontClass>
       </PortalNavItem>      
-      <PortalNavItem Name="MyApplication" Text="Originated" NavigationUrl="/Task/MyApp.aspx" ShowAmount="true">
+      <PortalNavItem Name="MyApplication_2" Text="Waiting for Answer" NavigationUrl="/Task/MyApp.aspx?c=2" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="MyCompleted" Text="Ready for Review" NavigationUrl="/Task/MyCompleted.aspx" ShowAmount="true">
+      <PortalNavItem Name="MyApplication_3" Text="Ready for Review" NavigationUrl="/Task/MyApp.aspx?c=3" ShowAmount="true">
         <FontClass>
           <![CDATA[ <i class="fa fa-tasks"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <!--<PortalNavItem Name="MyCompleted" Text="Ready for Review" NavigationUrl="/Task/MyCompleted.aspx" ShowAmount="true">
+        <FontClass>
+          <![CDATA[ <i class="fa fa-tasks"></i>]]>
+        </FontClass>
+      </PortalNavItem>-->
     </Items>
   </PortalNavItem>  
   <PortalNavItem Name="Agent" Text="Leads" NavigationUrl="/SummaryPage.aspx" ShowAmount="false" ItemType="Agent" Expanded="true">
@@ -96,8 +101,6 @@
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
       </PortalNavItem>
-
-
     </Items>
   </PortalNavItem>
 
@@ -152,8 +155,7 @@
                   <![CDATA[<i class="fa fa-line-chart"></i>]]>
                 </FontClass>
               </PortalNavItem>
-            </Items>-->
-            
+            </Items>-->            
           </PortalNavItem>
           <PortalNavItem Name="AgentDeadLead" Text="Dead Lead" NavigationUrl="/LeadAgent.aspx?c=Dead Lead" ShowAmount="true">
             <FontClass>
@@ -315,7 +317,7 @@
 
   <PortalNavItem Name="Eviction" Text="Eviction" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <!--Temporarily use Admin roles for Eviction-->
-    <UserRoles>Admin</UserRoles>
+    <UserRoles>Eviction-Manager</UserRoles>
     <Items>
       <PortalNavItem Name="Eviction" Text="Eviction Leads" NavigationUrl="/ShortSale/ShortSale.aspx?isEviction=true" ShowAmount="false">
         <FontClass>
@@ -700,8 +702,6 @@
       </PortalNavItem>
     </Items>
   </PortalNavItem>
-
- 
   
   <PortalNavItem Name="PortalManagement" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Admin</UserRoles>

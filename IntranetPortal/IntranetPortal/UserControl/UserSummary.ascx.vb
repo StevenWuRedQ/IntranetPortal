@@ -93,10 +93,11 @@ Public Class UserSummary
                                                                     .ScheduleDate = lead.AssignDate
                                                                    }
                                        ).Distinct.ToList.OrderByDescending(Function(li) li.ScheduleDate)
-            gridTask.DataSource = leads
+            'leads = WorkflowService.GetMyWorklist()
+            gridTask.DataSource = WorkflowService.GetMyWorklist()
             gridTask.DataBind()
 
-            gridTask.GroupBy(gridTask.Columns("ScheduleDate"))
+            gridTask.GroupBy(gridTask.Columns("ProcSchemeDisplayName"))
 
             'Bind Priority Data
             Dim priorityData = Context.Leads.Where(Function(ld) ld.Status = LeadStatus.Priority And ld.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(e) e.LastUpdate2)
@@ -144,6 +145,7 @@ Public Class UserSummary
         If (quote.IndexOf("~") <> 0) Then
             spliteSymble = "~"
         End If
+
         If (quote.IndexOf("–") <> 0) Then
             spliteSymble = "–"
         End If
@@ -159,7 +161,6 @@ Public Class UserSummary
         Dim EndStr As String = ""
 
         FontStr = strArry(0)
-
         EndStr = strArry(1)
 
         Return String.Format("{0}<br>-<span style=""font-weight:700;"">{1}</span>", FontStr, EndStr)
@@ -189,74 +190,6 @@ Public Class UserSummary
         Return String.Format("<span style=""font-weight: 900;"">{0}</span>-{1}", FontStr, EndStr)
         'Return "<span style=""font-weight: 900;""> 720 QUINCY ST</span> - " & leadData
     End Function
-
-    'Protected Sub getAddressCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
-    '    Using Context As New Entities
-    '        Dim lead = Context.LeadsInfoes.Where(Function(ld) ld.BBLE = e.Parameter).SingleOrDefault
-    '        e.Result = lead.PropertyAddress
-    '    End Using
-    'End Sub
-
-    'Protected Sub leadStatusCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
-    '    If e.Parameter.Length > 0 Then
-
-    '        If e.Parameter.StartsWith("Tomorrow") Then
-    '            If e.Parameter.Contains("|") Then
-    '                Dim bble = e.Parameter.Split("|")(1)
-    '                UpdateLeadStatus(bble, LeadStatus.Callback, DateTime.Now.AddDays(1))
-    '            End If
-    '        End If
-
-
-    '        If e.Parameter.StartsWith(4) Then
-    '            If e.Parameter.Contains("|") Then
-    '                Dim bble = e.Parameter.Split("|")(1)
-    '                UpdateLeadStatus(bble, LeadStatus.DoorKnocks, Nothing)
-    '            End If
-    '        End If
-
-    '        If e.Parameter.StartsWith(5) Then
-    '            If e.Parameter.Contains("|") Then
-    '                Dim bble = e.Parameter.Split("|")(1)
-    '                UpdateLeadStatus(bble, LeadStatus.Priority, Nothing)
-    '            End If
-    '        End If
-
-    '        If e.Parameter.StartsWith(6) Then
-    '            If e.Parameter.Contains("|") Then
-    '                Dim bble = e.Parameter.Split("|")(1)
-    '                UpdateLeadStatus(bble, LeadStatus.DeadEnd, Nothing)
-    '            End If
-    '        End If
-
-    '        If e.Parameter.StartsWith(7) Then
-    '            If e.Parameter.Contains("|") Then
-    '                Dim bble = e.Parameter.Split("|")(1)
-    '                UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing)
-    '            End If
-    '        End If
-
-    '        If e.Parameter.StartsWith(8) Then
-    '            If e.Parameter.Contains("|") Then
-    '                Dim bble = e.Parameter.Split("|")(1)
-    '                UpdateLeadStatus(bble, LeadStatus.Closed, Nothing)
-    '            End If
-    '        End If
-
-    '        'Delete Lead
-    '        If e.Parameter.StartsWith(11) Then
-    '            If e.Parameter.Contains("|") Then
-    '                Dim bble = e.Parameter.Split("|")(1)
-    '                UpdateLeadStatus(bble, LeadStatus.Deleted, Nothing)
-    '            End If
-    '        End If
-
-    '    End If
-    'End Sub
-
-    'Sub UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime)
-    '    Lead.UpdateLeadStatus(bble, status, callbackDate)
-    'End Sub
 
     Public Function GroupText(groupDateText As String) As String
         Dim today = DateTime.Now.Date

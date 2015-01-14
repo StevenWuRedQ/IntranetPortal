@@ -5,6 +5,7 @@ Public Class RulesService
     Private StateObj As New StateObjClass
     Public Delegate Sub StatusChange(sta As ServiceStatus)
     Public Event OnStatusChange As StatusChange
+    Private serviceMode As RunningMode
 
     Private _svrStatus As ServiceStatus
     Public Property Status As ServiceStatus
@@ -25,9 +26,18 @@ Public Class RulesService
         Return ServiceInstance
     End Function
 
+    Public Shared ReadOnly Property Mode As RunningMode
+        Get
+            Return GetInstance.serviceMode
+        End Get
+    End Property
+
     Public Sub Start()
         If Status <> ServiceStatus.Running Then
             Status = ServiceStatus.Running
+
+            InitServiceMode()
+
             Log("Service is running")
             RunTimer()
             Log("Service is Start")
@@ -48,7 +58,7 @@ Public Class RulesService
         StateObj.SomeValue = 1
 
         Dim TimerDelegate As New System.Threading.TimerCallback(AddressOf TimerTask)
-        timerItem = New System.Threading.Timer(TimerDelegate, StateObj, New TimeSpan(1000), New TimeSpan(0, 1, 0))
+        timerItem = New System.Threading.Timer(TimerDelegate, StateObj, New TimeSpan(1000), New TimeSpan(1, 0, 0))
 
         ' Save a reference for Dispose.
         StateObj.TimerReference = TimerItem
@@ -56,13 +66,22 @@ Public Class RulesService
 
     Private Sub TimerTask(ByVal StateObj As Object)
         Dim State As StateObjClass = CType(StateObj, StateObjClass)
+
+        If State.InProcess Then
+            Log("Timer is cancel")
+            Return
+        End If
+
         ' Use the interlocked class to increment the counter variable.
         System.Threading.Interlocked.Increment(State.SomeValue)
 
+
         Log("Launched new task ")
+        State.InProcess = True
 
         Try
             If WorkingHours.IsWorkingHour(DateTime.Now) Then
+
                 'Run Rules
                 RunRules()
             End If
@@ -71,6 +90,7 @@ Public Class RulesService
         End Try
 
         Status = ServiceStatus.Sleep
+        State.InProcess = False
 
         If State.TimerCanceled Then
             ' Dispose Requested.
@@ -145,16 +165,30 @@ Public Class RulesService
         ServiceLog.Log(msg, ex)
     End Sub
 
+    Private Sub InitServiceMode()
+        Dim mode = System.Configuration.ConfigurationManager.AppSettings("ServiceMode")
+        If String.IsNullOrEmpty(mode) Then
+            serviceMode = [Enum].Parse(GetType(ServiceStatus), mode)
+        End If
+    End Sub
+
     Private Class StateObjClass
         ' Used to hold parameters for calls to TimerTask. 
         Public SomeValue As Integer
         Public TimerReference As System.Threading.Timer
         Public TimerCanceled As Boolean
+        Public InProcess As Boolean
     End Class
 
     Enum ServiceStatus
         Stopped
         Sleep
         Running
+    End Enum
+
+    Enum RunningMode
+        Debug
+        Trial
+        Release
     End Enum
 End Class
