@@ -310,6 +310,17 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="LeadsSearchTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TaksName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SearchFileds" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Completed" Type="bit" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="LeadsTaxLiens">
           <Key>
             <PropertyRef Name="TaxLienId" />
@@ -582,6 +593,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="LeadsComments" EntityType="Self.LeadsComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsInfo" EntityType="Self.LeadsInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsMortgageData" EntityType="Self.LeadsMortgageData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeadsSearchTask" EntityType="Self.LeadsSearchTask" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsTaxLiens" EntityType="Self.LeadsTaxLiens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginLogs" EntityType="Self.LoginLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NYC_DATA_COMMENT" EntityType="Self.NYC_DATA_COMMENT" Schema="dbo" store:Type="Tables" />
@@ -673,6 +685,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <EntitySet Name="LeadsTaxLiens" EntityType="IntranetPortalModel.LeadsTaxLien" />
           <EntitySet Name="HomeOwnerEmails" EntityType="IntranetPortalModel.HomeOwnerEmail" />
           <EntitySet Name="NYC_DATA_COMMENT" EntityType="IntranetPortalModel.NYC_DATA_COMMENT" />
+          <EntitySet Name="LeadsSearchTasks" EntityType="IntranetPortalModel.LeadsSearchTask" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1300,6 +1313,17 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Type" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Data" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="LeadsSearchTask">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TaksName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SearchFileds" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Completed" Type="Boolean" />
+          <Property Name="CreateBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1888,6 +1912,18 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
               <MappingFragment StoreEntitySet="NYC_DATA_COMMENT">
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadsSearchTasks">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LeadsSearchTask">
+              <MappingFragment StoreEntitySet="LeadsSearchTask">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="SearchFileds" ColumnName="SearchFileds" />
+                <ScalarProperty Name="TaksName" ColumnName="TaksName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

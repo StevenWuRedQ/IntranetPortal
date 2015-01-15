@@ -21,4 +21,15 @@
         End Using
     End Sub
 
+    Protected Sub SaveSearchPopup_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        Using Context As New Entities
+            Dim s = New LeadsSearchTask
+            s.TaksName = e.Parameter.Split("|")(0)
+            s.SearchFileds = e.Parameter.Split("|")(1)
+            s.CreateBy = Page.User.Identity.Name
+            s.CreateTime = Date.Now
+            Context.LeadsSearchTasks.Add(s)
+            Context.SaveChanges()
+        End Using
+    End Sub
 End Class

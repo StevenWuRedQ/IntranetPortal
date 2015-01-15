@@ -399,6 +399,9 @@
     <Compile Include="DataModel\LeadsMortgageData.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\LeadsSearchTask.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\LeadsTaxLien.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>

@@ -138,16 +138,16 @@
 
                         <% For Each comment In LeadsInfoData.UserComments%>
                         <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
-                            <table style="width:100%">
+                            <table style="width: 100%">
                                 <tr>
-                                    <td style="width:30px">
+                                    <td style="width: 30px">
                                         <i class="fa fa-exclamation-circle note_img"></i>
                                     </td>
                                     <td>
                                         <div class="note_text"><%= comment.Comments%></div>
                                     </td>
-                                    <td style="width:30px;padding-right: 25px;">
-                                        <i class="fa fa-times" style=" font-size: 18px; color: #b1b2b7; cursor: pointer" onclick="DeleteComments(<%= comment.CommentId %>)"></i>
+                                    <td style="width: 30px; padding-right: 25px;">
+                                        <i class="fa fa-times" style="font-size: 18px; color: #b1b2b7; cursor: pointer" onclick="DeleteComments(<%= comment.CommentId %>)"></i>
 
                                     </td>
                                 </tr>
@@ -221,26 +221,27 @@
                 <input class="text_input" value="<%=LeadsInfoData.Neighborhood%>" />
             </div>
 
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+            <%--<div class="form_div_node form_div_node_margin form_div_node_line_margin">
                 <span class="form_input_title">Borough</span>
 
-                <input class="text_input" value="<%=LeadsInfoData.Borough%>" />
-            </div>
+                <input class="text_input" value="<%=LeadsInfoData.BoroughName%>" />
+            </div>--%>
 
             <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                 <span class="form_input_title">Block</span>
 
                 <input class="text_input" value="<%=LeadsInfoData.Block%>" />
             </div>
-            <%--end line 2--%>
-            <%--line 3--%>
-
-            <div class="form_div_node form_div_node_line_margin">
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                 <span class="form_input_title">Lot</span>
                 <input class="text_input" value="<%= LeadsInfoData.Lot%>" />
             </div>
+            <%--end line 2--%>
+            <%--line 3--%>
 
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+
+
+            <div class="form_div_node form_div_node_line_margin ">
                 <span class="form_input_title">NYC SQFT</span>
 
                 <input class="text_input" value="<%=LeadsInfoData.NYCSqft%>" />
@@ -251,17 +252,17 @@
 
                 <input class="text_input" value="<%=LeadsInfoData.YearBuilt%>" />
             </div>
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Building dem</span>
+                <input class="text_input" value="<%=LeadsInfoData.BuildingDem%>" />
+            </div>
 
             <%----end line 3----%>
 
             <%--line 4--%>
 
-            <div class="form_div_node form_div_node_line_margin">
-                <span class="form_input_title">Building dem</span>
-                <input class="text_input" value="<%=LeadsInfoData.BuildingDem%>" />
-            </div>
 
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+            <div class="form_div_node form_div_node_line_margin ">
                 <span class="form_input_title">Lot Dem</span>
 
                 <input class="text_input" value="<%=LeadsInfoData.LotDem%>" />
@@ -272,16 +273,20 @@
 
                 <input class="text_input" value="<%= LeadsInfoData.NumFloors %>" />
             </div>
+            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
+                <span class="form_input_title">Property Class</span>
+                <input class="text_input" value="<%=LeadsInfoData.PropertyClassCode%>" />
+            </div>
 
             <%----end line 4----%>
 
             <%-----line 5-----%>
 
-            <div class="form_div_node form_div_node_line_margin">
-                <span class="form_input_title">Property Class</span>
-                <input class="text_input" value="<%=LeadsInfoData.PropertyClassCode%>" />
-            </div>
 
+            <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Max Far</span>
+                <input class="text_input" value="<%=LeadsInfoData.MaxFar%>" />
+            </div>
             <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                 <span class="form_input_title">Zoning (<span style="color: #0e9ee9; cursor: pointer">PDF</span>)</span>
 
@@ -296,9 +301,9 @@
             <%----end line 5--%>
 
             <%-----line 6-----%>
-            <div class="form_div_node form_div_node_line_margin">
-                <span class="form_input_title">Max Far</span>
-                <input class="text_input" value="<%=LeadsInfoData.MaxFar%>" />
+             <div class="form_div_node form_div_node_line_margin">
+                <span class="form_input_title">Sale Date</span>
+                <input class="text_input" value="<%=LeadsInfoData.SaleDate%>" />
             </div>
 
             <div class="form_div_node form_div_node_margin form_div_node_line_margin">
@@ -314,10 +319,7 @@
             </div>--%>
             <%-----end line -----%>
 
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Sale Date</span>
-                <input class="text_input" value="<%=LeadsInfoData.SaleDate%>" />
-            </div>
+           
             <%--<div class="form_div_node form_div_node_margin form_div_node_line_margin">
                 <span class="form_input_title">Zestimate</span>
                 <input class="text_input" value="$<%=LeadsInfoData.EstValue %>" />

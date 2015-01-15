@@ -9,6 +9,11 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <script>
         function SearchLeads() {
+
+            popUpSearch();
+            debugger;
+        }
+        function GetSearchFields() {
             var filter = {}
             filter.Location = $("#IdLocation").val();
             filter.Zips = $("#IdZips").val();
@@ -29,12 +34,58 @@
             filter.ECB_DOB = { min: $("#IdECB_DOBMin").val(), max: $("#IdECB_DOBMax").val() }
             filter.isLis = $("#Lis_Pendens_yes").val();
             filter.DocketYear = $("#IdDocket_Year").val();
-            popUpSearch(filter);
-            debugger;
+            return filter;
         }
-        function popUpSearch(filter)
-        {
+        function popUpSearch() {
+            $("#TxtSearchTaskName").val("");
             SaveSearchPopupClient.Show();
+
+        }
+        function OnSearchSaveClick() {
+            var searchTaskName = $("#TxtSearchTaskName").val();
+            if (searchTaskName == null || searchTaskName.length == 0) {
+                alert("please input name !")
+                return;
+            }
+            var filter = GetSearchFields();
+
+
+            SaveSearchPopupClient.PerformCallback(searchTaskName + "|" + JSON.stringify(filter));
+            SaveSearchPopupClient.Hide();
+        }
+        function expand_array_all(e, isopen) {
+
+            var div = $(e).parents(".ss_array");
+            var current_div = div.find(".collapse_div")
+            //var isopen = current_div.css("display") != "none";
+            var field = div.attr("data-field");
+
+        
+
+            control_array_div(div, isopen)
+
+
+        }
+        function control_all(isopen)
+        {
+            $(".expand_btn").each(
+                function () {
+                    if (isopen)
+                    {
+                        if ($(this).hasClass("fa-expand")) {
+                            expand_array_item(this);
+                        }
+                    }else
+                    {
+                        
+                        if ($(this).hasClass("fa-compress")) {
+                            expand_array_item(this);
+                        }
+                    }
+                    
+                }
+            
+            )
         }
     </script>
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Width="100%" Height="100%" ClientInstanceName="sampleSplitter" FullscreenMode="true">
@@ -56,11 +107,10 @@
                             <div class="form-group under_line_div" style="margin-top: 10px; padding-bottom: 20px; border-width: 2px">
 
                                 <div class="form-inline">
-                                    <select class="selectpicker form-control query_input_60percent" multiple>
-                                        <optgroup label="Borough">
-                                            <option value="Borough">All</option>
-                                            <option value="Borough">Bronx</option>
-                                        </optgroup>
+                                    <select class=" form-control query_input_60percent" >
+
+                                        <option value="Borough">All</option>
+                                        <option value="Borough">Bronx</option>
                                         <option value="Borough">Borough</option>
                                         <option value="Zip">Zip</option>
                                     </select>
@@ -73,8 +123,8 @@
                                 <div>
                                     <div style="display: inline-block; padding-right: 10px; border-right: 1px solid #dde0e7; color: #234b60; font-size: 18px;">Or... create new search criteria below</div>
                                     <div style="font-size: 12px; display: inline-block; line-height: 18px;">
-                                        <span class="color_blue icon_btn button_margin" onclick="collapse_all(true)">Expand All </span>
-                                        <span class="color_blue icon_btn button_margin" onclick="collapse_all(true)">Collapse All</span>
+                                        <span class="color_blue icon_btn button_margin" onclick="control_all(true)">Expand All </span>
+                                        <span class="color_blue icon_btn button_margin" onclick="control_all(false)">Collapse All</span>
 
                                     </div>
                                 </div>
@@ -91,7 +141,7 @@
                                         <div class="ss_array">
                                             <h4 class="ss_form_title title_with_line">
                                                 <span class="title_index title_span upcase_text">Location</span>&nbsp;
-                                        <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>
+                                                <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>
 
                                             </h4>
                                             <div class="collapse_div">
@@ -729,7 +779,7 @@
         ClientInstanceName="SaveSearchPopupClient"
         CloseAction="CloseButton" ShowFooter="true" Width="550"
         HeaderText="Save Search " Modal="true"
-        PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableViewState="false" EnableHierarchyRecreation="True">
+        PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableViewState="false" EnableHierarchyRecreation="True" OnWindowCallback="SaveSearchPopup_WindowCallback">
         <HeaderTemplate>
             <div class="clearfix">
 
@@ -748,19 +798,19 @@
         </HeaderTemplate>
         <ContentCollection>
             <dx:PopupControlContentControl>
-                <div style="padding:0 10px;">
-                    <div class="input-group" style="width:100%">
-                        <label class="ss_form_input_title"> name the search</label>
-                        
-                        <input type="text" class="form-control"  style="border-radius:4px;margin-top:3px;">
+                <div style="padding: 0 10px;">
+                    <div class="input-group" style="width: 100%">
+                        <label class="ss_form_input_title">name the search</label>
+
+                        <input type="text" class="form-control" id="TxtSearchTaskName" style="border-radius: 4px; margin-top: 3px;">
                     </div>
                 </div>
             </dx:PopupControlContentControl>
         </ContentCollection>
-        <FooterContentTemplate> 
+        <FooterContentTemplate>
 
             <div style="float: right; padding-bottom: 20px;">
-                <input style="margin-right: 20px;" type="button" class="rand-button rand-button-padding bg_color_blue" value="Assign" onclick="OnSearchSaveClick()">
+                <input style="margin-right: 20px;" type="button" class="rand-button rand-button-padding bg_color_blue" value="Save" onclick="OnSearchSaveClick()">
                 <input type="button" class="rand-button rand-button-padding bg_color_gray" value="Close" onclick="SaveSearchPopupClient.Hide()">
             </div>
 
