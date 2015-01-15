@@ -6,9 +6,14 @@ Public Class OriginatedListControl
     Public Property DisplayMode As ListMode = ListMode.Originated
     Public Property HeaderText As String = "Originated"
     Private sepatred As Boolean = True
+    Private procInstStatus As Integer
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
+            If Request.QueryString("c") IsNot Nothing Then
+                procInstStatus = CInt(Request.QueryString("c"))
+            End If
+
             BindList()
         End If
     End Sub
@@ -19,6 +24,10 @@ Public Class OriginatedListControl
 
         If Not IsPostBack Then
             gridProcess.GroupBy(gridProcess.Columns("ProcessSchemeDisplayName"))
+
+            If procInstStatus = 3 Then
+                gridProcess.Columns(0).Visible = True
+            End If
         End If
     End Sub
 
@@ -71,4 +80,10 @@ Public Class OriginatedListControl
     End Enum
 
     
+    Protected Sub gridProcess_RowDeleting(sender As Object, e As DevExpress.Web.Data.ASPxDataDeletingEventArgs)
+        Dim id = CInt(e.Keys(0))
+        WorkflowService.ArchivedProcInst(id)
+
+        e.Cancel = True
+    End Sub
 End Class

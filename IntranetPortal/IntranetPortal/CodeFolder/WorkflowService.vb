@@ -101,6 +101,10 @@ Public Class WorkflowService
         Return DBPersistence.ProcessInstance.GetMyProcessed(userName)
     End Function
 
+    Public Shared Sub ArchivedProcInst(procInstId As Integer)
+        DBPersistence.ProcessInstance.Archive(procInstId)
+    End Sub
+
     Public Shared Function LoadProcInstById(procInstId As Integer) As DBPersistence.ProcessInstance
         Dim procInst = DBPersistence.ProcessInstance.LoadProcInstById(procInstId)
         Return procInst

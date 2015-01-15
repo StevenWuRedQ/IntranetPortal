@@ -1,9 +1,8 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="OriginatedListControl.ascx.vb" Inherits="IntranetPortal.OriginatedListControl" %>
 <script type="text/javascript">
-    function ViewProcess(link)
-    {    
+    function ViewProcess(link) {
         var contentPane = splitterTaskPage.GetPaneByName("contentPanel")
-        contentPane.SetContentUrl(link);     
+        contentPane.SetContentUrl(link);
     }
 
     function expandAllClick(s) {
@@ -50,16 +49,35 @@
                         callbacks: ladfucntion
                     }
                  );
-            } else {               
+            } else {
             }
         });
     }
-    
+
+    function ArchivedProcInst(rowIndex) {
+        gridProcess.DeleteRow(rowIndex);
+        //$(span).parent().parent().remove();
+        gridProcess.Refresh();
+    }
+
     $(document).ready(function () {
         //Handler for .ready() called.       
         InitScrollBar();
     });
 </script>
+<style type="text/css">
+    .dxgvDataRowHover_MetropolisBlue1 .iconAction {
+        visibility: visible;
+    }
+
+    .dxgvDataRow_MetropolisBlue1 .iconAction {
+        visibility: hidden;
+    }
+
+    .dxgvDataRow_MetropolisBlue1:hover .iconAction {
+        visibility: visible;
+    }
+</style>
 
 <div style="width: 100%; height: 100%;" class="color_gray">
     <div style="margin: 30px 10px 10px 10px; text-align: left;" class="clearfix">
@@ -69,7 +87,7 @@
                 <span style="color: #234b60; font-size: 30px;">
                     <%= HeaderText%>                    
                 </span>
-                <div class="icon_right_s">                    
+                <div class="icon_right_s">
                     <i class="fa fa-sort-amount-desc icon_btn tooltip-examples" title="Sort" style="cursor: pointer; font-size: 18px" id="btnSortIcon" onclick="aspxPopupSortMenu.ShowAtElement(this);"></i>
                     <i class="fa fa-compress icon_btn tooltip-examples" style="font-size: 18px;" title="Expand or Collapse All" onclick="expandAllClick(this)" runat="server" id="divExpand"></i>
                 </div>
@@ -78,8 +96,13 @@
     </div>
     <div style="height: 768px; padding: 0px 10px;" id="leads_list_left">
         <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" OnDataBinding="gridProcess_DataBinding"
-            ID="gridProcess" Border-BorderStyle="None" ClientInstanceName="gridProcess" Width="100%" AutoGenerateColumns="False" KeyFieldName="Id">
-            <Columns>                
+            ID="gridProcess" Border-BorderStyle="None" ClientInstanceName="gridProcess" Width="100%" AutoGenerateColumns="False" KeyFieldName="Id" OnRowDeleting="gridProcess_RowDeleting">
+            <Columns>
+                <dx:GridViewDataTextColumn FieldName="Id" VisibleIndex="0" Width="20px" Visible="false">
+                    <DataItemTemplate>
+                        <i class="fa fa-times iconAction" onclick="ArchivedProcInst(<%# Container.ItemIndex%>)" />
+                    </DataItemTemplate>
+                </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="DisplayName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
                     <DataItemTemplate>
@@ -88,9 +111,9 @@
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="StartDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">
                     <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
-                    <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>                    
+                    <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
                 </dx:GridViewDataTextColumn>
-                <dx:GridViewDataColumn FieldName="Status" Visible="false" VisibleIndex="3">                    
+                <dx:GridViewDataColumn FieldName="Status" Visible="false" VisibleIndex="3">
                 </dx:GridViewDataColumn>
                 <%--<dx:GridViewDataColumn FieldName="Originator" Visible="false" VisibleIndex="4">                  
                 </dx:GridViewDataColumn>--%>
@@ -111,15 +134,15 @@
                             </table>
                         </div>
                     </GroupRowTemplate>
-                </dx:GridViewDataColumn>               
-            </Columns>       
+                </dx:GridViewDataColumn>
+            </Columns>
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
                 EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
             <%--<SettingsPager Mode="ShowPager" PageSize="17" Position="Bottom" Summary-Visible="false" ShowDisabledButtons="false" NumericButtonCount="4"></SettingsPager>--%>
             <SettingsPager Mode="EndlessPaging" PageSize="16"></SettingsPager>
             <%--   <SettingsPager Mode="ShowAllRecords"></SettingsPager>--%>
             <Settings ShowColumnHeaders="False" VerticalScrollableHeight="767"></Settings>
-            <SettingsEditing Mode="PopupEditForm"></SettingsEditing>                                   
+            <SettingsEditing Mode="PopupEditForm"></SettingsEditing>
             <Styles>
                 <Table Border-BorderStyle="None">
                     <Border BorderStyle="None"></Border>
@@ -132,7 +155,7 @@
             </Styles>
             <GroupSummary>
                 <dx:ASPxSummaryItem FieldName="DisplayName" SummaryType="Count" />
-            </GroupSummary>            
+            </GroupSummary>
             <Border BorderStyle="None"></Border>
             <ClientSideEvents EndCallback="function(s,e){ InitScrollBar();}" />
         </dx:ASPxGridView>

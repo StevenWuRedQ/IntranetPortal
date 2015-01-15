@@ -8,7 +8,9 @@ Namespace Messager
         Public Function BeginProcessRequest(context As HttpContext, cb As AsyncCallback, extraData As Object) As IAsyncResult Implements IHttpAsyncHandler.BeginProcessRequest
             'Refresh online user list
             OnlineUser.Refresh(HttpContext.Current)
-            UserTask.UpdateNotify()
+
+            'diable task popup notify
+            'UserTask.UpdateNotify()
             Dim msg = UserMessage.GetNewMessage(context.User.Identity.Name)
             Dim result = New MessagerAsyncResult(context, msg)
 
