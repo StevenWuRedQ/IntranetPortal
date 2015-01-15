@@ -39,6 +39,7 @@ Public Class RulesService
             InitServiceMode()
 
             Log("Service is running")
+            Log("Service Running Mode: " + Mode.ToString)
             RunTimer()
             Log("Service is Start")
         End If
@@ -58,7 +59,7 @@ Public Class RulesService
         StateObj.SomeValue = 1
 
         Dim TimerDelegate As New System.Threading.TimerCallback(AddressOf TimerTask)
-        timerItem = New System.Threading.Timer(TimerDelegate, StateObj, New TimeSpan(1000), New TimeSpan(2, 0, 0))
+        timerItem = New System.Threading.Timer(TimerDelegate, StateObj, New TimeSpan(1000), New TimeSpan(23, 59, 59))
 
         ' Save a reference for Dispose.
         StateObj.TimerReference = TimerItem
@@ -75,13 +76,11 @@ Public Class RulesService
         ' Use the interlocked class to increment the counter variable.
         System.Threading.Interlocked.Increment(State.SomeValue)
 
-
         Log("Launched new task ")
         State.InProcess = True
 
         Try
-            If WorkingHours.IsWorkingHour(DateTime.Now) Then
-
+            If Not WorkingHours.IsWorkingHour(DateTime.Now) Then
                 'Run Rules
                 RunRules()
             End If
@@ -167,8 +166,8 @@ Public Class RulesService
 
     Public Sub InitServiceMode()
         Dim mode = System.Configuration.ConfigurationManager.AppSettings("ServiceMode")
-        If String.IsNullOrEmpty(mode) Then
-            serviceMode = [Enum].Parse(GetType(ServiceStatus), mode)
+        If Not String.IsNullOrEmpty(mode) Then
+            serviceMode = [Enum].Parse(GetType(RunningMode), mode)
         End If
     End Sub
 

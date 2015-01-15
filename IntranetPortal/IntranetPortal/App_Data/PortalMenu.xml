@@ -731,7 +731,7 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="PortalQueryBuilder" Text="Query Builder" NavigationUrl="/Management/QueryBuilder.aspx" ShowAmount="false">
+      <PortalNavItem Name="ProcessReport" Text="Process Report" NavigationUrl="/Task/ProcessReport.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>

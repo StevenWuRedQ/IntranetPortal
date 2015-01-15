@@ -1,4 +1,4 @@
-﻿var EnableClientRefresh = true;
+﻿var EnableClientRefresh = false;
 var callIntervalTime = 3000;
 
 function init() {

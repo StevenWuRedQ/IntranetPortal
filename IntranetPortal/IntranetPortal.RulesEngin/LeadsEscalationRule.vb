@@ -14,6 +14,7 @@ Public Class LeadsEscalationRule
     End Sub
 
     Public Shared Sub Execute(bble As String)
+        RulesService.GetInstance.InitServiceMode()
         Dim ld = Lead.GetInstance(bble)
         If ld IsNot Nothing Then
             For Each Rule In GetRule(ld)
