@@ -40,6 +40,12 @@
         End Using
     End Function
 
+    Public Shared Function GetRuleById(ruleId As Integer) As AssignRule
+        Using ctx As New Entities
+            Return ctx.AssignRules.Find(ruleId)
+        End Using
+    End Function
+
     Public Sub Execute()
         Dim logdata = GetLogData(CType(IntervalType, RuleInterval))
         If IsAssigned(logdata, EmployeeName) Then
@@ -49,9 +55,15 @@
         Dim emp = Employee.GetInstance(EmployeeName)
 
         Using ctx As New Entities
-            Dim count = 0
+            Dim rowCount = 0
             If Not String.IsNullOrEmpty(Source) Then
-                Dim lds = ctx.Leads.Where(Function(li) li.EmployeeName = Source).Take(Count)
+                Dim lds As List(Of Lead)
+                If LeadsType = LeadsInfo.LeadsType.All Then
+                    lds = ctx.Leads.Where(Function(li) li.EmployeeName = Source).Take(Me.Count).ToList
+                Else
+                    lds = ctx.Leads.Where(Function(li) li.EmployeeName = Source And li.LeadsInfo.Type = LeadsType).Take(Count).ToList
+                End If
+
                 For Each ld In lds
                     ld.EmployeeID = emp.EmployeeID
                     ld.EmployeeName = emp.Name
@@ -60,19 +72,19 @@
                     ld.AssignBy = "System"
                 Next
                 ctx.SaveChanges()
-                count = lds.Count
+                rowCount = lds.Count
             Else
                 If Description = "LeadsBankRule" Then
-                    count = AssginLeadsBank()
+                    rowCount = AssginLeadsBank()
                 End If
             End If
 
-            If count > 0 Then
+            If rowCount > 0 Then
                 Dim log = New AssginRulesLog
                 log.EmployeeName = EmployeeName
                 log.LogData = logdata
                 log.RuleId = RuleId
-                log.LeadsAmount = count
+                log.LeadsAmount = Count
                 log.CreateBy = "System"
                 log.CreateDate = DateTime.Now
                 ctx.AssginRulesLogs.Add(log)
@@ -84,9 +96,9 @@
     Private Function AssginLeadsBank() As Integer
         Dim key = "BusinessRules"
         Using Context As New Entities
-            Dim count = 0
-            For Each prop In Context.Agent_Properties.Where(Function(ap) ap.BBLE IsNot Nothing And (ap.Active = True Or Not ap.Active.HasValue) And ap.Agent_Name = EmployeeName).Take(count)
-                Try
+            Dim rowCount = 0
+            Try
+                For Each prop In Context.Agent_Properties.Where(Function(ap) ap.BBLE IsNot Nothing And (ap.Active = True Or Not ap.Active.HasValue) And ap.Agent_Name = EmployeeName).Take(count)
                     Dim li = Context.LeadsInfoes.Where(Function(l) l.BBLE = prop.BBLE).SingleOrDefault
                     If li Is Nothing Then
 
@@ -102,49 +114,52 @@
 
                         If Context.LeadsInfoes.Local.Where(Function(tmp) tmp.BBLE = li.BBLE).Count = 0 Then
                             Context.LeadsInfoes.Add(li)
-                            count += 1
+                            rowCount += 1
                         End If
+                    End If
 
-                        If Not String.IsNullOrEmpty(prop.Agent_Name) Then
-                            Dim emp = Employee.GetInstance(prop.Agent_Name)
+                    If Not String.IsNullOrEmpty(prop.Agent_Name) Then
+                        Dim emp = Employee.GetInstance(prop.Agent_Name)
 
-                            If emp IsNot Nothing Then
-                                Dim newlead = Context.Leads.Where(Function(ld) ld.BBLE = prop.BBLE).SingleOrDefault
-                                If newlead Is Nothing Then
-                                    newlead = New Lead() With {
-                                                      .BBLE = prop.BBLE,
-                                                      .LeadsName = li.LeadsName,
-                                                      .Neighborhood = li.NeighName,
-                                                      .EmployeeID = emp.EmployeeID,
-                                                      .EmployeeName = emp.Name,
-                                                      .Status = LeadStatus.NewLead,
-                                                      .AssignDate = DateTime.Now,
-                                                      .AssignBy = key
-                                                      }
+                        If emp IsNot Nothing Then
+                            Dim newlead = Context.Leads.Where(Function(ld) ld.BBLE = prop.BBLE).SingleOrDefault
+                            If newlead Is Nothing Then
+                                newlead = New Lead() With {
+                                                  .BBLE = prop.BBLE,
+                                                  .LeadsName = li.LeadsName,
+                                                  .Neighborhood = li.NeighName,
+                                                  .EmployeeID = emp.EmployeeID,
+                                                  .EmployeeName = emp.Name,
+                                                  .Status = LeadStatus.NewLead,
+                                                  .AssignDate = DateTime.Now,
+                                                  .AssignBy = key
+                                                  }
 
-                                    If Context.Leads.Local.Where(Function(tmp) tmp.BBLE = prop.BBLE).Count = 0 Then
-                                        Context.Leads.Add(newlead)
-                                    End If
+                                If Context.Leads.Local.Where(Function(tmp) tmp.BBLE = prop.BBLE).Count = 0 Then
+                                    Context.Leads.Add(newlead)
                                 End If
                             End If
                         End If
                     End If
+
                     prop.Active = False
-                Catch ex As Exception
-                    Throw ex
-                End Try
-            Next
-            Context.SaveChanges()
-            Return count
+                Next
+                Context.SaveChanges()
+
+            Catch ex As Exception
+                Throw ex
+            End Try
+
+            Return rowCount
         End Using
     End Function
 
     Private Function GetLogData(interval As RuleInterval) As String
         Select Case interval
             Case RuleInterval.Day
-                Return String.Format("{0}/{1}", DateTime.Today.DayOfYear, DateTime.Today.Year)
+                Return String.Format("DAY:{0}/{1}", DateTime.Today.DayOfYear, DateTime.Today.Year)
             Case RuleInterval.Week
-                Return String.Format("{0}/{1}", DatePart(DateInterval.WeekOfYear, DateTime.Today, Microsoft.VisualBasic.FirstDayOfWeek.Sunday), DateTime.Today.Year)
+                Return String.Format("WEEK:{0}/{1}", DatePart(DateInterval.WeekOfYear, DateTime.Today, Microsoft.VisualBasic.FirstDayOfWeek.Sunday), DateTime.Today.Year)
         End Select
 
         Return ""

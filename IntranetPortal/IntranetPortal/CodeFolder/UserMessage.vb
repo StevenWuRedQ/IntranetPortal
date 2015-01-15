@@ -31,15 +31,16 @@
         msg.Status = UserMessage.MsgStatus.Active
         msg.Createby = createBy
         msg.CreateTime = DateTime.Now
+        Try
+            Using context As New Entities
+                context.UserMessages.Add(msg)
+                context.SaveChanges()
 
-        Using context As New Entities
-            context.UserMessages.Add(msg)
-            context.SaveChanges()
-
-            Return True
-        End Using
-
-        Return False
+                Return True
+            End Using
+        Catch ex As Exception
+            Return False
+        End Try
     End Function
 
     Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, notifyTime As DateTime)

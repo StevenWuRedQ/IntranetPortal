@@ -592,6 +592,20 @@
       <DependentUpon>LeadsGenerator.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="LeadsGenerator\LeadsSearchUploadData.aspx.designer.vb">
+      <DependentUpon>LeadsSearchUploadData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LeadsGenerator\LeadsSearchUploadData.aspx.vb">
+      <DependentUpon>LeadsSearchUploadData.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="LeadsGenerator\LeadsSearchApproval.aspx.designer.vb">
+      <DependentUpon>LeadsSearchApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LeadsGenerator\LeadsSearchApproval.aspx.vb">
+      <DependentUpon>LeadsSearchApproval.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\ImportAgentData.aspx.designer.vb">
       <DependentUpon>ImportAgentData.aspx</DependentUpon>
     </Compile>
@@ -1361,6 +1375,8 @@
     <Content Include="images\img\logo_landing.png" />
     <Content Include="images\img\submenu_shadow.png" />
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
+    <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
+    <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />
     <Content Include="Management\LeadsDataManage.aspx" />

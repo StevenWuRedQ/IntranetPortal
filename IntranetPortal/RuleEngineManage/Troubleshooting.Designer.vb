@@ -28,6 +28,9 @@ Partial Class Troubleshooting
         Me.txtTaskId = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.txtRuleId = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -80,11 +83,39 @@ Partial Class Troubleshooting
         Me.Button1.Text = "Task Rule"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(230, 38)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(78, 23)
+        Me.Button2.TabIndex = 6
+        Me.Button2.Text = "Assign Rules"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'txtRuleId
+        '
+        Me.txtRuleId.Location = New System.Drawing.Point(230, 12)
+        Me.txtRuleId.Name = "txtRuleId"
+        Me.txtRuleId.Size = New System.Drawing.Size(127, 20)
+        Me.txtRuleId.TabIndex = 7
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(184, 15)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(44, 13)
+        Me.Label3.TabIndex = 8
+        Me.Label3.Text = "RuleId: "
+        '
         'Troubleshooting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(496, 217)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.txtRuleId)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtTaskId)
@@ -103,4 +134,7 @@ Partial Class Troubleshooting
     Friend WithEvents txtTaskId As System.Windows.Forms.TextBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents txtRuleId As System.Windows.Forms.TextBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
 End Class

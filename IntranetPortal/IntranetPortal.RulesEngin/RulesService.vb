@@ -58,7 +58,7 @@ Public Class RulesService
         StateObj.SomeValue = 1
 
         Dim TimerDelegate As New System.Threading.TimerCallback(AddressOf TimerTask)
-        timerItem = New System.Threading.Timer(TimerDelegate, StateObj, New TimeSpan(1000), New TimeSpan(1, 0, 0))
+        timerItem = New System.Threading.Timer(TimerDelegate, StateObj, New TimeSpan(1000), New TimeSpan(2, 0, 0))
 
         ' Save a reference for Dispose.
         StateObj.TimerReference = TimerItem
@@ -165,7 +165,7 @@ Public Class RulesService
         ServiceLog.Log(msg, ex)
     End Sub
 
-    Private Sub InitServiceMode()
+    Public Sub InitServiceMode()
         Dim mode = System.Configuration.ConfigurationManager.AppSettings("ServiceMode")
         If String.IsNullOrEmpty(mode) Then
             serviceMode = [Enum].Parse(GetType(ServiceStatus), mode)

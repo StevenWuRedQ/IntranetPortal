@@ -74,9 +74,9 @@
                     {
                         if ($(this).hasClass("fa-expand")) {
                             expand_array_item(this);
-                        }
+        }
                     }else
-                    {
+        {
                         
                         if ($(this).hasClass("fa-compress")) {
                             expand_array_item(this);
@@ -109,8 +109,8 @@
                                 <div class="form-inline">
                                     <select class=" form-control query_input_60percent" >
 
-                                        <option value="Borough">All</option>
-                                        <option value="Borough">Bronx</option>
+                                            <option value="Borough">All</option>
+                                            <option value="Borough">Bronx</option>
                                         <option value="Borough">Borough</option>
                                         <option value="Zip">Zip</option>
                                     </select>
@@ -141,7 +141,7 @@
                                         <div class="ss_array">
                                             <h4 class="ss_form_title title_with_line">
                                                 <span class="title_index title_span upcase_text">Location</span>&nbsp;
-                                                <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>
+                                        <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>
 
                                             </h4>
                                             <div class="collapse_div">
@@ -807,8 +807,7 @@
                 </div>
             </dx:PopupControlContentControl>
         </ContentCollection>
-        <FooterContentTemplate>
-
+        <FooterContentTemplate> 
             <div style="float: right; padding-bottom: 20px;">
                 <input style="margin-right: 20px;" type="button" class="rand-button rand-button-padding bg_color_blue" value="Save" onclick="OnSearchSaveClick()">
                 <input type="button" class="rand-button rand-button-padding bg_color_gray" value="Close" onclick="SaveSearchPopupClient.Hide()">
@@ -816,6 +815,13 @@
 
         </FooterContentTemplate>
     </dx:ASPxPopupControl>
+
+    <dx:ASPxCallback runat="server" ID="cbStartProcess" ClientInstanceName="cbStartProcess" OnCallback="cbStartProcess_Callback">
+        <ClientSideEvents EndCallback="function(s,e){
+                SaveSearchPopupClient.Hide();
+                alert('Search Request is submited.');
+            }" />
+    </dx:ASPxCallback>
 
     <script>
         $(document).ready(function () {
@@ -825,7 +831,5 @@
             });
 
         });
-
-
     </script>
 </asp:Content>

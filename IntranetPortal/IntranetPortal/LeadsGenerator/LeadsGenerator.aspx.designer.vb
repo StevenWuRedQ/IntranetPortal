@@ -39,4 +39,13 @@ Partial Public Class LeadsGenerator
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SaveSearchPopup As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''cbStartProcess control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbStartProcess As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class

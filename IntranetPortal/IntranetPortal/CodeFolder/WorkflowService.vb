@@ -2,6 +2,8 @@
 Imports MyIdealProp.Workflow
 
 Public Class WorkflowService
+
+#Region "Task"
     Public Shared Sub StartTaskProcess(procName As String, displayName As String, taskId As Integer, bble As String, approver As String, priority As String)
         If Not IntegratedWithWorkflow() Then
             Return
@@ -27,6 +29,9 @@ Public Class WorkflowService
         End Using
     End Sub
 
+#End Region
+
+#Region "New Leads"
     Public Shared Sub StartNewLeadsRequest(displayName As String, bble As String, approver As String)
         If Not IntegratedWithWorkflow() Then
             Return
@@ -40,7 +45,9 @@ Public Class WorkflowService
             conn.StartProcessInstance(procInst)
         End Using
     End Sub
+#End Region
 
+#Region "Appointment"
     Public Shared Sub StartNewAppointmentProcess(displayName As String, bble As String, appointId As Integer, approver As String)
         If Not IntegratedWithWorkflow() Then
             Return
@@ -68,7 +75,28 @@ Public Class WorkflowService
 
         Return False
     End Function
+#End Region
 
+#Region "Leads Search"
+    Public Shared Sub StartLeadsSearchProcess(displayName As String, searchName As String, searchData As String)
+        If Not IntegratedWithWorkflow() Then
+            Return
+        End If
+
+        Using conn = GetConnection()
+            Dim procInst = conn.CreateProcessInstance("LeadsSearchRequest")
+            procInst.DisplayName = displayName
+            procInst.DataFields.Add("SearchName", searchName)
+            procInst.DataFields.Add("SearchData", searchData)
+            conn.StartProcessInstance(procInst)
+        End Using
+    End Sub
+
+
+
+#End Region
+
+#Region "Worklist"
     Public Shared Function LoadTaskProcess(sn As String) As WorklistItem
         If Not IntegratedWithWorkflow() Then
             Return Nothing
@@ -92,7 +120,9 @@ Public Class WorkflowService
             Return conn.OpenMyWorklist()
         End Using
     End Function
+#End Region
 
+#Region "Workflow Log"
     Public Shared Function GetMyOriginated(userName As String) As List(Of DBPersistence.ProcessInstance)
         Return DBPersistence.ProcessInstance.GetMyApplication(userName)
     End Function
@@ -109,7 +139,9 @@ Public Class WorkflowService
         Dim procInst = DBPersistence.ProcessInstance.LoadProcInstById(procInstId)
         Return procInst
     End Function
+#End Region
 
+#Region "Private Methods"
     Private Shared Function GetConnection() As Connection
         Dim conn As New Connection(wfServer)
         conn.Integrated = True
@@ -128,4 +160,7 @@ Public Class WorkflowService
     End Function
 
     Private Shared wfServer As String = System.Configuration.ConfigurationManager.AppSettings("WorkflowServer")
+#End Region
+
+
 End Class

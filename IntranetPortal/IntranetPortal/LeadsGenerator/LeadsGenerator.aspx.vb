@@ -32,4 +32,10 @@
             Context.SaveChanges()
         End Using
     End Sub
+    Protected Sub cbStartProcess_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        Dim procName = e.Parameter
+        Dim searchName = e.Parameter
+        Dim searchData = e.Parameter
+        WorkflowService.StartLeadsSearchProcess(procName, searchName, searchData)
+    End Sub
 End Class

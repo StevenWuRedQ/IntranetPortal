@@ -57,7 +57,7 @@
                         display:none;
                     }*/
                 </style>
-                <dx:ASPxGridView ID="RulesGrid" runat="server" KeyFieldName="RuleId" ClientInstanceName="RulesGridClient" EnableRowsCache="false" Width="100%"
+                <dx:ASPxGridView ID="RulesGrid" runat="server" KeyFieldName="RuleId" ClientInstanceName="RulesGridClient" Width="100%"
                     OnRowUpdating="RulesGrid_RowUpdating"
                     OnRowInserting="RulesGrid_RowInserting"
                     OnRowDeleting="RulesGrid_RowDeleting" CssClass="hidden_btn">
@@ -188,7 +188,7 @@
                     </tr>
                 </table>--%>
                 <div style="float: right">
-                    <i class="fa fa-plus-circle tooltip-examples icon_btn color_blue" style="font-size: 24px; margin-right: 37px;" title="Add" onclick="OnNewClick()"></i>
+                    <i class="fa fa-plus-circle tooltip-examples icon_btn color_blue" style="font-size: 24px; margin-right: 37px;" title="Add" onclick="OnNewClick()"></i>                 
                 </div>
                 <asp:HiddenField runat="server" ID="hfSource" />
                 <asp:HiddenField runat="server" ID="hfEmployees" />
@@ -200,7 +200,7 @@
     <FooterContentTemplate>
 
         <div style="float: right; padding-bottom: 20px;">
-            <input style="margin-right: 20px;" type="button" class="rand-button rand-button-padding bg_color_blue" value="Assign" onclick="OnSaveClick()">
+            <input style="margin-right: 20px;" type="button" class="rand-button rand-button-padding bg_color_blue" value="Save" onclick="OnSaveClick()">
             <input type="button" class="rand-button rand-button-padding bg_color_gray" value="Close" onclick="AssignLeadsPopupClient.Hide()">
         </div>
 

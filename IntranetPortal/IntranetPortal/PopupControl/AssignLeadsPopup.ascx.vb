@@ -14,9 +14,9 @@ Public Class AssignLeadsPopup
     Public Property EmployeeSource As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'If Not Page.IsPostBack Then
-        BindRules()
-        'End If
+        If Not Page.IsPostBack Then
+            BindRules()
+        End If
     End Sub
 
     Function GetDataSource()
@@ -26,6 +26,15 @@ Public Class AssignLeadsPopup
 
         'Dim empNames = Employee.GetMyEmployees(Page.User.Identity.Name).Select(Function(em) em.Name).ToArray
         portalDataContext = New Entities
+
+        If String.IsNullOrEmpty(hfSource.Value) Then
+            If Page.User.IsInRole("Admin") Then
+                Return portalDataContext.AssignRules.Where(Function(rule) String.IsNullOrEmpty(rule.Source)).ToList()
+            Else
+                Return New List(Of AssignRule)
+            End If
+        End If
+
         Return portalDataContext.AssignRules.Where(Function(rule) rule.Source = hfSource.Value).ToList()
     End Function
 
@@ -100,8 +109,6 @@ Public Class AssignLeadsPopup
 
     Protected Sub RulesGrid_RowUpdating(sender As Object, e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs)
         Dim grid As ASPxGridView = TryCast(sender, ASPxGridView)
-
-        Dim table As List(Of AssignRule) = GetDataSource()
         Using Context As New Entities
             Dim rule = Context.AssignRules.Find(e.Keys(0))
             VarRule(rule, e)
@@ -117,8 +124,8 @@ Public Class AssignLeadsPopup
     End Sub
     Sub VarRule(rule As AssignRule, e As Object)
         rule.EmployeeName = e.NewValues("EmployeeName")
-        Dim str = ViewEventNewVlaue(e)
-        rule.LeadsType = e.NewValues("LeadsTypeText")
+        'Dim str = ViewEventNewVlaue(e)
+        rule.LeadsTypeText = e.NewValues("LeadsTypeText")
         rule.Count = CInt(e.NewValues("Count"))
         rule.IntervalTypeText = e.NewValues("IntervalTypeText")
     End Sub
@@ -132,9 +139,15 @@ Public Class AssignLeadsPopup
 
     Protected Sub RulesGrid_RowInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs)
         Dim rule As New AssignRule
-
         VarRule(rule, e)
-        rule.Source = LeadsSource
+
+        If String.IsNullOrEmpty(hfSource.Value) Then
+            If Page.User.IsInRole("Admin") Then
+                rule.Source = hfSource.Value
+                rule.Description = "LeadsBankRule"
+            End If
+        End If
+
         rule.CreateBy = Page.User.Identity.Name
         rule.CreateDate = DateTime.Now
 

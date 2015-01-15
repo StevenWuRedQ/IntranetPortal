@@ -149,6 +149,10 @@
       <Project>{4b4c5173-473a-449a-b117-25e18d3c401b}</Project>
       <Name>IntranetPortal.RulesEngine</Name>
     </ProjectReference>
+    <ProjectReference Include="..\IntranetPortal\IntranetPortal.vbproj">
+      <Project>{6ca9f52b-c8d7-4098-8fb4-0626d61a9e32}</Project>
+      <Name>IntranetPortal</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,6 @@
 ﻿Public Class LeadsInfo
     Public Enum LeadsType
+        All = 11
         DevelopmentOpportunity = 0
         Foreclosure = 1
         HasEquity = 2
