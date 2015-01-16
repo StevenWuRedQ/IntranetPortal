@@ -40,7 +40,7 @@
             Return False
         End If
 
-        If dt.Hour > 18 Or dt.Hour < 9 Then
+        If dt.Hour >= 18 Or dt.Hour < 9 Then
             Return False
         End If
 

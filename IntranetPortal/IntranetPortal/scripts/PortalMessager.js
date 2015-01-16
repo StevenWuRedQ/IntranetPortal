@@ -1,10 +1,13 @@
-﻿var EnableClientRefresh = false;
+﻿var EnableClientRefresh = true;
+var EnablePopupMsg = false;
 var callIntervalTime = 3000;
 
 function init() {
-    if (EnableClientRefresh)
-    {
+    if (EnableClientRefresh) {
         RefreshLeadsCount();
+    }
+
+    if (EnablePopupMsg) {
         AwayMsg();
     }
 }
@@ -23,18 +26,17 @@ function RefreshLeadsCount() {
                         leadsCounts = eval("(" + request.responseText + ")");
                         //alert(msg);
                         if (leadsCounts != null) {
-                            for (var i = 0; i < leadsCounts.length; i++)
-                            {
+                            for (var i = 0; i < leadsCounts.length; i++) {
                                 var item = leadsCounts[i];
-                                if(item.Count > 0)
+                                if (item.Count > 0)
                                     document.getElementById(item.Name).innerText = item.Count;
                                 else
                                     document.getElementById(item.Name).innerText = "";
 
-                            }                            
+                            }
                         }
-                    }                   
-                    
+                    }
+
                     window.setTimeout(function () { RefreshLeadsCount(); }, callIntervalTime);
                 }
                 else {
@@ -97,18 +99,16 @@ function hook() {
             if (request.readyState == 4) {
                 if (request.status == 200) {
                     var msg = null;
-                    if (request.responseText != "")
-                    {
+                    if (request.responseText != "") {
                         msg = eval("(" + request.responseText + ")");
                         //alert(msg);
-                        if (msg != null)
-                        {
+                        if (msg != null) {
                             currentMsgId = msg.MsgID;
                             popupBBLE = msg.BBLE;
                             document.getElementById('tdMsgTitle').innerHTML = msg.Title;
                             document.getElementById('tdMsgContent').innerHTML = msg.Message;
-                        
-                            if (!ASPxPopupMessagerControlClient.GetVisible())                        
+
+                            if (!ASPxPopupMessagerControlClient.GetVisible())
                                 ASPxPopupMessagerControlClient.Show();
                         }
                     }
@@ -124,13 +124,12 @@ function hook() {
         catch (e) {
             document.getElementById('errorMsg').innerHTML = "Error: " + e.message;
         }
-    };   
+    };
     request.open('POST', url, true);
     request.send(null);
 }
 
-function ReadMsg()
-{
+function ReadMsg() {
     var msgId = currentMsgId;
     var url = 'MessagerHandler.ashx?msgId=' + msgId;
     var request = getRequestObject();
@@ -138,7 +137,7 @@ function ReadMsg()
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status != 200)
             alert('Error ' + request.status + ' trying to send request');
-        if(request.status == 200)
+        if (request.status == 200)
             ASPxPopupMessagerControlClient.Hide();
     };
 
@@ -146,8 +145,7 @@ function ReadMsg()
     request.send(params);
 }
 
-function PopupViewLead()
-{   
+function PopupViewLead() {
     if (popupBBLE != null) {
         var url = '/ViewLeadsInfo.aspx?id=' + popupBBLE;
         window.showModalDialog(url, 'View Leads Info', 'dialogWidth:1350px;dialogHeight:810px');

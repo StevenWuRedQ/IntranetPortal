@@ -59,10 +59,16 @@ Public Class RulesService
         StateObj.SomeValue = 1
 
         Dim TimerDelegate As New System.Threading.TimerCallback(AddressOf TimerTask)
-        timerItem = New System.Threading.Timer(TimerDelegate, StateObj, New TimeSpan(1000), New TimeSpan(23, 59, 59))
+
+        Dim dueTime As New TimeSpan(1000)
+        If WorkingHours.IsWorkingHour(DateTime.Now) Then
+            dueTime = DateTime.Today.AddHours(19) - DateTime.Now
+        End If
+
+        timerItem = New System.Threading.Timer(TimerDelegate, StateObj, dueTime, New TimeSpan(23, 59, 59))
 
         ' Save a reference for Dispose.
-        StateObj.TimerReference = TimerItem
+        StateObj.TimerReference = timerItem
     End Sub
 
     Private Sub TimerTask(ByVal StateObj As Object)
@@ -154,6 +160,14 @@ Public Class RulesService
             End Try
         Next
         Log("Assign Rules Finished")
+
+        'Log("Run Data loop service")
+        'Try
+        '    IntranetPortal.LeadsDataManage.LeadsDataService.GetInstance.DataLoop("New")
+        'Catch ex As Exception
+        '    Log("Exception when Data loop. Exception: " & ex.Message, ex)
+        'End Try
+        'Log("Data Loop service Started.")
     End Sub
 
     Private Sub Log(msg As String)

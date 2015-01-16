@@ -121,4 +121,13 @@ Public Class Form1
 
         MessageBox.Show("Compplete.")
     End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        Dim emailData As New Dictionary(Of String, String)
+        emailData.Add("UserName", "Chris YAN")
+        emailData.Add("Action", "Request Update")
+        emailData.Add("BBLE", "4073820030")
+        emailData.Add("Description", "princess need to get extra numbers for this owner of the lead, the  number i have is disconnected and family members dont know this person and are not related ")
+        IntranetPortal.Core.EmailService.SendMail("chris@gvs4u.com", "", "UrgentTaskNotify", emailData)
+    End Sub
 End Class

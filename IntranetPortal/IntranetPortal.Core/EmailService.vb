@@ -28,12 +28,20 @@ Public Class EmailService
         'End Try
     End Sub
 
+    Public Shared Sub SendMail(toAddress As String, ccAddress As String, templateName As String, mailData As Dictionary(Of String, String))
+        Dim emailTemplate = GetEmailTemplate(templateName)
+        If emailTemplate IsNot Nothing Then
+            SendMail(toAddress, ccAddress, ProcessContent(emailTemplate.Subject, mailData), ProcessContent(emailTemplate.Body, mailData), Nothing)
+        End If
+    End Sub
+
     Public Shared Function SendMail(toAddress As String, ccAddress As String, subject As String, body As String, attachments As List(Of String)) As Integer
         Dim mailmsg As New EmailMessage
         mailmsg.ToAddress = toAddress
         mailmsg.CcAddress = ccAddress
         mailmsg.Subject = subject
         mailmsg.Body = body
+
         'mailmsg.Attachments = String.Join(";", attachments)
         Dim tmpAttachs As New Dictionary(Of String, String)
 
@@ -92,9 +100,26 @@ Public Class EmailService
 
     Private Shared Function SaveEmail(msg As EmailMessage) As Integer
         Using ctx As New CoreEntities
+            msg.SendDate = DateTime.Now
+            msg.SendBy = "Portal"
             msg = ctx.EmailMessages.Add(msg)
             ctx.SaveChanges()
             Return msg.EmailId
         End Using
+    End Function
+
+    Private Shared Function GetEmailTemplate(templateName As String) As EmailTemplate
+        Using ctx As New CoreEntities
+            Return ctx.EmailTemplates.FirstOrDefault(Function(a) a.Name = templateName)
+        End Using
+    End Function
+
+    Private Shared Function ProcessContent(content As String, emailData As Dictionary(Of String, String)) As String
+
+        For Each item In emailData
+            content = content.Replace(String.Format("[[${0}]]", item.Key), item.Value)
+        Next
+
+        Return content
     End Function
 End Class

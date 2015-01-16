@@ -19,6 +19,16 @@
           <Property Name="SendBy" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="EmailTemplates">
+          <Key>
+            <PropertyRef Name="TemplateId" />
+          </Key>
+          <Property Name="TemplateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="256" />
+          <Property Name="Body" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1024" />
+        </EntityType>
         <EntityType Name="SpecialDays">
           <Key>
             <PropertyRef Name="DayId" />
@@ -33,6 +43,7 @@
         </EntityType>
         <EntityContainer Name="IntranetPortalCoreModelStoreContainer">
           <EntitySet Name="EmailMessages" EntityType="Self.EmailMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmailTemplates" EntityType="Self.EmailTemplates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpecialDays" EntityType="Self.SpecialDays" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -56,6 +67,7 @@
         <EntityContainer Name="CoreEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="EmailMessages" EntityType="Self.EmailMessage" />
           <EntitySet Name="SpecialDays" EntityType="IntranetPortal.Core.Model.SpecialDay" />
+          <EntitySet Name="EmailTemplates" EntityType="IntranetPortal.Core.Model.EmailTemplate" />
         </EntityContainer>
         <EntityType Name="SpecialDay">
           <Key>
@@ -68,6 +80,16 @@
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreateBy" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="EmailTemplate">
+          <Key>
+            <PropertyRef Name="TemplateId" />
+          </Key>
+          <Property Name="TemplateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -100,6 +122,17 @@
                 <ScalarProperty Name="SpecialDate" ColumnName="SpecialDate" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="DayId" ColumnName="DayId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmailTemplates">
+            <EntityTypeMapping TypeName="IntranetPortal.Core.Model.EmailTemplate">
+              <MappingFragment StoreEntitySet="EmailTemplates">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

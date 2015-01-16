@@ -395,7 +395,7 @@ Public Class ActivityLogs
         End Using
 
         Dim ld = LeadsInfo.GetInstance(bble)
-        Dim taskName = String.Format("{0} {1}", cbTaskAction.Text, ld.StreetNameWithNo)
+        Dim taskName = String.Format("{0} {1}", taskAction, ld.StreetNameWithNo)
         WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, bble, employees, taskPriority)
         
         Dim emps = employees.Split(";").Distinct.ToArray

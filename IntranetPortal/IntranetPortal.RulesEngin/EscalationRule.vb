@@ -55,13 +55,21 @@
                                                                '    tmpTask.NotifyDate = DateTime.Now
                                                                '    tmpTask.Schedule = DateTime.Now
                                                                '    ctx.SaveChanges()
-                                                               'End Using
+                                                               'End Using 
                                                                For Each empName In tk.EmployeeName.Split(";")
                                                                    Dim emp = Employee.GetInstance(empName)
-                                                                   If Not String.IsNullOrEmpty(emp.Email) Then
-                                                                       IntranetPortal.Core.EmailService.SendMail(emp.Email, "", String.Format("The urgent Task ({0}) is due", tk.Action), tk.Description, Nothing)
+                                                                   If Not emp Is Nothing AndAlso Not String.IsNullOrEmpty(emp.Email) Then
+                                                                       Dim email = emp.Email
+                                                                       Dim emailData As New Dictionary(Of String, String)
+                                                                       emailData.Add("UserName", empName)
+                                                                       emailData.Add("Action", tk.Action)
+                                                                       emailData.Add("BBLE", tk.BBLE)
+                                                                       emailData.Add("Description", tk.Description)
+                                                                       'IntranetPortal.Core.EmailService.SendMail("chris@gvs4u.com", "", "UrgentTaskNotify", emailData)
+                                                                       IntranetPortal.Core.EmailService.SendMail(email, "", "UrgentTaskNotify", emailData)
                                                                    End If
                                                                Next
+
                                                                'IntranetPortal.Core.EmailService.SendMail(tk.EmployeeName)
                                                            End Sub))
         Return rules

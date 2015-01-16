@@ -98,6 +98,9 @@
     <Compile Include="ADOEntity\EmailMessage.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\EmailTemplate.vb">
+      <DependentUpon>CoreEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\SpecialDay.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
