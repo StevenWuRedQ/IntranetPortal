@@ -809,7 +809,7 @@
         </ContentCollection>
         <FooterContentTemplate> 
             <div style="float: right; padding-bottom: 20px;">
-                <input style="margin-right: 20px;" type="button" class="rand-button rand-button-padding bg_color_blue" value="Save" onclick="OnSearchSaveClick()">
+                <input style="margin-right: 20px;" type="button" class="rand-button rand-button-padding bg_color_blue" value="Save" onclick="cbStartProcess.PerformCallback($('#TxtSearchTaskName').val()); OnSearchSaveClick();">
                 <input type="button" class="rand-button rand-button-padding bg_color_gray" value="Close" onclick="SaveSearchPopupClient.Hide()">
             </div>
 
