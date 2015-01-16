@@ -37,7 +37,7 @@
             filter.DocketYear = $("#IdDocket_Year").val();
             filter.YearBuild = { min: $("#IdYearBuildMin").val(), max: $("#IdYearBuildMax").val() }
             return filter;
-            
+
         }
         function popUpSearch() {
             $("#TxtSearchTaskName").val("");
@@ -63,31 +63,28 @@
             //var isopen = current_div.css("display") != "none";
             var field = div.attr("data-field");
 
-        
+
 
             control_array_div(div, isopen)
 
 
         }
-        function control_all(isopen)
-        {
+        function control_all(isopen) {
             $(".expand_btn").each(
                 function () {
-                    if (isopen)
-                    {
+                    if (isopen) {
                         if ($(this).hasClass("fa-expand")) {
                             expand_array_item(this);
-        }
-                    }else
-        {
-                        
+                        }
+                    } else {
+
                         if ($(this).hasClass("fa-compress")) {
                             expand_array_item(this);
                         }
                     }
-                    
+
                 }
-            
+
             )
         }
     </script>
@@ -106,19 +103,22 @@
                                 <i class="fa fa-search-plus title_icon color_gray"></i>
                                 <span class="title_text">Leads Search</span>
                             </div>
-                            <span class="font_18" style="color: #234b60;">Load a previously saved search</span>
+                            <span class="font_18" style="color: #234b60;">Load search results  <%--Load a previously saved search--%></span>
                             <div class="form-group under_line_div" style="margin-top: 10px; padding-bottom: 20px; border-width: 2px">
 
                                 <div class="form-inline">
-                                    <select class=" form-control query_input_60percent" >
-
-                                            <option value="Borough">All</option>
-                                            <option value="Borough">Bronx</option>
+                                    <select class=" form-control query_input_60percent">
+                                        <% For Each st In CompletedTask %>
+                                            <option value='<%= st.Id%>'><%= st.TaksName %></option>
+                                        <% Next %>
+                                        <option ></option>
+                                        <%--<option value="Borough">All</option>
+                                        <option value="Borough">Bronx</option>
                                         <option value="Borough">Borough</option>
-                                        <option value="Zip">Zip</option>
+                                        <option value="Zip">Zip</option>--%>
                                     </select>
                                     <button type="button" class="rand-button rand-button-pad bg_orange button_margin">Load</button>
-                                    <button type="button" class="rand-button rand-button-pad bg_orange button_margin">Create New</button>
+                                   <%-- <button type="button" class="rand-button rand-button-pad bg_orange button_margin">Create New</button>--%>
                                 </div>
 
                             </div>
@@ -430,7 +430,7 @@
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Mortgages (Sum)</label>
                                                             <select class="selectpicker form-control width_100percent" id="IdMortgageMin">
-                                                                <option  value="">Min Value</option>
+                                                                <option value="">Min Value</option>
 
                                                                 <option value="500">$500</option>
                                                                 <option value="750">$750</option>
@@ -498,7 +498,7 @@
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Value</label>
                                                             <select class="selectpicker form-control width_100percent" id="IDValueMin">
-                                                                <option  value="">Min Value</option>
+                                                                <option value="">Min Value</option>
 
                                                                 <option value="100000">$100,000</option>
                                                                 <option value="150000">$150,000</option>
@@ -809,7 +809,7 @@
                 </div>
             </dx:PopupControlContentControl>
         </ContentCollection>
-        <FooterContentTemplate> 
+        <FooterContentTemplate>
             <div style="float: right; padding-bottom: 20px;">
                 <input style="margin-right: 20px;" type="button" class="rand-button rand-button-padding bg_color_blue" value="Save" onclick="cbStartProcess.PerformCallback($('#TxtSearchTaskName').val()); OnSearchSaveClick();">
                 <input type="button" class="rand-button rand-button-padding bg_color_gray" value="Close" onclick="SaveSearchPopupClient.Hide()">
@@ -827,9 +827,10 @@
 
     <script>
         $(document).ready(function () {
+
             $('.selectpicker').selectpicker();
             $('#lead_search_left').mCustomScrollbar({
-                theme: "Minmal-dark"
+                theme: "minimal-dark"
             });
 
         });
