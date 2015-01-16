@@ -34,7 +34,11 @@
 
             //alert('mid ' + mid + 'afterloginsubmission' + afterloginsubmission);
             if (result == 1) {
-                window.location.replace("/default.aspx");
+                var returnUrl = getParameterByName("ReturnUrl");
+                if (returnUrl == "")
+                    window.location.replace("/default.aspx");
+                else
+                    window.location.replace(returnUrl);
             }
             else {
                 if (result == 3)
@@ -48,6 +52,13 @@
             if (e.keyCode == 13) {
                 onLogIn();
             }
+        }
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
 
     </script>
