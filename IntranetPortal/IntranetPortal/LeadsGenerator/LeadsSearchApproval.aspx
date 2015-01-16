@@ -164,20 +164,24 @@
         </div>
         <table>
             <tr>
-                <td>Applicant: </td>
+                <td>
+                    <div class="form_head">Applicant:</div>
+                </td>
                 <td><%= Me.Applicant%></td>
             </tr>
             <tr>
-                <td>Name: </td>
+                <td>
+                    <div class="form_head">Name:</div>
+                </td>
                 <td>
                     <%= SearchName%>
                 </td>
             </tr>
 
             <tr>
-                <td>Criteria: </td>
-                <td>
-                    <div id="reslut"></div>
+
+                <td colspan="2">
+                    <div id="reslut" style="margin-top:20px;"></div>
                 </td>
             </tr>
             <tr>
@@ -197,24 +201,20 @@
             }" />
     </dx:ASPxCallback>
     <script>
-        function hasValue(v)
-        {
-            if (v == null)
-            {
+        function hasValue(v) {
+            if (v == null) {
                 return false;
             }
-            function v_has_value(_v)
-            {
+            function v_has_value(_v) {
                 return _v != null && _v != ""
             }
-            if (v_has_value(v["min"]))
-            {
+            if (v_has_value(v["min"])) {
                 return true;
             }
             if (v_has_value(v["max"])) {
                 return true;
             }
-            
+
             return false;
         }
         Handlebars.registerHelper('ifCond', function (v1, options) {
@@ -223,13 +223,13 @@
             }
             return options.inverse(this);
         });
-       
+
         var source = $("#entry-template").html();
         var template = Handlebars.compile(source);
 
 
         var data = JSON.parse(SearchData);
-        
+
         var result = template(data);
         $("#reslut").html(result)
     </script>
