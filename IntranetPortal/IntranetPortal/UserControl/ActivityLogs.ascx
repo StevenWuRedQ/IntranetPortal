@@ -233,8 +233,7 @@
             gridLeads.Refresh();
     }
 
-    function ShowAppointmentWindow(logId)
-    {
+    function ShowAppointmentWindow(logId) {
         showAppointmentPopup = true;
         ASPxPopupScheduleClient.PerformCallback("BindAppointment|" + logId);
     }
@@ -316,6 +315,19 @@
         popupFilterControl.Hide();
         filter_popup_show = false;
     }
+    $(document).ready(function () {
+       //alert("called here>")
+        $(".dxheDesignViewArea_MetropolisBlue1 dxheViewArea_MetropolisBlue1").keydown(function () {
+            alert("test!!");
+        })
+
+    });
+    function testaddKey()
+    {
+        $(".dxheDesignViewArea_MetropolisBlue1 dxheViewArea_MetropolisBlue1").keydown(function () {
+            alert("test!!");
+        })
+    }
     // ]]>
 </script>
 
@@ -328,19 +340,21 @@
         <div style="float: left; height: 110px; min-width: 460px; width: 60%; margin-top: 10px;">
             <div class="clearfix">
                 <span style="color: #295268;" class="upcase_text">Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
-                <input type="radio" id="sex12" name="sex" value="Fannie" class="font_12" />
-                <label for="sex12" class="font_12">
-                    <span class="upcase_text">Private</span>
+                <input type="radio" id="is_public" name="is_public" value="Fannie" class="font_12" />
+                <label for="is_public" class="font_12">
+                    <span class="upcase_text">Internal update</span>
                 </label>
-                <input type="radio" id="sexf11" name="sex" value="FHA" class="font_12" />
-                <label for="sexf11" class="font_12">
-                    <span class="upcase_text">Public</span>
+                <input type="radio" id="is_publicf" name="is_public" value="FHA" class="font_12" />
+                <label for="is_publicf" class="font_12">
+                    <span class="upcase_text">Public update</span>
                 </label>
             </div>
+           <%-- <button  type="button" onclick="testaddKey()">Test</button>--%>
             <textarea title="Press CTRL+ENTER to submit." class="edit_text_area" style="display: none; height: 148px;" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
-            <div class="html_edit_div">
+            <div class="html_edit_div" >
                 <dx:ASPxHtmlEditor ID="EmailBody2" runat="server" Height="148px" Width="100%" ClientInstanceName="EmailBody" OnLoad="EmailBody2_Load">
                     <Settings AllowHtmlView="false" AllowPreview="false" />
+                    
                 </dx:ASPxHtmlEditor>
             </div>
         </div>

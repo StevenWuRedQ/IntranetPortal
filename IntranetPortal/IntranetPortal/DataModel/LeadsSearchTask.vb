@@ -14,7 +14,7 @@ Partial Public Class LeadsSearchTask
     Public Property Id As Integer
     Public Property TaksName As String
     Public Property SearchFileds As String
-    Public Property Completed As Nullable(Of Boolean)
+    Public Property Status As Nullable(Of Integer)
     Public Property CreateBy As String
     Public Property CreateTime As Nullable(Of Date)
 

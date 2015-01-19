@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agent_Properties">
           <Key>
             <PropertyRef Name="ID" />
@@ -317,7 +317,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TaksName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SearchFileds" Type="nvarchar" MaxLength="4000" />
-          <Property Name="Completed" Type="bit" />
+          <Property Name="Status" Type="int" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
           <Property Name="CreateTime" Type="datetime" />
         </EntityType>
@@ -1320,7 +1320,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TaksName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SearchFileds" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="Completed" Type="Boolean" />
+          <Property Name="Status" Type="Int32" />
           <Property Name="CreateBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
         </EntityType>
@@ -1921,7 +1921,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
               <MappingFragment StoreEntitySet="LeadsSearchTask">
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="Completed" ColumnName="Completed" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="SearchFileds" ColumnName="SearchFileds" />
                 <ScalarProperty Name="TaksName" ColumnName="TaksName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
