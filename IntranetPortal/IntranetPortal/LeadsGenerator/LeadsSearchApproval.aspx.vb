@@ -16,7 +16,7 @@ Public Class LeadsSearchApproval
     Public Property ActivityName As String
 
     Private Sub Binddata()
-        If Not String.IsNullOrEmpty("sn") Then
+        If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
             If wli IsNot Nothing Then
                 SearchName = wli.ProcessInstance.DataFields("SearchName").ToString
@@ -28,7 +28,7 @@ Public Class LeadsSearchApproval
             End If
         End If
 
-        If Not String.IsNullOrEmpty("ProcInstId") Then
+        If Not String.IsNullOrEmpty(Request.QueryString("ProcInstId")) Then
             Dim procInst = WorkflowService.LoadProcInstById(CInt(Request.QueryString("ProcInstId")))
             SearchName = procInst.GetDataFieldValue("SearchName")
             SearchData = procInst.GetDataFieldValue("SearchData")
@@ -44,7 +44,7 @@ Public Class LeadsSearchApproval
         End Using
     End Sub
     Protected Sub cbApproval_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
-        If Not String.IsNullOrEmpty("sn") Then
+        If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
             If wli IsNot Nothing Then
                 wli.ProcessInstance.DataFields("Result") = e.Parameter

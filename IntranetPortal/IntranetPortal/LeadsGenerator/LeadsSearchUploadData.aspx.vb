@@ -13,7 +13,7 @@
     Public Property ActivityName As String
 
     Private Sub Binddata()
-        If Not String.IsNullOrEmpty("sn") Then
+        If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
             If wli IsNot Nothing Then
                 SearchName = wli.ProcessInstance.DataFields("SearchName").ToString
@@ -25,7 +25,7 @@
     End Sub
 
     Protected Sub cbApproval_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
-        If Not String.IsNullOrEmpty("sn") Then
+        If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
             If wli IsNot Nothing Then
                 wli.ProcessInstance.DataFields("Result") = e.Parameter
