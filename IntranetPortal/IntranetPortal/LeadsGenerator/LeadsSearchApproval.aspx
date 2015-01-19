@@ -188,7 +188,7 @@
                 <td colspan="2">&nbsp;</td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td colspan="2" runat="server" id="tdButton">
                     <button type="button" class="rand-button rand-button-pad bg_orange button_margin" onclick="cbApproval.PerformCallback('Approve')">Approve</button>
                     <button type="button" class="rand-button rand-button-pad bg_color_gray button_margin" onclick="cbApproval.PerformCallback('Decline')">Decline</button>
                 </td>

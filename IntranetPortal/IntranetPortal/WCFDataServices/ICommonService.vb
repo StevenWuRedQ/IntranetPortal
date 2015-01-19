@@ -8,6 +8,12 @@ Public Interface ICommonService
     Sub SendMessage(userName As String, title As String, msg As String, bble As String, notifyTime As DateTime, createBy As String)
 
     <OperationContract()>
+    Sub SendEmailByTemplate(userName As String, templateName As String, emailData As Dictionary(Of String, String))
+
+    <OperationContract()>
     Sub SendEmail(userName As String, subject As String, body As String)
+
+    <OperationContract()>
+    Sub UpdateLeadsSearchStatus(leadsSearchId As Integer, status As Integer)
 
 End Interface

@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class LeadsSearchApproval
 
     '''<summary>
+    '''tdButton control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents tdButton As Global.System.Web.UI.HtmlControls.HtmlTableCell
+
+    '''<summary>
     '''cbApproval control.
     '''</summary>
     '''<remarks>

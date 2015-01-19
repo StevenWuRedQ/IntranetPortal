@@ -811,20 +811,17 @@
         </ContentCollection>
         <FooterContentTemplate>
             <div style="float: right; padding-bottom: 20px;">
-                <input style="margin-right: 20px;" type="button" class="rand-button rand-button-padding bg_color_blue" value="Save" onclick="cbStartProcess.PerformCallback($('#TxtSearchTaskName').val()); OnSearchSaveClick();">
+                <input style="margin-right: 20px;" type="button" class="rand-button rand-button-padding bg_color_blue" value="Save" onclick="OnSearchSaveClick();">
                 <input type="button" class="rand-button rand-button-padding bg_color_gray" value="Close" onclick="SaveSearchPopupClient.Hide()">
             </div>
 
         </FooterContentTemplate>
-    </dx:ASPxPopupControl>
-
-    <dx:ASPxCallback runat="server" ID="cbStartProcess" ClientInstanceName="cbStartProcess" OnCallback="cbStartProcess_Callback">
         <ClientSideEvents EndCallback="function(s,e){
                 SaveSearchPopupClient.Hide();
                 alert('Search Request is submited.');
             }" />
-    </dx:ASPxCallback>
-
+    </dx:ASPxPopupControl>
+    
     <script>
         $(document).ready(function () {
 

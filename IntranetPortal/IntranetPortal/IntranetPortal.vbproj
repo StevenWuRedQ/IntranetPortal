@@ -678,6 +678,13 @@
       <DependentUpon>MgrRole.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Management\WorkflowMng.aspx.designer.vb">
+      <DependentUpon>WorkflowMng.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\WorkflowMng.aspx.vb">
+      <DependentUpon>WorkflowMng.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="MgrViewLeads.aspx.designer.vb">
       <DependentUpon>MgrViewLeads.aspx</DependentUpon>
     </Compile>
@@ -1388,6 +1395,7 @@
     <Content Include="Management\PortalStatus.aspx" />
     <Content Include="Management\TaskList.aspx" />
     <Content Include="Management\TroubleShooting.aspx" />
+    <Content Include="Management\WorkflowMng.aspx" />
     <Content Include="MapTest.aspx" />
     <Content Include="OneDrive\constants.js" />
     <Content Include="OneDrive\Callback.html" />

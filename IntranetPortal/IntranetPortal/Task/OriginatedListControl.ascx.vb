@@ -68,6 +68,7 @@ Public Class OriginatedListControl
                 _processViewLinks.Add("TaskProcess", "/ViewLeadsInfo.aspx?ProcInstId=")
                 _processViewLinks.Add("TestProcess", "")
                 _processViewLinks.Add("ShortSaleTask", "/ShortSale/Shortsale.aspx?ProcInstId=")
+                _processViewLinks.Add("LeadsSearchRequest", "/LeadsGenerator/LeadsSearchApproval.aspx?ProcInstId=")
             End If
 
             Return _processViewLinks

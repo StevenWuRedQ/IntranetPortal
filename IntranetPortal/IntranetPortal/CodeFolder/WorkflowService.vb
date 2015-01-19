@@ -4,6 +4,26 @@ Imports MyIdealProp.Workflow
 Public Class WorkflowService
 
 #Region "Task"
+    Public Shared Sub StartTaskProcess(procName As String, displayName As String, taskId As Integer, bble As String, approver As String, priority As String, createUser As String)
+        If Not IntegratedWithWorkflow() Then
+            Return
+        End If
+
+        Dim conn = GetConnection(createUser)
+        Dim procInst = conn.CreateProcessInstance(procName)
+        procInst.DisplayName = displayName
+        Dim tmpPriority As ProcessPriority
+        If [Enum].TryParse(Of ProcessPriority)(priority, tmpPriority) Then
+            procInst.Priority = tmpPriority
+        End If
+
+        procInst.DataFields.Add("TaskId", taskId)
+        procInst.DataFields.Add("BBLE", bble)
+        procInst.DataFields.Add("Mgr", approver)
+        conn.StartProcessInstance(procInst)
+        conn.Close()
+    End Sub
+
     Public Shared Sub StartTaskProcess(procName As String, displayName As String, taskId As Integer, bble As String, approver As String, priority As String)
         If Not IntegratedWithWorkflow() Then
             Return
@@ -12,7 +32,12 @@ Public Class WorkflowService
         Dim conn = GetConnection()
         Dim procInst = conn.CreateProcessInstance(procName)
         procInst.DisplayName = displayName
-        procInst.Priority = [Enum].Parse(GetType(ProcessPriority), priority)
+
+        Dim tmpPriority As ProcessPriority
+        If [Enum].TryParse(Of ProcessPriority)(priority, tmpPriority) Then
+            procInst.Priority = tmpPriority
+        End If
+
         procInst.DataFields.Add("TaskId", taskId)
         procInst.DataFields.Add("BBLE", bble)
         procInst.DataFields.Add("Mgr", approver)
@@ -78,7 +103,7 @@ Public Class WorkflowService
 #End Region
 
 #Region "Leads Search"
-    Public Shared Sub StartLeadsSearchProcess(displayName As String, searchName As String, searchData As String)
+    Public Shared Sub StartLeadsSearchProcess(displayName As String, searchName As String, searchData As String, searchId As Integer)
         If Not IntegratedWithWorkflow() Then
             Return
         End If
@@ -88,6 +113,7 @@ Public Class WorkflowService
             procInst.DisplayName = displayName
             procInst.DataFields.Add("SearchName", searchName)
             procInst.DataFields.Add("SearchData", searchData)
+            procInst.DataFields.Add("SearchId", searchId)
             conn.StartProcessInstance(procInst)
         End Using
     End Sub
@@ -150,6 +176,15 @@ Public Class WorkflowService
         Else
             conn.UserName = HttpContext.Current.User.Identity.Name
         End If
+
+        conn.Open()
+        Return conn
+    End Function
+
+    Private Shared Function GetConnection(impersonateUser As String) As Connection
+        Dim conn As New Connection(wfServer)
+        conn.Integrated = True
+        conn.UserName = impersonateUser
 
         conn.Open()
         Return conn

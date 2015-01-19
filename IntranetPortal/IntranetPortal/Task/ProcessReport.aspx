@@ -46,6 +46,8 @@
                     <dx:ASPxSummaryItem FieldName="Duration" SummaryType="Average" DisplayFormat="Avg Duration: {0:dd\.hh\:mm\:ss}" />
                 </GroupSummary>
             </dx:ASPxGridView>
+            <h3>User Worklist</h3>
+
         </div>
     </form>
 </body>

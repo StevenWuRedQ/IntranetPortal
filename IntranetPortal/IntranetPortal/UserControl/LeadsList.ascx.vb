@@ -572,41 +572,50 @@ Public Class LeadsList
 
     Sub SendRequest(bble)
 
-        Dim employees = Page.User.Identity.Name & ";" & txtRequestUpdateCreateby.Text & ";" & txtRequestUpdateManager.Text
+        Dim employees = New List(Of String)
+        employees.Add(Page.User.Identity.Name.ToLower)
+        employees.Add(txtRequestUpdateCreateby.Text.ToLower)
+        employees.Add(txtRequestUpdateManager.Text.ToLower)
+        Dim emps = String.Join(";", employees.Distinct().ToArray)
 
-        Dim cbTaskImportant = TryCast(requestUpdateFormlayout.FindControl("cbTaskImportant"), ASPxComboBox)
-        Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td>Employees:</td>" &
-                                     "<td>{0}</td></tr>" &
-                                     "<tr><td>Action:</td><td>{1}</td></tr>" &
-                                     "<tr><td>Important:</td><td>{2}</td></tr>" &
-                                   "<tr><td>Description:</td><td>{3}</td></tr>" &
-                                   "</table>", employees, "Request Update", cbTaskImportant.Text, txtTaskDes.Text)
-        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString)
+        'Dim cbTaskImportant = TryCast(requestUpdateFormlayout.FindControl("cbTaskImportant"), ASPxComboBox)
+        'Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td>Employees:</td>" &
+        '                             "<td>{0}</td></tr>" &
+        '                             "<tr><td>Action:</td><td>{1}</td></tr>" &
+        '                             "<tr><td>Important:</td><td>{2}</td></tr>" &
+        '                           "<tr><td>Description:</td><td>{3}</td></tr>" &
+        '                           "</table>", employees, "Request Update", cbTaskImportant.Text, txtTaskDes.Text)
 
-        Dim scheduleDate = DateTime.Now
-        If cbTaskImportant.Text = "Normal" Then
-            scheduleDate = scheduleDate.AddDays(2)
-        End If
+        'Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString)
 
-        If cbTaskImportant.Text = "Importal" Then
-            scheduleDate = scheduleDate.AddDays(1)
-        End If
+        'Dim scheduleDate = DateTime.Now
+        'If cbTaskImportant.Text = "Normal" Then
+        '    scheduleDate = scheduleDate.AddDays(2)
+        'End If
 
-        If cbTaskImportant.Text = "Urgent" Then
-            scheduleDate = scheduleDate.AddHours(2)
-        End If
+        'If cbTaskImportant.Text = "Importal" Then
+        '    scheduleDate = scheduleDate.AddDays(1)
+        'End If
 
-        UserTask.AddUserTask(bble, employees, "Request Update", cbTaskImportant.Text, "In Office", scheduleDate, txtTaskDes.Text, log.LogID)
+        'If cbTaskImportant.Text = "Urgent" Then
+        '    scheduleDate = scheduleDate.AddHours(2)
+        'End If
 
-        'Add New message
-        Dim ld = LeadsInfo.GetInstance(bble)
-        Dim emps = employees.Split(";").Distinct.ToArray
-        For i = 0 To emps.Count - 1
-            If emps(i) <> Page.User.Identity.Name Then
-                Dim title = String.Format("A New Task has been assigned by {0} regarding {1} for {2}", Page.User.Identity.Name, "Lead Update", ld.PropertyAddress)
-                UserMessage.AddNewMessage(emps(i), title, comments, bble)
-            End If
-        Next
+        'Start new task
+        Dim actlog As New ActivityLogs
+        actlog.SetAsTask(emps, cbTaskImportant.Text, "Request Update", txtTaskDes.Text, bble, Page.User.Identity.Name)
+
+        'UserTask.AddUserTask(bble, employees, "Request Update", cbTaskImportant.Text, "In Office", scheduleDate, txtTaskDes.Text, log.LogID)
+
+        ''Add New message
+        'Dim ld = LeadsInfo.GetInstance(bble)
+        'Dim emps = employees.Split(";").Distinct.ToArray
+        'For i = 0 To emps.Count - 1
+        '    If emps(i) <> Page.User.Identity.Name Then
+        '        Dim title = String.Format("A New Task has been assigned by {0} regarding {1} for {2}", Page.User.Identity.Name, "Lead Update", ld.PropertyAddress)
+        '        UserMessage.AddNewMessage(emps(i), title, comments, bble)
+        '    End If
+        'Next
     End Sub
 
     Protected Sub cbStreetlookup_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)

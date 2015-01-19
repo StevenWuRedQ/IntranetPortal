@@ -15,7 +15,6 @@ Public Class LeadsSearchApproval
     Public Property SearchData As String
     Public Property ActivityName As String
 
-
     Private Sub Binddata()
         If Not String.IsNullOrEmpty("sn") Then
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
@@ -27,6 +26,15 @@ Public Class LeadsSearchApproval
             Else
                 GetTestData()
             End If
+        End If
+
+        If Not String.IsNullOrEmpty("ProcInstId") Then
+            Dim procInst = WorkflowService.LoadProcInstById(CInt(Request.QueryString("ProcInstId")))
+            SearchName = procInst.GetDataFieldValue("SearchName")
+            SearchData = procInst.GetDataFieldValue("SearchData")
+            Applicant = procInst.Originator
+            ActivityName = procInst.ActivityInstances.Last.ActivityName
+            tdButton.Visible = False
         End If
     End Sub
     Private Sub GetTestData()

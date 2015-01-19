@@ -31,12 +31,11 @@
             s.CreateTime = Date.Now
             Context.LeadsSearchTasks.Add(s)
             Context.SaveChanges()
+
+            WorkflowService.StartLeadsSearchProcess(s.TaksName, s.TaksName, s.SearchFileds, s.Id)
         End Using
     End Sub
+
     Protected Sub cbStartProcess_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
-        Dim procName = e.Parameter
-        Dim searchName = e.Parameter
-        Dim searchData = e.Parameter
-        WorkflowService.StartLeadsSearchProcess(procName, searchName, searchData)
     End Sub
 End Class

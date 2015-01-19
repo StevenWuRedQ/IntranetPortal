@@ -818,7 +818,7 @@
                                 <dx:LayoutItemNestedControlContainer runat="server" Width="100%" SupportsDisabledAttribute="True">
                                     <dx:ASPxComboBox runat="server" Width="100%" CssClass="edit_drop" ID="cbTaskImportant">
                                         <Items>
-                                            <dx:ListEditItem Text="Normal" Value="Normal" />
+                                            <dx:ListEditItem Text="Normal" Value="Normal" Selected="true" />
                                             <dx:ListEditItem Text="Important" Value="Important" />
                                             <dx:ListEditItem Text="Urgent" Value="Urgent" />
                                         </Items>

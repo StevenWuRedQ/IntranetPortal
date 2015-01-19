@@ -11,32 +11,32 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class LeadsGenerator
+Partial Public Class WorkflowMng
 
     '''<summary>
-    '''ASPxSplitter1 control.
+    '''form1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''QueryResultsGrid control.
+    '''txtTaskId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents QueryResultsGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+    Protected WithEvents txtTaskId As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''SaveSearchPopup control.
+    '''lblResult control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SaveSearchPopup As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+    Protected WithEvents lblResult As Global.System.Web.UI.WebControls.Label
 End Class
