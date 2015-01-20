@@ -8,6 +8,12 @@
         //alert(sn + " " + processName);
     }
 
+    function ClosePage()
+    {
+        var contentPane = splitterTaskPage.GetPaneByName("contentPanel")
+        contentPane.SetContentUrl("about:blank");
+    }
+
     function ExpandOrCollapseGroupRow(rowIndex) {
         if (gridTasks.IsGroupRow(rowIndex)) {
             if (gridTasks.IsGroupRowExpanded(rowIndex)) {

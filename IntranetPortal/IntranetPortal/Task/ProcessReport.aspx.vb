@@ -12,6 +12,11 @@ Public Class ProcessReport
         gridProcInst.DataBind()
 
         gridProcInst.GroupBy(gridProcInst.Columns("ProcessName"))
+
+        GridWorklist.DataSource = MyIdealProp.Workflow.DBPersistence.Worklist.GetAllPendingWorklist()
+        GridWorklist.DataBind()
+
+        GridWorklist.GroupBy(GridWorklist.Columns("DestinationUser"))
     End Sub
 
     Protected Sub gridProcInst_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs)

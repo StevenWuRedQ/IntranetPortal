@@ -752,6 +752,11 @@ Public Class DataWCFService
         Catch ex As Exception
             Throw New Exception("Exception Occured in BuildPropertyAddress: " + ex.Message)
         End Try
-
     End Function
+
+    Public Shared Sub TestNewAPI()
+        Using client As New DataAPI.WCFMacrosClient
+            Dim table = client.AB_GetJugments("Test123", "Manhattan", "0000-00-00", "0000-00-00", "234", "1")
+        End Using
+    End Sub
 End Class

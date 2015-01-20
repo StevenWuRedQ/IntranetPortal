@@ -626,4 +626,91 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="TaxLien_Info" nillable="true" type="tns:TaxLien_Info" />
+  <xs:complexType name="ArrayOfJudgment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Judgment" nillable="true" type="tns:Judgment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfJudgment" nillable="true" type="tns:ArrayOfJudgment" />
+  <xs:complexType name="Judgment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ACITY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ADATE" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="AFNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ALNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AMNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AMOUNT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ASTNAM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ASTNUM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ATYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AZIP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AZIP1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BCOUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CCITY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CFNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CLNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CMNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CNCOUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CNTYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="COUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CSTNAM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CSTNUM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CTYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CZIP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CZIP1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Ccorpname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DBLOCK" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DCITY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DCOUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DFNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DLNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DLOT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DMNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DOCC" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DOCNUM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DSTNAM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DSTNUM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DTOTAL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DTYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DZIP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DZIP1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Dcorpname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ECOUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EDATE" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ETIME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IDISP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="KYV" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="KYVSUB" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NDATE" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NTIME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OPERID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remarks" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SCOUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SCOURT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SDDATE" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SDOID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SDSHER" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SDTYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SEQ" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SFEE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SINDEX" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TCITY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TCOUNTY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TFNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TLNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TMNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TSTNAM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TSTNUM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TTYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TZIP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TZIP1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="XDATE" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="date_uploaded" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="datetimestamp" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Judgment" nillable="true" type="tns:Judgment" />
 </xs:schema>

@@ -3,7 +3,6 @@
         Dim rule = GetRule(t)
         
         If rule.IsDateDue(If(t.Schedule.HasValue, t.Schedule, t.CreateDate), Nothing) Then
-
             If (rule.Execute(t)) Then
                 ServiceLog.Log(String.Format("Task Rule, {3}, {4}, {0}, {1}, {2}", t.BBLE, t.TaskID, t.EmployeeName, rule.Name, rule.EscalationAfter))
             End If
@@ -50,12 +49,6 @@
 
         rules.Add(New EscalationRule("Urgent", "02:00:00", Sub(task)
                                                                Dim tk = CType(task, UserTask)
-                                                               'Using ctx As New Entities
-                                                               '    Dim tmpTask = ctx.UserTasks.Where(Function(obj) obj.TaskID = tk.TaskID).FirstOrDefault
-                                                               '    tmpTask.NotifyDate = DateTime.Now
-                                                               '    tmpTask.Schedule = DateTime.Now
-                                                               '    ctx.SaveChanges()
-                                                               'End Using 
                                                                For Each empName In tk.EmployeeName.Split(";")
                                                                    Dim emp = Employee.GetInstance(empName)
                                                                    If Not emp Is Nothing AndAlso Not String.IsNullOrEmpty(emp.Email) Then
@@ -65,12 +58,9 @@
                                                                        emailData.Add("Action", tk.Action)
                                                                        emailData.Add("BBLE", tk.BBLE)
                                                                        emailData.Add("Description", tk.Description)
-                                                                       'IntranetPortal.Core.EmailService.SendMail("chris@gvs4u.com", "", "UrgentTaskNotify", emailData)
                                                                        IntranetPortal.Core.EmailService.SendMail(email, "", "UrgentTaskNotify", emailData)
                                                                    End If
                                                                Next
-
-                                                               'IntranetPortal.Core.EmailService.SendMail(tk.EmployeeName)
                                                            End Sub))
         Return rules
     End Function

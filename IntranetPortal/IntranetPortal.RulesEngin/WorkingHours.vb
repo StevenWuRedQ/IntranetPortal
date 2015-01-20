@@ -31,12 +31,20 @@
         Return IntranetPortal.Core.HolidayService.IsHoliday(startDate.Date, emp)
     End Function
 
-    Public Shared Function IsWorkingHour(dt As DateTime) As Boolean
+    Public Shared Function IsWorkingDay(dt As DateTime) As Boolean
         If dt.DayOfWeek = DayOfWeek.Sunday Or dt.DayOfWeek = DayOfWeek.Saturday Then
             Return False
         End If
 
         If IntranetPortal.Core.HolidayService.IsPublicHoliday(dt) Then
+            Return False
+        End If
+
+        Return True
+    End Function
+
+    Public Shared Function IsWorkingHour(dt As DateTime) As Boolean
+        If Not IsWorkingDay(dt) Then
             Return False
         End If
 

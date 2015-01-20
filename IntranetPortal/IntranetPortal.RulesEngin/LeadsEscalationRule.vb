@@ -34,12 +34,12 @@ Public Class LeadsEscalationRule
 
     Private Shared Function TaskRules() As List(Of EscalationRule)
         Dim rules As New List(Of EscalationRule)
-        rules.Add(New EscalationRule("NewLead", "5.00:00:00",
+        rules.Add(New EscalationRule("NewLead", "3.00:00:00",
                                      Sub(leads)
                                          Dim ld = CType(leads, Lead)
                                          'UserMessage.AddNewMessage(ld.EmployeeName, "New Leads Handler Warning", String.Format("The new leads BBLE:{0} will be recycled.", ld.BBLE), ld.BBLE)
                                          Dim log As New ActivityLogs
-                                         Dim description = String.Format("This lead ({0},{1}) has not been reviewed within 5 days. This lead will be recycled within 48 hours.", ld.BBLE, ld.LeadsName)
+                                         Dim description = String.Format("This lead ({0},{1}) has not been reviewed within 3 days. This lead will be recycled within 48 hours.", ld.BBLE, ld.LeadsName)
                                          log.SetAsTask(ld.EmployeeName, "Important", "Review New Leads Reminder", description, ld.BBLE, "Portal")
                                      End Sub,
                                      Function(leads)
@@ -55,7 +55,7 @@ Public Class LeadsEscalationRule
                                          Return ld.LastUpdate2
                                      End Function))
 
-        rules.Add(New EscalationRule("NewLead", "7.00:00:00",
+        rules.Add(New EscalationRule("NewLead", "5.00:00:00",
                                      Sub(leads)
                                          Dim ld = CType(leads, Lead)
                                          If RulesService.Mode = RulesService.RunningMode.Trial Then

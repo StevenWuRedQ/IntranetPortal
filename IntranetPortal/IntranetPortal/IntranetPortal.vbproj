@@ -2168,6 +2168,7 @@
     <Content Include="pdfViewer\web\locale\zh-TW\viewer.properties" />
     <Content Include="pdfViewer\web\locale\zu\viewer.properties" />
     <Content Include="scripts\angular.min.js.map" />
+    <Content Include="My Project\DataSources\System.Data.DataTable.datasource" />
     <None Include="scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />
@@ -2298,6 +2299,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TaxLien_Info.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Judgment.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\DataAPI\Reference.svcmap">

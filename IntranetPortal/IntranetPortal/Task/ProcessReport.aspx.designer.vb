@@ -30,4 +30,13 @@ Partial Public Class ProcessReport
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridProcInst As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''GridWorklist control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents GridWorklist As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 End Class

@@ -117,7 +117,7 @@ Public Class EmailService
     Private Shared Function ProcessContent(content As String, emailData As Dictionary(Of String, String)) As String
 
         For Each item In emailData
-            content = content.Replace(String.Format("[[${0}]]", item.Key), item.Value)
+            content = content.Replace("{{$" & item.Key & "}}", item.Value)
         Next
 
         Return content

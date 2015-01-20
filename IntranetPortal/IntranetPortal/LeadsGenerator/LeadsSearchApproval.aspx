@@ -179,7 +179,6 @@
             </tr>
 
             <tr>
-
                 <td colspan="2">
                     <div id="reslut" style="margin-top:20px;"></div>
                 </td>
@@ -190,7 +189,7 @@
             <tr>
                 <td colspan="2" runat="server" id="tdButton">
                     <button type="button" class="rand-button rand-button-pad bg_orange button_margin" onclick="cbApproval.PerformCallback('Approve')">Approve</button>
-                    <button type="button" class="rand-button rand-button-pad bg_color_gray button_margin" onclick="cbApproval.PerformCallback('Decline')">Decline</button>
+                    <button type="button" class="rand-button rand-button-pad bg_color_gray button_margin" onclick="cbApproval.PerformCallback('Decline')">Decline</button>                 
                 </td>
             </tr>
         </table>
@@ -198,6 +197,10 @@
     <dx:ASPxCallback runat="server" ID="cbApproval" ClientInstanceName="cbApproval" OnCallback="cbApproval_Callback">
         <ClientSideEvents EndCallback="function(s,e){
             alert('Submited');
+            if (window.parent && typeof window.parent.ClosePage == 'function')
+               window.parent.ClosePage();
+            else
+               window.close();  
             }" />
     </dx:ASPxCallback>
     <script>

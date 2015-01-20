@@ -5,6 +5,11 @@
         contentPane.SetContentUrl(link);
     }
 
+    function ClosePage() {
+        var contentPane = splitterTaskPage.GetPaneByName("contentPanel")
+        contentPane.SetContentUrl("about:blank");
+    }
+
     function expandAllClick(s) {
         if (gridProcess.IsGroupRowExpanded(0)) {
             gridProcess.CollapseAll();

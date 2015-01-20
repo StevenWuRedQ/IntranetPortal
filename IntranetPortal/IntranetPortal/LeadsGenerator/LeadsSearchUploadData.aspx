@@ -26,7 +26,7 @@
             </tr>           
             <tr>
                 <td colspan="2">
-                    <button type="button" class="rand-button rand-button-pad bg_orange button_margin" onclick="cbApproval.PerformCallback('Complete')">Complete</button>                    
+                    <button type="button" class="rand-button rand-button-pad bg_orange button_margin" onclick="cbApproval.PerformCallback('Complete')">Complete</button>
                 </td>
             </tr>
         </table>
@@ -34,6 +34,10 @@
     <dx:ASPxCallback runat="server" ID="cbApproval" ClientInstanceName="cbApproval" OnCallback="cbApproval_Callback">
           <ClientSideEvents EndCallback="function(s,e){
             alert('Submited');
+            if (window.parent && typeof window.parent.ClosePage == 'function')
+               window.parent.ClosePage();
+            else
+               window.close();               
             }" />
     </dx:ASPxCallback>
 </asp:Content>

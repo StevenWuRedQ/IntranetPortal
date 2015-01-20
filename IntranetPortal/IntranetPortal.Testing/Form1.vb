@@ -89,11 +89,8 @@ Public Class Form1
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Using client As New IntranetPortal.DataAPI.WCFMacrosClient
-            Dim result = client.Get_Acris_Latest_OwnerName("4013910001")
-
+            Dim result = client.AB_GetJugments("Test123", "Manhattan", "0000-00-00", "0000-00-00", "234", "1")
         End Using
-
-
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
@@ -128,6 +125,6 @@ Public Class Form1
         emailData.Add("Action", "Request Update")
         emailData.Add("BBLE", "4073820030")
         emailData.Add("Description", "princess need to get extra numbers for this owner of the lead, the  number i have is disconnected and family members dont know this person and are not related ")
-        IntranetPortal.Core.EmailService.SendMail("chris@gvs4u.com", "", "UrgentTaskNotify", emailData)
+        IntranetPortal.Core.EmailService.SendMail("portal@myidealprop.com", "", "UrgentTaskNotify", emailData)
     End Sub
 End Class
