@@ -24,7 +24,7 @@
             <div class="popup_padding">
                 <div class="clearence_list_text">
                     <div class="clearence_list_title">
-                        Unique TLO ID
+                        Unique ID
                     </div>
                     <div class="clearence_list_text18  color_blue_edit">
                         <input class="ss_form_input" value="" runat="server" id="txtUniqueTLOID" style="width: 90%">

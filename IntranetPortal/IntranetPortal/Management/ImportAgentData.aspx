@@ -14,7 +14,7 @@
     </script>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" style="height:1000px;overflow:auto">
         <div>
             <dx:ASPxRoundPanel runat="server" HeaderText="Import Data" Width="100%">
                 <PanelCollection>
@@ -84,9 +84,59 @@
                         </dx:ASPxGridView>
                         Select Agent to Import:
                         <dx:ASPxComboBox runat="server" ID="cbEmpTo" TextField="Name" ValueField="EmployeeID"></dx:ASPxComboBox>
-                        <dx:ASPxButton runat="server" ID="btnTransfer" Text="Transfer" OnClick="btnTransfer_Click"></dx:ASPxButton>                        
+                        
+                        <dx:ASPxButton runat="server" ID="btnTransfer" Text="Transfer" OnClick="btnTransfer_Click"></dx:ASPxButton>
                         <dx:ASPxLabel runat="server" ID="ASPxLabel2"></dx:ASPxLabel>
                     </dx:PanelContent>
+                </PanelCollection>
+            </dx:ASPxRoundPanel>
+
+            <dx:ASPxRoundPanel runat="server" HeaderText="Change Leads Status" Width="100%">
+                <PanelCollection>
+                    <dx:PanelContent>
+                        <table>
+                            <tr>
+                                <td style="width: 80px">
+                                    <dx:ASPxLabel runat="server" Text="Agents:"></dx:ASPxLabel>
+                                </td>
+                                <td style="width: 150px;">
+                                    <dx:ASPxComboBox runat="server" ID="cbChagneAgentFrom" TextField="Name" ValueField="EmployeeId"></dx:ASPxComboBox>
+                                </td>
+                                
+                                <td style="padding-left: 10px;">
+                                    <dx:ASPxButton runat="server" Text="Load" ID="btnLoad3" OnClick="btnLoad3_Click"></dx:ASPxButton>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 80px">
+                                    <dx:ASPxLabel runat="server" Text="StatusForm:"></dx:ASPxLabel>
+                                </td>
+                                <td style="width: 150px;">
+                                     <dx:ASPxComboBox runat="server" ID="cbStatusFrom"  ></dx:ASPxComboBox>
+                                </td>
+                            </tr>
+                        </table>
+                        <dx:ASPxGridView runat="server" ID="gridNeedChangeLeads" KeyFieldName="ID" Settings-ShowGroupPanel="false" AutoGenerateColumns="false">
+                             <Columns>
+                                <dx:GridViewDataTextColumn FieldName="BBLE">
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn FieldName="EmployeeName">
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn FieldName="LeadsName">
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn FieldName="Status">
+                                </dx:GridViewDataTextColumn>
+                            </Columns>
+                        </dx:ASPxGridView>
+                         Select status to Change:
+                        <dx:ASPxComboBox runat="server" ID="cbStatusToChange"  ></dx:ASPxComboBox>
+                         
+                        Call Back Time :
+                        <dx:ASPxDateEdit runat="server" ID="deCallBackTime"></dx:ASPxDateEdit>
+                        <dx:ASPxButton runat="server" ID="btnChangeStuats" Text="Change" OnClick="btnChangeStuats_Click"></dx:ASPxButton>
+                        <dx:ASPxLabel runat="server" ID="ChangeProcess"></dx:ASPxLabel>
+                    </dx:PanelContent>
+                    
                 </PanelCollection>
             </dx:ASPxRoundPanel>
             <dx:ASPxRoundPanel runat="server" HeaderText="Initial Data" Width="100%">

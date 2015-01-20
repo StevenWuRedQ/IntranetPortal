@@ -122,6 +122,15 @@ Partial Public Class ImportAgentData
     Protected WithEvents cbEmpTo As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
 
     '''<summary>
+    '''deCallBackTime control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents deCallBackTime As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
+
+    '''<summary>
     '''btnTransfer control.
     '''</summary>
     '''<remarks>
@@ -138,6 +147,69 @@ Partial Public Class ImportAgentData
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxLabel2 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+
+    '''<summary>
+    '''cbChagneAgentFrom control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbChagneAgentFrom As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
+    '''btnLoad3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnLoad3 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''cbStatusFrom control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbStatusFrom As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
+    '''gridNeedChangeLeads control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridNeedChangeLeads As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''cbStatusToChange control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbStatusToChange As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
+    '''btnChangeStuats control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnChangeStuats As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''ChangeProcess control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ChangeProcess As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
     '''cbLeadsType control.

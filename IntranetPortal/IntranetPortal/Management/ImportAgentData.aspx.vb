@@ -25,6 +25,16 @@ Public Class ImportAgentData
             cbEmpTo.DataSource = Context.Employees.ToList.OrderBy(Function(em) em.Name)
             cbEmpTo.DataBind()
             cbEmpTo.Items.Insert(0, New ListEditItem())
+
+            cbChagneAgentFrom.DataSource = Context.Employees.ToList.OrderBy(Function(em) em.Name)
+            cbChagneAgentFrom.DataBind()
+            cbChagneAgentFrom.Items.Insert(0, New ListEditItem())
+
+            cbStatusToChange.DataSource = System.Enum.GetNames(GetType(LeadStatus))
+            cbStatusToChange.DataBind()
+            cbStatusFrom.DataSource = System.Enum.GetNames(GetType(LeadStatus))
+            cbStatusFrom.DataBind()
+
         End Using
     End Sub
 
@@ -40,6 +50,7 @@ Public Class ImportAgentData
                 gridLead.DataBind()
             End If
         End Using
+        BindNeedChangeLeads()
     End Sub
 
     Protected Sub btnLoad2_Click(sender As Object, e As EventArgs)
@@ -58,6 +69,10 @@ Public Class ImportAgentData
         End Using
     End Function
 
+
+    Function LoadAgentLeads(name As String, empId As Integer, Stauts As LeadStatus) As List(Of Lead)
+        Return LoadAgentLeads(name, empId).Where(Function(l) l.Status = Stauts).ToList
+    End Function
     Protected Sub btnTransfer_Click(sender As Object, e As EventArgs)
         Dim agent = cbEmpFrom.Text
         If String.IsNullOrEmpty(agent) Then
@@ -324,4 +339,57 @@ InitialLine:
     End Sub
 
  
+    Protected Sub btnLoad3_Click(sender As Object, e As EventArgs)
+        BindNeedChangeLeads()
+    End Sub
+    Protected Sub BindNeedChangeLeads()
+        Dim agent = cbChagneAgentFrom.Text
+        Dim statusFrom = cbStatusFrom.Text
+        If Not String.IsNullOrEmpty(agent) And Not String.IsNullOrEmpty(statusFrom) Then
+
+            Dim empId = CInt(cbChagneAgentFrom.Value)
+            Dim statusForme = [Enum].Parse(GetType(LeadStatus), statusFrom)
+            gridNeedChangeLeads.DataSource = LoadAgentLeads(agent, empId, statusForme)
+            gridNeedChangeLeads.DataBind()
+        End If
+    End Sub
+
+    Protected Sub btnChangeStuats_Click(sender As Object, e As EventArgs)
+        Dim agent = cbChagneAgentFrom.Text
+        Dim statusFrom = cbStatusFrom.Text
+        Dim statusto = cbStatusToChange.Text
+        If Not String.IsNullOrEmpty(agent) And Not String.IsNullOrEmpty(statusFrom) Then
+
+           
+            Dim empId = CInt(cbChagneAgentFrom.Value)
+            Dim statusForm = CInt([Enum].Parse(GetType(LeadStatus), statusFrom))
+
+            If (deCallBackTime.Value <= Date.Now) And statusForm = LeadStatus.Callback Then
+                ChangeProcess.Text = "Need Date greater than today"
+                Return
+            End If
+            If (Not String.IsNullOrEmpty(statusto)) Then
+                ChangeProcess.Text = "Change agent " & agent & "all leads in " & statusFrom & " to " & statusto
+                Using ctx As New Entities
+                    Dim list = ctx.Leads.Where(Function(le) le.EmployeeID = empId AndAlso le.Status = statusForm).ToList
+                    For Each l In ctx.Leads.Where(Function(le) le.EmployeeID = empId AndAlso le.Status = statusForm).ToList
+                        Dim eStatusTo = [Enum].Parse(GetType(LeadStatus), statusto)
+                        Dim vStatusTo = CInt(eStatusTo)
+                        l.Status = vStatusTo ' change status 
+                        If (eStatusTo = LeadStatus.Callback) Then
+                            l.CallbackDate = deCallBackTime.Value
+                        End If
+                        LeadsActivityLog.AddActivityLog(DateTime.Now, ChangeProcess.Text, l.BBLE, LeadsActivityLog.LogCategory.Task.ToString, Nothing, Page.User.Identity.Name, LeadsActivityLog.EnumActionType.SetAsTask)
+                    Next
+                    ctx.SaveChanges()
+
+                    'write log
+                End Using
+                ChangeProcess.Text = "Chagne finished"
+            End If
+           
+        Else
+            ChangeProcess.Text = "Agent name or status is not select"
+        End If
+    End Sub
 End Class
