@@ -18,6 +18,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyOccupant" Width="1.5" PointX="8.75" PointY="6" />
         <EntityTypeShape EntityType="IntranetPortalModel.TitleJudgementSearch" Width="1.5" PointX="4.75" PointY="6.25" />
         <EntityTypeShape EntityType="IntranetPortalModel.Employee" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.EvictionCas" Width="1.5" PointX="11.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

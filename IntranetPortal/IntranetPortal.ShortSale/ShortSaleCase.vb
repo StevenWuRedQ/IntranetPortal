@@ -184,6 +184,9 @@ Partial Public Class ShortSaleCase
             Return Nothing
         End Get
     End Property
+
+    Public Property EvictionOwner As String
+
     Function GetMortageStauts(ByVal index As Integer) As String
         If (Mortgages IsNot Nothing AndAlso Mortgages.Count > index) Then
 
@@ -441,7 +444,21 @@ Partial Public Class ShortSaleCase
         Using context As New ShortSaleEntities
             Return context.ShortSaleCases.Where(Function(ss) bbles.Contains(ss.BBLE)).ToList
         End Using
+    End Function
 
+    Public Shared Function GetEvictionCases() As List(Of ShortSaleCase)
+        Using ctx As New ShortSaleEntities
+            Dim result = (From ss In ctx.ShortSaleCases
+                         Join evi In ctx.EvictionCases On ss.BBLE Equals evi.BBLE
+                         Select New With {.case = ss, .Name = evi.Owner}).ToList.Select(Function(s) ShortsaleCaseWithEvictionOwner(s.case, s.Name)).ToList
+
+            Return result
+        End Using
+    End Function
+
+    Private Shared Function ShortsaleCaseWithEvictionOwner(ss As ShortSaleCase, owner As String) As ShortSaleCase
+        ss.EvictionOwner = owner
+        Return ss
     End Function
 
 #End Region

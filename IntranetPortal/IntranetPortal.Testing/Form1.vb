@@ -89,7 +89,7 @@ Public Class Form1
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Using client As New IntranetPortal.DataAPI.WCFMacrosClient
-            Dim result = client.AB_GetJugments("Test123", "Manhattan", "0000-00-00", "0000-00-00", "234", "1")
+            Dim result = client.AB_GetEnvirnomental("Test123", "Manhattan", "0000-00-00", "0000-00-00", "186", "EAST 2 STREET")
         End Using
     End Sub
 
