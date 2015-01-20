@@ -713,4 +713,66 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Judgment" nillable="true" type="tns:Judgment" />
+  <xs:complexType name="ArrayOfBankruptcy">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Bankruptcy" nillable="true" type="tns:Bankruptcy" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBankruptcy" nillable="true" type="tns:ArrayOfBankruptcy" />
+  <xs:complexType name="Bankruptcy">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SSN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="area" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="case_no" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="case_number" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="date_uploaded" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="filed" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="first_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="generation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="judge_initials" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="last_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="middle_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="rec_type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="role" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="row_id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="taxID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="timestamp" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Bankruptcy" nillable="true" type="tns:Bankruptcy" />
+  <xs:complexType name="ArrayOfECB">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ECB" nillable="true" type="tns:ECB" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfECB" nillable="true" type="tns:ArrayOfECB" />
+  <xs:complexType name="ECB">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ADDRESS" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AMOUNTDUE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CITY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DECDATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DOCDATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HNUM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="JDATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TIMESTAMP" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TYPE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VIOLNUM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZIP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="address_tso" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="docket_date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fname_tso" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="hnum_tso" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="lname_tso" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="name_no_space" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="name_with_space" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="row_id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="satdate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="satvac" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ECB" nillable="true" type="tns:ECB" />
 </xs:schema>

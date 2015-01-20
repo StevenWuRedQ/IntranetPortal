@@ -86,6 +86,10 @@ Partial Public Class Employee
                 Return True
             End If
 
+            If Roles.IsUserInRole(name, "Title-Users") Then
+                Return True
+            End If
+
             Dim lead = context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
 
             If lead IsNot Nothing Then

@@ -216,16 +216,32 @@ Public Class LeadsSubMenu
         If (e.Parameter.StartsWith("Show")) Then
             Dim bble = e.Parameter.Split("|")(1)
             hfInProcessBBLE.Value = bble
+            BindEvictionUsers()
         End If
 
         If e.Parameter.StartsWith("Save") Then
             Dim bble = hfInProcessBBLE.Value
             UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing)
 
-            If Not String.IsNullOrEmpty(lbSelectionMode.Value) AndAlso lbSelectionMode.Value = 0 Then
-                'Add leads to short sale section
-                ShortSaleManage.MoveLeadsToShortSale(hfInProcessBBLE.Value, Page.User.Identity.Name)
+            If Not String.IsNullOrEmpty(lbSelectionMode.Value) Then
+                If lbSelectionMode.SelectedValues.Contains("0") Then
+                    'Add leads to short sale section
+                    ShortSaleManage.MoveLeadsToShortSale(hfInProcessBBLE.Value, Page.User.Identity.Name)
+                End If
+
+                If lbSelectionMode.SelectedValues.Contains("1") Then
+                    Dim name = cbEvictionUsers.Value
+                    If String.IsNullOrEmpty(name) Then
+                        Throw New Exception("Please select Eviction User")
+                    End If
+                    ShortSale.EvictionCas.AddEviction(bble, name, Page.User.Identity.Name)
+                End If
             End If
         End If
+    End Sub
+
+    Private Sub BindEvictionUsers()
+        cbEvictionUsers.DataSource = Roles.GetUsersInRole("Eviction-User")
+        cbEvictionUsers.DataBind()
     End Sub
 End Class

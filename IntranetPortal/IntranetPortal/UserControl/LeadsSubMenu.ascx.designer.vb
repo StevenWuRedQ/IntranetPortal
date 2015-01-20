@@ -131,6 +131,15 @@ Partial Public Class LeadsSubMenu
     Protected WithEvents lbSelectionMode As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
 
     '''<summary>
+    '''cbEvictionUsers control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbEvictionUsers As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
     '''ASPxPopupControl5 control.
     '''</summary>
     '''<remarks>

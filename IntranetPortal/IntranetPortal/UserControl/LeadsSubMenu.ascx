@@ -103,7 +103,7 @@
                                         }" />
             </dx:ASPxButton>
         </dx:PopupControlContentControl>
-    </ContentCollection>    
+    </ContentCollection>
 </dx:ASPxPopupControl>
 
 <dx:ASPxCallback runat="server" ClientInstanceName="reassignCallback" ID="reassignCallback" OnCallback="reassignCallback_Callback">
@@ -140,7 +140,7 @@
                 <div class="tab-pane" id="BingBird">BingBird</div>
                 <div class="tab-pane" id="Oasis">Oasis</div>
                 <div class="tab-pane" id="ZOLA">ZOLA</div>
-                
+
             </div>
             <div style="width: 100%; text-align: center; display: none" id="leads_address_popup"></div>
         </div>
@@ -174,7 +174,20 @@
                     <dx:ListEditItem Text="Construction" Value="2" />
                     <dx:ListEditItem Text="Litigation" Value="3" />
                 </Items>
+                <ClientSideEvents SelectedIndexChanged="function(s,e){
+                        if(s.GetSelectedValues().indexOf('1')!=-1)
+                        {
+                             document.getElementById('divEvictionUsers').style.display = 'block';
+                        }else{
+                            document.getElementById('divEvictionUsers').style.display = 'none';
+                    }
+                    }" />
             </dx:ASPxCheckBoxList>
+            <div id="divEvictionUsers" style="display:none; width:300px;">
+                Eviction User: 
+                <dx:ASPxComboBox ID="cbEvictionUsers" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">
+                </dx:ASPxComboBox>
+            </div>
         </dx:PopupControlContentControl>
     </ContentCollection>
     <FooterContentTemplate>

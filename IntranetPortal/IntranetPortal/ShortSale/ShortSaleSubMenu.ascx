@@ -321,6 +321,33 @@
     </ContentCollection>
 </dx:ASPxPopupControl>
 
+<dx:ASPxPopupControl ClientInstanceName="popupEvictionUsers" Width="300px" Height="300px"
+    MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl4"
+    HeaderText="Select Eviction User:" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl4_WindowCallback"
+    runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server" Visible="false" ID="popupCtrEvictionUser">
+            <dx:ASPxListBox runat="server" ID="lbEvictionUsers" ClientInstanceName="lbEvictionUsers" Height="270"
+                SelectedIndex="0" Width="100%">
+            </dx:ASPxListBox>
+            <dx:ASPxButton Text="OK" runat="server" ID="ASPxButton1" AutoPostBack="false">
+                <ClientSideEvents Click="function(s,e){
+                                        var item = lbEvictionUsers.GetSelectedItem();
+                                        if(item == null)
+                                        {
+                                             alert('Please select eviction user.');
+                                             return;
+                                         }
+                                        popupEvictionUsers.PerformCallback(tmpBBLE + '|' + item.text);
+                                        popupEvictionUsers.Hide();   
+                                        OnSetStatusComplete(s,e);                    
+                                        }" />
+            </dx:ASPxButton>
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+</dx:ASPxPopupControl>
+
+
 <dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback">
     <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
 </dx:ASPxCallback>

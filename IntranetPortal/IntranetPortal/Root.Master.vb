@@ -20,7 +20,7 @@ Public Class Root
         Get
             If _empUnderMgred Is Nothing Then
 
-                If Page.User.IsInRole("Admin") Then
+                If Page.User.IsInRole("Admin") Or Page.User.IsInRole("Title-Users") Then
                     _empUnderMgred = Employee.GetAllEmps()
                 Else
                     Dim emps = Employee.GetManagedEmployees(Page.User.Identity.Name).ToList

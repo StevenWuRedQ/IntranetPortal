@@ -360,4 +360,41 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AB_GetBankruptcy">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetBankruptcyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetBankruptcyResult" nillable="true" type="q23:ArrayOfBankruptcy" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetEnvirnomental">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="House_Num" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="St_Name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetEnvirnomentalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetEnvirnomentalResult" nillable="true" type="q24:ArrayOfECB" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -10,6 +10,17 @@ Public Class ShortSaleCaseList
     Public Sub BindCaseList(status As CaseStatus)
         hfCaseStatus.Value = status
 
+        If status = CaseStatus.Eviction Then
+            gridCase.DataSource = ShortSaleCase.GetEvictionCases
+            gridCase.DataBind()
+
+            If Not Page.IsPostBack Then
+                gridCase.GroupBy(gridCase.Columns("EvictionOwner"))
+            End If
+
+            Return
+        End If
+
         If Employee.IsShortSaleManager(Page.User.Identity.Name) Then
             gridCase.DataSource = ShortSaleCase.GetCaseByStatus(status)
 

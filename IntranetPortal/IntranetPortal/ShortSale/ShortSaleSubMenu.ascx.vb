@@ -66,4 +66,27 @@ Public Class ShortSaleSubMenu
             listboxEmployee.DataBind()
         End Using
     End Sub
+
+    Protected Sub ASPxPopupControl4_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        If String.IsNullOrEmpty(e.Parameter) Then
+            popupCtrEvictionUser.Visible = True
+            BindEvictionUser()
+            Return
+        End If
+
+        If e.Parameter.Split("|").Length > 0 Then
+            Dim bble = e.Parameter.Split("|")(0)
+            Dim name = e.Parameter.Split("|")(1)
+            'ShortSaleCase.ReassignOwner(bble, name)
+            ShortSaleCase.GetCaseByBBLE(bble).SaveStatus(CaseStatus.Eviction)
+            EvictionCas.AddEviction(bble, name, Page.User.Identity.Name)
+
+            LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} set to eviction. Eviction User: {1}.", Page.User.Identity.Name, name), bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
+        End If
+    End Sub
+
+    Sub BindEvictionUser()
+        lbEvictionUsers.DataSource = Roles.GetUsersInRole("Eviction-User")
+        lbEvictionUsers.DataBind()
+    End Sub
 End Class
