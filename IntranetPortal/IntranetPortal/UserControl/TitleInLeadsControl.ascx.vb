@@ -103,8 +103,7 @@ Public Class TitleInLeads
                                }
         End If
 
-        Dim json As New JavaScriptSerializer
-        e.Result = json.Serialize(ShortSale.TitleJudgementSearch.GetInstaceByBBLE(bble))
+        e.Result = JsonConvert.SerializeObject(objJudgement)
     End Sub
 
     Protected Sub cbSaveJudgementData_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
