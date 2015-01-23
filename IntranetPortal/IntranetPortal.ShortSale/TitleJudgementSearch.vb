@@ -19,4 +19,10 @@
         End Using
     End Function
 
+    Public Shared Function GetInstaceByBBLE(bble As String) As TitleJudgementSearch
+        Using ctx As New ShortSaleEntities
+            Return ctx.TitleJudgementSearches.Where(Function(obj) obj.BBLE = bble).SingleOrDefault
+        End Using
+    End Function
+
 End Class

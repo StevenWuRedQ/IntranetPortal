@@ -36,5 +36,6 @@ Partial Public Class TitleJudgementSearch
     Public Property Description As String
     Public Property CreateBy As String
     Public Property CreateDate As Nullable(Of Date)
+    Public Property BBLE As String
 
 End Class

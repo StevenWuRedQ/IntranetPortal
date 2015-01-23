@@ -274,6 +274,7 @@
             <PropertyRef Name="JudgementId" />
           </Key>
           <Property Name="JudgementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
           <Property Name="CaseId" Type="int" Nullable="false" />
           <Property Name="RepairTax" Type="nvarchar" MaxLength="50" />
           <Property Name="RepairTaxDate" Type="datetime" />
@@ -597,6 +598,7 @@
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -879,6 +881,7 @@
           <EntitySetMapping Name="TitleJudgementSearches">
             <EntityTypeMapping TypeName="IntranetPortalModel.TitleJudgementSearch">
               <MappingFragment StoreEntitySet="TitleJudgementSearch">
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
