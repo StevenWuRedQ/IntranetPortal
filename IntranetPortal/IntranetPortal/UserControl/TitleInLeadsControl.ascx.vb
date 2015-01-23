@@ -1,6 +1,7 @@
 ﻿Imports IntranetPortal.ShortSale
 Imports DevExpress.Web.ASPxGridView
 Imports DevExpress.Web.ASPxPopupControl
+Imports System.Web.Script.Serialization
 
 Public Class TitleInLeads
     Inherits System.Web.UI.UserControl
@@ -88,5 +89,11 @@ Public Class TitleInLeads
 
             e.Result = ssCase.IsUrgent
         End If
+    End Sub
+
+    Protected Sub cbGetJudgementData_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        Dim bble = e.Parameter
+        Dim json As New JavaScriptSerializer
+        e.Result = json.Serialize(ShortSale.TitleJudgementSearch.GetInstaceByBBLE(bble))
     End Sub
 End Class

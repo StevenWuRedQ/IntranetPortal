@@ -278,6 +278,10 @@
                 </div>
             </div>
 
+            <dx:ASPxCallback runat="server" ID="cbGetJudgementData" ClientInstanceName="cbGetJudgementData" OnCallback="cbGetJudgementData_Callback">
+                <ClientSideEvents CallbackComplete="function(s,e){alert(e.result);}" />
+            </dx:ASPxCallback>
+
             <div class="ss_form" style="display:none">
                 <dx:ASPxCallbackPanel ID="callbackClearence" runat="server" ClientInstanceName="callbackClearence" OnCallback="callbackClearence_Callback">
                     <PanelCollection>
