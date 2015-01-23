@@ -86,6 +86,7 @@
             var data_value = null;
            
             data_value = get_sub_property(ss_data, field, null);
+            
             ss_field_data(elem, data_value);
             //d_assert(field == "Evivtion", "get evition " + data_value);
         });
@@ -109,6 +110,10 @@
             if (is_save) {
                 /* if radio box not check then*/
                 //if (!fieldNotChange(ShortSaleCaseData, field) && elem.attr("type")=="radio") {
+                //if (field == 'JudgementInfo.RepairTaxDate')
+                //{
+                //    debugger;
+                //}
                 data_value = get_sub_property(ShortSaleCaseData, field, ss_field_data(elem, null));
 
                 // }
@@ -116,9 +121,14 @@
             }
             data_value = get_sub_property(ss_data, field, null);
             ss_field_data(elem, data_value);
+            if (field == 'JudgementInfo.RepairTaxDate')
+            {
+                debugger;
+            }
             //d_assert(field == "Evivtion", "get evition " + data_value);
         });
         ShortSaleCaseData.JudgementInfo;
+        debugger;
         cbSaveJudgementData.PerformCallback(JSON.stringify(ShortSaleCaseData.JudgementInfo))
     }
 </script>
@@ -310,9 +320,9 @@
                             <tr class="font_14">
                                 <td class="judgment_search_td">NYC Lien
                                 </td>
-                                <td><input type="text" class="ss_form_input table_input" data-field="JudgementInfo.RepairTaxDate" placeholder="Click to input"/>
+                                <td><input type="text" class="ss_form_input table_input" data-field="JudgementInfo.NYCLien" placeholder="Click to input"/>
                                 </td>
-                                <td><input type="text"class="ss_form_input table_input ss_date" data-field="JudgementInfo.RepairTaxDate" placeholder="Click to select date"/>
+                                <td><input type="text"class="ss_form_input table_input ss_date" data-field="JudgementInfo.NYCLienDate" placeholder="Click to select date"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
