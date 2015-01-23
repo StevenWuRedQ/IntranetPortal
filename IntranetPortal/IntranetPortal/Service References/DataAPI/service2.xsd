@@ -481,4 +481,23 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AB_GetTranscriptAdjunction">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AB_GetTranscriptAdjunctionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AB_GetTranscriptAdjunctionResult" nillable="true" type="q29:ArrayOfTranscriptAdjunction" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

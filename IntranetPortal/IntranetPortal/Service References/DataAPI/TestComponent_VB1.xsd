@@ -926,4 +926,41 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ParkingViolation" nillable="true" type="tns:ParkingViolation" />
+  <xs:complexType name="ArrayOfTranscriptAdjunction">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TranscriptAdjunction" nillable="true" type="tns:TranscriptAdjunction" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTranscriptAdjunction" nillable="true" type="tns:ArrayOfTranscriptAdjunction" />
+  <xs:complexType name="TranscriptAdjunction">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BADADDR" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BOOKDATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CITY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CURRADDR" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CURRAMT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DATEOFBIR" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ENTERDATE" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FILEDATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FIRSTNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HOUSENUM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ISSDATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="JUDGEAMT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LASTNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MIDDLENAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NDLN" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NIJDATE" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PAIDAMT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STIND" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STREETADD" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TEMPSUB" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TIMESTAMP" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="VACDATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VIONUMBER" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZIP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="row_id" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TranscriptAdjunction" nillable="true" type="tns:TranscriptAdjunction" />
 </xs:schema>
