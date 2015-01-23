@@ -40432,6 +40432,249 @@ Namespace DataAPI
         End Property
     End Class
     
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ParkingViolation", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class ParkingViolation
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ADDRESSField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CITYSTATEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER3Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER4Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER5Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER6Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER7Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private INTAMTField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private JGAMT1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private PLATEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RPTJGMTField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private STATEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TIMESTAMPField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ZIPField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private pvbnameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private row_idField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ADDRESS() As String
+            Get
+                Return Me.ADDRESSField
+            End Get
+            Set
+                Me.ADDRESSField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CITYSTATE() As String
+            Get
+                Return Me.CITYSTATEField
+            End Get
+            Set
+                Me.CITYSTATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER1() As String
+            Get
+                Return Me.FILLER1Field
+            End Get
+            Set
+                Me.FILLER1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER3() As String
+            Get
+                Return Me.FILLER3Field
+            End Get
+            Set
+                Me.FILLER3Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER4() As String
+            Get
+                Return Me.FILLER4Field
+            End Get
+            Set
+                Me.FILLER4Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER5() As String
+            Get
+                Return Me.FILLER5Field
+            End Get
+            Set
+                Me.FILLER5Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER6() As String
+            Get
+                Return Me.FILLER6Field
+            End Get
+            Set
+                Me.FILLER6Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER7() As String
+            Get
+                Return Me.FILLER7Field
+            End Get
+            Set
+                Me.FILLER7Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property INTAMT() As String
+            Get
+                Return Me.INTAMTField
+            End Get
+            Set
+                Me.INTAMTField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property JGAMT1() As String
+            Get
+                Return Me.JGAMT1Field
+            End Get
+            Set
+                Me.JGAMT1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property PLATE() As String
+            Get
+                Return Me.PLATEField
+            End Get
+            Set
+                Me.PLATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RPTJGMT() As String
+            Get
+                Return Me.RPTJGMTField
+            End Get
+            Set
+                Me.RPTJGMTField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property STATE() As String
+            Get
+                Return Me.STATEField
+            End Get
+            Set
+                Me.STATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TIMESTAMP() As System.Nullable(Of Date)
+            Get
+                Return Me.TIMESTAMPField
+            End Get
+            Set
+                Me.TIMESTAMPField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ZIP() As String
+            Get
+                Return Me.ZIPField
+            End Get
+            Set
+                Me.ZIPField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property pvbname() As String
+            Get
+                Return Me.pvbnameField
+            End Get
+            Set
+                Me.pvbnameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property row_id() As String
+            Get
+                Return Me.row_idField
+            End Get
+            Set
+                Me.row_idField = value
+            End Set
+        End Property
+    End Class
+    
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
      System.ServiceModel.ServiceContractAttribute(ConfigurationName:="DataAPI.IWCFMacros")>  _
     Public Interface IWCFMacros
@@ -40603,6 +40846,12 @@ Namespace DataAPI
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetPatriot", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetPatriotResponse")>  _
         Function AB_GetPatriotAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.Patriot())
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetParkingViolations", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetParkingViolationsResponse")>  _
+        Function AB_GetParkingViolations(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.ParkingViolation()
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetParkingViolations", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetParkingViolationsResponse")>  _
+        Function AB_GetParkingViolationsAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.ParkingViolation())
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -40858,6 +41107,14 @@ Namespace DataAPI
         
         Public Function AB_GetPatriotAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.Patriot()) Implements DataAPI.IWCFMacros.AB_GetPatriotAsync
             Return MyBase.Channel.AB_GetPatriotAsync(JobTitle, County, Start_Date, End_Date, LastName, FirstName, CorpName, SearchType)
+        End Function
+        
+        Public Function AB_GetParkingViolations(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.ParkingViolation() Implements DataAPI.IWCFMacros.AB_GetParkingViolations
+            Return MyBase.Channel.AB_GetParkingViolations(JobTitle, County, Start_Date, End_Date, LastName, FirstName, CorpName, SearchType)
+        End Function
+        
+        Public Function AB_GetParkingViolationsAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.ParkingViolation()) Implements DataAPI.IWCFMacros.AB_GetParkingViolationsAsync
+            Return MyBase.Channel.AB_GetParkingViolationsAsync(JobTitle, County, Start_Date, End_Date, LastName, FirstName, CorpName, SearchType)
         End Function
     End Class
 End Namespace

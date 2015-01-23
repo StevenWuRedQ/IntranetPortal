@@ -3,9 +3,9 @@
         Using context As New ShortSaleEntities
             Dim pbi As TitleJudgementSearch
             If CaseId = 0 Then
-                pbi = GetInstaceByBBLE(BBLE)
+                pbi = context.TitleJudgementSearches.SingleOrDefault(Function(obj) obj.BBLE = BBLE)
             Else
-                pbi = GetInstance(CaseId)
+                pbi = context.TitleJudgementSearches.SingleOrDefault(Function(obj) obj.CaseId = CaseId)
             End If
 
             If pbi Is Nothing Then

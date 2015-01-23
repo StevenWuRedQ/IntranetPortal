@@ -90,7 +90,8 @@ Public Class Form1
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Using client As New IntranetPortal.DataAPI.WCFMacrosClient
             'Dim result = client.AB_GetFederalTaxLien("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "", "", "D & S ELECTRICAL CORP", "ByCorpName")
-            Dim result = client.AB_GetPatriot("Test123", "Queens", "0000-00-00", "0000-00-00", "ABU SITTA", "", "", "ByPersonName")
+            'Dim result = client.AB_GetPatriot("Test123", "Queens", "0000-00-00", "0000-00-00", "ABU SITTA", "", "", "ByPersonName")
+            Dim result = client.AB_GetParkingViolations("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "CORPORATION", "ByCorpName")
 
             'client.NYC_Address_Search()
         End Using

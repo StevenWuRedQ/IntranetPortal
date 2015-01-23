@@ -898,4 +898,32 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Patriot" nillable="true" type="tns:Patriot" />
+  <xs:complexType name="ArrayOfParkingViolation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ParkingViolation" nillable="true" type="tns:ParkingViolation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfParkingViolation" nillable="true" type="tns:ArrayOfParkingViolation" />
+  <xs:complexType name="ParkingViolation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ADDRESS" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CITYSTATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FILLER1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FILLER3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FILLER4" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FILLER5" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FILLER6" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FILLER7" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="INTAMT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="JGAMT1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PLATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RPTJGMT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TIMESTAMP" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ZIP" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="pvbname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="row_id" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ParkingViolation" nillable="true" type="tns:ParkingViolation" />
 </xs:schema>

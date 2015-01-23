@@ -179,6 +179,12 @@
   <wsdl:message name="IWCFMacros_AB_GetPatriot_OutputMessage">
     <wsdl:part name="parameters" element="tns:AB_GetPatriotResponse" />
   </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetParkingViolations_InputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetParkingViolations" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetParkingViolations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetParkingViolationsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IWCFMacros">
     <wsdl:operation name="DoWork">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DoWork" message="tns:IWCFMacros_DoWork_InputMessage" />
@@ -291,6 +297,10 @@
     <wsdl:operation name="AB_GetPatriot">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetPatriot" message="tns:IWCFMacros_AB_GetPatriot_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetPatriotResponse" message="tns:IWCFMacros_AB_GetPatriot_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetParkingViolations">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetParkingViolations" message="tns:IWCFMacros_AB_GetParkingViolations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetParkingViolationsResponse" message="tns:IWCFMacros_AB_GetParkingViolations_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WCFMacros_Http" type="tns:IWCFMacros">
@@ -540,6 +550,15 @@
     </wsdl:operation>
     <wsdl:operation name="AB_GetPatriot">
       <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetPatriot" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetParkingViolations">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetParkingViolations" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
