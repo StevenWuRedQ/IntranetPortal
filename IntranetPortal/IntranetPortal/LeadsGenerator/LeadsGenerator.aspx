@@ -37,8 +37,8 @@
             filter.DocketYear = $("#IdDocket_Year").val();
             filter.YearBuild = { min: $("#IdYearBuildMin").val(), max: $("#IdYearBuildMax").val() }
             return filter;
-
         }
+
         function popUpSearch() {
             $("#TxtSearchTaskName").val("");
             SaveSearchPopupClient.Show();
@@ -108,17 +108,17 @@
 
                                 <div class="form-inline">
                                     <select class=" form-control query_input_60percent">
-                                        <% For Each st In CompletedTask %>
-                                            <option value='<%= st.Id%>'><%= st.TaksName %></option>
-                                        <% Next %>
-                                        <option ></option>
+                                        <% For Each st In CompletedTask%>
+                                        <option value='<%= st.Id%>'><%= st.TaksName %></option>
+                                        <% Next%>
+                                        <option></option>
                                         <%--<option value="Borough">All</option>
                                         <option value="Borough">Bronx</option>
                                         <option value="Borough">Borough</option>
                                         <option value="Zip">Zip</option>--%>
                                     </select>
                                     <button type="button" class="rand-button rand-button-pad bg_orange button_margin">Load</button>
-                                   <%-- <button type="button" class="rand-button rand-button-pad bg_orange button_margin">Create New</button>--%>
+                                    <%-- <button type="button" class="rand-button rand-button-pad bg_orange button_margin">Create New</button>--%>
                                 </div>
 
                             </div>
@@ -203,8 +203,10 @@
 
                                                                 <option>All</option>
                                                                 <option>Condo</option>
-                                                                <option>Loft</option>
-                                                                <option>Single Family Home</option>
+                                                                <option>Commercial</option>
+                                                                <option value="a*">Single Family Home</option>
+                                                                <option value="b*,c0,c3">2-4 Family</option>
+                                                                <option value="c1,c2">5-6 Family</option>
                                                                 <option>Coop</option>
                                                                 <option>Townhome </option>
                                                                 <option>TIC  </option>
@@ -818,10 +820,28 @@
         </FooterContentTemplate>
         <ClientSideEvents EndCallback="function(s,e){
                 SaveSearchPopupClient.Hide();
-                alert('Search Request is submited.');
+                $('#msgModal').modal();
             }" />
     </dx:ASPxPopupControl>
-    
+
+    <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Success</h4>
+                </div>
+                <div class="modal-body">
+                    Your request has been submitted. Estimated time is 48 hours to upload. 
+                    The system will notify you upon completion.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                   
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         $(document).ready(function () {
 

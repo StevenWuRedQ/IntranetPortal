@@ -91,7 +91,7 @@
                     <%Else%>
                         Mark As Urgent
                     <%End If%>
-                </span>                
+                </span>
                 <span class="time_buttons">See Title Report</span>
             </div>
             <%--data format June 2, 2014 6:37 PM--%>

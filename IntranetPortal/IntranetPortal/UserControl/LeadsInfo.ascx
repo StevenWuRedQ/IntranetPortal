@@ -6,6 +6,8 @@
 <%@ Register Src="~/OneDrive/LeadsDocumentOneDrive.ascx" TagPrefix="uc1" TagName="LeadsDocumentOneDrive" %>
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
 <%@ Register Src="~/PopupControl/EditHomeOwner.ascx" TagPrefix="uc1" TagName="EditHomeOwner" %>
+<%@ Register Src="~/ShortSale/TitleControl.ascx" TagPrefix="uc1" TagName="TitleControl" %>
+
 
 <script type="text/javascript">
     // <![CDATA[
@@ -388,7 +390,7 @@
                                     </dx:ASPxPopupMenu>
                                     <asp:HiddenField ID="hfBBLE" runat="server" />
                                     <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white">
+                                    <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 16px; color: white">
                                         <li class="active short_sale_head_tab">
                                             <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
                                                 <i class="fa fa-info-circle head_tab_icon_padding"></i>
@@ -405,6 +407,12 @@
                                             <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
                                                 <i class="fa fa-file head_tab_icon_padding"></i>
                                                 <div class="font_size_bold">Documents</div>
+                                            </a>
+                                        </li>
+                                        <li class="short_sale_head_tab">
+                                            <a href="#titlePane" role="tab" data-toggle="tab" class="tab_button_a">
+                                                <i class="fa fa-file head_tab_icon_padding"></i>
+                                                <div class="font_size_bold">Title</div>
                                             </a>
                                         </li>
                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
@@ -456,6 +464,9 @@
                                         <div class="tab-pane" id="documents">
                                             <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
                                             <%--<uc1:LeadsDocumentOneDrive runat="server" ID="LeadsDocumentOneDrive" />--%>
+                                        </div>
+                                        <div class="tab-pane" id="titlePane">
+                                            <uc1:TitleControl runat="server" ID="TitleControl" />
                                         </div>
                                     </div>
                                     <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="ASPxPopupMenuPhone"

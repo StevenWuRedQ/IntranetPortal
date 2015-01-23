@@ -1,17 +1,18 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="TasklistControl.ascx.vb" Inherits="IntranetPortal.TasklistControl" %>
 <script type="text/javascript">
-    function ShowWorklistItem(itemData, processName)
-    {
-        var frm = document.getElementById("FrmTaskContent");
-        var contentPane = splitterTaskPage.GetPaneByName("contentPanel")
-        contentPane.SetContentUrl(itemData);
-        //alert(sn + " " + processName);
-    }
+    //function ShowWorklistItem(itemData, processName)
+    //{
+    //    var frm = document.getElementById("FrmTaskContent");
+    //    var contentPane = splitterTaskPage.GetPaneByName("contentPanel")
+    //    contentPane.SetContentUrl(itemData);
+    //    //alert(sn + " " + processName);
+    //}
 
     function ClosePage()
     {
         var contentPane = splitterTaskPage.GetPaneByName("contentPanel")
         contentPane.SetContentUrl("about:blank");
+        gridTasks.Refresh();
     }
 
     function ExpandOrCollapseGroupRow(rowIndex) {
@@ -42,8 +43,7 @@
     function InitScrollBar() {
         $("#leads_list_left").mCustomScrollbar(
                     {
-                        theme: "minimal-dark",
-                        callbacks: ladfucntion
+                        theme: "minimal-dark"                      
                     }
                  );
     }
@@ -52,6 +52,18 @@
         //Handler for .ready() called.       
         InitScrollBar();
     });
+
+    function OnGridFocusedRowChanged(s,e) {
+        // The values will be returned to the OnGetRowValues() function 
+        if (gridTasks.GetFocusedRowIndex() >= 0) {
+            gridTasks.GetRowValues(gridTasks.GetFocusedRowIndex(), 'ItemData', OnGetRowValues);
+        }
+    }
+
+    function OnGetRowValues(values) {
+        var contentPane = splitterTaskPage.GetPaneByName("contentPanel")
+        contentPane.SetContentUrl(values);
+    }
 
 </script>
 
@@ -72,7 +84,7 @@
     </div>
     <div style="height: 768px; padding: 0px 10px;" id="leads_list_left">
         <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true"
-            ID="gridTasks" Border-BorderStyle="None" ClientInstanceName="gridTasks" Width="100%" AutoGenerateColumns="False" KeyFieldName="ProcInstId;ActInstId">
+            ID="gridTasks" Border-BorderStyle="None" ClientInstanceName="gridTasks" Width="100%" AutoGenerateColumns="False" KeyFieldName="ProcInstId;ActInstId" OnDataBinding="gridTasks_DataBinding">
             <Columns>        
                  <dx:GridViewDataTextColumn FieldName="MarkColor"  VisibleIndex="0" Width="30px">
                     <DataItemTemplate>                        
@@ -82,7 +94,8 @@
                 <dx:GridViewDataTextColumn FieldName="DisplayName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
                     <DataItemTemplate>
-                        <span onclick='ShowWorklistItem("<%# Eval("ItemData")%>", "<%# Eval("ProcessName")%>")'><%# Eval("DisplayName")%></span>
+                      <%--  <span onclick='ShowWorklistItem("<%# Eval("ItemData")%>", "<%# Eval("ProcessName")%>")'><%# Eval("DisplayName")%></span>--%>
+                        <%# Eval("DisplayName")%>
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="StartDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">
@@ -133,6 +146,7 @@
                 <dx:ASPxSummaryItem FieldName="DisplayName" SummaryType="Count" />
             </GroupSummary>            
             <Border BorderStyle="None"></Border>
+            <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
         </dx:ASPxGridView>
     </div>
 </div>

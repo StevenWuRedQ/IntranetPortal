@@ -11,32 +11,23 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ProcessReport
+Partial Public Class WorklistReport
 
     '''<summary>
-    '''form1 control.
+    '''lblUserName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    Protected WithEvents lblUserName As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
-    '''ASPxSplitter1 control.
+    '''GridWorklist control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
-
-    '''<summary>
-    '''ASPxNavBar1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxNavBar1 As Global.DevExpress.Web.ASPxNavBar.ASPxNavBar
+    Protected WithEvents GridWorklist As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 End Class

@@ -799,4 +799,21 @@ Public Class ActivityLogs
             htmlEditor.Toolbars.Add(Utility.CreateCustomToolbar("Custom"))
         End If
     End Sub
+
+    Protected Sub callbackGetEmployeesByAction_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        Dim action = e.Parameter
+
+        If action = "Lookup Request" Then
+            Dim emp = Employee.GetInstance(Page.User.Identity.Name)
+            If emp IsNot Nothing AndAlso emp.Department = "RonTeam" Then
+                e.Result = "Princess Simeon"
+            Else
+                e.Result = "Jamie Ventura"
+            End If
+        End If
+
+        If action = "Judgement Search Request" Then
+            e.Result = String.Join(";", Roles.GetUsersInRole("Title-Users"))
+        End If
+    End Sub
 End Class

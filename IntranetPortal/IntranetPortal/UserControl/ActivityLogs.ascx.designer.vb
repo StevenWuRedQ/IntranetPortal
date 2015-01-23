@@ -149,6 +149,15 @@ Partial Public Class ActivityLogs
     Protected WithEvents cbTaskAction As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
 
     '''<summary>
+    '''callbackGetEmployeesByAction control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents callbackGetEmployeesByAction As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+
+    '''<summary>
     '''empsDropDownEdit control.
     '''</summary>
     '''<remarks>

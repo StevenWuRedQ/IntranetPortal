@@ -161,6 +161,24 @@
   <wsdl:message name="IWCFMacros_AB_GetEnvirnomental_OutputMessage">
     <wsdl:part name="parameters" element="tns:AB_GetEnvirnomentalResponse" />
   </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetMortDeed_InputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetMortDeed" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetMortDeed_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetMortDeedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetFederalTaxLien_InputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetFederalTaxLien" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetFederalTaxLien_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetFederalTaxLienResponse" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetPatriot_InputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetPatriot" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AB_GetPatriot_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AB_GetPatriotResponse" />
+  </wsdl:message>
   <wsdl:portType name="IWCFMacros">
     <wsdl:operation name="DoWork">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DoWork" message="tns:IWCFMacros_DoWork_InputMessage" />
@@ -261,6 +279,18 @@
     <wsdl:operation name="AB_GetEnvirnomental">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetEnvirnomental" message="tns:IWCFMacros_AB_GetEnvirnomental_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetEnvirnomentalResponse" message="tns:IWCFMacros_AB_GetEnvirnomental_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetMortDeed">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetMortDeed" message="tns:IWCFMacros_AB_GetMortDeed_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetMortDeedResponse" message="tns:IWCFMacros_AB_GetMortDeed_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetFederalTaxLien">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLien" message="tns:IWCFMacros_AB_GetFederalTaxLien_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLienResponse" message="tns:IWCFMacros_AB_GetFederalTaxLien_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetPatriot">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetPatriot" message="tns:IWCFMacros_AB_GetPatriot_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetPatriotResponse" message="tns:IWCFMacros_AB_GetPatriot_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WCFMacros_Http" type="tns:IWCFMacros">
@@ -483,6 +513,33 @@
     </wsdl:operation>
     <wsdl:operation name="AB_GetEnvirnomental">
       <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetEnvirnomental" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetMortDeed">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetMortDeed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetFederalTaxLien">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLien" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AB_GetPatriot">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetPatriot" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

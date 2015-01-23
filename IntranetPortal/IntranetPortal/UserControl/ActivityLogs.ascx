@@ -384,7 +384,6 @@
                         </select>
                         <div class="color_gray upcase_text">Status Update</div>
                         <select class="select_bootstrap select_margin" id="selStatusUpdate">
-
                             <option value="Ready for Submission">Ready for Submission</option>
                             <option value="Pending Service Release">Pending Service Release</option>
                             <option value="Pending Vacancy">Pending Vacancy</option>
@@ -411,8 +410,9 @@
                         </select>
                     </div>
                 </div>
-                <div style="margin-top: 15px; float: right; margin-right: 14px;">
+                <div style="margin-top: 15px; float: right; margin-right: 5px;">
                     <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
+                    <i class="fa fa-calendar-o activity_add_buttons tooltip-examples" style="margin-right: 15px; cursor: pointer" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
                     <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this);ASPxPopupSetAsTaskControl.PerformCallback();"></i>
                     <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
                 </div>
@@ -794,21 +794,24 @@
                                     <dx:ListEditItem Text="Documents Request" Value="Documents Request" />
                                     <dx:ListEditItem Text="Lookup Request" Value="Lookup Request" />
                                     <dx:ListEditItem Text="Incentive Offer Needed" Value="Incentive Offer Needed" />
+                                    <dx:ListEditItem Text="Judgement Search Request" Value="Judgement Search Request" />
                                 </Items>
                                 <ValidationSettings ErrorDisplayMode="None">
                                     <RequiredField IsRequired="true" />
                                 </ValidationSettings>
                                 <ClientSideEvents SelectedIndexChanged="function(s,e){
-                                        if(cbTaskAction.GetText() == 'Lookup Request')
-                                        {
-                                            empCheckComboBox.SetText('Jamie Ventura');
-                                        }
-                                        else
-                                        {
-                                             empCheckComboBox.SetText('');
-                                        }
+                                       if(s.GetText() != '')
+                                       {
+                                            callbackGetEmployeesByAction.PerformCallback(s.GetText());                                           
+                                            return;
+                                       }
                                     }" />
                             </dx:ASPxComboBox>
+                            <dx:ASPxCallback runat="server" ID="callbackGetEmployeesByAction" ClientInstanceName="callbackGetEmployeesByAction" OnCallback="callbackGetEmployeesByAction_Callback">
+                                <ClientSideEvents CallbackComplete="function(s,e){                                       
+                                            empCheckComboBox.SetText(e.result);
+                                    }" />
+                            </dx:ASPxCallback>
                         </div>
                         <div class="form-group ">
                             <label class="upcase_text">employees</label>

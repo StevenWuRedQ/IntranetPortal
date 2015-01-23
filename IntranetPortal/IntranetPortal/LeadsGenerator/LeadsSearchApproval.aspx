@@ -189,20 +189,44 @@
             <tr>
                 <td colspan="2" runat="server" id="tdButton">
                     <button type="button" class="rand-button rand-button-pad bg_orange button_margin" onclick="cbApproval.PerformCallback('Approve')">Approve</button>
-                    <button type="button" class="rand-button rand-button-pad bg_color_gray button_margin" onclick="cbApproval.PerformCallback('Decline')">Decline</button>                 
+                    <button type="button" class="rand-button rand-button-pad bg_color_gray button_margin" onclick="cbApproval.PerformCallback('Decline')">Decline</button>                       
                 </td>
             </tr>
         </table>
     </div>
     <dx:ASPxCallback runat="server" ID="cbApproval" ClientInstanceName="cbApproval" OnCallback="cbApproval_Callback">
         <ClientSideEvents EndCallback="function(s,e){
-            alert('Submited');
-            if (window.parent && typeof window.parent.ClosePage == 'function')
-               window.parent.ClosePage();
-            else
-               window.close();  
+            OnSubmited();
             }" />
     </dx:ASPxCallback>
+    <script type="text/javascript">
+        function OnSubmited()
+        {
+            $('#msgModal').modal('show');
+            $('#msgModal').on('hide.bs.modal', function (e) {             
+                if (window.parent && typeof window.parent.ClosePage == 'function')
+                    window.parent.ClosePage();
+                else
+                    window.close();
+            });
+        }      
+    </script>
+     <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Success</h4>
+                </div>
+                <div class="modal-body">
+                    The action is submited.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                   
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         function hasValue(v) {
             if (v == null) {

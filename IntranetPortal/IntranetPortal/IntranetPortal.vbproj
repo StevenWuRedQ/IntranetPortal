@@ -1034,6 +1034,34 @@
       <DependentUpon>ProcessReport.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Task\Reports\ProcInstReport.aspx.designer.vb">
+      <DependentUpon>ProcInstReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Task\Reports\ProcInstReport.aspx.vb">
+      <DependentUpon>ProcInstReport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Task\Reports\ReportSummary.aspx.designer.vb">
+      <DependentUpon>ReportSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Task\Reports\ReportSummary.aspx.vb">
+      <DependentUpon>ReportSummary.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Task\Reports\WorkflowReprot.Master.designer.vb">
+      <DependentUpon>WorkflowReprot.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Task\Reports\WorkflowReprot.Master.vb">
+      <DependentUpon>WorkflowReprot.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Task\Reports\WorklistReport.aspx.designer.vb">
+      <DependentUpon>WorklistReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Task\Reports\WorklistReport.aspx.vb">
+      <DependentUpon>WorklistReport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Task\TasklistControl.ascx.designer.vb">
       <DependentUpon>TasklistControl.ascx</DependentUpon>
     </Compile>
@@ -2310,6 +2338,15 @@
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.ECB.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Mortgages_Deeds.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.FederalTaxLien.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Patriot.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\DataAPI\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
@@ -2336,6 +2373,9 @@
     <Content Include="Task\MyTask.aspx" />
     <Content Include="Task\OriginatedListControl.ascx" />
     <Content Include="Task\ProcessReport.aspx" />
+    <Content Include="Task\Reports\ProcInstReport.aspx" />
+    <Content Include="Task\Reports\ReportSummary.aspx" />
+    <Content Include="Task\Reports\WorklistReport.aspx" />
     <Content Include="Task\TasklistControl.ascx" />
     <Content Include="Test.aspx" />
     <Content Include="UploadFilePage.aspx" />
@@ -2463,6 +2503,7 @@
     <None Include="Service References\DataAPI\TestComponent_VB1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Task\Reports\WorkflowReprot.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

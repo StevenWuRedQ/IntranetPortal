@@ -11,7 +11,16 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ProcessReport
+Partial Public Class WorkflowReprot
+
+    '''<summary>
+    '''head control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents head As Global.System.Web.UI.WebControls.ContentPlaceHolder
 
     '''<summary>
     '''form1 control.
@@ -23,20 +32,11 @@ Partial Public Class ProcessReport
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''ASPxSplitter1 control.
+    '''contentPlaceHolderMain control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
-
-    '''<summary>
-    '''ASPxNavBar1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxNavBar1 As Global.DevExpress.Web.ASPxNavBar.ASPxNavBar
+    Protected WithEvents contentPlaceHolderMain As Global.System.Web.UI.WebControls.ContentPlaceHolder
 End Class

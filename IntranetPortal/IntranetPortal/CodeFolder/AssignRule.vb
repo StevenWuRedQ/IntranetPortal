@@ -114,7 +114,6 @@
 
                         If Context.LeadsInfoes.Local.Where(Function(tmp) tmp.BBLE = li.BBLE).Count = 0 Then
                             Context.LeadsInfoes.Add(li)
-                            rowCount += 1
                         End If
                     End If
 
@@ -137,6 +136,7 @@
 
                                 If Context.Leads.Local.Where(Function(tmp) tmp.BBLE = prop.BBLE).Count = 0 Then
                                     Context.Leads.Add(newlead)
+                                    rowCount += 1
                                 End If
                             End If
                         End If

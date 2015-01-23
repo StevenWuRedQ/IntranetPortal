@@ -4,7 +4,9 @@ Public Class TasklistControl
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        BindTask()
+        If Not Page.IsPostBack Then
+            BindTask()
+        End If
     End Sub
 
     Public Sub BindTask()
@@ -28,4 +30,10 @@ Public Class TasklistControl
         End If
         Return color
     End Function
+
+    Protected Sub gridTasks_DataBinding(sender As Object, e As EventArgs)
+        If gridTasks.DataSource Is Nothing Then
+            BindTask()
+        End If
+    End Sub
 End Class

@@ -57,7 +57,7 @@
             } else {
             }
         });
-    }
+    }   
 
     function ArchivedProcInst(rowIndex) {
         gridProcess.DeleteRow(rowIndex);
