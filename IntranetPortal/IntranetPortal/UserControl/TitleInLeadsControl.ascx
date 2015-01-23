@@ -61,7 +61,51 @@
             span.innerText = "Make As Urgent";
         }
     }
+    function loadJagmentSearch(jagmentSearch)
+    {
+        debugger;
+        var shortSale = { JudgementInfo: JSON.parse(loadJagmentSearch) };
+        if (ShortSaleCaseData == null)
+        {
+            ShortSaleCaseData = shortSale;
+        } else
+        {
+            ShortSaleCaseData.JudgementInfo =shortSale.JudgementInfo
+        }
+        ShortSaleDataBand();
+        debugger;
 
+    }
+    function SaveJudgementSearch()
+    {
+        ShortSaleCaseData = {};
+        var ss_data = ShortSaleCaseData;
+        //var field_name = "PropertyInfo.Number";
+        var is_save = true;
+        var inputs = $(".ss_form_input");
+        inputs.each(function (index) {
+
+            var field = ($(this).attr("data-field"));
+            if (!field) {
+                return;
+            }
+            var elem = $(this);
+            var data_value = null;
+            if (is_save) {
+                /* if radio box not check then*/
+                //if (!fieldNotChange(ShortSaleCaseData, field) && elem.attr("type")=="radio") {
+                data_value = get_sub_property(ShortSaleCaseData, field, ss_field_data(elem, null));
+
+                // }
+
+            }
+            data_value = get_sub_property(ss_data, field, null);
+            ss_field_data(elem, data_value);
+            //d_assert(field == "Evivtion", "get evition " + data_value);
+        });
+        ShortSaleCaseData.JudgementInfo;
+        cbSaveJudgementData.PerformCallback(JSON.stringify(ShortSaleCaseData.JudgementInfo))
+    }
 </script>
 <style type="text/css">
     .TitleCleared .TitleContent {
@@ -76,6 +120,7 @@
         color:white;
     }
 </style>
+
 <div style="padding-top: 5px">
     <div style="height: 850px; overflow:auto" id="home_owner_content">
         <%--time label--%>
@@ -179,7 +224,7 @@
             </div>
 
             <div class="ss_form">
-                <h4 class="ss_form_title">Judgement Search <i class="fa fa-save  color_blue_edit collapse_btn" title="Save Referral" onclick="alert('Save')"></i></h4>
+                <h4 class="ss_form_title">Judgement Search <i class="fa fa-save  color_blue_edit collapse_btn" title="Save Referral" onclick="SaveJudgementSearch('Save')"></i></h4>
                 <%-- log tables--%>
                 <div>
                     <table class="table">
@@ -279,7 +324,7 @@
             </div>
 
             <dx:ASPxCallback runat="server" ID="cbGetJudgementData" ClientInstanceName="cbGetJudgementData" OnCallback="cbGetJudgementData_Callback">
-                <ClientSideEvents CallbackComplete="function(s,e){alert(e.result);}" />
+                <ClientSideEvents CallbackComplete="function(s,e){loadJagmentSearch(e.result);}" />
             </dx:ASPxCallback>
 
             <dx:ASPxCallback runat="server" ID="cbSaveJudgementData" ClientInstanceName="cbSaveJudgementData" OnCallback="cbSaveJudgementData_Callback">

@@ -410,7 +410,7 @@
                                         </li>
                                         <li class="short_sale_head_tab">
                                             <a href="#titlePane" role="tab" data-toggle="tab" class="tab_button_a" onclick="cbGetJudgementData.PerformCallback(leadsInfoBBLE)">
-                                                <i class="fa fa-file head_tab_icon_padding"></i>
+                                                <i class="fa fa-file-text head_tab_icon_padding"></i>
                                                 <div class="font_size_bold">Title</div>
                                             </a>
                                         </li>

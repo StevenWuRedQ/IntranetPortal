@@ -68,6 +68,14 @@
                                     <dx:ASPxButton runat="server" Text="Load" ID="btnLoad2" OnClick="btnLoad2_Click"></dx:ASPxButton>
                                 </td>
                             </tr>
+                            <tr>
+                                <td style="width: 120px">
+                                    <dx:ASPxLabel runat="server" Text="StatusForm: (Optional) " ></dx:ASPxLabel>
+                                </td>
+                                <td style="width: 150px;">
+                                     <dx:ASPxComboBox runat="server" ID="cbStatusFrom" ></dx:ASPxComboBox>
+                                </td>
+                            </tr>
                         </table>
 
                         <dx:ASPxGridView runat="server" ID="gridAgentLeads" KeyFieldName="ID" Settings-ShowGroupPanel="false" AutoGenerateColumns="false">
@@ -85,60 +93,55 @@
                         Select Agent to Import:
                         <dx:ASPxComboBox runat="server" ID="cbEmpTo" TextField="Name" ValueField="EmployeeID"></dx:ASPxComboBox>
                         
+                         Select status to Change:(optional)
+                        <dx:ASPxComboBox runat="server" ID="cbStatusToChange"  ></dx:ASPxComboBox>
+                         
+                        Call Back Time :(need  select when tralsfer to status call back)
+                        <dx:ASPxDateEdit runat="server" ID="deCallBackTime"></dx:ASPxDateEdit>
+                        
                         <dx:ASPxButton runat="server" ID="btnTransfer" Text="Transfer" OnClick="btnTransfer_Click"></dx:ASPxButton>
                         <dx:ASPxLabel runat="server" ID="ASPxLabel2"></dx:ASPxLabel>
                     </dx:PanelContent>
                 </PanelCollection>
             </dx:ASPxRoundPanel>
 
-            <dx:ASPxRoundPanel runat="server" HeaderText="Change Leads Status" Width="100%">
+            
+            <dx:ASPxRoundPanel runat="server" HeaderText="Last Log View" Width="100%">
                 <PanelCollection>
                     <dx:PanelContent>
-                        <table>
-                            <tr>
-                                <td style="width: 80px">
-                                    <dx:ASPxLabel runat="server" Text="Agents:"></dx:ASPxLabel>
-                                </td>
-                                <td style="width: 150px;">
-                                    <dx:ASPxComboBox runat="server" ID="cbChagneAgentFrom" TextField="Name" ValueField="EmployeeId"></dx:ASPxComboBox>
-                                </td>
-                                
-                                <td style="padding-left: 10px;">
-                                    <dx:ASPxButton runat="server" Text="Load" ID="btnLoad3" OnClick="btnLoad3_Click"></dx:ASPxButton>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="width: 80px">
-                                    <dx:ASPxLabel runat="server" Text="StatusForm:"></dx:ASPxLabel>
-                                </td>
-                                <td style="width: 150px;">
-                                     <dx:ASPxComboBox runat="server" ID="cbStatusFrom"  ></dx:ASPxComboBox>
-                                </td>
-                            </tr>
-                        </table>
-                        <dx:ASPxGridView runat="server" ID="gridNeedChangeLeads" KeyFieldName="ID" Settings-ShowGroupPanel="false" AutoGenerateColumns="false">
+                         <dx:ASPxButton runat="server" Text="LoadLastLog" ID="LoadLastLog" OnClick="LoadLastLog_Click"></dx:ASPxButton>
+                        <dx:ASPxButton runat="server" Text="ExportExcel" ID="exportLastLog" OnClick="exportLastLog_Click"></dx:ASPxButton>
+                         <dx:ASPxGridView runat="server" ID="gridLastLogView" KeyFieldName="BBLE" Settings-ShowGroupPanel="false" AutoGenerateColumns="false">
                              <Columns>
-                                <dx:GridViewDataTextColumn FieldName="BBLE">
+                                 <dx:GridViewDataTextColumn FieldName="BBLE">
                                 </dx:GridViewDataTextColumn>
-                                <dx:GridViewDataTextColumn FieldName="EmployeeName">
+                                <dx:GridViewDataTextColumn FieldName="PropertyAddress">
                                 </dx:GridViewDataTextColumn>
-                                <dx:GridViewDataTextColumn FieldName="LeadsName">
+                                <dx:GridViewDataTextColumn FieldName="Current_Agent">
                                 </dx:GridViewDataTextColumn>
-                                <dx:GridViewDataTextColumn FieldName="Status">
+                                <dx:GridViewDataTextColumn FieldName="Department">
                                 </dx:GridViewDataTextColumn>
-                            </Columns>
-                        </dx:ASPxGridView>
-                         Select status to Change:
-                        <dx:ASPxComboBox runat="server" ID="cbStatusToChange"  ></dx:ASPxComboBox>
-                         
-                        Call Back Time :
-                        <dx:ASPxDateEdit runat="server" ID="deCallBackTime"></dx:ASPxDateEdit>
-                        <dx:ASPxButton runat="server" ID="btnChangeStuats" Text="Change" OnClick="btnChangeStuats_Click"></dx:ASPxButton>
-                        <dx:ASPxLabel runat="server" ID="ChangeProcess"></dx:ASPxLabel>
+                                 <dx:GridViewDataTextColumn FieldName="Status">
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn FieldName="LastUpdateBy">
+                                </dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn FieldName="LastUpdateDate">
+                                </dx:GridViewDataTextColumn>
+                                 <dx:GridViewDataTextColumn FieldName="LastUpdateComments">
+                                   <DataItemTemplate>
+                                       <div>
+                                           <%# Eval("LastUpdateComments")%>
+                                       </div>
+                                   </DataItemTemplate>
+                                </dx:GridViewDataTextColumn>
+                                 
+                             </Columns>
+                             
+                         </dx:ASPxGridView>
+                        <dx:ASPxGridViewExporter ID="ASPxLoadLastLogExporter" runat="server" GridViewID="gridLastLogView"></dx:ASPxGridViewExporter>
                     </dx:PanelContent>
-                    
-                </PanelCollection>
-            </dx:ASPxRoundPanel>
+                    </PanelCollection>
+                </dx:ASPxRoundPanel>
             <dx:ASPxRoundPanel runat="server" HeaderText="Initial Data" Width="100%">
                 <PanelCollection>
                     <dx:PanelContent>

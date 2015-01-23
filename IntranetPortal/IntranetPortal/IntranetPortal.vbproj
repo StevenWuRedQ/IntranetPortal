@@ -406,6 +406,9 @@
     <Compile Include="DataModel\LeadsTaxLien.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\Leads_with_last_log.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\LoginLog.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>

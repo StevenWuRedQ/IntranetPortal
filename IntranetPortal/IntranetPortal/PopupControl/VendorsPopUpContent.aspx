@@ -22,7 +22,7 @@
 </head>
 <body ng-controller="PortalCtrl">
     <form id="form1" runat="server">
-        <link href="/css/stevencss.css?v=1.0" rel="stylesheet" type="text/css" />
+        <link href="/css/stevencss.css?v=1.02" rel="stylesheet" type="text/css" />
         <div style="color: #b1b2b7" class="clearfix">
             <div class="row" style="margin: 0px;">
                 <div class="col-md-3">

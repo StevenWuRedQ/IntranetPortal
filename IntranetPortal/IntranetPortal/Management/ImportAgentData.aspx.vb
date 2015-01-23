@@ -26,13 +26,13 @@ Public Class ImportAgentData
             cbEmpTo.DataBind()
             cbEmpTo.Items.Insert(0, New ListEditItem())
 
-            cbChagneAgentFrom.DataSource = Context.Employees.ToList.OrderBy(Function(em) em.Name)
-            cbChagneAgentFrom.DataBind()
-            cbChagneAgentFrom.Items.Insert(0, New ListEditItem())
+           
 
-            cbStatusToChange.DataSource = System.Enum.GetNames(GetType(LeadStatus))
+            Dim LeadsStatus = System.Enum.GetNames(GetType(LeadStatus)).ToList
+            LeadsStatus.Insert(0, "")
+            cbStatusToChange.DataSource = LeadsStatus
             cbStatusToChange.DataBind()
-            cbStatusFrom.DataSource = System.Enum.GetNames(GetType(LeadStatus))
+            cbStatusFrom.DataSource = LeadsStatus
             cbStatusFrom.DataBind()
 
         End Using
@@ -50,7 +50,7 @@ Public Class ImportAgentData
                 gridLead.DataBind()
             End If
         End Using
-        BindNeedChangeLeads()
+
     End Sub
 
     Protected Sub btnLoad2_Click(sender As Object, e As EventArgs)
@@ -58,10 +58,20 @@ Public Class ImportAgentData
         Dim agent = cbEmpFrom.Text
         If Not String.IsNullOrEmpty(agent) Then
             Dim empId = CInt(cbEmpFrom.Value)
-            gridAgentLeads.DataSource = LoadAgentLeads(agent, empId)
+            If (String.IsNullOrEmpty(cbStatusFrom.Text)) Then
+                gridAgentLeads.DataSource = LoadAgentLeads(agent, empId)
+            Else
+
+                gridAgentLeads.DataSource = LoadAgentLeads(agent, empId, ConvertLeadStatus(cbStatusFrom.Text))
+            End If
+
             gridAgentLeads.DataBind()
         End If
     End Sub
+    Protected Function ConvertLeadStatus(status As String) As Integer
+        Dim iStatus = CInt([Enum].Parse(GetType(LeadStatus), status))
+        Return iStatus
+    End Function
 
     Private Function LoadAgentLeads(name As String, empId As Integer) As List(Of Lead)
         Using Context As New Entities
@@ -85,12 +95,38 @@ Public Class ImportAgentData
             Return
         End If
 
+        If Not String.IsNullOrEmpty(cbStatusToChange.Text) AndAlso ConvertLeadStatus(cbStatusToChange.Text) = LeadStatus.Callback Then
+            If (deCallBackTime.Value Is Nothing Or deCallBackTime.Value <= Date.Now) Then
+                ASPxLabel2.Text = "When Transfer to call back need select call back date geater than now"
+                Return
+            End If
+        End If
+
+
         Using ctx As New Entities
             Dim empId = CInt(cbEmpFrom.Value)
-            For Each ld In ctx.Leads.Where(Function(ap) ap.EmployeeName = agent And ap.EmployeeID = empId).ToList
+            Dim lList = New List(Of Lead)
+            If (String.IsNullOrEmpty(cbStatusFrom.Text)) Then
+                lList = ctx.Leads.Where(Function(ap) ap.EmployeeName = agent AndAlso ap.EmployeeID = empId).ToList
+            Else
+                Dim iStutsFrom = ConvertLeadStatus(cbStatusFrom.Text)
+                lList = ctx.Leads.Where(Function(le) le.EmployeeID = empId AndAlso le.Status = iStutsFrom).ToList()
+            End If
+
+            For Each ld In lList
                 ld.EmployeeID = CInt(cbEmpTo.Value)
                 ld.EmployeeName = cbEmpTo.Text
-                ld.Status = LeadStatus.NewLead
+                If (String.IsNullOrEmpty(cbStatusToChange.Text)) Then
+                    ld.Status = LeadStatus.NewLead
+                Else
+                    ld.Status = ConvertLeadStatus(cbStatusToChange.Text)
+                End If
+                If (ld.Status = LeadStatus.Callback AndAlso deCallBackTime.Value IsNot Nothing) Then
+                    ld.CallbackDate = deCallBackTime.Value
+                End If
+                Dim strtoStatus = If(String.IsNullOrEmpty(cbStatusToChange.Text), "", "in status " + cbStatusToChange.Text)
+                Dim strFormStatus = If(String.IsNullOrEmpty(cbStatusFrom.Text), "", "in status " + cbStatusFrom.Text)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, "Transfer all Leads form: " & cbEmpFrom.Text & " " & strFormStatus & " to: " & cbEmpTo.Text & strtoStatus, ld.BBLE, LeadsActivityLog.LogCategory.Task.ToString, Nothing, Page.User.Identity.Name, LeadsActivityLog.EnumActionType.SetAsTask)
             Next
 
             ctx.SaveChanges()
@@ -339,57 +375,32 @@ InitialLine:
     End Sub
 
  
-    Protected Sub btnLoad3_Click(sender As Object, e As EventArgs)
-        BindNeedChangeLeads()
-    End Sub
-    Protected Sub BindNeedChangeLeads()
-        Dim agent = cbChagneAgentFrom.Text
-        Dim statusFrom = cbStatusFrom.Text
-        If Not String.IsNullOrEmpty(agent) And Not String.IsNullOrEmpty(statusFrom) Then
+   
+   
 
-            Dim empId = CInt(cbChagneAgentFrom.Value)
-            Dim statusForme = [Enum].Parse(GetType(LeadStatus), statusFrom)
-            gridNeedChangeLeads.DataSource = LoadAgentLeads(agent, empId, statusForme)
-            gridNeedChangeLeads.DataBind()
-        End If
+    
+
+    
+    Protected Sub exportLastLog_Click(sender As Object, e As EventArgs)
+        BindLastLog()
+        ASPxLoadLastLogExporter.WriteXlsToResponse()
     End Sub
 
-    Protected Sub btnChangeStuats_Click(sender As Object, e As EventArgs)
-        Dim agent = cbChagneAgentFrom.Text
-        Dim statusFrom = cbStatusFrom.Text
-        Dim statusto = cbStatusToChange.Text
-        If Not String.IsNullOrEmpty(agent) And Not String.IsNullOrEmpty(statusFrom) Then
+    Protected Sub LoadLastLog_Click(sender As Object, e As EventArgs)
+       
+        BindLastLog()
+    End Sub
+    Protected Sub BindLastLog()
+        Using ctx As New Entities
+            Dim logs = ctx.Leads_with_last_log.ToList()
+            For Each log In logs
+                If (Not String.IsNullOrEmpty(log.LastUpdateComments)) Then
+                    log.LastUpdateComments = Regex.Replace(log.LastUpdateComments, "<[^>]*(>|$)", String.Empty)
+                End If
 
-           
-            Dim empId = CInt(cbChagneAgentFrom.Value)
-            Dim statusForm = CInt([Enum].Parse(GetType(LeadStatus), statusFrom))
-
-            If (deCallBackTime.Value <= Date.Now) And statusForm = LeadStatus.Callback Then
-                ChangeProcess.Text = "Need Date greater than today"
-                Return
-            End If
-            If (Not String.IsNullOrEmpty(statusto)) Then
-                ChangeProcess.Text = "Change agent " & agent & "all leads in " & statusFrom & " to " & statusto
-                Using ctx As New Entities
-                    Dim list = ctx.Leads.Where(Function(le) le.EmployeeID = empId AndAlso le.Status = statusForm).ToList
-                    For Each l In ctx.Leads.Where(Function(le) le.EmployeeID = empId AndAlso le.Status = statusForm).ToList
-                        Dim eStatusTo = [Enum].Parse(GetType(LeadStatus), statusto)
-                        Dim vStatusTo = CInt(eStatusTo)
-                        l.Status = vStatusTo ' change status 
-                        If (eStatusTo = LeadStatus.Callback) Then
-                            l.CallbackDate = deCallBackTime.Value
-                        End If
-                        LeadsActivityLog.AddActivityLog(DateTime.Now, ChangeProcess.Text, l.BBLE, LeadsActivityLog.LogCategory.Task.ToString, Nothing, Page.User.Identity.Name, LeadsActivityLog.EnumActionType.SetAsTask)
-                    Next
-                    ctx.SaveChanges()
-
-                    'write log
-                End Using
-                ChangeProcess.Text = "Chagne finished"
-            End If
-           
-        Else
-            ChangeProcess.Text = "Agent name or status is not select"
-        End If
+            Next
+            gridLastLogView.DataSource = logs
+            gridLastLogView.DataBind()
+        End Using
     End Sub
 End Class
