@@ -23,6 +23,15 @@ Partial Public Class TitleInLeads
     Protected WithEvents cbGetJudgementData As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 
     '''<summary>
+    '''cbSaveJudgementData control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbSaveJudgementData As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+
+    '''<summary>
     '''callbackClearence control.
     '''</summary>
     '''<remarks>

@@ -2,6 +2,7 @@
 Imports DevExpress.Web.ASPxGridView
 Imports DevExpress.Web.ASPxPopupControl
 Imports System.Web.Script.Serialization
+Imports Newtonsoft.Json
 
 Public Class TitleInLeads
     Inherits System.Web.UI.UserControl
@@ -95,5 +96,12 @@ Public Class TitleInLeads
         Dim bble = e.Parameter
         Dim json As New JavaScriptSerializer
         e.Result = json.Serialize(ShortSale.TitleJudgementSearch.GetInstaceByBBLE(bble))
+    End Sub
+
+    Protected Sub cbSaveJudgementData_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        Dim res = JsonConvert.DeserializeObject(Of TitleJudgementSearch)(e.Parameter)
+        res.Save()
+
+        e.Result = "Save Success."
     End Sub
 End Class

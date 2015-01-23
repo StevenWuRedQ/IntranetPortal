@@ -282,6 +282,10 @@
                 <ClientSideEvents CallbackComplete="function(s,e){alert(e.result);}" />
             </dx:ASPxCallback>
 
+            <dx:ASPxCallback runat="server" ID="cbSaveJudgementData" ClientInstanceName="cbSaveJudgementData" OnCallback="cbSaveJudgementData_Callback">
+                <ClientSideEvents CallbackComplete="function(s,e){alert(e.result);}" />
+            </dx:ASPxCallback>
+
             <div class="ss_form" style="display:none">
                 <dx:ASPxCallbackPanel ID="callbackClearence" runat="server" ClientInstanceName="callbackClearence" OnCallback="callbackClearence_Callback">
                     <PanelCollection>
