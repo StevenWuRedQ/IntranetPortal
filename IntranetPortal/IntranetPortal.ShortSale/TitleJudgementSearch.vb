@@ -1,7 +1,13 @@
 ﻿Partial Public Class TitleJudgementSearch
     Public Sub Save()
         Using context As New ShortSaleEntities
-            Dim pbi = GetInstance(CaseId)
+            Dim pbi As TitleJudgementSearch
+            If CaseId = 0 Then
+                pbi = GetInstaceByBBLE(BBLE)
+            Else
+                pbi = GetInstance(CaseId)
+            End If
+
             If pbi Is Nothing Then
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
@@ -24,5 +30,4 @@
             Return ctx.TitleJudgementSearches.Where(Function(obj) obj.BBLE = bble).SingleOrDefault
         End Using
     End Function
-
 End Class
