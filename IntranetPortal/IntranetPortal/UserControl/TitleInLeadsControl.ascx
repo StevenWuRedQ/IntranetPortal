@@ -61,10 +61,12 @@
             span.innerText = "Make As Urgent";
         }
     }
+    var ShortSaleCaseData = {};
     function loadJagmentSearch(jagmentSearch)
     {
         debugger;
-        var shortSale = { JudgementInfo: JSON.parse(loadJagmentSearch) };
+        
+        var shortSale = { JudgementInfo: JSON.parse(jagmentSearch) };
         if (ShortSaleCaseData == null)
         {
             ShortSaleCaseData = shortSale;
@@ -72,13 +74,26 @@
         {
             ShortSaleCaseData.JudgementInfo =shortSale.JudgementInfo
         }
-        ShortSaleDataBand();
+        var ss_data = ShortSaleCaseData;
+        var inputs = $(".ss_form_input");
+        inputs.each(function (index) {
+
+            var field = ($(this).attr("data-field"));
+            if (!field) {
+                return;
+            }
+            var elem = $(this);
+            var data_value = null;
+           
+            data_value = get_sub_property(ss_data, field, null);
+            ss_field_data(elem, data_value);
+            //d_assert(field == "Evivtion", "get evition " + data_value);
+        });
         debugger;
 
     }
     function SaveJudgementSearch()
-    {
-        ShortSaleCaseData = {};
+    {        
         var ss_data = ShortSaleCaseData;
         //var field_name = "PropertyInfo.Number";
         var is_save = true;
