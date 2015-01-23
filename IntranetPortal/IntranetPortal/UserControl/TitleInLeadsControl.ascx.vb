@@ -94,6 +94,15 @@ Public Class TitleInLeads
 
     Protected Sub cbGetJudgementData_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         Dim bble = e.Parameter
+        Dim objJudgement = ShortSale.TitleJudgementSearch.GetInstaceByBBLE(bble)
+
+        If objJudgement Is Nothing Then
+            objJudgement = New TitleJudgementSearch With
+                           {
+                               .BBLE = bble
+                               }
+        End If
+
         Dim json As New JavaScriptSerializer
         e.Result = json.Serialize(ShortSale.TitleJudgementSearch.GetInstaceByBBLE(bble))
     End Sub
