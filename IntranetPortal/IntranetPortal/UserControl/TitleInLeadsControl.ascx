@@ -64,7 +64,7 @@
     var ShortSaleCaseData = {};
     function loadJagmentSearch(jagmentSearch)
     {
-        debugger;
+        format_input();
         
         var shortSale = { JudgementInfo: JSON.parse(jagmentSearch) };
         if (ShortSaleCaseData == null)
