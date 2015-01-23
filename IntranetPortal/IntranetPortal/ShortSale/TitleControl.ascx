@@ -250,9 +250,9 @@
                             <tr class="font_14">
                                 <td class="judgment_search_td">NYC Lien
                                 </td>
-                                <td><input type="text" class="ss_form_input table_input" data-field="JudgementInfo.RepairTaxDate" placeholder="Click to input"/>
+                                <td><input type="text" class="ss_form_input table_input" data-field="JudgementInfo.NYCLien" placeholder="Click to input"/>
                                 </td>
-                                <td><input type="text"class="ss_form_input table_input ss_date" data-field="JudgementInfo.RepairTaxDate" placeholder="Click to select date"/>
+                                <td><input type="text"class="ss_form_input table_input ss_date" data-field="JudgementInfo.NYCLienDate" placeholder="Click to select date"/>
                                 </td>
                             </tr>
                             <tr class="font_14">
