@@ -294,7 +294,7 @@ i[title]:hover:after {
 /*short sale css*/
 .short_sale_head_tab {
     float: left;
-    width: 130px;
+    width: 110px;
     height: 100%;
     text-align: center;
     cursor: pointer;

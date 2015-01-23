@@ -1202,6 +1202,13 @@
       <DependentUpon>PropertyInfo.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\TitleInLeadsControl.ascx.designer.vb">
+      <DependentUpon>TitleInLeadsControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\TitleInLeadsControl.ascx.vb">
+      <DependentUpon>TitleInLeadsControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControl\UserSummary.ascx.designer.vb">
       <DependentUpon>UserSummary.ascx</DependentUpon>
     </Compile>
@@ -2395,6 +2402,7 @@
     <Content Include="UserControl\LeadsSubMenu.ascx" />
     <Content Include="UserControl\NavMenu.ascx" />
     <Content Include="UserControl\PropertyInfo.ascx" />
+    <Content Include="UserControl\TitleInLeadsControl.ascx" />
     <Content Include="UserControl\UserSummary.ascx" />
     <Content Include="ViewLeadsInfo.aspx" />
     <Content Include="WCFDataServices\CommonService.svc" />

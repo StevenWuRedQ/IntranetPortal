@@ -6,8 +6,7 @@
 <%@ Register Src="~/OneDrive/LeadsDocumentOneDrive.ascx" TagPrefix="uc1" TagName="LeadsDocumentOneDrive" %>
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
 <%@ Register Src="~/PopupControl/EditHomeOwner.ascx" TagPrefix="uc1" TagName="EditHomeOwner" %>
-<%@ Register Src="~/ShortSale/TitleControl.ascx" TagPrefix="uc1" TagName="TitleControl" %>
-
+<%@ Register Src="~/UserControl/TitleInLeadsControl.ascx" TagPrefix="uc1" TagName="TitleControl" %>
 
 <script type="text/javascript">
     // <![CDATA[
@@ -496,7 +495,6 @@
                                         <Items>
                                             <dx:MenuItem Text="Delete" Name="Delete">
                                             </dx:MenuItem>
-
                                         </Items>
                                         <ClientSideEvents ItemClick="OnEmailPopupClick" />
                                     </dx:ASPxPopupMenu>
@@ -529,7 +527,7 @@
                         <ContentCollection>
                             <dx:SplitterContentControl ID="SplitterContentControl4" runat="server">
                                 <div style="font-size: 12px; color: #9fa1a8;">
-                                    <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
+                                    <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 16px; color: white">
                                         <li class="short_sale_head_tab activity_light_blue">
                                             <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
                                                 <i class="fa fa-history head_tab_icon_padding"></i>

@@ -402,6 +402,7 @@
                             <input class="text_input" value='<%# LeadsInfoData.MortgageData.C1stServicer %>' id="txt1stServicer" runat="server" />
                         </div>
                         <%--end line --%>
+
                         <%--line 2--%>
 
                         <div class="form_div_node form_div_node_line_margin">
@@ -463,7 +464,6 @@
                             <dx:ASPxTextBox runat="server" ID="txtTaxesAmt" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.TaxesAmt  %>'></dx:ASPxTextBox>
                             <%--<input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.TaxesAmt%>" />--%>
                         </div>
-
                         <div class="form_div_node form_div_node_line_margin form_div_node_small" style="border: none">
                             <div class="form_head" style="margin-left: 20px">
                                 Tax Liens:
@@ -477,12 +477,10 @@
                             <span class="form_input_title">water</span>
                             <dx:ASPxTextBox runat="server" ID="txtWaterAmt" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.WaterAmt  %>'></dx:ASPxTextBox>
                         </div>
-
                         <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                             <span class="form_input_title">Tax Liens Date</span>
                             <input class="text_input" value="<%= LeadsInfoData.TaxLiensDateText %>" id="Text1" />
                         </div>
-
                         <div class="form_div_node form_div_node_margin form_div_node_line_margin">
                             <span class="form_input_title">Tax Liens Amount</span>
                             <input class="text_input" value="<%= LeadsInfoData.TaxLiensAmount %>" id="Text2" />
