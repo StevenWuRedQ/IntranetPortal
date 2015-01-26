@@ -132,7 +132,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div style="height: 75%; padding-right: 15px;" id="lead_search_left">
+                            <div style="height: 75%; padding-right: 15px;overflow:auto" id="lead_search_left">
                                 <div>
                                     <div style="margin-top: 30px" class="clearfix">
                                         <div style="float: right">
@@ -230,7 +230,7 @@
                                                     </script>--%>
                                                         </div>
                                                         <div class="inline_block  " style="width: 28%">
-                                                            <label class="upcase_text font_black" style="display: block">Zoning</label>
+                                                            <label class="upcase_text font_black" style="display: block">Class Code</label>
                                                             <select class=" selectpicker form-control width_100percent" id="IdZoning" multiple>
                                                                 <% For Each zoning In AllZoning%>
                                                                 <option><%= zoning%> </option>
@@ -846,9 +846,9 @@
         $(document).ready(function () {
 
             $('.selectpicker').selectpicker();
-            $('#lead_search_left').mCustomScrollbar({
-                theme: "minimal-dark"
-            });
+            //$('#lead_search_left').mCustomScrollbar({
+            //    theme: "minimal-dark"
+            //});
 
         });
     </script>

@@ -11,6 +11,7 @@
     Public Property Applicant As String
     Public Property SearchData As String
     Public Property ActivityName As String
+    Public Property SubmitedDate As DateTime
 
     Private Sub Binddata()
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
@@ -20,6 +21,7 @@
                 SearchData = wli.ProcessInstance.DataFields("SearchData").ToString
                 Applicant = wli.ProcessInstance.Originator
                 ActivityName = wli.ActivityName
+                SubmitedDate = wli.ProcessInstance.StateDate
             End If
         End If
     End Sub

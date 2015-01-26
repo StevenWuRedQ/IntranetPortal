@@ -963,4 +963,54 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="TranscriptAdjunction" nillable="true" type="tns:TranscriptAdjunction" />
+  <xs:complexType name="ArrayOfUCC">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UCC" nillable="true" type="tns:UCC" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUCC" nillable="true" type="tns:ArrayOfUCC" />
+  <xs:complexType name="UCC">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CrossReference" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LotRecord" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PartyRecord" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Remarks" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="addr1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="addr2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="boro" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="boro1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="city" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="crfn" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="dcreate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="docamt" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="docdate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="doctype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="doctype1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="fedtaxdate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="fedtaxser" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="file_nbr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="input_date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="modate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="partype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="recorded" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="recorded1" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="rectype" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="rectype1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="reel_nbr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="reel_pg" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="reel_yr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="row_id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="rpttl_nbr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="searchname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="state" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="timestamp" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ucc_coll" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="unkey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="unkey1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="zip" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UCC" nillable="true" type="tns:UCC" />
 </xs:schema>

@@ -8,6 +8,12 @@
         </div>
         <table>
             <tr>
+                <td>
+                    <div class="form_head">Date:</div>
+                </td>
+                <td><%= If(Me.SubmitedDate = DateTime.MinValue, "", Me.SubmitedDate.ToString("g"))%></td>
+            </tr>
+            <tr>
                 <td>Applicant: </td>
                 <td><%= Me.Applicant%></td>
             </tr>
@@ -23,7 +29,7 @@
             </tr>
             <tr>
                 <td colspan="2">&nbsp;</td>
-            </tr>           
+            </tr>
             <tr>
                 <td colspan="2">
                     <button type="button" class="rand-button rand-button-pad bg_orange button_margin" onclick="cbApproval.PerformCallback('Complete')">Complete</button>
@@ -32,23 +38,22 @@
         </table>
     </div>
     <dx:ASPxCallback runat="server" ID="cbApproval" ClientInstanceName="cbApproval" OnCallback="cbApproval_Callback">
-          <ClientSideEvents EndCallback="function(s,e){
+        <ClientSideEvents EndCallback="function(s,e){
                OnSubmited();
             }" />
     </dx:ASPxCallback>
-     <script type="text/javascript">
-        function OnSubmited()
-        {
+    <script type="text/javascript">
+        function OnSubmited() {
             $('#msgModal').modal('show');
-            $('#msgModal').on('hide.bs.modal', function (e) {             
+            $('#msgModal').on('hide.bs.modal', function (e) {
                 if (window.parent && typeof window.parent.ClosePage == 'function')
                     window.parent.ClosePage();
                 else
                     window.close();
             });
-        }      
+        }
     </script>
-     <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+    <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -59,7 +64,7 @@
                     The action is submited.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                   
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

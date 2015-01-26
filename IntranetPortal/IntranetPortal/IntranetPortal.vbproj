@@ -2363,6 +2363,9 @@
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TranscriptAdjunction.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.UCC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\DataAPI\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>

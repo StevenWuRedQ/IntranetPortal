@@ -61,7 +61,7 @@
     }
 
     function OnGetRowValues(values) {
-        var contentPane = splitterTaskPage.GetPaneByName("contentPanel")
+        var contentPane = splitterTaskPage.GetPaneByName("contentPanel");
         contentPane.SetContentUrl(values);
     }
 

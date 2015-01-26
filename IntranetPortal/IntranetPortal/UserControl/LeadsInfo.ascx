@@ -379,10 +379,9 @@
                                             <dx:MenuItem Text="All" Name="All"></dx:MenuItem>
                                             <dx:MenuItem Text="General Property Info" Name="Assessment"></dx:MenuItem>
                                             <dx:MenuItem Text="Mortgage and Violations" Name="PropData"></dx:MenuItem>
-                                            <dx:MenuItem Text="Home Owner" Name="TLO">
-                                            </dx:MenuItem>
-                                            <dx:MenuItem Text="ZEstimate" Name="ZEstimate">
-                                            </dx:MenuItem>
+                                            <dx:MenuItem Text="Home Owner Info" Name="TLO"></dx:MenuItem>
+                                            <dx:MenuItem Text="zEstimate" Name="ZEstimate"></dx:MenuItem>
+                                            <dx:MenuItem Text="Judgment Search" Name="JudgmentSearch"></dx:MenuItem>
                                         </Items>
                                         <ClientSideEvents ItemClick="OnRefreshMenuClick" />
                                         <%--<ItemStyle Width="143px"></ItemStyle>--%>
@@ -393,25 +392,25 @@
                                         <li class="active short_sale_head_tab">
                                             <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
                                                 <i class="fa fa-info-circle head_tab_icon_padding"></i>
-                                                <div class="font_size_bold">Property Info</div>
+                                                <div class="font_size_bold" style="font-weight: 900;">Property</div>
                                             </a>
                                         </li>
                                         <li class="short_sale_head_tab">
                                             <a href="#home_owner" role="tab" data-toggle="tab" class="tab_button_a">
                                                 <i class="fa fa-home head_tab_icon_padding"></i>
-                                                <div class="font_size_bold">Homeowner</div>
+                                                <div class="font_size_bold" style="font-weight: 900;">Homeowner</div>
                                             </a>
                                         </li>
                                         <li class="short_sale_head_tab">
                                             <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
                                                 <i class="fa fa-file head_tab_icon_padding"></i>
-                                                <div class="font_size_bold">Documents</div>
+                                                <div class="font_size_bold" style="font-weight: 900;">Documents</div>
                                             </a>
                                         </li>
                                         <li class="short_sale_head_tab">
                                             <a href="#titlePane" role="tab" data-toggle="tab" class="tab_button_a" onclick="cbGetJudgementData.PerformCallback(leadsInfoBBLE)">
-                                                <i class="fa fa-file-text head_tab_icon_padding"></i>
-                                                <div class="font_size_bold">Title</div>
+                                                <i class="fa fa-key head_tab_icon_padding"></i>
+                                                <div class="font_size_bold" style="font-weight: 900;">Title</div>
                                             </a>
                                         </li>
                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
@@ -531,7 +530,7 @@
                                         <li class="short_sale_head_tab activity_light_blue">
                                             <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
                                                 <i class="fa fa-history head_tab_icon_padding"></i>
-                                                <div class="font_size_bold">Activity Log</div>
+                                                <div class="font_size_bold" style="font-weight: 900;">Activity Log</div>
                                             </a>
                                         </li>
                                         <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>

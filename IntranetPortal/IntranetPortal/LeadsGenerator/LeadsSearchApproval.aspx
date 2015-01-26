@@ -14,8 +14,7 @@
         <div>
             <div class="ss_array">
                 <h4 class="ss_form_title title_with_line">
-                    <span class="title_index title_span upcase_text">Location</span>&nbsp;
-                    
+                    <span class="title_index title_span upcase_text">Location</span>&nbsp;                    
                 </h4>
                 <div>
                     <table class="table table-striped">
@@ -163,6 +162,12 @@
             <span class="title_text">Leads Search - <%= ActivityName%></span>
         </div>
         <table>
+             <tr>
+                <td>
+                    <div class="form_head">Date:</div>
+                </td>
+                <td><%= If(Me.SubmitedDate = DateTime.MinValue, "", Me.SubmitedDate.ToString("g"))%></td>
+            </tr>
             <tr>
                 <td>
                     <div class="form_head">Applicant:</div>
@@ -211,7 +216,7 @@
             });
         }      
     </script>
-     <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+     <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

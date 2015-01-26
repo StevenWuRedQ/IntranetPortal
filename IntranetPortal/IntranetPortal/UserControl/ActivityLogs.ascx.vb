@@ -813,7 +813,7 @@ Public Class ActivityLogs
         End If
 
         If action = "Judgement Search Request" Then
-            e.Result = String.Join(";", Roles.GetUsersInRole("Title-Users"))
+            e.Result = String.Join(";", Roles.GetUsersInRole("Judgment Searches"))
         End If
     End Sub
 End Class

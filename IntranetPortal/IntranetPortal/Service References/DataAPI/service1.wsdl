@@ -191,6 +191,12 @@
   <wsdl:message name="IWCFMacros_AB_GetTranscriptAdjunction_OutputMessage">
     <wsdl:part name="parameters" element="tns:AB_GetTranscriptAdjunctionResponse" />
   </wsdl:message>
+  <wsdl:message name="IWCFMacros_AAbs_GetUcc_InputMessage">
+    <wsdl:part name="parameters" element="tns:AAbs_GetUcc" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AAbs_GetUcc_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AAbs_GetUccResponse" />
+  </wsdl:message>
   <wsdl:portType name="IWCFMacros">
     <wsdl:operation name="DoWork">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DoWork" message="tns:IWCFMacros_DoWork_InputMessage" />
@@ -311,6 +317,10 @@
     <wsdl:operation name="AB_GetTranscriptAdjunction">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunction" message="tns:IWCFMacros_AB_GetTranscriptAdjunction_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunctionResponse" message="tns:IWCFMacros_AB_GetTranscriptAdjunction_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AAbs_GetUcc">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AAbs_GetUcc" message="tns:IWCFMacros_AAbs_GetUcc_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AAbs_GetUccResponse" message="tns:IWCFMacros_AAbs_GetUcc_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WCFMacros_Http" type="tns:IWCFMacros">
@@ -578,6 +588,15 @@
     </wsdl:operation>
     <wsdl:operation name="AB_GetTranscriptAdjunction">
       <soap:operation soapAction="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AAbs_GetUcc">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AAbs_GetUcc" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

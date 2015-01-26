@@ -14,6 +14,7 @@ Public Class LeadsSearchApproval
     Public Property Applicant As String
     Public Property SearchData As String
     Public Property ActivityName As String
+    Public Property SubmitedDate As DateTime
 
     Private Sub Binddata()
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
@@ -23,6 +24,7 @@ Public Class LeadsSearchApproval
                 SearchData = wli.ProcessInstance.DataFields("SearchData").ToString
                 Applicant = wli.ProcessInstance.Originator
                 ActivityName = wli.ActivityName
+                SubmitedDate = wli.ProcessInstance.StateDate
             Else
                 GetTestData()
             End If
@@ -40,7 +42,6 @@ Public Class LeadsSearchApproval
     Private Sub GetTestData()
         Using Context As New Entities
             SearchData = Context.LeadsSearchTasks.ToList.Last().SearchFileds.ToString
-
         End Using
     End Sub
     Protected Sub cbApproval_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
