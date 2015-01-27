@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class LeadsGenerator
 
     '''<summary>
+    '''loadClick control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents loadClick As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+
+    '''<summary>
     '''ASPxSplitter1 control.
     '''</summary>
     '''<remarks>

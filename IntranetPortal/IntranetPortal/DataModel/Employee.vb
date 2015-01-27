@@ -26,7 +26,7 @@ Partial Public Class Employee
     Public Property Active As Nullable(Of Boolean)
     Public Property EmployeeSince As Nullable(Of Date)
     Public Property Picture As String
-    Public Property CellPhone As String
+    Public Property Cellphone As String
 
     Public Overridable Property Leads As ICollection(Of Lead) = New HashSet(Of Lead)
     Public Overridable Property LeadsActivityLogs As ICollection(Of LeadsActivityLog) = New HashSet(Of LeadsActivityLog)

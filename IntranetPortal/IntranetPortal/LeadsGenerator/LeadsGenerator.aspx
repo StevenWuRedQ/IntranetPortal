@@ -106,7 +106,20 @@
 
             )
         }
+
+        function OnLoadClick()
+        {
+            LoadCallBackClient.PerformCallback($("#LoadSearchName").val());
+        }
+        function LoadCallBackCompleted()
+        {
+            QueryResultsGridClient.Refresh();
+        }
     </script>
+    <dx:ASPxCallback ID="loadClick" runat="server" ClientInstanceName="LoadCallBackClient" OnCallback="loadClick_Callback">
+        <ClientSideEvents  CallbackComplete="function(s,e){ LoadCallBackCompleted();
+            }"/>
+    </dx:ASPxCallback>
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Width="100%" Height="100%" ClientInstanceName="sampleSplitter" FullscreenMode="true">
         <Styles>
             <Pane>
@@ -126,9 +139,9 @@
                             <div class="form-group under_line_div" style="margin-top: 10px; padding-bottom: 20px; border-width: 2px">
 
                                 <div class="form-inline">
-                                    <select class=" form-control query_input_60percent">
+                                    <select class=" form-control query_input_60percent" id="LoadSearchName">
                                         <% For Each st In CompletedTask%>
-                                        <option value='<%= st.Id%>'><%= st.TaksName %></option>
+                                        <option value='<%= st.TaksName%>'><%= st.TaksName %></option>
                                         <% Next%>
                                         <option></option>
                                         <%--<option value="Borough">All</option>
@@ -136,7 +149,7 @@
                                         <option value="Borough">Borough</option>
                                         <option value="Zip">Zip</option>--%>
                                     </select>
-                                    <button type="button" class="rand-button rand-button-pad bg_orange button_margin">Load</button>
+                                    <input type="button" class="rand-button rand-button-pad bg_orange button_margin" onclick="OnLoadClick()" value="Load">
                                     <%-- <button type="button" class="rand-button rand-button-pad bg_orange button_margin">Create New</button>--%>
                                 </div>
 
@@ -791,7 +804,7 @@
                                                     <i class="fa fa-folder-open color_gray"></i>&nbsp;<span class="font_black">5 Results</span>
                                                 </div>
                                                 <div style="margin-top: 30px">
-                                                    <dx:ASPxGridView ID="QueryResultsGrid" runat="server" Width="100%" KeyFieldName="BBLE" SettingsPager-PageSize="20">
+                                                    <dx:ASPxGridView ID="QueryResultsGrid" ClientInstanceName="QueryResultsGridClient" runat="server" Width="100%" KeyFieldName="Id" SettingsPager-PageSize="20">
                                                         <Columns>
                                                             <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" SelectAllCheckboxMode="AllPages">
                                                             </dx:GridViewCommandColumn>

@@ -62,6 +62,7 @@ Partial Public Class Entities
     Public Overridable Property NYC_DATA_COMMENT() As DbSet(Of NYC_DATA_COMMENT)
     Public Overridable Property LeadsSearchTasks() As DbSet(Of LeadsSearchTask)
     Public Overridable Property Leads_with_last_log() As DbSet(Of Leads_with_last_log)
+    Public Overridable Property SearchResults() As DbSet(Of SearchResult)
 
     Public Overridable Function UpdateEmployeeName(oldName As String, newName As String) As Integer
         Dim oldNameParameter As ObjectParameter = If(oldName IsNot Nothing, New ObjectParameter("OldName", oldName), New ObjectParameter("OldName", GetType(String)))

@@ -14,8 +14,7 @@
 
     Private Sub DataBinds()
         Using context As New Entities
-            QueryResultsGrid.DataSource = context.Leads.ToList()
-            QueryResultsGrid.DataBind()
+           
             CompletedTask = context.LeadsSearchTasks.Where(Function(s) s.Status = LeadsSearchTaskStauts.Completed And s.CreateBy = Page.User.Identity.Name).ToList
             ZipCodes = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "ZIP").Select(Function(c) c.Data).ToList
             AllNeighName = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "Neighborhood").Select(Function(c) c.Data).ToList
@@ -39,5 +38,19 @@
     End Sub
 
     Protected Sub cbStartProcess_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+    End Sub
+
+    
+
+    Protected Sub loadClick_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        Dim SearchName = e.Parameter
+
+        Using context As New Entities
+            Dim results = context.SearchResults.Where(Function(s) s.Type = SearchName).ToList
+            QueryResultsGrid.DataSource = results
+            QueryResultsGrid.DataBind()
+
+        End Using
+
     End Sub
 End Class

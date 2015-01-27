@@ -82,21 +82,21 @@
             <PropertyRef Name="EmployeeID" />
           </Key>
           <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="EmployeeNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Position" Type="nvarchar" MaxLength="50" />
           <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeNo" Type="nvarchar" MaxLength="50" />
           <Property Name="Extension" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cellphone" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeSince" Type="date" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="100" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="ReportTo" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="120" />
           <Property Name="CreateDate" Type="date" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="Active" Type="bit" />
-          <Property Name="CellPhone" Type="nvarchar" MaxLength="50" />
-          <Property Name="EmployeeSince" Type="date" />
-          <Property Name="Picture" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="FileAttachments">
           <Key>
@@ -184,7 +184,7 @@
           <Property Name="Process" Type="int" />
           <Property Name="Status" Type="int" />
           <Property Name="CallbackDate" Type="date" />
-          <Property Name="Neighborhood" Type="nvarchar" MaxLength="120" />
+          <Property Name="Neighborhood" Type="nvarchar" MaxLength="50" />
           <Property Name="DeadReason" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="LastUpdate" Type="datetime" />
@@ -258,8 +258,8 @@
           <Property Name="Date" Type="smalldatetime" />
           <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
           <Property Name="SaleDate" Type="smalldatetime" />
-          <Property Name="PropertyClass" Type="nvarchar" MaxLength="50" />
           <Property Name="TaxClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="PropertyClass" Type="nvarchar" MaxLength="50" />
           <Property Name="SaleType" Type="nvarchar" MaxLength="50" />
           <Property Name="Condition" Type="nchar" MaxLength="15" />
           <Property Name="Block" Type="nchar" MaxLength="5" />
@@ -467,6 +467,23 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Rolename" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ApplicationName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="SearchResults">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="LeadsName" Type="nvarchar" MaxLength="180" />
+          <Property Name="MotgCombo" Type="numeric" Precision="19" Scale="0" />
+          <Property Name="Neigh_Name" Type="nvarchar" MaxLength="25" />
+          <Property Name="CLass" Type="nvarchar" MaxLength="2" />
+          <Property Name="ORIG_SQFT" Type="float" />
+          <Property Name="LOT_DIM" Type="nvarchar" MaxLength="17" />
+          <Property Name="Servicer" Type="varchar" MaxLength="100" />
+          <Property Name="TaxCombo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="ImportDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="SharedLeads">
           <Key>
             <PropertyRef Name="SharedID" />
@@ -499,8 +516,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="ScheduleDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
           <Property Name="Location" Type="nvarchar" MaxLength="120" />
-          <Property Name="Manager" Type="nvarchar" MaxLength="50" />
-          <Property Name="Agent" Type="nvarchar" MaxLength="50" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="200" />
+          <Property Name="Agent" Type="nvarchar" MaxLength="200" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="Status" Type="int" />
           <Property Name="Label" Type="nvarchar" MaxLength="50" />
@@ -621,6 +638,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <EntitySet Name="PortalQuotes" EntityType="Self.PortalQuotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyReferrels" EntityType="Self.PropertyReferrels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SearchResults" EntityType="Self.SearchResults" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SharedLeads" EntityType="Self.SharedLeads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserAppointments" EntityType="Self.UserAppointments" Schema="dbo" store:Type="Tables" />
@@ -716,6 +734,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <EntitySet Name="NYC_DATA_COMMENT" EntityType="IntranetPortalModel.NYC_DATA_COMMENT" />
           <EntitySet Name="LeadsSearchTasks" EntityType="IntranetPortalModel.LeadsSearchTask" />
           <EntitySet Name="Leads_with_last_log" EntityType="IntranetPortalModel.Leads_with_last_log" />
+          <EntitySet Name="SearchResults" EntityType="IntranetPortalModel.SearchResult" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -738,7 +757,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <NavigationProperty Name="LeadsActivityLogs" Relationship="IntranetPortalModel.EmployeeLeadsActivityLog" FromRole="Employee" ToRole="LeadsActivityLog" />
           <Property Name="EmployeeSince" Type="DateTime" Precision="0" />
           <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CellPhone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Cellphone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LeadsActivityLog">
           <Key>
@@ -766,7 +785,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <Property Name="Process" Type="Int32" />
           <Property Name="Status" Type="Int32" />
           <Property Name="CallbackDate" Type="DateTime" Precision="0" />
-          <Property Name="Neighborhood" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="Neighborhood" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AssignDate" Type="DateTime" Precision="3" />
           <Property Name="AssignBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="LeadsInfo" Relationship="IntranetPortalModel.LeadLeadsInfo" FromRole="Lead" ToRole="LeadsInfo" />
@@ -982,8 +1001,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <Property Name="ScheduleDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Location" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="Manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Manager" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Agent" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
@@ -1368,6 +1387,23 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="SearchResult">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="LeadsName" Type="String" MaxLength="180" FixedLength="false" Unicode="true" />
+          <Property Name="MotgCombo" Type="Decimal" Precision="19" Scale="0" />
+          <Property Name="Neigh_Name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CLass" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="ORIG_SQFT" Type="Double" />
+          <Property Name="LOT_DIM" Type="String" MaxLength="17" FixedLength="false" Unicode="true" />
+          <Property Name="Servicer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TaxCombo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImportDate" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1377,7 +1413,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="IntranetPortalModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
-                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
                 <ScalarProperty Name="Picture" ColumnName="Picture" />
                 <ScalarProperty Name="EmployeeSince" ColumnName="EmployeeSince" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
@@ -1984,6 +2020,24 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
                 <ScalarProperty Name="Current_Agent" ColumnName="Current Agent" />
                 <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SearchResults">
+            <EntityTypeMapping TypeName="IntranetPortalModel.SearchResult">
+              <MappingFragment StoreEntitySet="SearchResults">
+                <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TaxCombo" ColumnName="TaxCombo" />
+                <ScalarProperty Name="Servicer" ColumnName="Servicer" />
+                <ScalarProperty Name="LOT_DIM" ColumnName="LOT_DIM" />
+                <ScalarProperty Name="ORIG_SQFT" ColumnName="ORIG_SQFT" />
+                <ScalarProperty Name="CLass" ColumnName="CLass" />
+                <ScalarProperty Name="Neigh_Name" ColumnName="Neigh_Name" />
+                <ScalarProperty Name="MotgCombo" ColumnName="MotgCombo" />
+                <ScalarProperty Name="LeadsName" ColumnName="LeadsName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

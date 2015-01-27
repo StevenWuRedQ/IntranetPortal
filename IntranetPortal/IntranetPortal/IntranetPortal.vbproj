@@ -457,6 +457,9 @@
     <Compile Include="DataModel\Role.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\SearchResult.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\SharedLead.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
