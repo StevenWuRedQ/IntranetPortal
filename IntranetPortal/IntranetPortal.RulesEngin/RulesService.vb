@@ -87,8 +87,10 @@ Public Class RulesService
 
         Try
             If Not WorkingHours.IsWorkingHour(DateTime.Now) Then
-                'Run Rules
-                RunRules()
+                If WorkingHours.IsWorkingDay(DateTime.Now) Then
+                    'Run Rules
+                    RunRules()
+                End If
             End If
         Catch ex As Exception
             Log("Exception in Run Rules", ex)

@@ -34,9 +34,15 @@
                 </td>
             </tr>
             <tr>
-                <td>Task Description:
+                <td style="vertical-align:top">Task Description:
                 </td>
                 <td><b>{{$Description}}</b>
+                </td>
+            </tr>
+            <tr>
+                <td>Date Created:
+                </td>
+                <td><b>{{$DateCreated}}</b>
                 </td>
             </tr>
         </table>

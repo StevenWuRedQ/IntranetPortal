@@ -117,6 +117,26 @@ Public Class DocumentService
         End Using
     End Function
 
+    Public Shared Function GetTitleReport(bble As String) As String
+        Using ClientContext = GetClientContext()
+            Dim titleFolder = bble & "/Short%20Sale/Title%20Report"
+            If Not IsFolderExsit(ClientContext, titleFolder) Then
+                Return ""
+            End If
+
+            Dim folder = ClientContext.Web.GetFolderByServerRelativeUrl("/" & RootFolderName & "/" & titleFolder)
+            Dim files = folder.Files
+            ClientContext.Load(files)
+            ClientContext.ExecuteQuery()
+
+            If files.Count > 0 Then
+                Return files(0).UniqueId.ToString
+            End If
+
+            Return ""
+        End Using
+    End Function
+
     Private Shared Function GetFileById(uniqueId As String, clientContext As ClientContext) As ListItem
         Dim list = clientContext.Web.Lists.GetByTitle(DocumentLibraryTitle)
         Dim camlQuery As New CamlQuery

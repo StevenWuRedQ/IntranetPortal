@@ -130,7 +130,9 @@
         ShortSaleCaseData.JudgementInfo;
         debugger;
         cbSaveJudgementData.PerformCallback(JSON.stringify(ShortSaleCaseData.JudgementInfo))
+        
     }
+
 </script>
 <style type="text/css">
     .TitleCleared .TitleContent {
@@ -149,25 +151,32 @@
 <div style="padding-top: 5px">
     <div style="height: 850px; overflow:auto" id="home_owner_content">
         <%--time label--%>
-        <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px; display:none" class="font_gray">
-            <div style="font-size: 30px">
-                <span>
+        <div style="font-size: 30px; margin-left: 30px; margin-top: 20px; display:block" class="font_gray">
+            <div style="font-size: 30px;">
+                <span style="display:none">
                     <i class="fa fa-refresh"></i>
                     <span style="margin-left: 19px; font-weight: 300">Jun 9,2014 1:12PM</span>
                 </span>                
-                <span class="time_buttons" id="spanUrgent" style="margin-right: 30px; font-weight: 300;" onclick="MakeAsUrgent(<%=ShortSaleCaseData.CaseId%>)">
+                <span class="time_buttons" id="spanUrgent" style="margin-right: 30px; font-weight: 300; display:none" onclick="MakeAsUrgent(<%=ShortSaleCaseData.CaseId%>)">
                     <% If ShortSaleCaseData.IsUrgent.HasValue AndAlso ShortSaleCaseData.IsUrgent Then %>
                         Urgent
                     <%Else%>
                         Mark As Urgent
                     <%End If%>
                 </span>
-                <span class="time_buttons">See Title Report</span>
+                <span class="time_buttons" onclick="callbackTitleReportId.PerformCallback(leadsInfoBBLE)">See Title Report</span>
+                <span class="time_buttons">Refresh Judgment Search</span>
             </div>
             <%--data format June 2, 2014 6:37 PM--%>
-            <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;">Started on June 2,1014</span>
+            <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; display:none">Started on June 2,1014</span>
         </div>
-
+        <dx:ASPxCallback runat="server" ID="callbackTitleReportId" ClientInstanceName="callbackTitleReportId" OnCallback="callbackTitleReportId_Callback">
+            <ClientSideEvents CallbackComplete="function(s,e){
+                if(e.result != '')
+                { debugger;  NavigateUrl('/DownloadFile.aspx?spFile=' + e.result);}
+                else { alert('Title report is not uploaded.');}  
+                }" />
+        </dx:ASPxCallback>
         <%--note list--%>
         <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px; display:none">
         </div>

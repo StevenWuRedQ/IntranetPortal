@@ -49,6 +49,8 @@
 
         rules.Add(New EscalationRule("Urgent", "02:00:00", Sub(task)
                                                                Dim tk = CType(task, UserTask)
+                                                               Dim ld = LeadsInfo.GetInstance(tk.BBLE)
+                                                               'Dim procInst = 
                                                                For Each empName In tk.EmployeeName.Split(";")
                                                                    Dim emp = Employee.GetInstance(empName)
                                                                    If Not emp Is Nothing AndAlso Not String.IsNullOrEmpty(emp.Email) Then
@@ -56,8 +58,14 @@
                                                                        Dim emailData As New Dictionary(Of String, String)
                                                                        emailData.Add("UserName", empName)
                                                                        emailData.Add("Action", tk.Action)
+                                                                       emailData.Add("Address", ld.PropertyAddress)
+                                                                       emailData.Add("Priority", tk.Important)
+                                                                       emailData.Add("CreateBy", tk.CreateBy)
+                                                                       emailData.Add("CreatedDate", If(tk.CreateDate.HasValue, tk.CreateDate.Value.ToString("g"), ""))
                                                                        emailData.Add("BBLE", tk.BBLE)
                                                                        emailData.Add("Description", tk.Description)
+                                                                       emailData.Add("ApprovalLink", WorkflowService.GetUserTaskApprovalLink(tk.TaskID, empName))
+
                                                                        IntranetPortal.Core.EmailService.SendMail(email, "", "UrgentTaskNotify", emailData)
                                                                    End If
                                                                Next

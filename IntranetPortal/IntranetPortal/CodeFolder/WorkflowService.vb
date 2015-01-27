@@ -54,6 +54,32 @@ Public Class WorkflowService
         End Using
     End Sub
 
+    Public Shared Function GetUserTaskWorklist(taskId As Integer, destUser As String) As DBPersistence.Worklist
+        Using conn = GetConnection()
+            Dim pInstIds = conn.GetProcessInstancesByDataFields("TaskProcess", "TaskId", taskId)
+            If pInstIds.Count > 0 Then
+
+                Dim wls = MyIdealProp.Workflow.DBPersistence.Worklist.GetProcInstWorkList(pInstIds(0))
+                If wls IsNot Nothing Then
+                    Return wls.SingleOrDefault(Function(wl) wl.DestinationUser.ToLower = destUser.ToLower)
+                End If
+            End If
+
+            Return Nothing
+        End Using
+    End Function
+
+    Public Shared Function GetUserTaskApprovalLink(taskId As Integer, destUser As String) As String
+        Dim wl = GetUserTaskWorklist(taskId, destUser)
+        Dim siteUrl = System.Configuration.ConfigurationManager.AppSettings("PortalUrl")
+        If wl IsNot Nothing Then
+            Return siteUrl & wl.ItemData
+        Else
+            Return siteUrl
+        End If
+
+    End Function
+
 #End Region
 
 #Region "New Leads"

@@ -112,4 +112,9 @@ Public Class TitleInLeads
 
         e.Result = "Save Success."
     End Sub
+
+    Protected Sub callbackTitleReportId_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        Dim bble = e.Parameter.Trim
+        e.Result = Core.DocumentService.GetTitleReport(bble)
+    End Sub
 End Class
