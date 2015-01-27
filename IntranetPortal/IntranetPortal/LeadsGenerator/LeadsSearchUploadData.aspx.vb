@@ -35,4 +35,8 @@
             End If
         End If
     End Sub
+
+    Protected Sub SearchResultsUpolad_FilesUploadComplete(sender As Object, e As DevExpress.Web.ASPxUploadControl.FilesUploadCompleteEventArgs)
+
+    End Sub
 End Class

@@ -11,7 +11,10 @@
         function SearchLeads() {
 
             popUpSearch();
-            debugger;
+            var filter = GetSearchFields();
+            var sc_str = JSON.stringify(removeEmpty(filter)).replace("{", "").replace("}", "");
+            $("#Search_scenario").html(sc_str);
+
         }
         function GetSearchFields() {
             var filter = {}
@@ -19,6 +22,7 @@
             filter.Zips = $("#IdZips").val();
             filter.Neighborhoods = $("#IDNeighborhods").val();
             filter.PeropertyClasses = $("#IDPeropertyClass").val();
+            filter.PeropertyClassesCode = $("#IdPropertyClassCode").val();
             filter.Zonings = $("#IdZoning").val();
             filter.UnbuiltSqft = { min: $("#IdUnbuiltSqftmin").val(), max: $("#IdUnbuiltSqftmax").val() }
             filter.NYCsqft = { min: $("#IdNYCsqftMin").val(), max: $("#IdNYCsqftMax").val() }
@@ -39,6 +43,20 @@
             return filter;
         }
 
+        function removeEmpty(test) {
+            for (var i in test) {
+                if (test[i] === null || test[i] === undefined || test[i] === "") {
+
+                    delete test[i];
+                } else if (typeof test[i] == 'object') {
+                    var o = removeEmpty(test[i])
+                    if ($.isEmptyObject(o)) {
+                        delete test[i];
+                    }
+                }
+            }
+            return test;
+        }
         function popUpSearch() {
             $("#TxtSearchTaskName").val("");
             SaveSearchPopupClient.Show();
@@ -46,6 +64,7 @@
         }
         function OnSearchSaveClick() {
             var searchTaskName = $("#TxtSearchTaskName").val();
+
             if (searchTaskName == null || searchTaskName.length == 0) {
                 alert("please input name !")
                 return;
@@ -149,7 +168,7 @@
                                             <div class="collapse_div">
                                                 <div class="form-group">
                                                     <div class="form-inline">
-                                                        <div class="inline_block query_input_50_percent">
+                                                        <div class="inline_block query_input_50_percent" >
                                                             <label class="upcase_text font_black" style="display: block">Borough</label>
                                                             <select class=" selectpicker form-control width_100percent" id="IdLocation" multiple>
                                                                 <option>Manhattan</option>
@@ -161,7 +180,7 @@
                                                         </div>
                                                         <div class="inline_block  query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Zip</label>
-                                                            <select class=" selectpicker form-control width_100percent" id="IdZips" multiple>
+                                                            <select class=" selectpicker form-control width_100percent" id="IdZips" multiple data-size="8">
                                                                 <% For Each zip In ZipCodes%>
                                                                 <option><%= zip %></option>
 
@@ -175,7 +194,7 @@
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Neighborhood</label>
-                                                            <select class="selectpicker form-control width_100percent" id="IDNeighborhods" multiple>
+                                                            <select class="selectpicker form-control width_100percent" id="IDNeighborhods" multiple data-size="8">
                                                                 <%For Each neighName In AllNeighName%>
                                                                 <option><%= neighName%></option>
 
@@ -197,19 +216,29 @@
                                             <div class="collapse_div">
                                                 <div class="form-group">
                                                     <div class="form-inline">
-                                                        <div class="inline_block " style="width: 68%">
+                                                        <div class="inline_block " style="width:100%">
                                                             <label class="upcase_text font_black" style="display: block">Property Class</label>
-                                                            <select class="selectpicker form-control width_100percent" id="IDPeropertyClass" multiple>
+                                                            <select class="selectpicker form-control width_100percent" id="IDPeropertyClass" multiple data-size="8">
 
-                                                                <option>All</option>
-                                                                <option>Condo</option>
-                                                                <option>Commercial</option>
+                                                                <option value="**">All</option>
+                                                                <option value="R0-8">Condo</option>
+                                                                <option value="D*">Large Residential</option>
                                                                 <option value="a*">Single Family Home</option>
                                                                 <option value="b*,c0,c3">2-4 Family</option>
-                                                                <option value="c1,c2">5-6 Family</option>
-                                                                <option>Coop</option>
-                                                                <option>Townhome </option>
-                                                                <option>TIC  </option>
+                                                                <option value="c2">5-6 Family</option>
+                                                                <option value="c1">7+ Family</option>
+                                                                <option value="M*">Church / Synagogue</option>
+
+                                                                <option value="c6,c8,d0,r9">Co-Op</option>
+                                                                <option value="v*">Vacant Land</option>
+                                                                <option value="g0-2,g6-8">Garage</option>
+                                                                <option value="o1-5">Office Building</option>
+                                                                <option value="c7,k1-5,s0-5,s9">Residential w/ Store</option>
+
+                                                                <option value="e*,f*">Warehouse/Factory</option>
+
+
+
                                                             </select>
                                                             <%-- <button type="button" id="btn" onclick="AddOption()" value="Add" >Add</button>
                                                     <script type="text/javascript">
@@ -229,9 +258,24 @@
                                                         }
                                                     </script>--%>
                                                         </div>
-                                                        <div class="inline_block  " style="width: 28%">
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block  query_input_50_percent" >
                                                             <label class="upcase_text font_black" style="display: block">Class Code</label>
-                                                            <select class=" selectpicker form-control width_100percent" id="IdZoning" multiple>
+                                                            <select class=" selectpicker form-control width_100percent" id="IdPropertyClassCode" multiple data-size="8">
+                                                                <% For Each classCode In AllPropertyCode%>
+                                                                <option><%= classCode%> </option>
+
+                                                                <% Next%>
+                                                            </select>
+                                                        </div>
+                                                        <div class="inline_block  query_input_50_percent" >
+                                                            <label class="upcase_text font_black" style="display: block">Zoning</label>
+                                                            <select class=" selectpicker form-control width_100percent" id="IdZoning" multiple data-size="8">
                                                                 <% For Each zoning In AllZoning%>
                                                                 <option><%= zoning%> </option>
 
@@ -239,9 +283,7 @@
                                                             </select>
                                                         </div>
                                                     </div>
-
                                                 </div>
-
                                                 <div class="form-group">
                                                     <div class="form-inline">
                                                         <div class="inline_block query_input_50_percent">
@@ -789,7 +831,7 @@
 
                 <div class="pop_up_header_margin">
                     <i class="fa fa-floppy-o with_circle pop_up_header_icon"></i>
-                    <span class="pop_up_header_text">Save Search</span>
+                    <span class="pop_up_header_text">Save Search <span id="Search_scenario" style="font-size: 18px"></span></span>
                     <%--<div style="display: inline-block; font-size: 12px;">
                     <div>50 Leads</div>
                     <div>to be assigned</div>

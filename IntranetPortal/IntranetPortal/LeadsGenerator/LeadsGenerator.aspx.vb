@@ -3,6 +3,7 @@
     Public ZipCodes As List(Of String)
     Public AllNeighName As List(Of String)
     Public AllZoning As List(Of String)
+    Public AllPropertyCode As List(Of String)
     Public CompletedTask As New List(Of LeadsSearchTask)
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
@@ -19,6 +20,7 @@
             ZipCodes = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "ZIP").Select(Function(c) c.Data).ToList
             AllNeighName = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "Neighborhood").Select(Function(c) c.Data).ToList
             AllZoning = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "ZONING").Select(Function(c) c.Data).ToList
+            AllPropertyCode = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "PropertyDesc").Select(Function(c) c.Data).ToList
         End Using
     End Sub
 

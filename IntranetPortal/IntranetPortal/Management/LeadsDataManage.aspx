@@ -171,6 +171,9 @@
                                 <SettingsEditing Mode="Batch"></SettingsEditing>
                             </dx:ASPxGridView>
                         </dx:SplitterContentControl>
+                        <dx:SplitterContentControl>
+                            
+                        </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
                 <dx:SplitterPane>
@@ -178,7 +181,7 @@
                         <dx:SplitterPane PaneStyle-Paddings-Padding="5px">
                             <ContentCollection>
                                 <dx:SplitterContentControl>
-                                    <table style="width:100%">
+                                    <table style="width: 100%">
                                         <tr>
                                             <td>
                                                 <h3>Data Loop Service Status</h3>
@@ -197,8 +200,7 @@
                                                     <dx:ASPxLabel runat="server" Text="Service Status: " ClientInstanceName="lblServiceStatus"></dx:ASPxLabel>
                                                 </div>
                                             </td>
-                                            <td>                                            
-                                            </td>
+                                            <td></td>
                                         </tr>
                                     </table>
                                     <table>
@@ -218,7 +220,7 @@
                                                         <dx:ListEditItem Text="Employee" Value="Employee" />
                                                     </Items>
                                                 </dx:ASPxComboBox>
-                                                <dx:ASPxComboBox runat="server" ID="cbEmployee" ClientInstanceName="CbEmployee">                                                    
+                                                <dx:ASPxComboBox runat="server" ID="cbEmployee" ClientInstanceName="CbEmployee">
                                                 </dx:ASPxComboBox>
                                             </td>
                                             <td style="padding-left: 10px;">
@@ -245,7 +247,8 @@
                                             else
                                               {  RunService('Loop|' + cbLeadsType.GetText()); }
                                             }" />
-                                    </dx:ASPxButton>&nbsp;
+                                    </dx:ASPxButton>
+                                    &nbsp;
                                     <dx:ASPxButton runat="server" ID="ASPxButton5" Text="Run General Info Loop" AutoPostBack="false">
                                         <ClientSideEvents Click="function(s,e){
                                             if(cbLeadsType.GetText() == 'Employee')
@@ -296,7 +299,7 @@
                     </Panes>
                 </dx:SplitterPane>
             </Panes>
-        </dx:ASPxSplitter>       
+        </dx:ASPxSplitter>
         <dx:ASPxCallback runat="server" ID="callBackService" ClientInstanceName="callBackService" OnCallback="callBackService_Callback">
         </dx:ASPxCallback>
         <dx:ASPxCallback runat="server" ID="ASPxCallback1" ClientInstanceName="CheckProgress" OnCallback="checkProgress_Callback">
