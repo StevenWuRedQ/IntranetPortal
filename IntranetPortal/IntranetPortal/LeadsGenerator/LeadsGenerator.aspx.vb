@@ -123,8 +123,8 @@ Public Class LeadsGenerator
         Dim maxAdd = LeadMaxAdd()
         Dim selectrows = QueryResultsGrid.GetSelectedFieldValues("BBLE")
         If selectrows.Count <= 0 Then
-            Alert("You didn't select leads !")
-            Return
+            Throw New Exception("You didn't select leads !")
+            'Return
         End If
         Dim empID = Employee.GetInstance(Page.User.Identity.Name).EmployeeID
         If selectrows.Count > maxAdd Then
