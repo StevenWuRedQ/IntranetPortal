@@ -11,23 +11,14 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Test
+Partial Public Class TaskSummary
 
     '''<summary>
-    '''form1 control.
+    '''rptWorklist control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
-
-    '''<summary>
-    '''TaskSummary control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents TaskSummary As Global.IntranetPortal.TaskSummary
+    Protected WithEvents rptWorklist As Global.System.Web.UI.WebControls.Repeater
 End Class

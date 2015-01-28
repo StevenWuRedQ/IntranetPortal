@@ -156,6 +156,8 @@ Public Class LeadsGenerator
 
     Protected Sub runbDataLoop()
         'To do Chris Need run data loop here!
+        Dim service = LeadsDataManage.LeadsDataService.GetInstance
+        service.DataLoop("New")
     End Sub
 
 End Class

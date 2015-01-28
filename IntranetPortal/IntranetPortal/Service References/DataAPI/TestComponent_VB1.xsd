@@ -1013,4 +1013,45 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UCC" nillable="true" type="tns:UCC" />
+  <xs:complexType name="ArrayOfEmergencyRepair">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="EmergencyRepair" nillable="true" type="tns:EmergencyRepair" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEmergencyRepair" nillable="true" type="tns:ArrayOfEmergencyRepair" />
+  <xs:complexType name="EmergencyRepair">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ADD1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ADD2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ADD3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ADJCODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AMOUNT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BLOCK" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BORO" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DISDOLL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ERROR" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FILLER" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FILLER1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FILLER2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FILLER3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FILLER4" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HOUSENUM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HOUSESUF" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LOT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MODBAL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="MODCODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NONMODBAL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NUMBER" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RECODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RECOUPNUM" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STCODE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="STNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TRANSDATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="add4" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="display_housenum" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="row_id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="timestamp" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="EmergencyRepair" nillable="true" type="tns:EmergencyRepair" />
 </xs:schema>

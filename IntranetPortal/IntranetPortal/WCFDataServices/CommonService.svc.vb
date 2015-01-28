@@ -1,7 +1,10 @@
-﻿' NOTE: You can use the "Rename" command on the context menu to change the class name "CommonService" in code, svc and config file together.
+﻿Imports System.IO
+
+' NOTE: You can use the "Rename" command on the context menu to change the class name "CommonService" in code, svc and config file together.
 ' NOTE: In order to launch WCF Test Client for testing this service, please select CommonService.svc or CommonService.svc.vb at the Solution Explorer and start debugging.
 Public Class CommonService
     Implements ICommonService
+
 
 
     Public Sub SendEmail(userName As String, subject As String, body As String) Implements ICommonService.SendEmail
@@ -28,4 +31,27 @@ Public Class CommonService
             ctx.SaveChanges()
         End Using
     End Sub
+
+    Public Sub SendTaskSummaryEmail(userName As String) Implements ICommonService.SendTaskSummaryEmail
+        Dim emp = Employee.GetInstance(userName)
+        IntranetPortal.Core.EmailService.SendMail(emp.Email, "", "Task Summary", LoadSummaryEmail(userName), Nothing)
+    End Sub
+
+    Private Function LoadSummaryEmail(userName As String) As String
+        Dim ts As TaskSummary
+        Using Page As New Page
+            ts = Page.LoadControl("~/EmailTemplate/TaskSummary.ascx")
+            ts.DestinationUser = userName
+            ts.BindData()
+
+            Dim sb As New StringBuilder
+            Using tw As New StringWriter(sb)
+                Using hw As New HtmlTextWriter(tw)
+                    ts.RenderControl(hw)
+                End Using
+            End Using
+
+            Return sb.ToString
+        End Using
+    End Function
 End Class

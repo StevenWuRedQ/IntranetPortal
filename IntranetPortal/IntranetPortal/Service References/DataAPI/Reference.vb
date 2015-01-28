@@ -41564,6 +41564,418 @@ Namespace DataAPI
         End Property
     End Class
     
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="EmergencyRepair", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class EmergencyRepair
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ADD1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ADD2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ADD3Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ADJCODEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AMOUNTField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BLOCKField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BOROField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DISDOLLField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ERRORField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLERField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER3Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER4Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private HOUSENUMField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private HOUSESUFField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LOTField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private MODBALField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private MODCODEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private NONMODBALField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private NUMBERField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RECODEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RECOUPNUMField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private STCODEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private STNAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TRANSDATEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private add4Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private display_housenumField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private row_idField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private timestampField As System.Nullable(Of Date)
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ADD1() As String
+            Get
+                Return Me.ADD1Field
+            End Get
+            Set
+                Me.ADD1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ADD2() As String
+            Get
+                Return Me.ADD2Field
+            End Get
+            Set
+                Me.ADD2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ADD3() As String
+            Get
+                Return Me.ADD3Field
+            End Get
+            Set
+                Me.ADD3Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ADJCODE() As String
+            Get
+                Return Me.ADJCODEField
+            End Get
+            Set
+                Me.ADJCODEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AMOUNT() As String
+            Get
+                Return Me.AMOUNTField
+            End Get
+            Set
+                Me.AMOUNTField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BLOCK() As String
+            Get
+                Return Me.BLOCKField
+            End Get
+            Set
+                Me.BLOCKField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BORO() As String
+            Get
+                Return Me.BOROField
+            End Get
+            Set
+                Me.BOROField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DISDOLL() As String
+            Get
+                Return Me.DISDOLLField
+            End Get
+            Set
+                Me.DISDOLLField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property [ERROR]() As String
+            Get
+                Return Me.ERRORField
+            End Get
+            Set
+                Me.ERRORField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER() As String
+            Get
+                Return Me.FILLERField
+            End Get
+            Set
+                Me.FILLERField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER1() As String
+            Get
+                Return Me.FILLER1Field
+            End Get
+            Set
+                Me.FILLER1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER2() As String
+            Get
+                Return Me.FILLER2Field
+            End Get
+            Set
+                Me.FILLER2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER3() As String
+            Get
+                Return Me.FILLER3Field
+            End Get
+            Set
+                Me.FILLER3Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER4() As String
+            Get
+                Return Me.FILLER4Field
+            End Get
+            Set
+                Me.FILLER4Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property HOUSENUM() As String
+            Get
+                Return Me.HOUSENUMField
+            End Get
+            Set
+                Me.HOUSENUMField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property HOUSESUF() As String
+            Get
+                Return Me.HOUSESUFField
+            End Get
+            Set
+                Me.HOUSESUFField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LOT() As String
+            Get
+                Return Me.LOTField
+            End Get
+            Set
+                Me.LOTField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property MODBAL() As String
+            Get
+                Return Me.MODBALField
+            End Get
+            Set
+                Me.MODBALField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property MODCODE() As String
+            Get
+                Return Me.MODCODEField
+            End Get
+            Set
+                Me.MODCODEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property NONMODBAL() As String
+            Get
+                Return Me.NONMODBALField
+            End Get
+            Set
+                Me.NONMODBALField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property NUMBER() As String
+            Get
+                Return Me.NUMBERField
+            End Get
+            Set
+                Me.NUMBERField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RECODE() As String
+            Get
+                Return Me.RECODEField
+            End Get
+            Set
+                Me.RECODEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RECOUPNUM() As String
+            Get
+                Return Me.RECOUPNUMField
+            End Get
+            Set
+                Me.RECOUPNUMField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property STCODE() As String
+            Get
+                Return Me.STCODEField
+            End Get
+            Set
+                Me.STCODEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property STNAME() As String
+            Get
+                Return Me.STNAMEField
+            End Get
+            Set
+                Me.STNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TRANSDATE() As String
+            Get
+                Return Me.TRANSDATEField
+            End Get
+            Set
+                Me.TRANSDATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property add4() As String
+            Get
+                Return Me.add4Field
+            End Get
+            Set
+                Me.add4Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property display_housenum() As String
+            Get
+                Return Me.display_housenumField
+            End Get
+            Set
+                Me.display_housenumField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property row_id() As String
+            Get
+                Return Me.row_idField
+            End Get
+            Set
+                Me.row_idField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property timestamp() As System.Nullable(Of Date)
+            Get
+                Return Me.timestampField
+            End Get
+            Set
+                Me.timestampField = value
+            End Set
+        End Property
+    End Class
+    
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
      System.ServiceModel.ServiceContractAttribute(ConfigurationName:="DataAPI.IWCFMacros")>  _
     Public Interface IWCFMacros
@@ -41753,6 +42165,12 @@ Namespace DataAPI
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetUcc", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetUccResponse")>  _
         Function AAbs_GetUccAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.UCC())
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepair", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepairResponse")>  _
+        Function AAbs_GetEmergencyRepair(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal HouseNumer As String, ByVal St_Name As String, ByVal SearchType As String) As DataAPI.EmergencyRepair()
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepair", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepairResponse")>  _
+        Function AAbs_GetEmergencyRepairAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal HouseNumer As String, ByVal St_Name As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.EmergencyRepair())
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -42032,6 +42450,14 @@ Namespace DataAPI
         
         Public Function AAbs_GetUccAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.UCC()) Implements DataAPI.IWCFMacros.AAbs_GetUccAsync
             Return MyBase.Channel.AAbs_GetUccAsync(JobTitle, County, Start_Date, End_Date, Block, Lot, LastName, FirstName, CorpName, SearchType)
+        End Function
+        
+        Public Function AAbs_GetEmergencyRepair(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal HouseNumer As String, ByVal St_Name As String, ByVal SearchType As String) As DataAPI.EmergencyRepair() Implements DataAPI.IWCFMacros.AAbs_GetEmergencyRepair
+            Return MyBase.Channel.AAbs_GetEmergencyRepair(JobTitle, County, Start_Date, End_Date, Block, Lot, HouseNumer, St_Name, SearchType)
+        End Function
+        
+        Public Function AAbs_GetEmergencyRepairAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal HouseNumer As String, ByVal St_Name As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.EmergencyRepair()) Implements DataAPI.IWCFMacros.AAbs_GetEmergencyRepairAsync
+            Return MyBase.Channel.AAbs_GetEmergencyRepairAsync(JobTitle, County, Start_Date, End_Date, Block, Lot, HouseNumer, St_Name, SearchType)
         End Function
     End Class
 End Namespace

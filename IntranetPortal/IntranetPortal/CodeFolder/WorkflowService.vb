@@ -172,6 +172,16 @@ Public Class WorkflowService
             Return conn.OpenMyWorklist()
         End Using
     End Function
+
+    Public Shared Function GetUserWorklist(destUser As String) As List(Of WorklistItem)
+        If Not IntegratedWithWorkflow() Then
+            Return New List(Of WorklistItem)
+        End If
+
+        Using conn = GetConnection(destUser)
+            Return conn.OpenMyWorklist
+        End Using
+    End Function
 #End Region
 
 #Region "Workflow Log"

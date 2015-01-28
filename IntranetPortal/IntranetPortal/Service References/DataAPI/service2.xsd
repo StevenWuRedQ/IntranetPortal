@@ -523,4 +523,26 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AAbs_GetEmergencyRepair">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="JobTitle" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Block" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Lot" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="HouseNumer" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="St_Name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SearchType" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AAbs_GetEmergencyRepairResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AAbs_GetEmergencyRepairResult" nillable="true" type="q31:ArrayOfEmergencyRepair" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

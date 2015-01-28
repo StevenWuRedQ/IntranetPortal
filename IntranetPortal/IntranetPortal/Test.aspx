@@ -2,6 +2,8 @@
 
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
 <%@ Register Src="~/UserControl/NavMenu.ascx" TagPrefix="uc1" TagName="NavMenu" %>
+<%@ Register Src="~/EmailTemplate/TaskSummary.ascx" TagPrefix="uc1" TagName="TaskSummary" %>
+
 
 <!DOCTYPE html>
 
@@ -20,39 +22,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        Dear {{$UserName}},
-        <br />
-        <br />
-        The urgent task (<b>{{$Action}}</b>) of <b>{{$Address}}</b> is now due. Please complete this as soon as possible. Below is the task description.
-        <br />
-        <br />
-        <table>
-            <tr>
-                <td style="width: 150px">From:
-                </td>
-                <td><b>{{$CreateBy}}</b>
-                </td>
-            </tr>
-            <tr>
-                <td style="vertical-align:top">Task Description:
-                </td>
-                <td><b>{{$Description}}</b>
-                </td>
-            </tr>
-            <tr>
-                <td>Date Created:
-                </td>
-                <td><b>{{$DateCreated}}</b>
-                </td>
-            </tr>
-        </table>
-        <br />
-        To view this lead, click <a href="{{$ApprovalLink}}">Here</a>. 	
-        <br /><br />
-        Regards,<br />
-        My Ideal Property PORTAL team.
-        <br />
-        <small>This is an automatic email. Please do not reply.</small>
+        <uc1:TaskSummary runat="server" id="TaskSummary" DestinationUser="Chris Yan" />
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/Scripts/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>

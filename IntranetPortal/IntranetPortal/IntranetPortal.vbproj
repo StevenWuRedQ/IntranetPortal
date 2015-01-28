@@ -590,6 +590,13 @@
       <DependentUpon>DownloadFile.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\TaskSummary.ascx.designer.vb">
+      <DependentUpon>TaskSummary.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\TaskSummary.ascx.vb">
+      <DependentUpon>TaskSummary.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1311,6 +1318,7 @@
     <Content Include="DLL\MyIdealProp.Workflow.Core.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.DBPersistence.dll" />
     <Content Include="DownloadFile.aspx" />
+    <Content Include="EmailTemplate\TaskSummary.ascx" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />
     <Content Include="images\add-button-hi.png" />
@@ -2368,6 +2376,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.UCC.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.EmergencyRepair.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\DataAPI\Reference.svcmap">

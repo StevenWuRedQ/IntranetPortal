@@ -14,6 +14,9 @@ Public Interface ICommonService
     Sub SendEmail(userName As String, subject As String, body As String)
 
     <OperationContract()>
+    Sub SendTaskSummaryEmail(userName As String)
+
+    <OperationContract()>
     Sub UpdateLeadsSearchStatus(leadsSearchId As Integer, status As Integer)
 
 End Interface
