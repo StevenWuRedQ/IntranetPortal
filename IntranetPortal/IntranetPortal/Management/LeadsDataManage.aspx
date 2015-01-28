@@ -171,9 +171,7 @@
                                 <SettingsEditing Mode="Batch"></SettingsEditing>
                             </dx:ASPxGridView>
                         </dx:SplitterContentControl>
-                        <dx:SplitterContentControl>
-                            
-                        </dx:SplitterContentControl>
+                       
                     </ContentCollection>
                 </dx:SplitterPane>
                 <dx:SplitterPane>

@@ -106,20 +106,28 @@
 
             )
         }
-
-        function OnLoadClick()
-        {
-            LoadCallBackClient.PerformCallback($("#LoadSearchName").val());
+        
+        function OnLoadClick() {
+            
+            QueryResultsGridClient.PerformCallback($("#LoadSearchName").val());
         }
-        function LoadCallBackCompleted()
+        function LoadCallBackCompleted() {
+            var message= ErrorMessageClient.Get("hidden_value")
+            if (message != null || message!='')
+            {
+                alert(message);
+                ErrorMessageClient.Set("hidden_value", "");
+            }
+                //QueryResultsGridClient.Refresh();
+            
+
+        }
+        function loadFunction(funName)
         {
-            QueryResultsGridClient.Refresh();
+            QueryResultsGridClient.PerformCallback("loadFunction|" + funName)
         }
     </script>
-    <dx:ASPxCallback ID="loadClick" runat="server" ClientInstanceName="LoadCallBackClient" OnCallback="loadClick_Callback">
-        <ClientSideEvents  CallbackComplete="function(s,e){ LoadCallBackCompleted();
-            }"/>
-    </dx:ASPxCallback>
+    <dx:ASPxHiddenField runat="server" ID="ErrorMessage" ClientInstanceName="ErrorMessageClient" ></dx:ASPxHiddenField>
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Width="100%" Height="100%" ClientInstanceName="sampleSplitter" FullscreenMode="true">
         <Styles>
             <Pane>
@@ -164,7 +172,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div style="height: 75%; padding-right: 15px;overflow:auto" id="lead_search_left">
+                            <div style="height: 75%; padding-right: 15px; overflow: auto" id="lead_search_left">
                                 <div>
                                     <div style="margin-top: 30px" class="clearfix">
                                         <div style="float: right">
@@ -181,7 +189,7 @@
                                             <div class="collapse_div">
                                                 <div class="form-group">
                                                     <div class="form-inline">
-                                                        <div class="inline_block query_input_50_percent" >
+                                                        <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Borough</label>
                                                             <select class=" selectpicker form-control width_100percent" id="IdLocation" multiple>
                                                                 <option>Manhattan</option>
@@ -229,7 +237,7 @@
                                             <div class="collapse_div">
                                                 <div class="form-group">
                                                     <div class="form-inline">
-                                                        <div class="inline_block " style="width:100%">
+                                                        <div class="inline_block " style="width: 100%">
                                                             <label class="upcase_text font_black" style="display: block">Property Class</label>
                                                             <select class="selectpicker form-control width_100percent" id="IDPeropertyClass" multiple data-size="8">
 
@@ -277,7 +285,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="form-inline">
-                                                        <div class="inline_block  query_input_50_percent" >
+                                                        <div class="inline_block  query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Class Code</label>
                                                             <select class=" selectpicker form-control width_100percent" id="IdPropertyClassCode" multiple data-size="8">
                                                                 <% For Each classCode In AllPropertyCode%>
@@ -286,7 +294,7 @@
                                                                 <% Next%>
                                                             </select>
                                                         </div>
-                                                        <div class="inline_block  query_input_50_percent" >
+                                                        <div class="inline_block  query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">Zoning</label>
                                                             <select class=" selectpicker form-control width_100percent" id="IdZoning" multiple data-size="8">
                                                                 <% For Each zoning In AllZoning%>
@@ -346,7 +354,7 @@
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block">NYC Sqft</label>
                                                             <select class="selectpicker form-control width_100percent" id="IdNYCsqftMin">
-                                                                <option value="" value="">Min Sqft</option>
+                                                                <option value="">Min Sqft</option>
                                                                 <option>500 sqft</option>
                                                                 <option>600 sqft</option>
                                                                 <option>700 sqft</option>
@@ -367,7 +375,7 @@
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
                                                             <select class="selectpicker form-control width_100percent" id="IdNYCsqftMax">
-                                                                <option value="" value="">Max Sqft</option>
+                                                                <option value="">Max Sqft</option>
                                                                 <option>500 sqft</option>
                                                                 <option>600 sqft</option>
                                                                 <option>700 sqft</option>
@@ -800,22 +808,49 @@
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="table_view">
                                             <div style="padding: 30px">
-                                                <div style="margin: 0 10px; font-size: 36px">
+                                                <div style="margin: 0 10px; font-size: 36px" class="clear-fix">
                                                     <i class="fa fa-folder-open color_gray"></i>&nbsp;<span class="font_black">5 Results</span>
-                                                </div>
-                                                <div style="margin-top: 30px">
-                                                    <dx:ASPxGridView ID="QueryResultsGrid" ClientInstanceName="QueryResultsGridClient" runat="server" Width="100%" KeyFieldName="Id" SettingsPager-PageSize="20">
+                                                    <div style="float: right">
+                                                    <button style="margin-right: 10px" class="rand-button bg_color_blue rand-button-padding" type="button"  id="ImportSelect" onclick="loadFunction('ImportSelect_ServerClick')"> Import Selected</button>
+                                                    <button   class="rand-button bg_color_blue rand-button-padding" type="button"  id="Select250" onclick="loadFunction('Select250_ServerClick')"> Select Leads Random <%--Select 250 Random--%></button>
+                                                    </div>
+                                            </div>
+                                            <div style="margin-top: 30px">
+                                                    
+                                                   <dx:ASPxGridView ID="QueryResultsGrid" runat="server"  
+                                                        OnHtmlRowPrepared="QueryResultsGrid_HtmlRowPrepared"
+                                                       ClientInstanceName="QueryResultsGridClient"  Width="100%" KeyFieldName="Id" SettingsPager-PageSize="12" OnCustomCallback="QueryResultsGrid_CustomCallback">
                                                         <Columns>
                                                             <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" SelectAllCheckboxMode="AllPages">
                                                             </dx:GridViewCommandColumn>
                                                             <dx:GridViewDataColumn FieldName="LeadsName" VisibleIndex="1" />
+                                                            <dx:GridViewDataColumn FieldName="Neigh_Name"  />
+                                                            <dx:GridViewDataColumn FieldName="MotgCombo"  />
+                                                            <dx:GridViewDataColumn FieldName="TaxCombo"  />
+                                                            
+                                                            <dx:GridViewDataColumn FieldName="ORIG_SQFT"  />
+                                                            <dx:GridViewDataColumn FieldName="LOT_DIM"  />
+                                                            <dx:GridViewDataColumn FieldName="Servicer"  />
+                                                            <dx:GridViewDataColumn FieldName="MotgCombo"  />
+                                                            <dx:GridViewDataColumn FieldName="Type"  />
+                                                             <dx:GridViewDataColumn FieldName="AgentInLeads" >
+                                                                <%-- <DataItemTemplate>
+                                                                     <div>
+                                                                         <% If (String.IsNullOrEmpty(Eval("AgentInLeads"))) Then%>
+                                                                         Lead already assgin to <%# Eval("AgentInLeads")%>!
+                                                                         <% End If%>
+                                                                        
+                                                                     </div>
+                                                                 </DataItemTemplate>--%>
+                                                             </dx:GridViewDataColumn>
                                                         </Columns>
                                                         <Styles>
                                                             <SelectedRow BackColor="#d9f1fd" ForeColor="#3993c1">
                                                             </SelectedRow>
                                                         </Styles>
                                                         <Settings />
-                                                    </dx:ASPxGridView>
+                                                     <ClientSideEvents EndCallback="function(s,e) { LoadCallBackCompleted()}"/>
+                                                   </dx:ASPxGridView>
                                                 </div>
                                             </div>
 
@@ -891,7 +926,7 @@
                     The system will notify you upon completion.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                   
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
