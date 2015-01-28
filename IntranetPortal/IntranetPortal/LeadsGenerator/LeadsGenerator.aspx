@@ -112,12 +112,12 @@
             QueryResultsGridClient.PerformCallback($("#LoadSearchName").val());
         }
         function LoadCallBackCompleted() {
-            var message= ErrorMessageClient.Get("hidden_value")
-            if (message != null || message!='')
-            {
-                alert(message);
-                ErrorMessageClient.Set("hidden_value", "");
-            }
+            //var message= ErrorMessageClient.Get("hidden_value")
+            //if (message != null || message!='')
+            //{
+            //    alert(message);
+            //    ErrorMessageClient.Set("hidden_value", "");
+            //}
                 //QueryResultsGridClient.Refresh();
             
 

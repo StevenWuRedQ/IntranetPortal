@@ -12,12 +12,15 @@ Public Class LeadsGenerator
 
 
         DataBinds()
-
+        Dim SearchName = (Request.QueryString("n"))
+        If (Not String.IsNullOrEmpty(SearchName)) Then
+            BindGrid(SearchName)
+        End If
     End Sub
 
     Private Sub DataBinds()
         Using context As New Entities
-            BindGrid("Demo Leads Search")
+
             CompletedTask = context.LeadsSearchTasks.Where(Function(s) s.Status = LeadsSearchTaskStauts.Completed And s.CreateBy = Page.User.Identity.Name).ToList
             ZipCodes = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "ZIP").Select(Function(c) c.Data).ToList
             AllNeighName = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "Neighborhood").Select(Function(c) c.Data).ToList
@@ -107,7 +110,9 @@ Public Class LeadsGenerator
 
     End Sub
     Protected Sub Alert(message As String)
-        ErrorMessage.Item("hidden_value") = message
+        ' ErrorMessage.Item("hidden_value") = message
+
+        Throw New Exception(message)
     End Sub
     Protected Function HasNewLeadsInProtal() As Integer
         Using Context As New Entities
@@ -123,8 +128,9 @@ Public Class LeadsGenerator
         Dim maxAdd = LeadMaxAdd()
         Dim selectrows = QueryResultsGrid.GetSelectedFieldValues("BBLE")
         If selectrows.Count <= 0 Then
-            Throw New Exception("You didn't select leads !")
-            'Return
+            Alert("You didn't select leads !")
+        ElseIf (selectrows.Count > maxAdd) Then
+            Alert("You have enough leads in bank!")
         End If
         Dim empID = Employee.GetInstance(Page.User.Identity.Name).EmployeeID
         If selectrows.Count > maxAdd Then
@@ -147,4 +153,9 @@ Public Class LeadsGenerator
             Throw New Exception("Only can import !" + maxAdd)
         End If
     End Sub
+
+    Protected Sub runbDataLoop()
+        'To do Chris Need run data loop here!
+    End Sub
+
 End Class
