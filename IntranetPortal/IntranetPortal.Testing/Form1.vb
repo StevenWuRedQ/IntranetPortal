@@ -92,7 +92,8 @@ Public Class Form1
             'Dim result = client.AB_GetFederalTaxLien("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "", "", "D & S ELECTRICAL CORP", "ByCorpName")
             'Dim result = client.AB_GetPatriot("Test123", "Queens", "0000-00-00", "0000-00-00", "ABU SITTA", "", "", "ByPersonName")
             'Dim result = client.AB_GetParkingViolations("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "CORPORATION", "ByCorpName")
-            Dim result = client.AAbs_GetUcc("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "Smith", "", "", "ByPersonName")
+            'Dim result = client.AAbs_GetUcc("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "Smith", "", "", "ByPersonName")
+            Dim result = client.AAbs_GetEmergencyRepair("Test123", "Queens", "0000-00-00", "0000-00-00", "", "", "111-08", "207 STREET", "ByAddress")
             'client.NYC_Address_Search()
         End Using
     End Sub

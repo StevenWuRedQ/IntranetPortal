@@ -56,6 +56,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -93,6 +94,7 @@
     </Compile>
     <Compile Include="RulesService.vb" />
     <Compile Include="ServiceLog.vb" />
+    <Compile Include="TaskSummaryRule.vb" />
     <Compile Include="WorkingHours.vb" />
   </ItemGroup>
   <ItemGroup>

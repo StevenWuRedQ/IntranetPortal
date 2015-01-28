@@ -69,6 +69,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -110,6 +112,11 @@
     <Compile Include="RuleEngineManagement.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Service References\PortalService\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Troubleshooting.Designer.vb">
       <DependentUpon>Troubleshooting.vb</DependentUpon>
     </Compile>
@@ -143,6 +150,16 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="Service References\PortalService\CommonService.wsdl" />
+    <None Include="Service References\PortalService\CommonService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PortalService\CommonService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PortalService\CommonService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntranetPortal.RulesEngin\IntranetPortal.RulesEngine.vbproj">
@@ -153,6 +170,27 @@
       <Project>{6ca9f52b-c8d7-4098-8fb4-0626d61a9e32}</Project>
       <Name>IntranetPortal</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\PortalService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PortalService\CommonService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PortalService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PortalService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\PortalService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
