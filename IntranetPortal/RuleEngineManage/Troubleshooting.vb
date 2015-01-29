@@ -14,8 +14,16 @@
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        IntranetPortal.RulesEngine.TaskSummaryRule.LoadSummaryEmail("Chris Yan")
+        Return
+
         Using client As New PortalService.CommonServiceClient
             client.SendTaskSummaryEmail("Chris Yan")
         End Using
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Dim rule As New IntranetPortal.RulesEngine.LoopServiceRule
+        rule.Execute()
     End Sub
 End Class

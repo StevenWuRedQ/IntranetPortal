@@ -5,6 +5,18 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="IntranetPortal.Core.Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DataLoopRules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="LoopType" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="FinishDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="EmailMessages">
           <Key>
             <PropertyRef Name="EmailId" />
@@ -42,6 +54,7 @@
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
         <EntityContainer Name="IntranetPortalCoreModelStoreContainer">
+          <EntitySet Name="DataLoopRules" EntityType="Self.DataLoopRules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailMessages" EntityType="Self.EmailMessages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailTemplates" EntityType="Self.EmailTemplates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpecialDays" EntityType="Self.SpecialDays" Schema="dbo" store:Type="Tables" />
@@ -68,6 +81,7 @@
           <EntitySet Name="EmailMessages" EntityType="Self.EmailMessage" />
           <EntitySet Name="SpecialDays" EntityType="IntranetPortal.Core.Model.SpecialDay" />
           <EntitySet Name="EmailTemplates" EntityType="IntranetPortal.Core.Model.EmailTemplate" />
+          <EntitySet Name="DataLoopRules" EntityType="IntranetPortal.Core.Model.DataLoopRule" />
         </EntityContainer>
         <EntityType Name="SpecialDay">
           <Key>
@@ -90,6 +104,18 @@
           <Property Name="Subject" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DataLoopRule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="LoopType" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="FinishDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -133,6 +159,19 @@
                 <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DataLoopRules">
+            <EntityTypeMapping TypeName="IntranetPortal.Core.Model.DataLoopRule">
+              <MappingFragment StoreEntitySet="DataLoopRules">
+                <ScalarProperty Name="FinishDate" ColumnName="FinishDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LoopType" ColumnName="LoopType" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

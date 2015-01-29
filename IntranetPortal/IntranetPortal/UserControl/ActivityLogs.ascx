@@ -160,34 +160,41 @@
     }
 
     function CompleteTask(logID) {
-        gridTrackingClient.PerformCallback("CompleteTask|" + logID);
-
-        if (typeof gridLeads != 'undefined')
-            gridLeads.Refresh();
+        NeedToRefreshList = true;
+        gridTrackingClient.PerformCallback("CompleteTask|" + logID);       
     }
 
     function ResendTask(logID) {
         ASPxPopupSetAsTaskControl.PerformCallback("ResendTask|" + logID);
         ASPxPopupSetAsTaskControl.EndCallback.AddHandler(function (s, e) {
             s.Show();
-
-            if (typeof gridLeads != 'undefined')
-                gridLeads.Refresh();
+            RefreshList();
         });
     }
 
-    function ApproveNewLead(logID) {
-        gridTrackingClient.PerformCallback("ApproveNewLead|" + logID);
-
+    var NeedToRefreshList = false;
+    function RefreshList() {
+        debugger;
         if (typeof gridLeads != 'undefined')
             gridLeads.Refresh();
+
+        if (window.parent && typeof window.parent.RefreshTaskList == 'function')
+            window.parent.RefreshTaskList();
+
+        NeedToRefreshList = false;
+    }
+
+    function ApproveNewLead(logID) {
+        NeedToRefreshList = true;
+        gridTrackingClient.PerformCallback("ApproveNewLead|" + logID);
     }
 
     function DeclineNewLead(logID) {
+        NeedToRefreshList = true;
         gridTrackingClient.PerformCallback("DeclineNewLead|" + logID);
 
-        if (typeof gridLeads != 'undefined')
-            gridLeads.Refresh();
+        //if (typeof gridLeads != 'undefined')
+        //    gridLeads.Refresh();
     }
 
     var lastIndexofAppointmentAction = null;
@@ -222,15 +229,17 @@
     }
 
     function AcceptAppointment(logID) {
+        NeedToRefreshList = true;
         gridTrackingClient.PerformCallback("AcceptAppointment|" + logID);
-        if (typeof gridLeads != 'undefined')
-            gridLeads.Refresh();
+        //if (typeof gridLeads != 'undefined')
+        //    gridLeads.Refresh();
     }
 
     function DeclineAppointment(logID) {
+        NeedToRefreshList = true;
         gridTrackingClient.PerformCallback("DeclineAppointment|" + logID);
-        if (typeof gridLeads != 'undefined')
-            gridLeads.Refresh();
+        //if (typeof gridLeads != 'undefined')
+        //    gridLeads.Refresh();
     }
 
     function ShowAppointmentWindow(logId) {
@@ -244,9 +253,10 @@
         //    s.Show();         
         //});
         //return;
+        NeedToRefreshList = true;
         gridTrackingClient.PerformCallback("ReScheduleAppointment|" + logID);
-        if (typeof gridLeads != 'undefined')
-            gridLeads.Refresh();
+        //if (typeof gridLeads != 'undefined')
+        //    gridLeads.Refresh();
     }
 
     function OnCbTaskScheduleSelectedIndexChanged(s, e) {
@@ -316,14 +326,13 @@
         filter_popup_show = false;
     }
     $(document).ready(function () {
-       //alert("called here>")
+        //alert("called here>")
         $(".dxheDesignViewArea_MetropolisBlue1 dxheViewArea_MetropolisBlue1").keydown(function () {
             alert("test!!");
         })
 
     });
-    function testaddKey()
-    {
+    function testaddKey() {
         $(".dxheDesignViewArea_MetropolisBlue1 dxheViewArea_MetropolisBlue1").keydown(function () {
             alert("test!!");
         })
@@ -349,12 +358,12 @@
                     <span class="upcase_text">Public update</span>
                 </label>
             </div>
-           <%-- <button  type="button" onclick="testaddKey()">Test</button>--%>
+            <%-- <button  type="button" onclick="testaddKey()">Test</button>--%>
             <textarea title="Press CTRL+ENTER to submit." class="edit_text_area" style="display: none; height: 148px;" id="txtComments" onkeydown="OnCommentsKeyDown(event);"></textarea>
-            <div class="html_edit_div" >
+            <div class="html_edit_div">
                 <dx:ASPxHtmlEditor ID="EmailBody2" runat="server" Height="148px" Width="100%" ClientInstanceName="EmailBody" OnLoad="EmailBody2_Load">
                     <Settings AllowHtmlView="false" AllowPreview="false" />
-                    
+
                 </dx:ASPxHtmlEditor>
             </div>
         </div>
@@ -644,7 +653,7 @@
             <Settings VerticalScrollBarMode="Auto" VerticalScrollableHeight="600" ShowHeaderFilterButton="true" />
             <SettingsBehavior AllowFocusedRow="false" AllowClientEventsOnLoad="false" AllowDragDrop="false"
                 EnableRowHotTrack="false" ColumnResizeMode="Disabled" />
-            <ClientSideEvents EndCallback="function(){dateActivityClient.SetDate(new Date());AddTooltips();}" />
+            <ClientSideEvents EndCallback="function(s,e){dateActivityClient.SetDate(new Date());if(NeedToRefreshList){RefreshList();}}" />
         </dx:ASPxGridView>
 
         <dx:ASPxPopupControl ClientInstanceName="popupFilterControl" Width="160px" Height="200px"

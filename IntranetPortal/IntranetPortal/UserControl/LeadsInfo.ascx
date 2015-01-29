@@ -157,6 +157,8 @@
             return;
         else
             window.parent.agentTreeCallbackPanel.PerformCallback("");
+
+        
     }
 
     function PrintLeadInfo() {
@@ -242,6 +244,7 @@
 
     function OnRefreshMenuClick(s, e) {
         if (typeof ContentCallbackPanel != "undefined") {
+            debugger;
             var parms = "Refresh|" + leadsInfoBBLE + "|" + e.item.name;
             ContentCallbackPanel.PerformCallback(parms);
         }

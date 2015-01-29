@@ -60,7 +60,7 @@ Public Class LeadsGenerator
         End Using
     End Sub
 
-   
+
     Protected Sub BindGrid(SearchName As String)
         Using context As New Entities
             Dim results = context.SearchResults.Where(Function(s) s.Type = SearchName).ToList
@@ -84,11 +84,9 @@ Public Class LeadsGenerator
 
             e.Row.BackColor = c ' rgb(194, 193, 193)
         End If
-
     End Sub
 
     Public Sub Select250_ServerClick()
-
 
         Dim count = 0
         Dim maxAdd = LeadMaxAdd()
@@ -121,9 +119,11 @@ Public Class LeadsGenerator
 
         Return 0
     End Function
+
     Protected Function LeadMaxAdd() As Integer
         Return MaxSelect - HasNewLeadsInProtal()
     End Function
+
     Public Sub ImportSelect_ServerClick()
         Dim maxAdd = LeadMaxAdd()
         Dim selectrows = QueryResultsGrid.GetSelectedFieldValues("BBLE")
@@ -145,7 +145,6 @@ Public Class LeadsGenerator
                     l.AssignDate = Date.Now
 
                     Context.Leads.Add(l)
-
                 Next
                 Context.SaveChanges()
 
@@ -158,8 +157,9 @@ Public Class LeadsGenerator
 
     Protected Sub runbDataLoop()
         'To do Chris Need run data loop here!
-        Dim service = LeadsDataManage.LeadsDataService.GetInstance
-        service.DataLoop("New")
+        'Dim service = LeadsDataManage.LeadsDataService.GetInstance
+        'service.DataLoop("New")
+        Core.DataLoopRule.AddRules(LeadsInfo.GetNewLeads, Core.DataLoopRule.DataLoopType.All, Page.User.Identity.Name)
     End Sub
 
     Protected Sub cpTableView_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
@@ -181,6 +181,5 @@ Public Class LeadsGenerator
             BindGrid(SearchName)
 
         End If
-
     End Sub
 End Class

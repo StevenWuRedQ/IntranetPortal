@@ -15,6 +15,11 @@
         gridTasks.Refresh();
     }
 
+    function RefreshTaskList()
+    {
+        gridTasks.Refresh();
+    }
+
     function ExpandOrCollapseGroupRow(rowIndex) {
         if (gridTasks.IsGroupRow(rowIndex)) {
             if (gridTasks.IsGroupRowExpanded(rowIndex)) {

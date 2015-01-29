@@ -5,7 +5,6 @@ Imports System.Web
 
 Public Class TaskSummaryRule
     Public Shared Sub Execute()
-
         Dim emps = Employee.GetAllActiveEmps()
 
         For Each emp In emps
@@ -19,9 +18,10 @@ Public Class TaskSummaryRule
         'ts.BindData()
 
         Using Page As New Page
-            ts = Page.LoadControl(GetType(TaskSummary), Nothing)
+
+            ts = Page.LoadControl("~/EmailTemplate/TaskSummary.ascx")
             ts.DestinationUser = userName
-            'ts.BindData()          
+            ts.BindData()
 
             Page.Controls.Add(ts)
 

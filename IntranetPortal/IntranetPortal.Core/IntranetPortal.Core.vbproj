@@ -95,6 +95,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\DataLoopRule.vb">
+      <DependentUpon>CoreEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\EmailMessage.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
@@ -104,6 +107,7 @@
     <Compile Include="ADOEntity\SpecialDay.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataLoopRule.vb" />
     <Compile Include="DocumentService.vb" />
     <Compile Include="EmailService.vb" />
     <Compile Include="HolidayService.vb" />

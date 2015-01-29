@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.EmailMessage" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.SpecialDay" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortal.Core.Model.EmailTemplate" Width="1.5" PointX="5.625" PointY="1" />
+        <EntityTypeShape EntityType="IntranetPortal.Core.Model.DataLoopRule" Width="1.5" PointX="7.875" PointY="1.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

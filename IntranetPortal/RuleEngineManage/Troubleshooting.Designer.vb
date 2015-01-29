@@ -32,6 +32,7 @@ Partial Class Troubleshooting
         Me.txtRuleId = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -118,11 +119,21 @@ Partial Class Troubleshooting
         Me.Button3.Text = "TaskSummary"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(49, 160)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(91, 23)
+        Me.Button4.TabIndex = 10
+        Me.Button4.Text = "DataLoop Rule"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'Troubleshooting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(496, 217)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtRuleId)
@@ -149,4 +160,5 @@ Partial Class Troubleshooting
     Friend WithEvents txtRuleId As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents Button4 As System.Windows.Forms.Button
 End Class

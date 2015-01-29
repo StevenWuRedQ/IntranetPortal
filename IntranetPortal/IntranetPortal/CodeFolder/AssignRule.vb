@@ -89,6 +89,9 @@
                 log.CreateDate = DateTime.Now
                 ctx.AssginRulesLogs.Add(log)
                 ctx.SaveChanges()
+
+                'Add to data loop
+                Core.DataLoopRule.AddRules(LeadsInfo.GetNewLeads(), Core.DataLoopRule.DataLoopType.All, "AssignRule")
             End If
         End Using
     End Sub

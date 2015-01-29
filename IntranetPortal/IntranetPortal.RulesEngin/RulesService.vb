@@ -2,7 +2,7 @@
 
 Public Class RulesService
     Private Shared ServiceInstance As RulesService
-    Private StateObj As New StateObjClass
+    Private StateObjs As New List(Of StateObjClass)
     Public Delegate Sub StatusChange(sta As ServiceStatus)
     Public Event OnStatusChange As StatusChange
     Private serviceMode As RunningMode
@@ -37,38 +37,57 @@ Public Class RulesService
             Status = ServiceStatus.Running
 
             InitServiceMode()
+            InitRules()
 
             Log("Service is running")
             Log("Service Running Mode: " + Mode.ToString)
-            RunTimer()
+
+            For Each Rule In rules
+                Log("Inital Rule: " & Rule.RuleName)
+                RunTimer(Rule)
+                Log("Inital Rule (" & Rule.RuleName & ") Finished. ")
+            Next
+
             Log("Service is Start")
         End If
     End Sub
 
+    Dim rules As List(Of BaseRule)
+    Private Sub InitRules()
+        rules = New List(Of BaseRule)
+        rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Leads and Task Rule"})
+        rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:01"), .Period = TimeSpan.Parse("00:10:00"), .RuleName = "Data Loop Rule"})
+        rules.Add(New EmailSummaryRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "User Task Summary Rule"})
+        rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("02:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Assign Leads Rule"})
+    End Sub
+
     Public Sub StopService()
         ' Request Dispose of the timer object.
-        GetInstance.StateObj.TimerCanceled = True
-        If timerItem IsNot Nothing Then
-            timerItem.Dispose()
+        If StateObjs.Count > 0 Then
+            For Each obj In StateObjs
+                obj.TimerCanceled = True
+                obj.TimerReference.Dispose()
+            Next
         End If
     End Sub
 
-    Dim timerItem As Threading.Timer
-    Private Sub RunTimer()
+    Private Sub RunTimer(rule As BaseRule)
+        Dim StateObj As New StateObjClass
         StateObj.TimerCanceled = False
-        StateObj.SomeValue = 1
+        StateObj.Rule = rule
 
         Dim TimerDelegate As New System.Threading.TimerCallback(AddressOf TimerTask)
 
-        Dim dueTime As New TimeSpan(1000)
-        If WorkingHours.IsWorkingHour(DateTime.Now) Then
-            dueTime = DateTime.Today.AddHours(19) - DateTime.Now
+        Dim dueTime = DateTime.Today.Add(rule.ExecuteOn) - DateTime.Now
+        If dueTime.TotalSeconds < 0 Then
+            dueTime = New TimeSpan(1000)
         End If
 
-        timerItem = New System.Threading.Timer(TimerDelegate, StateObj, dueTime, New TimeSpan(23, 59, 59))
+        Dim timerItem = New System.Threading.Timer(TimerDelegate, StateObj, dueTime, rule.Period)
 
         ' Save a reference for Dispose.
         StateObj.TimerReference = timerItem
+        StateObjs.Add(StateObj)
     End Sub
 
     Private Sub TimerTask(ByVal StateObj As Object)
@@ -79,34 +98,34 @@ Public Class RulesService
             Return
         End If
 
-        ' Use the interlocked class to increment the counter variable.
-        System.Threading.Interlocked.Increment(State.SomeValue)
+        If State.Rule Is Nothing Then
+            Log("Business Rule is nothing. Please check.")
+            Return
+        End If
 
-        Log("Launched new task ")
+        Log("Launched rule Task: " & State.Rule.RuleName)
         State.InProcess = True
 
         Try
-            If Not WorkingHours.IsWorkingHour(DateTime.Now) Then
-                If WorkingHours.IsWorkingDay(DateTime.Now) Then
-                    'Run Rules
-                    RunRules()
-                End If
+            If WorkingHours.IsWorkingDay(DateTime.Now) Then
+                'Run Rules
+                'RunRules()
+                State.Rule.Execute()
             End If
         Catch ex As Exception
             Log("Exception in Run Rules", ex)
         End Try
 
-        Status = ServiceStatus.Sleep
         State.InProcess = False
 
         If State.TimerCanceled Then
             ' Dispose Requested.
             State.TimerReference.Dispose()
-            Log("Service is stop.")
-            Status = ServiceStatus.Stopped
+            Log("Rule " & State.Rule.RuleName & " is cancel.")
         End If
     End Sub
 
+    <Obsolete>
     Private Sub RunRules()
         'Run Task rule
         Dim tasks = UserTask.GetActiveTasks()
@@ -197,6 +216,7 @@ Public Class RulesService
         Public TimerReference As System.Threading.Timer
         Public TimerCanceled As Boolean
         Public InProcess As Boolean
+        Public Rule As BaseRule
     End Class
 
     Enum ServiceStatus
@@ -210,4 +230,6 @@ Public Class RulesService
         Trial
         Release
     End Enum
+
+
 End Class

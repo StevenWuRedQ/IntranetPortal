@@ -430,6 +430,12 @@
         End Using
     End Function
 
+    Public Shared Function GetNewLeads() As String()
+        Using ctx As New Entities
+            Return ctx.LeadsInfoes.Where(Function(ld) String.IsNullOrEmpty(ld.PropertyAddress)).Select(Function(li) li.BBLE).ToArray
+        End Using
+    End Function
+
     Public Sub AddComments(comments As String, userName As String)
         Using Context As New Entities
             Dim lc As New LeadsComment
