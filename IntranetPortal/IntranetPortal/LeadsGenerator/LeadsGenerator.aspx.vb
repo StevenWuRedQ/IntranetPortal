@@ -148,6 +148,8 @@ Public Class LeadsGenerator
 
                 Next
                 Context.SaveChanges()
+
+                runbDataLoop()
             End Using
         Else
             Alert("Only can import " + maxAdd + " Leads !")
