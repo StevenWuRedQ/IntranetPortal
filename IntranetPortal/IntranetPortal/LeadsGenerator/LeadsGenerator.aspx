@@ -45,7 +45,7 @@
 
         function removeEmpty(test) {
             for (var i in test) {
-                if (test[i] === null || test[i] === undefined || test[i] === "") {
+                if (test[i] === null || test[i] === undefined || test[i] === "" || test[i]==false) {
 
                     delete test[i];
                 } else if (typeof test[i] == 'object') {
@@ -71,9 +71,9 @@
             }
             var filter = GetSearchFields();
 
-
-            SaveSearchPopupClient.PerformCallback(searchTaskName + "|" + JSON.stringify(filter));
-            SaveSearchPopupClient.Hide();
+            loadFunction("SaveSearchPopup_WindowCallback|" + searchTaskName + "|" + JSON.stringify(filter))
+            //tableViewClinetCallBack.PerformCallback();
+            //SaveSearchPopupClient.Hide();
         }
         function expand_array_all(e, isopen) {
 
@@ -106,28 +106,42 @@
 
             )
         }
-        
+
         function OnLoadClick() {
-            
-            QueryResultsGridClient.PerformCallback($("#LoadSearchName").val());
+
+            tableViewClinetCallBack.PerformCallback($("#LoadSearchName").val());
+        }
+        loadCallBack = {}
+        loadCallBack.ClosePupUp= function()
+        {
+            SaveSearchPopupClient.Hide();
+            ;
         }
         function LoadCallBackCompleted() {
-            //var message= ErrorMessageClient.Get("hidden_value")
-            //if (message != null || message!='')
-            //{
-            //    alert(message);
-            //    ErrorMessageClient.Set("hidden_value", "");
-            //}
-                //QueryResultsGridClient.Refresh();
-            
+            var message = ErrorMessageClient.Get("hidden_value");
+            if (message != null && message!='')
+            {
+                if (message.indexOf("_call_func")>=0)
+                {
+                    var funcName = message.split("_call_func")[1];
+                    loadCallBack[funcName]();
+                    message = message.substring(0,message.indexOf("_call_func"));
+                }
+                //alert(message);
+                $("#messageBody").html(message);
 
+                $('#msgModal').modal();
+                ErrorMessageClient.Set("hidden_value", "");
+            }
+            //QueryResultsGridClient.Refresh();
+
+           
         }
-        function loadFunction(funName)
-        {
-            QueryResultsGridClient.PerformCallback("loadFunction|" + funName)
+        function loadFunction(funName) {
+            tableViewClinetCallBack.PerformCallback("loadFunction|" + funName)
         }
     </script>
-    <dx:ASPxHiddenField runat="server" ID="ErrorMessage" ClientInstanceName="ErrorMessageClient" ></dx:ASPxHiddenField>
+   
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Width="100%" Height="100%" ClientInstanceName="sampleSplitter" FullscreenMode="true">
         <Styles>
             <Pane>
@@ -807,34 +821,40 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane active" id="table_view">
-                                            <div style="padding: 30px">
-                                                <div style="margin: 0 10px; font-size: 36px" class="clear-fix">
-                                                    <i class="fa fa-folder-open color_gray"></i>&nbsp;<span class="font_black">5 Results</span>
-                                                    <div style="float: right">
-                                                    <button style="margin-right: 10px" class="rand-button bg_color_blue rand-button-padding" type="button"  id="ImportSelect" onclick="loadFunction('ImportSelect_ServerClick')"> Import Selected</button>
-                                                    <button   class="rand-button bg_color_blue rand-button-padding" type="button"  id="Select250" onclick="loadFunction('Select250_ServerClick')"> Select Leads Random <%--Select 250 Random--%></button>
-                                                    </div>
-                                            </div>
-                                            <div style="margin-top: 30px">
-                                                    
-                                                   <dx:ASPxGridView ID="QueryResultsGrid" runat="server"  
-                                                        OnHtmlRowPrepared="QueryResultsGrid_HtmlRowPrepared"
-                                                       ClientInstanceName="QueryResultsGridClient"  Width="100%" KeyFieldName="Id" SettingsPager-PageSize="12" OnCustomCallback="QueryResultsGrid_CustomCallback">
-                                                        <Columns>
-                                                            <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" SelectAllCheckboxMode="AllPages">
-                                                            </dx:GridViewCommandColumn>
-                                                            <dx:GridViewDataColumn FieldName="LeadsName" VisibleIndex="1" />
-                                                            <dx:GridViewDataColumn FieldName="Neigh_Name"  />
-                                                            <dx:GridViewDataColumn FieldName="MotgCombo"  />
-                                                            <dx:GridViewDataColumn FieldName="TaxCombo"  />
-                                                            
-                                                            <dx:GridViewDataColumn FieldName="ORIG_SQFT"  />
-                                                            <dx:GridViewDataColumn FieldName="LOT_DIM"  />
-                                                            <dx:GridViewDataColumn FieldName="Servicer"  />
-                                                            <dx:GridViewDataColumn FieldName="MotgCombo"  />
-                                                            <dx:GridViewDataColumn FieldName="Type"  />
-                                                             <dx:GridViewDataColumn FieldName="AgentInLeads" >
-                                                                <%-- <DataItemTemplate>
+                                            <dx:ASPxCallbackPanel runat="server" ID="cpTableView" ClientInstanceName="tableViewClinetCallBack" OnCallback="cpTableView_Callback">
+                                                <PanelCollection>
+
+                                                    <dx:PanelContent>
+                                                        <asp:HiddenField ID="hfSearchName"  runat="server"/>
+                                                        <dx:ASPxHiddenField runat="server" ID="ErrorMessage" ClientInstanceName="ErrorMessageClient"></dx:ASPxHiddenField>
+                                                        <div style="padding: 30px">
+                                                            <div style="margin: 0 10px; font-size: 36px" class="clear-fix">
+                                                                <i class="fa fa-folder-open color_gray"></i>&nbsp;<span class="font_black"><span id="ResultsCount"><%=LoadLeadsCount %></span> Results</span>
+                                                                <div style="float: right">
+                                                                    <button style="margin-right: 10px" class="rand-button bg_color_blue rand-button-padding" type="button" id="ImportSelect" onclick="loadFunction('ImportSelect_ServerClick')">Import Selected</button>
+                                                                    <button class="rand-button bg_color_blue rand-button-padding" type="button" id="Select250" onclick="loadFunction('Select250_ServerClick')">Select fill bank Leads <%--Select 250 Random--%></button>
+                                                                </div>
+                                                            </div>
+                                                            <div style="margin-top: 30px">
+
+                                                                <dx:ASPxGridView ID="QueryResultsGrid" runat="server"
+                                                                    OnHtmlRowPrepared="QueryResultsGrid_HtmlRowPrepared"
+                                                                    ClientInstanceName="QueryResultsGridClient" Width="100%" KeyFieldName="Id" SettingsPager-PageSize="12" >
+                                                                    <Columns>
+                                                                        <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" SelectAllCheckboxMode="AllPages">
+                                                                        </dx:GridViewCommandColumn>
+                                                                        <dx:GridViewDataColumn FieldName="LeadsName" VisibleIndex="1" />
+                                                                        <dx:GridViewDataColumn FieldName="Neigh_Name" />
+                                                                        <dx:GridViewDataColumn FieldName="MotgCombo" />
+                                                                        <dx:GridViewDataColumn FieldName="TaxCombo" />
+
+                                                                        <dx:GridViewDataColumn FieldName="ORIG_SQFT" />
+                                                                        <dx:GridViewDataColumn FieldName="LOT_DIM" />
+                                                                        <dx:GridViewDataColumn FieldName="Servicer" />
+                                                                        <dx:GridViewDataColumn FieldName="MotgCombo" />
+                                                                        <dx:GridViewDataColumn FieldName="Type" />
+                                                                        <dx:GridViewDataColumn FieldName="AgentInLeads">
+                                                                            <%-- <DataItemTemplate>
                                                                      <div>
                                                                          <% If (String.IsNullOrEmpty(Eval("AgentInLeads"))) Then%>
                                                                          Lead already assgin to <%# Eval("AgentInLeads")%>!
@@ -842,18 +862,21 @@
                                                                         
                                                                      </div>
                                                                  </DataItemTemplate>--%>
-                                                             </dx:GridViewDataColumn>
-                                                        </Columns>
-                                                        <Styles>
-                                                            <SelectedRow BackColor="#d9f1fd" ForeColor="#3993c1">
-                                                            </SelectedRow>
-                                                        </Styles>
-                                                        <Settings />
-                                                     <ClientSideEvents EndCallback="function(s,e) { LoadCallBackCompleted()}"/>
-                                                   </dx:ASPxGridView>
-                                                </div>
-                                            </div>
-
+                                                                        </dx:GridViewDataColumn>
+                                                                    </Columns>
+                                                                    <Styles>
+                                                                        <SelectedRow BackColor="#d9f1fd" ForeColor="#3993c1">
+                                                                        </SelectedRow>
+                                                                    </Styles>
+                                                                    <Settings />
+                                                                   <%-- <ClientSideEvents EndCallback="function(s,e) { LoadCallBackCompleted(e.result)}" />--%>
+                                                                </dx:ASPxGridView>
+                                                            </div>
+                                                        </div>
+                                                    </dx:PanelContent>
+                                                </PanelCollection>
+                                                <ClientSideEvents EndCallback="function(s,e) { LoadCallBackCompleted()}" />
+                                            </dx:ASPxCallbackPanel>
 
                                         </div>
                                         <div role="tabpanel" class="tab-pane" id="map_view">map view</div>
@@ -873,7 +896,7 @@
         ClientInstanceName="SaveSearchPopupClient"
         CloseAction="CloseButton" ShowFooter="true" Width="550"
         HeaderText="Save Search " Modal="true"
-        PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableViewState="false" EnableHierarchyRecreation="True" OnWindowCallback="SaveSearchPopup_WindowCallback">
+        PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableViewState="false" EnableHierarchyRecreation="True" >
         <HeaderTemplate>
             <div class="clearfix">
 
@@ -908,10 +931,10 @@
             </div>
 
         </FooterContentTemplate>
-        <ClientSideEvents EndCallback="function(s,e){
+       <%-- <ClientSideEvents EndCallback="function(s,e){
                 SaveSearchPopupClient.Hide();
                 $('#msgModal').modal();
-            }" />
+            }" />--%>
     </dx:ASPxPopupControl>
 
     <div class="modal fade" id="msgModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -921,7 +944,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Success</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="messageBody">
                     Your request has been submitted. Estimated time is 48 hours to upload. 
                     The system will notify you upon completion.
                 </div>

@@ -14,15 +14,6 @@ Option Explicit On
 Partial Public Class LeadsGenerator
 
     '''<summary>
-    '''ErrorMessage control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ErrorMessage As Global.DevExpress.Web.ASPxHiddenField.ASPxHiddenField
-
-    '''<summary>
     '''ASPxSplitter1 control.
     '''</summary>
     '''<remarks>
@@ -30,6 +21,33 @@ Partial Public Class LeadsGenerator
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+
+    '''<summary>
+    '''cpTableView control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cpTableView As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
+
+    '''<summary>
+    '''hfSearchName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfSearchName As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''ErrorMessage control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ErrorMessage As Global.DevExpress.Web.ASPxHiddenField.ASPxHiddenField
 
     '''<summary>
     '''QueryResultsGrid control.

@@ -8,6 +8,7 @@ Public Class LeadsGenerator
     Public AllPropertyCode As List(Of String)
     Public CompletedTask As New List(Of LeadsSearchTask)
     Public MaxSelect = 250
+    Public LoadLeadsCount = 0
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
@@ -15,6 +16,13 @@ Public Class LeadsGenerator
         Dim SearchName = (Request.QueryString("n"))
         If (Not String.IsNullOrEmpty(SearchName)) Then
             BindGrid(SearchName)
+
+        End If
+
+        If (Page.IsPostBack) Then
+            If (Not String.IsNullOrEmpty(hfSearchName.Value)) Then
+                BindGrid(hfSearchName.Value)
+            End If
         End If
     End Sub
 
@@ -29,46 +37,38 @@ Public Class LeadsGenerator
         End Using
     End Sub
 
-    Protected Sub SaveSearchPopup_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    Public Sub SaveSearchPopup_WindowCallback(Parameter As String)
         Using Context As New Entities
             Dim s = New LeadsSearchTask
-            s.TaksName = e.Parameter.Split("|")(0)
-            s.SearchFileds = e.Parameter.Split("|")(1)
+            s.TaksName = Parameter.Split("|")(0)
+
+            Dim hasSameTask = Context.LeadsSearchTasks.Where(Function(l) l.TaksName = s.TaksName).FirstOrDefault
+            If (hasSameTask IsNot Nothing) Then
+
+                Alert("Already has Search named " + s.TaksName + " please picker another name!")
+                Return
+
+            End If
+            s.SearchFileds = Parameter.Split("|")(1)
             s.CreateBy = Page.User.Identity.Name
             s.CreateTime = Date.Now
             Context.LeadsSearchTasks.Add(s)
             Context.SaveChanges()
 
             WorkflowService.StartLeadsSearchProcess(s.TaksName, s.TaksName, s.SearchFileds, s.Id)
+            Alert(" Your request has been submitted. Estimated time is 48 hours to upload.<br>The system will notify you upon completion._call_funcClosePupUp")
         End Using
     End Sub
 
-    Protected Sub cbStartProcess_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
-    End Sub
-
-
-
-
-    Protected Sub QueryResultsGrid_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
-        If (e.Parameters.StartsWith("loadFunction")) Then
-            Dim funName = e.Parameters.Split("|")(1)
-            CallByName(Me, funName, CallType.Method)
-        Else
-            Dim SearchName = e.Parameters
-            BindGrid(SearchName)
-        End If
-        
-
-
-    End Sub
+   
     Protected Sub BindGrid(SearchName As String)
         Using context As New Entities
             Dim results = context.SearchResults.Where(Function(s) s.Type = SearchName).ToList
             'Dim s As SearchResult
-
+            LoadLeadsCount = results.Count
             QueryResultsGrid.DataSource = results
             QueryResultsGrid.DataBind()
-
+            hfSearchName.Value = SearchName
         End Using
     End Sub
 
@@ -110,9 +110,9 @@ Public Class LeadsGenerator
 
     End Sub
     Protected Sub Alert(message As String)
-        ' ErrorMessage.Item("hidden_value") = message
+        ErrorMessage.Item("hidden_value") = message
 
-        Throw New Exception(message)
+        'Throw New Exception(message)
     End Sub
     Protected Function HasNewLeadsInProtal() As Integer
         Using Context As New Entities
@@ -150,7 +150,7 @@ Public Class LeadsGenerator
                 Context.SaveChanges()
             End Using
         Else
-            Throw New Exception("Only can import !" + maxAdd)
+            Alert("Only can import " + maxAdd + " Leads !")
         End If
     End Sub
 
@@ -160,4 +160,25 @@ Public Class LeadsGenerator
         service.DataLoop("New")
     End Sub
 
+    Protected Sub cpTableView_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        If (e.Parameter.StartsWith("loadFunction")) Then
+            Dim funName = e.Parameter.Split("|")(1)
+            Dim funCall = "|" + funName + "|"
+            Dim indexFunCall = e.Parameter.IndexOf(funCall)
+            If (indexFunCall > 0) Then
+
+                Dim parameter = e.Parameter.Substring(indexFunCall + funCall.Length)
+                CallByName(Me, funName, CallType.Method, parameter)
+            Else
+                CallByName(Me, funName, CallType.Method)
+            End If
+
+        Else
+            Dim SearchName = e.Parameter
+
+            BindGrid(SearchName)
+
+        End If
+
+    End Sub
 End Class
