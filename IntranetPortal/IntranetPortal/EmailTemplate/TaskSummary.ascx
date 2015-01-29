@@ -3,15 +3,23 @@
 Dear <%= DestinationUser%>,
 <br />
 <br />
-As so far, you have totally <%= TaskCount%> tasks. Please review below list and complete.<br />
+Below are <b><%= TaskCount%></b> outstanding reminders or Tasks that are in your Que. Please review and complete them.
+<%--As so far, you have totally <b><%= TaskCount%></b> tasks. Please review below list and complete as soon as possible.--%><br />
 <br />
+Regards,<br />
+My Ideal Property PORTAL team. <br />
+This is an auto-generated Email. No reply is necessary. 
+<br />
+<br />
+
+
 <asp:Repeater runat="server" ID="rptWorklist" OnItemDataBound="rptWorklist_ItemDataBound">
     <HeaderTemplate>
         <table>
             <thead>
                 <tr style="font-weight: 800">
-                    <td style="width: 300px">Name</td>
-                    <td style="width: 150px">Originator</td>
+                    <td style="width: 300px"></td>
+                    <td style="width: 150px">From</td>
                     <td style="width: 150px">Create Date</td>
                     <td></td>
                 </tr>
@@ -19,7 +27,7 @@ As so far, you have totally <%= TaskCount%> tasks. Please review below list and 
     </HeaderTemplate>
     <ItemTemplate>
         <tr>
-            <td colspan="5" style="font-weight: 800; background-color:#efefef">
+            <td colspan="5" style="font-weight: 800; background-color: #cfcfcf">
                 <%# Eval("ProcSchemeDisplayName")%>
             </td>
         </tr>
@@ -32,6 +40,14 @@ As so far, you have totally <%= TaskCount%> tasks. Please review below list and 
                     <td></td>
                 </tr>
             </ItemTemplate>
+            <AlternatingItemTemplate>
+                <tr style="background-color: whitesmoke">
+                    <td><a href='http://portal.myidealprop.com<%# Eval("ItemData") %>'><%# Eval("DisplayName")%></a></td>
+                    <td><%# Eval("Originator")%></td>
+                    <td><%# Eval("StartDate", "{0:g}") %></td>
+                    <td></td>
+                </tr>
+            </AlternatingItemTemplate>
         </asp:Repeater>
     </ItemTemplate>
     <FooterTemplate>

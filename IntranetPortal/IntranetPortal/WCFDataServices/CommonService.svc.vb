@@ -5,8 +5,6 @@
 Public Class CommonService
     Implements ICommonService
 
-
-
     Public Sub SendEmail(userName As String, subject As String, body As String) Implements ICommonService.SendEmail
         Dim emp = Employee.GetInstance(userName)
         IntranetPortal.Core.EmailService.SendMail(emp.Email, "", subject, body, Nothing)
@@ -34,7 +32,12 @@ Public Class CommonService
 
     Public Sub SendTaskSummaryEmail(userName As String) Implements ICommonService.SendTaskSummaryEmail
         Dim emp = Employee.GetInstance(userName)
-        IntranetPortal.Core.EmailService.SendMail(emp.Email, "", "Task Summary", LoadSummaryEmail(userName), Nothing)
+
+        Dim emailData As New Dictionary(Of String, String)
+        emailData.Add("Body", LoadSummaryEmail(userName))
+        emailData.Add("Date", DateTime.Today.ToString("m"))
+        'IntranetPortal.Core.EmailService.SendMail("Chris@gvs4u.com", "", "Task Summary on " & DateTime.Now, LoadSummaryEmail(userName), Nothing)
+        IntranetPortal.Core.EmailService.SendMail(emp.Email, "chris@gvs4u.com", "UserTaskSummary", emailData)
     End Sub
 
     Private Function LoadSummaryEmail(userName As String) As String

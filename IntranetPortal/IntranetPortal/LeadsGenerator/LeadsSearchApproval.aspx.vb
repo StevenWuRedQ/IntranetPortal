@@ -6,7 +6,6 @@ Public Class LeadsSearchApproval
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
             Binddata()
-
         End If
     End Sub
 
@@ -35,15 +34,18 @@ Public Class LeadsSearchApproval
             SearchName = procInst.GetDataFieldValue("SearchName")
             SearchData = procInst.GetDataFieldValue("SearchData")
             Applicant = procInst.Originator
+            SubmitedDate = procInst.StartDate
             ActivityName = procInst.ActivityInstances.Last.ActivityName
             tdButton.Visible = False
         End If
     End Sub
+
     Private Sub GetTestData()
         Using Context As New Entities
             SearchData = Context.LeadsSearchTasks.ToList.Last().SearchFileds.ToString
         End Using
     End Sub
+
     Protected Sub cbApproval_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))

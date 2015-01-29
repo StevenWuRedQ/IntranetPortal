@@ -166,7 +166,7 @@ InitialLine:
                     Case 3
                         Thread.Sleep(300000)
                     Case Else
-
+                        NotifyUserDataServiceIsOff()
                         Thread.Sleep(1000000)
                 End Select
 
@@ -237,6 +237,15 @@ InitialLine:
                     End If
                 End If
         End Select
+    End Sub
+
+    Private Sub NotifyUserDataServiceIsOff()
+        Using client As New PortalService.CommonServiceClient
+            Dim emaildata As New Dictionary(Of String, String)
+            emaildata.Add("UserName", "Chris Yan")
+            client.SendEmailByTemplate("Chris Yan", "LoopServiceNotAvaiable", emaildata)
+        End Using
+
     End Sub
 End Class
 

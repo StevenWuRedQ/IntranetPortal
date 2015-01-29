@@ -11,9 +11,7 @@
                 Response.End()
                 Return
             End If
-
             LoadData(bble)
-            
             Return
         End If
 
@@ -32,6 +30,15 @@
             If procInst IsNot Nothing Then
                 Dim bble = procInst.GetDataFieldValue("BBLE")
                 If Not String.IsNullOrEmpty(bble) Then
+                    'check if this leads is waiting manager approval
+                    Dim ld = IntranetPortal.Lead.GetInstance(bble)
+                    If ld.Status = IntranetPortal.LeadStatus.MgrApprovalInWf Then
+                        Response.Clear()
+                        Response.Write("This leads is pending for manager approval. Please wait.")
+                        Response.End()
+                        Return
+                    End If
+
                     LoadData(bble)
                 End If
             End If
