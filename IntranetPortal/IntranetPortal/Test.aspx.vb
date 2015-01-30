@@ -4,7 +4,7 @@ Public Class Test
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Response.Write(Roles.IsUserInRole("123", "OfficeManager-Bronx"))
+        'Response.Write(Roles.IsUserInRole("123", "OfficeManager-Bronx"))
         LoadSummaryEmail("Chris Yan")
     End Sub
 

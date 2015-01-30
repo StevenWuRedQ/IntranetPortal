@@ -14,7 +14,7 @@
         Else
             Dim user = Request.QueryString("u").ToString
             lblUserName.Text = "Name: " & user
-            GridWorklist.DataSource = MyIdealProp.Workflow.DBPersistence.Worklist.GetUserWorklist(user)
+            GridWorklist.DataSource = MyIdealProp.Workflow.DBPersistence.Worklist.GetUserWorklistReport(user)
             GridWorklist.Columns("DestinationUser").Visible = False
         End If
     End Sub

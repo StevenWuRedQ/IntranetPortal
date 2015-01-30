@@ -7,7 +7,7 @@
 
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-    <script>
+    <script type="text/javascript">
         function SearchLeads() {
 
             popUpSearch();

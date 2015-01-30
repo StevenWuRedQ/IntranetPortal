@@ -7,13 +7,55 @@ Below are <b><%= TaskCount%></b> outstanding reminders or Tasks that are in your
 <%--As so far, you have totally <b><%= TaskCount%></b> tasks. Please review below list and complete as soon as possible.--%><br />
 <br />
 Regards,<br />
-My Ideal Property PORTAL team. <br />
+My Ideal Property PORTAL team.
+<br />
+<br />
 This is an auto-generated Email. No reply is necessary. 
 <br />
 <br />
 
-
 <asp:Repeater runat="server" ID="rptWorklist" OnItemDataBound="rptWorklist_ItemDataBound">
+    <ItemTemplate>
+        <h3><%# Eval("ProcSchemeDisplayName")%></h3>
+        <asp:Repeater runat="server" ID="rptWorklistItem">
+            <ItemTemplate>
+                <table style="width:500px">
+                    <tr>
+                        <td colspan="2">
+                            <hr />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:150px">Property Address:</td>
+                        <td><a href='http://portal.myidealprop.com<%# Eval("ItemData") %>'><%# Eval("DisplayName")%></a></td>
+                    </tr>
+                    <tr>
+                        <td>Create By:</td>
+                        <td><%# Eval("Originator")%></td>
+                    </tr>
+                    <tr>
+                        <td>Date Created:</td>
+                        <td><%# Eval("StartDate", "{0:g}") %></td>
+                    </tr>
+                    <tr>
+                        <td>Description:</td>
+                        <td><%# Eval("Description")%></td>
+                    </tr>
+                    <tr runat="server" visible='<%# Eval("ShowPortalMsg")%>'>
+                        <td>PORTAL Message:</td>
+                        <td><%# Eval("PortalMsg")%></td>
+                    </tr>
+                </table>
+            </ItemTemplate>
+          
+        </asp:Repeater>
+    </ItemTemplate>
+    <FooterTemplate>       
+    </FooterTemplate>
+</asp:Repeater>
+<br />
+<br />
+<%--<asp:Repeater runat="server" ID="rptWorklist" OnItemDataBound="rptWorklist_ItemDataBound">
     <HeaderTemplate>
         <table>
             <thead>
@@ -53,10 +95,4 @@ This is an auto-generated Email. No reply is necessary.
     <FooterTemplate>
         </table>
     </FooterTemplate>
-</asp:Repeater>
-<br />
-<br />
-Regards,<br />
-My Ideal Property PORTAL team.
-        <br />
-<small>This is an automatic email. Please do not reply.</small>
+</asp:Repeater>--%>

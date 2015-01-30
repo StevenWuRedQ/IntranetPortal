@@ -334,6 +334,10 @@
                 debt += C2ndMotgrAmt
             End If
 
+            If C3rdMortgrAmt.HasValue Then
+                debt += C3rdMortgrAmt
+            End If
+
             If TaxesAmt.HasValue Then
                 debt += TaxesAmt
             End If
