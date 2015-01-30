@@ -104,7 +104,11 @@ Public Class EmailSummaryRule
         Dim emps = Employee.GetAllActiveEmps()
         Using client As New PortalService.CommonServiceClient
             For Each emp In emps
-                client.SendTaskSummaryEmail(emp)
+                Try
+                    client.SendTaskSummaryEmail(emp)
+                Catch ex As Exception
+                    Log("Send Task Summary Email Error. Employee Name: " & emp, ex)
+                End Try
             Next
         End Using
     End Sub

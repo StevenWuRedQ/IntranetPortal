@@ -20,7 +20,6 @@ Public Class Test
             Using tw As New StringWriter(sb)
                 Using hw As New HtmlTextWriter(tw)
                     ts.RenderControl(hw)
-                    hw.Write("End")
                 End Using
             End Using
 

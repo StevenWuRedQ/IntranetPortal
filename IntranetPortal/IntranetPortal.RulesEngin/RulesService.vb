@@ -55,15 +55,15 @@ Public Class RulesService
     Dim rules As List(Of BaseRule)
     Private Sub InitRules()
         rules = New List(Of BaseRule)
-        'rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Leads and Task Rule"})
-        'rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:01"), .Period = TimeSpan.Parse("00:10:00"), .RuleName = "Data Loop Rule"})
-        'rules.Add(New EmailSummaryRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "User Task Summary Rule"})
-        'rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("02:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Assign Leads Rule"})
+        rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Leads and Task Rule"})
+        rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:01"), .Period = TimeSpan.Parse("00:20:00"), .RuleName = "Data Loop Rule"})
+        rules.Add(New EmailSummaryRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "User Task Summary Rule"})
+        rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("02:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Assign Leads Rule"})
 
-        rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("0:1:0"), .RuleName = "Leads and Task Rule"})
-        rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:01"), .Period = TimeSpan.Parse("00:1:00"), .RuleName = "Data Loop Rule"})
-        rules.Add(New EmailSummaryRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("0:1:0"), .RuleName = "User Task Summary Rule"})
-        rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("02:00:00"), .Period = TimeSpan.Parse("0:1:0"), .RuleName = "Assign Leads Rule"})
+        'rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("0:1:0"), .RuleName = "Leads and Task Rule"})
+        'rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:01"), .Period = TimeSpan.Parse("00:1:00"), .RuleName = "Data Loop Rule"})
+        'rules.Add(New EmailSummaryRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("0:1:0"), .RuleName = "User Task Summary Rule"})
+        'rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("02:00:00"), .Period = TimeSpan.Parse("0:1:0"), .RuleName = "Assign Leads Rule"})
     End Sub
 
     Public Sub StopService()
@@ -115,7 +115,7 @@ Public Class RulesService
             If WorkingHours.IsWorkingDay(DateTime.Now) Then
                 'Run Rules
                 'RunRules()
-                'State.Rule.Execute()
+                State.Rule.Execute()
             End If
         Catch ex As Exception
             Log("Exception in Run Rules", ex)

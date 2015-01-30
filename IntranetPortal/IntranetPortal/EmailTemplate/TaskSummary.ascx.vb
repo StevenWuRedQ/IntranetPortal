@@ -26,16 +26,6 @@ Public Class TaskSummary
             Dim rptItems = CType(e.Item.FindControl("rptWorklistItem"), Repeater)
             Dim wls = CType(DataBinder.Eval(e.Item.DataItem, "Data"), WorklistItem())
 
-            'Dim data = (From wl In wls
-            '           Select New With {
-            '               .DisplayName = wl.DisplayName,
-            '               .ItemData = wl.ItemData,
-            '               .Originator = wl.Originator,
-            '               .StartDate = wl.StartDate,
-            '               .Description = wl.ProcInstId,
-            '               .PortalMsg = ""
-            '               }).ToList
-
             Dim tasks As New List(Of TaskItem)
             For Each wl In wls
                 Dim item As New TaskItem With

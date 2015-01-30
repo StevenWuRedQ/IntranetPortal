@@ -10,7 +10,7 @@ Regards,<br />
 My Ideal Property PORTAL team.
 <br />
 <br />
-This is an auto-generated Email. No reply is necessary. 
+<small>This is an auto-generated Email. No reply is necessary. </small>
 <br />
 <br />
 
