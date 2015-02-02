@@ -127,14 +127,15 @@
 }
 
 @media (max-width: 1199px) {
-	/*#ctl00_MainContentPH_UserSummary_contentSplitter_1 {
+    /*#ctl00_MainContentPH_UserSummary_contentSplitter_1 {
 		display: none;
 	}*/
 }
-.dxmLite_MetropolisBlue1.dxm-ltr .dxm-popup .dxm-image
-{
-    margin-top:4px;
+
+.dxmLite_MetropolisBlue1.dxm-ltr .dxm-popup .dxm-image {
+    margin-top: 4px;
 }
+
 .rand-pop {
     box-shadow: 2.5px 4.33px 40px 0px rgba(2, 2, 2, 0.3);
     border-radius: 5px;
@@ -588,7 +589,7 @@ label {
 
 .note_item {
     /*height: 40px;*/
-    padding:10px;
+    padding: 10px;
     border-bottom: 1px solid white;
     /*line-height: 40px;*/
     background: #f5f5f5;
@@ -1153,10 +1154,11 @@ pre#event-log {
 .border_right {
     border-right: 1px solid #dde0e7;
 }
-.doc_border_left 
-{
-    border-left:3px solid #dde0e7;
+
+.doc_border_left {
+    border-left: 3px solid #dde0e7;
 }
+
 .doc_list_checks {
     margin-top: 0px !important;
     /*width: 290px;*/
@@ -1167,10 +1169,11 @@ pre#event-log {
     .doc_list_checks:hover {
         background: #f0f2f6;
     }
-    .doc_list_checks_sub
-    {
-        margin-left:8px;
-    }
+
+.doc_list_checks_sub {
+    margin-left: 8px;
+}
+
 .font_16 {
     font-size: 16px;
 }
@@ -1195,10 +1198,11 @@ input + label.font_12 {
     padding-top: 28px;
     padding-left: 9px;
 }
-.doc_list_section_sub
-{
-     padding-top: 0px;
+
+.doc_list_section_sub {
+    padding-top: 0px;
 }
+
 .save_report_list {
 }
 
@@ -2127,8 +2131,21 @@ td.vendor_info_left {
     display: none !important;
 }
 
-.list_text_border
-{
+.list_text_border {
     border-left: 3px solid;
-    padding-left:6px;
+    padding-left: 6px;
 }
+
+/*management UI*/
+.magement_number {
+    padding: 2px 6px;
+    color: white;
+    background: #ff400d;
+    border-radius: 4px;
+}
+.magement_font
+{
+    font-size:14px;
+    font-weight:400
+}
+/*end magagement UI*/
