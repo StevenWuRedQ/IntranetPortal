@@ -45,7 +45,7 @@
 
         function removeEmpty(test) {
             for (var i in test) {
-                if (test[i] === null || test[i] === undefined || test[i] === "" || test[i]==false) {
+                if (test[i] === null || test[i] === undefined || test[i] === "" || test[i] == false) {
 
                     delete test[i];
                 } else if (typeof test[i] == 'object') {
@@ -112,20 +112,17 @@
             tableViewClinetCallBack.PerformCallback($("#LoadSearchName").val());
         }
         loadCallBack = {}
-        loadCallBack.ClosePupUp= function()
-        {
+        loadCallBack.ClosePupUp = function () {
             SaveSearchPopupClient.Hide();
             ;
         }
         function LoadCallBackCompleted() {
             var message = ErrorMessageClient.Get("hidden_value");
-            if (message != null && message!='')
-            {
-                if (message.indexOf("_call_func")>=0)
-                {
+            if (message != null && message != '') {
+                if (message.indexOf("_call_func") >= 0) {
                     var funcName = message.split("_call_func")[1];
                     loadCallBack[funcName]();
-                    message = message.substring(0,message.indexOf("_call_func"));
+                    message = message.substring(0, message.indexOf("_call_func"));
                 }
                 //alert(message);
                 $("#messageBody").html(message);
@@ -135,13 +132,13 @@
             }
             //QueryResultsGridClient.Refresh();
 
-           
+
         }
         function loadFunction(funName) {
             tableViewClinetCallBack.PerformCallback("loadFunction|" + funName)
         }
     </script>
-   
+
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Width="100%" Height="100%" ClientInstanceName="sampleSplitter" FullscreenMode="true">
         <Styles>
             <Pane>
@@ -825,24 +822,28 @@
                                                 <PanelCollection>
 
                                                     <dx:PanelContent>
-                                                        <asp:HiddenField ID="hfSearchName"  runat="server"/>
+                                                        <asp:HiddenField ID="hfSearchName" runat="server" />
                                                         <dx:ASPxHiddenField runat="server" ID="ErrorMessage" ClientInstanceName="ErrorMessageClient"></dx:ASPxHiddenField>
                                                         <div style="padding: 30px">
                                                             <div style="margin: 0 10px; font-size: 36px" class="clear-fix">
                                                                 <i class="fa fa-folder-open color_gray"></i>&nbsp;<span class="font_black"><span id="ResultsCount"><%=LoadLeadsCount %></span> Results</span>
                                                                 <div style="float: right">
+                                                                    <button class="rand-button bg_color_blue fa-sh rand-button-padding" type="button" id="Select250" onclick="loadFunction('Select250_ServerClick')">Select 250 Random for me !</button>
                                                                     <button style="margin-right: 10px" class="rand-button bg_color_blue rand-button-padding" type="button" id="ImportSelect" onclick="loadFunction('ImportSelect_ServerClick')">Import Selected</button>
-                                                                    <button class="rand-button bg_color_blue rand-button-padding" type="button" id="Select250" onclick="loadFunction('Select250_ServerClick')">Select fill bank Leads <%--Select 250 Random--%></button>
+                                                                   
+                                                                    <asp:LinkButton ID="btnExport" runat="server" OnClick="btnXlsxExport_Click" Text='<i class="fa fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Save Excel"></i>'>                                                                
+                                                                    </asp:LinkButton>
                                                                 </div>
                                                             </div>
                                                             <div style="margin-top: 30px">
 
                                                                 <dx:ASPxGridView ID="QueryResultsGrid" runat="server"
                                                                     OnHtmlRowPrepared="QueryResultsGrid_HtmlRowPrepared"
-                                                                    ClientInstanceName="QueryResultsGridClient" Width="100%" KeyFieldName="Id" SettingsPager-PageSize="12" >
+                                                                    ClientInstanceName="QueryResultsGridClient" Width="100%" KeyFieldName="Id" SettingsPager-PageSize="12"  OnCommandButtonInitialize="QueryResultsGrid_CommandButtonInitialize">
                                                                     <Columns>
                                                                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" SelectAllCheckboxMode="AllPages">
                                                                         </dx:GridViewCommandColumn>
+                                                                        <dx:GridViewDataColumn FieldName="BBLE" VisibleIndex="0"></dx:GridViewDataColumn>
                                                                         <dx:GridViewDataColumn FieldName="LeadsName" VisibleIndex="1" />
                                                                         <dx:GridViewDataColumn FieldName="Neigh_Name" />
                                                                         <dx:GridViewDataColumn FieldName="MotgCombo" />
@@ -853,7 +854,7 @@
                                                                         <dx:GridViewDataColumn FieldName="Servicer" />
                                                                         <dx:GridViewDataColumn FieldName="MotgCombo" />
                                                                         <dx:GridViewDataColumn FieldName="Type" />
-                                                                        <dx:GridViewDataColumn FieldName="AgentInLeads">
+                                                                        <dx:GridViewDataColumn FieldName="AgentInLeads" Caption="Assign To">
                                                                             <%-- <DataItemTemplate>
                                                                      <div>
                                                                          <% If (String.IsNullOrEmpty(Eval("AgentInLeads"))) Then%>
@@ -862,6 +863,7 @@
                                                                         
                                                                      </div>
                                                                  </DataItemTemplate>--%>
+                                                                            
                                                                         </dx:GridViewDataColumn>
                                                                     </Columns>
                                                                     <Styles>
@@ -869,8 +871,10 @@
                                                                         </SelectedRow>
                                                                     </Styles>
                                                                     <Settings />
-                                                                   <%-- <ClientSideEvents EndCallback="function(s,e) { LoadCallBackCompleted(e.result)}" />--%>
+                                                                    <%-- <ClientSideEvents EndCallback="function(s,e) { LoadCallBackCompleted(e.result)}" />--%>
                                                                 </dx:ASPxGridView>
+                                                                <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="QueryResultsGrid"></dx:ASPxGridViewExporter>
+                                                                
                                                             </div>
                                                         </div>
                                                     </dx:PanelContent>
@@ -896,7 +900,7 @@
         ClientInstanceName="SaveSearchPopupClient"
         CloseAction="CloseButton" ShowFooter="true" Width="550"
         HeaderText="Save Search " Modal="true"
-        PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableViewState="false" EnableHierarchyRecreation="True" >
+        PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableViewState="false" EnableHierarchyRecreation="True">
         <HeaderTemplate>
             <div class="clearfix">
 
@@ -931,7 +935,7 @@
             </div>
 
         </FooterContentTemplate>
-       <%-- <ClientSideEvents EndCallback="function(s,e){
+        <%-- <ClientSideEvents EndCallback="function(s,e){
                 SaveSearchPopupClient.Hide();
                 $('#msgModal').modal();
             }" />--%>

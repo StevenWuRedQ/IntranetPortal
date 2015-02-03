@@ -2143,9 +2143,74 @@ td.vendor_info_left {
     background: #ff400d;
     border-radius: 4px;
 }
-.magement_font
-{
-    font-size:14px;
-    font-weight:400
+
+.magement_font {
+    font-size: 14px;
+    font-weight: 400;
 }
+
+.management_score {
+    background: white;
+    color: #77787b;
+    font-weight: 300;
+    margin-left: 50px;
+    border: 1px solid #dde0e7;
+    padding: 0px 15px;
+}
+
+.management_molecular {
+    color: #ff400d;
+    font-size: 36px;
+}
+
+.management_denominator {
+    font-size: 24px;
+}
+
+.management_text {
+    font-size: 14px;
+    color: #77787b;
+    font-weight: 300;
+}
+
+.management_search_icon {
+    font-size: 24px;
+    color: #3993c1;
+}
+
+.mag_tab {
+    width: 25%;
+    text-align: center;
+    vertical-align: middle;
+    background: #eff2f5;
+    color: #77787b;
+    border: none;
+}
+
+li.active.mag_tab {
+    font-weight: 800;
+    background: white !important;
+    border:none !important;
+}
+
+.mag_tab_panel {
+    border: 1px solid #dde0e7;
+    border-radius: 5px;
+}
+.mag_tab_text
+{
+    color:#77787b;
+    border:none;
+}
+ .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus.mag_tab_text
+{
+    border:none;
+}
+ .mag_tab_input_group
+ {
+     padding:15px 20px;
+     background:#eff2f5;
+     border-radius:5px;
+
+ }
 /*end magagement UI*/

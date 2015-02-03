@@ -94,16 +94,18 @@ Public Class LeadsGenerator
             Alert("You have enough leads in your bank !")
             Return
         End If
-        For Each rt In CType(QueryResultsGrid.DataSource, List(Of SearchResult))
+        Dim i = 0
+        For Each tr In CType(QueryResultsGrid.DataSource, List(Of SearchResult))
             'Dim resultId As Integer = Convert.ToInt32(rt.Item("Id"))
             'Dim s = SearchResult.getSeachResult(resultId)
-            If String.IsNullOrEmpty(rt.AgentInLeads) Then
-                QueryResultsGrid.Selection.SelectRow(count)
+            If String.IsNullOrEmpty(tr.AgentInLeads) Then
+                QueryResultsGrid.Selection.SelectRow(i)
                 count = count + 1
                 If (count >= maxAdd) Then
                     Exit For
                 End If
             End If
+            i = i + 1
         Next
 
     End Sub
@@ -125,7 +127,7 @@ Public Class LeadsGenerator
     End Function
 
     Public Sub ImportSelect_ServerClick()
-        Dim maxAdd = LeadMaxAdd()
+        Dim maxAdd As Integer = LeadMaxAdd()
         Dim selectrows = QueryResultsGrid.GetSelectedFieldValues("BBLE")
         If selectrows.Count <= 0 Then
             Alert("You didn't select leads !")
@@ -133,7 +135,7 @@ Public Class LeadsGenerator
             Alert("You have enough leads in bank!")
         End If
         Dim empID = Employee.GetInstance(Page.User.Identity.Name).EmployeeID
-        If selectrows.Count > maxAdd Then
+        If selectrows.Count < maxAdd Then
             Using Context As New Entities
                 For Each row In selectrows
                     Dim l = New Lead
@@ -182,4 +184,18 @@ Public Class LeadsGenerator
 
         End If
     End Sub
+
+    Protected Sub btnXlsxExport_Click(sender As Object, e As EventArgs)
+        gridExport.WriteXlsxToResponse()
+    End Sub
+
+    Protected Sub QueryResultsGrid_CommandButtonInitialize(sender As Object, e As ASPxGridViewCommandButtonEventArgs)
+        Dim gvCommandButton = CType(e, ASPxGridViewCommandButtonEventArgs)
+        Dim ag = CType(QueryResultsGrid.GetRow(e.VisibleIndex), SearchResult)
+        If ag IsNot Nothing And (Not String.IsNullOrEmpty(ag.AgentInLeads)) Then
+            e.Enabled = False
+        End If
+    End Sub
+
+  
 End Class

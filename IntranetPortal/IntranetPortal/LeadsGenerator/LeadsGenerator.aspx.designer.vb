@@ -50,6 +50,15 @@ Partial Public Class LeadsGenerator
     Protected WithEvents ErrorMessage As Global.DevExpress.Web.ASPxHiddenField.ASPxHiddenField
 
     '''<summary>
+    '''btnExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''QueryResultsGrid control.
     '''</summary>
     '''<remarks>
@@ -57,6 +66,15 @@ Partial Public Class LeadsGenerator
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents QueryResultsGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''gridExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
 
     '''<summary>
     '''SaveSearchPopup control.
