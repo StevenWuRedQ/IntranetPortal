@@ -50,6 +50,15 @@ Partial Public Class LeadsGenerator
     Protected WithEvents ErrorMessage As Global.DevExpress.Web.ASPxHiddenField.ASPxHiddenField
 
     '''<summary>
+    '''hfFilterOutExist control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfFilterOutExist As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''btnExport control.
     '''</summary>
     '''<remarks>

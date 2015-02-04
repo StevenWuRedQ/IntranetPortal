@@ -9,20 +9,22 @@ Public Class LeadsGenerator
     Public CompletedTask As New List(Of LeadsSearchTask)
     Public MaxSelect = 250
     Public LoadLeadsCount = 0
+    Public bfilterOutExist As Boolean = False
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        If (Not Page.IsPostBack) Then
+            hfFilterOutExist.Value = "false"
+            DataBinds()
+            Dim SearchName = (Request.QueryString("n"))
+            If (Not String.IsNullOrEmpty(SearchName)) Then
+                BindGrid(SearchName)
 
-        DataBinds()
-        Dim SearchName = (Request.QueryString("n"))
-        If (Not String.IsNullOrEmpty(SearchName)) Then
-            BindGrid(SearchName)
-
-        End If
-
-        If (Page.IsPostBack) Then
-            If (Not String.IsNullOrEmpty(hfSearchName.Value)) Then
-                BindGrid(hfSearchName.Value)
             End If
+
+
+            'If (Not String.IsNullOrEmpty(hfSearchName.Value)) Then
+            '    BindGrid(hfSearchName.Value)
+            'End If
         End If
     End Sub
 
@@ -63,8 +65,34 @@ Public Class LeadsGenerator
 
     Protected Sub BindGrid(SearchName As String)
         Using context As New Entities
-            Dim results = context.SearchResults.Where(Function(s) s.Type = SearchName).ToList
+
+
+
+            Dim results = (From sr In context.SearchResults.Where(Function(s) s.Type = SearchName)
+                      From ld In context.Leads.Where(Function(l) sr.BBLE = l.BBLE).DefaultIfEmpty
+                      Select New With {
+                          .Id = sr.Id,
+                          .BBLE = sr.BBLE,
+                          .LeadsName = sr.LeadsName,
+                          .Neigh_Name = sr.Neigh_Name,
+                          .MotgCombo = sr.MotgCombo,
+                          .TaxCombo = sr.TaxCombo,
+                          .ORIG_SQFT = sr.ORIG_SQFT,
+                          sr.CLass,
+                          sr.LOT_DIM,
+                          sr.Servicer,
+                          sr.Type,
+                          .AgentInLeads = ld.EmployeeName}).ToList
+
+
+
             'Dim s As SearchResult
+
+
+            bfilterOutExist = CBool(hfFilterOutExist.Value)
+            If (bfilterOutExist) Then
+                results = results.Where(Function(s) s.AgentInLeads Is Nothing).ToList()
+            End If
             LoadLeadsCount = results.Count
             QueryResultsGrid.DataSource = results
             QueryResultsGrid.DataBind()
@@ -95,7 +123,7 @@ Public Class LeadsGenerator
             Return
         End If
         Dim i = 0
-        For Each tr In CType(QueryResultsGrid.DataSource, List(Of SearchResult))
+        For Each tr In CType(QueryResultsGrid.DataSource, List(Of Object))
             'Dim resultId As Integer = Convert.ToInt32(rt.Item("Id"))
             'Dim s = SearchResult.getSeachResult(resultId)
             If String.IsNullOrEmpty(tr.AgentInLeads) Then
@@ -131,8 +159,10 @@ Public Class LeadsGenerator
         Dim selectrows = QueryResultsGrid.GetSelectedFieldValues("BBLE")
         If selectrows.Count <= 0 Then
             Alert("You didn't select leads !")
+            Return
         ElseIf (selectrows.Count > maxAdd) Then
-            Alert("You have enough leads in bank!")
+            Alert("You have enough leads in bank !")
+            Return
         End If
         Dim empID = Employee.GetInstance(Page.User.Identity.Name).EmployeeID
         If selectrows.Count < maxAdd Then
@@ -190,12 +220,31 @@ Public Class LeadsGenerator
     End Sub
 
     Protected Sub QueryResultsGrid_CommandButtonInitialize(sender As Object, e As ASPxGridViewCommandButtonEventArgs)
+        'If (QueryResultsGrid.DataSource Is Nothing) Then
+        '    BindGrid(hfSearchName.Value)
+        'End If
+
         Dim gvCommandButton = CType(e, ASPxGridViewCommandButtonEventArgs)
-        Dim ag = CType(QueryResultsGrid.GetRow(e.VisibleIndex), SearchResult)
+        Dim ag = CType(QueryResultsGrid.GetRow(e.VisibleIndex), Object)
         If ag IsNot Nothing And (Not String.IsNullOrEmpty(ag.AgentInLeads)) Then
+            e.Visible = False
             e.Enabled = False
         End If
     End Sub
 
   
+    
+
+    Public Sub dxfilterOutExist_CheckedChanged(e As String)
+        hfFilterOutExist.Value = e
+        If (Not String.IsNullOrEmpty(hfSearchName.Value)) Then
+            BindGrid(hfSearchName.Value)
+        End If
+    End Sub
+
+    Protected Sub QueryResultsGrid_DataBinding(sender As Object, e As EventArgs)
+        If QueryResultsGrid.DataSource Is Nothing Then
+            BindGrid(hfSearchName.Value)
+        End If
+    End Sub
 End Class

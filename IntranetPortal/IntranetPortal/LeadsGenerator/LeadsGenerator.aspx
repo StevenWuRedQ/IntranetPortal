@@ -137,6 +137,10 @@
         function loadFunction(funName) {
             tableViewClinetCallBack.PerformCallback("loadFunction|" + funName)
         }
+        function filterOutExitChange(e)
+        {
+            loadFunction('dxfilterOutExist_CheckedChanged|' + e.checked);
+        }
     </script>
 
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Width="100%" Height="100%" ClientInstanceName="sampleSplitter" FullscreenMode="true">
@@ -826,11 +830,17 @@
                                                         <dx:ASPxHiddenField runat="server" ID="ErrorMessage" ClientInstanceName="ErrorMessageClient"></dx:ASPxHiddenField>
                                                         <div style="padding: 30px">
                                                             <div style="margin: 0 10px; font-size: 36px" class="clear-fix">
-                                                                <i class="fa fa-folder-open color_gray"></i>&nbsp;<span class="font_black"><span id="ResultsCount"><%=LoadLeadsCount %></span> Results</span>
+                                                                <i class="fa fa-folder-open color_gray"></i>&nbsp;<span class="font_black"><span id="ResultsCount"><%=LoadLeadsCount %></span>Results</span>
                                                                 <div style="float: right">
+                                                                    <%--<dx:ASPxCheckBox ID="dxfilterOutExist" AutoPostBack="true" runat="server" OnCheckedChanged="dxfilterOutExist_CheckedChanged"> </dx:ASPxCheckBox>--%>
+                                                                   <asp:HiddenField runat="server" ID="hfFilterOutExist" />
+                                                                    <input type="checkbox" id="cbfilterOutExist" name="cbfilterOutExist" class="font_12" onchange="filterOutExitChange(this)"  <%= If( bfilterOutExist,"checked","")%>/>
+                                                                    <label for="cbfilterOutExist" class="font_12" style="float:left;padding-top: 26px;">
+                                                                        <span class="upcase_text">Don't show leads exist</span>
+                                                                    </label>
                                                                     <button class="rand-button bg_color_blue fa-sh rand-button-padding" type="button" id="Select250" onclick="loadFunction('Select250_ServerClick')">Select 250 Random for me !</button>
                                                                     <button style="margin-right: 10px" class="rand-button bg_color_blue rand-button-padding" type="button" id="ImportSelect" onclick="loadFunction('ImportSelect_ServerClick')">Import Selected</button>
-                                                                   
+
                                                                     <asp:LinkButton ID="btnExport" runat="server" OnClick="btnXlsxExport_Click" Text='<i class="fa fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Save Excel"></i>'>                                                                
                                                                     </asp:LinkButton>
                                                                 </div>
@@ -838,8 +848,8 @@
                                                             <div style="margin-top: 30px">
 
                                                                 <dx:ASPxGridView ID="QueryResultsGrid" runat="server"
-                                                                    OnHtmlRowPrepared="QueryResultsGrid_HtmlRowPrepared"
-                                                                    ClientInstanceName="QueryResultsGridClient" Width="100%" KeyFieldName="Id" SettingsPager-PageSize="12"  OnCommandButtonInitialize="QueryResultsGrid_CommandButtonInitialize">
+                                                                    OnHtmlRowPrepared="QueryResultsGrid_HtmlRowPrepared" OnDataBinding="QueryResultsGrid_DataBinding"
+                                                                    ClientInstanceName="QueryResultsGridClient" Width="100%" KeyFieldName="Id" SettingsPager-PageSize="12" OnCommandButtonInitialize="QueryResultsGrid_CommandButtonInitialize" Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="450">
                                                                     <Columns>
                                                                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" SelectAllCheckboxMode="AllPages">
                                                                         </dx:GridViewCommandColumn>
@@ -848,11 +858,11 @@
                                                                         <dx:GridViewDataColumn FieldName="Neigh_Name" />
                                                                         <dx:GridViewDataColumn FieldName="MotgCombo" />
                                                                         <dx:GridViewDataColumn FieldName="TaxCombo" />
-
+                                                                        <dx:GridViewDataColumn FieldName="CLass" />
                                                                         <dx:GridViewDataColumn FieldName="ORIG_SQFT" />
                                                                         <dx:GridViewDataColumn FieldName="LOT_DIM" />
                                                                         <dx:GridViewDataColumn FieldName="Servicer" />
-                                                                        <dx:GridViewDataColumn FieldName="MotgCombo" />
+
                                                                         <dx:GridViewDataColumn FieldName="Type" />
                                                                         <dx:GridViewDataColumn FieldName="AgentInLeads" Caption="Assign To">
                                                                             <%-- <DataItemTemplate>
@@ -863,18 +873,20 @@
                                                                         
                                                                      </div>
                                                                  </DataItemTemplate>--%>
-                                                                            
                                                                         </dx:GridViewDataColumn>
                                                                     </Columns>
                                                                     <Styles>
                                                                         <SelectedRow BackColor="#d9f1fd" ForeColor="#3993c1">
                                                                         </SelectedRow>
                                                                     </Styles>
-                                                                    <Settings />
+
+                                                                    <SettingsPager PageSize="12"></SettingsPager>
+
+                                                                    <Settings ShowFilterRow="True" ShowFilterRowMenu="true" ShowGroupPanel="True" ShowFooter="True" />
                                                                     <%-- <ClientSideEvents EndCallback="function(s,e) { LoadCallBackCompleted(e.result)}" />--%>
                                                                 </dx:ASPxGridView>
                                                                 <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="QueryResultsGrid"></dx:ASPxGridViewExporter>
-                                                                
+
                                                             </div>
                                                         </div>
                                                     </dx:PanelContent>
@@ -892,6 +904,9 @@
                     </dx:SplitterPane>
 
                 </Panes>
+                <ContentCollection>
+                    <dx:SplitterContentControl runat="server"></dx:SplitterContentControl>
+                </ContentCollection>
             </dx:SplitterPane>
         </Panes>
 
