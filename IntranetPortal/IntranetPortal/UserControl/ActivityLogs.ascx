@@ -800,9 +800,12 @@
                             <dx:ASPxComboBox runat="server" Width="100%" DropDownStyle="DropDown" ID="cbTaskAction" ClientInstanceName="cbTaskAction" CssClass="edit_drop">
                                 <Items>
                                     <dx:ListEditItem Text="" Value="" />
+                                   
+                                    <dx:ListEditItem Text="Manager Review Needed" Value="Manager Review Needed" />
+                                    <dx:ListEditItem Text="Update Needed" Value="Update Needed" />
+                                    <dx:ListEditItem Text="Person Lookup" Value="Lookup Request" />
+                                    <dx:ListEditItem Text="Incentive Offer" Value="Incentive Offer Needed" />
                                     <dx:ListEditItem Text="Documents Request" Value="Documents Request" />
-                                    <dx:ListEditItem Text="Lookup Request" Value="Lookup Request" />
-                                    <dx:ListEditItem Text="Incentive Offer Needed" Value="Incentive Offer Needed" />
                                     <dx:ListEditItem Text="Judgement Search Request" Value="Judgement Search Request" />
                                 </Items>
                                 <ValidationSettings ErrorDisplayMode="None">
@@ -929,7 +932,7 @@
                                                                                                                         }"></ClientSideEvents>
                                     </dx:ASPxButton>
                                     &nbsp;
-                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
+                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CausesValidation="false" CssClass="rand-button rand-button-gray">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSetAsTaskControl.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>

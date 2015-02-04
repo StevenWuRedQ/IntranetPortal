@@ -132,7 +132,7 @@
             }
             //QueryResultsGridClient.Refresh();
 
-
+           
         }
         function loadFunction(funName) {
             tableViewClinetCallBack.PerformCallback("loadFunction|" + funName)
@@ -142,7 +142,7 @@
             loadFunction('dxfilterOutExist_CheckedChanged|' + e.checked);
         }
     </script>
-
+   
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Width="100%" Height="100%" ClientInstanceName="sampleSplitter" FullscreenMode="true">
         <Styles>
             <Pane>
@@ -855,7 +855,7 @@
                                                                         </dx:GridViewCommandColumn>
                                                                         <dx:GridViewDataColumn FieldName="BBLE" VisibleIndex="0"></dx:GridViewDataColumn>
                                                                         <dx:GridViewDataColumn FieldName="LeadsName" VisibleIndex="1" />
-                                                                        <dx:GridViewDataColumn FieldName="Neigh_Name" />
+                                                                   <%--     <dx:GridViewDataColumn FieldName="Neigh_Name" />
                                                                         <dx:GridViewDataColumn FieldName="MotgCombo" />
                                                                         <dx:GridViewDataColumn FieldName="TaxCombo" />
                                                                         <dx:GridViewDataColumn FieldName="CLass" />
@@ -874,6 +874,7 @@
                                                                      </div>
                                                                  </DataItemTemplate>--%>
                                                                         </dx:GridViewDataColumn>
+                                                                        
                                                                     </Columns>
                                                                     <Styles>
                                                                         <SelectedRow BackColor="#d9f1fd" ForeColor="#3993c1">
@@ -883,7 +884,7 @@
                                                                     <SettingsPager PageSize="12"></SettingsPager>
 
                                                                     <Settings ShowFilterRow="True" ShowFilterRowMenu="true" ShowGroupPanel="True" ShowFooter="True" />
-                                                                    <%-- <ClientSideEvents EndCallback="function(s,e) { LoadCallBackCompleted(e.result)}" />--%>
+                                                                   <%-- <ClientSideEvents EndCallback="function(s,e) { LoadCallBackCompleted(e.result)}" />--%>
                                                                 </dx:ASPxGridView>
                                                                 <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="QueryResultsGrid"></dx:ASPxGridViewExporter>
 
@@ -950,7 +951,7 @@
             </div>
 
         </FooterContentTemplate>
-        <%-- <ClientSideEvents EndCallback="function(s,e){
+       <%-- <ClientSideEvents EndCallback="function(s,e){
                 SaveSearchPopupClient.Hide();
                 $('#msgModal').modal();
             }" />--%>

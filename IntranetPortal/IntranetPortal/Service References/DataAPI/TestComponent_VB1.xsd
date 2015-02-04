@@ -710,6 +710,7 @@
       <xs:element minOccurs="0" name="XDATE" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="date_uploaded" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="datetimestamp" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="dcorp" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Judgment" nillable="true" type="tns:Judgment" />
@@ -768,6 +769,7 @@
       <xs:element minOccurs="0" name="hnum_tso" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="lname_tso" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="name_no_space" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="name_regex" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="name_with_space" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="row_id" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="satdate" nillable="true" type="xs:string" />

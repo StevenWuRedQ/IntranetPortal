@@ -26,4 +26,9 @@
         Dim rule As New IntranetPortal.RulesEngine.LoopServiceRule
         rule.Execute()
     End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim rule As New IntranetPortal.RulesEngine.CompleteTaskRule
+        rule.ExpiredReminderTask("4032340101", 9685, 747)
+    End Sub
 End Class

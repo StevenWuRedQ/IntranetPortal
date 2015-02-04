@@ -47,8 +47,10 @@ Public Class LeadsSubMenu
             Dim empId = CInt(e.Parameter.Split("|")(1))
             Dim name = e.Parameter.Split("|")(2)
 
+
             Using Context As New Entities
                 Dim lead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
+
                 Dim oldOwner = lead.EmployeeName
                 lead.EmployeeID = empId
                 lead.EmployeeName = name

@@ -183,7 +183,8 @@ Public Class LeadsEscalationRule
                                        Dim ld = CType(leads, Lead)
                                        Dim emps = ld.EmployeeName & ";" & ld.Employee.Manager
                                        Dim log As New ActivityLogs
-                                       log.SetAsTask(emps, "Urgent", "HotLeads Reminder", String.Format("The hot leads {0} need take care. BBLE:{1}", ld.LeadsName, ld.BBLE), ld.BBLE, "Portal")
+                                       Dim comments = "Hot Leads require an update every 48 Hours. If this is not a Hot Lead, change Status to Follow Up and select a date. If no comment is entered in 48 Hours, this lead will get escalated to a manager. "
+                                       log.SetAsTask(emps, "Urgent", "HotLeads Reminder", comments, ld.BBLE, "Portal")
                                    End Sub,
                                    Function(leads)
                                        Dim ld = CType(leads, Lead)

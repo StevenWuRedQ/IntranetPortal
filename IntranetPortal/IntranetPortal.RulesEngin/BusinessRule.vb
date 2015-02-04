@@ -1,4 +1,5 @@
 ﻿Imports System.Threading
+Imports MyIdealProp.Workflow.DBPersistence
 
 Public Class BaseRule
     Public Property RuleName As String
@@ -253,3 +254,58 @@ InitialLine:
     End Sub
 End Class
 
+Public Class CompleteTaskRule
+    Inherits BaseRule
+
+    Public Overrides Sub Execute()
+
+        Dim remiderInsts = WorkflowService.GetMyOriginated("Portal")
+
+        For Each pInst In remiderInsts.Where(Function(p) p.ProcessName = "TaskProcess" And p.Status = MyIdealProp.Workflow.DBPersistence.ProcessInstance.ProcessStatus.Active)
+            Try
+                Dim bble = pInst.GetDataFieldValue("BBLE").ToString
+                Dim taskId = pInst.GetDataFieldValue("TaskId").ToString
+                If Not (ExpiredReminderTask(bble, taskId, pInst.Id)) Then
+                    Log("No Action on pInst: " & pInst.Id & " Process Name: " & pInst.DisplayName)
+                End If
+            Catch ex As Exception
+                Log("Exception in Complete Task Rule. pInst: " & pInst.Id & " Process Name: " & pInst.DisplayName, ex)
+            End Try
+        Next
+    End Sub
+
+    Public Function ExpiredReminderTask(bble As String, taskId As Integer, pInstId As Integer) As Boolean
+        Dim tk = UserTask.GetTaskById(taskId)
+
+        If (CheckIfNeedExpired(bble, tk)) Then
+            UserTask.ExpiredTask(taskId)
+            WorkflowService.ExpiredReminderProcess(pInstId)
+
+            Dim comments = String.Format("{0} is expired by System.", tk.Action)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status, Nothing, "Portal", LeadsActivityLog.EnumActionType.SetAsTask)
+
+            Log(String.Format("Task is expired. BBLE: {0}, task Name: {1}, task user: {2}", bble, tk.Action, tk.EmployeeName))
+            Return True
+        End If
+
+        Return False
+    End Function
+
+    Private Function CheckIfNeedExpired(bble As String, tk As UserTask) As Boolean
+
+        If tk.Status = UserTask.TaskStatus.Active Then
+            Dim logs = LeadsActivityLog.GetLastAgentAction(bble)
+
+            If logs IsNot Nothing AndAlso logs.LogID > tk.LogID Then
+                Return True
+            End If
+
+            Dim ld = Lead.GetInstance(bble)
+            If Not tk.EmployeeName.ToLower.Contains(ld.EmployeeName.ToLower) Then
+                Return True
+            End If
+        End If
+
+        Return False
+    End Function
+End Class

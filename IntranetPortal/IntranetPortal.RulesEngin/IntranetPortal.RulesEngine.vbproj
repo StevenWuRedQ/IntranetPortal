@@ -53,6 +53,10 @@
     <Reference Include="log4net">
       <HintPath>..\..\..\WorkFlow\SourceCode2\DLL\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MyIdealProp.Workflow.DBPersistence, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\WorkFlow\SourceCode2\MyIdealProp.Common\MyIdealProp.Workflow.DBPersistence\bin\Debug\MyIdealProp.Workflow.DBPersistence.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />

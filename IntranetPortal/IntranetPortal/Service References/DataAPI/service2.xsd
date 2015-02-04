@@ -350,6 +350,12 @@
         <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Block" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Lot" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="House_Num" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="St_Name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SearchType" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -170,6 +170,13 @@ Partial Public Class Lead
                 ld.Status = LeadStatus.NewLead
                 ld.AssignDate = DateTime.Now
                 ld.LastUpdate = DateTime.Now
+
+                If HttpContext.Current Is Nothing Then
+                    ld.AssignBy = "Portal"
+                Else
+                    ld.AssignBy = HttpContext.Current.User.Identity.Name
+                End If
+
                 ctx.SaveChanges()
 
                 'Expired the task on this bble

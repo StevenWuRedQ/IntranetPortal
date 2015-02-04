@@ -693,6 +693,16 @@ Public Class DataWCFService
         End Using
     End Sub
 
+    Public Shared Sub UpdateJudgmentSearchInfo(bble As String)
+        Using client As New DataAPI.WCFMacrosClient
+            'client.AAbs_GetEmergencyRepair()  -- Emergency Repair
+            'client.
+
+
+        End Using
+
+    End Sub
+
     Private Shared Function FieldMap(li As LeadsInfo, leadResult As DataAPI.ALL_NYC_Tax_Liens_CO_Info) As LeadsInfo
         'li.BBLE = leadResult.BBLE
         li.IsLisPendens = leadResult.IsLisPendens
@@ -756,7 +766,7 @@ Public Class DataWCFService
 
     Public Shared Sub TestNewAPI()
         Using client As New DataAPI.WCFMacrosClient
-            Dim table = client.AB_GetJugments("Test123", "Manhattan", "0000-00-00", "0000-00-00", "234", "1")
+            'Dim table = client.AB_GetJugments("Test123", "Manhattan", "0000-00-00", "0000-00-00", "234", "1")
         End Using
     End Sub
 End Class

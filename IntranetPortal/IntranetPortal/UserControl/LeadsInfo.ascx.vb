@@ -470,6 +470,9 @@ Public Class LeadsInfo1
                 If Not DataWCFService.GetZillowValue(bble) Then
                     Throw New Exception("The ZEstimate info failed refreshing.")
                 End If
+            Case "JudgmentSearch"
+                comments = String.Format("Judgement Search info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+
         End Select
 
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString)

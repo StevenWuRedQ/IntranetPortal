@@ -66,6 +66,14 @@
         End Using
     End Function
 
+    Public Shared Function GetLastAgentAction(bble As String) As LeadsActivityLog
+        Using ctx As New Entities
+            Dim agentLog = ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = bble And l.EmployeeID = l.Lead.EmployeeID).OrderByDescending(Function(l) l.ActivityDate).FirstOrDefault
+
+            Return agentLog
+        End Using
+    End Function
+
     Enum LogCategory
         SalesAgent
         Finder

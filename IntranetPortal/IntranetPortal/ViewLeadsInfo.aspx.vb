@@ -29,6 +29,19 @@
             Dim procInst = WorkflowService.LoadProcInstById(CInt(Request.QueryString("ProcInstId")))
             If procInst IsNot Nothing Then
                 Dim bble = procInst.GetDataFieldValue("BBLE")
+
+                If procInst.ProcessName = "NewLeadsRequest" Then
+                    Dim result = procInst.GetDataFieldValue("Result")
+
+                    If result = "Decline" Then
+                        Response.Clear()
+                        Response.Write("This new leads is declined.")
+                        Response.End()
+                        Return
+                    End If
+
+                End If
+
                 If Not String.IsNullOrEmpty(bble) Then
                     'check if this leads is waiting manager approval
                     Dim ld = IntranetPortal.Lead.GetInstance(bble)
@@ -41,6 +54,8 @@
 
                     LoadData(bble)
                 End If
+
+
             End If
         End If
     End Sub

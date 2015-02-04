@@ -14,6 +14,7 @@ Public Enum LeadStatus
     MgrApproval = 12
     ALL = 13
     MgrApprovalInWf = 14
+    Declined = 15
 End Enum
 
 Public Class Utility

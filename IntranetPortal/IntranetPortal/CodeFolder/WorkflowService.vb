@@ -54,6 +54,12 @@ Public Class WorkflowService
         End Using
     End Sub
 
+    Public Shared Sub ExpiredReminderProcess(pInstId As Integer)
+        Using conn = GetConnection()
+            conn.ExpiredProcessInstance(pInstId)
+        End Using
+    End Sub
+
     Public Shared Function GetUserTaskWorklist(taskId As Integer, destUser As String) As DBPersistence.Worklist
         Using conn = GetConnection()
             Dim pInstIds = conn.GetProcessInstancesByDataFields("TaskProcess", "TaskId", taskId)

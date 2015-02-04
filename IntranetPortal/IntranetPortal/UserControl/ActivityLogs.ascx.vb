@@ -43,7 +43,8 @@ Public Class ActivityLogs
             lbEmps.DataBind()
 
             Dim lbRecentEmps = TryCast(empsDropDownEdit.FindControl("tabPageEmpSelect").FindControl("lbRecentEmps"), ASPxListBox)
-            lbRecentEmps.DataSource = Employee.GetProfile(Page.User.Identity.Name).RecentEmps
+
+            lbRecentEmps.DataSource = Employee.GetProfile(Page.User.Identity.Name).RecentEmps.Select(Function(str) str.Trim).Distinct
             lbRecentEmps.DataBind()
         End Using
     End Sub
@@ -172,8 +173,6 @@ Public Class ActivityLogs
 
                 If log IsNot Nothing Then
                     log.Category = LeadsActivityLog.LogCategory.Declined.ToString
-                    Dim lead = Context.Leads.Where(Function(ld) ld.BBLE = log.BBLE).SingleOrDefault
-
                     Context.SaveChanges()
 
                     LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is declined by " & Page.User.Identity.Name, log.BBLE, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Declined)
@@ -187,16 +186,27 @@ Public Class ActivityLogs
                         End If
                     End If
 
+                    Dim lead = Context.Leads.Where(Function(ld) ld.BBLE = log.BBLE).SingleOrDefault
+                    lead.EmployeeID = Employee.GetInstance(Page.User.Identity.Name).EmployeeID
+                    lead.EmployeeName = Page.User.Identity.Name
+                    lead.Status = LeadStatus.NewLead
+                    lead.AssignDate = DateTime.Now
+                    lead.AssignBy = Page.User.Identity.Name
+                    Context.SaveChanges()
+
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, "The Leads status changes to new leads of " & Page.User.Identity.Name, log.BBLE, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
+
                     'Add Notify Message
                     Dim title = "Your lead is declined"
                     Dim msg = String.Format("New Lead (BBLE: {0}) is declined by " & Page.User.Identity.Name, log.BBLE)
                     UserMessage.AddNewMessage(lead.EmployeeName, title, msg, log.BBLE)
 
-                    Dim logs = Context.LeadsActivityLogs.Where(Function(l) l.BBLE = log.BBLE)
+                    'Don't remove leads logs
+                    'Dim logs = Context.LeadsActivityLogs.Where(Function(l) l.BBLE = log.BBLE)
 
-                    Context.LeadsActivityLogs.RemoveRange(logs)
-                    Context.Leads.Remove(lead)
-                    Context.SaveChanges()
+                    'Context.LeadsActivityLogs.RemoveRange(logs)
+                    'Context.Leads.Remove(lead)
+                    'Context.SaveChanges()
                 End If
             End Using
 
@@ -348,14 +358,15 @@ Public Class ActivityLogs
 
         For i = 0 To emps.Count - 1
             If Not emps(i) = Page.User.Identity.Name Then
+                Dim tmpName = emps(1).Trim
                 Dim title = String.Format("A New Task has been assigned by {0}  regarding {1} for {2}", Page.User.Identity.Name, cbTaskAction.Text, ld.PropertyAddress)
-                UserMessage.AddNewMessage(emps(i), title, comments, hfBBLE.Value)
+                UserMessage.AddNewMessage(tmpName, title, comments, hfBBLE.Value)
 
                 'Add recently choose employee list
-                If upData.RecentEmps.Contains(emps(i)) Then
-                    upData.RecentEmps.Remove(emps(i))
+                If upData.RecentEmps.Contains(tmpName) Then
+                    upData.RecentEmps.Remove(tmpName)
                 End If
-                upData.RecentEmps.Insert(0, emps(i))
+                upData.RecentEmps.Insert(0, tmpName)
             End If
         Next
 

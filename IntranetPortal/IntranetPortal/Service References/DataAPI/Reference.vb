@@ -37861,6 +37861,9 @@ Namespace DataAPI
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private datetimestampField As System.Nullable(Of Date)
         
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private dcorpField As String
+        
         <Global.System.ComponentModel.BrowsableAttribute(false)>  _
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
@@ -38630,6 +38633,16 @@ Namespace DataAPI
                 Me.datetimestampField = value
             End Set
         End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property dcorp() As String
+            Get
+                Return Me.dcorpField
+            End Get
+            Set
+                Me.dcorpField = value
+            End Set
+        End Property
     End Class
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
@@ -38934,6 +38947,9 @@ Namespace DataAPI
         Private name_no_spaceField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private name_regexField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private name_with_spaceField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
@@ -39152,6 +39168,16 @@ Namespace DataAPI
             End Get
             Set
                 Me.name_no_spaceField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property name_regex() As String
+            Get
+                Return Me.name_regexField
+            End Get
+            Set
+                Me.name_regexField = value
             End Set
         End Property
         
@@ -42113,10 +42139,10 @@ Namespace DataAPI
         Function Requests_WaitingAsync() As System.Threading.Tasks.Task(Of Integer)
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetJugments", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetJugmentsResponse")>  _
-        Function AB_GetJugments(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String) As DataAPI.Judgment()
+        Function AB_GetJugments(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal CorpName As String, ByVal FirstName As String, ByVal LastName As String, ByVal House_Num As String, ByVal St_Name As String, ByVal SearchType As String) As DataAPI.Judgment()
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetJugments", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetJugmentsResponse")>  _
-        Function AB_GetJugmentsAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String) As System.Threading.Tasks.Task(Of DataAPI.Judgment())
+        Function AB_GetJugmentsAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal CorpName As String, ByVal FirstName As String, ByVal LastName As String, ByVal House_Num As String, ByVal St_Name As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.Judgment())
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetBankruptcy", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetBankruptcyResponse")>  _
         Function AB_GetBankruptcy(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal CorpName As String) As DataAPI.Bankruptcy1()
@@ -42380,12 +42406,12 @@ Namespace DataAPI
             Return MyBase.Channel.Requests_WaitingAsync
         End Function
         
-        Public Function AB_GetJugments(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String) As DataAPI.Judgment() Implements DataAPI.IWCFMacros.AB_GetJugments
-            Return MyBase.Channel.AB_GetJugments(JobTitle, County, Start_Date, End_Date, Block, Lot)
+        Public Function AB_GetJugments(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal CorpName As String, ByVal FirstName As String, ByVal LastName As String, ByVal House_Num As String, ByVal St_Name As String, ByVal SearchType As String) As DataAPI.Judgment() Implements DataAPI.IWCFMacros.AB_GetJugments
+            Return MyBase.Channel.AB_GetJugments(JobTitle, County, Start_Date, End_Date, Block, Lot, CorpName, FirstName, LastName, House_Num, St_Name, SearchType)
         End Function
         
-        Public Function AB_GetJugmentsAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String) As System.Threading.Tasks.Task(Of DataAPI.Judgment()) Implements DataAPI.IWCFMacros.AB_GetJugmentsAsync
-            Return MyBase.Channel.AB_GetJugmentsAsync(JobTitle, County, Start_Date, End_Date, Block, Lot)
+        Public Function AB_GetJugmentsAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal CorpName As String, ByVal FirstName As String, ByVal LastName As String, ByVal House_Num As String, ByVal St_Name As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.Judgment()) Implements DataAPI.IWCFMacros.AB_GetJugmentsAsync
+            Return MyBase.Channel.AB_GetJugmentsAsync(JobTitle, County, Start_Date, End_Date, Block, Lot, CorpName, FirstName, LastName, House_Num, St_Name, SearchType)
         End Function
         
         Public Function AB_GetBankruptcy(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal CorpName As String) As DataAPI.Bankruptcy1() Implements DataAPI.IWCFMacros.AB_GetBankruptcy
