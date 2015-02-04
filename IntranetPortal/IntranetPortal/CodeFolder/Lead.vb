@@ -231,7 +231,7 @@ Partial Public Class Lead
             End Using
         End Get
     End Property
-
+    
     Enum DeadReasonEnum
         <Description("Deed Recorded with Other Party")>
         DeadRecord = 1

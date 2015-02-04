@@ -561,7 +561,7 @@
 
                                                             <i class="fa fa-save report_head_button report_head_button_padding tooltip-examples" onclick="SaveReportPopup.Show()" title="Save Report" style="cursor: pointer"></i>
                                                             <i class="fa fa-exchange report_head_button tooltip-examples report_head_button_padding" title="Compare" onclick="cbPnlCompareClient.PerformCallback('CompareEmp');popupControlCompareList.Show();"></i>
-                                                            <asp:LinkButton ID="btnExport" runat="server" OnClick="Unnamed_ServerClick" Text='<i class="fa fa-print  report_head_button report_head_button_padding tooltip-examples" title="Save PDF"></i>'>                                                                
+                                                            <asp:LinkButton ID="btnExport" runat="server" OnClick="Unnamed_ServerClick" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                
                                                             </asp:LinkButton>
                                                             <%--        <i class="fa fa-envelope  report_head_button report_head_button_padding"></i>
                                                             <i class="fa fa-file-pdf-o  report_head_button"></i>--%>
@@ -689,6 +689,9 @@
                                             <dx:ListEditItem Text="Create Date" Value="CreateDate" />
                                             <dx:ListEditItem Text="Last Update" Value="LastUpdate2" />
                                             <dx:ListEditItem Text="Servicer" Value="MortgageData.C1stServicer" />
+                                            <dx:ListEditItem Text="LastLP" Value="LastLP" />
+                                            
+                                            <dx:ListEditItem Text="LastComment" Value="LastComment" />
                                             
                                         </Items>
 

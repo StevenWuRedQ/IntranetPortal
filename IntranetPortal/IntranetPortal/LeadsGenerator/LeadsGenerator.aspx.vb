@@ -123,7 +123,7 @@ Public Class LeadsGenerator
             Return
         End If
         Dim i = 0
-        For Each tr In CType(QueryResultsGrid.DataSource, List(Of Object))
+        For Each tr In QueryResultsGrid.DataSource
             'Dim resultId As Integer = Convert.ToInt32(rt.Item("Id"))
             'Dim s = SearchResult.getSeachResult(resultId)
             If String.IsNullOrEmpty(tr.AgentInLeads) Then
@@ -184,6 +184,12 @@ Public Class LeadsGenerator
             End Using
         Else
             Alert("Only can import " + maxAdd + " Leads !")
+        End If
+        RefreshGrid()
+    End Sub
+    Public Sub RefreshGrid()
+        If (Not String.IsNullOrEmpty(hfSearchName.Value)) Then
+            BindGrid(hfSearchName.Value)
         End If
     End Sub
 

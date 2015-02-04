@@ -132,17 +132,20 @@
             }
             //QueryResultsGridClient.Refresh();
 
-           
+
         }
         function loadFunction(funName) {
             tableViewClinetCallBack.PerformCallback("loadFunction|" + funName)
         }
-        function filterOutExitChange(e)
-        {
+        function filterOutExitChange(e) {
             loadFunction('dxfilterOutExist_CheckedChanged|' + e.checked);
         }
+        function gridSelect()
+        {
+            $("#SelectCount").html(QueryResultsGridClient.GetSelectedRowCount())
+        }
     </script>
-   
+
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Width="100%" Height="100%" ClientInstanceName="sampleSplitter" FullscreenMode="true">
         <Styles>
             <Pane>
@@ -833,9 +836,9 @@
                                                                 <i class="fa fa-folder-open color_gray"></i>&nbsp;<span class="font_black"><span id="ResultsCount"><%=LoadLeadsCount %></span>Results</span>
                                                                 <div style="float: right">
                                                                     <%--<dx:ASPxCheckBox ID="dxfilterOutExist" AutoPostBack="true" runat="server" OnCheckedChanged="dxfilterOutExist_CheckedChanged"> </dx:ASPxCheckBox>--%>
-                                                                   <asp:HiddenField runat="server" ID="hfFilterOutExist" />
-                                                                    <input type="checkbox" id="cbfilterOutExist" name="cbfilterOutExist" class="font_12" onchange="filterOutExitChange(this)"  <%= If( bfilterOutExist,"checked","")%>/>
-                                                                    <label for="cbfilterOutExist" class="font_12" style="float:left;padding-top: 26px;">
+                                                                    <asp:HiddenField runat="server" ID="hfFilterOutExist" />
+                                                                    <input type="checkbox" id="cbfilterOutExist" name="cbfilterOutExist" class="font_12" onchange="filterOutExitChange(this)" <%= If( bfilterOutExist,"checked","")%> />
+                                                                    <label for="cbfilterOutExist" class="font_12" style="float: left; padding-top: 26px;">
                                                                         <span class="upcase_text">Don't show leads exist</span>
                                                                     </label>
                                                                     <button class="rand-button bg_color_blue fa-sh rand-button-padding" type="button" id="Select250" onclick="loadFunction('Select250_ServerClick')">Select 250 Random for me !</button>
@@ -845,6 +848,10 @@
                                                                     </asp:LinkButton>
                                                                 </div>
                                                             </div>
+                                                            <div style="font-size: 24px;margin-left: 53px;">
+                                                                <span id="SelectCount"><%= QueryResultsGrid.GetSelectedFieldValues.Count %> </span> Selected
+                                                            </div>
+                                                            
                                                             <div style="margin-top: 30px">
 
                                                                 <dx:ASPxGridView ID="QueryResultsGrid" runat="server"
@@ -855,7 +862,7 @@
                                                                         </dx:GridViewCommandColumn>
                                                                         <dx:GridViewDataColumn FieldName="BBLE" VisibleIndex="0"></dx:GridViewDataColumn>
                                                                         <dx:GridViewDataColumn FieldName="LeadsName" VisibleIndex="1" />
-                                                                   <%--     <dx:GridViewDataColumn FieldName="Neigh_Name" />
+                                                                        <dx:GridViewDataColumn FieldName="Neigh_Name" />
                                                                         <dx:GridViewDataColumn FieldName="MotgCombo" />
                                                                         <dx:GridViewDataColumn FieldName="TaxCombo" />
                                                                         <dx:GridViewDataColumn FieldName="CLass" />
@@ -865,26 +872,30 @@
 
                                                                         <dx:GridViewDataColumn FieldName="Type" />
                                                                         <dx:GridViewDataColumn FieldName="AgentInLeads" Caption="Assign To">
-                                                                            <%-- <DataItemTemplate>
+                                                                        </dx:GridViewDataColumn>
+                                                                    </Columns>
+                                                                    <%-- <DataItemTemplate>
                                                                      <div>
                                                                          <% If (String.IsNullOrEmpty(Eval("AgentInLeads"))) Then%>
                                                                          Lead already assgin to <%# Eval("AgentInLeads")%>!
                                                                          <% End If%>
                                                                         
                                                                      </div>
-                                                                 </DataItemTemplate>--%>
+                                                                 </DataItemTemplate>
                                                                         </dx:GridViewDataColumn>
                                                                         
                                                                     </Columns>
+                                                                   
+
+                                                                   
+                                                                   <%-- <ClientSideEvents EndCallback="function(s,e) { LoadCallBackCompleted(e.result)}" />--%>
                                                                     <Styles>
                                                                         <SelectedRow BackColor="#d9f1fd" ForeColor="#3993c1">
                                                                         </SelectedRow>
                                                                     </Styles>
-
+                                                                    <ClientSideEvents  SelectionChanged="function(s,e) { gridSelect()}" />
                                                                     <SettingsPager PageSize="12"></SettingsPager>
-
                                                                     <Settings ShowFilterRow="True" ShowFilterRowMenu="true" ShowGroupPanel="True" ShowFooter="True" />
-                                                                   <%-- <ClientSideEvents EndCallback="function(s,e) { LoadCallBackCompleted(e.result)}" />--%>
                                                                 </dx:ASPxGridView>
                                                                 <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="QueryResultsGrid"></dx:ASPxGridViewExporter>
 
@@ -951,7 +962,7 @@
             </div>
 
         </FooterContentTemplate>
-       <%-- <ClientSideEvents EndCallback="function(s,e){
+        <%-- <ClientSideEvents EndCallback="function(s,e){
                 SaveSearchPopupClient.Hide();
                 $('#msgModal').modal();
             }" />--%>

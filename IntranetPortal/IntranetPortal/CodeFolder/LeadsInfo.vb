@@ -31,6 +31,23 @@
             End Using
         End Get
     End Property
+    Public ReadOnly Property LastComment As String
+        Get
+            Using ctx As New Entities
+                Return ctx.LeadsActivityLogs.Where(Function(l) l.BBLE = BBLE).Select(Function(l) l.Comments).FirstOrDefault
+            End Using
+        End Get
+    End Property
+    Public ReadOnly Property LastLP As String
+        Get
+
+            Dim lp = LisPens.FirstOrDefault()
+            If (lp IsNot Nothing) Then
+                Return lp.Docket_Number & "/" & lp.FileDate.Year
+            End If
+            Return Nothing
+        End Get
+    End Property
     Public ReadOnly Property BoroughName() As String
         Get
             Return Utility.Borough2BoroughName(Borough)
