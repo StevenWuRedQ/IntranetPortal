@@ -23,5 +23,8 @@ Partial Public Class SearchResult
     Public Property TaxCombo As Nullable(Of Decimal)
     Public Property Type As String
     Public Property ImportDate As Nullable(Of Date)
+    Public Property PropertyAddress As String
+    Public Property BLOCK As String
+    Public Property LOT As String
 
 End Class

@@ -875,12 +875,12 @@
                                                                         <dx:GridViewDataColumn FieldName="BBLE" Caption="ShowMap" >
                                                                             <DataItemTemplate>
                                                                                 <div>
-                                                                                    <i class="fa fa-map-marker icon_btn" style="font-size:18px" onclick='ShowPropertyMap("<%# Eval("BBLE") %>")'> </i>
+                                                                                    <i class="fa fa-map-marker icon_btn" style="font-size:18px;margin-left:20px;" onclick='ShowPropertyMap("<%# Eval("BBLE") %>")'> </i>
                                                                                 </div>
                                                                             </DataItemTemplate>
                                                                         </dx:GridViewDataColumn>
                                                                        
-                                                                        <dx:GridViewBandColumn />
+                                                                      
                                                                         <dx:GridViewDataColumn FieldName="Type" />
                                                                         <dx:GridViewDataColumn FieldName="AgentInLeads" Caption="Assign To">
                                                                         </dx:GridViewDataColumn>

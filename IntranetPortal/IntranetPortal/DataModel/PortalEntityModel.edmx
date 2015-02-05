@@ -485,6 +485,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="TaxCombo" Type="numeric" Precision="18" Scale="0" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="ImportDate" Type="datetime" />
+          <Property Name="PropertyAddress" Type="nvarchar" MaxLength="70" />
+          <Property Name="BLOCK" Type="nvarchar" MaxLength="5" />
+          <Property Name="LOT" Type="nvarchar" MaxLength="4" />
         </EntityType>
         <EntityType Name="SharedLeads">
           <Key>
@@ -1407,6 +1410,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <Property Name="TaxCombo" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ImportDate" Type="DateTime" Precision="3" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="BLOCK" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="LOT" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2032,6 +2038,9 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <EntitySetMapping Name="SearchResults">
             <EntityTypeMapping TypeName="IntranetPortalModel.SearchResult">
               <MappingFragment StoreEntitySet="SearchResults">
+                <ScalarProperty Name="LOT" ColumnName="LOT" />
+                <ScalarProperty Name="BLOCK" ColumnName="BLOCK" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
                 <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="TaxCombo" ColumnName="TaxCombo" />
