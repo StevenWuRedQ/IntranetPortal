@@ -207,18 +207,21 @@
             <div class="form_head">General</div>
             <ul class="ss_form_box clearfix">
 
-                <li class="ss_form_item" style="width:66%">
+                <li class="ss_form_item" style="width: 66%">
                     <label class="ss_form_input_title">address</label>
-                    <input class="ss_form_input" style="width:91%" value="<%= LeadsInfoData.PropertyAddress%>">
+                    <input class="ss_form_input" style="width: 91%" value="<%= LeadsInfoData.PropertyAddress%>">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">BBLE</label>
                     <input class="ss_form_input font_black" value="<%= LeadsInfoData.BBLE%>">
                 </li>
+                <% If LeadsInfoData isnot Nothing andalso LeadsInfoData.IsApartment Then%>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Unit Number</label>
-                    <input class="ss_form_input" value="<%= LeadsInfoData.BBLE %>">
+                    <input class="ss_form_input" value="<%= LeadsInfoData.UnitNum %>">
                 </li>
+                <%End If%>
+
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Neighborhood</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.Neighborhood %>">
@@ -274,7 +277,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">SALE DATE</label>
-                    <input class="ss_form_input" value="<%= LeadsInfoData.UnbuiltSqft%>">
+                    <input class="ss_form_input" value="<%= LeadsInfoData.SaleDate%>">
                 </li>
 
 
@@ -284,7 +287,7 @@
                 </li>
 
             </ul>
-            
+
         </div>
 
         <%-------end-----%>

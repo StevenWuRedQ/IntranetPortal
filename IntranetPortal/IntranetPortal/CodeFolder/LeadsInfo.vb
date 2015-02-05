@@ -14,6 +14,21 @@
         ShortSale = 10
     End Enum
 
+    Public ReadOnly Property IsApartment() As Boolean
+        Get
+            If Not String.IsNullOrEmpty(BBLE) Then
+                Return BBLE.StartsWith("A")
+            End If
+            Return False
+        End Get
+    End Property
+
+    Public ReadOnly Property Address1 As String
+        Get
+            Return String.Format("{2} {0} {1}", Number, StreetName, UnitNum).Trim
+        End Get
+    End Property
+
     'Get assign leads type
     Public Function GetLeadsType(type As String) As LeadsType
         Dim retType = Nothing
@@ -139,7 +154,7 @@
                             _referrel.ReferrelName = ld.AssignBy
                         End If
                     Else
-                    _referrel = tmpRef
+                        _referrel = tmpRef
                     End If
                 End Using
             End If
@@ -573,6 +588,6 @@
         End Sub
     End Class
 
-   
+
 
 End Class

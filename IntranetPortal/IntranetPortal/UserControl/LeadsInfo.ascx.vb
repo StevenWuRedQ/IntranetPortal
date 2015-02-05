@@ -31,7 +31,6 @@ Public Class LeadsInfo1
     End Sub
 
     Sub BindLeadsInfo(bble As String)
-
         If Not ShowLogPanel Then
             contentSplitter.GetPaneByName("LogPanel").Collapsed = True
             'contentSplitter.GetPaneByName("paneInfo").Separator.Visible = DevExpress.Utils.DefaultBoolean.False
@@ -69,6 +68,16 @@ Public Class LeadsInfo1
             If leadsinfodata IsNot Nothing Then
                 'If lead.LeadsInfo.CreateDate
                 If String.IsNullOrEmpty(leadsinfodata.Owner) AndAlso String.IsNullOrEmpty(leadsinfodata.Neighborhood) Then
+                    If (DataWCFService.UpdateAssessInfo(leadsinfodata.BBLE) IsNot Nothing) Then
+                        'Context.Entry(lead).Reload()
+                        If lead IsNot Nothing Then
+                            Context.Entry(lead.LeadsInfo).Reload()
+                            leadsinfodata = lead.LeadsInfo
+                        End If
+                    End If
+                End If
+
+                If String.IsNullOrEmpty(leadsinfodata.PropertyAddress) Then
                     If (DataWCFService.UpdateAssessInfo(leadsinfodata.BBLE) IsNot Nothing) Then
                         'Context.Entry(lead).Reload()
                         If lead IsNot Nothing Then

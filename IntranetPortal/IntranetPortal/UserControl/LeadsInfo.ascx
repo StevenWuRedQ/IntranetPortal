@@ -787,8 +787,6 @@
                                     </dx:ASPxButton>
                                 </td>
                             </tr>
-
-
                         </table>
                     </dx:PopupControlContentControl>
                 </ContentCollection>

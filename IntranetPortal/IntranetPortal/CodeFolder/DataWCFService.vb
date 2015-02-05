@@ -189,6 +189,7 @@ Public Class DataWCFService
                 Dim result = client.NYC_Assessment_Full(bble).SingleOrDefault
                 If li Is Nothing Then
                     li = New LeadsInfo
+                    li.BBLE = bble
                     li.CreateDate = DateTime.Now
                     li.CreateBy = GetCurrentIdentityName()
                 End If
@@ -302,9 +303,15 @@ Public Class DataWCFService
 
     Public Shared Function UpdateAssessInfo(bble As String) As LeadsInfo
         Try
-            Using context As New Entities
-                Dim li As LeadsInfo = context.LeadsInfoes.Where(Function(l) l.BBLE = bble).SingleOrDefault
+            'this is apartment
+            If bble.StartsWith("A") Then
+                Return UpdateApartmentBuildingInfo(bble)
+            End If
 
+
+            Using context As New Entities
+
+                Dim li As LeadsInfo = context.LeadsInfoes.Where(Function(l) l.BBLE = bble).SingleOrDefault
                 If li Is Nothing Then
                     li = GetFullAssessInfo(bble, li)
                     context.LeadsInfoes.Add(li)
@@ -351,6 +358,67 @@ Public Class DataWCFService
         End Try
     End Function
 
+    Public Shared Function UpdateApartmentBuildingInfo(bble As String) As LeadsInfo
+        Try
+            Using context As New Entities
+
+                Dim li As LeadsInfo = context.LeadsInfoes.Where(Function(l) l.BBLE = bble).SingleOrDefault
+
+                li = GetFullAssessInfo(li.BuildingBBLE, li)
+                li.BBLE = bble
+                If Not String.IsNullOrEmpty(li.UnitNum) Then
+                    li.PropertyAddress = "#" & li.UnitNum & " " & li.PropertyAddress
+                End If
+
+                context.SaveChanges()
+
+                'Update Home owner info
+                SaveHomeOwner(bble, li.Owner, li.Address1, "", li.NeighName, li.State, "US", li.ZipCode, context)
+
+                If String.IsNullOrEmpty(li.CoOwner) Then
+                    SaveHomeOwner(bble, li.CoOwner, li.Address1, "", li.NeighName, li.State, "US", li.ZipCode, context)
+                End If
+
+                context.SaveChanges()
+
+                'Update leads neighborhood info
+                Dim lead = context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault
+                If lead IsNot Nothing Then
+                    lead.Neighborhood = li.NeighName
+                    lead.LeadsName = li.LeadsName
+                    lead.LastUpdate = DateTime.Now
+                    lead.UpdateBy = GetCurrentIdentityName()
+                    context.SaveChanges()
+                End If
+                Return li
+            End Using
+        Catch ex As System.ServiceModel.EndpointNotFoundException
+            Throw New Exception("The data serice is not avaiable. Please refresh later.")
+        Catch ex As Exception
+            Throw New Exception("Exception happened during updating Apartment. Please try later. Exception: " & ex.Message)
+        End Try
+    End Function
+
+    Public Shared Function UpdateApartmentHomeOwner(bble As String) As Boolean
+        Using context As New Entities
+            Dim li = context.LeadsInfoes.Find(bble)
+
+            Using client As New DataAPI.WCFMacrosClient
+                For Each owner In context.HomeOwners.Where(Function(ho) ho.BBLE = bble).ToList
+                    Dim apiOrderNum = New Random().Next(1, 100)
+                    Dim result = client.Get_LocateReport(apiOrderNum, li.BuildingBBLE, owner.Name, owner.Address1, owner.Address2, owner.City, owner.State, owner.Zip, owner.Country, "", "")
+                    If result IsNot Nothing Then
+                        owner.TLOLocateReport = result
+                        owner.UserModified = False
+                    End If
+                Next
+            End Using
+
+            context.SaveChanges()
+            Return True
+        End Using
+    End Function
+
     Public Shared Function UpdateLeadInfo(bble As String, Optional assessment As Boolean = False,
                                           Optional acris As Boolean = True,
                                           Optional taxBill As Boolean = True,
@@ -358,6 +426,18 @@ Public Class DataWCFService
                                           Optional waterBill As Boolean = True,
                                           Optional zillow As Boolean = True,
                                           Optional TLO As Boolean = True) As Boolean
+
+        If bble.StartsWith("A") Then
+            If assessment Then
+                UpdateAssessInfo(bble)
+            End If
+
+            If TLO Then
+                UpdateApartmentHomeOwner(bble)
+            End If
+
+            Return True
+        End If
 
         Dim apiOrder As New APIOrder
 

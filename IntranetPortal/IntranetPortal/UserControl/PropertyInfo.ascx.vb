@@ -7,6 +7,10 @@
 
     Public Property LeadsInfoData As LeadsInfo = New LeadsInfo
     Public Function BindData() As Boolean
+        'If LeadsInfoData.IsApartment Then
+        '    LeadsInfoData = ""
+        'End If
+
         UpatingPanel.Visible = LeadsInfoData.IsUpdating
         hfBBLE.Value = LeadsInfoData.BBLE
         Me.DataBind()
