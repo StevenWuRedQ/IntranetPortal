@@ -66,9 +66,11 @@ Public Class OriginatedListControl
             If _processViewLinks Is Nothing Then
                 _processViewLinks = New Dictionary(Of String, String)
                 _processViewLinks.Add("TaskProcess", "/ViewLeadsInfo.aspx?ProcInstId=")
+                _processViewLinks.Add("ReminderProcess", "/ViewLeadsInfo.aspx?ProcInstId=")
                 _processViewLinks.Add("TestProcess", "")
                 _processViewLinks.Add("ShortSaleTask", "/ShortSale/Shortsale.aspx?ProcInstId=")
                 _processViewLinks.Add("LeadsSearchRequest", "/LeadsGenerator/LeadsSearchApproval.aspx?ProcInstId=")
+
             End If
 
             Return _processViewLinks

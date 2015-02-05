@@ -156,9 +156,7 @@
         if (typeof window.parent.agentTreeCallbackPanel == "undefined")
             return;
         else
-            window.parent.agentTreeCallbackPanel.PerformCallback("");
-
-        
+            window.parent.agentTreeCallbackPanel.PerformCallback("");        
     }
 
     function PrintLeadInfo() {
@@ -868,7 +866,6 @@
                 <h4 class="modal-title" id="exampleModalLabel">Phone Comments</h4>
             </div>
             <div class="modal-body">
-
                 <div class="form-group">
                     <label for="phone_comment" class="control-label">Comments:</label>
                     <input type="text" class="form-control" id="phone_comment">

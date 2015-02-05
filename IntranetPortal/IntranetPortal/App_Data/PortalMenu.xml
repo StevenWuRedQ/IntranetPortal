@@ -11,7 +11,7 @@
         <FontClass>
           <![CDATA[<i class="fa fa-sign-in"></i>]]>
         </FontClass>
-      </PortalNavItem>      
+      </PortalNavItem>
       <PortalNavItem Name="MyApplication_2" Text="Waiting for Answer" NavigationUrl="/Task/MyApp.aspx?c=2" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
@@ -28,7 +28,7 @@
         </FontClass>
       </PortalNavItem>-->
     </Items>
-  </PortalNavItem>  
+  </PortalNavItem>
   <PortalNavItem Name="Agent" Text="Leads" NavigationUrl="/SummaryPage.aspx" ShowAmount="false" ItemType="Agent" Expanded="true">
     <level>1</level>
     <FontClass>
@@ -155,7 +155,7 @@
                   <![CDATA[<i class="fa fa-line-chart"></i>]]>
                 </FontClass>
               </PortalNavItem>
-            </Items>-->            
+            </Items>-->
           </PortalNavItem>
           <PortalNavItem Name="AgentDeadLead" Text="Dead Lead" NavigationUrl="/LeadAgent.aspx?c=Dead Lead" ShowAmount="true">
             <FontClass>
@@ -247,7 +247,7 @@
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="AdvanceQuery" Text="Leads Search" NavigationUrl="/LeadsGenerator/LeadsGenerator.aspx" ShowAmount="false" Visible="false">
+      <PortalNavItem Name="AdvanceQuery" Text="Leads Search" NavigationUrl="/LeadsGenerator/LeadsGenerator.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-search-plus"></i>]]>
         </FontClass>
@@ -326,9 +326,9 @@
       </PortalNavItem>
     </Items>
   </PortalNavItem>
-  
+
   <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
-    <UserRoles>OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen,OfficeManager-GalleriaTeam,OfficeManager-TomTeam</UserRoles>
+    <UserRoles>OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen,OfficeManager-GalleriaTeam,OfficeManager-TomTeam,OfficeManager-RonTeam,OfficeManager-GendinTeam</UserRoles>
     <Items>
       <PortalNavItem Name="Office-Bronx-Management" Text="Bronx Team" NavigationUrl="#" ShowAmount="true" ItemType="Office">
         <UserRoles>OfficeManager-Bronx</UserRoles>
@@ -483,8 +483,8 @@
         </Items>
       </PortalNavItem>
 
-      <PortalNavItem Name="Office-GendinTeam-Management" Text="Gendin Team" NavigationUrl="#" ShowAmount="true" ItemType="Manager">
-        <UserRoles>OfficeManager-Patchen</UserRoles>
+      <PortalNavItem Name="Office-GendinTeam-Management" Text="Gendin Team" NavigationUrl="#" ShowAmount="true" ItemType="Office">
+        <UserRoles>OfficeManager-GendinTeam</UserRoles>
         <Items>
           <PortalNavItem Name="Office-GendinTeam-AssignLeads" Text="Assign Leads" NavigationUrl="/Management/LeadsManagement.aspx?office=GendinTeam" ShowAmount="true">
             <FontClass>
@@ -536,8 +536,8 @@
         </Items>
       </PortalNavItem>
 
-      <PortalNavItem Name="Office-RonTeam-Management" Text="Ron Team" NavigationUrl="#" ShowAmount="true" ItemType="Manager">
-        <UserRoles>OfficeManager-Patchen</UserRoles>
+      <PortalNavItem Name="Office-RonTeam-Management" Text="Ron Team" NavigationUrl="#" ShowAmount="true" ItemType="Office">
+        <UserRoles>OfficeManager-RonTeam</UserRoles>
         <Items>
           <PortalNavItem Name="Office-RonTeam-AssignLeads" Text="Assign Leads" NavigationUrl="/Management/LeadsManagement.aspx?office=RonTeam" ShowAmount="true">
             <FontClass>
@@ -702,7 +702,7 @@
       </PortalNavItem>
     </Items>
   </PortalNavItem>
-  
+
   <PortalNavItem Name="PortalManagement" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Admin</UserRoles>
     <Items>

@@ -8,8 +8,16 @@ Public Class SendMailControl
         EmailBody.Toolbars.Add(Utility.CreateCustomToolbar("Custom"))
         If (Not IsPostBack) Then
             'BindEmail()
+
         End If
     End Sub
+
+    Private Function GetSignature(empName As String) As String
+        Dim emp = Employee.GetInstance(empName)
+
+        Dim result = String.Format("<br/><br/><br/><br/>Best Regards,<br/><br/> {0} <br /> {1}<br />", emp.Name, emp.Email)
+        Return result
+    End Function
 
     'Protected Function CreateDemoCustomToolbar(ByVal name As String) As HtmlEditorToolbar
     '    Return New HtmlEditorToolbar(name, New ToolbarFontSizeEdit(), New ToolbarJustifyLeftButton(True), New ToolbarJustifyCenterButton(), New ToolbarJustifyRightButton(), New ToolbarJustifyFullButton(), New ToolbarBoldButton(), New ToolbarItalicButton(), New ToolbarUnderlineButton()).CreateDefaultItems()
@@ -64,5 +72,9 @@ Public Class SendMailControl
             emailCClist.DataSource = emilListData
             emailCClist.DataBind()
         End Using
+
+        If String.IsNullOrEmpty(EmailBody.Html) Then
+            EmailBody.Html = GetSignature(Page.User.Identity.Name)
+        End If
     End Sub
 End Class

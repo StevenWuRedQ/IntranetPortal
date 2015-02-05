@@ -313,40 +313,40 @@ Public Class ActivityLogs
         'SetAsTask(employees, cbTaskImportant.Text, cbTaskAction.Text, txtTaskDes.Text, hfBBLE.Value, Page.User.Identity.Name)
         'Return
 
-        Dim scheduleDate = DateTime.Now
+        'Dim scheduleDate = DateTime.Now
 
-        If cbTaskImportant.Text = "Normal" Then
-            scheduleDate = scheduleDate.AddDays(3)
-        End If
+        'If cbTaskImportant.Text = "Normal" Then
+        '    scheduleDate = scheduleDate.AddDays(3)
+        'End If
 
-        If cbTaskImportant.Text = "Important" Then
-            scheduleDate = scheduleDate.AddDays(1)
-        End If
+        'If cbTaskImportant.Text = "Important" Then
+        '    scheduleDate = scheduleDate.AddDays(1)
+        'End If
 
-        If cbTaskImportant.Text = "Urgent" Then
-            scheduleDate = scheduleDate.AddHours(2)
-        End If
+        'If cbTaskImportant.Text = "Urgent" Then
+        '    scheduleDate = scheduleDate.AddHours(2)
+        'End If
 
-        Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Employees:</td>" &
-                                     "<td>{0}</td></tr>" &
-                                     "<tr><td>Action:</td><td>{1}</td></tr>" &
-                                     "<tr><td>Important:</td><td>{2}</td></tr>" &
-                                   "<tr><td>Description:</td><td>{3}</td></tr>" &
-                                   "</table>", employees, cbTaskAction.Text, cbTaskImportant.Text, txtTaskDes.Text)
+        'Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Employees:</td>" &
+        '                             "<td>{0}</td></tr>" &
+        '                             "<tr><td>Action:</td><td>{1}</td></tr>" &
+        '                             "<tr><td>Important:</td><td>{2}</td></tr>" &
+        '                           "<tr><td>Description:</td><td>{3}</td></tr>" &
+        '                           "</table>", employees, cbTaskAction.Text, cbTaskImportant.Text, txtTaskDes.Text)
 
-        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
+        'Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
 
-        Dim taskId As Integer
-        Using Context As New Entities
-            Dim task = Context.UserTasks.Add(AddTask(hfBBLE.Value, employees, cbTaskAction.Text, cbTaskImportant.Text, scheduleDate, txtTaskDes.Text, log.LogID))
-            Context.SaveChanges()
-            taskId = task.TaskID
-        End Using
+        'Dim taskId As Integer
+        'Using Context As New Entities
+        '    Dim task = Context.UserTasks.Add(AddTask(hfBBLE.Value, employees, cbTaskAction.Text, cbTaskImportant.Text, scheduleDate, txtTaskDes.Text, log.LogID))
+        '    Context.SaveChanges()
+        '    taskId = task.TaskID
+        'End Using
+
+        Dim taskId = CreateTask(employees, cbTaskImportant.Text, cbTaskAction.Text, txtTaskDes.Text, hfBBLE.Value, Page.User.Identity.Name)
 
         Dim emps = employees.Split(";").Distinct.ToArray
-
         Dim upData = Employee.GetProfile(Page.User.Identity.Name)
-
         Dim ld = LeadsInfo.GetInstance(hfBBLE.Value)
 
         Dim taskName = String.Format("{0} {1}", cbTaskAction.Text, ld.StreetNameWithNo)
@@ -359,8 +359,8 @@ Public Class ActivityLogs
         For i = 0 To emps.Count - 1
             If Not emps(i) = Page.User.Identity.Name Then
                 Dim tmpName = emps(1).Trim
-                Dim title = String.Format("A New Task has been assigned by {0}  regarding {1} for {2}", Page.User.Identity.Name, cbTaskAction.Text, ld.PropertyAddress)
-                UserMessage.AddNewMessage(tmpName, title, comments, hfBBLE.Value)
+                'Dim title = String.Format("A New Task has been assigned by {0}  regarding {1} for {2}", Page.User.Identity.Name, cbTaskAction.Text, ld.PropertyAddress)
+                'UserMessage.AddNewMessage(tmpName, title, comments, hfBBLE.Value)
 
                 'Add recently choose employee list
                 If upData.RecentEmps.Contains(tmpName) Then
@@ -375,6 +375,60 @@ Public Class ActivityLogs
     End Sub
 
     Public Sub SetAsTask(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String)
+        'Dim scheduleDate = DateTime.Now
+
+        'If taskPriority = "Normal" Then
+        '    scheduleDate = scheduleDate.AddDays(3)
+        'End If
+
+        'If taskPriority = "Important" Then
+        '    scheduleDate = scheduleDate.AddDays(1)
+        'End If
+
+        'If taskPriority = "Urgent" Then
+        '    scheduleDate = scheduleDate.AddHours(2)
+        'End If
+
+        'Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Employees:</td>" &
+        '                             "<td>{0}</td></tr>" &
+        '                             "<tr><td>Action:</td><td>{1}</td></tr>" &
+        '                             "<tr><td>Important:</td><td>{2}</td></tr>" &
+        '                           "<tr><td>Description:</td><td>{3}</td></tr>" &
+        '                           "</table>", employees, taskAction, taskPriority, taskDescription)
+
+        'Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString, Nothing, createUser, LeadsActivityLog.EnumActionType.SetAsTask)
+
+        'Dim taskId As Integer
+        'Using Context As New Entities
+        '    Dim task = Context.UserTasks.Add(AddTask(bble, employees, taskAction, taskPriority, scheduleDate, taskDescription, log.LogID, createUser))
+        '    Context.SaveChanges()
+        '    taskId = task.TaskID
+        'End Using
+
+        Dim taskId = CreateTask(employees, taskPriority, taskAction, taskDescription, bble, createUser)
+
+        Dim ld = LeadsInfo.GetInstance(bble)
+        Dim taskName = String.Format("{0} {1}", taskAction, ld.StreetNameWithNo)
+        WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, bble, employees, taskPriority)
+        
+        'Dim emps = employees.Split(";").Distinct.ToArray
+        'For i = 0 To emps.Count - 1
+        '    If Not emps(i) = createUser Then
+        '        Dim title = String.Format("A New Task has been assigned by {0}  regarding {1} for {2}", createUser, taskAction, ld.PropertyAddress)
+        '        UserMessage.AddNewMessage(emps(i), title, comments, bble, DateTime.Now, createUser)
+        '    End If
+        'Next
+    End Sub
+
+    Public Sub SetAsReminder(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String)
+        Dim taskId = CreateTask(employees, taskPriority, taskAction, taskDescription, bble, createUser)
+
+        Dim ld = LeadsInfo.GetInstance(bble)
+        Dim taskName = String.Format("{0} {1}", taskAction, ld.StreetNameWithNo)
+        WorkflowService.StartTaskProcess("ReminderProcess", taskName, taskId, bble, employees, taskPriority)
+    End Sub
+
+    Private Function CreateTask(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String) As Integer
         Dim scheduleDate = DateTime.Now
 
         If taskPriority = "Normal" Then
@@ -397,26 +451,17 @@ Public Class ActivityLogs
                                    "</table>", employees, taskAction, taskPriority, taskDescription)
 
         Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString, Nothing, createUser, LeadsActivityLog.EnumActionType.SetAsTask)
+        Dim task = UserTask.AddUserTask(bble, employees, taskAction, taskPriority, "In Office", scheduleDate, taskDescription, log.LogID, createUser)
 
-        Dim taskId As Integer
-        Using Context As New Entities
-            Dim task = Context.UserTasks.Add(AddTask(bble, employees, taskAction, taskPriority, scheduleDate, taskDescription, log.LogID, createUser))
-            Context.SaveChanges()
-            taskId = task.TaskID
-        End Using
+        'Dim taskId As Integer
+        'Using Context As New Entities
+        '    Dim task = Context.UserTasks.Add(AddTask(bble, employees, taskAction, taskPriority, scheduleDate, taskDescription, log.LogID, createUser))
+        '    Context.SaveChanges()
+        '    taskId = task.TaskID
+        'End Using
 
-        Dim ld = LeadsInfo.GetInstance(bble)
-        Dim taskName = String.Format("{0} {1}", taskAction, ld.StreetNameWithNo)
-        WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, bble, employees, taskPriority)
-        
-        Dim emps = employees.Split(";").Distinct.ToArray
-        For i = 0 To emps.Count - 1
-            If Not emps(i) = createUser Then
-                Dim title = String.Format("A New Task has been assigned by {0}  regarding {1} for {2}", createUser, taskAction, ld.PropertyAddress)
-                UserMessage.AddNewMessage(emps(i), title, comments, bble, DateTime.Now, createUser)
-            End If
-        Next
-    End Sub
+        Return task.TaskID
+    End Function
 
     Function GetCommentsIconClass(type As String)
         If String.IsNullOrEmpty(type) Then
@@ -536,7 +581,7 @@ Public Class ActivityLogs
                     If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
                         Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
                         If wli IsNot Nothing Then
-                            If wli.ProcessName.ToString = "TaskProcess" OrElse wli.ProcessName = "ShortSaleTask" Then
+                            If wli.ProcessName.ToString = "TaskProcess" OrElse wli.ProcessName = "ShortSaleTask" OrElse wli.ProcessName = "ReminderProcess" Then
                                 If CInt(wli.ProcessInstance.DataFields("TaskId")) = task.TaskID Then
                                     If btnTaskComplete IsNot Nothing Then
                                         btnTaskComplete.Visible = True

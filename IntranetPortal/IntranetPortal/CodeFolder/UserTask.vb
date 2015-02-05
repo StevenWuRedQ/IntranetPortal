@@ -26,7 +26,18 @@
         End Using
     End Sub
 
-    Public Shared Sub AddUserTask(bble As String, name As String, action As String, Important As String, location As String, schedule As DateTime, description As String, logId As Integer)
+    Public Shared Function AddUserTask(bble As String, name As String, action As String, Important As String, location As String, schedule As DateTime, description As String, logId As Integer) As UserTask
+        Dim createBy = ""
+
+        If HttpContext.Current IsNot Nothing Then
+            createBy = HttpContext.Current.User.Identity.Name
+        Else
+            createBy = "Portal"
+        End If
+        Return AddUserTask(bble, name, action, Important, location, schedule, description, logId, createBy)
+    End Function
+
+    Public Shared Function AddUserTask(bble As String, name As String, action As String, Important As String, location As String, schedule As DateTime, description As String, logId As Integer, createUser As String) As UserTask
         Using context As New Entities
             Dim task As New UserTask
             task.BBLE = bble
@@ -39,29 +50,33 @@
             task.Description = description
             task.Status = UserTask.TaskStatus.Active
             task.CreateDate = DateTime.Now
-            task.CreateBy = HttpContext.Current.User.Identity.Name
+            task.CreateBy = createUser
             task.LogID = logId
 
             context.UserTasks.Add(task)
             context.SaveChanges()
 
+            Return task
         End Using
-    End Sub
+    End Function
 
     Public Shared Sub AddUserTask(bble As String, name As String, description As String, logId As Integer)
-        Using context As New Entities
-            Dim task As New UserTask
-            task.BBLE = bble
-            task.EmployeeName = name
-            task.Description = description
-            task.CreateDate = DateTime.Now
-            task.CreateBy = HttpContext.Current.User.Identity.Name
-            task.LogID = logId
+        AddUserTask(bble, name, "", Nothing, "In Office", Nothing, description, logId)
+        Return
 
-            context.UserTasks.Add(task)
-            context.SaveChanges()
+        'Using context As New Entities
+        '    Dim task As New UserTask
+        '    task.BBLE = bble
+        '    task.EmployeeName = name
+        '    task.Description = description
+        '    task.CreateDate = DateTime.Now
+        '    task.CreateBy = HttpContext.Current.User.Identity.Name
+        '    task.LogID = logId
 
-        End Using
+        '    context.UserTasks.Add(task)
+        '    context.SaveChanges()
+
+        'End Using
     End Sub
 
     Public Shared Function GetActiveTasks() As List(Of UserTask)
