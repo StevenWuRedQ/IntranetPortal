@@ -2120,7 +2120,10 @@ td.vendor_info_left {
 .query_input_50_percent {
     width: 49% !important;
 }
-
+.query_control
+{
+    width:97%;
+}
 .table_delete_row {
     font-size: 18px;
     margin-top: 8px;

@@ -93,4 +93,13 @@ Partial Public Class LeadsGenerator
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SaveSearchPopup As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''MapsPopup control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents MapsPopup As Global.IntranetPortal.MapsPopup
 End Class

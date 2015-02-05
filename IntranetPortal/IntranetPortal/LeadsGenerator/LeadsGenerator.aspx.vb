@@ -88,7 +88,9 @@ Public Class LeadsGenerator
 
             'Dim s As SearchResult
 
-
+            If (String.IsNullOrEmpty(hfFilterOutExist.Value)) Then
+                hfFilterOutExist.Value = "false"
+            End If
             bfilterOutExist = CBool(hfFilterOutExist.Value)
             If (bfilterOutExist) Then
                 results = results.Where(Function(s) s.AgentInLeads Is Nothing).ToList()
@@ -232,10 +234,13 @@ Public Class LeadsGenerator
 
         Dim gvCommandButton = CType(e, ASPxGridViewCommandButtonEventArgs)
         Dim ag = CType(QueryResultsGrid.GetRow(e.VisibleIndex), Object)
-        If ag IsNot Nothing And (Not String.IsNullOrEmpty(ag.AgentInLeads)) Then
-            e.Visible = False
-            e.Enabled = False
+        If ag IsNot Nothing Then
+            If Not String.IsNullOrEmpty(ag.AgentInLeads) Then
+                e.Visible = False
+                e.Enabled = False
+            End If
         End If
+
     End Sub
 
   
