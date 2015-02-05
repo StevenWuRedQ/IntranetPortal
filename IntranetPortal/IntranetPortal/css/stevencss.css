@@ -2120,10 +2120,11 @@ td.vendor_info_left {
 .query_input_50_percent {
     width: 49% !important;
 }
-.query_control
-{
-    width:97%;
+
+.query_control {
+    width: 97%;
 }
+
 .table_delete_row {
     font-size: 18px;
     margin-top: 8px;
@@ -2193,27 +2194,32 @@ td.vendor_info_left {
 li.active.mag_tab {
     font-weight: 800;
     background: white !important;
-    border:none !important;
+    border: none !important;
 }
 
 .mag_tab_panel {
     border: 1px solid #dde0e7;
     border-radius: 5px;
 }
-.mag_tab_text
-{
-    color:#77787b;
-    border:none;
-}
- .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus.mag_tab_text
-{
-    border:none;
-}
- .mag_tab_input_group
- {
-     padding:15px 20px;
-     background:#eff2f5;
-     border-radius:5px;
 
- }
+.mag_tab_text {
+    color: #77787b;
+    border: none;
+}
+
+.nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus.mag_tab_text {
+    border: none;
+}
+
+.mag_tab_input_group {
+    padding: 15px 20px;
+    background: #eff2f5;
+    border-radius: 5px;
+}
+
+.chart_text {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+}
 /*end magagement UI*/

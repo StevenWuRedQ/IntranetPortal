@@ -4,6 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
+    <script src="/Scripts/globalize/globalize.js"></script>
+    <script src="/Scripts/dx.chartjs.js"></script>
     <div class="container-fluid">
         <%--Head--%>
         <div style="padding-top: 30px">
@@ -89,13 +91,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="margin:30px 0;font-size:24px;color:#234b60">
-                                    <span  style="font-weight:900">52,013 </span>Phone Calls<br />
-                                    <span style="font-size:14px;color:#77787b">January 1, 2015 - January 31, 2015</span>
+                                <div style="margin: 30px 0; font-size: 24px; color: #234b60">
+                                    <span style="font-weight: 900">52,013 </span>Phone Calls<br />
+                                    <span style="font-size: 14px; color: #77787b">January 1, 2015 - January 31, 2015</span>
                                 </div>
-                                <div style="font-size:14px;">
-                                     <table class="table table-striped">
-                                        <thead style="text-transform:uppercase">
+                                <div style="font-size: 14px;">
+                                    <table class="table table-striped">
+                                        <thead style="text-transform: uppercase">
                                             <tr>
                                                 <td>Name</td>
                                                 <td>Phone Calls </td>
@@ -113,17 +115,17 @@
                                                 <td>800-324-4567</td>
                                             </tr>
                                             <tr>
-                                               <th scope="row">Prakash Maharaj</th>
+                                                <th scope="row">Prakash Maharaj</th>
                                                 <td>1,234</td>
                                                 <td>37H 23M</td>
                                                 <td>718-123-4567</td>
                                                 <td>800-324-4567</td>
                                             </tr>
-                                           
+
                                         </tbody>
                                     </table>
                                 </div>
-                               
+
 
                             </div>
                             <div role="tabpanel" class="tab-pane" id="profile">...</div>
@@ -134,8 +136,77 @@
 
                     </div>
                 </div>
+                <div class="col-md-5">
+                    <div style="padding-left: 10px">
+                        <div>
+                            <i class="fa fa-pie-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Status Of Leads</span>
+                        </div>
+                        <div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="container" class="containers" style="height: 300px; width: 100%;"></div>
+                                    <div class="chart_text">
+                                        In Process Leads: 35
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="current_leads" class="containers" style="height: 300px; width: 100%;"></div>
+                                    <div class="chart_text">
+                                        Current Leads: 1250
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <script>
+        var dataSource = [
+            { region: "ShortSale", val: 41 },
+            { region: "Eviction", val: 10 },
+            { region: "Constact", val: 34 },
+            { region: "T1", val: 59 },
+           { region: "T2", val: 59 },
+        ];
+        var dataSource2 = [
+            { region: "DoorKnock", val: 50 },
+            { region: "Task", val: 60 },
+            { region: "HotLeads", val: 70 },
+            { region: "T1", val: 20 },
+           { region: "T2", val: 20 },
+
+        ];
+        var option =
+            {
+                dataSource: dataSource,
+                tooltip: {
+                    enabled: true,
+
+                    percentPrecision: 2,
+                    customizeText: function () {
+                        
+                        return this.argumentText + " - " + this.percentText;
+                    }
+                },
+                legend: { visible: false },
+                series: [{
+                    type: "doughnut",
+                    argumentField: "region",
+                    label: {
+                        visible: true,
+
+                        connector: {
+                            visible: true
+                        }
+                    }
+                }]
+            }
+        $("#container").dxPieChart(option);
+        option.dataSource = dataSource2;
+        $("#current_leads").dxPieChart(option);
+    </script>
 </asp:Content>
 
