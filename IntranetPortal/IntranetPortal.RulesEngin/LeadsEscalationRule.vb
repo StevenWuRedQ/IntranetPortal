@@ -40,7 +40,7 @@ Public Class LeadsEscalationRule
                                          'UserMessage.AddNewMessage(ld.EmployeeName, "New Leads Handler Warning", String.Format("The new leads BBLE:{0} will be recycled.", ld.BBLE), ld.BBLE)
                                          Dim log As New ActivityLogs
                                          Dim description = String.Format("This lead ({0},{1}) has not been reviewed within 3 days. This lead will be recycled within 48 hours.", ld.BBLE, ld.LeadsName)
-                                         log.SetAsTask(ld.EmployeeName, "Important", "Review New Leads Reminder", description, ld.BBLE, "Portal")
+                                         log.SetAsReminder(ld.EmployeeName, "Important", "Review New Leads Reminder", description, ld.BBLE, "Portal")
                                      End Sub,
                                      Function(leads)
                                          Dim ld = CType(leads, Lead)
@@ -80,8 +80,8 @@ Public Class LeadsEscalationRule
 
         rules.Add(New EscalationRule("Callback", "5.00:00:00",
                                      Sub(leads)
-                                         Dim ld = CType(leads, Lead)
-                                         UserMessage.AddNewMessage(ld.EmployeeName, "You missed a Callback", String.Format("The Call back of Leads ({0}) need to hanlder. BBLE:{1}", ld.LeadsName, ld.BBLE), ld.BBLE, DateTime.Now, "Portal")
+                                         'Dim ld = CType(leads, Lead)
+                                         'UserMessage.AddNewMessage(ld.EmployeeName, "You missed a Callback", String.Format("The Call back of Leads ({0}) need to hanlder. BBLE:{1}", ld.LeadsName, ld.BBLE), ld.BBLE, DateTime.Now, "Portal")
                                      End Sub,
                                      Function(leads)
                                          Dim ld = CType(leads, Lead)
@@ -107,7 +107,7 @@ Public Class LeadsEscalationRule
                                     Dim emps = ld.EmployeeName & ";" & ld.Employee.Manager
                                     Dim log As New ActivityLogs
                                     Dim description = String.Format("A call back was scheduled for {0:d}, If no call back is made within 48 hours, this lead will be recycled. Leads:{1}, BBLE: {2}", ld.CallbackDate, ld.LeadsName, ld.BBLE)
-                                    log.SetAsTask(emps, "Urgent", "Missed Callback Reminder", description, ld.BBLE, "Portal")
+                                    log.SetAsReminder(emps, "Urgent", "Missed Callback Reminder", description, ld.BBLE, "Portal")
                                 End Sub,
                                 Function(leads)
                                     Dim ld = CType(leads, Lead)
@@ -158,7 +158,7 @@ Public Class LeadsEscalationRule
                                  Dim emps = ld.EmployeeName & ";" & ld.Employee.Manager
                                  Dim log As New ActivityLogs
                                  Dim description = String.Format("A Door Knock was initiated on {0:d}, If no door knock attempt is made within 72 hours, this lead will be recycled.  Leads:{1}, BBLE: {2}", ld.LastUpdate2, ld.LeadsName, ld.BBLE)
-                                 log.SetAsTask(emps, "Urgent", "Door Knock Reminder", description, ld.BBLE, "Portal")
+                                 log.SetAsReminder(emps, "Urgent", "Door Knock Reminder", description, ld.BBLE, "Portal")
                              End Sub,
                              Function(leads)
                                  Return True
@@ -184,7 +184,7 @@ Public Class LeadsEscalationRule
                                        Dim emps = ld.EmployeeName & ";" & ld.Employee.Manager
                                        Dim log As New ActivityLogs
                                        Dim comments = "Hot Leads require an update every 48 Hours. If this is not a Hot Lead, change Status to Follow Up and select a date. If no comment is entered in 48 Hours, this lead will get escalated to a manager. "
-                                       log.SetAsTask(emps, "Urgent", "HotLeads Reminder", comments, ld.BBLE, "Portal")
+                                       log.SetAsReminder(emps, "Urgent", "HotLeads Reminder", comments, ld.BBLE, "Portal")
                                    End Sub,
                                    Function(leads)
                                        Dim ld = CType(leads, Lead)
