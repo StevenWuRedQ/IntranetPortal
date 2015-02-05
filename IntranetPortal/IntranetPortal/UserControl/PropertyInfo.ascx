@@ -67,8 +67,7 @@
         // Handler for .ready() called.
         init_currency();
     });
-    function openZoningUrl(zoingcode)
-    {
+    function openZoningUrl(zoingcode) {
         window.open("http://www.nyc.gov/html/dcp/pdf/zone/zoning_handbook/" + zoingcode + ".pdf");
     }
     //init_currency();
@@ -206,138 +205,86 @@
         <%--property form--%>
         <div style="margin: 20px" class="clearfix">
             <div class="form_head">General</div>
+            <ul class="ss_form_box clearfix">
 
-            <%--line 1--%>
-            <div class="form_div_node" style="width: 63%">
-                <span class="form_input_title">address</span>
-                <input class="text_input" value="<%= LeadsInfoData.PropertyAddress%>" />
-            </div>
+                <li class="ss_form_item" style="width:66%">
+                    <label class="ss_form_input_title">address</label>
+                    <input class="ss_form_input" style="width:91%" value="<%= LeadsInfoData.PropertyAddress%>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">BBLE</label>
+                    <input class="ss_form_input font_black" value="<%= LeadsInfoData.BBLE%>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Unit Number</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.BBLE %>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Neighborhood</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.Neighborhood %>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Block</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.Block %>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Lot</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.Lot %>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">NYC SQFT</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.NYCSqft %>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">YEAR BUILT</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.YearBuilt %>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">BUILDING DEM</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.BuildingDem %>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">LOT DEM</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.LotDem %>">
+                </li>
 
-            <div class="form_div_node form_div_node_margin">
-                <span class="form_input_title">bble</span>
-                <input class="text_input font_black" value="<%= LeadsInfoData.BBLE%>" />
-            </div>
-
-         <%--   <div class="form_div_node form_div_node_margin">
-                <span class="form_input_title">UnitNum</span>
-                <input class="text_input font_black" value="<%= LeadsInfoData.BBLE%>" />
-            </div>--%>
-
-            <%--end line 1--%>
-            <%--line 2--%>
-            <div class="form_div_node form_div_node_line_margin">
-                <span class="form_input_title">Neighborhood</span>
-                <input class="text_input" value="<%=LeadsInfoData.Neighborhood%>" />
-            </div>
-
-            <%--<div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Borough</span>
-
-                <input class="text_input" value="<%=LeadsInfoData.BoroughName%>" />
-            </div>--%>
-
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Block</span>
-
-                <input class="text_input" value="<%=LeadsInfoData.Block%>" />
-            </div>
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Lot</span>
-                <input class="text_input" value="<%= LeadsInfoData.Lot%>" />
-            </div>
-            <%--end line 2--%>
-            <%--line 3--%>
-
-
-
-            <div class="form_div_node form_div_node_line_margin ">
-                <span class="form_input_title">NYC SQFT</span>
-
-                <input class="text_input" value="<%=LeadsInfoData.NYCSqft%>" />
-            </div>
-
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Year Built</span>
-
-                <input class="text_input" value="<%=LeadsInfoData.YearBuilt%>" />
-            </div>
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Building dem</span>
-                <input class="text_input" value="<%=LeadsInfoData.BuildingDem%>" />
-            </div>
-
-            <%----end line 3----%>
-
-            <%--line 4--%>
-
-
-            <div class="form_div_node form_div_node_line_margin ">
-                <span class="form_input_title">Lot Dem</span>
-
-                <input class="text_input" value="<%=LeadsInfoData.LotDem%>" />
-            </div>
-
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">stories</span>
-
-                <input class="text_input" value="<%= LeadsInfoData.NumFloors %>" />
-            </div>
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Property Class</span>
-                <input class="text_input" value="<%=LeadsInfoData.PropertyClassCode%>" />
-            </div>
-
-            <%----end line 4----%>
-
-            <%-----line 5-----%>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">STORIES</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.NumFloors%>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">PROPERTY CLASS</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.PropertyClassCode%>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">MAX FAR</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.MaxFar%>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">
+                        Zoning (<span style="color: #0e9ee9; cursor: pointer"
+                            <% If (Not String.IsNullOrEmpty(LeadsInfoData.Zoning)) Then%>
+                            onclick="openZoningUrl('<%= LeadsInfoData.Zoning.ToLower.Trim%>')"
+                            <%End If%>>PDF</span>)</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.Zoning%>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">UNBUILT SQFT</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.UnbuiltSqft%>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">SALE DATE</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.UnbuiltSqft%>">
+                </li>
 
 
-            <div class="form_div_node form_div_node_line_margin">
-                <span class="form_input_title">Max Far</span>
-                <input class="text_input" value="<%=LeadsInfoData.MaxFar%>" />
-            </div>
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Zoning (<span style="color: #0e9ee9; cursor: pointer"
-                    <% If( Not String.IsNullOrEmpty(LeadsInfoData.Zoning)) Then %>
-                     onclick="openZoningUrl('<%= LeadsInfoData.Zoning.ToLower.Trim%>')"
-                    <%end if %>
-                    >PDF</span>)</span>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">ACTUAL FAR</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.ActualFar%>">
+                </li>
 
-                <input class="text_input" value="<%=LeadsInfoData.Zoning%>" />
-            </div>
-
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Unbuilt sqft</span>
-
-                <input class="text_input" value="<%=LeadsInfoData.UnbuiltSqft%>" />
-            </div>
-            <%----end line 5--%>
-
-            <%-----line 6-----%>
-             <div class="form_div_node form_div_node_line_margin">
-                <span class="form_input_title">Sale Date</span>
-                <input class="text_input" value="<%=LeadsInfoData.SaleDate%>" />
-            </div>
-
-            <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">actual far</span>
-
-                <input class="text_input" value="<%= LeadsInfoData.ActualFar%>" />
-            </div>
-            <%--remove tax class--%>
-            <%-- <div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Property Class</span>
-
-                <input class="text_input" value="<%=LeadsInfoData.TaxClass %>" />
-            </div>--%>
-            <%-----end line -----%>
-
-           
-            <%--<div class="form_div_node form_div_node_margin form_div_node_line_margin">
-                <span class="form_input_title">Zestimate</span>
-                <input class="text_input" value="$<%=LeadsInfoData.EstValue %>" />
-            </div>--%>
-            <%----end line --%>
+            </ul>
+            
         </div>
 
         <%-------end-----%>
