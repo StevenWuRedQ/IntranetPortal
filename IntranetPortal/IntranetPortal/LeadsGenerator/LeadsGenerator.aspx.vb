@@ -82,7 +82,11 @@ Public Class LeadsGenerator
                           sr.LOT_DIM,
                           sr.Servicer,
                           sr.Type,
-                          .AgentInLeads = ld.EmployeeName}).ToList
+                          .AgentInLeads = ld.EmployeeName,
+                          sr.PropertyAddress,
+                          sr.BLOCK,
+                          sr.LOT
+                          }).ToList
 
 
 
@@ -106,7 +110,14 @@ Public Class LeadsGenerator
         If e.RowType <> GridViewRowType.Data Then
             Return
         End If
+        If QueryResultsGrid.DataSource Is Nothing Then
+            RefreshGrid()
+        End If
         Dim resultId As Integer = Convert.ToInt32(e.GetValue("Id"))
+
+        If (resultId = 0) Then
+            Return
+        End If
         Dim s = SearchResult.getSeachResult(resultId)
 
         If Not String.IsNullOrEmpty(s.AgentInLeads) Then

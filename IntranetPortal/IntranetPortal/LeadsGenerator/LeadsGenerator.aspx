@@ -872,13 +872,13 @@
                                                                         <dx:GridViewDataColumn FieldName="ORIG_SQFT" />
                                                                         <dx:GridViewDataColumn FieldName="LOT_DIM" />
                                                                         <dx:GridViewDataColumn FieldName="Servicer" />
-                                                                        <dx:GridViewDataColumn FieldName="BBLE" Caption="ShowMap" >
+                                                                        <%--<dx:GridViewDataColumn  Caption="ShowMap" >
                                                                             <DataItemTemplate>
                                                                                 <div>
-                                                                                    <i class="fa fa-map-marker icon_btn" style="font-size:18px;margin-left:20px;" onclick='ShowPropertyMap("<%# Eval("BBLE") %>")'> </i>
+                                                                                    <a  style="font-size:18px;margin-left:20px;" onclick='ShowPropertyMap("<%# Eval("BBLE") %>")' >Show Map</a>
                                                                                 </div>
                                                                             </DataItemTemplate>
-                                                                        </dx:GridViewDataColumn>
+                                                                        </dx:GridViewDataColumn>--%>
                                                                        
                                                                       
                                                                         <dx:GridViewDataColumn FieldName="Type" />
