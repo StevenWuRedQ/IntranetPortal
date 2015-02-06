@@ -144,13 +144,13 @@
                         <div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div id="container" class="containers" style="height: 300px; width: 100%;"></div>
+                                    <div id="container" class="containers" style="height: 250px; width: 100%;"></div>
                                     <div class="chart_text">
                                         In Process Leads: 35
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div id="current_leads" class="containers" style="height: 300px; width: 100%;"></div>
+                                    <div id="current_leads" class="containers" style="height: 250px; width: 100%;"></div>
                                     <div class="chart_text">
                                         Current Leads: 1250
                                     </div>
@@ -158,6 +158,18 @@
                             </div>
                         </div>
 
+                        <div style="margin: 30px 0;">
+                            <i class="fa fa-bar-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Monthly Leads Process</span>
+                        </div>
+                        <div>
+                            <div id="leads_process_chart" class="containers" style="height: 250px; width: 100%;"></div>
+                        </div>
+                        <div style="margin: 30px 0;">
+                            <i class="fa fa-line-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Compare Offices</span>
+                        </div>
+                        <div>
+                            <div id="compare_offices_chart" class="containers" style="height: 200px; width: 100%;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -187,7 +199,7 @@
 
                     percentPrecision: 2,
                     customizeText: function () {
-                        
+
                         return this.argumentText + " - " + this.percentText;
                     }
                 },
@@ -207,6 +219,92 @@
         $("#container").dxPieChart(option);
         option.dataSource = dataSource2;
         $("#current_leads").dxPieChart(option);
+
+        var leadsProcess = [
+    { state: "May", young: 6.7, middle: 28.6, older: 5.1 },
+    { state: "Jun", young: 9.6, middle: 43.4, older: 9 },
+    { state: "Jul", young: 13.5, middle: 49, older: 5.8 },
+    { state: "Aug", young: 30, middle: 90.3, older: 14.5 }
+        ];
+
+        $("#leads_process_chart").dxChart({
+            dataSource: leadsProcess,
+            commonSeriesSettings: {
+                argumentField: "state",
+                type: "stackedBar"
+            },
+            series: [
+                { valueField: "young", name: "Closed" },
+                { valueField: "middle", name: "In Process" },
+                { valueField: "older", name: "Appointments" }
+            ],
+            legend: {
+                verticalAlignment: "bottom",
+                horizontalAlignment: "center",
+                itemTextPosition: 'top'
+            },
+            valueAxis: {
+                title: {
+                    text: "millions"
+                },
+                position: "right"
+            },
+
+            tooltip: {
+                enabled: true,
+                location: "edge",
+                customizeText: function () {
+                    return this.seriesName + " years: " + this.valueText;
+                }
+            }
+        });
+        var compateOfficeData = [
+    { year: 1997, smp: 263, mmp: 226, cnstl: 10, cluster: 1 },
+    { year: 1999, smp: 169, mmp: 256, cnstl: 66, cluster: 7 },
+    { year: 2001, smp: 57, mmp: 257, cnstl: 143, cluster: 43 },
+    { year: 2003, smp: 0, mmp: 163, cnstl: 127, cluster: 210 },
+    { year: 2005, smp: 0, mmp: 103, cnstl: 36, cluster: 361 },
+    { year: 2007, smp: 0, mmp: 91, cnstl: 3, cluster: 406 }
+        ];
+
+       
+
+        var chartOptions = {
+            dataSource: compateOfficeData,
+            commonSeriesSettings: {
+                type: "spline",
+                argumentField: "year"
+            },
+            commonAxisSettings: {
+                grid: {
+                    visible: true
+                }
+            },
+            margin: {
+                bottom: 20
+            },
+            series: [
+                { valueField: "smp", name: "SMP" },
+                { valueField: "mmp", name: "MMP" },
+                { valueField: "cnstl", name: "Cnstl" },
+                { valueField: "cluster", name: "Cluster" }
+            ],
+            tooltip: {
+                enabled: true
+            },
+            legend: {
+                verticalAlignment: "bottom",
+                horizontalAlignment: "center",
+                itemTextPosition: 'top'
+            },
+            //title: "Architecture Share Over Time (Count)",
+            commonPaneSettings: {
+                border: {
+                    visible: true
+                }
+            }
+        };
+        var chart = $("#compare_offices_chart").dxChart(chartOptions).dxChart("instance");
     </script>
 </asp:Content>
 
