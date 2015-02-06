@@ -259,12 +259,10 @@
             }
         });
         var compateOfficeData = [
-    { year: 1997, smp: 263, mmp: 226, cnstl: 10, cluster: 1 },
-    { year: 1999, smp: 169, mmp: 256, cnstl: 66, cluster: 7 },
-    { year: 2001, smp: 57, mmp: 257, cnstl: 143, cluster: 43 },
-    { year: 2003, smp: 0, mmp: 163, cnstl: 127, cluster: 210 },
-    { year: 2005, smp: 0, mmp: 103, cnstl: 36, cluster: 361 },
-    { year: 2007, smp: 0, mmp: 91, cnstl: 3, cluster: 406 }
+    { year: "November,2014", Queens: 190, Brooklyn: 180, Bronx: 100, Manhattan: 150 },
+    { year: "December,2014", Queens: 263, Brooklyn: 280, Bronx: 230, Manhattan: 150 },
+    { year: "January", Queens: 220, Brooklyn: 380, Bronx: 190, Manhattan: 150 },
+   
         ];
 
        
@@ -284,10 +282,10 @@
                 bottom: 20
             },
             series: [
-                { valueField: "smp", name: "SMP" },
-                { valueField: "mmp", name: "MMP" },
-                { valueField: "cnstl", name: "Cnstl" },
-                { valueField: "cluster", name: "Cluster" }
+                { valueField: "Queens", name: "Queens Office" },
+                { valueField: "Brooklyn", name: "Queens Office" },
+                { valueField: "Bronx", name: "Bronx Office" },
+                { valueField: "Manhattan", name: "Manhattan Office" }
             ],
             tooltip: {
                 enabled: true
