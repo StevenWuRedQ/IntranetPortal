@@ -375,6 +375,31 @@ Partial Public Class Employee
 
         Return Nothing
     End Function
+
+    Public Shared Function GetOfficeAssignAccount(empName As String) As String
+        Dim emp = GetInstance(empName)
+        Dim recycleName = emp.Department & " office"
+        If GetInstance(recycleName) IsNot Nothing Then
+            Return recycleName
+        End If
+
+        Using ctx As New Entities
+            Dim team = (From t In ctx.Teams
+                       Join ut In ctx.UserInTeams On t.TeamId Equals ut.TeamId
+                       Where ut.EmployeeName = empName
+                       Select t.Name).FirstOrDefault
+
+            If team IsNot Nothing Then
+                recycleName = team & " office"
+
+                If GetInstance(recycleName) IsNot Nothing Then
+                    Return recycleName
+                End If
+            End If
+        End Using
+
+        Return empName
+    End Function
 End Class
 
 Public Enum ShortSaleRole
