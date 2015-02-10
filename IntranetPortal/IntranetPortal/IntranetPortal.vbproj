@@ -596,6 +596,13 @@
       <DependentUpon>DownloadFile.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\EmailSummary.aspx.designer.vb">
+      <DependentUpon>EmailSummary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\EmailSummary.aspx.vb">
+      <DependentUpon>EmailSummary.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="EmailTemplate\TaskSummary.ascx.designer.vb">
       <DependentUpon>TaskSummary.ascx</DependentUpon>
     </Compile>
@@ -1338,6 +1345,7 @@
     <Content Include="DLL\MyIdealProp.Workflow.Core.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.DBPersistence.dll" />
     <Content Include="DownloadFile.aspx" />
+    <Content Include="EmailTemplate\EmailSummary.aspx" />
     <Content Include="EmailTemplate\TaskSummary.ascx" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />

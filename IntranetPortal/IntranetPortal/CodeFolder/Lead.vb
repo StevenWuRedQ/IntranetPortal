@@ -11,6 +11,7 @@ Partial Public Class Lead
 
     Public Shared Function GetInstance(bble As String) As Lead
         Dim context As New Entities
+
         Return context.Leads.Where(Function(l) l.BBLE = bble).SingleOrDefault
     End Function
 

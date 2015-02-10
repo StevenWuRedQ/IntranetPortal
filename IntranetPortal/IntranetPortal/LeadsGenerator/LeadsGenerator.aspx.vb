@@ -156,13 +156,16 @@ Public Class LeadsGenerator
         'Throw New Exception(message)
     End Sub
     Protected Function HasNewLeadsInProtal() As Integer
+        Dim OfficeName = GetCurrentOffice()
         Using Context As New Entities
-            Return Context.Leads.Where(Function(l) l.EmployeeName = Page.User.Identity.Name And l.Status = LeadStatus.NewLead).Count()
+            Return Context.Leads.Where(Function(l) l.EmployeeName = OfficeName And l.Status = LeadStatus.NewLead).Count()
         End Using
 
         Return 0
     End Function
-
+    Protected Function GetCurrentOffice() As String
+        Return Employee.GetOfficeAssignAccount(Page.User.Identity.Name)
+    End Function
     Protected Function LeadMaxAdd() As Integer
         Return MaxSelect - HasNewLeadsInProtal()
     End Function
@@ -177,18 +180,20 @@ Public Class LeadsGenerator
             Alert("You have enough leads in bank !")
             Return
         End If
-        Dim empID = Employee.GetInstance(Page.User.Identity.Name).EmployeeID
+        Dim empOffice = Employee.GetInstance(GetCurrentOffice())
         If selectrows.Count < maxAdd Then
             Using Context As New Entities
                 For Each row In selectrows
                     Dim l = New Lead
-                    l.EmployeeName = Page.User.Identity.Name
-                    l.EmployeeID = empID
+                    l.EmployeeName = empOffice.Name
+                    l.EmployeeID = empOffice.EmployeeID
                     l.BBLE = row
                     l.Status = LeadStatus.NewLead
                     l.AssignBy = l.EmployeeName
                     l.AssignDate = Date.Now
-
+                    Dim li = New LeadsInfo
+                    li.BBLE = row
+                    Context.LeadsInfoes.Add(li)
                     Context.Leads.Add(l)
                 Next
                 Context.SaveChanges()
