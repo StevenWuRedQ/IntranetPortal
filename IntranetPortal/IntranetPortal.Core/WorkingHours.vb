@@ -1,4 +1,5 @@
 ﻿Public Class WorkingHours
+
     ''' <summary>
     ''' 
     ''' </summary>
@@ -25,6 +26,19 @@
         End While
 
         Return (endDate - startDate).Add(TimeSpan.Parse(dayCount & ".00:00:00"))
+    End Function
+
+    Public Shared Function AddWorkDays(startDate As DateTime, days As Integer) As DateTime
+        Dim returnDate = startDate
+        Dim count = 0
+        While count < days
+            returnDate = returnDate.AddDays(1)
+            If IsWorkingDay(returnDate) Then
+                count = count + 1
+            End If
+        End While
+
+        Return returnDate
     End Function
 
     Private Shared Function IsHoliday(startDate As DateTime, emp As String) As Boolean

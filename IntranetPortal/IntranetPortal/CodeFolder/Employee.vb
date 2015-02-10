@@ -398,8 +398,49 @@ Partial Public Class Employee
             End If
         End Using
 
+        If Not String.IsNullOrEmpty(emp.Manager) Then
+            Return emp.Manager
+        End If
+
         Return empName
     End Function
+
+    Public Shared Function GetEmpOfficeManagers(empName As String) As String()
+        Dim depart = GetInstance(empName).Department
+
+        Dim officeRole = "OfficeManager-" & depart
+
+        If Roles.RoleExists(officeRole) Then
+            Return Roles.GetUsersInRole(officeRole)
+        End If
+
+        Dim teams = GetEmpTeams(empName)
+        If teams IsNot Nothing AndAlso teams.Length > 0 Then
+            Dim team = teams.First()
+
+            If Roles.RoleExists("OfficeManager-" & team) Then
+                Return Roles.GetUsersInRole("OfficeManager-" & team)
+            End If
+        End If
+
+        Return Nothing
+    End Function
+
+    Public Shared Function GetEmpTeams(empName As String) As String()
+        Using ctx As New Entities
+            Dim team = (From t In ctx.Teams
+                       Join ut In ctx.UserInTeams On t.TeamId Equals ut.TeamId
+                       Where ut.EmployeeName = empName
+                       Select t.Name).ToList
+
+            If team IsNot Nothing Then
+                Return team.ToArray
+            End If
+
+            Return Nothing
+        End Using
+    End Function
+
 End Class
 
 Public Enum ShortSaleRole

@@ -5,6 +5,7 @@ Public Class BaseRule
     Public Property RuleName As String
     Public Property ExecuteOn As TimeSpan
     Public Property Period As TimeSpan
+    Public Property ExecuteNow As Boolean
 
     Public Sub New()
 
@@ -261,7 +262,7 @@ Public Class CompleteTaskRule
 
         Dim remiderInsts = WorkflowService.GetMyOriginated("Portal")
 
-        For Each pInst In remiderInsts.Where(Function(p) p.ProcessName = "TaskProcess" And p.Status = MyIdealProp.Workflow.DBPersistence.ProcessInstance.ProcessStatus.Active)
+        For Each pInst In remiderInsts.Where(Function(p) p.ProcessName = "ReminderProcess" And p.Status = MyIdealProp.Workflow.DBPersistence.ProcessInstance.ProcessStatus.Active)
             Try
                 Dim bble = pInst.GetDataFieldValue("BBLE").ToString
                 Dim taskId = pInst.GetDataFieldValue("TaskId").ToString
@@ -308,4 +309,97 @@ Public Class CompleteTaskRule
 
         Return False
     End Function
+End Class
+
+Public Class ExpiredAllReminderRule
+    Inherits BaseRule
+
+    Public Overrides Sub Execute()
+
+        Dim remiderInsts = WorkflowService.GetMyOriginated("Portal")
+
+        For Each pInst In remiderInsts.Where(Function(p) p.ProcessName = "TaskProcess" And p.Status = MyIdealProp.Workflow.DBPersistence.ProcessInstance.ProcessStatus.Active)
+            Try
+                Dim bble = pInst.GetDataFieldValue("BBLE").ToString
+                Dim taskId = pInst.GetDataFieldValue("TaskId").ToString
+                If Not (ExpiredReminderTask(bble, taskId, pInst.Id)) Then
+                    Log("No Action on pInst: " & pInst.Id & " Process Name: " & pInst.DisplayName)
+                End If
+            Catch ex As Exception
+                Log("Exception in Complete Task Rule. pInst: " & pInst.Id & " Process Name: " & pInst.DisplayName, ex)
+            End Try
+        Next
+    End Sub
+
+    Public Function ExpiredReminderTask(bble As String, taskId As Integer, pInstId As Integer) As Boolean
+        Dim tk = UserTask.GetTaskById(taskId)
+
+        If (CheckIfNeedExpired(bble, tk)) Then
+            UserTask.ExpiredTask(taskId)
+            WorkflowService.ExpiredReminderProcess(pInstId)
+
+            Dim comments = String.Format("{0} is expired by System.", tk.Action)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status, Nothing, "Portal", LeadsActivityLog.EnumActionType.SetAsTask)
+
+            Log(String.Format("Task is expired. BBLE: {0}, task Name: {1}, task user: {2}", bble, tk.Action, tk.EmployeeName))
+            Return True
+        End If
+
+        Return False
+    End Function
+
+    Private Function CheckIfNeedExpired(bble As String, tk As UserTask) As Boolean
+        If tk.Status = UserTask.TaskStatus.Active Then
+            Return True
+        End If
+
+        Return False
+    End Function
+End Class
+
+Public Class CreateReminderBaseOnErrorProcess
+    Inherits BaseRule
+
+    Public Overrides Sub Execute()
+
+        For Each pId In {4329, 4332, 4333}
+            Dim procInstId = pId
+            Dim procInst = WorkflowService.LoadProcInstById(procInstId)
+            Dim bble = procInst.GetDataFieldValue("BBLE").ToString
+            Dim taskId = procInst.GetDataFieldValue("TaskId")
+            Dim mgr = procInst.GetDataFieldValue("Mgr").ToString
+            Dim displayName = procInst.DisplayName
+            WorkflowService.StartTaskProcess("ReminderProcess", displayName, taskId, bble, mgr, "Important")
+            Log("Reminder Process is created. pId: " & pId)
+        Next
+
+    End Sub
+
+End Class
+
+Public Class RecycleProcessRule
+    Inherits BaseRule
+
+    Public Overrides Sub Execute()
+        Dim rleads = Core.RecycleLead.GetActiveRecycleLeads
+
+        For Each rld In rleads
+            Try
+                Dim ld = Lead.GetInstance(rld.BBLE)
+
+                If ld.LastUserUpdate <= rld.RecycleDate Then
+                    ld.Recycle()
+                    rld.Recycle()
+                    Log("Leads is Recycled. BBLE: " & ld.BBLE)
+                Else
+                    'Since user did action against this leads, the Recycle action expired
+                    WorkflowService.ExpiredRecycleProcess(rld.BBLE)
+                    rld.Expire()
+                End If
+            Catch ex As Exception
+                Log("Error in recycle leads, BBLE: " & rld.BBLE, ex)
+            End Try
+
+        Next
+    End Sub
 End Class

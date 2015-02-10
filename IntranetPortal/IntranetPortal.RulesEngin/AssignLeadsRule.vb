@@ -1,4 +1,6 @@
-﻿Public Class AssignLeadsRule
+﻿Imports IntranetPortal.Core
+
+Public Class AssignLeadsRule
     Inherits BaseRule
 
     Public Overrides Sub Execute()

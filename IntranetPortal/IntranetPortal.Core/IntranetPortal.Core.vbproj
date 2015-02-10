@@ -104,6 +104,9 @@
     <Compile Include="ADOEntity\EmailTemplate.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\RecycleLead.vb">
+      <DependentUpon>CoreEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\SpecialDay.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
@@ -127,6 +130,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="PropertyHelper.vb" />
+    <Compile Include="RecycleLead.vb" />
+    <Compile Include="WorkingHours.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

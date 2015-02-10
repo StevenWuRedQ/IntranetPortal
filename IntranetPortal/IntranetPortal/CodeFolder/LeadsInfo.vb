@@ -12,6 +12,7 @@
         StalledProject = 8
         AEP = 9
         ShortSale = 10
+        CoOpConversion = 11
     End Enum
 
     Public ReadOnly Property IsApartment() As Boolean
@@ -20,6 +21,29 @@
                 Return BBLE.StartsWith("A")
             End If
             Return False
+        End Get
+    End Property
+
+    Public ReadOnly Property AptBBLE As String
+        Get
+            If IsApartment Then
+                Return String.Format("{0}#{1}", BuildingBBLE, UnitNum)
+            End If
+
+            Return BBLE
+        End Get
+    End Property
+
+    Public ReadOnly Property AptBuildingInfo As ApartmentBuilding
+        Get
+            If IsApartment Then
+                Using ctx As New Entities
+                    Dim buildingId = CInt(BBLE.Substring(1, 5))
+                    Return ctx.ApartmentBuildings.Find(buildingId)
+                End Using
+            End If
+
+            Return Nothing
         End Get
     End Property
 

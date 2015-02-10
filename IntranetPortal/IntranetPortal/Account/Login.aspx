@@ -1,7 +1,6 @@
 <%@ Page Language="VB" AutoEventWireup="true" CodeBehind="Login.aspx.vb" Inherits="IntranetPortal.Login" %>
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta charset="utf-8" />
@@ -17,7 +16,6 @@
     <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="/css/main.css" />
     <!-- Latest compiled and minified CSS -->
-
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script>
         function onLogIn() {

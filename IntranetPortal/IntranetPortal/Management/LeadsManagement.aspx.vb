@@ -77,7 +77,6 @@ Public Class LeadsManagement
         Dim officeName = office & " Office"
 
         Dim unActiveUser = Employee.GetDeptUsersList(office, False).Select(Function(emp) emp.Name).ToArray
-
         Using Context As New Entities
             gridLeads.DataSource = (From li In Context.LeadsInfoes
                                    Join ld In Context.Leads On ld.BBLE Equals li.BBLE

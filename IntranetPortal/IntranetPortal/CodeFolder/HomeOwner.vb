@@ -88,7 +88,7 @@ Partial Public Class HomeOwner
 
                     If phone Is Nothing Then
 
-                        phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = Name And p.Phone = item.phoneField).SingleOrDefault
+                        phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = Name And p.Phone = item.phoneField).FirstOrDefault
 
                         If phone Is Nothing Then
                             phone = GetOwnerPhone(BBLE, Name, item)
@@ -107,7 +107,7 @@ Partial Public Class HomeOwner
                         Dim phone = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).FirstOrDefault
 
                         If phone Is Nothing Then
-                            phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).SingleOrDefault
+                            phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).FirstOrDefault
 
                             If phone Is Nothing Then
                                 phone = GetOwnerPhone(BBLE, name, item)
@@ -127,7 +127,7 @@ Partial Public Class HomeOwner
                         Dim phone = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).FirstOrDefault
 
                         If phone Is Nothing Then
-                            phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).SingleOrDefault
+                            phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).FirstOrDefault
 
                             If phone Is Nothing Then
                                 phone = GetOwnerPhone(BBLE, name, item)
@@ -144,9 +144,9 @@ Partial Public Class HomeOwner
                     Dim name = String.Format("{0} {1}{2}", relative.nameField.firstNameField, relative.nameField.middleNameField & " ", relative.nameField.lastNameField)
 
                     For Each item In relative.phonesField
-                        Dim phone = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).SingleOrDefault
+                        Dim phone = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).FirstOrDefault
 
-                        phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).SingleOrDefault
+                        phone = context.HomeOwnerPhones.Local.Where(Function(p) p.BBLE = BBLE And p.OwnerName = name And p.Phone = item.phoneField).FirstOrDefault
 
                         If phone Is Nothing Then
                             phone = GetOwnerPhone(BBLE, name, item)

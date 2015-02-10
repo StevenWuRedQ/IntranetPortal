@@ -6,7 +6,7 @@
     }
 
     function ClosePage() {
-        var contentPane = splitterTaskPage.GetPaneByName("contentPanel")
+        var contentPane = splitterTaskPage.GetPaneByName("contentPanel");
         contentPane.SetContentUrl("about:blank");
     }
 
@@ -57,7 +57,35 @@
             } else {
             }
         });
-    }   
+    }
+
+    function SortLeadsList(s, field) {
+        var classDesc = "fa fa-sort-amount-desc icon_btn tooltip-examples";
+        var classAsc = "fa fa-sort-amount-asc icon_btn tooltip-examples";
+        var sort = s.getAttribute("class");
+
+        if (sort.indexOf("-desc") > 0) {
+            s.setAttribute("class", classAsc);
+            gridProcess.SortBy(field, "ASC");
+        }
+        else {
+            if (sort.indexOf("-asc") > 0) {
+                s.setAttribute("class", classDesc);
+                gridProcess.SortBy(field, "DSC");
+            }
+        }
+    }
+
+    function OnSortMenuClick(s, e) {
+        var icon = document.getElementById("btnSortIcon");
+        if (e.item.index == 0) {
+            SortLeadsList(icon, "StartDate");
+        }
+
+        //if (e.item.index == 1) {
+        //    gridProcess.PerformCallback("Group|Originator");
+        //}     
+    }
 
     function ArchivedProcInst(rowIndex) {
         gridProcess.DeleteRow(rowIndex);
@@ -165,4 +193,16 @@
             <ClientSideEvents EndCallback="function(s,e){ InitScrollBar();}" />
         </dx:ASPxGridView>
     </div>
+
+    <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="aspxPopupSortMenu"
+        ShowPopOutImages="false" AutoPostBack="false"
+        ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px"
+        PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
+        <ItemStyle Paddings-PaddingLeft="20px" />
+        <Items>
+            <dx:MenuItem Text="Date" Name="Date">
+            </dx:MenuItem>                                             
+        </Items>
+        <ClientSideEvents ItemClick="OnSortMenuClick" />
+    </dx:ASPxPopupMenu>
 </div>

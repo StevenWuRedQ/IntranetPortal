@@ -11,7 +11,7 @@ Public Class ActivityLogs
                                                         "<i class=""{1}""></i>" &
                                                     "</div>"
 
-    Public Property DispalyMode As ActivityLogMode = ActivityLogMode.Leads
+    Public Property DisplayMode As ActivityLogMode = ActivityLogMode.Leads
     Public Event MortgageStatusUpdateEvent As OnMortgageStatusUpdate
     Public Delegate Sub OnMortgageStatusUpdate(updateType As String, status As String, bble As String)
 
@@ -295,6 +295,27 @@ Public Class ActivityLogs
 
             BindData(hfBBLE.Value)
         End If
+
+        'Postpone the recycle date
+        If (e.Parameters.StartsWith("PostponeRecylce")) Then
+            If e.Parameters.Split("|").Length = 3 Then
+                Dim logId = CInt(e.Parameters.Split("|")(1))
+                Dim days = CInt(e.Parameters.Split("|")(2))
+
+                If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                    Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+                    If wli IsNot Nothing Then
+                        wli.ProcessInstance.DataFields("Result") = "Completed"
+                        wli.Finish()
+
+                        Dim recycle = Core.RecycleLead.GetInstanceByLogId(logId)
+                        Dim rDate = recycle.PostponeDays(days)
+
+                        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Recycle action is postponed to {0} by {1} ", rDate.ToShortDateString, Page.User.Identity.Name), hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+                    End If
+                End If
+            End If
+        End If
     End Sub
 
     Sub SetAsTask()
@@ -350,15 +371,15 @@ Public Class ActivityLogs
         Dim ld = LeadsInfo.GetInstance(hfBBLE.Value)
 
         Dim taskName = String.Format("{0} {1}", cbTaskAction.Text, ld.StreetNameWithNo)
-        If DispalyMode = ActivityLogMode.Leads Then
+        If DisplayMode = ActivityLogMode.Leads Then
             WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text)
-        ElseIf DispalyMode = ActivityLogMode.ShortSale Then
+        ElseIf DisplayMode = ActivityLogMode.ShortSale Then
             WorkflowService.StartTaskProcess("ShortSaleTask", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text)
         End If
 
         For i = 0 To emps.Count - 1
             If Not emps(i) = Page.User.Identity.Name Then
-                Dim tmpName = emps(1).Trim
+                Dim tmpName = emps(i).Trim
                 'Dim title = String.Format("A New Task has been assigned by {0}  regarding {1} for {2}", Page.User.Identity.Name, cbTaskAction.Text, ld.PropertyAddress)
                 'UserMessage.AddNewMessage(tmpName, title, comments, hfBBLE.Value)
 
@@ -410,14 +431,6 @@ Public Class ActivityLogs
         Dim ld = LeadsInfo.GetInstance(bble)
         Dim taskName = String.Format("{0} {1}", taskAction, ld.StreetNameWithNo)
         WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, bble, employees, taskPriority)
-        
-        'Dim emps = employees.Split(";").Distinct.ToArray
-        'For i = 0 To emps.Count - 1
-        '    If Not emps(i) = createUser Then
-        '        Dim title = String.Format("A New Task has been assigned by {0}  regarding {1} for {2}", createUser, taskAction, ld.PropertyAddress)
-        '        UserMessage.AddNewMessage(emps(i), title, comments, bble, DateTime.Now, createUser)
-        '    End If
-        'Next
     End Sub
 
     Public Sub SetAsReminder(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String)
@@ -452,14 +465,6 @@ Public Class ActivityLogs
 
         Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString, Nothing, createUser, LeadsActivityLog.EnumActionType.SetAsTask)
         Dim task = UserTask.AddUserTask(bble, employees, taskAction, taskPriority, "In Office", scheduleDate, taskDescription, log.LogID, createUser)
-
-        'Dim taskId As Integer
-        'Using Context As New Entities
-        '    Dim task = Context.UserTasks.Add(AddTask(bble, employees, taskAction, taskPriority, scheduleDate, taskDescription, log.LogID, createUser))
-        '    Context.SaveChanges()
-        '    taskId = task.TaskID
-        'End Using
-
         Return task.TaskID
     End Function
 
@@ -536,6 +541,35 @@ Public Class ActivityLogs
                     btnTaskComplete.Visible = False
                     ltDoorknockResult.Visible = True
                     ltDoorknockResult.Text = "Complete"
+                End If
+            End If
+        End If
+
+        If category = "RecycleTask" Then
+            If e.GetValue("LogID") IsNot Nothing Then
+                Dim logId = CInt(e.GetValue("LogID"))
+
+                Dim recyle = Core.RecycleLead.GetInstanceByLogId(logId)
+                Dim pnlTask = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "pnlRecycleTask"), Panel)
+                Dim cbRecycleDays = TryCast(pnlTask.FindControl("cbRecycleDays"), ASPxComboBox)
+                Dim ltRecycleDays = TryCast(pnlTask.FindControl("ltRecycleDays"), Literal)
+
+                If recyle IsNot Nothing AndAlso recyle.Status = Core.RecycleLead.RecycleStatus.Active Then
+
+                    'check if this is recycle page
+                    If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                        Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
+                        If wli IsNot Nothing AndAlso wli.ProcessName.ToString = "RecycleProcess" AndAlso CInt(wli.ProcessInstance.DataFields("TaskId")) = recyle.RecycleId Then
+                            cbRecycleDays.Visible = True
+                            cbRecycleDays.ClientSideEvents.SelectedIndexChanged = String.Format("function(s,e){{PostponeRecylce({0}, s);}}", logId)
+                        Else
+
+                        End If
+                    End If
+                Else
+                    cbRecycleDays.Visible = False
+                    ltRecycleDays.Visible = True
+                    ltRecycleDays.Text = If(recyle IsNot Nothing, CType(recyle.Status, Core.RecycleLead.RecycleStatus).ToString, "")
                 End If
             End If
         End If
@@ -789,7 +823,7 @@ Public Class ActivityLogs
             Throw New Exception("Comments can not be empty.")
         End If
 
-        If Me.DispalyMode = ActivityLogMode.ShortSale Then
+        If Me.DisplayMode = ActivityLogMode.ShortSale Then
             aspxdate = DateTime.Now
             Dim typeOfUpdate = e.Parameter.Split("|")(2)
             Dim statusOfUpdate = e.Parameter.Split("|")(3)

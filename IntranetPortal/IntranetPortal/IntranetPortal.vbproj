@@ -356,6 +356,12 @@
     <Compile Include="DataModel\Agent_Properties.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\Apartment.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\ApartmentBuilding.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\APIOrder.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>

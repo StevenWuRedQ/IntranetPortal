@@ -86,6 +86,7 @@
         Approved
         Declined
         Email
+        RecycleTask
     End Enum
 
     Enum EnumActionType

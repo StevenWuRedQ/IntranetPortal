@@ -161,7 +161,7 @@
 
     function CompleteTask(logID) {
         NeedToRefreshList = true;
-        gridTrackingClient.PerformCallback("CompleteTask|" + logID);       
+        gridTrackingClient.PerformCallback("CompleteTask|" + logID);
     }
 
     function ResendTask(logID) {
@@ -226,6 +226,15 @@
             }
 
         }
+    }
+
+    function PostponeRecylce(logID, s) {
+        if (confirm("Are you sure to postpone?")) {
+            NeedToRefreshList = true;
+            gridTrackingClient.PerformCallback("PostponeRecylce|" + logID + "|" + s.GetValue());
+        }
+        else
+            s.SetText("Extend...");
     }
 
     function AcceptAppointment(logID) {
@@ -377,11 +386,11 @@
 
                 <%-- 50px --%>
                 <div style="margin-top: 50px">
-                    <div <%= If(DispalyMode = ActivityLogMode.ShortSale, "style='display:none'", "")%>>Date of Comment:</div>
-                    <div class="border_under_line" <%= If(DispalyMode = ActivityLogMode.ShortSale, "style='display:none'", "style='height:80px'")%>>
+                    <div <%= If(DisplayMode = ActivityLogMode.ShortSale, "style='display:none'", "")%>>Date of Comment:</div>
+                    <div class="border_under_line" <%= If(DisplayMode = ActivityLogMode.ShortSale, "style='display:none'", "style='height:80px'")%>>
                         <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
-                    <div <%= If(DispalyMode = ActivityLogMode.Leads, "style='display:none'", "")%>>
+                    <div <%= If(DisplayMode = ActivityLogMode.Leads, "style='display:none'", "")%>>
                         <div class="color_gray upcase_text">Type of update</div>
                         <select class="select_bootstrap select_margin" id="selType1">
                             <option>1st Mortgage</option>
@@ -590,6 +599,43 @@
                             </div>
                         </asp:Panel>
 
+                        <asp:Panel runat="server" ID="pnlRecycleTask" Visible='<%# Eval("Category").ToString.StartsWith("RecycleTask")%>'>
+                            <table style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <td style="font-weight: bold">Recycle</td>
+                                        <td style="text-align: right; width: 120px;">
+                                            <div style="float: right">
+                                                <asp:Panel runat="server" ID="pnlRecylce">
+                                                    <div style="float: right;">
+                                                       <span style="font-size: 14px;">
+                                                        <asp:Literal runat="server" ID="ltRecycleDays"></asp:Literal></span>
+                                                        <dx:ASPxComboBox runat="server" ID="cbRecycleDays" Width="80px" Visible="false">
+                                                            <Items>
+                                                                <dx:ListEditItem Text="Extend..." Value="0" Selected="true" />
+                                                                <dx:ListEditItem Text="1 Day" Value="1" />
+                                                                <dx:ListEditItem Text="2 Days" Value="2" />
+                                                                <dx:ListEditItem Text="3 Days" Value="3" />
+                                                                <dx:ListEditItem Text="4 Days" Value="4" />
+                                                                <dx:ListEditItem Text="5 Days" Value="5" />
+                                                            </Items>
+                                                        </dx:ASPxComboBox>
+                                                    </div>
+                                                </asp:Panel>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2">
+                                            <%# Eval("Comments")%>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </asp:Panel>
+
                         <asp:Panel runat="server" Visible='<%# Eval("Category").ToString.StartsWith("Approval")%>' ID="panelTask">
                             <table style="width: 100%">
                                 <thead>
@@ -616,7 +662,7 @@
                                 </tbody>
                             </table>
                         </asp:Panel>
-                        <asp:Literal runat="server" Visible='<%# Not (Eval("Category").ToString.StartsWith("Task") Or Eval("Category").ToString.StartsWith("Appointment") Or Eval("Category").ToString.StartsWith("Approval") Or Eval("Category").ToString.StartsWith("DoorknockTask"))%>' Text='<%# Eval("Comments")%>'>                                                
+                        <asp:Literal runat="server" Visible='<%# Not (Eval("Category").ToString.StartsWith("Task") Or Eval("Category").ToString.StartsWith("Appointment") Or Eval("Category").ToString.StartsWith("Approval") Or Eval("Category").ToString.StartsWith("DoorknockTask") Or Eval("Category").ToString.StartsWith("RecycleTask"))%>' Text='<%# Eval("Comments")%>'>                                                
                         </asp:Literal>
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
@@ -800,7 +846,7 @@
                             <dx:ASPxComboBox runat="server" Width="100%" DropDownStyle="DropDown" ID="cbTaskAction" ClientInstanceName="cbTaskAction" CssClass="edit_drop">
                                 <Items>
                                     <dx:ListEditItem Text="" Value="" />
-                                   
+
                                     <dx:ListEditItem Text="Manager Review Needed" Value="Manager Review Needed" />
                                     <dx:ListEditItem Text="Update Needed" Value="Update Needed" />
                                     <dx:ListEditItem Text="Person Lookup" Value="Lookup Request" />

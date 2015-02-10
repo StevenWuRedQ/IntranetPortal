@@ -209,18 +209,18 @@
 
                 <li class="ss_form_item" style="width: 66%">
                     <label class="ss_form_input_title">address</label>
-                    <input class="ss_form_input" style="width: 91%" value="<%= LeadsInfoData.PropertyAddress%>">
+                    <input class="ss_form_input" style="width: 91%" value="<%= LeadsInfoData.PropertyAddress & If(LeadsInfoData.IsApartment, " - Unit #"&LeadsInfoData.UnitNum, "")%>">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">BBLE</label>
-                    <input class="ss_form_input font_black" value="<%= LeadsInfoData.BBLE%>">
+                    <input class="ss_form_input font_black" value="<%= If(LeadsInfoData.IsApartment, LeadsInfoData.BuildingBBLE, LeadsInfoData.BBLE)%>">
                 </li>
-                <% If LeadsInfoData isnot Nothing andalso LeadsInfoData.IsApartment Then%>
+               <%-- <% If LeadsInfoData isnot Nothing andalso LeadsInfoData.IsApartment Then%>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Unit Number</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.UnitNum %>">
                 </li>
-                <%End If%>
+                <%End If%>--%>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Neighborhood</label>

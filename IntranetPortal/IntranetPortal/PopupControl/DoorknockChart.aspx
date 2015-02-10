@@ -57,22 +57,26 @@
                         <tbody>
                             <% For i = 0 To BBLEs.Length - 1%>
                             <% Dim li = IntranetPortal.LeadsInfo.GetInstance(BBLEs(i))
+                                If li IsNot Nothing Then
                             %>
                             <tr>
                                 <td>
-
                                     <input type="checkbox" />
                                     <label>&nbsp;</label>
                                 </td>
 
                                 <td>
                                     <% 
-                                        Dim adds = Addresses(i)
-                                        Dim strName = adds.Split(",")(0)
-                                        Dim restAdd = adds.Replace(strName & ",", "")
+                                        Dim strName = ""
+                                        Dim restAdd = ""
+                                        If Addresses.Length > i Then
+                                            Dim adds = Addresses(i)
+                                            strName = adds.Split(",")(0)
+                                            restAdd = adds.Replace(strName & ",", "")
                                     %>
                                     <span class="font_black"><%= strName %></span><br />
                                     <%= restAdd %>
+                                    <% End If%>
                                 </td>
                                 <td>
                                     <%= String.Format("{0}({1})", li.Owner, li.GetOwnerAge(li.Owner))%>
@@ -119,6 +123,7 @@
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
+                            <% End If%>
                             <% Next%>
                         </tbody>
                     </table>

@@ -367,7 +367,12 @@ Public Class DataWCFService
                 li = GetFullAssessInfo(li.BuildingBBLE, li)
                 li.BBLE = bble
                 If Not String.IsNullOrEmpty(li.UnitNum) Then
-                    li.PropertyAddress = "#" & li.UnitNum & " " & li.PropertyAddress
+                    li.Number = li.AptBuildingInfo.Number
+                    li.StreetName = li.AptBuildingInfo.StreetName
+                    li.NeighName = li.AptBuildingInfo.NeighName
+                    li.State = li.AptBuildingInfo.State
+                    li.ZipCode = li.AptBuildingInfo.ZipCode
+                    li.PropertyAddress = li.AptBuildingInfo.Address
                 End If
 
                 context.SaveChanges()

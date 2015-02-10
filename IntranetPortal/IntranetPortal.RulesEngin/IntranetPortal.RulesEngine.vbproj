@@ -107,7 +107,6 @@
     </Compile>
     <Compile Include="ServiceLog.vb" />
     <Compile Include="TaskSummaryRule.vb" />
-    <Compile Include="WorkingHours.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

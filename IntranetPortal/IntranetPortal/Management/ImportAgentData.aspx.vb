@@ -126,14 +126,13 @@ Public Class ImportAgentData
                 End If
                 Dim strtoStatus = If(String.IsNullOrEmpty(cbStatusToChange.Text), "", "in status " + cbStatusToChange.Text)
                 Dim strFormStatus = If(String.IsNullOrEmpty(cbStatusFrom.Text), "", "in status " + cbStatusFrom.Text)
-                LeadsActivityLog.AddActivityLog(DateTime.Now, "Transfer all Leads form: " & cbEmpFrom.Text & " " & strFormStatus & " to: " & cbEmpTo.Text & strtoStatus, ld.BBLE, LeadsActivityLog.LogCategory.Task.ToString, Nothing, Page.User.Identity.Name, LeadsActivityLog.EnumActionType.SetAsTask)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, "Transfer all Leads form: " & cbEmpFrom.Text & " " & strFormStatus & " to: " & cbEmpTo.Text & strtoStatus, ld.BBLE, LeadsActivityLog.LogCategory.Status, Nothing, Page.User.Identity.Name, LeadsActivityLog.EnumActionType.Reassign)
             Next
 
             ctx.SaveChanges()
         End Using
 
         ASPxLabel2.Text = "Transfer finished."
-
     End Sub
 
     Protected Sub btnImport_Click(sender As Object, e As EventArgs) Handles btnImport.Click

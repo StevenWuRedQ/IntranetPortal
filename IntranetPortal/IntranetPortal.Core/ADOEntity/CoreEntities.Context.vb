@@ -26,5 +26,6 @@ Partial Public Class CoreEntities
     Public Overridable Property SpecialDays() As DbSet(Of SpecialDay)
     Public Overridable Property EmailTemplates() As DbSet(Of EmailTemplate)
     Public Overridable Property DataLoopRules() As DbSet(Of DataLoopRule)
+    Public Overridable Property RecycleLeads() As DbSet(Of RecycleLead)
 
 End Class

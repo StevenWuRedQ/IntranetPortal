@@ -41,6 +41,19 @@
           <Property Name="Body" Type="nvarchar(max)" />
           <Property Name="Description" Type="nvarchar" MaxLength="1024" />
         </EntityType>
+        <EntityType Name="RecycleLeads">
+          <Key>
+            <PropertyRef Name="RecycleId" />
+          </Key>
+          <Property Name="RecycleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="RecycleDate" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Recycled" Type="bit" />
+          <Property Name="ActionDate" Type="datetime" />
+          <Property Name="LogId" Type="int" />
+        </EntityType>
         <EntityType Name="SpecialDays">
           <Key>
             <PropertyRef Name="DayId" />
@@ -57,6 +70,7 @@
           <EntitySet Name="DataLoopRules" EntityType="Self.DataLoopRules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailMessages" EntityType="Self.EmailMessages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailTemplates" EntityType="Self.EmailTemplates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecycleLeads" EntityType="Self.RecycleLeads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SpecialDays" EntityType="Self.SpecialDays" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -82,6 +96,7 @@
           <EntitySet Name="SpecialDays" EntityType="IntranetPortal.Core.Model.SpecialDay" />
           <EntitySet Name="EmailTemplates" EntityType="IntranetPortal.Core.Model.EmailTemplate" />
           <EntitySet Name="DataLoopRules" EntityType="IntranetPortal.Core.Model.DataLoopRule" />
+          <EntitySet Name="RecycleLeads" EntityType="IntranetPortal.Core.Model.RecycleLead" />
         </EntityContainer>
         <EntityType Name="SpecialDay">
           <Key>
@@ -116,6 +131,19 @@
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
           <Property Name="FinishDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="RecycleLead">
+          <Key>
+            <PropertyRef Name="RecycleId" />
+          </Key>
+          <Property Name="RecycleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="RecycleDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Recycled" Type="Boolean" />
+          <Property Name="LogId" Type="Int32" />
+          <Property Name="ActionDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -172,6 +200,20 @@
                 <ScalarProperty Name="LoopType" ColumnName="LoopType" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecycleLeads">
+            <EntityTypeMapping TypeName="IntranetPortal.Core.Model.RecycleLead">
+              <MappingFragment StoreEntitySet="RecycleLeads">
+                <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="Recycled" ColumnName="Recycled" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="RecycleDate" ColumnName="RecycleDate" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="RecycleId" ColumnName="RecycleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

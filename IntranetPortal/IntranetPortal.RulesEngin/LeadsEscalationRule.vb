@@ -64,7 +64,7 @@ Public Class LeadsEscalationRule
                                          End If
 
                                          'insert to assign leads folder of this team  -- need consider the UserinTeam situation
-                                         ld.Recycle()
+                                         ld.StartRecycleProcess()
                                      End Sub,
                                      Function(leads)
                                          Dim ld = CType(leads, Lead)
@@ -134,7 +134,7 @@ Public Class LeadsEscalationRule
                                         Return
                                     End If
 
-                                    ld.Recycle()
+                                    ld.StartRecycleProcess()
                                 End Sub,
                                 Function(leads)
                                     Dim ld = CType(leads, Lead)
@@ -172,7 +172,7 @@ Public Class LeadsEscalationRule
                                   'ld.UpdateCallbackDate(DateTime.Now)
                                   Return
                               End If
-                              ld.Recycle()
+                              ld.StartRecycleProcess()
 
                           End Sub, Function(leads)
                                        Return True
@@ -199,7 +199,7 @@ Public Class LeadsEscalationRule
                                        Return
                                    End If
 
-                                   ld.Recycle()
+                                   ld.StartRecycleProcess()
                                End Sub,
                                Function(leads)
                                    Dim ld = CType(leads, Lead)

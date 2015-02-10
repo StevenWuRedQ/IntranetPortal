@@ -36,4 +36,13 @@ Public Class TasklistControl
             BindTask()
         End If
     End Sub
+
+    Protected Sub gridTasks_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+        If e.Parameters.StartsWith("Group") Then
+            gridTasks.UnGroup(gridTasks.Columns("ProcSchemeDisplayName"))
+            gridTasks.UnGroup(gridTasks.Columns("Originator"))
+            gridTasks.GroupBy(gridTasks.Columns(e.Parameters.Split("|")(1)))
+            'BindTask()
+        End If
+    End Sub
 End Class

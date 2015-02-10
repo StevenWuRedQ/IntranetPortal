@@ -69,16 +69,31 @@ Public Class Root
                 gridSearch.DataBind()
             End Using
         Else
-            Using Context As New Entities
-                gridSearch.DataSource = Context.Leads.Where(Function(ld) ld.LeadsName.Contains(key) Or ld.BBLE.StartsWith(key)).ToList
-                gridSearch.DataBind()
-            End Using
+            If IsApartmentSearch(key) Then
+                Dim bble = key.Split("#")(0)
+                Dim unitNum = key.Split("#")(1)
+
+                Using ctx As New Entities
+                    gridSearch.DataSource = ctx.Leads.Where(Function(ld) ld.LeadsInfo.BuildingBBLE = bble And ld.LeadsInfo.UnitNum = unitNum).ToList
+                    gridSearch.DataBind()
+                End Using
+            Else
+                Using Context As New Entities
+                    gridSearch.DataSource = Context.Leads.Where(Function(ld) ld.LeadsName.Contains(key) Or ld.BBLE.StartsWith(key)).ToList
+                    gridSearch.DataBind()
+                End Using
+            End If
         End If
     End Sub
 
     Protected Sub HeadLoginStatus_LoggingOut(sender As Object, e As LoginCancelEventArgs)
         OnlineUser.LogoutUser(HttpContext.Current.User.Identity.Name)
     End Sub
+
+    Function IsApartmentSearch(key As String) As Boolean
+        Dim rx As New Regex("^\d{10}\#\w")
+        Return rx.IsMatch(key)
+    End Function
 
     Function IsPhoneNo(key As String) As Boolean
         Dim phoneNo = key.Replace("(", "").Replace(")", "").Replace("-", "")

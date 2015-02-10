@@ -45,9 +45,33 @@ Public Class WorkflowService
         conn.Close()
     End Sub
 
+    Public Shared Sub ExpiredLeadsProcess(bble As String)
+        ExpireTaskProcess(bble)
+        ExpiredLeadsReminder(bble)
+        ExpiredRecycleProcess(bble)
+    End Sub
+
     Public Shared Sub ExpireTaskProcess(bble As String)
         Using conn = GetConnection()
             Dim pInsts = conn.GetProcessInstancesByDataFields("TaskProcess", "BBLE", bble)
+            For Each pInstId In pInsts
+                conn.ExpiredProcessInstance(pInstId)
+            Next
+        End Using
+    End Sub
+
+    Public Shared Sub ExpiredLeadsReminder(bble As String)
+        Using conn = GetConnection()
+            Dim pInsts = conn.GetProcessInstancesByDataFields("ReminderProcess", "BBLE", bble)
+            For Each pInstId In pInsts
+                conn.ExpiredProcessInstance(pInstId)
+            Next
+        End Using
+    End Sub
+
+    Public Shared Sub ExpiredRecycleProcess(bble As String)
+        Using conn = GetConnection()
+            Dim pInsts = conn.GetProcessInstancesByDataFields("RecycleProcess", "BBLE", bble)
             For Each pInstId In pInsts
                 conn.ExpiredProcessInstance(pInstId)
             Next

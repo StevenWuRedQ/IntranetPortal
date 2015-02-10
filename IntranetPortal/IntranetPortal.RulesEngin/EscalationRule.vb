@@ -1,7 +1,9 @@
-﻿Public Class TaskEscalationRule
+﻿Imports IntranetPortal.Core
+
+Public Class TaskEscalationRule
     Public Shared Sub Excute(t As UserTask)
         Dim rule = GetRule(t)
-        
+
         If rule.IsDateDue(If(t.Schedule.HasValue, t.Schedule, t.CreateDate), Nothing) Then
             If (rule.Execute(t)) Then
                 ServiceLog.Log(String.Format("Task Rule, {3}, {4}, {0}, {1}, {2}", t.BBLE, t.TaskID, t.EmployeeName, rule.Name, rule.EscalationAfter))
@@ -51,6 +53,7 @@
                                                                Dim tk = CType(task, UserTask)
                                                                Dim ld = LeadsInfo.GetInstance(tk.BBLE)
                                                                'Dim procInst = 
+
                                                                For Each empName In tk.EmployeeName.Split(";")
                                                                    Dim emp = Employee.GetInstance(empName)
                                                                    If Not emp Is Nothing AndAlso Not String.IsNullOrEmpty(emp.Email) Then

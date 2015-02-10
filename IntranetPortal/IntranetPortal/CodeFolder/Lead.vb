@@ -180,7 +180,7 @@ Partial Public Class Lead
                 ctx.SaveChanges()
 
                 'Expired the task on this bble
-                WorkflowService.ExpireTaskProcess(BBLE)
+                WorkflowService.ExpiredLeadsProcess(BBLE)
                 UserTask.ExpiredTasks(BBLE)
 
                 Dim comments = String.Format("Leads Reassign from {0} to {1}.", originator, empName)
@@ -190,30 +190,48 @@ Partial Public Class Lead
         End If
     End Sub
 
-    Public Sub Recycle()
-        Dim recycleName = Employee.Department & " office"
-        If IntranetPortal.Employee.GetInstance(recycleName) IsNot Nothing Then
-            ReAssignLeads(recycleName)
-            Return
+    Public Sub StartRecycleProcess()
+        Dim comments = "This Lead will be recycled today."
+        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, BBLE, LeadsActivityLog.LogCategory.RecycleTask.ToString, Nothing, "Portal", LeadsActivityLog.EnumActionType.SetAsTask)
+        Dim rLead = Core.RecycleLead.AddRecycle(BBLE, DateTime.Now, log.LogID)
+
+        Dim emps = IntranetPortal.Employee.GetEmpOfficeManagers(EmployeeName)
+
+        If emps Is Nothing Then
+            emps = New String() {Employee.Manager}
         End If
 
-        Using ctx As New Entities
-            Dim team = (From t In ctx.Teams
-                       Join ut In ctx.UserInTeams On t.TeamId Equals ut.TeamId
-                       Where ut.EmployeeName = EmployeeName
-                       Select t.Name).FirstOrDefault
+        WorkflowService.StartTaskProcess("RecycleProcess", LeadsName, rLead.RecycleId, BBLE, String.Join(";", emps), "Normal")
+    End Sub
 
-            If team IsNot Nothing Then
-                recycleName = team & " office"
+    Public Sub Recycle()
+        Dim recylceName = IntranetPortal.Employee.GetOfficeAssignAccount(EmployeeName)
+        ReAssignLeads(recylceName)
+        Return
 
-                If IntranetPortal.Employee.GetInstance(recycleName) IsNot Nothing Then
-                    ReAssignLeads(recycleName)
-                    Return
-                End If
-            End If
-        End Using
+        'Dim recycleName = Employee.Department & " office"
+        'If IntranetPortal.Employee.GetInstance(recycleName) IsNot Nothing Then
+        '    ReAssignLeads(recycleName)
+        '    Return
+        'End If
 
-        UserMessage.AddNewMessage("Recycle Message", "Failed Recycle Leads: " & BBLE, String.Format("Failed Recycle Leads BBLE: {0}, Employee name:{1}. ", BBLE, EmployeeName), BBLE, DateTime.Now, "Recycle")
+        'Using ctx As New Entities
+        '    Dim team = (From t In ctx.Teams
+        '               Join ut In ctx.UserInTeams On t.TeamId Equals ut.TeamId
+        '               Where ut.EmployeeName = EmployeeName
+        '               Select t.Name).FirstOrDefault
+
+        '    If team IsNot Nothing Then
+        '        recycleName = team & " office"
+
+        '        If IntranetPortal.Employee.GetInstance(recycleName) IsNot Nothing Then
+        '            ReAssignLeads(recycleName)
+        '            Return
+        '        End If
+        '    End If
+        'End Using
+
+        'UserMessage.AddNewMessage("Recycle Message", "Failed Recycle Leads: " & BBLE, String.Format("Failed Recycle Leads BBLE: {0}, Employee name:{1}. ", BBLE, EmployeeName), BBLE, DateTime.Now, "Recycle")
     End Sub
 
     Public ReadOnly Property Task As UserTask
