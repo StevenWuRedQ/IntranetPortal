@@ -875,7 +875,7 @@
                                                                         <%--<dx:GridViewDataColumn  Caption="ShowMap" >
                                                                             <DataItemTemplate>
                                                                                 <div>
-                                                                                    <a  style="font-size:18px;margin-left:20px;" onclick='ShowPropertyMap("<%# Eval("BBLE") %>")' >Show Map</a>
+                                                                                    <i class="fa fa-map-marker icon_btn" style="font-size:18px;margin-left:20px;" onclick='ShowPropertyMap("<%# Eval("BBLE") %>")'> </i>
                                                                                 </div>
                                                                             </DataItemTemplate>
                                                                         </dx:GridViewDataColumn>--%>
