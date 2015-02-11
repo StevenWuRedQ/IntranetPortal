@@ -95,8 +95,12 @@ Partial Public Class Employee
             If lead IsNot Nothing Then
                 Dim owner = lead.EmployeeName
 
-                If owner = name And lead.Status <> LeadStatus.MgrApproval And lead.Status <> LeadStatus.MgrApprovalInWf Then
-                    Return True
+                If owner = name Then
+                    If lead.Status <> LeadStatus.MgrApproval And lead.Status <> LeadStatus.MgrApprovalInWf Then
+                        Return True
+                    Else
+                        Return False
+                    End If
                 End If
 
                 If GetManagedEmployees(name).Contains(owner) Then
@@ -299,6 +303,16 @@ Partial Public Class Employee
         Using Context As New Entities
             Return Context.Employees.Where(Function(em) em.Active = True).Select(Function(em) em.Name).ToArray
         End Using
+    End Function
+
+    Public Shared Function IsAdmin(empName As String) As Boolean
+        Dim rs = Roles.GetRolesForUser(empName)
+
+        If rs.Contains("Admin") Then
+            Return True
+        End If
+
+        Return False
     End Function
 
     Public Shared Function IsManager(empName As String)
