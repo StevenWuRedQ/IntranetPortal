@@ -836,7 +836,7 @@
                                                         <dx:ASPxHiddenField runat="server" ID="ErrorMessage" ClientInstanceName="ErrorMessageClient"></dx:ASPxHiddenField>
                                                         <div style="padding: 30px">
                                                             <div style="margin: 0 10px; font-size: 36px" class="clear-fix">
-                                                                <i class="fa fa-folder-open color_gray"></i>&nbsp;<span class="font_black"><span id="ResultsCount"><%=LoadLeadsCount %></span>Results</span>
+                                                                <i class="fa fa-folder-open color_gray"></i>&nbsp;<span class="font_black"><span id="ResultsCount"><%=LoadLeadsCount %></span> Results</span>
                                                                 <div style="float: right">
                                                                     <%--<dx:ASPxCheckBox ID="dxfilterOutExist" AutoPostBack="true" runat="server" OnCheckedChanged="dxfilterOutExist_CheckedChanged"> </dx:ASPxCheckBox>--%>
                                                                     <asp:HiddenField runat="server" ID="hfFilterOutExist" />

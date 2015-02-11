@@ -17,5 +17,6 @@ Partial Public Class LeadsSearchTask
     Public Property Status As Nullable(Of Integer)
     Public Property CreateBy As String
     Public Property CreateTime As Nullable(Of Date)
+    Public Property DeclineReason As String
 
 End Class

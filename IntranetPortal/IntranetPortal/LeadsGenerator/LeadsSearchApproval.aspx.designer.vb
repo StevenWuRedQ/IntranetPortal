@@ -30,4 +30,13 @@ Partial Public Class LeadsSearchApproval
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbApproval As Global.DevExpress.Web.ASPxCallback.ASPxCallback
+
+    '''<summary>
+    '''hfSearchName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfSearchName As Global.System.Web.UI.WebControls.HiddenField
 End Class

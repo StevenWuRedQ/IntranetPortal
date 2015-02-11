@@ -182,7 +182,16 @@
                     <%= SearchName%>
                 </td>
             </tr>
-
+            <%If (Not String.IsNullOrEmpty(DeclineReason)) Then%>
+            <tr>
+                <td>
+                    <div class="form_head">Decline Reason:</div>
+                </td>
+                <td>
+                    <%= DeclineReason%>
+                </td>
+            </tr>
+            <% end if %>
             <tr>
                 <td colspan="2">
                     <div id="reslut" style="margin-top:20px;"></div>
@@ -194,7 +203,7 @@
             <tr>
                 <td colspan="2" runat="server" id="tdButton">
                     <button type="button" class="rand-button rand-button-pad bg_orange button_margin" onclick="cbApproval.PerformCallback('Approve')">Approve</button>
-                    <button type="button" class="rand-button rand-button-pad bg_color_gray button_margin" onclick="cbApproval.PerformCallback('Decline')">Decline</button>                       
+                    <button type="button" class="rand-button rand-button-pad bg_color_gray button_margin" onclick="$('#decile_modal').modal('show');">Decline</button>                       
                 </td>
             </tr>
         </table>
@@ -232,7 +241,52 @@
             </div>
         </div>
     </div>
+     <div class="modal fade" id="decile_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >Decline reason</h4>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control" id="decile_reason"/>
+                </div>
+                <div class="modal-footer">
+                     <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="declineClick()">Decline</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="errorMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >Decline reason</h4>
+                </div>
+                <div class="modal-body">
+                    Need input decline reason!
+                </div>
+                <div class="modal-footer">
+    
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <asp:HiddenField runat="server" ID="hfSearchName"/>
     <script>
+        function declineClick()
+        {
+            var declineReason = $('#decile_reason').val()
+            if (declineReason ==''|| declineReason.length <= 0)
+            {
+                $('#errorMsg').modal('show');
+                return;
+            }
+            cbApproval.PerformCallback('Decline|' + declineReason);
+        }
         function hasValue(v) {
             if (v == null) {
                 return false;
