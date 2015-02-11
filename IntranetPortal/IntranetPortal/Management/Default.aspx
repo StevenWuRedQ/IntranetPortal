@@ -7,10 +7,9 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" runat="server">    
-          <div style="background: url(/images/Background2.png) no-repeat center fixed; background-size: auto, auto; background-color: #dddddd; width: 100%; height: 100%;">
-             
-    </div>
+    <form id="form1" runat="server">
+        <div style="background: url(/images/Background2.png) no-repeat center fixed; background-size: auto, auto; background-color: #dddddd; width: 100%; height: 100%;">
+        </div>
     </form>
 </body>
 </html>

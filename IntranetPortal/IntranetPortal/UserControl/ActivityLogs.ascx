@@ -643,7 +643,7 @@
                                         <td style="font-weight: bold"><%# Eval("Category")%> </td>
                                         <td style="text-align: right; width: 120px;">
                                             <div style="float: right">
-                                                <asp:Panel runat="server" ID="pnlAptButton">
+                                                <asp:Panel runat="server" ID="pnlAptButton" Visible="false">
                                                     <div style="float: right; font-size: 18px">
                                                         <i class="fa fa-check-circle-o log_item_hl_buttons tooltip-examples" title="Approve" onclick='<%# String.Format("ApproveNewLead(""{0}"")", Eval("LogID"))%>'></i>
                                                         <i class="fa fa-times-circle-o log_item_hl_buttons" title="Decline" onclick='<%# String.Format("DeclineNewLead(""{0}"")", Eval("LogID"))%>'></i>

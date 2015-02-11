@@ -373,7 +373,10 @@
         <xs:element minOccurs="0" name="County" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Start_Date" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="End_Date" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="CorpName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SearchType" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -548,6 +551,33 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AAbs_GetEmergencyRepairResult" nillable="true" type="q31:ArrayOfEmergencyRepair" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AAbs_GetAreAbstractReport">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="SelectedOwners" nillable="true" type="q32:ArrayOfOwnerInfo" />
+        <xs:element minOccurs="0" name="RunJudgement" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunFederalTaxLiens" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunMortgages" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunParkingViolation" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunPatriot" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunUcc" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunBankruptcy" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunECB" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunEmergenyRepairs" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunTransitAdjudication" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RunTLO" type="xs:boolean" />
+        <xs:element minOccurs="0" name="RetainRecords" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AAbs_GetAreAbstractReportResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="AAbs_GetAreAbstractReportResult" nillable="true" type="q33:AB_Report_Out" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

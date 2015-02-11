@@ -203,6 +203,12 @@
   <wsdl:message name="IWCFMacros_AAbs_GetEmergencyRepair_OutputMessage">
     <wsdl:part name="parameters" element="tns:AAbs_GetEmergencyRepairResponse" />
   </wsdl:message>
+  <wsdl:message name="IWCFMacros_AAbs_GetAreAbstractReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:AAbs_GetAreAbstractReport" />
+  </wsdl:message>
+  <wsdl:message name="IWCFMacros_AAbs_GetAreAbstractReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AAbs_GetAreAbstractReportResponse" />
+  </wsdl:message>
   <wsdl:portType name="IWCFMacros">
     <wsdl:operation name="DoWork">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/DoWork" message="tns:IWCFMacros_DoWork_InputMessage" />
@@ -331,6 +337,10 @@
     <wsdl:operation name="AAbs_GetEmergencyRepair">
       <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepair" message="tns:IWCFMacros_AAbs_GetEmergencyRepair_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepairResponse" message="tns:IWCFMacros_AAbs_GetEmergencyRepair_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AAbs_GetAreAbstractReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReport" message="tns:IWCFMacros_AAbs_GetAreAbstractReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReportResponse" message="tns:IWCFMacros_AAbs_GetAreAbstractReport_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WCFMacros_Http" type="tns:IWCFMacros">
@@ -616,6 +626,15 @@
     </wsdl:operation>
     <wsdl:operation name="AAbs_GetEmergencyRepair">
       <soap:operation soapAction="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepair" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AAbs_GetAreAbstractReport">
+      <soap:operation soapAction="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReport" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -388,7 +388,9 @@ Public Class RecycleProcessRule
                 Dim ld = Lead.GetInstance(rld.BBLE)
 
                 If ld.LastUserUpdate <= rld.RecycleDate Then
-                    ld.Recycle()
+                    'for now don not do real recycle.
+                    'ld.Recycle()
+
                     rld.Recycle()
                     Log("Leads is Recycled. BBLE: " & ld.BBLE)
                 Else
@@ -399,7 +401,6 @@ Public Class RecycleProcessRule
             Catch ex As Exception
                 Log("Error in recycle leads, BBLE: " & rld.BBLE, ex)
             End Try
-
         Next
     End Sub
 End Class

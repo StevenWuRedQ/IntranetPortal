@@ -145,7 +145,6 @@ Public Class ActivityLogs
 
                     LeadsActivityLog.AddActivityLog(DateTime.Now, "New Lead is approved by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Approved)
 
-
                     If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
                         Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
                         If wli IsNot Nothing Then
@@ -516,6 +515,17 @@ Public Class ActivityLogs
 
         If category = "Approval" Then
             Dim logId = CInt(e.GetValue("LogID"))
+            Dim pnlApproval = TryCast(gridTracking.FindRowCellTemplateControl(e.VisibleIndex, gridTracking.Columns("Comments"), "pnlAptButton"), Panel)
+            Dim pnlAptButton = TryCast(pnlApproval.FindControl("pnlAptButton"), Panel)
+
+            If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
+                If wli IsNot Nothing AndAlso wli.ProcessName.ToString = "NewLeadsRequest" Then
+                    pnlAptButton.Visible = True
+                Else
+                    pnlAptButton.Visible = False
+                End If
+            End If
         End If
 
         If category = "DoorknockTask" Then

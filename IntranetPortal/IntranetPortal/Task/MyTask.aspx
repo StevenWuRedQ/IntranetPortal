@@ -4,7 +4,7 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitterTaskPage" Orientation="Horizontal" FullscreenMode="true">
         <Panes>
-            <dx:SplitterPane Name="leadPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="2px">
+            <dx:SplitterPane Name="leadPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="270px" PaneStyle-Paddings-Padding="2px">
                 <ContentCollection>
                     <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
                         <uc1:TasklistControl runat="server" ID="TasklistControl" />

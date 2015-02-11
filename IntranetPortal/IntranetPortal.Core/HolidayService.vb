@@ -21,17 +21,9 @@
 
     Public Shared Function IsPersonalOff(dt As Date, emp As String) As Boolean
         Using ctx As New CoreEntities
-            Return ctx.SpecialDays.Where(Function(sd) sd.Type = SpecialDay.DayType.PersonalOff And sd.SpecialDate = dt).Count > 0
+            Return ctx.SpecialDays.Where(Function(sd) sd.Type = SpecialDay.DayType.PersonalOff And sd.SpecialDate = dt And sd.Employee = emp).Count > 0
         End Using
 
         Return False
     End Function
-End Class
-
-Public Class SpecialDay
-    Enum DayType
-        PublicHoliday = 0
-        PersonalOff = 1
-    End Enum
-
 End Class

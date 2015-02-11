@@ -18,7 +18,7 @@
         'Return
 
         Using client As New PortalService.CommonServiceClient
-            client.SendTaskSummaryEmail("Ron Borovinsky")
+            client.SendTaskSummaryEmail("Chris Yan")
         End Using
     End Sub
 
@@ -30,5 +30,10 @@
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim rule As New IntranetPortal.RulesEngine.CompleteTaskRule
         rule.ExpiredReminderTask("4032340101", 9685, 747)
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim rule As New IntranetPortal.RulesEngine.RecycleProcessRule
+        rule.Execute()
     End Sub
 End Class

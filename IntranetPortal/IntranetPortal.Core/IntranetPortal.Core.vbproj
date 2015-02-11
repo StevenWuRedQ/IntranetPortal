@@ -114,6 +114,7 @@
     <Compile Include="DocumentService.vb" />
     <Compile Include="EmailService.vb" />
     <Compile Include="HolidayService.vb" />
+    <Compile Include="Model\SpecialDay.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -130,7 +131,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="PropertyHelper.vb" />
-    <Compile Include="RecycleLead.vb" />
+    <Compile Include="Model\RecycleLead.vb" />
     <Compile Include="WorkingHours.vb" />
   </ItemGroup>
   <ItemGroup>

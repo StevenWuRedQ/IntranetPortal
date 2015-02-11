@@ -38,11 +38,16 @@ Public Class TaskSummary
                 Try
                     Dim pInst = WorkflowService.LoadProcInstById(wl.ProcInstId)
                     If pInst.ProcessName = "TaskProcess" Then
+                        Dim taskId = CInt(pInst.GetDataFieldValue("TaskId"))
                         Dim t = UserTask.GetTaskById(CInt(pInst.GetDataFieldValue("TaskId")))
-                        item.Description = t.Description
-                        If t.Important = "Urgent" Then
-                            item.ShowPortalMsg = True
-                            item.PortalMsg = "This is urgent task. Please complete it in 2 hours."
+                        If t IsNot Nothing Then
+                            item.Description = t.Description
+                            If t.Important = "Urgent" Then
+                                item.ShowPortalMsg = True
+                                item.PortalMsg = "This is urgent task. Please complete it in 2 hours."
+                            End If
+                        Else
+                            item.Description = ""
                         End If
                     End If
                 Catch ex As Exception

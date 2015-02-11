@@ -698,6 +698,13 @@
       <DependentUpon>MgrEmployee.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Management\MgrOffDays.aspx.designer.vb">
+      <DependentUpon>MgrOffDays.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Management\MgrOffDays.aspx.vb">
+      <DependentUpon>MgrOffDays.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Management\MgrTeam.aspx.designer.vb">
       <DependentUpon>MgrTeam.aspx</DependentUpon>
     </Compile>
@@ -1408,8 +1415,10 @@
     <Content Include="images\ic_filtered_bg.png" />
     <Content Include="images\imprimir.png" />
     <Content Include="images\inprogess_icon_s.png" />
+    <Content Include="images\logo%402x.png" />
     <Content Include="images\logo.png" />
     <Content Include="images\logo_black.jpg" />
+    <Content Include="images\logo_landing%402x.png" />
     <Content Include="images\lr_dev_opportunity.png" />
     <Content Include="images\lr_forecosure.png" />
     <Content Include="images\lr_has_equity.png" />
@@ -1469,6 +1478,7 @@
     <Content Include="Management\LeadsDataManage.aspx" />
     <Content Include="Management\Management.aspx" />
     <Content Include="Management\MgrEmployee.aspx" />
+    <Content Include="Management\MgrOffDays.aspx" />
     <Content Include="Management\MgrTeam.aspx" />
     <Content Include="Management\MgrRole.aspx" />
     <Content Include="Management\PortalStatus.aspx" />
@@ -2409,6 +2419,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.EmergencyRepair.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.AB_Report_Out.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\DataAPI\Reference.svcmap">

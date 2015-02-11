@@ -3896,7 +3896,19 @@ Namespace DataAPI
         Private COUNTRYField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DOCUMENT_IDField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FirstNameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LastNameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private NAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private PARTY_TYPEField As Short
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private STATEField As String
@@ -3955,12 +3967,52 @@ Namespace DataAPI
         End Property
         
         <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DOCUMENT_ID() As String
+            Get
+                Return Me.DOCUMENT_IDField
+            End Get
+            Set
+                Me.DOCUMENT_IDField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FirstName() As String
+            Get
+                Return Me.FirstNameField
+            End Get
+            Set
+                Me.FirstNameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LastName() As String
+            Get
+                Return Me.LastNameField
+            End Get
+            Set
+                Me.LastNameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
         Public Property NAME() As String
             Get
                 Return Me.NAMEField
             End Get
             Set
                 Me.NAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property PARTY_TYPE() As Short
+            Get
+                Return Me.PARTY_TYPEField
+            End Get
+            Set
+                Me.PARTY_TYPEField = value
             End Set
         End Property
         
@@ -37864,6 +37916,9 @@ Namespace DataAPI
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private dcorpField As String
         
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private row_idField As String
+        
         <Global.System.ComponentModel.BrowsableAttribute(false)>  _
         Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
             Get
@@ -38641,6 +38696,16 @@ Namespace DataAPI
             End Get
             Set
                 Me.dcorpField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property row_id() As String
+            Get
+                Return Me.row_idField
+            End Get
+            Set
+                Me.row_idField = value
             End Set
         End Property
     End Class
@@ -40518,6 +40583,9 @@ Namespace DataAPI
         Private pvbnameField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private pvbname_altField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private row_idField As String
         
         <Global.System.ComponentModel.BrowsableAttribute(false)>  _
@@ -40687,6 +40755,16 @@ Namespace DataAPI
             End Get
             Set
                 Me.pvbnameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property pvbname_alt() As String
+            Get
+                Return Me.pvbname_altField
+            End Get
+            Set
+                Me.pvbname_altField = value
             End Set
         End Property
         
@@ -42002,6 +42080,2591 @@ Namespace DataAPI
         End Property
     End Class
     
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="OwnerInfo", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class OwnerInfo
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AptField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CityField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CorpNameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FirstNameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private HouseNumField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private IsOwnerPersonField As Boolean
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LastNameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private St_NameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private StateField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ZipField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Apt() As String
+            Get
+                Return Me.AptField
+            End Get
+            Set
+                Me.AptField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property City() As String
+            Get
+                Return Me.CityField
+            End Get
+            Set
+                Me.CityField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CorpName() As String
+            Get
+                Return Me.CorpNameField
+            End Get
+            Set
+                Me.CorpNameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FirstName() As String
+            Get
+                Return Me.FirstNameField
+            End Get
+            Set
+                Me.FirstNameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property HouseNum() As String
+            Get
+                Return Me.HouseNumField
+            End Get
+            Set
+                Me.HouseNumField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property IsOwnerPerson() As Boolean
+            Get
+                Return Me.IsOwnerPersonField
+            End Get
+            Set
+                Me.IsOwnerPersonField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LastName() As String
+            Get
+                Return Me.LastNameField
+            End Get
+            Set
+                Me.LastNameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property St_Name() As String
+            Get
+                Return Me.St_NameField
+            End Get
+            Set
+                Me.St_NameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property State() As String
+            Get
+                Return Me.StateField
+            End Get
+            Set
+                Me.StateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Zip() As String
+            Get
+                Return Me.ZipField
+            End Get
+            Set
+                Me.ZipField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="AB_Report_Out", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class AB_Report_Out
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BankruptcyField() As DataAPI.Bankruptcy_Report
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FederalTaxLiensField() As DataAPI.FederalTaxLiens_Report
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private JugmentsField() As DataAPI.Judgments_Report
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ParkingViolationsField() As DataAPI.ParkingViolations_Report
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TLO_PastAddressField() As DataAPI.TLO_PastAddress_Report
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Bankruptcy() As DataAPI.Bankruptcy_Report()
+            Get
+                Return Me.BankruptcyField
+            End Get
+            Set
+                Me.BankruptcyField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FederalTaxLiens() As DataAPI.FederalTaxLiens_Report()
+            Get
+                Return Me.FederalTaxLiensField
+            End Get
+            Set
+                Me.FederalTaxLiensField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Jugments() As DataAPI.Judgments_Report()
+            Get
+                Return Me.JugmentsField
+            End Get
+            Set
+                Me.JugmentsField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ParkingViolations() As DataAPI.ParkingViolations_Report()
+            Get
+                Return Me.ParkingViolationsField
+            End Get
+            Set
+                Me.ParkingViolationsField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TLO_PastAddress() As DataAPI.TLO_PastAddress_Report()
+            Get
+                Return Me.TLO_PastAddressField
+            End Get
+            Set
+                Me.TLO_PastAddressField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="Bankruptcy_Report", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class Bankruptcy_Report
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LLDateTimeStampField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LLSearchTypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SSNField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private areaField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private case_noField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private case_numberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private date_uploadedField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private filedField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private first_nameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private generationField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private judge_initialsField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private last_nameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private middle_nameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private rec_typeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private roleField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private row_idField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private taxIDField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private timestampField As System.Nullable(Of Date)
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LLDateTimeStamp() As System.Nullable(Of Date)
+            Get
+                Return Me.LLDateTimeStampField
+            End Get
+            Set
+                Me.LLDateTimeStampField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LLSearchType() As String
+            Get
+                Return Me.LLSearchTypeField
+            End Get
+            Set
+                Me.LLSearchTypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property SSN() As String
+            Get
+                Return Me.SSNField
+            End Get
+            Set
+                Me.SSNField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property area() As String
+            Get
+                Return Me.areaField
+            End Get
+            Set
+                Me.areaField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property case_no() As String
+            Get
+                Return Me.case_noField
+            End Get
+            Set
+                Me.case_noField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property case_number() As String
+            Get
+                Return Me.case_numberField
+            End Get
+            Set
+                Me.case_numberField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property date_uploaded() As System.Nullable(Of Date)
+            Get
+                Return Me.date_uploadedField
+            End Get
+            Set
+                Me.date_uploadedField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property filed() As System.Nullable(Of Date)
+            Get
+                Return Me.filedField
+            End Get
+            Set
+                Me.filedField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property first_name() As String
+            Get
+                Return Me.first_nameField
+            End Get
+            Set
+                Me.first_nameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property generation() As String
+            Get
+                Return Me.generationField
+            End Get
+            Set
+                Me.generationField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property judge_initials() As String
+            Get
+                Return Me.judge_initialsField
+            End Get
+            Set
+                Me.judge_initialsField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property last_name() As String
+            Get
+                Return Me.last_nameField
+            End Get
+            Set
+                Me.last_nameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property middle_name() As String
+            Get
+                Return Me.middle_nameField
+            End Get
+            Set
+                Me.middle_nameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property rec_type() As String
+            Get
+                Return Me.rec_typeField
+            End Get
+            Set
+                Me.rec_typeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property role() As String
+            Get
+                Return Me.roleField
+            End Get
+            Set
+                Me.roleField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property row_id() As String
+            Get
+                Return Me.row_idField
+            End Get
+            Set
+                Me.row_idField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property taxID() As String
+            Get
+                Return Me.taxIDField
+            End Get
+            Set
+                Me.taxIDField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property timestamp() As System.Nullable(Of Date)
+            Get
+                Return Me.timestampField
+            End Get
+            Set
+                Me.timestampField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="FederalTaxLiens_Report", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class FederalTaxLiens_Report
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CrossReferenceField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LLDateTimeStampField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LLSearchTypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LotRecordField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private PartyRecordField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RemarksField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private addr1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private addr2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private boroField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private boro1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private cityField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private countryField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private crfnField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private dcreateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private docamtField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private docdateField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private doctypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private doctype1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private fedtaxdateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private fedtaxserField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private file_nbrField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private input_dateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private modateField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private nameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private partypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private recordedField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private recorded1Field As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private rectypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private rectype1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private reel_nbrField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private reel_pgField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private reel_yrField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private row_idField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private rpttl_nbrField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private searchnameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private stateField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private timestampField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ucc_collField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private unkeyField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private unkey1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private zipField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CrossReference() As String
+            Get
+                Return Me.CrossReferenceField
+            End Get
+            Set
+                Me.CrossReferenceField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LLDateTimeStamp() As System.Nullable(Of Date)
+            Get
+                Return Me.LLDateTimeStampField
+            End Get
+            Set
+                Me.LLDateTimeStampField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LLSearchType() As String
+            Get
+                Return Me.LLSearchTypeField
+            End Get
+            Set
+                Me.LLSearchTypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LotRecord() As String
+            Get
+                Return Me.LotRecordField
+            End Get
+            Set
+                Me.LotRecordField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property PartyRecord() As String
+            Get
+                Return Me.PartyRecordField
+            End Get
+            Set
+                Me.PartyRecordField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Remarks() As String
+            Get
+                Return Me.RemarksField
+            End Get
+            Set
+                Me.RemarksField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property addr1() As String
+            Get
+                Return Me.addr1Field
+            End Get
+            Set
+                Me.addr1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property addr2() As String
+            Get
+                Return Me.addr2Field
+            End Get
+            Set
+                Me.addr2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property boro() As String
+            Get
+                Return Me.boroField
+            End Get
+            Set
+                Me.boroField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property boro1() As String
+            Get
+                Return Me.boro1Field
+            End Get
+            Set
+                Me.boro1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property city() As String
+            Get
+                Return Me.cityField
+            End Get
+            Set
+                Me.cityField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property country() As String
+            Get
+                Return Me.countryField
+            End Get
+            Set
+                Me.countryField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property crfn() As String
+            Get
+                Return Me.crfnField
+            End Get
+            Set
+                Me.crfnField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property dcreate() As System.Nullable(Of Date)
+            Get
+                Return Me.dcreateField
+            End Get
+            Set
+                Me.dcreateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property docamt() As String
+            Get
+                Return Me.docamtField
+            End Get
+            Set
+                Me.docamtField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property docdate() As String
+            Get
+                Return Me.docdateField
+            End Get
+            Set
+                Me.docdateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property doctype() As String
+            Get
+                Return Me.doctypeField
+            End Get
+            Set
+                Me.doctypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property doctype1() As String
+            Get
+                Return Me.doctype1Field
+            End Get
+            Set
+                Me.doctype1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property fedtaxdate() As System.Nullable(Of Date)
+            Get
+                Return Me.fedtaxdateField
+            End Get
+            Set
+                Me.fedtaxdateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property fedtaxser() As String
+            Get
+                Return Me.fedtaxserField
+            End Get
+            Set
+                Me.fedtaxserField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property file_nbr() As String
+            Get
+                Return Me.file_nbrField
+            End Get
+            Set
+                Me.file_nbrField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property input_date() As System.Nullable(Of Date)
+            Get
+                Return Me.input_dateField
+            End Get
+            Set
+                Me.input_dateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property modate() As String
+            Get
+                Return Me.modateField
+            End Get
+            Set
+                Me.modateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property name() As String
+            Get
+                Return Me.nameField
+            End Get
+            Set
+                Me.nameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property partype() As String
+            Get
+                Return Me.partypeField
+            End Get
+            Set
+                Me.partypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property recorded() As System.Nullable(Of Date)
+            Get
+                Return Me.recordedField
+            End Get
+            Set
+                Me.recordedField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property recorded1() As System.Nullable(Of Date)
+            Get
+                Return Me.recorded1Field
+            End Get
+            Set
+                Me.recorded1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property rectype() As String
+            Get
+                Return Me.rectypeField
+            End Get
+            Set
+                Me.rectypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property rectype1() As String
+            Get
+                Return Me.rectype1Field
+            End Get
+            Set
+                Me.rectype1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property reel_nbr() As String
+            Get
+                Return Me.reel_nbrField
+            End Get
+            Set
+                Me.reel_nbrField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property reel_pg() As String
+            Get
+                Return Me.reel_pgField
+            End Get
+            Set
+                Me.reel_pgField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property reel_yr() As String
+            Get
+                Return Me.reel_yrField
+            End Get
+            Set
+                Me.reel_yrField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property row_id() As String
+            Get
+                Return Me.row_idField
+            End Get
+            Set
+                Me.row_idField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property rpttl_nbr() As String
+            Get
+                Return Me.rpttl_nbrField
+            End Get
+            Set
+                Me.rpttl_nbrField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property searchname() As String
+            Get
+                Return Me.searchnameField
+            End Get
+            Set
+                Me.searchnameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property state() As String
+            Get
+                Return Me.stateField
+            End Get
+            Set
+                Me.stateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property timestamp() As System.Nullable(Of Date)
+            Get
+                Return Me.timestampField
+            End Get
+            Set
+                Me.timestampField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ucc_coll() As String
+            Get
+                Return Me.ucc_collField
+            End Get
+            Set
+                Me.ucc_collField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property unkey() As String
+            Get
+                Return Me.unkeyField
+            End Get
+            Set
+                Me.unkeyField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property unkey1() As String
+            Get
+                Return Me.unkey1Field
+            End Get
+            Set
+                Me.unkey1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property zip() As String
+            Get
+                Return Me.zipField
+            End Get
+            Set
+                Me.zipField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="Judgments_Report", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class Judgments_Report
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ACITYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ADATEField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AFNAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ALNAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AMNAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AMOUNTField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ASTNAMField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ASTNUMField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ATYPEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AZIPField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AZIP1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BCOUNTYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CCITYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CFNAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CLNAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CMNAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CNField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CNCOUNTYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CNTYPEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private COUNTYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CSTNAMField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CSTNUMField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CTYPEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CZIPField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CZIP1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CcorpnameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DBLOCKField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DCITYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DCOUNTYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DFNAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DLNAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DLOTField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DMNAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DOCCField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DOCNUMField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DSTNAMField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DSTNUMField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DTOTALField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DTYPEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DZIPField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DZIP1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DcorpnameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ECOUNTYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private EDATEField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ETIMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private IDISPField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private KYVField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private KYVSUBField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LLDateTimeStampField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LLSearchTypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private NDATEField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private NTIMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private OPERIDField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RemarksField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SCOUNTYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SCOURTField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SDDATEField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SDOIDField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SDSHERField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SDTYPEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SEQField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SFEEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private SINDEXField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private STYPEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TCITYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TCOUNTYField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TFNAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TLNAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TMNAMEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TSTNAMField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TSTNUMField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TTYPEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TYPEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TZIPField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TZIP1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private XDATEField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private date_uploadedField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private datetimestampField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private dcorpField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ACITY() As String
+            Get
+                Return Me.ACITYField
+            End Get
+            Set
+                Me.ACITYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ADATE() As System.Nullable(Of Date)
+            Get
+                Return Me.ADATEField
+            End Get
+            Set
+                Me.ADATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AFNAME() As String
+            Get
+                Return Me.AFNAMEField
+            End Get
+            Set
+                Me.AFNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ALNAME() As String
+            Get
+                Return Me.ALNAMEField
+            End Get
+            Set
+                Me.ALNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AMNAME() As String
+            Get
+                Return Me.AMNAMEField
+            End Get
+            Set
+                Me.AMNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AMOUNT() As String
+            Get
+                Return Me.AMOUNTField
+            End Get
+            Set
+                Me.AMOUNTField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ASTNAM() As String
+            Get
+                Return Me.ASTNAMField
+            End Get
+            Set
+                Me.ASTNAMField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ASTNUM() As String
+            Get
+                Return Me.ASTNUMField
+            End Get
+            Set
+                Me.ASTNUMField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ATYPE() As String
+            Get
+                Return Me.ATYPEField
+            End Get
+            Set
+                Me.ATYPEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AZIP() As String
+            Get
+                Return Me.AZIPField
+            End Get
+            Set
+                Me.AZIPField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AZIP1() As String
+            Get
+                Return Me.AZIP1Field
+            End Get
+            Set
+                Me.AZIP1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BCOUNTY() As String
+            Get
+                Return Me.BCOUNTYField
+            End Get
+            Set
+                Me.BCOUNTYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CCITY() As String
+            Get
+                Return Me.CCITYField
+            End Get
+            Set
+                Me.CCITYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CFNAME() As String
+            Get
+                Return Me.CFNAMEField
+            End Get
+            Set
+                Me.CFNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CLNAME() As String
+            Get
+                Return Me.CLNAMEField
+            End Get
+            Set
+                Me.CLNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CMNAME() As String
+            Get
+                Return Me.CMNAMEField
+            End Get
+            Set
+                Me.CMNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CN() As String
+            Get
+                Return Me.CNField
+            End Get
+            Set
+                Me.CNField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CNCOUNTY() As String
+            Get
+                Return Me.CNCOUNTYField
+            End Get
+            Set
+                Me.CNCOUNTYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CNTYPE() As String
+            Get
+                Return Me.CNTYPEField
+            End Get
+            Set
+                Me.CNTYPEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property COUNTY() As String
+            Get
+                Return Me.COUNTYField
+            End Get
+            Set
+                Me.COUNTYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CSTNAM() As String
+            Get
+                Return Me.CSTNAMField
+            End Get
+            Set
+                Me.CSTNAMField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CSTNUM() As String
+            Get
+                Return Me.CSTNUMField
+            End Get
+            Set
+                Me.CSTNUMField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property [CTYPE]() As String
+            Get
+                Return Me.CTYPEField
+            End Get
+            Set
+                Me.CTYPEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CZIP() As String
+            Get
+                Return Me.CZIPField
+            End Get
+            Set
+                Me.CZIPField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CZIP1() As String
+            Get
+                Return Me.CZIP1Field
+            End Get
+            Set
+                Me.CZIP1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Ccorpname() As String
+            Get
+                Return Me.CcorpnameField
+            End Get
+            Set
+                Me.CcorpnameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DBLOCK() As String
+            Get
+                Return Me.DBLOCKField
+            End Get
+            Set
+                Me.DBLOCKField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DCITY() As String
+            Get
+                Return Me.DCITYField
+            End Get
+            Set
+                Me.DCITYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DCOUNTY() As String
+            Get
+                Return Me.DCOUNTYField
+            End Get
+            Set
+                Me.DCOUNTYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DFNAME() As String
+            Get
+                Return Me.DFNAMEField
+            End Get
+            Set
+                Me.DFNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DLNAME() As String
+            Get
+                Return Me.DLNAMEField
+            End Get
+            Set
+                Me.DLNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DLOT() As String
+            Get
+                Return Me.DLOTField
+            End Get
+            Set
+                Me.DLOTField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DMNAME() As String
+            Get
+                Return Me.DMNAMEField
+            End Get
+            Set
+                Me.DMNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DOCC() As String
+            Get
+                Return Me.DOCCField
+            End Get
+            Set
+                Me.DOCCField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DOCNUM() As String
+            Get
+                Return Me.DOCNUMField
+            End Get
+            Set
+                Me.DOCNUMField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DSTNAM() As String
+            Get
+                Return Me.DSTNAMField
+            End Get
+            Set
+                Me.DSTNAMField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DSTNUM() As String
+            Get
+                Return Me.DSTNUMField
+            End Get
+            Set
+                Me.DSTNUMField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DTOTAL() As String
+            Get
+                Return Me.DTOTALField
+            End Get
+            Set
+                Me.DTOTALField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DTYPE() As String
+            Get
+                Return Me.DTYPEField
+            End Get
+            Set
+                Me.DTYPEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DZIP() As String
+            Get
+                Return Me.DZIPField
+            End Get
+            Set
+                Me.DZIPField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DZIP1() As String
+            Get
+                Return Me.DZIP1Field
+            End Get
+            Set
+                Me.DZIP1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Dcorpname() As String
+            Get
+                Return Me.DcorpnameField
+            End Get
+            Set
+                Me.DcorpnameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ECOUNTY() As String
+            Get
+                Return Me.ECOUNTYField
+            End Get
+            Set
+                Me.ECOUNTYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property EDATE() As System.Nullable(Of Date)
+            Get
+                Return Me.EDATEField
+            End Get
+            Set
+                Me.EDATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ETIME() As String
+            Get
+                Return Me.ETIMEField
+            End Get
+            Set
+                Me.ETIMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property IDISP() As String
+            Get
+                Return Me.IDISPField
+            End Get
+            Set
+                Me.IDISPField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property KYV() As String
+            Get
+                Return Me.KYVField
+            End Get
+            Set
+                Me.KYVField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property KYVSUB() As String
+            Get
+                Return Me.KYVSUBField
+            End Get
+            Set
+                Me.KYVSUBField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LLDateTimeStamp() As System.Nullable(Of Date)
+            Get
+                Return Me.LLDateTimeStampField
+            End Get
+            Set
+                Me.LLDateTimeStampField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LLSearchType() As String
+            Get
+                Return Me.LLSearchTypeField
+            End Get
+            Set
+                Me.LLSearchTypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property NDATE() As System.Nullable(Of Date)
+            Get
+                Return Me.NDATEField
+            End Get
+            Set
+                Me.NDATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property NTIME() As String
+            Get
+                Return Me.NTIMEField
+            End Get
+            Set
+                Me.NTIMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property OPERID() As String
+            Get
+                Return Me.OPERIDField
+            End Get
+            Set
+                Me.OPERIDField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Remarks() As String
+            Get
+                Return Me.RemarksField
+            End Get
+            Set
+                Me.RemarksField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property SCOUNTY() As String
+            Get
+                Return Me.SCOUNTYField
+            End Get
+            Set
+                Me.SCOUNTYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property SCOURT() As String
+            Get
+                Return Me.SCOURTField
+            End Get
+            Set
+                Me.SCOURTField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property SDDATE() As System.Nullable(Of Date)
+            Get
+                Return Me.SDDATEField
+            End Get
+            Set
+                Me.SDDATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property SDOID() As String
+            Get
+                Return Me.SDOIDField
+            End Get
+            Set
+                Me.SDOIDField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property SDSHER() As String
+            Get
+                Return Me.SDSHERField
+            End Get
+            Set
+                Me.SDSHERField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property SDTYPE() As String
+            Get
+                Return Me.SDTYPEField
+            End Get
+            Set
+                Me.SDTYPEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property SEQ() As String
+            Get
+                Return Me.SEQField
+            End Get
+            Set
+                Me.SEQField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property SFEE() As String
+            Get
+                Return Me.SFEEField
+            End Get
+            Set
+                Me.SFEEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property SINDEX() As String
+            Get
+                Return Me.SINDEXField
+            End Get
+            Set
+                Me.SINDEXField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property STYPE() As String
+            Get
+                Return Me.STYPEField
+            End Get
+            Set
+                Me.STYPEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TCITY() As String
+            Get
+                Return Me.TCITYField
+            End Get
+            Set
+                Me.TCITYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TCOUNTY() As String
+            Get
+                Return Me.TCOUNTYField
+            End Get
+            Set
+                Me.TCOUNTYField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TFNAME() As String
+            Get
+                Return Me.TFNAMEField
+            End Get
+            Set
+                Me.TFNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TLNAME() As String
+            Get
+                Return Me.TLNAMEField
+            End Get
+            Set
+                Me.TLNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TMNAME() As String
+            Get
+                Return Me.TMNAMEField
+            End Get
+            Set
+                Me.TMNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TSTNAM() As String
+            Get
+                Return Me.TSTNAMField
+            End Get
+            Set
+                Me.TSTNAMField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TSTNUM() As String
+            Get
+                Return Me.TSTNUMField
+            End Get
+            Set
+                Me.TSTNUMField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TTYPE() As String
+            Get
+                Return Me.TTYPEField
+            End Get
+            Set
+                Me.TTYPEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TYPE() As String
+            Get
+                Return Me.TYPEField
+            End Get
+            Set
+                Me.TYPEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TZIP() As String
+            Get
+                Return Me.TZIPField
+            End Get
+            Set
+                Me.TZIPField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TZIP1() As String
+            Get
+                Return Me.TZIP1Field
+            End Get
+            Set
+                Me.TZIP1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property XDATE() As System.Nullable(Of Date)
+            Get
+                Return Me.XDATEField
+            End Get
+            Set
+                Me.XDATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property date_uploaded() As System.Nullable(Of Date)
+            Get
+                Return Me.date_uploadedField
+            End Get
+            Set
+                Me.date_uploadedField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property datetimestamp() As System.Nullable(Of Date)
+            Get
+                Return Me.datetimestampField
+            End Get
+            Set
+                Me.datetimestampField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property dcorp() As String
+            Get
+                Return Me.dcorpField
+            End Get
+            Set
+                Me.dcorpField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ParkingViolations_Report", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class ParkingViolations_Report
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ADDRESSField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CITYSTATEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER3Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER4Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER5Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER6Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private FILLER7Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private INTAMTField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private JGAMT1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LLDateTimeStampField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LLSearchTypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private PLATEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private RPTJGMTField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private STATEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TIMESTAMPField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ZIPField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private pvbnameField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private pvbname_altField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private row_idField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ADDRESS() As String
+            Get
+                Return Me.ADDRESSField
+            End Get
+            Set
+                Me.ADDRESSField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CITYSTATE() As String
+            Get
+                Return Me.CITYSTATEField
+            End Get
+            Set
+                Me.CITYSTATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER1() As String
+            Get
+                Return Me.FILLER1Field
+            End Get
+            Set
+                Me.FILLER1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER3() As String
+            Get
+                Return Me.FILLER3Field
+            End Get
+            Set
+                Me.FILLER3Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER4() As String
+            Get
+                Return Me.FILLER4Field
+            End Get
+            Set
+                Me.FILLER4Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER5() As String
+            Get
+                Return Me.FILLER5Field
+            End Get
+            Set
+                Me.FILLER5Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER6() As String
+            Get
+                Return Me.FILLER6Field
+            End Get
+            Set
+                Me.FILLER6Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property FILLER7() As String
+            Get
+                Return Me.FILLER7Field
+            End Get
+            Set
+                Me.FILLER7Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property INTAMT() As String
+            Get
+                Return Me.INTAMTField
+            End Get
+            Set
+                Me.INTAMTField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property JGAMT1() As String
+            Get
+                Return Me.JGAMT1Field
+            End Get
+            Set
+                Me.JGAMT1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LLDateTimeStamp() As System.Nullable(Of Date)
+            Get
+                Return Me.LLDateTimeStampField
+            End Get
+            Set
+                Me.LLDateTimeStampField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LLSearchType() As String
+            Get
+                Return Me.LLSearchTypeField
+            End Get
+            Set
+                Me.LLSearchTypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property PLATE() As String
+            Get
+                Return Me.PLATEField
+            End Get
+            Set
+                Me.PLATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property RPTJGMT() As String
+            Get
+                Return Me.RPTJGMTField
+            End Get
+            Set
+                Me.RPTJGMTField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property STATE() As String
+            Get
+                Return Me.STATEField
+            End Get
+            Set
+                Me.STATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TIMESTAMP() As System.Nullable(Of Date)
+            Get
+                Return Me.TIMESTAMPField
+            End Get
+            Set
+                Me.TIMESTAMPField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ZIP() As String
+            Get
+                Return Me.ZIPField
+            End Get
+            Set
+                Me.ZIPField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property pvbname() As String
+            Get
+                Return Me.pvbnameField
+            End Get
+            Set
+                Me.pvbnameField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property pvbname_alt() As String
+            Get
+                Return Me.pvbname_altField
+            End Get
+            Set
+                Me.pvbname_altField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property row_id() As String
+            Get
+                Return Me.row_idField
+            End Get
+            Set
+                Me.row_idField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLO_PastAddress_Report", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLO_PastAddress_Report
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Addr_Line1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Addr_Line2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Addr_Line3Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private BBLEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CityField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LLDateTimeStampField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private LLSearchTypeField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private StateField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ZIPField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Addr_Line1() As String
+            Get
+                Return Me.Addr_Line1Field
+            End Get
+            Set
+                Me.Addr_Line1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Addr_Line2() As String
+            Get
+                Return Me.Addr_Line2Field
+            End Get
+            Set
+                Me.Addr_Line2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Addr_Line3() As String
+            Get
+                Return Me.Addr_Line3Field
+            End Get
+            Set
+                Me.Addr_Line3Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set
+                Me.BBLEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property City() As String
+            Get
+                Return Me.CityField
+            End Get
+            Set
+                Me.CityField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LLDateTimeStamp() As System.Nullable(Of Date)
+            Get
+                Return Me.LLDateTimeStampField
+            End Get
+            Set
+                Me.LLDateTimeStampField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property LLSearchType() As String
+            Get
+                Return Me.LLSearchTypeField
+            End Get
+            Set
+                Me.LLSearchTypeField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property State() As String
+            Get
+                Return Me.StateField
+            End Get
+            Set
+                Me.StateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ZIP() As String
+            Get
+                Return Me.ZIPField
+            End Get
+            Set
+                Me.ZIPField = value
+            End Set
+        End Property
+    End Class
+    
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
      System.ServiceModel.ServiceContractAttribute(ConfigurationName:="DataAPI.IWCFMacros")>  _
     Public Interface IWCFMacros
@@ -42145,10 +44808,10 @@ Namespace DataAPI
         Function AB_GetJugmentsAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal CorpName As String, ByVal FirstName As String, ByVal LastName As String, ByVal House_Num As String, ByVal St_Name As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.Judgment())
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetBankruptcy", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetBankruptcyResponse")>  _
-        Function AB_GetBankruptcy(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal CorpName As String) As DataAPI.Bankruptcy1()
+        Function AB_GetBankruptcy(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.Bankruptcy1()
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetBankruptcy", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetBankruptcyResponse")>  _
-        Function AB_GetBankruptcyAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal CorpName As String) As System.Threading.Tasks.Task(Of DataAPI.Bankruptcy1())
+        Function AB_GetBankruptcyAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.Bankruptcy1())
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomental", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomentalResponse")>  _
         Function AB_GetEnvirnomental(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal House_Num As String, ByVal St_Name As String) As DataAPI.ECB()
@@ -42197,6 +44860,12 @@ Namespace DataAPI
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepair", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepairResponse")>  _
         Function AAbs_GetEmergencyRepairAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal HouseNumer As String, ByVal St_Name As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.EmergencyRepair())
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReport", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReportResponse")>  _
+        Function AAbs_GetAreAbstractReport(ByVal BBLE As String, ByVal SelectedOwners() As DataAPI.OwnerInfo, ByVal RunJudgement As Boolean, ByVal RunFederalTaxLiens As Boolean, ByVal RunMortgages As Boolean, ByVal RunParkingViolation As Boolean, ByVal RunPatriot As Boolean, ByVal RunUcc As Boolean, ByVal RunBankruptcy As Boolean, ByVal RunECB As Boolean, ByVal RunEmergenyRepairs As Boolean, ByVal RunTransitAdjudication As Boolean, ByVal RunTLO As Boolean, ByVal RetainRecords As Boolean) As DataAPI.AB_Report_Out
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReport", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReportResponse")>  _
+        Function AAbs_GetAreAbstractReportAsync(ByVal BBLE As String, ByVal SelectedOwners() As DataAPI.OwnerInfo, ByVal RunJudgement As Boolean, ByVal RunFederalTaxLiens As Boolean, ByVal RunMortgages As Boolean, ByVal RunParkingViolation As Boolean, ByVal RunPatriot As Boolean, ByVal RunUcc As Boolean, ByVal RunBankruptcy As Boolean, ByVal RunECB As Boolean, ByVal RunEmergenyRepairs As Boolean, ByVal RunTransitAdjudication As Boolean, ByVal RunTLO As Boolean, ByVal RetainRecords As Boolean) As System.Threading.Tasks.Task(Of DataAPI.AB_Report_Out)
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -42414,12 +45083,12 @@ Namespace DataAPI
             Return MyBase.Channel.AB_GetJugmentsAsync(JobTitle, County, Start_Date, End_Date, Block, Lot, CorpName, FirstName, LastName, House_Num, St_Name, SearchType)
         End Function
         
-        Public Function AB_GetBankruptcy(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal CorpName As String) As DataAPI.Bankruptcy1() Implements DataAPI.IWCFMacros.AB_GetBankruptcy
-            Return MyBase.Channel.AB_GetBankruptcy(JobTitle, County, Start_Date, End_Date, CorpName)
+        Public Function AB_GetBankruptcy(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.Bankruptcy1() Implements DataAPI.IWCFMacros.AB_GetBankruptcy
+            Return MyBase.Channel.AB_GetBankruptcy(JobTitle, County, Start_Date, End_Date, LastName, FirstName, CorpName, SearchType)
         End Function
         
-        Public Function AB_GetBankruptcyAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal CorpName As String) As System.Threading.Tasks.Task(Of DataAPI.Bankruptcy1()) Implements DataAPI.IWCFMacros.AB_GetBankruptcyAsync
-            Return MyBase.Channel.AB_GetBankruptcyAsync(JobTitle, County, Start_Date, End_Date, CorpName)
+        Public Function AB_GetBankruptcyAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.Bankruptcy1()) Implements DataAPI.IWCFMacros.AB_GetBankruptcyAsync
+            Return MyBase.Channel.AB_GetBankruptcyAsync(JobTitle, County, Start_Date, End_Date, LastName, FirstName, CorpName, SearchType)
         End Function
         
         Public Function AB_GetEnvirnomental(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal House_Num As String, ByVal St_Name As String) As DataAPI.ECB() Implements DataAPI.IWCFMacros.AB_GetEnvirnomental
@@ -42484,6 +45153,14 @@ Namespace DataAPI
         
         Public Function AAbs_GetEmergencyRepairAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal HouseNumer As String, ByVal St_Name As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.EmergencyRepair()) Implements DataAPI.IWCFMacros.AAbs_GetEmergencyRepairAsync
             Return MyBase.Channel.AAbs_GetEmergencyRepairAsync(JobTitle, County, Start_Date, End_Date, Block, Lot, HouseNumer, St_Name, SearchType)
+        End Function
+        
+        Public Function AAbs_GetAreAbstractReport(ByVal BBLE As String, ByVal SelectedOwners() As DataAPI.OwnerInfo, ByVal RunJudgement As Boolean, ByVal RunFederalTaxLiens As Boolean, ByVal RunMortgages As Boolean, ByVal RunParkingViolation As Boolean, ByVal RunPatriot As Boolean, ByVal RunUcc As Boolean, ByVal RunBankruptcy As Boolean, ByVal RunECB As Boolean, ByVal RunEmergenyRepairs As Boolean, ByVal RunTransitAdjudication As Boolean, ByVal RunTLO As Boolean, ByVal RetainRecords As Boolean) As DataAPI.AB_Report_Out Implements DataAPI.IWCFMacros.AAbs_GetAreAbstractReport
+            Return MyBase.Channel.AAbs_GetAreAbstractReport(BBLE, SelectedOwners, RunJudgement, RunFederalTaxLiens, RunMortgages, RunParkingViolation, RunPatriot, RunUcc, RunBankruptcy, RunECB, RunEmergenyRepairs, RunTransitAdjudication, RunTLO, RetainRecords)
+        End Function
+        
+        Public Function AAbs_GetAreAbstractReportAsync(ByVal BBLE As String, ByVal SelectedOwners() As DataAPI.OwnerInfo, ByVal RunJudgement As Boolean, ByVal RunFederalTaxLiens As Boolean, ByVal RunMortgages As Boolean, ByVal RunParkingViolation As Boolean, ByVal RunPatriot As Boolean, ByVal RunUcc As Boolean, ByVal RunBankruptcy As Boolean, ByVal RunECB As Boolean, ByVal RunEmergenyRepairs As Boolean, ByVal RunTransitAdjudication As Boolean, ByVal RunTLO As Boolean, ByVal RetainRecords As Boolean) As System.Threading.Tasks.Task(Of DataAPI.AB_Report_Out) Implements DataAPI.IWCFMacros.AAbs_GetAreAbstractReportAsync
+            Return MyBase.Channel.AAbs_GetAreAbstractReportAsync(BBLE, SelectedOwners, RunJudgement, RunFederalTaxLiens, RunMortgages, RunParkingViolation, RunPatriot, RunUcc, RunBankruptcy, RunECB, RunEmergenyRepairs, RunTransitAdjudication, RunTLO, RetainRecords)
         End Function
     End Class
 End Namespace

@@ -19,7 +19,8 @@ Partial Public Class RecycleLead
 
     Public Shared Function GetActiveRecycleLeads() As List(Of RecycleLead)
         Using ctx As New CoreEntities
-            Return ctx.RecycleLeads.Where(Function(r) (r.Status = RecycleStatus.Active Or r.Status = RecycleStatus.Postponed) And r.RecycleDate < DateTime.Today.AddDays(1)).ToList
+            Dim sDate = DateTime.Today.AddDays(1)
+            Return ctx.RecycleLeads.Where(Function(r) (r.Status = RecycleStatus.Active Or r.Status = RecycleStatus.Postponed) And r.RecycleDate < sDate).ToList
         End Using
     End Function
 

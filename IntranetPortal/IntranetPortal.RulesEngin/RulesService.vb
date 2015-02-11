@@ -56,12 +56,14 @@ Public Class RulesService
     Dim rules As List(Of BaseRule)
     Private Sub InitRules()
         rules = New List(Of BaseRule)
-        'rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("20:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Leads and Task Rule"})
-        rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:20:00"), .RuleName = "Data Loop Rule", .ExecuteNow = True})
-        'rules.Add(New EmailSummaryRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "User Task Summary Rule"})
-        rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("02:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Assign Leads Rule"})
+        'rules.Add(New RecycleProcessRule() With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Recycle Leads"})
+        'rules.Add(New CompleteTaskRule() With {.ExecuteOn = TimeSpan.Parse("20:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Complete Leads Task"})
+        'rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("22:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Leads and Task Rule"})
 
-        'rules.Add(New CompleteTaskRule() With {.ExecuteOn = TimeSpan.Parse("21:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Complete Leads Task"})
+        rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("01:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Assign Leads Rule"})
+        'rules.Add(New EmailSummaryRule() With {.ExecuteOn = TimeSpan.Parse("08:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "User Task Summary Rule"})
+
+        rules.Add(New LoopServiceRule() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:20:00"), .RuleName = "Data Loop Rule", .ExecuteNow = True})
 
         'rules.Add(New ExpiredAllReminderRule With {.ExecuteOn = TimeSpan.Parse("18:31:00"), .Period = TimeSpan.Parse("10.0:0:0"), .RuleName = "Expired all reminder"})
         'rules.Add(New CreateReminderBaseOnErrorProcess() With {.ExecuteOn = TimeSpan.Parse("00:00:00"), .Period = TimeSpan.Parse("00:20:00"), .RuleName = "CreateReminderBaseOnErrorProcess Rule", .ExecuteNow = True})
@@ -255,6 +257,4 @@ Public Class RulesService
         Trial
         Release
     End Enum
-
-
 End Class

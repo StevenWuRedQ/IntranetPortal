@@ -28,7 +28,7 @@
                     </Separator>
                     <ContentCollection>
                         <dx:SplitterContentControl runat="server">
-                            <dx:ASPxRoundPanel ID="ASPxRoundPanel1" runat="server" Width="100%" HeaderText="Employee Tree" Height="100%">
+                            <dx:ASPxRoundPanel ID="ASPxRoundPanel1" runat="server" Width="100%" HeaderText="Employee Tree" Height="100%" >
                                 <PanelCollection>
                                     <dx:PanelContent>
                                         <div>                                            
@@ -52,7 +52,7 @@
                                                     </PropertiesTextEdit>
                                                     <EditFormSettings Visible="True"></EditFormSettings>
                                                     <EditCellTemplate>
-                                                        <dx:ASPxTextBox ID="pswtextbox" runat="server" Text='<%#Bind("Password")%>'
+                                                        <dx:ASPxTextBox ID="pswtextbox" runat="server" Text='<%#Bind("Password")%>' Theme="Moderno"
                                                             Visible='<%#treeList.IsNewNodeEditing%>' Password="True">
                                                             <ValidationSettings ErrorDisplayMode="ImageWithTooltip"></ValidationSettings>
                                                             <ClientSideEvents Validation="function(s,e){e.isValid = s.GetText()>5;}" />

@@ -327,8 +327,10 @@
     </Items>
   </PortalNavItem>
 
+  
+  
   <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
-    <UserRoles>OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen,OfficeManager-GalleriaTeam,OfficeManager-TomTeam,OfficeManager-RonTeam,OfficeManager-GendinTeam</UserRoles>
+    <UserRoles>OfficeManager-*,OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen,OfficeManager-GalleriaTeam,OfficeManager-TomTeam,OfficeManager-RonTeam,OfficeManager-GendinTeam</UserRoles>
     <Items>
       <PortalNavItem Name="Office-Bronx-Management" Text="Bronx Team" NavigationUrl="#" ShowAmount="true" ItemType="Office">
         <UserRoles>OfficeManager-Bronx</UserRoles>
@@ -596,6 +598,11 @@
     <UserRoles>Admin</UserRoles>
     <Items>
       <PortalNavItem Name="PortalEmployee" Text="Employee List" NavigationUrl="/Management/MgrEmployee.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="PortalOffDays" Text="Days Off" NavigationUrl="/Management/MgrOffDays.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>

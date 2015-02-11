@@ -69,7 +69,7 @@ Public Class TaskEscalationRule
                                                                        emailData.Add("Description", tk.Description)
                                                                        emailData.Add("ApprovalLink", WorkflowService.GetUserTaskApprovalLink(tk.TaskID, empName))
 
-                                                                       IntranetPortal.Core.EmailService.SendMail(email, "", "UrgentTaskNotify", emailData)
+                                                                       'IntranetPortal.Core.EmailService.SendMail(email, "", "UrgentTaskNotify", emailData)
                                                                    End If
                                                                Next
                                                            End Sub))
