@@ -51,7 +51,7 @@ Public Class LeadsSearchApproval
             If (String.IsNullOrEmpty(SearchName)) Then
                 task = Context.LeadsSearchTasks.ToList.Last()
             Else
-                task = Context.LeadsSearchTasks.Where(Function(s) s.TaksName = SearchData)
+                task = Context.LeadsSearchTasks.Where(Function(s) s.TaksName = SearchData).FirstOrDefault
             End If
 
             SearchName = task.TaksName
