@@ -301,7 +301,7 @@
                                                                         <%--add data row height and font color  by steven--%>
                                                                         <div class="search_pop_data_s">
                                                                             <div href="#" class="pop_search_data"
-                                                                                onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"), StringComparer.OrdinalIgnoreCase)  %>'>
+                                                                                onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"), StringComparer.OrdinalIgnoreCase) %>'>
                                                                                 <%# Eval("LeadsName")%>
                                                                             </div>
                                                                             <div class="pop_search_data"

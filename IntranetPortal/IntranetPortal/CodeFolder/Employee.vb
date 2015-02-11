@@ -95,7 +95,7 @@ Partial Public Class Employee
             If lead IsNot Nothing Then
                 Dim owner = lead.EmployeeName
 
-                If owner = name And lead.Status <> LeadStatus.MgrApproval Then
+                If owner = name And lead.Status <> LeadStatus.MgrApproval And lead.Status <> LeadStatus.MgrApprovalInWf Then
                     Return True
                 End If
 
