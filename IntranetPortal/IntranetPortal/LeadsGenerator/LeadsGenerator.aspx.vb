@@ -181,6 +181,7 @@ Public Class LeadsGenerator
         If (AdminLogIn()) Then
             If (String.IsNullOrEmpty(EmployeeList.Value)) Then
                 Alert("You have to select Agent")
+                Return True
             End If
         End If
         Return False
