@@ -123,6 +123,8 @@
                                 </dx:GridViewDataTextColumn>
                                  <dx:GridViewDataTextColumn FieldName="Status">
                                 </dx:GridViewDataTextColumn>
+                                 <dx:GridViewDataTextColumn FieldName="ZipCode">
+                                </dx:GridViewDataTextColumn>
                                 <dx:GridViewDataTextColumn FieldName="LastUpdateBy">
                                 </dx:GridViewDataTextColumn>
                                 <dx:GridViewDataTextColumn FieldName="LastUpdateDate">

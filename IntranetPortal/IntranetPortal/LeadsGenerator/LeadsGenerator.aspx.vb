@@ -36,6 +36,9 @@ Public Class LeadsGenerator
             AllNeighName = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "Neighborhood").Select(Function(c) c.Data).ToList
             AllZoning = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "ZONING").Select(Function(c) c.Data).ToList
             AllPropertyCode = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "PropertyDesc").Select(Function(c) c.Data).ToList
+            Dim agents = context.Employees.Where(Function(e) e.Active Or e.Name.Contains("Office")).Select(Function(e) e.Name).ToList
+            EmployeeList.DataSource = agents
+            EmployeeList.DataBind()
         End Using
     End Sub
 
@@ -128,7 +131,9 @@ Public Class LeadsGenerator
     End Sub
 
     Public Sub Select250_ServerClick()
-
+        If (AlertEmployee()) Then
+            Return
+        End If
         Dim count = 0
         Dim maxAdd = LeadMaxAdd()
         If (maxAdd < 0) Then
@@ -164,13 +169,33 @@ Public Class LeadsGenerator
         Return 0
     End Function
     Protected Function GetCurrentOffice() As String
+
+        If (AdminLogIn()) Then
+            Return EmployeeList.Value
+        End If
+
         Return Employee.GetOfficeAssignAccount(Page.User.Identity.Name)
+    End Function
+
+    Protected Function AlertEmployee() As Boolean
+        If (AdminLogIn()) Then
+            If (String.IsNullOrEmpty(EmployeeList.Value)) Then
+                Alert("You have to select Agent")
+            End If
+        End If
+        Return False
+    End Function
+    Public Function AdminLogIn() As Boolean
+        Return Employee.IsAdmin(Page.User.Identity.Name)
     End Function
     Protected Function LeadMaxAdd() As Integer
         Return MaxSelect - HasNewLeadsInProtal()
     End Function
 
     Public Sub ImportSelect_ServerClick()
+        If (AlertEmployee()) Then
+            Return
+        End If
         Dim maxAdd As Integer = LeadMaxAdd()
         Dim selectrows = QueryResultsGrid.GetSelectedFieldValues("BBLE")
         If selectrows.Count <= 0 Then
@@ -189,7 +214,7 @@ Public Class LeadsGenerator
                     l.EmployeeID = empOffice.EmployeeID
                     l.BBLE = row
                     l.Status = LeadStatus.NewLead
-                    l.AssignBy = l.EmployeeName
+                    l.AssignBy = Page.User.Identity.Name
                     l.AssignDate = Date.Now
                     Dim li = New LeadsInfo
                     li.BBLE = row
@@ -259,8 +284,8 @@ Public Class LeadsGenerator
 
     End Sub
 
-  
-    
+
+
 
     Public Sub dxfilterOutExist_CheckedChanged(e As String)
         hfFilterOutExist.Value = e

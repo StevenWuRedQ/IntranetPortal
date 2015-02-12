@@ -393,6 +393,7 @@ InitialLine:
         Using ctx As New Entities
             Dim logs = ctx.Leads_with_last_log.ToList()
             For Each log In logs
+
                 If (Not String.IsNullOrEmpty(log.LastUpdateComments)) Then
                     log.LastUpdateComments = Regex.Replace(log.LastUpdateComments, "<[^>]*(>|$)", String.Empty)
                 End If

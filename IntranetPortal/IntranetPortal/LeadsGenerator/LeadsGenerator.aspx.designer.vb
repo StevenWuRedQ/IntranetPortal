@@ -86,6 +86,15 @@ Partial Public Class LeadsGenerator
     Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
 
     '''<summary>
+    '''EmployeeList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents EmployeeList As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
     '''SaveSearchPopup control.
     '''</summary>
     '''<remarks>

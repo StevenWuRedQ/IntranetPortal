@@ -909,7 +909,14 @@
                                                                     <Settings ShowFilterRow="True" ShowFilterRowMenu="true" ShowGroupPanel="True" ShowFooter="True" />
                                                                 </dx:ASPxGridView>
                                                                 <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="QueryResultsGrid"></dx:ASPxGridViewExporter>
+                                                                <%If AdminLogIn() Then%>
+                                                                <div>
+                                                                    Admin Log in need assign agent 
+                                                                    <dx:ASPxComboBox runat="server" ID="EmployeeList">
 
+                                                                    </dx:ASPxComboBox>
+                                                                </div>
+                                                                <%End if %>
                                                             </div>
                                                         </div>
                                                     </dx:PanelContent>
