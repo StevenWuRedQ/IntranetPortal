@@ -6,7 +6,7 @@
     <link href="/css/dx.light.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-    
+
     <script src="/Scripts/globalize/globalize.js"></script>
     <script src="/Scripts/dx.chartjs.js"></script>
     <script src="/Scripts/dx.webappjs.js"></script>
@@ -99,9 +99,9 @@
                                     <span style="font-size: 14px; color: #77787b">January 1, 2015 - January 31, 2015</span>
                                 </div>
                                 <div style="font-size: 14px;">
-                                    <div id="gridContainer" style="height: 450px; max-width: 1000px; width:100%; margin: 0 auto"></div>
+                                    <div id="gridContainer" style="height: 450px; max-width: 1000px; width: 100%; margin: 0 auto"></div>
 
-                                    <table class="table table-striped" style="display:none">
+                                    <table class="table table-striped" style="display: none">
                                         <thead style="text-transform: uppercase">
                                             <tr>
                                                 <td>Name</td>
@@ -183,15 +183,15 @@
     <script type="text/javascript">
         function LoadGrid() {
             var customStore = new DevExpress.data.CustomStore({
-                load: function (loadOptions) {               
+                load: function (loadOptions) {
                     var d = $.Deferred();
-                    $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {                                            
+                    $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {
                         d.resolve(data, { totalCount: data.length });
                     });
                     return d.promise();
                 }
             });
-            
+
             var gridDataSourceConfiguration = { store: customStore };
 
             var logDataSource = new DevExpress.data.DataSource({
@@ -200,14 +200,14 @@
             });
 
             logDataSource.load().done(function (result) {
-                debugger;                
-                DevExpress.data.query(result).sum("Count").done(function (result) {                  
+                debugger;
+                DevExpress.data.query(result).sum("Count").done(function (result) {
                     $("#CallTotalCount").html(result);
                 });
             });
 
             $(function () {
-               var datagrid = $("#gridContainer").dxDataGrid({
+                var datagrid = $("#gridContainer").dxDataGrid({
                     dataSource: gridDataSourceConfiguration,
                     showColumnLines: false,
                     showRowLines: true,
@@ -232,7 +232,7 @@
                             summaryType: 'sum'
                         }]
                     }
-               });           
+                });
             });
 
 
@@ -248,13 +248,19 @@
         //    { region: "T1", val: 59 },
         //   { region: "T2", val: 59 },
         //];
+        var leadstatusData = null;
         var dataSource2 = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LeadsStatusReport/queens");
-        
-       
+
+        dataSource2.load().done(function (result) {
+            leadstatusData = result;
+            DevExpress.data.query(leadstatusData).sum("Count").done(function (result) {
+                $("#spanTotalLeads").html(result);
+            });
+        });
 
         var option =
             {
-                dataSource: dataSource2,
+                dataSource: leadstatusData,
                 tooltip: {
                     enabled: true,
 
@@ -281,12 +287,12 @@
         //$("#container").dxPieChart(option);
         option.dataSource = dataSource2;
         $("#current_leads").dxPieChart(option);
-        
-        dataSource2.select("Count").load().done(function (result) {
-            DevExpress.data.query(result).sum("Count").done(function (result) {
-                $("#spanTotalLeads").html(result);
-            });
-        });
+
+        //dataSource2.load().done(function (result) {
+        //    DevExpress.data.query(result).sum("Count").done(function (result) {
+        //        $("#spanTotalLeads").html(result);
+        //    });
+        //});
 
 
         var leadsProcess = [
