@@ -911,7 +911,7 @@
                                                                 <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="QueryResultsGrid"></dx:ASPxGridViewExporter>
                                                                 <%If AdminLogIn() Then%>
                                                                 <div>
-                                                                    Admin Log in need assign agent:
+                                                                    Admin Log in must assign agent to import:
                                                                     <dx:ASPxComboBox runat="server" ID="EmployeeList" CssClass="edit_drop">
 
                                                                     </dx:ASPxComboBox>

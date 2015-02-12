@@ -3,13 +3,16 @@
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/css/dx.common.css" rel="stylesheet" />
+    <link href="/Content/dx.ios7.default.css" rel="stylesheet" />
     <link href="/css/dx.light.css" rel="stylesheet" />
+
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
     <script src="/Scripts/globalize/globalize.js"></script>
     <script src="/Scripts/dx.chartjs.js"></script>
     <script src="/Scripts/dx.webappjs.js"></script>
+    <script src="/Scripts/dx.phonejs.js"></script>
     <div class="container-fluid">
         <%--Head--%>
         <div style="padding-top: 30px">
@@ -20,8 +23,20 @@
                         <span class="border_right" style="padding-right: 30px; font-weight: 300;">Management Summary</span>
                     </div>
                     <div class="col-md-2">
-                        <span style="font-size: 30px" class="icon_btn">Queens Team</span>
-                        <i class="fa fa-caret-down" style="color: #2e2f31; font-size: 18px;"></i>
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <span style="font-size: 30px" id="teams_link">Queens Team</span>
+                                </td>
+                                <td>
+                                    <div id="dropDownMenu" style="margin-left: 10px; background: white; border: none; box-shadow: none" />
+                                </td>
+                            </tr>
+                        </table>
+
+
+                        <%--<i class="fa fa-caret-down" style="color: #2e2f31; font-size: 18px;" ></i>--%>
                     </div>
                     <div class="col-md-6">
                         <div>
@@ -241,13 +256,13 @@
 
 
     <script>
-        //var dataSource = [
-        //    { region: "ShortSale", val: 41 },
-        //    { region: "Eviction", val: 10 },
-        //    { region: "Constact", val: 34 },
-        //    { region: "T1", val: 59 },
-        //   { region: "T2", val: 59 },
-        //];
+        var dataSource = [
+            { Status: "ShortSale", Count: 41 },
+            { Status: "Eviction", Count: 10 },
+            { Status: "Constact", Count: 34 },
+            { Status: "T1", Count: 59 },
+            { Status: "T2", Count: 59 },
+        ];
         var leadstatusData = null;
         var dataSource2 = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LeadsStatusReport/queens");
 
@@ -260,7 +275,7 @@
 
         var option =
             {
-                dataSource: leadstatusData,
+                dataSource: dataSource,
                 tooltip: {
                     enabled: true,
 
@@ -284,15 +299,10 @@
                     }
                 }]
             }
-        //$("#container").dxPieChart(option);
+        $("#container").dxPieChart(option);
         option.dataSource = dataSource2;
         $("#current_leads").dxPieChart(option);
 
-        //dataSource2.load().done(function (result) {
-        //    DevExpress.data.query(result).sum("Count").done(function (result) {
-        //        $("#spanTotalLeads").html(result);
-        //    });
-        //});
 
 
         var leadsProcess = [
@@ -378,6 +388,25 @@
             }
         };
         var chart = $("#compare_offices_chart").dxChart(chartOptions).dxChart("instance");
+    </script>
+    <script>
+        dropDownMenuData = [
+            "Queens Team",
+            "Bronx Team",
+            "Rockaway Team"
+
+        ];
+        menuItemClicked = function (e) {
+            DevExpress.ui.notify(e.itemData + " item clicked", "success", 2000);
+            $('#teams_link').html(e.itemData);
+            //officeDropDown.option("buttonText", e.itemData );
+        };
+        var officeDropDown = $("#dropDownMenu").dxDropDownMenu({
+            dataSource: dropDownMenuData,
+            itemClickAction: menuItemClicked,
+            buttonIcon: 'arrowdown',
+        }).dxDropDownMenu("instance");
+
     </script>
 </asp:Content>
 
