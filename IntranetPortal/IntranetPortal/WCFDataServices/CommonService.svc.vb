@@ -15,10 +15,18 @@ Public Class CommonService
     End Sub
 
     Public Sub SendEmailByTemplate(userName As String, templateName As String, emailData As Dictionary(Of String, String)) Implements ICommonService.SendEmailByTemplate
-        Dim emp = Employee.GetInstance(userName)
+        Dim names = userName.Split(";")
+        Dim toAdds = New List(Of String)
+        For Each name In names
+            Dim tmpEmp = Employee.GetInstance(name)
+            If tmpEmp IsNot Nothing AndAlso Not String.IsNullOrEmpty(tmpEmp.Email) Then
+                toAdds.Add(tmpEmp.Email)
+            End If
+        Next
+        'Dim emp = Employee.GetInstance(userName)
 
-        If emp IsNot Nothing AndAlso Not String.IsNullOrEmpty(emp.Email) Then
-            IntranetPortal.Core.EmailService.SendMail(emp.Email, "", templateName, emailData)
+        If toAdds IsNot Nothing AndAlso toAdds.Count > 0 Then
+            IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", templateName, emailData)
         End If
     End Sub
 

@@ -186,6 +186,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Http, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -922,6 +923,11 @@
       <DependentUpon>Root.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Service References\CallTrackingService\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\DataAPI\Reference.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1276,8 +1282,12 @@
     </Compile>
     <Compile Include="WCFDataServices\ICommonService.vb" />
     <Compile Include="WCFDataServices\IPortalDataService.vb" />
+    <Compile Include="WCFDataServices\IPortalReportService.vb" />
     <Compile Include="WCFDataServices\PortalDataService.svc.vb">
       <DependentUpon>PortalDataService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="WCFDataServices\PortalReportService.svc.vb">
+      <DependentUpon>PortalReportService.svc</DependentUpon>
     </Compile>
     <Compile Include="WebForm2.aspx.designer.vb">
       <DependentUpon>WebForm2.aspx</DependentUpon>
@@ -1306,6 +1316,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\dx.android.holo-dark.css" />
     <Content Include="Content\dx.android.holo-light.css" />
+    <Content Include="Content\dx.android5.light.css" />
     <Content Include="Content\dx.common.css" />
     <Content Include="Content\dx.dark.css" />
     <Content Include="Content\dx.exporter.dark.css" />
@@ -1327,6 +1338,8 @@
     <Content Include="Content\layouts\Empty\EmptyLayout.html" />
     <Content Include="Content\layouts\Empty\EmptyLayout.js" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\dx.common.css" />
+    <Content Include="css\dx.light.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="css\main.css" />
@@ -1598,7 +1611,6 @@
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\Chart.js" />
     <Content Include="scripts\devextreme-localization\dx.webappjs.de.js" />
-    <Content Include="scripts\devextreme-localization\dx.webappjs.fr.js" />
     <Content Include="scripts\devextreme-localization\dx.webappjs.ja.js" />
     <Content Include="scripts\devextreme-localization\dx.webappjs.ru.js" />
     <Content Include="scripts\devextreme-modules\dx.module-core.debug.js" />
@@ -2340,6 +2352,22 @@
     <Content Include="scripts\jquery-2.1.1.min.map" />
     <Content Include="scripts\Web.config" />
     <Content Include="scrollbar\Web.config" />
+    <None Include="Service References\CallTrackingService\CallTrackingService.wsdl" />
+    <Content Include="Service References\CallTrackingService\IntranetPortal.CallTrackingService.EmployeeStatisticData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\CallTrackingService\item.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CallTrackingService\item1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CallTrackingService\item2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CallTrackingService\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\DataAPI\Arrays1.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -2349,6 +2377,13 @@
     <Content Include="scrollbar\jquery.mCustomScrollbar.concat.min.js" />
     <Content Include="scrollbar\jquery.mCustomScrollbar.css" />
     <Content Include="scrollbar\jquery.mCustomScrollbar.js" />
+    <None Include="Service References\CallTrackingService\item.disco" />
+    <None Include="Service References\CallTrackingService\configuration91.svcinfo" />
+    <None Include="Service References\CallTrackingService\configuration.svcinfo" />
+    <None Include="Service References\CallTrackingService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.vb</LastGenOutput>
+    </None>
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Acris_Out.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -2477,6 +2512,7 @@
     <Content Include="ViewLeadsInfo.aspx" />
     <Content Include="WCFDataServices\CommonService.svc" />
     <Content Include="WCFDataServices\PortalDataService.svc" />
+    <Content Include="WCFDataServices\PortalReportService.svc" />
     <Content Include="WebForm2.aspx" />
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -2602,6 +2638,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CallTrackingService\" />
     <WCFMetadataStorage Include="Service References\DataAPI\" />
   </ItemGroup>
   <ItemGroup>

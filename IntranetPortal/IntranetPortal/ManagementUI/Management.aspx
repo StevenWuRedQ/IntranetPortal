@@ -2,10 +2,14 @@
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/css/dx.common.css" rel="stylesheet" />
+    <link href="/css/dx.light.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
+    
     <script src="/Scripts/globalize/globalize.js"></script>
     <script src="/Scripts/dx.chartjs.js"></script>
+    <script src="/Scripts/dx.webappjs.js"></script>
     <div class="container-fluid">
         <%--Head--%>
         <div style="padding-top: 30px">
@@ -41,7 +45,6 @@
                             <i class="fa fa-search-plus management_search_icon" style="margin-left: 10px;"></i>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -87,16 +90,18 @@
                                             </select>
                                         </div>
                                         <div class="col-md-1">
-                                            <button class="rand-button bg_color_blue rand-button-padding">Display</button>
+                                            <input type="button" value="Display" class="rand-button bg_color_blue rand-button-padding" onclick="LoadGrid()" />
                                         </div>
                                     </div>
                                 </div>
                                 <div style="margin: 30px 0; font-size: 24px; color: #234b60">
-                                    <span style="font-weight: 900">52,013 </span>Phone Calls<br />
+                                    <span style="font-weight: 900" id="CallTotalCount">52,013 </span>Phone Calls<br />
                                     <span style="font-size: 14px; color: #77787b">January 1, 2015 - January 31, 2015</span>
                                 </div>
                                 <div style="font-size: 14px;">
-                                    <table class="table table-striped">
+                                    <div id="gridContainer" style="height: 450px; max-width: 1000px; width:100%; margin: 0 auto"></div>
+
+                                    <table class="table table-striped" style="display:none">
                                         <thead style="text-transform: uppercase">
                                             <tr>
                                                 <td>Name</td>
@@ -152,7 +157,7 @@
                                 <div class="col-md-6">
                                     <div id="current_leads" class="containers" style="height: 250px; width: 100%;"></div>
                                     <div class="chart_text">
-                                        Current Leads: 1250
+                                        Current Leads: <span id="spanTotalLeads">0</span>
                                     </div>
                                 </div>
                             </div>
@@ -175,25 +180,81 @@
             </div>
         </div>
     </div>
-    <script>
-        var dataSource = [
-            { region: "ShortSale", val: 41 },
-            { region: "Eviction", val: 10 },
-            { region: "Constact", val: 34 },
-            { region: "T1", val: 59 },
-           { region: "T2", val: 59 },
-        ];
-        var dataSource2 = [
-            { region: "DoorKnock", val: 50 },
-            { region: "Task", val: 60 },
-            { region: "HotLeads", val: 70 },
-            { region: "T1", val: 20 },
-           { region: "T2", val: 20 },
+    <script type="text/javascript">
+        function LoadGrid() {
+            var customStore = new DevExpress.data.CustomStore({
+                load: function (loadOptions) {               
+                    var d = $.Deferred();
+                    $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {                                            
+                        d.resolve(data, { totalCount: data.length });
+                    });
+                    return d.promise();
+                }
+            });
+            
+            var gridDataSourceConfiguration = { store: customStore };
 
-        ];
+            var logDataSource = new DevExpress.data.DataSource({
+                store: customStore,
+                select: "Count"
+            });
+
+            logDataSource.load().done(function (result) {
+                debugger;                
+                DevExpress.data.query(result).sum("Count").done(function (result) {                  
+                    $("#CallTotalCount").html(result);
+                });
+            });
+
+            $(function () {
+               var datagrid = $("#gridContainer").dxDataGrid({
+                    dataSource: gridDataSourceConfiguration,
+                    showColumnLines: false,
+                    showRowLines: true,
+                    rowAlternationEnabled: true,
+                    paging: { enabled: false },
+                    columns: [{
+                        dataField: "EmployeeName",
+                        caption: "Name",
+                    }, "Inbound", {
+                        dataField: "Outbound",
+                        caption: "Outbound"
+                    }, {
+                        dataField: "Count",
+                        caption: "Phone Calls"
+                    }, {
+                        dataField: "Duration",
+                        caption: "Total Time"
+                    }],
+                    summary: {
+                        totalItems: [{
+                            column: 'Count',
+                            summaryType: 'sum'
+                        }]
+                    }
+               });           
+            });
+
+
+        }
+    </script>
+
+
+    <script>
+        //var dataSource = [
+        //    { region: "ShortSale", val: 41 },
+        //    { region: "Eviction", val: 10 },
+        //    { region: "Constact", val: 34 },
+        //    { region: "T1", val: 59 },
+        //   { region: "T2", val: 59 },
+        //];
+        var dataSource2 = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LeadsStatusReport/queens");
+        
+       
+
         var option =
             {
-                dataSource: dataSource,
+                dataSource: dataSource2,
                 tooltip: {
                     enabled: true,
 
@@ -206,7 +267,8 @@
                 legend: { visible: false },
                 series: [{
                     type: "doughnut",
-                    argumentField: "region",
+                    argumentField: "Status",
+                    valueField: "Count",
                     label: {
                         visible: true,
 
@@ -216,9 +278,16 @@
                     }
                 }]
             }
-        $("#container").dxPieChart(option);
+        //$("#container").dxPieChart(option);
         option.dataSource = dataSource2;
         $("#current_leads").dxPieChart(option);
+        
+        dataSource2.select("Count").load().done(function (result) {
+            DevExpress.data.query(result).sum("Count").done(function (result) {
+                $("#spanTotalLeads").html(result);
+            });
+        });
+
 
         var leadsProcess = [
     { state: "May", young: 6.7, middle: 28.6, older: 5.1 },
@@ -262,10 +331,10 @@
     { year: "November,2014", Queens: 190, Brooklyn: 180, Bronx: 100, Manhattan: 150 },
     { year: "December,2014", Queens: 263, Brooklyn: 280, Bronx: 230, Manhattan: 150 },
     { year: "January", Queens: 220, Brooklyn: 380, Bronx: 190, Manhattan: 150 },
-   
+
         ];
 
-       
+
 
         var chartOptions = {
             dataSource: compateOfficeData,

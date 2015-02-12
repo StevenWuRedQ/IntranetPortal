@@ -16,9 +16,11 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "RuleEngineManage", "RuleEng
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "RuleEngineService", "RuleEngineService\RuleEngineService.vbproj", "{DF12C48F-79A8-4F28-8794-9A481A431EC2}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Management", "IntranetPortal.Management\IntranetPortal.Management.vbproj", "{2B915A55-7815-4D0D-8CF6-8384F4638099}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://chrispc:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -43,6 +45,9 @@ Global
 		SccProjectUniqueName7 = RuleEngineService\\RuleEngineService.vbproj
 		SccProjectName7 = RuleEngineService
 		SccLocalPath7 = RuleEngineService
+		SccProjectUniqueName8 = IntranetPortal.Management\\IntranetPortal.Management.vbproj
+		SccProjectName8 = IntranetPortal.Management
+		SccLocalPath8 = IntranetPortal.Management
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +82,10 @@ Global
 		{DF12C48F-79A8-4F28-8794-9A481A431EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF12C48F-79A8-4F28-8794-9A481A431EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF12C48F-79A8-4F28-8794-9A481A431EC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B915A55-7815-4D0D-8CF6-8384F4638099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B915A55-7815-4D0D-8CF6-8384F4638099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B915A55-7815-4D0D-8CF6-8384F4638099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B915A55-7815-4D0D-8CF6-8384F4638099}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

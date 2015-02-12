@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="332c4549-bb57-4fa2-9ea0-f8393fd412b5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8733/CallTrackingService/" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CallTrackingService.wsdl" MetadataType="Wsdl" ID="288ec384-6a1a-4ee9-b53c-de1bdf1bd523" SourceId="1" SourceUrl="http://localhost:8733/CallTrackingService/?wsdl" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="1d8f4ba4-3ed8-4f38-988b-fbe464f2f578" SourceId="1" SourceUrl="http://localhost:8733/CallTrackingService/?disco" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="e4f3c380-b849-4dfd-9490-4b908d35344b" SourceId="1" SourceUrl="http://localhost:8733/CallTrackingService/?xsd=xsd3" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="817b38e1-84e8-4f91-9ddb-5bd787534574" SourceId="1" SourceUrl="http://localhost:8733/CallTrackingService/?xsd=xsd0" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="1ab1f747-53c4-4882-9933-f6af64904f46" SourceId="1" SourceUrl="http://localhost:8733/CallTrackingService/?xsd=xsd1" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="57e2d2f4-03d5-487b-ba00-565659f0f796" SourceId="1" SourceUrl="http://localhost:8733/CallTrackingService/?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
