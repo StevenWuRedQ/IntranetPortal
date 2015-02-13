@@ -6,9 +6,8 @@
     <link href="/Content/dx.ios7.default.css" rel="stylesheet" />
     <link href="/css/dx.light.css" rel="stylesheet" />
     <style>
-        .nofoucs:focus
-        {
-            border:none !important;
+        .nofoucs:focus {
+            border: none !important;
         }
     </style>
 </asp:Content>
@@ -200,6 +199,7 @@
             </div>
         </div>
     </div>
+   
     <script type="text/javascript">
         function LoadGrid() {
             var customStore = new DevExpress.data.CustomStore({
@@ -261,157 +261,164 @@
 
 
     <script>
-        var dataSource = new DevExpress.data.DataSource({
-            load: function (loadOptions) {
-                var d = $.Deferred();
-                $.getJSON('/WCFDataServices/PortalReportService.svc/LeadsInProcessReport/RonTeam').done(function (data) {
-                    d.resolve(data);
-                    var inporcessCount = data.reduce(function (a, b) {
-                        return { Count: a.Count + b.Count };
-                    });
-                    $("#InProcessCount").html(inporcessCount.Count)
-                });
-                return d.promise();
-            }
-        });
-        var leadstatusData = null;
-        var dataSource2 = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LeadsStatusReport/queens");
-       
-        
-        dataSource2.load().done(function (result) {
-            leadstatusData = result;
-            DevExpress.data.query(leadstatusData).sum("Count").done(function (result) {
-                $("#spanTotalLeads").html(result);
-            });
-        });
+        function loadCharts(office) {
 
-        var option =
-            {
-                dataSource: dataSource,
+            var dataSource = new DevExpress.data.DataSource({
+                load: function (loadOptions) {
+                    var d = $.Deferred();
+                    $.getJSON('/WCFDataServices/PortalReportService.svc/LeadsInProcessReport/' + office).done(function (data) {
+                        d.resolve(data);
+                        var inporcessCount = data.reduce(function (a, b) {
+                            return { Count: a.Count + b.Count };
+                        });
+                        $("#InProcessCount").html(inporcessCount.Count)
+                    });
+                    return d.promise();
+                }
+            });
+            var leadstatusData = null;
+            var dataSource2 = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LeadsStatusReport/" + office);
+
+
+            dataSource2.load().done(function (result) {
+                leadstatusData = result;
+                DevExpress.data.query(leadstatusData).sum("Count").done(function (result) {
+                    $("#spanTotalLeads").html(result);
+                });
+            });
+
+            var option =
+                {
+                    dataSource: dataSource,
+                    tooltip: {
+                        enabled: true,
+
+                        percentPrecision: 2,
+                        customizeText: function () {
+
+                            return this.argumentText + " - " + this.percentText;
+                        }
+                    },
+                    legend: { visible: false },
+                    series: [{
+                        type: "doughnut",
+                        argumentField: "Status",
+                        valueField: "Count",
+                        label: {
+                            visible: true,
+
+                            connector: {
+                                visible: true
+                            }
+                        }
+                    }]
+                }
+            $("#container").dxPieChart(option);
+            option.dataSource = dataSource2;
+            $("#current_leads").dxPieChart(option);
+
+
+
+            var leadsProcess = [
+        { state: "May", young: 6.7, middle: 28.6, older: 5.1 },
+        { state: "Jun", young: 9.6, middle: 43.4, older: 9 },
+        { state: "Jul", young: 13.5, middle: 49, older: 5.8 },
+        { state: "Aug", young: 30, middle: 90.3, older: 14.5 }
+            ];
+
+            $("#leads_process_chart").dxChart({
+                dataSource: leadsProcess,
+                commonSeriesSettings: {
+                    argumentField: "state",
+                    type: "stackedBar"
+                },
+                series: [
+                    { valueField: "young", name: "Closed" },
+                    { valueField: "middle", name: "In Process" },
+                    { valueField: "older", name: "Appointments" }
+                ],
+                legend: {
+                    verticalAlignment: "bottom",
+                    horizontalAlignment: "center",
+                    itemTextPosition: 'top'
+                },
+                valueAxis: {
+                    title: {
+                        text: "millions"
+                    },
+                    position: "right"
+                },
+
                 tooltip: {
                     enabled: true,
-
-                    percentPrecision: 2,
+                    location: "edge",
                     customizeText: function () {
+                        return this.seriesName + " years: " + this.valueText;
+                    }
+                }
+            });
+            var compateOfficeData = [
+                { year: "November,2014", Queens: 190, Brooklyn: 180, Bronx: 100, Manhattan: 150 },
+                { year: "December,2014", Queens: 263, Brooklyn: 280, Bronx: 230, Manhattan: 150 },
+                { year: "January", Queens: 220, Brooklyn: 380, Bronx: 190, Manhattan: 150 },
 
-                        return this.argumentText + " - " + this.percentText;
+            ];
+
+
+
+            var chartOptions = {
+                dataSource: compateOfficeData,
+                commonSeriesSettings: {
+                    type: "spline",
+                    argumentField: "year"
+                },
+                commonAxisSettings: {
+                    grid: {
+                        visible: true
                     }
                 },
-                legend: { visible: false },
-                series: [{
-                    type: "doughnut",
-                    argumentField: "Status",
-                    valueField: "Count",
-                    label: {
-                        visible: true,
-
-                        connector: {
-                            visible: true
-                        }
-                    }
-                }]
-            }
-        $("#container").dxPieChart(option);
-        option.dataSource = dataSource2;
-        $("#current_leads").dxPieChart(option);
-
-
-
-        var leadsProcess = [
-    { state: "May", young: 6.7, middle: 28.6, older: 5.1 },
-    { state: "Jun", young: 9.6, middle: 43.4, older: 9 },
-    { state: "Jul", young: 13.5, middle: 49, older: 5.8 },
-    { state: "Aug", young: 30, middle: 90.3, older: 14.5 }
-        ];
-
-        $("#leads_process_chart").dxChart({
-            dataSource: leadsProcess,
-            commonSeriesSettings: {
-                argumentField: "state",
-                type: "stackedBar"
-            },
-            series: [
-                { valueField: "young", name: "Closed" },
-                { valueField: "middle", name: "In Process" },
-                { valueField: "older", name: "Appointments" }
-            ],
-            legend: {
-                verticalAlignment: "bottom",
-                horizontalAlignment: "center",
-                itemTextPosition: 'top'
-            },
-            valueAxis: {
-                title: {
-                    text: "millions"
+                margin: {
+                    bottom: 20
                 },
-                position: "right"
-            },
-
-            tooltip: {
-                enabled: true,
-                location: "edge",
-                customizeText: function () {
-                    return this.seriesName + " years: " + this.valueText;
+                series: [
+                    { valueField: "Queens", name: "Queens Office" },
+                    { valueField: "Brooklyn", name: "Queens Office" },
+                    { valueField: "Bronx", name: "Bronx Office" },
+                    { valueField: "Manhattan", name: "Manhattan Office" }
+                ],
+                tooltip: {
+                    enabled: true
+                },
+                legend: {
+                    verticalAlignment: "bottom",
+                    horizontalAlignment: "center",
+                    itemTextPosition: 'top'
+                },
+                //title: "Architecture Share Over Time (Count)",
+                commonPaneSettings: {
+                    border: {
+                        visible: true
+                    }
                 }
-            }
-        });
-        var compateOfficeData = [
-    { year: "November,2014", Queens: 190, Brooklyn: 180, Bronx: 100, Manhattan: 150 },
-    { year: "December,2014", Queens: 263, Brooklyn: 280, Bronx: 230, Manhattan: 150 },
-    { year: "January", Queens: 220, Brooklyn: 380, Bronx: 190, Manhattan: 150 },
-
-        ];
-
-
-
-        var chartOptions = {
-            dataSource: compateOfficeData,
-            commonSeriesSettings: {
-                type: "spline",
-                argumentField: "year"
-            },
-            commonAxisSettings: {
-                grid: {
-                    visible: true
-                }
-            },
-            margin: {
-                bottom: 20
-            },
-            series: [
-                { valueField: "Queens", name: "Queens Office" },
-                { valueField: "Brooklyn", name: "Queens Office" },
-                { valueField: "Bronx", name: "Bronx Office" },
-                { valueField: "Manhattan", name: "Manhattan Office" }
-            ],
-            tooltip: {
-                enabled: true
-            },
-            legend: {
-                verticalAlignment: "bottom",
-                horizontalAlignment: "center",
-                itemTextPosition: 'top'
-            },
-            //title: "Architecture Share Over Time (Count)",
-            commonPaneSettings: {
-                border: {
-                    visible: true
-                }
-            }
-        };
-        var chart = $("#compare_offices_chart").dxChart(chartOptions).dxChart("instance");
+            };
+            var chart = $("#compare_offices_chart").dxChart(chartOptions).dxChart("instance");
+        }
+        loadCharts("Queens");
     </script>
     <script>
-        dropDownMenuData = [
-            "Queens Team",
-            "Bronx Team",
-            "Rockaway Team"
+        dropDownMenuData = <%= AllTameJson()%>
+        //dropDownMenuData = [
+        //    "Queens Team",
+        //    "Bronx Team",
+        //    "Rockaway Team"
 
-        ];
+        //];
         menuItemClicked = function (e) {
-            DevExpress.ui.notify(e.itemData + " item clicked", "success", 2000);
+           
+            DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000});
             $('#teams_link').html(e.itemData);
             //officeDropDown.option("buttonText", e.itemData );
+            loadCharts(e.itemData.replace("Office",'').trim());
         };
         var officeDropDown = $("#dropDownMenu").dxDropDownMenu({
             dataSource: dropDownMenuData,
