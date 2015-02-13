@@ -382,7 +382,7 @@ InitialLine:
     
     Protected Sub exportLastLog_Click(sender As Object, e As EventArgs)
         BindLastLog()
-        ASPxLoadLastLogExporter.WriteXlsToResponse()
+        ASPxLoadLastLogExporter.WriteXlsxToResponse()
     End Sub
 
     Protected Sub LoadLastLog_Click(sender As Object, e As EventArgs)

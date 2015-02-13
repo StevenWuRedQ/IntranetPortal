@@ -32,6 +32,15 @@ Partial Public Class LeadsManagement
     Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
+    '''btnExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnExport As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''ASPxPopupMenu3 control.
     '''</summary>
     '''<remarks>
@@ -50,6 +59,15 @@ Partial Public Class LeadsManagement
     Protected WithEvents gridLeads As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
+    '''gridExport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridExport As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
+
+    '''<summary>
     '''ASPxLabel1 control.
     '''</summary>
     '''<remarks>
@@ -66,24 +84,6 @@ Partial Public Class LeadsManagement
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents listboxEmployee As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
-
-    '''<summary>
-    '''btnAssign control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAssign As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
-    '''ASPxButton1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
     '''LeadsInfo control.

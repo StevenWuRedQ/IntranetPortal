@@ -52,6 +52,20 @@ Public Class PortalReportService
             End Using
         End Using
     End Function
+    Public Function LoadLeadsInProcessReport(teamName As String) As List(Of LeadsStatusData) Implements IPortalReportService.LoadLeadsInProcessReport
+        Dim result As New List(Of LeadsStatusData)
+        Using Context As New Entities
+            Dim emps = Employee.GetDeptUsers(teamName)
+            Dim source = Context.Leads.Where(Function(ld) emps.Contains(ld.EmployeeName) And ld.Status = LeadStatus.InProcess).Select(Function(ld) ld.BBLE).ToList
+            Dim shortSale = IntranetPortal.ShortSale.ShortSaleCase.GetCaseByBBLEs(source)
+            Dim EvictionCase = IntranetPortal.ShortSale.EvictionCas.GetCaseByBBLEs(source)
+            result.Add(New LeadsStatusData With {.Status = "Short Sale", .Count = shortSale.Count})
+            result.Add(New LeadsStatusData With {.Status = "Eviction", .Count = EvictionCase.Count})
+            result.Add(New LeadsStatusData With {.Status = "In Process", .Count = source.Count})
+        End Using
+
+        Return result
+    End Function
 End Class
 
 Public Class EmpData

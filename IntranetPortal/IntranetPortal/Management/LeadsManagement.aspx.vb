@@ -33,7 +33,7 @@ Public Class LeadsManagement
             BindEmployeeList()
         End If
     End Sub
-
+ 
     Sub BindLeads()
         If Not String.IsNullOrEmpty(Request.QueryString("mgr")) Then
             Dim mgrName = Employee.GetInstance(CInt(Request.QueryString("mgr"))).Name
@@ -308,5 +308,9 @@ Public Class LeadsManagement
                 gridLeads.DataBind()
             End If
         End If
+    End Sub
+
+    Protected Sub btnExport_Click(sender As Object, e As EventArgs)
+        gridExport.WriteXlsxToResponse()
     End Sub
 End Class

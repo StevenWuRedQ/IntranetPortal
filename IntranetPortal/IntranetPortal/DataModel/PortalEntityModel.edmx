@@ -211,7 +211,7 @@
           <Property Name="Process" Type="int" />
           <Property Name="Status" Type="int" />
           <Property Name="CallbackDate" Type="date" />
-          <Property Name="Neighborhood" Type="nvarchar" MaxLength="50" />
+          <Property Name="Neighborhood" Type="nvarchar" MaxLength="120" />
           <Property Name="DeadReason" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="LastUpdate" Type="datetime" />
@@ -285,8 +285,8 @@
           <Property Name="Date" Type="smalldatetime" />
           <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
           <Property Name="SaleDate" Type="smalldatetime" />
-          <Property Name="TaxClass" Type="nvarchar" MaxLength="50" />
           <Property Name="PropertyClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxClass" Type="nvarchar" MaxLength="50" />
           <Property Name="SaleType" Type="nvarchar" MaxLength="50" />
           <Property Name="Condition" Type="nchar" MaxLength="15" />
           <Property Name="Block" Type="nchar" MaxLength="5" />
@@ -549,8 +549,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="ScheduleDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
           <Property Name="Location" Type="nvarchar" MaxLength="120" />
-          <Property Name="Manager" Type="nvarchar" MaxLength="200" />
-          <Property Name="Agent" Type="nvarchar" MaxLength="200" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="50" />
+          <Property Name="Agent" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="Status" Type="int" />
           <Property Name="Label" Type="nvarchar" MaxLength="50" />
@@ -630,9 +630,11 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           </Key>
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="PropertyClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="Current Agent" Type="nvarchar" MaxLength="50" />
           <Property Name="Department" Type="nvarchar" MaxLength="50" />
-          <Property Name="Status" Type="int" />
           <Property Name="DeadReason" Type="int" />
           <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="LastUpdateDate" Type="datetime" />
@@ -692,9 +694,11 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
             <DefiningQuery>SELECT 
     [Leads_with_last_log].[BBLE] AS [BBLE], 
     [Leads_with_last_log].[PropertyAddress] AS [PropertyAddress], 
+    [Leads_with_last_log].[PropertyClass] AS [PropertyClass], 
+    [Leads_with_last_log].[ZipCode] AS [ZipCode], 
+    [Leads_with_last_log].[Status] AS [Status], 
     [Leads_with_last_log].[Current Agent] AS [Current Agent], 
     [Leads_with_last_log].[Department] AS [Department], 
-    [Leads_with_last_log].[Status] AS [Status], 
     [Leads_with_last_log].[DeadReason] AS [DeadReason], 
     [Leads_with_last_log].[LastUpdateBy] AS [LastUpdateBy], 
     [Leads_with_last_log].[LastUpdateDate] AS [LastUpdateDate], 
@@ -768,10 +772,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <EntitySet Name="HomeOwnerEmails" EntityType="IntranetPortalModel.HomeOwnerEmail" />
           <EntitySet Name="NYC_DATA_COMMENT" EntityType="IntranetPortalModel.NYC_DATA_COMMENT" />
           <EntitySet Name="LeadsSearchTasks" EntityType="IntranetPortalModel.LeadsSearchTask" />
-          <EntitySet Name="Leads_with_last_log" EntityType="IntranetPortalModel.Leads_with_last_log" />
           <EntitySet Name="SearchResults" EntityType="IntranetPortalModel.SearchResult" />
           <EntitySet Name="ApartmentBuildings" EntityType="IntranetPortalModel.ApartmentBuilding" />
           <EntitySet Name="Apartments" EntityType="IntranetPortalModel.Apartment" />
+          <EntitySet Name="Leads_with_last_log" EntityType="IntranetPortalModel.Leads_with_last_log" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -822,7 +826,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <Property Name="Process" Type="Int32" />
           <Property Name="Status" Type="Int32" />
           <Property Name="CallbackDate" Type="DateTime" Precision="0" />
-          <Property Name="Neighborhood" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Neighborhood" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
           <Property Name="AssignDate" Type="DateTime" Precision="3" />
           <Property Name="AssignBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="LeadsInfo" Relationship="IntranetPortalModel.LeadLeadsInfo" FromRole="Lead" ToRole="LeadsInfo" />
@@ -1040,8 +1044,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <Property Name="ScheduleDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Location" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="Manager" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Agent" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
@@ -1413,20 +1417,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="DeclineReason" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Leads_with_last_log">
-          <Key>
-            <PropertyRef Name="BBLE" />
-          </Key>
-          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Current_Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="DeadReason" Type="Int32" />
-          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdateComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="SearchResult">
           <Key>
             <PropertyRef Name="Id" />
@@ -1473,6 +1463,22 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <Property Name="Active" Type="Boolean" />
           <Property Name="AptBBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
           <Property Name="BuildingId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Leads_with_last_log">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Current_Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeadReason" Type="Int32" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdateComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2081,21 +2087,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Leads_with_last_log">
-            <EntityTypeMapping TypeName="IntranetPortalModel.Leads_with_last_log">
-              <MappingFragment StoreEntitySet="Leads_with_last_log">
-                <ScalarProperty Name="LastUpdateComments" ColumnName="LastUpdateComments" />
-                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
-                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
-                <ScalarProperty Name="DeadReason" ColumnName="DeadReason" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="Current_Agent" ColumnName="Current Agent" />
-                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
-                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SearchResults">
             <EntityTypeMapping TypeName="IntranetPortalModel.SearchResult">
               <MappingFragment StoreEntitySet="SearchResults">
@@ -2143,6 +2134,23 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
                 <ScalarProperty Name="UnitNum" ColumnName="UnitNum" />
                 <ScalarProperty Name="BuildingBBLE" ColumnName="BuildingBBLE" />
                 <ScalarProperty Name="AptId" ColumnName="AptId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leads_with_last_log">
+            <EntityTypeMapping TypeName="IntranetPortalModel.Leads_with_last_log">
+              <MappingFragment StoreEntitySet="Leads_with_last_log">
+                <ScalarProperty Name="LastUpdateComments" ColumnName="LastUpdateComments" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="DeadReason" ColumnName="DeadReason" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Current_Agent" ColumnName="Current Agent" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="PropertyClass" ColumnName="PropertyClass" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -13,9 +13,11 @@ Imports System.Collections.Generic
 Partial Public Class Leads_with_last_log
     Public Property BBLE As String
     Public Property PropertyAddress As String
+    Public Property PropertyClass As String
+    Public Property ZipCode As String
+    Public Property Status As String
     Public Property Current_Agent As String
     Public Property Department As String
-    Public Property Status As Nullable(Of Integer)
     Public Property DeadReason As Nullable(Of Integer)
     Public Property LastUpdateBy As String
     Public Property LastUpdateDate As Nullable(Of Date)

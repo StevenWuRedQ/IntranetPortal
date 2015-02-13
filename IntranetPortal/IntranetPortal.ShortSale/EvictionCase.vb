@@ -18,5 +18,11 @@
             ctx.SaveChanges()
         End Using
     End Sub
+    Public Shared Function GetCaseByBBLEs(bbles As List(Of String)) As List(Of EvictionCas)
+        Using ctx As New ShortSaleEntities
+            Dim evis = ctx.EvictionCases.Where(Function(ec) bbles.Contains(ec.BBLE)).ToList
+            Return evis
+        End Using
 
+    End Function
 End Class

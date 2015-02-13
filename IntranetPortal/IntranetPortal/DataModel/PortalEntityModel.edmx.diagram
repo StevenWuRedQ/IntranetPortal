@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="aa1dbe47eff54603a23941d0def4ef3e" Name="Diagram1" ZoomLevel="101">
+      <Diagram DiagramId="aa1dbe47eff54603a23941d0def4ef3e" Name="Diagram1" ZoomLevel="75">
         <EntityTypeShape EntityType="IntranetPortalModel.Employee" Width="1.5" PointX="1.125" PointY="1.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsActivityLog" Width="2.5" PointX="3.75" PointY="1.375" />
         <EntityTypeShape EntityType="IntranetPortalModel.Lead" Width="1.75" PointX="3.625" PointY="4.75" IsExpanded="true" />
@@ -47,10 +47,10 @@
         <EntityTypeShape EntityType="IntranetPortalModel.HomeOwnerEmail" Width="1.5" PointX="16.375" PointY="3.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.NYC_DATA_COMMENT" Width="1.5" PointX="17.375" PointY="11.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsSearchTask" Width="1.5" PointX="11.375" PointY="17.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.Leads_with_last_log" Width="1.5" PointX="17.375" PointY="14.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.SearchResult" Width="1.5" PointX="13.375" PointY="18.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.ApartmentBuilding" Width="1.75" PointX="16.875" PointY="18.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.Apartment" Width="1.5" PointX="10" PointY="21.125" />
+        <EntityTypeShape EntityType="IntranetPortalModel.Leads_with_last_log" Width="1.5" PointX="17.375" PointY="14.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

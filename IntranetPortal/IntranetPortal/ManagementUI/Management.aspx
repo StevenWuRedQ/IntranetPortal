@@ -5,7 +5,12 @@
     <link href="/css/dx.common.css" rel="stylesheet" />
     <link href="/Content/dx.ios7.default.css" rel="stylesheet" />
     <link href="/css/dx.light.css" rel="stylesheet" />
-
+    <style>
+        .nofoucs:focus
+        {
+            border:none !important;
+        }
+    </style>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
@@ -30,7 +35,7 @@
                                     <span style="font-size: 30px" id="teams_link">Queens Team</span>
                                 </td>
                                 <td>
-                                    <div id="dropDownMenu" style="margin-left: 10px; background: white; border: none; box-shadow: none" />
+                                    <div id="dropDownMenu" class="nofoucs" style="margin-left: 10px; background: white; border: none; box-shadow: none" />
                                 </td>
                             </tr>
                         </table>
@@ -166,13 +171,13 @@
                                 <div class="col-md-6">
                                     <div id="container" class="containers" style="height: 250px; width: 100%;"></div>
                                     <div class="chart_text">
-                                        In Process Leads: 35
+                                        In Process Leads: <span id="InProcessCount" class="font_black">0</span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div id="current_leads" class="containers" style="height: 250px; width: 100%;"></div>
                                     <div class="chart_text">
-                                        Current Leads: <span id="spanTotalLeads">0</span>
+                                        Current Leads: <span id="spanTotalLeads" class="font_black">0</span>
                                     </div>
                                 </div>
                             </div>
@@ -256,16 +261,23 @@
 
 
     <script>
-        var dataSource = [
-            { Status: "ShortSale", Count: 41 },
-            { Status: "Eviction", Count: 10 },
-            { Status: "Constact", Count: 34 },
-            { Status: "T1", Count: 59 },
-            { Status: "T2", Count: 59 },
-        ];
+        var dataSource = new DevExpress.data.DataSource({
+            load: function (loadOptions) {
+                var d = $.Deferred();
+                $.getJSON('/WCFDataServices/PortalReportService.svc/LeadsInProcessReport/RonTeam').done(function (data) {
+                    d.resolve(data);
+                    var inporcessCount = data.reduce(function (a, b) {
+                        return { Count: a.Count + b.Count };
+                    });
+                    $("#InProcessCount").html(inporcessCount.Count)
+                });
+                return d.promise();
+            }
+        });
         var leadstatusData = null;
         var dataSource2 = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LeadsStatusReport/queens");
-
+       
+        
         dataSource2.load().done(function (result) {
             leadstatusData = result;
             DevExpress.data.query(leadstatusData).sum("Count").done(function (result) {

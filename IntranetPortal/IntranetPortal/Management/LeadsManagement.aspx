@@ -144,6 +144,8 @@
                                     </span>
                                     <div style="float: right">
                                         <%--  <a href="/LeadsGenerator/LeadsGenerator.aspx" target="_self" class="rand-button rand-button-blue">Create Leads</a>--%>
+                                        <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                
+                                                            </asp:LinkButton>
                                         <input type="button" value="Create Leads" class="rand-button rand-button-blue rand-button-pad" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'" />
                                     </div>
                                 </div>
@@ -206,6 +208,7 @@
                                     <Border BorderStyle="None"></Border>
                                     <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
                                 </dx:ASPxGridView>
+                                 <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridLeads"></dx:ASPxGridViewExporter>
                             </div>
                             <table style="width: 500px; float: right; margin-top: 10px;">
                                 <tr>
