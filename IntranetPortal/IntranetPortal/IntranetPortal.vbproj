@@ -727,6 +727,13 @@
       <DependentUpon>WorkflowMng.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Map\ZipMap.aspx.designer.vb">
+      <DependentUpon>ZipMap.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Map\ZipMap.aspx.vb">
+      <DependentUpon>ZipMap.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="MgrViewLeads.aspx.designer.vb">
       <DependentUpon>MgrViewLeads.aspx</DependentUpon>
     </Compile>
@@ -1517,6 +1524,7 @@
     <Content Include="Management\TroubleShooting.aspx" />
     <Content Include="Management\WorkflowMng.aspx" />
     <Content Include="MapTest.aspx" />
+    <Content Include="Map\ZipMap.aspx" />
     <Content Include="OneDrive\constants.js" />
     <Content Include="OneDrive\Callback.html" />
     <Content Include="OneDrive\LoadFileFromSharepoint.aspx" />
@@ -2305,6 +2313,8 @@
     <Content Include="pdfViewer\web\locale\zu\viewer.properties" />
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="My Project\DataSources\System.Data.DataTable.datasource" />
+    <Content Include="Map\MapData\nyc-zip-code.geojson" />
+    <Content Include="Map\MapData\Web.config" />
     <None Include="scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />
