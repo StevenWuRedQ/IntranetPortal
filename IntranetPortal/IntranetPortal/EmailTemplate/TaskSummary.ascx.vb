@@ -5,6 +5,7 @@ Public Class TaskSummary
 
     Public Property DestinationUser As String
     Public Property TaskCount As Integer
+    Public Property followUpCount As Integer = 0
     Protected Property Worklist As List(Of MyIdealProp.Workflow.Client.WorklistItem)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -15,10 +16,32 @@ Public Class TaskSummary
         Dim wls = WorkflowService.GetUserWorklist(DestinationUser)
         TaskCount = wls.Count
         Dim procList = (From proc In wls
-                       Group proc By proc.ProcSchemeDisplayName Into Data = Group).ToList
+                       Group proc By proc.ProcSchemeDisplayName Into Data = Group
+                       Select New With {
+                           .ProcSchemeDisplayName = ProcSchemeDisplayName,
+                           .Data = Data,
+                           .Count = Data.Count
+                           }).ToList
         'Worklist(0).ProcessInstance.
         rptWorklist.DataSource = procList
         rptWorklist.DataBind()
+
+        'bind appointments
+        rptAppointments.DataSource = UserAppointment.GetMyTodayAppointments(DestinationUser)
+        rptAppointments.DataBind()
+
+        'bind followup
+        Dim followUps = Lead.GetUserTodayFollowUps(DestinationUser)
+        followUpCount = followUps.Count
+        If followUpCount = 0 Then
+            rptFollowUp.Visible = False
+            lblNoFollowUp.Visible = True
+        Else
+            rptFollowUp.DataSource = followUps.Take(10).ToList
+            rptFollowUp.DataBind()
+        End If
+
+        Me.DataBind()
     End Sub
 
     Protected Sub rptWorklist_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
@@ -27,7 +50,7 @@ Public Class TaskSummary
             Dim wls = CType(DataBinder.Eval(e.Item.DataItem, "Data"), WorklistItem())
 
             Dim tasks As New List(Of TaskItem)
-            For Each wl In wls
+            For Each wl In wls.Take(5)
                 Dim item As New TaskItem With
                     {
                            .DisplayName = wl.DisplayName,
@@ -76,4 +99,21 @@ Public Class TaskSummary
         Public Property ShowPortalMsg As Boolean
     End Class
 
+    Protected Sub rptAppointments_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
+        If e.Item.ItemType = ListItemType.Footer Then
+            If rptAppointments IsNot Nothing AndAlso rptAppointments.Items.Count < 1 Then
+                Dim lbl = e.Item.FindControl("lblErrorMsg")
+
+                If lbl IsNot Nothing Then
+                    lbl.Visible = True
+                End If
+            End If
+        End If
+    End Sub
+
+    Protected Sub rptFollowUp_ItemDataBound(sender As Object, e As RepeaterItemEventArgs)
+        If e.Item.ItemType = ListItemType.Footer Then
+
+        End If
+    End Sub
 End Class
