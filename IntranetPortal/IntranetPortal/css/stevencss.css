@@ -2247,3 +2247,7 @@ li.active.mag_tab {
 {
     background-color:transparent;
 }
+::-webkit-scrollbar:horizontal
+{
+    height:6px;
+}
