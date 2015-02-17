@@ -246,4 +246,16 @@ Public Class LeadsSubMenu
         cbEvictionUsers.DataSource = Roles.GetUsersInRole("Eviction-User")
         cbEvictionUsers.DataBind()
     End Sub
+
+    Protected Sub ASPxPopupControl6_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        If e.Parameter.StartsWith("Show") Then
+            Dim bble = e.Parameter.Split("|")(1)
+            Dim ctr = CType(LoadControl("~/UserControl/DocumentsUI.ascx"), DocumentsUI)
+            ctr.ID = popupWinViewFiles.ID & "FileControls"
+            ctr.LeadsName = Lead.GetInstance(bble).LeadsName
+            ctr.ViewMode = True
+            ctr.BindFilesFromSharepoint(bble)
+            e.Window.Controls.Add(ctr)
+        End If
+    End Sub
 End Class

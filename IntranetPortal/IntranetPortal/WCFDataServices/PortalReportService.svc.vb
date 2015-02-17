@@ -1,4 +1,6 @@
 ﻿Imports System.ServiceModel.Web
+Imports System.Runtime.CompilerServices
+Imports System.IO
 
 
 ' NOTE: You can use the "Rename" command on the context menu to change the class name "PortalReportService" in code, svc and config file together.
@@ -6,14 +8,15 @@
 Public Class PortalReportService
     Implements IPortalReportService
 
-    Public Function GetUserReports() As List(Of EmpData) Implements IPortalReportService.GetUserReports
-        Return (From obj In {New EmpData With {.Name = "Test1", .Count = 123}, New EmpData With {.Name = "Test2", .Count = 343}}
-                Select obj).ToList
-    End Function
-
     Public Function EmployeeReports() As List(Of CallTrackingService.EmployeeStatisticData) Implements IPortalReportService.EmployeeReports
         Using client As New CallTrackingService.CallTrackingServiceClient
-            Return client.EmployeeReports().ToList
+            Return client.EmployeeStatisticData({"*"}).ToList
+        End Using
+    End Function
+
+    Public Function EmployeeCallLog(empName As String) As System.ServiceModel.Channels.Message Implements IPortalReportService.EmployeeCallLog
+        Using client As New CallTrackingService.CallTrackingServiceClient
+            Return client.EmployeeReports(empName).ToList.ToJson
         End Using
     End Function
 
@@ -67,6 +70,18 @@ Public Class PortalReportService
         Return result
     End Function
 End Class
+
+
+Public Module JsonExtension
+    <Extension()>
+    Public Function ToJson(ByVal obj As Object) As System.ServiceModel.Channels.Message
+        Dim json = Newtonsoft.Json.JsonConvert.SerializeObject(obj)
+        Dim ms As New MemoryStream(New UTF8Encoding().GetBytes(json))
+        ms.Position = 0
+        Return WebOperationContext.Current.CreateStreamResponse(ms, "application/json")
+    End Function
+End Module
+
 
 Public Class EmpData
     Public Property Name As String

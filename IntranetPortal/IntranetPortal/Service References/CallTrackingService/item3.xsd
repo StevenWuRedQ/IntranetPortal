@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/CallTracking" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CallTracking" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:8733/CallTrackingService/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfCallLog">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CallLog" nillable="true" type="tns:CallLog" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCallLog" nillable="true" type="tns:ArrayOfCallLog" />
+  <xs:complexType name="CallLog">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Account" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Answer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AutoAttendant" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CallingNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Comments" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DialedNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Direction" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Duration" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EmpExtension" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Talk" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Target" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TimeZone" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CallLog" nillable="true" type="tns:CallLog" />
   <xs:complexType name="ArrayOfEmployeeStatisticData">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="EmployeeStatisticData" nillable="true" type="tns:EmployeeStatisticData" />

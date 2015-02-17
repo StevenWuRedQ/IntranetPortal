@@ -18,7 +18,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-       <%-- <uc1:TaskSummary runat="server" id="TaskSummary" DestinationUser="Chris Yan" />--%>
+        <uc1:TaskSummary runat="server" id="TaskSummary" />
         <input type="button" onclick="LoadData()" value="Test" />
         <script type="text/javascript">      
 

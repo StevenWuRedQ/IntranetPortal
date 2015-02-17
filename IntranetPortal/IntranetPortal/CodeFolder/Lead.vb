@@ -90,6 +90,12 @@ Partial Public Class Lead
         End Using
     End Function
 
+    Public Shared Function GetUserTodayFollowUps(userName As String) As List(Of Lead)
+        Using ctx As New Entities
+            Return ctx.Leads.Where(Function(ld) ld.Status = LeadStatus.Callback And ld.EmployeeName = userName).ToList.Where(Function(ld) ld.CallbackDate < DateTime.Today.AddDays(1)).ToList
+        End Using
+    End Function
+
     Public Shared Function SetDeadLeadsStatus(bble As String, reason As Integer, description As String) As Boolean
         Using Context As New Entities
             Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).FirstOrDefault

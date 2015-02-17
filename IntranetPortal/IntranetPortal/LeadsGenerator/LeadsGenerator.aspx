@@ -842,7 +842,7 @@
                                                                     <asp:HiddenField runat="server" ID="hfFilterOutExist" />
                                                                     <input type="checkbox" id="cbfilterOutExist" name="cbfilterOutExist" class="font_12" onchange="filterOutExitChange(this)" <%= If( bfilterOutExist,"checked","")%> />
                                                                     <label for="cbfilterOutExist" class="font_12" style="float: left; padding-top: 26px;">
-                                                                        <span class="upcase_text">Don't show leads exist</span>
+                                                                        <span class="upcase_text">Don't Show Existing Leads</span>
                                                                     </label>
                                                                     <button class="rand-button bg_color_blue fa-sh rand-button-padding" type="button" id="Select250" onclick="loadFunction('Select250_ServerClick')">Select 250 Random for me !</button>
                                                                     <button style="margin-right: 10px" class="rand-button bg_color_blue rand-button-padding" type="button" id="ImportSelect" onclick="loadFunction('ImportSelect_ServerClick')">Import Selected</button>

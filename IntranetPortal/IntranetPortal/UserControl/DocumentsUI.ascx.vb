@@ -14,6 +14,7 @@ Public Class DocumentsUI
         'End If
     End Sub
 
+    Public Property ViewMode As Boolean = False
     Public Property LeadsName As String
     Public Property LeadsBBLE As String
 

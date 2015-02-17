@@ -1436,6 +1436,7 @@
     <Content Include="images\drop_active_icon.png" />
     <Content Include="images\drop_new_icon.png" />
     <Content Include="images\drop_on_hold_icon.png" />
+    <Content Include="images\EmailAlertMsg.png" />
     <Content Include="images\Evication.jpg" />
     <Content Include="images\Evication.png" />
     <Content Include="images\flag.png" />
@@ -1477,6 +1478,7 @@
     <Content Include="images\process-icon2.jpg" />
     <Content Include="images\profile_bg.png" />
     <Content Include="images\Refresh.png" />
+    <Content Include="images\reminder.png" />
     <Content Include="images\search.png" />
     <Content Include="images\search_btn.png" />
     <Content Include="images\search_icon.png" />
@@ -2420,6 +2422,9 @@
     <Content Include="scrollbar\Web.config" />
     <None Include="Service References\CallTrackingService\CallTrackingService.wsdl" />
     <Content Include="Service References\CallTrackingService\IntranetPortal.CallTrackingService.EmployeeStatisticData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\CallTrackingService\IntranetPortal.CallTrackingService.CallLog.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\CallTrackingService\item.xsd">

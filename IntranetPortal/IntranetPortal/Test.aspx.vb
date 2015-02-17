@@ -5,7 +5,11 @@ Public Class Test
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'Response.Write(Roles.IsUserInRole("123", "OfficeManager-Bronx"))
-        LoadSummaryEmail("Chris Yan")
+        If Not (String.IsNullOrEmpty(Request.QueryString("Name"))) Then
+            TaskSummary.DestinationUser = Request.QueryString("Name").ToString
+        Else
+            TaskSummary.DestinationUser = "Chris Yan"
+        End If
     End Sub
 
     Public Shared Function LoadSummaryEmail(userName As String) As String

@@ -201,6 +201,11 @@ Public Class DataWCFService
                     li.NeighName = result.NEIGH_NAME
                     li.State = "NY"
                     li.ZipCode = result.ZIP
+
+                    If Not String.IsNullOrEmpty(result.APT_NO) AndAlso Not String.IsNullOrEmpty(result.APT_NO.Trim) Then
+                        li.UnitNum = result.APT_NO.Trim
+                    End If
+
                     li.PropertyAddress = BuildPropertyAddress(result) 'String.Format("{0} {1},{2},{3} {4}", result.NUMBER, result.ST_NAME, result.NEIGH_NAME, "NY", result.ZIP)
                     li.Borough = result.BOROUGH
                     li.Zoning = result.ZONING
@@ -228,6 +233,7 @@ Public Class DataWCFService
                     li.BuildingDem = result.BLDG_DIM
                     li.LotDem = result.LOT_DIM
                     li.LastUpdate = DateTime.Now
+
                     Try
                         li.UpdateBy = GetCurrentIdentityName()
                     Catch ex As Exception
@@ -308,7 +314,6 @@ Public Class DataWCFService
                 Return UpdateApartmentBuildingInfo(bble)
             End If
 
-
             Using context As New Entities
 
                 Dim li As LeadsInfo = context.LeadsInfoes.Where(Function(l) l.BBLE = bble).SingleOrDefault
@@ -363,9 +368,10 @@ Public Class DataWCFService
             Using context As New Entities
 
                 Dim li As LeadsInfo = context.LeadsInfoes.Where(Function(l) l.BBLE = bble).SingleOrDefault
-
+                Dim tmpBBL = li.BBLE
                 li = GetFullAssessInfo(li.BuildingBBLE, li)
-                li.BBLE = bble
+                li.BBLE = tmpBBL
+
                 If Not String.IsNullOrEmpty(li.UnitNum) Then
                     li.Number = li.AptBuildingInfo.Number
                     li.StreetName = li.AptBuildingInfo.StreetName

@@ -73,6 +73,7 @@
     }
 
     function InitScrollBar() {
+        return;
         $("#prioity_content").mCustomScrollbar(
        {
            theme: "minimal-dark"
@@ -267,7 +268,6 @@
 
         if (e.item.index == 6) {
             SortLeadsList(icon, "MarkColor");
-
         }
     }
 
@@ -383,15 +383,12 @@
 </style>
 <dx:ASPxCallback runat="server" ID="MarkColorCallBack" OnCallback="MarkColorCallBack_Callback" ClientInstanceName="MarkColorCallBack">  </dx:ASPxCallback>
 <div id="color_drop" style="position: absolute; left: -100px; top: -1000px; z-index: 10000;width:15px;">
-
     <ul class="list-group" style="border:none;width:15px">
         <li class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #a820e1">&nbsp;</li>
         <li class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #ec471b">&nbsp;</li>
         <li class="list-group-item icon_btn color_list diagonal" onclick="click_item(this)"  > <span style="margin-top:5px;">Clear</span> </li>
     </ul>
 </div>
-
-
 
 <%--id="leads_list_left"--%>
 <div style="width: 100%; height: 100%;" class="color_gray">
@@ -413,7 +410,7 @@
         <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
     </div>
-    <div style="height: 768px; padding: 0px 10px;" id="leads_list_left">
+    <div style="height: 768px; padding: 0px 3px;" id="leads_list_left">
         <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText"
             OnSummaryDisplayText="gridLeads_SummaryDisplayText"
             OnCustomDataCallback="gridLeads_CustomDataCallback"

@@ -12,6 +12,7 @@
     <script type="text/javascript">
 
         function AttachScrollbar() {
+            return;
             $("#prioity_content").mCustomScrollbar(
               {
                   theme: "minimal-dark"

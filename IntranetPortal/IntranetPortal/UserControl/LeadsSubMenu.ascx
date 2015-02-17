@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LeadsSubMenu.ascx.vb" Inherits="IntranetPortal.LeadsSubMenu" %>
-<script type="text/javascript" src="/scripts/LeadsSubMenu.js"></script>
+<script type="text/javascript" src="/scripts/LeadsSubMenu.js?v=<%=New Random().Next(1000) %>"></script>
 <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
     <Items>
         <dx:MenuItem GroupName="Sort" Text="View Map" Image-Url="/images/drap_map_icons.png" Name="GoogleStreet">
@@ -76,6 +76,27 @@
     </HeaderTemplate>
     <ContentCollection>
         <dx:PopupControlContentControl runat="server">
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+    <ClientSideEvents CloseUp="function(s,e){}" />
+</dx:ASPxPopupControl>
+
+<dx:ASPxPopupControl ClientInstanceName="popupViewFiles" Width="950px" Height="840px" ID="popupWinViewFiles"
+    HeaderText="View Files" AutoUpdatePosition="true" Modal="true" CloseAction="CloseButton" OnWindowCallback="ASPxPopupControl6_WindowCallback"
+    runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <HeaderTemplate>
+        <div class="clearfix">
+            <div class="pop_up_header_margin">
+                <i class="fa fa-cloud-upload with_circle pop_up_header_icon"></i>
+                <span class="pop_up_header_text">View Files</span>
+            </div>
+            <div class="pop_up_buttons_div">
+                <i class="fa fa-times icon_btn" onclick="popupViewFiles.Hide()"></i>
+            </div>
+        </div>
+    </HeaderTemplate>
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server" ID="popupViewFiles">
         </dx:PopupControlContentControl>
     </ContentCollection>
     <ClientSideEvents CloseUp="function(s,e){}" />

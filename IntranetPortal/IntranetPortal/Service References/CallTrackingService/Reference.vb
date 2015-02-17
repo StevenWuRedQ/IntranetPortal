@@ -18,6 +18,245 @@ Namespace CallTrackingService
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="CallLog", [Namespace]:="http://schemas.datacontract.org/2004/07/CallTracking"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class CallLog
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AccountField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AnswerField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private AutoAttendantField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CallingNumberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private CommentsField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DateTimeField As Date
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DialedNumberField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DirectionField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private DurationField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private EmpExtensionField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TalkField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TargetField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TimeZoneField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Account() As String
+            Get
+                Return Me.AccountField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.AccountField, value) <> true) Then
+                    Me.AccountField = value
+                    Me.RaisePropertyChanged("Account")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Answer() As String
+            Get
+                Return Me.AnswerField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.AnswerField, value) <> true) Then
+                    Me.AnswerField = value
+                    Me.RaisePropertyChanged("Answer")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property AutoAttendant() As String
+            Get
+                Return Me.AutoAttendantField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.AutoAttendantField, value) <> true) Then
+                    Me.AutoAttendantField = value
+                    Me.RaisePropertyChanged("AutoAttendant")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property CallingNumber() As String
+            Get
+                Return Me.CallingNumberField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.CallingNumberField, value) <> true) Then
+                    Me.CallingNumberField = value
+                    Me.RaisePropertyChanged("CallingNumber")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Comments() As String
+            Get
+                Return Me.CommentsField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.CommentsField, value) <> true) Then
+                    Me.CommentsField = value
+                    Me.RaisePropertyChanged("Comments")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DateTime() As Date
+            Get
+                Return Me.DateTimeField
+            End Get
+            Set
+                If (Me.DateTimeField.Equals(value) <> true) Then
+                    Me.DateTimeField = value
+                    Me.RaisePropertyChanged("DateTime")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property DialedNumber() As String
+            Get
+                Return Me.DialedNumberField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.DialedNumberField, value) <> true) Then
+                    Me.DialedNumberField = value
+                    Me.RaisePropertyChanged("DialedNumber")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Direction() As String
+            Get
+                Return Me.DirectionField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.DirectionField, value) <> true) Then
+                    Me.DirectionField = value
+                    Me.RaisePropertyChanged("Direction")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Duration() As String
+            Get
+                Return Me.DurationField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.DurationField, value) <> true) Then
+                    Me.DurationField = value
+                    Me.RaisePropertyChanged("Duration")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property EmpExtension() As String
+            Get
+                Return Me.EmpExtensionField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.EmpExtensionField, value) <> true) Then
+                    Me.EmpExtensionField = value
+                    Me.RaisePropertyChanged("EmpExtension")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Talk() As String
+            Get
+                Return Me.TalkField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.TalkField, value) <> true) Then
+                    Me.TalkField = value
+                    Me.RaisePropertyChanged("Talk")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Target() As String
+            Get
+                Return Me.TargetField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.TargetField, value) <> true) Then
+                    Me.TargetField = value
+                    Me.RaisePropertyChanged("Target")
+                End If
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TimeZone() As String
+            Get
+                Return Me.TimeZoneField
+            End Get
+            Set
+                If (Object.ReferenceEquals(Me.TimeZoneField, value) <> true) Then
+                    Me.TimeZoneField = value
+                    Me.RaisePropertyChanged("TimeZone")
+                End If
+            End Set
+        End Property
+        
+        Public Event PropertyChanged As System.ComponentModel.PropertyChangedEventHandler Implements System.ComponentModel.INotifyPropertyChanged.PropertyChanged
+        
+        Protected Sub RaisePropertyChanged(ByVal propertyName As String)
+            Dim propertyChanged As System.ComponentModel.PropertyChangedEventHandler = Me.PropertyChangedEvent
+            If (Not (propertyChanged) Is Nothing) Then
+                propertyChanged(Me, New System.ComponentModel.PropertyChangedEventArgs(propertyName))
+            End If
+        End Sub
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="EmployeeStatisticData", [Namespace]:="http://schemas.datacontract.org/2004/07/CallTracking"),  _
      System.SerializableAttribute()>  _
     Partial Public Class EmployeeStatisticData
@@ -276,7 +515,7 @@ Namespace CallTrackingService
     Public Interface ICallTrackingService
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICallTrackingService/EmployeeReports", ReplyAction:="http://tempuri.org/ICallTrackingService/EmployeeReportsResponse")>  _
-        Function EmployeeReports() As CallTrackingService.EmployeeStatisticData()
+        Function EmployeeReports(ByVal empName As String) As CallTrackingService.CallLog()
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICallTrackingService/EmployeeStatisticData", ReplyAction:="http://tempuri.org/ICallTrackingService/EmployeeStatisticDataResponse")>  _
         Function EmployeeStatisticData(ByVal emps() As String) As CallTrackingService.EmployeeStatisticData()
@@ -313,8 +552,8 @@ Namespace CallTrackingService
             MyBase.New(binding, remoteAddress)
         End Sub
         
-        Public Function EmployeeReports() As CallTrackingService.EmployeeStatisticData() Implements CallTrackingService.ICallTrackingService.EmployeeReports
-            Return MyBase.Channel.EmployeeReports
+        Public Function EmployeeReports(ByVal empName As String) As CallTrackingService.CallLog() Implements CallTrackingService.ICallTrackingService.EmployeeReports
+            Return MyBase.Channel.EmployeeReports(empName)
         End Function
         
         Public Function EmployeeStatisticData(ByVal emps() As String) As CallTrackingService.EmployeeStatisticData() Implements CallTrackingService.ICallTrackingService.EmployeeStatisticData

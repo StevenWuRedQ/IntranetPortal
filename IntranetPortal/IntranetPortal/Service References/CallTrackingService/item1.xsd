@@ -4,13 +4,15 @@
   <xs:import schemaLocation="http://localhost:8733/CallTrackingService/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="EmployeeReports">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element minOccurs="0" name="empName" nillable="true" type="xs:string" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EmployeeReportsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/CallTracking" minOccurs="0" name="EmployeeReportsResult" nillable="true" type="q1:ArrayOfEmployeeStatisticData" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/CallTracking" minOccurs="0" name="EmployeeReportsResult" nillable="true" type="q1:ArrayOfCallLog" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

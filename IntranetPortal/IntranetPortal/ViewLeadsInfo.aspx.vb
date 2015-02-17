@@ -27,8 +27,16 @@
 
         If Not String.IsNullOrEmpty(Request.QueryString("ProcInstId")) Then
             Dim procInst = WorkflowService.LoadProcInstById(CInt(Request.QueryString("ProcInstId")))
+            
+
             If procInst IsNot Nothing Then
                 Dim bble = procInst.GetDataFieldValue("BBLE")
+                If Not Employee.HasControlLeads(User.Identity.Name, bble) Then
+                    Response.Clear()
+                    Response.Write("You are not allowed to view this lead.")
+                    Response.End()
+                    Return
+                End If
 
                 If procInst.ProcessName = "NewLeadsRequest" Then
                     Dim result = procInst.GetDataFieldValue("Result")
@@ -52,10 +60,15 @@
                         Return
                     End If
 
+                    If Not Employee.HasControlLeads(User.Identity.Name, bble) Then
+                        Response.Clear()
+                        Response.Write("You are not allowed to view this lead for now.")
+                        Response.End()
+                        Return
+                    End If
+
                     LoadData(bble)
                 End If
-
-
             End If
         End If
     End Sub

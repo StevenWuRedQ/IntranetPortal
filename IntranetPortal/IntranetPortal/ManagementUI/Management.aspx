@@ -16,7 +16,7 @@
 
     <script src="/Scripts/globalize/globalize.js"></script>
     <script src="/Scripts/dx.chartjs.js"></script>
-    <script src="/Scripts/dx.webappjs.js"></script>
+    <script src="/Scripts/dx.webappjs.debug.js"></script>
     <script src="/Scripts/dx.phonejs.js"></script>
     <div class="container-fluid">
         <%--Head--%>
@@ -25,7 +25,7 @@
 
                 <div class="row">
                     <div class="col-md-4">
-                        <span class="border_right" style="padding-right: 30px; font-weight: 300;">Management Summary</span>
+                        <span class="border_right" style="padding-richris ght: 30px; font-weight: 300;">Management Summary</span>
                     </div>
                     <div class="col-md-2">
 
@@ -121,6 +121,7 @@
                                 <div style="font-size: 14px;">
                                     <div id="gridContainer" style="height: 450px; max-width: 1000px; width: 100%; margin: 0 auto"></div>
 
+
                                     <table class="table table-striped" style="display: none">
                                         <thead style="text-transform: uppercase">
                                             <tr>
@@ -203,10 +204,14 @@
    
     <script type="text/javascript">
         function LoadGrid() {
+            var localCallLogs = null;
             var customStore = new DevExpress.data.CustomStore({
                 load: function (loadOptions) {
                     var d = $.Deferred();
                     $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {
+                        DevExpress.data.query(data).sum("Count").done(function (result) {
+                            $("#CallTotalCount").html(result);
+                        });
                         d.resolve(data, { totalCount: data.length });
                     });
                     return d.promise();
@@ -217,19 +222,12 @@
 
             var logDataSource = new DevExpress.data.DataSource({
                 store: customStore,
-                select: "Count"
-            });
-
-            logDataSource.load().done(function (result) {
-                debugger;
-                DevExpress.data.query(result).sum("Count").done(function (result) {
-                    $("#CallTotalCount").html(result);
-                });
+                paginate: false
             });
 
             $(function () {
                 var datagrid = $("#gridContainer").dxDataGrid({
-                    dataSource: gridDataSourceConfiguration,
+                    dataSource: logDataSource,
                     showColumnLines: false,
                     showRowLines: true,
                     rowAlternationEnabled: true,
@@ -237,6 +235,12 @@
                     columns: [{
                         dataField: "EmployeeName",
                         caption: "Name",
+                        cellTemplate: function (container, options) {
+                            if (options.value != null) {
+                                var fieldHTML = '<a href="javascript:ShowEmployeeReport(\'' + options.value + '\')">' + options.value + "</a>"
+                                container.html(fieldHTML);
+                            }
+                        }
                     }, "Inbound", {
                         dataField: "Outbound",
                         caption: "Outbound"
@@ -255,8 +259,58 @@
                     }
                 });
             });
+        }
 
+        function ShowEmployeeReport(empName) {
+            var empCallLogs = null;
+            var empCallLogsDs = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/CallLog/" + empName);
+            empCallLogsDs.load().done(function (result) {
+                empCallLogs = result;
 
+                $("#gridContainer").dxDataGrid({
+                    dataSource: empCallLogs,
+                    showColumnLines: false,
+                    showRowLines: true,
+                    rowAlternationEnabled: true,
+                    paging: { enabled: false },
+                    columns: [{
+                        dataField: "DateTime",
+                        caption:"Date",
+                        dataType: "date",
+                        format: "shortDate",
+                        calculateGroupValue: function (rowData) {                           
+                            var callDate = new Date(rowData.DateTime);
+                            return callDate.toLocaleDateString();
+                        }
+                    },{
+                        dataField: "DateTime",
+                        caption:"Time",
+                        dataType: "date",
+                        format: "shortTime",
+                    },
+                    "CallingNumber", "TimeZone", "Direction", "Duration", "DialedNumber", "Talk", "Answer"
+                    ],
+                    groupPanel: {
+                        visible: true
+                    },
+                    allowColumnReordering: true,
+                    grouping: {
+                        autoExpandAll: true,
+                    },
+                    searchPanel: {
+                        visible: true
+                    },
+                    summary: {
+                        totalItems: [{
+                            column: 'CallingNumber',
+                            summaryType: 'count'
+                        }, {
+                            column: 'Duration',
+                            summaryType: 'sum'
+                        }]
+                    }
+                });
+            });
         }
     </script>
 

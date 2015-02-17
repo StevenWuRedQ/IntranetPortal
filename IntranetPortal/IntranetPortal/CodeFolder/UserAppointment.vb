@@ -24,6 +24,17 @@
         End Using
     End Function
 
+    Public Shared Function GetMyTodayAppointments(name As String) As List(Of UserAppointment)
+        Using Context As New Entities
+
+            Dim appoints = (From appoint In Context.UserAppointments
+                           Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (appoint.Agent = name Or appoint.Manager = name)
+                           Select appoint).Distinct.ToList.Where(Function(api) api.ScheduleDate.Value.Date = DateTime.Today).ToList
+
+            Return appoints
+        End Using
+    End Function
+
     Public Shared Function GetAppointmentBylogID(logId As Integer) As UserAppointment
 
         Using context As New Entities

@@ -216,6 +216,16 @@ function OnLeadsCategoryClick(s, e) {
             else
                 window.open(url, 'Upload Files', popup_params(640, 400)); //'Width=640px,Height=400px,top=' + centerTop + ",left=" + centerLeft);            
         }
+
+        if (e.item.name = "ViewFiles")
+        {           
+            if (popupViewFiles) {
+                popupViewFiles.Show();
+                popupViewFiles.PerformCallback("Show|" + tmpBBLE)
+            }
+            else
+                alert("No View files");
+        }
     }
 
     e.item.SetChecked(false);

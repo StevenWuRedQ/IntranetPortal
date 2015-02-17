@@ -206,10 +206,13 @@
         <div style="margin: 20px" class="clearfix">
             <div class="form_head">General</div>
             <ul class="ss_form_box clearfix">
-
                 <li class="ss_form_item" style="width: 66%">
                     <label class="ss_form_input_title">address</label>
-                    <input class="ss_form_input" style="width: 91%" value="<%= LeadsInfoData.PropertyAddress & If(LeadsInfoData.IsApartment, " - Unit #"&LeadsInfoData.UnitNum, "")%>">
+                    <input class="ss_form_input" style="width: 91%" value="<%= LeadsInfoData.PropertyAddress %>">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Unit#</label>
+                    <input class="ss_form_input font_black" value="<%= LeadsInfoData.UnitNum%>">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">BBLE</label>
@@ -227,13 +230,13 @@
                     <input class="ss_form_input" value="<%= LeadsInfoData.Neighborhood %>">
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Block</label>
-                    <input class="ss_form_input" value="<%= LeadsInfoData.Block %>">
+                    <label class="ss_form_input_title">Block | Lot</label>
+                    <input class="ss_form_input" value="<%= LeadsInfoData.Block & "| " & LeadsInfoData.Lot %>">
                 </li>
-                <li class="ss_form_item">
+              <%--  <li class="ss_form_item">
                     <label class="ss_form_input_title">Lot</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.Lot %>">
-                </li>
+                </li>--%>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">NYC SQFT</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.NYCSqft %>">
