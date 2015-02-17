@@ -36,7 +36,7 @@ Public Class LeadsGenerator
             AllNeighName = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "Neighborhood").Select(Function(c) c.Data).ToList
             AllZoning = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "ZONING").Select(Function(c) c.Data).ToList
             AllPropertyCode = context.NYC_DATA_COMMENT.Where(Function(c) c.Type = "PropertyDesc").Select(Function(c) c.Data).ToList
-            Dim agents = context.Employees.Where(Function(e) e.Active Or e.Name.Contains("Office")).Select(Function(e) e.Name).ToList
+            Dim agents = context.Employees.Where(Function(e) e.Active Or e.Name.Contains("Office")).OrderBy(Function(f) f.Name).Select(Function(e) e.Name).ToList
             EmployeeList.DataSource = agents
             EmployeeList.DataBind()
         End Using
@@ -190,6 +190,7 @@ Public Class LeadsGenerator
         Return Employee.IsAdmin(Page.User.Identity.Name)
     End Function
     Protected Function LeadMaxAdd() As Integer
+        Return 1000000
         Return MaxSelect - HasNewLeadsInProtal()
     End Function
 
