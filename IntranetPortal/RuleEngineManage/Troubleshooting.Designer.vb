@@ -35,6 +35,8 @@ Partial Class Troubleshooting
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtName = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -114,7 +116,7 @@ Partial Class Troubleshooting
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(230, 83)
+        Me.Button3.Location = New System.Drawing.Point(230, 106)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(98, 23)
         Me.Button3.TabIndex = 9
@@ -132,7 +134,7 @@ Partial Class Troubleshooting
         '
         'Button5
         '
-        Me.Button5.Location = New System.Drawing.Point(230, 160)
+        Me.Button5.Location = New System.Drawing.Point(371, 173)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(114, 23)
         Me.Button5.TabIndex = 11
@@ -141,18 +143,36 @@ Partial Class Troubleshooting
         '
         'Button6
         '
-        Me.Button6.Location = New System.Drawing.Point(230, 122)
+        Me.Button6.Location = New System.Drawing.Point(371, 135)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(98, 23)
         Me.Button6.TabIndex = 12
         Me.Button6.Text = "RecycleRule"
         Me.Button6.UseVisualStyleBackColor = True
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(184, 83)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(38, 13)
+        Me.Label4.TabIndex = 14
+        Me.Label4.Text = "Name:"
+        '
+        'txtName
+        '
+        Me.txtName.Location = New System.Drawing.Point(230, 80)
+        Me.txtName.Name = "txtName"
+        Me.txtName.Size = New System.Drawing.Size(127, 20)
+        Me.txtName.TabIndex = 13
+        '
         'Troubleshooting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(496, 217)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.txtName)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
@@ -185,4 +205,6 @@ Partial Class Troubleshooting
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents Button6 As System.Windows.Forms.Button
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents txtName As System.Windows.Forms.TextBox
 End Class

@@ -21,6 +21,16 @@
         End Using
     End Sub
 
+    Public Shared Function IsInUpdate(bble As String) As Boolean
+        Using ctx As New CoreEntities
+            Return ctx.DataLoopRules.Any(Function(r) r.BBLE = bble And (r.Status = RuleStatus.Active Or r.Status = RuleStatus.Running))
+        End Using
+    End Function
+
+    Public Shared Sub AddRules(bble As String, loopType As DataLoopType, createby As String)
+        AddRules(New String() {bble}, loopType, createby)
+    End Sub
+
     Public Sub Complete()
         Using ctx As New CoreEntities
             Dim rule = ctx.DataLoopRules.Find(Id)

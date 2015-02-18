@@ -18,7 +18,7 @@
         'Return
 
         Using client As New PortalService.CommonServiceClient
-            client.SendTaskSummaryEmail("Chris Yan")
+            client.SendTaskSummaryEmail(txtName.Text)
         End Using
     End Sub
 

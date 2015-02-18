@@ -249,7 +249,7 @@ InitialLine:
         Using client As New PortalService.CommonServiceClient
             Dim emaildata As New Dictionary(Of String, String)
             emaildata.Add("UserName", "Chris Yan")
-            client.SendEmailByTemplate("Chris Yan", "LoopServiceNotAvaiable", emaildata)
+            'client.SendEmailByTemplate("Chris Yan", "LoopServiceNotAvaiable", emaildata)
         End Using
 
     End Sub
