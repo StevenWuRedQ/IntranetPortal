@@ -41,7 +41,8 @@
     <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.css' rel='stylesheet' />
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-geodesy/v0.1.0/leaflet-geodesy.js'></script>
-
+    <script src="https://www.mapbox.com/mapbox.js/assets/data/realworld.388.js"></script>
+    
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
@@ -61,6 +62,11 @@
         //    provider: 'google',
         //    type: 'roadmap'
         //}).dxMap("instance");
+        var LatLonData = <%= LatLonData%>
+            function f()
+            {
+
+            }
         var zipMap;
         var geocoder;
         var zipLeads = <%= leadsByZip%>
@@ -123,7 +129,7 @@
                         },
                         properties: {
                             title: feature.properties.postalCode,
-                            description: count,
+                            description: 'Leads: '+count,
                             // one can customize markers by adding simplestyle properties
                             // https://www.mapbox.com/guides/an-open-platform/#simplestyle
 
@@ -147,7 +153,21 @@
                 marker.setIcon(feature.properties.icon);
             });
             var z = zipMap;
-            myLayer.setGeoJSON(geoJson);
+            //myLayer.setGeoJSON(geoJson);
+            var markers = new L.MarkerClusterGroup();
+
+            for (var i = 0; i < LatLonData.length; i++) {
+                var a = LatLonData[i];
+                var title = a.PropertyAddress;
+                var marker = L.marker(new L.LatLng(a.Latitude, a.Longitude), {
+                    icon: L.mapbox.marker.icon({ 'marker-symbol': 'building', 'marker-color': '0044FF' }),
+                    title: title
+                });
+                marker.bindPopup(title);
+                markers.addLayer(marker);
+            }
+
+            map.addLayer(markers);
             //initMap();
         });
         function getCenter(array) {
@@ -174,48 +194,49 @@
             }
             return { x: x, y: y };
         }
-        function initMap() {
-            var vmaps = $("#container").dxVectorMap({
-                mapData: '/Map/MapData/nyc-zip-code.js',
-                bounds: [-74, 41, -73, 40.4],
-                zoomFactor: 30,
-                tooltip: {
-                    enabled: true,
-                    border: {
-                        visible: false
-                    },
-                    font: { color: "#565656" },
-                    customizeTooltip: function (arg) {
-                        var name = arg.attribute("postalCode")
-                        var zipCount = findCount(name);
+        //function initMap() {
+        //    var vmaps = $("#container").dxVectorMap({
+        //        mapData: '/Map/MapData/nyc-zip-code.js',
+        //        bounds: [-74, 41, -73, 40.4],
+        //        zoomFactor: 30,
+        //        tooltip: {
+        //            enabled: true,
+        //            border: {
+        //                visible: false
+        //            },
+        //            font: { color: "#565656" },
+        //            customizeTooltip: function (arg) {
+        //                var name = arg.attribute("postalCode")
+        //                var zipCount = findCount(name);
 
-                        return { text: name + zipCount };
-                    }
-                },
-                areaSettings: {
-                    customize: function (arg) {
+        //                return { text: name + zipCount };
+        //            }
+        //        },
+        //        areaSettings: {
+        //            customize: function (arg) {
 
-                    }
-                },
-                onAreaClick: function (e) {
-                    var target = e.target;
+        //            }
+        //        },
+        //        onAreaClick: function (e) {
+        //            var target = e.target;
 
-                },
+        //        },
 
-                markerSettings: {
-                    label: {
-                        font: { size: 11 }
-                    }
-                },
-                markers: zipMap,
+        //        markerSettings: {
+        //            label: {
+        //                font: { size: 11 }
+        //            }
+        //        },
+        //        markers: zipMap,
 
-            })
-            var vmaps = $('#container').dxVectorMap('instance');
-        }
+        //    })
+        //    var vmaps = $('#container').dxVectorMap('instance');
+        //}
         var map
         function initMapBox() {
             L.mapbox.accessToken = 'pk.eyJ1IjoicG9ydGFsIiwiYSI6ImtCdG9ac00ifQ.p2_3nTko4JskYcg0YIgeyw';
             map = L.mapbox.map('map', 'portal.l8711nb2')
+               .addControl(L.mapbox.geocoderControl('mapbox.places'))
              .setView([40.7127, -74.0059], 11);
 
             var featureGroup = L.featureGroup().addTo(map);

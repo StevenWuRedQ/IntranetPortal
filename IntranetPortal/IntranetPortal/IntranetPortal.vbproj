@@ -393,6 +393,9 @@
     <Compile Include="DataModel\HomeOwnerPhone.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\LatLon_View.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\Lead.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>

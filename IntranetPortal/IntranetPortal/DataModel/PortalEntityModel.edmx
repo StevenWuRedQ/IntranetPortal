@@ -623,6 +623,17 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="LogID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'IntranetPortal.dbo.LatLon_View' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="LatLon_View">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Leads_with_last_log">
           <Key>
@@ -689,6 +700,14 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
     [NYC_St_Names].[st_name] AS [st_name], 
     [NYC_St_Names].[BOROUGH] AS [BOROUGH]
     FROM [dbo].[NYC_St_Names] AS [NYC_St_Names]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="LatLon_View" EntityType="Self.LatLon_View" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LatLon_View].[Latitude] AS [Latitude], 
+    [LatLon_View].[Longitude] AS [Longitude], 
+    [LatLon_View].[PropertyAddress] AS [PropertyAddress], 
+    [LatLon_View].[BBLE] AS [BBLE]
+    FROM [dbo].[LatLon_View] AS [LatLon_View]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Leads_with_last_log" EntityType="Self.Leads_with_last_log" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -776,6 +795,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <EntitySet Name="ApartmentBuildings" EntityType="IntranetPortalModel.ApartmentBuilding" />
           <EntitySet Name="Apartments" EntityType="IntranetPortalModel.Apartment" />
           <EntitySet Name="Leads_with_last_log" EntityType="IntranetPortalModel.Leads_with_last_log" />
+          <EntitySet Name="LatLon_View" EntityType="IntranetPortalModel.LatLon_View" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1480,6 +1500,15 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
           <Property Name="LastUpdateComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="LatLon_View">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2151,6 +2180,16 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
                 <ScalarProperty Name="PropertyClass" ColumnName="PropertyClass" />
                 <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LatLon_View">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LatLon_View">
+              <MappingFragment StoreEntitySet="LatLon_View">
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

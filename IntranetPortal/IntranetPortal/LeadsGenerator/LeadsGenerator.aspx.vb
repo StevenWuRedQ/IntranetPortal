@@ -190,7 +190,7 @@ Public Class LeadsGenerator
         Return Employee.IsAdmin(Page.User.Identity.Name)
     End Function
     Protected Function LeadMaxAdd() As Integer
-        Return 1000000
+
         Return MaxSelect - HasNewLeadsInProtal()
     End Function
 
