@@ -1,5 +1,5 @@
 ﻿var EnableClientRefresh = true;
-var EnablePopupMsg = false;
+var EnablePopupMsg = true;
 var callIntervalTime = 3000;
 
 function init() {
@@ -63,7 +63,6 @@ function AwayMsg() {
                 if (request.status == 200) {
                     if (request.responseText != "") {
                         if (request.responseText != null) {
-
                             if (!ASPxPopupAwayControlClient.GetVisible()) {
                                 ASPxPopupAwayControlClient.SetContentUrl("/PopupControl/WhileAwayMsgs.aspx");
                                 ASPxPopupAwayControlClient.Show();
@@ -107,9 +106,13 @@ function hook() {
                             popupBBLE = msg.BBLE;
                             document.getElementById('tdMsgTitle').innerHTML = msg.Title;
                             document.getElementById('tdMsgContent').innerHTML = msg.Message;
+                                                     
+                          
+                            $('#divMsgTest').animate({ bottom: "25" }, 500);
+                            
 
-                            if (!ASPxPopupMessagerControlClient.GetVisible())
-                                ASPxPopupMessagerControlClient.Show();
+                            //if (!ASPxPopupMessagerControlClient.GetVisible())
+                            //    ASPxPopupMessagerControlClient.Show();
                         }
                     }
                     else
@@ -138,7 +141,12 @@ function ReadMsg() {
         if (request.readyState == 4 && request.status != 200)
             alert('Error ' + request.status + ' trying to send request');
         if (request.status == 200)
+        {
+            HideMessages();
             ASPxPopupMessagerControlClient.Hide();
+            hook();
+        }
+            
     };
 
     request.open('POST', url, true);
@@ -147,8 +155,7 @@ function ReadMsg() {
 
 function PopupViewLead() {
     if (popupBBLE != null) {
-        var url = '/ViewLeadsInfo.aspx?id=' + popupBBLE;
-        window.showModalDialog(url, 'View Leads Info', 'dialogWidth:1350px;dialogHeight:810px');
+        ShowSearchLeadsInfo(popupBBLE);
         ReadMsg();
     }
 }
@@ -197,5 +204,11 @@ function getRequestObject() {
     }
 
     return req;
+}
+
+function HideMessages()
+{
+    var msgHeight = $("#divMsgTest").outerHeight() + 10;
+    $('#divMsgTest').css('bottom', -msgHeight);
 }
 

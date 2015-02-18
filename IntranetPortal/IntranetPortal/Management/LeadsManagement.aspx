@@ -13,21 +13,34 @@
         var tempBBLE = null;
 
         //function is called on changing focused row
-        function OnGridFocusedRowChanged() {
+        function OnGridFocusedRowChanged(s, e) {
             // The values will be returned to the OnGetRowValues() function 
-            if (gridLeads.GetFocusedRowIndex() >= 0) {
+            var rowIndex = s.GetFocusedRowIndex();
+            if (rowIndex >= 0) {
+                NavigateToLeadsInfo(s.GetRowKey(rowIndex));
+                return;
 
-                if (ContentCallbackPanel.InCallback()) {
-                    postponedCallbackRequired = true;
-                }
-                else {
-                    if (gridLeads.GetFocusedRowIndex() >= 0) {
-                        //alert(gridLeads.GetFocusedRowIndex());
-                        var rowKey = gridLeads.GetRowKey(gridLeads.GetFocusedRowIndex());
-                        if (rowKey != null)
-                            OnGetRowValues(rowKey);
-                    }
-                }
+                //if (ContentCallbackPanel.InCallback()) {
+                //    postponedCallbackRequired = true;
+                //}
+                //else {
+                //    var rowKey = s.GetRowKey(rowIndex);
+                //    debugger;
+                //    if (rowKey != null)
+                //        OnGetRowValues(rowKey);
+                //}
+            }
+        }
+
+        function NavigateToLeadsInfo(bble) {
+            if (leadsInfoBBLE == bble)
+                return
+            else {
+                leadsInfoBBLE = bble;
+                var url = "/ViewLeadsInfo.aspx?b=" + bble;
+                var contentPane = splitter.GetPaneByName("RightPane");
+                contentPane.SetContentUrl(url);
+                return;
             }
         }
 
@@ -36,6 +49,7 @@
                 gridLeads.GetValuesOnCustomCallback(gridLeads.GetFocusedRowIndex(), OnGetRowValues);
             }
             else {
+
                 leadsInfoBBLE = values;
                 ContentCallbackPanel.PerformCallback(values);
             }
@@ -48,6 +62,8 @@
         }
 
         function OnEndCallback(s, e) {
+            debugger;
+            return;
             $("#prioity_content").mCustomScrollbar(
              {
                  theme: "minimal-dark"
@@ -62,6 +78,7 @@
         }
 
         function onInitScorllBar() {
+            return;
             $(".dxgvCSD").each(function (ind) {
                 var is_list = $(this).parents("#assign_leads_list").length > 0;
 
@@ -108,6 +125,16 @@
                 }
              );
         }
+
+        function ResizeGrid(pane)
+        {
+            if (pane.name == "gridPanel")
+            {           
+                var height = pane.GetClientHeight();
+                gridLeads.SetHeight(height);
+            }            
+        }
+
         $(document).ready(function () {
             // Handler for .ready() called.
             //onInitScorllBar();
@@ -133,47 +160,41 @@
                 <PaneStyle>
                     <Border BorderStyle="None" />
                 </PaneStyle>
-                <ContentCollection>
-                    <dx:SplitterContentControl runat="server">
-                        <div style="width: 100%; height: 100%; /*border: 1px solid gray; */ /*border-bottom: 1px solid gray; */">
-                            <div style="margin: 10px 20px 10px 10px; text-align: left; padding-left: 5px" class="clearfix">
-                                <div style="font-size: 24px;" class="clearfix">
-                                    <i class="fa fa-check-square-o with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
+                <Separators Visible="False"></Separators>
+                <Panes>
+                    <dx:SplitterPane Size="70px">
+                        <ContentCollection>
+                            <dx:SplitterContentControl>
+                                <div style="margin: 10px 20px 10px 10px; text-align: left; padding-left: 5px" class="clearfix">
+                                    <div style="font-size: 24px;" class="clearfix">
+                                        <i class="fa fa-check-square-o with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
                                     <span style="color: #234b60; font-size: 30px;">
                                         <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
                                     </span>
-                                    <div style="float: right">
-                                        <%--  <a href="/LeadsGenerator/LeadsGenerator.aspx" target="_self" class="rand-button rand-button-blue">Create Leads</a>--%>
-                                        <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                
-                                                            </asp:LinkButton>
-                                        <input type="button" value="Create Leads" class="rand-button rand-button-blue rand-button-pad" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'" />
+                                        <div style="float: right">
+                                            <%--  <a href="/LeadsGenerator/LeadsGenerator.aspx" target="_self" class="rand-button rand-button-blue">Create Leads</a>--%>
+                                            <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                
+                                            </asp:LinkButton>
+                                            <input type="button" value="Create Leads" class="rand-button rand-button-blue rand-button-pad" onclick="window.location.href = '/LeadsGenerator/LeadsGenerator.aspx'" />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <dx:ASPxPopupMenu ID="ASPxPopupMenu3" runat="server" ClientInstanceName="leadsTypeMenu"
-                                AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
-                                <Items>
-                                    <dx:MenuItem Text="Development" Name="DevelopmentOpportunity" Image-Url="/images/lr_dev_opportunity.png">
-                                    </dx:MenuItem>
-                                    <dx:MenuItem Text="Foreclosure" Name="Foreclosure" Image-Url="/images/lr_forecosure.png">
-                                    </dx:MenuItem>
-                                    <dx:MenuItem Text="Has Equity" Name="HasEquity" Image-Url="/images/lr_has_equity.png"></dx:MenuItem>
-                                    <dx:MenuItem Text="Tax Lien" Name="TaxLien" Image-Url="/images/lr_tax_lien.png">
-                                    </dx:MenuItem>
-                                </Items>
-                                <ClientSideEvents ItemClick="OnChangeLeadsType" />
-                            </dx:ASPxPopupMenu>
-                            <div style="overflow: auto; height: 680px;" id="assign_leads_list">
+                            </dx:SplitterContentControl>
+                        </ContentCollection>
+                    </dx:SplitterPane>
+                    <dx:SplitterPane Name="gridPanel">
+                        <ContentCollection>
+                            <dx:SplitterContentControl>
                                 <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding"
                                     ID="gridLeads" ClientInstanceName="gridLeads" Width="100%" KeyFieldName="BBLE" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared" OnCustomCallback="gridLeads_CustomCallback"
                                     EnableViewState="true">
                                     <Columns>
                                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" SelectAllCheckboxMode="Page" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
                                         </dx:GridViewCommandColumn>
-                                        <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False">
+                                        <dx:GridViewDataTextColumn FieldName="PropertyAddress" Settings-AllowHeaderFilter="False">
                                             <Settings AllowHeaderFilter="False"></Settings>
                                             <DataItemTemplate>
-                                                <%#IntranetPortal.Utility.HtmlBlackInfo(Eval("LeadsName"))%>
+                                                <%# String.Format("<span style=""font-weight: 900;"">{0}</span>-{1}", String.Format("{0} {1}", Eval("Number"), Eval("Street")).Trim, Eval("Owner"))%>
                                             </DataItemTemplate>
                                         </dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Neighborhood" Width="80px" Caption="Neighbor"></dx:GridViewDataTextColumn>
@@ -181,7 +202,7 @@
                                         <dx:GridViewDataTextColumn FieldName="LotDem" Width="100px"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="PropertyClass" Caption="Class" Width="50px"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="MortgageCombo" Width="80px" Caption="MtgCOMBO" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="MortgageData.C1stServicer" Caption="Servicer" Width="80px"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="C1stServicer" Caption="Servicer" Width="80px"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="TaxLiensAmount" Caption="TaxCOMBO" Width="60px" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="Type" Width="40px" CellStyle-HorizontalAlign="Center" CellStyle-VerticalAlign="Middle">
                                             <DataItemTemplate>
@@ -196,9 +217,9 @@
                                         </dx:GridViewDataColumn>
                                     </Columns>
                                     <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true"
-                                        EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
-                                    <Settings ShowColumnHeaders="true" VerticalScrollableHeight="650" GridLines="Both"></Settings>
-                                    <SettingsPager Mode="EndlessPaging" PageSize="45"></SettingsPager>
+                                        EnableRowHotTrack="True" />
+                                    <Settings ShowColumnHeaders="true" VerticalScrollableHeight="1000" GridLines="Both"></Settings>
+                                    <SettingsPager Mode="EndlessPaging" PageSize="50"></SettingsPager>
                                     <Styles>
                                         <Header HorizontalAlign="Center"></Header>
                                         <Row Cursor="pointer" />
@@ -208,48 +229,67 @@
                                     <Border BorderStyle="None"></Border>
                                     <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
                                 </dx:ASPxGridView>
-                                 <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridLeads"></dx:ASPxGridViewExporter>
-                            </div>
-                            <table style="width: 500px; float: right; margin-top: 10px;">
-                                <tr>
-                                    <td>
-                                        <dx:ASPxLabel Text="Select Employee:" ID="ASPxLabel1" runat="server" Font-Size="Large"></dx:ASPxLabel>
-                                    </td>
-                                    <td>
-                                        <dx:ASPxComboBox runat="server" CssClass="edit_drop" ClientInstanceName="listboxEmployee" ID="listboxEmployee" TextField="Name" ValueField="EmployeeID" DropDownStyle="DropDownList" IncrementalFilteringMode="StartsWith">
-                                            <ValidationSettings ErrorDisplayMode="None">
-                                                <RequiredField IsRequired="true" />
-                                            </ValidationSettings>
-                                        </dx:ASPxComboBox>
-                                    </td>
-                                    <td>
-                                       <%-- <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" CssClass="rand-button rand-button-blue" AutoPostBack="false">
-                                            <ClientSideEvents Click="function(s,e){
-                                                   if(listboxEmployee.GetIsValid())
-                                                        gridLeads.PerformCallback('AssignLeads');
-                                                }
-                                                " />
-                                        </dx:ASPxButton>--%>
-                                        <input type="button" value="Assign" class="rand-button rand-button-blue rand-button-pad" onclick="{if(listboxEmployee.GetIsValid()) gridLeads.PerformCallback('AssignLeads');}" />
-                                        &nbsp;&nbsp;
+                                <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridLeads"></dx:ASPxGridViewExporter>
+                                <dx:ASPxPopupMenu ID="ASPxPopupMenu3" runat="server" ClientInstanceName="leadsTypeMenu"
+                                    AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                    <Items>
+                                        <dx:MenuItem Text="Development" Name="DevelopmentOpportunity" Image-Url="/images/lr_dev_opportunity.png">
+                                        </dx:MenuItem>
+                                        <dx:MenuItem Text="Foreclosure" Name="Foreclosure" Image-Url="/images/lr_forecosure.png">
+                                        </dx:MenuItem>
+                                        <dx:MenuItem Text="Has Equity" Name="HasEquity" Image-Url="/images/lr_has_equity.png"></dx:MenuItem>
+                                        <dx:MenuItem Text="Tax Lien" Name="TaxLien" Image-Url="/images/lr_tax_lien.png">
+                                        </dx:MenuItem>
+                                    </Items>
+                                    <ClientSideEvents ItemClick="OnChangeLeadsType" />
+                                </dx:ASPxPopupMenu>
+                            </dx:SplitterContentControl>
+                        </ContentCollection>
+                    </dx:SplitterPane>
+                    <dx:SplitterPane Size="70px">
+                        <ContentCollection>
+                            <dx:SplitterContentControl>
+                                <table style="width: 500px; float: right; margin-top: 10px;">
+                                    <tr>
+                                        <td>
+                                            <dx:ASPxLabel Text="Select Employee:" ID="ASPxLabel1" runat="server" Font-Size="Large"></dx:ASPxLabel>
+                                        </td>
+                                        <td>
+                                            <dx:ASPxComboBox runat="server" CssClass="edit_drop" ClientInstanceName="listboxEmployee" ID="listboxEmployee" TextField="Name" ValueField="EmployeeID" DropDownStyle="DropDownList" IncrementalFilteringMode="StartsWith">
+                                                <ValidationSettings ErrorDisplayMode="None">
+                                                    <RequiredField IsRequired="true" />
+                                                </ValidationSettings>
+                                            </dx:ASPxComboBox>
+                                        </td>
+                                        <td>
+                                            <input type="button" value="Assign" class="rand-button rand-button-blue rand-button-pad" onclick="{ if (listboxEmployee.GetIsValid()) gridLeads.PerformCallback('AssignLeads'); }" />
+                                            &nbsp;&nbsp;
                                       <input type="button" value="Rules" class="rand-button rand-button-blue rand-button-pad" onclick="AssignLeadsPopupClient.Show();" />
 
-                                        <button type="button" onclick="popupAssignRules.Show();" style="display: none">Rules Old</button>
-                                    </td>
-                                </tr>
-                            </table>
+                                            <button type="button" onclick="popupAssignRules.Show();" style="display: none">Rules Old</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </dx:SplitterContentControl>
+                        </ContentCollection>
+                    </dx:SplitterPane>
+                </Panes>
+                <%-- <ContentCollection>
+                    <dx:SplitterContentControl runat="server">
+                        <div style="width: 100%; height: 100%; /*border: 1px solid gray; */ /*border-bottom: 1px solid gray; */">
                         </div>
                     </dx:SplitterContentControl>
-                </ContentCollection>
+                </ContentCollection>--%>
             </dx:SplitterPane>
-            <dx:SplitterPane Name="RightPane" ScrollBars="Auto">
+            <dx:SplitterPane Name="RightPane" ScrollBars="Auto" ContentUrl="about:blank">
                 <ContentCollection>
                     <dx:SplitterContentControl>
-                        <uc1:LeadsInfo runat="server" ID="LeadsInfo" ShowLogPanel="false" />
+                        <%--  <uc1:LeadsInfo runat="server" ID="LeadsInfo" ShowLogPanel="false" />--%>
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
         </Panes>
+        <ClientSideEvents PaneResized="function(s,e){ResizeGrid(e.pane);}" />
     </dx:ASPxSplitter>
     <dx:ASPxCallback runat="server" ID="updateLeadsType" ClientInstanceName="updateLeadsType" OnCallback="updateLeadsType_Callback">
         <ClientSideEvents EndCallback="function(){gridLeads.Refresh();}" />

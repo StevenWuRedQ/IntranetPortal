@@ -244,7 +244,15 @@
         if (typeof ContentCallbackPanel != "undefined") {
             debugger;
             var parms = "Refresh|" + leadsInfoBBLE + "|" + e.item.name;
-            ContentCallbackPanel.PerformCallback(parms);
+
+            //if (e.item.name == "TLO")
+            //{
+            //    ownerInfoCallbackPanel.PerformCallback(parms)
+            //}
+            //else
+            //{
+                ContentCallbackPanel.PerformCallback(parms);
+            //}            
         }
         else {
             __doPostBack(s.name, '');

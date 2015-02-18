@@ -37,6 +37,7 @@
     }
 
     function InitScrollBar() {
+        return;
         $("#leads_list_left").mCustomScrollbar(
                     {
                         theme: "minimal-dark"
@@ -110,7 +111,7 @@
             </div>
         </div>
     </div>
-    <div style="height: 768px; padding: 0px 10px;" id="leads_list_left">
+    <div style="height: 768px;" id="leads_list_left">
         <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" OnCustomCallback="gridTasks_CustomCallback"
             ID="gridTasks" Border-BorderStyle="None" ClientInstanceName="gridTasks" Width="100%" AutoGenerateColumns="False" KeyFieldName="ProcInstId;ActInstId" OnDataBinding="gridTasks_DataBinding">
             <Columns>
@@ -169,8 +170,8 @@
                     </GroupRowTemplate>
                 </dx:GridViewDataColumn>
             </Columns>
-            <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
-                EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
+            <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="false" AllowGroup="true"
+                EnableRowHotTrack="True" />
             <%--<SettingsPager Mode="ShowPager" PageSize="17" Position="Bottom" Summary-Visible="false" ShowDisabledButtons="false" NumericButtonCount="4"></SettingsPager>--%>
             <SettingsPager Mode="ShowAllRecords"></SettingsPager>
             <%--   <SettingsPager Mode="ShowAllRecords"></SettingsPager>--%>

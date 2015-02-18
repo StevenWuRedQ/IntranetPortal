@@ -15,6 +15,13 @@
             Return
         End If
 
+        If Not String.IsNullOrEmpty(Request.QueryString("b")) Then
+            Dim bble = Request.QueryString("b").ToString
+            LeadsInfo.ShowLogPanel = False
+            LoadData(bble)
+            Return
+        End If
+
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) AndAlso Not Page.IsPostBack Then
             Dim sn = Request.QueryString("sn").ToString
             Dim wli = WorkflowService.LoadTaskProcess(sn)

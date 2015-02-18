@@ -172,28 +172,26 @@
                                                                             padding: 2px 4px;
                                                                             font-size: 11px;
                                                                         }
-                                                                        .message_list
-                                                                        {
-                                                                            font-size:14px;
-                                                                            color:#3993c1;
-                                                                            border:none;
-                                                                            border-radius:0px;
-                                                                            cursor:pointer;
+
+                                                                        .message_list {
+                                                                            font-size: 14px;
+                                                                            color: #3993c1;
+                                                                            border: none;
+                                                                            border-radius: 0px;
+                                                                            cursor: pointer;
                                                                         }
-                                                                        .message_list:hover
-                                                                        {
-                                                                            background:#a0c5e8;
-                                                                            
+
+                                                                            .message_list:hover {
+                                                                                background: #a0c5e8;
+                                                                            }
+
+                                                                        .special-class {
+                                                                            padding-left: 0px;
+                                                                            padding-right: 0px;
                                                                         }
-                                                                        .special-class
-                                                                        {
-                                                                            padding-left:0px;
-                                                                            padding-right:0px;
-                                                                            
-                                                                        }
-                                                                        .un_readed_link
-                                                                        {
-                                                                            font-weight:700;
+
+                                                                        .un_readed_link {
+                                                                            font-weight: 700;
                                                                         }
                                                                     </style>
 
@@ -205,62 +203,54 @@
                                                                                     template: '<div class="popover special-class"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content special-class"><p></p></div></div></div>'
                                                                                 })
                                                                         }
-                                                                        function readLink(isRead,e)
-                                                                        {
-                                                                            if(isRead)
-                                                                            {
+                                                                        function readLink(isRead, e) {
+                                                                            if (isRead) {
                                                                                 $(e).addClass("un_readed_link")
-                                                                            }else
-                                                                            {
+                                                                            } else {
                                                                                 $(e).attr("class", $(e).attr("class").replace("un_readed_link", ""));
                                                                                 //$(e).removeClass("un_readed_link");
                                                                             }
                                                                             return $(e);
                                                                         }
-                                                                        function AddItem(title,isRead,callBackid)
-                                                                        {
-                                                                            
+                                                                        function AddItem(title, isRead, callBackid) {
+
                                                                             var link = $(".message_list:first").clone()
                                                                             var link = readLink(isRead, link.html(title))
-                                                                           
+
                                                                             link.attr('onclick', 'GoToMassage(this,' + callBackid + ')');
                                                                             $("#ul_template ").append(link.prop("outerHTML"));
                                                                             show_message_alert();
                                                                         }
-                                                                        function testAddItem()
-                                                                        {
+                                                                        function testAddItem() {
                                                                             var r = Math.floor(Math.random() * 6);
-                                                                            AddItem("test " + r,r%2==0,r)
+                                                                            AddItem("test " + r, r % 2 == 0, r)
                                                                         }
-                                                                        function GoToMassage(e,id)
-                                                                        {
+                                                                        function GoToMassage(e, id) {
                                                                             debugger;
                                                                             readLink(false, $(e))
                                                                             show_message_alert()
                                                                             //call function use id 
                                                                             ShowMassge(id);
                                                                         }
-                                                                        function show_message_alert()
-                                                                        {
+                                                                        function show_message_alert() {
                                                                             $("#message_alert").css("display", $(".un_readed_link").length == 0 ? "none" : "");
                                                                         }
-                                                                        function ShowMassge(id)
-                                                                        {
+                                                                        function ShowMassge(id) {
 
                                                                         }
                                                                     </script>
-                                                                   <%-- <button type="button" onclick="testAddItem()">test add</button>--%>
-                                                                    <div id="messageList" style="display:none">
-                                                                        <ul class="list-group" id="ul_template" style="border-radius:0px;">
-                                                                            <li class="list-group-item message_list" >Cras justo odio</li>
+                                                                    <%-- <button type="button" onclick="testAddItem()">test add</button>--%>
+                                                                    <div id="messageList" style="display: none">
+                                                                        <ul class="list-group" id="ul_template" style="border-radius: 0px;">
+                                                                            <li class="list-group-item message_list">Cras justo odio</li>
                                                                             <li class="list-group-item message_list">Dapibus ac facilisis in</li>
-                                                                            
+
                                                                         </ul>
                                                                     </div>
-                                                                    <div style="display: inline-block;display:none">
-                                                                        <button class="btn btn-default btn-sm btn-link" type="button" style="font-size: 18px; outline: none" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-html="true" 
+                                                                    <div style="display: inline-block; display: none">
+                                                                        <button class="btn btn-default btn-sm btn-link" type="button" style="font-size: 18px; outline: none" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-html="true"
                                                                             onclick='PopupMessageList(this);'>
-                                                                            <span class="glyphicon glyphicon-comment"  style="color: black"></span>
+                                                                            <span class="glyphicon glyphicon-comment" style="color: black"></span>
                                                                         </button>
                                                                         <span class="badge badge-notify" id="message_alert">&nbsp;&nbsp;&nbsp;</span>
                                                                     </div>
@@ -388,17 +378,85 @@
                 </dx:SplitterPane>
             </Panes>
         </dx:ASPxSplitter>
+
+        <style type="text/css">
+            .message {
+                background-size: 40px 40px;
+                background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%, transparent 75%, transparent);
+                box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+                width: 300px;
+                border: 1px solid;
+                color: #fff;
+                padding: 15px;
+                position: fixed;
+                _position: absolute;
+                text-shadow: 0 1px 0 rgba(0,0,0,.5);
+                animation: animate-bg 5s linear infinite;
+            }
+
+            .info {
+                background-color: #4ea5cd;
+                border-color: #3b8eb5;
+            }
+
+            .message .msgtitle {
+                margin: 0 0 5px 0;
+                font-size:14px;
+            }
+
+            .message p {
+                margin: 0;
+            }
+
+            @keyframes animate-bg {
+                from {
+                    background-position: 0 0;
+                }
+
+                to {
+                    background-position: -80px 0;
+                }
+            }
+        </style>
+
+        <div id="divMsgTest" class="info message" style="bottom: -300px; right: 25px">
+            <div class="msgtitle"> <i class="fa fa-envelope with_circle" style="color:white; font-size:14px; width:30px; height:30px; line-height:30px; text-align:center"></i>&nbsp; New Message
+                <span style="float:right; line-height:30px;font-weight:600; cursor:pointer" onclick="ReadMsg()">X</span>
+            </div>
+            <table style="width: 100%">
+                <thead>
+                    <tr>
+                        <td id="tdMsgTitle" style="font-weight: bold; margin-bottom: 5px; font-size: 14px; cursor:pointer" onclick="PopupViewLead()"></td>
+                    </tr>
+                </thead>
+                <tr style="vertical-align: top">
+                    <td id="tdMsgContent"></td>
+                </tr>
+                <tr style="display:none">
+                    <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
+                        <dx:ASPxButton ID="ASPxButton2" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                            <ClientSideEvents Click="function(){
+                                                                                                                        ReadMsg();                                                                                                                     
+                                                                                                                                                                                                                                              
+                                                                                                                        }"></ClientSideEvents>
+                        </dx:ASPxButton>
+                        <dx:ASPxButton ID="ASPxButton3" runat="server" Text="Go to Lead" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                            <ClientSideEvents Click="function(){PopupViewLead(); }"></ClientSideEvents>
+                        </dx:ASPxButton>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMessagerControlClient" Width="460px" Height="350px"
             MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl2"
             Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
             <HeaderTemplate>
-
                 <div class="pop_up_header_margin">
                     <i class="fa fa-envelope with_circle pop_up_header_icon"></i>
                     <span class="pop_up_header_text">New Message</span>
                 </div>
-
             </HeaderTemplate>
             <ContentCollection>
                 <dx:PopupControlContentControl runat="server">
@@ -407,32 +465,6 @@
                             <dx:TabPage Text="First" Name="tabStreet">
                                 <ContentCollection>
                                     <dx:ContentControl runat="server">
-                                        <table style="width: 100%">
-                                            <thead>
-                                                <tr>
-                                                    <td id="tdMsgTitle" style="font-weight: bold; margin-bottom: 5px; font-size: 14px"></td>
-                                                </tr>
-                                            </thead>
-                                            <tr style="vertical-align: top">
-                                                <td id="tdMsgContent" style="height: 300px"></td>
-                                            </tr>
-                                            <tr>
-                                                <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                                    <dx:ASPxButton ID="ASPxButton2" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                                        <ClientSideEvents Click="function(){
-                                                                                                                        ReadMsg();                                                                                                                     
-                                                                                                                                                                                                                                              
-                                                                                                                        }"></ClientSideEvents>
-                                                    </dx:ASPxButton>
-                                                    <dx:ASPxButton ID="ASPxButton3" runat="server" Text="Go to Lead" AutoPostBack="false" CssClass="rand-button rand-button-blue">
-                                                        <ClientSideEvents Click="function(){
-                                                                                                                      PopupViewLead();                                                                                                                  
-                                                                                                                                                                                                                                              
-                                                                                                                        }"></ClientSideEvents>
-                                                    </dx:ASPxButton>
-                                                </td>
-                                            </tr>
-                                        </table>
                                     </dx:ContentControl>
                                 </ContentCollection>
                             </dx:TabPage>

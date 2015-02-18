@@ -307,6 +307,35 @@ Public Class DataWCFService
         End Using
     End Function
 
+    'Used to create new leads
+    Public Shared Function UpdateBasicInfo(bble As String) As LeadsInfo
+        Try
+            'this is apartment
+            If bble.StartsWith("A") Then
+                Return UpdateApartmentBuildingInfo(bble)
+            End If
+
+            Using context As New Entities
+
+                Dim li As LeadsInfo = context.LeadsInfoes.Where(Function(l) l.BBLE = bble).SingleOrDefault
+                If li Is Nothing Then
+                    li = GetFullAssessInfo(bble, li)
+                    context.LeadsInfoes.Add(li)
+                Else
+                    li = GetFullAssessInfo(bble, li)
+                End If
+
+                context.SaveChanges()
+
+                Return li
+            End Using
+        Catch ex As System.ServiceModel.EndpointNotFoundException
+            Throw New Exception("The data serice is not avaiable. Please refresh later.")
+        Catch ex As Exception
+            Throw New Exception("Exception happened during updating. Please try later. Exception: " & ex.Message)
+        End Try
+    End Function
+
     Public Shared Function UpdateAssessInfo(bble As String) As LeadsInfo
         Try
             'this is apartment

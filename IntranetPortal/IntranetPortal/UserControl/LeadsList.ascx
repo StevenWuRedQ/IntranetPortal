@@ -53,6 +53,7 @@
             gridLeads.GetValuesOnCustomCallback(gridLeads.GetFocusedRowIndex(), OnGetRowValues);
         }
         else {
+            debugger;
             leadsInfoBBLE = values;
             ContentCallbackPanel.PerformCallback(values);
         }
@@ -63,8 +64,8 @@
             gridLeads.GetRowValues(gridLeads.GetFocusedRowIndex(), 'BBLE', OnGetRowValues);
             postponedCallbackRequired = false;
         }
-
-        InitScrollBar();
+        
+        //InitScrollBar();
         init_currency();
         initToolTips();
         if (sortPhones) {
@@ -283,6 +284,7 @@
     }
 
     function AddScrollbarOnLeadsList() {
+        return;
         $("#leads_list_left .dxgvCSD").each(function (ind) {
             var is_list = $(this).parents("#leads_list_left").length > 0;
 
@@ -362,6 +364,7 @@
 
 
 </script>
+
 <style>
    
     .color_list
@@ -372,6 +375,7 @@
         height:30px;
         border:none;
     }
+
      .diagonal {
         /*background: repeating-linear-gradient( 135deg, #fff, #fff 10px, #000 10px, #000 15px );*/
         background:white;
@@ -410,8 +414,8 @@
         <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
     </div>
-    <div style="height: 768px; padding: 0px 3px;" id="leads_list_left">
-        <dx:ASPxGridView runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText"
+    <div style="height: 768px; padding: 0px 0px;" id="leads_list_left">
+        <dx:ASPxGridView EnableViewState="false" runat="server" EnableRowsCache="false" OnCustomCallback="gridLeads_CustomCallback" OnDataBinding="gridLeads_DataBinding" OnCustomGroupDisplayText="gridLeads_CustomGroupDisplayText"
             OnSummaryDisplayText="gridLeads_SummaryDisplayText"
             OnCustomDataCallback="gridLeads_CustomDataCallback"
             Settings-ShowColumnHeaders="false"
@@ -721,7 +725,7 @@
                 </FilterRow>
             </Templates>
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
-                EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
+                EnableRowHotTrack="True" />
             <%--<SettingsPager Mode="ShowPager" PageSize="17" Position="Bottom" Summary-Visible="false" ShowDisabledButtons="false" NumericButtonCount="4"></SettingsPager>--%>
             <SettingsPager Mode="EndlessPaging" PageSize="16"></SettingsPager>
             <%--   <SettingsPager Mode="ShowAllRecords"></SettingsPager>--%>

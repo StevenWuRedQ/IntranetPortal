@@ -462,18 +462,22 @@ Public Class LeadsInfo1
         Select Case type
             Case "All"
                 comments = String.Format("All leads info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
-                DataWCFService.UpdateLeadInfo(bble, True)
+                'DataWCFService.UpdateLeadInfo(bble, True)
+                Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, HttpContext.Current.User.Identity.Name)
+
             Case "Assessment"
                 comments = String.Format("General property info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
                 DataWCFService.UpdateAssessInfo(bble)
             Case "PropData"
                 comments = String.Format("Mortgage and Violations is refreshed by {0}", HttpContext.Current.User.Identity.Name)
-                DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, True, False)
+                Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.Mortgage, HttpContext.Current.User.Identity.Name)
+                'DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, True, False)
             Case "TLO"
                 comments = String.Format("Home Owner info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
-                If Not DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
-                    Throw New Exception("This Lead didn't have owner info in our database.")
-                End If
+                Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.HomeOwner, HttpContext.Current.User.Identity.Name)
+                'If Not DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
+                '    Throw New Exception("This Lead didn't have owner info in our database.")
+                'End If
             Case "ZEstimate"
                 comments = String.Format("ZEstimate info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
                 If Not DataWCFService.GetZillowValue(bble) Then
@@ -522,6 +526,22 @@ Public Class LeadsInfo1
             ElseIf (e.Parameter.StartsWith("DeleteEmail")) Then
                 Dim paramters = e.Parameter.Split("|")
                 DelteEmail(bble, paramters(1), paramters(2))
+            ElseIf e.Parameter.StartsWith("Refresh") Then
+                Dim params = e.Parameter.Split("|")
+                bble = params(1)
+
+                If bble = "null" Then
+                    bble = hfBBLE.Value
+                End If
+
+                If params.Length = 3 Then
+                    Dim type = params(2)
+                    Dim comments = String.Format("Home Owner info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
+                    If Not DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
+                        Throw New Exception("This Lead didn't have owner info in our database.")
+                    End If
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString)
+                End If
             Else
                 Dim phoneNo = e.Parameter.Split("|")(0)
                 Dim ownerName = e.Parameter.Split("|")(1)

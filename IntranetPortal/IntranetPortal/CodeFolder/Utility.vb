@@ -44,6 +44,7 @@ Public Class Utility
 
         Return category
     End Function
+
     Public Shared Function Borough2BoroughName(borough As String) As String
         Dim boroughName = "undefine borough"
         Dim arraryDic As New Dictionary(Of String, String)
@@ -58,9 +59,11 @@ Public Class Utility
         End If
         Return boroughName
     End Function
+
     Public Shared Function IsAny(Of T)(data As IEnumerable(Of T)) As Boolean
         Return data IsNot Nothing AndAlso data.Any()
     End Function
+
     Public Shared Function GetLeadsName(leadData As LeadsInfo) As String
         Dim leadsName = ""
 
@@ -101,6 +104,7 @@ Public Class Utility
         Return String.Format("<span style=""font-weight: 900;"">{0}</span>-{1}", FontStr, EndStr)
         'Return "<span style=""font-weight: 900;""> 720 QUINCY ST</span> - " & leadData
     End Function
+
 
 
     'Public Shared Function BuildPropertyAddress(num As String, strname As String, borough As String, neighName As String, zip As String) As String

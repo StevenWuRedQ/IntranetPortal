@@ -13,7 +13,9 @@
         function PopupViewLead(popupBBLE) {
             if (popupBBLE != null) {
                 var url = '/ViewLeadsInfo.aspx?id=' + popupBBLE;
-                window.showModalDialog(url, 'View Leads Info', 'dialogWidth:1350px;dialogHeight:810px');
+                var left = (screen.width / 2) - (1350 / 2);
+                var top = (screen.height / 2) - (930 / 2);
+                window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
             }
         }
     </script>
@@ -24,11 +26,11 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <dx:ASPxGridView runat="server" ID="gridMsgs" ClientInstanceName="gridMsgs" KeyFieldName="MsgID" Width="100%" OnCustomCallback="gridMsgs_CustomCallback" SettingsBehavior-AllowSort="false">
+            <dx:ASPxGridView runat="server" ID="gridMsgs" ClientInstanceName="gridMsgs" KeyFieldName="MsgID" Theme="Moderno" Width="100%" OnCustomCallback="gridMsgs_CustomCallback" SettingsBehavior-AllowSort="false">
                 <Columns>
                     <dx:GridViewDataTextColumn FieldName="BBLE" Caption="ADDRESS" Width="200px">
                         <DataItemTemplate>
-                            <%# GetPropertyAddress(Eval("BBLE"))%>
+                        <a href="#"  onclick='(<%# String.Format("PopupViewLead({0})", Eval("BBLE"))%>'><%# GetPropertyAddress(Eval("BBLE"))%></a>    
                         </DataItemTemplate>
                     </dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Createby" Caption="FROM" Width="100px"></dx:GridViewDataTextColumn>
@@ -43,9 +45,7 @@
                             <a href="#" onclick='(<%# String.Format("PopupViewLead({0})", Eval("BBLE"))%>)'>View</a>
                         </DataItemTemplate>
                     </dx:GridViewDataTextColumn>
-                </Columns>
-                <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true"
-                    EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
+                </Columns>                
                 <SettingsPager Mode="ShowAllRecords"></SettingsPager>
                 <Styles>                   
                     <Row Cursor="pointer" />

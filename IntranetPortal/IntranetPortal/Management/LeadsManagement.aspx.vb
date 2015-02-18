@@ -4,11 +4,7 @@ Public Class LeadsManagement
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
-    End Sub
-
-    Protected Sub page_init(ByVal sender As Object, e As EventArgs) Handles Me.Init
-        If (Not IsPostBack) Then
+        If Not IsPostBack Then
             BindData()
         End If
     End Sub
@@ -51,13 +47,67 @@ Public Class LeadsManagement
     Sub BindNewestLeads()
         Using Context As New Entities
             If User.IsInRole("Admin") Then
-                gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead Is Nothing).ToList
-                gridLeads.DataBind()
 
+                Dim lds = From ld In Context.LeadsInfoes.Where(Function(l) l.Lead Is Nothing)
+                          Let TaxCobo = Context.LeadsTaxLiens.Where(Function(t) t.BBLE = ld.BBLE).FirstOrDefault
+                          Let Mort = Context.LeadsMortgageDatas.Where(Function(l) l.BBLE = ld.BBLE).FirstOrDefault
+                          Let Recycle = Context.LeadsActivityLogs.Any(Function(l) l.BBLE = ld.BBLE)
+                          Let MortgageCombo = (If(ld.C1stMotgrAmt.HasValue, ld.C1stMotgrAmt, 0) + If(ld.C2ndMotgrAmt.HasValue, ld.C2ndMotgrAmt, 0) + If(ld.C3rdMortgrAmt.HasValue, ld.C3rdMortgrAmt, 0))
+                          Select New With {
+                              .BBLE = ld.BBLE,
+                              .PropertyAddress = ld.PropertyAddress,
+                              .Number = ld.Number,
+                              .Street = ld.StreetName,
+                              .Owner = ld.Owner,
+                              .CoOwner = ld.CoOwner,
+                              .Neighborhood = ld.NeighName,
+                              .NYCSqft = ld.NYCSqft,
+                              .C1 = ld.C1stMotgrAmt,
+                              .C2 = ld.C2ndMotgrAmt,
+                              .C3 = ld.C3rdMortgrAmt,
+                              .LotDem = ld.LotDem,
+                              .PropertyClass = ld.PropertyClass,
+                              .MortgageCombo = MortgageCombo,
+                              .C1stServicer = Mort.C1stServicer,
+                              .TaxLiensAmount = If(TaxCobo.Amount = 0, "Not Avaiable", ""),
+                              .Type = ld.Type,
+                              .IsRecycled = Recycle
+                              }
+
+                gridLeads.DataSource = lds.ToList ' Context.LeadsInfoes.Where(Function(l) l.Lead Is Nothing).ToList
+                gridLeads.DataBind()
             Else
                 If Employee.IsManager(User.Identity.Name) Then
                     Dim name = User.Identity.Name
-                    gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = name And li.Lead.Status = LeadStatus.NewLead).ToList
+                    'gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = name And li.Lead.Status = LeadStatus.NewLead).ToList
+
+                    Dim lds = From ld In Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = name And li.Lead.Status = LeadStatus.NewLead)
+                       Let TaxCobo = Context.LeadsTaxLiens.Where(Function(t) t.BBLE = ld.BBLE).FirstOrDefault
+                       Let Mort = Context.LeadsMortgageDatas.Where(Function(l) l.BBLE = ld.BBLE).FirstOrDefault
+                       Let Recycle = Context.LeadsActivityLogs.Any(Function(l) l.BBLE = ld.BBLE)
+                       Let MortgageCombo = (If(ld.C1stMotgrAmt.HasValue, ld.C1stMotgrAmt, 0) + If(ld.C2ndMotgrAmt.HasValue, ld.C2ndMotgrAmt, 0) + If(ld.C3rdMortgrAmt.HasValue, ld.C3rdMortgrAmt, 0))
+                       Select New With {
+                           .BBLE = ld.BBLE,
+                           .PropertyAddress = ld.PropertyAddress,
+                           .Number = ld.Number,
+                           .Street = ld.StreetName,
+                           .Owner = ld.Owner,
+                           .CoOwner = ld.CoOwner,
+                           .Neighborhood = ld.NeighName,
+                           .NYCSqft = ld.NYCSqft,
+                           .C1 = ld.C1stMotgrAmt,
+                           .C2 = ld.C2ndMotgrAmt,
+                           .C3 = ld.C3rdMortgrAmt,
+                           .LotDem = ld.LotDem,
+                           .PropertyClass = ld.PropertyClass,
+                           .MortgageCombo = MortgageCombo,
+                           .C1stServicer = Mort.C1stServicer,
+                           .TaxLiensAmount = If(TaxCobo.Amount = 0, "Not Avaiable", ""),
+                           .Type = ld.Type,
+                           .IsRecycled = Recycle
+                           }
+
+                    gridLeads.DataSource = lds.ToList
                     gridLeads.DataBind()
 
                     AssignLeadsPopup.LeadsSource = name
@@ -68,7 +118,34 @@ Public Class LeadsManagement
 
     Sub BindTeamList(mgrName As String)
         Using Context As New Entities
-            gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = mgrName And li.Lead.Status = LeadStatus.NewLead).ToList
+            'gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = mgrName And li.Lead.Status = LeadStatus.NewLead).ToList
+            Dim lds = From ld In Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = mgrName And li.Lead.Status = LeadStatus.NewLead)
+                      Let TaxCobo = Context.LeadsTaxLiens.Where(Function(t) t.BBLE = ld.BBLE).FirstOrDefault
+                      Let Mort = Context.LeadsMortgageDatas.Where(Function(l) l.BBLE = ld.BBLE).FirstOrDefault
+                      Let Recycle = Context.LeadsActivityLogs.Any(Function(l) l.BBLE = ld.BBLE)
+                      Let MortgageCombo = (If(ld.C1stMotgrAmt.HasValue, ld.C1stMotgrAmt, 0) + If(ld.C2ndMotgrAmt.HasValue, ld.C2ndMotgrAmt, 0) + If(ld.C3rdMortgrAmt.HasValue, ld.C3rdMortgrAmt, 0))
+                      Select New With {
+                          .BBLE = ld.BBLE,
+                          .PropertyAddress = ld.PropertyAddress,
+                          .Number = ld.Number,
+                          .Street = ld.StreetName,
+                          .Owner = ld.Owner,
+                          .CoOwner = ld.CoOwner,
+                          .Neighborhood = ld.NeighName,
+                          .NYCSqft = ld.NYCSqft,
+                          .C1 = ld.C1stMotgrAmt,
+                          .C2 = ld.C2ndMotgrAmt,
+                          .C3 = ld.C3rdMortgrAmt,
+                          .LotDem = ld.LotDem,
+                          .PropertyClass = ld.PropertyClass,
+                          .MortgageCombo = MortgageCombo,
+                          .C1stServicer = Mort.C1stServicer,
+                          .TaxLiensAmount = If(TaxCobo.Amount = 0, "Not Avaiable", ""),
+                          .Type = ld.Type,
+                          .IsRecycled = Recycle
+                          }
+
+            gridLeads.DataSource = lds.ToList
             gridLeads.DataBind()
         End Using
     End Sub
@@ -78,11 +155,34 @@ Public Class LeadsManagement
 
         Dim unActiveUser = Employee.GetDeptUsersList(office, False).Select(Function(emp) emp.Name).ToArray
         Using Context As New Entities
-            gridLeads.DataSource = (From li In Context.LeadsInfoes
+            Dim lds = (From li In Context.LeadsInfoes
                                    Join ld In Context.Leads On ld.BBLE Equals li.BBLE
+                                   Let TaxCobo = Context.LeadsTaxLiens.Where(Function(t) t.BBLE = ld.BBLE).FirstOrDefault
+                                   Let Mort = Context.LeadsMortgageDatas.Where(Function(l) l.BBLE = ld.BBLE).FirstOrDefault
+                                   Let Recycle = Context.LeadsActivityLogs.Any(Function(l) l.BBLE = ld.BBLE)
+                                   Let MortgageCombo = (If(li.C1stMotgrAmt.HasValue, li.C1stMotgrAmt, 0) + If(li.C2ndMotgrAmt.HasValue, li.C2ndMotgrAmt, 0) + If(li.C3rdMortgrAmt.HasValue, li.C3rdMortgrAmt, 0))
                                    Where ld.EmployeeName = officeName Or (unActiveUser.Contains(ld.EmployeeName) And ld.Status <> LeadStatus.InProcess)
-                                   Select li).ToList
-
+                                    Select New With {
+                                      .BBLE = ld.BBLE,
+                                      .PropertyAddress = li.PropertyAddress,
+                                      .Number = li.Number,
+                                      .Street = li.StreetName,
+                                      .Owner = li.Owner,
+                                      .CoOwner = li.CoOwner,
+                                      .Neighborhood = li.NeighName,
+                                      .NYCSqft = li.NYCSqft,
+                                      .C1 = li.C1stMotgrAmt,
+                                      .C2 = li.C2ndMotgrAmt,
+                                      .C3 = li.C3rdMortgrAmt,
+                                      .LotDem = li.LotDem,
+                                      .PropertyClass = li.PropertyClass,
+                                      .MortgageCombo = MortgageCombo,
+                                      .C1stServicer = Mort.C1stServicer,
+                                      .TaxLiensAmount = If(TaxCobo.Amount = 0, "Not Avaiable", ""),
+                                      .Type = li.Type,
+                                      .IsRecycled = Recycle
+                                      })
+            gridLeads.DataSource = lds.ToList
             gridLeads.DataBind()
         End Using
     End Sub

@@ -52,7 +52,7 @@
         <%--<div id="container" class="containers" style="height: 600px; width: 100%;"></div>--%>
     </div>
 
-    <script>
+    <script type="text/javascript">
         //var map = $("#map").dxMap({
         //    center: "Brooklyn Bridge,New York,NY",
         //    zoom: 10,
@@ -63,7 +63,7 @@
         //}).dxMap("instance");
         var zipMap;
         var geocoder;
-        var zipLeads = <%=leadsByZip%>
+        var zipLeads = <%= leadsByZip%>
 
        //function codeAddress(zip,Count) {
        //    geocoder = new google.maps.Geocoder();

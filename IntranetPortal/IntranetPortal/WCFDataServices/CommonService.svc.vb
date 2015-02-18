@@ -45,7 +45,7 @@ Public Class CommonService
         emailData.Add("Body", LoadSummaryEmail(userName))
         emailData.Add("Date", DateTime.Today.ToString("m"))
         'IntranetPortal.Core.EmailService.SendMail("Chris@gvs4u.com", "", "Task Summary on " & DateTime.Now, LoadSummaryEmail(userName), Nothing)
-        IntranetPortal.Core.EmailService.SendMail(emp.Email, "chris@gvs4u.com", "UserTaskSummary", emailData)
+        IntranetPortal.Core.EmailService.SendMail(emp.Email, "", "UserTaskSummary", emailData)
     End Sub
 
     Private Function LoadSummaryEmail(userName As String) As String

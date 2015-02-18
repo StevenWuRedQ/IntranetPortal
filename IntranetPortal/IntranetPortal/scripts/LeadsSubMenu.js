@@ -201,7 +201,7 @@ function OnLeadsCategoryClick(s, e) {
 
         if (e.item.name == "Reassign") {
             popupCtrReassignEmployeeListCtr.PerformCallback();
-            popupCtrReassignEmployeeListCtr.ShowAtElement(s.GetMainElement());
+            popupCtrReassignEmployeeListCtr.ShowAtElement(s.GetMainElement());         
         }
 
         if (e.item.name == "Upload") {
@@ -217,7 +217,7 @@ function OnLeadsCategoryClick(s, e) {
                 window.open(url, 'Upload Files', popup_params(640, 400)); //'Width=640px,Height=400px,top=' + centerTop + ",left=" + centerLeft);            
         }
 
-        if (e.item.name = "ViewFiles")
+        if (e.item.name == "ViewFiles")
         {           
             if (popupViewFiles) {
                 popupViewFiles.Show();

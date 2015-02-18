@@ -440,20 +440,20 @@
 
                 If context.APIOrders.Where(Function(order) order.BBLE = BBLE And order.Status <> APIOrder.OrderStatus.Complete).Count > 0 Then
                     Return True
-                Else
-                    Return False
                 End If
+
+                If Core.DataLoopRule.IsInUpdate(BBLE) Then
+                    Return True
+                End If
+
+                Return False
             End Using
         End Get
     End Property
 
-    Public ReadOnly Property IsRecycled As Boolean
-        Get
-            Using ctx As New Entities
-                Return ctx.LeadsActivityLogs.Where(Function(log) log.BBLE = BBLE).Count > 0
-            End Using
-        End Get
-    End Property
+
+    Public Property IsRecycled As Boolean
+
 
     Public ReadOnly Property UpdateInfo As String
         Get
