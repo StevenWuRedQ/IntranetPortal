@@ -106,14 +106,37 @@ Public Class EmailSummaryRule
         Dim emps = Employee.GetAllActiveEmps()
         Using client As New PortalService.CommonServiceClient
             For Each emp In emps
+
                 Try
-                    client.SendTaskSummaryEmail(emp)
+                    If HasTask(emp) Then
+                        client.SendTaskSummaryEmail(emp)
+                    End If
+
                 Catch ex As Exception
                     Log("Send Task Summary Email Error. Employee Name: " & emp, ex)
                 End Try
             Next
         End Using
     End Sub
+
+    Private Function HasTask(emp As String) As Boolean
+        Dim wls = WorkflowService.GetUserWorklist(emp)
+        If wls.Count > 0 Then
+            Return True
+        End If
+
+        Dim apois = IntranetPortal.UserAppointment.GetMyTodayAppointments(emp)
+        If apois.Count > 0 Then
+            Return True
+        End If
+
+        Dim followUps = IntranetPortal.Lead.GetUserTodayFollowUps(emp)
+        If followUps.Count > 0 Then
+            Return True
+        End If
+
+        Return False
+    End Function
 End Class
 
 Public Class LoopServiceRule
@@ -403,4 +426,16 @@ Public Class RecycleProcessRule
             End Try
         Next
     End Sub
+End Class
+
+Public Class RefreshDataRule
+    Inherits BaseRule
+
+    Dim rules As List(Of Core.DataLoopRule)
+    Public Overrides Sub Execute()
+        rules = IntranetPortal.Core.DataLoopRule.GetAllActiveRule
+
+      
+    End Sub
+
 End Class

@@ -5,20 +5,16 @@
         End Using
     End Function
 
-    Public Shared Sub AddRules(bblesToLoop As String(), loopType As DataLoopType, createBy As String)
-        Using ctx As New CoreEntities
-            For Each tmpBBLE In bblesToLoop
-                Dim rule As New DataLoopRule
-                rule.BBLE = tmpBBLE
-                rule.LoopType = loopType
-                rule.CreateBy = createBy
-                rule.CreateDate = DateTime.Now
-                rule.Status = RuleStatus.Active
-                ctx.DataLoopRules.Add(rule)
-            Next
+    Public Shared Function GetRefreshRule() As List(Of DataLoopRule)
+        Return Nothing
+    End Function
 
-            ctx.SaveChanges()
-        End Using
+    Public Shared Sub AddRules(bblesToLoop As String(), loopType As DataLoopType, createBy As String)
+        AddRules(bblesToLoop, loopType, createBy, RuleStatus.Active)
+    End Sub
+
+    Public Shared Sub AddRefreshRule(BBLE As String, loopType As DataLoopType, createBy As String)
+        AddRules(New String() {BBLE}, loopType, createBy, RuleStatus.Refresh)
     End Sub
 
     Public Shared Function IsInUpdate(bble As String) As Boolean
@@ -29,6 +25,22 @@
 
     Public Shared Sub AddRules(bble As String, loopType As DataLoopType, createby As String)
         AddRules(New String() {bble}, loopType, createby)
+    End Sub
+
+    Public Shared Sub AddRules(bblesToLoop As String(), loopType As DataLoopType, createBy As String, ruleStatus As RuleStatus)
+        Using ctx As New CoreEntities
+            For Each tmpBBLE In bblesToLoop
+                Dim rule As New DataLoopRule
+                rule.BBLE = tmpBBLE
+                rule.LoopType = loopType
+                rule.CreateBy = createBy
+                rule.CreateDate = DateTime.Now
+                rule.Status = ruleStatus
+                ctx.DataLoopRules.Add(rule)
+            Next
+
+            ctx.SaveChanges()
+        End Using
     End Sub
 
     Public Sub Complete()
@@ -53,6 +65,7 @@
         Active = 0
         Running = 1
         Completed = 2
+        Refresh = 3
     End Enum
 
     Enum DataLoopType
