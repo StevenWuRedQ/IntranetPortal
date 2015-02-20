@@ -9,7 +9,6 @@
     <title>Agent Portal (beta) - My Ideal Property</title>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <%--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />--%>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/normalize.min.css" />
@@ -347,14 +346,14 @@
                                                                 </tr>
                                                             </table>
                                                         </asp:Panel>
+                                                        <div style="overflow: auto">
+                                                            <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
+                                                        </div>
                                                     </dx:PopupControlContentControl>
                                                 </ContentCollection>
                                                 <ClientSideEvents EndCallback="function(s,e){s.ShowAtElement(txtSearchKeyClient.GetMainElement()); $('.tooltip-examples').tooltip(); }" />
                                             </dx:ASPxPopupControl>
                                             <%---------------------end---------------%>
-                                            <div style="overflow: auto">
-                                                <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
-                                            </div>
                                         </div>
                                     </div>
                                 </dx:SplitterContentControl>
@@ -422,11 +421,11 @@
             <table style="width: 100%">
                 <thead>
                     <tr>
-                        <td id="tdMsgTitle" style="font-weight:600; margin-bottom: 5px; font-size: 14px; cursor: pointer" onclick="PopupViewLead()"></td>
+                        <td id="tdMsgTitle" style="font-weight: 600; margin-bottom: 5px; font-size: 14px; cursor: pointer" onclick="PopupViewLead()"></td>
                     </tr>
                 </thead>
                 <tr style="vertical-align: top">
-                    <td id="tdMsgContent" onclick="PopupViewLead()" style="cursor:pointer"></td>
+                    <td id="tdMsgContent" onclick="PopupViewLead()" style="cursor: pointer"></td>
                 </tr>
                 <tr style="display: none">
                     <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
@@ -444,7 +443,7 @@
             </table>
         </div>
 
-        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMessagerControlClient" Width="460px" Height="350px"
+        <%--   <dx:ASPxPopupControl ClientInstanceName="ASPxPopupMessagerControlClient" Width="460px" Height="350px" 
             MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl2"
             Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -455,7 +454,7 @@
                 </div>
             </HeaderTemplate>
             <ContentCollection>
-                <dx:PopupControlContentControl runat="server">
+                <dx:PopupControlContentControl runat="server" Visible="false">
                     <dx:ASPxPageControl Width="100%" runat="server" ActiveTabIndex="0" TabSpacing="0px" EnableHierarchyRecreation="True" ShowTabs="false">
                         <TabPages>
                             <dx:TabPage Text="First" Name="tabStreet">
@@ -469,7 +468,7 @@
                 </dx:PopupControlContentControl>
             </ContentCollection>
             <ClientSideEvents Closing="function(){hook();}" />
-        </dx:ASPxPopupControl>
+        </dx:ASPxPopupControl>--%>
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupAwayControlClient" Width="800px" Height="400px"
             ID="ASPxPopupControl1" HeaderText="While You Were Away" Modal="true" CloseAction="CloseButton"
             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
