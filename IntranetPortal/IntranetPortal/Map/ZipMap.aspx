@@ -153,21 +153,21 @@
                 marker.setIcon(feature.properties.icon);
             });
             var z = zipMap;
-            //myLayer.setGeoJSON(geoJson);
-            var markers = new L.MarkerClusterGroup();
+            myLayer.setGeoJSON(geoJson);
+            //var markers = new L.MarkerClusterGroup();
 
-            for (var i = 0; i < LatLonData.length; i++) {
-                var a = LatLonData[i];
-                var title = a.PropertyAddress;
-                var marker = L.marker(new L.LatLng(a.Latitude, a.Longitude), {
-                    icon: L.mapbox.marker.icon({ 'marker-symbol': 'building', 'marker-color': '0044FF' }),
-                    title: title
-                });
-                marker.bindPopup(title);
-                markers.addLayer(marker);
-            }
+            //for (var i = 0; i < LatLonData.length; i++) {
+            //    var a = LatLonData[i];
+            //    var title = a.PropertyAddress;
+            //    var marker = L.marker(new L.LatLng(a.Latitude, a.Longitude), {
+            //        icon: L.mapbox.marker.icon({ 'marker-symbol': 'building', 'marker-color': '0044FF' }),
+            //        title: title
+            //    });
+            //    marker.bindPopup(title);
+            //    markers.addLayer(marker);
+            //}
 
-            map.addLayer(markers);
+            //map.addLayer(markers);
             //initMap();
         });
         function getCenter(array) {

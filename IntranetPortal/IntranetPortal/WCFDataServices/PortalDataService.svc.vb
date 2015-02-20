@@ -253,60 +253,63 @@ Public Class PortalDataService
     End Function
 
     Public Function UpdateOrderInfo(orderId As Integer, infoType As String, status As String) As Boolean
-        Using context As New Entities
+        Return APIOrder.UpdateOrderInfo(orderId, infoType, status)
 
-            Dim apiOrder = context.APIOrders.Where(Function(order) order.ApiOrderID = orderId).SingleOrDefault
 
-            If apiOrder IsNot Nothing Then
+        'Using context As New Entities
 
-                Select Case infoType
-                    Case "AcrisMtgrs"
-                        If status = "Task-Done" Then
-                            apiOrder.Acris = apiOrder.ItemStatus.Complete
-                        End If
+        '    Dim apiOrder = context.APIOrders.Where(Function(order) order.ApiOrderID = orderId).SingleOrDefault
 
-                    Case "ECB_Violations", "DOBPenalty"
-                        If status = "Task-Done" Then
-                            apiOrder.ECBViolation = apiOrder.ItemStatus.Complete
-                        End If
+        '    If apiOrder IsNot Nothing Then
 
-                    Case "PROP_TAX"
-                        If status = "Task-Done" Then
-                            apiOrder.TaxBill = apiOrder.ItemStatus.Complete
-                        End If
+        '        Select Case infoType
+        '            Case "AcrisMtgrs"
+        '                If status = "Task-Done" Then
+        '                    apiOrder.Acris = apiOrder.ItemStatus.Complete
+        '                End If
 
-                    Case "WATER_SEWER"
-                        If status = "Task-Done" Then
-                            apiOrder.WaterBill = apiOrder.ItemStatus.Complete
-                        End If
-                    Case "Zillow"
-                        If status = "Task-Done" Then
-                            apiOrder.Zillow = apiOrder.ItemStatus.Complete
-                        End If
-                    Case "ACRIS_LatestSale"
-                        If status = "Done" Then
-                            apiOrder.LatestSale = apiOrder.ItemStatus.Complete
-                        End If
-                End Select
+        '            Case "ECB_Violations", "DOBPenalty"
+        '                If status = "Task-Done" Then
+        '                    apiOrder.ECBViolation = apiOrder.ItemStatus.Complete
+        '                End If
 
-                Dim result As Boolean = (Not (apiOrder.Acris.HasValue AndAlso apiOrder.Acris = apiOrder.ItemStatus.Calling) And
-                                         Not (apiOrder.ECBViolation.HasValue AndAlso apiOrder.ECBViolation = apiOrder.ItemStatus.Calling) And
-                                              Not (apiOrder.TaxBill.HasValue AndAlso apiOrder.TaxBill = apiOrder.ItemStatus.Calling) And
-                                              Not (apiOrder.WaterBill.HasValue AndAlso apiOrder.WaterBill = apiOrder.ItemStatus.Calling) And
-                                              Not (apiOrder.Zillow.HasValue AndAlso apiOrder.Zillow = apiOrder.ItemStatus.Calling) And
-                                              Not (apiOrder.LatestSale.HasValue AndAlso apiOrder.LatestSale = apiOrder.ItemStatus.Calling))
+        '            Case "PROP_TAX"
+        '                If status = "Task-Done" Then
+        '                    apiOrder.TaxBill = apiOrder.ItemStatus.Complete
+        '                End If
 
-                If result Then
-                    apiOrder.Status = apiOrder.OrderStatus.Complete
-                Else
-                    apiOrder.Status = apiOrder.OrderStatus.PartialComplete
-                End If
+        '            Case "WATER_SEWER"
+        '                If status = "Task-Done" Then
+        '                    apiOrder.WaterBill = apiOrder.ItemStatus.Complete
+        '                End If
+        '            Case "Zillow"
+        '                If status = "Task-Done" Then
+        '                    apiOrder.Zillow = apiOrder.ItemStatus.Complete
+        '                End If
+        '            Case "ACRIS_LatestSale"
+        '                If status = "Done" Then
+        '                    apiOrder.LatestSale = apiOrder.ItemStatus.Complete
+        '                End If
+        '        End Select
 
-                context.SaveChanges()
-                Return True
-            End If
-        End Using
+        '        Dim result As Boolean = (Not (apiOrder.Acris.HasValue AndAlso apiOrder.Acris = apiOrder.ItemStatus.Calling) And
+        '                                 Not (apiOrder.ECBViolation.HasValue AndAlso apiOrder.ECBViolation = apiOrder.ItemStatus.Calling) And
+        '                                      Not (apiOrder.TaxBill.HasValue AndAlso apiOrder.TaxBill = apiOrder.ItemStatus.Calling) And
+        '                                      Not (apiOrder.WaterBill.HasValue AndAlso apiOrder.WaterBill = apiOrder.ItemStatus.Calling) And
+        '                                      Not (apiOrder.Zillow.HasValue AndAlso apiOrder.Zillow = apiOrder.ItemStatus.Calling) And
+        '                                      Not (apiOrder.LatestSale.HasValue AndAlso apiOrder.LatestSale = apiOrder.ItemStatus.Calling))
 
-        Return False
+        '        If result Then
+        '            apiOrder.Status = apiOrder.OrderStatus.Complete
+        '        Else
+        '            apiOrder.Status = apiOrder.OrderStatus.PartialComplete
+        '        End If
+
+        '        context.SaveChanges()
+        '        Return True
+        '    End If
+        'End Using
+
+        'Return False
     End Function
 End Class

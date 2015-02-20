@@ -81,45 +81,52 @@ Partial Public Class Employee
     End Property
 
     Public Shared Function HasControlLeads(name As String, bble As String) As Boolean
-        Using context As New Entities
-            If Roles.IsUserInRole(name, "Admin") Then
-                Return True
-            End If
-
-            If Roles.IsUserInRole(name, "Title-Users") Then
-                Return True
-            End If
-
-            Dim lead = context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
-
-            If lead IsNot Nothing Then
-                Dim owner = lead.EmployeeName
-
-                If owner = name Then
-                    If lead.Status <> LeadStatus.MgrApproval And lead.Status <> LeadStatus.MgrApprovalInWf Then
-                        Return True
-                    Else
-                        Return False
-                    End If
-                End If
-
-                If GetManagedEmployees(name).Contains(owner) Then
-                    Return True
-                End If
-
-                For Each rl In Roles.GetRolesForUser(name)
-                    If rl.StartsWith("OfficeManager") Then
-                        Dim dept = rl.Split("-")(1)
-
-                        If GetDeptUsers(dept).Contains(owner) Then
-                            Return True
-                        End If
-                    End If
-                Next
-            End If
-
+        Dim ld = Lead.GetInstance(bble)
+        If ld Is Nothing Then
             Return False
-        End Using
+        End If
+
+        Return ld.IsViewable(name)
+
+        'Using context As New Entities
+        '    If Roles.IsUserInRole(name, "Admin") Then
+        '        Return True
+        '    End If
+
+        '    If Roles.IsUserInRole(name, "Title-Users") Then
+        '        Return True
+        '    End If
+
+        '    Dim lead = context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
+
+        '    If lead IsNot Nothing Then
+        '        Dim owner = lead.EmployeeName
+
+        '        If owner = name Then
+        '            If lead.Status <> LeadStatus.MgrApproval And lead.Status <> LeadStatus.MgrApprovalInWf Then
+        '                Return True
+        '            Else
+        '                Return False
+        '            End If
+        '        End If
+
+        '        If GetManagedEmployees(name).Contains(owner) Then
+        '            Return True
+        '        End If
+
+        '        For Each rl In Roles.GetRolesForUser(name)
+        '            If rl.StartsWith("OfficeManager") Then
+        '                Dim dept = rl.Split("-")(1)
+
+        '                If GetDeptUsers(dept).Contains(owner) Then
+        '                    Return True
+        '                End If
+        '            End If
+        '        Next
+        '    End If
+
+        '    Return False
+        'End Using
     End Function
 
     Public Shared Function GetMyEmployees(userName As String) As List(Of Employee)
@@ -315,7 +322,7 @@ Partial Public Class Employee
         Return False
     End Function
 
-    Public Shared Function IsManager(empName As String)
+    Public Shared Function IsManager(empName As String) As Boolean
         Dim rs = Roles.GetRolesForUser(empName)
 
         If rs.Contains("Admin") Then

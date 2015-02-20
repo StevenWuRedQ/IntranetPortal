@@ -47,8 +47,16 @@
                 var top = (screen.height / 2) - (930 / 2);
                 window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
             }
+
             function GoToLead(bble) {
-                window.location.href = "/default.aspx?t=search&key=" + encodeURIComponent(txtSearchKeyClient.GetText()) + "&id=" + bble;
+                var iframe = document.getElementById("contentUrlPane");
+                debugger;
+                if (iframe && iframe != null) {
+                    iframe.src = "/LeadAgent.aspx?c=Search&key=" + encodeURIComponent(txtSearchKeyClient.GetText()) + "&id=" + bble;
+                }
+                else {
+                    window.location.href = "/default.aspx?t=search&key=" + encodeURIComponent(txtSearchKeyClient.GetText()) + "&id=" + bble;
+                }
             }
 
             function endsWith(str, suffix) {
@@ -118,7 +126,6 @@
                                                                     btnSearchClient.DoClick();                                                                                                                                     
                                                                 }                                                               
                                                             }" />
-
                                                                 <Border BorderStyle="None"></Border>
                                                             </dx:ASPxTextBox>
                                                         </td>
@@ -132,20 +139,14 @@
                                                                 <%--<Image Url="/images/search_btn.png"></Image>--%>
                                                                 <ClientSideEvents Click="function(s,e){
                                                                     ASPxPopupSearchPanel.PerformCallback(txtSearchKeyClient.GetText());
-                                                             ASPxPopupSearchPanel.ShowAtElement(txtSearchKeyClient.GetMainElement());
-                                                               gridSearchLeads.PerformCallback();                                                           
+                                                                    ASPxPopupSearchPanel.ShowAtElement(txtSearchKeyClient.GetMainElement());                                                            
                                                             }" />
 
                                                                 <%--<Image Url="/images/search_btn.png"></Image>--%>
 
                                                                 <HoverStyle BackColor="Transparent"></HoverStyle>
-
                                                                 <BackgroundImage ImageUrl="/images/search_btn.png" Repeat="NoRepeat"></BackgroundImage>
-
-
                                                                 <Border BorderStyle="None"></Border>
-
-
                                                             </dx:ASPxButton>
                                                         </td>
                                                         <%--replace login menu with a image by steven--%>
@@ -291,11 +292,10 @@
                                                                         <%--add data row height and font color  by steven--%>
                                                                         <div class="search_pop_data_s">
                                                                             <div href="#" class="pop_search_data"
-                                                                                onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"), StringComparer.OrdinalIgnoreCase) %>'>
+                                                                                onclick='<%# String.Format("ShowSearchLeadsInfo(""{0}"")", Eval("BBLE"))%>' runat="server" visible='<%# Eval("Viewable") %>'>
                                                                                 <%# Eval("LeadsName")%>
                                                                             </div>
-                                                                            <div class="pop_search_data"
-                                                                                runat="server" visible='<%# Not EmpUnderManaged.Contains(Eval("EmployeeName"))%>'>
+                                                                            <div class="pop_search_data" runat="server" visible='<%# Not  Eval("Viewable")%>'>
                                                                                 <%# Eval("LeadsName") %>
                                                                             </div>
                                                                         </div>
@@ -310,17 +310,13 @@
                                                                     <CellStyle HorizontalAlign="left"></CellStyle>
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewDataColumn FieldName="EmployeeName" Caption="EMPLOYEE NAME" VisibleIndex="4" Width="150px" CellStyle-HorizontalAlign="left">
-                                                                    <GroupRowTemplate>
-                                                                        Employee Name: <%# Container.GroupText & Container.SummaryText.Replace("Count=", "")%>
-                                                                    </GroupRowTemplate>
-                                                                    <CellStyle HorizontalAlign="left"></CellStyle>
                                                                 </dx:GridViewDataColumn>
                                                                 <dx:GridViewDataColumn Width="35px" VisibleIndex="5">
                                                                     <DataItemTemplate>
                                                                         <%--use font image to change the image--%>
-                                                                        <i class="fa fa-external-link-square tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To Lead" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"), StringComparer.OrdinalIgnoreCase) or SharedBBLEs.Contains(Eval("BBLE"))%>'></i>
+                                                                        <i class="fa fa-external-link-square tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To Lead" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# Eval("Viewable")%>'></i>
                                                                         <span style="width: 10px">&nbsp;&nbsp;</span>
-                                                                        <i class="fa fa-list-alt tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"), StringComparer.OrdinalIgnoreCase) or SharedBBLEs.Contains(Eval("BBLE"))%>'></i>
+                                                                        <i class="fa fa-list-alt tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# Eval("Viewable")%>'></i>
                                                                         <%--change image to beaty style by steven--%>
                                                                         <%--<img src="~/images/search_pop_go_leads.png" title="Go To Lead" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />
                                                                         <img src="~/images/search_pop_menu.png" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />--%>
@@ -359,7 +355,6 @@
                                             <div style="overflow: auto">
                                                 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
                                             </div>
-
                                         </div>
                                     </div>
                                 </dx:SplitterContentControl>
@@ -401,7 +396,7 @@
 
             .message .msgtitle {
                 margin: 0 0 5px 0;
-                font-size:14px;
+                font-size: 14px;
             }
 
             .message p {
@@ -420,19 +415,20 @@
         </style>
 
         <div id="divMsgTest" class="info message" style="bottom: -300px; right: 25px">
-            <div class="msgtitle"> <i class="fa fa-envelope with_circle" style="color:white; font-size:14px; width:30px; height:30px; line-height:30px; text-align:center"></i>&nbsp; New Message
-                <span style="float:right; line-height:30px;font-weight:600; cursor:pointer" onclick="ReadMsg()">X</span>
+            <div class="msgtitle">
+                <i class="fa fa-envelope with_circle" style="color: white; font-size: 14px; width: 30px; height: 30px; line-height: 30px; text-align: center"></i>&nbsp; New Message
+                <span style="float: right; line-height: 30px; font-weight: 600; cursor: pointer" onclick="ReadMsg()">X</span>
             </div>
             <table style="width: 100%">
                 <thead>
                     <tr>
-                        <td id="tdMsgTitle" style="font-weight: bold; margin-bottom: 5px; font-size: 14px; cursor:pointer" onclick="PopupViewLead()"></td>
+                        <td id="tdMsgTitle" style="font-weight:600; margin-bottom: 5px; font-size: 14px; cursor: pointer" onclick="PopupViewLead()"></td>
                     </tr>
                 </thead>
                 <tr style="vertical-align: top">
-                    <td id="tdMsgContent"></td>
+                    <td id="tdMsgContent" onclick="PopupViewLead()" style="cursor:pointer"></td>
                 </tr>
-                <tr style="display:none">
+                <tr style="display: none">
                     <td style="color: #666666; font-family: Tahoma; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
                         <dx:ASPxButton ID="ASPxButton2" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
                             <ClientSideEvents Click="function(){

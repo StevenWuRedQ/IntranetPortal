@@ -21,31 +21,4 @@ Partial Public Class Default2
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents NavMenu As Global.IntranetPortal.NavMenu
-
-    '''<summary>
-    '''agentTreeCallbackPanel control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents agentTreeCallbackPanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
-
-    '''<summary>
-    '''AgentTree control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents AgentTree As Global.DevExpress.Web.ASPxTreeView.ASPxTreeView
-
-    '''<summary>
-    '''splitter control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents splitter As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
 End Class

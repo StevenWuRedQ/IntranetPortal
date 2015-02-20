@@ -155,7 +155,22 @@ function ReadMsg() {
 
 function PopupViewLead() {
     if (popupBBLE != null) {
-        ShowSearchLeadsInfo(popupBBLE);
+
+        var iframe = document.getElementById("contentUrlPane");
+        if (iframe && iframe != null)
+        {
+            var frmDocument = (iframe.contentWindow || iframe.contentDocument);
+            if(frmDocument.ReloadPage)
+            {
+                debugger;
+                if (frmDocument.ReloadPage(popupBBLE)) {
+                    ReadMsg()
+                    return;
+                }
+            }
+        }
+
+        ShowSearchLeadsInfo(popupBBLE);        
         ReadMsg();
     }
 }

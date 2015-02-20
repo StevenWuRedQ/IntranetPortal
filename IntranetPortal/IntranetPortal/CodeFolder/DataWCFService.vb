@@ -324,8 +324,11 @@ Public Class DataWCFService
                 Else
                     li = GetFullAssessInfo(bble, li)
                 End If
-
                 context.SaveChanges()
+
+                GetLatestSalesInfo(bble)
+
+
 
                 Return li
             End Using
@@ -525,6 +528,7 @@ Public Class DataWCFService
 
         If TLO Then
             apiOrder.TLO = apiOrder.ItemStatus.Calling
+            needWait = True
         Else
             apiOrder.TLO = apiOrder.ItemStatus.NonCall
         End If
@@ -677,7 +681,7 @@ Public Class DataWCFService
 
     Shared Sub SaveHomeOwner(bble As String, name As String, add1 As String, add2 As String, city As String, state As String, country As String, zip As String, context As Entities)
         Try
-            Dim localOwner = context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Name = name And ho.Active = True).SingleOrDefault
+            Dim localOwner = context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Name = name And ho.Active = True).FirstOrDefault
 
             If localOwner IsNot Nothing Then
                 localOwner.Name = name
@@ -768,35 +772,88 @@ Public Class DataWCFService
                 End If
 
                 Context.SaveChanges()
-                Using client As New DataAPI.WCFMacrosClient
 
-                    If needCallService Then
-                        Try
-                            client.GetPropdata(bble,
+
+                If needCallService Then
+                    Try
+                        If HttpContext.Current IsNot Nothing Then
+                            Dim callback = Sub()
+                                               Using client As New DataAPI.WCFMacrosClient
+                                                   client.GetPropdata(bble,
+                                                                  apiOrder.ApiOrderID,
+                                                                  apiOrder.Acris = apiOrder.ItemStatus.Calling,
+                                                                  apiOrder.TaxBill = apiOrder.ItemStatus.Calling,
+                                                                  apiOrder.ECBViolation = apiOrder.ItemStatus.Calling,
+                                                                  apiOrder.WaterBill = apiOrder.ItemStatus.Calling,
+                                                                  apiOrder.Zillow = apiOrder.ItemStatus.Calling, False)
+
+                                                   Try
+                                                       client.Get_Servicer(apiOrder.ApiOrderID, bble)
+                                                   Catch ex As Exception
+
+                                                   End Try
+                                               End Using
+                                           End Sub
+
+                            System.Threading.ThreadPool.QueueUserWorkItem(callback)
+                        Else
+                            Using client As New DataAPI.WCFMacrosClient
+                                client.GetPropdata(bble,
                                                apiOrder.ApiOrderID,
                                                apiOrder.Acris = apiOrder.ItemStatus.Calling,
                                                apiOrder.TaxBill = apiOrder.ItemStatus.Calling,
                                                apiOrder.ECBViolation = apiOrder.ItemStatus.Calling,
                                                apiOrder.WaterBill = apiOrder.ItemStatus.Calling,
-                                                apiOrder.Zillow = apiOrder.ItemStatus.Calling, False)
-                            Try
-                                client.Get_Servicer(apiOrder.ApiOrderID, bble)
-                            Catch ex As Exception
+                                               apiOrder.Zillow = apiOrder.ItemStatus.Calling, False)
 
-                            End Try
-                        Catch ex As System.TimeoutException
-                            Throw New Exception("Time is out. The data services is busy now. Please try later. Data Service: GetPropdata " & ex.Message)
-                        End Try
+                                Try
+                                    client.Get_Servicer(apiOrder.ApiOrderID, bble)
+                                Catch ex As Exception
 
-                    End If
+                                End Try
+                            End Using
+                        End If
+                    Catch ex As System.TimeoutException
+                        Throw New Exception("Time is out. The data services is busy now. Please try later. Data Service: GetPropdata " & ex.Message)
+                    End Try
 
-                    'Update Homeownerinfo
-                    If apiOrder.TLO = apiOrder.ItemStatus.Calling Then
+                End If
+
+                'Update HomeOwnerInfo
+                'check if current request is sent by portal user
+                If apiOrder.TLO = apiOrder.ItemStatus.Calling Then
+                    If HttpContext.Current IsNot Nothing Then
+
                         'client.Acris_Get_LatestSale(apiOrder.ApiOrderID, bble)
                         'Dim ldinfo = LeadsInfo.GetInstance(apiOrder.BBLE)
-                        Return UpdateHomeOwner(bble, apiOrder.ApiOrderID)
+                        Dim stateObj = New With {
+                              .BBLE = bble,
+                              .OrderId = apiOrder.ApiOrderID,
+                              .Context = HttpContext.Current
+                              }
+
+                        Dim callBack = Sub(state)
+                                           HttpContext.Current = state.Context
+                                           Try
+                                               UpdateHomeOwner(bble, state.OrderId)
+                                               'UserMessage.AddNewMessage(GetCurrentIdentityName, "Refresh", "HomeOwner info is ready. BBLE: " & state.BBLE, state.BBLE)
+                                           Catch ex As Exception
+
+                                               UserMessage.AddNewMessage(GetCurrentIdentityName, "Error", "Error happened on refresh. Message: " & ex.Message, state.BBLE)
+                                           Finally
+                                               UpdateHomeOwnerApi(state.OrderId)
+                                           End Try
+                                       End Sub
+
+                        System.Threading.ThreadPool.QueueUserWorkItem(callBack, stateObj)
+                        Return True
+                    Else
+                        'Sent by Data loop service
+                        Dim result = UpdateHomeOwner(bble, apiOrder.ApiOrderID)
+                        UpdateHomeOwnerApi(apiOrder.ApiOrderID)
+                        Return result
                     End If
-                End Using
+                End If
                 Return True
             End Using
 
@@ -884,9 +941,19 @@ Public Class DataWCFService
         End Try
     End Function
 
+    Private Shared Sub UpdateHomeOwnerApi(orderId As Integer)
+        APIOrder.UpdateOrderInfo(orderId, "TLO", "Done")
+    End Sub
+
     Public Shared Sub TestNewAPI()
         Using client As New DataAPI.WCFMacrosClient
             'Dim table = client.AB_GetJugments("Test123", "Manhattan", "0000-00-00", "0000-00-00", "234", "1")
         End Using
     End Sub
+
+    Private Shared Function GetServiceClient()
+        Return New DataAPI.WCFMacrosClient()
+    End Function
+
+    Public Shared Property ServiceAddress
 End Class

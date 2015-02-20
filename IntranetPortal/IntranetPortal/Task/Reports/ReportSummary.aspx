@@ -47,11 +47,11 @@
                         </dx:ASPxButton>
                         <dx:ASPxGridView ID="ASPxGridView1" ClientInstanceName="gridProcInst" runat="server" KeyFieldName="ProcessName" Theme="Moderno" OnDataBinding="ASPxGridView1_DataBinding">
                             <Columns>
-                                <dx:GridViewDataColumn FieldName="ProcessName" VisibleIndex="0" >
+                                <dx:GridViewDataColumn FieldName="ProcessName" VisibleIndex="0">
                                     <DataItemTemplate>
-                                        <a href="#" style="cursor:pointer" onclick="LoadProcessList(this)"><%# Eval("ProcessName")%></a>
+                                        <a href="#" style="cursor: pointer" onclick="LoadProcessList(this)"><%# Eval("ProcessName")%></a>
                                     </DataItemTemplate>
-                                    </dx:GridViewDataColumn>
+                                </dx:GridViewDataColumn>
                                 <dx:GridViewDataColumn FieldName="Active" VisibleIndex="1" />
                                 <dx:GridViewDataColumn FieldName="Completed" VisibleIndex="2" />
                                 <dx:GridViewDataColumn FieldName="Terminated" VisibleIndex="3" />
@@ -68,7 +68,7 @@
             </dx:SplitterPane>
         </Panes>
     </dx:ASPxSplitter>
-    <table style="width: 100%; margin: 10px; display:none">
+    <table style="width: 100%; margin: 10px; display: none">
         <tr>
             <td style="width: 50%; vertical-align: top"></td>
             <td style="width: 50%; vertical-align: top">

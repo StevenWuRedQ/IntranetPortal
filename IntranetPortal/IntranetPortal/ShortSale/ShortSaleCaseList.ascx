@@ -120,6 +120,7 @@
     }
 
     function AddScrollbarOnLeadsList() {
+        return;
         $("#leads_list_left .dxgvCSD").each(function (ind) {
             var is_list = $(this).parents("#leads_list_left").length > 0;
 
@@ -256,7 +257,7 @@
             </Columns>
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
                 EnableRowHotTrack="True" ColumnResizeMode="NextColumn" />
-            <SettingsPager Mode="EndlessPaging" PageSize="10"></SettingsPager>
+            <SettingsPager Mode="EndlessPaging" PageSize="20"></SettingsPager>
             <Settings ShowColumnHeaders="False" VerticalScrollableHeight="767"></Settings>
             <Styles>
                 <Table Border-BorderStyle="None">

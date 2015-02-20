@@ -32,7 +32,7 @@ Public Class OriginatedListControl
     End Sub
 
     Protected Sub gridProcess_DataBinding(sender As Object, e As EventArgs)
-        If gridProcess.DataSource Is Nothing Then
+        If gridProcess.DataSource Is Nothing And gridProcess.IsCallback Then
             gridProcess.DataSource = GetDataSource()
         End If
     End Sub

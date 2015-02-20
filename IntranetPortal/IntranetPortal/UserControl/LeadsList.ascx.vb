@@ -670,7 +670,7 @@ Public Class LeadsList
     End Sub
 
     Protected Sub gridLeads_DataBinding(sender As Object, e As EventArgs)
-        If gridLeads.DataSource Is Nothing Then
+        If gridLeads.DataSource Is Nothing AndAlso gridLeads.IsCallback Then
 
             If Not String.IsNullOrEmpty(Request.QueryString("o")) Then
                 LeadsListView = ControlView.OfficeView

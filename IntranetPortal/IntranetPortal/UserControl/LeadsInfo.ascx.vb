@@ -1,4 +1,5 @@
 ﻿Imports DevExpress.Web.ASPxEditors
+Imports System.Threading
 
 Public Class LeadsInfo1
     Inherits System.Web.UI.UserControl
@@ -304,7 +305,7 @@ Public Class LeadsInfo1
 
             'Appointment
             If e.Parameter.StartsWith(9) Then
-           
+
             End If
 
             'Delete Lead
@@ -437,7 +438,9 @@ Public Class LeadsInfo1
 
             If params.Length = 3 Then
                 Dim type = params(2)
+
                 RefreshBBLE(bble, type)
+                'AsynRefreshBBLE(bble, type)
             End If
         Else
             bble = e.Parameter
@@ -456,28 +459,35 @@ Public Class LeadsInfo1
         Return
     End Sub
 
-    Sub RefreshBBLE(bble As String, type As String)
+    Sub AsynRefreshBBLE(bble As Object, type As String)
 
+
+       
+
+        'System.Threading.ThreadPool.QueueUserWorkItem(callBack, stateObj)
+    End Sub
+
+    Sub RefreshBBLE(bble As String, type As String)
         Dim comments = ""
         Select Case type
             Case "All"
                 comments = String.Format("All leads info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
-                'DataWCFService.UpdateLeadInfo(bble, True)
-                Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, HttpContext.Current.User.Identity.Name)
+                DataWCFService.UpdateLeadInfo(bble, True)
+                'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, HttpContext.Current.User.Identity.Name)
 
             Case "Assessment"
                 comments = String.Format("General property info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
                 DataWCFService.UpdateAssessInfo(bble)
             Case "PropData"
                 comments = String.Format("Mortgage and Violations is refreshed by {0}", HttpContext.Current.User.Identity.Name)
-                Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.Mortgage, HttpContext.Current.User.Identity.Name)
-                'DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, True, False)
+                'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.Mortgage, HttpContext.Current.User.Identity.Name)
+                DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, True, False)
             Case "TLO"
                 comments = String.Format("Home Owner info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
-                Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.HomeOwner, HttpContext.Current.User.Identity.Name)
-                'If Not DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
-                '    Throw New Exception("This Lead didn't have owner info in our database.")
-                'End If
+                'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.HomeOwner, HttpContext.Current.User.Identity.Name)
+                If Not DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
+                    Throw New Exception("This Lead didn't have owner info in our database.")
+                End If
             Case "ZEstimate"
                 comments = String.Format("ZEstimate info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
                 If Not DataWCFService.GetZillowValue(bble) Then
@@ -485,7 +495,6 @@ Public Class LeadsInfo1
                 End If
             Case "JudgmentSearch"
                 comments = String.Format("Judgement Search info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
-
         End Select
 
         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString)

@@ -166,6 +166,17 @@
         }
     }
 
+    function ReloadPage(bbleToLoad)
+    {
+        if (bbleToLoad == leadsInfoBBLE)
+        {
+            ContentCallbackPanel.PerformCallback(bbleToLoad);
+            return true;
+        }
+
+        return false;
+    }
+
     function PrintLogInfo() {
         if (leadsInfoBBLE != null) {
             var url = '/ShowReport.aspx?id=' + leadsInfoBBLE + "&t=log";

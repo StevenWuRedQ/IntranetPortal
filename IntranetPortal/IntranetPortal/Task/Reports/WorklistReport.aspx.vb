@@ -3,6 +3,7 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not Page.IsPostBack Then
+            BindData()
             GridWorklist.DataBind()
         End If
     End Sub
@@ -20,8 +21,12 @@
     End Sub
 
     Protected Sub GridWorklist_DataBinding(sender As Object, e As EventArgs)
-        If GridWorklist.DataSource Is Nothing Then
+        If GridWorklist.DataSource Is Nothing AndAlso (GridWorklist.IsCallback) Then
             BindData()
         End If
+    End Sub
+
+    Protected Sub Unnamed_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+
     End Sub
 End Class

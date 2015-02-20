@@ -21,6 +21,7 @@ Public Class Root
             If _empUnderMgred Is Nothing Then
 
                 If Page.User.IsInRole("Admin") Or Page.User.IsInRole("Title-Users") Then
+                    IsAdmin = True
                     _empUnderMgred = Employee.GetAllEmps()
                 Else
                     Dim emps = Employee.GetManagedEmployees(Page.User.Identity.Name).ToList
@@ -45,6 +46,23 @@ Public Class Root
         End Get
     End Property
 
+    Public Function IsViewable(userName As String, bble As String)
+        If EmpUnderManaged.Contains(userName, StringComparer.OrdinalIgnoreCase) Then
+            Return True
+        End If
+
+        If IsAdmin Then
+            Return True
+        End If
+
+        If SharedBBLEs.Contains(bble) Then
+            Return True
+        End If
+
+        Return False
+    End Function
+
+    Protected IsAdmin As Boolean
 
     Public Function HasControl(bble As String)
         Return Employee.HasControlLeads(Page.User.Identity.Name, bble)

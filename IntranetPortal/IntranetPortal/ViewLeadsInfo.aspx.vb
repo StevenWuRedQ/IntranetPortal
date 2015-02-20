@@ -38,44 +38,47 @@
 
             If procInst IsNot Nothing Then
                 Dim bble = procInst.GetDataFieldValue("BBLE")
-                If Not Employee.HasControlLeads(User.Identity.Name, bble) Then
-                    Response.Clear()
-                    Response.Write("You are not allowed to view this lead.")
-                    Response.End()
-                    Return
-                End If
-
-                If procInst.ProcessName = "NewLeadsRequest" Then
-                    Dim result = procInst.GetDataFieldValue("Result")
-
-                    If result = "Decline" Then
-                        Response.Clear()
-                        Response.Write("This new leads is declined.")
-                        Response.End()
-                        Return
-                    End If
-
-                End If
-
-                If Not String.IsNullOrEmpty(bble) Then
-                    'check if this leads is waiting manager approval
-                    Dim ld = IntranetPortal.Lead.GetInstance(bble)
-                    If ld.Status = IntranetPortal.LeadStatus.MgrApprovalInWf Then
-                        Response.Clear()
-                        Response.Write("This leads is pending for manager approval. Please wait.")
-                        Response.End()
-                        Return
-                    End If
-
+                If bble IsNot Nothing AndAlso String.IsNullOrEmpty(bble) Then
                     If Not Employee.HasControlLeads(User.Identity.Name, bble) Then
                         Response.Clear()
-                        Response.Write("You are not allowed to view this lead for now.")
+                        Response.Write("You are not allowed to view this lead.")
                         Response.End()
                         Return
                     End If
 
-                    LoadData(bble)
+                    If procInst.ProcessName = "NewLeadsRequest" Then
+                        Dim result = procInst.GetDataFieldValue("Result")
+
+                        If result = "Decline" Then
+                            Response.Clear()
+                            Response.Write("This new leads is declined.")
+                            Response.End()
+                            Return
+                        End If
+
+                    End If
+
+                    If Not String.IsNullOrEmpty(bble) Then
+                        'check if this leads is waiting manager approval
+                        Dim ld = IntranetPortal.Lead.GetInstance(bble)
+                        If ld.Status = IntranetPortal.LeadStatus.MgrApprovalInWf Then
+                            Response.Clear()
+                            Response.Write("This leads is pending for manager approval. Please wait.")
+                            Response.End()
+                            Return
+                        End If
+
+                        If Not Employee.HasControlLeads(User.Identity.Name, bble) Then
+                            Response.Clear()
+                            Response.Write("You are not allowed to view this lead for now.")
+                            Response.End()
+                            Return
+                        End If
+
+                        LoadData(bble)
+                    End If
                 End If
+
             End If
         End If
     End Sub

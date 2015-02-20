@@ -47,6 +47,63 @@ Partial Public Class Lead
         End Get
     End Property
 
+    Private _viewable As Boolean? = Nothing
+    Public ReadOnly Property Viewable As Boolean
+        Get
+            If _viewable.HasValue Then
+                Return _viewable.Value
+            End If
+
+            If HttpContext.Current IsNot Nothing Then
+                _viewable = IsViewable(HttpContext.Current.User.Identity.Name)
+                Return _viewable
+            End If
+
+            _viewable = False
+            Return _viewable
+        End Get
+    End Property
+
+    Friend Function IsViewable(name As String) As Boolean
+        If Roles.IsUserInRole(name, "Admin") Then
+            Return True
+        End If
+
+        If Roles.IsUserInRole(name, "Title-Users") Then
+            Return True
+        End If
+
+        Dim owner = EmployeeName
+
+        If owner = name Then
+            If Status <> LeadStatus.MgrApproval And Status <> LeadStatus.MgrApprovalInWf Then
+                Return True
+            Else
+                Return False
+            End If
+        End If
+
+        If IntranetPortal.Employee.GetManagedEmployees(name).Contains(owner) Then
+            Return True
+        End If
+
+        For Each rl In Roles.GetRolesForUser(name)
+            If rl.StartsWith("OfficeManager") Then
+                Dim dept = rl.Split("-")(1)
+
+                If IntranetPortal.Employee.GetDeptUsers(dept).Contains(owner) Then
+                    Return True
+                End If
+            End If
+        Next
+
+        If SharedUsers.Contains(name) Then
+            Return True
+        End If
+
+        Return False
+    End Function
+
     Public Shared Function UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime) As Boolean
         Using Context As New Entities
             Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).FirstOrDefault
@@ -137,6 +194,14 @@ Partial Public Class Lead
         Dim results = (From ld In ctx.Leads Where ld.Status = LeadStatus.DeadEnd).ToList
         Return results
     End Function
+
+    Public ReadOnly Property SharedUsers As List(Of String)
+        Get
+            Using ctx As New Entities
+                Return ctx.SharedLeads.Where(Function(s) s.BBLE = BBLE).Select(Function(s) s.UserName).ToList
+            End Using
+        End Get
+    End Property
 
     Public Sub UpdateAssignDate()
         Using ctx As New Entities
@@ -256,7 +321,7 @@ Partial Public Class Lead
             End Using
         End Get
     End Property
-    
+
     Enum DeadReasonEnum
         <Description("Deed Recorded with Other Party")>
         DeadRecord = 1
