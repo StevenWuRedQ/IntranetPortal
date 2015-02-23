@@ -29,12 +29,10 @@ Public Class LeadsList
                 Dim leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
                 gridLeads.DataSource = leads
                 gridLeads.DataBind()
-
             Else
                 Dim leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
                 gridLeads.DataSource = leads
                 gridLeads.DataBind()
-
             End If
         End Using
 

@@ -120,9 +120,9 @@
             <table width="100%" bgcolor="#234b60">
                 <tr>
                     <td style="padding-top: 20px; padding-left: 40px; height: 115px;">
-                        <img style="width: 60px; height: 80px;" alt="logo" src="http://portal.myidealprop.com/Images/logo.png" />
+                        <img alt="logo" src="http://portal.myidealprop.com/Images/logo@2x.png" />
                     </td>
-                    <td width="242" style="padding-right: 40px; padding-top: 34px">
+                    <td width="220" style="padding-right: 20px; padding-top: 34px">
                         <table width="100%">
                             <tr>
                                 <td>
@@ -169,7 +169,6 @@
                                     <span class="email_title">Today's Appointment</span>
                                     <asp:Repeater runat="server" ID="rptAppointments" OnItemDataBound="rptAppointments_ItemDataBound">
                                         <HeaderTemplate>
-                                            <br />
                                             <br />
                                             <table width="100%">
                                         </HeaderTemplate>
@@ -222,7 +221,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding: 0px 30px; border-bottom: 2px solid #eee; padding-bottom: 30px;">
+                                <td style="padding: 10px 30px; border-bottom: 2px solid #eee; padding-bottom: 30px;">
                                     <span class="email_title">Today's FollowUp</span>&nbsp&nbsp;<span class="index_bullet" style='<%= if(followUpCount = 0, "display:none", "") %>'>(<%# followUpCount%>)</span>
                                     <asp:Repeater runat="server" ID="rptFollowUp" OnItemDataBound="rptFollowUp_ItemDataBound">
                                         <HeaderTemplate>
@@ -256,7 +255,7 @@
                             <asp:Repeater runat="server" ID="rptWorklist" OnItemDataBound="rptWorklist_ItemDataBound">
                                 <ItemTemplate>
                                     <tr>
-                                        <td style="padding: 0px 30px; border-bottom: 2px solid #eee; padding-bottom: 30px;">
+                                        <td style="padding: 10px 30px; border-bottom: 2px solid #eee; padding-bottom: 30px;">
                                             <span class="email_title"><%# Eval("ProcSchemeDisplayName")%></span> &nbsp;&nbsp;<span class="index_bullet">(<%# Eval("Count")%>)</span>
                                             <asp:Repeater runat="server" ID="rptWorklistItem">
                                                 <HeaderTemplate>
@@ -329,7 +328,6 @@
                         </table>
                         <div>
                         </div>
-
                     </td>
                 </tr>
             </table>
