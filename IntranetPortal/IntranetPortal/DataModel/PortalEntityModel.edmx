@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agent_Properties">
           <Key>
             <PropertyRef Name="ID" />
@@ -628,10 +628,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.LatLon_View' does not have a pr
           <Key>
             <PropertyRef Name="BBLE" />
           </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="Latitude" Type="float" />
           <Property Name="Longitude" Type="float" />
           <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
-          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -650,6 +650,33 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <Property Name="LastUpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="LastUpdateDate" Type="datetime" />
           <Property Name="LastUpdateComments" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="LeadsAssignView">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="PropertyClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="LotDem" Type="nvarchar" MaxLength="50" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="StreetName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NeighName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NYCSqft" Type="float" />
+          <Property Name="UnitNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="C1stServicer" Type="nvarchar" MaxLength="500" />
+          <Property Name="Recycle" Type="int" />
+          <Property Name="C1stMotgrAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="C2ndMotgrAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="C3rdMortgrAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="70" />
+          <Property Name="CoOwner" Type="nvarchar" MaxLength="70" />
+          <Property Name="Type" Type="int" />
         </EntityType>
         <Function Name="UpdateEmployeeName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="OldName" Type="nvarchar" Mode="In" />
@@ -703,10 +730,10 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           </EntitySet>
           <EntitySet Name="LatLon_View" EntityType="Self.LatLon_View" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
+    [LatLon_View].[BBLE] AS [BBLE], 
     [LatLon_View].[Latitude] AS [Latitude], 
     [LatLon_View].[Longitude] AS [Longitude], 
-    [LatLon_View].[PropertyAddress] AS [PropertyAddress], 
-    [LatLon_View].[BBLE] AS [BBLE]
+    [LatLon_View].[PropertyAddress] AS [PropertyAddress]
     FROM [dbo].[LatLon_View] AS [LatLon_View]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Leads_with_last_log" EntityType="Self.Leads_with_last_log" store:Type="Views" store:Schema="dbo">
@@ -723,6 +750,30 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
     [Leads_with_last_log].[LastUpdateDate] AS [LastUpdateDate], 
     [Leads_with_last_log].[LastUpdateComments] AS [LastUpdateComments]
     FROM [dbo].[Leads_with_last_log] AS [Leads_with_last_log]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="LeadsAssignView" EntityType="Self.LeadsAssignView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LeadsAssignView].[EmployeeName] AS [EmployeeName], 
+    [LeadsAssignView].[Status] AS [Status], 
+    [LeadsAssignView].[PropertyAddress] AS [PropertyAddress], 
+    [LeadsAssignView].[PropertyClass] AS [PropertyClass], 
+    [LeadsAssignView].[LotDem] AS [LotDem], 
+    [LeadsAssignView].[Number] AS [Number], 
+    [LeadsAssignView].[StreetName] AS [StreetName], 
+    [LeadsAssignView].[NeighName] AS [NeighName], 
+    [LeadsAssignView].[NYCSqft] AS [NYCSqft], 
+    [LeadsAssignView].[UnitNum] AS [UnitNum], 
+    [LeadsAssignView].[Amount] AS [Amount], 
+    [LeadsAssignView].[C1stServicer] AS [C1stServicer], 
+    [LeadsAssignView].[Recycle] AS [Recycle], 
+    [LeadsAssignView].[C1stMotgrAmt] AS [C1stMotgrAmt], 
+    [LeadsAssignView].[C2ndMotgrAmt] AS [C2ndMotgrAmt], 
+    [LeadsAssignView].[C3rdMortgrAmt] AS [C3rdMortgrAmt], 
+    [LeadsAssignView].[BBLE] AS [BBLE], 
+    [LeadsAssignView].[Owner] AS [Owner], 
+    [LeadsAssignView].[CoOwner] AS [CoOwner], 
+    [LeadsAssignView].[Type] AS [Type]
+    FROM [dbo].[LeadsAssignView] AS [LeadsAssignView]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -796,6 +847,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <EntitySet Name="Apartments" EntityType="IntranetPortalModel.Apartment" />
           <EntitySet Name="Leads_with_last_log" EntityType="IntranetPortalModel.Leads_with_last_log" />
           <EntitySet Name="LatLon_View" EntityType="IntranetPortalModel.LatLon_View" />
+          <EntitySet Name="LeadsAssignViews" EntityType="IntranetPortalModel.LeadsAssignView" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1509,6 +1561,31 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
           <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
         </EntityType>
+        <EntityType Name="LeadsAssignView">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LotDem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NeighName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NYCSqft" Type="Double" />
+          <Property Name="UnitNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="C1stServicer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Recycle" Type="Int32" />
+          <Property Name="C1stMotgrAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="C2ndMotgrAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="C3rdMortgrAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Owner" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwner" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2190,6 +2267,32 @@ warning 6002: The table/view 'IntranetPortal.dbo.Leads_with_last_log' does not h
                 <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
                 <ScalarProperty Name="Longitude" ColumnName="Longitude" />
                 <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadsAssignViews">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LeadsAssignView">
+              <MappingFragment StoreEntitySet="LeadsAssignView">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CoOwner" ColumnName="CoOwner" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="C3rdMortgrAmt" ColumnName="C3rdMortgrAmt" />
+                <ScalarProperty Name="C2ndMotgrAmt" ColumnName="C2ndMotgrAmt" />
+                <ScalarProperty Name="C1stMotgrAmt" ColumnName="C1stMotgrAmt" />
+                <ScalarProperty Name="Recycle" ColumnName="Recycle" />
+                <ScalarProperty Name="C1stServicer" ColumnName="C1stServicer" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="UnitNum" ColumnName="UnitNum" />
+                <ScalarProperty Name="NYCSqft" ColumnName="NYCSqft" />
+                <ScalarProperty Name="NeighName" ColumnName="NeighName" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="LotDem" ColumnName="LotDem" />
+                <ScalarProperty Name="PropertyClass" ColumnName="PropertyClass" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
