@@ -80,7 +80,7 @@
             }
         }
         e.item.SetChecked(false);
-
+        
         if (sortPhones && e.item.index != 4) {
             sortPhones();
         }
@@ -88,12 +88,13 @@
 
     function SetSameStyle(className, style, value) {
         var list = document.getElementsByClassName(className)
-
+       // alert('find class ' + className+ 'get item count '+list.length +' value'+value);
         for (var i = 0; i < list.length; i++) {
             var item = list[i];
-
-            if (item.innerText.indexOf(value) == 0) {
-                item.setAttribute("style", style);
+         
+            if (item.innerText.trim().indexOf(value) == 0) {
+              
+                $(item).attr("style", style);
             }
         }
     }

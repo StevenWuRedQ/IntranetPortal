@@ -29,7 +29,7 @@ Public Class LeadsManagement
             BindEmployeeList()
         End If
     End Sub
- 
+
     Sub BindLeads()
         If Not String.IsNullOrEmpty(Request.QueryString("mgr")) Then
             Dim mgrName = Employee.GetInstance(CInt(Request.QueryString("mgr"))).Name

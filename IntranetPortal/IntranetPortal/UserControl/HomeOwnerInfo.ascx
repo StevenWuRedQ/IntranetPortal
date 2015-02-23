@@ -464,7 +464,8 @@
        
         var colors = {}
         var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
-       // debugger;
+      
+        
         var phones_div = $(".homeowner_info_label:has(.PhoneLink)")
             .each(function (id) {
                 var phones = $(this).find("div").children(".color_gray:has(.color_gray)");
