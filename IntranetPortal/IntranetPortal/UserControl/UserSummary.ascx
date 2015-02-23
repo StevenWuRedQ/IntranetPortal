@@ -4,9 +4,9 @@
 
 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 
-<link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
+<%--<link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
 <script src="/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
+<script src="/scrollbar/jquery.mCustomScrollbar.js"></script>--%>
 <link rel="stylesheet" href="/css/right-pane.css" />
 <script type="text/javascript">
     function OnNotesKeyDown(s, e) {
@@ -44,7 +44,7 @@
     }
 
     function initScrollbar_summary() {
-
+        return;
         $("#ctl00_MainContentPH_UserSummary_contentSplitter_0_CC").mCustomScrollbar(
             {
                 theme: "minimal-dark",
@@ -107,9 +107,7 @@
         padding: 8px 12px;
         border-radius: 5px;
     }
-
-    /*@import url(http://fonts.googleapis.com/css?family=PT+Serif:400,400italic);*/
-
+    
     .dxgv {
         font: 14px 'Source Sans Pro';
         /*height: 40px;*/

@@ -21,20 +21,6 @@
         }
     </style>
     <script type="text/javascript" src="/scripts/PortalMessager.js"></script>
-
-    <%-- <script type="text/javascript">
-        // here is a cross-browser compatible way of connecting 
-        // handlers to events, in case you don't have one
-        function attachEventHandler(element, eventToHandle, eventHandler) {
-            if (element.attachEvent) {
-                element.attachEvent(eventToHandle, eventHandler);
-            } else if (element.addEventListener) {
-                element.addEventListener(eventToHandle.replace("on", ""), eventHandler, false);
-            } else {
-                element[eventToHandle] = eventHandler;
-            }
-        }       
-    </script>--%>
     <asp:ContentPlaceHolder ID="Head" runat="server"></asp:ContentPlaceHolder>
 </head>
 <body onload="init();" id="testIDbody">
@@ -49,7 +35,6 @@
 
             function GoToLead(bble) {
                 var iframe = document.getElementById("contentUrlPane");
-                debugger;
                 if (iframe && iframe != null) {
                     iframe.src = "/LeadAgent.aspx?c=Search&key=" + encodeURIComponent(txtSearchKeyClient.GetText()) + "&id=" + bble;
                 }
@@ -163,98 +148,6 @@
                                                                     <%--<asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />--%>
                                                                     <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>'>                                                                
                                                                     </asp:LinkButton>
-                                                                    <style>
-                                                                        .badge-notify {
-                                                                            background: red;
-                                                                            position: relative;
-                                                                            top: -13px;
-                                                                            left: -22px;
-                                                                            padding: 2px 4px;
-                                                                            font-size: 11px;
-                                                                        }
-
-                                                                        .message_list {
-                                                                            font-size: 14px;
-                                                                            color: #3993c1;
-                                                                            border: none;
-                                                                            border-radius: 0px;
-                                                                            cursor: pointer;
-                                                                        }
-
-                                                                            .message_list:hover {
-                                                                                background: #a0c5e8;
-                                                                            }
-
-                                                                        .special-class {
-                                                                            padding-left: 0px;
-                                                                            padding-right: 0px;
-                                                                        }
-
-                                                                        .un_readed_link {
-                                                                            font-weight: 700;
-                                                                        }
-                                                                    </style>
-
-                                                                    <script>
-                                                                        function PopupMessageList(e) {
-                                                                            $(e).popover(
-                                                                                {
-                                                                                    content: function () { return $('#messageList').html() },
-                                                                                    template: '<div class="popover special-class"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content special-class"><p></p></div></div></div>'
-                                                                                })
-                                                                        }
-                                                                        function readLink(isRead, e) {
-                                                                            if (isRead) {
-                                                                                $(e).addClass("un_readed_link")
-                                                                            } else {
-                                                                                $(e).attr("class", $(e).attr("class").replace("un_readed_link", ""));
-                                                                                //$(e).removeClass("un_readed_link");
-                                                                            }
-                                                                            return $(e);
-                                                                        }
-                                                                        function AddItem(title, isRead, callBackid) {
-
-                                                                            var link = $(".message_list:first").clone()
-                                                                            var link = readLink(isRead, link.html(title))
-
-                                                                            link.attr('onclick', 'GoToMassage(this,' + callBackid + ')');
-                                                                            $("#ul_template ").append(link.prop("outerHTML"));
-                                                                            show_message_alert();
-                                                                        }
-                                                                        function testAddItem() {
-                                                                            var r = Math.floor(Math.random() * 6);
-                                                                            AddItem("test " + r, r % 2 == 0, r)
-                                                                        }
-                                                                        function GoToMassage(e, id) {
-                                                                            debugger;
-                                                                            readLink(false, $(e))
-                                                                            show_message_alert()
-                                                                            //call function use id 
-                                                                            ShowMassge(id);
-                                                                        }
-                                                                        function show_message_alert() {
-                                                                            $("#message_alert").css("display", $(".un_readed_link").length == 0 ? "none" : "");
-                                                                        }
-                                                                        function ShowMassge(id) {
-
-                                                                        }
-                                                                    </script>
-                                                                    <%-- <button type="button" onclick="testAddItem()">test add</button>--%>
-                                                                    <div id="messageList" style="display: none">
-                                                                        <ul class="list-group" id="ul_template" style="border-radius: 0px;">
-                                                                            <li class="list-group-item message_list">Cras justo odio</li>
-                                                                            <li class="list-group-item message_list">Dapibus ac facilisis in</li>
-
-                                                                        </ul>
-                                                                    </div>
-                                                                    <div style="display: inline-block; display: none">
-                                                                        <button class="btn btn-default btn-sm btn-link" type="button" style="font-size: 18px; outline: none" tabindex="0" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-html="true"
-                                                                            onclick='PopupMessageList(this);'>
-                                                                            <span class="glyphicon glyphicon-comment" style="color: black"></span>
-                                                                        </button>
-                                                                        <span class="badge badge-notify" id="message_alert">&nbsp;&nbsp;&nbsp;</span>
-                                                                    </div>
-
                                                                     <div style="display: none">
                                                                         [<asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />
                                                                         |<a href="/Account/ChangePassword.aspx" visible="false">Setting</a>]
@@ -268,7 +161,7 @@
                                             </div>
                                             <%--change the pop search screen UI style by steven--%>
                                             <%--MinHeight="150px"--%>
-                                            <dx:ASPxPopupMenu runat="server" ID="messageList" ClientInstanceName="messageListClinet"
+                                            <%--       <dx:ASPxPopupMenu runat="server" ID="messageList" ClientInstanceName="messageListClinet"
                                                 AutoPostBack="false"
                                                 PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                                 ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -276,7 +169,7 @@
                                                 <Items>
                                                     <dx:MenuItem Text="Message1"></dx:MenuItem>
                                                 </Items>
-                                            </dx:ASPxPopupMenu>
+                                            </dx:ASPxPopupMenu>--%>
                                             <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSearchPanel" Width="600px" Height="250px"
                                                 MaxWidth="800px" MaxHeight="800px" MinWidth="150px" ID="pcMain" OnWindowCallback="pcMain_WindowCallback"
                                                 ShowHeader="false" CloseAction="CloseButton"
@@ -346,14 +239,15 @@
                                                                 </tr>
                                                             </table>
                                                         </asp:Panel>
-                                                        <div style="overflow: auto">
-                                                            <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
-                                                        </div>
+
                                                     </dx:PopupControlContentControl>
                                                 </ContentCollection>
                                                 <ClientSideEvents EndCallback="function(s,e){s.ShowAtElement(txtSearchKeyClient.GetMainElement()); $('.tooltip-examples').tooltip(); }" />
                                             </dx:ASPxPopupControl>
                                             <%---------------------end---------------%>
+                                            <div style="overflow: auto">
+                                                <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
+                                            </div>
                                         </div>
                                     </div>
                                 </dx:SplitterContentControl>
@@ -489,6 +383,6 @@
     <script src="/Scripts/js/main.js"></script>
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="/scripts/stevenjs.js?v=1.0?v=1.0"></script>
+    <script src="/scripts/stevenjs.js"></script>
 </body>
 </html>

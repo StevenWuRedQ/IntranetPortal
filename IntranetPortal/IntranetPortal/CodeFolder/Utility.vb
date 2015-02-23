@@ -72,8 +72,14 @@ Public Class Utility
                 Return leadData.PropertyAddress
             End If
 
-            leadsName = String.Format("{0} {1} - {2}", leadData.Number, leadData.StreetName, leadData.Owner.TrimEnd)
+            If Not String.IsNullOrEmpty(leadData.UnitNum) Then
+                leadsName = String.Format("{0} {1} #{3} - {2}", leadData.Number, leadData.StreetName, leadData.Owner.TrimEnd, leadData.UnitNum)
+            Else
+                leadsName = String.Format("{0} {1} - {2}", leadData.Number, leadData.StreetName, leadData.Owner.TrimEnd)
+            End If
+
             leadsName = leadsName.TrimStart(" ")
+
             If Not String.IsNullOrEmpty(leadData.CoOwner) AndAlso leadData.Owner.TrimStart.TrimEnd <> leadData.CoOwner.TrimStart.TrimEnd Then
                 leadsName += "; " & leadData.CoOwner.TrimEnd
             End If

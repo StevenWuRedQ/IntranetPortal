@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LeadsSubMenu.ascx.vb" Inherits="IntranetPortal.LeadsSubMenu" %>
-<script type="text/javascript" src="/scripts/LeadsSubMenu.js?v=<%=New Random().Next(1000) %>"></script>
+<script type="text/javascript" src="/scripts/LeadsSubMenu.js"></script>
 <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
     <Items>
         <dx:MenuItem GroupName="Sort" Text="View Map" Image-Url="/images/drap_map_icons.png" Name="GoogleStreet">
@@ -44,7 +44,7 @@
             <Image Url="/images/drap_upload_icons.png"></Image>
         </dx:MenuItem>
     </Items>
-    <ClientSideEvents ItemClick="OnLeadsCategoryClick" />
+    <ClientSideEvents ItemClick="function(s,e){OnLeadsCategoryClick(s,e);}" />
     <ItemStyle Height="30px"></ItemStyle>
 </dx:ASPxPopupMenu>
 <dx:ASPxPopupMenu ID="ASPxPopupMenu1" runat="server" ClientInstanceName="AspPopupColorMark" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -299,8 +299,8 @@
 </dx:ASPxPopupControl>
 
 <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
-    <ClientSideEvents CallbackComplete="OnSetStatusComplete" />
+    <ClientSideEvents CallbackComplete="function(s,e) {OnSetStatusComplete(s,e)}" />
 </dx:ASPxCallback>
-<dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback" ClientSideEvents-CallbackError="OnGetAddressCallbackError">
-    <ClientSideEvents CallbackComplete="OnGetAddressCallbackComplete" />
+<dx:ASPxCallback runat="server" ClientInstanceName="getAddressCallback" ID="getAddressCallback" OnCallback="getAddressCallback_Callback">
+    <ClientSideEvents CallbackComplete="function(s,e){OnGetAddressCallbackComplete(s,e);}" CallbackError="function(s,e){OnGetAddressCallbackError(s,e)}" />
 </dx:ASPxCallback>

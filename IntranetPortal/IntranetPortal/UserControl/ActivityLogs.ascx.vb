@@ -11,7 +11,7 @@ Public Class ActivityLogs
                                                         "<i class=""{1}""></i>" &
                                                     "</div>"
 
-    Public Property DisplayMode As ActivityLogMode = ActivityLogMode.Leads
+    Public Property DisplayMode As ActivityLogMode
     Public Event MortgageStatusUpdateEvent As OnMortgageStatusUpdate
     Public Delegate Sub OnMortgageStatusUpdate(updateType As String, status As String, bble As String)
 

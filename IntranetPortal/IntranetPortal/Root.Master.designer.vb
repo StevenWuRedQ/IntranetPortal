@@ -95,15 +95,6 @@ Partial Public Class Root
     Protected WithEvents HeadLoginView As Global.System.Web.UI.WebControls.LoginView
 
     '''<summary>
-    '''messageList control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents messageList As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
-
-    '''<summary>
     '''pcMain control.
     '''</summary>
     '''<remarks>

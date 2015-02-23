@@ -143,7 +143,7 @@ function ReadMsg() {
         if (request.status == 200)
         {
             HideMessages();
-            ASPxPopupMessagerControlClient.Hide();
+            //ASPxPopupMessagerControlClient.Hide();
             hook();
         }
             

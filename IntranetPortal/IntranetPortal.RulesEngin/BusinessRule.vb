@@ -271,8 +271,8 @@ InitialLine:
     Private Sub NotifyUserDataServiceIsOff()
         Using client As New PortalService.CommonServiceClient
             Dim emaildata As New Dictionary(Of String, String)
-            emaildata.Add("UserName", "Chris Yan")
-            'client.SendEmailByTemplate("Chris Yan", "LoopServiceNotAvaiable", emaildata)
+            emaildata.Add("UserName", "Steven")
+            client.SendEmailByTemplate("Steven Wu", "LoopServiceNotAvaiable", emaildata)
         End Using
 
     End Sub

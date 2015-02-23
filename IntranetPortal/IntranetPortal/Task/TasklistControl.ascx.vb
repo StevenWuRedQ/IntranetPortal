@@ -32,7 +32,7 @@ Public Class TasklistControl
     End Function
 
     Protected Sub gridTasks_DataBinding(sender As Object, e As EventArgs)
-        If gridTasks.DataSource Is Nothing Then
+        If gridTasks.DataSource Is Nothing AndAlso gridTasks.IsCallback Then
             BindTask()
         End If
     End Sub

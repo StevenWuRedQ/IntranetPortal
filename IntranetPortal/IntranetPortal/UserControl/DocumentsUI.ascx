@@ -88,7 +88,7 @@
         <%--<dx:MenuItem Text="Preview History" Name="History">
         </dx:MenuItem>--%>
     </Items>
-    <ClientSideEvents ItemClick="OnFilePopUpClick" />
+     <ClientSideEvents ItemClick="function(s,e){OnFilePopUpClick(s,e);}" />
 </dx:ASPxPopupMenu>
 
 <div style="color: #999ca1;">

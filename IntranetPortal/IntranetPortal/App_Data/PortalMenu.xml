@@ -214,12 +214,12 @@
               <![CDATA[<i class="fa fa-sign-out"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="MgrInProcess" Text="Construction" NavigationUrl="/MgrViewLeads.aspx?c=In Process" ShowAmount="true">
+          <PortalNavItem Name="Construction" Text="Construction" NavigationUrl="/MgrViewLeads.aspx?c=In Process" ShowAmount="true">
             <FontClass>
               <![CDATA[<i class="fa  fa-wrench"></i>]]>
             </FontClass>
           </PortalNavItem>
-          <PortalNavItem Name="MgrInProcess" Text="Litigation" NavigationUrl="/MgrViewLeads.aspx?c=In Process" ShowAmount="true">
+          <PortalNavItem Name="Litigation" Text="Litigation" NavigationUrl="/MgrViewLeads.aspx?c=In Process" ShowAmount="true">
             <FontClass>
               <![CDATA[<i class="fa fa-university"></i>]]>
             </FontClass>

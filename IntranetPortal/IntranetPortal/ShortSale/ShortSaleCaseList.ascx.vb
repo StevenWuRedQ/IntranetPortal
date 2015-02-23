@@ -48,14 +48,14 @@ Public Class ShortSaleCaseList
     End Sub
 
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)
-        If gridCase.DataSource Is Nothing Then
+        If gridCase.DataSource Is Nothing AndAlso gridCase.IsCallback Then
             If Not String.IsNullOrEmpty(hfCaseStatus.Value) Then
                 BindCaseList(hfCaseStatus.Value)
             End If
+
             If (Not String.IsNullOrEmpty(hfCaseBBLEs.Value)) Then
                 BindCaseByBBLEs(hfCaseBBLEs.Value.Split(";").ToList())
             End If
-
         End If
     End Sub
 

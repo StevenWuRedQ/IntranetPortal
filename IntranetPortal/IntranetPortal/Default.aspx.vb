@@ -4,12 +4,14 @@ Imports DevExpress.Web.ASPxTreeView
 
 Public Class Default2
     Inherits System.Web.UI.Page
-    Private layoutFomat = "<table><tr><td style=""width: 120px;"">{0}</td><td><div class=""raund-label2"">{1}</div></td></tr></table>"
+    'Private layoutFomat = "<table><tr><td style=""width: 120px;"">{0}</td><td><div class=""raund-label2"">{1}</div></td></tr></table>"
 
-    Public ContentUrl As String = "/SummaryPage.aspx"
+    Public ContentUrl As String = "/SummaryPage.aspx" '"about:blank"
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not String.IsNullOrEmpty(Request.QueryString("key")) Then
-            contentUrl = String.Format("/LeadAgent.aspx?c=Search&key={0}&id={1}", Request.QueryString("key"), Request.QueryString("id"))
+        If Not Page.IsPostBack Then
+            If Not String.IsNullOrEmpty(Request.QueryString("key")) Then
+                ContentUrl = String.Format("/LeadAgent.aspx?c=Search&key={0}&id={1}", Request.QueryString("key"), Request.QueryString("id"))
+            End If
         End If
 
         'Change layout by steven

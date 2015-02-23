@@ -430,7 +430,9 @@
                 </div>
                 <div style="margin-top: 15px; float: right; margin-right: 5px;">
                     <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
+                    <% If DisplayMode = ActivityLogMode.Leads Then%>
                     <i class="fa fa-calendar-o activity_add_buttons tooltip-examples" style="margin-right: 15px; cursor: pointer" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
+                    <% End If%>
                     <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this);ASPxPopupSetAsTaskControl.PerformCallback();"></i>
                     <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
                 </div>
@@ -608,8 +610,8 @@
                                             <div style="float: right">
                                                 <asp:Panel runat="server" ID="pnlRecylce">
                                                     <div style="float: right;">
-                                                       <span style="font-size: 14px;">
-                                                        <asp:Literal runat="server" ID="ltRecycleDays"></asp:Literal></span>
+                                                        <span style="font-size: 14px;">
+                                                            <asp:Literal runat="server" ID="ltRecycleDays"></asp:Literal></span>
                                                         <dx:ASPxComboBox runat="server" ID="cbRecycleDays" Width="80px" Visible="false">
                                                             <Items>
                                                                 <dx:ListEditItem Text="Extend..." Value="0" Selected="true" />

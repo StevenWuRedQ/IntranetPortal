@@ -131,6 +131,7 @@ Public Class ShortSalePage
         contentSplitter.ClientVisible = True
         ShortSaleOverVew.BindData(ShortSaleCaseData)
         ucTitle.BindData(ShortSaleCaseData)
+        ActivityLogs.DisplayMode = IntranetPortal.ActivityLogs.ActivityLogMode.ShortSale
         ActivityLogs.BindData(ShortSaleCaseData.BBLE)
         'DocumentsUI.BindFileList(ShortSaleCaseData.BBLE)
         DocumentsUI.LeadsName = ShortSaleCaseData.CaseName
@@ -142,6 +143,7 @@ Public Class ShortSalePage
         contentSplitter.ClientVisible = True
         ShortSaleOverVew.BindData(ShortSaleCaseData)
         ucTitle.BindData(ShortSaleCaseData)
+        ActivityLogs.DisplayMode = IntranetPortal.ActivityLogs.ActivityLogMode.ShortSale
         ActivityLogs.BindData(ShortSaleCaseData.BBLE)
         'DocumentsUI.BindFileList(ShortSaleCaseData.BBLE)
         DocumentsUI.LeadsName = ShortSaleCaseData.CaseName

@@ -264,16 +264,16 @@
         initToolTips();
 
         format_input();
-        $("#prioity_content").mCustomScrollbar(
-              {
-                  theme: "minimal-dark"
-              }
-              );
-        $("#home_owner_content").mCustomScrollbar(
-            {
-                theme: "minimal-dark"
-            }
-         );
+        //$("#prioity_content").mCustomScrollbar(
+        //      {
+        //          theme: "minimal-dark"
+        //      }
+        //      );
+        //$("#home_owner_content").mCustomScrollbar(
+        //    {
+        //        theme: "minimal-dark"
+        //    }
+        // );
 
         //$(".dxgvCSD").mCustomScrollbar(
         //    {

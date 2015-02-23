@@ -53,6 +53,7 @@ Public Class LeadsManagement
                           Let Mort = Context.LeadsMortgageDatas.Where(Function(l) l.BBLE = ld.BBLE).FirstOrDefault
                           Let Recycle = Context.LeadsActivityLogs.Any(Function(l) l.BBLE = ld.BBLE)
                           Let MortgageCombo = (If(ld.C1stMotgrAmt.HasValue, ld.C1stMotgrAmt, 0) + If(ld.C2ndMotgrAmt.HasValue, ld.C2ndMotgrAmt, 0) + If(ld.C3rdMortgrAmt.HasValue, ld.C3rdMortgrAmt, 0))
+                          Order By ld.BBLE Ascending
                           Select New With {
                               .BBLE = ld.BBLE,
                               .PropertyAddress = ld.PropertyAddress,
@@ -81,12 +82,15 @@ Public Class LeadsManagement
                     Dim name = User.Identity.Name
                     'gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = name And li.Lead.Status = LeadStatus.NewLead).ToList
 
-                    Dim lds = From ld In Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = name And li.Lead.Status = LeadStatus.NewLead)
-                       Let TaxCobo = Context.LeadsTaxLiens.Where(Function(t) t.BBLE = ld.BBLE).FirstOrDefault
-                       Let Mort = Context.LeadsMortgageDatas.Where(Function(l) l.BBLE = ld.BBLE).FirstOrDefault
-                       Let Recycle = Context.LeadsActivityLogs.Any(Function(l) l.BBLE = ld.BBLE)
-                       Let MortgageCombo = (If(ld.C1stMotgrAmt.HasValue, ld.C1stMotgrAmt, 0) + If(ld.C2ndMotgrAmt.HasValue, ld.C2ndMotgrAmt, 0) + If(ld.C3rdMortgrAmt.HasValue, ld.C3rdMortgrAmt, 0))
-                       Select New With {
+                    Dim lds = From ld In Context.LeadsInfoes
+                              Join li In Context.Leads On ld.BBLE Equals li.BBLE
+                              Where li.Status = LeadStatus.NewLead And li.EmployeeName = name
+                              Let TaxCobo = Context.LeadsTaxLiens.Where(Function(t) t.BBLE = ld.BBLE).FirstOrDefault
+                              Let Mort = Context.LeadsMortgageDatas.Where(Function(l) l.BBLE = ld.BBLE).FirstOrDefault
+                              Let Recycle = Context.LeadsActivityLogs.Any(Function(l) l.BBLE = ld.BBLE)
+                              Let MortgageCombo = (If(ld.C1stMotgrAmt.HasValue, ld.C1stMotgrAmt, 0) + If(ld.C2ndMotgrAmt.HasValue, ld.C2ndMotgrAmt, 0) + If(ld.C3rdMortgrAmt.HasValue, ld.C3rdMortgrAmt, 0))
+                              Order By ld.BBLE Ascending
+                    Select New With {
                            .BBLE = ld.BBLE,
                            .PropertyAddress = ld.PropertyAddress,
                            .Number = ld.Number,
@@ -124,7 +128,8 @@ Public Class LeadsManagement
                       Let Mort = Context.LeadsMortgageDatas.Where(Function(l) l.BBLE = ld.BBLE).FirstOrDefault
                       Let Recycle = Context.LeadsActivityLogs.Any(Function(l) l.BBLE = ld.BBLE)
                       Let MortgageCombo = (If(ld.C1stMotgrAmt.HasValue, ld.C1stMotgrAmt, 0) + If(ld.C2ndMotgrAmt.HasValue, ld.C2ndMotgrAmt, 0) + If(ld.C3rdMortgrAmt.HasValue, ld.C3rdMortgrAmt, 0))
-                      Select New With {
+                    Order By ld.BBLE Ascending
+                        Select New With {
                           .BBLE = ld.BBLE,
                           .PropertyAddress = ld.PropertyAddress,
                           .Number = ld.Number,
@@ -157,11 +162,12 @@ Public Class LeadsManagement
         Using Context As New Entities
             Dim lds = (From li In Context.LeadsInfoes
                                    Join ld In Context.Leads On ld.BBLE Equals li.BBLE
+                                   Where ld.EmployeeName = officeName Or (unActiveUser.Contains(ld.EmployeeName) And ld.Status <> LeadStatus.InProcess)
                                    Let TaxCobo = Context.LeadsTaxLiens.Where(Function(t) t.BBLE = ld.BBLE).FirstOrDefault
                                    Let Mort = Context.LeadsMortgageDatas.Where(Function(l) l.BBLE = ld.BBLE).FirstOrDefault
                                    Let Recycle = Context.LeadsActivityLogs.Any(Function(l) l.BBLE = ld.BBLE)
                                    Let MortgageCombo = (If(li.C1stMotgrAmt.HasValue, li.C1stMotgrAmt, 0) + If(li.C2ndMotgrAmt.HasValue, li.C2ndMotgrAmt, 0) + If(li.C3rdMortgrAmt.HasValue, li.C3rdMortgrAmt, 0))
-                                   Where ld.EmployeeName = officeName Or (unActiveUser.Contains(ld.EmployeeName) And ld.Status <> LeadStatus.InProcess)
+                                    Order By ld.BBLE Ascending
                                     Select New With {
                                       .BBLE = ld.BBLE,
                                       .PropertyAddress = li.PropertyAddress,
@@ -370,32 +376,35 @@ Public Class LeadsManagement
     Protected Sub gridLeads_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
         If e.Parameters.StartsWith("AssignLeads") Then
             If gridLeads.Selection.Count > 0 AndAlso listboxEmployee.SelectedItem IsNot Nothing Then
-                Dim selectedLeads = gridLeads.GetSelectedFieldValues("BBLE", "LeadsName", "Neighborhood")
+                Dim selectedLeads = gridLeads.GetSelectedFieldValues("BBLE")
 
                 Using Context As New Entities
-                    For Each lead In selectedLeads
-                        Dim bble = lead(0).ToString
-                        Dim newlead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
-                        If newlead Is Nothing Then
-                            newlead = New Lead() With {
-                                              .BBLE = lead(0).ToString,
-                                              .LeadsName = lead(1).ToString,
-                                              .Neighborhood = lead(2),
-                                              .EmployeeID = CInt(listboxEmployee.SelectedItem.Value),
-                                              .EmployeeName = listboxEmployee.SelectedItem.Text,
-                                              .Status = LeadStatus.NewLead,
-                                              .AssignDate = DateTime.Now,
-                                            .AssignBy = User.Identity.Name
-                                              }
-                            Context.Leads.Add(newlead)
-                        Else
-                            newlead.LeadsName = lead(1)
-                            newlead.Neighborhood = lead(2)
-                            newlead.EmployeeID = CInt(listboxEmployee.SelectedItem.Value)
-                            newlead.EmployeeName = listboxEmployee.SelectedItem.Text
-                            newlead.Status = LeadStatus.NewLead
-                            newlead.AssignDate = DateTime.Now
-                            newlead.AssignBy = User.Identity.Name
+                    For Each bble In selectedLeads
+                        Dim li = Context.LeadsInfoes.Find(bble)
+
+                        If li IsNot Nothing Then
+                            Dim newlead = Context.Leads.Find(bble)
+                            If newlead Is Nothing Then
+                                newlead = New Lead() With {
+                                                  .BBLE = li.BBLE,
+                                                  .LeadsName = li.LeadsName,
+                                                  .Neighborhood = li.NeighName,
+                                                  .EmployeeID = CInt(listboxEmployee.SelectedItem.Value),
+                                                  .EmployeeName = listboxEmployee.SelectedItem.Text,
+                                                  .Status = LeadStatus.NewLead,
+                                                  .AssignDate = DateTime.Now,
+                                                  .AssignBy = User.Identity.Name
+                                                  }
+                                Context.Leads.Add(newlead)
+                            Else
+                                newlead.LeadsName = li.LeadsName
+                                newlead.Neighborhood = li.NeighName
+                                newlead.EmployeeID = CInt(listboxEmployee.SelectedItem.Value)
+                                newlead.EmployeeName = listboxEmployee.SelectedItem.Text
+                                newlead.Status = LeadStatus.NewLead
+                                newlead.AssignDate = DateTime.Now
+                                newlead.AssignBy = User.Identity.Name
+                            End If
                         End If
                     Next
                     If Context.GetValidationErrors().Count > 0 Then
