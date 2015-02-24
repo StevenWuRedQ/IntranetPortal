@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>DevExtreme.Web</id>
+    <version>14.2.4</version>
+    <title>DevExtreme Web</title>
+    <authors>Developer Express Inc.</authors>
+    <owners>Developer Express Inc.</owners>
+    <licenseUrl>http://js.devexpress.com/EULAs/DevExtremeWeb</licenseUrl>
+    <projectUrl>http://js.devexpress.com/WebDevelopment</projectUrl>
+    <iconUrl>http://cdn3.devexpress.com/jslib/jslogo-32.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>The blazing-fast DevExtreme HTML5 Data Grid, collection of high-performance data visualization widgets for all your business intelligence needs and a rich library of touch-enabled JavaScript widgets for use in your next web project.</description>
+    <summary>Create highly responsive web apps for touch-enabled devices and traditional desktops.</summary>
+    <copyright>Copyright © 2012-2014 Developer Express Inc.</copyright>
+    <tags>DevExtreme grid datagrid chart gauge javascript visualization HTML5 framework</tags>
+    <dependencies>
+      <dependency id="jQuery" version="1.11.0" />
+      <dependency id="jquery-globalize" version="0.1.1" />
+    </dependencies>
+  </metadata>
+</package>

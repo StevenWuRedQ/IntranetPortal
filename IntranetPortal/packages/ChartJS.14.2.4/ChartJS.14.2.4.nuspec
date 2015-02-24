@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ChartJS</id>
+    <version>14.2.4</version>
+    <title>DevExtreme Web - Data Visualization</title>
+    <authors>Developer Express Inc.</authors>
+    <owners>Developer Express Inc.</owners>
+    <licenseUrl>http://js.devexpress.com/EULAs/DevExtremeWeb</licenseUrl>
+    <projectUrl>http://js.devexpress.com/WebDevelopment/Charts</projectUrl>
+    <iconUrl>http://cdn3.devexpress.com/jslib/jslogo-32.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>DevExtreme Web - Chart And Visualization - JavaScript Charting and Visualization library. From next-gen websites, to those targeting mobile devices, DevExtreme ships with a fully integrated collection of high-performance data visualization widgets for all your business intelligence needs.</description>
+    <summary>DevExtreme Web - Chart And Visualization - JavaScript Charting and Visualization library.</summary>
+    <copyright>Copyright © 2012-2014 Developer Express Inc.</copyright>
+    <tags>DevExtreme chart gauge javascript visualization</tags>
+    <dependencies>
+      <dependency id="jQuery" version="1.11.0" />
+      <dependency id="jquery-globalize" version="0.1.1" />
+    </dependencies>
+  </metadata>
+</package>

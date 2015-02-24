@@ -2322,7 +2322,6 @@
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="My Project\DataSources\System.Data.DataTable.datasource" />
     <Content Include="Map\MapData\nyc-zip-code.js" />
-    <Content Include="Map\MapData\Web.config" />
     <None Include="scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />

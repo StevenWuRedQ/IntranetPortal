@@ -28,7 +28,7 @@
             filter.PeropertyClassesCode = $("#IdPropertyClassCode").val();
             filter.Zonings = $("#IdZoning").val();
             filter.UnbuiltSqft = { min: $("#IdUnbuiltSqftmin").val(), max: $("#IdUnbuiltSqftmax").val() }
-            filter.NYCsqft = { min: $("#IdNYCsqftMin").val(), max: $("#IdNYCsqftMax").val() }
+            filter.NYCsqft = { min: $("#IdNYCsqftMin").val(), max: $("#IdNYCsqftMax").val() } 
 
             filter.LotSqft = { min: $("#IdLotSqftMin").val(), max: $("#IdLotSqftMax").val() }
             filter.Servicers = $("#IdServicer").val();

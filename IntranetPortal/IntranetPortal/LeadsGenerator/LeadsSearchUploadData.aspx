@@ -91,7 +91,7 @@
                 </td>
             </tr>
         </table>
-        <dx:ASPxGridView runat="server" ID="ASPxGridView1" Width="100%" ClientInstanceName="gridLeadsData" OnCustomCallback="gridLeadsData_CustomCallback" KeyFieldName="ID" >
+        <dx:ASPxGridView runat="server" ID="ASPxGridView1" Width="100%" ClientInstanceName="gridLeadsData" KeyFieldName="ID" >
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="BBLE"></dx:GridViewDataTextColumn>
 

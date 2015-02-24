@@ -7,7 +7,12 @@ Public Class LeadsGenerator
     Public AllZoning As List(Of String)
     Public AllPropertyCode As List(Of String)
     Public CompletedTask As New List(Of LeadsSearchTask)
+#If DEBUG Then
     Public MaxSelect = 250
+#Else
+    Public MaxSelect = 250
+#End If
+
     Public LoadLeadsCount = 0
     Public bfilterOutExist As Boolean = False
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -161,14 +166,14 @@ Public Class LeadsGenerator
         'Throw New Exception(message)
     End Sub
     Protected Function HasNewLeadsInProtal() As Integer
-        Dim OfficeName = GetCurrentOffice()
+        Dim OfficeName = GetImportToUser()
         Using Context As New Entities
             Return Context.Leads.Where(Function(l) l.EmployeeName = OfficeName And l.Status = LeadStatus.NewLead).Count()
         End Using
 
         Return 0
     End Function
-    Protected Function GetCurrentOffice() As String
+    Protected Function GetImportToUser() As String
 
         If (AdminLogIn()) Then
             Return EmployeeList.Value
@@ -190,7 +195,6 @@ Public Class LeadsGenerator
         Return Employee.IsAdmin(Page.User.Identity.Name)
     End Function
     Protected Function LeadMaxAdd() As Integer
-
         Return MaxSelect - HasNewLeadsInProtal()
     End Function
 
@@ -207,8 +211,8 @@ Public Class LeadsGenerator
             Alert("You have enough leads in bank !")
             Return
         End If
-        Dim empOffice = Employee.GetInstance(GetCurrentOffice())
-        If selectrows.Count < maxAdd Then
+        Dim empOffice = Employee.GetInstance(GetImportToUser())
+        If selectrows.Count <= maxAdd Then
             Using Context As New Entities
                 For Each row In selectrows
                     Dim l = New Lead
@@ -218,9 +222,13 @@ Public Class LeadsGenerator
                     l.Status = LeadStatus.NewLead
                     l.AssignBy = Page.User.Identity.Name
                     l.AssignDate = Date.Now
-                    Dim li = New LeadsInfo
-                    li.BBLE = row
-                    Context.LeadsInfoes.Add(li)
+                    Dim li = Context.LeadsInfoes.Find(row)
+                    If (li Is Nothing) Then
+                        li = New LeadsInfo
+                        li.BBLE = row
+                        Context.LeadsInfoes.Add(li)
+                    End If
+                   
                     Context.Leads.Add(l)
                 Next
                 Context.SaveChanges()
@@ -228,7 +236,7 @@ Public Class LeadsGenerator
                 runbDataLoop()
             End Using
         Else
-            Alert("Only can import " + maxAdd + " Leads !")
+            Alert("Only can import " & maxAdd & " Leads !")
         End If
         RefreshGrid()
     End Sub
