@@ -141,8 +141,8 @@ Public Class LeadsGenerator
         End If
         Dim count = 0
         Dim maxAdd = LeadMaxAdd()
-        If (maxAdd < 0) Then
-            Alert("You have enough leads in your bank !")
+        If (maxAdd <= 0) Then
+            Alert(GetImportToUser() & " has enough leads in his bank !")
             Return
         End If
         Dim i = 0
@@ -208,7 +208,7 @@ Public Class LeadsGenerator
             Alert("You didn't select leads !")
             Return
         ElseIf (selectrows.Count > maxAdd) Then
-            Alert("You have enough leads in bank !")
+            Alert(GetImportToUser() & " has enough leads in bank !")
             Return
         End If
         Dim empOffice = Employee.GetInstance(GetImportToUser())

@@ -235,7 +235,7 @@
         var map
         function initMapBox() {
             L.mapbox.accessToken = 'pk.eyJ1IjoicG9ydGFsIiwiYSI6ImtCdG9ac00ifQ.p2_3nTko4JskYcg0YIgeyw';
-            map = L.mapbox.map('map', 'portal.l8711nb2')
+            map = L.mapbox.map('map', 'portal.c0410d46')
                .addControl(L.mapbox.geocoderControl('mapbox.places'))
              .setView([40.7127, -74.0059], 11);
 
