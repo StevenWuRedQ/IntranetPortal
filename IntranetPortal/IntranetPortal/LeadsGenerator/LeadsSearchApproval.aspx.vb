@@ -86,7 +86,7 @@ Public Class LeadsSearchApproval
                         End If
                     End Using
                 End If
-                wli.ProcessInstance.DataFields("result") = strReslut
+                wli.ProcessInstance.DataFields("Result") = strReslut
                 wli.Finish()
             End If
         End If

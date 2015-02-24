@@ -111,7 +111,7 @@
             </div>
         </div>
     </div>
-    <div style="height: 768px;" id="leads_list_left">
+    <div style="height: 768px; overflow-y:scroll" id="leads_list_left">
         <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" OnCustomCallback="gridTasks_CustomCallback"
             ID="gridTasks" Border-BorderStyle="None" ClientInstanceName="gridTasks" Width="100%" AutoGenerateColumns="False" KeyFieldName="ProcInstId;ActInstId" OnDataBinding="gridTasks_DataBinding">
             <Columns>
@@ -193,7 +193,6 @@
             <Border BorderStyle="None"></Border>
             <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
         </dx:ASPxGridView>
-
     </div>
     <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="aspxPopupSortMenu"
         ShowPopOutImages="false" AutoPostBack="false"
