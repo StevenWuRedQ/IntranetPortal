@@ -394,10 +394,11 @@ Public Class LeadsList
                 Throw New Exception(String.Format("You cann't create this leads. Lead is already created by {0}. <a href=""#"" id=""linkRequestUpdate"" onclick=""OnRequestUpdate('{1}');return false;"">Request update?</a>", lead.EmployeeName, lead.BBLE))
             End If
 
-            Dim lf As LeadsInfo = DataWCFService.UpdateBasicInfo(bble)
-            'DataWCFService.UpdateLeadInfo(bble)
+            'Dim lf As LeadsInfo = DataWCFService.UpdateBasicInfo(bble)
+            DataWCFService.UpdateLeadInfo(bble)
+            Dim lf = LeadsInfo.GetInstance(bble)
             'Add to update
-            Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, Page.User.Identity.Name)
+            'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, Page.User.Identity.Name)
 
             'Save Lead
             Dim ld = New Lead

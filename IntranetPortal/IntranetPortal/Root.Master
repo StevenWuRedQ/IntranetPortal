@@ -122,8 +122,7 @@
 
                                                                 <%--<Image Url="/images/search_btn.png"></Image>--%>
                                                                 <ClientSideEvents Click="function(s,e){
-                                                                    ASPxPopupSearchPanel.PerformCallback(txtSearchKeyClient.GetText());
-                                                                    ASPxPopupSearchPanel.ShowAtElement(txtSearchKeyClient.GetMainElement());                                                            
+                                                                    ASPxPopupSearchPanel.PerformCallback(txtSearchKeyClient.GetText());                                                                                                                          
                                                             }" />
 
                                                                 <%--<Image Url="/images/search_btn.png"></Image>--%>
@@ -232,14 +231,12 @@
                                                                             <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSearchPanel.Hide();                                                                                                                                                                                                                                            
                                                                                                                         }"></ClientSideEvents>
-
                                                                             <Border BorderStyle="None"></Border>
                                                                         </dx:ASPxButton>
                                                                     </td>
                                                                 </tr>
                                                             </table>
-                                                        </asp:Panel>
-
+                                                        </asp:Panel>                                                       
                                                     </dx:PopupControlContentControl>
                                                 </ContentCollection>
                                                 <ClientSideEvents EndCallback="function(s,e){s.ShowAtElement(txtSearchKeyClient.GetMainElement()); $('.tooltip-examples').tooltip(); }" />

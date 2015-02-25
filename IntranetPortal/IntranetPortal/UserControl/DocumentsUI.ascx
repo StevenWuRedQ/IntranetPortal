@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="DocumentsUI.ascx.vb" Inherits="IntranetPortal.DocumentsUI" %>
 
-<script src="/scripts/stevenjs.js?v=1.02"></script>
+<script src="/scripts/stevenjs.js"></script>
 <script type="text/javascript">
     function UploadFiles() {
         var url = "";

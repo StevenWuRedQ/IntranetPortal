@@ -357,7 +357,7 @@
         btn.onclick();
     }
 </script>
-<script src="/scripts/stevenjs.js?v=1.02"></script>
+<script src="/scripts/stevenjs.js"></script>
 <style type="text/css">
     .UpdateInfoAlign {
         text-align: right;
