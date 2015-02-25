@@ -21,7 +21,7 @@
             </dx:GridViewDataTextColumn>
         </Columns>
         <Settings VerticalScrollBarMode="Visible" VerticalScrollBarStyle="Virtual" />
-        <SettingsPager Mode="EndlessPaging" PageSize="10"></SettingsPager>
+        <SettingsPager Mode="ShowPager"></SettingsPager>
         <GroupSummary>
             <dx:ASPxSummaryItem FieldName="Id" SummaryType="Count" DisplayFormat="Count: {0}" />
             <dx:ASPxSummaryItem FieldName="Duration" SummaryType="Average" DisplayFormat="Avg Duration: {0:dd\.hh\:mm\:ss}" />
@@ -29,6 +29,5 @@
         <Settings ShowGroupPanel="true" />
     </dx:ASPxGridView>
 
-    <input type="button" value="Refresh" onclick="cpTest.PerformCallback()" />
-    <dx:ASPxCallback runat="server" OnCallback="Unnamed_Callback" ClientInstanceName="cpTest"></dx:ASPxCallback>
+
 </asp:Content>

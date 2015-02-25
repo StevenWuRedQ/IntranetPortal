@@ -7,8 +7,6 @@
     </div>
 </div>
 
-
-
 <div data-array-index="0" data-field="Mortgages" class="ss_array" style="display: none">
     <%--<h3 class="title_with_line"><span class="title_index title_span">Mortgages </span></h3>--%>
     <h4 class="ss_form_title title_with_line">

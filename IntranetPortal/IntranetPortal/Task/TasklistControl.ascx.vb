@@ -45,4 +45,21 @@ Public Class TasklistControl
             'BindTask()
         End If
     End Sub
+
+    Protected Sub gridTasks_CustomColumnSort(sender As Object, e As DevExpress.Web.ASPxGridView.CustomColumnSortEventArgs)
+        If e.Column.FieldName = "ProcSchemeDisplayName" Then
+            e.Handled = True
+            Dim s1 = e.Value1.ToString, s2 = e.Value2.ToString
+
+            Dim processName = "Reminder"
+
+            If s1 = processName Then
+                e.Result = 1
+            ElseIf s2 = processName Then
+                e.Result = -1
+            Else
+                e.Result = Comparer.Default.Compare(s1, s2)
+            End If
+        End If
+    End Sub
 End Class

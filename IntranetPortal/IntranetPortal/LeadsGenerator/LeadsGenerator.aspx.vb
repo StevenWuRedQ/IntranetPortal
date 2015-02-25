@@ -228,7 +228,7 @@ Public Class LeadsGenerator
                         li.BBLE = row
                         Context.LeadsInfoes.Add(li)
                     End If
-                   
+
                     Context.Leads.Add(l)
                 Next
                 Context.SaveChanges()

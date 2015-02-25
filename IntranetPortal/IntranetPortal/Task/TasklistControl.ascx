@@ -112,7 +112,7 @@
         </div>
     </div>
     <div style="height: 768px; overflow-y:scroll" id="leads_list_left">
-        <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" OnCustomCallback="gridTasks_CustomCallback"
+        <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" OnCustomCallback="gridTasks_CustomCallback" OnCustomColumnSort="gridTasks_CustomColumnSort"
             ID="gridTasks" Border-BorderStyle="None" ClientInstanceName="gridTasks" Width="100%" AutoGenerateColumns="False" KeyFieldName="ProcInstId;ActInstId" OnDataBinding="gridTasks_DataBinding">
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="MarkColor" VisibleIndex="0" Width="30px">
@@ -151,7 +151,7 @@
                         </div>
                     </GroupRowTemplate>
                 </dx:GridViewDataColumn>
-                <dx:GridViewDataColumn FieldName="ProcSchemeDisplayName" Visible="false" VisibleIndex="5">
+                <dx:GridViewDataColumn FieldName="ProcSchemeDisplayName" Visible="false" VisibleIndex="5" Settings-SortMode="Custom">
                     <GroupRowTemplate>
                         <div>
                             <table style="height: 45px">

@@ -25,8 +25,4 @@
             BindData()
         End If
     End Sub
-
-    Protected Sub Unnamed_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
-
-    End Sub
 End Class

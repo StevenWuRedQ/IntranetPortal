@@ -42,7 +42,7 @@
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-geodesy/v0.1.0/leaflet-geodesy.js'></script>
     <script src="https://www.mapbox.com/mapbox.js/assets/data/realworld.388.js"></script>
-    
+
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
@@ -63,8 +63,7 @@
         //    type: 'roadmap'
         //}).dxMap("instance");
         var LatLonData = <%= LatLonData%>
-            function f()
-            {
+            function f() {
 
             }
         var zipMap;
@@ -105,11 +104,127 @@
            }
            return ''
        }
+
+        function findCountNum(zip) {
+            for (var i = 0 ; i < zipLeads.length; i++) {
+                var e = zipLeads[i];
+                if (zip == e.ZipCode) {
+                    return e.Count;
+                }
+            }
+            return 0;
+        }
+
+        var popup = new L.Popup({ autoPan: false });
+
+
         $.getJSON("/Map/MapData/nyc-zip-code.js", function (data) {
+            initMapBox();
+            var statesLayer = L.geoJson(data, {
+                style: getStyle,
+                onEachFeature: onEachFeature
+            }).addTo(map);
+
+
+            function getStyle(feature) {
+                return {
+                    weight: 2,
+                    opacity: 0.1,
+                    color: 'black',
+                    fillOpacity: 0.7,
+                    fillColor: getColor(findCountNum(feature.properties.postalCode))
+                };
+            }
+
+            function getColor(d) {
+
+                return d > 1000 ? '#8c2d04' :
+                    d > 500 ? '#cc4c02' :
+                    d > 200 ? '#ec7014' :
+                    d > 100 ? '#fe9929' :
+                    d > 50 ? '#fec44f' :
+                    d > 20 ? '#fee391' :
+                    d > 10 ? '#fff7bc' :
+                    '#ffffe5';
+            }
+
+            function onEachFeature(feature, layer) {
+                layer.on({
+                    mousemove: mousemove,
+                    mouseout: mouseout,
+                    click: ClickZip
+                });
+            }
+
+            var closeTooltip;
+
+            function mousemove(e) {
+                var layer = e.target;
+
+                popup.setLatLng(e.latlng);
+                popup.setContent('<div class="marker-title">' + layer.feature.properties.postalCode + '</div>' +
+                    findCountNum(layer.feature.properties.postalCode) + ' leads');
+
+                if (!popup._map) popup.openOn(map);
+                window.clearTimeout(closeTooltip);
+
+                // highlight feature
+                layer.setStyle({
+                    weight: 3,
+                    opacity: 0.3,
+                    fillOpacity: 0.9
+                });
+
+                if (!L.Browser.ie && !L.Browser.opera) {
+                    layer.bringToFront();
+                }
+            }
+
+            function mouseout(e) {
+                statesLayer.resetStyle(e.target);
+                closeTooltip = window.setTimeout(function () {
+                    map.closePopup();
+                }, 100);
+            }
+
+            
+            function ClickZip(e) {
+                $('#divMsgTest').animate({ top: "25" }, 500);
+                var zip = e.target.feature.properties.postalCode;
+                $('#spanZip').html("Zip: " + zip);
+                $('#tdLeadsCount').html(findCountNum(zip));
+                // map.fitBounds(e.target.getBounds());
+            }
+
+            map.legendControl.addLegend(getLegendHTML());
+
+            function getLegendHTML() {
+                var grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+                labels = [],
+                from, to;
+
+                for (var i = 0; i < grades.length; i++) {
+                    from = grades[i];
+                    to = grades[i + 1];
+
+                    labels.push(
+                      '<li><span class="swatch" style="background:' + getColor(from + 1) + '"></span> ' +
+                      from + (to ? '&ndash;' + to : '+')) + '</li>';
+                }
+
+                return '<span>Leads in Zip</span><ul>' + labels.join('') + '</ul>';
+            }
+            
+            return;
+
             zipMap = zipMap || [];// data.features;
             initMapBox();
             var geoJson = []
-            var myLayer = L.mapbox.featureLayer().addTo(map);
+            var myLayer = L.mapbox.featureLayer({
+                style: getStyle,
+                onEachFeature: onEachFeature
+            }).addTo(map);
+
             for (var i = 0 ; i < data.features.length; i++) {
 
                 var feature = data.features[i];
@@ -129,7 +244,7 @@
                         },
                         properties: {
                             title: feature.properties.postalCode,
-                            description: 'Leads: '+count,
+                            description: 'Leads: ' + count,
                             // one can customize markers by adding simplestyle properties
                             // https://www.mapbox.com/guides/an-open-platform/#simplestyle
 
@@ -146,7 +261,6 @@
                 }
             }
 
-            
             myLayer.on('layeradd', function (e) {
                 var marker = e.layer,
                 feature = marker.feature;
@@ -154,7 +268,7 @@
                 marker.setIcon(feature.properties.icon);
             });
             var z = zipMap;
-           // myLayer.setGeoJSON(geoJson);
+            // myLayer.setGeoJSON(geoJson);
             var markers = new L.MarkerClusterGroup();
 
             for (var i = 0; i < LatLonData.length; i++) {
@@ -271,5 +385,78 @@
             }
         }
 
+        function HideMessages() {
+            var msgHeight = $("#divMsgTest").outerHeight() + 10;
+            $('#divMsgTest').css('top', -msgHeight);
+        }
+
     </script>
+
+    <style type="text/css">
+        .map-legend .swatch {
+            width: 20px;
+            height: 20px;
+            float: left;
+            margin-right: 10px;
+        }
+
+        .leaflet-popup-close-button {
+            display: none;
+        }
+
+        .leaflet-popup-content-wrapper {
+            pointer-events: none;
+        }
+
+        .message {
+            background-size: 40px 40px;
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%, transparent 75%, transparent);
+            box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+            width: 300px;
+            border: 1px solid;
+            color: #fff;
+            padding: 15px;
+            position: fixed;
+            _position: absolute;
+            text-shadow: 0 1px 0 rgba(0,0,0,.5);
+            animation: animate-bg 5s linear infinite;
+        }
+
+        .info {
+            background-color: #4ea5cd;
+            border-color: #3b8eb5;
+        }
+
+        .message .msgtitle {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+        }
+
+        .message p {
+            margin: 0;
+        }
+
+        @keyframes animate-bg {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -80px 0;
+            }
+        }
+    </style>
+
+    <div id="divMsgTest" class="info message" style="top: -300px; right: 25px">
+        <div class="msgtitle">
+            <i class="fa fa-database with_circle" style="color: white; font-size: 14px; width: 30px; height: 30px; line-height: 30px; text-align: center"></i>&nbsp; <span id="spanZip"></span>
+            <span style="float: right; line-height: 30px; font-weight: 600; cursor: pointer" onclick="HideMessages()">X</span>
+        </div>
+        <table style="width: 100%; font-size: 14px">
+            <tr>
+                <td>Leads in Portal: </td>
+                <td id="tdLeadsCount"></td>
+            </tr>
+        </table>
+    </div>
 </asp:Content>
