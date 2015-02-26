@@ -3,6 +3,7 @@ Public Class ZipMap
     Inherits System.Web.UI.Page
     Public Property leadsByZip As String
     Public Property LatLonData As String
+    Public Property CountJosn As String
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         bindData()
     End Sub
@@ -13,6 +14,8 @@ Public Class ZipMap
             s = ctx.LeadsInfoes.GroupBy(Function(l) l.ZipCode).Select(Function(f) New With {.Count = f.Count, .ZipCode = f.Key}).ToList
 
             LatLonData = JsonConvert.SerializeObject(ctx.LatLon_View.ToList())
+            Dim MapDate = ctx.MapDataSets.Select(Function(m) New With {.Count = m.Count, .TypeName = m.TypeName, .ZipCode = m.KeyCode}).ToList()
+            CountJosn = JsonConvert.SerializeObject(MapDate)
         End Using
         leadsByZip = JsonConvert.SerializeObject(s)
     End Sub

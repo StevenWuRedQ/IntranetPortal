@@ -11,6 +11,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>--%>
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
+    
     <style>
         body {
             margin: 0;
@@ -42,7 +43,7 @@
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-geodesy/v0.1.0/leaflet-geodesy.js'></script>
     <script src="https://www.mapbox.com/mapbox.js/assets/data/realworld.388.js"></script>
-
+    
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
@@ -69,6 +70,23 @@
         var zipMap;
         var geocoder;
         var zipLeads = <%= leadsByZip%>
+            function f() {
+            }
+           
+        var CountDateSet = <%= CountJosn%>
+            function FindNumberByName(typeName,zipCode)
+            {
+                
+                for (var i = 0; i < CountDateSet.length; i++)
+                {
+                    var c = CountDateSet[i];
+                    if (c.TypeName == typeName && c.ZipCode == zipCode)
+                    {
+                        return String(c.Count)
+                    }
+                }
+                return 0;
+            }
 
        //function codeAddress(zip,Count) {
        //    geocoder = new google.maps.Geocoder();
@@ -193,7 +211,13 @@
                 var zip = e.target.feature.properties.postalCode;
                 $('#spanZip').html("Zip: " + zip);
                 $('#tdLeadsCount').html(findCountNum(zip));
-                // map.fitBounds(e.target.getBounds());
+                $(".ZipCount").each(function (index) {
+                    var c = FindNumberByName(this.id, zip);
+                    
+                    $(this).html(c);
+
+                });
+                 //map.fitBounds(e.target.getBounds());
             }
 
             map.legendControl.addLegend(getLegendHTML());
@@ -268,21 +292,21 @@
                 marker.setIcon(feature.properties.icon);
             });
             var z = zipMap;
-            // myLayer.setGeoJSON(geoJson);
-            var markers = new L.MarkerClusterGroup();
+            myLayer.setGeoJSON(geoJson);
+            //var markers = new L.MarkerClusterGroup();
 
-            for (var i = 0; i < LatLonData.length; i++) {
-                var a = LatLonData[i];
-                var title = a.PropertyAddress;
-                var marker = L.marker(new L.LatLng(a.Latitude, a.Longitude), {
-                    icon: L.mapbox.marker.icon({ 'marker-symbol': 'building', 'marker-color': '0044FF' }),
-                    title: title
-                });
-                marker.bindPopup(title);
-                markers.addLayer(marker);
-            }
+            //for (var i = 0; i < LatLonData.length; i++) {
+            //    var a = LatLonData[i];
+            //    var title = a.PropertyAddress;
+            //    var marker = L.marker(new L.LatLng(a.Latitude, a.Longitude), {
+            //        icon: L.mapbox.marker.icon({ 'marker-symbol': 'building', 'marker-color': '0044FF' }),
+            //        title: title
+            //    });
+            //    marker.bindPopup(title);
+            //    markers.addLayer(marker);
+            //}
 
-            map.addLayer(markers);
+            //map.addLayer(markers);
             //initMap();
         });
         function getCenter(array) {
@@ -452,11 +476,69 @@
             <i class="fa fa-database with_circle" style="color: white; font-size: 14px; width: 30px; height: 30px; line-height: 30px; text-align: center"></i>&nbsp; <span id="spanZip"></span>
             <span style="float: right; line-height: 30px; font-weight: 600; cursor: pointer" onclick="HideMessages()">X</span>
         </div>
-        <table style="width: 100%; font-size: 14px">
+        <table style="width: 100%; font-size: 14px" >
             <tr>
                 <td>Leads in Portal: </td>
                 <td id="tdLeadsCount"></td>
             </tr>
+            <tr>
+                <td>Leads LP NYC: </td>
+                <td id="Zip_LPCount" class="ZipCount"></td>
+            </tr>
+            <tr>
+                <td>Vacant Land in NYC: </td>
+                <td id="Zip_VacantLand" class="ZipCount"></td>
+            </tr>
+            <tr>
+                <td>Condo: </td>
+                <td id="Zip_Condo" class="ZipCount"></td>
+            </tr>
+            <tr>
+                <td>Single Family Home: </td>
+                <td id="Zip_Single_Family_Home" class="ZipCount"></td>
+            </tr>
+            <tr>
+                <td>2-4 Family: </td>
+                <td id="Zip_2_4_Family" class="ZipCount"></td>
+            </tr>
+            <tr>
+                <td>5-6 Family: </td>
+                <td id="Zip_5_6_Family" class="ZipCount"></td>
+            </tr>
+            <tr>
+                <td>7+ Family: </td>
+                <td id="Zip_7MoreFamily" class="ZipCount"></td>
+            </tr>
+            <tr>
+                <td>Church / Synagogue: </td>
+                <td id="Zip_Church_Synagogue" class="ZipCount"></td>
+            </tr>
+            <tr>
+                <td>Co-Op: </td>
+                <td id="Zip_Co_Op" class="ZipCount"></td>
+            </tr>
+           
+            <tr>
+                <td>Garage: </td>
+                <td id="Zip_Garage" class="ZipCount"></td>
+            </tr>
+            <tr>
+                <td>Office Building: </td>
+                <td id="Zip_Office_Building" class="ZipCount"></td>
+            </tr>
+            <tr>
+                <td>Residential w/ Store: </td>
+                <td id="Zip_Residential_w_Store" class="ZipCount"></td>
+            </tr>
+             <tr>
+                <td>Warehouse/Factory: </td>
+                <td id="Zip_Warehouse_Factory" class="ZipCount"></td>
+            </tr>
+            <tr>
+                <td>Total : </td>
+                <td id="Zip_Total" class="ZipCount"></td>
+            </tr>
+             
         </table>
     </div>
 </asp:Content>

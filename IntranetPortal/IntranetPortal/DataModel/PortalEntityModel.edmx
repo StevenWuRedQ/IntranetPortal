@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agent_Properties">
           <Key>
             <PropertyRef Name="ID" />
@@ -373,6 +373,18 @@
           <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'IntranetPortal.dbo.MapDataSet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MapDataSet">
+          <Key>
+            <PropertyRef Name="TypeName" />
+            <PropertyRef Name="KeyCode" />
+            <PropertyRef Name="Count" />
+          </Key>
+          <Property Name="TypeName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="KeyCode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="NYC_DATA_COMMENT">
           <Key>
             <PropertyRef Name="Id" />
@@ -722,6 +734,13 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView' does not have 
           <EntitySet Name="UserProfileData" EntityType="Self.UserProfileData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersInRoles" EntityType="Self.UsersInRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTasks" EntityType="Self.UserTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapDataSet" EntityType="Self.MapDataSet" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MapDataSet].[TypeName] AS [TypeName], 
+    [MapDataSet].[KeyCode] AS [KeyCode], 
+    [MapDataSet].[Count] AS [Count]
+    FROM [dbo].[MapDataSet] AS [MapDataSet]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="NYC_St_Names" EntityType="Self.NYC_St_Names" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [NYC_St_Names].[st_name] AS [st_name], 
@@ -848,6 +867,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView' does not have 
           <EntitySet Name="Leads_with_last_log" EntityType="IntranetPortalModel.Leads_with_last_log" />
           <EntitySet Name="LatLon_View" EntityType="IntranetPortalModel.LatLon_View" />
           <EntitySet Name="LeadsAssignViews" EntityType="IntranetPortalModel.LeadsAssignView" />
+          <EntitySet Name="MapDataSets" EntityType="IntranetPortalModel.MapDataSet" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1586,6 +1606,16 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView' does not have 
           <Property Name="CoOwner" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="Int32" />
         </EntityType>
+        <EntityType Name="MapDataSet">
+          <Key>
+            <PropertyRef Name="TypeName" />
+            <PropertyRef Name="KeyCode" />
+            <PropertyRef Name="Count" />
+          </Key>
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="KeyCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2293,6 +2323,15 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView' does not have 
                 <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapDataSets">
+            <EntityTypeMapping TypeName="IntranetPortalModel.MapDataSet">
+              <MappingFragment StoreEntitySet="MapDataSet">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="KeyCode" ColumnName="KeyCode" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -426,6 +426,9 @@
     <Compile Include="DataModel\LoginLog.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\MapDataSet.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\NYC_DATA_COMMENT.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
