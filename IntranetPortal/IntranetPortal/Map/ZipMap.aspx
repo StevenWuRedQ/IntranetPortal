@@ -1,6 +1,20 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ZipMap.aspx.vb" Inherits="IntranetPortal.ZipMap" MasterPageFile="~/Content.Master" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ZipMap.aspx.vb" Inherits="IntranetPortal.ZipMap" %>
 
-<asp:Content ContentPlaceHolderID="head" runat="server">
+<html>
+<%--<asp:Content ContentPlaceHolderID="head" runat="server">--%>
+<head>
+    <title></title>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <%--<link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />--%>
+    <%--<script src="/scrollbar/jquery.mCustomScrollbar.js"></script>--%>
+    <script src="/scripts/bootstrap-datepicker.js"></script>
+    <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%-- <link href="/css/dx.common.css" rel="stylesheet" />
 
@@ -11,7 +25,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>--%>
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
-    
+
     <style>
         body {
             margin: 0;
@@ -23,6 +37,7 @@
             top: 0;
             bottom: 0;
             width: 100%;
+            left: 0px;
         }
 
         .count-icon {
@@ -43,9 +58,13 @@
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-geodesy/v0.1.0/leaflet-geodesy.js'></script>
     <script src="https://www.mapbox.com/mapbox.js/assets/data/realworld.388.js"></script>
-    
-</asp:Content>
-<asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
+
+</head>
+
+<body>
+
+    <%--</asp:Content>
+<asp:content contentplaceholderid="MainContentPH" runat="server">--%>
 
 
 
@@ -72,56 +91,53 @@
         var zipLeads = <%= leadsByZip%>
             function f() {
             }
-           
+
         var CountDateSet = <%= CountJosn%>
-            function FindNumberByName(typeName,zipCode)
-            {
-                
-                for (var i = 0; i < CountDateSet.length; i++)
-                {
+            function FindNumberByName(typeName, zipCode) {
+
+                for (var i = 0; i < CountDateSet.length; i++) {
                     var c = CountDateSet[i];
-                    if (c.TypeName == typeName && c.ZipCode == zipCode)
-                    {
+                    if (c.TypeName == typeName && c.ZipCode == zipCode) {
                         return String(c.Count)
                     }
                 }
                 return 0;
             }
 
-       //function codeAddress(zip,Count) {
-       //    geocoder = new google.maps.Geocoder();
-       //    var address = 'New York, NY ' + zip;
-       //    geocoder.geocode({ 'address': address }, function (results, status) {
-       //        if (status == google.maps.GeocoderStatus.OK) {
-       //            var lat = results[0].geometry.location;
-       //            zipMap = zipMap || [];
-       //            zipMap[zip] = { coordinates: lat, attributes: { name: zip } };
-       //            //vmaps = $('#container').dxVectorMap('instance');
-       //            //vmaps.option("markers", zipMap);
-       //        } else {
-       //            alert("Geocode was not successful for the following reason: " + status);
-       //        }
-       //    });
-       //}
-       // function initMaker()
-       // {
-       //     for (var i =0 ; i<zipLeads.length;i++ )
-       //     {
-       //         var a = zipLeads[i];
-       //         codeAddress(a.ZipCode, a.Count);
-       //     }
-       // }
-       // initMaker();
+        //function codeAddress(zip,Count) {
+        //    geocoder = new google.maps.Geocoder();
+        //    var address = 'New York, NY ' + zip;
+        //    geocoder.geocode({ 'address': address }, function (results, status) {
+        //        if (status == google.maps.GeocoderStatus.OK) {
+        //            var lat = results[0].geometry.location;
+        //            zipMap = zipMap || [];
+        //            zipMap[zip] = { coordinates: lat, attributes: { name: zip } };
+        //            //vmaps = $('#container').dxVectorMap('instance');
+        //            //vmaps.option("markers", zipMap);
+        //        } else {
+        //            alert("Geocode was not successful for the following reason: " + status);
+        //        }
+        //    });
+        //}
+        // function initMaker()
+        // {
+        //     for (var i =0 ; i<zipLeads.length;i++ )
+        //     {
+        //         var a = zipLeads[i];
+        //         codeAddress(a.ZipCode, a.Count);
+        //     }
+        // }
+        // initMaker();
 
-       function findCount(zip) {
-           for (var i = 0 ; i < zipLeads.length; i++) {
-               var e = zipLeads[i];
-               if (zip == e.ZipCode) {
-                   return ', Leads :' + e.Count;
-               }
-           }
-           return ''
-       }
+        function findCount(zip) {
+            for (var i = 0 ; i < zipLeads.length; i++) {
+                var e = zipLeads[i];
+                if (zip == e.ZipCode) {
+                    return ', Leads :' + e.Count;
+                }
+            }
+            return ''
+        }
 
         function findCountNum(zip) {
             for (var i = 0 ; i < zipLeads.length; i++) {
@@ -156,14 +172,14 @@
 
             function getColor(d) {
 
-                return d > 1000 ? '#8c2d04' :
-                    d > 500 ? '#cc4c02' :
-                    d > 200 ? '#ec7014' :
-                    d > 100 ? '#fe9929' :
-                    d > 50 ? '#fec44f' :
-                    d > 20 ? '#fee391' :
-                    d > 10 ? '#fff7bc' :
-                    '#ffffe5';
+                return d > 1000 ? '#1976D2' :
+                    d > 500 ? '#1E88E5' :
+                    d > 200 ? '#2196F3' :
+                    d > 100 ? '#42A5F5' :
+                    d > 50 ? '#64B5F6' :
+                    d > 20 ? '#90CAF9' :
+                    d > 10 ? '#BBDEFB' :
+                    '#E3F2FD';
             }
 
             function onEachFeature(feature, layer) {
@@ -190,7 +206,7 @@
                 layer.setStyle({
                     weight: 3,
                     opacity: 0.3,
-                    fillOpacity: 0.9
+                    fillOpacity: 0.5
                 });
 
                 if (!L.Browser.ie && !L.Browser.opera) {
@@ -205,7 +221,7 @@
                 }, 100);
             }
 
-            
+
             function ClickZip(e) {
                 $('#divMsgTest').animate({ top: "25" }, 500);
                 var zip = e.target.feature.properties.postalCode;
@@ -213,11 +229,11 @@
                 $('#tdLeadsCount').html(findCountNum(zip));
                 $(".ZipCount").each(function (index) {
                     var c = FindNumberByName(this.id, zip);
-                    
+
                     $(this).html(c);
 
                 });
-                 //map.fitBounds(e.target.getBounds());
+                //map.fitBounds(e.target.getBounds());
             }
 
             map.legendControl.addLegend(getLegendHTML());
@@ -238,16 +254,13 @@
 
                 return '<span>Leads in Zip</span><ul>' + labels.join('') + '</ul>';
             }
+
             
-            return;
 
             zipMap = zipMap || [];// data.features;
-            initMapBox();
+            //initMapBox();
             var geoJson = []
-            var myLayer = L.mapbox.featureLayer({
-                style: getStyle,
-                onEachFeature: onEachFeature
-            }).addTo(map);
+            var myLayer = L.mapbox.featureLayer();
 
             for (var i = 0 ; i < data.features.length; i++) {
 
@@ -291,8 +304,20 @@
 
                 marker.setIcon(feature.properties.icon);
             });
+
             var z = zipMap;
             myLayer.setGeoJSON(geoJson);
+
+            /*add layer swicher */
+            L.control.layers({
+                'Base Map': L.mapbox.tileLayer('examples.map-i87786ca'),
+                'Grey Map': L.mapbox.tileLayer('examples.map-20v6611k')
+            }, {
+                'Leads Count Portal': myLayer,
+               
+            }).addTo(map);
+            /******/
+            return;
             //var markers = new L.MarkerClusterGroup();
 
             //for (var i = 0; i < LatLonData.length; i++) {
@@ -378,6 +403,7 @@
                .addControl(L.mapbox.geocoderControl('mapbox.places'))
              .setView([40.7127, -74.0059], 11);
 
+           
             var featureGroup = L.featureGroup().addTo(map);
 
             var drawControl = new L.Control.Draw({
@@ -434,49 +460,50 @@
 
         .message {
             background-size: 40px 40px;
-            background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%, transparent 75%, transparent);
-            box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
-            width: 300px;
-            border: 1px solid;
-            color: #fff;
-            padding: 15px;
-            position: fixed;
-            _position: absolute;
-            text-shadow: 0 1px 0 rgba(0,0,0,.5);
-            animation: animate-bg 5s linear infinite;
-        }
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 25,  25, .05) 50%, 
+             255, .05) 5%, tasparn 75%,  transparent);            
+            x-shad w: ins
+            ba(255, 55,55,.4)
+             width  300p
+              border  1px 
+                  col r: #ff
+              padding: 15px;
+  tion: fixed;
+                     _position:
+                      ext-shadow 0 1px 0 gba(0,0,0
+         
+        ation  
+            linear infinite;                    info {
+           ba
+        o
 
-        .info {
-            background-color: #4ea5cd;
-            border-color: #3b8eb5;
-        }
+        ;
+           bor e
+            b5;
+     }                        
+            ge .msgtit e {            
+          5px 0;          size: 1 px
+         
+         .message  {
+       
+   keyframes animate-bg {
+                 m
 
-        .message .msgtitle {
-            margin: 0 0 5px 0;
-            font-size: 14px;
-        }
-
-        .message p {
-            margin: 0;
-        }
-
-        @keyframes animate-bg {
-            from {
-                background-position: 0 0;
-            }
-
-            to {
-                background-position: -80px 0;
-            }
+               n: 0 0;
+           }
+                
+                  
+         kground-position: -80px 0
+                   }
         }
     </style>
 
-    <div id="divMsgTest" class="info message" style="top: -300px; right: 25px">
+    <div id="divMsgTest" class="info message" style="top: -500px; right: 25px">
         <div class="msgtitle">
             <i class="fa fa-database with_circle" style="color: white; font-size: 14px; width: 30px; height: 30px; line-height: 30px; text-align: center"></i>&nbsp; <span id="spanZip"></span>
             <span style="float: right; line-height: 30px; font-weight: 600; cursor: pointer" onclick="HideMessages()">X</span>
         </div>
-        <table style="width: 100%; font-size: 14px" >
+        <table style="width: 100%; font-size: 14px">
             <tr>
                 <td>Leads in Portal: </td>
                 <td id="tdLeadsCount"></td>
@@ -517,7 +544,7 @@
                 <td>Co-Op: </td>
                 <td id="Zip_Co_Op" class="ZipCount"></td>
             </tr>
-           
+
             <tr>
                 <td>Garage: </td>
                 <td id="Zip_Garage" class="ZipCount"></td>
@@ -530,7 +557,7 @@
                 <td>Residential w/ Store: </td>
                 <td id="Zip_Residential_w_Store" class="ZipCount"></td>
             </tr>
-             <tr>
+            <tr>
                 <td>Warehouse/Factory: </td>
                 <td id="Zip_Warehouse_Factory" class="ZipCount"></td>
             </tr>
@@ -538,7 +565,10 @@
                 <td>Total : </td>
                 <td id="Zip_Total" class="ZipCount"></td>
             </tr>
-             
+
         </table>
     </div>
-</asp:Content>
+</body>
+
+<%--</asp:Content>--%>
+</html>
