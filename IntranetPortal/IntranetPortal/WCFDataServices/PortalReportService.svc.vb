@@ -71,7 +71,6 @@ Public Class PortalReportService
     End Function
 End Class
 
-
 Public Module JsonExtension
     <Extension()>
     Public Function ToJson(ByVal obj As Object) As System.ServiceModel.Channels.Message
