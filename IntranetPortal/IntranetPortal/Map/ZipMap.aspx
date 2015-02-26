@@ -260,6 +260,8 @@
                 // you want something other than just one zoom level, like
                 // (map.getZoom > 10)
                 var bound = map.getBounds();
+
+
                 debugger;
             });
             
