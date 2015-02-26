@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MapDataEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="dtm_0814_tax_block_polygon">
+          <Key>
+            <PropertyRef Name="ogr_fid" />
+          </Key>
+          <Property Name="ogr_fid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ogr_geometry" Type="geometry" />
+          <Property Name="boro" Type="varchar" MaxLength="1" />
+          <Property Name="block" Type="numeric" Precision="9" Scale="0" />
+          <Property Name="eop_overla" Type="numeric" Precision="4" Scale="0" />
+          <Property Name="jagged_st_" Type="numeric" Precision="4" Scale="0" />
+          <Property Name="created_by" Type="varchar" MaxLength="50" />
+          <Property Name="created_da" Type="date" />
+          <Property Name="last_modif" Type="varchar" MaxLength="50" />
+          <Property Name="last_mod_1" Type="date" />
+          <Property Name="section_nu" Type="numeric" Precision="4" Scale="0" />
+          <Property Name="volume_num" Type="numeric" Precision="4" Scale="0" />
+          <Property Name="shape_leng" Type="numeric" Precision="19" Scale="11" />
+          <Property Name="shape_area" Type="numeric" Precision="19" Scale="11" />
+        </EntityType>
+        <EntityContainer Name="MapDataEntitiesStoreContainer">
+          <EntitySet Name="dtm_0814_tax_block_polygon" EntityType="Self.dtm_0814_tax_block_polygon" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="MapDataEntities" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="MapDataEntitiesContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="dtm_0814_tax_block_polygon" EntityType="MapDataEntities.dtm_0814_tax_block_polygon" />
+        </EntityContainer>
+        <EntityType Name="dtm_0814_tax_block_polygon">
+          <Key>
+            <PropertyRef Name="ogr_fid" />
+          </Key>
+          <Property Name="ogr_fid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ogr_geometry" Type="Geometry" />
+          <Property Name="boro" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="block" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="eop_overla" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="jagged_st_" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="created_da" Type="DateTime" Precision="0" />
+          <Property Name="last_modif" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="last_mod_1" Type="DateTime" Precision="0" />
+          <Property Name="section_nu" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="volume_num" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="shape_leng" Type="Decimal" Precision="19" Scale="11" />
+          <Property Name="shape_area" Type="Decimal" Precision="19" Scale="11" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="MapDataEntities" />
+        <Alias Key="Target" Value="MapDataEntities.Store" />
+        <EntityContainerMapping CdmEntityContainer="MapDataEntitiesContainer" StorageEntityContainer="MapDataEntitiesStoreContainer">
+          <EntitySetMapping Name="dtm_0814_tax_block_polygon">
+            <EntityTypeMapping TypeName="MapDataEntities.dtm_0814_tax_block_polygon">
+              <MappingFragment StoreEntitySet="dtm_0814_tax_block_polygon">
+                <ScalarProperty Name="shape_area" ColumnName="shape_area" />
+                <ScalarProperty Name="shape_leng" ColumnName="shape_leng" />
+                <ScalarProperty Name="volume_num" ColumnName="volume_num" />
+                <ScalarProperty Name="section_nu" ColumnName="section_nu" />
+                <ScalarProperty Name="last_mod_1" ColumnName="last_mod_1" />
+                <ScalarProperty Name="last_modif" ColumnName="last_modif" />
+                <ScalarProperty Name="created_da" ColumnName="created_da" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="jagged_st_" ColumnName="jagged_st_" />
+                <ScalarProperty Name="eop_overla" ColumnName="eop_overla" />
+                <ScalarProperty Name="block" ColumnName="block" />
+                <ScalarProperty Name="boro" ColumnName="boro" />
+                <ScalarProperty Name="ogr_geometry" ColumnName="ogr_geometry" />
+                <ScalarProperty Name="ogr_fid" ColumnName="ogr_fid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

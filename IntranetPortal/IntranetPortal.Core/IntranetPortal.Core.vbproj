@@ -53,8 +53,18 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="GeoJSON.Net">
+      <HintPath>..\..\..\MapData\GeoJSON.Net.MsSqlSpatial\src\GeoJSON.Net.MsSqlSpatial\bin\Debug\GeoJSON.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="GeoJSON.Net.MsSqlSpatial">
+      <HintPath>..\..\..\MapData\GeoJSON.Net.MsSqlSpatial\src\GeoJSON.Net.MsSqlSpatial\bin\Debug\GeoJSON.Net.MsSqlSpatial.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.SharePoint.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\MapData\GeoJSON.Net.MsSqlSpatial\src\GeoJSON.Net.MsSqlSpatial\bin\Debug\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -98,11 +108,29 @@
     <Compile Include="ADOEntity\DataLoopRule.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\dtm_0814_tax_block_polygon.vb">
+      <DependentUpon>MapDataEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\EmailMessage.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\EmailTemplate.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\MapDataEntities.Context.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MapDataEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\MapDataEntities.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MapDataEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ADOEntity\MapDataEntities.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MapDataEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ADOEntity\RecycleLead.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
@@ -114,6 +142,7 @@
     <Compile Include="DocumentService.vb" />
     <Compile Include="EmailService.vb" />
     <Compile Include="HolidayService.vb" />
+    <Compile Include="MapService.vb" />
     <Compile Include="Model\SpecialDay.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -159,6 +188,23 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CoreEntities.edmx</DependentUpon>
       <LastGenOutput>CoreEntities.vb</LastGenOutput>
+    </None>
+    <EntityDeploy Include="ADOEntity\MapDataEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MapDataEntities.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ADOEntity\MapDataEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MapDataEntities.Context.vb</LastGenOutput>
+      <DependentUpon>MapDataEntities.edmx</DependentUpon>
+    </None>
+    <None Include="ADOEntity\MapDataEntities.edmx.diagram">
+      <DependentUpon>MapDataEntities.edmx</DependentUpon>
+    </None>
+    <None Include="ADOEntity\MapDataEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MapDataEntities.vb</LastGenOutput>
+      <DependentUpon>MapDataEntities.edmx</DependentUpon>
     </None>
     <None Include="App.config" />
     <None Include="My Project\Application.myapp">
