@@ -736,6 +736,10 @@
       <DependentUpon>WorkflowMng.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Map\PortalMapData.asmx.vb">
+      <DependentUpon>PortalMapData.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Map\ZipMap.aspx.designer.vb">
       <DependentUpon>ZipMap.aspx</DependentUpon>
     </Compile>
@@ -1535,6 +1539,8 @@
     <Content Include="Management\TroubleShooting.aspx" />
     <Content Include="Management\WorkflowMng.aspx" />
     <Content Include="MapTest.aspx" />
+    <Content Include="Map\MapData\nyc-zip-code.js" />
+    <Content Include="Map\PortalMapData.asmx" />
     <Content Include="Map\ZipMap.aspx" />
     <Content Include="OneDrive\constants.js" />
     <Content Include="OneDrive\Callback.html" />
@@ -2324,7 +2330,6 @@
     <Content Include="pdfViewer\web\locale\zu\viewer.properties" />
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="My Project\DataSources\System.Data.DataTable.datasource" />
-    <Content Include="Map\MapData\nyc-zip-code.js" />
     <None Include="scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />

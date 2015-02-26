@@ -6,9 +6,8 @@ Imports IntranetPortal.CallTrackingService
 <ServiceContract()>
 Public Interface IPortalReportService
     <OperationContract()>
-   <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="UserReports")>
+    <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="UserReports")>
     Function EmployeeReports() As List(Of EmployeeStatisticData)
-
 
     <OperationContract()>
     <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="CallLog/{empName}")>
@@ -17,6 +16,7 @@ Public Interface IPortalReportService
     <OperationContract()>
     <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="LeadsStatusReport/{teamName}")>
     Function LoadLeadsStatusReport(teamName As String) As List(Of LeadsStatusData)
+
     <OperationContract()>
    <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="LeadsInProcessReport/{teamName}")>
     Function LoadLeadsInProcessReport(teamName As String) As List(Of LeadsStatusData)

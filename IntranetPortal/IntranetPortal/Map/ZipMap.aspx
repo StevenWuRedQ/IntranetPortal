@@ -104,40 +104,40 @@
                 return 0;
             }
 
-        //function codeAddress(zip,Count) {
-        //    geocoder = new google.maps.Geocoder();
-        //    var address = 'New York, NY ' + zip;
-        //    geocoder.geocode({ 'address': address }, function (results, status) {
-        //        if (status == google.maps.GeocoderStatus.OK) {
-        //            var lat = results[0].geometry.location;
-        //            zipMap = zipMap || [];
-        //            zipMap[zip] = { coordinates: lat, attributes: { name: zip } };
-        //            //vmaps = $('#container').dxVectorMap('instance');
-        //            //vmaps.option("markers", zipMap);
-        //        } else {
-        //            alert("Geocode was not successful for the following reason: " + status);
-        //        }
-        //    });
-        //}
-        // function initMaker()
-        // {
-        //     for (var i =0 ; i<zipLeads.length;i++ )
-        //     {
-        //         var a = zipLeads[i];
-        //         codeAddress(a.ZipCode, a.Count);
-        //     }
-        // }
-        // initMaker();
+       //function codeAddress(zip,Count) {
+       //    geocoder = new google.maps.Geocoder();
+       //    var address = 'New York, NY ' + zip;
+       //    geocoder.geocode({ 'address': address }, function (results, status) {
+       //        if (status == google.maps.GeocoderStatus.OK) {
+       //            var lat = results[0].geometry.location;
+       //            zipMap = zipMap || [];
+       //            zipMap[zip] = { coordinates: lat, attributes: { name: zip } };
+       //            //vmaps = $('#container').dxVectorMap('instance');
+       //            //vmaps.option("markers", zipMap);
+       //        } else {
+       //            alert("Geocode was not successful for the following reason: " + status);
+       //        }
+       //    });
+       //}
+       // function initMaker()
+       // {
+       //     for (var i =0 ; i<zipLeads.length;i++ )
+       //     {
+       //         var a = zipLeads[i];
+       //         codeAddress(a.ZipCode, a.Count);
+       //     }
+       // }
+       // initMaker();
 
-        function findCount(zip) {
-            for (var i = 0 ; i < zipLeads.length; i++) {
-                var e = zipLeads[i];
-                if (zip == e.ZipCode) {
-                    return ', Leads :' + e.Count;
-                }
-            }
-            return ''
-        }
+       function findCount(zip) {
+           for (var i = 0 ; i < zipLeads.length; i++) {
+               var e = zipLeads[i];
+               if (zip == e.ZipCode) {
+                   return ', Leads :' + e.Count;
+               }
+           }
+           return ''
+       }
 
         function findCountNum(zip) {
             for (var i = 0 ; i < zipLeads.length; i++) {
@@ -221,7 +221,7 @@
                 }, 100);
             }
 
-
+            
             function ClickZip(e) {
                 $('#divMsgTest').animate({ top: "25" }, 500);
                 var zip = e.target.feature.properties.postalCode;
@@ -254,8 +254,18 @@
 
                 return '<span>Leads in Zip</span><ul>' + labels.join('') + '</ul>';
             }
-
             
+            map.on('zoomend', function () {
+                // here's where you decided what zoom levels the layer should and should
+                // not be available for: use javascript comparisons like < and > if
+                // you want something other than just one zoom level, like
+                // (map.getZoom > 10)
+                var bound = map.getBounds();
+                debugger;
+            });
+            
+            return;
+
 
             zipMap = zipMap || [];// data.features;
             //initMapBox();
@@ -314,7 +324,7 @@
                 'Grey Map': L.mapbox.tileLayer('examples.map-20v6611k')
             }, {
                 'Leads Count Portal': myLayer,
-               
+
             }).addTo(map);
             /******/
             return;
@@ -467,7 +477,7 @@
              width  300p
               border  1px 
                   col r: #ff
-              padding: 15px;
+            padding: 15px;
   tion: fixed;
                      _position:
                       ext-shadow 0 1px 0 gba(0,0,0
@@ -480,21 +490,23 @@
         ;
            bor e
             b5;
-     }                        
+        }
+
+            
             ge .msgtit e {            
           5px 0;          size: 1 px
          
          .message  {
-       
+
    keyframes animate-bg {
                  m
 
                n: 0 0;
-           }
-                
-                  
+        }
+
+
          kground-position: -80px 0
-                   }
+            }
         }
     </style>
 
