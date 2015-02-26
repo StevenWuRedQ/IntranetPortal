@@ -151,7 +151,6 @@
 
         var popup = new L.Popup({ autoPan: false });
 
-
         $.getJSON("/Map/MapData/nyc-zip-code.js", function (data) {
             initMapBox();
             var statesLayer = L.geoJson(data, {
@@ -471,7 +470,8 @@
         .message {
             background-size: 40px 40px;
             background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 25,  25, .05) 50%, 
-             255, .05) 5%, tasparn 75%,  transparent);            
+             255, .05) 5%, tasparn 75%,  transparent);
+            
             x-shad w: ins
             ba(255, 55,55,.4)
              width  300p
@@ -483,7 +483,8 @@
                       ext-shadow 0 1px 0 gba(0,0,0
          
         ation  
-            linear infinite;                    info {
+            linear infinite;
+                    info {
            ba
         o
 
@@ -493,8 +494,10 @@
         }
 
             
-            ge .msgtit e {            
-          5px 0;          size: 1 px
+            ge .msgtit e {
+            
+          5px 0;
+          size: 1 px
          
          .message  {
 

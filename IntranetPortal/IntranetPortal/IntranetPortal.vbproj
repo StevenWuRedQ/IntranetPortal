@@ -142,6 +142,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="GeoJSON.Net, Version=0.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\MapData\GeoJSON.Net.MsSqlSpatial\src\GeoJSON.Net.MsSqlSpatial\bin\Debug\GeoJSON.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.EntityDataSource">
       <HintPath>..\packages\Microsoft.AspNet.EntityDataSource.6.0.0\lib\net40\Microsoft.AspNet.EntityDataSource.dll</HintPath>
     </Reference>
@@ -736,9 +740,16 @@
       <DependentUpon>WorkflowMng.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Map\PortalMapData.asmx.vb">
-      <DependentUpon>PortalMapData.asmx</DependentUpon>
-      <SubType>Component</SubType>
+    <Compile Include="Map\MapDataService.svc.vb">
+      <DependentUpon>MapDataService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Map\IMapDataService.vb" />
+    <Compile Include="Map\ServiceTest.aspx.designer.vb">
+      <DependentUpon>ServiceTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Map\ServiceTest.aspx.vb">
+      <DependentUpon>ServiceTest.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Map\ZipMap.aspx.designer.vb">
       <DependentUpon>ZipMap.aspx</DependentUpon>
@@ -1539,8 +1550,9 @@
     <Content Include="Management\TroubleShooting.aspx" />
     <Content Include="Management\WorkflowMng.aspx" />
     <Content Include="MapTest.aspx" />
+    <Content Include="Map\MapDataService.svc" />
     <Content Include="Map\MapData\nyc-zip-code.js" />
-    <Content Include="Map\PortalMapData.asmx" />
+    <Content Include="Map\ServiceTest.aspx" />
     <Content Include="Map\ZipMap.aspx" />
     <Content Include="OneDrive\constants.js" />
     <Content Include="OneDrive\Callback.html" />
