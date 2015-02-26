@@ -104,40 +104,40 @@
                 return 0;
             }
 
-       //function codeAddress(zip,Count) {
-       //    geocoder = new google.maps.Geocoder();
-       //    var address = 'New York, NY ' + zip;
-       //    geocoder.geocode({ 'address': address }, function (results, status) {
-       //        if (status == google.maps.GeocoderStatus.OK) {
-       //            var lat = results[0].geometry.location;
-       //            zipMap = zipMap || [];
-       //            zipMap[zip] = { coordinates: lat, attributes: { name: zip } };
-       //            //vmaps = $('#container').dxVectorMap('instance');
-       //            //vmaps.option("markers", zipMap);
-       //        } else {
-       //            alert("Geocode was not successful for the following reason: " + status);
-       //        }
-       //    });
-       //}
-       // function initMaker()
-       // {
-       //     for (var i =0 ; i<zipLeads.length;i++ )
-       //     {
-       //         var a = zipLeads[i];
-       //         codeAddress(a.ZipCode, a.Count);
-       //     }
-       // }
-       // initMaker();
+        //function codeAddress(zip,Count) {
+        //    geocoder = new google.maps.Geocoder();
+        //    var address = 'New York, NY ' + zip;
+        //    geocoder.geocode({ 'address': address }, function (results, status) {
+        //        if (status == google.maps.GeocoderStatus.OK) {
+        //            var lat = results[0].geometry.location;
+        //            zipMap = zipMap || [];
+        //            zipMap[zip] = { coordinates: lat, attributes: { name: zip } };
+        //            //vmaps = $('#container').dxVectorMap('instance');
+        //            //vmaps.option("markers", zipMap);
+        //        } else {
+        //            alert("Geocode was not successful for the following reason: " + status);
+        //        }
+        //    });
+        //}
+        // function initMaker()
+        // {
+        //     for (var i =0 ; i<zipLeads.length;i++ )
+        //     {
+        //         var a = zipLeads[i];
+        //         codeAddress(a.ZipCode, a.Count);
+        //     }
+        // }
+        // initMaker();
 
-       function findCount(zip) {
-           for (var i = 0 ; i < zipLeads.length; i++) {
-               var e = zipLeads[i];
-               if (zip == e.ZipCode) {
-                   return ', Leads :' + e.Count;
-               }
-           }
-           return ''
-       }
+        function findCount(zip) {
+            for (var i = 0 ; i < zipLeads.length; i++) {
+                var e = zipLeads[i];
+                if (zip == e.ZipCode) {
+                    return ', Leads :' + e.Count;
+                }
+            }
+            return ''
+        }
 
         function findCountNum(zip) {
             for (var i = 0 ; i < zipLeads.length; i++) {
@@ -171,14 +171,14 @@
 
             function getColor(d) {
 
-                return d > 1000 ? '#1976D2' :
-                    d > 500 ? '#1E88E5' :
-                    d > 200 ? '#2196F3' :
-                    d > 100 ? '#42A5F5' :
-                    d > 50 ? '#64B5F6' :
-                    d > 20 ? '#90CAF9' :
-                    d > 10 ? '#BBDEFB' :
-                    '#E3F2FD';
+                return d > 1000 ? '#287aa6' :
+                    d > 500 ? '#3890bf' :
+                    d > 200 ? '#469fcf' :
+                    d > 100 ? '#58acd9' :
+                    d > 50 ? '#6ebfea' :
+                    d > 20 ? '#8ccef2' :
+                    d > 10 ? '#a6dcf8' :
+                    '#c7ebff';
             }
 
             function onEachFeature(feature, layer) {
@@ -220,7 +220,7 @@
                 }, 100);
             }
 
-            
+
             function ClickZip(e) {
                 $('#divMsgTest').animate({ top: "25" }, 500);
                 var zip = e.target.feature.properties.postalCode;
@@ -253,20 +253,11 @@
 
                 return '<span>Leads in Zip</span><ul>' + labels.join('') + '</ul>';
             }
+
+            map.on('zoomend', ZoomEndMapBox);
             
-            map.on('zoomend', function () {
-                // here's where you decided what zoom levels the layer should and should
-                // not be available for: use javascript comparisons like < and > if
-                // you want something other than just one zoom level, like
-                // (map.getZoom > 10)
-                var bound = map.getBounds();
-
-
-                debugger;
-            });
+          
             
-            return;
-
 
             zipMap = zipMap || [];// data.features;
             //initMapBox();
@@ -321,11 +312,10 @@
 
             /*add layer swicher */
             L.control.layers({
-                'Base Map': L.mapbox.tileLayer('examples.map-i87786ca'),
-                'Grey Map': L.mapbox.tileLayer('examples.map-20v6611k')
+                
             }, {
                 'Leads Count Portal': myLayer,
-
+               
             }).addTo(map);
             /******/
             return;
@@ -408,9 +398,34 @@
         //    var vmaps = $('#container').dxVectorMap('instance');
         //}
         var map
+        function ZoomEndMapBox()
+        {
+            if(map.getZoom() === 16)
+            {
+                // here's where you decided what zoom levels the layer should and should
+                // not be available for: use javascript comparisons like < and > if
+                // you want something other than just one zoom level, like
+                // (map.getZoom > 17)
+                var bounds = map.getBounds();
+                var northEast = bounds.getNorthEast();
+                var southWest = bounds.getSouthWest();
+                var featureLayer = L.mapbox.featureLayer()
+                var string = [northEast.lat,northEast.lng,southWest.lat,southWest.lng].join(',');
+                $.getJSON('/map/mapdataservice.svc/BlockData/' + string, function (data) {
+                   
+                    var geoJson = {
+                        "type": "FeatureCollection",
+                        "features":data
+                    }
+                    var featureLayer = L.mapbox.featureLayer(geoJson)
+                    .addTo(map);
+                });
+                
+            }
+        }
         function initMapBox() {
             L.mapbox.accessToken = 'pk.eyJ1IjoicG9ydGFsIiwiYSI6ImtCdG9ac00ifQ.p2_3nTko4JskYcg0YIgeyw';
-            map = L.mapbox.map('map', 'portal.c0410d46')
+            map = L.mapbox.map('map', 'examples.map-i87786ca')
                .addControl(L.mapbox.geocoderControl('mapbox.places'))
              .setView([40.7127, -74.0059], 11);
 
@@ -471,47 +486,40 @@
 
         .message {
             background-size: 40px 40px;
-            background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 25,  25, .05) 50%, 
-             255, .05) 5%, tasparn 75%,  transparent);
-            
-            x-shad w: ins
-            ba(255, 55,55,.4)
-             width  300p
-              border  1px 
-                  col r: #ff
-            padding: 15px;
-  tion: fixed;
-                     _position:
-                      ext-shadow 0 1px 0 gba(0,0,0
-         
-        ation  
-            linear infinite;
-                    info {
-           ba
-        o
-
-        ;
-           bor e
-            b5;
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%, transparent 75%, transparent);
+            box-shadow: inset 0 -1px 0 rgba(255,255,255,.4);
+            width: 300px;
+            border: 1px solid;
+            color: #fff;
+              padding: 15px;
+            position: fixed;
+            _position: absolute;
+            text-shadow: 0 1px 0 rgba(0,0,0,.5);
+            animation: animate-bg 5s linear infinite;
         }
 
+        .info {
+            background-color: #4ea5cd;
+            border-color: #3b8eb5;
+     }
             
-            ge .msgtit e {
-            
-          5px 0;
-          size: 1 px
-         
-         .message  {
-
-   keyframes animate-bg {
-                 m
-
-               n: 0 0;
+        .message .msgtitle {
+            margin: 0 0 5px 0;
+            font-size: 14px;
         }
 
-
-         kground-position: -80px 0
+        .message p {
+            margin: 0;
+           }
+                
+        @keyframes animate-bg {
+            from {
+                background-position: 0 0;
             }
+                  
+            to {
+                background-position: -80px 0;
+                   }
         }
     </style>
 
