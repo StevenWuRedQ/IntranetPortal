@@ -1,4 +1,5 @@
 ﻿Imports DevExpress.Web.ASPxEditors
+Imports DevExpress.XtraPrintingLinks
 
 Public Class LeadsManagement
     Inherits System.Web.UI.Page
@@ -47,14 +48,14 @@ Public Class LeadsManagement
     Sub BindNewestLeads()
         Using Context As New Entities
             If User.IsInRole("Admin") Then
-                Dim lds = Context.LeadsAssignViews.Where(Function(la) String.IsNullOrEmpty(la.EmployeeName)).OrderBy(Function(la) la.BBLE)
+                Dim lds = Context.LeadsAssignView2.Where(Function(la) String.IsNullOrEmpty(la.EmployeeName)).OrderBy(Function(la) la.BBLE)
                 gridLeads.DataSource = lds.ToList ' Context.LeadsInfoes.Where(Function(l) l.Lead Is Nothing).ToList
                 gridLeads.DataBind()
             Else
                 If Employee.IsManager(User.Identity.Name) Then
                     Dim name = User.Identity.Name
 
-                    Dim lds = Context.LeadsAssignViews.Where(Function(la) la.EmployeeName = name And la.Status = LeadStatus.NewLead).OrderBy(Function(la) la.BBLE)
+                    Dim lds = Context.LeadsAssignView2.Where(Function(la) la.EmployeeName = name And la.Status = LeadStatus.NewLead).OrderBy(Function(la) la.BBLE)
                     gridLeads.DataSource = lds.ToList
                     gridLeads.DataBind()
 
@@ -68,7 +69,7 @@ Public Class LeadsManagement
         Using Context As New Entities
             'gridLeads.DataSource = Context.LeadsInfoes.Where(Function(li) li.Lead.EmployeeName = mgrName And li.Lead.Status = LeadStatus.NewLead).ToList         
 
-            gridLeads.DataSource = Context.LeadsAssignViews.Where(Function(la) la.EmployeeName = mgrName And la.Status = LeadStatus.NewLead).OrderBy(Function(la) la.BBLE).ToList 'lds.ToList
+            gridLeads.DataSource = Context.LeadsAssignView2.Where(Function(la) la.EmployeeName = mgrName And la.Status = LeadStatus.NewLead).OrderBy(Function(la) la.BBLE).ToList 'lds.ToList
             gridLeads.DataBind()
         End Using
     End Sub
@@ -106,7 +107,7 @@ Public Class LeadsManagement
             '                          .Type = li.Type,
             '                          .IsRecycled = Recycle
             '                          })
-            gridLeads.DataSource = Context.LeadsAssignViews.Where(Function(la) la.EmployeeName = officeName Or (unActiveUser.Contains(la.EmployeeName) And la.Status <> LeadStatus.InProcess)).OrderBy(Function(la) la.BBLE).ToList
+            gridLeads.DataSource = Context.LeadsAssignView2.Where(Function(la) la.EmployeeName = officeName Or (unActiveUser.Contains(la.EmployeeName) And la.Status <> LeadStatus.InProcess)).OrderBy(Function(la) la.BBLE).ToList
             gridLeads.DataBind()
         End Using
     End Sub
@@ -340,6 +341,14 @@ Public Class LeadsManagement
     Protected Sub btnExport_Click(sender As Object, e As EventArgs)
         gridExport.WriteXlsxToResponse()
     End Sub
+
+    Protected Sub gridExport_RenderBrick(sender As Object, e As DevExpress.Web.ASPxGridView.Export.ASPxGridViewExportRenderingEventArgs)
+        If e.Column.Caption = "Recycle" Then
+            If e.GetValue("Comments") IsNot Nothing Then
+                e.TextValue = Utility.RemoveHtmlTags(e.GetValue("Comments")) 'String.Format("{0}@{1} {2}", e.GetValue("UpdateUser"), e.GetValue("ActivityDate"), e.GetValue("Comments"))                
+            End If
+        End If
+    End Sub
 End Class
 
 Partial Class LeadsAssignView
@@ -370,6 +379,58 @@ Partial Class LeadsAssignView
     Public ReadOnly Property Street As String
         Get
             Return StreetName
+        End Get
+    End Property
+
+    Public ReadOnly Property TypeText As String
+        Get
+            If Type.HasValue Then
+                Return CType(Type, LeadsInfo.LeadsType).ToString
+            End If
+
+            Return ""
+        End Get
+    End Property
+End Class
+
+Partial Class LeadsAssignView2
+    Public ReadOnly Property IsRecycled As Boolean
+        Get
+            Return Not String.IsNullOrEmpty(Me.Comments)
+        End Get
+    End Property
+
+    Public ReadOnly Property MortgageCombo As Decimal
+        Get
+            Return If(C1stMotgrAmt.HasValue, C1stMotgrAmt, 0) + If(C2ndMotgrAmt.HasValue, C2ndMotgrAmt, 0) + If(C3rdMortgrAmt.HasValue, C3rdMortgrAmt, 0)
+        End Get
+    End Property
+
+    Public ReadOnly Property TaxLiensAmount As String
+        Get
+            Return If(Amount = 0, "Not Avaiable", "")
+        End Get
+    End Property
+
+    Public ReadOnly Property Neighborhood As String
+        Get
+            Return NeighName
+        End Get
+    End Property
+
+    Public ReadOnly Property Street As String
+        Get
+            Return StreetName
+        End Get
+    End Property
+
+    Public ReadOnly Property TypeText As String
+        Get
+            If Type.HasValue Then
+                Return CType(Type, LeadsInfo.LeadsType).ToString
+            End If
+
+            Return ""
         End Get
     End Property
 End Class

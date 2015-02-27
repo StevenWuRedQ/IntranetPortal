@@ -21,6 +21,10 @@ Partial Public Class MapDataService
 
     Public Function LoadBlockData(neLat As String, neLng As String, swLat As String, swLng As String) As Channels.Message Implements IMapDataService.LoadBlockData
         Dim dataSvr As New MapService
-        Return dataSvr.LoadBlockLayers(neLat, neLng, swLat, swLng).ToJson()
+        Dim result = New With {
+            .type = "FeatureCollection",
+            .features = dataSvr.LoadBlockLayers(neLat, neLng, swLat, swLng)
+            }
+        Return result.ToJson()
     End Function
 End Class

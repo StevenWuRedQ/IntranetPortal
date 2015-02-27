@@ -32,6 +32,14 @@
             }
         }
 
+        function OnSelectionChanged(s, e) {
+            var counnt = s.GetSelectedRowCount();
+            if (counnt > 0) {
+                document.getElementById("btnAssign").disabled = false;
+            } else
+                document.getElementById("btnAssign").disabled = true;
+        }
+
         function NavigateToLeadsInfo(bble) {
             if (leadsInfoBBLE == bble)
                 return
@@ -140,6 +148,13 @@
             //onInitScorllBar();
         });
     </script>
+    <style type="text/css">
+        .rand-button:disabled
+        {
+            background-color:gray;
+        }
+
+    </style>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
@@ -191,6 +206,8 @@
                                     <Columns>
                                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" SelectAllCheckboxMode="Page" VisibleIndex="0" Name="colSelect" Visible="true" Width="25px">
                                         </dx:GridViewCommandColumn>
+                                        <dx:GridViewDataColumn FieldName="BBLE" Caption="BBLE" Width="1px" ExportWidth="100">                                            
+                                        </dx:GridViewDataColumn>
                                         <dx:GridViewDataTextColumn FieldName="PropertyAddress" Settings-AllowHeaderFilter="False">
                                             <Settings AllowHeaderFilter="False"></Settings>
                                             <DataItemTemplate>
@@ -204,17 +221,17 @@
                                         <dx:GridViewDataTextColumn FieldName="MortgageCombo" Width="80px" Caption="MtgCOMBO" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="C1stServicer" Caption="Servicer" Width="80px"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="TaxLiensAmount" Caption="TaxCOMBO" Width="60px" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="Type" Width="40px" CellStyle-HorizontalAlign="Center" CellStyle-VerticalAlign="Middle">
+                                        <dx:GridViewDataTextColumn FieldName="TypeText" Width="40px" CellStyle-HorizontalAlign="Center" CellStyle-VerticalAlign="Middle">
                                             <DataItemTemplate>
                                                 <dx:ASPxImage EmptyImage-Url="~/images/ide.png" EmptyImage-Width="16" EmptyImage-Height="16" runat="server" ID="imgType" Width="24" Height="24" CssClass="always_show">
                                                 </dx:ASPxImage>
                                             </DataItemTemplate>
                                         </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataColumn FieldName="IsRecycled" Width="50px" Caption="Recycle">
+                                        <dx:GridViewDataColumn FieldName="Comments" Width="50px" Caption="Recycle">
                                             <DataItemTemplate>
                                                 <dx:ASPxCheckBox runat="server" ID="chkRecycled" ToolTip="Recycled" Checked='<%# Eval("IsRecycled")%>' ReadOnly="true" Visible='<%# Eval("IsRecycled")%>'></dx:ASPxCheckBox>
                                             </DataItemTemplate>
-                                        </dx:GridViewDataColumn>
+                                        </dx:GridViewDataColumn>                                       
                                     </Columns>
                                     <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true"
                                         EnableRowHotTrack="True" />
@@ -227,9 +244,10 @@
                                         <RowHotTrack BackColor="#FF400D"></RowHotTrack>
                                     </Styles>
                                     <Border BorderStyle="None"></Border>
-                                    <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" />
+                                    <ClientSideEvents FocusedRowChanged="OnGridFocusedRowChanged" SelectionChanged="OnSelectionChanged" />
                                 </dx:ASPxGridView>
-                                <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridLeads"></dx:ASPxGridViewExporter>
+                                <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="gridLeads" OnRenderBrick="gridExport_RenderBrick">                                    
+                                </dx:ASPxGridViewExporter>
                                 <dx:ASPxPopupMenu ID="ASPxPopupMenu3" runat="server" ClientInstanceName="leadsTypeMenu"
                                     AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
                                     <Items>
@@ -262,7 +280,7 @@
                                             </dx:ASPxComboBox>
                                         </td>
                                         <td>
-                                            <input type="button" value="Assign" class="rand-button rand-button-blue rand-button-pad" onclick="{ if (listboxEmployee.GetIsValid()) gridLeads.PerformCallback('AssignLeads'); }" />
+                                            <input type="button" id="btnAssign" value="Assign" class="rand-button rand-button-blue rand-button-pad" disabled="disabled" onclick="{ if (listboxEmployee.GetIsValid()) gridLeads.PerformCallback('AssignLeads'); }" />
                                             &nbsp;&nbsp;
                                       <input type="button" value="Rules" class="rand-button rand-button-blue rand-button-pad" onclick="AssignLeadsPopupClient.Show();" />
 

@@ -14,7 +14,6 @@
     <%--<script src="/scrollbar/jquery.mCustomScrollbar.js"></script>--%>
     <script src="/scripts/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%-- <link href="/css/dx.common.css" rel="stylesheet" />
 
@@ -413,11 +412,8 @@
                 var string = [northEast.lat,northEast.lng,southWest.lat,southWest.lng].join(',');
                 $.getJSON('/map/mapdataservice.svc/BlockData/' + string, function (data) {
                    
-                    var geoJson = {
-                        "type": "FeatureCollection",
-                        "features":data
-                    }
-                    var featureLayer = L.mapbox.featureLayer(geoJson)
+                 
+                    var featureLayer = L.mapbox.featureLayer(data)
                     .addTo(map);
                 });
                 
@@ -428,7 +424,6 @@
             map = L.mapbox.map('map', 'examples.map-i87786ca')
                .addControl(L.mapbox.geocoderControl('mapbox.places'))
              .setView([40.7127, -74.0059], 11);
-
            
             var featureGroup = L.featureGroup().addTo(map);
 

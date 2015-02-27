@@ -287,4 +287,9 @@ Public Class Utility
         End If
         Return mynewNumber
     End Function
+
+    Public Shared Function RemoveHtmlTags(html As String) As String
+        Dim text = Regex.Replace(html, "<(.|\n)*?>", String.Empty)
+        Return text
+    End Function
 End Class
