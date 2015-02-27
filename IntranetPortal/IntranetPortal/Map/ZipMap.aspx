@@ -10,8 +10,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <%--<link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />--%>
-    <%--<script src="/scrollbar/jquery.mCustomScrollbar.js"></script>--%>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
+    
     <script src="/scripts/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,7 +56,9 @@
     <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.css' rel='stylesheet' />
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-geodesy/v0.1.0/leaflet-geodesy.js'></script>
-    <script src="https://www.mapbox.com/mapbox.js/assets/data/realworld.388.js"></script>
+
+    
+  
 
 </head>
 
@@ -91,7 +93,7 @@
             function f() {
             }
 
-        var CountDateSet = <%= CountJosn%>
+
             function FindNumberByName(typeName, zipCode) {
 
                 for (var i = 0; i < CountDateSet.length; i++) {
@@ -149,10 +151,70 @@
         }
 
         var popup = new L.Popup({ autoPan: false });
+        var ZipPolygonLayer;
 
+        function getMessgae(properties) {
+            var is_Blcok = map.hasLayer(BlockLayer);
+
+            if (is_Blcok) {
+                return '<div class="marker-title">' + 'Borough:' + properties.Boro + '</div>' + 'Block :' +
+                  properties.block;
+            }
+
+            return '<div class="marker-title">' + properties.postalCode + '</div>' +
+                findCountNum(properties.postalCode) + ' leads';
+        }
+
+        function mousemove(e) {
+            var layer = e.target;
+
+            popup.setLatLng(e.latlng);
+
+            popup.setContent(getMessgae(layer.feature.properties));
+
+            if (!popup._map) popup.openOn(map);
+            window.clearTimeout(closeTooltip);
+
+            // highlight feature
+            layer.setStyle({
+                weight: 3,
+                opacity: 0.3,
+                fillOpacity: 0.5
+            });
+
+            if (!L.Browser.ie && !L.Browser.opera) {
+                layer.bringToFront();
+            }
+        }
+        var closeTooltip;
+        function mouseout(e) {
+            
+            if (BlockLayer != null) {
+                var is_Blcok = map.hasLayer(BlockLayer);
+
+                if (is_Blcok)
+                {
+                    BlockLayer.resetStyle(e.target);
+                }
+               
+            }
+            
+            if (map.hasLayer(ZipPolygonLayer))
+            {
+                ZipPolygonLayer.resetStyle(e.target);
+            }
+            
+       
+           
+            
+            
+            closeTooltip = window.setTimeout(function () {
+                map.closePopup();
+            }, 100);
+        }
         $.getJSON("/Map/MapData/nyc-zip-code.js", function (data) {
             initMapBox();
-            var statesLayer = L.geoJson(data, {
+            ZipPolygonLayer = L.geoJson(data, {
                 style: getStyle,
                 onEachFeature: onEachFeature
             }).addTo(map);
@@ -188,49 +250,41 @@
                 });
             }
 
-            var closeTooltip;
 
-            function mousemove(e) {
-                var layer = e.target;
 
-                popup.setLatLng(e.latlng);
-                popup.setContent('<div class="marker-title">' + layer.feature.properties.postalCode + '</div>' +
-                    findCountNum(layer.feature.properties.postalCode) + ' leads');
-
-                if (!popup._map) popup.openOn(map);
-                window.clearTimeout(closeTooltip);
-
-                // highlight feature
-                layer.setStyle({
-                    weight: 3,
-                    opacity: 0.3,
-                    fillOpacity: 0.5
-                });
-
-                if (!L.Browser.ie && !L.Browser.opera) {
-                    layer.bringToFront();
-                }
-            }
-
-            function mouseout(e) {
-                statesLayer.resetStyle(e.target);
-                closeTooltip = window.setTimeout(function () {
-                    map.closePopup();
-                }, 100);
-            }
 
 
             function ClickZip(e) {
-                $('#divMsgTest').animate({ top: "25" }, 500);
                 var zip = e.target.feature.properties.postalCode;
-                $('#spanZip').html("Zip: " + zip);
-                $('#tdLeadsCount').html(findCountNum(zip));
-                $(".ZipCount").each(function (index) {
-                    var c = FindNumberByName(this.id, zip);
+                $.getJSON('/map/mapdataservice.svc/ZipCount/' + zip, function (data) {
 
-                    $(this).html(c);
+                    $('#divMsgTest').animate({ top: "25" }, 500);
 
-                });
+                    $('#spanZip').html("Zip: " + zip);
+
+
+                    
+                    //$('#tdLeadsCount').html(findCountNum(zip));
+                    var zipCountData = data;
+                    html = ''
+                    var source = $("#zipCountTrTemplate").html();
+                    var template = Handlebars.compile(source);
+                    for (var i = 0; i < zipCountData.length; i++)
+                    {
+
+                        var context = zipCountData[i];
+                         html += template(context);
+            }
+                    $("#zipCountTable").html(html);
+                    //$(".ZipCount").each(function (index) {
+                    //    var c = FindNumberByName(this.id, zip);
+
+                    //    $(this).html(c);
+
+                    //});
+                })
+
+
                 //map.fitBounds(e.target.getBounds());
             }
 
@@ -250,18 +304,19 @@
                       from + (to ? '&ndash;' + to : '+')) + '</li>';
                 }
 
-                return '<span>Leads in Zip</span><ul>' + labels.join('') + '</ul>';
+                return '<span>Leads in Zip</span><ul style="list-style-type: none;">' + labels.join('') + '</ul>';
             }
 
-            map.on('zoomend', ZoomEndMapBox);
+            
             
           
             
 
             zipMap = zipMap || [];// data.features;
-            //initMapBox();
+            
             var geoJson = []
-            var myLayer = L.mapbox.featureLayer();
+            zipMakerLayer
+            var zipMakerLayer = L.mapbox.featureLayer();
 
             for (var i = 0 ; i < data.features.length; i++) {
 
@@ -299,7 +354,7 @@
                 }
             }
 
-            myLayer.on('layeradd', function (e) {
+            zipMakerLayer.on('layeradd', function (e) {
                 var marker = e.layer,
                 feature = marker.feature;
 
@@ -307,13 +362,13 @@
             });
 
             var z = zipMap;
-            myLayer.setGeoJSON(geoJson);
+            zipMakerLayer.setGeoJSON(geoJson);
 
             /*add layer swicher */
             L.control.layers({
                 
             }, {
-                'Leads Count Portal': myLayer,
+                'Leads Count Portal': zipMakerLayer,
                
             }).addTo(map);
             /******/
@@ -399,8 +454,57 @@
         var map
         function ZoomEndMapBox()
         {
-            if(map.getZoom() === 16)
+            
+        }
+
+        /*zoom out to zoom*/
+        var SHOW_ZIP = 1 << 1;
+        var SHOW_BLOCK = 1 << 2;
+
+        function ShowPloyons(layers)
+        {
+
+            showLayer(layers & SHOW_ZIP,ZipPolygonLayer)
+            
+            showLayer(layers & SHOW_BLOCK, BlockLayer)
+
+        }
+
+        function showLayer(isShow , layer)
+        {
+            if(isShow)
             {
+                if(!map.hasLayer(layer))
+                {
+                    map.addLayer(layer)
+                }
+            }else
+            {
+                if(map.hasLayer(layer))
+                {
+                    map.removeLayer(layer)
+                }
+            }
+        }
+
+        function ZoomOut(zoom)
+        {
+            if(zoom<16)
+            {
+                ShowPloyons(SHOW_ZIP)
+            }
+        }
+        var BlockLayer;
+        function onEachFeatureBlock(feature, layer) {
+            layer.on({
+                mousemove: mousemove,
+                mouseout: mouseout,
+               
+            });
+        }
+        function ZoomIn(zoom)
+            {
+            if (zoom === 16) {
                 // here's where you decided what zoom levels the layer should and should
                 // not be available for: use javascript comparisons like < and > if
                 // you want something other than just one zoom level, like
@@ -408,22 +512,34 @@
                 var bounds = map.getBounds();
                 var northEast = bounds.getNorthEast();
                 var southWest = bounds.getSouthWest();
-                var featureLayer = L.mapbox.featureLayer()
-                var string = [northEast.lat,northEast.lng,southWest.lat,southWest.lng].join(',');
+             
+                var string = [northEast.lat, northEast.lng, southWest.lat, southWest.lng].join(',');
                 $.getJSON('/map/mapdataservice.svc/BlockData/' + string, function (data) {
                    
-                 
-                    var featureLayer = L.mapbox.featureLayer(data)
+                    var geoJson = {
+                        "type": "FeatureCollection",
+                        "features":data
+                    }
+                    var featureLayer = L.mapbox.featureLayer(geoJson)
                     .addTo(map);
                 });
                 
+
             }
         }
+        function MapZoomLevelChange() {
+            var nowZoom = map.getZoom();
+            nowZoom > ZoomLevel ? ZoomIn(nowZoom) : ZoomOut(nowZoom);
+            ZoomLevel = nowZoom;
+        }
+        
+        var ZoomLevel = 11;
         function initMapBox() {
             L.mapbox.accessToken = 'pk.eyJ1IjoicG9ydGFsIiwiYSI6ImtCdG9ac00ifQ.p2_3nTko4JskYcg0YIgeyw';
             map = L.mapbox.map('map', 'examples.map-i87786ca')
                .addControl(L.mapbox.geocoderControl('mapbox.places'))
              .setView([40.7127, -74.0059], 11);
+
            
             var featureGroup = L.featureGroup().addTo(map);
 
@@ -518,19 +634,27 @@
         }
     </style>
 
-    <div id="divMsgTest" class="info message" style="top: -500px; right: 25px">
+    <script id="zipCountTrTemplate" type="text/x-handlebars-template">
+        <tr>
+            <td>{{TypeName}} : </td>
+            <td > {{ Count}}</td>
+        </tr>
+    </script>
+    <div id="divMsgTest" class="info message" style="top: -500px; right: 40px">
         <div class="msgtitle">
             <i class="fa fa-database with_circle" style="color: white; font-size: 14px; width: 30px; height: 30px; line-height: 30px; text-align: center"></i>&nbsp; <span id="spanZip"></span>
             <span style="float: right; line-height: 30px; font-weight: 600; cursor: pointer" onclick="HideMessages()">X</span>
         </div>
-        <table style="width: 100%; font-size: 14px">
-            <tr>
+        <table style="width: 100%;color:white; font-size: 14px" id="zipCountTable">
+            <%--<tr>
                 <td>Leads in Portal: </td>
                 <td id="tdLeadsCount"></td>
             </tr>
             <tr>
                 <td>Leads LP NYC: </td>
-                <td id="Zip_LPCount" class="ZipCount"></td>
+                <td id="Zip_LPCount" class="ZipCount">
+                    
+                </td>
             </tr>
             <tr>
                 <td>Vacant Land in NYC: </td>
@@ -584,7 +708,7 @@
             <tr>
                 <td>Total : </td>
                 <td id="Zip_Total" class="ZipCount"></td>
-            </tr>
+            </tr>--%>
 
         </table>
     </div>
