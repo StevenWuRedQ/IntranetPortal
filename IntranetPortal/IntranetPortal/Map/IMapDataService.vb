@@ -24,12 +24,16 @@ Partial Public Class MapDataService
     Implements IMapDataService
 
     Public Function LoadBlockData(neLat As String, neLng As String, swLat As String, swLng As String) As Channels.Message Implements IMapDataService.LoadBlockData
-        Dim dataSvr As New MapService
-        Dim result = New With {
-            .type = "FeatureCollection",
-            .features = dataSvr.LoadBlockLayers(neLat, neLng, swLat, swLng)
-            }
-        Return result.ToJson()
+        Try
+            Dim dataSvr As New MapService
+            Dim result = New With {
+                .type = "FeatureCollection",
+                .features = dataSvr.LoadBlockLayers(neLat, neLng, swLat, swLng)
+                }
+            Return result.ToJson()
+        Catch ex As Exception
+            Return ex.InnerException.ToJson
+        End Try
     End Function
     Public Function GetZipCountInfo(zip As String) As Channels.Message Implements IMapDataService.GetZipCountInfo
 
