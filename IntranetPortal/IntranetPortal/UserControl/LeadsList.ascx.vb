@@ -395,7 +395,7 @@ Public Class LeadsList
             End If
 
             'Dim lf As LeadsInfo = DataWCFService.UpdateBasicInfo(bble)
-            DataWCFService.UpdateLeadInfo(bble)
+            DataWCFService.UpdateLeadInfo(bble, True)
             Dim lf = LeadsInfo.GetInstance(bble)
             'Add to update
             'Core.DataLoopRule.AddRules(bble, Core.DataLoopRule.DataLoopType.All, Page.User.Identity.Name)

@@ -744,7 +744,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -752,7 +751,7 @@
     </div>
     <!-- custom scrollbar plugin -->
 
-    <script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<%--    <script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>--%>
     <script>
         (function ($) {
             $(window).load(function () {
@@ -760,6 +759,7 @@
             });
         })(jQuery);
         function initScrollbars() {
+            return;
             $(".custom_report_table").mCustomScrollbar(
                   {
                       theme: "minimal-dark"
@@ -808,10 +808,8 @@
                         <i class="fa fa-envelope report_head_button tooltip-examples report_head_button_padding" title="E-mail"></i>
                         <i class="fa fa-file-pdf-o report_head_button tooltip-examples report_head_button_padding" title="PDF"></i>
                     </div>
-
                 </div>
             </div>
-
         </HeaderTemplate>
         <ContentCollection>
             <dx:PopupControlContentControl runat="server">

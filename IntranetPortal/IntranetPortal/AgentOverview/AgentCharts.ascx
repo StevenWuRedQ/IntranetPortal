@@ -2,7 +2,8 @@
 <%--use jquery 2.1.1 can't show the tooltips--%>
 <%--<script src="/Scripts/jquery-2.1.1.min.js"></script>--%>
 <script src="/Scripts/globalize/globalize.js"></script>
-<script src="/Scripts/dx.chartjs.js"></script>
+
+<script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.1.4/js/dx.chartjs.js"></script>
 <%--<div style="padding-top: 43px; padding-bottom: 20px; font-size: 30px; color: #ff400d; text-align: center;" id="chartsTitle">Charts Title</div>--%>
 <%--use for debug chart width--%>
 <div style="padding-top: 43px; padding-bottom: 20px; font-size: 30px; color: #ff400d; text-align: center;display:none" id="showPanesize">0px</div>
@@ -137,7 +138,9 @@
         $('#id_change_range_drop_down').css('display', display_style);
     }
     function show_bar_chart(ds) {
+        debugger;
         var dataFormSever = ds != null ? ds : $.parseJSON('<%=ChartSource()%>');
+        //var dataFormSever = $.parseJSON('<%=ChartSource()%>');
         var chart = '<div id="container" style="height: 350px;"></div>'
         $("#container").remove();
         $("#chars_with_scorll").append(chart)
@@ -170,18 +173,7 @@
 
 
         var charts = $("#container").dxChart({
-            dataSource: chartData,
-            commonSeriesSettings: {
-                argumentField: "state",
-                type: "bar",
-                hoverMode: "allArgumentPoints",
-                selectionMode: "allArgumentPoints",
-                label: {
-                    visible: true,
-                    format: "fixedPoint",
-                    precision: 0
-                }
-            },
+            dataSource: chartData,            
             series: {
                 argumentField: "Name",
                 valueField: "Count",

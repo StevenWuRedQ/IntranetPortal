@@ -248,6 +248,7 @@
                     <label class="upcase_text">Select Reason</label>
                     <dx:ASPxComboBox ID="cbDeadReasons" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">
                         <Items>
+                            <dx:ListEditItem Text="Full Sale Completed" Value="8" />
                             <dx:ListEditItem Text="Dead Recorded with Other Party" Value="1" />
                             <dx:ListEditItem Text="Working towards a Loan MOD" Value="2" />
                             <dx:ListEditItem Text="Working towards a short sale with another company" Value="3" />

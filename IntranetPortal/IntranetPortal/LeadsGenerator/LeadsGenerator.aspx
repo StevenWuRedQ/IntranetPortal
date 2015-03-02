@@ -885,6 +885,7 @@
                                                                         <dx:GridViewDataColumn FieldName="AgentInLeads" Caption="Assign To">
                                                                         </dx:GridViewDataColumn>
                                                                     </Columns>
+
                                                                     <%-- <DataItemTemplate>
                                                                      <div>
                                                                          <% If (String.IsNullOrEmpty(Eval("AgentInLeads"))) Then%>
@@ -906,7 +907,7 @@
                                                                     </Styles>
                                                                     <ClientSideEvents  SelectionChanged="function(s,e) { gridSelect()}" />
                                                                     <SettingsPager PageSize="12"></SettingsPager>
-                                                                    <Settings ShowFilterRow="True" ShowFilterRowMenu="true" ShowGroupPanel="True" ShowFooter="True" />
+                                                                    <Settings ShowFilterRow="True" ShowFilterRowMenu="true" ShowGroupPanel="True" ShowFooter="True" ShowHeaderFilterButton="true" />
                                                                 </dx:ASPxGridView>
                                                                 <dx:ASPxGridViewExporter ID="gridExport" runat="server" GridViewID="QueryResultsGrid"></dx:ASPxGridViewExporter>
                                                                 <%If AdminLogIn() Then%>
