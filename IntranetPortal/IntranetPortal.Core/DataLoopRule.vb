@@ -8,8 +8,16 @@
     Public Shared Function GetRefreshRule() As List(Of DataLoopRule)
         Return Nothing
     End Function
+    Public Shared Sub AddRulesUnique(bblesToLoop As String(), loopType As DataLoopType, createBy As String)
+        Using context As New CoreEntities
+            Dim bbleRuningList = context.DataLoopRules.Where(Function(r) r.Status = 0 AndAlso bblesToLoop.Contains(r.BBLE)).Select(Function(r) r.BBLE).ToArray
+            Dim uniqueBBles = bblesToLoop.ToList.Where(Function(b) Not bbleRuningList.Contains(b)).ToArray()
+            AddRules(uniqueBBles, loopType, createBy, RuleStatus.Active)
+        End Using
 
+    End Sub
     Public Shared Sub AddRules(bblesToLoop As String(), loopType As DataLoopType, createBy As String)
+
         AddRules(bblesToLoop, loopType, createBy, RuleStatus.Active)
     End Sub
 

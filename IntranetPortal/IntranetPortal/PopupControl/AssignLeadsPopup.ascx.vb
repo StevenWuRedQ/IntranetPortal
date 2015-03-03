@@ -78,7 +78,17 @@ Public Class AssignLeadsPopup
         Next
         Return leadsTypeText
     End Function
+    Public Shared Function GetLeadsTypeList()
+        Dim LeadsTypeList As New List(Of Object)
+        Dim types = [Enum].GetValues(GetType(LeadsInfo.LeadsType))
 
+
+
+        For Each t As Integer In types
+            LeadsTypeList.Add(New With {.Name = CType(t, LeadsInfo.LeadsType).ToString, .Value = t})
+        Next
+        Return LeadsTypeList
+    End Function
     Function GetAllEmps() As String()
         If String.IsNullOrEmpty(hfEmployees.Value) Then
             hfEmployees.Value = EmployeeSource

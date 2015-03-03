@@ -8,9 +8,9 @@ Public Class LeadsGenerator
     Public AllPropertyCode As List(Of String)
     Public CompletedTask As New List(Of LeadsSearchTask)
 #If DEBUG Then
-    Public MaxSelect = 250
+    Public MaxSelect = 500
 #Else
-    Public MaxSelect = 250
+    Public MaxSelect = 500
 #End If
 
     Public LoadLeadsCount = 0
@@ -51,7 +51,8 @@ Public Class LeadsGenerator
         Using Context As New Entities
             Dim s = New LeadsSearchTask
             s.TaksName = Parameter.Split("|")(0)
-
+            s.Type = s.TaksName.Split(",")(1)
+            s.TaksName = s.TaksName.Split(",")(0)
             Dim hasSameTask = Context.LeadsSearchTasks.Where(Function(l) l.TaksName = s.TaksName).FirstOrDefault
             If (hasSameTask IsNot Nothing) Then
 
@@ -110,6 +111,8 @@ Public Class LeadsGenerator
             LoadLeadsCount = results.Count
             QueryResultsGrid.DataSource = results
             QueryResultsGrid.DataBind()
+            Dim st = context.LeadsSearchTasks.Where(Function(f) f.TaksName = SearchName).FirstOrDefault
+            hfSearchType.Value = st.Type
             hfSearchName.Value = SearchName
         End Using
     End Sub
@@ -195,6 +198,10 @@ Public Class LeadsGenerator
         Return Employee.IsAdmin(Page.User.Identity.Name)
     End Function
     Protected Function LeadMaxAdd() As Integer
+        'admin can import more than 250
+        If (AdminLogIn()) Then
+            Return 99999999
+        End If
         Return MaxSelect - HasNewLeadsInProtal()
     End Function
 
@@ -212,6 +219,7 @@ Public Class LeadsGenerator
             Return
         End If
         Dim empOffice = Employee.GetInstance(GetImportToUser())
+        Dim BBlesList = New List(Of String)
         If selectrows.Count <= maxAdd Then
             Using Context As New Entities
                 For Each row In selectrows
@@ -222,23 +230,29 @@ Public Class LeadsGenerator
                     l.Status = LeadStatus.NewLead
                     l.AssignBy = Page.User.Identity.Name
                     l.AssignDate = Date.Now
+
                     Dim li = Context.LeadsInfoes.Find(row)
                     If (li Is Nothing) Then
                         li = New LeadsInfo
+                        li.Type = CInt(hfSearchType.Value)
                         li.BBLE = row
                         Context.LeadsInfoes.Add(li)
                     End If
 
                     Context.Leads.Add(l)
+                    BBlesList.Add(row.ToString)
                 Next
                 Context.SaveChanges()
 
-                runbDataLoop()
+
             End Using
+
+            runDataLoop(BBlesList)
         Else
             Alert("Only can import " & maxAdd & " Leads !")
         End If
         RefreshGrid()
+        QueryResultsGrid.Selection.UnselectAll()
     End Sub
     Public Sub RefreshGrid()
         If (Not String.IsNullOrEmpty(hfSearchName.Value)) Then
@@ -246,11 +260,11 @@ Public Class LeadsGenerator
         End If
     End Sub
 
-    Protected Sub runbDataLoop()
+    Protected Sub runDataLoop(bbles As List(Of String))
         'To do Chris Need run data loop here!
         'Dim service = LeadsDataManage.LeadsDataService.GetInstance
         'service.DataLoop("New")
-        Core.DataLoopRule.AddRules(LeadsInfo.GetNewLeads, Core.DataLoopRule.DataLoopType.All, Page.User.Identity.Name)
+        Core.DataLoopRule.AddRulesUnique(bbles.ToArray, Core.DataLoopRule.DataLoopType.All, Page.User.Identity.Name)
     End Sub
 
     Protected Sub cpTableView_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
@@ -309,4 +323,6 @@ Public Class LeadsGenerator
             BindGrid(hfSearchName.Value)
         End If
     End Sub
+
+
 End Class

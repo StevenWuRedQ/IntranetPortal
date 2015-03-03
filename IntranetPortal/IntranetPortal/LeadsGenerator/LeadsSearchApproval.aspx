@@ -72,20 +72,20 @@
                         {{#ifCond NYCsqft}}
                         <tr>
                             <td>NYC SQFT :</td>
-                            <td>{{#if NYCsqft.min}} min: {{NYCsqft.min}}  {{/if}}  {{#if NYCsqft.max}} min: {{NYCsqft.max}}  {{/if}}</td>
+                            <td>{{#if NYCsqft.min}} min: {{NYCsqft.min}}  {{/if}}  {{#if NYCsqft.max}} max: {{NYCsqft.max}}  {{/if}}</td>
                         </tr>
                         {{/ifCond}}
 
                          {{#ifCond LotSqft}}
                         <tr>
                             <td>Lot SQFT :</td>
-                            <td>{{#if LotSqft.min}} min: {{LotSqft.min}}  {{/if}}  {{#if LotSqft.max}} min: {{LotSqft.max}}  {{/if}}</td>
+                            <td>{{#if LotSqft.min}} min: {{LotSqft.min}}  {{/if}}  {{#if LotSqft.max}} max: {{LotSqft.max}}  {{/if}}</td>
                         </tr>
                         {{/ifCond}}
                          {{#ifCond YearBuild}}
                          <tr>
                              <td>YEAR BUILT :</td>
-                             <td>{{#if YearBuild.min}} min: {{YearBuild.min}}  {{/if}}  {{#if YearBuild.max}} min: {{YearBuild.max}}  {{/if}}</td>
+                             <td>{{#if YearBuild.min}} min: {{YearBuild.min}}  {{/if}}  {{#if YearBuild.max}} max: {{YearBuild.max}}  {{/if}}</td>
                          </tr>
                         {{/ifCond}}
 

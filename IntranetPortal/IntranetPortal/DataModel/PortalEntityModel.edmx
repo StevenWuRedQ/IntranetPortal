@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agent_Properties">
           <Key>
             <PropertyRef Name="ID" />
@@ -211,7 +211,7 @@
           <Property Name="Process" Type="int" />
           <Property Name="Status" Type="int" />
           <Property Name="CallbackDate" Type="date" />
-          <Property Name="Neighborhood" Type="nvarchar" MaxLength="50" />
+          <Property Name="Neighborhood" Type="nvarchar" MaxLength="120" />
           <Property Name="DeadReason" Type="int" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="LastUpdate" Type="datetime" />
@@ -285,8 +285,8 @@
           <Property Name="Date" Type="smalldatetime" />
           <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
           <Property Name="SaleDate" Type="smalldatetime" />
-          <Property Name="TaxClass" Type="nvarchar" MaxLength="50" />
           <Property Name="PropertyClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxClass" Type="nvarchar" MaxLength="50" />
           <Property Name="SaleType" Type="nvarchar" MaxLength="50" />
           <Property Name="Condition" Type="nchar" MaxLength="15" />
           <Property Name="Block" Type="nchar" MaxLength="5" />
@@ -350,6 +350,7 @@
           <Property Name="CreateBy" Type="nvarchar" MaxLength="20" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="DeclineReason" Type="nvarchar" MaxLength="255" />
+          <Property Name="Type" Type="int" />
         </EntityType>
         <EntityType Name="LeadsTaxLiens">
           <Key>
@@ -561,8 +562,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="ScheduleDate" Type="datetime" />
           <Property Name="EndDate" Type="datetime" />
           <Property Name="Location" Type="nvarchar" MaxLength="120" />
-          <Property Name="Manager" Type="nvarchar" MaxLength="200" />
-          <Property Name="Agent" Type="nvarchar" MaxLength="200" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="50" />
+          <Property Name="Agent" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="Status" Type="int" />
           <Property Name="Label" Type="nvarchar" MaxLength="50" />
@@ -669,7 +670,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView' does not have 
           <Key>
             <PropertyRef Name="BBLE" />
           </Key>
-          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="int" />
           <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
@@ -686,6 +686,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView' does not have 
           <Property Name="C1stMotgrAmt" Type="decimal" Precision="18" Scale="2" />
           <Property Name="C2ndMotgrAmt" Type="decimal" Precision="18" Scale="2" />
           <Property Name="C3rdMortgrAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="Owner" Type="nvarchar" MaxLength="70" />
           <Property Name="CoOwner" Type="nvarchar" MaxLength="70" />
           <Property Name="Type" Type="int" />
@@ -801,7 +802,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
           </EntitySet>
           <EntitySet Name="LeadsAssignView" EntityType="Self.LeadsAssignView" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [LeadsAssignView].[BBLE] AS [BBLE], 
     [LeadsAssignView].[EmployeeName] AS [EmployeeName], 
     [LeadsAssignView].[Status] AS [Status], 
     [LeadsAssignView].[PropertyAddress] AS [PropertyAddress], 
@@ -818,6 +818,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
     [LeadsAssignView].[C1stMotgrAmt] AS [C1stMotgrAmt], 
     [LeadsAssignView].[C2ndMotgrAmt] AS [C2ndMotgrAmt], 
     [LeadsAssignView].[C3rdMortgrAmt] AS [C3rdMortgrAmt], 
+    [LeadsAssignView].[BBLE] AS [BBLE], 
     [LeadsAssignView].[Owner] AS [Owner], 
     [LeadsAssignView].[CoOwner] AS [CoOwner], 
     [LeadsAssignView].[Type] AS [Type]
@@ -974,7 +975,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
           <Property Name="Process" Type="Int32" />
           <Property Name="Status" Type="Int32" />
           <Property Name="CallbackDate" Type="DateTime" Precision="0" />
-          <Property Name="Neighborhood" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Neighborhood" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
           <Property Name="AssignDate" Type="DateTime" Precision="3" />
           <Property Name="AssignBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="LeadsInfo" Relationship="IntranetPortalModel.LeadLeadsInfo" FromRole="Lead" ToRole="LeadsInfo" />
@@ -1192,8 +1193,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
           <Property Name="ScheduleDate" Type="DateTime" Precision="3" />
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Location" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="Manager" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Agent" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Manager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
@@ -1564,6 +1565,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
           <Property Name="CreateBy" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="DeclineReason" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
         </EntityType>
         <EntityType Name="SearchResult">
           <Key>
@@ -2296,6 +2298,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
           <EntitySetMapping Name="LeadsSearchTasks">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadsSearchTask">
               <MappingFragment StoreEntitySet="LeadsSearchTask">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="DeclineReason" ColumnName="DeclineReason" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />

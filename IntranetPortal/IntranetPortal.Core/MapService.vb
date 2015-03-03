@@ -32,6 +32,11 @@ Public Class MapService
         Dim polygonText = String.Format("POLYGON(({0},{1},{2},{3},{0}))", New MapPoint(neLng, neLat), New MapPoint(neLng, swLat), New MapPoint(swLng, swLat), New MapPoint(swLng, neLat))
         Return DbGeometry.PolygonFromText(polygonText, SRID)
     End Function
+
+    Function GetZipCountInfo(zip As String) As Object
+        Throw New NotImplementedException
+    End Function
+
 End Class
 
 Public Class MapPoint

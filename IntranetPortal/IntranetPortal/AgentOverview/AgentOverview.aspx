@@ -73,6 +73,7 @@
         }
 
         function DoCallback() {
+           
             var rowKey = gridEmpsClient.GetRowKey(gridEmpsClient.GetFocusedRowIndex());
             var rowIndex = gridEmpsClient.GetFocusedRowIndex();
             if (gridEmpsClient.IsGroupRow(rowIndex)) {
