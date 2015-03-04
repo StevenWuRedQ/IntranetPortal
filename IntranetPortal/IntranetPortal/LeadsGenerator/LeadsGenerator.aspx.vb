@@ -112,7 +112,10 @@ Public Class LeadsGenerator
             QueryResultsGrid.DataSource = results
             QueryResultsGrid.DataBind()
             Dim st = context.LeadsSearchTasks.Where(Function(f) f.TaksName = SearchName).FirstOrDefault
-            hfSearchType.Value = st.Type
+
+            hfSearchType.Value = If(st IsNot Nothing, st.Type, "0")
+
+
             hfSearchName.Value = SearchName
         End Using
     End Sub
@@ -219,35 +222,47 @@ Public Class LeadsGenerator
             Return
         End If
         Dim empOffice = Employee.GetInstance(GetImportToUser())
-        Dim BBlesList = New List(Of String)
+        ' Dim BBlesList = New List(Of String)
         If selectrows.Count <= maxAdd Then
             Using Context As New Entities
                 For Each row In selectrows
-                    Dim l = New Lead
-                    l.EmployeeName = empOffice.Name
-                    l.EmployeeID = empOffice.EmployeeID
-                    l.BBLE = row
-                    l.Status = LeadStatus.NewLead
-                    l.AssignBy = Page.User.Identity.Name
-                    l.AssignDate = Date.Now
 
-                    Dim li = Context.LeadsInfoes.Find(row)
-                    If (li Is Nothing) Then
-                        li = New LeadsInfo
-                        li.Type = CInt(hfSearchType.Value)
-                        li.BBLE = row
-                        Context.LeadsInfoes.Add(li)
+                    'l.EmployeeName = empOffice.Name
+                    'l.EmployeeID = empOffice.EmployeeID
+                    'l.BBLE = row
+                    'l.Status = LeadStatus.NewLead
+                    'l.AssignBy = Page.User.Identity.Name
+                    'l.AssignDate = Date.Now
+
+
+                    Dim pa = Context.PendingAssignLeads.Find(row)
+                    If (pa Is Nothing) Then
+                        pa = New PendingAssignLead
+                        pa.BBLE = row
+                        Context.PendingAssignLeads.Add(pa)
                     End If
+                    pa.EmployeeName = empOffice.Name
+                    pa.CreateBy = Page.User.Identity.Name
+                    pa.CreateDate = Date.Now
+                    pa.Status = 0
+                    pa.Type = CInt(hfSearchType.Value)
 
-                    Context.Leads.Add(l)
-                    BBlesList.Add(row.ToString)
+                    'li = New LeadsInfo
+                    'li.Type = CInt(hfSearchType.Value)
+                    'li.BBLE = row
+                    'Context.LeadsInfoes.Add(li)
+
+
+
+                    'BBlesList.Add(row.ToString)
                 Next
                 Context.SaveChanges()
 
-
+                Context.UploadSearchInfo2Portal()
+                Context.SaveChanges()
             End Using
-
-            runDataLoop(BBlesList)
+            'please build address after loop finish
+            'runDataLoop(BBlesList)
         Else
             Alert("Only can import " & maxAdd & " Leads !")
         End If

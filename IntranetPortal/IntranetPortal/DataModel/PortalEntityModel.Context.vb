@@ -79,4 +79,8 @@ Partial Public Class Entities
         Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("UpdateEmployeeName", oldNameParameter, newNameParameter)
     End Function
 
+    Public Overridable Function UploadSearchInfo2Portal() As Integer
+        Return DirectCast(Me, IObjectContextAdapter).ObjectContext.ExecuteFunction("UploadSearchInfo2Portal")
+    End Function
+
 End Class

@@ -17,5 +17,6 @@ Partial Public Class PendingAssignLead
     Public Property CreateDate As Nullable(Of Date)
     Public Property FinishDate As Nullable(Of Date)
     Public Property CreateBy As String
+    Public Property Type As Nullable(Of Integer)
 
 End Class
