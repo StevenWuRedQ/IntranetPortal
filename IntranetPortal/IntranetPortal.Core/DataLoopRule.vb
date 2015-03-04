@@ -38,13 +38,19 @@
     Public Shared Sub AddRules(bblesToLoop As String(), loopType As DataLoopType, createBy As String, ruleStatus As RuleStatus)
         Using ctx As New CoreEntities
             For Each tmpBBLE In bblesToLoop
-                Dim rule As New DataLoopRule
-                rule.BBLE = tmpBBLE
-                rule.LoopType = loopType
-                rule.CreateBy = createBy
-                rule.CreateDate = DateTime.Now
-                rule.Status = ruleStatus
-                ctx.DataLoopRules.Add(rule)
+                Dim rule = ctx.DataLoopRules.Where(Function(r) r.BBLE = tmpBBLE AndAlso r.Status = ruleStatus).FirstOrDefault
+                If rule Is Nothing Then
+                    rule = New DataLoopRule
+                    rule.BBLE = tmpBBLE
+                    rule.LoopType = loopType
+                    rule.CreateBy = createBy
+                    rule.CreateDate = DateTime.Now
+                    rule.Status = ruleStatus
+
+                    If ctx.DataLoopRules.Local.Where(Function(r) r.BBLE = tmpBBLE).Count = 0 Then
+                        ctx.DataLoopRules.Add(rule)
+                    End If
+                End If
             Next
 
             ctx.SaveChanges()
@@ -56,6 +62,15 @@
             Dim rule = ctx.DataLoopRules.Find(Id)
             rule.Status = RuleStatus.Completed
             rule.FinishDate = DateTime.Now
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
+    Public Sub Complete(type As DataLoopType)
+        Using ctx As New CoreEntities
+            Dim rule = ctx.DataLoopRules.Find(Id)
+            rule.LoopType = type
+            'rule.FinishDate = DateTime.Now
             ctx.SaveChanges()
         End Using
     End Sub
@@ -78,6 +93,8 @@
 
     Enum DataLoopType
         All = 0
+        AllHomeOwner = 5
+        AllMortgage = 6
         Mortgage = 1
         Servicer = 2
         HomeOwner = 3

@@ -13,8 +13,8 @@
         <AssociationConnector Association="IntranetPortalModel.EmployeeLead" />
         <AssociationConnector Association="IntranetPortalModel.LeadsActivityLogLead" />
         <AssociationConnector Association="IntranetPortalModel.EmployeeLeadsActivityLog" />
-        <EntityTypeShape EntityType="IntranetPortalModel.Role" Width="1.5" PointX="1.875" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="IntranetPortalModel.UsersInRole" Width="1.75" PointX="1.25" PointY="7" IsExpanded="false" />
+        <EntityTypeShape EntityType="IntranetPortalModel.Role" Width="1.5" PointX="1.875" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="IntranetPortalModel.UsersInRole" Width="1.75" PointX="1.25" PointY="7" IsExpanded="true" />
         <AssociationConnector Association="IntranetPortalModel.RoleUsersInRole" />
         <EntityTypeShape EntityType="IntranetPortalModel.FileAttachment" Width="1.5" PointX="6.375" PointY="8.125" IsExpanded="true" />
         <EntityTypeShape EntityType="IntranetPortalModel.UserTask" Width="1.5" PointX="6.625" PointY="1.375" IsExpanded="true" />
@@ -55,6 +55,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsAssignView" Width="1.5" PointX="19.375" PointY="7.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.MapDataSet" Width="1.5" PointX="19.375" PointY="13.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsAssignView2" Width="1.5" PointX="19.375" PointY="16.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PendingAssignLead" Width="1.5" PointX="20.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -448,8 +448,16 @@ Partial Public Class ShortSaleCase
 
     Public Shared Function GetEvictionCases() As List(Of ShortSaleCase)
         Using ctx As New ShortSaleEntities
-            Dim result = (From ss In ctx.ShortSaleCases
-                         Join evi In ctx.EvictionCases On ss.BBLE Equals evi.BBLE
+            'Dim result = (From ss In ctx.ShortSaleCases.Where(Function(ss) ss.Status = CaseStatus.Eviction)
+            '         Let evi = ctx.EvictionCases.Where(Function(e) e.BBLE = ss.BBLE).FirstOrDefault
+            '         Select New With {.case = ss, .Name = evi.Owner}).ToList.Select(Function(s) ShortsaleCaseWithEvictionOwner(s.case, s.Name)).ToList
+
+            'Dim result = (From ss In ctx.ShortSaleCases
+            '             Join evi In ctx.EvictionCases On ss.BBLE Equals evi.BBLE
+            '             Select New With {.case = ss, .Name = evi.Owner}).ToList.Select(Function(s) ShortsaleCaseWithEvictionOwner(s.case, s.Name)).ToList
+
+            Dim result = (From evi In ctx.EvictionCases
+                         Join ss In ctx.ShortSaleCases On ss.BBLE Equals evi.BBLE
                          Select New With {.case = ss, .Name = evi.Owner}).ToList.Select(Function(s) ShortsaleCaseWithEvictionOwner(s.case, s.Name)).ToList
 
             Return result

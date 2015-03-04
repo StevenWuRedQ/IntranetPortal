@@ -12,7 +12,7 @@
         StalledProject = 8
         AEP = 9
         ShortSale = 10
-        CoOpConversion = 11
+        CoOpConversion = 12
     End Enum
 
     Public ReadOnly Property IsApartment() As Boolean
@@ -536,6 +536,38 @@
             Return Nothing
         End Get
     End Property
+
+    Public Sub AssignTo(empName As String, assignBy As String)
+        Using ctx As New Entities
+            Dim emp = Employee.GetInstance(empName)
+            If emp IsNot Nothing Then
+                Dim newlead = ctx.Leads.Find(BBLE)
+                If newlead Is Nothing Then
+                    newlead = New Lead() With {
+                                      .BBLE = BBLE,
+                                      .LeadsName = LeadsName,
+                                      .Neighborhood = NeighName,
+                                      .EmployeeID = emp.EmployeeID,
+                                      .EmployeeName = emp.Name,
+                                      .Status = LeadStatus.NewLead,
+                                      .AssignDate = DateTime.Now,
+                                      .AssignBy = assignBy
+                                      }
+                    ctx.Leads.Add(newlead)
+                Else
+                    newlead.LeadsName = LeadsName
+                    newlead.Neighborhood = NeighName
+                    newlead.EmployeeID = emp.EmployeeID
+                    newlead.EmployeeName = emp.Name
+                    newlead.Status = LeadStatus.NewLead
+                    newlead.AssignDate = DateTime.Now
+                    newlead.AssignBy = assignBy
+                End If
+
+                ctx.SaveChanges()
+            End If
+        End Using
+    End Sub
 
     Public Shared Sub AddIndicator(name As String, li As LeadsInfo)
         Indicators.Where(Function(indi) indi.Name = name).FirstOrDefault.AddIndicator(li)

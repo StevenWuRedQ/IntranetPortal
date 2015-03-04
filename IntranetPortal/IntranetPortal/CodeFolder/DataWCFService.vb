@@ -273,13 +273,31 @@ Public Class DataWCFService
                 'Return False
             End If
 
+            'Used to check if homeowner is refreshed before
+            Dim homeOwnerRefreshInternal As Integer = 60
+
             Dim loaded = False
             For Each owner In context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Active = True And (ho.Name = li.Owner Or ho.Name = li.CoOwner)).ToList
+                If owner.LocateReport IsNot Nothing Then
+                    If Not owner.LastUpdate.HasValue Then
+                        owner.LastUpdate = DateTime.Now
+                        loaded = True
+                        Continue For
+                    Else
+                        If owner.LastUpdate.Value.AddDays(homeOwnerRefreshInternal) > DateTime.Now Then
+                            loaded = True
+                            'if homeowner is refreshed in 3 month. don't refresh again.
+                            Continue For
+                        End If
+                    End If
+                End If
+
                 Dim result = GetLocateReport(orderid, bble, owner)
                 If result IsNot Nothing Then
                     loaded = True
                     owner.TLOLocateReport = result
                     owner.UserModified = False
+                    owner.LastUpdate = DateTime.Now
                 End If
             Next
 
@@ -287,6 +305,20 @@ Public Class DataWCFService
             If Not loaded Then
                 GetLatestSalesInfo(bble)
                 For Each owner In context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Active = True).ToList
+                    If owner.LocateReport IsNot Nothing Then
+                        If Not owner.LastUpdate.HasValue Then
+                            owner.LastUpdate = DateTime.Now
+                            loaded = True
+                            Continue For
+                        Else
+                            If owner.LastUpdate.Value.AddDays(homeOwnerRefreshInternal) > DateTime.Now Then
+                                loaded = True
+                                'if homeowner is refreshed in 3 month. don't refresh again.
+                                Continue For
+                            End If
+                        End If
+                    End If
+
                     Dim result = GetLocateReport(orderid, bble, owner)
                     If result IsNot Nothing Then
                         loaded = True

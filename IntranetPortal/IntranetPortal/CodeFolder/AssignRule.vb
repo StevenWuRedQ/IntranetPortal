@@ -69,10 +69,15 @@
                     ld.EmployeeName = emp.Name
                     ld.Status = LeadStatus.NewLead
                     ld.AssignDate = DateTime.Now
-                    ld.AssignBy = "System"
+                    ld.AssignBy = "AssignRule"
                 Next
+
                 ctx.SaveChanges()
                 rowCount = lds.Count
+
+                If rowCount > 0 Then
+                    Core.DataLoopRule.AddRules(lds.Select(Function(l) l.BBLE).ToArray, Core.DataLoopRule.DataLoopType.All, "AssignRule")
+                End If
             Else
                 If Description = "LeadsBankRule" Then
                     rowCount = AssginLeadsBank()

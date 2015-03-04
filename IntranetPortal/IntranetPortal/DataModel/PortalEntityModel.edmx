@@ -196,6 +196,7 @@
           <Property Name="LocateReport" Type="varbinary(max)" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="UserModified" Type="bit" />
+          <Property Name="LastUpdate" Type="datetime" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="Active" Type="bit" />
@@ -439,6 +440,17 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PendingAssignLeads">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="FinishDate" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PortalLisPen">
           <Key>
@@ -750,6 +762,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
           <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderResponses" EntityType="Self.OrderResponses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OwnerContacts" EntityType="Self.OwnerContacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PendingAssignLeads" EntityType="Self.PendingAssignLeads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PortalLisPen" EntityType="Self.PortalLisPen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PortalNotes" EntityType="Self.PortalNotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PortalQuotes" EntityType="Self.PortalQuotes" Schema="dbo" store:Type="Tables" />
@@ -925,6 +938,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
           <EntitySet Name="LeadsAssignViews" EntityType="IntranetPortalModel.LeadsAssignView" />
           <EntitySet Name="MapDataSets" EntityType="IntranetPortalModel.MapDataSet" />
           <EntitySet Name="LeadsAssignView2" EntityType="IntranetPortalModel.LeadsAssignView2" />
+          <EntitySet Name="PendingAssignLeads" EntityType="IntranetPortalModel.PendingAssignLead" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1348,6 +1362,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
           <Property Name="Active" Type="Boolean" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="UserModified" Type="Boolean" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="LoginLog">
           <Key>
@@ -1701,6 +1716,17 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
           <Property Name="ActivityDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="PendingAssignLead">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="FinishDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2053,6 +2079,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
           <EntitySetMapping Name="HomeOwners">
             <EntityTypeMapping TypeName="IntranetPortalModel.HomeOwner">
               <MappingFragment StoreEntitySet="HomeOwners">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="UserModified" ColumnName="UserModified" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
@@ -2443,6 +2470,18 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
                 <ScalarProperty Name="LotDem" ColumnName="LotDem" />
                 <ScalarProperty Name="PropertyClass" ColumnName="PropertyClass" />
                 <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PendingAssignLeads">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PendingAssignLead">
+              <MappingFragment StoreEntitySet="PendingAssignLeads">
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="FinishDate" ColumnName="FinishDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />

@@ -321,8 +321,6 @@
       </PortalNavItem>
     </Items>
   </PortalNavItem>
-
-  
   
   <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
     <UserRoles>OfficeManager-*,OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen,OfficeManager-GalleriaTeam,OfficeManager-TomTeam,OfficeManager-RonTeam,OfficeManager-GendinTeam</UserRoles>
@@ -589,7 +587,33 @@
     </Items>
   </PortalNavItem>
 
-  <PortalNavItem Name="PortalManagement" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
+  <PortalNavItem Name="ManagementReport" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
+    <UserRoles>OfficeManager-*</UserRoles>
+    <Items>
+      <PortalNavItem Name="ReportSummary" Text="Summary" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ReportPerformance" Text="Performance Tracking" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-line-chart"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ReportCalendar" Text="Employees Calendar" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-calendar"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ReportAgents" Text="Agents Maangement" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-calendar"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+  </PortalNavItem>
+  
+  <PortalNavItem Name="PortalManagement" Text="Portal Settings" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Admin</UserRoles>
     <Items>
       <PortalNavItem Name="PortalEmployee" Text="Employee List" NavigationUrl="/Management/MgrEmployee.aspx" ShowAmount="false">

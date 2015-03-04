@@ -142,14 +142,17 @@ End Class
 Public Class LoopServiceRule
     Inherits BaseRule
 
+    Public Property Type As LoopType
+
     Dim threadPools As New List(Of Thread)
     Dim rules As List(Of Core.DataLoopRule)
+
     Public Overrides Sub Execute()
         rules = IntranetPortal.Core.DataLoopRule.GetAllActiveRule
 
         If rules IsNot Nothing AndAlso rules.Count > 0 Then
             CurrentIndex = 0
-            For i = 0 To 1
+            For i = 0 To 10
                 Log("Thread " & i & " is starting.")
                 Dim TestThread As New System.Threading.Thread(New ThreadStart(Sub()
                                                                                   InitialData()
@@ -184,7 +187,7 @@ InitialLine:
             attemps += 1
             Try
                 ExecuteDataloopRule(rule)
-                rule.Complete()
+                'rule.Complete()
             Catch ex As Exception
                 Log("Initial Data Error " & rule.BBLE & " Attemps: " & attemps, ex)
                 Select Case attemps
@@ -213,9 +216,23 @@ InitialLine:
         Dim bble = rule.BBLE
         Select Case rule.LoopType
             Case Core.DataLoopRule.DataLoopType.All
-                If DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True) Then
-                    rule.Complete()
-                    Log("All Data is refreshed. BBLE: " & bble)
+                'Dim callback = Sub()
+                '                   DataWCFService.UpdateAssessInfo(bble)
+                '               End Sub
+                'Threading.ThreadPool.QueueUserWorkItem(callback)
+
+                DataWCFService.UpdateAssessInfo(bble)
+                rule.Complete(Core.DataLoopRule.DataLoopType.AllHomeOwner)
+                Log("General Data is updated. BBLE: " & bble)
+
+                'If DataWCFService.UpdateLeadInfo(bble, True, True, True, True, True, False, True) Then
+                '    rule.Complete()
+                '    Log("All Data is refreshed. BBLE: " & bble)
+                'End If
+            Case Core.DataLoopRule.DataLoopType.AllHomeOwner
+                If DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
+                    rule.Complete(Core.DataLoopRule.DataLoopType.AllMortgage)
+                    Log("Initial Data Message " & bble & String.Format(" Refresh BBLE: {0} homeowner info is finished.", bble))
                 End If
             Case Core.DataLoopRule.DataLoopType.Servicer
                 DataWCFService.UpdateServicer(bble)
@@ -231,7 +248,7 @@ InitialLine:
                     rule.Complete()
                     Log("Initial Data Message " & bble & String.Format(" Refresh BBLE: {0} homeowner info is finished.", bble))
                 End If
-            Case Core.DataLoopRule.DataLoopType.Mortgage
+            Case Core.DataLoopRule.DataLoopType.Mortgage, Core.DataLoopRule.DataLoopType.AllMortgage
                 If DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True) Then
                     rule.Complete()
                     Log("Initial Data Message " & bble & String.Format(" BBLE: {0} Morgatage data is loaded. ", bble))
@@ -276,6 +293,12 @@ InitialLine:
         End Using
 
     End Sub
+
+    Enum LoopType
+        GeneralData
+        HomeOwner
+        Mortgage
+    End Enum
 End Class
 
 Public Class CompleteTaskRule
@@ -438,4 +461,22 @@ Public Class RefreshDataRule
       
     End Sub
 
+End Class
+
+Public Class PendingAssignRule
+    Inherits BaseRule
+
+    Public Overrides Sub Execute()
+
+        Dim lds = PendingAssignLead.GetAllPendingLeads
+
+        For Each ld In lds
+            Try
+                ld.Assign()
+                Log(String.Format("{0} is assign to {1}.", ld.BBLE, ld.EmployeeName))
+            Catch ex As Exception
+                Log(String.Format("Exception in Pending Assign Rule. BBLE: {0}, Employee Name: {1}", ld.BBLE, ld.EmployeeName), ex)
+            End Try
+        Next
+    End Sub
 End Class

@@ -27,5 +27,6 @@ Partial Public Class HomeOwner
     Public Property Active As Nullable(Of Boolean)
     Public Property Description As String
     Public Property UserModified As Nullable(Of Boolean)
+    Public Property LastUpdate As Nullable(Of Date)
 
 End Class

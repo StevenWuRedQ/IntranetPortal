@@ -21,19 +21,25 @@
     }
 </style>
 <% If (IsNeedAddHomeOwner()) Then%>
-<i class="fa  fa-plus-circle icon_btn color_blue tooltip-examples" title="Add home owner"  onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}", "Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="font-size: 32px"></i>
-<% End If %>
+<i class="fa  fa-plus-circle icon_btn color_blue tooltip-examples" title="Add home owner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}", "Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="font-size: 32px"></i>
+<% End If%>
 
-<div style='vertical-align: top; margin: 0; font-size: 18px;<%= if(IsNeedAddHomeOwner(),"visibility:hidden","") %>'>
+<div style='vertical-align: top; margin: 0; font-size: 18px; <%= if(IsNeedAddHomeOwner(),"visibility:hidden","") %>'>
     <div style="font-size: 30px; color: #2e2f31">
         <i class="fa fa-edit tooltip-examples" title="Edit Homeowner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}","Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
         <span class="homeowner_name">
             <%= OwnerName %>
         </span>
     </div>
-
     <% If TLOLocateReport IsNot Nothing Then%>
     <table style="list-style: none; margin-left: 5px; padding-left: 0px;">
+        <%If HomeOwnerInfo.LastUpdate.HasValue Then%>
+        <tr>
+            <td>
+                <span class="form_input_title">Data Update on &nbsp;<%= HomeOwnerInfo.LastUpdate.Value.ToString("g") %></span>
+            </td>
+        </tr>
+        <%End If%>
         <tr>
             <td class="border_under_line">
                 <div class="form_div_node form_div_no_float" style="width: 100%">
@@ -121,29 +127,28 @@
         <span>Best Emails </span>&nbsp;<i class="fa fa-plus-circle homeowner_plus_color" style="cursor: pointer" onclick="<%= String.Format("AddBestEmail('{0}','{1}','{2}', this)", BBLE, OwnerName, ulBestPhones.ClientID)%>"></i>
     </div>
     <div>
-        <% If Utility.isAny(BestEmail) or Utility.IsAny(TLOLocateReport.emailAddressesField) Then%>
+        <% If Utility.IsAny(BestEmail) Or Utility.IsAny(TLOLocateReport.emailAddressesField) Then%>
         <div class="clearfix homeowner_info_label">
             <div>
                 <% Dim emails2 = BestEmail.Select(Function(e) e.Email).ToList%>
                 <% Dim emails = BestEmail.Select(Function(e) e.Email).ToList%>
                 <%If (Utility.IsAny(emails) And Utility.IsAny(TLOLocateReport.emailAddressesField)) Then%>
-                <% emails.AddRange(TLOLocateReport.emailAddressesField) %>
-                <%End If %>
+                <% emails.AddRange(TLOLocateReport.emailAddressesField)%>
+                <%End If%>
 
-               
-                <% For Each email In emails %>
+
+                <% For Each email In emails%>
                 <% If Not String.IsNullOrEmpty(email) Then%>
                 <div class="color_gray clearfix">
                     <i class="fa fa-envelope homeowner_info_icon"></i>
                     <div class="form_div_node homeowner_info_text homeowner_info_bottom">
                         <div class="color_blue">
-                           <%--  --%>
-                            
-                           <a href="#" style="text-decoration:none" 
-                               <% If (Utility.IsAny(emails2) Andalso emails2.Contains(email)) Then %>
-                               onclick="OnEmailLinkClick('<%= email %>','<%= BBLE%>','<%= OwnerName%>',this)"
-                               <% End if %>
-                                ><%= email %></a> 
+                            <%--  --%>
+
+                            <a href="#" style="text-decoration: none"
+                                <% If (Utility.IsAny(emails2) AndAlso emails2.Contains(email)) Then%>
+                                onclick="OnEmailLinkClick('<%= email %>','<%= BBLE%>','<%= OwnerName%>',this)"
+                                <% End If%>><%= email %></a>
                         </div>
                     </div>
                 </div>
@@ -206,12 +211,12 @@
 
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
-                                   (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
+                                    (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
                                 </div>
                             </div>
                         </div>
                     </div>
-                   <%-- <div class="color_gray clearfix">
+                    <%-- <div class="color_gray clearfix">
                         <i class="fa fa-phone homeowner_info_icon"></i>
                         <div class="form_div_node homeowner_info_text ">
                             <div>
@@ -461,11 +466,11 @@
         return hash;
     }
     function sortPhones() {
-       
+
         var colors = {}
         var phones_divs = $(".homeowner_info_label:has(.PhoneLink)");
-      
-        
+
+
         var phones_div = $(".homeowner_info_label:has(.PhoneLink)")
             .each(function (id) {
                 var phones = $(this).find("div").children(".color_gray:has(.color_gray)");

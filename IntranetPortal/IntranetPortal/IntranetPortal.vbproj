@@ -326,6 +326,7 @@
     <Compile Include="CodeFolder\Office.vb" />
     <Compile Include="CodeFolder\OnlineUser.vb" />
     <Compile Include="CodeFolder\OwnerContact.vb" />
+    <Compile Include="CodeFolder\PendingAssignLead.vb" />
     <Compile Include="CodeFolder\PortalLisPen.vb" />
     <Compile Include="CodeFolder\PortalMembership.vb" />
     <Compile Include="CodeFolder\PortalNavItem.vb" />
@@ -449,6 +450,9 @@
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\OwnerContact.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\PendingAssignLead.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\PortalEntityModel.Context.vb">
