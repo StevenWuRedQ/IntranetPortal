@@ -365,8 +365,11 @@
                             connector: {
                                 visible: true
                             }
-                        }
-                    }]
+                        },
+                       
+                    }],
+                    palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
+
                 }
             $("#container").dxPieChart(option);
             option.dataSource = dataSource2;
@@ -410,7 +413,8 @@
                     customizeText: function () {
                         return this.seriesName + " years: " + this.valueText;
                     }
-                }
+                },
+                palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
             });
             var compateOfficeData = [
                 { year: "November,2014", Queens: 190, Brooklyn: 180, Bronx: 100, Manhattan: 150 },

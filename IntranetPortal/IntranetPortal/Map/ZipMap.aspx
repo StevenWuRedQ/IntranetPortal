@@ -231,6 +231,23 @@
             }
 
             function getColor(d) {
+                 
+              
+                
+                var color = 'rgba(223, 48, 0,'
+                var percent = 0.13
+                var values = [1000, 500, 200, 100, 50, 20, 10];
+                
+                for (var i = 0; i < values.length; i++)
+                {
+                    if(d>values[i])
+                    {
+                        var optacty = (1 - percent * i);
+                        return  color + optacty + ')'
+                    }
+                }
+                var optacty = (1 - percent * values.length);
+                return color + optacty + ')'
 
                 return d > 1000 ? '#287aa6' :
                     d > 500 ? '#3890bf' :
@@ -514,17 +531,30 @@
                 var southWest = bounds.getSouthWest();
              
                 var string = [northEast.lat, northEast.lng, southWest.lat, southWest.lng].join(',');
-                $.getJSON('/map/mapdataservice.svc/BlockData/' + string, function (data) {
-                   
-                    var geoJson = {
-                        "type": "FeatureCollection",
-                        "features":data
-                    }
-                    var featureLayer = L.mapbox.featureLayer(geoJson)
-                    .addTo(map);
-                });
-                
+                var geoJsonUrl = '/map/mapdataservice.svc/BlockData/' + string;
 
+                $.getJSON(geoJsonUrl, function (data) {
+                   
+                    var geoJson = data;
+                    //if (BlockLayer != null)
+                    //{
+                    //    showLayer(false, BlockLayer)
+                    //}
+                    BlockLayer = L.geoJson(geoJson, {
+                        style: {
+                            weight: 2,
+                            opacity: 0.1,
+                            color: 'black',
+                            fillOpacity: 0.7,
+                            fillColor: '#42A5F5'
+                        },
+                        onEachFeature: onEachFeatureBlock
+                    });
+                    ShowPloyons(SHOW_BLOCK);
+                    
+                });
+               
+                
             }
         }
         function MapZoomLevelChange() {
@@ -558,7 +588,7 @@
 
             map.on('draw:created', showPolygonArea);
             map.on('draw:edited', showPolygonAreaEdited);
-
+            map.on("zoomend", MapZoomLevelChange);
             function showPolygonAreaEdited(e) {
                 e.layers.eachLayer(function (layer) {
                     showPolygonArea({ layer: layer });
