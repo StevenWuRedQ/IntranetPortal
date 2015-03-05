@@ -467,16 +467,31 @@ Public Class PendingAssignRule
     Inherits BaseRule
 
     Public Overrides Sub Execute()
+        AssignLeads()
+        MoveToDataLoop()
+    End Sub
 
+    Public Sub AssignLeads()
+        Dim lds = PendingAssignLead.GetInLoopLeads()
+
+        For Each ld In lds
+            Dim li = LeadsInfo.GetInstance(ld.BBLE)
+            If li IsNot Nothing Then
+                If Not li.IsUpdating Then
+                    li.AssignTo(ld.EmployeeName, ld.CreateBy)
+
+                    ld.Finish()
+                End If
+            End If
+        Next
+    End Sub
+
+    Public Sub MoveToDataLoop()
         Dim lds = PendingAssignLead.GetAllPendingLeads
 
         For Each ld In lds
-            Try
-                ld.Assign()
-                Log(String.Format("{0} is assign to {1}.", ld.BBLE, ld.EmployeeName))
-            Catch ex As Exception
-                Log(String.Format("Exception in Pending Assign Rule. BBLE: {0}, Employee Name: {1}", ld.BBLE, ld.EmployeeName), ex)
-            End Try
+            Core.DataLoopRule.AddRules(ld.BBLE, Core.DataLoopRule.DataLoopType.All, "PendingAssignRule")
+            ld.Update(PendingAssignLead.PendingStatus.InLoop)
         Next
     End Sub
 End Class

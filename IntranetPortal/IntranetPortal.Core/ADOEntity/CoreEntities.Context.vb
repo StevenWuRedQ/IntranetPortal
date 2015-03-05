@@ -27,5 +27,8 @@ Partial Public Class CoreEntities
     Public Overridable Property EmailTemplates() As DbSet(Of EmailTemplate)
     Public Overridable Property DataLoopRules() As DbSet(Of DataLoopRule)
     Public Overridable Property RecycleLeads() As DbSet(Of RecycleLead)
+    Public Overridable Property SystemLogs() As DbSet(Of SystemLog)
+    Public Overridable Property TLOApiLogs() As DbSet(Of TLOApiLog)
+    Public Overridable Property PortalSettings() As DbSet(Of PortalSetting)
 
 End Class

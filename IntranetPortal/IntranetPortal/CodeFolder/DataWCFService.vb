@@ -24,7 +24,7 @@ Public Class DataWCFService
         End If
 
         Using client As New DataAPI.WCFMacrosClient
-            Dim result = client.Get_LocateReport(apiOrderNum, bble, owner.Name, owner.Address1, owner.Address2, owner.City, owner.State, owner.Zip, owner.Country, "", "")
+            Dim result = GetLocateReport(apiOrderNum, bble, owner.Name, owner.Address1, owner.Address2, owner.City, owner.State, owner.Zip, owner.Country)
 
             If result Is Nothing Then
                 Dim propOwners = client.NYC_NameAndAddress(bble)
@@ -32,11 +32,37 @@ Public Class DataWCFService
                     Dim newAds = propOwners(0)
                     If newAds.Owner1.Trim = owner.Name Or newAds.Owner2.Trim = owner.Name Then
                         Dim add1 = String.Format("{0} {1}", newAds.Mail_Num.Trim, newAds.Mail_ST1.Trim).TrimStart.TrimEnd
-                        result = client.Get_LocateReport(apiOrderNum, bble, owner.Name, add1, newAds.Mail_ST2, newAds.Mail_City, newAds.Mail_State, newAds.Mail_Zip, "US", "", "")
+                        'result = client.Get_LocateReport(apiOrderNum, bble, owner.Name, add1, newAds.Mail_ST2, newAds.Mail_City, newAds.Mail_State, newAds.Mail_Zip, "US", "", "")
+                        result = GetLocateReport(apiOrderNum, bble, owner.Name, add1, newAds.Mail_ST2, newAds.Mail_City, newAds.Mail_State, newAds.Mail_Zip, "US")
+
+                        'Log the ower
+                        'If result IsNot Nothing Then
+                        '    Dim desc = String.Format("Owner Name: {0}, Address1: {1}, City: {2}, State: {3}, Zip: {4},HomeOwnerId:{5}", owner.Name, add1, newAds.Mail_City, newAds.Mail_State, newAds.Mail_Zip, owner.OwnerID)
+                        '    Core.SystemLog.Log("TLO Locate Report", desc, "TLO API", bble, GetCurrentIdentityName)
+                        'End If
+
                     End If
                 End If
+            Else
+                'Dim desc = String.Format("Owner Name: {0}, Address1: {1}, City: {2}, State: {3}, Zip: {4},HomeOwnerId:{5}", owner.Name, owner.Address1, owner.City, owner.State, owner.Zip, owner.OwnerID)
+                'Core.SystemLog.Log("TLO Locate Report", desc, "TLO API", bble, GetCurrentIdentityName)
             End If
 
+            Return result
+        End Using
+    End Function
+
+    Private Shared Function GetLocateReport(orderNum As Integer, bble As String, name As String, address1 As String, address2 As String, city As String, state As String, zip As String, country As String) As DataAPI.TLOLocateReportOutput
+        If Core.TLOApiLog.LimiteIsExceed Then
+            Throw New Exception("TLO Call Limit is reached. Please contact Admin!")
+        End If
+
+        Using client As New DataAPI.WCFMacrosClient
+
+            Dim result = client.Get_LocateReport(orderNum, bble, name, address1, address2, city, state, zip, country, "", "")
+
+            'LogTloApiCall
+            Core.TLOApiLog.Log(bble, name, address1, address2, city, state, zip, country, result IsNot Nothing, GetCurrentIdentityName)
             Return result
         End Using
     End Function
@@ -274,7 +300,7 @@ Public Class DataWCFService
             End If
 
             'Used to check if homeowner is refreshed before
-            Dim homeOwnerRefreshInternal As Integer = 60
+            Dim homeOwnerRefreshInternal As Integer = CInt(Core.PortalSettings.GetValue("TLOCallInterval"))
 
             Dim loaded = False
             For Each owner In context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Active = True And (ho.Name = li.Owner Or ho.Name = li.CoOwner)).ToList

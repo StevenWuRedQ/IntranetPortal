@@ -78,7 +78,9 @@ Public Class LeadsGenerator
 
 
             Dim results = (From sr In context.SearchResults.Where(Function(s) s.Type = SearchName)
-                      From ld In context.Leads.Where(Function(l) sr.BBLE = l.BBLE).DefaultIfEmpty
+                      Let ld = context.Leads.Where(Function(l) sr.BBLE = l.BBLE).FirstOrDefault
+                      Let pendingAgent = context.PendingAssignLeads.Where(Function(p) p.BBLE = sr.BBLE).FirstOrDefault
+                      Let AgentInLeads = If(pendingAgent IsNot Nothing, pendingAgent.EmployeeName, ld.EmployeeName)
                       Select New With {
                           .Id = sr.Id,
                           .BBLE = sr.BBLE,
@@ -91,10 +93,10 @@ Public Class LeadsGenerator
                           sr.LOT_DIM,
                           sr.Servicer,
                           sr.Type,
-                          .AgentInLeads = ld.EmployeeName,
-                          sr.PropertyAddress,
-                          sr.BLOCK,
-                          sr.LOT
+                          .AgentInLeads = AgentInLeads,
+                        sr.PropertyAddress,
+                        sr.BLOCK,
+                        sr.LOT
                           }).ToList
 
 

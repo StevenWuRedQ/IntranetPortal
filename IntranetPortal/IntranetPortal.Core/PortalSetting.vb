@@ -1,0 +1,22 @@
+﻿Public Class PortalSettings
+    Private Shared _settings As Dictionary(Of String, String)
+    Private Shared ReadOnly Property Settings As Dictionary(Of String, String)
+        Get
+            If _settings Is Nothing Then
+                Using ctx As New Core.CoreEntities
+                    _settings = ctx.PortalSettings.ToDictionary(Of String, String)(Function(s) s.Name, Function(s) s.Value)
+                End Using
+            End If
+
+            Return _settings
+        End Get
+    End Property
+
+    Public Shared Function GetValue(name As String) As String
+        If Settings.ContainsKey(name) Then
+            Return Settings(name)
+        End If
+
+        Return Nothing
+    End Function
+End Class

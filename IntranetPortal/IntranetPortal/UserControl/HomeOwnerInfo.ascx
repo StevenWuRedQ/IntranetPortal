@@ -182,9 +182,7 @@
                                     <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>>
                                         <%=FormatPhoneNumber(phone.Phone)%>
                                         <span class="phone_comment"><%=GetPhoneComment(phone.Phone)%></span>
-
                                     </a>
-
                                 </div>
                                 <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
                                     &nbsp;
@@ -195,6 +193,48 @@
                     <% End If%>
                     <% Next%>
 
+                    <!-- Business phones -->
+                    <% If TLOLocateReport.businessPhonesField IsNot Nothing AndAlso TLOLocateReport.businessPhonesField.Length > 0 Then%>
+                    <% For Each phone In TLOLocateReport.businessPhonesField%>
+                    <% If phone IsNot Nothing Then%>
+                    <div class="color_gray clearfix">
+                        <div class="color_gray clearfix">
+                            <i class="fa fa-phone homeowner_info_icon"></i>
+                            <div class="form_div_node homeowner_info_text ">
+                                <div>
+                                    <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
+                                        <%=FormatPhoneNumber(phone.phoneField)%>
+                                        <span class="phone_comment"><%=GetPhoneComment(phone.phoneField)%></span>
+
+                                    </a>
+
+                                </div>
+                                <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
+                                    (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%-- <div class="color_gray clearfix">
+                        <i class="fa fa-phone homeowner_info_icon"></i>
+                        <div class="form_div_node homeowner_info_text ">
+                            <div>
+                                <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
+                                    <%= FormatPhoneNumber(phone.phoneField)%>
+                                    <span class="phone_comment"><%=GetPhoneComment(phone.phoneField) %></span>
+                                </a>
+
+                            </div>
+                            <div class="homeowner_info_sm_font homeowner_info_bottom homeowner_info_sm_font color_balck">
+                                (<%= phone.timeZoneField%>) <%= phone.phoneTypeField.ToString %> (<%= phone.scoreField%>%)
+                            </div>
+                        </div>
+                    </div>--%>
+                    <% End If%>
+                    <% Next%>
+                    <% End If%>
+
+                    <!-- personal phones -->
                     <% If TLOLocateReport.phonesField IsNot Nothing AndAlso TLOLocateReport.phonesField.Length > 0 Then%>
                     <% For Each phone In TLOLocateReport.phonesField%>
                     <% If phone IsNot Nothing Then%>
