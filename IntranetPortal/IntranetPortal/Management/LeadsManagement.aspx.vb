@@ -124,14 +124,14 @@ Public Class LeadsManagement
             'End If
 
             If String.IsNullOrEmpty(Request.QueryString("team")) Then
-                Dim emps = Employee.GetDeptUsersList(office)
+                Dim emps = Employee.GetDeptUsersList(office).OrderBy(Function(e) e.Name).ToList
                 listboxEmployee.DataSource = emps
                 listboxEmployee.DataBind()
 
                 AssignLeadsPopup.EmployeeSource = String.Join(",", emps.Select(Function(em) em.Name).ToArray)
             Else
                 Dim teamId = CInt(Request.QueryString("team"))
-                Dim emps = Employee.GetTeamUserList(teamId)
+                Dim emps = Employee.GetTeamUserList(teamId).OrderBy(Function(e) e.Name).ToList
                 listboxEmployee.DataSource = emps
                 listboxEmployee.DataBind()
 
