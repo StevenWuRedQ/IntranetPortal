@@ -133,6 +133,31 @@ Partial Public Class Employee
         'End Using
     End Function
 
+    Public Shared Function GetMyEmployeesByTeam(userName As String) As List(Of UserInTeam)
+        Using ctx As New Entities
+            If Roles.IsUserInRole(userName, "Admin") Then
+                Return UserInTeam.GetAllUsers
+            End If
+
+            Dim teams As New List(Of String)
+            For Each rl In Roles.GetRolesForUser(userName)
+                If rl.StartsWith("OfficeManager") Then
+                    teams.Add(rl.Split("-")(1))
+                End If
+            Next
+
+            If teams.Count > 0 Then
+                Return UserInTeam.GetTeamUsers(String.Join(",", teams.ToArray))
+            End If
+
+            If Employee.HasSubordinates(userName) Then
+                Return UserInTeam.GetTeamUsersByNames(Employee.GetManagedEmployees(userName))
+            End If
+
+            Return New List(Of UserInTeam)
+        End Using
+    End Function
+
     Public Shared Function GetMyEmployees(userName As String) As List(Of Employee)
         Using ctx As New Entities
             If Roles.IsUserInRole(userName, "Admin") Then

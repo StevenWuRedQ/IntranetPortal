@@ -32,7 +32,7 @@ Public Class AgentOverview
         If Not IsPostBack Then
             gridEmps.DataBind()
             gridReport.DataBind()
-            gridEmps.GroupBy(gridEmps.Columns("Department"))
+            gridEmps.GroupBy(gridEmps.Columns("TeamName"))
         End If
     End Sub
 
@@ -198,7 +198,7 @@ Public Class AgentOverview
     End Function
 
     Function GetEmpDataSource()
-        Return Employee.GetMyEmployees(Page.User.Identity.Name)
+        Return Employee.GetMyEmployeesByTeam(Page.User.Identity.Name) 'Employee.GetMyEmployees(Page.User.Identity.Name)
     End Function
 
     Sub BindEmp()

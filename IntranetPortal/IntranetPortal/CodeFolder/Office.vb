@@ -11,7 +11,7 @@
     Public ReadOnly Property OfficeDescription As String
         Get
             If String.IsNullOrEmpty(Description) Then
-                Return String.Format("{0} Office", Name)
+                Return String.Format("{0}", Name)
             End If
 
             Return Description
@@ -34,7 +34,9 @@
 
             Dim office = context.Offices.Where(Function(ofc) ofc.Name = name).FirstOrDefault
             If office Is Nothing Then
-                Return New Office()
+                Return New Office() With {
+                    .Name = name
+                    }
             Else
                 Return office
             End If

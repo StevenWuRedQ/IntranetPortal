@@ -72,12 +72,12 @@
             }
         }
 
-        function DoCallback() {
-           
+        function DoCallback() {           
             var rowKey = gridEmpsClient.GetRowKey(gridEmpsClient.GetFocusedRowIndex());
-            var rowIndex = gridEmpsClient.GetFocusedRowIndex();
+            var rowIndex = gridEmpsClient.GetFocusedRowIndex();         
             if (gridEmpsClient.IsGroupRow(rowIndex)) {
-                gridEmpsClient.GetRowValues(rowIndex + 1, "Department", OnGetRowValues);
+                gridEmpsClient.ExpandRow(rowIndex);
+                gridEmpsClient.GetRowValues(rowIndex, "TeamName", OnGetRowValues);
             }
             if (rowKey != null) {
                 //ContentCallbackPanel.PerformCallback("EMP|" + rowKey);
@@ -207,21 +207,21 @@
                                 </div>
                                 <input type="text" data-var="@btn-info-color" class="form-control" style="width: 250px; margin-top: 25px; height: 30px; color: #b1b2b7" placeholder="Type employee’s name" onchange="SearchNames(this)" />
                                 <div style="margin-top: 27px; height: 290px; overflow: auto" id="employees_grid">
-                                    <dx:ASPxGridView runat="server" Width="100%" ID="gridEmps" KeyFieldName="EmployeeID" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" ClientInstanceName="gridEmpsClient" CssClass="font_source_sans_pro">
+                                    <dx:ASPxGridView runat="server" Width="100%" ID="gridEmps" KeyFieldName="EmployeeId;TeamId" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" ClientInstanceName="gridEmpsClient" CssClass="font_source_sans_pro">
                                         <Columns>
-                                            <dx:GridViewDataTextColumn FieldName="Name" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                                            <dx:GridViewDataTextColumn FieldName="EmployeeName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                 <Settings AllowHeaderFilter="False"></Settings>
                                                 <DataItemTemplate>
                                                     <div class="employee_list_item clearfix">
                                                         <div class="employee_list_item_div">
-                                                            <span class="font_black"><%# Eval("Name")%></span><br />
-                                                            <%# Eval("Position")%>
+                                                            <span class="font_black"><%# Eval("EmployeeName")%></span><br />
+                                                            <%# Eval("EmployeePosition")%>
                                                         </div>
                                                         <%-- <i class="fa fa-list-alt employee_list_item_icon"></i>--%>
                                                     </div>
                                                 </DataItemTemplate>
                                             </dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataColumn FieldName="Department" VisibleIndex="5">
+                                            <dx:GridViewDataColumn FieldName="TeamName" VisibleIndex="5">
                                                 <GroupRowTemplate>
                                                     <%-- <div>
                                                         <span class="font_black"><%# Container.GroupText%></td></span>&nbsp;&nbsp;&nbsp;
@@ -265,55 +265,7 @@
                                         <Settings ShowColumnHeaders="False" GridLines="None"></Settings>
                                         <Border BorderStyle="None"></Border>
                                     </dx:ASPxGridView>
-                                </div>
-                                <div style="margin-top: 27px; height: 290px; display: none /*background: blue*/">
-                                    <div>
-                                        <span class="font_black">A</span>&nbsp;&nbsp;&nbsp;<span class="employee_lest_head_number_label">2</span>
-                                    </div>
-                                    <ul style="margin-left: -35px; margin-top: 10px;">
-                                        <li class="employee_list_item">
-                                            <div class="employee_list_item_div">
-                                                <span class="font_black">Alko Kone</span><br />
-                                                Eviction
-                                            </div>
-                                        </li>
-                                        <li class="employee_list_item">
-                                            <div class="employee_list_item_div">
-                                                <span class="font_black">Allen Glover</span><br />
-                                                Sales
-                                            </div>
-                                            <i class="fa fa-list-alt employee_list_item_icon"></i>
-                                        </li>
-                                    </ul>
-
-                                    <div class="employee_list_group_margin">
-                                        <span class="font_black">B</span>&nbsp;&nbsp;&nbsp;<span class="employee_lest_head_number_label">4</span>
-                                    </div>
-                                    <ul style="margin-left: -35px; margin-top: 10px;">
-                                        <li class="employee_list_item">
-                                            <div class="employee_list_item_div">
-                                                <span class="font_black">Benn Martin</span><br />
-                                                Sales
-                                            </div>
-                                            <i class="fa fa-list-alt employee_list_item_icon"></i>
-                                        </li>
-                                        <li class="employee_list_item">
-                                            <div class="employee_list_item_div">
-                                                <span class="font_black">Ben Gendin</span><br />
-                                                Departemnt
-                                            </div>
-                                            <i class="fa fa-list-alt employee_list_item_icon"></i>
-                                        </li>
-
-                                        <li class="employee_list_item">
-                                            <div class="employee_list_item_div">
-                                                <span class="font_black">Bibi Khan</span><br />
-                                                Short Sale
-                                            </div>
-                                            <i class="fa fa-list-alt employee_list_item_icon"></i>
-                                        </li>
-                                    </ul>
-                                </div>
+                                </div>                               
                             </div>
                         </div>
                         <%----end top block----%>
