@@ -299,6 +299,84 @@
     </HeaderTemplate>
 </dx:ASPxPopupControl>
 
+<dx:ASPxPopupControl ClientInstanceName="ASPxPopupRequestUpdateControl" Width="500px" Height="420px"
+        MaxWidth="800px" MinWidth="150px" ID="popupRequestUpdate"
+        HeaderText="Request Update" Modal="true" OnWindowCallback="popupRequestUpdate_WindowCallback"
+        runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+        <ContentCollection>
+            <dx:PopupControlContentControl runat="server" Visible="false" ID="popContentRequestUpdate">
+                <asp:HiddenField runat="server" ID="hfRequestUpdateBBLE" />
+                <dx:ASPxFormLayout ID="requestUpdateFormlayout" runat="server" Width="100%">
+                    <Items>
+                        <dx:LayoutItem Caption="Leads Name">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                    <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateLeadsName" ReadOnly="true"></dx:ASPxTextBox>
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+                        <dx:LayoutItem Caption="Create By">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                    <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateCreateby" ReadOnly="true"></dx:ASPxTextBox>
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+                        <dx:LayoutItem Caption="Manager">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                    <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateManager" ReadOnly="true"></dx:ASPxTextBox>
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+                        <dx:LayoutItem Caption="Importance">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server" Width="100%" SupportsDisabledAttribute="True">
+                                    <dx:ASPxComboBox runat="server" Width="100%" CssClass="edit_drop" ID="cbTaskImportant">
+                                        <Items>
+                                            <dx:ListEditItem Text="Normal" Value="Normal" Selected="true" />
+                                            <dx:ListEditItem Text="Important" Value="Important" />
+                                            <dx:ListEditItem Text="Urgent" Value="Urgent" />
+                                        </Items>
+                                    </dx:ASPxComboBox>
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+                        <dx:LayoutItem Caption="Description">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                    <dx:ASPxMemo runat="server" Width="100%" CssClass="edit_drop" Height="80px" ID="txtTaskDes"></dx:ASPxMemo>
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+                        <dx:LayoutItem Caption="Description" ShowCaption="False" HorizontalAlign="Right">
+                            <LayoutItemNestedControlCollection>
+                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                    <dx:ASPxButton ID="ASPxButton4" runat="server" Text="Send Request" AutoPostBack="false">
+                                        <ClientSideEvents Click="function(){                                                                                                                      
+                                                                                                                        ASPxPopupRequestUpdateControl.Hide();
+                                                                                                                        ASPxPopupRequestUpdateControl.PerformCallback('SendRequest');
+                                                                                                                        isSendRequest =true;                                                                                                                                                                                                                                         
+                                                                                                                        }"></ClientSideEvents>
+                                    </dx:ASPxButton>
+                                    &nbsp;
+                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
+                                                                <ClientSideEvents Click="function(){
+                                                                                                                        ASPxPopupRequestUpdateControl.Hide();                                                                                                                                                                                                                                               
+                                                                                                                        }"></ClientSideEvents>
+
+                                                            </dx:ASPxButton>
+                                </dx:LayoutItemNestedControlContainer>
+                            </LayoutItemNestedControlCollection>
+                        </dx:LayoutItem>
+                    </Items>
+                </dx:ASPxFormLayout>
+            </dx:PopupControlContentControl>
+        </ContentCollection>
+        <ClientSideEvents EndCallback="OnEndCallbackPanelRequestUpdate" />
+    </dx:ASPxPopupControl>
+
+
 <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
     <ClientSideEvents CallbackComplete="function(s,e) {OnSetStatusComplete(s,e)}" />
 </dx:ASPxCallback>

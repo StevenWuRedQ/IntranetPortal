@@ -81,6 +81,10 @@ Partial Public Class Employee
     End Property
 
     Public Shared Function HasControlLeads(name As String, bble As String) As Boolean
+        If Roles.IsUserInRole(name, "Admin") Then
+            Return True
+        End If
+
         Dim ld = Lead.GetInstance(bble)
         If ld Is Nothing Then
             Return False
@@ -349,8 +353,18 @@ Partial Public Class Employee
 
     Public Shared Function GetTeamUsers(teamId As Integer) As String()
         Using ctx As New Entities
-            Dim emps = ctx.UserInTeams.Where(Function(ut) ut.TeamId = teamId).Select(Function(ut) ut.EmployeeName).ToArray
+            Dim emps = (From user In ctx.UserInTeams.Where(Function(ut) ut.TeamId = teamId)
+                       Join emp In ctx.Employees On user.EmployeeName Equals emp.Name
+                       Where emp.Active = True
+                       Select user.EmployeeName).ToArray
+
             Return emps
+        End Using
+    End Function
+
+    Public Shared Function GetAllTeamUsers(teamId As Integer) As String()
+        Using ctx As New Entities
+            Return ctx.UserInTeams.Where(Function(ut) ut.TeamId = teamId).Select(Function(ut) ut.EmployeeName).ToArray
         End Using
     End Function
 

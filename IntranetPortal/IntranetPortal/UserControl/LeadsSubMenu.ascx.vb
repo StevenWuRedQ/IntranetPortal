@@ -1,5 +1,6 @@
 ﻿Imports DevExpress.Web.ASPxMenu
 Imports System.ComponentModel
+Imports DevExpress.Web.ASPxEditors
 
 Public Class LeadsSubMenu
     Inherits System.Web.UI.UserControl
@@ -257,5 +258,44 @@ Public Class LeadsSubMenu
             ctr.BindFilesFromSharepoint(bble)
             e.Window.Controls.Add(ctr)
         End If
+    End Sub
+
+    Protected Sub popupRequestUpdate_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        popContentRequestUpdate.Visible = True
+        If e.Parameter = "SendRequest" Then
+            Dim bble = hfRequestUpdateBBLE.Value
+
+            If Not String.IsNullOrEmpty(bble) Then
+                SendRequest(bble)
+
+                'Cancel Edit, Notify User
+                'gridLeads.CancelEdit()
+            End If
+        Else
+            Dim bble = e.Parameter
+            hfRequestUpdateBBLE.Value = bble
+
+            Using Context As New Entities
+                Dim lead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
+
+                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateLeadsName"), ASPxTextBox).Text = lead.LeadsName
+                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateCreateby"), ASPxTextBox).Text = lead.EmployeeName
+                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateManager"), ASPxTextBox).Text = Employee.GetReportToManger(Page.User.Identity.Name).Name
+
+            End Using
+        End If
+    End Sub
+
+    Sub SendRequest(bble)
+
+        Dim employees = New List(Of String)
+        employees.Add(Page.User.Identity.Name.ToLower)
+        employees.Add(txtRequestUpdateCreateby.Text.ToLower)
+        employees.Add(txtRequestUpdateManager.Text.ToLower)
+        Dim emps = String.Join(";", employees.Distinct().ToArray)
+
+        'Start new task
+        Dim actlog As New ActivityLogs
+        actlog.SetAsTask(emps, cbTaskImportant.Text, "Request Update", txtTaskDes.Text, bble, Page.User.Identity.Name)
     End Sub
 End Class

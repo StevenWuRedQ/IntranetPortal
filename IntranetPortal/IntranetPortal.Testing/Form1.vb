@@ -91,7 +91,13 @@ Public Class Form1
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Using client As New IntranetPortal.DataAPI.WCFMacrosClient
 
-            client.Get_LocateReport(100, "3015340029 ", "BUZHAKER, IGOR", "284 MACDOUGAL STREET", "", "BROOKLYN", "NY", "11234", "US", "", "")
+            Dim nameBase As New NameBase
+            nameBase.firstNameField = "George"
+            nameBase.lastNameField = "Vinsky"
+
+            Dim rresult = client.Get_TLO_Person(100, Nothing, Nothing, False, False, Nothing, "13074497", Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+
+            'client.Get_LocateReport(100, "3015340029 ", "BUZHAKER, IGOR", "284 MACDOUGAL STREET", "", "BROOKLYN", "NY", "11234", "US", "", "")
 
 
 

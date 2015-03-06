@@ -37,16 +37,13 @@
             NotifyUserLimited(left, count)
         End If
 
-        If left = 0 Then
-            Return False
-        End If
-
         Return True
     End Function
 
     Private Shared Function GetCount() As Integer
         Using ctx As New CoreEntities
-            Dim count = ctx.TLOApiLogs.Where(Function(a) a.CreateDate > New Date(DateTime.Today.Year, DateTime.Today.Month, 1)).Count
+            Dim firstOfMonth = New Date(DateTime.Today.Year, DateTime.Today.Month, 1)
+            Dim count = ctx.TLOApiLogs.Where(Function(a) a.CreateDate > firstOfMonth And a.Successed = True).Count
             Return count
         End Using
     End Function

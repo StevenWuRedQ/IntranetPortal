@@ -80,7 +80,7 @@ Public Class LeadsList
             Dim leads As Object
 
             If category = LeadStatus.InProcess Then
-                subOridates = Employee.GetAllDeptUsers(OfficeName)
+                subOridates = Employee.GetAllTeamUsers(TeamId)
                 leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
             Else
                 leads = Context.Leads.Where(Function(e) subOridates.Contains(e.EmployeeName) And e.Status = category).ToList.OrderByDescending(Function(e) e.LastUpdate)
@@ -546,78 +546,78 @@ Public Class LeadsList
     '    End Using
     'End Sub
 
-    Protected Sub callbackPanelRequestUpdate_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
-        If e.Parameter = "SendRequest" Then
-            Dim bble = hfRequestUpdateBBLE.Value
+    'Protected Sub callbackPanelRequestUpdate_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+    '    If e.Parameter = "SendRequest" Then
+    '        Dim bble = hfRequestUpdateBBLE.Value
 
-            If Not String.IsNullOrEmpty(bble) Then
-                SendRequest(bble)
+    '        If Not String.IsNullOrEmpty(bble) Then
+    '            SendRequest(bble)
 
-                'Cancel Edit, Notify User
-                'gridLeads.CancelEdit()
-            End If
-        Else
-            Dim bble = e.Parameter
-            hfRequestUpdateBBLE.Value = bble
+    '            'Cancel Edit, Notify User
+    '            'gridLeads.CancelEdit()
+    '        End If
+    '    Else
+    '        Dim bble = e.Parameter
+    '        hfRequestUpdateBBLE.Value = bble
 
-            Using Context As New Entities
-                Dim lead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
+    '        Using Context As New Entities
+    '            Dim lead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
 
-                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateLeadsName"), ASPxTextBox).Text = lead.LeadsName
-                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateCreateby"), ASPxTextBox).Text = lead.EmployeeName
-                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateManager"), ASPxTextBox).Text = Employee.GetReportToManger(Page.User.Identity.Name).Name
+    '            TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateLeadsName"), ASPxTextBox).Text = lead.LeadsName
+    '            TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateCreateby"), ASPxTextBox).Text = lead.EmployeeName
+    '            TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateManager"), ASPxTextBox).Text = Employee.GetReportToManger(Page.User.Identity.Name).Name
 
-            End Using
-        End If
-    End Sub
+    '        End Using
+    '    End If
+    'End Sub
 
-    Sub SendRequest(bble)
+    'Sub SendRequest(bble)
 
-        Dim employees = New List(Of String)
-        employees.Add(Page.User.Identity.Name.ToLower)
-        employees.Add(txtRequestUpdateCreateby.Text.ToLower)
-        employees.Add(txtRequestUpdateManager.Text.ToLower)
-        Dim emps = String.Join(";", employees.Distinct().ToArray)
+    '    Dim employees = New List(Of String)
+    '    employees.Add(Page.User.Identity.Name.ToLower)
+    '    employees.Add(txtRequestUpdateCreateby.Text.ToLower)
+    '    employees.Add(txtRequestUpdateManager.Text.ToLower)
+    '    Dim emps = String.Join(";", employees.Distinct().ToArray)
 
-        'Dim cbTaskImportant = TryCast(requestUpdateFormlayout.FindControl("cbTaskImportant"), ASPxComboBox)
-        'Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td>Employees:</td>" &
-        '                             "<td>{0}</td></tr>" &
-        '                             "<tr><td>Action:</td><td>{1}</td></tr>" &
-        '                             "<tr><td>Important:</td><td>{2}</td></tr>" &
-        '                           "<tr><td>Description:</td><td>{3}</td></tr>" &
-        '                           "</table>", employees, "Request Update", cbTaskImportant.Text, txtTaskDes.Text)
+    '    'Dim cbTaskImportant = TryCast(requestUpdateFormlayout.FindControl("cbTaskImportant"), ASPxComboBox)
+    '    'Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td>Employees:</td>" &
+    '    '                             "<td>{0}</td></tr>" &
+    '    '                             "<tr><td>Action:</td><td>{1}</td></tr>" &
+    '    '                             "<tr><td>Important:</td><td>{2}</td></tr>" &
+    '    '                           "<tr><td>Description:</td><td>{3}</td></tr>" &
+    '    '                           "</table>", employees, "Request Update", cbTaskImportant.Text, txtTaskDes.Text)
 
-        'Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString)
+    '    'Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString)
 
-        'Dim scheduleDate = DateTime.Now
-        'If cbTaskImportant.Text = "Normal" Then
-        '    scheduleDate = scheduleDate.AddDays(2)
-        'End If
+    '    'Dim scheduleDate = DateTime.Now
+    '    'If cbTaskImportant.Text = "Normal" Then
+    '    '    scheduleDate = scheduleDate.AddDays(2)
+    '    'End If
 
-        'If cbTaskImportant.Text = "Importal" Then
-        '    scheduleDate = scheduleDate.AddDays(1)
-        'End If
+    '    'If cbTaskImportant.Text = "Importal" Then
+    '    '    scheduleDate = scheduleDate.AddDays(1)
+    '    'End If
 
-        'If cbTaskImportant.Text = "Urgent" Then
-        '    scheduleDate = scheduleDate.AddHours(2)
-        'End If
+    '    'If cbTaskImportant.Text = "Urgent" Then
+    '    '    scheduleDate = scheduleDate.AddHours(2)
+    '    'End If
 
-        'Start new task
-        Dim actlog As New ActivityLogs
-        actlog.SetAsTask(emps, cbTaskImportant.Text, "Request Update", txtTaskDes.Text, bble, Page.User.Identity.Name)
+    '    'Start new task
+    '    Dim actlog As New ActivityLogs
+    '    actlog.SetAsTask(emps, cbTaskImportant.Text, "Request Update", txtTaskDes.Text, bble, Page.User.Identity.Name)
 
-        'UserTask.AddUserTask(bble, employees, "Request Update", cbTaskImportant.Text, "In Office", scheduleDate, txtTaskDes.Text, log.LogID)
+    '    'UserTask.AddUserTask(bble, employees, "Request Update", cbTaskImportant.Text, "In Office", scheduleDate, txtTaskDes.Text, log.LogID)
 
-        ''Add New message
-        'Dim ld = LeadsInfo.GetInstance(bble)
-        'Dim emps = employees.Split(";").Distinct.ToArray
-        'For i = 0 To emps.Count - 1
-        '    If emps(i) <> Page.User.Identity.Name Then
-        '        Dim title = String.Format("A New Task has been assigned by {0} regarding {1} for {2}", Page.User.Identity.Name, "Lead Update", ld.PropertyAddress)
-        '        UserMessage.AddNewMessage(emps(i), title, comments, bble)
-        '    End If
-        'Next
-    End Sub
+    '    ''Add New message
+    '    'Dim ld = LeadsInfo.GetInstance(bble)
+    '    'Dim emps = employees.Split(";").Distinct.ToArray
+    '    'For i = 0 To emps.Count - 1
+    '    '    If emps(i) <> Page.User.Identity.Name Then
+    '    '        Dim title = String.Format("A New Task has been assigned by {0} regarding {1} for {2}", Page.User.Identity.Name, "Lead Update", ld.PropertyAddress)
+    '    '        UserMessage.AddNewMessage(emps(i), title, comments, bble)
+    '    '    End If
+    '    'Next
+    'End Sub
 
     Protected Sub cbStreetlookup_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         If String.IsNullOrEmpty(e.Parameter) Then
@@ -700,31 +700,31 @@ Public Class LeadsList
         End If
     End Sub
 
-    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
-        popContentRequestUpdate.Visible = True
-        If e.Parameter = "SendRequest" Then
-            Dim bble = hfRequestUpdateBBLE.Value
+    'Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+    '    popContentRequestUpdate.Visible = True
+    '    If e.Parameter = "SendRequest" Then
+    '        Dim bble = hfRequestUpdateBBLE.Value
 
-            If Not String.IsNullOrEmpty(bble) Then
-                SendRequest(bble)
+    '        If Not String.IsNullOrEmpty(bble) Then
+    '            SendRequest(bble)
 
-                'Cancel Edit, Notify User
-                'gridLeads.CancelEdit()
-            End If
-        Else
-            Dim bble = e.Parameter
-            hfRequestUpdateBBLE.Value = bble
+    '            'Cancel Edit, Notify User
+    '            'gridLeads.CancelEdit()
+    '        End If
+    '    Else
+    '        Dim bble = e.Parameter
+    '        hfRequestUpdateBBLE.Value = bble
 
-            Using Context As New Entities
-                Dim lead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
+    '        Using Context As New Entities
+    '            Dim lead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
 
-                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateLeadsName"), ASPxTextBox).Text = lead.LeadsName
-                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateCreateby"), ASPxTextBox).Text = lead.EmployeeName
-                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateManager"), ASPxTextBox).Text = Employee.GetReportToManger(Page.User.Identity.Name).Name
+    '            TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateLeadsName"), ASPxTextBox).Text = lead.LeadsName
+    '            TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateCreateby"), ASPxTextBox).Text = lead.EmployeeName
+    '            TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateManager"), ASPxTextBox).Text = Employee.GetReportToManger(Page.User.Identity.Name).Name
 
-            End Using
-        End If
-    End Sub
+    '        End Using
+    '    End If
+    'End Sub
 
     Protected Sub MarkColorCallBack_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
         Dim BBLE = e.Parameter.Split("|")(1)

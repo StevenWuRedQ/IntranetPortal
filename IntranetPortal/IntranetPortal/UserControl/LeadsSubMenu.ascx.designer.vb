@@ -212,6 +212,96 @@ Partial Public Class LeadsSubMenu
     Protected WithEvents aspxPopupShareleads As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
+    '''popupRequestUpdate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents popupRequestUpdate As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''popContentRequestUpdate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents popContentRequestUpdate As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+
+    '''<summary>
+    '''hfRequestUpdateBBLE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfRequestUpdateBBLE As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''requestUpdateFormlayout control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents requestUpdateFormlayout As Global.DevExpress.Web.ASPxFormLayout.ASPxFormLayout
+
+    '''<summary>
+    '''txtRequestUpdateLeadsName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtRequestUpdateLeadsName As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''txtRequestUpdateCreateby control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtRequestUpdateCreateby As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''txtRequestUpdateManager control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtRequestUpdateManager As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''cbTaskImportant control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbTaskImportant As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
+    '''txtTaskDes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtTaskDes As Global.DevExpress.Web.ASPxEditors.ASPxMemo
+
+    '''<summary>
+    '''ASPxButton4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
     '''leadStatusCallback control.
     '''</summary>
     '''<remarks>

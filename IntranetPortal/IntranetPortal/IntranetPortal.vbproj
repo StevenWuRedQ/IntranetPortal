@@ -2562,6 +2562,9 @@
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.AB_Report_Out.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TLOPersonSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\DataAPI\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>

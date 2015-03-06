@@ -173,28 +173,9 @@
         //alert(cbStreetlookupClient.GetEnabled());
     }
 
-    function OnRequestUpdate(bble) {
-        isSendRequest = false;
-        if (ASPxPopupRequestUpdateControl.InCallback()) {
+    
 
-        }
-        else {
-            ASPxPopupRequestUpdateControl.SetHeaderText("Request Update - " + bble);
-            ASPxPopupRequestUpdateControl.PerformCallback(bble);
-        }
-    }
-
-    var isSendRequest = false;
-    function OnEndCallbackPanelRequestUpdate(s, e) {
-        if (isSendRequest) {
-            gridLeads.CancelEdit();
-            //gridLeads.Refresh();
-            alert("Request update is send.");
-        }
-        else {
-            s.Show();
-        }
-    }
+  
 
     var lastBorough = null;
     var loadedBorough = null;
@@ -784,7 +765,7 @@
 
     <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 
-    <dx:ASPxPopupControl ClientInstanceName="ASPxPopupRequestUpdateControl" Width="500px" Height="420px"
+    <%--<dx:ASPxPopupControl ClientInstanceName="ASPxPopupRequestUpdateControl" Width="500px" Height="420px"
         MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl3"
         HeaderText="Request Update" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
         runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
@@ -859,7 +840,7 @@
             </dx:PopupControlContentControl>
         </ContentCollection>
         <ClientSideEvents EndCallback="OnEndCallbackPanelRequestUpdate" />
-    </dx:ASPxPopupControl>
+    </dx:ASPxPopupControl>--%>
 
     <dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="aspxPopupSortMenu"
         ShowPopOutImages="false" AutoPostBack="false"

@@ -320,3 +320,32 @@ function OnSetStatusComplete(s, e) {
 function NavigateURL(type, bble) {
     window.location.href = "/LeadAgent.aspx?c=" + type + "&id=" + bble;
 }
+
+
+var isSendRequest = false;
+
+function OnRequestUpdate(bble) {
+    isSendRequest = false;
+    if (ASPxPopupRequestUpdateControl.InCallback()) {
+
+    }
+    else {
+        ASPxPopupRequestUpdateControl.SetHeaderText("Request Update - " + bble);
+        ASPxPopupRequestUpdateControl.PerformCallback(bble);
+    }
+}
+
+function OnEndCallbackPanelRequestUpdate(s, e) {
+    if (isSendRequest) {
+        if (typeof gridLeads != "undefined")
+        {
+            gridLeads.CancelEdit();
+        }
+
+        //gridLeads.Refresh();
+        alert("Request update is send.");
+    }
+    else {
+        s.Show();
+    }
+}

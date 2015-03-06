@@ -299,7 +299,21 @@
       <xs:element minOccurs="0" name="BillingOrderTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Block" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="C1stMotgrAmt" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="C1stMotgrDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="C1stMotgrName1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="C1stMotgrName2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="C1stMotgrName3" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="C2ndMotgrAmt" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="C2ndMotgrDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="C2ndMotgrName1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="C2ndMotgrName2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="C2ndMotgrName3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="C3rdMotgrAmt" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="C3rdMotgrDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="C3rdMotgrName1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="C3rdMotgrName2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="C3rdMotgrName3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Class" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CoOwner" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Condition" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="DOBOrderDeliveryTime" nillable="true" type="xs:dateTime" />
@@ -1079,6 +1093,8 @@
       <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="St_Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ToResearch" type="xs:boolean" />
+      <xs:element minOccurs="0" name="WhoIs" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Zip" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -1240,6 +1256,7 @@
       <xs:element minOccurs="0" name="NTIME" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OPERID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Remarks" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Researched_By" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SCOUNTY" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SCOURT" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="SDDATE" nillable="true" type="xs:dateTime" />

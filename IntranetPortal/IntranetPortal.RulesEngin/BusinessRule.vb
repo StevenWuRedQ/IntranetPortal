@@ -142,8 +142,6 @@ End Class
 Public Class LoopServiceRule
     Inherits BaseRule
 
-    Public Property Type As LoopType
-
     Dim threadPools As New List(Of Thread)
     Dim rules As List(Of Core.DataLoopRule)
 
@@ -152,7 +150,7 @@ Public Class LoopServiceRule
 
         If rules IsNot Nothing AndAlso rules.Count > 0 Then
             CurrentIndex = 0
-            For i = 0 To 10
+            For i = 0 To 1
                 Log("Thread " & i & " is starting.")
                 Dim TestThread As New System.Threading.Thread(New ThreadStart(Sub()
                                                                                   InitialData()
@@ -233,6 +231,9 @@ InitialLine:
                 If DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
                     rule.Complete(Core.DataLoopRule.DataLoopType.AllMortgage)
                     Log("Initial Data Message " & bble & String.Format(" Refresh BBLE: {0} homeowner info is finished.", bble))
+                Else
+                    rule.Complete(Core.DataLoopRule.DataLoopType.AllMortgage)
+                    Log("Initial Homeowner failed. No homeowene info loaded. BBLE: " & bble)
                 End If
             Case Core.DataLoopRule.DataLoopType.Servicer
                 DataWCFService.UpdateServicer(bble)
@@ -247,11 +248,17 @@ InitialLine:
                 If DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
                     rule.Complete()
                     Log("Initial Data Message " & bble & String.Format(" Refresh BBLE: {0} homeowner info is finished.", bble))
+                Else
+                    rule.Complete()
+                    Log("Initial Homeowner failed. No homeowene info loaded. BBLE: " & bble)
                 End If
             Case Core.DataLoopRule.DataLoopType.Mortgage, Core.DataLoopRule.DataLoopType.AllMortgage
                 If DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True) Then
                     rule.Complete()
                     Log("Initial Data Message " & bble & String.Format(" BBLE: {0} Morgatage data is loaded. ", bble))
+                Else
+                    rule.Complete()
+                    Log("Failed to Inital Mortgage Data. BBLE: " & bble)
                 End If
             Case Else
                 Dim lead = LeadsInfo.GetInstance(bble)
@@ -291,14 +298,13 @@ InitialLine:
             emaildata.Add("UserName", "Steven")
             client.SendEmailByTemplate("Steven Wu", "LoopServiceNotAvaiable", emaildata)
         End Using
-
     End Sub
 
-    Enum LoopType
-        GeneralData
-        HomeOwner
-        Mortgage
-    End Enum
+    'Enum LoopType
+    '    GeneralData
+    '    HomeOwner
+    '    Mortgage
+    'End Enum
 End Class
 
 Public Class CompleteTaskRule

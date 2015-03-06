@@ -14,7 +14,6 @@
 
     Public Shared Function UpdateOrderInfo(orderId As Integer, infoType As String, status As String) As Boolean
         Using context As New Entities
-
             Dim apiOrder = context.APIOrders.Where(Function(order) order.ApiOrderID = orderId).SingleOrDefault
 
             If apiOrder IsNot Nothing Then

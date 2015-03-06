@@ -3075,7 +3075,49 @@ Namespace DataAPI
         Private C1stMotgrAmtField As System.Nullable(Of Decimal)
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private C1stMotgrDateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private C1stMotgrName1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private C1stMotgrName2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private C1stMotgrName3Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private C2ndMotgrAmtField As System.Nullable(Of Decimal)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private C2ndMotgrDateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private C2ndMotgrName1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private C2ndMotgrName2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private C2ndMotgrName3Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private C3rdMotgrAmtField As System.Nullable(Of Decimal)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private C3rdMotgrDateField As System.Nullable(Of Date)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private C3rdMotgrName1Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private C3rdMotgrName2Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private C3rdMotgrName3Field As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ClassField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private CoOwnerField As String
@@ -3382,12 +3424,152 @@ Namespace DataAPI
         End Property
         
         <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property C1stMotgrDate() As System.Nullable(Of Date)
+            Get
+                Return Me.C1stMotgrDateField
+            End Get
+            Set
+                Me.C1stMotgrDateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property C1stMotgrName1() As String
+            Get
+                Return Me.C1stMotgrName1Field
+            End Get
+            Set
+                Me.C1stMotgrName1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property C1stMotgrName2() As String
+            Get
+                Return Me.C1stMotgrName2Field
+            End Get
+            Set
+                Me.C1stMotgrName2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property C1stMotgrName3() As String
+            Get
+                Return Me.C1stMotgrName3Field
+            End Get
+            Set
+                Me.C1stMotgrName3Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
         Public Property C2ndMotgrAmt() As System.Nullable(Of Decimal)
             Get
                 Return Me.C2ndMotgrAmtField
             End Get
             Set
                 Me.C2ndMotgrAmtField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property C2ndMotgrDate() As System.Nullable(Of Date)
+            Get
+                Return Me.C2ndMotgrDateField
+            End Get
+            Set
+                Me.C2ndMotgrDateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property C2ndMotgrName1() As String
+            Get
+                Return Me.C2ndMotgrName1Field
+            End Get
+            Set
+                Me.C2ndMotgrName1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property C2ndMotgrName2() As String
+            Get
+                Return Me.C2ndMotgrName2Field
+            End Get
+            Set
+                Me.C2ndMotgrName2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property C2ndMotgrName3() As String
+            Get
+                Return Me.C2ndMotgrName3Field
+            End Get
+            Set
+                Me.C2ndMotgrName3Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property C3rdMotgrAmt() As System.Nullable(Of Decimal)
+            Get
+                Return Me.C3rdMotgrAmtField
+            End Get
+            Set
+                Me.C3rdMotgrAmtField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property C3rdMotgrDate() As System.Nullable(Of Date)
+            Get
+                Return Me.C3rdMotgrDateField
+            End Get
+            Set
+                Me.C3rdMotgrDateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property C3rdMotgrName1() As String
+            Get
+                Return Me.C3rdMotgrName1Field
+            End Get
+            Set
+                Me.C3rdMotgrName1Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property C3rdMotgrName2() As String
+            Get
+                Return Me.C3rdMotgrName2Field
+            End Get
+            Set
+                Me.C3rdMotgrName2Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property C3rdMotgrName3() As String
+            Get
+                Return Me.C3rdMotgrName3Field
+            End Get
+            Set
+                Me.C3rdMotgrName3Field = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property [Class]() As String
+            Get
+                Return Me.ClassField
+            End Get
+            Set
+                Me.ClassField = value
             End Set
         End Property
         
@@ -5932,6 +6114,8 @@ Namespace DataAPI
      System.Runtime.Serialization.DataContractAttribute(Name:="ResponseOutputBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
      System.SerializableAttribute(),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOResponseOutput)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOGenericSearchOutputBaseOfTLOGenericSearchInput)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOPersonSearchOutput)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOLocateReportOutput))>  _
     Partial Public Class ResponseOutputBase
         Inherits Object
@@ -6039,6 +6223,8 @@ Namespace DataAPI
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="TLOResponseOutput", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
      System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOGenericSearchOutputBaseOfTLOGenericSearchInput)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOPersonSearchOutput)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOLocateReportOutput))>  _
     Partial Public Class TLOResponseOutput
         Inherits DataAPI.ResponseOutputBase
@@ -6088,6 +6274,83 @@ Namespace DataAPI
             End Get
             Set
                 Me.uniqueSearchIdFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOGenericSearchOutputBaseOfTLOGenericSearchInput", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOPersonSearchOutput))>  _
+    Partial Public Class TLOGenericSearchOutputBaseOfTLOGenericSearchInput
+        Inherits DataAPI.TLOResponseOutput
+        
+        Private actualSearchInputFieldField As DataAPI.TLOGenericSearchInput
+        
+        Private numberOfRecordsFoundWithModifiedSearchFieldField As Integer
+        
+        Private searchModifiedFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property actualSearchInputField() As DataAPI.TLOGenericSearchInput
+            Get
+                Return Me.actualSearchInputFieldField
+            End Get
+            Set
+                Me.actualSearchInputFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfRecordsFoundWithModifiedSearchField() As Integer
+            Get
+                Return Me.numberOfRecordsFoundWithModifiedSearchFieldField
+            End Get
+            Set
+                Me.numberOfRecordsFoundWithModifiedSearchFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property searchModifiedField() As String
+            Get
+                Return Me.searchModifiedFieldField
+            End Get
+            Set
+                Me.searchModifiedFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOPersonSearchOutput", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLOPersonSearchOutput
+        Inherits DataAPI.TLOGenericSearchOutputBaseOfTLOGenericSearchInput
+        
+        Private abbreviatedResultFieldField As String
+        
+        Private personSearchOutputRecordsFieldField() As DataAPI.TLOPersonSearchOutputRecord
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property abbreviatedResultField() As String
+            Get
+                Return Me.abbreviatedResultFieldField
+            End Get
+            Set
+                Me.abbreviatedResultFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property personSearchOutputRecordsField() As DataAPI.TLOPersonSearchOutputRecord()
+            Get
+                Return Me.personSearchOutputRecordsFieldField
+            End Get
+            Set
+                Me.personSearchOutputRecordsFieldField = value
             End Set
         End Property
     End Class
@@ -8726,13 +8989,6290 @@ Namespace DataAPI
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOGenericSearchInput", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLOGenericSearchInput
+        Inherits DataAPI.TLORequestInput
+        
+        Private addressFieldField As DataAPI.AddressBase
+        
+        Private businessNameFieldField As String
+        
+        Private businessTokenFieldField As String
+        
+        Private dateOfBirthFieldField As DataAPI.[Date]
+        
+        Private doNotModifySearchFieldField As String
+        
+        Private domainFieldField As String
+        
+        Private driversLicenseNumberFieldField As String
+        
+        Private driversLicenseNumberTokenFieldField As String
+        
+        Private dunsNumberFieldField As String
+        
+        Private emailAddressFieldField As String
+        
+        Private fEINumberFieldField As String
+        
+        Private findBestMatchFieldField As String
+        
+        Private fullNameFieldField As String
+        
+        Private iPAddressFieldField As String
+        
+        Private licensePlateFieldField As String
+        
+        Private licensePlateStateFieldField As String
+        
+        Private licensePlateTokenFieldField As String
+        
+        Private maximumAddressesFieldField As String
+        
+        Private maximumAgeFieldField As String
+        
+        Private minimumAgeFieldField As String
+        
+        Private nameFieldField As DataAPI.NameBase
+        
+        Private phoneFieldField As String
+        
+        Private radiusFieldField As String
+        
+        Private reportTokenFieldField As String
+        
+        Private returnAllRecordsLinkedToSSNFieldField As String
+        
+        Private sSNFieldField As String
+        
+        Private useExactFirstNameMatchFieldField As String
+        
+        Private usePhoneticLastNameMatchFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.AddressBase
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessNameField() As String
+            Get
+                Return Me.businessNameFieldField
+            End Get
+            Set
+                Me.businessNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessTokenField() As String
+            Get
+                Return Me.businessTokenFieldField
+            End Get
+            Set
+                Me.businessTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthField() As DataAPI.[Date]
+            Get
+                Return Me.dateOfBirthFieldField
+            End Get
+            Set
+                Me.dateOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property doNotModifySearchField() As String
+            Get
+                Return Me.doNotModifySearchFieldField
+            End Get
+            Set
+                Me.doNotModifySearchFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property domainField() As String
+            Get
+                Return Me.domainFieldField
+            End Get
+            Set
+                Me.domainFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property driversLicenseNumberField() As String
+            Get
+                Return Me.driversLicenseNumberFieldField
+            End Get
+            Set
+                Me.driversLicenseNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property driversLicenseNumberTokenField() As String
+            Get
+                Return Me.driversLicenseNumberTokenFieldField
+            End Get
+            Set
+                Me.driversLicenseNumberTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dunsNumberField() As String
+            Get
+                Return Me.dunsNumberFieldField
+            End Get
+            Set
+                Me.dunsNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property emailAddressField() As String
+            Get
+                Return Me.emailAddressFieldField
+            End Get
+            Set
+                Me.emailAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property fEINumberField() As String
+            Get
+                Return Me.fEINumberFieldField
+            End Get
+            Set
+                Me.fEINumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property findBestMatchField() As String
+            Get
+                Return Me.findBestMatchFieldField
+            End Get
+            Set
+                Me.findBestMatchFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property fullNameField() As String
+            Get
+                Return Me.fullNameFieldField
+            End Get
+            Set
+                Me.fullNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property iPAddressField() As String
+            Get
+                Return Me.iPAddressFieldField
+            End Get
+            Set
+                Me.iPAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property licensePlateField() As String
+            Get
+                Return Me.licensePlateFieldField
+            End Get
+            Set
+                Me.licensePlateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property licensePlateStateField() As String
+            Get
+                Return Me.licensePlateStateFieldField
+            End Get
+            Set
+                Me.licensePlateStateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property licensePlateTokenField() As String
+            Get
+                Return Me.licensePlateTokenFieldField
+            End Get
+            Set
+                Me.licensePlateTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property maximumAddressesField() As String
+            Get
+                Return Me.maximumAddressesFieldField
+            End Get
+            Set
+                Me.maximumAddressesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property maximumAgeField() As String
+            Get
+                Return Me.maximumAgeFieldField
+            End Get
+            Set
+                Me.maximumAgeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property minimumAgeField() As String
+            Get
+                Return Me.minimumAgeFieldField
+            End Get
+            Set
+                Me.minimumAgeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.NameBase
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property phoneField() As String
+            Get
+                Return Me.phoneFieldField
+            End Get
+            Set
+                Me.phoneFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property radiusField() As String
+            Get
+                Return Me.radiusFieldField
+            End Get
+            Set
+                Me.radiusFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property returnAllRecordsLinkedToSSNField() As String
+            Get
+                Return Me.returnAllRecordsLinkedToSSNFieldField
+            End Get
+            Set
+                Me.returnAllRecordsLinkedToSSNFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sSNField() As String
+            Get
+                Return Me.sSNFieldField
+            End Get
+            Set
+                Me.sSNFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property useExactFirstNameMatchField() As String
+            Get
+                Return Me.useExactFirstNameMatchFieldField
+            End Get
+            Set
+                Me.useExactFirstNameMatchFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property usePhoneticLastNameMatchField() As String
+            Get
+                Return Me.usePhoneticLastNameMatchFieldField
+            End Get
+            Set
+                Me.usePhoneticLastNameMatchFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="RequestCredentials", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.RequestIdentification)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLORequestInput)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOGenericSearchInput))>  _
+    Partial Public Class RequestCredentials
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private hostIPFieldField As String
+        
+        Private passwordFieldField As String
+        
+        Private usernameFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property hostIPField() As String
+            Get
+                Return Me.hostIPFieldField
+            End Get
+            Set
+                Me.hostIPFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property passwordField() As String
+            Get
+                Return Me.passwordFieldField
+            End Get
+            Set
+                Me.passwordFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property usernameField() As String
+            Get
+                Return Me.usernameFieldField
+            End Get
+            Set
+                Me.usernameFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="RequestIdentification", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLORequestInput)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOGenericSearchInput))>  _
+    Partial Public Class RequestIdentification
+        Inherits DataAPI.RequestCredentials
+        
+        Private caseNumberFieldField As String
+        
+        Private requestIdFieldField As String
+        
+        Private userDataFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property caseNumberField() As String
+            Get
+                Return Me.caseNumberFieldField
+            End Get
+            Set
+                Me.caseNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property requestIdField() As String
+            Get
+                Return Me.requestIdFieldField
+            End Get
+            Set
+                Me.requestIdFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property userDataField() As String
+            Get
+                Return Me.userDataFieldField
+            End Get
+            Set
+                Me.userDataFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLORequestInput", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOGenericSearchInput))>  _
+    Partial Public Class TLORequestInput
+        Inherits DataAPI.RequestIdentification
+        
+        Private dPPAPurposeFieldField As String
+        
+        Private gLBPurposeFieldField As String
+        
+        Private numberOfRecordsFieldField As Integer
+        
+        Private permissibleUseCodeFieldField As String
+        
+        Private startingRecordFieldField As Integer
+        
+        Private versionFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dPPAPurposeField() As String
+            Get
+                Return Me.dPPAPurposeFieldField
+            End Get
+            Set
+                Me.dPPAPurposeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property gLBPurposeField() As String
+            Get
+                Return Me.gLBPurposeFieldField
+            End Get
+            Set
+                Me.gLBPurposeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfRecordsField() As Integer
+            Get
+                Return Me.numberOfRecordsFieldField
+            End Get
+            Set
+                Me.numberOfRecordsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property permissibleUseCodeField() As String
+            Get
+                Return Me.permissibleUseCodeFieldField
+            End Get
+            Set
+                Me.permissibleUseCodeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property startingRecordField() As Integer
+            Get
+                Return Me.startingRecordFieldField
+            End Get
+            Set
+                Me.startingRecordFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property versionField() As String
+            Get
+                Return Me.versionFieldField
+            End Get
+            Set
+                Me.versionFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="AddressBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicAddress)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.Address))>  _
+    Partial Public Class AddressBase
+        Inherits DataAPI.ProtectedData
+        
+        Private cityFieldField As String
+        
+        Private countyFieldField As String
+        
+        Private latitudeFieldField As Double
+        
+        Private line1FieldField As String
+        
+        Private line2FieldField As String
+        
+        Private line3FieldField As String
+        
+        Private longitudeFieldField As Double
+        
+        Private stateFieldField As String
+        
+        Private zipFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property cityField() As String
+            Get
+                Return Me.cityFieldField
+            End Get
+            Set
+                Me.cityFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property countyField() As String
+            Get
+                Return Me.countyFieldField
+            End Get
+            Set
+                Me.countyFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property latitudeField() As Double
+            Get
+                Return Me.latitudeFieldField
+            End Get
+            Set
+                Me.latitudeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property line1Field() As String
+            Get
+                Return Me.line1FieldField
+            End Get
+            Set
+                Me.line1FieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property line2Field() As String
+            Get
+                Return Me.line2FieldField
+            End Get
+            Set
+                Me.line2FieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property line3Field() As String
+            Get
+                Return Me.line3FieldField
+            End Get
+            Set
+                Me.line3FieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property longitudeField() As Double
+            Get
+                Return Me.longitudeFieldField
+            End Get
+            Set
+                Me.longitudeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property stateField() As String
+            Get
+                Return Me.stateFieldField
+            End Get
+            Set
+                Me.stateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property zipField() As String
+            Get
+                Return Me.zipFieldField
+            End Get
+            Set
+                Me.zipFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="Date", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class [Date]
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private dayFieldField As String
+        
+        Private monthFieldField As String
+        
+        Private yearFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dayField() As String
+            Get
+                Return Me.dayFieldField
+            End Get
+            Set
+                Me.dayFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property monthField() As String
+            Get
+                Return Me.monthFieldField
+            End Get
+            Set
+                Me.monthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property yearField() As String
+            Get
+                Return Me.yearFieldField
+            End Get
+            Set
+                Me.yearFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="NameBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicName)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.Name))>  _
+    Partial Public Class NameBase
+        Inherits DataAPI.ProtectedData
+        
+        Private firstNameFieldField As String
+        
+        Private lastNameFieldField As String
+        
+        Private middleNameFieldField As String
+        
+        Private nameSuffixFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property firstNameField() As String
+            Get
+                Return Me.firstNameFieldField
+            End Get
+            Set
+                Me.firstNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property lastNameField() As String
+            Get
+                Return Me.lastNameFieldField
+            End Get
+            Set
+                Me.lastNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property middleNameField() As String
+            Get
+                Return Me.middleNameFieldField
+            End Get
+            Set
+                Me.middleNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameSuffixField() As String
+            Get
+                Return Me.nameSuffixFieldField
+            End Get
+            Set
+                Me.nameSuffixFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ProtectedData", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicDateOfBirthRecord)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.DateOfBirthRecord)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.NameBase)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicName)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.Name)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicSSNRecord)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.SSNRecord)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicPhoneListing)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.PhoneListing)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.AddressBase))>  _
+    Partial Public Class ProtectedData
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="DateOfBirthRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class DateOfBirthRecord
+        Inherits DataAPI.BasicDateOfBirthRecord
+        
+        Private astrologicalSignFieldField As String
+        
+        Private dateFirstSeenFieldField As DataAPI.[Date]
+        
+        Private dateLastSeenFieldField As DataAPI.[Date]
+        
+        Private displayFieldField As String
+        
+        Private observationsFieldField As String
+        
+        Private sourceFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property astrologicalSignField() As String
+            Get
+                Return Me.astrologicalSignFieldField
+            End Get
+            Set
+                Me.astrologicalSignFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateFirstSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateFirstSeenFieldField
+            End Get
+            Set
+                Me.dateFirstSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateLastSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateLastSeenFieldField
+            End Get
+            Set
+                Me.dateLastSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property displayField() As String
+            Get
+                Return Me.displayFieldField
+            End Get
+            Set
+                Me.displayFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property observationsField() As String
+            Get
+                Return Me.observationsFieldField
+            End Get
+            Set
+                Me.observationsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sourceField() As String
+            Get
+                Return Me.sourceFieldField
+            End Get
+            Set
+                Me.sourceFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="Name", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class Name
+        Inherits DataAPI.BasicName
+        
+        Private displayFieldField As String
+        
+        Private observationsFieldField As String
+        
+        Private scoreFieldField As String
+        
+        Private sourceFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property displayField() As String
+            Get
+                Return Me.displayFieldField
+            End Get
+            Set
+                Me.displayFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property observationsField() As String
+            Get
+                Return Me.observationsFieldField
+            End Get
+            Set
+                Me.observationsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property scoreField() As String
+            Get
+                Return Me.scoreFieldField
+            End Get
+            Set
+                Me.scoreFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sourceField() As String
+            Get
+                Return Me.sourceFieldField
+            End Get
+            Set
+                Me.sourceFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="BasicSSNRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.SSNRecord))>  _
+    Partial Public Class BasicSSNRecord
+        Inherits DataAPI.ProtectedData
+        
+        Private sSNFieldField As String
+        
+        Private sSNIssueYearsFieldField As String
+        
+        Private sSNPlaceOfIssueFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sSNField() As String
+            Get
+                Return Me.sSNFieldField
+            End Get
+            Set
+                Me.sSNFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sSNIssueYearsField() As String
+            Get
+                Return Me.sSNIssueYearsFieldField
+            End Get
+            Set
+                Me.sSNIssueYearsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sSNPlaceOfIssueField() As String
+            Get
+                Return Me.sSNPlaceOfIssueFieldField
+            End Get
+            Set
+                Me.sSNPlaceOfIssueFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="PhoneListing", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class PhoneListing
+        Inherits DataAPI.BasicPhoneListing
+        
+        Private dateFirstSeenFieldField As DataAPI.[Date]
+        
+        Private dateLastSeenFieldField As DataAPI.[Date]
+        
+        Private doNotCallFieldField As String
+        
+        Private personSynopsisFieldField As DataAPI.PersonSynopsis
+        
+        Private phoneMatchesInputFieldField As String
+        
+        Private sourceFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateFirstSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateFirstSeenFieldField
+            End Get
+            Set
+                Me.dateFirstSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateLastSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateLastSeenFieldField
+            End Get
+            Set
+                Me.dateLastSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property doNotCallField() As String
+            Get
+                Return Me.doNotCallFieldField
+            End Get
+            Set
+                Me.doNotCallFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property personSynopsisField() As DataAPI.PersonSynopsis
+            Get
+                Return Me.personSynopsisFieldField
+            End Get
+            Set
+                Me.personSynopsisFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property phoneMatchesInputField() As String
+            Get
+                Return Me.phoneMatchesInputFieldField
+            End Get
+            Set
+                Me.phoneMatchesInputFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sourceField() As String
+            Get
+                Return Me.sourceFieldField
+            End Get
+            Set
+                Me.sourceFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="BasicAddress", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.Address))>  _
+    Partial Public Class BasicAddress
+        Inherits DataAPI.AddressBase
+        
+        Private addressMissingUnitDesignationFieldField As String
+        
+        Private buildingNameFieldField As String
+        
+        Private countryNameFieldField As String
+        
+        Private dateFirstSeenFieldField As DataAPI.[Date]
+        
+        Private dateLastSeenFieldField As DataAPI.[Date]
+        
+        Private descriptionFieldField As String
+        
+        Private distanceFieldField As String
+        
+        Private reportTokenFieldField As String
+        
+        Private subdivisionNameFieldField As String
+        
+        Private zip4FieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressMissingUnitDesignationField() As String
+            Get
+                Return Me.addressMissingUnitDesignationFieldField
+            End Get
+            Set
+                Me.addressMissingUnitDesignationFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property buildingNameField() As String
+            Get
+                Return Me.buildingNameFieldField
+            End Get
+            Set
+                Me.buildingNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property countryNameField() As String
+            Get
+                Return Me.countryNameFieldField
+            End Get
+            Set
+                Me.countryNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateFirstSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateFirstSeenFieldField
+            End Get
+            Set
+                Me.dateFirstSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateLastSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateLastSeenFieldField
+            End Get
+            Set
+                Me.dateLastSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property descriptionField() As String
+            Get
+                Return Me.descriptionFieldField
+            End Get
+            Set
+                Me.descriptionFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property distanceField() As String
+            Get
+                Return Me.distanceFieldField
+            End Get
+            Set
+                Me.distanceFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property subdivisionNameField() As String
+            Get
+                Return Me.subdivisionNameFieldField
+            End Get
+            Set
+                Me.subdivisionNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property zip4Field() As String
+            Get
+                Return Me.zip4FieldField
+            End Get
+            Set
+                Me.zip4FieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="Address", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class Address
+        Inherits DataAPI.BasicAddress
+        
+        Private displayFieldField As String
+        
+        Private iPAddressesFieldField() As DataAPI.IPAddressRecord
+        
+        Private pictureIDsFieldField() As String
+        
+        Private picturesStreetAddressFieldField As String
+        
+        Private postalDeliveryTypeFieldField As String
+        
+        Private postalRouteTypeFieldField As String
+        
+        Private sourceFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property displayField() As String
+            Get
+                Return Me.displayFieldField
+            End Get
+            Set
+                Me.displayFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property iPAddressesField() As DataAPI.IPAddressRecord()
+            Get
+                Return Me.iPAddressesFieldField
+            End Get
+            Set
+                Me.iPAddressesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property pictureIDsField() As String()
+            Get
+                Return Me.pictureIDsFieldField
+            End Get
+            Set
+                Me.pictureIDsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property picturesStreetAddressField() As String
+            Get
+                Return Me.picturesStreetAddressFieldField
+            End Get
+            Set
+                Me.picturesStreetAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property postalDeliveryTypeField() As String
+            Get
+                Return Me.postalDeliveryTypeFieldField
+            End Get
+            Set
+                Me.postalDeliveryTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property postalRouteTypeField() As String
+            Get
+                Return Me.postalRouteTypeFieldField
+            End Get
+            Set
+                Me.postalRouteTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sourceField() As String
+            Get
+                Return Me.sourceFieldField
+            End Get
+            Set
+                Me.sourceFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ListingTypes", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService")>  _
+    Public Enum ListingTypes As Integer
+        
+        <System.Runtime.Serialization.EnumMemberAttribute()>  _
+        Unknown = 0
+        
+        <System.Runtime.Serialization.EnumMemberAttribute()>  _
+        Residential = 1
+        
+        <System.Runtime.Serialization.EnumMemberAttribute()>  _
+        Business = 2
+        
+        <System.Runtime.Serialization.EnumMemberAttribute()>  _
+        BusinessResidential = 3
+        
+        <System.Runtime.Serialization.EnumMemberAttribute()>  _
+        BusinessGovernment = 4
+        
+        <System.Runtime.Serialization.EnumMemberAttribute()>  _
+        BusinessGovernmentResidential = 5
+    End Enum
+    
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="PhoneTypes", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService")>  _
+    Public Enum PhoneTypes As Integer
+        
+        <System.Runtime.Serialization.EnumMemberAttribute()>  _
+        Unknown = 0
+        
+        <System.Runtime.Serialization.EnumMemberAttribute()>  _
+        LandLine = 1
+        
+        <System.Runtime.Serialization.EnumMemberAttribute()>  _
+        Mobile = 2
+        
+        <System.Runtime.Serialization.EnumMemberAttribute()>  _
+        Unlisted = 3
+        
+        <System.Runtime.Serialization.EnumMemberAttribute()>  _
+        ActiveLandLine = 4
+        
+        <System.Runtime.Serialization.EnumMemberAttribute()>  _
+        VoIP = 5
+    End Enum
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="PersonSynopsis", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class PersonSynopsis
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private dateOfBirthRecordFieldField As DataAPI.DateOfBirthRecord
+        
+        Private dateOfDeathFieldField As DataAPI.DateOfDeathRecord
+        
+        Private nameFieldField As DataAPI.Name
+        
+        Private picHashFieldField As String
+        
+        Private picHashesFieldField() As String
+        
+        Private reportTokenFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthRecordField() As DataAPI.DateOfBirthRecord
+            Get
+                Return Me.dateOfBirthRecordFieldField
+            End Get
+            Set
+                Me.dateOfBirthRecordFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfDeathField() As DataAPI.DateOfDeathRecord
+            Get
+                Return Me.dateOfDeathFieldField
+            End Get
+            Set
+                Me.dateOfDeathFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.Name
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property picHashField() As String
+            Get
+                Return Me.picHashFieldField
+            End Get
+            Set
+                Me.picHashFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property picHashesField() As String()
+            Get
+                Return Me.picHashesFieldField
+            End Get
+            Set
+                Me.picHashesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="IPAddressRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class IPAddressRecord
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private businessNameFieldField As String
+        
+        Private cityFieldField As String
+        
+        Private countryFieldField As String
+        
+        Private dateFirstSeenFieldField As DataAPI.[Date]
+        
+        Private dateLastSeenFieldField As DataAPI.[Date]
+        
+        Private domainNameFieldField As String
+        
+        Private iPAddressFieldField As String
+        
+        Private iSPFieldField As String
+        
+        Private latitudeFieldField As String
+        
+        Private longitudeFieldField As String
+        
+        Private postalCodeFieldField As String
+        
+        Private regionFieldField As String
+        
+        Private timeFirstSeenFieldField As DataAPI.Time
+        
+        Private timeLastSeenFieldField As DataAPI.Time
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessNameField() As String
+            Get
+                Return Me.businessNameFieldField
+            End Get
+            Set
+                Me.businessNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property cityField() As String
+            Get
+                Return Me.cityFieldField
+            End Get
+            Set
+                Me.cityFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property countryField() As String
+            Get
+                Return Me.countryFieldField
+            End Get
+            Set
+                Me.countryFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateFirstSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateFirstSeenFieldField
+            End Get
+            Set
+                Me.dateFirstSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateLastSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateLastSeenFieldField
+            End Get
+            Set
+                Me.dateLastSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property domainNameField() As String
+            Get
+                Return Me.domainNameFieldField
+            End Get
+            Set
+                Me.domainNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property iPAddressField() As String
+            Get
+                Return Me.iPAddressFieldField
+            End Get
+            Set
+                Me.iPAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property iSPField() As String
+            Get
+                Return Me.iSPFieldField
+            End Get
+            Set
+                Me.iSPFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property latitudeField() As String
+            Get
+                Return Me.latitudeFieldField
+            End Get
+            Set
+                Me.latitudeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property longitudeField() As String
+            Get
+                Return Me.longitudeFieldField
+            End Get
+            Set
+                Me.longitudeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property postalCodeField() As String
+            Get
+                Return Me.postalCodeFieldField
+            End Get
+            Set
+                Me.postalCodeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property regionField() As String
+            Get
+                Return Me.regionFieldField
+            End Get
+            Set
+                Me.regionFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property timeFirstSeenField() As DataAPI.Time
+            Get
+                Return Me.timeFirstSeenFieldField
+            End Get
+            Set
+                Me.timeFirstSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property timeLastSeenField() As DataAPI.Time
+            Get
+                Return Me.timeLastSeenFieldField
+            End Get
+            Set
+                Me.timeLastSeenFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="Time", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class Time
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private hourFieldField As String
+        
+        Private minuteFieldField As String
+        
+        Private secondFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property hourField() As String
+            Get
+                Return Me.hourFieldField
+            End Get
+            Set
+                Me.hourFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property minuteField() As String
+            Get
+                Return Me.minuteFieldField
+            End Get
+            Set
+                Me.minuteFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property secondField() As String
+            Get
+                Return Me.secondFieldField
+            End Get
+            Set
+                Me.secondFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOPersonSearchOutputRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLOPersonSearchOutputRecord
+        Inherits DataAPI.PersonSearchOutputRecordBase
+        
+        Private addressSatisfyingSearchFieldField As DataAPI.BasicAddress
+        
+        Private addressesFieldField() As DataAPI.BasicAddressRecord
+        
+        Private datesOfBirthFieldField() As DataAPI.BasicDateOfBirthRecord
+        
+        Private distanceFromLocationFieldField As String
+        
+        Private driversLicensesFieldField() As DataAPI.TLODriversLicense
+        
+        Private individualsSharingSSNFieldField() As DataAPI.TLOIndividualSharingSSN
+        
+        Private namesFieldField() As DataAPI.BasicName
+        
+        Private numberOfUtilityRecordsAvailableFieldField As String
+        
+        Private otherPhonesFieldField() As DataAPI.BasicPhoneListing
+        
+        Private pictureURLsFieldField() As String
+        
+        Private possibleSexOffenderFieldField As String
+        
+        Private professionalLicensesFieldField() As DataAPI.TLOProfessionalLicense
+        
+        Private relativesFieldField() As DataAPI.TLOPersonSearchRelative
+        
+        Private sexOffenderRecordsFieldField() As DataAPI.TLOSexOffenderRecord
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressSatisfyingSearchField() As DataAPI.BasicAddress
+            Get
+                Return Me.addressSatisfyingSearchFieldField
+            End Get
+            Set
+                Me.addressSatisfyingSearchFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressesField() As DataAPI.BasicAddressRecord()
+            Get
+                Return Me.addressesFieldField
+            End Get
+            Set
+                Me.addressesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property datesOfBirthField() As DataAPI.BasicDateOfBirthRecord()
+            Get
+                Return Me.datesOfBirthFieldField
+            End Get
+            Set
+                Me.datesOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property distanceFromLocationField() As String
+            Get
+                Return Me.distanceFromLocationFieldField
+            End Get
+            Set
+                Me.distanceFromLocationFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property driversLicensesField() As DataAPI.TLODriversLicense()
+            Get
+                Return Me.driversLicensesFieldField
+            End Get
+            Set
+                Me.driversLicensesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property individualsSharingSSNField() As DataAPI.TLOIndividualSharingSSN()
+            Get
+                Return Me.individualsSharingSSNFieldField
+            End Get
+            Set
+                Me.individualsSharingSSNFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property namesField() As DataAPI.BasicName()
+            Get
+                Return Me.namesFieldField
+            End Get
+            Set
+                Me.namesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfUtilityRecordsAvailableField() As String
+            Get
+                Return Me.numberOfUtilityRecordsAvailableFieldField
+            End Get
+            Set
+                Me.numberOfUtilityRecordsAvailableFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property otherPhonesField() As DataAPI.BasicPhoneListing()
+            Get
+                Return Me.otherPhonesFieldField
+            End Get
+            Set
+                Me.otherPhonesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property pictureURLsField() As String()
+            Get
+                Return Me.pictureURLsFieldField
+            End Get
+            Set
+                Me.pictureURLsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property possibleSexOffenderField() As String
+            Get
+                Return Me.possibleSexOffenderFieldField
+            End Get
+            Set
+                Me.possibleSexOffenderFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property professionalLicensesField() As DataAPI.TLOProfessionalLicense()
+            Get
+                Return Me.professionalLicensesFieldField
+            End Get
+            Set
+                Me.professionalLicensesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property relativesField() As DataAPI.TLOPersonSearchRelative()
+            Get
+                Return Me.relativesFieldField
+            End Get
+            Set
+                Me.relativesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sexOffenderRecordsField() As DataAPI.TLOSexOffenderRecord()
+            Get
+                Return Me.sexOffenderRecordsFieldField
+            End Get
+            Set
+                Me.sexOffenderRecordsFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ResponseOutputRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.CorporateIdentity)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.CorporateFilingBase)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOCorporateFiling)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.WatchListRecord)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.DriversLicenseBase)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLODriversLicense)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.DriversLicense)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.ProfessionalLicenseBase)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOProfessionalLicense)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.ProfessionalLicense)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCFilingBase)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCFiling)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCFiling)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.SexOffenderRecordBase)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOSexOffenderRecord)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.PersonSearchOutputRecordBase)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOPersonSearchOutputRecord))>  _
+    Partial Public Class ResponseOutputRecord
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="CorporateIdentity", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.CorporateFilingBase)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOCorporateFiling))>  _
+    Partial Public Class CorporateIdentity
+        Inherits DataAPI.ResponseOutputRecord
+        
+        Private businessNameFieldField As String
+        
+        Private businessNameTypeFieldField As String
+        
+        Private businessTokenFieldField As String
+        
+        Private secStatusFieldField As String
+        
+        Private stateFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessNameField() As String
+            Get
+                Return Me.businessNameFieldField
+            End Get
+            Set
+                Me.businessNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessNameTypeField() As String
+            Get
+                Return Me.businessNameTypeFieldField
+            End Get
+            Set
+                Me.businessNameTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessTokenField() As String
+            Get
+                Return Me.businessTokenFieldField
+            End Get
+            Set
+                Me.businessTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property secStatusField() As String
+            Get
+                Return Me.secStatusFieldField
+            End Get
+            Set
+                Me.secStatusFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property stateField() As String
+            Get
+                Return Me.stateFieldField
+            End Get
+            Set
+                Me.stateFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="CorporateFilingBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOCorporateFiling))>  _
+    Partial Public Class CorporateFilingBase
+        Inherits DataAPI.CorporateIdentity
+        
+        Private activeAgentFlagFieldField As String
+        
+        Private addressTypeFieldField As String
+        
+        Private amendmentsFieldField() As DataAPI.CorporateAmendment
+        
+        Private authCapitalTotalAmtFieldField As String
+        
+        Private businessDunsNumberFieldField As String
+        
+        Private businessNamesFieldField() As DataAPI.BusinessName
+        
+        Private corporateStockIssuesFieldField() As DataAPI.CorporateStockIssue
+        
+        Private corporationTypeFieldField As String
+        
+        Private countryFieldField As String
+        
+        Private dateFirstSeenFieldField As DataAPI.[Date]
+        
+        Private dateLastSeenFieldField As DataAPI.[Date]
+        
+        Private distributionControlFieldField As String
+        
+        Private expirationDateFieldField As DataAPI.[Date]
+        
+        Private fEINumberFieldField As String
+        
+        Private fileDateFieldField As DataAPI.[Date]
+        
+        Private filingDateFieldField As DataAPI.[Date]
+        
+        Private filingNumberFieldField As String
+        
+        Private filingOfficeBusinessTokenFieldField As String
+        
+        Private filingOfficeDunsNumberFieldField As String
+        
+        Private filingOfficeNameFieldField As String
+        
+        Private fiscalYearEndDateFieldField As DataAPI.[Date]
+        
+        Private foreignRegionFieldField As String
+        
+        Private franchiseTaxBalanceAmtFieldField As String
+        
+        Private franchiseTaxBoardStatusDateFieldField As DataAPI.[Date]
+        
+        Private franchiseTaxBoardStatusFieldField As String
+        
+        Private franchiseTaxPaidAmtFieldField As String
+        
+        Private franchiseTaxPaidDateFieldField As DataAPI.[Date]
+        
+        Private incorporationCountryFieldField As String
+        
+        Private incorporationDateFieldField As DataAPI.[Date]
+        
+        Private incorporationForeignRegionFieldField As String
+        
+        Private incorporationStateFieldField As String
+        
+        Private minRequirementMetFlagFieldField As String
+        
+        Private miscDetailsFieldField As String
+        
+        Private paidInCapitalAmtFieldField As String
+        
+        Private paidInCapitalDateFieldField As DataAPI.[Date]
+        
+        Private perpetualIndicatorFieldField As String
+        
+        Private rAAppointDateFieldField As DataAPI.[Date]
+        
+        Private receivedDateFieldField As DataAPI.[Date]
+        
+        Private registrationTypeDescFieldField As String
+        
+        Private registrationTypeFieldField As String
+        
+        Private sICFieldField As String
+        
+        Private secStateAnnReportDelinqDateFieldField As DataAPI.[Date]
+        
+        Private secStateAnnReportMailDateFieldField As DataAPI.[Date]
+        
+        Private secStateAnnualReportDueDateFieldField As DataAPI.[Date]
+        
+        Private secStateLastAnnReportDateFieldField As DataAPI.[Date]
+        
+        Private secStateReportFileDateFieldField As DataAPI.[Date]
+        
+        Private secStateStatusDateFieldField As DataAPI.[Date]
+        
+        Private secStateStatusFieldField As String
+        
+        Private taxBalanceAmtFieldField As String
+        
+        Private taxCapitalAmtFieldField As String
+        
+        Private taxPaidAmtFieldField As String
+        
+        Private taxPercentFactorFieldField As String
+        
+        Private totalCapitalAmtFieldField As String
+        
+        Private verificationDateFieldField As DataAPI.[Date]
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property activeAgentFlagField() As String
+            Get
+                Return Me.activeAgentFlagFieldField
+            End Get
+            Set
+                Me.activeAgentFlagFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressTypeField() As String
+            Get
+                Return Me.addressTypeFieldField
+            End Get
+            Set
+                Me.addressTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property amendmentsField() As DataAPI.CorporateAmendment()
+            Get
+                Return Me.amendmentsFieldField
+            End Get
+            Set
+                Me.amendmentsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property authCapitalTotalAmtField() As String
+            Get
+                Return Me.authCapitalTotalAmtFieldField
+            End Get
+            Set
+                Me.authCapitalTotalAmtFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessDunsNumberField() As String
+            Get
+                Return Me.businessDunsNumberFieldField
+            End Get
+            Set
+                Me.businessDunsNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessNamesField() As DataAPI.BusinessName()
+            Get
+                Return Me.businessNamesFieldField
+            End Get
+            Set
+                Me.businessNamesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property corporateStockIssuesField() As DataAPI.CorporateStockIssue()
+            Get
+                Return Me.corporateStockIssuesFieldField
+            End Get
+            Set
+                Me.corporateStockIssuesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property corporationTypeField() As String
+            Get
+                Return Me.corporationTypeFieldField
+            End Get
+            Set
+                Me.corporationTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property countryField() As String
+            Get
+                Return Me.countryFieldField
+            End Get
+            Set
+                Me.countryFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateFirstSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateFirstSeenFieldField
+            End Get
+            Set
+                Me.dateFirstSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateLastSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateLastSeenFieldField
+            End Get
+            Set
+                Me.dateLastSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property distributionControlField() As String
+            Get
+                Return Me.distributionControlFieldField
+            End Get
+            Set
+                Me.distributionControlFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property expirationDateField() As DataAPI.[Date]
+            Get
+                Return Me.expirationDateFieldField
+            End Get
+            Set
+                Me.expirationDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property fEINumberField() As String
+            Get
+                Return Me.fEINumberFieldField
+            End Get
+            Set
+                Me.fEINumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property fileDateField() As DataAPI.[Date]
+            Get
+                Return Me.fileDateFieldField
+            End Get
+            Set
+                Me.fileDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property filingDateField() As DataAPI.[Date]
+            Get
+                Return Me.filingDateFieldField
+            End Get
+            Set
+                Me.filingDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property filingNumberField() As String
+            Get
+                Return Me.filingNumberFieldField
+            End Get
+            Set
+                Me.filingNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property filingOfficeBusinessTokenField() As String
+            Get
+                Return Me.filingOfficeBusinessTokenFieldField
+            End Get
+            Set
+                Me.filingOfficeBusinessTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property filingOfficeDunsNumberField() As String
+            Get
+                Return Me.filingOfficeDunsNumberFieldField
+            End Get
+            Set
+                Me.filingOfficeDunsNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property filingOfficeNameField() As String
+            Get
+                Return Me.filingOfficeNameFieldField
+            End Get
+            Set
+                Me.filingOfficeNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property fiscalYearEndDateField() As DataAPI.[Date]
+            Get
+                Return Me.fiscalYearEndDateFieldField
+            End Get
+            Set
+                Me.fiscalYearEndDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property foreignRegionField() As String
+            Get
+                Return Me.foreignRegionFieldField
+            End Get
+            Set
+                Me.foreignRegionFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property franchiseTaxBalanceAmtField() As String
+            Get
+                Return Me.franchiseTaxBalanceAmtFieldField
+            End Get
+            Set
+                Me.franchiseTaxBalanceAmtFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property franchiseTaxBoardStatusDateField() As DataAPI.[Date]
+            Get
+                Return Me.franchiseTaxBoardStatusDateFieldField
+            End Get
+            Set
+                Me.franchiseTaxBoardStatusDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property franchiseTaxBoardStatusField() As String
+            Get
+                Return Me.franchiseTaxBoardStatusFieldField
+            End Get
+            Set
+                Me.franchiseTaxBoardStatusFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property franchiseTaxPaidAmtField() As String
+            Get
+                Return Me.franchiseTaxPaidAmtFieldField
+            End Get
+            Set
+                Me.franchiseTaxPaidAmtFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property franchiseTaxPaidDateField() As DataAPI.[Date]
+            Get
+                Return Me.franchiseTaxPaidDateFieldField
+            End Get
+            Set
+                Me.franchiseTaxPaidDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property incorporationCountryField() As String
+            Get
+                Return Me.incorporationCountryFieldField
+            End Get
+            Set
+                Me.incorporationCountryFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property incorporationDateField() As DataAPI.[Date]
+            Get
+                Return Me.incorporationDateFieldField
+            End Get
+            Set
+                Me.incorporationDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property incorporationForeignRegionField() As String
+            Get
+                Return Me.incorporationForeignRegionFieldField
+            End Get
+            Set
+                Me.incorporationForeignRegionFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property incorporationStateField() As String
+            Get
+                Return Me.incorporationStateFieldField
+            End Get
+            Set
+                Me.incorporationStateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property minRequirementMetFlagField() As String
+            Get
+                Return Me.minRequirementMetFlagFieldField
+            End Get
+            Set
+                Me.minRequirementMetFlagFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property miscDetailsField() As String
+            Get
+                Return Me.miscDetailsFieldField
+            End Get
+            Set
+                Me.miscDetailsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property paidInCapitalAmtField() As String
+            Get
+                Return Me.paidInCapitalAmtFieldField
+            End Get
+            Set
+                Me.paidInCapitalAmtFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property paidInCapitalDateField() As DataAPI.[Date]
+            Get
+                Return Me.paidInCapitalDateFieldField
+            End Get
+            Set
+                Me.paidInCapitalDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property perpetualIndicatorField() As String
+            Get
+                Return Me.perpetualIndicatorFieldField
+            End Get
+            Set
+                Me.perpetualIndicatorFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property rAAppointDateField() As DataAPI.[Date]
+            Get
+                Return Me.rAAppointDateFieldField
+            End Get
+            Set
+                Me.rAAppointDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property receivedDateField() As DataAPI.[Date]
+            Get
+                Return Me.receivedDateFieldField
+            End Get
+            Set
+                Me.receivedDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property registrationTypeDescField() As String
+            Get
+                Return Me.registrationTypeDescFieldField
+            End Get
+            Set
+                Me.registrationTypeDescFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property registrationTypeField() As String
+            Get
+                Return Me.registrationTypeFieldField
+            End Get
+            Set
+                Me.registrationTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sICField() As String
+            Get
+                Return Me.sICFieldField
+            End Get
+            Set
+                Me.sICFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property secStateAnnReportDelinqDateField() As DataAPI.[Date]
+            Get
+                Return Me.secStateAnnReportDelinqDateFieldField
+            End Get
+            Set
+                Me.secStateAnnReportDelinqDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property secStateAnnReportMailDateField() As DataAPI.[Date]
+            Get
+                Return Me.secStateAnnReportMailDateFieldField
+            End Get
+            Set
+                Me.secStateAnnReportMailDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property secStateAnnualReportDueDateField() As DataAPI.[Date]
+            Get
+                Return Me.secStateAnnualReportDueDateFieldField
+            End Get
+            Set
+                Me.secStateAnnualReportDueDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property secStateLastAnnReportDateField() As DataAPI.[Date]
+            Get
+                Return Me.secStateLastAnnReportDateFieldField
+            End Get
+            Set
+                Me.secStateLastAnnReportDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property secStateReportFileDateField() As DataAPI.[Date]
+            Get
+                Return Me.secStateReportFileDateFieldField
+            End Get
+            Set
+                Me.secStateReportFileDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property secStateStatusDateField() As DataAPI.[Date]
+            Get
+                Return Me.secStateStatusDateFieldField
+            End Get
+            Set
+                Me.secStateStatusDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property secStateStatusField() As String
+            Get
+                Return Me.secStateStatusFieldField
+            End Get
+            Set
+                Me.secStateStatusFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property taxBalanceAmtField() As String
+            Get
+                Return Me.taxBalanceAmtFieldField
+            End Get
+            Set
+                Me.taxBalanceAmtFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property taxCapitalAmtField() As String
+            Get
+                Return Me.taxCapitalAmtFieldField
+            End Get
+            Set
+                Me.taxCapitalAmtFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property taxPaidAmtField() As String
+            Get
+                Return Me.taxPaidAmtFieldField
+            End Get
+            Set
+                Me.taxPaidAmtFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property taxPercentFactorField() As String
+            Get
+                Return Me.taxPercentFactorFieldField
+            End Get
+            Set
+                Me.taxPercentFactorFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property totalCapitalAmtField() As String
+            Get
+                Return Me.totalCapitalAmtFieldField
+            End Get
+            Set
+                Me.totalCapitalAmtFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property verificationDateField() As DataAPI.[Date]
+            Get
+                Return Me.verificationDateFieldField
+            End Get
+            Set
+                Me.verificationDateFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="WatchListRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class WatchListRecord
+        Inherits DataAPI.ResponseOutputRecord
+        
+        Private addressFieldField As DataAPI.BasicAddress
+        
+        Private addressRemarksFieldField As String
+        
+        Private aliasNameFieldField As String
+        
+        Private aliasTypeFieldField As String
+        
+        Private callSignFieldField As String
+        
+        Private citizenshipFieldField As String
+        
+        Private constituancyFieldField As String
+        
+        Private countryFieldField As String
+        
+        Private dateOfBirthFieldField As String
+        
+        Private documentsFieldField As String
+        
+        Private emailAddressFieldField As String
+        
+        Private eyesFieldField As String
+        
+        Private faxFieldField As String
+        
+        Private fullNameFieldField As String
+        
+        Private gRTFieldField As String
+        
+        Private hairFieldField As String
+        
+        Private heightFieldField As String
+        
+        Private imageURLFieldField As String
+        
+        Private languagesFieldField As String
+        
+        Private legalBasisFieldField As String
+        
+        Private listingDateFieldField As String
+        
+        Private marksFieldField As String
+        
+        Private nameFieldField As DataAPI.Name
+        
+        Private offenseFieldField As String
+        
+        Private officialTitleFieldField As String
+        
+        Private originalIdFieldField As String
+        
+        Private pageURLFieldField As String
+        
+        Private phoneFieldField As String
+        
+        Private placeOfBirthFieldField As String
+        
+        Private politicalPartyFieldField As String
+        
+        Private programFieldField As String
+        
+        Private remarksFieldField As String
+        
+        Private scoreFieldField As Integer
+        
+        Private sexFieldField As String
+        
+        Private sourceFieldField As String
+        
+        Private tINFieldField As String
+        
+        Private titleFieldField As String
+        
+        Private tonnageFieldField As String
+        
+        Private typeFieldField As String
+        
+        Private vesselFlagFieldField As String
+        
+        Private vesselOwnerFieldField As String
+        
+        Private vesselTypeFieldField As String
+        
+        Private wantedByFieldField As String
+        
+        Private websiteFieldField As String
+        
+        Private weightFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.BasicAddress
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressRemarksField() As String
+            Get
+                Return Me.addressRemarksFieldField
+            End Get
+            Set
+                Me.addressRemarksFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property aliasNameField() As String
+            Get
+                Return Me.aliasNameFieldField
+            End Get
+            Set
+                Me.aliasNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property aliasTypeField() As String
+            Get
+                Return Me.aliasTypeFieldField
+            End Get
+            Set
+                Me.aliasTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property callSignField() As String
+            Get
+                Return Me.callSignFieldField
+            End Get
+            Set
+                Me.callSignFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property citizenshipField() As String
+            Get
+                Return Me.citizenshipFieldField
+            End Get
+            Set
+                Me.citizenshipFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property constituancyField() As String
+            Get
+                Return Me.constituancyFieldField
+            End Get
+            Set
+                Me.constituancyFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property countryField() As String
+            Get
+                Return Me.countryFieldField
+            End Get
+            Set
+                Me.countryFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthField() As String
+            Get
+                Return Me.dateOfBirthFieldField
+            End Get
+            Set
+                Me.dateOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property documentsField() As String
+            Get
+                Return Me.documentsFieldField
+            End Get
+            Set
+                Me.documentsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property emailAddressField() As String
+            Get
+                Return Me.emailAddressFieldField
+            End Get
+            Set
+                Me.emailAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property eyesField() As String
+            Get
+                Return Me.eyesFieldField
+            End Get
+            Set
+                Me.eyesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property faxField() As String
+            Get
+                Return Me.faxFieldField
+            End Get
+            Set
+                Me.faxFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property fullNameField() As String
+            Get
+                Return Me.fullNameFieldField
+            End Get
+            Set
+                Me.fullNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property gRTField() As String
+            Get
+                Return Me.gRTFieldField
+            End Get
+            Set
+                Me.gRTFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property hairField() As String
+            Get
+                Return Me.hairFieldField
+            End Get
+            Set
+                Me.hairFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property heightField() As String
+            Get
+                Return Me.heightFieldField
+            End Get
+            Set
+                Me.heightFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property imageURLField() As String
+            Get
+                Return Me.imageURLFieldField
+            End Get
+            Set
+                Me.imageURLFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property languagesField() As String
+            Get
+                Return Me.languagesFieldField
+            End Get
+            Set
+                Me.languagesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property legalBasisField() As String
+            Get
+                Return Me.legalBasisFieldField
+            End Get
+            Set
+                Me.legalBasisFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property listingDateField() As String
+            Get
+                Return Me.listingDateFieldField
+            End Get
+            Set
+                Me.listingDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property marksField() As String
+            Get
+                Return Me.marksFieldField
+            End Get
+            Set
+                Me.marksFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.Name
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property offenseField() As String
+            Get
+                Return Me.offenseFieldField
+            End Get
+            Set
+                Me.offenseFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property officialTitleField() As String
+            Get
+                Return Me.officialTitleFieldField
+            End Get
+            Set
+                Me.officialTitleFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property originalIdField() As String
+            Get
+                Return Me.originalIdFieldField
+            End Get
+            Set
+                Me.originalIdFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property pageURLField() As String
+            Get
+                Return Me.pageURLFieldField
+            End Get
+            Set
+                Me.pageURLFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property phoneField() As String
+            Get
+                Return Me.phoneFieldField
+            End Get
+            Set
+                Me.phoneFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property placeOfBirthField() As String
+            Get
+                Return Me.placeOfBirthFieldField
+            End Get
+            Set
+                Me.placeOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property politicalPartyField() As String
+            Get
+                Return Me.politicalPartyFieldField
+            End Get
+            Set
+                Me.politicalPartyFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property programField() As String
+            Get
+                Return Me.programFieldField
+            End Get
+            Set
+                Me.programFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property remarksField() As String
+            Get
+                Return Me.remarksFieldField
+            End Get
+            Set
+                Me.remarksFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property scoreField() As Integer
+            Get
+                Return Me.scoreFieldField
+            End Get
+            Set
+                Me.scoreFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sexField() As String
+            Get
+                Return Me.sexFieldField
+            End Get
+            Set
+                Me.sexFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sourceField() As String
+            Get
+                Return Me.sourceFieldField
+            End Get
+            Set
+                Me.sourceFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property tINField() As String
+            Get
+                Return Me.tINFieldField
+            End Get
+            Set
+                Me.tINFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property titleField() As String
+            Get
+                Return Me.titleFieldField
+            End Get
+            Set
+                Me.titleFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property tonnageField() As String
+            Get
+                Return Me.tonnageFieldField
+            End Get
+            Set
+                Me.tonnageFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property typeField() As String
+            Get
+                Return Me.typeFieldField
+            End Get
+            Set
+                Me.typeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property vesselFlagField() As String
+            Get
+                Return Me.vesselFlagFieldField
+            End Get
+            Set
+                Me.vesselFlagFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property vesselOwnerField() As String
+            Get
+                Return Me.vesselOwnerFieldField
+            End Get
+            Set
+                Me.vesselOwnerFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property vesselTypeField() As String
+            Get
+                Return Me.vesselTypeFieldField
+            End Get
+            Set
+                Me.vesselTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property wantedByField() As String
+            Get
+                Return Me.wantedByFieldField
+            End Get
+            Set
+                Me.wantedByFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property websiteField() As String
+            Get
+                Return Me.websiteFieldField
+            End Get
+            Set
+                Me.websiteFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property weightField() As String
+            Get
+                Return Me.weightFieldField
+            End Get
+            Set
+                Me.weightFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="DriversLicenseBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLODriversLicense)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.DriversLicense))>  _
+    Partial Public Class DriversLicenseBase
+        Inherits DataAPI.ResponseOutputRecord
+        
+        Private ageAtDeathFieldField As String
+        
+        Private attentionFlagFieldField As String
+        
+        Private currentAgeFieldField As String
+        
+        Private dateOfBirthFieldField As DataAPI.[Date]
+        
+        Private dateOfBirthRecordFieldField As DataAPI.DateOfBirthRecord
+        
+        Private dateOfDeathFieldField As DataAPI.[Date]
+        
+        Private driversLicenseNumberFieldField As String
+        
+        Private driversLicenseNumberTokenFieldField As String
+        
+        Private endorsementsFieldField As String
+        
+        Private expirationDateFieldField As DataAPI.[Date]
+        
+        Private genderFieldField As String
+        
+        Private heightFieldField As String
+        
+        Private issueDateFieldField As DataAPI.[Date]
+        
+        Private issuingStateFieldField As String
+        
+        Private licenseTypeFieldField As String
+        
+        Private motorcycleCodeFieldField As String
+        
+        Private newDriversLicenseNumberFieldField As String
+        
+        Private newDriversLicenseNumberTokenFieldField As String
+        
+        Private originalHeightFieldField As String
+        
+        Private originalIssueDateFieldField As DataAPI.[Date]
+        
+        Private outOfStateIssuerFieldField As String
+        
+        Private outOfStateLicenseNumberFieldField As String
+        
+        Private outOfStateLicenseNumberTokenFieldField As String
+        
+        Private preferredSSNRecordFieldField As DataAPI.SSNRecord
+        
+        Private privacyFlagFieldField As String
+        
+        Private raceFieldField As String
+        
+        Private reportTokenFieldField As String
+        
+        Private restrictionsFieldField As String
+        
+        Private sSNRecordFieldField As DataAPI.SSNRecord
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property ageAtDeathField() As String
+            Get
+                Return Me.ageAtDeathFieldField
+            End Get
+            Set
+                Me.ageAtDeathFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property attentionFlagField() As String
+            Get
+                Return Me.attentionFlagFieldField
+            End Get
+            Set
+                Me.attentionFlagFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property currentAgeField() As String
+            Get
+                Return Me.currentAgeFieldField
+            End Get
+            Set
+                Me.currentAgeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthField() As DataAPI.[Date]
+            Get
+                Return Me.dateOfBirthFieldField
+            End Get
+            Set
+                Me.dateOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthRecordField() As DataAPI.DateOfBirthRecord
+            Get
+                Return Me.dateOfBirthRecordFieldField
+            End Get
+            Set
+                Me.dateOfBirthRecordFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfDeathField() As DataAPI.[Date]
+            Get
+                Return Me.dateOfDeathFieldField
+            End Get
+            Set
+                Me.dateOfDeathFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property driversLicenseNumberField() As String
+            Get
+                Return Me.driversLicenseNumberFieldField
+            End Get
+            Set
+                Me.driversLicenseNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property driversLicenseNumberTokenField() As String
+            Get
+                Return Me.driversLicenseNumberTokenFieldField
+            End Get
+            Set
+                Me.driversLicenseNumberTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property endorsementsField() As String
+            Get
+                Return Me.endorsementsFieldField
+            End Get
+            Set
+                Me.endorsementsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property expirationDateField() As DataAPI.[Date]
+            Get
+                Return Me.expirationDateFieldField
+            End Get
+            Set
+                Me.expirationDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property genderField() As String
+            Get
+                Return Me.genderFieldField
+            End Get
+            Set
+                Me.genderFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property heightField() As String
+            Get
+                Return Me.heightFieldField
+            End Get
+            Set
+                Me.heightFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property issueDateField() As DataAPI.[Date]
+            Get
+                Return Me.issueDateFieldField
+            End Get
+            Set
+                Me.issueDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property issuingStateField() As String
+            Get
+                Return Me.issuingStateFieldField
+            End Get
+            Set
+                Me.issuingStateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property licenseTypeField() As String
+            Get
+                Return Me.licenseTypeFieldField
+            End Get
+            Set
+                Me.licenseTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property motorcycleCodeField() As String
+            Get
+                Return Me.motorcycleCodeFieldField
+            End Get
+            Set
+                Me.motorcycleCodeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property newDriversLicenseNumberField() As String
+            Get
+                Return Me.newDriversLicenseNumberFieldField
+            End Get
+            Set
+                Me.newDriversLicenseNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property newDriversLicenseNumberTokenField() As String
+            Get
+                Return Me.newDriversLicenseNumberTokenFieldField
+            End Get
+            Set
+                Me.newDriversLicenseNumberTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property originalHeightField() As String
+            Get
+                Return Me.originalHeightFieldField
+            End Get
+            Set
+                Me.originalHeightFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property originalIssueDateField() As DataAPI.[Date]
+            Get
+                Return Me.originalIssueDateFieldField
+            End Get
+            Set
+                Me.originalIssueDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property outOfStateIssuerField() As String
+            Get
+                Return Me.outOfStateIssuerFieldField
+            End Get
+            Set
+                Me.outOfStateIssuerFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property outOfStateLicenseNumberField() As String
+            Get
+                Return Me.outOfStateLicenseNumberFieldField
+            End Get
+            Set
+                Me.outOfStateLicenseNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property outOfStateLicenseNumberTokenField() As String
+            Get
+                Return Me.outOfStateLicenseNumberTokenFieldField
+            End Get
+            Set
+                Me.outOfStateLicenseNumberTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property preferredSSNRecordField() As DataAPI.SSNRecord
+            Get
+                Return Me.preferredSSNRecordFieldField
+            End Get
+            Set
+                Me.preferredSSNRecordFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property privacyFlagField() As String
+            Get
+                Return Me.privacyFlagFieldField
+            End Get
+            Set
+                Me.privacyFlagFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property raceField() As String
+            Get
+                Return Me.raceFieldField
+            End Get
+            Set
+                Me.raceFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property restrictionsField() As String
+            Get
+                Return Me.restrictionsFieldField
+            End Get
+            Set
+                Me.restrictionsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sSNRecordField() As DataAPI.SSNRecord
+            Get
+                Return Me.sSNRecordFieldField
+            End Get
+            Set
+                Me.sSNRecordFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLODriversLicense", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLODriversLicense
+        Inherits DataAPI.DriversLicenseBase
+        
+        Private addressFieldField As DataAPI.BasicAddress
+        
+        Private nameFieldField As DataAPI.BasicName
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.BasicAddress
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.BasicName
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="DriversLicense", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class DriversLicense
+        Inherits DataAPI.DriversLicenseBase
+        
+        Private addressFieldField As DataAPI.Address
+        
+        Private nameFieldField As DataAPI.Name
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.Address
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.Name
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ProfessionalLicenseBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOProfessionalLicense)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.ProfessionalLicense))>  _
+    Partial Public Class ProfessionalLicenseBase
+        Inherits DataAPI.ResponseOutputRecord
+        
+        Private additionalTypesFieldField() As String
+        
+        Private businessNameFieldField As String
+        
+        Private businessPhoneFieldField As String
+        
+        Private callSignFieldField As String
+        
+        Private currentAgeFieldField As String
+        
+        Private currentIssueDateFieldField As DataAPI.[Date]
+        
+        Private dateOfBirthFieldField As DataAPI.[Date]
+        
+        Private disciplinaryActionsFieldField As String
+        
+        Private emailAddressFieldField As String
+        
+        Private expirationDateFieldField As DataAPI.[Date]
+        
+        Private faxFieldField As String
+        
+        Private graduationDateFieldField As DataAPI.[Date]
+        
+        Private issueDateFieldField As DataAPI.[Date]
+        
+        Private jobFunctionsFieldField() As String
+        
+        Private licenseClassFieldField As String
+        
+        Private licenseNumberFieldField As String
+        
+        Private licenseStateFieldField As String
+        
+        Private licenseStatusFieldField As String
+        
+        Private licenseTypeFieldField As String
+        
+        Private phoneFieldField As String
+        
+        Private preferredSSNRecordFieldField As DataAPI.SSNRecord
+        
+        Private reportTokenFieldField As String
+        
+        Private sSNRecordFieldField As DataAPI.SSNRecord
+        
+        Private schoolFieldField As String
+        
+        Private specialtiesFieldField() As String
+        
+        Private tradeTypeFieldField As String
+        
+        Private websiteFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property additionalTypesField() As String()
+            Get
+                Return Me.additionalTypesFieldField
+            End Get
+            Set
+                Me.additionalTypesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessNameField() As String
+            Get
+                Return Me.businessNameFieldField
+            End Get
+            Set
+                Me.businessNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessPhoneField() As String
+            Get
+                Return Me.businessPhoneFieldField
+            End Get
+            Set
+                Me.businessPhoneFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property callSignField() As String
+            Get
+                Return Me.callSignFieldField
+            End Get
+            Set
+                Me.callSignFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property currentAgeField() As String
+            Get
+                Return Me.currentAgeFieldField
+            End Get
+            Set
+                Me.currentAgeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property currentIssueDateField() As DataAPI.[Date]
+            Get
+                Return Me.currentIssueDateFieldField
+            End Get
+            Set
+                Me.currentIssueDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthField() As DataAPI.[Date]
+            Get
+                Return Me.dateOfBirthFieldField
+            End Get
+            Set
+                Me.dateOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property disciplinaryActionsField() As String
+            Get
+                Return Me.disciplinaryActionsFieldField
+            End Get
+            Set
+                Me.disciplinaryActionsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property emailAddressField() As String
+            Get
+                Return Me.emailAddressFieldField
+            End Get
+            Set
+                Me.emailAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property expirationDateField() As DataAPI.[Date]
+            Get
+                Return Me.expirationDateFieldField
+            End Get
+            Set
+                Me.expirationDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property faxField() As String
+            Get
+                Return Me.faxFieldField
+            End Get
+            Set
+                Me.faxFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property graduationDateField() As DataAPI.[Date]
+            Get
+                Return Me.graduationDateFieldField
+            End Get
+            Set
+                Me.graduationDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property issueDateField() As DataAPI.[Date]
+            Get
+                Return Me.issueDateFieldField
+            End Get
+            Set
+                Me.issueDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property jobFunctionsField() As String()
+            Get
+                Return Me.jobFunctionsFieldField
+            End Get
+            Set
+                Me.jobFunctionsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property licenseClassField() As String
+            Get
+                Return Me.licenseClassFieldField
+            End Get
+            Set
+                Me.licenseClassFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property licenseNumberField() As String
+            Get
+                Return Me.licenseNumberFieldField
+            End Get
+            Set
+                Me.licenseNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property licenseStateField() As String
+            Get
+                Return Me.licenseStateFieldField
+            End Get
+            Set
+                Me.licenseStateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property licenseStatusField() As String
+            Get
+                Return Me.licenseStatusFieldField
+            End Get
+            Set
+                Me.licenseStatusFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property licenseTypeField() As String
+            Get
+                Return Me.licenseTypeFieldField
+            End Get
+            Set
+                Me.licenseTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property phoneField() As String
+            Get
+                Return Me.phoneFieldField
+            End Get
+            Set
+                Me.phoneFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property preferredSSNRecordField() As DataAPI.SSNRecord
+            Get
+                Return Me.preferredSSNRecordFieldField
+            End Get
+            Set
+                Me.preferredSSNRecordFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sSNRecordField() As DataAPI.SSNRecord
+            Get
+                Return Me.sSNRecordFieldField
+            End Get
+            Set
+                Me.sSNRecordFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property schoolField() As String
+            Get
+                Return Me.schoolFieldField
+            End Get
+            Set
+                Me.schoolFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property specialtiesField() As String()
+            Get
+                Return Me.specialtiesFieldField
+            End Get
+            Set
+                Me.specialtiesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property tradeTypeField() As String
+            Get
+                Return Me.tradeTypeFieldField
+            End Get
+            Set
+                Me.tradeTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property websiteField() As String
+            Get
+                Return Me.websiteFieldField
+            End Get
+            Set
+                Me.websiteFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOProfessionalLicense", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLOProfessionalLicense
+        Inherits DataAPI.ProfessionalLicenseBase
+        
+        Private addressFieldField As DataAPI.BasicAddress
+        
+        Private nameFieldField As DataAPI.BasicName
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.BasicAddress
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.BasicName
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ProfessionalLicense", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class ProfessionalLicense
+        Inherits DataAPI.ProfessionalLicenseBase
+        
+        Private addressFieldField As DataAPI.Address
+        
+        Private nameFieldField As DataAPI.Name
+        
+        Private pIdFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.Address
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.Name
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property pIdField() As String
+            Get
+                Return Me.pIdFieldField
+            End Get
+            Set
+                Me.pIdFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="UCCFilingBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCFiling)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCFiling))>  _
+    Partial Public Class UCCFilingBase
+        Inherits DataAPI.ResponseOutputRecord
+        
+        Private collateralItemsFieldField() As DataAPI.UCCCollateralItem
+        
+        Private crossReferenceFilingDateFieldField As DataAPI.[Date]
+        
+        Private crossReferenceFilingNumberFieldField As String
+        
+        Private expirationDateFieldField As DataAPI.[Date]
+        
+        Private filingDateFieldField As DataAPI.[Date]
+        
+        Private filingNumberFieldField As String
+        
+        Private filingOfficeNameFieldField As String
+        
+        Private filingTimeFieldField As DataAPI.Time
+        
+        Private filingTypeFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property collateralItemsField() As DataAPI.UCCCollateralItem()
+            Get
+                Return Me.collateralItemsFieldField
+            End Get
+            Set
+                Me.collateralItemsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property crossReferenceFilingDateField() As DataAPI.[Date]
+            Get
+                Return Me.crossReferenceFilingDateFieldField
+            End Get
+            Set
+                Me.crossReferenceFilingDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property crossReferenceFilingNumberField() As String
+            Get
+                Return Me.crossReferenceFilingNumberFieldField
+            End Get
+            Set
+                Me.crossReferenceFilingNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property expirationDateField() As DataAPI.[Date]
+            Get
+                Return Me.expirationDateFieldField
+            End Get
+            Set
+                Me.expirationDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property filingDateField() As DataAPI.[Date]
+            Get
+                Return Me.filingDateFieldField
+            End Get
+            Set
+                Me.filingDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property filingNumberField() As String
+            Get
+                Return Me.filingNumberFieldField
+            End Get
+            Set
+                Me.filingNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property filingOfficeNameField() As String
+            Get
+                Return Me.filingOfficeNameFieldField
+            End Get
+            Set
+                Me.filingOfficeNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property filingTimeField() As DataAPI.Time
+            Get
+                Return Me.filingTimeFieldField
+            End Get
+            Set
+                Me.filingTimeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property filingTypeField() As String
+            Get
+                Return Me.filingTypeFieldField
+            End Get
+            Set
+                Me.filingTypeFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOUCCFiling", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLOUCCFiling
+        Inherits DataAPI.UCCFilingBase
+        
+        Private debtorsFieldField() As DataAPI.TLOUCCDebtor
+        
+        Private filingOfficeAddressFieldField As DataAPI.BasicAddress
+        
+        Private securedPartiesFieldField() As DataAPI.TLOUCCSecuredParty
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property debtorsField() As DataAPI.TLOUCCDebtor()
+            Get
+                Return Me.debtorsFieldField
+            End Get
+            Set
+                Me.debtorsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property filingOfficeAddressField() As DataAPI.BasicAddress
+            Get
+                Return Me.filingOfficeAddressFieldField
+            End Get
+            Set
+                Me.filingOfficeAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property securedPartiesField() As DataAPI.TLOUCCSecuredParty()
+            Get
+                Return Me.securedPartiesFieldField
+            End Get
+            Set
+                Me.securedPartiesFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="UCCFiling", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class UCCFiling
+        Inherits DataAPI.UCCFilingBase
+        
+        Private debtorsFieldField() As DataAPI.UCCDebtor
+        
+        Private filingOfficeAddressFieldField As DataAPI.Address
+        
+        Private securedPartiesFieldField() As DataAPI.UCCSecuredParty
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property debtorsField() As DataAPI.UCCDebtor()
+            Get
+                Return Me.debtorsFieldField
+            End Get
+            Set
+                Me.debtorsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property filingOfficeAddressField() As DataAPI.Address
+            Get
+                Return Me.filingOfficeAddressFieldField
+            End Get
+            Set
+                Me.filingOfficeAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property securedPartiesField() As DataAPI.UCCSecuredParty()
+            Get
+                Return Me.securedPartiesFieldField
+            End Get
+            Set
+                Me.securedPartiesFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="SexOffenderRecordBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOSexOffenderRecord))>  _
+    Partial Public Class SexOffenderRecordBase
+        Inherits DataAPI.ResponseOutputRecord
+        
+        Private aKA1FieldField As String
+        
+        Private aKA2FieldField As String
+        
+        Private aKADateOfBirthFieldField As String
+        
+        Private birthStateFieldField As String
+        
+        Private caseNumberFieldField As String
+        
+        Private caseTypeFieldField As String
+        
+        Private convictionDateFieldField As String
+        
+        Private convictionPlaceFieldField As String
+        
+        Private countsFieldField As String
+        
+        Private courtFieldField As String
+        
+        Private dateOfBirthFieldField As DataAPI.[Date]
+        
+        Private dispositionDateFieldField As DataAPI.[Date]
+        
+        Private dispositionFieldField As String
+        
+        Private eyeFieldField As String
+        
+        Private genderFieldField As String
+        
+        Private hairFieldField As String
+        
+        Private heightFieldField As String
+        
+        Private offenseCodeFieldField As String
+        
+        Private offenseDateFieldField As DataAPI.[Date]
+        
+        Private offenseDescription1FieldField As String
+        
+        Private offenseDescription2FieldField As String
+        
+        Private photoNameFieldField As String
+        
+        Private pictureHashFieldField As String
+        
+        Private raceFieldField As String
+        
+        Private reportTokenFieldField As String
+        
+        Private scarsMarksFieldField As String
+        
+        Private sentenceFieldField As String
+        
+        Private skinToneFieldField As String
+        
+        Private sourceFieldField As String
+        
+        Private sourceNameFieldField As String
+        
+        Private weightFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property aKA1Field() As String
+            Get
+                Return Me.aKA1FieldField
+            End Get
+            Set
+                Me.aKA1FieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property aKA2Field() As String
+            Get
+                Return Me.aKA2FieldField
+            End Get
+            Set
+                Me.aKA2FieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property aKADateOfBirthField() As String
+            Get
+                Return Me.aKADateOfBirthFieldField
+            End Get
+            Set
+                Me.aKADateOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property birthStateField() As String
+            Get
+                Return Me.birthStateFieldField
+            End Get
+            Set
+                Me.birthStateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property caseNumberField() As String
+            Get
+                Return Me.caseNumberFieldField
+            End Get
+            Set
+                Me.caseNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property caseTypeField() As String
+            Get
+                Return Me.caseTypeFieldField
+            End Get
+            Set
+                Me.caseTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property convictionDateField() As String
+            Get
+                Return Me.convictionDateFieldField
+            End Get
+            Set
+                Me.convictionDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property convictionPlaceField() As String
+            Get
+                Return Me.convictionPlaceFieldField
+            End Get
+            Set
+                Me.convictionPlaceFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property countsField() As String
+            Get
+                Return Me.countsFieldField
+            End Get
+            Set
+                Me.countsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property courtField() As String
+            Get
+                Return Me.courtFieldField
+            End Get
+            Set
+                Me.courtFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthField() As DataAPI.[Date]
+            Get
+                Return Me.dateOfBirthFieldField
+            End Get
+            Set
+                Me.dateOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dispositionDateField() As DataAPI.[Date]
+            Get
+                Return Me.dispositionDateFieldField
+            End Get
+            Set
+                Me.dispositionDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dispositionField() As String
+            Get
+                Return Me.dispositionFieldField
+            End Get
+            Set
+                Me.dispositionFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property eyeField() As String
+            Get
+                Return Me.eyeFieldField
+            End Get
+            Set
+                Me.eyeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property genderField() As String
+            Get
+                Return Me.genderFieldField
+            End Get
+            Set
+                Me.genderFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property hairField() As String
+            Get
+                Return Me.hairFieldField
+            End Get
+            Set
+                Me.hairFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property heightField() As String
+            Get
+                Return Me.heightFieldField
+            End Get
+            Set
+                Me.heightFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property offenseCodeField() As String
+            Get
+                Return Me.offenseCodeFieldField
+            End Get
+            Set
+                Me.offenseCodeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property offenseDateField() As DataAPI.[Date]
+            Get
+                Return Me.offenseDateFieldField
+            End Get
+            Set
+                Me.offenseDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property offenseDescription1Field() As String
+            Get
+                Return Me.offenseDescription1FieldField
+            End Get
+            Set
+                Me.offenseDescription1FieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property offenseDescription2Field() As String
+            Get
+                Return Me.offenseDescription2FieldField
+            End Get
+            Set
+                Me.offenseDescription2FieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property photoNameField() As String
+            Get
+                Return Me.photoNameFieldField
+            End Get
+            Set
+                Me.photoNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property pictureHashField() As String
+            Get
+                Return Me.pictureHashFieldField
+            End Get
+            Set
+                Me.pictureHashFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property raceField() As String
+            Get
+                Return Me.raceFieldField
+            End Get
+            Set
+                Me.raceFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property scarsMarksField() As String
+            Get
+                Return Me.scarsMarksFieldField
+            End Get
+            Set
+                Me.scarsMarksFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sentenceField() As String
+            Get
+                Return Me.sentenceFieldField
+            End Get
+            Set
+                Me.sentenceFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property skinToneField() As String
+            Get
+                Return Me.skinToneFieldField
+            End Get
+            Set
+                Me.skinToneFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sourceField() As String
+            Get
+                Return Me.sourceFieldField
+            End Get
+            Set
+                Me.sourceFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sourceNameField() As String
+            Get
+                Return Me.sourceNameFieldField
+            End Get
+            Set
+                Me.sourceNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property weightField() As String
+            Get
+                Return Me.weightFieldField
+            End Get
+            Set
+                Me.weightFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOSexOffenderRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLOSexOffenderRecord
+        Inherits DataAPI.SexOffenderRecordBase
+        
+        Private addressFieldField As DataAPI.BasicAddress
+        
+        Private nameFieldField As DataAPI.BasicName
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.BasicAddress
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.BasicName
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="PersonSearchOutputRecordBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOPersonSearchOutputRecord))>  _
+    Partial Public Class PersonSearchOutputRecordBase
+        Inherits DataAPI.ResponseOutputRecord
+        
+        Private dateFirstSeenFieldField As DataAPI.[Date]
+        
+        Private dateLastSeenFieldField As DataAPI.[Date]
+        
+        Private datesOfDeathFieldField() As DataAPI.DateOfDeathRecord
+        
+        Private emailAddressesFieldField() As String
+        
+        Private mostRecentBankruptcyDateFieldField As DataAPI.[Date]
+        
+        Private mostRecentBankruptcyRecordDateFieldField As DataAPI.[Date]
+        
+        Private mostRecentJudgmentDateFieldField As DataAPI.[Date]
+        
+        Private mostRecentLienDateFieldField As DataAPI.[Date]
+        
+        Private numberOfAddressesFieldField As String
+        
+        Private numberOfBankruptciesFieldField As String
+        
+        Private numberOfBankruptcyRecordsFieldField As String
+        
+        Private numberOfJudgmentsFieldField As String
+        
+        Private numberOfLiensFieldField As String
+        
+        Private reportTokenFieldField As String
+        
+        Private sSNRecordsFieldField() As DataAPI.SSNRecord
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateFirstSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateFirstSeenFieldField
+            End Get
+            Set
+                Me.dateFirstSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateLastSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateLastSeenFieldField
+            End Get
+            Set
+                Me.dateLastSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property datesOfDeathField() As DataAPI.DateOfDeathRecord()
+            Get
+                Return Me.datesOfDeathFieldField
+            End Get
+            Set
+                Me.datesOfDeathFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property emailAddressesField() As String()
+            Get
+                Return Me.emailAddressesFieldField
+            End Get
+            Set
+                Me.emailAddressesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property mostRecentBankruptcyDateField() As DataAPI.[Date]
+            Get
+                Return Me.mostRecentBankruptcyDateFieldField
+            End Get
+            Set
+                Me.mostRecentBankruptcyDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property mostRecentBankruptcyRecordDateField() As DataAPI.[Date]
+            Get
+                Return Me.mostRecentBankruptcyRecordDateFieldField
+            End Get
+            Set
+                Me.mostRecentBankruptcyRecordDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property mostRecentJudgmentDateField() As DataAPI.[Date]
+            Get
+                Return Me.mostRecentJudgmentDateFieldField
+            End Get
+            Set
+                Me.mostRecentJudgmentDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property mostRecentLienDateField() As DataAPI.[Date]
+            Get
+                Return Me.mostRecentLienDateFieldField
+            End Get
+            Set
+                Me.mostRecentLienDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfAddressesField() As String
+            Get
+                Return Me.numberOfAddressesFieldField
+            End Get
+            Set
+                Me.numberOfAddressesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfBankruptciesField() As String
+            Get
+                Return Me.numberOfBankruptciesFieldField
+            End Get
+            Set
+                Me.numberOfBankruptciesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfBankruptcyRecordsField() As String
+            Get
+                Return Me.numberOfBankruptcyRecordsFieldField
+            End Get
+            Set
+                Me.numberOfBankruptcyRecordsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfJudgmentsField() As String
+            Get
+                Return Me.numberOfJudgmentsFieldField
+            End Get
+            Set
+                Me.numberOfJudgmentsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfLiensField() As String
+            Get
+                Return Me.numberOfLiensFieldField
+            End Get
+            Set
+                Me.numberOfLiensFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sSNRecordsField() As DataAPI.SSNRecord()
+            Get
+                Return Me.sSNRecordsFieldField
+            End Get
+            Set
+                Me.sSNRecordsFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOIndividualSharingSSN", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLOIndividualSharingSSN
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private dateOfBirthRecordFieldField As DataAPI.BasicDateOfBirthRecord
+        
+        Private nameFieldField As DataAPI.BasicName
+        
+        Private reportTokenFieldField As String
+        
+        Private sSNRecordFieldField As DataAPI.SSNRecord
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthRecordField() As DataAPI.BasicDateOfBirthRecord
+            Get
+                Return Me.dateOfBirthRecordFieldField
+            End Get
+            Set
+                Me.dateOfBirthRecordFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.BasicName
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sSNRecordField() As DataAPI.SSNRecord
+            Get
+                Return Me.sSNRecordFieldField
+            End Get
+            Set
+                Me.sSNRecordFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOPersonSearchRelative", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLOPersonSearchRelative
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private currentAgeFieldField As String
+        
+        Private dateOfBirthFieldField As DataAPI.[Date]
+        
+        Private dateOfBirthRecordFieldField As DataAPI.BasicDateOfBirthRecord
+        
+        Private dateOfDeathFieldField As DataAPI.DateOfDeathRecord
+        
+        Private nameFieldField As DataAPI.BasicName
+        
+        Private reportTokenFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property currentAgeField() As String
+            Get
+                Return Me.currentAgeFieldField
+            End Get
+            Set
+                Me.currentAgeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthField() As DataAPI.[Date]
+            Get
+                Return Me.dateOfBirthFieldField
+            End Get
+            Set
+                Me.dateOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthRecordField() As DataAPI.BasicDateOfBirthRecord
+            Get
+                Return Me.dateOfBirthRecordFieldField
+            End Get
+            Set
+                Me.dateOfBirthRecordFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfDeathField() As DataAPI.DateOfDeathRecord
+            Get
+                Return Me.dateOfDeathFieldField
+            End Get
+            Set
+                Me.dateOfDeathFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.BasicName
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="CorporateAmendment", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class CorporateAmendment
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private amendmentDescFieldField As String
+        
+        Private filingDateFieldField As DataAPI.[Date]
+        
+        Private reasonFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property amendmentDescField() As String
+            Get
+                Return Me.amendmentDescFieldField
+            End Get
+            Set
+                Me.amendmentDescFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property filingDateField() As DataAPI.[Date]
+            Get
+                Return Me.filingDateFieldField
+            End Get
+            Set
+                Me.filingDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reasonField() As String
+            Get
+                Return Me.reasonFieldField
+            End Get
+            Set
+                Me.reasonFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessName", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class BusinessName
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private nameFieldField As String
+        
+        Private typeFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As String
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property typeField() As String
+            Get
+                Return Me.typeFieldField
+            End Get
+            Set
+                Me.typeFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="CorporateStockIssue", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class CorporateStockIssue
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private authQuantityFieldField As String
+        
+        Private convertibleFlagFieldField As String
+        
+        Private dollarValueFieldField As String
+        
+        Private issuedQuantityFieldField As String
+        
+        Private parValueFieldField As String
+        
+        Private parValueFlagFieldField As String
+        
+        Private stockClassFieldField As String
+        
+        Private stockTypeFieldField As String
+        
+        Private votingRightsFlagFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property authQuantityField() As String
+            Get
+                Return Me.authQuantityFieldField
+            End Get
+            Set
+                Me.authQuantityFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property convertibleFlagField() As String
+            Get
+                Return Me.convertibleFlagFieldField
+            End Get
+            Set
+                Me.convertibleFlagFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dollarValueField() As String
+            Get
+                Return Me.dollarValueFieldField
+            End Get
+            Set
+                Me.dollarValueFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property issuedQuantityField() As String
+            Get
+                Return Me.issuedQuantityFieldField
+            End Get
+            Set
+                Me.issuedQuantityFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property parValueField() As String
+            Get
+                Return Me.parValueFieldField
+            End Get
+            Set
+                Me.parValueFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property parValueFlagField() As String
+            Get
+                Return Me.parValueFlagFieldField
+            End Get
+            Set
+                Me.parValueFlagFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property stockClassField() As String
+            Get
+                Return Me.stockClassFieldField
+            End Get
+            Set
+                Me.stockClassFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property stockTypeField() As String
+            Get
+                Return Me.stockTypeFieldField
+            End Get
+            Set
+                Me.stockTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property votingRightsFlagField() As String
+            Get
+                Return Me.votingRightsFlagFieldField
+            End Get
+            Set
+                Me.votingRightsFlagFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOBusinessContact", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLOBusinessContact
+        Inherits DataAPI.BusinessContactBase
+        
+        Private addressFieldField As DataAPI.BasicAddress
+        
+        Private dateOfBirthFieldField As DataAPI.BasicDateOfBirthRecord
+        
+        Private dateOfDeathFieldField As DataAPI.DateOfDeathRecord
+        
+        Private nameFieldField As DataAPI.BasicName
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.BasicAddress
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthField() As DataAPI.BasicDateOfBirthRecord
+            Get
+                Return Me.dateOfBirthFieldField
+            End Get
+            Set
+                Me.dateOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfDeathField() As DataAPI.DateOfDeathRecord
+            Get
+                Return Me.dateOfDeathFieldField
+            End Get
+            Set
+                Me.dateOfDeathFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.BasicName
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessContactBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BusinessContact)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOBusinessContact))>  _
+    Partial Public Class BusinessContactBase
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private bankruptcyRecordsFoundFieldField As String
+        
+        Private businessAssociationsCountFieldField As String
+        
+        Private businessNameFieldField As String
+        
+        Private contactTypeFieldField As String
+        
+        Private corporateAssociationsCountFieldField As String
+        
+        Private criminalRecordsFoundFieldField As String
+        
+        Private dateFirstSeenFieldField As DataAPI.[Date]
+        
+        Private dateLastSeenFieldField As DataAPI.[Date]
+        
+        Private individualSearchedForFieldField As String
+        
+        Private judgmentsFoundFieldField As String
+        
+        Private liensFoundFieldField As String
+        
+        Private reportTokenFieldField As String
+        
+        Private titleFieldField As String
+        
+        Private uCCFilingsFoundFieldField As String
+        
+        Private watchListRecordsFieldField() As DataAPI.WatchListRecord
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property bankruptcyRecordsFoundField() As String
+            Get
+                Return Me.bankruptcyRecordsFoundFieldField
+            End Get
+            Set
+                Me.bankruptcyRecordsFoundFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessAssociationsCountField() As String
+            Get
+                Return Me.businessAssociationsCountFieldField
+            End Get
+            Set
+                Me.businessAssociationsCountFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessNameField() As String
+            Get
+                Return Me.businessNameFieldField
+            End Get
+            Set
+                Me.businessNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property contactTypeField() As String
+            Get
+                Return Me.contactTypeFieldField
+            End Get
+            Set
+                Me.contactTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property corporateAssociationsCountField() As String
+            Get
+                Return Me.corporateAssociationsCountFieldField
+            End Get
+            Set
+                Me.corporateAssociationsCountFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property criminalRecordsFoundField() As String
+            Get
+                Return Me.criminalRecordsFoundFieldField
+            End Get
+            Set
+                Me.criminalRecordsFoundFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateFirstSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateFirstSeenFieldField
+            End Get
+            Set
+                Me.dateFirstSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateLastSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateLastSeenFieldField
+            End Get
+            Set
+                Me.dateLastSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property individualSearchedForField() As String
+            Get
+                Return Me.individualSearchedForFieldField
+            End Get
+            Set
+                Me.individualSearchedForFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property judgmentsFoundField() As String
+            Get
+                Return Me.judgmentsFoundFieldField
+            End Get
+            Set
+                Me.judgmentsFoundFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property liensFoundField() As String
+            Get
+                Return Me.liensFoundFieldField
+            End Get
+            Set
+                Me.liensFoundFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property titleField() As String
+            Get
+                Return Me.titleFieldField
+            End Get
+            Set
+                Me.titleFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property uCCFilingsFoundField() As String
+            Get
+                Return Me.uCCFilingsFoundFieldField
+            End Get
+            Set
+                Me.uCCFilingsFoundFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property watchListRecordsField() As DataAPI.WatchListRecord()
+            Get
+                Return Me.watchListRecordsFieldField
+            End Get
+            Set
+                Me.watchListRecordsFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessContact", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class BusinessContact
+        Inherits DataAPI.BusinessContactBase
+        
+        Private addressFieldField As DataAPI.Address
+        
+        Private businessAssociationsFieldField() As DataAPI.BusinessAssociation
+        
+        Private dateOfBirthFieldField As DataAPI.DateOfBirthRecord
+        
+        Private dateOfDeathFieldField As DataAPI.DateOfDeathRecord
+        
+        Private hasArrestRecordsFieldField As String
+        
+        Private hasCriminalRecordsFieldField As String
+        
+        Private hasWarrantRecordsFieldField As String
+        
+        Private isSexOffenderFieldField As String
+        
+        Private nameFieldField As DataAPI.Name
+        
+        Private numberOfBankruptciesFieldField As String
+        
+        Private numberOfBusinessAssociationsFieldField As String
+        
+        Private numberOfCorpFilingsFieldField As String
+        
+        Private numberOfEvictionsFieldField As String
+        
+        Private numberOfForeclosuresFieldField As String
+        
+        Private numberOfJudgmentsFieldField As String
+        
+        Private numberOfLiensFieldField As String
+        
+        Private numberOfProLicensesFieldField As String
+        
+        Private numberOfProfAssociationsFieldField As String
+        
+        Private numberOfUCCFilingsFieldField As String
+        
+        Private relativesBusinessAssociationsFieldField() As DataAPI.BusinessAssociation
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.Address
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessAssociationsField() As DataAPI.BusinessAssociation()
+            Get
+                Return Me.businessAssociationsFieldField
+            End Get
+            Set
+                Me.businessAssociationsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthField() As DataAPI.DateOfBirthRecord
+            Get
+                Return Me.dateOfBirthFieldField
+            End Get
+            Set
+                Me.dateOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfDeathField() As DataAPI.DateOfDeathRecord
+            Get
+                Return Me.dateOfDeathFieldField
+            End Get
+            Set
+                Me.dateOfDeathFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property hasArrestRecordsField() As String
+            Get
+                Return Me.hasArrestRecordsFieldField
+            End Get
+            Set
+                Me.hasArrestRecordsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property hasCriminalRecordsField() As String
+            Get
+                Return Me.hasCriminalRecordsFieldField
+            End Get
+            Set
+                Me.hasCriminalRecordsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property hasWarrantRecordsField() As String
+            Get
+                Return Me.hasWarrantRecordsFieldField
+            End Get
+            Set
+                Me.hasWarrantRecordsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property isSexOffenderField() As String
+            Get
+                Return Me.isSexOffenderFieldField
+            End Get
+            Set
+                Me.isSexOffenderFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.Name
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfBankruptciesField() As String
+            Get
+                Return Me.numberOfBankruptciesFieldField
+            End Get
+            Set
+                Me.numberOfBankruptciesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfBusinessAssociationsField() As String
+            Get
+                Return Me.numberOfBusinessAssociationsFieldField
+            End Get
+            Set
+                Me.numberOfBusinessAssociationsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfCorpFilingsField() As String
+            Get
+                Return Me.numberOfCorpFilingsFieldField
+            End Get
+            Set
+                Me.numberOfCorpFilingsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfEvictionsField() As String
+            Get
+                Return Me.numberOfEvictionsFieldField
+            End Get
+            Set
+                Me.numberOfEvictionsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfForeclosuresField() As String
+            Get
+                Return Me.numberOfForeclosuresFieldField
+            End Get
+            Set
+                Me.numberOfForeclosuresFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfJudgmentsField() As String
+            Get
+                Return Me.numberOfJudgmentsFieldField
+            End Get
+            Set
+                Me.numberOfJudgmentsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfLiensField() As String
+            Get
+                Return Me.numberOfLiensFieldField
+            End Get
+            Set
+                Me.numberOfLiensFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfProLicensesField() As String
+            Get
+                Return Me.numberOfProLicensesFieldField
+            End Get
+            Set
+                Me.numberOfProLicensesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfProfAssociationsField() As String
+            Get
+                Return Me.numberOfProfAssociationsFieldField
+            End Get
+            Set
+                Me.numberOfProfAssociationsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property numberOfUCCFilingsField() As String
+            Get
+                Return Me.numberOfUCCFilingsFieldField
+            End Get
+            Set
+                Me.numberOfUCCFilingsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property relativesBusinessAssociationsField() As DataAPI.BusinessAssociation()
+            Get
+                Return Me.relativesBusinessAssociationsFieldField
+            End Get
+            Set
+                Me.relativesBusinessAssociationsFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessAssociation", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class BusinessAssociation
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private businessRolesFieldField() As DataAPI.BusinessRole
+        
+        Private nameFieldField As DataAPI.Name
+        
+        Private reportTokenFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessRolesField() As DataAPI.BusinessRole()
+            Get
+                Return Me.businessRolesFieldField
+            End Get
+            Set
+                Me.businessRolesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.Name
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessRole", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class BusinessRole
+        Inherits DataAPI.BusinessRecord
+        
+        Private addressFieldField As DataAPI.Address
+        
+        Private nameFieldField As DataAPI.Name
+        
+        Private titleFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.Address
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.Name
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property titleField() As String
+            Get
+                Return Me.titleFieldField
+            End Get
+            Set
+                Me.titleFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessRecordBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOBusinessRecord)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BusinessRecord)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BusinessRole))>  _
+    Partial Public Class BusinessRecordBase
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private businessNamesFieldField() As DataAPI.BusinessName
+        
+        Private businessTokenFieldField As String
+        
+        Private domesticWorldFlagFieldField As String
+        
+        Private fEINumberFieldField As String
+        
+        Private globalBusinessTokenFieldField As String
+        
+        Private industriesFieldField() As String
+        
+        Private industryFieldField As String
+        
+        Private parentBusinessTokenFieldField As String
+        
+        Private subsidiaryCountFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessNamesField() As DataAPI.BusinessName()
+            Get
+                Return Me.businessNamesFieldField
+            End Get
+            Set
+                Me.businessNamesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessTokenField() As String
+            Get
+                Return Me.businessTokenFieldField
+            End Get
+            Set
+                Me.businessTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property domesticWorldFlagField() As String
+            Get
+                Return Me.domesticWorldFlagFieldField
+            End Get
+            Set
+                Me.domesticWorldFlagFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property fEINumberField() As String
+            Get
+                Return Me.fEINumberFieldField
+            End Get
+            Set
+                Me.fEINumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property globalBusinessTokenField() As String
+            Get
+                Return Me.globalBusinessTokenFieldField
+            End Get
+            Set
+                Me.globalBusinessTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property industriesField() As String()
+            Get
+                Return Me.industriesFieldField
+            End Get
+            Set
+                Me.industriesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property industryField() As String
+            Get
+                Return Me.industryFieldField
+            End Get
+            Set
+                Me.industryFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property parentBusinessTokenField() As String
+            Get
+                Return Me.parentBusinessTokenFieldField
+            End Get
+            Set
+                Me.parentBusinessTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property subsidiaryCountField() As String
+            Get
+                Return Me.subsidiaryCountFieldField
+            End Get
+            Set
+                Me.subsidiaryCountFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BusinessRole))>  _
+    Partial Public Class BusinessRecord
+        Inherits DataAPI.BusinessRecordBase
+        
+        Private addressesFieldField() As DataAPI.BusinessAddressRecord
+        
+        Private businessContactsFieldField() As DataAPI.BusinessContact
+        
+        Private dunsNumberFieldField As String
+        
+        Private globalDunsNumberFieldField As String
+        
+        Private parentDunsNumberFieldField As String
+        
+        Private parentFieldField As DataAPI.BusinessRecord
+        
+        Private phonesFieldField() As DataAPI.PhoneListing
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressesField() As DataAPI.BusinessAddressRecord()
+            Get
+                Return Me.addressesFieldField
+            End Get
+            Set
+                Me.addressesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessContactsField() As DataAPI.BusinessContact()
+            Get
+                Return Me.businessContactsFieldField
+            End Get
+            Set
+                Me.businessContactsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dunsNumberField() As String
+            Get
+                Return Me.dunsNumberFieldField
+            End Get
+            Set
+                Me.dunsNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property globalDunsNumberField() As String
+            Get
+                Return Me.globalDunsNumberFieldField
+            End Get
+            Set
+                Me.globalDunsNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property parentDunsNumberField() As String
+            Get
+                Return Me.parentDunsNumberFieldField
+            End Get
+            Set
+                Me.parentDunsNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property parentField() As DataAPI.BusinessRecord
+            Get
+                Return Me.parentFieldField
+            End Get
+            Set
+                Me.parentFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property phonesField() As DataAPI.PhoneListing()
+            Get
+                Return Me.phonesFieldField
+            End Get
+            Set
+                Me.phonesFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessAddressRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class BusinessAddressRecord
+        Inherits DataAPI.AddressRecord
+        
+        Private otherBusinessesFieldField() As DataAPI.BusinessRecord
+        
+        Private peopleAtAddressFieldField() As DataAPI.Resident
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property otherBusinessesField() As DataAPI.BusinessRecord()
+            Get
+                Return Me.otherBusinessesFieldField
+            End Get
+            Set
+                Me.otherBusinessesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property peopleAtAddressField() As DataAPI.Resident()
+            Get
+                Return Me.peopleAtAddressFieldField
+            End Get
+            Set
+                Me.peopleAtAddressFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOBusinessAddressRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLOBusinessAddressRecord
+        Inherits DataAPI.BasicAddressRecord
+        
+        Private otherBusinessesFieldField() As DataAPI.TLOBusinessRecord
+        
+        Private peopleAtAddressFieldField() As DataAPI.TLOResident
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property otherBusinessesField() As DataAPI.TLOBusinessRecord()
+            Get
+                Return Me.otherBusinessesFieldField
+            End Get
+            Set
+                Me.otherBusinessesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property peopleAtAddressField() As DataAPI.TLOResident()
+            Get
+                Return Me.peopleAtAddressFieldField
+            End Get
+            Set
+                Me.peopleAtAddressFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="StandardDatasetNames", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
      System.SerializableAttribute(),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.StandardFieldNames)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.AddressRecordBase)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.AddressRecord)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BusinessAddressRecord)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicAddressRecord))>  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicAddressRecord)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOBusinessAddressRecord))>  _
     Partial Public Class StandardDatasetNames
         Inherits Object
         Implements System.Runtime.Serialization.IExtensibleDataObject
@@ -8770,7 +15310,8 @@ Namespace DataAPI
      System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.AddressRecordBase)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.AddressRecord)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BusinessAddressRecord)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicAddressRecord))>  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicAddressRecord)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOBusinessAddressRecord))>  _
     Partial Public Class StandardFieldNames
         Inherits DataAPI.StandardDatasetNames
     End Class
@@ -8781,7 +15322,8 @@ Namespace DataAPI
      System.SerializableAttribute(),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.AddressRecord)),  _
      System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BusinessAddressRecord)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicAddressRecord))>  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicAddressRecord)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOBusinessAddressRecord))>  _
     Partial Public Class AddressRecordBase
         Inherits DataAPI.StandardFieldNames
         
@@ -9349,108 +15891,6 @@ Namespace DataAPI
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessAddressRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class BusinessAddressRecord
-        Inherits DataAPI.AddressRecord
-        
-        Private otherBusinessesFieldField() As DataAPI.BusinessRecord
-        
-        Private peopleAtAddressFieldField() As DataAPI.Resident
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property otherBusinessesField() As DataAPI.BusinessRecord()
-            Get
-                Return Me.otherBusinessesFieldField
-            End Get
-            Set
-                Me.otherBusinessesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property peopleAtAddressField() As DataAPI.Resident()
-            Get
-                Return Me.peopleAtAddressFieldField
-            End Get
-            Set
-                Me.peopleAtAddressFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="Date", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class [Date]
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private dayFieldField As String
-        
-        Private monthFieldField As String
-        
-        Private yearFieldField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dayField() As String
-            Get
-                Return Me.dayFieldField
-            End Get
-            Set
-                Me.dayFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property monthField() As String
-            Get
-                Return Me.monthFieldField
-            End Get
-            Set
-                Me.monthFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property yearField() As String
-            Get
-                Return Me.yearFieldField
-            End Get
-            Set
-                Me.yearFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="PhoneCounts", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
      System.SerializableAttribute()>  _
     Partial Public Class PhoneCounts
@@ -9687,76 +16127,6 @@ Namespace DataAPI
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="CorporateIdentity", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.CorporateFilingBase)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOCorporateFiling))>  _
-    Partial Public Class CorporateIdentity
-        Inherits DataAPI.ResponseOutputRecord
-        
-        Private businessNameFieldField As String
-        
-        Private businessNameTypeFieldField As String
-        
-        Private businessTokenFieldField As String
-        
-        Private secStatusFieldField As String
-        
-        Private stateFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessNameField() As String
-            Get
-                Return Me.businessNameFieldField
-            End Get
-            Set
-                Me.businessNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessNameTypeField() As String
-            Get
-                Return Me.businessNameTypeFieldField
-            End Get
-            Set
-                Me.businessNameTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessTokenField() As String
-            Get
-                Return Me.businessTokenFieldField
-            End Get
-            Set
-                Me.businessTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property secStatusField() As String
-            Get
-                Return Me.secStatusFieldField
-            End Get
-            Set
-                Me.secStatusFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property stateField() As String
-            Get
-                Return Me.stateFieldField
-            End Get
-            Set
-                Me.stateFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="PhoneBookEntry", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
      System.SerializableAttribute()>  _
     Partial Public Class PhoneBookEntry
@@ -9857,167 +16227,6 @@ Namespace DataAPI
             End Get
             Set
                 Me.reportTokenFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="BasicAddress", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.Address))>  _
-    Partial Public Class BasicAddress
-        Inherits DataAPI.AddressBase
-        
-        Private addressMissingUnitDesignationFieldField As String
-        
-        Private buildingNameFieldField As String
-        
-        Private countryNameFieldField As String
-        
-        Private dateFirstSeenFieldField As DataAPI.[Date]
-        
-        Private dateLastSeenFieldField As DataAPI.[Date]
-        
-        Private descriptionFieldField As String
-        
-        Private distanceFieldField As String
-        
-        Private reportTokenFieldField As String
-        
-        Private subdivisionNameFieldField As String
-        
-        Private zip4FieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressMissingUnitDesignationField() As String
-            Get
-                Return Me.addressMissingUnitDesignationFieldField
-            End Get
-            Set
-                Me.addressMissingUnitDesignationFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property buildingNameField() As String
-            Get
-                Return Me.buildingNameFieldField
-            End Get
-            Set
-                Me.buildingNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property countryNameField() As String
-            Get
-                Return Me.countryNameFieldField
-            End Get
-            Set
-                Me.countryNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateFirstSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateFirstSeenFieldField
-            End Get
-            Set
-                Me.dateFirstSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateLastSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateLastSeenFieldField
-            End Get
-            Set
-                Me.dateLastSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property descriptionField() As String
-            Get
-                Return Me.descriptionFieldField
-            End Get
-            Set
-                Me.descriptionFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property distanceField() As String
-            Get
-                Return Me.distanceFieldField
-            End Get
-            Set
-                Me.distanceFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property reportTokenField() As String
-            Get
-                Return Me.reportTokenFieldField
-            End Get
-            Set
-                Me.reportTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property subdivisionNameField() As String
-            Get
-                Return Me.subdivisionNameFieldField
-            End Get
-            Set
-                Me.subdivisionNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property zip4Field() As String
-            Get
-                Return Me.zip4FieldField
-            End Get
-            Set
-                Me.zip4FieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="TLOBusinessAddressRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class TLOBusinessAddressRecord
-        Inherits DataAPI.BasicAddressRecord
-        
-        Private otherBusinessesFieldField() As DataAPI.TLOBusinessRecord
-        
-        Private peopleAtAddressFieldField() As DataAPI.TLOResident
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property otherBusinessesField() As DataAPI.TLOBusinessRecord()
-            Get
-                Return Me.otherBusinessesFieldField
-            End Get
-            Set
-                Me.otherBusinessesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property peopleAtAddressField() As DataAPI.TLOResident()
-            Get
-                Return Me.peopleAtAddressFieldField
-            End Get
-            Set
-                Me.peopleAtAddressFieldField = value
             End Set
         End Property
     End Class
@@ -10192,38 +16401,6 @@ Namespace DataAPI
             End Get
             Set
                 Me.weaponTypeFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="TLODriversLicense", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class TLODriversLicense
-        Inherits DataAPI.DriversLicenseBase
-        
-        Private addressFieldField As DataAPI.BasicAddress
-        
-        Private nameFieldField As DataAPI.BasicName
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressField() As DataAPI.BasicAddress
-            Get
-                Return Me.addressFieldField
-            End Get
-            Set
-                Me.addressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As DataAPI.BasicName
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
             End Set
         End Property
     End Class
@@ -10776,38 +16953,6 @@ Namespace DataAPI
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="TLOProfessionalLicense", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class TLOProfessionalLicense
-        Inherits DataAPI.ProfessionalLicenseBase
-        
-        Private addressFieldField As DataAPI.BasicAddress
-        
-        Private nameFieldField As DataAPI.BasicName
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressField() As DataAPI.BasicAddress
-            Get
-                Return Me.addressFieldField
-            End Get
-            Set
-                Me.addressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As DataAPI.BasicName
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="TLOProperty", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
      System.SerializableAttribute()>  _
     Partial Public Class TLOProperty
@@ -11070,50 +17215,6 @@ Namespace DataAPI
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="TLOUCCFiling", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class TLOUCCFiling
-        Inherits DataAPI.UCCFilingBase
-        
-        Private debtorsFieldField() As DataAPI.TLOUCCDebtor
-        
-        Private filingOfficeAddressFieldField As DataAPI.BasicAddress
-        
-        Private securedPartiesFieldField() As DataAPI.TLOUCCSecuredParty
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property debtorsField() As DataAPI.TLOUCCDebtor()
-            Get
-                Return Me.debtorsFieldField
-            End Get
-            Set
-                Me.debtorsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property filingOfficeAddressField() As DataAPI.BasicAddress
-            Get
-                Return Me.filingOfficeAddressFieldField
-            End Get
-            Set
-                Me.filingOfficeAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property securedPartiesField() As DataAPI.TLOUCCSecuredParty()
-            Get
-                Return Me.securedPartiesFieldField
-            End Get
-            Set
-                Me.securedPartiesFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="TLOVoterRegistration", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
      System.SerializableAttribute()>  _
     Partial Public Class TLOVoterRegistration
@@ -11268,98 +17369,6 @@ Namespace DataAPI
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="Address", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class Address
-        Inherits DataAPI.BasicAddress
-        
-        Private displayFieldField As String
-        
-        Private iPAddressesFieldField() As DataAPI.IPAddressRecord
-        
-        Private pictureIDsFieldField() As String
-        
-        Private picturesStreetAddressFieldField As String
-        
-        Private postalDeliveryTypeFieldField As String
-        
-        Private postalRouteTypeFieldField As String
-        
-        Private sourceFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property displayField() As String
-            Get
-                Return Me.displayFieldField
-            End Get
-            Set
-                Me.displayFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property iPAddressesField() As DataAPI.IPAddressRecord()
-            Get
-                Return Me.iPAddressesFieldField
-            End Get
-            Set
-                Me.iPAddressesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property pictureIDsField() As String()
-            Get
-                Return Me.pictureIDsFieldField
-            End Get
-            Set
-                Me.pictureIDsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property picturesStreetAddressField() As String
-            Get
-                Return Me.picturesStreetAddressFieldField
-            End Get
-            Set
-                Me.picturesStreetAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property postalDeliveryTypeField() As String
-            Get
-                Return Me.postalDeliveryTypeFieldField
-            End Get
-            Set
-                Me.postalDeliveryTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property postalRouteTypeField() As String
-            Get
-                Return Me.postalRouteTypeFieldField
-            End Get
-            Set
-                Me.postalRouteTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sourceField() As String
-            Get
-                Return Me.sourceFieldField
-            End Get
-            Set
-                Me.sourceFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="Aircraft", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
      System.SerializableAttribute()>  _
     Partial Public Class Aircraft
@@ -11374,99 +17383,6 @@ Namespace DataAPI
             End Get
             Set
                 Me.registrantFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BusinessRole))>  _
-    Partial Public Class BusinessRecord
-        Inherits DataAPI.BusinessRecordBase
-        
-        Private addressesFieldField() As DataAPI.BusinessAddressRecord
-        
-        Private businessContactsFieldField() As DataAPI.BusinessContact
-        
-        Private dunsNumberFieldField As String
-        
-        Private globalDunsNumberFieldField As String
-        
-        Private parentDunsNumberFieldField As String
-        
-        Private parentFieldField As DataAPI.BusinessRecord
-        
-        Private phonesFieldField() As DataAPI.PhoneListing
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressesField() As DataAPI.BusinessAddressRecord()
-            Get
-                Return Me.addressesFieldField
-            End Get
-            Set
-                Me.addressesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessContactsField() As DataAPI.BusinessContact()
-            Get
-                Return Me.businessContactsFieldField
-            End Get
-            Set
-                Me.businessContactsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dunsNumberField() As String
-            Get
-                Return Me.dunsNumberFieldField
-            End Get
-            Set
-                Me.dunsNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property globalDunsNumberField() As String
-            Get
-                Return Me.globalDunsNumberFieldField
-            End Get
-            Set
-                Me.globalDunsNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property parentDunsNumberField() As String
-            Get
-                Return Me.parentDunsNumberFieldField
-            End Get
-            Set
-                Me.parentDunsNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property parentField() As DataAPI.BusinessRecord
-            Get
-                Return Me.parentFieldField
-            End Get
-            Set
-                Me.parentFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property phonesField() As DataAPI.PhoneListing()
-            Get
-                Return Me.phonesFieldField
-            End Get
-            Set
-                Me.phonesFieldField = value
             End Set
         End Property
     End Class
@@ -11691,38 +17607,6 @@ Namespace DataAPI
             End Get
             Set
                 Me.tLOCriminalIdsFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="DriversLicense", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class DriversLicense
-        Inherits DataAPI.DriversLicenseBase
-        
-        Private addressFieldField As DataAPI.Address
-        
-        Private nameFieldField As DataAPI.Name
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressField() As DataAPI.Address
-            Get
-                Return Me.addressFieldField
-            End Get
-            Set
-                Me.addressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As DataAPI.Name
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
             End Set
         End Property
     End Class
@@ -13539,86 +19423,6 @@ Namespace DataAPI
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="PhoneListing", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class PhoneListing
-        Inherits DataAPI.BasicPhoneListing
-        
-        Private dateFirstSeenFieldField As DataAPI.[Date]
-        
-        Private dateLastSeenFieldField As DataAPI.[Date]
-        
-        Private doNotCallFieldField As String
-        
-        Private personSynopsisFieldField As DataAPI.PersonSynopsis
-        
-        Private phoneMatchesInputFieldField As String
-        
-        Private sourceFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateFirstSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateFirstSeenFieldField
-            End Get
-            Set
-                Me.dateFirstSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateLastSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateLastSeenFieldField
-            End Get
-            Set
-                Me.dateLastSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property doNotCallField() As String
-            Get
-                Return Me.doNotCallFieldField
-            End Get
-            Set
-                Me.doNotCallFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property personSynopsisField() As DataAPI.PersonSynopsis
-            Get
-                Return Me.personSynopsisFieldField
-            End Get
-            Set
-                Me.personSynopsisFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property phoneMatchesInputField() As String
-            Get
-                Return Me.phoneMatchesInputFieldField
-            End Get
-            Set
-                Me.phoneMatchesInputFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sourceField() As String
-            Get
-                Return Me.sourceFieldField
-            End Get
-            Set
-                Me.sourceFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="PilotLicense", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
      System.SerializableAttribute()>  _
     Partial Public Class PilotLicense
@@ -13761,50 +19565,6 @@ Namespace DataAPI
             End Get
             Set
                 Me.webSiteFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="ProfessionalLicense", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class ProfessionalLicense
-        Inherits DataAPI.ProfessionalLicenseBase
-        
-        Private addressFieldField As DataAPI.Address
-        
-        Private nameFieldField As DataAPI.Name
-        
-        Private pIdFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressField() As DataAPI.Address
-            Get
-                Return Me.addressFieldField
-            End Get
-            Set
-                Me.addressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As DataAPI.Name
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property pIdField() As String
-            Get
-                Return Me.pIdFieldField
-            End Get
-            Set
-                Me.pIdFieldField = value
             End Set
         End Property
     End Class
@@ -14281,50 +20041,6 @@ Namespace DataAPI
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="UCCFiling", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class UCCFiling
-        Inherits DataAPI.UCCFilingBase
-        
-        Private debtorsFieldField() As DataAPI.UCCDebtor
-        
-        Private filingOfficeAddressFieldField As DataAPI.Address
-        
-        Private securedPartiesFieldField() As DataAPI.UCCSecuredParty
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property debtorsField() As DataAPI.UCCDebtor()
-            Get
-                Return Me.debtorsFieldField
-            End Get
-            Set
-                Me.debtorsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property filingOfficeAddressField() As DataAPI.Address
-            Get
-                Return Me.filingOfficeAddressFieldField
-            End Get
-            Set
-                Me.filingOfficeAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property securedPartiesField() As DataAPI.UCCSecuredParty()
-            Get
-                Return Me.securedPartiesFieldField
-            End Get
-            Set
-                Me.securedPartiesFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
      System.Runtime.Serialization.DataContractAttribute(Name:="UtilityConnection", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
      System.SerializableAttribute()>  _
     Partial Public Class UtilityConnection
@@ -14683,831 +20399,6 @@ Namespace DataAPI
             End Get
             Set
                 Me.sSNRecordFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="ProtectedData", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicDateOfBirthRecord)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.DateOfBirthRecord)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.NameBase)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicName)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.Name)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicSSNRecord)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.SSNRecord)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicPhoneListing)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.PhoneListing)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.AddressBase)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicAddress))>  _
-    Partial Public Class ProtectedData
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="DateOfBirthRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class DateOfBirthRecord
-        Inherits DataAPI.BasicDateOfBirthRecord
-        
-        Private astrologicalSignFieldField As String
-        
-        Private dateFirstSeenFieldField As DataAPI.[Date]
-        
-        Private dateLastSeenFieldField As DataAPI.[Date]
-        
-        Private displayFieldField As String
-        
-        Private observationsFieldField As String
-        
-        Private sourceFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property astrologicalSignField() As String
-            Get
-                Return Me.astrologicalSignFieldField
-            End Get
-            Set
-                Me.astrologicalSignFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateFirstSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateFirstSeenFieldField
-            End Get
-            Set
-                Me.dateFirstSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateLastSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateLastSeenFieldField
-            End Get
-            Set
-                Me.dateLastSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property displayField() As String
-            Get
-                Return Me.displayFieldField
-            End Get
-            Set
-                Me.displayFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property observationsField() As String
-            Get
-                Return Me.observationsFieldField
-            End Get
-            Set
-                Me.observationsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sourceField() As String
-            Get
-                Return Me.sourceFieldField
-            End Get
-            Set
-                Me.sourceFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="NameBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicName)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.Name))>  _
-    Partial Public Class NameBase
-        Inherits DataAPI.ProtectedData
-        
-        Private firstNameFieldField As String
-        
-        Private lastNameFieldField As String
-        
-        Private middleNameFieldField As String
-        
-        Private nameSuffixFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property firstNameField() As String
-            Get
-                Return Me.firstNameFieldField
-            End Get
-            Set
-                Me.firstNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property lastNameField() As String
-            Get
-                Return Me.lastNameFieldField
-            End Get
-            Set
-                Me.lastNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property middleNameField() As String
-            Get
-                Return Me.middleNameFieldField
-            End Get
-            Set
-                Me.middleNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameSuffixField() As String
-            Get
-                Return Me.nameSuffixFieldField
-            End Get
-            Set
-                Me.nameSuffixFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="Name", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class Name
-        Inherits DataAPI.BasicName
-        
-        Private displayFieldField As String
-        
-        Private observationsFieldField As String
-        
-        Private scoreFieldField As String
-        
-        Private sourceFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property displayField() As String
-            Get
-                Return Me.displayFieldField
-            End Get
-            Set
-                Me.displayFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property observationsField() As String
-            Get
-                Return Me.observationsFieldField
-            End Get
-            Set
-                Me.observationsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property scoreField() As String
-            Get
-                Return Me.scoreFieldField
-            End Get
-            Set
-                Me.scoreFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sourceField() As String
-            Get
-                Return Me.sourceFieldField
-            End Get
-            Set
-                Me.sourceFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="BasicSSNRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.SSNRecord))>  _
-    Partial Public Class BasicSSNRecord
-        Inherits DataAPI.ProtectedData
-        
-        Private sSNFieldField As String
-        
-        Private sSNIssueYearsFieldField As String
-        
-        Private sSNPlaceOfIssueFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sSNField() As String
-            Get
-                Return Me.sSNFieldField
-            End Get
-            Set
-                Me.sSNFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sSNIssueYearsField() As String
-            Get
-                Return Me.sSNIssueYearsFieldField
-            End Get
-            Set
-                Me.sSNIssueYearsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sSNPlaceOfIssueField() As String
-            Get
-                Return Me.sSNPlaceOfIssueFieldField
-            End Get
-            Set
-                Me.sSNPlaceOfIssueFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="AddressBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BasicAddress))>  _
-    Partial Public Class AddressBase
-        Inherits DataAPI.ProtectedData
-        
-        Private cityFieldField As String
-        
-        Private countyFieldField As String
-        
-        Private latitudeFieldField As Double
-        
-        Private line1FieldField As String
-        
-        Private line2FieldField As String
-        
-        Private line3FieldField As String
-        
-        Private longitudeFieldField As Double
-        
-        Private stateFieldField As String
-        
-        Private zipFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property cityField() As String
-            Get
-                Return Me.cityFieldField
-            End Get
-            Set
-                Me.cityFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property countyField() As String
-            Get
-                Return Me.countyFieldField
-            End Get
-            Set
-                Me.countyFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property latitudeField() As Double
-            Get
-                Return Me.latitudeFieldField
-            End Get
-            Set
-                Me.latitudeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property line1Field() As String
-            Get
-                Return Me.line1FieldField
-            End Get
-            Set
-                Me.line1FieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property line2Field() As String
-            Get
-                Return Me.line2FieldField
-            End Get
-            Set
-                Me.line2FieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property line3Field() As String
-            Get
-                Return Me.line3FieldField
-            End Get
-            Set
-                Me.line3FieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property longitudeField() As Double
-            Get
-                Return Me.longitudeFieldField
-            End Get
-            Set
-                Me.longitudeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property stateField() As String
-            Get
-                Return Me.stateFieldField
-            End Get
-            Set
-                Me.stateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property zipField() As String
-            Get
-                Return Me.zipFieldField
-            End Get
-            Set
-                Me.zipFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="IPAddressRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class IPAddressRecord
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private businessNameFieldField As String
-        
-        Private cityFieldField As String
-        
-        Private countryFieldField As String
-        
-        Private dateFirstSeenFieldField As DataAPI.[Date]
-        
-        Private dateLastSeenFieldField As DataAPI.[Date]
-        
-        Private domainNameFieldField As String
-        
-        Private iPAddressFieldField As String
-        
-        Private iSPFieldField As String
-        
-        Private latitudeFieldField As String
-        
-        Private longitudeFieldField As String
-        
-        Private postalCodeFieldField As String
-        
-        Private regionFieldField As String
-        
-        Private timeFirstSeenFieldField As DataAPI.Time
-        
-        Private timeLastSeenFieldField As DataAPI.Time
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessNameField() As String
-            Get
-                Return Me.businessNameFieldField
-            End Get
-            Set
-                Me.businessNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property cityField() As String
-            Get
-                Return Me.cityFieldField
-            End Get
-            Set
-                Me.cityFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property countryField() As String
-            Get
-                Return Me.countryFieldField
-            End Get
-            Set
-                Me.countryFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateFirstSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateFirstSeenFieldField
-            End Get
-            Set
-                Me.dateFirstSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateLastSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateLastSeenFieldField
-            End Get
-            Set
-                Me.dateLastSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property domainNameField() As String
-            Get
-                Return Me.domainNameFieldField
-            End Get
-            Set
-                Me.domainNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property iPAddressField() As String
-            Get
-                Return Me.iPAddressFieldField
-            End Get
-            Set
-                Me.iPAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property iSPField() As String
-            Get
-                Return Me.iSPFieldField
-            End Get
-            Set
-                Me.iSPFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property latitudeField() As String
-            Get
-                Return Me.latitudeFieldField
-            End Get
-            Set
-                Me.latitudeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property longitudeField() As String
-            Get
-                Return Me.longitudeFieldField
-            End Get
-            Set
-                Me.longitudeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property postalCodeField() As String
-            Get
-                Return Me.postalCodeFieldField
-            End Get
-            Set
-                Me.postalCodeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property regionField() As String
-            Get
-                Return Me.regionFieldField
-            End Get
-            Set
-                Me.regionFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property timeFirstSeenField() As DataAPI.Time
-            Get
-                Return Me.timeFirstSeenFieldField
-            End Get
-            Set
-                Me.timeFirstSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property timeLastSeenField() As DataAPI.Time
-            Get
-                Return Me.timeLastSeenFieldField
-            End Get
-            Set
-                Me.timeLastSeenFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="ListingTypes", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService")>  _
-    Public Enum ListingTypes As Integer
-        
-        <System.Runtime.Serialization.EnumMemberAttribute()>  _
-        Unknown = 0
-        
-        <System.Runtime.Serialization.EnumMemberAttribute()>  _
-        Residential = 1
-        
-        <System.Runtime.Serialization.EnumMemberAttribute()>  _
-        Business = 2
-        
-        <System.Runtime.Serialization.EnumMemberAttribute()>  _
-        BusinessResidential = 3
-        
-        <System.Runtime.Serialization.EnumMemberAttribute()>  _
-        BusinessGovernment = 4
-        
-        <System.Runtime.Serialization.EnumMemberAttribute()>  _
-        BusinessGovernmentResidential = 5
-    End Enum
-    
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="PhoneTypes", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService")>  _
-    Public Enum PhoneTypes As Integer
-        
-        <System.Runtime.Serialization.EnumMemberAttribute()>  _
-        Unknown = 0
-        
-        <System.Runtime.Serialization.EnumMemberAttribute()>  _
-        LandLine = 1
-        
-        <System.Runtime.Serialization.EnumMemberAttribute()>  _
-        Mobile = 2
-        
-        <System.Runtime.Serialization.EnumMemberAttribute()>  _
-        Unlisted = 3
-        
-        <System.Runtime.Serialization.EnumMemberAttribute()>  _
-        ActiveLandLine = 4
-        
-        <System.Runtime.Serialization.EnumMemberAttribute()>  _
-        VoIP = 5
-    End Enum
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="PersonSynopsis", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class PersonSynopsis
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private dateOfBirthRecordFieldField As DataAPI.DateOfBirthRecord
-        
-        Private dateOfDeathFieldField As DataAPI.DateOfDeathRecord
-        
-        Private nameFieldField As DataAPI.Name
-        
-        Private picHashFieldField As String
-        
-        Private picHashesFieldField() As String
-        
-        Private reportTokenFieldField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfBirthRecordField() As DataAPI.DateOfBirthRecord
-            Get
-                Return Me.dateOfBirthRecordFieldField
-            End Get
-            Set
-                Me.dateOfBirthRecordFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfDeathField() As DataAPI.DateOfDeathRecord
-            Get
-                Return Me.dateOfDeathFieldField
-            End Get
-            Set
-                Me.dateOfDeathFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As DataAPI.Name
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property picHashField() As String
-            Get
-                Return Me.picHashFieldField
-            End Get
-            Set
-                Me.picHashFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property picHashesField() As String()
-            Get
-                Return Me.picHashesFieldField
-            End Get
-            Set
-                Me.picHashesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property reportTokenField() As String
-            Get
-                Return Me.reportTokenFieldField
-            End Get
-            Set
-                Me.reportTokenFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="Time", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class Time
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private hourFieldField As String
-        
-        Private minuteFieldField As String
-        
-        Private secondFieldField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property hourField() As String
-            Get
-                Return Me.hourFieldField
-            End Get
-            Set
-                Me.hourFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property minuteField() As String
-            Get
-                Return Me.minuteFieldField
-            End Get
-            Set
-                Me.minuteFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property secondField() As String
-            Get
-                Return Me.secondFieldField
-            End Get
-            Set
-                Me.secondFieldField = value
             End Set
         End Property
     End Class
@@ -18559,4687 +23450,6 @@ Namespace DataAPI
             End Get
             Set
                 Me.partyTypeFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="ResponseOutputRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.WatchListRecord)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.DriversLicenseBase)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.DriversLicense)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLODriversLicense)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.ProfessionalLicenseBase)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.ProfessionalLicense)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOProfessionalLicense)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCFilingBase)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCFiling)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCFiling)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.CorporateIdentity)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.CorporateFilingBase)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOCorporateFiling))>  _
-    Partial Public Class ResponseOutputRecord
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="WatchListRecord", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class WatchListRecord
-        Inherits DataAPI.ResponseOutputRecord
-        
-        Private addressFieldField As DataAPI.BasicAddress
-        
-        Private addressRemarksFieldField As String
-        
-        Private aliasNameFieldField As String
-        
-        Private aliasTypeFieldField As String
-        
-        Private callSignFieldField As String
-        
-        Private citizenshipFieldField As String
-        
-        Private constituancyFieldField As String
-        
-        Private countryFieldField As String
-        
-        Private dateOfBirthFieldField As String
-        
-        Private documentsFieldField As String
-        
-        Private emailAddressFieldField As String
-        
-        Private eyesFieldField As String
-        
-        Private faxFieldField As String
-        
-        Private fullNameFieldField As String
-        
-        Private gRTFieldField As String
-        
-        Private hairFieldField As String
-        
-        Private heightFieldField As String
-        
-        Private imageURLFieldField As String
-        
-        Private languagesFieldField As String
-        
-        Private legalBasisFieldField As String
-        
-        Private listingDateFieldField As String
-        
-        Private marksFieldField As String
-        
-        Private nameFieldField As DataAPI.Name
-        
-        Private offenseFieldField As String
-        
-        Private officialTitleFieldField As String
-        
-        Private originalIdFieldField As String
-        
-        Private pageURLFieldField As String
-        
-        Private phoneFieldField As String
-        
-        Private placeOfBirthFieldField As String
-        
-        Private politicalPartyFieldField As String
-        
-        Private programFieldField As String
-        
-        Private remarksFieldField As String
-        
-        Private scoreFieldField As Integer
-        
-        Private sexFieldField As String
-        
-        Private sourceFieldField As String
-        
-        Private tINFieldField As String
-        
-        Private titleFieldField As String
-        
-        Private tonnageFieldField As String
-        
-        Private typeFieldField As String
-        
-        Private vesselFlagFieldField As String
-        
-        Private vesselOwnerFieldField As String
-        
-        Private vesselTypeFieldField As String
-        
-        Private wantedByFieldField As String
-        
-        Private websiteFieldField As String
-        
-        Private weightFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressField() As DataAPI.BasicAddress
-            Get
-                Return Me.addressFieldField
-            End Get
-            Set
-                Me.addressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressRemarksField() As String
-            Get
-                Return Me.addressRemarksFieldField
-            End Get
-            Set
-                Me.addressRemarksFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property aliasNameField() As String
-            Get
-                Return Me.aliasNameFieldField
-            End Get
-            Set
-                Me.aliasNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property aliasTypeField() As String
-            Get
-                Return Me.aliasTypeFieldField
-            End Get
-            Set
-                Me.aliasTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property callSignField() As String
-            Get
-                Return Me.callSignFieldField
-            End Get
-            Set
-                Me.callSignFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property citizenshipField() As String
-            Get
-                Return Me.citizenshipFieldField
-            End Get
-            Set
-                Me.citizenshipFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property constituancyField() As String
-            Get
-                Return Me.constituancyFieldField
-            End Get
-            Set
-                Me.constituancyFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property countryField() As String
-            Get
-                Return Me.countryFieldField
-            End Get
-            Set
-                Me.countryFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfBirthField() As String
-            Get
-                Return Me.dateOfBirthFieldField
-            End Get
-            Set
-                Me.dateOfBirthFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property documentsField() As String
-            Get
-                Return Me.documentsFieldField
-            End Get
-            Set
-                Me.documentsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property emailAddressField() As String
-            Get
-                Return Me.emailAddressFieldField
-            End Get
-            Set
-                Me.emailAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property eyesField() As String
-            Get
-                Return Me.eyesFieldField
-            End Get
-            Set
-                Me.eyesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property faxField() As String
-            Get
-                Return Me.faxFieldField
-            End Get
-            Set
-                Me.faxFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property fullNameField() As String
-            Get
-                Return Me.fullNameFieldField
-            End Get
-            Set
-                Me.fullNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property gRTField() As String
-            Get
-                Return Me.gRTFieldField
-            End Get
-            Set
-                Me.gRTFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property hairField() As String
-            Get
-                Return Me.hairFieldField
-            End Get
-            Set
-                Me.hairFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property heightField() As String
-            Get
-                Return Me.heightFieldField
-            End Get
-            Set
-                Me.heightFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property imageURLField() As String
-            Get
-                Return Me.imageURLFieldField
-            End Get
-            Set
-                Me.imageURLFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property languagesField() As String
-            Get
-                Return Me.languagesFieldField
-            End Get
-            Set
-                Me.languagesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property legalBasisField() As String
-            Get
-                Return Me.legalBasisFieldField
-            End Get
-            Set
-                Me.legalBasisFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property listingDateField() As String
-            Get
-                Return Me.listingDateFieldField
-            End Get
-            Set
-                Me.listingDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property marksField() As String
-            Get
-                Return Me.marksFieldField
-            End Get
-            Set
-                Me.marksFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As DataAPI.Name
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property offenseField() As String
-            Get
-                Return Me.offenseFieldField
-            End Get
-            Set
-                Me.offenseFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property officialTitleField() As String
-            Get
-                Return Me.officialTitleFieldField
-            End Get
-            Set
-                Me.officialTitleFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property originalIdField() As String
-            Get
-                Return Me.originalIdFieldField
-            End Get
-            Set
-                Me.originalIdFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property pageURLField() As String
-            Get
-                Return Me.pageURLFieldField
-            End Get
-            Set
-                Me.pageURLFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property phoneField() As String
-            Get
-                Return Me.phoneFieldField
-            End Get
-            Set
-                Me.phoneFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property placeOfBirthField() As String
-            Get
-                Return Me.placeOfBirthFieldField
-            End Get
-            Set
-                Me.placeOfBirthFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property politicalPartyField() As String
-            Get
-                Return Me.politicalPartyFieldField
-            End Get
-            Set
-                Me.politicalPartyFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property programField() As String
-            Get
-                Return Me.programFieldField
-            End Get
-            Set
-                Me.programFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property remarksField() As String
-            Get
-                Return Me.remarksFieldField
-            End Get
-            Set
-                Me.remarksFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property scoreField() As Integer
-            Get
-                Return Me.scoreFieldField
-            End Get
-            Set
-                Me.scoreFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sexField() As String
-            Get
-                Return Me.sexFieldField
-            End Get
-            Set
-                Me.sexFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sourceField() As String
-            Get
-                Return Me.sourceFieldField
-            End Get
-            Set
-                Me.sourceFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property tINField() As String
-            Get
-                Return Me.tINFieldField
-            End Get
-            Set
-                Me.tINFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property titleField() As String
-            Get
-                Return Me.titleFieldField
-            End Get
-            Set
-                Me.titleFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property tonnageField() As String
-            Get
-                Return Me.tonnageFieldField
-            End Get
-            Set
-                Me.tonnageFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property typeField() As String
-            Get
-                Return Me.typeFieldField
-            End Get
-            Set
-                Me.typeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property vesselFlagField() As String
-            Get
-                Return Me.vesselFlagFieldField
-            End Get
-            Set
-                Me.vesselFlagFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property vesselOwnerField() As String
-            Get
-                Return Me.vesselOwnerFieldField
-            End Get
-            Set
-                Me.vesselOwnerFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property vesselTypeField() As String
-            Get
-                Return Me.vesselTypeFieldField
-            End Get
-            Set
-                Me.vesselTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property wantedByField() As String
-            Get
-                Return Me.wantedByFieldField
-            End Get
-            Set
-                Me.wantedByFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property websiteField() As String
-            Get
-                Return Me.websiteFieldField
-            End Get
-            Set
-                Me.websiteFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property weightField() As String
-            Get
-                Return Me.weightFieldField
-            End Get
-            Set
-                Me.weightFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="DriversLicenseBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.DriversLicense)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLODriversLicense))>  _
-    Partial Public Class DriversLicenseBase
-        Inherits DataAPI.ResponseOutputRecord
-        
-        Private ageAtDeathFieldField As String
-        
-        Private attentionFlagFieldField As String
-        
-        Private currentAgeFieldField As String
-        
-        Private dateOfBirthFieldField As DataAPI.[Date]
-        
-        Private dateOfBirthRecordFieldField As DataAPI.DateOfBirthRecord
-        
-        Private dateOfDeathFieldField As DataAPI.[Date]
-        
-        Private driversLicenseNumberFieldField As String
-        
-        Private driversLicenseNumberTokenFieldField As String
-        
-        Private endorsementsFieldField As String
-        
-        Private expirationDateFieldField As DataAPI.[Date]
-        
-        Private genderFieldField As String
-        
-        Private heightFieldField As String
-        
-        Private issueDateFieldField As DataAPI.[Date]
-        
-        Private issuingStateFieldField As String
-        
-        Private licenseTypeFieldField As String
-        
-        Private motorcycleCodeFieldField As String
-        
-        Private newDriversLicenseNumberFieldField As String
-        
-        Private newDriversLicenseNumberTokenFieldField As String
-        
-        Private originalHeightFieldField As String
-        
-        Private originalIssueDateFieldField As DataAPI.[Date]
-        
-        Private outOfStateIssuerFieldField As String
-        
-        Private outOfStateLicenseNumberFieldField As String
-        
-        Private outOfStateLicenseNumberTokenFieldField As String
-        
-        Private preferredSSNRecordFieldField As DataAPI.SSNRecord
-        
-        Private privacyFlagFieldField As String
-        
-        Private raceFieldField As String
-        
-        Private reportTokenFieldField As String
-        
-        Private restrictionsFieldField As String
-        
-        Private sSNRecordFieldField As DataAPI.SSNRecord
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property ageAtDeathField() As String
-            Get
-                Return Me.ageAtDeathFieldField
-            End Get
-            Set
-                Me.ageAtDeathFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property attentionFlagField() As String
-            Get
-                Return Me.attentionFlagFieldField
-            End Get
-            Set
-                Me.attentionFlagFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property currentAgeField() As String
-            Get
-                Return Me.currentAgeFieldField
-            End Get
-            Set
-                Me.currentAgeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfBirthField() As DataAPI.[Date]
-            Get
-                Return Me.dateOfBirthFieldField
-            End Get
-            Set
-                Me.dateOfBirthFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfBirthRecordField() As DataAPI.DateOfBirthRecord
-            Get
-                Return Me.dateOfBirthRecordFieldField
-            End Get
-            Set
-                Me.dateOfBirthRecordFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfDeathField() As DataAPI.[Date]
-            Get
-                Return Me.dateOfDeathFieldField
-            End Get
-            Set
-                Me.dateOfDeathFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property driversLicenseNumberField() As String
-            Get
-                Return Me.driversLicenseNumberFieldField
-            End Get
-            Set
-                Me.driversLicenseNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property driversLicenseNumberTokenField() As String
-            Get
-                Return Me.driversLicenseNumberTokenFieldField
-            End Get
-            Set
-                Me.driversLicenseNumberTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property endorsementsField() As String
-            Get
-                Return Me.endorsementsFieldField
-            End Get
-            Set
-                Me.endorsementsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property expirationDateField() As DataAPI.[Date]
-            Get
-                Return Me.expirationDateFieldField
-            End Get
-            Set
-                Me.expirationDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property genderField() As String
-            Get
-                Return Me.genderFieldField
-            End Get
-            Set
-                Me.genderFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property heightField() As String
-            Get
-                Return Me.heightFieldField
-            End Get
-            Set
-                Me.heightFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property issueDateField() As DataAPI.[Date]
-            Get
-                Return Me.issueDateFieldField
-            End Get
-            Set
-                Me.issueDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property issuingStateField() As String
-            Get
-                Return Me.issuingStateFieldField
-            End Get
-            Set
-                Me.issuingStateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property licenseTypeField() As String
-            Get
-                Return Me.licenseTypeFieldField
-            End Get
-            Set
-                Me.licenseTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property motorcycleCodeField() As String
-            Get
-                Return Me.motorcycleCodeFieldField
-            End Get
-            Set
-                Me.motorcycleCodeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property newDriversLicenseNumberField() As String
-            Get
-                Return Me.newDriversLicenseNumberFieldField
-            End Get
-            Set
-                Me.newDriversLicenseNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property newDriversLicenseNumberTokenField() As String
-            Get
-                Return Me.newDriversLicenseNumberTokenFieldField
-            End Get
-            Set
-                Me.newDriversLicenseNumberTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property originalHeightField() As String
-            Get
-                Return Me.originalHeightFieldField
-            End Get
-            Set
-                Me.originalHeightFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property originalIssueDateField() As DataAPI.[Date]
-            Get
-                Return Me.originalIssueDateFieldField
-            End Get
-            Set
-                Me.originalIssueDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property outOfStateIssuerField() As String
-            Get
-                Return Me.outOfStateIssuerFieldField
-            End Get
-            Set
-                Me.outOfStateIssuerFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property outOfStateLicenseNumberField() As String
-            Get
-                Return Me.outOfStateLicenseNumberFieldField
-            End Get
-            Set
-                Me.outOfStateLicenseNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property outOfStateLicenseNumberTokenField() As String
-            Get
-                Return Me.outOfStateLicenseNumberTokenFieldField
-            End Get
-            Set
-                Me.outOfStateLicenseNumberTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property preferredSSNRecordField() As DataAPI.SSNRecord
-            Get
-                Return Me.preferredSSNRecordFieldField
-            End Get
-            Set
-                Me.preferredSSNRecordFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property privacyFlagField() As String
-            Get
-                Return Me.privacyFlagFieldField
-            End Get
-            Set
-                Me.privacyFlagFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property raceField() As String
-            Get
-                Return Me.raceFieldField
-            End Get
-            Set
-                Me.raceFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property reportTokenField() As String
-            Get
-                Return Me.reportTokenFieldField
-            End Get
-            Set
-                Me.reportTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property restrictionsField() As String
-            Get
-                Return Me.restrictionsFieldField
-            End Get
-            Set
-                Me.restrictionsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sSNRecordField() As DataAPI.SSNRecord
-            Get
-                Return Me.sSNRecordFieldField
-            End Get
-            Set
-                Me.sSNRecordFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="ProfessionalLicenseBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.ProfessionalLicense)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOProfessionalLicense))>  _
-    Partial Public Class ProfessionalLicenseBase
-        Inherits DataAPI.ResponseOutputRecord
-        
-        Private additionalTypesFieldField() As String
-        
-        Private businessNameFieldField As String
-        
-        Private businessPhoneFieldField As String
-        
-        Private callSignFieldField As String
-        
-        Private currentAgeFieldField As String
-        
-        Private currentIssueDateFieldField As DataAPI.[Date]
-        
-        Private dateOfBirthFieldField As DataAPI.[Date]
-        
-        Private disciplinaryActionsFieldField As String
-        
-        Private emailAddressFieldField As String
-        
-        Private expirationDateFieldField As DataAPI.[Date]
-        
-        Private faxFieldField As String
-        
-        Private graduationDateFieldField As DataAPI.[Date]
-        
-        Private issueDateFieldField As DataAPI.[Date]
-        
-        Private jobFunctionsFieldField() As String
-        
-        Private licenseClassFieldField As String
-        
-        Private licenseNumberFieldField As String
-        
-        Private licenseStateFieldField As String
-        
-        Private licenseStatusFieldField As String
-        
-        Private licenseTypeFieldField As String
-        
-        Private phoneFieldField As String
-        
-        Private preferredSSNRecordFieldField As DataAPI.SSNRecord
-        
-        Private reportTokenFieldField As String
-        
-        Private sSNRecordFieldField As DataAPI.SSNRecord
-        
-        Private schoolFieldField As String
-        
-        Private specialtiesFieldField() As String
-        
-        Private tradeTypeFieldField As String
-        
-        Private websiteFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property additionalTypesField() As String()
-            Get
-                Return Me.additionalTypesFieldField
-            End Get
-            Set
-                Me.additionalTypesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessNameField() As String
-            Get
-                Return Me.businessNameFieldField
-            End Get
-            Set
-                Me.businessNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessPhoneField() As String
-            Get
-                Return Me.businessPhoneFieldField
-            End Get
-            Set
-                Me.businessPhoneFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property callSignField() As String
-            Get
-                Return Me.callSignFieldField
-            End Get
-            Set
-                Me.callSignFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property currentAgeField() As String
-            Get
-                Return Me.currentAgeFieldField
-            End Get
-            Set
-                Me.currentAgeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property currentIssueDateField() As DataAPI.[Date]
-            Get
-                Return Me.currentIssueDateFieldField
-            End Get
-            Set
-                Me.currentIssueDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfBirthField() As DataAPI.[Date]
-            Get
-                Return Me.dateOfBirthFieldField
-            End Get
-            Set
-                Me.dateOfBirthFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property disciplinaryActionsField() As String
-            Get
-                Return Me.disciplinaryActionsFieldField
-            End Get
-            Set
-                Me.disciplinaryActionsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property emailAddressField() As String
-            Get
-                Return Me.emailAddressFieldField
-            End Get
-            Set
-                Me.emailAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property expirationDateField() As DataAPI.[Date]
-            Get
-                Return Me.expirationDateFieldField
-            End Get
-            Set
-                Me.expirationDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property faxField() As String
-            Get
-                Return Me.faxFieldField
-            End Get
-            Set
-                Me.faxFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property graduationDateField() As DataAPI.[Date]
-            Get
-                Return Me.graduationDateFieldField
-            End Get
-            Set
-                Me.graduationDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property issueDateField() As DataAPI.[Date]
-            Get
-                Return Me.issueDateFieldField
-            End Get
-            Set
-                Me.issueDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property jobFunctionsField() As String()
-            Get
-                Return Me.jobFunctionsFieldField
-            End Get
-            Set
-                Me.jobFunctionsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property licenseClassField() As String
-            Get
-                Return Me.licenseClassFieldField
-            End Get
-            Set
-                Me.licenseClassFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property licenseNumberField() As String
-            Get
-                Return Me.licenseNumberFieldField
-            End Get
-            Set
-                Me.licenseNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property licenseStateField() As String
-            Get
-                Return Me.licenseStateFieldField
-            End Get
-            Set
-                Me.licenseStateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property licenseStatusField() As String
-            Get
-                Return Me.licenseStatusFieldField
-            End Get
-            Set
-                Me.licenseStatusFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property licenseTypeField() As String
-            Get
-                Return Me.licenseTypeFieldField
-            End Get
-            Set
-                Me.licenseTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property phoneField() As String
-            Get
-                Return Me.phoneFieldField
-            End Get
-            Set
-                Me.phoneFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property preferredSSNRecordField() As DataAPI.SSNRecord
-            Get
-                Return Me.preferredSSNRecordFieldField
-            End Get
-            Set
-                Me.preferredSSNRecordFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property reportTokenField() As String
-            Get
-                Return Me.reportTokenFieldField
-            End Get
-            Set
-                Me.reportTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sSNRecordField() As DataAPI.SSNRecord
-            Get
-                Return Me.sSNRecordFieldField
-            End Get
-            Set
-                Me.sSNRecordFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property schoolField() As String
-            Get
-                Return Me.schoolFieldField
-            End Get
-            Set
-                Me.schoolFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property specialtiesField() As String()
-            Get
-                Return Me.specialtiesFieldField
-            End Get
-            Set
-                Me.specialtiesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property tradeTypeField() As String
-            Get
-                Return Me.tradeTypeFieldField
-            End Get
-            Set
-                Me.tradeTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property websiteField() As String
-            Get
-                Return Me.websiteFieldField
-            End Get
-            Set
-                Me.websiteFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="UCCFilingBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCFiling)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCFiling))>  _
-    Partial Public Class UCCFilingBase
-        Inherits DataAPI.ResponseOutputRecord
-        
-        Private collateralItemsFieldField() As DataAPI.UCCCollateralItem
-        
-        Private crossReferenceFilingDateFieldField As DataAPI.[Date]
-        
-        Private crossReferenceFilingNumberFieldField As String
-        
-        Private expirationDateFieldField As DataAPI.[Date]
-        
-        Private filingDateFieldField As DataAPI.[Date]
-        
-        Private filingNumberFieldField As String
-        
-        Private filingOfficeNameFieldField As String
-        
-        Private filingTimeFieldField As DataAPI.Time
-        
-        Private filingTypeFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property collateralItemsField() As DataAPI.UCCCollateralItem()
-            Get
-                Return Me.collateralItemsFieldField
-            End Get
-            Set
-                Me.collateralItemsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property crossReferenceFilingDateField() As DataAPI.[Date]
-            Get
-                Return Me.crossReferenceFilingDateFieldField
-            End Get
-            Set
-                Me.crossReferenceFilingDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property crossReferenceFilingNumberField() As String
-            Get
-                Return Me.crossReferenceFilingNumberFieldField
-            End Get
-            Set
-                Me.crossReferenceFilingNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property expirationDateField() As DataAPI.[Date]
-            Get
-                Return Me.expirationDateFieldField
-            End Get
-            Set
-                Me.expirationDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property filingDateField() As DataAPI.[Date]
-            Get
-                Return Me.filingDateFieldField
-            End Get
-            Set
-                Me.filingDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property filingNumberField() As String
-            Get
-                Return Me.filingNumberFieldField
-            End Get
-            Set
-                Me.filingNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property filingOfficeNameField() As String
-            Get
-                Return Me.filingOfficeNameFieldField
-            End Get
-            Set
-                Me.filingOfficeNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property filingTimeField() As DataAPI.Time
-            Get
-                Return Me.filingTimeFieldField
-            End Get
-            Set
-                Me.filingTimeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property filingTypeField() As String
-            Get
-                Return Me.filingTypeFieldField
-            End Get
-            Set
-                Me.filingTypeFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="CorporateFilingBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOCorporateFiling))>  _
-    Partial Public Class CorporateFilingBase
-        Inherits DataAPI.CorporateIdentity
-        
-        Private activeAgentFlagFieldField As String
-        
-        Private addressTypeFieldField As String
-        
-        Private amendmentsFieldField() As DataAPI.CorporateAmendment
-        
-        Private authCapitalTotalAmtFieldField As String
-        
-        Private businessDunsNumberFieldField As String
-        
-        Private businessNamesFieldField() As DataAPI.BusinessName
-        
-        Private corporateStockIssuesFieldField() As DataAPI.CorporateStockIssue
-        
-        Private corporationTypeFieldField As String
-        
-        Private countryFieldField As String
-        
-        Private dateFirstSeenFieldField As DataAPI.[Date]
-        
-        Private dateLastSeenFieldField As DataAPI.[Date]
-        
-        Private distributionControlFieldField As String
-        
-        Private expirationDateFieldField As DataAPI.[Date]
-        
-        Private fEINumberFieldField As String
-        
-        Private fileDateFieldField As DataAPI.[Date]
-        
-        Private filingDateFieldField As DataAPI.[Date]
-        
-        Private filingNumberFieldField As String
-        
-        Private filingOfficeBusinessTokenFieldField As String
-        
-        Private filingOfficeDunsNumberFieldField As String
-        
-        Private filingOfficeNameFieldField As String
-        
-        Private fiscalYearEndDateFieldField As DataAPI.[Date]
-        
-        Private foreignRegionFieldField As String
-        
-        Private franchiseTaxBalanceAmtFieldField As String
-        
-        Private franchiseTaxBoardStatusDateFieldField As DataAPI.[Date]
-        
-        Private franchiseTaxBoardStatusFieldField As String
-        
-        Private franchiseTaxPaidAmtFieldField As String
-        
-        Private franchiseTaxPaidDateFieldField As DataAPI.[Date]
-        
-        Private incorporationCountryFieldField As String
-        
-        Private incorporationDateFieldField As DataAPI.[Date]
-        
-        Private incorporationForeignRegionFieldField As String
-        
-        Private incorporationStateFieldField As String
-        
-        Private minRequirementMetFlagFieldField As String
-        
-        Private miscDetailsFieldField As String
-        
-        Private paidInCapitalAmtFieldField As String
-        
-        Private paidInCapitalDateFieldField As DataAPI.[Date]
-        
-        Private perpetualIndicatorFieldField As String
-        
-        Private rAAppointDateFieldField As DataAPI.[Date]
-        
-        Private receivedDateFieldField As DataAPI.[Date]
-        
-        Private registrationTypeDescFieldField As String
-        
-        Private registrationTypeFieldField As String
-        
-        Private sICFieldField As String
-        
-        Private secStateAnnReportDelinqDateFieldField As DataAPI.[Date]
-        
-        Private secStateAnnReportMailDateFieldField As DataAPI.[Date]
-        
-        Private secStateAnnualReportDueDateFieldField As DataAPI.[Date]
-        
-        Private secStateLastAnnReportDateFieldField As DataAPI.[Date]
-        
-        Private secStateReportFileDateFieldField As DataAPI.[Date]
-        
-        Private secStateStatusDateFieldField As DataAPI.[Date]
-        
-        Private secStateStatusFieldField As String
-        
-        Private taxBalanceAmtFieldField As String
-        
-        Private taxCapitalAmtFieldField As String
-        
-        Private taxPaidAmtFieldField As String
-        
-        Private taxPercentFactorFieldField As String
-        
-        Private totalCapitalAmtFieldField As String
-        
-        Private verificationDateFieldField As DataAPI.[Date]
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property activeAgentFlagField() As String
-            Get
-                Return Me.activeAgentFlagFieldField
-            End Get
-            Set
-                Me.activeAgentFlagFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressTypeField() As String
-            Get
-                Return Me.addressTypeFieldField
-            End Get
-            Set
-                Me.addressTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property amendmentsField() As DataAPI.CorporateAmendment()
-            Get
-                Return Me.amendmentsFieldField
-            End Get
-            Set
-                Me.amendmentsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property authCapitalTotalAmtField() As String
-            Get
-                Return Me.authCapitalTotalAmtFieldField
-            End Get
-            Set
-                Me.authCapitalTotalAmtFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessDunsNumberField() As String
-            Get
-                Return Me.businessDunsNumberFieldField
-            End Get
-            Set
-                Me.businessDunsNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessNamesField() As DataAPI.BusinessName()
-            Get
-                Return Me.businessNamesFieldField
-            End Get
-            Set
-                Me.businessNamesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property corporateStockIssuesField() As DataAPI.CorporateStockIssue()
-            Get
-                Return Me.corporateStockIssuesFieldField
-            End Get
-            Set
-                Me.corporateStockIssuesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property corporationTypeField() As String
-            Get
-                Return Me.corporationTypeFieldField
-            End Get
-            Set
-                Me.corporationTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property countryField() As String
-            Get
-                Return Me.countryFieldField
-            End Get
-            Set
-                Me.countryFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateFirstSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateFirstSeenFieldField
-            End Get
-            Set
-                Me.dateFirstSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateLastSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateLastSeenFieldField
-            End Get
-            Set
-                Me.dateLastSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property distributionControlField() As String
-            Get
-                Return Me.distributionControlFieldField
-            End Get
-            Set
-                Me.distributionControlFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property expirationDateField() As DataAPI.[Date]
-            Get
-                Return Me.expirationDateFieldField
-            End Get
-            Set
-                Me.expirationDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property fEINumberField() As String
-            Get
-                Return Me.fEINumberFieldField
-            End Get
-            Set
-                Me.fEINumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property fileDateField() As DataAPI.[Date]
-            Get
-                Return Me.fileDateFieldField
-            End Get
-            Set
-                Me.fileDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property filingDateField() As DataAPI.[Date]
-            Get
-                Return Me.filingDateFieldField
-            End Get
-            Set
-                Me.filingDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property filingNumberField() As String
-            Get
-                Return Me.filingNumberFieldField
-            End Get
-            Set
-                Me.filingNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property filingOfficeBusinessTokenField() As String
-            Get
-                Return Me.filingOfficeBusinessTokenFieldField
-            End Get
-            Set
-                Me.filingOfficeBusinessTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property filingOfficeDunsNumberField() As String
-            Get
-                Return Me.filingOfficeDunsNumberFieldField
-            End Get
-            Set
-                Me.filingOfficeDunsNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property filingOfficeNameField() As String
-            Get
-                Return Me.filingOfficeNameFieldField
-            End Get
-            Set
-                Me.filingOfficeNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property fiscalYearEndDateField() As DataAPI.[Date]
-            Get
-                Return Me.fiscalYearEndDateFieldField
-            End Get
-            Set
-                Me.fiscalYearEndDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property foreignRegionField() As String
-            Get
-                Return Me.foreignRegionFieldField
-            End Get
-            Set
-                Me.foreignRegionFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property franchiseTaxBalanceAmtField() As String
-            Get
-                Return Me.franchiseTaxBalanceAmtFieldField
-            End Get
-            Set
-                Me.franchiseTaxBalanceAmtFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property franchiseTaxBoardStatusDateField() As DataAPI.[Date]
-            Get
-                Return Me.franchiseTaxBoardStatusDateFieldField
-            End Get
-            Set
-                Me.franchiseTaxBoardStatusDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property franchiseTaxBoardStatusField() As String
-            Get
-                Return Me.franchiseTaxBoardStatusFieldField
-            End Get
-            Set
-                Me.franchiseTaxBoardStatusFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property franchiseTaxPaidAmtField() As String
-            Get
-                Return Me.franchiseTaxPaidAmtFieldField
-            End Get
-            Set
-                Me.franchiseTaxPaidAmtFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property franchiseTaxPaidDateField() As DataAPI.[Date]
-            Get
-                Return Me.franchiseTaxPaidDateFieldField
-            End Get
-            Set
-                Me.franchiseTaxPaidDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property incorporationCountryField() As String
-            Get
-                Return Me.incorporationCountryFieldField
-            End Get
-            Set
-                Me.incorporationCountryFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property incorporationDateField() As DataAPI.[Date]
-            Get
-                Return Me.incorporationDateFieldField
-            End Get
-            Set
-                Me.incorporationDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property incorporationForeignRegionField() As String
-            Get
-                Return Me.incorporationForeignRegionFieldField
-            End Get
-            Set
-                Me.incorporationForeignRegionFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property incorporationStateField() As String
-            Get
-                Return Me.incorporationStateFieldField
-            End Get
-            Set
-                Me.incorporationStateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property minRequirementMetFlagField() As String
-            Get
-                Return Me.minRequirementMetFlagFieldField
-            End Get
-            Set
-                Me.minRequirementMetFlagFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property miscDetailsField() As String
-            Get
-                Return Me.miscDetailsFieldField
-            End Get
-            Set
-                Me.miscDetailsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property paidInCapitalAmtField() As String
-            Get
-                Return Me.paidInCapitalAmtFieldField
-            End Get
-            Set
-                Me.paidInCapitalAmtFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property paidInCapitalDateField() As DataAPI.[Date]
-            Get
-                Return Me.paidInCapitalDateFieldField
-            End Get
-            Set
-                Me.paidInCapitalDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property perpetualIndicatorField() As String
-            Get
-                Return Me.perpetualIndicatorFieldField
-            End Get
-            Set
-                Me.perpetualIndicatorFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property rAAppointDateField() As DataAPI.[Date]
-            Get
-                Return Me.rAAppointDateFieldField
-            End Get
-            Set
-                Me.rAAppointDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property receivedDateField() As DataAPI.[Date]
-            Get
-                Return Me.receivedDateFieldField
-            End Get
-            Set
-                Me.receivedDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property registrationTypeDescField() As String
-            Get
-                Return Me.registrationTypeDescFieldField
-            End Get
-            Set
-                Me.registrationTypeDescFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property registrationTypeField() As String
-            Get
-                Return Me.registrationTypeFieldField
-            End Get
-            Set
-                Me.registrationTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sICField() As String
-            Get
-                Return Me.sICFieldField
-            End Get
-            Set
-                Me.sICFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property secStateAnnReportDelinqDateField() As DataAPI.[Date]
-            Get
-                Return Me.secStateAnnReportDelinqDateFieldField
-            End Get
-            Set
-                Me.secStateAnnReportDelinqDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property secStateAnnReportMailDateField() As DataAPI.[Date]
-            Get
-                Return Me.secStateAnnReportMailDateFieldField
-            End Get
-            Set
-                Me.secStateAnnReportMailDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property secStateAnnualReportDueDateField() As DataAPI.[Date]
-            Get
-                Return Me.secStateAnnualReportDueDateFieldField
-            End Get
-            Set
-                Me.secStateAnnualReportDueDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property secStateLastAnnReportDateField() As DataAPI.[Date]
-            Get
-                Return Me.secStateLastAnnReportDateFieldField
-            End Get
-            Set
-                Me.secStateLastAnnReportDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property secStateReportFileDateField() As DataAPI.[Date]
-            Get
-                Return Me.secStateReportFileDateFieldField
-            End Get
-            Set
-                Me.secStateReportFileDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property secStateStatusDateField() As DataAPI.[Date]
-            Get
-                Return Me.secStateStatusDateFieldField
-            End Get
-            Set
-                Me.secStateStatusDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property secStateStatusField() As String
-            Get
-                Return Me.secStateStatusFieldField
-            End Get
-            Set
-                Me.secStateStatusFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property taxBalanceAmtField() As String
-            Get
-                Return Me.taxBalanceAmtFieldField
-            End Get
-            Set
-                Me.taxBalanceAmtFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property taxCapitalAmtField() As String
-            Get
-                Return Me.taxCapitalAmtFieldField
-            End Get
-            Set
-                Me.taxCapitalAmtFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property taxPaidAmtField() As String
-            Get
-                Return Me.taxPaidAmtFieldField
-            End Get
-            Set
-                Me.taxPaidAmtFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property taxPercentFactorField() As String
-            Get
-                Return Me.taxPercentFactorFieldField
-            End Get
-            Set
-                Me.taxPercentFactorFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property totalCapitalAmtField() As String
-            Get
-                Return Me.totalCapitalAmtFieldField
-            End Get
-            Set
-                Me.totalCapitalAmtFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property verificationDateField() As DataAPI.[Date]
-            Get
-                Return Me.verificationDateFieldField
-            End Get
-            Set
-                Me.verificationDateFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="UCCCollateralItem", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class UCCCollateralItem
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private machineryClassificationFieldField As String
-        
-        Private manufacturerFieldField As String
-        
-        Private modelDescriptionFieldField As String
-        
-        Private modelFieldField As String
-        
-        Private modelYearFieldField As String
-        
-        Private newOrUsedFieldField As String
-        
-        Private quantityFieldField As String
-        
-        Private serialNumberFieldField As String
-        
-        Private typeFieldField As String
-        
-        Private yearManufacturedFieldField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property machineryClassificationField() As String
-            Get
-                Return Me.machineryClassificationFieldField
-            End Get
-            Set
-                Me.machineryClassificationFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property manufacturerField() As String
-            Get
-                Return Me.manufacturerFieldField
-            End Get
-            Set
-                Me.manufacturerFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property modelDescriptionField() As String
-            Get
-                Return Me.modelDescriptionFieldField
-            End Get
-            Set
-                Me.modelDescriptionFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property modelField() As String
-            Get
-                Return Me.modelFieldField
-            End Get
-            Set
-                Me.modelFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property modelYearField() As String
-            Get
-                Return Me.modelYearFieldField
-            End Get
-            Set
-                Me.modelYearFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property newOrUsedField() As String
-            Get
-                Return Me.newOrUsedFieldField
-            End Get
-            Set
-                Me.newOrUsedFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property quantityField() As String
-            Get
-                Return Me.quantityFieldField
-            End Get
-            Set
-                Me.quantityFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property serialNumberField() As String
-            Get
-                Return Me.serialNumberFieldField
-            End Get
-            Set
-                Me.serialNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property typeField() As String
-            Get
-                Return Me.typeFieldField
-            End Get
-            Set
-                Me.typeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property yearManufacturedField() As String
-            Get
-                Return Me.yearManufacturedFieldField
-            End Get
-            Set
-                Me.yearManufacturedFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="UCCDebtor", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class UCCDebtor
-        Inherits DataAPI.UCCEntity
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="UCCSecuredParty", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class UCCSecuredParty
-        Inherits DataAPI.UCCEntity
-        
-        Private assigneeFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property assigneeField() As String
-            Get
-                Return Me.assigneeFieldField
-            End Get
-            Set
-                Me.assigneeFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="UCCEntityBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCEntity)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCDebtor)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCSecuredParty)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCEntity)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCSecuredParty)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCDebtor))>  _
-    Partial Public Class UCCEntityBase
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private businessNameFieldField As String
-        
-        Private businessTokenFieldField As String
-        
-        Private fEINumberFieldField As String
-        
-        Private nameFieldField As String
-        
-        Private reportTokenFieldField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessNameField() As String
-            Get
-                Return Me.businessNameFieldField
-            End Get
-            Set
-                Me.businessNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessTokenField() As String
-            Get
-                Return Me.businessTokenFieldField
-            End Get
-            Set
-                Me.businessTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property fEINumberField() As String
-            Get
-                Return Me.fEINumberFieldField
-            End Get
-            Set
-                Me.fEINumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As String
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property reportTokenField() As String
-            Get
-                Return Me.reportTokenFieldField
-            End Get
-            Set
-                Me.reportTokenFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="TLOUCCEntity", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCDebtor)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCSecuredParty))>  _
-    Partial Public Class TLOUCCEntity
-        Inherits DataAPI.UCCEntityBase
-        
-        Private addressFieldField As DataAPI.BasicAddress
-        
-        Private dateOfBirthFieldField As DataAPI.BasicDateOfBirthRecord
-        
-        Private preferredSSNRecordFieldField As DataAPI.BasicSSNRecord
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressField() As DataAPI.BasicAddress
-            Get
-                Return Me.addressFieldField
-            End Get
-            Set
-                Me.addressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfBirthField() As DataAPI.BasicDateOfBirthRecord
-            Get
-                Return Me.dateOfBirthFieldField
-            End Get
-            Set
-                Me.dateOfBirthFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property preferredSSNRecordField() As DataAPI.BasicSSNRecord
-            Get
-                Return Me.preferredSSNRecordFieldField
-            End Get
-            Set
-                Me.preferredSSNRecordFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="TLOUCCDebtor", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class TLOUCCDebtor
-        Inherits DataAPI.TLOUCCEntity
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="TLOUCCSecuredParty", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class TLOUCCSecuredParty
-        Inherits DataAPI.TLOUCCEntity
-        
-        Private assigneeFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property assigneeField() As String
-            Get
-                Return Me.assigneeFieldField
-            End Get
-            Set
-                Me.assigneeFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="UCCEntity", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCSecuredParty)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCDebtor))>  _
-    Partial Public Class UCCEntity
-        Inherits DataAPI.UCCEntityBase
-        
-        Private addressFieldField As DataAPI.Address
-        
-        Private dateOfBirthFieldField As DataAPI.DateOfBirthRecord
-        
-        Private preferredSSNRecordFieldField As DataAPI.SSNRecord
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressField() As DataAPI.Address
-            Get
-                Return Me.addressFieldField
-            End Get
-            Set
-                Me.addressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfBirthField() As DataAPI.DateOfBirthRecord
-            Get
-                Return Me.dateOfBirthFieldField
-            End Get
-            Set
-                Me.dateOfBirthFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property preferredSSNRecordField() As DataAPI.SSNRecord
-            Get
-                Return Me.preferredSSNRecordFieldField
-            End Get
-            Set
-                Me.preferredSSNRecordFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="CorporateAmendment", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class CorporateAmendment
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private amendmentDescFieldField As String
-        
-        Private filingDateFieldField As DataAPI.[Date]
-        
-        Private reasonFieldField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property amendmentDescField() As String
-            Get
-                Return Me.amendmentDescFieldField
-            End Get
-            Set
-                Me.amendmentDescFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property filingDateField() As DataAPI.[Date]
-            Get
-                Return Me.filingDateFieldField
-            End Get
-            Set
-                Me.filingDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property reasonField() As String
-            Get
-                Return Me.reasonFieldField
-            End Get
-            Set
-                Me.reasonFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessName", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class BusinessName
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private nameFieldField As String
-        
-        Private typeFieldField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As String
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property typeField() As String
-            Get
-                Return Me.typeFieldField
-            End Get
-            Set
-                Me.typeFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="CorporateStockIssue", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class CorporateStockIssue
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private authQuantityFieldField As String
-        
-        Private convertibleFlagFieldField As String
-        
-        Private dollarValueFieldField As String
-        
-        Private issuedQuantityFieldField As String
-        
-        Private parValueFieldField As String
-        
-        Private parValueFlagFieldField As String
-        
-        Private stockClassFieldField As String
-        
-        Private stockTypeFieldField As String
-        
-        Private votingRightsFlagFieldField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property authQuantityField() As String
-            Get
-                Return Me.authQuantityFieldField
-            End Get
-            Set
-                Me.authQuantityFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property convertibleFlagField() As String
-            Get
-                Return Me.convertibleFlagFieldField
-            End Get
-            Set
-                Me.convertibleFlagFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dollarValueField() As String
-            Get
-                Return Me.dollarValueFieldField
-            End Get
-            Set
-                Me.dollarValueFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property issuedQuantityField() As String
-            Get
-                Return Me.issuedQuantityFieldField
-            End Get
-            Set
-                Me.issuedQuantityFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property parValueField() As String
-            Get
-                Return Me.parValueFieldField
-            End Get
-            Set
-                Me.parValueFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property parValueFlagField() As String
-            Get
-                Return Me.parValueFlagFieldField
-            End Get
-            Set
-                Me.parValueFlagFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property stockClassField() As String
-            Get
-                Return Me.stockClassFieldField
-            End Get
-            Set
-                Me.stockClassFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property stockTypeField() As String
-            Get
-                Return Me.stockTypeFieldField
-            End Get
-            Set
-                Me.stockTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property votingRightsFlagField() As String
-            Get
-                Return Me.votingRightsFlagFieldField
-            End Get
-            Set
-                Me.votingRightsFlagFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="TLOBusinessContact", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class TLOBusinessContact
-        Inherits DataAPI.BusinessContactBase
-        
-        Private addressFieldField As DataAPI.BasicAddress
-        
-        Private dateOfBirthFieldField As DataAPI.BasicDateOfBirthRecord
-        
-        Private dateOfDeathFieldField As DataAPI.DateOfDeathRecord
-        
-        Private nameFieldField As DataAPI.BasicName
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressField() As DataAPI.BasicAddress
-            Get
-                Return Me.addressFieldField
-            End Get
-            Set
-                Me.addressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfBirthField() As DataAPI.BasicDateOfBirthRecord
-            Get
-                Return Me.dateOfBirthFieldField
-            End Get
-            Set
-                Me.dateOfBirthFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfDeathField() As DataAPI.DateOfDeathRecord
-            Get
-                Return Me.dateOfDeathFieldField
-            End Get
-            Set
-                Me.dateOfDeathFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As DataAPI.BasicName
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessContactBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BusinessContact)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOBusinessContact))>  _
-    Partial Public Class BusinessContactBase
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private bankruptcyRecordsFoundFieldField As String
-        
-        Private businessAssociationsCountFieldField As String
-        
-        Private businessNameFieldField As String
-        
-        Private contactTypeFieldField As String
-        
-        Private corporateAssociationsCountFieldField As String
-        
-        Private criminalRecordsFoundFieldField As String
-        
-        Private dateFirstSeenFieldField As DataAPI.[Date]
-        
-        Private dateLastSeenFieldField As DataAPI.[Date]
-        
-        Private individualSearchedForFieldField As String
-        
-        Private judgmentsFoundFieldField As String
-        
-        Private liensFoundFieldField As String
-        
-        Private reportTokenFieldField As String
-        
-        Private titleFieldField As String
-        
-        Private uCCFilingsFoundFieldField As String
-        
-        Private watchListRecordsFieldField() As DataAPI.WatchListRecord
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property bankruptcyRecordsFoundField() As String
-            Get
-                Return Me.bankruptcyRecordsFoundFieldField
-            End Get
-            Set
-                Me.bankruptcyRecordsFoundFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessAssociationsCountField() As String
-            Get
-                Return Me.businessAssociationsCountFieldField
-            End Get
-            Set
-                Me.businessAssociationsCountFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessNameField() As String
-            Get
-                Return Me.businessNameFieldField
-            End Get
-            Set
-                Me.businessNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property contactTypeField() As String
-            Get
-                Return Me.contactTypeFieldField
-            End Get
-            Set
-                Me.contactTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property corporateAssociationsCountField() As String
-            Get
-                Return Me.corporateAssociationsCountFieldField
-            End Get
-            Set
-                Me.corporateAssociationsCountFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property criminalRecordsFoundField() As String
-            Get
-                Return Me.criminalRecordsFoundFieldField
-            End Get
-            Set
-                Me.criminalRecordsFoundFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateFirstSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateFirstSeenFieldField
-            End Get
-            Set
-                Me.dateFirstSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateLastSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateLastSeenFieldField
-            End Get
-            Set
-                Me.dateLastSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property individualSearchedForField() As String
-            Get
-                Return Me.individualSearchedForFieldField
-            End Get
-            Set
-                Me.individualSearchedForFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property judgmentsFoundField() As String
-            Get
-                Return Me.judgmentsFoundFieldField
-            End Get
-            Set
-                Me.judgmentsFoundFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property liensFoundField() As String
-            Get
-                Return Me.liensFoundFieldField
-            End Get
-            Set
-                Me.liensFoundFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property reportTokenField() As String
-            Get
-                Return Me.reportTokenFieldField
-            End Get
-            Set
-                Me.reportTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property titleField() As String
-            Get
-                Return Me.titleFieldField
-            End Get
-            Set
-                Me.titleFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property uCCFilingsFoundField() As String
-            Get
-                Return Me.uCCFilingsFoundFieldField
-            End Get
-            Set
-                Me.uCCFilingsFoundFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property watchListRecordsField() As DataAPI.WatchListRecord()
-            Get
-                Return Me.watchListRecordsFieldField
-            End Get
-            Set
-                Me.watchListRecordsFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessContact", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class BusinessContact
-        Inherits DataAPI.BusinessContactBase
-        
-        Private addressFieldField As DataAPI.Address
-        
-        Private businessAssociationsFieldField() As DataAPI.BusinessAssociation
-        
-        Private dateOfBirthFieldField As DataAPI.DateOfBirthRecord
-        
-        Private dateOfDeathFieldField As DataAPI.DateOfDeathRecord
-        
-        Private hasArrestRecordsFieldField As String
-        
-        Private hasCriminalRecordsFieldField As String
-        
-        Private hasWarrantRecordsFieldField As String
-        
-        Private isSexOffenderFieldField As String
-        
-        Private nameFieldField As DataAPI.Name
-        
-        Private numberOfBankruptciesFieldField As String
-        
-        Private numberOfBusinessAssociationsFieldField As String
-        
-        Private numberOfCorpFilingsFieldField As String
-        
-        Private numberOfEvictionsFieldField As String
-        
-        Private numberOfForeclosuresFieldField As String
-        
-        Private numberOfJudgmentsFieldField As String
-        
-        Private numberOfLiensFieldField As String
-        
-        Private numberOfProLicensesFieldField As String
-        
-        Private numberOfProfAssociationsFieldField As String
-        
-        Private numberOfUCCFilingsFieldField As String
-        
-        Private relativesBusinessAssociationsFieldField() As DataAPI.BusinessAssociation
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressField() As DataAPI.Address
-            Get
-                Return Me.addressFieldField
-            End Get
-            Set
-                Me.addressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessAssociationsField() As DataAPI.BusinessAssociation()
-            Get
-                Return Me.businessAssociationsFieldField
-            End Get
-            Set
-                Me.businessAssociationsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfBirthField() As DataAPI.DateOfBirthRecord
-            Get
-                Return Me.dateOfBirthFieldField
-            End Get
-            Set
-                Me.dateOfBirthFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfDeathField() As DataAPI.DateOfDeathRecord
-            Get
-                Return Me.dateOfDeathFieldField
-            End Get
-            Set
-                Me.dateOfDeathFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property hasArrestRecordsField() As String
-            Get
-                Return Me.hasArrestRecordsFieldField
-            End Get
-            Set
-                Me.hasArrestRecordsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property hasCriminalRecordsField() As String
-            Get
-                Return Me.hasCriminalRecordsFieldField
-            End Get
-            Set
-                Me.hasCriminalRecordsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property hasWarrantRecordsField() As String
-            Get
-                Return Me.hasWarrantRecordsFieldField
-            End Get
-            Set
-                Me.hasWarrantRecordsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property isSexOffenderField() As String
-            Get
-                Return Me.isSexOffenderFieldField
-            End Get
-            Set
-                Me.isSexOffenderFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As DataAPI.Name
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property numberOfBankruptciesField() As String
-            Get
-                Return Me.numberOfBankruptciesFieldField
-            End Get
-            Set
-                Me.numberOfBankruptciesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property numberOfBusinessAssociationsField() As String
-            Get
-                Return Me.numberOfBusinessAssociationsFieldField
-            End Get
-            Set
-                Me.numberOfBusinessAssociationsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property numberOfCorpFilingsField() As String
-            Get
-                Return Me.numberOfCorpFilingsFieldField
-            End Get
-            Set
-                Me.numberOfCorpFilingsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property numberOfEvictionsField() As String
-            Get
-                Return Me.numberOfEvictionsFieldField
-            End Get
-            Set
-                Me.numberOfEvictionsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property numberOfForeclosuresField() As String
-            Get
-                Return Me.numberOfForeclosuresFieldField
-            End Get
-            Set
-                Me.numberOfForeclosuresFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property numberOfJudgmentsField() As String
-            Get
-                Return Me.numberOfJudgmentsFieldField
-            End Get
-            Set
-                Me.numberOfJudgmentsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property numberOfLiensField() As String
-            Get
-                Return Me.numberOfLiensFieldField
-            End Get
-            Set
-                Me.numberOfLiensFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property numberOfProLicensesField() As String
-            Get
-                Return Me.numberOfProLicensesFieldField
-            End Get
-            Set
-                Me.numberOfProLicensesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property numberOfProfAssociationsField() As String
-            Get
-                Return Me.numberOfProfAssociationsFieldField
-            End Get
-            Set
-                Me.numberOfProfAssociationsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property numberOfUCCFilingsField() As String
-            Get
-                Return Me.numberOfUCCFilingsFieldField
-            End Get
-            Set
-                Me.numberOfUCCFilingsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property relativesBusinessAssociationsField() As DataAPI.BusinessAssociation()
-            Get
-                Return Me.relativesBusinessAssociationsFieldField
-            End Get
-            Set
-                Me.relativesBusinessAssociationsFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessAssociation", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class BusinessAssociation
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private businessRolesFieldField() As DataAPI.BusinessRole
-        
-        Private nameFieldField As DataAPI.Name
-        
-        Private reportTokenFieldField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessRolesField() As DataAPI.BusinessRole()
-            Get
-                Return Me.businessRolesFieldField
-            End Get
-            Set
-                Me.businessRolesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As DataAPI.Name
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property reportTokenField() As String
-            Get
-                Return Me.reportTokenFieldField
-            End Get
-            Set
-                Me.reportTokenFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessRole", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class BusinessRole
-        Inherits DataAPI.BusinessRecord
-        
-        Private addressFieldField As DataAPI.Address
-        
-        Private nameFieldField As DataAPI.Name
-        
-        Private titleFieldField As String
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressField() As DataAPI.Address
-            Get
-                Return Me.addressFieldField
-            End Get
-            Set
-                Me.addressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As DataAPI.Name
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property titleField() As String
-            Get
-                Return Me.titleFieldField
-            End Get
-            Set
-                Me.titleFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="BusinessRecordBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOBusinessRecord)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BusinessRecord)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.BusinessRole))>  _
-    Partial Public Class BusinessRecordBase
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private businessNamesFieldField() As DataAPI.BusinessName
-        
-        Private businessTokenFieldField As String
-        
-        Private domesticWorldFlagFieldField As String
-        
-        Private fEINumberFieldField As String
-        
-        Private globalBusinessTokenFieldField As String
-        
-        Private industriesFieldField() As String
-        
-        Private industryFieldField As String
-        
-        Private parentBusinessTokenFieldField As String
-        
-        Private subsidiaryCountFieldField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessNamesField() As DataAPI.BusinessName()
-            Get
-                Return Me.businessNamesFieldField
-            End Get
-            Set
-                Me.businessNamesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessTokenField() As String
-            Get
-                Return Me.businessTokenFieldField
-            End Get
-            Set
-                Me.businessTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property domesticWorldFlagField() As String
-            Get
-                Return Me.domesticWorldFlagFieldField
-            End Get
-            Set
-                Me.domesticWorldFlagFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property fEINumberField() As String
-            Get
-                Return Me.fEINumberFieldField
-            End Get
-            Set
-                Me.fEINumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property globalBusinessTokenField() As String
-            Get
-                Return Me.globalBusinessTokenFieldField
-            End Get
-            Set
-                Me.globalBusinessTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property industriesField() As String()
-            Get
-                Return Me.industriesFieldField
-            End Get
-            Set
-                Me.industriesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property industryField() As String
-            Get
-                Return Me.industryFieldField
-            End Get
-            Set
-                Me.industryFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property parentBusinessTokenField() As String
-            Get
-                Return Me.parentBusinessTokenFieldField
-            End Get
-            Set
-                Me.parentBusinessTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property subsidiaryCountField() As String
-            Get
-                Return Me.subsidiaryCountFieldField
-            End Get
-            Set
-                Me.subsidiaryCountFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="ResidentBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.Resident)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOResident))>  _
-    Partial Public Class ResidentBase
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private arrestRecordsAvailableFieldField As String
-        
-        Private criminalRecordsAvailableFieldField As String
-        
-        Private currentAgeFieldField As String
-        
-        Private dateFirstSeenFieldField As DataAPI.[Date]
-        
-        Private dateLastSeenFieldField As DataAPI.[Date]
-        
-        Private dateOfBirthFieldField As DataAPI.[Date]
-        
-        Private dateOfDeathFieldField As DataAPI.DateOfDeathRecord
-        
-        Private emailAddressesFieldField() As String
-        
-        Private reportTokenFieldField As String
-        
-        Private sexOffenderRecordsAvailableFieldField As String
-        
-        Private warrantsAvailableFieldField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property arrestRecordsAvailableField() As String
-            Get
-                Return Me.arrestRecordsAvailableFieldField
-            End Get
-            Set
-                Me.arrestRecordsAvailableFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property criminalRecordsAvailableField() As String
-            Get
-                Return Me.criminalRecordsAvailableFieldField
-            End Get
-            Set
-                Me.criminalRecordsAvailableFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property currentAgeField() As String
-            Get
-                Return Me.currentAgeFieldField
-            End Get
-            Set
-                Me.currentAgeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateFirstSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateFirstSeenFieldField
-            End Get
-            Set
-                Me.dateFirstSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateLastSeenField() As DataAPI.[Date]
-            Get
-                Return Me.dateLastSeenFieldField
-            End Get
-            Set
-                Me.dateLastSeenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfBirthField() As DataAPI.[Date]
-            Get
-                Return Me.dateOfBirthFieldField
-            End Get
-            Set
-                Me.dateOfBirthFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dateOfDeathField() As DataAPI.DateOfDeathRecord
-            Get
-                Return Me.dateOfDeathFieldField
-            End Get
-            Set
-                Me.dateOfDeathFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property emailAddressesField() As String()
-            Get
-                Return Me.emailAddressesFieldField
-            End Get
-            Set
-                Me.emailAddressesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property reportTokenField() As String
-            Get
-                Return Me.reportTokenFieldField
-            End Get
-            Set
-                Me.reportTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sexOffenderRecordsAvailableField() As String
-            Get
-                Return Me.sexOffenderRecordsAvailableFieldField
-            End Get
-            Set
-                Me.sexOffenderRecordsAvailableFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property warrantsAvailableField() As String
-            Get
-                Return Me.warrantsAvailableFieldField
-            End Get
-            Set
-                Me.warrantsAvailableFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="Bankruptcy", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class Bankruptcy
-        Inherits DataAPI.BankruptcyBase
-        
-        Private attorneyAddressFieldField As DataAPI.Address
-        
-        Private caseStatusDateFieldField As DataAPI.[Date]
-        
-        Private caseStatusFieldField As String
-        
-        Private claimDateFieldField As DataAPI.[Date]
-        
-        Private closedDateFieldField As DataAPI.[Date]
-        
-        Private convertedDateFieldField As DataAPI.[Date]
-        
-        Private convertedFieldField As String
-        
-        Private courtAddressFieldField As DataAPI.Address
-        
-        Private debtorsFieldField() As DataAPI.BankruptcyDebtor
-        
-        Private dischargeDateFieldField As DataAPI.[Date]
-        
-        Private dismissalDateFieldField As DataAPI.[Date]
-        
-        Private fileDateFieldField As DataAPI.[Date]
-        
-        Private judgeInitialsFieldField As String
-        
-        Private liabilityAmountFieldField As String
-        
-        Private objectionDateFieldField As DataAPI.[Date]
-        
-        Private previousChapterFieldField As String
-        
-        Private proSeFieldField As String
-        
-        Private reopenedDateFieldField As DataAPI.[Date]
-        
-        Private reportDateFieldField As DataAPI.[Date]
-        
-        Private sec341MeetingAddressFieldField As DataAPI.Address
-        
-        Private sec341MeetingDateFieldField As DataAPI.[Date]
-        
-        Private sec341MeetingLocationFieldField As String
-        
-        Private sec341MeetingPhoneFieldField As String
-        
-        Private sec341MeetingTimeFieldField As DataAPI.Time
-        
-        Private transferredDateFieldField As DataAPI.[Date]
-        
-        Private trusteeAddressFieldField As DataAPI.Address
-        
-        Private trusteeBusinessNameFieldField As String
-        
-        Private trusteeFieldField As DataAPI.Name
-        
-        Private voluntaryFieldField As String
-        
-        Private withdrawnDateFieldField As DataAPI.[Date]
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property attorneyAddressField() As DataAPI.Address
-            Get
-                Return Me.attorneyAddressFieldField
-            End Get
-            Set
-                Me.attorneyAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property caseStatusDateField() As DataAPI.[Date]
-            Get
-                Return Me.caseStatusDateFieldField
-            End Get
-            Set
-                Me.caseStatusDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property caseStatusField() As String
-            Get
-                Return Me.caseStatusFieldField
-            End Get
-            Set
-                Me.caseStatusFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property claimDateField() As DataAPI.[Date]
-            Get
-                Return Me.claimDateFieldField
-            End Get
-            Set
-                Me.claimDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property closedDateField() As DataAPI.[Date]
-            Get
-                Return Me.closedDateFieldField
-            End Get
-            Set
-                Me.closedDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property convertedDateField() As DataAPI.[Date]
-            Get
-                Return Me.convertedDateFieldField
-            End Get
-            Set
-                Me.convertedDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property convertedField() As String
-            Get
-                Return Me.convertedFieldField
-            End Get
-            Set
-                Me.convertedFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property courtAddressField() As DataAPI.Address
-            Get
-                Return Me.courtAddressFieldField
-            End Get
-            Set
-                Me.courtAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property debtorsField() As DataAPI.BankruptcyDebtor()
-            Get
-                Return Me.debtorsFieldField
-            End Get
-            Set
-                Me.debtorsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dischargeDateField() As DataAPI.[Date]
-            Get
-                Return Me.dischargeDateFieldField
-            End Get
-            Set
-                Me.dischargeDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property dismissalDateField() As DataAPI.[Date]
-            Get
-                Return Me.dismissalDateFieldField
-            End Get
-            Set
-                Me.dismissalDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property fileDateField() As DataAPI.[Date]
-            Get
-                Return Me.fileDateFieldField
-            End Get
-            Set
-                Me.fileDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property judgeInitialsField() As String
-            Get
-                Return Me.judgeInitialsFieldField
-            End Get
-            Set
-                Me.judgeInitialsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property liabilityAmountField() As String
-            Get
-                Return Me.liabilityAmountFieldField
-            End Get
-            Set
-                Me.liabilityAmountFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property objectionDateField() As DataAPI.[Date]
-            Get
-                Return Me.objectionDateFieldField
-            End Get
-            Set
-                Me.objectionDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property previousChapterField() As String
-            Get
-                Return Me.previousChapterFieldField
-            End Get
-            Set
-                Me.previousChapterFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property proSeField() As String
-            Get
-                Return Me.proSeFieldField
-            End Get
-            Set
-                Me.proSeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property reopenedDateField() As DataAPI.[Date]
-            Get
-                Return Me.reopenedDateFieldField
-            End Get
-            Set
-                Me.reopenedDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property reportDateField() As DataAPI.[Date]
-            Get
-                Return Me.reportDateFieldField
-            End Get
-            Set
-                Me.reportDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sec341MeetingAddressField() As DataAPI.Address
-            Get
-                Return Me.sec341MeetingAddressFieldField
-            End Get
-            Set
-                Me.sec341MeetingAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sec341MeetingDateField() As DataAPI.[Date]
-            Get
-                Return Me.sec341MeetingDateFieldField
-            End Get
-            Set
-                Me.sec341MeetingDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sec341MeetingLocationField() As String
-            Get
-                Return Me.sec341MeetingLocationFieldField
-            End Get
-            Set
-                Me.sec341MeetingLocationFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sec341MeetingPhoneField() As String
-            Get
-                Return Me.sec341MeetingPhoneFieldField
-            End Get
-            Set
-                Me.sec341MeetingPhoneFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sec341MeetingTimeField() As DataAPI.Time
-            Get
-                Return Me.sec341MeetingTimeFieldField
-            End Get
-            Set
-                Me.sec341MeetingTimeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property transferredDateField() As DataAPI.[Date]
-            Get
-                Return Me.transferredDateFieldField
-            End Get
-            Set
-                Me.transferredDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property trusteeAddressField() As DataAPI.Address
-            Get
-                Return Me.trusteeAddressFieldField
-            End Get
-            Set
-                Me.trusteeAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property trusteeBusinessNameField() As String
-            Get
-                Return Me.trusteeBusinessNameFieldField
-            End Get
-            Set
-                Me.trusteeBusinessNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property trusteeField() As DataAPI.Name
-            Get
-                Return Me.trusteeFieldField
-            End Get
-            Set
-                Me.trusteeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property voluntaryField() As String
-            Get
-                Return Me.voluntaryFieldField
-            End Get
-            Set
-                Me.voluntaryFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property withdrawnDateField() As DataAPI.[Date]
-            Get
-                Return Me.withdrawnDateFieldField
-            End Get
-            Set
-                Me.withdrawnDateFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="BankruptcyBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute(),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOBankruptcy)),  _
-     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.Bankruptcy))>  _
-    Partial Public Class BankruptcyBase
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private assetValueFieldField As String
-        
-        Private assetsAvailableFieldField As String
-        
-        Private assetsFieldField As String
-        
-        Private attorneyEmailAddressFieldField As String
-        
-        Private attorneyFieldField As DataAPI.Name
-        
-        Private attorneyNameFieldField As String
-        
-        Private attorneyPhoneFieldField As String
-        
-        Private bookCollectIdFieldField As String
-        
-        Private caseNumberFieldField As String
-        
-        Private chapterFieldField As String
-        
-        Private courtDistrictFieldField As String
-        
-        Private courtDivisionFieldField As String
-        
-        Private courtEmailAddressFieldField As String
-        
-        Private courtIdFieldField As String
-        
-        Private courtPhoneFieldField As String
-        
-        Private cr341MeetingAddressFieldField As DataAPI.BasicAddress
-        
-        Private cr341MeetingDateFieldField As DataAPI.[Date]
-        
-        Private cr341MeetingTimeFieldField As DataAPI.Time
-        
-        Private judgeNameFieldField As String
-        
-        Private lawFirmFieldField As String
-        
-        Private noticeTypeFieldField As String
-        
-        Private nphIdFieldField As String
-        
-        Private trusteeEmailAddressFieldField As String
-        
-        Private trusteeNameFieldField As String
-        
-        Private trusteePhoneFieldField As String
-        
-        Private unlawfulDetainerFieldField As String
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property assetValueField() As String
-            Get
-                Return Me.assetValueFieldField
-            End Get
-            Set
-                Me.assetValueFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property assetsAvailableField() As String
-            Get
-                Return Me.assetsAvailableFieldField
-            End Get
-            Set
-                Me.assetsAvailableFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property assetsField() As String
-            Get
-                Return Me.assetsFieldField
-            End Get
-            Set
-                Me.assetsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property attorneyEmailAddressField() As String
-            Get
-                Return Me.attorneyEmailAddressFieldField
-            End Get
-            Set
-                Me.attorneyEmailAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property attorneyField() As DataAPI.Name
-            Get
-                Return Me.attorneyFieldField
-            End Get
-            Set
-                Me.attorneyFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property attorneyNameField() As String
-            Get
-                Return Me.attorneyNameFieldField
-            End Get
-            Set
-                Me.attorneyNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property attorneyPhoneField() As String
-            Get
-                Return Me.attorneyPhoneFieldField
-            End Get
-            Set
-                Me.attorneyPhoneFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property bookCollectIdField() As String
-            Get
-                Return Me.bookCollectIdFieldField
-            End Get
-            Set
-                Me.bookCollectIdFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property caseNumberField() As String
-            Get
-                Return Me.caseNumberFieldField
-            End Get
-            Set
-                Me.caseNumberFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property chapterField() As String
-            Get
-                Return Me.chapterFieldField
-            End Get
-            Set
-                Me.chapterFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property courtDistrictField() As String
-            Get
-                Return Me.courtDistrictFieldField
-            End Get
-            Set
-                Me.courtDistrictFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property courtDivisionField() As String
-            Get
-                Return Me.courtDivisionFieldField
-            End Get
-            Set
-                Me.courtDivisionFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property courtEmailAddressField() As String
-            Get
-                Return Me.courtEmailAddressFieldField
-            End Get
-            Set
-                Me.courtEmailAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property courtIdField() As String
-            Get
-                Return Me.courtIdFieldField
-            End Get
-            Set
-                Me.courtIdFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property courtPhoneField() As String
-            Get
-                Return Me.courtPhoneFieldField
-            End Get
-            Set
-                Me.courtPhoneFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property cr341MeetingAddressField() As DataAPI.BasicAddress
-            Get
-                Return Me.cr341MeetingAddressFieldField
-            End Get
-            Set
-                Me.cr341MeetingAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property cr341MeetingDateField() As DataAPI.[Date]
-            Get
-                Return Me.cr341MeetingDateFieldField
-            End Get
-            Set
-                Me.cr341MeetingDateFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property cr341MeetingTimeField() As DataAPI.Time
-            Get
-                Return Me.cr341MeetingTimeFieldField
-            End Get
-            Set
-                Me.cr341MeetingTimeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property judgeNameField() As String
-            Get
-                Return Me.judgeNameFieldField
-            End Get
-            Set
-                Me.judgeNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property lawFirmField() As String
-            Get
-                Return Me.lawFirmFieldField
-            End Get
-            Set
-                Me.lawFirmFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property noticeTypeField() As String
-            Get
-                Return Me.noticeTypeFieldField
-            End Get
-            Set
-                Me.noticeTypeFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nphIdField() As String
-            Get
-                Return Me.nphIdFieldField
-            End Get
-            Set
-                Me.nphIdFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property trusteeEmailAddressField() As String
-            Get
-                Return Me.trusteeEmailAddressFieldField
-            End Get
-            Set
-                Me.trusteeEmailAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property trusteeNameField() As String
-            Get
-                Return Me.trusteeNameFieldField
-            End Get
-            Set
-                Me.trusteeNameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property trusteePhoneField() As String
-            Get
-                Return Me.trusteePhoneFieldField
-            End Get
-            Set
-                Me.trusteePhoneFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property unlawfulDetainerField() As String
-            Get
-                Return Me.unlawfulDetainerFieldField
-            End Get
-            Set
-                Me.unlawfulDetainerFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="BankruptcyDebtor", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class BankruptcyDebtor
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private aKAsFieldField() As DataAPI.Name
-        
-        Private addressFieldField As DataAPI.Address
-        
-        Private businessNamesFieldField() As String
-        
-        Private emailAddressFieldField As String
-        
-        Private nameFieldField As DataAPI.Name
-        
-        Private phoneFieldField As String
-        
-        Private reportTokenFieldField As String
-        
-        Private sSNFieldField As String
-        
-        Private sSNRecordFieldField As DataAPI.SSNRecord
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property aKAsField() As DataAPI.Name()
-            Get
-                Return Me.aKAsFieldField
-            End Get
-            Set
-                Me.aKAsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressField() As DataAPI.Address
-            Get
-                Return Me.addressFieldField
-            End Get
-            Set
-                Me.addressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessNamesField() As String()
-            Get
-                Return Me.businessNamesFieldField
-            End Get
-            Set
-                Me.businessNamesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property emailAddressField() As String
-            Get
-                Return Me.emailAddressFieldField
-            End Get
-            Set
-                Me.emailAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As DataAPI.Name
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property phoneField() As String
-            Get
-                Return Me.phoneFieldField
-            End Get
-            Set
-                Me.phoneFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property reportTokenField() As String
-            Get
-                Return Me.reportTokenFieldField
-            End Get
-            Set
-                Me.reportTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sSNField() As String
-            Get
-                Return Me.sSNFieldField
-            End Get
-            Set
-                Me.sSNFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sSNRecordField() As DataAPI.SSNRecord
-            Get
-                Return Me.sSNRecordFieldField
-            End Get
-            Set
-                Me.sSNRecordFieldField = value
-            End Set
-        End Property
-    End Class
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
-     System.Runtime.Serialization.DataContractAttribute(Name:="TLOBankruptcyDebtor", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
-     System.SerializableAttribute()>  _
-    Partial Public Class TLOBankruptcyDebtor
-        Inherits Object
-        Implements System.Runtime.Serialization.IExtensibleDataObject
-        
-        <System.NonSerializedAttribute()>  _
-        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
-        
-        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
-        
-        Private aKAsFieldField() As DataAPI.BasicName
-        
-        Private addressFieldField As DataAPI.BasicAddress
-        
-        Private businessNamesFieldField() As String
-        
-        Private emailAddressFieldField As String
-        
-        Private nameFieldField As DataAPI.BasicName
-        
-        Private phoneFieldField As String
-        
-        Private reportTokenFieldField As String
-        
-        Private sSNFieldField As String
-        
-        Private sSNRecordFieldField As DataAPI.BasicSSNRecord
-        
-        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
-        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
-            Get
-                Return Me.extensionDataField
-            End Get
-            Set
-                Me.extensionDataField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
-            Get
-                Return Me.PropertyChangedEventField
-            End Get
-            Set
-                Me.PropertyChangedEventField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property aKAsField() As DataAPI.BasicName()
-            Get
-                Return Me.aKAsFieldField
-            End Get
-            Set
-                Me.aKAsFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property addressField() As DataAPI.BasicAddress
-            Get
-                Return Me.addressFieldField
-            End Get
-            Set
-                Me.addressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property businessNamesField() As String()
-            Get
-                Return Me.businessNamesFieldField
-            End Get
-            Set
-                Me.businessNamesFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property emailAddressField() As String
-            Get
-                Return Me.emailAddressFieldField
-            End Get
-            Set
-                Me.emailAddressFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property nameField() As DataAPI.BasicName
-            Get
-                Return Me.nameFieldField
-            End Get
-            Set
-                Me.nameFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property phoneField() As String
-            Get
-                Return Me.phoneFieldField
-            End Get
-            Set
-                Me.phoneFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property reportTokenField() As String
-            Get
-                Return Me.reportTokenFieldField
-            End Get
-            Set
-                Me.reportTokenFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sSNField() As String
-            Get
-                Return Me.sSNFieldField
-            End Get
-            Set
-                Me.sSNFieldField = value
-            End Set
-        End Property
-        
-        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
-        Public Property sSNRecordField() As DataAPI.BasicSSNRecord
-            Get
-                Return Me.sSNRecordFieldField
-            End Get
-            Set
-                Me.sSNRecordFieldField = value
             End Set
         End Property
     End Class
@@ -28358,6 +28568,1174 @@ Namespace DataAPI
             End Get
             Set
                 Me.withdrawnDateFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="ResidentBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOResident)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.Resident))>  _
+    Partial Public Class ResidentBase
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private arrestRecordsAvailableFieldField As String
+        
+        Private criminalRecordsAvailableFieldField As String
+        
+        Private currentAgeFieldField As String
+        
+        Private dateFirstSeenFieldField As DataAPI.[Date]
+        
+        Private dateLastSeenFieldField As DataAPI.[Date]
+        
+        Private dateOfBirthFieldField As DataAPI.[Date]
+        
+        Private dateOfDeathFieldField As DataAPI.DateOfDeathRecord
+        
+        Private emailAddressesFieldField() As String
+        
+        Private reportTokenFieldField As String
+        
+        Private sexOffenderRecordsAvailableFieldField As String
+        
+        Private warrantsAvailableFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property arrestRecordsAvailableField() As String
+            Get
+                Return Me.arrestRecordsAvailableFieldField
+            End Get
+            Set
+                Me.arrestRecordsAvailableFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property criminalRecordsAvailableField() As String
+            Get
+                Return Me.criminalRecordsAvailableFieldField
+            End Get
+            Set
+                Me.criminalRecordsAvailableFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property currentAgeField() As String
+            Get
+                Return Me.currentAgeFieldField
+            End Get
+            Set
+                Me.currentAgeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateFirstSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateFirstSeenFieldField
+            End Get
+            Set
+                Me.dateFirstSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateLastSeenField() As DataAPI.[Date]
+            Get
+                Return Me.dateLastSeenFieldField
+            End Get
+            Set
+                Me.dateLastSeenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthField() As DataAPI.[Date]
+            Get
+                Return Me.dateOfBirthFieldField
+            End Get
+            Set
+                Me.dateOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfDeathField() As DataAPI.DateOfDeathRecord
+            Get
+                Return Me.dateOfDeathFieldField
+            End Get
+            Set
+                Me.dateOfDeathFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property emailAddressesField() As String()
+            Get
+                Return Me.emailAddressesFieldField
+            End Get
+            Set
+                Me.emailAddressesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sexOffenderRecordsAvailableField() As String
+            Get
+                Return Me.sexOffenderRecordsAvailableFieldField
+            End Get
+            Set
+                Me.sexOffenderRecordsAvailableFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property warrantsAvailableField() As String
+            Get
+                Return Me.warrantsAvailableFieldField
+            End Get
+            Set
+                Me.warrantsAvailableFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="Bankruptcy", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class Bankruptcy
+        Inherits DataAPI.BankruptcyBase
+        
+        Private attorneyAddressFieldField As DataAPI.Address
+        
+        Private caseStatusDateFieldField As DataAPI.[Date]
+        
+        Private caseStatusFieldField As String
+        
+        Private claimDateFieldField As DataAPI.[Date]
+        
+        Private closedDateFieldField As DataAPI.[Date]
+        
+        Private convertedDateFieldField As DataAPI.[Date]
+        
+        Private convertedFieldField As String
+        
+        Private courtAddressFieldField As DataAPI.Address
+        
+        Private debtorsFieldField() As DataAPI.BankruptcyDebtor
+        
+        Private dischargeDateFieldField As DataAPI.[Date]
+        
+        Private dismissalDateFieldField As DataAPI.[Date]
+        
+        Private fileDateFieldField As DataAPI.[Date]
+        
+        Private judgeInitialsFieldField As String
+        
+        Private liabilityAmountFieldField As String
+        
+        Private objectionDateFieldField As DataAPI.[Date]
+        
+        Private previousChapterFieldField As String
+        
+        Private proSeFieldField As String
+        
+        Private reopenedDateFieldField As DataAPI.[Date]
+        
+        Private reportDateFieldField As DataAPI.[Date]
+        
+        Private sec341MeetingAddressFieldField As DataAPI.Address
+        
+        Private sec341MeetingDateFieldField As DataAPI.[Date]
+        
+        Private sec341MeetingLocationFieldField As String
+        
+        Private sec341MeetingPhoneFieldField As String
+        
+        Private sec341MeetingTimeFieldField As DataAPI.Time
+        
+        Private transferredDateFieldField As DataAPI.[Date]
+        
+        Private trusteeAddressFieldField As DataAPI.Address
+        
+        Private trusteeBusinessNameFieldField As String
+        
+        Private trusteeFieldField As DataAPI.Name
+        
+        Private voluntaryFieldField As String
+        
+        Private withdrawnDateFieldField As DataAPI.[Date]
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property attorneyAddressField() As DataAPI.Address
+            Get
+                Return Me.attorneyAddressFieldField
+            End Get
+            Set
+                Me.attorneyAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property caseStatusDateField() As DataAPI.[Date]
+            Get
+                Return Me.caseStatusDateFieldField
+            End Get
+            Set
+                Me.caseStatusDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property caseStatusField() As String
+            Get
+                Return Me.caseStatusFieldField
+            End Get
+            Set
+                Me.caseStatusFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property claimDateField() As DataAPI.[Date]
+            Get
+                Return Me.claimDateFieldField
+            End Get
+            Set
+                Me.claimDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property closedDateField() As DataAPI.[Date]
+            Get
+                Return Me.closedDateFieldField
+            End Get
+            Set
+                Me.closedDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property convertedDateField() As DataAPI.[Date]
+            Get
+                Return Me.convertedDateFieldField
+            End Get
+            Set
+                Me.convertedDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property convertedField() As String
+            Get
+                Return Me.convertedFieldField
+            End Get
+            Set
+                Me.convertedFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property courtAddressField() As DataAPI.Address
+            Get
+                Return Me.courtAddressFieldField
+            End Get
+            Set
+                Me.courtAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property debtorsField() As DataAPI.BankruptcyDebtor()
+            Get
+                Return Me.debtorsFieldField
+            End Get
+            Set
+                Me.debtorsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dischargeDateField() As DataAPI.[Date]
+            Get
+                Return Me.dischargeDateFieldField
+            End Get
+            Set
+                Me.dischargeDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dismissalDateField() As DataAPI.[Date]
+            Get
+                Return Me.dismissalDateFieldField
+            End Get
+            Set
+                Me.dismissalDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property fileDateField() As DataAPI.[Date]
+            Get
+                Return Me.fileDateFieldField
+            End Get
+            Set
+                Me.fileDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property judgeInitialsField() As String
+            Get
+                Return Me.judgeInitialsFieldField
+            End Get
+            Set
+                Me.judgeInitialsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property liabilityAmountField() As String
+            Get
+                Return Me.liabilityAmountFieldField
+            End Get
+            Set
+                Me.liabilityAmountFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property objectionDateField() As DataAPI.[Date]
+            Get
+                Return Me.objectionDateFieldField
+            End Get
+            Set
+                Me.objectionDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property previousChapterField() As String
+            Get
+                Return Me.previousChapterFieldField
+            End Get
+            Set
+                Me.previousChapterFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property proSeField() As String
+            Get
+                Return Me.proSeFieldField
+            End Get
+            Set
+                Me.proSeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reopenedDateField() As DataAPI.[Date]
+            Get
+                Return Me.reopenedDateFieldField
+            End Get
+            Set
+                Me.reopenedDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportDateField() As DataAPI.[Date]
+            Get
+                Return Me.reportDateFieldField
+            End Get
+            Set
+                Me.reportDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sec341MeetingAddressField() As DataAPI.Address
+            Get
+                Return Me.sec341MeetingAddressFieldField
+            End Get
+            Set
+                Me.sec341MeetingAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sec341MeetingDateField() As DataAPI.[Date]
+            Get
+                Return Me.sec341MeetingDateFieldField
+            End Get
+            Set
+                Me.sec341MeetingDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sec341MeetingLocationField() As String
+            Get
+                Return Me.sec341MeetingLocationFieldField
+            End Get
+            Set
+                Me.sec341MeetingLocationFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sec341MeetingPhoneField() As String
+            Get
+                Return Me.sec341MeetingPhoneFieldField
+            End Get
+            Set
+                Me.sec341MeetingPhoneFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sec341MeetingTimeField() As DataAPI.Time
+            Get
+                Return Me.sec341MeetingTimeFieldField
+            End Get
+            Set
+                Me.sec341MeetingTimeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property transferredDateField() As DataAPI.[Date]
+            Get
+                Return Me.transferredDateFieldField
+            End Get
+            Set
+                Me.transferredDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property trusteeAddressField() As DataAPI.Address
+            Get
+                Return Me.trusteeAddressFieldField
+            End Get
+            Set
+                Me.trusteeAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property trusteeBusinessNameField() As String
+            Get
+                Return Me.trusteeBusinessNameFieldField
+            End Get
+            Set
+                Me.trusteeBusinessNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property trusteeField() As DataAPI.Name
+            Get
+                Return Me.trusteeFieldField
+            End Get
+            Set
+                Me.trusteeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property voluntaryField() As String
+            Get
+                Return Me.voluntaryFieldField
+            End Get
+            Set
+                Me.voluntaryFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property withdrawnDateField() As DataAPI.[Date]
+            Get
+                Return Me.withdrawnDateFieldField
+            End Get
+            Set
+                Me.withdrawnDateFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="BankruptcyBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOBankruptcy)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.Bankruptcy))>  _
+    Partial Public Class BankruptcyBase
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private assetValueFieldField As String
+        
+        Private assetsAvailableFieldField As String
+        
+        Private assetsFieldField As String
+        
+        Private attorneyEmailAddressFieldField As String
+        
+        Private attorneyFieldField As DataAPI.Name
+        
+        Private attorneyNameFieldField As String
+        
+        Private attorneyPhoneFieldField As String
+        
+        Private bookCollectIdFieldField As String
+        
+        Private caseNumberFieldField As String
+        
+        Private chapterFieldField As String
+        
+        Private courtDistrictFieldField As String
+        
+        Private courtDivisionFieldField As String
+        
+        Private courtEmailAddressFieldField As String
+        
+        Private courtIdFieldField As String
+        
+        Private courtPhoneFieldField As String
+        
+        Private cr341MeetingAddressFieldField As DataAPI.BasicAddress
+        
+        Private cr341MeetingDateFieldField As DataAPI.[Date]
+        
+        Private cr341MeetingTimeFieldField As DataAPI.Time
+        
+        Private judgeNameFieldField As String
+        
+        Private lawFirmFieldField As String
+        
+        Private noticeTypeFieldField As String
+        
+        Private nphIdFieldField As String
+        
+        Private trusteeEmailAddressFieldField As String
+        
+        Private trusteeNameFieldField As String
+        
+        Private trusteePhoneFieldField As String
+        
+        Private unlawfulDetainerFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property assetValueField() As String
+            Get
+                Return Me.assetValueFieldField
+            End Get
+            Set
+                Me.assetValueFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property assetsAvailableField() As String
+            Get
+                Return Me.assetsAvailableFieldField
+            End Get
+            Set
+                Me.assetsAvailableFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property assetsField() As String
+            Get
+                Return Me.assetsFieldField
+            End Get
+            Set
+                Me.assetsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property attorneyEmailAddressField() As String
+            Get
+                Return Me.attorneyEmailAddressFieldField
+            End Get
+            Set
+                Me.attorneyEmailAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property attorneyField() As DataAPI.Name
+            Get
+                Return Me.attorneyFieldField
+            End Get
+            Set
+                Me.attorneyFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property attorneyNameField() As String
+            Get
+                Return Me.attorneyNameFieldField
+            End Get
+            Set
+                Me.attorneyNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property attorneyPhoneField() As String
+            Get
+                Return Me.attorneyPhoneFieldField
+            End Get
+            Set
+                Me.attorneyPhoneFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property bookCollectIdField() As String
+            Get
+                Return Me.bookCollectIdFieldField
+            End Get
+            Set
+                Me.bookCollectIdFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property caseNumberField() As String
+            Get
+                Return Me.caseNumberFieldField
+            End Get
+            Set
+                Me.caseNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property chapterField() As String
+            Get
+                Return Me.chapterFieldField
+            End Get
+            Set
+                Me.chapterFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property courtDistrictField() As String
+            Get
+                Return Me.courtDistrictFieldField
+            End Get
+            Set
+                Me.courtDistrictFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property courtDivisionField() As String
+            Get
+                Return Me.courtDivisionFieldField
+            End Get
+            Set
+                Me.courtDivisionFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property courtEmailAddressField() As String
+            Get
+                Return Me.courtEmailAddressFieldField
+            End Get
+            Set
+                Me.courtEmailAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property courtIdField() As String
+            Get
+                Return Me.courtIdFieldField
+            End Get
+            Set
+                Me.courtIdFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property courtPhoneField() As String
+            Get
+                Return Me.courtPhoneFieldField
+            End Get
+            Set
+                Me.courtPhoneFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property cr341MeetingAddressField() As DataAPI.BasicAddress
+            Get
+                Return Me.cr341MeetingAddressFieldField
+            End Get
+            Set
+                Me.cr341MeetingAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property cr341MeetingDateField() As DataAPI.[Date]
+            Get
+                Return Me.cr341MeetingDateFieldField
+            End Get
+            Set
+                Me.cr341MeetingDateFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property cr341MeetingTimeField() As DataAPI.Time
+            Get
+                Return Me.cr341MeetingTimeFieldField
+            End Get
+            Set
+                Me.cr341MeetingTimeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property judgeNameField() As String
+            Get
+                Return Me.judgeNameFieldField
+            End Get
+            Set
+                Me.judgeNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property lawFirmField() As String
+            Get
+                Return Me.lawFirmFieldField
+            End Get
+            Set
+                Me.lawFirmFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property noticeTypeField() As String
+            Get
+                Return Me.noticeTypeFieldField
+            End Get
+            Set
+                Me.noticeTypeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nphIdField() As String
+            Get
+                Return Me.nphIdFieldField
+            End Get
+            Set
+                Me.nphIdFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property trusteeEmailAddressField() As String
+            Get
+                Return Me.trusteeEmailAddressFieldField
+            End Get
+            Set
+                Me.trusteeEmailAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property trusteeNameField() As String
+            Get
+                Return Me.trusteeNameFieldField
+            End Get
+            Set
+                Me.trusteeNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property trusteePhoneField() As String
+            Get
+                Return Me.trusteePhoneFieldField
+            End Get
+            Set
+                Me.trusteePhoneFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property unlawfulDetainerField() As String
+            Get
+                Return Me.unlawfulDetainerFieldField
+            End Get
+            Set
+                Me.unlawfulDetainerFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="BankruptcyDebtor", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class BankruptcyDebtor
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private aKAsFieldField() As DataAPI.Name
+        
+        Private addressFieldField As DataAPI.Address
+        
+        Private businessNamesFieldField() As String
+        
+        Private emailAddressFieldField As String
+        
+        Private nameFieldField As DataAPI.Name
+        
+        Private phoneFieldField As String
+        
+        Private reportTokenFieldField As String
+        
+        Private sSNFieldField As String
+        
+        Private sSNRecordFieldField As DataAPI.SSNRecord
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property aKAsField() As DataAPI.Name()
+            Get
+                Return Me.aKAsFieldField
+            End Get
+            Set
+                Me.aKAsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.Address
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessNamesField() As String()
+            Get
+                Return Me.businessNamesFieldField
+            End Get
+            Set
+                Me.businessNamesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property emailAddressField() As String
+            Get
+                Return Me.emailAddressFieldField
+            End Get
+            Set
+                Me.emailAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.Name
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property phoneField() As String
+            Get
+                Return Me.phoneFieldField
+            End Get
+            Set
+                Me.phoneFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sSNField() As String
+            Get
+                Return Me.sSNFieldField
+            End Get
+            Set
+                Me.sSNFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sSNRecordField() As DataAPI.SSNRecord
+            Get
+                Return Me.sSNRecordFieldField
+            End Get
+            Set
+                Me.sSNRecordFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOBankruptcyDebtor", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLOBankruptcyDebtor
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private aKAsFieldField() As DataAPI.BasicName
+        
+        Private addressFieldField As DataAPI.BasicAddress
+        
+        Private businessNamesFieldField() As String
+        
+        Private emailAddressFieldField As String
+        
+        Private nameFieldField As DataAPI.BasicName
+        
+        Private phoneFieldField As String
+        
+        Private reportTokenFieldField As String
+        
+        Private sSNFieldField As String
+        
+        Private sSNRecordFieldField As DataAPI.BasicSSNRecord
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property aKAsField() As DataAPI.BasicName()
+            Get
+                Return Me.aKAsFieldField
+            End Get
+            Set
+                Me.aKAsFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.BasicAddress
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessNamesField() As String()
+            Get
+                Return Me.businessNamesFieldField
+            End Get
+            Set
+                Me.businessNamesFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property emailAddressField() As String
+            Get
+                Return Me.emailAddressFieldField
+            End Get
+            Set
+                Me.emailAddressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As DataAPI.BasicName
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property phoneField() As String
+            Get
+                Return Me.phoneFieldField
+            End Get
+            Set
+                Me.phoneFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sSNField() As String
+            Get
+                Return Me.sSNFieldField
+            End Get
+            Set
+                Me.sSNFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property sSNRecordField() As DataAPI.BasicSSNRecord
+            Get
+                Return Me.sSNRecordFieldField
+            End Get
+            Set
+                Me.sSNRecordFieldField = value
             End Set
         End Property
     End Class
@@ -34878,6 +36256,408 @@ Namespace DataAPI
             End Get
             Set
                 Me.eventDateFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="UCCCollateralItem", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class UCCCollateralItem
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private machineryClassificationFieldField As String
+        
+        Private manufacturerFieldField As String
+        
+        Private modelDescriptionFieldField As String
+        
+        Private modelFieldField As String
+        
+        Private modelYearFieldField As String
+        
+        Private newOrUsedFieldField As String
+        
+        Private quantityFieldField As String
+        
+        Private serialNumberFieldField As String
+        
+        Private typeFieldField As String
+        
+        Private yearManufacturedFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property machineryClassificationField() As String
+            Get
+                Return Me.machineryClassificationFieldField
+            End Get
+            Set
+                Me.machineryClassificationFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property manufacturerField() As String
+            Get
+                Return Me.manufacturerFieldField
+            End Get
+            Set
+                Me.manufacturerFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property modelDescriptionField() As String
+            Get
+                Return Me.modelDescriptionFieldField
+            End Get
+            Set
+                Me.modelDescriptionFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property modelField() As String
+            Get
+                Return Me.modelFieldField
+            End Get
+            Set
+                Me.modelFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property modelYearField() As String
+            Get
+                Return Me.modelYearFieldField
+            End Get
+            Set
+                Me.modelYearFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property newOrUsedField() As String
+            Get
+                Return Me.newOrUsedFieldField
+            End Get
+            Set
+                Me.newOrUsedFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property quantityField() As String
+            Get
+                Return Me.quantityFieldField
+            End Get
+            Set
+                Me.quantityFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property serialNumberField() As String
+            Get
+                Return Me.serialNumberFieldField
+            End Get
+            Set
+                Me.serialNumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property typeField() As String
+            Get
+                Return Me.typeFieldField
+            End Get
+            Set
+                Me.typeFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property yearManufacturedField() As String
+            Get
+                Return Me.yearManufacturedFieldField
+            End Get
+            Set
+                Me.yearManufacturedFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="UCCDebtor", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class UCCDebtor
+        Inherits DataAPI.UCCEntity
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="UCCSecuredParty", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class UCCSecuredParty
+        Inherits DataAPI.UCCEntity
+        
+        Private assigneeFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property assigneeField() As String
+            Get
+                Return Me.assigneeFieldField
+            End Get
+            Set
+                Me.assigneeFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOUCCDebtor", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLOUCCDebtor
+        Inherits DataAPI.TLOUCCEntity
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOUCCSecuredParty", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute()>  _
+    Partial Public Class TLOUCCSecuredParty
+        Inherits DataAPI.TLOUCCEntity
+        
+        Private assigneeFieldField As String
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property assigneeField() As String
+            Get
+                Return Me.assigneeFieldField
+            End Get
+            Set
+                Me.assigneeFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="UCCEntityBase", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCEntity)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCDebtor)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCSecuredParty)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCEntity)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCSecuredParty)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCDebtor))>  _
+    Partial Public Class UCCEntityBase
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+        
+        <System.NonSerializedAttribute()>  _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+        
+        Private PropertyChangedEventField As System.ComponentModel.PropertyChangedEventHandler
+        
+        Private businessNameFieldField As String
+        
+        Private businessTokenFieldField As String
+        
+        Private fEINumberFieldField As String
+        
+        Private nameFieldField As String
+        
+        Private reportTokenFieldField As String
+        
+        <Global.System.ComponentModel.BrowsableAttribute(false)>  _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set
+                Me.extensionDataField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property PropertyChangedEvent() As System.ComponentModel.PropertyChangedEventHandler
+            Get
+                Return Me.PropertyChangedEventField
+            End Get
+            Set
+                Me.PropertyChangedEventField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessNameField() As String
+            Get
+                Return Me.businessNameFieldField
+            End Get
+            Set
+                Me.businessNameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property businessTokenField() As String
+            Get
+                Return Me.businessTokenFieldField
+            End Get
+            Set
+                Me.businessTokenFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property fEINumberField() As String
+            Get
+                Return Me.fEINumberFieldField
+            End Get
+            Set
+                Me.fEINumberFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property nameField() As String
+            Get
+                Return Me.nameFieldField
+            End Get
+            Set
+                Me.nameFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property reportTokenField() As String
+            Get
+                Return Me.reportTokenFieldField
+            End Get
+            Set
+                Me.reportTokenFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="UCCEntity", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCDebtor)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.UCCSecuredParty))>  _
+    Partial Public Class UCCEntity
+        Inherits DataAPI.UCCEntityBase
+        
+        Private addressFieldField As DataAPI.Address
+        
+        Private dateOfBirthFieldField As DataAPI.DateOfBirthRecord
+        
+        Private preferredSSNRecordFieldField As DataAPI.SSNRecord
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.Address
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthField() As DataAPI.DateOfBirthRecord
+            Get
+                Return Me.dateOfBirthFieldField
+            End Get
+            Set
+                Me.dateOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property preferredSSNRecordField() As DataAPI.SSNRecord
+            Get
+                Return Me.preferredSSNRecordFieldField
+            End Get
+            Set
+                Me.preferredSSNRecordFieldField = value
+            End Set
+        End Property
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"),  _
+     System.Runtime.Serialization.DataContractAttribute(Name:="TLOUCCEntity", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService"),  _
+     System.SerializableAttribute(),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCSecuredParty)),  _
+     System.Runtime.Serialization.KnownTypeAttribute(GetType(DataAPI.TLOUCCDebtor))>  _
+    Partial Public Class TLOUCCEntity
+        Inherits DataAPI.UCCEntityBase
+        
+        Private addressFieldField As DataAPI.BasicAddress
+        
+        Private dateOfBirthFieldField As DataAPI.BasicDateOfBirthRecord
+        
+        Private preferredSSNRecordFieldField As DataAPI.BasicSSNRecord
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property addressField() As DataAPI.BasicAddress
+            Get
+                Return Me.addressFieldField
+            End Get
+            Set
+                Me.addressFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property dateOfBirthField() As DataAPI.BasicDateOfBirthRecord
+            Get
+                Return Me.dateOfBirthFieldField
+            End Get
+            Set
+                Me.dateOfBirthFieldField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute(IsRequired:=true)>  _
+        Public Property preferredSSNRecordField() As DataAPI.BasicSSNRecord
+            Get
+                Return Me.preferredSSNRecordFieldField
+            End Get
+            Set
+                Me.preferredSSNRecordFieldField = value
             End Set
         End Property
     End Class
@@ -42119,6 +43899,12 @@ Namespace DataAPI
         Private StateField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ToResearchField As Boolean
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private WhoIsField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private ZipField As String
         
         <Global.System.ComponentModel.BrowsableAttribute(false)>  _
@@ -42218,6 +44004,26 @@ Namespace DataAPI
             End Get
             Set
                 Me.StateField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ToResearch() As Boolean
+            Get
+                Return Me.ToResearchField
+            End Get
+            Set
+                Me.ToResearchField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property WhoIs() As String
+            Get
+                Return Me.WhoIsField
+            End Get
+            Set
+                Me.WhoIsField = value
             End Set
         End Property
         
@@ -43346,6 +45152,9 @@ Namespace DataAPI
         Private RemarksField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private Researched_ByField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private SCOUNTYField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
@@ -43977,6 +45786,16 @@ Namespace DataAPI
             End Get
             Set
                 Me.RemarksField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property Researched_By() As String
+            Get
+                Return Me.Researched_ByField
+            End Get
+            Set
+                Me.Researched_ByField = value
             End Set
         End Property
         
@@ -44866,6 +46685,12 @@ Namespace DataAPI
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReport", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReportResponse")>  _
         Function AAbs_GetAreAbstractReportAsync(ByVal BBLE As String, ByVal SelectedOwners() As DataAPI.OwnerInfo, ByVal RunJudgement As Boolean, ByVal RunFederalTaxLiens As Boolean, ByVal RunMortgages As Boolean, ByVal RunParkingViolation As Boolean, ByVal RunPatriot As Boolean, ByVal RunUcc As Boolean, ByVal RunBankruptcy As Boolean, ByVal RunECB As Boolean, ByVal RunEmergenyRepairs As Boolean, ByVal RunTransitAdjudication As Boolean, ByVal RunTLO As Boolean, ByVal RetainRecords As Boolean) As System.Threading.Tasks.Task(Of DataAPI.AB_Report_Out)
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO_Person", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLO_PersonResponse")>  _
+        Function Get_TLO_Person(ByVal APIorderNum As Integer, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As DataAPI.TLOPersonSearchOutput
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO_Person", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLO_PersonResponse")>  _
+        Function Get_TLO_PersonAsync(ByVal APIorderNum As Integer, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As System.Threading.Tasks.Task(Of DataAPI.TLOPersonSearchOutput)
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -45161,6 +46986,14 @@ Namespace DataAPI
         
         Public Function AAbs_GetAreAbstractReportAsync(ByVal BBLE As String, ByVal SelectedOwners() As DataAPI.OwnerInfo, ByVal RunJudgement As Boolean, ByVal RunFederalTaxLiens As Boolean, ByVal RunMortgages As Boolean, ByVal RunParkingViolation As Boolean, ByVal RunPatriot As Boolean, ByVal RunUcc As Boolean, ByVal RunBankruptcy As Boolean, ByVal RunECB As Boolean, ByVal RunEmergenyRepairs As Boolean, ByVal RunTransitAdjudication As Boolean, ByVal RunTLO As Boolean, ByVal RetainRecords As Boolean) As System.Threading.Tasks.Task(Of DataAPI.AB_Report_Out) Implements DataAPI.IWCFMacros.AAbs_GetAreAbstractReportAsync
             Return MyBase.Channel.AAbs_GetAreAbstractReportAsync(BBLE, SelectedOwners, RunJudgement, RunFederalTaxLiens, RunMortgages, RunParkingViolation, RunPatriot, RunUcc, RunBankruptcy, RunECB, RunEmergenyRepairs, RunTransitAdjudication, RunTLO, RetainRecords)
+        End Function
+        
+        Public Function Get_TLO_Person(ByVal APIorderNum As Integer, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As DataAPI.TLOPersonSearchOutput Implements DataAPI.IWCFMacros.Get_TLO_Person
+            Return MyBase.Channel.Get_TLO_Person(APIorderNum, FullName, Name, UseExactFirstNameMatch, UsePhoneticLastNameMatch, Address, SSN, DateOfBirth, MinimumAge, MaximumAge, Phone, DriversLicenseNumber, EmailAddress, IPAddress, Domain)
+        End Function
+        
+        Public Function Get_TLO_PersonAsync(ByVal APIorderNum As Integer, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As System.Threading.Tasks.Task(Of DataAPI.TLOPersonSearchOutput) Implements DataAPI.IWCFMacros.Get_TLO_PersonAsync
+            Return MyBase.Channel.Get_TLO_PersonAsync(APIorderNum, FullName, Name, UseExactFirstNameMatch, UsePhoneticLastNameMatch, Address, SSN, DateOfBirth, MinimumAge, MaximumAge, Phone, DriversLicenseNumber, EmailAddress, IPAddress, Domain)
         End Function
     End Class
 End Namespace

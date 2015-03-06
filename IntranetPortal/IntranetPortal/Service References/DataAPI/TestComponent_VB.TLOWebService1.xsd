@@ -4587,4 +4587,256 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="TLOEmployer" nillable="true" type="tns:TLOEmployer" />
+  <xs:complexType name="TLOPersonSearchOutput">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TLOGenericSearchOutputBaseOfTLOGenericSearchInput">
+        <xs:sequence>
+          <xs:element name="abbreviatedResultField" nillable="true" type="xs:string" />
+          <xs:element name="personSearchOutputRecordsField" nillable="true" type="tns:ArrayOfTLOPersonSearchOutputRecord" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TLOPersonSearchOutput" nillable="true" type="tns:TLOPersonSearchOutput" />
+  <xs:complexType name="TLOGenericSearchOutputBaseOfTLOGenericSearchInput">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TLOResponseOutput">
+        <xs:sequence>
+          <xs:element name="actualSearchInputField" nillable="true" type="tns:TLOGenericSearchInput" />
+          <xs:element name="numberOfRecordsFoundWithModifiedSearchField" type="xs:int" />
+          <xs:element name="searchModifiedField" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TLOGenericSearchOutputBaseOfTLOGenericSearchInput" nillable="true" type="tns:TLOGenericSearchOutputBaseOfTLOGenericSearchInput" />
+  <xs:complexType name="TLOGenericSearchInput">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:TLORequestInput">
+        <xs:sequence>
+          <xs:element name="addressField" nillable="true" type="tns:AddressBase" />
+          <xs:element name="businessNameField" nillable="true" type="xs:string" />
+          <xs:element name="businessTokenField" nillable="true" type="xs:string" />
+          <xs:element name="dateOfBirthField" nillable="true" type="tns:Date" />
+          <xs:element name="doNotModifySearchField" nillable="true" type="xs:string" />
+          <xs:element name="domainField" nillable="true" type="xs:string" />
+          <xs:element name="driversLicenseNumberField" nillable="true" type="xs:string" />
+          <xs:element name="driversLicenseNumberTokenField" nillable="true" type="xs:string" />
+          <xs:element name="dunsNumberField" nillable="true" type="xs:string" />
+          <xs:element name="emailAddressField" nillable="true" type="xs:string" />
+          <xs:element name="fEINumberField" nillable="true" type="xs:string" />
+          <xs:element name="findBestMatchField" nillable="true" type="xs:string" />
+          <xs:element name="fullNameField" nillable="true" type="xs:string" />
+          <xs:element name="iPAddressField" nillable="true" type="xs:string" />
+          <xs:element name="licensePlateField" nillable="true" type="xs:string" />
+          <xs:element name="licensePlateStateField" nillable="true" type="xs:string" />
+          <xs:element name="licensePlateTokenField" nillable="true" type="xs:string" />
+          <xs:element name="maximumAddressesField" nillable="true" type="xs:string" />
+          <xs:element name="maximumAgeField" nillable="true" type="xs:string" />
+          <xs:element name="minimumAgeField" nillable="true" type="xs:string" />
+          <xs:element name="nameField" nillable="true" type="tns:NameBase" />
+          <xs:element name="phoneField" nillable="true" type="xs:string" />
+          <xs:element name="radiusField" nillable="true" type="xs:string" />
+          <xs:element name="reportTokenField" nillable="true" type="xs:string" />
+          <xs:element name="returnAllRecordsLinkedToSSNField" nillable="true" type="xs:string" />
+          <xs:element name="sSNField" nillable="true" type="xs:string" />
+          <xs:element name="useExactFirstNameMatchField" nillable="true" type="xs:string" />
+          <xs:element name="usePhoneticLastNameMatchField" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TLOGenericSearchInput" nillable="true" type="tns:TLOGenericSearchInput" />
+  <xs:complexType name="TLORequestInput">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RequestIdentification">
+        <xs:sequence>
+          <xs:element name="dPPAPurposeField" nillable="true" type="xs:string" />
+          <xs:element name="gLBPurposeField" nillable="true" type="xs:string" />
+          <xs:element name="numberOfRecordsField" type="xs:int" />
+          <xs:element name="permissibleUseCodeField" nillable="true" type="xs:string" />
+          <xs:element name="startingRecordField" type="xs:int" />
+          <xs:element name="versionField" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TLORequestInput" nillable="true" type="tns:TLORequestInput" />
+  <xs:complexType name="RequestIdentification">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:RequestCredentials">
+        <xs:sequence>
+          <xs:element name="caseNumberField" nillable="true" type="xs:string" />
+          <xs:element name="requestIdField" nillable="true" type="xs:string" />
+          <xs:element name="userDataField" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RequestIdentification" nillable="true" type="tns:RequestIdentification" />
+  <xs:complexType name="RequestCredentials">
+    <xs:sequence>
+      <xs:element xmlns:q108="http://schemas.datacontract.org/2004/07/System.ComponentModel" name="PropertyChangedEvent" nillable="true" type="q108:PropertyChangedEventHandler" />
+      <xs:element name="hostIPField" nillable="true" type="xs:string" />
+      <xs:element name="passwordField" nillable="true" type="xs:string" />
+      <xs:element name="usernameField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RequestCredentials" nillable="true" type="tns:RequestCredentials" />
+  <xs:complexType name="ArrayOfTLOPersonSearchOutputRecord">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TLOPersonSearchOutputRecord" nillable="true" type="tns:TLOPersonSearchOutputRecord" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTLOPersonSearchOutputRecord" nillable="true" type="tns:ArrayOfTLOPersonSearchOutputRecord" />
+  <xs:complexType name="TLOPersonSearchOutputRecord">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:PersonSearchOutputRecordBase">
+        <xs:sequence>
+          <xs:element name="addressSatisfyingSearchField" nillable="true" type="tns:BasicAddress" />
+          <xs:element name="addressesField" nillable="true" type="tns:ArrayOfBasicAddressRecord" />
+          <xs:element name="datesOfBirthField" nillable="true" type="tns:ArrayOfBasicDateOfBirthRecord" />
+          <xs:element name="distanceFromLocationField" nillable="true" type="xs:string" />
+          <xs:element name="driversLicensesField" nillable="true" type="tns:ArrayOfTLODriversLicense" />
+          <xs:element name="individualsSharingSSNField" nillable="true" type="tns:ArrayOfTLOIndividualSharingSSN" />
+          <xs:element name="namesField" nillable="true" type="tns:ArrayOfBasicName" />
+          <xs:element name="numberOfUtilityRecordsAvailableField" nillable="true" type="xs:string" />
+          <xs:element name="otherPhonesField" nillable="true" type="tns:ArrayOfBasicPhoneListing" />
+          <xs:element xmlns:q109="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="pictureURLsField" nillable="true" type="q109:ArrayOfstring" />
+          <xs:element name="possibleSexOffenderField" nillable="true" type="xs:string" />
+          <xs:element name="professionalLicensesField" nillable="true" type="tns:ArrayOfTLOProfessionalLicense" />
+          <xs:element name="relativesField" nillable="true" type="tns:ArrayOfTLOPersonSearchRelative" />
+          <xs:element name="sexOffenderRecordsField" nillable="true" type="tns:ArrayOfTLOSexOffenderRecord" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TLOPersonSearchOutputRecord" nillable="true" type="tns:TLOPersonSearchOutputRecord" />
+  <xs:complexType name="PersonSearchOutputRecordBase">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseOutputRecord">
+        <xs:sequence>
+          <xs:element name="dateFirstSeenField" nillable="true" type="tns:Date" />
+          <xs:element name="dateLastSeenField" nillable="true" type="tns:Date" />
+          <xs:element name="datesOfDeathField" nillable="true" type="tns:ArrayOfDateOfDeathRecord" />
+          <xs:element xmlns:q110="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="emailAddressesField" nillable="true" type="q110:ArrayOfstring" />
+          <xs:element name="mostRecentBankruptcyDateField" nillable="true" type="tns:Date" />
+          <xs:element name="mostRecentBankruptcyRecordDateField" nillable="true" type="tns:Date" />
+          <xs:element name="mostRecentJudgmentDateField" nillable="true" type="tns:Date" />
+          <xs:element name="mostRecentLienDateField" nillable="true" type="tns:Date" />
+          <xs:element name="numberOfAddressesField" nillable="true" type="xs:string" />
+          <xs:element name="numberOfBankruptciesField" nillable="true" type="xs:string" />
+          <xs:element name="numberOfBankruptcyRecordsField" nillable="true" type="xs:string" />
+          <xs:element name="numberOfJudgmentsField" nillable="true" type="xs:string" />
+          <xs:element name="numberOfLiensField" nillable="true" type="xs:string" />
+          <xs:element name="reportTokenField" nillable="true" type="xs:string" />
+          <xs:element name="sSNRecordsField" nillable="true" type="tns:ArrayOfSSNRecord" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PersonSearchOutputRecordBase" nillable="true" type="tns:PersonSearchOutputRecordBase" />
+  <xs:complexType name="ArrayOfDateOfDeathRecord">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DateOfDeathRecord" nillable="true" type="tns:DateOfDeathRecord" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDateOfDeathRecord" nillable="true" type="tns:ArrayOfDateOfDeathRecord" />
+  <xs:complexType name="ArrayOfBasicDateOfBirthRecord">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BasicDateOfBirthRecord" nillable="true" type="tns:BasicDateOfBirthRecord" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBasicDateOfBirthRecord" nillable="true" type="tns:ArrayOfBasicDateOfBirthRecord" />
+  <xs:complexType name="ArrayOfTLOIndividualSharingSSN">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TLOIndividualSharingSSN" nillable="true" type="tns:TLOIndividualSharingSSN" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTLOIndividualSharingSSN" nillable="true" type="tns:ArrayOfTLOIndividualSharingSSN" />
+  <xs:complexType name="TLOIndividualSharingSSN">
+    <xs:sequence>
+      <xs:element xmlns:q111="http://schemas.datacontract.org/2004/07/System.ComponentModel" name="PropertyChangedEvent" nillable="true" type="q111:PropertyChangedEventHandler" />
+      <xs:element name="dateOfBirthRecordField" nillable="true" type="tns:BasicDateOfBirthRecord" />
+      <xs:element name="nameField" nillable="true" type="tns:BasicName" />
+      <xs:element name="reportTokenField" nillable="true" type="xs:string" />
+      <xs:element name="sSNRecordField" nillable="true" type="tns:SSNRecord" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TLOIndividualSharingSSN" nillable="true" type="tns:TLOIndividualSharingSSN" />
+  <xs:complexType name="ArrayOfTLOPersonSearchRelative">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TLOPersonSearchRelative" nillable="true" type="tns:TLOPersonSearchRelative" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTLOPersonSearchRelative" nillable="true" type="tns:ArrayOfTLOPersonSearchRelative" />
+  <xs:complexType name="TLOPersonSearchRelative">
+    <xs:sequence>
+      <xs:element xmlns:q112="http://schemas.datacontract.org/2004/07/System.ComponentModel" name="PropertyChangedEvent" nillable="true" type="q112:PropertyChangedEventHandler" />
+      <xs:element name="currentAgeField" nillable="true" type="xs:string" />
+      <xs:element name="dateOfBirthField" nillable="true" type="tns:Date" />
+      <xs:element name="dateOfBirthRecordField" nillable="true" type="tns:BasicDateOfBirthRecord" />
+      <xs:element name="dateOfDeathField" nillable="true" type="tns:DateOfDeathRecord" />
+      <xs:element name="nameField" nillable="true" type="tns:BasicName" />
+      <xs:element name="reportTokenField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TLOPersonSearchRelative" nillable="true" type="tns:TLOPersonSearchRelative" />
+  <xs:complexType name="ArrayOfTLOSexOffenderRecord">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TLOSexOffenderRecord" nillable="true" type="tns:TLOSexOffenderRecord" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTLOSexOffenderRecord" nillable="true" type="tns:ArrayOfTLOSexOffenderRecord" />
+  <xs:complexType name="TLOSexOffenderRecord">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:SexOffenderRecordBase">
+        <xs:sequence>
+          <xs:element name="addressField" nillable="true" type="tns:BasicAddress" />
+          <xs:element name="nameField" nillable="true" type="tns:BasicName" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="TLOSexOffenderRecord" nillable="true" type="tns:TLOSexOffenderRecord" />
+  <xs:complexType name="SexOffenderRecordBase">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ResponseOutputRecord">
+        <xs:sequence>
+          <xs:element name="aKA1Field" nillable="true" type="xs:string" />
+          <xs:element name="aKA2Field" nillable="true" type="xs:string" />
+          <xs:element name="aKADateOfBirthField" nillable="true" type="xs:string" />
+          <xs:element name="birthStateField" nillable="true" type="xs:string" />
+          <xs:element name="caseNumberField" nillable="true" type="xs:string" />
+          <xs:element name="caseTypeField" nillable="true" type="xs:string" />
+          <xs:element name="convictionDateField" nillable="true" type="xs:string" />
+          <xs:element name="convictionPlaceField" nillable="true" type="xs:string" />
+          <xs:element name="countsField" nillable="true" type="xs:string" />
+          <xs:element name="courtField" nillable="true" type="xs:string" />
+          <xs:element name="dateOfBirthField" nillable="true" type="tns:Date" />
+          <xs:element name="dispositionDateField" nillable="true" type="tns:Date" />
+          <xs:element name="dispositionField" nillable="true" type="xs:string" />
+          <xs:element name="eyeField" nillable="true" type="xs:string" />
+          <xs:element name="genderField" nillable="true" type="xs:string" />
+          <xs:element name="hairField" nillable="true" type="xs:string" />
+          <xs:element name="heightField" nillable="true" type="xs:string" />
+          <xs:element name="offenseCodeField" nillable="true" type="xs:string" />
+          <xs:element name="offenseDateField" nillable="true" type="tns:Date" />
+          <xs:element name="offenseDescription1Field" nillable="true" type="xs:string" />
+          <xs:element name="offenseDescription2Field" nillable="true" type="xs:string" />
+          <xs:element name="photoNameField" nillable="true" type="xs:string" />
+          <xs:element name="pictureHashField" nillable="true" type="xs:string" />
+          <xs:element name="raceField" nillable="true" type="xs:string" />
+          <xs:element name="reportTokenField" nillable="true" type="xs:string" />
+          <xs:element name="scarsMarksField" nillable="true" type="xs:string" />
+          <xs:element name="sentenceField" nillable="true" type="xs:string" />
+          <xs:element name="skinToneField" nillable="true" type="xs:string" />
+          <xs:element name="sourceField" nillable="true" type="xs:string" />
+          <xs:element name="sourceNameField" nillable="true" type="xs:string" />
+          <xs:element name="weightField" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SexOffenderRecordBase" nillable="true" type="tns:SexOffenderRecordBase" />
 </xs:schema>
