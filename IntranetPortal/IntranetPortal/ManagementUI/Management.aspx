@@ -25,7 +25,7 @@
 
                 <div class="row">
                     <div class="col-md-4 ">
-                        <div class="border_right" style="padding-richris ght: 30px; font-weight: 300;">Management Summary</div>
+                        <div class="border_right" style="padding-right: 30px; font-weight: 300;">Management Summary</div>
                     </div>
                     <div class="col-md-2">
 
