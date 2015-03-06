@@ -21,4 +21,8 @@ Public Interface IPortalReportService
    <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="LeadsInProcessReport/{teamName}")>
     Function LoadLeadsInProcessReport(teamName As String) As List(Of LeadsStatusData)
 
+    <OperationContract()>
+    <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="LoadTeamInfo/{teamName}")>
+    Function LoadTeamInfo(teamName As String) As Channels.Message
+   
 End Interface

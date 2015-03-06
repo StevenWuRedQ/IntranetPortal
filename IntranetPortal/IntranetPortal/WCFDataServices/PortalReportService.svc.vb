@@ -69,6 +69,14 @@ Public Class PortalReportService
 
         Return result
     End Function
+    Public Function LoadTeamInfo(teamName As String) As System.ServiceModel.Channels.Message Implements IPortalReportService.LoadTeamInfo
+        Dim TeamAgentCount = Employee.GetDeptUsersList(teamName).Count
+        Dim info = New With {
+                .TeamAgentCount = TeamAgentCount
+            }
+        Return info.ToJson
+    End Function
+   
 End Class
 
 Public Module JsonExtension

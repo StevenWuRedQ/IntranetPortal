@@ -24,8 +24,8 @@
             <div style="font-size: 48px; color: #234b60">
 
                 <div class="row">
-                    <div class="col-md-4">
-                        <span class="border_right" style="padding-richris ght: 30px; font-weight: 300;">Management Summary</span>
+                    <div class="col-md-4 ">
+                        <div class="border_right" style="padding-richris ght: 30px; font-weight: 300;">Management Summary</div>
                     </div>
                     <div class="col-md-2">
 
@@ -35,6 +35,7 @@
                                     <span style="font-size: 30px" id="teams_link">Queens Team</span>
                                 </td>
                                 <td>
+                                    <%--<i class="fa fa-caret-down" style="color: #2e2f31; font-size: 18px;" ></i>--%>
                                     <div id="dropDownMenu" class="nofoucs" style="margin-left: 10px; background: white; border: none; box-shadow: none" />
                                 </td>
                             </tr>
@@ -47,7 +48,7 @@
                         <div>
                             <div style="display: inline-block">
                                 <span class="magement_font">Total agents</span>
-                                <span class="magement_font magement_number">23</span>
+                                <span class="magement_font magement_number" id="total_agent_count">23</span>
                             </div>
                             <div style="display: inline-block; margin-left: 20px">
                                 <span class="magement_font">total deals within last 30 days</span>
@@ -317,7 +318,10 @@
 
     <script>
         function loadCharts(office) {
-
+            $.getJSON('/WCFDataServices/PortalReportService.svc/LoadTeamInfo/' + office).done(function (data){
+                var total_agent_count = data.TeamAgentCount
+                $("#total_agent_count").html(total_agent_count)
+            });
             var dataSource = new DevExpress.data.DataSource({
                 load: function (loadOptions) {
                     var d = $.Deferred();
@@ -378,10 +382,10 @@
 
 
             var leadsProcess = [
-        { state: "May", young: 6.7, middle: 28.6, older: 5.1 },
-        { state: "Jun", young: 9.6, middle: 43.4, older: 9 },
-        { state: "Jul", young: 13.5, middle: 49, older: 5.8 },
-        { state: "Aug", young: 30, middle: 90.3, older: 14.5 }
+                { state: "May", young: 6.7, middle: 28.6, older: 5.1 },
+                { state: "Jun", young: 9.6, middle: 43.4, older: 9 },
+                { state: "Jul", young: 13.5, middle: 49, older: 5.8 },
+                { state: "Aug", young: 30, middle: 90.3, older: 14.5 }
             ];
 
             $("#leads_process_chart").dxChart({
