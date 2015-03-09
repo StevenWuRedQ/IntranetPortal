@@ -84,19 +84,27 @@ Public Class ShortSalePage
                 Dim users = {User.Identity.Name}
                 If String.IsNullOrEmpty(Request.QueryString("isEviction")) Then
                     ShortSaleCaseList.BindCaseByBBLEs(ShortSaleManage.GetShortSaleCasesByUsers(users).Select(Function(ss) ss.BBLE).ToList)
+                    isEviction = False
                 Else
+                    isEviction = True
                     ShortSaleCaseList.BindCaseByBBLEs(ShortSaleManage.GetEvictionCasesByUsers(users).Select(Function(evi) evi.BBLE).ToList)
                 End If
+
+                Return
             End If
 
             If Not String.IsNullOrEmpty(Request.QueryString("mgr")) Then
-                Dim users = Employee.GetManagedEmployees(Request.QueryString("mgr"))
+                Dim users = Employee.GetManagedEmployees(User.Identity.Name)
 
                 If String.IsNullOrEmpty(Request.QueryString("isEviction")) Then
+                    isEviction = False
                     ShortSaleCaseList.BindCaseByBBLEs(ShortSaleManage.GetShortSaleCasesByUsers(users).Select(Function(ss) ss.BBLE).ToList)
                 Else
+                    isEviction = True
                     ShortSaleCaseList.BindCaseByBBLEs(ShortSaleManage.GetEvictionCasesByUsers(users).Select(Function(evi) evi.BBLE).ToList)
                 End If
+
+                Return
             End If
 
             If Not String.IsNullOrEmpty(Request.QueryString("teamId")) Then
@@ -109,6 +117,8 @@ Public Class ShortSalePage
                         ShortSaleCaseList.BindCaseByBBLEs(bbles)
                     End If
                 End Using
+
+                Return
             End If
 
             If Not String.IsNullOrEmpty(Request.QueryString("isEviction")) Then
