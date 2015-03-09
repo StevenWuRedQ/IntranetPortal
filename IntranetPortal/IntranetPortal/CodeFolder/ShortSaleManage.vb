@@ -66,6 +66,7 @@ Public Class ShortSaleManage
     End Function
 
     Private Shared Function GetIntaker() As String
-        Return System.Configuration.ConfigurationManager.AppSettings("ShortSaleIntake").ToString
+        Return Core.PortalSettings.GetValue("ShortSaleIntake")
+        'Return System.Configuration.ConfigurationManager.AppSettings("ShortSaleIntake").ToString
     End Function
 End Class
