@@ -34,7 +34,7 @@ Public Class AgentCharts
 
     Public Function OfficeLeadsSource(office As String) As String
         Using Context As New Entities
-            Dim emps = Employee.GetDeptUsers(office)
+            Dim emps = UserInTeam.GetTeamUsers(office).Select(Function(t) t.EmployeeName).ToArray 'Employee.GetDeptUsers(office)
 
             Dim source = (From ld In Context.Leads.Where(Function(ld) emps.Contains(ld.EmployeeName))
                          Group ld By Name = ld.EmployeeName Into Count()).ToList

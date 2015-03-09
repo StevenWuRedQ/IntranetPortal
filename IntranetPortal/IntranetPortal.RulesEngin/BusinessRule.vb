@@ -166,6 +166,11 @@ Public Class LoopServiceRule
                 Next
             End If
         End If
+
+        rules = IntranetPortal.Core.DataLoopRule.GetAllActiveRule
+        If rules IsNot Nothing And rules.Count > 0 Then
+            Execute()
+        End If
     End Sub
 
     Dim CurrentIndex As Integer

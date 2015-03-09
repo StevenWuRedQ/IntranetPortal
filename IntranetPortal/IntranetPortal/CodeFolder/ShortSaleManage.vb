@@ -18,6 +18,29 @@ Public Class ShortSaleManage
         End If
     End Sub
 
+    Public Shared Function GetShortSaleCasesByUsers(users As String()) As List(Of ShortSaleCase)
+        Using ctx As New Entities
+            Dim bbles = ctx.Leads.Where(Function(l) l.Status = LeadStatus.InProcess AndAlso users.Contains(l.EmployeeName)).Select(Function(l) l.BBLE).ToList
+            If Utility.IsAny(bbles) Then
+                Return ShortSale.ShortSaleCase.GetCaseByBBLEs(bbles)
+            End If
+        End Using
+
+        Return New List(Of ShortSaleCase)
+    End Function
+
+    Public Shared Function GetEvictionCasesByUsers(users As String()) As List(Of EvictionCas)
+        Using ctx As New Entities
+            Dim bbles = ctx.Leads.Where(Function(l) l.Status = LeadStatus.InProcess AndAlso users.Contains(l.EmployeeName)).Select(Function(l) l.BBLE).ToList
+
+            If Utility.IsAny(bbles) Then
+                Return ShortSale.EvictionCas.GetCaseByBBLEs(bbles)
+            End If
+        End Using
+
+        Return New List(Of EvictionCas)
+    End Function
+
     Public Shared Function SaveProp(li As LeadsInfo, createBy As String) As IntranetPortal.ShortSale.PropertyBaseInfo
         Dim propBase = IntranetPortal.ShortSale.PropertyBaseInfo.GetInstance(li.BBLE)
 

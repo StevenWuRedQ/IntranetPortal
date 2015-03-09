@@ -21,7 +21,7 @@
             if (key == "")
                 gridEmpsClient.ClearFilter();
             else {
-                var filterCondition = "[Name] LIKE '%" + key + "%'";
+                var filterCondition = "[EmployeeName] LIKE '%" + key + "%'";
                 gridEmpsClient.ApplyFilter(filterCondition);
             }
         }
@@ -81,7 +81,8 @@
             }
             if (rowKey != null) {
                 //ContentCallbackPanel.PerformCallback("EMP|" + rowKey);
-                BindEmployee(rowKey);
+                var tmpId = rowKey.split("|")[0];
+                BindEmployee(tmpId);
             }
         }
 

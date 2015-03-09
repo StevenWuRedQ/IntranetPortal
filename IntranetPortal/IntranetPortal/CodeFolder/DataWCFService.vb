@@ -157,6 +157,7 @@ Public Class DataWCFService
                 Dim waitingRequest = client.Requests_Waiting
                 Return waitingRequest > 100
             Catch ex As Exception
+                Throw New Exception("Check Server is busy. exception: " & ex.Message)
                 Return False
             End Try
         End Using

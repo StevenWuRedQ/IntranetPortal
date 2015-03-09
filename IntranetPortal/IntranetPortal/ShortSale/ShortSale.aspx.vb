@@ -79,19 +79,54 @@ Public Class ShortSalePage
                     Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
                 End If
             End If
+
             If (Not String.IsNullOrEmpty(Request.QueryString("LeadsAgent"))) Then
-                Using Context As New Entities
-                    Dim bbles As List(Of String) = Context.Leads.Where(Function(l) l.Status = LeadStatus.InProcess AndAlso l.EmployeeName = User.Identity.Name).Select(Function(l) l.BBLE).ToList
-                    ShortSaleCaseList.BindCaseByBBLEs(bbles)
+                Dim users = {User.Identity.Name}
+                If String.IsNullOrEmpty(Request.QueryString("isEviction")) Then
+                    ShortSaleCaseList.BindCaseByBBLEs(ShortSaleManage.GetShortSaleCasesByUsers(users).Select(Function(ss) ss.BBLE).ToList)
+                Else
+                    ShortSaleCaseList.BindCaseByBBLEs(ShortSaleManage.GetEvictionCasesByUsers(users).Select(Function(evi) evi.BBLE).ToList)
+                End If
+            End If
+
+            If Not String.IsNullOrEmpty(Request.QueryString("mgr")) Then
+                Dim users = Employee.GetManagedEmployees(Request.QueryString("mgr"))
+
+                If String.IsNullOrEmpty(Request.QueryString("isEviction")) Then
+                    ShortSaleCaseList.BindCaseByBBLEs(ShortSaleManage.GetShortSaleCasesByUsers(users).Select(Function(ss) ss.BBLE).ToList)
+                Else
+                    ShortSaleCaseList.BindCaseByBBLEs(ShortSaleManage.GetEvictionCasesByUsers(users).Select(Function(evi) evi.BBLE).ToList)
+                End If
+            End If
+
+            If Not String.IsNullOrEmpty(Request.QueryString("teamId")) Then
+                Dim teamId = CInt(Request.QueryString("teamId"))
+                Dim users = Employee.GetAllTeamUsers(teamId)
+
+                Using ctx As New Entities
+                    Dim bbles = ctx.Leads.Where(Function(l) l.Status = LeadStatus.InProcess AndAlso users.Contains(l.EmployeeName)).Select(Function(l) l.BBLE).ToList
+                    If Utility.IsAny(bbles) Then
+                        ShortSaleCaseList.BindCaseByBBLEs(bbles)
+                    End If
                 End Using
-
-
             End If
 
             If Not String.IsNullOrEmpty(Request.QueryString("isEviction")) Then
                 isEviction = True
                 'it should be Eviction not new file for test
-                ShortSaleCaseList.BindCaseList(CaseStatus.Eviction)
+                If Not String.IsNullOrEmpty(Request.QueryString("tid")) Then
+                    Dim teamId = CInt(Request.QueryString("tid"))
+                    Dim users = Employee.GetAllTeamUsers(teamId)
+
+                    Using ctx As New Entities
+                        Dim bbles = ctx.Leads.Where(Function(l) l.Status = LeadStatus.InProcess AndAlso users.Contains(l.EmployeeName)).Select(Function(l) l.BBLE).ToList
+                        If Utility.IsAny(bbles) Then
+                            ShortSaleCaseList.BindCaseByBBLEs(EvictionCas.GetCaseByBBLEs(bbles).Select(Function(evi) evi.BBLE).ToList)
+                        End If
+                    End Using
+                Else
+                    ShortSaleCaseList.BindCaseList(CaseStatus.Eviction)
+                End If
             Else
                 isEviction = False
             End If

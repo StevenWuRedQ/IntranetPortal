@@ -60,6 +60,36 @@ Public Class NavMenu
         item.ShowAmount = True
         item.FontClass = String.Format("<i class=""fa {0}""></i>", fontClass)
 
+        If type = "In Process" Then
+            item.Items = New List(Of PortalNavItem)
+            item.Items.AddRange({New PortalNavItem With {
+                                .Name = String.Format("{0}-ShortSale", item.Name),
+                                .Text = "Short Sale",
+                                .NavigationUrl = "/ShortSale/ShortSale.aspx?teamId=" & teamId,
+                                .ShowAmount = True,
+                                .FontClass = "<i class=""fa fa-line-chart""></i>"
+                                }, New PortalNavItem With {
+                                .Name = String.Format("{0}-Eviction", item.Name),
+                                .Text = "Eviction",
+                                .NavigationUrl = "/ShortSale/ShortSale.aspx?isEviction=true&tid=" & teamId,
+                                .ShowAmount = True,
+                                .FontClass = "<i class=""fa fa-sign-out""></i>"
+                                }, New PortalNavItem With {
+                                .Name = String.Format("{0}-Construction", item.Name),
+                                .Text = "Construction",
+                                .NavigationUrl = "#",
+                                .ShowAmount = True,
+                                .FontClass = "<i class=""fa  fa-wrench""></i>"
+                                }, New PortalNavItem With {
+                                .Name = String.Format("{0}-Litigation", item.Name),
+                                .Text = "Litigation",
+                                .NavigationUrl = "#",
+                                .ShowAmount = True,
+                                .FontClass = "<i class=""fa fa-university""></i>"
+                                }
+                           })
+        End If
+
         Return item
     End Function
 
@@ -192,6 +222,10 @@ Public Class RefreshLeadsCountHandler
             Return GetShortSaleCaseCount(name, itemText, userName)
         End If
 
+        If name.StartsWith("Eviction") Then
+            Return ShortSale.ShortSaleCase.GetEvictionCases().Count
+        End If
+
         If name.StartsWith("MyTask") Then
             Return GetMyTaskCount()
         End If
@@ -244,6 +278,21 @@ Public Class RefreshLeadsCountHandler
                     Return Utility.GetTeamUnAssignedLeadsCount(teamId)
                 Case "Management"
                     Return Utility.GetTeamLeadsCount(LeadStatus.ALL, teamId) + Utility.GetTeamUnAssignedLeadsCount(teamId)
+                Case "InProcess"
+                    If tmpStr.Length = 4 Then
+                        Dim subCategory = tmpStr(3)
+                        If subCategory.StartsWith("ShortSale") Then
+                            Return GetTeamShortSale(teamId)
+                        End If
+
+                        If subCategory.StartsWith("Eviction") Then
+                            Return GetTeamEviction(teamId)
+                        End If
+
+                        Return 0
+                    Else
+                        Return Utility.GetTeamLeadsCount(Utility.GetLeadStatus(itemText), teamId)
+                    End If
                 Case Else
                     Return Utility.GetTeamLeadsCount(Utility.GetLeadStatus(itemText), teamId)
             End Select
@@ -299,9 +348,35 @@ Public Class RefreshLeadsCountHandler
             Select Case type
                 Case "AssignLeads"
                     Return 0 'Utility.GetUnAssignedLeadsCount(Office)  
-                Case "All"
-                    Dim count = GetShortSaleCaseByOwner(userName)
-                    Return GetShortSaleCaseByOwner(userName)
+                Case "Manager"
+                    If tmpStr.Length = 3 Then
+                        Dim subCategory = tmpStr(2)
+                        Dim users = Employee.GetManagedEmployees(userName)
+
+                        If subCategory = "All" Then
+                            Return ShortSaleManage.GetShortSaleCasesByUsers(users).Count
+                        End If
+
+                        If subCategory = "Eviction" Then
+                            Return ShortSaleManage.GetEvictionCasesByUsers(users).Count
+                        End If
+                    End If
+
+                    Return 0
+                Case "Agent"
+                    If tmpStr.Length = 3 Then
+                        Dim subCategory = tmpStr(2)
+                       
+                        If subCategory = "All" Then
+                            Return ShortSaleManage.GetShortSaleCasesByUsers({userName}).Count
+                        End If
+
+                        If subCategory = "Eviction" Then
+                            Return ShortSaleManage.GetEvictionCasesByUsers({userName}).Count
+                        End If
+                    End If
+
+                    Return 0
                 Case Else
                     Dim status As ShortSale.CaseStatus
 
@@ -317,33 +392,27 @@ Public Class RefreshLeadsCountHandler
             End Select
         End If
     End Function
+
     Function GetShortSaleCaseByOwner(userName As String) As Integer
-        Using context As New Entities
-            Dim bbles As List(Of String) = context.Leads.Where(Function(l) l.Status = LeadStatus.InProcess AndAlso l.EmployeeName = userName).Select(Function(l) l.BBLE).ToList
-            If Utility.IsAny(bbles) Then
-                Return ShortSale.ShortSaleCase.GetCaseByBBLEs(bbles).Count
-            End If
-        End Using
-        Return 0
+        Return GetShortSaleCountByUsers({userName})
     End Function
-    'Function GetAllShortSaleByOwner(userName As String) As Integer
-    '    Dim count = 0
-    '    Using Context As New Entities
-    '        Dim sqlConnect As New SqlConnection(Context.Database.Connection.ConnectionString)
-    '        Dim cmd As New SqlCommand
-    '        Dim reader As SqlDataReader
-    '        cmd.CommandText = "SELECT COUNT(ShortSaleCases.BBLE) as Count FROM [ShortSaleCases] inner join Leads on Leads.BBLE  = ShortSaleCases.BBLE where leads.EmployeeName='" & userName & "' "
-    '        cmd.CommandType = CommandType.Text
-    '        cmd.Connection = sqlConnect
 
-    '        sqlConnect.Open()
+    Function GetTeamShortSale(teamId As Integer) As Integer
+        Dim users = Employee.GetAllTeamUsers(teamId)
+        Return GetShortSaleCountByUsers(users)
+    End Function
 
-    '        reader = cmd.ExecuteReader()
-    '        While (reader.Read())
-    '            count = reader.GetInt32(0)
-    '        End While
-    '        sqlConnect.Close()
-    '    End Using
-    '    Return count
-    'End Function
+    Function GetManagerShortSale(mgr As String) As Integer
+        Dim users = Employee.GetManagedEmployees(mgr)
+        Return GetShortSaleCountByUsers(users)
+    End Function
+
+    Function GetTeamEviction(teamId As Integer) As Integer
+        Dim users = Employee.GetAllTeamUsers(teamId)
+        Return ShortSaleManage.GetEvictionCasesByUsers(users).Count
+    End Function
+
+    Function GetShortSaleCountByUsers(users As String()) As Integer
+        Return ShortSaleManage.GetShortSaleCasesByUsers(users).Count
+    End Function
 End Class

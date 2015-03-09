@@ -5,7 +5,7 @@
             Return {""}
         End If
 
-        Return Employee.GetAllDeptUsers(Name)
+        Return UserInTeam.GetTeamUsers(Name).Select(Function(t) t.EmployeeName).ToArray  'Employee.GetAllDeptUsers(Name)
     End Function
 
     Public ReadOnly Property OfficeDescription As String

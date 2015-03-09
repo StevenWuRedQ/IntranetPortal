@@ -59,7 +59,20 @@ function mip() {
         });
         return false;
     });
+
+    $('#main-nav .mip-nav .nav-level-2 .nav-level-3 .has-level-4-menu').click(function () {
+        var current_menu_item = $(this);
+        var target_menu = $(this).next('.nav-level-4');
+        target_menu.slideToggle('slow', 'easeOutCirc', function () {
+            if (target_menu.is(':visible')) current_menu_item.find('.fa-caret-right').removeClass('fa-caret-right').addClass('fa-caret-down');
+            else current_menu_item.find('.fa-caret-down').removeClass('fa-caret-down').addClass('fa-caret-right');
+        });
+        return false;
+    });
     
+    $('#main-nav .mip-nav .nav-level-2-container:not(#main-nav .mip-nav .current + .nav-level-2-container), #main-nav .mip-nav .nav-level-3 .nav-level-4').hide();
+
+
     $('.landing').hide();
 
     // FORM HANDLING

@@ -418,18 +418,24 @@ Partial Public Class ShortSaleCase
 
     Public Shared Function GetCaseByStatus(status As CaseStatus) As List(Of ShortSaleCase)
         Using context As New ShortSaleEntities
-            Return context.ShortSaleCases.Where(Function(ss) ss.Status = status).ToList
+            If status = CaseStatus.Eviction Then
+                Return GetEvictionCases()
+            Else
+                Return context.ShortSaleCases.Where(Function(ss) ss.Status = status).ToList
+            End If
         End Using
     End Function
+
     Public Shared Function GetCaseByOwner(owner As String) As List(Of ShortSaleCase)
         Using Context As New ShortSaleEntities
             Return Context.ShortSaleCases.Where(Function(ss) ss.Owner = owner).ToList
         End Using
-
     End Function
+
     Public Shared Function GetCaseByStatus(status As CaseStatus, owner As String) As List(Of ShortSaleCase)
         Using context As New ShortSaleEntities
-            Return context.ShortSaleCases.Where(Function(ss) ss.Status = status AndAlso ss.Owner = owner).ToList
+            Return GetCaseByStatus(status).Where(Function(ss) ss.Owner = owner).ToList
+            'Return context.ShortSaleCases.Where(Function(ss) ss.Status = status AndAlso ss.Owner = owner).ToList
         End Using
     End Function
 

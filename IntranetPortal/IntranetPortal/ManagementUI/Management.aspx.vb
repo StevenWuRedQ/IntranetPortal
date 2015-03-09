@@ -7,12 +7,15 @@ Public Class Management1
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
     End Sub
+
     Protected Function GetAllTeam() As List(Of String)
-        Dim teamList = New List(Of String)
-        Using ctx As New Entities
-            teamList = ctx.Employees.Where(Function(e) e.Name.Contains("Office")).Select(Function(e) e.Name).ToList
-        End Using
-        Return teamList
+        Return Team.GetAllTeams().Select(Function(t) t.Name).ToList
+
+        'Dim teamList = New List(Of String)
+        'Using ctx As New Entities
+        '    teamList = ctx.Employees.Where(Function(e) e.Name.Contains("Office")).Select(Function(e) e.Name).ToList
+        'End Using
+        'Return teamList
     End Function
     Public Function AllTameJson() As String
         Return (New JavaScriptSerializer()).Serialize(GetAllTeam)

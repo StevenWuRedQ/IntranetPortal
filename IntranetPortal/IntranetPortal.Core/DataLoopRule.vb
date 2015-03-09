@@ -14,10 +14,8 @@
             Dim uniqueBBles = bblesToLoop.ToList.Where(Function(b) Not bbleRuningList.Contains(b)).ToArray()
             AddRules(uniqueBBles, loopType, createBy, RuleStatus.Active)
         End Using
-
     End Sub
     Public Shared Sub AddRules(bblesToLoop As String(), loopType As DataLoopType, createBy As String)
-
         AddRules(bblesToLoop, loopType, createBy, RuleStatus.Active)
     End Sub
 

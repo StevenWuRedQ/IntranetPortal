@@ -67,5 +67,5 @@ Public Class ShortSaleCaseList
             gridCase.SettingsBehavior.AllowClientEventsOnLoad = value
         End Set
     End Property
-   
+
 End Class
