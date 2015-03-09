@@ -19,8 +19,7 @@
             <dx:GridViewDataTextColumn FieldName="Duration">
                 <PropertiesTextEdit DisplayFormatString="dd\.hh\:mm\:ss"></PropertiesTextEdit>
             </dx:GridViewDataTextColumn>
-        </Columns>
-        <Settings VerticalScrollBarMode="Visible" VerticalScrollBarStyle="Virtual" />
+        </Columns>        
         <SettingsPager Mode="ShowPager"></SettingsPager>
         <GroupSummary>
             <dx:ASPxSummaryItem FieldName="Id" SummaryType="Count" DisplayFormat="Count: {0}" />

@@ -67,7 +67,7 @@ function mip() {
             if (target_menu.is(':visible')) current_menu_item.find('.fa-caret-right').removeClass('fa-caret-right').addClass('fa-caret-down');
             else current_menu_item.find('.fa-caret-down').removeClass('fa-caret-down').addClass('fa-caret-right');
         });
-        return false;
+        return true;
     });
     
     $('#main-nav .mip-nav .nav-level-2-container:not(#main-nav .mip-nav .current + .nav-level-2-container), #main-nav .mip-nav .nav-level-3 .nav-level-4').hide();

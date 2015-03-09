@@ -233,6 +233,10 @@ Public Class LeadsSubMenu
                 End If
 
                 If lbSelectionMode.SelectedValues.Contains("1") Then
+                    If ShortSale.ShortSaleCase.GetCaseByBBLE(bble) Is Nothing Then
+                        ShortSaleManage.MoveLeadsToShortSale(bble, Page.User.Identity.Name)
+                    End If
+
                     Dim name = cbEvictionUsers.Value
                     If String.IsNullOrEmpty(name) Then
                         Throw New Exception("Please select Eviction User")

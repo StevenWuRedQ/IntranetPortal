@@ -22,6 +22,12 @@ Public Class PortalStatus
         End Get
     End Property
 
+    Public ReadOnly Property TLoCallCount As Integer
+        Get
+            Return Core.TLOApiLog.GetCount
+        End Get
+    End Property
+
     Protected Sub btnLoad_Click(sender As Object, e As EventArgs) Handles btnLoad.Click
         BindLogs()
     End Sub

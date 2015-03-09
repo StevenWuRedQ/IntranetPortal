@@ -16,6 +16,15 @@
                             <PanelCollection>
                                 <dx:PanelContent>
                                     <table>
+                                           <tr>
+                                            <td style="width: 150px;">TLO Call Count:</td>
+                                            <td style="text-align: left">
+                                                <strong><%= TLoCallCount%></strong>
+                                            </td>
+                                            <td>
+                                                
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td style="width: 150px;">Online Users Count:</td>
                                             <td style="text-align: left">
@@ -92,7 +101,7 @@
                             </PanelCollection>
                         </dx:ASPxRoundPanel>
                     </td>
-                </tr>
+                </tr>              
             </table>
 
 
