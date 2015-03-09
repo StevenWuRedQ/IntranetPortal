@@ -81,9 +81,18 @@
                             <li role="presentation" class="active mag_tab"><a class="mag_tab_text" href="#phone_callsTab" aria-controls="phone_callsTab" role="tab" data-toggle="tab"><i class="fa fa-phone"></i>
                                 <br />
                                 Phone Calls</a></li>
-                            <li role="presentation" class="mag_tab"><a class="mag_tab_text" href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-sign-in"></i>
+                            <li role="presentation" class="mag_tab"><a class="mag_tab_text" href="#geomap" aria-controls="profile" role="tab" data-toggle="tab">
+                                <i class="fa fa-map-marker"></i>
                                 <br />
-                                Door Knocks</a></li>
+                                Geo map</a>
+
+                            </li>
+                            <li role="presentation" class="mag_tab"><a class="mag_tab_text" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">
+                                <i class="fa fa-sign-in"></i>
+                                <br />
+                                Door Knocks</a>
+
+                            </li>
                             <li role="presentation" class="mag_tab"><a class="mag_tab_text" href="#deals_tab" aria-controls="deals_tab" role="tab" data-toggle="tab"><i class="fa fa-check-circle"></i>
                                 <br />
                                 Deals</a></li>
@@ -156,6 +165,10 @@
 
                             </div>
                             <div role="tabpanel" class="tab-pane" id="profile">...</div>
+                            <div role="tabpanel" class="tab-pane" id="geomap">
+                                <iframe src="/Map/ZipMap.aspx" style="width:100%;min-height:600px"></iframe>
+                            </div>
+                            
                             <div role="tabpanel" class="tab-pane" id="deals_tab">deals_tab</div>
                             <div role="tabpanel" class="tab-pane" id="messages">...</div>
 
