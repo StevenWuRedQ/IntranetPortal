@@ -66,7 +66,12 @@ Public Class ShortSaleManage
     End Function
 
     Private Shared Function GetIntaker() As String
-        Return Core.PortalSettings.GetValue("ShortSaleIntake")
+        Dim users = Roles.GetUsersInRole("Intake")
+        If users.Length > 0 Then
+            Return users(0)
+        End If
+
+        Return ""
         'Return System.Configuration.ConfigurationManager.AppSettings("ShortSaleIntake").ToString
     End Function
 End Class
