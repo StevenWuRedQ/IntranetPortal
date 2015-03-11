@@ -7,9 +7,11 @@ Public Class ShortSalePage
     Inherits System.Web.UI.Page
 
     Public Property ShortSaleCaseData As ShortSaleCase
-    Public Shared isEviction = False
+    Public Shared Property isEviction As Boolean = False
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
         If Not Page.IsPostBack Then
+            isEviction = False
             If Not String.IsNullOrEmpty(Request.QueryString("s")) Then
                 Dim status = CType(Request.QueryString("s"), CaseStatus)
                 ShortSaleCaseList.BindCaseList(status)

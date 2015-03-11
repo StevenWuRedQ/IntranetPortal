@@ -12,7 +12,7 @@
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-  <%--  <script src="/scripts/stevenjs.js?v=1.02"></script>--%>
+    <%--  <script src="/scripts/stevenjs.js?v=1.02"></script>--%>
     <script type="text/javascript">
         function OnCallbackMenuClick(s, e) {
             if (e.item.name == "Custom") {
@@ -71,21 +71,21 @@
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
 
                                                                 <!-- Nav tabs -->
-                                                                
-                                                                <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white; ">
+
+                                                                <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
                                                                     <li class="active short_sale_head_tab">
                                                                         <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
                                                                             <i class="fa <%= If(isEviction,"fa-sign-out","fa-info-circle") %>  head_tab_icon_padding"></i>
-                                                                            <div class="font_size_bold"> <%= If(isEviction,"Eviction","Overview") %></div>
+                                                                            <div class="font_size_bold"><%= If(isEviction,"Eviction","Overview") %></div>
                                                                         </a>
                                                                     </li>
-                                                                    <li class="short_sale_head_tab" style="<%= If(isEviction,"display:none","") %> ">
+                                                                    <li class="short_sale_head_tab" style="<%= If(isEviction,"display:none","") %>">
                                                                         <a href="#home_owner" role="tab" data-toggle="tab" class="tab_button_a">
                                                                             <i class="fa fa-key head_tab_icon_padding"></i>
                                                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;Title&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                                                         </a>
                                                                     </li>
-                                                                    <li class="short_sale_head_tab" style="<%= If(isEviction,"display:none","") %> ">
+                                                                    <li class="short_sale_head_tab" style="<%= If(isEviction,"display:none","") %>">
                                                                         <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
                                                                             <i class="fa fa-file head_tab_icon_padding"></i>
                                                                             <div class="font_size_bold">Documents</div>
