@@ -15,7 +15,7 @@
     <%--<script src="/scrollbar/jquery.mCustomScrollbar.js"></script>--%>
     <script src="/scripts/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
-    <link href="/css/stevencss.css?v=1.02" rel="stylesheet" type="text/css" />
+    <link href="/css/stevencss.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
    <%-- <script src="/scripts/angular.min.js"></script>--%>

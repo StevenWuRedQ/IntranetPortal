@@ -53,6 +53,10 @@ Public Class DataWCFService
     End Function
 
     Private Shared Function GetLocateReport(orderNum As Integer, bble As String, name As String, address1 As String, address2 As String, city As String, state As String, zip As String, country As String) As DataAPI.TLOLocateReportOutput
+        If Not Core.TLOApiLog.IsServiceOn Then
+            Throw New Exception("TLO Call Service is temporary closed. Please try later.")
+        End If
+
         If Core.TLOApiLog.LimiteIsExceed Then
             Throw New Exception("TLO Call Limit is reached. Please contact Admin!")
         End If
@@ -917,12 +921,11 @@ Public Class DataWCFService
                                            HttpContext.Current = state.Context
                                            Try
                                                UpdateHomeOwner(bble, state.OrderId)
+                                               UpdateHomeOwnerApi(state.OrderId)
                                                'UserMessage.AddNewMessage(GetCurrentIdentityName, "Refresh", "HomeOwner info is ready. BBLE: " & state.BBLE, state.BBLE)
                                            Catch ex As Exception
-
                                                UserMessage.AddNewMessage(GetCurrentIdentityName, "Error", "Error happened on refresh. Message: " & ex.Message, state.BBLE)
-                                           Finally
-                                               UpdateHomeOwnerApi(state.OrderId)
+                                               UpdateHomeOwnerApi(state.OrderId, "Error")
                                            End Try
                                        End Sub
 
@@ -1022,8 +1025,8 @@ Public Class DataWCFService
         End Try
     End Function
 
-    Private Shared Sub UpdateHomeOwnerApi(orderId As Integer)
-        APIOrder.UpdateOrderInfo(orderId, "TLO", "Done")
+    Private Shared Sub UpdateHomeOwnerApi(orderId As Integer, Optional result As String = "Done")
+        APIOrder.UpdateOrderInfo(orderId, "TLO", result)
     End Sub
 
     Public Shared Sub TestNewAPI()

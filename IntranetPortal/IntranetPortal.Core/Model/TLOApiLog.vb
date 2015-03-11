@@ -40,7 +40,13 @@
         Return True
     End Function
 
-    Private Shared Function GetCount() As Integer
+    Public Shared ReadOnly Property IsServiceOn As Boolean
+        Get
+            Return CBool(PortalSettings.GetValue("TLOSwitchOn"))
+        End Get
+    End Property
+
+    Public Shared Function GetCount() As Integer
         Using ctx As New CoreEntities
             Dim firstOfMonth = New Date(DateTime.Today.Year, DateTime.Today.Month, 1)
             Dim count = ctx.TLOApiLogs.Where(Function(a) a.CreateDate > firstOfMonth And a.Successed = True).Count

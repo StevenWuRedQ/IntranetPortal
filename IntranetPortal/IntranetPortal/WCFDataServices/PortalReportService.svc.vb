@@ -1,6 +1,7 @@
 ﻿Imports System.ServiceModel.Web
 Imports System.Runtime.CompilerServices
 Imports System.IO
+Imports System.ServiceModel
 
 
 ' NOTE: You can use the "Rename" command on the context menu to change the class name "PortalReportService" in code, svc and config file together.
@@ -8,9 +9,9 @@ Imports System.IO
 Public Class PortalReportService
     Implements IPortalReportService
 
-    Public Function EmployeeReports() As List(Of CallTrackingService.EmployeeStatisticData) Implements IPortalReportService.EmployeeReports
+    Public Function EmployeeReports() As Channels.Message Implements IPortalReportService.EmployeeReports
         Using client As New CallTrackingService.CallTrackingServiceClient
-            Return client.EmployeeStatisticData({"*"}).ToList
+            Return client.EmployeeStatisticData({"*"}).Where(Function(a) Not String.IsNullOrEmpty(a.EmployeeName) And a.Count > 10 And a.EmployeeName <> "Test").ToList.ToJson
         End Using
     End Function
 
@@ -23,7 +24,7 @@ Public Class PortalReportService
     Public Function LoadLeadsStatusReport(teamName As String) As List(Of LeadsStatusData) Implements IPortalReportService.LoadLeadsStatusReport
         Using ctx As New Entities
             Using Context As New Entities
-                Dim emps = Employee.GetDeptUsers(teamName)
+                Dim emps = UserInTeam.GetTeamUsersArray(teamName)
 
                 Dim source = (From ld In Context.Leads.Where(Function(ld) emps.Contains(ld.EmployeeName))
                              Group ld By Status = ld.Status Into Count()).ToDictionary(Function(l) l.Status, Function(l) l.Count)
@@ -55,10 +56,11 @@ Public Class PortalReportService
             End Using
         End Using
     End Function
+
     Public Function LoadLeadsInProcessReport(teamName As String) As List(Of LeadsStatusData) Implements IPortalReportService.LoadLeadsInProcessReport
         Dim result As New List(Of LeadsStatusData)
         Using Context As New Entities
-            Dim emps = Employee.GetDeptUsers(teamName)
+            Dim emps = UserInTeam.GetTeamUsersArray(teamName)
             Dim source = Context.Leads.Where(Function(ld) emps.Contains(ld.EmployeeName) And ld.Status = LeadStatus.InProcess).Select(Function(ld) ld.BBLE).ToList
             Dim shortSale = IntranetPortal.ShortSale.ShortSaleCase.GetCaseByBBLEs(source)
             Dim EvictionCase = IntranetPortal.ShortSale.EvictionCas.GetCaseByBBLEs(source)
@@ -69,14 +71,19 @@ Public Class PortalReportService
 
         Return result
     End Function
+
     Public Function LoadTeamInfo(teamName As String) As System.ServiceModel.Channels.Message Implements IPortalReportService.LoadTeamInfo
-        Dim TeamAgentCount = Employee.GetDeptUsersList(teamName).Count
+        Dim users = UserInTeam.GetTeamUsersArray(teamName)
+        Dim inProcessCount = Utility.GetMgrLeadsCount(LeadStatus.InProcess, users)
         Dim info = New With {
-                .TeamAgentCount = TeamAgentCount
+                .TeamAgentCount = users.Count,
+                .Users = users,
+                .TotalDeals = inProcessCount,
+                .EffeciencyScore = ""
             }
         Return info.ToJson
     End Function
-   
+
 End Class
 
 Public Module JsonExtension

@@ -258,7 +258,7 @@ InitialLine:
                     Log("Initial Homeowner failed. No homeowene info loaded. BBLE: " & bble)
                 End If
             Case Core.DataLoopRule.DataLoopType.Mortgage, Core.DataLoopRule.DataLoopType.AllMortgage
-                If DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, True) Then
+                If DataWCFService.UpdateLeadInfo(bble, False, True, True, True, True, False, False) Then
                     rule.Complete()
                     Log("Initial Data Message " & bble & String.Format(" BBLE: {0} Morgatage data is loaded. ", bble))
                 Else

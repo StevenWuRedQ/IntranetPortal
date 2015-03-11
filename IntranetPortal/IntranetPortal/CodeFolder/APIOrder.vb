@@ -47,7 +47,7 @@
                             apiOrder.LatestSale = apiOrder.ItemStatus.Complete
                         End If
                     Case "TLO"
-                        If status = "Done" Then
+                        If status = "Done" OrElse status = "Error" Then
                             apiOrder.TLO = apiOrder.ItemStatus.Complete
                         End If
                 End Select
@@ -68,7 +68,7 @@
 
                 context.SaveChanges()
 
-                If apiOrder.Status = OrderStatus.Complete Then
+                If apiOrder.Status = OrderStatus.Complete AndAlso status <> "Error" Then
                     Dim ld = LeadsInfo.GetInstance(apiOrder.BBLE)
                     If ld IsNot Nothing Then
                         UserMessage.AddNewMessage(apiOrder.Orderby, "Property Data is ready", String.Format("Property ({0}) Data is ready. Please check.", ld.LeadsName), apiOrder.BBLE, DateTime.Now, "Portal")

@@ -11,28 +11,24 @@
         <div>
             <table>
                 <tr>
-                    <td style="vertical-align:top">
+                    <td style="vertical-align: top">
                         <dx:ASPxRoundPanel HeaderText="User Status" runat="server">
                             <PanelCollection>
                                 <dx:PanelContent>
                                     <table>
-                                           <tr>
+                                        <tr>
                                             <td style="width: 150px;">TLO Call Count:</td>
                                             <td style="text-align: left">
                                                 <strong><%= TLoCallCount%></strong>
                                             </td>
-                                            <td>
-                                                
-                                            </td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td style="width: 150px;">Online Users Count:</td>
                                             <td style="text-align: left">
                                                 <strong><%= OnlineUsers.Count%></strong>
                                             </td>
-                                            <td>
-                                                
-                                            </td>
+                                            <td></td>
                                         </tr>
                                     </table>
                                     <dx:ASPxGridView runat="server" ID="gridOnlineUsers" KeyFieldName="UserName">
@@ -44,27 +40,26 @@
                                             <dx:GridViewDataTextColumn FieldName="SessionID"></dx:GridViewDataTextColumn>
                                         </Columns>
                                     </dx:ASPxGridView>
-                                    <table style="width:100%; margin-top:5px">
+                                    <table style="width: 100%; margin-top: 5px">
                                         <tr>
-                                            <td colspan="2" style="font-size:14px;text-align:center; line-height:20px; background-color:#efefef;">
-                                                Send Message
+                                            <td colspan="2" style="font-size: 14px; text-align: center; line-height: 20px; background-color: #efefef;">Send Message
                                             </td>
                                         </tr>
-                                        <tr style="margin-top:3px;height:25px">
+                                        <tr style="margin-top: 3px; height: 25px">
                                             <td>To:</td>
                                             <td>
                                                 <dx:ASPxComboBox runat="server" ID="cbUsers"></dx:ASPxComboBox>
                                             </td>
                                         </tr>
-                                         <tr style="margin-top:3px;">
+                                        <tr style="margin-top: 3px;">
                                             <td>Comments:</td>
                                             <td>
                                                 <dx:ASPxMemo runat="server" ID="txtComments" Width="100%" Height="100px"></dx:ASPxMemo>
                                             </td>
                                         </tr>
-                                        <tr style="height:30px;">
+                                        <tr style="height: 30px;">
                                             <td></td>
-                                            <td style="padding-top:3px;">
+                                            <td style="padding-top: 3px;">
                                                 <dx:ASPxButton Text="Send" runat="server" ID="btnSend"></dx:ASPxButton>
                                             </td>
 
@@ -74,7 +69,7 @@
                             </PanelCollection>
                         </dx:ASPxRoundPanel>
                     </td>
-                     <td style="vertical-align:top">
+                    <td style="vertical-align: top">
                         <dx:ASPxRoundPanel HeaderText="Login Logs" runat="server">
                             <PanelCollection>
                                 <dx:PanelContent>
@@ -101,7 +96,25 @@
                             </PanelCollection>
                         </dx:ASPxRoundPanel>
                     </td>
-                </tr>              
+                </tr>
+                <tr>
+                    <td>
+                        <dx:ASPxRoundPanel HeaderText="Settings" runat="server">
+                            <PanelCollection>
+                                <dx:PanelContent>
+                                    <dx:ASPxGridView runat="server" ID="gridSettings" KeyFieldName="SettingId" OnRowUpdating="gridSettings_RowUpdating" Theme="Moderno">
+                                        <Columns>
+                                            <dx:GridViewDataTextColumn FieldName="Name" ReadOnly="true" Width="100px"></dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataTextColumn FieldName="Value" Width="400px"></dx:GridViewDataTextColumn>
+                                        </Columns>
+                                        <SettingsEditing Mode="Batch"></SettingsEditing>
+                                    </dx:ASPxGridView>
+                                </dx:PanelContent>
+                            </PanelCollection>
+                        </dx:ASPxRoundPanel>
+                    </td>
+                    <td></td>
+                </tr>
             </table>
 
 

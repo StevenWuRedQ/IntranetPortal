@@ -1,19 +1,30 @@
 ﻿Imports DevExpress.Web.ASPxEditors
+Imports DevExpress.Web.ASPxGridView
 
 Public Class PortalStatus
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        gridOnlineUsers.DataSource = OnlineUsers
-        gridOnlineUsers.DataBind()
+        If Not Page.IsPostBack Then
+            gridOnlineUsers.DataSource = OnlineUsers
+            gridOnlineUsers.DataBind()
 
-        cbUsers.DataSource = OnlineUsers
-        cbUsers.TextField = "UserName"
-        cbUsers.ValueField = "UserName"
-        cbUsers.DataBind()
-        cbUsers.Items.Insert(0, New ListEditItem("ALL", "ALL"))
+            cbUsers.DataSource = OnlineUsers
+            cbUsers.TextField = "UserName"
+            cbUsers.ValueField = "UserName"
+            cbUsers.DataBind()
+            cbUsers.Items.Insert(0, New ListEditItem("ALL", "ALL"))
 
-        BindLogs()
+            BindLogs()
+
+            BindSettings()
+        End If
+
+    End Sub
+
+    Sub BindSettings()
+        gridSettings.DataSource = Core.PortalSettings.SettingData
+        gridSettings.DataBind()
     End Sub
 
     Public ReadOnly Property OnlineUsers As List(Of OnlineUser)
@@ -52,5 +63,14 @@ Public Class PortalStatus
         End If
 
         txtComments.Text = ""
+    End Sub
+
+    Protected Sub gridSettings_RowUpdating(sender As Object, e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs)
+        Dim grid As ASPxGridView = TryCast(sender, ASPxGridView)
+        Core.PortalSettings.SaveValues(CInt(e.Keys(0)), e.NewValues("Value"))
+        e.Cancel = True
+        grid.CancelEdit()
+
+        BindSettings()
     End Sub
 End Class

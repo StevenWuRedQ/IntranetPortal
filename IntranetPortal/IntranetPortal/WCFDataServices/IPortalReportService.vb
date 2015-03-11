@@ -7,7 +7,7 @@ Imports IntranetPortal.CallTrackingService
 Public Interface IPortalReportService
     <OperationContract()>
     <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="UserReports")>
-    Function EmployeeReports() As List(Of EmployeeStatisticData)
+    Function EmployeeReports() As Channels.Message
 
     <OperationContract()>
     <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="CallLog/{empName}")>

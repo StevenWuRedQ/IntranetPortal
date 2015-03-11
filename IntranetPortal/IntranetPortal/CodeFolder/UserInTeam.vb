@@ -1,4 +1,5 @@
-﻿Partial Public Class UserInTeam
+﻿
+Partial Public Class UserInTeam
     Public Property TeamName As String
     Public Property EmployeeId As Integer
     Public Property EmployeePosition As String
@@ -26,6 +27,10 @@
 
             Return result.ToList
         End Using
+    End Function
+
+    Public Shared Function GetTeamUsersArray(teamNames As String) As String()
+        Return GetTeamUsers(teamNames).Select(Function(u) u.EmployeeName).ToArray
     End Function
 
     Public Shared Function GetTeamUsersByNames(names As String()) As List(Of UserInTeam)

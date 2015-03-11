@@ -28,7 +28,6 @@
                         <div class="border_right" style="padding-right: 30px; font-weight: 300;">Management Summary</div>
                     </div>
                     <div class="col-md-2">
-
                         <table>
                             <tr>
                                 <td>
@@ -40,8 +39,6 @@
                                 </td>
                             </tr>
                         </table>
-
-
                         <%--<i class="fa fa-caret-down" style="color: #2e2f31; font-size: 18px;" ></i>--%>
                     </div>
                     <div class="col-md-6">
@@ -114,7 +111,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3">
-                                            <select class="form-control">
+                                            <select class="form-control" id="selAgents">
                                                 <option>All Agents</option>
                                                 <option>Agents 1</option>
                                             </select>
@@ -122,47 +119,20 @@
                                         <div class="col-md-1">
                                             <input type="button" value="Display" class="rand-button bg_color_blue rand-button-padding" onclick="LoadGrid()" />
                                         </div>
+                                           <div class="col-md-1">
+                                            <input type="button" value="Chart" class="rand-button bg_color_blue rand-button-padding" onclick="LoadPhoneBarChart()" />
+
+                                           </div>
                                     </div>
                                 </div>
-                                <div style="margin: 30px 0; font-size: 24px; color: #234b60">
+                                <div style="margin: 30px 0; font-size: 24px; color: #234b60;display:none" id="divPhoneSummary">
                                     <span style="font-weight: 900" id="CallTotalCount">52,013 </span>Phone Calls<br />
                                     <span style="font-size: 14px; color: #77787b">January 1, 2015 - January 31, 2015</span>
                                 </div>
                                 <div style="font-size: 14px;">
-                                    <div id="gridContainer" style="height: 450px; max-width: 1000px; width: 100%; margin: 0 auto"></div>
-
-
-                                    <table class="table table-striped" style="display: none">
-                                        <thead style="text-transform: uppercase">
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Phone Calls </td>
-                                                <td>Total Time</td>
-                                                <td>Longest Call TO</td>
-                                                <td>Last Called #</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">BiBi Khan</th>
-                                                <td>1,234</td>
-                                                <td>37H 23M</td>
-                                                <td>718-123-4567</td>
-                                                <td>800-324-4567</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">Prakash Maharaj</th>
-                                                <td>1,234</td>
-                                                <td>37H 23M</td>
-                                                <td>718-123-4567</td>
-                                                <td>800-324-4567</td>
-                                            </tr>
-
-                                        </tbody>
-                                    </table>
+                                    <div id="chartContainer" style="height:450px; max-width: 1000px; width: 100%; margin: 0 auto; display:none"></div>
+                                    <div id="gridContainer" style="height:450px; max-width: 1000px; width: 100%; margin: 0 auto; display:none"></div>                                  
                                 </div>
-
-
                             </div>
                             <div role="tabpanel" class="tab-pane" id="profile">...</div>
                             <div role="tabpanel" class="tab-pane" id="geomap">
@@ -217,13 +187,91 @@
     </div>
    
     <script type="text/javascript">
+        function BindAgents()
+        {
+            if(currentTeamInfo != null)
+            {
+                $("#selAgents").html("");
+                $.each(currentTeamInfo.Users, function (key, value) {
+                    $('#selAgents')
+                    .append($("<option></option>")
+                    .attr("value", value)
+                    .text(value));
+                });
+
+                $("#selAgents").prepend("<option value='' selected='selected'>All</option>");
+            }
+        }
+
+        function LoadPhoneBarChart() {
+            $("#chartContainer").show();
+            var localCallLogs = null;
+            var customStore = new DevExpress.data.CustomStore({
+                load: function (loadOptions) {
+                    var d = $.Deferred();
+                    $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {                        
+                        d.resolve(data, { totalCount: data.length });
+                    });
+                    return d.promise();
+                }
+            });
+
+            var gridDataSourceConfiguration = { store: customStore };
+
+            var logDataSource = new DevExpress.data.DataSource({
+                store: customStore,
+                paginate: false
+            });
+
+            $("#chartContainer").dxChart({
+                dataSource: customStore,
+                commonSeriesSettings: {
+                    argumentField: "EmployeeName",
+                    type: "stackedbar"
+                },
+                series: [
+                     { valueField: "Inbound", name: "Inbound" },
+                     { valueField: "Outbound", name: "Outbound" },
+                     { valueField: "Internal", name: "Internal" },
+                     { valueField: "Count", name: "Total", type: 'spline', color:'blue' }
+                ],
+                argumentAxis: {
+                    argumentType: 'string'
+                },
+                tooltip: {
+                    enabled: true
+                },
+                legend: {
+                    verticalAlignment: 'bottom',
+                    horizontalAlignment: 'center'
+                },
+                onPointClick: function (info) {
+                    var clickedPoint = info.target;
+                    clickedPoint.isSelected() ? clickedPoint.clearSelection() : clickedPoint.select();
+                },
+                onPointSelectionChanged: function (info) {
+                    var selectedPoint = info.target;
+                    ShowEmployeeReport(selectedPoint.originalArgument);
+                }
+            });
+        }
+
         function LoadGrid() {
+            $("#gridContainer").show();
+            var agent = $("#selAgents").val();
+            if (agent != "")
+            {
+                ShowEmployeeReport(agent);
+                return;
+            }
+
             var localCallLogs = null;
             var customStore = new DevExpress.data.CustomStore({
                 load: function (loadOptions) {
                     var d = $.Deferred();
                     $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {
                         DevExpress.data.query(data).sum("Count").done(function (result) {
+                            $("#divPhoneSummary").show();
                             $("#CallTotalCount").html(result);
                         });
                         d.resolve(data, { totalCount: data.length });
@@ -276,6 +324,7 @@
         }
 
         function ShowEmployeeReport(empName) {
+            $("#gridContainer").show();
             var empCallLogs = null;
             var empCallLogsDs = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/CallLog/" + empName);
             empCallLogsDs.load().done(function (result) {
@@ -330,8 +379,15 @@
 
 
     <script>
+                
+        var currentTeamInfo = null;
         function loadCharts(office) {
             $.getJSON('/WCFDataServices/PortalReportService.svc/LoadTeamInfo/' + office).done(function (data){
+                currentTeamInfo = data;
+
+                //bind phone log agents name
+                BindAgents();
+
                 var total_agent_count = data.TeamAgentCount
                 $("#total_agent_count").html(total_agent_count)
             });

@@ -84,4 +84,13 @@ Partial Public Class PortalStatus
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridLogs As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''gridSettings control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridSettings As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 End Class
