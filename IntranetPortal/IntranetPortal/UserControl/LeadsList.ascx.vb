@@ -206,6 +206,7 @@ Public Class LeadsList
             gridLeads.DataBind()
         End Using
     End Sub
+
     Sub BindLeadsColor()
         Using Context As New Entities
             Dim subOridates = Employee.GetSubOrdinate(Page.User.Identity.Name)
@@ -215,6 +216,7 @@ Public Class LeadsList
             gridLeads.DataBind()
         End Using
     End Sub
+
     Sub BindSharedList()
         Using Context As New Entities
             Dim leads = (From lead In Context.Leads

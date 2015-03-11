@@ -173,10 +173,6 @@
         //alert(cbStreetlookupClient.GetEnabled());
     }
 
-    
-
-  
-
     var lastBorough = null;
     var loadedBorough = null;
     function OnBoroughChanged(cbBorough) {

@@ -114,9 +114,6 @@
                             <span class="time_buttons" onclick='ShowDOBWindow("<%= shortSaleCaseData.PropertyInfo.Borough%>","<%= shortSaleCaseData.PropertyInfo.Block%>", "<%= shortSaleCaseData.PropertyInfo.Lot%>")'>DOB</span>
                             <span class="time_buttons" onclick='ShowAcrisMap("<%= shortSaleCaseData.BBLE %>")'>Acris</span>
                             <span class="time_buttons" onclick='ShowPropertyMap("<%= shortSaleCaseData.BBLE %>")'>Maps</span>
-
-
-
                             <% End If%>
                         </div>
                         <%--data format June 2, 2014 6:37 PM--%>
@@ -172,15 +169,12 @@
                                         <ClientSideEvents Click="function(s,e){aspxAddLeadsComments.Hide();}" />
                                     </dx:ASPxButton>
                                             </div>
-
                                         </td>
                                     </tr>
                                 </table>
                             </dx:PopupControlContentControl>
                         </ContentCollection>
                     </dx:ASPxPopupControl>
-
-
                     <%--detial tabs--%>
                     <div>
                         <!--detial Nav tabs -->

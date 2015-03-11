@@ -41,15 +41,6 @@ Partial Public Class ShortSaleOverVew
     Protected WithEvents ShortSaleCaseSavePanel As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
 
     '''<summary>
-    '''ASPxPopupControl1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
-
-    '''<summary>
     '''leadsCommentsCallbackPanel control.
     '''</summary>
     '''<remarks>
@@ -158,11 +149,11 @@ Partial Public Class ShortSaleOverVew
     Protected WithEvents ShortSalePartiesTab As Global.IntranetPortal.ShortSalePartiesTab
 
     '''<summary>
-    '''VendorsPopup control.
+    '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents VendorsPopup As Global.IntranetPortal.VendorsPopup
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 End Class
