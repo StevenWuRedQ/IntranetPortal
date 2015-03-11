@@ -101,6 +101,7 @@
                         
                         <dx:ASPxButton runat="server" ID="btnTransfer" Text="Transfer" OnClick="btnTransfer_Click"></dx:ASPxButton>
                         <dx:ASPxLabel runat="server" ID="ASPxLabel2"></dx:ASPxLabel>
+                        <dx:ASPxCheckBox ID="cbKeepStatus" runat="server" Text="Keep Same status"></dx:ASPxCheckBox>
                     </dx:PanelContent>
                 </PanelCollection>
             </dx:ASPxRoundPanel>

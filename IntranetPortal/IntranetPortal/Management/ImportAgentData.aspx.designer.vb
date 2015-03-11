@@ -167,6 +167,15 @@ Partial Public Class ImportAgentData
     Protected WithEvents ASPxLabel2 As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
+    '''cbKeepStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbKeepStatus As Global.DevExpress.Web.ASPxEditors.ASPxCheckBox
+
+    '''<summary>
     '''LoadLastLog control.
     '''</summary>
     '''<remarks>

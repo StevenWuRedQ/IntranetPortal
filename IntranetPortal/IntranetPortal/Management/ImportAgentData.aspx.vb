@@ -101,7 +101,7 @@ Public Class ImportAgentData
                 Return
             End If
         End If
-
+        Dim keepStatus = CBool(cbKeepStatus.Value)
 
         Using ctx As New Entities
             Dim empId = CInt(cbEmpFrom.Value)
@@ -116,11 +116,18 @@ Public Class ImportAgentData
             For Each ld In lList
                 ld.EmployeeID = CInt(cbEmpTo.Value)
                 ld.EmployeeName = cbEmpTo.Text
-                If (String.IsNullOrEmpty(cbStatusToChange.Text)) Then
-                    ld.Status = LeadStatus.NewLead
-                Else
-                    ld.Status = ConvertLeadStatus(cbStatusToChange.Text)
+
+                If Not keepStatus Then
+
+                    If (String.IsNullOrEmpty(cbStatusToChange.Text)) Then
+                        ld.Status = LeadStatus.NewLead
+                    Else
+                        ld.Status = ConvertLeadStatus(cbStatusToChange.Text)
+                    End If
+                   
+                   
                 End If
+
                 If (ld.Status = LeadStatus.Callback AndAlso deCallBackTime.Value IsNot Nothing) Then
                     ld.CallbackDate = deCallBackTime.Value
                 End If
