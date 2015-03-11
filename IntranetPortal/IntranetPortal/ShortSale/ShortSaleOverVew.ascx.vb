@@ -6,6 +6,14 @@ Public Class ShortSaleOverVew
     Inherits System.Web.UI.UserControl
 
     Public Property shortSaleCaseData As New ShortSaleCase
+    Public ReadOnly Property isEviction As Boolean
+        Get
+            Dim ShhortSale = CType(Me.Page, ShortSalePage)
+            Return ShhortSale.isEviction
+        End Get
+        
+    End Property
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
     End Sub

@@ -179,7 +179,7 @@
                     <div>
                         <!--detial Nav tabs -->
                        
-                        <ul class="nav nav-tabs overview_tabs" role="tablist" style='<%= If(ShortSalePage.isEviction,"display:none","") %>'>
+                        <ul class="nav nav-tabs overview_tabs" role="tablist" style='<%= If(isEviction,"display:none","") %>'>
                             <li class="active short_sale_tab">
                                 <a class="shot_sale_tab_a" href="#home" role="tab" data-toggle="tab" onclick="refreshSummary()">Summary</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Property" role="tab" data-toggle="tab">Property Info</a></li>
@@ -191,7 +191,7 @@
                         <%--<dx:ASPxCallbackPanel ID="overviewCallbackPanel" runat="server" ClientInstanceName="overviewCallbackPanelClinet" OnCallback="overviewCallbackPanel_Callback">--%>
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div class="tab-pane <%= If(ShortSalePage.isEviction,"","active") %>" id="home">
+                            <div class="tab-pane <%= If(isEviction,"","active") %>" id="home">
                                 <div class="short_sale_content">
 
                                     <uc1:ShortSaleSummaryTab runat="server" ID="ShortSaleSummaryTab" />
@@ -212,8 +212,8 @@
                                     <uc1:ShortSaleHomewonerTab runat="server" ID="ShortSaleHomewonerTab" />
                                 </div>
                             </div>
-                            <div class="tab-pane  <%= If(ShortSalePage.isEviction,"active","") %>" id="Eviction">
-                                <div class="short_sale_content" style='<%= If(ShortSalePage.isEviction,"margin-top: 0px;","") %>'>
+                            <div class="tab-pane  <%= If(isEviction,"active","") %>" id="Eviction">
+                                <div class="short_sale_content" style='<%= If(isEviction,"margin-top: 0px;","") %>'>
                                     <uc1:ShortSaleEvictionTab runat="server" ID="ShortSaleEvictionTab" />
                                 </div>
                             </div>

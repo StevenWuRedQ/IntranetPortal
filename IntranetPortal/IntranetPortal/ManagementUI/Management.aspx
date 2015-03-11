@@ -557,7 +557,7 @@
             itemClickAction: menuItemClicked,
             buttonIcon: 'arrowdown',
         }).dxDropDownMenu("instance");
-
+       
     </script>
 </asp:Content>
 

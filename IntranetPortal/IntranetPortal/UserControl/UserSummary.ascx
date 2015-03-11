@@ -335,7 +335,7 @@
                                 <td style="vertical-align: top" class="under_line">
                                     <h4>
                                         <img src="../images/grid_task_icon.png" class="vertical-img" /><span class="heading_text">Task</span> </h4>
-                                    <div class="div-underline">
+                                    <div class="div-underline" style="width:380px">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridTask" KeyFieldName="ProcInstId;ActInstId" ClientInstanceName="gridTaskClient" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="DisplayName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -367,6 +367,12 @@
                                                             </table>
                                                         </div>
                                                     </GroupRowTemplate>
+                                                </dx:GridViewDataColumn>
+                                                <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
+                                                    <DataItemTemplate>
+                                                        <%--change the image and the size by steven--%>
+                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;visibility: hidden;"  />
+                                                    </DataItemTemplate>
                                                 </dx:GridViewDataColumn>
                                             </Columns>
                                             <GroupSummary>

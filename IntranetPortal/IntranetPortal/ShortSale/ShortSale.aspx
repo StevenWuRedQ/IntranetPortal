@@ -25,6 +25,7 @@
             e.processOnServer = false;
         }
     </script>
+    <asp:HiddenField runat="server" ID="hfIsEvction" Value="false"/>
     <div style="background: url(/images/MyIdealProptery.png) no-repeat center fixed; background-size: 260px, 280px; background-color: #dddddd; width: 100%; height: 100%;">
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>

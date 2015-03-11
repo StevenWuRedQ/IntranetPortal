@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class ShortSalePage
 
     '''<summary>
+    '''hfIsEvction control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfIsEvction As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''ASPxSplitter1 control.
     '''</summary>
     '''<remarks>
