@@ -70,7 +70,7 @@
         }
 
         function OnEndCallback(s, e) {
-            debugger;
+           
             return;
             $("#prioity_content").mCustomScrollbar(
              {

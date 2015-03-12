@@ -63,9 +63,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
                 m_current_contact = $scope.currentContact;
 
             }
-            $("#employee_list").mCustomScrollbar({
-                theme: "minimal-dark"
-            });
+            
         }).error(function (data, status, headers, config) {
 
             debugger;

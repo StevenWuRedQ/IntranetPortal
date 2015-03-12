@@ -731,11 +731,7 @@
                 }
             );
             //use page filter to disable the custom scorllbar that can fix the expand the right spliter panel
-            // $('.dxgvCSD').mCustomScrollbar(
-            //    {
-            //        theme: "minimal-dark"
-            //    }
-            //);
+           
         }
 
         $('#ctl00_MainContentPH_ASPxSplitter1_contentSplitter_gridReport_DXPagerBottom_PSP_DXME_').addClass('no_before_and_after');

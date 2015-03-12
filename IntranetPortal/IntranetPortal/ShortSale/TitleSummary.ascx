@@ -35,12 +35,7 @@
     }
     function initScrollbar_summary() {
 
-        $("#ctl00_MainContentPH_UserSummary_contentSplitter_0_CC").mCustomScrollbar(
-            {
-                theme: "minimal-dark",
-                axis: "yx"
-            }
-         );
+       
     }
 
     $(document).ready(function () {

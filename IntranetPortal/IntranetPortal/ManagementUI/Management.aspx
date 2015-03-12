@@ -10,7 +10,7 @@
             border: none !important;
         }
     </style>
-   
+
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
@@ -25,7 +25,7 @@
 
                 <div class="row">
                     <div class="col-md-4 ">
-                        <div class="border_right" style="padding-right: 30px; font-weight: 300;">Management Summary</div>
+                        <div class="border_right" style="padding-right: 0px; font-weight: 300;">Management Summary</div>
                     </div>
                     <div class="col-md-2">
                         <table>
@@ -69,7 +69,7 @@
 
         <div style="margin-top: 40px;">
             <%--body Left--%>
-            <div class="row">
+            <%--<div class="row" style="display:none">
                 <div class="col-md-7">
                     <div role="tabpanel" class="mag_tab_panel">
 
@@ -119,26 +119,26 @@
                                         <div class="col-md-1">
                                             <input type="button" value="Display" class="rand-button bg_color_blue rand-button-padding" onclick="LoadGrid()" />
                                         </div>
-                                           <div class="col-md-1">
+                                        <div class="col-md-1">
                                             <input type="button" value="Chart" class="rand-button bg_color_blue rand-button-padding" onclick="LoadPhoneBarChart()" />
 
-                                           </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div style="margin: 30px 0; font-size: 24px; color: #234b60;display:none" id="divPhoneSummary">
+                                <div style="margin: 30px 0; font-size: 24px; color: #234b60; display: none" id="divPhoneSummary">
                                     <span style="font-weight: 900" id="CallTotalCount">52,013 </span>Phone Calls<br />
                                     <span style="font-size: 14px; color: #77787b">January 1, 2015 - January 31, 2015</span>
                                 </div>
                                 <div style="font-size: 14px;">
-                                    <div id="chartContainer" style="height:450px; max-width: 1000px; width: 100%; margin: 0 auto; display:none"></div>
-                                    <div id="gridContainer" style="height:450px; max-width: 1000px; width: 100%; margin: 0 auto; display:none"></div>                                  
+                                    <div id="chartContainer" style="height: 450px; max-width: 1000px; width: 100%; margin: 0 auto; display: none"></div>
+                                    <div id="gridContainer" style="height: 450px; max-width: 1000px; width: 100%; margin: 0 auto; display: none"></div>
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="profile">...</div>
                             <div role="tabpanel" class="tab-pane" id="geomap">
-                                <iframe src="/Map/ZipMap.aspx" style="width:100%;min-height:600px"></iframe>
+                                <iframe src="/Map/ZipMap.aspx" style="width: 100%; min-height: 600px"></iframe>
                             </div>
-                            
+
                             <div role="tabpanel" class="tab-pane" id="deals_tab">deals_tab</div>
                             <div role="tabpanel" class="tab-pane" id="messages">...</div>
 
@@ -182,15 +182,186 @@
                         </div>
                     </div>
                 </div>
+            </div>--%>
+            <%-- New layout --%>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mag_grid">
+                            <div class="mag_grid_title">
+                                <i class="fa fa-users management_denominator color_gray "></i><span>Agent Activity</span>
+                            </div>
+                            <div class="mag_grid_edit">
+                                <select class="form-control">
+                                    <option>In Process Leads</option>
+                                </select>
+                            </div>
+                            <div class="mag_grid_chart">
+                                <div id="current_leads" class="containers" style="height: 250px; width: 100%;"></div>
+                                <div class="chart_text">
+                                    Phone Call
+                                </div>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-8">&nbsp;</div>
+                                    <div class="col-md-4">
+                                        <button class="rand-button bg_color_blue rand-button-padding" type="button">All Charts <i class="fa fa-angle-right btn_arrow"></i></button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mag_grid">
+                            <div class="mag_grid_title">
+                                <i class="fa fa-pie-chart management_denominator color_gray "></i><span>Status Of Leads</span>
+                            </div>
+                            <div class="mag_grid_edit">
+                                <select class="form-control">
+                                    <option>Phone Call</option>
+                                </select>
+                            </div>
+                            <div class="mag_grid_chart">
+                                <div id="container" class="containers" style="height: 250px; width: 100%;"></div>
+                                <div class="chart_text">
+                                    &nbsp;
+                                </div>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-8">&nbsp;</div>
+                                    <div class="col-md-4">
+                                        <button class="rand-button bg_color_blue rand-button-padding" type="button">All Charts <i class="fa fa-angle-right btn_arrow"></i></button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mag_grid">
+                            <div class="mag_grid_title">
+                                <i class="fa fa-map-marker management_denominator color_gray "></i><span>Geo Leads</span>
+                            </div>
+
+                            <div class="mag_grid_chart">
+                                <iframe src="/Map/ZipMap.aspx" style="width: 100%; min-height: 299px"></iframe>
+                                <div class="chart_text">
+                                    &nbsp;
+                                </div>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-7">&nbsp;</div>
+                                    <div class="col-md-5">
+                                        <button class="rand-button bg_color_blue rand-button-padding" type="button">Show Big Map <i class="fa fa-angle-right btn_arrow"></i></button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 30px">
+                    <div class="col-md-4">
+                        <div class="mag_grid">
+                            <div class="mag_grid_title">
+                                <i class="fa  fa-bar-char management_denominator color_gray "></i><span>Monthly Intake</span>
+                            </div>
+                            <div class="mag_grid_edit">
+                                <select class="form-control">
+                                    <option>Sample Chart</option>
+                                </select>
+                            </div>
+                            <div class="mag_grid_chart">
+                                <div id="monthly_intake" class="containers" style="height: 250px; width: 100%;"></div>
+                                <div class="chart_text">
+                                    Phone Call
+                                </div>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-8">&nbsp;</div>
+                                    <div class="col-md-4">
+                                        <button class="rand-button bg_color_blue rand-button-padding" type="button">All Charts <i class="fa fa-angle-right btn_arrow"></i></button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mag_grid">
+                            <div class="mag_grid_title">
+                                <i class="fa fa-line-chart management_denominator color_gray "></i><span>Compare Offices</span>
+                            </div>
+                            <div class="mag_grid_edit">
+                                <select class="form-control">
+                                    <option>Sample Chart</option>
+                                </select>
+                            </div>
+                            <div class="mag_grid_chart">
+                                <div id="leads_process_chart" class="containers" style="height: 250px; width: 100%;"></div>
+                                <div class="chart_text">
+                                    &nbsp;
+                                </div>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-8">&nbsp;</div>
+                                    <div class="col-md-4">
+                                        <button class="rand-button bg_color_blue rand-button-padding" type="button">All Charts <i class="fa fa-angle-right btn_arrow"></i></button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="mag_grid">
+                            <div class="mag_grid_title">
+                                <i class="fa fa-line-chart management_denominator color_gray "></i><span>Compare Offices</span>
+                            </div>
+                            <div class="mag_grid_edit">
+                                <select class="form-control">
+                                    <option>Sample Chart</option>
+                                </select>
+                            </div>
+                            <div class="mag_grid_chart">
+                                <div id="team_hours_chart" class="containers" style="height: 250px; width: 100%;"></div>
+                                <div class="chart_text">
+                                    &nbsp;
+                                </div>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-8">&nbsp;</div>
+                                    <div class="col-md-4">
+                                        <button class="rand-button bg_color_blue rand-button-padding" type="button">All Charts <i class="fa fa-angle-right btn_arrow"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-   
+
+
     <script type="text/javascript">
-        function BindAgents()
-        {
-            if(currentTeamInfo != null)
-            {
+        function BindAgents() {
+            if (currentTeamInfo != null) {
                 $("#selAgents").html("");
                 $.each(currentTeamInfo.Users, function (key, value) {
                     $('#selAgents')
@@ -209,7 +380,7 @@
             var customStore = new DevExpress.data.CustomStore({
                 load: function (loadOptions) {
                     var d = $.Deferred();
-                    $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {                        
+                    $.getJSON('/wcfdataservices/portalReportservice.svc/UserReports').done(function (data) {
                         d.resolve(data, { totalCount: data.length });
                     });
                     return d.promise();
@@ -233,7 +404,7 @@
                      { valueField: "Inbound", name: "Inbound" },
                      { valueField: "Outbound", name: "Outbound" },
                      { valueField: "Internal", name: "Internal" },
-                     { valueField: "Count", name: "Total", type: 'spline', color:'blue' }
+                     { valueField: "Count", name: "Total", type: 'spline', color: 'blue' }
                 ],
                 argumentAxis: {
                     argumentType: 'string'
@@ -259,8 +430,7 @@
         function LoadGrid() {
             $("#gridContainer").show();
             var agent = $("#selAgents").val();
-            if (agent != "")
-            {
+            if (agent != "") {
                 ShowEmployeeReport(agent);
                 return;
             }
@@ -338,16 +508,16 @@
                     paging: { enabled: false },
                     columns: [{
                         dataField: "DateTime",
-                        caption:"Date",
+                        caption: "Date",
                         dataType: "date",
                         format: "shortDate",
-                        calculateGroupValue: function (rowData) {                           
+                        calculateGroupValue: function (rowData) {
                             var callDate = new Date(rowData.DateTime);
                             return callDate.toLocaleDateString();
                         }
-                    },{
+                    }, {
                         dataField: "DateTime",
-                        caption:"Time",
+                        caption: "Time",
                         dataType: "date",
                         format: "shortTime",
                     },
@@ -379,10 +549,74 @@
 
 
     <script>
-                
+
         var currentTeamInfo = null;
         function loadCharts(office) {
-            $.getJSON('/WCFDataServices/PortalReportService.svc/LoadTeamInfo/' + office).done(function (data){
+
+            $("#monthly_intake").dxChart({
+                legend: { visible: false },
+                rotated: true,
+                dataSource: [
+                    { day: "Monday", oranges: 3 },
+                    { day: "Tuesday", oranges: 2 },
+                    { day: "Wednesday", oranges: 3 },
+                    { day: "Thursday", oranges: 4 },
+                    { day: "Friday", oranges: 6 },
+                    { day: "Saturday", oranges: 11 },
+                    { day: "Sunday", oranges: 4 }],
+
+                series: {
+                    argumentField: "day",
+                    valueField: "oranges",
+
+                    type: "bar",
+                    color: '#ffa500'
+                }
+            });
+            var dataSource = [
+                  { language: "English", percent: 55.5 },
+                  { language: "Chinese", percent: 4.0 },
+                  { language: "Spanish", percent: 4.3 },
+                  { language: "Japanese", percent: 4.9 },
+                  { language: "Portuguese", percent: 2.3 },
+                  { language: "German", percent: 5.6 },
+                  { language: "French", percent: 3.8 },
+                  { language: "Russian", percent: 6.3 },
+                  { language: "Italian", percent: 1.6 },
+                  { language: "Polish", percent: 1.8 }
+            ];
+
+            $("#team_hours_chart").dxPieChart({
+               
+                dataSource: dataSource,
+                legend: {
+                    horizontalAlignment: "center",
+                    verticalAlignment: "bottom",
+
+                    visible: false
+                },
+               
+                series: [{
+                    smallValuesGrouping: {
+                        mode: "topN",
+                        topCount: 3
+                    },
+                    type: "doughnut",
+                    argumentField: "language",
+                    valueField: "percent",
+                    label: {
+                        visible: true,
+                        format: "fixedPoint",
+
+                        connector: {
+                            visible: true,
+                            width: 1
+                        }
+                    }
+                }]
+            });
+
+            $.getJSON('/WCFDataServices/PortalReportService.svc/LoadTeamInfo/' + office).done(function (data) {
                 currentTeamInfo = data;
 
                 //bind phone log agents name
@@ -439,7 +673,7 @@
                                 visible: true
                             }
                         },
-                       
+
                     }],
                     palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
 
@@ -546,18 +780,18 @@
 
         //];
         menuItemClicked = function (e) {
-           
-            DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000});
+
+            DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000 });
             $('#teams_link').html(e.itemData);
             //officeDropDown.option("buttonText", e.itemData );
-            loadCharts(e.itemData.replace("Office",'').trim());
+            loadCharts(e.itemData.replace("Office", '').trim());
         };
         var officeDropDown = $("#dropDownMenu").dxDropDownMenu({
             dataSource: dropDownMenuData,
             itemClickAction: menuItemClicked,
             buttonIcon: 'arrowdown',
         }).dxDropDownMenu("instance");
-       
+
     </script>
 </asp:Content>
 

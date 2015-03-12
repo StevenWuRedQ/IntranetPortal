@@ -2217,6 +2217,38 @@ li.active.mag_tab {
     border-radius: 5px;
 }
 
+.mag_grid {
+    width: 85%;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #dde0e7;
+}
+
+.mag_grid_edit, .mag_grid_chart {
+    margin-top: 20px;
+}
+
+.btn_arrow {
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.mag_grid_chart {
+}
+
+.mag_grid_title {
+    font-size: 24px;
+}
+
+    .mag_grid_title i {
+        color: #999ca1;
+    }
+
+    .mag_grid_title span {
+        color: #2e2f31;
+        font-weight: 900;
+        margin-left: 23px;
+    }
+
 .chart_text {
     font-size: 12px;
     text-align: center;
@@ -2225,29 +2257,25 @@ li.active.mag_tab {
 /*end magagement UI*/
 
 /* scrobar */
-::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: transparent;
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: transparent;
 }
 
-::-webkit-scrollbar
-{
-	width: 6px;
-	background-color: transparent;
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
 }
 
-::-webkit-scrollbar-thumb
-{
-	background-color:lightgray;
-  	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
 
-::-webkit-scrollbar-track-piece
-{
-    background-color:transparent;
+::-webkit-scrollbar-track-piece {
+    background-color: transparent;
 }
-::-webkit-scrollbar:horizontal
-{
-    height:6px;
+
+::-webkit-scrollbar:horizontal {
+    height: 6px;
 }

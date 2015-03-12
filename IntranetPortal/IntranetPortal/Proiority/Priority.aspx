@@ -918,25 +918,7 @@
 
                         <!-- custom scrollbar plugin -->
 
-                        <script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-                        <script>
-                            (function ($) {
-                                $(window).load(function () {
-
-                                    $("#prioity_content").mCustomScrollbar(
-                                        {
-                                            theme: "minimal-dark"
-                                        }
-                                        );
-                                    $("#home_owner_content").mCustomScrollbar(
-                                        {
-                                            theme: "minimal-dark"
-                                        }
-                                        );
-
-                                });
-                            })(jQuery);
-                        </script>
+                      
                         <script>
                             var el = $(".doc_list_title");
 

@@ -1047,9 +1047,7 @@
 
             //$('.selectpicker').selectpicker();
             $('.selectpicker').select2();
-            //$('#lead_search_left').mCustomScrollbar({
-            //    theme: "minimal-dark"
-            //});
+           
 
         });
     </script>
