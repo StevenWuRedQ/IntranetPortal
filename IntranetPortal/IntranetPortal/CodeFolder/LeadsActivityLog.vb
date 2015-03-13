@@ -1,19 +1,22 @@
 ﻿Partial Public Class LeadsActivityLog
     Public Shared Function AddActivityLog(logDate As DateTime, comments As String, bble As String, category As String, empid As Integer, empName As String) As LeadsActivityLog
-        Using Context As New Entities
-            Dim log As New LeadsActivityLog
-            log.BBLE = bble
-            log.EmployeeID = empid
-            log.EmployeeName = empName
-            log.Category = category
-            log.ActivityDate = logDate
-            log.Comments = comments
 
-            Context.LeadsActivityLogs.Add(log)
-            Context.SaveChanges()
+        AddActivityLog(logDate, comments, bble, category, empid, empName, EnumActionType.DefaultAction)
 
-            Return log
-        End Using
+        'Using Context As New Entities
+        '    Dim log As New LeadsActivityLog
+        '    log.BBLE = bble
+        '    log.EmployeeID = empid
+        '    log.EmployeeName = empName
+        '    log.Category = category
+        '    log.ActivityDate = logDate
+        '    log.Comments = comments
+
+        '    Context.LeadsActivityLogs.Add(log)
+        '    Context.SaveChanges()
+
+        '    Return log
+        'End Using
     End Function
 
     Public Shared Function AddActivityLog(logDate As DateTime, comments As String, bble As String, category As String, empid As Integer, empName As String, actionType As EnumActionType) As LeadsActivityLog
@@ -23,11 +26,22 @@
             log.EmployeeID = empid
             log.EmployeeName = empName
             log.Category = category
-            log.ActionType = actionType
+
+            If actionType = Nothing Then
+                log.ActionType = actionType
+            End If
+
             log.ActivityDate = logDate
             log.Comments = comments
 
             Context.LeadsActivityLogs.Add(log)
+
+            Dim ld = Context.Leads.Find(bble)
+            If ld IsNot Nothing Then
+                ld.LastUpdate = DateTime.Now
+                ld.UpdateBy = empName
+            End If
+
             Context.SaveChanges()
 
             Return log
@@ -40,7 +54,7 @@
 
         If HttpContext.Current Is Nothing Then
             empId = Nothing
-            empName = "System"
+            empName = "Portal"
         Else
             empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
             empName = HttpContext.Current.User.Identity.Name
@@ -106,6 +120,8 @@
         Declined = 13
         Reassign = 14
         DeadLead = 15
+        ExtendRecycle = 16
+        DefaultAction = 17
     End Enum
 
 End Class

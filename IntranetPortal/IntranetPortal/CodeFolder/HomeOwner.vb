@@ -35,29 +35,47 @@ Partial Public Class HomeOwner
         End Set
     End Property
 
+
+    Private _bestPhoneNo As List(Of HomeOwnerPhone)
     Public ReadOnly Property BestPhoneNo As List(Of HomeOwnerPhone)
         Get
-            Using context As New Entities
-                Dim list = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = Name And p.Source = PhoneSource.UserAdded).ToList
-                'list.Sort(Function(x, y) x.Stuats < y.Stuats)
-                Return list
-            End Using
+            If _bestPhoneNo Is Nothing Then
+                Using context As New Entities
+                    Dim list = context.HomeOwnerPhones.Where(Function(p) p.BBLE = BBLE And p.OwnerName = Name And p.Source = PhoneSource.UserAdded).ToList
+                    'list.Sort(Function(x, y) x.Stuats < y.Stuats)
+                    _bestPhoneNo = list
+                End Using
+            End If
+
+            Return _bestPhoneNo
         End Get
     End Property
 
+
+    Private _bestEmail As List(Of HomeOwnerEmail)
     Public ReadOnly Property BestEmail As List(Of HomeOwnerEmail)
         Get
-            Using context As New Entities
-                Dim list = context.HomeOwnerEmails.Where(Function(e) e.BBLE = BBLE And e.OwnerName = Name And e.Source = PhoneSource.UserAdded).ToList
-                Return list
-            End Using
+            If _bestEmail Is Nothing Then
+                Using context As New Entities
+                    Dim list = context.HomeOwnerEmails.Where(Function(e) e.BBLE = BBLE And e.OwnerName = Name And e.Source = PhoneSource.UserAdded).ToList
+                    _bestEmail = list
+                End Using
+            End If
+
+            Return _bestEmail
         End Get
     End Property
+
+    Private _bestAddress As List(Of HomeOwnerAddress)
     Public ReadOnly Property BestAddress As List(Of HomeOwnerAddress)
         Get
-            Using context As New Entities
-                Return context.HomeOwnerAddresses.Where(Function(add) add.BBLE = BBLE And add.OwnerName = Name And add.Source = AddressSource.UserAdded).ToList
-            End Using
+            If _bestAddress Is Nothing Then
+                Using context As New Entities
+                    _bestAddress = context.HomeOwnerAddresses.Where(Function(add) add.BBLE = BBLE And add.OwnerName = Name And add.Source = AddressSource.UserAdded).ToList
+                End Using
+            End If
+
+            Return _bestAddress
         End Get
     End Property
 

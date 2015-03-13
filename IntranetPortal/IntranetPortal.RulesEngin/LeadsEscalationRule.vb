@@ -2,7 +2,7 @@
 Public Class LeadsEscalationRule
     Public Shared Sub Execute(ld As Lead)
         For Each Rule In GetRule(ld)
-            If Rule.IsDateDue(ld.LastUpdate2, ld, ld.EmployeeName) Then
+            If Rule.IsDateDue(ld.LastUserUpdate, ld, ld.EmployeeName) Then
                 'ServiceLog.Log("Execute Leads Rule: " & ld.BBLE)
                 If Rule.Execute(ld) Then
                     ServiceLog.Log(String.Format("Rule Action, {0}, {1}, {2}, {3}", Rule.Name, Rule.EscalationAfter.ToString, ld.EmployeeName, ld.BBLE))
@@ -18,7 +18,7 @@ Public Class LeadsEscalationRule
         Dim ld = Lead.GetInstance(bble)
         If ld IsNot Nothing Then
             For Each Rule In GetRule(ld)
-                If Rule.IsDateDue(ld.LastUpdate2, ld, ld.EmployeeName) Then
+                If Rule.IsDateDue(ld.LastUserUpdate, ld, ld.EmployeeName) Then
                     ServiceLog.Log("Execute Leads Rule: " & ld.BBLE)
                     Rule.Execute(ld)
                     ServiceLog.Log("Finish Leads Rule: " & ld.BBLE)
@@ -43,16 +43,17 @@ Public Class LeadsEscalationRule
                                          log.SetAsReminder(ld.EmployeeName, "Important", "Review New Leads Reminder", description, ld.BBLE, "Portal")
                                      End Sub,
                                      Function(leads)
-                                         Dim ld = CType(leads, Lead)
-                                         Return ld.LastUpdate2 <= ld.AssignDate
+                                         'Dim ld = CType(leads, Lead)
+                                         'Return ld.LastUpdate2 <= ld.AssignDate
+                                         Return True
                                      End Function,
                                      1,
                                      Function(leads)
                                          Dim ld = CType(leads, Lead)
-                                         If ld.LastUpdate2 <= ld.AssignDate Then
+                                         If ld.LastUserUpdate <= ld.AssignDate Then
                                              Return ld.AssignDate
                                          End If
-                                         Return ld.LastUpdate2
+                                         Return ld.LastUserUpdate
                                      End Function))
 
         rules.Add(New EscalationRule("NewLead", "5.00:00:00",
@@ -65,20 +66,22 @@ Public Class LeadsEscalationRule
 
                                          'insert to assign leads folder of this team  -- need consider the UserinTeam situation
                                          ld.StartRecycleProcess()
+                                         ServiceLog.Log("Recycle of Leads is done, BBLE: " & ld.BBLE)
                                      End Sub,
                                      Function(leads)
-                                         Dim ld = CType(leads, Lead)
-                                         Return ld.LastUserUpdate <= ld.AssignDate
+                                         'Dim ld = CType(leads, Lead)
+                                         'Return ld.LastUserUpdate <= ld.AssignDate
+                                         Return True
                                      End Function, 2,
                                       Function(leads)
                                           Dim ld = CType(leads, Lead)
-                                          If ld.LastUpdate2 <= ld.AssignDate Then
+                                          If ld.LastUserUpdate <= ld.AssignDate Then
                                               Return ld.AssignDate
                                           End If
-                                          Return ld.LastUpdate2
+                                          Return ld.LastUserUpdate
                                       End Function))
 
-        rules.Add(New EscalationRule("Callback", "5.00:00:00",
+        rules.Add(New EscalationRule("Callback", "1.00:00:00",
                                      Sub(leads)
                                          'Dim ld = CType(leads, Lead)
                                          'UserMessage.AddNewMessage(ld.EmployeeName, "You missed a Callback", String.Format("The Call back of Leads ({0}) need to hanlder. BBLE:{1}", ld.LeadsName, ld.BBLE), ld.BBLE, DateTime.Now, "Portal")
@@ -99,7 +102,7 @@ Public Class LeadsEscalationRule
                                          End If
                                      End Function))
 
-        rules.Add(New EscalationRule("Callback", "7.00:00:00",
+        rules.Add(New EscalationRule("Callback", "4.00:00:00",
                                 Sub(leads)
                                     Dim ld = CType(leads, Lead)
 
@@ -125,7 +128,7 @@ Public Class LeadsEscalationRule
                                     End If
                                 End Function))
 
-        rules.Add(New EscalationRule("Callback", "10.00:00:00",
+        rules.Add(New EscalationRule("Callback", "7.00:00:00",
                                 Sub(leads)
                                     Dim ld = CType(leads, Lead)
 

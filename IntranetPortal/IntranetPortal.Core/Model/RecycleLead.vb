@@ -2,6 +2,12 @@
 
 Partial Public Class RecycleLead
 
+    Public Shared Function GetInstance(recycleId As Integer) As RecycleLead
+        Using ctx As New CoreEntities
+            Return ctx.RecycleLeads.Find(recycleId)
+        End Using
+    End Function
+
     Public Shared Function GetInstanceByLogId(logId As Integer) As RecycleLead
         Using ctx As New CoreEntities
             Return ctx.RecycleLeads.Where(Function(r) r.LogId = logId).FirstOrDefault
@@ -14,6 +20,12 @@ Partial Public Class RecycleLead
             ctx.SaveChanges()
 
             Return rLeads
+        End Using
+    End Function
+
+    Public Shared Function InRecycle(bble As String) As Boolean
+        Using ctx As New CoreEntities
+            Return ctx.RecycleLeads.Any(Function(r) r.BBLE = bble And (r.Status = RecycleStatus.Active Or r.Status = RecycleStatus.Postponed))
         End Using
     End Function
 

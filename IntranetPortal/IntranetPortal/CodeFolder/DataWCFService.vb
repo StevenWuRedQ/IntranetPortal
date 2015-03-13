@@ -650,20 +650,20 @@ Public Class DataWCFService
                     If Not String.IsNullOrEmpty(results(0).NAME) AndAlso Not String.IsNullOrEmpty(results(0).NAME.TrimStart.TrimEnd) Then
                         If Not IsSameName(li.Owner, results(0).NAME.Trim) Then
                             li.Owner = results(0).NAME.Trim
-                            'Dim add1 = String.Format("{0} {1}", results(0).ADDRESS_1, results(0).Street).TrimStart.TrimEnd
-                            SaveHomeOwner(bble, results(0).NAME.Trim, results(0).ADDRESS_1, results(0).ADDRESS_2, results(0).CITY, results(0).STATE, results(0).COUNTRY, results(0).ZIP, context)
                         End If
+
+                        li.Owner = li.Owner.Trim
+                        'Dim add1 = String.Format("{0} {1}", results(0).ADDRESS_1, results(0).Street).TrimStart.TrimEnd
+                        SaveHomeOwner(bble, li.Owner, results(0).ADDRESS_1, results(0).ADDRESS_2, results(0).CITY, results(0).STATE, results(0).COUNTRY, results(0).ZIP, context)
                     End If
 
                     If results.Count > 1 AndAlso Not String.IsNullOrEmpty(results(1).NAME) AndAlso Not String.IsNullOrEmpty(results(1).NAME.Trim) Then
-                        If Not IsSameName(li.CoOwner, results(1).NAME.Trim) Then
-                            Dim coOwner = results(1).NAME.Trim
-                            If Not String.IsNullOrEmpty(coOwner) AndAlso coOwner <> li.Owner Then
-                                li.CoOwner = results(1).NAME.Trim
-                                SaveHomeOwner(bble, results(1).NAME.Trim, results(1).ADDRESS_1, results(1).ADDRESS_2, results(1).CITY, results(1).STATE, results(1).COUNTRY, results(1).ZIP, context)
-                            Else
-                                li.CoOwner = ""
-                            End If
+                        Dim coOwner = results(1).NAME.Trim
+                        If Not String.IsNullOrEmpty(coOwner) AndAlso coOwner <> li.Owner Then
+                            li.CoOwner = results(1).NAME.Trim
+                            SaveHomeOwner(bble, results(1).NAME.Trim, results(1).ADDRESS_1, results(1).ADDRESS_2, results(1).CITY, results(1).STATE, results(1).COUNTRY, results(1).ZIP, context)
+                        Else
+                            li.CoOwner = ""
                         End If
                     Else
                         li.CoOwner = ""
@@ -673,8 +673,9 @@ Public Class DataWCFService
                     If prop IsNot Nothing AndAlso Not String.IsNullOrEmpty(prop.OWNER_NAME) Then
                         If Not IsSameName(li.Owner, prop.OWNER_NAME) Then
                             li.Owner = prop.OWNER_NAME.Trim
-                            SaveHomeOwner(bble, prop.OWNER_NAME.Trim, prop.OWNER_ADDRESS1, prop.OWNER_ADDRESS2, prop.OWNER_CITY, prop.OWNER_STATE, prop.OWNER_COUNTRY, prop.OWNER_ZIP, context)
                         End If
+                        li.Owner = li.Owner.Trim
+                        SaveHomeOwner(bble, li.Owner, prop.OWNER_ADDRESS1, prop.OWNER_ADDRESS2, prop.OWNER_CITY, prop.OWNER_STATE, prop.OWNER_COUNTRY, prop.OWNER_ZIP, context)
                     End If
                 End If
             End Using

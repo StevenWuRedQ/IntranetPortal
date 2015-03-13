@@ -31,7 +31,7 @@
                                             <td></td>
                                         </tr>
                                     </table>
-                                    <dx:ASPxGridView runat="server" ID="gridOnlineUsers" KeyFieldName="UserName">
+                                    <dx:ASPxGridView runat="server" ID="gridOnlineUsers" KeyFieldName="UserName" OnDataBinding="gridOnlineUsers_DataBinding">
                                         <Columns>
                                             <dx:GridViewDataTextColumn FieldName="UserName"></dx:GridViewDataTextColumn>
                                             <dx:GridViewDataTextColumn FieldName="IPAddress"></dx:GridViewDataTextColumn>
@@ -113,7 +113,41 @@
                             </PanelCollection>
                         </dx:ASPxRoundPanel>
                     </td>
-                    <td></td>
+                    <td style="vertical-align: top">
+                        <dx:ASPxRoundPanel HeaderText="Send Email" runat="server" Width="100%">                                                        
+                            <PanelCollection>
+                                <dx:PanelContent>
+                                    <table style="width:500px">
+                                        <tr style="margin-top: 3px; height: 25px">
+                                            <td>To:</td>
+                                            <td>
+                                                <dx:ASPxComboBox runat="server" ID="cbEmployee"></dx:ASPxComboBox>
+                                            </td>
+                                        </tr>
+                                        <tr style="margin-top: 3px; height: 25px">
+                                            <td>Subject:</td>
+                                            <td>
+                                                <dx:ASPxTextBox runat="server" ID="txtSubject"></dx:ASPxTextBox>
+                                            </td>
+                                        </tr>
+                                        <tr style="margin-top: 3px;">
+                                            <td>EmailBody:</td>
+                                            <td>
+                                                <dx:ASPxMemo runat="server" ID="ASPxMemo1" Width="100%" Height="100px"></dx:ASPxMemo>
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 30px;">
+                                            <td></td>
+                                            <td style="padding-top: 3px;">
+                                                <dx:ASPxButton Text="Send Email" runat="server" ID="ASPxButton1" OnClick="ASPxButton1_Click"></dx:ASPxButton>
+                                                <dx:ASPxLabel runat="server" ID="lblResult"></dx:ASPxLabel>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </dx:PanelContent>
+                            </PanelCollection>
+                        </dx:ASPxRoundPanel>
+                    </td>
                 </tr>
             </table>
 

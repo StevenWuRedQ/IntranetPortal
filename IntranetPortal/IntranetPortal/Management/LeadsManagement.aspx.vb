@@ -75,71 +75,29 @@ Public Class LeadsManagement
     End Sub
 
     Sub BindOfficeLeads(office As String)
-        Dim officeName = office & " Office"
-
-        Dim unActiveUser = Employee.GetDeptUsersList(office, False).Select(Function(emp) emp.Name).ToArray
-        Using Context As New Entities
-            'Dim lds = (From li In Context.LeadsInfoes
-            '                       Join ld In Context.Leads On ld.BBLE Equals li.BBLE
-            '                       Where ld.EmployeeName = officeName Or (unActiveUser.Contains(ld.EmployeeName) And ld.Status <> LeadStatus.InProcess)
-            '                       Let TaxCobo = Context.LeadsTaxLiens.Where(Function(t) t.BBLE = ld.BBLE).FirstOrDefault
-            '                       Let Mort = Context.LeadsMortgageDatas.Where(Function(l) l.BBLE = ld.BBLE).FirstOrDefault
-            '                       Let Recycle = Context.LeadsActivityLogs.Any(Function(l) l.BBLE = ld.BBLE)
-            '                       Let MortgageCombo = (If(li.C1stMotgrAmt.HasValue, li.C1stMotgrAmt, 0) + If(li.C2ndMotgrAmt.HasValue, li.C2ndMotgrAmt, 0) + If(li.C3rdMortgrAmt.HasValue, li.C3rdMortgrAmt, 0))
-            '                        Order By ld.BBLE Ascending
-            '                        Select New With {
-            '                          .BBLE = ld.BBLE,
-            '                          .PropertyAddress = li.PropertyAddress,
-            '                          .Number = li.Number,
-            '                          .Street = li.StreetName,
-            '                          .Owner = li.Owner,
-            '                          .CoOwner = li.CoOwner,
-            '                          .Neighborhood = li.NeighName,
-            '                          .NYCSqft = li.NYCSqft,
-            '                          .C1 = li.C1stMotgrAmt,
-            '                          .C2 = li.C2ndMotgrAmt,
-            '                          .C3 = li.C3rdMortgrAmt,
-            '                          .LotDem = li.LotDem,
-            '                          .PropertyClass = li.PropertyClass,
-            '                          .MortgageCombo = MortgageCombo,
-            '                          .C1stServicer = Mort.C1stServicer,
-            '                          .TaxLiensAmount = If(TaxCobo.Amount = 0, "Not Avaiable", ""),
-            '                          .Type = li.Type,
-            '                          .IsRecycled = Recycle
-            '                          })
-            gridLeads.DataSource = Context.LeadsAssignView2.Where(Function(la) la.EmployeeName = officeName Or (unActiveUser.Contains(la.EmployeeName) And la.Status <> LeadStatus.InProcess)).OrderBy(Function(la) la.BBLE).ToList
-            gridLeads.DataBind()
-        End Using
+        Dim currentTeam = Team.GetTeam(office)
+        gridLeads.DataSource = currentTeam.AssignLeadsView.ToList
+        gridLeads.DataBind()
+        Return
     End Sub
 
     Sub BindOfficeEmployee(office As String)
-        Using Context As New Entities
-            'If Page.User.IsInRole("Admin") Then
-            '    Dim emps = Context.Employees.Where(Function(emp) emp.Active = True Or emp.Name.EndsWith("Office")).ToList.OrderBy(Function(em) em.Name)
-            '    listboxEmployee.DataSource = emps
-            '    listboxEmployee.DataBind()
+        If String.IsNullOrEmpty(Request.QueryString("team")) Then
+            Dim emps = Employee.GetDeptUsersList(office).OrderBy(Function(e) e.Name).ToList
+            listboxEmployee.DataSource = emps
+            listboxEmployee.DataBind()
 
-            '    AssignLeadsPopup.LeadsSource = String.Join(",", emps.Select(Function(em) em.Name).ToArray)
-            '    Return
-            'End If
+            AssignLeadsPopup.EmployeeSource = String.Join(",", emps.Select(Function(em) em.Name).ToArray)
+        Else
+            Dim teamId = CInt(Request.QueryString("team"))
+            Dim emps = Team.GetTeam(teamId).ActiveUsers.Select(Function(u) Employee.GetInstance(u)).OrderBy(Function(e) e.Name).ToList
+            listboxEmployee.DataSource = emps
+            listboxEmployee.DataBind()
 
-            If String.IsNullOrEmpty(Request.QueryString("team")) Then
-                Dim emps = Employee.GetDeptUsersList(office).OrderBy(Function(e) e.Name).ToList
-                listboxEmployee.DataSource = emps
-                listboxEmployee.DataBind()
+            AssignLeadsPopup.EmployeeSource = String.Join(",", emps.Select(Function(em) em.Name).ToArray)
+        End If
 
-                AssignLeadsPopup.EmployeeSource = String.Join(",", emps.Select(Function(em) em.Name).ToArray)
-            Else
-                Dim teamId = CInt(Request.QueryString("team"))
-                Dim emps = Employee.GetTeamUserList(teamId).OrderBy(Function(e) e.Name).ToList
-                listboxEmployee.DataSource = emps
-                listboxEmployee.DataBind()
-
-                AssignLeadsPopup.EmployeeSource = String.Join(",", emps.Select(Function(em) em.Name).ToArray)
-            End If
-
-            AddDeadLeadsFolderToEmpList()
-        End Using
+        AddDeadLeadsFolderToEmpList()
     End Sub
 
     Sub BindEmployeeList()

@@ -6,10 +6,8 @@ Public Class LeadsSubMenu
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        MenuControl()
-
         If Not IsPostBack Then
-
+            MenuControl()
         End If
     End Sub
 

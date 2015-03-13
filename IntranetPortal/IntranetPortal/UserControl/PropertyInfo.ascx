@@ -502,7 +502,7 @@
         <%--Liens table--%>
         <div style="margin: 20px;" class="clearfix">
             <div class="form_head" style="margin-top: 40px;">Liens</div>
-            <dx:ASPxGridView runat="server" ID="gridLiens" KeyFieldName="LisPenID" Width="100%">
+            <dx:ASPxGridView runat="server" ID="gridLiens" KeyFieldName="LisPenID" Width="100%" ViewStateMode="Disabled">
                 <SettingsBehavior AllowDragDrop="false" AllowSort="false" AllowGroup="false" />
                 <Columns>
                     <dx:GridViewDataTextColumn FieldName="Type" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
@@ -516,40 +516,7 @@
                     <dx:GridViewDataTextColumn FieldName="Defendant" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Index" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
                 </Columns>
-            </dx:ASPxGridView>
-            <table class="table table-condensed" style="width: 100%; display: none">
-                <thead>
-                    <tr>
-                        <th class="report_head">Effective</th>
-                        <th class="report_head">Expiration</th>
-                        <th class="report_head">Type</th>
-                        <th class="report_head">PlainTiff</th>
-                        <th class="report_head">Defendant</th>
-                        <th class="report_head">Index</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="report_content">8/23/2013</td>
-                        <td class="report_content">8/23/2014</td>
-                        <td class="report_content">H.P.D.ORDER TO CORRECT</td>
-                        <td class="report_content">DEPT OF HOUSING PRESERVATION 100 GOLD ST 6TH FL NEW YORK NY 10038</td>
-                        <td class="report_content">OWNER OF BLOCK & LOT</td>
-                        <td class="report_content">HP 170/13</td>
-                    </tr>
-                    <tr style="color: #b1b2b7">
-                        <td class="report_content">5/16/2013</td>
-                        <td class="report_content">5/16/2016
-                                            <span class="color_balck">SATISFIED: 11/15/2013</span>
-                        </td>
-                        <td class="report_content">JUDGEMENT</td>
-                        <td class="report_content">DEPT OF HOUSING PRESERVATION 100 GOLD ST 6TH FL NEW YORK NY 10038</td>
-                        <td class="report_content">BRIGG ESTRELLA</td>
-                        <td class="report_content">HP 170/13</td>
-                    </tr>
-                </tbody>
-
-            </table>
+            </dx:ASPxGridView>           
         </div>
         <%--end--%>
     </div>
@@ -577,7 +544,7 @@
     </ContentCollection>
 </dx:ASPxPopupControl>
 
-<script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<%--<script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>--%>
 
 <script type="text/javascript">
     init_currency();

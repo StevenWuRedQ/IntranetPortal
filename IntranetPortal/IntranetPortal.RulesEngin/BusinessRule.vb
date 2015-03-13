@@ -200,8 +200,10 @@ InitialLine:
                         Thread.Sleep(60000)
                     Case 3
                         Thread.Sleep(300000)
-                    Case Else
+                    Case 4
                         NotifyUserDataServiceIsOff()
+                        Thread.Sleep(1000000)
+                    Case Else
                         Thread.Sleep(1000000)
                 End Select
 
@@ -233,13 +235,18 @@ InitialLine:
                 '    Log("All Data is refreshed. BBLE: " & bble)
                 'End If
             Case Core.DataLoopRule.DataLoopType.AllHomeOwner
-                If DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
+                Try
+                    If (DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True)) Then
+                        Log("Initial Data Message " & bble & String.Format(" Refresh BBLE: {0} homeowner info is finished.", bble))
+                    Else
+                        Log("Initial Homeowner failed. No homeowene info loaded. BBLE: " & bble)
+                    End If
+
+                Catch ex As Exception
+                    Log("Initial Homeower failed. Exception: " & ex.Message)
+                Finally
                     rule.Complete(Core.DataLoopRule.DataLoopType.AllMortgage)
-                    Log("Initial Data Message " & bble & String.Format(" Refresh BBLE: {0} homeowner info is finished.", bble))
-                Else
-                    rule.Complete(Core.DataLoopRule.DataLoopType.AllMortgage)
-                    Log("Initial Homeowner failed. No homeowene info loaded. BBLE: " & bble)
-                End If
+                End Try
             Case Core.DataLoopRule.DataLoopType.Servicer
                 DataWCFService.UpdateServicer(bble)
                 DataWCFService.UpdateTaxLiens(bble)
@@ -444,12 +451,14 @@ Public Class RecycleProcessRule
             Try
                 Dim ld = Lead.GetInstance(rld.BBLE)
 
-                If ld.LastUserUpdate <= rld.RecycleDate Then
+                If ld.LastUserUpdate < rld.CreateDate Then
                     'for now don not do real recycle.
-                    'ld.Recycle()
+                    ld.Recycle("RecycleRule")
 
                     rld.Recycle()
                     Log("Leads is Recycled. BBLE: " & ld.BBLE)
+
+                    WorkflowService.ExpiredRecycleProcess(rld.BBLE)
                 Else
                     'Since user did action against this leads, the Recycle action expired
                     WorkflowService.ExpiredRecycleProcess(rld.BBLE)

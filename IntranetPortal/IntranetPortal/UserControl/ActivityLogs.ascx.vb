@@ -16,9 +16,7 @@ Public Class ActivityLogs
     Public Delegate Sub OnMortgageStatusUpdate(updateType As String, status As String, bble As String)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'If (DispalyMode <> ActivityLogMode.ShortSale) Then
-        '    EmailBody2.setHeight = 130
-        'End If
+       
     End Sub
 
     Public Sub BindData(bble As String)
@@ -26,10 +24,6 @@ Public Class ActivityLogs
         Using Context As New Entities
             gridTracking.DataSource = Context.LeadsActivityLogs.Where(Function(log) log.BBLE = bble).OrderByDescending(Function(log) log.ActivityDate).ToList
             gridTracking.DataBind()
-
-            'If Not gridTracking.IsNewRowEditing Then
-            '    gridTracking.AddNewRow()
-            'End If
         End Using
     End Sub
 
@@ -76,22 +70,22 @@ Public Class ActivityLogs
         BindData(hfBBLE.Value)
     End Sub
 
-    Public Function AddActivityLog2(logDate As DateTime, comments As String, bble As String, category As String) As LeadsActivityLog
-        Using Context As New Entities
-            Dim log As New LeadsActivityLog
-            log.BBLE = bble
-            log.EmployeeID = CInt(Membership.GetUser(Page.User.Identity.Name).ProviderUserKey)
-            log.EmployeeName = Page.User.Identity.Name
-            log.Category = category
-            log.ActivityDate = logDate
-            log.Comments = comments
+    'Public Function AddActivityLog2(logDate As DateTime, comments As String, bble As String, category As String) As LeadsActivityLog
+    '    Using Context As New Entities
+    '        Dim log As New LeadsActivityLog
+    '        log.BBLE = bble
+    '        log.EmployeeID = CInt(Membership.GetUser(Page.User.Identity.Name).ProviderUserKey)
+    '        log.EmployeeName = Page.User.Identity.Name
+    '        log.Category = category
+    '        log.ActivityDate = logDate
+    '        log.Comments = comments
 
-            Context.LeadsActivityLogs.Add(log)
-            Context.SaveChanges()
+    '        Context.LeadsActivityLogs.Add(log)
+    '        Context.SaveChanges()
 
-            Return log
-        End Using
-    End Function
+    '        Return log
+    '    End Using
+    'End Function
 
     Protected Sub gridTracking_CustomCallback(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs) Handles gridTracking.CustomCallback
         If (e.Parameters = "Task") Then
@@ -330,39 +324,6 @@ Public Class ActivityLogs
             employees = empsDropDownEdit.Text
         End If
 
-        'SetAsTask(employees, cbTaskImportant.Text, cbTaskAction.Text, txtTaskDes.Text, hfBBLE.Value, Page.User.Identity.Name)
-        'Return
-
-        'Dim scheduleDate = DateTime.Now
-
-        'If cbTaskImportant.Text = "Normal" Then
-        '    scheduleDate = scheduleDate.AddDays(3)
-        'End If
-
-        'If cbTaskImportant.Text = "Important" Then
-        '    scheduleDate = scheduleDate.AddDays(1)
-        'End If
-
-        'If cbTaskImportant.Text = "Urgent" Then
-        '    scheduleDate = scheduleDate.AddHours(2)
-        'End If
-
-        'Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Employees:</td>" &
-        '                             "<td>{0}</td></tr>" &
-        '                             "<tr><td>Action:</td><td>{1}</td></tr>" &
-        '                             "<tr><td>Important:</td><td>{2}</td></tr>" &
-        '                           "<tr><td>Description:</td><td>{3}</td></tr>" &
-        '                           "</table>", employees, cbTaskAction.Text, cbTaskImportant.Text, txtTaskDes.Text)
-
-        'Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Task.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
-
-        'Dim taskId As Integer
-        'Using Context As New Entities
-        '    Dim task = Context.UserTasks.Add(AddTask(hfBBLE.Value, employees, cbTaskAction.Text, cbTaskImportant.Text, scheduleDate, txtTaskDes.Text, log.LogID))
-        '    Context.SaveChanges()
-        '    taskId = task.TaskID
-        'End Using
-
         Dim taskId = CreateTask(employees, cbTaskImportant.Text, cbTaskAction.Text, txtTaskDes.Text, hfBBLE.Value, Page.User.Identity.Name)
 
         Dim emps = employees.Split(";").Distinct.ToArray
@@ -395,35 +356,6 @@ Public Class ActivityLogs
     End Sub
 
     Public Sub SetAsTask(employees As String, taskPriority As String, taskAction As String, taskDescription As String, bble As String, createUser As String)
-        'Dim scheduleDate = DateTime.Now
-
-        'If taskPriority = "Normal" Then
-        '    scheduleDate = scheduleDate.AddDays(3)
-        'End If
-
-        'If taskPriority = "Important" Then
-        '    scheduleDate = scheduleDate.AddDays(1)
-        'End If
-
-        'If taskPriority = "Urgent" Then
-        '    scheduleDate = scheduleDate.AddHours(2)
-        'End If
-
-        'Dim comments = String.Format("<table style=""width:100%;line-weight:25px;""> <tr><td style=""width:100px;"">Employees:</td>" &
-        '                             "<td>{0}</td></tr>" &
-        '                             "<tr><td>Action:</td><td>{1}</td></tr>" &
-        '                             "<tr><td>Important:</td><td>{2}</td></tr>" &
-        '                           "<tr><td>Description:</td><td>{3}</td></tr>" &
-        '                           "</table>", employees, taskAction, taskPriority, taskDescription)
-
-        'Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Task.ToString, Nothing, createUser, LeadsActivityLog.EnumActionType.SetAsTask)
-
-        'Dim taskId As Integer
-        'Using Context As New Entities
-        '    Dim task = Context.UserTasks.Add(AddTask(bble, employees, taskAction, taskPriority, scheduleDate, taskDescription, log.LogID, createUser))
-        '    Context.SaveChanges()
-        '    taskId = task.TaskID
-        'End Using
 
         Dim taskId = CreateTask(employees, taskPriority, taskAction, taskDescription, bble, createUser)
 
@@ -472,7 +404,11 @@ Public Class ActivityLogs
             Return GetIcon("activity_green_bg", "fa fa-info")
         End If
 
-        Return CommentIconList(type)
+        If CommentIconList.ContainsKey(type) Then
+            Return CommentIconList(type)
+        Else
+            Return GetIcon("activity_green_bg", "fa fa-info")
+        End If
     End Function
 
     Function ShowTaskPanel(cate As String) As Boolean
@@ -900,9 +836,11 @@ Public Class ActivityLogs
     End Enum
 
     Protected Sub EmailBody2_Load(sender As Object, e As EventArgs)
-        Dim htmlEditor = CType(sender, ASPxHtmlEditor)
-        If htmlEditor.Toolbars.Count = 0 Then
-            htmlEditor.Toolbars.Add(Utility.CreateCustomToolbar("Custom"))
+        If Not Page.IsPostBack Then
+            Dim htmlEditor = CType(sender, ASPxHtmlEditor)
+            If htmlEditor.Toolbars.Count = 0 Then
+                htmlEditor.Toolbars.Add(Utility.CreateCustomToolbar("Custom"))
+            End If
         End If
     End Sub
 

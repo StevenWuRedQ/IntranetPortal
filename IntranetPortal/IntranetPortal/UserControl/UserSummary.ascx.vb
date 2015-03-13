@@ -4,10 +4,10 @@ Public Class UserSummary
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        BindData()
         BindCalendar()
 
         If Not IsPostBack Then
+            BindData()
             BindNotes()
         End If
     End Sub
@@ -54,6 +54,23 @@ Public Class UserSummary
 
     Sub BindData()
         Using Context As New Entities
+            gridAppointment.DataBind()
+            gridAppointment.GroupBy(gridAppointment.Columns("ScheduleDate"))
+
+
+            gridTask.DataBind()
+            gridTask.GroupBy(gridTask.Columns("ProcSchemeDisplayName"))
+
+            gridPriority.DataBind()
+            
+            gridCallback.DataBind()
+            CType(gridCallback.Columns("CallbackDate"), GridViewDataColumn).GroupBy()
+        End Using
+    End Sub
+
+    Protected Sub gridAppointment_DataBinding(sender As Object, e As EventArgs)
+        If gridAppointment.DataSource Is Nothing Then
+            Dim Context As New Entities
             'Bind Appointment
             Dim leads = (From al In Context.Leads
                                          Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
@@ -65,53 +82,28 @@ Public Class UserSummary
                                               }).Distinct.ToList.OrderByDescending(Function(li) li.ScheduleDate)
 
             gridAppointment.DataSource = leads
-            gridAppointment.DataBind()
-            gridAppointment.GroupBy(gridAppointment.Columns("ScheduleDate"))
+        End If
+    End Sub
 
-            Dim emps = Employee.GetSubOrdinateWithoutMgr(Page.User.Identity.Name)
-            'BindTask
-            leads = (From lead In Context.Leads
-                                                   Join task In Context.UserTasks On task.BBLE Equals lead.BBLE
-                                                   Where task.Status = UserTask.TaskStatus.Active And task.EmployeeName.Contains(Page.User.Identity.Name)
-                                                   Select New With {
-                                                                    .BBLE = lead.BBLE,
-                                                                    .LeadsName = lead.LeadsName,
-                                                                    .ScheduleDate = task.Schedule
-                                                                   }).Union(
-                    From al In Context.Leads
-                                       Join appoint In Context.UserAppointments On appoint.BBLE Equals al.BBLE
-                                       Where appoint.Status = UserAppointment.AppointmentStatus.NewAppointment And (appoint.Agent = Page.User.Identity.Name Or appoint.Manager = Page.User.Identity.Name)
-                                        Select New With {
-                                                                    .BBLE = al.BBLE,
-                                                                    .LeadsName = al.LeadsName,
-                                                                    .ScheduleDate = appoint.ScheduleDate
-                                                                   }).Union(
-                                       From lead In Context.Leads.Where(Function(ld) ld.Status = LeadStatus.MgrApproval And emps.Contains(ld.EmployeeID))
-                                        Select New With {
-                                                                    .BBLE = lead.BBLE,
-                                                                    .LeadsName = lead.LeadsName,
-                                                                    .ScheduleDate = lead.AssignDate
-                                                                   }
-                                       ).Distinct.ToList.OrderByDescending(Function(li) li.ScheduleDate)
-            'leads = WorkflowService.GetMyWorklist()
-            gridTask.DataSource = WorkflowService.GetMyWorklist()
-            gridTask.DataBind()
-
-            gridTask.GroupBy(gridTask.Columns("ProcSchemeDisplayName"))
-
-            'Bind Priority Data
-            Dim priorityData = Context.Leads.Where(Function(ld) ld.Status = LeadStatus.Priority And ld.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(e) e.LastUpdate2)
+    Protected Sub gridPriority_DataBinding(sender As Object, e As EventArgs)
+        If gridPriority.DataSource Is Nothing Then
+            Dim priorityData = Lead.GetUserLeadsData(Page.User.Identity.Name, LeadStatus.Priority)
             gridPriority.DataSource = priorityData
-            gridPriority.DataBind()
+        End If
+    End Sub
 
-            'Bind Callback data
-            Dim callbackleads = Context.Leads.Where(Function(ld) ld.Status = LeadStatus.Callback And ld.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(e) e.LastUpdate2)
+    Protected Sub gridTask_DataBinding(sender As Object, e As EventArgs)
+        If gridTask.DataSource Is Nothing Then
+            gridTask.DataSource = WorkflowService.GetMyWorklist()
+        End If
+    End Sub
+
+    Protected Sub gridCallback_DataBinding(sender As Object, e As EventArgs)
+        If gridCallback.DataSource Is Nothing Then
+            Dim Context As New Entities
+            Dim callbackleads = Lead.GetUserLeadsData(Page.User.Identity.Name, LeadStatus.Callback) 'Context.Leads.Where(Function(ld) ld.Status = LeadStatus.Callback And ld.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(ld) ld.LastUpdate)
             gridCallback.DataSource = callbackleads
-            gridCallback.DataBind()
-            CType(gridCallback.Columns("CallbackDate"), GridViewDataColumn).GroupBy()
-            'gridCallback.GroupBy(gridCallback.Columns("CallbackDate"))
-
-        End Using
+        End If
     End Sub
 
     Sub BindCalendar()
@@ -138,6 +130,7 @@ Public Class UserSummary
             todayScheduler.DataBind()
         End Using
     End Sub
+
 
     'change the quote to the UI by steven
     Public Function HtmlBlackQuote(quote As String) As String
@@ -324,4 +317,9 @@ Public Class UserSummary
     Protected Sub todayScheduler_PopupMenuShowing(sender As Object, e As DevExpress.Web.ASPxScheduler.PopupMenuShowingEventArgs)
         e.Menu.Items.Clear()
     End Sub
+
+  
+    
+ 
+    
 End Class

@@ -104,6 +104,21 @@ Partial Public Class Lead
         Return False
     End Function
 
+    'Get user data by status
+    Public Shared Function GetUserLeadsData(name As String, status As LeadStatus) As List(Of Lead)
+        Dim context As New Entities
+        'Dim result = From ld In context.Leads.Where(Function(ld) ld.Status = status And ld.EmployeeName = name)
+        '                      Let LastUpdate = context.LeadsActivityLogs.Where(Function(log) log.BBLE = ld.BBLE).OrderByDescending(Function(log) log.ActivityDate).FirstOrDefault
+        '                      Order By LastUpdate.ActivityDate Descending
+        '                      Select ld
+
+        Dim result = From ld In context.Leads.Where(Function(ld) ld.Status = status And ld.EmployeeName = name)
+                     Order By ld.LastUpdate Descending
+                     Select ld
+
+        Return result.ToList
+    End Function
+
     Public Shared Function UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime) As Boolean
         Using Context As New Entities
             Dim lead = Context.Leads.Where(Function(l) l.BBLE = bble).FirstOrDefault
@@ -230,7 +245,7 @@ Partial Public Class Lead
         End Using
     End Sub
 
-    Public Sub ReAssignLeads(empName As String)
+    Public Sub ReAssignLeads(empName As String, Optional assignBy As String = "Portal")
         Dim emp = IntranetPortal.Employee.GetInstance(empName)
 
         If emp IsNot Nothing Then
@@ -244,7 +259,7 @@ Partial Public Class Lead
                 ld.LastUpdate = DateTime.Now
 
                 If HttpContext.Current Is Nothing Then
-                    ld.AssignBy = "Portal"
+                    ld.AssignBy = assignBy
                 Else
                     ld.AssignBy = HttpContext.Current.User.Identity.Name
                 End If
@@ -263,22 +278,35 @@ Partial Public Class Lead
     End Sub
 
     Public Sub StartRecycleProcess()
-        Dim comments = "This Lead will be recycled today."
-        Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, BBLE, LeadsActivityLog.LogCategory.RecycleTask.ToString, Nothing, "Portal", LeadsActivityLog.EnumActionType.SetAsTask)
-        Dim rLead = Core.RecycleLead.AddRecycle(BBLE, DateTime.Now, log.LogID)
+        If Not InRecycle Then
+            Dim comments = "This Lead will be recycled today."
+            Dim log = LeadsActivityLog.AddActivityLog(DateTime.Now, comments, BBLE, LeadsActivityLog.LogCategory.RecycleTask.ToString, Nothing, "Portal", LeadsActivityLog.EnumActionType.SetAsTask)
+            Dim rLead = Core.RecycleLead.AddRecycle(BBLE, DateTime.Now, log.LogID)
 
-        Dim emps = IntranetPortal.Employee.GetEmpOfficeManagers(EmployeeName)
+            Dim emps = IntranetPortal.Employee.GetEmpOfficeManagers(EmployeeName)
 
-        If emps Is Nothing Then
-            emps = New String() {Employee.Manager}
+            If emps Is Nothing Then
+                emps = New String() {Employee.Manager}
+            End If
+
+            WorkflowService.StartTaskProcess("RecycleProcess", LeadsName, rLead.RecycleId, BBLE, String.Join(";", emps), "Normal")
         End If
-
-        WorkflowService.StartTaskProcess("RecycleProcess", LeadsName, rLead.RecycleId, BBLE, String.Join(";", emps), "Normal")
     End Sub
 
-    Public Sub Recycle()
+    Public ReadOnly Property InRecycle As Boolean
+        Get
+            Return Core.RecycleLead.InRecycle(BBLE)
+        End Get
+    End Property
+
+    Public Sub Recycle(Optional recycleBy As String = "")
         Dim recylceName = IntranetPortal.Employee.GetOfficeAssignAccount(EmployeeName)
-        ReAssignLeads(recylceName)
+        If String.IsNullOrEmpty(recycleBy) Then
+            ReAssignLeads(recylceName)
+        Else
+            ReAssignLeads(recylceName, recycleBy)
+        End If
+
         Return
 
         'Dim recycleName = Employee.Department & " office"

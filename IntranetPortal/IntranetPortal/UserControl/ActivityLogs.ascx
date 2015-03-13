@@ -354,7 +354,6 @@
     <%--comment box filters--%>
     <div style="padding: 20px; background: #f5f5f5" class="clearfix">
         <%--comment box and text--%>
-
         <div style="float: left; height: 110px; min-width: 460px; width: 60%; margin-top: 10px;">
             <div class="clearfix">
                 <span style="color: #295268;" class="upcase_text">Add Comment&nbsp;&nbsp;<i class="fa fa-comment" style="font-size: 14px"></i></span>
@@ -380,9 +379,7 @@
             <div style="float: right">
                 <div style="color: #2e2f31; float: right">
                     FILTER BY:&nbsp;&nbsp<i class="fa fa-filter acitivty_short_button tooltip-examples " id="filter_btn" title="Filter" style="color: #444547; font-size: 14px;" onclick="clickfilterBtn(this)"></i>
-                </div>
-                <dx:ASPxPopupControl runat="server" ID="popupFilters">
-                </dx:ASPxPopupControl>
+                </div>              
 
                 <%-- 50px --%>
                 <div style="margin-top: 50px">
@@ -446,25 +443,11 @@
     <%-- log tables--%>
     <div style="width: 100%; padding: 0px; display: block;">
         <asp:HiddenField ID="hfBBLE" runat="server" />
-        <dx:ASPxGridView ID="gridTracking" Width="100%" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true" SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID" SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" Styles-FilterBuilderHeader-BackColor="Gray">
+        <dx:ASPxGridView ID="gridTracking" Width="100%" ViewStateMode="Disabled" SettingsCommandButton-UpdateButton-ButtonType="Image" Visible="true" SettingsEditing-Mode="EditForm" ClientInstanceName="gridTrackingClient" runat="server" AutoGenerateColumns="False" KeyFieldName="LogID" SettingsBehavior-AllowSort="false" OnAfterPerformCallback="gridTracking_AfterPerformCallback" Styles-FilterBuilderHeader-BackColor="Gray">
             <Styles>
                 <Cell VerticalAlign="Top"></Cell>
                 <Header BackColor="#F5F5F5"></Header>
-            </Styles>
-            <Templates>
-                <EditForm>
-                    <table style="width: 100%; margin: 0;">
-                        <tr>
-                            <td style="width: 140px;"></td>
-                            <td></td>
-                            <td style="width: 20px; padding: 2px; vertical-align: middle">
-                                <dx:ASPxGridViewTemplateReplacement ID="AddButton" ReplacementType="EditFormUpdateButton" runat="server" ValidateRequestMode="Enabled" />
-                            </td>
-                            <td style="width: 20px; padding: 2px; padding-top: 0px; vertical-align: top"></td>
-                        </tr>
-                    </table>
-                </EditForm>
-            </Templates>
+            </Styles>          
             <Columns>
                 <dx:GridViewDataColumn FieldName="ActionType" VisibleIndex="0" Caption="" Width="40px">
                     <HeaderTemplate></HeaderTemplate>
@@ -612,7 +595,7 @@
                                                     <div style="float: right;">
                                                         <span style="font-size: 14px;">
                                                             <asp:Literal runat="server" ID="ltRecycleDays"></asp:Literal></span>
-                                                        <dx:ASPxComboBox runat="server" ID="cbRecycleDays" Width="80px" Visible="false">
+                                                        <dx:ASPxComboBox runat="server" ID="cbRecycleDays" Width="80px" Visible="false" Native="true">
                                                             <Items>
                                                                 <dx:ListEditItem Text="Extend..." Value="0" Selected="true" />
                                                                 <dx:ListEditItem Text="1 Day" Value="1" />

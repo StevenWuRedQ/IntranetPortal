@@ -193,6 +193,20 @@ Public Class WorkflowService
         End Try
     End Function
 
+    Public Shared Function LoadTaskProcess(sn As String, impersonateUser As String) As WorklistItem
+        If Not IntegratedWithWorkflow() Then
+            Return Nothing
+        End If
+
+        Try
+            Dim conn = GetConnection(impersonateUser)
+            Dim wli = conn.OpenWorklistItem(sn)
+            Return wli
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
+
     Public Shared Function GetMyWorklist() As List(Of WorklistItem)
         If Not IntegratedWithWorkflow() Then
             Return New List(Of WorklistItem)
@@ -212,6 +226,17 @@ Public Class WorkflowService
             Return conn.OpenMyWorklist
         End Using
     End Function
+
+    Public Shared ReadOnly Property ConnectionName As String
+        Get
+            If HttpContext.Current Is Nothing Then
+                Return "Portal"
+            Else
+                Return HttpContext.Current.User.Identity.Name
+            End If
+        End Get
+    End Property
+
 #End Region
 
 #Region "Workflow Log"
@@ -237,11 +262,7 @@ Public Class WorkflowService
     Private Shared Function GetConnection() As Connection
         Dim conn As New Connection(wfServer)
         conn.Integrated = True
-        If HttpContext.Current Is Nothing Then
-            conn.UserName = "Portal"
-        Else
-            conn.UserName = HttpContext.Current.User.Identity.Name
-        End If
+        conn.UserName = ConnectionName
 
         conn.Open()
         Return conn

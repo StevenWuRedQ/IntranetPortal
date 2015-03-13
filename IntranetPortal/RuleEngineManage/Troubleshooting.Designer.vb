@@ -37,6 +37,8 @@ Partial Class Troubleshooting
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtName = New System.Windows.Forms.TextBox()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -125,7 +127,7 @@ Partial Class Troubleshooting
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(49, 160)
+        Me.Button4.Location = New System.Drawing.Point(371, 106)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(91, 23)
         Me.Button4.TabIndex = 10
@@ -134,7 +136,7 @@ Partial Class Troubleshooting
         '
         'Button5
         '
-        Me.Button5.Location = New System.Drawing.Point(371, 173)
+        Me.Button5.Location = New System.Drawing.Point(371, 164)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(114, 23)
         Me.Button5.TabIndex = 11
@@ -166,11 +168,31 @@ Partial Class Troubleshooting
         Me.txtName.Size = New System.Drawing.Size(127, 20)
         Me.txtName.TabIndex = 13
         '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(230, 164)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(98, 23)
+        Me.Button7.TabIndex = 15
+        Me.Button7.Text = "Batch Extend"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(230, 135)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(98, 23)
+        Me.Button8.TabIndex = 16
+        Me.Button8.Text = "Extend Recycle"
+        Me.Button8.UseVisualStyleBackColor = True
+        '
         'Troubleshooting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(496, 217)
+        Me.Controls.Add(Me.Button8)
+        Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.txtName)
         Me.Controls.Add(Me.Button6)
@@ -207,4 +229,6 @@ Partial Class Troubleshooting
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents txtName As System.Windows.Forms.TextBox
+    Friend WithEvents Button7 As System.Windows.Forms.Button
+    Friend WithEvents Button8 As System.Windows.Forms.Button
 End Class

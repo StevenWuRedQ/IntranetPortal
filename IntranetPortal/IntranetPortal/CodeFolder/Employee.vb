@@ -466,13 +466,13 @@ Partial Public Class Employee
     End Function
 
     Public Shared Function GetEmpOfficeManagers(empName As String) As String()
-        Dim depart = GetInstance(empName).Department
+        'Dim depart = GetInstance(empName).Department
 
-        Dim officeRole = "OfficeManager-" & depart
+        'Dim officeRole = "OfficeManager-" & depart
 
-        If Roles.RoleExists(officeRole) Then
-            Return Roles.GetUsersInRole(officeRole)
-        End If
+        'If Roles.RoleExists(officeRole) Then
+        '    Return Roles.GetUsersInRole(officeRole)
+        'End If
 
         Dim teams = GetEmpTeams(empName)
         If teams IsNot Nothing AndAlso teams.Length > 0 Then
@@ -482,8 +482,13 @@ Partial Public Class Employee
                 Return Roles.GetUsersInRole("OfficeManager-" & team)
             End If
         End If
+        Dim emp = Employee.GetInstance(empName)
+        If emp IsNot Nothing AndAlso Not String.IsNullOrEmpty(emp.Manager) Then
+            Return {empName, emp.Manager}
+        End If
 
-        Return Nothing
+        Return {empName}
+
     End Function
 
     Public Shared Function GetEmpTeams(empName As String) As String()

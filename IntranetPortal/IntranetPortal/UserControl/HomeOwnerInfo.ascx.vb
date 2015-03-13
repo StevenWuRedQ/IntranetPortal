@@ -8,9 +8,9 @@
     Public Property OwnerName As String
     Public Property BBLE As String
     Public Property TLOLocateReport As DataAPI.TLOLocateReportOutput
-    Public Property BestNums As List(Of HomeOwnerPhone)
-    Public Property BestAddress As List(Of HomeOwnerAddress)
-    Public Property BestEmail As List(Of HomeOwnerEmail)
+    Public Property BestNums As New List(Of HomeOwnerPhone)
+    Public Property BestAddress As New List(Of HomeOwnerAddress)
+    Public Property BestEmail As New List(Of HomeOwnerEmail)
     Public Property HomeOwnerInfo As HomeOwner
 
     Private _contacts As List(Of OwnerContact)
@@ -50,11 +50,14 @@
     Public Sub BindData(bble As String)
         Using Context As New Entities
             Me.BBLE = bble
-            Dim homeOwner = Context.HomeOwners.Where(Function(h) h.BBLE = bble And h.Name = OwnerName).FirstOrDefault
-            If (OwnerName = homeOwner.EMPTY_HOMEOWNER) Then
-                homeOwner = New HomeOwner
+
+            If (OwnerName = IntranetPortal.HomeOwner.EMPTY_HOMEOWNER) Then
+                HomeOwnerInfo = New HomeOwner
                 TLOLocateReport = New DataAPI.TLOLocateReportOutput
+                Return
             End If
+
+            Dim homeOwner = Context.HomeOwners.Where(Function(h) h.BBLE = bble And h.Name = OwnerName).FirstOrDefault
 
             If homeOwner IsNot Nothing Then
                 HomeOwnerInfo = homeOwner

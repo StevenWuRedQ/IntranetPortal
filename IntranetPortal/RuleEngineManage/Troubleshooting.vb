@@ -36,4 +36,22 @@
         Dim rule As New IntranetPortal.RulesEngine.RecycleProcessRule
         rule.Execute()
     End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Dim name = txtName.Text
+        Try
+            IntranetPortal.RecycleManage.BatchPostponeRecycle(name, 5)
+        Catch ex As Exception
+            IntranetPortal.RulesEngine.ServiceLog.Log("Error messager: ", ex)
+        End Try
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Dim name = txtName.Text
+        Try
+            IntranetPortal.RecycleManage.PostponeRecyle(name, 5, "Michael Gendin")
+        Catch ex As Exception
+            IntranetPortal.RulesEngine.ServiceLog.Log("Error messager: ", ex)
+        End Try
+    End Sub
 End Class

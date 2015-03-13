@@ -12,7 +12,6 @@ Public Class LeadsList
 
     ' Dim CategoryName As String
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-
     End Sub
 
     Sub BindLeadsListMgr(category As LeadStatus, mgrName As String)
@@ -315,11 +314,8 @@ Public Class LeadsList
                 gridLeads.DataBind()
             End Using
         Else
-
-            Using Context As New Entities
-                gridLeads.DataSource = Context.Leads.Where(Function(ld) ld.Status = category And ld.EmployeeName = Page.User.Identity.Name).ToList.OrderByDescending(Function(e) e.LastUpdate2)
-                gridLeads.DataBind()
-            End Using
+            gridLeads.DataSource = Lead.GetUserLeadsData(Page.User.Identity.Name, category)
+            gridLeads.DataBind()
         End If
 
         If Not Page.IsPostBack Then

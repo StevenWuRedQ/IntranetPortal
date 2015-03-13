@@ -29,14 +29,11 @@ Imports System.Web.SessionState
 
 
     Sub Application_BeginRequest(ByVal sender As Object, ByVal e As EventArgs)
-        ' Fires at the beginning of each request
-        Context.Items("LoadStartTime") = DateTime.Now
+        'Debug.WriteLine("BeginRequest:" & DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"))
     End Sub
 
     Sub Application_EndRequest(ByVal sender As Object, ByVal e As EventArgs)
-        Dim endDt = CDate(Context.Items("LoadStartTime"))
-        Dim ts = DateTime.Now - endDt
-        'Response.Write("<h3>This page took " + ts.TotalMilliseconds.ToString + "ms to load</h3>")
+        'Debug.WriteLine("EndRequest:" & DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"))
     End Sub
 
     Sub Application_AuthenticateRequest(ByVal sender As Object, ByVal e As EventArgs)

@@ -30,7 +30,6 @@ Public Class MgrViewLeads
 
             If Not Page.IsPostBack Then
                 LeadsList.BindLeadsList(CategoryName)
-
                 If CategoryName = "Search" Then
                     ASPxSplitter1.GetPaneByName("leadPanel").Size = "400"
                 End If

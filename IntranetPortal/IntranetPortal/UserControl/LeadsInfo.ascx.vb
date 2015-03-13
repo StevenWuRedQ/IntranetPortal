@@ -91,11 +91,6 @@ Public Class LeadsInfo1
                 PropertyInfo.LeadsInfoData = leadsinfodata
                 PropertyInfo.BindData()
 
-                If leadsinfodata.C2ndMotgrAmt > leadsinfodata.C1stMotgrAmt Then
-                    'CType(formlayoutLeadsInfo.FindNestedControlByFieldName("C1stMotgrAmt"), ASPxTextBox).Text = leadsinfodata.C2ndMotgrAmt
-                    'CType(formlayoutLeadsInfo.FindNestedControlByFieldName("C2ndMotgrAmt"), ASPxTextBox).Text = leadsinfodata.C1stMotgrAmt
-                End If
-
                 'Bind files info
                 'DocumentsUI.BindFileList(bble)
                 DocumentsUI.LeadsName = leadsinfodata.PropertyAddress
@@ -111,7 +106,6 @@ Public Class LeadsInfo1
                 'Else
                 HomeOwnerInfo3.BBLE = bble
                 HomeOwnerInfo3.OwnerName = CoOwnerName(leadsinfodata.CoOwner, leadsinfodata.Owner, bble)
-
                 HomeOwnerInfo3.BindData(bble)
                 'End If
 
@@ -144,37 +138,6 @@ Public Class LeadsInfo1
         End Using
         Return HomeOwner.EMPTY_HOMEOWNER
     End Function
-
-
-    'Protected Sub callbackSaveLeadsInfo_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
-    '    Using Context As New Entities
-    '        Dim bble = hfBBLE.Value
-    '        Dim li = Context.LeadsInfoes.Where(Function(l) l.BBLE = bble).SingleOrDefault
-
-    '        If li IsNot Nothing Then
-    '            li.PropertyAddress = CStr(formlayoutLeadsInfo.GetNestedControlValueByFieldName("PropertyAddress"))
-
-    '            Dim saleDate = formlayoutLeadsInfo.GetNestedControlValueByFieldName("SaleDate")
-    '            li.SaleDate = saleDate
-
-    '            li.Block = CStr(formlayoutLeadsInfo.GetNestedControlValueByFieldName("Block"))
-    '            li.Lot = CStr(formlayoutLeadsInfo.GetNestedControlValueByFieldName("Lot"))
-    '            li.TaxClass = CStr(formlayoutLeadsInfo.GetNestedControlValueByFieldName("TaxClass"))
-    '            li.IsLisPendens = (formlayoutLeadsInfo.GetNestedControlValueByFieldName("IsLisPendens"))
-    '            li.C1stMotgrAmt = CDbl(formlayoutLeadsInfo.GetNestedControlValueByFieldName("C1stMotgrAmt"))
-    '            li.C2ndMotgrAmt = CDbl(formlayoutLeadsInfo.GetNestedControlValueByFieldName("C2ndMotgrAmt"))
-    '            li.IsOtherLiens = (formlayoutLeadsInfo.GetNestedControlValueByFieldName("IsOtherLiens"))
-    '            li.IsTaxesOwed = (formlayoutLeadsInfo.GetNestedControlValueByFieldName("IsTaxesOwed"))
-    '            li.IsWaterOwed = CDbl(formlayoutLeadsInfo.GetNestedControlValueByFieldName("IsWaterOwed"))
-    '            li.WaterAmt = CDbl(formlayoutLeadsInfo.GetNestedControlValueByFieldName("WaterAmt"))
-
-    '            li.UpdateBy = HttpContext.Current.User.Identity.Name
-    '            li.LastUpdate = DateTime.Now
-
-    '            Context.SaveChanges()
-    '        End If
-    '    End Using
-    'End Sub
 
     Sub BindActivityLog(bble As String)
         ActivityLogs.BindData(bble)
@@ -427,7 +390,8 @@ Public Class LeadsInfo1
 
     Protected Sub ASPxCallbackPanel2_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         Dim bble = ""
-
+        'Dim start = DateTime.Now
+        'Debug.WriteLine("Callpanel start:" & DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"))
         If e.Parameter.StartsWith("Refresh") Then
             Dim params = e.Parameter.Split("|")
             bble = params(1)
@@ -456,15 +420,9 @@ Public Class LeadsInfo1
             doorKnockMapPanel.Visible = False
         End If
 
+        'Debug.WriteLine("Callpanel end:" & DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff tt"))
+        'Debug.WriteLine("Binder Data: " & (DateTime.Now - start).TotalMilliseconds)
         Return
-    End Sub
-
-    Sub AsynRefreshBBLE(bble As Object, type As String)
-
-
-       
-
-        'System.Threading.ThreadPool.QueueUserWorkItem(callBack, stateObj)
     End Sub
 
     Sub RefreshBBLE(bble As String, type As String)

@@ -3,6 +3,7 @@ Partial Public Class UserInTeam
     Public Property TeamName As String
     Public Property EmployeeId As Integer
     Public Property EmployeePosition As String
+    Public Property EmployeeActive As Boolean
 
     Public Shared Function GetTeamUsers(teamNames As String) As List(Of UserInTeam)
         Using ctx As New Entities
@@ -14,7 +15,8 @@ Partial Public Class UserInTeam
                                .UserTeam = ut,
                                .TeamName = team.Name,
                                .EmployeeId = Emp.EmployeeID,
-                               .Position = Emp.Position
+                               .Position = Emp.Position,
+                               .Active = Emp.Active
                                }
 
             Dim result As New List(Of UserInTeam)
@@ -22,6 +24,7 @@ Partial Public Class UserInTeam
                 item.UserTeam.TeamName = item.TeamName
                 item.UserTeam.EmployeeId = item.EmployeeId
                 item.UserTeam.EmployeePosition = item.Position
+                item.UserTeam.EmployeeActive = item.Active
                 result.Add(item.UserTeam)
             Next
 
@@ -43,7 +46,8 @@ Partial Public Class UserInTeam
                                .UserTeam = ut,
                                .TeamName = team.Name,
                                .EmployeeId = Emp.EmployeeID,
-             .Position = Emp.Position
+                               .Position = Emp.Position,
+                                .Active = Emp.Active
                                }
 
             Dim result As New List(Of UserInTeam)
@@ -51,6 +55,7 @@ Partial Public Class UserInTeam
                 item.UserTeam.TeamName = item.TeamName
                 item.UserTeam.EmployeeId = item.EmployeeId
                 item.UserTeam.EmployeePosition = item.Position
+                item.UserTeam.EmployeeActive = item.Active
                 result.Add(item.UserTeam)
             Next
 
@@ -60,5 +65,17 @@ Partial Public Class UserInTeam
 
     Public Shared Function GetAllUsers() As List(Of UserInTeam)
         Return GetTeamUsers("*")
+    End Function
+
+    Public Shared Function GetTeamActiveUser(teamName As String) As String()
+        Return SelectEmployeeArray(GetTeamUsers(teamName).Where(Function(emp) emp.EmployeeActive = True))
+    End Function
+
+    Public Shared Function GetTeamUnActiveUser(teamName As String) As String()
+        Return SelectEmployeeArray(GetTeamUsers(teamName).Where(Function(emp) emp.EmployeeActive = False))
+    End Function
+
+    Private Shared Function SelectEmployeeArray(usersInTeam As IEnumerable(Of UserInTeam)) As String()
+        Return usersInTeam.Select(Function(u) u.EmployeeName).ToArray
     End Function
 End Class

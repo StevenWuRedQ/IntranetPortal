@@ -63,13 +63,19 @@
         Return Nothing
     End Function
 
+    Private _listPens As List(Of PortalLisPen)
     Public ReadOnly Property LisPens As List(Of PortalLisPen)
         Get
-            Using context As New Entities
-                Return context.PortalLisPens.Where(Function(li) li.BBLE = BBLE).ToList
-            End Using
+            If _listPens Is Nothing Then
+                Using context As New Entities
+                    _listPens = context.PortalLisPens.Where(Function(li) li.BBLE = BBLE).ToList
+                End Using
+            End If
+
+            Return _listPens
         End Get
     End Property
+
     Public ReadOnly Property LastComment As String
         Get
             Using ctx As New Entities

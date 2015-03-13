@@ -14,8 +14,9 @@
         UpatingPanel.Visible = LeadsInfoData.IsUpdating
         hfBBLE.Value = LeadsInfoData.BBLE
         Me.DataBind()
-        If LeadsInfoData.LisPens IsNot Nothing Then
-            gridLiens.DataSource = LeadsInfoData.LisPens
+        Dim lisPens = LeadsInfoData.LisPens
+        If lisPens IsNot Nothing Then
+            gridLiens.DataSource = lisPens
             gridLiens.DataBind()
         End If
     End Function

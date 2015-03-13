@@ -211,15 +211,7 @@ Public Class Utility
     End Function
 
     Public Shared Function GetTeamUnAssignedLeadsCount(teamId As Integer) As Integer
-        Using context As New Entities
-            Dim t = context.Teams.Find(teamId)
-            Dim officeName = t.Name & " Office"
-
-            Dim count = (From ld In context.Leads
-                                   Where ld.EmployeeName = officeName
-                                   Select ld).Count
-            Return count
-        End Using
+        Return Team.GetTeam(teamId).AssignLeadsView.Count
     End Function
 
     Public Shared Function GetTeamUnAssignedLeadsCount(teamMgr As String) As Integer
