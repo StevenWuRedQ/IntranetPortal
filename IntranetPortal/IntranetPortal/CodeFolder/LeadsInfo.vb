@@ -83,6 +83,7 @@
             End Using
         End Get
     End Property
+
     Public ReadOnly Property LastLP As String
         Get
 
@@ -93,11 +94,13 @@
             Return Nothing
         End Get
     End Property
+
     Public ReadOnly Property BoroughName() As String
         Get
             Return Utility.Borough2BoroughName(Borough)
         End Get
     End Property
+
     Public ReadOnly Property UserComments As List(Of LeadsComment)
         Get
             Using context As New Entities
@@ -115,6 +118,7 @@
                     Return String.Join(",", phones.ToArray)
                 End If
             End Using
+
             Return ""
         End Get
     End Property
@@ -460,7 +464,6 @@
 
     Public Property IsRecycled As Boolean
 
-
     Public ReadOnly Property UpdateInfo As String
         Get
             Using context As New Entities
@@ -478,15 +481,24 @@
         End Get
     End Property
 
+    Private _otherProperties As List(Of LeadsInfo)
     Public ReadOnly Property OtherProperties As List(Of LeadsInfo)
         Get
-            Using context As New Entities
-                If Not String.IsNullOrEmpty(Owner) Then
-                    Return context.LeadsInfoes.Where(Function(li) (li.Owner = Owner) And li.BBLE <> BBLE).ToList
-                End If
+            If _otherProperties Is Nothing Then
+                Using context As New Entities
+                    If Not String.IsNullOrEmpty(Owner) Then
+                        Dim ownerToken = context.HomeOwners.Where(Function(h) h.BBLE = BBLE And (h.Name = Owner Or h.Name = CoOwner) And h.ReportToken IsNot Nothing).Select(Function(h) h.ReportToken).ToArray
+                        If ownerToken IsNot Nothing AndAlso ownerToken.Count > 0 Then
+                            Dim result = (From li In context.LeadsInfoes.Where(Function(li) li.BBLE <> BBLE)
+                                               Join ho In context.HomeOwners.Where(Function(h) ownerToken.Contains(h.ReportToken)) On ho.BBLE Equals li.BBLE
+                                               Select li).Distinct
+                            _otherProperties = result.ToList
+                        End If
+                    End If
+                End Using
+            End If
 
-                Return Nothing
-            End Using
+            Return _otherProperties
         End Get
     End Property
 

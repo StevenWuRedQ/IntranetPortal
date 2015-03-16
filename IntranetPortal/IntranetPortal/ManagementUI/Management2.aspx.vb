@@ -1,7 +1,7 @@
 ﻿Imports System.Web.Services
 Imports System.Web.Script.Services
 Imports System.Web.Script.Serialization
-Public Class ManagementUI
+Public Class ManagementUI2
     Inherits System.Web.UI.Page
 
 

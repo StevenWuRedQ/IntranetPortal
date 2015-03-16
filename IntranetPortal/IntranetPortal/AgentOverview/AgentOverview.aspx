@@ -4,7 +4,7 @@
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="/css/right-pane.css" />
     <script src="../scripts/jquery.printElement.js"></script>
-   <%-- <script src="/scripts/stevenjs.js?v=1.02"></script>--%>
+    <%-- <script src="/scripts/stevenjs.js?v=1.02"></script>--%>
     <style type="text/css">
         .InforPanel {
             float: left;
@@ -72,9 +72,9 @@
             }
         }
 
-        function DoCallback() {           
+        function DoCallback() {
             var rowKey = gridEmpsClient.GetRowKey(gridEmpsClient.GetFocusedRowIndex());
-            var rowIndex = gridEmpsClient.GetFocusedRowIndex();         
+            var rowIndex = gridEmpsClient.GetFocusedRowIndex();
             if (gridEmpsClient.IsGroupRow(rowIndex)) {
                 gridEmpsClient.ExpandRow(rowIndex);
                 gridEmpsClient.GetRowValues(rowIndex, "TeamName", OnGetRowValues);
@@ -187,7 +187,6 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" FullscreenMode="true">
         <Styles>
             <Pane Paddings-Padding="0">
@@ -266,7 +265,7 @@
                                         <Settings ShowColumnHeaders="False" GridLines="None"></Settings>
                                         <Border BorderStyle="None"></Border>
                                     </dx:ASPxGridView>
-                                </div>                               
+                                </div>
                             </div>
                         </div>
                         <%----end top block----%>
@@ -363,12 +362,10 @@
                                                                                         <%----end item--%>
                                                                                         <div style="margin-left: 69px; margin-top: 10px;">
                                                                                             <button class="btn btn-default button_transparent" type="button" id="id_activity_log" onclick="onGetAgentLogButtonClick()">See my activity</button>
-
                                                                                             <button class="btn btn-default button_transparent" type="button" onclick="onGetAgentZoningDateClick()" style="margin-left: 20px">View my leads</button>
                                                                                         </div>
                                                                                     </div>
                                                                                 </asp:Panel>
-
                                                                                 <asp:Panel runat="server" ID="OfficeInfoPanel" Visible="false">
                                                                                     <dx:ASPxImage runat="server" ID="ASPxImage1" CssClass="img-circle class_profile_image" ImageUrl="/images/user-empty-icon.png">
                                                                                     </dx:ASPxImage>
@@ -398,6 +395,7 @@
                                                                             </div>
                                                                             <asp:HiddenField runat="server" ID="hfEmpName" />
                                                                             <asp:HiddenField runat="server" ID="hfMode" />
+                                                                            <asp:HiddenField runat="server" ID="hfOfficeName" />
                                                                             <dx:ASPxHiddenField runat="server" ID="hfReports"></dx:ASPxHiddenField>
                                                                         </div>
                                                                     </dx:PanelContent>
@@ -574,7 +572,7 @@
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-            
+
         </Panes>
         <ClientSideEvents PaneResized="contentSplitterClinet_resize" />
     </dx:ASPxSplitter>
@@ -644,11 +642,8 @@
                                             <dx:ListEditItem Text="Last Update" Value="LastUpdate2" />
                                             <dx:ListEditItem Text="Servicer" Value="MortgageData.C1stServicer" />
                                             <dx:ListEditItem Text="LastLP" Value="LastLP" />
-                                            
                                             <dx:ListEditItem Text="LastComment" Value="LastComment" />
-                                            
                                         </Items>
-
                                         <%--<CheckBoxStyle  BackgroundImage-ImageUrl="../images/icon_checked_box.png"/>--%>
                                         <%--<CheckedImage Url="../images/icon_checked_box.png"></CheckedImage>--%>
                                         <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
@@ -705,7 +700,7 @@
     </div>
     <!-- custom scrollbar plugin -->
 
-<%--    <script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>--%>
+    <%--    <script src="../scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>--%>
     <script>
         (function ($) {
             $(window).load(function () {
@@ -731,7 +726,7 @@
                 }
             );
             //use page filter to disable the custom scorllbar that can fix the expand the right spliter panel
-           
+
         }
 
         $('#ctl00_MainContentPH_ASPxSplitter1_contentSplitter_gridReport_DXPagerBottom_PSP_DXME_').addClass('no_before_and_after');

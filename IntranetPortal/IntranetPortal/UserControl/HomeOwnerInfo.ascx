@@ -342,16 +342,15 @@
                 <span class="font_black color_balck font_black upcase_text " style="white-space: nowrap"><%=relative.nameField.firstNameField & If(relative.nameField.middleNameField IsNot Nothing, " " & relative.nameField.middleNameField, " ") & " " & relative.nameField.lastNameField%></span><br />
                 <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
             </div>
-
         </div>
-
-
+        
         <div class="homeowner_expanll_border" style="margin-left: 20px">
             <div>
                 <div class="clearfix homeowner_info_label" style="margin-left: 17px;">
                     <div>
                         <% If relative.phonesField.Length > 0 Then%>
                         <% For Each phone In relative.phonesField%>
+                        <% If phone.phoneField IsNot Nothing Then%>
                         <div class="color_gray clearfix">
                             <i class="fa fa-phone homeowner_info_icon"></i>
                             <div class="form_div_node homeowner_info_text ">
@@ -368,6 +367,7 @@
                                 </div>
                             </div>
                         </div>
+                        <% End If%>
                         <% Next%>
                         <% End If%>
                     </div>
@@ -406,6 +406,7 @@
                         <div>
                             <% If relative.phonesField.Length > 0 Then%>
                             <% For Each phone In relative.phonesField%>
+                            <%If phone.phoneField IsNot Nothing Then%>                            
                             <div class="color_gray clearfix">
                                 <i class="fa fa-phone homeowner_info_icon"></i>
                                 <div class="form_div_node homeowner_info_text ">
@@ -422,6 +423,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <% End If%>
                             <% Next%>
                             <% End If%>
                         </div>
@@ -453,6 +455,7 @@
                         <div>
                             <% If relative.phonesField.Length > 0 Then%>
                             <% For Each phone In relative.phonesField%>
+                            <% If phone.phoneField IsNot Nothing Then%>                            
                             <div class="color_gray clearfix">
                                 <i class="fa fa-phone homeowner_info_icon"></i>
                                 <div class="form_div_node homeowner_info_text ">
@@ -469,6 +472,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <% End If%>
                             <% Next%>
                             <% End If%>
                         </div>

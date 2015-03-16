@@ -20,7 +20,7 @@ Partial Public Class HomeOwner
         Set(value As DataAPI.TLOLocateReportOutput)
             If value IsNot Nothing Then
                 objLocateReport = value
-
+                ReportToken = value.reportTokenField
                 'save phone no to database
                 SavePhoneField(value)
 
@@ -187,6 +187,20 @@ Partial Public Class HomeOwner
         phone.Source = PhoneSource.TLOLocateReport
         Return phone
     End Function
+
+    Public Shared Sub InitalOwnerToken()
+        Using ctx As New Entities
+            Dim owners = ctx.HomeOwners.Where(Function(h) String.IsNullOrEmpty(h.ReportToken) And h.LocateReport IsNot Nothing).Take(200).ToList
+
+            For Each owner In owners
+                If Not String.IsNullOrEmpty(owner.TLOLocateReport.reportTokenField) Then
+                    owner.ReportToken = owner.TLOLocateReport.reportTokenField
+                End If
+            Next
+
+            ctx.SaveChanges()
+        End Using
+    End Sub
 End Class
 
 Enum PhoneSource

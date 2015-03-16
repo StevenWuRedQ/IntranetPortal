@@ -33,6 +33,7 @@ Partial Class Form1
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
+        Me.btnInitialOwnerToken = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Button1
@@ -130,11 +131,21 @@ Partial Class Form1
         Me.Button9.Text = "Email Testing"
         Me.Button9.UseVisualStyleBackColor = True
         '
+        'btnInitialOwnerToken
+        '
+        Me.btnInitialOwnerToken.Location = New System.Drawing.Point(256, 179)
+        Me.btnInitialOwnerToken.Name = "btnInitialOwnerToken"
+        Me.btnInitialOwnerToken.Size = New System.Drawing.Size(146, 23)
+        Me.btnInitialOwnerToken.TabIndex = 11
+        Me.btnInitialOwnerToken.Text = "Initial HomeOwner Token"
+        Me.btnInitialOwnerToken.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(695, 261)
+        Me.Controls.Add(Me.btnInitialOwnerToken)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button7)
@@ -163,5 +174,6 @@ Partial Class Form1
     Friend WithEvents Button7 As System.Windows.Forms.Button
     Friend WithEvents Button8 As System.Windows.Forms.Button
     Friend WithEvents Button9 As System.Windows.Forms.Button
+    Friend WithEvents btnInitialOwnerToken As System.Windows.Forms.Button
 
 End Class

@@ -422,6 +422,9 @@
     <Compile Include="DataModel\LeadsInfo.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\LeadsInfoView.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\LeadsMortgageData.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
@@ -656,6 +659,20 @@
     </Compile>
     <Compile Include="LeadsGenerator\LeadsSearchApproval.aspx.vb">
       <DependentUpon>LeadsSearchApproval.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ManagementUI\Management2.aspx.designer.vb">
+      <DependentUpon>Management2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagementUI\Management2.aspx.vb">
+      <DependentUpon>Management2.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ManagementUI\Management1.aspx.designer.vb">
+      <DependentUpon>Management1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagementUI\Management1.aspx.vb">
+      <DependentUpon>Management1.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ManagementUI\Management.aspx.designer.vb">
@@ -1553,6 +1570,8 @@
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />
+    <Content Include="ManagementUI\Management2.aspx" />
+    <Content Include="ManagementUI\Management1.aspx" />
     <Content Include="ManagementUI\Management.aspx" />
     <Content Include="Management\ImportAgentData.aspx" />
     <Content Include="Management\Default.aspx" />

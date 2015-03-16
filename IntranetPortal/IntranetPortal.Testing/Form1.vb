@@ -181,4 +181,12 @@ Public Class Form1
         emailData.Add("Description", "princess need to get extra numbers for this owner of the lead, the  number i have is disconnected and family members dont know this person and are not related ")
         IntranetPortal.Core.EmailService.SendMail("portal@myidealprop.com", "", "UrgentTaskNotify", emailData)
     End Sub
+
+    Private Sub btnInitialOwnerToken_Click(sender As Object, e As EventArgs) Handles btnInitialOwnerToken.Click
+        For i = 0 To 100
+            IntranetPortal.HomeOwner.InitalOwnerToken()
+        Next
+
+        MessageBox.Show("This is done!")
+    End Sub
 End Class

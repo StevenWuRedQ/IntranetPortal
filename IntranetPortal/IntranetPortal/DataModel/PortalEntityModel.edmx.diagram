@@ -56,6 +56,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.MapDataSet" Width="1.5" PointX="19.375" PointY="13.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsAssignView2" Width="1.5" PointX="19.375" PointY="16.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PendingAssignLead" Width="1.5" PointX="20.375" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LeadsInfoView" Width="1.5" PointX="6" PointY="20.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

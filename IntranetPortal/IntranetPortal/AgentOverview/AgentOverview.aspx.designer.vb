@@ -104,6 +104,15 @@ Partial Public Class AgentOverview
     Protected WithEvents hfMode As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
+    '''hfOfficeName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfOfficeName As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''hfReports control.
     '''</summary>
     '''<remarks>

@@ -24,5 +24,9 @@ Public Interface IPortalReportService
     <OperationContract()>
     <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="LoadTeamInfo/{teamName}")>
     Function LoadTeamInfo(teamName As String) As Channels.Message
-   
+
+    <OperationContract()>
+    <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="LoadAgentActivity/{teamName}")>
+    Function LoadAgentActivityReport(agentNames As String, startDate As DateTime, endDate As DateTime) As Channels.Message
+
 End Interface

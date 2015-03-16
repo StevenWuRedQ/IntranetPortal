@@ -360,7 +360,7 @@
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ReportPerformance" Text="Performance Tracking" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
+      <PortalNavItem Name="ReportPerformance" Text="Performance Tracking" NavigationUrl="/ManagementUI/Management1.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-line-chart"></i>]]>
         </FontClass>
@@ -370,7 +370,7 @@
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ReportAgents" Text="Agents Maangement" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
+      <PortalNavItem Name="ReportAgents" Text="Agents Management" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>

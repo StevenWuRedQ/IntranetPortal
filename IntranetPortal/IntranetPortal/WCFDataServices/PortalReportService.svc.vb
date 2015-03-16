@@ -84,6 +84,9 @@ Public Class PortalReportService
         Return info.ToJson
     End Function
 
+    Public Function LoadAgentActivityReport(agentNames As String, startDate As Date, endDate As Date) As Channels.Message Implements IPortalReportService.LoadAgentActivityReport
+        Return Nothing
+    End Function
 End Class
 
 Public Module JsonExtension

@@ -60,10 +60,9 @@ Public Class AgentCharts
 
             Dim json As New JavaScriptSerializer
             Return json.Serialize(chart)
-
-
         End Using
     End Function
+
     Public Function AgentActivityToday(ByVal formdays As Date) As String
         'current_employee
         Dim today = formdays

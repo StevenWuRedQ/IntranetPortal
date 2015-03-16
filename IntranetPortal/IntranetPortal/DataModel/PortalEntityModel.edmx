@@ -200,6 +200,7 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="Active" Type="bit" />
+          <Property Name="ReportToken" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Leads">
           <Key>
@@ -734,7 +735,95 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsAssignView2' does not have
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'IntranetPortal.dbo.LeadsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="LeadsInfoView">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="IsLisPendens" Type="bit" />
+          <Property Name="IsOtherLiens" Type="bit" />
+          <Property Name="IsTaxesOwed" Type="bit" />
+          <Property Name="IsWaterOwed" Type="bit" />
+          <Property Name="IsECBViolations" Type="bit" />
+          <Property Name="IsDOBViolations" Type="bit" />
+          <Property Name="C1stMotgrAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="C2ndMotgrAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="C3rdMortgrAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TaxesAmt" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="TaxesOrderStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxesOrderTime" Type="datetime" />
+          <Property Name="TaxesOrderDeliveryTime" Type="datetime" />
+          <Property Name="WaterAmt" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="WaterOrderStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="WaterOrderTime" Type="datetime" />
+          <Property Name="WaterOrderDeliveryTime" Type="datetime" />
+          <Property Name="ECBViolationsAmt" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ECBOrderStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="ECBOrderTime" Type="datetime" />
+          <Property Name="ECBOrderDeliveryTime" Type="datetime" />
+          <Property Name="DOBViolationsAmt" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DOBOrderStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOBOrderTime" Type="datetime" />
+          <Property Name="DOBOrderDeliveryTime" Type="datetime" />
+          <Property Name="AcrisOrderStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="AcrisOrderTime" Type="datetime" />
+          <Property Name="AcrisOrderDeliveryTime" Type="datetime" />
+          <Property Name="LastPaid" Type="date" />
+          <Property Name="IsCoOnFile" Type="bit" />
+          <Property Name="TypeOfCo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Owner" Type="nvarchar" MaxLength="70" />
+          <Property Name="CoOwner" Type="nvarchar" MaxLength="70" />
+          <Property Name="Date" Type="smalldatetime" />
+          <Property Name="PropertyAddress" Type="nvarchar" MaxLength="200" />
+          <Property Name="SaleDate" Type="smalldatetime" />
+          <Property Name="PropertyClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="SaleType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Condition" Type="nchar" MaxLength="15" />
+          <Property Name="Block" Type="nchar" MaxLength="5" />
+          <Property Name="Lot" Type="nchar" MaxLength="4" />
+          <Property Name="DOBViolation" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark2" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark3" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark4" Type="nvarchar" MaxLength="50" />
+          <Property Name="Deed" Type="nvarchar" MaxLength="50" />
+          <Property Name="LPindex" Type="nvarchar" MaxLength="50" />
+          <Property Name="YearBuilt" Type="nchar" MaxLength="4" />
+          <Property Name="NumFloors" Type="int" />
+          <Property Name="BuildingDem" Type="nvarchar" MaxLength="50" />
+          <Property Name="LotDem" Type="nvarchar" MaxLength="50" />
+          <Property Name="EstValue" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="StreetName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NeighName" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Borough" Type="nvarchar" MaxLength="50" />
+          <Property Name="Zoning" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaxFar" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActualFar" Type="nvarchar" MaxLength="50" />
+          <Property Name="NYCSqft" Type="float" />
+          <Property Name="UnbuiltSqft" Type="float" />
+          <Property Name="BuildingBBLE" Type="nchar" MaxLength="11" />
+          <Property Name="UnitNum" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CallAttemps" Type="int" />
+          <Property Name="DoorKnockAttemps" Type="int" />
+          <Property Name="FollowupAttemps" Type="int" />
+          <Property Name="C1stServicer" Type="nvarchar" MaxLength="500" />
+          <Property Name="LastLP" Type="nvarchar" MaxLength="21" />
+          <Property Name="LastComment" Type="nvarchar(max)" />
+          <Property Name="LeadsName" Type="nvarchar" MaxLength="120" />
+        </EntityType>
         <Function Name="UpdateEmployeeName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="OldName" Type="nvarchar" Mode="In" />
           <Parameter Name="NewName" Type="nvarchar" Mode="In" />
@@ -867,6 +956,93 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsView' does not have a prim
     [LeadsAssignView2].[UpdateUser] AS [UpdateUser]
     FROM [dbo].[LeadsAssignView2] AS [LeadsAssignView2]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="LeadsInfoView" EntityType="Self.LeadsInfoView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [LeadsInfoView].[BBLE] AS [BBLE], 
+    [LeadsInfoView].[IsLisPendens] AS [IsLisPendens], 
+    [LeadsInfoView].[IsOtherLiens] AS [IsOtherLiens], 
+    [LeadsInfoView].[IsTaxesOwed] AS [IsTaxesOwed], 
+    [LeadsInfoView].[IsWaterOwed] AS [IsWaterOwed], 
+    [LeadsInfoView].[IsECBViolations] AS [IsECBViolations], 
+    [LeadsInfoView].[IsDOBViolations] AS [IsDOBViolations], 
+    [LeadsInfoView].[C1stMotgrAmt] AS [C1stMotgrAmt], 
+    [LeadsInfoView].[C2ndMotgrAmt] AS [C2ndMotgrAmt], 
+    [LeadsInfoView].[C3rdMortgrAmt] AS [C3rdMortgrAmt], 
+    [LeadsInfoView].[TaxesAmt] AS [TaxesAmt], 
+    [LeadsInfoView].[TaxesOrderStatus] AS [TaxesOrderStatus], 
+    [LeadsInfoView].[TaxesOrderTime] AS [TaxesOrderTime], 
+    [LeadsInfoView].[TaxesOrderDeliveryTime] AS [TaxesOrderDeliveryTime], 
+    [LeadsInfoView].[WaterAmt] AS [WaterAmt], 
+    [LeadsInfoView].[WaterOrderStatus] AS [WaterOrderStatus], 
+    [LeadsInfoView].[WaterOrderTime] AS [WaterOrderTime], 
+    [LeadsInfoView].[WaterOrderDeliveryTime] AS [WaterOrderDeliveryTime], 
+    [LeadsInfoView].[ECBViolationsAmt] AS [ECBViolationsAmt], 
+    [LeadsInfoView].[ECBOrderStatus] AS [ECBOrderStatus], 
+    [LeadsInfoView].[ECBOrderTime] AS [ECBOrderTime], 
+    [LeadsInfoView].[ECBOrderDeliveryTime] AS [ECBOrderDeliveryTime], 
+    [LeadsInfoView].[DOBViolationsAmt] AS [DOBViolationsAmt], 
+    [LeadsInfoView].[DOBOrderStatus] AS [DOBOrderStatus], 
+    [LeadsInfoView].[DOBOrderTime] AS [DOBOrderTime], 
+    [LeadsInfoView].[DOBOrderDeliveryTime] AS [DOBOrderDeliveryTime], 
+    [LeadsInfoView].[AcrisOrderStatus] AS [AcrisOrderStatus], 
+    [LeadsInfoView].[AcrisOrderTime] AS [AcrisOrderTime], 
+    [LeadsInfoView].[AcrisOrderDeliveryTime] AS [AcrisOrderDeliveryTime], 
+    [LeadsInfoView].[LastPaid] AS [LastPaid], 
+    [LeadsInfoView].[IsCoOnFile] AS [IsCoOnFile], 
+    [LeadsInfoView].[TypeOfCo] AS [TypeOfCo], 
+    [LeadsInfoView].[Owner] AS [Owner], 
+    [LeadsInfoView].[CoOwner] AS [CoOwner], 
+    [LeadsInfoView].[Date] AS [Date], 
+    [LeadsInfoView].[PropertyAddress] AS [PropertyAddress], 
+    [LeadsInfoView].[SaleDate] AS [SaleDate], 
+    [LeadsInfoView].[PropertyClass] AS [PropertyClass], 
+    [LeadsInfoView].[TaxClass] AS [TaxClass], 
+    [LeadsInfoView].[SaleType] AS [SaleType], 
+    [LeadsInfoView].[Condition] AS [Condition], 
+    [LeadsInfoView].[Block] AS [Block], 
+    [LeadsInfoView].[Lot] AS [Lot], 
+    [LeadsInfoView].[DOBViolation] AS [DOBViolation], 
+    [LeadsInfoView].[Remark1] AS [Remark1], 
+    [LeadsInfoView].[Remark2] AS [Remark2], 
+    [LeadsInfoView].[Remark3] AS [Remark3], 
+    [LeadsInfoView].[Remark4] AS [Remark4], 
+    [LeadsInfoView].[Deed] AS [Deed], 
+    [LeadsInfoView].[LPindex] AS [LPindex], 
+    [LeadsInfoView].[YearBuilt] AS [YearBuilt], 
+    [LeadsInfoView].[NumFloors] AS [NumFloors], 
+    [LeadsInfoView].[BuildingDem] AS [BuildingDem], 
+    [LeadsInfoView].[LotDem] AS [LotDem], 
+    [LeadsInfoView].[EstValue] AS [EstValue], 
+    [LeadsInfoView].[Number] AS [Number], 
+    [LeadsInfoView].[StreetName] AS [StreetName], 
+    [LeadsInfoView].[NeighName] AS [NeighName], 
+    [LeadsInfoView].[State] AS [State], 
+    [LeadsInfoView].[ZipCode] AS [ZipCode], 
+    [LeadsInfoView].[Borough] AS [Borough], 
+    [LeadsInfoView].[Zoning] AS [Zoning], 
+    [LeadsInfoView].[MaxFar] AS [MaxFar], 
+    [LeadsInfoView].[ActualFar] AS [ActualFar], 
+    [LeadsInfoView].[NYCSqft] AS [NYCSqft], 
+    [LeadsInfoView].[UnbuiltSqft] AS [UnbuiltSqft], 
+    [LeadsInfoView].[BuildingBBLE] AS [BuildingBBLE], 
+    [LeadsInfoView].[UnitNum] AS [UnitNum], 
+    [LeadsInfoView].[Type] AS [Type], 
+    [LeadsInfoView].[CreateDate] AS [CreateDate], 
+    [LeadsInfoView].[CreateBy] AS [CreateBy], 
+    [LeadsInfoView].[EmployeeID] AS [EmployeeID], 
+    [LeadsInfoView].[EmployeeName] AS [EmployeeName], 
+    [LeadsInfoView].[Status] AS [Status], 
+    [LeadsInfoView].[LastUpdate] AS [LastUpdate], 
+    [LeadsInfoView].[UpdateBy] AS [UpdateBy], 
+    [LeadsInfoView].[CallAttemps] AS [CallAttemps], 
+    [LeadsInfoView].[DoorKnockAttemps] AS [DoorKnockAttemps], 
+    [LeadsInfoView].[FollowupAttemps] AS [FollowupAttemps], 
+    [LeadsInfoView].[C1stServicer] AS [C1stServicer], 
+    [LeadsInfoView].[LastLP] AS [LastLP], 
+    [LeadsInfoView].[LastComment] AS [LastComment], 
+    [LeadsInfoView].[LeadsName] AS [LeadsName]
+    FROM [dbo].[LeadsInfoView] AS [LeadsInfoView]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -944,6 +1120,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsView' does not have a prim
           <EntitySet Name="LeadsAssignView2" EntityType="IntranetPortalModel.LeadsAssignView2" />
           <EntitySet Name="PendingAssignLeads" EntityType="IntranetPortalModel.PendingAssignLead" />
           <FunctionImport Name="UploadSearchInfo2Portal" />
+          <EntitySet Name="LeadsInfoViews" EntityType="IntranetPortalModel.LeadsInfoView" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1368,6 +1545,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsView' does not have a prim
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="UserModified" Type="Boolean" />
           <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="ReportToken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LoginLog">
           <Key>
@@ -1733,6 +1911,94 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsView' does not have a prim
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="LeadsInfoView">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="IsLisPendens" Type="Boolean" />
+          <Property Name="IsOtherLiens" Type="Boolean" />
+          <Property Name="IsTaxesOwed" Type="Boolean" />
+          <Property Name="IsWaterOwed" Type="Boolean" />
+          <Property Name="IsECBViolations" Type="Boolean" />
+          <Property Name="IsDOBViolations" Type="Boolean" />
+          <Property Name="C1stMotgrAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="C2ndMotgrAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="C3rdMortgrAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TaxesAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TaxesOrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxesOrderTime" Type="DateTime" Precision="3" />
+          <Property Name="TaxesOrderDeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="WaterAmt" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="WaterOrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WaterOrderTime" Type="DateTime" Precision="3" />
+          <Property Name="WaterOrderDeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="ECBViolationsAmt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ECBOrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ECBOrderTime" Type="DateTime" Precision="3" />
+          <Property Name="ECBOrderDeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="DOBViolationsAmt" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DOBOrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOBOrderTime" Type="DateTime" Precision="3" />
+          <Property Name="DOBOrderDeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="AcrisOrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AcrisOrderTime" Type="DateTime" Precision="3" />
+          <Property Name="AcrisOrderDeliveryTime" Type="DateTime" Precision="3" />
+          <Property Name="LastPaid" Type="DateTime" Precision="0" />
+          <Property Name="IsCoOnFile" Type="Boolean" />
+          <Property Name="TypeOfCo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Owner" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwner" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="SaleDate" Type="DateTime" Precision="0" />
+          <Property Name="PropertyClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SaleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Condition" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Block" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Lot" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="DOBViolation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark4" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Deed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LPindex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YearBuilt" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="NumFloors" Type="Int32" />
+          <Property Name="BuildingDem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LotDem" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EstValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NeighName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Borough" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Zoning" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaxFar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActualFar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NYCSqft" Type="Double" />
+          <Property Name="UnbuiltSqft" Type="Double" />
+          <Property Name="BuildingBBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="UnitNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="LastUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CallAttemps" Type="Int32" />
+          <Property Name="DoorKnockAttemps" Type="Int32" />
+          <Property Name="FollowupAttemps" Type="Int32" />
+          <Property Name="C1stServicer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LastLP" Type="String" MaxLength="21" FixedLength="false" Unicode="true" />
+          <Property Name="LastComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LeadsName" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2085,6 +2351,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsView' does not have a prim
           <EntitySetMapping Name="HomeOwners">
             <EntityTypeMapping TypeName="IntranetPortalModel.HomeOwner">
               <MappingFragment StoreEntitySet="HomeOwners">
+                <ScalarProperty Name="ReportToken" ColumnName="ReportToken" />
                 <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
                 <ScalarProperty Name="UserModified" ColumnName="UserModified" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2496,6 +2763,95 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsView' does not have a prim
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UploadSearchInfo2Portal" FunctionName="IntranetPortalModel.Store.UploadSearchInfo2Portal" />
+          <EntitySetMapping Name="LeadsInfoViews">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LeadsInfoView">
+              <MappingFragment StoreEntitySet="LeadsInfoView">
+                <ScalarProperty Name="LeadsName" ColumnName="LeadsName" />
+                <ScalarProperty Name="LastComment" ColumnName="LastComment" />
+                <ScalarProperty Name="LastLP" ColumnName="LastLP" />
+                <ScalarProperty Name="C1stServicer" ColumnName="C1stServicer" />
+                <ScalarProperty Name="FollowupAttemps" ColumnName="FollowupAttemps" />
+                <ScalarProperty Name="DoorKnockAttemps" ColumnName="DoorKnockAttemps" />
+                <ScalarProperty Name="CallAttemps" ColumnName="CallAttemps" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="UnitNum" ColumnName="UnitNum" />
+                <ScalarProperty Name="BuildingBBLE" ColumnName="BuildingBBLE" />
+                <ScalarProperty Name="UnbuiltSqft" ColumnName="UnbuiltSqft" />
+                <ScalarProperty Name="NYCSqft" ColumnName="NYCSqft" />
+                <ScalarProperty Name="ActualFar" ColumnName="ActualFar" />
+                <ScalarProperty Name="MaxFar" ColumnName="MaxFar" />
+                <ScalarProperty Name="Zoning" ColumnName="Zoning" />
+                <ScalarProperty Name="Borough" ColumnName="Borough" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="NeighName" ColumnName="NeighName" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="EstValue" ColumnName="EstValue" />
+                <ScalarProperty Name="LotDem" ColumnName="LotDem" />
+                <ScalarProperty Name="BuildingDem" ColumnName="BuildingDem" />
+                <ScalarProperty Name="NumFloors" ColumnName="NumFloors" />
+                <ScalarProperty Name="YearBuilt" ColumnName="YearBuilt" />
+                <ScalarProperty Name="LPindex" ColumnName="LPindex" />
+                <ScalarProperty Name="Deed" ColumnName="Deed" />
+                <ScalarProperty Name="Remark4" ColumnName="Remark4" />
+                <ScalarProperty Name="Remark3" ColumnName="Remark3" />
+                <ScalarProperty Name="Remark2" ColumnName="Remark2" />
+                <ScalarProperty Name="Remark1" ColumnName="Remark1" />
+                <ScalarProperty Name="DOBViolation" ColumnName="DOBViolation" />
+                <ScalarProperty Name="Lot" ColumnName="Lot" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="Condition" ColumnName="Condition" />
+                <ScalarProperty Name="SaleType" ColumnName="SaleType" />
+                <ScalarProperty Name="TaxClass" ColumnName="TaxClass" />
+                <ScalarProperty Name="PropertyClass" ColumnName="PropertyClass" />
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CoOwner" ColumnName="CoOwner" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="TypeOfCo" ColumnName="TypeOfCo" />
+                <ScalarProperty Name="IsCoOnFile" ColumnName="IsCoOnFile" />
+                <ScalarProperty Name="LastPaid" ColumnName="LastPaid" />
+                <ScalarProperty Name="AcrisOrderDeliveryTime" ColumnName="AcrisOrderDeliveryTime" />
+                <ScalarProperty Name="AcrisOrderTime" ColumnName="AcrisOrderTime" />
+                <ScalarProperty Name="AcrisOrderStatus" ColumnName="AcrisOrderStatus" />
+                <ScalarProperty Name="DOBOrderDeliveryTime" ColumnName="DOBOrderDeliveryTime" />
+                <ScalarProperty Name="DOBOrderTime" ColumnName="DOBOrderTime" />
+                <ScalarProperty Name="DOBOrderStatus" ColumnName="DOBOrderStatus" />
+                <ScalarProperty Name="DOBViolationsAmt" ColumnName="DOBViolationsAmt" />
+                <ScalarProperty Name="ECBOrderDeliveryTime" ColumnName="ECBOrderDeliveryTime" />
+                <ScalarProperty Name="ECBOrderTime" ColumnName="ECBOrderTime" />
+                <ScalarProperty Name="ECBOrderStatus" ColumnName="ECBOrderStatus" />
+                <ScalarProperty Name="ECBViolationsAmt" ColumnName="ECBViolationsAmt" />
+                <ScalarProperty Name="WaterOrderDeliveryTime" ColumnName="WaterOrderDeliveryTime" />
+                <ScalarProperty Name="WaterOrderTime" ColumnName="WaterOrderTime" />
+                <ScalarProperty Name="WaterOrderStatus" ColumnName="WaterOrderStatus" />
+                <ScalarProperty Name="WaterAmt" ColumnName="WaterAmt" />
+                <ScalarProperty Name="TaxesOrderDeliveryTime" ColumnName="TaxesOrderDeliveryTime" />
+                <ScalarProperty Name="TaxesOrderTime" ColumnName="TaxesOrderTime" />
+                <ScalarProperty Name="TaxesOrderStatus" ColumnName="TaxesOrderStatus" />
+                <ScalarProperty Name="TaxesAmt" ColumnName="TaxesAmt" />
+                <ScalarProperty Name="C3rdMortgrAmt" ColumnName="C3rdMortgrAmt" />
+                <ScalarProperty Name="C2ndMotgrAmt" ColumnName="C2ndMotgrAmt" />
+                <ScalarProperty Name="C1stMotgrAmt" ColumnName="C1stMotgrAmt" />
+                <ScalarProperty Name="IsDOBViolations" ColumnName="IsDOBViolations" />
+                <ScalarProperty Name="IsECBViolations" ColumnName="IsECBViolations" />
+                <ScalarProperty Name="IsWaterOwed" ColumnName="IsWaterOwed" />
+                <ScalarProperty Name="IsTaxesOwed" ColumnName="IsTaxesOwed" />
+                <ScalarProperty Name="IsOtherLiens" ColumnName="IsOtherLiens" />
+                <ScalarProperty Name="IsLisPendens" ColumnName="IsLisPendens" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -21,6 +21,10 @@ Public Class AgentOverview
             CurrentEmployee = Employee.GetInstance(hfEmpName.Value)
         End If
 
+        If Not String.IsNullOrEmpty(hfOfficeName.Value) Then
+            CurrentOffice = Office.GetInstance(hfOfficeName.Value)
+        End If
+
         'If Not ComparedEmps.Contains(CurrentEmployee) Then
         '    ComparedEmps.Add(CurrentEmployee)
         'End If
@@ -104,14 +108,16 @@ Public Class AgentOverview
 
         If e.Parameters.StartsWith("BindOffice") Then
             hfMode.Value = "Office"
-            CurrentOffice = Office.GetInstance(e.Parameters.Split("|")(1))
+            hfOfficeName.Value = e.Parameters.Split("|")(1)
+            CurrentOffice = Office.GetInstance(hfOfficeName.Value)
 
             gridReport.DataBind()
         End If
 
         If e.Parameters.StartsWith("OfficeStatus") Then
             hfMode.Value = "OfficeStatus"
-            CurrentOffice = Office.GetInstance(e.Parameters.Split("|")(1))
+            hfOfficeName.Value = e.Parameters.Split("|")(1)
+            CurrentOffice = Office.GetInstance(hfOfficeName.Value)
             CurrentStatus = CType(e.Parameters.Split("|")(2), LeadStatus)
 
             gridReport.DataBind()
@@ -138,7 +144,8 @@ Public Class AgentOverview
 
         If e.Parameter.StartsWith("OFFICE") Then
             hfMode.Value = "Office"
-            CurrentOffice = Office.GetInstance(e.Parameter.Split("|")(1))
+            hfOfficeName.Value = e.Parameter.Split("|")(1)
+            CurrentOffice = Office.GetInstance(hfOfficeName.Value)
 
             AgentInfoPanel.Visible = False
             OfficeInfoPanel.Visible = True
@@ -215,6 +222,7 @@ Public Class AgentOverview
                                       ld In portalDataContext.Leads On ld.BBLE Equals li.BBLE
                                       Where ld.Status = CurrentStatus
                                       Select li).ToList
+                'Dim reports = portalDataContext.LeadsInfoViews.Where(Function(li) li.Status = CurrentStatus)
                 gridReport.DataSource = reports
             End If
 

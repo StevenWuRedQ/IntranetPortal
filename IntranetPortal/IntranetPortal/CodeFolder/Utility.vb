@@ -211,7 +211,7 @@ Public Class Utility
     End Function
 
     Public Shared Function GetTeamUnAssignedLeadsCount(teamId As Integer) As Integer
-        Return Team.GetTeam(teamId).AssignLeadsView.Count
+        Return Team.GetTeam(teamId).AssignLeadsCount
     End Function
 
     Public Shared Function GetTeamUnAssignedLeadsCount(teamMgr As String) As Integer
