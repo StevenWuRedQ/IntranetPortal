@@ -67,7 +67,7 @@ Public Class AgentCharts
         'current_employee
         Dim today = formdays
         Using Context As New Entities
-            Dim source = (From ld In Context.LeadsActivityLogs.ToList.Where(Function(ld) ld.ActivityDate.HasValue AndAlso ld.ActivityDate.Value.Date > today And ld.EmployeeID = current_employee And ld.ActionType IsNot Nothing).ToList
+            Dim source = (From ld In Context.LeadsActivityLogs.Where(Function(ld) ld.ActivityDate > today And ld.EmployeeID = current_employee And ld.ActionType IsNot Nothing).ToList
                           Group ld By Name = CType(ld.ActionType, EnumActionType).ToString Into Count()).ToList
             Dim dateStr = today.ToShortDateString
             If today <> DateTime.Today Then
