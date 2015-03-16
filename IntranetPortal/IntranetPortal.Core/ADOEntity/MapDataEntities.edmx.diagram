@@ -6,6 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="8cf72ea5a4b246c3b18ec7659502a6a3" Name="Diagram1" >
         <EntityTypeShape EntityType="MapDataEntities.dtm_0814_tax_block_polygon" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="MapDataEntities.dtm_0814_tax_lot_polygon" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

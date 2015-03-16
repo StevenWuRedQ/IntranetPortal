@@ -118,6 +118,9 @@
     <Compile Include="ADOEntity\dtm_0814_tax_block_polygon.vb">
       <DependentUpon>MapDataEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\dtm_0814_tax_lot_polygon.vb">
+      <DependentUpon>MapDataEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\EmailMessage.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>

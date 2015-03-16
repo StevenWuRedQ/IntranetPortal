@@ -186,173 +186,91 @@
             <%-- New layout --%>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="mag_grid">
-                            <div class="mag_grid_title">
-                                <i class="fa fa-users management_denominator color_gray "></i><span>Agent Activity</span>
-                            </div>
-                            <div class="mag_grid_edit">
-                                <select class="form-control">
-                                    <option>In Process Leads</option>
-                                </select>
-                            </div>
-                            <div class="mag_grid_chart">
-                                <div id="current_leads" class="containers" style="height: 250px; width: 100%;"></div>
-                                <div class="chart_text">
-                                    Phone Call
+                    <div class="col-md-2">
+                        <ul class="nav nav-tabs nav-stacked color_gray" role="tablist">
+                            <li role="presentation" class="mag_tabv"><a href="#Agent_Activity_Tab" role="tab" data-toggle="tab"><i class="fa fa-users mag_tabv_i"></i>Agent Activity</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#Status_Of_Leads_Tab" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Status Of Leads</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-map-marker mag_tabv_i"></i>Geo Leads</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-bar-chart mag_tabv_i"></i>Monthly  Intake</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-line-chart mag_tabv_i"></i>Compare Offices</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-clock-o mag_tabv_i"></i>Team Hours</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-10">
+                        <div style="padding-left: 20px; border-left: 5px solid #dde0e7; min-height: 900px">
+                            <div class="tab-content" style="padding-right: 10px">
+                                <div role="tabpanel" class="tab-pane " id="Agent_Activity_Tab">
+                                    Agent Activity
                                 </div>
-                            </div>
-                            <div>
-                                <div class="row">
-                                    <div class="col-md-8">&nbsp;</div>
-                                    <div class="col-md-4">
-                                        <button class="rand-button bg_color_blue rand-button-padding" type="button">All Charts <i class="fa fa-angle-right btn_arrow"></i></button>
+                                <div role="tabpanel" class="tab-pane active" id="Status_Of_Leads_Tab">
+                                    <div class="mag_tab_input_group">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <select class="form-control">
+                                                    <option>Last Month</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <select class="form-control" id="selAgents">
+                                                    <option>All Agents</option>
+                                                    <option>Agents 1</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <input type="button" value="Display" class="rand-button bg_color_blue rand-button-padding" onclick="LoadGrid()" />
+                                            </div>
+                                            <div class="col-md-1">
+                                                <input type="button" value="Chart" class="rand-button bg_color_blue rand-button-padding" onclick="LoadPhoneBarChart()" />
+                                            </div>
+                                        </div>
+
+
                                     </div>
+                                    <div class="row" style="margin-top: 10px">
+                                        <div class="col-md-6">
+                                            <div style="margin-top:25px">
+                                                <i class="fa fa-pie-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Status Of Leads</span>
+                                            </div>
+                                            <div>
 
+                                                <div id="container" class="containers" style="height: 500px; width: 100%;"></div>
+                                                <div class="chart_text">
+                                                    In Process Leads: <span id="InProcessCount" class="font_black">0</span>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div style="border-left: 1px solid #dde0e7;min-height:800px;">
+                                                <div style="padding:30px 40px;font-weight:300;color:#2e2f31">
+                                                    
+                                                    <div style="font-size:24px;">
+                                                        <span class="color_balck">In-depth: </span> Short Sale
+                                                    </div> 
+                                                    <div style="margin-top:90px">
+                                                        Feb 01, 2015 - Mar 01, 2015
+                                                    </div>
+                                                    <div style="margin-top:10px;height:200px;width:100%" id="monthly_intake" >
+                                                        
+                                                    </div>
+                                                    <div style="margin-top:30px">
+                                                        Short Sale In-depth Sample Chart
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    Status Of Leads
                                 </div>
-
+                                <div role="tabpanel" class="tab-pane" id="Geo_Leads_tab">
+                                    <iframe src="/Map/ZipMap.aspx" style="width: 100%; height: 800px"></iframe>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-                    <div class="col-md-4">
-                        <div class="mag_grid">
-                            <div class="mag_grid_title">
-                                <i class="fa fa-pie-chart management_denominator color_gray "></i><span>Status Of Leads</span>
-                            </div>
-                            <div class="mag_grid_edit">
-                                <select class="form-control">
-                                    <option>Phone Call</option>
-                                </select>
-                            </div>
-                            <div class="mag_grid_chart">
-                                <div id="container" class="containers" style="height: 250px; width: 100%;"></div>
-                                <div class="chart_text">
-                                    &nbsp;
-                                </div>
-                            </div>
-                            <div>
-                                <div class="row">
-                                    <div class="col-md-8">&nbsp;</div>
-                                    <div class="col-md-4">
-                                        <button class="rand-button bg_color_blue rand-button-padding" type="button">All Charts <i class="fa fa-angle-right btn_arrow"></i></button>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="mag_grid">
-                            <div class="mag_grid_title">
-                                <i class="fa fa-map-marker management_denominator color_gray "></i><span>Geo Leads</span>
-                            </div>
-
-                            <div class="mag_grid_chart">
-                                <iframe src="/Map/ZipMap.aspx" style="width: 100%; min-height: 299px"></iframe>
-                                <div class="chart_text">
-                                    &nbsp;
-                                </div>
-                            </div>
-                            <div>
-                                <div class="row">
-                                    <div class="col-md-7">&nbsp;</div>
-                                    <div class="col-md-5">
-                                        <button class="rand-button bg_color_blue rand-button-padding" type="button">Show Big Map <i class="fa fa-angle-right btn_arrow"></i></button>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row" style="margin-top: 30px">
-                    <div class="col-md-4">
-                        <div class="mag_grid">
-                            <div class="mag_grid_title">
-                                <i class="fa  fa-bar-char management_denominator color_gray "></i><span>Monthly Intake</span>
-                            </div>
-                            <div class="mag_grid_edit">
-                                <select class="form-control">
-                                    <option>Sample Chart</option>
-                                </select>
-                            </div>
-                            <div class="mag_grid_chart">
-                                <div id="monthly_intake" class="containers" style="height: 250px; width: 100%;"></div>
-                                <div class="chart_text">
-                                    Phone Call
-                                </div>
-                            </div>
-                            <div>
-                                <div class="row">
-                                    <div class="col-md-8">&nbsp;</div>
-                                    <div class="col-md-4">
-                                        <button class="rand-button bg_color_blue rand-button-padding" type="button">All Charts <i class="fa fa-angle-right btn_arrow"></i></button>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="mag_grid">
-                            <div class="mag_grid_title">
-                                <i class="fa fa-line-chart management_denominator color_gray "></i><span>Compare Offices</span>
-                            </div>
-                            <div class="mag_grid_edit">
-                                <select class="form-control">
-                                    <option>Sample Chart</option>
-                                </select>
-                            </div>
-                            <div class="mag_grid_chart">
-                                <div id="leads_process_chart" class="containers" style="height: 250px; width: 100%;"></div>
-                                <div class="chart_text">
-                                    &nbsp;
-                                </div>
-                            </div>
-                            <div>
-                                <div class="row">
-                                    <div class="col-md-8">&nbsp;</div>
-                                    <div class="col-md-4">
-                                        <button class="rand-button bg_color_blue rand-button-padding" type="button">All Charts <i class="fa fa-angle-right btn_arrow"></i></button>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="mag_grid">
-                            <div class="mag_grid_title">
-                                <i class="fa fa-line-chart management_denominator color_gray "></i><span>Compare Offices</span>
-                            </div>
-                            <div class="mag_grid_edit">
-                                <select class="form-control">
-                                    <option>Sample Chart</option>
-                                </select>
-                            </div>
-                            <div class="mag_grid_chart">
-                                <div id="team_hours_chart" class="containers" style="height: 250px; width: 100%;"></div>
-                                <div class="chart_text">
-                                    &nbsp;
-                                </div>
-                            </div>
-                            <div>
-                                <div class="row">
-                                    <div class="col-md-8">&nbsp;</div>
-                                    <div class="col-md-4">
-                                        <button class="rand-button bg_color_blue rand-button-padding" type="button">All Charts <i class="fa fa-angle-right btn_arrow"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -551,6 +469,7 @@
     <script>
 
         var currentTeamInfo = null;
+        var palette_color = ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7'];
         function loadCharts(office) {
 
             $("#monthly_intake").dxChart({
@@ -570,8 +489,9 @@
                     valueField: "oranges",
 
                     type: "bar",
-                    color: '#ffa500'
-                }
+                  
+                },
+                palette:palette_color,
             });
             var dataSource = [
                   { language: "English", percent: 55.5 },
@@ -587,7 +507,7 @@
             ];
 
             $("#team_hours_chart").dxPieChart({
-               
+
                 dataSource: dataSource,
                 legend: {
                     horizontalAlignment: "center",
@@ -595,7 +515,7 @@
 
                     visible: false
                 },
-               
+
                 series: [{
                     smallValuesGrouping: {
                         mode: "topN",
@@ -769,23 +689,23 @@
             };
             var chart = $("#compare_offices_chart").dxChart(chartOptions).dxChart("instance");
         }
-        loadCharts("Queens");
+        loadCharts("RonTeam");
     </script>
     <script>
         dropDownMenuData = <%= AllTameJson()%>
-        //dropDownMenuData = [
-        //    "Queens Team",
-        //    "Bronx Team",
-        //    "Rockaway Team"
+    //dropDownMenuData = [
+    //    "Queens Team",
+    //    "Bronx Team",
+    //    "Rockaway Team"
 
-        //];
-        menuItemClicked = function (e) {
+    //];
+    menuItemClicked = function (e) {
 
-            DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000 });
-            $('#teams_link').html(e.itemData);
-            //officeDropDown.option("buttonText", e.itemData );
-            loadCharts(e.itemData.replace("Office", '').trim());
-        };
+        DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000 });
+        $('#teams_link').html(e.itemData);
+        //officeDropDown.option("buttonText", e.itemData );
+        loadCharts(e.itemData.replace("Office", '').trim());
+    };
         var officeDropDown = $("#dropDownMenu").dxDropDownMenu({
             dataSource: dropDownMenuData,
             itemClickAction: menuItemClicked,

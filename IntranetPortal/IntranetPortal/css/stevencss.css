@@ -2211,6 +2211,28 @@ li.active.mag_tab {
     border: none;
 }
 
+.mag_tabv
+{
+    
+    border-bottom:1px solid #dde0e7;
+}
+.mag_tabv a 
+{
+    color:#77787b;
+}
+.mag_tabv_i
+{
+    padding:0 10px;
+}
+li.mag_tabv.active
+{
+    background:transparent !important;
+  
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
+{
+    border:none;
+}
 .mag_tab_input_group {
     padding: 15px 20px;
     background: #eff2f5;
@@ -2250,9 +2272,10 @@ li.active.mag_tab {
     }
 
 .chart_text {
-    font-size: 12px;
+    font-size: 24px;
     text-align: center;
     margin-top: 10px;
+    font-weight:300;
 }
 /*end magagement UI*/
 

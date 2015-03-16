@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
-    
+
     <script src="/scripts/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,6 +24,9 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>--%>
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
+    <!-- Include the loading control -->
+   <%-- <link rel="stylesheet" href="https://rawgithub.com/ebrelsford/Leaflet.loading/master/src/Control.Loading.css">
+    <script src="https://rawgithub.com/ebrelsford/Leaflet.loading/master/src/Control.Loading.js"></script>--%>
 
     <style>
         body {
@@ -57,8 +60,8 @@
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-geodesy/v0.1.0/leaflet-geodesy.js'></script>
 
-    
-  
+
+
 
 </head>
 
@@ -94,16 +97,16 @@
             }
 
 
-            function FindNumberByName(typeName, zipCode) {
+        function FindNumberByName(typeName, zipCode) {
 
-                for (var i = 0; i < CountDateSet.length; i++) {
-                    var c = CountDateSet[i];
-                    if (c.TypeName == typeName && c.ZipCode == zipCode) {
-                        return String(c.Count)
-                    }
+            for (var i = 0; i < CountDateSet.length; i++) {
+                var c = CountDateSet[i];
+                if (c.TypeName == typeName && c.ZipCode == zipCode) {
+                    return String(c.Count)
                 }
-                return 0;
             }
+            return 0;
+        }
 
         //function codeAddress(zip,Count) {
         //    geocoder = new google.maps.Geocoder();
@@ -155,6 +158,10 @@
 
         function getMessgae(properties) {
             var is_Blcok = map.hasLayer(BlockLayer);
+            var is_Lot = map.hasLayer(LotLayer)
+            if (is_Lot) {
+                return '<div class="marker-title">' + 'BBLE:' + properties.BBLE + '</div>';
+            }
 
             if (is_Blcok) {
                 return '<div class="marker-title">' + 'Borough:' + properties.Boro + '</div>' + 'Block :' +
@@ -188,26 +195,27 @@
         }
         var closeTooltip;
         function mouseout(e) {
-            
+
             if (BlockLayer != null) {
                 var is_Blcok = map.hasLayer(BlockLayer);
 
-                if (is_Blcok)
-                {
+                if (is_Blcok) {
                     BlockLayer.resetStyle(e.target);
                 }
-               
+
             }
-            
-            if (map.hasLayer(ZipPolygonLayer))
-            {
+
+            if (map.hasLayer(ZipPolygonLayer)) {
                 ZipPolygonLayer.resetStyle(e.target);
             }
-            
-       
-           
-            
-            
+            if (map.hasLayer(LotLayer)) {
+                LotLayer.resetStyle(e.target);
+            }
+
+
+
+
+
             closeTooltip = window.setTimeout(function () {
                 map.closePopup();
             }, 100);
@@ -231,19 +239,17 @@
             }
 
             function getColor(d) {
-                 
-              
-                
+
+
+
                 var color = 'rgba(223, 48, 0,'
                 var percent = 0.13
                 var values = [1000, 500, 200, 100, 50, 20, 10];
-                
-                for (var i = 0; i < values.length; i++)
-                {
-                    if(d>values[i])
-                    {
+
+                for (var i = 0; i < values.length; i++) {
+                    if (d > values[i]) {
                         var optacty = (1 - percent * i);
-                        return  color + optacty + ')'
+                        return color + optacty + ')'
                     }
                 }
                 var optacty = (1 - percent * values.length);
@@ -280,18 +286,17 @@
                     $('#spanZip').html("Zip: " + zip);
 
 
-                    
+
                     //$('#tdLeadsCount').html(findCountNum(zip));
                     var zipCountData = data;
                     html = ''
                     var source = $("#zipCountTrTemplate").html();
                     var template = Handlebars.compile(source);
-                    for (var i = 0; i < zipCountData.length; i++)
-                    {
+                    for (var i = 0; i < zipCountData.length; i++) {
 
                         var context = zipCountData[i];
-                         html += template(context);
-            }
+                        html += template(context);
+                    }
                     $("#zipCountTable").html(html);
                     //$(".ZipCount").each(function (index) {
                     //    var c = FindNumberByName(this.id, zip);
@@ -321,16 +326,16 @@
                       from + (to ? '&ndash;' + to : '+')) + '</li>';
                 }
 
-                return '<span>Leads in Zip</span><ul style="list-style-type: none;">' + labels.join('') + '</ul>';
+                return '<span>Leads in Zip <i class="fa fa-spinner fa-pulse" id="LoadingSpin"></i></span> <ul style="list-style-type: none;">' + labels.join('') + '</ul>';
             }
 
-            
-            
-          
-            
+
+
+
+
 
             zipMap = zipMap || [];// data.features;
-            
+
             var geoJson = []
             zipMakerLayer
             var zipMakerLayer = L.mapbox.featureLayer();
@@ -383,10 +388,10 @@
 
             /*add layer swicher */
             L.control.layers({
-                
+
             }, {
                 'Leads Count Portal': zipMakerLayer,
-               
+
             }).addTo(map);
             /******/
             return;
@@ -469,58 +474,54 @@
         //    var vmaps = $('#container').dxVectorMap('instance');
         //}
         var map
-        function ZoomEndMapBox()
-        {
-            
+        function ZoomEndMapBox() {
+
         }
 
         /*zoom out to zoom*/
         var SHOW_ZIP = 1 << 1;
         var SHOW_BLOCK = 1 << 2;
+        var SHOW_LOT = 1 << 3;
+        function ShowPloyons(layers) {
 
-        function ShowPloyons(layers)
-        {
+            showLayer(layers & SHOW_ZIP, ZipPolygonLayer)
 
-            showLayer(layers & SHOW_ZIP,ZipPolygonLayer)
-            
             showLayer(layers & SHOW_BLOCK, BlockLayer)
+            showLayer(layers & SHOW_LOT, LotLayer)
 
         }
 
-        function showLayer(isShow , layer)
-        {
-            if(isShow)
-            {
-                if(!map.hasLayer(layer))
-                {
+        function showLayer(isShow, layer) {
+            if (isShow) {
+                if (!map.hasLayer(layer)) {
                     map.addLayer(layer)
                 }
-            }else
-            {
-                if(map.hasLayer(layer))
-                {
+            } else {
+                if (map.hasLayer(layer)) {
                     map.removeLayer(layer)
                 }
             }
         }
 
-        function ZoomOut(zoom)
-        {
-            if(zoom<16)
-            {
+        function ZoomOut(zoom) {
+            if (zoom < 16) {
                 ShowPloyons(SHOW_ZIP)
+            }
+
+            if (zoom >= 16 && zoom < 18) {
+                ShowPloyons(SHOW_BLOCK);
             }
         }
         var BlockLayer;
+        var LotLayer
         function onEachFeatureBlock(feature, layer) {
             layer.on({
                 mousemove: mousemove,
                 mouseout: mouseout,
-               
+
             });
         }
-        function ZoomIn(zoom)
-            {
+        function ZoomIn(zoom) {
             if (zoom === 16) {
                 // here's where you decided what zoom levels the layer should and should
                 // not be available for: use javascript comparisons like < and > if
@@ -529,12 +530,12 @@
                 var bounds = map.getBounds();
                 var northEast = bounds.getNorthEast();
                 var southWest = bounds.getSouthWest();
-             
+
                 var string = [northEast.lat, northEast.lng, southWest.lat, southWest.lng].join(',');
                 var geoJsonUrl = '/map/mapdataservice.svc/BlockData/' + string;
-
+                $('#LoadingSpin').addClass("fa-pulse")
                 $.getJSON(geoJsonUrl, function (data) {
-                   
+
                     var geoJson = data;
                     //if (BlockLayer != null)
                     //{
@@ -551,10 +552,35 @@
                         onEachFeature: onEachFeatureBlock
                     });
                     ShowPloyons(SHOW_BLOCK);
-                    
+                    $('#LoadingSpin').removeClass("fa-pulse")
                 });
-               
-                
+            }
+            if (zoom === 18) {
+                var bounds = map.getBounds();
+                var northEast = bounds.getNorthEast();
+                var southWest = bounds.getSouthWest();
+
+                var string = [northEast.lat, northEast.lng, southWest.lat, southWest.lng].join(',');
+                var geoJsonUrl = '/map/mapdataservice.svc/LoadLotData/' + string;
+                $('#LoadingSpin').addClass("fa-pulse");
+                $.getJSON(geoJsonUrl, function (data) {
+
+                    var geoJson = data;
+
+                    LotLayer = L.geoJson(geoJson, {
+                        style: {
+                            weight: 2,
+                            opacity: 0.1,
+                            color: 'black',
+                            fillOpacity: 0.7,
+                            fillColor: '#18FFFF'
+                        },
+                        onEachFeature: onEachFeatureBlock
+                    });
+                    ShowPloyons(SHOW_LOT);
+                    $('#LoadingSpin').removeClass("fa-pulse")
+                });
+
             }
         }
         function MapZoomLevelChange() {
@@ -562,15 +588,15 @@
             nowZoom > ZoomLevel ? ZoomIn(nowZoom) : ZoomOut(nowZoom);
             ZoomLevel = nowZoom;
         }
-        
+
         var ZoomLevel = 11;
         function initMapBox() {
             L.mapbox.accessToken = 'pk.eyJ1IjoicG9ydGFsIiwiYSI6ImtCdG9ac00ifQ.p2_3nTko4JskYcg0YIgeyw';
-            map = L.mapbox.map('map', 'examples.map-i87786ca')
+            map = L.mapbox.map('map', 'examples.map-i87786ca', { loadingControl: true })
                .addControl(L.mapbox.geocoderControl('mapbox.places'))
              .setView([40.7127, -74.0059], 11);
 
-           
+
             var featureGroup = L.featureGroup().addTo(map);
 
             var drawControl = new L.Control.Draw({
@@ -632,7 +658,7 @@
             width: 300px;
             border: 1px solid;
             color: #fff;
-              padding: 15px;
+            padding: 15px;
             position: fixed;
             _position: absolute;
             text-shadow: 0 1px 0 rgba(0,0,0,.5);
@@ -642,8 +668,8 @@
         .info {
             background-color: #4ea5cd;
             border-color: #3b8eb5;
-     }
-            
+        }
+
         .message .msgtitle {
             margin: 0 0 5px 0;
             font-size: 14px;
@@ -651,23 +677,23 @@
 
         .message p {
             margin: 0;
-           }
-                
+        }
+
         @keyframes animate-bg {
             from {
                 background-position: 0 0;
             }
-                  
+
             to {
                 background-position: -80px 0;
-                   }
+            }
         }
     </style>
 
     <script id="zipCountTrTemplate" type="text/x-handlebars-template">
         <tr>
             <td>{{TypeName}} : </td>
-            <td > {{ Count}}</td>
+            <td>{{ Count}}</td>
         </tr>
     </script>
     <div id="divMsgTest" class="info message" style="top: -500px; right: 40px">
@@ -675,7 +701,7 @@
             <i class="fa fa-database with_circle" style="color: white; font-size: 14px; width: 30px; height: 30px; line-height: 30px; text-align: center"></i>&nbsp; <span id="spanZip"></span>
             <span style="float: right; line-height: 30px; font-weight: 600; cursor: pointer" onclick="HideMessages()">X</span>
         </div>
-        <table style="width: 100%;color:white; font-size: 14px" id="zipCountTable">
+        <table style="width: 100%; color: white; font-size: 14px" id="zipCountTable">
             <%--<tr>
                 <td>Leads in Portal: </td>
                 <td id="tdLeadsCount"></td>
@@ -739,7 +765,6 @@
                 <td>Total : </td>
                 <td id="Zip_Total" class="ZipCount"></td>
             </tr>--%>
-
         </table>
     </div>
 </body>
