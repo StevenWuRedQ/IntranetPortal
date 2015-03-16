@@ -260,8 +260,9 @@ Public Class LeadsGenerator
                 Next
                 Context.SaveChanges()
 
-                Context.UploadSearchInfo2Portal()
-                Context.SaveChanges()
+                'UploadSearchInfo2Portal take long time for right now terminate it 
+                'Context.UploadSearchInfo2Portal()
+                'Context.SaveChanges()
             End Using
             'please build address after loop finish
             'runDataLoop(BBlesList)
