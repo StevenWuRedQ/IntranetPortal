@@ -24,9 +24,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>--%>
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
-    <!-- Include the loading control -->
-   <%-- <link rel="stylesheet" href="https://rawgithub.com/ebrelsford/Leaflet.loading/master/src/Control.Loading.css">
-    <script src="https://rawgithub.com/ebrelsford/Leaflet.loading/master/src/Control.Loading.js"></script>--%>
+
 
     <style>
         body {
@@ -60,6 +58,8 @@
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-geodesy/v0.1.0/leaflet-geodesy.js'></script>
 
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css' rel='stylesheet' />
 
 
 
@@ -326,7 +326,7 @@
                       from + (to ? '&ndash;' + to : '+')) + '</li>';
                 }
 
-                return '<span>Leads in Zip <i class="fa fa-spinner fa-pulse" id="LoadingSpin"></i></span> <ul style="list-style-type: none;">' + labels.join('') + '</ul>';
+                return '<span>Leads in Zip <i class="fa fa-spinner" id="LoadingSpin"></i></span> <ul style="list-style-type: none;">' + labels.join('') + '</ul>';
             }
 
 
@@ -521,6 +521,13 @@
 
             });
         }
+        function ShowLoading(isloading) {
+            if (isloading) {
+                $('#LoadingSpin').addClass("fa-spin")
+            } else {
+                $('#LoadingSpin').removeClass("fa-spin")
+            }
+        }
         function ZoomIn(zoom) {
             if (zoom === 16) {
                 // here's where you decided what zoom levels the layer should and should
@@ -533,7 +540,7 @@
 
                 var string = [northEast.lat, northEast.lng, southWest.lat, southWest.lng].join(',');
                 var geoJsonUrl = '/map/mapdataservice.svc/BlockData/' + string;
-                $('#LoadingSpin').addClass("fa-pulse")
+                ShowLoading(true)
                 $.getJSON(geoJsonUrl, function (data) {
 
                     var geoJson = data;
@@ -552,7 +559,7 @@
                         onEachFeature: onEachFeatureBlock
                     });
                     ShowPloyons(SHOW_BLOCK);
-                    $('#LoadingSpin').removeClass("fa-pulse")
+                    ShowLoading(false)
                 });
             }
             if (zoom === 18) {
@@ -562,7 +569,7 @@
 
                 var string = [northEast.lat, northEast.lng, southWest.lat, southWest.lng].join(',');
                 var geoJsonUrl = '/map/mapdataservice.svc/LoadLotData/' + string;
-                $('#LoadingSpin').addClass("fa-pulse");
+                ShowLoading(true);
                 $.getJSON(geoJsonUrl, function (data) {
 
                     var geoJson = data;
@@ -578,7 +585,7 @@
                         onEachFeature: onEachFeatureBlock
                     });
                     ShowPloyons(SHOW_LOT);
-                    $('#LoadingSpin').removeClass("fa-pulse")
+                    ShowLoading(false);
                 });
 
             }
@@ -596,7 +603,7 @@
                .addControl(L.mapbox.geocoderControl('mapbox.places'))
              .setView([40.7127, -74.0059], 11);
 
-
+            L.control.fullscreen().addTo(map);
             var featureGroup = L.featureGroup().addTo(map);
 
             var drawControl = new L.Control.Draw({
