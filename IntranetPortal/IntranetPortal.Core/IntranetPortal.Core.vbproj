@@ -142,6 +142,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MapDataEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\PortalLotInfo.vb">
+      <DependentUpon>MapDataEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\PortalSetting.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>

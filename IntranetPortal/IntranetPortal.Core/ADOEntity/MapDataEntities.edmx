@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MapDataEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MapDataEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="dtm_0814_tax_block_polygon">
           <Key>
             <PropertyRef Name="ogr_fid" />
@@ -62,8 +62,11 @@
           <Property Name="shape_area" Type="numeric" Precision="19" Scale="11" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6013: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+warning 6002: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PortalLotInfo">
+          <Key>
+            <PropertyRef Name="ogr_fid" />
+          </Key>
           <Property Name="BBLE" Type="nchar" MaxLength="11" />
           <Property Name="boro" Type="varchar" MaxLength="1" />
           <Property Name="block" Type="numeric" Precision="9" Scale="0" />
@@ -73,10 +76,25 @@ warning 6013: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
           <Property Name="LeadsName" Type="nvarchar" MaxLength="120" />
           <Property Name="Team" Type="nvarchar" MaxLength="50" />
           <Property Name="Color" Type="nchar" MaxLength="10" />
-        </EntityType>-->
+          <Property Name="ogr_fid" Type="int" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="MapDataEntitiesStoreContainer">
           <EntitySet Name="dtm_0814_tax_block_polygon" EntityType="Self.dtm_0814_tax_block_polygon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="dtm_0814_tax_lot_polygon" EntityType="Self.dtm_0814_tax_lot_polygon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortalLotInfo" EntityType="Self.PortalLotInfo" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PortalLotInfo].[BBLE] AS [BBLE], 
+    [PortalLotInfo].[boro] AS [boro], 
+    [PortalLotInfo].[block] AS [block], 
+    [PortalLotInfo].[lot] AS [lot], 
+    [PortalLotInfo].[bbl] AS [bbl], 
+    [PortalLotInfo].[ogr_geometry] AS [ogr_geometry], 
+    [PortalLotInfo].[LeadsName] AS [LeadsName], 
+    [PortalLotInfo].[Team] AS [Team], 
+    [PortalLotInfo].[Color] AS [Color], 
+    [PortalLotInfo].[ogr_fid] AS [ogr_fid]
+    FROM [dbo].[PortalLotInfo] AS [PortalLotInfo]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -85,6 +103,7 @@ warning 6013: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
         <EntityContainer Name="MapDataEntitiesContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="dtm_0814_tax_block_polygon" EntityType="MapDataEntities.dtm_0814_tax_block_polygon" />
           <EntitySet Name="dtm_0814_tax_lot_polygon" EntityType="MapDataEntities.dtm_0814_tax_lot_polygon" />
+          <EntitySet Name="PortalLotInfoes" EntityType="MapDataEntities.PortalLotInfo" />
         </EntityContainer>
         <EntityType Name="dtm_0814_tax_block_polygon">
           <Key>
@@ -141,6 +160,21 @@ warning 6013: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
           <Property Name="bill_bbl_f" Type="Decimal" Precision="4" Scale="0" />
           <Property Name="shape_leng" Type="Decimal" Precision="19" Scale="11" />
           <Property Name="shape_area" Type="Decimal" Precision="19" Scale="11" />
+        </EntityType>
+        <EntityType Name="PortalLotInfo">
+          <Key>
+            <PropertyRef Name="ogr_fid" />
+          </Key>
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="boro" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="block" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="lot" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="bbl" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ogr_geometry" Type="Geometry" />
+          <Property Name="LeadsName" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="Team" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ogr_fid" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -205,6 +239,22 @@ warning 6013: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
                 <ScalarProperty Name="boro" ColumnName="boro" />
                 <ScalarProperty Name="ogr_geometry" ColumnName="ogr_geometry" />
                 <ScalarProperty Name="ogr_fid" ColumnName="ogr_fid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalLotInfoes">
+            <EntityTypeMapping TypeName="MapDataEntities.PortalLotInfo">
+              <MappingFragment StoreEntitySet="PortalLotInfo">
+                <ScalarProperty Name="ogr_fid" ColumnName="ogr_fid" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Team" ColumnName="Team" />
+                <ScalarProperty Name="LeadsName" ColumnName="LeadsName" />
+                <ScalarProperty Name="ogr_geometry" ColumnName="ogr_geometry" />
+                <ScalarProperty Name="bbl" ColumnName="bbl" />
+                <ScalarProperty Name="lot" ColumnName="lot" />
+                <ScalarProperty Name="block" ColumnName="block" />
+                <ScalarProperty Name="boro" ColumnName="boro" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
