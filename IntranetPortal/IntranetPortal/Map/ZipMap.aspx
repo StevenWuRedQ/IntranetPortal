@@ -24,8 +24,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>--%>
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css' rel='stylesheet' />
-
-
+    
     <style>
         body {
             margin: 0;
@@ -156,11 +155,24 @@
         var popup = new L.Popup({ autoPan: false });
         var ZipPolygonLayer;
 
+        function ShowSearchLeadsInfo(bble) {
+            var url = '/ViewLeadsInfo.aspx?id=' + bble;
+            var left = (screen.width / 2) - (1350 / 2);
+            var top = (screen.height / 2) - (930 / 2);
+            window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+        }
+
         function getMessgae(properties) {
             var is_Blcok = map.hasLayer(BlockLayer);
             var is_Lot = map.hasLayer(LotLayer)
             if (is_Lot) {
-                return '<div class="marker-title">' + 'BBLE:' + properties.BBLE + '</div>';
+                var html = '<div class="marker-title">' + 'BBLE:' + properties.BBLE + '</div>';
+                if (properties.description != null)
+                {
+                    html += '<div> Leads Name : ' + properties.description + '</div>'
+                    + '<div> Team : ' + properties.Team + '</div>'
+                }
+                return html;
             }
 
             if (is_Blcok) {
@@ -514,20 +526,23 @@
         }
         var BlockLayer;
         var LotLayer
+        function ClickLot(e)
+        {
+            var layer = e.target
+            var feature = layer.feature;
+            if(feature.properties.BBLE != null)
+            {
+                ShowSearchLeadsInfo(feature.properties.BBLE);
+            }
+        }
         function onEachFeatureBlock(feature, layer) {
             layer.on({
                 mousemove: mousemove,
                 mouseout: mouseout,
-
+                click: ClickLot,
             });
         }
-        function ShowLoading(isloading) {
-            if (isloading) {
-                $('#LoadingSpin').addClass("fa-spin")
-            } else {
-                $('#LoadingSpin').removeClass("fa-spin")
-            }
-        }
+
         function ZoomIn(zoom) {
             if (zoom === 16) {
                 // here's where you decided what zoom levels the layer should and should
@@ -540,7 +555,7 @@
 
                 var string = [northEast.lat, northEast.lng, southWest.lat, southWest.lng].join(',');
                 var geoJsonUrl = '/map/mapdataservice.svc/BlockData/' + string;
-                ShowLoading(true)
+
                 $.getJSON(geoJsonUrl, function (data) {
 
                     var geoJson = data;
@@ -559,7 +574,7 @@
                         onEachFeature: onEachFeatureBlock
                     });
                     ShowPloyons(SHOW_BLOCK);
-                    ShowLoading(false)
+
                 });
             }
             if (zoom === 18) {
@@ -569,23 +584,33 @@
 
                 var string = [northEast.lat, northEast.lng, southWest.lat, southWest.lng].join(',');
                 var geoJsonUrl = '/map/mapdataservice.svc/LoadLotData/' + string;
-                ShowLoading(true);
+
                 $.getJSON(geoJsonUrl, function (data) {
 
                     var geoJson = data;
 
                     LotLayer = L.geoJson(geoJson, {
-                        style: {
-                            weight: 2,
-                            opacity: 0.1,
-                            color: 'black',
-                            fillOpacity: 0.7,
-                            fillColor: '#18FFFF'
-                        },
+                        style:function(feature) {
+                            return {
+                                weight: 2,
+                                opacity: 0.1,
+                                color: 'black',
+                                fillOpacity: 0.7,
+                                fillColor: feature.properties.color != null ? feature.properties.color : '#18FFFF'
+                            };
+                           
+                            },
+                        //    } {
+                        //    weight: 2,
+                        //    opacity: 0.1,
+                        //    color: 'black',
+                        //    fillOpacity: 0.7,
+                        //    fillColor: '#18FFFF'
+                        //},
                         onEachFeature: onEachFeatureBlock
                     });
                     ShowPloyons(SHOW_LOT);
-                    ShowLoading(false);
+
                 });
 
             }
@@ -695,6 +720,41 @@
                 background-position: -80px 0;
             }
         }
+
+        .message_popup {
+            background: white;
+            color: #77787b;
+            background: white;
+            border-radius: 12px;
+            border: none;
+            box-shadow: -1px 0px 13px 4px rgba(10, 10, 10, 0.25);
+            padding: 0px;
+        }
+
+        .message_popup_title {
+            background: #d9f1fd;
+            border-radius: 10px 10px 0px 0px;
+            font-size: 22px;
+            color: #3993c1;
+            font-weight: 300;
+            padding: 20px;
+        }
+
+        .message_pupup_icon {
+            font-size: 16px;
+            width: 32px;
+            height: 32px;
+            line-height: 32px;
+            text-align: center;
+            border-radius: 20px;
+            border: 1px solid;
+        }
+
+        .message_pupup_content {
+            padding: 20px;
+            font-size: 14px;
+            color: #77787b !important;
+        }
     </style>
 
     <script id="zipCountTrTemplate" type="text/x-handlebars-template">
@@ -703,77 +763,37 @@
             <td>{{ Count}}</td>
         </tr>
     </script>
-    <div id="divMsgTest" class="info message" style="top: -500px; right: 40px">
-        <div class="msgtitle">
-            <i class="fa fa-database with_circle" style="color: white; font-size: 14px; width: 30px; height: 30px; line-height: 30px; text-align: center"></i>&nbsp; <span id="spanZip"></span>
-            <span style="float: right; line-height: 30px; font-weight: 600; cursor: pointer" onclick="HideMessages()">X</span>
+    <div id="divMsgTest" class=" message message_popup" style="top: -500px; right: 40px;">
+        <div class="msgtitle message_popup_title">
+            <i class="fa fa-envelope with_circle message_pupup_icon"></i>&nbsp; <span id="spanZip" style="font-size: 22px;"></span>
+            <span style="float: right; line-height: 30px; font-weight: 600; cursor: pointer; font-size: 18px" onclick="HideMessages()"><i class="fa fa-times" style="color: #2e2f31"></i></span>
         </div>
-        <table style="width: 100%; color: white; font-size: 14px" id="zipCountTable">
-            <%--<tr>
-                <td>Leads in Portal: </td>
-                <td id="tdLeadsCount"></td>
-            </tr>
-            <tr>
-                <td>Leads LP NYC: </td>
-                <td id="Zip_LPCount" class="ZipCount">
-                    
-                </td>
-            </tr>
-            <tr>
-                <td>Vacant Land in NYC: </td>
-                <td id="Zip_VacantLand" class="ZipCount"></td>
-            </tr>
-            <tr>
-                <td>Condo: </td>
-                <td id="Zip_Condo" class="ZipCount"></td>
-            </tr>
-            <tr>
-                <td>Single Family Home: </td>
-                <td id="Zip_Single_Family_Home" class="ZipCount"></td>
-            </tr>
-            <tr>
-                <td>2-4 Family: </td>
-                <td id="Zip_2_4_Family" class="ZipCount"></td>
-            </tr>
-            <tr>
-                <td>5-6 Family: </td>
-                <td id="Zip_5_6_Family" class="ZipCount"></td>
-            </tr>
-            <tr>
-                <td>7+ Family: </td>
-                <td id="Zip_7MoreFamily" class="ZipCount"></td>
-            </tr>
-            <tr>
-                <td>Church / Synagogue: </td>
-                <td id="Zip_Church_Synagogue" class="ZipCount"></td>
-            </tr>
-            <tr>
-                <td>Co-Op: </td>
-                <td id="Zip_Co_Op" class="ZipCount"></td>
-            </tr>
+        <div class="message_pupup_content">
+            <table style="width: 100%; font-size: 14px; color: #77787b !important;" id="zipCountTable">
+            </table>
+        </div>
 
-            <tr>
-                <td>Garage: </td>
-                <td id="Zip_Garage" class="ZipCount"></td>
-            </tr>
-            <tr>
-                <td>Office Building: </td>
-                <td id="Zip_Office_Building" class="ZipCount"></td>
-            </tr>
-            <tr>
-                <td>Residential w/ Store: </td>
-                <td id="Zip_Residential_w_Store" class="ZipCount"></td>
-            </tr>
-            <tr>
-                <td>Warehouse/Factory: </td>
-                <td id="Zip_Warehouse_Factory" class="ZipCount"></td>
-            </tr>
-            <tr>
-                <td>Total : </td>
-                <td id="Zip_Total" class="ZipCount"></td>
-            </tr>--%>
-        </table>
     </div>
+   
+    <script>
+        $(document).ajaxSend(function () {
+            ShowLoading(true);
+        });
+        $(document).ajaxComplete(function (event, request, settings) {
+            ShowLoading(false);
+        });
+        
+        function ShowLoading(isloading) {
+            if (isloading) {
+                $('#LoadingSpin').addClass("fa-spin")
+             
+                
+            } else {
+                $('#LoadingSpin').removeClass("fa-spin")
+              
+            }
+        }
+    </script>
 </body>
 
 <%--</asp:Content>--%>

@@ -14,5 +14,6 @@ Partial Public Class MapDataSet
     Public Property TypeName As String
     Public Property KeyCode As String
     Public Property Count As Integer
+    Public Property PercentWDB As Nullable(Of Double)
 
 End Class

@@ -52,16 +52,47 @@ Partial Public Class MapDataService
     End Function
 
     Public Function GetZipCountInfo(zip As String) As Channels.Message Implements IMapDataService.GetZipCountInfo
+        Dim SHOW_PERCENT = True
 
         Using ctx As New Entities
             Dim LeadsInportal = New MapDataSet
             LeadsInportal.TypeName = "Leads In Portal"
             LeadsInportal.KeyCode = zip
             LeadsInportal.Count = ctx.Leads_with_last_log.Where(Function(f) f.ZipCode = zip).Count
-            Dim cList = New List(Of MapDataSet)
+            Dim cList = New List(Of Object)
 
             cList.Add(LeadsInportal)
-            cList.AddRange(ctx.MapDataSets.Where(Function(m) m.KeyCode = zip AndAlso m.Count <> 0).ToList())
+
+
+
+            If (SHOW_PERCENT) Then
+                Dim mapDataList = ctx.MapDataSets.Where(Function(m) m.KeyCode = zip AndAlso m.Count <> 0 AndAlso m.PercentWDB IsNot Nothing).ToList
+                '.Select(
+                '    Function(l) New With {
+                '                        .TypeName = l.TypeName,
+                '                        .KeyCode = l.KeyCode,
+                '                        .Count = CDec(l.PercentWDB).ToString("p")}
+                ').ToList()
+                Dim CovertList = New List(Of Object)
+
+                For Each m In mapDataList
+                    Dim l = New With {.TypeName = m.TypeName,
+                    .KeyCode = m.KeyCode,
+                    .Count = "0%"
+                        }
+
+                    Dim d = CDec(m.PercentWDB) '0.0123
+                    'm.PercentWDB
+                    Dim CountStr = d.ToString("p")
+                    l.Count = CountStr
+                    CovertList.Add(l)
+                Next
+
+                cList.AddRange(CovertList)
+            Else
+                cList.AddRange(ctx.MapDataSets.Where(Function(m) m.KeyCode = zip AndAlso m.Count <> 0).ToList())
+            End If
+
 
             Dim ListArrayDepatment As New List(Of String) From {"AITeam", "Core Staff", "ddd", "IT", "GalleriaTeam"}
             Dim TeamLeadsCount = ctx.Leads_with_last_log.Where(Function(m) m.ZipCode = zip AndAlso m.Department IsNot Nothing AndAlso Not ListArrayDepatment.Contains(m.Department)).GroupBy(Function(l) l.Department).Select(Function(l) New With {.Count = l.Count, .Deparemt = l.Key}).ToList()
@@ -76,7 +107,11 @@ Partial Public Class MapDataService
                 teamCountZip.TypeName = department
                 teamCountZip.KeyCode = zip
                 teamCountZip.Count = tc.Count
+
                 cList.Add(teamCountZip)
+
+
+
             Next
 
             Return cList.ToJson

@@ -16,7 +16,7 @@ Public Class ZipMap
             ctx.Leads_with_last_log.GroupBy(Function(l) l.ZipCode)
 
             ''LatLonData = JsonConvert.SerializeObject(ctx.LatLon_View.ToList())
-            
+           
         End Using
         leadsByZip = JsonConvert.SerializeObject(s)
     End Sub

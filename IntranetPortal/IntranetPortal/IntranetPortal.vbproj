@@ -2379,6 +2379,8 @@
     <Content Include="pdfViewer\web\locale\zu\viewer.properties" />
     <Content Include="scripts\angular.min.js.map" />
     <Content Include="My Project\DataSources\System.Data.DataTable.datasource" />
+    <Content Include="fonts\icons.ttf" />
+    <Content Include="fonts\icons.woff" />
     <None Include="scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />
@@ -2403,6 +2405,7 @@
     <Content Include="scripts\knockout-3.2.0.debug.js" />
     <Content Include="scripts\knockout-3.2.0.js" />
     <Content Include="scripts\LeadsSubMenu.js" />
+    <Content Include="scripts\loading-overlay.js" />
     <Content Include="scripts\locales\bootstrap-datepicker.ar.js" />
     <Content Include="scripts\locales\bootstrap-datepicker.az.js" />
     <Content Include="scripts\locales\bootstrap-datepicker.bg.js" />

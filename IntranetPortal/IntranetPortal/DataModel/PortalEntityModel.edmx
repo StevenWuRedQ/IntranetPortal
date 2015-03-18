@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agent_Properties">
           <Key>
             <PropertyRef Name="ID" />
@@ -387,6 +387,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.MapDataSet' does not have a pri
           <Property Name="TypeName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="KeyCode" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="PercentWDB" Type="float" />
         </EntityType>
         <EntityType Name="NYC_DATA_COMMENT">
           <Key>
@@ -874,7 +875,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
             <DefiningQuery>SELECT 
     [MapDataSet].[TypeName] AS [TypeName], 
     [MapDataSet].[KeyCode] AS [KeyCode], 
-    [MapDataSet].[Count] AS [Count]
+    [MapDataSet].[Count] AS [Count], 
+    [MapDataSet].[PercentWDB] AS [PercentWDB]
     FROM [dbo].[MapDataSet] AS [MapDataSet]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="NYC_St_Names" EntityType="Self.NYC_St_Names" store:Type="Tables" store:Schema="dbo">
@@ -1871,6 +1873,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
           <Property Name="TypeName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="KeyCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="PercentWDB" Type="Double" />
         </EntityType>
         <EntityType Name="LeadsAssignView2">
           <Key>
@@ -2715,6 +2718,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
           <EntitySetMapping Name="MapDataSets">
             <EntityTypeMapping TypeName="IntranetPortalModel.MapDataSet">
               <MappingFragment StoreEntitySet="MapDataSet">
+                <ScalarProperty Name="PercentWDB" ColumnName="PercentWDB" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="KeyCode" ColumnName="KeyCode" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />

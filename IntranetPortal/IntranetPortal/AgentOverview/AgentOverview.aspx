@@ -445,10 +445,10 @@
                                                                                 Select Range <span class="caret"></span>
                                                                             </button>
                                                                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(1)">Custom today</a></li>
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(3)">Custom 3 days</a></li>
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(7)">Custom 1 week</a></li>
-                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(30)">Custom 1 month</a></li>
+                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(0)">Custom today</a></li>
+                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(2)">Custom 3 days</a></li>
+                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(6)">Custom 1 week</a></li>
+                                                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#" onclick="change_chart_time(29)">Custom 1 month</a></li>
                                                                             </ul>
                                                                         </div>
 
