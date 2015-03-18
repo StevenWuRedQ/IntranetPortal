@@ -33,14 +33,17 @@ Public Class MapService
         Dim result As New List(Of Feature)
         Using ctx As New MapDataEntitiesContainer
 
-            Dim lots = ctx.dtm_0814_tax_lot_polygon.Where(Function(b) mapBound.Contains(b.ogr_geometry))
-            
+            Dim lots = ctx.PortalLotInfoes.Where(Function(b) mapBound.Contains(b.ogr_geometry))
+
             For Each lot In lots.ToList
                 Dim featureProperties As New Dictionary(Of String, Object)
 
                 featureProperties.Add("title", lot.bbl)
                 featureProperties.Add("BBLE", lot.bbl)
-                featureProperties.Add("description", "InPortal")
+
+                featureProperties.Add("description", lot.LeadsName)
+                featureProperties.Add("Team", lot.Team)
+                featureProperties.Add("color", lot.Color)
                 Dim polygon = SqlGeometry.Parse(New SqlString(lot.ogr_geometry.WellKnownValue.WellKnownText))
                 Dim obj = GeoJSON.Net.MsSqlSpatial.MsSqlSpatialConvert.ToGeoJSONGeometry(polygon)
                 Dim model = New Feature(obj, featureProperties, lot.ogr_fid.ToString)
