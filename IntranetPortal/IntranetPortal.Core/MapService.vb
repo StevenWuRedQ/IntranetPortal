@@ -38,7 +38,9 @@ Public Class MapService
             For Each lot In lots.ToList
                 Dim featureProperties As New Dictionary(Of String, Object)
 
+                featureProperties.Add("title", lot.bbl)
                 featureProperties.Add("BBLE", lot.bbl)
+                featureProperties.Add("description", "InPortal")
                 Dim polygon = SqlGeometry.Parse(New SqlString(lot.ogr_geometry.WellKnownValue.WellKnownText))
                 Dim obj = GeoJSON.Net.MsSqlSpatial.MsSqlSpatialConvert.ToGeoJSONGeometry(polygon)
                 Dim model = New Feature(obj, featureProperties, lot.ogr_fid.ToString)
