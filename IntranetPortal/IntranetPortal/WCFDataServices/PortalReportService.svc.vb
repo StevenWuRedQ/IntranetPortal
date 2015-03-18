@@ -76,6 +76,7 @@ Public Class PortalReportService
         Dim users = UserInTeam.GetTeamUsersArray(teamName)
         Dim inProcessCount = Utility.GetMgrLeadsCount(LeadStatus.InProcess, users)
         Dim info = New With {
+                .TeamName = teamName,
                 .TeamAgentCount = users.Count,
                 .Users = users,
                 .TotalDeals = inProcessCount,
@@ -84,8 +85,38 @@ Public Class PortalReportService
         Return info.ToJson
     End Function
 
-    Public Function LoadAgentActivityReport(agentNames As String, startDate As Date, endDate As Date) As Channels.Message Implements IPortalReportService.LoadAgentActivityReport
-        Return Nothing
+    Public Function LoadAgentActivityReport(teamName As String, startDate As String, endDate As String) As Channels.Message Implements IPortalReportService.LoadAgentActivityReport
+        Dim users = UserInTeam.GetTeamUsersArray(teamName)
+        Dim dtStart = DateTime.Parse(startDate)
+        Dim dtEnd = DateTime.Parse(endDate).AddDays(1)
+
+        Using ctx As New Entities
+            Dim logSql = ctx.LeadsActivityLogs.Where(Function(al) users.Contains(al.EmployeeName) And al.ActivityDate < dtEnd And al.ActivityDate > dtStart)
+            Dim logs = logSql.ToList
+
+            Dim result As New List(Of Object)
+            For Each user In users
+                Dim userLogs = logs.Where(Function(l) l.EmployeeName = user)
+                result.Add(New With {
+                           .Name = user,
+                           .CallCount = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.CallOwner).Count,
+                           .Comments = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.Comments).Count,
+                           .DoorKnock = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.DoorKnock).Count,
+                           .FollowUp = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.FollowUp).Count,
+                           .SetAsTask = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.SetAsTask).Count,
+                           .Appointment = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.Appointment).Count
+                           })
+            Next
+
+            Return result.ToJson
+        End Using
+    End Function
+
+    Public Function LoadAgentDetailReport(agentName As String, startDate As String, endDate As String) As Channels.Message Implements IPortalReportService.LoadAgentDetailReport
+        
+
+        Return LoadAgentActivityReport(agentName, startDate, endDate)
+
     End Function
 End Class
 

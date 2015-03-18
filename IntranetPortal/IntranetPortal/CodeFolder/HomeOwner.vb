@@ -201,6 +201,122 @@ Partial Public Class HomeOwner
             ctx.SaveChanges()
         End Using
     End Sub
+
+    Public ReadOnly Property FirstName As String
+        Get
+            Return TLOLocateReport.namesField(0).firstNameField
+        End Get
+    End Property
+
+    Public ReadOnly Property LastName As String
+        Get
+            Return TLOLocateReport.namesField(0).lastNameField
+        End Get
+    End Property
+
+    Public ReadOnly Property FullAddress As String
+        Get
+            Return String.Format("{0} {1}, {2},{3} {4}", Me.Address1, Me.Address2, Me.City, Me.State, Me.Zip)
+        End Get
+    End Property
+
+    Dim hoInfo As New HomeOwnerInfo
+
+    Public ReadOnly Property PhoneNumbers As String
+        Get
+
+            Dim result = New List(Of String)
+            For Each phone In TLOLocateReport.phonesField
+                result.Add(String.Format("{0}-({1}-{2}-{3})", hoInfo.FormatPhoneNumber(phone.phoneField), phone.timeZoneField, phone.phoneTypeField.ToString, phone.scoreField) & Environment.NewLine)
+            Next
+
+            Return String.Join(" ", result.ToArray)
+        End Get
+    End Property
+
+    Public ReadOnly Property PhoneCount As Integer
+        Get
+            Return TLOLocateReport.phonesField.Length
+        End Get
+    End Property
+
+    Public ReadOnly Property AddressHistory As String
+        Get
+            Dim result = New List(Of String)
+            For Each address In TLOLocateReport.addressesField
+                result.Add(String.Format("{0} ({1}-{2})", hoInfo.FormatAddress(address.addressField), hoInfo.BuilderDate(address.dateFirstSeenField), hoInfo.BuilderDate(address.dateLastSeenField)) & Environment.NewLine)
+            Next
+
+            Return String.Join(" ", result.ToArray)
+        End Get
+    End Property
+
+    Public ReadOnly Property Alive As Boolean
+        Get
+            Return TLOLocateReport.dateOfDeathField Is Nothing
+        End Get
+    End Property
+
+    Public ReadOnly Property Age As String
+        Get
+            If TLOLocateReport.dateOfBirthField IsNot Nothing Then
+                Return TLOLocateReport.dateOfBirthField.currentAgeField
+            End If
+            Return "Unknow"
+        End Get
+    End Property
+
+    Public ReadOnly Property Bankruptcy As Boolean
+        Get
+            Return TLOLocateReport.numberOfBankruptciesField > 0
+        End Get
+    End Property
+
+    Public ReadOnly Property Relatives1stNamePhone As String
+        Get
+            Dim result = New List(Of String)
+            For Each relative In TLOLocateReport.relatives1stDegreeField
+                result.Add(String.Format("{0} {2} ({1})",
+                                         relative.nameField.firstNameField & If(relative.nameField.middleNameField IsNot Nothing, " " & relative.nameField.middleNameField, " ") & " " & relative.nameField.lastNameField, GetPhonesString(relative.phonesField), Environment.NewLine) & Environment.NewLine)
+            Next
+
+            Return String.Join(" ", result.ToArray)
+        End Get
+    End Property
+
+    Public ReadOnly Property Relatives2ndNamePhone As String
+        Get
+            Dim result = New List(Of String)
+            For Each relative In TLOLocateReport.relatives2ndDegreeField
+                result.Add(String.Format("{0} {2} ({1})",
+                                         relative.nameField.firstNameField & If(relative.nameField.middleNameField IsNot Nothing, " " & relative.nameField.middleNameField, " ") & " " & relative.nameField.lastNameField, GetPhonesString(relative.phonesField), Environment.NewLine) & Environment.NewLine)
+            Next
+
+            Return String.Join(" ", result.ToArray)
+        End Get
+    End Property
+
+    Public ReadOnly Property Relatives3rdNamePhone As String
+        Get
+            Dim result = New List(Of String)
+            For Each relative In TLOLocateReport.relatives3rdDegreeField
+                result.Add(String.Format("{0} {2} ({1})",
+                                         relative.nameField.firstNameField & If(relative.nameField.middleNameField IsNot Nothing, " " & relative.nameField.middleNameField, " ") & " " & relative.nameField.lastNameField, GetPhonesString(relative.phonesField), Environment.NewLine) & Environment.NewLine)
+            Next
+
+            Return String.Join(" ", result.ToArray)
+        End Get
+    End Property
+
+    Private Function GetPhonesString(phones As DataAPI.PhoneListing()) As String
+        Dim result = New List(Of String)
+        For Each phone In phones
+            result.Add(String.Format("{0}-({1}-{2}-{3})", hoInfo.FormatPhoneNumber(phone.phoneField), phone.timeZoneField, phone.phoneTypeField.ToString, phone.scoreField) & Environment.NewLine)
+        Next
+
+        Return String.Join(" ", result.ToArray)
+    End Function
+
 End Class
 
 Enum PhoneSource

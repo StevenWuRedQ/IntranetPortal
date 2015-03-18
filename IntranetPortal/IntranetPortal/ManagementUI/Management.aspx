@@ -48,7 +48,7 @@
                             </div>
                             <div style="display: inline-block; margin-left: 20px">
                                 <span class="magement_font">total deals within last 30 days</span>
-                                <span class="magement_font magement_number">241</span>
+                                <span class="magement_font magement_number" id="total_deal_count">241</span>
                             </div>
                             <div style="display: inline-block">
                                 <span class="magement_number management_score">
@@ -187,8 +187,8 @@
                 <div class="row">
                     <div class="col-md-2">
                         <ul class="nav nav-tabs nav-stacked color_gray" role="tablist">
-                            <li role="presentation" class="mag_tabv"><a href="#Agent_Activity_Tab" role="tab" data-toggle="tab"><i class="fa fa-users mag_tabv_i"></i>Agent Activity</a></li>
-                            <li role="presentation" class="mag_tabv"><a href="#Status_Of_Leads_Tab" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Status Of Leads</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#Agent_Activity_Tab" onclick="agentActivityTab.ShowTab(currentTeamInfo.TeamName, true)" role="tab" data-toggle="tab"><i class="fa fa-users mag_tabv_i"></i>Agent Activity</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#Status_Of_Leads_Tab" onclick="LeadsStatusTab.ShowTab(currentTeamInfo.TeamName)" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Status Of Leads</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-map-marker mag_tabv_i"></i>Geo Leads</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-bar-chart mag_tabv_i"></i>Monthly  Intake</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-line-chart mag_tabv_i"></i>Compare Offices</a></li>
@@ -199,7 +199,372 @@
                         <div style="padding-left: 20px; border-left: 5px solid #dde0e7; min-height: 900px">
                             <div class="tab-content" style="padding-right: 10px">
                                 <div role="tabpanel" class="tab-pane active" id="Agent_Activity_Tab">
-                                    Agent Activity
+                                    <div class="mag_tab_input_group">
+                                        <div class="row">
+                                            <div id="dateRange" class="containers" style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 10px">
+                                        <div class="col-md-12">
+                                            <div id="agentActivityChart" class="containers" style="height: 440px; width: 100%;"></div>
+                                        </div>
+                                        <div class="">
+                                            <div id="agentDetailChart" class="containers" style="height: 440px; width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    <script type="text/javascript">
+                                        var agentActivityTab = {
+                                            TeamName: null,
+                                            ActivityDataSource: null,
+                                            Visible: function () { return $("#Agent_Activity_Tab").hasClass("active") ? true : false },
+                                            BarChart: function () {
+                                                if ($("#agentActivityChart").has("svg").length)
+                                                    return $("#agentActivityChart").dxChart("instance");
+                                                else {
+                                                    var tab = this;
+                                                    $("#agentActivityChart").dxChart({
+                                                        dataSource: {},
+                                                        commonSeriesSettings: {
+                                                            argumentField: "Name",
+                                                            type: "bar",
+                                                            hoverMode: "allArgumentPoints",
+                                                            selectionMode: "allArgumentPoints",
+                                                            label: {
+                                                                visible: true,
+                                                                format: "fixedPoint",
+                                                                precision: 0
+                                                            }
+                                                        },
+                                                        argumentAxis: {
+                                                            argumentType: 'string'
+                                                        },
+                                                        series: [
+                                                            { valueField: "CallCount", name: "Call" },
+                                                            { valueField: "Comments", name: "Comment" }
+                                                        ],
+                                                        title: "Agents Activities in " + tab.TeamName,
+                                                        legend: {
+                                                            verticalAlignment: "bottom",
+                                                            horizontalAlignment: "center"
+                                                        },
+                                                        loadingIndicator: {
+                                                            show: true
+                                                        },
+                                                        onPointClick: function (info) {
+                                                            var clickedPoint = info.target;
+                                                            clickedPoint.isSelected() ? clickedPoint.clearSelection() : clickedPoint.select();
+                                                        },
+                                                        onPointSelectionChanged: function (info) {
+                                                            var selectedPoint = info.target;
+                                                            var name = selectedPoint.originalArgument;
+                                                            var agentdata = DevExpress.data.query(tab.ActivityDataSource.items()).filter("Name", "=", name).toArray();
+                                                            var data = agentdata[0];
+
+                                                            var datasource = [];
+                                                            for (var key in data) {
+                                                                if (key != "Name") {
+                                                                    datasource.push({ name: key, count: data[key] });
+                                                                }
+                                                            }
+                                                            tab.UpdateAgentDetailChart(name, datasource);
+                                                        }
+                                                    });
+                                                    return $("#agentActivityChart").dxChart("instance");
+                                                }
+                                            },
+                                            PieChart: $("#agentDetailChart").has("svg").length ? $("#agentDetailChart").dxPieChart('instance') : $("#agentDetailChart").dxPieChart({
+                                                size: {
+                                                    width: 500
+                                                },
+                                                dataSource: {},
+                                                series: [
+                                                    {
+                                                        argumentField: "name",
+                                                        valueField: "count",
+                                                        label: {
+                                                            visible: true,
+                                                            connector: {
+                                                                visible: true,
+                                                                width: 1
+                                                            }
+                                                        }
+                                                    }
+                                                ],
+                                                onPointClick: function (e) {
+                                                    var point = e.target;
+                                                    point.isVisible() ? point.hide() : point.show();
+                                                }
+                                            }).dxPieChart("instance"),
+                                            DateRange: function () { return $('#dateRange').has("svg").length ? $('#dateRange').dxRangeSelector('instance') : null },
+                                            InitalTab: function () {
+                                                var tab = this;
+                                                var dateNow = new Date();
+                                                var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
+                                                $("#dateRange").dxRangeSelector({
+                                                    margin: {
+                                                        top: 5
+                                                    },
+                                                    size: {
+                                                        height: 150
+                                                    },
+                                                    scale: {
+                                                        startValue: new Date(2014, 8, 24),
+                                                        endValue: new Date(),
+                                                        minorTickInterval: "day",
+                                                        majorTickInterval: { days: 7 },
+                                                        minRange: "day",
+                                                        showMinorTicks: false
+                                                    },
+                                                    sliderMarker: {
+                                                        format: "monthAndDay"
+                                                    },
+                                                    selectedRange: {
+                                                        startValue: new Date(dateNow.getFullYear(), dateNow.getMonth(), 1),
+                                                        endValue: dateNow
+                                                    },
+                                                    onSelectedRangeChanged: function (e) {
+                                                        tab.UpdateActivityChart(e.startValue, e.endValue);
+                                                    }
+                                                });
+                                            },
+                                            ShowTab: function (name, noCheck) {
+                                                if (this.Visible() || noCheck) {
+                                                    if (this.TeamName == name)
+                                                        return;
+
+                                                    this.TeamName = name;
+                                                    var range = this.DateRange();
+                                                    var selectedRange = range.getSelectedRange();
+                                                    this.UpdateActivityChart(selectedRange.startValue, selectedRange.endValue);
+                                                }
+                                            },
+                                            LoadAgentActivityDs: function (startDate, endDate) {
+                                                this.ActivityDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentActivity/" + this.TeamName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-"));
+                                            },
+                                            UpdateActivityChart: function (startDate, endDate) {
+                                                if ($("#agentActivityChart").parent().hasClass("col-md-6")) {
+                                                    $("#agentActivityChart").parent().removeClass("col-md-6");
+                                                    $("#agentActivityChart").parent().addClass("col-md-12");
+                                                    var width = $("#agentActivityChart").parent().width();
+                                                    if (width == 100)
+                                                        $("#agentActivityChart").width("100%");
+                                                    else
+                                                        $("#agentActivityChart").width(width);
+                                                    this.BarChart().render();
+                                                    $("#agentDetailChart").parent().removeClass("col-md-6");
+                                                    $("#agentDetailChart").width(0);
+                                                    this.PieChart.render();
+                                                }
+
+                                                this.LoadAgentActivityDs(startDate, endDate);
+                                                var chart = this.BarChart();
+                                                chart.showLoadingIndicator();
+                                                chart.beginUpdate();
+                                                chart.option("dataSource", this.ActivityDataSource);
+                                                chart.option("title", "Agents Activities in " + this.TeamName);
+                                                chart.endUpdate();
+                                                chart.hideLoadingIndicator();
+                                            },
+                                            UpdateAgentDetailChart: function (agentName, agentData) {
+                                                if (!$("#agentActivityChart").parent().hasClass("col-md-6")) {
+                                                    $("#agentActivityChart").parent().removeClass("col-md-12");
+                                                    $("#agentActivityChart").parent().addClass("col-md-6");
+                                                    var width = $("#agentActivityChart").parent().width();
+                                                    $("#agentActivityChart").width(width);
+                                                    this.BarChart().render();
+                                                    $("#agentDetailChart").parent().addClass("col-md-6");
+
+                                                    this.PieChart.option({
+                                                        dataSource: agentData,
+                                                        title: agentName + " Actions",
+                                                    });
+
+                                                    return;
+                                                }
+
+                                                this.PieChart.option({
+                                                    dataSource: agentData,
+                                                    title: agentName + " Actions",
+                                                });
+                                            }
+                                        }
+
+
+                                        //var agentActivityDs = null;
+
+                                        //function LoadAgentActivityDs(startDate, endDate) {
+                                        //}
+
+                                        //function ShowAgentActivityTab() {
+                                        //    var dateNow = new Date();
+                                        //    var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
+                                        //    $("#dateRange").dxRangeSelector({
+                                        //        margin: {
+                                        //            top: 5
+                                        //        },
+                                        //        size: {
+                                        //            height: 150
+                                        //        },
+                                        //        scale: {
+                                        //            startValue: new Date(2014, 8, 24),
+                                        //            endValue: new Date(),
+                                        //            minorTickInterval: "day",
+                                        //            majorTickInterval: { days: 7 },
+                                        //            minRange: "day",
+                                        //            showMinorTicks: false
+                                        //        },
+                                        //        sliderMarker: {
+                                        //            format: "monthAndDay"
+                                        //        },
+                                        //        selectedRange: {
+                                        //            startValue: new Date(dateNow.getFullYear(), dateNow.getMonth(), 1),
+                                        //            endValue: dateNow
+                                        //        },
+                                        //        onSelectedRangeChanged: function (e) {
+                                        //            ShowAgentActivityChart(e.startValue, e.endValue);
+                                        //        }
+                                        //    });
+                                        //    return true;
+                                        //}
+
+                                        //function InitalAgentActivityChart() {
+                                        //    var teamName = currentTeamInfo.TeamName;
+                                        //    $("#agentActivityChart").dxChart({
+                                        //        dataSource: agentActivityDs,
+                                        //        commonSeriesSettings: {
+                                        //            argumentField: "Name",
+                                        //            type: "bar",
+                                        //            hoverMode: "allArgumentPoints",
+                                        //            selectionMode: "allArgumentPoints",
+                                        //            label: {
+                                        //                visible: true,
+                                        //                format: "fixedPoint",
+                                        //                precision: 0
+                                        //            }
+                                        //        },
+                                        //        argumentAxis: {
+                                        //            argumentType: 'string'
+                                        //        },
+                                        //        series: [
+                                        //            { valueField: "CallCount", name: "Call" },
+                                        //            { valueField: "Comments", name: "Comment" }
+                                        //        ],
+                                        //        title: "Agents Activities in " + teamName,
+                                        //        legend: {
+                                        //            verticalAlignment: "bottom",
+                                        //            horizontalAlignment: "center"
+                                        //        },
+                                        //        loadingIndicator: {
+                                        //            show: false
+                                        //        },
+                                        //        onPointClick: function (info) {
+                                        //            var clickedPoint = info.target;
+                                        //            clickedPoint.isSelected() ? clickedPoint.clearSelection() : clickedPoint.select();
+                                        //        },
+                                        //        onPointSelectionChanged: function (info) {
+                                        //            var selectedPoint = info.target;
+                                        //            var name = selectedPoint.originalArgument;
+                                        //            var agentdata = DevExpress.data.query(agentActivityDs.items()).filter("Name", "=", name).toArray();
+                                        //            var data = agentdata[0];
+
+                                        //            var datasource = [];
+                                        //            for (var key in data) {
+                                        //                if (key != "Name") {
+                                        //                    datasource.push({ name: key, count: data[key] });
+                                        //                }
+                                        //            }
+                                        //            ShowAgentDetailChart(name, datasource);
+                                        //        }
+                                        //    });
+                                        //}
+
+                                        //function ShowAgentActivityChart(startDate, endDate) {
+                                        //    //var teamName = currentTeamInfo.TeamName;
+                                        //    //var agentActivityDs = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentActivity/" + teamName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-"));
+
+                                        //    LoadAgentActivityDs(startDate, endDate);
+
+                                        //    var chart = $("#agentActivityChart").dxChart("instance");
+                                        //    chart.showLoadingIndicator();
+                                        //    chart.beginUpdate();
+                                        //    chart.option("dataSource", agentActivityDs);
+                                        //    chart.endUpdate();
+                                        //    chart.hideLoadingIndicator();
+                                        //}
+
+                                        //function ShowAgentDetailChart(agentName, agentData) {
+
+                                        //    var teamName = currentTeamInfo.TeamName;
+
+                                        //    if (!$("#agentActivityChart").parent().hasClass("col-md-6")) {
+                                        //        $("#agentActivityChart").parent().removeClass("col-md-12");
+                                        //        $("#agentActivityChart").parent().addClass("col-md-6");
+                                        //        var width = $("#agentActivityChart").parent().width();
+                                        //        var chart = $("#agentActivityChart").dxChart("instance");
+                                        //        $("#agentActivityChart").width(width);
+                                        //        chart.render();
+                                        //        $("#agentDetailChart").parent().addClass("col-md-6");
+
+                                        //        $("#agentDetailChart").dxPieChart({
+                                        //            size: {
+                                        //                width: 500
+                                        //            },
+                                        //            dataSource: agentData,
+                                        //            series: [
+                                        //                {
+                                        //                    argumentField: "name",
+                                        //                    valueField: "count",
+                                        //                    label: {
+                                        //                        visible: true,
+                                        //                        connector: {
+                                        //                            visible: true,
+                                        //                            width: 1
+                                        //                        }
+                                        //                    }
+                                        //                }
+                                        //            ],
+                                        //            title: agentName + " Actions",
+                                        //            onPointClick: function (e) {
+                                        //                var point = e.target;
+                                        //                point.isVisible() ? point.hide() : point.show();
+                                        //            }
+                                        //        });
+
+                                        //        return;
+                                        //    }
+
+                                        //    var pieChart = $("#agentDetailChart").dxPieChart('instance');
+                                        //    pieChart.option({
+                                        //        dataSource: agentData,
+                                        //        title: agentName + " Actions",
+                                        //    });
+                                        //}
+
+                                        $(document).ready(function () {
+                                            agentActivityTab.InitalTab();
+
+                                            ShowTeamData("RonTeam");
+                                        });
+
+                                        function ShowTeamData(team) {
+                                            $.when(LoadTeamInfo(team)).done(function () {
+                                                agentActivityTab.ShowTab(team);
+                                            });
+                                        }
+
+                                        //function ChangeTeamData(team)
+                                        //{
+                                        //    ShowAgentActivityTab();
+                                        //    $.when(LoadTeamInfo(team)).done(function () {
+                                        //        var rangeSelector = $('#dateRange').dxRangeSelector('instance');
+                                        //        var selectedRange = rangeSelector.getSelectedRange();
+                                        //        LoadAgentActivityDs(selectedRange.startValue, selectedRange.endValue);
+                                        //        InitalAgentActivityChart();
+                                        //    });
+                                        //}
+
+                                    </script>
+
                                 </div>
                                 <div role="tabpanel" class="tab-pane " id="Status_Of_Leads_Tab">
                                     <div class="mag_tab_input_group">
@@ -222,46 +587,98 @@
                                                 <input type="button" value="Chart" class="rand-button bg_color_blue rand-button-padding" onclick="LoadPhoneBarChart()" />
                                             </div>
                                         </div>
-
-
                                     </div>
                                     <div class="row" style="margin-top: 10px">
                                         <div class="col-md-6">
-                                            <div style="margin-top:25px">
+                                            <div style="margin-top: 25px">
                                                 <i class="fa fa-pie-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Status Of Leads</span>
                                             </div>
                                             <div>
-
-                                                <div id="container" class="containers" style="height: 500px; width: 100%;"></div>
+                                                <div id="LeadsStatusChart" class="containers" style="height: 500px; width: 100%;"></div>
                                                 <div class="chart_text">
                                                     In Process Leads: <span id="InProcessCount" class="font_black">0</span>
                                                 </div>
-
-
                                             </div>
-
                                         </div>
                                         <div class="col-md-6">
-                                            <div style="border-left: 1px solid #dde0e7;min-height:800px;">
-                                                <div style="padding:30px 40px;font-weight:300;color:#2e2f31">
-                                                    
-                                                    <div style="font-size:24px;">
-                                                        <span class="color_balck">In-depth: </span> Short Sale
-                                                    </div> 
-                                                    <div style="margin-top:90px">
+                                            <div style="border-left: 1px solid #dde0e7; min-height: 800px;">
+                                                <div style="padding: 30px 40px; font-weight: 300; color: #2e2f31">
+
+                                                    <div style="font-size: 24px;">
+                                                        <span class="color_balck">In-depth: </span>Short Sale
+                                                    </div>
+                                                    <div style="margin-top: 90px">
                                                         Feb 01, 2015 - Mar 01, 2015
                                                     </div>
-                                                    <div style="margin-top:10px;height:200px;width:100%" id="monthly_intake" >
-                                                        
+                                                    <div style="margin-top: 10px; height: 200px; width: 100%" id="monthly_intake">
                                                     </div>
-                                                    <div style="margin-top:30px">
+                                                    <div style="margin-top: 30px">
                                                         Short Sale In-depth Sample Chart
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    Status Of Leads
+                                    <script type="text/javascript">
+                                        var LeadsStatusTab = {
+                                            TeamName: null,
+                                            AgentSelect: $("#selAgents"),
+                                            LeadsStatusDataSource: null,
+                                            InitAgentSelect: function (users) {
+                                                if (this.TeamName != null) {
+                                                    var tab = this;
+                                                    tab.AgentSelect.html("");
+                                                    $.each(Users, function (key, value) {
+                                                        tab.AgentSelect.append(
+                                                       $("<option></option>")
+                                                        .attr("value", value)
+                                                        .text(value));
+                                                    });
+                                                    tab.AgentSelect.prepend("<option value='' selected='selected'>All</option>");
+                                                }
+                                            },
+                                            ShowTab: function (teamName) {
+                                                this.TeamName = teamName,
+                                                this.LoadChart();
+                                            },
+                                            LoadChart: function () {
+                                                this.LoadDataSource();
+                                                var tab = this;
+                                                $("#LeadsStatusChart").dxPieChart({
+                                                    dataSource: this.LeadsStatusDataSource,
+                                                    tooltip: {
+                                                        enabled: true,
+                                                        percentPrecision: 2,
+                                                        customizeText: function () {
+                                                            return this.argumentText + " - " + this.percentText;
+                                                        }
+                                                    },
+                                                    legend: { visible: false },
+                                                    series: [{
+                                                        type: "doughnut",
+                                                        argumentField: "Status",
+                                                        valueField: "Count",
+                                                        label: {
+                                                            visible: true,
+                                                            connector: {
+                                                                visible: true
+                                                            }
+                                                        },
+
+                                                    }],
+                                                    palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7'],
+                                                    onDone: function (e) {
+                                                        DevExpress.data.query(tab.LeadsStatusDataSource.items()).sum("Count").done(function (result) {
+                                                            $("#InProcessCount").html(result)
+                                                        });
+                                                    }
+                                                });                                                
+                                            },
+                                            LoadDataSource: function () {
+                                                this.LeadsStatusDataSource = new DevExpress.data.DataSource("/WCFDataServices/PortalReportService.svc/LeadsInProcessReport/" + this.TeamName);
+                                            }
+                                        };
+                                    </script>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="Geo_Leads_tab">
                                     <iframe src="/Map/ZipMap.aspx" style="width: 100%; height: 800px"></iframe>
@@ -277,6 +694,16 @@
 
 
     <script type="text/javascript">
+        function LoadTeamInfo(teamName) {
+            return $.getJSON('/WCFDataServices/PortalReportService.svc/LoadTeamInfo/' + teamName).done(function (data) {
+                currentTeamInfo = data;
+                var total_agent_count = data.TeamAgentCount
+                $("#total_agent_count").html(total_agent_count)
+                $("#total_deal_count").html(currentTeamInfo.TotalDeals);
+                $('#teams_link').html(teamName);
+            });
+        }
+
         function BindAgents() {
             if (currentTeamInfo != null) {
                 $("#selAgents").html("");
@@ -488,9 +915,9 @@
                     valueField: "oranges",
 
                     type: "bar",
-                  
+
                 },
-                palette:palette_color,
+                palette: palette_color,
             });
             var dataSource = [
                   { language: "English", percent: 55.5 },
@@ -535,15 +962,7 @@
                 }]
             });
 
-            $.getJSON('/WCFDataServices/PortalReportService.svc/LoadTeamInfo/' + office).done(function (data) {
-                currentTeamInfo = data;
 
-                //bind phone log agents name
-                BindAgents();
-
-                var total_agent_count = data.TeamAgentCount
-                $("#total_agent_count").html(total_agent_count)
-            });
             var dataSource = new DevExpress.data.DataSource({
                 load: function (loadOptions) {
                     var d = $.Deferred();
@@ -597,7 +1016,7 @@
                     palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
 
                 }
-            $("#container").dxPieChart(option);
+            $("#LeadsStatusChart").dxPieChart(option);
             option.dataSource = dataSource2;
             $("#current_leads").dxPieChart(option);
 
@@ -688,7 +1107,7 @@
             };
             var chart = $("#compare_offices_chart").dxChart(chartOptions).dxChart("instance");
         }
-        loadCharts("RonTeam");
+        //loadCharts("RonTeam");
     </script>
     <script>
         dropDownMenuData = <%= AllTameJson()%>
@@ -704,12 +1123,15 @@
         $('#teams_link').html(e.itemData);
         //officeDropDown.option("buttonText", e.itemData );
         loadCharts(e.itemData.replace("Office", '').trim());
+        LoadTeamInfo(e.itemData);
+        agentActivityTab.ShowTab(e.itemData);
     };
         var officeDropDown = $("#dropDownMenu").dxDropDownMenu({
             dataSource: dropDownMenuData,
             itemClickAction: menuItemClicked,
             buttonIcon: 'arrowdown',
         }).dxDropDownMenu("instance");
+
 
     </script>
 </asp:Content>

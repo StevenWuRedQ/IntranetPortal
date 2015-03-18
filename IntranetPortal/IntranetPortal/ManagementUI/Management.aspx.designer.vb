@@ -11,5 +11,5 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ManagementUI
+Partial Public Class Management1
 End Class
