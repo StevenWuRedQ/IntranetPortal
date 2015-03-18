@@ -54,7 +54,7 @@
             End If
         End Using
 
-        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} share lead to {1}.", User.Identity.Name, cbEmps.Text), hfbble.Value, LeadsActivityLog.LogCategory.Status.ToString)
+        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} share lead to {1}.", User.Identity.Name, cbEmps.Text), hfbble.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.SharedLeads)
         UserMessage.AddNewMessage(cbEmps.Text, "You have a new shared leads.", String.Format("{0} share a lead to you.", User.Identity.Name, cbEmps.Text), hfbble.Value)
 
         BindShareList(hfbble.Value)
@@ -71,7 +71,7 @@
             Context.SaveChanges()
         End Using
 
-        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} stop share to {1}.", User.Identity.Name, lbEmployees.SelectedItem.Text), hfbble.Value, LeadsActivityLog.LogCategory.Status.ToString)
+        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} stop share to {1}.", User.Identity.Name, lbEmployees.SelectedItem.Text), hfbble.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.DefaultAction)
         BindShareList(hfbble.Value)
     End Sub
 End Class

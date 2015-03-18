@@ -455,7 +455,7 @@ Public Class LeadsInfo1
                 comments = String.Format("Judgement Search info is refreshed by {0}", HttpContext.Current.User.Identity.Name)
         End Select
 
-        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString)
+        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.RefreshLeads)
     End Sub
 
     Protected Sub SaveBestEmail(bble As String, ownerName As String, email As String)
@@ -507,7 +507,7 @@ Public Class LeadsInfo1
                     If Not DataWCFService.UpdateLeadInfo(bble, False, False, False, False, False, False, True) Then
                         Throw New Exception("This Lead didn't have owner info in our database.")
                     End If
-                    LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString)
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.RefreshLeads)
                 End If
             Else
                 Dim phoneNo = e.Parameter.Split("|")(0)

@@ -211,7 +211,7 @@ Public Class ActivityLogs
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
             UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.Accepted)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is accepted by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is accepted by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.AcceptAppoitment)
 
             'Connect to Workflow Server
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
@@ -240,7 +240,7 @@ Public Class ActivityLogs
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
             UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.Declined)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Decline by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Decline by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.DeclineAppointment)
 
             'Connect to Workflow Server
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
@@ -267,7 +267,7 @@ Public Class ActivityLogs
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
             UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.ReScheduled)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Rescheduled by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Rescheduled by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reschedule)
 
             'Connect to Workflow Server
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
@@ -304,7 +304,7 @@ Public Class ActivityLogs
                         Dim recycle = Core.RecycleLead.GetInstanceByLogId(logId)
                         Dim rDate = recycle.PostponeDays(days)
 
-                        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Recycle action is postponed to {0} by {1} ", rDate.ToShortDateString, Page.User.Identity.Name), hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString)
+                        LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Recycle action is postponed to {0} by {1} ", rDate.ToShortDateString, Page.User.Identity.Name), hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.ExtendRecycle)
                     End If
                 End If
             End If

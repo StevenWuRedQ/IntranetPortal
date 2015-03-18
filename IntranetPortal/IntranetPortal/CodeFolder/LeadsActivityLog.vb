@@ -1,7 +1,7 @@
 ﻿Partial Public Class LeadsActivityLog
     Public Shared Function AddActivityLog(logDate As DateTime, comments As String, bble As String, category As String, empid As Integer, empName As String) As LeadsActivityLog
 
-        AddActivityLog(logDate, comments, bble, category, empid, empName, EnumActionType.DefaultAction)
+        Return AddActivityLog(logDate, comments, bble, category, empid, empName, EnumActionType.DefaultAction)
 
         'Using Context As New Entities
         '    Dim log As New LeadsActivityLog
@@ -27,7 +27,7 @@
             log.EmployeeName = empName
             log.Category = category
 
-            If actionType = Nothing Then
+            If actionType <> Nothing Then
                 log.ActionType = actionType
             End If
 
@@ -122,6 +122,12 @@
         DeadLead = 15
         ExtendRecycle = 16
         DefaultAction = 17
+        RefreshLeads = 18
+        AcceptAppoitment = 19
+        DeclineAppointment = 20
+        Reschedule = 21
+        InProcess = 22
+        SharedLeads = 23
     End Enum
 
 End Class

@@ -66,4 +66,7 @@
         End Get
     End Property
 
+    Public Function GetLeadsByStatus(status As LeadStatus) As List(Of Lead)
+        Return Lead.GetUserLeadsData(AllUsers, status)
+    End Function
 End Class

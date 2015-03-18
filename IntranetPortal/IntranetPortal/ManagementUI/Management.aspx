@@ -188,7 +188,7 @@
                     <div class="col-md-2">
                         <ul class="nav nav-tabs nav-stacked color_gray" role="tablist">
                             <li role="presentation" class="mag_tabv"><a href="#Agent_Activity_Tab" onclick="agentActivityTab.ShowTab(currentTeamInfo.TeamName, true)" role="tab" data-toggle="tab"><i class="fa fa-users mag_tabv_i"></i>Agent Activity</a></li>
-                            <li role="presentation" class="mag_tabv"><a href="#Status_Of_Leads_Tab" onclick="LeadsStatusTab.ShowTab(currentTeamInfo.TeamName)" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Status Of Leads</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#Status_Of_Leads_Tab" onclick="LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true)" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Status Of Leads</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-map-marker mag_tabv_i"></i>Geo Leads</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-bar-chart mag_tabv_i"></i>Monthly  Intake</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-line-chart mag_tabv_i"></i>Compare Offices</a></li>
@@ -240,7 +240,8 @@
                                                         },
                                                         series: [
                                                             { valueField: "CallCount", name: "Call" },
-                                                            { valueField: "Comments", name: "Comment" }
+                                                            { valueField: "Comments", name: "Comment" },
+                                                            { valueField: "UniqueBBLE", name: "UniqueBBLE", type: 'spline'},
                                                         ],
                                                         title: "Agents Activities in " + tab.TeamName,
                                                         legend: {
@@ -262,7 +263,7 @@
 
                                                             var datasource = [];
                                                             for (var key in data) {
-                                                                if (key != "Name") {
+                                                                if (key != "Name" || key != "UniqueBBLE") {
                                                                     datasource.push({ name: key, count: data[key] });
                                                                 }
                                                             }
@@ -569,46 +570,37 @@
                                 <div role="tabpanel" class="tab-pane " id="Status_Of_Leads_Tab">
                                     <div class="mag_tab_input_group">
                                         <div class="row">
-                                            <div class="col-md-2">
-                                                <select class="form-control">
-                                                    <option>Last Month</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <select class="form-control" id="selAgents">
+                                            <div class="col-md-5">
+                                                <label for="selAgents" style="float: left">Select Agents:&nbsp;</label>
+                                                <select class="form-control" style="width: 200px; float: left; margin-left: 20px;" id="selAgents" name="selAgents">
                                                     <option>All Agents</option>
                                                     <option>Agents 1</option>
                                                 </select>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <input type="button" value="Display" class="rand-button bg_color_blue rand-button-padding" onclick="LoadGrid()" />
-                                            </div>
-                                            <div class="col-md-1">
-                                                <input type="button" value="Chart" class="rand-button bg_color_blue rand-button-padding" onclick="LoadPhoneBarChart()" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row" style="margin-top: 10px">
                                         <div class="col-md-6">
-                                            <div style="margin-top: 25px">
+                                            <%--  <div style="margin-top: 25px">
                                                 <i class="fa fa-pie-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Status Of Leads</span>
-                                            </div>
+                                            </div>--%>
                                             <div>
-                                                <div id="LeadsStatusChart" class="containers" style="height: 500px; width: 100%;"></div>
                                                 <div class="chart_text">
-                                                    In Process Leads: <span id="InProcessCount" class="font_black">0</span>
+                                                    <div id="ProcessStatusChart" class="containers" style="height: 500px; width: 60%; float: left"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div style="border-left: 1px solid #dde0e7; min-height: 800px;">
                                                 <div style="padding: 30px 40px; font-weight: 300; color: #2e2f31">
-
                                                     <div style="font-size: 24px;">
-                                                        <span class="color_balck">In-depth: </span>Short Sale
+                                                        <div id="InProcessLeadsChart" class="containers" style="height: 300px; width: 50%;"></div>
                                                     </div>
-                                                    <div style="margin-top: 90px">
-                                                        Feb 01, 2015 - Mar 01, 2015
+                                                    <div>
+                                                        <div style="margin-top: 25px">
+                                                            <i class="fa fa-pie-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Leads Data</span>
+                                                        </div>
+                                                        <div id="gridLeads" style="height: 300px; max-width: 1000px; width: 100%; margin-top:5px;"></div>
                                                     </div>
                                                     <div style="margin-top: 10px; height: 200px; width: 100%" id="monthly_intake">
                                                     </div>
@@ -621,61 +613,184 @@
                                     </div>
                                     <script type="text/javascript">
                                         var LeadsStatusTab = {
-                                            TeamName: null,
+                                            DataView: {
+                                                Agent: {
+                                                    Name: null,
+                                                    LeadsDataSource: null,
+                                                    LeadsInProcessDataSource: null,
+                                                    LoadDataSource: function () {
+                                                        this.LeadsDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentLeadsReport/" + this.Name);
+                                                        this.LeadsInProcessDataSource = new DevExpress.data.DataSource("/WCFDataServices/PortalReportService.svc/LoadAgentInProcessReport/" + this.Name);
+                                                    },
+                                                    GetLeadsData: function (status) {
+                                                        var view = this;
+                                                        var customStore = new DevExpress.data.CustomStore({
+                                                            load: function (loadOptions) {
+                                                                var d = $.Deferred();
+                                                                $.getJSON("/WCFDataServices/PortalReportService.svc/LoadAgentLeadsData/" + view.Name + "/" + status).done(function (data) {
+                                                                    d.resolve(data, { totalCount: data.length });
+                                                                });
+                                                                return d.promise();
+                                                            }
+                                                        });
+                                                        return customStore;
+                                                    }
+                                                },
+                                                Team: {
+                                                    Name: null,
+                                                    TeamUsers: null,
+                                                    LeadsDataSource: null,
+                                                    LeadsInProcessDataSource: null,
+                                                    LoadDataSource: function () {
+                                                        this.LeadsDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadTeamLeadsReport/" + this.Name);
+                                                        this.LeadsInProcessDataSource = new DevExpress.data.DataSource("/WCFDataServices/PortalReportService.svc/LoadTeamInProcessReport/" + this.Name);
+                                                    },
+                                                    GetLeadsData: function (status) {
+                                                        var view = this;
+                                                        var customStore = new DevExpress.data.CustomStore({
+                                                            load: function (loadOptions) {
+                                                                var d = $.Deferred();
+                                                                $.getJSON("/WCFDataServices/PortalReportService.svc/LoadTeamLeadsData/" + view.Name + "/" + status).done(function (data) {
+                                                                    d.resolve(data, { totalCount: data.length });
+                                                                });
+                                                                return d.promise();
+                                                            }
+                                                        });
+                                                        return customStore;
+                                                    }
+                                                }
+                                            },
+                                            DisplayView: null,
+                                            Visible: function () { return $("#Status_Of_Leads_Tab").hasClass("active") ? true : false },
                                             AgentSelect: $("#selAgents"),
-                                            LeadsStatusDataSource: null,
-                                            InitAgentSelect: function (users) {
-                                                if (this.TeamName != null) {
+                                            InitAgentSelect: function () {
+                                                if (this.DisplayView != null) {
                                                     var tab = this;
                                                     tab.AgentSelect.html("");
-                                                    $.each(Users, function (key, value) {
+                                                    $.each(tab.DisplayView.TeamUsers, function (key, value) {
                                                         tab.AgentSelect.append(
                                                        $("<option></option>")
                                                         .attr("value", value)
                                                         .text(value));
                                                     });
                                                     tab.AgentSelect.prepend("<option value='' selected='selected'>All</option>");
+
+                                                    tab.AgentSelect.change(function () {
+                                                        var agent = tab.AgentSelect.val();
+                                                        if (agent != "") {
+                                                            tab.ShowAgentChart(agent);
+                                                        }
+                                                        else {
+                                                            tab.DisplayView = tab.DataView.Team;
+                                                            tab.LoadChart();
+                                                        }
+                                                    });
                                                 }
                                             },
-                                            ShowTab: function (teamName) {
-                                                this.TeamName = teamName,
+                                            ShowTab: function (teamName, users, noCheck) {
+                                                if (this.Visible() || noCheck) {
+                                                    this.DataView.Team.Name = teamName;
+                                                    this.DataView.Team.TeamUsers = users;
+                                                    this.DisplayView = this.DataView.Team;
+                                                    this.InitAgentSelect();
+                                                    this.LoadChart();
+                                                }
+                                            },
+                                            ShowAgentChart: function (agentName) {
+                                                this.DataView.Agent.Name = agentName;
+                                                this.DisplayView = this.DataView.Agent;
                                                 this.LoadChart();
                                             },
                                             LoadChart: function () {
-                                                this.LoadDataSource();
+                                                this.DisplayView.LoadDataSource();
                                                 var tab = this;
-                                                $("#LeadsStatusChart").dxPieChart({
-                                                    dataSource: this.LeadsStatusDataSource,
-                                                    tooltip: {
-                                                        enabled: true,
-                                                        percentPrecision: 2,
-                                                        customizeText: function () {
-                                                            return this.argumentText + " - " + this.percentText;
-                                                        }
-                                                    },
-                                                    legend: { visible: false },
-                                                    series: [{
-                                                        type: "doughnut",
-                                                        argumentField: "Status",
-                                                        valueField: "Count",
-                                                        label: {
-                                                            visible: true,
-                                                            connector: {
-                                                                visible: true
+                                                if (!$("#InProcessLeadsChart").has("svg").length) {
+                                                    var option = {
+                                                        dataSource: tab.DisplayView.LeadsInProcessDataSource,
+                                                        tooltip: {
+                                                            enabled: true,
+                                                            percentPrecision: 2,
+                                                            customizeText: function () {
+                                                                return this.argumentText + " - " + this.percentText;
                                                             }
                                                         },
+                                                        legend: { visible: false },
+                                                        series: [{
+                                                            type: "doughnut",
+                                                            argumentField: "Status",
+                                                            valueField: "Count",
+                                                            tagField: "StatusKey",
+                                                            label: {
+                                                                visible: true,
+                                                                connector: {
+                                                                    visible: true
+                                                                }
+                                                            },
 
-                                                    }],
-                                                    palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7'],
-                                                    onDone: function (e) {
-                                                        DevExpress.data.query(tab.LeadsStatusDataSource.items()).sum("Count").done(function (result) {
-                                                            $("#InProcessCount").html(result)
+                                                        }],
+                                                        title: "In Process Leads",
+                                                        palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
+                                                    }
+
+                                                    option.onDone = function (e) {
+                                                        DevExpress.data.query(tab.DisplayView.LeadsInProcessDataSource.items()).sum("Count").done(function (result) {
+                                                            //$("#InProcessCount").html(result);
+                                                            e.component.option("title", "In Process Leads: <b>" + result + "</b>");
                                                         });
                                                     }
-                                                });                                                
+                                                    $("#InProcessLeadsChart").dxPieChart(option);
+
+                                                    option.dataSource = tab.DisplayView.LeadsDataSource;
+                                                    option.onDone = function (e) {
+                                                        DevExpress.data.query(tab.DisplayView.LeadsDataSource.items()).sum("Count").done(function (result) {
+                                                            e.component.option("title", tab.DisplayView.Name + " Leads: <b>" + result + "</b>");
+                                                        });
+                                                    };
+                                                    option.onPointClick = function (e) {
+                                                        var point = e.target;
+                                                        tab.LoadGridLeads(point.tag);
+                                                        //point.isVisible() ? point.hide() : point.show();
+                                                    };
+
+                                                    $("#ProcessStatusChart").dxPieChart(option);
+                                                }
+                                                else {
+                                                    var chart = $("#InProcessLeadsChart").dxPieChart("instance");
+                                                    chart.option("dataSource", tab.DisplayView.LeadsInProcessDataSource);
+                                                    //chart.render({ force: true });
+
+                                                    chart = $("#ProcessStatusChart").dxPieChart("instance");
+                                                    chart.option("dataSource", tab.DisplayView.LeadsDataSource);
+                                                    //chart.render({ force: true });
+                                                }
                                             },
-                                            LoadDataSource: function () {
-                                                this.LeadsStatusDataSource = new DevExpress.data.DataSource("/WCFDataServices/PortalReportService.svc/LeadsInProcessReport/" + this.TeamName);
+                                            LoadGridLeads: function (statusKey) {
+                                                var tab = this;
+                                                $("#gridLeads").dxDataGrid({
+                                                    dataSource: tab.DisplayView.GetLeadsData(statusKey),
+                                                    showColumnLines: false,
+                                                    showRowLines: true,
+                                                    rowAlternationEnabled: true,
+                                                    paging: { enabled: false },
+                                                    columns: [{
+                                                        dataField: "LeadsName",
+                                                        caption: "Leads Name",
+                                                        width: 280,
+                                                        cellTemplate: function (container, options) {
+                                                            if (options.value != null) {
+                                                                var fieldHTML = '<a target="_blank" href="javascript:ViewLeadsInfo(\'' + options.data.BBLE + '\')">' + options.value + "</a>"
+                                                                container.html(fieldHTML);
+                                                            }
+                                                        }
+                                                    }, "BBLE", {
+                                                        dataField: "EmployeeName",
+                                                        caption: "Employee Name"
+                                                    }, {
+                                                        dataField: "LastUpdate",
+                                                        caption: "Last Update",
+                                                        dataType: 'date'
+                                                    }]
+                                                });
                                             }
                                         };
                                     </script>
@@ -694,6 +809,13 @@
 
 
     <script type="text/javascript">
+        function ViewLeadsInfo(bble) {
+            var url = '/ViewLeadsInfo.aspx?id=' + bble;
+            var left = (screen.width / 2) - (1350 / 2);
+            var top = (screen.height / 2) - (930 / 2);
+            window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+        }
+
         function LoadTeamInfo(teamName) {
             return $.getJSON('/WCFDataServices/PortalReportService.svc/LoadTeamInfo/' + teamName).done(function (data) {
                 currentTeamInfo = data;
@@ -1120,11 +1242,13 @@
     menuItemClicked = function (e) {
 
         DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000 });
-        $('#teams_link').html(e.itemData);
+        //        $('#teams_link').html(e.itemData);
         //officeDropDown.option("buttonText", e.itemData );
-        loadCharts(e.itemData.replace("Office", '').trim());
-        LoadTeamInfo(e.itemData);
+        //loadCharts(e.itemData.replace("Office", '').trim());
         agentActivityTab.ShowTab(e.itemData);
+        $.when(LoadTeamInfo(e.itemData)).done(function () {
+            LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users)
+        });
     };
         var officeDropDown = $("#dropDownMenu").dxDropDownMenu({
             dataSource: dropDownMenuData,

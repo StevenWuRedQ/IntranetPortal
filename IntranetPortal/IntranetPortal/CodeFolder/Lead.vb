@@ -106,13 +106,13 @@ Partial Public Class Lead
 
     'Get user data by status
     Public Shared Function GetUserLeadsData(name As String, status As LeadStatus) As List(Of Lead)
-        Dim context As New Entities
-        'Dim result = From ld In context.Leads.Where(Function(ld) ld.Status = status And ld.EmployeeName = name)
-        '                      Let LastUpdate = context.LeadsActivityLogs.Where(Function(log) log.BBLE = ld.BBLE).OrderByDescending(Function(log) log.ActivityDate).FirstOrDefault
-        '                      Order By LastUpdate.ActivityDate Descending
-        '                      Select ld
+        Return GetUserLeadsData({name}, status)
+    End Function
 
-        Dim result = From ld In context.Leads.Where(Function(ld) ld.Status = status And ld.EmployeeName = name)
+    Public Shared Function GetUserLeadsData(names As String(), status As LeadStatus) As List(Of Lead)
+        Dim context As New Entities
+
+        Dim result = From ld In context.Leads.Where(Function(ld) ld.Status = status And names.Contains(ld.EmployeeName))
                      Order By ld.LastUpdate Descending
                      Select ld
 
@@ -139,18 +139,28 @@ Partial Public Class Lead
                     If status = LeadStatus.DoorKnocks Then
                         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName, LeadsActivityLog.EnumActionType.DoorKnock)
                     Else
+                        Dim action = LeadsActivityLog.EnumActionType.DefaultAction
                         If status = LeadStatus.Callback Then
                             comments = "Lead Status changed to Follow Up on " & callbackDate.ToString("MM/dd/yyyy")
+                            action = LeadsActivityLog.EnumActionType.FollowUp
                         End If
 
-                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName)
+                        If status = LeadStatus.Priority Then
+                            action = LeadsActivityLog.EnumActionType.HotLeads
+                        End If
+
+                        If status = LeadStatus.InProcess Then
+                            action = LeadsActivityLog.EnumActionType.InProcess
+                        End If
+
+                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName, action)
                     End If
                 Else
                     Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
                     Dim empName = HttpContext.Current.User.Identity.Name
                     If status = LeadStatus.Callback Then
                         Dim comments = "Lead Status changed to Follow Up on " & callbackDate.ToString("MM/dd/yyyy")
-                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName)
+                        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName, LeadsActivityLog.EnumActionType.FollowUp)
                     End If
                 End If
 
@@ -188,7 +198,7 @@ Partial Public Class Lead
                     Dim empId = CInt(Membership.GetUser(HttpContext.Current.User.Identity.Name).ProviderUserKey)
                     Dim empName = HttpContext.Current.User.Identity.Name
                     Dim comments = String.Format("Change status from {0} to {1}.", CType(originateStatus, LeadStatus).ToString, LeadStatus.DeadEnd.ToString)
-                    LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName)
+                    LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName, LeadsActivityLog.EnumActionType.DeadLead)
                 End If
             End If
         End Using
