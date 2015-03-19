@@ -21,7 +21,6 @@
         <%--Head--%>
         <div style="padding-top: 30px">
             <div style="font-size: 48px; color: #234b60">
-
                 <div class="row">
                     <div class="col-md-4 ">
                         <div class="border_right" style="padding-right: 0px; font-weight: 300;">Management Summary</div>
@@ -212,6 +211,9 @@
                                             <div id="agentDetailChart" class="containers" style="height: 440px; width: 100%;"></div>
                                         </div>
                                     </div>
+                                    <div id="gridPopup">
+                                        <div id="agentLeadsGrid" style="height: 450px; max-width: 1000px; width: 100%; margin: 0 auto; display: none"></div>
+                                    </div>
                                     <script type="text/javascript">
                                         var agentActivityTab = {
                                             TeamName: null,
@@ -241,7 +243,7 @@
                                                         series: [
                                                             { valueField: "CallCount", name: "Call" },
                                                             { valueField: "Comments", name: "Comment" },
-                                                            { valueField: "UniqueBBLE", name: "UniqueBBLE", type: 'spline'},
+                                                            { valueField: "UniqueBBLE", name: "UniqueBBLE" },
                                                         ],
                                                         title: "Agents Activities in " + tab.TeamName,
                                                         legend: {
@@ -254,20 +256,26 @@
                                                         onPointClick: function (info) {
                                                             var clickedPoint = info.target;
                                                             clickedPoint.isSelected() ? clickedPoint.clearSelection() : clickedPoint.select();
+
+                                                            if (clickedPoint.isSelected()) {
+                                                                var name = clickedPoint.argument;
+                                                                var agentdata = DevExpress.data.query(tab.ActivityDataSource.items()).filter("Name", "=", name).toArray();
+                                                                var data = agentdata[0];
+
+                                                                var datasource = [];
+                                                                for (var key in data) {
+                                                                    if (key != "Name" && key != "UniqueBBLE") {
+                                                                        datasource.push({ name: key, count: data[key] });
+                                                                    }
+                                                                }
+                                                                tab.UpdateAgentDetailChart(name, datasource);
+                                                            }
                                                         },
                                                         onPointSelectionChanged: function (info) {
-                                                            var selectedPoint = info.target;
-                                                            var name = selectedPoint.originalArgument;
-                                                            var agentdata = DevExpress.data.query(tab.ActivityDataSource.items()).filter("Name", "=", name).toArray();
-                                                            var data = agentdata[0];
+                                                            //var selectedPoint = info.target;
+                                                            //if (selectedPoint.isSelected()) {
 
-                                                            var datasource = [];
-                                                            for (var key in data) {
-                                                                if (key != "Name" || key != "UniqueBBLE") {
-                                                                    datasource.push({ name: key, count: data[key] });
-                                                                }
-                                                            }
-                                                            tab.UpdateAgentDetailChart(name, datasource);
+                                                            //}
                                                         }
                                                     });
                                                     return $("#agentActivityChart").dxChart("instance");
@@ -309,10 +317,10 @@
                                                         height: 150
                                                     },
                                                     scale: {
-                                                        startValue: new Date(2014, 8, 24),
+                                                        startValue: new Date(2014, 8, 28),
                                                         endValue: new Date(),
                                                         minorTickInterval: "day",
-                                                        majorTickInterval: { days: 7 },
+                                                        majorTickInterval: 'week',
                                                         minRange: "day",
                                                         showMinorTicks: false
                                                     },
@@ -343,37 +351,38 @@
                                                 this.ActivityDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentActivity/" + this.TeamName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-"));
                                             },
                                             UpdateActivityChart: function (startDate, endDate) {
-                                                if ($("#agentActivityChart").parent().hasClass("col-md-6")) {
-                                                    $("#agentActivityChart").parent().removeClass("col-md-6");
+                                                var chart = this.BarChart();
+                                                chart.showLoadingIndicator();
+                                                chart.clearSelection();
+                                                this.LoadAgentActivityDs(startDate, endDate);
+                                                chart.beginUpdate();
+                                                chart.option("dataSource", this.ActivityDataSource);
+                                                chart.option("title", "Agents Activities in " + this.TeamName);
+
+                                                if ($("#agentActivityChart").parent().hasClass("col-md-7")) {
+                                                    $("#agentActivityChart").parent().removeClass("col-md-7");
                                                     $("#agentActivityChart").parent().addClass("col-md-12");
                                                     var width = $("#agentActivityChart").parent().width();
                                                     if (width == 100)
                                                         $("#agentActivityChart").width("100%");
                                                     else
                                                         $("#agentActivityChart").width(width);
-                                                    this.BarChart().render();
-                                                    $("#agentDetailChart").parent().removeClass("col-md-6");
-                                                    $("#agentDetailChart").width(0);
-                                                    this.PieChart.render();
+                                                    chart.render();
+                                                    $("#agentDetailChart").parent().hide();
                                                 }
 
-                                                this.LoadAgentActivityDs(startDate, endDate);
-                                                var chart = this.BarChart();
-                                                chart.showLoadingIndicator();
-                                                chart.beginUpdate();
-                                                chart.option("dataSource", this.ActivityDataSource);
-                                                chart.option("title", "Agents Activities in " + this.TeamName);
                                                 chart.endUpdate();
-                                                chart.hideLoadingIndicator();
+                                                //chart.hideLoadingIndicator();
                                             },
                                             UpdateAgentDetailChart: function (agentName, agentData) {
-                                                if (!$("#agentActivityChart").parent().hasClass("col-md-6")) {
+                                                if (!$("#agentActivityChart").parent().hasClass("col-md-7")) {
                                                     $("#agentActivityChart").parent().removeClass("col-md-12");
-                                                    $("#agentActivityChart").parent().addClass("col-md-6");
+                                                    $("#agentActivityChart").parent().addClass("col-md-7");
                                                     var width = $("#agentActivityChart").parent().width();
                                                     $("#agentActivityChart").width(width);
                                                     this.BarChart().render();
-                                                    $("#agentDetailChart").parent().addClass("col-md-6");
+                                                    $("#agentDetailChart").parent().addClass("col-md-5");
+                                                    $("#agentDetailChart").parent().show();
 
                                                     this.PieChart.option({
                                                         dataSource: agentData,
@@ -587,26 +596,17 @@
                                             <div>
                                                 <div class="chart_text">
                                                     <div id="ProcessStatusChart" class="containers" style="height: 500px; width: 60%; float: left"></div>
+                                                    <div id="InProcessLeadsChart" class="containers" style="height: 300px; width: 39%; float: left"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <div style="border-left: 1px solid #dde0e7; min-height: 800px;">
-                                                <div style="padding: 30px 40px; font-weight: 300; color: #2e2f31">
-                                                    <div style="font-size: 24px;">
-                                                        <div id="InProcessLeadsChart" class="containers" style="height: 300px; width: 50%;"></div>
-                                                    </div>
+                                            <div style="border-left: 1px solid #dde0e7;">
+                                                <div style="padding: 10px 15px; font-weight: 300; color: #2e2f31">
                                                     <div>
-                                                        <div style="margin-top: 25px">
-                                                            <i class="fa fa-pie-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Leads Data</span>
-                                                        </div>
-                                                        <div id="gridLeads" style="height: 300px; max-width: 1000px; width: 100%; margin-top:5px;"></div>
+                                                        <i class="fa fa-table report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black" id="gridTitle">Leads Data</span>
                                                     </div>
-                                                    <div style="margin-top: 10px; height: 200px; width: 100%" id="monthly_intake">
-                                                    </div>
-                                                    <div style="margin-top: 30px">
-                                                        Short Sale In-depth Sample Chart
-                                                    </div>
+                                                    <div id="gridLeads" style="height: 600px; max-width: 1000px; width: 100%; margin-top: 5px;"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -714,7 +714,11 @@
                                                                 return this.argumentText + " - " + this.percentText;
                                                             }
                                                         },
-                                                        legend: { visible: false },
+                                                        legend: {
+                                                            visible: true,
+                                                            verticalAlignment: "bottom",
+                                                            horizontalAlignment: "center"
+                                                        },
                                                         series: [{
                                                             type: "doughnut",
                                                             argumentField: "Status",
@@ -735,7 +739,7 @@
                                                     option.onDone = function (e) {
                                                         DevExpress.data.query(tab.DisplayView.LeadsInProcessDataSource.items()).sum("Count").done(function (result) {
                                                             //$("#InProcessCount").html(result);
-                                                            e.component.option("title", "In Process Leads: <b>" + result + "</b>");
+                                                            e.component.option("title", "In Process Leads");
                                                         });
                                                     }
                                                     $("#InProcessLeadsChart").dxPieChart(option);
@@ -749,6 +753,7 @@
                                                     option.onPointClick = function (e) {
                                                         var point = e.target;
                                                         tab.LoadGridLeads(point.tag);
+                                                        $("#gridTitle").html(point.originalArgument);
                                                         //point.isVisible() ? point.hide() : point.show();
                                                     };
 
@@ -764,35 +769,106 @@
                                                     //chart.render({ force: true });
                                                 }
                                             },
+                                            GridCustomColumn: function () {
+                                                var columns = {};
+                                                //Call back
+                                                columns["3"] = [{
+                                                    dataField: "Callback",
+                                                    caption: "Callback",
+                                                    dataType: 'date'
+                                                }, {
+                                                    dataField: "LastUpdate",
+                                                    caption: "Last Update",
+                                                    dataType: 'date'
+                                                }];
+
+                                                columns["4"] = [{
+                                                    dataField: "DeadReason",
+                                                    caption: "Dead Reason",
+                                                }, {
+                                                    dataField: "Description",
+                                                    caption: "Description",
+                                                }, {
+                                                    dataField: "LastUpdate",
+                                                    caption: "Last Update",
+                                                    dataType: 'date'
+                                                }];
+
+                                                return columns;
+                                            },
                                             LoadGridLeads: function (statusKey) {
                                                 var tab = this;
-                                                $("#gridLeads").dxDataGrid({
-                                                    dataSource: tab.DisplayView.GetLeadsData(statusKey),
-                                                    showColumnLines: false,
-                                                    showRowLines: true,
-                                                    rowAlternationEnabled: true,
-                                                    paging: { enabled: false },
-                                                    columns: [{
-                                                        dataField: "LeadsName",
-                                                        caption: "Leads Name",
-                                                        width: 280,
-                                                        cellTemplate: function (container, options) {
-                                                            if (options.value != null) {
-                                                                var fieldHTML = '<a target="_blank" href="javascript:ViewLeadsInfo(\'' + options.data.BBLE + '\')">' + options.value + "</a>"
-                                                                container.html(fieldHTML);
-                                                            }
+                                                var gridColumns = [{
+                                                    dataField: "LeadsName",
+                                                    caption: "Leads Name",
+                                                    width: 280,
+                                                    cellTemplate: function (container, options) {
+                                                        if (options.value != null) {
+                                                            var fieldHTML = '<a target="_blank" href="javascript:ViewLeadsInfo(\'' + options.data.BBLE + '\')">' + options.value + "</a>"
+                                                            container.html(fieldHTML);
                                                         }
-                                                    }, "BBLE", {
+                                                    }
+                                                }, {
+                                                    dataField: "BBLE",
+                                                    caption: "BBLE",
+                                                    width: 100
+                                                }];
+
+                                                var columns = tab.GridCustomColumn()[statusKey];
+                                                if (columns) {
+                                                    for (var i = 0; i < columns.length; i++) {
+                                                        gridColumns.push(columns[i]);
+                                                    }
+                                                } else {
+                                                    gridColumns.push({
                                                         dataField: "EmployeeName",
                                                         caption: "Employee Name"
                                                     }, {
                                                         dataField: "LastUpdate",
                                                         caption: "Last Update",
                                                         dataType: 'date'
-                                                    }]
+                                                    })
+                                                }
+
+                                                $("#gridLeads").dxDataGrid({
+                                                    dataSource: tab.DisplayView.GetLeadsData(statusKey),
+                                                    showColumnLines: false,
+                                                    showRowLines: true,
+                                                    rowAlternationEnabled: true,
+                                                    paging: { enabled: false },
+                                                    columns: gridColumns,
+                                                    summary: {
+                                                        totalItems: [{
+                                                            column: 'BBLE',
+                                                            summaryType: 'count'
+                                                        }]
+                                                    }
                                                 });
                                             }
                                         };
+
+                                        //columns: [{
+                                        //    dataField: "LeadsName",
+                                        //    caption: "Leads Name",
+                                        //    width: 280,
+                                        //    cellTemplate: function (container, options) {
+                                        //        if (options.value != null) {
+                                        //            var fieldHTML = '<a target="_blank" href="javascript:ViewLeadsInfo(\'' + options.data.BBLE + '\')">' + options.value + "</a>"
+                                        //            container.html(fieldHTML);
+                                        //        }
+                                        //    }
+                                        //}, {
+                                        //    dataField: "BBLE",
+                                        //    caption: "BBLE",
+                                        //    width: 100
+                                        //}, {
+                                        //    dataField: "EmployeeName",
+                                        //    caption: "Employee Name"
+                                        //}, {
+                                        //    dataField: "LastUpdate",
+                                        //    caption: "Last Update",
+                                        //    dataType: 'date'
+                                        //}],
                                     </script>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="Geo_Leads_tab">

@@ -54,15 +54,25 @@ Public Class PortalReportService
     Public Function LoadAgentActivityReport(teamName As String, startDate As String, endDate As String) As Channels.Message Implements IPortalReportService.LoadAgentActivityReport
         Dim users = UserInTeam.GetTeamUsersArray(teamName)
         Dim dtStart = DateTime.Parse(startDate)
-        Dim dtEnd = DateTime.Parse(endDate).AddDays(1)
+        Dim dtEnd = DateTime.Parse(endDate)
 
         Using ctx As New Entities
-            Dim logSql = ctx.LeadsActivityLogs.Where(Function(al) users.Contains(al.EmployeeName) And al.ActivityDate < dtEnd And al.ActivityDate > dtStart)
+            Dim actionTypes = {LeadsActivityLog.EnumActionType.CallOwner,
+                               LeadsActivityLog.EnumActionType.Comments,
+                               LeadsActivityLog.EnumActionType.DoorKnock,
+                               LeadsActivityLog.EnumActionType.FollowUp,
+                               LeadsActivityLog.EnumActionType.SetAsTask,
+                               LeadsActivityLog.EnumActionType.Appointment}
+
+            Dim logSql = ctx.LeadsActivityLogs.Where(Function(al) users.Contains(al.EmployeeName) And al.ActivityDate < dtEnd And al.ActivityDate > dtStart AndAlso actionTypes.Contains(al.ActionType))
             Dim logs = logSql.ToList
 
             Dim result As New List(Of Object)
             For Each user In users
+                'Dim actionTypes = {LeadsActivityLog.EnumActionType.CallOwner, LeadsActivityLog.EnumActionType.Comments, LeadsActivityLog.EnumActionType.DoorKnock,
+                '                   LeadsActivityLog.EnumActionType.FollowUp, LeadsActivityLog.EnumActionType.SetAsTask, LeadsActivityLog.EnumActionType.Appointment}
                 Dim userLogs = logs.Where(Function(l) l.EmployeeName = user)
+
                 result.Add(New With {
                            .Name = user,
                            .CallCount = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.CallOwner).Count,
@@ -98,7 +108,10 @@ Public Class PortalReportService
                        .BBLE = ld.BBLE,
                        .LeadsName = ld.LeadsName,
                        .EmployeeName = ld.EmployeeName,
-                       .LastUpdate = ld.LastUpdate
+                       .LastUpdate = ld.LastUpdate,
+                       .Callback = ld.CallbackDate,
+                       .DeadReason = If(ld.DeadReason.HasValue, CType(ld.DeadReason, Lead.DeadReasonEnum).ToString, ""),
+                       .Description = ld.Description
                        })
         Next
 
@@ -142,21 +155,18 @@ Public Class PortalReportService
         Dim result As New List(Of LeadsStatusData)
         Using Context As New Entities
             Dim source = Context.Leads.Where(Function(ld) users.Contains(ld.EmployeeName) And ld.Status = LeadStatus.InProcess).Select(Function(ld) ld.BBLE).ToList
-            Dim shortSale = IntranetPortal.ShortSale.ShortSaleCase.GetCaseByBBLEs(source)
-            Dim EvictionCase = IntranetPortal.ShortSale.EvictionCas.GetCaseByBBLEs(source)
+            Dim shortSale = IntranetPortal.ShortSale.ShortSaleCase.GetCaseByBBLEs(source).Select(Function(s) s.BBLE).ToList
+            Dim EvictionCase = IntranetPortal.ShortSale.EvictionCas.GetCaseByBBLEs(source).Select(Function(s) s.BBLE).ToList
+            Dim others = (From ld In source
+                         Where Not shortSale.Contains(ld) AndAlso Not EvictionCase.Contains(ld)).Distinct.Count
             result.Add(New LeadsStatusData With {.Status = "Short Sale", .Count = shortSale.Count})
             result.Add(New LeadsStatusData With {.Status = "Eviction", .Count = EvictionCase.Count})
-            result.Add(New LeadsStatusData With {.Status = "In Process", .Count = source.Count})
+            result.Add(New LeadsStatusData With {.Status = "Others", .Count = others})
         End Using
 
         Return result
     End Function
 #End Region
-
-
-
-
-  
 End Class
 
 Public Module JsonExtension

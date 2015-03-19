@@ -26,11 +26,7 @@
             log.EmployeeID = empid
             log.EmployeeName = empName
             log.Category = category
-
-            If actionType <> Nothing Then
-                log.ActionType = actionType
-            End If
-
+            log.ActionType = actionType
             log.ActivityDate = logDate
             log.Comments = comments
 
