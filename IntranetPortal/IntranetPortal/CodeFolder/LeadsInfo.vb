@@ -355,6 +355,7 @@
     End Property
     Public ReadOnly Property EstimatedMortageDefault As Decimal
         Get
+            'Return 1234564.123486456
             Dim EMD As Decimal
             If (LisPens IsNot Nothing AndAlso LisPens.Count > 0) Then
                 Dim ListPensYear = LisPens.Select(Function(f) f.FileDate.Year).ToList

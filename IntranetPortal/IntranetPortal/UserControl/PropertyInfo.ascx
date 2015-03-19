@@ -493,7 +493,7 @@
             <%--line 1--%>
             <div class="form_div_node form_div_node_line_margin">
                 <span class="form_input_title">Default</span>
-                <input class="text_input input_currency" onblur="$(this).formatCurrency();" type="text" value="$<%=LeadsInfoData.EstimatedMortageDefault %>" />
+                <input class="text_input input_currency" onblur="$(this).formatCurrency();" type="text" value="<%=LeadsInfoData.EstimatedMortageDefault.ToString("C") %>" />
             </div>
             <%----end line ----%>
         </div>

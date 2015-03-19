@@ -5,7 +5,10 @@ Public Class ZipMap
     Public Property LatLonData As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        bindData()
+        If (Not IsPostBack) Then
+            bindData()
+        End If
+
     End Sub
     Sub bindData()
         Dim s
@@ -19,5 +22,14 @@ Public Class ZipMap
            
         End Using
         leadsByZip = JsonConvert.SerializeObject(s)
+
+    End Sub
+
+    Protected Sub btnExport_Click(sender As Object, e As EventArgs)
+        If (gridZipCountInfo.DataSource Is Nothing) Then
+            gridZipCountInfo.DataSource = MapDataService.GetAllZipCountInfoList
+            gridZipCountInfo.DataBind()
+        End If
+        gridZipCountExporter.WriteXlsxToResponse()
     End Sub
 End Class

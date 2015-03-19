@@ -7,6 +7,10 @@ Imports IntranetPortal.Core
 Public Interface IMapDataService
 
     <OperationContract()>
+     <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="LoadAllTeamColor")>
+    Function LoadAllTeamColor() As Channels.Message
+
+    <OperationContract()>
      <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="BlockData/{neLat},{neLng},{swLat},{swLng}")>
     Function LoadBlockData(neLat As String, neLng As String, swLat As String, swLng As String) As Channels.Message
     <OperationContract()>
@@ -17,6 +21,9 @@ Public Interface IMapDataService
     <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="ZipCount/{zip}")>
     Function GetZipCountInfo(zip As String) As Channels.Message
 
+    <OperationContract()>
+    <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="LoadLotByBBLE/{bble}")>
+    Function LoadLotByBBLE(BBLE As String) As Channels.Message
     '<OperationContract()>
     ' <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="TestData")>
     'Function TestData() As Channels.Message
@@ -41,6 +48,7 @@ Partial Public Class MapDataService
     Public Function LoadLotData(neLat As String, neLng As String, swLat As String, swLng As String) As Channels.Message Implements IMapDataService.LoadLotData
         Try
             Dim dataSvr As New MapService
+
             Dim result = New With {
                 .type = "FeatureCollection",
                 .features = dataSvr.LoadLotLayers(neLat, neLng, swLat, swLng)
@@ -50,18 +58,63 @@ Partial Public Class MapDataService
             Return ex.InnerException.ToJson
         End Try
     End Function
+    Public Function LoadLotByBBLE(BBLE As String) As Channels.Message Implements IMapDataService.LoadLotByBBLE
+        Try
+            Dim dataSvr As New MapService
 
-    Public Function GetZipCountInfo(zip As String) As Channels.Message Implements IMapDataService.GetZipCountInfo
+            Dim result = New With {
+                .type = "FeatureCollection",
+                .features = dataSvr.LoadLotByBBLE(BBLE)
+                }
+            Return result.ToJson()
+        Catch ex As Exception
+            Return ex.InnerException.ToJson
+        End Try
+
+    End Function
+    Public Function LoadAllTeamColor() As Channels.Message Implements IMapDataService.LoadAllTeamColor
+        Try
+            Dim dataSvr As New MapService
+
+            Dim result = dataSvr.LoadALLTeamColor
+
+            Return result.ToJson()
+        Catch ex As Exception
+            Return ex.InnerException.ToJson
+        End Try
+    End Function
+    Public Shared Function GetAllZipCountInfoList() As List(Of Object)
+        Dim cList = New List(Of Object)
+        Using ctx As New Entities
+            Dim Zips = ctx.MapDataSets.Select(Function(l) l.KeyCode).Distinct.ToList
+
+            For Each zip In Zips
+                cList.AddRange(GetZipCountInfoList(zip))
+            Next
+        End Using
+
+        Return cList
+    End Function
+
+    Shared Function CoventMapDataSet(map As MapDataSet) As Object
+        Return New With
+               {
+                   .TypeName = map.TypeName,
+                   .KeyCode = map.KeyCode,
+                   .Count = map.Count.ToString
+                   }
+    End Function
+    Public Shared Function GetZipCountInfoList(zip As String) As List(Of Object)
         Dim SHOW_PERCENT = True
-
         Using ctx As New Entities
             Dim LeadsInportal = New MapDataSet
             LeadsInportal.TypeName = "Leads In Portal"
             LeadsInportal.KeyCode = zip
             LeadsInportal.Count = ctx.Leads_with_last_log.Where(Function(f) f.ZipCode = zip).Count
+
             Dim cList = New List(Of Object)
 
-            cList.Add(LeadsInportal)
+            cList.Add(CoventMapDataSet(LeadsInportal))
 
 
 
@@ -108,14 +161,18 @@ Partial Public Class MapDataService
                 teamCountZip.KeyCode = zip
                 teamCountZip.Count = tc.Count
 
-                cList.Add(teamCountZip)
+                cList.Add(CoventMapDataSet(teamCountZip))
 
 
 
             Next
 
-            Return cList.ToJson
+            Return cList
         End Using
+    End Function
+    Public Function GetZipCountInfo(zip As String) As Channels.Message Implements IMapDataService.GetZipCountInfo
 
+        Return GetZipCountInfoList(zip).ToJson
+   
     End Function
 End Class
