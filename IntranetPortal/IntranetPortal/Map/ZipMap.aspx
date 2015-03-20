@@ -442,13 +442,19 @@
                 zipMakerLayer.setGeoJSON(geoJson);
 
                 /*add layer swicher */
+                var layer_swicher = {
+                    
+                    'Leads Count Portal': zipMakerLayer
+
+                };
+                if (isAdminLogIn)
+                {
+                    
+                    layer_swicher['Zip Count'] = ZipPolygonLayer
+                }
                 L.control.layers({
                    
-                }, {
-                    'Zip Count': ZipPolygonLayer,
-                    'Leads Count Portal': zipMakerLayer,
-
-                }).addTo(map);
+                }, layer_swicher).addTo(map);
                 /******/
                 return;
                 //var markers = new L.MarkerClusterGroup();

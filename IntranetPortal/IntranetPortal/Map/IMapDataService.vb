@@ -157,7 +157,10 @@ Partial Public Class MapDataService
                     l.Count = CountStr
                     CovertList.Add(l)
                 Next
-
+                CovertList.AddRange(ctx.MapDataSets.Where(Function(m) m.KeyCode = zip AndAlso m.Count <> 0 AndAlso m.TypeName.Contains("Transactions")).Select(Function(l) New With {
+                                                                                                                                                                        .TypeName = l.TypeName,
+                                                                                                                                                                        .KeyCode = l.KeyCode,
+                                                                                                                                                                        .Count = l.Count}).ToList)
                 cList.AddRange(CovertList)
             Else
                 cList.AddRange(ctx.MapDataSets.Where(Function(m) m.KeyCode = zip AndAlso m.Count <> 0).ToList())
