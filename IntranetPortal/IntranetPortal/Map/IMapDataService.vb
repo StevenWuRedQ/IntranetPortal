@@ -24,6 +24,10 @@ Public Interface IMapDataService
     <OperationContract()>
     <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="LoadLotByBBLE/{bble}")>
     Function LoadLotByBBLE(BBLE As String) As Channels.Message
+
+    <OperationContract()>
+    <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="LoadLotByTeam/{team}")>
+    Function LoadLotByTeam(Team As String) As Channels.Message
     '<OperationContract()>
     ' <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="TestData")>
     'Function TestData() As Channels.Message
@@ -39,6 +43,19 @@ Partial Public Class MapDataService
             Dim result = New With {
                 .type = "FeatureCollection",
                 .features = dataSvr.LoadBlockLayers(neLat, neLng, swLat, swLng)
+                }
+            Return result.ToJson()
+        Catch ex As Exception
+            Return ex.InnerException.ToJson
+        End Try
+    End Function
+    Public Function LoadLotByTeam(Team As String) As Channels.Message Implements IMapDataService.LoadLotByTeam
+        Try
+            Dim dataSvr As New MapService
+
+            Dim result = New With {
+                .type = "FeatureCollection",
+                .features = dataSvr.LoadLotByTeam(Team)
                 }
             Return result.ToJson()
         Catch ex As Exception

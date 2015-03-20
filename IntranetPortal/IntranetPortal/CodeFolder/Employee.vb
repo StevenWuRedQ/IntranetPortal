@@ -350,7 +350,7 @@ Partial Public Class Employee
 
         Return False
     End Function
-
+    
     Public Shared Function IsManager(empName As String) As Boolean
         Dim rs = Roles.GetRolesForUser(empName)
 

@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ZipMap.aspx.vb" Inherits="IntranetPortal.ZipMap" %>
 
+<%@ Import Namespace="IntranetPortal" %>
+
 <html>
 <%--<asp:Content ContentPlaceHolderID="head" runat="server">--%>
 <head>
@@ -51,8 +53,24 @@
 
         #color_panle {
             position: absolute;
-            left: 0;
+            left: 10px;
             bottom: 0;
+            padding: 20px;
+            margin-bottom: 34px;
+        }
+
+        .color_box {
+            display: inline-block;
+            padding: 0 5px;
+            cursor: pointer;
+        }
+
+        .color_dot {
+            text-align: center;
+        }
+
+        .color_dot_c {
+            padding: 0 6px;
         }
     </style>
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
@@ -65,7 +83,7 @@
 
     <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/Leaflet.fullscreen.min.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v0.0.4/leaflet.fullscreen.css' rel='stylesheet' />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
 
 
 </head>
@@ -83,11 +101,21 @@
                 <dx:GridViewDataColumn FieldName="Count"></dx:GridViewDataColumn>
             </Columns>
         </dx:ASPxGridView>
+        <input type="hidden" id="isAdminLogIn" value="<%= Employee.IsAdmin(Page.User.Identity.Name)%>" />
         <dx:ASPxGridViewExporter runat="server" GridViewID="gridZipCountInfo" ID="gridZipCountExporter"></dx:ASPxGridViewExporter>
+        <script id="team-color-template" type="text/x-handlebars-template">
+            {{#each  list}}
+            <div class="color_box" onclick="SelectTeam('{{Team}}')">
+                <div class="color_dot"><span class="count-icon color_dot_c" style="background: {{Color}}">&nbsp;</span> </div>
+                <div>{{Team}}</div>
+            </div>
+            {{/each}}
+        </script>
         <div class="container-fluid">
             <div id="map"></div>
             <%--<div id="container" class="containers" style="height: 600px; width: 100%;"></div>--%>
-            <div id="color_panle">123</div>
+            <div id="color_panle" class="map-legends wax-legends leaflet-control" style="max-width: 1000px">
+            </div>
         </div>
 
         <script type="text/javascript">
@@ -99,8 +127,26 @@
             //    provider: 'google',
             //    type: 'roadmap'
             //}).dxMap("instance");
+            var isAdminLogIn = $("#isAdminLogIn").val() == 'True';
+            if (isAdminLogIn) {
+                $.getJSON("/map/mapdataservice.svc/LoadAllTeamColor", function (data) {
+                    var source = $("#team-color-template").html();
+                    var template = Handlebars.compile(source);
+                    var context = { list: data };
+                    var html = template(context);
+                    $("#color_panle").html(html)
+                });
+            } else {
+                $("#color_panle").css("display", "none")
+            }
+
             var SHOW_ALL_PORTAL_LOT = true;
 
+            if (isAdminLogIn) {
+                SHOW_ALL_PORTAL_LOT = true;
+            } else {
+                SHOW_ALL_PORTAL_LOT = false;
+            }
             var LatLonData = <%= LatLonData%>
                 function f() {
 
@@ -123,30 +169,7 @@
                 return 0;
             }
 
-            //function codeAddress(zip,Count) {
-            //    geocoder = new google.maps.Geocoder();
-            //    var address = 'New York, NY ' + zip;
-            //    geocoder.geocode({ 'address': address }, function (results, status) {
-            //        if (status == google.maps.GeocoderStatus.OK) {
-            //            var lat = results[0].geometry.location;
-            //            zipMap = zipMap || [];
-            //            zipMap[zip] = { coordinates: lat, attributes: { name: zip } };
-            //            //vmaps = $('#container').dxVectorMap('instance');
-            //            //vmaps.option("markers", zipMap);
-            //        } else {
-            //            alert("Geocode was not successful for the following reason: " + status);
-            //        }
-            //    });
-            //}
-            // function initMaker()
-            // {
-            //     for (var i =0 ; i<zipLeads.length;i++ )
-            //     {
-            //         var a = zipLeads[i];
-            //         codeAddress(a.ZipCode, a.Count);
-            //     }
-            // }
-            // initMaker();
+
 
             function findCount(zip) {
                 for (var i = 0 ; i < zipLeads.length; i++) {
@@ -241,9 +264,6 @@
                 }
 
 
-
-
-
                 closeTooltip = window.setTimeout(function () {
                     map.closePopup();
                 }, 100);
@@ -256,12 +276,7 @@
                     style: getStyle,
                     onEachFeature: onEachFeature
                 })
-                if (!SHOW_ALL_PORTAL_LOT) {
-                    ZipPolygonLayer.addTo(map);
-                }
-
-
-
+          
                 function getStyle(feature) {
                     return {
                         weight: 2,
@@ -312,6 +327,9 @@
 
 
                 function ClickZip(e) {
+                    if (!isAdminLogIn) {
+                        return;
+                    }
                     var zip = e.target.feature.properties.postalCode;
                     $.getJSON('/map/mapdataservice.svc/ZipCount/' + zip, function (data) {
 
@@ -343,8 +361,10 @@
 
                     //map.fitBounds(e.target.getBounds());
                 }
+                if (isAdminLogIn) {
+                    map.legendControl.addLegend(getLegendHTML());
+                }
 
-                map.legendControl.addLegend(getLegendHTML());
 
                 function getLegendHTML() {
                     var grades = [0, 10, 20, 50, 100, 200, 500, 1000],
@@ -423,8 +443,9 @@
 
                 /*add layer swicher */
                 L.control.layers({
-
+                   
                 }, {
+                    'Zip Count': ZipPolygonLayer,
                     'Leads Count Portal': zipMakerLayer,
 
                 }).addTo(map);
@@ -540,13 +561,16 @@
             }
 
             function ZoomOut(zoom) {
-                if (zoom < 16) {
-                    ShowPloyons(SHOW_ZIP)
-                }
+                //if (isAdminLogIn) {
+                //    if (zoom < 16) {
+                //        ShowPloyons(SHOW_ZIP)
+                //    }
+                //}
 
-                if (zoom >= 16 && zoom < 18) {
-                    ShowPloyons(SHOW_BLOCK);
-                }
+
+                //if (zoom >= 16 && zoom < 18) {
+                //    ShowPloyons(SHOW_BLOCK);
+                //}
             }
             var BlockLayer;
             var LotLayer
@@ -564,10 +588,35 @@
                     click: ClickLot,
                 });
             }
+
+
+            var TeamLot = null;
+            function LoadTeam(Team) {
+                if (TeamLot != null) {
+                    if (map.hasLayer(TeamLot)) {
+                        map.removeLayer(layer);
+                    }
+
+                }
+                var geoJsonUrl = '/map/mapdataservice.svc/LoadLotByTeam/' + Team;
+                $.getJSON(geoJsonUrl, function (data) {
+
+                    var geoJson = data;
+                    TeamLot = LoadLotMap(geoJson)
+
+                });
+
+            }
             $(document).ready(function () {
-                LoadLotPortal();
+                if (isAdminLogIn) {
+                    LoadLotPortal();
+                } else {
+                    LoadTeam("RonTeam")
+                }
+
             }).delay(3000)
             var loadBBLE = "0"
+
             function LoadLotPortal() {
                 var geoJsonUrl = '/map/mapdataservice.svc/LoadLotByBBLE/' + loadBBLE;
                 $.getJSON(geoJsonUrl, function (data) {
@@ -575,23 +624,27 @@
                     var geoJson = data;
 
                     if (geoJson.features.length > 0) {
-                        L.geoJson(geoJson, {
-                            style: function (feature) {
-                                return {
-                                    weight: 2,
-                                    opacity: 0.1,
-                                    color: 'black',
-                                    fillOpacity: 0.7,
-                                    fillColor: feature.properties.color != null ? feature.properties.color : '#18FFFF'
-                                };
-
-                            },
-                            onEachFeature: onEachFeatureBlock
-                        }).addTo(map)
+                        LoadLotMap(geoJson)
                         loadBBLE = geoJson.features[geoJson.features.length - 1].properties.BBLE
                         LoadLotPortal()
                     }
                 });
+            }
+            function LoadLotMap(geoJson) {
+                return L.geoJson(geoJson, {
+                    style: function (feature) {
+                        return {
+                            weight: 2,
+                            opacity: 0.1,
+                            color: 'black',
+                            fillOpacity: 0.7,
+                            fillColor: feature.properties.color != null ? feature.properties.color : '#18FFFF'
+                        };
+
+                    },
+                    onEachFeature: onEachFeatureBlock
+                }).addTo(map)
+
             }
             function ZoomIn(zoom) {
                 if (zoom === 16) {
@@ -676,10 +729,13 @@
             function initMapBox() {
                 L.mapbox.accessToken = 'pk.eyJ1IjoicG9ydGFsIiwiYSI6ImtCdG9ac00ifQ.p2_3nTko4JskYcg0YIgeyw';
                 map = L.mapbox.map('map', 'examples.map-i87786ca', { loadingControl: true })
-                    .addControl(L.mapbox.geocoderControl('mapbox.places'))
+                    .addControl(L.mapbox.geocoderControl('mapbox.places').on("found", function (e) {
+
+                    }))
                     .setView([40.7127, -74.0059], 11);
 
                 L.control.fullscreen().addTo(map);
+                /* add Draw Polyon contorl*/
                 var featureGroup = L.featureGroup().addTo(map);
 
                 var drawControl = new L.Control.Draw({
@@ -697,6 +753,8 @@
 
                 map.on('draw:created', showPolygonArea);
                 map.on('draw:edited', showPolygonAreaEdited);
+                /******************/
+
                 map.on("zoomend", MapZoomLevelChange);
                 function showPolygonAreaEdited(e) {
                     e.layers.eachLayer(function (layer) {
