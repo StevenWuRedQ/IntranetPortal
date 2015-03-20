@@ -11,6 +11,7 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class MapDataSet
+    Public Property Id As Integer
     Public Property TypeName As String
     Public Property KeyCode As String
     Public Property Count As Integer

@@ -376,14 +376,11 @@
           <Property Name="IPAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'IntranetPortal.dbo.MapDataSet' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="MapDataSet">
           <Key>
-            <PropertyRef Name="TypeName" />
-            <PropertyRef Name="KeyCode" />
-            <PropertyRef Name="Count" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TypeName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="KeyCode" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Count" Type="int" Nullable="false" />
@@ -852,6 +849,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
           <EntitySet Name="LeadsSearchTask" EntityType="Self.LeadsSearchTask" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsTaxLiens" EntityType="Self.LeadsTaxLiens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginLogs" EntityType="Self.LoginLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapDataSet" EntityType="Self.MapDataSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NYC_DATA_COMMENT" EntityType="Self.NYC_DATA_COMMENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Offices" EntityType="Self.Offices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderResponses" EntityType="Self.OrderResponses" Schema="dbo" store:Type="Tables" />
@@ -871,14 +869,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
           <EntitySet Name="UserProfileData" EntityType="Self.UserProfileData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersInRoles" EntityType="Self.UsersInRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTasks" EntityType="Self.UserTasks" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MapDataSet" EntityType="Self.MapDataSet" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [MapDataSet].[TypeName] AS [TypeName], 
-    [MapDataSet].[KeyCode] AS [KeyCode], 
-    [MapDataSet].[Count] AS [Count], 
-    [MapDataSet].[PercentWDB] AS [PercentWDB]
-    FROM [dbo].[MapDataSet] AS [MapDataSet]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="NYC_St_Names" EntityType="Self.NYC_St_Names" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [NYC_St_Names].[st_name] AS [st_name], 
@@ -1118,11 +1108,11 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
           <EntitySet Name="Leads_with_last_log" EntityType="IntranetPortalModel.Leads_with_last_log" />
           <EntitySet Name="LatLon_View" EntityType="IntranetPortalModel.LatLon_View" />
           <EntitySet Name="LeadsAssignViews" EntityType="IntranetPortalModel.LeadsAssignView" />
-          <EntitySet Name="MapDataSets" EntityType="IntranetPortalModel.MapDataSet" />
           <EntitySet Name="LeadsAssignView2" EntityType="IntranetPortalModel.LeadsAssignView2" />
           <EntitySet Name="PendingAssignLeads" EntityType="IntranetPortalModel.PendingAssignLead" />
           <FunctionImport Name="UploadSearchInfo2Portal" />
           <EntitySet Name="LeadsInfoViews" EntityType="IntranetPortalModel.LeadsInfoView" />
+          <EntitySet Name="MapDataSets" EntityType="IntranetPortalModel.MapDataSet" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1864,17 +1854,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
           <Property Name="CoOwner" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="Int32" />
         </EntityType>
-        <EntityType Name="MapDataSet">
-          <Key>
-            <PropertyRef Name="TypeName" />
-            <PropertyRef Name="KeyCode" />
-            <PropertyRef Name="Count" />
-          </Key>
-          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="KeyCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Count" Type="Int32" Nullable="false" />
-          <Property Name="PercentWDB" Type="Double" />
-        </EntityType>
         <EntityType Name="LeadsAssignView2">
           <Key>
             <PropertyRef Name="BBLE" />
@@ -2001,6 +1980,16 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
           <Property Name="LastLP" Type="String" MaxLength="21" FixedLength="false" Unicode="true" />
           <Property Name="LastComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LeadsName" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MapDataSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="KeyCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="PercentWDB" Type="Double" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2715,16 +2704,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MapDataSets">
-            <EntityTypeMapping TypeName="IntranetPortalModel.MapDataSet">
-              <MappingFragment StoreEntitySet="MapDataSet">
-                <ScalarProperty Name="PercentWDB" ColumnName="PercentWDB" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="KeyCode" ColumnName="KeyCode" />
-                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LeadsAssignView2">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadsAssignView2">
               <MappingFragment StoreEntitySet="LeadsAssignView2">
@@ -2853,6 +2832,17 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
                 <ScalarProperty Name="IsOtherLiens" ColumnName="IsOtherLiens" />
                 <ScalarProperty Name="IsLisPendens" ColumnName="IsLisPendens" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapDataSets">
+            <EntityTypeMapping TypeName="IntranetPortalModel.MapDataSet">
+              <MappingFragment StoreEntitySet="MapDataSet">
+                <ScalarProperty Name="PercentWDB" ColumnName="PercentWDB" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="KeyCode" ColumnName="KeyCode" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

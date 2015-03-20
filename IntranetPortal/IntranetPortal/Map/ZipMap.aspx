@@ -94,7 +94,7 @@
 <asp:content contentplaceholderid="MainContentPH" runat="server">--%>
 
     <form id="form1" runat="server">
-        <dx:ASPxGridView runat="server" ID="gridZipCountInfo" Visible="false">
+        <dx:ASPxGridView runat="server" ID="gridZipCountInfo" Visible="false" KeyFieldName="Id">
             <Columns>
                 <dx:GridViewDataColumn FieldName="KeyCode" Caption="ZipCode"></dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="TypeName"></dx:GridViewDataColumn>
