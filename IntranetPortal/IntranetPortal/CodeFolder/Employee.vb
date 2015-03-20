@@ -438,10 +438,10 @@ Partial Public Class Employee
 
     Public Shared Function GetOfficeAssignAccount(empName As String) As String
         Dim emp = GetInstance(empName)
-        Dim recycleName = emp.Department & " office"
-        If GetInstance(recycleName) IsNot Nothing Then
-            Return recycleName
-        End If
+        Dim recycleName = emp.Department & " Office"
+        'If GetInstance(recycleName) IsNot Nothing Then
+        '    Return recycleName
+        'End If
 
         Using ctx As New Entities
             Dim team = (From t In ctx.Teams
@@ -450,7 +450,7 @@ Partial Public Class Employee
                        Select t.Name).FirstOrDefault
 
             If team IsNot Nothing Then
-                recycleName = team & " office"
+                recycleName = team & " Office"
 
                 If GetInstance(recycleName) IsNot Nothing Then
                     Return recycleName

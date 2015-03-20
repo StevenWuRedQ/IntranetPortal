@@ -4,10 +4,10 @@ Imports System.Web.Script.Serialization
 Public Class ManagementUI
     Inherits System.Web.UI.Page
 
-
-
     Protected Function GetAllTeam() As List(Of String)
-        Return Team.GetAllTeams().Select(Function(t) t.Name).ToList
+        Return Employee.GetMyEmployeesByTeam(Page.User.Identity.Name).Select(Function(ut) ut.TeamName).Distinct.ToList
+
+        'Return Team.GetAllTeams().Select(Function(t) t.Name).ToList
 
         'Dim teamList = New List(Of String)
         'Using ctx As New Entities

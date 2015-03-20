@@ -291,9 +291,9 @@ Public Class LeadsSubMenu
     Sub SendRequest(bble)
 
         Dim employees = New List(Of String)
-        employees.Add(Page.User.Identity.Name.ToLower)
-        employees.Add(txtRequestUpdateCreateby.Text.ToLower)
-        employees.Add(txtRequestUpdateManager.Text.ToLower)
+        employees.Add(Page.User.Identity.Name)
+        employees.Add(txtRequestUpdateCreateby.Text)
+        employees.Add(txtRequestUpdateManager.Text)
         Dim emps = String.Join(";", employees.Distinct().ToArray)
 
         'Start new task

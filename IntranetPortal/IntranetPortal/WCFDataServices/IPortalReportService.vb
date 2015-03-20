@@ -45,4 +45,13 @@ Public Interface IPortalReportService
     <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="LoadTeamLeadsData/{teamName}/{status}")>
     Function LoadTeamLeadsData(teamName As String, status As String) As Channels.Message
 
+    <OperationContract()>
+    <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="LoadAgentActivityLeads/{agentName}/{action}/{startDate}/{endDate}")>
+    Function LoadAgentActivityLeads(agentName As String, action As String, startDate As String, endDate As String) As Channels.Message
+
+    <OperationContract()>
+    <WebInvoke(Method:="GET", ResponseFormat:=WebMessageFormat.Json, UriTemplate:="LoadTeamActivityLeads/{teamName}/{action}/{startDate}/{endDate}")>
+    Function LoadTeamActivityLeads(teamName As String, action As String, startDate As String, endDate As String) As Channels.Message
+
+
 End Interface

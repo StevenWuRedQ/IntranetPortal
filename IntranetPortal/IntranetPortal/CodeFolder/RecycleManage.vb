@@ -41,4 +41,17 @@ Public Class RecycleManage
             PostponeRecyle(wli.SeriesNumber, days, userName)
         Next
     End Sub
+
+    Public Shared Function UndoRecycle(nameFrom As String, nameTo As String, startDate As String) As Integer
+        Dim recycledLeads = Lead.GetRecycledLeads(nameFrom, nameTo, startDate)
+        Dim i = 0
+        For Each ld In recycledLeads
+            If ld.EmployeeName.ToLower = nameTo.ToLower Then
+                ld.ReAssignLeads(nameFrom, "Portal")
+                i = i + 1
+            End If
+        Next
+
+        Return i
+    End Function
 End Class

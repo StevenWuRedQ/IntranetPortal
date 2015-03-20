@@ -330,6 +330,7 @@
     <Compile Include="CodeFolder\PortalLisPen.vb" />
     <Compile Include="CodeFolder\PortalMembership.vb" />
     <Compile Include="CodeFolder\PortalNavItem.vb" />
+    <Compile Include="CodeFolder\PortalReport.vb" />
     <Compile Include="CodeFolder\PortalRoleProvider.vb" />
     <Compile Include="CodeFolder\RecycleManage.vb" />
     <Compile Include="CodeFolder\SearchResult.vb" />
@@ -622,6 +623,13 @@
     <Compile Include="DownloadFile.aspx.vb">
       <DependentUpon>DownloadFile.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="EmailTemplate\ActivitySummary.ascx.designer.vb">
+      <DependentUpon>ActivitySummary.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\ActivitySummary.ascx.vb">
+      <DependentUpon>ActivitySummary.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="EmailTemplate\EmailSummary.aspx.designer.vb">
       <DependentUpon>EmailSummary.aspx</DependentUpon>
@@ -1448,6 +1456,7 @@
     <Content Include="DLL\MyIdealProp.Workflow.Core.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.DBPersistence.dll" />
     <Content Include="DownloadFile.aspx" />
+    <Content Include="EmailTemplate\ActivitySummary.ascx" />
     <Content Include="EmailTemplate\EmailSummary.aspx" />
     <Content Include="EmailTemplate\TaskSummary.ascx" />
     <Content Include="images\1_down_picto.png" />

@@ -5,10 +5,18 @@ Public Class Test
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'Response.Write(Roles.IsUserInRole("123", "OfficeManager-Bronx"))
-        If Not (String.IsNullOrEmpty(Request.QueryString("Name"))) Then
-            TaskSummary.DestinationUser = Request.QueryString("Name").ToString
+        'If Not (String.IsNullOrEmpty(Request.QueryString("Name"))) Then
+        '    TaskSummary.DestinationUser = Request.QueryString("Name").ToString
+        'Else
+        '    TaskSummary.DestinationUser = "Chris Yan"
+        'End If
+
+        If Not (String.IsNullOrEmpty(Request.QueryString("team"))) Then
+            Dim objTeam = Team.GetTeam(Request.QueryString("team").ToString)
+            Me.ActivitySummary.team = objTeam
+            Me.ActivitySummary.Manager = "Manager"
         Else
-            TaskSummary.DestinationUser = "Chris Yan"
+
         End If
     End Sub
 

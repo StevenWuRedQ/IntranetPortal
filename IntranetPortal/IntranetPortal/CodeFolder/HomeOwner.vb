@@ -188,6 +188,18 @@ Partial Public Class HomeOwner
         Return phone
     End Function
 
+    Public Shared Function CheckLocateReportObject(reportToken As String)
+        Using ctx As New Entities
+            Dim owners = ctx.HomeOwners.Where(Function(h) h.ReportToken = reportToken).ToList
+
+            For Each owner In owners
+                Dim obj = owner.TLOLocateReport
+
+            Next
+            Return True
+        End Using
+    End Function
+
     Public Shared Sub InitalOwnerToken()
         Using ctx As New Entities
             Dim owners = ctx.HomeOwners.Where(Function(h) String.IsNullOrEmpty(h.ReportToken) And h.LocateReport IsNot Nothing).Take(200).ToList

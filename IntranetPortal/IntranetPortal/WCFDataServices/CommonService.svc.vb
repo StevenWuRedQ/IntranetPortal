@@ -48,6 +48,44 @@ Public Class CommonService
         IntranetPortal.Core.EmailService.SendMail(emp.Email, "", "UserTaskSummary", emailData)
     End Sub
 
+    Public Sub SendTeamActivityEmail(teamName As String) Implements ICommonService.SendTeamActivityEmail
+        Dim objTeam = Team.GetTeam(teamName)
+
+        Dim toAdds = New List(Of String)
+
+        'For Each mgr In objTeam.TeamManagers
+        '    Dim emp = Employee.GetInstance(mgr)
+        '    If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
+        '        toAdds.Add(Employee.GetInstance(mgr).Email)
+        '    End If
+        'Next
+
+        toAdds.Add("chris@gvs4u.com")
+
+        Dim emailData As New Dictionary(Of String, String)
+        emailData.Add("Body", LoadTeamActivityEmail(objTeam))
+        emailData.Add("Date", DateTime.Today.ToString("m"))
+
+        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData)
+    End Sub
+
+    Private Function LoadTeamActivityEmail(objTeam As Team) As String
+        Dim ts As ActivitySummary
+        Using Page As New Page
+            ts = Page.LoadControl("~/EmailTemplate/ActivitySummary.ascx")
+            ts.team = objTeam
+
+            Dim sb As New StringBuilder
+            Using tw As New StringWriter(sb)
+                Using hw As New HtmlTextWriter(tw)
+                    ts.RenderControl(hw)
+                End Using
+            End Using
+
+            Return sb.ToString
+        End Using
+    End Function
+
     Private Function LoadSummaryEmail(userName As String) As String
         Dim ts As TaskSummary
         Using Page As New Page

@@ -36,6 +36,11 @@ Partial Public Class UserInTeam
         Return GetTeamUsers(teamNames).Select(Function(u) u.EmployeeName).ToArray
     End Function
 
+    Public Shared Function GetTeamFinders(teamNames As String) As String()
+        Dim position = {"Finder"}
+        Return GetTeamUsers(teamNames).Where(Function(t) position.Contains(t.EmployeePosition) And t.EmployeeActive).Select(Function(u) u.EmployeeName).ToArray
+    End Function
+
     Public Shared Function GetTeamUsersByNames(names As String()) As List(Of UserInTeam)
         Using ctx As New Entities
             Dim items = From ut In ctx.UserInTeams

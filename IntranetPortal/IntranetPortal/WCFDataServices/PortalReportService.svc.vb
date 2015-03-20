@@ -52,41 +52,49 @@ Public Class PortalReportService
     End Function
 
     Public Function LoadAgentActivityReport(teamName As String, startDate As String, endDate As String) As Channels.Message Implements IPortalReportService.LoadAgentActivityReport
-        Dim users = UserInTeam.GetTeamUsersArray(teamName)
         Dim dtStart = DateTime.Parse(startDate)
         Dim dtEnd = DateTime.Parse(endDate)
+        Return PortalReport.LoadTeamAgentActivityReport(teamName, dtStart, dtEnd).ToJson
 
-        Using ctx As New Entities
-            Dim actionTypes = {LeadsActivityLog.EnumActionType.CallOwner,
-                               LeadsActivityLog.EnumActionType.Comments,
-                               LeadsActivityLog.EnumActionType.DoorKnock,
-                               LeadsActivityLog.EnumActionType.FollowUp,
-                               LeadsActivityLog.EnumActionType.SetAsTask,
-                               LeadsActivityLog.EnumActionType.Appointment}
+        'Using ctx As New Entities
+        '    Dim actionTypes = {LeadsActivityLog.EnumActionType.CallOwner,
+        '                       LeadsActivityLog.EnumActionType.Comments,
+        '                       LeadsActivityLog.EnumActionType.DoorKnock,
+        '                       LeadsActivityLog.EnumActionType.FollowUp,
+        '                       LeadsActivityLog.EnumActionType.SetAsTask,
+        '                       LeadsActivityLog.EnumActionType.Appointment}
 
-            Dim logSql = ctx.LeadsActivityLogs.Where(Function(al) users.Contains(al.EmployeeName) And al.ActivityDate < dtEnd And al.ActivityDate > dtStart AndAlso actionTypes.Contains(al.ActionType))
-            Dim logs = logSql.ToList
+        '    Dim logSql = ctx.LeadsActivityLogs.Where(Function(al) users.Contains(al.EmployeeName) And al.ActivityDate < dtEnd And al.ActivityDate > dtStart AndAlso actionTypes.Contains(al.ActionType))
+        '    Dim logs = logSql.ToList
 
-            Dim result As New List(Of Object)
-            For Each user In users
-                'Dim actionTypes = {LeadsActivityLog.EnumActionType.CallOwner, LeadsActivityLog.EnumActionType.Comments, LeadsActivityLog.EnumActionType.DoorKnock,
-                '                   LeadsActivityLog.EnumActionType.FollowUp, LeadsActivityLog.EnumActionType.SetAsTask, LeadsActivityLog.EnumActionType.Appointment}
-                Dim userLogs = logs.Where(Function(l) l.EmployeeName = user)
+        '    Dim result As New List(Of Object)
+        '    For Each user In users
+        '        'Dim actionTypes = {LeadsActivityLog.EnumActionType.CallOwner, LeadsActivityLog.EnumActionType.Comments, LeadsActivityLog.EnumActionType.DoorKnock,
+        '        '                   LeadsActivityLog.EnumActionType.FollowUp, LeadsActivityLog.EnumActionType.SetAsTask, LeadsActivityLog.EnumActionType.Appointment}
+        '        Dim userLogs = logs.Where(Function(l) l.EmployeeName = user)
 
-                result.Add(New With {
-                           .Name = user,
-                           .CallCount = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.CallOwner).Count,
-                           .Comments = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.Comments).Count,
-                           .DoorKnock = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.DoorKnock).Count,
-                           .FollowUp = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.FollowUp).Count,
-                           .SetAsTask = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.SetAsTask).Count,
-                           .Appointment = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.Appointment).Count,
-                           .UniqueBBLE = userLogs.Select(Function(l) l.BBLE).Distinct.Count
-                           })
-            Next
+        '        result.Add(New With {
+        '                   .Name = user,
+        '                   .CallOwner = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.CallOwner).Count,
+        '                   .Comments = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.Comments).Count,
+        '                   .DoorKnock = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.DoorKnock).Count,
+        '                   .FollowUp = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.FollowUp).Count,
+        '                   .SetAsTask = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.SetAsTask).Count,
+        '                   .Appointment = userLogs.Where(Function(l) l.ActionType.HasValue AndAlso l.ActionType = LeadsActivityLog.EnumActionType.Appointment).Count,
+        '                   .UniqueBBLE = userLogs.Select(Function(l) l.BBLE).Distinct.Count
+        '                   })
+        '    Next
 
-            Return result.ToJson
-        End Using
+        '    Return result.ToJson
+        'End Using
+    End Function
+
+    Public Function LoadAgentActivityLeads(agentName As String, action As String, startDate As String, endDate As String) As Channels.Message Implements IPortalReportService.LoadAgentActivityLeads
+        Return LeadsGridJson(LeadsDataByActivityAction({agentName}, action, startDate, endDate))
+    End Function
+
+    Public Function LoadTeamActivityLeads(teamName As String, action As String, startDate As String, endDate As String) As Channels.Message Implements IPortalReportService.LoadTeamActivityLeads
+        Return LeadsGridJson(LeadsDataByActivityAction(UserInTeam.GetTeamUsersArray(teamName), action, startDate, endDate))
     End Function
 
     Public Function LoadAgentLeadsData(agentName As String, status As String) As Channels.Message Implements IPortalReportService.LoadAgentLeadsData
@@ -100,6 +108,34 @@ Public Class PortalReportService
     End Function
 
 #Region "Private methods"
+
+    Private Function LeadsDataByActivityAction(names As String(), action As String, startDate As String, endDate As String) As List(Of Lead)
+        Dim dtStart = DateTime.Parse(startDate)
+        Dim dtEnd = DateTime.Parse(endDate)
+
+        Dim actionTypes = {LeadsActivityLog.EnumActionType.CallOwner,
+                             LeadsActivityLog.EnumActionType.Comments,
+                             LeadsActivityLog.EnumActionType.DoorKnock,
+                             LeadsActivityLog.EnumActionType.FollowUp,
+                             LeadsActivityLog.EnumActionType.SetAsTask,
+                             LeadsActivityLog.EnumActionType.Appointment}
+
+        Dim actionType As LeadsActivityLog.EnumActionType
+        If [Enum].TryParse(Of LeadsActivityLog.EnumActionType)(action, actionType) Then
+            actionTypes = {actionType}
+        End If
+
+        Using ctx As New Entities
+            Dim leads = (From bble In ctx.LeadsActivityLogs.Where(Function(al) names.Contains(al.EmployeeName) And al.ActivityDate < dtEnd And al.ActivityDate > dtStart AndAlso actionTypes.Contains(al.ActionType)).Select(Function(al) al.BBLE).Distinct
+                        Join ld In ctx.Leads On ld.BBLE Equals bble
+                        Order By ld.LastUpdate Descending
+                        Select ld).ToList
+
+            Return leads
+        End Using
+
+        Return Nothing
+    End Function
 
     Private Function LeadsGridJson(leadsData As List(Of Lead)) As Channels.Message
         Dim result As New List(Of Object)
@@ -167,6 +203,9 @@ Public Class PortalReportService
         Return result
     End Function
 #End Region
+
+
+
 End Class
 
 Public Module JsonExtension

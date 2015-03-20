@@ -74,8 +74,13 @@
             Return
         End If
 
+        Dim teamId = CInt(lbRoles.Value)
+        lbEmployees.DataSource = Team.GetTeam(teamId).ActiveUsers
+        lbEmployees.DataBind()
+        Return
+
         Using Context As New Entities
-            Dim teamId = CInt(lbRoles.Value)
+
             lbEmployees.DataSource = Context.UserInTeams.Where(Function(ur) ur.TeamId = teamId).OrderBy(Function(r) r.EmployeeName).ToList
             lbEmployees.ValueField = "EmployeeName"
             lbEmployees.TextField = "EmployeeName"

@@ -23,12 +23,12 @@ Public Class MgrEmployee
 
     Protected Sub treeList_NodeInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs) Handles treeList.NodeInserting
         Dim emp As New Employee
-        emp.Name = e.NewValues("Name")
+        emp.Name = Utility.FormatUserName(e.NewValues("Name"))
         emp.Position = e.NewValues("Position")
         emp.Department = e.NewValues("Department")
         emp.Extension = e.NewValues("Extension")
         emp.Email = e.NewValues("Email")
-        emp.Cellphone = e.NewValues("Cellphone")
+        emp.CellPhone = e.NewValues("Cellphone")
         emp.EmployeeSince = e.NewValues("EmployeeSince")
         emp.Picture = e.NewValues("Picture")
         emp.Password = e.NewValues("Password")
@@ -65,7 +65,7 @@ Public Class MgrEmployee
             Dim empID = CInt(e.Keys("EmployeeID"))
             Dim emp = Context.Employees.Where(Function(em) em.EmployeeID = empID).FirstOrDefault
 
-            emp.Name = e.NewValues("Name")
+            emp.Name = Utility.FormatUserName(e.NewValues("Name"))
             emp.Position = e.NewValues("Position")
             emp.Department = e.NewValues("Department")
             emp.Extension = e.NewValues("Extension")

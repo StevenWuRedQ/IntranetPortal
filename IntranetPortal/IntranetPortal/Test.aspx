@@ -3,6 +3,8 @@
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
 <%@ Register Src="~/UserControl/NavMenu.ascx" TagPrefix="uc1" TagName="NavMenu" %>
 <%@ Register Src="~/EmailTemplate/TaskSummary.ascx" TagPrefix="uc1" TagName="TaskSummary" %>
+<%@ Register Src="~/EmailTemplate/ActivitySummary.ascx" TagPrefix="uc1" TagName="ActivitySummary" %>
+
 
 <!DOCTYPE html>
 
@@ -18,8 +20,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <uc1:TaskSummary runat="server" id="TaskSummary" />
-        <input type="button" onclick="LoadData()" value="Test" />
+       <%-- <uc1:TaskSummary runat="server" ID="TaskSummary" />--%>
+        <%-- <input type="button" onclick="LoadData()" value="Test" />
         <script type="text/javascript">      
 
             function LoadData()
@@ -35,8 +37,8 @@
                 });
             }            
 
-        </script>
-
+        </script>--%>
+        <uc1:ActivitySummary runat="server" id="ActivitySummary" />
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="/Scripts/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
@@ -46,9 +48,9 @@
         <script src="/Scripts/js/jquery.mousewheel.js"></script>
         <script src="/Scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.min.js"></script>
         <script src="/Scripts/js/main.js"></script>
-            <script src="/scripts/jquery.collapse.js"></script>
-    <script src="/scripts/jquery.collapse_storage.js"></script>
-    <script src="/scripts/jquery.collapse_cookie_storage.js"></script>
+        <script src="/scripts/jquery.collapse.js"></script>
+        <script src="/scripts/jquery.collapse_storage.js"></script>
+        <script src="/scripts/jquery.collapse_cookie_storage.js"></script>
 
     </form>
 </body>

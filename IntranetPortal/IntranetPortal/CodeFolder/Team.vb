@@ -66,6 +66,17 @@
         End Get
     End Property
 
+    Private _managers As String()
+    Public ReadOnly Property TeamManagers As String()
+        Get
+            If _managers Is Nothing Then
+                Dim roleName = String.Format("OfficeManager-{0}", Name)
+                _managers = Roles.GetUsersInRole(roleName)
+            End If
+            Return _managers
+        End Get
+    End Property
+
     Public Function GetLeadsByStatus(status As LeadStatus) As List(Of Lead)
         Return Lead.GetUserLeadsData(AllUsers, status)
     End Function

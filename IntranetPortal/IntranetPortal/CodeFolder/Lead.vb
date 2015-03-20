@@ -30,9 +30,9 @@ Partial Public Class Lead
         End Get
     End Property
 
-    Public ReadOnly Property LastUserUpdate As DateTime
+    Public ReadOnly Property LastOwnerUpdate As DateTime
         Get
-            Dim log = LeadsActivityLogs.Where(Function(l) l.EmployeeName = EmployeeName).OrderByDescending(Function(lg) lg.ActivityDate).FirstOrDefault
+            Dim log = LeadsActivityLogs.Where(Function(l) l.EmployeeName.ToLower = EmployeeName.ToLower).OrderByDescending(Function(lg) lg.ActivityDate).FirstOrDefault
             If log IsNot Nothing Then
                 Return log.ActivityDate
             End If
@@ -40,6 +40,26 @@ Partial Public Class Lead
             Return AssignDate
         End Get
     End Property
+
+    Public ReadOnly Property LastUserUpdate As DateTime
+        Get
+            Dim log = LeadsActivityLogs.Where(Function(l) l.EmployeeID <> Nothing).OrderByDescending(Function(lg) lg.ActivityDate).FirstOrDefault
+            If log IsNot Nothing Then
+                Return log.ActivityDate
+            End If
+
+            Return AssignDate
+        End Get
+    End Property
+
+    Public Shared Function GetRecycledLeads(name As String, recycled As String, startDate As String) As List(Of Lead)
+        Using ctx As New Entities
+            Dim comments = String.Format("Leads Reassign from {0} to {1}.", name, recycled)
+            Dim bbles = ctx.LeadsActivityLogs.Where(Function(l) l.EmployeeName = "Portal" And l.Comments = comments And l.ActivityDate > startDate).Select(Function(b) b.BBLE).Distinct.ToArray
+
+            Return ctx.Leads.Where(Function(ld) bbles.Contains(ld.BBLE)).ToList
+        End Using
+    End Function
 
     Public ReadOnly Property ReferrelName As String
         Get
@@ -256,6 +276,10 @@ Partial Public Class Lead
     End Sub
 
     Public Sub ReAssignLeads(empName As String, Optional assignBy As String = "Portal")
+        If String.Equals(EmployeeName, empName, StringComparison.CurrentCultureIgnoreCase) Then
+            Return
+        End If
+
         Dim emp = IntranetPortal.Employee.GetInstance(empName)
 
         If emp IsNot Nothing Then

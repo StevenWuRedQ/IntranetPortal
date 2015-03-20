@@ -486,22 +486,56 @@
     Public ReadOnly Property OtherProperties As List(Of LeadsInfo)
         Get
             If _otherProperties Is Nothing Then
-                Using context As New Entities
-                    If Not String.IsNullOrEmpty(Owner) Then
+
+                If Not String.IsNullOrEmpty(Owner) Then
+                    Dim specialName = {"NOT ON FILE"}
+
+                    If specialName.Contains(Owner) Then
+                        _otherProperties = New List(Of LeadsInfo)
+                        Return _otherProperties
+                    End If
+
+                    Using context As New Entities
                         Dim ownerToken = context.HomeOwners.Where(Function(h) h.BBLE = BBLE And (h.Name = Owner Or h.Name = CoOwner) And h.ReportToken IsNot Nothing).Select(Function(h) h.ReportToken).ToArray
                         If ownerToken IsNot Nothing AndAlso ownerToken.Count > 0 Then
                             Dim result = (From li In context.LeadsInfoes.Where(Function(li) li.BBLE <> BBLE)
                                                Join ho In context.HomeOwners.Where(Function(h) ownerToken.Contains(h.ReportToken)) On ho.BBLE Equals li.BBLE
-                                               Select li).Distinct
-                            _otherProperties = result.ToList
+                                               Select li).Distinct.ToList
+
+                            If IsCompany(Owner) Then
+                                _otherProperties = New List(Of LeadsInfo)
+
+                                For Each li In result
+                                    If Utility.IsSimilarName(Owner, li.Owner) Then
+                                        _otherProperties.Add(li)
+                                    End If
+                                Next
+                            Else
+                                _otherProperties = result
+                            End If
                         End If
-                    End If
-                End Using
+                    End Using
+                End If
             End If
 
             Return _otherProperties
         End Get
     End Property
+
+    Private Function IsCompany(name As String) As Boolean
+        Dim suffixs = {"LLC", "LLC.", "CORP.", "CORP", "INC", "INC.", "L.P.", "CO.L.P."}
+
+        Dim lastSubstring = name.Trim.Split(" ").Last.ToUpper
+        For Each suffix In suffixs
+            If lastSubstring = suffix Then
+                Return True
+            End If
+        Next
+
+        Return False
+    End Function
+
+   
 
     Public Shared Function GetInstance(bble As String) As LeadsInfo
         Using context As New Entities
@@ -556,7 +590,7 @@
         End Get
     End Property
 
-    Public Sub AssignTo(empName As String, assignBy As String)
+    Public Sub AssignTo(empName As String, assignBy As String, Optional override As Boolean = True)
         Using ctx As New Entities
             Dim emp = Employee.GetInstance(empName)
             If emp IsNot Nothing Then
@@ -574,13 +608,15 @@
                                       }
                     ctx.Leads.Add(newlead)
                 Else
-                    newlead.LeadsName = LeadsName
-                    newlead.Neighborhood = NeighName
-                    newlead.EmployeeID = emp.EmployeeID
-                    newlead.EmployeeName = emp.Name
-                    newlead.Status = LeadStatus.NewLead
-                    newlead.AssignDate = DateTime.Now
-                    newlead.AssignBy = assignBy
+                    If override Then
+                        newlead.LeadsName = LeadsName
+                        newlead.Neighborhood = NeighName
+                        newlead.EmployeeID = emp.EmployeeID
+                        newlead.EmployeeName = emp.Name
+                        newlead.Status = LeadStatus.NewLead
+                        newlead.AssignDate = DateTime.Now
+                        newlead.AssignBy = assignBy
+                    End If
                 End If
 
                 ctx.SaveChanges()

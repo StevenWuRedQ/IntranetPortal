@@ -392,6 +392,11 @@ Public Class LeadsList
                 Throw New Exception(String.Format("You cann't create this leads. Lead is already created by {0}. <a href=""#"" id=""linkRequestUpdate"" onclick=""OnRequestUpdate('{1}');return false;"">Request update?</a>", lead.EmployeeName, lead.BBLE))
             End If
 
+            If Context.PendingAssignLeads.Where(Function(l) l.BBLE = bble AndAlso (l.Status = PendingAssignLead.PendingStatus.Active Or l.Status = PendingAssignLead.PendingStatus.InLoop)).Count > 0 Then
+                Dim pendleads = Context.PendingAssignLeads.Where(Function(l) l.BBLE = bble AndAlso (l.Status = PendingAssignLead.PendingStatus.Active Or l.Status = PendingAssignLead.PendingStatus.InLoop)).FirstOrDefault
+                Throw New Exception(String.Format("You cann't create this leads. Lead is pending assign to {0}.", pendleads.EmployeeName))
+            End If
+
             'Dim lf As LeadsInfo = DataWCFService.UpdateBasicInfo(bble)
             DataWCFService.UpdateLeadInfo(bble, True)
             Dim lf = LeadsInfo.GetInstance(bble)

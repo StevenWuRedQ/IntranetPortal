@@ -284,4 +284,18 @@ Public Class Utility
         Dim text = Regex.Replace(html, "<(.|\n)*?>", String.Empty)
         Return text
     End Function
+
+    Public Shared Function IsSimilarName(name1 As String, name2 As String) As Boolean
+        Dim strCompare = name1.Replace(",", "").Replace("&", " ").Replace("-", " ").Split(" ")
+        name2 = name2.Replace(",", "").Replace("&", " ").Replace("-", " ")
+        Dim nameArray = name2.Split(" ")
+        Dim result = strCompare.Where(Function(a) nameArray.Contains(a)).Count / strCompare.Length
+
+        Return result > 0.9
+    End Function
+
+    Public Shared Function FormatUserName(name As String)
+        name = name.Trim
+        Return StrConv(name, VbStrConv.ProperCase)
+    End Function
 End Class

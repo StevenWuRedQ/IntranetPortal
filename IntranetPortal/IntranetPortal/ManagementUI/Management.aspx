@@ -1,10 +1,10 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Management.aspx.vb" Inherits="IntranetPortal.Management1" MasterPageFile="~/Content.Master" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Management.aspx.vb" Inherits="IntranetPortal.ManagementUI" MasterPageFile="~/Content.Master" %>
 
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="/css/dx.common.css" rel="stylesheet" />
-    <link href="/Content/dx.ios7.default.css" rel="stylesheet" />
-    <link href="/css/dx.light.css" rel="stylesheet" />
+    <link href="/Content/dx.common.css" rel="stylesheet" />
+    <%--<link href="/Content/dx.ios7.default.css" rel="stylesheet" />--%>
+    <link href="/Content/dx.light.css" rel="stylesheet" />
     <style>
         .nofoucs:focus {
             border: none !important;
@@ -12,10 +12,9 @@
     </style>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-
     <script src="/Scripts/globalize/globalize.js"></script>
     <script src="/Scripts/dx.chartjs.js"></script>
-    <script src="/Scripts/dx.webappjs.debug.js"></script>
+    <script src="/Scripts/dx.webappjs.js"></script>
     <script src="/Scripts/dx.phonejs.js"></script>
     <div class="container-fluid">
         <%--Head--%>
@@ -188,10 +187,12 @@
                         <ul class="nav nav-tabs nav-stacked color_gray" role="tablist">
                             <li role="presentation" class="mag_tabv"><a href="#Agent_Activity_Tab" onclick="agentActivityTab.ShowTab(currentTeamInfo.TeamName, true)" role="tab" data-toggle="tab"><i class="fa fa-users mag_tabv_i"></i>Agent Activity</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Status_Of_Leads_Tab" onclick="LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true)" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Status Of Leads</a></li>
+                            <% If IntranetPortal.Employee.IsAdmin(Page.User.Identity.Name) Then%>
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-map-marker mag_tabv_i"></i>Geo Leads</a></li>
-                            <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-bar-chart mag_tabv_i"></i>Monthly  Intake</a></li>
-                            <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-line-chart mag_tabv_i"></i>Compare Offices</a></li>
-                            <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-clock-o mag_tabv_i"></i>Team Hours</a></li>
+                            <%End If%>
+                            <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-bar-chart mag_tabv_i"></i>Monthly  Intake</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-line-chart mag_tabv_i"></i>Compare Offices</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-clock-o mag_tabv_i"></i>Team Hours</a></li>
                         </ul>
                     </div>
                     <div class="col-md-10">
@@ -211,12 +212,13 @@
                                             <div id="agentDetailChart" class="containers" style="height: 440px; width: 100%;"></div>
                                         </div>
                                     </div>
-                                    <div id="gridPopup">
-                                        <div id="agentLeadsGrid" style="height: 450px; max-width: 1000px; width: 100%; margin: 0 auto; display: none"></div>
+                                    <div id="gridPopup" style="width: 700px">
+                                        <div id="agentLeadsGrid" style="height: 450px; max-width: 700px; width: 100%; margin: 0 auto;"></div>
                                     </div>
                                     <script type="text/javascript">
                                         var agentActivityTab = {
                                             TeamName: null,
+                                            CurrentAgentName: null,
                                             ActivityDataSource: null,
                                             Visible: function () { return $("#Agent_Activity_Tab").hasClass("active") ? true : false },
                                             BarChart: function () {
@@ -241,9 +243,9 @@
                                                             argumentType: 'string'
                                                         },
                                                         series: [
-                                                            { valueField: "CallCount", name: "Call" },
-                                                            { valueField: "Comments", name: "Comment" },
-                                                            { valueField: "UniqueBBLE", name: "UniqueBBLE" },
+                                                            { valueField: "CallOwner", name: "CallOwner", tag: "CallOwner" },
+                                                            { valueField: "Comments", name: "Comments", tag: "Comments" },
+                                                            { valueField: "UniqueBBLE", name: "UniqueBBLE", tag: "UniqueBBLE" },
                                                         ],
                                                         title: "Agents Activities in " + tab.TeamName,
                                                         legend: {
@@ -276,6 +278,12 @@
                                                             //if (selectedPoint.isSelected()) {
 
                                                             //}
+                                                        },
+                                                        onLegendClick: function (info) {
+                                                            var valueArray = [];
+                                                            var series = info.target;
+                                                            var action = series.tag;
+                                                            tab.ShowLeadsDataGrid("", action);
                                                         }
                                                     });
                                                     return $("#agentActivityChart").dxChart("instance");
@@ -299,11 +307,11 @@
                                                         }
                                                     }
                                                 ],
-                                                onPointClick: function (e) {
-                                                    var point = e.target;
-                                                    point.isVisible() ? point.hide() : point.show();
-                                                }
+                                                AgentName: null
                                             }).dxPieChart("instance"),
+                                            UrlEncodeDate: function (date) {
+                                                return date.toLocaleDateString().replace(/\//g, "-");
+                                            },
                                             DateRange: function () { return $('#dateRange').has("svg").length ? $('#dateRange').dxRangeSelector('instance') : null },
                                             InitalTab: function () {
                                                 var tab = this;
@@ -350,6 +358,74 @@
                                             LoadAgentActivityDs: function (startDate, endDate) {
                                                 this.ActivityDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentActivity/" + this.TeamName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-"));
                                             },
+                                            LoadGridLeadsData: function (agentName, action) {
+                                                var tab = this;
+                                                var customStore = new DevExpress.data.CustomStore({
+                                                    load: function (loadOptions) {
+                                                        var d = $.Deferred();
+                                                        var selectedRange = tab.DateRange().getSelectedRange();
+                                                        var dataApi = agentName == "" ? "LoadTeamActivityLeads/" + tab.TeamName : "LoadAgentActivityLeads/" + agentName;
+                                                        $.getJSON("/WCFDataServices/PortalReportService.svc/" + dataApi + "/" + action + "/" + tab.UrlEncodeDate(selectedRange.startValue) + "/" + tab.UrlEncodeDate(selectedRange.endValue)).done(function (data) {
+                                                            d.resolve(data, { totalCount: data.length });
+                                                        });
+                                                        return d.promise();
+                                                    }
+                                                });
+
+                                                return customStore;
+                                            },
+                                            ShowLeadsDataGrid: function (name, action) {
+                                                var titleName = name == "" ? this.TeamName : name;
+                                                $("#gridPopup").dxPopup({
+                                                    showTitle: true,
+                                                    title: titleName + ' - ' + action,
+                                                    showCloseButton: true,
+                                                    //titleTemplate: "<div>" + agentName + ' - ' + point.originalArgument + "</div>",                                                           
+                                                    width: 700,
+                                                    height: 550,
+                                                    closeOnOutsideClick: false
+                                                });
+                                                $("#gridPopup").dxPopup("instance").show();
+
+                                                $("#agentLeadsGrid").dxDataGrid({
+                                                    dataSource: this.LoadGridLeadsData(name, action),
+                                                    showColumnLines: false,
+                                                    showRowLines: true,
+                                                    rowAlternationEnabled: true,
+                                                    paging: { enabled: false },
+                                                    remoteOperations: {
+                                                        sorting: false
+                                                    },
+                                                    columns: [{
+                                                        dataField: "LeadsName",
+                                                        caption: "Leads Name",
+                                                        width: 280,
+                                                        cellTemplate: function (container, options) {
+                                                            if (options.value != null) {
+                                                                var fieldHTML = '<a target="_blank" href="javascript:ViewLeadsInfo(\'' + options.data.BBLE + '\')">' + options.value + "</a>"
+                                                                container.html(fieldHTML);
+                                                            }
+                                                        }
+                                                    }, {
+                                                        dataField: "BBLE",
+                                                        caption: "BBLE",
+                                                        width: 100
+                                                    }, {
+                                                        dataField: "EmployeeName",
+                                                        caption: "Employee Name"
+                                                    }, {
+                                                        dataField: "LastUpdate",
+                                                        caption: "Last Update",
+                                                        dataType: 'date'
+                                                    }],
+                                                    summary: {
+                                                        totalItems: [{
+                                                            column: 'BBLE',
+                                                            summaryType: 'count'
+                                                        }]
+                                                    }
+                                                });
+                                            },
                                             UpdateActivityChart: function (startDate, endDate) {
                                                 var chart = this.BarChart();
                                                 chart.showLoadingIndicator();
@@ -375,6 +451,7 @@
                                                 //chart.hideLoadingIndicator();
                                             },
                                             UpdateAgentDetailChart: function (agentName, agentData) {
+                                                this.CurrentAgentName = agentName;
                                                 if (!$("#agentActivityChart").parent().hasClass("col-md-7")) {
                                                     $("#agentActivityChart").parent().removeClass("col-md-12");
                                                     $("#agentActivityChart").parent().addClass("col-md-7");
@@ -383,198 +460,81 @@
                                                     this.BarChart().render();
                                                     $("#agentDetailChart").parent().addClass("col-md-5");
                                                     $("#agentDetailChart").parent().show();
-
-                                                    this.PieChart.option({
-                                                        dataSource: agentData,
-                                                        title: agentName + " Actions",
-                                                    });
-
-                                                    return;
                                                 }
-
+                                                var tab = this;
                                                 this.PieChart.option({
                                                     dataSource: agentData,
                                                     title: agentName + " Actions",
+                                                    AgentName: agentName,
+                                                    onPointClick: function (e) {
+                                                        var point = e.target;
+                                                        tab.ShowLeadsDataGrid(agentName, point.originalArgument);
+                                                        return;
+
+                                                        ////point.isVisible() ? point.hide() : point.show();
+                                                        //$("#gridPopup").dxPopup({
+                                                        //    showTitle: true,
+                                                        //    title: agentName + ' - ' + point.originalArgument,
+                                                        //    showCloseButton: true,
+                                                        //    //titleTemplate: "<div>" + agentName + ' - ' + point.originalArgument + "</div>",                                                           
+                                                        //    width: 700,
+                                                        //    height:550,
+                                                        //    closeOnOutsideClick: true
+                                                        //});
+                                                        //$("#gridPopup").dxPopup("instance").show();
+
+                                                        //var customStore = new DevExpress.data.CustomStore({
+                                                        //    load: function (loadOptions) {
+                                                        //        var d = $.Deferred();
+                                                        //        var selectedRange = tab.DateRange().getSelectedRange();
+                                                        //        $.getJSON("/WCFDataServices/PortalReportService.svc/LoadAgentActivityLeads/" + agentName + "/" + point.argument + "/" + tab.UrlEncodeDate(selectedRange.startValue) + "/" + tab.UrlEncodeDate(selectedRange.endValue)).done(function (data) {
+                                                        //            d.resolve(data, { totalCount: data.length });
+                                                        //        });
+                                                        //        return d.promise();
+                                                        //    }
+                                                        //});
+
+                                                        //$("#agentLeadsGrid").dxDataGrid({
+                                                        //    dataSource: customStore,
+                                                        //    showColumnLines: false,
+                                                        //    showRowLines: true,
+                                                        //    rowAlternationEnabled: true,
+                                                        //    paging: { enabled: false },
+                                                        //    columns: [{
+                                                        //        dataField: "LeadsName",
+                                                        //        caption: "Leads Name",
+                                                        //        width: 280,
+                                                        //        cellTemplate: function (container, options) {
+                                                        //            if (options.value != null) {
+                                                        //                var fieldHTML = '<a target="_blank" href="javascript:ViewLeadsInfo(\'' + options.data.BBLE + '\')">' + options.value + "</a>"
+                                                        //                container.html(fieldHTML);
+                                                        //            }
+                                                        //        }
+                                                        //    }, {
+                                                        //        dataField: "BBLE",
+                                                        //        caption: "BBLE",
+                                                        //        width: 100
+                                                        //    },{
+                                                        //        dataField: "EmployeeName",
+                                                        //        caption: "Employee Name"
+                                                        //    }, {
+                                                        //        dataField: "LastUpdate",
+                                                        //        caption: "Last Update",
+                                                        //        dataType: 'date'
+                                                        //    }],
+                                                        //    summary: {
+                                                        //        totalItems: [{
+                                                        //            column: 'BBLE',
+                                                        //            summaryType: 'count'
+                                                        //        }]
+                                                        //    }
+                                                        //});
+                                                    }
                                                 });
                                             }
                                         }
 
-
-                                        //var agentActivityDs = null;
-
-                                        //function LoadAgentActivityDs(startDate, endDate) {
-                                        //}
-
-                                        //function ShowAgentActivityTab() {
-                                        //    var dateNow = new Date();
-                                        //    var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
-                                        //    $("#dateRange").dxRangeSelector({
-                                        //        margin: {
-                                        //            top: 5
-                                        //        },
-                                        //        size: {
-                                        //            height: 150
-                                        //        },
-                                        //        scale: {
-                                        //            startValue: new Date(2014, 8, 24),
-                                        //            endValue: new Date(),
-                                        //            minorTickInterval: "day",
-                                        //            majorTickInterval: { days: 7 },
-                                        //            minRange: "day",
-                                        //            showMinorTicks: false
-                                        //        },
-                                        //        sliderMarker: {
-                                        //            format: "monthAndDay"
-                                        //        },
-                                        //        selectedRange: {
-                                        //            startValue: new Date(dateNow.getFullYear(), dateNow.getMonth(), 1),
-                                        //            endValue: dateNow
-                                        //        },
-                                        //        onSelectedRangeChanged: function (e) {
-                                        //            ShowAgentActivityChart(e.startValue, e.endValue);
-                                        //        }
-                                        //    });
-                                        //    return true;
-                                        //}
-
-                                        //function InitalAgentActivityChart() {
-                                        //    var teamName = currentTeamInfo.TeamName;
-                                        //    $("#agentActivityChart").dxChart({
-                                        //        dataSource: agentActivityDs,
-                                        //        commonSeriesSettings: {
-                                        //            argumentField: "Name",
-                                        //            type: "bar",
-                                        //            hoverMode: "allArgumentPoints",
-                                        //            selectionMode: "allArgumentPoints",
-                                        //            label: {
-                                        //                visible: true,
-                                        //                format: "fixedPoint",
-                                        //                precision: 0
-                                        //            }
-                                        //        },
-                                        //        argumentAxis: {
-                                        //            argumentType: 'string'
-                                        //        },
-                                        //        series: [
-                                        //            { valueField: "CallCount", name: "Call" },
-                                        //            { valueField: "Comments", name: "Comment" }
-                                        //        ],
-                                        //        title: "Agents Activities in " + teamName,
-                                        //        legend: {
-                                        //            verticalAlignment: "bottom",
-                                        //            horizontalAlignment: "center"
-                                        //        },
-                                        //        loadingIndicator: {
-                                        //            show: false
-                                        //        },
-                                        //        onPointClick: function (info) {
-                                        //            var clickedPoint = info.target;
-                                        //            clickedPoint.isSelected() ? clickedPoint.clearSelection() : clickedPoint.select();
-                                        //        },
-                                        //        onPointSelectionChanged: function (info) {
-                                        //            var selectedPoint = info.target;
-                                        //            var name = selectedPoint.originalArgument;
-                                        //            var agentdata = DevExpress.data.query(agentActivityDs.items()).filter("Name", "=", name).toArray();
-                                        //            var data = agentdata[0];
-
-                                        //            var datasource = [];
-                                        //            for (var key in data) {
-                                        //                if (key != "Name") {
-                                        //                    datasource.push({ name: key, count: data[key] });
-                                        //                }
-                                        //            }
-                                        //            ShowAgentDetailChart(name, datasource);
-                                        //        }
-                                        //    });
-                                        //}
-
-                                        //function ShowAgentActivityChart(startDate, endDate) {
-                                        //    //var teamName = currentTeamInfo.TeamName;
-                                        //    //var agentActivityDs = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentActivity/" + teamName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-"));
-
-                                        //    LoadAgentActivityDs(startDate, endDate);
-
-                                        //    var chart = $("#agentActivityChart").dxChart("instance");
-                                        //    chart.showLoadingIndicator();
-                                        //    chart.beginUpdate();
-                                        //    chart.option("dataSource", agentActivityDs);
-                                        //    chart.endUpdate();
-                                        //    chart.hideLoadingIndicator();
-                                        //}
-
-                                        //function ShowAgentDetailChart(agentName, agentData) {
-
-                                        //    var teamName = currentTeamInfo.TeamName;
-
-                                        //    if (!$("#agentActivityChart").parent().hasClass("col-md-6")) {
-                                        //        $("#agentActivityChart").parent().removeClass("col-md-12");
-                                        //        $("#agentActivityChart").parent().addClass("col-md-6");
-                                        //        var width = $("#agentActivityChart").parent().width();
-                                        //        var chart = $("#agentActivityChart").dxChart("instance");
-                                        //        $("#agentActivityChart").width(width);
-                                        //        chart.render();
-                                        //        $("#agentDetailChart").parent().addClass("col-md-6");
-
-                                        //        $("#agentDetailChart").dxPieChart({
-                                        //            size: {
-                                        //                width: 500
-                                        //            },
-                                        //            dataSource: agentData,
-                                        //            series: [
-                                        //                {
-                                        //                    argumentField: "name",
-                                        //                    valueField: "count",
-                                        //                    label: {
-                                        //                        visible: true,
-                                        //                        connector: {
-                                        //                            visible: true,
-                                        //                            width: 1
-                                        //                        }
-                                        //                    }
-                                        //                }
-                                        //            ],
-                                        //            title: agentName + " Actions",
-                                        //            onPointClick: function (e) {
-                                        //                var point = e.target;
-                                        //                point.isVisible() ? point.hide() : point.show();
-                                        //            }
-                                        //        });
-
-                                        //        return;
-                                        //    }
-
-                                        //    var pieChart = $("#agentDetailChart").dxPieChart('instance');
-                                        //    pieChart.option({
-                                        //        dataSource: agentData,
-                                        //        title: agentName + " Actions",
-                                        //    });
-                                        //}
-
-                                        $(document).ready(function () {
-                                            agentActivityTab.InitalTab();
-
-                                            ShowTeamData("RonTeam");
-                                        });
-
-                                        function ShowTeamData(team) {
-                                            $.when(LoadTeamInfo(team)).done(function () {
-                                                agentActivityTab.ShowTab(team);
-                                            });
-                                        }
-
-                                        //function ChangeTeamData(team)
-                                        //{
-                                        //    ShowAgentActivityTab();
-                                        //    $.when(LoadTeamInfo(team)).done(function () {
-                                        //        var rangeSelector = $('#dateRange').dxRangeSelector('instance');
-                                        //        var selectedRange = rangeSelector.getSelectedRange();
-                                        //        LoadAgentActivityDs(selectedRange.startValue, selectedRange.endValue);
-                                        //        InitalAgentActivityChart();
-                                        //    });
-                                        //}
-
                                     </script>
-
                                 </div>
                                 <div role="tabpanel" class="tab-pane " id="Status_Of_Leads_Tab">
                                     <div class="mag_tab_input_group">
@@ -590,9 +550,6 @@
                                     </div>
                                     <div class="row" style="margin-top: 10px">
                                         <div class="col-md-6">
-                                            <%--  <div style="margin-top: 25px">
-                                                <i class="fa fa-pie-chart report_head_button report_head_button_padding tooltip-examples"></i><span class="font_black">Status Of Leads</span>
-                                            </div>--%>
                                             <div>
                                                 <div class="chart_text">
                                                     <div id="ProcessStatusChart" class="containers" style="height: 500px; width: 60%; float: left"></div>
@@ -646,11 +603,11 @@
                                                         this.LeadsInProcessDataSource = new DevExpress.data.DataSource("/WCFDataServices/PortalReportService.svc/LoadTeamInProcessReport/" + this.Name);
                                                     },
                                                     GetLeadsData: function (status) {
-                                                        var view = this;
+                                                        var view = this;                                                        
                                                         var customStore = new DevExpress.data.CustomStore({
                                                             load: function (loadOptions) {
                                                                 var d = $.Deferred();
-                                                                $.getJSON("/WCFDataServices/PortalReportService.svc/LoadTeamLeadsData/" + view.Name + "/" + status).done(function (data) {
+                                                                $.getJSON("/WCFDataServices/PortalReportService.svc/LoadTeamLeadsData/" + view.Name + "/" + status).done(function (data) {                                                                    
                                                                     d.resolve(data, { totalCount: data.length });
                                                                 });
                                                                 return d.promise();
@@ -661,6 +618,58 @@
                                                 }
                                             },
                                             DisplayView: null,
+                                            DataGridLeads: $("#gridLeads").dxDataGrid({                                               
+                                                showColumnLines: false,
+                                                showRowLines: true,
+                                                rowAlternationEnabled: true,
+                                                paging: { enabled: false },
+                                                remoteOperations: {
+                                                    sorting: false
+                                                },
+                                                columns:[{
+                                                    dataField: "LeadsName",
+                                                    caption: "Leads Name",
+                                                    width: 280,
+                                                    cellTemplate: function (container, options) {
+                                                        if (options.value != null) {
+                                                            var fieldHTML = '<a target="_blank" href="javascript:ViewLeadsInfo(\'' + options.data.BBLE + '\')">' + options.value + "</a>"
+                                                            container.html(fieldHTML);
+                                                        }
+                                                    }
+                                                }, {
+                                                    dataField: "BBLE",
+                                                    caption: "BBLE",
+                                                    width: 100
+                                                }, {
+                                                    dataField: "EmployeeName",
+                                                    caption: "Employee Name",
+                                                    visible: false
+                                                },{
+                                                    dataField: "DeadReason",
+                                                    caption: "Dead Reason",
+                                                    visible: false
+                                                }, {
+                                                    dataField: "Description",
+                                                    caption: "Description",
+                                                    visible: false
+                                                }, {
+                                                    dataField: "Callback",
+                                                    caption: "Callback",
+                                                    dataType: 'date',
+                                                    visible: false
+                                                }, ,{
+                                                    dataField: "LastUpdate",
+                                                    caption: "Last Update",
+                                                    dataType: 'date',
+                                                    visible: true
+                                                }],
+                                                summary: {
+                                                    totalItems: [{
+                                                        column: 'BBLE',
+                                                        summaryType: 'count'
+                                                    }]
+                                                }
+                                            }).dxDataGrid("instance"),
                                             Visible: function () { return $("#Status_Of_Leads_Tab").hasClass("active") ? true : false },
                                             AgentSelect: $("#selAgents"),
                                             InitAgentSelect: function () {
@@ -751,12 +760,11 @@
                                                         });
                                                     };
                                                     option.onPointClick = function (e) {
-                                                        var point = e.target;
+                                                        var point = e.target;                                                        
                                                         tab.LoadGridLeads(point.tag);
                                                         $("#gridTitle").html(point.originalArgument);
                                                         //point.isVisible() ? point.hide() : point.show();
                                                     };
-
                                                     $("#ProcessStatusChart").dxPieChart(option);
                                                 }
                                                 else {
@@ -771,104 +779,41 @@
                                             },
                                             GridCustomColumn: function () {
                                                 var columns = {};
+                                                columns["Visible"] = ["Callback", "DeadReason", "Description", "EmployeeName"];
                                                 //Call back
-                                                columns["3"] = [{
-                                                    dataField: "Callback",
-                                                    caption: "Callback",
-                                                    dataType: 'date'
-                                                }, {
-                                                    dataField: "LastUpdate",
-                                                    caption: "Last Update",
-                                                    dataType: 'date'
-                                                }];
-
-                                                columns["4"] = [{
-                                                    dataField: "DeadReason",
-                                                    caption: "Dead Reason",
-                                                }, {
-                                                    dataField: "Description",
-                                                    caption: "Description",
-                                                }, {
-                                                    dataField: "LastUpdate",
-                                                    caption: "Last Update",
-                                                    dataType: 'date'
-                                                }];
+                                                columns["3"] = ["Callback"];
+                                                //Dead end
+                                                columns["4"] = ["DeadReason","Description"];
 
                                                 return columns;
                                             },
                                             LoadGridLeads: function (statusKey) {
                                                 var tab = this;
-                                                var gridColumns = [{
-                                                    dataField: "LeadsName",
-                                                    caption: "Leads Name",
-                                                    width: 280,
-                                                    cellTemplate: function (container, options) {
-                                                        if (options.value != null) {
-                                                            var fieldHTML = '<a target="_blank" href="javascript:ViewLeadsInfo(\'' + options.data.BBLE + '\')">' + options.value + "</a>"
-                                                            container.html(fieldHTML);
-                                                        }
+
+                                                this.DataGridLeads.beginUpdate();
+
+                                                var visibleColumns = tab.GridCustomColumn()["Visible"];
+                                                if (visibleColumns) {
+                                                    for (var i = 0; i < visibleColumns.length; i++) {
+                                                        this.DataGridLeads.columnOption(visibleColumns[i], "visible", false);
                                                     }
-                                                }, {
-                                                    dataField: "BBLE",
-                                                    caption: "BBLE",
-                                                    width: 100
-                                                }];
+                                                }
 
                                                 var columns = tab.GridCustomColumn()[statusKey];
                                                 if (columns) {
                                                     for (var i = 0; i < columns.length; i++) {
-                                                        gridColumns.push(columns[i]);
+                                                        this.DataGridLeads.columnOption(columns[i], "visible", true);
                                                     }
                                                 } else {
-                                                    gridColumns.push({
-                                                        dataField: "EmployeeName",
-                                                        caption: "Employee Name"
-                                                    }, {
-                                                        dataField: "LastUpdate",
-                                                        caption: "Last Update",
-                                                        dataType: 'date'
-                                                    })
+                                                    this.DataGridLeads.columnOption("EmployeeName", "visible", true);
+                                                    this.DataGridLeads.columnOption("LastUpdate", "visible", true);                                                   
                                                 }
-
-                                                $("#gridLeads").dxDataGrid({
-                                                    dataSource: tab.DisplayView.GetLeadsData(statusKey),
-                                                    showColumnLines: false,
-                                                    showRowLines: true,
-                                                    rowAlternationEnabled: true,
-                                                    paging: { enabled: false },
-                                                    columns: gridColumns,
-                                                    summary: {
-                                                        totalItems: [{
-                                                            column: 'BBLE',
-                                                            summaryType: 'count'
-                                                        }]
-                                                    }
-                                                });
+                                               
+                                                var ds = tab.DisplayView.GetLeadsData(statusKey);                                               
+                                                this.DataGridLeads.option("dataSource", ds);                                                                                             
+                                                this.DataGridLeads.endUpdate();                                                
                                             }
-                                        };
-
-                                        //columns: [{
-                                        //    dataField: "LeadsName",
-                                        //    caption: "Leads Name",
-                                        //    width: 280,
-                                        //    cellTemplate: function (container, options) {
-                                        //        if (options.value != null) {
-                                        //            var fieldHTML = '<a target="_blank" href="javascript:ViewLeadsInfo(\'' + options.data.BBLE + '\')">' + options.value + "</a>"
-                                        //            container.html(fieldHTML);
-                                        //        }
-                                        //    }
-                                        //}, {
-                                        //    dataField: "BBLE",
-                                        //    caption: "BBLE",
-                                        //    width: 100
-                                        //}, {
-                                        //    dataField: "EmployeeName",
-                                        //    caption: "Employee Name"
-                                        //}, {
-                                        //    dataField: "LastUpdate",
-                                        //    caption: "Last Update",
-                                        //    dataType: 'date'
-                                        //}],
+                                        };                                     
                                     </script>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="Geo_Leads_tab">
@@ -883,25 +828,7 @@
         </div>
     </div>
 
-
     <script type="text/javascript">
-        function ViewLeadsInfo(bble) {
-            var url = '/ViewLeadsInfo.aspx?id=' + bble;
-            var left = (screen.width / 2) - (1350 / 2);
-            var top = (screen.height / 2) - (930 / 2);
-            window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
-        }
-
-        function LoadTeamInfo(teamName) {
-            return $.getJSON('/WCFDataServices/PortalReportService.svc/LoadTeamInfo/' + teamName).done(function (data) {
-                currentTeamInfo = data;
-                var total_agent_count = data.TeamAgentCount
-                $("#total_agent_count").html(total_agent_count)
-                $("#total_deal_count").html(currentTeamInfo.TotalDeals);
-                $('#teams_link').html(teamName);
-            });
-        }
-
         function BindAgents() {
             if (currentTeamInfo != null) {
                 $("#selAgents").html("");
@@ -1087,12 +1014,7 @@
                 });
             });
         }
-    </script>
 
-
-    <script>
-
-        var currentTeamInfo = null;
         var palette_color = ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7'];
         function loadCharts(office) {
 
@@ -1307,31 +1229,57 @@
         }
         //loadCharts("RonTeam");
     </script>
-    <script>
-        dropDownMenuData = <%= AllTameJson()%>
-    //dropDownMenuData = [
-    //    "Queens Team",
-    //    "Bronx Team",
-    //    "Rockaway Team"
 
-    //];
-    menuItemClicked = function (e) {
+    <script type="text/javascript">
 
-        DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000 });
-        //        $('#teams_link').html(e.itemData);
-        //officeDropDown.option("buttonText", e.itemData );
-        //loadCharts(e.itemData.replace("Office", '').trim());
-        agentActivityTab.ShowTab(e.itemData);
-        $.when(LoadTeamInfo(e.itemData)).done(function () {
-            LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users)
-        });
-    };
+        var currentTeamInfo = null;
+
+        function ViewLeadsInfo(bble) {
+            var url = '/ViewLeadsInfo.aspx?id=' + bble;
+            var left = (screen.width / 2) - (1350 / 2);
+            var top = (screen.height / 2) - (930 / 2);
+            window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+        }
+
+        function LoadTeamInfo(teamName) {
+            return $.getJSON('/WCFDataServices/PortalReportService.svc/LoadTeamInfo/' + teamName).done(function (data) {
+                currentTeamInfo = data;
+                var total_agent_count = data.TeamAgentCount
+                $("#total_agent_count").html(total_agent_count)
+                $("#total_deal_count").html(currentTeamInfo.TotalDeals);
+                $('#teams_link').html(teamName);
+            });
+        }
+
+        var dropDownMenuData = <%= AllTameJson()%>
+
+           menuItemClicked = function (e) {
+               DevExpress.ui.notify({ message: e.itemData + " Data Loaded", type: "success", displayTime: 2000 });
+               //        $('#teams_link').html(e.itemData);
+               //officeDropDown.option("buttonText", e.itemData );
+               //loadCharts(e.itemData.replace("Office", '').trim());
+               agentActivityTab.ShowTab(e.itemData);
+               $.when(LoadTeamInfo(e.itemData)).done(function () {
+                   LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users)
+               });
+           };
         var officeDropDown = $("#dropDownMenu").dxDropDownMenu({
             dataSource: dropDownMenuData,
             itemClickAction: menuItemClicked,
             buttonIcon: 'arrowdown',
         }).dxDropDownMenu("instance");
 
+        $(document).ready(function () {
+            agentActivityTab.InitalTab();
+            if (dropDownMenuData && dropDownMenuData.length > 0)
+                ShowTeamData(dropDownMenuData[0]);
+        });
+
+        function ShowTeamData(team) {
+            $.when(LoadTeamInfo(team)).done(function () {
+                agentActivityTab.ShowTab(team);
+            });
+        }
 
     </script>
 </asp:Content>

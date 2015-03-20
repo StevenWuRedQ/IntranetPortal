@@ -19,4 +19,7 @@ Public Interface ICommonService
     <OperationContract()>
     Sub UpdateLeadsSearchStatus(leadsSearchId As Integer, status As Integer)
 
+    <OperationContract>
+    Sub SendTeamActivityEmail(teamName As String)
+
 End Interface

@@ -42,7 +42,7 @@ Public Class Login
         Dim password = e.Parameter.Split("|")(1)
         Dim rememberMe = e.Parameter.Split("|")(2)
         If Membership.ValidateUser(name, password) Then
-            Dim names = StrConv(name, VbStrConv.ProperCase)
+            Dim names = Utility.FormatUserName(name) ' StrConv(name, VbStrConv.ProperCase)
             FormsAuthentication.SetAuthCookie(names, CBool(rememberMe))
 
             OnlineUser.Refresh(HttpContext.Current)
