@@ -47,6 +47,12 @@ Namespace PortalService
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/UpdateLeadsSearchStatus", ReplyAction:="http://tempuri.org/ICommonService/UpdateLeadsSearchStatusResponse")>  _
         Function UpdateLeadsSearchStatusAsync(ByVal leadsSearchId As Integer, ByVal status As Integer) As System.Threading.Tasks.Task
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendTeamActivityEmail", ReplyAction:="http://tempuri.org/ICommonService/SendTeamActivityEmailResponse")>  _
+        Sub SendTeamActivityEmail(ByVal teamName As String)
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendTeamActivityEmail", ReplyAction:="http://tempuri.org/ICommonService/SendTeamActivityEmailResponse")>  _
+        Function SendTeamActivityEmailAsync(ByVal teamName As String) As System.Threading.Tasks.Task
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -118,6 +124,14 @@ Namespace PortalService
         
         Public Function UpdateLeadsSearchStatusAsync(ByVal leadsSearchId As Integer, ByVal status As Integer) As System.Threading.Tasks.Task Implements PortalService.ICommonService.UpdateLeadsSearchStatusAsync
             Return MyBase.Channel.UpdateLeadsSearchStatusAsync(leadsSearchId, status)
+        End Function
+        
+        Public Sub SendTeamActivityEmail(ByVal teamName As String) Implements PortalService.ICommonService.SendTeamActivityEmail
+            MyBase.Channel.SendTeamActivityEmail(teamName)
+        End Sub
+        
+        Public Function SendTeamActivityEmailAsync(ByVal teamName As String) As System.Threading.Tasks.Task Implements PortalService.ICommonService.SendTeamActivityEmailAsync
+            Return MyBase.Channel.SendTeamActivityEmailAsync(teamName)
         End Function
     End Class
 End Namespace

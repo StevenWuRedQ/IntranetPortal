@@ -53,11 +53,14 @@ Public Class LeadsAndTaskRule
 
         Dim lds = Lead.GetAllActiveLeads()
         Log("Total Active Leads: " & lds.Count)
+        Dim NoRulesUser = IntranetPortal.Core.PortalSettings.GetValue("NoRulesUser")
 
         'Run Leads Rule
         For Each ld In lds
             Try
-                LeadsEscalationRule.Execute(ld)
+                If Not NoRulesUser.Contains(ld.EmployeeName) Then
+                    LeadsEscalationRule.Execute(ld)
+                End If
             Catch ex As Exception
                 Log("Exception when execute Leads Rule. BBLE: " & ld.BBLE & ", Employee: " & ld.EmployeeName & ", Exception: " & ex.Message, ex)
             End Try
@@ -137,6 +140,20 @@ Public Class EmailSummaryRule
 
         Return False
     End Function
+End Class
+
+Public Class AgentActivitySummaryRule
+    Inherits BaseRule
+
+    Public Overrides Sub Execute()
+        Dim teams = IntranetPortal.Team.GetAllTeams()
+
+        Using client As New PortalService.CommonServiceClient
+            For Each team In teams
+                client.SendTeamActivityEmail(team.Name)
+            Next
+        End Using
+    End Sub
 End Class
 
 Public Class LoopServiceRule
@@ -337,6 +354,7 @@ Public Class CompleteTaskRule
                 Log("Exception in Complete Task Rule. pInst: " & pInst.Id & " Process Name: " & pInst.DisplayName, ex)
             End Try
         Next
+
     End Sub
 
     Public Function ExpiredReminderTask(bble As String, taskId As Integer, pInstId As Integer) As Boolean
@@ -498,7 +516,7 @@ Public Class PendingAssignRule
             Dim li = LeadsInfo.GetInstance(ld.BBLE)
             If li IsNot Nothing Then
                 If Not li.IsUpdating Then
-                    li.AssignTo(ld.EmployeeName, ld.CreateBy)
+                    li.AssignTo(ld.EmployeeName, ld.CreateBy, False)
 
                     ld.Finish()
                 End If

@@ -37,6 +37,12 @@
   <wsdl:message name="ICommonService_UpdateLeadsSearchStatus_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateLeadsSearchStatusResponse" />
   </wsdl:message>
+  <wsdl:message name="ICommonService_SendTeamActivityEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendTeamActivityEmail" />
+  </wsdl:message>
+  <wsdl:message name="ICommonService_SendTeamActivityEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendTeamActivityEmailResponse" />
+  </wsdl:message>
   <wsdl:portType name="ICommonService">
     <wsdl:operation name="SendMessage">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendMessage" message="tns:ICommonService_SendMessage_InputMessage" />
@@ -57,6 +63,10 @@
     <wsdl:operation name="UpdateLeadsSearchStatus">
       <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/UpdateLeadsSearchStatus" message="tns:ICommonService_UpdateLeadsSearchStatus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/UpdateLeadsSearchStatusResponse" message="tns:ICommonService_UpdateLeadsSearchStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendTeamActivityEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICommonService/SendTeamActivityEmail" message="tns:ICommonService_SendTeamActivityEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICommonService/SendTeamActivityEmailResponse" message="tns:ICommonService_SendTeamActivityEmail_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICommonService" type="tns:ICommonService">
@@ -99,6 +109,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateLeadsSearchStatus">
       <soap:operation soapAction="http://tempuri.org/ICommonService/UpdateLeadsSearchStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTeamActivityEmail">
+      <soap:operation soapAction="http://tempuri.org/ICommonService/SendTeamActivityEmail" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

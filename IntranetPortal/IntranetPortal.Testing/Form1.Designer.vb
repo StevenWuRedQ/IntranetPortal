@@ -34,6 +34,8 @@ Partial Class Form1
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.btnInitialOwnerToken = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.txtReportToken = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Button1
@@ -140,11 +142,29 @@ Partial Class Form1
         Me.btnInitialOwnerToken.Text = "Initial HomeOwner Token"
         Me.btnInitialOwnerToken.UseVisualStyleBackColor = True
         '
+        'Button10
+        '
+        Me.Button10.Location = New System.Drawing.Point(431, 180)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(127, 23)
+        Me.Button10.TabIndex = 12
+        Me.Button10.Text = "Check Token"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'txtReportToken
+        '
+        Me.txtReportToken.Location = New System.Drawing.Point(431, 154)
+        Me.txtReportToken.Name = "txtReportToken"
+        Me.txtReportToken.Size = New System.Drawing.Size(100, 20)
+        Me.txtReportToken.TabIndex = 13
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(695, 261)
+        Me.Controls.Add(Me.txtReportToken)
+        Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.btnInitialOwnerToken)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
@@ -175,5 +195,7 @@ Partial Class Form1
     Friend WithEvents Button8 As System.Windows.Forms.Button
     Friend WithEvents Button9 As System.Windows.Forms.Button
     Friend WithEvents btnInitialOwnerToken As System.Windows.Forms.Button
+    Friend WithEvents Button10 As System.Windows.Forms.Button
+    Friend WithEvents txtReportToken As System.Windows.Forms.TextBox
 
 End Class

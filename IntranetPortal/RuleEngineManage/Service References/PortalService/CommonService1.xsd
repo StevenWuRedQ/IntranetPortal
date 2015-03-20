@@ -71,4 +71,16 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="SendTeamActivityEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="teamName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendTeamActivityEmailResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

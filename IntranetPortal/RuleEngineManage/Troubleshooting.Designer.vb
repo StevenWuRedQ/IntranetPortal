@@ -39,11 +39,37 @@ Partial Class Troubleshooting
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.txtRecycleTo = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtRecycleFrom = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtRecycleDate = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.tabEmail = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.btnEmailSend = New System.Windows.Forms.Button()
+        Me.cbTeams = New System.Windows.Forms.ComboBox()
+        Me.Panel1.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.tabEmail.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(49, 12)
+        Me.TextBox1.Location = New System.Drawing.Point(25, 6)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(127, 20)
         Me.TextBox1.TabIndex = 0
@@ -51,7 +77,7 @@ Partial Class Troubleshooting
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(3, 19)
+        Me.Label1.Location = New System.Drawing.Point(-182, -39)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(40, 13)
         Me.Label1.TabIndex = 1
@@ -59,7 +85,7 @@ Partial Class Troubleshooting
         '
         'btnLeadsRule
         '
-        Me.btnLeadsRule.Location = New System.Drawing.Point(49, 38)
+        Me.btnLeadsRule.Location = New System.Drawing.Point(25, 32)
         Me.btnLeadsRule.Name = "btnLeadsRule"
         Me.btnLeadsRule.Size = New System.Drawing.Size(75, 23)
         Me.btnLeadsRule.TabIndex = 2
@@ -68,7 +94,7 @@ Partial Class Troubleshooting
         '
         'txtTaskId
         '
-        Me.txtTaskId.Location = New System.Drawing.Point(49, 80)
+        Me.txtTaskId.Location = New System.Drawing.Point(25, 76)
         Me.txtTaskId.Name = "txtTaskId"
         Me.txtTaskId.Size = New System.Drawing.Size(127, 20)
         Me.txtTaskId.TabIndex = 3
@@ -76,7 +102,7 @@ Partial Class Troubleshooting
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(3, 83)
+        Me.Label2.Location = New System.Drawing.Point(-182, 25)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(43, 13)
         Me.Label2.TabIndex = 4
@@ -84,7 +110,7 @@ Partial Class Troubleshooting
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(49, 106)
+        Me.Button1.Location = New System.Drawing.Point(25, 102)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 5
@@ -93,7 +119,7 @@ Partial Class Troubleshooting
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(230, 38)
+        Me.Button2.Location = New System.Drawing.Point(222, 32)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(78, 23)
         Me.Button2.TabIndex = 6
@@ -102,7 +128,7 @@ Partial Class Troubleshooting
         '
         'txtRuleId
         '
-        Me.txtRuleId.Location = New System.Drawing.Point(230, 12)
+        Me.txtRuleId.Location = New System.Drawing.Point(222, 6)
         Me.txtRuleId.Name = "txtRuleId"
         Me.txtRuleId.Size = New System.Drawing.Size(127, 20)
         Me.txtRuleId.TabIndex = 7
@@ -110,7 +136,7 @@ Partial Class Troubleshooting
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(184, 15)
+        Me.Label3.Location = New System.Drawing.Point(176, 9)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(44, 13)
         Me.Label3.TabIndex = 8
@@ -118,7 +144,7 @@ Partial Class Troubleshooting
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(230, 106)
+        Me.Button3.Location = New System.Drawing.Point(253, 34)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(98, 23)
         Me.Button3.TabIndex = 9
@@ -127,7 +153,7 @@ Partial Class Troubleshooting
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(371, 106)
+        Me.Button4.Location = New System.Drawing.Point(12, 12)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(91, 23)
         Me.Button4.TabIndex = 10
@@ -136,7 +162,7 @@ Partial Class Troubleshooting
         '
         'Button5
         '
-        Me.Button5.Location = New System.Drawing.Point(371, 164)
+        Me.Button5.Location = New System.Drawing.Point(123, 12)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(114, 23)
         Me.Button5.TabIndex = 11
@@ -145,7 +171,7 @@ Partial Class Troubleshooting
         '
         'Button6
         '
-        Me.Button6.Location = New System.Drawing.Point(371, 135)
+        Me.Button6.Location = New System.Drawing.Point(409, 8)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(98, 23)
         Me.Button6.TabIndex = 12
@@ -155,7 +181,7 @@ Partial Class Troubleshooting
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(184, 83)
+        Me.Label4.Location = New System.Drawing.Point(207, 11)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(38, 13)
         Me.Label4.TabIndex = 14
@@ -163,14 +189,14 @@ Partial Class Troubleshooting
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(230, 80)
+        Me.txtName.Location = New System.Drawing.Point(253, 8)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(127, 20)
         Me.txtName.TabIndex = 13
         '
         'Button7
         '
-        Me.Button7.Location = New System.Drawing.Point(230, 164)
+        Me.Button7.Location = New System.Drawing.Point(253, 92)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(98, 23)
         Me.Button7.TabIndex = 15
@@ -179,39 +205,237 @@ Partial Class Troubleshooting
         '
         'Button8
         '
-        Me.Button8.Location = New System.Drawing.Point(230, 135)
+        Me.Button8.Location = New System.Drawing.Point(253, 63)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(98, 23)
         Me.Button8.TabIndex = 16
         Me.Button8.Text = "Extend Recycle"
         Me.Button8.UseVisualStyleBackColor = True
         '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(66, 89)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(112, 22)
+        Me.Button9.TabIndex = 18
+        Me.Button9.Text = "Undo Recycle"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
+        'txtRecycleTo
+        '
+        Me.txtRecycleTo.Location = New System.Drawing.Point(66, 34)
+        Me.txtRecycleTo.Name = "txtRecycleTo"
+        Me.txtRecycleTo.Size = New System.Drawing.Size(114, 20)
+        Me.txtRecycleTo.TabIndex = 21
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(19, 11)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(31, 13)
+        Me.Label5.TabIndex = 20
+        Me.Label5.Text = "Emp:"
+        '
+        'txtRecycleFrom
+        '
+        Me.txtRecycleFrom.Location = New System.Drawing.Point(66, 8)
+        Me.txtRecycleFrom.Name = "txtRecycleFrom"
+        Me.txtRecycleFrom.Size = New System.Drawing.Size(114, 20)
+        Me.txtRecycleFrom.TabIndex = 19
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(24, 41)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(23, 13)
+        Me.Label6.TabIndex = 22
+        Me.Label6.Text = "To:"
+        '
+        'txtRecycleDate
+        '
+        Me.txtRecycleDate.Location = New System.Drawing.Point(66, 63)
+        Me.txtRecycleDate.Name = "txtRecycleDate"
+        Me.txtRecycleDate.Size = New System.Drawing.Size(114, 20)
+        Me.txtRecycleDate.TabIndex = 23
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(24, 66)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(33, 13)
+        Me.Label7.TabIndex = 24
+        Me.Label7.Text = "Date:"
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.Button4)
+        Me.Panel1.Controls.Add(Me.Button5)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(566, 46)
+        Me.Panel1.TabIndex = 25
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.tabEmail)
+        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl1.Location = New System.Drawing.Point(0, 46)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(566, 355)
+        Me.TabControl1.TabIndex = 26
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.Button3)
+        Me.TabPage1.Controls.Add(Me.txtRecycleTo)
+        Me.TabPage1.Controls.Add(Me.Label5)
+        Me.TabPage1.Controls.Add(Me.Label7)
+        Me.TabPage1.Controls.Add(Me.Button6)
+        Me.TabPage1.Controls.Add(Me.Button8)
+        Me.TabPage1.Controls.Add(Me.Button7)
+        Me.TabPage1.Controls.Add(Me.Label6)
+        Me.TabPage1.Controls.Add(Me.Button9)
+        Me.TabPage1.Controls.Add(Me.Label4)
+        Me.TabPage1.Controls.Add(Me.txtRecycleFrom)
+        Me.TabPage1.Controls.Add(Me.txtRecycleDate)
+        Me.TabPage1.Controls.Add(Me.txtName)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(558, 329)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "Undo Recycle"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.TextBox1)
+        Me.TabPage2.Controls.Add(Me.Button1)
+        Me.TabPage2.Controls.Add(Me.txtTaskId)
+        Me.TabPage2.Controls.Add(Me.btnLeadsRule)
+        Me.TabPage2.Controls.Add(Me.Button2)
+        Me.TabPage2.Controls.Add(Me.txtRuleId)
+        Me.TabPage2.Controls.Add(Me.Label3)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(558, 329)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Leads and Tasks"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'tabEmail
+        '
+        Me.tabEmail.Controls.Add(Me.TableLayoutPanel1)
+        Me.tabEmail.Location = New System.Drawing.Point(4, 22)
+        Me.tabEmail.Name = "tabEmail"
+        Me.tabEmail.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabEmail.Size = New System.Drawing.Size(558, 329)
+        Me.tabEmail.TabIndex = 2
+        Me.tabEmail.Text = "Email Template"
+        Me.tabEmail.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 2
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 0)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(552, 323)
+        Me.TableLayoutPanel1.TabIndex = 0
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.cbTeams)
+        Me.GroupBox1.Controls.Add(Me.btnEmailSend)
+        Me.GroupBox1.Controls.Add(Me.Label9)
+        Me.GroupBox1.Controls.Add(Me.TextBox3)
+        Me.GroupBox1.Controls.Add(Me.Label8)
+        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(270, 317)
+        Me.GroupBox1.TabIndex = 0
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Team Activity Email"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(6, 67)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(68, 13)
+        Me.Label8.TabIndex = 1
+        Me.Label8.Text = "Team Name:"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(80, 90)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(114, 20)
+        Me.TextBox3.TabIndex = 2
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(6, 93)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(60, 13)
+        Me.Label9.TabIndex = 3
+        Me.Label9.Text = "Send User:"
+        '
+        'btnEmailSend
+        '
+        Me.btnEmailSend.Location = New System.Drawing.Point(119, 116)
+        Me.btnEmailSend.Name = "btnEmailSend"
+        Me.btnEmailSend.Size = New System.Drawing.Size(75, 23)
+        Me.btnEmailSend.TabIndex = 4
+        Me.btnEmailSend.Text = "Send"
+        Me.btnEmailSend.UseVisualStyleBackColor = True
+        '
+        'cbTeams
+        '
+        Me.cbTeams.FormattingEnabled = True
+        Me.cbTeams.Location = New System.Drawing.Point(80, 63)
+        Me.cbTeams.Name = "cbTeams"
+        Me.cbTeams.Size = New System.Drawing.Size(114, 21)
+        Me.cbTeams.TabIndex = 5
+        '
         'Troubleshooting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(496, 217)
-        Me.Controls.Add(Me.Button8)
-        Me.Controls.Add(Me.Button7)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.txtName)
-        Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.txtRuleId)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.txtTaskId)
-        Me.Controls.Add(Me.btnLeadsRule)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.TextBox1)
+        Me.ClientSize = New System.Drawing.Size(566, 401)
+        Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.Panel1)
         Me.Name = "Troubleshooting"
         Me.Text = "Troubleshooting"
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
+        Me.tabEmail.ResumeLayout(False)
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
@@ -231,4 +455,23 @@ Partial Class Troubleshooting
     Friend WithEvents txtName As System.Windows.Forms.TextBox
     Friend WithEvents Button7 As System.Windows.Forms.Button
     Friend WithEvents Button8 As System.Windows.Forms.Button
+    Friend WithEvents Button9 As System.Windows.Forms.Button
+    Friend WithEvents txtRecycleTo As System.Windows.Forms.TextBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents txtRecycleFrom As System.Windows.Forms.TextBox
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents txtRecycleDate As System.Windows.Forms.TextBox
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents tabEmail As System.Windows.Forms.TabPage
+    Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label8 As System.Windows.Forms.Label
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents btnEmailSend As System.Windows.Forms.Button
+    Friend WithEvents cbTeams As System.Windows.Forms.ComboBox
 End Class

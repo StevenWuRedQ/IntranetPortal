@@ -54,4 +54,38 @@
             IntranetPortal.RulesEngine.ServiceLog.Log("Error messager: ", ex)
         End Try
     End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        Dim name = txtRecycleFrom.Text
+        Dim recycleTo = txtRecycleTo.Text
+        Dim startDate = txtRecycleDate.Text
+
+        Dim result = IntranetPortal.RecycleManage.UndoRecycle(name, recycleTo, startDate)
+        MessageBox.Show(String.Format("{0} leads are undo recycled.", result))
+    End Sub
+
+    Private Sub Troubleshooting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub btnEmailSend_Click(sender As Object, e As EventArgs) Handles btnEmailSend.Click
+        Using client As New PortalService.CommonServiceClient
+            Try
+                client.SendTeamActivityEmail(cbTeams.Text)
+                MessageBox.Show("Mail is send!")
+            Catch ex As Exception
+                MessageBox.Show("Exception: " & ex.Message)
+            End Try
+        End Using
+    End Sub
+
+    Private Sub txtTeamName_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        If TabControl1.SelectedTab.Name = "tabEmail" Then
+            cbTeams.DataSource = IntranetPortal.Team.GetAllTeams().Select(Function(t) t.Name).ToList
+        End If
+    End Sub
 End Class
