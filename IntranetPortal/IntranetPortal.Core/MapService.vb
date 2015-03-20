@@ -29,29 +29,62 @@ Public Class MapService
 
     Public Function LoadLotLayers(neLat As Double, neLng As Double, swLat As Double, swLng As Double) As List(Of Feature)
         Dim mapBound = GetPolygon(neLat, neLng, swLat, swLng)
-
+        
         Dim result As New List(Of Feature)
         Using ctx As New MapDataEntitiesContainer
 
             Dim lots = ctx.PortalLotInfoes.Where(Function(b) mapBound.Contains(b.ogr_geometry))
 
             For Each lot In lots.ToList
-                Dim featureProperties As New Dictionary(Of String, Object)
-
-                featureProperties.Add("title", lot.bbl)
-                featureProperties.Add("BBLE", lot.bbl)
-
-                featureProperties.Add("description", lot.LeadsName)
-                featureProperties.Add("Team", lot.Team)
-                featureProperties.Add("color", lot.Color)
-                Dim polygon = SqlGeometry.Parse(New SqlString(lot.ogr_geometry.WellKnownValue.WellKnownText))
-                Dim obj = GeoJSON.Net.MsSqlSpatial.MsSqlSpatialConvert.ToGeoJSONGeometry(polygon)
-                Dim model = New Feature(obj, featureProperties, lot.ogr_fid.ToString)
-                result.Add(model)
+                
+                result.Add(buildLotGeoJson(lot))
             Next
         End Using
 
         Return result
+    End Function
+
+    Public Function LoadLotByBBLE(BBLE As String) As List(Of Feature)
+
+
+        Dim result As New List(Of Feature)
+        Using ctx As New MapDataEntitiesContainer
+
+            Dim lots = ctx.PortalLotInfoes.Where(Function(b) b.BBLE IsNot Nothing And b.BBLE > BBLE).OrderBy(Function(b) b.BBLE).Take(100)
+
+            For Each lot In lots.ToList
+                result.Add(buildLotGeoJson(lot))
+            Next
+        End Using
+
+        Return result
+    End Function
+    Function LoadLotByTeam(Team As String) As List(Of Feature)
+        Dim result As New List(Of Feature)
+        Using ctx As New MapDataEntitiesContainer
+
+            Dim lots = ctx.PortalLotInfoes.Where(Function(b) b.BBLE IsNot Nothing And b.Team = Team).OrderBy(Function(b) b.BBLE).Take(100)
+
+            For Each lot In lots.ToList
+                result.Add(buildLotGeoJson(lot))
+            Next
+        End Using
+
+        Return result
+    End Function
+    Function buildLotGeoJson(lot As PortalLotInfo) As Feature
+        Dim featureProperties As New Dictionary(Of String, Object)
+
+        featureProperties.Add("title", lot.BBLE)
+        featureProperties.Add("BBLE", lot.bbl)
+
+        featureProperties.Add("description", lot.LeadsName)
+        featureProperties.Add("Team", lot.Team)
+        featureProperties.Add("color", lot.Color)
+        Dim polygon = SqlGeometry.Parse(New SqlString(lot.ogr_geometry.WellKnownValue.WellKnownText))
+        Dim obj = GeoJSON.Net.MsSqlSpatial.MsSqlSpatialConvert.ToGeoJSONGeometry(polygon)
+        Dim model = New Feature(obj, featureProperties, lot.ogr_fid.ToString)
+        Return model
     End Function
 
     Private Function GetPolygon(neLat As Double, neLng As Double, swLat As Double, swLng As Double) As System.Data.Entity.Spatial.DbGeometry
@@ -60,9 +93,22 @@ Public Class MapService
         Return DbGeometry.PolygonFromText(polygonText, SRID)
     End Function
 
-    Function GetZipCountInfo(zip As String) As Object
-        Throw New NotImplementedException
+    
+
+    Function LoadALLTeamColor() As List(Of Dictionary(Of String, String))
+        Dim colors = New List(Of Dictionary(Of String, String))
+        Using ctx As New MapDataEntitiesContainer
+            For Each c In ctx.PortalLotInfoes.Where(Function(l) l.Team IsNot Nothing).Select(Function(l) New With {.Team = l.Team, .Color = l.Color}).Distinct.ToList()
+                Dim tc = New Dictionary(Of String, String)
+                tc.Add("Team", c.Team)
+                tc.Add("Color", c.Color)
+                colors.Add(tc)
+            Next
+            Return colors
+        End Using
     End Function
+
+    
 
 End Class
 
