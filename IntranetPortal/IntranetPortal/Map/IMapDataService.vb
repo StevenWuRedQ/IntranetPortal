@@ -131,7 +131,7 @@ Partial Public Class MapDataService
 
 
            
-            cList.AddRange(ctx.MapDataSets.Where(Function(m) m.KeyCode = zip AndAlso m.Count <> 0 AndAlso Not m.TypeName.Contains("Transactions")).ToList())
+            cList.AddRange(ctx.MapDataSets.Where(Function(m) m.KeyCode = zip AndAlso m.Count <> 0 AndAlso Not m.TypeName.Contains("Transactions")).OrderBy(Function(s) s.Id).ToList())
 
 
 

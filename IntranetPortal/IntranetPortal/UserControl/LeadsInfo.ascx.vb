@@ -14,6 +14,8 @@ Public Class LeadsInfo1
             If Not String.IsNullOrEmpty(Request.QueryString("c")) Then
                 CategoryName = Request.QueryString("c")
                 category = Utility.GetLeadStatus(CategoryName)
+               
+              
 
                 If CategoryName = "Door Knock" Then
                     doorKnockMapPanel.Visible = True
@@ -552,7 +554,7 @@ Public Class LeadsInfo1
 
     Protected Sub aspxPopupSchedule_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         popupContentSchedule.Visible = True
-
+        cbMgr.DataBind()
         If Not String.IsNullOrEmpty(e.Parameter) Then
             If (e.Parameter.StartsWith("Clear")) Then
                 ClearSchedulePopup()
@@ -695,6 +697,18 @@ Public Class LeadsInfo1
                     Throw New Exception("This address already exist.")
                 End If
             End Using
+        End If
+    End Sub
+
+    Protected Sub cbMgr_DataBinding(sender As Object, e As EventArgs)
+        If cbMgr.Items.Count <= 0 Then
+            Dim managerDataScorce = Employee.GetEmpOfficeManagers(Page.User.Identity.Name).Where(Function(n) n <> Page.User.Identity.Name).Distinct.ToList
+            Dim dataScorce = managerDataScorce.Select(Function(l) New With {.Text = l, .Value = l}).ToList
+            dataScorce.Insert(0, New With {.Text = "Any Manager", .Value = "*"})
+            dataScorce.Add(New With {.Text = "No Manager Needed", .Value = ""})
+            For Each it In dataScorce
+                cbMgr.Items.Add(New ListEditItem(it.Text, it.Value))
+            Next
         End If
     End Sub
 End Class

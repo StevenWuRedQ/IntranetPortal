@@ -696,14 +696,14 @@
                                                     <dx:LayoutItem Caption="Manager">
                                                         <LayoutItemNestedControlCollection>
                                                             <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                                                <dx:ASPxComboBox runat="server" Width="100%" ID="cbMgr" CssClass="edit_drop">
-                                                                    <Items>
+                                                                <dx:ASPxComboBox runat="server" Width="100%" ID="cbMgr" CssClass="edit_drop" OnDataBinding="cbMgr_DataBinding">
+                                                                    <%--<Items>
                                                                         <dx:ListEditItem Text="Any Manager" Value="*" />
                                                                         <dx:ListEditItem Text="Ron Borovinsky" Value="Ron Borovinsky" />
                                                                         <dx:ListEditItem Text="Michael Gendin" Value="Michael Gendin" />
                                                                         <dx:ListEditItem Text="Allen Glover" Value="Allen Glover" />
                                                                         <dx:ListEditItem Text="No Manager Needed" Value="" />
-                                                                    </Items>
+                                                                    </Items>--%>
                                                                 </dx:ASPxComboBox>
                                                             </dx:LayoutItemNestedControlContainer>
                                                         </LayoutItemNestedControlCollection>

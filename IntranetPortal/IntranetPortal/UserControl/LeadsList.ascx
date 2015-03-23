@@ -326,12 +326,9 @@
         temBBLE = BBLE;
         AspPopupColorMark.ShowAtElement(e);
     }
-    function click_item(e) {
-        var index = $("li").index(e)
-        index++;
-        if (index == $(e).parent().children().length) {
-            index = 0;
-        }
+    function click_item(e,index) {
+      
+        
         onColoMarkClick(index, e);
 
         $("#color_drop").css("top", "-1000px")
@@ -379,8 +376,8 @@
         .arrow_box:after {
             border-color: rgba(255, 255, 255, 0);
             border-bottom-color: #fff;
-            border-width: 11px;
-            margin-left: -11px;
+            border-width: 10px;
+            margin-left: -10px;
         }
 
         .arrow_box:before {
@@ -389,16 +386,26 @@
             border-width: 11px;
             margin-left: -11px;
         }
+        .color_star
+        {
+            cursor:pointer;
+        }
 </style>
 <dx:ASPxCallback runat="server" ID="MarkColorCallBack" OnCallback="MarkColorCallBack_Callback" ClientInstanceName="MarkColorCallBack"></dx:ASPxCallback>
 
 
-    <div class="color_drop arrow_box" style="position: absolute; left: -100px; top: -1000px; z-index: 10000;">
+    <div id="color_drop" class=" arrow_box" style="position: absolute; left: 100px; top: 100px; z-index: 10000;">
         <div style="padding: 10px 15px">
             <div>Flag Tihis Leads:</div>
-            <div class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #a820e1; display: inline-block">&nbsp;</div>
-            <div class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #ec471b; display: inline-block">&nbsp;</div>
-            <div class="list-group-item icon_btn color_list diagonal" onclick="click_item(this)" style="display: inline-block"><span style="margin-top: 5px;">Clear</span> </div>
+            <div class="list-group-item icon_btn color_list" onclick="click_item(this,1)" style=" display: inline-block">
+                <i class="fa fa-circle" style="color: #a820e1;font-size:32px"></i>
+            </div>
+            <div class="list-group-item icon_btn color_list" onclick="click_item(this,2)" style=" display: inline-block">
+                 <i class="fa fa-circle" style="color: #ec471b;font-size:32px"></i>
+            </div>
+            <div class="icon_btn color_list diagonal" onclick="click_item(this,0)" style=" border:none;display: inline-block">
+                <i class="fa  fa-times-circle" style="font-size:32px"></i>
+            </div>
         </div>
     </div>
 
@@ -421,14 +428,7 @@
                 </div>
             </div>
         </div>
-        <div class="arrow_box">
-            <div style="padding: 10px 15px">
-                <div>Flag Tihis Leads:</div>
-                <div class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #a820e1; display: inline-block">&nbsp;</div>
-                <div class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #ec471b; display: inline-block">&nbsp;</div>
-                <div class="list-group-item icon_btn color_list diagonal" onclick="click_item(this)" style="display: inline-block"><span style="margin-top: 5px;">Clear</span> </div>
-            </div>
-        </div>
+       
 
         <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
@@ -917,9 +917,9 @@
             p = tmpCursor;
         }
         var color_drop = $("#color_drop");
-
-        color_drop.css("left", (p.left - 20) + "px");
-        color_drop.css("top", (p.top - 20) + 'px');
+       
+        color_drop.css("left", (p.left - 10) + "px");
+        color_drop.css("top", (p.top - 5) + 'px');
         temStar = e;
     }
     document.onmousemove = function (e) {

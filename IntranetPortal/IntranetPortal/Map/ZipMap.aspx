@@ -343,15 +343,22 @@
 
                         //$('#tdLeadsCount').html(findCountNum(zip));
                         var zipCountData = data;
-                        html = $('#tablehead')[0].outerHTML;
+                        var html = $('#tablehead')[0].outerHTML;
+                        var team_info_html = '';
                         var source = $("#zipCountTrTemplate").html();
                         var template = Handlebars.compile(source);
                         for (var i = 0; i < zipCountData.length; i++) {
 
                             var context = zipCountData[i];
-                            html += template(context);
+                            if (context.TypeName.indexOf("Team") > 0) {
+                                team_info_html += template(context);
+                            } else {
+                                html += template(context);
+                            }
+
                         }
                         $("#zipCountTable").html(html);
+                        $("#team_leads_table").html(team_info_html);
                         //$(".ZipCount").each(function (index) {
                         //    var c = FindNumberByName(this.id, zip);
 
@@ -871,6 +878,12 @@
                 font-size: 14px;
                 color: #77787b !important;
             }
+
+            .info_table {
+                width: 100%;
+                font-size: 14px;
+                color: #77787b !important;
+            }
         </style>
 
         <script id="zipCountTrTemplate" type="text/x-handlebars-template">
@@ -882,7 +895,7 @@
                 <td>{{Transactions}}</td>
             </tr>
         </script>
-        <div id="divMsgTest" class=" message message_popup" style="top: -500px; right: 40px;width:427px">
+        <div id="divMsgTest" class=" message message_popup" style="top: -500px; right: 40px; width: 427px">
             <div class="msgtitle message_popup_title">
 
                 <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa fa-file-excel-o with_circle message_pupup_icon" style="cursor:pointer"  title="Export to Excel"></i>'></asp:LinkButton>
@@ -890,14 +903,40 @@
                 <span style="float: right; line-height: 30px; font-weight: 600; cursor: pointer; font-size: 18px" onclick="HideMessages()"><i class="fa fa-times" style="color: #2e2f31"></i></span>
             </div>
             <div class="message_pupup_content">
-                <table style="width: 100%; font-size: 14px; color: #77787b !important;" id="zipCountTable" class="table table-striped">
-                    <tr id="tablehead">
-                        <th>Type Name </th>
-                        <th>Count </th>
-                        <th>Percent</th>
-                        <th>Transactions</th>
-                    </tr>
-                </table>
+                <div role="tabpanel">
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#team_leads" aria-controls="team_leads" role="tab" data-toggle="tab">Team Leads</a></li>
+                        <li role="presentation"><a href="#leads_infos" aria-controls="leads_infos" role="tab" data-toggle="tab">Leads Infos</a></li>
+
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="team_leads">
+                            <div>
+                                <table  class="table table-striped info_table " >
+                                    <tbody id="team_leads_table"></tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="leads_infos">
+                            <table id="zipCountTable" class="info_table table table-striped">
+                                <tr id="tablehead">
+                                    <th>Type Name </th>
+                                    <th>Count </th>
+                                    <th>Percent</th>
+                                    <th>Transactions</th>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
