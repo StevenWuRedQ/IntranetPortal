@@ -122,39 +122,39 @@ Public Class LoadFileFromSharepoint
         DocumentService.UploadFile(cate, fileUpload.FileBytes, fileUpload.FileName, "123")
         Return
 
-        Dim userName = "georgev@gvs4u.org"
-        Dim passwordstr = "Pupamutata1234$"
-        Dim serverUrl = "https://gvs4uinc.sharepoint.com"
+        'Dim userName = "georgev@gvs4u.org"
+        'Dim passwordstr = "Pupamutata1234$"
+        'Dim serverUrl = "https://gvs4uinc.sharepoint.com"
 
-        Using ClientContext As New ClientContext(serverUrl)
-            Dim password As New SecureString
-            Array.ForEach(passwordstr.ToCharArray, Sub(c)
-                                                       password.AppendChar(c)
-                                                   End Sub)
+        'Using ClientContext As New ClientContext(serverUrl)
+        '    Dim password As New SecureString
+        '    Array.ForEach(passwordstr.ToCharArray, Sub(c)
+        '                                               password.AppendChar(c)
+        '                                           End Sub)
 
-            Dim credentials As New SharePointOnlineCredentials(userName, password)
-            ClientContext.Credentials = credentials
+        '    Dim credentials As New SharePointOnlineCredentials(userName, password)
+        '    ClientContext.Credentials = credentials
 
-            Dim lists = ClientContext.Web.Lists.GetByTitle("Documents")
-            ClientContext.ExecuteQuery()
+        '    Dim lists = ClientContext.Web.Lists.GetByTitle("Documents")
+        '    ClientContext.ExecuteQuery()
 
-            Dim fileUrl = "/Shared Documents/" & fileUpload.FileName
+        '    Dim fileUrl = "/Shared Documents/" & fileUpload.FileName
 
-            Using fs As New MemoryStream(fileUpload.FileBytes)
-                Microsoft.SharePoint.Client.File.SaveBinaryDirect(ClientContext, fileUrl, fs, True)
-            End Using
+        '    Using fs As New MemoryStream(fileUpload.FileBytes)
+        '        Microsoft.SharePoint.Client.File.SaveBinaryDirect(ClientContext, fileUrl, fs, True)
+        '    End Using
 
-            Dim userRoleAssignments As New List(Of UserRoleAssignment)
-            userRoleAssignments.Add(New UserRoleAssignment With
-                                    {.UserId = "Everyone",
-                                        .Role = Sharing.Role.View
-                                        })
-            Dim returnValue = DocumentSharingManager.UpdateDocumentSharingInfo(ClientContext, serverUrl & fileUrl, userRoleAssignments, False, True, True, "", True)
-            ClientContext.ExecuteQuery()
+        '    Dim userRoleAssignments As New List(Of UserRoleAssignment)
+        '    userRoleAssignments.Add(New UserRoleAssignment With
+        '                            {.UserId = "Everyone",
+        '                                .Role = Sharing.Role.View
+        '                                })
+        '    Dim returnValue = DocumentSharingManager.UpdateDocumentSharingInfo(ClientContext, serverUrl & fileUrl, userRoleAssignments, False, True, True, "", True)
+        '    ClientContext.ExecuteQuery()
 
-            GetServerClient()
-            Return
-        End Using
+        '    GetServerClient()
+        '    Return
+        'End Using
         '    ClientContext.Load(lists)
         '    Dim camlQuery As New CamlQuery
         '    camlQuery.ViewXml = "<View Scope='RecursiveAll'></View>"

@@ -175,6 +175,13 @@
     <Reference Include="PortalThemeAssembly">
       <HintPath>..\..\Theme\PortalTheme\PortalThemeAssembly.dll</HintPath>
     </Reference>
+    <Reference Include="Spire.License">
+      <HintPath>DLL\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=2.8.63.5040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Spire.Pdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -876,6 +883,13 @@
       <DependentUpon>UploadFileToSharepoint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PdfCreator.aspx.designer.vb">
+      <DependentUpon>PdfCreator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PdfCreator.aspx.vb">
+      <DependentUpon>PdfCreator.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="PhoneUI\PhoneCall.aspx.designer.vb">
       <DependentUpon>PhoneCall.aspx</DependentUpon>
     </Compile>
@@ -1456,6 +1470,7 @@
     <Content Include="DLL\MyIdealProp.Workflow.Client.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.Core.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.DBPersistence.dll" />
+    <Content Include="DLL\Spire.Pdf.dll" />
     <Content Include="DownloadFile.aspx" />
     <Content Include="EmailTemplate\ActivitySummary.ascx" />
     <Content Include="EmailTemplate\EmailSummary.aspx" />
@@ -1604,6 +1619,7 @@
     <Content Include="OneDrive\Callback.html" />
     <Content Include="OneDrive\LoadFileFromSharepoint.aspx" />
     <Content Include="OneDrive\UploadFileToSharepoint.aspx" />
+    <Content Include="PdfCreator.aspx" />
     <Content Include="pdfViewer\build\pdf.js" />
     <Content Include="pdfViewer\build\pdf.worker.js" />
     <Content Include="pdfViewer\web\compatibility.js" />

@@ -114,6 +114,10 @@ Partial Public Class Lead
                 If IntranetPortal.Employee.GetDeptUsers(dept).Contains(owner) Then
                     Return True
                 End If
+
+                If owner.Contains(dept & " Office") Then
+                    Return True
+                End If
             End If
         Next
 

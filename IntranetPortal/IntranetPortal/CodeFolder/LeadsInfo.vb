@@ -665,6 +665,14 @@
                                                                                   Return Not String.IsNullOrEmpty(li.TaxLiensAmount)
                                                                               End Function))
 
+            str.Add(New Indicator("LPDefandant", "Lien is in different name than Deed Holder. Check Acris to ensure this is a good lead.", Function(li)
+                                                                                                                                               If li.LisPens IsNot Nothing AndAlso li.LisPens.Count > 0 Then
+                                                                                                                                                   Return Not Utility.IsSimilarName(li.LisPens(0).Defendant, li.Owner)
+                                                                                                                                               End If
+
+                                                                                                                                               Return False
+                                                                                                                                           End Function))
+
             Return str
         End Get
     End Property

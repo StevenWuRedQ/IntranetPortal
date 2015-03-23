@@ -54,11 +54,11 @@ Public Class DataWCFService
 
     Private Shared Function GetLocateReport(orderNum As Integer, bble As String, name As String, address1 As String, address2 As String, city As String, state As String, zip As String, country As String) As DataAPI.TLOLocateReportOutput
         If Not Core.TLOApiLog.IsServiceOn Then
-            Throw New Exception("TLO Call Service is temporary closed. Please try later.")
+            Throw New Exception("HomeOwner Service is temporary closed. Please try later.")
         End If
 
         If Core.TLOApiLog.LimiteIsExceed Then
-            Throw New Exception("TLO Call Limit is reached. Please contact Admin!")
+            Throw New Exception("HomeOwner Load Limit is reached. Please contact Admin!")
         End If
 
         Using client As New DataAPI.WCFMacrosClient
@@ -431,6 +431,9 @@ Public Class DataWCFService
 
                 'Get latest sale info
                 GetLatestSalesInfo(bble)
+
+                context.Entry(li).Reload()
+                LeadsInfo.AddIndicator("LPDefandant", li, GetCurrentIdentityName())
 
                 Try
                     'Update Taxliens data

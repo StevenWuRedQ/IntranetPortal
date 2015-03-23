@@ -60,7 +60,7 @@
                     If Not String.IsNullOrEmpty(bble) Then
                         'check if this leads is waiting manager approval
                         Dim ld = IntranetPortal.Lead.GetInstance(bble)
-                        If ld.Status = IntranetPortal.LeadStatus.MgrApprovalInWf Then
+                        If ld IsNot Nothing AndAlso ld.Status = IntranetPortal.LeadStatus.MgrApprovalInWf Then
                             Response.Clear()
                             Response.Write("This leads is pending for manager approval. Please wait.")
                             Response.End()

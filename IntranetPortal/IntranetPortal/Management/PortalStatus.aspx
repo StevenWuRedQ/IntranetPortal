@@ -114,10 +114,10 @@
                         </dx:ASPxRoundPanel>
                     </td>
                     <td style="vertical-align: top">
-                        <dx:ASPxRoundPanel HeaderText="Send Email" runat="server" Width="100%">                                                        
+                        <dx:ASPxRoundPanel HeaderText="Send Email" runat="server" Width="100%">
                             <PanelCollection>
                                 <dx:PanelContent>
-                                    <table style="width:500px">
+                                    <table style="width: 500px">
                                         <tr style="margin-top: 3px; height: 25px">
                                             <td>To:</td>
                                             <td>
@@ -140,6 +140,8 @@
                                             <td></td>
                                             <td style="padding-top: 3px;">
                                                 <dx:ASPxButton Text="Send Email" runat="server" ID="ASPxButton1" OnClick="ASPxButton1_Click"></dx:ASPxButton>
+                                                <dx:ASPxButton Text="Send All Email" runat="server" ID="ASPxButton2" OnClick="ASPxButton2_Click"></dx:ASPxButton>
+
                                                 <dx:ASPxLabel runat="server" ID="lblResult"></dx:ASPxLabel>
                                             </td>
                                         </tr>

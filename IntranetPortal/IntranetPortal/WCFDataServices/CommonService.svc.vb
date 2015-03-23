@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports Spire.Pdf
 
 ' NOTE: You can use the "Rename" command on the context menu to change the class name "CommonService" in code, svc and config file together.
 ' NOTE: In order to launch WCF Test Client for testing this service, please select CommonService.svc or CommonService.svc.vb at the Solution Explorer and start debugging.
@@ -60,14 +61,18 @@ Public Class CommonService
         '    End If
         'Next
 
-        toAdds.Add("chris@gvs4u.com")
+        toAdds.Add("ron@myidealprop.com")
 
         Dim emailData As New Dictionary(Of String, String)
         emailData.Add("Body", LoadTeamActivityEmail(objTeam))
         emailData.Add("Date", DateTime.Today.ToString("m"))
 
-        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData)
+
+
+        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "chris@gvs4u.com", "TeamActivitySummary", emailData)
     End Sub
+
+    
 
     Private Function LoadTeamActivityEmail(objTeam As Team) As String
         Dim ts As ActivitySummary

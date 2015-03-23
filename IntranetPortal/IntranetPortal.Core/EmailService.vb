@@ -5,6 +5,8 @@ Imports System.IO
 Imports System.Data.SqlClient
 Imports System.Data.Entity.Core.EntityClient
 Imports System.Web.Script.Serialization
+Imports System.Text.RegularExpressions
+Imports System.Globalization
 
 Public Class EmailService
     Public Shared Sub SendMail()
@@ -35,7 +37,60 @@ Public Class EmailService
         End If
     End Sub
 
+    Public Shared Function SendGroupEmail(toAddes As List(Of String), subject As String, body As String, attachments As List(Of String)) As Boolean
+
+        Dim util As New RegexUtilities()
+
+        Dim tmpAttachs As New Dictionary(Of String, String)
+
+        Dim Message As New Mail.MailMessage()
+        If toAddes Is Nothing Or toAddes.Count = 0 Then
+            Throw New Exception("Address can't be empty.")
+        Else
+            For Each add In toAddes
+                If util.IsValidEmail(add) Then
+                    Message.Bcc.Add(add)
+                End If
+            Next
+        End If
+
+        Message.Subject = subject
+        Message.Body = body
+        Message.IsBodyHtml = True
+
+        If attachments IsNot Nothing AndAlso attachments.Count > 0 Then
+            For Each att In attachments
+                Dim file = DocumentService.DownLoadFileStream(att)
+                Message.Attachments.Add(New Attachment(CType(file.Stream, MemoryStream), file.Name.ToString))
+                tmpAttachs.Add(att, file.Name.ToString)
+            Next
+        End If
+
+        Dim client As New SmtpClient()
+
+        Try
+            'client.Send(Message)
+            Dim mailmsg As New EmailMessage
+            mailmsg.ToAddress = toAddes.Count
+            mailmsg.Subject = subject
+            mailmsg.Body = body
+            mailmsg.Description = "Group Msg"
+
+            SaveEmail(mailmsg)
+            Return True
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
     Public Shared Function SendMail(toAddress As String, ccAddress As String, subject As String, body As String, attachments As List(Of String)) As Integer
+        'Using ctx As New CoreEntities
+        '    If ctx.EmailMessages.Any(Function(em) em.ToAddress = toAddress AndAlso em.Subject = subject AndAlso em.SendDate > DateTime.Today) Then
+        '        Return 0
+        '    End If
+        'End Using
+        Dim util As New RegexUtilities()
+
         Dim mailmsg As New EmailMessage
         mailmsg.ToAddress = toAddress
         mailmsg.CcAddress = ccAddress
@@ -51,14 +106,18 @@ Public Class EmailService
         Else
             Dim adds = toAddress.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries)
             For Each add In adds
-                Message.To.Add(add)
+                If util.IsValidEmail(add) Then
+                    Message.To.Add(add)
+                End If
             Next
         End If
 
         If Not String.IsNullOrEmpty(ccAddress) Then
             Dim adds = ccAddress.Split(New Char() {";"}, StringSplitOptions.RemoveEmptyEntries)
             For Each add In adds
-                Message.CC.Add(add)
+                If util.IsValidEmail(add) Then
+                    Message.CC.Add(add)
+                End If
             Next
         End If
 
@@ -121,5 +180,49 @@ Public Class EmailService
         Next
 
         Return content
+    End Function
+
+End Class
+
+
+Public Class RegexUtilities
+    Dim invalid As Boolean = False
+
+    Public Function IsValidEmail(strIn As String) As Boolean
+        invalid = False
+        If String.IsNullOrEmpty(strIn) Then Return False
+
+        ' Use IdnMapping class to convert Unicode domain names. 
+        Try
+            strIn = Regex.Replace(strIn, "(@)(.+)$", AddressOf Me.DomainMapper,
+                                  RegexOptions.None, TimeSpan.FromMilliseconds(200))
+        Catch e As RegexMatchTimeoutException
+            Return False
+        End Try
+
+        If invalid Then Return False
+
+        ' Return true if strIn is in valid e-mail format. 
+        Try
+            Return Regex.IsMatch(strIn,
+                   "^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                   "(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$",
+                   RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250))
+        Catch e As RegexMatchTimeoutException
+            Return False
+        End Try
+    End Function
+
+    Private Function DomainMapper(match As Match) As String
+        ' IdnMapping class with default property values. 
+        Dim idn As New IdnMapping()
+
+        Dim domainName As String = match.Groups(2).Value
+        Try
+            domainName = idn.GetAscii(domainName)
+        Catch e As ArgumentException
+            invalid = True
+        End Try
+        Return match.Groups(1).Value + domainName
     End Function
 End Class

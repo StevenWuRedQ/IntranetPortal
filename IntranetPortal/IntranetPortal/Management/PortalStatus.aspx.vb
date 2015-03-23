@@ -80,19 +80,40 @@ Public Class PortalStatus
     Protected Sub ASPxButton1_Click(sender As Object, e As EventArgs)
         If cbEmployee.Text = "ALL" Then
 
+            Dim userName = Page.User.Identity.Name
+
             Dim callback = Sub()
                                Dim users = Employee.GetAllActiveEmps()
+
                                For Each name In users
-                                   SendEmail(name)
+                                   Try
+                                       SendEmail(name)
+                                   Catch ex As Exception
+                                       UserMessage.AddNewMessage(userName, "Send Mail Error", ex.Message, "", DateTime.Now, "Portal")
+                                   End Try
                                Next
 
-                               UserMessage.AddNewMessage(Page.User.Identity.Name, "Send Mail Completed", "All the mail is send.", "", DateTime.Now, "Portal")
+                               UserMessage.AddNewMessage(userName, "Send Mail Completed", "All the mail is send.", "", DateTime.Now, "Portal")
                            End Sub
             Threading.ThreadPool.QueueUserWorkItem(callback)
         Else
             SendEmail(cbEmployee.Text)
         End If
         lblResult.Text = "Email is schedule to send."
+    End Sub
+
+    Private Sub SendAllEmail()
+        Dim users = Employee.GetAllActiveEmps()
+        Dim ToAddresses = New List(Of String)
+        For Each name In users
+            Dim emp = Employee.GetInstance(name)
+            If emp IsNot Nothing AndAlso Not String.IsNullOrEmpty(emp.Email) Then
+                ToAddresses.Add(emp.Email)
+            End If
+        Next
+
+        Dim body = ASPxMemo1.Text
+        Core.EmailService.SendGroupEmail(ToAddresses, txtSubject.Text, body, Nothing)
     End Sub
 
     Private Sub SendEmail(name As String)
@@ -103,7 +124,7 @@ Public Class PortalStatus
                 body = body.Replace("{{$Name}}", name)
                 Core.EmailService.SendMail(emp.Email, "", txtSubject.Text, body, Nothing)
             Catch ex As Exception
-                UserMessage.AddNewMessage(Page.User.Identity.Name, "Send Mail Error", ex.Message, "", DateTime.Now, "Portal")
+                Throw ex
             End Try
         End If
     End Sub
@@ -112,5 +133,10 @@ Public Class PortalStatus
         If gridOnlineUsers.DataSource Is Nothing Then
             gridOnlineUsers.DataSource = OnlineUsers
         End If
+    End Sub
+
+    Protected Sub ASPxButton2_Click(sender As Object, e As EventArgs)
+        SendAllEmail()
+        lblResult.Text = "Email is send to all."
     End Sub
 End Class
