@@ -394,7 +394,7 @@
 <dx:ASPxCallback runat="server" ID="MarkColorCallBack" OnCallback="MarkColorCallBack_Callback" ClientInstanceName="MarkColorCallBack"></dx:ASPxCallback>
 
 
-    <div id="color_drop" class=" arrow_box" style="position: absolute; left: 100px; top: 100px; z-index: 10000;">
+    <div id="color_drop" class=" arrow_box" style="position: absolute; left: -100px; top: -1000px; z-index: 10000;">
         <div style="padding: 10px 15px">
             <div>Flag Tihis Leads:</div>
             <div class="list-group-item icon_btn color_list" onclick="click_item(this,1)" style=" display: inline-block">
