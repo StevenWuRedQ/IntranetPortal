@@ -323,6 +323,7 @@
     <Compile Include="CodeFolder\Lead.vb" />
     <Compile Include="CodeFolder\LeadsActivityLog.vb" />
     <Compile Include="CodeFolder\LeadsSearchTask.vb" />
+    <Compile Include="CodeFolder\MapDataSet.vb" />
     <Compile Include="CodeFolder\Office.vb" />
     <Compile Include="CodeFolder\OnlineUser.vb" />
     <Compile Include="CodeFolder\OwnerContact.vb" />

@@ -114,13 +114,7 @@ Partial Public Class MapDataService
     End Function
 
     Shared Function CoventMapDataSet(map As MapDataSet) As Object
-        Return New With
-               {
-                   .Id = map.Id,
-                   .TypeName = map.TypeName,
-                   .KeyCode = map.KeyCode,
-                    .Count = map.Count.ToString
-                   }
+        Return map
     End Function
     Public Shared Function GetZipCountInfoList(zip As String) As List(Of Object)
         Dim SHOW_PERCENT = True
@@ -136,37 +130,9 @@ Partial Public Class MapDataService
 
 
 
-            If (SHOW_PERCENT) Then
-                Dim mapDataList = ctx.MapDataSets.Where(Function(m) m.KeyCode = zip AndAlso m.Count <> 0 AndAlso m.PercentWDB IsNot Nothing).ToList
-                '.Select(
-                '    Function(l) New With {
-                '                        .TypeName = l.TypeName,
-                '                        .KeyCode = l.KeyCode,
-                '                        .Count = CDec(l.PercentWDB).ToString("p")}
-                ').ToList()
-                Dim CovertList = New List(Of Object)
+           
+            cList.AddRange(ctx.MapDataSets.Where(Function(m) m.KeyCode = zip AndAlso m.Count <> 0 AndAlso Not m.TypeName.Contains("Transactions")).ToList())
 
-                For Each m In mapDataList
-                    Dim l = New With {.Id = m.Id,
-                                        .TypeName = m.TypeName,
-                                        .KeyCode = m.KeyCode,
-                                        .Count = "0%"
-                                        }
-
-                    Dim d = CDec(m.PercentWDB) '0.0123
-                    'm.PercentWDB
-                    Dim CountStr = d.ToString("p")
-                    l.Count = CountStr
-                    CovertList.Add(l)
-                Next
-                For Each tc In ctx.MapDataSets.Where(Function(m) m.KeyCode = zip AndAlso m.Count <> 0 AndAlso m.TypeName.Contains("Transactions")).ToList
-                    CovertList.Add(CoventMapDataSet(tc))
-                Next
-
-                cList.AddRange(CovertList)
-            Else
-                cList.AddRange(ctx.MapDataSets.Where(Function(m) m.KeyCode = zip AndAlso m.Count <> 0).ToList())
-            End If
 
 
             Dim ListArrayDepatment As New List(Of String) From {"AITeam", "Core Staff", "ddd", "IT", "GalleriaTeam"}
@@ -184,8 +150,6 @@ Partial Public Class MapDataService
                 teamCountZip.Count = tc.Count
 
                 cList.Add(CoventMapDataSet(teamCountZip))
-
-
 
             Next
 

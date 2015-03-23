@@ -53,7 +53,7 @@
             gridLeads.GetValuesOnCustomCallback(gridLeads.GetFocusedRowIndex(), OnGetRowValues);
         }
         else {
-           
+
             leadsInfoBBLE = values;
             ContentCallbackPanel.PerformCallback(values);
         }
@@ -64,7 +64,7 @@
             gridLeads.GetRowValues(gridLeads.GetFocusedRowIndex(), 'BBLE', OnGetRowValues);
             postponedCallbackRequired = false;
         }
-        
+
         //InitScrollBar();
         init_currency();
         initToolTips();
@@ -296,9 +296,8 @@
         var index = e.item.index;
         onColoMarkClick(index);
     }
-    function GetMarkColor(markColor)
-    {
-        if(markColor <= 0 || markColor == 1000){
+    function GetMarkColor(markColor) {
+        if (markColor <= 0 || markColor == 1000) {
             return "gray";
         }
         colors = [
@@ -308,14 +307,13 @@
         colors[2] = '#ec471b'
         colors[3] = '#7bb71b'
         var color = colors[markColor]
-        if(color != null)
-        {
+        if (color != null) {
             return color;
         }
         return "";
     }
     var temStar = null;
-    function onColoMarkClick(index,e) {
+    function onColoMarkClick(index, e) {
         if (index == 0) {
             index = 1000;
         }
@@ -334,8 +332,8 @@
         if (index == $(e).parent().children().length) {
             index = 0;
         }
-        onColoMarkClick(index,e);
-       
+        onColoMarkClick(index, e);
+
         $("#color_drop").css("top", "-1000px")
     }
 
@@ -343,33 +341,69 @@
 </script>
 
 <style>
-   
-    .color_list
-    {
+    .color_list {
         /*width:15px;*/
-        width:40px;
-        padding:0px;
-        height:30px;
-        border:none;
+        width: 40px;
+        padding: 0px;
+        height: 30px;
+        border: none;
     }
 
-     .diagonal {
+    .diagonal {
         /*background: repeating-linear-gradient( 135deg, #fff, #fff 10px, #000 10px, #000 15px );*/
-        background:white;
-        text-align:center;
-        vertical-align:central;
-        font-size:15px;
-        border:1px solid gray;
+        background: white;
+        text-align: center;
+        vertical-align: central;
+        font-size: 15px;
+        border: 1px solid gray;
     }
+
+    .arrow_box {
+        position: absolute;
+        background: #fff;
+        border: 1px solid #cdd4d8;
+        border-radius: 4px;
+    }
+
+        .arrow_box:after, .arrow_box:before {
+            bottom: 100%;
+            left: 15%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .arrow_box:after {
+            border-color: rgba(255, 255, 255, 0);
+            border-bottom-color: #fff;
+            border-width: 11px;
+            margin-left: -11px;
+        }
+
+        .arrow_box:before {
+            border-color: rgba(205, 212, 216, 0);
+            border-bottom-color: #cdd4d8;
+            border-width: 11px;
+            margin-left: -11px;
+        }
 </style>
-<dx:ASPxCallback runat="server" ID="MarkColorCallBack" OnCallback="MarkColorCallBack_Callback" ClientInstanceName="MarkColorCallBack">  </dx:ASPxCallback>
-<div id="color_drop" style="position: absolute; left: -100px; top: -1000px; z-index: 10000;width:15px;">
-    <ul class="list-group" style="border:none;width:15px">
-        <li class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #a820e1">&nbsp;</li>
-        <li class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #ec471b">&nbsp;</li>
-        <li class="list-group-item icon_btn color_list diagonal" onclick="click_item(this)"  > <span style="margin-top:5px;">Clear</span> </li>
-    </ul>
-</div>
+<dx:ASPxCallback runat="server" ID="MarkColorCallBack" OnCallback="MarkColorCallBack_Callback" ClientInstanceName="MarkColorCallBack"></dx:ASPxCallback>
+
+
+    <div class="color_drop arrow_box" style="position: absolute; left: -100px; top: -1000px; z-index: 10000;">
+        <div style="padding: 10px 15px">
+            <div>Flag Tihis Leads:</div>
+            <div class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #a820e1; display: inline-block">&nbsp;</div>
+            <div class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #ec471b; display: inline-block">&nbsp;</div>
+            <div class="list-group-item icon_btn color_list diagonal" onclick="click_item(this)" style="display: inline-block"><span style="margin-top: 5px;">Clear</span> </div>
+        </div>
+    </div>
+
+
+
 
 <%--id="leads_list_left"--%>
 <div style="width: 100%; height: 100%;" class="color_gray">
@@ -387,6 +421,14 @@
                 </div>
             </div>
         </div>
+        <div class="arrow_box">
+            <div style="padding: 10px 15px">
+                <div>Flag Tihis Leads:</div>
+                <div class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #a820e1; display: inline-block">&nbsp;</div>
+                <div class="list-group-item icon_btn color_list" onclick="click_item(this)" style="background: #ec471b; display: inline-block">&nbsp;</div>
+                <div class="list-group-item icon_btn color_list diagonal" onclick="click_item(this)" style="display: inline-block"><span style="margin-top: 5px;">Clear</span> </div>
+            </div>
+        </div>
 
         <%--      <button type="button" onclick="gridLeads.CollapseAll()" value="Collapse">Collapse</button>
         <button type="button" onclick="gridLeads.ExpandAll()" value="Expand">Expand</button>--%>
@@ -401,7 +443,7 @@
             <Columns>
                 <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" Name="colSelect" Visible="false" Width="25px">
                 </dx:GridViewCommandColumn>
-                <dx:GridViewDataTextColumn FieldName="MarkColor"  VisibleIndex="0" Width="30px">
+                <dx:GridViewDataTextColumn FieldName="MarkColor" VisibleIndex="0" Width="30px">
                     <DataItemTemplate>
                         <div>
                         </div>
@@ -871,18 +913,16 @@
     function star_mouseenter(e, bble) {
         temBBLE = bble;
         var p = $(e).position();
-        if (tmpCursor != null)
-        {
+        if (tmpCursor != null) {
             p = tmpCursor;
         }
         var color_drop = $("#color_drop");
-       
-        color_drop.css("left", (p.left -20) + "px");
-        color_drop.css("top", (p.top - 20)  + 'px');
+
+        color_drop.css("left", (p.left - 20) + "px");
+        color_drop.css("top", (p.top - 20) + 'px');
         temStar = e;
     }
-    document.onmousemove = function(e)
-    {
+    document.onmousemove = function (e) {
         tmpCursor = tmpCursor || {}
         tmpCursor.left = (window.Event) ? e.pageX : event.clientX + (document.documentElement.scrollLeft ? document.documentElement.scrollLeft : document.body.scrollLeft);;
         tmpCursor.top = (window.Event) ? e.pageY : event.clientY + (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop);

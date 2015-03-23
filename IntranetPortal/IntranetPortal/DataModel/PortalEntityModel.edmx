@@ -385,6 +385,7 @@
           <Property Name="KeyCode" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Count" Type="int" Nullable="false" />
           <Property Name="PercentWDB" Type="float" />
+          <Property Name="Transactions" Type="int" />
         </EntityType>
         <EntityType Name="NYC_DATA_COMMENT">
           <Key>
@@ -1990,6 +1991,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
           <Property Name="KeyCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" Nullable="false" />
           <Property Name="PercentWDB" Type="Double" />
+          <Property Name="Transactions" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2838,6 +2840,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
           <EntitySetMapping Name="MapDataSets">
             <EntityTypeMapping TypeName="IntranetPortalModel.MapDataSet">
               <MappingFragment StoreEntitySet="MapDataSet">
+                <ScalarProperty Name="Transactions" ColumnName="Transactions" />
                 <ScalarProperty Name="PercentWDB" ColumnName="PercentWDB" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="KeyCode" ColumnName="KeyCode" />

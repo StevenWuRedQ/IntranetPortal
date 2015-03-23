@@ -99,6 +99,8 @@
                 <dx:GridViewDataColumn FieldName="KeyCode" Caption="ZipCode"></dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="TypeName"></dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="Count"></dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="PercentWDBStr" Caption="Percent"></dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="Transactions"></dx:GridViewDataColumn>
             </Columns>
         </dx:ASPxGridView>
         <input type="hidden" id="isAdminLogIn" value="<%= Employee.IsAdmin(Page.User.Identity.Name)%>" />
@@ -276,7 +278,7 @@
                     style: getStyle,
                     onEachFeature: onEachFeature
                 })
-          
+
                 function getStyle(feature) {
                     return {
                         weight: 2,
@@ -341,7 +343,7 @@
 
                         //$('#tdLeadsCount').html(findCountNum(zip));
                         var zipCountData = data;
-                        html = ''
+                        html = $('#tablehead')[0].outerHTML;
                         var source = $("#zipCountTrTemplate").html();
                         var template = Handlebars.compile(source);
                         for (var i = 0; i < zipCountData.length; i++) {
@@ -443,17 +445,16 @@
 
                 /*add layer swicher */
                 var layer_swicher = {
-                    
+
                     'Leads Count Portal': zipMakerLayer
 
                 };
-                if (isAdminLogIn)
-                {
-                    
+                if (isAdminLogIn) {
+
                     layer_swicher['Zip Count'] = ZipPolygonLayer
                 }
                 L.control.layers({
-                   
+
                 }, layer_swicher).addTo(map);
                 /******/
                 return;
@@ -873,12 +874,15 @@
         </style>
 
         <script id="zipCountTrTemplate" type="text/x-handlebars-template">
+
             <tr>
-                <td>{{TypeName}} : </td>
+                <td>{{TypeName}}  </td>
                 <td>{{ Count}}</td>
+                <td>{{ PercentWDBStr}}</td>
+                <td>{{Transactions}}</td>
             </tr>
         </script>
-        <div id="divMsgTest" class=" message message_popup" style="top: -500px; right: 40px;">
+        <div id="divMsgTest" class=" message message_popup" style="top: -500px; right: 40px;width:427px">
             <div class="msgtitle message_popup_title">
 
                 <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa fa-file-excel-o with_circle message_pupup_icon" style="cursor:pointer"  title="Export to Excel"></i>'></asp:LinkButton>
@@ -886,7 +890,13 @@
                 <span style="float: right; line-height: 30px; font-weight: 600; cursor: pointer; font-size: 18px" onclick="HideMessages()"><i class="fa fa-times" style="color: #2e2f31"></i></span>
             </div>
             <div class="message_pupup_content">
-                <table style="width: 100%; font-size: 14px; color: #77787b !important;" id="zipCountTable">
+                <table style="width: 100%; font-size: 14px; color: #77787b !important;" id="zipCountTable" class="table table-striped">
+                    <tr id="tablehead">
+                        <th>Type Name </th>
+                        <th>Count </th>
+                        <th>Percent</th>
+                        <th>Transactions</th>
+                    </tr>
                 </table>
             </div>
 
