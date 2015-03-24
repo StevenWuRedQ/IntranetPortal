@@ -547,5 +547,12 @@
 
 
     }
+    $(document).ready(function () {
+        if (sortPhones) {
+            sortPhones();
+            
+        }
+    });
+    
 
 </script>

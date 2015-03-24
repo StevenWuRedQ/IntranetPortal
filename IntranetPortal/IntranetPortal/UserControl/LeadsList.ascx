@@ -70,6 +70,7 @@
         initToolTips();
         if (sortPhones) {
             sortPhones();
+            debugger;
         }
     }
 
