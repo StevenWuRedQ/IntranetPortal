@@ -1,5 +1,8 @@
 ﻿Imports System.IO
 Imports Spire.Pdf
+Imports DevExpress.XtraReports.UI
+Imports System.Net
+Imports System.ServiceModel
 
 ' NOTE: You can use the "Rename" command on the context menu to change the class name "CommonService" in code, svc and config file together.
 ' NOTE: In order to launch WCF Test Client for testing this service, please select CommonService.svc or CommonService.svc.vb at the Solution Explorer and start debugging.
@@ -61,18 +64,53 @@ Public Class CommonService
         '    End If
         'Next
 
-        toAdds.Add("ron@myidealprop.com")
+        toAdds.Add("chris@gvs4u.com")
 
         Dim emailData As New Dictionary(Of String, String)
         emailData.Add("Body", LoadTeamActivityEmail(objTeam))
         emailData.Add("Date", DateTime.Today.ToString("m"))
 
+        Dim name = String.Format("{1}-ActivityReport-{0:m}.pdf", DateTime.Today, teamName)
+        Dim attachment As New System.Net.Mail.Attachment(GetPDf(teamName), name)
 
-
-        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "chris@gvs4u.com", "TeamActivitySummary", emailData)
+        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "chris@gvs4u.com", "TeamActivitySummary", emailData, {attachment})
     End Sub
 
-    
+    Private Function GetPDf(name As String) As MemoryStream
+        'Using stream As New MemoryStream()
+        '    'DemoRichEdit.ExportToPdf(stream)
+        '    'HttpUtils.WriteFileToResponse(Me.Page, stream, "ExportedDocument", True, "pdf")
+        'End Using
+
+        Dim report As New XtraReport
+        report.Margins = New Drawing.Printing.Margins(50, 50, 50, 50)
+        Dim richText As New XRRichText
+        Dim db As New DetailBand
+        report.Bands.Add(db)
+        richText.SizeF = New System.Drawing.SizeF(700, 20)
+        richText.LocationF = New System.Drawing.PointF(0, 0)
+        report.Bands(BandKind.Detail).Controls.Add(richText)
+
+        Dim ms As New MemoryStream
+        richText.Html = LoadEmailTemplateThroughWeb(name)  'LoadTeamActivityEmail(Team.GetTeam("RonTeam"))
+        report.ExportToPdf(ms)
+        ms.Position = 0
+        Return ms
+    End Function
+
+    Private Function LoadEmailTemplateThroughWeb(name As String) As String
+        Dim url = OperationContext.Current.RequestContext.RequestMessage.Headers.To.GetLeftPart(UriPartial.Authority)
+        Dim myRequest As WebRequest = WebRequest.Create(String.Format("{0}/EmailTemplate/TeamActivityReport.aspx?name={1}", url, name))
+        Dim response As HttpWebResponse = CType(myRequest.GetResponse(), HttpWebResponse)
+        Dim receiveStream As Stream = response.GetResponseStream()
+        ' Pipes the stream to a higher level stream reader with the required encoding format.  
+        Dim readStream As New StreamReader(receiveStream, Encoding.UTF8)
+        Dim result = readStream.ReadToEnd()
+        response.Close()
+        readStream.Close()
+
+        Return result
+    End Function
 
     Private Function LoadTeamActivityEmail(objTeam As Team) As String
         Dim ts As ActivitySummary

@@ -11,14 +11,23 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class ActivitySummary
+Partial Public Class TeamActivityReport
 
     '''<summary>
-    '''WebChartControl1 control.
+    '''form1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents WebChartControl1 As Global.DevExpress.XtraCharts.Web.WebChartControl
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+
+    '''<summary>
+    '''chartActivity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chartActivity As Global.DevExpress.XtraCharts.Web.WebChartControl
 End Class

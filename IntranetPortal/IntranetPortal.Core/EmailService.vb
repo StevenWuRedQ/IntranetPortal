@@ -37,6 +37,13 @@ Public Class EmailService
         End If
     End Sub
 
+    Public Shared Sub SendMail(toAddress As String, ccAddress As String, templateName As String, mailData As Dictionary(Of String, String), attachments As Attachment())
+        Dim emailTemplate = GetEmailTemplate(templateName)
+        If emailTemplate IsNot Nothing Then
+            SendMail(toAddress, ccAddress, ProcessContent(emailTemplate.Subject, mailData), ProcessContent(emailTemplate.Body, mailData), Nothing, attachments)
+        End If
+    End Sub
+
     Public Shared Function SendGroupEmail(toAddes As List(Of String), subject As String, body As String, attachments As List(Of String)) As Boolean
 
         Dim util As New RegexUtilities()
@@ -83,7 +90,7 @@ Public Class EmailService
         End Try
     End Function
 
-    Public Shared Function SendMail(toAddress As String, ccAddress As String, subject As String, body As String, attachments As List(Of String)) As Integer
+    Public Shared Function SendMail(toAddress As String, ccAddress As String, subject As String, body As String, attachments As List(Of String), Optional attachments2 As Attachment() = Nothing) As Integer
         'Using ctx As New CoreEntities
         '    If ctx.EmailMessages.Any(Function(em) em.ToAddress = toAddress AndAlso em.Subject = subject AndAlso em.SendDate > DateTime.Today) Then
         '        Return 0
@@ -138,6 +145,12 @@ Public Class EmailService
 
                 mailmsg.Attachments = New JavaScriptSerializer().Serialize(tmpAttachs)
             End If
+        End If
+
+        If attachments2 IsNot Nothing AndAlso attachments2.Count > 0 Then
+            For Each att In attachments2
+                Message.Attachments.Add(att)
+            Next
         End If
 
         Dim client As New SmtpClient()

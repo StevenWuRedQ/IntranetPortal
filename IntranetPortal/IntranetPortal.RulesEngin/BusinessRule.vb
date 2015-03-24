@@ -387,6 +387,8 @@ Public Class CompleteTaskRule
             If Not tk.EmployeeName.ToLower.Contains(ld.EmployeeName.ToLower) Then
                 Return True
             End If
+        Else
+            Return True
         End If
 
         Return False

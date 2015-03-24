@@ -653,6 +653,13 @@
       <DependentUpon>TaskSummary.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\TeamActivityReport.aspx.designer.vb">
+      <DependentUpon>TeamActivityReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\TeamActivityReport.aspx.vb">
+      <DependentUpon>TeamActivityReport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1475,6 +1482,7 @@
     <Content Include="EmailTemplate\ActivitySummary.ascx" />
     <Content Include="EmailTemplate\EmailSummary.aspx" />
     <Content Include="EmailTemplate\TaskSummary.ascx" />
+    <Content Include="EmailTemplate\TeamActivityReport.aspx" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />
     <Content Include="images\add-button-hi.png" />
@@ -2407,6 +2415,7 @@
     <Content Include="My Project\DataSources\System.Data.DataTable.datasource" />
     <Content Include="fonts\icons.ttf" />
     <Content Include="fonts\icons.woff" />
+    <Content Include="EmailTemplate\Web.config" />
     <None Include="scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />

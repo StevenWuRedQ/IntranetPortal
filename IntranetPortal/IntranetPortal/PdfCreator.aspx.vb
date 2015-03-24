@@ -3,6 +3,7 @@ Imports Spire.Pdf
 Imports System.Threading
 Imports DevExpress.Web.ASPxClasses.Internal
 Imports DevExpress.XtraReports.UI
+Imports System.Net
 
 Public Class PdfCreator
     Inherits System.Web.UI.Page
@@ -15,6 +16,10 @@ Public Class PdfCreator
         Response.[End]()
     End Sub
 
+    Public Overrides Sub VerifyRenderingInServerForm(control As Control)
+        'MyBase.VerifyRenderingInServerForm(control)
+    End Sub
+
     Private Function GetPDf() As MemoryStream
         'Using stream As New MemoryStream()
         '    'DemoRichEdit.ExportToPdf(stream)
@@ -22,15 +27,16 @@ Public Class PdfCreator
         'End Using
 
         Dim report As New XtraReport
+        report.Margins = New Drawing.Printing.Margins(50, 50, 50, 50)
         Dim richText As New XRRichText
         Dim db As New DetailBand
         report.Bands.Add(db)
-        richText.SizeF = New System.Drawing.SizeF(600, 20)
+        richText.SizeF = New System.Drawing.SizeF(700, 20)
         richText.LocationF = New System.Drawing.PointF(0, 0)
         report.Bands(BandKind.Detail).Controls.Add(richText)
 
         Using ms As New MemoryStream
-            richText.Text = "testing"
+            richText.Html = LoadEmailTemplateThroughWeb()  'LoadTeamActivityEmail(Team.GetTeam("RonTeam"))
             report.ExportToPdf(ms)
 
             Return ms
@@ -50,6 +56,36 @@ Public Class PdfCreator
         'pdfDoc.Dispose()
 
         ' Return ms
+    End Function
+
+    Private Function LoadEmailTemplateThroughWeb() As String
+        Dim myRequest As WebRequest = WebRequest.Create("http://localhost:61504/EmailTemplate/TeamActivityReport.aspx?name=ronteam")
+        Dim response As HttpWebResponse = CType(myRequest.GetResponse(), HttpWebResponse)
+        Dim receiveStream As Stream = response.GetResponseStream()
+        ' Pipes the stream to a higher level stream reader with the required encoding format.  
+        Dim readStream As New StreamReader(receiveStream, Encoding.UTF8)
+        Dim result = readStream.ReadToEnd()
+        Response.Close()
+        readStream.Close()
+
+        Return result
+    End Function
+
+    Private Function LoadTeamActivityEmail(objTeam As Team) As String
+        Dim ts As ActivitySummary
+        Using Page As New Page
+            ts = Page.LoadControl("~/EmailTemplate/ActivitySummary.ascx")
+            ts.team = objTeam
+            ts.DataBind()
+            Dim sb As New StringBuilder
+            Using tw As New StringWriter(sb)
+                Using hw As New HtmlTextWriter(tw)
+                    ts.RenderControl(hw)
+                End Using
+            End Using
+
+            Return sb.ToString
+        End Using
     End Function
 
 End Class

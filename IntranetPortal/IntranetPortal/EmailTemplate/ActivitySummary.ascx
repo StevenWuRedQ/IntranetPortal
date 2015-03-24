@@ -47,7 +47,7 @@ Below is summary of your agents' activities today (<%= DateTime.Today.ToShortDat
         <% End If%>
         <% Next%>
     </tbody>
-</table>
+</table><br />
 <br />
 More info, please <a href="http://104.130.40.123/managementui/management.aspx">click here</a>.
 <br />
@@ -55,7 +55,4 @@ More info, please <a href="http://104.130.40.123/managementui/management.aspx">c
 <br />
 Regards,<br />
 The Portal Team<br />
-<small>(This is an automatic email. Please do not reply.)</small>
-
-
-
+<small>(This is an automatic email. Please do not reply.)</small><br />

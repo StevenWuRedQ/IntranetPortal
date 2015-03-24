@@ -316,6 +316,8 @@
                                             InitalTab: function () {
                                                 var tab = this;
                                                 var dateNow = new Date();
+                                                var endDate = new Date();
+                                                endDate = endDate.setDate(dateNow.getDate() + 1);
                                                 var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
                                                 $("#dateRange").dxRangeSelector({
                                                     margin: {
@@ -326,7 +328,7 @@
                                                     },
                                                     scale: {
                                                         startValue: new Date(2014, 8, 28),
-                                                        endValue: new Date(),
+                                                        endValue: endDate,
                                                         minorTickInterval: "day",
                                                         majorTickInterval: 'week',
                                                         minRange: "day",
@@ -337,7 +339,7 @@
                                                     },
                                                     selectedRange: {
                                                         startValue: new Date(dateNow.getFullYear(), dateNow.getMonth(), 1),
-                                                        endValue: dateNow
+                                                        endValue: endDate
                                                     },
                                                     onSelectedRangeChanged: function (e) {
                                                         tab.UpdateActivityChart(e.startValue, e.endValue);

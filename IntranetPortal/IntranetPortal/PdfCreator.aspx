@@ -1,16 +1,1 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="PdfCreator.aspx.vb" Inherits="IntranetPortal.PdfCreator" %>
-
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-    
-    </div>
-    </form>
-</body>
-</html>
+﻿<%@ Page Language="vb" AutoEventWireup="true" CodeBehind="PdfCreator.aspx.vb" Inherits="IntranetPortal.PdfCreator" EnableEventValidation="false" %>
