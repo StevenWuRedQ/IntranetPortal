@@ -12,7 +12,7 @@ Public Class TeamActivityReport
         If Not IsPostBack Then
             If Request.QueryString("name") IsNot Nothing Then
                 TeamName = Request.QueryString("name").ToString
-                TeamActivityData = PortalReport.LoadTeamAgentActivityReport(TeamName, DateTime.Today.AddDays(-1), DateTime.Today.AddDays(1))
+                TeamActivityData = PortalReport.LoadTeamAgentActivityReport(TeamName, DateTime.Today, DateTime.Today.AddDays(1))
                 BindChart()
             End If
         End If
@@ -24,8 +24,8 @@ Public Class TeamActivityReport
     Public ReadOnly Property ChartImage As String
         Get
             Dim ms As New IO.MemoryStream
-            CType(chartActivity, IChartContainer).Chart.ExportToImage(ms, System.Drawing.Imaging.ImageFormat.Jpeg)
-            Return "data:image/jpeg;base64," & System.Convert.ToBase64String(ms.ToArray)
+            CType(chartActivity, IChartContainer).Chart.ExportToImage(ms, System.Drawing.Imaging.ImageFormat.Png)
+            Return "data:image/png;base64," & System.Convert.ToBase64String(ms.ToArray)
         End Get
     End Property
 

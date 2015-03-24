@@ -631,7 +631,7 @@
                                                 columns:[{
                                                     dataField: "LeadsName",
                                                     caption: "Leads Name",
-                                                    width: 280,
+                                                    width: 240,
                                                     cellTemplate: function (container, options) {
                                                         if (options.value != null) {
                                                             var fieldHTML = '<a target="_blank" href="javascript:ViewLeadsInfo(\'' + options.data.BBLE + '\')">' + options.value + "</a>"

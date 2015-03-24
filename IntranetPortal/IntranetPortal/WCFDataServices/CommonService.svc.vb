@@ -54,26 +54,26 @@ Public Class CommonService
 
     Public Sub SendTeamActivityEmail(teamName As String) Implements ICommonService.SendTeamActivityEmail
         Dim objTeam = Team.GetTeam(teamName)
-
         Dim toAdds = New List(Of String)
 
-        'For Each mgr In objTeam.TeamManagers
-        '    Dim emp = Employee.GetInstance(mgr)
-        '    If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
-        '        toAdds.Add(Employee.GetInstance(mgr).Email)
-        '    End If
-        'Next
+        For Each mgr In objTeam.TeamManagers
+            Dim emp = Employee.GetInstance(mgr)
+            If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
+                toAdds.Add(Employee.GetInstance(mgr).Email)
+            End If
+        Next
 
-        toAdds.Add("chris@gvs4u.com")
+        'toAdds.Add("ron@myidealprop.com")
+        'toAdds.Add("chris@gvs4u.com")
 
         Dim emailData As New Dictionary(Of String, String)
-        emailData.Add("Body", LoadTeamActivityEmail(objTeam))
+        'emailData.Add("Body", LoadTeamActivityEmail(objTeam))
         emailData.Add("Date", DateTime.Today.ToString("m"))
 
         Dim name = String.Format("{1}-ActivityReport-{0:m}.pdf", DateTime.Today, teamName)
         Dim attachment As New System.Net.Mail.Attachment(GetPDf(teamName), name)
 
-        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "chris@gvs4u.com", "TeamActivitySummary", emailData, {attachment})
+        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
     End Sub
 
     Private Function GetPDf(name As String) As MemoryStream

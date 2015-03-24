@@ -64,7 +64,7 @@
                 Width="700px" ClientInstanceName="chart" CrosshairEnabled="False" EnableClientSideAPI="false" ToolTipEnabled="False">                
             </dx:WebChartControl>
             <br />
-            More info, please <a href="http://104.130.40.123/managementui/management.aspx">click here</a>.
+            More info, please <a href="http://portal.myidealprop.com/managementui/management.aspx">click here</a>.
             <br />
             <br />
             <br />
