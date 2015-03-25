@@ -104,6 +104,7 @@
             </Columns>
         </dx:ASPxGridView>
         <input type="hidden" id="isAdminLogIn" value="<%= Employee.IsAdmin(Page.User.Identity.Name)%>" />
+        <input type="hidden" id="LogInTeam" value="<%= Employee.GetMyEmployeesByTeam(Page.User.Identity.Name).Select(Function(e) e.TeamName).FirstOrDefault%>" />
         <dx:ASPxGridViewExporter runat="server" GridViewID="gridZipCountInfo" ID="gridZipCountExporter"></dx:ASPxGridViewExporter>
         <script id="team-color-template" type="text/x-handlebars-template">
             {{#each  list}}
@@ -625,7 +626,7 @@
                 if (isAdminLogIn) {
                     LoadLotPortal();
                 } else {
-                    LoadTeam("RonTeam")
+                    LoadTeam($("#LogInTeam").val())
                 }
 
             }).delay(3000)

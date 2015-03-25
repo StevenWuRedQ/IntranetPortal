@@ -63,7 +63,7 @@ Public Class MapService
         Dim result As New List(Of Feature)
         Using ctx As New MapDataEntitiesContainer
 
-            Dim lots = ctx.PortalLotInfoes.Where(Function(b) b.BBLE IsNot Nothing And b.Team = Team).OrderBy(Function(b) b.BBLE).Take(100)
+            Dim lots = ctx.PortalLotInfoes.Where(Function(b) b.BBLE IsNot Nothing And b.Team = Team).OrderBy(Function(b) b.BBLE)
 
             For Each lot In lots.ToList
                 result.Add(buildLotGeoJson(lot))
