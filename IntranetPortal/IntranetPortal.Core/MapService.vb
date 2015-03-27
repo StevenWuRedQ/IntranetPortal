@@ -29,7 +29,8 @@ Public Class MapService
 
     Public Function LoadLotLayers(neLat As Double, neLng As Double, swLat As Double, swLng As Double) As List(Of Feature)
         Dim mapBound = GetPolygon(neLat, neLng, swLat, swLng)
-        
+
+
         Dim result As New List(Of Feature)
         Using ctx As New MapDataEntitiesContainer
 
@@ -50,7 +51,7 @@ Public Class MapService
         Dim result As New List(Of Feature)
         Using ctx As New MapDataEntitiesContainer
 
-            Dim lots = ctx.PortalLotInfoes.Where(Function(b) b.BBLE IsNot Nothing And b.BBLE > BBLE).OrderBy(Function(b) b.BBLE).Take(100)
+            Dim lots = ctx.PortalLotInfoes.Where(Function(b) b.BBLE IsNot Nothing And b.BBLE > BBLE).OrderBy(Function(b) b.BBLE) '.Take(100)
 
             For Each lot In lots.ToList
                 result.Add(buildLotGeoJson(lot))
@@ -81,6 +82,8 @@ Public Class MapService
         featureProperties.Add("description", lot.LeadsName)
         featureProperties.Add("Team", lot.Team)
         featureProperties.Add("color", lot.Color)
+        featureProperties.Add("LPBBLE", lot.LPBBLE)
+        featureProperties.Add("Unbuild_SQFT", lot.Unbuild_SQFT)
         Dim polygon = SqlGeometry.Parse(New SqlString(lot.ogr_geometry.WellKnownValue.WellKnownText))
         Dim obj = GeoJSON.Net.MsSqlSpatial.MsSqlSpatialConvert.ToGeoJSONGeometry(polygon)
         Dim model = New Feature(obj, featureProperties, lot.ogr_fid.ToString)

@@ -21,5 +21,7 @@ Partial Public Class PortalLotInfo
     Public Property Team As String
     Public Property Color As String
     Public Property ogr_fid As Integer
+    Public Property LPBBLE As String
+    Public Property Unbuild_SQFT As Nullable(Of Double)
 
 End Class

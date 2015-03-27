@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MapDataEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MapDataEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="dtm_0814_tax_block_polygon">
           <Key>
             <PropertyRef Name="ogr_fid" />
@@ -77,6 +77,8 @@ warning 6002: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
           <Property Name="Team" Type="nvarchar" MaxLength="50" />
           <Property Name="Color" Type="nchar" MaxLength="10" />
           <Property Name="ogr_fid" Type="int" Nullable="false" />
+          <Property Name="LPBBLE" Type="nvarchar" MaxLength="11" />
+          <Property Name="Unbuild_SQFT" Type="float" />
         </EntityType>
         <EntityContainer Name="MapDataEntitiesStoreContainer">
           <EntitySet Name="dtm_0814_tax_block_polygon" EntityType="Self.dtm_0814_tax_block_polygon" Schema="dbo" store:Type="Tables" />
@@ -92,7 +94,9 @@ warning 6002: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
     [PortalLotInfo].[LeadsName] AS [LeadsName], 
     [PortalLotInfo].[Team] AS [Team], 
     [PortalLotInfo].[Color] AS [Color], 
-    [PortalLotInfo].[ogr_fid] AS [ogr_fid]
+    [PortalLotInfo].[ogr_fid] AS [ogr_fid], 
+    [PortalLotInfo].[LPBBLE] AS [LPBBLE], 
+    [PortalLotInfo].[Unbuild_SQFT] AS [Unbuild_SQFT]
     FROM [dbo].[PortalLotInfo] AS [PortalLotInfo]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -175,6 +179,8 @@ warning 6002: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
           <Property Name="Team" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Color" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="ogr_fid" Type="Int32" Nullable="false" />
+          <Property Name="LPBBLE" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Unbuild_SQFT" Type="Double" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -245,6 +251,8 @@ warning 6002: The table/view 'MapData.dbo.PortalLotInfo' does not have a primary
           <EntitySetMapping Name="PortalLotInfoes">
             <EntityTypeMapping TypeName="MapDataEntities.PortalLotInfo">
               <MappingFragment StoreEntitySet="PortalLotInfo">
+                <ScalarProperty Name="Unbuild_SQFT" ColumnName="Unbuild_SQFT" />
+                <ScalarProperty Name="LPBBLE" ColumnName="LPBBLE" />
                 <ScalarProperty Name="ogr_fid" ColumnName="ogr_fid" />
                 <ScalarProperty Name="Color" ColumnName="Color" />
                 <ScalarProperty Name="Team" ColumnName="Team" />

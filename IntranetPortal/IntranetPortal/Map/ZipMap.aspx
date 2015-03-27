@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js'></script>
 
     <script src="/scripts/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
@@ -57,6 +58,7 @@
             bottom: 0;
             padding: 20px;
             margin-bottom: 34px;
+            visibility:hidden;
         }
 
         .color_box {
@@ -106,6 +108,68 @@
         <input type="hidden" id="isAdminLogIn" value="<%= Employee.IsAdmin(Page.User.Identity.Name)%>" />
         <input type="hidden" id="LogInTeam" value="<%= Employee.GetMyEmployeesByTeam(Page.User.Identity.Name).Select(Function(e) e.TeamName).FirstOrDefault%>" />
         <dx:ASPxGridViewExporter runat="server" GridViewID="gridZipCountInfo" ID="gridZipCountExporter"></dx:ASPxGridViewExporter>
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header msgtitle">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa fa-file-excel-o with_circle message_pupup_icon" style="cursor:pointer"  title="Export to Excel"></i>'></asp:LinkButton>
+                            <%--<i class="fa fa-envelope with_circle message_pupup_icon"></i>--%>&nbsp; <span id="spanZip" style="font-size: 22px;"></span>
+
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="divMsgTest">
+                            <%--<div class="msgtitle message_popup_title">
+
+                               <span style="float: right; line-height: 30px; font-weight: 600; cursor: pointer; font-size: 18px" onclick="HideMessages()"><i class="fa fa-times" style="color: #2e2f31"></i></span>
+                            </div>--%>
+                            <div class="message_pupup_content">
+                                <div role="tabpanel">
+
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active"><a href="#team_leads" aria-controls="team_leads" role="tab" data-toggle="tab">Team Leads</a></li>
+                                        <li role="presentation"><a href="#leads_infos" aria-controls="leads_infos" role="tab" data-toggle="tab">Leads Infos</a></li>
+
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane active" id="team_leads">
+                                            <div>
+                                                <table class="table table-striped info_table ">
+                                                    <tbody id="team_leads_table"></tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane" id="leads_infos">
+                                            <table id="zipCountTable" class="info_table table table-striped">
+                                                <tr id="tablehead">
+                                                    <th>Type Name </th>
+                                                    <th>Count </th>
+                                                    <th>Percent</th>
+                                                    <th>Transactions</th>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <script id="team-color-template" type="text/x-handlebars-template">
             {{#each  list}}
             <div class="color_box" onclick="SelectTeam('{{Team}}')">
@@ -113,6 +177,9 @@
                 <div>{{Team}}</div>
             </div>
             {{/each}}
+            <div class="color_box">
+                <i class="fa fa-spinner fa-spin " id="loadingSpin" style="font-size: 48px"></i>
+            </div>
         </script>
         <div class="container-fluid">
             <div id="map"></div>
@@ -130,6 +197,9 @@
             //    provider: 'google',
             //    type: 'roadmap'
             //}).dxMap("instance");
+
+            UNBUILD_COLOR = '14,70,134';
+            UNBUILD_RAGNE = [100000, 50000, 20000, 10000, 5000, 2000, 1000];
             var isAdminLogIn = $("#isAdminLogIn").val() == 'True';
             if (isAdminLogIn) {
                 $.getJSON("/map/mapdataservice.svc/LoadAllTeamColor", function (data) {
@@ -210,9 +280,13 @@
 
                 if (properties.BBLE != null) {
                     var html = '<div class="marker-title">' + 'BBLE:' + properties.BBLE + '</div>';
+                    
                     if (properties.description != null) {
                         html += '<div> Leads Name : ' + properties.description + '</div>'
                         + '<div> Team : ' + properties.Team + '</div>'
+                    }
+                    if (properties.Unbuild_SQFT != null) {
+                        html += '<div> Unbuild SQFT : ' + properties.Unbuild_SQFT + '</div>'
                     }
                     return html;
                 }
@@ -225,7 +299,7 @@
                 return '<div class="marker-title">' + properties.postalCode + '</div>' +
                     findCountNum(properties.postalCode) + ' leads';
             }
-
+            var oldStyle = null;
             function mousemove(e) {
                 var layer = e.target;
 
@@ -237,6 +311,7 @@
                 window.clearTimeout(closeTooltip);
 
                 // highlight feature
+                oldStyle = this.options.style(this.feature);
                 layer.setStyle({
                     weight: 3,
                     opacity: 0.3,
@@ -248,30 +323,132 @@
                 }
             }
             var closeTooltip;
-            function mouseout(e) {
-
-                if (BlockLayer != null) {
-                    var is_Blcok = map.hasLayer(BlockLayer);
-
-                    if (is_Blcok) {
-                        BlockLayer.resetStyle(e.target);
-                    }
-
-                }
-
-                if (map.hasLayer(ZipPolygonLayer)) {
-                    ZipPolygonLayer.resetStyle(e.target);
-                }
-                if (map.hasLayer(LotLayer)) {
-                    LotLayer.resetStyle(e.target);
-                }
-
+            function mouseout(e,layer) {
+                var layer = e.target;
+                layer.setStyle(oldStyle);
 
                 closeTooltip = window.setTimeout(function () {
                     map.closePopup();
                 }, 100);
             }
+            function getLegendHTMLUnBuild()
+            {
+                return getLegendHTML(UNBUILD_COLOR, UNBUILD_RAGNE);
+            }
+            function overlayadd(e) {
+                if ("Zip Count" == e.name) {
+                    map.legendControl.addLegend(getLegendHTML());
+                }
+                if( "Unbuild" == e.name)
+                {
+                    var html = getLegendHTMLUnBuild()
+                    map.legendControl.addLegend(getLegendHTMLUnBuild());
+                }
+                if("Team Lot"==e.name)
+                {
+                    $("#color_panle").css("visibility", 'visible')
+                }
+            }
+            function overlayremove(e) {
+                if ("Zip Count" == e.name) {
+                    map.legendControl.removeLegend(getLegendHTML());
+                }
+                if ("Unbuild" == e.name)
+                {
+                    map.legendControl.removeLegend(getLegendHTMLUnBuild());
+                }
+                if ("Team Lot" == e.name) {
+                    $("#color_panle").css("visibility", 'hidden');
+                }
+            }
+            //if (isAdminLogIn) {
+            //    map.legendControl.addLegend(getLegendHTML());
+            //}
 
+            var zipMakerLayer
+            function getLegendHTML(baseColor, baseRange) {
+                var grades = baseRange != null ? baseRange : [0, 10, 20, 50, 100, 200, 500, 1000],
+                labels = [],
+                from, to;
+
+                for (var i = 0; i < grades.length; i++) {
+                    from = grades[i];
+                    to = grades[i + 1];
+
+                    labels.push(
+                      '<li><span class="swatch" style="background:' + getColor(from + 1, baseColor, baseRange) + '"></span> ' +
+                      from + (to ? '&ndash;' + to : '+')) + '</li>';
+                }
+                var title = baseColor != null ? "Unbuild" : Leads in Zip
+                return '<span>' + title + ' </span> <ul style="list-style-type: none;">' + labels.join('') + '</ul>';
+            }
+            function getColor(d,baseColor,baseRange) {
+
+
+
+                var color = 'rgba(' + (baseColor != null ? baseColor : '223,48,0') + ','//'rgba('+baseColor!=null?baseColor:'223,48,0'+',';
+                var percent = 0.13
+                var values = baseRange!=null? baseRange : [1000, 500, 200, 100, 50, 20, 10];
+
+                for (var i = 0; i < values.length; i++) {
+                    if (d > values[i]) {
+                        var optacty = (1 - percent * i);
+                        return color + optacty + ')'
+                    }
+                }
+                var optacty = (1 - percent * values.length);
+                return color + optacty + ')'
+
+                return d > 1000 ? '#287aa6' :
+                    d > 500 ? '#3890bf' :
+                    d > 200 ? '#469fcf' :
+                    d > 100 ? '#58acd9' :
+                    d > 50 ? '#6ebfea' :
+                    d > 20 ? '#8ccef2' :
+                    d > 10 ? '#a6dcf8' :
+                    '#c7ebff';
+            }
+            var layersControl = null;
+            function initLayers(layers) {
+                var v = layersControl;
+                
+                /*add layer swicher */
+                var layer_swicher = {
+
+                    'Leads Count Portal': zipMakerLayer
+
+                };
+                if (isAdminLogIn) {
+
+                    layer_swicher['Zip Count'] = ZipPolygonLayer
+                    // layer_swicher['Lot Layer'] = TeamLotLayer
+                }
+                if (layersControl!=null)
+                {
+                    _.each(layersControl._layers, function (v, k) {
+                        var name = _.find(_.keys(layers), function (l) { return l == v.name });
+                        if (name != null) {
+                            layersControl.removeLayer(v.layer);
+                        }
+
+                    });
+                    _.each(layers, function (v, k) {
+                        // layer_swicher[k]= v
+
+                        layersControl.addOverlay(v, k);
+                    })
+                }
+               
+
+                if (layersControl == null)
+                {
+                    layersControl =  L.control.layers({
+
+                    }, layer_swicher).addTo(map);
+                }
+               
+                /******/
+            }
             $.getJSON("/Map/MapData/nyc-zip-code.js", function (data) {
                 initMapBox();
 
@@ -290,32 +467,7 @@
                     };
                 }
 
-                function getColor(d) {
 
-
-
-                    var color = 'rgba(223, 48, 0,'
-                    var percent = 0.13
-                    var values = [1000, 500, 200, 100, 50, 20, 10];
-
-                    for (var i = 0; i < values.length; i++) {
-                        if (d > values[i]) {
-                            var optacty = (1 - percent * i);
-                            return color + optacty + ')'
-                        }
-                    }
-                    var optacty = (1 - percent * values.length);
-                    return color + optacty + ')'
-
-                    return d > 1000 ? '#287aa6' :
-                        d > 500 ? '#3890bf' :
-                        d > 200 ? '#469fcf' :
-                        d > 100 ? '#58acd9' :
-                        d > 50 ? '#6ebfea' :
-                        d > 20 ? '#8ccef2' :
-                        d > 10 ? '#a6dcf8' :
-                        '#c7ebff';
-                }
 
                 function onEachFeature(feature, layer) {
                     layer.on({
@@ -336,7 +488,8 @@
                     var zip = e.target.feature.properties.postalCode;
                     $.getJSON('/map/mapdataservice.svc/ZipCount/' + zip, function (data) {
 
-                        $('#divMsgTest').animate({ top: "25" }, 500);
+                        //$('#divMsgTest').animate({ top: "25" }, 500);
+                        $("#myModal").modal();
 
                         $('#spanZip').html("Zip: " + zip);
 
@@ -371,38 +524,13 @@
 
                     //map.fitBounds(e.target.getBounds());
                 }
-                if (isAdminLogIn) {
-                    map.legendControl.addLegend(getLegendHTML());
-                }
-
-
-                function getLegendHTML() {
-                    var grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-                    labels = [],
-                    from, to;
-
-                    for (var i = 0; i < grades.length; i++) {
-                        from = grades[i];
-                        to = grades[i + 1];
-
-                        labels.push(
-                          '<li><span class="swatch" style="background:' + getColor(from + 1) + '"></span> ' +
-                          from + (to ? '&ndash;' + to : '+')) + '</li>';
-                    }
-
-                    return '<span>Leads in Zip <i class="fa fa-spinner" id="LoadingSpin"></i></span> <ul style="list-style-type: none;">' + labels.join('') + '</ul>';
-                }
-
-
-
-
 
 
                 zipMap = zipMap || [];// data.features;
 
                 var geoJson = []
-                zipMakerLayer
-                var zipMakerLayer = L.mapbox.featureLayer();
+
+                zipMakerLayer = L.mapbox.featureLayer();
 
                 for (var i = 0 ; i < data.features.length; i++) {
 
@@ -451,20 +579,12 @@
                 var z = zipMap;
                 zipMakerLayer.setGeoJSON(geoJson);
 
-                /*add layer swicher */
-                var layer_swicher = {
+                initLayers();
 
-                    'Leads Count Portal': zipMakerLayer
+                map.on("overlayadd", overlayadd);
+                map.on("overlayremove", overlayremove);
 
-                };
-                if (isAdminLogIn) {
 
-                    layer_swicher['Zip Count'] = ZipPolygonLayer
-                }
-                L.control.layers({
-
-                }, layer_swicher).addTo(map);
-                /******/
                 return;
                 //var markers = new L.MarkerClusterGroup();
 
@@ -576,11 +696,11 @@
             }
 
             function ZoomOut(zoom) {
-                //if (isAdminLogIn) {
-                //    if (zoom < 16) {
-                //        ShowPloyons(SHOW_ZIP)
-                //    }
-                //}
+                if (isAdminLogIn) {
+                    if (zoom < 16) {
+                        ShowPloyons(SHOW_ZIP)
+                    }
+                }
 
 
                 //if (zoom >= 16 && zoom < 18) {
@@ -624,14 +744,14 @@
             }
             $(document).ready(function () {
                 if (isAdminLogIn) {
-                    LoadLotPortal();
+                    //LoadLotPortal();
                 } else {
                     LoadTeam($("#LogInTeam").val())
                 }
 
             }).delay(3000)
             var loadBBLE = "0"
-
+            var TeamLotLayer = null
             function LoadLotPortal() {
                 var geoJsonUrl = '/map/mapdataservice.svc/LoadLotByBBLE/' + loadBBLE;
                 $.getJSON(geoJsonUrl, function (data) {
@@ -639,62 +759,99 @@
                     var geoJson = data;
 
                     if (geoJson.features.length > 0) {
-                        LoadLotMap(geoJson)
+                        TeamLotLayer = TeamLotLayer || LoadLotMap(geoJson)
                         loadBBLE = geoJson.features[geoJson.features.length - 1].properties.BBLE
                         LoadLotPortal()
+                    } else {
+                        if (TeamLotLayer != null) {
+                            /*add layer swicher */
+                            var layer_swicher = {
+
+                                'Leads Count Portal': zipMakerLayer
+
+                            };
+                            if (isAdminLogIn) {
+
+                                layer_swicher['Zip Count'] = ZipPolygonLayer
+                                layer_swicher['Team Lot Layer'] = TeamLotLayer
+                            }
+
+
+                            L.control.layers({
+
+                            }, layer_swicher).addTo(map);
+                            /******/
+                        }
                     }
+
                 });
             }
-            function LoadLotMap(geoJson) {
+            function LoadLotMap(geoJson, styleHandler) {
+                
+                
                 return L.geoJson(geoJson, {
-                    style: function (feature) {
+                    style:styleHandler != null?styleHandler : function (feature) {
+                        var fColor = feature.properties.color != null ? feature.properties.color : '#18FFFF';
+                        if (feature.LPBBLE != null) {
+                            fColor = '#D50000'
+                        } else if (feature.Unbuild_SQFT != null) {
+                            fColor = '#4A148C'
+                        }
                         return {
                             weight: 2,
                             opacity: 0.1,
                             color: 'black',
                             fillOpacity: 0.7,
-                            fillColor: feature.properties.color != null ? feature.properties.color : '#18FFFF'
+                            fillColor: fColor
                         };
 
                     },
                     onEachFeature: onEachFeatureBlock
-                }).addTo(map)
+                })//.addTo(map)
 
             }
+            function buildGeoJson(Features)
+            {
+                var geojson = {};
+                geojson['type'] = 'FeatureCollection';
+                geojson['features'] = Features;
+                return geojson
+            }
             function ZoomIn(zoom) {
-                if (zoom === 16) {
-                    // here's where you decided what zoom levels the layer should and should
-                    // not be available for: use javascript comparisons like < and > if
-                    // you want something other than just one zoom level, like
-                    // (map.getZoom > 17)
-                    var bounds = map.getBounds();
-                    var northEast = bounds.getNorthEast();
-                    var southWest = bounds.getSouthWest();
+                //if (zoom === 16) {
+                //    // here's where you decided what zoom levels the layer should and should
+                //    // not be available for: use javascript comparisons like < and > if
+                //    // you want something other than just one zoom level, like
+                //    // (map.getZoom > 17)
+                //    var bounds = map.getBounds();
+                //    var northEast = bounds.getNorthEast();
+                //    var southWest = bounds.getSouthWest();
 
-                    var string = [northEast.lat, northEast.lng, southWest.lat, southWest.lng].join(',');
-                    var geoJsonUrl = '/map/mapdataservice.svc/BlockData/' + string;
+                //    var string = [northEast.lat, northEast.lng, southWest.lat, southWest.lng].join(',');
+                //    var geoJsonUrl = '/map/mapdataservice.svc/BlockData/' + string;
 
-                    $.getJSON(geoJsonUrl, function (data) {
+                //    $.getJSON(geoJsonUrl, function (data) {
 
-                        var geoJson = data;
-                        //if (BlockLayer != null)
-                        //{
-                        //    showLayer(false, BlockLayer)
-                        //}
-                        BlockLayer = L.geoJson(geoJson, {
-                            style: {
-                                weight: 2,
-                                opacity: 0.1,
-                                color: 'black',
-                                fillOpacity: 0.7,
-                                fillColor: '#42A5F5'
-                            },
-                            onEachFeature: onEachFeatureBlock
-                        });
-                        ShowPloyons(SHOW_BLOCK);
+                //        var geoJson = data;
+                //        //if (BlockLayer != null)
+                //        //{
+                //        //    showLayer(false, BlockLayer)
+                //        //}
+                //        BlockLayer = L.geoJson(geoJson, {
+                //            style: {
+                //                weight: 2,
+                //                opacity: 0.1,
+                //                color: 'black',
+                //                fillOpacity: 0.7,
+                //                fillColor: '#42A5F5'
+                //            },
+                //            onEachFeature: onEachFeatureBlock
+                //        });
+                //        ShowPloyons(SHOW_BLOCK);
 
-                    });
-                }
+                //    });
+                //}
+                
                 if (zoom === 18) {
                     var bounds = map.getBounds();
                     var northEast = bounds.getNorthEast();
@@ -706,27 +863,37 @@
                     $.getJSON(geoJsonUrl, function (data) {
 
                         var geoJson = data;
+                        var teamLotFeatures = _.filter(geoJson.features, function (f) {
+                            return f.properties.title != null;
+                        })
 
-                        LotLayer = L.geoJson(geoJson, {
-                            style: function (feature) {
-                                return {
-                                    weight: 2,
-                                    opacity: 0.1,
-                                    color: 'black',
-                                    fillOpacity: 0.7,
-                                    fillColor: feature.properties.color != null ? feature.properties.color : '#18FFFF'
-                                };
+                        LotLayer = LoadLotMap(buildGeoJson(teamLotFeatures));
+                        LPLayer = LoadLotMap(buildGeoJson(_.filter(geoJson.features, function (f) {
+                            return f.properties.LPBBLE != null && f.properties.title == null;
+                        })));
 
-                            },
-                            //    } {
-                            //    weight: 2,
-                            //    opacity: 0.1,
-                            //    color: 'black',
-                            //    fillOpacity: 0.7,
-                            //    fillColor: '#18FFFF'
-                            //},
-                            onEachFeature: onEachFeatureBlock
-                        });
+                        function UnBuildStyle(feature) {
+                            var fColor = getColor(parseInt(feature.properties.Unbuild_SQFT), UNBUILD_COLOR, UNBUILD_RAGNE)
+                            return {
+                                weight: 2,
+                                opacity: 0.1,
+                                color: '#0e4686',
+                                fillOpacity: 0.7,
+                                fillColor: fColor
+                            };
+
+                        }
+                        var unbuild = _.filter(geoJson.features, function (f) {
+                            return f.properties.title == null && f.properties.Unbuild_SQFT != null;
+                        })
+                        unbuild = _.sortBy(unbuild, function (f) { return f.properties.Unbuild_SQFT });
+                        UnbuildLayer = LoadLotMap(buildGeoJson(_.filter(geoJson.features, function (f) {
+                            return f.properties.title == null && f.properties.Unbuild_SQFT!=null;
+                        })), UnBuildStyle);
+                        
+                        //L.control.layers().addOverlay(LotLayer, "Team Lot")
+                        //LotLayer.addTo(map);
+                        initLayers({ "Team Lot": LotLayer, "LP Lot": LPLayer, 'Unbuild': UnbuildLayer });
                         ShowPloyons(SHOW_LOT);
 
                     });
@@ -832,58 +999,56 @@
             }
 
             .message p {
-                margin: 0;
-            }
+        
+      @keyframes animate b {
+                f
 
-            @keyframes animate-bg {
-                from {
-                    background-position: 0 0;
-                }
+                   : 0 0;
+               }                                        
+                  nd-position: - 0
+                     }
+          .mess ge_popup
+                  backgroun : whit
+                  color: #7778 b;
+                 kground  whit
+                  border-ra ius: 12p;                
+             boder none;
+                box-shad w: -
+            p
 
-                to {
-                    background-position: -80px 0;
-                }
-            }
+            0, 0.25);
+          
+           }
 
-            .message_popup {
-                background: white;
-                color: #77787b;
-                background: white;
-                border-radius: 12px;
-                border: none;
-                box-shadow: -1px 0px 13px 4px rgba(10, 10, 10, 0.25);
-                padding: 0px;
-            }
+                 e_popup_title 
+                             d;
+            10px 0px 0px 
+                    font-siz : 22
+                   color  #399
+             
+            ht: 300;
+          ;
+           }
+                essage pupup
+                       ont-s
+                          wi th: 3
+                    height: 32px;                
+                ne-height: 32p ;                
+  -align: cener;
+                  
+            0px;
+                o
+                           }                ssage_pupu _cont
+                     p dding: 0px;
+     t
 
-            .message_popup_title {
-                background: #d9f1fd;
-                border-radius: 10px 10px 0px 0px;
-                font-size: 22px;
-                color: #3993c1;
-                font-weight: 300;
-                padding: 20px;
-            }
+                        mporta t;                
+                           info_
+                      width: 00%;
+     t
 
-            .message_pupup_icon {
-                font-size: 16px;
-                width: 32px;
-                height: 32px;
-                line-height: 32px;
-                text-align: center;
-                border-radius: 20px;
-                border: 1px solid;
-            }
-
-            .message_pupup_content {
-                padding: 20px;
-                font-size: 14px;
-                color: #77787b !important;
-            }
-
-            .info_table {
-                width: 100%;
-                font-size: 14px;
-                color: #77787b !important;
+            
+                color:##77787b !important;
             }
         </style>
 
@@ -896,51 +1061,7 @@
                 <td>{{Transactions}}</td>
             </tr>
         </script>
-        <div id="divMsgTest" class=" message message_popup" style="top: -500px; right: 40px; width: 427px">
-            <div class="msgtitle message_popup_title">
 
-                <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa fa-file-excel-o with_circle message_pupup_icon" style="cursor:pointer"  title="Export to Excel"></i>'></asp:LinkButton>
-                <%--<i class="fa fa-envelope with_circle message_pupup_icon"></i>--%>&nbsp; <span id="spanZip" style="font-size: 22px;"></span>
-                <span style="float: right; line-height: 30px; font-weight: 600; cursor: pointer; font-size: 18px" onclick="HideMessages()"><i class="fa fa-times" style="color: #2e2f31"></i></span>
-            </div>
-            <div class="message_pupup_content">
-                <div role="tabpanel">
-
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#team_leads" aria-controls="team_leads" role="tab" data-toggle="tab">Team Leads</a></li>
-                        <li role="presentation"><a href="#leads_infos" aria-controls="leads_infos" role="tab" data-toggle="tab">Leads Infos</a></li>
-
-                    </ul>
-
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="team_leads">
-                            <div>
-                                <table  class="table table-striped info_table " >
-                                    <tbody id="team_leads_table"></tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="leads_infos">
-                            <table id="zipCountTable" class="info_table table table-striped">
-                                <tr id="tablehead">
-                                    <th>Type Name </th>
-                                    <th>Count </th>
-                                    <th>Percent</th>
-                                    <th>Transactions</th>
-                                </tr>
-                            </table>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
         <script>
             $('[title]').tooltip({ placement: 'bottom' })
         </script>
@@ -955,12 +1076,12 @@
 
             function ShowLoading(isloading) {
                 if (isloading) {
-                    $('#LoadingSpin').addClass("fa-spin")
-
+                    //$('#LoadingSpin').addClass("fa-spin")
+                    $('#loadingSpin').css("display",'')
 
                 } else {
-                    $('#LoadingSpin').removeClass("fa-spin")
-
+                    //$('#LoadingSpin').removeClass("fa-spin")
+                    $('#loadingSpin').css("display", 'none')
                 }
             }
         </script>
