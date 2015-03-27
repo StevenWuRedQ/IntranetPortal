@@ -444,10 +444,7 @@ Partial Public Class Employee
         'End If
 
         Using ctx As New Entities
-            Dim team = (From t In ctx.Teams
-                       Join ut In ctx.UserInTeams On t.TeamId Equals ut.TeamId
-                       Where ut.EmployeeName = empName
-                       Select t.Name).FirstOrDefault
+            Dim team = UserInTeam.GetUserTeam(empName)
 
             If team IsNot Nothing Then
                 recycleName = team & " Office"

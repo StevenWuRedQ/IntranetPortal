@@ -113,6 +113,11 @@ Public Class ImportAgentData
                 lList = ctx.Leads.Where(Function(le) le.EmployeeID = empId AndAlso le.Status = iStutsFrom).ToList()
             End If
 
+            If Not String.IsNullOrEmpty(txtLeadsAmount.Text) Then
+                Dim count = CInt(txtLeadsAmount.Text)
+                lList = lList.Take(count).ToList
+            End If
+
             For Each ld In lList
                 ld.EmployeeID = CInt(cbEmpTo.Value)
                 ld.EmployeeName = cbEmpTo.Text
@@ -124,8 +129,6 @@ Public Class ImportAgentData
                     Else
                         ld.Status = ConvertLeadStatus(cbStatusToChange.Text)
                     End If
-                   
-                   
                 End If
 
                 If (ld.Status = LeadStatus.Callback AndAlso deCallBackTime.Value IsNot Nothing) Then
@@ -133,7 +136,12 @@ Public Class ImportAgentData
                 End If
                 Dim strtoStatus = If(String.IsNullOrEmpty(cbStatusToChange.Text), "", "in status " + cbStatusToChange.Text)
                 Dim strFormStatus = If(String.IsNullOrEmpty(cbStatusFrom.Text), "", "in status " + cbStatusFrom.Text)
-                LeadsActivityLog.AddActivityLog(DateTime.Now, "Transfer all Leads form: " & cbEmpFrom.Text & " " & strFormStatus & " to: " & cbEmpTo.Text & strtoStatus, ld.BBLE, LeadsActivityLog.LogCategory.Status, Nothing, Page.User.Identity.Name, LeadsActivityLog.EnumActionType.Reassign)
+                LeadsActivityLog.AddActivityLog(DateTime.Now, "Transfer form: " & cbEmpFrom.Text & " " & strFormStatus & " to: " & cbEmpTo.Text & strtoStatus, ld.BBLE, LeadsActivityLog.LogCategory.Status, Nothing, Page.User.Identity.Name, LeadsActivityLog.EnumActionType.Reassign)
+
+                If ld.Status = LeadStatus.NewLead Then
+                    LeadsStatusLog.AddNewEntity(ld.BBLE, LeadsStatusLog.LogType.NewLeads, ld.EmployeeName, Page.User.Identity.Name, agent, ctx)
+                End If
+
             Next
 
             ctx.SaveChanges()

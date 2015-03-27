@@ -497,9 +497,7 @@
                         $("#myModal").modal();
 
                         $('#spanZip').html("Zip: " + zip);
-
-
-
+                        
                         //$('#tdLeadsCount').html(findCountNum(zip));
                         var zipCountData = data;
                         var html = $('#tablehead')[0].outerHTML;

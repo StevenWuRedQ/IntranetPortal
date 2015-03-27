@@ -113,6 +113,15 @@ Partial Public Class ImportAgentData
     Protected WithEvents cbStatusFrom As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
 
     '''<summary>
+    '''txtLeadsAmount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtLeadsAmount As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
     '''gridAgentLeads control.
     '''</summary>
     '''<remarks>

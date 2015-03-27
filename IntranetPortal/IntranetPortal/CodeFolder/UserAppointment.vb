@@ -24,6 +24,18 @@
         End Using
     End Function
 
+    Public Shared Sub ExpiredAppointmentByBBLE(bble As String)
+        Using Context As New Entities
+            Dim userAppoint = Context.UserAppointments.Where(Function(t) t.BBLE = bble).ToList
+
+            For Each apoit In userAppoint
+                apoit.Status = AppointmentStatus.Expired
+            Next
+
+            Context.SaveChanges()
+        End Using
+    End Sub
+
     Public Shared Function GetMyTodayAppointments(name As String) As List(Of UserAppointment)
         Using Context As New Entities
 
@@ -48,5 +60,6 @@
         Accepted
         Declined
         ReScheduled
+        Expired
     End Enum
 End Class

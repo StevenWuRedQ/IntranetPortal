@@ -330,6 +330,7 @@
     <Compile Include="CodeFolder\Lead.vb" />
     <Compile Include="CodeFolder\LeadsActivityLog.vb" />
     <Compile Include="CodeFolder\LeadsSearchTask.vb" />
+    <Compile Include="CodeFolder\LeadsStatusLog.vb" />
     <Compile Include="CodeFolder\MapDataSet.vb" />
     <Compile Include="CodeFolder\Office.vb" />
     <Compile Include="CodeFolder\OnlineUser.vb" />
@@ -438,6 +439,9 @@
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\LeadsSearchTask.vb">
+      <DependentUpon>PortalEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\LeadsStatusLog.vb">
       <DependentUpon>PortalEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataModel\LeadsTaxLien.vb">

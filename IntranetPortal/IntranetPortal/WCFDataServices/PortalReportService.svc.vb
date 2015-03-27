@@ -89,6 +89,50 @@ Public Class PortalReportService
         'End Using
     End Function
 
+    Public Function LoadAgentSummaryReport(agentName As String, startDate As String, endDate As String) As Channels.Message Implements IPortalReportService.LoadAgentSummaryReport
+        Dim dtStart = DateTime.Parse(startDate)
+        Dim dtEnd = DateTime.Parse(endDate)
+        Dim teamName = UserInTeam.GetUserTeam(agentName)
+
+        Dim result = New List(Of Object)
+        Dim allData = New List(Of PortalReport.AgentActivityData)
+        Dim agentData As PortalReport.AgentActivityData
+
+        If Not String.IsNullOrEmpty(teamName) Then
+            allData = PortalReport.LoadTeamAgentActivityReport(teamName, dtStart, dtEnd)
+            agentData = allData.Where(Function(a) a.Name = agentName).FirstOrDefault
+        Else
+            agentData = PortalReport.LoadAgentActivityReport(agentName, startDate, endDate)
+        End If
+
+        If agentData IsNot Nothing Then
+            allData.Add(agentData)
+            result.AddRange({New With {
+                              .Category = "CallOwner",
+                              .User = agentData.CallOwner,
+                              .Avg = CInt(allData.Average(Function(a) a.CallOwner))
+                              },
+                                    New With {
+                              .Category = "Comments",
+                              .User = agentData.Comments,
+                              .Avg = CInt(allData.Average(Function(a) a.Comments))
+                                        },
+                                      New With {
+                              .Category = "FollowUp",
+                              .User = agentData.FollowUp,
+                              .Avg = CInt(allData.Average(Function(a) a.FollowUp))
+                                        },
+                                     New With {
+                              .Category = "UniqueBBLE",
+                              .User = agentData.Comments,
+                              .Avg = CInt(allData.Average(Function(a) a.UniqueBBLE))
+                                        }
+                                    })
+        End If
+
+        Return result.ToJson
+    End Function
+
     Public Function LoadAgentActivityLeads(agentName As String, action As String, startDate As String, endDate As String) As Channels.Message Implements IPortalReportService.LoadAgentActivityLeads
         Return LeadsGridJson(LeadsDataByActivityAction({agentName}, action, startDate, endDate))
     End Function
@@ -206,6 +250,7 @@ Public Class PortalReportService
 
 
 
+  
 End Class
 
 Public Module JsonExtension

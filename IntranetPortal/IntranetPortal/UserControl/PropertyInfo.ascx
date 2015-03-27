@@ -218,7 +218,7 @@
                     <label class="ss_form_input_title">BBLE</label>
                     <input class="ss_form_input font_black" value="<%= If(LeadsInfoData.IsApartment, LeadsInfoData.BuildingBBLE, LeadsInfoData.BBLE)%>">
                 </li>
-               <%-- <% If LeadsInfoData isnot Nothing andalso LeadsInfoData.IsApartment Then%>
+                <%-- <% If LeadsInfoData isnot Nothing andalso LeadsInfoData.IsApartment Then%>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Unit Number</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.UnitNum %>">
@@ -233,7 +233,7 @@
                     <label class="ss_form_input_title">Block | Lot</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.Block & "| " & LeadsInfoData.Lot %>">
                 </li>
-              <%--  <li class="ss_form_item">
+                <%--  <li class="ss_form_item">
                     <label class="ss_form_input_title">Lot</label>
                     <input class="ss_form_input" value="<%= LeadsInfoData.Lot %>">
                 </li>--%>
@@ -516,7 +516,7 @@
                     <dx:GridViewDataTextColumn FieldName="Defendant" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Index" Settings-AllowSort="False"></dx:GridViewDataTextColumn>
                 </Columns>
-            </dx:ASPxGridView>           
+            </dx:ASPxGridView>
         </div>
         <%--end--%>
     </div>

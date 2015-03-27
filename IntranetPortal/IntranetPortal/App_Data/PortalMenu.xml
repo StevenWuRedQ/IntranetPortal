@@ -106,6 +106,12 @@
           <![CDATA[ <i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="ManageReport" Text="Reports" NavigationUrl="/AgentOverview/AgentOverview.aspx" ShowAmount="false">
+        <UserRoles>OfficeManager-*</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-group"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <PortalNavItem Name="Calendar" Text="Calendar" NavigationUrl="/Calendar.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-calendar"></i>]]>
@@ -360,7 +366,7 @@
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ReportPerformance" Text="Performance Tracking" NavigationUrl="/ManagementUI/Management1.aspx" ShowAmount="false">
+      <!--<PortalNavItem Name="ReportPerformance" Text="Performance Tracking" NavigationUrl="/ManagementUI/Management1.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-line-chart"></i>]]>
         </FontClass>
@@ -374,7 +380,7 @@
         <FontClass>
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
-      </PortalNavItem>
+      </PortalNavItem>-->
     </Items>
   </PortalNavItem>
   

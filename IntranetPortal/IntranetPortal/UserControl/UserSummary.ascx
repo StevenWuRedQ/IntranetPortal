@@ -4,6 +4,12 @@
 
 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 
+<link href="/Content/dx.light.css" rel="stylesheet" />
+<script src="/Scripts/globalize/globalize.js"></script>
+<script src="/Scripts/dx.chartjs.js"></script>
+<script src="/Scripts/dx.webappjs.js"></script>
+<script src="/Scripts/dx.phonejs.js"></script>
+
 <%--<link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
 <script src="/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>--%>
@@ -107,7 +113,7 @@
         padding: 8px 12px;
         border-radius: 5px;
     }
-    
+
     .dxgv {
         font: 14px 'Source Sans Pro';
         /*height: 40px;*/
@@ -164,7 +170,7 @@
                     <div style="display: inline-table; font-family: 'Source Sans Pro'; margin-left: 19px; margin-top: 15px;">
 
                         <div style="float: left; font-weight: 300; font-size: 48px; color: #234b60">
-                            <span style="text-transform: capitalize"><%= Page.User.Identity.Name %></span>'s Summary &nbsp;
+                            <span style="text-transform: capitalize" id="spanUserName"><%= Page.User.Identity.Name %></span>'s Summary &nbsp;
                         </div>
                         <div align="center" style="background-color: #ff400d;" class="label-summary-info">
                             <table>
@@ -187,11 +193,15 @@
                                     </td>
                                 </tr>
                             </table>
-
                         </div>
                     </div>
+
+
+
                     <%------end------%>
                     <div style="float: left; margin-right: 10px; margin-left: 35px; min-width: 1200px;">
+
+
                         <table style="vertical-align: top; height: 700px; margin-top: -21px;">
                             <tr style="height: 240px">
                                 <td style="width: 380px; vertical-align: top" class="under_line">
@@ -199,7 +209,7 @@
                                     <%--ments--%>
                                     <h4>
                                         <img src="../images/grid_upcoming_icon.png" class="vertical-img"><span class="heading_text">Upcoming Appointments</span></h4>
-                                    <div class="div-underline" style="width:380px">
+                                    <div class="div-underline" style="width: 380px">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridAppointment" ClientInstanceName="gridAppointmentClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" SettingsPager-PageSize="5" OnDataBinding="gridAppointment_DataBinding">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -255,9 +265,9 @@
                                     <h4>
                                         <img src="../images/grid_propity.png" class="vertical-img" /><span class="heading_text">Priority</span>
                                     </h4>
-                                    <div class="div-underline" >
+                                    <div class="div-underline">
                                         <dx:ASPxGridView runat="server" Width="100%" ID="gridPriority" ClientInstanceName="gridPriorityClient" KeyFieldName="BBLE" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="5"
-                                             OnDataBinding="gridPriority_DataBinding">
+                                            OnDataBinding="gridPriority_DataBinding">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <DataItemTemplate>
@@ -283,7 +293,6 @@
                                 <td rowspan="3" style="vertical-align: top; width: 380px">
                                     <h4>
                                         <img src="../images/grid_calendar.png" class="vertical-img" /><span class="heading_text">Today's Calendar</span>
-
                                     </h4>
                                     <div style="height: 615px; margin-top: 60px">
                                         <dx:ASPxScheduler ID="todayScheduler" runat="server" Width="100%" ActiveViewType="Day" OnPopupMenuShowing="todayScheduler_PopupMenuShowing"
@@ -328,22 +337,182 @@
                                             </Storage>
                                         </dx:ASPxScheduler>
                                     </div>
-
                                 </td>
-                                <td rowspan="4" style="width: 0px"></td>
+                                <td rowspan="4" style="width: 50px"></td>
+                                <td rowspan="4" style="vertical-align: top; width: 380px; padding-top: 40px;">
+                                    <div style="width: 375px">
+                                        <div id="dateRange" class="containers" style="width: 100%;"></div>
+                                        <div id="agentActivityChart" class="containers" style="height: 240px; width: 100%;"></div>
+                                        <div id="ProcessStatusChart" class="containers" style="width: 100%;"></div>
+                                    </div>
+                                    <script type="text/javascript">
+                                        var agentSummaryReport = {
+                                            ActivityDataSource: null,
+                                            LeadsDataSource: null,
+                                            AgentName: null,
+                                            DateRange: function () { return $('#dateRange').has("svg").length ? $('#dateRange').dxRangeSelector('instance') : null },
+                                            BarChart: function () {
+                                                if ($("#agentActivityChart").has("svg").length)
+                                                    return $("#agentActivityChart").dxChart("instance");
+                                                else {
+                                                    var tab = this;
+                                                    $("#agentActivityChart").dxChart({
+                                                        dataSource: {},
+                                                        commonSeriesSettings: {
+                                                            argumentField: "Category",
+                                                            type: "bar",
+                                                            hoverMode: "allArgumentPoints",
+                                                            selectionMode: "allArgumentPoints",
+                                                            label: {
+                                                                visible: true,
+                                                                format: "fixedPoint",
+                                                                precision: 0
+                                                            }
+                                                        },
+                                                        argumentAxis: {
+                                                            argumentType: 'string'
+                                                        },
+                                                        series: [
+                                                            { valueField: "User", name: "User", tag: "User" },
+                                                            { valueField: "Avg", name: "Team", tag: "TeamAverage" }
+                                                        ],
+                                                        title: "Activity Summary",
+                                                        legend: {
+                                                            verticalAlignment: "bottom",
+                                                            horizontalAlignment: "center"
+                                                        },
+                                                        loadingIndicator: {
+                                                            show: true
+                                                        },
+                                                        onPointClick: function (info) {
+                                                            var clickedPoint = info.target;
+                                                            clickedPoint.isSelected() ? clickedPoint.clearSelection() : clickedPoint.select();
+
+                                                            if (clickedPoint.isSelected()) {
+
+                                                            }
+                                                        },
+                                                        onPointSelectionChanged: function (info) {
+                                                            //var selectedPoint = info.target;
+                                                            //if (selectedPoint.isSelected()) {
+
+                                                            //}
+                                                        },
+                                                        onLegendClick: function (info) {
+
+                                                        }
+                                                    });
+                                                    return $("#agentActivityChart").dxChart("instance");
+                                                }
+                                            },
+                                            InitalTab: function () {
+                                                var tab = this;
+                                                var dateNow = new Date();
+                                                var endDate = new Date();
+                                                endDate = endDate.setDate(dateNow.getDate() + 1);
+                                                var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
+                                                $("#dateRange").dxRangeSelector({
+                                                    margin: {
+                                                        top: 5
+                                                    },
+                                                    size: {
+                                                        height: 150
+                                                    },
+                                                    width: 375,
+                                                    scale: {
+                                                        startValue: new Date(2015, 1, 1),
+                                                        endValue: endDate,
+                                                        minorTickInterval: "day",
+                                                        majorTickInterval: 'week',
+                                                        minRange: "day",
+                                                        showMinorTicks: false
+                                                    },
+                                                    sliderMarker: {
+                                                        format: "monthAndDay"
+                                                    },
+                                                    selectedRange: {
+                                                        startValue: new Date(dateNow.getFullYear(), dateNow.getMonth(), 1),
+                                                        endValue: endDate
+                                                    },
+                                                    onSelectedRangeChanged: function (e) {
+                                                        tab.UpdateActivityChart(e.startValue, e.endValue);
+                                                    }
+                                                });
+                                            },
+                                            ShowTab: function (name) {
+                                                this.AgentName = name;
+                                                var range = this.DateRange();
+                                                var selectedRange = range.getSelectedRange();
+                                                this.UpdateActivityChart(selectedRange.startValue, selectedRange.endValue);
+                                            },
+                                            LoadAgentActivityDs: function (startDate, endDate) {
+                                                this.ActivityDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentSummaryReport/" + this.AgentName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-"));
+                                                this.LeadsDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentLeadsReport/" + this.AgentName);
+                                            },
+                                            UpdateActivityChart: function (startDate, endDate) {
+                                                var chart = this.BarChart();
+                                                chart.showLoadingIndicator();
+                                                this.LoadAgentActivityDs(startDate, endDate);
+                                                chart.beginUpdate();
+                                                chart.option("dataSource", this.ActivityDataSource);
+                                                chart.endUpdate();
+                                                this.LoadStatusChart();
+                                            },
+                                            LoadStatusChart: function () {
+                                                var option = {
+                                                    dataSource: this.LeadsDataSource,
+                                                    tooltip: {
+                                                        enabled: true,
+                                                        percentPrecision: 0,
+                                                        customizeText: function () {
+                                                            return this.argumentText + " (" + this.percentText + ")";
+                                                        }
+                                                    },
+                                                    legend: {
+                                                        visible: true,
+                                                        verticalAlignment: "bottom",
+                                                        horizontalAlignment: "center"
+                                                    },
+                                                    series: [{
+                                                        type: "doughnut",
+                                                        argumentField: "Status",
+                                                        valueField: "Count",
+                                                        tagField: "StatusKey",
+                                                        label: {
+                                                            visible: true,
+                                                            connector: {
+                                                                visible: true
+                                                            }
+                                                        }
+                                                    }],
+                                                    title: "Leads Status",
+                                                    palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
+                                                };
+
+                                                $("#ProcessStatusChart").dxPieChart(option);
+                                            }
+                                        };
+
+                                        $(document).ready(function () {
+                                            agentSummaryReport.InitalTab();
+                                            var name = $("#spanUserName").html();
+                                            agentSummaryReport.ShowTab(name);
+                                        });
+                                    </script>
+                                </td>
                             </tr>
                             <tr style="height: 240px">
                                 <td style="vertical-align: top" class="under_line">
                                     <h4>
                                         <img src="../images/grid_task_icon.png" class="vertical-img" /><span class="heading_text">Task</span> </h4>
-                                    <div class="div-underline" style="width:380px">
-                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridTask" KeyFieldName="ProcInstId;ActInstId" ClientInstanceName="gridTaskClient" 
-                                             OnDataBinding="gridTask_DataBinding" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                    <div class="div-underline" style="width: 380px">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridTask" KeyFieldName="ProcInstId;ActInstId" ClientInstanceName="gridTaskClient"
+                                            OnDataBinding="gridTask_DataBinding" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="DisplayName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                                                     <Settings AutoFilterCondition="Contains" />
                                                     <DataItemTemplate>
-                                                         <div style="cursor: pointer; height: 30px; padding-left: 20px; line-height: 30px;" onclick='ShowWorklistItem("<%# Eval("ItemData")%>", "<%# Eval("ProcessName")%>")'><%# Eval("DisplayName")%></div>
+                                                        <div style="cursor: pointer; height: 30px; padding-left: 20px; line-height: 30px;" onclick='ShowWorklistItem("<%# Eval("ItemData")%>", "<%# Eval("ProcessName")%>")'><%# Eval("DisplayName")%></div>
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn FieldName="StartDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">
@@ -351,7 +520,7 @@
                                                     <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataColumn FieldName="ActivityName" Visible="false" VisibleIndex="3">
-                                                </dx:GridViewDataColumn>                                               
+                                                </dx:GridViewDataColumn>
                                                 <dx:GridViewDataColumn FieldName="ProcSchemeDisplayName" Visible="false" VisibleIndex="5">
                                                     <GroupRowTemplate>
                                                         <div>
@@ -373,7 +542,7 @@
                                                 <dx:GridViewDataColumn Width="40px" VisibleIndex="5" EditCellStyle-BorderLeft-BorderStyle="Solid">
                                                     <DataItemTemplate>
                                                         <%--change the image and the size by steven--%>
-                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer;visibility: hidden;"  />
+                                                        <img src="/images/menu_flag.png" style="/*width: 16px; height: 16px; */vertical-align: bottom; cursor: pointer; visibility: hidden;" />
                                                     </DataItemTemplate>
                                                 </dx:GridViewDataColumn>
                                             </Columns>
@@ -393,9 +562,9 @@
                                     <h4>
                                         <img src="../images/grid_call_back_icon.png" class="vertical-img" /><span class="heading_text">Call Backs</span> </h4>
                                     <%--------end-------%>
-                                    <div class="div-underline" style="width:380px">
-                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridCallback" ClientInstanceName="gridCallbackClient" KeyFieldName="BBLE" AutoGenerateColumns="false" 
-                                             OnDataBinding="gridCallback_DataBinding" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
+                                    <div class="div-underline" style="width: 380px">
+                                        <dx:ASPxGridView runat="server" Width="100%" ID="gridCallback" ClientInstanceName="gridCallbackClient" KeyFieldName="BBLE" AutoGenerateColumns="false"
+                                            OnDataBinding="gridCallback_DataBinding" Settings-ShowColumnHeaders="false" Settings-GridLines="None" Border-BorderStyle="None" Paddings-PaddingTop="10px" SettingsPager-PageSize="6">
                                             <Columns>
                                                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1" CellStyle-CssClass="cell_hover">
                                                     <DataItemTemplate>
@@ -440,7 +609,6 @@
 
                                             </Styles>
                                             <SettingsPager NumericButtonCount="4">
-                                                                                         
                                             </SettingsPager>
                                             <GroupSummary>
                                                 <dx:ASPxSummaryItem FieldName="CallbackDate" SummaryType="Count" />

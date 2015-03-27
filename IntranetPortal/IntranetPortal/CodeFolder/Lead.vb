@@ -175,7 +175,19 @@ Partial Public Class Lead
 
                         If status = LeadStatus.InProcess Then
                             action = LeadsActivityLog.EnumActionType.InProcess
+
+                            'In Process Log
+                            LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.InProcess, lead.EmployeeName, empName, Nothing)
                         End If
+
+                        If status = LeadStatus.Closed Then
+                            LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.Closed, lead.EmployeeName, empName, Nothing)
+                        End If
+
+                        'If status = LeadStatus.DeadEnd Then
+                        '    action = LeadsActivityLog.EnumActionType.DeadLead
+                        '    LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.DeadLeads, lead.EmployeeName, empName)
+                        'End If
 
                         LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Status.ToString, empId, empName, action)
                     End If
@@ -214,6 +226,9 @@ Partial Public Class Lead
 
                 Context.SaveChanges()
 
+                'Dead End
+                LeadsStatusLog.AddNew(bble, LeadsStatusLog.LogType.DeadLeads, lead.EmployeeName, HttpContext.Current.User.Identity.Name, Nothing)
+
                 'Expired user Task
                 WorkflowService.ExpireTaskProcess(bble)
                 UserTask.ExpiredTasks(bble)
@@ -243,6 +258,52 @@ Partial Public Class Lead
         Dim results = (From ld In ctx.Leads Where ld.Status = LeadStatus.DeadEnd).ToList
         Return results
     End Function
+
+    Public Shared Sub BatchAssignLeads(bbles As String(), name As String, empId As Integer, assignBy As String)
+        Using Context As New Entities
+            For Each item In bbles
+                Dim li = Context.LeadsInfoes.Find(item)
+
+                If li IsNot Nothing Then
+                    Dim newlead = Context.Leads.Find(item)
+                    Dim orgName = Nothing
+                    If newlead Is Nothing Then
+                        newlead = New Lead() With {
+                                          .BBLE = li.BBLE,
+                                          .LeadsName = li.LeadsName,
+                                          .Neighborhood = li.NeighName,
+                                          .EmployeeID = empId,
+                                          .EmployeeName = name,
+                                          .Status = LeadStatus.NewLead,
+                                          .AssignDate = DateTime.Now,
+                                          .AssignBy = assignBy
+                                          }
+                        Context.Leads.Add(newlead)
+                    Else
+                        orgName = newlead.EmployeeName
+                        newlead.LeadsName = li.LeadsName
+                        newlead.Neighborhood = li.NeighName
+                        newlead.EmployeeID = empId
+                        newlead.EmployeeName = name
+                        newlead.Status = LeadStatus.NewLead
+                        newlead.AssignDate = DateTime.Now
+                        newlead.AssignBy = assignBy
+
+                        Dim comments = String.Format("Leads assign from {0} to  {1}", orgName, name)
+                        LeadsActivityLog.AddActivityLogEntity(DateTime.Now, comments, item, LeadsActivityLog.LogCategory.Status.ToString, Nothing, assignBy, LeadsActivityLog.EnumActionType.Reassign, Context)
+                    End If
+
+                    'LeadsActivityLog.AddActivityLogEntity(DateTime.Now, "", item, LeadsActivityLog.LogCategory.Status.ToString, Nothing, assignBy, LeadsActivityLog.EnumActionType.Reassign, Context)
+                    LeadsStatusLog.AddNewEntity(item, LeadsStatusLog.LogType.NewLeads, name, assignBy, orgName, Context)
+                End If
+            Next
+            If Context.GetValidationErrors().Count > 0 Then
+                Throw New Exception("Exception Occured in Assign: " & Context.GetValidationErrors()(0).ValidationErrors(0).ErrorMessage)
+            Else
+                Context.SaveChanges()
+            End If
+        End Using
+    End Sub
 
     Public ReadOnly Property SharedUsers As List(Of String)
         Get
@@ -304,9 +365,13 @@ Partial Public Class Lead
 
                 ctx.SaveChanges()
 
+                'log the status
+                LeadsStatusLog.AddNew(BBLE, LeadsStatusLog.LogType.NewLeads, emp.Name, ld.AssignBy, EmployeeName)
+
                 'Expired the task on this bble
                 WorkflowService.ExpiredLeadsProcess(BBLE)
                 UserTask.ExpiredTasks(BBLE)
+                UserAppointment.ExpiredAppointmentByBBLE(BBLE)
 
                 Dim comments = String.Format("Leads Reassign from {0} to {1}.", originator, empName)
                 LeadsActivityLog.AddActivityLog(DateTime.Now, comments, BBLE, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
@@ -345,6 +410,7 @@ Partial Public Class Lead
             ReAssignLeads(recylceName, recycleBy)
         End If
 
+        LeadsStatusLog.AddNew(BBLE, LeadsStatusLog.LogType.Recycled, EmployeeName, recycleBy, Nothing)
         Return
 
         'Dim recycleName = Employee.Department & " office"

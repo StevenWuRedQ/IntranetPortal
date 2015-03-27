@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Agent_Properties">
           <Key>
             <PropertyRef Name="ID" />
@@ -353,6 +353,18 @@
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="DeclineReason" Type="nvarchar" MaxLength="255" />
           <Property Name="Type" Type="int" />
+        </EntityType>
+        <EntityType Name="LeadsStatusLogs">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Employee" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="LeadsTaxLiens">
           <Key>
@@ -848,6 +860,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
           <EntitySet Name="LeadsInfo" EntityType="Self.LeadsInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsMortgageData" EntityType="Self.LeadsMortgageData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsSearchTask" EntityType="Self.LeadsSearchTask" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeadsStatusLogs" EntityType="Self.LeadsStatusLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LeadsTaxLiens" EntityType="Self.LeadsTaxLiens" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginLogs" EntityType="Self.LoginLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MapDataSet" EntityType="Self.MapDataSet" Schema="dbo" store:Type="Tables" />
@@ -1114,6 +1127,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
           <FunctionImport Name="UploadSearchInfo2Portal" />
           <EntitySet Name="LeadsInfoViews" EntityType="IntranetPortalModel.LeadsInfoView" />
           <EntitySet Name="MapDataSets" EntityType="IntranetPortalModel.MapDataSet" />
+          <EntitySet Name="LeadsStatusLogs" EntityType="IntranetPortalModel.LeadsStatusLog" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1993,6 +2007,18 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
           <Property Name="PercentWDB" Type="Double" />
           <Property Name="Transactions" Type="Int32" />
         </EntityType>
+        <EntityType Name="LeadsStatusLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Employee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2846,6 +2872,19 @@ warning 6002: The table/view 'IntranetPortal.dbo.LeadsInfoView' does not have a 
                 <ScalarProperty Name="KeyCode" ColumnName="KeyCode" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeadsStatusLogs">
+            <EntityTypeMapping TypeName="IntranetPortalModel.LeadsStatusLog">
+              <MappingFragment StoreEntitySet="LeadsStatusLogs">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

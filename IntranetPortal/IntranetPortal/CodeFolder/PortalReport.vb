@@ -2,7 +2,14 @@
 
     Public Shared Function LoadTeamAgentActivityReport(teamName As String, startDate As DateTime, endDate As DateTime) As List(Of AgentActivityData)
         Dim users = UserInTeam.GetTeamFinders(teamName)
+        Return LoadActivityReport(users, startDate, endDate)
+    End Function
 
+    Public Shared Function LoadAgentActivityReport(agentName As String, startDate As DateTime, endDate As DateTime) As AgentActivityData
+        Return LoadActivityReport({agentName}, startDate, endDate).FirstOrDefault
+    End Function
+
+    Private Shared Function LoadActivityReport(users As String(), startDate As DateTime, endDate As DateTime) As List(Of AgentActivityData)
         Using ctx As New Entities
             Dim actionTypes = {LeadsActivityLog.EnumActionType.CallOwner,
                                LeadsActivityLog.EnumActionType.Comments,

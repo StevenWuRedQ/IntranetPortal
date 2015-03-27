@@ -20,16 +20,17 @@ Public Class LeadsSubMenu
     Sub BindEmployeeList()
         Using Context As New Entities
 
-            If Page.User.IsInRole("Admin") Then
-                listboxEmployee.DataSource = Context.Employees.Where(Function(emp) emp.Active = True Or emp.Name.EndsWith("Office")).ToList.OrderBy(Function(em) em.Name)
-                listboxEmployee.DataBind()
-                Return
-            End If
+            'If Page.User.IsInRole("Admin") Then
+            '    listboxEmployee.DataSource = Context.Employees.Where(Function(emp) emp.Active = True Or emp.Name.EndsWith("Office")).ToList.OrderBy(Function(em) em.Name)
+            '    listboxEmployee.DataBind()
+            '    Return
+            'End If
 
-            Dim mgr = Employee.GetInstance(Page.User.Identity.Name)
-            Dim emps = Employee.GetSubOrdinate(mgr.EmployeeID)
-            emps.Add(mgr)
-            listboxEmployee.DataSource = emps
+            'Dim mgr = Employee.GetInstance(Page.User.Identity.Name)
+            'Dim emps = Employee.GetSubOrdinate(mgr.EmployeeID)
+            'emps.Add(mgr)
+            'listboxEmployee.DataSource = emps
+            listboxEmployee.DataSource = Employee.GetMyEmployees(Page.User.Identity.Name)
             listboxEmployee.DataBind()
         End Using
     End Sub
@@ -46,17 +47,21 @@ Public Class LeadsSubMenu
             Dim empId = CInt(e.Parameter.Split("|")(1))
             Dim name = e.Parameter.Split("|")(2)
 
+            Dim ld = Lead.GetInstance(bble)
+            If ld IsNot Nothing Then
+                ld.ReAssignLeads(name, Page.User.Identity.Name)
+            End If
 
-            Using Context As New Entities
-                Dim lead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
+            'Using Context As New Entities
+            '    Dim lead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
 
-                Dim oldOwner = lead.EmployeeName
-                lead.EmployeeID = empId
-                lead.EmployeeName = name
-                lead.Status = LeadStatus.NewLead
-                Context.SaveChanges()
-                LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} reassign this lead from {1} to {2}.", Page.User.Identity.Name, oldOwner, name), bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
-            End Using
+            '    Dim oldOwner = lead.EmployeeName
+            '    lead.EmployeeID = empId
+            '    lead.EmployeeName = name
+            '    lead.Status = LeadStatus.NewLead
+            '    Context.SaveChanges()
+            '    LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("{0} reassign this lead from {1} to {2}.", Page.User.Identity.Name, oldOwner, name), bble, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reassign)
+            'End Using
         End If
     End Sub
 
@@ -277,19 +282,14 @@ Public Class LeadsSubMenu
             Dim bble = e.Parameter
             hfRequestUpdateBBLE.Value = bble
 
-            Using Context As New Entities
-                Dim lead = Context.Leads.Where(Function(ld) ld.BBLE = bble).SingleOrDefault
-
-                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateLeadsName"), ASPxTextBox).Text = lead.LeadsName
-                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateCreateby"), ASPxTextBox).Text = lead.EmployeeName
-                TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateManager"), ASPxTextBox).Text = Employee.GetReportToManger(Page.User.Identity.Name).Name
-
-            End Using
+            Dim ld = Lead.GetInstance(bble)
+            TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateLeadsName"), ASPxTextBox).Text = ld.LeadsName
+            TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateCreateby"), ASPxTextBox).Text = ld.EmployeeName
+            TryCast(requestUpdateFormlayout.FindControl("txtRequestUpdateManager"), ASPxTextBox).Text = Employee.GetReportToManger(Page.User.Identity.Name).Name
         End If
     End Sub
 
     Sub SendRequest(bble)
-
         Dim employees = New List(Of String)
         employees.Add(Page.User.Identity.Name)
         employees.Add(txtRequestUpdateCreateby.Text)

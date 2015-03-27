@@ -83,4 +83,13 @@ Partial Public Class UserInTeam
     Private Shared Function SelectEmployeeArray(usersInTeam As IEnumerable(Of UserInTeam)) As String()
         Return usersInTeam.Select(Function(u) u.EmployeeName).ToArray
     End Function
+
+    Public Shared Function GetUserTeam(userName As String) As String
+        Dim ut = GetTeamUsersByNames({userName}).FirstOrDefault
+        If ut IsNot Nothing Then
+            Return ut.TeamName
+        End If
+
+        Return Nothing
+    End Function
 End Class

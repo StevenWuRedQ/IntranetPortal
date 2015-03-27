@@ -21,16 +21,18 @@
 
     Public Shared Function AddActivityLog(logDate As DateTime, comments As String, bble As String, category As String, empid As Integer, empName As String, actionType As EnumActionType) As LeadsActivityLog
         Using Context As New Entities
-            Dim log As New LeadsActivityLog
-            log.BBLE = bble
-            log.EmployeeID = empid
-            log.EmployeeName = empName
-            log.Category = category
-            log.ActionType = actionType
-            log.ActivityDate = logDate
-            log.Comments = comments
+            Dim log = AddActivityLogEntity(logDate, comments, bble, category, empid, empName, actionType, Context)
 
-            Context.LeadsActivityLogs.Add(log)
+            'Dim log As New LeadsActivityLog
+            'log.BBLE = bble
+            'log.EmployeeID = empid
+            'log.EmployeeName = empName
+            'log.Category = category
+            'log.ActionType = actionType
+            'log.ActivityDate = logDate
+            'log.Comments = comments
+
+            'Context.LeadsActivityLogs.Add(log)
 
             Dim ld = Context.Leads.Find(bble)
             If ld IsNot Nothing Then
@@ -42,6 +44,21 @@
 
             Return log
         End Using
+    End Function
+
+    Public Shared Function AddActivityLogEntity(logDate As DateTime, comments As String, bble As String, category As String, empid As Integer, empName As String, actionType As EnumActionType, ctx As Entities) As LeadsActivityLog
+        Dim log As New LeadsActivityLog
+        log.BBLE = bble
+        log.EmployeeID = empid
+        log.EmployeeName = empName
+        log.Category = category
+        log.ActionType = actionType
+        log.ActivityDate = logDate
+        log.Comments = comments
+
+        ctx.LeadsActivityLogs.Add(log)
+
+        Return log
     End Function
 
     Public Shared Function AddActivityLog(logDate As DateTime, comments As String, bble As String, category As String, actionType As EnumActionType) As LeadsActivityLog

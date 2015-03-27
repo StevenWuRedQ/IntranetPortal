@@ -75,7 +75,15 @@
                                 <td style="width: 150px;">
                                      <dx:ASPxComboBox runat="server" ID="cbStatusFrom" ></dx:ASPxComboBox>
                                 </td>
-                            </tr>
+                            </tr>    
+                             <tr>
+                                <td style="width: 120px">
+                                    <dx:ASPxLabel runat="server" Text="Amount: (Optional) " ></dx:ASPxLabel>
+                                </td>
+                                <td style="width: 150px;">
+                                    <dx:ASPxTextBox runat="server" ID="txtLeadsAmount"></dx:ASPxTextBox>
+                                </td>
+                            </tr>                                     
                         </table>
 
                         <dx:ASPxGridView runat="server" ID="gridAgentLeads" KeyFieldName="ID" Settings-ShowGroupPanel="false" AutoGenerateColumns="false">

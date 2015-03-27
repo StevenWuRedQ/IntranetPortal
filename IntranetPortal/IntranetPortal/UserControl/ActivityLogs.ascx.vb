@@ -110,8 +110,18 @@ Public Class ActivityLogs
 
                 LeadsActivityLog.AddActivityLog(DateTime.Now, "Task is completed by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.SetAsTask)
 
+                Dim sn = ""
                 If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-                    Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+                    sn = Request.QueryString("sn").ToString
+                Else
+                    Dim wliItem = WorkflowService.GetUserTaskWorklist(task.TaskID, Page.User.Identity.Name)
+                    If wliItem IsNot Nothing Then
+                        sn = String.Format("{0}_{1}", wliItem.ProcInstId, wliItem.ActInstId)
+                    End If
+                End If
+
+                If Not String.IsNullOrEmpty(sn) Then
+                    Dim wli = WorkflowService.LoadTaskProcess(sn)
                     If wli IsNot Nothing Then
                         wli.ProcessInstance.DataFields("Result") = "Completed"
                         wli.Finish()
@@ -210,12 +220,22 @@ Public Class ActivityLogs
         If (e.Parameters.StartsWith("AcceptAppointment")) Then
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
-            UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.Accepted)
+            Dim appointment = UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.Accepted)
             LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is accepted by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.AcceptAppoitment)
 
-            'Connect to Workflow Server
+            Dim sn = ""
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-                Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+                sn = Request.QueryString("sn").ToString
+            Else
+                Dim wliItem = WorkflowService.GetUserAppointmentWorklist(appointment.AppoitID, Page.User.Identity.Name)
+                If wliItem IsNot Nothing Then
+                    sn = String.Format("{0}_{1}", wliItem.ProcInstId, wliItem.ActInstId)
+                End If
+            End If
+
+            'Connect to Workflow Server
+            If Not String.IsNullOrEmpty(sn) Then
+                Dim wli = WorkflowService.LoadTaskProcess(sn)
                 If wli IsNot Nothing Then
                     wli.ProcessInstance.DataFields("Result") = "Approve"
                     wli.Finish()
@@ -239,12 +259,22 @@ Public Class ActivityLogs
         If (e.Parameters.StartsWith("DeclineAppointment")) Then
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
-            UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.Declined)
+            Dim appointment = UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.Declined)
             LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Decline by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.DeclineAppointment)
 
-            'Connect to Workflow Server
+            Dim sn = ""
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-                Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+                sn = Request.QueryString("sn").ToString
+            Else
+                Dim wliItem = WorkflowService.GetUserAppointmentWorklist(appointment.AppoitID, Page.User.Identity.Name)
+                If wliItem IsNot Nothing Then
+                    sn = String.Format("{0}_{1}", wliItem.ProcInstId, wliItem.ActInstId)
+                End If
+            End If
+
+            'Connect to Workflow Server
+            If Not String.IsNullOrEmpty(sn) Then
+                Dim wli = WorkflowService.LoadTaskProcess(sn)
                 If wli IsNot Nothing Then
                     wli.ProcessInstance.DataFields("Result") = "Decline"
                     wli.Finish()
@@ -266,12 +296,22 @@ Public Class ActivityLogs
         If (e.Parameters.StartsWith("ReScheduleAppointment")) Then
             Dim logId = CInt(e.Parameters.Split("|")(1))
 
-            UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.ReScheduled)
+            Dim appointment = UserAppointment.UpdateAppointmentStatus(logId, UserAppointment.AppointmentStatus.ReScheduled)
             LeadsActivityLog.AddActivityLog(DateTime.Now, "Appointment is Rescheduled by " & Page.User.Identity.Name, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.Reschedule)
 
-            'Connect to Workflow Server
+            Dim sn = ""
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-                Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+                sn = Request.QueryString("sn").ToString
+            Else
+                Dim wliItem = WorkflowService.GetUserAppointmentWorklist(appointment.AppoitID, Page.User.Identity.Name)
+                If wliItem IsNot Nothing Then
+                    sn = String.Format("{0}_{1}", wliItem.ProcInstId, wliItem.ActInstId)
+                End If
+            End If
+
+            'Connect to Workflow Server
+            If Not String.IsNullOrEmpty(sn) Then
+                Dim wli = WorkflowService.LoadTaskProcess(sn)
                 If wli IsNot Nothing Then
                     wli.ProcessInstance.DataFields("Result") = "Reschedule"
                     wli.Finish()
@@ -294,14 +334,24 @@ Public Class ActivityLogs
             If e.Parameters.Split("|").Length = 3 Then
                 Dim logId = CInt(e.Parameters.Split("|")(1))
                 Dim days = CInt(e.Parameters.Split("|")(2))
+                Dim recycle = Core.RecycleLead.GetInstanceByLogId(logId)
 
+                Dim sn = ""
                 If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-                    Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
+                    sn = Request.QueryString("sn").ToString
+                Else
+                    Dim wliItem = WorkflowService.GetUserRecycleWorklist(recycle.RecycleId, Page.User.Identity.Name)
+                    If wliItem IsNot Nothing Then
+                        sn = String.Format("{0}_{1}", wliItem.ProcInstId, wliItem.ActInstId)
+                    End If
+                End If
+
+                If Not String.IsNullOrEmpty(sn) Then
+                    Dim wli = WorkflowService.LoadTaskProcess(sn)
                     If wli IsNot Nothing Then
                         wli.ProcessInstance.DataFields("Result") = "Completed"
                         wli.Finish()
 
-                        Dim recycle = Core.RecycleLead.GetInstanceByLogId(logId)
                         Dim rDate = recycle.PostponeDays(days)
 
                         LeadsActivityLog.AddActivityLog(DateTime.Now, String.Format("Recycle action is postponed to {0} by {1} ", rDate.ToShortDateString, Page.User.Identity.Name), hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.ExtendRecycle)
@@ -511,6 +561,8 @@ Public Class ActivityLogs
                         Else
 
                         End If
+                    Else
+
                     End If
                 Else
                     cbRecycleDays.Visible = False
@@ -576,7 +628,7 @@ Public Class ActivityLogs
                             End If
                         End If
                     Else
-                        If task.CreateDate < DateTime.Parse("2014-12-31 12:59") Then
+                        If task.CreateDate < DateTime.Parse("2014-12-31 12:59") OrElse task.EmployeeName.ToLower.Contains(Page.User.Identity.Name.ToLower) Then
                             If btnTaskComplete IsNot Nothing Then
                                 btnTaskComplete.Visible = True
                             End If
@@ -587,6 +639,10 @@ Public Class ActivityLogs
 
                             approvalView = True
                         End If
+
+                        'If task.EmployeeName.Contains(Page.User.Identity.Name) Then
+
+                        'End If
                     End If
 
                     If Not approvalView Then
@@ -664,7 +720,7 @@ Public Class ActivityLogs
                             approvalView = True
                         End If
                     Else
-                        If userAppoint.CreateDate < DateTime.Parse("2014-12-31 12:59") Then
+                        If userAppoint.CreateDate < DateTime.Parse("2014-12-31 12:59") OrElse userAppoint.Manager.ToLower.Contains(Page.User.Identity.Name.ToLower) Then
                             e.Row.CssClass = "activity_log_high_light dxgvDataRow_MetropolisBlue1"
                             btnAccept.Visible = True
                             btnDecline.Visible = True

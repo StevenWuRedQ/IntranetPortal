@@ -64,15 +64,17 @@
                     lds = ctx.Leads.Where(Function(li) li.EmployeeName = Source And li.LeadsInfo.Type = LeadsType).Take(Count).ToList
                 End If
 
-                For Each ld In lds
-                    ld.EmployeeID = emp.EmployeeID
-                    ld.EmployeeName = emp.Name
-                    ld.Status = LeadStatus.NewLead
-                    ld.AssignDate = DateTime.Now
-                    ld.AssignBy = "AssignRule"
-                Next
+                Lead.BatchAssignLeads(lds.Select(Function(ld) ld.BBLE).ToArray, emp.Name, emp.EmployeeID, "AssignRule")
 
-                ctx.SaveChanges()
+                'For Each ld In lds
+                '    ld.EmployeeID = emp.EmployeeID
+                '    ld.EmployeeName = emp.Name
+                '    ld.Status = LeadStatus.NewLead
+                '    ld.AssignDate = DateTime.Now
+                '    ld.AssignBy = "AssignRule"
+                'Next
+
+                'ctx.SaveChanges()
                 rowCount = lds.Count
 
                 If rowCount > 0 Then
@@ -144,6 +146,7 @@
 
                                 If Context.Leads.Local.Where(Function(tmp) tmp.BBLE = prop.BBLE).Count = 0 Then
                                     Context.Leads.Add(newlead)
+                                    LeadsStatusLog.AddNewEntity(prop.BBLE, LeadsStatusLog.LogType.NewLeads, emp.Name, key, Nothing, Context)
                                     rowCount += 1
                                 End If
                             End If

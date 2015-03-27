@@ -49,6 +49,7 @@ Public Class WorkflowService
         ExpireTaskProcess(bble)
         ExpiredLeadsReminder(bble)
         ExpiredRecycleProcess(bble)
+        ExpiredAppointment(bble)
     End Sub
 
     Public Shared Sub ExpireTaskProcess(bble As String)
@@ -57,6 +58,21 @@ Public Class WorkflowService
             For Each pInstId In pInsts
                 conn.ExpiredProcessInstance(pInstId)
             Next
+        End Using
+    End Sub
+
+    Public Shared Sub ExpiredAppointment(bble As String)
+        Using conn = GetConnection()
+            Dim pInsts = conn.GetProcessInstancesByDataFields("NewAppointmentRequest", "BBLE", bble)
+            For Each pInstId In pInsts
+                conn.ExpiredProcessInstance(pInstId)
+            Next
+        End Using
+    End Sub
+
+    Public Shared Sub ExpireProcessInstance(procInstId As Integer)
+        Using conn = GetConnection()
+            conn.ExpiredProcessInstance(procInstId)
         End Using
     End Sub
 
@@ -87,8 +103,39 @@ Public Class WorkflowService
     Public Shared Function GetUserTaskWorklist(taskId As Integer, destUser As String) As DBPersistence.Worklist
         Using conn = GetConnection()
             Dim pInstIds = conn.GetProcessInstancesByDataFields("TaskProcess", "TaskId", taskId)
+            pInstIds.AddRange(conn.GetProcessInstancesByDataFields("ShortSaleTask", "TaskId", taskId))
+            pInstIds.AddRange(conn.GetProcessInstancesByDataFields("ReminderProcess", "TaskId", taskId))
+
             If pInstIds.Count > 0 Then
 
+                Dim wls = MyIdealProp.Workflow.DBPersistence.Worklist.GetProcInstWorkList(pInstIds(0))
+                If wls IsNot Nothing Then
+                    Return wls.SingleOrDefault(Function(wl) wl.DestinationUser.ToLower = destUser.ToLower)
+                End If
+            End If
+
+            Return Nothing
+        End Using
+    End Function
+
+    Public Shared Function GetUserAppointmentWorklist(appId As Integer, destUser As String) As DBPersistence.Worklist
+        Using conn = GetConnection()
+            Dim pInstIds = conn.GetProcessInstancesByDataFields("NewAppointmentRequest", "AppointmentId", appId)
+            If pInstIds.Count > 0 Then
+                Dim wls = MyIdealProp.Workflow.DBPersistence.Worklist.GetProcInstWorkList(pInstIds(0))
+                If wls IsNot Nothing Then
+                    Return wls.SingleOrDefault(Function(wl) wl.DestinationUser.ToLower = destUser.ToLower)
+                End If
+            End If
+
+            Return Nothing
+        End Using
+    End Function
+
+    Public Shared Function GetUserRecycleWorklist(recycleId As Integer, destUser As String) As DBPersistence.Worklist
+        Using conn = GetConnection()
+            Dim pInstIds = conn.GetProcessInstancesByDataFields("RecycleProcess", "TaskId", recycleId)
+            If pInstIds.Count > 0 Then
                 Dim wls = MyIdealProp.Workflow.DBPersistence.Worklist.GetProcInstWorkList(pInstIds(0))
                 If wls IsNot Nothing Then
                     Return wls.SingleOrDefault(Function(wl) wl.DestinationUser.ToLower = destUser.ToLower)

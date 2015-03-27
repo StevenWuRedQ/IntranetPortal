@@ -607,8 +607,10 @@
                                       .AssignBy = assignBy
                                       }
                     ctx.Leads.Add(newlead)
+                    LeadsStatusLog.AddNewEntity(BBLE, LeadsStatusLog.LogType.NewLeads, emp.Name, assignBy, Nothing, ctx)
                 Else
                     If override Then
+                        Dim orgName = newlead.EmployeeName
                         newlead.LeadsName = LeadsName
                         newlead.Neighborhood = NeighName
                         newlead.EmployeeID = emp.EmployeeID
@@ -616,6 +618,8 @@
                         newlead.Status = LeadStatus.NewLead
                         newlead.AssignDate = DateTime.Now
                         newlead.AssignBy = assignBy
+
+                        LeadsStatusLog.AddNewEntity(BBLE, LeadsStatusLog.LogType.NewLeads, emp.Name, assignBy, orgName, ctx)
                     End If
                 End If
 
