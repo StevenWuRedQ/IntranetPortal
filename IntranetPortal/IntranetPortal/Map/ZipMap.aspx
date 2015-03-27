@@ -379,7 +379,7 @@
                       '<li><span class="swatch" style="background:' + getColor(from + 1, baseColor, baseRange) + '"></span> ' +
                       from + (to ? '&ndash;' + to : '+')) + '</li>';
                 }
-                var title = baseColor != null ? "Unbuild" : Leads in Zip
+                var title = baseColor != null ? "Unbuild" : 'Leads in Zip'
                 return '<span>' + title + ' </span> <ul style="list-style-type: none;">' + labels.join('') + '</ul>';
             }
             function getColor(d,baseColor,baseRange) {
@@ -457,6 +457,11 @@
                     onEachFeature: onEachFeature
                 })
 
+                if (isAdminLogIn)
+                {
+                    ShowPloyons(SHOW_ZIP);
+                    
+                }
                 function getStyle(feature) {
                     return {
                         weight: 2,
