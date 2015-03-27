@@ -361,9 +361,7 @@
                     $("#color_panle").css("visibility", 'hidden');
                 }
             }
-            //if (isAdminLogIn) {
-            //    map.legendControl.addLegend(getLegendHTML());
-            //}
+           
 
             var zipMakerLayer
             function getLegendHTML(baseColor, baseRange) {
@@ -527,7 +525,9 @@
 
                     //map.fitBounds(e.target.getBounds());
                 }
-
+                if (isAdminLogIn) {
+                    map.legendControl.addLegend(getLegendHTML());
+                }
 
                 zipMap = zipMap || [];// data.features;
 
@@ -1007,14 +1007,17 @@
                 f
 
                    : 0 0;
-               }                                        
+               }
+                    
+                    
                   nd-position: - 0
                      }
           .mess ge_popup
                   backgroun : whit
                   color: #7778 b;
                  kground  whit
-                  border-ra ius: 12p;                
+                  border-ra ius: 12p;
+                
              boder none;
                 box-shad w: -
             p
@@ -1035,17 +1038,21 @@
                 essage pupup
                        ont-s
                           wi th: 3
-                    height: 32px;                
-                ne-height: 32p ;                
+                    height: 32px;
+                
+                ne-height: 32p ;
+                
   -align: cener;
                   
             0px;
                 o
-                           }                ssage_pupu _cont
+                           }
+                ssage_pupu _cont
                      p dding: 0px;
      t
 
-                        mporta t;                
+                        mporta t;
+                
                            info_
                       width: 00%;
      t
