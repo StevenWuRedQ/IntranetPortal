@@ -977,6 +977,21 @@
                 pointer-events: none;
             }
 
+             .map-legend .swatch {
+                width: 20px;
+                height: 20px;
+                float: left;
+                margin-right: 10px;
+            }
+
+            .leaflet-popup-close-button {
+                display: none;
+            }
+
+            .leaflet-popup-content-wrapper {
+                pointer-events: none;
+            }
+
             .message {
                 background-size: 40px 40px;
                 background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%, transparent 75%, transparent);
@@ -1002,63 +1017,58 @@
             }
 
             .message p {
-        
-      @keyframes animate b {
-                f
+                margin: 0;
+            }
 
-                   : 0 0;
-               }
-                    
-                    
-                  nd-position: - 0
-                     }
-          .mess ge_popup
-                  backgroun : whit
-                  color: #7778 b;
-                 kground  whit
-                  border-ra ius: 12p;
-                
-             boder none;
-                box-shad w: -
-            p
+            @keyframes animate-bg {
+                from {
+                    background-position: 0 0;
+                }
 
-            0, 0.25);
-          
-           }
+                to {
+                    background-position: -80px 0;
+                }
+            }
 
-                 e_popup_title 
-                             d;
-            10px 0px 0px 
-                    font-siz : 22
-                   color  #399
-             
-            ht: 300;
-          ;
-           }
-                essage pupup
-                       ont-s
-                          wi th: 3
-                    height: 32px;
-                
-                ne-height: 32p ;
-                
-  -align: cener;
-                  
-            0px;
-                o
-                           }
-                ssage_pupu _cont
-                     p dding: 0px;
-     t
+            .message_popup {
+                background: white;
+                color: #77787b;
+                background: white;
+                border-radius: 12px;
+                border: none;
+                box-shadow: -1px 0px 13px 4px rgba(10, 10, 10, 0.25);
+                padding: 0px;
+            }
 
-                        mporta t;
-                
-                           info_
-                      width: 00%;
-     t
+            .message_popup_title {
+                background: #d9f1fd;
+                border-radius: 10px 10px 0px 0px;
+                font-size: 22px;
+                color: #3993c1;
+                font-weight: 300;
+                padding: 20px;
+            }
 
-            
-                color:##77787b !important;
+            .message_pupup_icon {
+                font-size: 16px;
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                text-align: center;
+                border-radius: 20px;
+                border: 1px solid;
+            }
+
+            .message_pupup_content {
+                padding: 20px;
+                font-size: 14px;
+                color: #77787b !important;
+            }
+
+            .info_table {
+                width: 100%;
+                font-size: 14px;
+                color: #77787b !important;
             }
         </style>
 
