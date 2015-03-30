@@ -190,9 +190,9 @@
                             <% If IntranetPortal.Employee.IsAdmin(Page.User.Identity.Name) Then%>
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-map-marker mag_tabv_i"></i>Geo Leads</a></li>
                             <%End If%>
-                            <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-bar-chart mag_tabv_i"></i>Monthly  Intake</a></li>
+                          <%--  <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-bar-chart mag_tabv_i"></i>Monthly  Intake</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-line-chart mag_tabv_i"></i>Compare Offices</a></li>
-                            <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-clock-o mag_tabv_i"></i>Team Hours</a></li>
+                            <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-clock-o mag_tabv_i"></i>Team Hours</a></li>--%>
                         </ul>
                     </div>
                     <div class="col-md-10">

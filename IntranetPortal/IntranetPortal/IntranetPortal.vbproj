@@ -175,13 +175,6 @@
     <Reference Include="PortalThemeAssembly">
       <HintPath>..\..\Theme\PortalTheme\PortalThemeAssembly.dll</HintPath>
     </Reference>
-    <Reference Include="Spire.License">
-      <HintPath>DLL\Spire.License.dll</HintPath>
-    </Reference>
-    <Reference Include="Spire.Pdf, Version=2.8.63.5040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>DLL\Spire.Pdf.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />

@@ -101,12 +101,19 @@ Public Class PortalReportService
         If Not String.IsNullOrEmpty(teamName) Then
             allData = PortalReport.LoadTeamAgentActivityReport(teamName, dtStart, dtEnd)
             agentData = allData.Where(Function(a) a.Name = agentName).FirstOrDefault
+
+            If agentData Is Nothing Then
+                agentData = PortalReport.LoadAgentActivityReport(agentName, startDate, endDate)
+            End If
         Else
             agentData = PortalReport.LoadAgentActivityReport(agentName, startDate, endDate)
         End If
 
         If agentData IsNot Nothing Then
-            allData.Add(agentData)
+            If allData.Count = 0 Then
+                allData.Add(agentData)
+            End If
+
             result.AddRange({New With {
                               .Category = "CallOwner",
                               .User = agentData.CallOwner,

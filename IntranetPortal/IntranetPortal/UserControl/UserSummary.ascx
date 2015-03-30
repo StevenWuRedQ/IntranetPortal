@@ -340,10 +340,14 @@
                                 </td>
                                 <td rowspan="4" style="width: 50px"></td>
                                 <td rowspan="4" style="vertical-align: top; width: 380px; padding-top: 40px;">
-                                    <div style="width: 375px">
-                                        <div id="dateRange" class="containers" style="width: 100%;"></div>
-                                        <div id="agentActivityChart" class="containers" style="height: 240px; width: 100%;"></div>
-                                        <div id="ProcessStatusChart" class="containers" style="width: 100%;"></div>
+                                    <div style="width: 375px; background-color: #F2F2F2;-webkit-border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border-radius: 10px;">
+                                        <div style="background-color: #D9F1FD;-webkit-border-top-left-radius: 10px; -webkit-border-top-right-radius: 10px; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                                            <div id="dateRange" class="containers" style="width: 100%;"></div>
+                                        </div>
+                                        <div style="padding: 10px 10px;">
+                                            <div id="agentActivityChart" class="containers" style="height: 240px; width: 100%;"></div>
+                                            <div id="ProcessStatusChart" class="containers" style="width: 100%;"></div>
+                                        </div>
                                     </div>
                                     <script type="text/javascript">
                                         var agentSummaryReport = {
@@ -376,7 +380,17 @@
                                                             { valueField: "User", name: "User", tag: "User" },
                                                             { valueField: "Avg", name: "Team", tag: "TeamAverage" }
                                                         ],
-                                                        title: "Activity Summary",
+                                                        title: {
+                                                            text: "Activity Summary",
+                                                            font: {
+                                                                family:'Source Sans Pro, sans-serif',
+                                                                size: 21,
+                                                                weight:900
+                                                            },
+                                                            horizontalAlignment: 'left',
+                                                            margin:{
+                                                                left:20}
+                                                        },
                                                         legend: {
                                                             verticalAlignment: "bottom",
                                                             horizontalAlignment: "center"
@@ -418,6 +432,7 @@
                                                     size: {
                                                         height: 150
                                                     },
+                                                    background: { color: '#ff400d' },                                                    
                                                     width: 375,
                                                     scale: {
                                                         startValue: new Date(2015, 1, 1),
@@ -428,6 +443,7 @@
                                                         showMinorTicks: false
                                                     },
                                                     sliderMarker: {
+                                                        color: '#ff400d',
                                                         format: "monthAndDay"
                                                     },
                                                     selectedRange: {
@@ -444,6 +460,7 @@
                                                 var range = this.DateRange();
                                                 var selectedRange = range.getSelectedRange();
                                                 this.UpdateActivityChart(selectedRange.startValue, selectedRange.endValue);
+                                                this.LoadStatusChart();
                                             },
                                             LoadAgentActivityDs: function (startDate, endDate) {
                                                 this.ActivityDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentSummaryReport/" + this.AgentName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-"));
@@ -456,7 +473,7 @@
                                                 chart.beginUpdate();
                                                 chart.option("dataSource", this.ActivityDataSource);
                                                 chart.endUpdate();
-                                                this.LoadStatusChart();
+                                                //this.LoadStatusChart();
                                             },
                                             LoadStatusChart: function () {
                                                 var option = {
@@ -485,7 +502,17 @@
                                                             }
                                                         }
                                                     }],
-                                                    title: "Leads Status",
+                                                    title:{
+                                                        text: "Leads Status",
+                                                        font: {
+                                                            family:'Source Sans Pro, sans-serif',
+                                                            size: 21,
+                                                            weight:900
+                                                        },
+                                                        horizontalAlignment: 'left',
+                                                        margin:{
+                                                            left:20}
+                                                    },
                                                     palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
                                                 };
 
