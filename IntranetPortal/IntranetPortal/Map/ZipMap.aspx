@@ -407,6 +407,7 @@
                     '#c7ebff';
             }
             var layersControl = null;
+
             function initLayers(layers) {
                 var v = layersControl;
                 
@@ -741,7 +742,7 @@
 
                     var geoJson = data;
                     TeamLot = LoadLotMap(geoJson)
-
+                    TeamLot.addTo(map);
                 });
 
             }
@@ -854,7 +855,10 @@
 
                 //    });
                 //}
-                
+                if (!isAdminLogIn)
+                {
+                    return;
+                }
                 if (zoom === 18) {
                     var bounds = map.getBounds();
                     var northEast = bounds.getNorthEast();
