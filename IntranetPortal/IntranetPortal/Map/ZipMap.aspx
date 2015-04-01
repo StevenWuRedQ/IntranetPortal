@@ -412,11 +412,11 @@
                 var v = layersControl;
                 
                 /*add layer swicher */
-                var layer_swicher = {
+                var layer_swicher = isAdminLogIn ?  {
 
                     'Leads Count Portal': zipMakerLayer
 
-                };
+                } : {};
                 if (isAdminLogIn) {
 
                     layer_swicher['Zip Count'] = ZipPolygonLayer

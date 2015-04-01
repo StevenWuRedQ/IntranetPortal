@@ -176,7 +176,7 @@
                     <%index = index + 1%>
                     <div class="color_gray <%= If(index = 1, "filed_margin_top", "")%> clearfix">
                         <div class="color_gray clearfix">
-                            <i class="fa fa-phone homeowner_info_icon"></i>
+                            <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.Phone)%>')"></i>
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
                                     <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.Phone)%>")' <%= CssStyle(FormatPhoneNumber(phone.Phone))%>>
@@ -199,7 +199,7 @@
                     <% If phone IsNot Nothing Then%>
                     <div class="color_gray clearfix">
                         <div class="color_gray clearfix">
-                            <i class="fa fa-phone homeowner_info_icon"></i>
+                            <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
                                     <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
@@ -240,7 +240,7 @@
                     <% If phone IsNot Nothing Then%>
                     <div class="color_gray clearfix">
                         <div class="color_gray clearfix">
-                            <i class="fa fa-phone homeowner_info_icon"></i>
+                            <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
                             <div class="form_div_node homeowner_info_text ">
                                 <div>
                                     <a href='#' class="PhoneLink" onclick='return OnTelphoneLinkClick(this, "<%=FormatPhoneNumber(phone.phoneField)%>")' <%= CssStyle(FormatPhoneNumber(phone.phoneField))%>>
@@ -352,7 +352,7 @@
                         <% For Each phone In relative.phonesField%>
                         <% If phone.phoneField IsNot Nothing Then%>
                         <div class="color_gray clearfix">
-                            <i class="fa fa-phone homeowner_info_icon"></i>
+                            <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
                             <div class="form_div_node homeowner_info_text ">
 
                                 <div class="color_blue">
@@ -408,7 +408,7 @@
                             <% For Each phone In relative.phonesField%>
                             <%If phone.phoneField IsNot Nothing Then%>                            
                             <div class="color_gray clearfix">
-                                <i class="fa fa-phone homeowner_info_icon"></i>
+                                <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
                                 <div class="form_div_node homeowner_info_text ">
 
                                     <div class="color_blue">
@@ -457,7 +457,7 @@
                             <% For Each phone In relative.phonesField%>
                             <% If phone.phoneField IsNot Nothing Then%>                            
                             <div class="color_gray clearfix">
-                                <i class="fa fa-phone homeowner_info_icon"></i>
+                                <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
                                 <div class="form_div_node homeowner_info_text ">
 
                                     <div class="color_blue">
@@ -556,3 +556,43 @@
     
 
 </script>
+
+<script>
+    function CallPhone(phone)
+    {
+        popUpAtBottomRight('/AutoDialer/Dialer.aspx?PN=' + phone, 'CallWindow', 560, 570);
+    }
+    function popUpAtBottomRight(pageToLoad, winName, width, height) {
+        xposition = 0; yposition = 0;
+        if ((parseInt(navigator.appVersion) >= 4)) {
+            xposition = (screen.width - width);
+            yposition = (screen.height - height);
+        }
+        yposition -= 40
+        var args = "";
+        args += "width=" + width + "," + "height=" + height + ","
+        + "location=0,"
+        + "menubar=0,"
+        + "resizable=0,"
+        + "scrollbars=0,"
+        + "statusbar=false,dependent,alwaysraised,"
+        + "status=false,"
+        + "titlebar=no,"
+        + "toolbar=0,"
+        + "hotkeys=0,"
+        + "screenx=" + xposition + ","  //NN Only
+        + "screeny=" + yposition + ","  //NN Only
+        + "left=" + xposition + ","     //IE Only
+        + "top=" + yposition;           //IE Only
+        var dmcaWin = window.open(pageToLoad, winName, args);
+        dmcaWin.focus();
+    }
+   
+</script>
+<style>
+    .fa-phone 
+    {
+        cursor:pointer;
+        color:green;
+    }
+</style>

@@ -4,8 +4,12 @@ Public Class Dialer
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        If (Not IsPostBack) Then
 
+            CalledNumber = Request.QueryString("PN")
+        End If
     End Sub
+    Public CalledNumber As String
 
     Public ReadOnly Property TwilioToken As String
         Get
