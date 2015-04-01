@@ -568,7 +568,7 @@
             xposition = (screen.width - width);
             yposition = (screen.height - height);
         }
-        yposition -= 40
+       
         var args = "";
         args += "width=" + width + "," + "height=" + height + ","
         + "location=0,"
@@ -581,7 +581,7 @@
         + "toolbar=0,"
         + "hotkeys=0,"
         + "screenx=" + xposition + ","  //NN Only
-        + "screeny=" + yposition + ","  //NN Only
+        + "screeny=" + (yposition -100) + ","  //NN Only
         + "left=" + xposition + ","     //IE Only
         + "top=" + yposition;           //IE Only
         var dmcaWin = window.open(pageToLoad, winName, args);

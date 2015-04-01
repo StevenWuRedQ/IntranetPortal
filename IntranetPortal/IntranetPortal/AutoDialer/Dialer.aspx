@@ -25,7 +25,7 @@
 
         Twilio.Device.ready(function (device) {
             $("#log").text("Ready");
-            if(CallNumber!=null)
+            if(CallNumber!=null && CallNumber.length>0)
             {
                call(CallNumber);
             }
