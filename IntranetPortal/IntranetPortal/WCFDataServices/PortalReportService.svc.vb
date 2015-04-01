@@ -131,7 +131,7 @@ Public Class PortalReportService
                                         },
                                      New With {
                               .Category = "UniqueBBLE",
-                              .User = agentData.Comments,
+                              .User = agentData.UniqueBBLE,
                               .Avg = CInt(allData.Average(Function(a) a.UniqueBBLE))
                                         }
                                     })

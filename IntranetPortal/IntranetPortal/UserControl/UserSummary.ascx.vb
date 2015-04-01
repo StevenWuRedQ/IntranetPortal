@@ -36,7 +36,6 @@ Public Class UserSummary
         End If
     End Sub
 
-
     Public ReadOnly Property Quote As String
         Get
             Using Context As New Entities

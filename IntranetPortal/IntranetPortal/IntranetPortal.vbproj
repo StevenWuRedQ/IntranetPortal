@@ -146,6 +146,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\MapData\GeoJSON.Net.MsSqlSpatial\src\GeoJSON.Net.MsSqlSpatial\bin\Debug\GeoJSON.Net.dll</HintPath>
     </Reference>
+    <Reference Include="JWT">
+      <HintPath>..\packages\JWT.1.3.2\lib\3.5\JWT.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.EntityDataSource">
       <HintPath>..\packages\Microsoft.AspNet.EntityDataSource.6.0.0\lib\net40\Microsoft.AspNet.EntityDataSource.dll</HintPath>
     </Reference>
@@ -174,6 +177,9 @@
     </Reference>
     <Reference Include="PortalThemeAssembly">
       <HintPath>..\..\Theme\PortalTheme\PortalThemeAssembly.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -210,6 +216,12 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="Twilio.Api">
+      <HintPath>..\packages\Twilio.3.6.27\lib\3.5\Twilio.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Twilio.Client.Capability">
+      <HintPath>..\packages\Twilio.Client.3.4.4\lib\3.5\Twilio.Client.Capability.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -297,6 +309,13 @@
     </Compile>
     <Compile Include="AssignLeadsRulesPage.aspx.vb">
       <DependentUpon>AssignLeadsRulesPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="AutoDialer\Dialer.aspx.designer.vb">
+      <DependentUpon>Dialer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AutoDialer\Dialer.aspx.vb">
+      <DependentUpon>Dialer.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="BingViewMap.aspx.designer.vb">
@@ -1398,6 +1417,7 @@
     </Content>
     <Content Include="App_Themes\PortalTheme2.dll" />
     <Content Include="AssignLeadsRulesPage.aspx" />
+    <Content Include="AutoDialer\Dialer.aspx" />
     <Content Include="BingViewMap.aspx" />
     <Content Include="CallBackServices.asmx" />
     <Content Include="Content\bootstrap-datepicker.css" />

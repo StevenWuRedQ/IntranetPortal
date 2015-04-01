@@ -40,7 +40,7 @@
         <FontClass>
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
-      </PortalNavItem>    
+      </PortalNavItem>
       <PortalNavItem Name="AgentNewLeads" Text="New Leads" NavigationUrl="/LeadAgent.aspx?c=New Leads" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-star"></i>]]>
@@ -203,7 +203,7 @@
         <FontClass>
           <![CDATA[<i class="fa fa-check-square-o"></i>]]>
         </FontClass>
-      </PortalNavItem>    
+      </PortalNavItem>
       <PortalNavItem Name="MgrNewLeads" Text="New Leads" NavigationUrl="/MgrViewLeads.aspx?c=New Leads" ShowAmount="true">
         <FontClass>
           <![CDATA[ <i class="fa fa-star"></i>]]>
@@ -351,13 +351,12 @@
       </PortalNavItem>
     </Items>
   </PortalNavItem>
-  
+
   <PortalNavItem Name="OfficeManagement" Text="Teams" NavigationUrl="#" ShowAmount="false" ItemType="Office" Visible="true">
     <UserRoles>OfficeManager-*,OfficeManager-Bronx,OfficeManager-Queens,OfficeManager-Rockaway,OfficeManager-Patchen,OfficeManager-GalleriaTeam,OfficeManager-TomTeam,OfficeManager-RonTeam,OfficeManager-GendinTeam</UserRoles>
     <Items>
     </Items>
   </PortalNavItem>
-
   <PortalNavItem Name="ManagementReport" Text="Management" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>OfficeManager-*</UserRoles>
     <Items>
@@ -366,12 +365,13 @@
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <!--<PortalNavItem Name="ReportPerformance" Text="Performance Tracking" NavigationUrl="/ManagementUI/Management1.aspx" ShowAmount="false">
+      <PortalNavItem Name="MapData" Text="Geo Leads" NavigationUrl="/Map/ZipMap.aspx" ShowAmount="false">
+        <UserRoles>Admin</UserRoles>
         <FontClass>
-          <![CDATA[<i class="fa fa-line-chart"></i>]]>
+          <![CDATA[<i class="fa fa-map-marker"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ReportCalendar" Text="Employees Calendar" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
+      <!--<PortalNavItem Name="ReportCalendar" Text="Employees Calendar" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-calendar"></i>]]>
         </FontClass>
@@ -383,7 +383,7 @@
       </PortalNavItem>-->
     </Items>
   </PortalNavItem>
-  
+
   <PortalNavItem Name="PortalManagement" Text="Portal Settings" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <UserRoles>Admin</UserRoles>
     <Items>

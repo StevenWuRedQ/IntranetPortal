@@ -905,7 +905,6 @@ Public Class DataWCFService
                     Catch ex As System.TimeoutException
                         Throw New Exception("Time is out. The data services is busy now. Please try later. Data Service: GetPropdata " & ex.Message)
                     End Try
-
                 End If
 
                 'Update HomeOwnerInfo
@@ -920,6 +919,7 @@ Public Class DataWCFService
                               .OrderId = apiOrder.ApiOrderID,
                               .Context = HttpContext.Current
                               }
+                        Dim userName = HttpContext.Current.User.Identity.Name
 
                         Dim callBack = Sub(state)
                                            HttpContext.Current = state.Context
@@ -928,7 +928,7 @@ Public Class DataWCFService
                                                UpdateHomeOwnerApi(state.OrderId)
                                                'UserMessage.AddNewMessage(GetCurrentIdentityName, "Refresh", "HomeOwner info is ready. BBLE: " & state.BBLE, state.BBLE)
                                            Catch ex As Exception
-                                               UserMessage.AddNewMessage(GetCurrentIdentityName, "Error", "Error happened on refresh. Message: " & ex.Message, state.BBLE)
+                                               UserMessage.AddNewMessage(userName, "Error", "Error happened on refresh. Message: " & ex.Message, state.BBLE, DateTime.Now, GetCurrentIdentityName)
                                                UpdateHomeOwnerApi(state.OrderId, "Error")
                                            End Try
                                        End Sub

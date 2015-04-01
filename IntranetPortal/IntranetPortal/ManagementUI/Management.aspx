@@ -22,7 +22,18 @@
             <div style="font-size: 48px; color: #234b60">
                 <div class="row">
                     <div class="col-md-4 ">
-                        <div class="border_right" style="padding-right: 0px; font-weight: 300;">Management Summary</div>
+                        <div class="border_right" style="padding-right: 0px; font-weight: 300;">
+                            <table>
+                                <tr>
+                                    <td id="tdReportTitle"><i class="fa fa-users mag_tabv_i"></i>Agent Activity
+                                    </td>
+                                    <td>
+                                        <%--<i class="fa fa-caret-down" style="color: #2e2f31; font-size: 18px;" ></i>--%>
+                                        <div id="reportType" class="nofoucs" style="margin-left: 10px; background: white; border: none; box-shadow: none" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                     <div class="col-md-2">
                         <table>
@@ -63,7 +74,6 @@
                 </div>
             </div>
         </div>
-
         <div style="margin-top: 40px;">
             <%--body Left--%>
             <%--<div class="row" style="display:none">
@@ -183,20 +193,20 @@
             <%-- New layout --%>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-2">
-                        <ul class="nav nav-tabs nav-stacked color_gray" role="tablist">
+                    <div class="col-md-2" style="display:none">
+                        <ul class="nav nav-tabs nav-stacked color_gray" role="tablist" id="mytab">
                             <li role="presentation" class="mag_tabv"><a href="#Agent_Activity_Tab" onclick="agentActivityTab.ShowTab(currentTeamInfo.TeamName, true)" role="tab" data-toggle="tab"><i class="fa fa-users mag_tabv_i"></i>Agent Activity</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#Status_Of_Leads_Tab" onclick="LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true)" role="tab" data-toggle="tab"><i class="fa fa-pie-chart mag_tabv_i"></i>Status Of Leads</a></li>
                             <% If IntranetPortal.Employee.IsAdmin(Page.User.Identity.Name) Then%>
                             <li role="presentation" class="mag_tabv"><a href="#Geo_Leads_tab" role="tab" data-toggle="tab"><i class="fa fa-map-marker mag_tabv_i"></i>Geo Leads</a></li>
                             <%End If%>
-                          <%--  <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-bar-chart mag_tabv_i"></i>Monthly  Intake</a></li>
+                            <%--  <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-bar-chart mag_tabv_i"></i>Monthly  Intake</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-line-chart mag_tabv_i"></i>Compare Offices</a></li>
                             <li role="presentation" class="mag_tabv"><a href="#" role="tab" data-toggle="tab"><i class="fa fa-clock-o mag_tabv_i"></i>Team Hours</a></li>--%>
                         </ul>
                     </div>
-                    <div class="col-md-10">
-                        <div style="padding-left: 20px; border-left: 5px solid #dde0e7; min-height: 900px">
+                    <div class="col-md-12">
+                        <div style="min-height: 900px">
                             <div class="tab-content" style="padding-right: 10px">
                                 <div role="tabpanel" class="tab-pane active" id="Agent_Activity_Tab">
                                     <div class="mag_tab_input_group">
@@ -605,11 +615,11 @@
                                                         this.LeadsInProcessDataSource = new DevExpress.data.DataSource("/WCFDataServices/PortalReportService.svc/LoadTeamInProcessReport/" + this.Name);
                                                     },
                                                     GetLeadsData: function (status) {
-                                                        var view = this;                                                        
+                                                        var view = this;
                                                         var customStore = new DevExpress.data.CustomStore({
                                                             load: function (loadOptions) {
                                                                 var d = $.Deferred();
-                                                                $.getJSON("/WCFDataServices/PortalReportService.svc/LoadTeamLeadsData/" + view.Name + "/" + status).done(function (data) {                                                                    
+                                                                $.getJSON("/WCFDataServices/PortalReportService.svc/LoadTeamLeadsData/" + view.Name + "/" + status).done(function (data) {
                                                                     d.resolve(data, { totalCount: data.length });
                                                                 });
                                                                 return d.promise();
@@ -620,7 +630,7 @@
                                                 }
                                             },
                                             DisplayView: null,
-                                            DataGridLeads: $("#gridLeads").dxDataGrid({                                               
+                                            DataGridLeads: $("#gridLeads").dxDataGrid({
                                                 showColumnLines: false,
                                                 showRowLines: true,
                                                 rowAlternationEnabled: true,
@@ -628,7 +638,7 @@
                                                 remoteOperations: {
                                                     sorting: false
                                                 },
-                                                columns:[{
+                                                columns: [{
                                                     dataField: "LeadsName",
                                                     caption: "Leads Name",
                                                     width: 240,
@@ -646,7 +656,7 @@
                                                     dataField: "EmployeeName",
                                                     caption: "Employee Name",
                                                     visible: false
-                                                },{
+                                                }, {
                                                     dataField: "DeadReason",
                                                     caption: "Dead Reason",
                                                     visible: false
@@ -659,7 +669,7 @@
                                                     caption: "Callback",
                                                     dataType: 'date',
                                                     visible: false
-                                                }, ,{
+                                                }, , {
                                                     dataField: "LastUpdate",
                                                     caption: "Last Update",
                                                     dataType: 'date',
@@ -762,7 +772,7 @@
                                                         });
                                                     };
                                                     option.onPointClick = function (e) {
-                                                        var point = e.target;                                                        
+                                                        var point = e.target;
                                                         tab.LoadGridLeads(point.tag);
                                                         $("#gridTitle").html(point.originalArgument);
                                                         //point.isVisible() ? point.hide() : point.show();
@@ -785,7 +795,7 @@
                                                 //Call back
                                                 columns["3"] = ["Callback"];
                                                 //Dead end
-                                                columns["4"] = ["DeadReason","Description"];
+                                                columns["4"] = ["DeadReason", "Description"];
 
                                                 return columns;
                                             },
@@ -808,14 +818,14 @@
                                                     }
                                                 } else {
                                                     this.DataGridLeads.columnOption("EmployeeName", "visible", true);
-                                                    this.DataGridLeads.columnOption("LastUpdate", "visible", true);                                                   
+                                                    this.DataGridLeads.columnOption("LastUpdate", "visible", true);
                                                 }
-                                               
-                                                var ds = tab.DisplayView.GetLeadsData(statusKey);                                               
-                                                this.DataGridLeads.option("dataSource", ds);                                                                                             
-                                                this.DataGridLeads.endUpdate();                                                
+
+                                                var ds = tab.DisplayView.GetLeadsData(statusKey);
+                                                this.DataGridLeads.option("dataSource", ds);
+                                                this.DataGridLeads.endUpdate();
                                             }
-                                        };                                     
+                                        };
                                     </script>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="Geo_Leads_tab">
@@ -1268,6 +1278,42 @@
         var officeDropDown = $("#dropDownMenu").dxDropDownMenu({
             dataSource: dropDownMenuData,
             itemClickAction: menuItemClicked,
+            buttonIcon: 'arrowdown',
+        }).dxDropDownMenu("instance");
+
+        var reportList = {
+            'Agent Activity': {
+                text: "<i class=\"fa fa-users mag_tabv_i\"></i>Agent Activity",
+                action: function () {
+                    $('#mytab a[href="#Agent_Activity_Tab"]').tab('show');
+                    agentActivityTab.ShowTab(currentTeamInfo.TeamName, true);
+
+                }
+            },
+            'Status Of Leads': {
+                text: "<i class=\"fa fa-pie-chart mag_tabv_i\"></i>Status Of Leads",
+                action: function () {
+                    $('#mytab a[href="#Status_Of_Leads_Tab"]').tab('show');
+                    LeadsStatusTab.ShowTab(currentTeamInfo.TeamName, currentTeamInfo.Users, true);
+                }
+            }
+        };
+
+        var reportsName = [];
+        for (var key in reportList) {
+            reportsName.push(key);
+        }
+
+        var reportTypeDropdown = $("#reportType").dxDropDownMenu({
+            dataSource: reportsName,
+            itemClickAction: function (e) {
+                console.log(reportList[e.itemData]);
+                var report = reportList[e.itemData];
+                $("#tdReportTitle").html(report.text);
+               
+                report.action();
+
+            },
             buttonIcon: 'arrowdown',
         }).dxDropDownMenu("instance");
 

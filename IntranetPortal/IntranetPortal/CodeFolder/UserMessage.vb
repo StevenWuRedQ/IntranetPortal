@@ -44,7 +44,14 @@
     End Function
 
     Public Shared Function AddNewMessage(userName As String, title As String, message As String, bble As String, notifyTime As DateTime)
-        Return AddNewMessage(userName, title, message, bble, notifyTime, HttpContext.Current.User.Identity.Name)
+        Dim createBy = ""
+        If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.User IsNot Nothing AndAlso HttpContext.Current.User.Identity IsNot Nothing Then
+            createBy = HttpContext.Current.User.Identity.Name
+        Else
+            createBy = "Portal"
+        End If
+
+        Return AddNewMessage(userName, title, message, bble, notifyTime, createBy)
     End Function
 
     Public Shared Function ReadMsg(userName As String, msgId As Integer) As Boolean
