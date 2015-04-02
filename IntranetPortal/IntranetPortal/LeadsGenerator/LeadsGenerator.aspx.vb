@@ -148,7 +148,7 @@ Public Class LeadsGenerator
             Return
         End If
         Dim count = 0
-        Dim maxAdd = LeadMaxAdd()
+        Dim maxAdd = If(AdminLogIn(), MaxSelect, LeadMaxAdd())
         If (maxAdd <= 0) Then
             Alert(GetImportToUser() & " has enough leads in his bank !")
             Return
