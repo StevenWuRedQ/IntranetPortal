@@ -6,19 +6,27 @@
             gridOffDays.DataBind()
             BindAgent()
 
-            gridPublicHoliday.DataSource = Core.SpecialDay.GetPublicOffDays
+            Dim days = Core.SpecialDay.GetPublicOffDays
+            gridPublicHoliday.DataSource = days
             gridPublicHoliday.DataBind()
         End If
     End Sub
 
     Private Sub BindAgent()
-        cbAgents.DataSource = Employee.GetAllActiveEmps()
+      
+        Dim teamUsers = GetAgent()
+        cbAgents.DataSource = teamUsers
+
         cbAgents.DataBind()
     End Sub
-    
+    Private Function GetAgent() As String()
+        Return Employee.GetMyEmployees(Page.User.Identity.Name).Select(Function(e) e.Name).ToArray
+    End Function
+
     Protected Sub gridOffDays_DataBinding(sender As Object, e As EventArgs)
         If gridOffDays.DataSource Is Nothing Then
-            gridOffDays.DataSource = Core.SpecialDay.GetPersonalOffDays
+            Dim agents = GetAgent()
+            gridOffDays.DataSource = Core.SpecialDay.GetPersonalOffDays().Where(Function(d) agents.Contains(d.Employee))
         End If
     End Sub
 

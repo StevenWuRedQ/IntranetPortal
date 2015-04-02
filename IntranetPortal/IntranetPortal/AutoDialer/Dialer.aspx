@@ -51,7 +51,16 @@
 
         function call(PhoneNumber) {
             // get the phone number to connect the call to
-            params = { "PhoneNumber": PhoneNumber != null ? PhoneNumber : PhoneNumber$("#number").val() };
+            var pn ;
+            if (PhoneNumber)
+            {
+                pn = PhoneNumber
+            } else {
+                pn= $("#number").val();
+            }
+           
+            
+            params = { "PhoneNumber":pn };
             Twilio.Device.connect(params);
         }
 

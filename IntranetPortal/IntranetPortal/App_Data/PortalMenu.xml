@@ -371,6 +371,12 @@
           <![CDATA[<i class="fa fa-map-marker"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="DayOff" Text="Day Off" NavigationUrl="/Management/MgrOffDays.aspx" ShowAmount="false">
+        <UserRoles>OfficeManager-*</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-calendar"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <!--<PortalNavItem Name="ReportCalendar" Text="Employees Calendar" NavigationUrl="/ManagementUI/Management.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-calendar"></i>]]>
