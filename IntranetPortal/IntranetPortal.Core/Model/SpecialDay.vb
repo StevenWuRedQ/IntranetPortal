@@ -1,7 +1,7 @@
 ﻿
 Partial Public Class SpecialDay
 
-    Public Shared Function GetPersonalOffDays()
+    Public Shared Function GetPersonalOffDays() As List(Of SpecialDay)
         Using ctx As New CoreEntities
             Return ctx.SpecialDays.Where(Function(s) s.Type = DayType.PersonalOff).ToList
         End Using
@@ -31,7 +31,7 @@ Partial Public Class SpecialDay
         End Using
     End Sub
 
-    Public Shared Function GetPublicOffDays()
+    Public Shared Function GetPublicOffDays() As List(Of SpecialDay)
         Using ctx As New CoreEntities
             Return ctx.SpecialDays.Where(Function(s) s.Type = DayType.PublicHoliday).ToList
         End Using
