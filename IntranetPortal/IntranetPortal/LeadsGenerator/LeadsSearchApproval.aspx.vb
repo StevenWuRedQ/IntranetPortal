@@ -44,6 +44,13 @@ Public Class LeadsSearchApproval
         Else
             GetSearchData()
         End If
+        If Not String.IsNullOrEmpty(Request.QueryString("TaskName")) Then
+            Dim taskname = Request.QueryString("TaskName")
+            Using Context As New Entities
+                Dim SearchData = Context.LeadsSearchTasks.Where(Function(s) s.TaksName = taskname).FirstOrDefault.SearchFileds.ToString
+                hfSearchName.Value = taskname
+            End Using
+        End If
     End Sub
     Private Sub GetSearchData()
         Using Context As New Entities

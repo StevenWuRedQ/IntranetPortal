@@ -324,7 +324,7 @@
                                                                 </li>
                                                                 <li class="ss_form_item">
                                                                     <label class="ss_form_input_title">last court date</label>
-                                                                    <input class="ss_form_input ss_date" value="866-880-1232">
+                                                                    <input class="ss_form_input ss_date" >
                                                                 </li>
                                                                 <li class="ss_form_item">
                                                                     <label class="ss_form_input_title">next court date </label>
@@ -807,12 +807,7 @@
                                                             </label>
 
                                                         </li>
-                                                        <li class="ss_form_item">
-                                                            <span class="ss_form_input_title">foreclosure</span>
-
-                                                            <label class="ss_form_input_title">prior action</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
-                                                        </li>
+                                                        
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Prior Plaintiff</label>
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number">
@@ -846,10 +841,16 @@
                                                         <li class="ss_form_item">
                                                             <span class="ss_form_input_title">Estate set up</span>
 
-                                                            <label class="ss_form_input_title">prior action</label>
+                                                          
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number">
                                                         </li>
+                                                         <li class="ss_form_item">
+                                                          <label class="ss_form_input_title">prior action</label>
 
+                                                          
+                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                        </li>
+                                                          
                                                     </ul>
                                                 </div>
                                                 <div class="ss_form">

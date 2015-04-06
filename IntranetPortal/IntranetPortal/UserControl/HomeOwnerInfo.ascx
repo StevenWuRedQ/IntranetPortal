@@ -590,7 +590,7 @@
    
 </script>
 <style>
-    .fa-phone 
+    .fa-phone.homeowner_info_icon 
     {
         cursor:pointer;
         color:green;

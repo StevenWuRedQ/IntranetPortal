@@ -222,6 +222,9 @@
     <Reference Include="Twilio.Client.Capability">
       <HintPath>..\packages\Twilio.Client.3.4.4\lib\3.5\Twilio.Client.Capability.dll</HintPath>
     </Reference>
+    <Reference Include="Twilio.Twiml">
+      <HintPath>..\packages\Twilio.TwiML.3.3.6\lib\3.5\Twilio.Twiml.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />

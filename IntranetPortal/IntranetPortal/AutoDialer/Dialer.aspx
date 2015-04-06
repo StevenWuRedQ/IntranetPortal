@@ -63,6 +63,7 @@
             params = { "PhoneNumber":pn };
             Twilio.Device.connect(params);
         }
+        
 
         function hangup() {
             Twilio.Device.disconnectAll();
@@ -74,11 +75,13 @@
         <button class="call" onclick="call();" type="button">
             Call
         </button>
-
+        
         <button class="hangup" onclick="hangup();" type="button">
             Hangup
         </button>
-
+        <button class="call"  runat="server" id="CallManger" onserverclick="CallManger_ServerClick" type="button">
+            Add Manger
+        </button>
         <input type="text" id="number" name="number"
             placeholder="Enter a phone number to call" />
 

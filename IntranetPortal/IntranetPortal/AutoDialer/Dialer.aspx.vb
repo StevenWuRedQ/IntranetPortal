@@ -1,5 +1,6 @@
 ﻿Imports Twilio
 
+
 Public Class Dialer
     Inherits System.Web.UI.Page
 
@@ -19,6 +20,7 @@ Public Class Dialer
             Dim appSid = "AP28c5fe5b36df57231d5e021de14c62ab"
 
             Dim capability = New TwilioCapability(accountSid, authToken)
+        
             capability.AllowClientOutgoing(appSid)
             capability.AllowClientIncoming("jenny")
             Return capability.GenerateToken()
@@ -27,4 +29,16 @@ Public Class Dialer
 
 
 
+    Protected Sub CallManger_ServerClick(sender As Object, e As EventArgs)
+        Dim twiml = New Twilio.TwiML.TwilioResponse()
+        twiml.Say("Connecting you to agent 1. All calls are recorded.")
+        ' @end snippet
+        twiml.Dial(New Twilio.TwiML.Number("+19298883289", New With { _
+            Key .url = "screen-caller.xml", _
+            Key .method = "GET" _
+        }), New With { _
+            Key .record = "true" _
+        })
+
+    End Sub
 End Class
