@@ -79,7 +79,7 @@
         <button class="hangup" onclick="hangup();" type="button">
             Hangup
         </button>
-        <button class="call"  runat="server" id="CallManger" onserverclick="CallManger_ServerClick" type="button">
+        <button class="call"  runat="server" id="CallManger" onserverclick="CallManger_ServerClick" type="button" style="display:none">
             Add Manger
         </button>
         <input type="text" id="number" name="number"
