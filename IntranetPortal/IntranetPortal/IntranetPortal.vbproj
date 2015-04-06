@@ -700,6 +700,13 @@
       <DependentUpon>LeadsSearchApproval.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="LegalUI\LegalUI.aspx.designer.vb">
+      <DependentUpon>LegalUI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LegalUI\LegalUI.aspx.vb">
+      <DependentUpon>LegalUI.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="ManagementUI\Management2.aspx.designer.vb">
       <DependentUpon>Management2.aspx</DependentUpon>
     </Compile>
@@ -1620,6 +1627,7 @@
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />
+    <Content Include="LegalUI\LegalUI.aspx" />
     <Content Include="ManagementUI\Management2.aspx" />
     <Content Include="ManagementUI\Management1.aspx" />
     <Content Include="ManagementUI\Management.aspx" />
