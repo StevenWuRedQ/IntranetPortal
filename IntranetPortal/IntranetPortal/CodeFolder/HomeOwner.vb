@@ -35,6 +35,19 @@ Partial Public Class HomeOwner
         End Set
     End Property
 
+    Public Shared Function GetHomeOwenrs(bble As String) As List(Of HomeOwner)
+        Using ctx As New Entities
+            Return ctx.HomeOwners.Where(Function(h) h.BBLE = bble).ToList
+        End Using
+
+    End Function
+
+    Public Shared Function LoadOwner(ownerId As Integer) As HomeOwner
+        Using ctx As New Entities
+            Return ctx.HomeOwners.Find(ownerId)
+        End Using
+
+    End Function
 
     Private _bestPhoneNo As List(Of HomeOwnerPhone)
     Public ReadOnly Property BestPhoneNo As List(Of HomeOwnerPhone)

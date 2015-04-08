@@ -7,6 +7,14 @@
 
     Protected Sub popupEditHomeOwner_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         PopupContentHomeOwner.Visible = True
+
+        If e.Parameter.StartsWith("Load") Then
+            Dim uniqueId = txtUniqueTLOID.Value
+
+
+        End If
+
+
         If e.Parameter.StartsWith("Show") Then
             Dim bble = e.Parameter.Split("|")(1)
             Dim ownerName = e.Parameter.Split("|")(2)

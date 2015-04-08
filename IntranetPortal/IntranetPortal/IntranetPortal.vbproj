@@ -1391,6 +1391,13 @@
       <DependentUpon>UserSummary.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ViewHomeOwner.aspx.designer.vb">
+      <DependentUpon>ViewHomeOwner.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewHomeOwner.aspx.vb">
+      <DependentUpon>ViewHomeOwner.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="ViewLeadsInfo.aspx.designer.vb">
       <DependentUpon>ViewLeadsInfo.aspx</DependentUpon>
     </Compile>
@@ -2711,6 +2718,7 @@
     <Content Include="UserControl\PropertyInfo.ascx" />
     <Content Include="UserControl\TitleInLeadsControl.ascx" />
     <Content Include="UserControl\UserSummary.ascx" />
+    <Content Include="ViewHomeOwner.aspx" />
     <Content Include="ViewLeadsInfo.aspx" />
     <Content Include="WCFDataServices\CommonService.svc" />
     <Content Include="WCFDataServices\PortalDataService.svc" />

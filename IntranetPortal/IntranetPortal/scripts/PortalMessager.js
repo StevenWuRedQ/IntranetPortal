@@ -32,7 +32,6 @@ function RefreshLeadsCount() {
                                     document.getElementById(item.Name).innerText = item.Count;
                                 else
                                     document.getElementById(item.Name).innerText = "";
-
                             }
                         }
                     }
@@ -42,6 +41,7 @@ function RefreshLeadsCount() {
                 else {
                     document.getElementById('errorMsg').innerHTML +=
                               request.responseText + '< br />';
+                    window.setTimeout(function () { RefreshLeadsCount(); }, callIntervalTime);
                 }
             }
         }

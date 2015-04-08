@@ -160,6 +160,9 @@ Public Class DataWCFService
             Try
                 Dim waitingRequest = client.Requests_Waiting
                 Return waitingRequest > 100
+            Catch ex As TimeoutException
+                Throw New Exception("Check Server is busy. Time out exception: " & ex.Message)
+                Return True
             Catch ex As Exception
                 Throw New Exception("Check Server is busy. exception: " & ex.Message)
                 Return False
@@ -967,6 +970,32 @@ Public Class DataWCFService
         End Using
 
     End Sub
+
+    Public Shared Function GetOwnerInfoByTLOId(tloId As String) As HomeOwner
+        Using client As New DataAPI.WCFMacrosClient
+            Dim result = client.Get_TLO_Person(100, Nothing, Nothing, False, False, Nothing, tloId, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+
+            If result.numberOfRecordsFoundField > 0 Then
+                Dim person = result.personSearchOutputRecordsField(0)
+                'relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField 
+                If person IsNot Nothing AndAlso person.namesField IsNot Nothing AndAlso person.namesField.Length > 0 Then
+                    Dim owner As New HomeOwner
+                    Dim name = person.namesField(0)
+                    owner.Name = name.firstNameField & If(name.middleNameField IsNot Nothing, " " & name.middleNameField & " ", " ") & name.lastNameField
+                    owner.Address1 = person.addressesField(0).addressField.line1Field
+                    owner.Address2 = person.addressesField(0).addressField.line2Field
+                    owner.City = person.addressesField(0).addressField.cityField
+                    owner.Country = person.addressesField(0).addressField.countryNameField
+                    owner.State = person.addressesField(0).addressField.stateField
+                    owner.Zip = person.addressesField(0).addressField.zipField
+
+                    Return owner
+                End If
+            End If
+
+            Return Nothing
+        End Using
+    End Function
 
     Private Shared Function FieldMap(li As LeadsInfo, leadResult As DataAPI.ALL_NYC_Tax_Liens_CO_Info) As LeadsInfo
         'li.BBLE = leadResult.BBLE

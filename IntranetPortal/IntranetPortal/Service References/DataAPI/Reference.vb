@@ -38818,10 +38818,16 @@ Namespace DataAPI
         Private COUNTRYField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private HOUSE_NUMBField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private OWNER_NAMEField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private STATEField As String
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private ST_NAMEField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private ZIPField As String
@@ -38877,6 +38883,16 @@ Namespace DataAPI
         End Property
         
         <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property HOUSE_NUMB() As String
+            Get
+                Return Me.HOUSE_NUMBField
+            End Get
+            Set
+                Me.HOUSE_NUMBField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
         Public Property OWNER_NAME() As String
             Get
                 Return Me.OWNER_NAMEField
@@ -38893,6 +38909,16 @@ Namespace DataAPI
             End Get
             Set
                 Me.STATEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property ST_NAME() As String
+            Get
+                Return Me.ST_NAMEField
+            End Get
+            Set
+                Me.ST_NAMEField = value
             End Set
         End Property
         
@@ -45197,6 +45223,12 @@ Namespace DataAPI
         Private TLNAMEField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TLOAddrConfirmedField As System.Nullable(Of Boolean)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
+        Private TLOIsDeceasedField As System.Nullable(Of Boolean)
+        
+        <System.Runtime.Serialization.OptionalFieldAttribute()>  _
         Private TMNAMEField As String
         
         <System.Runtime.Serialization.OptionalFieldAttribute()>  _
@@ -45936,6 +45968,26 @@ Namespace DataAPI
             End Get
             Set
                 Me.TLNAMEField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TLOAddrConfirmed() As System.Nullable(Of Boolean)
+            Get
+                Return Me.TLOAddrConfirmedField
+            End Get
+            Set
+                Me.TLOAddrConfirmedField = value
+            End Set
+        End Property
+        
+        <System.Runtime.Serialization.DataMemberAttribute()>  _
+        Public Property TLOIsDeceased() As System.Nullable(Of Boolean)
+            Get
+                Return Me.TLOIsDeceasedField
+            End Get
+            Set
+                Me.TLOIsDeceasedField = value
             End Set
         End Property
         
@@ -46687,10 +46739,10 @@ Namespace DataAPI
         Function AAbs_GetAreAbstractReportAsync(ByVal BBLE As String, ByVal SelectedOwners() As DataAPI.OwnerInfo, ByVal RunJudgement As Boolean, ByVal RunFederalTaxLiens As Boolean, ByVal RunMortgages As Boolean, ByVal RunParkingViolation As Boolean, ByVal RunPatriot As Boolean, ByVal RunUcc As Boolean, ByVal RunBankruptcy As Boolean, ByVal RunECB As Boolean, ByVal RunEmergenyRepairs As Boolean, ByVal RunTransitAdjudication As Boolean, ByVal RunTLO As Boolean, ByVal RetainRecords As Boolean) As System.Threading.Tasks.Task(Of DataAPI.AB_Report_Out)
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO_Person", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLO_PersonResponse")>  _
-        Function Get_TLO_Person(ByVal APIorderNum As Integer, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As DataAPI.TLOPersonSearchOutput
+        Function Get_TLO_Person(ByVal APIorderNum As String, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As DataAPI.TLOPersonSearchOutput
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO_Person", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLO_PersonResponse")>  _
-        Function Get_TLO_PersonAsync(ByVal APIorderNum As Integer, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As System.Threading.Tasks.Task(Of DataAPI.TLOPersonSearchOutput)
+        Function Get_TLO_PersonAsync(ByVal APIorderNum As String, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As System.Threading.Tasks.Task(Of DataAPI.TLOPersonSearchOutput)
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -46988,11 +47040,11 @@ Namespace DataAPI
             Return MyBase.Channel.AAbs_GetAreAbstractReportAsync(BBLE, SelectedOwners, RunJudgement, RunFederalTaxLiens, RunMortgages, RunParkingViolation, RunPatriot, RunUcc, RunBankruptcy, RunECB, RunEmergenyRepairs, RunTransitAdjudication, RunTLO, RetainRecords)
         End Function
         
-        Public Function Get_TLO_Person(ByVal APIorderNum As Integer, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As DataAPI.TLOPersonSearchOutput Implements DataAPI.IWCFMacros.Get_TLO_Person
+        Public Function Get_TLO_Person(ByVal APIorderNum As String, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As DataAPI.TLOPersonSearchOutput Implements DataAPI.IWCFMacros.Get_TLO_Person
             Return MyBase.Channel.Get_TLO_Person(APIorderNum, FullName, Name, UseExactFirstNameMatch, UsePhoneticLastNameMatch, Address, SSN, DateOfBirth, MinimumAge, MaximumAge, Phone, DriversLicenseNumber, EmailAddress, IPAddress, Domain)
         End Function
         
-        Public Function Get_TLO_PersonAsync(ByVal APIorderNum As Integer, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As System.Threading.Tasks.Task(Of DataAPI.TLOPersonSearchOutput) Implements DataAPI.IWCFMacros.Get_TLO_PersonAsync
+        Public Function Get_TLO_PersonAsync(ByVal APIorderNum As String, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As System.Threading.Tasks.Task(Of DataAPI.TLOPersonSearchOutput) Implements DataAPI.IWCFMacros.Get_TLO_PersonAsync
             Return MyBase.Channel.Get_TLO_PersonAsync(APIorderNum, FullName, Name, UseExactFirstNameMatch, UsePhoneticLastNameMatch, Address, SSN, DateOfBirth, MinimumAge, MaximumAge, Phone, DriversLicenseNumber, EmailAddress, IPAddress, Domain)
         End Function
     End Class

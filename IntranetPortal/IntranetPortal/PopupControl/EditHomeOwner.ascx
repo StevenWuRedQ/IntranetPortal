@@ -27,7 +27,8 @@
                         Unique ID
                     </div>
                     <div class="clearence_list_text18  color_blue_edit">
-                        <input class="ss_form_input" value="" runat="server" id="txtUniqueTLOID" style="width: 90%">
+                        <input class="ss_form_input" value="" runat="server" id="txtUniqueTLOID" style="width: 25%;">
+                        <input type="button" class="rand-button short_sale_edit bg_color_blue" style="margin-left:25px" value="Load" onclick="popupEditHomeOwner.PerformCallback('Load');" id="btnLoad">
                     </div>
                 </div>
                 <div class="clearence_list_text">

@@ -117,22 +117,22 @@ Public Class PortalReportService
             result.AddRange({New With {
                               .Category = "CallOwner",
                               .User = agentData.CallOwner,
-                              .Avg = CInt(allData.Average(Function(a) a.CallOwner))
-                              },
+                              .Avg = CInt(allData.Where(Function(a) a.CallOwner >= 10).Select(Function(a) a.CallOwner).DefaultIfEmpty(0).Average())
+                          },
                                     New With {
                               .Category = "Comments",
                               .User = agentData.Comments,
-                              .Avg = CInt(allData.Average(Function(a) a.Comments))
+                              .Avg = CInt(allData.Where(Function(a) a.Comments >= 10).Select(Function(a) a.Comments).DefaultIfEmpty(0).Average())
                                         },
                                       New With {
                               .Category = "FollowUp",
                               .User = agentData.FollowUp,
-                              .Avg = CInt(allData.Average(Function(a) a.FollowUp))
+                              .Avg = CInt(allData.Where(Function(a) a.FollowUp >= 10).Select(Function(a) a.FollowUp).DefaultIfEmpty(0).Average())
                                         },
                                      New With {
                               .Category = "UniqueBBLE",
                               .User = agentData.UniqueBBLE,
-                              .Avg = CInt(allData.Average(Function(a) a.UniqueBBLE))
+                              .Avg = CInt(allData.Where(Function(a) a.UniqueBBLE >= 10).Select(Function(a) a.UniqueBBLE).DefaultIfEmpty(0).Average())
                                         }
                                     })
         End If
@@ -267,6 +267,12 @@ Public Module JsonExtension
         Dim ms As New MemoryStream(New UTF8Encoding().GetBytes(json))
         ms.Position = 0
         Return WebOperationContext.Current.CreateStreamResponse(ms, "application/json")
+    End Function
+
+    <Extension()>
+    Public Function ToJsonString(ByVal obj As Object) As String
+        Dim json = Newtonsoft.Json.JsonConvert.SerializeObject(obj)
+        Return json
     End Function
 End Module
 

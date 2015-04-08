@@ -286,6 +286,10 @@ Public Class Utility
     End Function
 
     Public Shared Function IsSimilarName(name1 As String, name2 As String) As Boolean
+        If String.IsNullOrEmpty(name1) Or String.IsNullOrEmpty(name2) Then
+            Return False
+        End If
+
         Dim strCompare = name1.Replace(",", "").Replace("&", " ").Replace("-", " ").Split(" ")
         name2 = name2.Replace(",", "").Replace("&", " ").Replace("-", " ")
         Dim nameArray = name2.Split(" ")

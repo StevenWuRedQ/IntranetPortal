@@ -584,7 +584,7 @@
   <xs:element name="Get_TLO_Person">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="APIorderNum" type="xs:int" />
+        <xs:element minOccurs="0" name="APIorderNum" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="FullName" nillable="true" type="xs:string" />
         <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" minOccurs="0" name="Name" nillable="true" type="q34:NameBase" />
         <xs:element minOccurs="0" name="UseExactFirstNameMatch" type="xs:boolean" />

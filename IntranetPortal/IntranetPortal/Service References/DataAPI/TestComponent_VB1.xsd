@@ -574,8 +574,10 @@
       <xs:element minOccurs="0" name="ADDR2" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="CITY" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="COUNTRY" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HOUSE_NUMB" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OWNER_NAME" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="STATE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ST_NAME" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ZIP" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -1271,6 +1273,8 @@
       <xs:element minOccurs="0" name="TCOUNTY" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TFNAME" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TLNAME" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TLOAddrConfirmed" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TLOIsDeceased" nillable="true" type="xs:boolean" />
       <xs:element minOccurs="0" name="TMNAME" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TSTNAM" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TSTNUM" nillable="true" type="xs:string" />
