@@ -1100,7 +1100,7 @@
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number">
                                                         </li>
                                                         <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">HAMP  submitted Date</label>
+                                                            <label class="ss_form_input_title">HAMP submitted Date</label>
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number">
                                                         </li>
                                                         <li class="ss_form_item">
@@ -1108,7 +1108,7 @@
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number">
                                                         </li>
                                                         <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">HAMP  submitted Resubmission?</label>
+                                                            <label class="ss_form_input_title">HAMP  submitted Resubmission</label>
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number">
                                                         </li>
 
