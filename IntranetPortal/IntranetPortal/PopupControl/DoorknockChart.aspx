@@ -130,40 +130,18 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-10"></div>
-                <div class="col-md-2">
-                    <input type="button" class="rand-button rand-button-blue" value="Print" onclick="cpPrint.PerformCallback()" />
+                <div class="col-md-9"></div>
+                <div class="col-md-3">
+                    <input type="button" class="rand-button rand-button-blue" value="Confirm Door Knocking" id="btnConfirm" onclick="cpPrint.PerformCallback(); " />
+                    <input type="button" class="rand-button rand-button-blue" value="Print" onclick="window.print();" />
                 </div>
             </div>
         </div>
     </div>
     <dx:ASPxCallback runat="server" ID="cpPrint" ClientInstanceName="cpPrint" OnCallback="cpPrint_Callback">
-        <ClientSideEvents EndCallback="function(s,e){window.print();}" />
+        <ClientSideEvents EndCallback="function(s,e){alert('Doorknock task created.'); $('#btnConfirm').hide();}" />
     </dx:ASPxCallback>
     <div style="position: fixed; height: 90px; width: 170px; bottom: 0; right: 0;" class="logo">
         <img src="/images/logo_black.jpg" class="logo" />
     </div>
 </asp:Content>
-
-<%--<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/themes/smoothness/jquery-ui.css" />
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
-    <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
-    <link href="/styles/stevencss.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-    <form id="form1" runat="server">
-   
-    </form>
-</body>
-</html>--%>

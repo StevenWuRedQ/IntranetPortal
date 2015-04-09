@@ -2,10 +2,17 @@
 Imports System.Xml
 Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.Runtime.Serialization
 
 Partial Public Class HomeOwner
+
+    Public Property AgeString As String
+    Public Property DeathIndicator As String
+    Public Property BankruptcyString As String
+
     Private objLocateReport As DataAPI.TLOLocateReportOutput
     Public Shared EMPTY_HOMEOWNER As String = "Please Edit Owner"
+    <IgnoreDataMember>
     Public Property TLOLocateReport As DataAPI.TLOLocateReportOutput
         Get
             If objLocateReport Is Nothing And LocateReport IsNot Nothing AndAlso LocateReport.Length > 0 Then
@@ -49,7 +56,27 @@ Partial Public Class HomeOwner
 
     End Function
 
+    <IgnoreDataMember>
+    Public ReadOnly Property FullAddress As String
+        Get
+            Dim address = ""
+            address = String.Format("{0} {1}", Address1, Address2).Trim
+
+
+            If Not String.IsNullOrEmpty(City) Then
+                address = address & "," & City
+
+                If Not String.IsNullOrEmpty(State) Then
+                    address = address & String.Format(",{0} {1}", State, Zip).Trim
+                End If
+            End If
+
+            Return address
+        End Get
+    End Property
+
     Private _bestPhoneNo As List(Of HomeOwnerPhone)
+    <IgnoreDataMember>
     Public ReadOnly Property BestPhoneNo As List(Of HomeOwnerPhone)
         Get
             If _bestPhoneNo Is Nothing Then
@@ -66,6 +93,7 @@ Partial Public Class HomeOwner
 
 
     Private _bestEmail As List(Of HomeOwnerEmail)
+    <IgnoreDataMember>
     Public ReadOnly Property BestEmail As List(Of HomeOwnerEmail)
         Get
             If _bestEmail Is Nothing Then
@@ -80,6 +108,7 @@ Partial Public Class HomeOwner
     End Property
 
     Private _bestAddress As List(Of HomeOwnerAddress)
+    <IgnoreDataMember>
     Public ReadOnly Property BestAddress As List(Of HomeOwnerAddress)
         Get
             If _bestAddress Is Nothing Then
@@ -227,26 +256,29 @@ Partial Public Class HomeOwner
         End Using
     End Sub
 
+    <IgnoreDataMember>
     Public ReadOnly Property FirstName As String
         Get
             Return TLOLocateReport.namesField(0).firstNameField
         End Get
     End Property
 
+    <IgnoreDataMember>
     Public ReadOnly Property LastName As String
         Get
             Return TLOLocateReport.namesField(0).lastNameField
         End Get
     End Property
 
-    Public ReadOnly Property FullAddress As String
-        Get
-            Return String.Format("{0} {1}, {2},{3} {4}", Me.Address1, Me.Address2, Me.City, Me.State, Me.Zip)
-        End Get
-    End Property
+    'Public ReadOnly Property FullAddress As String
+    '    Get
+    '        Return String.Format("{0} {1}, {2},{3} {4}", Me.Address1, Me.Address2, Me.City, Me.State, Me.Zip)
+    '    End Get
+    'End Property
 
     Dim hoInfo As New HomeOwnerInfo
 
+    <IgnoreDataMember>
     Public ReadOnly Property PhoneNumbers As String
         Get
 
@@ -259,12 +291,14 @@ Partial Public Class HomeOwner
         End Get
     End Property
 
+    <IgnoreDataMember>
     Public ReadOnly Property PhoneCount As Integer
         Get
             Return TLOLocateReport.phonesField.Length
         End Get
     End Property
 
+    <IgnoreDataMember>
     Public ReadOnly Property AddressHistory As String
         Get
             Dim result = New List(Of String)
@@ -276,12 +310,14 @@ Partial Public Class HomeOwner
         End Get
     End Property
 
+    <IgnoreDataMember>
     Public ReadOnly Property Alive As Boolean
         Get
             Return TLOLocateReport.dateOfDeathField Is Nothing
         End Get
     End Property
 
+    <IgnoreDataMember>
     Public ReadOnly Property Age As String
         Get
             If TLOLocateReport.dateOfBirthField IsNot Nothing Then
@@ -291,12 +327,14 @@ Partial Public Class HomeOwner
         End Get
     End Property
 
+    <IgnoreDataMember>
     Public ReadOnly Property Bankruptcy As Boolean
         Get
             Return TLOLocateReport.numberOfBankruptciesField > 0
         End Get
     End Property
 
+    <IgnoreDataMember>
     Public ReadOnly Property Relatives1stNamePhone As String
         Get
             Dim result = New List(Of String)
@@ -308,7 +346,7 @@ Partial Public Class HomeOwner
             Return String.Join(" ", result.ToArray)
         End Get
     End Property
-
+    <IgnoreDataMember>
     Public ReadOnly Property Relatives2ndNamePhone As String
         Get
             Dim result = New List(Of String)
@@ -320,7 +358,7 @@ Partial Public Class HomeOwner
             Return String.Join(" ", result.ToArray)
         End Get
     End Property
-
+    <IgnoreDataMember>
     Public ReadOnly Property Relatives3rdNamePhone As String
         Get
             Dim result = New List(Of String)

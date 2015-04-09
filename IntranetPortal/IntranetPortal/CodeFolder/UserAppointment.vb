@@ -55,6 +55,18 @@
 
     End Function
 
+    Public Shared Function GetLatestUserAppointment(bble As String) As UserAppointment
+        Using ctx As New Entities
+            Dim dt = DateTime.Now
+            Dim appt = ctx.UserAppointments.Where(Function(ua) ua.BBLE = bble And ua.Status = AppointmentStatus.Accepted).OrderByDescending(Function(ua) ua.ScheduleDate).FirstOrDefault
+            If appt IsNot Nothing Then
+                Return appt
+            End If
+
+            Return Nothing
+        End Using
+    End Function
+
     Enum AppointmentStatus
         NewAppointment
         Accepted

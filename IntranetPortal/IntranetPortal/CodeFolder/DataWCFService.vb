@@ -52,7 +52,7 @@ Public Class DataWCFService
         End Using
     End Function
 
-    Private Shared Function GetLocateReport(orderNum As Integer, bble As String, name As String, address1 As String, address2 As String, city As String, state As String, zip As String, country As String) As DataAPI.TLOLocateReportOutput
+    Public Shared Function GetLocateReport(orderNum As Integer, bble As String, name As String, address1 As String, address2 As String, city As String, state As String, zip As String, country As String) As DataAPI.TLOLocateReportOutput
         If Not Core.TLOApiLog.IsServiceOn Then
             Throw New Exception("HomeOwner Service is temporary closed. Please try later.")
         End If
@@ -245,12 +245,12 @@ Public Class DataWCFService
                     li.Zoning = result.ZONING
                     li.MaxFar = CDbl(result.MAX_FAR)
                     li.ActualFar = CDbl(result.ACTUAL_FAR)
-                    li.NYCSqft = result.GROSS_SQFT
+                    li.NYCSqft = result.ORIG_SQFT
 
                     'result.LAND_SQFT  as Land_SF
                     'result.ORIG_SQFT as NYC_GLA
-                    If result.LAND_SQFT.HasValue AndAlso Not String.IsNullOrEmpty(result.MAX_FAR) AndAlso result.GROSS_SQFT.HasValue Then
-                        li.UnbuiltSqft = result.LAND_SQFT * CDbl(result.MAX_FAR) - result.GROSS_SQFT
+                    If result.LAND_SQFT.HasValue AndAlso Not String.IsNullOrEmpty(result.MAX_FAR) AndAlso result.ORIG_SQFT.HasValue Then
+                        li.UnbuiltSqft = result.LAND_SQFT * CDbl(result.MAX_FAR) - result.ORIG_SQFT
 
                         LeadsInfo.AddIndicator("UnderBuilt", li, GetCurrentIdentityName())
                     End If
@@ -971,12 +971,32 @@ Public Class DataWCFService
 
     End Sub
 
-    Public Shared Function GetOwnerInfoByTLOId(tloId As String) As HomeOwner
+    Public Shared Function GetOwnerInfoByTLOId(tloId As String, bble As String) As HomeOwner
+
+        If Not Core.TLOApiLog.IsServiceOn Then
+            Throw New Exception("HomeOwner Service is temporary closed. Please try later.")
+        End If
+
+        If Core.TLOApiLog.LimiteIsExceed Then
+            Throw New Exception("HomeOwner Load Limit is reached. Please contact Admin!")
+        End If
+
         Using client As New DataAPI.WCFMacrosClient
             Dim result = client.Get_TLO_Person(100, Nothing, Nothing, False, False, Nothing, tloId, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
 
+            If result Is Nothing Then
+                Throw New Exception("Can't find the user. Please check.")
+            End If
+
+            'LogTloApiCall
+
+
+
             If result.numberOfRecordsFoundField > 0 Then
                 Dim person = result.personSearchOutputRecordsField(0)
+
+
+
                 'relative.nameField.firstNameField & If(relative.nameField.middleNameField isnot Nothing,relative.nameField.middleNameField, " ") &" "& relative.nameField.lastNameField 
                 If person IsNot Nothing AndAlso person.namesField IsNot Nothing AndAlso person.namesField.Length > 0 Then
                     Dim owner As New HomeOwner
@@ -988,10 +1008,26 @@ Public Class DataWCFService
                     owner.Country = person.addressesField(0).addressField.countryNameField
                     owner.State = person.addressesField(0).addressField.stateField
                     owner.Zip = person.addressesField(0).addressField.zipField
+                    If person.datesOfBirthField IsNot Nothing AndAlso person.datesOfBirthField.Length > 0 Then
+                        owner.AgeString = person.datesOfBirthField(0).currentAgeField
+                    End If
+
+                    If person.datesOfDeathField IsNot Nothing Then
+                        owner.DeathIndicator = If(person.datesOfDeathField.Length > 0, "Death", "Alive")
+                    End If
+
+                    If Not String.IsNullOrEmpty(person.numberOfBankruptciesField) Then
+                        owner.BankruptcyString = If(CInt(person.numberOfBankruptciesField) > 0, "Yes", "No")
+                    End If
+
+                    'tlo log
+                    Core.TLOApiLog.Log(bble, owner.Name, "UniqueId:" & tloId, Nothing, Nothing, Nothing, Nothing, Nothing, True, GetCurrentIdentityName)
 
                     Return owner
                 End If
             End If
+
+            Core.TLOApiLog.Log(bble, Nothing, "UniqueId:" & tloId, Nothing, Nothing, Nothing, Nothing, Nothing, False, GetCurrentIdentityName)
 
             Return Nothing
         End Using

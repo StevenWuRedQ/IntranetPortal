@@ -50,6 +50,15 @@ Partial Public Class EditHomeOwner
     Protected WithEvents hfOwnerName As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
+    '''hfOwnerData control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfOwnerData As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''txtUniqueTLOID control.
     '''</summary>
     '''<remarks>

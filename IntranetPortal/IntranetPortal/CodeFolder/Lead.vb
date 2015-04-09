@@ -30,6 +30,18 @@ Partial Public Class Lead
         End Get
     End Property
 
+    Public ReadOnly Property LatestAppointmentDate As DateTime
+        Get
+            Dim appt = UserAppointment.GetLatestUserAppointment(BBLE)
+
+            If appt IsNot Nothing Then
+                Return appt.ScheduleDate
+            End If
+
+            Return DateTime.MinValue
+        End Get
+    End Property
+
     Public ReadOnly Property LastOwnerUpdate As DateTime
         Get
             Dim log = LeadsActivityLogs.Where(Function(l) l.EmployeeName.ToLower = EmployeeName.ToLower).OrderByDescending(Function(lg) lg.ActivityDate).FirstOrDefault
@@ -449,7 +461,7 @@ Partial Public Class Lead
     Public ReadOnly Property Appointment As UserAppointment
         Get
             Using ctx As New Entities
-                Return ctx.UserAppointments.Where(Function(t) t.BBLE = BBLE And t.Status = UserAppointment.AppointmentStatus.NewAppointment).Take(0).FirstOrDefault
+                Return ctx.UserAppointments.Where(Function(t) t.BBLE = BBLE And (t.Status = UserAppointment.AppointmentStatus.NewAppointment)).Take(0).FirstOrDefault
             End Using
         End Get
     End Property

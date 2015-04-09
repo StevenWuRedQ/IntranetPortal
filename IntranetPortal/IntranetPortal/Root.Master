@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/scripts/js/jquery.mCustomScrollbar/jquery.mCustomScrollbar.css" />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/css/stevencss.css?v=1.02" />
+
     <style>
         html, body, #form1 {
             width: 100% !important;
@@ -45,6 +46,32 @@
 
             function endsWith(str, suffix) {
                 return str.indexOf(suffix, str.length - suffix.length) !== -1;
+            }
+
+            function ShowChatWindow() {
+                var ctrId = 'divChat';
+                var userName = '<%= Page.User.Identity.Name%>';
+        //        <div id="divChat" class="info message" style="bottom: -300px; right: 25px">
+        //    <iframe id="MapContent" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="/chat/index.html"></iframe>
+        //</div>
+                var div = '<div id="' + ctrId + '"  rel="0" style="bottom: -300px; right: 25px; position: fixed; width: 300px;">' +
+                       '<div class="header">' +
+                          '<div  style="float:right;">' +
+                              '<img id="imgDelete"  style="cursor:pointer;" src="/Images/delete.png"/>' +
+                           '</div>' +
+
+                           '<span class="selText" rel="0">' + userName + '</span>' +
+                       '</div>' +
+                       '<iframe id="MapContent" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="/chat/index.html"></iframe>' +                  
+                    '</div>';
+                $div = $(div);
+                $('#divMsgTest').parent().append($div);
+                //$div.draggable({
+                //    handle: ".header",
+                //    stop: function () {
+                //    }
+                //});
+                $div.animate({ bottom: "25" }, 500);
             }
         </script>
         <dx:ASPxSplitter ID="MainSplitter" runat="server" Height="100%" Width="100%" FullscreenMode="True" ShowCollapseBackwardButton="true">
@@ -80,6 +107,7 @@
                                             </p>
                                             <p>&copy; 2014 My Ideal Property</p>
                                             <div id="errorMsg" style="color: transparent"></div>
+                                            <input type="button" value="Chat" onclick="ShowChatWindow()" />
                                         </footer>
                                     </div>
                                 </dx:SplitterContentControl>
@@ -205,7 +233,7 @@
                                                                 <dx:GridViewDataColumn Width="35px" VisibleIndex="5">
                                                                     <DataItemTemplate>
                                                                         <%--use font image to change the image--%>
-                                                                        <i class="fa fa-sheqel tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Request Update?" onclick='<%# String.Format("OnRequestUpdate(""{0}"");return false;", Eval("BBLE")) %>' runat="server" visible='<%# not CBool(Eval("Viewable"))%>'></i>                                                                        
+                                                                        <i class="fa fa-sheqel tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Request Update?" onclick='<%# String.Format("OnRequestUpdate(""{0}"");return false;", Eval("BBLE")) %>' runat="server" visible='<%# not CBool(Eval("Viewable"))%>'></i>
                                                                         <i class="fa fa-external-link-square tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To Lead" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# Eval("Viewable")%>'></i>
                                                                         <span style="width: 10px">&nbsp;&nbsp;</span>
                                                                         <i class="fa fa-list-alt tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# Eval("Viewable")%>'></i>
@@ -237,7 +265,7 @@
                                                                     </td>
                                                                 </tr>
                                                             </table>
-                                                        </asp:Panel>                                                       
+                                                        </asp:Panel>
                                                     </dx:PopupControlContentControl>
                                                 </ContentCollection>
                                                 <ClientSideEvents EndCallback="function(s,e){s.ShowAtElement(txtSearchKeyClient.GetMainElement()); $('.tooltip-examples').tooltip(); }" />
@@ -305,6 +333,8 @@
             }
         </style>
 
+        
+        
         <div id="divMsgTest" class="info message" style="bottom: -300px; right: 25px">
             <div class="msgtitle">
                 <i class="fa fa-envelope with_circle" style="color: white; font-size: 14px; width: 30px; height: 30px; line-height: 30px; text-align: center"></i>&nbsp; New Message

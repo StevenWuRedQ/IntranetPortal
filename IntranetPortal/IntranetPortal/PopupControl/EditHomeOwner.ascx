@@ -21,6 +21,7 @@
         <dx:PopupControlContentControl runat="server" ID="PopupContentHomeOwner" Visible="false">
             <asp:HiddenField ID="hfBBLE" runat="server" />
             <asp:HiddenField ID="hfOwnerName" runat="server" />
+            <asp:HiddenField ID="hfOwnerData" runat="server" />
             <div class="popup_padding">
                 <div class="clearence_list_text">
                     <div class="clearence_list_title">

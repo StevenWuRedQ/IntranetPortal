@@ -3,7 +3,6 @@ Imports System.Runtime.CompilerServices
 Imports System.IO
 Imports System.ServiceModel
 
-
 ' NOTE: You can use the "Rename" command on the context menu to change the class name "PortalReportService" in code, svc and config file together.
 ' NOTE: In order to launch WCF Test Client for testing this service, please select PortalReportService.svc or PortalReportService.svc.vb at the Solution Explorer and start debugging.
 Public Class PortalReportService
@@ -255,9 +254,6 @@ Public Class PortalReportService
     End Function
 #End Region
 
-
-
-  
 End Class
 
 Public Module JsonExtension

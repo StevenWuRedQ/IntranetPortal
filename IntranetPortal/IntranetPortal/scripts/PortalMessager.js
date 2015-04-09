@@ -145,8 +145,7 @@ function ReadMsg() {
             HideMessages();
             //ASPxPopupMessagerControlClient.Hide();
             hook();
-        }
-            
+        }            
     };
 
     request.open('POST', url, true);

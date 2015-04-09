@@ -10,15 +10,26 @@
 
         If e.Parameter.StartsWith("Load") Then
             Dim uniqueId = txtUniqueTLOID.Value
+            Dim bble = hfBBLE.Value
+            Dim owner = DataWCFService.GetOwnerInfoByTLOId(uniqueId, bble)
+            txtOwnerName.Value = owner.Name
+            txtDescription.Value = owner.FullAddress
+            txtAge.Value = owner.AgeString
+            rblDeathIndicator.Text = owner.DeathIndicator
+            rblBankruptcy.Text = owner.BankruptcyString
 
+            'owner.BBLE = hfBBLE.Value
+            'hfOwnerName.Value = owner.Name
+            hfOwnerData.Value = owner.ToJsonString
 
+            Return
         End If
-
 
         If e.Parameter.StartsWith("Show") Then
             Dim bble = e.Parameter.Split("|")(1)
             Dim ownerName = e.Parameter.Split("|")(2)
-
+            txtUniqueTLOID.Value = ""
+            hfOwnerData.Value = ""
             hfBBLE.Value = bble
             hfOwnerName.Value = ownerName
 
@@ -56,8 +67,12 @@
         If e.Parameter.StartsWith("Save") Then
             Dim bble = hfBBLE.Value
             Dim ownerName = hfOwnerName.Value
+            If hfOwnerName.Value = IntranetPortal.HomeOwner.EMPTY_HOMEOWNER Then
+                ownerName = ""
+            End If
 
             Using Context As New Entities
+
                 Dim li = Context.LeadsInfoes.Find(bble)
                 If li IsNot Nothing Then
                     If li.Owner = ownerName Then
@@ -69,58 +84,72 @@
                     End If
                 End If
 
-                Dim phones = Context.HomeOwnerPhones.Where(Function(ph) ph.BBLE = bble And ph.OwnerName = ownerName).ToList
-                For Each phone In phones
-                    phone.OwnerName = txtOwnerName.Value
-                Next
+                If Not String.IsNullOrEmpty(hfOwnerData.Value) Then
 
-                For Each address In Context.HomeOwnerAddresses.Where(Function(ad) ad.BBLE = bble And ad.OwnerName = ownerName).ToList
-                    address.OwnerName = txtOwnerName.Value
-                Next
-
-                Dim homeOwner = Context.HomeOwners.Where(Function(h) h.BBLE = bble And h.Name = ownerName).FirstOrDefault
-                If homeOwner Is Nothing Then
-                    homeOwner = New HomeOwner
+                    Dim homeOwner = Newtonsoft.Json.JsonConvert.DeserializeObject(Of HomeOwner)(hfOwnerData.Value)
                     homeOwner.BBLE = bble
                     homeOwner.Name = txtOwnerName.Value
-                    'homeOwner.UserModified = True
                     homeOwner.CreateBy = Page.User.Identity.Name
                     homeOwner.CreateDate = DateTime.Now
                     Context.HomeOwners.Add(homeOwner)
-                End If
 
-                If homeOwner IsNot Nothing Then
-                    homeOwner.Name = txtOwnerName.Value
                     homeOwner.UserModified = True
-                    Dim TLOLocateReport = homeOwner.TLOLocateReport
-                    If TLOLocateReport Is Nothing Then
-                        TLOLocateReport = New DataAPI.TLOLocateReportOutput
+                    'Load tlo report
+                    homeOwner.TLOLocateReport = DataWCFService.GetLocateReport(1, bble, homeOwner.Name, homeOwner.Address1, homeOwner.Address2, homeOwner.City, homeOwner.State, homeOwner.Zip, "USA")
+
+                Else
+
+                    Dim phones = Context.HomeOwnerPhones.Where(Function(ph) ph.BBLE = bble And ph.OwnerName = ownerName).ToList
+                    For Each phone In phones
+                        phone.OwnerName = txtOwnerName.Value
+                    Next
+
+                    For Each address In Context.HomeOwnerAddresses.Where(Function(ad) ad.BBLE = bble And ad.OwnerName = ownerName).ToList
+                        address.OwnerName = txtOwnerName.Value
+                    Next
+
+                    Dim homeOwner = Context.HomeOwners.Where(Function(h) h.BBLE = bble And h.Name = ownerName).FirstOrDefault
+                    If homeOwner Is Nothing Then
+                        homeOwner = New HomeOwner
+                        homeOwner.BBLE = bble
+                        homeOwner.Name = txtOwnerName.Value
+                        homeOwner.CreateBy = Page.User.Identity.Name
+                        homeOwner.CreateDate = DateTime.Now
+                        Context.HomeOwners.Add(homeOwner)
                     End If
 
-                    If TLOLocateReport.dateOfBirthField IsNot Nothing Then
-                        TLOLocateReport.dateOfBirthField.currentAgeField = txtAge.Value
-                    Else
-                        TLOLocateReport.dateOfBirthField = New DataAPI.BasicDateOfBirthRecord
-                        TLOLocateReport.dateOfBirthField.currentAgeField = txtAge.Value
-                    End If
+                    If homeOwner IsNot Nothing Then
+                        homeOwner.Name = txtOwnerName.Value
+                        homeOwner.UserModified = True
+                        Dim TLOLocateReport = homeOwner.TLOLocateReport
+                        If TLOLocateReport Is Nothing Then
+                            TLOLocateReport = New DataAPI.TLOLocateReportOutput
+                        End If
 
-                    If rblDeathIndicator.Text = "Death" Then
-                        TLOLocateReport.dateOfDeathField = New DataAPI.DateOfDeathRecord
-                    Else
-                        TLOLocateReport.dateOfDeathField = Nothing
-                    End If
+                        If TLOLocateReport.dateOfBirthField IsNot Nothing Then
+                            TLOLocateReport.dateOfBirthField.currentAgeField = txtAge.Value
+                        Else
+                            TLOLocateReport.dateOfBirthField = New DataAPI.BasicDateOfBirthRecord
+                            TLOLocateReport.dateOfBirthField.currentAgeField = txtAge.Value
+                        End If
 
-                    If rblBankruptcy.Text = "Yes" Then
-                        TLOLocateReport.numberOfBankruptciesField = 1
-                    Else
-                        TLOLocateReport.numberOfBankruptciesField = 0
-                    End If
+                        If rblDeathIndicator.Text = "Death" Then
+                            TLOLocateReport.dateOfDeathField = New DataAPI.DateOfDeathRecord
+                        Else
+                            TLOLocateReport.dateOfDeathField = Nothing
+                        End If
 
-                    homeOwner.TLOLocateReport = TLOLocateReport
-                    homeOwner.Description = txtDescription.InnerText
-                    homeOwner.UserModified = True
+                        If rblBankruptcy.Text = "Yes" Then
+                            TLOLocateReport.numberOfBankruptciesField = 1
+                        Else
+                            TLOLocateReport.numberOfBankruptciesField = 0
+                        End If
+
+                        homeOwner.TLOLocateReport = TLOLocateReport
+                        homeOwner.Description = txtDescription.InnerText
+                        homeOwner.UserModified = True
+                    End If
                 End If
-
                 Context.SaveChanges()
             End Using
         End If

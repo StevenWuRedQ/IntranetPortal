@@ -334,12 +334,11 @@
                             <td style="width: 160px;">Total: <span id="total"></span></td>
                             <td>
                                 <input type="button" class="rand-button rand-button-padding rand-button-blue" value="Print" onclick="window.print()" />
-
                             </td>
                             <td>
-                                <input type="button" class="rand-button  rand-button-padding rand-button-blue" value="Details" onclick="PrintDetails()" />
+                                <input type="button" class="rand-button  rand-button-padding rand-button-blue" value="Door Knocking" onclick="PrintDetails()" />
                             </td>
-                        </tr>
+                        </tr>                    
                     </table>
                 </div>
             </td>
