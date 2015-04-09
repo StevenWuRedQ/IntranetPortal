@@ -238,6 +238,8 @@ function format_input() {
     $(".ss_phone").on("keyup", function () {
         return format_phone(this);
     });
+    
+    
 
     $(".ss_zip").on("keyup", function () {
         return format_zip(this);

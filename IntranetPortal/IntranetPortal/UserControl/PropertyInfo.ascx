@@ -216,7 +216,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">BBLE</label>
-                    <input class="ss_form_input font_black" value="<%= If(LeadsInfoData.IsApartment, LeadsInfoData.BuildingBBLE, LeadsInfoData.BBLE)%>">
+                    <input class="ss_form_input font_black" id="BBLEId" value="<%= If(LeadsInfoData.IsApartment, LeadsInfoData.BuildingBBLE, LeadsInfoData.BBLE)%>">
                 </li>
                 <%-- <% If LeadsInfoData isnot Nothing andalso LeadsInfoData.IsApartment Then%>
                 <li class="ss_form_item">

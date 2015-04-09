@@ -8,10 +8,11 @@ Public Class Dialer
         If (Not IsPostBack) Then
 
             CalledNumber = Request.QueryString("PN")
+            BBLE = Request.QueryString("BBLE")
         End If
     End Sub
     Public CalledNumber As String
-
+    Public BBLE As String
     Public ReadOnly Property TwilioToken As String
         Get
 

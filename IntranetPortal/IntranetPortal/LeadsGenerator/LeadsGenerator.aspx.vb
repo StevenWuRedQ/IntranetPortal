@@ -247,7 +247,12 @@ Public Class LeadsGenerator
                     pa.CreateBy = Page.User.Identity.Name
                     pa.CreateDate = Date.Now
                     pa.Status = 0
-                    pa.Type = CInt(hfSearchType.Value)
+                    If (hfSearchType.Value IsNot Nothing AndAlso hfSearchType.Value <> "") Then
+                        pa.Type = CInt(hfSearchType.Value)
+                    Else
+                        pa.Type = 0
+                    End If
+
 
                     'li = New LeadsInfo
                     'li.Type = CInt(hfSearchType.Value)

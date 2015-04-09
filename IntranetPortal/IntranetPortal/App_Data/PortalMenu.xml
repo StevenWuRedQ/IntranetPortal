@@ -366,7 +366,7 @@
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="MapData" Text="Geo Leads" NavigationUrl="/Map/ZipMap.aspx" ShowAmount="false">
-        <UserRoles>Admin</UserRoles>
+        <UserRoles>Admin,OfficeManager-*</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-map-marker"></i>]]>
         </FontClass>

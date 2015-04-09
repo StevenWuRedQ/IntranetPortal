@@ -1,5 +1,8 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="LegalUI.aspx.vb" Inherits="IntranetPortal.LegalUI" MasterPageFile="~/Content.Master" %>
 
+<%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
+
+
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <div>
@@ -64,14 +67,15 @@
 
 
 
-                    <script src="/scripts/jquery.formatCurrency-1.1.0.js"></script>
+
                     <script type="text/javascript">
-                        function init_currency() {
-                            $('.input_currency').formatCurrency();
-                        }
+
                         $(document).ready(function () {
                             // Handler for .ready() called.
-                            init_currency();
+                            format_input();
+                            $(".ss_phone").each(function (index) {
+                                format_phone(this)
+                            });
                         });
                         var short_sale_case_data = null;
 
@@ -180,7 +184,7 @@
                                             <tr>
                                                 <td class="dx" style="padding-right: 0px;">
                                                     <img class="dxlp-loadingImage dxlp-imgPosLeft" src="/DXR.axd?r=1_15-8xia9" alt="" style="vertical-align: middle;"></td>
-                                                <td class="dx" style="padding-left: 0px;"><span id="ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_ShortSaleOverVew_ShortSaleCaseSavePanel_leadsCommentsCallbackPanel_TL">Loading…</span></td>
+                                                <td class="dx" style="padding-left: 0px;"><span>Loading…</span></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -194,16 +198,14 @@
                                     </div>
                                 </div>
 
-
-
                                 <div>
                                     <!--detial Nav tabs -->
 
                                     <ul class="nav nav-tabs overview_tabs" role="tablist" style="">
                                         <li class="short_sale_tab active">
-                                            <a class="shot_sale_tab_a " href="#home" role="tab" data-toggle="tab" onclick="refreshSummary()">Summary</a></li>
+                                            <a class="shot_sale_tab_a " href="#home" role="tab" data-toggle="tab">Summary</a></li>
                                         <li class="short_sale_tab">
-                                            <a class="shot_sale_tab_a " href="#Property" role="tab" data-toggle="tab" onclick="refreshSummary()">Foreclosure Review</a></li>
+                                            <a class="shot_sale_tab_a " href="#Property" role="tab" data-toggle="tab">Foreclosure Review</a></li>
                                         <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#Mortgages" role="tab" data-toggle="tab">Secondary Actions</a></li>
 
                                     </ul>
@@ -218,6 +220,7 @@
 
                                                     <div>
                                                         <h4 class="ss_form_title">Property</h4>
+
                                                         <ul class="ss_form_box clearfix">
                                                             <li class="ss_form_item" style="width: 100%">
                                                                 <label class="ss_form_input_title">address</label>
@@ -294,22 +297,13 @@
                                                         </ul>
                                                     </div>
 
-
-
-
-
-
                                                     <div data-array-index="0" data-field="Mortgages" class="ss_array" style="display: inline;">
 
                                                         <div class="ss_form">
                                                             <h4 class="ss_form_title"><span class="title_index ">Foreclosure </span></h4>
                                                             <ul class="ss_form_box clearfix">
 
-                                                                <li class="ss_form_item ss_mortages_stauts">
-                                                                    <label class="ss_form_input_title">Plaintiff</label>
 
-                                                                    <input class="ss_form_input" data-item="Lender" data-item-type="1">
-                                                                </li>
                                                                 <li class="ss_form_item">
                                                                     <label class="ss_form_input_title">Servicer</label>
                                                                     <input class="ss_form_input" data-item="Lender" data-item-type="1">
@@ -320,11 +314,11 @@
                                                                 </li>
                                                                 <li class="ss_form_item">
                                                                     <label class="ss_form_input_title">Attorney of record </label>
-                                                                    <input class="ss_form_input input_currency" onblur="$(this).formatCurrency();" data-item="LoanAmount" data-item-type="1">
+                                                                    <input class="ss_form_input input_currency" data-item="LoanAmount" data-item-type="1">
                                                                 </li>
                                                                 <li class="ss_form_item">
                                                                     <label class="ss_form_input_title">last court date</label>
-                                                                    <input class="ss_form_input ss_date" >
+                                                                    <input class="ss_form_input ss_date">
                                                                 </li>
                                                                 <li class="ss_form_item">
                                                                     <label class="ss_form_input_title">next court date </label>
@@ -352,6 +346,7 @@
                                                         </div>
 
                                                     </div>
+
 
                                                     <div class="ss_form">
                                                         <h4 class="ss_form_title">Secondary</h4>
@@ -394,8 +389,6 @@
                                                         </ul>
                                                     </div>
 
-
-
                                                 </div>
 
                                             </div>
@@ -412,39 +405,40 @@
 
                                                 <div>
                                                     <h4 class="ss_form_title">Property</h4>
+
                                                     <ul class="ss_form_box clearfix">
 
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Street Number</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                            <input class="ss_form_input color_blue_edit" data-field="PropertyInfo.Number" value="2930">
                                                         </li>
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Street Name</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.StreetName">
+                                                            <input class="ss_form_input color_blue_edit" data-field="PropertyInfo.StreetName" value="TENBROECK AVE">
                                                         </li>
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">City</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.City">
+                                                            <input class="ss_form_input color_blue_edit" data-field="PropertyInfo.City" value="BRONXDALE">
                                                         </li>
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">State</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.State">
+                                                            <input class="ss_form_input color_blue_edit" data-field="PropertyInfo.State" value="NY">
                                                         </li>
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Zip</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Zipcode">
+                                                            <input class="ss_form_input color_blue_edit" data-field="PropertyInfo.Zipcode" value="10469">
                                                         </li>
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">&nbsp;</label>
-                                                            <input class="ss_form_input ss_form_hidden" value=" ">
+                                                            <input class="ss_form_input ss_form_hidden color_blue_edit" value=" ">
                                                         </li>
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">BLOCK</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Block">
+                                                            <input class="ss_form_input color_blue_edit" data-field="PropertyInfo.Block" value="4561">
                                                         </li>
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Lot</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Lot">
+                                                            <input class="ss_form_input color_blue_edit" data-field="PropertyInfo.Lot" value="22">
                                                         </li>
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Building type</label>
@@ -503,28 +497,9 @@
                                                             <label class="ss_form_input_title">&nbsp;</label>
                                                             <input class="ss_form_input ss_form_hidden" value=" ">
                                                         </li>
-                                                        <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Plaintiff </label>
-                                                            <input class="ss_form_input">
-                                                        </li>
-                                                        <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Plaintiff Attorney</label>
-                                                            <input class="ss_form_input">
-                                                        </li>
 
-                                                        <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Servicer</label>
-                                                            <input class="ss_form_input">
-                                                        </li>
-                                                        <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Defendant(s) </label>
-                                                            <input class="ss_form_input">
-                                                        </li>
 
-                                                        <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Attorney of record  </label>
-                                                            <input class="ss_form_input">
-                                                        </li>
+
 
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Estate</label>
@@ -549,93 +524,515 @@
 
                                                     </ul>
                                                 </div>
-
-
                                                 <div class="ss_form">
-                                                    <h4 class="ss_form_title">Case Background</h4>
+                                                    <h4 class="ss_form_title">Plaintiff <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="VendorsPopupClient.Show()" style="display: inline !important;"></i></h4>
                                                     <ul class="ss_form_box clearfix">
 
                                                         <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Originator</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                            <label class="ss_form_input_title">name</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Name" value="Michael Simcha ">
                                                         </li>
                                                         <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">2nd Mortgage </label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                            <label class="ss_form_input_title">manager</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="Manager" value="">
                                                         </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Office</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Office">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">office #</label>
+                                                            <input class="ss_form_input ss_not_edit ss_phone" data-field="ReferralContact.OfficeNO" value="7186765222">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Cell #</label>
+                                                            <input class="ss_form_input ss_not_edit ss_phone" data-field="ReferralContact.Cell" value="7186765222">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">email</label>
+                                                            <input class="ss_form_input ss_not_edit ss_phone" data-field="ReferralContact.Email">
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="ss_form">
+                                                    <h4 class="ss_form_title">Plaintiff Attorney<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="VendorsPopupClient.Show()" style="display: inline !important;"></i></h4>
+                                                    <ul class="ss_form_box clearfix">
+
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">name</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Name">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">manager</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="Manager" value="">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Office</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Office">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">office #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.OfficeNO">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Cell #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Cell">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">email</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Email">
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="ss_form">
+                                                    <h4 class="ss_form_title">Servicer <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="VendorsPopupClient.Show()" style="display: inline !important;"></i></h4>
+                                                    <ul class="ss_form_box clearfix">
+
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">name</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Name">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">manager</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="Manager" value="">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Office</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Office">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">office #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.OfficeNO">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Cell #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Cell">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">email</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Email">
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="ss_form">
+                                                    <h4 class="ss_form_title">Defendant 1 <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="VendorsPopupClient.Show()" style="display: inline !important;"></i></h4>
+                                                    <ul class="ss_form_box clearfix">
+
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">name</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Name">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">manager</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="Manager" value="">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Office</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Office">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">office #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.OfficeNO">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Cell #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Cell">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">email</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Email">
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="ss_form">
+                                                    <h4 class="ss_form_title">Defendant 2 <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="VendorsPopupClient.Show()" style="display: inline !important;"></i></h4>
+                                                    <ul class="ss_form_box clearfix">
+
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">name</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Name">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">manager</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="Manager" value="">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Office</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Office">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">office #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.OfficeNO">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Cell #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Cell">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">email</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Email">
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <div class="ss_form">
+                                                    <h4 class="ss_form_title">Attorney of record 1 <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="VendorsPopupClient.Show()" style="display: inline !important;"></i></h4>
+                                                    <ul class="ss_form_box clearfix">
+
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">name</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Name">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">manager</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="Manager" value="">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Office</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Office">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">office #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.OfficeNO">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Cell #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Cell">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">email</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Email">
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="ss_form">
+                                                    <h4 class="ss_form_title">Attorney of record 2 <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="VendorsPopupClient.Show()" style="display: inline !important;"></i></h4>
+                                                    <ul class="ss_form_box clearfix">
+
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">name</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Name">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">manager</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="Manager" value="">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Office</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Office">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">office #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.OfficeNO">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Cell #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Cell">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">email</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Email">
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <%--background--%>
+                                                <div class="ss_form">
+                                                    <h4 class="ss_form_title">Background</h4>
+                                                    <ul class="ss_form_box clearfix">
+
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Deed Xfer </label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                            <input class="ss_form_input ss_date" data-field="PropertyInfo.Number">
                                                         </li>
                                                         <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Tax Lien </label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                            <label class="ss_form_input_title">Tax Lien  </label>
+                                                            <input class="ss_form_input currency_input" data-field="PropertyInfo.Number" value="30000">
                                                         </li>
                                                         <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">UCC </label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                            <label class="ss_form_input_title">UCC  </label>
+                                                            <input class="ss_form_input currency_input" data-field="PropertyInfo.Number">
                                                         </li>
                                                         <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">HPD</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                            <label class="ss_form_input_title">HPD </label>
+                                                            <input class="ss_form_input currency_input" data-field="PropertyInfo.Number">
+                                                        </li>
+                                                        <li class="ss_form_item" style="width: 100%">
+                                                            <label class="ss_form_input_title">Questionable Satisfactions </label>
+                                                            <input class="ss_form_input" data-field="PropertyInfo.Number" style="width: 93%">
                                                         </li>
                                                         <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Questionable Satisfactions</label>
+                                                            <label class="ss_form_input_title">Title Issues </label>
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number">
                                                         </li>
 
+
+                                                    </ul>
+                                                </div>
+                                                <div class="ss_form">
+                                                    <h4 class="ss_form_title">Originator  <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="VendorsPopupClient.Show()" style="display: inline !important;"></i></h4>
+                                                    <ul class="ss_form_box clearfix">
+
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">name</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Name">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">manager</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="Manager" value="">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Office</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Office">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">office #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.OfficeNO">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Cell #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Cell">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">email</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Email">
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="ss_form">
+                                                    <h4 class="ss_form_title">2nd Mortgage<i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="VendorsPopupClient.Show()" style="display: inline !important;"></i></h4>
+                                                    <ul class="ss_form_box clearfix">
+
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">name</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Name">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">manager</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="Manager" value="">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Office</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Office">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">office #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.OfficeNO">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Cell #</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Cell">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">email</label>
+                                                            <input class="ss_form_input ss_not_edit" data-field="ReferralContact.Email">
+                                                        </li>
                                                     </ul>
                                                 </div>
 
                                                 <div class="ss_form">
                                                     <h4 class="ss_form_title">Mortgage</h4>
                                                     <ul class="ss_form_box clearfix">
-
-                                                        <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Original Lender </label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
-                                                        </li>
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Active/Dissolved Date </label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                            <input class="ss_form_input ss_date" data-field="PropertyInfo.Number" value="04/08/2015">
+                                                        </li>
+
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">1st Loan Amount</label>
+                                                            <input class="ss_form_input currency_input" data-field="PropertyInfo.Number">
+                                                        </li>
+
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">2nd Loan Amount</label>
+                                                            <input class="ss_form_input currency_input" data-field="PropertyInfo.Number">
                                                         </li>
                                                         <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Loan Amount 1st/2nd Mtg </label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
-                                                        </li>
-                                                        <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Type of Loan </label>
+                                                            <label class="ss_form_input_title">Type of Loan</label>
                                                             <select class="ss_form_input" data-field="PropertyInfo.Number">
-                                                                <option>Type 1</option>
+                                                                <option>FHA</option>
+                                                                <option>FANNIE MAE</option>
+                                                                <option>FREDDIE</option>
+                                                                <option>ARM</option>
+                                                                <option>FIXED</option>
+                                                                <option>80/20</option>
+                                                                <option>COMMERCIAL</option>
                                                             </select>
                                                         </li>
                                                         <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">signed user </label>
+                                                            <label class="ss_form_input_title">First Mortgage Payment</label>
+                                                            <input class="ss_form_input currency_input" data-field="PropertyInfo.Number">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Maturity</label>
+                                                            <input class="ss_form_input ss_date" data-field="PropertyInfo.Number">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">signed</label>
+                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                        </li>
+
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">last payment date</label>
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number">
                                                         </li>
                                                         <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Owner occupied</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                            <span class="ss_form_input_title">Eviction status</span>
+
+                                                            <input type="radio" id="checy_41" name="1" value="YES" class="ss_form_input">
+                                                            <label for="checy_41" class="input_with_check">
+                                                                <span class="box_text">Vacant </span>
+
+                                                            </label>
+
+                                                            <input type="radio" id="checy_42" name="1" value="NO" class="ss_form_input">
+                                                            <label for="checy_42" class="input_with_check">
+                                                                <span class="box_text">Tenant</span>
+                                                            </label>
+
                                                         </li>
                                                         <li class="ss_form_item">
-                                                            <span class="ss_form_input_title">FREDDIE MAC</span>
+                                                            <span class="ss_form_input_title">HAMP eligible</span>
 
-                                                            <input type="radio" id="check1" name="FREDDIE_MAC__index__" data-item="Freddie" data-item-type="1" data-radio="Y" value="YES" class="ss_form_input">
-                                                            <label for="check1" class="input_with_check"><span class="box_text">Yes</span></label>
+                                                            <input type="radio" id="checy_45" name="1" value="YES" class="ss_form_input">
+                                                            <label for="checy_45" class="input_with_check ">
+                                                                <span class="box_text">Yes </span>
 
-                                                            <input type="radio" id="check2" name="FREDDIE_MAC__index__" data-item="Freddie" data-item-type="1" value="NO" class="ss_form_input">
-                                                            <label for="check2" class="input_with_check"><span class="box_text">No</span></label>
+                                                            </label>
+
+                                                            <input type="radio" id="checy_46" name="1" value="NO" class="ss_form_input">
+                                                            <label for="checy_46" class="input_with_check">
+                                                                <span class="box_text">No</span>
+                                                            </label>
                                                         </li>
 
                                                     </ul>
                                                 </div>
                                                 <div class="ss_form">
                                                     <h4 class="ss_form_title">Note</h4>
+
                                                     <ul class="ss_form_box clearfix">
-                                                        <li class="ss_form_item" style="width: 100%">
-                                                            <label class="ss_form_input_title">Note</label>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Count Of signed</label>
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number">
                                                         </li>
+                                                        <li class="ss_form_item">
+                                                            <span class="ss_form_input_title">note  endorsed</span>
+
+                                                            <input type="radio" id="checy_47" name="1" value="YES" class="ss_form_input">
+                                                            <label for="checy_47" class="input_with_check ">
+                                                                <span class="box_text">Yes </span>
+
+                                                            </label>
+
+                                                            <input type="radio" id="checy_48" name="1" value="NO" class="ss_form_input">
+                                                            <label for="checy_48" class="input_with_check">
+                                                                <span class="box_text">No</span>
+                                                            </label>
+                                                        </li>
+
+                                                        <li class="ss_form_item">
+                                                            <span class="ss_form_input_title">endorsed By Lender</span>
+
+                                                            <input type="radio" id="checy_49" name="1" value="YES" class="ss_form_input">
+                                                            <label for="checy_49" class="input_with_check ">
+                                                                <span class="box_text">Yes </span>
+
+                                                            </label>
+
+                                                            <input type="radio" id="checy_50" name="1" value="NO" class="ss_form_input">
+                                                            <label for="checy_50" class="input_with_check">
+                                                                <span class="box_text">No</span>
+                                                            </label>
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <span class="ss_form_input_title">endorsed Dept</span>
+
+                                                            <input type="radio" id="checy_51" name="1" value="YES" class="ss_form_input">
+                                                            <label for="checy_51" class="input_with_check ">
+                                                                <span class="box_text">entity </span>
+
+                                                            </label>
+
+                                                            <input type="radio" id="checy_52" name="1" value="NO" class="ss_form_input">
+                                                            <label for="checy_52" class="input_with_check">
+                                                                <span class="box_text">Blank</span>
+                                                            </label>
+                                                        </li>
+
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">signed</label>
+                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">endorsed signed date</label>
+                                                            <input class="ss_form_input ss_date" data-field="PropertyInfo.Number">
+                                                        </li>
+
+
+
+                                                    </ul>
+
+
+                                                </div>
+                                                <div class="ss_form">
+                                                    <h4 class="ss_form_title">Note Alonge</h4>
+                                                    <ul class="ss_form_box clearfix">
+
+                                                        <li class="ss_form_item">
+                                                            <span class="ss_form_input_title">note  Alonge</span>
+
+                                                            <input type="radio" id="checy_61" name="1" value="YES" class="ss_form_input">
+                                                            <label for="checy_61" class="input_with_check ">
+                                                                <span class="box_text">Yes </span>
+
+                                                            </label>
+
+                                                            <input type="radio" id="checy_62" name="1" value="NO" class="ss_form_input">
+                                                            <label for="checy_62" class="input_with_check">
+                                                                <span class="box_text">No</span>
+                                                            </label>
+                                                        </li>
+
+                                                        <li class="ss_form_item">
+                                                            <span class="ss_form_input_title">Alonge By Lender</span>
+
+                                                            <input type="radio" id="checy_63" name="1" value="YES" class="ss_form_input">
+                                                            <label for="checy_63" class="input_with_check ">
+                                                                <span class="box_text">Yes </span>
+
+                                                            </label>
+
+                                                            <input type="radio" id="checy_64" name="1" value="NO" class="ss_form_input">
+                                                            <label for="checy_64" class="input_with_check">
+                                                                <span class="box_text">No</span>
+                                                            </label>
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <span class="ss_form_input_title">Alonge Dept</span>
+
+                                                            <input type="radio" id="checy_65" name="1" value="YES" class="ss_form_input">
+                                                            <label for="checy_65" class="input_with_check ">
+                                                                <span class="box_text">entity </span>
+
+                                                            </label>
+
+                                                            <input type="radio" id="checy_66" name="1" value="NO" class="ss_form_input">
+                                                            <label for="checy_66" class="input_with_check">
+                                                                <span class="box_text">Blank</span>
+                                                            </label>
+                                                        </li>
+
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">signed</label>
+                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Alonge signed date</label>
+                                                            <input class="ss_form_input ss_date" data-field="PropertyInfo.Number">
+                                                        </li>
+
+
+
                                                     </ul>
                                                 </div>
 
@@ -648,8 +1045,12 @@
                                                             <input class="ss_form_input ss_date" data-field="PropertyInfo.Number">
                                                         </li>
                                                         <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Renewed Date</label>
+                                                            <input class="ss_form_input ss_date" data-field="PropertyInfo.Number" >
+                                                        </li>
+                                                        <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Affidavit Date</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                            <input class="ss_form_input ss_date" data-field="PropertyInfo.Number">
                                                         </li>
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Affidavit Company</label>
@@ -657,6 +1058,10 @@
                                                         </li>
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Prior Index Date</label>
+                                                            <input class="ss_form_input ss_date" data-field="PropertyInfo.Number">
+                                                        </li>
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">Prior Index disposition </label>
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number">
                                                         </li>
                                                         <li class="ss_form_item">
@@ -665,14 +1070,25 @@
                                                         </li>
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Conferences Date</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                            <input class="ss_form_input ss_date" data-field="PropertyInfo.Number">
                                                         </li>
                                                         <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Conferences Attended</label>
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                            
+                                                            <span class="ss_form_input_title">Conferences Attended</span>
+
+                                                            <input type="radio" id="checy_69" name="1" value="YES" class="ss_form_input">
+                                                            <label for="checy_69" class="input_with_check ">
+                                                                <span class="box_text">Yes </span>
+
+                                                            </label>
+
+                                                            <input type="radio" id="checy_70" name="1" value="NO" class="ss_form_input">
+                                                            <label for="checy_70" class="input_with_check">
+                                                                <span class="box_text">No</span>
+                                                            </label>
                                                         </li>
                                                         <li class="ss_form_item">
-                                                            <label class="ss_form_input_title">Conferences Referee</label>
+                                                            <label class="ss_form_input_title">Conferences Referee </label>
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number">
                                                         </li>
                                                         <li class="ss_form_item">
@@ -807,7 +1223,7 @@
                                                             </label>
 
                                                         </li>
-                                                        
+
                                                         <li class="ss_form_item">
                                                             <label class="ss_form_input_title">Prior Plaintiff</label>
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number">
@@ -841,16 +1257,16 @@
                                                         <li class="ss_form_item">
                                                             <span class="ss_form_input_title">Estate set up</span>
 
-                                                          
-                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
-                                                        </li>
-                                                         <li class="ss_form_item">
-                                                          <label class="ss_form_input_title">prior action</label>
 
-                                                          
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number">
                                                         </li>
-                                                          
+                                                        <li class="ss_form_item">
+                                                            <label class="ss_form_input_title">prior action</label>
+
+
+                                                            <input class="ss_form_input" data-field="PropertyInfo.Number">
+                                                        </li>
+
                                                     </ul>
                                                 </div>
                                                 <div class="ss_form">
@@ -863,11 +1279,11 @@
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number" style="width: 93%">
                                                         </li>
 
-                                                      
+
 
                                                     </ul>
                                                 </div>
-                                               
+
                                                 <div class="ss_form">
                                                     <h4 class="ss_form_title">Action Plan</h4>
                                                     <ul class="ss_form_box clearfix">
@@ -878,11 +1294,11 @@
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number" style="width: 93%">
                                                         </li>
 
-                                                      
+
 
                                                     </ul>
                                                 </div>
-                                                 <div class="ss_form">
+                                                <div class="ss_form">
                                                     <h4 class="ss_form_title">Etrack</h4>
                                                     <ul class="ss_form_box clearfix">
 
@@ -892,7 +1308,7 @@
                                                             <input class="ss_form_input" data-field="PropertyInfo.Number" style="width: 93%">
                                                         </li>
 
-                                                        
+
 
                                                     </ul>
                                                 </div>
@@ -972,7 +1388,7 @@
                                                                         <i class="fa fa-caret-right clearence_caret_right_icon"></i>
                                                                         <i class="fa fa-times color_blue_edit icon_btn tooltip-examples" title="" style="float: right" onclick="deleteAccoupantNote(0,0)" data-original-title="Delete"></i>
                                                                         <span class="clearence_list_text14">Note for test
-                                            <br>
+                                                                        <br>
 
                                                                             <span class="clearence_list_text12">4/6/2015 9:57:43 AM by 123
                                                                             </span>
@@ -1005,4 +1421,6 @@
             </div>
         </div>
     </div>
+    <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
+    <script src="/scripts/jquery.formatCurrency-1.1.0.js"></script>
 </asp:Content>

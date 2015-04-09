@@ -560,7 +560,7 @@
 <script>
     function CallPhone(phone)
     {
-        popUpAtBottomRight('/AutoDialer/Dialer.aspx?PN=' + phone, 'CallWindow', 560, 570);
+        popUpAtBottomRight('/AutoDialer/Dialer.aspx?PN=' + phone + 'BBLE=' + $("#BBLEId").val(), 'CallWindow', 560, 570);
     }
     function popUpAtBottomRight(pageToLoad, winName, width, height) {
         xposition = 0; yposition = 0;
