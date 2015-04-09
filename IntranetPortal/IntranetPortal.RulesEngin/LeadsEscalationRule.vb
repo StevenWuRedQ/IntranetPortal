@@ -191,8 +191,14 @@ Public Class LeadsEscalationRule
                                    End Sub,
                                    Function(leads)
                                        Dim ld = CType(leads, Lead)
-                                       Return ld.Task Is Nothing And ld.Appointment Is Nothing
-                                   End Function, 1))
+                                       Return ld.Task Is Nothing AndAlso ld.Appointment Is Nothing AndAlso ld.LatestAppointmentDate < DateTime.Now
+                                   End Function, 1, Function(leads)
+                                                        Dim ld = CType(leads, Lead)
+                                                        If ld.LatestAppointmentDate > ld.LastUserUpdate Then
+                                                            Return ld.LatestAppointmentDate
+                                                        End If
+                                                        Return ld.LastUserUpdate
+                                                    End Function))
 
         rules.Add(New EscalationRule("Priority", "4.00:00:00",
                                Sub(leads)
@@ -206,8 +212,14 @@ Public Class LeadsEscalationRule
                                End Sub,
                                Function(leads)
                                    Dim ld = CType(leads, Lead)
-                                   Return ld.Task Is Nothing And ld.Appointment Is Nothing
-                               End Function, 2))
+                                   Return ld.Task Is Nothing AndAlso ld.Appointment Is Nothing AndAlso ld.LatestAppointmentDate < DateTime.Now
+                               End Function, 2, Function(leads)
+                                                    Dim ld = CType(leads, Lead)
+                                                    If ld.LatestAppointmentDate > ld.LastUserUpdate Then
+                                                        Return ld.LatestAppointmentDate
+                                                    End If
+                                                    Return ld.LastUserUpdate
+                                                End Function))
 
         rules.Add(New EscalationRule("DeadEnd", "00:00:00",
                   Sub(leads)

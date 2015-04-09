@@ -23,6 +23,25 @@
         End Using
     End Sub
 
+    Public Shared Sub LogTLOIdSearch(bble As String, name As String, uniqueId As String, successed As Boolean, createBy As String)
+        Using ctx As New CoreEntities
+            Dim log As New TLOApiLog With
+                {
+                    .BBLE = bble,
+                    .Name = name,
+                    .Address1 = uniqueId,
+                    .Successed = Successed,
+                    .CreateBy = CreateBy,
+                    .CreateDate = DateTime.Now
+                    }
+
+            ctx.TLOApiLogs.Add(log)
+            ctx.SaveChanges()
+
+            log.CheckApiLimit()
+        End Using
+    End Sub
+
     Public Shared Function LimiteIsExceed() As Boolean
         Return GetCount() >= PortalSettings.GetValue("TLOMonthLimit")
     End Function
