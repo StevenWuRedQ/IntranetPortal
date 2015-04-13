@@ -336,6 +336,13 @@
       <DependentUpon>AssignLeadsRulesPage.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="AutoDialer\CallManagement.aspx.designer.vb">
+      <DependentUpon>CallManagement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AutoDialer\CallManagement.aspx.vb">
+      <DependentUpon>CallManagement.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="AutoDialer\Dialer.aspx.designer.vb">
       <DependentUpon>Dialer.aspx</DependentUpon>
     </Compile>
@@ -345,6 +352,13 @@
     </Compile>
     <Compile Include="AutoDialer\DialerAjaxService.svc.vb">
       <DependentUpon>DialerAjaxService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="AutoDialer\Twiml.aspx.designer.vb">
+      <DependentUpon>Twiml.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AutoDialer\Twiml.aspx.vb">
+      <DependentUpon>Twiml.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="BingViewMap.aspx.designer.vb">
       <DependentUpon>BingViewMap.aspx</DependentUpon>
@@ -1461,8 +1475,10 @@
     </Content>
     <Content Include="App_Themes\PortalTheme2.dll" />
     <Content Include="AssignLeadsRulesPage.aspx" />
+    <Content Include="AutoDialer\CallManagement.aspx" />
     <Content Include="AutoDialer\Dialer.aspx" />
     <Content Include="AutoDialer\DialerAjaxService.svc" />
+    <Content Include="AutoDialer\Twiml.aspx" />
     <Content Include="BingViewMap.aspx" />
     <Content Include="CallBackServices.asmx" />
     <Content Include="Chat\index.html" />

@@ -87,6 +87,9 @@
     <Reference Include="Twilio.Twiml">
       <HintPath>..\packages\Twilio.TwiML.3.3.6\lib\3.5\Twilio.Twiml.dll</HintPath>
     </Reference>
+    <Reference Include="TwilioSharp">
+      <HintPath>..\packages\TwilioSharpCore.1.0\lib\TwilioSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />

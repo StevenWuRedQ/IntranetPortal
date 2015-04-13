@@ -401,7 +401,7 @@
                         <%--line 3--%>
 
                         <div class="form_div_node form_div_node_line_margin">
-                            <span class="form_input_title">3nd Mortgage</span>
+                            <span class="form_input_title">3rd Mortgage</span>
                             <dx:ASPxTextBox runat="server" ID="txtC3rdMotgr" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.C3rdMortgrAmt  %>'></dx:ASPxTextBox>
                         </div>
 
