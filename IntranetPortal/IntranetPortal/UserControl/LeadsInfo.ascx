@@ -563,9 +563,8 @@
                                                 <div class="tooltip-inner" style="background-color: #ff400d;">Show Property Info</div>
                                             </div>
                                             <% End If%>
-                                            <div style="display:inline-block">
-                                                <a href="/LegalUI/LegalUI.aspx"> <i class="fa fa-university sale_head_button sale_head_button_left tooltip-examples" title="Legal" onclick=""></i></a>
-                                            </div>
+                                            <i class="fa fa-university sale_head_button sale_head_button_left tooltip-examples" title="Legal" onclick=""></i>
+                                           
                                             
                                             <i class="fa fa-calendar-o sale_head_button sale_head_button_left tooltip-examples" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
                                             <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus('5|'+leadsInfoBBLE);"></i>

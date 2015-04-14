@@ -33,7 +33,6 @@
                                         </a>
                                     </li>
 
-
                                     <li style="margin-right: 30px; color: #ffa484; float: right">
 
                                         <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="tmpBBLE=leadsInfoBBLE; popupCtrReassignEmployeeListCtr.PerformCallback();popupCtrReassignEmployeeListCtr.ShowAtElement(this);" data-original-title="Re-Assign"></i>
@@ -77,8 +76,6 @@
                                 <div class="tab-content">
 
                                     <div class="tab-pane active" id="property_info">
-
-
 
 
                                         <script type="text/javascript">
@@ -162,7 +159,39 @@
 
                                         </script>
 
+                                        <div class="modal fade" id="RequestModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        
+                                                        <h4 class="modal-title" >Request Document</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="input-group" style="width:100%">
+                                                            <span>Assgin to</span>
+                                                            <select class="form-control">
+                                                                <option>Agent 1</option>
+                                                                <option>Attoeny 1</option>
+                                                            </select>
 
+                                                        </div>
+                                                        <br />
+                                                        <div class="input-group" style="width:100%">
+                                                            <span>Assgin to</span>
+                                                           <select class="form-control">
+                                                                <option>Bankruptcy</option>
+                                                                <option>Statute of Limitations</option>
+                                                               <option>Foreclosure Doucment</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div id="" style="width: 100%;">
 
@@ -183,6 +212,8 @@
                                                             <span class="time_buttons" onclick="ShowAcrisMap(&quot;3015930048 &quot;)">Acris</span>
                                                             <span class="time_buttons" onclick="ShowPropertyMap(&quot;3015930048 &quot;)">Maps</span>
 
+                                                            <span class="time_buttons" onclick="VendorsPopupClient.Show()">Assgin Attorney</span>
+                                                            <span class="time_buttons" onclick="$('#RequestModal').modal()">Request Document</span>
                                                         </div>
 
                                                         <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">Started on 10/16/2014 9:30:16 PM</span>
@@ -209,7 +240,6 @@
 
                                                             <i class="fa fa-plus-circle note_img tooltip-examples" title="" style="color: #3993c1; cursor: pointer" onclick="aspxAddLeadsComments.ShowAtElement(this)" data-original-title="Add Notes"></i>
 
-
                                                         </div>
                                                     </div>
 
@@ -219,8 +249,10 @@
                                                         <ul class="nav nav-tabs overview_tabs" role="tablist" style="">
                                                             <li class="short_sale_tab active">
                                                                 <a class="shot_sale_tab_a " href="#home" role="tab" data-toggle="tab">Summary</a></li>
+                                                            <% If Agent Then%>
                                                             <li class="short_sale_tab">
                                                                 <a class="shot_sale_tab_a " href="#Property" role="tab" data-toggle="tab">Foreclosure Review</a></li>
+                                                            <% End If %>
                                                             <% If SecondaryAction Then%>
                                                             <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#Mortgages" role="tab" data-toggle="tab">Secondary Actions</a></li>
                                                             <% End If%>
@@ -415,7 +447,7 @@
 
                                                                     <div class="clearfix">
                                                                         <div style="float: right">
-                                                                            <input type="button" class="rand-button short_sale_edit" value="Edit" onclick="switch_edit_model(this, short_sale_case_data)">
+                                                                            <input type="button" class="rand-button short_sale_edit" value="Completed Document Submit to Attorny" onclick="switch_edit_model(this, short_sale_case_data)">
                                                                         </div>
                                                                     </div>
 
@@ -1673,7 +1705,7 @@
 
                                                                     <div class="clearfix">
                                                                         <div style="float: right">
-                                                                            <input type="button" class="rand-button short_sale_edit" value="Edit" onclick="switch_edit_model(this, short_sale_case_data)">
+                                                                            <input type="button" class="rand-button short_sale_edit" value="Completed send back to Agent" onclick="switch_edit_model(this, short_sale_case_data)">
                                                                         </div>
                                                                     </div>
                                                                     <div data-array-index="0" class="ss_array" style="display: inline;">
@@ -2203,7 +2235,7 @@
                                 <li style="margin-right: 30px; color: #7396a9; float: right">
 
                                     <div style="display: inline-block">
-                                        <a href="/LegalUI/LegalUI.aspx?SecondaryAction=true"><i class="fa fa-arrow-right sale_head_button sale_head_button_left tooltip-examples" style="margin-right:10px;color:#7396A9" title="Secondary" onclick=""></i></a>
+                                        <a href="/LegalUI/LegalUI.aspx?SecondaryAction=true"><i class="fa fa-arrow-right sale_head_button sale_head_button_left tooltip-examples" style="margin-right: 10px; color: #7396A9" title="Secondary" onclick=""></i></a>
                                     </div>
                                     <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
                                     <%-- <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>--%>
