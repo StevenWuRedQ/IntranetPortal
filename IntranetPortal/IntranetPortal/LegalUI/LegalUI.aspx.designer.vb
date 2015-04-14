@@ -14,6 +14,33 @@ Option Explicit On
 Partial Public Class LegalUI
 
     '''<summary>
+    '''ASPxSplitter1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+
+    '''<summary>
+    '''SplitterContentControl1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
+
+    '''<summary>
+    '''ShortSaleCaseList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ShortSaleCaseList As Global.IntranetPortal.ShortSaleCaseList
+
+    '''<summary>
     '''VendorsPopup control.
     '''</summary>
     '''<remarks>
@@ -21,4 +48,13 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents VendorsPopup As Global.IntranetPortal.VendorsPopup
+
+    '''<summary>
+    '''ActivityLogs control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
 End Class

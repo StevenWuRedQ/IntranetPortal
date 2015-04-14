@@ -1,4 +1,5 @@
 ﻿Imports Twilio
+Imports RestSharp
 
 
 Public Class Dialer
@@ -21,7 +22,7 @@ Public Class Dialer
             Dim appSid = "AP28c5fe5b36df57231d5e021de14c62ab"
 
             Dim capability = New TwilioCapability(accountSid, authToken)
-        
+
             capability.AllowClientOutgoing(appSid)
             capability.AllowClientIncoming("jenny")
             Return capability.GenerateToken()
@@ -31,6 +32,12 @@ Public Class Dialer
 
 
     Protected Sub CallManger_ServerClick(sender As Object, e As EventArgs)
+        Dim accountSid = "AC7a286d92694557dd36277876d0c1564d"
+        Dim authToken = "4d10548e8f394c399ff01bb21038dc53"
+        Dim client = New TwilioRestClient(accountSid, authToken)
+        Dim c = client.GetConference("abc")
+
+
         Dim twiml = New Twilio.TwiML.TwilioResponse()
         twiml.Say("Connecting you to agent 1. All calls are recorded.")
         ' @end snippet

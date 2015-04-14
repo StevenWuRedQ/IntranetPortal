@@ -65,7 +65,7 @@
 
         function call(PhoneNumber) {
             // get the phone number to connect the call to
-            var pn;
+            //var pn;
             if (PhoneNumber) {
                 pn = PhoneNumber
             } else {
@@ -73,11 +73,16 @@
             }
 
 
-            params = { "PhoneNumber": pn };
-            Twilio.Device.connect(params);
+            //params = { "PhoneNumber": pn };
+            //Twilio.Device.connect(params);
+            $.getJSON('/AutoDialer/DialerAjaxService.svc/CallNumber/' + pn);
         }
 
-
+        function InitConfrence()
+        {
+            params = { "Confrece": pn };
+            Twilio.Device.connect(params);
+        }
         function hangup() {
             Twilio.Device.disconnectAll();
         }
@@ -93,8 +98,8 @@
         <button class="hangup" onclick="hangup();" type="button">
             Hangup
         </button>
-        <button class="call" runat="server" id="CallManger" onserverclick="CallManger_ServerClick" type="button" style="display: none">
-            Add Manger
+        <button class="call" runat="server" id="InitConfrence" onserverclick="CallManger_ServerClick" type="button" style="">
+            Confrence
         </button>
         <input type="text" id="number" name="number"
             placeholder="Enter a phone number to call" />

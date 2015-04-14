@@ -963,13 +963,6 @@
       <DependentUpon>PdfCreator.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="PhoneUI\PhoneCall.aspx.designer.vb">
-      <DependentUpon>PhoneCall.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="PhoneUI\PhoneCall.aspx.vb">
-      <DependentUpon>PhoneCall.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="PopupControl\AssignLeadsPopup.ascx.designer.vb">
       <DependentUpon>AssignLeadsPopup.ascx</DependentUpon>
     </Compile>
@@ -1793,7 +1786,6 @@
     <Content Include="pdfViewer\web\viewer.css" />
     <Content Include="pdfViewer\web\viewer.html" />
     <Content Include="pdfViewer\web\viewer.js" />
-    <Content Include="PhoneUI\PhoneCall.aspx" />
     <Content Include="PopupControl\AssignLeadsPopup.ascx" />
     <Content Include="PopupControl\DoorknockChart.aspx" />
     <Content Include="PopupControl\EditHomeOwner.ascx" />
@@ -2496,6 +2488,7 @@
     <Content Include="fonts\icons.ttf" />
     <Content Include="fonts\icons.woff" />
     <Content Include="EmailTemplate\Web.config" />
+    <Content Include="AutoDialer\Web.config" />
     <None Include="scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="scripts\jquery-2.1.1.js" />
     <Content Include="scripts\jquery-2.1.1.min.js" />

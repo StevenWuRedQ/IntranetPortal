@@ -339,7 +339,16 @@
       </PortalNavItem>
     </Items>
   </PortalNavItem>
-
+  <PortalNavItem Name="Legal" Text="Legal" NavigationUrl="#" ShowAmount="false" Expanded="false">
+    <Items>
+      <PortalNavItem Name="Legal" Text="Legal Leads" NavigationUrl="/LegalUI/LegalUI.aspx" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+    </Items>
+    
+  </PortalNavItem>
   <PortalNavItem Name="Eviction" Text="Eviction" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <!--Temporarily use Admin roles for Eviction-->
     <UserRoles>Eviction-Manager</UserRoles>

@@ -34,6 +34,7 @@
 
         function OnSelectionChanged(s, e) {
             var counnt = s.GetSelectedRowCount();
+            $("#gridSelectCount").html(counnt);
             if (counnt > 0) {
                 document.getElementById("btnAssign").disabled = false;
             } else
@@ -183,9 +184,13 @@
                                 <div style="margin: 10px 20px 10px 10px; text-align: left; padding-left: 5px" class="clearfix">
                                     <div style="font-size: 24px;" class="clearfix">
                                         <i class="fa fa-check-square-o with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
-                                    <span style="color: #234b60; font-size: 30px;">
-                                        <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
-                                    </span>
+                                        <span style="color: #234b60; font-size: 30px;">
+                                            <dx:ASPxLabel Text="Assign Leads" ID="lblLeadCategory" Font-Size="30px" ClientInstanceName="LeadCategory" runat="server"></dx:ASPxLabel>
+
+                                        </span>
+                                        <span style="font-size:18px;margin-left:20px">
+                                            <span id="gridSelectCount"> 0 </span> selected
+                                        </span>
                                         <div style="float: right">
                                             <%--  <a href="/LeadsGenerator/LeadsGenerator.aspx" target="_self" class="rand-button rand-button-blue">Create Leads</a>--%>
                                             <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                
@@ -201,6 +206,7 @@
                         <ContentCollection>
                             <dx:SplitterContentControl>
                                 <dx:ASPxGridView runat="server" Settings-ShowColumnHeaders="false" OnDataBinding="gridLeads_DataBinding"
+                                    
                                     ID="gridLeads" ClientInstanceName="gridLeads" Width="100%" KeyFieldName="BBLE" OnHtmlRowPrepared="gridLeads_HtmlRowPrepared" OnCustomCallback="gridLeads_CustomCallback"
                                     EnableViewState="true">
                                     <Columns>
@@ -217,7 +223,7 @@
                                         <dx:GridViewDataTextColumn FieldName="Neighborhood" Width="80px" Caption="Neighbor"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataSpinEditColumn FieldName="NYCSqft" Width="60px" Caption="SQFT"></dx:GridViewDataSpinEditColumn>
                                         <dx:GridViewDataTextColumn FieldName="LotDem" Width="100px"></dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="PropertyClass" Caption="Class" Width="50px"></dx:GridViewDataTextColumn>
+                                        <dx:GridViewDataTextColumn FieldName="PropertyClass" Caption="Class" Width="60px" Settings-HeaderFilterMode="CheckedList"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="MortgageCombo" Width="80px" Caption="MtgCOMBO" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="C1stServicer" Caption="Servicer" Width="80px"></dx:GridViewDataTextColumn>
                                         <dx:GridViewDataTextColumn FieldName="TaxLiensAmount" Caption="TaxCOMBO" Width="60px" PropertiesTextEdit-DisplayFormatString="C"></dx:GridViewDataTextColumn>
@@ -235,7 +241,7 @@
                                     </Columns>
                                     <SettingsBehavior AllowClientEventsOnLoad="true" AllowFocusedRow="true"
                                         EnableRowHotTrack="True" />
-                                    <Settings ShowColumnHeaders="true" VerticalScrollableHeight="1000" GridLines="Both"></Settings>
+                                    <Settings ShowFilterRowMenu="true"  ShowHeaderFilterButton="true"  ShowColumnHeaders="true" VerticalScrollableHeight="1000" GridLines="Both"></Settings>
                                     <SettingsPager Mode="EndlessPaging" PageSize="50"></SettingsPager>
                                     <Styles>
                                         <Header HorizontalAlign="Center"></Header>
