@@ -163,11 +163,11 @@
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        
-                                                        <h4 class="modal-title" >Request Document</h4>
+
+                                                        <h4 class="modal-title">Request Document</h4>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="input-group" style="width:100%">
+                                                        <div class="input-group" style="width: 100%">
                                                             <span>Assgin to</span>
                                                             <select class="form-control">
                                                                 <option>Agent 1</option>
@@ -176,12 +176,12 @@
 
                                                         </div>
                                                         <br />
-                                                        <div class="input-group" style="width:100%">
+                                                        <div class="input-group" style="width: 100%">
                                                             <span>Assgin to</span>
-                                                           <select class="form-control">
+                                                            <select class="form-control">
                                                                 <option>Bankruptcy</option>
                                                                 <option>Statute of Limitations</option>
-                                                               <option>Foreclosure Doucment</option>
+                                                                <option>Foreclosure Doucment</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -252,7 +252,7 @@
                                                             <% If Agent Then%>
                                                             <li class="short_sale_tab">
                                                                 <a class="shot_sale_tab_a " href="#Property" role="tab" data-toggle="tab">Foreclosure Review</a></li>
-                                                            <% End If %>
+                                                            <% End If%>
                                                             <% If SecondaryAction Then%>
                                                             <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#Mortgages" role="tab" data-toggle="tab">Secondary Actions</a></li>
                                                             <% End If%>
@@ -2011,6 +2011,7 @@
                                                                                     </li>
                                                                                 </ul>
                                                                             </div>
+
                                                                             <div class="ss_form">
                                                                                 <h4 class="ss_form_title">Breach of Contract</h4>
                                                                                 <ul class="ss_form_box clearfix">
@@ -2072,6 +2073,48 @@
                                                                                     </li>
                                                                                 </ul>
                                                                             </div>
+                                                                            <style>
+                                                                                .checktoggle
+                                                                                {
+
+                                                                                }
+                                                                            </style>
+                                                                           
+                                                                            <div class="ss_form">
+                                                                                <h4 class="ss_form_title" style="width:59%;display:inline-block">Breach of Contract money damages </h4>
+                                                                                <div style="display:inline-block">
+                                                                                    <input type="checkbox" id="checkshow" name="1" class="ss_form_input checktoggle" value="YES">
+                                                                                    <label for="checkshow" class="input_with_check">
+                                                                                        <span class="box_text">Yes </span>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <ul class="ss_form_box clearfix" style="display:none">
+                                                                                    <li class="ss_form_item">
+                                                                                        <label class="ss_form_input_title">amount</label>
+                                                                                        <input class="ss_form_input currency_input" data-field="PropertyInfo.Number" />
+                                                                                    </li>
+                                                                                    <li class="ss_form_item">
+                                                                                        <label class="ss_form_input_title">Reason</label>
+                                                                                        <input class="ss_form_input " data-field="PropertyInfo.Number" />
+                                                                                    </li>
+                                                                                    <li class="ss_form_item">
+                                                                                        <label class="ss_form_input_title">check Id</label>
+                                                                                        <input class="ss_form_input " data-field="PropertyInfo.Number" />
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                             <script>
+                                                                                 $(".checktoggle").slideUp();
+                                                                                 $(".checktoggle").click(function () {
+                                                                                     var box = $(this).parents(".ss_form").children(".ss_form_box");
+                                                                                     if (this.checked) {
+                                                                                         box.slideDown();
+                                                                                     } else {
+                                                                                         box.slideUp();
+                                                                                     }
+                                                                                 }
+                                                                                 )
+                                                                            </script>
                                                                         </div>
                                                                     </div>
                                                                     <div class="ss_form">
