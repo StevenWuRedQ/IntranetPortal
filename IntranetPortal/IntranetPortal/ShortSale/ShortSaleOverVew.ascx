@@ -34,11 +34,10 @@
         var strJson = JSON.stringify(ShortSaleCaseData);
 
         //d_alert(strJson);
-        if (e == null)
-        {
+        if (e == null) {
             SaveClicklCallbackCallbackClinet.PerformCallback(strJson);
         }
-      
+
     }
     function saveComplete(s, e) {
         //RefreshContent();
@@ -178,12 +177,17 @@
                     <%--detial tabs--%>
                     <div>
                         <!--detial Nav tabs -->
-                       
+                        <style>
+                            .shot_sale_tab_a {
+                                padding: 10px 10px !important;
+                            }
+                        </style>
                         <ul class="nav nav-tabs overview_tabs" role="tablist" style='<%= If(isEviction,"display:none","") %>'>
                             <li class="active short_sale_tab">
                                 <a class="shot_sale_tab_a" href="#home" role="tab" data-toggle="tab" onclick="refreshSummary()">Summary</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Property" role="tab" data-toggle="tab">Property Info</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Mortgages" role="tab" data-toggle="tab">Mortgages</a></li>
+                            <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#DealInfo" role="tab" data-toggle="tab">Deal Info</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Homewoner" role="tab" data-toggle="tab">Homeowner</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a  " href="#Eviction" role="tab" data-toggle="tab">Eviction</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Parties" role="tab" data-toggle="tab">Parties</a></li>
@@ -205,6 +209,73 @@
                             <div class="tab-pane" id="Mortgages">
                                 <div class="short_sale_content">
                                     <uc1:ShortSaleMortgageTab runat="server" ID="ShortSaleMortgageTab" />
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="DealInfo">
+                                <div class="short_sale_content">
+                                    <div class="ss_form">
+                                        <h4 class="ss_form_title">Listing Info</h4>
+                                        <ul class="ss_form_box clearfix" id="short_sale_dept">
+
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">MLS #</label>
+                                                <input class="ss_form_input "  >
+                                            </li>
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">MLS Status</label>
+                                                <select class="ss_form_input">
+                                                    <option>MLS status 1</option>
+                                                    <option>MLS status 2</option>
+                                                </select>
+                                            </li>
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">Listing Expiry Date</label>
+                                                <input class="ss_form_input ss_date"  >
+                                            </li>
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">LockBox</label>
+                                                <input class="ss_form_input" >
+                                            </li>
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">List Price</label>
+                                                <input class="ss_form_input ">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="ss_form">
+                                        <h4 class="ss_form_title">Value Info </h4>
+                                        <table class="table table-striped" style="margin-top: 20px">
+                                            <thead>
+                                                <tr>
+                                                    <th>Method</th>
+                                                    <th>Bank Value</th>
+                                                    <th>Date Of Value</th>
+                                                    <th>Date Of Value</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tr>
+                                                <td>
+                                                    <select class="form-control">
+                                                        <option>Appraisal </option>
+                                                        <option>BPO </option>
+                                                        <option>Desktop Review </option>
+
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" />
+                                                </td>
+                                                <td>
+                                                    <input class="form-control ss_date" />
+                                                </td>
+                                                <td>
+                                                    <input class="form-control ss_date" />
+                                                </td>
+
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane" id="Homewoner">

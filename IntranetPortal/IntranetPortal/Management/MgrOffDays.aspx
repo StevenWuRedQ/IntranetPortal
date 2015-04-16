@@ -55,9 +55,9 @@
                                                 <dx:LayoutItemNestedControlContainer>
                                                     <dx:ASPxComboBox runat="server" ID="cbReason" Theme="Moderno">
                                                         <Items>
-                                                            <dx:ListEditItem Text="Sick" />
-                                                            <dx:ListEditItem Text="Vacation" />
-                                                            <dx:ListEditItem Text="Personal" />
+                                                            <dx:ListEditItem Text="Sick"  Value="Sick"/>
+                                                            <dx:ListEditItem Text="Vacation" Value="Vacation"/>
+                                                            <dx:ListEditItem Text="Personal"  Value="Personal"/>
                                                         </Items>
                                                     </dx:ASPxComboBox>
                                                 </dx:LayoutItemNestedControlContainer>

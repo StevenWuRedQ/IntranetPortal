@@ -31,7 +31,7 @@
     End Sub
 
     Protected Sub submitButton_Click(sender As Object, e As EventArgs)
-        Core.SpecialDay.AddPersonalOff(cbAgents.Text, sDate.Date, endDate.Date, cbReason.Text, User.Identity.Name)
+        Core.SpecialDay.AddPersonalOff(cbAgents.Text, sDate.Date, endDate.Date, cbReason.Value.ToString, User.Identity.Name)
         gridOffDays.DataBind()
     End Sub
 End Class

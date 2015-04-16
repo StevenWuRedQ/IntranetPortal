@@ -523,43 +523,28 @@
                                                             <label class="upcase_text font_black" style="display: block">Mortgages (Sum)</label>
                                                             <select class="selectpicker form-control width_100percent" style="width: 98%" id="IdMortgageMin">
                                                                 <option value="">Min Value</option>
+                                                                <% For number = 50000  to 1000000 step 50000 %>
+                                                                <option value="<%= number%>""><%= FormatCurrency(number, TriState.False, , TriState.True, TriState.True)%></option>
+                                                                <% Next %>
 
-                                                                <option value="500">$500</option>
-                                                                <option value="750">$750</option>
-                                                                <option value="1000">$1,000</option>
-                                                                <option value="1500">$1,500</option>
-                                                                <option value="2000">$2,000</option>
-                                                                <option value="2500">$2,500</option>
-                                                                <option value="3000">$3,000</option>
-                                                                <option value="4000">$4,000</option>
-                                                                <option value="5000">$5,000</option>
-                                                                <option value="6000">$6,000</option>
-                                                                <option value="7000">$7,000</option>
-                                                                <option value="8000">$8,000</option>
-                                                                <option value="9000">$9,000</option>
-                                                                <option value="10000">$10,000</option>
-                                                                <option value="15000">$15,000</option>
+                                                                <% For number = 1200000 To 3000000 Step 200000%>
+                                                                 <option value="<%= number%>""><%= FormatCurrency(number, TriState.False, , TriState.True, TriState.True)%></option>
+                                                                <% Next %>
+                                                                <option value="3M+">$3M+</option>
                                                             </select>
                                                         </div>
                                                         <div class="inline_block query_input_50_percent">
                                                             <label class="upcase_text font_black" style="display: block"></label>
                                                             <select class="selectpicker form-control width_100percent" style="width: 98%" id="IdMortgageMax">
                                                                 <option value="">Max Value</option>
-                                                                <option value="500">$500</option>
-                                                                <option value="750">$750</option>
-                                                                <option value="1000">$1,000</option>
-                                                                <option value="1500">$1,500</option>
-                                                                <option value="2000">$2,000</option>
-                                                                <option value="2500">$2,500</option>
-                                                                <option value="3000">$3,000</option>
-                                                                <option value="4000">$4,000</option>
-                                                                <option value="5000">$5,000</option>
-                                                                <option value="6000">$6,000</option>
-                                                                <option value="7000">$7,000</option>
-                                                                <option value="8000">$8,000</option>
-                                                                <option value="9000">$9,000</option>
-                                                                <option value="10000">$10,000</option>
-                                                                <option value="15000">$15,000</option>
+                                                                <% For number = 50000  to 1000000 step 50000 %>
+                                                                <option value="<%= number%>""><%= FormatCurrency(number, TriState.False, , TriState.True, TriState.True)%></option>
+                                                                <% Next %>
+
+                                                                <% For number = 1200000 To 3000000 Step 200000%>
+                                                                 <option value="<%= number%>""><%= FormatCurrency(number, TriState.False, , TriState.True, TriState.True)%></option>
+                                                                <% Next %>
+                                                                <option value="3M+">$3M+</option>
                                                             </select>
                                                         </div>
                                                     </div>

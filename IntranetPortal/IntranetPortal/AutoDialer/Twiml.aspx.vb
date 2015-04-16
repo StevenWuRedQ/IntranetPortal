@@ -18,7 +18,7 @@ Public Class Twiml
         If Request("PhoneNumber") IsNot Nothing Then
             number = Request("PhoneNumber")
         End If
-
+        Dim ConfrenceName = Request("ConfrenceName")
         ' wrap the phone number or client name in the appropriate TwiML verb
         ' by checking if the number given has only digits and format symbols
 
@@ -28,12 +28,13 @@ Public Class Twiml
         If m.Success Then
             'numberOrClient = String.Format("<Conference>{0}</Conference>", "Conference" & number)
             numberOrClient = String.Format("<Conference>{0}</Conference>", "Conference")
+            numberOrClient = String.Format("<Number>{0}</Number>", number) ')
         Else
             numberOrClient = ""
 
-            'numberOrClient = String.Format("<Number>{0}</Number>", "9298883289") 'number)
+
             'numberOrClient = numberOrClient & String.Format("<Client>{0}</Client>", number)
-            numberOrClient = numberOrClient & String.Format("<Conference>{0}</Conference>", "Conference")
+            numberOrClient = numberOrClient & String.Format("<Conference>{0}</Conference>", ConfrenceName)
         End If
 
 

@@ -89,8 +89,26 @@
                     <label class="ss_form_input_title"># of Families</label>
                     <input class="ss_form_input" data-field="PropertyInfo.NumOfFamilies">
                 </li>
+                <li class="ss_form_item ss_mortages_stauts">
+                    <label class="ss_form_input_title">Type</label>
+                    <select class="ss_form_input " data-item="Type" data-item-type="1">
+                        <option value=""></option>
+                        <option value="Ready for Submission">FHA</option>
+                        <option value="Ready for Submission">FANNIE MAE</option>
+                        <option value="Ready for Submission">FREDDIE MAC</option>
+                    </select>
 
+                </li>
                 <li class="ss_form_item">
+                    <label class="ss_form_input_title">Counter Offer</label>
+                    <input class="ss_form_input" data-field="PropertyInfo.NumOfFamilies">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Payoff Expires</label>
+                    <input class="ss_form_input ss_date" data-field="PropertyInfo.NumOfFamilies">
+                </li>
+
+                <%--<li class="ss_form_item">
                     <span class="ss_form_input_title">FHA</span>
 
                     <input type="radio" id="checkYes_FHA__index__" name="FHAname__index__" data-item="FHA" data-item-type="1" data-radio="Y" value="YES" class="ss_form_input">
@@ -119,7 +137,7 @@
                     <input type="radio" id="none_check_FREDDIE_MAC__index__" name="FREDDIE_MAC__index__" data-item="Freddie" data-item-type="1" value="NO" class="ss_form_input">
                     <label for="none_check_FREDDIE_MAC__index__" class="input_with_check"><span class="box_text">No</span></label>
 
-                </li>
+                </li>--%>
                 <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">Lien Postion</label>
                 <select class="ss_form_input">

@@ -95,7 +95,7 @@
     }
 
     function OnSuccess(response) {
-        debugger;
+      
         ShortSaleCaseData = response.d;  //JSON.parse(response.d);
         leadsInfoBBLE = ShortSaleCaseData.BBLE;
         ShortSaleDataBand(0);

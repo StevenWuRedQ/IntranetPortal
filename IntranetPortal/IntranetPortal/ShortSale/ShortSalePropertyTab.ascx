@@ -81,6 +81,17 @@
 
             </select>--%>
 
+
+        </li>
+         <li class="ss_form_item">
+            <label class="ss_form_input_title">Investor</label>
+            <select class="ss_form_input" data-field="PropertyInfo.Investor">
+                <option >Investor 1</option>
+                <option >Investor 2</option>
+                <option >Investor 3</option>
+
+            </select>
+           
         </li>
         <li class="ss_form_item">
             <span class="ss_form_input_title">c/o(<span class="linkey_pdf">pdf</span>)</span>

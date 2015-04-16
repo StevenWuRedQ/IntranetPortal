@@ -1683,6 +1683,7 @@ li.ss_form_item {
 .nav-tabs > li.active > a.shot_sale_tab_a {
     border-color: #ff400d !important;
     color: #2e2f31 !important;
+    padding:10px 10px !important;
 }
 
 .update_panel {

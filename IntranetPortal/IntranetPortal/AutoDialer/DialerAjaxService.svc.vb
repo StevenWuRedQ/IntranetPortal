@@ -34,14 +34,14 @@ Public Class DialerAjaxService
 
     End Function
     <OperationContract()>
-   <WebGet(UriTemplate:="CallNumber/{PhoneNumber}")>
-    Public Function CallNumber(PhoneNumber As String) As Channels.Message
+   <WebGet(UriTemplate:="CallNumber/{PhoneNumber},{userName}")>
+    Public Function CallNumber(PhoneNumber As String, userName As String) As Channels.Message
         Dim AccountSid As String = "AC7a286d92694557dd36277876d0c1564d"
         Dim AuthToken As String = "4d10548e8f394c399ff01bb21038dc53"
         Dim twilio = New TwilioRestClient(AccountSid, AuthToken)
         Dim options = New CallOptions()
-        options.Url = "tasks.myidealprop.com/AutoDialer/Twiml.aspx"
-
+        options.Url = "http://tasks.myidealprop.com/AutoDialer/Twiml.aspx" + "?ConfrenceName=" + userName.Replace(" ", "%20")
+        'options.Url = HttpContext.Current.Server.UrlEncode(options.Url)
         options.To = PhoneNumber
         options.From = "+19179633481"
         Dim tcall = twilio.InitiateOutboundCall(options)

@@ -66,22 +66,26 @@
         function call(PhoneNumber) {
             // get the phone number to connect the call to
             //var pn;
-            if (PhoneNumber) {
-                pn = PhoneNumber
-            } else {
-                pn = $("#number").val();
-            }
+            //if (PhoneNumber) {
+            //    pn = PhoneNumber
+            //} else {
+            //    pn = $("#number").val();
+            //}
 
-
-            //params = { "PhoneNumber": pn };
-            //Twilio.Device.connect(params);
-            $.getJSON('/AutoDialer/DialerAjaxService.svc/CallNumber/' + pn);
+           var params = { "ConfrenceName": $('#userName').val() };
+            Twilio.Device.connect(params
+                );
+            //$.getJSON('/AutoDialer/DialerAjaxService.svc/CallNumber/' + pn);
         }
 
         function InitConfrence()
         {
-            params = { "Confrece": pn };
-            Twilio.Device.connect(params);
+            //params = { "Confrece": pn };
+            //Twilio.Device.connect(params);
+           
+                pn = $("#number").val();
+            
+                $.getJSON('/AutoDialer/DialerAjaxService.svc/CallNumber/' + pn + ',' + $('#userName').val());
         }
         function hangup() {
             Twilio.Device.disconnectAll();
@@ -98,7 +102,7 @@
         <button class="hangup" onclick="hangup();" type="button">
             Hangup
         </button>
-        <button class="call" runat="server" id="InitConfrence" onserverclick="CallManger_ServerClick" type="button" style="">
+        <button class="call" onclick="InitConfrence();" type="button">
             Confrence
         </button>
         <input type="text" id="number" name="number"
