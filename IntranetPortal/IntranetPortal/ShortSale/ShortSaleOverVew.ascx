@@ -213,13 +213,18 @@
                             </div>
                             <div class="tab-pane" id="DealInfo">
                                 <div class="short_sale_content">
+                                    <div class="clearfix">
+                                        <div style="float: right">
+                                            <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
+                                        </div>
+                                    </div>
                                     <div class="ss_form">
                                         <h4 class="ss_form_title">Listing Info</h4>
-                                        <ul class="ss_form_box clearfix" id="short_sale_dept">
+                                        <ul class="ss_form_box clearfix">
 
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">MLS #</label>
-                                                <input class="ss_form_input "  >
+                                                <input class="ss_form_input ">
                                             </li>
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">MLS Status</label>
@@ -230,11 +235,11 @@
                                             </li>
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">Listing Expiry Date</label>
-                                                <input class="ss_form_input ss_date"  >
+                                                <input class="ss_form_input ss_date">
                                             </li>
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">LockBox</label>
-                                                <input class="ss_form_input" >
+                                                <input class="ss_form_input">
                                             </li>
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">List Price</label>
@@ -275,6 +280,20 @@
 
                                             </tr>
                                         </table>
+                                    </div>
+                                    <div class="ss_form">
+                                        <h4 class="ss_form_title">Offer Info</h4>
+                                        <ul class="ss_form_box clearfix">
+
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">Offer Submited </label>
+                                                <input class="ss_form_input ">
+                                            </li>
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">Date </label>
+                                                <input class="ss_form_input ss_date">
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
