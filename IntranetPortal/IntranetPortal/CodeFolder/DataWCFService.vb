@@ -190,7 +190,11 @@ Public Class DataWCFService
     End Sub
 
     Public Shared Sub UpdateTaxLiens(bble As String)
+        UpdateTaxLiens2(bble)
+        Return
+
         Using client As New DataAPI.WCFMacrosClient
+
             Dim taxLiens = client.Get_Acris_TaxLien(bble)
 
             If taxLiens IsNot Nothing AndAlso taxLiens.TaxLienAmt.HasValue Then
@@ -214,6 +218,37 @@ Public Class DataWCFService
             End If
         End Using
     End Sub
+
+    Public Shared Sub UpdateTaxLiens2(bble As String)
+        Using client As New DataAPI.WCFMacrosClient
+
+            Dim taxLiens = client.Get_NYC_TaxLien(bble, "")
+
+            If taxLiens IsNot Nothing AndAlso taxLiens.Length > 0 Then
+                Using ctx As New Entities
+                    Dim liens = ctx.LeadsTaxLiens.Where(Function(lt) lt.BBLE = bble)
+                    ctx.LeadsTaxLiens.RemoveRange(liens)
+
+                    For Each lien In taxLiens
+                        Dim newLien As New LeadsTaxLien
+                        newLien.BBLE = bble
+
+                        If lien.Year > 0 Then
+                            newLien.TaxLiensYear = lien.Year
+                        End If
+
+                        If lien.LienTotal.HasValue Then
+                            newLien.Amount = lien.LienTotal
+                        End If
+                        ctx.LeadsTaxLiens.Add(newLien)
+                    Next
+
+                    ctx.SaveChanges()
+                End Using
+            End If
+        End Using
+    End Sub
+
 
     Public Shared Function GetFullAssessInfo(bble As String, Optional li As LeadsInfo = Nothing) As LeadsInfo
 
@@ -695,10 +730,11 @@ Public Class DataWCFService
 
             context.SaveChanges()
         End Using
-
     End Sub
 
     Private Shared Function IsSameName(name As String, nameToCompare As String)
+        Return Utility.IsSimilarName(name, nameToCompare)
+
         If String.IsNullOrEmpty(name) Then
             Return False
         End If
@@ -865,7 +901,6 @@ Public Class DataWCFService
 
                 Context.SaveChanges()
 
-
                 If needCallService Then
                     Try
                         If HttpContext.Current IsNot Nothing Then
@@ -982,7 +1017,24 @@ Public Class DataWCFService
         End If
 
         Using client As New DataAPI.WCFMacrosClient
-            Dim result = client.Get_TLO_Person(100, Nothing, Nothing, False, False, Nothing, tloId, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
+            Dim orderId = 1
+
+            Using ctx As New Entities
+                Dim order As New APIOrder
+                order.BBLE = bble
+                order.Orderby = GetCurrentIdentityName()
+                order.OrderTime = DateTime.Now
+                order.Status = APIOrder.OrderStatus.Complete
+                ctx.APIOrders.Add(order)
+                ctx.SaveChanges()
+
+                orderId = order.ApiOrderID
+            End Using
+
+
+
+
+            Dim result = client.Get_TLO_Person(orderId, Nothing, Nothing, False, False, Nothing, tloId, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing)
 
             If result Is Nothing Then
                 Throw New Exception("Can't find the user. Please check.")

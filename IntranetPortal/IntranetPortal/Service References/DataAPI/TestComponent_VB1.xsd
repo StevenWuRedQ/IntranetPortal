@@ -1341,4 +1341,24 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="TLO_PastAddress_Report" nillable="true" type="tns:TLO_PastAddress_Report" />
+  <xs:complexType name="ArrayOfSP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" nillable="true" type="tns:SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" nillable="true" type="tns:ArrayOfSP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" />
+  <xs:complexType name="SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Block" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BoroNum" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Borough" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LienTotal" nillable="true" type="xs:double" />
+      <xs:element minOccurs="0" name="Lot" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Owner" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Year" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" nillable="true" type="tns:SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" />
 </xs:schema>

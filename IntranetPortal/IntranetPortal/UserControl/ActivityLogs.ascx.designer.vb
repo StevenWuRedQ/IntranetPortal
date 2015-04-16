@@ -23,15 +23,6 @@ Partial Public Class ActivityLogs
     Protected WithEvents EmailBody2 As Global.DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor
 
     '''<summary>
-    '''popupFilters control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents popupFilters As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
-
-    '''<summary>
     '''dateActivity control.
     '''</summary>
     '''<remarks>

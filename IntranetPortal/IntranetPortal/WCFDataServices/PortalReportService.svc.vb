@@ -87,10 +87,47 @@ Public Class PortalReportService
         '    Return result.ToJson
         'End Using
     End Function
+    Public Function UnicodeToAscii(ByVal unicodeString As String) As String
+
+
+        Dim ascii As Encoding = Encoding.ASCII
+        Dim unicode As Encoding = Encoding.Unicode
+        ' Convert the string into a byte array. 
+        Dim unicodeBytes As Byte() = unicode.GetBytes(unicodeString)
+
+        ' Perform the conversion from one encoding to the other. 
+        Dim asciiBytes As Byte() = Encoding.Convert(unicode, ascii, unicodeBytes)
+
+        ' Convert the new byte array into a char array and then into a string. 
+        Dim asciiChars(ascii.GetCharCount(asciiBytes, 0, asciiBytes.Length) - 1) As Char
+        ascii.GetChars(asciiBytes, 0, asciiBytes.Length, asciiChars, 0)
+        Dim asciiString As New String(asciiChars)
+        Return asciiString
+    End Function
+
+    Public Function ChangeDateFormatToASCII(dt As String) As String
+        Dim asciiBtye As Byte() = System.Text.Encoding.ASCII.GetBytes(dt)
+        asciiBtye = asciiBtye.Where(Function(b) b <> 63).ToArray
+        Dim asciiStr = System.Text.ASCIIEncoding.ASCII.GetString(asciiBtye)
+        Return asciiStr
+    End Function
 
     Public Function LoadAgentSummaryReport(agentName As String, startDate As String, endDate As String) As Channels.Message Implements IPortalReportService.LoadAgentSummaryReport
-        Dim dtStart = DateTime.Parse(startDate)
-        Dim dtEnd = DateTime.Parse(endDate)
+        Dim dtStart = DateTime.MinValue
+
+        If Not DateTime.TryParse(startDate, dtStart) Then
+            If Not DateTime.TryParse(ChangeDateFormatToASCII(startDate), dtStart) Then
+                dtStart = New DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)
+            End If
+        End If
+
+        Dim dtEnd = DateTime.Today
+        If Not DateTime.TryParse(endDate, dtEnd) Then
+            If Not DateTime.TryParse(ChangeDateFormatToASCII(endDate), dtEnd) Then
+                dtEnd = DateTime.Today.AddDays(1)
+            End If
+        End If
+
         Dim teamName = UserInTeam.GetUserTeam(agentName)
 
         Dim result = New List(Of Object)
@@ -102,10 +139,10 @@ Public Class PortalReportService
             agentData = allData.Where(Function(a) a.Name = agentName).FirstOrDefault
 
             If agentData Is Nothing Then
-                agentData = PortalReport.LoadAgentActivityReport(agentName, startDate, endDate)
+                agentData = PortalReport.LoadAgentActivityReport(agentName, dtStart, dtEnd)
             End If
         Else
-            agentData = PortalReport.LoadAgentActivityReport(agentName, startDate, endDate)
+            agentData = PortalReport.LoadAgentActivityReport(agentName, dtStart, dtEnd)
         End If
 
         If agentData IsNot Nothing Then

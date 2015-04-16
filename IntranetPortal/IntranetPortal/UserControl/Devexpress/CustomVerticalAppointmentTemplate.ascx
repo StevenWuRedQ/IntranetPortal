@@ -37,7 +37,7 @@
                                 <tr <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetAlignAttributes(Me, Nothing, "top")%> style="vertical-align: top">
                                     <td runat="server" id="statusContainer"></td>
                                     <td style="width: 100%">
-                                        <table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 1, 0)%> style="width: 100%">
+                                        <table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 1, 0)%> style="width: 100%;">
                                             <tr <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetAlignAttributes(Me, Nothing, "top")%> style="vertical-align: top">
                                                 <td class="dxscCellWithPadding">
                                                     <table id="imageContainer" runat="server" style="text-align: center">
@@ -46,13 +46,13 @@
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td class="dxscCellWithPadding" style="width: 100%">
-                                                    <table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 1, 0)%> style="width: 100%">
+                                                <td class="dxscCellWithPadding" style="width: 100%;">
+                                                    <table <%= DevExpress.Web.ASPxClasses.Internal.RenderUtils.GetTableSpacings(Me, 1, 0)%> style="width: 100%; font-size:11px;">
                                                         <tr>
                                                             <td class="dxscCellWithPadding" colspan="2">
                                                                 <dx:ASPxLabel runat="server" EnableViewState="false" EncodeHtml="true" ID="lblStartTime" Text='<%#(CType(Container, VerticalAppointmentTemplateContainer)).Items.StartTimeText.Text%>' Visible='<%#(CType(Container, VerticalAppointmentTemplateContainer)).Items.StartTimeText.Visible%>'></dx:ASPxLabel>
                                                                 <dx:ASPxLabel runat="server" EnableViewState="false" EncodeHtml="true" Style="margin-left: -4px;" ID="lblEndTime" Text='<%#(CType(Container, VerticalAppointmentTemplateContainer)).Items.EndTimeText.Text%>' Visible='<%#(CType(Container, VerticalAppointmentTemplateContainer)).Items.EndTimeText.Visible%>'></dx:ASPxLabel>
-                                                                <dx:ASPxLabel runat="server" EnableViewState="false" EncodeHtml="true" ID="lblTitle" Text='<%#(CType(Container, VerticalAppointmentTemplateContainer)).Items.Title.Text%>'></dx:ASPxLabel>
+                                                                <dx:ASPxLabel runat="server" EnableViewState="false" EncodeHtml="false" ID="lblTitle" Text='<%#(CType(Container, VerticalAppointmentTemplateContainer)).AppointmentViewInfo.Appointment.CustomFields("TitleLink").ToString() %>'></dx:ASPxLabel>
                                                             </td>
                                                         </tr>
                                                         <tr>

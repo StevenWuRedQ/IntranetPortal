@@ -732,7 +732,7 @@
                     <table>
                         <tr>
                             <td>
-                                <dx:ASPxTextBox runat="server" ID="txtkeyword" Width="240" ClientInstanceName="txtkeyWordClient"></dx:ASPxTextBox>
+                                <dx:ASPxTextBox runat="server" ID="txtkeyword" Width="180" ClientInstanceName="txtkeyWordClient"></dx:ASPxTextBox>
                             </td>
                             <td>
                                 <dx:ASPxButton runat="server" RenderMode="Button" Image-Url="/images/Search.png" Image-Height="16px" Text="Search" Image-Width="16px" AutoPostBack="false">

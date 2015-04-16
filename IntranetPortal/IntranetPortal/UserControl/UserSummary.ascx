@@ -463,7 +463,9 @@
                                                 this.LoadStatusChart();
                                             },
                                             LoadAgentActivityDs: function (startDate, endDate) {
-                                                this.ActivityDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentSummaryReport/" + this.AgentName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-"));
+                                                var url = "/wcfdataservices/portalReportservice.svc/LoadAgentSummaryReport/" + this.AgentName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-");                                                
+                                                
+                                                this.ActivityDataSource = new DevExpress.data.DataSource(url);
                                                 this.LeadsDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentLeadsReport/" + this.AgentName);
                                             },
                                             UpdateActivityChart: function (startDate, endDate) {

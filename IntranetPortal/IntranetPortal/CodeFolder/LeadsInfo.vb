@@ -295,6 +295,29 @@
         End Get
     End Property
 
+    Private _taxLiens As List(Of LeadsTaxLien)
+    Public ReadOnly Property TaxLiens As List(Of LeadsTaxLien)
+        Get
+            If _taxLiens Is Nothing Then
+                Using ctx As New Entities
+                    _taxLiens = ctx.LeadsTaxLiens.Where(Function(lt) lt.BBLE = BBLE).ToList
+                End Using
+            End If
+
+            Return _taxLiens
+        End Get
+    End Property
+
+    Public ReadOnly Property TotalTaxLienAmount As Decimal?
+        Get
+            If TaxLiens IsNot Nothing AndAlso TaxLiens.Count > 0 Then
+                Return TaxLiens.Sum(Function(a) a.Amount)
+            End If
+
+            Return Nothing
+        End Get
+    End Property
+
     Public ReadOnly Property TaxLiensDateText As String
         Get
             If TaxLiensInfo IsNot Nothing Then

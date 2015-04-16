@@ -7,7 +7,9 @@ Public Class Calendar
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        BindCalendar()
+        If Not Page.IsPostBack Then
+            BindCalendar()
+        End If
 
         'CType(Master, Main).LeftPanelSize = 310
     End Sub
@@ -16,11 +18,11 @@ Public Class Calendar
         Using Context As New Entities
             Dim user = Page.User.Identity.Name
             Dim users = Employee.GetManagedEmployees(user)
-            Dim appoints = (From appoint In Context.UserAppointments
-                           Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (users.Contains(appoint.Agent) Or appoint.Manager = user)
+            Dim appoints = (From appoint In Context.UserAppointments.Where(Function(ua) ua.Status = UserAppointment.AppointmentStatus.Accepted And (users.Contains(ua.Agent) Or ua.Manager = user)).ToList
                            Select New With {
                                .AppointmentId = appoint.LogID,
                                .Subject = appoint.Subject,
+                               .TitleLink = BuilerSubject(appoint),
                                .Start = appoint.ScheduleDate,
                                .End = appoint.EndDate,
                                .Description = appoint.Description,
@@ -31,21 +33,17 @@ Public Class Calendar
                                .Label = 0,
                                .Type = 0,
                                .AppointType = appoint.Type}).Distinct.ToList
-            'From task In Context.UserTasks
-            'Where task.EmployeeName.Contains(user)
-            'Select New With {
-            '    .AppointmentId = task.LogID,
-            '    .Subject = task.Action,
-            '    .Start = task.Schedule,
-            '    .End = task.EndDate,
-            '    .Description = task.Description,
-            '    .Location = task.Location
-            '    }).Distinct.ToList
-
+           
             Scheduler.AppointmentDataSource = appoints
             Scheduler.DataBind()
         End Using
     End Sub
+
+    Private Function BuilerSubject(appoint As UserAppointment) As String
+        Dim ld = LeadsInfo.GetInstance(appoint.BBLE)
+        Dim result = String.Format("Appointment of <a href='/viewleadsinfo.aspx?id={1}' target='_blank'>{0}</a>", ld.PropertyAddress, ld.BBLE)
+        Return result
+    End Function
 
     Protected Sub Scheduler_AppointmentFormShowing(sender As Object, e As AppointmentFormEventArgs) Handles Scheduler.AppointmentFormShowing, officeScheduler.AppointmentFormShowing
         e.Container.Caption = e.Appointment.Subject
@@ -61,11 +59,11 @@ Public Class Calendar
         Using Context As New Entities
             Dim user = Page.User.Identity.Name
             Dim users = Employee.GetDeptUsers(Employee.GetInstance(user).Department)
-            Dim appoints = (From appoint In Context.UserAppointments
-                           Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (users.Contains(appoint.Agent))
+            Dim appoints = (From appoint In Context.UserAppointments.Where(Function(ua) ua.Status = UserAppointment.AppointmentStatus.Accepted AndAlso users.Contains(ua.Agent)).ToList
                            Select New With {
                                .AppointmentId = appoint.LogID,
                                .Subject = appoint.Subject,
+                               .TitleLink = BuilerSubject(appoint),
                                .Start = appoint.ScheduleDate,
                                .End = appoint.EndDate,
                                .Description = appoint.Description,
@@ -80,5 +78,41 @@ Public Class Calendar
             officeScheduler.AppointmentDataSource = appoints
             officeScheduler.DataBind()
         End Using
+    End Sub
+
+    Protected Sub officeScheduler_AppointmentChanging(sender As Object, e As PersistentObjectCancelEventArgs)
+        Dim appoint = CType(e.Object, DevExpress.XtraScheduler.Appointment)
+        Dim apt = UserAppointment.GetAppointmentBylogID(CInt(appoint.Id))
+        apt.ScheduleDate = appoint.Start
+        apt.EndDate = appoint.End
+        apt.Save()
+
+        e.Cancel = True
+
+        BindOfficeCalandar()
+    End Sub
+
+    Protected Sub Scheduler_AppointmentChanging(sender As Object, e As PersistentObjectCancelEventArgs)
+        Dim appoint = CType(e.Object, DevExpress.XtraScheduler.Appointment)
+        Dim apt = UserAppointment.GetAppointmentBylogID(CInt(appoint.Id))
+        apt.ScheduleDate = appoint.Start
+        apt.EndDate = appoint.End
+        apt.Save()
+
+        e.Cancel = True
+
+        BindCalendar()
+    End Sub
+
+    Protected Sub officeScheduler_DataBinding(sender As Object, e As EventArgs)
+        If officeScheduler.AppointmentDataSource Is Nothing Then
+            BindOfficeCalandar()
+        End If
+    End Sub
+
+    Protected Sub Scheduler_DataBinding(sender As Object, e As EventArgs)
+        If Scheduler.AppointmentDataSource Is Nothing Then
+            BindCalendar()
+        End If
     End Sub
 End Class

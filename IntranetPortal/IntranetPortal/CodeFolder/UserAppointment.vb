@@ -10,6 +10,21 @@
 
     End Sub
 
+    Public Shared Function GetAppointment(aptId As Integer) As UserAppointment
+        Using ctx As New Entities
+            Return ctx.UserAppointments.Find(aptId)
+        End Using
+    End Function
+
+    Public Sub Save()
+        Using ctx As New Entities
+            Dim apt = ctx.UserAppointments.Find(AppoitID)
+            apt = Utility.SaveChangesObj(apt, Me)
+
+            ctx.SaveChanges()
+        End Using
+    End Sub
+
     Public Shared Function UpdateAppointmentStatus(logId As Integer, status As AppointmentStatus) As UserAppointment
 
         Using Context As New Entities

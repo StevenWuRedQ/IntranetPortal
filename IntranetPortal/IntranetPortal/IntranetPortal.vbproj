@@ -371,6 +371,13 @@
       <DependentUpon>CallBackServices.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Chat\ChatDefault.aspx.designer.vb">
+      <DependentUpon>ChatDefault.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Chat\ChatDefault.aspx.vb">
+      <DependentUpon>ChatDefault.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Chat\ChatHub.vb" />
     <Compile Include="CodeFolder\Agent_Properties.vb" />
     <Compile Include="CodeFolder\APIOrder.vb" />
@@ -1474,6 +1481,7 @@
     <Content Include="AutoDialer\Twiml.aspx" />
     <Content Include="BingViewMap.aspx" />
     <Content Include="CallBackServices.asmx" />
+    <Content Include="Chat\ChatDefault.aspx" />
     <Content Include="Chat\index.html" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker3.css" />
@@ -1578,6 +1586,7 @@
     <Content Include="images\Create.png" />
     <Content Include="images\Dead.png" />
     <Content Include="images\dead_lead_icon.png" />
+    <Content Include="images\delete.png" />
     <Content Include="images\demo_logo.png" />
     <Content Include="images\door_knocks.jpg" />
     <Content Include="images\door_knocks.png" />
@@ -2706,6 +2715,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TLOPersonSearchOutput.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\DataAPI\Reference.svcmap">

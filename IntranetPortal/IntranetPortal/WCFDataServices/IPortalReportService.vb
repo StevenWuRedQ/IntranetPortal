@@ -1,6 +1,7 @@
 ﻿Imports System.ServiceModel
 Imports System.ServiceModel.Web
 Imports IntranetPortal.CallTrackingService
+Imports System.ServiceModel.Activation
 
 ' NOTE: You can use the "Rename" command on the context menu to change the interface name "IPortalReportService" in both code and config file together.
 <ServiceContract()>

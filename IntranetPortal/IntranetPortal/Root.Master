@@ -1,4 +1,4 @@
-<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Root.master.vb" Inherits="IntranetPortal.Root" %>
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Root.master.vb" Inherits="IntranetPortal.Root" %>
 
 <%@ Import Namespace="System.ComponentModel" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
@@ -48,30 +48,51 @@
                 return str.indexOf(suffix, str.length - suffix.length) !== -1;
             }
 
-            function ShowChatWindow() {
-                var ctrId = 'divChat';
-                var userName = '<%= Page.User.Identity.Name%>';
-        //        <div id="divChat" class="info message" style="bottom: -300px; right: 25px">
-        //    <iframe id="MapContent" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="/chat/index.html"></iframe>
-        //</div>
-                var div = '<div id="' + ctrId + '"  rel="0" style="bottom: -300px; right: 25px; position: fixed; width: 300px;">' +
-                       '<div class="header">' +
+            var ctrId = 'divChat';
+            function ShowChatWindow() {             
+                var tmp = $('#' + ctrId);
+                if (tmp.is('div')) {
+                    tmp.fadeIn();
+                    var bottom = tmp.css("bottom");
+                    if (bottom == "-500px")
+                    {
+                        tmp.animate({ bottom: "25" }, 500);
+                    }
+
+                    return;
+                }
+                else {
+                    LoadChatWindow(true);
+                }
+            }
+
+            function LoadChatWindow(visible) {
+               
+                var dateMark = (new Date()).toJSON();
+                var div = '<div id="' + ctrId + '"  rel="0"  style="bottom: -500px; right: 25px; position: fixed; width: 565px; height:390px;background-color:white;box-shadow: 10px 10px 5px #888888;">' +
+                    '<div class="header" style="position:fixed;width:550px;background-color:transparent;line-height:35px;">' +
                           '<div  style="float:right;">' +
                               '<img id="imgDelete"  style="cursor:pointer;" src="/Images/delete.png"/>' +
                            '</div>' +
-
-                           '<span class="selText" rel="0">' + userName + '</span>' +
+                           '<span class="selText" rel="0"></span>' +
                        '</div>' +
-                       '<iframe id="MapContent" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="/chat/index.html"></iframe>' +                  
+                       '<iframe id="MapContent" width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="/chat/ChatDefault.aspx?t=' + dateMark + '"></iframe>' +
                     '</div>';
                 $div = $(div);
                 $('#divMsgTest').parent().append($div);
-                //$div.draggable({
-                //    handle: ".header",
-                //    stop: function () {
-                //    }
-                //});
-                $div.animate({ bottom: "25" }, 500);
+                $div.draggable({
+                    handle: ".header",
+                    stop: function () {
+                    }
+                });
+
+                $div.find('#imgDelete').click(function () {
+                    $('#' + ctrId).hide();
+                });
+
+                if (visible) {
+                    $div.animate({ bottom: "25" }, 500);
+                }     
             }
         </script>
         <dx:ASPxSplitter ID="MainSplitter" runat="server" Height="100%" Width="100%" FullscreenMode="True" ShowCollapseBackwardButton="true">
@@ -107,7 +128,7 @@
                                             </p>
                                             <p>&copy; 2014 My Ideal Property</p>
                                             <div id="errorMsg" style="color: transparent"></div>
-                                            <input type="button" value="Chat" onclick="ShowChatWindow()" />
+
                                         </footer>
                                     </div>
                                 </dx:SplitterContentControl>
@@ -171,6 +192,7 @@
                                                                     Good  <%=If(DateTime.now.ToString.IndexOf("AM")>0,"morning","afternoon") %>, <span style="font-weight: 900; text-transform: capitalize">
                                                                         <asp:LoginName ID="HeadLoginName" runat="server" />
                                                                     </span>
+                                                                    <i class="fa fa-wechat icon_btn color_black tooltip-examples" onclick="ShowChatWindow()" id="imgChat" style="color: black;" title="Let's Chat"></i>,
                                                                     <%-- <img src="/images/arrow_down.png" />--%>
                                                                     <%--<asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />--%>
                                                                     <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>'>                                                                
@@ -181,6 +203,7 @@
                                                                     </div>
                                                                 </LoggedInTemplate>
                                                             </asp:LoginView>
+
                                                         </td>
                                                         <%----end------%>
                                                     </tr>
@@ -333,8 +356,8 @@
             }
         </style>
 
-        
-        
+
+
         <div id="divMsgTest" class="info message" style="bottom: -300px; right: 25px">
             <div class="msgtitle">
                 <i class="fa fa-envelope with_circle" style="color: white; font-size: 14px; width: 30px; height: 30px; line-height: 30px; text-align: center"></i>&nbsp; New Message
@@ -401,8 +424,9 @@
             <ClientSideEvents Closing="function(){hook();}" />
         </dx:ASPxPopupControl>
     </form>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="/Scripts/js/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="/Scripts/js/jquery.easing.1.3.js"></script>
     <script src="/Scripts/js/jquery.debouncedresize.js"></script>
     <script src="/Scripts/js/jquery.throttledresize.js"></script>
@@ -412,5 +436,15 @@
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="/scripts/stevenjs.js"></script>
+
+    <script>
+        $(function () {
+            setTimeout(
+                function(){                
+                    LoadChatWindow(false);
+                $('#imgChat').css("color", "green");
+            },  1000);            
+        });
+    </script>
 </body>
 </html>

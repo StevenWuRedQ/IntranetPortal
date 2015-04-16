@@ -46536,516 +46536,669 @@ Namespace DataAPI
         End Property
     End Class
     
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
-     System.ServiceModel.ServiceContractAttribute(ConfigurationName:="DataAPI.IWCFMacros")>  _
+    <System.Diagnostics.DebuggerStepThroughAttribute(), _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0"), _
+     System.Runtime.Serialization.DataContractAttribute(Name:="SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result", [Namespace]:="http://schemas.datacontract.org/2004/07/TestComponent_VB"), _
+     System.SerializableAttribute()> _
+    Partial Public Class SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result
+        Inherits Object
+        Implements System.Runtime.Serialization.IExtensibleDataObject
+
+        <System.NonSerializedAttribute()> _
+        Private extensionDataField As System.Runtime.Serialization.ExtensionDataObject
+
+        <System.Runtime.Serialization.OptionalFieldAttribute()> _
+        Private AddressField As String
+
+        <System.Runtime.Serialization.OptionalFieldAttribute()> _
+        Private BBLEField As String
+
+        <System.Runtime.Serialization.OptionalFieldAttribute()> _
+        Private BlockField As String
+
+        <System.Runtime.Serialization.OptionalFieldAttribute()> _
+        Private BoroNumField As String
+
+        <System.Runtime.Serialization.OptionalFieldAttribute()> _
+        Private BoroughField As String
+
+        <System.Runtime.Serialization.OptionalFieldAttribute()> _
+        Private LienTotalField As System.Nullable(Of Double)
+
+        <System.Runtime.Serialization.OptionalFieldAttribute()> _
+        Private LotField As String
+
+        <System.Runtime.Serialization.OptionalFieldAttribute()> _
+        Private OwnerField As String
+
+        <System.Runtime.Serialization.OptionalFieldAttribute()> _
+        Private YearField As Double
+
+        <Global.System.ComponentModel.BrowsableAttribute(False)> _
+        Public Property ExtensionData() As System.Runtime.Serialization.ExtensionDataObject Implements System.Runtime.Serialization.IExtensibleDataObject.ExtensionData
+            Get
+                Return Me.extensionDataField
+            End Get
+            Set(value As System.Runtime.Serialization.ExtensionDataObject)
+                Me.extensionDataField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute()> _
+        Public Property Address() As String
+            Get
+                Return Me.AddressField
+            End Get
+            Set(value As String)
+                Me.AddressField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute()> _
+        Public Property BBLE() As String
+            Get
+                Return Me.BBLEField
+            End Get
+            Set(value As String)
+                Me.BBLEField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute()> _
+        Public Property Block() As String
+            Get
+                Return Me.BlockField
+            End Get
+            Set(value As String)
+                Me.BlockField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute()> _
+        Public Property BoroNum() As String
+            Get
+                Return Me.BoroNumField
+            End Get
+            Set(value As String)
+                Me.BoroNumField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute()> _
+        Public Property Borough() As String
+            Get
+                Return Me.BoroughField
+            End Get
+            Set(value As String)
+                Me.BoroughField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute()> _
+        Public Property LienTotal() As System.Nullable(Of Double)
+            Get
+                Return Me.LienTotalField
+            End Get
+            Set(value As System.Nullable(Of Double))
+                Me.LienTotalField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute()> _
+        Public Property Lot() As String
+            Get
+                Return Me.LotField
+            End Get
+            Set(value As String)
+                Me.LotField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute()> _
+        Public Property Owner() As String
+            Get
+                Return Me.OwnerField
+            End Get
+            Set(value As String)
+                Me.OwnerField = value
+            End Set
+        End Property
+
+        <System.Runtime.Serialization.DataMemberAttribute()> _
+        Public Property Year() As Double
+            Get
+                Return Me.YearField
+            End Get
+            Set(value As Double)
+                Me.YearField = value
+            End Set
+        End Property
+    End Class
+
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"), _
+     System.ServiceModel.ServiceContractAttribute(ConfigurationName:="DataAPI.IWCFMacros")> _
     Public Interface IWCFMacros
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DoWork", ReplyAction:="http://tempuri.org/IWCFMacros/DoWorkResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DoWork", ReplyAction:="http://tempuri.org/IWCFMacros/DoWorkResponse")> _
         Sub DoWork()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DoWork", ReplyAction:="http://tempuri.org/IWCFMacros/DoWorkResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DoWork", ReplyAction:="http://tempuri.org/IWCFMacros/DoWorkResponse")> _
         Function DoWorkAsync() As System.Threading.Tasks.Task
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DOD_PPO_Get", ReplyAction:="http://tempuri.org/IWCFMacros/DOD_PPO_GetResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DOD_PPO_Get", ReplyAction:="http://tempuri.org/IWCFMacros/DOD_PPO_GetResponse")> _
         Function DOD_PPO_Get(ByVal Request As DataAPI.DOB_PPO_In) As DataAPI.DOB_PPO_out
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DOD_PPO_Get", ReplyAction:="http://tempuri.org/IWCFMacros/DOD_PPO_GetResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/DOD_PPO_Get", ReplyAction:="http://tempuri.org/IWCFMacros/DOD_PPO_GetResponse")> _
         Function DOD_PPO_GetAsync(ByVal Request As DataAPI.DOB_PPO_In) As System.Threading.Tasks.Task(Of DataAPI.DOB_PPO_out)
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_Get", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_GetResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_Get", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_GetResponse")> _
         Function NYC_Prop_tax_Get(ByVal Request As DataAPI.NYC_Prop_tax_In) As DataAPI.NYC_Prop_tax_Out
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_Get", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_GetResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_Get", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Prop_tax_GetResponse")> _
         Function NYC_Prop_tax_GetAsync(ByVal Request As DataAPI.NYC_Prop_tax_In) As System.Threading.Tasks.Task(Of DataAPI.NYC_Prop_tax_Out)
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_WaterSewer_Get", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_WaterSewer_GetResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_WaterSewer_Get", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_WaterSewer_GetResponse")> _
         Function NYC_WaterSewer_Get(ByVal Request As DataAPI.NYC_WaterSewer_In) As DataAPI.NYC_WaterSewer_Out
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_WaterSewer_Get", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_WaterSewer_GetResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_WaterSewer_Get", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_WaterSewer_GetResponse")> _
         Function NYC_WaterSewer_GetAsync(ByVal Request As DataAPI.NYC_WaterSewer_In) As System.Threading.Tasks.Task(Of DataAPI.NYC_WaterSewer_Out)
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Acris_Get", ReplyAction:="http://tempuri.org/IWCFMacros/Acris_GetResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Acris_Get", ReplyAction:="http://tempuri.org/IWCFMacros/Acris_GetResponse")> _
         Function Acris_Get(ByVal Request As DataAPI.Acris_In) As DataAPI.Acris_Out
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Acris_Get", ReplyAction:="http://tempuri.org/IWCFMacros/Acris_GetResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Acris_Get", ReplyAction:="http://tempuri.org/IWCFMacros/Acris_GetResponse")> _
         Function Acris_GetAsync(ByVal Request As DataAPI.Acris_In) As System.Threading.Tasks.Task(Of DataAPI.Acris_Out)
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Streets_lookup", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Streets_lookupResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Streets_lookup", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Streets_lookupResponse")> _
         Function NYC_Streets_lookup(ByVal Boro As String, ByVal FullSet As Boolean, ByVal FistLetter As String) As String()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Streets_lookup", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Streets_lookupResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Streets_lookup", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Streets_lookupResponse")> _
         Function NYC_Streets_lookupAsync(ByVal Boro As String, ByVal FullSet As Boolean, ByVal FistLetter As String) As System.Threading.Tasks.Task(Of String())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Address_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Address_SearchResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Address_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Address_SearchResponse")> _
         Function NYC_Address_Search(ByVal Boro As String, ByVal HouseNumber As String, ByVal ST_NAME As String) As DataAPI.NYC_Assessment_Initial_Search_View()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Address_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Address_SearchResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Address_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Address_SearchResponse")> _
         Function NYC_Address_SearchAsync(ByVal Boro As String, ByVal HouseNumber As String, ByVal ST_NAME As String) As System.Threading.Tasks.Task(Of DataAPI.NYC_Assessment_Initial_Search_View())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Legal_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Legal_SearchResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Legal_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Legal_SearchResponse")> _
         Function NYC_Legal_Search(ByVal Boro As String, ByVal Block As String, ByVal Lot As String) As DataAPI.NYC_Assessment_Initial_Search_View()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Legal_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Legal_SearchResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Legal_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Legal_SearchResponse")> _
         Function NYC_Legal_SearchAsync(ByVal Boro As String, ByVal Block As String, ByVal Lot As String) As System.Threading.Tasks.Task(Of DataAPI.NYC_Assessment_Initial_Search_View())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Owner_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Owner_SearchResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Owner_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Owner_SearchResponse")> _
         Function NYC_Owner_Search(ByVal Boro As String, ByVal OwnerName As String) As DataAPI.NYC_Assessment_Initial_Search_View()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Owner_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Owner_SearchResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Owner_Search", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Owner_SearchResponse")> _
         Function NYC_Owner_SearchAsync(ByVal Boro As String, ByVal OwnerName As String) As System.Threading.Tasks.Task(Of DataAPI.NYC_Assessment_Initial_Search_View())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Assessment_Full", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Assessment_FullResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Assessment_Full", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Assessment_FullResponse")> _
         Function NYC_Assessment_Full(ByVal BBLE As String) As DataAPI.NYC_Assessment()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Assessment_Full", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Assessment_FullResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_Assessment_Full", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_Assessment_FullResponse")> _
         Function NYC_Assessment_FullAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.NYC_Assessment())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLEResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLEResponse")> _
         Function ALL_NYC_Tax_Liens_By_BBLE(ByVal BBLE As String) As DataAPI.ALL_NYC_Tax_Liens_CO_Info()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLEResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/ALL_NYC_Tax_Liens_By_BBLEResponse")> _
         Function ALL_NYC_Tax_Liens_By_BBLEAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.ALL_NYC_Tax_Liens_CO_Info())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/GetPropdata", ReplyAction:="http://tempuri.org/IWCFMacros/GetPropdataResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/GetPropdata", ReplyAction:="http://tempuri.org/IWCFMacros/GetPropdataResponse")> _
         Function GetPropdata(ByVal BBLE As String, ByVal APIorderNum As Integer, ByVal GetAcrisMtgrs As Boolean, ByVal GetTaxBill As Boolean, ByVal GetECBviolations As Boolean, ByVal GetWaterBill As Boolean, ByVal GetZillow As Boolean, ByVal GetTLO As Boolean) As String
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/GetPropdata", ReplyAction:="http://tempuri.org/IWCFMacros/GetPropdataResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/GetPropdata", ReplyAction:="http://tempuri.org/IWCFMacros/GetPropdataResponse")> _
         Function GetPropdataAsync(ByVal BBLE As String, ByVal APIorderNum As Integer, ByVal GetAcrisMtgrs As Boolean, ByVal GetTaxBill As Boolean, ByVal GetECBviolations As Boolean, ByVal GetWaterBill As Boolean, ByVal GetZillow As Boolean, ByVal GetTLO As Boolean) As System.Threading.Tasks.Task(Of String)
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLEResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLEResponse")> _
         Function Zillow_Estimate_By_BBLE(ByVal BBLE As String) As Integer
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLEResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLE", ReplyAction:="http://tempuri.org/IWCFMacros/Zillow_Estimate_By_BBLEResponse")> _
         Function Zillow_Estimate_By_BBLEAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of Integer)
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerName", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerNameResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerName", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerNameResponse")> _
         Function Get_Acris_Latest_OwnerName(ByVal BBLE As String) As DataAPI.Acris_LatestOwner_View()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerName", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerNameResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerName", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_Latest_OwnerNameResponse")> _
         Function Get_Acris_Latest_OwnerNameAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.Acris_LatestOwner_View())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_LisPendens", ReplyAction:="http://tempuri.org/IWCFMacros/Get_LisPendensResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_LisPendens", ReplyAction:="http://tempuri.org/IWCFMacros/Get_LisPendensResponse")> _
         Function Get_LisPendens(ByVal BBLE As String) As DataAPI.LisPen()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_LisPendens", ReplyAction:="http://tempuri.org/IWCFMacros/Get_LisPendensResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_LisPendens", ReplyAction:="http://tempuri.org/IWCFMacros/Get_LisPendensResponse")> _
         Function Get_LisPendensAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.LisPen())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLOResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLOResponse")> _
         Function Get_TLO(ByVal APIorderNum As Integer, ByVal BBLE As String, ByVal PersonName As String, ByVal PersonAddress1 As String, ByVal PersonAddress2 As String, ByVal PersonCity As String, ByVal PersonState As String, ByVal PersonZip As String, ByVal PersonCountry As String, ByVal Subject_Type As String, ByVal PersonPhone As String) As DataAPI.TLO_SuperPhoneResults()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLOResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLOResponse")> _
         Function Get_TLOAsync(ByVal APIorderNum As Integer, ByVal BBLE As String, ByVal PersonName As String, ByVal PersonAddress1 As String, ByVal PersonAddress2 As String, ByVal PersonCity As String, ByVal PersonState As String, ByVal PersonZip As String, ByVal PersonCountry As String, ByVal Subject_Type As String, ByVal PersonPhone As String) As System.Threading.Tasks.Task(Of DataAPI.TLO_SuperPhoneResults())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_LocateReport", ReplyAction:="http://tempuri.org/IWCFMacros/Get_LocateReportResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_LocateReport", ReplyAction:="http://tempuri.org/IWCFMacros/Get_LocateReportResponse")> _
         Function Get_LocateReport(ByVal APIorderNum As Integer, ByVal BBLE As String, ByVal PersonName As String, ByVal PersonAddress1 As String, ByVal PersonAddress2 As String, ByVal PersonCity As String, ByVal PersonState As String, ByVal PersonZip As String, ByVal PersonCountry As String, ByVal Subject_Type As String, ByVal PersonPhone As String) As DataAPI.TLOLocateReportOutput
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_LocateReport", ReplyAction:="http://tempuri.org/IWCFMacros/Get_LocateReportResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_LocateReport", ReplyAction:="http://tempuri.org/IWCFMacros/Get_LocateReportResponse")> _
         Function Get_LocateReportAsync(ByVal APIorderNum As Integer, ByVal BBLE As String, ByVal PersonName As String, ByVal PersonAddress1 As String, ByVal PersonAddress2 As String, ByVal PersonCity As String, ByVal PersonState As String, ByVal PersonZip As String, ByVal PersonCountry As String, ByVal Subject_Type As String, ByVal PersonPhone As String) As System.Threading.Tasks.Task(Of DataAPI.TLOLocateReportOutput)
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Acris_Get_LatestSale", ReplyAction:="http://tempuri.org/IWCFMacros/Acris_Get_LatestSaleResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Acris_Get_LatestSale", ReplyAction:="http://tempuri.org/IWCFMacros/Acris_Get_LatestSaleResponse")> _
         Function Acris_Get_LatestSale(ByVal APIorderNum As Integer, ByVal BBLE As String) As DataAPI.Acris_Last_Sales_Info
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Acris_Get_LatestSale", ReplyAction:="http://tempuri.org/IWCFMacros/Acris_Get_LatestSaleResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Acris_Get_LatestSale", ReplyAction:="http://tempuri.org/IWCFMacros/Acris_Get_LatestSaleResponse")> _
         Function Acris_Get_LatestSaleAsync(ByVal APIorderNum As Integer, ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.Acris_Last_Sales_Info)
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_NameAndAddress", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_NameAndAddressResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_NameAndAddress", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_NameAndAddressResponse")> _
         Function NYC_NameAndAddress(ByVal BBLE As String) As DataAPI.NYC_NameAndAddress_View()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_NameAndAddress", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_NameAndAddressResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/NYC_NameAndAddress", ReplyAction:="http://tempuri.org/IWCFMacros/NYC_NameAndAddressResponse")> _
         Function NYC_NameAndAddressAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.NYC_NameAndAddress_View())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLienResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLienResponse")> _
         Function Get_Acris_TaxLien(ByVal BBLE As String) As DataAPI.TaxLien_Info
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLienResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_Acris_TaxLienResponse")> _
         Function Get_Acris_TaxLienAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.TaxLien_Info)
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Servicer", ReplyAction:="http://tempuri.org/IWCFMacros/Get_ServicerResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Servicer", ReplyAction:="http://tempuri.org/IWCFMacros/Get_ServicerResponse")> _
         Function Get_Servicer(ByVal APIorderNum As Integer, ByVal BBLE As String) As String
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Servicer", ReplyAction:="http://tempuri.org/IWCFMacros/Get_ServicerResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_Servicer", ReplyAction:="http://tempuri.org/IWCFMacros/Get_ServicerResponse")> _
         Function Get_ServicerAsync(ByVal APIorderNum As Integer, ByVal BBLE As String) As System.Threading.Tasks.Task(Of String)
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Requests_Waiting", ReplyAction:="http://tempuri.org/IWCFMacros/Requests_WaitingResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Requests_Waiting", ReplyAction:="http://tempuri.org/IWCFMacros/Requests_WaitingResponse")> _
         Function Requests_Waiting() As Integer
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Requests_Waiting", ReplyAction:="http://tempuri.org/IWCFMacros/Requests_WaitingResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Requests_Waiting", ReplyAction:="http://tempuri.org/IWCFMacros/Requests_WaitingResponse")> _
         Function Requests_WaitingAsync() As System.Threading.Tasks.Task(Of Integer)
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetJugments", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetJugmentsResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetJugments", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetJugmentsResponse")> _
         Function AB_GetJugments(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal CorpName As String, ByVal FirstName As String, ByVal LastName As String, ByVal House_Num As String, ByVal St_Name As String, ByVal SearchType As String) As DataAPI.Judgment()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetJugments", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetJugmentsResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetJugments", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetJugmentsResponse")> _
         Function AB_GetJugmentsAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal CorpName As String, ByVal FirstName As String, ByVal LastName As String, ByVal House_Num As String, ByVal St_Name As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.Judgment())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetBankruptcy", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetBankruptcyResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetBankruptcy", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetBankruptcyResponse")> _
         Function AB_GetBankruptcy(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.Bankruptcy1()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetBankruptcy", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetBankruptcyResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetBankruptcy", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetBankruptcyResponse")> _
         Function AB_GetBankruptcyAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.Bankruptcy1())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomental", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomentalResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomental", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomentalResponse")> _
         Function AB_GetEnvirnomental(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal House_Num As String, ByVal St_Name As String) As DataAPI.ECB()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomental", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomentalResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomental", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetEnvirnomentalResponse")> _
         Function AB_GetEnvirnomentalAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal House_Num As String, ByVal St_Name As String) As System.Threading.Tasks.Task(Of DataAPI.ECB())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetMortDeed", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetMortDeedResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetMortDeed", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetMortDeedResponse")> _
         Function AB_GetMortDeed(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String) As DataAPI.Mortgages_Deeds()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetMortDeed", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetMortDeedResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetMortDeed", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetMortDeedResponse")> _
         Function AB_GetMortDeedAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String) As System.Threading.Tasks.Task(Of DataAPI.Mortgages_Deeds())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLienResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLienResponse")> _
         Function AB_GetFederalTaxLien(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.FederalTaxLien()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLienResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetFederalTaxLienResponse")> _
         Function AB_GetFederalTaxLienAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.FederalTaxLien())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetPatriot", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetPatriotResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetPatriot", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetPatriotResponse")> _
         Function AB_GetPatriot(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.Patriot()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetPatriot", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetPatriotResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetPatriot", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetPatriotResponse")> _
         Function AB_GetPatriotAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.Patriot())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetParkingViolations", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetParkingViolationsResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetParkingViolations", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetParkingViolationsResponse")> _
         Function AB_GetParkingViolations(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.ParkingViolation()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetParkingViolations", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetParkingViolationsResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetParkingViolations", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetParkingViolationsResponse")> _
         Function AB_GetParkingViolationsAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.ParkingViolation())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunction", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunctionResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunction", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunctionResponse")> _
         Function AB_GetTranscriptAdjunction(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String) As DataAPI.TranscriptAdjunction()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunction", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunctionResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunction", ReplyAction:="http://tempuri.org/IWCFMacros/AB_GetTranscriptAdjunctionResponse")> _
         Function AB_GetTranscriptAdjunctionAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String) As System.Threading.Tasks.Task(Of DataAPI.TranscriptAdjunction())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetUcc", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetUccResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetUcc", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetUccResponse")> _
         Function AAbs_GetUcc(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.UCC()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetUcc", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetUccResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetUcc", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetUccResponse")> _
         Function AAbs_GetUccAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.UCC())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepair", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepairResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepair", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepairResponse")> _
         Function AAbs_GetEmergencyRepair(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal HouseNumer As String, ByVal St_Name As String, ByVal SearchType As String) As DataAPI.EmergencyRepair()
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepair", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepairResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepair", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetEmergencyRepairResponse")> _
         Function AAbs_GetEmergencyRepairAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal HouseNumer As String, ByVal St_Name As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.EmergencyRepair())
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReport", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReportResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReport", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReportResponse")> _
         Function AAbs_GetAreAbstractReport(ByVal BBLE As String, ByVal SelectedOwners() As DataAPI.OwnerInfo, ByVal RunJudgement As Boolean, ByVal RunFederalTaxLiens As Boolean, ByVal RunMortgages As Boolean, ByVal RunParkingViolation As Boolean, ByVal RunPatriot As Boolean, ByVal RunUcc As Boolean, ByVal RunBankruptcy As Boolean, ByVal RunECB As Boolean, ByVal RunEmergenyRepairs As Boolean, ByVal RunTransitAdjudication As Boolean, ByVal RunTLO As Boolean, ByVal RetainRecords As Boolean) As DataAPI.AB_Report_Out
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReport", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReportResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReport", ReplyAction:="http://tempuri.org/IWCFMacros/AAbs_GetAreAbstractReportResponse")> _
         Function AAbs_GetAreAbstractReportAsync(ByVal BBLE As String, ByVal SelectedOwners() As DataAPI.OwnerInfo, ByVal RunJudgement As Boolean, ByVal RunFederalTaxLiens As Boolean, ByVal RunMortgages As Boolean, ByVal RunParkingViolation As Boolean, ByVal RunPatriot As Boolean, ByVal RunUcc As Boolean, ByVal RunBankruptcy As Boolean, ByVal RunECB As Boolean, ByVal RunEmergenyRepairs As Boolean, ByVal RunTransitAdjudication As Boolean, ByVal RunTLO As Boolean, ByVal RetainRecords As Boolean) As System.Threading.Tasks.Task(Of DataAPI.AB_Report_Out)
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO_Person", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLO_PersonResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO_Person", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLO_PersonResponse")> _
         Function Get_TLO_Person(ByVal APIorderNum As String, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As DataAPI.TLOPersonSearchOutput
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO_Person", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLO_PersonResponse")>  _
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_TLO_Person", ReplyAction:="http://tempuri.org/IWCFMacros/Get_TLO_PersonResponse")> _
         Function Get_TLO_PersonAsync(ByVal APIorderNum As String, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As System.Threading.Tasks.Task(Of DataAPI.TLOPersonSearchOutput)
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_NYC_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_NYC_TaxLienResponse")> _
+        Function Get_NYC_TaxLien(ByVal BBLE As String, ByVal YEAR As String) As DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result()
+
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/IWCFMacros/Get_NYC_TaxLien", ReplyAction:="http://tempuri.org/IWCFMacros/Get_NYC_TaxLienResponse")> _
+        Function Get_NYC_TaxLienAsync(ByVal BBLE As String, ByVal YEAR As String) As System.Threading.Tasks.Task(Of DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result())
     End Interface
-    
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
+
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")> _
     Public Interface IWCFMacrosChannel
         Inherits DataAPI.IWCFMacros, System.ServiceModel.IClientChannel
     End Interface
-    
-    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
-     System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
+
+    <System.Diagnostics.DebuggerStepThroughAttribute(), _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")> _
     Partial Public Class WCFMacrosClient
         Inherits System.ServiceModel.ClientBase(Of DataAPI.IWCFMacros)
         Implements DataAPI.IWCFMacros
-        
+
         Public Sub New()
-            MyBase.New
+            MyBase.New()
         End Sub
-        
+
         Public Sub New(ByVal endpointConfigurationName As String)
             MyBase.New(endpointConfigurationName)
         End Sub
-        
+
         Public Sub New(ByVal endpointConfigurationName As String, ByVal remoteAddress As String)
             MyBase.New(endpointConfigurationName, remoteAddress)
         End Sub
-        
+
         Public Sub New(ByVal endpointConfigurationName As String, ByVal remoteAddress As System.ServiceModel.EndpointAddress)
             MyBase.New(endpointConfigurationName, remoteAddress)
         End Sub
-        
+
         Public Sub New(ByVal binding As System.ServiceModel.Channels.Binding, ByVal remoteAddress As System.ServiceModel.EndpointAddress)
             MyBase.New(binding, remoteAddress)
         End Sub
-        
+
         Public Sub DoWork() Implements DataAPI.IWCFMacros.DoWork
-            MyBase.Channel.DoWork
+            MyBase.Channel.DoWork()
         End Sub
-        
+
         Public Function DoWorkAsync() As System.Threading.Tasks.Task Implements DataAPI.IWCFMacros.DoWorkAsync
             Return MyBase.Channel.DoWorkAsync
         End Function
-        
+
         Public Function DOD_PPO_Get(ByVal Request As DataAPI.DOB_PPO_In) As DataAPI.DOB_PPO_out Implements DataAPI.IWCFMacros.DOD_PPO_Get
             Return MyBase.Channel.DOD_PPO_Get(Request)
         End Function
-        
+
         Public Function DOD_PPO_GetAsync(ByVal Request As DataAPI.DOB_PPO_In) As System.Threading.Tasks.Task(Of DataAPI.DOB_PPO_out) Implements DataAPI.IWCFMacros.DOD_PPO_GetAsync
             Return MyBase.Channel.DOD_PPO_GetAsync(Request)
         End Function
-        
+
         Public Function NYC_Prop_tax_Get(ByVal Request As DataAPI.NYC_Prop_tax_In) As DataAPI.NYC_Prop_tax_Out Implements DataAPI.IWCFMacros.NYC_Prop_tax_Get
             Return MyBase.Channel.NYC_Prop_tax_Get(Request)
         End Function
-        
+
         Public Function NYC_Prop_tax_GetAsync(ByVal Request As DataAPI.NYC_Prop_tax_In) As System.Threading.Tasks.Task(Of DataAPI.NYC_Prop_tax_Out) Implements DataAPI.IWCFMacros.NYC_Prop_tax_GetAsync
             Return MyBase.Channel.NYC_Prop_tax_GetAsync(Request)
         End Function
-        
+
         Public Function NYC_WaterSewer_Get(ByVal Request As DataAPI.NYC_WaterSewer_In) As DataAPI.NYC_WaterSewer_Out Implements DataAPI.IWCFMacros.NYC_WaterSewer_Get
             Return MyBase.Channel.NYC_WaterSewer_Get(Request)
         End Function
-        
+
         Public Function NYC_WaterSewer_GetAsync(ByVal Request As DataAPI.NYC_WaterSewer_In) As System.Threading.Tasks.Task(Of DataAPI.NYC_WaterSewer_Out) Implements DataAPI.IWCFMacros.NYC_WaterSewer_GetAsync
             Return MyBase.Channel.NYC_WaterSewer_GetAsync(Request)
         End Function
-        
+
         Public Function Acris_Get(ByVal Request As DataAPI.Acris_In) As DataAPI.Acris_Out Implements DataAPI.IWCFMacros.Acris_Get
             Return MyBase.Channel.Acris_Get(Request)
         End Function
-        
+
         Public Function Acris_GetAsync(ByVal Request As DataAPI.Acris_In) As System.Threading.Tasks.Task(Of DataAPI.Acris_Out) Implements DataAPI.IWCFMacros.Acris_GetAsync
             Return MyBase.Channel.Acris_GetAsync(Request)
         End Function
-        
+
         Public Function NYC_Streets_lookup(ByVal Boro As String, ByVal FullSet As Boolean, ByVal FistLetter As String) As String() Implements DataAPI.IWCFMacros.NYC_Streets_lookup
             Return MyBase.Channel.NYC_Streets_lookup(Boro, FullSet, FistLetter)
         End Function
-        
+
         Public Function NYC_Streets_lookupAsync(ByVal Boro As String, ByVal FullSet As Boolean, ByVal FistLetter As String) As System.Threading.Tasks.Task(Of String()) Implements DataAPI.IWCFMacros.NYC_Streets_lookupAsync
             Return MyBase.Channel.NYC_Streets_lookupAsync(Boro, FullSet, FistLetter)
         End Function
-        
+
         Public Function NYC_Address_Search(ByVal Boro As String, ByVal HouseNumber As String, ByVal ST_NAME As String) As DataAPI.NYC_Assessment_Initial_Search_View() Implements DataAPI.IWCFMacros.NYC_Address_Search
             Return MyBase.Channel.NYC_Address_Search(Boro, HouseNumber, ST_NAME)
         End Function
-        
+
         Public Function NYC_Address_SearchAsync(ByVal Boro As String, ByVal HouseNumber As String, ByVal ST_NAME As String) As System.Threading.Tasks.Task(Of DataAPI.NYC_Assessment_Initial_Search_View()) Implements DataAPI.IWCFMacros.NYC_Address_SearchAsync
             Return MyBase.Channel.NYC_Address_SearchAsync(Boro, HouseNumber, ST_NAME)
         End Function
-        
+
         Public Function NYC_Legal_Search(ByVal Boro As String, ByVal Block As String, ByVal Lot As String) As DataAPI.NYC_Assessment_Initial_Search_View() Implements DataAPI.IWCFMacros.NYC_Legal_Search
             Return MyBase.Channel.NYC_Legal_Search(Boro, Block, Lot)
         End Function
-        
+
         Public Function NYC_Legal_SearchAsync(ByVal Boro As String, ByVal Block As String, ByVal Lot As String) As System.Threading.Tasks.Task(Of DataAPI.NYC_Assessment_Initial_Search_View()) Implements DataAPI.IWCFMacros.NYC_Legal_SearchAsync
             Return MyBase.Channel.NYC_Legal_SearchAsync(Boro, Block, Lot)
         End Function
-        
+
         Public Function NYC_Owner_Search(ByVal Boro As String, ByVal OwnerName As String) As DataAPI.NYC_Assessment_Initial_Search_View() Implements DataAPI.IWCFMacros.NYC_Owner_Search
             Return MyBase.Channel.NYC_Owner_Search(Boro, OwnerName)
         End Function
-        
+
         Public Function NYC_Owner_SearchAsync(ByVal Boro As String, ByVal OwnerName As String) As System.Threading.Tasks.Task(Of DataAPI.NYC_Assessment_Initial_Search_View()) Implements DataAPI.IWCFMacros.NYC_Owner_SearchAsync
             Return MyBase.Channel.NYC_Owner_SearchAsync(Boro, OwnerName)
         End Function
-        
+
         Public Function NYC_Assessment_Full(ByVal BBLE As String) As DataAPI.NYC_Assessment() Implements DataAPI.IWCFMacros.NYC_Assessment_Full
             Return MyBase.Channel.NYC_Assessment_Full(BBLE)
         End Function
-        
+
         Public Function NYC_Assessment_FullAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.NYC_Assessment()) Implements DataAPI.IWCFMacros.NYC_Assessment_FullAsync
             Return MyBase.Channel.NYC_Assessment_FullAsync(BBLE)
         End Function
-        
+
         Public Function ALL_NYC_Tax_Liens_By_BBLE(ByVal BBLE As String) As DataAPI.ALL_NYC_Tax_Liens_CO_Info() Implements DataAPI.IWCFMacros.ALL_NYC_Tax_Liens_By_BBLE
             Return MyBase.Channel.ALL_NYC_Tax_Liens_By_BBLE(BBLE)
         End Function
-        
+
         Public Function ALL_NYC_Tax_Liens_By_BBLEAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.ALL_NYC_Tax_Liens_CO_Info()) Implements DataAPI.IWCFMacros.ALL_NYC_Tax_Liens_By_BBLEAsync
             Return MyBase.Channel.ALL_NYC_Tax_Liens_By_BBLEAsync(BBLE)
         End Function
-        
+
         Public Function GetPropdata(ByVal BBLE As String, ByVal APIorderNum As Integer, ByVal GetAcrisMtgrs As Boolean, ByVal GetTaxBill As Boolean, ByVal GetECBviolations As Boolean, ByVal GetWaterBill As Boolean, ByVal GetZillow As Boolean, ByVal GetTLO As Boolean) As String Implements DataAPI.IWCFMacros.GetPropdata
             Return MyBase.Channel.GetPropdata(BBLE, APIorderNum, GetAcrisMtgrs, GetTaxBill, GetECBviolations, GetWaterBill, GetZillow, GetTLO)
         End Function
-        
+
         Public Function GetPropdataAsync(ByVal BBLE As String, ByVal APIorderNum As Integer, ByVal GetAcrisMtgrs As Boolean, ByVal GetTaxBill As Boolean, ByVal GetECBviolations As Boolean, ByVal GetWaterBill As Boolean, ByVal GetZillow As Boolean, ByVal GetTLO As Boolean) As System.Threading.Tasks.Task(Of String) Implements DataAPI.IWCFMacros.GetPropdataAsync
             Return MyBase.Channel.GetPropdataAsync(BBLE, APIorderNum, GetAcrisMtgrs, GetTaxBill, GetECBviolations, GetWaterBill, GetZillow, GetTLO)
         End Function
-        
+
         Public Function Zillow_Estimate_By_BBLE(ByVal BBLE As String) As Integer Implements DataAPI.IWCFMacros.Zillow_Estimate_By_BBLE
             Return MyBase.Channel.Zillow_Estimate_By_BBLE(BBLE)
         End Function
-        
+
         Public Function Zillow_Estimate_By_BBLEAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of Integer) Implements DataAPI.IWCFMacros.Zillow_Estimate_By_BBLEAsync
             Return MyBase.Channel.Zillow_Estimate_By_BBLEAsync(BBLE)
         End Function
-        
+
         Public Function Get_Acris_Latest_OwnerName(ByVal BBLE As String) As DataAPI.Acris_LatestOwner_View() Implements DataAPI.IWCFMacros.Get_Acris_Latest_OwnerName
             Return MyBase.Channel.Get_Acris_Latest_OwnerName(BBLE)
         End Function
-        
+
         Public Function Get_Acris_Latest_OwnerNameAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.Acris_LatestOwner_View()) Implements DataAPI.IWCFMacros.Get_Acris_Latest_OwnerNameAsync
             Return MyBase.Channel.Get_Acris_Latest_OwnerNameAsync(BBLE)
         End Function
-        
+
         Public Function Get_LisPendens(ByVal BBLE As String) As DataAPI.LisPen() Implements DataAPI.IWCFMacros.Get_LisPendens
             Return MyBase.Channel.Get_LisPendens(BBLE)
         End Function
-        
+
         Public Function Get_LisPendensAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.LisPen()) Implements DataAPI.IWCFMacros.Get_LisPendensAsync
             Return MyBase.Channel.Get_LisPendensAsync(BBLE)
         End Function
-        
+
         Public Function Get_TLO(ByVal APIorderNum As Integer, ByVal BBLE As String, ByVal PersonName As String, ByVal PersonAddress1 As String, ByVal PersonAddress2 As String, ByVal PersonCity As String, ByVal PersonState As String, ByVal PersonZip As String, ByVal PersonCountry As String, ByVal Subject_Type As String, ByVal PersonPhone As String) As DataAPI.TLO_SuperPhoneResults() Implements DataAPI.IWCFMacros.Get_TLO
             Return MyBase.Channel.Get_TLO(APIorderNum, BBLE, PersonName, PersonAddress1, PersonAddress2, PersonCity, PersonState, PersonZip, PersonCountry, Subject_Type, PersonPhone)
         End Function
-        
+
         Public Function Get_TLOAsync(ByVal APIorderNum As Integer, ByVal BBLE As String, ByVal PersonName As String, ByVal PersonAddress1 As String, ByVal PersonAddress2 As String, ByVal PersonCity As String, ByVal PersonState As String, ByVal PersonZip As String, ByVal PersonCountry As String, ByVal Subject_Type As String, ByVal PersonPhone As String) As System.Threading.Tasks.Task(Of DataAPI.TLO_SuperPhoneResults()) Implements DataAPI.IWCFMacros.Get_TLOAsync
             Return MyBase.Channel.Get_TLOAsync(APIorderNum, BBLE, PersonName, PersonAddress1, PersonAddress2, PersonCity, PersonState, PersonZip, PersonCountry, Subject_Type, PersonPhone)
         End Function
-        
+
         Public Function Get_LocateReport(ByVal APIorderNum As Integer, ByVal BBLE As String, ByVal PersonName As String, ByVal PersonAddress1 As String, ByVal PersonAddress2 As String, ByVal PersonCity As String, ByVal PersonState As String, ByVal PersonZip As String, ByVal PersonCountry As String, ByVal Subject_Type As String, ByVal PersonPhone As String) As DataAPI.TLOLocateReportOutput Implements DataAPI.IWCFMacros.Get_LocateReport
             Return MyBase.Channel.Get_LocateReport(APIorderNum, BBLE, PersonName, PersonAddress1, PersonAddress2, PersonCity, PersonState, PersonZip, PersonCountry, Subject_Type, PersonPhone)
         End Function
-        
+
         Public Function Get_LocateReportAsync(ByVal APIorderNum As Integer, ByVal BBLE As String, ByVal PersonName As String, ByVal PersonAddress1 As String, ByVal PersonAddress2 As String, ByVal PersonCity As String, ByVal PersonState As String, ByVal PersonZip As String, ByVal PersonCountry As String, ByVal Subject_Type As String, ByVal PersonPhone As String) As System.Threading.Tasks.Task(Of DataAPI.TLOLocateReportOutput) Implements DataAPI.IWCFMacros.Get_LocateReportAsync
             Return MyBase.Channel.Get_LocateReportAsync(APIorderNum, BBLE, PersonName, PersonAddress1, PersonAddress2, PersonCity, PersonState, PersonZip, PersonCountry, Subject_Type, PersonPhone)
         End Function
-        
+
         Public Function Acris_Get_LatestSale(ByVal APIorderNum As Integer, ByVal BBLE As String) As DataAPI.Acris_Last_Sales_Info Implements DataAPI.IWCFMacros.Acris_Get_LatestSale
             Return MyBase.Channel.Acris_Get_LatestSale(APIorderNum, BBLE)
         End Function
-        
+
         Public Function Acris_Get_LatestSaleAsync(ByVal APIorderNum As Integer, ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.Acris_Last_Sales_Info) Implements DataAPI.IWCFMacros.Acris_Get_LatestSaleAsync
             Return MyBase.Channel.Acris_Get_LatestSaleAsync(APIorderNum, BBLE)
         End Function
-        
+
         Public Function NYC_NameAndAddress(ByVal BBLE As String) As DataAPI.NYC_NameAndAddress_View() Implements DataAPI.IWCFMacros.NYC_NameAndAddress
             Return MyBase.Channel.NYC_NameAndAddress(BBLE)
         End Function
-        
+
         Public Function NYC_NameAndAddressAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.NYC_NameAndAddress_View()) Implements DataAPI.IWCFMacros.NYC_NameAndAddressAsync
             Return MyBase.Channel.NYC_NameAndAddressAsync(BBLE)
         End Function
-        
+
         Public Function Get_Acris_TaxLien(ByVal BBLE As String) As DataAPI.TaxLien_Info Implements DataAPI.IWCFMacros.Get_Acris_TaxLien
             Return MyBase.Channel.Get_Acris_TaxLien(BBLE)
         End Function
-        
+
         Public Function Get_Acris_TaxLienAsync(ByVal BBLE As String) As System.Threading.Tasks.Task(Of DataAPI.TaxLien_Info) Implements DataAPI.IWCFMacros.Get_Acris_TaxLienAsync
             Return MyBase.Channel.Get_Acris_TaxLienAsync(BBLE)
         End Function
-        
+
         Public Function Get_Servicer(ByVal APIorderNum As Integer, ByVal BBLE As String) As String Implements DataAPI.IWCFMacros.Get_Servicer
             Return MyBase.Channel.Get_Servicer(APIorderNum, BBLE)
         End Function
-        
+
         Public Function Get_ServicerAsync(ByVal APIorderNum As Integer, ByVal BBLE As String) As System.Threading.Tasks.Task(Of String) Implements DataAPI.IWCFMacros.Get_ServicerAsync
             Return MyBase.Channel.Get_ServicerAsync(APIorderNum, BBLE)
         End Function
-        
+
         Public Function Requests_Waiting() As Integer Implements DataAPI.IWCFMacros.Requests_Waiting
             Return MyBase.Channel.Requests_Waiting
         End Function
-        
+
         Public Function Requests_WaitingAsync() As System.Threading.Tasks.Task(Of Integer) Implements DataAPI.IWCFMacros.Requests_WaitingAsync
             Return MyBase.Channel.Requests_WaitingAsync
         End Function
-        
+
         Public Function AB_GetJugments(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal CorpName As String, ByVal FirstName As String, ByVal LastName As String, ByVal House_Num As String, ByVal St_Name As String, ByVal SearchType As String) As DataAPI.Judgment() Implements DataAPI.IWCFMacros.AB_GetJugments
             Return MyBase.Channel.AB_GetJugments(JobTitle, County, Start_Date, End_Date, Block, Lot, CorpName, FirstName, LastName, House_Num, St_Name, SearchType)
         End Function
-        
+
         Public Function AB_GetJugmentsAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal CorpName As String, ByVal FirstName As String, ByVal LastName As String, ByVal House_Num As String, ByVal St_Name As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.Judgment()) Implements DataAPI.IWCFMacros.AB_GetJugmentsAsync
             Return MyBase.Channel.AB_GetJugmentsAsync(JobTitle, County, Start_Date, End_Date, Block, Lot, CorpName, FirstName, LastName, House_Num, St_Name, SearchType)
         End Function
-        
+
         Public Function AB_GetBankruptcy(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.Bankruptcy1() Implements DataAPI.IWCFMacros.AB_GetBankruptcy
             Return MyBase.Channel.AB_GetBankruptcy(JobTitle, County, Start_Date, End_Date, LastName, FirstName, CorpName, SearchType)
         End Function
-        
+
         Public Function AB_GetBankruptcyAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.Bankruptcy1()) Implements DataAPI.IWCFMacros.AB_GetBankruptcyAsync
             Return MyBase.Channel.AB_GetBankruptcyAsync(JobTitle, County, Start_Date, End_Date, LastName, FirstName, CorpName, SearchType)
         End Function
-        
+
         Public Function AB_GetEnvirnomental(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal House_Num As String, ByVal St_Name As String) As DataAPI.ECB() Implements DataAPI.IWCFMacros.AB_GetEnvirnomental
             Return MyBase.Channel.AB_GetEnvirnomental(JobTitle, County, Start_Date, End_Date, House_Num, St_Name)
         End Function
-        
+
         Public Function AB_GetEnvirnomentalAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal House_Num As String, ByVal St_Name As String) As System.Threading.Tasks.Task(Of DataAPI.ECB()) Implements DataAPI.IWCFMacros.AB_GetEnvirnomentalAsync
             Return MyBase.Channel.AB_GetEnvirnomentalAsync(JobTitle, County, Start_Date, End_Date, House_Num, St_Name)
         End Function
-        
+
         Public Function AB_GetMortDeed(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String) As DataAPI.Mortgages_Deeds() Implements DataAPI.IWCFMacros.AB_GetMortDeed
             Return MyBase.Channel.AB_GetMortDeed(JobTitle, County, Start_Date, End_Date, Block, Lot)
         End Function
-        
+
         Public Function AB_GetMortDeedAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String) As System.Threading.Tasks.Task(Of DataAPI.Mortgages_Deeds()) Implements DataAPI.IWCFMacros.AB_GetMortDeedAsync
             Return MyBase.Channel.AB_GetMortDeedAsync(JobTitle, County, Start_Date, End_Date, Block, Lot)
         End Function
-        
+
         Public Function AB_GetFederalTaxLien(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.FederalTaxLien() Implements DataAPI.IWCFMacros.AB_GetFederalTaxLien
             Return MyBase.Channel.AB_GetFederalTaxLien(JobTitle, County, Start_Date, End_Date, Block, Lot, LastName, FirstName, CorpName, SearchType)
         End Function
-        
+
         Public Function AB_GetFederalTaxLienAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.FederalTaxLien()) Implements DataAPI.IWCFMacros.AB_GetFederalTaxLienAsync
             Return MyBase.Channel.AB_GetFederalTaxLienAsync(JobTitle, County, Start_Date, End_Date, Block, Lot, LastName, FirstName, CorpName, SearchType)
         End Function
-        
+
         Public Function AB_GetPatriot(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.Patriot() Implements DataAPI.IWCFMacros.AB_GetPatriot
             Return MyBase.Channel.AB_GetPatriot(JobTitle, County, Start_Date, End_Date, LastName, FirstName, CorpName, SearchType)
         End Function
-        
+
         Public Function AB_GetPatriotAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.Patriot()) Implements DataAPI.IWCFMacros.AB_GetPatriotAsync
             Return MyBase.Channel.AB_GetPatriotAsync(JobTitle, County, Start_Date, End_Date, LastName, FirstName, CorpName, SearchType)
         End Function
-        
+
         Public Function AB_GetParkingViolations(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.ParkingViolation() Implements DataAPI.IWCFMacros.AB_GetParkingViolations
             Return MyBase.Channel.AB_GetParkingViolations(JobTitle, County, Start_Date, End_Date, LastName, FirstName, CorpName, SearchType)
         End Function
-        
+
         Public Function AB_GetParkingViolationsAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.ParkingViolation()) Implements DataAPI.IWCFMacros.AB_GetParkingViolationsAsync
             Return MyBase.Channel.AB_GetParkingViolationsAsync(JobTitle, County, Start_Date, End_Date, LastName, FirstName, CorpName, SearchType)
         End Function
-        
+
         Public Function AB_GetTranscriptAdjunction(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String) As DataAPI.TranscriptAdjunction() Implements DataAPI.IWCFMacros.AB_GetTranscriptAdjunction
             Return MyBase.Channel.AB_GetTranscriptAdjunction(JobTitle, County, Start_Date, End_Date, LastName, FirstName)
         End Function
-        
+
         Public Function AB_GetTranscriptAdjunctionAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal LastName As String, ByVal FirstName As String) As System.Threading.Tasks.Task(Of DataAPI.TranscriptAdjunction()) Implements DataAPI.IWCFMacros.AB_GetTranscriptAdjunctionAsync
             Return MyBase.Channel.AB_GetTranscriptAdjunctionAsync(JobTitle, County, Start_Date, End_Date, LastName, FirstName)
         End Function
-        
+
         Public Function AAbs_GetUcc(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As DataAPI.UCC() Implements DataAPI.IWCFMacros.AAbs_GetUcc
             Return MyBase.Channel.AAbs_GetUcc(JobTitle, County, Start_Date, End_Date, Block, Lot, LastName, FirstName, CorpName, SearchType)
         End Function
-        
+
         Public Function AAbs_GetUccAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal LastName As String, ByVal FirstName As String, ByVal CorpName As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.UCC()) Implements DataAPI.IWCFMacros.AAbs_GetUccAsync
             Return MyBase.Channel.AAbs_GetUccAsync(JobTitle, County, Start_Date, End_Date, Block, Lot, LastName, FirstName, CorpName, SearchType)
         End Function
-        
+
         Public Function AAbs_GetEmergencyRepair(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal HouseNumer As String, ByVal St_Name As String, ByVal SearchType As String) As DataAPI.EmergencyRepair() Implements DataAPI.IWCFMacros.AAbs_GetEmergencyRepair
             Return MyBase.Channel.AAbs_GetEmergencyRepair(JobTitle, County, Start_Date, End_Date, Block, Lot, HouseNumer, St_Name, SearchType)
         End Function
-        
+
         Public Function AAbs_GetEmergencyRepairAsync(ByVal JobTitle As String, ByVal County As String, ByVal Start_Date As String, ByVal End_Date As String, ByVal Block As String, ByVal Lot As String, ByVal HouseNumer As String, ByVal St_Name As String, ByVal SearchType As String) As System.Threading.Tasks.Task(Of DataAPI.EmergencyRepair()) Implements DataAPI.IWCFMacros.AAbs_GetEmergencyRepairAsync
             Return MyBase.Channel.AAbs_GetEmergencyRepairAsync(JobTitle, County, Start_Date, End_Date, Block, Lot, HouseNumer, St_Name, SearchType)
         End Function
-        
+
         Public Function AAbs_GetAreAbstractReport(ByVal BBLE As String, ByVal SelectedOwners() As DataAPI.OwnerInfo, ByVal RunJudgement As Boolean, ByVal RunFederalTaxLiens As Boolean, ByVal RunMortgages As Boolean, ByVal RunParkingViolation As Boolean, ByVal RunPatriot As Boolean, ByVal RunUcc As Boolean, ByVal RunBankruptcy As Boolean, ByVal RunECB As Boolean, ByVal RunEmergenyRepairs As Boolean, ByVal RunTransitAdjudication As Boolean, ByVal RunTLO As Boolean, ByVal RetainRecords As Boolean) As DataAPI.AB_Report_Out Implements DataAPI.IWCFMacros.AAbs_GetAreAbstractReport
             Return MyBase.Channel.AAbs_GetAreAbstractReport(BBLE, SelectedOwners, RunJudgement, RunFederalTaxLiens, RunMortgages, RunParkingViolation, RunPatriot, RunUcc, RunBankruptcy, RunECB, RunEmergenyRepairs, RunTransitAdjudication, RunTLO, RetainRecords)
         End Function
-        
+
         Public Function AAbs_GetAreAbstractReportAsync(ByVal BBLE As String, ByVal SelectedOwners() As DataAPI.OwnerInfo, ByVal RunJudgement As Boolean, ByVal RunFederalTaxLiens As Boolean, ByVal RunMortgages As Boolean, ByVal RunParkingViolation As Boolean, ByVal RunPatriot As Boolean, ByVal RunUcc As Boolean, ByVal RunBankruptcy As Boolean, ByVal RunECB As Boolean, ByVal RunEmergenyRepairs As Boolean, ByVal RunTransitAdjudication As Boolean, ByVal RunTLO As Boolean, ByVal RetainRecords As Boolean) As System.Threading.Tasks.Task(Of DataAPI.AB_Report_Out) Implements DataAPI.IWCFMacros.AAbs_GetAreAbstractReportAsync
             Return MyBase.Channel.AAbs_GetAreAbstractReportAsync(BBLE, SelectedOwners, RunJudgement, RunFederalTaxLiens, RunMortgages, RunParkingViolation, RunPatriot, RunUcc, RunBankruptcy, RunECB, RunEmergenyRepairs, RunTransitAdjudication, RunTLO, RetainRecords)
         End Function
-        
+
         Public Function Get_TLO_Person(ByVal APIorderNum As String, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As DataAPI.TLOPersonSearchOutput Implements DataAPI.IWCFMacros.Get_TLO_Person
             Return MyBase.Channel.Get_TLO_Person(APIorderNum, FullName, Name, UseExactFirstNameMatch, UsePhoneticLastNameMatch, Address, SSN, DateOfBirth, MinimumAge, MaximumAge, Phone, DriversLicenseNumber, EmailAddress, IPAddress, Domain)
         End Function
-        
+
         Public Function Get_TLO_PersonAsync(ByVal APIorderNum As String, ByVal FullName As String, ByVal Name As DataAPI.NameBase, ByVal UseExactFirstNameMatch As Boolean, ByVal UsePhoneticLastNameMatch As Boolean, ByVal Address As DataAPI.AddressBase, ByVal SSN As String, ByVal DateOfBirth As Date, ByVal MinimumAge As String, ByVal MaximumAge As String, ByVal Phone As String, ByVal DriversLicenseNumber As String, ByVal EmailAddress As String, ByVal IPAddress As String, ByVal Domain As String) As System.Threading.Tasks.Task(Of DataAPI.TLOPersonSearchOutput) Implements DataAPI.IWCFMacros.Get_TLO_PersonAsync
             Return MyBase.Channel.Get_TLO_PersonAsync(APIorderNum, FullName, Name, UseExactFirstNameMatch, UsePhoneticLastNameMatch, Address, SSN, DateOfBirth, MinimumAge, MaximumAge, Phone, DriversLicenseNumber, EmailAddress, IPAddress, Domain)
+        End Function
+
+        Public Function Get_NYC_TaxLien(ByVal BBLE As String, ByVal YEAR As String) As DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result() Implements DataAPI.IWCFMacros.Get_NYC_TaxLien
+            Return MyBase.Channel.Get_NYC_TaxLien(BBLE, YEAR)
+        End Function
+
+        Public Function Get_NYC_TaxLienAsync(ByVal BBLE As String, ByVal YEAR As String) As System.Threading.Tasks.Task(Of DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result()) Implements DataAPI.IWCFMacros.Get_NYC_TaxLienAsync
+            Return MyBase.Channel.Get_NYC_TaxLienAsync(BBLE, YEAR)
         End Function
     End Class
 End Namespace

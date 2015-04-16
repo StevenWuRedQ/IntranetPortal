@@ -90,6 +90,10 @@ Public Class Form1
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Using client As New IntranetPortal.DataAPI.WCFMacrosClient
+            Dim bble = "1004490043"
+            Dim data = client.Get_NYC_TaxLien(bble, "")
+
+            Return
 
             Dim nameBase As New NameBase
             nameBase.firstNameField = "George"

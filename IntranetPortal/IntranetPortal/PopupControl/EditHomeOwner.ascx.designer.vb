@@ -68,6 +68,15 @@ Partial Public Class EditHomeOwner
     Protected WithEvents txtUniqueTLOID As Global.System.Web.UI.HtmlControls.HtmlInputText
 
     '''<summary>
+    '''cbHoweOwners control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbHoweOwners As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
+
+    '''<summary>
     '''txtOwnerName control.
     '''</summary>
     '''<remarks>

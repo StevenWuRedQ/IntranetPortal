@@ -1,4 +1,5 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ActivityLogs.ascx.vb" Inherits="IntranetPortal.ActivityLogs" %>
+
 <style type="text/css">
     .TaskLogStyle {
         background-color: #FFC5C5;
@@ -379,7 +380,7 @@
             <div style="float: right">
                 <div style="color: #2e2f31; float: right">
                     FILTER BY:&nbsp;&nbsp<i class="fa fa-filter acitivty_short_button tooltip-examples " id="filter_btn" title="Filter" style="color: #444547; font-size: 14px;" onclick="clickfilterBtn(this)"></i>
-                </div>              
+                </div>
 
                 <%-- 50px --%>
                 <div style="margin-top: 50px">

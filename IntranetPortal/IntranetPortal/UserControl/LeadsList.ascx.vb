@@ -178,9 +178,9 @@ Public Class LeadsList
         End If
 
         BindLeadsListByKey(key)
-
+        gridLeads.Columns("MarkColor").Visible = False
         gridLeads.Columns("EmployeeName").Visible = True
-        gridLeads.Columns("Neighborhood").Visible = True
+        gridLeads.Columns("Neighborhood").Visible = False
 
         gridLeads.Settings.ShowColumnHeaders = True
         gridLeads.Settings.ShowFilterRow = True

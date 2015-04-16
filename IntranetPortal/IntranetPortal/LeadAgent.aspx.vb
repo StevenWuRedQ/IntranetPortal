@@ -17,7 +17,7 @@ Public Class LeadAgent
                 leadPanel.Collapsed = False
 
                 If CategoryName = "Search" Then
-                    leadPanel.Size = 300
+                    leadPanel.Size = 270
                 End If
 
                 LeadsList.BindLeadsList(CategoryName)

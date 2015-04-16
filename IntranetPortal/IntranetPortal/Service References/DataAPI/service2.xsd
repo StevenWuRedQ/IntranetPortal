@@ -609,4 +609,19 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="Get_NYC_TaxLien">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="YEAR" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Get_NYC_TaxLienResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_NYC_TaxLienResult" nillable="true" type="q37:ArrayOfSP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

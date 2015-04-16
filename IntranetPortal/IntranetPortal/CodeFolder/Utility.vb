@@ -290,8 +290,8 @@ Public Class Utility
             Return False
         End If
 
-        Dim strCompare = name1.Replace(",", "").Replace("&", " ").Replace("-", " ").Split(" ")
-        name2 = name2.Replace(",", "").Replace("&", " ").Replace("-", " ")
+        Dim strCompare = name1.Replace(",", "").Replace("&", " ").Replace("-", " ").Replace("/", "").Split(" ")
+        name2 = name2.Replace(",", "").Replace("&", " ").Replace("-", " ").Replace("/", "")
         Dim nameArray = name2.Split(" ")
         Dim result = strCompare.Where(Function(a) nameArray.Contains(a)).Count / strCompare.Length
 
@@ -301,5 +301,23 @@ Public Class Utility
     Public Shared Function FormatUserName(name As String)
         name = name.Trim
         Return StrConv(name, VbStrConv.ProperCase)
+    End Function
+
+    Public Shared Function SaveChangesObj(oldObj As Object, newObj As Object) As Object
+        Dim type = oldObj.GetType()
+
+        For Each prop In type.GetProperties
+            Dim newValue = prop.GetValue(newObj)
+            If newValue IsNot Nothing Then
+                Dim oldValue = prop.GetValue(oldObj)
+                If Not newValue.Equals(oldValue) Then
+                    If prop.CanWrite Then
+                        prop.SetValue(oldObj, newValue)
+                    End If
+                End If
+            End If
+        Next
+
+        Return oldObj
     End Function
 End Class
