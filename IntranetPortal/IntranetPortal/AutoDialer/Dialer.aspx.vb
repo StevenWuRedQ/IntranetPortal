@@ -4,16 +4,19 @@ Imports RestSharp
 
 Public Class Dialer
     Inherits System.Web.UI.Page
+    Public CalledNumber As String
+    Public Monitor As String
+    Public BBLE As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not IsPostBack) Then
 
             CalledNumber = Request.QueryString("PN")
             BBLE = Request.QueryString("BBLE")
+            Monitor = Request.QueryString("Monitor")
         End If
     End Sub
-    Public CalledNumber As String
-    Public BBLE As String
+   
     Public ReadOnly Property TwilioToken As String
         Get
 
@@ -24,7 +27,11 @@ Public Class Dialer
             Dim capability = New TwilioCapability(accountSid, authToken)
 
             capability.AllowClientOutgoing(appSid)
-            capability.AllowClientIncoming("jenny")
+
+            'If (Not String.IsNullOrEmpty(Monitor)) Then
+            '    capability.AllowClientIncoming("jenny")
+            'End If
+
             Return capability.GenerateToken()
         End Get
     End Property

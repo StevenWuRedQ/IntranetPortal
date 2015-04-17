@@ -10,7 +10,7 @@
     </script>
     <link href="http://static0.twilio.com/bundles/quickstart/client.css" type="text/css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sprintf/1.0.1/sprintf.js"></script>
-    
+
     <style>
         /*body {
             text-align: center;
@@ -21,19 +21,20 @@
     <script type="text/javascript">
         var CallNumber = '<%= CalledNumber%>';
         var BBLE = '<%= BBLE%>';
+        var Montor = "<%= Monitor %>";
         Twilio.Device.setup('<%= TwilioToken%>');
 
         Twilio.Device.ready(function (device) {
             $("#log").text("Ready");
-            if (CallNumber != null && CallNumber.length > 0) {
-                call(CallNumber);
+            if (Montor) {
+                call(Montor);
             }
         });
 
         Twilio.Device.error(function (error) {
             $("#log").text("Error: " + error.message);
         });
-       
+
         Twilio.Device.connect(function (conn) {
             if (BBLE) {
                 var log = sprintf("%s did phone (%s) call", $("#userName").val(), CallNumber);
@@ -41,8 +42,7 @@
             }
             $("#log").text("Successfully established call");
         });
-        function logCall(BBLE,log)
-        {
+        function logCall(BBLE, log) {
             var url = '/autoDialer/DialerAjaxservice.svc/CallLog/' + BBLE + ',' + log;
             $.getJSON(url, function (d) { });
         }
@@ -63,29 +63,27 @@
             conn.accept();
         });
 
-        function call(PhoneNumber) {
-            // get the phone number to connect the call to
-            //var pn;
-            //if (PhoneNumber) {
-            //    pn = PhoneNumber
-            //} else {
-            //    pn = $("#number").val();
-            //}
+        function call(confrenceName) {
+            
 
-           var params = { "ConfrenceName": $('#userName').val() };
+            var params = { "ConfrenceName": (confrenceName ? confrenceName : $('#userName').val()) };
+            if (confrenceName)
+            {
+                params.muted = "true";
+
+            }
             Twilio.Device.connect(params
                 );
             //$.getJSON('/AutoDialer/DialerAjaxService.svc/CallNumber/' + pn);
         }
 
-        function InitConfrence()
-        {
+        function InitConfrence() {
             //params = { "Confrece": pn };
             //Twilio.Device.connect(params);
-           
-                pn = $("#number").val();
-            
-                $.getJSON('/AutoDialer/DialerAjaxService.svc/CallNumber/' + pn + ',' + $('#userName').val());
+
+            var pn = $("#number").val();
+
+            $.getJSON('/AutoDialer/DialerAjaxService.svc/CallNumber/' + pn + ',' + $('#userName').val());
         }
         function hangup() {
             Twilio.Device.disconnectAll();

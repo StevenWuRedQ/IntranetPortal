@@ -27,19 +27,44 @@
                <%For Each c In CallList%>
                  <tr>
                     
-                    <th ><%= c.From%></th>
-                    <td><%= c.To %></td>
-                    <td><%= c.Duration %></td>
-                    <td><i class="fa fa-phone icon_btn" onclick="MonitorCall('<%=c.Sid %>')"></i></td>
+                    <th ><%= c.FriendlyName%></th>
+                    <td> <%= c.AccountSid%></td>
+                    <td><%= c.Status%></td>
+                    <td><i class="fa fa-phone icon_btn" onclick="MonitorCall('<%=c.FriendlyName %>')"></i></td>
                 </tr>
                 <% Next %>
             </tbody>
         </table>
     </div>
     <script>
-        function MonitorCall(sid)
+        function MonitorCall(name)
         {
-            alert(sid)
+            popUpAtBottomRight('/AutoDialer/Dialer.aspx?Monitor=' + name, "monitor", 560, 570)
+        }
+        function popUpAtBottomRight(pageToLoad, winName, width, height) {
+            xposition = 0; yposition = 0;
+            if ((parseInt(navigator.appVersion) >= 4)) {
+                xposition = (screen.width - width);
+                yposition = (screen.height - height);
+            }
+
+            var args = "";
+            args += "width=" + width + "," + "height=" + height + ","
+            + "location=0,"
+            + "menubar=0,"
+            + "resizable=0,"
+            + "scrollbars=0,"
+            + "statusbar=false,dependent,alwaysraised,"
+            + "status=false,"
+            + "titlebar=no,"
+            + "toolbar=0,"
+            + "hotkeys=0,"
+            + "screenx=" + xposition + ","  //NN Only
+            + "screeny=" + (yposition - 100) + ","  //NN Only
+            + "left=" + xposition + ","     //IE Only
+            + "top=" + yposition;           //IE Only
+            var dmcaWin = window.open(pageToLoad, winName, args);
+            dmcaWin.focus();
         }
     </script>
 </asp:Content>

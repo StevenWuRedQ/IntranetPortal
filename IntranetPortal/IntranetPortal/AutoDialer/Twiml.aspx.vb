@@ -21,21 +21,24 @@ Public Class Twiml
         Dim ConfrenceName = Request("ConfrenceName")
         ' wrap the phone number or client name in the appropriate TwiML verb
         ' by checking if the number given has only digits and format symbols
-
+        Dim muted = Request("muted")
+        Dim isOut = Request("isout")
         Dim m = Regex.Match(number, "^[\d\+\-\(\) ]+$")
-      
-       
-        If m.Success Then
-            'numberOrClient = String.Format("<Conference>{0}</Conference>", "Conference" & number)
-            numberOrClient = String.Format("<Conference>{0}</Conference>", "Conference")
-            numberOrClient = String.Format("<Number>{0}</Number>", number) ')
-        Else
-            numberOrClient = ""
 
 
-            'numberOrClient = numberOrClient & String.Format("<Client>{0}</Client>", number)
-            numberOrClient = numberOrClient & String.Format("<Conference>{0}</Conference>", ConfrenceName)
-        End If
+        'If m.Success Then
+     
+        '    numberOrClient = String.Format("<Number>{0}</Number>", number) ')
+        'Else
+        '    numberOrClient = ""
+
+
+        'numberOrClient = numberOrClient & String.Format("<Client>{0}</Client>", number)
+        Dim mutedStr = If(muted IsNot Nothing, "muted=""true""", "")
+        Dim toString = If(isOut IsNot Nothing, "endConferenceOnExit=""true""", "")
+
+        numberOrClient = String.Format("<Conference {0} {1}>{2}</Conference>", mutedStr, toString, "Conference")
+        'End If
 
 
 
