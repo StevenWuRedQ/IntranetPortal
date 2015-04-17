@@ -2104,7 +2104,7 @@
                                                                                 </ul>
                                                                             </div>
                                                                              <script>
-                                                                                 $(".checktoggle").slideUp();
+                                                                                
                                                                                  $(".checktoggle").click(function () {
                                                                                      var box = $(this).parents(".ss_form").children(".ss_form_box");
                                                                                      if (this.checked) {
