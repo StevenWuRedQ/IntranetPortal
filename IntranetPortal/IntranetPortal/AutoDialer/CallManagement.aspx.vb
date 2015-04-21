@@ -23,14 +23,19 @@ Public Class CallManagement
         request.Status = "in-progress"
         Dim conferences = twilio.ListConferences(request)
         For Each c In conferences.Conferences
-            Dim partics = twilio.ListConferenceParticipants(c.Sid, False).Participants
-            For Each p In partics
-                Dim calls = twilio.GetCall(p.CallSid)
-                If (Not String.IsNullOrEmpty(calls.To)) Then
-                    c.AccountSid = calls.To
-                    c.Status = calls.Duration.ToString
-                End If
-            Next
+            Dim vcall = DialerAjaxService.GetOutboundCallInConference(c.Sid)
+            If (vcall IsNot Nothing) Then
+                c.AccountSid = vcall.To
+                c.Status = vcall.Direction.ToString
+            End If
+            'Dim partics = twilio.ListConferenceParticipants(c.Sid, False).Participants
+            'For Each p In partics
+            '    Dim calls = twilio.GetCall(p.CallSid)
+            '    If (Not String.IsNullOrEmpty(calls.To)) Then
+            '        c.AccountSid = calls.To
+            '        c.Status = calls.Duration.ToString
+            '    End If
+            'Next
             'c.Sid
         Next
         Return conferences.Conferences

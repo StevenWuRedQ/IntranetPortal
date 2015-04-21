@@ -23,27 +23,33 @@ Public Class Twiml
         ' by checking if the number given has only digits and format symbols
         Dim muted = Request("muted")
         Dim isOut = Request("isout")
-        Dim m = Regex.Match(number, "^[\d\+\-\(\) ]+$")
+
+        ' All user is not muted need end conferce on exit
+        If (muted IsNot Nothing) Then
+            isOut = "1"
+        End If
+        'Dim m = Regex.Match(number, "^[\d\+\-\(\) ]+$")
 
 
         'If m.Success Then
-     
+
         '    numberOrClient = String.Format("<Number>{0}</Number>", number) ')
         'Else
         '    numberOrClient = ""
 
 
         'numberOrClient = numberOrClient & String.Format("<Client>{0}</Client>", number)
-        Dim mutedStr = If(muted IsNot Nothing, "muted=""true""", "")
+        Dim mutedStr = If(muted IsNot Nothing, "muted=""true""  beep=""false""", "")
         Dim toString = If(isOut IsNot Nothing, "endConferenceOnExit=""true""", "")
 
-        numberOrClient = String.Format("<Conference {0} {1}>{2}</Conference>", mutedStr, toString, "Conference")
+        numberOrClient = String.Format("<Conference {0} {1}>{2}</Conference>", mutedStr, toString, If(ConfrenceName IsNot Nothing, ConfrenceName, "Conference"))
         'End If
 
 
 
         Response.Write(BiuldXml(callerId, numberOrClient))
     End Sub
+
     Function BiuldXml(callerId As String, number As String) As String
         Return "<Response>" &
                 "<Dial callerId=""" & callerId & """>" & number &
