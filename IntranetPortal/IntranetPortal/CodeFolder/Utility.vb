@@ -15,6 +15,8 @@ Public Enum LeadStatus
     ALL = 13
     MgrApprovalInWf = 14
     Declined = 15
+    Publishing = 16
+    Published = 17
 End Enum
 
 Public Class Utility
