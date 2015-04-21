@@ -311,9 +311,7 @@
                 this.ChatDiv.find('#divMessage').scrollTop(height);
             };
         }
-
-
-
+        
         function AddUser(chatHub, id, name) {
 
             var userId = $('#hdId').val();

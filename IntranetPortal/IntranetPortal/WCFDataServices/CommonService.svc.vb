@@ -59,7 +59,7 @@ Public Class CommonService
         For Each mgr In objTeam.TeamManagers
             Dim emp = Employee.GetInstance(mgr)
             If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
-                toAdds.Add(Employee.GetInstance(mgr).Email)
+                toAdds.Add(emp.Email)
             End If
         Next
 

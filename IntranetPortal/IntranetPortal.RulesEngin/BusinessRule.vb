@@ -150,7 +150,11 @@ Public Class AgentActivitySummaryRule
 
         Using client As New PortalService.CommonServiceClient
             For Each team In teams
-                client.SendTeamActivityEmail(team.Name)
+                Try
+                    client.SendTeamActivityEmail(team.Name)
+                Catch ex As Exception
+                    Log("AgentActivitySummaryRule Error. TeamName: " & team.Name, ex)
+                End Try
             Next
         End Using
     End Sub

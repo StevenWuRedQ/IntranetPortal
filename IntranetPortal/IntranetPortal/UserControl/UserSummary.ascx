@@ -332,6 +332,7 @@
                                                         <dx:ASPxAppointmentCustomFieldMapping Name="Agent" ValueType="String" Member="Agent" />
                                                         <dx:ASPxAppointmentCustomFieldMapping Name="Manager" ValueType="String" Member="Manager" />
                                                         <dx:ASPxAppointmentCustomFieldMapping Name="AppointType" ValueType="String" Member="AppointType" />
+                                                        <dx:ASPxAppointmentCustomFieldMapping Name="TitleLink" ValueType="String" Member="TitleLink" />
                                                     </CustomFieldMappings>
                                                 </Appointments>
                                             </Storage>
@@ -340,8 +341,8 @@
                                 </td>
                                 <td rowspan="4" style="width: 50px"></td>
                                 <td rowspan="4" style="vertical-align: top; width: 380px; padding-top: 40px;">
-                                    <div style="width: 375px; background-color: #F2F2F2;-webkit-border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border-radius: 10px;">
-                                        <div style="background-color: #D9F1FD;-webkit-border-top-left-radius: 10px; -webkit-border-top-right-radius: 10px; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                                    <div style="width: 375px; background-color: #F2F2F2; -webkit-border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border-radius: 10px;">
+                                        <div style="background-color: #D9F1FD; -webkit-border-top-left-radius: 10px; -webkit-border-top-right-radius: 10px; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                                             <div id="dateRange" class="containers" style="width: 100%;"></div>
                                         </div>
                                         <div style="padding: 10px 10px;">
@@ -383,13 +384,14 @@
                                                         title: {
                                                             text: "Activity Summary",
                                                             font: {
-                                                                family:'Source Sans Pro, sans-serif',
+                                                                family: 'Source Sans Pro, sans-serif',
                                                                 size: 21,
-                                                                weight:900
+                                                                weight: 900
                                                             },
                                                             horizontalAlignment: 'left',
-                                                            margin:{
-                                                                left:20}
+                                                            margin: {
+                                                                left: 20
+                                                            }
                                                         },
                                                         legend: {
                                                             verticalAlignment: "bottom",
@@ -432,7 +434,7 @@
                                                     size: {
                                                         height: 150
                                                     },
-                                                    background: { color: '#ff400d' },                                                    
+                                                    background: { color: '#ff400d' },
                                                     width: 375,
                                                     scale: {
                                                         startValue: new Date(2015, 1, 1),
@@ -463,8 +465,8 @@
                                                 this.LoadStatusChart();
                                             },
                                             LoadAgentActivityDs: function (startDate, endDate) {
-                                                var url = "/wcfdataservices/portalReportservice.svc/LoadAgentSummaryReport/" + this.AgentName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-");                                                
-                                                
+                                                var url = "/wcfdataservices/portalReportservice.svc/LoadAgentSummaryReport/" + this.AgentName + "/" + startDate.toLocaleDateString().replace(/\//g, "-") + "/" + endDate.toLocaleDateString().replace(/\//g, "-");
+
                                                 this.ActivityDataSource = new DevExpress.data.DataSource(url);
                                                 this.LeadsDataSource = new DevExpress.data.DataSource("/wcfdataservices/portalReportservice.svc/LoadAgentLeadsReport/" + this.AgentName);
                                             },
@@ -504,16 +506,17 @@
                                                             }
                                                         }
                                                     }],
-                                                    title:{
+                                                    title: {
                                                         text: "Leads Status",
                                                         font: {
-                                                            family:'Source Sans Pro, sans-serif',
+                                                            family: 'Source Sans Pro, sans-serif',
                                                             size: 21,
-                                                            weight:900
+                                                            weight: 900
                                                         },
                                                         horizontalAlignment: 'left',
-                                                        margin:{
-                                                            left:20}
+                                                        margin: {
+                                                            left: 20
+                                                        }
                                                     },
                                                     palette: ['#a5bcd7', '#e97c82', '#da5859', '#f09777', '#fbc986', '#a5d7d0', '#a5bcd7']
                                                 };
@@ -675,7 +678,7 @@
 </dx:ASPxSplitter>
 <%--change it to color sytle by steven--%>
 <div id="right-pane-container" class="clearfix">
-    <div id="right-pane-button" style="margin-top:125px"></div>
+    <div id="right-pane-button" style="margin-top: 125px"></div>
     <div id="right-pane">
         <div style="width: 290px; height: 100%; background: #EFF2F5;">
             <%--/*the showlder box*--%>

@@ -403,6 +403,7 @@
     <Compile Include="CodeFolder\PortalNavItem.vb" />
     <Compile Include="CodeFolder\PortalReport.vb" />
     <Compile Include="CodeFolder\PortalRoleProvider.vb" />
+    <Compile Include="CodeFolder\PublicSiteService.vb" />
     <Compile Include="CodeFolder\RecycleManage.vb" />
     <Compile Include="CodeFolder\SearchResult.vb" />
     <Compile Include="CodeFolder\ShortSaleManage.vb" />
@@ -1066,6 +1067,20 @@
     </Compile>
     <Compile Include="Proiority\Priority.aspx.vb">
       <DependentUpon>Priority.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Publish\Publish.aspx.designer.vb">
+      <DependentUpon>Publish.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Publish\Publish.aspx.vb">
+      <DependentUpon>Publish.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Publish\PropertyList.ascx.designer.vb">
+      <DependentUpon>PropertyList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Publish\PropertyList.ascx.vb">
+      <DependentUpon>PropertyList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Reports\LeaderReport.vb">
@@ -1809,6 +1824,8 @@
     <Content Include="PreviewFile.aspx" />
     <Content Include="Proiority\ActivityLog.aspx" />
     <Content Include="Proiority\Priority.aspx" />
+    <Content Include="Publish\Publish.aspx" />
+    <Content Include="Publish\PropertyList.ascx" />
     <Content Include="scripts\angular-mocks.js" />
     <Content Include="scripts\angular.js" />
     <Content Include="scripts\angular.min.js" />
@@ -2917,6 +2934,10 @@
     <Folder Include="TempDataFile\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SalesSite\PublicSite\PublicSiteData\PublicSiteData.vbproj">
+      <Project>{0a6eb9bb-cbef-49c9-bd9e-18446aa0728b}</Project>
+      <Name>PublicSiteData</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IntranetPortal.Core\IntranetPortal.Core.vbproj">
       <Project>{5da9a152-6e61-4cde-baf5-6309ed56539a}</Project>
       <Name>IntranetPortal.Core</Name>

@@ -106,7 +106,15 @@ Public Class LeadsSubMenu
             If e.Parameter.StartsWith("customDays") Then
                 If e.Parameter.Contains("|") Then
                     Dim bble = e.Parameter.Split("|")(1)
-                    Dim tmpdate = If(e.Parameter.Split("|").Count > 2, DateTime.Parse(e.Parameter.Split("|")(2)), DateTime.Now)
+                    Dim tmpDate = DateTime.Now
+
+                    If e.Parameter.Split("|").Count > 2 Then
+                        If Not DateTime.TryParse(e.Parameter.Split("|")(2), tmpDate) Then
+                            Throw New Exception("The input date is not valid. Date: " & e.Parameter.Split("|")(2))
+                        End If
+                    End If
+                    'Dim tmpdate = If(e.Parameter.Split("|").Count > 2, DateTime.Parse(e.Parameter.Split("|")(2)), DateTime.Now)
+
                     UpdateLeadStatus(bble, LeadStatus.Callback, tmpdate)
                 End If
             End If

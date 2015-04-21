@@ -203,13 +203,13 @@ Partial Public Class LeadsInfo1
     Protected WithEvents pcMain As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
-    '''Panel1 control.
+    '''pcMainPopupControl control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Panel1 As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents pcMainPopupControl As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
 
     '''<summary>
     '''ASPxCalendar1 control.
@@ -219,15 +219,6 @@ Partial Public Class LeadsInfo1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxCalendar1 As Global.DevExpress.Web.ASPxEditors.ASPxCalendar
-
-    '''<summary>
-    '''ASPxDateEdit1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxDateEdit1 As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
 
     '''<summary>
     '''ASPxButton1 control.

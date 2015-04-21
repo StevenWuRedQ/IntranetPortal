@@ -80,7 +80,7 @@
             }
         }
         e.item.SetChecked(false);
-        
+
         if (sortPhones && e.item.index != 4 && e.item.index != 0) {
             sortPhones();
         }
@@ -88,12 +88,12 @@
 
     function SetSameStyle(className, style, value) {
         var list = document.getElementsByClassName(className)
-       // alert('find class ' + className+ 'get item count '+list.length +' value'+value);
+        // alert('find class ' + className+ 'get item count '+list.length +' value'+value);
         for (var i = 0; i < list.length; i++) {
             var item = list[i];
-         
+
             if (item.innerText.trim().indexOf(value) == 0) {
-              
+
                 $(item).attr("style", style);
             }
         }
@@ -127,6 +127,7 @@
     function OnCallbackMenuClick(s, e) {
 
         if (e.item.name == "Custom") {
+            ASPxPopupSelectDateControl.PerformCallback("Show");
             ASPxPopupSelectDateControl.ShowAtElement(s.GetMainElement());
             e.processOnServer = false;
             return;
@@ -157,7 +158,7 @@
         if (typeof window.parent.agentTreeCallbackPanel == "undefined")
             return;
         else
-            window.parent.agentTreeCallbackPanel.PerformCallback("");        
+            window.parent.agentTreeCallbackPanel.PerformCallback("");
     }
 
     function PrintLeadInfo() {
@@ -167,10 +168,8 @@
         }
     }
 
-    function ReloadPage(bbleToLoad)
-    {
-        if (bbleToLoad == leadsInfoBBLE)
-        {
+    function ReloadPage(bbleToLoad) {
+        if (bbleToLoad == leadsInfoBBLE) {
             ContentCallbackPanel.PerformCallback(bbleToLoad);
             return true;
         }
@@ -263,7 +262,7 @@
             //}
             //else
             //{
-                ContentCallbackPanel.PerformCallback(parms);
+            ContentCallbackPanel.PerformCallback(parms);
             //}            
         }
         else {
@@ -277,14 +276,14 @@
             debugger;
             ASPxPopupScheduleClient.Hide();
             var logId = hfLogIDClient.Get('logId');
-            if (logId != null && logId > 0) {               
+            if (logId != null && logId > 0) {
                 ReScheduledAppointment(logId);
                 //SetLeadStatus(9);
                 ASPxPopupScheduleClient.PerformCallback("Schedule");
                 ASPxPopupScheduleClient.Hide();
             }
             else {
-               
+
                 ASPxPopupScheduleClient.PerformCallback("Schedule");
             }
             showAppointmentPopup = false;
@@ -564,8 +563,8 @@
                                             </div>
                                             <% End If%>
                                             <i class="fa fa-university sale_head_button sale_head_button_left tooltip-examples" title="Legal" onclick=""></i>
-                                           
-                                            
+
+
                                             <i class="fa fa-calendar-o sale_head_button sale_head_button_left tooltip-examples" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
                                             <i class="fa fa-sun-o sale_head_button sale_head_button_left tooltip-examples" title="Hot Leads" onclick="SetLeadStatus('5|'+leadsInfoBBLE);"></i>
                                             <i class="fa fa-rotate-right sale_head_button sale_head_button_left tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
@@ -577,7 +576,7 @@
                                     </ul>
                                     <uc1:ActivityLogs runat="server" ID="ActivityLogs" />
                                 </div>
-                            <%--    <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
+                                <%--    <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
                                     <ClientSideEvents CallbackComplete="OnSetStatusComplete" />
                                 </dx:ASPxCallback>--%>
                                 <dx:ASPxCallback ID="callPhoneCallback" runat="server" ClientInstanceName="callPhoneCallbackClient" OnCallback="callPhoneCallback_Callback">
@@ -599,42 +598,41 @@
                                     </Items>
                                     <ClientSideEvents ItemClick="OnCallbackMenuClick" />
                                 </dx:ASPxPopupMenu>
-                                <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="260px" Height="250px"
+                                <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectDateControl" Width="360px" Height="250px"
                                     MaxWidth="800px" MaxHeight="150px" MinHeight="150px" MinWidth="150px" ID="pcMain"
-                                    HeaderText="Select Date" Modal="true"
-                                    runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
+                                    HeaderText="Select Date" Modal="false" OnWindowCallback="pcMain_WindowCallback"
+                                    runat="server" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
                                     <ContentCollection>
-                                        <dx:PopupControlContentControl runat="server">
-                                            <asp:Panel ID="Panel1" runat="server">
-                                                <table>
-                                                    <tr>
-                                                        <td>
-                                                            <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="false"></dx:ASPxCalendar>
-                                                            <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" TimeSectionProperties-Visible="True" CssClass="edit_drop">
-                                                                <TimeSectionProperties Visible="True"></TimeSectionProperties>
-                                                                <ClientSideEvents Init="function(s,e){ s.SetDate(new Date());}" />
-                                                            </dx:ASPxDateEdit>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
-                                                            <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" ClientSideEvents-Click="function(){ASPxPopupSelectDateControl.Hide();}" CssClass="rand-button rand-button-blue">
-                                                                <ClientSideEvents Click="function(){
+                                        <dx:PopupControlContentControl runat="server" Visible="false" ID="pcMainPopupControl">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <dx:ASPxCalendar ID="ASPxCalendar1" runat="server" ClientInstanceName="callbackCalendar" ShowClearButton="False" ShowTodayButton="False" Visible="true"></dx:ASPxCalendar>
+                                                   <%--     <dx:ASPxDateEdit runat="server" EditFormatString="g" Width="100%" ID="ASPxDateEdit1" ClientInstanceName="ScheduleDateClientFllowUp" 
+                                                            TimeSectionProperties-Visible="True" CssClass="edit_drop">
+                                                            <TimeSectionProperties Visible="True"></TimeSectionProperties>
+                                                            <ClientSideEvents Init="function(s,e){ s.SetDate(new Date());}" />
+                                                        </dx:ASPxDateEdit>--%>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="color: #666666; font-size: 10px; align-content: center; text-align: center; padding-top: 2px;">
+                                                        <dx:ASPxButton ID="ASPxButton1" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                                            <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                       
-                                                                                                                        SetLeadStatus('customDays|' + leadsInfoBBLE + '|' + ScheduleDateClientFllowUp.GetText());
+                                                                                                                        SetLeadStatus('customDays|' + leadsInfoBBLE + '|' + callbackCalendar.GetSelectedDate().toISOString());
                                                                                                                         }"></ClientSideEvents>
-                                                            </dx:ASPxButton>
-                                                            &nbsp;
+                                                        </dx:ASPxButton>
+                                                        &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CssClass="rand-button rand-button-gray">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupSelectDateControl.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>
 
                                                             </dx:ASPxButton>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </asp:Panel>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </dx:PopupControlContentControl>
                                     </ContentCollection>
                                 </dx:ASPxPopupControl>
@@ -742,7 +740,7 @@
                                                 s.Show();
                                             else
                                                 s.Hide();
-                                        }"                                     />
+                                        }" />
                                 </dx:ASPxPopupControl>
                             </dx:SplitterContentControl>
                         </ContentCollection>

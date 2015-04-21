@@ -204,7 +204,7 @@ Public Class LeadsInfo1
 
             If e.Parameter = "customDays" Then
 
-                Dim tmpdate = If(ASPxDateEdit1 IsNot Nothing, ASPxDateEdit1.Value, ASPxCalendar1.SelectedDate)
+                Dim tmpdate = If(ASPxCalendar1 IsNot Nothing, ASPxCalendar1.Value, DateTime.Today)
                 UpdateLeadStatus(hfBBLE.Value, LeadStatus.Callback, tmpdate)
             End If
 
@@ -709,6 +709,12 @@ Public Class LeadsInfo1
             For Each it In dataScorce
                 cbMgr.Items.Add(New ListEditItem(it.Text, it.Value))
             Next
+        End If
+    End Sub
+
+    Protected Sub pcMain_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        If Not pcMainPopupControl.Visible Then
+            pcMainPopupControl.Visible = True
         End If
     End Sub
 End Class

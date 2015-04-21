@@ -273,6 +273,7 @@
         if (s.GetSelectedIndex() == 3)
             ASPxPopupScheduleSelectDateControl.ShowAtElement(s.GetMainElement());
     }
+
     function OnLogMemoKeyDown(s, e) {
         var textArea = s.GetInputElement();
         if (e.htmlEvent.keyCode == 13) {
@@ -372,7 +373,6 @@
             <div class="html_edit_div">
                 <dx:ASPxHtmlEditor ID="EmailBody2" runat="server" Height="148px" Width="100%" ClientInstanceName="EmailBody" OnLoad="EmailBody2_Load">
                     <Settings AllowHtmlView="false" AllowPreview="false" />
-
                 </dx:ASPxHtmlEditor>
             </div>
         </div>
@@ -715,7 +715,7 @@
             </ContentCollection>
         </dx:ASPxPopupControl>
 
-        <dx:ASPxPopupControl ClientInstanceName="ASPxPopupScheduleSelectDateControl" Width="260px" Height="250px"
+      <%--  <dx:ASPxPopupControl ClientInstanceName="ASPxPopupScheduleSelectDateControl" Width="260px" Height="250px"
             MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl2"
             HeaderText="Select Date" Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
@@ -747,7 +747,7 @@
                     </table>
                 </dx:PopupControlContentControl>
             </ContentCollection>
-        </dx:ASPxPopupControl>
+        </dx:ASPxPopupControl>--%>
 
         <%--  <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSelectUserControl" Width="260px" Height="250px" MaxWidth="800px" MinWidth="150px" ID="pcMain" HeaderText="Select Employees:" Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="RightSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
@@ -930,20 +930,7 @@
                                     <RequiredField IsRequired="true" />
                                 </ValidationSettings>
                             </dx:ASPxComboBox>
-                        </div>
-
-                        <div class="form-group " style="display: none">
-                            <label class="upcase_text">Reminder</label>
-                            <dx:ASPxComboBox runat="server" DropDownStyle="DropDown" ID="cbTaskSchedule" Width="100%" ClientInstanceName="cbTaskScheduleClient" CssClass="edit_drop">
-                                <Items>
-                                    <dx:ListEditItem Text="None" Value="None" />
-                                    <dx:ListEditItem Text="1 Day" Value="1 Day" />
-                                    <dx:ListEditItem Text="2 Day" Value="2 Day" />
-                                    <dx:ListEditItem Text="Custom" Value="Custom" />
-                                </Items>
-                                <ClientSideEvents SelectedIndexChanged="OnCbTaskScheduleSelectedIndexChanged" />
-                            </dx:ASPxComboBox>
-                        </div>
+                        </div>                      
                         <div class="form-group ">
                             <label class="upcase_text" style="display: block">Description</label>
                             <dx:ASPxMemo runat="server" Width="100%" Height="115px" ID="txtTaskDes" CssClass="edit_text_area"></dx:ASPxMemo>

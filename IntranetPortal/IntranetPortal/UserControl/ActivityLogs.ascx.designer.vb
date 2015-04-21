@@ -77,33 +77,6 @@ Partial Public Class ActivityLogs
     Protected WithEvents cbCateLog As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
 
     '''<summary>
-    '''ASPxPopupControl2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
-
-    '''<summary>
-    '''ASPxCalendar1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxCalendar1 As Global.DevExpress.Web.ASPxEditors.ASPxCalendar
-
-    '''<summary>
-    '''ASPxButton2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxEditors.ASPxButton
-
-    '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>
@@ -165,15 +138,6 @@ Partial Public Class ActivityLogs
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cbTaskImportant As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
-
-    '''<summary>
-    '''cbTaskSchedule control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents cbTaskSchedule As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
 
     '''<summary>
     '''txtTaskDes control.

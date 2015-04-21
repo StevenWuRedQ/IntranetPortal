@@ -109,12 +109,12 @@ Public Class UserSummary
         Using Context As New Entities
             Dim user = Page.User.Identity.Name
             Dim users = Employee.GetManagedEmployees(user)
-            Dim appoints = (From appoint In Context.UserAppointments
-                           Where appoint.Status = UserAppointment.AppointmentStatus.Accepted And (users.Contains(appoint.Agent) Or appoint.Manager = user)
+            Dim appoints = (From appoint In Context.UserAppointments.Where(Function(ua) ua.Status = UserAppointment.AppointmentStatus.Accepted AndAlso (users.Contains(ua.Agent) Or ua.Manager = user)).ToList
                            Select New With {
                                .AppointmentId = appoint.LogID,
                                .Subject = appoint.Subject,
                                .Start = appoint.ScheduleDate,
+                               .TitleLink = BuilerSubject(appoint),
                                .End = appoint.EndDate,
                                .Description = appoint.Description,
                                .Location = appoint.Location,
@@ -130,6 +130,11 @@ Public Class UserSummary
         End Using
     End Sub
 
+    Private Function BuilerSubject(appoint As UserAppointment) As String
+        Dim ld = LeadsInfo.GetInstance(appoint.BBLE)
+        Dim result = String.Format("Appointment of <a href='/viewleadsinfo.aspx?id={1}' target='_blank'>{0}</a>", ld.PropertyAddress, ld.BBLE)
+        Return result
+    End Function
 
     'change the quote to the UI by steven
     Public Function HtmlBlackQuote(quote As String) As String
