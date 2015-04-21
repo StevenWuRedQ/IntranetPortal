@@ -12,7 +12,6 @@ Public Class PropertyListControl
     Public Sub BindProperty()
         gridTasks.DataSource = PublicSiteData.ListProperty.GetListedPropertyByOwner({Page.User.Identity.Name})
         gridTasks.DataBind()
-
     End Sub
 
     Public Function GetMarkColor(priority As Integer)
