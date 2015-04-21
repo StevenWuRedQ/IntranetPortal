@@ -146,9 +146,13 @@ Partial Public Class Lead
     End Function
 
     Public Shared Function GetUserLeadsData(names As String(), status As LeadStatus) As List(Of Lead)
+        Return GetUserLeadsData(names, {status})
+    End Function
+
+    Public Shared Function GetUserLeadsData(names As String(), status As LeadStatus()) As List(Of Lead)
         Dim context As New Entities
 
-        Dim result = From ld In context.Leads.Where(Function(ld) ld.Status = status And names.Contains(ld.EmployeeName))
+        Dim result = From ld In context.Leads.Where(Function(ld) status.Contains(ld.Status) And names.Contains(ld.EmployeeName))
                      Order By ld.LastUpdate Descending
                      Select ld
 
