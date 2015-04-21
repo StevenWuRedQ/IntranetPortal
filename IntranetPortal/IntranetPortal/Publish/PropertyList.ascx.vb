@@ -10,12 +10,9 @@ Public Class PropertyListControl
     End Sub
 
     Public Sub BindProperty()
-        gridTasks.DataSource = WorkflowService.GetMyWorklist()
+        gridTasks.DataSource = PublicSiteData.ListProperty.GetListedPropertyByOwner({Page.User.Identity.Name})
         gridTasks.DataBind()
 
-        If Not Page.IsPostBack Then
-            gridTasks.GroupBy(gridTasks.Columns("ProcSchemeDisplayName"))
-        End If
     End Sub
 
     Public Function GetMarkColor(priority As Integer)
