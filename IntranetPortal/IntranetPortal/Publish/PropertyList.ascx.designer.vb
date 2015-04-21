@@ -48,4 +48,13 @@ Partial Public Class PropertyListControl
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
+
+    '''<summary>
+    '''LeadsSubMenu control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LeadsSubMenu As Global.IntranetPortal.LeadsSubMenu
 End Class

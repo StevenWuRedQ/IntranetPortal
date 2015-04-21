@@ -1,5 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PropertyList.ascx.vb" Inherits="IntranetPortal.PropertyListControl" %>
-<script type="text/javascript">   
+<%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
+
+<script type="text/javascript">
 
     function ClosePage() {
         var contentPane = splitterTaskPage.GetPaneByName("contentPanel")
@@ -83,14 +85,14 @@
         var icon = document.getElementById("btnSortIcon");
         if (e.item.index == 0) {
             SortLeadsList(icon, "StartDate");
-        }        
+        }
 
-        if (e.item.index == 1) {           
-            gridTasks.PerformCallback("Group|Originator");          
+        if (e.item.index == 1) {
+            gridTasks.PerformCallback("Group|Originator");
         }
 
         if (e.item.index == 2) {
-            gridTasks.PerformCallback("Group|ProcSchemeDisplayName");          
+            gridTasks.PerformCallback("Group|ProcSchemeDisplayName");
         }
     }
 
@@ -102,7 +104,7 @@
             <div class="clearfix">
                 <i class="fa fa-list-ol with_circle" style="width: 48px; height: 48px; line-height: 48px;"></i>&nbsp;
                 <span style="color: #234b60; font-size: 30px;">
-                    <dx:ASPxLabel Text="Tasks" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
+                    <dx:ASPxLabel Text="Publish" ID="lblLeadCategory" Cursor="pointer" ClientInstanceName="LeadCategory" runat="server" Font-Size="30px"></dx:ASPxLabel>
                 </span>
                 <div class="icon_right_s">
                     <i class="fa fa-sort-amount-desc icon_btn tooltip-examples" title="Sort" style="cursor: pointer; font-size: 18px" id="btnSortIcon" onclick="aspxPopupSortMenu.ShowAtElement(this);"></i>
@@ -111,7 +113,7 @@
             </div>
         </div>
     </div>
-    <div style="height: 768px; overflow-y:scroll" id="leads_list_left">
+    <div style="height: 768px; overflow-y: scroll" id="leads_list_left">
         <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" OnCustomCallback="gridTasks_CustomCallback" OnCustomColumnSort="gridTasks_CustomColumnSort"
             ID="gridTasks" Border-BorderStyle="None" ClientInstanceName="gridTasks" Width="100%" AutoGenerateColumns="False" KeyFieldName="ProcInstId;ActInstId" OnDataBinding="gridTasks_DataBinding">
             <Columns>
@@ -120,20 +122,13 @@
                         <i class="fa fa-circle color_star" style="color: <%# GetMarkColor(Eval("Priority"))%>">
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="DisplayName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
+                <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
                     <Settings AutoFilterCondition="Contains" />
                     <DataItemTemplate>
-                        <%--  <span onclick='ShowWorklistItem("<%# Eval("ItemData")%>", "<%# Eval("ProcessName")%>")'><%# Eval("DisplayName")%></span>--%>
-                        <%# Eval("DisplayName")%>
+                        <div><%# Eval("LeadsName")%></div>
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
-                <dx:GridViewDataTextColumn FieldName="StartDate" Visible="false" PropertiesTextEdit-DisplayFormatString="d" VisibleIndex="2" Caption="Date">
-                    <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
-                    <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
-                </dx:GridViewDataTextColumn>
-                <dx:GridViewDataColumn FieldName="ActivityName" Visible="false" VisibleIndex="3">
-                </dx:GridViewDataColumn>
-                <dx:GridViewDataColumn FieldName="Originator" Visible="false" VisibleIndex="4">
+                <dx:GridViewDataColumn FieldName="EmployeeName" Visible="false" VisibleIndex="4">
                     <GroupRowTemplate>
                         <div>
                             <table style="height: 45px">
@@ -151,23 +146,14 @@
                         </div>
                     </GroupRowTemplate>
                 </dx:GridViewDataColumn>
-                <dx:GridViewDataColumn FieldName="ProcSchemeDisplayName" Visible="false" VisibleIndex="5" Settings-SortMode="Custom">
-                    <GroupRowTemplate>
-                        <div>
-                            <table style="height: 45px">
-                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
-                                    <td style="width: 80px;">
-                                        <span class="font_black">
-                                            <i class="fa fa-user font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
-                                        </span>
-                                    </td>
-                                    <td style="padding-left: 10px">
-                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
-                                    </td>
-                                </tr>
-                            </table>
+                <dx:GridViewDataColumn FieldName="LastUpdate" Visible="false" VisibleIndex="5"></dx:GridViewDataColumn>
+                <dx:GridViewDataColumn Width="40px" VisibleIndex="6">
+                    <DataItemTemplate>
+                        <div class="hidden_icon">
+                            <i class="fa fa-list-alt employee_list_item_icon" style="width: 30px" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>"></i>
                         </div>
-                    </GroupRowTemplate>
+                        <%-- <img src="/images/flag1.png" style="width: 16px; height: 16px; vertical-align: bottom" onclick="<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>" />--%>
+                    </DataItemTemplate>
                 </dx:GridViewDataColumn>
             </Columns>
             <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="false" AllowGroup="true"
@@ -201,12 +187,14 @@
         <ItemStyle Paddings-PaddingLeft="20px" />
         <Items>
             <dx:MenuItem Text="Date" Name="Date">
-            </dx:MenuItem>                       
+            </dx:MenuItem>
             <dx:MenuItem Text="Employee" Name="Employee">
             </dx:MenuItem>
             <dx:MenuItem Text="Process" Name="Process">
-            </dx:MenuItem>       
+            </dx:MenuItem>
         </Items>
         <ClientSideEvents ItemClick="OnSortMenuClick" />
     </dx:ASPxPopupMenu>
+
+       <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
 </div>
