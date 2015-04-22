@@ -72,7 +72,7 @@
             });
         }
         function MonitorCall(name) {
-            popUpAtBottomRight('/AutoDialer/Dialer.aspx?Monitor=' + name, "monitor", 560, 570)
+            popUpAtBottomRight('/AutoDialer/Dialer.aspx?Monitor=' + name, "monitor", 560, 460)
         }
         function popUpAtBottomRight(pageToLoad, winName, width, height) {
             xposition = 0; yposition = 0;

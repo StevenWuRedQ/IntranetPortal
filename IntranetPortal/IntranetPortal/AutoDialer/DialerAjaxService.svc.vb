@@ -25,19 +25,25 @@ Public Class DialerAjaxService
     <OperationContract()>
     <WebGet(UriTemplate:="GetCallDuration/{CallSid}")>
     Public Function GetCallDuration(CallSid As String) As Channels.Message
-     
-        Dim twilio = New TwilioRestClient(AccountSid, AuthToken)
 
-        Dim [call] = twilio.GetCall(CallSid)
-        Dim duration = ""
-        ' try to get confercens call
-        If ([call] Is Nothing) Then
-            [call] = GetOutboundCallInConference(CallSid)
-       
-        End If
-        Dim times = TimeSpan.FromSeconds([call].Duration)
-        duration = times.ToString("hh\:mm\:ss").Replace("00:", "").Replace("00:00:", "")
-        Return duration.ToJson()
+            Dim twilio = New TwilioRestClient(AccountSid, AuthToken)
+
+            Dim [call] = twilio.GetCall(CallSid)
+            Dim duration = "services error can't get duration "
+            ' try to get confercens call
+            If ([call] Is Nothing) Then
+                [call] = GetOutboundCallInConference(CallSid)
+
+            End If
+            If ([call] IsNot Nothing AndAlso Not String.IsNullOrEmpty([call].Duration)) Then
+                Dim times = TimeSpan.FromSeconds([call].Duration)
+
+                duration = times.ToString("hh\:mm\:ss").Replace("00:", "").Replace("00:00:", "")
+            Else
+                Return duration.ToJson
+            End If
+
+            Return duration.ToJson()
 
     End Function
     Public Shared Function GetOutboundCallInConference(conferenceID) As Twilio.Call

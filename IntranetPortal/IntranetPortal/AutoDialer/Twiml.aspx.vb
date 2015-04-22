@@ -12,7 +12,7 @@ Public Class Twiml
         callerId = "+19179633481"
 
         ' put your default Twilio Client name here, for when a phone number isn't given
-        Dim number As String = "jenny"
+        Dim number As String = ""
 
         ' get the phone number from the page request parameters, if given
         If Request("PhoneNumber") IsNot Nothing Then
@@ -25,7 +25,7 @@ Public Class Twiml
         Dim isOut = Request("isout")
 
         ' All user is not muted need end conferce on exit
-        If (muted IsNot Nothing) Then
+        If (String.IsNullOrEmpty(muted)) Then
             isOut = "1"
         End If
         'Dim m = Regex.Match(number, "^[\d\+\-\(\) ]+$")

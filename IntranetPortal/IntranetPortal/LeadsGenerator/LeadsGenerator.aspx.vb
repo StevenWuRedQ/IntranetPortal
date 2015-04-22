@@ -176,7 +176,8 @@ Public Class LeadsGenerator
     Protected Function HasNewLeadsInProtal() As Integer
         Dim OfficeName = GetImportToUser()
         Using Context As New Entities
-            Return Context.Leads.Where(Function(l) l.EmployeeName = OfficeName And l.Status = LeadStatus.NewLead).Count()
+            Dim inPadding = Context.PendingAssignLeads.Where(Function(p) p.EmployeeName = OfficeName AndAlso (p.Status = 0 Or p.Status = 1)).Count
+            Return Context.Leads.Where(Function(l) l.EmployeeName = OfficeName And l.Status = LeadStatus.NewLead).Count() + inPadding
         End Using
 
         Return 0

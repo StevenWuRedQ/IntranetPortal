@@ -46,7 +46,7 @@
             $(function ()
             {
                 InitConfrence(CallNumber)
-            }).delay(2000)
+            }).delay(5000)
 
             //}else
             //{
@@ -72,11 +72,15 @@
         Twilio.Device.disconnect(function (conn) {
             $("#log").text("Call ended");
             var callId = conn.parameters.CallSid;
-            var url = '/AutoDialer/DialerAjaxService.svc/GetCallDuration/' + callId;
-            $.getJSON(url, function (duration) {
-                var log = sprintf("%s did phone (%s) call duration %s", $("#userName").val(), CallNumber, duration);
-                logCall(BBLE, log)
-            });
+            if (callId && typeof callId !== 'undefined')
+            {
+                var url = '/AutoDialer/DialerAjaxService.svc/GetCallDuration/' + callId;
+                $.getJSON(url, function (duration) {
+                    var log = sprintf("%s did phone (%s) call duration %s", $("#userName").val(), CallNumber, duration);
+                    logCall(BBLE, log)
+                });
+            }
+            
 
         });
 
