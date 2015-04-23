@@ -55,13 +55,15 @@
     function OnGridFocusedRowChanged(s, e) {
         // The values will be returned to the OnGetRowValues() function 
         if (gridTasks.GetFocusedRowIndex() >= 0) {
-            gridTasks.GetRowValues(gridTasks.GetFocusedRowIndex(), 'ItemData', OnGetRowValues);
+            var bble = gridTasks.GetRowKey(gridTasks.GetFocusedRowIndex());
+            ShowListPropertyPage(bble);
         }
     }
 
-    function OnGetRowValues(values) {
-        var contentPane = splitterTaskPage.GetPaneByName("contentPanel");
-        contentPane.SetContentUrl(values);
+    function ShowListPropertyPage(bble) {
+        var contentPane = splitter.GetPaneByName("contentPanel");
+        var url = "/Publish/PublishPropertyPage.aspx?bble=" + bble;
+        contentPane.SetContentUrl(url);
     }
 
     function SortLeadsList(s, field) {
@@ -115,11 +117,11 @@
     </div>
     <div style="height: 768px; overflow-y: scroll" id="leads_list_left">
         <dx:ASPxGridView runat="server" EnableRowsCache="false" Settings-ShowColumnHeaders="false" SettingsBehavior-AutoExpandAllGroups="true" OnCustomCallback="gridTasks_CustomCallback" OnCustomColumnSort="gridTasks_CustomColumnSort"
-            ID="gridTasks" Border-BorderStyle="None" ClientInstanceName="gridTasks" Width="100%" AutoGenerateColumns="False" KeyFieldName="ProcInstId;ActInstId" OnDataBinding="gridTasks_DataBinding">
+            ID="gridTasks" Border-BorderStyle="None" ClientInstanceName="gridTasks" Width="100%" AutoGenerateColumns="False" KeyFieldName="BBLE" OnDataBinding="gridTasks_DataBinding">
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="MarkColor" VisibleIndex="0" Width="30px">
                     <DataItemTemplate>
-                        <i class="fa fa-circle color_star" style="color: <%# GetMarkColor(Eval("Priority"))%>">
+                        <i class="fa fa-circle color_star" style="color: <%# GetMarkColor(Eval("Process"))%>">
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
                 <dx:GridViewDataTextColumn FieldName="LeadsName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -156,7 +158,7 @@
                     </DataItemTemplate>
                 </dx:GridViewDataColumn>
             </Columns>
-            <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="false" AllowGroup="true"
+            <SettingsBehavior AllowFocusedRow="true" AllowClientEventsOnLoad="true" AllowGroup="true"
                 EnableRowHotTrack="True" />
             <%--<SettingsPager Mode="ShowPager" PageSize="17" Position="Bottom" Summary-Visible="false" ShowDisabledButtons="false" NumericButtonCount="4"></SettingsPager>--%>
             <SettingsPager Mode="ShowAllRecords"></SettingsPager>

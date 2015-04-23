@@ -10,7 +10,7 @@ Public Class PropertyListControl
     End Sub
 
     Public Sub BindProperty()
-        gridTasks.DataSource = Lead.GetUserLeadsData({Page.User.Identity.Name}, {LeadStatus.Publishing, LeadStatus.Published})
+        gridTasks.DataSource = Lead.GetPublicSiteLeads({Page.User.Identity.Name})
         gridTasks.DataBind()
     End Sub
 

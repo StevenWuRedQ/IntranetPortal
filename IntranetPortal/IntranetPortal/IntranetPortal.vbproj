@@ -1088,6 +1088,20 @@
       <DependentUpon>PropertyList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Publish\PublishProperty.ascx.designer.vb">
+      <DependentUpon>PublishProperty.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Publish\PublishProperty.ascx.vb">
+      <DependentUpon>PublishProperty.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Publish\PublishPropertyPage.aspx.designer.vb">
+      <DependentUpon>PublishPropertyPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Publish\PublishPropertyPage.aspx.vb">
+      <DependentUpon>PublishPropertyPage.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Reports\LeaderReport.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -1831,6 +1845,8 @@
     <Content Include="Proiority\Priority.aspx" />
     <Content Include="Publish\Publish.aspx" />
     <Content Include="Publish\PropertyList.ascx" />
+    <Content Include="Publish\PublishProperty.ascx" />
+    <Content Include="Publish\PublishPropertyPage.aspx" />
     <Content Include="scripts\angular-mocks.js" />
     <Content Include="scripts\angular.js" />
     <Content Include="scripts\angular.min.js" />

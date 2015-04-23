@@ -34,9 +34,9 @@ Partial Public Class ListProperty
     Public Property MinDownPay As Nullable(Of Decimal)
     Public Property AllowDog As Nullable(Of Boolean)
     Public Property AllowCat As Nullable(Of Boolean)
-    Public Property TotalSqft As Nullable(Of Double)
-    Public Property UnitsInBuilding As Nullable(Of Decimal)
-    Public Property BuildingFloors As Nullable(Of Decimal)
+    Public Property TotalSqft As Nullable(Of Decimal)
+    Public Property UnitsInBuilding As Nullable(Of Integer)
+    Public Property BuildingFloors As Nullable(Of Integer)
     Public Property SchoolDistrict As String
     Public Property Latitude As String
     Public Property Longitude As String

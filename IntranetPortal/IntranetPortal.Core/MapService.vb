@@ -60,6 +60,7 @@ Public Class MapService
 
         Return result
     End Function
+
     Function LoadLotByTeam(Team As String) As List(Of Feature)
         Dim result As New List(Of Feature)
         Using ctx As New MapDataEntitiesContainer

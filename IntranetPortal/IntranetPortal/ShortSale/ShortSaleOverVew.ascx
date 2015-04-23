@@ -320,7 +320,6 @@
             </div>
         </dx:PanelContent>
     </PanelCollection>
-
 </dx:ASPxCallbackPanel>
 
 <dx:ASPxPopupControl ClientInstanceName="aspxAcrisControl" Width="1000px" Height="800px"

@@ -254,6 +254,10 @@ Public Class LeadsSubMenu
                     End If
                     ShortSale.EvictionCas.AddEviction(bble, name, Page.User.Identity.Name)
                 End If
+
+                If lbSelectionMode.SelectedValues.Contains("4") Then
+                    Lead.Publishing(bble)
+                End If
             End If
         End If
     End Sub

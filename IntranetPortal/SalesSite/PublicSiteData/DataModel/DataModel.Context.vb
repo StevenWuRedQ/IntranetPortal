@@ -26,5 +26,7 @@ Partial Public Class PublicSiteEntities
     Public Overridable Property Neighbors() As DbSet(Of Neighbor)
     Public Overridable Property PropertyImages() As DbSet(Of PropertyImage)
     Public Overridable Property ListProperties() As DbSet(Of ListProperty)
+    Public Overridable Property FeatureDatas() As DbSet(Of FeatureData)
+    Public Overridable Property PropertyFeatures() As DbSet(Of PropertyFeature)
 
 End Class

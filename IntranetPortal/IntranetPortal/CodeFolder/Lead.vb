@@ -2,6 +2,12 @@
 
 Partial Public Class Lead
 
+    Public Enum LeadProcess
+        Agent = 0
+        Publishing = 1
+        Published = 2
+    End Enum
+
     Public ReadOnly Property FormatLeadsname As String
         Get
             Dim leadsname = String.Format("<span style='color:red'>{0} {1}</span> - {2}", LeadsInfo.Number, LeadsInfo.StreetName, LeadsInfo.Owner)
@@ -157,6 +163,53 @@ Partial Public Class Lead
                      Select ld
 
         Return result.ToList
+    End Function
+
+    Public Shared Function GetPublicSiteLeads(names As String()) As List(Of Lead)
+        Dim ctx As New Entities
+        Dim processes = {LeadProcess.Published, LeadProcess.Publishing}
+        Dim result = From ld In ctx.Leads.Where(Function(l) names.Contains(l.EmployeeName) AndAlso processes.Contains(l.Process))
+                   Order By ld.LastUpdate Descending
+                   Select ld
+
+        Return result.ToList
+    End Function
+
+    Public Shared Sub Publishing(bble As String)
+        Using ctx As New Entities
+            Dim ld = ctx.Leads.Find(bble)
+
+            If ld IsNot Nothing Then
+                ld.Process = LeadProcess.Publishing
+                ctx.SaveChanges()
+
+                InitPublicData(bble)
+            End If
+        End Using
+    End Sub
+
+    Public Shared Function InitPublicData(bble As String) As PublicSiteData.ListProperty
+        Dim ld = LeadsInfo.GetInstance(bble)
+
+        Dim listProp As New PublicSiteData.ListProperty
+        listProp.BBLE = bble
+        listProp.Block = ld.Block
+        listProp.Lot = ld.Lot
+        listProp.PropertyClass = ld.PropertyClass
+        listProp.AptNo = ld.UnitNum
+        listProp.Number = ld.Number
+        listProp.StreetName = ld.StreetName
+        listProp.NeighName = ld.NeighName
+        listProp.State = ld.State
+        listProp.Zipcode = ld.ZipCode
+        listProp.Borough = ld.Borough
+        listProp.Agent = Lead.GetInstance(bble).EmployeeName
+
+        'geo info
+        listProp.Latitude = ""
+        listProp.Longitude = ""
+
+        Return listProp.Create()
     End Function
 
     Public Shared Function UpdateLeadStatus(bble As String, status As LeadStatus, callbackDate As DateTime) As Boolean

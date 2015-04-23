@@ -197,6 +197,11 @@
               <![CDATA[ <i class="fa fa-check-circle"></i>]]>
             </FontClass>
           </PortalNavItem>
+          <PortalNavItem Name="AgentPublish" Text="Published" NavigationUrl="/Publish/Publish.aspx">
+            <FontClass>
+              <![CDATA[ <i class="fa fa-paper-plane"></i>]]>
+            </FontClass>
+          </PortalNavItem>
         </Items>
       </PortalNavItem>
       <PortalNavItem Name="AssignLeads" Text="Assign Leads" NavigationUrl="/Management/LeadsManagement.aspx" ShowAmount="true">

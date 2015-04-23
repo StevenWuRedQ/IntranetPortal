@@ -16,14 +16,7 @@
                                 </dx:SplitterContentControl>
                             </ContentCollection>
                         </dx:SplitterPane>
-                        <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px">
-                            <PaneStyle BackColor="#F9F9F9">
-                            </PaneStyle>
-                            <ContentCollection>
-                                <dx:SplitterContentControl ID="SplitterContentControl2" runat="server">
-
-                                </dx:SplitterContentControl>
-                            </ContentCollection>
+                        <dx:SplitterPane Name="contentPanel" ShowCollapseForwardButton="True" PaneStyle-BackColor="#f9f9f9" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px" ContentUrl="about:blank">                        
                         </dx:SplitterPane>
                     </Panes>
                 </dx:SplitterPane>

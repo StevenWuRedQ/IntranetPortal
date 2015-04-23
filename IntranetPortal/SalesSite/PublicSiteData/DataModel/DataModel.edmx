@@ -19,6 +19,14 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="FeatureData">
+          <Key>
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="FeatureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
         <EntityType Name="ListProperties">
           <Key>
             <PropertyRef Name="BBLE" />
@@ -46,9 +54,9 @@
           <Property Name="MinDownPay" Type="decimal" Precision="18" Scale="2" />
           <Property Name="AllowDog" Type="bit" />
           <Property Name="AllowCat" Type="bit" />
-          <Property Name="TotalSqft" Type="float" />
-          <Property Name="UnitsInBuilding" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="BuildingFloors" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TotalSqft" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UnitsInBuilding" Type="int" />
+          <Property Name="BuildingFloors" Type="int" />
           <Property Name="SchoolDistrict" Type="nvarchar" MaxLength="50" />
           <Property Name="Latitude" Type="nvarchar" MaxLength="50" />
           <Property Name="Longitude" Type="nvarchar" MaxLength="50" />
@@ -69,21 +77,37 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="PropertyFeatures">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="FeatureId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="PropertyImages">
           <Key>
             <PropertyRef Name="ImageId" />
           </Key>
-          <Property Name="ImageId" Type="int" Nullable="false" />
+          <Property Name="ImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="OrderId" Type="int" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="256" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
           <Property Name="ImageData" Type="varbinary(max)" />
+          <Property Name="ImageSize" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="PublicSiteModelStoreContainer">
           <EntitySet Name="Agents" EntityType="Self.Agents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeatureData" EntityType="Self.FeatureData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ListProperties" EntityType="Self.ListProperties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Neighbors" EntityType="Self.Neighbors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyFeatures" EntityType="Self.PropertyFeatures" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyImages" EntityType="Self.PropertyImages" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -122,12 +146,17 @@
           <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ImageSize" Type="Int32" />
         </EntityType>
         <EntityContainer Name="PublicSiteEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Agents" EntityType="Self.Agent" />
           <EntitySet Name="Neighbors" EntityType="Self.Neighbor" />
           <EntitySet Name="PropertyImages" EntityType="Self.PropertyImage" />
           <EntitySet Name="ListProperties" EntityType="PublicSiteModel.ListProperty" />
+          <EntitySet Name="FeatureDatas" EntityType="PublicSiteModel.FeatureData" />
+          <EntitySet Name="PropertyFeatures" EntityType="PublicSiteModel.PropertyFeature" />
         </EntityContainer>
         <EntityType Name="ListProperty">
           <Key>
@@ -156,9 +185,9 @@
           <Property Name="MinDownPay" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="AllowDog" Type="Boolean" />
           <Property Name="AllowCat" Type="Boolean" />
-          <Property Name="TotalSqft" Type="Double" />
-          <Property Name="UnitsInBuilding" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="BuildingFloors" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalSqft" Type="Decimal" />
+          <Property Name="UnitsInBuilding" Type="Int32" />
+          <Property Name="BuildingFloors" Type="Int32" />
           <Property Name="SchoolDistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -170,6 +199,25 @@
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FeatureData">
+          <Key>
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="FeatureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PropertyFeature">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="FeatureId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -204,6 +252,9 @@
           <EntitySetMapping Name="PropertyImages">
             <EntityTypeMapping TypeName="PublicSiteModel.PropertyImage">
               <MappingFragment StoreEntitySet="PropertyImages">
+                <ScalarProperty Name="ImageSize" ColumnName="ImageSize" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ImageId" ColumnName="ImageId" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
@@ -252,6 +303,26 @@
                 <ScalarProperty Name="PropertyClass" ColumnName="PropertyClass" />
                 <ScalarProperty Name="Lot" ColumnName="Lot" />
                 <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeatureDatas">
+            <EntityTypeMapping TypeName="PublicSiteModel.FeatureData">
+              <MappingFragment StoreEntitySet="FeatureData">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyFeatures">
+            <EntityTypeMapping TypeName="PublicSiteModel.PropertyFeature">
+              <MappingFragment StoreEntitySet="PropertyFeatures">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>

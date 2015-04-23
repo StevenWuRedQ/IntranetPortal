@@ -42,20 +42,17 @@
                         <input type="radio" id="pdf_check_yes" name="1" <%= ShortSalePage.CheckBox(summaryCase.PropertyInfo.CO)%> value="YES" class="ss_form_input">
                         <label for="pdf_check_yes" class="input_with_check">
                             <span class="box_text">Yes </span>
-
                         </label>
 
                         <input type="radio" id="pdf_check_no" name="1" <%= ShortSalePage.CheckBox( Not summaryCase.PropertyInfo.CO)%> value="NO" class="ss_form_input">
                         <label for="pdf_check_no" class="input_with_check">
                             <span class="box_text">No </span>
                         </label>
-
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Tax class</label>
                         <input class="ss_form_input" value="<%= summaryCase.PropertyInfo.TaxClass%>">
                     </li>
-
                     <li class="ss_form_item">
                         <label class="ss_form_input_title"># of families</label>
                         <input class="ss_form_input" value="<%= summaryCase.PropertyInfo.NumOfFamilies%>">
@@ -229,7 +226,6 @@
                         <label class="ss_form_input_title">Offie phone #</label>
                         <input class="ss_form_input" value="<%=summaryCase.ReferralContact.OfficeNO %>">
                     </li>
-
                 </ul>
             </div>
 
