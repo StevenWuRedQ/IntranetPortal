@@ -177,7 +177,7 @@
                                                         </div>
                                                         <br />
                                                         <div class="input-group" style="width: 100%">
-                                                            <span>Assgin to</span>
+                                                            <span>Assgin for</span>
                                                             <select class="form-control">
                                                                 <option>Bankruptcy</option>
                                                                 <option>Statute of Limitations</option>
