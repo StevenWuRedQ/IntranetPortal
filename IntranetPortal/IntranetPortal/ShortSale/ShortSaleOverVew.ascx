@@ -8,7 +8,6 @@
 <%@ Register Src="~/ShortSale/ShortSaleMortgageTab.ascx" TagPrefix="uc1" TagName="ShortSaleMortgageTab" %>
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 
-
 <script src="/scripts/jquery.formatCurrency-1.1.0.js"></script>
 <script type="text/javascript">
     function init_currency() {
@@ -255,7 +254,7 @@
                                                     <th>Method</th>
                                                     <th>Bank Value</th>
                                                     <th>Date Of Value</th>
-                                                    <th>Date Of Value</th>
+                                                    <th>Expires on</th>
 
                                                 </tr>
                                             </thead>
@@ -269,7 +268,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input class="form-control" />
+                                                    <input class="form-control input_curr" />
                                                 </td>
                                                 <td>
                                                     <input class="form-control ss_date" />

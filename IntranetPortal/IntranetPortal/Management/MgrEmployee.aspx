@@ -80,7 +80,7 @@
                                                 </dx:TreeListTextColumn>
                                                 <dx:TreeListImageColumn FieldName="Picture" VisibleIndex="10" Visible="false" EditFormSettings-Visible="True">
                                                     <EditCellTemplate>
-                                                        <dx:ASPxImage ID="imgEmpPhoto" runat="server" ImageUrl='<%# Bind("Picture")%>' Width="50px" Height="50px" Cursor="pointer">
+                                                        <dx:ASPxImage ID="imgEmpPhoto" runat="server" ImageUrl='<%# "/DownloadFile.aspx?id=" & Eval("Picture")%>' Width="50px" Height="50px" Cursor="pointer">
                                                             <EmptyImage Url="/images/User-Empty-icon.png" ></EmptyImage>
                                                             <ClientSideEvents Click="function(s,e){aspxImage = s; selectImgs.ShowAtElement(s.GetMainElement()); getPreviewImageElement().src='/images/user-empty-icon.png';}" />
                                                         </dx:ASPxImage>
@@ -172,7 +172,8 @@
                                                             var imgSrc = aspxPreviewImgSrc;
                                                             if (args.isValid) {
                                                                 //var date = new Date();
-                                                                imgSrc = args.callbackData;
+                                                                imgSrc = "/DownloadFile.aspx?id=" + args.callbackData;
+                                                                fileId = args.callbackData;
                                                                 aspxPreviewImgSrc = imgSrc;                                                               
                                                                 getPreviewImageElement().src = imgSrc;
                                                             }
@@ -232,7 +233,7 @@
                                                                                         &nbsp;
                                                                                         <dx:ASPxButton ID="btnConfirm" runat="server" AutoPostBack="False" Text="OK" CausesValidation="false"
                                                                                             Width="100px" Style="margin: 0 auto;">
-                                                                                            <ClientSideEvents Click="function(s, e) { aspxImage.SetImageUrl(aspxPreviewImgSrc);txtImageUrl.SetText(aspxPreviewImgSrc); selectImgs.Hide(); }" />
+                                                                                            <ClientSideEvents Click="function(s, e) { aspxImage.SetImageUrl(aspxPreviewImgSrc);txtImageUrl.SetText(fileId); selectImgs.Hide(); }" />
                                                                                         </dx:ASPxButton>
                                                                                     </td>
                                                                                 </tr>
@@ -248,6 +249,7 @@
                                                     <script type="text/javascript">
                                                         // <![CDATA[
                                                         var aspxPreviewImgSrc = getPreviewImageElement().src;
+                                                        var fileId = null;
                                                         // ]]> 
                                                     </script>
 

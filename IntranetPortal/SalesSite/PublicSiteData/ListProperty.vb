@@ -6,6 +6,12 @@
         End Using
     End Function
 
+    Public Shared Function GetRecentListing() As List(Of ListProperty)
+        Using ctx As New PublicSiteEntities
+            Return ctx.ListProperties.OrderByDescending(Function(lp) lp.CreateDate).Take(4).ToList
+        End Using
+    End Function
+
     Public Shared Function GetListedPropertyByOwner(ownerNames As String()) As List(Of ListProperty)
         Using ctx As New PublicSiteEntities
             Return ctx.ListProperties.Where(Function(p) ownerNames.Contains(p.Agent)).ToList
@@ -53,6 +59,12 @@
         End Using
     End Sub
 
+    Public ReadOnly Property Images As List(Of PropertyImage)
+        Get
+            Return PropertyImage.GetPropertyImages(BBLE)
+        End Get
+    End Property
+
     Public Enum ListPropertyStatus
         Publishing = 0
         Published = 1
@@ -73,6 +85,12 @@ Partial Public Class PropertyImage
     Public Shared Function GetPropertyImages(bble As String) As List(Of PropertyImage)
         Using ctx As New PublicSiteEntities
             Return ctx.PropertyImages.Where(Function(pi) pi.BBLE = bble).OrderBy(Function(pi) pi.OrderId).ToList
+        End Using
+    End Function
+
+    Public Shared Function GetImage(imageId As Integer) As PropertyImage
+        Using ctx As New PublicSiteEntities
+            Return ctx.PropertyImages.Find(imageId)
         End Using
     End Function
 

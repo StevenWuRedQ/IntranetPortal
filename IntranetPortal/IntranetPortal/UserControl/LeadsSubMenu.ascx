@@ -189,12 +189,12 @@
         <dx:PopupControlContentControl runat="server" ID="popupContentInProcess" Visible="false">
             <asp:HiddenField runat="server" ID="hfInProcessBBLE" />
             <dx:ASPxCheckBoxList ID="lbSelectionMode" runat="server" AutoPostBack="false" Border-BorderStyle="None">
-                <Items>
+                <Items>                    
                     <dx:ListEditItem Text="Short Sale" Value="0" />
-                    <dx:ListEditItem Text="Evition" Value="1" />
+                    <dx:ListEditItem Text="Eviction" Value="1" />
+                    <dx:ListEditItem Text="Legal" Value="3" />
                     <dx:ListEditItem Text="Construction" Value="2" />
-                    <dx:ListEditItem Text="Litigation" Value="3" />
-                    <dx:ListEditItem Text="Publishing Process" Value="4" />
+                    <dx:ListEditItem Text="Open Market Sale" Value="4" />
                 </Items>
                 <ClientSideEvents SelectedIndexChanged="function(s,e){
                         if(s.GetSelectedValues().indexOf('1')!=-1)

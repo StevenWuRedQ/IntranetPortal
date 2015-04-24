@@ -104,6 +104,9 @@
     <Compile Include="DataModel\Neighbor.vb">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\PortalAgent.vb">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\PropertyFeature.vb">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -126,6 +129,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ListProperty.vb" />
+    <Compile Include="PortalAgent.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

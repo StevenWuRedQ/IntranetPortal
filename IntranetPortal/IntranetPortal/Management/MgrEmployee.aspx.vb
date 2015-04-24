@@ -127,7 +127,7 @@ Public Class MgrEmployee
     End Sub
 
     Protected Sub uplImage_FileUploadComplete(sender As Object, e As DevExpress.Web.ASPxUploadControl.FileUploadCompleteEventArgs)
-        e.CallbackData = String.Format("/DownloadFile.aspx?id={0}", SavePostedFile(e.UploadedFile))
+        e.CallbackData = SavePostedFile(e.UploadedFile)
     End Sub
 
    Private Function SavePostedFile(ByVal uploadedFile As UploadedFile) As String

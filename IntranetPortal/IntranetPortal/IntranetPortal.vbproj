@@ -171,8 +171,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security">
-      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SharePoint.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\..\..\Program Files\Common Files\Microsoft Shared\Web Server Extensions\15\ISAPI\Microsoft.SharePoint.Client.dll</HintPath>
@@ -2536,9 +2537,9 @@
     <Content Include="fonts\icons.woff" />
     <Content Include="EmailTemplate\Web.config" />
     <Content Include="AutoDialer\Web.config" />
-    <None Include="scripts\jquery-2.1.1.intellisense.js" />
-    <Content Include="scripts\jquery-2.1.1.js" />
-    <Content Include="scripts\jquery-2.1.1.min.js" />
+    <None Include="scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="scripts\jquery-2.1.3.js" />
+    <Content Include="scripts\jquery-2.1.3.min.js" />
     <Content Include="scripts\jquery.collapse.js" />
     <Content Include="scripts\jquery.collapse_cookie_storage.js" />
     <Content Include="scripts\jquery.collapse_storage.js" />
@@ -2630,7 +2631,6 @@
     <Content Include="scripts\PortalMessager.js" />
     <Content Include="scripts\prototype.js" />
     <Content Include="scripts\stevenjs.js" />
-    <Content Include="scripts\jquery-2.1.1.min.map" />
     <Content Include="scripts\vectormap-data\africa.js" />
     <Content Include="scripts\vectormap-data\canada.js" />
     <Content Include="scripts\vectormap-data\eurasia.js" />
@@ -2642,6 +2642,7 @@
     <Content Include="scripts\vectormap-utils\dx.vectormaputils.node.js" />
     <Content Include="scripts\Web.config" />
     <Content Include="scrollbar\Web.config" />
+    <Content Include="scripts\jquery-2.1.3.min.map" />
     <None Include="Service References\CallTrackingService\CallTrackingService.wsdl" />
     <Content Include="Service References\CallTrackingService\IntranetPortal.CallTrackingService.EmployeeStatisticData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

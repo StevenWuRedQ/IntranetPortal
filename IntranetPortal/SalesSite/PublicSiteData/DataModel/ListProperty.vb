@@ -48,5 +48,6 @@ Partial Public Class ListProperty
     Public Property CreateBy As String
     Public Property UpdateDate As Nullable(Of Date)
     Public Property UpdateBy As String
+    Public Property DefaultImage As Nullable(Of Integer)
 
 End Class

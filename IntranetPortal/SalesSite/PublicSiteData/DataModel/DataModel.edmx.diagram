@@ -11,6 +11,7 @@
         <EntityTypeShape EntityType="PublicSiteModel.ListProperty" Width="1.5" PointX="3.375" PointY="3.75" />
         <EntityTypeShape EntityType="PublicSiteModel.FeatureData" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="PublicSiteModel.PropertyFeature" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="PublicSiteModel.PortalAgent" Width="1.5" PointX="8.5" PointY="2.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

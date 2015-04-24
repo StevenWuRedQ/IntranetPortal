@@ -426,7 +426,7 @@
                                                 var dateNow = new Date();
                                                 var endDate = new Date();
                                                 endDate = endDate.setDate(dateNow.getDate() + 1);
-                                                var startDate = new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
+                                                var startDate = dateNow; //new Date(dateNow.getFullYear(), dateNow.getMonth(), 1);
                                                 $("#dateRange").dxRangeSelector({
                                                     margin: {
                                                         top: 5
@@ -449,7 +449,7 @@
                                                         format: "monthAndDay"
                                                     },
                                                     selectedRange: {
-                                                        startValue: new Date(dateNow.getFullYear(), dateNow.getMonth(), 1),
+                                                        startValue: startDate,
                                                         endValue: endDate
                                                     },
                                                     onSelectedRangeChanged: function (e) {

@@ -17,6 +17,24 @@
         }
     });
     </script>
+    @Html.DevExpress().GetScripts(
+        New Script With {.ExtensionSuite = ExtensionSuite.NavigationAndLayout},
+        New Script With {.ExtensionSuite = ExtensionSuite.HtmlEditor},
+        New Script With {.ExtensionSuite = ExtensionSuite.GridView},
+        New Script With {.ExtensionSuite = ExtensionSuite.Editors},
+        New Script With {.ExtensionSuite = ExtensionSuite.Scheduler},
+        New Script With {.ExtensionSuite = ExtensionSuite.TreeList}
+    )
+
+    @Html.DevExpress().GetStyleSheets(
+        New StyleSheet With {.ExtensionSuite = ExtensionSuite.NavigationAndLayout},
+        New StyleSheet With {.ExtensionSuite = ExtensionSuite.Editors},
+        New StyleSheet With {.ExtensionSuite = ExtensionSuite.HtmlEditor},
+        New StyleSheet With {.ExtensionSuite = ExtensionSuite.GridView},
+        New StyleSheet With {.ExtensionSuite = ExtensionSuite.Scheduler},
+        New StyleSheet With {.ExtensionSuite = ExtensionSuite.TreeList}
+    )
+
     <script type="text/javascript" src="~/Scripts/modernizr.js"></script>
      <style type="text/css">
          
@@ -241,7 +259,7 @@ html {
             </div>
         </div>
     </footer>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     @RenderSection("FootScript", False)
     <script type="text/javascript" src="~/Scripts/wf.js"></script>       
     @RenderSection("scripts", required:=False)

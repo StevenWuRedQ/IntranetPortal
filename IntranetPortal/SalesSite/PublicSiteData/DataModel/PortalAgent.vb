@@ -10,16 +10,14 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class PropertyImage
-    Public Property ImageId As Integer
-    Public Property BBLE As String
-    Public Property OrderId As Nullable(Of Integer)
-    Public Property ImageData As Byte()
-    Public Property CreateDate As Nullable(Of Date)
-    Public Property CreateBy As String
+Partial Public Class PortalAgent
+    Public Property EmployeeID As Integer
+    Public Property Name As String
+    Public Property Position As String
+    Public Property Department As String
+    Public Property Email As String
     Public Property Description As String
-    Public Property FileName As String
-    Public Property ImageSize As Nullable(Of Integer)
-    Public Property ContentType As String
+    Public Property CellPhone As String
+    Public Property Photo As Byte()
 
 End Class

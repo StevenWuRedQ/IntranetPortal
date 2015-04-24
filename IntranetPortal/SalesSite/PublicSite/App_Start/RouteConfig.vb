@@ -7,7 +7,11 @@ Imports System.Web.Routing
 
 Public Module RouteConfig
     Public Sub RegisterRoutes(ByVal routes As RouteCollection)
+        RouteTable.Routes.Add("ImageRoute", New Route("getImage/{imageId}", New RouteValueDictionary(New With {.imageId = 0}), New ImageHandler))
+        RouteTable.Routes.Add("AgentImageRoute", New Route("getAgentImage/{agentId}", New ImageHandler))
+
         routes.IgnoreRoute("{resource}.axd/{*pathInfo}")
+        routes.IgnoreRoute("{resource}.ashx/{*pathInfo}")
 
         routes.MapRoute(
             name:="Default",

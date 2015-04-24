@@ -136,6 +136,7 @@ Public Class PublishProperty
         Dim img As New PropertyImage
         img.FileName = e.UploadedFile.FileName
         img.ImageData = e.UploadedFile.FileBytes
+        img.ContentType = e.UploadedFile.ContentType
         img.ImageSize = e.UploadedFile.ContentLength
         img.BBLE = hfBBLE.Value
         img.CreateBy = Page.User.Identity.Name

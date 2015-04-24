@@ -28,5 +28,6 @@ Partial Public Class PublicSiteEntities
     Public Overridable Property ListProperties() As DbSet(Of ListProperty)
     Public Overridable Property FeatureDatas() As DbSet(Of FeatureData)
     Public Overridable Property PropertyFeatures() As DbSet(Of PropertyFeature)
+    Public Overridable Property PortalAgents() As DbSet(Of PortalAgent)
 
 End Class

@@ -24,7 +24,8 @@
         <li style="margin-right: 30px; color: #ffa484; float: right">
             <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="Save Draft" onclick="cpProperty.PerformCallback('Save')"></i>
             <i class="fa fa-paper-plane sale_head_button sale_head_button_left tooltip-examples" title="Publish" onclick=""></i>
-            <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>
+            <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick=""></i>
+            <i class="fa fa-eye sale_head_button sale_head_button_left tooltip-examples" title="Preview" onclick=""></i>
         </li>
     </ul>
 

@@ -64,6 +64,7 @@
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="TransitLines" Type="nvarchar" MaxLength="50" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="DefaultImage" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="UpdateDate" Type="datetime" />
@@ -97,10 +98,28 @@
           <Property Name="OrderId" Type="int" />
           <Property Name="FileName" Type="nvarchar" MaxLength="256" />
           <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="ContentType" Type="nvarchar" MaxLength="256" />
           <Property Name="ImageData" Type="varbinary(max)" />
           <Property Name="ImageSize" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PublicSite.dbo.PortalAgents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PortalAgents">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+          <Property Name="CellPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Photo" Type="varbinary(max)" />
         </EntityType>
         <EntityContainer Name="PublicSiteModelStoreContainer">
           <EntitySet Name="Agents" EntityType="Self.Agents" Schema="dbo" store:Type="Tables" />
@@ -109,6 +128,18 @@
           <EntitySet Name="Neighbors" EntityType="Self.Neighbors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyFeatures" EntityType="Self.PropertyFeatures" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyImages" EntityType="Self.PropertyImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortalAgents" EntityType="Self.PortalAgents" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PortalAgents].[EmployeeID] AS [EmployeeID], 
+    [PortalAgents].[Name] AS [Name], 
+    [PortalAgents].[Position] AS [Position], 
+    [PortalAgents].[Department] AS [Department], 
+    [PortalAgents].[Email] AS [Email], 
+    [PortalAgents].[Description] AS [Description], 
+    [PortalAgents].[CellPhone] AS [CellPhone], 
+    [PortalAgents].[Photo] AS [Photo]
+    FROM [dbo].[PortalAgents] AS [PortalAgents]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -149,6 +180,7 @@
           <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="FileName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="ImageSize" Type="Int32" />
+          <Property Name="ContentType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="PublicSiteEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Agents" EntityType="Self.Agent" />
@@ -157,6 +189,7 @@
           <EntitySet Name="ListProperties" EntityType="PublicSiteModel.ListProperty" />
           <EntitySet Name="FeatureDatas" EntityType="PublicSiteModel.FeatureData" />
           <EntitySet Name="PropertyFeatures" EntityType="PublicSiteModel.PropertyFeature" />
+          <EntitySet Name="PortalAgents" EntityType="PublicSiteModel.PortalAgent" />
         </EntityContainer>
         <EntityType Name="ListProperty">
           <Key>
@@ -185,7 +218,7 @@
           <Property Name="MinDownPay" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="AllowDog" Type="Boolean" />
           <Property Name="AllowCat" Type="Boolean" />
-          <Property Name="TotalSqft" Type="Decimal" />
+          <Property Name="TotalSqft" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="UnitsInBuilding" Type="Int32" />
           <Property Name="BuildingFloors" Type="Int32" />
           <Property Name="SchoolDistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -199,6 +232,7 @@
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultImage" Type="Int32" />
         </EntityType>
         <EntityType Name="FeatureData">
           <Key>
@@ -218,6 +252,21 @@
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PortalAgent">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="CellPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -252,6 +301,7 @@
           <EntitySetMapping Name="PropertyImages">
             <EntityTypeMapping TypeName="PublicSiteModel.PropertyImage">
               <MappingFragment StoreEntitySet="PropertyImages">
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
                 <ScalarProperty Name="ImageSize" ColumnName="ImageSize" />
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -267,6 +317,7 @@
           <EntitySetMapping Name="ListProperties">
             <EntityTypeMapping TypeName="PublicSiteModel.ListProperty">
               <MappingFragment StoreEntitySet="ListProperties">
+                <ScalarProperty Name="DefaultImage" ColumnName="DefaultImage" />
                 <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
@@ -324,6 +375,20 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalAgents">
+            <EntityTypeMapping TypeName="PublicSiteModel.PortalAgent">
+              <MappingFragment StoreEntitySet="PortalAgents">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
