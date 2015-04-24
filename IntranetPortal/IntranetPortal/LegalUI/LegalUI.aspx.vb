@@ -7,6 +7,13 @@
             
             SecondaryAction = Request.QueryString("Attorney") IsNot Nothing
             Agent = Request.QueryString("Agent") IsNot Nothing
+
+           
+            ShortSaleCaseList.BindCaseForTest()
+            If (SecondaryAction AndAlso Agent) Then
+
+                'ShortSaleCaseList.groupBy()
+            End If
         End If
     End Sub
 

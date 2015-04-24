@@ -346,7 +346,17 @@
   </PortalNavItem>
   <PortalNavItem Name="Legal" Text="Legal" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <Items>
-      <PortalNavItem Name="Legal" Text="Legal Leads" NavigationUrl="/LegalUI/LegalUI.aspx" ShowAmount="true">
+      <PortalNavItem Name="Legal" Text="Legal Leads" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal2" Text="Legal Manger" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;attorney=true" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal3" Text="Legal Attorney" NavigationUrl="/LegalUI/LegalUI.aspx?attorney=true" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>

@@ -312,4 +312,8 @@ Public Class LeadsSubMenu
         Dim actlog As New ActivityLogs
         actlog.SetAsTask(emps, cbTaskImportant.Text, "Request Update", txtTaskDes.Text, bble, Page.User.Identity.Name)
     End Sub
+
+    Protected Sub aspxPopupLegalInfo_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+
+    End Sub
 End Class

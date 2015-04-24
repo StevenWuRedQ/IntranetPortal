@@ -1,4 +1,6 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LeadsSubMenu.ascx.vb" Inherits="IntranetPortal.LeadsSubMenu" %>
+<%@ Register Src="~/LegalUI/LegalSecondaryActions.ascx" TagPrefix="uc1" TagName="LegalSecondaryActions" %>
+
 <script type="text/javascript" src="/scripts/LeadsSubMenu.js"></script>
 <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
     <Items>
@@ -188,8 +190,8 @@
     <ContentCollection>
         <dx:PopupControlContentControl runat="server" ID="popupContentInProcess" Visible="false">
             <asp:HiddenField runat="server" ID="hfInProcessBBLE" />
-            <dx:ASPxCheckBoxList ID="lbSelectionMode" runat="server" AutoPostBack="false" Border-BorderStyle="None">
-                <Items>                    
+            <dx:ASPxCheckBoxList ID="lbSelectionMode" runat="server" ClientInstanceName="lbSelectionModeClient" AutoPostBack="false" Border-BorderStyle="None">
+                <Items>
                     <dx:ListEditItem Text="Short Sale" Value="0" />
                     <dx:ListEditItem Text="Eviction" Value="1" />
                     <dx:ListEditItem Text="Legal" Value="3" />
@@ -206,17 +208,31 @@
                     }
                     }" />
             </dx:ASPxCheckBoxList>
-            <div id="divEvictionUsers" style="display:none; width:300px;">
+            <div id="divEvictionUsers" style="display: none; width: 300px;">
                 Eviction User: 
                 <dx:ASPxComboBox ID="cbEvictionUsers" runat="server" AutoPostBack="false" Width="100%" CssClass="edit_drop">
                 </dx:ASPxComboBox>
             </div>
+
         </dx:PopupControlContentControl>
     </ContentCollection>
     <FooterContentTemplate>
         <div style="height: 30px; vertical-align: central">
+            <script>
+                function ConfirmClick() {
+                    //popupShow = false;
+                    //aspxPopupInprocessClient.PerformCallback('Save');
+                    var selected = lbSelectionModeClient.GetSelectedValues();
+                    if (selected.indexOf(3)) {
+                        //aspxPopupLegalInfoClient.Show();
+                        aspxPopupInprocessClient.Hide();
+                        $('.legal_action_div').css("display", 'none');
+                        $("#LegalPopUp").modal();
+                    }
+                }
+            </script>
             <span class="time_buttons" onclick="aspxPopupInprocessClient.Hide()">Cancel</span>
-            <span class="time_buttons" onclick="popupShow=false; aspxPopupInprocessClient.PerformCallback('Save');">Confirm</span>
+            <span class="time_buttons" onclick="ConfirmClick();">Confirm</span>
         </div>
     </FooterContentTemplate>
     <ClientSideEvents EndCallback="function(s,e){
@@ -228,7 +244,91 @@
         }
         }" />
 </dx:ASPxPopupControl>
+<div class="modal fade" id="LegalPopUp">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                 <div class="clearfix">
+            <div class="pop_up_header_margin">
+                <i class="fa fa-university  with_circle pop_up_header_icon"></i>
+                <span class="pop_up_header_text">Legal</span>
+            </div>
+            <div class="pop_up_buttons_div">
+                <i class="fa fa-times icon_btn" data-dismiss="modal" style="font-size: 23px;"></i>
+            </div>
+        </div>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <script>
+                        function LeagalInfoSelectChange(s, e) {
+                            var selected = cbLegalTypeClient.GetSelectedValues();
+                            $('.legal_action_div').css("display", 'none')
+                            $(selected).each(function (i,se) {
+                                
+                                $("#" + se).css("display", '');
+                            })
+                        }
+                    </script>
+                    <dx:ASPxCheckBoxList runat="server" ID="cbLegalType" ClientInstanceName="cbLegalTypeClient">
+                        <Items>
+                            <dx:ListEditItem Text="Partition" Value="Partition" />
+                            <dx:ListEditItem Text="Breach of Contract" Value="Breach_of_Contract" />
+                            <dx:ListEditItem Text="Quiet Title" Value="Quiet_Title" />
+                            <dx:ListEditItem Text="Estate" Value="Estate" />
+                        </Items>
+                        <ClientSideEvents SelectedIndexChanged="LeagalInfoSelectChange" />
+                    </dx:ASPxCheckBoxList>
 
+                    <uc1:LegalSecondaryActions runat="server" ID="LegalSecondaryActions" />
+
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<dx:ASPxPopupControl ClientInstanceName="aspxPopupLegalInfoClient" Width="680px" ID="aspxPopupLegalInfo"
+    Modal="true" ShowFooter="true" OnWindowCallback="aspxPopupLegalInfo_WindowCallback" runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <HeaderTemplate>
+        <div class="clearfix">
+            <div class="pop_up_header_margin">
+                <i class="fa fa-university  with_circle pop_up_header_icon"></i>
+                <span class="pop_up_header_text">In Process</span>
+            </div>
+            <div class="pop_up_buttons_div">
+                <i class="fa fa-times icon_btn" onclick="aspxPopupLegalInfoClient.Hide()"></i>
+            </div>
+        </div>
+    </HeaderTemplate>
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server" ID="aspxPopupLegalInfoClientcontecn">
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+    <FooterContentTemplate>
+        <div style="height: 30px; vertical-align: central">
+
+            <span class="time_buttons" onclick="aspxPopupLegalInfoClient.Hide()">Cancel</span>
+            <span class="time_buttons" onclick="ConfirmClick();">Confirm</span>
+        </div>
+    </FooterContentTemplate>
+    <ClientSideEvents EndCallback="function(s,e){
+        if(popupShow)
+            s.Show();
+        else{
+            s.Hide();
+            
+        }
+        }"
+        Shown="function(s,e) {  $('.legal_action_div').css('display','none')}" />
+</dx:ASPxPopupControl>
 <dx:ASPxPopupControl ClientInstanceName="aspxPopupDeadLeadsClient" Width="356px" Height="350px" ID="ASPxPopupControl5" Modal="true" ShowFooter="true" OnWindowCallback="ASPxPopupControl5_WindowCallback"
     runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <HeaderTemplate>
@@ -302,81 +402,81 @@
 </dx:ASPxPopupControl>
 
 <dx:ASPxPopupControl ClientInstanceName="ASPxPopupRequestUpdateControl" Width="500px" Height="420px"
-        MaxWidth="800px" MinWidth="150px" ID="popupRequestUpdate"
-        HeaderText="Request Update" Modal="true" OnWindowCallback="popupRequestUpdate_WindowCallback"
-        runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
-        <ContentCollection>
-            <dx:PopupControlContentControl runat="server" Visible="false" ID="popContentRequestUpdate">
-                <asp:HiddenField runat="server" ID="hfRequestUpdateBBLE" />
-                <dx:ASPxFormLayout ID="requestUpdateFormlayout" runat="server" Width="100%">
-                    <Items>
-                        <dx:LayoutItem Caption="Leads Name">
-                            <LayoutItemNestedControlCollection>
-                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateLeadsName" ReadOnly="true"></dx:ASPxTextBox>
-                                </dx:LayoutItemNestedControlContainer>
-                            </LayoutItemNestedControlCollection>
-                        </dx:LayoutItem>
-                        <dx:LayoutItem Caption="Create By">
-                            <LayoutItemNestedControlCollection>
-                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateCreateby" ReadOnly="true"></dx:ASPxTextBox>
-                                </dx:LayoutItemNestedControlContainer>
-                            </LayoutItemNestedControlCollection>
-                        </dx:LayoutItem>
-                        <dx:LayoutItem Caption="Manager">
-                            <LayoutItemNestedControlCollection>
-                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateManager" ReadOnly="true"></dx:ASPxTextBox>
-                                </dx:LayoutItemNestedControlContainer>
-                            </LayoutItemNestedControlCollection>
-                        </dx:LayoutItem>
-                        <dx:LayoutItem Caption="Importance">
-                            <LayoutItemNestedControlCollection>
-                                <dx:LayoutItemNestedControlContainer runat="server" Width="100%" SupportsDisabledAttribute="True">
-                                    <dx:ASPxComboBox runat="server" Width="100%" CssClass="edit_drop" ID="cbTaskImportant">
-                                        <Items>
-                                            <dx:ListEditItem Text="Normal" Value="Normal" Selected="true" />
-                                            <dx:ListEditItem Text="Important" Value="Important" />
-                                            <dx:ListEditItem Text="Urgent" Value="Urgent" />
-                                        </Items>
-                                    </dx:ASPxComboBox>
-                                </dx:LayoutItemNestedControlContainer>
-                            </LayoutItemNestedControlCollection>
-                        </dx:LayoutItem>
-                        <dx:LayoutItem Caption="Description">
-                            <LayoutItemNestedControlCollection>
-                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxMemo runat="server" Width="100%" CssClass="edit_drop" Height="80px" ID="txtTaskDes"></dx:ASPxMemo>
-                                </dx:LayoutItemNestedControlContainer>
-                            </LayoutItemNestedControlCollection>
-                        </dx:LayoutItem>
-                        <dx:LayoutItem Caption="Description" ShowCaption="False" HorizontalAlign="Right">
-                            <LayoutItemNestedControlCollection>
-                                <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
-                                    <dx:ASPxButton ID="ASPxButton4" runat="server" Text="Send Request" AutoPostBack="false">
-                                        <ClientSideEvents Click="function(){                                                                                                                      
+    MaxWidth="800px" MinWidth="150px" ID="popupRequestUpdate"
+    HeaderText="Request Update" Modal="true" OnWindowCallback="popupRequestUpdate_WindowCallback"
+    runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server" Visible="false" ID="popContentRequestUpdate">
+            <asp:HiddenField runat="server" ID="hfRequestUpdateBBLE" />
+            <dx:ASPxFormLayout ID="requestUpdateFormlayout" runat="server" Width="100%">
+                <Items>
+                    <dx:LayoutItem Caption="Leads Name">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateLeadsName" ReadOnly="true"></dx:ASPxTextBox>
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+                    <dx:LayoutItem Caption="Create By">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateCreateby" ReadOnly="true"></dx:ASPxTextBox>
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+                    <dx:LayoutItem Caption="Manager">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                <dx:ASPxTextBox runat="server" Width="100%" CssClass="edit_drop" ID="txtRequestUpdateManager" ReadOnly="true"></dx:ASPxTextBox>
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+                    <dx:LayoutItem Caption="Importance">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server" Width="100%" SupportsDisabledAttribute="True">
+                                <dx:ASPxComboBox runat="server" Width="100%" CssClass="edit_drop" ID="cbTaskImportant">
+                                    <Items>
+                                        <dx:ListEditItem Text="Normal" Value="Normal" Selected="true" />
+                                        <dx:ListEditItem Text="Important" Value="Important" />
+                                        <dx:ListEditItem Text="Urgent" Value="Urgent" />
+                                    </Items>
+                                </dx:ASPxComboBox>
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+                    <dx:LayoutItem Caption="Description">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                <dx:ASPxMemo runat="server" Width="100%" CssClass="edit_drop" Height="80px" ID="txtTaskDes"></dx:ASPxMemo>
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+                    <dx:LayoutItem Caption="Description" ShowCaption="False" HorizontalAlign="Right">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server" SupportsDisabledAttribute="True">
+                                <dx:ASPxButton ID="ASPxButton4" runat="server" Text="Send Request" AutoPostBack="false">
+                                    <ClientSideEvents Click="function(){                                                                                                                      
                                                                                                                         ASPxPopupRequestUpdateControl.Hide();
                                                                                                                         ASPxPopupRequestUpdateControl.PerformCallback('SendRequest');
                                                                                                                         isSendRequest =true;                                                                                                                                                                                                                                         
                                                                                                                         }"></ClientSideEvents>
-                                    </dx:ASPxButton>
-                                    &nbsp;
+                                </dx:ASPxButton>
+                                &nbsp;
                                                             <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false">
                                                                 <ClientSideEvents Click="function(){
                                                                                                                         ASPxPopupRequestUpdateControl.Hide();                                                                                                                                                                                                                                               
                                                                                                                         }"></ClientSideEvents>
 
                                                             </dx:ASPxButton>
-                                </dx:LayoutItemNestedControlContainer>
-                            </LayoutItemNestedControlCollection>
-                        </dx:LayoutItem>
-                    </Items>
-                </dx:ASPxFormLayout>
-            </dx:PopupControlContentControl>
-        </ContentCollection>
-        <ClientSideEvents EndCallback="OnEndCallbackPanelRequestUpdate" />
-    </dx:ASPxPopupControl>
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
+                </Items>
+            </dx:ASPxFormLayout>
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+    <ClientSideEvents EndCallback="OnEndCallbackPanelRequestUpdate" />
+</dx:ASPxPopupControl>
 
 
 <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">

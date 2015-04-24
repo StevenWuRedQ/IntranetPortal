@@ -41,6 +41,15 @@ Partial Public Class LegalUI
     Protected WithEvents ShortSaleCaseList As Global.IntranetPortal.ShortSaleCaseList
 
     '''<summary>
+    '''LegalSecondaryActions control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LegalSecondaryActions As Global.IntranetPortal.LegalSecondaryActions
+
+    '''<summary>
     '''VendorsPopup control.
     '''</summary>
     '''<remarks>

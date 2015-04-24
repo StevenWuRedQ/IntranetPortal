@@ -46,7 +46,13 @@ Public Class ShortSaleCaseList
         gridCase.DataSource = ShortSaleCase.GetCaseByBBLEs(bbles)
         gridCase.DataBind()
     End Sub
+    Public Sub BindCaseForTest()
+        Using ctx As New ShortSaleEntities
+            gridCase.DataSource = ctx.ShortSaleCases.Take(20).ToList
+        End Using
 
+
+    End Sub
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)
         If gridCase.DataSource Is Nothing AndAlso gridCase.IsCallback Then
             If Not String.IsNullOrEmpty(hfCaseStatus.Value) Then

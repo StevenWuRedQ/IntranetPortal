@@ -158,6 +158,42 @@ Partial Public Class LeadsSubMenu
     Protected WithEvents cbEvictionUsers As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
 
     '''<summary>
+    '''aspxPopupLegalInfo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents aspxPopupLegalInfo As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''aspxPopupLegalInfoClientcontecn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents aspxPopupLegalInfoClientcontecn As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+
+    '''<summary>
+    '''cbLegalType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbLegalType As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
+
+    '''<summary>
+    '''LegalSecondaryActions control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LegalSecondaryActions As Global.IntranetPortal.LegalSecondaryActions
+
+    '''<summary>
     '''ASPxPopupControl5 control.
     '''</summary>
     '''<remarks>

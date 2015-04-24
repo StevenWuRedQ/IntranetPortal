@@ -562,7 +562,7 @@
                                                 <div class="tooltip-inner" style="background-color: #ff400d;">Show Property Info</div>
                                             </div>
                                             <% End If%>
-                                            <i class="fa fa-university sale_head_button sale_head_button_left tooltip-examples" title="Legal" onclick=""></i>
+                                          
 
 
                                             <i class="fa fa-calendar-o sale_head_button sale_head_button_left tooltip-examples" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
