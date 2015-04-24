@@ -46,12 +46,21 @@ Public Class ShortSaleCaseList
         gridCase.DataSource = ShortSaleCase.GetCaseByBBLEs(bbles)
         gridCase.DataBind()
     End Sub
-    Public Sub BindCaseForTest()
-        Using ctx As New ShortSaleEntities
-            gridCase.DataSource = ctx.ShortSaleCases.Take(20).ToList
-        End Using
+    Public Sub BindCaseForTest(needGorup As Boolean)
+        'hfCaseStatus.Value = CaseStatus.NewFile
+        BindCaseList(CaseStatus.NewFile)
+        'gridCase.DataBind()
+
+        If (Not needGorup) Then
+            gridCase.UnGroup(gridCase.Columns("Owner"))
+        End If
+
+        'Using ctx As New ShortSaleEntities
+        '    gridCase.DataSource = ctx.ShortSaleCases.Take(20).ToList
 
 
+        '    gridCase.DataBind()
+        'End Using
     End Sub
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)
         If gridCase.DataSource Is Nothing AndAlso gridCase.IsCallback Then

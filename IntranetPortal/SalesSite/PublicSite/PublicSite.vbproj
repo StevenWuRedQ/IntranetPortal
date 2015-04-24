@@ -331,6 +331,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <Content Include="images\sample-image-70-54.jpg" />
     <Content Include="other\.DS_Store" />
     <Content Include="other\animated-headline\.DS_Store" />
     <Content Include="other\animated-headline\css\.DS_Store" />
@@ -401,6 +402,7 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.vbhtml" />
     <Content Include="Views\Shared\_LoginPartial.vbhtml" />
     <Content Include="Views\Home\Detail.vbhtml" />
+    <Content Include="Views\Home\List.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />

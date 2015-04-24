@@ -41,15 +41,23 @@ End Section
         <div class="hero-search-box">
             <!--<div class="hero-search-selection"><a class="hero-search-link hsl-left hsl-current" href="#">Quick Search</a><a class="hero-search-link" href="#">Advanced Search</a></div>-->
             <div>
-                <form id="search-form" name="search-form">
-                    <select class="w-select hero-search-input hero-search-input-selection" id="Category" name="Category" data-name="Category" required>
-                        <option value="Buy">Buy</option>
-                        <option value="Rent">Rent</option>
-                        <option value="Sell">Sell</option>
-                    </select>
-                    <input class="w-input hero-search-input" id="search-criteria" type="text" placeholder="Search neighborhood, city, zip or address" name="search-criteria" data-name="search-criteria" required="required">
-                    <input class="w-button hero-search-button" type="submit" value="&#xf002;" data-wait="Please wait...">
-                </form>
+                @Using Html.BeginRouteForm("Default", New With{.action="List", .controller="Home"}, FormMethod.Post)
+                    @Html.AntiForgeryToken()
+                    
+                    @<text>
+                        <select class="w-select hero-search-input hero-search-input-selection" id="Category" name="Category" data-name="Category" required>
+                            <option value="Buy">Buy</option>
+                            <option value="Rent">Rent</option>
+                            <option value="Sell">Sell</option>
+                        </select>
+                        <input class="w-input hero-search-input" id="searchCriteria" type="text" placeholder="Search neighborhood, city, zip or address" name="searchCriteria" data-name="searchCriteria" required="required">
+                        <input class="w-button hero-search-button" type="submit" value="&#xf002;" data-wait="Please wait...">
+                    </text>
+                End Using
+
+                @*<form id="search-form" name="search-form">
+
+                    </form>*@
             </div>
         </div>
     </div>
@@ -78,18 +86,12 @@ End Section
                     @For Each agent In agents
 
                         @<li class="featured-agents-list-item">
-                             <a class="w-inline-block featured-agents-list-item-link" href="#fa-@agent.EmployeeID">
-                                 <img class="featured-agents-list-item-pic" src="~/getAgentImage/@agent.EmployeeID" width="80" alt="/images/agent-1.jpg">
-                                 <div>@agent.Name</div>
-                             </a>
-                                      
-                      
-
-
-                        </li>
-
+                            <a class="w-inline-block featured-agents-list-item-link" href="#fa-@agent.EmployeeID">
+                                <img class="featured-agents-list-item-pic" src="~/getAgentImage/@agent.EmployeeID" width="80" alt="/images/agent-1.jpg">
+                                <div>@agent.Name</div>
+                            </a>                    
+                        </li>                        
                     Next
-
                     @*<li class="featured-agents-list-item">
                             <a class="w-inline-block featured-agents-list-item-link" href="#fa-serah-zach">
                                 <img class="featured-agents-list-item-pic" src="images/agent-2.jpg" width="80" alt="54b551de50d87cf623f7e37d_agent-2.jpg">
@@ -152,7 +154,6 @@ End Section
             </div>
 
         Next
-
         @*<div id="fa-jack-akin" class="featured-agents-desc">
                 <div class="w-container">
                     <div class="featured-agents-desc-content">
@@ -186,7 +187,6 @@ End Section
                     </a>
                 </div>
             Next
-
 
             @*<div class="w-col w-col-3">
                     <a class="w-inline-block featured-listings-item" href="#">

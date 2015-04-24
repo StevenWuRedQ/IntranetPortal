@@ -9,11 +9,8 @@
             Agent = Request.QueryString("Agent") IsNot Nothing
 
            
-            ShortSaleCaseList.BindCaseForTest()
-            If (SecondaryAction AndAlso Agent) Then
-
-                'ShortSaleCaseList.groupBy()
-            End If
+            ShortSaleCaseList.BindCaseForTest(SecondaryAction AndAlso Agent)
+           
         End If
     End Sub
 

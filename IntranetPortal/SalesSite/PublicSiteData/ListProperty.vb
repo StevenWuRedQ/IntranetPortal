@@ -18,6 +18,10 @@
         End Using
     End Function
 
+    Public Shared Function SearchList(criteria As SearchCriteria) As List(Of ListProperty)
+        Return GetRecentListing()
+    End Function
+
     Public Function Create() As ListProperty
         Me.CreateDate = DateTime.Now
         Me.Status = ListPropertyStatus.Publishing
@@ -71,6 +75,22 @@
         UnPublish = 2
         Sold = 3
     End Enum
+End Class
+
+Public Class SearchCriteria
+    Public Property Type As String
+    Public Property Keyword As String
+    Public Property PriceRange As Range
+    Public Property BedRoomCount As Integer
+    Public Property BathRoomCount As Integer
+    Public Property More As String
+
+    Public Property Result As List(Of ListProperty)
+
+    Public Structure Range
+        Public Property Min As Decimal
+        Public Property Max As Decimal
+    End Structure
 End Class
 
 Partial Public Class FeatureData

@@ -103,7 +103,7 @@ html {
         <div class="w-container global-nav-container">
             <div class="w-row">
                 <div class="w-col w-col-2">
-                    <a class="w-inline-block global-nav-logo" href="#">
+                    <a class="w-inline-block global-nav-logo" href="~/">
                         <img src="~/images/logo.png" width="44" alt="54b53ed3af20c3f6386698ac_logo.png">
                     </a>
                 </div>
@@ -243,7 +243,7 @@ html {
             </div>
         </div>
     </footer>
-    <footer class="global-footer-2">
+    <footer class="global-footer-2 ">
         <div class="w-container global-footer-seo">
             <h3 class="global-footer-seo-heading">Place SEO Text Here</h3>
             <p class="global-footer-seo-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum porttitor commodo libero. Donec malesuada, eros id vestibulum malesuada, magna est consectetur ipsum, vitae varius quam dolor et dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean in ipsum tristique turpis imperdiet vestibulum ut in nulla. Nullam sagittis sed libero ut gravida.</p>
