@@ -1683,7 +1683,7 @@ li.ss_form_item {
 .nav-tabs > li.active > a.shot_sale_tab_a {
     border-color: #ff400d !important;
     color: #2e2f31 !important;
-    padding:10px 10px !important;
+    padding: 10px 10px !important;
 }
 
 .update_panel {
@@ -2212,28 +2212,26 @@ li.active.mag_tab {
     border: none;
 }
 
-.mag_tabv
-{
-    
-    border-bottom:1px solid #dde0e7;
+.mag_tabv {
+    border-bottom: 1px solid #dde0e7;
 }
-.mag_tabv a 
-{
-    color:#77787b;
+
+    .mag_tabv a {
+        color: #77787b;
+    }
+
+.mag_tabv_i {
+    padding: 0 10px;
 }
-.mag_tabv_i
-{
-    padding:0 10px;
+
+li.mag_tabv.active {
+    background: transparent !important;
 }
-li.mag_tabv.active
-{
-    background:transparent !important;
-  
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    border: none;
 }
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
-{
-    border:none;
-}
+
 .mag_tab_input_group {
     padding: 15px 20px;
     background: #eff2f5;
@@ -2276,7 +2274,7 @@ li.mag_tabv.active
     font-size: 24px;
     text-align: center;
     margin-top: 10px;
-    font-weight:300;
+    font-weight: 300;
 }
 /*end magagement UI*/
 
@@ -2302,4 +2300,27 @@ li.mag_tabv.active
 
 ::-webkit-scrollbar:horizontal {
     height: 6px;
+}
+
+.message_pupup_icon {
+    font-size: 16px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 20px;
+    border: 1px solid;
+}
+
+.message_popup_title {
+    background: #d9f1fd;
+    border-radius: 10px 10px 0px 0px;
+    font-size: 22px;
+    color: #3993c1;
+    font-weight: 300;
+    padding: 20px;
+}
+
+.no_outline:focus {
+    outline: none !important;
 }

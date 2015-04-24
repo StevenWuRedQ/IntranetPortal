@@ -177,9 +177,9 @@
                     <div>
                         <!--detial Nav tabs -->
                         <style>
-                            .shot_sale_tab_a {
+                            /*.shot_sale_tab_a {
                                 padding: 10px 10px !important;
-                            }
+                            }*/
                         </style>
                         <ul class="nav nav-tabs overview_tabs" role="tablist" style='<%= If(isEviction,"display:none","") %>'>
                             <li class="active short_sale_tab">
@@ -188,7 +188,7 @@
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Mortgages" role="tab" data-toggle="tab">Mortgages</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#DealInfo" role="tab" data-toggle="tab">Deal Info</a></li>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Homewoner" role="tab" data-toggle="tab">Homeowner</a></li>
-                            <li class="short_sale_tab"><a class="shot_sale_tab_a  " href="#Eviction" role="tab" data-toggle="tab">Eviction</a></li>
+                            <%--<li class="short_sale_tab"><a class="shot_sale_tab_a  " href="#Eviction" role="tab" data-toggle="tab">Eviction</a></li>--%>
                             <li class="short_sale_tab"><a class="shot_sale_tab_a " href="#Parties" role="tab" data-toggle="tab">Parties</a></li>
                         </ul>
                         <%--<dx:ASPxCallbackPanel ID="overviewCallbackPanel" runat="server" ClientInstanceName="overviewCallbackPanelClinet" OnCallback="overviewCallbackPanel_Callback">--%>
@@ -248,7 +248,28 @@
                                     </div>
                                     <div class="ss_form">
                                         <h4 class="ss_form_title">Value Info </h4>
+                                        <script>
+                                            function dateValueChagne(e)
+                                            {
+                                                var vdate = $(e).val()
+                                                var montadd=
+                                                    {
+                                                        Appraisal: 3,
+                                                        BPO:6
+                                                    }
+                                                var add = montadd[$('#ValueSelect').val()];
+                                                if (add)
+                                                {
+                                                    var edate = new Date(vdate)
+                                                    edate.setMonth(edate.getMonth() + add);
+                                                    var ldate = edate.toLocaleDateString();
+                                                    $('#expries_date').val(ldate);
+                                                }
+                                                
+                                            }
+                                        </script>
                                         <table class="table table-striped" style="margin-top: 20px">
+
                                             <thead>
                                                 <tr>
                                                     <th>Method</th>
@@ -260,7 +281,7 @@
                                             </thead>
                                             <tr>
                                                 <td>
-                                                    <select class="form-control">
+                                                    <select class="form-control" id="ValueSelect">
                                                         <option>Appraisal </option>
                                                         <option>BPO </option>
                                                         <option>Desktop Review </option>
@@ -268,13 +289,13 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <input class="form-control input_curr" />
+                                                    <input class="form-control currency_input" />
                                                 </td>
                                                 <td>
-                                                    <input class="form-control ss_date" />
+                                                    <input class="form-control ss_date" onchange="dateValueChagne(this)"/>
                                                 </td>
                                                 <td>
-                                                    <input class="form-control ss_date" />
+                                                    <input class="form-control ss_date"  id="expries_date"/>
                                                 </td>
 
                                             </tr>

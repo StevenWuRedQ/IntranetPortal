@@ -57,7 +57,7 @@
                                             <div class="clearfix">
                                                 <div class="pop_up_header_margin">
                                                     <i class="fa fa-envelope with_circle pop_up_header_icon"></i>
-                                                    <span class="pop_up_header_text">Email</span>
+                                                    <span class="pop_up_header_text ">Email</span>
                                                 </div>
                                                 <div class="pop_up_buttons_div">
                                                     <i class="fa fa-times icon_btn" onclick="popupSendEmailClient.Hide()"></i>

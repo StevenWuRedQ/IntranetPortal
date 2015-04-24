@@ -5,6 +5,7 @@ Imports RestSharp
 Public Class Dialer
     Inherits System.Web.UI.Page
     Public CalledNumber As String
+    Public CallModel = True
     Public Monitor As String
     Public BBLE As String
 
@@ -14,6 +15,7 @@ Public Class Dialer
             CalledNumber = Request.QueryString("PN")
             BBLE = Request.QueryString("BBLE")
             Monitor = Request.QueryString("Monitor")
+           
         End If
     End Sub
    

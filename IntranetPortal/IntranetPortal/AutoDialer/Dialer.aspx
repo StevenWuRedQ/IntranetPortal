@@ -5,11 +5,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
     <script type="text/javascript" src="https://static.twilio.com/libs/twiliojs/1.2/twilio.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
     </script>
+    <link href="/css/stevencss.css" rel="stylesheet" type="text/css" />
 
-    <link href="http://static0.twilio.com/bundles/quickstart/client.css" type="text/css" rel="stylesheet" />
+    <%-- <link href="http://static0.twilio.com/bundles/quickstart/client.css" type="text/css" rel="stylesheet" />--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sprintf/1.0.1/sprintf.js"></script>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
@@ -21,15 +24,53 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
     <style>
-        body {
+        /*body {
             text-align: center;
             margin: 0;
             background: none;
-            /*background:url(https://static0.twilio.com/resources/quickstart/whitey.png) center top repeat;*/
+           
         }
 
         button.call, button.hangup {
             margin-top: 118px;
+        }*/
+        .close:focus {
+            outline: none;
+        }
+
+        button.close:focus {
+            outline: none;
+        }
+
+        .dailer_input {
+            background: inherit;
+            height: 40px;
+            color: white;
+        }
+
+        .dailer_input_addon {
+            background: inherit;
+            font-size: 18px;
+            color: white;
+        }
+
+        .call_btn {
+            font-size: 30px;
+            padding: 18px 25px;
+            background: inherit;
+            border-radius: 50%;
+        }
+        .call_btn_nomal
+        {
+            border: 1px white solid;
+        }
+        .call_btn_hangup
+        {
+            background:#ff400d;
+            transform:rotate(135deg);
+        }
+        .no_outline:focus {
+            outline: none !important;
         }
     </style>
     <script type="text/javascript">
@@ -42,9 +83,8 @@
             $("#log").text("Ready");
             //if (Montor) {
             call(Montor);
-            
-            $(function ()
-            {
+
+            $(function () {
                 InitConfrence(CallNumber)
             }).delay(5000)
 
@@ -72,15 +112,14 @@
         Twilio.Device.disconnect(function (conn) {
             $("#log").text("Call ended");
             var callId = conn.parameters.CallSid;
-            if (callId && typeof callId !== 'undefined')
-            {
+            if (callId && typeof callId !== 'undefined') {
                 var url = '/AutoDialer/DialerAjaxService.svc/GetCallDuration/' + callId;
                 $.getJSON(url, function (duration) {
                     var log = sprintf("%s did phone (%s) call duration %s", $("#userName").val(), CallNumber, duration);
                     logCall(BBLE, log)
                 });
             }
-            
+
 
         });
 
@@ -106,14 +145,13 @@
         function InitConfrence(cn) {
             //params = { "Confrece": pn };
             //Twilio.Device.connect(params);
-            
-            var pn = cn?cn:$("#number").val();
 
-            if (pn)
-            {
+            var pn = cn ? cn : $("#number").val();
+
+            if (pn) {
                 $.getJSON('/AutoDialer/DialerAjaxService.svc/CallNumber/' + pn + ',' + $('#userName').val());
             }
-            
+
         }
         function hangup() {
             Twilio.Device.disconnectAll();
@@ -150,28 +188,63 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <input type="hidden" id="userName" value="<%=Page.User.Identity.Name%>" />
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <button class="call" onclick="InitConfrence();" type="button">
-                        Call
-                    </button>
-                    <input type="hidden" id="userName" value="<%=Page.User.Identity.Name%>" />
-                    <button class="hangup" onclick="hangup();" type="button">
-                        Hangup
-                    </button>
-                    <%--<button class="call" onclick="InitConfrence();" type="button">
-                        Confrence
-                    </button>--%>
-                    <input type="text" id="number" name="number"
-                        placeholder="Enter a phone number to call" style="margin: 29px 0 0 46px;" />
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="background: #1a3847; color: white">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <i class="fa fa-times" style="color:white"></i>
 
-                    <%-- <button onclick="GetCallInfo()" type="button">Try javascprit aip  </button>--%>
+                                </button>
+                                <h4 class="modal-title">
+                                    <i class="fa fa-phone with_circle message_pupup_icon"></i>
 
-                    <div id="log" style="height: 46px">Loading pigeons...</div>
-                    <div id="javascriptApi"></div>
+                                    <span style="font-size: 22px; padding-left: 5px;" class="">Dailer</span>
+
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control dailer_input" placeholder="Dail or Search" aria-describedby="basic-addon2">
+                                    <span class="input-group-addon dailer_input_addon" id="basic-addon2"><i class="fa fa-times-circle"></i></span>
+                                </div>
+                                <div align="center" style="margin: 15px;">
+                                    <span style="font-size: 30px" class="font_light">(347) 123-4567</span>
+
+                                </div>
+
+                                <div align="center">
+                                    <button type="button" class="call_btn no_outline call_btn_nomal">
+                                        <i class="fa fa-phone"></i>
+                                    </button>
+                                </div>
+
+                                <%--<button class="call" onclick="InitConfrence();" type="button">
+                                    Call
+                                </button>
+                                
+                                <button class="hangup" onclick="hangup();" type="button">
+                                    Hangup
+                                </button>--%>
+
+                                <%-- <input type="text" id="number" name="number"
+                                    placeholder="Enter a phone number to call" />--%>
+
+                                <%-- <button onclick="GetCallInfo()" type="button">Try javascprit aip  </button>--%>
+
+                                <div id="log" style="padding: 20px;">Loading pigeons...</div>
+                                <div id="javascriptApi"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
-                <% If String.IsNullOrEmpty(Monitor) Then%>
+                <% If String.IsNullOrEmpty(Monitor) And Not CallModel Then%>
                 <div class="col-md-6">
                     <iframe src="/Chat/ChatDefault.aspx" style="width: 574px; height: 400px; border: none"></iframe>
                 </div>
