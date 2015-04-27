@@ -42,12 +42,14 @@
         End Using
     End Sub
 
-    Private _features As List(Of PropertyFeature)
-    Public ReadOnly Property Features As List(Of PropertyFeature)
+    Private _features As List(Of String)
+    Public ReadOnly Property Features As List(Of String)
         Get
             If _features Is Nothing Then
                 Using ctx As New PublicSiteEntities
-                    _features = ctx.PropertyFeatures.Where(Function(a) a.BBLE = BBLE).ToList
+                    _features = (From ft In ctx.PropertyFeatures.Where(Function(a) a.BBLE = BBLE)
+                                Join ftData In ctx.FeatureDatas On ft.FeatureId Equals ftData.FeatureId
+                                Select ftData.Name).ToList
                 End Using
             End If
             Return _features

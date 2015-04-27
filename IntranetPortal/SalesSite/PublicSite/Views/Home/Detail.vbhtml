@@ -140,7 +140,7 @@ End Section
             <h2 class="global-heading-2">Features</h2>
             <ul class="w-list-unstyled w-clearfix apartment-features-list">
                 @For Each ft In Model.Features
-                    @<li class="afl-item">@ft.Description</li>
+                    @<li class="afl-item">@ft</li>
                 Next
                 @*<li class="afl-item">
                     <strong class="text-important">Northern Exposure</strong>

@@ -1,13 +1,14 @@
 ﻿Public Class DataLoopRule
     Public Shared Function GetAllActiveRule() As List(Of DataLoopRule)
         Using ctx As New CoreEntities
-            Return ctx.DataLoopRules.Where(Function(dl) dl.Status Is Nothing Or dl.Status <> RuleStatus.Completed).ToList
+            Return ctx.DataLoopRules.Where(Function(dl) dl.Status Is Nothing Or dl.Status = RuleStatus.Active Or dl.Status = RuleStatus.Running Or dl.Status = RuleStatus.Refresh).ToList
         End Using
     End Function
 
     Public Shared Function GetRefreshRule() As List(Of DataLoopRule)
         Return Nothing
     End Function
+
     Public Shared Sub AddRulesUnique(bblesToLoop As String(), loopType As DataLoopType, createBy As String)
         Using context As New CoreEntities
             Dim bbleRuningList = context.DataLoopRules.Where(Function(r) r.Status = 0 AndAlso bblesToLoop.Contains(r.BBLE)).Select(Function(r) r.BBLE).ToArray
@@ -15,6 +16,7 @@
             AddRules(uniqueBBles, loopType, createBy, RuleStatus.Active)
         End Using
     End Sub
+
     Public Shared Sub AddRules(bblesToLoop As String(), loopType As DataLoopType, createBy As String)
         AddRules(bblesToLoop, loopType, createBy, RuleStatus.Active)
     End Sub
@@ -25,7 +27,7 @@
 
     Public Shared Function IsInUpdate(bble As String) As Boolean
         Using ctx As New CoreEntities
-            Return ctx.DataLoopRules.Any(Function(r) r.BBLE = bble And (r.Status = RuleStatus.Active Or r.Status = RuleStatus.Running))
+            Return ctx.DataLoopRules.Any(Function(r) r.BBLE = bble And (r.Status = RuleStatus.Active Or r.Status = RuleStatus.Running Or r.Status = RuleStatus.Pending))
         End Using
     End Function
 
@@ -87,6 +89,7 @@
         Running = 1
         Completed = 2
         Refresh = 3
+        Pending = 4
     End Enum
 
     Enum DataLoopType
