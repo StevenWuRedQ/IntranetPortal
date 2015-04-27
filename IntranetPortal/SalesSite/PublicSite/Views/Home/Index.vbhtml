@@ -30,8 +30,7 @@ End Section
     <div class="hero-callout">
         <h1 class="callout-h1 cd-headline clip">
             <span class="cd-words-wrapper">
-                <b class="is-visible">Hundreds of listings!</b>
-                <b>Add a second line!</b>
+                <b class="is-visible">Hundreds of listings!</b>                
                 <b>One more!</b>
             </span>
         </h1>
