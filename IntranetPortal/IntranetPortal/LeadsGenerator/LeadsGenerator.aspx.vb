@@ -212,6 +212,11 @@ Public Class LeadsGenerator
     End Function
 
     Public Sub ImportSelect_ServerClick()
+
+        If (Core.TLOApiLog.LimiteIsExceed) Then
+            Alert("Monthly resource used up please try it next month !")
+            Return
+        End If
         If (AlertEmployee()) Then
             Return
         End If

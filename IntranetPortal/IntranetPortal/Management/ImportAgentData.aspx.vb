@@ -130,6 +130,9 @@ Public Class ImportAgentData
                         ld.Status = ConvertLeadStatus(cbStatusToChange.Text)
                     End If
                 End If
+                If (ld.Status = LeadStatus.NewLead) Then
+                    ld.AssignDate = Date.Now
+                End If
 
                 If (ld.Status = LeadStatus.Callback AndAlso deCallBackTime.Value IsNot Nothing) Then
                     ld.CallbackDate = deCallBackTime.Value

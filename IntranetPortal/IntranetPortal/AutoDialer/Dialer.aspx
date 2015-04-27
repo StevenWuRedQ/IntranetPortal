@@ -60,15 +60,16 @@
             background: inherit;
             border-radius: 50%;
         }
-        .call_btn_nomal
-        {
+
+        .call_btn_nomal {
             border: 1px white solid;
         }
-        .call_btn_hangup
-        {
-            background:#ff400d;
-            transform:rotate(135deg);
+
+        .call_btn_hangup {
+            background: #ff400d;
+            transform: rotate(135deg);
         }
+
         .no_outline:focus {
             outline: none !important;
         }
@@ -194,8 +195,17 @@
                 <div class="col-md-6">
                     <div class="modal-dialog">
                         <div class="modal-content" style="background: #1a3847; color: white">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <div class="modal-header" style="border-bottom: none">
+                                <div class="clearfix">
+                                    <div class="pop_up_header_margin">
+                                        <i class="fa fa-phone with_circle pop_up_header_icon" style="color:inherit"></i>
+                                        <span class="pop_up_header_text">Dailer</span>
+                                    </div>
+                                    <div class="pop_up_buttons_div">
+                                        <i class="fa fa-times icon_btn" style="color:white;font-size:22px;margin-top:9px;" data-dismiss="modal" ></i>
+                                    </div>
+                                </div>
+                                <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <i class="fa fa-times" style="color:white"></i>
 
                                 </button>
@@ -204,13 +214,13 @@
 
                                     <span style="font-size: 22px; padding-left: 5px;" class="">Dailer</span>
 
-                                </h4>
+                                </h4>--%>
                             </div>
-                            <div class="modal-body">
-
-                                <div class="input-group">
-                                    <input type="text" class="form-control dailer_input" placeholder="Dail or Search" aria-describedby="basic-addon2">
-                                    <span class="input-group-addon dailer_input_addon" id="basic-addon2"><i class="fa fa-times-circle"></i></span>
+                            <div class="modal-body" style="background: #1e4154">
+                                 
+                                <div class="input-group" style="border-color:#2b586f">
+                                    <input type="text" class="form-control dailer_input" style="border-color:inherit;border-right:none" placeholder="Dail or Search" aria-describedby="basic-addon2">
+                                    <span class="input-group-addon dailer_input_addon" style="border-color:inherit" id="basic-addon2"><i class="fa fa-times-circle"></i></span>
                                 </div>
                                 <div align="center" style="margin: 15px;">
                                     <span style="font-size: 30px" class="font_light">(347) 123-4567</span>
@@ -235,8 +245,10 @@
                                     placeholder="Enter a phone number to call" />--%>
 
                                 <%-- <button onclick="GetCallInfo()" type="button">Try javascprit aip  </button>--%>
+                                <div align="center">
+                                    <div id="log" style="padding: 20px;">Loading pigeons...</div>
+                                </div>
 
-                                <div id="log" style="padding: 20px;">Loading pigeons...</div>
                                 <div id="javascriptApi"></div>
                             </div>
 

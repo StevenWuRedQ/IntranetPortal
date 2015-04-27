@@ -8,6 +8,7 @@ Public Class Dialer
     Public CallModel = True
     Public Monitor As String
     Public BBLE As String
+    Public TrainingMode As Boolean = False
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If (Not IsPostBack) Then
@@ -15,7 +16,7 @@ Public Class Dialer
             CalledNumber = Request.QueryString("PN")
             BBLE = Request.QueryString("BBLE")
             Monitor = Request.QueryString("Monitor")
-           
+
         End If
     End Sub
    

@@ -130,13 +130,14 @@ Partial Public Class MapDataService
 
 
 
-           
+
             cList.AddRange(ctx.MapDataSets.Where(Function(m) m.KeyCode = zip AndAlso m.Count <> 0 AndAlso Not m.TypeName.Contains("Transactions")).OrderBy(Function(s) s.Id).ToList())
 
 
 
-            Dim ListArrayDepatment As New List(Of String) From {"AITeam", "Core Staff", "ddd", "IT", "GalleriaTeam"}
-            Dim TeamLeadsCount = ctx.Leads_with_last_log.Where(Function(m) m.ZipCode = zip AndAlso m.Department IsNot Nothing AndAlso Not ListArrayDepatment.Contains(m.Department)).GroupBy(Function(l) l.Department).Select(Function(l) New With {.Count = l.Count, .Deparemt = l.Key}).ToList()
+            'Dim ListArrayDepatment As New List(Of String) From {"AITeam", "Core Staff", "ddd", "IT", "GalleriaTeam"}
+            Dim TeamLeadsCount = ctx.TeamLeadsInZips.Where(Function(t) t.ZipCode = zip).GroupBy(Function(l) l.Name).Select(Function(l) New With {.Count = l.Count, .Deparemt = l.Key}).ToList()
+
             For Each tc In TeamLeadsCount
                 Dim teamCountZip = New MapDataSet
                 Dim department = tc.Deparemt
@@ -159,6 +160,6 @@ Partial Public Class MapDataService
     Public Function GetZipCountInfo(zip As String) As Channels.Message Implements IMapDataService.GetZipCountInfo
 
         Return GetZipCountInfoList(zip).ToJson
-   
+
     End Function
 End Class
