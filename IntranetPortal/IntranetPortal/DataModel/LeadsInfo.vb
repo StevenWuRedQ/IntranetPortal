@@ -84,6 +84,8 @@ Partial Public Class LeadsInfo
     Public Property C3rdMortgrAmt As Nullable(Of Decimal)
     Public Property BuildingBBLE As String
     Public Property UnitNum As String
+    Public Property Latitude As Nullable(Of Double)
+    Public Property Longitude As Nullable(Of Double)
 
     Public Overridable Property Lead As Lead
 

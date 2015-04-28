@@ -1,4 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PublishProperty.ascx.vb" Inherits="IntranetPortal.PublishProperty" %>
+
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+
 <div style="width: 100%; align-content: center; height: 100%">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 16px; color: white">
@@ -15,7 +18,7 @@
             </a>
         </li>
         <li class="short_sale_head_tab">
-            <a href="#PropertyImages" role="tab" data-toggle="tab" class="tab_button_a">
+            <a href="#PropertyImages" role="tab" data-toggle="tab" class="tab_button_a" onclick="cpImageSlider.PerformCallback()">
                 <i class="fa fa-file head_tab_icon_padding"></i>
                 <div class="font_size_bold" style="font-weight: 900;">Images</div>
             </a>
@@ -251,33 +254,203 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="PropertyImages">
+                        <style type="text/css">
+                            .hover {
+                                background-color: lightblue;
+                            }
+
+                            .activeHover {
+                                background-color: lightgray;
+                            }
+
+                            .ui-draggable-dragging {
+                                background-color: lightgreen;
+                                color: White;
+                            }
+                        </style>
                         <script type="text/javascript">
                             function onFileUploadComplete(s, e) {
                                 if (e.callbackData) {
                                     gridImages.PerformCallback("Upload|" + e.callbackData);
                                 }
                             }
+
+                            function InitalizejQuery() {
+                                $('.draggable').draggable({
+                                    helper: 'clone',
+                                    start: function (ev, ui) {
+                                        var $draggingElement = $(ui.helper);
+                                        $draggingElement.width(gridView.GetWidth());
+                                    }
+                                });
+                                $('.draggable').droppable({
+                                    activeClass: "hover",
+                                    tolerance: "intersect",
+                                    hoverClass: "activeHover",
+                                    drop: function (event, ui) {
+                                        var draggingSortIndex = ui.draggable.attr("sortOrder");
+                                        var targetSortIndex = $(this).attr("sortOrder");
+                                        gridView.PerformCallback("DRAGROW|" + draggingSortIndex + '|' + targetSortIndex);
+                                    }
+                                });
+                            }
+
+                            function UpdatedGridViewButtonsState(grid) {
+                                btMoveUp.SetEnabled(grid.cpbtMoveUp_Enabled);
+                                btMoveDown.SetEnabled(grid.cpbtMoveDown_Enabled);
+                            }
+
+                            function gridView_Init(s, e) {
+                                UpdatedGridViewButtonsState(s);
+                            }
+
+                            function gridView_EndCallback(s, e) {
+                                UpdatedGridViewButtonsState(s);                            
+                            }
+
+                            function btMoveUp_Click(s, e) {
+                                gridView.PerformCallback("MOVEUP");
+                            }
+
+                            function btMoveDown_Click(s, e) {
+                                gridView.PerformCallback("MOVEDOWN");
+                            }
+
+                            function OnLogMemoKeyDown(s, e) {
+                                var textArea = s.GetInputElement();
+
+                                if (textArea.scrollHeight + 2 > s.GetHeight()) {
+                                    //alert(textArea.scrollHeight + "|" + s.GetHeight());
+                                    s.SetHeight(textArea.scrollHeight + 2);
+                                }
+
+                                if (textArea.scrollHeight + 2 < s.GetHeight()) {
+                                    //alert(textArea.scrollHeight + "|" + s.GetHeight());
+                                    s.SetHeight(textArea.scrollHeight + 2);
+                                }
+                            }
+
+                            function SaveDescription(s, imgId) {
+                                var comments = s.GetText();
+                                callbackSaveDescription.PerformCallback(imgId + "|" + comments);
+                            }
+
+                            function ShowBorder(s) {
+                                var tbl = s.GetMainElement();
+                                if (tbl.style.borderColor == 'transparent') {
+                                    //border-top: 1px solid #9da0aa;
+                                    //border-right: 1px solid #c2c4cb;
+                                    //border-bottom: 1px solid #d9dae0;
+                                    //border-left: 1px solid #c2c4cb;
+                                    tbl.style.borderColor = "#9da0aa";
+                                    tbl.style.backgroundColor = 'white';
+                                }
+                                else {
+                                    tbl.style.borderColor = 'transparent';
+                                    tbl.style.backgroundColor = 'transparent';
+                                }
+                            }
                         </script>
                         <div style="margin: 20px">
-                            <dx:ASPxImageSlider ID="imageSlider" runat="server" ClientInstanceName="ImageSlider" EnableViewState="False" EnableTheming="False" ImageContentBytesField="ImageData" Visible="false"
-                                TextField="FileName" BinaryImageCacheFolder="~\TempDataFile\">
-                                <SettingsNavigationBar ThumbnailsModeNavigationButtonVisibility="None" />
-                                <SettingsAutoGeneratedImages ImageCacheFolder="~\TempDataFile\" />
-                                <Styles>
-                                    <ImageArea Width="600px" Height="400px" />
-                                </Styles>                                 
-                            </dx:ASPxImageSlider>                         
-                            <h4 class="ss_form_title">Image List</h4>
-                            <dx:ASPxGridView runat="server" ID="gridImages" ClientInstanceName="gridImages" OnCustomCallback="gridImages_CustomCallback" KeyFieldName="ImageId" OnRowDeleting="gridImages_RowDeleting">
-                                <Columns>
-                                    <dx:GridViewDataTextColumn FieldName="OrderId"></dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="FileName"></dx:GridViewDataTextColumn>
-                                    <dx:GridViewDataTextColumn FieldName="Description"></dx:GridViewDataTextColumn>
-                                    <dx:GridViewCommandColumn ShowDeleteButton="true" ShowEditButton="true"></dx:GridViewCommandColumn>                                    
-                                </Columns>
-                            </dx:ASPxGridView>
+                            <dx:ASPxCallbackPanel runat="server" ID="cpImageSlider" ClientInstanceName="cpImageSlider" OnCallback="cpImageSlider_Callback">
+                                <PanelCollection>
+                                    <dx:PanelContent>
+                                        <a href="#" onclick="cpImageSlider.PerformCallback();">Refresh</a>
+                                        <dx:ASPxImageSlider ID="imageSlider" runat="server" ClientInstanceName="ImageSlider" ShowNavigationBar="true" ImageContentBytesField="ImageData" Visible="true" Width="850" Height="460"
+                                            TextField="Description">
+                                            <SettingsImageArea ImageSizeMode="FitProportional" />
+                                            <SettingsAutoGeneratedImages ImageCacheFolder="~\images\" />
+                                        </dx:ASPxImageSlider>
+
+                                        <%--         <dx:ASPxGridView runat="server" ID="gridImages" ClientInstanceName="gridImages" OnCustomCallback="gridImages_CustomCallback" KeyFieldName="ImageId" OnRowDeleting="gridImages_RowDeleting">
+                                            <Columns>
+                                                <dx:GridViewDataColumn FieldName="OrderId" Caption="Order" Width="60px">
+                                                    <DataItemTemplate>
+                                                        <dx:ASPxComboBox runat="server" ID="cbOrder" Width="100%">
+                                                            <Items>
+                                                                <dx:ListEditItem Text="" Value="" />
+                                                                <dx:ListEditItem Text="1" Value="1" />
+                                                                <dx:ListEditItem Text="2" Value="2" />
+                                                                <dx:ListEditItem Text="3" Value="3" />
+                                                                <dx:ListEditItem Text="4" Value="4" />
+                                                                <dx:ListEditItem Text="5" Value="5" />
+                                                            </Items>
+                                                            <ClientSideEvents SelectedIndexChanged="ImageOrderChanges" />
+                                                        </dx:ASPxComboBox>
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataColumn>
+                                                <dx:GridViewDataTextColumn FieldName="FileName"></dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn FieldName="Description" Caption="Description" Width="275px">
+                                                    <DataItemTemplate>
+                                                        <dx:ASPxMemo ID="txtDescription" Width="100%" ClientInstanceName="txtDescription" runat="server" Text='<%# Eval("Description")%>' Height="13px" Border-BorderColor="Transparent" BackColor="Transparent">
+                                                            <ClientSideEvents KeyDown="OnLogMemoKeyDown" Init="function(s,e){
+                                                                                        s.GetInputElement().style.overflowY='hidden';
+                                                                                        OnLogMemoKeyDown(s,e);
+                                                                                    }"
+                                                                GotFocus="function(s,e){ShowBorder(s);}" LostFocus="function(s,e){ShowBorder(s);}" />
+                                                        </dx:ASPxMemo>
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewCommandColumn ShowDeleteButton="true" ShowEditButton="true"></dx:GridViewCommandColumn>
+                                            </Columns>
+                                            <Styles>
+                                                <Row CssClass="draggable"></Row>
+                                            </Styles>
+                                            <SettingsBehavior AllowSort="false" AllowFocusedRow="true" ProcessFocusedRowChangedOnServer="True" />
+                                            <SettingsPager Mode="ShowAllRecords" />
+                                        </dx:ASPxGridView>--%>
+                                    </dx:PanelContent>
+                                </PanelCollection>
+                            </dx:ASPxCallbackPanel>
+                            <h4 class="ss_form_title">Image List </h4>
+                            <table>
+                                <tr>
+                                    <td rowspan="2">
+                                        <dx:ASPxGridView ID="gridImages" runat="server" OnHtmlRowPrepared="gridImages_HtmlRowPrepared" ClientInstanceName="gridView" Theme="Moderno"
+                                            AutoGenerateColumns="False" KeyFieldName="ImageId" OnCustomCallback="gridImages_CustomCallback1" OnDataBinding="gridImages_DataBinding" OnSelectionChanged="gridImages_SelectionChanged"
+                                            OnCustomJSProperties="gridImages_CustomJSProperties">                                            
+                                            <Columns>
+                                                <dx:GridViewCommandColumn ShowSelectCheckbox="true" Caption="Default"></dx:GridViewCommandColumn>
+                                                <dx:GridViewDataColumn FieldName="OrderId" Caption="Order" Width="60px">
+                                                </dx:GridViewDataColumn>
+                                                <dx:GridViewDataTextColumn FieldName="FileName"></dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn FieldName="Description" Caption="Description" Width="275px">
+                                                    <DataItemTemplate>
+                                                        <dx:ASPxMemo ID="txtDescription" Width="100%" ClientInstanceName="txtDescription" runat="server" Text='<%# Eval("Description")%>' Height="13px" Border-BorderColor="Transparent" BackColor="Transparent">
+                                                            <ClientSideEvents KeyDown="OnLogMemoKeyDown" Init="function(s,e){
+                                                                                        s.GetInputElement().style.overflowY='hidden';
+                                                                                        OnLogMemoKeyDown(s,e);
+                                                                                    }"
+                                                                GotFocus="function(s,e){ShowBorder(s);}" LostFocus="function(s,e){ShowBorder(s);}" />
+                                                        </dx:ASPxMemo>
+                                                    </DataItemTemplate>
+                                                </dx:GridViewDataTextColumn>
+                                            </Columns>
+                                            <Styles>
+                                                <Row CssClass="draggable"></Row>
+                                            </Styles>
+                                            <SettingsBehavior AllowSort="false" AllowFocusedRow="true" AllowSelectSingleRowOnly="true" ProcessSelectionChangedOnServer="true"  ProcessFocusedRowChangedOnServer="true" />
+                                            <SettingsPager Mode="ShowAllRecords" />
+                                            <ClientSideEvents Init="gridView_Init" EndCallback="gridView_EndCallback" />
+                                        </dx:ASPxGridView>
+                                    </td>
+                                    <td class="style1" style="vertical-align: bottom">
+                                        <dx:ASPxButton ID="btMoveUp" ClientInstanceName="btMoveUp" runat="server" Text="Up" Width="100px" AutoPostBack="false" Theme="Moderno">
+                                            <ClientSideEvents Click="btMoveUp_Click" />
+                                        </dx:ASPxButton>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="style1" style="vertical-align: top">
+                                        <dx:ASPxButton ID="btMoveDown" runat="server" ClientInstanceName="btMoveDown" Text="Down" Width="100px" AutoPostBack="false" Theme="Moderno">
+                                            <ClientSideEvents Click="btMoveDown_Click" />
+                                        </dx:ASPxButton>
+                                    </td>
+                                </tr>
+                            </table>
+                            <dx:ASPxCallback runat="server" ID="callbackSaveDescription" ClientInstanceName="callbackSaveDescription" OnCallback="callbackSaveDescription_Callback"></dx:ASPxCallback>
                             <br />
-                            <h4 class="ss_form_title">Upload Files</h4>                       
+                            <h4 class="ss_form_title">Upload Files</h4>
                             <dx:ASPxUploadControl ID="UploadControl" runat="server" ClientInstanceName="UploadControl" Width="320"
                                 NullText="Select multiple files..." UploadMode="Advanced" ShowUploadButton="True" ShowProgressPanel="True"
                                 OnFileUploadComplete="UploadControl_FileUploadComplete">
@@ -286,10 +459,12 @@
                                 </ValidationSettings>
                                 <ClientSideEvents FileUploadComplete="onFileUploadComplete" />
                             </dx:ASPxUploadControl>
+                            <dx:ASPxGlobalEvents ID="ge" runat="server">
+                                <ClientSideEvents ControlsInitialized="InitalizejQuery" EndCallback="InitalizejQuery" />
+                            </dx:ASPxGlobalEvents>
                         </div>
                     </div>
                 </div>
-
             </dx:PanelContent>
         </PanelCollection>
         <ClientSideEvents EndCallback="function(s,e){alert('Success.');}" />

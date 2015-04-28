@@ -1,5 +1,6 @@
 ﻿Imports PublicSiteData
 Imports DevExpress.Web.ASPxEditors
+Imports DevExpress.Web.ASPxGridView
 
 Public Class PublishProperty
     Inherits System.Web.UI.UserControl
@@ -13,7 +14,8 @@ Public Class PublishProperty
                 hfBBLE.Value = bble
                 BindFeatureList()
                 BindData(bble)
-                BindImages(bble)
+                'BindImages(bble)
+                gridImages.DataBind()
             End If
         End If
     End Sub
@@ -28,8 +30,8 @@ Public Class PublishProperty
         imageSlider.DataSource = imgs
         imageSlider.DataBind()
 
-        gridImages.DataSource = imgs
-        gridImages.DataBind()
+        'gridImages.DataSource = imgs
+        'gridImages.DataBind()
     End Sub
 
     Private Sub BindData(bble As String)
@@ -71,7 +73,7 @@ Public Class PublishProperty
 
     Sub BindFeatures()
         For Each item In ListPropertyData.Features
-            Dim ft = cblFeatures.Items.FindByValue(item)
+            Dim ft = cblFeatures.Items.FindByText(item.FeatureId.ToString)
             If ft IsNot Nothing Then
                 ft.Selected = True
             End If
@@ -158,5 +160,120 @@ Public Class PublishProperty
         e.Cancel = True
 
         BindImages(hfBBLE.Value)
+    End Sub
+
+    Protected Sub cpImageSlider_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        Dim bble = hfBBLE.Value
+        BindImages(bble)
+    End Sub
+
+    Protected Sub gridImages_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs)
+        If e.RowType = GridViewRowType.Data Then
+            Dim rowOrder As Object = e.GetValue("OrderId")
+            If rowOrder IsNot Nothing Then
+                e.Row.Attributes.Add("sortOrder", rowOrder.ToString())
+            Else
+                e.Row.Attributes.Add("sortOrder", e.VisibleIndex + 1)
+                UpdateSortIndex(e.KeyValue, e.VisibleIndex + 1)
+            End If
+
+            Dim txtComments = TryCast(gridImages.FindRowCellTemplateControl(e.VisibleIndex, gridImages.Columns("Description"), "txtDescription"), ASPxMemo)
+            txtComments.ClientSideEvents.TextChanged = String.Format("function(s,e){{ SaveDescription(s, {0}); }}", e.KeyValue)
+        End If
+    End Sub
+
+    Protected Sub gridImages_CustomCallback1(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewCustomCallbackEventArgs)
+        If e.Parameters.StartsWith("Upload") Then
+            Dim fileId = CInt(e.Parameters.Split("|")(1))
+            Dim bble = hfBBLE.Value
+            PropertyImage.UpdateBBLE(fileId, bble, Nothing)
+        End If
+
+        Dim gridView As ASPxGridView = TryCast(sender, ASPxGridView)
+        Dim parameters() As String = e.Parameters.Split("|"c)
+        Dim command As String = parameters(0)
+        If command = "MOVEUP" OrElse command = "MOVEDOWN" Then
+            Dim focusedRowKey As Integer = GetGridViewKeyByVisibleIndex(gridView, gridView.FocusedRowIndex)
+            Dim index As Integer = CInt((gridView.GetRowValues(gridView.FocusedRowIndex, "OrderId")))
+            Dim newIndex As Integer = index
+            If command = "MOVEUP" Then
+                newIndex = If(index = 0, index, index - 1)
+            End If
+            If command = "MOVEDOWN" Then
+                newIndex = If(index = gridView.VisibleRowCount, index, index + 1)
+            End If
+            Dim rowKey As Integer = GetKeyIDBySortIndex(gridView, newIndex)
+            UpdateSortIndex(focusedRowKey, newIndex)
+            UpdateSortIndex(rowKey, index)
+            gridView.FocusedRowIndex = gridView.FindVisibleIndexByKeyValue(rowKey)
+        End If
+        If command = "DRAGROW" Then
+            Dim draggingIndex As Integer = Integer.Parse(parameters(1))
+            Dim targetIndex As Integer = Integer.Parse(parameters(2))
+            Dim draggingRowKey As Integer = GetKeyIDBySortIndex(gridView, draggingIndex)
+            Dim targetRowKey As Integer = GetKeyIDBySortIndex(gridView, targetIndex)
+            Dim draggingDirection As Integer = If(targetIndex < draggingIndex, 1, -1)
+            For rowIndex As Integer = 0 To gridView.VisibleRowCount - 1
+                Dim rowKey As Integer = GetGridViewKeyByVisibleIndex(gridView, rowIndex)
+                Dim index As Integer = CInt((gridView.GetRowValuesByKeyValue(rowKey, "OrderId")))
+                If (index > Math.Min(targetIndex, draggingIndex)) AndAlso (index < Math.Max(targetIndex, draggingIndex)) Then
+                    UpdateSortIndex(rowKey, index + draggingDirection)
+                End If
+            Next rowIndex
+            UpdateSortIndex(draggingRowKey, targetIndex)
+            UpdateSortIndex(targetRowKey, targetIndex + draggingDirection)
+        End If
+        gridView.DataBind()
+    End Sub
+
+    Private Function GetGridViewKeyByVisibleIndex(ByVal gridView As ASPxGridView, ByVal visibleIndex As Integer) As Integer
+        Return CInt((gridView.GetRowValues(visibleIndex, gridView.KeyFieldName)))
+    End Function
+
+    Private Sub UpdateGridViewButtons(ByVal gridView As ASPxGridView)
+        gridView.JSProperties("cpbtMoveUp_Enabled") = gridView.FocusedRowIndex > 0
+        gridView.JSProperties("cpbtMoveDown_Enabled") = gridView.FocusedRowIndex < (gridView.VisibleRowCount - 1)
+    End Sub
+
+    Private Function GetKeyIDBySortIndex(ByVal gridView As ASPxGridView, ByVal sortIndex As Integer) As Integer
+        Dim img = PropertyImage.GetImage(hfBBLE.Value, sortIndex)
+        Return img.ImageId
+
+    End Function
+
+    Private Sub UpdateSortIndex(ByVal rowKey As Integer, ByVal sortIndex As Integer)
+        Dim img = PropertyImage.GetImage(rowKey)
+        img.OrderId = sortIndex
+        img.Save()
+    End Sub
+
+    Protected Sub gridImages_CustomJSProperties(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewClientJSPropertiesEventArgs)
+        Dim gridView As ASPxGridView = TryCast(sender, ASPxGridView)
+        UpdateGridViewButtons(gridView)
+    End Sub
+
+    Protected Sub gridImages_DataBinding(sender As Object, e As EventArgs)
+        If gridImages.DataSource Is Nothing Then
+            gridImages.DataSource = PropertyImage.GetPropertyImages(hfBBLE.Value)
+        End If
+    End Sub
+
+    Protected Sub callbackSaveDescription_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
+        If Not String.IsNullOrEmpty(e.Parameter) Then
+            Dim imgId = e.Parameter.Substring(0, e.Parameter.IndexOf("|"))
+            Dim comments = e.Parameter.Remove(0, e.Parameter.IndexOf("|") + 1)
+            Dim img = PropertyImage.GetImage(CInt(imgId))
+            img.Description = comments
+            img.Save()
+        End If
+    End Sub
+
+    Protected Sub gridImages_SelectionChanged(sender As Object, e As EventArgs)
+        Dim imgId = gridImages.GetSelectedFieldValues("ImageId")
+        If imgId IsNot Nothing AndAlso imgId.Count > 0 Then
+            Dim prop = ListProperty.GetProperty(hfBBLE.Value)
+            prop.DefaultImage = CInt(imgId(0))
+            prop.Save()
+        End If
     End Sub
 End Class

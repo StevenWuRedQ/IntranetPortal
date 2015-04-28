@@ -206,8 +206,8 @@ Partial Public Class Lead
         listProp.Agent = Lead.GetInstance(bble).EmployeeName
 
         'geo info
-        listProp.Latitude = ""
-        listProp.Longitude = ""
+        listProp.Latitude = ld.Latitude
+        listProp.Longitude = ld.Longitude
 
         Return listProp.Create()
     End Function

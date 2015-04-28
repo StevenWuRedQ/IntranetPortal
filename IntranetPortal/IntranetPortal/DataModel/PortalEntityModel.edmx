@@ -319,6 +319,8 @@
           <Property Name="BuildingBBLE" Type="nchar" MaxLength="11" />
           <Property Name="UnitNum" Type="nvarchar" MaxLength="50" />
           <Property Name="Type" Type="int" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="LastUpdate" Type="datetime" />
@@ -1291,6 +1293,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="C3rdMortgrAmt" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="BuildingBBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
           <Property Name="UnitNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
         </EntityType>
         <Association Name="LeadLeadsInfo">
           <End Type="IntranetPortalModel.Lead" Role="Lead" Multiplicity="0..1" />
@@ -2119,6 +2123,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySetMapping Name="LeadsInfoes">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadsInfo">
               <MappingFragment StoreEntitySet="LeadsInfo">
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
                 <ScalarProperty Name="UnitNum" ColumnName="UnitNum" />
                 <ScalarProperty Name="BuildingBBLE" ColumnName="BuildingBBLE" />
                 <ScalarProperty Name="C3rdMortgrAmt" ColumnName="C3rdMortgrAmt" />

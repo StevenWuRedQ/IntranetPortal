@@ -281,6 +281,8 @@ Public Class DataWCFService
                     li.MaxFar = CDbl(result.MAX_FAR)
                     li.ActualFar = CDbl(result.ACTUAL_FAR)
                     li.NYCSqft = result.ORIG_SQFT
+                    li.Latitude = result.Latitude
+                    li.Longitude = result.Longitude
 
                     'result.LAND_SQFT  as Land_SF
                     'result.ORIG_SQFT as NYC_GLA
