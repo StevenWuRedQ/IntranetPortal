@@ -32,12 +32,12 @@ End Section
         @Using Html.BeginForm("List", "Home", FormMethod.Post)
             @Html.AntiForgeryToken()
 
-            @*@Html.TextBoxFor(Function(model) model.Keyword, New With {.placeholder = "Search neighborhood, city, zip or address",
+            @Html.TextBoxFor(Function(model) model.Keyword, New With {.placeholder = "Search neighborhood, city, zip or address",
                 .required = "required",
-                .class = "w-input hsearch-bar-input"})*@
+                .class = "w-input hsearch-bar-input"})
 
             @<text>
-                <input class="w-input hsearch-bar-input" id="hsearch-criteria" type="text" placeholder="Search neighborhood, city, zip or address" name="search-criteria" data-name="hsearch-criteria" required="required">
+                @*<input class="w-input hsearch-bar-input" id="hsearch-criteria" type="text" placeholder="Search neighborhood, city, zip or address" name="search-criteria" data-name="hsearch-criteria" required="required">*@
                 <select class="w-select hsearch-bar-input hsearch-bar-input-selection" id="price" name="price" data-name="price" required>
                     <option value="">Price</option>
                     <option value="Under $200,000">Under $200,000</option>

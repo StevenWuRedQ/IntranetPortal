@@ -42,14 +42,14 @@
         End Using
     End Sub
 
-    Private _features As List(Of String)
-    Public ReadOnly Property Features As List(Of String)
+    Private _features As List(Of FeatureData)
+    Public ReadOnly Property Features As List(Of FeatureData)
         Get
             If _features Is Nothing Then
                 Using ctx As New PublicSiteEntities
                     _features = (From ft In ctx.PropertyFeatures.Where(Function(a) a.BBLE = BBLE)
                                 Join ftData In ctx.FeatureDatas On ft.FeatureId Equals ftData.FeatureId
-                                Select ftData.Name).ToList
+                                Select ftData).ToList
                 End Using
             End If
             Return _features
@@ -107,6 +107,12 @@ Partial Public Class PropertyImage
     Public Shared Function GetPropertyImages(bble As String) As List(Of PropertyImage)
         Using ctx As New PublicSiteEntities
             Return ctx.PropertyImages.Where(Function(pi) pi.BBLE = bble).OrderBy(Function(pi) pi.OrderId).ToList
+        End Using
+    End Function
+
+    Public Shared Function GetImage(bble As String, orderid As Integer) As PropertyImage
+        Using ctx As New PublicSiteEntities
+            Return ctx.PropertyImages.Where(Function(pi) pi.BBLE = bble AndAlso pi.OrderId = orderid).FirstOrDefault
         End Using
     End Function
 
