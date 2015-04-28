@@ -67,36 +67,42 @@
 
         .call_btn_hangup {
             background: #ff400d;
-            transform: rotate(135deg);
+            /*transform: rotate(135deg);*/
         }
 
         .no_outline:focus {
             outline: none !important;
         }
-        body
-        {
-            background:transparent;
+
+        body {
+            background: transparent;
         }
     </style>
     <script type="text/javascript">
         var CallNumber = '<%= CalledNumber%>';
         var BBLE = '<%= BBLE%>';
         var Montor = "<%= Monitor %>";
+        var TrainingMode = '<%= TrainingMode%>'=='True'
+
         Twilio.Device.setup('<%= TwilioToken%>');
 
         Twilio.Device.ready(function (device) {
             $("#log").text("Ready");
-            //if (Montor) {
-            call(Montor);
+            
+            if (BBLE)
+            {
+                call(CallNumber);
+            }
 
-            $(function () {
-                InitConfrence(CallNumber)
-            }).delay(5000)
+            if (TrainingMode) {
+                call(Montor);
+                $(function () {
+                    InitConfrence(CallNumber)
+                }).delay(5000)
 
-            //}else
-            //{
-            //    call(null);
-            //}
+            }
+
+            
         });
 
         Twilio.Device.error(function (error) {
@@ -104,17 +110,17 @@
         });
 
         Twilio.Device.connect(function (conn) {
+            CallBtnStauts(true);
+
             if (BBLE) {
                 var log = sprintf("%s did phone (%s) call", $("#userName").val(), CallNumber);
                 logCall(BBLE, log);
             }
             $("#log").text("Successfully established call");
         });
-        function logCall(BBLE, log) {
-            var url = '/autoDialer/DialerAjaxservice.svc/CallLog/' + BBLE + ',' + log;
-            $.getJSON(url, function (d) { });
-        }
+       
         Twilio.Device.disconnect(function (conn) {
+            CallBtnStauts(false);
             $("#log").text("Call ended");
             var callId = conn.parameters.CallSid;
             if (callId && typeof callId !== 'undefined') {
@@ -134,16 +140,54 @@
             conn.accept();
         });
 
+
+        function CallBtnStauts(isconnect) {
+            var callbtn = $('#CallBtn');
+
+            if (isconnect) {
+                callbtn.addClass("call_btn_hangup");
+            } else {
+                callbtn.removeClass("call_btn_hangup");
+            }
+
+            callbtn.animate({ borderSpacing: isconnect ? 135 : 0 }, {
+                step: function (now, fx) {
+
+                    $(this).css('transform', 'rotate(' + now + 'deg)');
+                },
+                duration: 'slow'
+            }, 'linear');
+        }
+        function logCall(BBLE, log) {
+            var url = '/autoDialer/DialerAjaxservice.svc/CallLog/' + BBLE + ',' + log;
+            if (BBLE) {
+                $.getJSON(url, function (d) {
+                    console.log(JSON.stringify(d))
+                });
+            }
+
+        }
+
         function call(confrenceName) {
 
 
-            var params = { "ConfrenceName": (confrenceName ? confrenceName : $('#userName').val()) };
-            if (confrenceName) {
-                params.muted = "true";
+            var params;
+            var number = (confrenceName ? confrenceName : $('#userName').val());
+            if (TrainingMode) {
+                params = { "ConfrenceName": number };
+                if (confrenceName) {
+                    params.muted = "true";
+
+                }
 
             }
-            Twilio.Device.connect(params
-                );
+            else {
+                var cnumber = confrenceName ? confrenceName : $("#number").val() 
+                params = { "PhoneNumber": cnumber }
+                $('#callnumber').html(cnumber);
+            }
+
+            Twilio.Device.connect(params);
             //$.getJSON('/AutoDialer/DialerAjaxService.svc/CallNumber/' + pn);
         }
 
@@ -189,27 +233,38 @@
             var hash = btoa(tok);
             return hash;
         }
+        function CallBtnClick(e)
+        {
+            var cbtn = $(e);
+            if(cbtn.hasClass("call_btn_hangup"))
+            {
+                hangup();
+            }else
+            {
+                call(null);
+            }
+        }
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
         <input type="hidden" id="userName" value="<%=Page.User.Identity.Name%>" />
-       <%-- <div class="container-fluid">--%>
-           <%-- <div class="row">
+        <%-- <div class="container-fluid">--%>
+        <%-- <div class="row">
                 <div class="col-md-6">--%>
-                    <div class="modal-dialog">
-                        <div class="modal-content" style="background: #1a3847; color: white">
-                            <div class="modal-header" style="border-bottom: none">
-                                <div class="clearfix">
-                                    <div class="pop_up_header_margin">
-                                        <i class="fa fa-phone with_circle pop_up_header_icon" style="color:inherit"></i>
-                                        <span class="pop_up_header_text">Dailer</span>
-                                    </div>
-                                    <div class="pop_up_buttons_div">
-                                        <i class="fa fa-times icon_btn" style="color:white;font-size:22px;margin-top:9px;" data-dismiss="modal" ></i>
-                                    </div>
-                                </div>
-                                <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background: #1a3847; color: white">
+                <div class="modal-header" style="border-bottom: none">
+                    <div class="clearfix">
+                        <div class="pop_up_header_margin">
+                            <i class="fa fa-phone with_circle pop_up_header_icon" style="color: inherit"></i>
+                            <span class="pop_up_header_text">Dailer</span>
+                        </div>
+                        <div class="pop_up_buttons_div">
+                            <i class="fa fa-times icon_btn" style="color: white; font-size: 22px; margin-top: 9px;" onclick="$('body').css('display','none');hangup();"></i>
+                        </div>
+                    </div>
+                    <%--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <i class="fa fa-times" style="color:white"></i>
 
                                 </button>
@@ -219,25 +274,25 @@
                                     <span style="font-size: 22px; padding-left: 5px;" class="">Dailer</span>
 
                                 </h4>--%>
-                            </div>
-                            <div class="modal-body" style="background: #1e4154">
-                                 
-                                <div class="input-group" style="border-color:#2b586f">
-                                    <input type="text" class="form-control dailer_input" style="border-color:inherit;border-right:none" placeholder="Dail or Search" aria-describedby="basic-addon2">
-                                    <span class="input-group-addon dailer_input_addon" style="border-color:inherit" id="basic-addon2"><i class="fa fa-times-circle"></i></span>
-                                </div>
-                                <div align="center" style="margin: 15px;">
-                                    <span style="font-size: 30px" class="font_light">(347) 123-4567</span>
+                </div>
+                <div class="modal-body" style="background: #1e4154">
 
-                                </div>
+                    <div class="input-group" style="border-color: #2b586f">
+                        <input type="text" class="form-control dailer_input" id="number" style="border-color: inherit; border-right: none" placeholder="Dail or Search" aria-describedby="basic-addon2">
+                        <span class="input-group-addon dailer_input_addon" style="border-color: inherit" id="basic-addon2"><i class="fa fa-times-circle"></i></span>
+                    </div>
+                    <div align="center" style="margin: 15px;">
+                        <span style="font-size: 30px" class="font_light" id="callnumber">&nbsp;</span>
 
-                                <div align="center">
-                                    <button type="button" class="call_btn no_outline call_btn_nomal">
-                                        <i class="fa fa-phone"></i>
-                                    </button>
-                                </div>
+                    </div>
 
-                                <%--<button class="call" onclick="InitConfrence();" type="button">
+                    <div align="center">
+                        <button type="button" id="CallBtn" class="call_btn no_outline call_btn_nomal" onclick="CallBtnClick(this);">
+                            <i class="fa fa-phone"></i>
+                        </button>
+                    </div>
+
+                    <%--<button class="call" onclick="InitConfrence();" type="button">
                                     Call
                                 </button>
                                 
@@ -245,29 +300,28 @@
                                     Hangup
                                 </button>--%>
 
-                                <%-- <input type="text" id="number" name="number"
+                    <%-- <input type="text" id="number" name="number"
                                     placeholder="Enter a phone number to call" />--%>
 
-                                <%-- <button onclick="GetCallInfo()" type="button">Try javascprit aip  </button>--%>
-                                <div align="center">
-                                    <div id="log" style="padding: 20px;">Loading pigeons...</div>
-                                </div>
-
-                                <div id="javascriptApi"></div>
-                            </div>
-
-                        </div>
+                    <%-- <button onclick="GetCallInfo()" type="button">Try javascprit aip  </button>--%>
+                    <div align="center">
+                        <div id="log" style="padding: 20px;">Loading pigeons...</div>
                     </div>
 
-               <%-- </div>--%>
-                <% If String.IsNullOrEmpty(Monitor) And Not CallModel Then%>
-                <div class="col-md-6">
-                    <iframe src="/Chat/ChatDefault.aspx" style="width: 574px; height: 400px; border: none"></iframe>
+                    <div id="javascriptApi"></div>
                 </div>
-                <%End If%>
+
+            </div>
+        </div>
+
+        <%-- </div>--%>
+        <% If String.IsNullOrEmpty(Monitor) And Not CallModel Then%>
+        <div class="col-md-6">
+            <iframe src="/Chat/ChatDefault.aspx" style="width: 574px; height: 400px; border: none"></iframe>
+        </div>
+        <%End If%>
         <%--    </div>
         </div>--%>
-
     </form>
 </body>
 </html>

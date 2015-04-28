@@ -481,7 +481,7 @@
                                                 </dx:ASPxCallbackPanel>
                                             </div>
                                             <div style="position:fixed;right: 0;bottom: 5px;">
-                                                <iframe src="/AutoDialer/Dialer.aspx" id="#AutoDialer" style="width: 339px;height: 406px;border: none;">
+                                                <iframe src="/AutoDialer/Dialer.aspx" id="AutoDialer" style="width: 339px;height: 406px;border: none;">
 
                                                 </iframe>
                                             </div>
