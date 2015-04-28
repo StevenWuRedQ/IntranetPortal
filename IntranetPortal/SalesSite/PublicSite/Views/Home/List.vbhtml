@@ -7,6 +7,9 @@ End Code
 
 @section Header
     <link rel="stylesheet" href="~/other/v-nav/css/style.css">
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+
 End Section
 
 <div class="w-nav global-nav-2" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1" data-ix="display-global-nav-2">
@@ -67,7 +70,11 @@ End Section
 </section>
 <section class="listings-map" style="background: #f5f5f5; padding: 30px;">
     <div class="l-map-container">
-        Place map here.
+        <div id='map' style="top:0;bottom:0;width:100%"></div>
+        <script>
+            L.mapbox.accessToken = 'pk.eyJ1IjoicG9ydGFsIiwiYSI6ImtCdG9ac00ifQ.p2_3nTko4JskYcg0YIgeyw';
+            map = L.mapbox.map('map', 'examples.map-i87786ca').setView([40.7127, -74.0059], 11);
+        </script>
     </div>
 </section>
 <section class="listings">
@@ -84,7 +91,7 @@ End Section
 
             @code
                 Dim i = 0
-                'Dim c As Char = "A"                
+                'Dim c As Char = "A"
                 'c = c & 1
                 Dim C As Byte = System.Text.Encoding.Unicode.GetBytes("A")(0)
             End Code
@@ -92,26 +99,26 @@ End Section
             @For Each item In Model.Result
 
                 @<div class="l-entry">
-                     <a class="l-entry-link" href="/home/detail/@item.BBLE" target="_blank">
-                         <img src="~/images/sample-image-70-54.jpg" alt="" width="70" height="54">
-                         <div class="l-entry-headers">
-                             <h3>@item.Number&nbsp;@item.StreetName &nbsp;@(If(String.IsNullOrEmpty(item.AptNo), "", "Unit " & item.AptNo))</h3>
-                             <h4><i class="fa fa-map-marker"></i> @item.NeighName</h4>
-                         </div>
-                         <div class="w-clearfix">
-                             <div class="lei-item"><span class="lei-item-important">@item.BedRoomNum</span> bed</div>
-                             <div class="lei-item"><span class="lei-item-important">@item.BathRoomNum</span> bath</div>
-                             <div class="lei-item leii-s2 w-clearfix">
-                                 <div class="lei-item-icon"><i class="fa fa-tag"></i></div>
-                                 <div class="lei-item-text"><span class="lei-item-important leiii-2">@String.Format("{0:C0}", item.SalePrice)</span> Annual Taxes: @String.Format("{0:C0}", item.Taxes)</div>
-                             </div>
-                         </div>
-                         <p class="l-entry-time-added">Added 2 hours ago</p>
-                         <div class="l-entry-num">@Convert.ToChar(C+i)</div>
-                         @code
-                         i = i + 1
-                         End Code
-                     </a>
+                    <a class="l-entry-link" href="/home/detail/@item.BBLE" target="_blank">
+                        <img src="~/images/sample-image-70-54.jpg" alt="" width="70" height="54">
+                        <div class="l-entry-headers">
+                            <h3>@item.Number&nbsp;@item.StreetName &nbsp;@(If(String.IsNullOrEmpty(item.AptNo), "", "Unit " & item.AptNo))</h3>
+                            <h4><i class="fa fa-map-marker"></i> @item.NeighName</h4>
+                        </div>
+                        <div class="w-clearfix">
+                            <div class="lei-item"><span class="lei-item-important">@item.BedRoomNum</span> bed</div>
+                            <div class="lei-item"><span class="lei-item-important">@item.BathRoomNum</span> bath</div>
+                            <div class="lei-item leii-s2 w-clearfix">
+                                <div class="lei-item-icon"><i class="fa fa-tag"></i></div>
+                                <div class="lei-item-text"><span class="lei-item-important leiii-2">@String.Format("{0:C0}", item.SalePrice)</span> Annual Taxes: @String.Format("{0:C0}", item.Taxes)</div>
+                            </div>
+                        </div>
+                        <p class="l-entry-time-added">Added 2 hours ago</p>
+                        <div class="l-entry-num">@Convert.ToChar(C + i)</div>
+                        @code
+                        i = i + 1
+                        End Code
+                    </a>
                 </div>
             Next
             @*<div class="l-entry">
