@@ -190,6 +190,7 @@
     <ContentCollection>
         <dx:PopupControlContentControl runat="server" ID="popupContentInProcess" Visible="false">
             <asp:HiddenField runat="server" ID="hfInProcessBBLE" />
+           
             <dx:ASPxCheckBoxList ID="lbSelectionMode" runat="server" ClientInstanceName="lbSelectionModeClient" AutoPostBack="false" Border-BorderStyle="None">
                 <Items>
                     <dx:ListEditItem Text="Short Sale" Value="0" />
@@ -270,12 +271,19 @@
                             })
                         }
                     </script>
+                    <textarea style="height:200px;width:100%">
+
+                    </textarea>
+
                     <dx:ASPxCheckBoxList runat="server" ID="cbLegalType" ClientInstanceName="cbLegalTypeClient">
                         <Items>
+                            <dx:ListEditItem Text="Urgent Foreclosure review needed" Value="Partition" />
                             <dx:ListEditItem Text="Partition" Value="Partition" />
+                            <dx:ListEditItem Text="Deed Reversal" Value="Deed Reversal" />
                             <dx:ListEditItem Text="Breach of Contract" Value="Breach_of_Contract" />
                             <dx:ListEditItem Text="Quiet Title" Value="Quiet_Title" />
                             <dx:ListEditItem Text="Estate" Value="Estate" />
+                            
                         </Items>
                         <ClientSideEvents SelectedIndexChanged="LeagalInfoSelectChange" />
                     </dx:ASPxCheckBoxList>
