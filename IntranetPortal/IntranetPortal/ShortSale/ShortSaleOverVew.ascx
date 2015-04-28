@@ -125,7 +125,6 @@
                                 <dx:PanelContent>
                                     <% Dim i = 0%>
                                     <asp:HiddenField ID="hfCaseId" runat="server" />
-
                                     <% For Each comment In shortSaleCaseData.Comments%>
                                     <div class="note_item" style='<%= If((i mod 2)=0,"background: #e8e8e8","")%>'>
                                         <i class="fa fa-exclamation-circle note_img"></i>
