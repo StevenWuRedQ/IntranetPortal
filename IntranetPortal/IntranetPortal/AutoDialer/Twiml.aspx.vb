@@ -39,10 +39,15 @@ Public Class Twiml
 
 
         'numberOrClient = numberOrClient & String.Format("<Client>{0}</Client>", number)
-        Dim mutedStr = If(muted IsNot Nothing, "muted=""true""  beep=""false""", "")
-        Dim toString = If(isOut IsNot Nothing, "endConferenceOnExit=""true""", "")
+        If (Not String.IsNullOrEmpty(number)) Then
 
-        numberOrClient = String.Format("<Conference {0} {1}>{2}</Conference>", mutedStr, toString, If(ConfrenceName IsNot Nothing, ConfrenceName, "Conference"))
+            numberOrClient = String.Format("<Number>{0}</Number>", number)
+        Else
+            Dim mutedStr = If(muted IsNot Nothing, "muted=""true""  beep=""false""", "")
+            Dim toString = If(isOut IsNot Nothing, "endConferenceOnExit=""true""", "")
+            numberOrClient = String.Format("<Conference {0} {1}>{2}</Conference>", mutedStr, toString, If(ConfrenceName IsNot Nothing, ConfrenceName, "Conference"))
+        End If
+        
         'End If
 
 

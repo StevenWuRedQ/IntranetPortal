@@ -68,11 +68,11 @@ Partial Public Class Entities
     Public Overridable Property LatLon_View() As DbSet(Of LatLon_View)
     Public Overridable Property LeadsAssignViews() As DbSet(Of LeadsAssignView)
     Public Overridable Property LeadsAssignView2() As DbSet(Of LeadsAssignView2)
-    Public Overridable Property PendingAssignLeads() As DbSet(Of PendingAssignLead)
     Public Overridable Property LeadsInfoViews() As DbSet(Of LeadsInfoView)
     Public Overridable Property MapDataSets() As DbSet(Of MapDataSet)
     Public Overridable Property LeadsStatusLogs() As DbSet(Of LeadsStatusLog)
     Public Overridable Property TeamLeadsInZips() As DbSet(Of TeamLeadsInZip)
+    Public Overridable Property PendingAssignLeads() As DbSet(Of PendingAssignLead)
 
     Public Overridable Function UpdateEmployeeName(oldName As String, newName As String) As Integer
         Dim oldNameParameter As ObjectParameter = If(oldName IsNot Nothing, New ObjectParameter("OldName", oldName), New ObjectParameter("OldName", GetType(String)))

@@ -24,6 +24,11 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PublicSiteData", "SalesSite
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PublicSite", "SalesSite\PublicSite\PublicSite.vbproj", "{51BD1B6F-27A0-4CE3-BE89-D241CBA9A4AE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{43375D09-BCC8-4469-BFFE-6298F91F1CAB}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 11

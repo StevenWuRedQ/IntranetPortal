@@ -73,6 +73,10 @@
         .no_outline:focus {
             outline: none !important;
         }
+        body
+        {
+            background:transparent;
+        }
     </style>
     <script type="text/javascript">
         var CallNumber = '<%= CalledNumber%>';
@@ -190,9 +194,9 @@
 <body>
     <form id="form1" runat="server">
         <input type="hidden" id="userName" value="<%=Page.User.Identity.Name%>" />
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
+       <%-- <div class="container-fluid">--%>
+           <%-- <div class="row">
+                <div class="col-md-6">--%>
                     <div class="modal-dialog">
                         <div class="modal-content" style="background: #1a3847; color: white">
                             <div class="modal-header" style="border-bottom: none">
@@ -255,14 +259,14 @@
                         </div>
                     </div>
 
-                </div>
+               <%-- </div>--%>
                 <% If String.IsNullOrEmpty(Monitor) And Not CallModel Then%>
                 <div class="col-md-6">
                     <iframe src="/Chat/ChatDefault.aspx" style="width: 574px; height: 400px; border: none"></iframe>
                 </div>
                 <%End If%>
-            </div>
-        </div>
+        <%--    </div>
+        </div>--%>
 
     </form>
 </body>

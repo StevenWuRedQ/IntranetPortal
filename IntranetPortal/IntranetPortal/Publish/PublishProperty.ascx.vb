@@ -71,7 +71,7 @@ Public Class PublishProperty
 
     Sub BindFeatures()
         For Each item In ListPropertyData.Features
-            Dim ft = cblFeatures.Items.FindByValue(item.FeatureId.ToString)
+            Dim ft = cblFeatures.Items.FindByValue(item)
             If ft IsNot Nothing Then
                 ft.Selected = True
             End If

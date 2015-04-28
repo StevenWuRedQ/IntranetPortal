@@ -1145,12 +1145,12 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="LatLon_View" EntityType="IntranetPortalModel.LatLon_View" />
           <EntitySet Name="LeadsAssignViews" EntityType="IntranetPortalModel.LeadsAssignView" />
           <EntitySet Name="LeadsAssignView2" EntityType="IntranetPortalModel.LeadsAssignView2" />
-          <EntitySet Name="PendingAssignLeads" EntityType="IntranetPortalModel.PendingAssignLead" />
           <FunctionImport Name="UploadSearchInfo2Portal" />
           <EntitySet Name="LeadsInfoViews" EntityType="IntranetPortalModel.LeadsInfoView" />
           <EntitySet Name="MapDataSets" EntityType="IntranetPortalModel.MapDataSet" />
           <EntitySet Name="LeadsStatusLogs" EntityType="IntranetPortalModel.LeadsStatusLog" />
           <EntitySet Name="TeamLeadsInZips" EntityType="IntranetPortalModel.TeamLeadsInZip" />
+          <EntitySet Name="PendingAssignLeads" EntityType="IntranetPortalModel.PendingAssignLead" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1919,20 +1919,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="ActivityDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="PendingAssignLead">
-          <Key>
-            <PropertyRef Name="BBLE" />
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="FinishDate" Type="DateTime" Precision="3" />
-          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
         <EntityType Name="LeadsInfoView">
           <Key>
             <PropertyRef Name="BBLE" />
@@ -2053,6 +2039,19 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="LeadsName" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
           <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PendingAssignLead">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="FinishDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2795,20 +2794,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PendingAssignLeads">
-            <EntityTypeMapping TypeName="IntranetPortalModel.PendingAssignLead">
-              <MappingFragment StoreEntitySet="PendingAssignLeads">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="FinishDate" ColumnName="FinishDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
-                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="UploadSearchInfo2Portal" FunctionName="IntranetPortalModel.Store.UploadSearchInfo2Portal" />
           <EntitySetMapping Name="LeadsInfoViews">
             <EntityTypeMapping TypeName="IntranetPortalModel.LeadsInfoView">
@@ -2932,6 +2917,20 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
                 <ScalarProperty Name="LeadsName" ColumnName="LeadsName" />
                 <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PendingAssignLeads">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PendingAssignLead">
+              <MappingFragment StoreEntitySet="PendingAssignLeads">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="FinishDate" ColumnName="FinishDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

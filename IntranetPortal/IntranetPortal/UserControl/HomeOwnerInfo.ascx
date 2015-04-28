@@ -560,8 +560,10 @@
 <script>
     function CallPhone(phone)
     {
-        popUpAtBottomRight('/AutoDialer/Dialer.aspx?PN=' + phone + '&BBLE=' + $("#BBLEId").val()
-            , 'CallWindow', 1210, 460);
+        var url ='/AutoDialer/Dialer.aspx?PN=' + phone + '&BBLE=' + $("#BBLEId").val();
+        $("#AutoDialer").attr("src", url);
+        //popUpAtBottomRight(
+          //  , 'CallWindow', 1210, 460);
     }
     function popUpAtBottomRight(pageToLoad, winName, width, height) {
         xposition = 0; yposition = 0;

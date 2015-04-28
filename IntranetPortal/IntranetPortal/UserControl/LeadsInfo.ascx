@@ -472,12 +472,19 @@
                                                                         </td>
                                                                     </tr>
                                                                 </table>
+                                                               <div>
+
+                                                               </div>
                                                             </div>
                                                         </dx:PanelContent>
                                                     </PanelCollection>
                                                 </dx:ASPxCallbackPanel>
                                             </div>
+                                            <div style="position:fixed;right: 0;bottom: 5px;">
+                                                <iframe src="/AutoDialer/Dialer.aspx" id="#AutoDialer" style="width: 339px;height: 406px;border: none;">
 
+                                                </iframe>
+                                            </div>
                                         </div>
                                         <div class="tab-pane" id="documents">
                                             <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
