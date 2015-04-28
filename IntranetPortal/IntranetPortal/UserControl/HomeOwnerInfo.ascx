@@ -560,7 +560,8 @@
 <script>
     function CallPhone(phone)
     {
-        var url ='/AutoDialer/Dialer.aspx?PN=' + phone + '&BBLE=' + $("#BBLEId").val();
+        var url = '/AutoDialer/Dialer.aspx?PN=' + phone + '&BBLE=' + $("#BBLEId").val();
+        $("#AutoDialer").css('display', '');
         $("#AutoDialer").attr("src", encodeURI(url));
         //popUpAtBottomRight(
           //  , 'CallWindow', 1210, 460);
