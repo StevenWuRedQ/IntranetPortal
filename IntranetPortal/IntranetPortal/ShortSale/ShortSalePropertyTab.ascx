@@ -21,6 +21,10 @@
             <label class="ss_form_input_title">Street Name</label>
             <input class="ss_form_input" data-field="PropertyInfo.StreetName">
         </li>
+         <li class="ss_form_item">
+            <label class="ss_form_input_title">Apt #</label>
+            <input class="ss_form_input" data-field="PropertyInfo.AptNo">
+        </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">City</label>
             <input class="ss_form_input" data-field="PropertyInfo.City">
@@ -33,10 +37,7 @@
             <label class="ss_form_input_title">Zip</label>
             <input class="ss_form_input" data-field="PropertyInfo.Zipcode">
         </li>
-        <li class="ss_form_item">
-            <label class="ss_form_input_title">&nbsp;</label>
-            <input class="ss_form_input ss_form_hidden" value=" ">
-        </li>
+        
         <li class="ss_form_item">
             <label class="ss_form_input_title">BLOCK</label>
             <input class="ss_form_input" data-field="PropertyInfo.Block">

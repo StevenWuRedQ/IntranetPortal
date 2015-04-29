@@ -24,6 +24,10 @@
                         <input class="ss_form_input" style="width: 93.5%;" name="lender"
                             value="<%= summaryCase.PropertyInfo.PropertyAddress%>">
                     </li>
+                      <li class="ss_form_item">
+                        <label class="ss_form_input_title">BBLE</label>
+                        <input class="ss_form_input font_black" data-field="PropertyInfo.BBLE">
+                    </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Block</label>
                         <input class="ss_form_input" data-field="PropertyInfo.Block">

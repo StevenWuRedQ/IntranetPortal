@@ -9,5 +9,6 @@ Public Class ShortSaleSummaryTab
 
     Protected Sub summary_call_back_panel_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         summaryCase = ShortSaleCase.GetCase(CInt(e.Parameter))
+
     End Sub
 End Class

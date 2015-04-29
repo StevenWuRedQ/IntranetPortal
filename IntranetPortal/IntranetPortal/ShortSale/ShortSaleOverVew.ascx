@@ -222,7 +222,7 @@
 
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">MLS #</label>
-                                                <input class="ss_form_input ">
+                                                <input class="ss_form_input " data-field="ListMLS">
                                             </li>
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">MLS Status</label>
@@ -233,15 +233,15 @@
                                             </li>
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">Listing Expiry Date</label>
-                                                <input class="ss_form_input ss_date">
+                                                <input class="ss_form_input ss_date" data-field="ListingExpireDate">
                                             </li>
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">LockBox</label>
-                                                <input class="ss_form_input">
+                                                <input class="ss_form_input" data-field="Lockbox">
                                             </li>
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">List Price</label>
-                                                <input class="ss_form_input ">
+                                                <input class="ss_form_input " data-field="ListPrice">
                                             </li>
                                         </ul>
                                     </div>
@@ -327,11 +327,11 @@
 
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">Offer Submited </label>
-                                                <input class="ss_form_input ">
+                                                <input class="ss_form_input " data-field="OfferSubmited">
                                             </li>
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">Date </label>
-                                                <input class="ss_form_input ss_date">
+                                                <input class="ss_form_input ss_date" data-field="OfferDate">
                                             </li>
                                         </ul>
                                     </div>
