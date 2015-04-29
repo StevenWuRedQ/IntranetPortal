@@ -34,5 +34,12 @@ Partial Public Class ShortSaleCase
     Public Property Owner As String
     Public Property IsUrgent As Nullable(Of Boolean)
     Public Property CallbackDate As Nullable(Of Date)
+    Public Property ListMLS As String
+    Public Property MLSStatus As String
+    Public Property ListingExpireDate As Nullable(Of Date)
+    Public Property Lockbox As String
+    Public Property ListPrice As Nullable(Of Decimal)
+    Public Property OfferSubmited As Nullable(Of Decimal)
+    Public Property OfferDate As Nullable(Of Date)
 
 End Class

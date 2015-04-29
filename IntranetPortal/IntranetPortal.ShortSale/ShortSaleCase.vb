@@ -121,6 +121,17 @@ Partial Public Class ShortSaleCase
         End Get
     End Property
 
+    Private _valueInfos As List(Of PropertyValueInfo)
+    Public ReadOnly Property ValueInfoes As List(Of PropertyValueInfo)
+        Get
+            If _valueInfos Is Nothing Then
+                _valueInfos = PropertyValueInfo.GetValueInfos(BBLE)
+            End If
+
+            Return _valueInfos
+        End Get
+    End Property
+
     Public ReadOnly Property AssignedProcessor As PartyContact
         Get
             If Processor.HasValue Then
@@ -150,6 +161,8 @@ Partial Public Class ShortSaleCase
             End If
         End Get
     End Property
+
+
 
     Public ReadOnly Property Manager As String
         Get
@@ -212,7 +225,7 @@ Partial Public Class ShortSaleCase
         End If
         Return Nothing
     End Function
-    
+
     Public ReadOnly Property SencondMortageProgress As String
         Get
             Return GetMortageStauts(1)

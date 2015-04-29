@@ -113,6 +113,9 @@
     <Compile Include="ADOEntity\PropertyTitle.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\PropertyValueInfo.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\ShortSale.Context.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -164,6 +167,7 @@
     <Compile Include="PropertyOccupant.vb" />
     <Compile Include="PropertyOwner.vb" />
     <Compile Include="PropertyTitle.vb" />
+    <Compile Include="PropertyValueInfo.vb" />
     <Compile Include="ShortSaleCase.vb" />
     <Compile Include="ShortSaleCaseComment.vb" />
     <Compile Include="ShortSaleSummary.vb" />

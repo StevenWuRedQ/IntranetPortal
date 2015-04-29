@@ -34,5 +34,6 @@ Partial Public Class PropertyBaseInfo
     Public Property UpdateDate As Nullable(Of Date)
     Public Property UpdateBy As String
     Public Property Borough As String
+    Public Property AptNo As String
 
 End Class

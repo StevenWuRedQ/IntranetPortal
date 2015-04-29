@@ -18,14 +18,14 @@ Partial Public Class Employee
     Public Property Department As String
     Public Property Extension As String
     Public Property Email As String
-    Public Property Cellphone As String
-    Public Property EmployeeSince As Nullable(Of Date)
-    Public Property Picture As String
     Public Property Password As String
     Public Property ReportTo As Nullable(Of Integer)
     Public Property Description As String
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
     Public Property Active As Nullable(Of Boolean)
+    Public Property CellPhone As String
+    Public Property EmployeeSince As Nullable(Of Date)
+    Public Property Picture As String
 
 End Class
