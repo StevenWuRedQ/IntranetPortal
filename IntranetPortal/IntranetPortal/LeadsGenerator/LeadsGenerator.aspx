@@ -118,7 +118,7 @@
 
         function OnLoadClick() {
 
-            tableViewClinetCallBack.PerformCallback($("#LoadSearchName").val());
+            tableViewClinetCallBack.PerformCallback( decodeURI( $("#LoadSearchName").val()));
         }
         loadCallBack = {}
         loadCallBack.ClosePupUp = function () {
@@ -175,7 +175,7 @@
                                 <div class="form-inline">
                                     <select class=" form-control query_input_60percent" id="LoadSearchName">
                                         <% For Each st In CompletedTask%>
-                                        <option value='<%= st.TaksName%>'><%= st.TaksName %></option>
+                                        <option value='<%= HttpUtility.UrlEncode(st.TaksName).Replace("+","%20")%>'><%= st.TaksName %></option>
                                         <% Next%>
                                         <option></option>
                                         

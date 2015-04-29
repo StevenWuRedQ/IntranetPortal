@@ -190,7 +190,7 @@
     <ContentCollection>
         <dx:PopupControlContentControl runat="server" ID="popupContentInProcess" Visible="false">
             <asp:HiddenField runat="server" ID="hfInProcessBBLE" />
-           
+
             <dx:ASPxCheckBoxList ID="lbSelectionMode" runat="server" ClientInstanceName="lbSelectionModeClient" AutoPostBack="false" Border-BorderStyle="None">
                 <Items>
                     <dx:ListEditItem Text="Short Sale" Value="0" />
@@ -249,15 +249,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                 <div class="clearfix">
-            <div class="pop_up_header_margin">
-                <i class="fa fa-university  with_circle pop_up_header_icon"></i>
-                <span class="pop_up_header_text">Legal</span>
-            </div>
-            <div class="pop_up_buttons_div">
-                <i class="fa fa-times icon_btn" data-dismiss="modal" style="font-size: 23px;"></i>
-            </div>
-        </div>
+                <div class="clearfix">
+                    <div class="pop_up_header_margin">
+                        <i class="fa fa-university  with_circle pop_up_header_icon"></i>
+                        <span class="pop_up_header_text">Legal</span>
+                    </div>
+                    <div class="pop_up_buttons_div">
+                        <i class="fa fa-times icon_btn" data-dismiss="modal" style="font-size: 23px;"></i>
+                    </div>
+                </div>
             </div>
             <div class="modal-body">
                 <div>
@@ -265,32 +265,34 @@
                         function LeagalInfoSelectChange(s, e) {
                             var selected = cbLegalTypeClient.GetSelectedValues();
                             $('.legal_action_div').css("display", 'none')
-                            $(selected).each(function (i,se) {
-                                
+                            $(selected).each(function (i, se) {
+
                                 $("#" + se).css("display", '');
                             })
                         }
                     </script>
-                    <textarea style="height:200px;width:100%">
+                    <div >
+                        <h4 class="ss_form_title">Description</h4>
+                        <textarea class="edit_text_area" style="height: 100px; width: 100%"></textarea>
+                    </div>
 
-                    </textarea>
 
                     <dx:ASPxCheckBoxList runat="server" ID="cbLegalType" ClientInstanceName="cbLegalTypeClient">
                         <Items>
-                            <dx:ListEditItem Text="Urgent Foreclosure review needed" Value="Partition" />
+                            <dx:ListEditItem Text="Urgent Foreclosure review needed" Value="Urgent_Foreclosure_review_needed" />
                             <dx:ListEditItem Text="Partition" Value="Partition" />
-                            <dx:ListEditItem Text="Deed Reversal" Value="Deed Reversal" />
+                            <dx:ListEditItem Text="Deed Reversal" Value="Deed_Reversal" />
                             <dx:ListEditItem Text="Breach of Contract" Value="Breach_of_Contract" />
                             <dx:ListEditItem Text="Quiet Title" Value="Quiet_Title" />
                             <dx:ListEditItem Text="Estate" Value="Estate" />
-                            
+
                         </Items>
                         <ClientSideEvents SelectedIndexChanged="LeagalInfoSelectChange" />
                     </dx:ASPxCheckBoxList>
 
                     <uc1:LegalSecondaryActions runat="server" ID="LegalSecondaryActions" />
 
-                    
+
                 </div>
             </div>
             <div class="modal-footer">

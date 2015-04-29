@@ -112,10 +112,10 @@
         Twilio.Device.connect(function (conn) {
             CallBtnStauts(true);
 
-            if (BBLE) {
-                var log = sprintf("%s did phone (%s) call", $("#userName").val(), CallNumber);
-                logCall(BBLE, log);
-            }
+            //if (BBLE) {
+            //    var log = sprintf("%s did phone (%s) call", $("#userName").val(), CallNumber);
+            //    logCall(BBLE, log);
+            //}
             $("#log").text("Successfully established call");
         });
        
