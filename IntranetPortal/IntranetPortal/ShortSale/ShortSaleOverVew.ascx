@@ -247,28 +247,25 @@
                                     </div>
                                     <div class="ss_form">
                                         <h4 class="ss_form_title">Value Info </h4>
-                                        <script>
-                                            function dateValueChagne(e)
-                                            {
+                                        <%-- <script>
+                                            function dateValueChagne(e) {
                                                 var vdate = $(e).val()
-                                                var montadd=
+                                                var montadd =
                                                     {
                                                         Appraisal: 3,
-                                                        BPO:6
+                                                        BPO: 6
                                                     }
                                                 var add = montadd[$('#ValueSelect').val()];
-                                                if (add)
-                                                {
+                                                if (add) {
                                                     var edate = new Date(vdate)
                                                     edate.setMonth(edate.getMonth() + add);
                                                     var ldate = edate.toLocaleDateString();
                                                     $('#expries_date').val(ldate);
                                                 }
-                                                
+
                                             }
                                         </script>
                                         <table class="table table-striped" style="margin-top: 20px">
-
                                             <thead>
                                                 <tr>
                                                     <th>Method</th>
@@ -284,21 +281,45 @@
                                                         <option>Appraisal </option>
                                                         <option>BPO </option>
                                                         <option>Desktop Review </option>
-
                                                     </select>
                                                 </td>
                                                 <td>
                                                     <input class="form-control currency_input" />
                                                 </td>
                                                 <td>
-                                                    <input class="form-control ss_date" onchange="dateValueChagne(this)"/>
+                                                    <input class="form-control ss_date" onchange="dateValueChagne(this)" />
                                                 </td>
                                                 <td>
-                                                    <input class="form-control ss_date"  id="expries_date"/>
+                                                    <input class="form-control ss_date" id="expries_date" />
                                                 </td>
 
                                             </tr>
-                                        </table>
+                                        </table>--%>
+                                        <asp:HiddenField ID="hfBBLE" runat="server" />
+                                        <dx:ASPxGridView ID="gvPropertyValueInfo" runat="server" KeyFieldName="ValueId" Width="100%" Theme="Moderno" OnDataBinding="gvPropertyValueInfo_DataBinding"
+                                             OnRowInserting="gvPropertyValueInfo_RowInserting" OnRowUpdating="gvPropertyValueInfo_RowUpdating" OnRowDeleting="gvPropertyValueInfo_RowDeleting" >
+                                            <Columns>                                               
+                                                <dx:GridViewDataComboBoxColumn FieldName="Method" Width="150px">
+                                                    <PropertiesComboBox Native="true" Style-CssClass="form-control">
+                                                        <Items>
+                                                            <dx:ListEditItem Value="Appraisal" Text="Appraisal" />
+                                                            <dx:ListEditItem Value="BPO" Text="BPO" />
+                                                            <dx:ListEditItem Value="Desktop Review" Text="Desktop Review" />
+                                                        </Items>
+                                                    </PropertiesComboBox>
+                                                </dx:GridViewDataComboBoxColumn>
+                                                <dx:GridViewDataTextColumn FieldName="BankValue" PropertiesTextEdit-DisplayFormatString="C2">
+                                                    <PropertiesTextEdit Native="true" Style-CssClass="form-control">                                                        
+                                                    </PropertiesTextEdit>
+                                                </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataDateColumn FieldName="DateOfValue" Width="120px">                                                 
+                                                </dx:GridViewDataDateColumn>
+                                                <dx:GridViewDataDateColumn FieldName="ExpiredOn" Width="120px"></dx:GridViewDataDateColumn>
+                                                <dx:GridViewCommandColumn ShowEditButton="true" ShowDeleteButton="true" ShowNewButtonInHeader="true"></dx:GridViewCommandColumn>
+                                            </Columns>
+                                            <SettingsEditing Mode="Inline"></SettingsEditing>
+                                        </dx:ASPxGridView>
+
                                     </div>
                                     <div class="ss_form">
                                         <h4 class="ss_form_title">Offer Info</h4>

@@ -348,6 +348,16 @@
             alert("test!!");
         })
     }
+
+    var refreshLogs = false;
+    function ShortSaleUpdateTypeChange(s) {
+        var type = s.value;
+        if (type == "BPO/Appraisal") {
+            refreshLogs = false;
+            popupBpo.PerformCallback();
+            popupBpo.Show();
+        }
+    }
     // ]]>
 </script>
 
@@ -389,8 +399,10 @@
                         <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
                     <div <%= If(DisplayMode = ActivityLogMode.Leads, "style='display:none'", "")%>>
+
+
                         <div class="color_gray upcase_text">Type of update</div>
-                        <select class="select_bootstrap select_margin" id="selType1">
+                        <select class="select_bootstrap select_margin" id="selType1" onchange="ShortSaleUpdateTypeChange(this)">
                             <option>1st Mortgage</option>
                             <option>2nd Mortgage</option>
                             <option>BPO/Appraisal</option>
@@ -448,7 +460,7 @@
             <Styles>
                 <Cell VerticalAlign="Top"></Cell>
                 <Header BackColor="#F5F5F5"></Header>
-            </Styles>          
+            </Styles>
             <Columns>
                 <dx:GridViewDataColumn FieldName="ActionType" VisibleIndex="0" Caption="" Width="40px">
                     <HeaderTemplate></HeaderTemplate>
@@ -715,7 +727,7 @@
             </ContentCollection>
         </dx:ASPxPopupControl>
 
-      <%--  <dx:ASPxPopupControl ClientInstanceName="ASPxPopupScheduleSelectDateControl" Width="260px" Height="250px"
+        <%--  <dx:ASPxPopupControl ClientInstanceName="ASPxPopupScheduleSelectDateControl" Width="260px" Height="250px"
             MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl2"
             HeaderText="Select Date" Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
@@ -807,6 +819,77 @@
                 </dx:PopupControlContentControl>
             </ContentCollection>
         </dx:ASPxPopupControl>--%>
+
+        <dx:ASPxPopupControl ClientInstanceName="popupBpo" Width="450px" Height="480px" OnWindowCallback="ASPxPopupControl2_WindowCallback"
+            MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl2"
+            HeaderText="BPO/Appraisal" Modal="true"
+            runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+            <HeaderTemplate>
+                <div class="clearfix">
+                    <div class="pop_up_header_margin">
+                        <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
+                        <span class="pop_up_header_text">BPO/Appraisal</span>
+                    </div>
+                    <div class="pop_up_buttons_div">
+                        <i class="fa fa-times icon_btn" onclick="ASPxPopupSetAsTaskControl.Hide()"></i>
+                    </div>
+                </div>
+            </HeaderTemplate>
+            <ContentCollection>
+                <dx:PopupControlContentControl runat="server" Visible="false" ID="popupContentBpo">
+                    <div class="form-group ">
+                        <label class="upcase_text" style="display: block">Methods</label>
+                        <dx:ASPxComboBox runat="server" Width="100%" DropDownStyle="DropDown" ID="cbMethods" CssClass="edit_drop">
+                            <Items>
+                                <dx:ListEditItem Text="Appraisal" Value="Appraisal" />
+                                <dx:ListEditItem Text="BPO" Value="BPO" />
+                                <dx:ListEditItem Text="Desktop Review" Value="Desktop Review" />
+                            </Items>
+                            <ValidationSettings ErrorDisplayMode="None">
+                                <RequiredField IsRequired="true" />
+                            </ValidationSettings>
+                        </dx:ASPxComboBox>
+                    </div>
+                    <div class="form-group ">
+                        <label class="upcase_text" style="display: block">Bank Value</label>
+                        <dx:ASPxTextBox runat="server" Width="100%" Native="true" ID="txtBankValue" CssClass="form-control"></dx:ASPxTextBox>
+                    </div>
+                    <div class="form-group ">
+                        <label class="upcase_text" style="display: block">Date Of Value</label>
+                        <input class="form-control ss_date" onchange="dateValueChagne(this)" runat="server" id="txtDateofValue">
+                    </div>
+                    <div class="form-group ">
+                        <label class="upcase_text" style="display: block">Expired On</label>
+                        <input class="form-control ss_date" onchange="dateValueChagne(this)" runat="server" id="txtExpiredDate">
+                    </div>
+                    <div>
+                        <div class="row" style="margin-top: 33px;">
+                            <div class="col-md-7">&nbsp;</div>
+                            <div class="col-md-5">
+                                <dx:ASPxButton ID="ASPxButton2" runat="server" Text="OK" AutoPostBack="false" CssClass="rand-button rand-button-blue">
+                                    <ClientSideEvents Click="function(){
+                                                                                                                        var container = popupBpo.GetMainElement();
+                                                                                                                        if (ASPxClientEdit.ValidateEditorsInContainer(container))
+                                                                                                                        {
+                                                                                                                            refreshLogs = true;
+                                                                                                                            popupBpo.PerformCallback('Add');
+                                                                                                                            popupBpo.Hide();
+                                                                                                                        }                                                                                                                                                                                                                                        
+                                                                                                                  }"></ClientSideEvents>
+                                </dx:ASPxButton>
+                                &nbsp;
+                                                            <dx:ASPxButton runat="server" Text="Cancel" AutoPostBack="false" CausesValidation="false" CssClass="rand-button rand-button-gray">
+                                                                <ClientSideEvents Click="function(){
+                                                                                                                        popupBpo.Hide();                                                                                                                                                                                                                                               
+                                                                                                                        }"></ClientSideEvents>
+                                                            </dx:ASPxButton>
+                            </div>
+                        </div>
+                    </div>
+                </dx:PopupControlContentControl>
+            </ContentCollection>
+            <ClientSideEvents EndCallback="function(s,e){if(refreshLogs) { gridTrackingClient.Refresh();}}" />
+        </dx:ASPxPopupControl>
 
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSetAsTaskControl" Width="450px" Height="550px" OnWindowCallback="ASPxPopupControl1_WindowCallback"
             MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl1"
@@ -930,7 +1013,7 @@
                                     <RequiredField IsRequired="true" />
                                 </ValidationSettings>
                             </dx:ASPxComboBox>
-                        </div>                      
+                        </div>
                         <div class="form-group ">
                             <label class="upcase_text" style="display: block">Description</label>
                             <dx:ASPxMemo runat="server" Width="100%" Height="115px" ID="txtTaskDes" CssClass="edit_text_area"></dx:ASPxMemo>

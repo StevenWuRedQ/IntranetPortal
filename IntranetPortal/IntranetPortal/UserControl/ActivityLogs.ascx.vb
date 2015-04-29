@@ -3,6 +3,7 @@ Imports System.Globalization
 Imports DevExpress.Web.ASPxCallbackPanel
 Imports DevExpress.Web.ASPxPopupControl
 Imports DevExpress.Web.ASPxHtmlEditor
+Imports IntranetPortal.ShortSale
 
 Public Class ActivityLogs
     Inherits System.Web.UI.UserControl
@@ -16,7 +17,7 @@ Public Class ActivityLogs
     Public Delegate Sub OnMortgageStatusUpdate(updateType As String, status As String, bble As String)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-       
+
     End Sub
 
     Public Sub BindData(bble As String)
@@ -914,6 +915,32 @@ Public Class ActivityLogs
 
         If action = "Judgement Search Request" Then
             e.Result = String.Join(";", Roles.GetUsersInRole("Judgment Searches"))
+        End If
+    End Sub
+
+    Protected Sub ASPxPopupControl2_WindowCallback(source As Object, e As PopupWindowCallbackArgs)
+        popupContentBpo.Visible = True
+
+        If e.Parameter.StartsWith("Add") Then
+            Dim bble = hfBBLE.Value
+            Dim propValue As New PropertyValueInfo
+            propValue.BBLE = bble
+            propValue.Method = cbMethods.Text
+            propValue.BankValue = CDec(txtBankValue.Text)
+            propValue.DateOfValue = CDate(txtDateofValue.Value)
+            propValue.ExpiredOn = CDate(txtExpiredDate.Value)
+
+            propValue.Save()
+
+            Dim comments = String.Format("Value Info: {0}, {1} - {2}, Expired on {3}", propValue.Method, String.Format("{0:C0}", propValue.BankValue),
+                                         String.Format("{0:d}", propValue.DateOfValue), String.Format("{0:d}", propValue.ExpiredOn))
+
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, "ShortSale", LeadsActivityLog.EnumActionType.Comments)
+
+            cbMethods.Text = ""
+            txtBankValue.Text = ""
+            txtDateofValue.Value = ""
+            txtExpiredDate.Value = ""
         End If
     End Sub
 End Class

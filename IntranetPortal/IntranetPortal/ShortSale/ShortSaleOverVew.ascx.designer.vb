@@ -122,6 +122,24 @@ Partial Public Class ShortSaleOverVew
     Protected WithEvents ShortSaleMortgageTab As Global.IntranetPortal.ShortSaleMortgageTab
 
     '''<summary>
+    '''hfBBLE control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfBBLE As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
+    '''gvPropertyValueInfo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gvPropertyValueInfo As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
     '''ShortSaleHomewonerTab control.
     '''</summary>
     '''<remarks>

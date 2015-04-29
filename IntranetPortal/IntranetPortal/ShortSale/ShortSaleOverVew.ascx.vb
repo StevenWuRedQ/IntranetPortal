@@ -11,7 +11,6 @@ Public Class ShortSaleOverVew
             Dim ShhortSale = CType(Me.Page, ShortSalePage)
             Return ShhortSale.isEviction
         End Get
-        
     End Property
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -24,6 +23,7 @@ Public Class ShortSaleOverVew
 
     Public Sub BindData(shortSale As ShortSaleCase)
         hfCaseId.Value = shortSale.CaseId
+        hfBBLE.Value = shortSale.BBLE
 
         shortSaleCaseData = shortSale
         ShortSalePropertyTab.propertyInfo = shortSaleCaseData.PropertyInfo
@@ -32,6 +32,9 @@ Public Class ShortSaleOverVew
         ShortSaleMortgageTab.mortgagesData = shortSaleCaseData.Mortgages
         ShortSaleEvictionTab.evictionData = shortSaleCaseData
         ShortSaleSummaryTab.summaryCase = shortSaleCaseData
+
+        gvPropertyValueInfo.DataSource = shortSale.ValueInfoes
+        gvPropertyValueInfo.DataBind()
     End Sub
 
     Protected Sub SaveClicklCallback_Callback(source As Object, e As DevExpress.Web.ASPxCallback.CallbackEventArgs)
@@ -70,6 +73,50 @@ Public Class ShortSaleOverVew
         If e.Parameter.StartsWith("Delete") Then
             Dim commentId = CInt(e.Parameter.Split("|")(1))
             ShortSaleCaseComment.DeleteComment(commentId)
+        End If
+    End Sub
+
+    Protected Sub gvPropertyValueInfo_RowInserting(sender As Object, e As DevExpress.Web.Data.ASPxDataInsertingEventArgs)
+        Dim info As New PropertyValueInfo
+        info.BBLE = hfBBLE.Value
+        info.Method = e.NewValues("Method")
+        info.BankValue = e.NewValues("BankValue")
+        info.DateOfValue = e.NewValues("DateOfValue")
+        info.ExpiredOn = e.NewValues("ExpiredOn")
+
+        info.Save()
+
+        e.Cancel = True
+        gvPropertyValueInfo.CancelEdit()
+
+        gvPropertyValueInfo.DataBind()
+    End Sub
+
+    Protected Sub gvPropertyValueInfo_RowUpdating(sender As Object, e As DevExpress.Web.Data.ASPxDataUpdatingEventArgs)
+        Dim info = PropertyValueInfo.GetValueInfo(e.Keys(0))
+        info.Method = e.NewValues("Method")
+        info.BankValue = e.NewValues("BankValue")
+        info.DateOfValue = e.NewValues("DateOfValue")
+        info.ExpiredOn = e.NewValues("ExpiredOn")
+
+        info.Save()
+
+        e.Cancel = True
+        gvPropertyValueInfo.CancelEdit()
+
+        gvPropertyValueInfo.DataBind()
+    End Sub
+
+    Protected Sub gvPropertyValueInfo_RowDeleting(sender As Object, e As DevExpress.Web.Data.ASPxDataDeletingEventArgs)
+        PropertyValueInfo.DeleteValueInfo(e.Keys(0))
+
+        e.Cancel = True
+        gvPropertyValueInfo.DataBind()
+    End Sub
+
+    Protected Sub gvPropertyValueInfo_DataBinding(sender As Object, e As EventArgs)
+        If gvPropertyValueInfo.DataSource Is Nothing Then
+            gvPropertyValueInfo.DataSource = PropertyValueInfo.GetValueInfos(hfBBLE.Value)
         End If
     End Sub
 End Class

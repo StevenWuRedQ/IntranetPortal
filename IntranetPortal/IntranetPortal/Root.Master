@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" type="text/css" href="/css/stevencss.css?v=1.02" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
     <style>
         html, body, #form1 {
             width: 100% !important;
@@ -34,7 +33,7 @@
                 var top = (screen.height / 2) - (930 / 2);
                 window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
             }
-
+            
             function GoToLead(bble) {
                 var iframe = document.getElementById("contentUrlPane");
                 if (iframe && iframe != null) {
@@ -435,7 +434,6 @@
     <script src="/scripts/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="/scripts/stevenjs.js"></script>
-
     <script>
         $(function () {
             setTimeout(
