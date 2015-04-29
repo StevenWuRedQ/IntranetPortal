@@ -33,7 +33,7 @@
                 var top = (screen.height / 2) - (930 / 2);
                 window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
             }
-            
+
             function GoToLead(bble) {
                 var iframe = document.getElementById("contentUrlPane");
                 if (iframe && iframe != null) {
@@ -423,6 +423,7 @@
             <ClientSideEvents Closing="function(){hook();}" />
         </dx:ASPxPopupControl>
     </form>
+<%--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>--%>
     <script>window.jQuery || document.write('<script src="/Scripts/jquery-2.1.3.min.js"><\/script>')</script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="/Scripts/js/jquery.easing.1.3.js"></script>
@@ -439,6 +440,7 @@
             setTimeout(
                 function () {
                     LoadChatWindow(false);
+                    mip();
                     $('#imgChat').css("color", "green");
                 }, 1000);
         });

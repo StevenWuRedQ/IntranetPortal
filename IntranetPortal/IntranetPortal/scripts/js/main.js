@@ -115,4 +115,5 @@ function afterloginsubmission() {
         if ($('.form-validation-message').is(':visible')) $('.form-validation-message').animate({ "top": "-80px" }, 500, 'easeOutCirc');
     });
 }
-$(document).ready(mip);
+$(document).ready(
+    function () { setTimeout(function () { mip(); }, 100) });
