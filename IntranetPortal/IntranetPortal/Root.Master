@@ -439,8 +439,7 @@
         $(function () {
             setTimeout(
                 function () {
-                    LoadChatWindow(false);
-                    mip();
+                    LoadChatWindow(false);                    
                     $('#imgChat').css("color", "green");
                 }, 1000);
         });
