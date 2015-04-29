@@ -13,18 +13,18 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <%--<link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />--%>
     <%--<script src="/scrollbar/jquery.mCustomScrollbar.js"></script>--%>
-    <script src="/scripts/bootstrap-datepicker.js"></script>
+    <script src="/Scripts/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
     <link href="/css/stevencss.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
-    <%-- <script src="/scripts/angular.min.js"></script>--%>
+    <%-- <script src="/Scripts/angular.min.js"></script>--%>
 </head>
 <body style="width: 100%">
     <form id="form1" runat="server">
         <asp:ContentPlaceHolder ID="MainContentPH" runat="server">
         </asp:ContentPlaceHolder>
     </form>
-    <script src="/scripts/stevenjs.js"></script>
+    <script src="/Scripts/stevenjs.js"></script>
 </body>
 </html>

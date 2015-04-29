@@ -13,9 +13,9 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="/scrollbar/jquery.mCustomScrollbar.css" />
     <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
-    <script src="/scripts/bootstrap-datepicker.js"></script>
+    <script src="/Scripts/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
-    <script src="/scripts/angular.js"></script>
+    <script src="/Scripts/angular.js"></script>
 </head>
 <body ng-controller="PortalCtrl">
     <form id="form1" runat="server">
@@ -237,7 +237,7 @@
 
         </div>
     </form>
-    <script src="/scripts/PortalApp.js?v=<%=DateTime.Now.Millisecond.ToString %>>"></script>
-    <script src="/scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/PortalApp.js?v=<%=DateTime.Now.Millisecond.ToString %>>"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

@@ -23,11 +23,11 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="../scrollbar/jquery.mCustomScrollbar.css" />
-    <script src="/scripts/jquery.collapse.js"></script>
-    <script src="/scripts/jquery.collapse_storage.js"></script>
-    <script src="/scripts/jquery.collapse_cookie_storage.js"></script>
+    <script src="/Scripts/jquery.collapse.js"></script>
+    <script src="/Scripts/jquery.collapse_storage.js"></script>
+    <script src="/Scripts/jquery.collapse_cookie_storage.js"></script>
     
-    <script src="../scripts/jquery.formatCurrency-1.1.0.js"></script>
+    <script src="../Scripts/jquery.formatCurrency-1.1.0.js"></script>
     <script>
         $('.currency_input').blur(function () {
             alert('blur runned');

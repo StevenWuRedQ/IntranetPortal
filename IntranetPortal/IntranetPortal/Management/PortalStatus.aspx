@@ -9,9 +9,9 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <table>
+            <table style="sc">
                 <tr>
-                    <td style="vertical-align: top">
+                    <td style="vertical-align: top;max-height:300px;">
                         <dx:ASPxRoundPanel HeaderText="User Status" runat="server">
                             <PanelCollection>
                                 <dx:PanelContent>

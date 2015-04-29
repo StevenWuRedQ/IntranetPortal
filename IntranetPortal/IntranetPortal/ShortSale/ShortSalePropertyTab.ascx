@@ -267,7 +267,7 @@
     <%------end-------%>
 </div>
 
-<script src="/scripts/mindmup-editabletable.js"></script>
+<script src="/Scripts/mindmup-editabletable.js"></script>
 <script>
     function onRefreashDone() {
         //$("#home_breakdown_table").editableTableWidget();

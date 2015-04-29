@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PropertyInfo.ascx.vb" Inherits="IntranetPortal.PropertyInfo" %>
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 
-<script src="/scripts/jquery.formatCurrency-1.1.0.js"></script>
+<script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 <script type="text/javascript">
     function ShowAcrisMap(propBBLE) {
         //var url = "http://www.oasisnyc.net/map.aspx?zoomto=lot:" + propBBLE;

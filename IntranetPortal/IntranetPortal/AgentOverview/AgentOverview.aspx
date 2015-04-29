@@ -3,8 +3,8 @@
 <%@ Register Src="~/AgentOverview/AgentCharts.ascx" TagPrefix="uc1" TagName="AgentCharts" %>
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="/css/right-pane.css" />
-    <script src="../scripts/jquery.printElement.js"></script>
-    <%-- <script src="/scripts/stevenjs.js?v=1.02"></script>--%>
+    <script src="../Scripts/jquery.printElement.js"></script>
+    <%-- <script src="/Scripts/stevenjs.js?v=1.02"></script>--%>
     <style type="text/css">
         .InforPanel {
             float: left;
@@ -956,7 +956,7 @@
             </dx:PopupControlContentControl>
         </ContentCollection>
     </dx:ASPxPopupControl>
-    <script src="/scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
+    <script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
 </asp:Content>
 
 

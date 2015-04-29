@@ -2,7 +2,7 @@
 
 <script src="/OneDrive/constants.js"></script>
 <script src="//js.live.net/v5.0/wl.js"></script>
-<script src="/scripts/stevenjs.js?v=1.02"></script>
+<script src="/Scripts/stevenjs.js?v=1.02"></script>
 <label id="info"></label>
 
 <script type="text/javascript">

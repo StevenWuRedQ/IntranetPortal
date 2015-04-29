@@ -2002,7 +2002,7 @@
                                 </div>
                             </div>
                             <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
-                            <script src="/scripts/jquery.formatCurrency-1.1.0.js"></script>
+                            <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
                         </div>
                     </dx:SplitterContentControl>
 

@@ -15,7 +15,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js'></script>
 
-    <script src="/scripts/bootstrap-datepicker.js"></script>
+    <script src="/Scripts/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%-- <link href="/css/dx.common.css" rel="stylesheet" />

@@ -732,4 +732,4 @@
         </div>
     </div>
 </div>
-<script src="/scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>
+<script src="/Scripts/js/right_pane.js?v=1.01" type="text/javascript"></script>

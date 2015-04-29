@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LeadsSubMenu.ascx.vb" Inherits="IntranetPortal.LeadsSubMenu" %>
 <%@ Register Src="~/LegalUI/LegalSecondaryActions.ascx" TagPrefix="uc1" TagName="LegalSecondaryActions" %>
 
-<script type="text/javascript" src="/scripts/LeadsSubMenu.js"></script>
+<script type="text/javascript" src="/Scripts/LeadsSubMenu.js"></script>
 <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="ASPxPopupMenuCategory" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="MouseOver" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
     <Items>
         <dx:MenuItem GroupName="Sort" Text="View Map" Image-Url="/images/drap_map_icons.png" Name="GoogleStreet">
