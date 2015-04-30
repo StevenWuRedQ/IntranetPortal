@@ -131,6 +131,7 @@
           <Property Name="DateAssigned" Type="datetime" />
           <Property Name="Supervisor" Type="int" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="LoanType" Type="nvarchar" MaxLength="50" />
           <Property Name="Fannie" Type="bit" />
           <Property Name="FHA" Type="bit" />
           <Property Name="Freddie" Type="bit" />
@@ -436,6 +437,7 @@
           <Property Name="LenderContactId" Type="Int32" />
           <Property Name="CounterOffer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="PayoffExpired" Type="DateTime" Precision="3" />
+          <Property Name="LoanType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -734,6 +736,7 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="LoanType" ColumnName="LoanType" />
                 <ScalarProperty Name="PayoffExpired" ColumnName="PayoffExpired" />
                 <ScalarProperty Name="CounterOffer" ColumnName="CounterOffer" />
                 <ScalarProperty Name="LenderContactId" ColumnName="LenderContactId" />

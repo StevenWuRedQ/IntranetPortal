@@ -37,5 +37,6 @@ Partial Public Class PropertyMortgage
     Public Property LenderContactId As Nullable(Of Integer)
     Public Property CounterOffer As String
     Public Property PayoffExpired As Nullable(Of Date)
+    Public Property LoanType As String
 
 End Class
