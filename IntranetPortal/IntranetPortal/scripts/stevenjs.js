@@ -252,13 +252,13 @@ function format_input() {
         onkeyUpSSN(this);
     });
 
-    $(".ss_not_empty, .ss_zip, .ss_email, .ss_not_empty").each(function (index) {
+    $(".ss_not_empty, .ss_ssn ,.ss_zip, .ss_email, .ss_not_empty").each(function (index) {
         $(this).on("blur", function () {
 
             return $(this).keyup();
         });
     });
-    $(".ss_not_empty, .ss_zip,.ss_email, .ss_not_empty").blur();
+    $(".ss_not_empty,.ss_ssn , .ss_zip,.ss_email, .ss_not_empty").blur();
     // return is_pass;
 }
 

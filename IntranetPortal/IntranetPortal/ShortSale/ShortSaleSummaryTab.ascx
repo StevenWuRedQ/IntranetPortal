@@ -25,7 +25,7 @@
                         <input class="ss_form_input" style="width: 93.5%;" name="lender"
                             value="<%= summaryCase.PropertyInfo.PropertyAddress%>">
                     </li>
-                      <li class="ss_form_item">
+                    <li class="ss_form_item">
                         <label class="ss_form_input_title">BBLE</label>
                         <input class="ss_form_input font_black" data-field="PropertyInfo.BBLE">
                     </li>
@@ -65,7 +65,7 @@
 
                 </ul>
             </div>
-
+           
             <%--<div data-array-index="0" data-field="PropertyInfo.Owners" class="ss_array" style="display: none">--%>
             <%Dim i = 0%>
             <%For Each owner As PropertyOwner In summaryCase.PropertyInfo.Owners%>
@@ -79,7 +79,7 @@
                         <input class="ss_form_input" value="<%=owner.FullName %>">
                     </li>
                     <li class="ss_form_item">
-                        <label class="ss_form_input_title ss_ssn">SSN</label>
+                        <label class="ss_form_input_title">SSN</label>
                         <input class="ss_form_input ss_ssn" value="<%=owner.SSN %>">
                     </li>
                     <li class="ss_form_item" style="visibility: hidden">
@@ -151,28 +151,18 @@
                         </li>
 
                         <li class="ss_form_item">
-                            <span class="ss_form_input_title">&nbsp;</span>
+                            <label class="ss_form_input_title">Mortgage Type</label>
 
-                            <input type="checkbox" id="pdf_check_yes1__index__" name="1">
-                            <label for="pdf_check_yes1__index__" class="ss_form_input input_with_check">
-                                <span class="box_text">Fannie</span>
-                            </label>
+                            <select class="ss_form_input">
+                                <option value=""></option>
+                                <option value="Fannie">Fannie</option>
+                                <option value="FHA">FHA</option>
+                                <option value="Freddie Mac">Freddie Mac</option>
 
-                            <input type="checkbox" id="pdf_check_no2__index__" class="ss_form_input" name="1">
-                            <label for="pdf_check_no2__index__" class="input_with_check">
-                                <span class="box_text">FHA</span>
-                            </label>
+                            </select>
 
                         </li>
-                        <li class="ss_form_item">
-                            <span class="ss_form_input_title">&nbsp;</span>
 
-                            <input type="checkbox" id="pdf_check_yes3__index__" name="1" class="ss_form_input" value="YES">
-                            <label for="pdf_check_yes3__index__" class="input_with_check">
-                                <span class="box_text">Freddie Mac </span>
-                            </label>
-
-                        </li>
                     </ul>
                 </div>
 
@@ -219,10 +209,10 @@
                         <label class="ss_form_input_title">Cell phone #</label>
                         <input class="ss_form_input" value="Manager's cell phone ??">
                     </li>--%>
-                    <li class="ss_form_item">
+                    <%-- <li class="ss_form_item">
                         <label class="ss_form_input_title">&nbsp;</label>
                         <input class="ss_form_input ss_form_hidden" value=" ">
-                    </li>
+                    </li>--%>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Office</label>
                         <input class="ss_form_input" value="<%=summaryCase.ReferralContact.Office %>">

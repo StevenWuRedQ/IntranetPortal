@@ -76,6 +76,19 @@
 
                     <input class="ss_form_input currency_input" data-item="LoanAmount" data-item-type="1" onblur="$(this).formatCurrency();">
                 </li>
+
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Mortgage Type</label>
+
+                    <select class="ss_form_input">
+                        <option value=""> </option>
+                        <option value="Fannie">Fannie</option>
+                        <option value="FHA">FHA</option>
+                        <option value="Freddie Mac">Freddie Mac</option>
+
+                    </select>
+
+                </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Authorization Sent On</label>
                     <input class="ss_form_input ss_date" data-item="AuthorizationSent" data-item-type="1">
@@ -214,7 +227,7 @@
                 <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].LenderContact', function(party){ShortSaleCaseData.Mortgages[__index__].LenderContactId =party.ContactId})"></i>
 
             </h4>
-            <ul class="ss_form_box clearfix" >
+            <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Name</label>
                     <input class="ss_form_input ss_not_edit" data-item="LenderContact.Name" data-item-type="1">
