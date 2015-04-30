@@ -209,8 +209,19 @@ Public Class Troubleshooting
         For Each seller In ds.Tables("Seller").Rows
             Dim owner As New PropertyOwner
             owner.BBLE = ssCase.BBLE
-            owner.FirstName = seller("First Name").ToString
-            owner.LastName = seller("Last Name").ToString
+
+            If Not IsDBNull(seller("First Name")) Then
+                Dim firstName = seller("First Name").ToString
+                Dim lastName = seller("Last Name").ToString
+                If lastName.Split(" ").Count > 0 Then
+                    Dim middleName = lastName.Split(" ")(0)
+                    firstName = firstName & " " & middleName
+                    lastName = lastName.Replace(middleName, "")
+                End If
+                owner.FirstName = firstName
+                owner.LastName = lastName
+            End If
+
             owner.Phone = seller("Phone Number").ToString
             owner.Email = seller("Email").ToString
 
