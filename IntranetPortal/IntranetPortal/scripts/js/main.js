@@ -19,7 +19,7 @@ function mip() {
             }
         });
     }
-    $(submenu_height_reset).delay(3000);
+    
     submenu_height_reset();
 
     $(window).on('debouncedresize', function (event) {

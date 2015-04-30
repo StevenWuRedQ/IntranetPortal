@@ -311,8 +311,8 @@ Public Class LeadsGenerator
 
         Else
             Dim SearchName = e.Parameter
-
-            BindGrid(SearchName)
+            Dim nameUrl = HttpUtility.UrlDecode(SearchName)
+            BindGrid(nameUrl)
 
         End If
     End Sub

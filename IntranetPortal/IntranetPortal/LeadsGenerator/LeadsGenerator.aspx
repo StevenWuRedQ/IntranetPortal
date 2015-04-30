@@ -117,7 +117,7 @@
         }
 
         function OnLoadClick() {
-
+            var searchName = encodeURIComponent($("#LoadSearchName").val());
             tableViewClinetCallBack.PerformCallback( decodeURI( $("#LoadSearchName").val()));
         }
         loadCallBack = {}

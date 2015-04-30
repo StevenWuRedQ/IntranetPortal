@@ -344,7 +344,7 @@
     <HeaderTemplate>
         <div class="clearfix">
             <div class="pop_up_header_margin">
-                <i class="fa fa-mail-forward with_circle pop_up_header_icon"></i>
+                <i class="fa fa-times-circle with_circle pop_up_header_icon"></i>
                 <span class="pop_up_header_text">Dead Leads</span>
             </div>
             <div class="pop_up_buttons_div">
