@@ -65,6 +65,10 @@
                     <label class="ss_form_input_title">street name</label>
                     <input class="ss_form_input" data-item="MailStreetName" data-item-type="1">
                 </li>
+                 <li class="ss_form_item">
+                    <label class="ss_form_input_title">Apt #</label>
+                    <input class="ss_form_input" data-item="MailApt" data-item-type="1">
+                </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">City</label>
                     <input class="ss_form_input" data-item="MailCity" data-item-type="1">
