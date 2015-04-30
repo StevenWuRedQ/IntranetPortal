@@ -35,5 +35,7 @@ Partial Public Class PropertyMortgage
     Public Property LastBPOUpdate As Nullable(Of Date)
     Public Property UpcomingBPODate As Nullable(Of Date)
     Public Property LenderContactId As Nullable(Of Integer)
+    Public Property CounterOffer As String
+    Public Property PayoffExpired As Nullable(Of Date)
 
 End Class

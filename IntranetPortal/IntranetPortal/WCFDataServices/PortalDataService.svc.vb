@@ -252,7 +252,7 @@ Public Class PortalDataService
         Return False
     End Function
 
-   
+
     Public Function UpdateOrderInfo(orderId As Integer, infoType As String, status As String) As Boolean
         Return APIOrder.UpdateOrderInfo(orderId, infoType, status)
 
@@ -313,4 +313,8 @@ Public Class PortalDataService
 
         'Return False
     End Function
+
+    Public Sub TriggerIsReady(triggerDetected As Boolean) Implements IPortalDataService.TriggerIsReady
+
+    End Sub
 End Class

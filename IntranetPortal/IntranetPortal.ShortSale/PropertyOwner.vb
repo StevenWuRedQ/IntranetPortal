@@ -14,6 +14,18 @@
         End Get
     End Property
 
+    'Public Function GetOwner(bble As String, firstName As String, lastName As String)
+    '    Using ctx As New ShortSaleEntities
+    '        Dim owner = ctx.PropertyOwners.Where(Function(po) po.BBLE = bble And po.FirstName = firstName And po.LastName = lastName).SingleOrDefault
+
+    '        If owner Is Nothing Then
+    '            owner = New PropertyOwner
+    '        End If
+
+    '        Return owner
+    '    End Using
+    'End Function
+
     Public Sub Save()
         Using context As New ShortSaleEntities
             Dim obj = context.PropertyOwners.Find(BBLE, FirstName, LastName)

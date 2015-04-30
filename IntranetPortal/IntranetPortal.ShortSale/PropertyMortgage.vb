@@ -86,6 +86,18 @@
 
     Public Property DataStatus As ModelStatus
 
+    Public Shared Function GetMortgage(caseId As Integer, loanNum As String) As PropertyMortgage
+        Using ctx As New ShortSaleEntities
+            Dim mort = ctx.PropertyMortgages.Where(Function(mt) mt.CaseId = caseId And mt.Loan = loanNum).FirstOrDefault
+
+            If mort Is Nothing Then
+                mort = New PropertyMortgage
+            End If
+
+            Return mort
+        End Using
+    End Function
+
     Public Sub Save()
         Using context As New ShortSaleEntities
             Dim pbi = context.PropertyMortgages.Find(MortgageId)

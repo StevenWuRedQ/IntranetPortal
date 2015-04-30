@@ -10,4 +10,8 @@ Public Interface IPortalDataService
 
     <OperationContract()>
     Function CompleteServicer(bble As String, billLine1 As String, billLine2 As String, billLine3 As String, billLine4 As String) As Boolean
+
+    <OperationContract>
+    Sub TriggerIsReady(triggerDetected As Boolean)
+
 End Interface

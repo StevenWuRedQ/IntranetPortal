@@ -53,11 +53,17 @@ Partial Class Troubleshooting
         Me.tabEmail = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.btnEmailSend = New System.Windows.Forms.Button()
         Me.cbTeams = New System.Windows.Forms.ComboBox()
+        Me.btnEmailSend = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.btnLoad = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.lbFiles = New System.Windows.Forms.ListBox()
+        Me.btnImportFile = New System.Windows.Forms.Button()
+        Me.lbResult = New System.Windows.Forms.ListBox()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -65,6 +71,8 @@ Partial Class Troubleshooting
         Me.tabEmail.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -286,6 +294,7 @@ Partial Class Troubleshooting
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.tabEmail)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 46)
         Me.TabControl1.Name = "TabControl1"
@@ -373,30 +382,13 @@ Partial Class Troubleshooting
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Team Activity Email"
         '
-        'Label8
+        'cbTeams
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 67)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(68, 13)
-        Me.Label8.TabIndex = 1
-        Me.Label8.Text = "Team Name:"
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(80, 90)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(114, 20)
-        Me.TextBox3.TabIndex = 2
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(6, 93)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(60, 13)
-        Me.Label9.TabIndex = 3
-        Me.Label9.Text = "Send User:"
+        Me.cbTeams.FormattingEnabled = True
+        Me.cbTeams.Location = New System.Drawing.Point(80, 63)
+        Me.cbTeams.Name = "cbTeams"
+        Me.cbTeams.Size = New System.Drawing.Size(114, 21)
+        Me.cbTeams.TabIndex = 5
         '
         'btnEmailSend
         '
@@ -407,13 +399,96 @@ Partial Class Troubleshooting
         Me.btnEmailSend.Text = "Send"
         Me.btnEmailSend.UseVisualStyleBackColor = True
         '
-        'cbTeams
+        'Label9
         '
-        Me.cbTeams.FormattingEnabled = True
-        Me.cbTeams.Location = New System.Drawing.Point(80, 63)
-        Me.cbTeams.Name = "cbTeams"
-        Me.cbTeams.Size = New System.Drawing.Size(114, 21)
-        Me.cbTeams.TabIndex = 5
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(6, 93)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(60, 13)
+        Me.Label9.TabIndex = 3
+        Me.Label9.Text = "Send User:"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(80, 90)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(114, 20)
+        Me.TextBox3.TabIndex = 2
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(6, 67)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(68, 13)
+        Me.Label8.TabIndex = 1
+        Me.Label8.Text = "Team Name:"
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.TableLayoutPanel2)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(558, 329)
+        Me.TabPage3.TabIndex = 3
+        Me.TabPage3.Text = "TabPage3"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'btnLoad
+        '
+        Me.btnLoad.Location = New System.Drawing.Point(3, 3)
+        Me.btnLoad.Name = "btnLoad"
+        Me.btnLoad.Size = New System.Drawing.Size(75, 23)
+        Me.btnLoad.TabIndex = 0
+        Me.btnLoad.Text = "Load Files"
+        Me.btnLoad.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 2
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.23188!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.76812!))
+        Me.TableLayoutPanel2.Controls.Add(Me.btnLoad, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.lbFiles, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.btnImportFile, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.lbResult, 1, 1)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 2
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.287926!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.71207!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(552, 323)
+        Me.TableLayoutPanel2.TabIndex = 1
+        '
+        'lbFiles
+        '
+        Me.lbFiles.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lbFiles.FormattingEnabled = True
+        Me.lbFiles.Location = New System.Drawing.Point(3, 33)
+        Me.lbFiles.Name = "lbFiles"
+        Me.lbFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
+        Me.lbFiles.Size = New System.Drawing.Size(193, 287)
+        Me.lbFiles.TabIndex = 1
+        '
+        'btnImportFile
+        '
+        Me.btnImportFile.Location = New System.Drawing.Point(202, 3)
+        Me.btnImportFile.Name = "btnImportFile"
+        Me.btnImportFile.Size = New System.Drawing.Size(75, 23)
+        Me.btnImportFile.TabIndex = 2
+        Me.btnImportFile.Text = "Import"
+        Me.btnImportFile.UseVisualStyleBackColor = True
+        '
+        'lbResult
+        '
+        Me.lbResult.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lbResult.FormattingEnabled = True
+        Me.lbResult.Location = New System.Drawing.Point(202, 33)
+        Me.lbResult.Name = "lbResult"
+        Me.lbResult.Size = New System.Drawing.Size(347, 287)
+        Me.lbResult.TabIndex = 3
         '
         'Troubleshooting
         '
@@ -435,6 +510,8 @@ Partial Class Troubleshooting
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.TabPage3.ResumeLayout(False)
+        Me.TableLayoutPanel2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -474,4 +551,10 @@ Partial Class Troubleshooting
     Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
     Friend WithEvents btnEmailSend As System.Windows.Forms.Button
     Friend WithEvents cbTeams As System.Windows.Forms.ComboBox
+    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents btnLoad As System.Windows.Forms.Button
+    Friend WithEvents TableLayoutPanel2 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents lbFiles As System.Windows.Forms.ListBox
+    Friend WithEvents btnImportFile As System.Windows.Forms.Button
+    Friend WithEvents lbResult As System.Windows.Forms.ListBox
 End Class

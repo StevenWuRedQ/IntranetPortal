@@ -34,5 +34,6 @@ Partial Public Class PropertyOwner
     Public Property CreateDate As Nullable(Of Date)
     Public Property AttorneyPhone As String
     Public Property AttorneyEmail As String
+    Public Property MailApt As String
 
 End Class

@@ -122,6 +122,8 @@
           <Property Name="LoanAmount" Type="numeric" Precision="18" Scale="2" />
           <Property Name="AuthorizationSent" Type="nvarchar" MaxLength="50" />
           <Property Name="LienPosition" Type="nvarchar" MaxLength="50" />
+          <Property Name="CounterOffer" Type="nvarchar" MaxLength="256" />
+          <Property Name="PayoffExpired" Type="datetime" />
           <Property Name="ShortSaleDept" Type="int" />
           <Property Name="Processor" Type="int" />
           <Property Name="Negotiator" Type="int" />
@@ -178,10 +180,11 @@
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="SSN" Type="nchar" MaxLength="11" />
+          <Property Name="SSN" Type="nchar" MaxLength="9" />
           <Property Name="DOB" Type="date" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="MailApt" Type="nvarchar" MaxLength="50" />
           <Property Name="MailNumber" Type="nvarchar" MaxLength="200" />
           <Property Name="MailStreetName" Type="nvarchar" MaxLength="50" />
           <Property Name="MailCity" Type="nvarchar" MaxLength="50" />
@@ -431,6 +434,8 @@
           <Property Name="LastBPOUpdate" Type="DateTime" Precision="3" />
           <Property Name="UpcomingBPODate" Type="DateTime" Precision="3" />
           <Property Name="LenderContactId" Type="Int32" />
+          <Property Name="CounterOffer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PayoffExpired" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -441,7 +446,7 @@
           <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SSN" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="SSN" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
           <Property Name="DOB" Type="DateTime" Precision="0" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -461,6 +466,7 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="AttorneyPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AttorneyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MailApt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyTitle">
           <Key>
@@ -728,6 +734,8 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="PayoffExpired" ColumnName="PayoffExpired" />
+                <ScalarProperty Name="CounterOffer" ColumnName="CounterOffer" />
                 <ScalarProperty Name="LenderContactId" ColumnName="LenderContactId" />
                 <ScalarProperty Name="UpcomingBPODate" ColumnName="UpcomingBPODate" />
                 <ScalarProperty Name="LastBPOUpdate" ColumnName="LastBPOUpdate" />
@@ -758,6 +766,7 @@
           <EntitySetMapping Name="PropertyOwners">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyOwner">
               <MappingFragment StoreEntitySet="PropertyOwners">
+                <ScalarProperty Name="MailApt" ColumnName="MailApt" />
                 <ScalarProperty Name="AttorneyEmail" ColumnName="AttorneyEmail" />
                 <ScalarProperty Name="AttorneyPhone" ColumnName="AttorneyPhone" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />

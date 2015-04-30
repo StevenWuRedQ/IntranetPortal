@@ -136,6 +136,17 @@
         End Get
     End Property
 
+    Public Shared Function GetLeadsInfoByStreet(strNum As String, strName As String) As LeadsInfo
+        Using ctx As New Entities
+            Try
+                strName = strName.Replace("Avenue", "Ave").Replace("Street", "Str")
+                Return ctx.LeadsInfoes.Where(Function(li) li.Number = strNum AndAlso li.StreetName.Contains(strName)).SingleOrDefault
+            Catch ex As Exception
+                Throw New Exception(String.Format("Str No: {0}, strName: {1}. Exception: {2}", strNum, strName, ex.Message))
+            End Try
+        End Using
+    End Function
+
     Public Function GetHomeOwner(ownerName As String) As HomeOwner
         Using ctx As New Entities
             Return ctx.HomeOwners.Where(Function(ho) ho.BBLE = BBLE And ho.Name = ownerName And ho.Active = True).FirstOrDefault

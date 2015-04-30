@@ -81,6 +81,30 @@ Partial Public Class PartyContact
         End Using
     End Function
 
+    Public Shared Function GetContactByName(name As String) As PartyContact
+        Using ctx As New ShortSaleEntities
+            Return ctx.PartyContacts.Where(Function(pc) pc.Name = name).FirstOrDefault
+        End Using
+    End Function
+
+    Public Shared Function GetContactByName(name As String, corpName As String, phone As String, fax As String, email As String) As PartyContact
+        Using ctx As New ShortSaleEntities
+            Dim contact = ctx.PartyContacts.Where(Function(pc) pc.Name = name).FirstOrDefault
+            If contact Is Nothing Then
+                contact = New PartyContact
+                contact.Name = name
+                contact.CorpName = corpName
+                contact.Cell = phone
+                contact.OfficeNO = fax
+                contact.Email = email
+
+                contact.Save()
+            End If
+
+            Return contact
+        End Using
+    End Function
+
     Public Shared Sub DeleteContact(contactId As Integer)
         Using context As New ShortSaleEntities
             Dim obj = context.PartyContacts.Find(contactId)
