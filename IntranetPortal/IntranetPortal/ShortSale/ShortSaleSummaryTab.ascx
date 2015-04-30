@@ -7,6 +7,7 @@
     }
     function reinitClient(s, e) {
         ShortSaleDataBand(0);
+        format_input();
     }
 </script>
 
@@ -79,7 +80,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title ss_ssn">SSN</label>
-                        <input class="ss_form_input" value="<%=owner.SSN %>">
+                        <input class="ss_form_input ss_ssn" value="<%=owner.SSN %>">
                     </li>
                     <li class="ss_form_item" style="visibility: hidden">
                         <label class="ss_form_input_title">Tax class</label>
@@ -142,11 +143,11 @@
                         </li>
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Loan Amount</label>
-                            <input class="ss_form_input input_currency" onblur="$(this).formatCurrency();" data-item="LoanAmount" data-item-type="1">
+                            <input class="ss_form_input currency_input" onblur="$(this).formatCurrency();" data-item="LoanAmount" data-item-type="1">
                         </li>
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Short Sale Dept</label>
-                            <input class="ss_form_input" value="866-880-1232">
+                            <input class="ss_form_input ss_phone" value="866-880-1232">
                         </li>
 
                         <li class="ss_form_item">
@@ -187,7 +188,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input" value="<%=summaryCase.AssignedProcessor.Cell%>">
+                        <input class="ss_form_input ss_phone" value="<%=summaryCase.AssignedProcessor.Cell%>">
                     </li>
 
 
@@ -204,7 +205,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Cell phone #</label>
-                        <input class="ss_form_input" value="<%=summaryCase.ReferralContact.Cell%>">
+                        <input class="ss_form_input ss_phone" value="<%=summaryCase.ReferralContact.Cell%>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title ">&nbsp;</label>
@@ -228,7 +229,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Offie phone #</label>
-                        <input class="ss_form_input" value="<%=summaryCase.ReferralContact.OfficeNO %>">
+                        <input class="ss_form_input ss_phone" value="<%=summaryCase.ReferralContact.OfficeNO %>">
                     </li>
                 </ul>
             </div>
@@ -243,7 +244,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input" value="<%=summaryCase.SellerAttorneyContact.Cell %>">
+                        <input class="ss_form_input ss_phone" value="<%=summaryCase.SellerAttorneyContact.Cell %>">
                     </li>
 
                 </ul>
