@@ -116,5 +116,5 @@ function afterloginsubmission() {
     });
 }
 $(document).ready(
-    function () { setTimeout(function () { mip(); }, 100) });
+    function () { setTimeout(function () { mip(); }, 1) });
 //$(function () { mip(); });

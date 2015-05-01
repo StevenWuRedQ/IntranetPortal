@@ -3,6 +3,7 @@ Imports DevExpress.Web.ASPxClasses
 Imports System.Web.Routing
 Imports System.Web.Security
 Imports Microsoft.AspNet.SignalR
+Imports System.Threading
 
 Public Class Global_asax
     Inherits System.Web.HttpApplication
@@ -45,6 +46,21 @@ Public Class Global_asax
 
     Sub Application_Error(ByVal sender As Object, ByVal e As EventArgs)
         ' Fires when an error occurs
+
+        If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.AllErrors.Length > 0 Then
+            Dim ex = HttpContext.Current.AllErrors.Last
+
+            If TypeOf ex Is ThreadAbortException Then
+                Return
+            End If
+
+            Try
+                'UserMessage.AddNewMessage("Portal", "Error in Portal Application", String.Format("Message:{0}, Stack: {1}", ex.Message, ex.StackTrace), "")
+                IntranetPortal.Core.SystemLog.Log("Error in Portal Application", String.Format("Message:{0}, Stack: {1}", ex.Message, ex.StackTrace), "Error", "", HttpContext.Current.User.Identity.Name)
+            Catch exp As Exception
+
+            End Try
+        End If
 
     End Sub
 
