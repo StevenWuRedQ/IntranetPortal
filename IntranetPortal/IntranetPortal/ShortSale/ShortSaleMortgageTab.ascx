@@ -114,11 +114,11 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Counter Offer</label>
-                    <input class="ss_form_input" data-field="PropertyInfo.NumOfFamilies">
+                    <input class="ss_form_input" data-field="CounterOffer">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Expires</label>
-                    <input class="ss_form_input ss_date" data-field="PropertyInfo.NumOfFamilies">
+                    <input class="ss_form_input ss_date" data-field="PayoffExpired">
                 </li>
 
                 <%--<li class="ss_form_item">
