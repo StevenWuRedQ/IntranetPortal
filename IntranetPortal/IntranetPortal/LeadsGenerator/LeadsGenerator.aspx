@@ -837,7 +837,7 @@
                                                                         <span class="upcase_text">Don't Show Existing Leads</span>
                                                                     </label>
                                                                     <button class="rand-button bg_color_blue fa-sh rand-button-padding" type="button" id="Select250" onclick="loadFunction('Select250_ServerClick')">Select 500 Random for me !</button>
-                                                                    <button style="margin-right: 10px" class="rand-button bg_color_blue rand-button-padding" type="button" id="ImportSelect" onclick="loadFunction('ImportSelect_ServerClick')">Import Selected</button>
+                                                                    <button style="margin-right: 10px;" class="rand-button bg_color_blue rand-button-padding" type="button" id="ImportSelect" onclick="loadFunction('ImportSelect_ServerClick')">Import Selected</button>
 
                                                                     <asp:LinkButton ID="btnExport" runat="server" OnClick="btnXlsxExport_Click" Text='<i class="fa fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Save Excel"></i>'>                                                                
                                                                     </asp:LinkButton>

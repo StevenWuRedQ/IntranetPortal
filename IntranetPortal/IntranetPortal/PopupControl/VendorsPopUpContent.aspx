@@ -2,11 +2,11 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" ng-app="PortalApp">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="PortalApp" xmlns:ng="http://angularjs.org">
 <head runat="server">
     <title></title>
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel="stylesheet" type="text/css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -15,7 +15,9 @@
     <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
     <script src="/Scripts/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
-    <script src="/Scripts/angular.js"></script>
+    <!-- Angular Material CSS using RawGit to load directly from `bower-material/master` -->
+    <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.css">
+    <%--<script src="/Scripts/angular.js"></script>--%>
 </head>
 <body ng-controller="PortalCtrl">
     <form id="form1" runat="server">
@@ -32,7 +34,10 @@
                             <li class="list-group-item popup_menu_list_item" ng-class="query.Type===2?'popup_menu_list_item_active':''" ng-click="filterContactFunc($event,2)">Attorneys</li>
                             <li class="list-group-item popup_menu_list_item" ng-class="query.Type===1?'popup_menu_list_item_active':''" ng-click="filterContactFunc($event,1)">Sellers</li>
                             <li class="list-group-item popup_menu_list_item" ng-class="query.Type===4?'popup_menu_list_item_active':''" ng-click="filterContactFunc($event,4)">Lenders</li>
-                            
+
+                        </ul>
+                        <ul class="list-group" style="box-shadow: none;margin-left: 20px;margin-top: -18px;">
+                            <li class="list-group-item popup_menu_list_item" ng-repeat="cropName in lenderList" ng-click="filterContactFunc($event,4)">{{ cropName }}</li>
                         </ul>
                     </div>
                 </div>
@@ -71,27 +76,27 @@
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">address</label>
-                                                                <input class="ss_form_input" ng-model="addContact.Address" runat="server" id="txtAddress">
+                                                                <input class="ss_form_input" ng-model="addContact.Address" runat="server" id="txtAddress" />
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">office #</label>
                                                                 <%--<input class="ss_form_input"  ng-model="addContact.OfficeNO" />--%>
                                                                 <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input" Native="true">
-                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
+                                                                    <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
                                                                     <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
                                                                 </dx:ASPxTextBox>
                                                             </li>
-                                                            <li class="ss_form_item" >
+                                                            <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Cell #</label>
-                                                                
-                                                                <dx:ASPxTextBox runat="server" ID="txtCell"  ng-model="addContact.Cell" CssClass="ss_form_input" Native="true">
+
+                                                                <dx:ASPxTextBox runat="server" ID="txtCell" ng-model="addContact.Cell" CssClass="ss_form_input" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
                                                                     <ValidationSettings CausesValidation="false" RequiredField-IsRequired="false" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
                                                                 </dx:ASPxTextBox>
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">email</label>
-                                                              <%-- <input ng-model="addContact.Email" class="ss_form_input" />--%>
+                                                                <%-- <input ng-model="addContact.Email" class="ss_form_input" />--%>
                                                                 <dx:ASPxTextBox runat="server" ID="txtEmail" ng-model="addContact.Email" CssClass="ss_form_input" Native="true">
                                                                     <ValidationSettings ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact">
                                                                         <RegularExpression ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorText="Email isnot valid." />
@@ -114,14 +119,14 @@
                             <input style="margin-top: 20px;" type="text" class="form-control" placeholder="Type employee's name" ng-model="query.Name">
                             <div style="margin-top: 10px; height: 350px; overflow: auto" id="employee_list">
                                 <div>
-                                    <ul class="list-group" style="box-shadow: none" ng-repeat="groupedcontact in showingContacts|orderBy:group_text_order| filter:query.Name">
+                                    <ul class="list-group" style="box-shadow: none" ng-repeat="groupedcontact in showingContacts|orderBy:group_text_order">
                                         <%--<li class="list-group-item popup_menu_list_item" style="font-size: 18px; width: 80px; cursor: default; font-weight: 900">{{groupedcontact.group_text}}
                                             <span class="badge" style="font-size: 18px; border-radius: 18px;">{{groupedcontact.data.length}}</span>
                                         </li>--%>
-                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.Name==currentContact.Name? 'popup_employee_list_item_active':''" ng-repeat="contact in groupedcontact.data| filter:query |orderBy:predicate">
+                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.Name==currentContact.Name? 'popup_employee_list_item_active':''" ng-repeat="contact in groupedcontact.data| ByContact:query |orderBy:predicate| filter:query.Name">
                                             <div>
                                                 <div style="font-weight: 900; font-size: 16px">
-                                                    <label style="width:100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}}</label>
+                                                    <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}}</label>
                                                     <%--<i class="fa fa-list-alt icon_btn" style="float: right; margin-right: 20px; margin-top: 0px; font-size: 18px;"></i>--%>
                                                 </div>
                                                 <%--<div style="font-size: 14px">Eviction</div>--%>
@@ -130,7 +135,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div style="margin-top: 20px;display:none">
+                            <div style="margin-top: 20px; display: none">
                                 <%--Press ‘Ctrl’ or ‘Command’ for multiple selections.--%>
                                     Check to muliple selections.
                             </div>
@@ -180,7 +185,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                 <tr class="vendor_info">
+                                <tr class="vendor_info">
                                     <td class="vendor_info_left">Office #
                                     </td>
                                     <td>
@@ -237,7 +242,15 @@
 
         </div>
     </form>
-    <script src="/Scripts/PortalApp.js?v=<%=DateTime.Now.Millisecond.ToString %>>"></script>
+    <!-- Angular Material Dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.js"></script>
+
+    <!-- Angular Material Javascript using RawGit to load directly from `bower-material/master` -->
+    <script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="/Scripts/PortalApp.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

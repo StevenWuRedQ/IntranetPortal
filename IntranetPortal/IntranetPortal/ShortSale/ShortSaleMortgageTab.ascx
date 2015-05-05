@@ -421,7 +421,7 @@
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>
-            <li class="ss_form_item">
+            <li class="ss_form_item"> 
                 <label class="ss_form_input_title">&nbsp;</label>
                 <input class="ss_form_input ss_form_hidden" value="">
             </li>--%>

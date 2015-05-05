@@ -29,9 +29,14 @@ Public Class CallBackServices
     End Sub
 
     <WebMethod()> _
-    Public Function addContact(contact As PartyContact) As PartyContact
-        
+    Public Function AddContact(contact As PartyContact) As PartyContact
+
         contact.Save()
         Return contact
+    End Function
+    <WebMethod()> _
+    Public Function GetLenderList() As List(Of String)
+        Dim l = PartyContact.GetContactByType(PartyContact.ContactType.Lender).Where(Function(c) c.CorpName IsNot Nothing).Select(Function(c) c.CorpName).ToList()
+        Return l
     End Function
 End Class
