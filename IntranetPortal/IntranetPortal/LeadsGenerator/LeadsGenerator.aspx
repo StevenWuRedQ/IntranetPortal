@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="LeadsGenerator.aspx.vb" Inherits="IntranetPortal.LeadsGenerator" MasterPageFile="~/Content.Master" %>
 
+<%@ Import Namespace="IntranetPortal" %>
+
 <%@ Register Src="~/PopupControl/MapsPopup.ascx" TagPrefix="uc1" TagName="MapsPopup" %>
 
 
@@ -15,8 +17,8 @@
 
             popUpSearch();
             var filter = GetSearchFields();
-            var sc_str = JSON.stringify(removeEmpty(filter)).replace("{", "").replace("}", "");
-            $("#Search_scenario").html(sc_str);
+            var scStr = JSON.stringify(removeEmpty(filter)).replace("{", "").replace("}", "");
+            $("#Search_scenario").html(scStr);
 
         }
         function GetSearchFields() {
@@ -41,6 +43,7 @@
             filter.Tax = { min: $("#IdTaxesMin").val(), max: $("#IdTaxesMax").val() }
             filter.ECB_DOB = { min: $("#IdECB_DOBMin").val(), max: $("#IdECB_DOBMax").val() }
             filter.isLis = $("#Lis_Pendens_yes").prop("checked");
+            filter.isLPMOD = $("#LPMOD_yes").prop("checked");
             filter.DocketYear = $("#IdDocket_Year").val();
             filter.YearBuild = { min: $("#IdYearBuildMin").val(), max: $("#IdYearBuildMax").val() }
             return filter;
@@ -67,9 +70,9 @@
         }
         function OnSearchSaveClick() {
             var searchTaskName = $("#TxtSearchTaskName").val();
-            var SearchType = $("#SearchType").val()
+            var SearchType = $("#SearchType").val();
             if (searchTaskName == null || searchTaskName.length == 0) {
-                alert("please input name !")
+                alert("please input name !");
                 return;
             }
             
@@ -92,8 +95,7 @@
             var field = div.attr("data-field");
 
 
-
-            control_array_div(div, isopen)
+            control_array_div(div, isopen);
 
 
         }
@@ -144,13 +146,13 @@
 
         }
         function loadFunction(funName) {
-            tableViewClinetCallBack.PerformCallback("loadFunction|" + funName)
+            tableViewClinetCallBack.PerformCallback("loadFunction|" + funName);
         }
         function filterOutExitChange(e) {
             loadFunction('dxfilterOutExist_CheckedChanged|' + e.checked);
         }
         function gridSelect() {
-            $("#SelectCount").html(QueryResultsGridClient.GetSelectedRowCount())
+            $("#SelectCount").html(QueryResultsGridClient.GetSelectedRowCount());
         }
     </script>
 
@@ -524,11 +526,11 @@
                                                             <select class="selectpicker form-control width_100percent" style="width: 98%" id="IdMortgageMin">
                                                                 <option value="">Min Value</option>
                                                                 <% For number = 50000  to 1000000 step 50000 %>
-                                                                <option value="<%= number%>""><%= FormatCurrency(number, TriState.False, , TriState.True, TriState.True)%></option>
+                                                                <option value="<%= number%>"><%= FormatCurrency(number, TriState.False, , TriState.True, TriState.True)%></option>
                                                                 <% Next %>
 
                                                                 <% For number = 1200000 To 3000000 Step 200000%>
-                                                                 <option value="<%= number%>""><%= FormatCurrency(number, TriState.False, , TriState.True, TriState.True)%></option>
+                                                                 <option value="<%= number%>"><%= FormatCurrency(number, TriState.False, , TriState.True, TriState.True)%></option>
                                                                 <% Next %>
                                                                 <option value="3M+">$3M+</option>
                                                             </select>
@@ -538,11 +540,11 @@
                                                             <select class="selectpicker form-control width_100percent" style="width: 98%" id="IdMortgageMax">
                                                                 <option value="">Max Value</option>
                                                                 <% For number = 50000  to 1000000 step 50000 %>
-                                                                <option value="<%= number%>""><%= FormatCurrency(number, TriState.False, , TriState.True, TriState.True)%></option>
+                                                                <option value="<%= number%>"><%= FormatCurrency(number, TriState.False, , TriState.True, TriState.True)%></option>
                                                                 <% Next %>
 
                                                                 <% For number = 1200000 To 3000000 Step 200000%>
-                                                                 <option value="<%= number%>""><%= FormatCurrency(number, TriState.False, , TriState.True, TriState.True)%></option>
+                                                                 <option value="<%= number%>"><%= FormatCurrency(number, TriState.False, , TriState.True, TriState.True)%></option>
                                                                 <% Next %>
                                                                 <option value="3M+">$3M+</option>
                                                             </select>
@@ -758,6 +760,22 @@
                                                             </label>
                                                             <input id="Lis_Pendens_No" type="radio" name="Lis_Pendens">
                                                             <label for="Lis_Pendens_No" style="margin-left: 30px">
+                                                                <span class="box_text">No </span>
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="form-inline">
+                                                        <div class="inline_block ">
+                                                            <label class="upcase_text font_black" style="display: block">Lis Pendens MOD <span style="color: red; text-transform: none; font-weight: 400">(Check if want Lis Pendens not has been renewed)</span></label>
+                                                            <input id="LPMOD_yes" type="radio" name="LPMOD">
+                                                            <label for="LPMOD_yes">
+                                                                <span class="box_text">Yes </span>
+                                                            </label>
+                                                            <input id="LPMOD_yes_No" type="radio" name="LPMOD">
+                                                            <label for="LPMOD_yes_No" style="margin-left: 30px">
                                                                 <span class="box_text">No </span>
                                                             </label>
                                                         </div>
@@ -987,7 +1005,7 @@
                              <label class="ss_form_input_title" style="margin-top:10px" >Search Type</label>
                         <select class="form-control" style="border-radius: 4px; margin-top: 3px;" id="SearchType">
                             <option value=""> Must Select !</option>
-                            <%For Each lt In popupcontrol_assignleadspopup_ascx.GetLeadsTypeList%>
+                            <%For Each lt In AssignLeadsPopup.GetLeadsTypeList%>
                             <option value='<%=lt.Value%>' > <%= lt.Name%> </option>
                             <% Next %>
                         </select>

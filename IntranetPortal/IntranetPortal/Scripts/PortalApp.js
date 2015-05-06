@@ -149,9 +149,12 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
             $scope.query.Type = type;
         }
        
+        var corpName = type == 4 && text != 'Lenders' ? text : '';
+        $scope.query.CorpName = corpName;
 
-        $scope.query.CorpName = type == 4 && text != 'Lenders' ? text : '';
 
+        $scope.addContact.CorpName = corpName;
+        
         $scope.selectType = text;
         return true;
     }
