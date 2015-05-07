@@ -179,7 +179,7 @@
     <HeaderTemplate>
         <div class="clearfix">
             <div class="pop_up_header_margin">
-                <i class="fa fa-mail-forward with_circle pop_up_header_icon"></i>
+                <i class="fa fa-refresh with_circle pop_up_header_icon"></i>
                 <span class="pop_up_header_text">In Process</span>
             </div>
             <div class="pop_up_buttons_div">
@@ -195,9 +195,9 @@
                 <Items>
                     <dx:ListEditItem Text="Short Sale" Value="0" />
                     <dx:ListEditItem Text="Eviction" Value="1" />
-                    <dx:ListEditItem Text="Legal" Value="3" />
+                   <%-- <dx:ListEditItem Text="Legal" Value="3" />--%>
                     <dx:ListEditItem Text="Construction" Value="2" />
-                    <dx:ListEditItem Text="Open Market Sale" Value="4" />
+                    <%--<dx:ListEditItem Text="Open Market Sale" Value="4" />--%>
                 </Items>
                 <ClientSideEvents SelectedIndexChanged="function(s,e){
                         if(s.GetSelectedValues().indexOf('1')!=-1)
@@ -221,14 +221,18 @@
         <div style="height: 30px; vertical-align: central">
             <script>
                 function ConfirmClick() {
-                    //popupShow = false;
-                    //aspxPopupInprocessClient.PerformCallback('Save');
+                    popupShow = false;
                     var selected = lbSelectionModeClient.GetSelectedValues();
-                    if (selected.indexOf(3)) {
-                        //aspxPopupLegalInfoClient.Show();
+                    var index3 = selected.indexOf("3");
+                    if (index3 >= 0) {
                         aspxPopupInprocessClient.Hide();
+                        //aspxPopupLegalInfoClient.Show();
+                       
                         $('.legal_action_div').css("display", 'none');
                         $("#LegalPopUp").modal();
+                    } else {
+                       
+                        aspxPopupInprocessClient.PerformCallback('Save');
                     }
                 }
             </script>
