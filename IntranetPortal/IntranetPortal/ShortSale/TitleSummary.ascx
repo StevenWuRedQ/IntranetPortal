@@ -512,6 +512,8 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn  FieldName="OwnerLastName" Caption="Name">
                                                     </dx:GridViewDataTextColumn>
+                                                     <dx:GridViewDataTextColumn FieldName="StatuStr" Caption="Status">
+                                                    </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1st Mort Prog">
@@ -613,7 +615,8 @@
                                         <dx:ListEditItem Value="PropertyInfo.PropertyAddress" Text="Street address" Selected="True"/>
 
                                         <dx:ListEditItem Value="OwnerLastName" Text="Name" Selected="True"/>
-
+                                        <dx:ListEditItem Value="StatuStr" Text="Status" Selected="True"/>
+                                                  
                                         <dx:ListEditItem Value="OccupiedBy" Text="Occupancy" />
 
                                         <dx:ListEditItem Value="FristMortageProgress" Text="1st Mort Prog" />
