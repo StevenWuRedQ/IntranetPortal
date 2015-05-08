@@ -249,6 +249,34 @@ Public Class DataWCFService
         End Using
     End Sub
 
+    Public Shared Function GetBBLEByAddress(num As String, streetName As String, borough As String) As String()
+        Using client As New DataAPI.WCFMacrosClient
+            Dim strName = streetName.Trim
+            num = num.Trim.Replace(" ", "")
+
+            Dim result = client.NYC_Address_Search(borough, num, strName)
+
+            If result.Length = 0 Then
+                strName = strName.ToLower.Replace("street", "ST").Replace("avenue", "Ave")
+                If strName.EndsWith(".") Then
+                    strName = strName.Remove(strName.Length - 1, 1)
+                End If
+                result = client.NYC_Address_Search(borough, num.Trim, strName)
+            End If
+
+            If result.Length = 0 Then
+                strName = strName.Replace("th", "").Replace("rd", "").Replace("nd", "")
+                result = client.NYC_Address_Search(borough, num.Trim, strName)
+            End If
+
+            If result.Length = 0 Then
+                strName = strName.Replace("east", "E")
+                result = client.NYC_Address_Search(borough, num.Trim, strName)
+            End If
+
+            Return result.Select(Function(r) r.BBLE).ToArray
+        End Using
+    End Function
 
     Public Shared Function GetFullAssessInfo(bble As String, Optional li As LeadsInfo = Nothing) As LeadsInfo
 

@@ -147,6 +147,29 @@
         End Using
     End Function
 
+    Public Shared Function GetLeadsInfoByStreet(strNum As String, strName As String, city As String, zip As String) As String
+        Using ctx As New Entities
+            Try
+                Dim boro = Utility.GetBoroughByZip(zip)
+                If Not String.IsNullOrEmpty(boro) Then
+                    Dim bbles = DataWCFService.GetBBLEByAddress(strNum, strName, boro)
+                    If bbles IsNot Nothing AndAlso bbles.Count > 0 Then
+                        Return String.Join(",", bbles)
+                    End If
+                End If
+
+                Dim li = GetLeadsInfoByStreet(strNum, strName)
+                If li IsNot Nothing Then
+                    Return li.BBLE
+                End If
+
+                Return ""
+            Catch ex As Exception
+                Throw New Exception(String.Format("Str No: {0}, strName: {1}. Exception: {2}", strNum, strName, ex.Message))
+            End Try
+        End Using
+    End Function
+
     Public Function GetHomeOwner(ownerName As String) As HomeOwner
         Using ctx As New Entities
             Return ctx.HomeOwners.Where(Function(ho) ho.BBLE = BBLE And ho.Name = ownerName And ho.Active = True).FirstOrDefault

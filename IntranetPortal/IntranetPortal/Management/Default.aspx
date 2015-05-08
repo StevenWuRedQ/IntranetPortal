@@ -18,11 +18,19 @@
                     </dx:GridViewCommandColumn>
                     <dx:GridViewDataColumn FieldName="BBLE" Caption="BBLE" Width="1px" ExportWidth="100">
                     </dx:GridViewDataColumn>
-                    <dx:GridViewDataTextColumn FieldName="FirstName" Settings-AllowHeaderFilter="False">                       
+                    <dx:GridViewDataTextColumn FieldName="FirstName" Settings-AllowHeaderFilter="False" Visible="false">                       
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="LastName" Settings-AllowHeaderFilter="False">                       
+                    <dx:GridViewDataTextColumn FieldName="LastName" Settings-AllowHeaderFilter="False" Visible="false">                       
                     </dx:GridViewDataTextColumn>
-                    <dx:GridViewDataTextColumn FieldName="FullAddress"></dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Name" Settings-AllowHeaderFilter="False">                       
+                    </dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Address1" Settings-AllowHeaderFilter="False">                       
+                    </dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="City" Settings-AllowHeaderFilter="False">                       
+                    </dx:GridViewDataTextColumn>
+                    <dx:GridViewDataTextColumn FieldName="Zip" Settings-AllowHeaderFilter="False">                       
+                    </dx:GridViewDataTextColumn>                                        
+                    <dx:GridViewDataTextColumn FieldName="FullAddress" Visible="false"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Alive"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Age"></dx:GridViewDataTextColumn>
                     <dx:GridViewDataTextColumn FieldName="Bankruptcy"></dx:GridViewDataTextColumn>

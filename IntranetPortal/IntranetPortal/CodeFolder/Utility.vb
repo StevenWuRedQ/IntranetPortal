@@ -322,4 +322,25 @@ Public Class Utility
 
         Return oldObj
     End Function
+
+    Public Shared Function GetBoroughByZip(zip As String) As String
+        If String.IsNullOrEmpty(zip) Then
+            Return ""
+        End If
+
+        Select Case zip.Substring(0, 3)
+            Case "100"
+                Return "1"
+            Case "104"
+                Return "2"
+            Case "112"
+                Return "3"
+            Case "110", "111", "113", "114", "116"
+                Return "4"
+            Case "103"
+                Return "5"
+            Case Else
+                Return ""
+        End Select
+    End Function
 End Class

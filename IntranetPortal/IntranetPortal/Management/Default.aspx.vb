@@ -3,8 +3,8 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Using ctx As New Entities
-            Dim result = ctx.HomeOwners.Where(Function(h) h.LocateReport IsNot Nothing AndAlso h.ReportToken IsNot Nothing).Take(500).ToList
-            gridHomeOwner.DataSource = result.Where(Function(h) h.PhoneCount > 7).Take(30).ToList
+            Dim result = ctx.HomeOwners.Where(Function(h) h.LocateReport IsNot Nothing AndAlso h.ReportToken IsNot Nothing AndAlso h.BBLE.StartsWith(7)).ToList
+            gridHomeOwner.DataSource = result.ToList
             gridHomeOwner.DataBind()
         End Using
     End Sub

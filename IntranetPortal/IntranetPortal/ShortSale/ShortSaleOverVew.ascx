@@ -232,7 +232,7 @@
                                                 </select>
                                             </li>
                                             <li class="ss_form_item">
-                                                <label class="ss_form_input_title">Listing Expiry Date</label>
+                                                <label class="ss_form_input_title">Expiration Date</label>
                                                 <input class="ss_form_input ss_date" data-field="ListingExpireDate">
                                             </li>
                                             <li class="ss_form_item">

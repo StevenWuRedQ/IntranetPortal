@@ -114,6 +114,7 @@
         Declined
         Email
         RecycleTask
+        ShortSale
     End Enum
 
     Enum EnumActionType

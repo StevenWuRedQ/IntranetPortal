@@ -315,7 +315,7 @@
         if (addDate == null)
             addDate = new Date();
 
-        addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + commentHtml + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate").val());
+        addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" +  $("#selType1").val() + "|" + $("#selStatusUpdate").val());
         EmailBody.SetHtml("");
     }
 
@@ -442,6 +442,8 @@
                     <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
                     <% If DisplayMode = ActivityLogMode.Leads Then%>
                     <i class="fa fa-calendar-o activity_add_buttons tooltip-examples" style="margin-right: 15px; cursor: pointer" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
+                    <%Else%>
+                    <i class="fa fa-comment activity_add_buttons tooltip-examples" style="margin-right: 15px; cursor: pointer" title="Previous Notes" onclick="popupPreviousNotes.Show();popupPreviousNotes.PerformCallback()"></i>
                     <% End If%>
                     <i class="fa fa-tasks activity_add_buttons tooltip-examples icon_btn" title="Create Task" style="margin-right: 15px;" onclick="ASPxPopupSetAsTaskControl.ShowAtElement(this);ASPxPopupSetAsTaskControl.PerformCallback();"></i>
                     <i class="fa fa-repeat activity_add_buttons tooltip-examples icon_btn" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
@@ -831,7 +833,7 @@
                         <span class="pop_up_header_text">BPO/Appraisal</span>
                     </div>
                     <div class="pop_up_buttons_div">
-                        <i class="fa fa-times icon_btn" onclick="ASPxPopupSetAsTaskControl.Hide()"></i>
+                        <i class="fa fa-times icon_btn" onclick="popupBpo.Hide()"></i>
                     </div>
                 </div>
             </HeaderTemplate>
@@ -890,6 +892,45 @@
             </ContentCollection>
             <ClientSideEvents EndCallback="function(s,e){if(refreshLogs) { gridTrackingClient.Refresh();}}" />
         </dx:ASPxPopupControl>
+
+        <dx:ASPxPopupControl ClientInstanceName="popupPreviousNotes" Width="800px" Height="480px" OnWindowCallback="popupPreviousNotes_WindowCallback"
+           ID="popupPreviousNotes"
+            HeaderText="Previous Notes" Modal="true"
+            runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+            <HeaderTemplate>
+                <div class="clearfix">
+                    <div class="pop_up_header_margin">
+                        <i class="fa fa-comment with_circle pop_up_header_icon"></i>
+                        <span class="pop_up_header_text">Previous Notes</span>
+                    </div>
+                    <div class="pop_up_buttons_div">
+                        <i class="fa fa-times icon_btn" onclick="popupPreviousNotes.Hide()"></i>
+                    </div>
+                </div>
+            </HeaderTemplate>
+            <ContentCollection>
+                <dx:PopupControlContentControl runat="server" Visible="false" ID="popupCtontrlPreviousNotes">
+                    <dx:ASPxGridView runat="server" ID="gvPreviousNotes" KeyFieldName="LogId" Width="100%" OnDataBinding="gvPreviousNotes_DataBinding" Theme="Moderno">
+                        <Columns>
+                            <dx:GridViewDataDateColumn FieldName="ActivityDate" PropertiesDateEdit-DisplayFormatString="g" Width="100px"></dx:GridViewDataDateColumn>
+                            <dx:GridViewDataTextColumn FieldName="Source" Width="100px"></dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="ActivityType" Width="100px"></dx:GridViewDataTextColumn>
+                            <dx:GridViewDataTextColumn FieldName="ActivityTitle"></dx:GridViewDataTextColumn>                            
+                            <dx:GridViewDataTextColumn FieldName="Shared" Width="60px"></dx:GridViewDataTextColumn>
+                        </Columns>
+                        <Templates>
+                            <DetailRow>
+                                <%# Eval("Description")%>
+                            </DetailRow>
+                        </Templates>
+                        <Settings VerticalScrollableHeight="400" />
+                        <SettingsPager Mode="EndlessPaging"></SettingsPager>
+                        <SettingsDetail ShowDetailRow="true" />
+                    </dx:ASPxGridView>
+                </dx:PopupControlContentControl>
+            </ContentCollection>
+        </dx:ASPxPopupControl>
+
 
         <dx:ASPxPopupControl ClientInstanceName="ASPxPopupSetAsTaskControl" Width="450px" Height="550px" OnWindowCallback="ASPxPopupControl1_WindowCallback"
             MaxWidth="800px" MinWidth="150px" ID="ASPxPopupControl1"

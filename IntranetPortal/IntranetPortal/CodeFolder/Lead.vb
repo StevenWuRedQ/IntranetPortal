@@ -182,8 +182,11 @@ Partial Public Class Lead
             If ld IsNot Nothing Then
                 ld.Process = LeadProcess.Publishing
                 ctx.SaveChanges()
-
-                InitPublicData(bble)
+                Try
+                    InitPublicData(bble)
+                Catch ex As Exception
+                    Throw New Exception("Unable to Publishing Now.")
+                End Try
             End If
         End Using
     End Sub

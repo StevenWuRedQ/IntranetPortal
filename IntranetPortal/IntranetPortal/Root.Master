@@ -27,11 +27,18 @@
 <body onload="init();" id="testIDbody">
     <form id="form1" runat="server">
         <script type="text/javascript">
-            function ShowSearchLeadsInfo(bble) {
+            function ShowSearchLeadsInfo(bble) {                
                 var url = '/ViewLeadsInfo.aspx?id=' + bble;
+                OpenLeadsWindow(url, "View Leads Info " + bble);
+                //var left = (screen.width / 2) - (1350 / 2);
+                //var top = (screen.height / 2) - (930 / 2);
+                //window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+            }
+
+            function OpenLeadsWindow(url, title) {                
                 var left = (screen.width / 2) - (1350 / 2);
                 var top = (screen.height / 2) - (930 / 2);
-                window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+                window.open(url, title, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
             }
 
             function GoToLead(bble) {
@@ -41,6 +48,31 @@
                 }
                 else {
                     window.location.href = "/default.aspx?t=search&key=" + encodeURIComponent(txtSearchKeyClient.GetText()) + "&id=" + bble;
+                }
+            }
+
+            function ShowPopupLeadsMenu(s, bble)
+            {
+                tmpBBLE = bble;
+                popupMenuLeads.ShowAtElement(s);
+            }
+
+            function OnPopupMenuLeadsClick(s,e)
+            {
+                if (e.item.name == "Leads") {
+                    ShowSearchLeadsInfo(tmpBBLE);
+                }
+
+                if (e.item.name == "ShortSale") {
+                    OpenLeadsWindow("/ShortSale/ShortSale.aspx?bble=" + tmpBBLE, "ShortSale Info");
+                }
+
+                if (e.item.name == "Eviction") {
+                    OpenLeadsWindow("/ShortSale/ShortSale.aspx?isEviction=true&bble=" + tmpBBLE, "Eviction Info");
+                }
+
+                if (e.item.name == "Legal") {
+                    OpenLeadsWindow("/LegalUI/LegalUI.aspx?bble=" + tmpBBLE, "Legal Info");
                 }
             }
 
@@ -256,9 +288,11 @@
                                                                     <DataItemTemplate>
                                                                         <%--use font image to change the image--%>
                                                                         <i class="fa fa-sheqel tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Request Update?" onclick='<%# String.Format("OnRequestUpdate(""{0}"");return false;", Eval("BBLE")) %>' runat="server" visible='<%# not CBool(Eval("Viewable"))%>'></i>
-                                                                        <i class="fa fa-external-link-square tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To Lead" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# Eval("Viewable")%>'></i>
+                                                                        <%--<i class="fa fa-external-link-square tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To Lead" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# Eval("Viewable")%>'></i>--%>
+                                                                        <i class="fa fa-external-link-square tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To" onclick='<%#String.Format("ShowPopupLeadsMenu(this, {0})", Eval("BBLE"))%>' runat="server" visible='<%# Eval("Viewable")%>'></i>
                                                                         <span style="width: 10px">&nbsp;&nbsp;</span>
                                                                         <i class="fa fa-list-alt tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# Eval("Viewable")%>'></i>
+                                                                        
                                                                         <%--change image to beaty style by steven--%>
                                                                         <%--<img src="~/images/search_pop_go_leads.png" title="Go To Lead" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />
                                                                         <img src="~/images/search_pop_menu.png" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />--%>
@@ -288,6 +322,17 @@
                                                                 </tr>
                                                             </table>
                                                         </asp:Panel>
+                                                        <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="popupMenuLeads"
+                                                            AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+                                                            <ItemStyle Paddings-PaddingLeft="20px" />
+                                                            <Items>
+                                                                <dx:MenuItem Text="Leads" Name="Leads"></dx:MenuItem>
+                                                                <dx:MenuItem Text="Short Sale" Name="ShortSale"></dx:MenuItem>
+                                                                <dx:MenuItem Text="Eviction" Name="Eviction"></dx:MenuItem>
+                                                                <dx:MenuItem Text="Legal" Name="Legal"></dx:MenuItem>                                                           
+                                                            </Items>
+                                                            <ClientSideEvents ItemClick="OnPopupMenuLeadsClick" />
+                                                        </dx:ASPxPopupMenu>
                                                     </dx:PopupControlContentControl>
                                                 </ContentCollection>
                                                 <ClientSideEvents EndCallback="function(s,e){s.ShowAtElement(txtSearchKeyClient.GetMainElement()); $('.tooltip-examples').tooltip(); }" />
@@ -423,7 +468,7 @@
             <ClientSideEvents Closing="function(){hook();}" />
         </dx:ASPxPopupControl>
     </form>
-<%--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>--%>
+    <%--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>--%>
     <script>window.jQuery || document.write('<script src="/Scripts/jquery-2.1.3.min.js"><\/script>')</script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="/Scripts/js/jquery.easing.1.3.js"></script>
@@ -439,7 +484,7 @@
         $(function () {
             setTimeout(
                 function () {
-                    LoadChatWindow(false);                    
+                    LoadChatWindow(false);
                     $('#imgChat').css("color", "green");
                 }, 1000);
         });

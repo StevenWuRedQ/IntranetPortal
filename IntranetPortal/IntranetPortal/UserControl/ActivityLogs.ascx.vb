@@ -812,7 +812,7 @@ Public Class ActivityLogs
         End If
 
         Dim aspxdate = CDate(e.Parameter.Split("|")(0))
-        Dim txtComments = e.Parameter.Split("|")(1)
+        Dim txtComments = EmailBody2.Html 'e.Parameter.Split("|")(1)
 
         If aspxdate.Date = DateTime.Now.Date Then
             aspxdate = DateTime.Now
@@ -828,13 +828,13 @@ Public Class ActivityLogs
 
         If Me.DisplayMode = ActivityLogMode.ShortSale Then
             aspxdate = DateTime.Now
-            Dim typeOfUpdate = e.Parameter.Split("|")(2)
-            Dim statusOfUpdate = e.Parameter.Split("|")(3)
+            Dim typeOfUpdate = e.Parameter.Split("|")(1)
+            Dim statusOfUpdate = e.Parameter.Split("|")(2)
 
             RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, hfBBLE.Value)
 
             txtComments = String.Format("Type of Update: {0}<br />{1}", typeOfUpdate, txtComments)
-            LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent, LeadsActivityLog.EnumActionType.Comments)
+            LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale, LeadsActivityLog.EnumActionType.Comments)
         Else
             LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)
 
@@ -887,7 +887,7 @@ Public Class ActivityLogs
         End Using
     End Sub
 
-    Enum ActivityLogMode
+    Public Enum ActivityLogMode
         Leads
         ShortSale
     End Enum
@@ -941,6 +941,18 @@ Public Class ActivityLogs
             txtBankValue.Text = ""
             txtDateofValue.Value = ""
             txtExpiredDate.Value = ""
+        End If
+    End Sub
+
+    Protected Sub popupPreviousNotes_WindowCallback(source As Object, e As PopupWindowCallbackArgs)
+        popupCtontrlPreviousNotes.Visible = True
+        gvPreviousNotes.DataSource = ShortSaleActivityLog.GetLogs(hfBBLE.Value)
+        gvPreviousNotes.DataBind()
+    End Sub
+
+    Protected Sub gvPreviousNotes_DataBinding(sender As Object, e As EventArgs)
+        If gvPreviousNotes.DataSource Is Nothing AndAlso gvPreviousNotes.IsCallback Then
+            gvPreviousNotes.DataSource = ShortSaleActivityLog.GetLogs(hfBBLE.Value)
         End If
     End Sub
 End Class

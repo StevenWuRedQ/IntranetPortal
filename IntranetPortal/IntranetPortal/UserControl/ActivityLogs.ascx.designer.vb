@@ -140,6 +140,33 @@ Partial Public Class ActivityLogs
     Protected WithEvents ASPxButton2 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
+    '''popupPreviousNotes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents popupPreviousNotes As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''popupCtontrlPreviousNotes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents popupCtontrlPreviousNotes As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
+
+    '''<summary>
+    '''gvPreviousNotes control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gvPreviousNotes As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
     '''ASPxPopupControl1 control.
     '''</summary>
     '''<remarks>
