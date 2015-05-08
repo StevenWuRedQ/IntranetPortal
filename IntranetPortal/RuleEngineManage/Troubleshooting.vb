@@ -2,6 +2,7 @@
 Imports System.Data.OleDb
 Imports IntranetPortal
 Imports IntranetPortal.ShortSale
+Imports System.Threading
 
 Public Class Troubleshooting
 
@@ -98,10 +99,14 @@ Public Class Troubleshooting
         Dim dictionary = IO.Path.GetFullPath("Files")
 
         Dim dics As New IO.DirectoryInfo(dictionary)
-
+        gvFiles.Rows.Clear()
         For Each file In dics.GetFiles()
-            lbFiles.Items.Add(file.Name)
+            gvFiles.Rows.Add(file.Name, "")
+
+            'lbFiles.Items.Add(file.Name)
         Next
+
+        AddResultToListBox("Total Files: " & gvFiles.Rows.Count)
     End Sub
 
     Private Sub btnImportFile_Click(sender As Object, e As EventArgs) Handles btnImportFile.Click
@@ -118,7 +123,7 @@ Public Class Troubleshooting
                 SaveParties(ssCase, ds)
 
                 AddResultToListBox(String.Format("{0} is done.", name))
-                MoveFile(name)
+                MoveFile(name, ssCase.BBLE)
             Catch ex As Exception
                 AddResultToListBox(String.Format("Error on importing {0}. Message: {1}", name, ex.Message))
                 Logger.Log.Error(String.Format("Error on importing {0}. Message: {1}", name, ex.Message), ex)
@@ -127,10 +132,142 @@ Public Class Troubleshooting
         Next
     End Sub
 
-    Sub MoveFile(fileName As String)
+    Private Sub btnGetBBLE_Click(sender As Object, e As EventArgs) Handles btnGetBBLE.Click
+        Dim td As New Threading.Thread(New ThreadStart(Sub()
+                                                           For Each row As DataGridViewRow In gvFiles.SelectedRows
+                                                               ThreadPool.QueueUserWorkItem(Sub()
+                                                                                                ImportFiles(row)
+                                                                                            End Sub)
+                                                           Next
+                                                       End Sub))
+        td.Start()
+    End Sub
+
+    Private Sub btnImportLogs_Click(sender As Object, e As EventArgs) Handles btnImportLogs.Click
+        Dim td As New Threading.Thread(New ThreadStart(Sub()
+                                                           For Each row As DataGridViewRow In gvFiles.SelectedRows
+                                                               ThreadPool.QueueUserWorkItem(Sub()
+                                                                                                ImportLogs(row)
+                                                                                            End Sub)
+                                                           Next
+                                                       End Sub))
+        td.Start()
+    End Sub
+
+    Private Sub ImportLogs(row As DataGridViewRow)
+        Try
+            row.Cells(3).Value = ""
+            Dim fileName = row.Cells(0).Value
+            UpdateStatus(row, "Loading data from Excel...")
+            Dim ds = LoadDataFromExcel(fileName)
+            UpdateStatus(row, "Loading... BBLE")
+
+            Dim bble = ""
+            If fileName.ToString.StartsWith("bble_") Then
+                bble = fileName.ToString.Replace("bble_", "").Replace(".xlsx", "")
+            Else
+                bble = LoadBBLE(ds)
+            End If
+
+            If String.IsNullOrEmpty(bble) Then
+                Throw New Exception("Can't find address")
+            End If
+
+            UpdateStatus(row, bble, 1)
+
+            UpdateStatus(row, "Save Logs")
+
+            SaveActivityLogs(bble, ds)
+
+            UpdateStatus(row, "Imported is done")
+            AddResultToListBox(String.Format("{0} is done.", fileName))
+            MoveFile(fileName, bble)
+            UpdateStatus(row, "Move to filed")
+        Catch ex As Exception
+            row.Cells(3).Value = "Exception: " & ex.Message
+        End Try
+    End Sub
+
+    Private Sub ImportFiles(row As DataGridViewRow)
+        Try
+            row.Cells(3).Value = ""
+            Dim fileName = row.Cells(0).Value
+            UpdateStatus(row, "Loading data from Excel...")
+            Dim ds = LoadDataFromExcel(fileName)
+            UpdateStatus(row, "Loading... BBLE")
+
+            Dim bble = ""
+            If fileName.ToString.StartsWith("bble_") Then
+                bble = fileName.ToString.Replace("bble_", "").Replace(".xlsx", "")
+            Else
+                bble = LoadBBLE(ds)
+            End If
+
+            UpdateStatus(row, bble, 1)
+            UpdateStatus(row, "Save... Property Info")
+            Dim ssCase = SavePropertyInfo(ds, bble)
+            UpdateStatus(row, "Save... Seller info")
+            SaveSellerInfo(ssCase, ds)
+            UpdateStatus(row, "Save... Mortgages")
+            SaveMortgages(ssCase, ds)
+            UpdateStatus(row, "Save... parties")
+            SaveParties(ssCase, ds)
+            UpdateStatus(row, "Save Logs")
+            SaveActivityLogs(bble, ds)
+            UpdateStatus(row, "Imported is done")
+            AddResultToListBox(String.Format("{0} is done.", fileName))
+            MoveFile(fileName, bble)
+            UpdateStatus(row, "Move to filed")
+        Catch ex As Exception
+            row.Cells(3).Value = "Exception: " & ex.Message
+        End Try
+    End Sub
+
+    Private Sub UpdateStatus(row As DataGridViewRow, status As String, Optional index As Integer = 2)
+        Me.Invoke(New MethodInvoker(Sub()
+                                        row.Cells(index).Value = status
+                                    End Sub))
+    End Sub
+
+    Private Sub SaveActivityLogs(bble As String, ds As DataSet)
+        Dim logs As New List(Of ShortSaleActivityLog)
+        For Each row In ds.Tables("Activity Log").Rows
+            Dim log As New ShortSaleActivityLog
+            log.BBLE = bble
+            log.ActivityDate = SetDate(row("Activity Date"), log.ActivityDate)
+            log.Source = row("Source").ToString
+            log.ActivityType = row("Activity Type").ToString
+            log.ActivityTitle = row("Activity Title").ToString
+            log.Description = row("Activity Description").ToString
+            log.Shared = row("Shared").ToString
+
+            logs.Add(log)
+        Next
+        ShortSaleActivityLog.ClearLogs(bble)
+        ShortSaleActivityLog.AddLogs(logs.ToArray)
+    End Sub
+
+    Private Function LoadBBLE(ds As DataSet) As String
+
+        Dim prop = ds.Tables("Property").Rows(0)
+
+        Dim strNo = prop("Street Number").ToString
+        Dim strPrefix = prop("Street Prefix").ToString
+        Dim strName = prop("Street Name").ToString
+        Dim city = prop("City").ToString
+        Dim zip = prop("Zip").ToString
+
+        If Not String.IsNullOrEmpty(strPrefix) Then
+            strName = strPrefix.Trim & " " & strName.Trim
+        End If
+
+        Return LeadsInfo.GetLeadsInfoByStreet(strNo, strName, city, zip)
+    End Function
+
+    Sub MoveFile(fileName As String, newName As String)
         Dim fullName = Path.GetFullPath("Files\" & fileName)
         'fl.MoveTo("Files\Done\fileName")
-        Dim path2 = "Files\Done\" & fileName
+        Dim path2 = "Files\Done\bble_" & newName & ".xlsx"
         If File.Exists(path2) Then
             File.Delete(path2)
         End If
@@ -153,12 +290,12 @@ Public Class Troubleshooting
                 mtg.CaseId = ssCase.CaseId
                 mtg.Lender = mort("Company Name").ToString
                 mtg.Loan = mort("Loan #").ToString
-                SetDecimal(mort("Total Loan Amount").ToString, mtg.LoanAmount)
+                mtg.LoanAmount = SetDecimal(mort("Total Loan Amount").ToString, mtg.LoanAmount)
                 'mtg.LoanAmount = CDec()
                 mtg.CounterOffer = mort("Counter Offer").ToString
 
                 If Not String.IsNullOrEmpty(mort("Payoff Expires").ToString) Then
-                    SetDate(mort("Payoff Expires").ToString, mtg.PayoffExpired)
+                    mtg.PayoffExpired = SetDate(mort("Payoff Expires").ToString, mtg.PayoffExpired)
                 End If
 
                 mtg.Status = mort("Progress").ToString
@@ -169,26 +306,32 @@ Public Class Troubleshooting
         Next
     End Sub
 
-    Public Sub SetDecimal(data As String, obj As Decimal?)
+    Public Function SetDecimal(data As String, obj As Decimal?) As Decimal?
         Dim result As Decimal
         If Decimal.TryParse(data, result) Then
             obj = result
         End If
-    End Sub
 
-    Public Sub SetDate(data As String, obj As DateTime?)
+        Return obj
+    End Function
+
+    Public Function SetDate(data As String, obj As DateTime?) As DateTime?
         Dim retDate As DateTime
         If DateTime.TryParse(data, retDate) Then
             obj = retDate
         End If
-    End Sub
 
-    Public Sub SetBool(data As String, obj As Boolean?)
+        Return obj
+    End Function
+
+    Public Function SetBool(data As String, obj As Boolean?) As Boolean?
         Dim result As Boolean
         If Boolean.TryParse(data, result) Then
             obj = result
         End If
-    End Sub
+
+        Return obj
+    End Function
 
     Sub SaveParties(ssCase As ShortSaleCase, ds As DataSet)
         If ds.Tables("Contacts").Rows.Count > 0 Then
@@ -213,10 +356,10 @@ Public Class Troubleshooting
             If Not IsDBNull(seller("First Name")) Then
                 Dim firstName = seller("First Name").ToString
                 Dim lastName = seller("Last Name").ToString
-                If lastName.Split(" ").Count > 0 Then
-                    Dim middleName = lastName.Split(" ")(0)
+                If lastName.Trim.Split(" ").Count > 1 Then
+                    Dim middleName = lastName.Trim.Split(" ")(0)
                     firstName = firstName & " " & middleName
-                    lastName = lastName.Replace(middleName, "")
+                    lastName = lastName.Trim.Replace(middleName, "")
                 End If
                 owner.FirstName = firstName
                 owner.LastName = lastName
@@ -240,30 +383,42 @@ Public Class Troubleshooting
             owner.MailZip = seller("Zip").ToString
 
             If Not String.IsNullOrEmpty(seller("Bankruptcy").ToString) Then
-                SetBool(seller("Bankruptcy").ToString, owner.Bankruptcy)
+                owner.Bankruptcy = SetBool(seller("Bankruptcy").ToString, owner.Bankruptcy)
             End If
 
             owner.Save()
         Next
     End Sub
 
-    Function SavePropertyInfo(ds As DataSet) As ShortSaleCase
+    Function SavePropertyInfo(ds As DataSet, Optional bble As String = "") As ShortSaleCase
         If ds.Tables("Property").Rows.Count = 0 Then
             Throw New Exception("No Property Info on " & Name)
         End If
 
         Dim prop = ds.Tables("Property").Rows(0)
+        Dim li As LeadsInfo
 
-        Dim strNo = prop("Street Number").ToString
-        Dim strName = prop("Street Name").ToString
+        If String.IsNullOrEmpty(bble) Then
+            Dim strNo = prop("Street Number").ToString
+            Dim strName = prop("Street Name").ToString
+            Dim city = prop("City").ToString
+            Dim zip = prop("Zip").ToString
 
-        Dim li = LeadsInfo.GetLeadsInfoByStreet(strNo, strName)
+            li = LeadsInfo.GetLeadsInfoByStreet(strNo, strName)
+
+        Else
+            li = LeadsInfo.GetInstance(bble)
+
+            If li Is Nothing Then
+                li = DataWCFService.UpdateAssessInfo(bble)
+            End If
+        End If
 
         If li Is Nothing Then
             Throw New Exception("Cannot find this leads in system.")
         End If
 
-        Dim bble = li.BBLE
+        bble = li.BBLE
 
         'load property info
         Dim ssCase = ShortSale.ShortSaleCase.GetCaseByBBLE(bble)
@@ -298,6 +453,8 @@ Public Class Troubleshooting
             ssCase.ListingAgent = contact.ContactId
         End If
 
+        ssCase.Save()
+
         Return ssCase
     End Function
 
@@ -311,6 +468,7 @@ Public Class Troubleshooting
 
             Dim cmd As System.Data.OleDb.OleDbDataAdapter
 
+
             For Each table In GetExcelSheetName(connStr)
                 Dim dt As New DataTable
                 cn.Open()
@@ -320,10 +478,13 @@ Public Class Troubleshooting
                 data.Tables.Add(dt)
                 cn.Close()
             Next
+
         End Using
 
         Return data
     End Function
+
+
 
     Function GetExcelSheetName(connStr As String) As String()
         'Dim cn As System.Data.OleDb.OleDbConnection
@@ -345,4 +506,7 @@ Public Class Troubleshooting
             Return tables.ToArray
         End Using
     End Function
+
+
+
 End Class

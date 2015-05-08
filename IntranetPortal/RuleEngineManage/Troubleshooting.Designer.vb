@@ -59,11 +59,19 @@ Partial Class Troubleshooting
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.btnLoad = New System.Windows.Forms.Button()
-        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.gvFiles = New System.Windows.Forms.DataGridView()
+        Me.colName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colBBLE = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.colException = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.lbFiles = New System.Windows.Forms.ListBox()
-        Me.btnImportFile = New System.Windows.Forms.Button()
         Me.lbResult = New System.Windows.Forms.ListBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnGetBBLE = New System.Windows.Forms.Button()
+        Me.btnLoad = New System.Windows.Forms.Button()
+        Me.btnImportFile = New System.Windows.Forms.Button()
+        Me.btnImportLogs = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -72,7 +80,12 @@ Partial Class Troubleshooting
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
-        Me.TableLayoutPanel2.SuspendLayout()
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SplitContainer1.Panel1.SuspendLayout()
+        Me.SplitContainer1.Panel2.SuspendLayout()
+        Me.SplitContainer1.SuspendLayout()
+        CType(Me.gvFiles, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -426,7 +439,8 @@ Partial Class Troubleshooting
         '
         'TabPage3
         '
-        Me.TabPage3.Controls.Add(Me.TableLayoutPanel2)
+        Me.TabPage3.Controls.Add(Me.SplitContainer1)
+        Me.TabPage3.Controls.Add(Me.Panel2)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
@@ -435,60 +449,120 @@ Partial Class Troubleshooting
         Me.TabPage3.Text = "TabPage3"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
-        'btnLoad
+        'SplitContainer1
         '
-        Me.btnLoad.Location = New System.Drawing.Point(3, 3)
-        Me.btnLoad.Name = "btnLoad"
-        Me.btnLoad.Size = New System.Drawing.Size(75, 23)
-        Me.btnLoad.TabIndex = 0
-        Me.btnLoad.Text = "Load Files"
-        Me.btnLoad.UseVisualStyleBackColor = True
+        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SplitContainer1.Location = New System.Drawing.Point(3, 41)
+        Me.SplitContainer1.Name = "SplitContainer1"
         '
-        'TableLayoutPanel2
+        'SplitContainer1.Panel1
         '
-        Me.TableLayoutPanel2.ColumnCount = 2
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.23188!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.76812!))
-        Me.TableLayoutPanel2.Controls.Add(Me.btnLoad, 0, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.lbFiles, 0, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.btnImportFile, 1, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.lbResult, 1, 1)
-        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
-        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 2
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.287926!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.71207!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(552, 323)
-        Me.TableLayoutPanel2.TabIndex = 1
+        Me.SplitContainer1.Panel1.Controls.Add(Me.gvFiles)
+        Me.SplitContainer1.Panel1.Controls.Add(Me.lbFiles)
+        '
+        'SplitContainer1.Panel2
+        '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.lbResult)
+        Me.SplitContainer1.Size = New System.Drawing.Size(552, 285)
+        Me.SplitContainer1.SplitterDistance = 240
+        Me.SplitContainer1.TabIndex = 3
+        '
+        'gvFiles
+        '
+        Me.gvFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.gvFiles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colName, Me.colBBLE, Me.colStatus, Me.colException})
+        Me.gvFiles.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.gvFiles.Location = New System.Drawing.Point(0, 0)
+        Me.gvFiles.Name = "gvFiles"
+        Me.gvFiles.Size = New System.Drawing.Size(240, 285)
+        Me.gvFiles.TabIndex = 2
+        '
+        'colName
+        '
+        Me.colName.HeaderText = "File Name"
+        Me.colName.Name = "colName"
+        '
+        'colBBLE
+        '
+        Me.colBBLE.HeaderText = "BBLE"
+        Me.colBBLE.Name = "colBBLE"
+        '
+        'colStatus
+        '
+        Me.colStatus.HeaderText = "Status"
+        Me.colStatus.Name = "colStatus"
+        '
+        'colException
+        '
+        Me.colException.HeaderText = "Exception"
+        Me.colException.Name = "colException"
         '
         'lbFiles
         '
-        Me.lbFiles.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lbFiles.FormattingEnabled = True
-        Me.lbFiles.Location = New System.Drawing.Point(3, 33)
+        Me.lbFiles.Location = New System.Drawing.Point(3, 213)
+        Me.lbFiles.MultiColumn = True
         Me.lbFiles.Name = "lbFiles"
         Me.lbFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
-        Me.lbFiles.Size = New System.Drawing.Size(193, 287)
+        Me.lbFiles.Size = New System.Drawing.Size(127, 69)
         Me.lbFiles.TabIndex = 1
-        '
-        'btnImportFile
-        '
-        Me.btnImportFile.Location = New System.Drawing.Point(202, 3)
-        Me.btnImportFile.Name = "btnImportFile"
-        Me.btnImportFile.Size = New System.Drawing.Size(75, 23)
-        Me.btnImportFile.TabIndex = 2
-        Me.btnImportFile.Text = "Import"
-        Me.btnImportFile.UseVisualStyleBackColor = True
         '
         'lbResult
         '
         Me.lbResult.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lbResult.FormattingEnabled = True
-        Me.lbResult.Location = New System.Drawing.Point(202, 33)
+        Me.lbResult.Location = New System.Drawing.Point(0, 0)
         Me.lbResult.Name = "lbResult"
-        Me.lbResult.Size = New System.Drawing.Size(347, 287)
+        Me.lbResult.Size = New System.Drawing.Size(308, 285)
         Me.lbResult.TabIndex = 3
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.btnImportLogs)
+        Me.Panel2.Controls.Add(Me.btnGetBBLE)
+        Me.Panel2.Controls.Add(Me.btnLoad)
+        Me.Panel2.Controls.Add(Me.btnImportFile)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(3, 3)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(552, 38)
+        Me.Panel2.TabIndex = 2
+        '
+        'btnGetBBLE
+        '
+        Me.btnGetBBLE.Location = New System.Drawing.Point(86, 3)
+        Me.btnGetBBLE.Name = "btnGetBBLE"
+        Me.btnGetBBLE.Size = New System.Drawing.Size(75, 32)
+        Me.btnGetBBLE.TabIndex = 3
+        Me.btnGetBBLE.Text = "BBLE"
+        Me.btnGetBBLE.UseVisualStyleBackColor = True
+        '
+        'btnLoad
+        '
+        Me.btnLoad.Location = New System.Drawing.Point(5, 3)
+        Me.btnLoad.Name = "btnLoad"
+        Me.btnLoad.Size = New System.Drawing.Size(75, 32)
+        Me.btnLoad.TabIndex = 0
+        Me.btnLoad.Text = "Load Files"
+        Me.btnLoad.UseVisualStyleBackColor = True
+        '
+        'btnImportFile
+        '
+        Me.btnImportFile.Location = New System.Drawing.Point(248, 3)
+        Me.btnImportFile.Name = "btnImportFile"
+        Me.btnImportFile.Size = New System.Drawing.Size(75, 32)
+        Me.btnImportFile.TabIndex = 2
+        Me.btnImportFile.Text = "Import"
+        Me.btnImportFile.UseVisualStyleBackColor = True
+        '
+        'btnImportLogs
+        '
+        Me.btnImportLogs.Location = New System.Drawing.Point(167, 3)
+        Me.btnImportLogs.Name = "btnImportLogs"
+        Me.btnImportLogs.Size = New System.Drawing.Size(75, 32)
+        Me.btnImportLogs.TabIndex = 4
+        Me.btnImportLogs.Text = "Import Logs"
+        Me.btnImportLogs.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -511,7 +585,12 @@ Partial Class Troubleshooting
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.TabPage3.ResumeLayout(False)
-        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.SplitContainer1.Panel1.ResumeLayout(False)
+        Me.SplitContainer1.Panel2.ResumeLayout(False)
+        CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SplitContainer1.ResumeLayout(False)
+        CType(Me.gvFiles, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -539,7 +618,6 @@ Partial Class Troubleshooting
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents txtRecycleDate As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
     Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
     Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
@@ -553,8 +631,17 @@ Partial Class Troubleshooting
     Friend WithEvents cbTeams As System.Windows.Forms.ComboBox
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents btnLoad As System.Windows.Forms.Button
-    Friend WithEvents TableLayoutPanel2 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents lbFiles As System.Windows.Forms.ListBox
     Friend WithEvents btnImportFile As System.Windows.Forms.Button
     Friend WithEvents lbResult As System.Windows.Forms.ListBox
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents btnGetBBLE As System.Windows.Forms.Button
+    Friend WithEvents gvFiles As System.Windows.Forms.DataGridView
+    Friend WithEvents colName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colBBLE As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colStatus As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colException As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnImportLogs As System.Windows.Forms.Button
 End Class
