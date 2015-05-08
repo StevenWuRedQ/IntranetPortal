@@ -53,6 +53,20 @@ Public Class ShortSalePage
                 End If
             End If
 
+            If Not String.IsNullOrEmpty(Request.QueryString("bble")) Then
+                Dim bble = Request.QueryString("bble").ToString
+                BindCaseData2(bble)
+
+                ASPxSplitter1.Panes("listPanel").Collapsed = True
+                contentSplitter.ClientVisible = True
+
+                If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
+                    Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                                    String.Format("GetShortSaleData({0});", ShortSaleCaseData.CaseId) & "</script>"
+                    Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
+                End If
+            End If
+
             If Not String.IsNullOrEmpty(Request.QueryString("CaseId")) Then
                 Dim caseId = CInt(Request.QueryString("CaseId"))
                 BindCaseData(caseId)
@@ -66,6 +80,7 @@ Public Class ShortSalePage
                     Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)
                 End If
             End If
+
 
             If Not String.IsNullOrEmpty(Request.QueryString("ShowList")) Then
                 ASPxSplitter1.Panes("listPanel").Collapsed = False
@@ -188,6 +203,14 @@ Public Class ShortSalePage
 
     Private Sub BindCaseData2(bble As String)
         ShortSaleCaseData = ShortSaleCase.GetCaseByBBLE(bble)
+
+        If ShortSaleCaseData Is Nothing Then
+            Response.Clear()
+            Response.Write("This leads isnot in Short Sale. Please check!")
+            Response.End()
+            Return
+        End If
+
         contentSplitter.ClientVisible = True
         ShortSaleOverVew.BindData(ShortSaleCaseData)
         ucTitle.BindData(ShortSaleCaseData)
