@@ -177,6 +177,15 @@
                                     </td>
                                 </tr>--%>
                                 <tr class="vendor_info">
+                                    <td class="vendor_info_left">Company Name
+                                    </td>
+                                    <td>
+                                        <div class="detail_right">
+                                            <input class="form-control contact_info_eidt" ng-model="currentContact.CorpName" placeholder="Click to input">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="vendor_info">
                                     <td class="vendor_info_left">Office
                                     </td>
                                     <td>
@@ -250,7 +259,7 @@
     <!-- Angular Material Javascript using RawGit to load directly from `bower-material/master` -->
     <script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="/Scripts/PortalApp.js"></script>
+    <script src="/Scripts/PortalApp.js?v=1.3"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

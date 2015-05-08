@@ -194,6 +194,15 @@ Partial Public Class UCTitleSummary
     Protected WithEvents ShortSaleSubMenu As Global.IntranetPortal.ShortSaleSubMenu
 
     '''<summary>
+    '''chkFields control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkFields As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
+
+    '''<summary>
     '''notesCallbackPanel control.
     '''</summary>
     '''<remarks>

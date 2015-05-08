@@ -306,7 +306,7 @@
         show_pie_chart($.parseJSON(e.result))
     }
     function ChangeDataSource() {
-        var ds = eval('<% ChartSource()%>');
+        var ds = eval('<%= ChartSource()%>');
         show_bar_chart(ds);
     }
     function change_x_axis_complete(s, e) {

@@ -98,6 +98,7 @@ Public Class UCTitleSummary
         'Bind All Leads Grid
         AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase()
         AllLeadsGrid.DataBind()
+        RefreshGrid()
     End Sub
 
 #Region "Bind Datagridview"
@@ -397,4 +398,16 @@ Public Class UCTitleSummary
     '        AllLeadsGrid.AutoFilterByColumn(AllLeadsGrid.Columns("PropertyInfo.StreetName"), QuickSearch.Value)
     '    End If
     'End Sub  
+    Private Sub RefreshGrid()
+        Dim showColumn = chkFields.SelectedValues
+        For Each c In AllLeadsGrid.AllColumns
+            Dim column = CType(c, GridViewDataTextColumn)
+            c.Visible = showColumn.Contains(column.FieldName)
+
+        Next
+     
+    End Sub
+    Protected Sub AllLeadsGrid_OnCustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs)
+        RefreshGrid()
+    End Sub
 End Class

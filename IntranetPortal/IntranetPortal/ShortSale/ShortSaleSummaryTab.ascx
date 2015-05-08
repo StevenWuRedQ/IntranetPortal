@@ -49,7 +49,7 @@
                             <span class="box_text">Yes </span>
                         </label>
 
-                        <input type="radio" id="pdf_check_no" name="1" <%= ShortSalePage.CheckBox( Not summaryCase.PropertyInfo.CO)%> value="NO" class="ss_form_input">
+                        <input type="radio" id="pdf_check_no" name="1" <%= ShortSalePage.CheckBox(summaryCase.PropertyInfo.CO = False)%> value="NO" class="ss_form_input">
                         <label for="pdf_check_no" class="input_with_check">
                             <span class="box_text">No </span>
                         </label>
@@ -65,7 +65,7 @@
 
                 </ul>
             </div>
-           
+
             <%--<div data-array-index="0" data-field="PropertyInfo.Owners" class="ss_array" style="display: none">--%>
             <%Dim i = 0%>
             <%For Each owner As PropertyOwner In summaryCase.PropertyInfo.Owners%>
@@ -153,11 +153,13 @@
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Mortgage Type</label>
 
-                            <select class="ss_form_input">
+                            <select class="ss_form_input" data-item="Type" data-item-type="1">
                                 <option value=""></option>
                                 <option value="Fannie">Fannie</option>
                                 <option value="FHA">FHA</option>
                                 <option value="Freddie Mac">Freddie Mac</option>
+                                <option value="Conventional">Conventional</option>
+                                <option value="Private">Private</option>
 
                             </select>
 

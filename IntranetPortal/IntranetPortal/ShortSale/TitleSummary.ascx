@@ -35,7 +35,7 @@
     }
     function initScrollbar_summary() {
 
-       
+
     }
 
     $(document).ready(function () {
@@ -499,18 +499,18 @@
                                                 <asp:LinkButton ID="ExportExcel" OnClick="ExportExcel_Click" runat="server" Text='<i class="fa fa-file-excel-o report_head_button report_head_button_padding tooltip-examples" ></i>'></asp:LinkButton>
                                                 <asp:LinkButton ID="ExportPdf" OnClick="ExportPdf_Click" runat="server" Text='<i class="fa fa-file-pdf-o report_head_button report_head_button_padding tooltip-examples" style="margin-right: 40px;"></i>'></asp:LinkButton>
                                             </div>
-                                            <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="8" KeyFieldName="CaseId" Width="100%" Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300" ForeColor="#b1b2b7" Settings-HorizontalScrollBarMode="Auto">
+                                            <dx:ASPxGridView ID="AllLeadsGrid" runat="server" ClientInstanceName="AllLeadsGridClient" SettingsPager-PageSize="8" KeyFieldName="CaseId" Width="100%" Settings-VerticalScrollBarMode="Auto" Settings-VerticalScrollableHeight="300" ForeColor="#b1b2b7" Settings-HorizontalScrollBarMode="Auto" OnCustomCallback="AllLeadsGrid_OnCustomCallback">
                                                 <Styles>
                                                     <Row CssClass="summary_row">
                                                     </Row>
                                                 </Styles>
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Street address" SortOrder="Ascending" Width="430px">
+                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Street address" SortOrder="Ascending" Width="100%">
                                                         <DataItemTemplate>
                                                             <div style="cursor: pointer; width: 600px" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
                                                         </DataItemTemplate>
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="OwnerLastName" Caption="Name">
+                                                    <dx:GridViewDataTextColumn  FieldName="OwnerLastName" Caption="Name">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
                                                     </dx:GridViewDataTextColumn>
@@ -522,13 +522,12 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="SencondMortageLender" Caption="2nd Mort Ser">
                                                     </dx:GridViewDataTextColumn>
-                                                    <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City"  Caption="Office Price">                                                 
-                                                </dx:GridViewDataTextColumn>--%>
+
                                                     <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name" Caption="Listing agent">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="Manager" Caption="Manager">
+                                                    <dx:GridViewDataTextColumn FieldName="Manager">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="PropertyInfo.UpdateDate" Width="120px" Caption="Last Activity">
                                                         <DataItemTemplate>
@@ -540,13 +539,12 @@
                                                     <dx:GridViewDataTextColumn FieldName="BBLE" Width="75px" Caption="Comments">
                                                         <DataItemTemplate>
                                                             <div style="text-align: center; width: 100%">
-                                                                <i class="fa fa-info-circle tooltip-examples icon_btn" style="font-size: 18px" data-toggle="tooltip" data-placement="bottom" data-html="true" title='<%# IntranetPortal.LeadsActivityLog.GetLastComments(Eval("BBLE"))%>'></i>
+                                                                <i class="fa fa-info-circle tooltip-examples icon_btn" style="font-size: 18px" data-toggle="tooltip" data-placement="bottom" title='<%# IntranetPortal.LeadsActivityLog.GetLastComments(Eval("BBLE"))%>'></i>
                                                             </div>
 
                                                         </DataItemTemplate>
                                                     </dx:GridViewDataTextColumn>
-                                                    <%--<dx:GridViewDataTextColumn FieldName="PropertyInfo.City" Caption="Next Task" >                                                 
-                                                </dx:GridViewDataTextColumn>--%>
+
                                                 </Columns>
                                                 <Settings ShowHeaderFilterButton="true" />
                                                 <SettingsPager>
@@ -555,9 +553,9 @@
                                                 <SettingsPopup>
                                                     <HeaderFilter Height="200" />
                                                 </SettingsPopup>
-                                                
+
                                             </dx:ASPxGridView>
-                                            
+
                                             <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
                                         </div>
                                     </div>
@@ -584,9 +582,68 @@
 </dx:ASPxSplitter>
 <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
 <div id="right-pane-container" class="clearfix">
-    <div id="right-pane-button"></div>
+    <div id="right-pane-button" class="right-pane_custom_reports"></div>
     <div id="right-pane">
         <div style="height: 100%; background: #EFF2F5;">
+            <div style="width: 310px; background: #f5f5f5" class="agent_layout_float">
+                <div style="margin-left: 30px; margin-top: 30px; margin-right: 20px; font-size: 24px; float: none;">
+
+                    <div>
+
+                        <div style="padding-top: 19px; padding-bottom: 14px;" class="border_under_line">
+                            <span style="color: #234b60">Custom Fields</span>
+                            <i class="fa fa-question-circle tooltip-examples" title="Check items view the customized report." style="color: #999ca1; float: right; margin-top: 3px"></i>
+                        </div>
+
+                        <div style="margin-top: 20px; overflow: auto; height: 346px;" id="custom_fields_div">
+
+                            <script type="text/javascript">
+                                function Fields_ValueChanged(s, e) {
+                                    
+
+                                    AllLeadsGridClient.PerformCallback();
+                                    
+                                }
+                            </script>
+                            <div>
+                                <div class="color_gray upcase_text" style="font-size: 12px; padding-bottom: 10px;">Category </div>
+                                <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" Width="100%" ClientInstanceName="filed_CheckBoxList1">
+                                    <Items>
+
+                                        <dx:ListEditItem Value="PropertyInfo.PropertyAddress" Text="Street address" Selected="True"/>
+
+                                        <dx:ListEditItem Value="OwnerLastName" Text="Name" Selected="True"/>
+
+                                        <dx:ListEditItem Value="OccupiedBy" Text="Occupancy" />
+
+                                        <dx:ListEditItem Value="FristMortageProgress" Text="1st Mort Prog" />
+
+                                        <dx:ListEditItem Value="FristMortageLender" Text="1st Mort Ser " />
+
+                                        <dx:ListEditItem Value="SencondMortageProgress" Text="2nd Mort Prog" />
+
+                                        <dx:ListEditItem Value="SencondMortageLender" Text="2nd Mort Ser" />
+                                        <dx:ListEditItem Value="ProcessorContact.Name" Text="Processor" />
+                                        <dx:ListEditItem Value="ListingAgentContact.Name" Text="Listing agent" />
+                                        <dx:ListEditItem Value="Manager" Text="Manager"/>
+                                        <dx:ListEditItem Value="PropertyInfo.UpdateDate" Text="Last Activity" />
+                                        <dx:ListEditItem Value="Owner" Text="Assgin To" />
+                                        <dx:ListEditItem Value="BBLE" Text="Comments" />
+
+
+                                    </Items>
+                                    <%--<CheckBoxStyle  BackgroundImage-ImageUrl="../images/icon_checked_box.png"/>--%>
+                                    <%--<CheckedImage Url="../images/icon_checked_box.png"></CheckedImage>--%>
+                                    <ClientSideEvents SelectedIndexChanged="Fields_ValueChanged" />
+                                </dx:ASPxCheckBoxList>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="height: 100%; background: #EFF2F5; display: none">
             <div style="width: 100%; height: 100%;">
                 <div style="height: 70px;">
                     <div style="color: #b2b4b7; padding-top: 35px; margin-left: 26px; font-size: 30px; font-weight: 300;">Notes</div>
@@ -594,7 +651,7 @@
                 <dx:ASPxCallbackPanel runat="server" ID="notesCallbackPanel" ClientInstanceName="notesCallbackPanel" OnCallback="notesCallbackPanel_Callback">
                     <PanelCollection>
                         <dx:PanelContent>
-                            <div style="background: #f53e0d; color: white; min-height: 270px; margin-top: 35px">
+                            <div style="background: #f53e0d; color: white; min-height: 270px; margin-top: 35px;">
                                 <div style="margin-left: 30px; margin-right: 15px; padding-bottom: 30px">
                                     <h2 style="font-size: 30px; font-weight: 400; margin: 0px; padding-top: 35px; padding-bottom: 35px;">
                                         <dx:ASPxMemo runat="server" ID="txtTitle" CssClass="notesTitleStyle" BackColor="Transparent" Border-BorderColor="Transparent" Font-Size="30px" ForeColor="White" NullText="Input Title" Height="35px" MaxLength="50">

@@ -80,12 +80,14 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Mortgage Type</label>
 
-                    <select class="ss_form_input">
+                    <select class="ss_form_input" data-item="Type" data-item-type="1">
                         <option value=""> </option>
                         <option value="Fannie">Fannie</option>
                         <option value="FHA">FHA</option>
                         <option value="Freddie Mac">Freddie Mac</option>
-
+                        <option value="Conventional">Conventional</option>
+                        <option value="Private">Private</option>
+                        
                     </select>
 
                 </li>
@@ -102,16 +104,7 @@
                     <label class="ss_form_input_title"># of Families</label>
                     <input class="ss_form_input" data-field="PropertyInfo.NumOfFamilies">
                 </li>
-                <li class="ss_form_item ss_mortages_stauts">
-                    <label class="ss_form_input_title">Type</label>
-                    <select class="ss_form_input " data-item="Type" data-item-type="1">
-                        <option value=""></option>
-                        <option value="Ready for Submission">FHA</option>
-                        <option value="Ready for Submission">FANNIE MAE</option>
-                        <option value="Ready for Submission">FREDDIE MAC</option>
-                    </select>
-
-                </li>
+               
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Counter Offer</label>
                     <input class="ss_form_input" data-field="CounterOffer">

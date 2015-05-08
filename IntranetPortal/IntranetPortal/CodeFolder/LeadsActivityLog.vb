@@ -86,7 +86,8 @@
         Using Context As New Entities
             Dim log = Context.LeadsActivityLogs.Where(Function(lg) lg.BBLE = bble).OrderByDescending(Function(lg) lg.ActivityDate).FirstOrDefault
             If log IsNot Nothing Then
-                Return log.Comments
+
+                Return Utility.RemoveHtmlTags(log.Comments)
             End If
 
             Return ""

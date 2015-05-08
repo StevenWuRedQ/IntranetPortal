@@ -53,7 +53,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2" style="text-align:center;padding:2px;"">
+                                    <td colspan="2" style="text-align:center;padding:2px;">
                                         <dx:ASPxButton ID="btnLogin" runat="server" Text="Log In" ValidationGroup="LoginUserValidationGroup"
                                             OnClick="btnLogin_Click">
                                         </dx:ASPxButton>

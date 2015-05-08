@@ -293,38 +293,7 @@ Public Class AgentOverview
         Next
     End Sub
 
-    Protected Sub init_grid_by_items(collectItems As ListEditItemCollection, isAdd As Boolean)
-        If collectItems.Count > 0 Then
-            For Each item As ListEditItem In collectItems
-                Dim gridCol = New GridViewDataColumn
-                If Not isAdd Then
-                    gridCol = gridReport.Columns(item.Value)
-
-                    If gridCol Is Nothing Then
-                        gridCol = New GridViewDataColumn
-                        gridCol.FieldName = item.Value
-                    End If
-                Else
-                    gridCol.FieldName = item.Value
-                End If
-
-                If item.Selected Then
-                    gridCol.Visible = True
-                    If gridReport.Columns(item.Value) Is Nothing Then
-                        gridReport.Columns.Add(gridCol)
-                    End If
-                Else
-                    If gridReport.Columns(item.Value) IsNot Nothing Then
-                        gridReport.Columns.Remove(gridCol)
-                    End If
-                End If
-
-                If isAdd Then
-                    'gridReport.Columns.Add(gridCol)
-                End If
-            Next
-        End If
-    End Sub
+   
 
     Public _allEmps As List(Of Employee)
     Public Function allEmpoyeeName() As List(Of Employee)

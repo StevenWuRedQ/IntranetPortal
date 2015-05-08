@@ -5,6 +5,17 @@
     return name[0].toUpperCase();
 }
 
+Array.prototype.getUnique = function () {
+    var u = {}, a = [];
+    for (var i = 0, l = this.length; i < l; ++i) {
+        if (u.hasOwnProperty(this[i])) {
+            continue;
+        }
+        a.push(this[i]);
+        u[this[i]] = 1;
+    }
+    return a;
+}
 function groupBy(array, f) {
     var groups = {};
     array.forEach(function (o) {
@@ -93,7 +104,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
         });
 
     $http.post('/CallBackServices.asmx/GetLenderList', {}).success(function (data, status) {
-        $scope.lenderList = data.d;
+        $scope.lenderList = data.d.getUnique();
     });
 
     $scope.predicate = "Name";

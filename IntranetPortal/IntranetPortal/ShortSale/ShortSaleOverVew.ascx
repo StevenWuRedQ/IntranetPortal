@@ -226,13 +226,18 @@
                                             </li>
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">MLS Status</label>
-                                                <select class="ss_form_input">
-                                                    <option>MLS status 1</option>
-                                                    <option>MLS status 2</option>
+                                                <select class="ss_form_input" data-field="MLSStatus">
+                                                    <option>NYS MLS</option>
+                                                    <option>MLS LI </option>
+                                                    <option>Brooklyn MLS</option>
                                                 </select>
                                             </li>
                                             <li class="ss_form_item">
-                                                <label class="ss_form_input_title">Expiration Date</label>
+                                                <label class="ss_form_input_title">Listing Date</label>
+                                                 <input class="ss_form_input ss_date" data-field="ListingDate" >
+                                            </li>
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">Listing Expiry Date</label>
                                                 <input class="ss_form_input ss_date" data-field="ListingExpireDate">
                                             </li>
                                             <li class="ss_form_item">
@@ -302,9 +307,11 @@
                                                 <dx:GridViewDataComboBoxColumn FieldName="Method" Width="150px">
                                                     <PropertiesComboBox Native="true" Style-CssClass="form-control">
                                                         <Items>
-                                                            <dx:ListEditItem Value="Appraisal" Text="Appraisal" />
-                                                            <dx:ListEditItem Value="BPO" Text="BPO" />
-                                                            <dx:ListEditItem Value="Desktop Review" Text="Desktop Review" />
+                                                            <dx:ListEditItem Value="Exterior Appraisal" Text="Exterior Appraisal" />
+                                                            <dx:ListEditItem Value="Interior Appraisal" Text="Interior Appraisal" />
+                                                            <dx:ListEditItem Value="Exterior BPO" Text="Exterior BPO" />
+                                                            <dx:ListEditItem Value="Interior BPO" Text="Interior BPO" />
+                                                           
                                                         </Items>
                                                     </PropertiesComboBox>
                                                 </dx:GridViewDataComboBoxColumn>

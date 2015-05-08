@@ -36,7 +36,7 @@ Public Class CallBackServices
     End Function
     <WebMethod()> _
     Public Function GetLenderList() As List(Of String)
-        Dim l = PartyContact.GetContactByType(PartyContact.ContactType.Lender).Where(Function(c) c.CorpName IsNot Nothing).Select(Function(c) c.CorpName).ToList()
+        Dim l = PartyContact.GetContactByType(PartyContact.ContactType.Lender).Where(Function(c) c.CorpName IsNot Nothing).Select(Function(c) c.CorpName).Distinct().ToList()
         Return l
     End Function
 End Class
