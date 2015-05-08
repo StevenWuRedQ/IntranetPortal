@@ -38,5 +38,6 @@ Partial Public Class PropertyMortgage
     Public Property CounterOffer As String
     Public Property PayoffExpired As Nullable(Of Date)
     Public Property LoanType As String
+    Public Property Type As String
 
 End Class

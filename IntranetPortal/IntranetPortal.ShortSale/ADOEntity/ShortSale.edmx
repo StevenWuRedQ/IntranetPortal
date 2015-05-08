@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CleareneceNotes">
           <Key>
             <PropertyRef Name="NoteId" />
@@ -142,6 +142,7 @@
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="LenderContactId" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PropertyOccupants">
           <Key>
@@ -279,6 +280,7 @@
           <Property Name="CallbackDate" Type="datetime" />
           <Property Name="ListMLS" Type="nvarchar" MaxLength="50" />
           <Property Name="MLSStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="ListingDate" Type="datetime" />
           <Property Name="ListingExpireDate" Type="datetime" />
           <Property Name="Lockbox" Type="nvarchar" MaxLength="50" />
           <Property Name="ListPrice" Type="decimal" Precision="18" Scale="2" />
@@ -453,6 +455,7 @@
           <Property Name="CounterOffer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="PayoffExpired" Type="DateTime" Precision="3" />
           <Property Name="LoanType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -535,6 +538,7 @@
           <Property Name="ListPrice" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OfferSubmited" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OfferDate" Type="DateTime" Precision="3" />
+          <Property Name="ListingDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>
@@ -764,6 +768,7 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="LoanType" ColumnName="LoanType" />
                 <ScalarProperty Name="PayoffExpired" ColumnName="PayoffExpired" />
                 <ScalarProperty Name="CounterOffer" ColumnName="CounterOffer" />
@@ -844,6 +849,7 @@
           <EntitySetMapping Name="ShortSaleCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCase">
               <MappingFragment StoreEntitySet="ShortSaleCases">
+                <ScalarProperty Name="ListingDate" ColumnName="ListingDate" />
                 <ScalarProperty Name="OfferDate" ColumnName="OfferDate" />
                 <ScalarProperty Name="OfferSubmited" ColumnName="OfferSubmited" />
                 <ScalarProperty Name="ListPrice" ColumnName="ListPrice" />

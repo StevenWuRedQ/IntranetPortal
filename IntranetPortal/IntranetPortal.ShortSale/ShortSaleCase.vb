@@ -15,6 +15,24 @@ Partial Public Class ShortSaleCase
 #End Region
 
 #Region "Properties"
+
+    Private _statuStr As String
+
+    Public ReadOnly Property StatuStr As String
+        Get
+            If _statuStr Is Nothing Then
+                Try
+                    Dim caseStatusE = CType(Status, CaseStatus)
+                    _statuStr = caseStatusE.ToString()
+                Catch ex As Exception
+
+                End Try
+
+            End If
+            Return _statuStr
+        End Get
+    End Property
+
     Private _propInfo As PropertyBaseInfo
     Public ReadOnly Property PropertyInfo As PropertyBaseInfo
         Get
