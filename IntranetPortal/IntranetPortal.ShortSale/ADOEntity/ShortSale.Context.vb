@@ -37,5 +37,6 @@ Partial Public Class ShortSaleEntities
     Public Overridable Property EvictionCases() As DbSet(Of EvictionCas)
     Public Overridable Property PropertyValueInfoes() As DbSet(Of PropertyValueInfo)
     Public Overridable Property Employees() As DbSet(Of Employee)
+    Public Overridable Property ShortSaleActivityLogs() As DbSet(Of ShortSaleActivityLog)
 
 End Class

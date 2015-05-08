@@ -51,7 +51,7 @@
             <PropertyRef Name="ContactId" />
           </Key>
           <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
           <Property Name="OfficeNO" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="CorpName" Type="nvarchar" MaxLength="50" />
@@ -230,6 +230,19 @@
           <Property Name="DateOfValue" Type="datetime" />
           <Property Name="ExpiredOn" Type="datetime" />
         </EntityType>
+        <EntityType Name="ShortSaleActivityLogs">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" />
+          <Property Name="ActivityDate" Type="datetime" />
+          <Property Name="Source" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActivityType" Type="nvarchar" MaxLength="256" />
+          <Property Name="ActivityTitle" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Shared" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="ShortSaleCaseComments">
           <Key>
             <PropertyRef Name="CommentId" />
@@ -335,6 +348,7 @@
           <EntitySet Name="PropertyOwners" EntityType="Self.PropertyOwners" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyTitles" EntityType="Self.PropertyTitles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PropertyValueInfo" EntityType="Self.PropertyValueInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShortSaleActivityLogs" EntityType="Self.ShortSaleActivityLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleCaseComments" EntityType="Self.ShortSaleCaseComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleCases" EntityType="Self.ShortSaleCases" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleClearences" EntityType="Self.TitleClearences" Schema="dbo" store:Type="Tables" />
@@ -360,6 +374,7 @@
           <EntitySet Name="EvictionCases" EntityType="IntranetPortalModel.EvictionCas" />
           <EntitySet Name="PropertyValueInfoes" EntityType="IntranetPortalModel.PropertyValueInfo" />
           <EntitySet Name="Employees" EntityType="IntranetPortalModel.Employee" />
+          <EntitySet Name="ShortSaleActivityLogs" EntityType="IntranetPortalModel.ShortSaleActivityLog" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -376,7 +391,7 @@
             <PropertyRef Name="ContactId" />
           </Key>
           <Property Name="ContactId" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="OfficeNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CorpName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -678,6 +693,19 @@
           <Property Name="CellPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeSince" Type="DateTime" Precision="0" />
           <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ShortSaleActivityLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="ActivityDate" Type="DateTime" Precision="3" />
+          <Property Name="Source" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActivityType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ActivityTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Shared" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1012,6 +1040,20 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShortSaleActivityLogs">
+            <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleActivityLog">
+              <MappingFragment StoreEntitySet="ShortSaleActivityLogs">
+                <ScalarProperty Name="Shared" ColumnName="Shared" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ActivityTitle" ColumnName="ActivityTitle" />
+                <ScalarProperty Name="ActivityType" ColumnName="ActivityType" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
