@@ -11,7 +11,6 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class PendingAssignLead
-    Public Property ID As Integer
     Public Property BBLE As String
     Public Property EmployeeName As String
     Public Property Status As Nullable(Of Integer)

@@ -64,7 +64,6 @@ Partial Public Class Entities
     Public Overridable Property SearchResults() As DbSet(Of SearchResult)
     Public Overridable Property ApartmentBuildings() As DbSet(Of ApartmentBuilding)
     Public Overridable Property Apartments() As DbSet(Of Apartment)
-    Public Overridable Property Leads_with_last_log() As DbSet(Of Leads_with_last_log)
     Public Overridable Property LatLon_View() As DbSet(Of LatLon_View)
     Public Overridable Property LeadsAssignViews() As DbSet(Of LeadsAssignView)
     Public Overridable Property LeadsAssignView2() As DbSet(Of LeadsAssignView2)
@@ -73,6 +72,7 @@ Partial Public Class Entities
     Public Overridable Property LeadsStatusLogs() As DbSet(Of LeadsStatusLog)
     Public Overridable Property TeamLeadsInZips() As DbSet(Of TeamLeadsInZip)
     Public Overridable Property PendingAssignLeads() As DbSet(Of PendingAssignLead)
+    Public Overridable Property Leads_with_last_log() As DbSet(Of Leads_with_last_log)
 
     Public Overridable Function UpdateEmployeeName(oldName As String, newName As String) As Integer
         Dim oldNameParameter As ObjectParameter = If(oldName IsNot Nothing, New ObjectParameter("OldName", oldName), New ObjectParameter("OldName", GetType(String)))

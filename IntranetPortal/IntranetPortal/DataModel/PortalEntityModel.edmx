@@ -457,9 +457,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.NYC_St_Names' does not have a p
         </EntityType>
         <EntityType Name="PendingAssignLeads">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="BBLE" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="int" />
@@ -1143,7 +1142,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="SearchResults" EntityType="IntranetPortalModel.SearchResult" />
           <EntitySet Name="ApartmentBuildings" EntityType="IntranetPortalModel.ApartmentBuilding" />
           <EntitySet Name="Apartments" EntityType="IntranetPortalModel.Apartment" />
-          <EntitySet Name="Leads_with_last_log" EntityType="IntranetPortalModel.Leads_with_last_log" />
           <EntitySet Name="LatLon_View" EntityType="IntranetPortalModel.LatLon_View" />
           <EntitySet Name="LeadsAssignViews" EntityType="IntranetPortalModel.LeadsAssignView" />
           <EntitySet Name="LeadsAssignView2" EntityType="IntranetPortalModel.LeadsAssignView2" />
@@ -1153,6 +1151,7 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <EntitySet Name="LeadsStatusLogs" EntityType="IntranetPortalModel.LeadsStatusLog" />
           <EntitySet Name="TeamLeadsInZips" EntityType="IntranetPortalModel.TeamLeadsInZip" />
           <EntitySet Name="PendingAssignLeads" EntityType="IntranetPortalModel.PendingAssignLead" />
+          <EntitySet Name="Leads_with_last_log" EntityType="IntranetPortalModel.Leads_with_last_log" />
         </EntityContainer>
         <EntityType Name="Employee">
           <Key>
@@ -1846,22 +1845,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="AptBBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
           <Property Name="BuildingId" Type="Int32" />
         </EntityType>
-        <EntityType Name="Leads_with_last_log">
-          <Key>
-            <PropertyRef Name="BBLE" />
-          </Key>
-          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="PropertyClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Current_Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DeadReason" Type="Int32" />
-          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
-          <Property Name="LastUpdateComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="LatLon_View">
           <Key>
             <PropertyRef Name="BBLE" />
@@ -2046,9 +2029,8 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
         </EntityType>
         <EntityType Name="PendingAssignLead">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="BBLE" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
           <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Status" Type="Int32" />
@@ -2056,6 +2038,22 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Leads_with_last_log">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="PropertyAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Current_Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DeadReason" Type="Int32" />
+          <Property Name="LastUpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdateComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2719,23 +2717,6 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Leads_with_last_log">
-            <EntityTypeMapping TypeName="IntranetPortalModel.Leads_with_last_log">
-              <MappingFragment StoreEntitySet="Leads_with_last_log">
-                <ScalarProperty Name="LastUpdateComments" ColumnName="LastUpdateComments" />
-                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
-                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
-                <ScalarProperty Name="DeadReason" ColumnName="DeadReason" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="Current_Agent" ColumnName="Current Agent" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
-                <ScalarProperty Name="PropertyClass" ColumnName="PropertyClass" />
-                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
-                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="LatLon_View">
             <EntityTypeMapping TypeName="IntranetPortalModel.LatLon_View">
               <MappingFragment StoreEntitySet="LatLon_View">
@@ -2936,7 +2917,23 @@ warning 6002: The table/view 'IntranetPortal.dbo.TeamLeadsInZip' does not have a
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leads_with_last_log">
+            <EntityTypeMapping TypeName="IntranetPortalModel.Leads_with_last_log">
+              <MappingFragment StoreEntitySet="Leads_with_last_log">
+                <ScalarProperty Name="LastUpdateComments" ColumnName="LastUpdateComments" />
+                <ScalarProperty Name="LastUpdateDate" ColumnName="LastUpdateDate" />
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="DeadReason" ColumnName="DeadReason" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Current_Agent" ColumnName="Current Agent" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="PropertyClass" ColumnName="PropertyClass" />
+                <ScalarProperty Name="PropertyAddress" ColumnName="PropertyAddress" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

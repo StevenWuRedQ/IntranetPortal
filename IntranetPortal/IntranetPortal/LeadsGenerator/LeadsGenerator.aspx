@@ -874,6 +874,7 @@
                                                                     <Columns>
                                                                         <dx:GridViewCommandColumn ShowSelectCheckbox="True" VisibleIndex="0" SelectAllCheckboxMode="AllPages">
                                                                         </dx:GridViewCommandColumn>
+                                                                        
                                                                         <dx:GridViewDataColumn FieldName="BBLE" VisibleIndex="0">
                                                                         </dx:GridViewDataColumn>
                                                                         <dx:GridViewDataColumn FieldName="LeadsName" VisibleIndex="1" />

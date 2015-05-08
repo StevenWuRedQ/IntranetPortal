@@ -221,6 +221,7 @@ Public Class LeadsGenerator
             Return
         End If
         Dim maxAdd As Integer = LeadMaxAdd()
+
         Dim selectrows = QueryResultsGrid.GetSelectedFieldValues("BBLE")
         If selectrows.Count <= 0 Then
             Alert("You didn't select leads !")
@@ -233,7 +234,7 @@ Public Class LeadsGenerator
         ' Dim BBlesList = New List(Of String)
         If selectrows.Count <= maxAdd Then
             Using Context As New Entities
-                For Each row In selectrows
+                For Each row As String In selectrows
 
                     'l.EmployeeName = empOffice.Name
                     'l.EmployeeID = empOffice.EmployeeID
@@ -243,7 +244,8 @@ Public Class LeadsGenerator
                     'l.AssignDate = Date.Now
 
 
-                    Dim pa = Context.PendingAssignLeads.Find(row)
+                    Dim pa As PendingAssignLead
+                    pa = Context.PendingAssignLeads.Find(row)
                     If (pa Is Nothing) Then
                         pa = New PendingAssignLead
                         pa.BBLE = row

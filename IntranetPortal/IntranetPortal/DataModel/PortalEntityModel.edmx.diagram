@@ -50,15 +50,15 @@
         <EntityTypeShape EntityType="IntranetPortalModel.SearchResult" Width="1.5" PointX="13.375" PointY="18.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.ApartmentBuilding" Width="1.75" PointX="16.875" PointY="18.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.Apartment" Width="1.5" PointX="10" PointY="21.125" />
-        <EntityTypeShape EntityType="IntranetPortalModel.Leads_with_last_log" Width="1.5" PointX="17.375" PointY="14.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.LatLon_View" Width="1.5" PointX="0.75" PointY="19.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsAssignView" Width="1.5" PointX="19.375" PointY="7.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.LeadsAssignView2" Width="1.5" PointX="19.375" PointY="16.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LeadsAssignView2" Width="1.5" PointX="21.375" PointY="17.625" />
         <EntityTypeShape EntityType="IntranetPortalModel.LeadsInfoView" Width="1.5" PointX="6" PointY="20.375" />
         <EntityTypeShape EntityType="IntranetPortalModel.MapDataSet" Width="1.5" PointX="19.375" PointY="13.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.LeadsStatusLog" Width="1.5" PointX="21.375" PointY="4.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.LeadsStatusLog" Width="2" PointX="21.375" PointY="4.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.TeamLeadsInZip" Width="1.5" PointX="21.375" PointY="8.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PendingAssignLead" Width="1.5" PointX="21.375" PointY="0.75" />
+        <EntityTypeShape EntityType="IntranetPortalModel.Leads_with_last_log" Width="1.5" PointX="21.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
