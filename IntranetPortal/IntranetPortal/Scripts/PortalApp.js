@@ -144,6 +144,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
 
             $scope.currentContact = addContact;
             m_current_contact = $scope.currentContact;
+            $scope.initLenderList();
             //debugger;
         }).
         error(function (data, status, headers, config) {

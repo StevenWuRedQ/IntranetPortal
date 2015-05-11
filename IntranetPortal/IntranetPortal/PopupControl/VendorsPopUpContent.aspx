@@ -275,7 +275,7 @@
     <!-- Angular Material Javascript using RawGit to load directly from `bower-material/master` -->
     <script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="/Scripts/PortalApp.js?v=1.4"></script>
+    <script src="/Scripts/PortalApp.js?v=1.5"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
