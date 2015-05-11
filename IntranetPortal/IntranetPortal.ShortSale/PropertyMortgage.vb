@@ -84,6 +84,20 @@
         End Set
     End Property
 
+    Public Shared _statusData As List(Of MortgageStatusData)
+    Public Shared ReadOnly Property StatusData As List(Of MortgageStatusData)
+        Get
+            If _statusData Is Nothing Then
+                Using ctx As New ShortSaleEntities
+                    _statusData = ctx.MortgageStatusDatas.ToList
+                End Using
+            End If
+
+            Return _statusData
+        End Get
+    End Property
+
+
     Public Property DataStatus As ModelStatus
 
     Public Shared Function GetMortgage(caseId As Integer, loanNum As String) As PropertyMortgage

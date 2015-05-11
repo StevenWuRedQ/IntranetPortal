@@ -92,6 +92,9 @@
     <Compile Include="ADOEntity\EvictionCas.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
+    <Compile Include="ADOEntity\MortgageStatusData.vb">
+      <DependentUpon>ShortSale.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\PartyContact.vb">
       <DependentUpon>ShortSale.tt</DependentUpon>
     </Compile>
