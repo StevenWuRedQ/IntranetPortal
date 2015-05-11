@@ -67,6 +67,7 @@
           <Property Name="Cell" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="120" />
           <Property Name="Type" Type="int" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
@@ -413,6 +414,7 @@
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="Type" Type="Int32" />
+          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyFloor">
           <Key>
@@ -749,6 +751,7 @@
           <EntitySetMapping Name="PartyContacts">
             <EntityTypeMapping TypeName="IntranetPortalModel.PartyContact">
               <MappingFragment StoreEntitySet="PartyContacts">
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
