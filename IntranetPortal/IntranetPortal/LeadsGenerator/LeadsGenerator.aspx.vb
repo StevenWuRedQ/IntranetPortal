@@ -122,7 +122,7 @@ Public Class LeadsGenerator
         End Using
     End Sub
 
-    Protected Sub QueryResultsGrid_HtmlRowPrepared(sender As Object, e As DevExpress.Web.ASPxGridView.ASPxGridViewTableRowEventArgs)
+    Protected Sub QueryResultsGrid_HtmlRowPrepared(sender As Object, e As ASPxGridViewTableRowEventArgs)
         If e.RowType <> GridViewRowType.Data Then
             Return
         End If
@@ -328,7 +328,7 @@ Public Class LeadsGenerator
         '    BindGrid(hfSearchName.Value)
         'End If
 
-        Dim gvCommandButton = CType(e, ASPxGridViewCommandButtonEventArgs)
+
         Dim ag = CType(QueryResultsGrid.GetRow(e.VisibleIndex), Object)
         If ag IsNot Nothing Then
             If Not String.IsNullOrEmpty(ag.AgentInLeads) Then

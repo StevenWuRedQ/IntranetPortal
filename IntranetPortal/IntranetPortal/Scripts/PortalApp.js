@@ -26,7 +26,7 @@ function groupBy(array, f) {
     });
 
 
-    return Object.keys(groups).map(function(group) {
+    return Object.keys(groups).map(function (group) {
         var gropObj = {}
         gropObj.group_text = group.replace(/\"/gi, "");
         gropObj.data = groups[group];
@@ -49,7 +49,7 @@ filter('ByContact', function () {
             return movies;
         }
         angular.forEach(movies, function (value, key) {
-            
+
             if (value.Type == contact.Type) {
                 if (contact.CorpName == '' || contact.CorpName == value.CorpName) {
                     items.out.push(value);
@@ -103,9 +103,13 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
             alert("error get contacts: " + status + " error :" + data.d);
         });
 
-    $http.post('/CallBackServices.asmx/GetLenderList', {}).success(function (data, status) {
-        $scope.lenderList = data.d.getUnique();
-    });
+    $scope.initLenderList = function () {
+        $http.post('/CallBackServices.asmx/GetLenderList', {}).success(function (data, status) {
+            $scope.lenderList = data.d.getUnique();
+        });
+    }
+
+    $scope.initLenderList();
 
     $scope.predicate = "Name";
     $scope.group_text_order = "group_text";
@@ -114,6 +118,10 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
     $scope.query = {};
     $scope.addContactFunc = function () {
         var addType = $scope.query.Type;
+        if (!$scope.addContact || !$scope.addContact.Name) {
+            alert("Please fill vender Name !");
+            return;
+        }
         if (addType != null) {
             $scope.addContact.Type = addType;
 
@@ -152,20 +160,20 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
 
         var text = angular.element(e.currentTarget).html();
         //debugger;
-        if (typeof(type) == 'string') {
+        if (typeof (type) == 'string') {
             $scope.query = {};
             $scope.selectType = text;
             return true;
         } else {
             $scope.query.Type = type;
         }
-       
+
         var corpName = type == 4 && text != 'Lenders' ? text : '';
         $scope.query.CorpName = corpName;
 
 
         $scope.addContact.CorpName = corpName;
-        
+
         $scope.selectType = text;
         return true;
     }
@@ -173,7 +181,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
 
         $http.post("/CallBackServices.asmx/SaveContact", { json: $scope.currentContact }).
         success(function (data, status, headers, config) {
-
+            $scope.initLenderList();
         }).
         error(function (data, status, headers, config) {
             alert("geting SaveCurrent error" + status + "error:" + JSON.stringify(data.d));

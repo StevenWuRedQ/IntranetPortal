@@ -36,7 +36,7 @@
                             <li class="list-group-item popup_menu_list_item" ng-class="query.Type===4?'popup_menu_list_item_active':''" ng-click="filterContactFunc($event,4)">Lenders</li>
 
                         </ul>
-                        <ul class="list-group" style="box-shadow: none;margin-left: 20px;margin-top: -18px;">
+                        <ul class="list-group" style="box-shadow: none; margin-left: 20px; margin-top: -18px;">
                             <li class="list-group-item popup_menu_list_item" ng-repeat="cropName in lenderList" ng-click="filterContactFunc($event,4)">{{ cropName }}</li>
                         </ul>
                     </div>
@@ -86,6 +86,12 @@
                                                                     <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
                                                                 </dx:ASPxTextBox>
                                                             </li>
+                                                            <li class="ss_form_item">
+                                                                <label class="ss_form_input_title">Extension </label>
+                                                                <%--<input class="ss_form_input"  ng-model="addContact.OfficeNO" />--%>
+                                                               <input class="ss_form_input" ng-model="addContact.Extension" runat="server" />
+                                                            </li>
+
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Cell #</label>
 
@@ -203,6 +209,16 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <tr class="vendor_info">
+                                    <td class="vendor_info_left">Extension
+                                    </td>
+                                    <td>
+                                        <div class="detail_right">
+                                            <input class="form-control contact_info_eidt" ng-model="currentContact.Extension" placeholder="Click to input">
+                                        </div>
+                                    </td>
+                                </tr>
+                                
                                 <%--<tr class="vendor_info">
                                     <td class="vendor_info_left">Employee Since
                                     </td>
@@ -259,7 +275,7 @@
     <!-- Angular Material Javascript using RawGit to load directly from `bower-material/master` -->
     <script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="/Scripts/PortalApp.js?v=1.3"></script>
+    <script src="/Scripts/PortalApp.js?v=1.4"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
