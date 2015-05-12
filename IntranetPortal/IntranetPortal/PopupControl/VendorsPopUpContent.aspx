@@ -17,8 +17,14 @@
     <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
     <!-- Angular Material CSS using RawGit to load directly from `bower-material/master` -->
     <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".ss_phone").mask("(000) 000-0000");
+            
+        });
+    </script>
     <%--<script src="/Scripts/angular.js"></script>--%>
-   
 </head>
 <body ng-controller="PortalCtrl">
     <form id="form1" runat="server">
@@ -81,25 +87,26 @@
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">office #</label>
-                                                                <%--<input class="ss_form_input"  ng-model="addContact.OfficeNO" />--%>
-                                                                <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input ss_phone" Native="true">
+                                                                <input class="ss_form_input ss_phone"  ng-model="addContact.OfficeNO" />
+
+                                                              <%--  <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input ss_phone" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
                                                                     <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
-                                                                </dx:ASPxTextBox>
+                                                                </dx:ASPxTextBox>--%>
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Extension </label>
                                                                 <%--<input class="ss_form_input"  ng-model="addContact.OfficeNO" />--%>
-                                                               <input class="ss_form_input" ng-model="addContact.Extension" runat="server" />
+                                                                <input class="ss_form_input" ng-model="addContact.Extension" runat="server" />
                                                             </li>
 
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Cell #</label>
-
-                                                                <dx:ASPxTextBox runat="server" ID="txtCell" ng-model="addContact.Cell" CssClass="ss_form_input ss_phone" Native="true">
+                                                                <input class="ss_form_input ss_phone"  ng-model="addContact.Cell" />
+                                                                <%--<dx:ASPxTextBox runat="server" ID="txtCell" ng-model="addContact.Cell" CssClass="ss_form_input ss_phone" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
                                                                     <ValidationSettings CausesValidation="false" RequiredField-IsRequired="false" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
-                                                                </dx:ASPxTextBox>
+                                                                </dx:ASPxTextBox>--%>
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">email</label>
@@ -110,6 +117,18 @@
                                                                     </ValidationSettings>
                                                                 </dx:ASPxTextBox>
                                                             </li>
+                                                            <li class="ss_form_item">
+                                                                <label class="ss_form_input_title">Type</label>
+
+                                                                <select class="ss_form_input" ng-model="addContact.Type">
+                                                                    <option value=""></option>
+                                                                    <% For Each v In getVenderTypes()%>
+                                                                    <option value="<%= v.key %>"><%= v.value %> </option>
+                                                                    <% Next%>
+                                                                </select>
+                                                            </li>
+
+
                                                         </ul>
                                                     </div>
                                                     <div class="modal-footer">
@@ -184,6 +203,15 @@
                                     </td>
                                 </tr>--%>
                                 <tr class="vendor_info">
+                                    <td class="vendor_info_left">Name
+                                    </td>
+                                    <td>
+                                        <div class="detail_right">
+                                            <input class="form-control contact_info_eidt" ng-model="currentContact.Name" placeholder="Click to input">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="vendor_info">
                                     <td class="vendor_info_left">Company Name
                                     </td>
                                     <td>
@@ -192,6 +220,7 @@
                                         </div>
                                     </td>
                                 </tr>
+
                                 <tr class="vendor_info">
                                     <td class="vendor_info_left">Office
                                     </td>
@@ -219,7 +248,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                
+
                                 <%--<tr class="vendor_info">
                                     <td class="vendor_info_left">Employee Since
                                     </td>
@@ -245,6 +274,20 @@
                                                 <input class="form-control contact_info_eidt" style="color: #3993c1" ng-model="currentContact.Email" placeholder="Click to input">
                                             </span>
 
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="vendor_info">
+                                    <td class="vendor_info_left">Company Name
+                                    </td>
+                                    <td>
+                                        <div class="detail_right">
+                                            <select class="form-control contact_info_eidt" ng-model="currentContact.Type">
+                                                <option value=""></option>
+                                                <% For Each v In getVenderTypes()%>
+                                                <option value="<%= v.key %>"><%= v.value %> </option>
+                                                <% Next%>
+                                            </select>
                                         </div>
                                     </td>
                                 </tr>
@@ -279,7 +322,7 @@
     <script src="/Scripts/stevenjs.js"></script>
     <script src="/Scripts/PortalApp.js?v=1.5"></script>
     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
-   <%--  <script>
+    <%--  <script>
          $(document).ready(function () {
                  format_input();
              }

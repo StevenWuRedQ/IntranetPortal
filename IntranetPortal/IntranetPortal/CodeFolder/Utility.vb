@@ -46,6 +46,20 @@ Public Class Utility
 
         Return category
     End Function
+    Public Shared Function Enum2Dictinary(cEnum As Type) As Dictionary(Of Integer, String)
+        Dim VenderTypes = New Dictionary(Of Integer, String)
+
+        Dim vals = [Enum].GetValues(cEnum)
+        For Each v In vals
+            VenderTypes.Add(CInt(v), v.ToString())
+        Next
+        Return VenderTypes
+    End Function
+    '<System.Runtime.CompilerServices.Extension> _
+    'Public Shared Function ToDictionary(enum__1 As Type) As Dictionary(Of Integer, String)
+    '    Dim type = enum__1.[GetType]()
+    '    Return [Enum].GetValues(type).Cast(Of Integer)().ToDictionary(Function(e) e, Function(e) [Enum].GetName(type, e))
+    'End Function
 
     Public Shared Function Borough2BoroughName(borough As String) As String
         Dim boroughName = "undefine borough"
