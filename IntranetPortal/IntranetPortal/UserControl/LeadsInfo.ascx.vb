@@ -14,8 +14,6 @@ Public Class LeadsInfo1
             If Not String.IsNullOrEmpty(Request.QueryString("c")) Then
                 CategoryName = Request.QueryString("c")
                 category = Utility.GetLeadStatus(CategoryName)
-               
-              
 
                 If CategoryName = "Door Knock" Then
                     doorKnockMapPanel.Visible = True
