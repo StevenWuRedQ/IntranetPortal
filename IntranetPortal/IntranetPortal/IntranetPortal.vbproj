@@ -735,6 +735,13 @@
       <DependentUpon>TaskSummary.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="EmailTemplate\ShortSaleActivityReport.aspx.designer.vb">
+      <DependentUpon>ShortSaleActivityReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmailTemplate\ShortSaleActivityReport.aspx.vb">
+      <DependentUpon>ShortSaleActivityReport.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="EmailTemplate\TeamActivityReport.aspx.designer.vb">
       <DependentUpon>TeamActivityReport.aspx</DependentUpon>
     </Compile>
@@ -1613,6 +1620,7 @@
     <Content Include="EmailTemplate\ActivitySummary.ascx" />
     <Content Include="EmailTemplate\EmailSummary.aspx" />
     <Content Include="EmailTemplate\TaskSummary.ascx" />
+    <Content Include="EmailTemplate\ShortSaleActivityReport.aspx" />
     <Content Include="EmailTemplate\TeamActivityReport.aspx" />
     <Content Include="images\1_down_picto.png" />
     <Content Include="images\accounting_icon.jpg" />
@@ -2552,7 +2560,9 @@
     <Content Include="My Project\DataSources\System.Data.DataTable.datasource" />
     <Content Include="fonts\icons.ttf" />
     <Content Include="fonts\icons.woff" />
-    <Content Include="EmailTemplate\Web.config" />
+    <Content Include="EmailTemplate\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="AutoDialer\Web.config" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />

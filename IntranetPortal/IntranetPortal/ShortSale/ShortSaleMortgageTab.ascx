@@ -27,7 +27,11 @@
                     <label class="ss_form_input_title">Status</label>
                     <select class="ss_form_input " data-item="Status" data-item-type="1">
                         <option value=""></option>
-                        <option value="Ready for Submission">Ready for Submission</option>
+                        <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
+                            <option value="<%= mortStatus.Name%>"><%= mortStatus.Name%></option>
+                        <% Next%>
+
+                    <%--    <option value="Ready for Submission">Ready for Submission</option>
                         <option value="Pending Service Release">Pending Service Release</option>
                         <option value="Pending Vacancy">Pending Vacancy</option>
                         <option value="Package Submitted">Package Submitted</option>
@@ -49,7 +53,7 @@
                         <option value="Value Dispute">Value Dispute</option>
                         <option value="Marketing W/ Price Reductions">Marketing W/ Price Reductions</option>
                         <option value="Investor Review">Investor Review</option>
-                        <option value="Approved">Approved</option>
+                        <option value="Approved">Approved</option>--%>
                     </select>
 
                 </li>

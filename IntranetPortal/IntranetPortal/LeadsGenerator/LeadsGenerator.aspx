@@ -19,7 +19,6 @@
             var filter = GetSearchFields();
             var scStr = JSON.stringify(removeEmpty(filter)).replace("{", "").replace("}", "");
             $("#Search_scenario").html(scStr);
-
         }
         function GetSearchFields() {
             var filter = {}
@@ -66,7 +65,6 @@
         function popUpSearch() {
             $("#TxtSearchTaskName").val("");
             SaveSearchPopupClient.Show();
-
         }
         function OnSearchSaveClick() {
             var searchTaskName = $("#TxtSearchTaskName").val();

@@ -102,7 +102,7 @@
                                                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick=""></i>
                                                                     </li>
                                                                 </ul>
-                                                                <uc1:SendMail runat="server" ID="SendMail" />
+                                                                <uc1:SendMail runat="server" ID="SendMail" LogCategory="ShortSale" />
                                                                 <div class="tab-content">
                                                                     <%--<uc1:PropertyInfo runat="server" ID="PropertyInfo" />--%>
                                                                     <div class="tab-pane active" id="property_info">

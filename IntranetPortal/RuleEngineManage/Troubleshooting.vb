@@ -20,11 +20,11 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        'IntranetPortal.RulesEngine.TaskSummaryRule.LoadSummaryEmail("Chris Yan")
+        'IntranetPortal.RulesEngine
         'Return
 
         Using client As New PortalService.CommonServiceClient
-            client.SendTaskSummaryEmail(txtName.Text)
+            client.SendShortSaleActivityEmail()
         End Using
     End Sub
 
@@ -465,10 +465,7 @@ Public Class Troubleshooting
         Dim connStr = String.Format("provider=Microsoft.ACE.OLEDB.12.0;" & "data source={0};Extended Properties=Excel 12.0;", fullName)
 
         Using cn As New System.Data.OleDb.OleDbConnection(connStr)
-
             Dim cmd As System.Data.OleDb.OleDbDataAdapter
-
-
             For Each table In GetExcelSheetName(connStr)
                 Dim dt As New DataTable
                 cn.Open()
@@ -478,13 +475,10 @@ Public Class Troubleshooting
                 data.Tables.Add(dt)
                 cn.Close()
             Next
-
         End Using
 
         Return data
     End Function
-
-
 
     Function GetExcelSheetName(connStr As String) As String()
         'Dim cn As System.Data.OleDb.OleDbConnection

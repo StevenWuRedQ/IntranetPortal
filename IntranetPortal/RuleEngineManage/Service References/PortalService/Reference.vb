@@ -53,6 +53,12 @@ Namespace PortalService
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendTeamActivityEmail", ReplyAction:="http://tempuri.org/ICommonService/SendTeamActivityEmailResponse")>  _
         Function SendTeamActivityEmailAsync(ByVal teamName As String) As System.Threading.Tasks.Task
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendShortSaleActivityEmail", ReplyAction:="http://tempuri.org/ICommonService/SendShortSaleActivityEmailResponse")>  _
+        Sub SendShortSaleActivityEmail()
+        
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendShortSaleActivityEmail", ReplyAction:="http://tempuri.org/ICommonService/SendShortSaleActivityEmailResponse")>  _
+        Function SendShortSaleActivityEmailAsync() As System.Threading.Tasks.Task
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -132,6 +138,14 @@ Namespace PortalService
         
         Public Function SendTeamActivityEmailAsync(ByVal teamName As String) As System.Threading.Tasks.Task Implements PortalService.ICommonService.SendTeamActivityEmailAsync
             Return MyBase.Channel.SendTeamActivityEmailAsync(teamName)
+        End Function
+        
+        Public Sub SendShortSaleActivityEmail() Implements PortalService.ICommonService.SendShortSaleActivityEmail
+            MyBase.Channel.SendShortSaleActivityEmail
+        End Sub
+        
+        Public Function SendShortSaleActivityEmailAsync() As System.Threading.Tasks.Task Implements PortalService.ICommonService.SendShortSaleActivityEmailAsync
+            Return MyBase.Channel.SendShortSaleActivityEmailAsync
         End Function
     End Class
 End Namespace

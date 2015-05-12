@@ -21,38 +21,23 @@ Namespace PortalService
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendMessage", ReplyAction:="http://tempuri.org/ICommonService/SendMessageResponse")>  _
         Sub SendMessage(ByVal userName As String, ByVal title As String, ByVal msg As String, ByVal bble As String, ByVal notifyTime As Date, ByVal createBy As String)
         
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendMessage", ReplyAction:="http://tempuri.org/ICommonService/SendMessageResponse")>  _
-        Function SendMessageAsync(ByVal userName As String, ByVal title As String, ByVal msg As String, ByVal bble As String, ByVal notifyTime As Date, ByVal createBy As String) As System.Threading.Tasks.Task
-        
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendEmailByTemplate", ReplyAction:="http://tempuri.org/ICommonService/SendEmailByTemplateResponse")>  _
         Sub SendEmailByTemplate(ByVal userName As String, ByVal templateName As String, ByVal emailData As System.Collections.Generic.Dictionary(Of String, String))
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendEmailByTemplate", ReplyAction:="http://tempuri.org/ICommonService/SendEmailByTemplateResponse")>  _
-        Function SendEmailByTemplateAsync(ByVal userName As String, ByVal templateName As String, ByVal emailData As System.Collections.Generic.Dictionary(Of String, String)) As System.Threading.Tasks.Task
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendEmail", ReplyAction:="http://tempuri.org/ICommonService/SendEmailResponse")>  _
         Sub SendEmail(ByVal userName As String, ByVal subject As String, ByVal body As String)
         
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendEmail", ReplyAction:="http://tempuri.org/ICommonService/SendEmailResponse")>  _
-        Function SendEmailAsync(ByVal userName As String, ByVal subject As String, ByVal body As String) As System.Threading.Tasks.Task
-        
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendTaskSummaryEmail", ReplyAction:="http://tempuri.org/ICommonService/SendTaskSummaryEmailResponse")>  _
         Sub SendTaskSummaryEmail(ByVal userName As String)
-        
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendTaskSummaryEmail", ReplyAction:="http://tempuri.org/ICommonService/SendTaskSummaryEmailResponse")>  _
-        Function SendTaskSummaryEmailAsync(ByVal userName As String) As System.Threading.Tasks.Task
         
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/UpdateLeadsSearchStatus", ReplyAction:="http://tempuri.org/ICommonService/UpdateLeadsSearchStatusResponse")>  _
         Sub UpdateLeadsSearchStatus(ByVal leadsSearchId As Integer, ByVal status As Integer)
         
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/UpdateLeadsSearchStatus", ReplyAction:="http://tempuri.org/ICommonService/UpdateLeadsSearchStatusResponse")>  _
-        Function UpdateLeadsSearchStatusAsync(ByVal leadsSearchId As Integer, ByVal status As Integer) As System.Threading.Tasks.Task
-        
         <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendTeamActivityEmail", ReplyAction:="http://tempuri.org/ICommonService/SendTeamActivityEmailResponse")>  _
         Sub SendTeamActivityEmail(ByVal teamName As String)
         
-        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendTeamActivityEmail", ReplyAction:="http://tempuri.org/ICommonService/SendTeamActivityEmailResponse")>  _
-        Function SendTeamActivityEmailAsync(ByVal teamName As String) As System.Threading.Tasks.Task
+        <System.ServiceModel.OperationContractAttribute(Action:="http://tempuri.org/ICommonService/SendShortSaleActivityEmail", ReplyAction:="http://tempuri.org/ICommonService/SendShortSaleActivityEmailResponse")>  _
+        Sub SendShortSaleActivityEmail()
     End Interface
     
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
@@ -90,48 +75,28 @@ Namespace PortalService
             MyBase.Channel.SendMessage(userName, title, msg, bble, notifyTime, createBy)
         End Sub
         
-        Public Function SendMessageAsync(ByVal userName As String, ByVal title As String, ByVal msg As String, ByVal bble As String, ByVal notifyTime As Date, ByVal createBy As String) As System.Threading.Tasks.Task Implements PortalService.ICommonService.SendMessageAsync
-            Return MyBase.Channel.SendMessageAsync(userName, title, msg, bble, notifyTime, createBy)
-        End Function
-        
         Public Sub SendEmailByTemplate(ByVal userName As String, ByVal templateName As String, ByVal emailData As System.Collections.Generic.Dictionary(Of String, String)) Implements PortalService.ICommonService.SendEmailByTemplate
             MyBase.Channel.SendEmailByTemplate(userName, templateName, emailData)
         End Sub
-        
-        Public Function SendEmailByTemplateAsync(ByVal userName As String, ByVal templateName As String, ByVal emailData As System.Collections.Generic.Dictionary(Of String, String)) As System.Threading.Tasks.Task Implements PortalService.ICommonService.SendEmailByTemplateAsync
-            Return MyBase.Channel.SendEmailByTemplateAsync(userName, templateName, emailData)
-        End Function
         
         Public Sub SendEmail(ByVal userName As String, ByVal subject As String, ByVal body As String) Implements PortalService.ICommonService.SendEmail
             MyBase.Channel.SendEmail(userName, subject, body)
         End Sub
         
-        Public Function SendEmailAsync(ByVal userName As String, ByVal subject As String, ByVal body As String) As System.Threading.Tasks.Task Implements PortalService.ICommonService.SendEmailAsync
-            Return MyBase.Channel.SendEmailAsync(userName, subject, body)
-        End Function
-        
         Public Sub SendTaskSummaryEmail(ByVal userName As String) Implements PortalService.ICommonService.SendTaskSummaryEmail
             MyBase.Channel.SendTaskSummaryEmail(userName)
         End Sub
-        
-        Public Function SendTaskSummaryEmailAsync(ByVal userName As String) As System.Threading.Tasks.Task Implements PortalService.ICommonService.SendTaskSummaryEmailAsync
-            Return MyBase.Channel.SendTaskSummaryEmailAsync(userName)
-        End Function
         
         Public Sub UpdateLeadsSearchStatus(ByVal leadsSearchId As Integer, ByVal status As Integer) Implements PortalService.ICommonService.UpdateLeadsSearchStatus
             MyBase.Channel.UpdateLeadsSearchStatus(leadsSearchId, status)
         End Sub
         
-        Public Function UpdateLeadsSearchStatusAsync(ByVal leadsSearchId As Integer, ByVal status As Integer) As System.Threading.Tasks.Task Implements PortalService.ICommonService.UpdateLeadsSearchStatusAsync
-            Return MyBase.Channel.UpdateLeadsSearchStatusAsync(leadsSearchId, status)
-        End Function
-        
         Public Sub SendTeamActivityEmail(ByVal teamName As String) Implements PortalService.ICommonService.SendTeamActivityEmail
             MyBase.Channel.SendTeamActivityEmail(teamName)
         End Sub
         
-        Public Function SendTeamActivityEmailAsync(ByVal teamName As String) As System.Threading.Tasks.Task Implements PortalService.ICommonService.SendTeamActivityEmailAsync
-            Return MyBase.Channel.SendTeamActivityEmailAsync(teamName)
-        End Function
+        Public Sub SendShortSaleActivityEmail() Implements PortalService.ICommonService.SendShortSaleActivityEmail
+            MyBase.Channel.SendShortSaleActivityEmail
+        End Sub
     End Class
 End Namespace

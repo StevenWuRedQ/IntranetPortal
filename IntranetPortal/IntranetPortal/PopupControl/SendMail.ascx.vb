@@ -4,6 +4,8 @@ Imports DevExpress.Web.ASPxEditors
 Public Class SendMailControl
     Inherits System.Web.UI.UserControl
 
+    Public Property LogCategory As LeadsActivityLog.LogCategory = LeadsActivityLog.LogCategory.SalesAgent
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         EmailBody.Toolbars.Add(Utility.CreateCustomToolbar("Custom"))
         If (Not IsPostBack) Then
@@ -39,7 +41,8 @@ Public Class SendMailControl
 
             Dim mailId = IntranetPortal.Core.EmailService.SendMail(EmailToIDs.Text, EmailCCIDs.Text, EmailSuject.Text, EmailBody.Html, attachments)
             Dim comments = String.Format("{0} send an email.&nbsp;<a href='#' onclick='ShowMailmessage({1})'>Email Message</a>", Page.User.Identity.Name, mailId)
-            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Email.ToString, LeadsActivityLog.EnumActionType.Email)
+            Dim catgorys = String.Join(",", {LogCategory.ToString, LeadsActivityLog.LogCategory.Email.ToString})
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, catgorys, LeadsActivityLog.EnumActionType.Email)
             EmailToIDs.Text = ""
             EmailCCIDs.Text = ""
             EmailSuject.Text = ""

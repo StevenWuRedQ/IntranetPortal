@@ -140,16 +140,6 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="packages.config" />
-    <None Include="Service References\PortalService\CommonService.wsdl" />
-    <None Include="Service References\PortalService\CommonService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\PortalService\CommonService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\PortalService\CommonService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IntranetPortal.Core\IntranetPortal.Core.vbproj">
@@ -168,9 +158,16 @@
     <WCFMetadataStorage Include="Service References\PortalService\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\PortalService\CommonService.disco" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Service References\PortalService\CommonService1.wsdl" />
+    <None Include="Service References\PortalService\CommonService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PortalService\CommonService31.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PortalService\CommonService32.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\PortalService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +182,7 @@
   <ItemGroup>
     <Content Include="DLL\MyIdealProp.Workflow.Client.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.DBPersistence.dll" />
+    <None Include="Service References\PortalService\CommonService1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

@@ -22,4 +22,7 @@ Public Interface ICommonService
     <OperationContract>
     Sub SendTeamActivityEmail(teamName As String)
 
+    <OperationContract>
+    Sub SendShortSaleActivityEmail()
+
 End Interface

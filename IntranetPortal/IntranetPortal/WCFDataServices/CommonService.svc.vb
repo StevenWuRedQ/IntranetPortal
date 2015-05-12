@@ -76,6 +76,32 @@ Public Class CommonService
         IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
     End Sub
 
+    Public Sub SendShortSaleActivityEmail() Implements ICommonService.SendShortSaleActivityEmail
+        Dim ssMgrs = Roles.GetUsersInRole("ShortSale-Manager")
+
+        Dim toAdds = New List(Of String)
+
+        For Each mgr In ssMgrs.Distinct
+            Dim emp = Employee.GetInstance(mgr)
+            If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
+                'toAdds.Add(emp.Email)
+            End If
+        Next
+
+        toAdds.Add("ron@myidealprop.com")
+        toAdds.Add("chris@gvs4u.com")
+
+        Dim emailData As New Dictionary(Of String, String)
+        'emailData.Add("Body", LoadTeamActivityEmail(objTeam))
+        emailData.Add("Date", DateTime.Today.ToString("m"))
+
+        Dim name = String.Format("{1}-ActivityReport-{0:m}.pdf", DateTime.Today, "ShortSale Team")
+        Dim attachment As New System.Net.Mail.Attachment(GetPDf("ShortSale"), name)
+
+        IntranetPortal.Core.EmailService.SendMail(String.Join(";", toAdds.ToArray), "", "TeamActivitySummary", emailData, {attachment})
+
+    End Sub
+
     Private Function GetPDf(name As String) As MemoryStream
         'Using stream As New MemoryStream()
         '    'DemoRichEdit.ExportToPdf(stream)
@@ -100,7 +126,13 @@ Public Class CommonService
 
     Private Function LoadEmailTemplateThroughWeb(name As String) As String
         Dim url = OperationContext.Current.RequestContext.RequestMessage.Headers.To.GetLeftPart(UriPartial.Authority)
-        Dim myRequest As WebRequest = WebRequest.Create(String.Format("{0}/EmailTemplate/TeamActivityReport.aspx?name={1}", url, name))
+        Dim pageLink = String.Format("{0}/EmailTemplate/TeamActivityReport.aspx?name={1}", url, name)
+
+        If name = "ShortSale" Then
+            pageLink = String.Format("{0}/EmailTemplate/ShortSaleActivityReport.aspx", url)
+        End If
+
+        Dim myRequest As WebRequest = WebRequest.Create(pageLink)
         Dim response As HttpWebResponse = CType(myRequest.GetResponse(), HttpWebResponse)
         Dim receiveStream As Stream = response.GetResponseStream()
         ' Pipes the stream to a higher level stream reader with the required encoding format.  

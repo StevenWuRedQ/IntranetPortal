@@ -755,12 +755,10 @@
                 </Panes>
                 <ClientSideEvents PaneCollapsed="function(s,e){}" />
             </dx:ASPxSplitter>
-
-
+            
             <dx:ASPxPopupControl ClientInstanceName="aspxPopupAddPhoneNum" Width="320px" Height="80px" ID="ASPxPopupControl2"
                 HeaderText="Add Phone Number" ShowHeader="false"
                 runat="server" EnableViewState="false" PopupHorizontalAlign="LeftSides" PopupVerticalAlign="Below" EnableHierarchyRecreation="True">
-
                 <ContentCollection>
                     <dx:PopupControlContentControl>
                         <table>

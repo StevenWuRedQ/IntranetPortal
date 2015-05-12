@@ -156,6 +156,12 @@ Public Class AgentActivitySummaryRule
                     Log("AgentActivitySummaryRule Error. TeamName: " & team.Name, ex)
                 End Try
             Next
+
+            Try
+                client.SendShortSaleActivityEmail()
+            Catch ex As Exception
+                Log("AgentActivitySummaryRule Error. TeamName: ShortSale", ex)
+            End Try
         End Using
     End Sub
 End Class
