@@ -1,4 +1,8 @@
-﻿function clickCollapse(e) {
+﻿
+if (typeof $().formatCurrency != 'function') {
+    $.getScript("/Scripts/jquery.formatCurrency-1.1.0.js");
+}
+function clickCollapse(e) {
 
     var buttonClassName = e.className;
     var openClass = "-minus";
@@ -350,7 +354,7 @@ function ss_field_data(elem, value) {
             //d_alert("elem.attr radio id = " + elem.attr("id") + "set value is " + elem.prop("checked"));
             //d_assert(elem.attr("id") == "checkYes_Bankaccount1", "checkYes_Bankaccount1 value is " + value +"getting "+ typeof (value));
             if (typeof (value) != "string") {
-                elem.prop("checked", elem.attr("data-radio") == "Y" ? value : !value)
+                elem.prop("checked", elem.attr("data-radio") == "Y" ? value : !value);
             }
 
         }
@@ -373,10 +377,11 @@ function ss_field_data(elem, value) {
             if (elem.hasClass("ss_date")) {
               
                 if (value != '') {
-                    var t_date = new Date(value);
 
+                    var t_date = new Date(value);
+                   
                     if (t_date != null) {
-                        value = fromatDateString(t_date)
+                        value = fromatDateString(t_date);
                     }
                 }
             }
@@ -391,15 +396,17 @@ function ss_field_data(elem, value) {
     }
     return null;
 }
+
 function onkeyUpSSN(e) {
     var value = $(e).val();
     $(e).val(fromatSSN(value));
 }
+
 function fromatSSN(value) {
     var ssn = value.replace(/[^\d]/g, "");
     var reslut = ""
     if (ssn.length >= 9) {
-        reslut = ssn.substring(0, 3) + "-" + ssn.substring(3, 5) + "-" + ssn.substring(5, 9)
+        reslut = ssn.substring(0, 3) + "-" + ssn.substring(3, 5) + "-" + ssn.substring(5, 9);
     }
 
     if (reslut.length == 0) {
@@ -409,7 +416,7 @@ function fromatSSN(value) {
     return reslut;
 }
 function fromatDateString(date) {
-    var dateString = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
+    var dateString = (date.getUTCMonth() + 1) + '/' + (date.getUTCDate()) + '/' + date.getUTCFullYear();
     if (dateString.indexOf("NaN")>=0)
     {
         return "";

@@ -179,7 +179,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
         return true;
     }
     $scope.SaveCurrent = function () {
-
+       
         $http.post("/CallBackServices.asmx/SaveContact", { json: $scope.currentContact }).
         success(function (data, status, headers, config) {
             $scope.initLenderList();

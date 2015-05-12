@@ -18,6 +18,7 @@
     <!-- Angular Material CSS using RawGit to load directly from `bower-material/master` -->
     <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.css">
     <%--<script src="/Scripts/angular.js"></script>--%>
+   
 </head>
 <body ng-controller="PortalCtrl">
     <form id="form1" runat="server">
@@ -81,7 +82,7 @@
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">office #</label>
                                                                 <%--<input class="ss_form_input"  ng-model="addContact.OfficeNO" />--%>
-                                                                <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input" Native="true">
+                                                                <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input ss_phone" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
                                                                     <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
                                                                 </dx:ASPxTextBox>
@@ -95,7 +96,7 @@
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Cell #</label>
 
-                                                                <dx:ASPxTextBox runat="server" ID="txtCell" ng-model="addContact.Cell" CssClass="ss_form_input" Native="true">
+                                                                <dx:ASPxTextBox runat="server" ID="txtCell" ng-model="addContact.Cell" CssClass="ss_form_input ss_phone" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
                                                                     <ValidationSettings CausesValidation="false" RequiredField-IsRequired="false" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
                                                                 </dx:ASPxTextBox>
@@ -275,7 +276,15 @@
     <!-- Angular Material Javascript using RawGit to load directly from `bower-material/master` -->
     <script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="/Scripts/stevenjs.js"></script>
     <script src="/Scripts/PortalApp.js?v=1.5"></script>
+    <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
+   <%--  <script>
+         $(document).ready(function () {
+                 format_input();
+             }
+         )
+    </script>--%>
     <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
