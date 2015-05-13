@@ -5,7 +5,6 @@ Imports Newtonsoft.Json
 Imports DevExpress.Web.Data
 Imports System.ComponentModel
 
-
 Public Class AssignLeadsPopup
     Inherits System.Web.UI.UserControl
     Public portalDataContext As New Entities
@@ -81,8 +80,6 @@ Public Class AssignLeadsPopup
     Public Shared Function GetLeadsTypeList()
         Dim LeadsTypeList As New List(Of Object)
         Dim types = [Enum].GetValues(GetType(LeadsInfo.LeadsType))
-
-
 
         For Each t As Integer In types
             LeadsTypeList.Add(New With {.Name = CType(t, LeadsInfo.LeadsType).ToString, .Value = t})

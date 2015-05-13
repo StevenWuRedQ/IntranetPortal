@@ -384,6 +384,12 @@ Public Class UCTitleSummary
     End Sub
 
     Protected Sub ExportExcel_Click(sender As Object, e As EventArgs)
+        If AllLeadsGrid.DataSource Is Nothing Then
+            AllLeadsGrid.DataSource = ShortSaleCase.GetAllCase
+            AllLeadsGrid.DataBind()
+        End If
+
+        AllLeadGridViewExporter.FileName = String.Format("All-{0}-{1}-{2}.xlsx", Today.Month, Today.Day, Today.Year)
         AllLeadGridViewExporter.WriteXlsToResponse()
     End Sub
 

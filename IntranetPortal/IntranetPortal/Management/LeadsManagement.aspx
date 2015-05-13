@@ -5,7 +5,6 @@
 <%@ Register Src="~/UserControl/AssignRulesControl.ascx" TagPrefix="uc1" TagName="AssignRulesControl" %>
 <%@ Register Src="~/PopupControl/AssignLeadsPopup.ascx" TagPrefix="uc1" TagName="AssignLeadsPopup" %>
 
-
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <script type="text/javascript">
         var postponedCallbackRequired = false;

@@ -524,7 +524,6 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="SencondMortageLender" Caption="2nd Mort Ser">
                                                     </dx:GridViewDataTextColumn>
-
                                                     <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name" Caption="Listing agent">

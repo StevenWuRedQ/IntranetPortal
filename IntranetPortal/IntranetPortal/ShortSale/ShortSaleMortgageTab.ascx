@@ -1,7 +1,12 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="ShortSaleMortgageTab.ascx.vb" Inherits="IntranetPortal.ShortSaleMortgageTab" %>
 <%@ Import Namespace="IntranetPortal.ShortSale" %>
 
-<div class="clearfix">
+<div class="clearfix" style="margin-bottom: 25px">
+    <label class="ss_form_title" style="font-size: 18px; margin-right: 10px">
+        Sale Date    
+    </label>
+    <input class="ss_form_input ss_date" data-field="SaleDate" style="width: 150px">
+
     <div style="float: right">
         <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
     </div>
@@ -20,18 +25,16 @@
             <%--<h4 class="ss_form_title title_with_line"><span class="title_index title_span">Mortgage __index__</span>  <i class="fa fa-minus-square-o color_blue collapse_btn" onclick="clickCollapse(this, 'mortgage1')"></i> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples" onclick="AddArraryItem(event,this)" title="Add"></i>
             <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" onclick="delete_array_item(this)" title="Delete"></i> 
         </h4>--%>
-
-
             <ul class="ss_form_box clearfix" id="mortgage__index__">
                 <li class="ss_form_item ss_mortages_stauts">
                     <label class="ss_form_input_title">Status</label>
                     <select class="ss_form_input " data-item="Status" data-item-type="1">
                         <option value=""></option>
                         <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
-                            <option value="<%= mortStatus.Name%>"><%= mortStatus.Name%></option>
+                        <option value="<%= mortStatus.Name%>"><%= mortStatus.Name%></option>
                         <% Next%>
 
-                    <%--    <option value="Ready for Submission">Ready for Submission</option>
+                        <%--    <option value="Ready for Submission">Ready for Submission</option>
                         <option value="Pending Service Release">Pending Service Release</option>
                         <option value="Pending Vacancy">Pending Vacancy</option>
                         <option value="Package Submitted">Package Submitted</option>
@@ -85,13 +88,13 @@
                     <label class="ss_form_input_title">Mortgage Type</label>
 
                     <select class="ss_form_input" data-item="Type" data-item-type="1">
-                        <option value=""> </option>
+                        <option value=""></option>
                         <option value="Fannie">Fannie</option>
                         <option value="FHA">FHA</option>
                         <option value="Freddie Mac">Freddie Mac</option>
                         <option value="Conventional">Conventional</option>
                         <option value="Private">Private</option>
-                        
+
                     </select>
 
                 </li>
@@ -108,7 +111,7 @@
                     <label class="ss_form_input_title"># of Families</label>
                     <input class="ss_form_input" data-field="PropertyInfo.NumOfFamilies">
                 </li>
-               
+
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Counter Offer</label>
                     <input class="ss_form_input" data-field="CounterOffer">

@@ -84,12 +84,12 @@ Public Class CommonService
         For Each mgr In ssMgrs.Distinct
             Dim emp = Employee.GetInstance(mgr)
             If emp IsNot Nothing AndAlso emp.Active AndAlso Not String.IsNullOrEmpty(emp.Email) Then
-                'toAdds.Add(emp.Email)
+                toAdds.Add(emp.Email)
             End If
         Next
 
-        toAdds.Add("ron@myidealprop.com")
-        toAdds.Add("chris@gvs4u.com")
+        'toAdds.Add("ron@myidealprop.com")
+        'toAdds.Add("chris@gvs4u.com")
 
         Dim emailData As New Dictionary(Of String, String)
         'emailData.Add("Body", LoadTeamActivityEmail(objTeam))

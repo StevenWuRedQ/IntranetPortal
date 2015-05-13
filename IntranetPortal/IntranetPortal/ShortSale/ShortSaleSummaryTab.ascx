@@ -106,32 +106,10 @@
                             <label class="ss_form_input_title">Status</label>
                             <select class="ss_form_input " data-item="Status" data-item-type="1">
                                 <option value=""></option>
-                                <option value="Ready for Submission">Ready for Submission</option>
-                                <option value="Pending Service Release">Pending Service Release</option>
-                                <option value="Pending Vacancy">Pending Vacancy</option>
-                                <option value="Package Submitted">Package Submitted</option>
-                                <option value="Package Submitted in Equator">Package Submitted in Equator</option>
-                                <option value="Pending BPO Expiration">Pending BPO Expiration</option>
-                                <option value="Processor Assigned">Processor Assigned</option>
-                                <option value="Document Review">Document Review</option>
-                                <option value="Updated Docs Needed">Updated Docs Needed</option>
-                                <option value="Processor BPO Ordered">Processor BPO Ordered</option>
-                                <option value="Processor BPO Schdeduled">Processor BPO Schdeduled</option>
-                                <option value="Processor BPO Completed">Processor BPO Completed</option>
-                                <option value="Negotiator BPO Ordered">Negotiator BPO Ordered</option>
-                                <option value="Negotiator BPO Schdeduled">Negotiator BPO Schdeduled</option>
-                                <option value="Negotiator BPO Completed">Negotiator BPO Completed</option>
-                                <option value="Auction/Hubzu Opt Out">Auction/Hubzu Opt Out</option>
-                                <option value="Negotiator Assigned">Negotiator Assigned</option>
-                                <option value="Offer Review">Offer Review</option>
-                                <option value="Counter Offer">Counter Offer</option>
-                                <option value="Value Dispute">Value Dispute</option>
-                                <option value="Marketing W/ Price Reductions">Marketing W/ Price Reductions</option>
-                                <option value="Investor Review">Investor Review</option>
-                                <option value="Approved">Approved</option>
-
+                                <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
+                                <option value="<%= mortStatus.Name%>"><%= mortStatus.Name%></option>
+                                <% Next%>
                             </select>
-
                         </li>
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Lender</label>

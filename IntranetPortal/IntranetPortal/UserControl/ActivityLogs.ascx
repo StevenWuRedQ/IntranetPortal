@@ -315,7 +315,7 @@
         if (addDate == null)
             addDate = new Date();
 
-        addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" +  $("#selType1").val() + "|" + $("#selStatusUpdate").val());
+        addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate").val());
         EmailBody.SetHtml("");
     }
 
@@ -399,10 +399,9 @@
                         <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
                     <div <%= If(DisplayMode = ActivityLogMode.Leads, "style='display:none'", "")%>>
-
-
                         <div class="color_gray upcase_text">Type of update</div>
                         <select class="select_bootstrap select_margin" id="selType1" onchange="ShortSaleUpdateTypeChange(this)">
+                            <option></option>
                             <option>1st Mortgage</option>
                             <option>2nd Mortgage</option>
                             <option>BPO/Appraisal</option>
@@ -411,31 +410,14 @@
                             <option>Evictions</option>
                         </select>
                         <div class="color_gray upcase_text">Status Update</div>
+                        <% If DisplayMode = ActivityLogMode.ShortSale Then%>
                         <select class="select_bootstrap select_margin" id="selStatusUpdate">
-                            <option value="Ready for Submission">Ready for Submission</option>
-                            <option value="Pending Service Release">Pending Service Release</option>
-                            <option value="Pending Vacancy">Pending Vacancy</option>
-                            <option value="Package Submitted">Package Submitted</option>
-                            <option value="Package Submitted in Equator">Package Submitted in Equator</option>
-                            <option value="Pending BPO Expiration">Pending BPO Expiration</option>
-                            <option value="Processor Assigned">Processor Assigned</option>
-                            <option value="Document Review">Document Review</option>
-                            <option value="Updated Docs Needed">Updated Docs Needed</option>
-                            <option value="Processor BPO Ordered">Processor BPO Ordered</option>
-                            <option value="Processor BPO Schdeduled">Processor BPO Schdeduled</option>
-                            <option value="Processor BPO Completed">Processor BPO Completed</option>
-                            <option value="Negotiator BPO Ordered">Negotiator BPO Ordered</option>
-                            <option value="Negotiator BPO Schdeduled">Negotiator BPO Schdeduled</option>
-                            <option value="Negotiator BPO Completed">Negotiator BPO Completed</option>
-                            <option value="Auction/Hubzu Opt Out">Auction/Hubzu Opt Out</option>
-                            <option value="Negotiator Assigned">Negotiator Assigned</option>
-                            <option value="Offer Review">Offer Review</option>
-                            <option value="Counter Offer">Counter Offer</option>
-                            <option value="Value Dispute">Value Dispute</option>
-                            <option value="Marketing W/ Price Reductions">Marketing W/ Price Reductions</option>
-                            <option value="Investor Review">Investor Review</option>
-                            <option value="Approved">Approved</option>
+                            <option value=""></option>
+                            <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
+                            <option value="<%= mortStatus.Name%>"><%= mortStatus.Name%></option>
+                            <% Next%>
                         </select>
+                        <% End If%>
                     </div>
                 </div>
                 <div style="margin-top: 15px; float: right; margin-right: 5px;">
@@ -894,7 +876,7 @@
         </dx:ASPxPopupControl>
 
         <dx:ASPxPopupControl ClientInstanceName="popupPreviousNotes" Width="800px" Height="480px" OnWindowCallback="popupPreviousNotes_WindowCallback"
-           ID="popupPreviousNotes"
+            ID="popupPreviousNotes"
             HeaderText="Previous Notes" Modal="true"
             runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
             <HeaderTemplate>
@@ -915,7 +897,7 @@
                             <dx:GridViewDataDateColumn FieldName="ActivityDate" PropertiesDateEdit-DisplayFormatString="g" Width="100px"></dx:GridViewDataDateColumn>
                             <dx:GridViewDataTextColumn FieldName="Source" Width="100px"></dx:GridViewDataTextColumn>
                             <dx:GridViewDataTextColumn FieldName="ActivityType" Width="100px"></dx:GridViewDataTextColumn>
-                            <dx:GridViewDataTextColumn FieldName="ActivityTitle"></dx:GridViewDataTextColumn>                            
+                            <dx:GridViewDataTextColumn FieldName="ActivityTitle"></dx:GridViewDataTextColumn>
                             <dx:GridViewDataTextColumn FieldName="Shared" Width="60px"></dx:GridViewDataTextColumn>
                         </Columns>
                         <Templates>

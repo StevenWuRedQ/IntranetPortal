@@ -199,14 +199,11 @@
                                                                 <%------end-------%>
                                                                 <%--<Image Height="16px" Width="16px" Url="/images/search_btn.png"></Image>--%>
                                                                 <%-- <FocusRectPaddings PaddingLeft="2" PaddingRight="2" PaddingBottom="0" PaddingTop="0" />--%>
-
                                                                 <%--<Image Url="/images/search_btn.png"></Image>--%>
                                                                 <ClientSideEvents Click="function(s,e){
                                                                     ASPxPopupSearchPanel.PerformCallback(txtSearchKeyClient.GetText());                                                                                                                          
                                                             }" />
-
                                                                 <%--<Image Url="/images/search_btn.png"></Image>--%>
-
                                                                 <HoverStyle BackColor="Transparent"></HoverStyle>
                                                                 <BackgroundImage ImageUrl="/images/search_btn.png" Repeat="NoRepeat"></BackgroundImage>
                                                                 <Border BorderStyle="None"></Border>
@@ -223,7 +220,7 @@
                                                                     Good  <%=If(DateTime.now.ToString.IndexOf("AM")>0,"morning","afternoon") %>, <span style="font-weight: 900; text-transform: capitalize">
                                                                         <asp:LoginName ID="HeadLoginName" runat="server" />
                                                                     </span>
-                                                                    <i class="fa fa-wechat icon_btn color_black tooltip-examples" onclick="ShowChatWindow()" id="imgChat" style="color: black;" title="Let's Chat"></i>,
+                                                                    <i class="fa fa-wechat icon_btn color_black tooltip-examples" onclick="ShowChatWindow()" id="imgChat" style="color: black;display:none;" title="Let's Chat"></i>,
                                                                     <%-- <img src="/images/arrow_down.png" />--%>
                                                                     <%--<asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />--%>
                                                                     <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>'>                                                                
