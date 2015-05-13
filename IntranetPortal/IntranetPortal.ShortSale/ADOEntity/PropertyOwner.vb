@@ -35,5 +35,6 @@ Partial Public Class PropertyOwner
     Public Property AttorneyPhone As String
     Public Property AttorneyEmail As String
     Public Property MailApt As String
+    Public Property AdlPhone As String
 
 End Class

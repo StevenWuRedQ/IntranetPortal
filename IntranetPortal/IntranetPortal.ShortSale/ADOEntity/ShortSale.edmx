@@ -82,7 +82,7 @@
           <Property Name="Borough" Type="nvarchar" MaxLength="50" />
           <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="State" Type="nvarchar" MaxLength="50" />
-          <Property Name="Zipcode" Type="nchar" MaxLength="5" />
+          <Property Name="Zipcode" Type="nvarchar" MaxLength="50" />
           <Property Name="Block" Type="nchar" MaxLength="5" />
           <Property Name="Lot" Type="nchar" MaxLength="4" />
           <Property Name="BuildingType" Type="nvarchar" MaxLength="50" />
@@ -194,6 +194,7 @@
           <Property Name="SSN" Type="nchar" MaxLength="9" />
           <Property Name="DOB" Type="date" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="AdlPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="MailApt" Type="nvarchar" MaxLength="50" />
           <Property Name="MailNumber" Type="nvarchar" MaxLength="200" />
@@ -295,6 +296,7 @@
           <Property Name="ListPrice" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OfferSubmited" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OfferDate" Type="datetime" />
+          <Property Name="SaleDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
@@ -499,6 +501,7 @@
           <Property Name="AttorneyPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AttorneyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MailApt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdlPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyTitle">
           <Key>
@@ -551,6 +554,7 @@
           <Property Name="OfferSubmited" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="OfferDate" Type="DateTime" Precision="3" />
           <Property Name="ListingDate" Type="DateTime" Precision="3" />
+          <Property Name="SaleDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>
@@ -577,7 +581,7 @@
           <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Zipcode" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Block" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
           <Property Name="Lot" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
           <Property Name="BuildingType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -823,6 +827,7 @@
           <EntitySetMapping Name="PropertyOwners">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyOwner">
               <MappingFragment StoreEntitySet="PropertyOwners">
+                <ScalarProperty Name="AdlPhone" ColumnName="AdlPhone" />
                 <ScalarProperty Name="MailApt" ColumnName="MailApt" />
                 <ScalarProperty Name="AttorneyEmail" ColumnName="AttorneyEmail" />
                 <ScalarProperty Name="AttorneyPhone" ColumnName="AttorneyPhone" />
@@ -870,6 +875,7 @@
           <EntitySetMapping Name="ShortSaleCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCase">
               <MappingFragment StoreEntitySet="ShortSaleCases">
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
                 <ScalarProperty Name="ListingDate" ColumnName="ListingDate" />
                 <ScalarProperty Name="OfferDate" ColumnName="OfferDate" />
                 <ScalarProperty Name="OfferSubmited" ColumnName="OfferSubmited" />
