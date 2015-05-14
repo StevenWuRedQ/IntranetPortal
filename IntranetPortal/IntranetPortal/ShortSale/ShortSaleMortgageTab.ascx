@@ -5,8 +5,11 @@
     <label class="ss_form_title" style="font-size: 18px; margin-right: 10px">
         Sale Date    
     </label>
-    <input class="ss_form_input ss_date" data-field="SaleDate" style="width: 150px">
-
+    <input class="ss_form_input ss_date" data-field="SaleDate" style="width: 150px" id="txtSaleDate">     
+    <input type="checkbox" class="ss_form_input" data-field="NoSaleDate" style="width: 150px" id="chkNoSaleDate" onclick="txtSaleDate.hidden = this.checked ? true : false">
+    <label class="ss_form_input_title" style="margin-right: 10px" for="chkNoSaleDate">
+        No Sale Date as of
+    </label>
     <div style="float: right">
         <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
     </div>
