@@ -43,5 +43,6 @@ Partial Public Class ShortSaleCase
     Public Property OfferDate As Nullable(Of Date)
     Public Property ListingDate As Nullable(Of Date)
     Public Property SaleDate As Nullable(Of Date)
+    Public Property NoSaleDate As Nullable(Of Boolean)
 
 End Class

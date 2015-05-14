@@ -66,6 +66,7 @@
           <Property Name="Office" Type="nvarchar" MaxLength="50" />
           <Property Name="Cell" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar" MaxLength="120" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="50" />
           <Property Name="Type" Type="int" />
           <Property Name="Extension" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
@@ -297,6 +298,7 @@
           <Property Name="OfferSubmited" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OfferDate" Type="datetime" />
           <Property Name="SaleDate" Type="datetime" />
+          <Property Name="NoSaleDate" Type="bit" />
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateDate" Type="datetime" />
@@ -417,6 +419,7 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="Type" Type="Int32" />
           <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyFloor">
           <Key>
@@ -555,6 +558,7 @@
           <Property Name="OfferDate" Type="DateTime" Precision="3" />
           <Property Name="ListingDate" Type="DateTime" Precision="3" />
           <Property Name="SaleDate" Type="DateTime" Precision="3" />
+          <Property Name="NoSaleDate" Type="Boolean" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>
@@ -755,6 +759,7 @@
           <EntitySetMapping Name="PartyContacts">
             <EntityTypeMapping TypeName="IntranetPortalModel.PartyContact">
               <MappingFragment StoreEntitySet="PartyContacts">
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
                 <ScalarProperty Name="Extension" ColumnName="Extension" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -875,6 +880,7 @@
           <EntitySetMapping Name="ShortSaleCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCase">
               <MappingFragment StoreEntitySet="ShortSaleCases">
+                <ScalarProperty Name="NoSaleDate" ColumnName="NoSaleDate" />
                 <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
                 <ScalarProperty Name="ListingDate" ColumnName="ListingDate" />
                 <ScalarProperty Name="OfferDate" ColumnName="OfferDate" />
