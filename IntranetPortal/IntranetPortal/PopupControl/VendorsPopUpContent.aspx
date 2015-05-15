@@ -19,20 +19,327 @@
     <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
     <script>
+        //$(document).ready(function () {
+        //    $(".ss_phone").mask("(000) 000-0000");
+
+        //});
+
+    </script>
+    <script>
+        $.fn.accordion = function (options) {
+            var settings = $.extend({
+                autoCollapse: false
+            }, options);
+
+            var
+              $accordion = $(this),
+              blockName = $accordion.attr('data-block'),
+              $items = $('.' + blockName + '__item', $accordion);
+
+            $accordion.delegate('.' + blockName + '__title', 'click', triggerAccordion);
+
+            function triggerAccordion() {
+                var
+                  $that = $(this),
+                  $parent = $that.parent(),
+                  $content = $parent.children('.' + blockName + '__content'),
+                  isOpen = $that.hasClass('js-accordion--open'),
+                  autoCollapse = true,
+                  contentHeight = $content.prop('scrollHeight');
+
+                if (isOpen) {
+                    $that.removeClass('js-accordion--open');
+                    $parent.removeClass('js-accordion--open');
+                    $content.css('height', contentHeight);
+                    setTimeout(function () {
+                        $content.removeClass('js-accordion--open').css('height', '');
+                    }, 4);
+                } else {
+                    if (settings.autoCollapse) {
+                        //auto collapse open accordions
+                    }
+                    $that.addClass('js-accordion--open');
+                    $parent.addClass('js-accordion--open');
+                    $content.addClass('js-accordion--open').css('height', contentHeight).one('webkitTransitionEnd', event, function () {
+                        if (event.propertyName === 'height') {
+                            $(this).css('height', '');
+                        }
+                    });
+                }
+            }
+        };
+
         $(document).ready(function () {
-            $(".ss_phone").mask("(000) 000-0000");
-            
+            $('.js-sidebar').accordion();
+            $('.sidebar__title').each(function (idx, e) {
+                var len = $(e).parent().children().length;
+                if (len <= 1) {
+                    $(e).addClass("notafter");
+                }
+            });
         });
     </script>
+    <style>
+        @charset "UTF-8";
+
+
+
+        .barebone, .sidebar {
+            max-width: 464px;
+            width: 86%;
+            margin: 20px auto;
+        }
+
+        .barebone__title {
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .barebone__content {
+            height: 0;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            overflow: hidden;
+            -webkit-transition: height linear .1s;
+            transition: height linear .1s;
+        }
+
+            .barebone__content.js-accordion--open {
+                height: auto;
+            }
+
+        .sidebar {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            background-color: white;
+        }
+
+        .sidebar__title {
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .sidebar__content {
+            height: 0;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            overflow: hidden;
+            -webkit-transition: height linear .1s;
+            transition: height linear .1s;
+        }
+
+            .sidebar__content.js-accordion--open {
+                height: auto;
+            }
+
+        .sidebar__item {
+            border: 1px solid #ddd;
+            border-top: 0;
+        }
+
+            .sidebar__item:first-child {
+                border-top: 1px solid #ddd;
+            }
+
+        .sidebar__title {
+            position: relative;
+            padding: 10px 20px;
+            -webkit-transition: all ease-out .25s;
+            transition: all ease-out .25s;
+            font-weight: bold;
+            padding-right: 60px;
+        }
+
+            .sidebar__title::after, .sidebar__title:after {
+                position: absolute;
+                content: '+';
+                right: 14px;
+                top: 50%;
+                -webkit-transform: translate(0%, -50%);
+                -ms-transform: translate(0%, -50%);
+                transform: translate(0%, -50%);
+                width: 22px;
+                height: 22px;
+                text-align: center;
+                background-color: white;
+                color: #666;
+                border-radius: 100%;
+                line-height: 23px;
+            }
+
+            .sidebar__title.js-accordion--open {
+                background-color: #eee;
+            }
+
+                .sidebar__title.js-accordion--open::after, .sidebar__title.js-accordion--open:after {
+                    content: '–';
+                    line-height: 20px;
+                }
+
+        .sidebar__content {
+            padding-left: 20px;
+            padding-right: 20px;
+            font-size: 14px;
+            padding-top: 0;
+            padding-bottom: 0;
+            -webkit-transition: height ease-out .25s;
+            transition: height ease-out .25s;
+        }
+
+        .inner {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            background-color: white;
+            margin-bottom: 20px;
+        }
+
+        .inner__title {
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .inner__content {
+            height: 0;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            overflow: hidden;
+            -webkit-transition: height linear .1s;
+            transition: height linear .1s;
+        }
+
+            .inner__content.js-accordion--open {
+                height: auto;
+            }
+
+        .inner__item {
+            border: 1px solid #ddd;
+            border-top: 0;
+        }
+
+            .inner__item:first-child {
+                border-top: 1px solid #ddd;
+            }
+
+        .inner__title {
+            position: relative;
+            padding: 10px 20px;
+            -webkit-transition: all ease-out .25s;
+            transition: all ease-out .25s;
+            font-weight: bold;
+            padding-right: 60px;
+        }
+
+            /*.inner__title::after, .inner__title:after {
+                position: absolute;
+                content: '+';
+                right: 14px;
+                top: 50%;
+                -webkit-transform: translate(0%, -50%);
+                -ms-transform: translate(0%, -50%);
+                transform: translate(0%, -50%);
+                width: 22px;
+                height: 22px;
+                text-align: center;
+                background-color: white;
+                color: #666;
+                border-radius: 100%;
+                line-height: 23px;
+            }*/
+
+            .inner__title.js-accordion--open {
+                background-color: #eee;
+            }
+
+                .inner__title.js-accordion--open::after, .inner__title.js-accordion--open:after {
+                    content: '–';
+                    line-height: 20px;
+                }
+
+        .inner__content {
+            padding-left: 20px;
+            padding-right: 20px;
+            font-size: 14px;
+            padding-top: 0;
+            padding-bottom: 0;
+            -webkit-transition: height ease-out .25s;
+            transition: height ease-out .25s;
+        }
+
+        .sidebar p, .inner p {
+            margin-bottom: 20px;
+            color: #777;
+            line-height: 20px;
+        }
+
+            .sidebar p:first-child, .inner p:first-child {
+                margin-top: 20px;
+            }
+
+            .sidebar p strong, .inner p strong {
+                font-weight: bold;
+                color: #444;
+            }
+
+        .notafter:after {
+            content: none !important;
+        }
+    </style>
+
     <%--<script src="/Scripts/angular.js"></script>--%>
 </head>
 <body ng-controller="PortalCtrl">
     <form id="form1" runat="server">
         <link href="/css/stevencss.css?v=1.02" rel="stylesheet" type="text/css" />
         <div style="color: #b1b2b7" class="clearfix">
-            <div class="row" style="margin: 0px;">
+            <div class="row" style="margin: 0px">
                 <div class="col-md-3">
+                   <%-- <div>
+                        <div data-block="sidebar" class="sidebar js-sidebar">
+                            
+                            <div class="sidebar__item">
+                                <div class="sidebar__title">
+                                    <div>Height Auto Transition</div>
+                                </div>
+
+                            </div>
+                            <div class="sidebar__item js-accordion--open">
+                                <div class="sidebar__title js-accordion--open">
+                                    <div>Responsive Accordion</div>
+                                </div>
+                                <div class="sidebar__content js-accordion--open">
+                                    <div data-block="inner" class="inner js-sidebar">
+                                        <div class="inner__item">
+                                            <div class="inner__title">
+                                                <div>Implementation</div>
+                                            </div>
+                                            <div class="inner__content">
+                                                123456
+                                            </div>
+                                        </div>
+                                        <div class="inner__item">
+                                            <div class="inner__title">
+                                                <div>Things to Note</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+
+                    </div>--%>
                     <div style="font-size: 16px; color: #3993c1; font-weight: 700">
+
                         <ul class="list-group" style="box-shadow: none">
 
                             <li class="list-group-item popup_menu_list_item" ng-class="query.Type===''?'popup_menu_list_item_active':''" ng-click="filterContactFunc($event,'')">All Vendors</li>
@@ -87,9 +394,9 @@
                                                             </li>
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">office #</label>
-                                                                <input class="ss_form_input ss_phone"  ng-model="addContact.OfficeNO" />
+                                                                <input class="ss_form_input ss_phone" input-mask="(000) 000-0000" ng-model="addContact.OfficeNO" />
 
-                                                              <%--  <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input ss_phone" Native="true">
+                                                                <%--  <dx:ASPxTextBox runat="server" ID="txtOffice" ng-model="addContact.OfficeNO" CssClass="ss_form_input ss_phone" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
                                                                     <ValidationSettings RequiredField-IsRequired="true" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
                                                                 </dx:ASPxTextBox>--%>
@@ -99,10 +406,15 @@
                                                                 <%--<input class="ss_form_input"  ng-model="addContact.OfficeNO" />--%>
                                                                 <input class="ss_form_input" ng-model="addContact.Extension" runat="server" />
                                                             </li>
+                                                            <li class="ss_form_item">
+                                                                <label class="ss_form_input_title">Fax </label>
+                                                                <%--<input class="ss_form_input"  ng-model="addContact.OfficeNO" />--%>
+                                                                <input class="ss_form_input" input-mask="(000) 000-0000" ng-model="addContact.Fax" />
+                                                            </li>
 
                                                             <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Cell #</label>
-                                                                <input class="ss_form_input ss_phone"  ng-model="addContact.Cell" />
+                                                                <input class="ss_form_input ss_phone" input-mask="(000) 000-0000" ng-model="addContact.Cell" />
                                                                 <%--<dx:ASPxTextBox runat="server" ID="txtCell" ng-model="addContact.Cell" CssClass="ss_form_input ss_phone" Native="true">
                                                                     <MaskSettings Mask="(999) 000-0000" IncludeLiterals="None" />
                                                                     <ValidationSettings CausesValidation="false" RequiredField-IsRequired="false" ErrorDisplayMode="ImageWithTooltip" ValidationGroup="Contact"></ValidationSettings>
@@ -145,11 +457,11 @@
                             <input style="margin-top: 20px;" type="text" class="form-control" placeholder="Type employee's name" ng-model="query.Name">
                             <div style="margin-top: 10px; height: 350px; overflow: auto" id="employee_list">
                                 <div>
-                                    <ul class="list-group" style="box-shadow: none" ng-repeat="groupedcontact in showingContacts|orderBy:group_text_order">
+                                    <ul class="list-group"  style="box-shadow: none" ng-repeat="groupedcontact in showingContacts|orderBy:group_text_order">
                                         <%--<li class="list-group-item popup_menu_list_item" style="font-size: 18px; width: 80px; cursor: default; font-weight: 900">{{groupedcontact.group_text}}
                                             <span class="badge" style="font-size: 18px; border-radius: 18px;">{{groupedcontact.data.length}}</span>
                                         </li>--%>
-                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.Name==currentContact.Name? 'popup_employee_list_item_active':''" ng-repeat="contact in groupedcontact.data| ByContact:query |orderBy:predicate| filter:query.Name">
+                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.Name==currentContact.Name? 'popup_employee_list_item_active':''" ng-repeat="contact in groupedcontact.data|orderBy:predicate| filter:query.Name| ByContact:query ">
                                             <div>
                                                 <div style="font-weight: 900; font-size: 16px">
                                                     <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}}</label>
@@ -235,7 +547,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" ng-model="currentContact.OfficeNO" placeholder="Click to input">
+                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.OfficeNO" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>
@@ -248,7 +560,15 @@
                                         </div>
                                     </td>
                                 </tr>
-
+                                <tr class="vendor_info">
+                                    <td class="vendor_info_left">Fax
+                                    </td>
+                                    <td>
+                                        <div class="detail_right">
+                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.Fax" placeholder="Click to input">
+                                        </div>
+                                    </td>
+                                </tr>
                                 <%--<tr class="vendor_info">
                                     <td class="vendor_info_left">Employee Since
                                     </td>
@@ -261,7 +581,7 @@
                                     </td>
                                     <td>
                                         <div class="detail_right">
-                                            <input class="form-control contact_info_eidt" ng-model="currentContact.Cell" placeholder="Click to input">
+                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.Cell" placeholder="Click to input">
                                         </div>
                                     </td>
                                 </tr>

@@ -45,7 +45,7 @@ filter('ByContact', function () {
 
             out: []
         };
-        if ($.isEmptyObject(contact)) {
+        if ($.isEmptyObject(contact) || contact.Type == null) {
             return movies;
         }
         angular.forEach(movies, function (value, key) {
@@ -66,12 +66,36 @@ function Fomart_data_String(json) {
         return new Date(parseInt(match.substr(6))).toISOString();
     }
 
-    return json.replace(/\/Date\((\d+)\)\//gi, ToDateString)
+    return json.replace(/\/Date\((\d+)\)\//gi, ToDateString);
 }
 function group_func(item) {
     return getNameFirst(item.Name);
 }
+
+portalApp.directive('inputMask', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, el, attrs) {
+
+            $(el).mask(attrs.inputMask);
+            $(el).on('change', function () {
+                scope.$eval(attrs.ngModel + "='" + el.val() + "'");
+                //scope[attrs.ngModel] = el.val(); //if your expression doesn't contain dot.
+            });
+        }
+    };
+});
+
 portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
+    $scope.activities = [
+        {
+            title: 'title1'
+        },
+        {
+            title: 'title2'
+        }
+    ];
+
     $($('[title]')).tooltip({
         placement: 'bottom'
     });
@@ -128,9 +152,9 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
 
         }
         var addC = $scope.addContact;
-        addC.OfficeNO = $('#txtOffice').val();
-        addC.Cell = $('#txtCell').val();
-        addC.Email = $('#txtEmail').val();
+        //addC.OfficeNO = $('#txtOffice').val();
+        //addC.Cell = $('#txtCell').val();
+        //addC.Email = $('#txtEmail').val();
 
         debugger;
         $http.post("/CallBackServices.asmx/AddContact", { contact: $scope.addContact }).
@@ -145,6 +169,9 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
             $scope.currentContact = addContact;
             m_current_contact = $scope.currentContact;
             $scope.initLenderList();
+            var stop = $(".popup_employee_list_item_active:first").position().top;
+            $('#employee_list').scrollTop(stop);
+            var a = 10;
             //debugger;
         }).
         error(function (data, status, headers, config) {
@@ -179,7 +206,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
         return true;
     }
     $scope.SaveCurrent = function () {
-       
+
         $http.post("/CallBackServices.asmx/SaveContact", { json: $scope.currentContact }).
         success(function (data, status, headers, config) {
             $scope.initLenderList();

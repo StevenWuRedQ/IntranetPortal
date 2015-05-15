@@ -828,7 +828,7 @@ function format_email(e) {
         return true;
     }
 
-    var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}|$/;
     var match_mail = $(e).val().match(pattern);
 
     var is_email = match_mail !== null && match_mail.length > 0;
