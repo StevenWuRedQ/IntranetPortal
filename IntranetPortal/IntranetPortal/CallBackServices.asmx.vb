@@ -39,4 +39,15 @@ Public Class CallBackServices
         Dim l = PartyContact.GetContactByType(PartyContact.ContactType.Lender).Where(Function(c) c.CorpName IsNot Nothing).Select(Function(c) c.CorpName).Distinct().ToList()
         Return l
     End Function
+    <WebMethod()> _
+    Public Function GetAllGroups() As List(Of GroupType)
+        Dim g = GroupType.GetAllGroupType()
+        Return g
+    End Function
+    <WebMethod()> _
+    Public Function GetContactByGroup(gId As Integer) As List(Of PartyContact)
+        Dim g = GroupType.GetGroup(gId)
+        Return g.Contacts
+    End Function
+
 End Class

@@ -87,18 +87,18 @@ portalApp.directive('inputMask', function () {
 });
 
 portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
-    $scope.activities = [
-        {
-            title: 'title1'
-        },
-        {
-            title: 'title2'
-        }
-    ];
+
 
     $($('[title]')).tooltip({
         placement: 'bottom'
     });
+
+    $scope.ChangeGroups = function (gId) {
+        $http.post('/CallBackServices.asmx/GetContactByGroup', {gId:gId}).
+            success(function(data) {
+                $scope.InitDataFunc(data);
+            });
+    };
     $scope.InitData = function (data) {
         $scope.allContacts = data.slice();
         var gropData = groupBy(data, group_func);
@@ -107,19 +107,32 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
         return gropData;
     }
 
+    $http.post('/CallBackServices.asmx/GetAllGroups', {}).
+         success(function (data, status, headers, config) {
+             $scope.Groups = data.d;
+
+         }).error(function (data, status, headers, config) {
+
+
+             alert("error get GetAllGroups: " + status + " error :" + data.d);
+         });
+
+    $scope.InitDataFunc = function (data) {
+        var gropData = $scope.InitData(data.d);
+        //debugger;
+        var allContacts = gropData;
+        if (allContacts.length > 0) {
+            $scope.currentContact = gropData[0].data[0];
+            m_current_contact = $scope.currentContact;
+
+        }
+    }
     $http.post('/CallBackServices.asmx/GetContact', { p: '' }).
         success(function (data, status, headers, config) {
 
             //debugger;
+            $scope.InitDataFunc(data);
 
-            var gropData = $scope.InitData(data.d);
-            //debugger;
-            var allContacts = gropData;
-            if (allContacts.length > 0) {
-                $scope.currentContact = gropData[0].data[0];
-                m_current_contact = $scope.currentContact;
-
-            }
 
         }).error(function (data, status, headers, config) {
 

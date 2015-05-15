@@ -302,34 +302,22 @@
         <div style="color: #b1b2b7" class="clearfix">
             <div class="row" style="margin: 0px">
                 <div class="col-md-3">
-                   <%-- <div>
+                    <div style="display:none">
                         <div data-block="sidebar" class="sidebar js-sidebar">
                             
-                            <div class="sidebar__item">
-                                <div class="sidebar__title">
-                                    <div>Height Auto Transition</div>
+                            <div class="sidebar__item"  ng-repeat="group in Groups">
+                                <div class="sidebar__title" ng-click="ChangeGroups(group.Id)">
+                                    <div >{{group.GroupName}}</div>
                                 </div>
-
-                            </div>
-                            <div class="sidebar__item js-accordion--open">
-                                <div class="sidebar__title js-accordion--open">
-                                    <div>Responsive Accordion</div>
-                                </div>
-                                <div class="sidebar__content js-accordion--open">
+                                 <div class="sidebar__content">
                                     <div data-block="inner" class="inner js-sidebar">
-                                        <div class="inner__item">
-                                            <div class="inner__title">
-                                                <div>Implementation</div>
+                                        <div class="inner__item" ng-repeat="sbgroup in group.SubGroups">
+                                            <div class="inner__title" ng-click="ChangeGroups(sbgroup.Id)">
+                                                <div >{{sbgroup.GroupName}}</div>
                                             </div>
-                                            <div class="inner__content">
-                                                123456
-                                            </div>
+                                           
                                         </div>
-                                        <div class="inner__item">
-                                            <div class="inner__title">
-                                                <div>Things to Note</div>
-                                            </div>
-                                        </div>
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -337,8 +325,8 @@
                         </div>
                         
 
-                    </div>--%>
-                    <div style="font-size: 16px; color: #3993c1; font-weight: 700">
+                    </div>
+                    <div style="font-size: 16px; color: #3993c1; font-weight: 700;">
 
                         <ul class="list-group" style="box-shadow: none">
 
@@ -598,7 +586,7 @@
                                     </td>
                                 </tr>
                                 <tr class="vendor_info">
-                                    <td class="vendor_info_left">Company Name
+                                    <td class="vendor_info_left">Type
                                     </td>
                                     <td>
                                         <div class="detail_right">

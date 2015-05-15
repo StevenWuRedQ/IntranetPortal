@@ -24,5 +24,6 @@ Partial Public Class PartyContact
     Public Property Type As Nullable(Of Integer)
     Public Property Extension As String
     Public Property Fax As String
+    Public Property GroupId As Nullable(Of Integer)
 
 End Class
