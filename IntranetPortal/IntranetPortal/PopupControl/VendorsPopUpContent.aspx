@@ -1,12 +1,14 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="VendorsPopUpContent.aspx.vb" Inherits="IntranetPortal.VendorsPopUpContent" %>
 
+<%@ Import Namespace="IntranetPortal.ShortSale" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" ng-app="PortalApp" xmlns:ng="http://angularjs.org">
 <head runat="server">
     <title></title>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel="stylesheet" type="text/css" />
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -71,14 +73,10 @@
 
         $(document).ready(function () {
             $('.js-sidebar').accordion();
-            $('.sidebar__title').each(function (idx, e) {
-                var len = $(e).parent().children().length;
-                if (len <= 1) {
-                    $(e).addClass("notafter");
-                }
-            });
+
         });
     </script>
+
     <style>
         @charset "UTF-8";
 
@@ -174,7 +172,7 @@
             }
 
             .sidebar__title.js-accordion--open {
-                background-color: #eee;
+                /*background-color: #eee;*/
             }
 
                 .sidebar__title.js-accordion--open::after, .sidebar__title.js-accordion--open:after {
@@ -292,6 +290,10 @@
         .notafter:after {
             content: none !important;
         }
+
+        .nodisplay {
+            display: none;
+        }
     </style>
 
     <%--<script src="/Scripts/angular.js"></script>--%>
@@ -301,32 +303,68 @@
         <link href="/css/stevencss.css?v=1.02" rel="stylesheet" type="text/css" />
         <div style="color: #b1b2b7" class="clearfix">
             <div class="row" style="margin: 0px">
+                <input type="hidden" id="CurrentUser" value="<%= Page.User.Identity.Name%>" />
                 <div class="col-md-3">
-                    <div style="display:none">
-                        <div data-block="sidebar" class="sidebar js-sidebar">
-                            
-                            <div class="sidebar__item"  ng-repeat="group in Groups">
-                                <div class="sidebar__title" ng-click="ChangeGroups(group.Id)">
-                                    <div >{{group.GroupName}}</div>
+
+                    <div class="modal fade" id="AddGroupPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title">Add Group</h4>
                                 </div>
-                                 <div class="sidebar__content">
+                                <div class="modal-body">
+                                    <ul class="ss_form_box clearfix">
+                                        <li class="ss_form_item">
+                                            <label class="ss_form_input_title">Group Name</label>
+                                            <input class="ss_form_input" ng-model="addGroupName" />
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" ng-click="AddGroups()" data-dismiss="modal">Add</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+
+                        <div data-block="sidebar" class="sidebar js-sidebar">
+                            <div class="sidebar__item">
+
+                                <div class="sidebar__title notafter" ng-click="ChangeGroups({})">
+                                    <div class="clear-fix">All Vendors  <i class="fa fa-user-plus icon_btn layout_float_right" title="Add group" ng-click="popAddgroup(0)"></i></div>
+
+                                </div>
+                                <div class="sidebar__content nodisplay">
+                                </div>
+
+                            </div>
+                            <div class="sidebar__item" ng-repeat="group in Groups">
+
+                                <div class="sidebar__title" ng-class="group.SubGroups==null||group.SubGroups.length==0?'notafter':''" ng-click="ChangeGroups(group)">
+                                    <div>{{group.GroupName}} <i class="fa fa-user-plus icon_btn layout_float_right" title="Add group" ng-click="popAddgroup(group.Id)"></i></div>
+                                </div>
+                                <div class="sidebar__content" ng-class="group.SubGroups==null||group.SubGroups.length==0?'nodisplay':''">
                                     <div data-block="inner" class="inner js-sidebar">
                                         <div class="inner__item" ng-repeat="sbgroup in group.SubGroups">
-                                            <div class="inner__title" ng-click="ChangeGroups(sbgroup.Id)">
-                                                <div >{{sbgroup.GroupName}}</div>
+                                            <div class="inner__title" ng-click="ChangeGroups(sbgroup)">
+                                                <div>{{sbgroup.GroupName}}</div>
                                             </div>
-                                           
+
                                         </div>
-                                      
+
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-                        
+
 
                     </div>
-                    <div style="font-size: 16px; color: #3993c1; font-weight: 700;">
+                    <div style="font-size: 16px; color: #3993c1; font-weight: 700; display: none">
 
                         <ul class="list-group" style="box-shadow: none">
 
@@ -417,7 +455,7 @@
                                                                     </ValidationSettings>
                                                                 </dx:ASPxTextBox>
                                                             </li>
-                                                            <li class="ss_form_item">
+                                                            <li class="ss_form_item" style="display: none">
                                                                 <label class="ss_form_input_title">Type</label>
 
                                                                 <select class="ss_form_input" ng-model="addContact.Type">
@@ -428,7 +466,16 @@
                                                                 </select>
                                                             </li>
 
+                                                            <li class="ss_form_item">
+                                                                <label class="ss_form_input_title">Group</label>
 
+                                                                <select class="ss_form_input" ng-model="addContact.GroupId">
+                                                                    <option value=""></option>
+                                                                    <% For Each v In GroupType.GetAllGroupType(True)%>
+                                                                    <option value="<%= v.Id%>"><%= v.GroupName %> </option>
+                                                                    <% Next%>
+                                                                </select>
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                     <div class="modal-footer">
@@ -445,7 +492,7 @@
                             <input style="margin-top: 20px;" type="text" class="form-control" placeholder="Type employee's name" ng-model="query.Name">
                             <div style="margin-top: 10px; height: 350px; overflow: auto" id="employee_list">
                                 <div>
-                                    <ul class="list-group"  style="box-shadow: none" ng-repeat="groupedcontact in showingContacts|orderBy:group_text_order">
+                                    <ul class="list-group" style="box-shadow: none" ng-repeat="groupedcontact in showingContacts|orderBy:group_text_order">
                                         <%--<li class="list-group-item popup_menu_list_item" style="font-size: 18px; width: 80px; cursor: default; font-weight: 900">{{groupedcontact.group_text}}
                                             <span class="badge" style="font-size: 18px; border-radius: 18px;">{{groupedcontact.data.length}}</span>
                                         </li>--%>
@@ -585,7 +632,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="vendor_info">
+                                <tr class="vendor_info" style="display: none">
                                     <td class="vendor_info_left">Type
                                     </td>
                                     <td>
@@ -599,6 +646,21 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <tr class="vendor_info">
+                                    <td class="vendor_info_left">Group
+                                    </td>
+                                    <td>
+                                        <div class="detail_right">
+                                            <select class="form-control contact_info_eidt" ng-model="currentContact.GroupId">
+                                                <option value=""></option>
+                                                <% For Each v In GroupType.GetAllGroupType(True)%>
+                                                <option value="<%= v.Id%>"><%= v.GroupName %> </option>
+                                                <% Next%>
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+
                                 <%-- <tr class="vendor_info">
                                     <td class="vendor_info_left">Closed deals
                                     </td>

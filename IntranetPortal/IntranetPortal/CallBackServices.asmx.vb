@@ -24,8 +24,13 @@ Public Class CallBackServices
 
     <WebMethod()> _
     Public Sub SaveContact(json As PartyContact)
-        
-        json.Save()
+        Dim c = PartyContact.GetContactByName(json.Name)
+        If (c IsNot Nothing) Then
+            c.Save()
+        Else
+            json.Save()
+        End If
+
     End Sub
 
     <WebMethod()> _
@@ -41,13 +46,21 @@ Public Class CallBackServices
     End Function
     <WebMethod()> _
     Public Function GetAllGroups() As List(Of GroupType)
-        Dim g = GroupType.GetAllGroupType()
+        Dim g = GroupType.GetAllGroupType(False)
         Return g
     End Function
     <WebMethod()> _
-    Public Function GetContactByGroup(gId As Integer) As List(Of PartyContact)
+    Public Function GetContactByGroup(gId? As Integer) As List(Of PartyContact)
+        If gId = 0 Then
+            Return PartyContact.getAllContact()
+        End If
         Dim g = GroupType.GetGroup(gId)
         Return g.Contacts
     End Function
 
+    <WebMethod()> _
+    Public Function AddGroups(gid As Integer, groupName As String, addUser As String) As GroupType
+
+        Return GroupType.AddGroups(gid, groupName, addUser)
+    End Function
 End Class

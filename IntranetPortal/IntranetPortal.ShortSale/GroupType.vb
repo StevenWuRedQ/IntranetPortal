@@ -33,15 +33,33 @@
     Public Function HasSubType() As Boolean
         Return SubGroups IsNot Nothing AndAlso SubGroups.Count > 0
     End Function
+    Public Shared Function AddGroups(gid As Integer, groupName As String, addUser As String) As GroupType
+        Using ctx As New ShortSaleEntities
+            Dim g = New GroupType
+            If (gid <> 0) Then
+                g.ParentId = gid
+            End If
+            g.GroupName = groupName
+            g.CreateBy = addUser
+            g.CreateDate = Date.Now
+            ctx.GroupTypes.Add(g)
+            ctx.SaveChanges()
+        End Using
+    End Function
+
     Public Shared Function GetGroup(aId As Integer) As GroupType
         Using ctx As New ShortSaleEntities
             Return ctx.GroupTypes.Where(Function(g) g.Id = aId).FirstOrDefault
         End Using
 
     End Function
-    Public Shared Function GetAllGroupType() As List(Of GroupType)
+    Public Shared Function GetAllGroupType(isAll As Boolean) As List(Of GroupType)
         Using ctx As New ShortSaleEntities
+            If isAll Then
+                Return ctx.GroupTypes.ToList()
+            End If
             Return ctx.GroupTypes.Where(Function(g) g.ParentId Is Nothing).ToList()
         End Using
     End Function
+   
 End Class

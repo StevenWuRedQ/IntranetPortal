@@ -1,9 +1,9 @@
 ﻿function getNameFirst(name) {
-    if (name.length <= 0) {
+    if (name == null || name.length <= 0) {
         return '';
     }
     return name[0].toUpperCase();
-}
+} getNameFirst
 
 Array.prototype.getUnique = function () {
     var u = {}, a = [];
@@ -92,10 +92,24 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
     $($('[title]')).tooltip({
         placement: 'bottom'
     });
+    $scope.popAddgroup = function (Id) {
+        $scope.AddGroupId = Id;
+        $('#AddGroupPopup').modal();
+    }
+    $scope.AddGroups = function () {
+        $http.post('/CallBackServices.asmx/AddGroups', { gid: $scope.AddGroupId, groupName: $scope.addGroupName, addUser: $('#CurrentUser').val() }).
+           success(function (data) {
+               $scope.initGroups();
+           });
+    }
+    $scope.ChangeGroups = function (g) {
 
-    $scope.ChangeGroups = function (gId) {
-        $http.post('/CallBackServices.asmx/GetContactByGroup', {gId:gId}).
-            success(function(data) {
+        $scope.selectType = g.Id == null ? "All Vendors" : g.GroupName;
+        if (g.Id == null) {
+            g.Id = 0;
+        }
+        $http.post('/CallBackServices.asmx/GetContactByGroup', { gId: g.Id }).
+            success(function (data) {
                 $scope.InitDataFunc(data);
             });
     };
@@ -106,8 +120,8 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
 
         return gropData;
     }
-
-    $http.post('/CallBackServices.asmx/GetAllGroups', {}).
+    $scope.initGroups = function () {
+        $http.post('/CallBackServices.asmx/GetAllGroups', {}).
          success(function (data, status, headers, config) {
              $scope.Groups = data.d;
 
@@ -116,7 +130,9 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
 
              alert("error get GetAllGroups: " + status + " error :" + data.d);
          });
+    }
 
+    $scope.initGroups();
     $scope.InitDataFunc = function (data) {
         var gropData = $scope.InitData(data.d);
         //debugger;
@@ -218,6 +234,7 @@ portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
         $scope.selectType = text;
         return true;
     }
+
     $scope.SaveCurrent = function () {
 
         $http.post("/CallBackServices.asmx/SaveContact", { json: $scope.currentContact }).
