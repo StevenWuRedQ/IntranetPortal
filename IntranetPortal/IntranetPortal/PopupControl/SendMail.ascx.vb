@@ -39,6 +39,11 @@ Public Class SendMailControl
                 attachments = EmailAttachments.Text.Split(",").ToList
             End If
 
+            Dim senderEmail = Employee.GetInstance(Page.User.Identity.Name).Email
+            If Not String.IsNullOrEmpty(senderEmail) Then
+                EmailCCIDs.Text = EmailCCIDs.Text & ";" & senderEmail
+            End If
+
             Dim mailId = IntranetPortal.Core.EmailService.SendMail(EmailToIDs.Text, EmailCCIDs.Text, EmailSuject.Text, EmailBody.Html, attachments)
             Dim comments = String.Format("{0} send an email.&nbsp;<a href='#' onclick='ShowMailmessage({1})'>Email Message</a>", Page.User.Identity.Name, mailId)
             Dim catgorys = String.Join(",", {LogCategory.ToString, LeadsActivityLog.LogCategory.Email.ToString})

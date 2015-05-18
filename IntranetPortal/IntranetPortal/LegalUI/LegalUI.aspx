@@ -5,9 +5,6 @@
 <%@ Register Src="~/ShortSale/ShortSaleCaseList.ascx" TagPrefix="uc1" TagName="ShortSaleCaseList" %>
 <%@ Register Src="~/LegalUI/LegalSecondaryActions.ascx" TagPrefix="uc1" TagName="LegalSecondaryActions" %>
 
-
-
-
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <%--leagal Ui--%>
     <style>
@@ -30,9 +27,7 @@
                     <dx:SplitterContentControl>
                         <div style="width: 650px">
                             <div style="align-content: center; height: 100%">
-
                                 <!-- Nav tabs -->
-
                                 <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
                                     <li class="active short_sale_head_tab">
                                         <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
@@ -451,11 +446,9 @@
                                                             </div>
                                                             <div class="tab-pane " id="Foreclosure_Review">
                                                                 <div class="short_sale_content">
-
-
                                                                     <div class="clearfix">
                                                                         <div style="float: right">
-                                                                            <input type="button" class="rand-button short_sale_edit" value="Completed Document Submit to Attorny" onclick="switch_edit_model(this, short_sale_case_data)">
+                                                                            <input type="button" class="rand-button short_sale_edit" value="Completed Research" runat="server" onserverclick="btnCompleteResearch_ServerClick" id="btnCompleteResearch" />
                                                                         </div>
                                                                     </div>
 
@@ -2045,7 +2038,4 @@
 
     </dx:ASPxSplitter>
 
-    <style>
-       
-    </style>
 </asp:Content>

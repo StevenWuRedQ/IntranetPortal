@@ -189,7 +189,7 @@
                                         </span>
                                         <span style="font-size:18px;margin-left:20px">
                                             <span id="gridSelectCount"> 0 </span> selected
-                                        </span>
+                                        </span>                                     
                                         <div style="float: right">
                                             <%--  <a href="/LeadsGenerator/LeadsGenerator.aspx" target="_self" class="rand-button rand-button-blue">Create Leads</a>--%>
                                             <asp:LinkButton ID="btnExport" runat="server" OnClick="btnExport_Click" Text='<i class="fa  fa-file-excel-o  report_head_button report_head_button_padding tooltip-examples" title="Export to Excel"></i>'>                                                                

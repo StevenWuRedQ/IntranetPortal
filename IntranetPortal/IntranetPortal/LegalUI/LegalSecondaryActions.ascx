@@ -19,7 +19,6 @@
                     <option>Tenants in common</option>
                     <option>Joint Tenants w/right of survivorship</option>
                     <option>Tenancy by the entirety</option>
-
                 </select>
             </li>
 

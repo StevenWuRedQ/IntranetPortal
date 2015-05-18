@@ -195,7 +195,7 @@
                 <Items>
                     <dx:ListEditItem Text="Short Sale" Value="0" />
                     <dx:ListEditItem Text="Eviction" Value="1" />
-                   <%-- <dx:ListEditItem Text="Legal" Value="3" />--%>
+                    <dx:ListEditItem Text="Legal" Value="3" />
                     <dx:ListEditItem Text="Construction" Value="2" />
                     <%--<dx:ListEditItem Text="Open Market Sale" Value="4" />--%>
                 </Items>
@@ -230,6 +230,8 @@
                        
                         $('.legal_action_div').css("display", 'none');
                         $("#LegalPopUp").modal();
+                        aspxPopupInprocessClient.PerformCallback('Save');
+
                     } else {
                        
                         aspxPopupInprocessClient.PerformCallback('Save');

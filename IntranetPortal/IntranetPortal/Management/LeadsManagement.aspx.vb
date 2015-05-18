@@ -115,7 +115,6 @@ Public Class LeadsManagement
                 Return
             End If
 
-
             Dim mgr = Employee.GetInstance(Page.User.Identity.Name)
             Dim emps = Employee.GetSubOrdinate(mgr.EmployeeID)
             emps.Add(mgr)

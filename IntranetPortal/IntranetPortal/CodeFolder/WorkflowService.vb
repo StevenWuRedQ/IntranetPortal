@@ -175,6 +175,22 @@ Public Class WorkflowService
     End Sub
 #End Region
 
+#Region "Legal Process"
+    Public Shared Sub StartLegalRequest(displayName As String, bble As String, mgr As String)
+        If Not IntegratedWithWorkflow() Then
+            Return
+        End If
+
+        Using conn = GetConnection()
+            Dim procInst = conn.CreateProcessInstance("LegalRequest")
+            procInst.DisplayName = displayName
+            procInst.DataFields.Add("BBLE", bble)
+            procInst.DataFields.Add("Mgr", mgr)
+            conn.StartProcessInstance(procInst)
+        End Using
+    End Sub
+#End Region
+
 #Region "Appointment"
     Public Shared Sub StartNewAppointmentProcess(displayName As String, bble As String, appointId As Integer, approver As String)
         If Not IntegratedWithWorkflow() Then

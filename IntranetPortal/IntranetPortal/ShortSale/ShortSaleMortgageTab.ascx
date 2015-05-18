@@ -6,7 +6,7 @@
         Sale Date    
     </label>
     <input class="ss_form_input ss_date" data-field="SaleDate" style="width: 150px" id="txtSaleDate">     
-    <input type="checkbox" class="ss_form_input" data-field="NoSaleDate" style="width: 150px" id="chkNoSaleDate" onclick="txtSaleDate.hidden = this.checked ? true : false">
+    <%--<input type="checkbox" class="ss_form_input" data-field="NoSaleDate" style="width: 150px" id="chkNoSaleDate" onclick="txtSaleDate.hidden = this.checked ? true : false">--%>
     <label class="ss_form_input_title" style="margin-right: 10px" for="chkNoSaleDate">
         No Sale Date as of
     </label>
@@ -37,7 +37,7 @@
                         <option value="<%= mortStatus.Name%>"><%= mortStatus.Name%></option>
                         <% Next%>
 
-                        <%--    <option value="Ready for Submission">Ready for Submission</option>
+                        <%--<option value="Ready for Submission">Ready for Submission</option>
                         <option value="Pending Service Release">Pending Service Release</option>
                         <option value="Pending Vacancy">Pending Vacancy</option>
                         <option value="Package Submitted">Package Submitted</option>

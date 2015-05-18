@@ -258,6 +258,11 @@ Public Class LeadsSubMenu
                 If lbSelectionMode.SelectedValues.Contains("4") Then
                     Lead.Publishing(bble)
                 End If
+
+                If lbSelectionMode.SelectedValues.Contains("3") Then
+                    Dim ld = Lead.GetInstance(bble)
+                    WorkflowService.StartLegalRequest(ld.LeadsName, bble, String.Join(";", Roles.GetUsersInRole("Legal-Manager")))
+                End If
             End If
         End If
     End Sub

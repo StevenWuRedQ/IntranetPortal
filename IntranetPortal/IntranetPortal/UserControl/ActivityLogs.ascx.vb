@@ -831,8 +831,11 @@ Public Class ActivityLogs
             Dim typeOfUpdate = e.Parameter.Split("|")(1)
             Dim statusOfUpdate = e.Parameter.Split("|")(2)
 
-            If Not String.IsNullOrEmpty(typeOfUpdate) AndAlso Not String.IsNullOrEmpty(statusOfUpdate) Then
-                RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, hfBBLE.Value)
+            If Not String.IsNullOrEmpty(typeOfUpdate) Then
+                If Not String.IsNullOrEmpty(statusOfUpdate) Then
+                    RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, hfBBLE.Value)
+                End If
+
                 txtComments = String.Format("Type of Update: {0}<br />{1}", typeOfUpdate, txtComments)
                 LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
             Else

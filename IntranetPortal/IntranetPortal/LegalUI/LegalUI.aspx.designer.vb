@@ -41,6 +41,15 @@ Partial Public Class LegalUI
     Protected WithEvents ShortSaleCaseList As Global.IntranetPortal.ShortSaleCaseList
 
     '''<summary>
+    '''btnCompleteResearch control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCompleteResearch As Global.System.Web.UI.HtmlControls.HtmlInputButton
+
+    '''<summary>
     '''LegalSecondaryActions control.
     '''</summary>
     '''<remarks>

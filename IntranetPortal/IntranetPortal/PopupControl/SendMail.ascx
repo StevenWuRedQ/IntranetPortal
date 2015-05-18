@@ -287,7 +287,7 @@
                                         </div>
                                     </DropDownWindowTemplate>
                                     <ValidationSettings ErrorDisplayMode="None">
-                                        <RequiredField IsRequired="true" />
+                                        <RequiredField IsRequired="false" />
                                     </ValidationSettings>
                                     <%--<ClientSideEvents TextChanged="SynchronizeEmpListBoxValues" DropDown="SynchronizeEmpListBoxValues" />--%>
                                 </dx:ASPxDropDownEdit>

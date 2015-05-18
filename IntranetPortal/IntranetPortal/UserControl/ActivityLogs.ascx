@@ -402,12 +402,15 @@
                         <div class="color_gray upcase_text">Type of update</div>
                         <select class="select_bootstrap select_margin" id="selType1" onchange="ShortSaleUpdateTypeChange(this)">
                             <option></option>
-                            <option>1st Mortgage</option>
+                            <% For Each type In IntranetPortal.Core.CommonData.GetData("UpdateType")%>
+                            <option value="<%= type.Name%>"><%= type.Name%></option>
+                            <% Next%>
+                            <%--   <option>1st Mortgage</option>
                             <option>2nd Mortgage</option>
                             <option>BPO/Appraisal</option>
                             <option>Title</option>
                             <option>Documents Request</option>
-                            <option>Evictions</option>
+                            <option>Evictions</option>--%>
                         </select>
                         <div class="color_gray upcase_text">Status Update</div>
                         <% If DisplayMode = ActivityLogMode.ShortSale Then%>

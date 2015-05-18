@@ -75,7 +75,7 @@ Partial Public Class Lead
             Dim comments = String.Format("Leads Reassign from {0} to {1}.", name, recycled)
             Dim bbles = ctx.LeadsActivityLogs.Where(Function(l) l.EmployeeName = "Portal" And l.Comments = comments And l.ActivityDate > startDate).Select(Function(b) b.BBLE).Distinct.ToArray
 
-            Return ctx.Leads.Where(Function(ld) bbles.Contains(ld.BBLE)).ToList
+            Return ctx.Leads.Where(Function(ld) bbles.Contains(ld.BBLE) And ld.EmployeeName = recycled).ToList
         End Using
     End Function
 
