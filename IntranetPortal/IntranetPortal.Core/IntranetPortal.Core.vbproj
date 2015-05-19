@@ -105,6 +105,9 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADOEntity\CommonData.vb">
+      <DependentUpon>CoreEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ADOEntity\CoreEntities.Context.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -168,6 +171,7 @@
     <Compile Include="ADOEntity\TLOApiLog.vb">
       <DependentUpon>CoreEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="CommonData.vb" />
     <Compile Include="DataLoopRule.vb" />
     <Compile Include="DocumentService.vb" />
     <Compile Include="EmailService.vb" />

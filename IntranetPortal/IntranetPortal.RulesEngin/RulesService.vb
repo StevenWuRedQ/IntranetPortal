@@ -59,7 +59,7 @@ Public Class RulesService
         rules.Add(New RecycleProcessRule() With {.ExecuteOn = TimeSpan.Parse("19:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Recycle Leads"})
         rules.Add(New CompleteTaskRule() With {.ExecuteOn = TimeSpan.Parse("20:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Complete Leads Task"})
         rules.Add(New AgentActivitySummaryRule() With {.ExecuteOn = TimeSpan.Parse("21:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Team Activity Email Rule"})
-        rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("22:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Leads and Task Rule"})
+        'rules.Add(New LeadsAndTaskRule() With {.ExecuteOn = TimeSpan.Parse("22:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Leads and Task Rule"})
         rules.Add(New AssignLeadsRule() With {.ExecuteOn = TimeSpan.Parse("01:00:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "Assign Leads Rule"})
         rules.Add(New EmailSummaryRule() With {.ExecuteOn = TimeSpan.Parse("06:30:00"), .Period = TimeSpan.Parse("1.0:0:0"), .RuleName = "User Task Summary Rule"})
 

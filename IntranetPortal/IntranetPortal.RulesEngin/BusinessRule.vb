@@ -99,6 +99,7 @@ Public Class LeadsAndTaskRule
         '    Log("Assgin Rule is cancel, due to non-working day")
         'End If
     End Sub
+
 End Class
 
 Public Class EmailSummaryRule

@@ -23,5 +23,7 @@ Partial Public Class TLOApiLog
     Public Property Successed As Nullable(Of Boolean)
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
+    Public Property UniqueId As String
+    Public Property Type As String
 
 End Class
