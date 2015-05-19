@@ -41,6 +41,15 @@ Partial Public Class LegalUI
     Protected WithEvents ShortSaleCaseList As Global.IntranetPortal.ShortSaleCaseList
 
     '''<summary>
+    '''btnAssignAttorney control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAssignAttorney As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
     '''btnCompleteResearch control.
     '''</summary>
     '''<remarks>
@@ -48,6 +57,33 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnCompleteResearch As Global.System.Web.UI.HtmlControls.HtmlInputButton
+
+    '''<summary>
+    '''lbEmployee control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbEmployee As Global.System.Web.UI.HtmlControls.HtmlSelect
+
+    '''<summary>
+    '''btnAssign control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnAssign As Global.System.Web.UI.HtmlControls.HtmlInputButton
+
+    '''<summary>
+    '''btnComplete control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnComplete As Global.System.Web.UI.HtmlControls.HtmlInputButton
 
     '''<summary>
     '''LegalSecondaryActions control.

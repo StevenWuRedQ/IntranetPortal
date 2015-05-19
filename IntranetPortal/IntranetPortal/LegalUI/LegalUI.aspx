@@ -8,9 +8,8 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <%--leagal Ui--%>
     <style>
-        .dxsplControl_MetropolisBlue1 .dxsplLCC
-        {
-            padding:0;
+        .dxsplControl_MetropolisBlue1 .dxsplLCC {
+            padding: 0;
         }
     </style>
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
@@ -215,10 +214,9 @@
                                                             <span class="time_buttons" onclick="ShowAcrisMap(&quot;3015930048 &quot;)">Acris</span>
                                                             <span class="time_buttons" onclick="ShowPropertyMap(&quot;3015930048 &quot;)">Maps</span>
 
-                                                            <span class="time_buttons" onclick="VendorsPopupClient.Show()">Assgin Attorney</span>
+                                                            <span class="time_buttons" onclick="" runat="server" visible="false" id="btnAssignAttorney">Assign Attorney</span>
                                                             <span class="time_buttons" onclick="$('#RequestModal').modal()">Request Document</span>
                                                         </div>
-
                                                         <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">Started on 10/16/2014 9:30:16 PM</span>
                                                     </div>
 
@@ -448,7 +446,13 @@
                                                                 <div class="short_sale_content">
                                                                     <div class="clearfix">
                                                                         <div style="float: right">
-                                                                            <input type="button" class="rand-button short_sale_edit" value="Completed Research" runat="server" onserverclick="btnCompleteResearch_ServerClick" id="btnCompleteResearch" />
+                                                                            <input type="button" class="rand-button short_sale_edit" value="Completed Research" runat="server" onserverclick="btnCompleteResearch_ServerClick" id="btnCompleteResearch" visible="false" />
+                                                                            <select class="ss_form_input" id="lbEmployee" runat="server" style="width:150px" visible="false">
+                                                                                <option value=""></option>
+                                                                                <option value="Chris Yan">Chris Yan</option>
+                                                                                <option value="Steven Wu">Steven Wu</option>
+                                                                            </select>
+                                                                            <input type="button" class="rand-button short_sale_edit" visible="false" value="Assign" runat="server" onserverclick="btnAssign_ServerClick" id="btnAssign" />
                                                                         </div>
                                                                     </div>
 
@@ -1705,7 +1709,7 @@
 
                                                                     <div class="clearfix">
                                                                         <div style="float: right">
-                                                                            <input type="button" class="rand-button short_sale_edit" value="Completed send back to Agent" onclick="switch_edit_model(this, short_sale_case_data)">
+                                                                            <input type="button" id="btnComplete" class="rand-button short_sale_edit" value="Completed" runat="server" onserverclick="btnComplete_ServerClick" />
                                                                         </div>
                                                                     </div>
                                                                     <div data-array-index="0" class="ss_array" style="display: inline;">
@@ -1921,7 +1925,7 @@
 
                                                                             </div>
 
-                                                                            <uc1:LegalSecondaryActions runat="server" id="LegalSecondaryActions" />
+                                                                            <uc1:LegalSecondaryActions runat="server" ID="LegalSecondaryActions" />
 
                                                                         </div>
                                                                     </div>
@@ -1997,6 +2001,7 @@
                             <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
                             <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
                         </div>
+
                     </dx:SplitterContentControl>
 
                 </ContentCollection>
@@ -2015,7 +2020,6 @@
                                 </li>
                                 <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                 <li style="margin-right: 30px; color: #7396a9; float: right">
-
                                     <div style="display: inline-block">
                                         <a href="/LegalUI/LegalUI.aspx?SecondaryAction=true"><i class="fa fa-arrow-right sale_head_button sale_head_button_left tooltip-examples" style="margin-right: 10px; color: #7396A9" title="Secondary" onclick=""></i></a>
                                     </div>
@@ -2033,6 +2037,8 @@
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
+
+
         </Panes>
 
 

@@ -10,9 +10,7 @@
 <div id="Estate" class="legal_action_div">
     <div class="ss_form">
         <h4 class="ss_form_title">Estate</h4>
-        <ul class="ss_form_box clearfix">
-
-
+        <ul class="ss_form_box clearfix">            
             <li class="ss_form_item">
                 <label class="ss_form_input_title">hold Reason</label>
                 <select class="ss_form_input" data-field="PropertyInfo.Number">

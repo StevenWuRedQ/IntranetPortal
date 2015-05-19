@@ -6,6 +6,7 @@ Public Class ManagePreview
     Public Property Applicant As String
     Public Property BBLE As String
     Public Property SubmitedDate As DateTime
+    Public Property CaseName As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
@@ -14,6 +15,7 @@ Public Class ManagePreview
                 BBLE = wli.ProcessInstance.DataFields("BBLE").ToString
                 Applicant = wli.ProcessInstance.Originator
                 SubmitedDate = wli.ProcessInstance.StateDate
+                CaseName = wli.DisplayName
 
                 BindLegalUser()
             End If

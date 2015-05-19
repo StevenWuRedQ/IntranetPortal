@@ -23,9 +23,27 @@
             </tr>
             <tr>
                 <td>
+                    <div class="form_head">Case Name</div>
+                </td>
+                <td><%= Me.CaseName%></td>
+            </tr>
+            <tr>
+                <td>
                     <div class="form_head">BBLE</div>
                 </td>
                 <td><%= Me.BBLE%></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="form_head">Description</div>
+                </td>
+                <td><textarea>
+                    this is description from agent. 
+                    </textarea></td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td></td>
             </tr>
             <tr>
                 <td style="vertical-align:top">
