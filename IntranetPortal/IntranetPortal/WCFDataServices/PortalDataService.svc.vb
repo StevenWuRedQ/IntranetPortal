@@ -314,7 +314,14 @@ Public Class PortalDataService
         'Return False
     End Function
 
-    Public Sub TriggerIsReady(triggerDetected As Boolean) Implements IPortalDataService.TriggerIsReady
+    Public Sub TriggerIsReady(data As TriggerData) Implements IPortalDataService.TriggerIsReady
 
     End Sub
+End Class
+
+Public Class TriggerData
+    Public Property AcrisNotifyFlag As Boolean
+    Public Property AcrisIsBatch As Boolean
+    Public Property AcrisBBLE As String
+    Public Property ECBNotifyFlag As Boolean
 End Class

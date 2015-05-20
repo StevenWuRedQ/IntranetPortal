@@ -260,8 +260,7 @@ Public Class LeadsSubMenu
                 End If
 
                 If lbSelectionMode.SelectedValues.Contains("3") Then
-                    Dim ld = Lead.GetInstance(bble)
-                    WorkflowService.StartLegalRequest(ld.LeadsName, bble, String.Join(";", Roles.GetUsersInRole("Legal-Manager")))
+                    LegalCaseManage.StartLegalRequest(bble, Page.User.Identity.Name)
                 End If
             End If
         End If
