@@ -198,6 +198,7 @@
     </Compile>
     <Compile Include="PropertyHelper.vb" />
     <Compile Include="Model\RecycleLead.vb" />
+    <Compile Include="Utility.vb" />
     <Compile Include="WorkingHours.vb" />
   </ItemGroup>
   <ItemGroup>
