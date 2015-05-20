@@ -402,9 +402,9 @@
                         <div class="color_gray upcase_text">Type of update</div>
                         <select class="select_bootstrap select_margin" id="selType1" onchange="ShortSaleUpdateTypeChange(this)">
                             <option></option>
-                            <% For Each type In IntranetPortal.Core.CommonData.GetData("UpdateType")%>
+                           <%-- <% For Each type In IntranetPortal.Core.CommonData.GetData("UpdateType")%>
                             <option value="<%= type.Name%>"><%= type.Name%></option>
-                            <% Next%>
+                            <% Next%>--%>
                             <%--   <option>1st Mortgage</option>
                             <option>2nd Mortgage</option>
                             <option>BPO/Appraisal</option>

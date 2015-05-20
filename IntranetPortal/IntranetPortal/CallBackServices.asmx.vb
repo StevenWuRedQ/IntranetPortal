@@ -7,7 +7,7 @@ Imports Newtonsoft.Json
 Imports System.Web.Script.Serialization
 
 ' To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line.
-' <System.Web.Script.Services.ScriptService()> _
+'<System.Web.Script.Services.ScriptService()> _
 <System.Web.Services.WebService(Namespace:="http://tempuri.org/")> _
 <System.Web.Services.WebServiceBinding(ConformsTo:=WsiProfiles.BasicProfile1_1)> _
 <ToolboxItem(False)> _
@@ -18,6 +18,13 @@ Public Class CallBackServices
 
     <WebMethod()> _
     Public Function GetContact(p As String) As List(Of PartyContact)
+        Dim allContact = PartyContact.getAllContact
+        Return allContact
+    End Function
+
+    <WebMethod()> _
+    <ScriptMethod(UseHttpGet:=True)> _
+    Public Function GetContact2() As List(Of PartyContact)
         Dim allContact = PartyContact.getAllContact
         Return allContact
     End Function

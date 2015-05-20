@@ -1,4 +1,7 @@
-﻿Public Class LegalUI
+﻿Imports IntranetPortal.ShortSale
+Imports Newtonsoft.Json
+
+Public Class LegalUI
     Inherits System.Web.UI.Page
     Public SecondaryAction As Boolean = False
     Public Agent As Boolean = False

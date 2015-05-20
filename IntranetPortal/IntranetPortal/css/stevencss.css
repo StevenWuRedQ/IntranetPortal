@@ -1646,7 +1646,10 @@ li.ss_form_item {
         outline: none;
         color: #0e9ee9;
     }
+.ss_disable
+{
 
+}
 .ss_form_title {
     color: rgb(177, 178, 183);
     text-transform: uppercase;

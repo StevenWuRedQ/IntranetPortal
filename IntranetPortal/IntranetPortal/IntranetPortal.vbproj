@@ -1515,6 +1515,9 @@
     <Compile Include="WCFDataServices\CommonService.svc.vb">
       <DependentUpon>CommonService.svc</DependentUpon>
     </Compile>
+    <Compile Include="WCFDataServices\ContactService.svc.vb">
+      <DependentUpon>ContactService.svc</DependentUpon>
+    </Compile>
     <Compile Include="WCFDataServices\ICommonService.vb" />
     <Compile Include="WCFDataServices\IPortalDataService.vb" />
     <Compile Include="WCFDataServices\IPortalReportService.vb" />
@@ -2583,6 +2586,8 @@
     <Content Include="Scripts\jquery.printElement.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.js" />
     <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
+    <Content Include="Scripts\jquery.webui-popover.css" />
+    <Content Include="Scripts\jquery.webui-popover.js" />
     <Content Include="Scripts\js\jquery.backstretch.min.js" />
     <Content Include="Scripts\js\jquery.debouncedresize.js" />
     <Content Include="Scripts\js\jquery.easing.1.3.js" />
@@ -2848,6 +2853,7 @@
     <Content Include="ViewHomeOwner.aspx" />
     <Content Include="ViewLeadsInfo.aspx" />
     <Content Include="WCFDataServices\CommonService.svc" />
+    <Content Include="WCFDataServices\ContactService.svc" />
     <Content Include="WCFDataServices\PortalDataService.svc" />
     <Content Include="WCFDataServices\PortalReportService.svc" />
     <Content Include="WebForm2.aspx" />

@@ -883,6 +883,7 @@ function initSelectByElem(e, dValue) {
 
 $(document).ready(function () {
     initToolTips();
+    $(".ss_disable").prop('disabled', 'disabled');
     $(".ss_allow_eidt").prop("disabled", false);// allow alweays edit
 });
 function phone_InitAndKeyUp(s, e) {

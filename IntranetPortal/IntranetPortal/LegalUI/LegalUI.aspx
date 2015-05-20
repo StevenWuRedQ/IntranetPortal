@@ -4,6 +4,24 @@
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
 <%@ Register Src="~/ShortSale/ShortSaleCaseList.ascx" TagPrefix="uc1" TagName="ShortSaleCaseList" %>
 <%@ Register Src="~/LegalUI/LegalSecondaryActions.ascx" TagPrefix="uc1" TagName="LegalSecondaryActions" %>
+<asp:Content runat="server" ContentPlaceHolderID="head">
+
+    <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery.webui-popover.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
+    <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
+    <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>
+    <!-- Angular Material Javascript using RawGit to load directly from `bower-material/master` -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
+    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">
+
+
+    <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.light.css">
+</asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <%--leagal Ui--%>
@@ -12,19 +30,94 @@
             padding: 0;
         }
     </style>
+    <div>
+    </div>
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
         <Panes>
-            <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="2px">
+            <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
                 <ContentCollection>
                     <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
                         <uc1:ShortSaleCaseList runat="server" ID="ShortSaleCaseList" />
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-            <dx:SplitterPane ShowCollapseBackwardButton="True">
+            <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px">
                 <ContentCollection>
                     <dx:SplitterContentControl>
-                        <div style="width: 650px">
+
+                        <script>
+                            function formatRepo(repo) {
+                                if (repo.loading) return repo.text;
+
+                                var markup = '</div>' + repo.Name + '</div>';
+
+                                markup += '</div></div>';
+
+                                return markup;
+                            }
+                            function formatRepoSelection(repo) {
+                                return repo.Name || repo.text;
+                            }
+
+                            $(document).ready(function () {
+
+                                $('.popup').webuiPopover({ title: 'Contact ' + $("#vendor_btn").html(), content: $('#contact_popup').html(), width: 400 });
+
+                            });
+                        </script>
+                        <div ng-controller="PortalCtrl">
+                            <div id="vendor_btn" style="display: none">
+                                <i class="fa fa-users icon_btn" title="Vendors" onclick="VendorsPopupClient.Show()"></i>
+                            </div>
+                            <div id="contact_popup" style="display: none;">
+
+                                <div>
+                                    <ul class="ss_form_box clearfix">
+                                        <li class="ss_form_item">
+
+                                            <label class="ss_form_input_title">Name</label>
+                                            <input class="ss_form_input ss_disable" disabled="disabled">
+                                        </li>
+                                        <li class="ss_form_item">
+                                            <label class="ss_form_input_title">Office #</label>
+                                            <input class="ss_form_input ss_disable" disabled="disabled">
+                                        </li>
+                                        <li class="ss_form_item">
+                                            <label class="ss_form_input_title">Extension</label>
+                                            <input class="ss_form_input ss_disable" disabled="disabled">
+                                        </li>
+                                        <li class="ss_form_item">
+                                            <label class="ss_form_input_title">Company Name</label>
+                                            <input class="ss_form_input ss_disable" disabled="disabled">
+                                        </li>
+                                        <li class="ss_form_item">
+                                            <label class="ss_form_input_title">Fax</label>
+                                            <input class="ss_form_input ss_disable" disabled="disabled">
+                                        </li>
+                                        <li class="ss_form_item">
+                                            <label class="ss_form_input_title">Cell #</label>
+                                            <input class="ss_form_input ss_disable" disabled="disabled">
+                                        </li>
+                                        <li class="ss_form_item">
+                                            <label class="ss_form_input_title">email</label>
+                                            <input class="ss_form_input ss_disable" disabled="disabled">
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+
+                            </div>
+
+                            <div>
+                               
+                                <%--<select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
+                                </select>
+                                <select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
+                                </select>--%>
+                                <p style="display:none">{{selectBoxData}}</p>
+                            </div>
+
                             <div style="align-content: center; height: 100%">
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
@@ -86,12 +179,12 @@
                                                 // Handler for .ready() called.
                                                 format_input();
                                                 $(".ss_phone").each(function (index) {
-                                                    format_phone(this)
+                                                    format_phone(this);
                                                 });
                                             });
                                             var short_sale_case_data = null;
                                             function ShowSelectParty() {
-                                                VendorsPopupClient.Show()
+                                                VendorsPopupClient.Show();
                                             }
                                             function getShortSaleInstanceComplete(s, e) {
                                                 debugger;
@@ -210,9 +303,9 @@
                                                             </span>
 
                                                             <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
-                                                            <span class="time_buttons" onclick="ShowDOBWindow(&quot;&quot;,&quot;1593 &quot;, &quot;48  &quot;)">DOB</span>
-                                                            <span class="time_buttons" onclick="ShowAcrisMap(&quot;3015930048 &quot;)">Acris</span>
-                                                            <span class="time_buttons" onclick="ShowPropertyMap(&quot;3015930048 &quot;)">Maps</span>
+                                                            <span class="time_buttons" onclick="ShowDOBWindow('','1593 ', '48')">DOB</span>
+                                                            <span class="time_buttons" onclick="ShowAcrisMap('3015930048')">Acris</span>
+                                                            <span class="time_buttons" onclick="ShowPropertyMap('3015930048')">Maps</span>
 
                                                             <span class="time_buttons" onclick="" runat="server" visible="false" id="btnAssignAttorney">Assign Attorney</span>
                                                             <span class="time_buttons" onclick="$('#RequestModal').modal()">Request Document</span>
@@ -268,6 +361,7 @@
                                                                     <div>
 
                                                                         <div>
+
                                                                             <h4 class="ss_form_title">Property</h4>
 
                                                                             <ul class="ss_form_box clearfix">
@@ -551,9 +645,6 @@
                                                                                 <input class="ss_form_input ss_form_hidden" value=" ">
                                                                             </li>
 
-
-
-
                                                                             <li class="ss_form_item">
                                                                                 <label class="ss_form_input_title">Estate</label>
                                                                                 <input class="ss_form_input" type="number" data-field="PropertyInfo.NumOfStories">
@@ -573,10 +664,21 @@
                                                                                 </label>
 
                                                                             </li>
+                                                                            <li class="ss_form_item">
+                                                                                <label class="ss_form_input_title">Plaintiff <i class="fa fa-user popup"></i></label>
+                                                                                <div dx-select-box="{ dataSource: selectBoxData,valueExpr: 'ContactId',displayExpr: 'Name',searchEnabled:true,bindingOptions: { value: 'selectValue' }}">
+                                                                                </div>
+                                                                                <%--<input class="ss_form_input" type="number" data-field="PropertyInfo.NumOfStories">--%>
+                                                                            </li>
+                                                                             <li class="ss_form_item">
+                                                                                <label class="ss_form_input_title">Plaintiff # <i class="fa fa-user popup"></i></label>
+                                                                                <div dx-select-box="{ dataSource: selectBoxData,valueExpr: 'ContactId',displayExpr: 'OfficeNO',searchEnabled:true,value:selectValue,bindingOptions: { value: 'selectValue' }}">
+                                                                                </div>
 
-
+                                                                            </li>
                                                                         </ul>
                                                                     </div>
+
                                                                     <div class="ss_form">
                                                                         <h4 class="ss_form_title">Plaintiff <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="VendorsPopupClient.Show()" style="display: inline !important;"></i></h4>
                                                                         <ul class="ss_form_box clearfix">
@@ -1261,7 +1363,7 @@
 
                                                                             <div class="ss_form">
                                                                                 <h4 class="ss_form_title">Assignee 
-                                                             <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty(' ',  " style="display: inline !important;"></i>
+                                                                                 <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn"></i>
                                                                                 </h4>
                                                                                 <ul class="ss_form_box clearfix">
                                                                                     <li class="ss_form_item">
@@ -1288,7 +1390,7 @@
                                                                             </div>
                                                                             <div class="ss_form">
                                                                                 <h4 class="ss_form_title">Signed by 
-                                                             <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty(' ',  " style="display: inline !important;"></i>
+                                                                                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn"></i>
                                                                                 </h4>
                                                                                 <ul class="ss_form_box clearfix">
                                                                                     <li class="ss_form_item">
@@ -1936,27 +2038,7 @@
                                                                         <h4 class="ss_form_title">Legal  Notes <i class="fa fa-plus-circle  color_blue_edit collapse_btn tooltip-examples" title="" onclick="addOccupantNoteClick( 0  ,this);" data-original-title="Add"></i></h4>
 
 
-                                                                        <div class="note_input" style="display: none" data-index="0">
-                                                                            {{#Notes}}
-                                                                            <div class="clearence_list_item">
-                                                                                <div class="clearence_list_content clearfix" style="margin-bottom: 10px">
-                                                                                    <div class="clearence_list_text" style="margin-top: 0px;">
-                                                                                        <div class="clearence_list_text14">
-                                                                                            <i class="fa fa-caret-right clearence_caret_right_icon"></i>
-                                                                                            <i class="fa fa-times color_blue_edit icon_btn tooltip-examples" title="" style="float: right" onclick="deleteAccoupantNote(0,{{id}})" data-original-title="Delete"></i>
-                                                                                            <span class="clearence_list_text14">{{Notes}}
-                                                                                                    <br>
 
-                                                                                                <span class="clearence_list_text12">{{CreateDate}} by {{CreateBy}}
-                                                                                                </span>
-                                                                                            </span>
-
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            {{/Notes}}
-                                                                        </div>
                                                                         <div class="note_output">
 
 
@@ -1999,7 +2081,7 @@
                                 </div>
                             </div>
                             <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
-                            <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
+
                         </div>
 
                     </dx:SplitterContentControl>
@@ -2044,4 +2126,37 @@
 
     </dx:ASPxSplitter>
 
+
+   <%-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
+    <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
+    <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>
+   
+    <script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>--%>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="/Scripts/stevenjs.js"></script>
+    <script>
+        var portalApp = angular.module('PortalApp', ['dx']);
+        var AllContact = $.parseJSON('<%= GetAllContact()%>');
+        portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
+            $scope.SelectContactId = 128;
+            $scope.selectBoxData = AllContact;
+            $.getJSON('/WCFDataServices/ContactService.svc/GetAllContacts', function (data) {
+              
+                $scope.selectBoxData = data;
+            });
+           
+        });
+    </script>
+    <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
+    <%--  <script>
+         $(document).ready(function () {
+                 format_input();
+             }
+         )
+    </script>--%>
+    <script src="/Scripts/bootstrap.min.js"></script>
 </asp:Content>
