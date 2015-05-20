@@ -37,7 +37,7 @@
                 <td>
                     <div class="form_head">Description</div>
                 </td>
-                <td><textarea>
+                <td><textarea style="width:300px;height:150px;">
                     this is description from agent. 
                     </textarea></td>
             </tr>
