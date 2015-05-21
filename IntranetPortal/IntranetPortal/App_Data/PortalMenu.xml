@@ -29,6 +29,7 @@
       </PortalNavItem>-->
     </Items>
   </PortalNavItem>
+  
   <PortalNavItem Name="Agent" Text="Leads" NavigationUrl="/SummaryPage.aspx" ShowAmount="false" ItemType="Agent" Expanded="true">
     <level>1</level>
     <FontClass>
@@ -344,19 +345,35 @@
       </PortalNavItem>
     </Items>
   </PortalNavItem>
+  
   <PortalNavItem Name="Legal" Text="Legal" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <Items>
-      <PortalNavItem Name="Legal" Text="Legal Leads" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true" ShowAmount="true">
+      <PortalNavItem Name="Legal0" Text="Summary" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Legal2" Text="Legal Manger" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;attorney=true" ShowAmount="true">
+      <!--<PortalNavItem Name="Legal" Text="Preview" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>-->
+      <PortalNavItem Name="Legal" Text="Research" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="Legal3" Text="Legal Attorney" NavigationUrl="/LegalUI/LegalUI.aspx?attorney=true" ShowAmount="true">
+      <!--<PortalNavItem Name="Legal" Text="Review" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>-->
+      <PortalNavItem Name="Legal2" Text="In Court" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;attorney=true" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-university"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal3" Text="Closed" NavigationUrl="/LegalUI/LegalUI.aspx?attorney=true" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
@@ -364,6 +381,7 @@
     </Items>
     
   </PortalNavItem>
+  
   <PortalNavItem Name="Eviction" Text="Eviction" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <!--Temporarily use Admin roles for Eviction-->
     <UserRoles>Eviction-Manager</UserRoles>
