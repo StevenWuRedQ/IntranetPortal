@@ -150,10 +150,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="dxpc-contentWrapper">
-                                            <div class="dxpc-content" id="ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_SendMail_PopupSendMail_PWC-1">
-                                            </div>
-                                        </div>
+                                       
                                     </div>
                                 </div>
 

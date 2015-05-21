@@ -774,11 +774,25 @@
       <DependentUpon>LeadsSearchApproval.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="LegalUI\LegalForeclosureReviewTab.ascx.designer.vb">
+      <DependentUpon>LegalForeclosureReviewTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LegalUI\LegalForeclosureReviewTab.ascx.vb">
+      <DependentUpon>LegalForeclosureReviewTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="LegalUI\LegalSecondaryActions.ascx.designer.vb">
       <DependentUpon>LegalSecondaryActions.ascx</DependentUpon>
     </Compile>
     <Compile Include="LegalUI\LegalSecondaryActions.ascx.vb">
       <DependentUpon>LegalSecondaryActions.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LegalUI\LegalSecondaryActionTab.ascx.designer.vb">
+      <DependentUpon>LegalSecondaryActionTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LegalUI\LegalSecondaryActionTab.ascx.vb">
+      <DependentUpon>LegalSecondaryActionTab.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="LegalUI\LegalSummaryTab.ascx.designer.vb">
@@ -1768,7 +1782,9 @@
     <Content Include="LeadsGenerator\LeadsGenerator.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />
+    <Content Include="LegalUI\LegalForeclosureReviewTab.ascx" />
     <Content Include="LegalUI\LegalSecondaryActions.ascx" />
+    <Content Include="LegalUI\LegalSecondaryActionTab.ascx" />
     <Content Include="LegalUI\LegalSummaryTab.ascx" />
     <Content Include="LegalUI\LegalTab.ascx" />
     <Content Include="LegalUI\LegalUI.aspx" />

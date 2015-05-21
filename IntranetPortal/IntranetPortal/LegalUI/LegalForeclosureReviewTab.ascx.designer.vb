@@ -11,41 +11,32 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class LegalTab
+Partial Public Class LegalForeclosureReviewTab
 
     '''<summary>
-    '''btnAssignAttorney control.
+    '''btnCompleteResearch control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnAssignAttorney As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents btnCompleteResearch As Global.System.Web.UI.HtmlControls.HtmlInputButton
 
     '''<summary>
-    '''LegalSummaryTab control.
+    '''lbEmployee control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LegalSummaryTab As Global.IntranetPortal.LegalSummaryTab
+    Protected WithEvents lbEmployee As Global.System.Web.UI.HtmlControls.HtmlSelect
 
     '''<summary>
-    '''LegalForeclosureReviewTab control.
+    '''btnAssign control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LegalForeclosureReviewTab As Global.IntranetPortal.LegalForeclosureReviewTab
-
-    '''<summary>
-    '''LegalSecondaryActionTab control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents LegalSecondaryActionTab As Global.IntranetPortal.LegalSecondaryActionTab
+    Protected WithEvents btnAssign As Global.System.Web.UI.HtmlControls.HtmlInputButton
 End Class
