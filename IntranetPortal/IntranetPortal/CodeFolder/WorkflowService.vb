@@ -45,6 +45,28 @@ Public Class WorkflowService
         conn.Close()
     End Sub
 
+    Public Shared Sub StartTaskProcess(procName As String, displayName As String, taskId As Integer, bble As String, approver As String, priority As String, createUser As String, taskUrl As String)
+        If Not IntegratedWithWorkflow() Then
+            Return
+        End If
+
+        Dim conn = GetConnection()
+        Dim procInst = conn.CreateProcessInstance(procName)
+        procInst.DisplayName = displayName
+
+        Dim tmpPriority As ProcessPriority
+        If [Enum].TryParse(Of ProcessPriority)(priority, tmpPriority) Then
+            procInst.Priority = tmpPriority
+        End If
+
+        procInst.DataFields.Add("TaskId", taskId)
+        procInst.DataFields.Add("BBLE", bble)
+        procInst.DataFields.Add("Mgr", approver)
+        procInst.DataFields.Add("TaskUrl", taskUrl)
+        conn.StartProcessInstance(procInst)
+        conn.Close()
+    End Sub
+
     Public Shared Sub ExpiredLeadsProcess(bble As String)
         ExpireTaskProcess(bble)
         ExpiredLeadsReminder(bble)

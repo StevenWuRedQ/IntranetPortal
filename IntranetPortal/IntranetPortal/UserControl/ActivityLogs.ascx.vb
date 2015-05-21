@@ -386,6 +386,8 @@ Public Class ActivityLogs
             WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text)
         ElseIf DisplayMode = ActivityLogMode.ShortSale Then
             WorkflowService.StartTaskProcess("ShortSaleTask", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text)
+        ElseIf DisplayMode = ActivityLogMode.Legal Then
+            WorkflowService.StartTaskProcess("TaskProcess", taskName, taskId, ld.BBLE, employees, cbTaskImportant.Text, "", "/LegalUI/LegalUI.aspx")
         End If
 
         For i = 0 To emps.Count - 1
@@ -826,31 +828,37 @@ Public Class ActivityLogs
             Throw New Exception("Comments can not be empty.")
         End If
 
-        If Me.DisplayMode = ActivityLogMode.ShortSale Then
-            aspxdate = DateTime.Now
-            Dim typeOfUpdate = e.Parameter.Split("|")(1)
-            Dim statusOfUpdate = e.Parameter.Split("|")(2)
+        Select Case DisplayMode
+            Case ActivityLogMode.ShortSale
+                aspxdate = DateTime.Now
+                Dim typeOfUpdate = e.Parameter.Split("|")(1)
+                Dim statusOfUpdate = e.Parameter.Split("|")(2)
 
-            If Not String.IsNullOrEmpty(typeOfUpdate) Then
-                If Not String.IsNullOrEmpty(statusOfUpdate) Then
-                    RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, hfBBLE.Value)
+                If Not String.IsNullOrEmpty(typeOfUpdate) Then
+                    If Not String.IsNullOrEmpty(statusOfUpdate) Then
+                        RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, hfBBLE.Value)
+                    End If
+
+                    txtComments = String.Format("Type of Update: {0}<br />{1}", typeOfUpdate, txtComments)
+                    LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
+                Else
+                    LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
                 End If
+            Case ActivityLogMode.Legal
 
-                txtComments = String.Format("Type of Update: {0}<br />{1}", typeOfUpdate, txtComments)
-                LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
-            Else
-                LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
-            End If
-        Else
-            LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)
+                LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.Legal.ToString, LeadsActivityLog.EnumActionType.Comments)
 
-            'Notify leads owner messager 
-            Dim ld = Lead.GetInstance(hfBBLE.Value)
-            If Not ld.EmployeeName.ToLower = Page.User.Identity.Name.ToLower Then
-                Dim comments = String.Format("{0} just added new comments on {1}", Page.User.Identity.Name, ld.LeadsName)
-                UserMessage.AddNewMessage(ld.EmployeeName, "New Comments", comments, hfBBLE.Value)
-            End If
-        End If
+            Case Else
+                LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.SalesAgent.ToString, LeadsActivityLog.EnumActionType.Comments)
+
+                'Notify leads owner messager 
+                Dim ld = Lead.GetInstance(hfBBLE.Value)
+                If Not ld.EmployeeName.ToLower = Page.User.Identity.Name.ToLower Then
+                    Dim comments = String.Format("{0} just added new comments on {1}", Page.User.Identity.Name, ld.LeadsName)
+                    UserMessage.AddNewMessage(ld.EmployeeName, "New Comments", comments, hfBBLE.Value)
+                End If
+        End Select
+
         'BindData(hfBBLE.Value)
     End Sub
 
@@ -896,6 +904,7 @@ Public Class ActivityLogs
     Public Enum ActivityLogMode
         Leads
         ShortSale
+        Legal
     End Enum
 
     Protected Sub EmailBody2_Load(sender As Object, e As EventArgs)

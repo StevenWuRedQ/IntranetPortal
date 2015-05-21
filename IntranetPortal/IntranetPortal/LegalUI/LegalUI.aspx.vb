@@ -6,6 +6,7 @@ Public Class LegalUI
     Inherits System.Web.UI.Page
     Public SecondaryAction As Boolean = False
     Public Agent As Boolean = False
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
     End Sub
@@ -15,9 +16,10 @@ Public Class LegalUI
         Agent = Request.QueryString("Agent") IsNot Nothing
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             ASPxSplitter1.Panes("listPanel").Visible = False
-            ShortSaleCaseList.BindCaseForTest(SecondaryAction AndAlso Agent)
+            Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
+            Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
+            ActivityLogs.BindData(bble)
 
-            'Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
             'Select Case wli.ActivityName
             '    Case "LegalResearch"
             '        btnCompleteResearch.Visible = True
@@ -25,6 +27,13 @@ Public Class LegalUI
             '        lbEmployee.Visible = True
             '        btnAssign.Visible = True
             'End Select
+
+            Return
+        End If
+
+        If Not String.IsNullOrEmpty(Request.QueryString("lc")) Then
+            LegalCaseList.BindCaseList(CInt(Request.QueryString("lc")))
+            LegalCaseList.AutoLoadCase = True
         End If
     End Sub
 
@@ -32,43 +41,8 @@ Public Class LegalUI
         Dim json = New JavaScriptSerializer().Serialize(PartyContact.getAllContact().OrderBy(Function(c) c.Name))
         Return json
     End Function
-    'Protected Sub btnCompleteResearch_ServerClick(sender As Object, e As EventArgs)
-    '    If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-    '        Dim sn = Request.QueryString("sn").ToString
 
-    '        Dim wli = WorkflowService.LoadTaskProcess(sn)
-    '        wli.Finish()
-
-    '        Response.Clear()
-    '        Response.Write("The case is move back to manager.")
-    '        Response.End()
-    '    End If
-    'End Sub
-
-    'Protected Sub btnAssign_ServerClick(sender As Object, e As EventArgs)
-    '    If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-    '        Dim sn = Request.QueryString("sn").ToString
-
-    '        Dim wli = WorkflowService.LoadTaskProcess(sn)
-    '        wli.ProcessInstance.DataFields("Attorney") = lbEmployee.Value
-    '        wli.Finish()
-
-    '        Response.Clear()
-    '        Response.Write("The case is move to " & lbEmployee.Value)
-    '        Response.End()
-    '    End If
-    'End Sub
-
-    'Protected Sub btnComplete_ServerClick(sender As Object, e As EventArgs)
-    '    If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-    '        Dim sn = Request.QueryString("sn").ToString
-
-    '        Dim wli = WorkflowService.LoadTaskProcess(sn)
-    '        wli.Finish()
-
-    '        Response.Clear()
-    '        Response.Write("The case is finished.")
-    '        Response.End()
-    '    End If
-    'End Sub
+    Protected Sub cbpLogs_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+        ActivityLogs.BindData(e.Parameter)
+    End Sub
 End Class

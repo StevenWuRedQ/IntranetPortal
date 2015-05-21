@@ -23,13 +23,13 @@ Partial Public Class ActivityLogs
     Protected WithEvents EmailBody2 As Global.DevExpress.Web.ASPxHtmlEditor.ASPxHtmlEditor
 
     '''<summary>
-    '''dateActivity control.
+    '''ASPxDateEdit1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents dateActivity As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
+    Protected WithEvents ASPxDateEdit1 As Global.DevExpress.Web.ASPxEditors.ASPxDateEdit
 
     '''<summary>
     '''addCommentsCallback control.

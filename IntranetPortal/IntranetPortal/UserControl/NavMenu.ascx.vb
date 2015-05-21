@@ -237,6 +237,30 @@ Public Class RefreshLeadsCountHandler
         If name.StartsWith("MyCompleted") Then
             Return GetMyCompletedCount(userName)
         End If
+
+        If name.StartsWith("Legal") Then
+            Return GetLegalCaseCount(name, itemText, userName)
+        End If
+    End Function
+
+    Function GetLegalCaseCount(name As String, itemText As String, userName As String) As Integer
+        Dim tmpStr = name.Split("-")
+
+        If tmpStr.Length > 0 Then
+            Dim type = tmpStr(1)
+
+            Dim status As Legal.LegalCaseStatus
+
+            If [Enum].TryParse(Of Legal.LegalCaseStatus)(type, status) Then
+                If (Roles.IsUserInRole(userName, "Legal-Manager")) Then
+                    Return Legal.LegalCase.GetCaseList(status).Count
+                End If
+
+                Return Legal.LegalCase.GetCaseList(status, userName).Count
+            Else
+                Return 0
+            End If
+        End If
     End Function
 
     Function GetMyTaskCount() As Integer
@@ -338,7 +362,6 @@ Public Class RefreshLeadsCountHandler
 
     End Function
 
-
     Function GetShortSaleCaseCount(name As String, itemText As String, userName As String) As Integer
         Dim tmpStr = name.Split("-")
 
@@ -366,7 +389,7 @@ Public Class RefreshLeadsCountHandler
                 Case "Agent"
                     If tmpStr.Length = 3 Then
                         Dim subCategory = tmpStr(2)
-                       
+
                         If subCategory = "All" Then
                             Return ShortSaleManage.GetShortSaleCasesByUsers({userName}).Count
                         End If

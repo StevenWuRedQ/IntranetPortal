@@ -11,68 +11,59 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class LegalUI
+Partial Public Class LegalCaseList
 
     '''<summary>
-    '''ASPxSplitter1 control.
+    '''lblLeadCategory control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents lblLeadCategory As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
-    '''SplitterContentControl1 control.
+    '''divExpand control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
+    Protected WithEvents divExpand As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''LegalCaseList control.
+    '''hfCaseStatus control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LegalCaseList As Global.IntranetPortal.LegalCaseList
+    Protected WithEvents hfCaseStatus As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
-    '''LegalTab1 control.
+    '''hfCaseBBLEs control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LegalTab1 As Global.IntranetPortal.LegalTab
+    Protected WithEvents hfCaseBBLEs As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
-    '''VendorsPopup control.
+    '''gridCase control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents VendorsPopup As Global.IntranetPortal.VendorsPopup
+    Protected WithEvents gridCase As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
-    '''cbpLogs control.
+    '''ASPxPopupMenu2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbpLogs As Global.DevExpress.Web.ASPxCallbackPanel.ASPxCallbackPanel
-
-    '''<summary>
-    '''ActivityLogs control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
+    Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
 End Class

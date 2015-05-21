@@ -2,8 +2,9 @@
 
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
-<%@ Register Src="~/ShortSale/ShortSaleCaseList.ascx" TagPrefix="uc1" TagName="ShortSaleCaseList" %>
 <%@ Register Src="~/LegalUI/LegalSecondaryActions.ascx" TagPrefix="uc1" TagName="LegalSecondaryActions" %>
+<%@ Register Src="~/LegalUI/LegalCaseList.ascx" TagPrefix="uc1" TagName="LegalCaseList" %>
+
 <%@ Register Src="~/LegalUI/LegalTab.ascx" TagPrefix="uc1" TagName="LegalTab" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
@@ -39,7 +40,7 @@
             <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
                 <ContentCollection>
                     <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
-                        <uc1:ShortSaleCaseList runat="server" ID="ShortSaleCaseList" />
+                        <uc1:LegalCaseList runat="server" id="LegalCaseList" />
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
@@ -48,7 +49,7 @@
                     <dx:SplitterContentControl>
 
                         <script>
-                            
+
                             $(document).ready(function () {
 
                                 $('.popup').webuiPopover({ title: 'Contact ' + $("#vendor_btn").html(), content: $('#contact_popup').html(), width: 400 });
@@ -196,16 +197,18 @@
                                     <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                 </li>
                             </ul>
-                            <uc1:ActivityLogs runat="server" ID="ActivityLogs" DispalyMode="ShortSale" />
+                            <dx:ASPxCallbackPanel runat="server" ID="cbpLogs" ClientInstanceName="cbpLogs" OnCallback="cbpLogs_Callback">
+                                <PanelCollection>
+                                    <dx:PanelContent>
+                                        <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="Legal"/>
+                                    </dx:PanelContent>
+                                </PanelCollection>
+                            </dx:ASPxCallbackPanel>                            
                         </div>
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
-
-
         </Panes>
-
-
     </dx:ASPxSplitter>
 
 

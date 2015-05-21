@@ -28,8 +28,14 @@
             Dim sn = Request.QueryString("sn").ToString
 
             Dim wli = WorkflowService.LoadTaskProcess(sn)
+            Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
             wli.ProcessInstance.DataFields("Attorney") = lbEmployee.Value
             wli.Finish()
+
+            'update legal case status
+            Dim lc = Legal.LegalCase.GetCase(bble)
+            lc.Status = Legal.LegalCaseStatus.InCount
+            lc.SaveData()
 
             Response.Clear()
             Response.Write("The case is move to " & lbEmployee.Value)
@@ -41,7 +47,13 @@
             Dim sn = Request.QueryString("sn").ToString
 
             Dim wli = WorkflowService.LoadTaskProcess(sn)
+            Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
             wli.Finish()
+
+            'update legal case status
+            Dim lc = Legal.LegalCase.GetCase(bble)
+            lc.Status = Legal.LegalCaseStatus.ManagerAssign
+            lc.SaveData()
 
             Response.Clear()
             Response.Write("The case is move back to manager.")

@@ -46,8 +46,13 @@ Public Class ManagePreview
             Dim sn = Request.QueryString("sn").ToString
             Dim searchUser = lbLegalUser.SelectedItem.GetValue("Name")
             Dim wli = WorkflowService.LoadTaskProcess(sn)
+            Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
             wli.ProcessInstance.DataFields("ResearchUser") = searchUser
             wli.Finish()
+
+            Dim lc = Legal.LegalCase.GetCase(bble)
+            lc.Status = Legal.LegalCaseStatus.InResearch
+            lc.SaveData()
 
             Response.Clear()
             Response.Write("The case is assign to " & searchUser)

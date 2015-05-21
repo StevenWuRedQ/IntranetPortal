@@ -116,6 +116,7 @@
         Email
         RecycleTask
         ShortSale
+        Legal
     End Enum
 
     Enum EnumActionType

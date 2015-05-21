@@ -9,7 +9,13 @@
             Dim sn = Request.QueryString("sn").ToString
 
             Dim wli = WorkflowService.LoadTaskProcess(sn)
+            Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
             wli.Finish()
+
+            'update legal case status
+            Dim lc = Legal.LegalCase.GetCase(bble)
+            lc.Status = Legal.LegalCaseStatus.Closed
+            lc.SaveData()
 
             Response.Clear()
             Response.Write("The case is finished.")
