@@ -10,7 +10,11 @@
             <PropertyRef Name="BBLE" />
           </Key>
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="CaseName" Type="nvarchar" MaxLength="256" />
+          <Property Name="ResearchBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Attorney" Type="nvarchar" MaxLength="50" />
           <Property Name="CaseData" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" />
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -32,6 +36,10 @@
           <Property Name="CaseData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CaseName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ResearchBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Attorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -44,6 +52,10 @@
           <EntitySetMapping Name="LegalCases">
             <EntityTypeMapping TypeName="LegalModel.LegalCase">
               <MappingFragment StoreEntitySet="LegalCase">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Attorney" ColumnName="Attorney" />
+                <ScalarProperty Name="ResearchBy" ColumnName="ResearchBy" />
+                <ScalarProperty Name="CaseName" ColumnName="CaseName" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CaseData" ColumnName="CaseData" />

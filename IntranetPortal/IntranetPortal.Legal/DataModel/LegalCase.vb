@@ -15,5 +15,9 @@ Partial Public Class LegalCase
     Public Property CaseData As String
     Public Property CreateDate As Nullable(Of Date)
     Public Property CreateBy As String
+    Public Property CaseName As String
+    Public Property ResearchBy As String
+    Public Property Attorney As String
+    Public Property Status As Nullable(Of Integer)
 
 End Class
