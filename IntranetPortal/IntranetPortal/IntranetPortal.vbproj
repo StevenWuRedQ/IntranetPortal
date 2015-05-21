@@ -781,6 +781,20 @@
       <DependentUpon>LegalSecondaryActions.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="LegalUI\LegalSummaryTab.ascx.designer.vb">
+      <DependentUpon>LegalSummaryTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LegalUI\LegalSummaryTab.ascx.vb">
+      <DependentUpon>LegalSummaryTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LegalUI\LegalTab.ascx.designer.vb">
+      <DependentUpon>LegalTab.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LegalUI\LegalTab.ascx.vb">
+      <DependentUpon>LegalTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="LegalUI\LegalUI.aspx.designer.vb">
       <DependentUpon>LegalUI.aspx</DependentUpon>
     </Compile>
@@ -1755,6 +1769,8 @@
     <Content Include="LeadsGenerator\LeadsSearchUploadData.aspx" />
     <Content Include="LeadsGenerator\LeadsSearchApproval.aspx" />
     <Content Include="LegalUI\LegalSecondaryActions.ascx" />
+    <Content Include="LegalUI\LegalSummaryTab.ascx" />
+    <Content Include="LegalUI\LegalTab.ascx" />
     <Content Include="LegalUI\LegalUI.aspx" />
     <Content Include="LegalUI\ManagePreview.aspx" />
     <Content Include="ManagementUI\Management2.aspx" />

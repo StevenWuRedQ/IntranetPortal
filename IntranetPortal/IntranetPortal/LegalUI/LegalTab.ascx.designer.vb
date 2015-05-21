@@ -11,59 +11,68 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class LegalUI
+Partial Public Class LegalTab
 
     '''<summary>
-    '''ASPxSplitter1 control.
+    '''btnAssignAttorney control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ASPxSplitter1 As Global.DevExpress.Web.ASPxSplitter.ASPxSplitter
+    Protected WithEvents btnAssignAttorney As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''SplitterContentControl1 control.
+    '''LegalSummaryTab control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents SplitterContentControl1 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
+    Protected WithEvents LegalSummaryTab As Global.IntranetPortal.LegalSummaryTab
 
     '''<summary>
-    '''ShortSaleCaseList control.
+    '''btnCompleteResearch control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ShortSaleCaseList As Global.IntranetPortal.ShortSaleCaseList
+    Protected WithEvents btnCompleteResearch As Global.System.Web.UI.HtmlControls.HtmlInputButton
 
     '''<summary>
-    '''LegalTab1 control.
+    '''lbEmployee control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents LegalTab1 As Global.IntranetPortal.LegalTab
+    Protected WithEvents lbEmployee As Global.System.Web.UI.HtmlControls.HtmlSelect
 
     '''<summary>
-    '''VendorsPopup control.
+    '''btnAssign control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents VendorsPopup As Global.IntranetPortal.VendorsPopup
+    Protected WithEvents btnAssign As Global.System.Web.UI.HtmlControls.HtmlInputButton
 
     '''<summary>
-    '''ActivityLogs control.
+    '''btnComplete control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
+    Protected WithEvents btnComplete As Global.System.Web.UI.HtmlControls.HtmlInputButton
+
+    '''<summary>
+    '''LegalSecondaryActions control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LegalSecondaryActions As Global.IntranetPortal.LegalSecondaryActions
 End Class

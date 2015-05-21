@@ -1,4 +1,5 @@
-﻿Imports IntranetPortal.ShortSale
+﻿Imports System.Web.Script.Serialization
+Imports IntranetPortal.ShortSale
 Imports Newtonsoft.Json
 
 Public Class LegalUI
@@ -16,54 +17,58 @@ Public Class LegalUI
             ASPxSplitter1.Panes("listPanel").Visible = False
             ShortSaleCaseList.BindCaseForTest(SecondaryAction AndAlso Agent)
 
-            Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
-            Select Case wli.ActivityName
-                Case "LegalResearch"
-                    btnCompleteResearch.Visible = True
-                Case "ManagerAssign"
-                    lbEmployee.Visible = True
-                    btnAssign.Visible = True
-            End Select
+            'Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
+            'Select Case wli.ActivityName
+            '    Case "LegalResearch"
+            '        btnCompleteResearch.Visible = True
+            '    Case "ManagerAssign"
+            '        lbEmployee.Visible = True
+            '        btnAssign.Visible = True
+            'End Select
         End If
     End Sub
 
-    Protected Sub btnCompleteResearch_ServerClick(sender As Object, e As EventArgs)
-        If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-            Dim sn = Request.QueryString("sn").ToString
+    Public Function GetAllContact() As String
+        Dim json = New JavaScriptSerializer().Serialize(PartyContact.getAllContact().OrderBy(Function(c) c.Name))
+        Return json
+    End Function
+    'Protected Sub btnCompleteResearch_ServerClick(sender As Object, e As EventArgs)
+    '    If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+    '        Dim sn = Request.QueryString("sn").ToString
 
-            Dim wli = WorkflowService.LoadTaskProcess(sn)
-            wli.Finish()
+    '        Dim wli = WorkflowService.LoadTaskProcess(sn)
+    '        wli.Finish()
 
-            Response.Clear()
-            Response.Write("The case is move back to manager.")
-            Response.End()
-        End If
-    End Sub
+    '        Response.Clear()
+    '        Response.Write("The case is move back to manager.")
+    '        Response.End()
+    '    End If
+    'End Sub
 
-    Protected Sub btnAssign_ServerClick(sender As Object, e As EventArgs)
-        If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-            Dim sn = Request.QueryString("sn").ToString
+    'Protected Sub btnAssign_ServerClick(sender As Object, e As EventArgs)
+    '    If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+    '        Dim sn = Request.QueryString("sn").ToString
 
-            Dim wli = WorkflowService.LoadTaskProcess(sn)
-            wli.ProcessInstance.DataFields("Attorney") = lbEmployee.Value
-            wli.Finish()
+    '        Dim wli = WorkflowService.LoadTaskProcess(sn)
+    '        wli.ProcessInstance.DataFields("Attorney") = lbEmployee.Value
+    '        wli.Finish()
 
-            Response.Clear()
-            Response.Write("The case is move to " & lbEmployee.Value)
-            Response.End()
-        End If
-    End Sub
+    '        Response.Clear()
+    '        Response.Write("The case is move to " & lbEmployee.Value)
+    '        Response.End()
+    '    End If
+    'End Sub
 
-    Protected Sub btnComplete_ServerClick(sender As Object, e As EventArgs)
-        If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-            Dim sn = Request.QueryString("sn").ToString
+    'Protected Sub btnComplete_ServerClick(sender As Object, e As EventArgs)
+    '    If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+    '        Dim sn = Request.QueryString("sn").ToString
 
-            Dim wli = WorkflowService.LoadTaskProcess(sn)
-            wli.Finish()
+    '        Dim wli = WorkflowService.LoadTaskProcess(sn)
+    '        wli.Finish()
 
-            Response.Clear()
-            Response.Write("The case is finished.")
-            Response.End()
-        End If
-    End Sub
+    '        Response.Clear()
+    '        Response.Write("The case is finished.")
+    '        Response.End()
+    '    End If
+    'End Sub
 End Class
