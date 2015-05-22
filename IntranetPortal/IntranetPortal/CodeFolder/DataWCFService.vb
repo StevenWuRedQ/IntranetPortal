@@ -841,6 +841,12 @@ Public Class DataWCFService
         Try
             Dim localOwner = context.HomeOwners.Where(Function(ho) ho.BBLE = bble And ho.Name = name And ho.Active = True).FirstOrDefault
 
+            If bble.StartsWith("3") Then
+                If city.Trim = "BK" Or city.Trim = "BKLYN" Then
+                    city = "Brooklyn"
+                End If
+            End If
+
             If localOwner IsNot Nothing Then
                 localOwner.Name = name
                 localOwner.Address1 = add1

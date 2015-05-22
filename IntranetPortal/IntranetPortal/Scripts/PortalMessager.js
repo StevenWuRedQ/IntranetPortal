@@ -28,10 +28,22 @@ function RefreshLeadsCount() {
                         if (leadsCounts != null) {
                             for (var i = 0; i < leadsCounts.length; i++) {
                                 var item = leadsCounts[i];
-                                if (item.Count > 0)
+                                
+                                if (item.Count > 0) {
+
+                                    if (item.Name == "SpanAmount_MyTask") {
+                                        var count = parseInt(document.getElementById(item.Name).innerText);
+                                        if (item.count > count) {
+                                            NewTask();
+                                        }
+                                    }
+
                                     document.getElementById(item.Name).innerText = item.Count;
+                                }
                                 else
                                     document.getElementById(item.Name).innerText = "";
+
+
                             }
                         }
                     }
@@ -106,10 +118,10 @@ function hook() {
                             popupBBLE = msg.BBLE;
                             document.getElementById('tdMsgTitle').innerHTML = msg.Title;
                             document.getElementById('tdMsgContent').innerHTML = msg.Message;
-                                                     
-                          
+
+
                             $('#divMsgTest').animate({ bottom: "25" }, 500);
-                            
+
 
                             //if (!ASPxPopupMessagerControlClient.GetVisible())
                             //    ASPxPopupMessagerControlClient.Show();
@@ -140,12 +152,11 @@ function ReadMsg() {
     request.onreadystatechange = function () {
         if (request.readyState == 4 && request.status != 200)
             alert('Error ' + request.status + ' trying to send request');
-        if (request.status == 200)
-        {
+        if (request.status == 200) {
             HideMessages();
             //ASPxPopupMessagerControlClient.Hide();
             hook();
-        }            
+        }
     };
 
     request.open('POST', url, true);
@@ -156,11 +167,9 @@ function PopupViewLead() {
     if (popupBBLE != null) {
 
         var iframe = document.getElementById("contentUrlPane");
-        if (iframe && iframe != null)
-        {
+        if (iframe && iframe != null) {
             var frmDocument = (iframe.contentWindow || iframe.contentDocument);
-            if(frmDocument.ReloadPage)
-            {
+            if (frmDocument.ReloadPage) {
                 debugger;
                 if (frmDocument.ReloadPage(popupBBLE)) {
                     ReadMsg()
@@ -169,7 +178,7 @@ function PopupViewLead() {
             }
         }
 
-        ShowSearchLeadsInfo(popupBBLE);        
+        ShowSearchLeadsInfo(popupBBLE);
         ReadMsg();
     }
 }
@@ -220,8 +229,7 @@ function getRequestObject() {
     return req;
 }
 
-function HideMessages()
-{
+function HideMessages() {
     var msgHeight = $("#divMsgTest").outerHeight() + 10;
     $('#divMsgTest').css('bottom', -msgHeight);
 }

@@ -20,9 +20,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
-   <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>
-
-
+   <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>    
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.light.css">
 </asp:Content>
 
@@ -93,15 +91,10 @@
                                             <label class="ss_form_input_title">email</label>
                                             <input class="ss_form_input ss_disable" disabled="disabled">
                                         </li>
-
                                     </ul>
                                 </div>
-
-
                             </div>
-
-                            <div>
-                               
+                            <div>                               
                                 <%--<select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
                                 </select>
                                 <select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">

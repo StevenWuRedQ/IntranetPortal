@@ -4,7 +4,7 @@
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" >
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>Agent Portal (beta) - My Ideal Property</title>
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900' rel='stylesheet' type='text/css' />
@@ -27,7 +27,7 @@
 <body onload="init();" id="testIDbody">
     <form id="form1" runat="server">
         <script type="text/javascript">
-            function ShowSearchLeadsInfo(bble) {                
+            function ShowSearchLeadsInfo(bble) {
                 var url = '/ViewLeadsInfo.aspx?id=' + bble;
                 OpenLeadsWindow(url, "View Leads Info " + bble);
                 //var left = (screen.width / 2) - (1350 / 2);
@@ -35,7 +35,7 @@
                 //window.open(url, 'View Leads Info ' + bble, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
             }
 
-            function OpenLeadsWindow(url, title) {                
+            function OpenLeadsWindow(url, title) {
                 var left = (screen.width / 2) - (1350 / 2);
                 var top = (screen.height / 2) - (930 / 2);
                 window.open(url, title, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
@@ -51,14 +51,12 @@
                 }
             }
 
-            function ShowPopupLeadsMenu(s, bble)
-            {
+            function ShowPopupLeadsMenu(s, bble) {
                 tmpBBLE = bble;
                 popupMenuLeads.ShowAtElement(s);
             }
 
-            function OnPopupMenuLeadsClick(s,e)
-            {
+            function OnPopupMenuLeadsClick(s, e) {
                 if (e.item.name == "Leads") {
                     ShowSearchLeadsInfo(tmpBBLE);
                 }
@@ -125,6 +123,13 @@
                     $div.animate({ bottom: "25" }, 500);
                 }
             }
+
+            function NewTask() {
+                $('a[href="/Task/MyTask.aspx"]').animate({
+                    backgroundColor: "red"
+                }, 1000).animate({ backgroundColor: "yellow" }, 1000).animate(
+                { backgroundColor: "transparent" }, 1000);
+            }
         </script>
         <dx:ASPxSplitter ID="MainSplitter" runat="server" Height="100%" Width="100%" FullscreenMode="True" ShowCollapseBackwardButton="true">
             <Styles>
@@ -158,8 +163,8 @@
                                                 <dx:ASPxLabel ID="lblVersion" runat="server" ForeColor="#446576" Font-Size="12px"></dx:ASPxLabel>
                                             </p>
                                             <p>&copy; 2014 My Ideal Property</p>
-                                            <div id="errorMsg" style="color: transparent"></div>
-
+                                            <div id="errorMsg"  style="color: transparent"></div>
+<%--                                            <input type="button" class="NewTask" onclick="NewTask()" value="NewTask" />--%>
                                         </footer>
                                     </div>
                                 </dx:SplitterContentControl>
@@ -220,7 +225,7 @@
                                                                     Good  <%=If(DateTime.now.ToString.IndexOf("AM")>0,"morning","afternoon") %>, <span style="font-weight: 900; text-transform: capitalize">
                                                                         <asp:LoginName ID="HeadLoginName" runat="server" />
                                                                     </span>
-                                                                    <i class="fa fa-wechat icon_btn color_black tooltip-examples" onclick="ShowChatWindow()" id="imgChat" style="color: black;display:none;" title="Let's Chat"></i>,
+                                                                    <i class="fa fa-wechat icon_btn color_black tooltip-examples" onclick="ShowChatWindow()" id="imgChat" style="color: black; display: none;" title="Let's Chat"></i>,
                                                                     <%-- <img src="/images/arrow_down.png" />--%>
                                                                     <%--<asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />--%>
                                                                     <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>'>                                                                
@@ -289,7 +294,7 @@
                                                                         <i class="fa fa-external-link-square tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" title="Go To" onclick='<%# If(DirectCast(Eval("Status"), IntranetPortal.LeadStatus) = IntranetPortal.LeadStatus.InProcess, String.Format("ShowPopupLeadsMenu(this, {0})", Eval("BBLE")), String.Format("GoToLead({0})", Eval("BBLE")))%>' runat="server" visible='<%# Eval("Viewable")%>'></i>
                                                                         <span style="width: 10px">&nbsp;&nbsp;</span>
                                                                         <i class="fa fa-list-alt tooltip-examples" data-toggle="tooltip" data-placement="bottom" style="font-size: 18px; vertical-align: bottom; cursor: pointer;" onclick='<%#  String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# Eval("Viewable")%>'></i>
-                                                                        
+
                                                                         <%--change image to beaty style by steven--%>
                                                                         <%--<img src="~/images/search_pop_go_leads.png" title="Go To Lead" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("GoToLead({0})", Eval("BBLE"))%>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />
                                                                         <img src="~/images/search_pop_menu.png" style="vertical-align: bottom; cursor: pointer;" onclick='<%#String.Format("ShowCateMenu(this,{0})", Eval("BBLE")) %>' runat="server" visible='<%# EmpUnderManaged.Contains(Eval("EmployeeName"))%>' />--%>
@@ -326,7 +331,7 @@
                                                                 <dx:MenuItem Text="Leads" Name="Leads"></dx:MenuItem>
                                                                 <dx:MenuItem Text="Short Sale" Name="ShortSale"></dx:MenuItem>
                                                                 <dx:MenuItem Text="Eviction" Name="Eviction"></dx:MenuItem>
-                                                                <dx:MenuItem Text="Legal" Name="Legal"></dx:MenuItem>                                                           
+                                                                <dx:MenuItem Text="Legal" Name="Legal"></dx:MenuItem>
                                                             </Items>
                                                             <ClientSideEvents ItemClick="OnPopupMenuLeadsClick" />
                                                         </dx:ASPxPopupMenu>
@@ -394,6 +399,32 @@
                 to {
                     background-position: -80px 0;
                 }
+            }
+
+            /* The animation code */
+            @keyframes example {
+                0% {
+                    background-color: red;
+                }
+
+                25% {
+                    background-color: yellow;
+                }
+
+                50% {
+                    background-color: blue;
+                }
+
+                100% {
+                    background-color: green;
+                } 
+            }
+
+            /* The element to apply the animation to */
+            .NewTask {
+                background-color: red;
+                animation-name: example;
+                animation-duration: 10s;
             }
         </style>
 
