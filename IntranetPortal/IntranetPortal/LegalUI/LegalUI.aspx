@@ -361,6 +361,10 @@
                 }
                 return false;
             }
+            $scope.SaveLegal = function() {
+                var json = JSON.stringify($scope.LegalCase);
+                alert("save here !");
+            }
             $scope.GetContactById = function(id) {
                 var c = _.findWhere(AllContact, {ContactId:id});
                 return c == null ? {} : c;

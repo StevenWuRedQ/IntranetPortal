@@ -9,6 +9,7 @@
                 <option value="Steven Wu">Steven Wu</option>
             </select>
             <input type="button" class="rand-button short_sale_edit" visible="false" value="Assign" runat="server" onserverclick="btnAssign_ServerClick" id="btnAssign" />
+            <input type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveLegal()"  />
         </div>
     </div>
 
