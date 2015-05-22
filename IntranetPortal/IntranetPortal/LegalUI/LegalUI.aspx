@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
    <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>    
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.light.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
+     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
@@ -216,20 +218,162 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="/Scripts/stevenjs.js"></script>
+    <style>
+        .contact_box {
+            margin-top: 5px;
+            width: 80%
+        }
+    </style>
     <script>
-        var portalApp = angular.module('PortalApp', ['dx']);
         var AllContact = $.parseJSON('<%= GetAllContact()%>');
+        var portalApp = angular.module('PortalApp', ['dx']);
+        portalApp.directive('ssDate', function () {
+            return {
+                restrict: 'A',
+                link: function (scope, el, attrs) {
+                    $(el).datepicker({});
+                    $(el).on('change', function () {
+                        scope.$eval(attrs.ngModel + "='" + el.val() + "'");
+                        //scope[attrs.ngModel] = el.val(); //if your expression doesn't contain dot.
+                    });
+                }
+            };
+        });
+        portalApp.directive('inputMask', function () {
+            return {
+                restrict: 'A',
+                link: function (scope, el, attrs) {
+
+                    $(el).mask(attrs.inputMask);
+                    $(el).on('change', function () {
+                        scope.$eval(attrs.ngModel + "='" + el.val() + "'");
+                        //scope[attrs.ngModel] = el.val(); //if your expression doesn't contain dot.
+                    });
+                }
+            };
+        });
+        portalApp.directive('maskMoney', function () {
+            return {
+                restrict: 'A',
+                link: function (scope, el, attrs) {
+
+                    $(el).formatCurrency();
+                    $(el).on("blur", function () { $(this).formatCurrency() });
+                   
+                    $(el).on('change', function () {
+                        scope.$eval(attrs.ngModel + "='" + el.val() + "'");
+                        //scope[attrs.ngModel] = el.val(); //if your expression doesn't contain dot.
+                    });
+                }
+            };
+        });
         portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
+            $scope.LegalCase = {PropertyInfo: {},ForeclosureInfo: {}, SecondaryInfo: {} };
+            var PropertyInfo = $scope.LegalCase.PropertyInfo;
+            PropertyInfo.PropertyAddress = "421 HART ST, BEDFORD STUYVESANT,NY 11221";
+            PropertyInfo.StreetName = 'HART ST';
+            PropertyInfo.Number = "421";
+            PropertyInfo.City = "BEDFORD STUYVESANT";
+            PropertyInfo.State = "NY";
+            PropertyInfo.Zipcode = "11221";
+            PropertyInfo.Number = "421";
+           
+
+            PropertyInfo.Block = 1234;
+            
+
+            PropertyInfo.Lot = 123;
+            PropertyInfo.BuildingType = "Apartment";
+            PropertyInfo.Class = 'A0';
+            PropertyInfo.Condition = 'Good';
+            PropertyInfo.VacantOrOccupied = "Vacant";
+            PropertyInfo.AgentId = 164;
+            PropertyInfo.Use = '';
+            PropertyInfo.OwnerOfRecordId = 164;
+            PropertyInfo.CaseContactId = 164;
+            PropertyInfo.Class = 'A0';
+
+            var ForeclosureInfo = $scope.LegalCase.ForeclosureInfo;
+            ForeclosureInfo.PlaintiffId = 638;
+            ForeclosureInfo.ServicerId = 646;
+            ForeclosureInfo.DefendantId = 646;
+            ForeclosureInfo.AttorneyId = 646;
+            ForeclosureInfo.LastCourtDate = '05 / 05 / 2015';
+            ForeclosureInfo.NextCourtDate = '05 / 06 / 2015';
+            ForeclosureInfo.SaleDate = '05 / 06 / 2015';
+            ForeclosureInfo.HAMP = true;
+            ForeclosureInfo.LastUpdate = '05 / 08 / 2015';
+            ForeclosureInfo.ServicerId = 646;
+            ForeclosureInfo.ServicerId = 646;
+            ForeclosureInfo.ServicerId = 646;
+            ForeclosureInfo.ServicerId = 646;
+            ForeclosureInfo.ServicerId = 646;
+            ForeclosureInfo.ServicerId = 646;
+            ForeclosureInfo.ServicerId = 646;
+            ForeclosureInfo.ServicerId = 646;
+            ForeclosureInfo.ServicerId = 646;
+            ForeclosureInfo.ServicerId = 646;
+
+            var SecondaryInfo = $scope.LegalCase.PropertyInfo;
+
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.Status = "Status 1";
+            SecondaryInfo.Tasks = "Task 1";
+            SecondaryInfo.AttorneyWorkingFile = "Working File 1";
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.BorrowerId = 638;
+            SecondaryInfo.CoBorrowerId = 639;
+            SecondaryInfo.Language = "Chinese";
+            SecondaryInfo.MentalCapacity = "Capacity 1";
+            SecondaryInfo.Divorce = false;
+            SecondaryInfo.OpposingPartyId = 638;  
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;  
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;  
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;
+
             $scope.SelectContactId = 128;
+
             $scope.selectBoxData = AllContact;
+            $scope.InitContact = function(id) {
+                return {
+                    dataSource: $scope.selectBoxData,
+                    valueExpr: 'ContactId',
+                    displayExpr: 'Name',
+                    searchEnabled: true,
+                    bindingOptions: { value: id }
+                };
+            }
+            $scope.CheckPlace = function (p) {
+                if (p) {
+                    return p == 'NY';
+                }
+                return false;
+            }
+            $scope.GetContactById = function(id) {
+                var c = _.findWhere(AllContact, {ContactId:id});
+                return c == null ? {} : c;
+            }
             $.getJSON('/WCFDataServices/ContactService.svc/GetAllContacts', function (data) {
               
                 $scope.selectBoxData = data;
             });
            
+
         });
     </script>
-    <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
+   
     <%--  <script>
          $(document).ready(function () {
                  format_input();

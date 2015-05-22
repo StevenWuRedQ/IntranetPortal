@@ -22,8 +22,8 @@
                 <ul class="ss_form_box clearfix">
 
                     <li class="ss_form_item">
-                        <label class="ss_form_input_title">case Type</label>
-                        <select class="ss_form_input" data-field="PropertyInfo.Block">
+                        <label class="ss_form_input_title">Case Type</label>
+                        <select class="ss_form_input" ng-model="LegalCase.SecondaryInfo.CaseType">
                             <option>Partition</option>
                             <option>Breach of Contract</option>
                             <option>Quiet Title</option>
@@ -33,85 +33,86 @@
                             <option>Fraud                </option>
                             <option>Deed Reversion       </option>
                             <option>Other</option>
+
                         </select>
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Index #</label>
-                        <input class="ss_form_input" type="number" data-field="PropertyInfo.Block">
+                        <input class="ss_form_input" type="number" ng-model="LegalCase.SecondaryInfo.IndexNumber">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Relief requested</label>
-                        <input class="ss_form_input" data-field="PropertyInfo.Block">
+                        <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.ReliefRequested">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Goal</label>
-                        <input class="ss_form_input" data-field="PropertyInfo.Block">
+                        <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.Goal">
                     </li>
                     <li class="ss_form_item">
-                        <label class="ss_form_input_title">represent</label>
-                        <input class="ss_form_input" data-field="PropertyInfo.Block">
+                        <label class="ss_form_input_title">represent Person </label>
+                        <div class="contact_box" dx-select-box="InitContact('LegalCase.SecondaryInfo.RepresentPersonId')">
+                        </div>
                     </li>
 
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">against</label>
-                        <input class="ss_form_input" data-field="PropertyInfo.Block">
+                        <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.Against">
                     </li>
                     <li class="ss_form_item">
-                        <span class="ss_form_input_title">Deed</span>
-                        <input type="checkbox" id="pdf_check_yes104" name="1" class="ss_form_input" value="YES">
-                        <label for="pdf_check_yes40" class="input_with_check">
-                            <span class="box_text">Yes </span>
-                        </label>
+                        <span class="ss_form_input_title">Has Deed</span>
+                        <select class="ss_form_input" ng-model="LegalCase.SecondaryInfo.HasDeed">
+                            <option>Unknown</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
                     </li>
 
 
                     <li class="ss_form_item">
                         <span class="ss_form_input_title">service completed</span>
-                        <input type="checkbox" id="pdf_check_yes106" name="1" class="ss_form_input" value="YES">
-                        <label for="pdf_check_yes40" class="input_with_check">
+                        <input type="checkbox" id="pdf_check_yes106" name="1" class="ss_form_input" value="true" ng-model="LegalCase.SecondaryInfo.Servicecompleted">
+                        <label for="pdf_check_yes106" class="input_with_check">
                             <span class="box_text">Yes </span>
                         </label>
                     </li>
 
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Action commenced</label>
-                        <input class="ss_form_input" data-field="PropertyInfo.Block">
+                        <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.ActionCommenced">
                     </li>
 
+
                     <li class="ss_form_item">
-                        <span class="ss_form_input_title">documents completed</span>
-                        <input type="checkbox" id="pdf_check_yes105" name="1" class="ss_form_input" value="YES">
-                        <label for="pdf_check_yes40" class="input_with_check">
+                        <span class="ss_form_input_title">Action answered</span>
+                        <input type="checkbox" id="pdf_check_yes107" name="1" class="ss_form_input" value="true" ng-model="LegalCase.SecondaryInfo.ActionAnswered">
+                        <label for="pdf_check_yes107" class="input_with_check">
                             <span class="box_text">Yes </span>
                         </label>
                     </li>
                     <li class="ss_form_item">
-                        <span class="ss_form_input_title">action answered</span>
-                        <input type="checkbox" id="pdf_check_yes107" name="1" class="ss_form_input" value="YES">
-                        <label for="pdf_check_yes40" class="input_with_check">
-                            <span class="box_text">Yes </span>
-                        </label>
+                        <span class="ss_form_input_title">Action answered Date</span>
+                        <input class="ss_form_input" ss-date="" ng-model="LegalCase.SecondaryInfo.ActionAnsweredDate">
                     </li>
                     <li class="ss_form_item">
 
                         <label class="ss_form_input_title">Upcoming court Motions</label>
-                        <input class="ss_form_input" data-field="PropertyInfo.Block">
+                        <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.UpcomingCourtMotions">
                     </li>
                     <li class="ss_form_item">
 
                         <label class="ss_form_input_title">Upcoming court Orders</label>
-                        <input class="ss_form_input" data-field="PropertyInfo.Block">
+                        <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.UpcomingCourtOrders">
                     </li>
                     <li class="ss_form_item">
 
                         <label class="ss_form_input_title">Upcoming court Date</label>
-                        <input class="ss_form_input ss_date" data-field="PropertyInfo.Block">
+                        <input class="ss_form_input " ss-date="" ng-model="LegalCase.SecondaryInfo.UpcomingCourtDate">
                     </li>
 
 
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Partition</label>
-                        <input class="ss_form_input" data-field="PropertyInfo.Lot">
+                        <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.CaseType">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Breach of Contract</label>
@@ -129,97 +130,6 @@
                 </ul>
             </div>
 
-            <div class="ss_form">
-                <h4 class="ss_form_title">Attorney 1
-                                                            <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty()" style="display: inline !important;"></i>
-
-                </h4>
-                <ul class="ss_form_box clearfix">
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Name</label>
-                        <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Name" data-item-type="1" disabled="">
-                    </li>
-
-
-
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Cell" data-item-type="1" disabled="">
-                    </li>
-
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Fax #</label>
-                        <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.OfficeNO" data-item-type="1" disabled="">
-                    </li>
-
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">email</label>
-                        <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Email" data-item-type="1" disabled="">
-                    </li>
-                </ul>
-
-            </div>
-            <div class="ss_form">
-                <h4 class="ss_form_title">Attorney 2
-                                                            <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty()" style="display: inline !important;"></i>
-
-                </h4>
-                <ul class="ss_form_box clearfix">
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Name</label>
-                        <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Name" data-item-type="1" disabled="">
-                    </li>
-
-
-
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Cell" data-item-type="1" disabled="">
-                    </li>
-
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Fax #</label>
-                        <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.OfficeNO" data-item-type="1" disabled="">
-                    </li>
-
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">email</label>
-                        <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Email" data-item-type="1" disabled="">
-                    </li>
-                </ul>
-
-            </div>
-
-            <div class="ss_form">
-                <h4 class="ss_form_title">Opposing Counsel
-                                                                                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty()" style="display: inline !important;"></i>
-
-                </h4>
-                <ul class="ss_form_box clearfix">
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Name</label>
-                        <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Name" data-item-type="1" disabled="">
-                    </li>
-
-
-
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Cell" data-item-type="1" disabled="">
-                    </li>
-
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Fax #</label>
-                        <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.OfficeNO" data-item-type="1" disabled="">
-                    </li>
-
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">email</label>
-                        <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Email" data-item-type="1" disabled="">
-                    </li>
-                </ul>
-
-            </div>
 
             <uc1:legalsecondaryactions runat="server" ID="LegalSecondaryActions" />
 

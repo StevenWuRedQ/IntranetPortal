@@ -232,7 +232,7 @@ function format_input() {
 
     });
     $(".currency_input").formatCurrency();
-    $(".currency_input").on("blur", function(){ $(this).formatCurrency()})
+    $(".currency_input").on("blur", function() { $(this).formatCurrency() });
     //var is_pass = true;
 
 
