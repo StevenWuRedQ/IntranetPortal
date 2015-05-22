@@ -225,6 +225,12 @@
         }
     </style>
     <script>
+        /*
+        function(case) */
+        function GetLegalData() {
+            return CaseData;
+        }
+        
         var AllContact = $.parseJSON('<%= GetAllContact()%>');
         var portalApp = angular.module('PortalApp', ['dx']);
         portalApp.directive('ssDate', function () {
@@ -270,6 +276,7 @@
         portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
             $scope.LegalCase = {PropertyInfo: {},ForeclosureInfo: {}, SecondaryInfo: {} };
             var PropertyInfo = $scope.LegalCase.PropertyInfo;
+            CaseData = $scope.LegalCase;
             PropertyInfo.PropertyAddress = "421 HART ST, BEDFORD STUYVESANT,NY 11221";
             PropertyInfo.StreetName = 'HART ST';
             PropertyInfo.Number = "421";
@@ -364,6 +371,9 @@
             $scope.SaveLegal = function() {
                 var json = JSON.stringify($scope.LegalCase);
                 alert("save here !");
+                if (SaveLegalInterface != null) {
+                    SaveLegalInterface(json);
+                }
             }
             $scope.GetContactById = function(id) {
                 var c = _.findWhere(AllContact, {ContactId:id});
