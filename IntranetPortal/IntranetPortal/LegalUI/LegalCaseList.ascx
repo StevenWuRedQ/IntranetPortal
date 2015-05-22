@@ -33,6 +33,7 @@
             //ContentCallbackPanel.PerformCallback(values);
             if (cbpLogs)
                 cbpLogs.PerformCallback(leadsInfoBBLE);
+            angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(leadsInfoBBLE);
         }
     }
 

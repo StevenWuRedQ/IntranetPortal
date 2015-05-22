@@ -1,6 +1,8 @@
 ﻿Imports System.Web.Script.Serialization
 Imports IntranetPortal.ShortSale
 Imports Newtonsoft.Json
+Imports System.Web.Services
+Imports System.Web.Script.Services
 
 Public Class LegalUI
     Inherits System.Web.UI.Page
@@ -45,4 +47,25 @@ Public Class LegalUI
     Protected Sub cbpLogs_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
         ActivityLogs.BindData(e.Parameter)
     End Sub
+
+    <WebMethod()> _
+    <ScriptMethod>
+    Public Shared Sub SaveCase(legalCase As Legal.LegalCase)
+        legalCase.SaveData()
+    End Sub
+
+    <WebMethod()> _
+   <ScriptMethod>
+    Public Shared Sub SaveCaseData(caseData As String, bble As String)
+        Dim lgCase = Legal.LegalCase.GetCase(bble)
+        lgCase.CaseData = caseData
+        lgCase.SaveData()
+    End Sub
+
+    <WebMethod()> _
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function GetCaseData(bble As String) As String
+        Return Legal.LegalCase.GetCase(bble).CaseData
+    End Function
+
 End Class

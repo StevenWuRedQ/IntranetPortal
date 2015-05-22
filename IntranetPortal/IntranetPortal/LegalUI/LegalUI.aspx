@@ -40,23 +40,23 @@
             <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
                 <ContentCollection>
                     <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
-                        <uc1:LegalCaseList runat="server" id="LegalCaseList" />
+                        <uc1:LegalCaseList runat="server" ID="LegalCaseList" />
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
             <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px">
                 <ContentCollection>
                     <dx:SplitterContentControl>
-
                         <script>
 
+ 
                             $(document).ready(function () {
 
                                 $('.popup').webuiPopover({ title: 'Contact ' + $("#vendor_btn").html(), content: $('#contact_popup').html(), width: 400 });
 
                             });
                         </script>
-                        <div ng-controller="PortalCtrl">
+                        <div id="PortalCtrl" ng-controller="PortalCtrl">
                             <div id="vendor_btn" style="display: none">
                                 <i class="fa fa-users icon_btn" title="Vendors" onclick="VendorsPopupClient.Show()"></i>
                             </div>
@@ -154,7 +154,7 @@
                                 <div class="tab-content">
 
                                     <div class="tab-pane active" id="LegalTab">
-                                        <uc1:LegalTab runat="server" id="LegalTab1" />
+                                        <uc1:LegalTab runat="server" ID="LegalTab1" />
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +195,7 @@
                             <dx:ASPxCallbackPanel runat="server" ID="cbpLogs" ClientInstanceName="cbpLogs" OnCallback="cbpLogs_Callback">
                                 <PanelCollection>
                                     <dx:PanelContent>
-                                        <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="Legal"/>
+                                        <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="Legal" />
                                     </dx:PanelContent>
                                 </PanelCollection>
                             </dx:ASPxCallbackPanel>                            
@@ -205,7 +205,6 @@
             </dx:SplitterPane>
         </Panes>
     </dx:ASPxSplitter>
-
 
    <%-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.js"></script>
@@ -232,6 +231,7 @@
         }
         
         var AllContact = $.parseJSON('<%= GetAllContact()%>');
+        <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
         var portalApp = angular.module('PortalApp', ['dx']);
         portalApp.directive('ssDate', function () {
             return {
@@ -353,6 +353,7 @@
             $scope.SelectContactId = 128;
 
             $scope.selectBoxData = AllContact;
+            
             $scope.InitContact = function(id) {
                 return {
                     dataSource: $scope.selectBoxData,
@@ -368,17 +369,35 @@
                 }
                 return false;
             }
+
             $scope.SaveLegal = function() {
                 var json = JSON.stringify($scope.LegalCase);
-                alert("save here !");
-                if (SaveLegalInterface != null) {
-                    SaveLegalInterface(json);
-                }
+                
+                var data = { bble: leadsInfoBBLE, caseData: json };
+                $http.post('LegalUI.aspx/SaveCaseData', data).
+                    success(function () {
+                        alert("Save Success!");
+                    }).
+                    error(function () {
+                        alert("Fail to save data.");
+                    });
+                
+                //$.getJSON('/LegalUI/LegalUI.aspx/SaveCaseData', data, function (data) {                    
+                //});
             }
-            $scope.GetContactById = function(id) {
-                var c = _.findWhere(AllContact, {ContactId:id});
-                return c == null ? {} : c;
+
+            $scope.LoadLeadsCase = function(BBLE)
+            {
+                var data = { bble: BBLE };
+                $http.post('LegalUI.aspx/GetCaseData', data).
+                     success(function (data, status, headers, config) {
+                         $scope.LegalCase = $.parseJSON(data.d);
+                     }).
+                     error(function () {
+                         alert("Fail to load data.")
+                     });
             }
+
             $.getJSON('/WCFDataServices/ContactService.svc/GetAllContacts', function (data) {
               
                 $scope.selectBoxData = data;
@@ -388,11 +407,6 @@
         });
     </script>
    
-    <%--  <script>
-         $(document).ready(function () {
-                 format_input();
-             }
-         )
-    </script>--%>
+
     <script src="/Scripts/bootstrap.min.js"></script>
 </asp:Content>

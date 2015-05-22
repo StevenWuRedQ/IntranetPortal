@@ -260,8 +260,6 @@
                     <option value="vacate">vacate</option>
                     <option value="tenant">tenant</option>
                 </select>
-
-
             </li>
             <li class="ss_form_item">
                 <span class="ss_form_input_title">HAMP eligible</span>
