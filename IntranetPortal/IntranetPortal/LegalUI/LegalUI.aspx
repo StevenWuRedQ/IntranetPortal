@@ -2,11 +2,11 @@
 
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 <%@ Register Src="~/UserControl/ActivityLogs.ascx" TagPrefix="uc1" TagName="ActivityLogs" %>
-<%@ Register Src="~/LegalUI/LegalSecondaryActions.ascx" TagPrefix="uc1" TagName="LegalSecondaryActions" %>
 <%@ Register Src="~/LegalUI/LegalCaseList.ascx" TagPrefix="uc1" TagName="LegalCaseList" %>
 
 <%@ Register Src="~/LegalUI/LegalTab.ascx" TagPrefix="uc1" TagName="LegalTab" %>
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
+<%@ Register TagPrefix="uc1" TagName="LegalSecondaryActions" Src="~/LegalUI/LegalSecondaryActions.ascx" %>
 
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
@@ -22,21 +22,17 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
-    <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>
+   <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>    
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.light.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
-    <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
+     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
+    <script src="/Scripts/stevenjs.js"></script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <%--leagal Ui--%>
-    <style>
-        .dxsplControl_MetropolisBlue1 .dxsplLCC {
-            padding: 0;
-        }
-    </style>
-    <div>
-    </div>
+    <div id="PortalCtrl" ng-controller="PortalCtrl">
+
     <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
         <Panes>
             <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
@@ -56,7 +52,7 @@
 
                             });
                         </script>
-                        <div id="PortalCtrl" ng-controller="PortalCtrl">
+
                             <div id="vendor_btn" style="display: none">
                                 <i class="fa fa-users icon_btn" title="Vendors" onclick="VendorsPopupClient.Show()"></i>
                             </div>
@@ -96,7 +92,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div>
+                            <div>                               
                                 <%--<select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
                                 </select>
                                 <select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
@@ -161,7 +157,7 @@
                                         popupCtrReassignEmployeeListCtr.Hide();
                                         }" />
                                             </dx:ASPxButton>
-                                        </dx:PopupControlContentControl>
+                                        </dx:PopupControlContentControl>                                       
                                     </ContentCollection>
                                     <ClientSideEvents Closing="function(s,e){
                                               if (typeof gridTrackingClient != 'undefined')
@@ -201,10 +197,10 @@
                                     <div class="tab-pane active" id="LegalTab">
                                         <uc1:LegalTab runat="server" ID="LegalTab1" />
                                     </div>
-                                    <div class="tab-pane active" id="DocumentTab">
+                                    <div class="tab-pane" id="DocumentTab">
                                         <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
-                                    </div>
                                 </div>
+                            </div>
                             </div>
                             <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
                                 HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true" CloseAction="CloseButton"
@@ -214,7 +210,7 @@
                                         <div class="pop_up_header_margin">
                                             <i class="fa fa-cloud-upload with_circle pop_up_header_icon"></i>
                                             <span class="pop_up_header_text">Upload Files</span>
-                                        </div>
+                            </div>
                                         <div class="pop_up_buttons_div">
                                             <i class="fa fa-times icon_btn" onclick="popupCtrUploadFiles.Hide()"></i>
                                         </div>
@@ -227,7 +223,7 @@
                                 <ClientSideEvents CloseUp="function(s,e){}" />
                             </dx:ASPxPopupControl>
                             <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
-                        </div>
+
                     </dx:SplitterContentControl>
                 </ContentCollection>
             </dx:SplitterPane>
@@ -262,7 +258,7 @@
                                         <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="Legal" />
                                     </dx:PanelContent>
                                 </PanelCollection>
-                            </dx:ASPxCallbackPanel>
+                            </dx:ASPxCallbackPanel>                            
                         </div>
                     </dx:SplitterContentControl>
                 </ContentCollection>
@@ -270,30 +266,79 @@
         </Panes>
     </dx:ASPxSplitter>
 
-    <%-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
-     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.js"></script>
-    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
-    <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
-    <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>
    
-    <script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>--%>
+        <div runat="server" id="SencnedAction" visible="False" style="padding: 0 10px">
+            <%--<div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="clearfix">
+                            <div class="pop_up_header_margin">
+                                <i class="fa fa-university  with_circle pop_up_header_icon"></i>
+                                <span class="pop_up_header_text">Legal</span>
+                            </div>
+                            <div class="pop_up_buttons_div">
+                                <i class="fa fa-times icon_btn" data-dismiss="modal" style="font-size: 23px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">--%>
+            <div>
+                <script>
+                    function LeagalInfoSelectChange(s, e) {
+                        var selected = cbLegalTypeClient.GetSelectedValues();
+                        $('.legal_action_div').css("display", 'none');
+                        $(selected).each(function (i, se) {
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="/Scripts/stevenjs.js"></script>
-    <style>
-        .contact_box {
-            margin-top: 5px;
-            width: 80%;
+                            $("#" + se).css("display", '');
+                        });
         }
-    </style>
+                </script>
+                <div>
+
+                    <h4 class="ss_form_title">Description</h4>
+                    <textarea class="edit_text_area" style="height: 100px; width: 100%"></textarea>
+                </div>
+
+
+                <dx:ASPxCheckBoxList runat="server" ID="cbLegalType" ClientInstanceName="cbLegalTypeClient">
+                    <Items>
+                        <dx:ListEditItem Text="Urgent Foreclosure review needed" Value="Urgent_Foreclosure_review_needed" />
+                        <dx:ListEditItem Text="Partition" Value="Partition" />
+                        <dx:ListEditItem Text="Deed Reversal" Value="Deed_Reversal" />
+                        <dx:ListEditItem Text="Breach of Contract" Value="Breach_of_Contract" />
+                        <dx:ListEditItem Text="Quiet Title" Value="Quiet_Title" />
+                        <dx:ListEditItem Text="Estate" Value="Estate" />
+
+                    </Items>
+                    <ClientSideEvents SelectedIndexChanged="LeagalInfoSelectChange" />
+                </dx:ASPxCheckBoxList>
+
+                <uc1:LegalSecondaryActions runat="server" ID="LegalSecondaryActions" />
+
+                <script>
+                    $('.legal_action_div').css("display", 'none');
+                </script>
+            </div>
+        </div>
+        <%--<div class="modal-footer">
+            <button type="button" class="btn btn-primary">Confirm</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>--%>
+    </div>
+    <!-- /.modal-content -->
+    <%--  </div>
+        </div>
+    </div>--%>
+    
     <script>
         /*
         function(case) */
         function GetLegalData() {
-            return CaseData;
+            
+            return angular.element(document.getElementById('PortalCtrl')).scope().LegalCase;
+           
         }
-
+        
        <%-- var AllContact = $.parseJSON('<%= GetAllContact()%>');--%>
         var taskSN = '<%= Request.QueryString("sn")%>';
         <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
@@ -330,7 +375,7 @@
 
                     $(el).formatCurrency();
                     $(el).on("blur", function () { $(this).formatCurrency() });
-
+                   
                     $(el).on('change', function () {
                         scope.$eval(attrs.ngModel + "='" + el.val() + "'");
                         //scope[attrs.ngModel] = el.val(); //if your expression doesn't contain dot.
@@ -349,10 +394,10 @@
             PropertyInfo.State = "NY";
             PropertyInfo.Zipcode = "11221";
             PropertyInfo.Number = "421";
-
+           
 
             PropertyInfo.Block = 1234;
-
+            
 
             PropertyInfo.Lot = 123;
             PropertyInfo.BuildingType = "Apartment";
@@ -398,17 +443,17 @@
             SecondaryInfo.Language = "Chinese";
             SecondaryInfo.MentalCapacity = "Capacity 1";
             SecondaryInfo.Divorce = false;
+            SecondaryInfo.OpposingPartyId = 638;  
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;  
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
-            SecondaryInfo.OpposingPartyId = 638;
-            SecondaryInfo.OpposingPartyId = 638;
-            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;  
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
@@ -500,7 +545,7 @@
 
                 //$.getJSON('/LegalUI/LegalUI.aspx/SaveCaseData', data, function (data) {                    
                 //});
-            }
+                }
 
             $scope.AttorneyComplete = function () {
                 var json = JSON.stringify($scope.LegalCase);
@@ -528,18 +573,18 @@
                          $scope.LegalCase = $.parseJSON(data.d);
                      }).
                      error(function () {
-                         alert("Fail to load data.")
+                        alert("Fail to load data.");
                      });
             }
             //$.getJSON('/WCFDataServices/ContactService.svc/GetAllContacts', function (data) {
-
+              
             //    $scope.selectBoxData = data;
             //});
-
+           
 
         });
     </script>
-
+   
 
     <script src="/Scripts/bootstrap.min.js"></script>
 </asp:Content>

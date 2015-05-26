@@ -56,9 +56,8 @@
           
             
             refreshDiv(tmpPartyName, m_Current_contatct);
-            if (onSelectCallback != null)
-            {
-                onSelectCallback(m_Current_contatct)
+            if (onSelectCallback != null) {
+                onSelectCallback(m_Current_contatct);
                 debugger;
             }
             

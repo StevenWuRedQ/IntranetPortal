@@ -115,9 +115,7 @@
 
         .sidebar__title {
             cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
+          
             user-select: none;
         }
 
@@ -149,7 +147,7 @@
             -webkit-transition: all ease-out .25s;
             transition: all ease-out .25s;
             font-weight: bold;
-            padding-right: 60px;
+            padding-right: 40px;
         }
 
             .sidebar__title::after, .sidebar__title:after {
@@ -327,7 +325,7 @@
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div style="height: 590px;overflow: auto">
 
                         <div data-block="sidebar" class="sidebar js-sidebar">
                             <div class="sidebar__item">

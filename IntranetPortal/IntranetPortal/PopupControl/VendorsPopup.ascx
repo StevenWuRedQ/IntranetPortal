@@ -2,7 +2,7 @@
 
 <dx:ASPxPopupControl ID="VendorsPopup" runat="server"
     ClientInstanceName="VendorsPopupClient"
-    Width="1050" Height="730px" 
+    Width="1150" Height="730px" 
     ContentUrl="/PopupControl/VendorsPopUpContent.aspx"
     HeaderText="Email" Modal="true"  ShowFooter="true" 
     EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True" ContentStyle-Paddings-Padding="0">

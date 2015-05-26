@@ -227,13 +227,14 @@
                     if (index3 >= 0) {
                         aspxPopupInprocessClient.Hide();
                         //aspxPopupLegalInfoClient.Show();
-                       
-                        $('.legal_action_div').css("display", 'none');
-                        $("#LegalPopUp").modal();
+
+                        
+                        //$("#LegalPopUp").modal();
+                        ASPLegalPopupClient.Show();
                         aspxPopupInprocessClient.PerformCallback('Save');
 
                     } else {
-                       
+
                         aspxPopupInprocessClient.PerformCallback('Save');
                     }
                 }
@@ -251,65 +252,37 @@
         }
         }" />
 </dx:ASPxPopupControl>
-<div class="modal fade" id="LegalPopUp">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="clearfix">
-                    <div class="pop_up_header_margin">
-                        <i class="fa fa-university  with_circle pop_up_header_icon"></i>
-                        <span class="pop_up_header_text">Legal</span>
-                    </div>
-                    <div class="pop_up_buttons_div">
-                        <i class="fa fa-times icon_btn" data-dismiss="modal" style="font-size: 23px;"></i>
-                    </div>
-                </div>
+
+<dx:ASPxPopupControl ClientInstanceName="ASPLegalPopupClient"  ID="ASPLegalPopup" Width="670" Height="650"
+    Modal="true" ShowFooter="true"  runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True" ContentUrl="/LegalUI/LegalUI.aspx?InPopUp=true">
+    <HeaderTemplate>
+        <div class="clearfix">
+            <div class="pop_up_header_margin">
+                <i class="fa fa-university with_circle pop_up_header_icon"></i>
+                <span class="pop_up_header_text">Legal</span>
             </div>
-            <div class="modal-body">
-                <div>
-                    <script>
-                        function LeagalInfoSelectChange(s, e) {
-                            var selected = cbLegalTypeClient.GetSelectedValues();
-                            $('.legal_action_div').css("display", 'none')
-                            $(selected).each(function (i, se) {
-
-                                $("#" + se).css("display", '');
-                            })
-                        }
-                    </script>
-                    <div >
-                        <h4 class="ss_form_title">Description</h4>
-                        <textarea class="edit_text_area" style="height: 100px; width: 100%"></textarea>
-                    </div>
-
-
-                    <dx:ASPxCheckBoxList runat="server" ID="cbLegalType" ClientInstanceName="cbLegalTypeClient">
-                        <Items>
-                            <dx:ListEditItem Text="Urgent Foreclosure review needed" Value="Urgent_Foreclosure_review_needed" />
-                            <dx:ListEditItem Text="Partition" Value="Partition" />
-                            <dx:ListEditItem Text="Deed Reversal" Value="Deed_Reversal" />
-                            <dx:ListEditItem Text="Breach of Contract" Value="Breach_of_Contract" />
-                            <dx:ListEditItem Text="Quiet Title" Value="Quiet_Title" />
-                            <dx:ListEditItem Text="Estate" Value="Estate" />
-
-                        </Items>
-                        <ClientSideEvents SelectedIndexChanged="LeagalInfoSelectChange" />
-                    </dx:ASPxCheckBoxList>
-
-                    <uc1:LegalSecondaryActions runat="server" ID="LegalSecondaryActions" />
-
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Confirm</button>
+            <div class="pop_up_buttons_div">
+                <i class="fa fa-times icon_btn" onclick="ASPLegalPopupClient.Hide()"></i>
             </div>
         </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
+    </HeaderTemplate>
+    <FooterContentTemplate>
+        <div style="height: 30px; vertical-align: central">
+            <script>
+                function LegalConfirmClick() {
+                    var lCase = ASPLegalPopupClient.GetContentIFrame().contentWindow.GetLegalData();
+                    alert(" get leagl case " + lCase);
+                }
+            </script>
+            <span class="time_buttons" onclick="ASPLegalPopupClient.Hide()">Cancel</span>
+            <span class="time_buttons" onclick="LegalConfirmClick();">Confirm</span>
+        </div>
+    </FooterContentTemplate>
+  </dx:ASPxPopupControl>  
+<div class="modal fade" id="LegalPopUp">
+   <iframe src="/LegalUI/LegalUI.aspx?InPopUp=true" class="noborder"></iframe>
 </div>
+
 <!-- /.modal -->
 <dx:ASPxPopupControl ClientInstanceName="aspxPopupLegalInfoClient" Width="680px" ID="aspxPopupLegalInfo"
     Modal="true" ShowFooter="true" OnWindowCallback="aspxPopupLegalInfo_WindowCallback" runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">

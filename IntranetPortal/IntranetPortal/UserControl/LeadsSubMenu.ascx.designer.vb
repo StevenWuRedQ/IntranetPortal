@@ -158,22 +158,13 @@ Partial Public Class LeadsSubMenu
     Protected WithEvents cbEvictionUsers As Global.DevExpress.Web.ASPxEditors.ASPxComboBox
 
     '''<summary>
-    '''cbLegalType control.
+    '''ASPLegalPopup control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents cbLegalType As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
-
-    '''<summary>
-    '''LegalSecondaryActions control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents LegalSecondaryActions As Global.IntranetPortal.LegalSecondaryActions
+    Protected WithEvents ASPLegalPopup As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
     '''aspxPopupLegalInfo control.

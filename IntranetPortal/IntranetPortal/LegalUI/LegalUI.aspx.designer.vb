@@ -129,4 +129,31 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
+
+    '''<summary>
+    '''SencnedAction control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SencnedAction As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''cbLegalType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbLegalType As Global.DevExpress.Web.ASPxEditors.ASPxCheckBoxList
+
+    '''<summary>
+    '''LegalSecondaryActions control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LegalSecondaryActions As Global.IntranetPortal.LegalSecondaryActions
 End Class

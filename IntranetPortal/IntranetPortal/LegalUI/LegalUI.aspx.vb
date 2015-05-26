@@ -16,6 +16,11 @@ Public Class LegalUI
     End Sub
 
     Sub Page_init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
+        Dim isInPoupUp = Request.QueryString("InPopUp") IsNot Nothing
+        If (isInPoupUp) Then
+            SencnedAction.Visible = True
+            ASPxSplitter1.Visible = False
+        End If
         SecondaryAction = Request.QueryString("Attorney") IsNot Nothing
         Agent = Request.QueryString("Agent") IsNot Nothing
 
