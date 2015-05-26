@@ -101,7 +101,7 @@
                                 </select>
                                 <select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
                                 </select>--%>
-                               <%-- <p >{{selectBoxData}}</p>--%>
+                               
                             </div>
 
                             <div style="align-content: center; height: 100%">
@@ -274,7 +274,7 @@
             return CaseData;
         }
         
-        var AllContact = $.parseJSON('<%= GetAllContact()%>');
+       <%-- var AllContact = $.parseJSON('<%= GetAllContact()%>');--%>
         var taskSN = '<%= Request.QueryString("sn")%>';
         <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
         var portalApp = angular.module('PortalApp', ['dx']);
@@ -397,7 +397,7 @@
 
             $scope.SelectContactId = 128;
 
-            $scope.selectBoxData = AllContact;
+            //$scope.selectBoxData = AllContact;
             $scope.InitContact = function (id) {
 
                 var store = new DevExpress.data.DataSource({
