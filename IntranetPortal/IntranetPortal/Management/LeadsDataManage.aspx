@@ -110,7 +110,7 @@
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <h3>Leads Data</h3>
-                            <table style="width: 720px; text-align: left; margin: 10px,10px,0,0;">
+                            <table style="width: 720px; text-align: left; margin: 10px 10px 0 0;">
                                 <tr>
                                     <td class="caption" style="width: 100px;">
                                         <dx:ASPxLabel ID="lblSelectImage" runat="server" Text="Select File:">

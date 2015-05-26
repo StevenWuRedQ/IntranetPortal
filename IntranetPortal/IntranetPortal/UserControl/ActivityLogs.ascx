@@ -865,11 +865,11 @@
                     </div>
                     <div class="form-group ">
                         <label class="upcase_text" style="display: block">Date Of Value</label>
-                        <input class="form-control ss_date" onchange="dateValueChagne(this)" runat="server" id="txtDateofValue">
+                        <input class="form-control ss_date" onchange="dateValueChagne(this)" runat="server" id="txtDateofValue"/>
                     </div>
                     <div class="form-group ">
                         <label class="upcase_text" style="display: block">Expired On</label>
-                        <input class="form-control ss_date" onchange="dateValueChagne(this)" runat="server" id="txtExpiredDate">
+                        <input class="form-control ss_date" onchange="dateValueChagne(this)" runat="server" id="txtExpiredDate"/>
                     </div>
                     <div>
                         <div class="row" style="margin-top: 33px;">

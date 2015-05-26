@@ -233,7 +233,7 @@
                 <div id="map-canvas" style="float: left; width: 100%; height: 100%"></div>
             </td>
             <td style="width: 200px">
-                <div id="directionsPanel" style="float: right; width: 100%; height 100%">
+                <div id="directionsPanel" style="float: right; width: 100%; height:100%">
                     <p>Total Distance: <span id="total"></span></p>
                 </div>
             </td>

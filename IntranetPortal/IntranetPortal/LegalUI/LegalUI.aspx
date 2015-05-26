@@ -6,6 +6,8 @@
 <%@ Register Src="~/LegalUI/LegalCaseList.ascx" TagPrefix="uc1" TagName="LegalCaseList" %>
 
 <%@ Register Src="~/LegalUI/LegalTab.ascx" TagPrefix="uc1" TagName="LegalTab" %>
+<%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
+
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
 
@@ -20,10 +22,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
-    <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>
+   <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>    
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.light.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
-    <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
+     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
@@ -94,12 +96,12 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div>
+                            <div>                               
                                 <%--<select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
                                 </select>
                                 <select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
                                 </select>--%>
-                                <%-- <p >{{selectBoxData}}</p>--%>
+                               <%-- <p >{{selectBoxData}}</p>--%>
                             </div>
 
                             <div style="align-content: center; height: 100%">
@@ -110,8 +112,15 @@
                                             <i class="fa fa-info-circle  head_tab_icon_padding"></i>
                                             <div class="font_size_bold">Legal</div>
                                         </a>
-                                    </li>
 
+
+                                    </li>
+                                    <li class="short_sale_head_tab">
+                                        <a href="#DocumentTab" role="tab" data-toggle="tab" class="tab_button_a">
+                                            <i class="fa fa-file head_tab_icon_padding"></i>
+                                            <div class="font_size_bold">Documents</div>
+                                        </a>
+                                    </li>
                                     <li style="margin-right: 30px; color: #ffa484; float: right">
                                         <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
 
@@ -182,7 +191,7 @@
                                             </div>
 
                                         </div>
-
+                                       
                                     </div>
                                 </div>
 
@@ -192,7 +201,10 @@
                                     <div class="tab-pane active" id="LegalTab">
                                         <uc1:LegalTab runat="server" ID="LegalTab1" />
                                     </div>
+                                    <div class="tab-pane active" id="DocumentTab">
+                                        <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
                                 </div>
+                            </div>
                             </div>
                             <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
                         </div>
@@ -230,7 +242,7 @@
                                         <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="Legal" />
                                     </dx:PanelContent>
                                 </PanelCollection>
-                            </dx:ASPxCallbackPanel>
+                            </dx:ASPxCallbackPanel>                            
                         </div>
                     </dx:SplitterContentControl>
                 </ContentCollection>
@@ -238,7 +250,7 @@
         </Panes>
     </dx:ASPxSplitter>
 
-    <%-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+   <%-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
@@ -261,7 +273,7 @@
         function GetLegalData() {
             return CaseData;
         }
-
+        
         var AllContact = $.parseJSON('<%= GetAllContact()%>');
         var taskSN = '<%= Request.QueryString("sn")%>';
         <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
@@ -298,7 +310,7 @@
 
                     $(el).formatCurrency();
                     $(el).on("blur", function () { $(this).formatCurrency() });
-
+                   
                     $(el).on('change', function () {
                         scope.$eval(attrs.ngModel + "='" + el.val() + "'");
                         //scope[attrs.ngModel] = el.val(); //if your expression doesn't contain dot.
@@ -317,10 +329,10 @@
             PropertyInfo.State = "NY";
             PropertyInfo.Zipcode = "11221";
             PropertyInfo.Number = "421";
-
+           
 
             PropertyInfo.Block = 1234;
-
+            
 
             PropertyInfo.Lot = 123;
             PropertyInfo.BuildingType = "Apartment";
@@ -366,17 +378,17 @@
             SecondaryInfo.Language = "Chinese";
             SecondaryInfo.MentalCapacity = "Capacity 1";
             SecondaryInfo.Divorce = false;
+            SecondaryInfo.OpposingPartyId = 638;  
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;  
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
-            SecondaryInfo.OpposingPartyId = 638;
-            SecondaryInfo.OpposingPartyId = 638;
-            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;  
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
@@ -386,10 +398,42 @@
             $scope.SelectContactId = 128;
 
             $scope.selectBoxData = AllContact;
-
             $scope.InitContact = function (id) {
+
+                var store = new DevExpress.data.DataSource({
+                    load: function (loadOptions) {
+                        var d = $.Deferred();
+                        if (loadOptions.searchValue) {
+                            $.getJSON('/WCFDataServices/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
+                                d.resolve(data);
+
+                            });
+                        } else {
+                            $.getJSON('/WCFDataServices/ContactService.svc/LoadContacts').done(function (data) {
+                                d.resolve(data);
+
+                            });
+                        }
+
+                        return d.promise();
+                    },
+                    byKey: function (key) {
+                        var d = new $.Deferred();
+                        $.get('/WCFDataServices/ContactService.svc/GetAllContacts?id=' + key)
+                            .done(function (result) {
+                                d.resolve(result);
+                            });
+                        return d.promise();
+                    },
+                    searchExpr: ["Name"]
+                });
+                //new DevExpress.data.ODataStore({
+                //    url: "/WCFDataServices/ContactService.svc/GetAllContacts",
+                //    key: "ContactId",
+                //    keyType: "Int32"
+                //});
                 return {
-                    dataSource: $scope.selectBoxData,
+                    dataSource: store,
                     valueExpr: 'ContactId',
                     displayExpr: 'Name',
                     searchEnabled: true,
@@ -433,7 +477,7 @@
 
                 //$.getJSON('/LegalUI/LegalUI.aspx/SaveCaseData', data, function (data) {                    
                 //});
-            }
+                }
 
             $scope.AttorneyComplete = function () {
                 var json = JSON.stringify($scope.LegalCase);
@@ -461,16 +505,15 @@
                          alert("Fail to load data.")
                      });
             }
-
-            $.getJSON('/WCFDataServices/ContactService.svc/GetAllContacts', function (data) {
-
-                $scope.selectBoxData = data;
-            });
-
+            //$.getJSON('/WCFDataServices/ContactService.svc/GetAllContacts', function (data) {
+              
+            //    $scope.selectBoxData = data;
+            //});
+           
 
         });
     </script>
-
+   
 
     <script src="/Scripts/bootstrap.min.js"></script>
 </asp:Content>

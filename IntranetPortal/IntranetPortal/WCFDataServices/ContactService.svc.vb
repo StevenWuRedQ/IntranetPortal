@@ -20,11 +20,21 @@ Public Class ContactService
         Return p.ToJson()
         ' Add your operation implementation here
     End Function
-
     <OperationContract()>
     <WebGet()>
-    Public Function GetAllContacts() As Channels.Message
-        Dim p = PartyContact.getAllContact()
+    Public Function LoadContacts() As Channels.Message ' As List(Of PartyContact)
+
+        Return PartyContact.getAllContact().ToJson()
+       
+    End Function
+    <OperationContract()>
+    <WebGet()>
+    Public Function GetAllContacts(id As Integer) As Channels.Message ' As List(Of PartyContact)
+        If (id = 0) Then
+            Return PartyContact.getAllContact().ToJson()
+        End If
+        Dim p = PartyContact.getAllContact().Where(Function(ps) ps.ContactId = id)
+
         Return p.ToJson()
         ' Add your operation implementation here
     End Function

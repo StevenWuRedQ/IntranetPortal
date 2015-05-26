@@ -375,7 +375,7 @@
                                 <% Dim i = 1%>
                                 <% For Each clearence In ShortSaleCaseData.Clearences%>
                                 <div class="clearence_list_item">
-                                    <div class="clearence_list_content clearfix  <%= If(Not String.IsNullOrEmpty(clearence.Status) AndAlso clearence.Status = IntranetPortal.ShortSale.TitleClearence.ClearenceStatus.Cleared, "TitleCleared", "")%>"">
+                                    <div class="clearence_list_content clearfix  <%= If(Not String.IsNullOrEmpty(clearence.Status) AndAlso clearence.Status = IntranetPortal.ShortSale.TitleClearence.ClearenceStatus.Cleared, "TitleCleared", "")%>">
                                         <div class="clearence_list_index TitleContent">
                                             <%= i%>
                                         </div>
@@ -492,7 +492,7 @@
                         Issue
                     </div>
                     <div class="clearence_list_text18  color_blue_edit">
-                        <input class="ss_form_input ss_allow_eidt" value="" runat="server" id="txtIssue" style="width: 90%">
+                        <input class="ss_form_input ss_allow_eidt" value="" runat="server" id="txtIssue" style="width: 90%"/>
                     </div>
                 </div>
                 <div class="clearence_list_text">
@@ -503,7 +503,7 @@
                                     Contact Name
                                 </div>
                                 <div class="clearence_list_text14  color_blue_edit">
-                                    <input class="ss_form_input ss_allow_eidt" value="" runat="server" id="txtContactName">
+                                    <input class="ss_form_input ss_allow_eidt" value="" runat="server" id="txtContactName"/>
                                 </div>
                             </td>
                             <td class="clearence_table_td">
@@ -511,7 +511,7 @@
                                     Contact Number
                                 </div>
                                 <div class="clearence_list_text14  color_blue_edit">
-                                    <input class="ss_form_input ss_allow_eidt" value="" runat="server" id="txtContactNum">
+                                    <input class="ss_form_input ss_allow_eidt" value="" runat="server" id="txtContactNum"/>
                                 </div>
                             </td>
                             <td class="clearence_table_td">
@@ -519,7 +519,7 @@
                                     Contact Email
                                 </div>
                                 <div class="clearence_list_text14  color_blue_edit">
-                                    <input class="ss_form_input ss_allow_eidt" value="" runat="server" id="txtContactEmail">
+                                    <input class="ss_form_input ss_allow_eidt" value="" runat="server" id="txtContactEmail"/>
                                 </div>
                             </td>
                         </tr>
@@ -533,7 +533,7 @@
                                     Company Name
                                 </div>
                                 <div class="clearence_list_text14  color_blue_edit">
-                                    <input class="ss_form_input ss_allow_eidt" value="" runat="server" id="txtCompanyName">
+                                    <input class="ss_form_input ss_allow_eidt" value="" runat="server" id="txtCompanyName"/>
                                 </div>
                             </td>
                             <td class="clearence_table_td">

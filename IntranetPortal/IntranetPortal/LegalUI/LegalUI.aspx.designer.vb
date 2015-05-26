@@ -86,6 +86,15 @@ Partial Public Class LegalUI
     Protected WithEvents LegalTab1 As Global.IntranetPortal.LegalTab
 
     '''<summary>
+    '''DocumentsUI control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents DocumentsUI As Global.IntranetPortal.DocumentsUI
+
+    '''<summary>
     '''VendorsPopup control.
     '''</summary>
     '''<remarks>

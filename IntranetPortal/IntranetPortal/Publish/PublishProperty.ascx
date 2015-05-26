@@ -134,7 +134,7 @@
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">Avaiable Date</label>
-                                    <input class="ss_form_input ss_date color_blue_edit" runat="server" id="txtAvaiableDate">
+                                    <input class="ss_form_input ss_date color_blue_edit" runat="server" id="txtAvaiableDate"/>
                                 </li>
                                 <li class="ss_form_item">
                                     <label class="ss_form_input_title">TransitLines</label>
