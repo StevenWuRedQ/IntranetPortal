@@ -25,6 +25,9 @@ Partial Public Class PartyContact
         End Using
     End Function
     Public Shared Function SearchContacts(query As String) As List(Of PartyContact)
+        If (query Is Nothing) Then
+            Return Nothing
+        End If
         query = query.ToUpper()
         Using context As New ShortSaleEntities
             Dim result = context.PartyContacts.Where(Function(pc) pc.Name.ToUpper().Contains(query) Or pc.OfficeNO.ToUpper().Contains(query) Or pc.Cell.ToUpper().Contains(query) Or pc.CorpName.ToUpper().Contains(query)).ToList()
