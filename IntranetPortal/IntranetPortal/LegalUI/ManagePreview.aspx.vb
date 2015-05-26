@@ -51,7 +51,7 @@ Public Class ManagePreview
             wli.Finish()
 
             Dim lc = Legal.LegalCase.GetCase(bble)
-            lc.Status = Legal.LegalCaseStatus.InResearch
+            lc.Status = Legal.LegalCaseStatus.LegalResearch
             lc.SaveData()
 
             Response.Clear()

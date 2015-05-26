@@ -11,7 +11,6 @@
         Agent = Request.QueryString("Agent") IsNot Nothing
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
 
-
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
             Select Case wli.ActivityName
                 Case "LegalResearch"
@@ -34,7 +33,7 @@
 
             'update legal case status
             Dim lc = Legal.LegalCase.GetCase(bble)
-            lc.Status = Legal.LegalCaseStatus.InCount
+            lc.Status = Legal.LegalCaseStatus.AttorneyHandle
             lc.SaveData()
 
             Response.Clear()

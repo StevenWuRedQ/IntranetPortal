@@ -211,6 +211,43 @@ Public Class WorkflowService
             conn.StartProcessInstance(procInst)
         End Using
     End Sub
+
+    Public Shared Function GetLegalWorklistItem(sn As String, bble As String, status As Legal.LegalCaseStatus, destName As String) As WorklistItem
+        If String.IsNullOrEmpty(sn) Then
+            Dim result = WorkflowService.GetLegalWorklist(bble, status, destName)
+
+            If result IsNot Nothing Then
+                sn = String.Format("{0}_{1}", result.ProcInstId, result.ActInstId)
+
+                Return WorkflowService.LoadTaskProcess(sn, result.DestinationUser)
+            End If
+        Else
+            Return WorkflowService.LoadTaskProcess(sn)
+        End If
+
+        Return Nothing
+    End Function
+
+
+    Public Shared Function GetLegalWorklist(bble As String, legalStatus As Legal.LegalCaseStatus, userName As String) As DBPersistence.Worklist
+        Using conn = GetConnection()
+            Dim pInstIds = conn.GetProcessInstancesByDataFields("LegalRequest", "BBLE", bble)
+            If pInstIds.Count > 0 Then
+                Dim wls = MyIdealProp.Workflow.DBPersistence.Worklist.GetProcInstWorkList(pInstIds(0))
+                If wls IsNot Nothing Then
+                    Return wls.SingleOrDefault(Function(wl) wl.ActivityName = legalStatus.ToString)
+
+                End If
+            End If
+
+            Return Nothing
+        End Using
+    End Function
+
+    Public Shared Sub CompleteResearch(sn As String)
+        Dim wli = WorkflowService.LoadTaskProcess(sn)
+        wli.Finish()
+    End Sub
 #End Region
 
 #Region "Appointment"

@@ -9,6 +9,8 @@ Public Class LegalUI
     Public SecondaryAction As Boolean = False
     Public Agent As Boolean = False
 
+    Public Property DisplayView As Legal.LegalCaseStatus
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
     End Sub
@@ -16,11 +18,18 @@ Public Class LegalUI
     Sub Page_init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         SecondaryAction = Request.QueryString("Attorney") IsNot Nothing
         Agent = Request.QueryString("Agent") IsNot Nothing
+
+        If Not String.IsNullOrEmpty(Request.QueryString("view")) Then
+            SetView(Request.QueryString("view"))
+        End If
+
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             ASPxSplitter1.Panes("listPanel").Visible = False
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
             Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
             ActivityLogs.BindData(bble)
+
+            SetView(wli.ActivityName)
 
             'Select Case wli.ActivityName
             '    Case "LegalResearch"
@@ -36,6 +45,12 @@ Public Class LegalUI
         If Not String.IsNullOrEmpty(Request.QueryString("lc")) Then
             LegalCaseList.BindCaseList(CInt(Request.QueryString("lc")))
             LegalCaseList.AutoLoadCase = True
+        End If
+    End Sub
+
+    Public Sub SetView(viewName As String)
+        If Not ([Enum].TryParse(Of Legal.LegalCaseStatus)(viewName, DisplayView)) Then
+            DisplayView = Legal.LegalCaseStatus.Closed
         End If
     End Sub
 
@@ -63,9 +78,65 @@ Public Class LegalUI
     End Sub
 
     <WebMethod()> _
+   <ScriptMethod>
+    Public Shared Sub CompleteResearch(caseData As String, bble As String, sn As String)
+        'save data
+        SaveCaseData(caseData, bble)
+
+        Dim wli = WorkflowService.GetLegalWorklistItem(sn, bble, Legal.LegalCaseStatus.LegalResearch, HttpContext.Current.User.Identity.Name)
+
+        If wli IsNot Nothing Then
+            wli.Finish()
+        End If
+
+        'update legal case status
+        Legal.LegalCase.UpdateStatus(bble, Legal.LegalCaseStatus.ManagerAssign)
+    End Sub
+
+    <WebMethod()> _
+  <ScriptMethod>
+    Public Shared Sub AttorneyComplete(caseData As String, bble As String, sn As String)
+        'save data
+        SaveCaseData(caseData, bble)
+
+        Dim wli = WorkflowService.GetLegalWorklistItem(sn, bble, Legal.LegalCaseStatus.AttorneyHandle, HttpContext.Current.User.Identity.Name)
+
+        If wli IsNot Nothing Then
+            wli.Finish()
+        End If
+
+        Legal.LegalCase.UpdateStatus(bble, Legal.LegalCaseStatus.Closed)
+    End Sub
+
+    <WebMethod()> _
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
     Public Shared Function GetCaseData(bble As String) As String
         Return Legal.LegalCase.GetCase(bble).CaseData
     End Function
 
+    Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
+        PopupContentReAssign.Visible = True
+        listboxEmployee.DataSource = Roles.GetUsersInRole("Legal-Attorney")
+        listboxEmployee.DataBind()
+
+        If Not String.IsNullOrEmpty(e.Parameter) AndAlso e.Parameter.Split("|").Length > 0 Then
+            Dim bble = e.Parameter.Split("|")(0)
+            Dim attorney = e.Parameter.Split("|")(1)
+
+            Dim sn = Request.QueryString("sn").ToString
+
+            Dim wli = WorkflowService.GetLegalWorklistItem(sn, bble, Legal.LegalCaseStatus.ManagerAssign, HttpContext.Current.User.Identity.Name)
+
+            If wli IsNot Nothing Then
+                wli.ProcessInstance.DataFields("Attorney") = attorney
+                wli.Finish()
+            End If
+
+            'update legal case status
+            Dim lc = Legal.LegalCase.GetCase(bble)
+            lc.Status = Legal.LegalCaseStatus.AttorneyHandle
+            lc.Attorney = attorney
+            lc.SaveData()
+        End If
+    End Sub
 End Class

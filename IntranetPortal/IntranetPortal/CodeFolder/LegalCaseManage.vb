@@ -6,7 +6,7 @@
         Dim lc As New Legal.LegalCase
         lc.BBLE = bble
         lc.CaseName = ld.LeadsName
-        lc.Status = Legal.LegalCaseStatus.Preview
+        lc.Status = Legal.LegalCaseStatus.ManagerPreview
         lc.CreateBy = createBy
         lc.SaveData()
 

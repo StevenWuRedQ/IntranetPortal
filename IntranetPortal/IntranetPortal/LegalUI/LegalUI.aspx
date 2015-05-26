@@ -20,10 +20,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
-   <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>    
+    <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.light.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
-     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
+    <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
@@ -48,8 +48,6 @@
                 <ContentCollection>
                     <dx:SplitterContentControl>
                         <script>
-
- 
                             $(document).ready(function () {
 
                                 $('.popup').webuiPopover({ title: 'Contact ' + $("#vendor_btn").html(), content: $('#contact_popup').html(), width: 400 });
@@ -96,12 +94,12 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div>                               
+                            <div>
                                 <%--<select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
                                 </select>
                                 <select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
                                 </select>--%>
-                               <%-- <p >{{selectBoxData}}</p>--%>
+                                <%-- <p >{{selectBoxData}}</p>--%>
                             </div>
 
                             <div style="align-content: center; height: 100%">
@@ -115,12 +113,51 @@
                                     </li>
 
                                     <li style="margin-right: 30px; color: #ffa484; float: right">
+                                        <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
 
-                                        <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="tmpBBLE=leadsInfoBBLE; popupCtrReassignEmployeeListCtr.PerformCallback();popupCtrReassignEmployeeListCtr.ShowAtElement(this);" data-original-title="Re-Assign"></i>
+                                        <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.LegalResearch Then%>
+                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="CompleteResearch()" data-original-title="Complete Search"></i>
+                                        <% End If%>
+
+                                        <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Then%>
+                                        <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupCtrReassignEmployeeListCtr.PerformCallback();popupCtrReassignEmployeeListCtr.ShowAtElement(this);" data-original-title="Assign to Attorney"></i>
+                                        <% End If%>
+
+                                        <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.AttorneyHandle Then%>
+                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="AttorneyComplete()" data-original-title="Complete"></i>
+                                        <% End If%>
+
                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
                                     </li>
+
                                 </ul>
+
+                                <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Then%>
+                                <dx:ASPxPopupControl ClientInstanceName="popupCtrReassignEmployeeListCtr" Width="300px" Height="300px"
+                                    MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
+                                    HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
+                                    runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
+                                    <ContentCollection>
+                                        <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentReAssign">
+                                            <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" SelectedIndex="0" Width="100%">
+                                            </dx:ASPxListBox>
+                                            <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
+                                                <ClientSideEvents Click="function(s,e){
+                                        var item = listboxEmployeeClient.GetSelectedItem();
+                                        if(item == null)
+                                        {
+                                             alert('Please select attorney.');
+                                             return;
+                                         }
+                                        reassignCallback.PerformCallback(leadsInfoBBLE + '|' + item.text);
+                                        popupCtrReassignEmployeeListCtr.Hide();                                       
+                                        }" />
+                                            </dx:ASPxButton>
+                                        </dx:PopupControlContentControl>
+                                    </ContentCollection>
+                                </dx:ASPxPopupControl>
+                                <% End If%>
 
                                 <style>
                                     .AttachmentSpan {
@@ -134,7 +171,6 @@
                                 <div id="ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_SendMail_PopupSendMail_PW-1" class="dxpcLite_MetropolisBlue1 dxpclW" style="height: 700px; width: 630px; cursor: default; z-index: 10000; display: none;">
                                     <div class="dxpc-mainDiv dxpc-shadow">
                                         <div class="dxpc-header dxpc-withBtn" id="ctl00_MainContentPH_ASPxSplitter1_ASPxCallbackPanel2_contentSplitter_SendMail_PopupSendMail_PWH-1">
-
                                             <div class="clearfix">
                                                 <div class="pop_up_header_margin">
                                                     <i class="fa fa-envelope with_circle pop_up_header_icon"></i>
@@ -146,7 +182,7 @@
                                             </div>
 
                                         </div>
-                                       
+
                                     </div>
                                 </div>
 
@@ -159,13 +195,9 @@
                                 </div>
                             </div>
                             <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
-
                         </div>
-
                     </dx:SplitterContentControl>
-
                 </ContentCollection>
-
             </dx:SplitterPane>
             <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9">
                 <ContentCollection>
@@ -198,7 +230,7 @@
                                         <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="Legal" />
                                     </dx:PanelContent>
                                 </PanelCollection>
-                            </dx:ASPxCallbackPanel>                            
+                            </dx:ASPxCallbackPanel>
                         </div>
                     </dx:SplitterContentControl>
                 </ContentCollection>
@@ -206,7 +238,7 @@
         </Panes>
     </dx:ASPxSplitter>
 
-   <%-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+    <%-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.js"></script>
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
@@ -220,7 +252,7 @@
     <style>
         .contact_box {
             margin-top: 5px;
-            width: 80%
+            width: 80%;
         }
     </style>
     <script>
@@ -229,8 +261,9 @@
         function GetLegalData() {
             return CaseData;
         }
-        
+
         var AllContact = $.parseJSON('<%= GetAllContact()%>');
+        var taskSN = '<%= Request.QueryString("sn")%>';
         <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
         var portalApp = angular.module('PortalApp', ['dx']);
         portalApp.directive('ssDate', function () {
@@ -265,7 +298,7 @@
 
                     $(el).formatCurrency();
                     $(el).on("blur", function () { $(this).formatCurrency() });
-                   
+
                     $(el).on('change', function () {
                         scope.$eval(attrs.ngModel + "='" + el.val() + "'");
                         //scope[attrs.ngModel] = el.val(); //if your expression doesn't contain dot.
@@ -274,7 +307,7 @@
             };
         });
         portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
-            $scope.LegalCase = {PropertyInfo: {},ForeclosureInfo: {}, SecondaryInfo: {} };
+            $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
             var PropertyInfo = $scope.LegalCase.PropertyInfo;
             CaseData = $scope.LegalCase;
             PropertyInfo.PropertyAddress = "421 HART ST, BEDFORD STUYVESANT,NY 11221";
@@ -284,10 +317,10 @@
             PropertyInfo.State = "NY";
             PropertyInfo.Zipcode = "11221";
             PropertyInfo.Number = "421";
-           
+
 
             PropertyInfo.Block = 1234;
-            
+
 
             PropertyInfo.Lot = 123;
             PropertyInfo.BuildingType = "Apartment";
@@ -333,17 +366,17 @@
             SecondaryInfo.Language = "Chinese";
             SecondaryInfo.MentalCapacity = "Capacity 1";
             SecondaryInfo.Divorce = false;
-            SecondaryInfo.OpposingPartyId = 638;  
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
-            SecondaryInfo.OpposingPartyId = 638;  
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
-            SecondaryInfo.OpposingPartyId = 638;  
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;
+            SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
             SecondaryInfo.OpposingPartyId = 638;
@@ -353,8 +386,8 @@
             $scope.SelectContactId = 128;
 
             $scope.selectBoxData = AllContact;
-            
-            $scope.InitContact = function(id) {
+
+            $scope.InitContact = function (id) {
                 return {
                     dataSource: $scope.selectBoxData,
                     valueExpr: 'ContactId',
@@ -370,9 +403,9 @@
                 return false;
             }
 
-            $scope.SaveLegal = function() {
+            $scope.SaveLegal = function () {
                 var json = JSON.stringify($scope.LegalCase);
-                
+
                 var data = { bble: leadsInfoBBLE, caseData: json };
                 $http.post('LegalUI.aspx/SaveCaseData', data).
                     success(function () {
@@ -381,13 +414,44 @@
                     error(function () {
                         alert("Fail to save data.");
                     });
-                
+
                 //$.getJSON('/LegalUI/LegalUI.aspx/SaveCaseData', data, function (data) {                    
                 //});
             }
 
-            $scope.LoadLeadsCase = function(BBLE)
-            {
+            $scope.CompleteResearch = function () {
+                var json = JSON.stringify($scope.LegalCase);
+
+                var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN };
+                $http.post('LegalUI.aspx/CompleteResearch', data).
+                    success(function () {
+                        alert("Submit Success!");
+                    }).
+                    error(function () {
+                        alert("Fail to save data.");
+                    });
+
+                //$.getJSON('/LegalUI/LegalUI.aspx/SaveCaseData', data, function (data) {                    
+                //});
+            }
+
+            $scope.AttorneyComplete = function () {
+                var json = JSON.stringify($scope.LegalCase);
+
+                var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN };
+                $http.post('LegalUI.aspx/AttorneyComplete', data).
+                    success(function () {
+                        alert("Submit Success!");
+                    }).
+                    error(function () {
+                        alert("Fail to save data.");
+                    });
+
+                //$.getJSON('/LegalUI/LegalUI.aspx/SaveCaseData', data, function (data) {                    
+                //});
+            }
+
+            $scope.LoadLeadsCase = function (BBLE) {
                 var data = { bble: BBLE };
                 $http.post('LegalUI.aspx/GetCaseData', data).
                      success(function (data, status, headers, config) {
@@ -399,14 +463,14 @@
             }
 
             $.getJSON('/WCFDataServices/ContactService.svc/GetAllContacts', function (data) {
-              
+
                 $scope.selectBoxData = data;
             });
-           
+
 
         });
     </script>
-   
+
 
     <script src="/Scripts/bootstrap.min.js"></script>
 </asp:Content>

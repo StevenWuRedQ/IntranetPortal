@@ -17,7 +17,6 @@
         <h4 class="ss_form_title">Property</h4>
 
         <ul class="ss_form_box clearfix">
-
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Street Number</label>
                 <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.StreetName">
