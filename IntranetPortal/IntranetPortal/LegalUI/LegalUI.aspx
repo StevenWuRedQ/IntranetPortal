@@ -139,7 +139,6 @@
                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
                                     </li>
-
                                 </ul>
 
                                 <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Then%>
@@ -160,11 +159,15 @@
                                              return;
                                          }
                                         reassignCallback.PerformCallback(leadsInfoBBLE + '|' + item.text);
-                                        popupCtrReassignEmployeeListCtr.Hide();                                       
+                                        popupCtrReassignEmployeeListCtr.Hide();
                                         }" />
                                             </dx:ASPxButton>
-                                        </dx:PopupControlContentControl>
+                                        </dx:PopupControlContentControl>                                       
                                     </ContentCollection>
+                                    <ClientSideEvents Closing="function(s,e){
+                                              if (typeof gridTrackingClient != 'undefined')
+                                                    gridTrackingClient.Refresh();
+                                        }" />
                                 </dx:ASPxPopupControl>
                                 <% End If%>
 
@@ -469,6 +472,8 @@
                 var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN };
                 $http.post('LegalUI.aspx/CompleteResearch', data).
                     success(function () {
+                        if (typeof gridTrackingClient != 'undefined')
+                            gridTrackingClient.Refresh();
                         alert("Submit Success!");
                     }).
                     error(function () {
@@ -485,6 +490,8 @@
                 var data = { bble: leadsInfoBBLE, caseData: json, sn: taskSN };
                 $http.post('LegalUI.aspx/AttorneyComplete', data).
                     success(function () {
+                        if (typeof gridTrackingClient != 'undefined')
+                            gridTrackingClient.Refresh();
                         alert("Submit Success!");
                     }).
                     error(function () {

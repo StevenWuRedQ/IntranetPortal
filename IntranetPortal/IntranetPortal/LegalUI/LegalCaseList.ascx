@@ -37,23 +37,6 @@
         }
     }
 
-    function GetShortSaleData(caseId) {
-        //debugger;
-        $.ajax({
-            type: "POST",
-            url: "ShortSale.aspx/GetCase",
-            data: '{caseId: ' + caseId + '}',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: OnSuccess,
-            failure: function (response) {
-                alert("Get ShortSaleData failed" + response);
-            },
-            error: function (response) {
-                alert("Get ShortSaleData error" + response);
-            }
-        });
-    }
 
     function expandAllClick(s) {
         if (gridCase.IsGroupRowExpanded(0)) {
@@ -107,45 +90,10 @@
         }
     }
 
-    function OnSuccess(response) {
-      
-        ShortSaleCaseData = response.d;  //JSON.parse(response.d);
-        leadsInfoBBLE = ShortSaleCaseData.BBLE;
-        ShortSaleDataBand(0);
-        
-    }
-
-   
-
     function RefreshContent() {
         if (caseId != null) {
             ContentCallbackPanel.PerformCallback(caseId);
         }
-    }
-
-    function AddScrollbarOnLeadsList() {
-        return;
-        $("#leads_list_left .dxgvCSD").each(function (ind) {
-            var is_list = $(this).parents("#leads_list_left").length > 0;
-
-            var ladfucntion = {
-                onScroll: function () {
-                    var position = this.mcs.topPct;
-                    if (position > 95) {
-                        gridCase.NextPage();
-                    }
-                }
-            }
-
-            if (is_list) {
-                $(this).mCustomScrollbar(
-                    {
-                        theme: "minimal-dark",
-                        callbacks: ladfucntion
-                    }
-                 );
-            }
-        });
     }
 
     function ExpandOrCollapseGroupRow(rowIndex) {
@@ -155,7 +103,6 @@
             } else {
                 gridCase.ExpandRow(rowIndex);
             }
-            AddScrollbarOnLeadsList();
             return
         }
     }

@@ -19,9 +19,9 @@ Public Class LegalUI
         SecondaryAction = Request.QueryString("Attorney") IsNot Nothing
         Agent = Request.QueryString("Agent") IsNot Nothing
 
-        If Not String.IsNullOrEmpty(Request.QueryString("view")) Then
-            SetView(Request.QueryString("view"))
-        End If
+        'If Not String.IsNullOrEmpty(Request.QueryString("lc")) Then
+        '    SetView(Request.QueryString("view"))
+        'End If
 
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             ASPxSplitter1.Panes("listPanel").Visible = False
@@ -43,6 +43,7 @@ Public Class LegalUI
         End If
 
         If Not String.IsNullOrEmpty(Request.QueryString("lc")) Then
+            DisplayView = CInt(Request.QueryString("lc"))
             LegalCaseList.BindCaseList(CInt(Request.QueryString("lc")))
             LegalCaseList.AutoLoadCase = True
         End If
@@ -91,6 +92,9 @@ Public Class LegalUI
 
         'update legal case status
         Legal.LegalCase.UpdateStatus(bble, Legal.LegalCaseStatus.ManagerAssign)
+
+        Dim comments = String.Format("Research is completed. The case is move to manager.")
+        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal, LeadsActivityLog.EnumActionType.Comments)
     End Sub
 
     <WebMethod()> _
@@ -106,6 +110,10 @@ Public Class LegalUI
         End If
 
         Legal.LegalCase.UpdateStatus(bble, Legal.LegalCaseStatus.Closed)
+
+        Dim comments = String.Format("Case is closed.")
+        LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal, LeadsActivityLog.EnumActionType.Comments)
+
     End Sub
 
     <WebMethod()> _
@@ -137,6 +145,9 @@ Public Class LegalUI
             lc.Status = Legal.LegalCaseStatus.AttorneyHandle
             lc.Attorney = attorney
             lc.SaveData()
+
+            Dim comments = String.Format("The case is assign to {0}.", attorney)
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal, LeadsActivityLog.EnumActionType.Comments)
         End If
     End Sub
 End Class
