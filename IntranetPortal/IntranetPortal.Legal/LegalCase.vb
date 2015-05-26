@@ -21,6 +21,13 @@
         End Using
     End Function
 
+    Public Shared Sub UpdateStatus(bble As String, status As LegalCaseStatus)
+        'update legal case status
+        Dim lc = Legal.LegalCase.GetCase(bble)
+        lc.Status = status
+        lc.SaveData()
+    End Sub
+
     Public Shared Function GetCaseList(status As LegalCaseStatus) As List(Of LegalCase)
         Using ctx As New LegalModelContainer
             Return ctx.LegalCases.Where(Function(lc) lc.Status = status).ToList
@@ -35,9 +42,9 @@
 End Class
 
 Public Enum LegalCaseStatus
-    Preview = 0
-    InResearch = 1
+    ManagerPreview = 0
+    LegalResearch = 1
     ManagerAssign = 2
-    InCount = 3
+    AttorneyHandle = 3
     Closed = 4
 End Enum
