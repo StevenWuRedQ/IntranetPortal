@@ -52,6 +52,7 @@ Public Class ManagePreview
 
             Dim lc = Legal.LegalCase.GetCase(bble)
             lc.Status = Legal.LegalCaseStatus.LegalResearch
+            lc.ResearchBy = searchUser
             lc.SaveData()
 
             Response.Clear()
