@@ -22,42 +22,46 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
-    <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>
+   <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>    
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.light.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
-    <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
+     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
     <script src="/Scripts/stevenjs.js"></script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <%--leagal Ui--%>
+    <style>
+        .dxsplControl_MetropolisBlue1 .dxsplLCC {
+            padding: 0;
+        }
+    </style>
     <div id="PortalCtrl" ng-controller="PortalCtrl">
 
-        <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
-            <Panes>
-                <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
-                    <ContentCollection>
-                        <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
-                            <uc1:LegalCaseList runat="server" ID="LegalCaseList" />
-                        </dx:SplitterContentControl>
-                    </ContentCollection>
-                </dx:SplitterPane>
-                <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px">
-                    <ContentCollection>
-                        <dx:SplitterContentControl>
-                            <script>
+    <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
+        <Panes>
+            <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
+                <ContentCollection>
+                    <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
+                        <uc1:LegalCaseList runat="server" ID="LegalCaseList" />
+                    </dx:SplitterContentControl>
+                </ContentCollection>
+            </dx:SplitterPane>
+            <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px">
+                <ContentCollection>
+                    <dx:SplitterContentControl>
+                        <script>
                             $(document).ready(function () {
 
                                 $('.popup').webuiPopover({ title: 'Contact ' + $("#vendor_btn").html(), content: $('#contact_popup').html(), width: 400 });
 
                             });
-                            </script>
+                        </script>
 
                             <div id="vendor_btn" style="display: none">
                                 <i class="fa fa-users icon_btn" title="Vendors" onclick="VendorsPopupClient.Show()"></i>
                             </div>
                             <div id="contact_popup" style="display: none;">
-
                                 <div>
                                     <ul class="ss_form_box clearfix">
                                         <li class="ss_form_item">
@@ -92,7 +96,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div>
+                            <div>                               
                                 <%--<select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
                                 </select>
                                 <select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
@@ -153,11 +157,11 @@
                                              alert('Please select attorney.');
                                              return;
                                          }
-                                        reassignCallback.PerformCallback(leadsInfoBBLE + '|' + item.text);
+                                        popupCtrReassignEmployeeListCtr.PerformCallback(leadsInfoBBLE + '|' + item.text);
                                         popupCtrReassignEmployeeListCtr.Hide();
                                         }" />
                                             </dx:ASPxButton>
-                                        </dx:PopupControlContentControl>
+                                        </dx:PopupControlContentControl>                                       
                                     </ContentCollection>
                                     <ClientSideEvents Closing="function(s,e){
                                               if (typeof gridTrackingClient != 'undefined')
@@ -199,8 +203,8 @@
                                     </div>
                                     <div class="tab-pane" id="DocumentTab">
                                         <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
-                                    </div>
                                 </div>
+                            </div>
                             </div>
                             <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
                                 HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true" CloseAction="CloseButton"
@@ -210,7 +214,7 @@
                                         <div class="pop_up_header_margin">
                                             <i class="fa fa-cloud-upload with_circle pop_up_header_icon"></i>
                                             <span class="pop_up_header_text">Upload Files</span>
-                                        </div>
+                            </div>
                                         <div class="pop_up_buttons_div">
                                             <i class="fa fa-times icon_btn" onclick="popupCtrUploadFiles.Hide()"></i>
                                         </div>
@@ -224,49 +228,49 @@
                             </dx:ASPxPopupControl>
                             <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
 
-                        </dx:SplitterContentControl>
-                    </ContentCollection>
-                </dx:SplitterPane>
-                <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9">
-                    <ContentCollection>
-                        <dx:SplitterContentControl>
-                            <div style="font-size: 12px; color: #9fa1a8;">
-                                <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
-                                    <li class="short_sale_head_tab activity_light_blue">
-                                        <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
-                                            <i class="fa fa-history head_tab_icon_padding"></i>
-                                            <div class="font_size_bold">Activity Log</div>
-                                        </a>
-                                    </li>
-                                    <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
-                                    <li style="margin-right: 30px; color: #7396a9; float: right">
-                                        <div style="display: inline-block">
-                                            <a href="/LegalUI/LegalUI.aspx?SecondaryAction=true"><i class="fa fa-arrow-right sale_head_button sale_head_button_left tooltip-examples" style="margin-right: 10px; color: #7396A9" title="Secondary" onclick=""></i></a>
-                                        </div>
-                                        <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
-                                        <%-- <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>--%>
-                                        <i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')"></i>
-                                        <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>
-                                        <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')"></i>
-                                        <i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="LogClick('Closed')"></i>
-                                        <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
-                                    </li>
-                                </ul>
-                                <dx:ASPxCallbackPanel runat="server" ID="cbpLogs" ClientInstanceName="cbpLogs" OnCallback="cbpLogs_Callback">
-                                    <PanelCollection>
-                                        <dx:PanelContent>
-                                            <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="Legal" />
-                                        </dx:PanelContent>
-                                    </PanelCollection>
-                                </dx:ASPxCallbackPanel>
-                            </div>
-                        </dx:SplitterContentControl>
-                    </ContentCollection>
-                </dx:SplitterPane>
-            </Panes>
-        </dx:ASPxSplitter>
+                    </dx:SplitterContentControl>
+                </ContentCollection>
+            </dx:SplitterPane>
+            <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9">
+                <ContentCollection>
+                    <dx:SplitterContentControl>
+                        <div style="font-size: 12px; color: #9fa1a8;">
+                            <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
+                                <li class="short_sale_head_tab activity_light_blue">
+                                    <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
+                                        <i class="fa fa-history head_tab_icon_padding"></i>
+                                        <div class="font_size_bold">Activity Log</div>
+                                    </a>
+                                </li>
+                                <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
+                                <li style="margin-right: 30px; color: #7396a9; float: right">
+                                    <div style="display: inline-block">
+                                        <a href="/LegalUI/LegalUI.aspx?SecondaryAction=true"><i class="fa fa-arrow-right sale_head_button sale_head_button_left tooltip-examples" style="margin-right: 10px; color: #7396A9" title="Secondary" onclick=""></i></a>
+                                    </div>
+                                    <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
+                                    <%-- <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>--%>
+                                    <i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')"></i>
+                                    <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>
+                                    <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')"></i>
+                                    <i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="LogClick('Closed')"></i>
+                                    <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
+                                </li>
+                            </ul>
+                            <dx:ASPxCallbackPanel runat="server" ID="cbpLogs" ClientInstanceName="cbpLogs" OnCallback="cbpLogs_Callback">
+                                <PanelCollection>
+                                    <dx:PanelContent>
+                                        <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="Legal" />
+                                    </dx:PanelContent>
+                                </PanelCollection>
+                            </dx:ASPxCallbackPanel>                            
+                        </div>
+                    </dx:SplitterContentControl>
+                </ContentCollection>
+            </dx:SplitterPane>
+        </Panes>
+    </dx:ASPxSplitter>
 
-
+   
         <div runat="server" id="SencnedAction" visible="False" style="padding: 0 10px">
             <%--<div class="modal-dialog">
                 <div class="modal-content">
@@ -291,7 +295,7 @@
 
                             $("#" + se).css("display", '');
                         });
-                    }
+        }
                 </script>
                 <div>
 
@@ -329,16 +333,16 @@
     <%--  </div>
         </div>
     </div>--%>
-
+    
     <script>
         /*
         function(case) */
         function GetLegalData() {
-
+            
             return angular.element(document.getElementById('PortalCtrl')).scope().LegalCase;
-
+           
         }
-
+        
        <%-- var AllContact = $.parseJSON('<%= GetAllContact()%>');--%>
         var taskSN = '<%= Request.QueryString("sn")%>';
         <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
@@ -375,7 +379,7 @@
 
                     $(el).formatCurrency();
                     $(el).on("blur", function () { $(this).formatCurrency() });
-
+                   
                     $(el).on('change', function () {
                         scope.$eval(attrs.ngModel + "='" + el.val() + "'");
                         //scope[attrs.ngModel] = el.val(); //if your expression doesn't contain dot.
@@ -394,10 +398,10 @@
             //PropertyInfo.State = "NY";
             //PropertyInfo.Zipcode = "11221";
             //PropertyInfo.Number = "421";
-
+           
 
             //PropertyInfo.Block = 1234;
-
+            
 
             //PropertyInfo.Lot = 123;
             //PropertyInfo.BuildingType = "Apartment";
@@ -545,7 +549,7 @@
 
                 //$.getJSON('/LegalUI/LegalUI.aspx/SaveCaseData', data, function (data) {                    
                 //});
-            }
+                }
 
             $scope.AttorneyComplete = function () {
                 var json = JSON.stringify($scope.LegalCase);
@@ -573,18 +577,18 @@
                          $scope.LegalCase = $.parseJSON(data.d);
                      }).
                      error(function () {
-                         alert("Fail to load data.");
+                        alert("Fail to load data.");
                      });
             }
             //$.getJSON('/WCFDataServices/ContactService.svc/GetAllContacts', function (data) {
-
+              
             //    $scope.selectBoxData = data;
             //});
-
+           
 
         });
     </script>
-
+   
 
     <script src="/Scripts/bootstrap.min.js"></script>
 </asp:Content>

@@ -5,8 +5,8 @@
 
     <div class="clearfix">
         <div style="float: right">
-            <input type="button" id="btnComplete" class="rand-button short_sale_edit" value="Completed" runat="server" onserverclick="btnComplete_ServerClick" />
-            <input type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveLegal()"  />
+       <%--     <input type="button" id="btnComplete" class="rand-button short_sale_edit" value="Completed" runat="server" onserverclick="btnComplete_ServerClick" />
+            <input type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveLegal()"  />--%>
         </div>
     </div>
     <div data-array-index="0" class="ss_array" style="display: inline;">

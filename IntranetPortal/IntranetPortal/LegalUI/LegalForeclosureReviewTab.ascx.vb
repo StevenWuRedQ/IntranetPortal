@@ -9,17 +9,6 @@
     Sub Page_init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
         SecondaryAction = Request.QueryString("Attorney") IsNot Nothing
         Agent = Request.QueryString("Agent") IsNot Nothing
-        If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-
-            Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
-            Select Case wli.ActivityName
-                Case "LegalResearch"
-                    btnCompleteResearch.Visible = True
-                Case "ManagerAssign"
-                    lbEmployee.Visible = True
-                    btnAssign.Visible = True
-            End Select
-        End If
     End Sub
 
     Protected Sub btnAssign_ServerClick(sender As Object, e As EventArgs)
@@ -41,6 +30,7 @@
             Response.End()
         End If
     End Sub
+
     Protected Sub btnCompleteResearch_ServerClick(sender As Object, e As EventArgs)
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             Dim sn = Request.QueryString("sn").ToString

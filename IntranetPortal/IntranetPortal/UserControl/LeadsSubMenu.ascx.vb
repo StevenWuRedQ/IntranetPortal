@@ -258,11 +258,15 @@ Public Class LeadsSubMenu
                 If lbSelectionMode.SelectedValues.Contains("4") Then
                     Lead.Publishing(bble)
                 End If
-
-                If lbSelectionMode.SelectedValues.Contains("3") Then
-                    LegalCaseManage.StartLegalRequest(bble, Page.User.Identity.Name)
-                End If
             End If
+        End If
+
+        If e.Parameter.StartsWith("StartlegalProcess") Then
+            Dim bble = hfInProcessBBLE.Value
+            UpdateLeadStatus(bble, LeadStatus.InProcess, Nothing)
+
+            Dim caseData = e.Parameter.Replace("StartlegalProcess|", "")
+            LegalCaseManage.StartLegalRequest(bble, caseData, Page.User.Identity.Name)
         End If
     End Sub
 

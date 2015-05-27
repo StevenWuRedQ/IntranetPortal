@@ -31,10 +31,18 @@ Public Class LegalUI
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             ASPxSplitter1.Panes("listPanel").Visible = False
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
-            Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
-            ActivityLogs.BindData(bble)
+            If wli IsNot Nothing Then
+                Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
+                ActivityLogs.BindData(bble)
 
-            SetView(wli.ActivityName)
+                If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
+                    Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                                    String.Format("var leadsInfoBBLE = ""{0}"";", bble) & "</script>"
+                    Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
+                End If
+                SetView(wli.ActivityName)
+
+            End If
 
             'Select Case wli.ActivityName
             '    Case "LegalResearch"

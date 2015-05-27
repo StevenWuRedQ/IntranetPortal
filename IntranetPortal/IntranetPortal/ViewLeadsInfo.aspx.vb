@@ -86,13 +86,13 @@
         LeadsInfo.BindData(bble)
         If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
             Dim cstext1 As String = "<script type=""text/javascript"">" & _
-                            String.Format("var leadsInfoBBLE = ""{0}"";AttachScrollbar();", bble) & "</script>"
+                            String.Format("var leadsInfoBBLE = ""{0}"";", bble) & "</script>"
             Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
         End If
 
         If Not Page.ClientScript.IsClientScriptBlockRegistered("OnEndCallback") Then
             Dim js As String = "<script type=""text/javascript"">" & _
-                               "function OnEndCallback() {AttachScrollbar();}" & _
+                               "function OnEndCallback() {}" & _
                                "</script>"
             Page.ClientScript.RegisterClientScriptBlock(Me.GetType, "OnEndCallback", js)
         End If

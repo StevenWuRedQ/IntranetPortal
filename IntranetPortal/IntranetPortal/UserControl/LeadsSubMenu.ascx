@@ -232,7 +232,6 @@
                         //$("#LegalPopUp").modal();
                         ASPLegalPopupClient.Show();
                         aspxPopupInprocessClient.PerformCallback('Save');
-
                     } else {
 
                         aspxPopupInprocessClient.PerformCallback('Save');
@@ -271,7 +270,9 @@
             <script>
                 function LegalConfirmClick() {
                     var lCase = ASPLegalPopupClient.GetContentIFrame().contentWindow.GetLegalData();
-                    alert(" get leagl case " + lCase);
+                    aspxPopupInprocessClient.PerformCallback('StartlegalProcess|' + JSON.stringify(lCase));
+                    ASPLegalPopupClient.Hide();
+                    //alert(" get leagl case " + lCase);
                 }
             </script>
             <span class="time_buttons" onclick="ASPLegalPopupClient.Hide()">Cancel</span>
