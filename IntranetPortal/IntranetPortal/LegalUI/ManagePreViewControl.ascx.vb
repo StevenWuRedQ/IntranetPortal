@@ -4,6 +4,7 @@
     Public Property BBLE As String
     Public Property SubmitedDate As DateTime
     Public Property CaseName As String
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
@@ -14,6 +15,12 @@
                 CaseName = wli.DisplayName
 
                 BindLegalUser()
+
+                If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
+                    Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                                    String.Format("setLegalData(""{0}"");", BBLE) & "</script>"
+                    Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
+                End If
             End If
         End If
     End Sub
@@ -21,11 +28,14 @@
     Private Sub BindLegalUser()
         Dim users = Roles.GetUsersInRole("Legal-Research")
 
+        Dim researchCase = Legal.LegalCase.GetCaseList(Legal.LegalCaseStatus.LegalResearch)
+
+
         Dim userData As New List(Of Object)
         For Each item In users
             userData.Add(New With {
                          .Name = item,
-                         .Amount = 10
+                         .Amount = researchCase.Where(Function(c) c.ResearchBy = item).Count
                          })
         Next
 

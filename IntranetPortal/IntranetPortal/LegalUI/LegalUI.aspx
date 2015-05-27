@@ -343,6 +343,10 @@
             return angular.element(document.getElementById('PortalCtrl')).scope().LegalCase;
 
         }
+        function setLegalData(BBLE)
+        {
+            $(document).ready(function () { angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(BBLE) })
+        }
 
         var AllContact = $.parseJSON('<%= GetAllContact()%>');
         var taskSN = '<%= Request.QueryString("sn")%>';

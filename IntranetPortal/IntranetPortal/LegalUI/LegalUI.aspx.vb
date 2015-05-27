@@ -21,10 +21,13 @@ Public Class LegalUI
             SencnedAction.Visible = True
             ASPxSplitter1.Visible = False
         End If
+
         Dim iSMangerPreview = Request.QueryString("MangerPreivew") IsNot Nothing
         If (iSMangerPreview) Then
             ASPxSplitter1.Visible = False
             MangePreview.Visible = True
+            Return
+
         End If
         SecondaryAction = Request.QueryString("Attorney") IsNot Nothing
         Agent = Request.QueryString("Agent") IsNot Nothing
