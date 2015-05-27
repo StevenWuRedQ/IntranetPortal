@@ -156,4 +156,22 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LegalSecondaryActions As Global.IntranetPortal.LegalSecondaryActions
+
+    '''<summary>
+    '''MangePreview control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents MangePreview As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''ManagePreViewControl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ManagePreViewControl As Global.IntranetPortal.ManagePreViewControl
 End Class

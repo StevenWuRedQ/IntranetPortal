@@ -34,12 +34,11 @@
                 <td><%= Me.BBLE%></td>
             </tr>
             <tr>
-                <td>
-                    <div class="form_head">Description</div>
+                <td colspan="2">
+                    <div>
+                        
+                    </div>
                 </td>
-                <td><textarea style="width:300px;height:150px;">
-                    this is description from agent. 
-                    </textarea></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
@@ -64,6 +63,7 @@
                 <td>&nbsp;</td>
                 <td></td>
             </tr>
+           
             <tr>
                 <td></td>
                 <td>

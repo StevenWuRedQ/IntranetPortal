@@ -858,6 +858,13 @@
       <DependentUpon>LegalCaseList.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="LegalUI\ManagePreViewControl.ascx.designer.vb">
+      <DependentUpon>ManagePreViewControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LegalUI\ManagePreViewControl.ascx.vb">
+      <DependentUpon>ManagePreViewControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ManagementUI\Management2.aspx.designer.vb">
       <DependentUpon>Management2.aspx</DependentUpon>
     </Compile>
@@ -1825,6 +1832,7 @@
     <Content Include="LegalUI\LegalUI.aspx" />
     <Content Include="LegalUI\ManagePreview.aspx" />
     <Content Include="LegalUI\LegalCaseList.ascx" />
+    <Content Include="LegalUI\ManagePreViewControl.ascx" />
     <Content Include="ManagementUI\Management2.aspx" />
     <Content Include="ManagementUI\Management1.aspx" />
     <Content Include="ManagementUI\Management.aspx" />

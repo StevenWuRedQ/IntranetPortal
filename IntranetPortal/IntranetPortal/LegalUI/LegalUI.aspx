@@ -7,6 +7,8 @@
 <%@ Register Src="~/LegalUI/LegalTab.ascx" TagPrefix="uc1" TagName="LegalTab" %>
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
 <%@ Register TagPrefix="uc1" TagName="LegalSecondaryActions" Src="~/LegalUI/LegalSecondaryActions.ascx" %>
+<%@ Register Src="~/LegalUI/ManagePreViewControl.ascx" TagPrefix="uc1" TagName="ManagePreViewControl" %>
+
 
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
@@ -323,6 +325,10 @@
             <button type="button" class="btn btn-primary">Confirm</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         </div>--%>
+        
+        <div runat="server" ID="MangePreview" Visible="False">
+            <uc1:ManagePreViewControl runat="server" id="ManagePreViewControl" />
+        </div>
     </div>
     <!-- /.modal-content -->
     <%--  </div>
@@ -338,7 +344,7 @@
 
         }
 
-       <%-- var AllContact = $.parseJSON('<%= GetAllContact()%>');--%>
+        var AllContact = $.parseJSON('<%= GetAllContact()%>');
         var taskSN = '<%= Request.QueryString("sn")%>';
         <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
         var portalApp = angular.module('PortalApp', ['dx']);
@@ -465,6 +471,7 @@
             //$scope.selectBoxData = AllContact;
             var cStore = new DevExpress.data.CustomStore({
                     load: function (loadOptions) {
+
                         var d = $.Deferred();
                         if (loadOptions.searchValue) {
                             $.getJSON('/WCFDataServices/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
@@ -472,9 +479,13 @@
 
                             });
                         } else {
+                            if (AllContact) {
+                                d.promise();
+                                return AllContact;
+                            }
                             $.getJSON('/WCFDataServices/ContactService.svc/LoadContacts').done(function (data) {
                                 d.resolve(data);
-
+                                AllContact = data;
                             });
                         }
 
@@ -495,16 +506,17 @@
             });
 
             $scope.GetContactById = function (id) {
-                if (id) {
-                    var d = new $.Deferred();
-                    $.get('/WCFDataServices/ContactService.svc/GetAllContacts?id=' + id)
-                        .done(function (result) {
-                            d.resolve(result[0]);
-                        });
-                    var c = d.promise();
-                    return c;
-                }
-                return {};
+                //if (id) {
+                //    var d = new $.Deferred();
+                //    $.get('/WCFDataServices/ContactService.svc/GetAllContacts?id=' + id)
+                //        .done(function (result) {
+                //            d.resolve(result[0]);
+                //        });
+                //    var c = d.promise();
+                //    return c;
+                //}
+                return AllContact.filter(function(o) { return o.ContactId == id })[0];
+                //return {};
             }
             $scope.InitContact = function (id) {
 
