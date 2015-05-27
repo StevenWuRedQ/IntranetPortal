@@ -253,7 +253,7 @@
         }" />
 </dx:ASPxPopupControl>
 
-<dx:ASPxPopupControl ClientInstanceName="ASPLegalPopupClient"  ID="ASPLegalPopup" Width="670" Height="650"
+<dx:ASPxPopupControl ClientInstanceName="ASPLegalPopupClient"  ID="ASPLegalPopup" Width="670" Height="550"
     Modal="true" ShowFooter="true"  runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True" ContentUrl="/LegalUI/LegalUI.aspx?InPopUp=true">
     <HeaderTemplate>
         <div class="clearfix">

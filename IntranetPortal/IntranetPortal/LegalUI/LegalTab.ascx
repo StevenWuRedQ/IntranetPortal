@@ -70,7 +70,7 @@
 
         aspxAcrisControl.SetHeaderText(header);
         //header = header + "(Borough:" + ShortSaleCaseData.PropertyInfo.Borough + "Lot:" + ShortSaleCaseData.PropertyInfo.Lot + ")";
-        $('#pop_up_header_text').html(header)
+        $('#pop_up_header_text').html(header);
         aspxAcrisControl.Show();
     }
 
