@@ -92,7 +92,6 @@ Public Class LeadsInfo1
                 PropertyInfo.BindData()
 
                 'Bind files info
-                'DocumentsUI.BindFileList(bble)
                 DocumentsUI.LeadsName = leadsinfodata.PropertyAddress
 
                 'Bind Owner info
