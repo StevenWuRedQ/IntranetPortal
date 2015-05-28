@@ -9,8 +9,6 @@
 <%@ Register TagPrefix="uc1" TagName="LegalSecondaryActions" Src="~/LegalUI/LegalSecondaryActions.ascx" %>
 <%@ Register Src="~/LegalUI/ManagePreViewControl.ascx" TagPrefix="uc1" TagName="ManagePreViewControl" %>
 
-
-
 <asp:Content runat="server" ContentPlaceHolderID="head">
 
     <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
@@ -20,7 +18,7 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
     <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
     <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>
-    <!-- Angular Material Javascript using RawGit to load directly from `bower-material/master` -->
+    <!-- Angular Material Javascript using RawGit to load directly from `bower-material/master -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
@@ -228,7 +226,7 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-                <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9">
+                <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" PaneStyle-Paddings-Padding="0px">
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <div style="font-size: 12px; color: #9fa1a8;">
@@ -266,7 +264,6 @@
                 </dx:SplitterPane>
             </Panes>
         </dx:ASPxSplitter>
-
 
         <div runat="server" id="SencnedAction" visible="False" style="padding: 0 10px">
             <%--<div class="modal-dialog">
@@ -617,7 +614,6 @@
 
         });
     </script>
-
-
+    
     <script src="/Scripts/bootstrap.min.js"></script>
 </asp:Content>
