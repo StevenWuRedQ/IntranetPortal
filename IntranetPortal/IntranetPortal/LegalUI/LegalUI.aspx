@@ -419,6 +419,7 @@
         portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
             $scope.SecondaryTypeSource = ["Statue Of Limitations", "Estate", "Deed Reversal", "Partition", "Breach of Contract", "Quiet Title"];
+           
             if (!LegalShowAll) {
                 $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.SecondaryTypeSource;
             }

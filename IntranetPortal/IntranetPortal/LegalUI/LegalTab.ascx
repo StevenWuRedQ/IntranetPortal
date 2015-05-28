@@ -143,7 +143,7 @@
                 <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">Started on {{LegalCase.CreateDate|date:'medium'}}</span>
             </div>
 
-            <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; display: none; font-size: 20px">
+            <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
 
                 <div class="note_item" style="background: white">
 
@@ -154,14 +154,14 @@
                                     <i class="fa fa-exclamation-circle note_img"></i>
                                 </td>
                                 <td>
-                                    <div class="note_text">{{LegalCase.Description}}</div>
+                                    <div class="note_text">Agent description : {{LegalCase.Description}}</div>
                                 </td>
                                 
                             </tr>
                         </tbody>
                     </table>
 
-                    <i class="fa fa-plus-circle note_img tooltip-examples" title="" style="color: #3993c1; cursor: pointer" onclick="aspxAddLeadsComments.ShowAtElement(this)" data-original-title="Add Notes"></i>
+                    <i class="fa fa-plus-circle note_img tooltip-examples" title="" style="color: #3993c1; display: none; cursor: pointer" onclick="aspxAddLeadsComments.ShowAtElement(this)" data-original-title="Add Notes"></i>
                 </div>
             </div>
 
