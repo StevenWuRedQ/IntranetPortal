@@ -420,9 +420,9 @@
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
             $scope.SecondaryTypeSource = ["Statue Of Limitations", "Estate", "Deed Reversal", "Partition", "Breach of Contract", "Quiet Title"];
            
-            if (!LegalShowAll) {
+            if (typeof LegalShowAll == 'undefined' || LegalShowAll == null) {
                 $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.SecondaryTypeSource;
-            }
+            } 
             //var PropertyInfo = $scope.LegalCase.PropertyInfo;
             //CaseData = $scope.LegalCase;
             //PropertyInfo.PropertyAddress = "421 HART ST, BEDFORD STUYVESANT,NY 11221";
@@ -670,6 +670,7 @@
                     $scope.LegalCase.SecondaryInfo.StatueOfLimitations.push({ tt: 1 });
                 }
             }
+            $scope.LegalCase.SecondaryInfo.SelectedType = $scope.SecondaryTypeSource[0];
             $scope.SecondarySelectType = function() {
                 $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.LegalCase.SecondaryInfo.SelectTypes || [];
                 var selectTypes = $scope.LegalCase.SecondaryInfo.SelectTypes;
@@ -679,8 +680,11 @@
                 
             }
             $scope.CheckShow = function (filed) {
+                if (typeof LegalShowAll == 'undefined' || LegalShowAll == null) {
+                    return true;
+                }
                 return $scope.LegalCase.SecondaryInfo.SelectedType == filed;
-                return _.contains($scope.LegalCase.SecondaryInfo.SelectTypes, filed);
+                
             }
             //$.getJSON('/LegalUI/ContactService.svc/GetAllContacts', function (data) {
 

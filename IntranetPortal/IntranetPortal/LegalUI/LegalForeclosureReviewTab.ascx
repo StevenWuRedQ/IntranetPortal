@@ -254,7 +254,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">last payment date</label>
-                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.LastPaymentDate">
+                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.LastPaymentDate"/>
             </li>
             <li class="ss_form_item">
                 <span class="ss_form_input_title">Eviction status</span>
