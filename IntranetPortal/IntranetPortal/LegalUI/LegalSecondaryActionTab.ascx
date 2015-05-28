@@ -9,20 +9,19 @@
             <input type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveLegal()"  />--%>
         </div>
     </div>
-    {{LegalCase.SecondaryInfo.SelectTypes}}
-    {{LegalCase.SecondaryInfo.StatuteOfLimitations}}
+   
    <div class="form-inline">
        <h4 class="ss_form_title" style="margin-bottom: 12px;">Select Types</h4>
-       <select class="form-control" ng-model="LegalCase.SecondaryInfo.SelectedType" ng-change="SecondarySelectType()" ng-options='o as o for o  in ["Statue Of Limitations","Estate","Deed Reversal","Partition","Breach of Contract","Quiet Title"]' style="width: 94%; margin-top: -15px">
+       <select class="form-control" ng-model="LegalCase.SecondaryInfo.SelectedType" ng-change="SecondarySelectType()" ng-options='o as o for o  in SecondaryTypeSource' style="width: 94%; margin-top: -8px">
            <option value=""></option>
        </select>&nbsp; &nbsp; &nbsp; 
-        <i class="fa  fa-plus-circle color_blue tooltip-examples icon_btn" ng-click="AddSecondaryArray()" title="Add" data-original-title="Add" style="font-size: 28px"></i>
+        <i class="fa  fa-plus-circle color_blue tooltip-examples icon_btn" ng-click="AddSecondaryArray()" title="Add" data-original-title="Add" style="font-size: 28px;display: none"></i>
    </div>
 
 
-    <div data-array-index="0" class="ss_array " >
+    <div class="ss_array " >
 
-        <h4 class="ss_form_title title_with_line  title_after_notes" ng-show="CheckShow('Statue of Limitations')">
+        <h4 class="ss_form_title title_with_line  title_after_notes animate-show" ng-show="CheckShow('Statue Of Limitations')">
             <span class="title_index title_span">Statute of Limitation</span>&nbsp;
                                                         <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
             &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="" data-original-title="Add"></i>
@@ -30,8 +29,9 @@
         </h4>
         
         <div class="collapse_div" style="">
-            <div class="ss_form animate-show" ng-repeat="Action in LegalCase.SecondaryInfo.StatuteOfLimitations" ng-show="CheckShow('Statue of Limitations')">
+            <div class="ss_form animate-show"  ng-show="CheckShow('Statue Of Limitations')">
                 <h4 class="ss_form_title">Action</h4>
+                
                 <ul class="ss_form_box clearfix">
 
                     <li class="ss_form_item">

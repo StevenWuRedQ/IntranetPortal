@@ -125,7 +125,7 @@
 
     <input hidden="" id="short_sale_case_id" value="23">
     <div style="padding-top: 5px">
-        <div style="height: 850px; overflow: auto;" id="prioity_content">            
+        <div style="height: 850px; overflow: auto;" id="prioity_content">
             <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
                 <div style="font-size: 30px">
                     <span>
@@ -138,14 +138,29 @@
                     <span class="time_buttons" onclick="ShowPropertyMap(leadsInfoBBLE)">Maps</span>
 
                     <span class="time_buttons" onclick="" runat="server" visible="false" id="btnAssignAttorney">Assign Attorney</span>
-                    <span class="time_buttons" onclick="$('#RequestModal').modal()" style="display:none">Request Document</span>
+                    <span class="time_buttons" onclick="$('#RequestModal').modal()" style="display: none">Request Document</span>
                 </div>
                 <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">Started on {{LegalCase.CreateDate|date:'medium'}}</span>
             </div>
-            
-            <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; display:none; font-size: 20px">
-                
+
+            <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; display: none; font-size: 20px">
+
                 <div class="note_item" style="background: white">
+
+                    <table style="width: 100%">
+                        <tbody>
+                            <tr ng-show="LegalCase.Description!=null">
+                                <td style="width: 30px">
+                                    <i class="fa fa-exclamation-circle note_img"></i>
+                                </td>
+                                <td>
+                                    <div class="note_text">{{LegalCase.Description}}</div>
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+
                     <i class="fa fa-plus-circle note_img tooltip-examples" title="" style="color: #3993c1; cursor: pointer" onclick="aspxAddLeadsComments.ShowAtElement(this)" data-original-title="Add Notes"></i>
                 </div>
             </div>
@@ -156,27 +171,27 @@
                 <ul class="nav nav-tabs overview_tabs" role="tablist" style="">
                     <li class="short_sale_tab active">
                         <a class="shot_sale_tab_a " href="#Summary" role="tab" data-toggle="tab">Summary</a></li>
-                   <%-- <% If Agent Then%>--%>
+                    <%-- <% If Agent Then%>--%>
                     <li class="short_sale_tab">
                         <a class="shot_sale_tab_a " href="#Foreclosure_Review" role="tab" data-toggle="tab">Foreclosure Review</a></li>
-                <%--    <% End If%>
+                    <%--    <% End If%>
                     <% If SecondaryAction Then%>--%>
                     <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#Secondary_Actions" role="tab" data-toggle="tab">Secondary Actions</a></li>
-                  <%--  <% End If%>--%>
+                    <%--  <% End If%>--%>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
                     <div class="tab-pane active" id="Summary">
-                        <uc1:LegalSummaryTab runat="server" id="LegalSummaryTab" />
+                        <uc1:LegalSummaryTab runat="server" ID="LegalSummaryTab" />
                     </div>
                     <div class="tab-pane " id="Foreclosure_Review">
-                       
+
                         <uc1:LegalForeclosureReviewTab runat="server" ID="LegalForeclosureReviewTab" />
 
                     </div>
                     <div class="tab-pane" id="Secondary_Actions">
-                        <uc1:LegalSecondaryActionTab runat="server" id="LegalSecondaryActionTab" />
+                        <uc1:LegalSecondaryActionTab runat="server" ID="LegalSecondaryActionTab" />
                     </div>
 
                 </div>

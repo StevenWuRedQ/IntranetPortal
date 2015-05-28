@@ -577,7 +577,7 @@
             </li>
         </ul>
     </div>
-    <div data-array-index="0" class="ss_array" style="display: inline;">
+    <div  class="ss_array" style="display: inline;">
 
         <h4 class="ss_form_title title_with_line  title_after_notes ">
             <span class="title_index title_span">Assignments </span>&nbsp;
@@ -697,7 +697,7 @@
         </div>
 
 
-        <div data-array-index="3" class="ss_array" style="display: inline;">
+        <div class="ss_array" style="display: inline;">
 
             <h4 class="ss_form_title title_with_line  title_after_notes ">
                 <span class="title_index title_span">Loan Pool Trust</span>&nbsp;
@@ -801,7 +801,7 @@
             </ul>
         </div>
 
-        <div data-array-index="4" class="ss_array" style="display: inline;">
+        <div class="ss_array" style="display: inline;">
 
             <h4 class="ss_form_title title_with_line  title_after_notes ">
                 <span class="title_index title_span">Statute of Limitation</span>&nbsp;

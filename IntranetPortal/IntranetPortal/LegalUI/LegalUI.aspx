@@ -201,6 +201,9 @@
 
                                     <div class="tab-pane active" id="LegalTab">
                                         <uc1:LegalTab runat="server" ID="LegalTab1" />
+                                        <script>
+                                            LegalShowAll = true;
+                                        </script>
                                     </div>
                                     <div class="tab-pane" id="DocumentTab">
                                         <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
@@ -415,6 +418,10 @@
 
         portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
+            $scope.SecondaryTypeSource = ["Statue Of Limitations", "Estate", "Deed Reversal", "Partition", "Breach of Contract", "Quiet Title"];
+            if (!LegalShowAll) {
+                $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.SecondaryTypeSource;
+            }
             //var PropertyInfo = $scope.LegalCase.PropertyInfo;
             //CaseData = $scope.LegalCase;
             //PropertyInfo.PropertyAddress = "421 HART ST, BEDFORD STUYVESANT,NY 11221";
@@ -553,12 +560,12 @@
             $scope.InitTagBox = function () {
                 return {
                     dataSource:
-                        [{ id: 1, value: ' Statue of Limitations' },
-                            { id: 2, value: 'Estate' },
-                            { id: 3, value: 'Deed Reversal' },
-                            { id: 4, value: 'Partition' },
-                            { id: 5, value: 'Breach of Contract' },
-                            { id: 6, value: 'Quiet Title' }],
+                    [{ id: 1, value: ' Statue of Limitations' },
+                    { id: 2, value: 'Estate' },
+                    { id: 3, value: 'Deed Reversal' },
+                    { id: 4, value: 'Partition' },
+                    { id: 5, value: 'Breach of Contract' },
+                    { id: 6, value: 'Quiet Title' }],
                     valueExpr: 'id', displayExpr: 'value', bindingOptions: { value: 'LegalCase.SecondaryInfo.Type' }, onChange: function (d) { alert(JSON.stringify(d)) }
                 };
             }
@@ -640,12 +647,12 @@
             $scope.LoadLeadsCase = function (BBLE) {
                 var data = { bble: BBLE };
                 $http.post('LegalUI.aspx/GetCaseData', data).
-                     success(function (data, status, headers, config) {
-                         $scope.LegalCase = $.parseJSON(data.d);
-                     }).
-                     error(function () {
-                         alert("Fail to load data.");
-                     });
+                    success(function (data, status, headers, config) {
+                        $scope.LegalCase = $.parseJSON(data.d);
+                    }).
+                    error(function () {
+                        alert("Fail to load data.");
+                    });
             }
             $scope.AddSecondaryArray = function () {
                
@@ -665,12 +672,13 @@
             $scope.SecondarySelectType = function() {
                 $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.LegalCase.SecondaryInfo.SelectTypes || [];
                 var selectTypes = $scope.LegalCase.SecondaryInfo.SelectTypes;
-                if (!$scope.CheckShow(selectTypes, $scope.LegalCase.SecondaryInfo.SelectedType)) {
+                if (!_.contains(selectTypes, $scope.LegalCase.SecondaryInfo.SelectedType)) {
                     selectTypes.push($scope.LegalCase.SecondaryInfo.SelectedType);
                 }
                 
             }
-            $scope.CheckShow = function(filed) {
+            $scope.CheckShow = function (filed) {
+                return $scope.LegalCase.SecondaryInfo.SelectedType == filed;
                 return _.contains($scope.LegalCase.SecondaryInfo.SelectTypes, filed);
             }
             //$.getJSON('/LegalUI/ContactService.svc/GetAllContacts', function (data) {

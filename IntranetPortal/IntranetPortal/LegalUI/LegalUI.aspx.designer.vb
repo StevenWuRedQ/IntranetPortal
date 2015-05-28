@@ -113,15 +113,6 @@ Partial Public Class LegalUI
     Protected WithEvents ASPxPopupControl2 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
-    '''VendorsPopup control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents VendorsPopup As Global.IntranetPortal.VendorsPopup
-
-    '''<summary>
     '''cbpLogs control.
     '''</summary>
     '''<remarks>
@@ -183,4 +174,13 @@ Partial Public Class LegalUI
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ManagePreViewControl As Global.IntranetPortal.ManagePreViewControl
+
+    '''<summary>
+    '''VendorsPopup control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents VendorsPopup As Global.IntranetPortal.VendorsPopup
 End Class
