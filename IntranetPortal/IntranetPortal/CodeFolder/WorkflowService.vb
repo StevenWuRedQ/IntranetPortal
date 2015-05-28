@@ -228,7 +228,6 @@ Public Class WorkflowService
         Return Nothing
     End Function
 
-
     Public Shared Function GetLegalWorklist(bble As String, legalStatus As Legal.LegalCaseStatus, userName As String) As DBPersistence.Worklist
         Using conn = GetConnection()
             Dim pInstIds = conn.GetProcessInstancesByDataFields("LegalRequest", "BBLE", bble)

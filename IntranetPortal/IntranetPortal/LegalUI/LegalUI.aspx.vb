@@ -8,6 +8,9 @@ Public Class LegalUI
     Inherits System.Web.UI.Page
     Public SecondaryAction As Boolean = False
     Public Agent As Boolean = False
+    Public InWorkflow As Boolean = True
+
+    Public propertyData As String
 
     Public Property DisplayView As Legal.LegalCaseStatus
 
@@ -20,15 +23,18 @@ Public Class LegalUI
         If (isInPoupUp) Then
             SencnedAction.Visible = True
             ASPxSplitter1.Visible = False
+
+            'Dim bble = Request.QueryString("BBLE").ToString
+            'propertyData = LegalCaseManage.GetPropertyInfoJSON(bble)
         End If
 
-        Dim iSMangerPreview = Request.QueryString("MangerPreivew") IsNot Nothing
-        If (iSMangerPreview) Then
-            ASPxSplitter1.Visible = False
-            MangePreview.Visible = True
-            Return
+        'Dim iSMangerPreview = Request.QueryString("MangerPreivew") IsNot Nothing
+        'If (iSMangerPreview) Then
+        '    'ASPxSplitter1.Visible = False
+        '    'MangePreview.Visible = True
+        '    Return
+        'End If
 
-        End If
         SecondaryAction = Request.QueryString("Attorney") IsNot Nothing
         Agent = Request.QueryString("Agent") IsNot Nothing
 
@@ -145,29 +151,47 @@ Public Class LegalUI
 
     Protected Sub ASPxPopupControl3_WindowCallback(source As Object, e As DevExpress.Web.ASPxPopupControl.PopupWindowCallbackArgs)
         PopupContentReAssign.Visible = True
-        listboxEmployee.DataSource = Roles.GetUsersInRole("Legal-Attorney")
-        listboxEmployee.DataBind()
 
-        If Not String.IsNullOrEmpty(e.Parameter) AndAlso e.Parameter.Split("|").Length > 0 Then
-            Dim bble = e.Parameter.Split("|")(0)
-            Dim attorney = e.Parameter.Split("|")(1)
+        If e.Parameter.StartsWith("type") Then
+            Dim type = e.Parameter.Split("|")(1)
+            hfUserType.Value = type
+            listboxEmployee.DataSource = Roles.GetUsersInRole("Legal-" & type)
+            listboxEmployee.DataBind()
+        End If
+        
+        If Not String.IsNullOrEmpty(e.Parameter) AndAlso e.Parameter.StartsWith("Save") Then
+            Dim bble = e.Parameter.Split("|")(1)
+            Dim user = e.Parameter.Split("|")(2)
+            Dim selectType = hfUserType.Value
 
-            Dim sn = Request.QueryString("sn").ToString
+            Dim sn = ""
+            If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                sn = Request.QueryString("sn").ToString
+            End If
+            'Request.QueryString("sn").ToString()
 
-            Dim wli = WorkflowService.GetLegalWorklistItem(sn, bble, Legal.LegalCaseStatus.ManagerAssign, HttpContext.Current.User.Identity.Name)
+            If selectType = "Research" Then
+                LegalCaseManage.AssignToResearch(sn, bble, user, Page.User.Identity.Name)
+                'Else
+                '    Dim wli = WorkflowService.GetLegalWorklistItem(sn, bble, Legal.LegalCaseStatus.ManagerAssign, HttpContext.Current.User.Identity.Name)
 
-            If wli IsNot Nothing Then
-                wli.ProcessInstance.DataFields("Attorney") = attorney
-                wli.Finish()
+                '    If wli IsNot Nothing Then
+                '        wli.ProcessInstance.DataFields("Attorney") = attorney
+                '        wli.Finish()
+                '    End If
+
+                '    'update legal case status
+                '    Dim lc = Legal.LegalCase.GetCase(bble)
+                '    lc.Status = Legal.LegalCaseStatus.AttorneyHandle
+                '    lc.Attorney = attorney
+                '    lc.SaveData()
             End If
 
-            'update legal case status
-            Dim lc = Legal.LegalCase.GetCase(bble)
-            lc.Status = Legal.LegalCaseStatus.AttorneyHandle
-            lc.Attorney = attorney
-            lc.SaveData()
+            If selectType = "Attorney" Then
+                LegalCaseManage.AssignToAttorney(sn, bble, user, Page.User.Identity.Name)
+            End If
 
-            Dim comments = String.Format("The case is assign to {0}.", attorney)
+            Dim comments = String.Format("The case is assign to {0}.", user)
             LeadsActivityLog.AddActivityLog(DateTime.Now, comments, bble, LeadsActivityLog.LogCategory.Legal, LeadsActivityLog.EnumActionType.Comments)
         End If
     End Sub

@@ -48,4 +48,22 @@ Partial Public Class LegalTab
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents LegalSecondaryActionTab As Global.IntranetPortal.LegalSecondaryActionTab
+
+    '''<summary>
+    '''ASPxPopupControl1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''LeadsSubMenu control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LeadsSubMenu As Global.IntranetPortal.LeadsSubMenu
 End Class

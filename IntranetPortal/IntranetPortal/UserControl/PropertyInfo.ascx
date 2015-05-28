@@ -193,7 +193,6 @@
                                         <ClientSideEvents Click="function(s,e){aspxAddLeadsComments.Hide();}" />
                                     </dx:ASPxButton>
                                 </div>
-
                             </td>
                         </tr>
                     </table>

@@ -53,7 +53,7 @@
                 <div class="form_head">Legal User</div>
             </td>
             <td>
-                <dx:ASPxListBox ID="lbLegalUser" runat="server" SelectionMode="Single" Width="250" Height="80" CssClass="table table-striped">
+                <dx:ASPxListBox ID="lbLegalUser" runat="server" SelectionMode="Single" Width="350" Height="120" CssClass="table table-striped">
                     <ValidationSettings RequiredField-IsRequired="true"></ValidationSettings>
                     <Columns>
                         <dx:ListBoxColumn Caption="Name" FieldName="Name" />
@@ -67,7 +67,6 @@
             <td>&nbsp;</td>
             <td></td>
         </tr>
-
         <tr>
             <td></td>
             <td>

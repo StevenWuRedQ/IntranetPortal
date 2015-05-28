@@ -1,4 +1,6 @@
 ﻿Imports IntranetPortal.Legal
+Imports System.Reflection
+Imports System.ComponentModel
 
 Public Class LegalCaseList
     Inherits System.Web.UI.UserControl
@@ -10,8 +12,18 @@ Public Class LegalCaseList
     Public Sub BindCaseList(status As LegalCaseStatus)
         hfCaseStatus.Value = status
 
+        lblLeadCategory.Text = Core.Utility.GetEnumDescription(status)
+
         gridCase.DataSource = LegalCase.GetCaseList(status)
         gridCase.DataBind()
+
+        If status = LegalCaseStatus.LegalResearch Then
+            gridCase.GroupBy(gridCase.Columns("ResearchBy"))
+        End If
+
+        If status = LegalCaseStatus.AttorneyHandle Then
+            gridCase.GroupBy(gridCase.Columns("Attorney"))
+        End If
 
         'If status = CaseStatus.Eviction Then
         '    gridCase.DataSource = ShortSaleCase.GetEvictionCases
@@ -49,7 +61,7 @@ Public Class LegalCaseList
         'gridCase.DataSource = ShortSaleCase.GetCaseByBBLEs(bbles)
         'gridCase.DataBind()
     End Sub
-   
+
     Protected Sub gridCase_DataBinding(sender As Object, e As EventArgs)
         If gridCase.DataSource Is Nothing AndAlso gridCase.IsCallback Then
             If Not String.IsNullOrEmpty(hfCaseStatus.Value) Then
@@ -70,5 +82,8 @@ Public Class LegalCaseList
             gridCase.SettingsBehavior.AllowClientEventsOnLoad = value
         End Set
     End Property
+
+
+
 
 End Class

@@ -59,6 +59,15 @@ Partial Public Class LegalUI
     Protected WithEvents PopupContentReAssign As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
 
     '''<summary>
+    '''hfUserType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents hfUserType As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''listboxEmployee control.
     '''</summary>
     '''<remarks>

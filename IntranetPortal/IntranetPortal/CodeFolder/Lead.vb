@@ -103,6 +103,10 @@ Partial Public Class Lead
     End Property
 
     Friend Function IsViewable(name As String) As Boolean
+        If Status = LeadStatus.DeadEnd Or EmployeeName = "Dead Leads" Then
+            Return True
+        End If
+
         If Roles.IsUserInRole(name, "Admin") Then
             Return True
         End If

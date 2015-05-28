@@ -27,7 +27,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">City</label>
-                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.City">
+                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.NeighName">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">State</label>
@@ -35,7 +35,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Zip</label>
-                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.Zipcode">
+                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.ZipCode">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>

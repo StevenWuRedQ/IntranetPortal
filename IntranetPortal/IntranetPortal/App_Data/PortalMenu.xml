@@ -348,34 +348,34 @@
   
   <PortalNavItem Name="Legal" Text="Legal" NavigationUrl="#" ShowAmount="false" Expanded="false">
     <Items>
-      <PortalNavItem Name="Legal-Summary" Text="Summary" NavigationUrl="/LegalUI/LegalUI.aspx" ShowAmount="false">
-        <FontClass>
-          <![CDATA[<i class="fa fa-university"></i>]]>
-        </FontClass>
-      </PortalNavItem>
-      <!--<PortalNavItem Name="Legal" Text="Preview" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true" ShowAmount="true">
+      <!--<PortalNavItem Name="Legal-Summary" Text="Summary" NavigationUrl="/LegalUI/LegalUI.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
       </PortalNavItem>-->
+      <PortalNavItem Name="Legal-ManagerPreview" Text="New Cases" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;lc=0" ShowAmount="true">
+        <FontClass>
+          <![CDATA[<i class="fa fa-star"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <PortalNavItem Name="Legal-LegalResearch" Text="Research" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;lc=1" ShowAmount="true">
         <FontClass>
+          <![CDATA[<i class="fa fa-codepen"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="Legal-ManagerAssign" Text="Review" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;lc=2" ShowAmount="true">
+        <FontClass>
           <![CDATA[<i class="fa fa-university"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <!--<PortalNavItem Name="Legal" Text="Review" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true" ShowAmount="true">
-        <FontClass>
-          <![CDATA[<i class="fa fa-university"></i>]]>
-        </FontClass>
-      </PortalNavItem>-->
       <PortalNavItem Name="Legal-AttorneyHandle" Text="In Court" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;attorney=true&amp;lc=3" ShowAmount="true">
         <FontClass>
-          <![CDATA[<i class="fa fa-university"></i>]]>
+          <![CDATA[<i class="fa fa-check"></i>]]>
         </FontClass>
       </PortalNavItem>
       <PortalNavItem Name="Legal-Closed" Text="Closed" NavigationUrl="/LegalUI/LegalUI.aspx?Agent=true&amp;attorney=true&amp;lc=4" ShowAmount="true">
         <FontClass>
-          <![CDATA[<i class="fa fa-university"></i>]]>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
     </Items>

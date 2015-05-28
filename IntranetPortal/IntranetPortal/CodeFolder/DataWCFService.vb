@@ -847,11 +847,17 @@ Public Class DataWCFService
                 End If
             End If
 
+            If bble.StartsWith("2") Then
+                If city.Trim = "BX" Then
+                    city = "Bronx"
+                End If
+            End If
+
             If localOwner IsNot Nothing Then
-                localOwner.Name = name
-                localOwner.Address1 = add1
-                localOwner.Address2 = add2
-                localOwner.City = city
+                localOwner.Name = name.Trim
+                localOwner.Address1 = add1.Trim
+                localOwner.Address2 = add2.Trim
+                localOwner.City = city.Trim
                 localOwner.Country = country
                 localOwner.State = state
                 localOwner.Zip = zip

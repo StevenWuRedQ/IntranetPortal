@@ -269,7 +269,9 @@ Public Class LeadsSubMenu
             LegalCaseManage.StartLegalRequest(bble, caseData, Page.User.Identity.Name)
         End If
     End Sub
-
+    'Public Function getGenoInfo() As Object
+    '    Lead.GetInstance(hfBBLE).toj()
+    'End Function
     Private Sub BindEvictionUsers()
         cbEvictionUsers.DataSource = Roles.GetUsersInRole("Eviction-User")
         cbEvictionUsers.DataBind()

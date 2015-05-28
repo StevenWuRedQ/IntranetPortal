@@ -228,7 +228,10 @@
                         aspxPopupInprocessClient.Hide();
                         //aspxPopupLegalInfoClient.Show();
 
+                        var bble = $('#<%= hfInProcessBBLE.ClientID%>').val();
                         
+                        ASPLegalPopupClient.SetContentUrl('/LegalUI/LegalUI.aspx?InPopUp=true&bble=' + bble);
+
                         //$("#LegalPopUp").modal();
                         ASPLegalPopupClient.Show();
                         aspxPopupInprocessClient.PerformCallback('Save');
@@ -253,7 +256,7 @@
 </dx:ASPxPopupControl>
 
 <dx:ASPxPopupControl ClientInstanceName="ASPLegalPopupClient"  ID="ASPLegalPopup" Width="670" Height="550"
-    Modal="true" ShowFooter="true"  runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True" ContentUrl="/LegalUI/LegalUI.aspx?InPopUp=true">
+    Modal="true" ShowFooter="true"  runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True" ContentUrl="about:blank">
     <HeaderTemplate>
         <div class="clearfix">
             <div class="pop_up_header_margin">
@@ -270,6 +273,7 @@
             <script>
                 function LegalConfirmClick() {
                     var lCase = ASPLegalPopupClient.GetContentIFrame().contentWindow.GetLegalData();
+                    //$.getJSON("getGeoCaseURL", function (data) { lCase.pe })
                     aspxPopupInprocessClient.PerformCallback('StartlegalProcess|' + JSON.stringify(lCase));
                     ASPLegalPopupClient.Hide();
                     //alert(" get leagl case " + lCase);
@@ -280,12 +284,12 @@
         </div>
     </FooterContentTemplate>
   </dx:ASPxPopupControl>  
-<div class="modal fade" id="LegalPopUp">
+<%--<div class="modal fade" id="LegalPopUp">
    <iframe src="/LegalUI/LegalUI.aspx?InPopUp=true" class="noborder"></iframe>
-</div>
+</div>--%>
 
 <!-- /.modal -->
-<dx:ASPxPopupControl ClientInstanceName="aspxPopupLegalInfoClient" Width="680px" ID="aspxPopupLegalInfo"
+<%--<dx:ASPxPopupControl ClientInstanceName="aspxPopupLegalInfoClient" Width="680px" ID="aspxPopupLegalInfo"
     Modal="true" ShowFooter="true" OnWindowCallback="aspxPopupLegalInfo_WindowCallback" runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <HeaderTemplate>
         <div class="clearfix">
@@ -318,7 +322,8 @@
         }
         }"
         Shown="function(s,e) {  $('.legal_action_div').css('display','none')}" />
-</dx:ASPxPopupControl>
+</dx:ASPxPopupControl>--%>
+
 <dx:ASPxPopupControl ClientInstanceName="aspxPopupDeadLeadsClient" Width="356px" Height="350px" ID="ASPxPopupControl5" Modal="true" ShowFooter="true" OnWindowCallback="ASPxPopupControl5_WindowCallback"
     runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
     <HeaderTemplate>

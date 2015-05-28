@@ -61,7 +61,6 @@
                                 <div>
                                     <ul class="ss_form_box clearfix">
                                         <li class="ss_form_item">
-
                                             <label class="ss_form_input_title">Name</label>
                                             <input class="ss_form_input ss_disable" disabled="disabled">
                                         </li>
@@ -119,12 +118,16 @@
                                     <li style="margin-right: 30px; color: #ffa484; float: right">
                                         <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
 
+                                        <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
+                                          <i class="fa fa-codepen  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Research');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Research"></i>
+                                        <% End If%>
+
                                         <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.LegalResearch Then%>
                                         <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="CompleteResearch()" data-original-title="Complete Search"></i>
                                         <% End If%>
 
                                         <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Then%>
-                                        <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupCtrReassignEmployeeListCtr.PerformCallback();popupCtrReassignEmployeeListCtr.ShowAtElement(this);" data-original-title="Assign to Attorney"></i>
+                                        <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Attorney');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Attorney"></i>
                                         <% End If%>
 
                                         <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.AttorneyHandle Then%>
@@ -137,13 +140,14 @@
                                     </li>
                                 </ul>
 
-                                <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Then%>
-                                <dx:ASPxPopupControl ClientInstanceName="popupCtrReassignEmployeeListCtr" Width="300px" Height="300px"
+                                <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
+                                <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
                                     MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
                                     HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
                                     runat="server" EnableViewState="false" EnableHierarchyRecreation="True">
                                     <ContentCollection>
                                         <dx:PopupControlContentControl runat="server" Visible="false" ID="PopupContentReAssign">
+                                            <asp:HiddenField runat="server" ID="hfUserType" />
                                             <dx:ASPxListBox runat="server" ID="listboxEmployee" ClientInstanceName="listboxEmployeeClient" Height="270" SelectedIndex="0" Width="100%">
                                             </dx:ASPxListBox>
                                             <dx:ASPxButton Text="Assign" runat="server" ID="btnAssign" AutoPostBack="false">
@@ -154,8 +158,8 @@
                                              alert('Please select attorney.');
                                              return;
                                          }
-                                        popupCtrReassignEmployeeListCtr.PerformCallback(leadsInfoBBLE + '|' + item.text);
-                                        popupCtrReassignEmployeeListCtr.Hide();
+                                        popupSelectAttorneyCtr.PerformCallback('Save|' + leadsInfoBBLE + '|' + item.text);
+                                        popupSelectAttorneyCtr.Hide();
                                         }" />
                                             </dx:ASPxButton>
                                         </dx:PopupControlContentControl>
@@ -241,15 +245,20 @@
                                     </li>
                                     <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                     <li style="margin-right: 30px; color: #7396a9; float: right">
-                                        <div style="display: inline-block">
+                                        <%--<div style="display: inline-block">
                                             <a href="/LegalUI/LegalUI.aspx?SecondaryAction=true"><i class="fa fa-arrow-right sale_head_button sale_head_button_left tooltip-examples" style="margin-right: 10px; color: #7396A9" title="Secondary" onclick=""></i></a>
-                                        </div>
-                                        <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
+                                        </div>--%>
+
+<%--                                        <i class="fa fa-codepen  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback();popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Research"></i>
+                                        <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback();popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Attorney"></i>
+                                        <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="AttorneyComplete()" data-original-title="Close"></i>--%>
+
+                                        <%--<i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>--%>
                                         <%-- <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>--%>
-                                        <i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')"></i>
-                                        <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>
-                                        <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')"></i>
-                                        <i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="LogClick('Closed')"></i>
+                                        <%--<i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')"></i>--%>
+                                        <%--<i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>--%>
+                                       <%-- <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')"></i>--%>
+                                        <%--<i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="LogClick('Closed')"></i>--%>
                                         <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                     </li>
                                 </ul>
@@ -268,6 +277,7 @@
         </dx:ASPxSplitter>
 
         <div runat="server" id="SencnedAction" visible="False" style="padding: 0 10px">
+           
             <%--<div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -283,7 +293,9 @@
                     </div>
                     <div class="modal-body">--%>
             <div>
-                <script>
+                <script type="text/javascript">
+                    var PropertyInfo = $.parseJSON('<%= propertyData%>');
+                    
                     function LeagalInfoSelectChange(s, e) {
                         var selected = cbLegalTypeClient.GetSelectedValues();
                         $('.legal_action_div').css("display", 'none');

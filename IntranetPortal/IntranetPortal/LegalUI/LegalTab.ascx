@@ -3,7 +3,7 @@
 <%@ Register Src="~/LegalUI/LegalSummaryTab.ascx" TagPrefix="uc1" TagName="LegalSummaryTab" %>
 <%@ Register Src="~/LegalUI/LegalForeclosureReviewTab.ascx" TagPrefix="uc1" TagName="LegalForeclosureReviewTab" %>
 <%@ Register Src="~/LegalUI/LegalSecondaryActionTab.ascx" TagPrefix="uc1" TagName="LegalSecondaryActionTab" %>
-
+<%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
 
 <script type="text/javascript">
@@ -125,33 +125,28 @@
 
     <input hidden="" id="short_sale_case_id" value="23">
     <div style="padding-top: 5px">
-        <div style="height: 850px; overflow: auto;" id="prioity_content">
-
-
+        <div style="height: 850px; overflow: auto;" id="prioity_content">            
             <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
                 <div style="font-size: 30px">
                     <span>
                         <i class="fa fa-refresh"></i>
-                        <span style="margin-left: 19px;">10/16/2014 9:30:16 PM</span>
+                        <span style="margin-left: 19px;">{{LegalCase.UpdateDate|date:'medium'}}</span>
                     </span>
-
                     <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
-                    <span class="time_buttons" onclick="ShowDOBWindow('','1593 ', '48')">DOB</span>
-                    <span class="time_buttons" onclick="ShowAcrisMap('3015930048')">Acris</span>
-                    <span class="time_buttons" onclick="ShowPropertyMap('3015930048')">Maps</span>
+                    <span class="time_buttons" onclick="ShowDOBWindow(GetLegalData().PropertyInfo.Borough,GetLegalData().PropertyInfo.Block, GetLegalData().PropertyInfo.Lot)">DOB</span>
+                    <span class="time_buttons" onclick="ShowAcrisMap(leadsInfoBBLE)">Acris</span>
+                    <span class="time_buttons" onclick="ShowPropertyMap(leadsInfoBBLE)">Maps</span>
 
                     <span class="time_buttons" onclick="" runat="server" visible="false" id="btnAssignAttorney">Assign Attorney</span>
-                    <span class="time_buttons" onclick="$('#RequestModal').modal()">Request Document</span>
+                    <span class="time_buttons" onclick="$('#RequestModal').modal()" style="display:none">Request Document</span>
                 </div>
-                <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">Started on 10/16/2014 9:30:16 PM</span>
+                <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; visibility: visible">Started on {{LegalCase.CreateDate|date:'medium'}}</span>
             </div>
-
-
-            <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; font-size: 20px">
+            
+            <div class="font_deep_gray" style="border-top: 1px solid #dde0e7; display:none; font-size: 20px">
                 
                 <div class="note_item" style="background: white">
                     <i class="fa fa-plus-circle note_img tooltip-examples" title="" style="color: #3993c1; cursor: pointer" onclick="aspxAddLeadsComments.ShowAtElement(this)" data-original-title="Add Notes"></i>
-
                 </div>
             </div>
 
@@ -161,13 +156,13 @@
                 <ul class="nav nav-tabs overview_tabs" role="tablist" style="">
                     <li class="short_sale_tab active">
                         <a class="shot_sale_tab_a " href="#Summary" role="tab" data-toggle="tab">Summary</a></li>
-                    <% If Agent Then%>
+                   <%-- <% If Agent Then%>--%>
                     <li class="short_sale_tab">
                         <a class="shot_sale_tab_a " href="#Foreclosure_Review" role="tab" data-toggle="tab">Foreclosure Review</a></li>
-                    <% End If%>
-                    <% If SecondaryAction Then%>
+                <%--    <% End If%>
+                    <% If SecondaryAction Then%>--%>
                     <li class="short_sale_tab "><a class="shot_sale_tab_a " href="#Secondary_Actions" role="tab" data-toggle="tab">Secondary Actions</a></li>
-                    <% End If%>
+                  <%--  <% End If%>--%>
                 </ul>
 
                 <!-- Tab panes -->
@@ -187,9 +182,26 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-
-
 </div>
+
+<dx:ASPxPopupControl ClientInstanceName="aspxAcrisControl" Width="1000px" Height="800px"
+    ID="ASPxPopupControl1" HeaderText="Acris" Modal="true" CloseAction="CloseButton" ShowMaximizeButton="true"
+    runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
+    <HeaderTemplate>
+        <div class="clearfix">
+            <div class="pop_up_header_margin">
+                <i class="fa fa-tasks with_circle pop_up_header_icon"></i>
+                <span class="pop_up_header_text" id="pop_up_header_text">Acris</span> <span class="pop_up_header_text"></span>
+            </div>
+            <div class="pop_up_buttons_div">
+                <i class="fa fa-times icon_btn" onclick="aspxAcrisControl.Hide()"></i>
+            </div>
+        </div>
+    </HeaderTemplate>
+    <ContentCollection>
+        <dx:PopupControlContentControl runat="server">
+        </dx:PopupControlContentControl>
+    </ContentCollection>
+</dx:ASPxPopupControl>
+<uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
