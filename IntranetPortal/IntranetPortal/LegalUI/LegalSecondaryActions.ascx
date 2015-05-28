@@ -6,7 +6,7 @@
         /*display:none;*/
     }
 </style>
-<div id="Estate" class="legal_action_div">
+<div id="Estate" class="legal_action_div  animate-show" ng-show="CheckShow('Estate')">
     <div class="ss_form">
         <h4 class="ss_form_title">Estate</h4>
         <ul class="ss_form_box clearfix">
@@ -59,12 +59,15 @@
 
                 <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstatePriorAction">
             </li>
-
+            <li class="ss_form_item ss_form_item_line">
+                <label class="ss_form_input_title">note</label>
+                <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.EstateNotes"></textarea>
+            </li>
         </ul>
     </div>
 </div>
 
-<div id="Partition" class="legal_action_div">
+<div id="Partition" class="legal_action_div  animate-show" ng-show="CheckShow('Partition')">
     <div class="ss_form">
         <h4 class="ss_form_title">Partition</h4>
         <ul class="ss_form_box clearfix">
@@ -94,12 +97,16 @@
                     <option value="Tenancy by the entirety">Tenancy by the entirety               </option>
                 </select>
             </li>
+            <li class="ss_form_item ss_form_item_line">
+                <label class="ss_form_input_title">note</label>
+                <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.SecondaryInfo.PartitionNotes"></textarea>
+            </li>
         </ul>
     </div>
 </div>
 
 
-<div id="Breach_of_Contract" class="legal_action_div">
+<div id="Breach_of_Contract" class="legal_action_div animate-show" ng-show="CheckShow('Breach of Contract')">
     <div class="ss_form">
         <h4 class="ss_form_title">Breach of Contract</h4>
         <ul class="ss_form_box clearfix">
@@ -144,7 +151,10 @@
                 <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.MoneyDamagesCheckId" />
             </li>
 
-
+            <li class="ss_form_item ss_form_item_line">
+                <label class="ss_form_input_title">note</label>
+                <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.SecondaryInfo.BreachOfContractNotes"></textarea>
+            </li>
         </ul>
     </div>
     <style>
@@ -190,7 +200,7 @@
 </script>
 <div></div>
 
-<div id="Quiet_Title" class="legal_action_div">
+<div id="Quiet_Title" class="legal_action_div animate-show" ng-show="CheckShow('Quiet Title')">
     <div class="ss_form">
         <h4 class="ss_form_title">Quiet Title</h4>
         <ul class="ss_form_box clearfix">
@@ -275,7 +285,10 @@
                 <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.ActionUserId')">
                 </div>
             </li>
-
+            <li class="ss_form_item ss_form_item_line">
+                <label class="ss_form_input_title">note</label>
+                <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.SecondaryInfo.QuietTitleNotes"></textarea>
+            </li>
         </ul>
     </div>
 </div>

@@ -404,7 +404,7 @@ function onkeyUpSSN(e) {
 
 function fromatSSN(value) {
     var ssn = value.replace(/[^\d]/g, "");
-    var reslut = ""
+    var reslut = "";
     if (ssn.length >= 9) {
         reslut = ssn.substring(0, 3) + "-" + ssn.substring(3, 5) + "-" + ssn.substring(5, 9);
     }
@@ -412,7 +412,7 @@ function fromatSSN(value) {
     if (reslut.length == 0) {
         return ssn;
     }
-    debugger;
+    
     return reslut;
 }
 function fromatDateString(date) {

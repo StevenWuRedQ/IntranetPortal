@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class LegalSecondaryActionTab
 
     '''<summary>
+    '''ASPxListBox1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxListBox1 As Global.DevExpress.Web.ASPxEditors.ASPxListBox
+
+    '''<summary>
     '''LegalSecondaryActions control.
     '''</summary>
     '''<remarks>

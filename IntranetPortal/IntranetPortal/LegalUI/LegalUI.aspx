@@ -27,6 +27,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
     <script src="/Scripts/stevenjs.js"></script>
+   
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
@@ -46,11 +47,11 @@
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <script>
-                            $(document).ready(function () {
+                                $(document).ready(function () {
 
-                                $('.popup').webuiPopover({ title: 'Contact ' + $("#vendor_btn").html(), content: $('#contact_popup').html(), width: 400 });
+                                    $('.popup').webuiPopover({ title: 'Contact ' + $("#vendor_btn").html(), content: $('#contact_popup').html(), width: 400 });
 
-                            });
+                                });
                             </script>
 
                             <div id="vendor_btn" style="display: none">
@@ -222,7 +223,7 @@
                                 </ContentCollection>
                                 <ClientSideEvents CloseUp="function(s,e){}" />
                             </dx:ASPxPopupControl>
-                            <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
+
 
                         </dx:SplitterContentControl>
                     </ContentCollection>
@@ -323,8 +324,8 @@
             <button type="button" class="btn btn-primary">Confirm</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         </div>--%>
-        
-        <div runat="server" ID="MangePreview" Visible="False">
+
+        <div runat="server" id="MangePreview" visible="False">
             <uc1:ManagePreViewControl runat="server" id="ManagePreViewControl" />
         </div>
     </div>
@@ -336,13 +337,22 @@
     <script>
         /*
         function(case) */
+        function VendorsClosing(s) {
+            GetContactCallBack();
+        }
+        GetContactCallBack = function (contact) {
+            $.getJSON('/LegalUI/ContactService.svc/LoadContacts').done(function (data) {
+
+                AllContact = data;
+            });
+
+        }
         function GetLegalData() {
 
             return angular.element(document.getElementById('PortalCtrl')).scope().LegalCase;
 
         }
-        function setLegalData(BBLE)
-        {
+        function setLegalData(BBLE) {
             $(document).ready(function () { angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(BBLE) })
         }
 
@@ -390,7 +400,7 @@
                 }
             };
         });
-        
+
         portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
             //var PropertyInfo = $scope.LegalCase.PropertyInfo;
@@ -472,52 +482,43 @@
 
             //$scope.selectBoxData = AllContact;
             var cStore = new DevExpress.data.CustomStore({
-                    load: function (loadOptions) {
+                load: function (loadOptions) {
 
-                        var d = $.Deferred();
-                        if (loadOptions.searchValue) {
-                            $.getJSON('/LegalUI/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
-                                d.resolve(data);
+                    var d = $.Deferred();
+                    if (loadOptions.searchValue) {
+                        $.getJSON('/LegalUI/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
+                            d.resolve(data);
 
-                            });
-                        } else {
-                            if (AllContact) {
-                                d.promise();
-                                return AllContact;
-                            }
-                            $.getJSON('/LegalUI/ContactService.svc/LoadContacts').done(function (data) {
-                                d.resolve(data);
-                                AllContact = data;
-                            });
+                        });
+                    } else {
+                        if (AllContact) {
+                            d.promise();
+                            return AllContact;
                         }
+                        $.getJSON('/LegalUI/ContactService.svc/LoadContacts').done(function (data) {
+                            d.resolve(data);
+                            AllContact = data;
+                        });
+                    }
 
-                        return d.promise();
-                    },
-                    byKey: function (key) {
-                        var d = new $.Deferred();
-                        $.get('/LegalUI/ContactService.svc/GetAllContacts?id=' + key)
-                            .done(function (result) {
-                                d.resolve(result);
-                            });
-                        return d.promise();
-                    },
-                    searchExpr: ["Name"]
-                });
+                    return d.promise();
+                },
+                byKey: function (key) {
+                    var d = new $.Deferred();
+                    $.get('/LegalUI/ContactService.svc/GetAllContacts?id=' + key)
+                        .done(function (result) {
+                            d.resolve(result);
+                        });
+                    return d.promise();
+                },
+                searchExpr: ["Name"]
+            });
             $scope.ContactDataSource = new DevExpress.data.DataSource({
                 store: cStore
             });
             $scope.PickedContactId = null;
-            $scope.GetContactCallBack = function(contact) {
-                $.getJSON('/LegalUI/ContactService.svc/LoadContacts').done(function (data) {
-                   
-                    AllContact = data;
-                });
-                if ($scope.PickedContactId) {
-                    $scope.PickedContactId = contact.ContactId;
-                }
-            }
-            $scope.TestContactId = function(c)
-            {
+
+            $scope.TestContactId = function (c) {
                 $scope.$eval(c + '=' + '192');
             }
             $scope.GetContactById = function (id) {
@@ -530,8 +531,24 @@
                 //    var c = d.promise();
                 //    return c;
                 //}
-                return AllContact.filter(function(o) { return o.ContactId == id })[0];
+                return AllContact.filter(function (o) { return o.ContactId == id })[0];
                 //return {};
+            }
+            $scope.SelectBoxChange = function (e) {
+                alert(JSON.stringify(e));
+            }
+
+            $scope.InitTagBox = function () {
+                return {
+                    dataSource:
+                        [{ id: 1, value: ' Statue of Limitations' },
+                            { id: 2, value: 'Estate' },
+                            { id: 3, value: 'Deed Reversal' },
+                            { id: 4, value: 'Partition' },
+                            { id: 5, value: 'Breach of Contract' },
+                            { id: 6, value: 'Quiet Title' }],
+                    valueExpr: 'id', displayExpr: 'value', bindingOptions: { value: 'LegalCase.SecondaryInfo.Type' }, onChange: function (d) { alert(JSON.stringify(d)) }
+                };
             }
             $scope.InitContact = function (id) {
 
@@ -582,13 +599,11 @@
                         if (typeof gridTrackingClient != 'undefined')
                             gridTrackingClient.Refresh();
 
-                    }).
-                    error(function () {
+                    }).error(function () {
                         alert("Fail to save data.");
                     });
 
-                //$.getJSON('/LegalUI/LegalUI.aspx/SaveCaseData', data, function (data) {                    
-                //});
+
             }
 
             $scope.AttorneyComplete = function () {
@@ -609,7 +624,7 @@
                 //$.getJSON('/LegalUI/LegalUI.aspx/SaveCaseData', data, function (data) {                    
                 //});
             }
-
+            $scope.LegalCase.SecondaryInfo.StatuteOfLimitations = [];
             $scope.LoadLeadsCase = function (BBLE) {
                 var data = { bble: BBLE };
                 $http.post('LegalUI.aspx/GetCaseData', data).
@@ -620,6 +635,32 @@
                          alert("Fail to load data.");
                      });
             }
+            $scope.AddSecondaryArray = function () {
+               
+                var selectType = $scope.LegalCase.SecondaryInfo.SelectedType;
+                if (selectType) {
+                    var name = selectType.replace(/\s/g, '');
+                   
+                    var arr = $scope.LegalCase.SecondaryInfo[name];
+                    if(!arr|| typeof $scope.LegalCase.SecondaryInfo[name]!='Array') {
+                        $scope.LegalCase.SecondaryInfo[name] = [];
+                        //arr = $scope.LegalCase.SecondaryInfo[name];
+                    }
+                    //$scope.LegalCase.SecondaryInfo[name].push({ tt: 1 });
+                    $scope.LegalCase.SecondaryInfo.StatueOfLimitations.push({ tt: 1 });
+                }
+            }
+            $scope.SecondarySelectType = function() {
+                $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.LegalCase.SecondaryInfo.SelectTypes || [];
+                var selectTypes = $scope.LegalCase.SecondaryInfo.SelectTypes;
+                if (!$scope.CheckShow(selectTypes, $scope.LegalCase.SecondaryInfo.SelectedType)) {
+                    selectTypes.push($scope.LegalCase.SecondaryInfo.SelectedType);
+                }
+                
+            }
+            $scope.CheckShow = function(filed) {
+                return _.contains($scope.LegalCase.SecondaryInfo.SelectTypes, filed);
+            }
             //$.getJSON('/LegalUI/ContactService.svc/GetAllContacts', function (data) {
 
             //    $scope.selectBoxData = data;
@@ -628,6 +669,6 @@
 
         });
     </script>
-    
+    <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
     <script src="/Scripts/bootstrap.min.js"></script>
 </asp:Content>

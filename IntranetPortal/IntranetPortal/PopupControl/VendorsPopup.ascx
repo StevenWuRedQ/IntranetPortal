@@ -5,7 +5,7 @@
     Width="1150" Height="730px" 
     ContentUrl="/PopupControl/VendorsPopUpContent.aspx"
     HeaderText="Email" Modal="true"  ShowFooter="true" 
-    EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True" ContentStyle-Paddings-Padding="0">
+    EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True" ContentStyle-Paddings-Padding="0" >
     <HeaderTemplate>
         <div class="clearfix">
             <div class="pop_up_header_margin">
@@ -30,6 +30,7 @@
 
         </dx:PopupControlContentControl>
     </ContentCollection>
+    <ClientSideEvents CloseUp="function(s) {if(VendorsClosing) VendorsClosing();}"></ClientSideEvents>
 </dx:ASPxPopupControl>
 <dx:ASPxPopupControl ID="AddNewVendorPopUp" runat="server"
 >

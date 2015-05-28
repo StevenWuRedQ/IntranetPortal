@@ -1623,6 +1623,15 @@ li.ss_form_item {
     height: 70px;
 }
 
+li.ss_form_item_line {
+    width: 93.3%;
+}
+
+.text_area_ss_form {
+    height: 48px;
+    margin-top: 7px;
+}
+
 .ss_form_input_title {
     font-size: 12px;
     color: rgb(177, 178, 183);
@@ -1810,6 +1819,9 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
     /*height: 33px;*/
 }
 
+.title_after_notes {
+    margin-top: 35px;
+}
 .title_span {
     color: #ff400d;
     font-weight: 900;
@@ -2331,4 +2343,23 @@ li.mag_tabv.active {
 
 .no_outline:focus {
     outline: none !important;
+}
+
+.animate-show {
+ 
+  opacity: 1;
+ 
+ 
+}
+
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  
+  opacity: 0;
+  
 }

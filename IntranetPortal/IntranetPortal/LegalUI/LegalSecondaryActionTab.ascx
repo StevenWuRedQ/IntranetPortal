@@ -5,35 +5,47 @@
 
     <div class="clearfix">
         <div style="float: right">
-       <%--     <input type="button" id="btnComplete" class="rand-button short_sale_edit" value="Completed" runat="server" onserverclick="btnComplete_ServerClick" />
+            <%--     <input type="button" id="btnComplete" class="rand-button short_sale_edit" value="Completed" runat="server" onserverclick="btnComplete_ServerClick" />
             <input type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveLegal()"  />--%>
         </div>
     </div>
-    <div data-array-index="0" class="ss_array" style="display: inline;">
+    {{LegalCase.SecondaryInfo.SelectTypes}}
+    {{LegalCase.SecondaryInfo.StatuteOfLimitations}}
+   <div class="form-inline">
+       <h4 class="ss_form_title" style="margin-bottom: 12px;">Select Types</h4>
+       <select class="form-control" ng-model="LegalCase.SecondaryInfo.SelectedType" ng-change="SecondarySelectType()" ng-options='o as o for o  in ["Statue Of Limitations","Estate","Deed Reversal","Partition","Breach of Contract","Quiet Title"]' style="width: 94%; margin-top: -15px">
+           <option value=""></option>
+       </select>&nbsp; &nbsp; &nbsp; 
+        <i class="fa  fa-plus-circle color_blue tooltip-examples icon_btn" ng-click="AddSecondaryArray()" title="Add" data-original-title="Add" style="font-size: 28px"></i>
+   </div>
 
-        <h4 class="ss_form_title title_with_line">
+
+    <div data-array-index="0" class="ss_array " >
+
+        <h4 class="ss_form_title title_with_line  title_after_notes" ng-show="CheckShow('Statue of Limitations')">
             <span class="title_index title_span">Statute of Limitation</span>&nbsp;
-                                                        <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" style="display: none" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
+                                                        <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
             &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="" data-original-title="Add"></i>
             <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="" data-original-title="Delete"></i>
         </h4>
+        
         <div class="collapse_div" style="">
-            <div class="ss_form">
+            <div class="ss_form animate-show" ng-repeat="Action in LegalCase.SecondaryInfo.StatuteOfLimitations" ng-show="CheckShow('Statue of Limitations')">
                 <h4 class="ss_form_title">Action</h4>
                 <ul class="ss_form_box clearfix">
 
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Case Type</label>
                         <select class="ss_form_input" ng-model="LegalCase.SecondaryInfo.CaseType">
-                            <option>Partition</option>
-                            <option>Breach of Contract</option>
-                            <option>Quiet Title</option>
-                            <option>Estate</option>
-                            <option>Article 78           </option>
-                            <option>Declaratory Relief   </option>
-                            <option>Fraud                </option>
-                            <option>Deed Reversion       </option>
-                            <option>Other</option>
+                            <option value="Partition">Partition            </option>
+                            <option value="Breach of Contract">Breach of Contract   </option>
+                            <option value="Quiet Title">Quiet Title          </option>
+                            <option value="Estate">Estate               </option>
+                            <option value="Article 78">Article 78           </option>
+                            <option value="Declaratory Relief">Declaratory Relief   </option>
+                            <option value="Fraud">Fraud                </option>
+                            <option value="Deed Reversion">Deed Reversion       </option>
+                            <option value="Other">Other                </option>
 
                         </select>
                     </li>
@@ -128,7 +140,12 @@
                         <label class="ss_form_input_title">Other </label>
                         <input class="ss_form_input">
                     </li>
+                    <li class="ss_form_item ss_form_item_line">
+                        <label class="ss_form_input_title">note</label>
+                        <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.SecondaryInfo.ActionNotes"></textarea>
+                    </li>
                 </ul>
+
             </div>
 
 
