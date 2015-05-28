@@ -1,4 +1,6 @@
-﻿Partial Public Class LegalCase
+﻿Imports System.ComponentModel
+
+Partial Public Class LegalCase
 
     Public Sub SaveData()
         Using ctx As New LegalModelContainer
@@ -42,9 +44,14 @@
 End Class
 
 Public Enum LegalCaseStatus
+    <Description("New Cases")>
     ManagerPreview = 0
+    <Description("Research")>
     LegalResearch = 1
+    <Description("Review")>
     ManagerAssign = 2
+    <Description("In Court")>
     AttorneyHandle = 3
+    <Description("Closed")>
     Closed = 4
 End Enum

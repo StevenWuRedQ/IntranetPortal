@@ -68,10 +68,13 @@ Partial Class Troubleshooting
         Me.lbFiles = New System.Windows.Forms.ListBox()
         Me.lbResult = New System.Windows.Forms.ListBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnImportLogs = New System.Windows.Forms.Button()
         Me.btnGetBBLE = New System.Windows.Forms.Button()
         Me.btnLoad = New System.Windows.Forms.Button()
         Me.btnImportFile = New System.Windows.Forms.Button()
-        Me.btnImportLogs = New System.Windows.Forms.Button()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -86,6 +89,7 @@ Partial Class Troubleshooting
         Me.SplitContainer1.SuspendLayout()
         CType(Me.gvFiles, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -308,6 +312,7 @@ Partial Class Troubleshooting
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.tabEmail)
         Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 46)
         Me.TabControl1.Name = "TabControl1"
@@ -528,6 +533,15 @@ Partial Class Troubleshooting
         Me.Panel2.Size = New System.Drawing.Size(552, 38)
         Me.Panel2.TabIndex = 2
         '
+        'btnImportLogs
+        '
+        Me.btnImportLogs.Location = New System.Drawing.Point(167, 3)
+        Me.btnImportLogs.Name = "btnImportLogs"
+        Me.btnImportLogs.Size = New System.Drawing.Size(75, 32)
+        Me.btnImportLogs.TabIndex = 4
+        Me.btnImportLogs.Text = "Import Logs"
+        Me.btnImportLogs.UseVisualStyleBackColor = True
+        '
         'btnGetBBLE
         '
         Me.btnGetBBLE.Location = New System.Drawing.Point(86, 3)
@@ -555,14 +569,33 @@ Partial Class Troubleshooting
         Me.btnImportFile.Text = "Import"
         Me.btnImportFile.UseVisualStyleBackColor = True
         '
-        'btnImportLogs
+        'TabPage4
         '
-        Me.btnImportLogs.Location = New System.Drawing.Point(167, 3)
-        Me.btnImportLogs.Name = "btnImportLogs"
-        Me.btnImportLogs.Size = New System.Drawing.Size(75, 32)
-        Me.btnImportLogs.TabIndex = 4
-        Me.btnImportLogs.Text = "Import Logs"
-        Me.btnImportLogs.UseVisualStyleBackColor = True
+        Me.TabPage4.Controls.Add(Me.TextBox2)
+        Me.TabPage4.Controls.Add(Me.Label10)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Size = New System.Drawing.Size(558, 329)
+        Me.TabPage4.TabIndex = 4
+        Me.TabPage4.Text = "TLO Service"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(22, 18)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(35, 13)
+        Me.Label10.TabIndex = 0
+        Me.Label10.Text = "Name"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(80, 15)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(153, 20)
+        Me.TextBox2.TabIndex = 1
         '
         'Troubleshooting
         '
@@ -591,6 +624,8 @@ Partial Class Troubleshooting
         Me.SplitContainer1.ResumeLayout(False)
         CType(Me.gvFiles, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
+        Me.TabPage4.ResumeLayout(False)
+        Me.TabPage4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -644,4 +679,7 @@ Partial Class Troubleshooting
     Friend WithEvents colStatus As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents colException As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnImportLogs As System.Windows.Forms.Button
+    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
+    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents Label10 As System.Windows.Forms.Label
 End Class
