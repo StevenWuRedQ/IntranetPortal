@@ -1585,7 +1585,7 @@
     <Compile Include="WCFDataServices\CommonService.svc.vb">
       <DependentUpon>CommonService.svc</DependentUpon>
     </Compile>
-    <Compile Include="WCFDataServices\ContactService.svc.vb">
+    <Compile Include="LegalUI\ContactService.svc.vb">
       <DependentUpon>ContactService.svc</DependentUpon>
     </Compile>
     <Compile Include="WCFDataServices\ICommonService.vb" />
@@ -2929,7 +2929,7 @@
     <Content Include="ViewHomeOwner.aspx" />
     <Content Include="ViewLeadsInfo.aspx" />
     <Content Include="WCFDataServices\CommonService.svc" />
-    <Content Include="WCFDataServices\ContactService.svc" />
+    <Content Include="LegalUI\ContactService.svc" />
     <Content Include="WCFDataServices\PortalDataService.svc" />
     <Content Include="WCFDataServices\PortalReportService.svc" />
     <Content Include="WebForm2.aspx" />

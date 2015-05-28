@@ -130,6 +130,7 @@
                                         <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="AttorneyComplete()" data-original-title="Complete"></i>
                                         <% End If%>
 
+                                        <i class="fa fa-users sale_head_button sale_head_button_left tooltip-examples" title="" onclick="VendorsPopupClient.Show()" data-original-title="Contacts"></i>
                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
                                     </li>
@@ -475,7 +476,7 @@
 
                         var d = $.Deferred();
                         if (loadOptions.searchValue) {
-                            $.getJSON('/WCFDataServices/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
+                            $.getJSON('/LegalUI/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
                                 d.resolve(data);
 
                             });
@@ -484,7 +485,7 @@
                                 d.promise();
                                 return AllContact;
                             }
-                            $.getJSON('/WCFDataServices/ContactService.svc/LoadContacts').done(function (data) {
+                            $.getJSON('/LegalUI/ContactService.svc/LoadContacts').done(function (data) {
                                 d.resolve(data);
                                 AllContact = data;
                             });
@@ -494,7 +495,7 @@
                     },
                     byKey: function (key) {
                         var d = new $.Deferred();
-                        $.get('/WCFDataServices/ContactService.svc/GetAllContacts?id=' + key)
+                        $.get('/LegalUI/ContactService.svc/GetAllContacts?id=' + key)
                             .done(function (result) {
                                 d.resolve(result);
                             });
@@ -505,11 +506,24 @@
             $scope.ContactDataSource = new DevExpress.data.DataSource({
                 store: cStore
             });
-
+            $scope.PickedContactId = null;
+            $scope.GetContactCallBack = function(contact) {
+                $.getJSON('/LegalUI/ContactService.svc/LoadContacts').done(function (data) {
+                   
+                    AllContact = data;
+                });
+                if ($scope.PickedContactId) {
+                    $scope.PickedContactId = contact.ContactId;
+                }
+            }
+            $scope.TestContactId = function(c)
+            {
+                $scope.$eval(c + '=' + '192');
+            }
             $scope.GetContactById = function (id) {
                 //if (id) {
                 //    var d = new $.Deferred();
-                //    $.get('/WCFDataServices/ContactService.svc/GetAllContacts?id=' + id)
+                //    $.get('/LegalUI/ContactService.svc/GetAllContacts?id=' + id)
                 //        .done(function (result) {
                 //            d.resolve(result[0]);
                 //        });
@@ -523,7 +537,7 @@
 
 
                 //new DevExpress.data.ODataStore({
-                //    url: "/WCFDataServices/ContactService.svc/GetAllContacts",
+                //    url: "/LegalUI/ContactService.svc/GetAllContacts",
                 //    key: "ContactId",
                 //    keyType: "Int32"
                 //});
@@ -606,7 +620,7 @@
                          alert("Fail to load data.");
                      });
             }
-            //$.getJSON('/WCFDataServices/ContactService.svc/GetAllContacts', function (data) {
+            //$.getJSON('/LegalUI/ContactService.svc/GetAllContacts', function (data) {
 
             //    $scope.selectBoxData = data;
             //});
