@@ -33,7 +33,6 @@
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <%--leagal Ui--%>
     <div id="PortalCtrl" ng-controller="PortalCtrl">
-
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
@@ -43,9 +42,10 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-                <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px">
+                <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px" Name="dataPane">
                     <ContentCollection>
                         <dx:SplitterContentControl>
+
                             <script>
                                 $(document).ready(function () {
 
@@ -230,8 +230,7 @@
                                 </ContentCollection>
                                 <ClientSideEvents CloseUp="function(s,e){}" />
                             </dx:ASPxPopupControl>
-
-
+                            
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>

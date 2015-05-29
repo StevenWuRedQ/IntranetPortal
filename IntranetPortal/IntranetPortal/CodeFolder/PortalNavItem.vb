@@ -166,6 +166,12 @@ Public Class PortalNavItem
                     End If
                 End If
 
+                If rl.Contains("*") Then
+                    If Roles.GetRolesForUser(userName).Where(Function(a) a.StartsWith(rl.Replace("*", ""))).Count > 0 Then
+                        Return True
+                    End If
+                End If
+
                 If Roles.IsUserInRole(userName, rl) Then
                     Return True
                 End If

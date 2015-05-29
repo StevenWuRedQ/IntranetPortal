@@ -24,7 +24,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Class</label>
-                    <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.Class">
+                    <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.TaxClass">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Condition</label>

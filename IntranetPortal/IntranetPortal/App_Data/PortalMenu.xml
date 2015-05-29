@@ -347,6 +347,7 @@
   </PortalNavItem>
   
   <PortalNavItem Name="Legal" Text="Legal" NavigationUrl="#" ShowAmount="false" Expanded="false">
+    <UserRoles>Legal-*</UserRoles>
     <Items>
       <!--<PortalNavItem Name="Legal-Summary" Text="Summary" NavigationUrl="/LegalUI/LegalUI.aspx" ShowAmount="false">
         <FontClass>

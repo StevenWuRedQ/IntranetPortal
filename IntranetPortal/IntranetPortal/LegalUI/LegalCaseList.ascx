@@ -17,7 +17,16 @@
                     //alert(gridLeads.GetFocusedRowIndex());
                     var rowKey = gridCase.GetRowKey(gridCase.GetFocusedRowIndex());
                     if (rowKey != null)
+                    {
                         OnGetRowValues(rowKey);
+                    }
+                    else
+                    {
+                        if(splitter)
+                        {
+                            splitter.GetPaneByName('dataPane')
+                        }
+                    }
                 }
             }
         }

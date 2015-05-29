@@ -19,11 +19,11 @@
         <ul class="ss_form_box clearfix">
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Street Number</label>
-                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.StreetName">
+                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.Number">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Street Name</label>
-                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.Number">
+                <input class="ss_form_input color_blue_edit" ng-model="LegalCase.PropertyInfo.StreetName">
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">City</label>
