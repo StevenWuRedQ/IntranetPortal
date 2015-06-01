@@ -176,6 +176,15 @@ Partial Public Class LegalUI
     Protected WithEvents ManagePreViewControl As Global.IntranetPortal.ManagePreViewControl
 
     '''<summary>
+    '''SendMail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SendMail As Global.IntranetPortal.SendMailControl
+
+    '''<summary>
     '''VendorsPopup control.
     '''</summary>
     '''<remarks>

@@ -8,6 +8,7 @@
 <%@ Register Src="~/UserControl/DocumentsUI.ascx" TagPrefix="uc1" TagName="DocumentsUI" %>
 <%@ Register TagPrefix="uc1" TagName="LegalSecondaryActions" Src="~/LegalUI/LegalSecondaryActions.ascx" %>
 <%@ Register Src="~/LegalUI/ManagePreViewControl.ascx" TagPrefix="uc1" TagName="ManagePreViewControl" %>
+<%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
 
@@ -347,7 +348,7 @@
     <%--  </div>
         </div>
     </div>--%>
-
+    <uc1:SendMail runat="server" ID="SendMail" />
     <script>
         /*
         function(case) */
