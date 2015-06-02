@@ -17,8 +17,8 @@
     <script src="/scrollbar/jquery.mCustomScrollbar.js"></script>
     <script src="/Scripts/bootstrap-datepicker.js"></script>
     <link rel="stylesheet" href="/Content/bootstrap-datepicker3.css" />
-    <!-- Angular Material CSS using RawGit to load directly from `bower-material/master` -->
-    <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.css">
+    
+  
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
     <script>
         //$(document).ready(function () {
@@ -682,11 +682,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.js"></script>
 
-    <!-- Angular Material Javascript using RawGit to load directly from `bower-material/master` -->
-    <script src="https://rawgit.com/angular/bower-material/master/angular-material.js"></script>
+    
+   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="/Scripts/stevenjs.js"></script>
-    <script src="/Scripts/PortalApp.js?v=1.5"></script>
+    <script src="/Scripts/PortalApp.js?v=1.6"></script>
     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
     <%--  <script>
          $(document).ready(function () {

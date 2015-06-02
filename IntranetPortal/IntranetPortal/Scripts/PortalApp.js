@@ -59,7 +59,7 @@ filter('ByContact', function () {
         return items.out;
     };
 });
-var portalApp = angular.module('PortalApp', ['ngMaterial', 'myFilters']);
+var portalApp = angular.module('PortalApp', [ 'myFilters']);
 function Fomart_data_String(json) {
     function ToDateString(match) {
 

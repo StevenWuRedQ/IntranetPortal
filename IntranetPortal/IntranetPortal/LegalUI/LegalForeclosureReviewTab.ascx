@@ -336,13 +336,16 @@
                 <label class="ss_form_input_title">endorsed signed date</label>
                 <input class="ss_form_input " ss-date="" ng-model="LegalCase.ForeclosureInfo.NoteEndorsedSingedDate">
             </li>
-
+            <li class="ss_form_item ss_form_item_line">
+                <label class="ss_form_input_title">note</label>
+                <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.NoteNotes"></textarea>
+            </li>
         </ul>
 
 
     </div>
     <div class="ss_form">
-        <h4 class="ss_form_title">Note Alonge</h4>
+        <h4 class="ss_form_title">Note endorsements/allonge</h4>
         <ul class="ss_form_box clearfix">
 
             <li class="ss_form_item">
@@ -394,7 +397,10 @@
                 <label class="ss_form_input_title">Alonge signed date</label>
                 <input class="ss_form_input " ss-date="" ng-model="LegalCase.ForeclosureInfo.NoteAlongeSingedDate">
             </li>
-
+             <li class="ss_form_item ss_form_item_line">
+                <label class="ss_form_input_title">note</label>
+                <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.NoteAlongeNotes"></textarea>
+            </li>
         </ul>
     </div>
 

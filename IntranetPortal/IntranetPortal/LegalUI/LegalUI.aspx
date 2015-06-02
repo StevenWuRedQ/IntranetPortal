@@ -19,7 +19,7 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
     <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
     <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>
-    <!-- Angular Material Javascript using RawGit to load directly from `bower-material/master -->
+   
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
