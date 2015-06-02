@@ -28,7 +28,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
     <script src="/Scripts/stevenjs.js"></script>
-   
+
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
@@ -97,6 +97,7 @@
                                 </select>
                                 <select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
                                 </select>--%>
+                                
                             </div>
 
                             <div style="align-content: center; height: 100%">
@@ -120,7 +121,7 @@
                                         <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
 
                                         <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
-                                          <i class="fa fa-codepen  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Research');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Research"></i>
+                                        <i class="fa fa-codepen  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Research');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Research"></i>
                                         <% End If%>
 
                                         <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.LegalResearch Then%>
@@ -141,7 +142,7 @@
                                     </li>
                                 </ul>
 
-                                <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
+                                <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
                                 <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
                                     MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
                                     HeaderText="Select Employee" AutoUpdatePosition="true" Modal="true" OnWindowCallback="ASPxPopupControl3_WindowCallback"
@@ -252,7 +253,7 @@
                                             <a href="/LegalUI/LegalUI.aspx?SecondaryAction=true"><i class="fa fa-arrow-right sale_head_button sale_head_button_left tooltip-examples" style="margin-right: 10px; color: #7396A9" title="Secondary" onclick=""></i></a>
                                         </div>--%>
 
-<%--                                        <i class="fa fa-codepen  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback();popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Research"></i>
+                                        <%--                                        <i class="fa fa-codepen  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback();popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Research"></i>
                                         <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback();popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Attorney"></i>
                                         <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="AttorneyComplete()" data-original-title="Close"></i>--%>
 
@@ -260,7 +261,7 @@
                                         <%-- <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>--%>
                                         <%--<i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')"></i>--%>
                                         <%--<i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>--%>
-                                       <%-- <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')"></i>--%>
+                                        <%-- <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')"></i>--%>
                                         <%--<i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="LogClick('Closed')"></i>--%>
                                         <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                     </li>
@@ -280,7 +281,7 @@
         </dx:ASPxSplitter>
 
         <div runat="server" id="SencnedAction" visible="False" style="padding: 0 10px">
-           
+
             <%--<div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -298,7 +299,7 @@
             <div>
                 <script type="text/javascript">
                     var PropertyInfo = $.parseJSON('<%= propertyData%>');
-                    
+
                     function LeagalInfoSelectChange(s, e) {
                         var selected = cbLegalTypeClient.GetSelectedValues();
                         $('.legal_action_div').css("display", 'none');
@@ -341,7 +342,7 @@
         </div>--%>
 
         <div runat="server" id="MangePreview" visible="False">
-            <uc1:ManagePreViewControl runat="server" id="ManagePreViewControl" />
+            <uc1:ManagePreViewControl runat="server" ID="ManagePreViewControl" />
         </div>
     </div>
     <!-- /.modal-content -->
@@ -418,11 +419,16 @@
 
         portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
-            $scope.SecondaryTypeSource = ["Statue Of Limitations", "Estate", "Deed Reversal", "Partition", "Breach of Contract", "Quiet Title"];
-           
+                                             
+            $scope.SecondaryTypeSource = ["Statute Of Limitations", "Estate", "Deed Reversal", "Partition", "Breach of Contract", "Quiet Title"];
+
             if (typeof LegalShowAll == 'undefined' || LegalShowAll == null) {
                 $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.SecondaryTypeSource;
-            } 
+            }
+            $scope.TestRepeatData = [];
+            $scope.addTest = function() {
+                $scope.TestRepeatData[$scope.TestRepeatData.length]=$scope.TestRepeatData.length;
+            }
             //var PropertyInfo = $scope.LegalCase.PropertyInfo;
             //CaseData = $scope.LegalCase;
             //PropertyInfo.PropertyAddress = "421 HART ST, BEDFORD STUYVESANT,NY 11221";
@@ -558,18 +564,7 @@
                 alert(JSON.stringify(e));
             }
 
-            $scope.InitTagBox = function () {
-                return {
-                    dataSource:
-                    [{ id: 1, value: ' Statue of Limitations' },
-                    { id: 2, value: 'Estate' },
-                    { id: 3, value: 'Deed Reversal' },
-                    { id: 4, value: 'Partition' },
-                    { id: 5, value: 'Breach of Contract' },
-                    { id: 6, value: 'Quiet Title' }],
-                    valueExpr: 'id', displayExpr: 'value', bindingOptions: { value: 'LegalCase.SecondaryInfo.Type' }, onChange: function (d) { alert(JSON.stringify(d)) }
-                };
-            }
+           
             $scope.InitContact = function (id) {
 
 
@@ -656,35 +651,38 @@
                     });
             }
             $scope.AddSecondaryArray = function () {
-               
+
                 var selectType = $scope.LegalCase.SecondaryInfo.SelectedType;
                 if (selectType) {
                     var name = selectType.replace(/\s/g, '');
-                   
+
                     var arr = $scope.LegalCase.SecondaryInfo[name];
-                    if(!arr|| typeof $scope.LegalCase.SecondaryInfo[name]!='Array') {
+                    if (name == 'StatuteOfLimitations') {
+                        alert('match');
+                    }
+                    if (!arr || !Array.isArray($scope.LegalCase.SecondaryInfo[name])) {
                         $scope.LegalCase.SecondaryInfo[name] = [];
                         //arr = $scope.LegalCase.SecondaryInfo[name];
                     }
-                    //$scope.LegalCase.SecondaryInfo[name].push({ tt: 1 });
-                    $scope.LegalCase.SecondaryInfo.StatueOfLimitations.push({ tt: 1 });
+                    $scope.LegalCase.SecondaryInfo[name].push({});
+                    //$scope.LegalCase.SecondaryInfo.StatuteOfLimitations.push({});
                 }
             }
             $scope.LegalCase.SecondaryInfo.SelectedType = $scope.SecondaryTypeSource[0];
-            $scope.SecondarySelectType = function() {
+            $scope.SecondarySelectType = function () {
                 $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.LegalCase.SecondaryInfo.SelectTypes || [];
                 var selectTypes = $scope.LegalCase.SecondaryInfo.SelectTypes;
                 if (!_.contains(selectTypes, $scope.LegalCase.SecondaryInfo.SelectedType)) {
                     selectTypes.push($scope.LegalCase.SecondaryInfo.SelectedType);
                 }
-                
+
             }
             $scope.CheckShow = function (filed) {
                 if (typeof LegalShowAll == 'undefined' || LegalShowAll == null) {
                     return true;
                 }
                 return $scope.LegalCase.SecondaryInfo.SelectedType == filed;
-                
+
             }
             //$.getJSON('/LegalUI/ContactService.svc/GetAllContacts', function (data) {
 

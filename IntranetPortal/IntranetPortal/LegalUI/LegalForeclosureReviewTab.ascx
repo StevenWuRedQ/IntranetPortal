@@ -254,7 +254,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">last payment date</label>
-                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.LastPaymentDate"/>
+                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.LastPaymentDate" />
             </li>
             <li class="ss_form_item">
                 <span class="ss_form_input_title">Eviction status</span>
@@ -577,14 +577,15 @@
             </li>
         </ul>
     </div>
-    <div  class="ss_array" style="display: inline;">
+    <div class="ss_array">
 
         <h4 class="ss_form_title title_with_line  title_after_notes ">
             <span class="title_index title_span">Assignments </span>&nbsp;
-                                                        <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples"  onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
+            <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>                                            
             &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="" data-original-title="Add"></i>
             <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="" data-original-title="Delete"></i>
         </h4>
+        
         <div class="collapse_div">
 
             <div class="ss_form">
@@ -697,218 +698,220 @@
         </div>
 
 
-        <div class="ss_array" style="display: inline;">
 
-            <h4 class="ss_form_title title_with_line  title_after_notes ">
-                <span class="title_index title_span">Loan Pool Trust</span>&nbsp;
-                                                        <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples"  onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
-                &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="" data-original-title="Add"></i>
-                <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="" data-original-title="Delete"></i>
-            </h4>
-            <div class="collapse_div" style="">
+    </div>
+    <div class="ss_array" style="display: inline;">
 
-
-                <div class="ss_form">
-                    <h4 class="ss_form_title">Trust 
-                                                            
-                    </h4>
-                    <ul class="ss_form_box clearfix">
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">Trust</label>
-                            <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.TrustId')">
-                            </div>
-                        </li>
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">Depositor Name</label>
-                            <input class="ss_form_input " dx-select-box="InitContact('LegalCase.ForeclosureInfo.DepositorId')">
-                        </li>
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">Trustee</label>
-                            <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.TrusteeId')">
-                            </div>
-                        </li>
-
-                        <li class="ss_form_item">
-                            <span class="ss_form_input_title">Trust documentation been located</span>
-
-                            <input type="checkbox" id="check_90" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TrustDocLocated">
-                            <label for="check_90" class="input_with_check ">
-                                <span class="box_text">Yes </span>
-
-                            </label>
-                        </li>
-
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">Assignment date</label>
-                            <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.TrustDocAssignmentDate">
-                        </li>
-                        <li class="ss_form_item">
-                            <span class="ss_form_input_title">Default date after close</span>
-
-                            <input type="radio" id="check_93" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TrustDefaultDateAfterClose">
-                            <label for="check_93" class="input_with_check ">
-                                <span class="box_text">Yes </span>
-                            </label>
-
-                            <input type="radio" id="check_94" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TrustDefaultDateAfterClose">
-                            <label for="check_94" class="input_with_check">
-                                <span class="box_text">No</span>
-                            </label>
-                        </li>
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">Cutoff Date</label>
-                            <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.TrustCutoffDate">
-                        </li>
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">Closing Date</label>
-                            <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.TrustClosingDate">
-                        </li>
-                        <li class="ss_form_item ss_form_item_line">
-                            <label class="ss_form_input_title">note</label>
-                            <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.LoanPoolTrustNotes"></textarea>
-                        </li>
-                    </ul>
-                </div>
+        <h4 class="ss_form_title title_with_line  title_after_notes ">
+            <span class="title_index title_span">Loan Pool Trust</span>&nbsp;
+            <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
+            &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="" data-original-title="Add"></i>
+            <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="" data-original-title="Delete"></i>
+        </h4>
+        <div class="collapse_div" style="">
 
 
-
-            </div>
-        </div>
-
-        <div class="ss_form">
-            <h4 class="ss_form_title">Bankruptcy</h4>
-            <ul class="ss_form_box clearfix">
-
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">PriorDate</label>
-                    <input class="ss_form_input" ss-date="" data-field="LegalCase.ForeclosureInfo.BankruptcyPriorDate">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">chapter</label>
-                    <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Bankruptcychapter">
-                        <option value="7">7</option>
-                        <option value="13">13</option>
-                    </select>
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">Disposition</label>
-                    <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.BankruptcyDisposition">
-                </li>
-                <li class="ss_form_item ss_form_item_line">
-                    <label class="ss_form_input_title">note</label>
-                    <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.BankruptcyNotes"></textarea>
-                </li>
-            </ul>
-        </div>
-
-        <div class="ss_array" style="display: inline;">
-
-            <h4 class="ss_form_title title_with_line  title_after_notes ">
-                <span class="title_index title_span">Statute of Limitation</span>&nbsp;
-                                                        <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples"  onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
-                &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="" data-original-title="Add"></i>
-                <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="" data-original-title="Delete"></i>
-            </h4>
-            <div class="collapse_div" style="">
-
-
-
-                <div class="ss_form">
-                    <h4 class="ss_form_title">Statute of Limitations</h4>
-                    <ul class="ss_form_box clearfix">
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">Prior Plaintiff</label>
-                            <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PriorPlaintiffId')">
-                            </div>
-                        </li>
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">Prior Plaintiff(Bank) gone out of business</label>
-                            <input type="checkbox" id="pdf_check_yes391" name="1" class="ss_form_input" value="true" ng-model="LegalCase.ForeclosureInfo.PriorPlaintiffOutOfBusiness">
-                            <label for="pdf_check_yes391" class="input_with_check">
-                                <span class="box_text">Yes </span>
-                            </label>
-                        </li>
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">Prior Attorney</label>
-                            <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PriorPlaintiffId')">
-                            </div>
-                        </li>
-
-
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">LP Date</label>
-                            <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.LPDate">
-                        </li>
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">Default Date</label>
-                            <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.DefaultDate">
-                        </li>
-                        <li class="ss_form_item">
-                            <span class="ss_form_input_title">In foreclosure </span>
-
-                            <input type="checkbox" id="pdf_check_yes39" name="1" class="ss_form_input" value="true" ng-model="LegalCase.ForeclosureInfo.InForeclosure">
-                            <label for="pdf_check_yes39" class="input_with_check">
-                                <span class="box_text">Yes </span>
-                            </label>
-
-                        </li>
-
-                        <li class="ss_form_item">
-                            <label class="ss_form_input_title">Disposition</label>
-                            <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.StatuteDisposition">
-                                <option>Dismissed</option>
-                                <option>Discontinued</option>
-                                <option>Abandoned</option>
-                                <option>Other</option>
-
-                            </select>
-                        </li>
-                        <li class="ss_form_item ss_form_item_line">
-                            <label class="ss_form_input_title">note</label>
-                            <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.StatuteOfLimitationNotes"></textarea>
-                        </li>
-                    </ul>
-                </div>
-
-            </div>
             <div class="ss_form">
-                <h4 class="ss_form_title">Estate</h4>
+                <h4 class="ss_form_title">Trust 
+                                                            
+                </h4>
                 <ul class="ss_form_box clearfix">
-
-
                     <li class="ss_form_item">
-                        <label class="ss_form_input_title">hold Reason</label>
-                        <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstateHoldReason">
-                            <option>Tenants in common</option>
-                            <option>Joint Tenants w/right of survivorship</option>
-                            <option>Tenancy by the entirety</option>
-
-                        </select>
+                        <label class="ss_form_input_title">Trust</label>
+                        <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.TrustId')">
+                        </div>
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Depositor Name</label>
+                        <input class="ss_form_input " dx-select-box="InitContact('LegalCase.ForeclosureInfo.DepositorId')">
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Trustee</label>
+                        <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.TrusteeId')">
+                        </div>
                     </li>
 
                     <li class="ss_form_item">
-                        <span class="ss_form_input_title">Estate set up</span>
+                        <span class="ss_form_input_title">Trust documentation been located</span>
 
-                        <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstateSetUp">
-                            <option>Unknown</option>
-                            <option>Yes</option>
-                            <option>No</option>
+                        <input type="checkbox" id="check_90" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TrustDocLocated">
+                        <label for="check_90" class="input_with_check ">
+                            <span class="box_text">Yes </span>
+
+                        </label>
+                    </li>
+
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Assignment date</label>
+                        <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.TrustDocAssignmentDate">
+                    </li>
+                    <li class="ss_form_item">
+                        <span class="ss_form_input_title">Default date after close</span>
+
+                        <input type="radio" id="check_93" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TrustDefaultDateAfterClose">
+                        <label for="check_93" class="input_with_check ">
+                            <span class="box_text">Yes </span>
+                        </label>
+
+                        <input type="radio" id="check_94" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TrustDefaultDateAfterClose">
+                        <label for="check_94" class="input_with_check">
+                            <span class="box_text">No</span>
+                        </label>
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Cutoff Date</label>
+                        <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.TrustCutoffDate">
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Closing Date</label>
+                        <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.TrustClosingDate">
+                    </li>
+                    <li class="ss_form_item ss_form_item_line">
+                        <label class="ss_form_input_title">note</label>
+                        <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.LoanPoolTrustNotes"></textarea>
+                    </li>
+                </ul>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="ss_form">
+        <h4 class="ss_form_title">Bankruptcy</h4>
+        <ul class="ss_form_box clearfix">
+
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">PriorDate</label>
+                <input class="ss_form_input" ss-date="" data-field="LegalCase.ForeclosureInfo.BankruptcyPriorDate">
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">chapter</label>
+                <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Bankruptcychapter">
+                    <option value="7">7</option>
+                    <option value="13">13</option>
+                </select>
+            </li>
+            <li class="ss_form_item">
+                <label class="ss_form_input_title">Disposition</label>
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.BankruptcyDisposition">
+            </li>
+            <li class="ss_form_item ss_form_item_line">
+                <label class="ss_form_input_title">note</label>
+                <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.BankruptcyNotes"></textarea>
+            </li>
+        </ul>
+    </div>
+
+    <div class="ss_array" style="display: inline;">
+
+        <h4 class="ss_form_title title_with_line  title_after_notes ">
+            <span class="title_index title_span">Statute of Limitation</span>&nbsp;
+                                                        <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
+            &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="" data-original-title="Add"></i>
+            <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="" data-original-title="Delete"></i>
+        </h4>
+        <div class="collapse_div" style="">
+
+
+
+            <div class="ss_form">
+                <h4 class="ss_form_title">Statute of Limitations</h4>
+                <ul class="ss_form_box clearfix">
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Prior Plaintiff</label>
+                        <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PriorPlaintiffId')">
+                        </div>
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Prior Plaintiff(Bank) gone out of business</label>
+                        <input type="checkbox" id="pdf_check_yes391" name="1" class="ss_form_input" value="true" ng-model="LegalCase.ForeclosureInfo.PriorPlaintiffOutOfBusiness">
+                        <label for="pdf_check_yes391" class="input_with_check">
+                            <span class="box_text">Yes </span>
+                        </label>
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Prior Attorney</label>
+                        <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PriorPlaintiffId')">
+                        </div>
+                    </li>
+
+
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">LP Date</label>
+                        <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.LPDate">
+                    </li>
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Default Date</label>
+                        <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.DefaultDate">
+                    </li>
+                    <li class="ss_form_item">
+                        <span class="ss_form_input_title">In foreclosure </span>
+
+                        <input type="checkbox" id="pdf_check_yes39" name="1" class="ss_form_input" value="true" ng-model="LegalCase.ForeclosureInfo.InForeclosure">
+                        <label for="pdf_check_yes39" class="input_with_check">
+                            <span class="box_text">Yes </span>
+                        </label>
+
+                    </li>
+
+                    <li class="ss_form_item">
+                        <label class="ss_form_input_title">Disposition</label>
+                        <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.StatuteDisposition">
+                            <option>Dismissed</option>
+                            <option>Discontinued</option>
+                            <option>Abandoned</option>
+                            <option>Other</option>
+
                         </select>
-                        <%--<input type="checkbox" id="pdf_check_yes103" name="1" class="ss_form_input" value="true">
+                    </li>
+                    <li class="ss_form_item ss_form_item_line">
+                        <label class="ss_form_input_title">note</label>
+                        <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.StatuteOfLimitationNotes"></textarea>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="ss_form">
+            <h4 class="ss_form_title">Estate</h4>
+            <ul class="ss_form_box clearfix">
+
+
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">hold Reason</label>
+                    <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstateHoldReason">
+                        <option>Tenants in common</option>
+                        <option>Joint Tenants w/right of survivorship</option>
+                        <option>Tenancy by the entirety</option>
+
+                    </select>
+                </li>
+
+                <li class="ss_form_item">
+                    <span class="ss_form_input_title">Estate set up</span>
+
+                    <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstateSetUp">
+                        <option>Unknown</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                    <%--<input type="checkbox" id="pdf_check_yes103" name="1" class="ss_form_input" value="true">
                                                                                     <label for="pdf_check_yes40" class="input_with_check">
                                                                                         <span class="box_text">Yes </span>
                                                                                     </label>--%>
-                    </li>
-                    <li class="ss_form_item">
+                </li>
+                <li class="ss_form_item">
 
-                        <span class="ss_form_input_title">borrower Died</span>
+                    <span class="ss_form_input_title">borrower Died</span>
 
-                        <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstateBorrowerDied">
-                            <option>Unknown</option>
-                            <option>Yes</option>
-                            <option>No</option>
-                        </select>
-                        <%-- <input type="radio" id="pdf_check100" name="1" class="ss_form_input" value="true">
+                    <select class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.EstateBorrowerDied">
+                        <option>Unknown</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                    <%-- <input type="radio" id="pdf_check100" name="1" class="ss_form_input" value="true">
                                                                                     <label for="pdf_check50" class="input_with_check">
                                                                                         <span class="box_text">Yes </span>
                                                                                     </label>
@@ -917,53 +920,52 @@
                                                                                         <span class="box_text">Tenancy by the entirety </span>
                                                                                     </label>--%>
 
-                    </li>
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">prior action</label>
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">prior action</label>
 
-                        <input class="ss_form_input" data-field="PropertyInfo.Number">
-                    </li>
-                    <li class="ss_form_item ss_form_item_line">
-                        <label class="ss_form_input_title">note</label>
-                        <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.EstateNotes"></textarea>
-                    </li>
-                </ul>
-            </div>
-            <div class="ss_form">
-                <h4 class="ss_form_title">Defenses/Conclusion</h4>
-                <ul class="ss_form_box clearfix">
+                    <input class="ss_form_input" data-field="PropertyInfo.Number">
+                </li>
+                <li class="ss_form_item ss_form_item_line">
+                    <label class="ss_form_input_title">note</label>
+                    <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.EstateNotes"></textarea>
+                </li>
+            </ul>
+        </div>
+        <div class="ss_form">
+            <h4 class="ss_form_title">Defenses/Conclusion</h4>
+            <ul class="ss_form_box clearfix">
 
-                    <li class="ss_form_item" style="width: 100%">
-                        <label class="ss_form_input_title">Defenses/Conclusion</label>
-                        <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.DefensesOrConclusion" style="width: 93%">
-                    </li>
+                <li class="ss_form_item" style="width: 100%">
+                    <label class="ss_form_input_title">Defenses/Conclusion</label>
+                    <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.DefensesOrConclusion" style="width: 93%">
+                </li>
 
-                </ul>
-            </div>
+            </ul>
+        </div>
 
-            <div class="ss_form">
-                <h4 class="ss_form_title">Action Plan</h4>
-                <ul class="ss_form_box clearfix">
+        <div class="ss_form">
+            <h4 class="ss_form_title">Action Plan</h4>
+            <ul class="ss_form_box clearfix">
 
 
-                    <li class="ss_form_item" style="width: 100%">
-                        <label class="ss_form_input_title">Action Plan</label>
-                        <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ActionPlan" style="width: 93%">
-                    </li>
+                <li class="ss_form_item" style="width: 100%">
+                    <label class="ss_form_input_title">Action Plan</label>
+                    <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.ActionPlan" style="width: 93%">
+                </li>
 
-                </ul>
-            </div>
-            <div class="ss_form">
-                <h4 class="ss_form_title">Etrack</h4>
-                <ul class="ss_form_box clearfix">
+            </ul>
+        </div>
+        <div class="ss_form">
+            <h4 class="ss_form_title">Etrack</h4>
+            <ul class="ss_form_box clearfix">
 
-                    <li class="ss_form_item" style="width: 100%">
-                        <label class="ss_form_input_title">Etrack</label>
-                        <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Etrack" style="width: 93%">
-                    </li>
+                <li class="ss_form_item" style="width: 100%">
+                    <label class="ss_form_input_title">Etrack</label>
+                    <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.Etrack" style="width: 93%">
+                </li>
 
-                </ul>
-            </div>
+            </ul>
         </div>
     </div>
 </div>

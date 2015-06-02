@@ -9,29 +9,30 @@
             <input type="button" class="rand-button short_sale_edit" value="Save" ng-click="SaveLegal()"  />--%>
         </div>
     </div>
-   
-   <div class="form-inline">
-       <h4 class="ss_form_title" style="margin-bottom: 12px;">Select Types</h4>
-       <select class="form-control" ng-model="LegalCase.SecondaryInfo.SelectedType" ng-change="SecondarySelectType()" ng-options='o as o for o  in SecondaryTypeSource' style="width: 94%; margin-top: -8px">
-           <option value=""></option>
-       </select>&nbsp; &nbsp; &nbsp; 
-        <i class="fa  fa-plus-circle color_blue tooltip-examples icon_btn" ng-click="AddSecondaryArray()" title="Add" data-original-title="Add" style="font-size: 28px;display: none"></i>
-   </div>
+
+    <div class="form-inline">
+        <h4 class="ss_form_title" style="margin-bottom: 12px;">Select Types</h4>
+        <select class="form-control" ng-model="LegalCase.SecondaryInfo.SelectedType" ng-change="SecondarySelectType()" ng-options='o as o for o  in SecondaryTypeSource' style="width: 94%; margin-top: -8px">
+            <option value=""></option>
+        </select>&nbsp; &nbsp; &nbsp; 
+        <i class="fa  fa-plus-circle color_blue tooltip-examples icon_btn" style="display: none" ng-click="AddSecondaryArray()" title="Add" data-original-title="Add" style="font-size: 28px;"></i>
+    </div>
 
 
-    <div class="ss_array " >
+    <div class="ss_array ">
 
-        <h4 class="ss_form_title title_with_line  title_after_notes animate-show" ng-show="CheckShow('Statue Of Limitations')">
+        <h4 class="ss_form_title title_with_line  title_after_notes animate-show" ng-show="CheckShow('Statute Of Limitations')">
             <span class="title_index title_span">Statute of Limitation</span>&nbsp;
-                                                        <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
+            <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
             &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="" data-original-title="Add"></i>
             <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="" data-original-title="Delete"></i>
         </h4>
-        
+
         <div class="collapse_div" style="">
-            <div class="ss_form animate-show"  ng-show="CheckShow('Statue Of Limitations')">
+
+            <div class="ss_form animate-show" <%--ng-repeat="n in LegalCase.SecondaryInfo.StatuteOfLimitations track by $index" --%> ng-show="CheckShow('Statute Of Limitations')">
                 <h4 class="ss_form_title">Action</h4>
-                
+
                 <ul class="ss_form_box clearfix">
 
                     <li class="ss_form_item">
@@ -125,21 +126,9 @@
 
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Partition</label>
-                        <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.CaseType">
+                        <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.Partition">
                     </li>
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Breach of Contract</label>
-                        <input class="ss_form_input">
-                    </li>
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Quiet Title</label>
-                        <input class="ss_form_input">
-                    </li>
-
-                    <li class="ss_form_item">
-                        <label class="ss_form_input_title">Other </label>
-                        <input class="ss_form_input">
-                    </li>
+                
                     <li class="ss_form_item ss_form_item_line">
                         <label class="ss_form_input_title">note</label>
                         <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.SecondaryInfo.ActionNotes"></textarea>
@@ -157,31 +146,14 @@
 
 
     <div class="ss_form" style="padding-bottom: 20px;">
-        <h4 class="ss_form_title">Legal  Notes <i class="fa fa-plus-circle  color_blue_edit collapse_btn tooltip-examples" title="" onclick="addOccupantNoteClick( 0  ,this);" data-original-title="Add"></i></h4>
+        <h4 class="ss_form_title">Legal  Notes </h4>
+        <ul class="ss_form_box clearfix">
+            <li class="ss_form_item ss_form_item_line">
+                <label class="ss_form_input_title">Note</label>
+                <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.SecondaryInfo.LegalNotes"></textarea>
+            </li>
+        </ul>
 
-
-
-        <div class="note_output">
-
-
-            <div class="clearence_list_item">
-                <div class="clearence_list_content clearfix" style="margin-bottom: 10px">
-                    <div class="clearence_list_text" style="margin-top: 0px;">
-                        <div class="clearence_list_text14">
-                            <i class="fa fa-caret-right clearence_caret_right_icon"></i>
-                            <i class="fa fa-times color_blue_edit icon_btn tooltip-examples" title="" style="float: right" onclick="deleteAccoupantNote(0,0)" data-original-title="Delete"></i>
-                            <span class="clearence_list_text14">Note for test
-                                                                        <br>
-
-                                <span class="clearence_list_text12">4/6/2015 9:57:43 AM by 123
-                                </span>
-                            </span>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
 
