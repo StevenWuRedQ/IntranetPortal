@@ -1,4 +1,5 @@
 ﻿Imports System.Text.RegularExpressions
+Imports System.Text
 
 Partial Public Class ShortSaleCase
 
@@ -34,7 +35,7 @@ Partial Public Class ShortSaleCase
     End Property
 
     Private _propInfo As PropertyBaseInfo
-    Public ReadOnly Property PropertyInfo As PropertyBaseInfo
+    Public Property PropertyInfo As PropertyBaseInfo
         Get
             If _propInfo Is Nothing Then
                 _propInfo = PropertyBaseInfo.GetInstance(BBLE)
@@ -46,6 +47,9 @@ Partial Public Class ShortSaleCase
 
             Return _propInfo
         End Get
+        Set(value As PropertyBaseInfo)
+            _propInfo = value
+        End Set
     End Property
 
     Private _judgementInfo As TitleJudgementSearch
@@ -65,7 +69,7 @@ Partial Public Class ShortSaleCase
     End Property
 
     Private _mortgages As List(Of PropertyMortgage)
-    Public ReadOnly Property Mortgages As List(Of PropertyMortgage)
+    Public Property Mortgages As List(Of PropertyMortgage)
         Get
             If _mortgages Is Nothing Then
                 Using context As New ShortSaleEntities
@@ -75,7 +79,13 @@ Partial Public Class ShortSaleCase
 
             Return _mortgages
         End Get
+        Set(value As List(Of PropertyMortgage))
+            _mortgages = value
+        End Set
     End Property
+
+    Public Property PropertyOwner As PropertyOwner
+    Public Property LastActivity As ShortSaleActivityLog
 
     Private _sellerTitle As PropertyTitle
     Public ReadOnly Property SellerTitle As PropertyTitle
@@ -140,7 +150,7 @@ Partial Public Class ShortSaleCase
     End Property
 
     Private _valueInfos As List(Of PropertyValueInfo)
-    Public ReadOnly Property ValueInfoes As List(Of PropertyValueInfo)
+    Public Property ValueInfoes As List(Of PropertyValueInfo)
         Get
             If _valueInfos Is Nothing Then
                 _valueInfos = PropertyValueInfo.GetValueInfos(BBLE)
@@ -148,6 +158,9 @@ Partial Public Class ShortSaleCase
 
             Return _valueInfos
         End Get
+        Set(value As List(Of PropertyValueInfo))
+            _valueInfos = value
+        End Set
     End Property
 
     Public ReadOnly Property AssignedProcessor As PartyContact
@@ -204,15 +217,22 @@ Partial Public Class ShortSaleCase
 
         End Get
     End Property
+
     Public ReadOnly Property OwnerLastName As String
         Get
-            If (Owner IsNot Nothing AndAlso Owner.Length > 0) Then
-                Dim mathces = Regex.Matches(Owner, "\s(\w+)$")
-                If (mathces.Count > 0) Then
-                    Return mathces(0).Value
-                End If
+            If PropertyInfo IsNot Nothing AndAlso PropertyInfo.Owners IsNot Nothing AndAlso PropertyInfo.Owners.Count > 0 Then
+                Return PropertyInfo.Owners(0).LastName
             End If
-            Return Nothing
+            Return ""
+        End Get
+    End Property
+
+    Public ReadOnly Property OwnerFirstName As String
+        Get
+            If PropertyInfo IsNot Nothing AndAlso PropertyInfo.Owners IsNot Nothing AndAlso PropertyInfo.Owners.Count > 0 Then
+                Return PropertyInfo.Owners(0).FirstName
+            End If
+            Return ""
         End Get
     End Property
 
@@ -225,6 +245,15 @@ Partial Public Class ShortSaleCase
         End If
         Return Nothing
     End Function
+
+    Function GetMortageType(ByVal index As Integer) As String
+        If (Mortgages IsNot Nothing AndAlso Mortgages.Count > index) Then
+
+            Return Mortgages(index).Type
+        End If
+        Return Nothing
+    End Function
+
     Public ReadOnly Property FristMortageLender()
         Get
             Return GetMortageLonder(0)
@@ -297,6 +326,34 @@ Partial Public Class ShortSaleCase
     Public ReadOnly Property LastComments As String
         Get
             Return ""
+        End Get
+    End Property
+
+    Public ReadOnly Property ReportDetails As String
+        Get
+            Dim sb As New StringBuilder
+            sb.Append("Investor: " & GetMortageType(0) & Environment.NewLine)
+
+            If ValueInfoes IsNot Nothing AndAlso ValueInfoes.Count > 0 Then
+                Dim val = ValueInfoes(0)
+                sb.Append("Date of Valuation: " & String.Format("{0:d}", val.DateOfValue) & Environment.NewLine)
+                sb.Append("Expiration Date of Value: " & String.Format("{0:d}", val.ExpiredOn) & Environment.NewLine)
+                sb.Append("Value: " & String.Format("{0:C}", val.BankValue) & Environment.NewLine)
+            End If
+
+            sb.Append("Date Offer Submitted: " & String.Format("{0:d}", OfferDate) & Environment.NewLine)
+            sb.Append("Offer: " & String.Format("{0:C}", OfferSubmited) & Environment.NewLine)
+            sb.Append("Lender Counter: " & LenderCounter & Environment.NewLine)
+            sb.Append("Counter Submitted: " & String.Format("{0:d}", CounterSubmited) & Environment.NewLine)
+            sb.Append("Current Status: " & FristMortageProgress & Environment.NewLine)
+            sb.Append("Documents Missing: " & If(DocumentMissing.HasValue, If(DocumentMissing, "Yes", "No"), "N/A") & Environment.NewLine)
+            sb.Append("Start Intake: " & If(StartIntake, "Yes", "No") & Environment.NewLine)
+
+            If LastActivity IsNot Nothing Then
+                sb.Append("Update/Notes: " & LastActivity.ActivityTitle)
+            End If
+
+            Return sb.ToString
         End Get
     End Property
 
@@ -504,6 +561,41 @@ Partial Public Class ShortSaleCase
     Private Shared Function ShortsaleCaseWithEvictionOwner(ss As ShortSaleCase, owner As String) As ShortSaleCase
         ss.EvictionOwner = owner
         Return ss
+    End Function
+
+#End Region
+
+#Region "Report"
+
+    Public Shared Function CaseReport() As List(Of ShortSaleCase)
+        Using ctx As New ShortSaleEntities
+            Dim data = From ss In ctx.ShortSaleCases
+                       Join pi In ctx.PropertyBaseInfoes On pi.BBLE Equals ss.BBLE
+                       Let owner = ctx.PropertyOwners.FirstOrDefault(Function(po) po.BBLE = ss.BBLE)
+                       Let morts = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = ss.CaseId)
+                       Let values = ctx.PropertyValueInfoes.Where(Function(pv) pv.BBLE = ss.BBLE)
+                       Let LastActivity = ctx.ShortSaleActivityLogs.Where(Function(sa) sa.BBLE = ss.BBLE).OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
+                       Select New With {.CaseId = ss.CaseId,
+                                        .ShortSale = ss,
+                                        .PropertyInfo = pi,
+                                        .Owner = owner,
+                                        .Mortgages = morts,
+                                        .ValueInfo = values,
+                                        .LastActivity = LastActivity}
+
+            Dim result = New List(Of ShortSaleCase)
+            For Each item In data.ToList
+                item.ShortSale.PropertyInfo = item.PropertyInfo
+                item.ShortSale.Mortgages = item.Mortgages.ToList
+                item.ShortSale.PropertyOwner = item.Owner
+                item.ShortSale.ValueInfoes = item.ValueInfo.ToList
+                item.ShortSale.LastActivity = item.LastActivity
+
+                result.Add(item.ShortSale)
+            Next
+
+            Return result
+        End Using
     End Function
 
 #End Region

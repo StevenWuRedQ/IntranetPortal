@@ -839,10 +839,13 @@ Public Class ActivityLogs
                         RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, hfBBLE.Value)
                     End If
 
-                    txtComments = String.Format("Type of Update: {0}<br />{1}", typeOfUpdate, txtComments)
-                    LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
+                    Dim comments = String.Format("Type of Update: {0}<br />{1}", typeOfUpdate, txtComments)
+                    LeadsActivityLog.AddActivityLog(aspxdate, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
+
+                    ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, statusOfUpdate, txtComments)
                 Else
                     LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
+                    ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, "Comments", "Comments", txtComments)
                 End If
             Case ActivityLogMode.Legal
 

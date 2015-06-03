@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="QueryBuilder.aspx.vb" Inherits="IntranetPortal.QueryBuilder" %>
 
-<%@ Register Assembly="ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Control, Version=2.5.16.0, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde" Namespace="ActiveDatabaseSoftware.ActiveQueryBuilder.Web.Control" TagPrefix="AQB" %>
+<%@ Register Assembly="ActiveDatabaseSoftware.ActiveQueryBuilder2.Web.Control, Version=2.8.7.0, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde" Namespace="ActiveDatabaseSoftware.ActiveQueryBuilder.Web.Control" TagPrefix="AQB" %>
 
 <!DOCTYPE html>
 

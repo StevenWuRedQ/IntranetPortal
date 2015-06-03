@@ -20,11 +20,13 @@ Public Class Troubleshooting
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        'IntranetPortal.RulesEngine
-        'Return
+     
+
+
 
         Using client As New PortalService.CommonServiceClient
-            client.SendShortSaleActivityEmail()
+            'client.SendShortSaleActivityEmail()
+            client.SendTaskSummaryEmail(txtName.Text)
         End Using
     End Sub
 

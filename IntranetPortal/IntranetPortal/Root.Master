@@ -51,29 +51,6 @@
                 }
             }
 
-            function ShowPopupLeadsMenu(s, bble) {
-                tmpBBLE = bble;
-                popupMenuLeads.ShowAtElement(s);
-            }
-
-            function OnPopupMenuLeadsClick(s, e) {
-                if (e.item.name == "Leads") {
-                    ShowSearchLeadsInfo(tmpBBLE);
-                }
-
-                if (e.item.name == "ShortSale") {
-                    OpenLeadsWindow("/ShortSale/ShortSale.aspx?bble=" + tmpBBLE, "ShortSale Info");
-                }
-
-                if (e.item.name == "Eviction") {
-                    OpenLeadsWindow("/ShortSale/ShortSale.aspx?isEviction=true&bble=" + tmpBBLE, "Eviction Info");
-                }
-
-                if (e.item.name == "Legal") {
-                    OpenLeadsWindow("/LegalUI/LegalUI.aspx?bble=" + tmpBBLE, "Legal Info");
-                }
-            }
-
             function endsWith(str, suffix) {
                 return str.indexOf(suffix, str.length - suffix.length) !== -1;
             }
@@ -324,7 +301,7 @@
                                                                 </tr>
                                                             </table>
                                                         </asp:Panel>
-                                                        <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="popupMenuLeads"
+                                                      <%--  <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="popupMenuLeads"
                                                             AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
                                                             <ItemStyle Paddings-PaddingLeft="20px" />
                                                             <Items>
@@ -334,7 +311,7 @@
                                                                 <dx:MenuItem Text="Legal" Name="Legal"></dx:MenuItem>
                                                             </Items>
                                                             <ClientSideEvents ItemClick="OnPopupMenuLeadsClick" />
-                                                        </dx:ASPxPopupMenu>
+                                                        </dx:ASPxPopupMenu>--%>
                                                     </dx:PopupControlContentControl>
                                                 </ContentCollection>
                                                 <ClientSideEvents EndCallback="function(s,e){s.ShowAtElement(txtSearchKeyClient.GetMainElement()); $('.tooltip-examples').tooltip(); }" />

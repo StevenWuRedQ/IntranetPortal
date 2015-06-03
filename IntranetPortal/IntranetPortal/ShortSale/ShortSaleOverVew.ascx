@@ -234,7 +234,7 @@
                                             </li>
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">Listing Date</label>
-                                                 <input class="ss_form_input ss_date" data-field="ListingDate" >
+                                                <input class="ss_form_input ss_date" data-field="ListingDate">
                                             </li>
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">Listing Expiry Date</label>
@@ -247,6 +247,20 @@
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">List Price</label>
                                                 <input class="ss_form_input " data-field="ListPrice">
+                                            </li>
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">Document Missing</label>                                             
+                                                <input type="checkbox" id="pdf_check120" name="1" value="YES" class="ss_form_input" data-field="DocumentMissing">
+                                                <label for="pdf_check120" class="input_with_check">
+                                                    <span class="box_text">Yes </span>
+                                                </label>
+                                            </li>
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">Start Intake</label>
+                                                <input type="checkbox" id="pdf_check119" name="1" value="YES" class="ss_form_input" data-field="StartIntake">
+                                                <label for="pdf_check119" class="input_with_check">
+                                                    <span class="box_text">Yes </span>
+                                                </label>
                                             </li>
                                         </ul>
                                     </div>
@@ -302,8 +316,8 @@
                                         </table>--%>
                                         <asp:HiddenField ID="hfBBLE" runat="server" />
                                         <dx:ASPxGridView ID="gvPropertyValueInfo" runat="server" KeyFieldName="ValueId" Width="100%" Theme="Moderno" OnDataBinding="gvPropertyValueInfo_DataBinding"
-                                             OnRowInserting="gvPropertyValueInfo_RowInserting" OnRowUpdating="gvPropertyValueInfo_RowUpdating" OnRowDeleting="gvPropertyValueInfo_RowDeleting" >
-                                            <Columns>                                               
+                                            OnRowInserting="gvPropertyValueInfo_RowInserting" OnRowUpdating="gvPropertyValueInfo_RowUpdating" OnRowDeleting="gvPropertyValueInfo_RowDeleting">
+                                            <Columns>
                                                 <dx:GridViewDataComboBoxColumn FieldName="Method" Width="150px">
                                                     <PropertiesComboBox Native="true" Style-CssClass="form-control">
                                                         <Items>
@@ -311,15 +325,15 @@
                                                             <dx:ListEditItem Value="Interior Appraisal" Text="Interior Appraisal" />
                                                             <dx:ListEditItem Value="Exterior BPO" Text="Exterior BPO" />
                                                             <dx:ListEditItem Value="Interior BPO" Text="Interior BPO" />
-                                                           
+
                                                         </Items>
                                                     </PropertiesComboBox>
                                                 </dx:GridViewDataComboBoxColumn>
                                                 <dx:GridViewDataTextColumn FieldName="BankValue" PropertiesTextEdit-DisplayFormatString="C2">
-                                                    <PropertiesTextEdit Native="true" Style-CssClass="form-control">                                                        
+                                                    <PropertiesTextEdit Native="true" Style-CssClass="form-control">
                                                     </PropertiesTextEdit>
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataDateColumn FieldName="DateOfValue" Width="120px">                                                 
+                                                <dx:GridViewDataDateColumn FieldName="DateOfValue" Width="120px">
                                                 </dx:GridViewDataDateColumn>
                                                 <dx:GridViewDataDateColumn FieldName="ExpiredOn" Width="120px"></dx:GridViewDataDateColumn>
                                                 <dx:GridViewCommandColumn ShowEditButton="true" ShowDeleteButton="true" ShowNewButtonInHeader="true"></dx:GridViewCommandColumn>
@@ -339,6 +353,15 @@
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">Date </label>
                                                 <input class="ss_form_input ss_date" data-field="OfferDate">
+                                            </li>
+                                            <li class="ss_form_item"></li>
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">Lender Counter </label>
+                                                <input class="ss_form_input" data-field="LenderCounter">
+                                            </li>
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">Count Submitted </label>
+                                                <input class="ss_form_input ss_date" data-field="CounterSubmited">
                                             </li>
                                         </ul>
                                     </div>

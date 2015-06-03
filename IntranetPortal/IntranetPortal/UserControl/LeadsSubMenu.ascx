@@ -229,7 +229,7 @@
                         //aspxPopupLegalInfoClient.Show();
 
                         var bble = $('#<%= hfInProcessBBLE.ClientID%>').val();
-                        
+
                         ASPLegalPopupClient.SetContentUrl('/LegalUI/LegalUI.aspx?InPopUp=true&bble=' + bble);
 
                         //$("#LegalPopUp").modal();
@@ -255,8 +255,8 @@
         }" />
 </dx:ASPxPopupControl>
 
-<dx:ASPxPopupControl ClientInstanceName="ASPLegalPopupClient"  ID="ASPLegalPopup" Width="670" Height="550"
-    Modal="true" ShowFooter="true"  runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True" ContentUrl="about:blank">
+<dx:ASPxPopupControl ClientInstanceName="ASPLegalPopupClient" ID="ASPLegalPopup" Width="670" Height="550"
+    Modal="true" ShowFooter="true" runat="server" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True" ContentUrl="about:blank">
     <HeaderTemplate>
         <div class="clearfix">
             <div class="pop_up_header_margin">
@@ -283,7 +283,7 @@
             <span class="time_buttons" onclick="LegalConfirmClick();">Confirm</span>
         </div>
     </FooterContentTemplate>
-  </dx:ASPxPopupControl>  
+</dx:ASPxPopupControl>
 <%--<div class="modal fade" id="LegalPopUp">
    <iframe src="/LegalUI/LegalUI.aspx?InPopUp=true" class="noborder"></iframe>
 </div>--%>
@@ -473,6 +473,17 @@
     <ClientSideEvents EndCallback="OnEndCallbackPanelRequestUpdate" />
 </dx:ASPxPopupControl>
 
+<dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="popupMenuLeads"
+    AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
+    <ItemStyle Paddings-PaddingLeft="20px" />
+    <Items>
+        <dx:MenuItem Text="Leads" Name="Leads"></dx:MenuItem>
+        <dx:MenuItem Text="Short Sale" Name="ShortSale"></dx:MenuItem>
+        <dx:MenuItem Text="Eviction" Name="Eviction"></dx:MenuItem>
+        <dx:MenuItem Text="Legal" Name="Legal"></dx:MenuItem>
+    </Items>
+    <ClientSideEvents ItemClick="OnPopupMenuLeadsClick" />
+</dx:ASPxPopupMenu>
 
 <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
     <ClientSideEvents CallbackComplete="function(s,e) {OnSetStatusComplete(s,e)}" />

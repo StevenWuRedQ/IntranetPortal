@@ -6,23 +6,19 @@
     Public Property CaseName As String
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
-            Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
-            If wli IsNot Nothing Then
-                BBLE = wli.ProcessInstance.DataFields("BBLE").ToString
-                Applicant = wli.ProcessInstance.Originator
-                SubmitedDate = wli.ProcessInstance.StateDate
-                CaseName = wli.DisplayName
+        'If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+        '    Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
+        '    If wli IsNot Nothing Then
+        '        BBLE = wli.ProcessInstance.DataFields("BBLE").ToString
+        '        Applicant = wli.ProcessInstance.Originator
+        '        SubmitedDate = wli.ProcessInstance.StateDate
+        '        CaseName = wli.DisplayName
 
-                BindLegalUser()
+        '        BindLegalUser()
 
-                If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
-                    Dim cstext1 As String = "<script type=""text/javascript"">" & _
-                                    String.Format("setLegalData(""{0}"");", BBLE) & "</script>"
-                    Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
-                End If
-            End If
-        End If
+
+        '    End If
+        'End If
     End Sub
 
     Private Sub BindLegalUser()

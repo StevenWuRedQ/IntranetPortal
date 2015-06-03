@@ -8,6 +8,18 @@
         End Using
     End Sub
 
+    Public Shared Sub AddLog(bble As String, source As String, activityType As String, activityTitle As String, description As String)
+        Dim log As New ShortSaleActivityLog
+        log.BBLE = bble
+        log.ActivityDate = DateTime.Now
+        log.Source = source
+        log.ActivityType = activityType
+        log.ActivityTitle = activityTitle
+        log.Description = description
+
+        AddLogs({log})
+    End Sub
+
     Public Shared Sub AddLogs(logs As ShortSaleActivityLog())
         Using ctx As New ShortSaleEntities
             ctx.ShortSaleActivityLogs.AddRange(logs)

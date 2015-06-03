@@ -510,9 +510,9 @@
                                                             <div style="cursor: pointer; width: 600px" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
                                                         </DataItemTemplate>
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn  FieldName="OwnerLastName" Caption="Name">
+                                                    <dx:GridViewDataTextColumn FieldName="OwnerLastName" Caption="Name">
                                                     </dx:GridViewDataTextColumn>
-                                                     <dx:GridViewDataTextColumn FieldName="StatuStr" Caption="Status">
+                                                    <dx:GridViewDataTextColumn FieldName="StatuStr" Caption="Status">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
                                                     </dx:GridViewDataTextColumn>
@@ -542,10 +542,8 @@
                                                             <div style="text-align: center; width: 100%">
                                                                 <i class="fa fa-info-circle tooltip-examples icon_btn" style="font-size: 18px" data-toggle="tooltip" data-placement="bottom" title='<%# IntranetPortal.LeadsActivityLog.GetLastComments(Eval("BBLE"))%>'></i>
                                                             </div>
-
                                                         </DataItemTemplate>
                                                     </dx:GridViewDataTextColumn>
-
                                                 </Columns>
                                                 <Settings ShowHeaderFilterButton="true" />
                                                 <SettingsPager>
@@ -554,10 +552,44 @@
                                                 <SettingsPopup>
                                                     <HeaderFilter Height="200" />
                                                 </SettingsPopup>
-
                                             </dx:ASPxGridView>
 
-                                            <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="AllLeadsGrid"></dx:ASPxGridViewExporter>
+                                            <dx:ASPxGridViewExporter ID="AllLeadGridViewExporter" runat="server" GridViewID="gridData"></dx:ASPxGridViewExporter>
+                                            <dx:ASPxGridView ID="gridData" runat="server" Visible="false"
+                                                KeyFieldName="CaseId" Width="100%">
+                                                <Columns>
+                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Full Property Address">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="PropertyOwner.FirstName" Caption="First Name">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="PropertyOwner.LastName" Caption="Last Name">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="File Progress">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn Caption="Description" FieldName="ReportDetails">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="FristMortageLender" Caption="1st Mortgage Company">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="SencondMortageLender" Caption="2nd Mortgage Company">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="LastActivity.Source" Caption="Last Activity Done By">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="LastActivity.ActivityDate" Caption="Last Activity">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="LastActivity.ActivityTitle" Caption="Last Activity Title">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name" Caption="Referral">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn Caption="Other1">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="CreateDate" Caption="File Created">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">
+                                                    </dx:GridViewDataTextColumn>
+                                                </Columns>
+                                            </dx:ASPxGridView>
                                         </div>
                                     </div>
                                 </td>
@@ -600,10 +632,10 @@
 
                             <script type="text/javascript">
                                 function Fields_ValueChanged(s, e) {
-                                    
+
 
                                     AllLeadsGridClient.PerformCallback();
-                                    
+
                                 }
                             </script>
                             <div>
@@ -611,11 +643,11 @@
                                 <dx:ASPxCheckBoxList ID="chkFields" runat="server" ValueType="System.String" Width="100%" ClientInstanceName="filed_CheckBoxList1">
                                     <Items>
 
-                                        <dx:ListEditItem Value="PropertyInfo.PropertyAddress" Text="Street address" Selected="True"/>
+                                        <dx:ListEditItem Value="PropertyInfo.PropertyAddress" Text="Street address" Selected="True" />
 
-                                        <dx:ListEditItem Value="OwnerLastName" Text="Name" Selected="True"/>
-                                        <dx:ListEditItem Value="StatuStr" Text="Status" Selected="True"/>
-                                                  
+                                        <dx:ListEditItem Value="OwnerLastName" Text="Name" Selected="True" />
+                                        <dx:ListEditItem Value="StatuStr" Text="Status" Selected="True" />
+
                                         <dx:ListEditItem Value="OccupiedBy" Text="Occupancy" />
 
                                         <dx:ListEditItem Value="FristMortageProgress" Text="1st Mort Prog" />
@@ -627,7 +659,7 @@
                                         <dx:ListEditItem Value="SencondMortageLender" Text="2nd Mort Ser" />
                                         <dx:ListEditItem Value="ProcessorContact.Name" Text="Processor" />
                                         <dx:ListEditItem Value="ListingAgentContact.Name" Text="Listing agent" />
-                                        <dx:ListEditItem Value="Manager" Text="Manager"/>
+                                        <dx:ListEditItem Value="Manager" Text="Manager" />
                                         <dx:ListEditItem Value="PropertyInfo.UpdateDate" Text="Last Activity" />
                                         <dx:ListEditItem Value="Owner" Text="Assgin To" />
                                         <dx:ListEditItem Value="BBLE" Text="Comments" />

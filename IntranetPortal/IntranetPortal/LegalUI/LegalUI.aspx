@@ -19,7 +19,7 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
     <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
     <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>
-   
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
@@ -28,7 +28,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
     <script src="/Scripts/stevenjs.js"></script>
-
+   
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
@@ -121,7 +121,7 @@
                                         <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
 
                                         <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
-                                        <i class="fa fa-codepen  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Research');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Research"></i>
+                                          <i class="fa fa-codepen  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback('type|Research');popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Assign to Research"></i>
                                         <% End If%>
 
                                         <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.LegalResearch Then%>
@@ -137,6 +137,8 @@
                                         <% End If%>
 
                                         <i class="fa fa-users sale_head_button sale_head_button_left tooltip-examples" title="" onclick="VendorsPopupClient.Show()" data-original-title="Contacts"></i>
+                                        <i class="fa fa-external-link-square sale_head_button sale_head_button_left tooltip-examples" data-toggle="tooltip" data-original-title="Go To" onclick='ShowPopupLeadsMenu(this,leadsInfoBBLE)'></i>
+
                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
                                     </li>
@@ -253,7 +255,7 @@
                                             <a href="/LegalUI/LegalUI.aspx?SecondaryAction=true"><i class="fa fa-arrow-right sale_head_button sale_head_button_left tooltip-examples" style="margin-right: 10px; color: #7396A9" title="Secondary" onclick=""></i></a>
                                         </div>--%>
 
-                                        <%--                                        <i class="fa fa-codepen  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback();popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Research"></i>
+<%--                                        <i class="fa fa-codepen  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback();popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Research"></i>
                                         <i class="fa fa-mail-forward  sale_head_button sale_head_button_left tooltip-examples" title="" onclick="popupSelectAttorneyCtr.PerformCallback();popupSelectAttorneyCtr.ShowAtElement(this);" data-original-title="Attorney"></i>
                                         <i class="fa fa-check sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="AttorneyComplete()" data-original-title="Close"></i>--%>
 
@@ -261,7 +263,7 @@
                                         <%-- <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>--%>
                                         <%--<i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')"></i>--%>
                                         <%--<i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>--%>
-                                        <%-- <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')"></i>--%>
+                                       <%-- <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')"></i>--%>
                                         <%--<i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="LogClick('Closed')"></i>--%>
                                         <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>
                                     </li>
@@ -281,7 +283,7 @@
         </dx:ASPxSplitter>
 
         <div runat="server" id="SencnedAction" visible="False" style="padding: 0 10px">
-
+           
             <%--<div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -299,7 +301,7 @@
             <div>
                 <script type="text/javascript">
                     var PropertyInfo = $.parseJSON('<%= propertyData%>');
-
+                    
                     function LeagalInfoSelectChange(s, e) {
                         var selected = cbLegalTypeClient.GetSelectedValues();
                         $('.legal_action_div').css("display", 'none');
@@ -419,12 +421,12 @@
 
         portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
-                                             
+           
             $scope.SecondaryTypeSource = ["Statute Of Limitations", "Estate", "Deed Reversal", "Partition", "Breach of Contract", "Quiet Title"];
 
             if (typeof LegalShowAll == 'undefined' || LegalShowAll == null) {
                 $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.SecondaryTypeSource;
-            }
+            } 
             $scope.TestRepeatData = [];
             $scope.addTest = function() {
                 $scope.TestRepeatData[$scope.TestRepeatData.length]=$scope.TestRepeatData.length;
@@ -651,11 +653,11 @@
                     });
             }
             $scope.AddSecondaryArray = function () {
-
+               
                 var selectType = $scope.LegalCase.SecondaryInfo.SelectedType;
                 if (selectType) {
                     var name = selectType.replace(/\s/g, '');
-
+                   
                     var arr = $scope.LegalCase.SecondaryInfo[name];
                     if (name == 'StatuteOfLimitations') {
                         alert('match');
@@ -675,14 +677,14 @@
                 if (!_.contains(selectTypes, $scope.LegalCase.SecondaryInfo.SelectedType)) {
                     selectTypes.push($scope.LegalCase.SecondaryInfo.SelectedType);
                 }
-
+                
             }
             $scope.CheckShow = function (filed) {
                 if (typeof LegalShowAll == 'undefined' || LegalShowAll == null) {
                     return true;
                 }
                 return $scope.LegalCase.SecondaryInfo.SelectedType == filed;
-
+                
             }
             //$.getJSON('/LegalUI/ContactService.svc/GetAllContacts', function (data) {
 

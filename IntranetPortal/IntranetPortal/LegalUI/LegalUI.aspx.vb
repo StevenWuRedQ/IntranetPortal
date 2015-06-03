@@ -23,49 +23,33 @@ Public Class LegalUI
         If (isInPoupUp) Then
             SencnedAction.Visible = True
             ASPxSplitter1.Visible = False
-
-            'Dim bble = Request.QueryString("BBLE").ToString
-            'propertyData = LegalCaseManage.GetPropertyInfoJSON(bble)
         End If
-
-        'Dim iSMangerPreview = Request.QueryString("MangerPreivew") IsNot Nothing
-        'If (iSMangerPreview) Then
-        '    'ASPxSplitter1.Visible = False
-        '    'MangePreview.Visible = True
-        '    Return
-        'End If
 
         SecondaryAction = Request.QueryString("Attorney") IsNot Nothing
         Agent = Request.QueryString("Agent") IsNot Nothing
 
-        'If Not String.IsNullOrEmpty(Request.QueryString("lc")) Then
-        '    SetView(Request.QueryString("view"))
-        'End If
-
+        If Not String.IsNullOrEmpty(Request.QueryString("bble")) Then
+            Dim bble = Request.QueryString("bble").ToString
+            BindData(bble)
+            Return
+        End If
+        
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             ASPxSplitter1.Panes("listPanel").Visible = False
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
             If wli IsNot Nothing Then
                 Dim bble = wli.ProcessInstance.DataFields("BBLE").ToString
-                ActivityLogs.BindData(bble)
+                BindData(bble)
+                'ActivityLogs.BindData(bble)
 
-                If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
-                    Dim cstext1 As String = "<script type=""text/javascript"">" & _
-                                    String.Format("var leadsInfoBBLE = ""{0}"";", bble) & "</script>"
-                    Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
-                End If
+                'If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
+                '    Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                '                    String.Format("var leadsInfoBBLE = ""{0}"";", bble) & "</script>"
+                '    Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
+                'End If
                 SetView(wli.ActivityName)
 
             End If
-
-            'Select Case wli.ActivityName
-            '    Case "LegalResearch"
-            '        btnCompleteResearch.Visible = True
-            '    Case "ManagerAssign"
-            '        lbEmployee.Visible = True
-            '        btnAssign.Visible = True
-            'End Select
-
             Return
         End If
 
@@ -73,6 +57,22 @@ Public Class LegalUI
             DisplayView = CInt(Request.QueryString("lc"))
             LegalCaseList.BindCaseList(CInt(Request.QueryString("lc")))
             LegalCaseList.AutoLoadCase = True
+        End If
+    End Sub
+
+    Private Sub BindData(bble As String)
+        ASPxSplitter1.Panes("listPanel").Visible = False
+        ActivityLogs.BindData(bble)
+        If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
+            Dim cstext1 As String = "<script type=""text/javascript"">" & _
+                            String.Format("var leadsInfoBBLE = ""{0}"";", bble) & "</script>"
+            Page.ClientScript.RegisterStartupScript(Me.GetType, "SetleadBBLE", cstext1)
+
+            If Not Page.ClientScript.IsStartupScriptRegistered("InitLegalData") Then
+                cstext1 = "<script type=""text/javascript"">" & _
+                                String.Format("setLegalData(""{0}"");", bble) & "</script>"
+                Page.ClientScript.RegisterStartupScript(Me.GetType, "InitLegalData", cstext1)
+            End If
         End If
     End Sub
 

@@ -167,24 +167,6 @@ Partial Public Class LeadsSubMenu
     Protected WithEvents ASPLegalPopup As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
 
     '''<summary>
-    '''aspxPopupLegalInfo control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents aspxPopupLegalInfo As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
-
-    '''<summary>
-    '''aspxPopupLegalInfoClientcontecn control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents aspxPopupLegalInfoClientcontecn As Global.DevExpress.Web.ASPxPopupControl.PopupControlContentControl
-
-    '''<summary>
     '''ASPxPopupControl5 control.
     '''</summary>
     '''<remarks>
@@ -327,6 +309,15 @@ Partial Public Class LeadsSubMenu
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxButton4 As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
+    '''ASPxPopupMenu2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ASPxPopupMenu2 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
 
     '''<summary>
     '''leadStatusCallback control.

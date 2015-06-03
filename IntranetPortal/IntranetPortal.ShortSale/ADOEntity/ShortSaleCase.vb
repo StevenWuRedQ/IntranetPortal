@@ -44,5 +44,9 @@ Partial Public Class ShortSaleCase
     Public Property ListingDate As Nullable(Of Date)
     Public Property SaleDate As Nullable(Of Date)
     Public Property NoSaleDate As Nullable(Of Boolean)
+    Public Property LenderCounter As Nullable(Of Decimal)
+    Public Property CounterSubmited As Nullable(Of Date)
+    Public Property StartIntake As Nullable(Of Boolean)
+    Public Property DocumentMissing As Nullable(Of Boolean)
 
 End Class

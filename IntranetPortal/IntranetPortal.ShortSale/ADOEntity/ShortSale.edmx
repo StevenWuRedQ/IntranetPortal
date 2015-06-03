@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="IntranetPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CleareneceNotes">
           <Key>
             <PropertyRef Name="NoteId" />
@@ -308,6 +308,10 @@
           <Property Name="ListPrice" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OfferSubmited" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OfferDate" Type="datetime" />
+          <Property Name="LenderCounter" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CounterSubmited" Type="datetime" />
+          <Property Name="StartIntake" Type="bit" />
+          <Property Name="DocumentMissing" Type="bit" />
           <Property Name="SaleDate" Type="datetime" />
           <Property Name="NoSaleDate" Type="bit" />
           <Property Name="UpdateDate" Type="datetime" />
@@ -573,6 +577,10 @@
           <Property Name="ListingDate" Type="DateTime" Precision="3" />
           <Property Name="SaleDate" Type="DateTime" Precision="3" />
           <Property Name="NoSaleDate" Type="Boolean" />
+          <Property Name="LenderCounter" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CounterSubmited" Type="DateTime" Precision="3" />
+          <Property Name="StartIntake" Type="Boolean" />
+          <Property Name="DocumentMissing" Type="Boolean" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>
@@ -905,6 +913,10 @@
           <EntitySetMapping Name="ShortSaleCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCase">
               <MappingFragment StoreEntitySet="ShortSaleCases">
+                <ScalarProperty Name="DocumentMissing" ColumnName="DocumentMissing" />
+                <ScalarProperty Name="StartIntake" ColumnName="StartIntake" />
+                <ScalarProperty Name="CounterSubmited" ColumnName="CounterSubmited" />
+                <ScalarProperty Name="LenderCounter" ColumnName="LenderCounter" />
                 <ScalarProperty Name="NoSaleDate" ColumnName="NoSaleDate" />
                 <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
                 <ScalarProperty Name="ListingDate" ColumnName="ListingDate" />

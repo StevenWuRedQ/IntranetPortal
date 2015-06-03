@@ -185,6 +185,15 @@ Partial Public Class UCTitleSummary
     Protected WithEvents AllLeadGridViewExporter As Global.DevExpress.Web.ASPxGridView.Export.ASPxGridViewExporter
 
     '''<summary>
+    '''gridData control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridData As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
     '''ShortSaleSubMenu control.
     '''</summary>
     '''<remarks>

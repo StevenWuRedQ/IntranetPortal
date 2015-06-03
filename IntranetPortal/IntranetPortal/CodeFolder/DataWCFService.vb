@@ -990,7 +990,7 @@ Public Class DataWCFService
                 'Update HomeOwnerInfo
                 'check if current request is sent by portal user
                 If apiOrder.TLO = apiOrder.ItemStatus.Calling Then
-                    If HttpContext.Current IsNot Nothing Then
+                    If HttpContext.Current IsNot Nothing AndAlso HttpContext.Current.User IsNot Nothing AndAlso HttpContext.Current.User.Identity IsNot Nothing AndAlso Not String.IsNullOrEmpty(HttpContext.Current.User.Identity.Name) Then
 
                         'client.Acris_Get_LatestSale(apiOrder.ApiOrderID, bble)
                         'Dim ldinfo = LeadsInfo.GetInstance(apiOrder.BBLE)

@@ -140,15 +140,6 @@ Partial Public Class Root
     Protected WithEvents ASPxButton1 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
-    '''popupMenuLeads control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents popupMenuLeads As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
-
-    '''<summary>
     '''LeadsSubMenu control.
     '''</summary>
     '''<remarks>

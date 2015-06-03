@@ -349,3 +349,32 @@ function OnEndCallbackPanelRequestUpdate(s, e) {
         s.Show();
     }
 }
+
+function ShowPopupLeadsMenu(s, bble) {
+    tmpBBLE = bble;
+    popupMenuLeads.ShowAtElement(s);
+}
+
+function OnPopupMenuLeadsClick(s, e) {
+    if (e.item.name == "Leads") {
+        ShowSearchLeadsInfo(tmpBBLE);
+    }
+
+    if (e.item.name == "ShortSale") {
+        OpenLeadsWindow("/ShortSale/ShortSale.aspx?bble=" + tmpBBLE, "ShortSale Info");
+    }
+
+    if (e.item.name == "Eviction") {
+        OpenLeadsWindow("/ShortSale/ShortSale.aspx?isEviction=true&bble=" + tmpBBLE, "Eviction Info");
+    }
+
+    if (e.item.name == "Legal") {
+        OpenLeadsWindow("/LegalUI/LegalUI.aspx?bble=" + tmpBBLE, "Legal Info");
+    }
+}
+
+function OpenLeadsWindow(url, title) {
+    var left = (screen.width / 2) - (1350 / 2);
+    var top = (screen.height / 2) - (930 / 2);
+    window.open(url, title, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+}
