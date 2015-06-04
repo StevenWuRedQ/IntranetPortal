@@ -1,4 +1,7 @@
-﻿Public Class HomeOwnerInfo
+﻿Imports DevExpress.Web.ASPxCallback
+Imports IntranetPortal.Core
+
+Public Class HomeOwnerInfo
     Inherits System.Web.UI.UserControl
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -169,6 +172,14 @@
         End If
         Return mynewNumber
     End Function
+
+   
+
+    Protected Sub ReportNoHomeCallBack_OnCallback(source As Object, e As CallbackEventArgs)
+        Dim BBLE = e.Parameter
+        EmailService.SendMail("chris@gvs4u.com", "stevenwu@gvs4u.com", "Leads " & BBLE & "Can not get homeower info", "Hi Chris,  Leads " & BBLE & "has no homeower info after refersh please check !" & " Submmit by " + Page.User.Identity.Name, Nothing)
+        Throw New Exception("Submit succeed !")
+    End Sub
 End Class
 
 Namespace DataAPI

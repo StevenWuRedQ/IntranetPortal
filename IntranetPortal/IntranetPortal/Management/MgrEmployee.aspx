@@ -79,6 +79,7 @@
                                                 <dx:TreeListTextColumn FieldName="Description" ShowInCustomizationForm="True" VisibleIndex="9">
                                                 </dx:TreeListTextColumn>
                                                 <dx:TreeListImageColumn FieldName="Picture" VisibleIndex="10" Visible="false" EditFormSettings-Visible="True">
+                                                <EditFormSettings Visible="True"></EditFormSettings>
                                                     <EditCellTemplate>
                                                         <dx:ASPxImage ID="imgEmpPhoto" runat="server" ImageUrl='<%# "/DownloadFile.aspx?id=" & Eval("Picture")%>' Width="50px" Height="50px" Cursor="pointer">
                                                             <EmptyImage Url="/images/User-Empty-icon.png" ></EmptyImage>

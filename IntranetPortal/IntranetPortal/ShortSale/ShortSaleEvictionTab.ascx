@@ -115,7 +115,7 @@
                 </li>--%>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Date to Vacate</label>
-                    <input class="ss_form_input " data-item="DateToVacate" data-item-type="1">
+                    <input class="ss_form_input ss_date" data-item="DateToVacate" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
 

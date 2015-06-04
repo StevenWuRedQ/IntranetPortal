@@ -183,4 +183,13 @@ Partial Public Class Root
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ASPxPopupControl1 As Global.DevExpress.Web.ASPxPopupControl.ASPxPopupControl
+
+    '''<summary>
+    '''SendMail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents SendMail As Global.IntranetPortal.SendMailControl
 End Class

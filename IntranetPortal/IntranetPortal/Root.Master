@@ -2,6 +2,8 @@
 
 <%@ Import Namespace="System.ComponentModel" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
+<%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
+
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -203,10 +205,12 @@
                                                                         <asp:LoginName ID="HeadLoginName" runat="server" />
                                                                     </span>
                                                                     <i class="fa fa-wechat icon_btn color_black tooltip-examples" onclick="ShowChatWindow()" id="imgChat" style="color: black; display: none;" title="Let's Chat"></i>,
+                                                                    <i class="fa fa-wrench icon_btn color_black tooltip-examples" onclick="popupSendEmailClient.Show()" style="margin-left:10px;color: black;" title="Support"></i>
                                                                     <%-- <img src="/images/arrow_down.png" />--%>
                                                                     <%--<asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />--%>
                                                                     <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>'>                                                                
                                                                     </asp:LinkButton>
+                                                                    
                                                                     <div style="display: none">
                                                                         [<asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />
                                                                         |<a href="/Account/ChangePassword.aspx" visible="false">Setting</a>]
@@ -472,6 +476,7 @@
             </ContentCollection>
             <ClientSideEvents Closing="function(){hook();}" />
         </dx:ASPxPopupControl>
+        <uc1:SendMail runat="server" ID="SendMail" />
     </form>
     <%--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>--%>
     <script>window.jQuery || document.write('<script src="/Scripts/jquery-2.1.3.min.js"><\/script>')</script>

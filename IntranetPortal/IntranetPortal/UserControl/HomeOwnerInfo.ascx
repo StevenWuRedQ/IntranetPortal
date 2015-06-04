@@ -23,10 +23,14 @@
 <% If (IsNeedAddHomeOwner()) Then%>
 <i class="fa  fa-plus-circle icon_btn color_blue tooltip-examples" title="Add home owner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}", "Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="font-size: 32px"></i>
 <% End If%>
-
+<dx:ASPxCallback ID="ReportNoHomeCallBack" runat="server" OnCallback="ReportNoHomeCallBack_OnCallback" ClientInstanceName="ReportNoHomeCallBackClinet"></dx:ASPxCallback>
 <div style='vertical-align: top; margin: 0; font-size: 18px; <%= if(IsNeedAddHomeOwner(),"visibility:hidden","") %>'>
     <div style="font-size: 30px; color: #2e2f31">
         <i class="fa fa-edit tooltip-examples" title="Edit Homeowner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}","Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
+     <%--   <% If TLOLocateReport Is Nothing  Then%>--%>
+       <i class='fa fa-wrench icon_btn tooltip-examples' title='Report no info after refresh homeowner info' onclick="ReportNoHomeCallBackClinet.PerformCallback(leadsInfoBBLE)">&nbsp;</i>
+        
+        <%--<% end if %>--%>
         <span class="homeowner_name">
             <%= OwnerName %>
         </span>
