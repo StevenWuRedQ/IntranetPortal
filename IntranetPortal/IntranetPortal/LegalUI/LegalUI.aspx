@@ -126,7 +126,7 @@
                                     margin-top: -35px;
                                 }
                             </style>
-                            <div>{{contacts}}</div>
+                           <%-- <div>{{contacts}}</div>
                             <md-content class="md-padding autocomplete" layout="column">
                                 <md-contact-chips ng-model="contacts" md-contacts="querySearch($query)" md-contact-name="Name" md-contact-image="image" md-contact-email="Email" md-require-match="" filter-selected="filterSelected" placeholder="Contacts">
                                 </md-contact-chips>
@@ -154,7 +154,7 @@
                               <md-button type="button" ng-disabled="true" class="md-raised md-primary">Disabled</md-button>
                               <md-button type="button" class="md-raised md-warn">Warn</md-button>
                               <div class="label">Raised</div>
-                            </section>
+                            </section>--%>
                             <div id="vendor_btn" style="display: none">
                                 <i class="fa fa-users icon_btn" title="Vendors" onclick="VendorsPopupClient.Show()"></i>
                             </div>
