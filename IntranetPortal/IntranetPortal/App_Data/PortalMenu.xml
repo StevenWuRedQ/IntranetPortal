@@ -456,6 +456,11 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="QueryBuilder" Text="Query Builder" NavigationUrl="/Management/QueryBuilder.aspx" ShowAmount="false">
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <PortalNavItem Name="LeadsDataManagement" Text="Data Service" NavigationUrl="/Management/LeadsDataManage.aspx" ShowAmount="false">
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>

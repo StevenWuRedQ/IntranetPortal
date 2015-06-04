@@ -24,7 +24,8 @@
                                             <AQB:Canvas ID="Canvas1" runat="server" />
                                             <AQB:Grid ID="Grid1" runat="server" />
                                             <AQB:StatusBar ID="StatusBar1" runat="server" /> 
-                                            <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Query" OnClick="ASPxButton1_Click">
+                                            <dx:ASPxButton ID="ASPxButton1" runat="server" Text="Query" AutoPostBack="false">
+                                                <ClientSideEvents Click="function(s,e){gridResult.Refresh();}" />
                             </dx:ASPxButton>
                                              <dx:ASPxButton ID="btnExport" runat="server" Text="Export to Excel" OnClick="btnExport_Click">
                             </dx:ASPxButton>
@@ -41,7 +42,7 @@
                 <dx:SplitterPane>
                     <ContentCollection>
                         <dx:SplitterContentControl>
-                            <dx:ASPxGridView ID="gridResult2" runat="server" AutoGenerateColumns="true" OnDataBinding="gridResult2_DataBinding">
+                            <dx:ASPxGridView ID="gridResult2" ClientInstanceName="gridResult" runat="server" AutoGenerateColumns="true" OnDataBinding="gridResult2_DataBinding">
                                 <Columns>
                                     <dx:GridViewDataColumn></dx:GridViewDataColumn>
                                 </Columns>
