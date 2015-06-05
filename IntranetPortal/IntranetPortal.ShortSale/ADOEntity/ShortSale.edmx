@@ -312,6 +312,8 @@
           <Property Name="CounterSubmited" Type="datetime" />
           <Property Name="StartIntake" Type="bit" />
           <Property Name="DocumentMissing" Type="bit" />
+          <Property Name="MissingDocDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="CounterOffer" Type="nvarchar" MaxLength="500" />
           <Property Name="SaleDate" Type="datetime" />
           <Property Name="NoSaleDate" Type="bit" />
           <Property Name="UpdateDate" Type="datetime" />
@@ -581,6 +583,8 @@
           <Property Name="CounterSubmited" Type="DateTime" Precision="3" />
           <Property Name="StartIntake" Type="Boolean" />
           <Property Name="DocumentMissing" Type="Boolean" />
+          <Property Name="MissingDocDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CounterOffer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>
@@ -913,6 +917,8 @@
           <EntitySetMapping Name="ShortSaleCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCase">
               <MappingFragment StoreEntitySet="ShortSaleCases">
+                <ScalarProperty Name="CounterOffer" ColumnName="CounterOffer" />
+                <ScalarProperty Name="MissingDocDescription" ColumnName="MissingDocDescription" />
                 <ScalarProperty Name="DocumentMissing" ColumnName="DocumentMissing" />
                 <ScalarProperty Name="StartIntake" ColumnName="StartIntake" />
                 <ScalarProperty Name="CounterSubmited" ColumnName="CounterSubmited" />

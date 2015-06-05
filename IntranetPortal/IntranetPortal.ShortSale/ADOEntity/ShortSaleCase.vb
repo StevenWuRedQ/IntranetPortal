@@ -48,5 +48,7 @@ Partial Public Class ShortSaleCase
     Public Property CounterSubmited As Nullable(Of Date)
     Public Property StartIntake As Nullable(Of Boolean)
     Public Property DocumentMissing As Nullable(Of Boolean)
+    Public Property MissingDocDescription As String
+    Public Property CounterOffer As String
 
 End Class
