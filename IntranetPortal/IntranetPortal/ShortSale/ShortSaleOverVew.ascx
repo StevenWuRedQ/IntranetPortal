@@ -216,6 +216,13 @@
                                             <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
                                         </div>
                                     </div>
+                                    <script>
+                                        function DocumentChanged(e)
+                                        {
+                                            var checked = e.checked // $(e).porp("checked")
+                                            $("#missed_doc_li").css("display", checked ? '' : "none");
+                                        }
+                                    </script>
                                     <div class="ss_form">
                                         <h4 class="ss_form_title">Listing Info</h4>
                                         <ul class="ss_form_box clearfix">
@@ -248,20 +255,41 @@
                                                 <label class="ss_form_input_title">List Price</label>
                                                 <input class="ss_form_input " data-field="ListPrice">
                                             </li>
+                                            
                                             <li class="ss_form_item">
-                                                <label class="ss_form_input_title">Document Missing</label>                                             
-                                                <input type="checkbox" id="pdf_check120" name="1" value="YES" class="ss_form_input" data-field="DocumentMissing">
+                                                <label class="ss_form_input_title">Document Missing</label>
+                                                <input type="checkbox" onvolumechange="DocumentChanged(this)" id="pdf_check120" name="1" value="YES" class="ss_form_input" data-field="DocumentMissing">
                                                 <label for="pdf_check120" class="input_with_check">
                                                     <span class="box_text">Yes </span>
                                                 </label>
                                             </li>
-                                            <li class="ss_form_item">
+                                            <li class="ss_form_item" id="missed_doc_li" style="display:none">
+                                                <label class="ss_form_input_title">Missed Document</label>
+                                                <input class="ss_form_input " data-field="MissingDocDescription">
+                                            </li>
+                                            <li class="ss_form_item" >
                                                 <label class="ss_form_input_title">Start Intake</label>
-                                                <input type="checkbox" id="pdf_check119" name="1" value="YES" class="ss_form_input" data-field="StartIntake">
+                                                <input type="radio" id="pdf_check119" name="1" value="YES" class="ss_form_input" data-field="StartIntake">
                                                 <label for="pdf_check119" class="input_with_check">
                                                     <span class="box_text">Yes </span>
                                                 </label>
+                                                <input type="radio" id="pdf_check1191" name="1" value="NO" class="ss_form_input">
+                                                <label for="pdf_check1191" class="input_with_check">
+                                                    <span class="box_text">No </span>
+                                                </label>
                                             </li>
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">Start Intake</label>
+                                                <input type="radio" id="a100000" name="1" value="YES" class="ss_form_input" data-field="StartIntake">
+                                                <label for="a100000" class="input_with_check">
+                                                    <span class="box_text">Yes </span>
+                                                </label>
+                                                <input type="radio" id="a1000004" name="1" value="NO" class="ss_form_input">
+                                                <label for="a1000004" class="input_with_check">
+                                                    <span class="box_text">No </span>
+                                                </label>
+                                            </li>
+
                                         </ul>
                                     </div>
                                     <div class="ss_form">
@@ -360,8 +388,12 @@
                                                 <input class="ss_form_input" data-field="LenderCounter">
                                             </li>
                                             <li class="ss_form_item">
-                                                <label class="ss_form_input_title">Count Submitted </label>
+                                                <label class="ss_form_input_title">Date Count Submitted </label>
                                                 <input class="ss_form_input ss_date" data-field="CounterSubmited">
+                                            </li>
+                                            <li class="ss_form_item">
+                                                <label class="ss_form_input_title">Counter Offer</label>
+                                                <input class="ss_form_input" data-field="CounterOffer">
                                             </li>
                                         </ul>
                                     </div>

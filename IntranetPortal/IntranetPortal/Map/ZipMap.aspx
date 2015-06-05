@@ -490,13 +490,13 @@
                         return;
                     }
                     var zip = e.target.feature.properties.postalCode;
-                    $.getJSON('/map/mapdataservice.svc/ZipCount/' + zip, function (data) {
+                    $.getJSON('/map/mapdataservice.svc/ZipCount/' + zip, function(data) {
 
                         //$('#divMsgTest').animate({ top: "25" }, 500);
                         $("#myModal").modal();
 
                         $('#spanZip').html("Zip: " + zip);
-                        
+
                         //$('#tdLeadsCount').html(findCountNum(zip));
                         var zipCountData = data;
                         var html = $('#tablehead')[0].outerHTML;
@@ -521,7 +521,7 @@
                         //    $(this).html(c);
 
                         //});
-                    })
+                    });
 
 
                     //map.fitBounds(e.target.getBounds());
