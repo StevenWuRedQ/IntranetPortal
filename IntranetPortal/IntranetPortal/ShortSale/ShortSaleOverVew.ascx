@@ -216,13 +216,7 @@
                                             <input type="button" class="rand-button short_sale_edit" value="Edit" onclick='switch_edit_model(this, short_sale_case_data)' />
                                         </div>
                                     </div>
-                                    <script>
-                                        function DocumentChanged(e)
-                                        {
-                                            var checked = e.checked // $(e).porp("checked")
-                                            $("#missed_doc_li").css("display", checked ? '' : "none");
-                                        }
-                                    </script>
+                                    
                                     <div class="ss_form">
                                         <h4 class="ss_form_title">Listing Info</h4>
                                         <ul class="ss_form_box clearfix">
@@ -258,7 +252,7 @@
                                             
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">Document Missing</label>
-                                                <input type="checkbox" onvolumechange="DocumentChanged(this)" id="pdf_check120" name="1" value="YES" class="ss_form_input" data-field="DocumentMissing">
+                                                <input type="checkbox"  id="pdf_check120" name="1" value="YES" class="ss_form_input" data-field="DocumentMissing">
                                                 <label for="pdf_check120" class="input_with_check">
                                                     <span class="box_text">Yes </span>
                                                 </label>
@@ -278,20 +272,21 @@
                                                     <span class="box_text">No </span>
                                                 </label>
                                             </li>
-                                            <li class="ss_form_item">
-                                                <label class="ss_form_input_title">Start Intake</label>
-                                                <input type="radio" id="a100000" name="1" value="YES" class="ss_form_input" data-field="StartIntake">
-                                                <label for="a100000" class="input_with_check">
-                                                    <span class="box_text">Yes </span>
-                                                </label>
-                                                <input type="radio" id="a1000004" name="1" value="NO" class="ss_form_input">
-                                                <label for="a1000004" class="input_with_check">
-                                                    <span class="box_text">No </span>
-                                                </label>
-                                            </li>
-
                                         </ul>
                                     </div>
+                                    <script>
+                                        $(function (ready) {
+                                            $("#pdf_check120").on("change",function () {
+                                                var checked = this.checked // $(e).porp("checked")
+                                                $("#missed_doc_li").css("display", checked ? '' : "none");
+                                            });
+                                        });
+                                       
+                                        function DocumentChanged(e) {
+                                            var checked = e.checked // $(e).porp("checked")
+                                            $("#missed_doc_li").css("display", checked ? '' : "none");
+                                        }
+                                    </script>
                                     <div class="ss_form">
                                         <h4 class="ss_form_title">Value Info </h4>
                                         <%-- <script>

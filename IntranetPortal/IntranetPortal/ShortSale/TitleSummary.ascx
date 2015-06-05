@@ -574,7 +574,7 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="SencondMortageLender" Caption="2nd Mortgage Company">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="LastActivity.Source" Caption="Last Activity Done By">
+                                                    <dx:GridViewDataTextColumn FieldName="PipeLine.Source" Caption="Update">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="LastActivity.ActivityDate" Caption="Last Activity">
                                                     </dx:GridViewDataTextColumn>
@@ -582,7 +582,7 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name" Caption="Referral">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn Caption="Other1">
+                                                    <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Office" Caption="Office">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="CreateDate" Caption="File Created">
                                                     </dx:GridViewDataTextColumn>

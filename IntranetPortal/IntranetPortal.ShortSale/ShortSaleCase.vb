@@ -86,6 +86,7 @@ Partial Public Class ShortSaleCase
 
     Public Property PropertyOwner As PropertyOwner
     Public Property LastActivity As ShortSaleActivityLog
+    Public Property PipeLine As ShortSaleActivityLog
 
     Private _sellerTitle As PropertyTitle
     Public ReadOnly Property SellerTitle As PropertyTitle
@@ -347,10 +348,15 @@ Partial Public Class ShortSaleCase
             sb.Append("Counter Submitted: " & String.Format("{0:d}", CounterSubmited) & Environment.NewLine)
             sb.Append("Current Status: " & FristMortageProgress & Environment.NewLine)
             sb.Append("Documents Missing: " & If(DocumentMissing.HasValue, If(DocumentMissing, "Yes", "No"), "N/A") & Environment.NewLine)
+
+            If DocumentMissing.HasValue AndAlso DocumentMissing Then
+                sb.Append(MissingDocDescription & Environment.NewLine)
+            End If
+
             sb.Append("Start Intake: " & If(StartIntake, "Yes", "No") & Environment.NewLine)
 
             If LastActivity IsNot Nothing Then
-                sb.Append("Update/Notes: " & LastActivity.ActivityTitle)
+                sb.Append("Update/Notes: " & PipeLine.Description)
             End If
 
             Return sb.ToString
@@ -575,13 +581,15 @@ Partial Public Class ShortSaleCase
                        Let morts = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = ss.CaseId)
                        Let values = ctx.PropertyValueInfoes.Where(Function(pv) pv.BBLE = ss.BBLE)
                        Let LastActivity = ctx.ShortSaleActivityLogs.Where(Function(sa) sa.BBLE = ss.BBLE).OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
+                       Let PipeLine = ctx.ShortSaleActivityLogs.Where(Function(sa) sa.BBLE = sa.BBLE And sa.ActivityType = "PipeLine").OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
                        Select New With {.CaseId = ss.CaseId,
                                         .ShortSale = ss,
                                         .PropertyInfo = pi,
                                         .Owner = owner,
                                         .Mortgages = morts,
                                         .ValueInfo = values,
-                                        .LastActivity = LastActivity}
+                                        .LastActivity = LastActivity,
+                                        .PipeLine = PipeLine}
 
             Dim result = New List(Of ShortSaleCase)
             For Each item In data.ToList
@@ -590,6 +598,7 @@ Partial Public Class ShortSaleCase
                 item.ShortSale.PropertyOwner = item.Owner
                 item.ShortSale.ValueInfoes = item.ValueInfo.ToList
                 item.ShortSale.LastActivity = item.LastActivity
+                item.ShortSale.PipeLine = item.PipeLine
 
                 result.Add(item.ShortSale)
             Next
