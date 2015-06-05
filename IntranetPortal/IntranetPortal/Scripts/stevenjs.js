@@ -226,6 +226,7 @@ function ShortSaleDataBand(data_stauts) {
     onRefreashDone();
     /**/
     LoadOccupantNotes();
+    init_visiable();
 }
 function format_input() {
     $('.ss_date').datepicker({
@@ -885,6 +886,13 @@ $(document).ready(function () {
     initToolTips();
     $(".ss_disable").prop('disabled', 'disabled');
     $(".ss_allow_eidt").prop("disabled", false);// allow alweays edit
+    $(document.body).on('change', '.ss_visable', function () {
+        var checked = this.checked; // $(e).porp("checked")
+        var filed = this.getAttribute("data-field")
+
+        $("[data-visiable='" + filed + "']").css("display", checked ? '' : "none");
+    });
+    
 });
 function phone_InitAndKeyUp(s, e) {
     //d_alert("$(s.GetMainElement()) " + $(s.GetMainElement()).attr("id"));
@@ -894,3 +902,11 @@ function phone_InitAndKeyUp(s, e) {
 function price_InitAndKeyUp(s, e) {
     //$(s.GetMainElement()).val(s.GetValue());
 }
+function init_visiable() {
+    $("[data-visiable]").each(function () {
+        var checkedFiled = this.getAttribute("data-visiable");
+        var checked = get_sub_property(ShortSaleCaseData, checkedFiled, null)
+        $(this).css("display", checked ? '' : "none");
+    });
+}
+
