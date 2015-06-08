@@ -357,7 +357,8 @@ function ShowPopupLeadsMenu(s, bble) {
 
 function OnPopupMenuLeadsClick(s, e) {
     if (e.item.name == "Leads") {
-        ShowSearchLeadsInfo(tmpBBLE);
+        OpenLeadsWindow("/ViewLeadsInfo.aspx?id=" + tmpBBLE, "Leads Info");
+        //ShowSearchLeadsInfo(tmpBBLE);
     }
 
     if (e.item.name == "ShortSale") {

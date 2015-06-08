@@ -20,6 +20,12 @@
     function InitAttachments() {
 
         var attachmentHoder = document.getElementById("divAttachment");
+
+        if (attachmentHoder == null)
+        {
+            return;
+        }
+
         attachmentHoder.innerHTML = "";
 
         if (ShowEmail) {

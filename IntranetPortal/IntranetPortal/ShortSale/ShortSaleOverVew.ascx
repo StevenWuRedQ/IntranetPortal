@@ -379,7 +379,7 @@
                                                 <input class="ss_form_input" data-field="LenderCounter">
                                             </li>
                                             <li class="ss_form_item">
-                                                <label class="ss_form_input_title">Date Count Submitted </label>
+                                                <label class="ss_form_input_title">Date Counter Submitted </label>
                                                 <input class="ss_form_input ss_date" data-field="CounterSubmited">
                                             </li>
                                             <li class="ss_form_item">

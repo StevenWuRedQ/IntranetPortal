@@ -14,7 +14,12 @@ Public Class LegalCaseList
 
         lblLeadCategory.Text = Core.Utility.GetEnumDescription(status)
 
-        gridCase.DataSource = LegalCase.GetCaseList(status)
+        If (Roles.IsUserInRole(Page.User.Identity.Name, "Legal-Manager")) Then
+            gridCase.DataSource = LegalCase.GetCaseList(status)
+        Else
+            gridCase.DataSource = LegalCase.GetCaseList(status, Page.User.Identity.Name)
+        End If
+
         gridCase.DataBind()
 
         If status = LegalCaseStatus.LegalResearch Then

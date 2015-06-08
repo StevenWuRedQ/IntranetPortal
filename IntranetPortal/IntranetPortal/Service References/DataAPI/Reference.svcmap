@@ -22,14 +22,14 @@
     <MetadataSource Address="http://georgepc:8002/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="6598c575-8e9a-47ac-a24b-3da7b715371a" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
-    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="60d11988-8b8b-4412-b873-69c85c034fed" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
-    <MetadataFile FileName="service21.xsd" MetadataType="Schema" ID="f22635ac-1b15-4fcc-a1ee-f98ce932752b" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
-    <MetadataFile FileName="TestComponent_VB1.xsd" MetadataType="Schema" ID="41205c24-819d-4625-a057-3d2e631c557f" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
-    <MetadataFile FileName="Arrays1.xsd" MetadataType="Schema" ID="28595811-c1da-487c-a94a-976753fe3a9b" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
-    <MetadataFile FileName="TestComponent_VB.TLOWebService1.xsd" MetadataType="Schema" ID="1cac9edb-78b2-4e9f-84a8-9cbb30fd4ad8" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
-    <MetadataFile FileName="System.ComponentModel1.xsd" MetadataType="Schema" ID="14d71494-d6d6-4c8f-ac09-0925a631ff43" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
-    <MetadataFile FileName="System1.xsd" MetadataType="Schema" ID="68c8f3fc-43c8-4bad-8179-490cfee1656a" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="ed15ec36-20b3-4294-bf77-2556b994f668" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="f1495e00-c2b3-4d22-92ab-d9f00c1f515d" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="service21.xsd" MetadataType="Schema" ID="dc0d05fd-2628-4590-801d-65da6a947b9d" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="TestComponent_VB1.xsd" MetadataType="Schema" ID="fd170ab2-0e21-42e8-8c1b-2bbc409340d0" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="Arrays1.xsd" MetadataType="Schema" ID="b7756aa5-9f1b-4051-97b2-fee98cd88391" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="TestComponent_VB.TLOWebService1.xsd" MetadataType="Schema" ID="b6293ba7-d0bb-4e48-ae8f-ab981debfae9" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="System.ComponentModel1.xsd" MetadataType="Schema" ID="fad0e189-60c5-41cb-a3c7-4fea9316b35c" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
+    <MetadataFile FileName="System1.xsd" MetadataType="Schema" ID="f38c0ebb-feb7-4d3e-80fe-7fe5e4f6a101" SourceId="1" SourceUrl="http://georgepc:8002/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

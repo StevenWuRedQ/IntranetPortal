@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/TestComponent_VB" />
-  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" />
+  <xs:import schemaLocation="" namespace="http://schemas.datacontract.org/2004/07/TestComponent_VB" />
+  <xs:import schemaLocation="" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="" namespace="http://schemas.datacontract.org/2004/07/TestComponent_VB.TLOWebService" />
   <xs:element name="DoWork">
     <xs:complexType>
       <xs:sequence />
@@ -621,6 +621,98 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Get_NYC_TaxLienResult" nillable="true" type="q37:ArrayOfSP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Create_Subscription">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PersonOrBBLE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SubscriptionActive" type="xs:boolean" />
+        <xs:element minOccurs="0" name="SubscriptionFor" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="TrigThresholdDate" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="NotificationType" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="NotificationEmail" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Create_SubscriptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Trig_Create_SubscriptionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Delete_Subscription">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SubscriptionFor" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Delete_SubscriptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Trig_Delete_SubscriptionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Activate_Deactivate_Subscription">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ActiveDeactive" type="xs:boolean" />
+        <xs:element minOccurs="0" name="SubscriptionFor" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Activate_Deactivate_SubscriptionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Trig_Activate_Deactivate_SubscriptionResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Get_Subscriptions_List">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Get_Subscriptions_ListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Trig_Get_Subscriptions_ListResult" nillable="true" type="q38:ArrayOfTriggerManager" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Is_TrigOn_By_BBLE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Trig_Is_TrigOn_By_BBLEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="Trig_Is_TrigOn_By_BBLEResult" nillable="true" type="q39:ArrayOfSP_Is_TrigOn_BY_BBLE_Result" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Zoning_By_BBLE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NYC_Zoning_By_BBLEResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/TestComponent_VB" minOccurs="0" name="NYC_Zoning_By_BBLEResult" nillable="true" type="q40:ArrayOfSP_NYC_Zoning_BY_BBLE_Result" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

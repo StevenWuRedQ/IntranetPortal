@@ -142,8 +142,8 @@
                                                 <dx:ASPxLabel ID="lblVersion" runat="server" ForeColor="#446576" Font-Size="12px"></dx:ASPxLabel>
                                             </p>
                                             <p>&copy; 2014 My Ideal Property</p>
-                                            <div id="errorMsg"  style="color: transparent"></div>
-<%--                                            <input type="button" class="NewTask" onclick="NewTask()" value="NewTask" />--%>
+                                            <div id="errorMsg" style="color: transparent"></div>
+                                            <%--                                            <input type="button" class="NewTask" onclick="NewTask()" value="NewTask" />--%>
                                         </footer>
                                     </div>
                                 </dx:SplitterContentControl>
@@ -205,12 +205,14 @@
                                                                         <asp:LoginName ID="HeadLoginName" runat="server" />
                                                                     </span>
                                                                     <i class="fa fa-wechat icon_btn color_black tooltip-examples" onclick="ShowChatWindow()" id="imgChat" style="color: black; display: none;" title="Let's Chat"></i>,
-                                                                    <i class="fa fa-wrench icon_btn color_black tooltip-examples" onclick="popupSendEmailClient.Show()" style="margin-left:10px;color: black;" title="Support"></i>
+                                                                    <a href="mailto:support@myidealprop.com">
+                                                                        <i class="fa fa-wrench icon_btn color_black tooltip-examples" style="margin-left: 10px; color: black;" title="Support email: support@myidealprop.com"></i>
+                                                                    </a>
                                                                     <%-- <img src="/images/arrow_down.png" />--%>
                                                                     <%--<asp:LoginStatus ID="LoginStatus1" runat="server" ForeColor="Black" LogoutAction="Redirect" LogoutText="Log out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />--%>
                                                                     <asp:LinkButton ID="btnLogOut" runat="server" OnClick="btnLogOut_Click" Text='<i class="fa fa-sign-out icon_btn color_black tooltip-examples" style="margin-left:10px;color: black;" title="Log Out"></i>'>                                                                
                                                                     </asp:LinkButton>
-                                                                    
+
                                                                     <div style="display: none">
                                                                         [<asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_LoggingOut" />
                                                                         |<a href="/Account/ChangePassword.aspx" visible="false">Setting</a>]
@@ -305,7 +307,7 @@
                                                                 </tr>
                                                             </table>
                                                         </asp:Panel>
-                                                      <%--  <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="popupMenuLeads"
+                                                        <%--  <dx:ASPxPopupMenu ID="popupMenuLeads" runat="server" ClientInstanceName="popupMenuLeads"
                                                             AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
                                                             <ItemStyle Paddings-PaddingLeft="20px" />
                                                             <Items>
@@ -398,7 +400,7 @@
 
                 100% {
                     background-color: green;
-                } 
+                }
             }
 
             /* The element to apply the animation to */

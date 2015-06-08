@@ -43,12 +43,23 @@
         initScrollbar_summary();
     });
 
+    var fileWindows = {};
     function ShowCaseInfo(CaseId) {
+        for (var win in fileWindows)
+        {
+            if(fileWindows.hasOwnProperty(win) && win == CaseId)
+            {
+                fileWindows[win].focus();
+                return;
+            }
+        }
+
         var url = '/ShortSale/ShortSale.aspx?CaseId=' + CaseId;
         var left = (screen.width / 2) - (1350 / 2);
         var top = (screen.height / 2) - (930 / 2);
         debugger;
-        window.open(url, 'View Case Info ' + CaseId, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+        var win = window.open(url, 'View Case Info ' + CaseId, 'Width=1350px,Height=930px, top=' + top + ', left=' + left);
+        fileWindows[CaseId] = win;
     }
 
     function GoToCase(CaseId) {

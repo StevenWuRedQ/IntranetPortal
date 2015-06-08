@@ -3116,87 +3116,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Acris_Out.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.ALL_NYC_Tax_Liens_CO_Info.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.DOB_PPO_out.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_Assessment.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_Assessment_Initial_Search_View.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_Prop_tax_Out.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_WaterSewer_Out.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.LisPen.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TLOLocateReportOutput.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TLO_SuperPhoneResults.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Acris_LatestOwner_View.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Acris_Last_Sales_Info.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_NameAndAddress_View.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TaxLien_Info.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Judgment.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Bankruptcy1.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.ECB.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Mortgages_Deeds.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.FederalTaxLien.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Patriot.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.ParkingViolation.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TranscriptAdjunction.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.UCC.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.EmergencyRepair.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.AB_Report_Out.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TLOPersonSearchOutput.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <None Include="Service References\DataAPI\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
@@ -3339,6 +3258,7 @@
     </Content>
     <Content Include="packages.config" />
     <Content Include="WCFDataServices\Web.config" />
+    <Content Include="Task\Reports\WorkflowReprot.Master" />
     <None Include="Service References\DataAPI\service1.wsdl" />
     <None Include="Service References\DataAPI\service2.xsd">
       <SubType>Designer</SubType>
@@ -3358,7 +3278,6 @@
     <None Include="Service References\DataAPI\TestComponent_VB1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Task\Reports\WorkflowReprot.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

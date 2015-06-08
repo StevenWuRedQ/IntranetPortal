@@ -1361,4 +1361,87 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" nillable="true" type="tns:SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" />
+  <xs:complexType name="ArrayOfTriggerManager">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TriggerManager" nillable="true" type="tns:TriggerManager" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTriggerManager" nillable="true" type="tns:ArrayOfTriggerManager" />
+  <xs:complexType name="TriggerManager">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActiveSubs" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DidAcrisHadNewTran" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ExecSQL" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastAcrisTranCheckDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastUpdated" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NotifyEmailAddr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NotifyType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PersonName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PersonOrBble" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ResponseObj" nillable="true" type="xs:base64Binary" />
+      <xs:element minOccurs="0" name="ResponseObjType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ResponseSequence" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="TrigThresholdDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="TriggerType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TriggerManager" nillable="true" type="tns:TriggerManager" />
+  <xs:complexType name="ArrayOfSP_Is_TrigOn_BY_BBLE_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SP_Is_TrigOn_BY_BBLE_Result" nillable="true" type="tns:SP_Is_TrigOn_BY_BBLE_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSP_Is_TrigOn_BY_BBLE_Result" nillable="true" type="tns:ArrayOfSP_Is_TrigOn_BY_BBLE_Result" />
+  <xs:complexType name="SP_Is_TrigOn_BY_BBLE_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Check_date" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LatestTrans" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StatID" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TrigOn" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SP_Is_TrigOn_BY_BBLE_Result" nillable="true" type="tns:SP_Is_TrigOn_BY_BBLE_Result" />
+  <xs:complexType name="ArrayOfSP_NYC_Zoning_BY_BBLE_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SP_NYC_Zoning_BY_BBLE_Result" nillable="true" type="tns:SP_NYC_Zoning_BY_BBLE_Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSP_NYC_Zoning_BY_BBLE_Result" nillable="true" type="tns:ArrayOfSP_NYC_Zoning_BY_BBLE_Result" />
+  <xs:complexType name="SP_NYC_Zoning_BY_BBLE_Result">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BBLE" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BLOCK" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BOROUGH" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cf_Far_district_1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cf_Far_district_2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Comm_Far_district_1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Comm_Far_district_2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Commercial_overlay_1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Commercial_overlay_2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Density_district_1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Density_district_2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description_district_1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description_district_2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LOT" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastUpdated" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Limited_height_district" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Man_Far_district_1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Man_Far_district_2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Res_Far_Attic_district_1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Res_Far_Attic_district_2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Res_Far_district_1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Res_Far_district_2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Special_district_1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Special_district_2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zoning_district_1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zoning_district_2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zoning_district_3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zoning_district_4" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zoning_map_code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zoning_map_number" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SP_NYC_Zoning_BY_BBLE_Result" nillable="true" type="tns:SP_NYC_Zoning_BY_BBLE_Result" />
 </xs:schema>
