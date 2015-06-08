@@ -287,15 +287,15 @@
                 <input class="ss_form_input" input-mask="0000" ng-model="LegalCase.ForeclosureInfo.HAMP">
             </li>
             <li class="ss_form_item">
-                <span class="ss_form_input_title">note  endorsed</span>
+                <span class="ss_form_input_title">note endorsed</span>
 
-                <input type="radio" id="checy_47" name="1" class="ss_form_input" value="ture" ng-model="LegalCase.ForeclosureInfo.NoteEndorsed">
+                <input type="radio" id="checy_47" name="12" class="ss_form_input" value="ture" ng-model="LegalCase.ForeclosureInfo.NoteEndorsed">
                 <label for="checy_47" class="input_with_check ">
                     <span class="box_text">Yes </span>
 
                 </label>
 
-                <input type="radio" id="checy_48" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteEndorsed">
+                <input type="radio" id="checy_48" name="12" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteEndorsed">
                 <label for="checy_48" class="input_with_check">
                     <span class="box_text">No</span>
                 </label>
@@ -305,13 +305,13 @@
             <li class="ss_form_item">
                 <span class="ss_form_input_title">endorsed By Lender</span>
 
-                <input type="radio" id="checy_49" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteEndorsed">
+                <input type="radio" id="checy_49" name="13" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteEndorsedLender">
                 <label for="checy_49" class="input_with_check ">
                     <span class="box_text">Yes </span>
 
                 </label>
 
-                <input type="radio" id="checy_50" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteEndorsed">
+                <input type="radio" id="checy_50" name="13" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteEndorsedLender">
                 <label for="checy_50" class="input_with_check">
                     <span class="box_text">No</span>
                 </label>
@@ -351,12 +351,12 @@
             <li class="ss_form_item">
                 <span class="ss_form_input_title">note  Alonge</span>
 
-                <input type="radio" id="checy_61" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteIsAlonge">
+                <input type="radio" id="checy_61" name="14" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteIsAlonge">
                 <label for="checy_61" class="input_with_check ">
                     <span class="box_text">Yes </span>
 
                 </label>
-                <input type="radio" id="checy_62" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteIsAlonge">
+                <input type="radio" id="checy_62" name="14" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteIsAlonge">
                 <label for="checy_62" class="input_with_check">
                     <span class="box_text">No</span>
                 </label>
@@ -365,13 +365,13 @@
             <li class="ss_form_item">
                 <span class="ss_form_input_title">Alonge By Lender</span>
 
-                <input type="radio" id="checy_63" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteAlongeByLender">
+                <input type="radio" id="checy_63" name="15" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteAlongeByLender">
                 <label for="checy_63" class="input_with_check">
                     <span class="box_text">Yes </span>
 
                 </label>
 
-                <input type="radio" id="checy_64" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteAlongeByLender">
+                <input type="radio" id="checy_64" name="15" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.NoteAlongeByLender">
                 <label for="checy_64" class="input_with_check">
                     <span class="box_text">No</span>
                 </label>
@@ -450,13 +450,13 @@
 
                 <span class="ss_form_input_title">Conferences Attended</span>
 
-                <input type="radio" id="checy_69" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtConferencesAttended">
+                <input type="radio" id="checy_69" name="16" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtConferencesAttended">
                 <label for="checy_69" class="input_with_check ">
                     <span class="box_text">Yes </span>
 
                 </label>
 
-                <input type="radio" id="checy_70" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtConferencesAttended">
+                <input type="radio" id="checy_70" name="16" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtConferencesAttended">
                 <label for="checy_70" class="input_with_check">
                     <span class="box_text">No</span>
                 </label>
@@ -476,13 +476,13 @@
             <li class="ss_form_item">
                 <span class="ss_form_input_title">Status Answered</span>
 
-                <input type="radio" id="checy_71" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtStatusAnswered">
+                <input type="radio" id="checy_71" name="17" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtStatusAnswered">
                 <label for="checy_71" class="input_with_check ">
                     <span class="box_text">Yes </span>
 
                 </label>
 
-                <input type="radio" id="checy_72" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtStatusAnswered">
+                <input type="radio" id="checy_72" name="17" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtStatusAnswered">
                 <label for="checy_72" class="input_with_check">
                     <span class="box_text">No</span>
                 </label>
@@ -492,13 +492,13 @@
             <li class="ss_form_item">
                 <span class="ss_form_input_title">Order of Reference</span>
 
-                <input type="radio" id="checy_73" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtOrderOfReference">
+                <input type="radio" id="checy_73" name="18" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtOrderOfReference">
                 <label for="checy_73" class="input_with_check ">
                     <span class="box_text">Yes </span>
 
                 </label>
 
-                <input type="radio" id="checy_74" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtOrderOfReference">
+                <input type="radio" id="checy_74" name="18" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtOrderOfReference">
                 <label for="checy_74" class="input_with_check">
                     <span class="box_text">No</span>
                 </label>
@@ -507,13 +507,13 @@
             <li class="ss_form_item">
                 <span class="ss_form_input_title">Judgment of Foreclosure and Sale</span>
 
-                <input type="radio" id="check_76" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtJudgmentOfForeclosureAndSale">
+                <input type="radio" id="check_76" name="19" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtJudgmentOfForeclosureAndSale">
                 <label for="check_76" class="input_with_check ">
                     <span class="box_text">Yes </span>
 
                 </label>
 
-                <input type="radio" id="check_77" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtJudgmentOfForeclosureAndSale">
+                <input type="radio" id="check_77" name="19" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtJudgmentOfForeclosureAndSale">
                 <label for="check_77" class="input_with_check">
                     <span class="box_text">No</span>
                 </label>
@@ -535,13 +535,13 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Judgment Stay</label>
-                <input type="radio" id="check_761" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtJudgmentStay">
+                <input type="radio" id="check_761" name="20" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtJudgmentStay">
                 <label for="check_761" class="input_with_check ">
                     <span class="box_text">Yes </span>
 
                 </label>
 
-                <input type="radio" id="check_72" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtJudgmentStay">
+                <input type="radio" id="check_72" name="20" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.CourtJudgmentStay">
                 <label for="check_72" class="input_with_check">
                     <span class="box_text">No</span>
                 </label>
@@ -549,13 +549,13 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">HAMP submitted</label>
-                <input type="radio" id="check_768" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.HAMPSubmitted">
+                <input type="radio" id="check_768" name="101" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.HAMPSubmitted">
                 <label for="check_768" class="input_with_check ">
                     <span class="box_text">Yes </span>
 
                 </label>
 
-                <input type="radio" id="check_762" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.HAMPSubmitted">
+                <input type="radio" id="check_762" name="101" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.HAMPSubmitted">
                 <label for="check_762" class="input_with_check">
                     <span class="box_text">No</span>
                 </label>
@@ -609,12 +609,12 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Document prepared</label>
-                        <input type="radio" id="check_891" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignorDocumentPrepared">
+                        <input type="radio" id="check_891" name="102" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignorDocumentPrepared">
                         <label for="check_891" class="input_with_check ">
                             <span class="box_text">Yes </span>
                         </label>
 
-                        <input type="radio" id="check_8912" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignorDocumentPrepared">
+                        <input type="radio" id="check_8912" name="102" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignorDocumentPrepared">
                         <label for="check_891" class="input_with_check">
                             <span class="box_text">No</span>
                         </label>
@@ -631,13 +631,13 @@
                     <li class="ss_form_item">
                         <span class="ss_form_input_title">Assigned before the S&C </span>
 
-                        <input type="radio" id="checy_819" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedbeforeSAndC">
+                        <input type="radio" id="checy_819" name="103" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedbeforeSAndC">
                         <label for="checy_819" class="input_with_check ">
                             <span class="box_text">Yes </span>
 
                         </label>
 
-                        <input type="radio" id="checy_889" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedbeforeSAndC">
+                        <input type="radio" id="checy_889" name="103" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedbeforeSAndC">
                         <label for="checy_889" class="input_with_check">
                             <span class="box_text">No</span>
                         </label>
@@ -650,13 +650,13 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Signed Known robo-signor</label>
-                        <input type="radio" id="checy_8191" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedKnownRS">
+                        <input type="radio" id="checy_8191" name="104" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedKnownRS">
                         <label for="checy_8191" class="input_with_check ">
                             <span class="box_text">Yes </span>
 
                         </label>
 
-                        <input type="radio" id="checy_8892" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedKnownRS">
+                        <input type="radio" id="checy_8892" name="104" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedKnownRS">
                         <label for="checy_8892" class="input_with_check">
                             <span class="box_text">No</span>
                         </label>
@@ -683,13 +683,13 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Third party address Matched</label>
-                        <input type="radio" id="checy_8194" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedKnownRS">
+                        <input type="radio" id="checy_8194" name="105" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedKnownRS">
                         <label for="checy_8194" class="input_with_check ">
                             <span class="box_text">Yes </span>
 
                         </label>
 
-                        <input type="radio" id="checy_8195" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedKnownRS">
+                        <input type="radio" id="checy_8195" name="105" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.AssignedSignedKnownRS">
                         <label for="checy_8195" class="input_with_check">
                             <span class="box_text">No</span>
                         </label>
@@ -740,7 +740,7 @@
                     <li class="ss_form_item">
                         <span class="ss_form_input_title">Trust documentation been located</span>
 
-                        <input type="checkbox" id="check_90" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TrustDocLocated">
+                        <input type="checkbox" id="check_90" name="106" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TrustDocLocated">
                         <label for="check_90" class="input_with_check ">
                             <span class="box_text">Yes </span>
 
@@ -754,12 +754,12 @@
                     <li class="ss_form_item">
                         <span class="ss_form_input_title">Default date after close</span>
 
-                        <input type="radio" id="check_93" name="1" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TrustDefaultDateAfterClose">
+                        <input type="radio" id="check_93" name="107" value="true" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TrustDefaultDateAfterClose">
                         <label for="check_93" class="input_with_check ">
                             <span class="box_text">Yes </span>
                         </label>
 
-                        <input type="radio" id="check_94" name="1" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TrustDefaultDateAfterClose">
+                        <input type="radio" id="check_94" name="107" value="false" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.TrustDefaultDateAfterClose">
                         <label for="check_94" class="input_with_check">
                             <span class="box_text">No</span>
                         </label>

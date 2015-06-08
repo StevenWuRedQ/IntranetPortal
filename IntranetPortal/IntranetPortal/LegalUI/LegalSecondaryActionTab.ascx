@@ -84,7 +84,7 @@
 
                     <li class="ss_form_item">
                         <span class="ss_form_input_title">service completed</span>
-                        <input type="checkbox" id="pdf_check_yes106" name="1" class="ss_form_input" value="true" ng-model="LegalCase.SecondaryInfo.Servicecompleted">
+                        <input type="checkbox" id="pdf_check_yes106" name="131" class="ss_form_input" value="true" ng-model="LegalCase.SecondaryInfo.Servicecompleted">
                         <label for="pdf_check_yes106" class="input_with_check">
                             <span class="box_text">Yes </span>
                         </label>
@@ -98,7 +98,7 @@
 
                     <li class="ss_form_item">
                         <span class="ss_form_input_title">Action answered</span>
-                        <input type="checkbox" id="pdf_check_yes107" name="1" class="ss_form_input" value="true" ng-model="LegalCase.SecondaryInfo.ActionAnswered">
+                        <input type="checkbox" id="pdf_check_yes107" name="134" class="ss_form_input" value="true" ng-model="LegalCase.SecondaryInfo.ActionAnswered">
                         <label for="pdf_check_yes107" class="input_with_check">
                             <span class="box_text">Yes </span>
                         </label>

@@ -215,7 +215,7 @@
             </li>
             <li class="ss_form_item">
                 <span class="ss_form_input_title">foreclosure active</span>
-                <input type="checkbox" id="pdf_check_yes121" name="1" class="ss_form_input" value="YES" ng-model="LegalCase.ForeclosureInfo.InForeclosure"/>
+                <input type="checkbox" id="pdf_check_yes121" name="121" class="ss_form_input" value="YES" ng-model="LegalCase.ForeclosureInfo.InForeclosure"/>
                 <label for="pdf_check_yes121" class="input_with_check">
                     <span class="box_text">Yes </span>
                 </label>
@@ -234,7 +234,7 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Prior Plaintiff(Bank) gone out of business</label>
-                <input type="checkbox" id="pdf_check_yes399" name="1" class="ss_form_input" value="true" ng-model="LegalCase.ForeclosureInfo.PriorPlaintiffOutOfBusiness">
+                <input type="checkbox" id="pdf_check_yes399" name="122" class="ss_form_input" value="true" ng-model="LegalCase.ForeclosureInfo.PriorPlaintiffOutOfBusiness">
                 <label for="pdf_check_yes399" class="input_with_check">
                     <span class="box_text">Yes </span>
                 </label>
