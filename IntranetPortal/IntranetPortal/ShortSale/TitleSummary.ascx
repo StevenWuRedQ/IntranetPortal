@@ -45,10 +45,8 @@
 
     var fileWindows = {};
     function ShowCaseInfo(CaseId) {
-        for (var win in fileWindows)
-        {
-            if(fileWindows.hasOwnProperty(win) && win == CaseId)
-            {
+        for (var win in fileWindows) {
+            if (fileWindows.hasOwnProperty(win) && win == CaseId) {
                 fileWindows[win].focus();
                 return;
             }
@@ -591,11 +589,13 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="LastActivity.ActivityTitle" Caption="Last Activity Title">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Name" Caption="Referral">
+                                                    <dx:GridViewDataTextColumn FieldName="ReferralContact.Name" Caption="Referral">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="ListingAgentContact.Office" Caption="Office">
+                                                    <dx:GridViewDataTextColumn FieldName="ReferralContact.Office" Caption="Office">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="CreateDate" Caption="File Created">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn FieldName="Duration" Caption="Duration">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="ProcessorContact.Name" Caption="Processor">
                                                     </dx:GridViewDataTextColumn>

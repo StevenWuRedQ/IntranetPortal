@@ -330,6 +330,19 @@ Partial Public Class ShortSaleCase
         End Get
     End Property
 
+    Public ReadOnly Property Duration As String
+        Get
+            If CreateDate.HasValue Then
+                Dim ts = (DateTime.Now - CreateDate)
+                If ts.HasValue AndAlso ts.Value.Days > 0 Then
+                    Return ts.Value.Days & " days"
+                End If
+            End If
+
+            Return ""
+        End Get
+    End Property
+
     Public ReadOnly Property ReportDetails As String
         Get
             Dim sb As New StringBuilder
@@ -356,7 +369,7 @@ Partial Public Class ShortSaleCase
             sb.Append("Start Intake: " & If(StartIntake, "Yes", "No") & Environment.NewLine)
 
             If PipeLine IsNot Nothing Then
-                sb.Append("Update/Notes: " & PipeLine.Description)
+                sb.Append("Update/Notes: " & ShortSaleUtility.StripTagsCharArray(PipeLine.Description))
             End If
 
             Return sb.ToString
@@ -580,25 +593,32 @@ Partial Public Class ShortSaleCase
                        Let owner = ctx.PropertyOwners.FirstOrDefault(Function(po) po.BBLE = ss.BBLE)
                        Let morts = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = ss.CaseId)
                        Let values = ctx.PropertyValueInfoes.Where(Function(pv) pv.BBLE = ss.BBLE)
-                       Let LastActivity = ctx.ShortSaleActivityLogs.Where(Function(sa) sa.BBLE = ss.BBLE).OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
-                       Let PipeLine = ctx.ShortSaleActivityLogs.Where(Function(sa) sa.BBLE = ss.BBLE And sa.ActivityType = "PipeLine").OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
                        Select New With {.CaseId = ss.CaseId,
                                         .ShortSale = ss,
                                         .PropertyInfo = pi,
                                         .Owner = owner,
                                         .Mortgages = morts,
-                                        .ValueInfo = values,
-                                        .LastActivity = LastActivity,
-                                        .PipeLine = PipeLine}
+                                        .ValueInfo = values}
 
+            'LastActivity = ctx.ShortSaleActivityLogs.Where(Function(sa) sa.BBLE = ss.BBLE).OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
+            'PipeLine = ctx.ShortSaleActivityLogs.Where(Function(sa) sa.BBLE = ss.BBLE And sa.ActivityType = "PipeLine").OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
+
+            Dim logs = (From sl In ctx.ShortSaleActivityLogs
+                       From logId In ctx.ShortSaleActivityLogs.GroupBy(Function(lg) lg.BBLE).Select(Function(sg) sg.Max(Function(sd) sd.ActivityDate))
+                       From pipeId In ctx.ShortSaleActivityLogs.GroupBy(Function(lg) lg.BBLE And lg.ActivityType = "Pipeline").Select(Function(sg) sg.Max(Function(sd) sd.ActivityDate))
+                       Where sl.ActivityDate = logId Or sl.ActivityDate = pipeId
+                       Select sl).Distinct
+            Dim logsData = logs.ToList
             Dim result = New List(Of ShortSaleCase)
             For Each item In data.ToList
+                Dim logData = logsData.Where(Function(sl) sl.BBLE.StartsWith(item.ShortSale.BBLE)).ToList
+
                 item.ShortSale.PropertyInfo = item.PropertyInfo
                 item.ShortSale.Mortgages = item.Mortgages.ToList
                 item.ShortSale.PropertyOwner = item.Owner
                 item.ShortSale.ValueInfoes = item.ValueInfo.ToList
-                item.ShortSale.LastActivity = item.LastActivity
-                item.ShortSale.PipeLine = item.PipeLine
+                item.ShortSale.LastActivity = logData.OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
+                item.ShortSale.PipeLine = logData.Where(Function(Sa) Sa.ActivityType = "Pipeline").OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
 
                 result.Add(item.ShortSale)
             Next
