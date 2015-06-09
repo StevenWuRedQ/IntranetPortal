@@ -10,12 +10,12 @@
     @RenderSection("Header", False)
     <link rel="stylesheet" type="text/css" href="~/Content/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
-    <script type="text/javascript"> 
-    WebFont.load({
-        google: {
-            families: ["Source Sans Pro:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,900,900italic"]
-        }
-    });
+    <script type="text/javascript">
+        WebFont.load({
+            google: {
+                families: ["Source Sans Pro:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,900,900italic"]
+            }
+        });
     </script>
     @Html.DevExpress().GetScripts(
         New Script With {.ExtensionSuite = ExtensionSuite.NavigationAndLayout},
@@ -36,67 +36,73 @@
     )
 
     <script type="text/javascript" src="~/Scripts/modernizr.js"></script>
-     <style type="text/css">
-         
-html {
-        -webkit-font-smoothing: antialiased;
-        font-smoothing: antialiased;
-    }
-    a, input, select {
-        -moz-transition: color .5s ease, background-color .5s ease, border-color .5s ease, opacity .5s ease, -moz-transform .5s ease, box-shadow .5s ease;
-        -ms-transition: color .5s ease, background-color .5s ease, border-color .5s ease, opacity .5s ease, -ms-transform .5s ease, box-shadow .5s ease;
-        -o-transition: color .5s ease, background-color .5s ease, border-color .5s ease, opacity .5s ease, -o-transform .5s ease, box-shadow .5s ease;
-        -webkit-transition: color .5s ease, background-color .5s ease, border-color .5s ease, opacity .5s ease, -webkit-transform .5s ease, box-shadow .5s ease;
-        transition: color .5s ease, background-color .5s ease, border-color .5s ease, opacity .5s ease, transform .5s ease, box-shadow .5s ease;
-    }
-          @@media screen and (min-width: 1200px) {
-            .w-container {
-              max-width: 1170px;
+    <style type="text/css">
+            html {
+                -webkit-font-smoothing: antialiased;
+                font-smoothing: antialiased;
             }
-          }
-    /*
-    ==============================================
-    pulse
-    ==============================================
-    */
-    .pulse{
-    	animation-name: pulse;
-    	-webkit-animation-name: pulse;	
-    	animation-duration: 1.5s;	
-    	-webkit-animation-duration: 1.5s;
-    	animation-iteration-count: infinite;
-    	-webkit-animation-iteration-count: infinite;
-    }
-    @@keyframes pulse {
-    	0% {
-    		transform: scale(0.7);
-    		opacity: 0.5;		
-    	}
-    	50% {
-    		transform: scale(1);
-    		opacity: 1;	
-    	}	
-    	100% {
-    		transform: scale(0.7);
-    		opacity: 0.5;	
-    	}			
-    }
-    @@-webkit-keyframes pulse {
-    	0% {
-    		-webkit-transform: scale(0.75);
-    		opacity: 0.5;		
-    	}
-    	50% {
-    		-webkit-transform: scale(1);
-    		opacity: 1;	
-    	}	
-    	100% {
-    		-webkit-transform: scale(0.75);
-    		opacity: 0.5;	
-    	}			
-    }
 
-     </style>
+            a, input, select {
+                -moz-transition: color .5s ease, background-color .5s ease, border-color .5s ease, opacity .5s ease, -moz-transform .5s ease, box-shadow .5s ease;
+                -ms-transition: color .5s ease, background-color .5s ease, border-color .5s ease, opacity .5s ease, -ms-transform .5s ease, box-shadow .5s ease;
+                -o-transition: color .5s ease, background-color .5s ease, border-color .5s ease, opacity .5s ease, -o-transform .5s ease, box-shadow .5s ease;
+                -webkit-transition: color .5s ease, background-color .5s ease, border-color .5s ease, opacity .5s ease, -webkit-transform .5s ease, box-shadow .5s ease;
+                transition: color .5s ease, background-color .5s ease, border-color .5s ease, opacity .5s ease, transform .5s ease, box-shadow .5s ease;
+            }
+
+            @@media screen and (min-width: 1200px) {
+                .w-container {
+                    max-width: 1170px;
+                }
+            }
+            /*
+        ==============================================
+        pulse
+        ==============================================
+        */
+            .pulse {
+                animation-name: pulse;
+                -webkit-animation-name: pulse;
+                animation-duration: 1.5s;
+                -webkit-animation-duration: 1.5s;
+                animation-iteration-count: infinite;
+                -webkit-animation-iteration-count: infinite;
+            }
+
+            @@keyframes pulse {
+                0% {
+                    transform: scale(0.7);
+                    opacity: 0.5;
+                }
+
+                50% {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: scale(0.7);
+                    opacity: 0.5;
+                }
+            }
+
+            @@-webkit-keyframes pulse {
+                0% {
+                    -webkit-transform: scale(0.75);
+                    opacity: 0.5;
+                }
+
+                50% {
+                    -webkit-transform: scale(1);
+                    opacity: 1;
+                }
+
+                100% {
+                    -webkit-transform: scale(0.75);
+                    opacity: 0.5;
+                }
+            }
+    </style>
 </head>
 <body>
     <nav class="w-hidden-medium w-hidden-small w-hidden-tiny global-nav">
@@ -116,9 +122,9 @@ html {
                 </div>
             </div>
         </div>
-    </nav>   
+    </nav>
 
-@RenderBody()
+    @RenderBody()
 
     <footer class="global-footer">
         <div class="w-container">
@@ -261,7 +267,7 @@ html {
     </footer>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     @RenderSection("FootScript", False)
-    <script type="text/javascript" src="~/Scripts/wf.js"></script>       
+    <script type="text/javascript" src="~/Scripts/wf.js"></script>
     @RenderSection("scripts", required:=False)
 </body>
 </html>

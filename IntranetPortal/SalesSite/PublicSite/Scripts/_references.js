@@ -14,3 +14,4 @@
 /// <reference path="../other/navigation/js/velocity.min.js" />
 /// <reference path="../other/v-nav/js/main.js" />
 /// <reference path="../other/v-nav/js/modernizr.js" />
+/// <reference path="geojson.js" />
