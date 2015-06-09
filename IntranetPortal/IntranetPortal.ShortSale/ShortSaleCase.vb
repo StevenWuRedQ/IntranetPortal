@@ -355,7 +355,7 @@ Partial Public Class ShortSaleCase
 
             sb.Append("Start Intake: " & If(StartIntake, "Yes", "No") & Environment.NewLine)
 
-            If LastActivity IsNot Nothing Then
+            If PipeLine IsNot Nothing Then
                 sb.Append("Update/Notes: " & PipeLine.Description)
             End If
 
@@ -581,7 +581,7 @@ Partial Public Class ShortSaleCase
                        Let morts = ctx.PropertyMortgages.Where(Function(pm) pm.CaseId = ss.CaseId)
                        Let values = ctx.PropertyValueInfoes.Where(Function(pv) pv.BBLE = ss.BBLE)
                        Let LastActivity = ctx.ShortSaleActivityLogs.Where(Function(sa) sa.BBLE = ss.BBLE).OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
-                       Let PipeLine = ctx.ShortSaleActivityLogs.Where(Function(sa) sa.BBLE = sa.BBLE And sa.ActivityType = "PipeLine").OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
+                       Let PipeLine = ctx.ShortSaleActivityLogs.Where(Function(sa) sa.BBLE = ss.BBLE And sa.ActivityType = "PipeLine").OrderByDescending(Function(sa) sa.ActivityDate).FirstOrDefault
                        Select New With {.CaseId = ss.CaseId,
                                         .ShortSale = ss,
                                         .PropertyInfo = pi,
