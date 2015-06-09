@@ -5,6 +5,6 @@
     Renaming the file extension or editing the content of this file may   
     cause the file to be unrecognizable by the program.
 -->
-<GenericObjectDataSource DisplayName="SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>IntranetPortal.DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result, Service References.DataAPI.Reference.vb, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
+<GenericObjectDataSource DisplayName="TLO_SuperPhoneResults" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+   <TypeInfo>IntranetPortal.DataAPI.TLO_SuperPhoneResults, Service References.DataAPI.Reference.vb, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

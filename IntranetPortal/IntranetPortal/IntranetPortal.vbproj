@@ -251,17 +251,14 @@
     <Reference Include="Microsoft.Online.SharePoint.Client.Tenant">
       <HintPath>..\..\..\..\..\Documents\ProvisionO365PersonalSites-iSharePoint\Microsoft.Online.SharePoint.Client.Tenant.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Restier.Conventions">
       <HintPath>..\packages\Microsoft.Restier.Conventions.0.2.0-pre\lib\net45\Microsoft.Restier.Conventions.dll</HintPath>
@@ -275,9 +272,6 @@
     </Reference>
     <Reference Include="Microsoft.Restier.Security">
       <HintPath>..\packages\Microsoft.Restier.Security.0.2.0-pre\lib\net45\Microsoft.Restier.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Restier.WebApi">
-      <HintPath>..\packages\Microsoft.Restier.WebApi.0.2.0-pre\lib\net45\Microsoft.Restier.WebApi.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SharePoint.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\..\..\..\..\..\..\Program Files\Common Files\Microsoft Shared\Web Server Extensions\15\ISAPI\Microsoft.SharePoint.Client.dll</HintPath>
@@ -304,8 +298,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="PortalTheme2">
@@ -325,26 +318,11 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.OData">
-      <HintPath>..\packages\Microsoft.AspNet.OData.5.4.0\lib\net45\System.Web.OData.dll</HintPath>
-    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -448,7 +426,6 @@
       <DependentUpon>AgentOverview.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="App_Start\WebApiConfig.vb" />
     <Compile Include="AssignLeadsRulesPage.aspx.designer.vb">
       <DependentUpon>AssignLeadsRulesPage.aspx</DependentUpon>
     </Compile>
@@ -3100,9 +3077,6 @@
     <None Include="Service References\CallTrackingService\item3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\DataAPI\Arrays1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\DataAPI\configuration91.svcinfo" />
     <None Include="Service References\DataAPI\configuration.svcinfo" />
     <Content Include="scrollbar\jquery-1.11.0.min.js" />
@@ -3116,10 +3090,113 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.AB_Report_Out1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Acris_Last_Sales_Info1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Acris_LatestOwner_View1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Acris_Out1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.ALL_NYC_Tax_Liens_CO_Info1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Bankruptcy11.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.DOB_PPO_out1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.ECB1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.EmergencyRepair1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.FederalTaxLien1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Judgment1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.LisPen1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Mortgages_Deeds1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_Assessment1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_Assessment_Initial_Search_View1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_NameAndAddress_View1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_Prop_tax_Out1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.NYC_WaterSewer_Out1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.ParkingViolation1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.Patriot1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.SP_NYC_Scan_TaxLiens_Per_Year_By_BBLE_Result.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TaxLien_Info1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TLOLocateReportOutput1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TLOPersonSearchOutput1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TLO_SuperPhoneResults1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.TranscriptAdjunction1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\DataAPI\IntranetPortal.DataAPI.UCC1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\DataAPI\item7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item71.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item72.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item73.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item74.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item75.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataAPI\item76.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\DataAPI\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.vb</LastGenOutput>
     </None>
+    <None Include="Service References\DataAPI\item1.disco" />
     <Content Include="ShortSale\SelectPartyUC.ascx" />
     <Content Include="ShortSale\ShortSale.aspx" />
     <Content Include="ShortSale\ShortSaleCaseList.ascx" />
@@ -3256,28 +3333,12 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="WCFDataServices\Web.config" />
     <Content Include="Task\Reports\WorkflowReprot.Master" />
-    <None Include="Service References\DataAPI\service1.wsdl" />
-    <None Include="Service References\DataAPI\service2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataAPI\service21.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataAPI\System.ComponentModel1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataAPI\System1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataAPI\TestComponent_VB.TLOWebService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\DataAPI\TestComponent_VB1.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Service References\DataAPI\WCFMacros1.wsdl" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3302,6 +3363,7 @@
     <WCFMetadataStorage Include="Service References\DataAPI\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Start\" />
     <Folder Include="Controllers\" />
     <Folder Include="Scripts\jquery.globalize\cultures\" />
     <Folder Include="TempDataFile\" />
