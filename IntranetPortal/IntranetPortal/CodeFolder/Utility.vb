@@ -337,6 +337,19 @@ Public Class Utility
         Return oldObj
     End Function
 
+    Public Shared Function IsCompany(name As String) As Boolean
+        Dim suffixs = {"LLC", "LLC.", "CORP.", "CORP", "INC", "INC.", "L.P.", "CO.L.P."}
+
+        Dim lastSubstring = name.Trim.Split(" ").Last.ToUpper
+        For Each suffix In suffixs
+            If lastSubstring = suffix Then
+                Return True
+            End If
+        Next
+
+        Return False
+    End Function
+
     Public Shared Function GetBoroughByZip(zip As String) As String
         If String.IsNullOrEmpty(zip) Then
             Return ""
