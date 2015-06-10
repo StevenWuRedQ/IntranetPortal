@@ -855,9 +855,9 @@ Public Class DataWCFService
 
             If localOwner IsNot Nothing Then
                 localOwner.Name = name.Trim
-                localOwner.Address1 = add1.Trim
-                localOwner.Address2 = add2.Trim
-                localOwner.City = city.Trim
+                localOwner.Address1 = Trim(add1)
+                localOwner.Address2 = Trim(add2)
+                localOwner.City = Trim(city)
                 localOwner.Country = country
                 localOwner.State = state
                 localOwner.Zip = zip
@@ -865,9 +865,9 @@ Public Class DataWCFService
                 If context.HomeOwners.Local.Where(Function(ho) ho.BBLE = bble And ho.Name = name).Count = 0 Then
                     context.HomeOwners.Add(New HomeOwner With {
                                                        .BBLE = bble,
-                                                       .Name = name,
-                                                       .Address1 = add1,
-                                                       .Address2 = add2,
+                                                       .Name = Trim(name),
+                                                       .Address1 = Trim(add1),
+                                                       .Address2 = Trim(add2),
                                                        .City = city,
                                                        .Country = country,
                                                        .State = state,
@@ -883,6 +883,14 @@ Public Class DataWCFService
             Throw New Exception("Error occure in SaveHomeOwner. Error: " + ex.Message)
         End Try
     End Sub
+
+    Private Shared Function TrimString(Str As String) As String
+        If String.IsNullOrEmpty(Str) Then
+            Return Str
+        End If
+
+        Return Str.Trim
+    End Function
 
     Public Shared Function OrderPropData(apiOrder As APIOrder, Optional needWait As Boolean = True) As Boolean
 

@@ -338,7 +338,7 @@ Public Class Utility
     End Function
 
     Public Shared Function IsCompany(name As String) As Boolean
-        Dim suffixs = {"LLC", "LLC.", "CORP.", "CORP", "INC", "INC.", "L.P.", "CO.L.P."}
+        Dim suffixs = {"LLC", "LLC.", "CORP.", "CORP", "INC", "INC.", "L.P.", "CO.L.P.", "CHURCH"}
 
         Dim lastSubstring = name.Trim.Split(" ").Last.ToUpper
         For Each suffix In suffixs

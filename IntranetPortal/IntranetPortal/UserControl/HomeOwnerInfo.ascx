@@ -27,10 +27,12 @@
 <div style='vertical-align: top; margin: 0; font-size: 18px; <%= if(IsNeedAddHomeOwner(),"visibility:hidden","") %>'>
     <div style="font-size: 30px; color: #2e2f31">
         <i class="fa fa-edit tooltip-examples" title="Edit Homeowner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}","Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
-     <%--   <% If TLOLocateReport Is Nothing  Then%>--%>
-       <i class='fa fa-wrench icon_btn tooltip-examples' title='Report no info after refresh homeowner info' onclick="ReportNoHomeCallBackClinet.PerformCallback(leadsInfoBBLE)">&nbsp;</i>
-        
-        <%--<% end if %>--%>
+
+        <% If TLOLocateReport Is Nothing andalso Not Utility.IsCompany(OwnerName) Then%>
+        <%Dim I=0 %>
+        <i class='fa fa-wrench icon_btn tooltip-examples' title='Report no info after refresh homeowner info' onclick="ReportNoHomeCallBackClinet.PerformCallback(leadsInfoBBLE)">&nbsp;</i>
+        <% End If%>
+
         <span class="homeowner_name">
             <%= OwnerName %>
         </span>
@@ -347,7 +349,7 @@
                 <span style="font-size: 14px">Age <span class="color_balck"><%= If(relative.dateOfBirthField  is Nothing , " ", relative.dateOfBirthField.currentAgeField) %></span></span>
             </div>
         </div>
-        
+
         <div class="homeowner_expanll_border" style="margin-left: 20px">
             <div>
                 <div class="clearfix homeowner_info_label" style="margin-left: 17px;">
@@ -410,7 +412,7 @@
                         <div>
                             <% If relative.phonesField.Length > 0 Then%>
                             <% For Each phone In relative.phonesField%>
-                            <%If phone.phoneField IsNot Nothing Then%>                            
+                            <%If phone.phoneField IsNot Nothing Then%>
                             <div class="color_gray clearfix">
                                 <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
                                 <div class="form_div_node homeowner_info_text ">
@@ -459,7 +461,7 @@
                         <div>
                             <% If relative.phonesField.Length > 0 Then%>
                             <% For Each phone In relative.phonesField%>
-                            <% If phone.phoneField IsNot Nothing Then%>                            
+                            <% If phone.phoneField IsNot Nothing Then%>
                             <div class="color_gray clearfix">
                                 <i class="fa fa-phone homeowner_info_icon" onclick="CallPhone('<%=FormatPhoneNumber(phone.phoneField)%>')"></i>
                                 <div class="form_div_node homeowner_info_text ">
@@ -554,21 +556,20 @@
     $(document).ready(function () {
         if (sortPhones) {
             sortPhones();
-            
+
         }
     });
-    
+
 
 </script>
 
 <script>
-    function CallPhone(phone)
-    {
+    function CallPhone(phone) {
         var url = '/AutoDialer/Dialer.aspx?PN=' + phone + '&BBLE=' + $("#BBLEId").val();
         $("#AutoDialer").css('display', '');
         $("#AutoDialer").attr("src", encodeURI(url));
         //popUpAtBottomRight(
-          //  , 'CallWindow', 1210, 460);
+        //  , 'CallWindow', 1210, 460);
     }
     function popUpAtBottomRight(pageToLoad, winName, width, height) {
         xposition = 0; yposition = 0;
@@ -576,7 +577,7 @@
             xposition = (screen.width - width);
             yposition = (screen.height - height);
         }
-       
+
         var args = "";
         args += "width=" + width + "," + "height=" + height + ","
         + "location=0,"
@@ -589,18 +590,17 @@
         + "toolbar=0,"
         + "hotkeys=0,"
         + "screenx=" + xposition + ","  //NN Only
-        + "screeny=" + (yposition -100) + ","  //NN Only
+        + "screeny=" + (yposition - 100) + ","  //NN Only
         + "left=" + xposition + ","     //IE Only
         + "top=" + yposition;           //IE Only
         var dmcaWin = window.open(pageToLoad, winName, args);
         dmcaWin.focus();
     }
-   
+
 </script>
 <style>
-    .fa-phone.homeowner_info_icon 
-    {
-        cursor:pointer;
-        color:green;
+    .fa-phone.homeowner_info_icon {
+        cursor: pointer;
+        color: green;
     }
 </style>
