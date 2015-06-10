@@ -175,10 +175,10 @@
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">UCC  </label>
-                <input class="ss_form_input currency_input" ng-model="LegalCase.ForeclosureInfo.UCC">
+                <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.UCC">
             </li>
             <li class="ss_form_item">
-                <label class="ss_form_input_title">UCC  </label>
+                <label class="ss_form_input_title">UCC Amount </label>
                 <input class="ss_form_input currency_input" mask-money="" ng-model="LegalCase.ForeclosureInfo.UCCAmount">
             </li>
             <li class="ss_form_item">

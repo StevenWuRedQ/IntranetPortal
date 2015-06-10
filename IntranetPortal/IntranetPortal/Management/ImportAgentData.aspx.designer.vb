@@ -104,6 +104,15 @@ Partial Public Class ImportAgentData
     Protected WithEvents btnLoad2 As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
+    '''BBLEList control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents BBLEList As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''cbStatusFrom control.
     '''</summary>
     '''<remarks>

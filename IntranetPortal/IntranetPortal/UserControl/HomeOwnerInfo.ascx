@@ -28,9 +28,9 @@
     <div style="font-size: 30px; color: #2e2f31">
         <i class="fa fa-edit tooltip-examples" title="Edit Homeowner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}","Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
 
-      <% If IsEmptyReport AndAlso Not Utility.IsCompany(OwnerName) Then%>       
-        <i class='fa fa-wrench icon_btn tooltip-examples' title='Report no info after refresh homeowner info' onclick="ReportNoHomeCallBackClinet.PerformCallback(leadsInfoBBLE)">&nbsp;</i>
-      <% End If%>
+        <% If IsEmptyReport AndAlso Not Utility.IsCompany(OwnerName) Then%>
+        <i class='fa fa-wrench icon_btn tooltip-examples' title='Report no info after refresh homeowner info' onclick="ConfrimReport()">&nbsp;</i>
+        <% End If%>
 
         <span class="homeowner_name">
             <%= OwnerName %>
@@ -595,7 +595,11 @@
         var dmcaWin = window.open(pageToLoad, winName, args);
         dmcaWin.focus();
     }
-
+    function ConfrimReport() {
+        if (confirm("Did you just refersh homeowner info ? If still can not get homeowner info press Ok to cotunie submit report !") == true) {
+            ReportNoHomeCallBackClinet.PerformCallback(leadsInfoBBLE);
+        }
+    }
 </script>
 <style>
     .fa-phone.homeowner_info_icon {

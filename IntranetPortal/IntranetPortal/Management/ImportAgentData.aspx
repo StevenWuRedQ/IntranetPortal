@@ -69,6 +69,15 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td style="width: 80px">
+                                  <label>BBLEs:</label>
+                                </td>
+                                <td style="width: 150px;">
+                                    <asp:TextBox ID="BBLEList" runat="server" ></asp:TextBox>
+                                </td>
+                                
+                            </tr>
+                            <tr>
                                 <td style="width: 120px">
                                     <dx:ASPxLabel runat="server" Text="StatusForm: (Optional) " ></dx:ASPxLabel>
                                 </td>

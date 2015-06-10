@@ -1,5 +1,6 @@
 ﻿Imports System.Threading
 Imports DevExpress.Web.ASPxEditors
+Imports Newtonsoft.Json.Linq
 
 Public Class ImportAgentData
     Inherits System.Web.UI.Page
@@ -26,7 +27,7 @@ Public Class ImportAgentData
             cbEmpTo.DataBind()
             cbEmpTo.Items.Insert(0, New ListEditItem())
 
-           
+
 
             Dim LeadsStatus = System.Enum.GetNames(GetType(LeadStatus)).ToList
             LeadsStatus.Insert(0, "")
@@ -67,7 +68,23 @@ Public Class ImportAgentData
 
             gridAgentLeads.DataBind()
         End If
+        If (Not String.IsNullOrEmpty(BBLEList.Text)) Then
+            gridAgentLeads.DataSource = LoadBBLEsLeads(BBLEList.Text)
+            gridAgentLeads.DataBind()
+        End If
     End Sub
+    Function LoadBBLEsLeads(json As String) As List(Of Lead)
+        Dim BBLes = JArray.Parse(json).ToArray
+        Dim BBLEsStr As List(Of String) = New List(Of String)
+        For Each b In BBLes
+            Dim bStr As String = CStr(b).Trim
+            BBLEsStr.Add(bStr)
+        Next
+        Using Context As New Entities
+            Return Context.Leads.Where(Function(ap) BBLEsStr.Contains(ap.BBLE)).ToList
+
+        End Using
+    End Function
     Protected Function ConvertLeadStatus(status As String) As Integer
         Dim iStatus = CInt([Enum].Parse(GetType(LeadStatus), status))
         Return iStatus
@@ -84,39 +101,55 @@ Public Class ImportAgentData
         Return LoadAgentLeads(name, empId).Where(Function(l) l.Status = Stauts).ToList
     End Function
     Protected Sub btnTransfer_Click(sender As Object, e As EventArgs)
-        Dim agent = cbEmpFrom.Text
-        If String.IsNullOrEmpty(agent) Then
-            ASPxLabel2.Text = "Please select agent for transfer from."
-            Return
-        End If
+        Using ctx As New Entities
+            Dim agent = cbEmpFrom.Text
+            Dim lList = New List(Of Lead)
+            If (Not String.IsNullOrEmpty(BBLEList.Text)) Then
+                lList = LoadBBLEsLeads(BBLEList.Text)
+            End If
 
-        If String.IsNullOrEmpty(cbEmpTo.Text) Then
-            ASPxLabel2.Text = "Please select agent for transfer to."
-            Return
-        End If
+            If (lList.Count = 0) Then
+                If String.IsNullOrEmpty(agent) Then
+                    ASPxLabel2.Text = "Please select agent for transfer from."
+                    Return
+                End If
 
-        If Not String.IsNullOrEmpty(cbStatusToChange.Text) AndAlso ConvertLeadStatus(cbStatusToChange.Text) = LeadStatus.Callback Then
-            If (deCallBackTime.Value Is Nothing Or deCallBackTime.Value <= Date.Now) Then
-                ASPxLabel2.Text = "When Transfer to call back need select call back date geater than now"
+
+            End If
+
+            If String.IsNullOrEmpty(cbEmpTo.Text) Then
+                ASPxLabel2.Text = "Please select agent for transfer to."
                 Return
             End If
-        End If
-        Dim keepStatus = CBool(cbKeepStatus.Value)
 
-        Using ctx As New Entities
+            If Not String.IsNullOrEmpty(cbStatusToChange.Text) AndAlso ConvertLeadStatus(cbStatusToChange.Text) = LeadStatus.Callback Then
+                If (deCallBackTime.Value Is Nothing Or deCallBackTime.Value <= Date.Now) Then
+                    ASPxLabel2.Text = "When Transfer to call back need select call back date geater than now"
+                    Return
+                End If
+            End If
+            Dim keepStatus = CBool(cbKeepStatus.Value)
+
+
             Dim empId = CInt(cbEmpFrom.Value)
-            Dim lList = New List(Of Lead)
-            If (String.IsNullOrEmpty(cbStatusFrom.Text)) Then
-                lList = ctx.Leads.Where(Function(ap) ap.EmployeeName = agent AndAlso ap.EmployeeID = empId).ToList
+
+            If (lList.Count = 0) Then
+                If (String.IsNullOrEmpty(cbStatusFrom.Text)) Then
+                    lList = ctx.Leads.Where(Function(ap) ap.EmployeeName = agent AndAlso ap.EmployeeID = empId).ToList
+                Else
+                    Dim iStutsFrom = ConvertLeadStatus(cbStatusFrom.Text)
+                    lList = ctx.Leads.Where(Function(le) le.EmployeeID = empId AndAlso le.Status = iStutsFrom).ToList()
+                End If
+
+                If Not String.IsNullOrEmpty(txtLeadsAmount.Text) Then
+                    Dim count = CInt(txtLeadsAmount.Text)
+                    lList = lList.Take(count).ToList
+                End If
             Else
-                Dim iStutsFrom = ConvertLeadStatus(cbStatusFrom.Text)
-                lList = ctx.Leads.Where(Function(le) le.EmployeeID = empId AndAlso le.Status = iStutsFrom).ToList()
+                Dim BBles = lList.Select(Function(b) b.BBLE).ToList
+                lList = ctx.Leads.Where(Function(b) BBles.Contains(b.BBLE)).ToList
             End If
 
-            If Not String.IsNullOrEmpty(txtLeadsAmount.Text) Then
-                Dim count = CInt(txtLeadsAmount.Text)
-                lList = lList.Take(count).ToList
-            End If
 
             For Each ld In lList
                 ld.EmployeeID = CInt(cbEmpTo.Value)
@@ -391,20 +424,20 @@ InitialLine:
         e.Result = CDbl(count / total)
     End Sub
 
- 
-   
-   
 
-    
 
-    
+
+
+
+
+
     Protected Sub exportLastLog_Click(sender As Object, e As EventArgs)
         BindLastLog()
         ASPxLoadLastLogExporter.WriteXlsxToResponse()
     End Sub
 
     Protected Sub LoadLastLog_Click(sender As Object, e As EventArgs)
-       
+
         BindLastLog()
     End Sub
     Protected Sub BindLastLog()
