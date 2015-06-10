@@ -13,6 +13,7 @@
             <dx:ASPxButton runat="server" ID="btnLoad" Text="Load" OnClick="btnLoad_Click" Theme="Moderno"></dx:ASPxButton>
             <dx:ASPxComboBox runat="server" ID="cbOwners" Theme="Moderno"></dx:ASPxComboBox>
             <dx:ASPxButton runat="server" ID="btnView" Text="View" OnClick="btnView_Click" Theme="Moderno"></dx:ASPxButton>
+            <dx:ASPxButton runat="server" ID="btnLoadOwnerInfo" Text="Get Owner Info" OnClick="btnLoadOwnerInfo_Click" Theme="Moderno"></dx:ASPxButton>
             <dx:ASPxMemo runat="server" ID="txtOwnerData" Width="500px" Height="400px" Theme="Moderno"></dx:ASPxMemo>
         </div>
     </form>

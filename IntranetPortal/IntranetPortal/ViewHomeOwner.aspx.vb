@@ -17,4 +17,21 @@
         Dim ownerId = CInt(cbOwners.Value)
         txtOwnerData.Text = HomeOwner.LoadOwner(ownerId).TLOLocateReport.ToJsonString
     End Sub
+
+    Protected Sub btnLoadOwnerInfo_Click(sender As Object, e As EventArgs)
+        Dim ownerId = CInt(cbOwners.Value)
+        Using ctx As New Entities
+            Dim owner = ctx.HomeOwners.Find(ownerId)
+            Dim result = DataWCFService.GetLocateReport(New Random().Next(1, 10000), owner.BBLE, owner)
+            If result IsNot Nothing Then
+                owner.TLOLocateReport = result
+                owner.UserModified = False
+                owner.LastUpdate = DateTime.Now
+            End If
+
+            ctx.SaveChanges()
+
+            txtOwnerData.Text = result.ToJsonString
+        End Using
+    End Sub
 End Class

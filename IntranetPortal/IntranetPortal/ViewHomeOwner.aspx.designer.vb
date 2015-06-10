@@ -59,6 +59,15 @@ Partial Public Class ViewHomeOwner
     Protected WithEvents btnView As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
+    '''btnLoadOwnerInfo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnLoadOwnerInfo As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
     '''txtOwnerData control.
     '''</summary>
     '''<remarks>
