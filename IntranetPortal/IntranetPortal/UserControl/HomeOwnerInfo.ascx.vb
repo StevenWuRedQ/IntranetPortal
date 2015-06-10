@@ -15,6 +15,7 @@ Public Class HomeOwnerInfo
     Public Property BestAddress As New List(Of HomeOwnerAddress)
     Public Property BestEmail As New List(Of HomeOwnerEmail)
     Public Property HomeOwnerInfo As HomeOwner
+    Public Property IsEmptyReport As Boolean = False
 
     Private _contacts As List(Of OwnerContact)
     Public ReadOnly Property Contacts As List(Of OwnerContact)
@@ -66,6 +67,7 @@ Public Class HomeOwnerInfo
                 HomeOwnerInfo = homeOwner
                 TLOLocateReport = homeOwner.TLOLocateReport
                 If TLOLocateReport Is Nothing Then
+                    IsEmptyReport = True
                     TLOLocateReport = New DataAPI.TLOLocateReportOutput
                 End If
                 BestNums = homeOwner.BestPhoneNo

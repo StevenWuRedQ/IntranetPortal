@@ -28,8 +28,7 @@
     <div style="font-size: 30px; color: #2e2f31">
         <i class="fa fa-edit tooltip-examples" title="Edit Homeowner" onclick="popupEditHomeOwner.PerformCallback('<%= String.Format("{0}|{1}|{2}","Show", BBLE, OwnerName)%>');popupEditHomeOwner.Show();" style="cursor: pointer">&nbsp;</i>
 
-        <% If TLOLocateReport Is Nothing andalso Not Utility.IsCompany(OwnerName) Then%>
-        <%Dim I=0 %>
+        <% If IsEmptyReport AndAlso Not Utility.IsCompany(OwnerName) Then%>        
         <i class='fa fa-wrench icon_btn tooltip-examples' title='Report no info after refresh homeowner info' onclick="ReportNoHomeCallBackClinet.PerformCallback(leadsInfoBBLE)">&nbsp;</i>
         <% End If%>
 
