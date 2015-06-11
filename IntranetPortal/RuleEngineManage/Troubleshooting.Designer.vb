@@ -73,8 +73,10 @@ Partial Class Troubleshooting
         Me.btnLoad = New System.Windows.Forms.Button()
         Me.btnImportFile = New System.Windows.Forms.Button()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.Button10 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -90,6 +92,7 @@ Partial Class Troubleshooting
         CType(Me.gvFiles, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.TabPage4.SuspendLayout()
+        Me.TabPage5.SuspendLayout()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -313,6 +316,7 @@ Partial Class Troubleshooting
         Me.TabControl1.Controls.Add(Me.tabEmail)
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Controls.Add(Me.TabPage5)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 46)
         Me.TabControl1.Name = "TabControl1"
@@ -581,6 +585,13 @@ Partial Class Troubleshooting
         Me.TabPage4.Text = "TLO Service"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(80, 15)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(153, 20)
+        Me.TextBox2.TabIndex = 1
+        '
         'Label10
         '
         Me.Label10.AutoSize = True
@@ -590,12 +601,25 @@ Partial Class Troubleshooting
         Me.Label10.TabIndex = 0
         Me.Label10.Text = "Name"
         '
-        'TextBox2
+        'TabPage5
         '
-        Me.TextBox2.Location = New System.Drawing.Point(80, 15)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(153, 20)
-        Me.TextBox2.TabIndex = 1
+        Me.TabPage5.Controls.Add(Me.Button10)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage5.Size = New System.Drawing.Size(558, 329)
+        Me.TabPage5.TabIndex = 5
+        Me.TabPage5.Text = "ShortSale"
+        Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'Button10
+        '
+        Me.Button10.Location = New System.Drawing.Point(24, 15)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(138, 23)
+        Me.Button10.TabIndex = 0
+        Me.Button10.Text = "Set ShortSale Referral"
+        Me.Button10.UseVisualStyleBackColor = True
         '
         'Troubleshooting
         '
@@ -626,6 +650,7 @@ Partial Class Troubleshooting
         Me.Panel2.ResumeLayout(False)
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
+        Me.TabPage5.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -682,4 +707,6 @@ Partial Class Troubleshooting
     Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
+    Friend WithEvents Button10 As System.Windows.Forms.Button
 End Class

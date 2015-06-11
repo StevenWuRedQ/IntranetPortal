@@ -505,4 +505,8 @@ Public Class Troubleshooting
 
 
 
+    Private Sub Button10_Click_1(sender As Object, e As EventArgs) Handles Button10.Click
+        IntranetPortal.ShortSaleManage.UpdateReferral()
+        MessageBox.Show("Complete!")
+    End Sub
 End Class
