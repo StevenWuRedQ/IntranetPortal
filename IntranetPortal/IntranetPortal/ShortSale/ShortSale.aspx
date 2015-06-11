@@ -92,6 +92,13 @@
                                                                             <div class="font_size_bold">Documents</div>
                                                                         </a>
                                                                     </li>
+                                                                    <li class="short_sale_head_tab" >
+                                                                        <a  role="tab" data-toggle="tab" class="tab_button_a" onclick="ShowPopupLeadsMenu(this,leadsInfoBBLE)">
+                                                                            <i class="fa fa-list-ul head_tab_icon_padding"></i>
+                                                                            <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                                                        </a>
+                                                                    </li>
+                                                                   
 
                                                                     <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                     <li style="margin-right: 30px; color: #ffa484; float: right">

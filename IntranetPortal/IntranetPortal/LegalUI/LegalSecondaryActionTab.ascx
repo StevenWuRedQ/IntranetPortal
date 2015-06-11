@@ -138,9 +138,9 @@
             </div>
 
 
-            <uc1:legalsecondaryactions runat="server" ID="LegalSecondaryActions" />
 
         </div>
+        <uc1:legalsecondaryactions runat="server" ID="LegalSecondaryActions" />
     </div>
 
 

@@ -19,7 +19,7 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
     <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
     <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>
-   
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
@@ -126,7 +126,7 @@
                                     margin-top: -35px;
                                 }
                             </style>
-                           <%-- <div>{{contacts}}</div>
+                            <%-- <div>{{contacts}}</div>
                             <md-content class="md-padding autocomplete" layout="column">
                                 <md-contact-chips ng-model="contacts" md-contacts="querySearch($query)" md-contact-name="Name" md-contact-image="image" md-contact-email="Email" md-require-match="" filter-selected="filterSelected" placeholder="Contacts">
                                 </md-contact-chips>
@@ -216,6 +216,12 @@
                                             <div class="font_size_bold">Documents</div>
                                         </a>
                                     </li>
+                                    <li class="short_sale_head_tab">
+                                        <a role="tab" data-toggle="tab" class="tab_button_a" onclick="ShowPopupLeadsMenu(this,leadsInfoBBLE)">
+                                            <i class="fa fa-list-ul head_tab_icon_padding"></i>
+                                            <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                        </a>
+                                    </li>
                                     <li style="margin-right: 30px; color: #ffa484; float: right">
                                         <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
 
@@ -236,7 +242,7 @@
                                         <% End If%>
 
                                         <i class="fa fa-users sale_head_button sale_head_button_left tooltip-examples" title="" onclick="VendorsPopupClient.Show()" data-original-title="Contacts"></i>
-                                        <i class="fa fa-external-link-square sale_head_button sale_head_button_left tooltip-examples" data-toggle="tooltip" data-original-title="Go To" onclick='ShowPopupLeadsMenu(this,leadsInfoBBLE)'></i>
+                                        <%--<i class="fa fa-external-link-square sale_head_button sale_head_button_left tooltip-examples" data-toggle="tooltip" data-original-title="Go To" onclick='ShowPopupLeadsMenu(this,leadsInfoBBLE)'></i>--%>
 
                                         <i class="fa fa-envelope sale_head_button sale_head_button_left tooltip-examples" title="" onclick="ShowEmailPopup(leadsInfoBBLE)" data-original-title="Mail"></i>
                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
@@ -333,7 +339,7 @@
                                 </ContentCollection>
                                 <ClientSideEvents CloseUp="function(s,e){}" />
                             </dx:ASPxPopupControl>
-                            
+
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
@@ -520,7 +526,7 @@
 
         portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
-                                             
+
 
             var self = $scope;
             function querySearch(query) {
@@ -561,7 +567,7 @@
              */
 
 
-            $scope.SecondaryTypeSource = ["Statute Of Limitations", "Estate", "Deed Reversal", "Partition", "Breach of Contract", "Quiet Title"];
+            $scope.SecondaryTypeSource = ["Statute Of Limitations", "Estate", "Miscellaneous", "Deed Reversal", "Partition", "Breach of Contract", "Quiet Title", ""];
 
             if (typeof LegalShowAll == 'undefined' || LegalShowAll == null) {
                 $scope.LegalCase.SecondaryInfo.SelectTypes = $scope.SecondaryTypeSource;
@@ -705,7 +711,7 @@
                 alert(JSON.stringify(e));
             }
 
-           
+
             $scope.InitContact = function (id) {
 
 

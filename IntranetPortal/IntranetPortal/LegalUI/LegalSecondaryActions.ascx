@@ -67,6 +67,18 @@
     </div>
 </div>
 
+<div class="legal_action_div  animate-show" ng-show="CheckShow('Miscellaneous')">
+    <div class="ss_form">
+        <h4 class="ss_form_title">Miscellaneous</h4>
+        <ul class="ss_form_box clearfix">
+
+            <li class="ss_form_item ss_form_item_line">
+                <label class="ss_form_input_title">Miscellaneous</label>
+                <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.SecondaryInfo.Miscellaneous"></textarea>
+            </li>
+        </ul>
+    </div>
+</div>
 <div id="Partition" class="legal_action_div  animate-show" ng-show="CheckShow('Partition')">
     <div class="ss_form">
         <h4 class="ss_form_title">Partition</h4>
@@ -215,7 +227,7 @@
             </li>
             <li class="ss_form_item">
                 <span class="ss_form_input_title">foreclosure active</span>
-                <input type="checkbox" id="pdf_check_yes121" name="121" class="ss_form_input" value="YES" ng-model="LegalCase.ForeclosureInfo.InForeclosure"/>
+                <input type="checkbox" id="pdf_check_yes121" name="121" class="ss_form_input" value="YES" ng-model="LegalCase.ForeclosureInfo.InForeclosure" />
                 <label for="pdf_check_yes121" class="input_with_check">
                     <span class="box_text">Yes </span>
                 </label>
@@ -247,7 +259,7 @@
 
             <li class="ss_form_item">
                 <label class="ss_form_input_title">last payment date</label>
-                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.LastPaymentDate"/>
+                <input class="ss_form_input" ss-date="" ng-model="LegalCase.ForeclosureInfo.LastPaymentDate" />
             </li>
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Credit Report</label>
@@ -256,10 +268,10 @@
             <li class="ss_form_item">
                 <%--Who owns mortgage?--%>
                 <li class="ss_form_item">
-                <label class="ss_form_input_title">Lender </label>
-                <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.OriginalLenderId')">
-                </div>
-            </li>
+                    <label class="ss_form_input_title">Lender </label>
+                    <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.OriginalLenderId')">
+                    </div>
+                </li>
             </li>
             <li class="ss_form_item">
                 <%--Do we know who owns the Note--%>
