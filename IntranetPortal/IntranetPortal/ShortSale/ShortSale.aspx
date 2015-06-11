@@ -58,21 +58,8 @@
                                                     <ContentCollection>
                                                         <dx:SplitterContentControl ID="SplitterContentControl3" runat="server">
                                                             <div style="width: 100%; align-content: center; height: 100%">
-                                                                <dx:ASPxPopupMenu ID="ASPxPopupMenu3" runat="server" ClientInstanceName="popupMenuRefreshClient"
-                                                                    AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
-                                                                    <ItemStyle Paddings-PaddingLeft="20px" />
-                                                                    <Items>
-                                                                        <dx:MenuItem Text="All" Name="All"></dx:MenuItem>
-                                                                        <dx:MenuItem Text="General Property Info" Name="Assessment"></dx:MenuItem>
-                                                                        <dx:MenuItem Text="Mortgage and Violations" Name="PropData"></dx:MenuItem>
-                                                                        <dx:MenuItem Text="Home Owner" Name="TLO">
-                                                                        </dx:MenuItem>
-                                                                    </Items>
-                                                                </dx:ASPxPopupMenu>
                                                                 <asp:HiddenField ID="hfBBLE" runat="server" />
-
                                                                 <!-- Nav tabs -->
-
                                                                 <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
                                                                     <li class="active short_sale_head_tab">
                                                                         <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">

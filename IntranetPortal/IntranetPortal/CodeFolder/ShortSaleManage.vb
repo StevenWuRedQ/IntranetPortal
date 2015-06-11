@@ -14,9 +14,35 @@ Public Class ShortSaleManage
             ssCase.Owner = GetIntaker()
             ssCase.CreateBy = createBy
             ssCase.CreateDate = DateTime.Now
+
+            ssCase = SetReferral(ssCase)
             ssCase.Save()
         End If
     End Sub
+
+    Public Shared Sub UpdateReferral()
+        Dim ssCases = ShortSaleCase.GetAllCase().Where(Function(ss) ss.Referral Is Nothing).ToList
+
+        For Each ss In ssCases
+            If ss.Referral Is Nothing Then
+                ss = SetReferral(ss)
+                ss.Save()
+            End If
+        Next
+    End Sub
+
+    Private Shared Function SetReferral(ssCase As ShortSaleCase)
+
+        Dim ld = Lead.GetInstance(ssCase.BBLE)
+        If ld IsNot Nothing Then
+            Dim referral = ShortSale.PartyContact.GetContactByName(ld.EmployeeName)
+            If referral IsNot Nothing Then
+                ssCase.Referral = referral.ContactId
+            End If
+        End If
+
+        Return ssCase
+    End Function
 
     Public Shared Function GetShortSaleCasesByUsers(users As String()) As List(Of ShortSaleCase)
         Using ctx As New Entities

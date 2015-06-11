@@ -95,15 +95,6 @@ Partial Public Class ShortSalePage
     Protected WithEvents SplitterContentControl3 As Global.DevExpress.Web.ASPxSplitter.SplitterContentControl
 
     '''<summary>
-    '''ASPxPopupMenu3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ASPxPopupMenu3 As Global.DevExpress.Web.ASPxMenu.ASPxPopupMenu
-
-    '''<summary>
     '''hfBBLE control.
     '''</summary>
     '''<remarks>
