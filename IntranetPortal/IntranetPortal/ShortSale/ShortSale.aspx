@@ -10,6 +10,8 @@
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
 <%@ Register Src="~/ShortSale/ShortSaleSubMenu.ascx" TagPrefix="uc1" TagName="ShortSaleSubMenu" %>
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
+<%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
+
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
    
@@ -241,6 +243,7 @@
     <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
     <uc1:SelectPartyUC runat="server" ID="SelectPartyUC" />
     <uc1:ShortSaleSubMenu runat="server" ID="ShortSaleSubMenu" />
+    <uc1:Common runat="server" ID="Common" />
 </asp:Content>
 
 

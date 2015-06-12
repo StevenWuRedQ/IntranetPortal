@@ -23,7 +23,6 @@ Public Class ContactService
     <OperationContract()>
     <WebGet()>
     Public Function LoadContacts() As Channels.Message ' As List(Of PartyContact)
-
         Return PartyContact.getAllContact().ToJson()
        
     End Function

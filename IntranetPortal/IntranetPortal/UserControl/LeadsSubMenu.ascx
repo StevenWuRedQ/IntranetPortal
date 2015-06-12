@@ -473,7 +473,7 @@
     <ClientSideEvents EndCallback="OnEndCallbackPanelRequestUpdate" />
 </dx:ASPxPopupControl>
 
-<dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="popupMenuLeads"
+<%--<dx:ASPxPopupMenu ID="ASPxPopupMenu2" runat="server" ClientInstanceName="popupMenuLeads"
     AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick" ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
     <ItemStyle Paddings-PaddingLeft="20px" />
     <Items>
@@ -483,7 +483,7 @@
         <dx:MenuItem Text="Legal" Name="Legal"></dx:MenuItem>
     </Items>
     <ClientSideEvents ItemClick="OnPopupMenuLeadsClick" />
-</dx:ASPxPopupMenu>
+</dx:ASPxPopupMenu>--%>
 
 <dx:ASPxCallback ID="leadStatusCallback" runat="server" ClientInstanceName="leadStatusCallbackClient" OnCallback="leadStatusCallback_Callback">
     <ClientSideEvents CallbackComplete="function(s,e) {OnSetStatusComplete(s,e)}" />

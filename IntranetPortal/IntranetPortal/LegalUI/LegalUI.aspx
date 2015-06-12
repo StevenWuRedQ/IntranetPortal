@@ -9,6 +9,7 @@
 <%@ Register TagPrefix="uc1" TagName="LegalSecondaryActions" Src="~/LegalUI/LegalSecondaryActions.ascx" %>
 <%@ Register Src="~/LegalUI/ManagePreViewControl.ascx" TagPrefix="uc1" TagName="ManagePreViewControl" %>
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
+<%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 
 <asp:Content runat="server" ContentPlaceHolderID="head">
 
@@ -19,8 +20,7 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
     <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
     <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>
-
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
     <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>
@@ -386,7 +386,7 @@
                 </dx:SplitterPane>
             </Panes>
         </dx:ASPxSplitter>
-
+        <uc1:Common runat="server" ID="Common" />
         <div runat="server" id="SencnedAction" visible="False" style="padding: 0 10px">
 
             <%--<div class="modal-dialog">
@@ -457,7 +457,7 @@
         </div>
     </div>--%>
     <uc1:SendMail runat="server" ID="SendMail" />
-    <script>
+    <script type="text/javascript">
         /*
         function(case) */
         function VendorsClosing(s) {

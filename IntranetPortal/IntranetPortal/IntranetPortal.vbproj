@@ -1534,6 +1534,13 @@
       <DependentUpon>AssignRulesControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserControl\Common.ascx.designer.vb">
+      <DependentUpon>Common.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\Common.ascx.vb">
+      <DependentUpon>Common.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="UserControl\CompanyTree.ascx.designer.vb">
       <DependentUpon>CompanyTree.ascx</DependentUpon>
     </Compile>
@@ -3229,6 +3236,7 @@
     <Content Include="OneDrive\UploadToOneDrive.aspx" />
     <Content Include="UserControl\ActivityLogs.ascx" />
     <Content Include="UserControl\AssignRulesControl.ascx" />
+    <Content Include="UserControl\Common.ascx" />
     <Content Include="UserControl\Devexpress\CustomAppointmentForm.ascx" />
     <Content Include="UserControl\Devexpress\CustomVerticalAppointmentTemplate.ascx" />
     <Content Include="UserControl\Devexpress\CustomInplaceEditor.ascx" />

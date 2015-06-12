@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="LegalCaseList.ascx.vb" Inherits="IntranetPortal.LegalCaseList" %>
-<%@ Register Src="~/ShortSale/ShortSaleSubMenu.ascx" TagPrefix="uc1" TagName="ShortSaleSubMenu" %>
 
 <script type="text/javascript">
     var postponedCallbackRequired = false;

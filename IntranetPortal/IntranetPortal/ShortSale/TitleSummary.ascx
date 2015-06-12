@@ -33,14 +33,10 @@
             tbl.style.backgroundColor = 'transparent';
         }
     }
-    function initScrollbar_summary() {
-
-
-    }
 
     $(document).ready(function () {
-        // Handler for .ready() called.
-        initScrollbar_summary();
+        // Handler for .ready() called.       
+        AllLeadsGridClient.PerformCallback("Load");
     });
 
     var fileWindows = {};
@@ -514,7 +510,7 @@
                                                     </Row>
                                                 </Styles>
                                                 <Columns>
-                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.PropertyAddress" Caption="Street address" SortOrder="Ascending" Width="100%">
+                                                    <dx:GridViewDataTextColumn Name="PropertyInfo.PropertyAddress" Caption="Street address" Width="100%">
                                                         <DataItemTemplate>
                                                             <div style="cursor: pointer; width: 600px" class="font_black" onclick='<%# String.Format("ShowCaseInfo({0})", Eval("CaseId"))%>'><%# GetAddress(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%></div>
                                                         </DataItemTemplate>
@@ -525,7 +521,7 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1st Mort Prog">
+                                                    <dx:GridViewDataTextColumn Name="FristMortageProgress" Caption="1st Mort Prog">                                                        
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="FristMortageLender" Caption="1st Mort Ser ">
                                                     </dx:GridViewDataTextColumn>
@@ -539,7 +535,7 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="Manager">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="PropertyInfo.UpdateDate" Width="120px" Caption="Last Activity">
+                                                    <dx:GridViewDataTextColumn Width="120px" Caption="Last Activity" Name="LastActivity">
                                                         <DataItemTemplate>
                                                             <%# GetLastActivity(CType(Container.Grid.GetRow(Container.VisibleIndex), IntranetPortal.ShortSale.ShortSaleCase))%>
                                                         </DataItemTemplate>
@@ -671,7 +667,7 @@
                                         <dx:ListEditItem Value="ProcessorContact.Name" Text="Processor" />
                                         <dx:ListEditItem Value="ListingAgentContact.Name" Text="Listing agent" />
                                         <dx:ListEditItem Value="Manager" Text="Manager" />
-                                        <dx:ListEditItem Value="PropertyInfo.UpdateDate" Text="Last Activity" />
+                                        <dx:ListEditItem Value="LastActivity" Text="Last Activity" />
                                         <dx:ListEditItem Value="Owner" Text="Assgin To" />
                                         <dx:ListEditItem Value="BBLE" Text="Comments" />
 

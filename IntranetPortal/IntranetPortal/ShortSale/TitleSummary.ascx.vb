@@ -9,7 +9,7 @@ Public Class UCTitleSummary
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         If Not IsPostBack Then
             CurrentUserRole = Employee.GetShortSaleRole(Page.User.Identity.Name)
-            BindNotes()
+            'BindNotes()
 
             BindData()
         End If
@@ -95,6 +95,7 @@ Public Class UCTitleSummary
                 BindTask()
         End Select
 
+        Return
         'Bind All Leads Grid
         AllLeadsGrid.DataSource = ShortSale.ShortSaleSummary.GetAllCase()
         AllLeadsGrid.DataBind()
@@ -411,12 +412,20 @@ Public Class UCTitleSummary
         Dim showColumn = chkFields.SelectedValues
         For Each c In AllLeadsGrid.AllColumns
             Dim column = CType(c, GridViewDataTextColumn)
-            c.Visible = showColumn.Contains(column.FieldName)
+            Dim name = column.FieldName
 
+            If String.IsNullOrEmpty(name) Then
+                name = column.Name
+            End If
+
+            c.Visible = showColumn.Contains(name)
         Next
-     
     End Sub
     Protected Sub AllLeadsGrid_OnCustomCallback(sender As Object, e As ASPxGridViewCustomCallbackEventArgs)
         RefreshGrid()
+
+        If e.Parameters = "Load" Then
+            AllLeadsGrid.DataBind()
+        End If
     End Sub
 End Class

@@ -246,4 +246,13 @@ Partial Public Class ShortSalePage
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ShortSaleSubMenu As Global.IntranetPortal.ShortSaleSubMenu
+
+    '''<summary>
+    '''Common control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Common As Global.IntranetPortal.Common
 End Class

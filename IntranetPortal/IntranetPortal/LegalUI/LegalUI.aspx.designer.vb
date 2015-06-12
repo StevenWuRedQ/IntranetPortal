@@ -131,6 +131,15 @@ Partial Public Class LegalUI
     Protected WithEvents ActivityLogs As Global.IntranetPortal.ActivityLogs
 
     '''<summary>
+    '''Common control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Common As Global.IntranetPortal.Common
+
+    '''<summary>
     '''SencnedAction control.
     '''</summary>
     '''<remarks>

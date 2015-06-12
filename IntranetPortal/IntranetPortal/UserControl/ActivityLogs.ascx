@@ -394,9 +394,9 @@
 
                 <%-- 50px --%>
                 <div style="margin-top: 50px">
-                    <% If DisplayMode = ActivityLogMode.Leads or DisplayMode=ActivityLogMode.Legal Then%>
+                    <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Legal Then%>
                     <div>Date of Comment:</div>
-                    <div class="border_under_line" style="height:80px">
+                    <div class="border_under_line" style="height: 80px">
                         <dx:ASPxDateEdit ID="ASPxDateEdit1" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
                     </div>
                     <% End If%>
@@ -421,7 +421,7 @@
                     </div>
 
                     <% End If%>
-                    
+
                     <%-- <div <%= If(DisplayMode = ActivityLogMode.ShortSale, "style='display:none'", "")%>>Date of Comment:</div>
                     <div class="border_under_line" <%= If(DisplayMode = ActivityLogMode.ShortSale, "style='display:none'", "style='height:80px'")%>>
                         <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
@@ -447,7 +447,7 @@
                 </div>
                 <div style="margin-top: 15px; float: right; margin-right: 5px;">
                     <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
-                    <% If DisplayMode = ActivityLogMode.Leads or DisplayMode=ActivityLogMode.Legal Then%>
+                    <% If DisplayMode = ActivityLogMode.Leads Or DisplayMode = ActivityLogMode.Legal Then%>
                     <i class="fa fa-calendar-o activity_add_buttons tooltip-examples" style="margin-right: 15px; cursor: pointer" title="Schedule" onclick="showAppointmentPopup=true;ASPxPopupScheduleClient.PerformCallback();"></i>
                     <%Else%>
                     <i class="fa fa-comment activity_add_buttons tooltip-examples" style="margin-right: 15px; cursor: pointer" title="Previous Notes" onclick="popupPreviousNotes.Show();popupPreviousNotes.PerformCallback()"></i>
@@ -716,12 +716,13 @@
                 <dx:PopupControlContentControl runat="server">
                     <dx:ASPxCheckBoxList ID="cbCateLog" runat="server" ClientInstanceName="cbCateLogClient" Border-BorderStyle="None" OnSelectedIndexChanged="cbCateLog_SelectedIndexChanged">
                         <Items>
-                            <dx:ListEditItem Text="Appointment" Value="Appointment" />
+                            <dx:ListEditItem Text="Leads" Value="SalesAgent" />
+                            <dx:ListEditItem Text="Short Sale" Value="ShortSale" />
+                            <dx:ListEditItem Text="Legal" Value="Legal" />
                             <dx:ListEditItem Text="Accounting" Value="Accounting" />
                             <dx:ListEditItem Text="Construction" Value="Construction" />
                             <dx:ListEditItem Text="Eviction" Value="Eviction" />
-                            <dx:ListEditItem Text="Finder" Value="Finder" />
-                            <dx:ListEditItem Text="Legal" Value="Legal" />
+                            <dx:ListEditItem Text="Appointment" Value="Appointment" />
                             <dx:ListEditItem Text="Manager" Value="Manager" />
                             <dx:ListEditItem Text="Processing" Value="Processing" />
                             <dx:ListEditItem Text="Task" Value="Task" />
@@ -865,11 +866,11 @@
                     </div>
                     <div class="form-group ">
                         <label class="upcase_text" style="display: block">Date Of Value</label>
-                        <input class="form-control ss_date" onchange="dateValueChagne(this)" runat="server" id="txtDateofValue"/>
+                        <input class="form-control ss_date" onchange="dateValueChagne(this)" runat="server" id="txtDateofValue" />
                     </div>
                     <div class="form-group ">
                         <label class="upcase_text" style="display: block">Expired On</label>
-                        <input class="form-control ss_date" onchange="dateValueChagne(this)" runat="server" id="txtExpiredDate"/>
+                        <input class="form-control ss_date" onchange="dateValueChagne(this)" runat="server" id="txtExpiredDate" />
                     </div>
                     <div>
                         <div class="row" style="margin-top: 33px;">
