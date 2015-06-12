@@ -307,6 +307,10 @@
     <Reference Include="PortalThemeAssembly">
       <HintPath>..\..\Theme\PortalTheme\PortalThemeAssembly.dll</HintPath>
     </Reference>
+    <Reference Include="PublicSiteData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\PublicSiteData.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
     </Reference>
@@ -1817,6 +1821,7 @@
     <Content Include="DLL\MyIdealProp.Workflow.Client.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.Core.dll" />
     <Content Include="DLL\MyIdealProp.Workflow.DBPersistence.dll" />
+    <Content Include="DLL\PublicSiteData.dll" />
     <Content Include="DLL\Spire.Pdf.dll" />
     <Content Include="DownloadFile.aspx" />
     <Content Include="EmailTemplate\ActivitySummary.ascx" />
@@ -3420,7 +3425,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50213/</IISUrl>
+          <IISUrl>http://localhost:52923/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
