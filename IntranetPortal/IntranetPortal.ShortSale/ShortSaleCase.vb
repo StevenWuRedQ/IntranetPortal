@@ -149,7 +149,9 @@ Partial Public Class ShortSaleCase
             Return Nothing
         End Get
         Set(value As DateTime?)
-            _upComingDate = value
+            If value IsNot Nothing Then
+                _upComingDate = value
+            End If
         End Set
     End Property
 

@@ -591,7 +591,10 @@
                 return contacts.map(function (c, index) {
 
                     c.image = 'https://storage.googleapis.com/material-icons/external-assets/v1/icons/svg/ic_account_circle_black_48px.svg'
-                    c._lowername = c.Name.toLowerCase();
+                    if ( c.Name)
+                    {
+                        c._lowername = c.Name.toLowerCase();
+                    } 
                     return c;
                 });
             }

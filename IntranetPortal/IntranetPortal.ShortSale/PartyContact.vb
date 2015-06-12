@@ -57,7 +57,7 @@ Partial Public Class PartyContact
                     emp.Save()
                 Next
 
-                Return result
+                Return ctx.PartyContacts.Where(Function(p) p.Type = type).ToList
             Else
                 Return ctx.PartyContacts.Where(Function(p) p.Type = type).ToList
             End If
