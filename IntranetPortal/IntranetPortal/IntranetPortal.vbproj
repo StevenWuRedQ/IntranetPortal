@@ -3389,10 +3389,6 @@
       <Project>{fc0c5f0d-f387-48ed-a96c-6d4e1914fd0b}</Project>
       <Name>IntranetPortal.ShortSale</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SalesSite\PublicSiteData\PublicSiteData.vbproj">
-      <Project>{0a6eb9bb-cbef-49c9-bd9e-18446aa0728b}</Project>
-      <Name>PublicSiteData</Name>
-    </ProjectReference>
   </ItemGroup>
   <!--<ItemGroup>
     <Folder Include="App_Data\" />

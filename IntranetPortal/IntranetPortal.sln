@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal", "IntranetPortal\IntranetPortal.vbproj", "{6CA9F52B-C8D7-4098-8FB4-0626D61A9E32}"
 EndProject
@@ -18,12 +18,6 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "RuleEngineService", "RuleEn
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Management", "IntranetPortal.Management\IntranetPortal.Management.vbproj", "{2B915A55-7815-4D0D-8CF6-8384F4638099}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SalesSite", "SalesSite", "{7AD50AAA-155B-4287-96A2-ED698922EC76}"
-EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PublicSiteData", "SalesSite\PublicSiteData\PublicSiteData.vbproj", "{0A6EB9BB-CBEF-49C9-BD9E-18446AA0728B}"
-EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PublicSite", "SalesSite\PublicSite\PublicSite.vbproj", "{51BD1B6F-27A0-4CE3-BE89-D241CBA9A4AE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{43375D09-BCC8-4469-BFFE-6298F91F1CAB}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\packages.config = .nuget\packages.config
@@ -33,7 +27,7 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "IntranetPortal.Legal", "Int
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 12
+		SccNumberOfProjects = 10
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://chrispc:8080/tfs/defaultcollection
 		SccLocalPath0 = .
@@ -61,17 +55,9 @@ Global
 		SccProjectUniqueName8 = IntranetPortal.Management\\IntranetPortal.Management.vbproj
 		SccProjectName8 = IntranetPortal.Management
 		SccLocalPath8 = IntranetPortal.Management
-		SccProjectUniqueName9 = SalesSite\\PublicSiteData\\PublicSiteData.vbproj
-		SccProjectTopLevelParentUniqueName9 = IntranetPortal.sln
-		SccProjectName9 = SalesSite/PublicSiteData
-		SccLocalPath9 = SalesSite\\PublicSiteData
-		SccProjectUniqueName10 = SalesSite\\PublicSite\\PublicSite.vbproj
-		SccProjectTopLevelParentUniqueName10 = IntranetPortal.sln
-		SccProjectName10 = SalesSite/PublicSite
-		SccLocalPath10 = SalesSite\\PublicSite
-		SccProjectUniqueName11 = IntranetPortal.Legal\\IntranetPortal.Legal.vbproj
-		SccProjectName11 = IntranetPortal.Legal
-		SccLocalPath11 = IntranetPortal.Legal
+		SccProjectUniqueName9 = IntranetPortal.Legal\\IntranetPortal.Legal.vbproj
+		SccProjectName9 = IntranetPortal.Legal
+		SccLocalPath9 = IntranetPortal.Legal
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,14 +96,6 @@ Global
 		{2B915A55-7815-4D0D-8CF6-8384F4638099}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B915A55-7815-4D0D-8CF6-8384F4638099}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B915A55-7815-4D0D-8CF6-8384F4638099}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A6EB9BB-CBEF-49C9-BD9E-18446AA0728B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A6EB9BB-CBEF-49C9-BD9E-18446AA0728B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A6EB9BB-CBEF-49C9-BD9E-18446AA0728B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A6EB9BB-CBEF-49C9-BD9E-18446AA0728B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51BD1B6F-27A0-4CE3-BE89-D241CBA9A4AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51BD1B6F-27A0-4CE3-BE89-D241CBA9A4AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51BD1B6F-27A0-4CE3-BE89-D241CBA9A4AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51BD1B6F-27A0-4CE3-BE89-D241CBA9A4AE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F816325A-F7BD-4C84-93A4-EF33DAE80E6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F816325A-F7BD-4C84-93A4-EF33DAE80E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F816325A-F7BD-4C84-93A4-EF33DAE80E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -125,9 +103,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{0A6EB9BB-CBEF-49C9-BD9E-18446AA0728B} = {7AD50AAA-155B-4287-96A2-ED698922EC76}
-		{51BD1B6F-27A0-4CE3-BE89-D241CBA9A4AE} = {7AD50AAA-155B-4287-96A2-ED698922EC76}
 	EndGlobalSection
 EndGlobal
