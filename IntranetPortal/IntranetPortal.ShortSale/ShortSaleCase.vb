@@ -140,7 +140,7 @@ Partial Public Class ShortSaleCase
     End Property
 
     Private _upComingDate As DateTime
-    Public ReadOnly Property UpComingBPODate As DateTime?
+    Public Property UpComingBPODate As DateTime?
         Get
             If Mortgages IsNot Nothing AndAlso Mortgages.Count > 0 Then
                 Return Mortgages(0).UpcomingBPODate
@@ -148,6 +148,9 @@ Partial Public Class ShortSaleCase
 
             Return Nothing
         End Get
+        Set(value As DateTime?)
+            _upComingDate = value
+        End Set
     End Property
 
     Private _valueInfos As List(Of PropertyValueInfo)

@@ -7,6 +7,7 @@ Imports System.Data.Entity.Core.EntityClient
 Imports System.Web.Script.Serialization
 Imports System.Text.RegularExpressions
 Imports System.Globalization
+Imports System.Net.Configuration
 
 Public Class EmailService
     Public Shared Sub SendMail()
@@ -28,6 +29,10 @@ Public Class EmailService
         'Catch ex As Exception
         '    ' ...
         'End Try
+    End Sub
+
+    Public Shared Sub SendShortSaleMail(toAddress As String, ccAddress As String, templateName As String, mailData As Dictionary(Of String, String))
+
     End Sub
 
     Public Shared Sub SendMail(toAddress As String, ccAddress As String, templateName As String, mailData As Dictionary(Of String, String))
@@ -90,7 +95,7 @@ Public Class EmailService
         End Try
     End Function
 
-    Public Shared Function SendMail(toAddress As String, ccAddress As String, subject As String, body As String, attachments As List(Of String), Optional attachments2 As Attachment() = Nothing) As Integer
+    Public Shared Function SendMail(toAddress As String, ccAddress As String, subject As String, body As String, attachments As List(Of String), Optional attachments2 As Attachment() = Nothing, Optional smtpSetting As String = "smtp") As Integer
         'Using ctx As New CoreEntities
         '    If ctx.EmailMessages.Any(Function(em) em.ToAddress = toAddress AndAlso em.Subject = subject AndAlso em.SendDate > DateTime.Today) Then
         '        Return 0
@@ -153,7 +158,7 @@ Public Class EmailService
             Next
         End If
 
-        Dim client As New SmtpClient()
+        Dim client As New CustomSmtpClient(smtpSetting)
 
         Try
             client.Send(Message)
@@ -196,6 +201,44 @@ Public Class EmailService
     End Function
 
 End Class
+
+Public Class CustomSmtpClient
+    Private ReadOnly _smtpClient As SmtpClient
+    Private fromAddress As String
+
+    Public Sub New(Optional sectionName As String = "smtp")
+        Dim section As SmtpSection = DirectCast(ConfigurationManager.GetSection(Convert.ToString("mailSettings/") & sectionName), SmtpSection)
+
+        _smtpClient = New SmtpClient()
+
+        If section IsNot Nothing Then
+            If section.Network IsNot Nothing Then
+                fromAddress = section.From
+                _smtpClient.Host = section.Network.Host
+                _smtpClient.Port = section.Network.Port
+                _smtpClient.UseDefaultCredentials = section.Network.DefaultCredentials
+
+                _smtpClient.Credentials = New NetworkCredential(section.Network.UserName, section.Network.Password, section.Network.ClientDomain)
+                _smtpClient.EnableSsl = section.Network.EnableSsl
+
+                If section.Network.TargetName IsNot Nothing Then
+                    _smtpClient.TargetName = section.Network.TargetName
+                End If
+            End If
+
+            _smtpClient.DeliveryMethod = section.DeliveryMethod
+            If section.SpecifiedPickupDirectory IsNot Nothing AndAlso section.SpecifiedPickupDirectory.PickupDirectoryLocation IsNot Nothing Then
+                _smtpClient.PickupDirectoryLocation = section.SpecifiedPickupDirectory.PickupDirectoryLocation
+            End If
+        End If
+    End Sub
+
+    Public Sub Send(message As MailMessage)
+        message.From = New MailAddress(fromAddress)
+        _smtpClient.Send(message)
+    End Sub
+End Class
+
 
 
 Public Class RegexUtilities

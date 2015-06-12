@@ -16,7 +16,19 @@
     End Function
 
     Public Shared Function GetUpcomingClosings() As List(Of ShortSaleCase)
-        Return GetAllCase()
+        Using ctx As New ShortSaleEntities
+            Dim upComingDate = DateTime.Today.AddDays(14)
+            Dim result = (From ssCase In ctx.ShortSaleCases
+                         Join mort In ctx.PropertyMortgages On mort.CaseId Equals ssCase.CaseId
+                         Where mort.UpcomingBPODate < upComingDate
+                         Select ssCase, mort.UpcomingBPODate).Distinct.ToList
+
+
+            Return result.Select(Function(ru)
+                                     ru.ssCase.UpComingBPODate = ru.UpcomingBPODate
+                                     Return ru.ssCase
+                                 End Function).ToList
+        End Using
     End Function
 
     Public Shared Function GetFollowUpCases() As List(Of ShortSaleCase)
@@ -53,7 +65,7 @@
         'End Using
 
         Using ctx As New ShortSaleEntities
-            Return ctx.ShortSaleCases.ToList
+            Return ctx.ShortSaleCases.OrderByDescending(Function(ss) ss.UpdateDate).ToList
         End Using
     End Function
 End Class
