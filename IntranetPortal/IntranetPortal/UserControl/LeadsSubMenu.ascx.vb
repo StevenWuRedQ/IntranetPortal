@@ -222,6 +222,15 @@ Public Class LeadsSubMenu
             cbDeadReasons.Text = ""
             txtDeadLeadDescription.Text = ""
         End If
+        If e.Parameter.StartsWith("DumpDeadLeads") Then
+            
+            Dim l = Lead.GetInstance(hfBBLE.Value)
+            l.ReAssignLeads("Dead Leads", Page.User.Identity.Name)
+            Dim comments = "Dump Dead Leads"
+
+            LeadsActivityLog.AddActivityLog(DateTime.Now, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.Status.ToString, LeadsActivityLog.EnumActionType.DeadLead)
+
+        End If
     End Sub
 
     'In Process Popup

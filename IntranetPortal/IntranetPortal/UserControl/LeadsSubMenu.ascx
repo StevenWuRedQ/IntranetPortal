@@ -368,6 +368,7 @@
         <div style="height: 30px; vertical-align: central">
             <span class="time_buttons" onclick="aspxPopupDeadLeadsClient.Hide()">Cancel</span>
             <span class="time_buttons" onclick="popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('Save');">Confirm</span>
+             <span class="time_buttons" onclick="popupShow=false;aspxPopupDeadLeadsClient.PerformCallback('DumpDeadLeads');">Dump Dead Leads</span>
         </div>
     </FooterContentTemplate>
     <ClientSideEvents EndCallback="function(s,e){
