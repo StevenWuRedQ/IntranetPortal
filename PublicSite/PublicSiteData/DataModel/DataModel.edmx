@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PublicSiteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agents">
+          <Key>
+            <PropertyRef Name="AgentId" />
+          </Key>
+          <Property Name="AgentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PortalName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Company" Type="nvarchar" MaxLength="256" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="FeatureData">
+          <Key>
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="FeatureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="ListProperties">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="Block" Type="nchar" MaxLength="5" />
+          <Property Name="Lot" Type="nchar" MaxLength="4" />
+          <Property Name="PropertyClass" Type="nvarchar" MaxLength="50" />
+          <Property Name="AptNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="StreetName" Type="nvarchar" MaxLength="50" />
+          <Property Name="NeighName" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Zipcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Borough" Type="nvarchar" MaxLength="50" />
+          <Property Name="BedRoomNum" Type="int" />
+          <Property Name="BathRoomNum" Type="int" />
+          <Property Name="SalePrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AnnualTax" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AvaiableDate" Type="date" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CommonCharges" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Taxes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PriceSqft" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MinDownPay" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AllowDog" Type="bit" />
+          <Property Name="AllowCat" Type="bit" />
+          <Property Name="TotalSqft" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="UnitsInBuilding" Type="int" />
+          <Property Name="BuildingFloors" Type="int" />
+          <Property Name="SchoolDistrict" Type="nvarchar" MaxLength="50" />
+          <Property Name="Latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="Longitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="Agent" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransitLines" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="DefaultImage" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Neighbors">
+          <Key>
+            <PropertyRef Name="NeighborId" />
+          </Key>
+          <Property Name="NeighborId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PropertyFeatures">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="FeatureId" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PropertyImages">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="256" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+          <Property Name="ContentType" Type="nvarchar" MaxLength="256" />
+          <Property Name="ImageData" Type="varbinary(max)" />
+          <Property Name="ImageSize" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PublicSite.dbo.PortalAgents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PortalAgents">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" />
+          <Property Name="Department" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="120" />
+          <Property Name="CellPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Photo" Type="varbinary(max)" />
+        </EntityType>
+        <EntityContainer Name="PublicSiteModelStoreContainer">
+          <EntitySet Name="Agents" EntityType="Self.Agents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FeatureData" EntityType="Self.FeatureData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListProperties" EntityType="Self.ListProperties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Neighbors" EntityType="Self.Neighbors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyFeatures" EntityType="Self.PropertyFeatures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PropertyImages" EntityType="Self.PropertyImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PortalAgents" EntityType="Self.PortalAgents" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PortalAgents].[EmployeeID] AS [EmployeeID], 
+    [PortalAgents].[Name] AS [Name], 
+    [PortalAgents].[Position] AS [Position], 
+    [PortalAgents].[Department] AS [Department], 
+    [PortalAgents].[Email] AS [Email], 
+    [PortalAgents].[Description] AS [Description], 
+    [PortalAgents].[CellPhone] AS [CellPhone], 
+    [PortalAgents].[Photo] AS [Photo]
+    FROM [dbo].[PortalAgents] AS [PortalAgents]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PublicSiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="AgentId" />
+          </Key>
+          <Property Name="AgentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PortalName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Company" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Neighbor">
+          <Key>
+            <PropertyRef Name="NeighborId" />
+          </Key>
+          <Property Name="NeighborId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PropertyImage">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="Int32" Nullable="false" />
+          <Property Name="BBLE" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ImageSize" Type="Int32" />
+          <Property Name="ContentType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="PublicSiteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agents" EntityType="Self.Agent" />
+          <EntitySet Name="Neighbors" EntityType="Self.Neighbor" />
+          <EntitySet Name="PropertyImages" EntityType="Self.PropertyImage" />
+          <EntitySet Name="ListProperties" EntityType="PublicSiteModel.ListProperty" />
+          <EntitySet Name="FeatureDatas" EntityType="PublicSiteModel.FeatureData" />
+          <EntitySet Name="PropertyFeatures" EntityType="PublicSiteModel.PropertyFeature" />
+          <EntitySet Name="PortalAgents" EntityType="PublicSiteModel.PortalAgent" />
+        </EntityContainer>
+        <EntityType Name="ListProperty">
+          <Key>
+            <PropertyRef Name="BBLE" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Block" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
+          <Property Name="Lot" Type="String" MaxLength="4" FixedLength="true" Unicode="true" />
+          <Property Name="PropertyClass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AptNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NeighName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Borough" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BedRoomNum" Type="Int32" />
+          <Property Name="BathRoomNum" Type="Int32" />
+          <Property Name="SalePrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AnnualTax" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AvaiableDate" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CommonCharges" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Taxes" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PriceSqft" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MinDownPay" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AllowDog" Type="Boolean" />
+          <Property Name="AllowCat" Type="Boolean" />
+          <Property Name="TotalSqft" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="UnitsInBuilding" Type="Int32" />
+          <Property Name="BuildingFloors" Type="Int32" />
+          <Property Name="SchoolDistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransitLines" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultImage" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FeatureData">
+          <Key>
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="FeatureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PropertyFeature">
+          <Key>
+            <PropertyRef Name="BBLE" />
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="FeatureId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PortalAgent">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="CellPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PublicSiteModelStoreContainer" CdmEntityContainer="PublicSiteEntities">
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="PublicSiteModel.Agent">
+              <MappingFragment StoreEntitySet="Agents">
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="PortalName" ColumnName="PortalName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Neighbors">
+            <EntityTypeMapping TypeName="PublicSiteModel.Neighbor">
+              <MappingFragment StoreEntitySet="Neighbors">
+                <ScalarProperty Name="NeighborId" ColumnName="NeighborId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyImages">
+            <EntityTypeMapping TypeName="PublicSiteModel.PropertyImage">
+              <MappingFragment StoreEntitySet="PropertyImages">
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="ImageSize" ColumnName="ImageSize" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListProperties">
+            <EntityTypeMapping TypeName="PublicSiteModel.ListProperty">
+              <MappingFragment StoreEntitySet="ListProperties">
+                <ScalarProperty Name="DefaultImage" ColumnName="DefaultImage" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TransitLines" ColumnName="TransitLines" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="SchoolDistrict" ColumnName="SchoolDistrict" />
+                <ScalarProperty Name="BuildingFloors" ColumnName="BuildingFloors" />
+                <ScalarProperty Name="UnitsInBuilding" ColumnName="UnitsInBuilding" />
+                <ScalarProperty Name="TotalSqft" ColumnName="TotalSqft" />
+                <ScalarProperty Name="AllowCat" ColumnName="AllowCat" />
+                <ScalarProperty Name="AllowDog" ColumnName="AllowDog" />
+                <ScalarProperty Name="MinDownPay" ColumnName="MinDownPay" />
+                <ScalarProperty Name="PriceSqft" ColumnName="PriceSqft" />
+                <ScalarProperty Name="Taxes" ColumnName="Taxes" />
+                <ScalarProperty Name="CommonCharges" ColumnName="CommonCharges" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AvaiableDate" ColumnName="AvaiableDate" />
+                <ScalarProperty Name="AnnualTax" ColumnName="AnnualTax" />
+                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+                <ScalarProperty Name="BathRoomNum" ColumnName="BathRoomNum" />
+                <ScalarProperty Name="BedRoomNum" ColumnName="BedRoomNum" />
+                <ScalarProperty Name="Borough" ColumnName="Borough" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="NeighName" ColumnName="NeighName" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="AptNo" ColumnName="AptNo" />
+                <ScalarProperty Name="PropertyClass" ColumnName="PropertyClass" />
+                <ScalarProperty Name="Lot" ColumnName="Lot" />
+                <ScalarProperty Name="Block" ColumnName="Block" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeatureDatas">
+            <EntityTypeMapping TypeName="PublicSiteModel.FeatureData">
+              <MappingFragment StoreEntitySet="FeatureData">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyFeatures">
+            <EntityTypeMapping TypeName="PublicSiteModel.PropertyFeature">
+              <MappingFragment StoreEntitySet="PropertyFeatures">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PortalAgents">
+            <EntityTypeMapping TypeName="PublicSiteModel.PortalAgent">
+              <MappingFragment StoreEntitySet="PortalAgents">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
