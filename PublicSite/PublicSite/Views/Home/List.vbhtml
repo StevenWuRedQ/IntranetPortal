@@ -4,12 +4,12 @@
     ViewData("Title") = "Property List"
     Layout = "~/Views/Shared/_Layout.vbhtml"
 End Code
-
+@imports Newtonsoft.Json
 @section Header
     <link rel="stylesheet" href="~/other/v-nav/css/style.css">
     <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
-
+    <script src="/Scripts/geojson.js"></script>
 End Section
 
 <div class="w-nav global-nav-2" data-collapse="medium" data-animation="default" data-duration="400" data-contain="1" data-ix="display-global-nav-2">
@@ -68,12 +68,50 @@ End Section
         End Using
     </div>
 </section>
-<section class="listings-map" style="background: #f5f5f5; padding: 30px;">
+<section class="listings-map" style="background: #f5f5f5;">
     <div class="l-map-container">
+        <style>
+            #map {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 100%;
+            }
+        </style>
         <div id='map' style="top:0;bottom:0;width:100%"></div>
         <script>
             L.mapbox.accessToken = 'pk.eyJ1IjoicG9ydGFsIiwiYSI6ImtCdG9ac00ifQ.p2_3nTko4JskYcg0YIgeyw';
             map = L.mapbox.map('map', 'examples.map-i87786ca').setView([40.7127, -74.0059], 11);
+            var reslut = @Html.Raw(JsonConvert.SerializeObject(Model.Result))
+
+            function map_reslut(o) {
+                var image =  o.Images && o.Images[0] && o.Images[0].ImageData ? o.Images[0].ImageData : '';
+                return { BBLE: o.BBLE, lat: o.Latitude, lng: o.Longitude, image: image }
+            };
+            var myLayer = L.mapbox.featureLayer().addTo(map);
+
+            reslut = reslut.map(map_reslut);
+            reslut.forEach(function (e, idx) { e.title = String.fromCharCode("A".charCodeAt(0) +idx ) })
+            reslut = GeoJSON.parse(reslut, { Point: ['lat', 'lng'] });
+            myLayer.on('layeradd', function (e) {
+                var marker = e.layer,
+                    feature = marker.feature;
+
+                // Create custom popup content
+                var popupContent = '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
+                                        '<img src="data:image/png;base64, ' + feature.properties.image + '" />' +
+                                        
+                                    '</a>';
+
+                // http://leafletjs.com/reference.html#popup
+                marker.bindPopup(popupContent, {
+                    closeButton: false,
+                    minWidth: 320
+                });
+            })
+            //alert(JSON.stringify(reslut));
+            myLayer.setGeoJSON(reslut);
+            //test
         </script>
     </div>
 </section>

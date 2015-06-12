@@ -396,6 +396,7 @@
     <Content Include="other\v-nav\js\main.js" />
     <Content Include="other\v-nav\js\modernizr.js" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\geojson.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\main.js" />
