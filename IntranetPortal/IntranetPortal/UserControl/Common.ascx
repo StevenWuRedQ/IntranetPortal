@@ -25,7 +25,11 @@
             OpenLeadsWindow("/LegalUI/LegalUI.aspx?bble=" + commonTmpBBLE, "Legal Info");
         }
     }
-
+    function OpenTabLink(tabText,bble)
+    {
+        commonTmpBBLE = bble;
+        OnPopupMenuLeadsClick(null, { item: { name: tabText } });
+    }
     function OpenLeadsWindow(url, title) {
         var left = (screen.width / 2) - (1350 / 2);
         var top = (screen.height / 2) - (930 / 2);

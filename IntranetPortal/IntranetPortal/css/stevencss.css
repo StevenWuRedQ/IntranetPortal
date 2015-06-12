@@ -1822,6 +1822,7 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 .title_after_notes {
     margin-top: 35px;
 }
+
 .title_span {
     color: #ff400d;
     font-weight: 900;
@@ -2346,20 +2347,35 @@ li.mag_tabv.active {
 }
 
 .animate-show {
- 
-  opacity: 1;
- 
- 
+    opacity: 1;
 }
 
-.animate-show.ng-hide-add.ng-hide-add-active,
-.animate-show.ng-hide-remove.ng-hide-remove-active {
-  -webkit-transition: all linear 0.5s;
-  transition: all linear 0.5s;
+    .animate-show.ng-hide-add.ng-hide-add-active,
+    .animate-show.ng-hide-remove.ng-hide-remove-active {
+        -webkit-transition: all linear 0.5s;
+        transition: all linear 0.5s;
+    }
+
+    .animate-show.ng-hide {
+        opacity: 0;
+    }
+
+.short_sale_head_tab > div.shot_sale_sub {
+    display: none;
+    margin: 0;
+    opacity: 0;
+    position: absolute;
+    visibility: hidden;
+    background: #ff400d;
+    z-index:9999;
 }
 
-.animate-show.ng-hide {
-  
-  opacity: 0;
-  
+.short_sale_head_tab:hover > div.shot_sale_sub {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+.shot_sale_sub > ul> li > a > div 
+{
+    padding-bottom:6px;
 }

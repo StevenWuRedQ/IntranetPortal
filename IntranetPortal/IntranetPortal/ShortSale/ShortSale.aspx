@@ -14,7 +14,7 @@
 
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
-   
+
     <script type="text/javascript">
         function OnCallbackMenuClick(s, e) {
             if (e.item.name == "Custom") {
@@ -27,7 +27,7 @@
             e.processOnServer = false;
         }
     </script>
-    <asp:HiddenField runat="server" ID="hfIsEvction" Value="false"/>
+    <asp:HiddenField runat="server" ID="hfIsEvction" Value="false" />
     <div style="background: url(/images/MyIdealProptery.png) no-repeat center fixed; background-size: 260px, 280px; background-color: #dddddd; width: 100%; height: 100%;">
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
@@ -75,19 +75,50 @@
                                                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;Title&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                                                         </a>
                                                                     </li>
-                                                                    <li class="short_sale_head_tab" >
+                                                                    <li class="short_sale_head_tab">
                                                                         <a href="#documents" role="tab" data-toggle="tab" class="tab_button_a" onclick="BindDocuments(false)">
                                                                             <i class="fa fa-file head_tab_icon_padding"></i>
                                                                             <div class="font_size_bold">Documents</div>
                                                                         </a>
                                                                     </li>
-                                                                    <li class="short_sale_head_tab" >
-                                                                        <a  role="tab" data-toggle="tab" class="tab_button_a" onclick="ShowPopupLeadsMenu(this,leadsInfoBBLE)">
+                                                                    <li class="short_sale_head_tab">
+
+                                                                        <a class="tab_button_a">
                                                                             <i class="fa fa-list-ul head_tab_icon_padding"></i>
                                                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                                                         </a>
+                                                                        <div class="shot_sale_sub">
+                                                                            <ul class="nav  clearfix" role="tablist">
+                                                                                <li class="short_sale_head_tab">
+                                                                                    <a role="tab" class="tab_button_a" onclick="OpenTabLink('Leads',leadsInfoBBLE)">
+                                                                                        <i class="fa fa-folder head_tab_icon_padding"></i>
+                                                                                        <div class="font_size_bold">Leads</div>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li class="short_sale_head_tab">
+                                                                                    <a role="tab" class="tab_button_a" onclick="OpenTabLink('ShortSale',leadsInfoBBLE)">
+                                                                                        <i class="fa fa-forward head_tab_icon_padding"></i>
+                                                                                        <div class="font_size_bold">Short Sale</div>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li class="short_sale_head_tab">
+                                                                                    <a role="tab" class="tab_button_a" onclick="OpenTabLink('Eviction',leadsInfoBBLE)">
+                                                                                        <i class="fa fa-sign-out head_tab_icon_padding"></i>
+                                                                                        <div class="font_size_bold">Eviction</div>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <li class="short_sale_head_tab">
+                                                                                    <a role="tab" data-toggle="tab" class="tab_button_a" onclick="OpenTabLink('Legal',leadsInfoBBLE)">
+                                                                                        <i class="fa fa-university head_tab_icon_padding"></i>
+                                                                                        <div class="font_size_bold">Legal</div>
+                                                                                    </a>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+
+
                                                                     </li>
-                                                                   
+
 
                                                                     <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                     <li style="margin-right: 30px; color: #ffa484; float: right">
@@ -131,14 +162,14 @@
                                                                             </li>
                                                                             <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                             <li style="margin-right: 30px; color: #7396a9; float: right">
-                                                                               
+
                                                                                 <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
-<%--                                                                                 <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>--%>
+                                                                                <%--                                                                                 <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>--%>
                                                                                 <i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')"></i>
                                                                                 <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>
                                                                                 <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')"></i>
                                                                                 <i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="LogClick('Closed')"></i>
-<%--                                                                                <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>--%>
+                                                                                <%--                                                                                <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>--%>
                                                                             </li>
                                                                         </ul>
                                                                         <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="ShortSale" />

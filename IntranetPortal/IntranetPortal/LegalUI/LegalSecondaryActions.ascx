@@ -95,8 +95,15 @@
             </li>
 
             <li class="ss_form_item">
+                <label class="ss_form_input_title">Relationship Of Parties</label>
+                <select class="ss_form_input" ng-model="LegalCase.SecondaryInfo.RelationshipOfParties" ng-options='o as o for o  in [ "Married","Divorced","Seperated","Family members","Other"]'>
+                    <option value="Action1">Action1 </option>
+                    <option value="Action1">Action2 </option>
+                </select>
+            </li>
+             <li class="ss_form_item">
                 <label class="ss_form_input_title">Action</label>
-                <select class="ss_form_input" ng-model="LegalCase.SecondaryInfo.PartitionAction">
+                <select class="ss_form_input" ng-model="LegalCase.SecondaryInfo.Relationshi">
                     <option value="Action1">Action1 </option>
                     <option value="Action1">Action2 </option>
                 </select>

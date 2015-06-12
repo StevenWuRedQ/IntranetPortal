@@ -20,7 +20,7 @@
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
     <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
     <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
     <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>
@@ -197,6 +197,9 @@
                                 </select>
                                 <select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
                                 </select>--%>
+                                <style>
+                                   
+                                </style>
                             </div>
 
                             <div style="align-content: center; height: 100%">
@@ -216,11 +219,45 @@
                                             <div class="font_size_bold">Documents</div>
                                         </a>
                                     </li>
+
                                     <li class="short_sale_head_tab">
-                                        <a role="tab" data-toggle="tab" class="tab_button_a" onclick="ShowPopupLeadsMenu(this,leadsInfoBBLE)">
+
+
+                                        <a class="tab_button_a">
                                             <i class="fa fa-list-ul head_tab_icon_padding"></i>
                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
+
                                         </a>
+                                        <div class="shot_sale_sub">
+                                            <ul class="nav  clearfix" role="tablist">
+                                                <li class="short_sale_head_tab">
+                                                    <a role="tab" class="tab_button_a" onclick="OpenTabLink('Leads',leadsInfoBBLE)">
+                                                        <i class="fa fa-folder head_tab_icon_padding"></i>
+                                                        <div class="font_size_bold">Leads</div>
+                                                    </a>
+                                                </li>
+                                                <li class="short_sale_head_tab">
+                                                    <a role="tab" class="tab_button_a" onclick="OpenTabLink('ShortSale',leadsInfoBBLE)">
+                                                        <i class="fa fa-forward head_tab_icon_padding"></i>
+                                                        <div class="font_size_bold">Short Sale</div>
+                                                    </a>
+                                                </li>
+                                                <li class="short_sale_head_tab">
+                                                    <a role="tab" class="tab_button_a" onclick="OpenTabLink('Eviction',leadsInfoBBLE)">
+                                                        <i class="fa fa-sign-out head_tab_icon_padding"></i>
+                                                        <div class="font_size_bold">Eviction</div>
+                                                    </a>
+                                                </li>
+                                                <li class="short_sale_head_tab">
+                                                    <a role="tab" data-toggle="tab" class="tab_button_a" onclick="OpenTabLink('Legal',leadsInfoBBLE)">
+                                                        <i class="fa fa-university head_tab_icon_padding"></i>
+                                                        <div class="font_size_bold">Legal</div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+
+
                                     </li>
                                     <li style="margin-right: 30px; color: #ffa484; float: right">
                                         <i class="fa fa-save sale_head_button sale_head_button_left tooltip-examples" title="" ng-click="SaveLegal()" data-original-title="Save"></i>
@@ -319,6 +356,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <dx:ASPxPopupControl ClientInstanceName="popupCtrUploadFiles" Width="950px" Height="840px" ID="ASPxPopupControl2"
                                 HeaderText="Upload Files" AutoUpdatePosition="true" Modal="true" CloseAction="CloseButton"
                                 runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
