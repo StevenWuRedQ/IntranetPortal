@@ -35,10 +35,10 @@ Partial Public Class ShortSaleEntities
     Public Overridable Property PropertyOccupants() As DbSet(Of PropertyOccupant)
     Public Overridable Property TitleJudgementSearches() As DbSet(Of TitleJudgementSearch)
     Public Overridable Property EvictionCases() As DbSet(Of EvictionCas)
-    Public Overridable Property PropertyValueInfoes() As DbSet(Of PropertyValueInfo)
     Public Overridable Property Employees() As DbSet(Of Employee)
     Public Overridable Property ShortSaleActivityLogs() As DbSet(Of ShortSaleActivityLog)
     Public Overridable Property MortgageStatusDatas() As DbSet(Of MortgageStatusData)
     Public Overridable Property GroupTypes() As DbSet(Of GroupType)
+    Public Overridable Property PropertyValueInfoes() As DbSet(Of PropertyValueInfo)
 
 End Class

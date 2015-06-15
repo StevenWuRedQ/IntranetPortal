@@ -15,6 +15,7 @@ Partial Public Class PropertyValueInfo
     Public Property BBLE As String
     Public Property Method As String
     Public Property BankValue As Nullable(Of Decimal)
+    Public Property MNSP As Nullable(Of Decimal)
     Public Property DateOfValue As Nullable(Of Date)
     Public Property ExpiredOn As Nullable(Of Date)
 

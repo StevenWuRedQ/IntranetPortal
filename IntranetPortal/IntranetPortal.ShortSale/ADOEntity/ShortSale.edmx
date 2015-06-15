@@ -250,6 +250,7 @@
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="Method" Type="nvarchar" MaxLength="50" />
           <Property Name="BankValue" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MNSP" Type="decimal" Precision="18" Scale="2" />
           <Property Name="DateOfValue" Type="datetime" />
           <Property Name="ExpiredOn" Type="datetime" />
         </EntityType>
@@ -406,11 +407,11 @@
           <EntitySet Name="PropertyOccupants" EntityType="IntranetPortalModel.PropertyOccupant" />
           <EntitySet Name="TitleJudgementSearches" EntityType="IntranetPortalModel.TitleJudgementSearch" />
           <EntitySet Name="EvictionCases" EntityType="IntranetPortalModel.EvictionCas" />
-          <EntitySet Name="PropertyValueInfoes" EntityType="IntranetPortalModel.PropertyValueInfo" />
           <EntitySet Name="Employees" EntityType="IntranetPortalModel.Employee" />
           <EntitySet Name="ShortSaleActivityLogs" EntityType="IntranetPortalModel.ShortSaleActivityLog" />
           <EntitySet Name="MortgageStatusDatas" EntityType="IntranetPortalModel.MortgageStatusData" />
           <EntitySet Name="GroupTypes" EntityType="IntranetPortalModel.GroupType" />
+          <EntitySet Name="PropertyValueInfoes" EntityType="IntranetPortalModel.PropertyValueInfo" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -712,17 +713,6 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="PropertyValueInfo">
-          <Key>
-            <PropertyRef Name="ValueId" />
-          </Key>
-          <Property Name="ValueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="Method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BankValue" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="DateOfValue" Type="DateTime" Precision="3" />
-          <Property Name="ExpiredOn" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="EmployeeID" />
@@ -774,6 +764,18 @@
           <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PropertyValueInfo">
+          <Key>
+            <PropertyRef Name="ValueId" />
+          </Key>
+          <Property Name="ValueId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="Method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BankValue" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MNSP" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DateOfValue" Type="DateTime" Precision="3" />
+          <Property Name="ExpiredOn" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1091,18 +1093,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PropertyValueInfoes">
-            <EntityTypeMapping TypeName="IntranetPortalModel.PropertyValueInfo">
-              <MappingFragment StoreEntitySet="PropertyValueInfo">
-                <ScalarProperty Name="ExpiredOn" ColumnName="ExpiredOn" />
-                <ScalarProperty Name="DateOfValue" ColumnName="DateOfValue" />
-                <ScalarProperty Name="BankValue" ColumnName="BankValue" />
-                <ScalarProperty Name="Method" ColumnName="Method" />
-                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
-                <ScalarProperty Name="ValueId" ColumnName="ValueId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="IntranetPortalModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
@@ -1156,6 +1146,19 @@
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyValueInfoes">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PropertyValueInfo">
+              <MappingFragment StoreEntitySet="PropertyValueInfo">
+                <ScalarProperty Name="ExpiredOn" ColumnName="ExpiredOn" />
+                <ScalarProperty Name="DateOfValue" ColumnName="DateOfValue" />
+                <ScalarProperty Name="MNSP" ColumnName="MNSP" />
+                <ScalarProperty Name="BankValue" ColumnName="BankValue" />
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="ValueId" ColumnName="ValueId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
