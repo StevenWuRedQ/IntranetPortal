@@ -294,7 +294,7 @@
 
     <%--<script src="/Scripts/angular.js"></script>--%>
 </head>
-<body ng-controller="PortalCtrl">
+<body ng-controller="PortalCtrl" id="PortalCtrl">
     <form id="form1" runat="server">
         <link href="/css/stevencss.css?v=1.02" rel="stylesheet" type="text/css" />
         <div style="color: #b1b2b7" class="clearfix">
@@ -695,6 +695,13 @@
              }
          )
     </script>--%>
+    <script>
+        function saveContact()
+        {
+            angular.element(document.getElementById("PortalCtrl")).scope().SaveCurrent();
+        }
+        
+    </script>
     <script src="/Scripts/bootstrap.min.js"></script>
 </body>
 </html>

@@ -53,8 +53,12 @@
                 return;
             }
             var m_Current_contatct = contactDocument.m_current_contact;
-          
             
+            if (typeof contactDocument.saveContact != 'undefined')
+            {
+                contactDocument.saveContact();
+            }
+
             refreshDiv(tmpPartyName, m_Current_contatct);
             if (onSelectCallback != null) {
                 onSelectCallback(m_Current_contatct);
