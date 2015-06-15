@@ -43,8 +43,12 @@
     function ShowCaseInfo(CaseId) {
         for (var win in fileWindows) {
             if (fileWindows.hasOwnProperty(win) && win == CaseId) {
-                fileWindows[win].focus();
-                return;
+                var caseWin = fileWindows[win];
+                if (!caseWin.closed)
+                {
+                    caseWin.focus();
+                    return;
+                }
             }
         }
 

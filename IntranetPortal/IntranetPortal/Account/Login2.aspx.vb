@@ -23,7 +23,7 @@ Public Class Login2
             If String.IsNullOrEmpty(Request.QueryString("ReturnUrl")) Then
                 Response.Redirect("~/")
             Else
-                FormsAuthentication.RedirectFromLoginPage(name, False)
+                FormsAuthentication.RedirectFromLoginPage(cbEmps.Text, False)
             End If
         Else
             tbUserName.ErrorText = "Invalid user"

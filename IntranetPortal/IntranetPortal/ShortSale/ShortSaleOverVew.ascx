@@ -276,8 +276,8 @@
                                     </div>
                                     <script>
 
-                                        
-                                       
+
+
                                         function DocumentChanged(e) {
                                             var checked = e.checked // $(e).porp("checked")
                                             $("#missed_doc_li").css("display", checked ? '' : "none");
@@ -352,6 +352,10 @@
                                                     <PropertiesTextEdit Native="true" Style-CssClass="form-control">
                                                     </PropertiesTextEdit>
                                                 </dx:GridViewDataTextColumn>
+                                                <dx:GridViewDataTextColumn FieldName="MNSP" PropertiesTextEdit-DisplayFormatString="C2">
+                                                    <PropertiesTextEdit Native="true" Style-CssClass="form-control">
+                                                    </PropertiesTextEdit>
+                                                </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataDateColumn FieldName="DateOfValue" Width="120px">
                                                 </dx:GridViewDataDateColumn>
                                                 <dx:GridViewDataDateColumn FieldName="ExpiredOn" Width="120px"></dx:GridViewDataDateColumn>
@@ -359,7 +363,6 @@
                                             </Columns>
                                             <SettingsEditing Mode="Inline"></SettingsEditing>
                                         </dx:ASPxGridView>
-
                                     </div>
                                     <div class="ss_form">
                                         <h4 class="ss_form_title">Offer Info</h4>

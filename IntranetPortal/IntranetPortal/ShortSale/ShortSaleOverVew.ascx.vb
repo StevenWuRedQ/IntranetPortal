@@ -83,7 +83,7 @@ Public Class ShortSaleOverVew
         info.BankValue = e.NewValues("BankValue")
         info.DateOfValue = e.NewValues("DateOfValue")
         info.ExpiredOn = e.NewValues("ExpiredOn")
-
+        info.MNSP = e.NewValues("MNSP")
         info.Save()
 
         e.Cancel = True
@@ -98,7 +98,7 @@ Public Class ShortSaleOverVew
         info.BankValue = e.NewValues("BankValue")
         info.DateOfValue = e.NewValues("DateOfValue")
         info.ExpiredOn = e.NewValues("ExpiredOn")
-
+        info.MNSP = e.NewValues("MNSP")
         info.Save()
 
         e.Cancel = True
