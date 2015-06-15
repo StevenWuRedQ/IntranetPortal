@@ -86,6 +86,51 @@ Partial Public Class ImportAgentData
     Protected WithEvents lblMsg As Global.DevExpress.Web.ASPxEditors.ASPxLabel
 
     '''<summary>
+    '''ImportJson control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ImportJson As Global.DevExpress.Web.ASPxEditors.ASPxTextBox
+
+    '''<summary>
+    '''LoadImportJson control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents LoadImportJson As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Import2PaddingBtn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Import2PaddingBtn As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''ImportStauts control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ImportStauts As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+
+    '''<summary>
+    '''Import2PaddingAssginGrid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Import2PaddingAssginGrid As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
     '''cbEmpFrom control.
     '''</summary>
     '''<remarks>

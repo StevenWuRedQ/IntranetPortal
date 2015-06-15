@@ -14,7 +14,7 @@
     </script>
 </head>
 <body>
-    <form id="form1" runat="server" style="height:1000px;overflow:auto">
+    <form id="form1" runat="server" style="height: 1000px; overflow: auto">
         <div>
             <dx:ASPxRoundPanel runat="server" HeaderText="Import Data" Width="100%">
                 <PanelCollection>
@@ -53,6 +53,38 @@
                     </dx:PanelContent>
                 </PanelCollection>
             </dx:ASPxRoundPanel>
+            <dx:ASPxRoundPanel runat="server" HeaderText="Import to padding assign " Width="100%">
+                <PanelCollection>
+                    <dx:PanelContent>
+                        <table>
+                            <tr>
+                                <td style="width: 80px">
+                                    <dx:ASPxLabel runat="server" Text="BBLEs:"></dx:ASPxLabel>
+                                </td>
+                                <td>
+                                    <dx:ASPxTextBox ID="ImportJson" runat="server" Width="170px">
+                                    </dx:ASPxTextBox>
+                                </td>
+                                <td>
+                                    <asp:Button ID="LoadImportJson" runat="server" Text="Load" OnClick="LoadImportJson_Click" />
+                                    <br />
+                                    <asp:Button ID="Import2PaddingBtn" runat="server" Text="Import" OnClick="Import2PaddingBtn_Click" />
+
+                                    <dx:ASPxLabel runat="server" ID="ImportStauts" Text=""></dx:ASPxLabel>
+                                </td>
+                            </tr>
+                        </table>
+                        <dx:ASPxGridView runat="server" KeyFieldName="BBLE" ID="Import2PaddingAssginGrid">
+                            <Columns>
+                                <dx:GridViewDataTextColumn FieldName="BBLE"></dx:GridViewDataTextColumn>
+                                <dx:GridViewDataTextColumn FieldName="EmployeeName"></dx:GridViewDataTextColumn>
+                                
+                            </Columns>
+                        </dx:ASPxGridView>
+                    </dx:PanelContent>
+                </PanelCollection>
+            </dx:ASPxRoundPanel>
+
             <dx:ASPxRoundPanel runat="server" HeaderText="Transfer Leads" Width="100%">
                 <PanelCollection>
                     <dx:PanelContent>
@@ -70,29 +102,29 @@
                             </tr>
                             <tr>
                                 <td style="width: 80px">
-                                  <label>BBLEs:</label>
+                                    <label>BBLEs:</label>
                                 </td>
                                 <td style="width: 150px;">
-                                    <asp:TextBox ID="BBLEList" runat="server" ></asp:TextBox>
+                                    <asp:TextBox ID="BBLEList" runat="server"></asp:TextBox>
                                 </td>
-                                
+
                             </tr>
                             <tr>
                                 <td style="width: 120px">
-                                    <dx:ASPxLabel runat="server" Text="StatusForm: (Optional) " ></dx:ASPxLabel>
+                                    <dx:ASPxLabel runat="server" Text="StatusForm: (Optional) "></dx:ASPxLabel>
                                 </td>
                                 <td style="width: 150px;">
-                                     <dx:ASPxComboBox runat="server" ID="cbStatusFrom" ></dx:ASPxComboBox>
+                                    <dx:ASPxComboBox runat="server" ID="cbStatusFrom"></dx:ASPxComboBox>
                                 </td>
-                            </tr>    
-                             <tr>
+                            </tr>
+                            <tr>
                                 <td style="width: 120px">
-                                    <dx:ASPxLabel runat="server" Text="Amount: (Optional) " ></dx:ASPxLabel>
+                                    <dx:ASPxLabel runat="server" Text="Amount: (Optional) "></dx:ASPxLabel>
                                 </td>
                                 <td style="width: 150px;">
                                     <dx:ASPxTextBox runat="server" ID="txtLeadsAmount"></dx:ASPxTextBox>
                                 </td>
-                            </tr>                                     
+                            </tr>
                         </table>
 
                         <dx:ASPxGridView runat="server" ID="gridAgentLeads" KeyFieldName="ID" Settings-ShowGroupPanel="false" AutoGenerateColumns="false">
@@ -109,13 +141,13 @@
                         </dx:ASPxGridView>
                         Select Agent to Import:
                         <dx:ASPxComboBox runat="server" ID="cbEmpTo" TextField="Name" ValueField="EmployeeID"></dx:ASPxComboBox>
-                        
-                         Select status to Change:(optional)
-                        <dx:ASPxComboBox runat="server" ID="cbStatusToChange"  ></dx:ASPxComboBox>
-                         
+
+                        Select status to Change:(optional)
+                        <dx:ASPxComboBox runat="server" ID="cbStatusToChange"></dx:ASPxComboBox>
+
                         Call Back Time :(need  select when tralsfer to status call back)
                         <dx:ASPxDateEdit runat="server" ID="deCallBackTime"></dx:ASPxDateEdit>
-                        
+
                         <dx:ASPxButton runat="server" ID="btnTransfer" Text="Transfer" OnClick="btnTransfer_Click"></dx:ASPxButton>
                         <dx:ASPxLabel runat="server" ID="ASPxLabel2"></dx:ASPxLabel>
                         <dx:ASPxCheckBox ID="cbKeepStatus" runat="server" Text="Keep Same status"></dx:ASPxCheckBox>
@@ -123,15 +155,15 @@
                 </PanelCollection>
             </dx:ASPxRoundPanel>
 
-            
+
             <dx:ASPxRoundPanel runat="server" HeaderText="Last Log View" Width="100%">
                 <PanelCollection>
                     <dx:PanelContent>
-                         <dx:ASPxButton runat="server" Text="LoadLastLog" ID="LoadLastLog" OnClick="LoadLastLog_Click"></dx:ASPxButton>
+                        <dx:ASPxButton runat="server" Text="LoadLastLog" ID="LoadLastLog" OnClick="LoadLastLog_Click"></dx:ASPxButton>
                         <dx:ASPxButton runat="server" Text="ExportExcel" ID="exportLastLog" OnClick="exportLastLog_Click"></dx:ASPxButton>
-                         <dx:ASPxGridView runat="server" ID="gridLastLogView" KeyFieldName="BBLE" Settings-ShowGroupPanel="false" AutoGenerateColumns="false">
-                             <Columns>
-                                 <dx:GridViewDataTextColumn FieldName="BBLE">
+                        <dx:ASPxGridView runat="server" ID="gridLastLogView" KeyFieldName="BBLE" Settings-ShowGroupPanel="false" AutoGenerateColumns="false">
+                            <Columns>
+                                <dx:GridViewDataTextColumn FieldName="BBLE">
                                 </dx:GridViewDataTextColumn>
                                 <dx:GridViewDataTextColumn FieldName="PropertyAddress">
                                 </dx:GridViewDataTextColumn>
@@ -139,29 +171,29 @@
                                 </dx:GridViewDataTextColumn>
                                 <dx:GridViewDataTextColumn FieldName="Department">
                                 </dx:GridViewDataTextColumn>
-                                 <dx:GridViewDataTextColumn FieldName="Status">
+                                <dx:GridViewDataTextColumn FieldName="Status">
                                 </dx:GridViewDataTextColumn>
-                                 <dx:GridViewDataTextColumn FieldName="ZipCode">
+                                <dx:GridViewDataTextColumn FieldName="ZipCode">
                                 </dx:GridViewDataTextColumn>
                                 <dx:GridViewDataTextColumn FieldName="LastUpdateBy">
                                 </dx:GridViewDataTextColumn>
                                 <dx:GridViewDataTextColumn FieldName="LastUpdateDate">
                                 </dx:GridViewDataTextColumn>
-                                 <dx:GridViewDataTextColumn FieldName="LastUpdateComments">
-                                   <DataItemTemplate>
-                                       <div>
-                                           <%# Eval("LastUpdateComments")%>
-                                       </div>
-                                   </DataItemTemplate>
+                                <dx:GridViewDataTextColumn FieldName="LastUpdateComments">
+                                    <DataItemTemplate>
+                                        <div>
+                                            <%# Eval("LastUpdateComments")%>
+                                        </div>
+                                    </DataItemTemplate>
                                 </dx:GridViewDataTextColumn>
-                                 
-                             </Columns>
-                             
-                         </dx:ASPxGridView>
+
+                            </Columns>
+
+                        </dx:ASPxGridView>
                         <dx:ASPxGridViewExporter ID="ASPxLoadLastLogExporter" runat="server" GridViewID="gridLastLogView"></dx:ASPxGridViewExporter>
                     </dx:PanelContent>
-                    </PanelCollection>
-                </dx:ASPxRoundPanel>
+                </PanelCollection>
+            </dx:ASPxRoundPanel>
             <dx:ASPxRoundPanel runat="server" HeaderText="Initial Data" Width="100%">
                 <PanelCollection>
                     <dx:PanelContent>

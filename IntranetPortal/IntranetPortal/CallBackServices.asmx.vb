@@ -31,12 +31,8 @@ Public Class CallBackServices
 
     <WebMethod()> _
     Public Sub SaveContact(json As PartyContact)
-        Dim c = PartyContact.GetContactByName(json.Name)
-        If (c IsNot Nothing) Then
-            c.Save()
-        Else
-            json.Save()
-        End If
+
+        json.Save()
 
     End Sub
 

@@ -30,7 +30,7 @@
 
         </dx:PopupControlContentControl>
     </ContentCollection>
-    <ClientSideEvents CloseUp="function(s) {if(VendorsClosing) VendorsClosing();}"></ClientSideEvents>
+    <ClientSideEvents CloseUp="function(s) {if(typeof VendorsClosing != 'undefined') VendorsClosing();}"></ClientSideEvents>
 </dx:ASPxPopupControl>
 <dx:ASPxPopupControl ID="AddNewVendorPopUp" runat="server"
 >

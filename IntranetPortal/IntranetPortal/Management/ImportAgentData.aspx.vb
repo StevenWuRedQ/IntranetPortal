@@ -454,4 +454,47 @@ InitialLine:
             gridLastLogView.DataBind()
         End Using
     End Sub
+
+    Protected Sub LoadImportJson_Click(sender As Object, e As EventArgs)
+        Dim paddingAssginLeads = GetPaddginAssignLeads()
+        If (paddingAssginLeads Is Nothing) Then
+            ImportStauts.Text = "Please fill padding assgin Josn"
+            Return
+        End If
+        Import2PaddingAssginGrid.DataSource = paddingAssginLeads
+        Import2PaddingAssginGrid.DataBind()
+    End Sub
+
+    Protected Sub Import2PaddingBtn_Click(sender As Object, e As EventArgs)
+        Dim paddingLeads = GetPaddginAssignLeads()
+        If (paddingLeads Is Nothing) Then
+            ImportStauts.Text = "Please fill padding assgin Josn"
+            Return
+        End If
+        ImportStauts.Text = "Start transfter"
+        Using ctx As New Entities
+
+            For Each p In paddingLeads
+                Dim l = New PendingAssignLead
+                l.BBLE = p.Item("BBLE").ToString
+                l.EmployeeName = p.Item("EmployeeName")
+                l.CreateBy = "System Import"
+                l.CreateDate = DateTime.Now
+                l.Status = 0
+                ctx.PendingAssignLeads.Add(l)
+
+            Next
+            ctx.SaveChanges()
+        End Using
+
+        ImportStauts.Text = "Transfer finished"
+    End Sub
+    Function GetPaddginAssignLeads() As JArray
+        If (Not String.IsNullOrEmpty(ImportJson.Text)) Then
+            Return JArray.Parse(ImportJson.Text)
+        End If
+
+        Return Nothing
+    End Function
+
 End Class

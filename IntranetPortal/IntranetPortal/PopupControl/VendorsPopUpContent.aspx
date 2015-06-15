@@ -524,6 +524,7 @@
                                     <td>
                                         <div class="detail_right">
                                             <div style="font-size: 30px; color: #234b60">{{currentContact.Name}}</div>
+                                            
                                             <%-- <div style="font-size: 16px; color: #234b60; font-weight: 900">Sales Agent</div>--%>
                                         </div>
                                     </td>
