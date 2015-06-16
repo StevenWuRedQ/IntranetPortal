@@ -5,9 +5,9 @@
     <label class="ss_form_title" style="font-size: 18px; margin-right: 10px">
         Sale Date    
     </label>
-    <input class="ss_form_input ss_date" data-field="SaleDate" style="width: 150px" id="txtSaleDate">     
+    <input class="ss_form_input ss_date" data-field="SaleDate" style="width: 150px" id="txtSaleDate">
     <%--<input type="checkbox" class="ss_form_input" data-field="NoSaleDate" style="width: 150px" id="chkNoSaleDate" onclick="txtSaleDate.hidden = this.checked ? true : false">--%>
-   <%-- <label class="ss_form_input_title" style="margin-right: 10px" for="chkNoSaleDate">
+    <%-- <label class="ss_form_input_title" style="margin-right: 10px" for="chkNoSaleDate">
         No Sale Date as of
     </label>--%>
     <div style="float: right">
@@ -95,9 +95,9 @@
                         <option value="Fannie">Fannie</option>
                         <option value="FHA">FHA</option>
                         <option value="Freddie Mac">Freddie Mac</option>
+                        <option value="Ginnie Mae">Ginnie Mae</option>
                         <option value="Conventional">Conventional</option>
                         <option value="Private">Private</option>
-
                     </select>
 
                 </li>
@@ -115,7 +115,7 @@
                     <input class="ss_form_input" data-field="PropertyInfo.NumOfFamilies">
                 </li>
 
-              
+
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Expires</label>
                     <input class="ss_form_input ss_date" data-field="PayoffExpired">

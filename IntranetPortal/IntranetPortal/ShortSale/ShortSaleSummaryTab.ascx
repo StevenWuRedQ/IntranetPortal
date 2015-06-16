@@ -136,11 +136,10 @@
                                 <option value="Fannie">Fannie</option>
                                 <option value="FHA">FHA</option>
                                 <option value="Freddie Mac">Freddie Mac</option>
+                                <option value="Ginnie Mae">Ginnie Mae</option>
                                 <option value="Conventional">Conventional</option>
                                 <option value="Private">Private</option>
-
                             </select>
-
                         </li>
 
                     </ul>
