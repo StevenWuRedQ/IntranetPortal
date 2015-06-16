@@ -728,6 +728,8 @@ Public Class LeadsInfo
                 End If
 
                 ctx.SaveChanges()
+            Else
+                Throw New Exception("Can't find employee name: " & empName)
             End If
         End Using
     End Sub

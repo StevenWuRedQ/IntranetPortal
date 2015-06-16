@@ -973,4 +973,8 @@ Public Class ActivityLogs
             gvPreviousNotes.DataSource = ShortSaleActivityLog.GetLogs(hfBBLE.Value)
         End If
     End Sub
+
+    Protected Sub cmbStatus_Callback(sender As Object, e As DevExpress.Web.ASPxClasses.CallbackEventArgsBase)
+
+    End Sub
 End Class

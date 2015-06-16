@@ -77,6 +77,7 @@ Partial Class Troubleshooting
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.Button10 = New System.Windows.Forms.Button()
+        Me.Button11 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -349,6 +350,7 @@ Partial Class Troubleshooting
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.Button11)
         Me.TabPage2.Controls.Add(Me.TextBox1)
         Me.TabPage2.Controls.Add(Me.Button1)
         Me.TabPage2.Controls.Add(Me.txtTaskId)
@@ -621,6 +623,15 @@ Partial Class Troubleshooting
         Me.Button10.Text = "Set ShortSale Referral"
         Me.Button10.UseVisualStyleBackColor = True
         '
+        'Button11
+        '
+        Me.Button11.Location = New System.Drawing.Point(222, 72)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(153, 23)
+        Me.Button11.TabIndex = 9
+        Me.Button11.Text = "Pending Assign Rules"
+        Me.Button11.UseVisualStyleBackColor = True
+        '
         'Troubleshooting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -709,4 +720,5 @@ Partial Class Troubleshooting
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
     Friend WithEvents Button10 As System.Windows.Forms.Button
+    Friend WithEvents Button11 As System.Windows.Forms.Button
 End Class

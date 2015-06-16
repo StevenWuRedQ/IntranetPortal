@@ -149,6 +149,15 @@ Partial Public Class Root
     Protected WithEvents LeadsSubMenu As Global.IntranetPortal.LeadsSubMenu
 
     '''<summary>
+    '''Common control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Common As Global.IntranetPortal.Common
+
+    '''<summary>
     '''Content control.
     '''</summary>
     '''<remarks>

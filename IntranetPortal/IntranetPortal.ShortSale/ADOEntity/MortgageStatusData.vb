@@ -14,5 +14,6 @@ Partial Public Class MortgageStatusData
     Public Property StatusId As Integer
     Public Property Name As String
     Public Property Description As String
+    Public Property Category As String
 
 End Class

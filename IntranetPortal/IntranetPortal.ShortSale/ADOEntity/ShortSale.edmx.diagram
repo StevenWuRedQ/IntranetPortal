@@ -19,10 +19,10 @@
         <EntityTypeShape EntityType="IntranetPortalModel.TitleJudgementSearch" Width="1.5" PointX="4.75" PointY="6.25" />
         <EntityTypeShape EntityType="IntranetPortalModel.EvictionCas" Width="1.5" PointX="14.125" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.Employee" Width="1.5" PointX="0.75" PointY="9.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleActivityLog" Width="1.75" PointX="6.625" PointY="12.25" />
+        <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleActivityLog" Width="1.75" PointX="6.625" PointY="12.125" />
         <EntityTypeShape EntityType="IntranetPortalModel.MortgageStatusData" Width="1.5" PointX="8.625" PointY="10" />
         <EntityTypeShape EntityType="IntranetPortalModel.GroupType" Width="1.5" PointX="11.375" PointY="10.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.PropertyValueInfo" Width="1.5" PointX="6.75" PointY="9.625" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyValueInfo" Width="1.5" PointX="6.625" PointY="9.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

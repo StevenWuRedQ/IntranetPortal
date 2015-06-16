@@ -509,4 +509,9 @@ Public Class Troubleshooting
         IntranetPortal.ShortSaleManage.UpdateReferral()
         MessageBox.Show("Complete!")
     End Sub
+
+    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        Dim rule As New IntranetPortal.RulesEngine.PendingAssignRule
+        rule.Execute()
+    End Sub
 End Class

@@ -3,6 +3,8 @@
 <%@ Import Namespace="System.ComponentModel" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 <%@ Register Src="~/PopupControl/SendMail.ascx" TagPrefix="uc1" TagName="SendMail" %>
+<%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
+
 
 
 <!DOCTYPE html>
@@ -325,6 +327,7 @@
                                             <%---------------------end---------------%>
                                             <div style="overflow: auto">
                                                 <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
+                                                <uc1:Common runat="server" ID="Common" />
                                             </div>
                                         </div>
                                     </div>

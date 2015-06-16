@@ -529,9 +529,13 @@ Public Class PendingAssignRule
             Dim li = LeadsInfo.GetInstance(ld.BBLE)
             If li IsNot Nothing Then
                 If Not li.IsUpdating Then
-                    li.AssignTo(ld.EmployeeName, ld.CreateBy, False)
+                    Try
+                        li.AssignTo(ld.EmployeeName, ld.CreateBy, False)
 
-                    ld.Finish()
+                        ld.Finish()
+                    Catch ex As Exception
+                        Log("Pending Assign leads error " & li.BBLE, ex)
+                    End Try
                 End If
             End If
         Next
