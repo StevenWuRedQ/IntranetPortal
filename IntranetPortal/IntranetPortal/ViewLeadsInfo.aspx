@@ -20,27 +20,5 @@
         <uc1:LeadsInfo runat="server" ID="LeadsInfo" />
     </div>
     <uc1:LeadsSubMenu runat="server" ID="LeadsSubMenu" />
-    <script type="text/javascript">
-
-        function AttachScrollbar() {
-            return;
-            $("#prioity_content").mCustomScrollbar(
-              {
-                  theme: "minimal-dark"
-              }
-              );
-            $("#home_owner_content").mCustomScrollbar(
-                {
-                    theme: "minimal-dark"
-                }
-             );
-
-            $(".dxgvCSD").mCustomScrollbar(
-                {
-                    theme: "minimal-dark"
-                }
-             );
-           
-        }
-    </script>
+  
 </asp:Content>

@@ -965,6 +965,13 @@ jQuery.fn.fitToParent = function (options) {
     });
 };
 
-$(document).ready(function () {
-    $(".fit_to_parent").fitToParent();
-});
+function LoadMoreFrame(e) {
+    var url = e.dataset.url;
+    var href = e.dataset.href;
+    var iframe = $(href + ">iframe");
+    var frameurl = iframe.attr("src")
+    if (!frameurl) {
+        iframe.attr("src", url);
+    }
+
+}

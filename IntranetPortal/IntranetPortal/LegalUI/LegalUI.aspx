@@ -714,6 +714,10 @@
                     return d.promise();
                 },
                 byKey: function (key) {
+                    if (AllContact)
+                    {
+                        return AllContact.filter(function (o) { return o.ContactId == key })[0];
+                    }
                     var d = new $.Deferred();
                     $.get('/LegalUI/ContactService.svc/GetAllContacts?id=' + key)
                         .done(function (result) {

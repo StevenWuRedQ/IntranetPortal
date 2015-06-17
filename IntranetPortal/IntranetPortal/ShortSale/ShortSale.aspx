@@ -88,26 +88,31 @@
                                                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                                                         </a>
                                                                         <div class="shot_sale_sub">
+                                                                            <script>
+                                                                                
+                                                                            </script>
                                                                             <ul class="nav  clearfix" role="tablist">
                                                                                 <li class="short_sale_head_tab">
-                                                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads">
+                                                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="/ViewLeadsInfo.aspx?HiddenTab=true&id=<%= hfBBLE.Value %>" data-href="#more_leads"  onclick="LoadMoreFrame(this)">
                                                                                         <i class="fa fa-folder head_tab_icon_padding"></i>
                                                                                         <div class="font_size_bold">Leads</div>
                                                                                     </a>
                                                                                 </li>
-                                                                               
+
                                                                                 <li class="short_sale_head_tab">
-                                                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_evction">
+                                                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_evction" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_evction"  onclick="LoadMoreFrame(this)">
                                                                                         <i class="fa fa-sign-out head_tab_icon_padding"></i>
                                                                                         <div class="font_size_bold">Eviction</div>
                                                                                     </a>
                                                                                 </li>
+                                                                                <%If IntranetPortal.Legal.LegalCase.InLegal(hfBBLE.Value) %>
                                                                                 <li class="short_sale_head_tab">
-                                                                                    <a role="tab" data-toggle="tab" class="tab_button_a" href="#more_legal">
+                                                                                    <a role="tab" data-toggle="tab" class="tab_button_a" href="#more_legal" data-url="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_legal"  onclick="LoadMoreFrame(this)">
                                                                                         <i class="fa fa-university head_tab_icon_padding"></i>
                                                                                         <div class="font_size_bold">Legal</div>
                                                                                     </a>
                                                                                 </li>
+                                                                                <% End If %>
                                                                             </ul>
                                                                         </div>
                                                                     </li>
@@ -120,7 +125,7 @@
                                                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick=""></i>
                                                                     </li>
                                                                 </ul>
-                                                                <% End if %>
+                                                                <% End If%>
 
                                                                 <uc1:SendMail runat="server" ID="SendMail" LogCategory="ShortSale" />
                                                                 <div class="tab-content">
@@ -128,20 +133,20 @@
                                                                     <div class="tab-pane active" id="property_info">
                                                                         <uc1:ShortSaleOverVew runat="server" ID="ShortSaleOverVew" />
                                                                     </div>
-                                                                    <div class="tab-pane" id="home_owner">
+                                                                    <div class="tab-pane load_bg" id="home_owner">
                                                                         <uc1:Title runat="server" ID="ucTitle" />
                                                                     </div>
-                                                                    <div class="tab-pane " id="documents">
+                                                                    <div class="tab-pane load_bg" id="documents">
                                                                         <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
                                                                     </div>
-                                                                    <div class="tab-pane" id="more_leads">
-                                                                        <iframe   width="100%" height="100%" style="min-height:855px;overflow:auto"  frameborder="0" src="/ViewLeadsInfo.aspx?HiddenTab=true&id=<%= hfBBLE.Value %>"></iframe>
+                                                                    <div class="tab-pane load_bg" id="more_leads">
+                                                                        <iframe width="100%" height="100%" style="min-height: 855px; overflow: auto" frameborder="0"></iframe>
                                                                     </div>
-                                                                   <div class="tab-pane" id="more_evction">
-                                                                       <iframe   width="100%" height="100%" style="min-height:855px;overflow:auto"  frameborder="0" src="/ShortSale/ShortSale.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>"></iframe>
+                                                                    <div class="tab-pane load_bg" id="more_evction">
+                                                                       <iframe   width="100%" height="100%" style="min-height:855px;overflow:auto"  frameborder="0" ></iframe>
                                                                    </div>
-                                                                    <div class="tab-pane" id="more_legal">
-                                                                       <iframe   width="100%" height="100%" style="min-height:855px;overflow:auto"  frameborder="0" src="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>"></iframe>
+                                                                    <div class="tab-pane load_bg" id="more_legal">
+                                                                       <iframe   width="100%" height="100%" style="min-height:855px;overflow:auto"  frameborder="0" ></iframe>
                                                                    </div>
                                                                 </div>
                                                             </div>
