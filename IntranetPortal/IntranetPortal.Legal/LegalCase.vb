@@ -29,7 +29,9 @@ Partial Public Class LegalCase
         lc.Status = status
         lc.SaveData()
     End Sub
-
+    Public Shared Function InLegal(bble As String) As Boolean
+        Return LegalCase.GetCase(bble) IsNot Nothing
+    End Function
     Public Shared Function GetCaseList(status As LegalCaseStatus) As List(Of LegalCase)
         Using ctx As New LegalModelContainer
             Return ctx.LegalCases.Where(Function(lc) lc.Status = status).ToList
