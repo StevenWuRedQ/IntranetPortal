@@ -204,6 +204,7 @@
 
                             <div style="align-content: center; height: 100%">
                                 <!-- Nav tabs -->
+                                <% If Not HiddenTab Then%>
                                 <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 18px; color: white;">
                                     <li class="active short_sale_head_tab">
                                         <a href="#LegalTab" role="tab" data-toggle="tab" class="tab_button_a">
@@ -248,12 +249,7 @@
                                                         <div class="font_size_bold">Eviction</div>
                                                     </a>
                                                 </li>
-                                                <li class="short_sale_head_tab">
-                                                    <a role="tab" data-toggle="tab" class="tab_button_a" onclick="OpenTabLink('Legal',leadsInfoBBLE)">
-                                                        <i class="fa fa-university head_tab_icon_padding"></i>
-                                                        <div class="font_size_bold">Legal</div>
-                                                    </a>
-                                                </li>
+                                               
                                             </ul>
                                         </div>
 
@@ -285,7 +281,7 @@
                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
                                     </li>
                                 </ul>
-
+                                <% End If %>
                                 <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
                                 <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
                                     MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
@@ -381,7 +377,7 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-                <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" PaneStyle-Paddings-Padding="0px">
+                <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" PaneStyle-Paddings-Padding="0px" Name="LogPanel">
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <div style="font-size: 12px; color: #9fa1a8;">

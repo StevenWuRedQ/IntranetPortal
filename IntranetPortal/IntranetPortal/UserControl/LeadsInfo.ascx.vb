@@ -6,6 +6,7 @@ Public Class LeadsInfo1
 
     Dim category As Integer
     Dim CategoryName As String
+    Public Property HiddenTab As Boolean = False
     Public Property ShowLogPanel As Boolean = True
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -22,12 +23,18 @@ Public Class LeadsInfo1
                     doorKnockMapPanel.Visible = False
                 End If
             End If
-
+           
             If Not ShowLogPanel Then
                 contentSplitter.GetPaneByName("LogPanel").Collapsed = True
                 'contentSplitter.GetPaneByName("paneInfo").Separator.Visible = DevExpress.Utils.DefaultBoolean.False
                 'ActivityLogs.Visible = False
             End If
+        End If
+
+        HiddenTab = Not String.IsNullOrEmpty(Request.QueryString("HiddenTab"))
+        If (HiddenTab) Then
+            contentSplitter.GetPaneByName("LogPanel").Visible = False
+
         End If
     End Sub
 

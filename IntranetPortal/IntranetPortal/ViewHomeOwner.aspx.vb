@@ -22,6 +22,9 @@
         Dim ownerId = CInt(cbOwners.Value)
         Using ctx As New Entities
             Dim owner = ctx.HomeOwners.Find(ownerId)
+            Dim s = owner
+            Dim o = New With {.Address1 = s.Address1, .Address2 = s.Address2, .Name = s.Name, .Ctiy = s.City, .Zip = s.Zip}
+            lbArgumentSend.Text = o.ToJsonString
             Dim result = DataWCFService.GetLocateReport(New Random().Next(1, 10000), owner.BBLE, owner)
             If result IsNot Nothing Then
                 owner.TLOLocateReport = result

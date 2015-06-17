@@ -68,6 +68,15 @@ Partial Public Class ViewHomeOwner
     Protected WithEvents btnLoadOwnerInfo As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
+    '''lbArgumentSend control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbArgumentSend As Global.DevExpress.Web.ASPxEditors.ASPxLabel
+
+    '''<summary>
     '''txtOwnerData control.
     '''</summary>
     '''<remarks>

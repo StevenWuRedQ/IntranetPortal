@@ -408,6 +408,8 @@
                                     </dx:ASPxPopupMenu>
                                     <asp:HiddenField ID="hfBBLE" runat="server" />
                                     <!-- Nav tabs -->
+                                    <% If Not HiddenTab Then%>
+                                    
                                     <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #ff400d; font-size: 16px; color: white">
                                         <li class="active short_sale_head_tab">
                                             <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
@@ -448,6 +450,7 @@
                                             <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLeadInfo()"></i>
                                         </li>
                                     </ul>
+                                    <% End If %>
                                     <div class="tab-content">
                                         <uc1:PropertyInfo runat="server" ID="PropertyInfo" />
                                         <div class="tab-pane clearfix" id="home_owner">

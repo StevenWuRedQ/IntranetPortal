@@ -478,6 +478,10 @@ InitialLine:
                 Dim l = New PendingAssignLead
                 l.BBLE = p.Item("BBLE").ToString
                 l.EmployeeName = p.Item("EmployeeName")
+                Dim es = Employee.GetInstance(l.EmployeeName)
+                If (es Is Nothing) Then
+                    Throw New Exception("Can't find emloyee " & l.EmployeeName & " please check !")
+                End If
                 l.CreateBy = "System Import"
                 l.CreateDate = DateTime.Now
                 l.Status = 0

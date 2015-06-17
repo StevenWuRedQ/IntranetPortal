@@ -8,9 +8,17 @@ Public Class ShortSalePage
 
     Public Property ShortSaleCaseData As ShortSaleCase
     Public Property isEviction As Boolean = False
+    Public Property HiddenTab As Boolean = False
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         isEviction = CBool(hfIsEvction.Value)
         If Not Page.IsPostBack Then
+
+            HiddenTab = Not String.IsNullOrEmpty(Request.QueryString("HiddenTab"))
+            If (HiddenTab) Then
+                contentSplitter.GetPaneByName("LogPanel").Visible = False
+
+            End If
 
             If Not String.IsNullOrEmpty(Request.QueryString("s")) Then
                 Dim status = CType(Request.QueryString("s"), CaseStatus)
@@ -60,6 +68,7 @@ Public Class ShortSalePage
 
             If Not String.IsNullOrEmpty(Request.QueryString("bble")) Then
                 Dim bble = Request.QueryString("bble").ToString
+                hfBBLE.Value = bble
                 BindCaseData2(bble)
 
                 ASPxSplitter1.Panes("listPanel").Collapsed = True
@@ -74,6 +83,10 @@ Public Class ShortSalePage
 
             If Not String.IsNullOrEmpty(Request.QueryString("CaseId")) Then
                 Dim caseId = CInt(Request.QueryString("CaseId"))
+                Dim ssCase = ShortSaleCase.GetCase(caseId)
+                If (ssCase IsNot Nothing) Then
+                    hfBBLE.Value = ssCase.BBLE
+                End If
                 BindCaseData(caseId)
 
                 ASPxSplitter1.Panes("listPanel").Collapsed = True
@@ -198,6 +211,7 @@ Public Class ShortSalePage
         ShortSaleCaseData = ShortSaleCase.GetCase(caseId)
         contentSplitter.ClientVisible = True
         ShortSaleOverVew.BindData(ShortSaleCaseData)
+        hfBBLE.Value = ShortSaleCaseData.BBLE
         ucTitle.BindData(ShortSaleCaseData)
         ActivityLogs.DisplayMode = IntranetPortal.ActivityLogs.ActivityLogMode.ShortSale
         ActivityLogs.BindData(ShortSaleCaseData.BBLE)

@@ -11,6 +11,7 @@ Public Class LegalUI
     Public InWorkflow As Boolean = True
 
     Public propertyData As String
+    Public Property HiddenTab As Boolean = False
 
     Public Property DisplayView As Legal.LegalCaseStatus
 
@@ -19,6 +20,13 @@ Public Class LegalUI
     End Sub
 
     Sub Page_init(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Init
+
+
+        HiddenTab = Not String.IsNullOrEmpty(Request.QueryString("HiddenTab"))
+        If (HiddenTab) Then
+            ASPxSplitter1.GetPaneByName("LogPanel").Visible = False
+
+        End If
         Dim isInPoupUp = Request.QueryString("InPopUp") IsNot Nothing
         If (isInPoupUp) Then
             SencnedAction.Visible = True
@@ -33,7 +41,7 @@ Public Class LegalUI
             BindData(bble)
             Return
         End If
-        
+
         If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
             ASPxSplitter1.Panes("listPanel").Visible = False
             Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))
