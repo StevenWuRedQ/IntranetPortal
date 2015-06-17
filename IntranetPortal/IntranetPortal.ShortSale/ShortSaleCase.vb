@@ -551,6 +551,22 @@ Partial Public Class ShortSaleCase
         End Using
     End Function
 
+    Public Shared Function GetCaseByCategory(category As String, Optional owner As String = Nothing) As List(Of ShortSaleCase)
+        Using ctx As New ShortSaleEntities
+            Dim result = (From ss In ctx.ShortSaleCases
+                         Join mort In ctx.PropertyMortgages On ss.CaseId Equals mort.CaseId
+                         Join status In ctx.MortgageStatusDatas On mort.Status Equals status.Name
+                         Where status.Category = category
+                         Select ss).Distinct.ToList
+
+            If Not String.IsNullOrEmpty(owner) Then
+                result = result.Where(Function(ss) ss.Owner = owner).ToList
+            End If
+
+            Return result
+        End Using
+    End Function
+
     Public Shared Function GetCaseCount(status As CaseStatus, owner As String) As Integer
         Return GetCaseByStatus(status, owner).Count
     End Function
