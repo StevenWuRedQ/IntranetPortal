@@ -219,7 +219,12 @@ Public Class RefreshLeadsCountHandler
         End If
 
         If name.StartsWith("ShortSale") Then
-            Return GetShortSaleCaseCount(name, itemText, userName)
+            Try
+                Return GetShortSaleCaseCount(name, itemText, userName)
+            Catch ex As Exception
+                IntranetPortal.Core.SystemLog.Log("Error in Refresh System log", String.Format("Message:{0}, Stack: {1}", ex.Message, ex.StackTrace), "Error", "", userName)
+                Return 0
+            End Try
         End If
 
         If name.StartsWith("Eviction") Then
@@ -400,6 +405,16 @@ Public Class RefreshLeadsCountHandler
                     End If
 
                     Return 0
+                Case "Category"
+                    If tmpStr.Length = 3 Then
+                        Dim category = tmpStr(2)
+
+                        If (Employee.IsShortSaleManager(userName)) Then
+                            Return ShortSale.ShortSaleCase.GetCaseByCategory(category).Count
+                        End If
+
+                        Return ShortSale.ShortSaleCase.GetCaseByCategory(category, userName).Count
+                    End If
                 Case Else
                     Dim status As ShortSale.CaseStatus
 

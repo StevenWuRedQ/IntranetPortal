@@ -7,6 +7,22 @@ Public Class ShortSaleCaseList
         'BindCaseList()
     End Sub
 
+    Public Sub BindCaseListByCategory(category As String)
+        hfCaseCategory.Value = category
+
+        If Employee.IsShortSaleManager(Page.User.Identity.Name) Then
+            gridCase.DataSource = ShortSaleCase.GetCaseByCategory(category)
+            gridCase.DataBind()
+
+            If Not Page.IsPostBack Then
+                gridCase.GroupBy(gridCase.Columns("Owner"))
+            End If
+        Else
+            gridCase.DataSource = ShortSaleCase.GetCaseByCategory(category, Page.User.Identity.Name)
+            gridCase.DataBind()
+        End If
+    End Sub
+
     Public Sub BindCaseList(status As CaseStatus)
         hfCaseStatus.Value = status
 
@@ -70,6 +86,10 @@ Public Class ShortSaleCaseList
 
             If (Not String.IsNullOrEmpty(hfCaseBBLEs.Value)) Then
                 BindCaseByBBLEs(hfCaseBBLEs.Value.Split(";").ToList())
+            End If
+
+            If Not String.IsNullOrEmpty(hfCaseCategory.Value) Then
+                BindCaseListByCategory(hfCaseCategory.Value)
             End If
         End If
     End Sub

@@ -95,11 +95,11 @@
     }
 
     function OnSuccess(response) {
-      
+
         ShortSaleCaseData = response.d;  //JSON.parse(response.d);
         leadsInfoBBLE = ShortSaleCaseData.BBLE;
         ShortSaleDataBand(0);
-        
+
     }
 
     function OnGetRowValues(values) {
@@ -181,7 +181,8 @@
     </div>
     <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
         <asp:HiddenField runat="server" ID="hfCaseStatus" />
-         <asp:HiddenField runat="server" ID="hfCaseBBLEs" />
+        <asp:HiddenField runat="server" ID="hfCaseBBLEs" />
+        <asp:HiddenField runat="server" ID="hfCaseCategory" />
         <dx:ASPxGridView runat="server" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" KeyFieldName="CaseId" OnDataBinding="gridCase_DataBinding">
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -227,7 +228,6 @@
                         </div>
                     </GroupRowTemplate>
                 </dx:GridViewDataColumn>
-
                 <dx:GridViewDataColumn FieldName="EvictionOwner" Visible="false" VisibleIndex="4">
                     <GroupRowTemplate>
                         <div>
@@ -246,7 +246,6 @@
                         </div>
                     </GroupRowTemplate>
                 </dx:GridViewDataColumn>
-                
                 <dx:GridViewDataColumn Width="40px" VisibleIndex="6">
                     <DataItemTemplate>
                         <div class="hidden_icon">

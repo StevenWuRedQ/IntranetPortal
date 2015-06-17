@@ -17,6 +17,11 @@ Public Class ShortSalePage
                 ShortSaleCaseList.BindCaseList(status)
             End If
 
+            If Not String.IsNullOrEmpty(Request.QueryString("category")) Then
+                Dim category = Request.QueryString("category").ToString
+                ShortSaleCaseList.BindCaseListByCategory(category)
+            End If
+
             'process the task
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
                 Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn"))

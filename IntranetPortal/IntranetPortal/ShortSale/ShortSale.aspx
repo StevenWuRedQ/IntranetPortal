@@ -82,7 +82,6 @@
                                                                         </a>
                                                                     </li>
                                                                     <li class="short_sale_head_tab">
-
                                                                         <a class="tab_button_a">
                                                                             <i class="fa fa-list-ul head_tab_icon_padding"></i>
                                                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -115,11 +114,7 @@
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
-
-
                                                                     </li>
-
-
                                                                     <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                     <li style="margin-right: 30px; color: #ffa484; float: right">
                                                                         <%--<i class="fa fa-comments sale_head_button tooltip-examples" title="Chat"></i>
@@ -163,12 +158,12 @@
                                                                             <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                             <li style="margin-right: 30px; color: #7396a9; float: right">
 
-                                                                                <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);"></i>
+                                                                                <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);" style="display: none"></i>
                                                                                 <%--                                                                                 <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>--%>
-                                                                                <i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')"></i>
-                                                                                <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>
-                                                                                <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')"></i>
-                                                                                <i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="LogClick('Closed')"></i>
+                                                                                <i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')" style="display: none"></i>
+                                                                                <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" style="display: none" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>
+                                                                                <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')" style="display: none"></i>
+                                                                                <i class="fa fa-check-circle sale_head_button sale_head_button_left tooltip-examples" title="Closed" onclick="LogClick('Closed')" style="display: none"></i>
                                                                                 <%--                                                                                <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>--%>
                                                                             </li>
                                                                         </ul>
@@ -238,8 +233,6 @@
                                                                         runat="server" EnableViewState="false" PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" EnableHierarchyRecreation="True">
                                                                         <HeaderTemplate>
                                                                             <div class="clearfix">
-
-
                                                                                 <div class="pop_up_header_margin">
                                                                                     <i class="fa fa-clock-o with_circle pop_up_header_icon"></i>
                                                                                     <span class="pop_up_header_text">Appointment</span>

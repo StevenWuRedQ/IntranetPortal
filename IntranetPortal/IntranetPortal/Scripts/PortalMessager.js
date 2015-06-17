@@ -1,6 +1,6 @@
 ﻿var EnableClientRefresh = true;
 var EnablePopupMsg = true;
-var callIntervalTime = 3000;
+var callIntervalTime = 10000;
 
 function init() {
     if (EnableClientRefresh) {

@@ -289,18 +289,101 @@
   <PortalNavItem Name="ShortSale" Text="Short Sale" NavigationUrl="#" ShowAmount="false" ItemType="ShortSale" Visible="true">
     <UserRoles>ShortSale-*,ShortSale-Processor,ShortSale-Negotiator,ShortSale-Manager,Intake,Title-Users</UserRoles>
     <Items>
-      <PortalNavItem Name="ShortSale-Summary" Text="Summary" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="false">
+      <PortalNavItem Name="ShortSale-Summary" Text="Summary" NavigationUrl="/ShortSale/ShortSaleSummaryPage.aspx" ShowAmount="false">        
         <FontClass>
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ShortSale-NewFile" Text="New File" NavigationUrl="/ShortSale/ShortSale.aspx?s=0" ShowAmount="true">
-        <UserRoles></UserRoles>
+      <PortalNavItem Name="ShortSale-NewFile" Text="New File" NavigationUrl="/ShortSale/ShortSale.aspx?s=0" ShowAmount="true">        
         <FontClass>
           <![CDATA[<i class="fa fa-file"></i>]]>
         </FontClass>
+      </PortalNavItem>      
+      <PortalNavItem Name="ShortSale-Category-Approved" Text="Approved" NavigationUrl="/ShortSale/ShortSale.aspx?category=Approved" ShowAmount="true">
+        <UserRoles>ShortSale-Manager,ShortSale-Negotiator,Title-Users</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-rotate-right"></i>]]>
+        </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ShortSale-FollowUp" Text="Follow Up" NavigationUrl="/ShortSale/ShortSale.aspx?s=1" ShowAmount="true">
+      <PortalNavItem Name="ShortSale-Category-Offer Review" Text="Offer Review" NavigationUrl="/ShortSale/ShortSale.aspx?category=Offer Review" ShowAmount="false">
+        <UserRoles>ShortSale-Manager,ShortSale-Negotiator,Title-Users</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-bell"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ShortSale-Category-Valuation" Text="Valuation" NavigationUrl="/ShortSale/ShortSale.aspx?category=Valuation" ShowAmount="true">
+        <UserRoles>ShortSale-Manager,ShortSale-Processor,ShortSale-Negotiator</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-folder-open"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ShortSale-Category-Value Dispute" Text="Value Dispute" NavigationUrl="/ShortSale/ShortSale.aspx?category=Value Dispute" ShowAmount="true">
+        <UserRoles>ShortSale-Manager,ShortSale-Processor,ShortSale-Negotiator</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-sign-out"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ShortSale-Category-Intake" Text="Intake" NavigationUrl="/ShortSale/ShortSale.aspx?category=Intake" ShowAmount="true">
+        <UserRoles>ShortSale-Manager,ShortSale-Intake</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-pause"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ShortSale-Category-Processing" Text="Processing" NavigationUrl="/ShortSale/ShortSale.aspx?category=Processing" ShowAmount="true">
+        <UserRoles>ShortSale-Manager,ShortSale-Processor,ShortSale-Negotiator</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-pause"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ShortSale-Category-Equator" Text="Equator/Res.net" NavigationUrl="/ShortSale/ShortSale.aspx?category=Equator" ShowAmount="true">
+        <UserRoles>ShortSale-Manager,ShortSale-Processor,ShortSale-Negotiator</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-pause"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ShortSale-Category-Homepath" Text="Homepath" NavigationUrl="/ShortSale/ShortSale.aspx?category=Homepath" ShowAmount="true">
+        <UserRoles>ShortSale-Manager,ShortSale-Processor,ShortSale-Negotiator</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-pause"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ShortSale-Category-Pending" Text="Pending" NavigationUrl="/ShortSale/ShortSale.aspx?category=Pending" ShowAmount="true">
+        <UserRoles>ShortSale-Manager,ShortSale-Processor,ShortSale-Negotiator</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-pause"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ShortSale-Category-Dead" Text="Dead" NavigationUrl="/ShortSale/ShortSale.aspx?category=Dead" ShowAmount="true">
+        <UserRoles>ShortSale-Manager,ShortSale-Intake</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-pause"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ShortSale-Category-Evictions" Text="Evictions" NavigationUrl="/ShortSale/ShortSale.aspx?category=Evictions" ShowAmount="true">
+        <UserRoles>ShortSale-Manager,ShortSale-Intake</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-pause"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ShortSale-Category-Held" Text="Held" NavigationUrl="/ShortSale/ShortSale.aspx?category=Held" ShowAmount="true">
+        <UserRoles>ShortSale-Manager,ShortSale-Intake</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-pause"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ShortSale-Category-Litigation" Text="Litigation" NavigationUrl="/ShortSale/ShortSale.aspx?category=Litigation" ShowAmount="true">
+        <UserRoles>ShortSale-Manager,ShortSale-Intake</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-pause"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <PortalNavItem Name="ShortSale-Category-Closed" Text="Closed" NavigationUrl="/ShortSale/ShortSale.aspx?category=Closed" ShowAmount="true">
+        <UserRoles>ShortSale-Manager</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-check-circle"></i>]]>
+        </FontClass>
+      </PortalNavItem>
+      <!--<PortalNavItem Name="ShortSale-FollowUp" Text="Follow Up" NavigationUrl="/ShortSale/ShortSale.aspx?s=1" ShowAmount="true">
         <UserRoles></UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-rotate-right"></i>]]>
@@ -334,7 +417,7 @@
         <FontClass>
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
-      </PortalNavItem>
+      </PortalNavItem>-->
     </Items>
   </PortalNavItem>
 
