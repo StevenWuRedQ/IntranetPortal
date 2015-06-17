@@ -105,7 +105,7 @@
                                                                                         <div class="font_size_bold">Eviction</div>
                                                                                     </a>
                                                                                 </li>
-                                                                                <%If IntranetPortal.Legal.LegalCase.InLegal(hfBBLE.Value) %>
+                                                                                <%If IntranetPortal.Legal.LegalCase.InLegal(hfBBLE.Value) Then %>
                                                                                 <li class="short_sale_head_tab">
                                                                                     <a role="tab" data-toggle="tab" class="tab_button_a" href="#more_legal" data-url="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_legal"  onclick="LoadMoreFrame(this)">
                                                                                         <i class="fa fa-university head_tab_icon_padding"></i>
