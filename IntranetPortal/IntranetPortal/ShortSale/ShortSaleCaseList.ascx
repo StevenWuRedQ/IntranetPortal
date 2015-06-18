@@ -24,23 +24,6 @@
         }
     }
 
-    function GetShortSaleData(caseId) {
-        //debugger;
-        $.ajax({
-            type: "POST",
-            url: "ShortSale.aspx/GetCase",
-            data: '{caseId: ' + caseId + '}',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: OnSuccess,
-            failure: function (response) {
-                alert("Get ShortSaleData failed" + response);
-            },
-            error: function (response) {
-                alert("Get ShortSaleData error" + response);
-            }
-        });
-    }
 
     function expandAllClick(s) {
         if (gridCase.IsGroupRowExpanded(0)) {
@@ -94,14 +77,7 @@
         }
     }
 
-    function OnSuccess(response) {
-
-        ShortSaleCaseData = response.d;  //JSON.parse(response.d);
-        leadsInfoBBLE = ShortSaleCaseData.BBLE;
-        ShortSaleDataBand(0);
-
-    }
-
+   
     function OnGetRowValues(values) {
         if (values == null) {
             //gridCase.GetValuesOnCustomCallback(gridCase.GetFocusedRowIndex(), OnGetRowValues);

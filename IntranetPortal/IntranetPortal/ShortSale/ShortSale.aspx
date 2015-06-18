@@ -82,7 +82,38 @@
                                                                             <div class="font_size_bold">Documents</div>
                                                                         </a>
                                                                     </li>
-                                                                   
+                                                                    <li class="short_sale_head_tab">
+                                                                        <a class="tab_button_a">
+                                                                            <i class="fa fa-list-ul head_tab_icon_padding"></i>
+                                                                            <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                                                                        </a>
+                                                                        <div class="shot_sale_sub">
+                                                                           
+                                                                            <ul class="nav  clearfix" role="tablist">
+                                                                                <li class="short_sale_head_tab">
+                                                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="/ViewLeadsInfo.aspx?HiddenTab=true&id=<%= hfBBLE.Value %>" data-href="#more_leads"  onclick="LoadMoreFrame(this)">
+                                                                                        <i class="fa fa-folder head_tab_icon_padding"></i>
+                                                                                        <div class="font_size_bold">Leads</div>
+                                                                                    </a>
+                                                                                </li>
+
+                                                                                <li class="short_sale_head_tab">
+                                                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_evction" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_evction"  onclick="LoadMoreFrame(this)">
+                                                                                        <i class="fa fa-sign-out head_tab_icon_padding"></i>
+                                                                                        <div class="font_size_bold">Eviction</div>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <%If IntranetPortal.Legal.LegalCase.InLegal(hfBBLE.Value) Then %>
+                                                                                <li class="short_sale_head_tab">
+                                                                                    <a role="tab" data-toggle="tab" class="tab_button_a" href="#more_legal" data-url="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_legal"  onclick="LoadMoreFrame(this)">
+                                                                                        <i class="fa fa-university head_tab_icon_padding"></i>
+                                                                                        <div class="font_size_bold">Legal</div>
+                                                                                    </a>
+                                                                                </li>
+                                                                                <% End If %>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </li>
                                                                     <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                     <li style="margin-right: 30px; color: #ffa484; float: right">
                                                                         <%--<i class="fa fa-comments sale_head_button tooltip-examples" title="Chat"></i>
@@ -106,7 +137,7 @@
                                                                     <div class="tab-pane " id="documents">
                                                                         <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
                                                                     </div>
-                                                                   <%-- <div class="tab-pane load_bg" id="more_leads">
+                                                                   <div class="tab-pane load_bg" id="more_leads">
                                                                         <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
                                                                     </div>
                                                                     <div class="tab-pane load_bg" id="more_evction">
@@ -114,7 +145,7 @@
                                                                    </div>
                                                                     <div class="tab-pane load_bg" id="more_legal">
                                                                        <iframe   width="100%" height="100%" class="more_frame"  frameborder="0" ></iframe>
-                                                                   </div>--%>
+                                                                   </div>
                                                                 </div>
                                                             </div>
                                                         </dx:SplitterContentControl>

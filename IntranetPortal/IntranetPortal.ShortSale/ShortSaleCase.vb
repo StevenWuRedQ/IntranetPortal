@@ -598,9 +598,15 @@ Partial Public Class ShortSaleCase
         End Using
     End Function
 
+
+
     Private Shared Function ShortsaleCaseWithEvictionOwner(ss As ShortSaleCase, owner As String) As ShortSaleCase
         ss.EvictionOwner = owner
         Return ss
+    End Function
+
+    Public Shared Function InShortSale(bble As String) As Boolean
+        Return GetCaseByBBLE(bble) IsNot Nothing
     End Function
 
 #End Region

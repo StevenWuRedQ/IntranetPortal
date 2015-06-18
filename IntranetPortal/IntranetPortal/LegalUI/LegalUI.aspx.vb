@@ -12,7 +12,7 @@ Public Class LegalUI
 
     Public propertyData As String
     Public Property HiddenTab As Boolean = False
-
+    Public Property BBLEStr As String
     Public Property DisplayView As Legal.LegalCaseStatus
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -70,6 +70,7 @@ Public Class LegalUI
 
     Private Sub BindData(bble As String)
         ASPxSplitter1.Panes("listPanel").Visible = False
+        BBLEStr = bble
         ActivityLogs.BindData(bble)
         If Not Page.ClientScript.IsStartupScriptRegistered("SetleadBBLE") Then
             Dim cstext1 As String = "<script type=""text/javascript"">" & _

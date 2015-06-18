@@ -37,7 +37,12 @@ Public Class ContactService
         Return p.ToJson()
         ' Add your operation implementation here
     End Function
+    <OperationContract()>
+    Public Function CheckInShortSale(BBLE) As Channels.Message ' As List(Of PartyContact)
 
+        Return ShortSaleCase.InShortSale(BBLE).ToJson
+        ' Add your operation implementation here
+    End Function
     ' Add more operations here and mark them with <OperationContract()>
 
 End Class

@@ -197,9 +197,7 @@
                                 </select>
                                 <select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
                                 </select>--%>
-                                <style>
-                                   
-                                </style>
+                              
                             </div>
 
                             <div style="align-content: center; height: 100%">
@@ -232,24 +230,25 @@
                                         <div class="shot_sale_sub">
                                             <ul class="nav  clearfix" role="tablist">
                                                 <li class="short_sale_head_tab">
-                                                    <a role="tab" class="tab_button_a" onclick="OpenTabLink('Leads',leadsInfoBBLE)">
+                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="/ViewLeadsInfo.aspx?HiddenTab=true&id=BBLE" data-href="#more_leads" onclick="LoadMoreFrame(this)">
                                                         <i class="fa fa-folder head_tab_icon_padding"></i>
                                                         <div class="font_size_bold">Leads</div>
+                                                       
                                                     </a>
                                                 </li>
-                                                <li class="short_sale_head_tab">
-                                                    <a role="tab" class="tab_button_a" onclick="OpenTabLink('ShortSale',leadsInfoBBLE)">
-                                                        <i class="fa fa-forward head_tab_icon_padding"></i>
+                                                <li class="short_sale_head_tab" ng-show="LegalCase.InShortSale">
+                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_short_sale" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&bble=BBLE" data-href="#more_short_sale" onclick="LoadMoreFrame(this)">
+                                                        <i class="fa fa-sign-out head_tab_icon_padding"></i>
                                                         <div class="font_size_bold">Short Sale</div>
                                                     </a>
                                                 </li>
-                                                <li class="short_sale_head_tab">
-                                                    <a role="tab" class="tab_button_a" onclick="OpenTabLink('Eviction',leadsInfoBBLE)">
+                                                <li class="short_sale_head_tab" ng-show="LegalCase.InShortSale">
+                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_evction" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&isEviction=true&bble=BBLE" data-href="#more_evction" onclick="LoadMoreFrame(this)">
                                                         <i class="fa fa-sign-out head_tab_icon_padding"></i>
                                                         <div class="font_size_bold">Eviction</div>
                                                     </a>
                                                 </li>
-                                               
+
                                             </ul>
                                         </div>
 
@@ -281,7 +280,7 @@
                                         <i class="fa fa-print sale_head_button sale_head_button_left tooltip-examples" title="" onclick="" data-original-title="Print"></i>
                                     </li>
                                 </ul>
-                                <% End If %>
+                                <% End If%>
                                 <% If DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerAssign Or DisplayView = IntranetPortal.Legal.LegalCaseStatus.ManagerPreview Then%>
                                 <dx:ASPxPopupControl ClientInstanceName="popupSelectAttorneyCtr" Width="300px" Height="300px"
                                     MaxWidth="800px" MaxHeight="800px" MinHeight="150px" MinWidth="150px" ID="ASPxPopupControl3"
@@ -349,6 +348,15 @@
                                     </div>
                                     <div class="tab-pane" id="DocumentTab">
                                         <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
+                                    </div>
+                                    <div class="tab-pane load_bg" id="more_leads">
+                                        <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                                    </div>
+                                    <div class="tab-pane load_bg" id="more_evction">
+                                        <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                                    </div>
+                                    <div class="tab-pane load_bg" id="more_short_sale">
+                                        <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
                                     </div>
                                 </div>
                             </div>
@@ -559,9 +567,15 @@
         });
 
         portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
+            
+            
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
+            $http.post('/LegalUI/ContactService.svc/CheckInShortSale', { bble: leadsInfoBBLE }).success(function (data) {
 
-
+                $scope.LegalCase.InShortSale = data;
+                
+            });
+           
             var self = $scope;
             function querySearch(query) {
                 var results = query ?
@@ -587,10 +601,9 @@
                 return contacts.map(function (c, index) {
 
                     c.image = 'https://storage.googleapis.com/material-icons/external-assets/v1/icons/svg/ic_account_circle_black_48px.svg'
-                    if ( c.Name)
-                    {
+                    if (c.Name) {
                         c._lowername = c.Name.toLowerCase();
-                    } 
+                    }
                     return c;
                 });
             }
@@ -714,8 +727,7 @@
                     return d.promise();
                 },
                 byKey: function (key) {
-                    if (AllContact)
-                    {
+                    if (AllContact) {
                         return AllContact.filter(function (o) { return o.ContactId == key })[0];
                     }
                     var d = new $.Deferred();

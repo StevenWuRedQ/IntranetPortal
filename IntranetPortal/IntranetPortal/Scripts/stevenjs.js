@@ -967,6 +967,13 @@ jQuery.fn.fitToParent = function (options) {
 
 function LoadMoreFrame(e) {
     var url = e.dataset.url;
+    if (url.indexOf("BBLE") > 0)
+    {
+        if(leadsInfoBBLE)
+        {
+            url = url.replace("BBLE", leadsInfoBBLE);
+        }
+    }
     var href = e.dataset.href;
     var iframe = $(href + ">iframe");
     var frameurl = iframe.attr("src")
@@ -975,3 +982,16 @@ function LoadMoreFrame(e) {
     }
 
 }
+
+$(document).on("click", ".tab_button_a", function (e) {
+    $(".tab_button_a").parent().removeClass("active");
+    var list = $(".tab_button_a").parent();
+    var currentList = $(e.currentTarget).parent();
+
+    setTimeout(function () {
+
+        currentList.addClass("active");
+        var i = 0;
+    }, 500);
+
+});

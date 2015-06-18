@@ -2382,7 +2382,7 @@ li.mag_tabv.active {
 
 .load_bg {
     background: url(/images/Background.png) no-repeat center fixed;
-    background-size: auto, auto;
+    background-size: cover;
     background-color: #dddddd;
     width: 100%;
     height: 100%;
@@ -2391,4 +2391,5 @@ li.mag_tabv.active {
 .more_frame {
     min-height: 855px;
     overflow: auto;
+   
 }
