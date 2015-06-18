@@ -17,7 +17,7 @@ Public Class ShortSalePage
             HiddenTab = Not String.IsNullOrEmpty(Request.QueryString("HiddenTab"))
             If (HiddenTab) Then
                 contentSplitter.GetPaneByName("LogPanel").Visible = False
-
+                ASPxSplitter1.GetPaneByName("listPanel").Visible = False
             End If
 
             If Not String.IsNullOrEmpty(Request.QueryString("s")) Then
@@ -39,6 +39,7 @@ Public Class ShortSalePage
                 contentSplitter.ClientVisible = True
 
                 If Not Page.ClientScript.IsStartupScriptRegistered("GetShortSaleData") Then
+
                     Dim cstext1 As String = "<script type=""text/javascript"">" & _
                                     String.Format("GetShortSaleData({0});", ShortSaleCaseData.CaseId) & "</script>"
                     Page.ClientScript.RegisterStartupScript(Me.GetType, "GetShortSaleData", cstext1)

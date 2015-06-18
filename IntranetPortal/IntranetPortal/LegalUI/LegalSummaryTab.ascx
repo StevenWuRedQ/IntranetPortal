@@ -22,6 +22,10 @@
                     <label class="ss_form_input_title">lot</label>
                     <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.Lot">
                 </li>
+                 <li class="ss_form_item">
+                    <label class="ss_form_input_title">BBLE</label>
+                    <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.BBLE">
+                </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Class</label>
                     <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.TaxClass">

@@ -94,9 +94,16 @@
         <%--time label--%>
         <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
             <div style="font-size: 30px">
-                <span style='<%= If(LeadsInfoData.LastUpdate.HasValue, "visibility:visible", "visibility:hidden")%>'>
+                <span>
+
+                    <%  If (LeadsInfoData.LastUpdate.HasValue) Then%>
                     <i class="fa fa-refresh"></i>
                     <span style="margin-left: 19px;"><%= LeadsInfoData.LastUpdate.ToString%></span>
+
+                    <%Else%>
+                    <i class="fa fa-home"></i>
+                    <span style="margin-left: 19px;"><%= LeadsInfoData.PropertyAddress %></span>
+                    <% End If%>
                 </span>
                 <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
                 <span class="time_buttons" onclick='ShowDOBWindow("<%= LeadsInfoData.Borough%>","<%= LeadsInfoData.Block%>", "<%= LeadsInfoData.Lot%>")'>DOB</span>
@@ -430,7 +437,7 @@
                             <%--<input class="text_input input_currency" onblur="$(this).formatCurrency();" value="$<%=LeadsInfoData.TaxesAmt%>" />--%>
                         </div>
 
-                        <div class="form_div_node form_div_node_line_margin form_div_node_small" style="border: none;visibility:hidden" >
+                        <div class="form_div_node form_div_node_line_margin form_div_node_small" style="border: none; visibility: hidden">
                             <div class="form_head" style="margin-left: 20px">
                                 Tax Liens:
                             </div>
@@ -443,11 +450,11 @@
                             <span class="form_input_title">water</span>
                             <dx:ASPxTextBox runat="server" ID="txtWaterAmt" DisplayFormatString="C" Native="true" CssClass="text_input input_currency" Text='<%#LeadsInfoData.WaterAmt  %>'></dx:ASPxTextBox>
                         </div>
-                        <div class="form_div_node form_div_node_margin form_div_node_line_margin" style="visibility:hidden">
+                        <div class="form_div_node form_div_node_margin form_div_node_line_margin" style="visibility: hidden">
                             <span class="form_input_title">Tax Liens Date</span>
                             <input class="text_input" value="<%= LeadsInfoData.TaxLiensDateText %>" id="Text1" />
                         </div>
-                        <div class="form_div_node form_div_node_margin form_div_node_line_margin" style="visibility:hidden">
+                        <div class="form_div_node form_div_node_margin form_div_node_line_margin" style="visibility: hidden">
                             <span class="form_input_title">Tax Liens Amount</span>
                             <input class="text_input" value="<%= LeadsInfoData.TaxLiensAmount %>" id="Text2" />
                         </div>
@@ -475,32 +482,32 @@
         </dx:ASPxCallbackPanel>
 
         <% If LeadsInfoData.TaxLiens IsNot Nothing AndAlso LeadsInfoData.TaxLiens.Count > 0 Then%>
-        <div style="margin: 20px;Margin-top: -219px; margin-left: 230px;" class="clearfix">
+        <div style="margin: 20px; margin-top: -219px; margin-left: 230px;" class="clearfix">
             <div class="form_head">Tax Liens</div>
             <ul class="ss_form_box clearfix">
                 <% For Each lien In LeadsInfoData.TaxLiens%>
-                <li class="ss_form_item" style="width:50%">
+                <li class="ss_form_item" style="width: 50%">
                     <label class="ss_form_input_title">Tax Liens Date</label>
                     <input class="ss_form_input" value="<%= lien.TaxLiensYear %>" />
                 </li>
-                <li class="ss_form_item" style="width:50%">
+                <li class="ss_form_item" style="width: 50%">
                     <label class="ss_form_input_title">Tax Liens Amount</label>
                     <input class="ss_form_input input_currency" value="<%= lien.Amount %>" />
                 </li>
 
-              <%--  <li class="ss_form_item">
+                <%--  <li class="ss_form_item">
                     <label class="ss_form_input_title">&nbsp;</label>
                     <input class="ss_form_input ss_form_hidden">
                 </li>--%>
 
                 <% Next%>
 
-                <li class="ss_form_item" style="width:50%">
+                <li class="ss_form_item" style="width: 50%">
                     <label class="ss_form_input_title">&nbsp;</label>
                     <input class="ss_form_input ss_form_hidden">
                 </li>
-                <li class="ss_form_item" style="width:50%">
-                    <label class="ss_form_input_title"  style="color: #ff400d">Total</label>
+                <li class="ss_form_item" style="width: 50%">
+                    <label class="ss_form_input_title" style="color: #ff400d">Total</label>
                     <input class="ss_form_input input_currency" value="<%= LeadsInfoData.TotalTaxLienAmount %>" />
                 </li>
             </ul>
