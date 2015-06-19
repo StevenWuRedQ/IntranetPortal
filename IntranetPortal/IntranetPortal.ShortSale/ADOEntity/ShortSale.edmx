@@ -164,6 +164,7 @@
           <Property Name="UpdateDate" Type="datetime" />
           <Property Name="UpdateBy" Type="nvarchar" MaxLength="50" />
           <Property Name="LenderContactId" Type="int" />
+          <Property Name="LenderAttorney" Type="int" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PropertyOccupants">
@@ -495,6 +496,7 @@
           <Property Name="PayoffExpired" Type="DateTime" Precision="3" />
           <Property Name="LoanType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LenderAttorney" Type="Int32" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -839,6 +841,7 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="LenderAttorney" ColumnName="LenderAttorney" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="LoanType" ColumnName="LoanType" />
                 <ScalarProperty Name="PayoffExpired" ColumnName="PayoffExpired" />

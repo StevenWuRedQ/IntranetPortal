@@ -84,6 +84,23 @@
         End Set
     End Property
 
+    Private _lenderAttorneyContact As PartyContact
+    Public Property LeaderAttorneyContact As PartyContact
+        Get
+            If LenderAttorney.HasValue Then
+                _lenderAttorneyContact = PartyContact.GetContact(LenderAttorney)
+            End If
+
+            Return _lenderAttorneyContact
+        End Get
+        Set(value As PartyContact)
+            _lenderAttorneyContact = value
+        End Set
+    End Property
+
+
+
+
     Public Shared ReadOnly Property StatusCategory As String()
         Get
             Return _statusData.Select(Function(s) s.Category).Where(Function(s) Not String.IsNullOrEmpty(s)).Distinct.OrderBy(Function(s) s).ToArray

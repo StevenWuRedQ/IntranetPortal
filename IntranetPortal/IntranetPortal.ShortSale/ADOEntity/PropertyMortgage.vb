@@ -39,5 +39,6 @@ Partial Public Class PropertyMortgage
     Public Property PayoffExpired As Nullable(Of Date)
     Public Property LoanType As String
     Public Property Type As String
+    Public Property LenderAttorney As Nullable(Of Integer)
 
 End Class
