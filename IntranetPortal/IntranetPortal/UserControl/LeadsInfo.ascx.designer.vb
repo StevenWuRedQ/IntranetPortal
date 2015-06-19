@@ -462,4 +462,13 @@ Partial Public Class LeadsInfo1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents EditHomeOwner As Global.IntranetPortal.EditHomeOwner
+
+    '''<summary>
+    '''ReportNoHomeCallBack control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ReportNoHomeCallBack As Global.DevExpress.Web.ASPxCallback.ASPxCallback
 End Class

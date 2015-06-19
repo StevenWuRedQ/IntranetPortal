@@ -315,7 +315,7 @@
         if (addDate == null)
             addDate = new Date();
 
-        addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate option:selected").text());
+        addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate option:selected").text() + "|" + $("#selCategory").val());
         EmailBody.SetHtml("");
     }
 
@@ -728,7 +728,7 @@
                 <Row Cursor="pointer" />
                 <AlternatingRow CssClass="gridAlternatingRow"></AlternatingRow>
             </Styles>
-            <Settings VerticalScrollBarMode="Auto" VerticalScrollableHeight="600" ShowHeaderFilterButton="true" />
+            <Settings VerticalScrollBarMode="Auto" ShowHeaderFilterButton="true" />
             <SettingsBehavior AllowFocusedRow="false" AllowClientEventsOnLoad="false" AllowDragDrop="false"
                 EnableRowHotTrack="false" ColumnResizeMode="Disabled" />
             <ClientSideEvents EndCallback="function(s,e){dateActivityClient.SetDate(new Date());if(NeedToRefreshList){RefreshList();}}" />

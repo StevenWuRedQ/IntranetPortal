@@ -862,6 +862,8 @@
             </dx:ASPxPopupControl>
             <uc1:SendMail runat="server" ID="SendMail" />
             <uc1:EditHomeOwner runat="server" ID="EditHomeOwner" />
+            <dx:ASPxCallback ID="ReportNoHomeCallBack" runat="server" OnCallback="ReportNoHomeCallBack_OnCallback" ClientInstanceName="ReportNoHomeCallBackClinet"></dx:ASPxCallback>
+
         </dx:PanelContent>
     </PanelCollection>
     <ClientSideEvents EndCallback="OnEndCallback"></ClientSideEvents>

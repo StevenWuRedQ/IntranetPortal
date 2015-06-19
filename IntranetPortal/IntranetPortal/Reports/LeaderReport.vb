@@ -1294,8 +1294,10 @@ Public Class LeaderReport
                 End If
 
                 Dim resControl As HomeOwnerInfo
-                Using Page As New Page
-                    resControl = Page.LoadControl(String.Format("~/UserControl/HomeOwnerInfo.ascx"))
+                Using mainPage As New System.Web.UI.Page
+                    'mainPage.EnableViewState = False
+                    'mainPage.EnableEventValidation = False
+                    resControl = mainPage.LoadControl(String.Format("~/UserControl/HomeOwnerInfo.ascx"))
                     resControl.BBLE = bble
                     resControl.OwnerName = li.Owner
                     resControl.BindData(bble)
@@ -1303,7 +1305,8 @@ Public Class LeaderReport
                     Dim stringWriter As New StringWriter
                     Dim htmlWriter As New HtmlTextWriter(stringWriter)
                     resControl.RenderControl(htmlWriter)
-                    XrRichText1.Html = stringWriter.ToString
+                    Dim html = stringWriter.ToString
+                    XrRichText1.Html = html
 
                     If Not String.IsNullOrEmpty(li.CoOwner) Then
 

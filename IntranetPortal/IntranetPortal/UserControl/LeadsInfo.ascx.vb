@@ -1,5 +1,7 @@
 ﻿Imports DevExpress.Web.ASPxEditors
 Imports System.Threading
+Imports DevExpress.Web.ASPxCallback
+Imports IntranetPortal.Core
 
 Public Class LeadsInfo1
     Inherits System.Web.UI.UserControl
@@ -23,7 +25,7 @@ Public Class LeadsInfo1
                     doorKnockMapPanel.Visible = False
                 End If
             End If
-           
+
             If Not ShowLogPanel Then
                 contentSplitter.GetPaneByName("LogPanel").Collapsed = True
                 'contentSplitter.GetPaneByName("paneInfo").Separator.Visible = DevExpress.Utils.DefaultBoolean.False
@@ -720,5 +722,17 @@ Public Class LeadsInfo1
         If Not pcMainPopupControl.Visible Then
             pcMainPopupControl.Visible = True
         End If
+    End Sub
+
+    Protected Sub ReportNoHomeCallBack_OnCallback(source As Object, e As CallbackEventArgs)
+        Dim BBLE = e.Parameter
+        Dim em = Employee.GetInstance(Page.User.Identity.Name)
+        Dim Eamil = ""
+        If (em.Email IsNot Nothing) Then
+            Eamil = ";" & em.Email
+        End If
+
+        EmailService.SendMail("chris@gvs4u.com", "stevenwu@gvs4u.com" & Eamil, "Leads " & BBLE & " Can not get homeower info", "Hi Chris,  Leads " & BBLE & " does not have homeower info after refersh please check !" & " Submmit by " + Page.User.Identity.Name, Nothing)
+        Throw New Exception("Submit succeed !")
     End Sub
 End Class

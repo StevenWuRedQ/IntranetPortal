@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ShowReport.aspx.vb" Inherits="IntranetPortal.ShowReport" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="ShowReport.aspx.vb" Inherits="IntranetPortal.ShowReport"%>
 
 <%@ Register Assembly="DevExpress.XtraReports.v14.1.Web, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraReports.Web" TagPrefix="dx" %>
 
@@ -10,7 +10,7 @@
 </head>
 <body style="height: 100%; margin:0px;">
     <form id="form1" runat="server">
-        <div style="height: 800px">
+        <div style="height: 800px">            
             <dx:ASPxDocumentViewer ID="ASPxDocumentViewer1" runat="server" Height="100%">
                 <SettingsSplitter SidePaneVisible="false" />
                <%-- <StylesViewer>

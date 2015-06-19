@@ -17,6 +17,15 @@ Public Class ShortSaleManage
 
             ssCase = SetReferral(ssCase)
             ssCase.Save()
+
+            If ssCase.CaseId > 0 Then
+                If ssCase.Mortgages.Count = 0 Then
+                    Dim mort As New PropertyMortgage
+                    mort.CaseId = ssCase.CaseId
+                    mort.Status = "Intake - New File"
+                    mort.Save()
+                End If
+            End If
         End If
     End Sub
 
@@ -32,7 +41,6 @@ Public Class ShortSaleManage
     End Sub
 
     Private Shared Function SetReferral(ssCase As ShortSaleCase)
-
         Dim ld = Lead.GetInstance(ssCase.BBLE)
         If ld IsNot Nothing Then
             Dim referral = ShortSale.PartyContact.GetContactByName(ld.EmployeeName)
@@ -92,7 +100,7 @@ Public Class ShortSaleManage
     End Function
 
     Private Shared Function GetIntaker() As String
-        Dim users = Roles.GetUsersInRole("Intake")
+        Dim users = Roles.GetUsersInRole("ShortSale-Intake")
         If users.Length > 0 Then
             Return users(0)
         End If

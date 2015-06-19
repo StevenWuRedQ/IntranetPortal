@@ -189,6 +189,12 @@ Public Class ShortSalePage
                 If obj IsNot Nothing Then
                     obj.Status = status
                     obj.Save()
+
+                    If status = "Closed" Then
+                        ssCase.Status = CaseStatus.Closed
+                    Else
+                        ssCase.Status = CaseStatus.Active
+                    End If
                 End If
             End If
         End If
@@ -199,6 +205,8 @@ Public Class ShortSalePage
                 If obj IsNot Nothing Then
                     obj.Status = status
                     obj.Save()
+
+                    ssCase.Status = CaseStatus.Active
                 End If
             End If
         End If

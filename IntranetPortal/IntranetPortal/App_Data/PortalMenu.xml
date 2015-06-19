@@ -294,7 +294,7 @@
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ShortSale-NewFile" Text="New File" NavigationUrl="/ShortSale/ShortSale.aspx?s=0" ShowAmount="true">        
+      <PortalNavItem Name="ShortSale-Category-Assign" Text="New File" NavigationUrl="/ShortSale/ShortSale.aspx?category=Assign" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-file"></i>]]>
         </FontClass>

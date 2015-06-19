@@ -18,6 +18,12 @@ Public Class ActivityLogs
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        If DisplayMode = ActivityLogMode.ShortSale Then
+            gridTracking.Settings.VerticalScrollableHeight = 550
+        Else
+            gridTracking.Settings.VerticalScrollableHeight = 600
+        End If
+
     End Sub
 
     Public Sub BindData(bble As String)
@@ -833,16 +839,29 @@ Public Class ActivityLogs
                 aspxdate = DateTime.Now
                 Dim typeOfUpdate = e.Parameter.Split("|")(1)
                 Dim statusOfUpdate = e.Parameter.Split("|")(2)
+                Dim category = e.Parameter.Split("|")(3)
 
                 If Not String.IsNullOrEmpty(typeOfUpdate) Then
                     If Not String.IsNullOrEmpty(statusOfUpdate) Then
                         RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, hfBBLE.Value)
                     End If
 
-                    Dim comments = String.Format("Type of Update: {0}<br />{1}", typeOfUpdate, txtComments)
-                    LeadsActivityLog.AddActivityLog(aspxdate, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
+                    Dim comments = String.Format("Type of Update: {0} <br />Status Update: {2} - {3}<br />{1}", typeOfUpdate, txtComments, category, statusOfUpdate)
 
-                    ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, statusOfUpdate, txtComments)
+                    If category = "Assign" Then
+                        Dim users = Roles.GetUsersInRole("ShortSale-AssignReviewer")
+                        If users IsNot Nothing AndAlso users.Count > 0 Then
+                            Dim ssCase = ShortSaleCase.GetCaseByBBLE(hfBBLE.Value)
+                            ssCase.Owner = users(0)
+                            ssCase.UpdateDate = DateTime.Now
+                            ssCase.UpdateBy = Page.User.Identity.Name
+                            ssCase.Save()
+                        End If
+                    End If
+
+                    LeadsActivityLog.AddActivityLog(aspxdate, comments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
+                    ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, typeOfUpdate, category & " - " & statusOfUpdate, txtComments)
+
                 Else
                     LeadsActivityLog.AddActivityLog(aspxdate, txtComments, hfBBLE.Value, LeadsActivityLog.LogCategory.ShortSale.ToString, LeadsActivityLog.EnumActionType.Comments)
                     ShortSale.ShortSaleActivityLog.AddLog(hfBBLE.Value, Page.User.Identity.Name, "Comments", "Comments", txtComments)
@@ -915,6 +934,10 @@ Public Class ActivityLogs
             Dim htmlEditor = CType(sender, ASPxHtmlEditor)
             If htmlEditor.Toolbars.Count = 0 Then
                 htmlEditor.Toolbars.Add(Utility.CreateCustomToolbar("Custom"))
+            End If
+
+            If DisplayMode = ActivityLogMode.ShortSale Then
+                htmlEditor.Height = 180
             End If
         End If
     End Sub

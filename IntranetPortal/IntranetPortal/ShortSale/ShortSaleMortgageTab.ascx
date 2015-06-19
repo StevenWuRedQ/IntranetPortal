@@ -282,6 +282,35 @@
             </li>--%>
             </ul>
         </div>
+
+         <div class="ss_form">
+            <h4 class="ss_form_title">Lender Foreclosure Attorney
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].LeaderAttorneyContact', function(party){ShortSaleCaseData.Mortgages[__index__].LeaderAttorneyContact=party.ContactId})"></i>
+            </h4>
+            <ul class="ss_form_box clearfix">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Name</label>
+                    <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.Name" data-item-type="1">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">phone #</label>
+                    <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.Cell" data-item-type="1">
+                </li>              
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">customer service</label>
+                    <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.OfficeNO" data-item-type="1">
+                </li>                
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Fax #</label>
+                    <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.OfficeNO" data-item-type="1">
+                </li>                
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Email</label>
+                    <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.Email" data-item-type="1">
+                </li>                
+            </ul>
+        </div>
+
         <div class="ss_form">
             <h4 class="ss_form_title">Processor 
                 <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].ProcessorContact', function(party){ShortSaleCaseData.Mortgages[__index__].Processor =party.ContactId})"></i>
