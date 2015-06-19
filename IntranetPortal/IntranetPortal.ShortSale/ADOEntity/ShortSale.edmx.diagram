@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="IntranetPortalModel.CleareneceNote" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PartyContact" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyFloor" Width="1.5" PointX="0.75" PointY="4.75" />
-        <EntityTypeShape EntityType="IntranetPortalModel.PropertyMortgage" Width="1.5" PointX="6.75" PointY="0.5" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyOwner" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyTitle" Width="1.5" PointX="2.75" PointY="4.875" />
         <EntityTypeShape EntityType="IntranetPortalModel.ShortSaleCase" Width="1.5" PointX="8.625" PointY="0.5" />
@@ -23,6 +22,7 @@
         <EntityTypeShape EntityType="IntranetPortalModel.MortgageStatusData" Width="1.5" PointX="8.625" PointY="10" />
         <EntityTypeShape EntityType="IntranetPortalModel.GroupType" Width="1.5" PointX="11.375" PointY="10.75" />
         <EntityTypeShape EntityType="IntranetPortalModel.PropertyValueInfo" Width="1.5" PointX="6.625" PointY="9.5" />
+        <EntityTypeShape EntityType="IntranetPortalModel.PropertyMortgage" Width="1.5" PointX="2.875" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

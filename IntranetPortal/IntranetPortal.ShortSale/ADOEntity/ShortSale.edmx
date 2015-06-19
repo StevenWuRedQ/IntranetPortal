@@ -152,7 +152,7 @@
           <Property Name="Closer" Type="int" />
           <Property Name="DateAssigned" Type="datetime" />
           <Property Name="Supervisor" Type="int" />
-          <Property Name="StatusCategory" Type="nvarchar" MaxLength="50" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="LoanType" Type="nvarchar" MaxLength="50" />
           <Property Name="Fannie" Type="bit" />
@@ -401,7 +401,6 @@
           <EntitySet Name="CleareneceNotes" EntityType="IntranetPortalModel.CleareneceNote" />
           <EntitySet Name="PartyContacts" EntityType="IntranetPortalModel.PartyContact" />
           <EntitySet Name="PropertyFloors" EntityType="IntranetPortalModel.PropertyFloor" />
-          <EntitySet Name="PropertyMortgages" EntityType="IntranetPortalModel.PropertyMortgage" />
           <EntitySet Name="PropertyOwners" EntityType="IntranetPortalModel.PropertyOwner" />
           <EntitySet Name="PropertyTitles" EntityType="IntranetPortalModel.PropertyTitle" />
           <EntitySet Name="ShortSaleCases" EntityType="IntranetPortalModel.ShortSaleCase" />
@@ -416,6 +415,7 @@
           <EntitySet Name="MortgageStatusDatas" EntityType="IntranetPortalModel.MortgageStatusData" />
           <EntitySet Name="GroupTypes" EntityType="IntranetPortalModel.GroupType" />
           <EntitySet Name="PropertyValueInfoes" EntityType="IntranetPortalModel.PropertyValueInfo" />
+          <EntitySet Name="PropertyMortgages" EntityType="IntranetPortalModel.PropertyMortgage" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -465,41 +465,6 @@
           <Property Name="BoilerRoom" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="PropertyMortgage">
-          <Key>
-            <PropertyRef Name="MortgageId" />
-          </Key>
-          <Property Name="MortgageId" Type="Int32" Nullable="false" />
-          <Property Name="CaseId" Type="Int32" Nullable="false" />
-          <Property Name="Lender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Loan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LoanAmount" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="AuthorizationSent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LienPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Processor" Type="Int32" />
-          <Property Name="Negotiator" Type="Int32" />
-          <Property Name="Closer" Type="Int32" />
-          <Property Name="DateAssigned" Type="DateTime" Precision="3" />
-          <Property Name="Supervisor" Type="Int32" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ShortSaleDept" Type="Int32" />
-          <Property Name="Fannie" Type="Boolean" />
-          <Property Name="FHA" Type="Boolean" />
-          <Property Name="Freddie" Type="Boolean" />
-          <Property Name="LastBPOUpdate" Type="DateTime" Precision="3" />
-          <Property Name="UpcomingBPODate" Type="DateTime" Precision="3" />
-          <Property Name="LenderContactId" Type="Int32" />
-          <Property Name="CounterOffer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="PayoffExpired" Type="DateTime" Precision="3" />
-          <Property Name="LoanType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LenderAttorney" Type="Int32" />
-          <Property Name="StatusCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -785,6 +750,41 @@
           <Property Name="DateOfValue" Type="DateTime" Precision="3" />
           <Property Name="ExpiredOn" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="PropertyMortgage">
+          <Key>
+            <PropertyRef Name="MortgageId" />
+          </Key>
+          <Property Name="MortgageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseId" Type="Int32" Nullable="false" />
+          <Property Name="Lender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Loan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LoanAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AuthorizationSent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LienPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CounterOffer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PayoffExpired" Type="DateTime" Precision="3" />
+          <Property Name="ShortSaleDept" Type="Int32" />
+          <Property Name="Processor" Type="Int32" />
+          <Property Name="Negotiator" Type="Int32" />
+          <Property Name="Closer" Type="Int32" />
+          <Property Name="DateAssigned" Type="DateTime" Precision="3" />
+          <Property Name="Supervisor" Type="Int32" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LoanType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fannie" Type="Boolean" />
+          <Property Name="FHA" Type="Boolean" />
+          <Property Name="Freddie" Type="Boolean" />
+          <Property Name="LastBPOUpdate" Type="DateTime" Precision="3" />
+          <Property Name="UpcomingBPODate" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LenderContactId" Type="Int32" />
+          <Property Name="LenderAttorney" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -839,42 +839,6 @@
                 <ScalarProperty Name="Bedroom" ColumnName="Bedroom" />
                 <ScalarProperty Name="FloorId" ColumnName="FloorId" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PropertyMortgages">
-            <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
-              <MappingFragment StoreEntitySet="PropertyMortgages">
-                <ScalarProperty Name="StatusCategory" ColumnName="StatusCategory" />
-                <ScalarProperty Name="LenderAttorney" ColumnName="LenderAttorney" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="LoanType" ColumnName="LoanType" />
-                <ScalarProperty Name="PayoffExpired" ColumnName="PayoffExpired" />
-                <ScalarProperty Name="CounterOffer" ColumnName="CounterOffer" />
-                <ScalarProperty Name="LenderContactId" ColumnName="LenderContactId" />
-                <ScalarProperty Name="UpcomingBPODate" ColumnName="UpcomingBPODate" />
-                <ScalarProperty Name="LastBPOUpdate" ColumnName="LastBPOUpdate" />
-                <ScalarProperty Name="Freddie" ColumnName="Freddie" />
-                <ScalarProperty Name="FHA" ColumnName="FHA" />
-                <ScalarProperty Name="Fannie" ColumnName="Fannie" />
-                <ScalarProperty Name="ShortSaleDept" ColumnName="ShortSaleDept" />
-                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
-                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
-                <ScalarProperty Name="DateAssigned" ColumnName="DateAssigned" />
-                <ScalarProperty Name="Closer" ColumnName="Closer" />
-                <ScalarProperty Name="Negotiator" ColumnName="Negotiator" />
-                <ScalarProperty Name="Processor" ColumnName="Processor" />
-                <ScalarProperty Name="LienPosition" ColumnName="LienPosition" />
-                <ScalarProperty Name="AuthorizationSent" ColumnName="AuthorizationSent" />
-                <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
-                <ScalarProperty Name="Loan" ColumnName="Loan" />
-                <ScalarProperty Name="Lender" ColumnName="Lender" />
-                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
-                <ScalarProperty Name="MortgageId" ColumnName="MortgageId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1171,6 +1135,42 @@
                 <ScalarProperty Name="Method" ColumnName="Method" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="ValueId" ColumnName="ValueId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyMortgages">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
+              <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="LenderAttorney" ColumnName="LenderAttorney" />
+                <ScalarProperty Name="LenderContactId" ColumnName="LenderContactId" />
+                <ScalarProperty Name="UpdateBy" ColumnName="UpdateBy" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpcomingBPODate" ColumnName="UpcomingBPODate" />
+                <ScalarProperty Name="LastBPOUpdate" ColumnName="LastBPOUpdate" />
+                <ScalarProperty Name="Freddie" ColumnName="Freddie" />
+                <ScalarProperty Name="FHA" ColumnName="FHA" />
+                <ScalarProperty Name="Fannie" ColumnName="Fannie" />
+                <ScalarProperty Name="LoanType" ColumnName="LoanType" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
+                <ScalarProperty Name="DateAssigned" ColumnName="DateAssigned" />
+                <ScalarProperty Name="Closer" ColumnName="Closer" />
+                <ScalarProperty Name="Negotiator" ColumnName="Negotiator" />
+                <ScalarProperty Name="Processor" ColumnName="Processor" />
+                <ScalarProperty Name="ShortSaleDept" ColumnName="ShortSaleDept" />
+                <ScalarProperty Name="PayoffExpired" ColumnName="PayoffExpired" />
+                <ScalarProperty Name="CounterOffer" ColumnName="CounterOffer" />
+                <ScalarProperty Name="LienPosition" ColumnName="LienPosition" />
+                <ScalarProperty Name="AuthorizationSent" ColumnName="AuthorizationSent" />
+                <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
+                <ScalarProperty Name="Loan" ColumnName="Loan" />
+                <ScalarProperty Name="Lender" ColumnName="Lender" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="MortgageId" ColumnName="MortgageId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

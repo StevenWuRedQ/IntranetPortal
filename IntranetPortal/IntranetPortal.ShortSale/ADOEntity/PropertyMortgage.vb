@@ -18,28 +18,28 @@ Partial Public Class PropertyMortgage
     Public Property LoanAmount As Nullable(Of Decimal)
     Public Property AuthorizationSent As String
     Public Property LienPosition As String
+    Public Property CounterOffer As String
+    Public Property PayoffExpired As Nullable(Of Date)
+    Public Property ShortSaleDept As Nullable(Of Integer)
     Public Property Processor As Nullable(Of Integer)
     Public Property Negotiator As Nullable(Of Integer)
     Public Property Closer As Nullable(Of Integer)
     Public Property DateAssigned As Nullable(Of Date)
     Public Property Supervisor As Nullable(Of Integer)
+    Public Property Category As String
     Public Property Status As String
-    Public Property CreateDate As Nullable(Of Date)
-    Public Property CreateBy As String
-    Public Property UpdateDate As Nullable(Of Date)
-    Public Property UpdateBy As String
-    Public Property ShortSaleDept As Nullable(Of Integer)
+    Public Property LoanType As String
     Public Property Fannie As Nullable(Of Boolean)
     Public Property FHA As Nullable(Of Boolean)
     Public Property Freddie As Nullable(Of Boolean)
     Public Property LastBPOUpdate As Nullable(Of Date)
     Public Property UpcomingBPODate As Nullable(Of Date)
+    Public Property CreateDate As Nullable(Of Date)
+    Public Property CreateBy As String
+    Public Property UpdateDate As Nullable(Of Date)
+    Public Property UpdateBy As String
     Public Property LenderContactId As Nullable(Of Integer)
-    Public Property CounterOffer As String
-    Public Property PayoffExpired As Nullable(Of Date)
-    Public Property LoanType As String
-    Public Property Type As String
     Public Property LenderAttorney As Nullable(Of Integer)
-    Public Property StatusCategory As String
+    Public Property Type As String
 
 End Class

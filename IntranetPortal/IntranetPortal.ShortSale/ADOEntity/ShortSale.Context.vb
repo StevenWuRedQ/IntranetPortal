@@ -25,7 +25,6 @@ Partial Public Class ShortSaleEntities
     Public Overridable Property CleareneceNotes() As DbSet(Of CleareneceNote)
     Public Overridable Property PartyContacts() As DbSet(Of PartyContact)
     Public Overridable Property PropertyFloors() As DbSet(Of PropertyFloor)
-    Public Overridable Property PropertyMortgages() As DbSet(Of PropertyMortgage)
     Public Overridable Property PropertyOwners() As DbSet(Of PropertyOwner)
     Public Overridable Property PropertyTitles() As DbSet(Of PropertyTitle)
     Public Overridable Property ShortSaleCases() As DbSet(Of ShortSaleCase)
@@ -40,5 +39,6 @@ Partial Public Class ShortSaleEntities
     Public Overridable Property MortgageStatusDatas() As DbSet(Of MortgageStatusData)
     Public Overridable Property GroupTypes() As DbSet(Of GroupType)
     Public Overridable Property PropertyValueInfoes() As DbSet(Of PropertyValueInfo)
+    Public Overridable Property PropertyMortgages() As DbSet(Of PropertyMortgage)
 
 End Class
