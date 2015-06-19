@@ -152,6 +152,7 @@
           <Property Name="Closer" Type="int" />
           <Property Name="DateAssigned" Type="datetime" />
           <Property Name="Supervisor" Type="int" />
+          <Property Name="StatusCategory" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="LoanType" Type="nvarchar" MaxLength="50" />
           <Property Name="Fannie" Type="bit" />
@@ -309,6 +310,7 @@
           <Property Name="ListingExpireDate" Type="datetime" />
           <Property Name="Lockbox" Type="nvarchar" MaxLength="50" />
           <Property Name="ListPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="HasOfferSubmit" Type="bit" />
           <Property Name="OfferSubmited" Type="decimal" Precision="18" Scale="2" />
           <Property Name="OfferDate" Type="datetime" />
           <Property Name="LenderCounter" Type="decimal" Precision="18" Scale="2" />
@@ -497,6 +499,7 @@
           <Property Name="LoanType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LenderAttorney" Type="Int32" />
+          <Property Name="StatusCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyOwner">
           <Key>
@@ -589,6 +592,7 @@
           <Property Name="DocumentMissing" Type="Boolean" />
           <Property Name="MissingDocDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CounterOffer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HasOfferSubmit" Type="Boolean" />
         </EntityType>
         <EntityType Name="TitleClearence">
           <Key>
@@ -841,6 +845,7 @@
           <EntitySetMapping Name="PropertyMortgages">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyMortgage">
               <MappingFragment StoreEntitySet="PropertyMortgages">
+                <ScalarProperty Name="StatusCategory" ColumnName="StatusCategory" />
                 <ScalarProperty Name="LenderAttorney" ColumnName="LenderAttorney" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="LoanType" ColumnName="LoanType" />
@@ -924,6 +929,7 @@
           <EntitySetMapping Name="ShortSaleCases">
             <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleCase">
               <MappingFragment StoreEntitySet="ShortSaleCases">
+                <ScalarProperty Name="HasOfferSubmit" ColumnName="HasOfferSubmit" />
                 <ScalarProperty Name="CounterOffer" ColumnName="CounterOffer" />
                 <ScalarProperty Name="MissingDocDescription" ColumnName="MissingDocDescription" />
                 <ScalarProperty Name="DocumentMissing" ColumnName="DocumentMissing" />

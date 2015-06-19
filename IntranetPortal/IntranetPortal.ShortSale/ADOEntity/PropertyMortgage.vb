@@ -40,5 +40,6 @@ Partial Public Class PropertyMortgage
     Public Property LoanType As String
     Public Property Type As String
     Public Property LenderAttorney As Nullable(Of Integer)
+    Public Property StatusCategory As String
 
 End Class

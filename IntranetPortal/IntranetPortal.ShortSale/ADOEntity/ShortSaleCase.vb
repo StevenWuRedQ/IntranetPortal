@@ -50,5 +50,6 @@ Partial Public Class ShortSaleCase
     Public Property DocumentMissing As Nullable(Of Boolean)
     Public Property MissingDocDescription As String
     Public Property CounterOffer As String
+    Public Property HasOfferSubmit As Nullable(Of Boolean)
 
 End Class
