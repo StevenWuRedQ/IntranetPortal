@@ -155,9 +155,12 @@ Public Class HomeOwnerInfo
 
         Return name
     End Function
-    Function IsNeedAddHomeOwner() As Boolean
-        Return OwnerName = HomeOwner.EMPTY_HOMEOWNER
-    End Function
+    Public ReadOnly Property IsNeedAddHomeOwner As Boolean
+        Get
+            Return OwnerName = HomeOwner.EMPTY_HOMEOWNER
+        End Get
+    End Property
+
     Function FormatPhoneNumber(ByVal myNumber As String)
         Dim mynewNumber As String
         mynewNumber = ""
@@ -175,7 +178,7 @@ Public Class HomeOwnerInfo
         Return mynewNumber
     End Function
 
-   
+
 
     Protected Sub ReportNoHomeCallBack_OnCallback(source As Object, e As CallbackEventArgs)
         Dim BBLE = e.Parameter
