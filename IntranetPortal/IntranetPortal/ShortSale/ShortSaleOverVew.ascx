@@ -393,7 +393,7 @@
                                            
                                             <li class="ss_form_item"  data-visiable="HasOfferSubmit">
                                                 <label class="ss_form_input_title">Offer Submitted Amount</label>
-                                                <input class="ss_form_input currency_input" data-field="OfferSubimtAmt">
+                                                <input class="ss_form_input currency_input" data-field="OfferSubimt">
                                             </li>
                                             <li class="ss_form_item" data-visiable="HasOfferSubmit">
                                                 <label class="ss_form_input_title">Offer Submitted Date </label>
