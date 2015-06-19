@@ -29,38 +29,24 @@
             <i class="fa fa-times-circle icon_btn color_blue tooltip-examples" onclick="delete_array_item(this)" title="Delete"></i> 
         </h4>--%>
             <ul class="ss_form_box clearfix" id="mortgage__index__">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title ">Category</label>
+                    <select class="ss_form_input" data-item="Category" data-item-type="1" >
+                        <option value=""></option>
+                        <% For Each category In IntranetPortal.ShortSale.PropertyMortgage.StatusCategory%>
+                        <option value="<%= category%>"><%= category%></option>
+                        <% Next%>
+                    </select>
+                </li>
                 <li class="ss_form_item ss_mortages_stauts">
                     <label class="ss_form_input_title">Status</label>
-                    <select class="ss_form_input " data-item="Status" data-item-type="1">
+                    <input class="ss_form_input "  data-item="Status" data-item-type="1"  readonly="readonly">
+                  <%--  <select class="ss_form_input selStatusUpdate" data-item="Status" data-item-type="1" disabled>
                         <option value=""></option>
                         <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
-                        <option value="<%= mortStatus.Name%>"><%= mortStatus.Name%></option>
+                        <option value="<%= mortStatus.Name%>" data-cat="<%=mortStatus.Category %>"> <%= mortStatus.Name%></option>
                         <% Next%>
-
-                        <%--<option value="Ready for Submission">Ready for Submission</option>
-                        <option value="Pending Service Release">Pending Service Release</option>
-                        <option value="Pending Vacancy">Pending Vacancy</option>
-                        <option value="Package Submitted">Package Submitted</option>
-                        <option value="Package Submitted in Equator">Package Submitted in Equator</option>
-                        <option value="Pending BPO Expiration">Pending BPO Expiration</option>
-                        <option value="Processor Assigned">Processor Assigned</option>
-                        <option value="Document Review">Document Review</option>
-                        <option value="Updated Docs Needed">Updated Docs Needed</option>
-                        <option value="Processor BPO Ordered">Processor BPO Ordered</option>
-                        <option value="Processor BPO Schdeduled">Processor BPO Schdeduled</option>
-                        <option value="Processor BPO Completed">Processor BPO Completed</option>
-                        <option value="Negotiator BPO Ordered">Negotiator BPO Ordered</option>
-                        <option value="Negotiator BPO Schdeduled">Negotiator BPO Schdeduled</option>
-                        <option value="Negotiator BPO Completed">Negotiator BPO Completed</option>
-                        <option value="Auction/Hubzu Opt Out">Auction/Hubzu Opt Out</option>
-                        <option value="Negotiator Assigned">Negotiator Assigned</option>
-                        <option value="Offer Review">Offer Review</option>
-                        <option value="Counter Offer">Counter Offer</option>
-                        <option value="Value Dispute">Value Dispute</option>
-                        <option value="Marketing W/ Price Reductions">Marketing W/ Price Reductions</option>
-                        <option value="Investor Review">Investor Review</option>
-                        <option value="Approved">Approved</option>--%>
-                    </select>
+                    </select>--%>
 
                 </li>
                 <li class="ss_form_item">
@@ -283,7 +269,7 @@
             </ul>
         </div>
 
-         <div class="ss_form">
+        <div class="ss_form">
             <h4 class="ss_form_title">Lender Foreclosure Attorney
                 <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].LeaderAttorneyContact', function(party){ShortSaleCaseData.Mortgages[__index__].LeaderAttorneyContact=party.ContactId})"></i>
             </h4>
@@ -295,19 +281,19 @@
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">phone #</label>
                     <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.Cell" data-item-type="1">
-                </li>              
+                </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">customer service</label>
                     <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.OfficeNO" data-item-type="1">
-                </li>                
+                </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Fax #</label>
                     <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.OfficeNO" data-item-type="1">
-                </li>                
+                </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Email</label>
                     <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.Email" data-item-type="1">
-                </li>                
+                </li>
             </ul>
         </div>
 

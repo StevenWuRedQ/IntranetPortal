@@ -107,7 +107,7 @@
                             <select class="ss_form_input " data-item="Status" data-item-type="1">
                                 <option value=""></option>
                                 <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
-                                <option value="<%= mortStatus.Name%>"><%= mortStatus.Name%></option>
+                                <option value="<%= mortStatus.Category & "-" & mortStatus.Name%>"><%= mortStatus.Name%></option>
                                 <% Next%>
                             </select>
                         </li>

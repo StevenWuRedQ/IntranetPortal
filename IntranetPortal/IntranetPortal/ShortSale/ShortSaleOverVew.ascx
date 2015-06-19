@@ -103,16 +103,13 @@
 
                     <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
                         <div style="font-size: 30px">
-                            <%If (shortSaleCaseData.UpdateDate.HasValue) Then%>
-                                <i class="fa fa-refresh"></i>
-                                <span style="margin-left: 19px;"><%= shortSaleCaseData.UpdateDate.ToString%></span>
-                            <%Else %>
-                                <% If ( Not String.IsNullOrEmpty(shortSaleCaseData.CaseName)) Then%>
-                                <i class="fa fa-home"></i>
-                                <span style="margin-left: 19px;"><%= shortSaleCaseData.CaseName.Substring(0,If(shortSaleCaseData.CaseName.Length>20 , 20,shortSaleCaseData.CaseName.Length))%></span>
-                                <% End If %>
-                            <%End if %>
-                           
+
+                            <% If (Not String.IsNullOrEmpty(shortSaleCaseData.CaseName)) Then%>
+                            <i class="fa fa-home"></i>
+                            <span style="margin-left: 19px;"><%= shortSaleCaseData.CaseName.Substring(0,If(shortSaleCaseData.CaseName.Length>20 , 20,shortSaleCaseData.CaseName.Length))%></span>
+                            <% End If%>
+
+
                             <% If shortSaleCaseData.PropertyInfo IsNot Nothing Then%>
                             <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
                             <span class="time_buttons" onclick='ShowDOBWindow("<%= shortSaleCaseData.PropertyInfo.Borough%>","<%= shortSaleCaseData.PropertyInfo.Block%>", "<%= shortSaleCaseData.PropertyInfo.Lot%>")'>DOB</span>
@@ -183,8 +180,8 @@
                         <!--detial Nav tabs -->
                         <style>
                             /*.shot_sale_tab_a {
-                                padding: 10px 10px !important;
-                            }*/
+                        important;
+                        }*/
                         </style>
                         <ul class="nav nav-tabs overview_tabs" role="tablist" style='<%= If(isEviction,"display:none","") %>'>
                             <li class="active short_sale_tab">
@@ -390,16 +387,16 @@
                                                 </label>--%>
                                                
                                             </li>
-                                           
-                                            <li class="ss_form_item"  data-visiable="HasOfferSubmit">
+
+                                            <li class="ss_form_item" data-visiable="HasOfferSubmit">
                                                 <label class="ss_form_input_title">Offer Submitted Amount</label>
-                                                <input class="ss_form_input currency_input" data-field="OfferSubimt">
+                                                <input class="ss_form_input currency_input" data-field="OfferSubmited">
                                             </li>
                                             <li class="ss_form_item" data-visiable="HasOfferSubmit">
                                                 <label class="ss_form_input_title">Offer Submitted Date </label>
                                                 <input class="ss_form_input ss_date" data-field="OfferDate">
                                             </li>
-                                           
+
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">Lender Counter </label>
                                                 <input class="ss_form_input" data-field="LenderCounter">

@@ -402,25 +402,7 @@
                     <% End If%>
 
                     <% If DisplayMode = ActivityLogMode.ShortSale Then%>
-                    <script type="text/javascript">
-                        function OnStatusCategoryChange(selCategory)
-                        {
-                            var cat = selCategory.value;
-                            $("#selStatusUpdate").val("");
-                            $("#selStatusUpdate option").each(function () {
-                                var val = $(this).val();
-
-                                if(val.substring(0, cat.length) === cat)
-                                {
-                                    $(this).show();
-                                }
-                                else
-                                {
-                                    $(this).hide();
-                                }
-                            });
-                        }
-                    </script>
+                    
                     <div>
                         <div class="color_gray upcase_text">Type of update</div>
                         <select class="select_bootstrap select_margin" id="selType1" onchange="ShortSaleUpdateTypeChange(this)">
@@ -430,14 +412,14 @@
                             <% Next%>
                         </select>
                         <div class="color_gray upcase_text">Category</div>
-                        <select class="select_bootstrap select_margin" id="selCategory" onchange="OnStatusCategoryChange(this)">
+                        <select class="select_bootstrap select_margin " id="selCategory" onchange="OnStatusCategoryChange(this)">
                             <option value=""></option>
                             <% For Each category In IntranetPortal.ShortSale.PropertyMortgage.StatusCategory%>
                             <option value="<%= category%>"><%= category%></option>
                             <% Next%>
                         </select>
                         <div class="color_gray upcase_text">Status Update</div>
-                        <select class="select_bootstrap select_margin" id="selStatusUpdate">
+                        <select class="select_bootstrap select_margin selStatusUpdate" id="selStatusUpdate">
                             <option value=""></option>
                             <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
                             <option value="<%= mortStatus.Category & "-" & mortStatus.Name%>"><%= mortStatus.Name%></option>

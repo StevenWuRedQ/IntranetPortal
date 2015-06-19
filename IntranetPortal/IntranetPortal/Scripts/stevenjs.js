@@ -995,3 +995,26 @@ $(document).on("click", ".tab_button_a", function (e) {
     }, 500);
 
 });
+
+function OnStatusCategoryChange(selCategory) {
+    var cat = selCategory.value;
+    var selStatusUpdate = $(selCategory).parent().children(".selStatusUpdate");
+    if (selStatusUpdate.length == 0)
+    {
+        selStatusUpdate = $(selCategory).parent().parent().find(".selStatusUpdate");
+    }
+    selStatusUpdate = $(selStatusUpdate[0]);
+    selStatusUpdate.val("");
+    var options = selStatusUpdate.children("option");
+    options.each(function () {
+        var val = $(this).val();
+
+        if (val.substring(0, cat.length) === cat || $(this).prop("data-cat") == cat || $(this).attr("data-cat")==cat) {
+            $(this).show();
+        }
+        else {
+            $(this).hide();
+        }
+    });
+}
+
