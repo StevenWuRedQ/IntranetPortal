@@ -597,7 +597,7 @@
         dmcaWin.focus();
     }
     function ConfrimReport() {
-        if (confirm("Did you just refersh homeowner info ? If still can not get homeowner info press Ok to cotunie submit report !") == true) {
+        if (confirm("Did you just refersh homeowner info ? If still can not get homeowner info press Ok to cotunie submit report ! \nIf we don't contact you in 24 hours that's mean this leads can't get homeowner info, please try edit homeowner input unique ID to load homeowner info.") == true) {
             ReportNoHomeCallBackClinet.PerformCallback(leadsInfoBBLE);
         }
     }

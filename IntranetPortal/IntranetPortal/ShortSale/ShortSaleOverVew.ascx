@@ -103,10 +103,16 @@
 
                     <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
                         <div style="font-size: 30px">
-                            <span style='<%=If(shortSaleCaseData.UpdateDate.HasValue, "visibility:visible", "visibility:hidden")%>'>
+                            <%If (shortSaleCaseData.UpdateDate.HasValue) Then%>
                                 <i class="fa fa-refresh"></i>
                                 <span style="margin-left: 19px;"><%= shortSaleCaseData.UpdateDate.ToString%></span>
-                            </span>
+                            <%Else %>
+                                <% If ( Not String.IsNullOrEmpty(shortSaleCaseData.CaseName)) Then%>
+                                <i class="fa fa-home"></i>
+                                <span style="margin-left: 19px;"><%= shortSaleCaseData.CaseName.Substring(0,If(shortSaleCaseData.CaseName.Length>20 , 20,shortSaleCaseData.CaseName.Length))%></span>
+                                <% End If %>
+                            <%End if %>
+                           
                             <% If shortSaleCaseData.PropertyInfo IsNot Nothing Then%>
                             <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
                             <span class="time_buttons" onclick='ShowDOBWindow("<%= shortSaleCaseData.PropertyInfo.Borough%>","<%= shortSaleCaseData.PropertyInfo.Block%>", "<%= shortSaleCaseData.PropertyInfo.Lot%>")'>DOB</span>
@@ -252,7 +258,7 @@
 
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">Document Missing</label>
-                                                <input type="checkbox" id="pdf_check120" name="1" value="YES" class="ss_form_input ss_visable" data-field="DocumentMissing">
+                                                <input type="checkbox" id="pdf_check120" name="DocumentMissing" value="YES" class="ss_form_input ss_visable" data-field="DocumentMissing">
                                                 <label for="pdf_check120" class="input_with_check">
                                                     <span class="box_text">Yes </span>
                                                 </label>
@@ -367,16 +373,33 @@
                                     <div class="ss_form">
                                         <h4 class="ss_form_title">Offer Info</h4>
                                         <ul class="ss_form_box clearfix">
-
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">Offer Submited </label>
-                                                <input class="ss_form_input " data-field="OfferSubmited">
+
+                                                <input type="checkbox" id="pdf_check9995" name="HasOfferSubmit" value="true" class="ss_form_input ss_visable" data-field="HasOfferSubmit">
+                                                <label for="pdf_check9995" class="input_with_check">
+                                                    <span class="box_text">Yes </span>
+                                                </label>
+                                                <%-- <input type="radio" id="pdf_check9993" name="HasOfferSubmit" value="false" class="ss_form_input ss_visable" data-field="HasOfferSubmit">
+                                                <label for="pdf_check9993" class="input_with_check">
+                                                    <span class="box_text">Yes </span>
+                                                </label>
+                                                <input type="radio" id="pdf_check9994" name="HasOfferSubmit" value="true" class="ss_form_input">
+                                                <label for="pdf_check9994" class="input_with_check">
+                                                    <span class="box_text">No </span>
+                                                </label>--%>
+                                               
                                             </li>
-                                            <li class="ss_form_item">
-                                                <label class="ss_form_input_title">Date </label>
+                                           
+                                            <li class="ss_form_item"  data-visiable="HasOfferSubmit">
+                                                <label class="ss_form_input_title">Offer Submitted Amount</label>
+                                                <input class="ss_form_input currency_input" data-field="OfferSubimtAmt">
+                                            </li>
+                                            <li class="ss_form_item" data-visiable="HasOfferSubmit">
+                                                <label class="ss_form_input_title">Offer Submitted Date </label>
                                                 <input class="ss_form_input ss_date" data-field="OfferDate">
                                             </li>
-                                            <li class="ss_form_item"></li>
+                                           
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">Lender Counter </label>
                                                 <input class="ss_form_input" data-field="LenderCounter">

@@ -27,7 +27,7 @@
     var IsDocumentLoaded = false;
     function BindDocuments(refreshDocuments) {
         if (!IsDocumentLoaded || refreshDocuments) {
-            debugger;
+            
             cbpDocumentUI.PerformCallback(leadsInfoBBLE);
             isLoaded = true;
         }
