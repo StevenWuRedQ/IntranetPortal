@@ -72,6 +72,7 @@
           <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="256" />
           <Property Name="OfficeNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerService" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="CorpName" Type="nvarchar" MaxLength="50" />
           <Property Name="Office" Type="nvarchar" MaxLength="256" />
@@ -445,6 +446,7 @@
           <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GroupId" Type="Int32" />
+          <Property Name="CustomerService" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyFloor">
           <Key>
@@ -805,6 +807,7 @@
           <EntitySetMapping Name="PartyContacts">
             <EntityTypeMapping TypeName="IntranetPortalModel.PartyContact">
               <MappingFragment StoreEntitySet="PartyContacts">
+                <ScalarProperty Name="CustomerService" ColumnName="CustomerService" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="Fax" ColumnName="Fax" />
                 <ScalarProperty Name="Extension" ColumnName="Extension" />

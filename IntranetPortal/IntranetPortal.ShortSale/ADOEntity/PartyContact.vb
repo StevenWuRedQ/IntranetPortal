@@ -25,5 +25,6 @@ Partial Public Class PartyContact
     Public Property Extension As String
     Public Property Fax As String
     Public Property GroupId As Nullable(Of Integer)
+    Public Property CustomerService As String
 
 End Class
