@@ -279,7 +279,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">customer service</label>
-                    <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.OfficeNO" data-item-type="1">
+                    <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.CustomerService" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Fax #</label>
