@@ -299,6 +299,7 @@
         <link href="/css/stevencss.css?v=1.02" rel="stylesheet" type="text/css" />
         <div style="color: #b1b2b7" class="clearfix">
             <div class="row" style="margin: 0px">
+               
                 <input type="hidden" id="CurrentUser" value="<%= Page.User.Identity.Name%>" />
                 <div class="col-md-3">
 
@@ -492,10 +493,10 @@
                                         <%--<li class="list-group-item popup_menu_list_item" style="font-size: 18px; width: 80px; cursor: default; font-weight: 900">{{groupedcontact.group_text}}
                                             <span class="badge" style="font-size: 18px; border-radius: 18px;">{{groupedcontact.data.length}}</span>
                                         </li>--%>
-                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.Name==currentContact.Name? 'popup_employee_list_item_active':''" ng-repeat="contact in groupedcontact.data|orderBy:predicate| filter:query.Name| ByContact:query ">
+                                        <li class="list-group-item popup_menu_list_item popup_employee_list_item" ng-class="contact.ContactId==currentContact.ContactId? 'popup_employee_list_item_active':''" ng-repeat="contact in groupedcontact.data|orderBy:predicate| filter:query.Name| ByContact:query ">
                                             <div>
                                                 <div style="font-weight: 900; font-size: 16px">
-                                                    <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}}</label>
+                                                    <label style="width: 100%" class="icon_btn" ng-click="selectCurrent(contact)">{{contact.Name}} </label>
                                                     <%--<i class="fa fa-list-alt icon_btn" style="float: right; margin-right: 20px; margin-top: 0px; font-size: 18px;"></i>--%>
                                                 </div>
                                                 <%--<div style="font-size: 14px">Eviction</div>--%>
@@ -566,7 +567,7 @@
                                 </tr>
 
                                 <tr class="vendor_info">
-                                    <td class="vendor_info_left">Office
+                                    <td class="vendor_info_left">Office address
                                     </td>
                                     <td>
                                         <div class="detail_right">
@@ -657,7 +658,18 @@
                                         </div>
                                     </td>
                                 </tr>
+                                <tr class="vendor_info">
+                                    <td class="vendor_info_left">Address
+                                    </td>
+                                    <td>
+                                        <div class="detail_right">
+                                            <span >
+                                                <input class="form-control contact_info_eidt" ng-model="currentContact.Address" placeholder="Click to input">
+                                            </span>
 
+                                        </div>
+                                    </td>
+                                </tr>
                                 <%-- <tr class="vendor_info">
                                     <td class="vendor_info_left">Closed deals
                                     </td>

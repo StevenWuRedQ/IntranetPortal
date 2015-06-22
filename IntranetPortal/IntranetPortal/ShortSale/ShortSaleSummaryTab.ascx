@@ -125,7 +125,7 @@
                         </li>
                         <li class="ss_form_item">
                             <label class="ss_form_input_title">Short Sale Dept</label>
-                            <input class="ss_form_input ss_phone" value="866-880-1232">
+                            <input class="ss_form_input" data-item="ShortSaleDeptContact.OfficeNO" data-item-type="1">
                         </li>
 
                         <li class="ss_form_item">
