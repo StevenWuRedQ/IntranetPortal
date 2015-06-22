@@ -819,7 +819,14 @@ Public Class ActivityLogs
             Return
         End If
 
-        Dim aspxdate = CDate(e.Parameter.Split("|")(0))
+        Dim aspxdate As DateTime
+
+        If Not DateTime.TryParse(e.Parameter.Split("|")(0), aspxdate) Then
+            aspxdate = DateTime.Now
+        End If
+
+        'Dim aspxdate = CDate(e.Parameter.Split("|")(0))
+
         Dim txtComments = EmailBody2.Html 'e.Parameter.Split("|")(1)
 
         If aspxdate.Date = DateTime.Now.Date Then
@@ -846,7 +853,15 @@ Public Class ActivityLogs
                         RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, category, hfBBLE.Value)
                     End If
 
-                    Dim comments = String.Format("Type of Update: {0} <br />Status Update: {2} - {3}<br />{1}", typeOfUpdate, txtComments, category, statusOfUpdate)
+                    Dim comments = String.Format("Type of Update: {0}", typeOfUpdate)
+
+                    If Not String.IsNullOrEmpty(category) AndAlso Not String.IsNullOrEmpty(statusOfUpdate) Then
+                        comments = comments & String.Format("<br />Status Update: {0} - {1}", category, statusOfUpdate)
+                    End If
+
+                    If Not String.IsNullOrEmpty(txtComments) Then
+                        comments = comments & "<br />" & txtComments
+                    End If
 
                     If category = "Assign" Then
                         Dim users = Roles.GetUsersInRole("ShortSale-AssignReviewer")

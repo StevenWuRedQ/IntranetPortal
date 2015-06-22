@@ -349,8 +349,7 @@
         })
     }
 
-    function ExpandComments(btnExpand)
-    {
+    function ExpandComments(btnExpand) {
         if ($(btnExpand).hasClass("fa-compress")) {
             $("DIV .divComments").each(function () {
                 $(this).height(25);
@@ -369,8 +368,24 @@
     var refreshLogs = false;
     function ShortSaleUpdateTypeChange(s) {
         var type = s.value;
-        
-        
+
+        var liens = ["1st Lien", "2nd Lien"];
+        var categorys = ["Assign", "Closed", "Dead", "Evictions", "Held", "Intake", "Litigation"];
+        var updates = ["Referral Update", "Seller Update", "Title"];
+
+        if ($.inArray(type, categorys) > -1) {
+            $("#selCategory").val(type);
+        } else {
+            $("#selCategory").val("");
+        }
+
+        if ($.inArray(type, updates) > -1) {
+            $("#selCategory").attr("disabled", true);
+            $("#selStatusUpdate").attr("disabled", true);
+        } else {
+            $("#selCategory").attr("disabled", false);
+            $("#selStatusUpdate").attr("disabled", false);
+        }
 
 
 
@@ -424,10 +439,10 @@
                     <% End If%>
 
                     <% If DisplayMode = ActivityLogMode.ShortSale Then%>
-                    
+
                     <div>
                         <div class="color_gray upcase_text">Type of update</div>
-                        <select class="select_bootstrap select_margin" id="selType1" onchange="ShortSaleUpdateTypeChange(this)">                         
+                        <select class="select_bootstrap select_margin" id="selType1" onchange="ShortSaleUpdateTypeChange(this)">
                             <% For Each type In IntranetPortal.Core.CommonData.GetData("UpdateType")%>
                             <option value="<%= type.Name%>"><%= type.Name%></option>
                             <% Next%>
@@ -443,7 +458,7 @@
                         <select class="select_bootstrap select_margin selStatusUpdate" id="selStatusUpdate">
                             <option value=""></option>
                             <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
-                            <option value="<%= mortStatus.Category & "-" & mortStatus.Name%>"><%= mortStatus.Name%></option>
+                            <option value="<%= mortStatus.Category & "-" & mortStatus.Name%>" style="display: none"><%= mortStatus.Name%></option>
                             <% Next%>
                         </select>
                     </div>
@@ -502,7 +517,7 @@
                 <dx:GridViewDataColumn FieldName="ActionType" VisibleIndex="0" Caption="" Width="40px">
                     <HeaderStyle HorizontalAlign="Center" />
                     <HeaderTemplate>
-                       <i class="fa fa-compress tooltip-examples" title="Expand or Collapse All" onclick="ExpandComments(this)"></i>
+                        <i class="fa fa-compress tooltip-examples" title="Expand or Collapse All" onclick="ExpandComments(this)"></i>
                     </HeaderTemplate>
                     <DataItemTemplate>
                         <%# GetCommentsIconClass(Eval("ActionType"))%>
@@ -737,7 +752,7 @@
             <Settings VerticalScrollBarMode="Auto" ShowHeaderFilterButton="true" />
             <SettingsBehavior AllowFocusedRow="false" AllowClientEventsOnLoad="false" AllowDragDrop="false"
                 EnableRowHotTrack="false" ColumnResizeMode="Disabled" />
-            <ClientSideEvents EndCallback="function(s,e){dateActivityClient.SetDate(new Date());if(NeedToRefreshList){RefreshList();}}" />
+            <ClientSideEvents EndCallback="function(s,e){if(typeof dateActivityClient != 'undefined'){dateActivityClient.SetDate(new Date());} if(NeedToRefreshList){RefreshList();}}" />
         </dx:ASPxGridView>
 
         <dx:ASPxPopupControl ClientInstanceName="popupFilterControl" Width="160px" Height="200px"
