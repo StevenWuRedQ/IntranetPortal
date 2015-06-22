@@ -425,6 +425,11 @@
                                                                 </dx:ASPxTextBox>--%>
                                                             </li>
                                                             <li class="ss_form_item">
+                                                                <label class="ss_form_input_title">Customer Service</label>
+                                                                <input class="ss_form_input ss_phone" input-mask="(000) 000-0000" ng-model="addContact.CustomerService" />
+
+                                                            </li>
+                                                            <li class="ss_form_item">
                                                                 <label class="ss_form_input_title">Extension </label>
                                                                 <%--<input class="ss_form_input"  ng-model="addContact.OfficeNO" />--%>
                                                                 <input class="ss_form_input" ng-model="addContact.Extension" runat="server" />
@@ -584,6 +589,16 @@
                                         </div>
                                     </td>
                                 </tr>
+                                 <tr class="vendor_info">
+                                    <td class="vendor_info_left">Customer Service
+                                    </td>
+                                    <td>
+                                        <div class="detail_right">
+                                            <input class="form-control contact_info_eidt" input-mask="(000) 000-0000" ng-model="currentContact.CustomerService" placeholder="Click to input">
+                                        </div>
+                                    </td>
+                                </tr>
+                                
                                 <tr class="vendor_info">
                                     <td class="vendor_info_left">Extension
                                     </td>

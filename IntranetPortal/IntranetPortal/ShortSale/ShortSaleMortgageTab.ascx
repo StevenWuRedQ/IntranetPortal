@@ -36,7 +36,7 @@
                 <li class="ss_form_item ss_mortages_stauts">
                     <label class="ss_form_input_title">Status</label>
                     <input class="ss_form_input " data-item="Status" data-item-type="1" readonly="readonly">
-                  <%--  <select class="ss_form_input selStatusUpdate" data-item="Status" data-item-type="1" disabled>
+                    <%--  <select class="ss_form_input selStatusUpdate" data-item="Status" data-item-type="1" disabled>
                         <option value=""></option>
                         <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
                         <option value="<%= mortStatus.Name%>" data-cat="<%=mortStatus.Category %>"> <%= mortStatus.Name%></option>
@@ -153,8 +153,8 @@
             <ul class="ss_form_box clearfix" id="short_sale_dept">
 
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">phone #</label>
-                    <input class="ss_form_input ss_not_edit" data-item="ShortSaleDeptContact.Cell" data-item-type="1">
+                    <label class="ss_form_input_title">Office #</label>
+                    <input class="ss_form_input ss_not_edit" data-item="ShortSaleDeptContact.OfficeNO" data-item-type="1">
                 </li>
                 <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">Extension</label>
@@ -166,7 +166,7 @@
             </li>--%>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">customer service</label>
-                    <input class="ss_form_input ss_not_edit" data-item="ShortSaleDeptContact.OfficeNO" data-item-type="1">
+                    <input class="ss_form_input ss_not_edit" data-item="ShortSaleDeptContact.CustomerService" data-item-type="1">
                 </li>
                 <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">Extension</label>
@@ -214,8 +214,8 @@
                     <input class="ss_form_input ss_not_edit" data-item="LenderContact.Name" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">phone #</label>
-                    <input class="ss_form_input ss_not_edit" data-item="LenderContact.Cell" data-item-type="1">
+                    <label class="ss_form_input_title">Office #</label>
+                    <input class="ss_form_input ss_not_edit" data-item="LenderContact.OfficeNO" data-item-type="1">
                 </li>
                 <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">Extension</label>
@@ -227,7 +227,7 @@
             </li>--%>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">customer service</label>
-                    <input class="ss_form_input ss_not_edit" data-item="LenderContact.OfficeNO" data-item-type="1">
+                    <input class="ss_form_input ss_not_edit" data-item="LenderContact.CustomerService" data-item-type="1">
                 </li>
                 <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">Extension</label>
@@ -239,7 +239,7 @@
             </li>--%>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Fax #</label>
-                    <input class="ss_form_input ss_not_edit" data-item="LenderContact.OfficeNO" data-item-type="1">
+                    <input class="ss_form_input ss_not_edit" data-item="LenderContact.Fax" data-item-type="1">
                 </li>
                 <%--<li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>
@@ -312,13 +312,13 @@
             </li>--%>
 
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Phone #</label>
-                    <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Cell" data-item-type="1">
+                    <label class="ss_form_input_title">Office #</label>
+                    <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.OfficeNO" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
-                <label class="ss_form_input_title">Extension</label>
+                    <label class="ss_form_input_title">Extension</label>
                     <input class="ss_form_input " data-item="ProcessorContact.Extension" data-item-type="1">
-            </li>
+                </li>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Fax #</label>
@@ -462,14 +462,7 @@
                     <label class="ss_form_input_title">Office #</label>
                     <input class="ss_form_input ss_not_edit" data-item="CloserContact.OfficeNO" data-item-type="1">
                 </li>
-                <li class="ss_form_item">
-                    <%--    <label class="ss_form_input_title">Extension</label>
-                <input class="ss_form_input " value="616">
-            </li>
-            <li class="ss_form_item">
-                <label class="ss_form_input_title">&nbsp;</label>
-                <input class="ss_form_input ss_form_hidden" value="">
-            </li>--%>
+                
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Fax #</label>
                     <input class="ss_form_input ss_not_edit" data-item="CloserContact.Fax" data-item-type="1">
