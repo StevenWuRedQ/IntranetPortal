@@ -193,7 +193,6 @@ Public Class UCTitleSummary
     End Sub
 #End Region
 
-
     Public Function CaseNameOfDocumentRequest() As String
         Return ""
     End Function
@@ -268,7 +267,6 @@ Public Class UCTitleSummary
             End If
         End If
     End Function
-
 
     Protected Sub gridAppointment_CustomColumnGroup(sender As Object, e As CustomColumnSortEventArgs) Handles gridTask.CustomColumnGroup, gridFollowUp.CustomColumnGroup
         If e.Column.FieldName = "ScheduleDate" Or e.Column.FieldName = "CallbackDate" Then

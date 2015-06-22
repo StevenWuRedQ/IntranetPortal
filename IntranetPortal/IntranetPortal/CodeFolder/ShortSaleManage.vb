@@ -10,8 +10,14 @@ Public Class ShortSaleManage
             Dim ssCase = New ShortSaleCase(propBase)
             ssCase.BBLE = bble
             ssCase.CaseName = li.LeadsName
-            ssCase.Status = ShortSale.CaseStatus.NewFile
+            ssCase.Status = ShortSale.CaseStatus.Active
             ssCase.Owner = GetIntaker()
+
+            Dim processor = PartyContact.GetContactByName(ssCase.Owner)
+            If processor IsNot Nothing Then
+                ssCase.Processor = processor.ContactId
+            End If
+
             ssCase.CreateBy = createBy
             ssCase.CreateDate = DateTime.Now
 

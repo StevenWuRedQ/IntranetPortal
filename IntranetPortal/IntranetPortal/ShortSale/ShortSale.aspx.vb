@@ -180,33 +180,35 @@ Public Class ShortSalePage
         hfIsEvction.Value = isEviction.ToString
     End Sub
 
-    Sub MortgageStatusUpdate(mortageType As String, status As String, bble As String) Handles ActivityLogs.MortgageStatusUpdateEvent
+    Sub MortgageStatusUpdate(mortageType As String, status As String, category As String, bble As String) Handles ActivityLogs.MortgageStatusUpdateEvent
         Dim ssCase = ShortSaleCase.GetCaseByBBLE(bble)
 
-        If mortageType = "1st Mortgage" Then
+        If mortageType <> "2nd Lien" Then
             If ssCase.Mortgages.Count > 0 Then
                 Dim obj = ssCase.Mortgages(0)
                 If obj IsNot Nothing Then
                     obj.Status = status
+                    obj.Category = category
                     obj.Save()
 
-                    If status = "Closed" Then
-                        ssCase.Status = CaseStatus.Closed
-                    Else
-                        ssCase.Status = CaseStatus.Active
-                    End If
+                    'If status = "Closed" Then
+                    '    ssCase.Status = CaseStatus.Closed
+                    'Else
+                    '    ssCase.Status = CaseStatus.Active
+                    'End If
                 End If
             End If
         End If
 
-        If mortageType = "2nd Mortgage" Then
+        If mortageType = "2nd Lien" Then
             If ssCase.Mortgages.Count > 1 Then
                 Dim obj = ssCase.Mortgages(1)
                 If obj IsNot Nothing Then
                     obj.Status = status
+                    obj.Category = category
                     obj.Save()
 
-                    ssCase.Status = CaseStatus.Active
+                    'ssCase.Status = CaseStatus.Active
                 End If
             End If
         End If

@@ -57,24 +57,25 @@
     function OnSortMenuClick(s, e) {
         var icon = document.getElementById("btnSortIcon");
         if (e.item.index == 0) {
-            SortLeadsList(icon, "UpdateDate");
+            gridCase.GroupBy("Owner", 0);
+            
         }
 
         if (e.item.index == 1) {
-            SortLeadsList(icon, "CaseName");
+            gridCase.GroupBy("MortgageStatus", 0);
         }
 
-        if (e.item.index == 2) {
-            gridCase.GroupBy("Neighborhood", 0);
-        }
+        //if (e.item.index == 2) {
+        
+        //}
 
-        if (e.item.index == 3) {
-            gridCase.GroupBy("Owner", 0);
-        }
+        //if (e.item.index == 3) {
+        //    gridCase.GroupBy("Owner", 0);
+        //}
 
-        if (e.item.index == 4) {
+        //if (e.item.index == 4) {
 
-        }
+        //}
     }
 
    
@@ -204,6 +205,60 @@
                         </div>
                     </GroupRowTemplate>
                 </dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="ReferralName" Visible="false" VisibleIndex="4">
+                    <GroupRowTemplate>
+                        <div>
+                            <table style="height: 30px">
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
+                                    <td style="width: 80px;">
+                                        <span class="font_black">
+                                            <i class="fa fa-user font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                        </span>
+                                    </td>
+                                    <td style="padding-left: 10px">
+                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </GroupRowTemplate>
+                </dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="MortgageStatus" Visible="false" VisibleIndex="4">
+                    <GroupRowTemplate>
+                        <div>
+                            <table style="height: 30px">
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
+                                    <td style="width: 80px;">
+                                        <span class="font_black">
+                                           <span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                        </span>
+                                    </td>
+                                    <td style="padding-left: 10px">
+                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </GroupRowTemplate>
+                </dx:GridViewDataColumn>
+                <dx:GridViewDataColumn FieldName="MortgageCategory" Visible="false" VisibleIndex="4">
+                    <GroupRowTemplate>
+                        <div>
+                            <table style="height: 30px">
+                                <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
+                                    <td style="width: 80px;">
+                                        <span class="font_black">
+                                           <span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                        </span>
+                                    </td>
+                                    <td style="padding-left: 10px">
+                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </GroupRowTemplate>
+                </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn FieldName="EvictionOwner" Visible="false" VisibleIndex="4">
                     <GroupRowTemplate>
                         <div>
@@ -257,19 +312,11 @@
     ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px"
     PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
     <ItemStyle Paddings-PaddingLeft="20px" />
-    <Items>
-        <dx:MenuItem Text="Date" Name="Date">
+    <Items>        
+        <dx:MenuItem Text="User" Name="User">
         </dx:MenuItem>
-        <dx:MenuItem Text="Name" Name="Name">
-        </dx:MenuItem>
-        <dx:MenuItem Text="Borough" Name="Borough">
-        </dx:MenuItem>
-        <dx:MenuItem Text="Employee" Name="Employee">
-        </dx:MenuItem>
-        <dx:MenuItem Text="Zip" Name="Zip">
-        </dx:MenuItem>
-        <dx:MenuItem Text="Type" Name="LeadsType">
-        </dx:MenuItem>
+        <dx:MenuItem Text="Status" Name="Status">
+        </dx:MenuItem>       
     </Items>
     <ClientSideEvents ItemClick="OnSortMenuClick" />
 </dx:ASPxPopupMenu>

@@ -294,6 +294,12 @@
           <![CDATA[<i class="fa fa-bar-chart-o"></i>]]>
         </FontClass>
       </PortalNavItem>
+      <PortalNavItem Name="ShortSale-Category-All" Text="All Files" NavigationUrl="/ShortSale/ShortSale.aspx?category=All" ShowAmount="true">
+        <UserRoles>ShortSale-Manager</UserRoles>
+        <FontClass>
+          <![CDATA[<i class="fa fa-file"></i>]]>
+        </FontClass>
+      </PortalNavItem>
       <PortalNavItem Name="ShortSale-Category-Assign" Text="New File" NavigationUrl="/ShortSale/ShortSale.aspx?category=Assign" ShowAmount="true">
         <FontClass>
           <![CDATA[<i class="fa fa-file"></i>]]>
@@ -383,13 +389,13 @@
           <![CDATA[<i class="fa fa-check-circle"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <!--<PortalNavItem Name="ShortSale-FollowUp" Text="Follow Up" NavigationUrl="/ShortSale/ShortSale.aspx?s=1" ShowAmount="true">
+     <PortalNavItem Name="ShortSale-Archived" Text="Archived" NavigationUrl="/ShortSale/ShortSale.aspx?s=6" ShowAmount="true">
         <UserRoles></UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-rotate-right"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ShortSale-Upcoming" Text="Upcoming Approvals" NavigationUrl="/ShortSale/ShortSale.aspx" ShowAmount="false">
+       <!--<PortalNavItem Name="ShortSale-Upcoming" Text="Upcoming Approvals" NavigationUrl="/ShortSale/ShortSale.aspx" ShowAmount="false">
         <UserRoles>ShortSale-Manager</UserRoles>
         <FontClass>
           <![CDATA[<i class="fa fa-bell"></i>]]>

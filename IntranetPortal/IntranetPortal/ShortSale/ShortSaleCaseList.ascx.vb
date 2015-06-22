@@ -9,6 +9,7 @@ Public Class ShortSaleCaseList
 
     Public Sub BindCaseListByCategory(category As String)
         hfCaseCategory.Value = category
+        lblLeadCategory.Text = category
 
         If Employee.IsShortSaleManager(Page.User.Identity.Name) Then
             gridCase.DataSource = ShortSaleCase.GetCaseByCategory(category)
@@ -16,10 +17,15 @@ Public Class ShortSaleCaseList
 
             If Not Page.IsPostBack Then
                 gridCase.GroupBy(gridCase.Columns("Owner"))
+                gridCase.GroupBy(gridCase.Columns("MortgageStatus"))
             End If
         Else
             gridCase.DataSource = ShortSaleCase.GetCaseByCategory(category, Page.User.Identity.Name)
             gridCase.DataBind()
+
+            If Not Page.IsPostBack Then
+                gridCase.GroupBy(gridCase.Columns("MortgageStatus"))
+            End If
         End If
     End Sub
 
@@ -32,6 +38,17 @@ Public Class ShortSaleCaseList
 
             If Not Page.IsPostBack Then
                 gridCase.GroupBy(gridCase.Columns("EvictionOwner"))
+            End If
+
+            Return
+        End If
+
+        If status = CaseStatus.Archived Then
+            gridCase.DataSource = ShortSaleCase.GetArchivedCases
+            gridCase.DataBind()
+
+            If Not Page.IsPostBack Then
+                gridCase.GroupBy(gridCase.Columns("MortgageCategory"))
             End If
 
             Return

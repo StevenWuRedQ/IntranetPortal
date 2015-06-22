@@ -98,9 +98,6 @@
         End Set
     End Property
 
-
-
-
     Public Shared ReadOnly Property StatusCategory As String()
         Get
             Return _statusData.Select(Function(s) s.Category).Where(Function(s) Not String.IsNullOrEmpty(s)).Distinct.OrderBy(Function(s) s).ToArray
@@ -112,7 +109,7 @@
         Get
             If _statusData Is Nothing Then
                 Using ctx As New ShortSaleEntities
-                    _statusData = ctx.MortgageStatusDatas.ToList
+                    _statusData = ctx.MortgageStatusDatas.Where(Function(a) a.Category IsNot Nothing).ToList
                 End Using
             End If
 

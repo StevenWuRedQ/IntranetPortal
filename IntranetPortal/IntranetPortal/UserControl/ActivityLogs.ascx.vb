@@ -14,7 +14,7 @@ Public Class ActivityLogs
 
     Public Property DisplayMode As ActivityLogMode
     Public Event MortgageStatusUpdateEvent As OnMortgageStatusUpdate
-    Public Delegate Sub OnMortgageStatusUpdate(updateType As String, status As String, bble As String)
+    Public Delegate Sub OnMortgageStatusUpdate(updateType As String, status As String, category As String, bble As String)
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
@@ -843,7 +843,7 @@ Public Class ActivityLogs
 
                 If Not String.IsNullOrEmpty(typeOfUpdate) Then
                     If Not String.IsNullOrEmpty(statusOfUpdate) Then
-                        RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, hfBBLE.Value)
+                        RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, category, hfBBLE.Value)
                     End If
 
                     Dim comments = String.Format("Type of Update: {0} <br />Status Update: {2} - {3}<br />{1}", typeOfUpdate, txtComments, category, statusOfUpdate)
@@ -851,11 +851,20 @@ Public Class ActivityLogs
                     If category = "Assign" Then
                         Dim users = Roles.GetUsersInRole("ShortSale-AssignReviewer")
                         If users IsNot Nothing AndAlso users.Count > 0 Then
-                            Dim ssCase = ShortSaleCase.GetCaseByBBLE(hfBBLE.Value)
-                            ssCase.Owner = users(0)
-                            ssCase.UpdateDate = DateTime.Now
-                            ssCase.UpdateBy = Page.User.Identity.Name
-                            ssCase.Save()
+
+                            ShortSaleCase.ReassignOwner(hfBBLE.Value, users(0))
+
+                            'Dim ssCase = ShortSaleCase.GetCaseByBBLE(hfBBLE.Value)
+                            'ssCase.Owner = users(0)
+                            'Dim party = PartyContact.GetContactByName(users(0))
+
+                            'If party IsNot Nothing Then
+                            '    ssCase.Processor = party.ContactId
+                            'End If
+
+                            'ssCase.UpdateDate = DateTime.Now
+                            'ssCase.UpdateBy = Page.User.Identity.Name
+                            'ssCase.Save()
                         End If
                     End If
 

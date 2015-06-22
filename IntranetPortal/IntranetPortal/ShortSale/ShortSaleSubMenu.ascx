@@ -32,10 +32,10 @@
 
             if (e.item.index == 1)
             {
-                SaveStatus(e.item.name, tmpCaseId, "NextWeek");
+                SaveStatus(e.item.name, tmpCaseId);
             }
 
-            if (e.item.index > 1 && e.item.index <= 6) {
+            if (e.item.index =2) {
                 SaveStatus(e.item.name, tmpCaseId);
             }
 
@@ -231,24 +231,24 @@
         <dx:MenuItem GroupName="Sort" Text="View Map" Name="GoogleStreet">
             <Image Url="/images/drap_map_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="Follow Up" Name="FollowUp" Image-Url="/images/drap_follow_up_icons.png">
+     <%--   <dx:MenuItem GroupName="Sort" Text="Follow Up" Name="FollowUp" Image-Url="/images/drap_follow_up_icons.png">
             <Image Url="/images/drap_inprocess_icons.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="New File" Name="NewFile" Image-Url="/images/drap_prority_icons.png">
             <Image Url="/images/drop_new_icon.png"></Image>
-        </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="Active Cases" Name="Active" Image-Url="/images/drap_prority_icons.png">
+        </dx:MenuItem>--%>
+        <dx:MenuItem GroupName="Sort" Text="Active" Name="Active" Image-Url="/images/drap_prority_icons.png">
             <Image Url="/images/drop_active_icon.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="Eviction" Name="Eviction" Image-Url="/images/drap_deadlead_icons.png">
+        <dx:MenuItem GroupName="Sort" Text="Archived" Name="Archived" Image-Url="/images/drap_deadlead_icons.png">
             <Image Url="/images/drap_doorknock_icons.png"></Image>
         </dx:MenuItem>
-        <dx:MenuItem GroupName="Sort" Text="On Hold" Name="OnHold" Image-Url="/images/drap_inprocess_icons.png">
+    <%--    <dx:MenuItem GroupName="Sort" Text="On Hold" Name="OnHold" Image-Url="/images/drap_inprocess_icons.png">
             <Image Url="/images/drop_on_hold_icon.png"></Image>
         </dx:MenuItem>
         <dx:MenuItem GroupName="Sort" Text="Closed" Name="Closed" Image-Url="/images/drap_closed_icons.png">
             <Image Url="/images/drap_closed_icons.png"></Image>
-        </dx:MenuItem>
+        </dx:MenuItem>--%>
         <dx:MenuItem GroupName="Sort" Text="Reassign" Name="Reassign">
             <Image Url="/images/drap_reassign_icon.png"></Image>
         </dx:MenuItem>     

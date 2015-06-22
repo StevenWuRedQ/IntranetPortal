@@ -1,7 +1,7 @@
 ﻿Public Class PortalReport
 
     Public Shared Function LoadShortSaleActivityReport(startDate As DateTime, endDate As DateTime) As List(Of AgentActivityData)
-        Dim ssRoles = {"ShortSale-Negotiator", "ShortSale-Processor", "Intake"}
+        Dim ssRoles = Roles.GetAllRoles().Where(Function(r) r.StartsWith("ShortSale-") OrElse r.StartsWith("Title-")).ToList
         Dim ssUsers As New List(Of String)
 
         For Each rl In ssRoles

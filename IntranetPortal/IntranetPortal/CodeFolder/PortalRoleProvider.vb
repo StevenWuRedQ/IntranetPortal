@@ -55,7 +55,13 @@
     End Function
 
     Public Overrides Function GetAllRoles() As String()
-        Throw New NotImplementedException()
+        Try
+            Using ctx As New Entities
+                Return ctx.Roles.Select(Function(r) r.Rolename).ToArray
+            End Using
+        Catch ex As Exception
+            Throw ex
+        End Try
     End Function
 
     Public Overrides Function GetRolesForUser(username As String) As String()

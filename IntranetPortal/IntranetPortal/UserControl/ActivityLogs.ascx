@@ -349,14 +349,36 @@
         })
     }
 
+    function ExpandComments(btnExpand)
+    {
+        if ($(btnExpand).hasClass("fa-compress")) {
+            $("DIV .divComments").each(function () {
+                $(this).height(25);
+            });
+
+            $(btnExpand).attr("class", 'fa fa-expand tooltip-examples');
+        }
+        else {
+            $("DIV .divComments").each(function () {
+                $(this).height("auto");
+            });
+            $(btnExpand).attr("class", 'fa fa-compress tooltip-examples');
+        }
+    }
+
     var refreshLogs = false;
     function ShortSaleUpdateTypeChange(s) {
         var type = s.value;
-        if (type == "BPO/Appraisal") {
-            refreshLogs = false;
-            popupBpo.PerformCallback();
-            popupBpo.Show();
-        }
+        
+        
+
+
+
+        //if (type == "BPO/Appraisal") {
+        //    refreshLogs = false;
+        //    popupBpo.PerformCallback();
+        //    popupBpo.Show();
+        //}
     }
     // ]]>
 </script>
@@ -405,8 +427,7 @@
                     
                     <div>
                         <div class="color_gray upcase_text">Type of update</div>
-                        <select class="select_bootstrap select_margin" id="selType1" onchange="ShortSaleUpdateTypeChange(this)">
-                            <option></option>
+                        <select class="select_bootstrap select_margin" id="selType1" onchange="ShortSaleUpdateTypeChange(this)">                         
                             <% For Each type In IntranetPortal.Core.CommonData.GetData("UpdateType")%>
                             <option value="<%= type.Name%>"><%= type.Name%></option>
                             <% Next%>
@@ -479,7 +500,10 @@
             </Styles>
             <Columns>
                 <dx:GridViewDataColumn FieldName="ActionType" VisibleIndex="0" Caption="" Width="40px">
-                    <HeaderTemplate></HeaderTemplate>
+                    <HeaderStyle HorizontalAlign="Center" />
+                    <HeaderTemplate>
+                       <i class="fa fa-compress tooltip-examples" title="Expand or Collapse All" onclick="ExpandComments(this)"></i>
+                    </HeaderTemplate>
                     <DataItemTemplate>
                         <%# GetCommentsIconClass(Eval("ActionType"))%>
                     </DataItemTemplate>
@@ -676,7 +700,7 @@
                                 </tbody>
                             </table>
                         </asp:Panel>
-                        <asp:Literal runat="server" Visible='<%# Not (Eval("Category").ToString.StartsWith("Task") Or Eval("Category").ToString.StartsWith("Appointment") Or Eval("Category").ToString.StartsWith("Approval") Or Eval("Category").ToString.StartsWith("DoorknockTask") Or Eval("Category").ToString.StartsWith("RecycleTask"))%>' Text='<%# Eval("Comments")%>'>                                                
+                        <asp:Literal runat="server" Visible='<%# Not (Eval("Category").ToString.StartsWith("Task") Or Eval("Category").ToString.StartsWith("Appointment") Or Eval("Category").ToString.StartsWith("Approval") Or Eval("Category").ToString.StartsWith("DoorknockTask") Or Eval("Category").ToString.StartsWith("RecycleTask"))%>' Text='<%# String.Format("<div class=""divComments"">{0}</div>", Eval("Comments"))%>'>
                         </asp:Literal>
                     </DataItemTemplate>
                 </dx:GridViewDataTextColumn>
