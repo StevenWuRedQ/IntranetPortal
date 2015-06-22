@@ -18,7 +18,7 @@
                 <ValidationSettings ErrorDisplayMode="ImageWithTooltip" />
                 <ClientSideEvents Init="phone_InitAndKeyUp" KeyUp="phone_InitAndKeyUp" />
             </dx:ASPxTextBox>--%>
-            <input class="ss_form_input ss_not_edit" data-field="AssignedProcessor.Cell">
+            <input class="ss_form_input ss_not_edit" data-field="AssignedProcessor.OfficeNO">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Email</label>
@@ -65,7 +65,6 @@
             <label class="ss_form_input_title">name</label>
             <input class="ss_form_input ss_not_edit" data-field="ListingAgentContact.Name">
         </li>
-
         <li class="ss_form_item">
             <label class="ss_form_input_title">Office</label>
             <input class="ss_form_input ss_not_edit" data-field="ListingAgentContact.Office">
@@ -158,7 +157,6 @@
             <label class="ss_form_input_title">office</label>
             <input class="ss_form_input ss_not_edit" data-field="BuyerAttorneyContact.Office">
         </li>
-
         <li class="ss_form_item">
             <label class="ss_form_input_title">address</label>
             <input class="ss_form_input ss_not_edit" data-field="BuyerAttorneyContact.Address">

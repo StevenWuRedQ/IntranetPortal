@@ -267,7 +267,7 @@
 
         <div class="ss_form">
             <h4 class="ss_form_title">Lender Foreclosure Attorney
-                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].LeaderAttorneyContact', function(party){ShortSaleCaseData.Mortgages[__index__].LeaderAttorneyContact=party.ContactId})"></i>
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].LeaderAttorneyContact', function(party){ShortSaleCaseData.Mortgages[__index__].LenderAttorney=party.ContactId})"></i>
             </h4>
             <ul class="ss_form_box clearfix">
                 <li class="ss_form_item">
@@ -276,7 +276,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">phone #</label>
-                    <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.Cell" data-item-type="1">
+                    <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.OfficeNO" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">customer service</label>
@@ -284,7 +284,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Fax #</label>
-                    <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.OfficeNO" data-item-type="1">
+                    <input class="ss_form_input ss_not_edit" data-item="LeaderAttorneyContact.Fax" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Email</label>
@@ -314,7 +314,7 @@
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Phone #</label>
-                    <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Cell" data-item-type="1">
+                    <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.OfficeNO" data-item-type="1">
                 </li>
                 <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">Extension</label>
@@ -326,7 +326,7 @@
             </li>--%>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Fax #</label>
-                    <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.OfficeNO" data-item-type="1">
+                    <input class="ss_form_input ss_not_edit" data-item="ProcessorContact.Fax" data-item-type="1">
                 </li>
                 <%-- <li class="ss_form_item">
                 <label class="ss_form_input_title">&nbsp;</label>

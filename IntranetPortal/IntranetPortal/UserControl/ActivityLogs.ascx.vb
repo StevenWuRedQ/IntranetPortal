@@ -937,7 +937,17 @@ Public Class ActivityLogs
                 Context.SaveChanges()
             End If
 
+            Dim sn = ""
             If Not String.IsNullOrEmpty(Request.QueryString("sn")) Then
+                sn = Request.QueryString("sn").ToString
+            Else
+                Dim wliItem = WorkflowService.GetUserTaskWorklist(task.TaskID, Page.User.Identity.Name)
+                If wliItem IsNot Nothing Then
+                    sn = String.Format("{0}_{1}", wliItem.ProcInstId, wliItem.ActInstId)
+                End If
+            End If
+
+            If Not String.IsNullOrEmpty(sn) Then
                 Dim wli = WorkflowService.LoadTaskProcess(Request.QueryString("sn").ToString)
                 wli.ProcessInstance.DataFields("Result") = "Completed"
                 wli.Finish()

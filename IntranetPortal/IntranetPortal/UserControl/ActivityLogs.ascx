@@ -375,19 +375,24 @@
 
         if ($.inArray(type, categorys) > -1) {
             $("#selCategory").val(type);
+            OnStatusCategoryChange(document.getElementById("selCategory"));
+            $("#selCategory").attr("disabled", true);
+
+            return;
         } else {
             $("#selCategory").val("");
+            $("#selCategory").attr("disabled", false);
         }
 
         if ($.inArray(type, updates) > -1) {
             $("#selCategory").attr("disabled", true);
             $("#selStatusUpdate").attr("disabled", true);
+            
+            return;
         } else {
             $("#selCategory").attr("disabled", false);
             $("#selStatusUpdate").attr("disabled", false);
         }
-
-
 
         //if (type == "BPO/Appraisal") {
         //    refreshLogs = false;
