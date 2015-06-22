@@ -157,10 +157,8 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input ss_phone" value="<%=summaryCase.AssignedProcessor.Cell%>">
+                        <input class="ss_form_input ss_phone" value="<%=summaryCase.AssignedProcessor.OfficeNO%>">
                     </li>
-
-
                 </ul>
             </div>
 
@@ -209,11 +207,11 @@
 
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">name</label>
-                        <input class="ss_form_input" value="<%=summaryCase.SellerAttorneyContact.Name %>">
+                        <input class="ss_form_input" value="<%=If(summaryCase.SellerAttorneyContact isnot Nothing, summaryCase.SellerAttorneyContact.Name, "") %>">
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Phone #</label>
-                        <input class="ss_form_input ss_phone" value="<%=summaryCase.SellerAttorneyContact.Cell %>">
+                        <input class="ss_form_input ss_phone" value="<%=If(summaryCase.SellerAttorneyContact isnot Nothing, summaryCase.SellerAttorneyContact.OfficeNO, "") %>">
                     </li>
 
                 </ul>
