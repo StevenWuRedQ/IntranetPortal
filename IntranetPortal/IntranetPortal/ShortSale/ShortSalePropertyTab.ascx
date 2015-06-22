@@ -15,36 +15,36 @@
 
         <li class="ss_form_item">
             <label class="ss_form_input_title">Street Number</label>
-            <input class="ss_form_input" data-field="PropertyInfo.Number">
+            <input class="ss_form_input" data-field="PropertyInfo.Number" readonly="readonly">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Street Name</label>
-            <input class="ss_form_input" data-field="PropertyInfo.StreetName">
+            <input class="ss_form_input" data-field="PropertyInfo.StreetName" readonly="readonly">
         </li>
          <li class="ss_form_item">
             <label class="ss_form_input_title">Apt #</label>
-            <input class="ss_form_input" data-field="PropertyInfo.AptNo">
+            <input class="ss_form_input" data-field="PropertyInfo.AptNo" readonly="readonly">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">City</label>
-            <input class="ss_form_input" data-field="PropertyInfo.City">
+            <input class="ss_form_input" data-field="PropertyInfo.City" readonly="readonly">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">State</label>
-            <input class="ss_form_input" data-field="PropertyInfo.State">
+            <input class="ss_form_input" data-field="PropertyInfo.State" readonly="readonly">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Zip</label>
-            <input class="ss_form_input" data-field="PropertyInfo.Zipcode">
+            <input class="ss_form_input" data-field="PropertyInfo.Zipcode" readonly="readonly">
         </li>
         
         <li class="ss_form_item">
             <label class="ss_form_input_title">BLOCK</label>
-            <input class="ss_form_input" data-field="PropertyInfo.Block">
+            <input class="ss_form_input" data-field="PropertyInfo.Block" readonly="readonly">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Lot</label>
-            <input class="ss_form_input" data-field="PropertyInfo.Lot">
+            <input class="ss_form_input" data-field="PropertyInfo.Lot" readonly="readonly">
         </li>
         <li class="ss_form_item">
             <label class="ss_form_input_title">Building type</label>
