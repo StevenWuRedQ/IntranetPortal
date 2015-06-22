@@ -338,16 +338,12 @@ Public Class Utility
     End Function
 
     Public Shared Function IsCompany(name As String) As Boolean
-        Dim suffixs = {"LLC", "LLC.", "CORP.", "CORP", "INC", "INC.", "L.P.", "CO.L.P.", "CHURCH"}
+        'regex match the comany like LLC Crop Etc. regex store in database
 
-        Dim lastSubstring = name.Trim.Split(" ").Last.ToUpper
-        For Each suffix In suffixs
-            If lastSubstring = suffix Then
-                Return True
-            End If
-        Next
+        Dim regexStr = Core.PortalSettings.GetValue("CompanyRegex")
+        Dim match = Regex.Match(name, regexStr)
 
-        Return False
+        Return match.Success
     End Function
 
     Public Shared Function GetBoroughByZip(zip As String) As String

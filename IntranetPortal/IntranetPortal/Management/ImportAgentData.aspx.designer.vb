@@ -113,6 +113,15 @@ Partial Public Class ImportAgentData
     Protected WithEvents Import2PaddingBtn As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''cbNotShowExist control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cbNotShowExist As Global.DevExpress.Web.ASPxEditors.ASPxCheckBox
+
+    '''<summary>
     '''ImportStauts control.
     '''</summary>
     '''<remarks>

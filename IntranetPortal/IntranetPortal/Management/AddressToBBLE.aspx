@@ -13,8 +13,9 @@
          
          <asp:Button ID="Button1" runat="server" Text="GetBBLEs" OnClick="Button1_OnClick"/>
          <dx:ASPxCheckBox ID="aspShowError" runat="server" Text="Allow Show Error"></dx:ASPxCheckBox>
+         <asp:Button ID="FormatAddressBtn" runat="server" Text="Format Address" OnClick="FormatAddressBtn_Click"/>
          <div>
-              <p> <%= reslut%> </p> 
+             <textarea><%= reslut %></textarea>
          </div>
          
     </div>

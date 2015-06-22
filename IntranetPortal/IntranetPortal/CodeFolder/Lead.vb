@@ -477,7 +477,17 @@ Partial Public Class Lead
             Return Core.RecycleLead.InRecycle(BBLE)
         End Get
     End Property
-
+    Public Shared Function InSystem(BBLE As String) As Boolean
+        Using ctx As New Entities
+            If (ctx.Leads.Find(BBLE) IsNot Nothing) Then
+                Return True
+            End If
+            If (ctx.PendingAssignLeads.Where(Function(l) l.Status = 1).Where(Function(l) l.BBLE = BBLE) IsNot Nothing) Then
+                Return True
+            End If
+        End Using
+        Return False
+    End Function
     Public Sub Recycle(Optional recycleBy As String = "")
         Dim recylceName = IntranetPortal.Employee.GetOfficeAssignAccount(EmployeeName)
         If String.IsNullOrEmpty(recycleBy) Then

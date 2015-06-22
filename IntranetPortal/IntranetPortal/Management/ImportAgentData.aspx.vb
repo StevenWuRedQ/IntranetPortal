@@ -456,7 +456,10 @@ InitialLine:
     End Sub
 
     Protected Sub LoadImportJson_Click(sender As Object, e As EventArgs)
-        Dim paddingAssginLeads = GetPaddginAssignLeads()
+        BindPaddingAssginLead()
+    End Sub
+    Sub BindPaddingAssginLead()
+        Dim paddingAssginLeads = GetPaddingAssignLeads()
         If (paddingAssginLeads Is Nothing) Then
             ImportStauts.Text = "Please fill padding assgin Josn"
             Return
@@ -464,9 +467,8 @@ InitialLine:
         Import2PaddingAssginGrid.DataSource = paddingAssginLeads
         Import2PaddingAssginGrid.DataBind()
     End Sub
-
     Protected Sub Import2PaddingBtn_Click(sender As Object, e As EventArgs)
-        Dim paddingLeads = GetPaddginAssignLeads()
+        Dim paddingLeads = GetPaddingAssignLeads()
         If (paddingLeads Is Nothing) Then
             ImportStauts.Text = "Please fill padding assgin Josn"
             Return
@@ -493,12 +495,19 @@ InitialLine:
 
         ImportStauts.Text = "Transfer finished"
     End Sub
-    Function GetPaddginAssignLeads() As JArray
+    Function GetPaddingAssignLeads() As JArray
         If (Not String.IsNullOrEmpty(ImportJson.Text)) Then
-            Return JArray.Parse(ImportJson.Text)
+            Dim needImport = JArray.Parse(ImportJson.Text)
+            If (cbNotShowExist.Checked) Then
+                needImport = needImport.Values().Select(Function(l) Not Lead.InSystem(l.Item("BBLE")))
+            End If
+            Return needImport
         End If
 
         Return Nothing
     End Function
 
+    Protected Sub cbNotShowExist_CheckedChanged(sender As Object, e As EventArgs)
+        BindPaddingAssginLead()
+    End Sub
 End Class

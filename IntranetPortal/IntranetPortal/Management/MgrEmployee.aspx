@@ -28,9 +28,14 @@
                     </Separator>
                     <ContentCollection>
                         <dx:SplitterContentControl runat="server">
+
                             <dx:ASPxRoundPanel ID="ASPxRoundPanel1" runat="server" Width="100%" HeaderText="Employee Tree" Height="100%" >
                                 <PanelCollection>
                                     <dx:PanelContent>
+                                        <div>
+                                            <asp:TextBox ID="SearchName" runat="server"></asp:TextBox>
+                                            <asp:Button ID="SearchnameBtn" runat="server" Text="Search" OnClick="SearchnameBtn_Click"/>
+                                        </div>
                                         <div>                                            
                                             <dx:ASPxCheckBox runat="server" ID="chkActive" Text="Only Active User:" TextAlign="Left" Checked="true" AutoPostBack="true"></dx:ASPxCheckBox>
                                         </div>

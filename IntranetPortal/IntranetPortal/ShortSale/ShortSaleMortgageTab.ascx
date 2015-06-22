@@ -31,12 +31,8 @@
             <ul class="ss_form_box clearfix" id="mortgage__index__">
                 <li class="ss_form_item">
                     <label class="ss_form_input_title ">Category</label>
-                    <select class="ss_form_input" data-item="Category" data-item-type="1" >
-                        <option value=""></option>
-                        <% For Each category In IntranetPortal.ShortSale.PropertyMortgage.StatusCategory%>
-                        <option value="<%= category%>"><%= category%></option>
-                        <% Next%>
-                    </select>
+                    <input class="ss_form_input" data-item="Category" data-item-type="1" readonly="readonly">
+                       
                 </li>
                 <li class="ss_form_item ss_mortages_stauts">
                     <label class="ss_form_input_title">Status</label>
@@ -56,14 +52,14 @@
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">LENDER</label>
-                    <input class="ss_form_input" data-item="Lender" data-item-type="1">
+                    <input class="ss_form_input" id="MLender__index__" data-item="Lender" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Loan #</label>
                     <input class="ss_form_input" data-item="Loan" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">LOAN AMOUNT</label>
+                    <label class="ss_form_input_title" >LOAN AMOUNT</label>
                     <%--<dx:ASPxTextBox Native="true" runat="server" CssClass="ss_form_input" data-item="LoanAmount">
                         <MaskSettings Mask="$<0..99999g>.<00..99>" IncludeLiterals="DecimalSymbol" />
                         <ValidationSettings ErrorDisplayMode="ImageWithTooltip" />
@@ -152,7 +148,7 @@
 
         <div class="ss_form">
             <h4 class="ss_form_title">Short sale dept 
-                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].ShortSaleDeptContact', function(party){ShortSaleCaseData.Mortgages[__index__].ShortSaleDept =party.ContactId})"></i>
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].ShortSaleDeptContact', function(party){ShortSaleCaseData.Mortgages[__index__].ShortSaleDept =party.ContactId; })"></i>
 
             </h4>
             <ul class="ss_form_box clearfix" id="short_sale_dept">
@@ -210,7 +206,7 @@
 
         <div class="ss_form">
             <h4 class="ss_form_title">Lender
-                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].LenderContact', function(party){ShortSaleCaseData.Mortgages[__index__].LenderContactId =party.ContactId})"></i>
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('Mortgages[__index__].LenderContact', function(party){ShortSaleCaseData.Mortgages[__index__].LenderContactId =party.ContactId;ShortSaleCaseData.Mortgages[__index__].Lender =party.Name ; $('#MLender__index__').val(party.Name); })"></i>
 
             </h4>
             <ul class="ss_form_box clearfix">

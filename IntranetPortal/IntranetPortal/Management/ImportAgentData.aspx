@@ -68,10 +68,17 @@
                                 <td>
                                     <asp:Button ID="LoadImportJson" runat="server" Text="Load" OnClick="LoadImportJson_Click" />
                                     <br />
-                                    <asp:Button ID="Import2PaddingBtn" runat="server" Text="Import" OnClick="Import2PaddingBtn_Click" />
-
+                                </td>
+                                <td>
+                                     <asp:Button ID="Import2PaddingBtn" runat="server" Text="Import" OnClick="Import2PaddingBtn_Click" />
+                                </td>
+                                <td>
+                                    <dx:ASPxCheckBox runat="server" ID="cbNotShowExist" Text="Do not import exist" OnCheckedChanged="cbNotShowExist_CheckedChanged"></dx:ASPxCheckBox>
+                                </td>
+                                <td>
                                     <dx:ASPxLabel runat="server" ID="ImportStauts" Text=""></dx:ASPxLabel>
                                 </td>
+                                
                             </tr>
                         </table>
                         <dx:ASPxGridView runat="server" KeyFieldName="BBLE" ID="Import2PaddingAssginGrid">

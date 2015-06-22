@@ -155,4 +155,25 @@ Public Class MgrEmployee
             Return attach.FileID
         End Using
     End Function
+
+    Protected Sub SearchnameBtn_Click(sender As Object, e As EventArgs)
+        Dim iterator As New TreeListNodeIterator(treeList.RootNode)
+        Do While iterator.Current IsNot Nothing
+            CheckNode(iterator.Current)
+            iterator.GetNext()
+        Loop
+    End Sub
+    Private Sub CheckNode(ByVal node As TreeListNode)
+        Dim s_text As String = SearchName.Text.ToLower()
+        Dim node_value As Object = node.GetValue("Name")
+        If node_value Is Nothing Then
+            Return
+        End If
+        If node_value.ToString().ToLower().IndexOf(s_text) >= 0 Then
+            node.MakeVisible()
+        Else
+
+
+        End If
+    End Sub
 End Class
