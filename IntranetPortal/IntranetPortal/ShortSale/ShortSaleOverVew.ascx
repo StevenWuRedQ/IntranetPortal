@@ -104,7 +104,6 @@
                     <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
                         <div style="font-size: 30px">
 
-
                             <i class="fa fa-user"></i>
                             <span style="margin-left: 19px;">
                                 <% If (Not String.IsNullOrEmpty(shortSaleCaseData.OwnerFirstName)) Then%>
