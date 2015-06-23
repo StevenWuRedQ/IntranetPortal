@@ -108,14 +108,24 @@
     Public Shared ReadOnly Property StatusData As List(Of MortgageStatusData)
         Get
             If _statusData Is Nothing Then
-                Using ctx As New ShortSaleEntities
-                    _statusData = ctx.MortgageStatusDatas.Where(Function(a) a.Category IsNot Nothing).ToList
-                End Using
+                _statusData = LoadStatusData()
             End If
 
             Return _statusData
         End Get
     End Property
+
+    Public Shared Sub RefreshMortgageStatusData()
+        If _statusData IsNot Nothing Then
+            _statusData = LoadStatusData()
+        End If
+    End Sub
+
+    Private Shared Function LoadStatusData() As List(Of MortgageStatusData)
+        Using ctx As New ShortSaleEntities
+            Return ctx.MortgageStatusDatas.Where(Function(a) a.Category IsNot Nothing).ToList
+        End Using
+    End Function
 
 
     Public Property DataStatus As ModelStatus

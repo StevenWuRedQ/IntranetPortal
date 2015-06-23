@@ -1,6 +1,16 @@
 ﻿Public Class CommonData
     Private Shared CacheData As New Dictionary(Of String, List(Of CommonData))
 
+    Public Shared Sub RefreshData()
+
+        For Each item In CacheData.Keys.ToList
+            CacheData.Item(item) = LoadCommonData(item)
+        Next
+        'If CacheData.Count > 0 Then
+        '    CacheData = New Dictionary(Of String, List(Of CommonData))
+        'End If
+    End Sub
+
     Public Shared Function GetData(title As String) As List(Of CommonData)
         If CacheData.ContainsKey(title) Then
             Return CacheData(title)
