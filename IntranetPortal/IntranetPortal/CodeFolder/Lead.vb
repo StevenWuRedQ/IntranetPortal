@@ -482,7 +482,7 @@ Partial Public Class Lead
             If (ctx.Leads.Find(BBLE) IsNot Nothing) Then
                 Return True
             End If
-            If (ctx.PendingAssignLeads.Where(Function(l) l.Status = 1).Where(Function(l) l.BBLE = BBLE) IsNot Nothing) Then
+            If (ctx.PendingAssignLeads.Find(BBLE) IsNot Nothing) Then
                 Return True
             End If
         End Using

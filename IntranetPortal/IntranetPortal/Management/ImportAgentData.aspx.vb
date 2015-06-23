@@ -464,36 +464,52 @@ InitialLine:
             ImportStauts.Text = "Please fill padding assgin Josn"
             Return
         End If
-        Import2PaddingAssginGrid.DataSource = paddingAssginLeads
+        Import2PaddingAssginGrid.DataSource = paddingAssginLeads.ToList().Select(Function(l) New With {.BBLE = l.Item("BBLE").ToString, .EmployeeName = l.Item("EmployeeName").ToString})
         Import2PaddingAssginGrid.DataBind()
     End Sub
     Protected Sub Import2PaddingBtn_Click(sender As Object, e As EventArgs)
-        Dim paddingLeads = GetPaddingAssignLeads()
+        Dim paddingLeads = GetPaddingAssignLeads().Select(Function(l) New With {.BBLE = l.Item("BBLE").ToString, .EmployeeName = l.Item("EmployeeName").ToString}).Distinct()
         If (paddingLeads Is Nothing) Then
             ImportStauts.Text = "Please fill padding assgin Josn"
             Return
         End If
+        Dim listNeedAdd = New List(Of PendingAssignLead)
         ImportStauts.Text = "Start transfter"
+
         Using ctx As New Entities
 
             For Each p In paddingLeads
+
                 Dim l = New PendingAssignLead
-                l.BBLE = p.Item("BBLE").ToString
-                l.EmployeeName = p.Item("EmployeeName")
-                Dim es = Employee.GetInstance(l.EmployeeName)
-                If (es Is Nothing) Then
-                    Throw New Exception("Can't find emloyee " & l.EmployeeName & " please check !")
+                l.BBLE = p.BBLE
+                If (Not Lead.InSystem(l.BBLE)) Then
+                    l.EmployeeName = p.EmployeeName
+                    Dim es = Employee.GetInstance(l.EmployeeName)
+                    If (es Is Nothing) Then
+                        Throw New Exception("Can't find emloyee " & l.EmployeeName & " please check !")
+                    End If
+                    l.CreateBy = "System Import"
+                    l.CreateDate = DateTime.Now
+                    l.Status = 0
+                    'do not add duplicate
+                    If (listNeedAdd.Where(Function(t) t.BBLE = l.BBLE)).FirstOrDefault Is Nothing Then
+                        listNeedAdd.Add(l)
+                    End If
+
+
+
                 End If
-                l.CreateBy = "System Import"
-                l.CreateDate = DateTime.Now
-                l.Status = 0
-                ctx.PendingAssignLeads.Add(l)
+               
 
             Next
-            ctx.SaveChanges()
+            If (listNeedAdd.Count > 0) Then
+                ctx.PendingAssignLeads.AddRange(listNeedAdd)
+                ctx.SaveChanges()
+            End If
+
         End Using
 
-        ImportStauts.Text = "Transfer finished"
+        ImportStauts.Text = "Transfer finished total " & listNeedAdd.Count & " Leads"
     End Sub
     Function GetPaddingAssignLeads() As JArray
         If (Not String.IsNullOrEmpty(ImportJson.Text)) Then

@@ -156,7 +156,7 @@
                                 <td>
                                     <div class="note_text">Agent description : {{LegalCase.Description}}</div>
                                 </td>
-                                
+
                             </tr>
                         </tbody>
                     </table>

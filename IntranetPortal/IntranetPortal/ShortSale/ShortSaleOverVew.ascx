@@ -104,11 +104,14 @@
                     <div style="height: 80px; font-size: 30px; margin-left: 30px; margin-top: 20px;" class="font_gray">
                         <div style="font-size: 30px">
 
-                            <% If (Not String.IsNullOrEmpty(shortSaleCaseData.CaseName)) Then%>
-                            <i class="fa fa-home"></i>
-                            <span style="margin-left: 19px;"><%= shortSaleCaseData.CaseName.Substring(0,If(shortSaleCaseData.CaseName.Length>20 , 20,shortSaleCaseData.CaseName.Length))%></span>
-                            <% End If%>
 
+                            <i class="fa fa-user"></i>
+                            <span style="margin-left: 19px;">
+                                <% If (Not String.IsNullOrEmpty(shortSaleCaseData.OwnerFirstName)) Then%>
+                                <%= shortSaleCaseData.Owner & shortSaleCaseData.OwnerLastName %>
+                                <% End If%>
+                                &nbsp;
+                            </span>
 
                             <% If shortSaleCaseData.PropertyInfo IsNot Nothing Then%>
                             <span class="time_buttons" style="margin-right: 30px" onclick="ShowPopupMap('https://iapps.courts.state.ny.us/webcivil/ecourtsMain', 'eCourts')">eCourts</span>
@@ -118,7 +121,7 @@
                             <% End If%>
                         </div>
                         <%--data format June 2, 2014 6:37 PM--%>
-                        <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px; <%= If(shortSaleCaseData.CreateDate.HasValue,"visibility:visible","visibility:hidden")%>">Started on <%= shortSaleCaseData.CreateDate.ToString%></span>
+                        <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;"><%=If(shortSaleCaseData.PropertyInfo isnot Nothing,shortSaleCaseData.PropertyInfo.PropertyAddress,"") %></span>
                     </div>
 
                     <%--note list--%>

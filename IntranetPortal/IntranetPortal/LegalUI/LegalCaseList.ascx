@@ -15,14 +15,11 @@
                 if (gridCase.GetFocusedRowIndex() >= 0) {
                     //alert(gridLeads.GetFocusedRowIndex());
                     var rowKey = gridCase.GetRowKey(gridCase.GetFocusedRowIndex());
-                    if (rowKey != null)
-                    {
+                    if (rowKey != null) {
                         OnGetRowValues(rowKey);
                     }
-                    else
-                    {
-                        if(splitter)
-                        {
+                    else {
+                        if (splitter) {
                             splitter.GetPaneByName('dataPane')
                         }
                     }
@@ -136,7 +133,7 @@
     </div>
     <div style="overflow: auto; height: 768px; padding: 0px 10px;" id="leads_list_left">
         <asp:HiddenField runat="server" ID="hfCaseStatus" />
-         <asp:HiddenField runat="server" ID="hfCaseBBLEs" />
+        <asp:HiddenField runat="server" ID="hfCaseBBLEs" />
         <dx:ASPxGridView runat="server" SettingsBehavior-AutoExpandAllGroups="true" ID="gridCase" Border-BorderStyle="None" ClientInstanceName="gridCase" Width="100%" KeyFieldName="BBLE" OnDataBinding="gridCase_DataBinding">
             <Columns>
                 <dx:GridViewDataTextColumn FieldName="CaseName" Settings-AllowHeaderFilter="False" VisibleIndex="1">
@@ -161,7 +158,7 @@
                         </div>
                     </GroupRowTemplate>
                 </dx:GridViewDataColumn>
-                 <dx:GridViewDataColumn FieldName="Attorney" Visible="false" VisibleIndex="4">
+                <dx:GridViewDataColumn FieldName="Attorney" Visible="false" VisibleIndex="4">
                     <GroupRowTemplate>
                         <div>
                             <table style="height: 30px">
@@ -178,7 +175,7 @@
                             </table>
                         </div>
                     </GroupRowTemplate>
-                </dx:GridViewDataColumn>                
+                </dx:GridViewDataColumn>
                 <dx:GridViewDataColumn Width="40px" VisibleIndex="6" Visible="false">
                     <DataItemTemplate>
                         <div class="hidden_icon">

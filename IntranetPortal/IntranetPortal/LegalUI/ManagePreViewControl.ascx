@@ -32,16 +32,16 @@
         </tr>
         <tr>
             <td colspan="2">
-                
-                    <div style="width:600px">
-                        
-                        <div>
 
-                            <h4 class="ss_form_title">Description</h4>
-                            <textarea class="edit_text_area" ng-model="LegalCase.Description" style="height: 100px; width: 100%"></textarea>
-                        </div>
-                        <uc1:LegalSecondaryActions runat="server" ID="LegalSecondaryActions" />
+                <div style="width: 600px">
+
+                    <div>
+
+                        <h4 class="ss_form_title">Description</h4>
+                        <textarea class="edit_text_area" ng-model="LegalCase.Description" style="height: 100px; width: 100%"></textarea>
                     </div>
+                    <uc1:LegalSecondaryActions runat="server" ID="LegalSecondaryActions" />
+                </div>
             </td>
         </tr>
         <tr>

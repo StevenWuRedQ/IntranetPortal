@@ -128,7 +128,7 @@
                         <label class="ss_form_input_title">Partition</label>
                         <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.Partition">
                     </li>
-                
+
                     <li class="ss_form_item ss_form_item_line">
                         <label class="ss_form_input_title">note</label>
                         <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.SecondaryInfo.ActionNotes"></textarea>

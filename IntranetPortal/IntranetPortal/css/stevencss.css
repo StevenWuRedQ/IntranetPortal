@@ -1944,8 +1944,7 @@ input[type='checkbox'] + label, input[type='radio'] + label, input[type='radio']
 
 .select_bootstrap {
     padding: 5px;
-    min-width: 120px;
-    max-width: 130px;
+    width: 130px;
     border-radius: 5px;
     border: 1px solid #dde0e7;
     color: #2e2f31;

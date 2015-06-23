@@ -34,13 +34,16 @@ Public Class AddressToBBLE
         Dim reslut As String = reader.ReadToEnd()
         Dim values = JObject.Parse(reslut)
         Dim info = values.Item("address")
-        Dim Erray = "Get Error " + houseNumber + "," + street + "," + borough
+        Dim Erray = ""
         If (info IsNot Nothing) Then
             Dim bbl = info.Item("bbl")
             If (bbl IsNot Nothing) Then
                 Return bbl
+            Else
+                Erray = "Get Error " + If(info.Item("message") IsNot Nothing, info.Item("message").ToString, "")
             End If
-
+        Else
+            Erray = "Get Error " + houseNumber + "," + street + "," + borough
         End If
         Return Erray
     End Function
@@ -57,7 +60,7 @@ Public Class AddressToBBLE
                 Dim fAddress = FormatAddress(address)
                 If (fAddress IsNot Nothing) Then
 
-                    getBBl = street2BBLE(a.Item("houseNumber"), a.Item("street"), a.Item("borough"))
+                    getBBl = street2BBLE(fAddress.Item("houseNumber"), fAddress.Item("street"), a.Item("borough"))
                 End If
 
             Else

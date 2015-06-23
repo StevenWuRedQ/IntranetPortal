@@ -92,7 +92,7 @@ Public Class LegalUI
     End Sub
 
     Public Function GetAllContact() As String
-        Dim json = New JavaScriptSerializer().Serialize(PartyContact.getAllContact().OrderBy(Function(c) c.Name))
+        Dim json = PartyContact.getAllContact().OrderBy(Function(c) c.Name).ToJsonString
         Return json
     End Function
 

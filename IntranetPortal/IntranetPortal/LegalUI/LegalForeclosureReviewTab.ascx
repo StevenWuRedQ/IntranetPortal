@@ -397,7 +397,7 @@
                 <label class="ss_form_input_title">Alonge signed date</label>
                 <input class="ss_form_input " ss-date="" ng-model="LegalCase.ForeclosureInfo.NoteAlongeSingedDate">
             </li>
-             <li class="ss_form_item ss_form_item_line">
+            <li class="ss_form_item ss_form_item_line">
                 <label class="ss_form_input_title">note</label>
                 <textarea class="edit_text_area text_area_ss_form" ng-model="LegalCase.ForeclosureInfo.NoteAlongeNotes"></textarea>
             </li>
@@ -587,11 +587,11 @@
 
         <h4 class="ss_form_title title_with_line  title_after_notes ">
             <span class="title_index title_span">Assignments </span>&nbsp;
-            <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>                                            
+            <i class="fa fa-compress expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="" data-original-title="Expand or Collapse"></i>
             &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="" data-original-title="Add"></i>
             <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="" data-original-title="Delete"></i>
         </h4>
-        
+
         <div class="collapse_div">
 
             <div class="ss_form">

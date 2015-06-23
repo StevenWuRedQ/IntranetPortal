@@ -22,7 +22,7 @@
                     <label class="ss_form_input_title">lot</label>
                     <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.Lot">
                 </li>
-                 <li class="ss_form_item">
+                <li class="ss_form_item">
                     <label class="ss_form_input_title">BBLE</label>
                     <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.BBLE">
                 </li>
@@ -115,7 +115,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Defendant</label>
-                         <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.DefendantId')">
+                        <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.DefendantId')">
                         </div>
                     </li>
                     <li class="ss_form_item">
@@ -126,9 +126,8 @@
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">last court date</label>
                         <input class="ss_form_input " ss-date="" ng-model="LegalCase.ForeclosureInfo.LastCourtDate">
-                        
                     </li>
-                    
+
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">next court date </label>
                         <input class="ss_form_input " ss-date="" ng-model="LegalCase.ForeclosureInfo.NextCourtDate">

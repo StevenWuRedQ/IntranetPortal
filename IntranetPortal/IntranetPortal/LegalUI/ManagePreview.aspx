@@ -10,7 +10,7 @@
         </div>
         <table>
             <tr>
-                <td style="width:120px">
+                <td style="width: 120px">
                     <div class="form_head">Date</div>
                 </td>
                 <td><%= If(Me.SubmitedDate = DateTime.MinValue, "", Me.SubmitedDate.ToString("g"))%></td>
@@ -36,7 +36,6 @@
             <tr>
                 <td colspan="2">
                     <div>
-                        
                     </div>
                 </td>
             </tr>
@@ -45,7 +44,7 @@
                 <td></td>
             </tr>
             <tr>
-                <td style="vertical-align:top">
+                <td style="vertical-align: top">
                     <div class="form_head">Legal User</div>
                 </td>
                 <td>
@@ -63,11 +62,11 @@
                 <td>&nbsp;</td>
                 <td></td>
             </tr>
-           
+
             <tr>
                 <td></td>
                 <td>
-                    <button type="submit" class="rand-button rand-button-pad bg_orange button_margin" runat="server" id="btnSubmit" onserverclick="btnSubmit_ServerClick">Submit</button>                   
+                    <button type="submit" class="rand-button rand-button-pad bg_orange button_margin" runat="server" id="btnSubmit" onserverclick="btnSubmit_ServerClick">Submit</button>
                 </td>
             </tr>
         </table>

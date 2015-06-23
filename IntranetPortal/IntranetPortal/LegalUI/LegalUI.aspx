@@ -197,7 +197,6 @@
                                 </select>
                                 <select class="ss_contact" ss-select="" ng-model="SelectContactId" style="width: 100%">
                                 </select>--%>
-                              
                             </div>
 
                             <div style="align-content: center; height: 100%">
@@ -233,7 +232,7 @@
                                                     <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="/ViewLeadsInfo.aspx?HiddenTab=true&id=BBLE" data-href="#more_leads" onclick="LoadMoreFrame(this)">
                                                         <i class="fa fa-folder head_tab_icon_padding"></i>
                                                         <div class="font_size_bold">Leads</div>
-                                                       
+
                                                     </a>
                                                 </li>
                                                 <li class="short_sale_head_tab" ng-show="LegalCase.InShortSale">
@@ -521,7 +520,7 @@
             $(document).ready(function () { angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(BBLE) })
         }
 
-        var AllContact = $.parseJSON('<%= GetAllContact()%>');
+        var AllContact = <%= GetAllContact()%> ;
         var taskSN = '<%= Request.QueryString("sn")%>';
         <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
         var portalApp = angular.module('PortalApp', ['dx', 'ngMaterial']);
@@ -567,15 +566,15 @@
         });
 
         portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
-            
-            
+
+
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
             $http.post('/LegalUI/ContactService.svc/CheckInShortSale', { bble: leadsInfoBBLE }).success(function (data) {
 
                 $scope.LegalCase.InShortSale = data;
-                
+
             });
-           
+
             var self = $scope;
             function querySearch(query) {
                 var results = query ?
@@ -774,7 +773,7 @@
                 //    keyType: "Int32"
                 //});
                 return {
-                    dataSource: $scope.ContactDataSource,
+                    dataSource: AllContact,//$scope.ContactDataSource,
                     valueExpr: 'ContactId',
                     displayExpr: 'Name',
                     searchEnabled: true,
