@@ -11,7 +11,7 @@
         <div>
             <table>
                 <tr>
-                    <td style="vertical-align: top;max-height:300px;">
+                    <td style="vertical-align: top; max-height: 300px;">
                         <dx:ASPxRoundPanel HeaderText="User Status" runat="server">
                             <PanelCollection>
                                 <dx:PanelContent>
@@ -70,6 +70,30 @@
                         </dx:ASPxRoundPanel>
                     </td>
                     <td style="vertical-align: top">
+                        <dx:ASPxRoundPanel HeaderText="Settings" runat="server">
+                            <PanelCollection>
+                                <dx:PanelContent>
+                                    <dx:ASPxGridView runat="server" ID="gridSettings" KeyFieldName="SettingId" OnRowUpdating="gridSettings_RowUpdating" Theme="Moderno">
+                                        <Columns>
+                                            <dx:GridViewDataTextColumn FieldName="Name" ReadOnly="true" Width="100px"></dx:GridViewDataTextColumn>
+                                            <dx:GridViewDataTextColumn FieldName="Value" Width="400px"></dx:GridViewDataTextColumn>
+                                        </Columns>
+                                        <SettingsEditing Mode="Batch"></SettingsEditing>
+                                    </dx:ASPxGridView>
+                                </dx:PanelContent>
+                            </PanelCollection>
+                        </dx:ASPxRoundPanel>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <dx:ASPxRoundPanel HeaderText="Common Data" runat="server">
+                            <PanelCollection>
+                                <dx:PanelContent>
+                                    <dx:ASPxButton Text="Refresh Common Data" runat="server" ID="btnCommonData" OnClick="btnCommonData_Click"></dx:ASPxButton>
+                                </dx:PanelContent>
+                            </PanelCollection>
+                        </dx:ASPxRoundPanel>
                         <dx:ASPxRoundPanel HeaderText="Login Logs" runat="server">
                             <PanelCollection>
                                 <dx:PanelContent>
@@ -91,23 +115,6 @@
                                             <dx:GridViewDataTextColumn FieldName="LogInTime" PropertiesTextEdit-DisplayFormatString="g"></dx:GridViewDataTextColumn>
                                             <dx:GridViewDataTextColumn FieldName="LogoutTime" PropertiesTextEdit-DisplayFormatString="g"></dx:GridViewDataTextColumn>
                                         </Columns>
-                                    </dx:ASPxGridView>
-                                </dx:PanelContent>
-                            </PanelCollection>
-                        </dx:ASPxRoundPanel>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <dx:ASPxRoundPanel HeaderText="Settings" runat="server">
-                            <PanelCollection>
-                                <dx:PanelContent>
-                                    <dx:ASPxGridView runat="server" ID="gridSettings" KeyFieldName="SettingId" OnRowUpdating="gridSettings_RowUpdating" Theme="Moderno">
-                                        <Columns>
-                                            <dx:GridViewDataTextColumn FieldName="Name" ReadOnly="true" Width="100px"></dx:GridViewDataTextColumn>
-                                            <dx:GridViewDataTextColumn FieldName="Value" Width="400px"></dx:GridViewDataTextColumn>
-                                        </Columns>
-                                        <SettingsEditing Mode="Batch"></SettingsEditing>
                                     </dx:ASPxGridView>
                                 </dx:PanelContent>
                             </PanelCollection>

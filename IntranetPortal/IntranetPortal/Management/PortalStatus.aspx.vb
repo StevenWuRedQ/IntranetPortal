@@ -139,4 +139,9 @@ Public Class PortalStatus
         SendAllEmail()
         lblResult.Text = "Email is send to all."
     End Sub
+
+    Protected Sub btnCommonData_Click(sender As Object, e As EventArgs)
+        Core.CommonData.RefreshData()
+        ShortSale.PropertyMortgage.RefreshMortgageStatusData()
+    End Sub
 End Class

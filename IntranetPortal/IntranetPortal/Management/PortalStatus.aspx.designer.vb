@@ -59,6 +59,24 @@ Partial Public Class PortalStatus
     Protected WithEvents btnSend As Global.DevExpress.Web.ASPxEditors.ASPxButton
 
     '''<summary>
+    '''gridSettings control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents gridSettings As Global.DevExpress.Web.ASPxGridView.ASPxGridView
+
+    '''<summary>
+    '''btnCommonData control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnCommonData As Global.DevExpress.Web.ASPxEditors.ASPxButton
+
+    '''<summary>
     '''dtLog control.
     '''</summary>
     '''<remarks>
@@ -84,15 +102,6 @@ Partial Public Class PortalStatus
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents gridLogs As Global.DevExpress.Web.ASPxGridView.ASPxGridView
-
-    '''<summary>
-    '''gridSettings control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents gridSettings As Global.DevExpress.Web.ASPxGridView.ASPxGridView
 
     '''<summary>
     '''cbEmployee control.
