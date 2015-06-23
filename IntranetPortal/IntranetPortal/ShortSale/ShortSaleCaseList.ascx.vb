@@ -16,14 +16,32 @@ Public Class ShortSaleCaseList
             gridCase.DataBind()
 
             If Not Page.IsPostBack Then
-                gridCase.GroupBy(gridCase.Columns("Owner"))
-                gridCase.GroupBy(gridCase.Columns("MortgageStatus"))
+                If category = "Upcoming" Then
+                    gridCase.GroupBy(gridCase.Columns("SaleDate"))
+                End If
+
+                If category = "All" Then
+                    gridCase.GroupBy(gridCase.Columns("Owner"))
+                    gridCase.GroupBy(gridCase.Columns("MortgageCategory"))
+                    gridCase.GroupBy(gridCase.Columns("MortgageStatus"))
+                Else
+                    gridCase.GroupBy(gridCase.Columns("Owner"))
+                    gridCase.GroupBy(gridCase.Columns("MortgageStatus"))
+                End If
             End If
         Else
             gridCase.DataSource = ShortSaleCase.GetCaseByCategory(category, Page.User.Identity.Name)
             gridCase.DataBind()
 
             If Not Page.IsPostBack Then
+                If category = "Upcoming" Then
+                    gridCase.GroupBy(gridCase.Columns("SaleDate"))
+                End If
+
+                If category = "All" Then
+                    gridCase.GroupBy(gridCase.Columns("MortgageCategory"))
+                End If
+
                 gridCase.GroupBy(gridCase.Columns("MortgageStatus"))
             End If
         End If

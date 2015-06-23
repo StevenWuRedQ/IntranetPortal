@@ -58,7 +58,7 @@
         var icon = document.getElementById("btnSortIcon");
         if (e.item.index == 0) {
             gridCase.GroupBy("Owner", 0);
-            
+
         }
 
         if (e.item.index == 1) {
@@ -66,7 +66,7 @@
         }
 
         //if (e.item.index == 2) {
-        
+
         //}
 
         //if (e.item.index == 3) {
@@ -78,7 +78,7 @@
         //}
     }
 
-   
+
     function OnGetRowValues(values) {
         if (values == null) {
             //gridCase.GetValuesOnCustomCallback(gridCase.GetFocusedRowIndex(), OnGetRowValues);
@@ -205,24 +205,26 @@
                         </div>
                     </GroupRowTemplate>
                 </dx:GridViewDataColumn>
-                <dx:GridViewDataColumn FieldName="ReferralName" Visible="false" VisibleIndex="4">
+                <dx:GridViewDataTextColumn FieldName="SaleDate" PropertiesTextEdit-DisplayFormatString="d" Visible="false" VisibleIndex="2">
+                    <PropertiesTextEdit DisplayFormatString="d"></PropertiesTextEdit>
+                    <Settings AllowHeaderFilter="False" GroupInterval="Date"></Settings>
                     <GroupRowTemplate>
-                        <div>
+                        <div style="height: 30px">
                             <table style="height: 30px">
                                 <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
-                                    <td style="width: 80px;">
-                                        <span class="font_black">
-                                            <i class="fa fa-user font_16"></i><span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
-                                        </span>
-                                    </td>
+                                    <td>
+                                        <img src="../images/grid_call_backs_canlender.png" /></td>
+                                    <td style="font-weight: 900; width: 80px; text-align: center;"><%# Container.GroupText%></td>
                                     <td style="padding-left: 10px">
-                                        <span class="employee_lest_head_number_label"><%# Container.SummaryText.Replace("Count=", "").Replace("(", "").Replace(")", "")%></span>
+                                        <div class="employee_lest_head_number_label">
+                                            <%#  Container.SummaryText.Replace("Count=", "").Replace("(","").Replace(")","") %>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>
                         </div>
                     </GroupRowTemplate>
-                </dx:GridViewDataColumn>
+                </dx:GridViewDataTextColumn>
                 <dx:GridViewDataColumn FieldName="MortgageStatus" Visible="false" VisibleIndex="4">
                     <GroupRowTemplate>
                         <div>
@@ -230,7 +232,7 @@
                                 <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
                                     <td style="width: 80px;">
                                         <span class="font_black">
-                                           <span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                            <span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
                                         </span>
                                     </td>
                                     <td style="padding-left: 10px">
@@ -248,7 +250,7 @@
                                 <tr onclick="ExpandOrCollapseGroupRow(<%# Container.VisibleIndex%>)" style="cursor: pointer">
                                     <td style="width: 80px;">
                                         <span class="font_black">
-                                           <span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
+                                            <span class="group_text_margin"><%#  Container.GroupText  %> &nbsp;</span>
                                         </span>
                                     </td>
                                     <td style="padding-left: 10px">
@@ -312,11 +314,11 @@
     ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px"
     PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick">
     <ItemStyle Paddings-PaddingLeft="20px" />
-    <Items>        
+    <Items>
         <dx:MenuItem Text="User" Name="User">
         </dx:MenuItem>
         <dx:MenuItem Text="Status" Name="Status">
-        </dx:MenuItem>       
+        </dx:MenuItem>
     </Items>
     <ClientSideEvents ItemClick="OnSortMenuClick" />
 </dx:ASPxPopupMenu>

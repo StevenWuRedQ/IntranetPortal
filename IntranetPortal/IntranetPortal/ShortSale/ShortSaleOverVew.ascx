@@ -107,7 +107,7 @@
                             <i class="fa fa-user"></i>
                             <span style="margin-left: 19px;">
                                 <% If (Not String.IsNullOrEmpty(shortSaleCaseData.OwnerFirstName)) Then%>
-                                <%= shortSaleCaseData.Owner & shortSaleCaseData.OwnerLastName %>
+                                <%= shortSaleCaseData.OwnerFirstName &" "& shortSaleCaseData.OwnerLastName %>
                                 <% End If%>
                                 &nbsp;
                             </span>
