@@ -106,8 +106,9 @@
 
                             <i class="fa fa-user"></i>
                             <span style="margin-left: 19px;">
-                                <% If (Not String.IsNullOrEmpty(shortSaleCaseData.OwnerFirstName)) Then%>
-                                <%= shortSaleCaseData.OwnerFirstName &" "& shortSaleCaseData.OwnerLastName %>
+                                <% If (Not String.IsNullOrEmpty(shortSaleCaseData.CaseName)) Then%>
+                               
+                                <%= Regex.Replace( shortSaleCaseData.CaseName,"-(?!.*-).*$","")%>
                                 <% End If%>
                                 &nbsp;
                             </span>
@@ -120,7 +121,7 @@
                             <% End If%>
                         </div>
                         <%--data format June 2, 2014 6:37 PM--%>
-                        <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;"><%=If(shortSaleCaseData.PropertyInfo isnot Nothing,shortSaleCaseData.PropertyInfo.PropertyAddress,"") %></span>
+                        <span style="font-size: 14px; margin-top: -5px; float: left; margin-left: 53px;"><%=If(String.IsNullOrEmpty(shortSaleCaseData.OwnerFirstName),"",shortSaleCaseData.OwnerFirstName &" " &shortSaleCaseData.OwnerLastName) %></span>
                     </div>
 
                     <%--note list--%>
