@@ -19,8 +19,10 @@
 
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
     <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
-    <script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>
-
+    <%--<script src="http://cdn3.devexpress.com/jslib/14.2.7/js/dx.all.js"></script>--%>
+    
+    <script src="/Scripts/dx.webappjs.js"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.common.css" type="text/css">
     <%-- <link rel="stylesheet" href="http://cdn3.devexpress.com/jslib/14.2.7/css/dx.spa.css" type="text/css">--%>
@@ -42,7 +44,48 @@
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
     <%--leagal Ui--%>
+    <div id="Div1" ng-controller="PortalCtrl" runat="server" visible="false">
+        <script>
+            leadsInfoBBLE = "123456789";
+        </script>
+       <%-- {{LegalCase.PropertyInfo.AgentId}} {{LegalCase.PropertyInfo.Agent3Id}}--%>
+       <%-- <div>
+            <md-autocomplete
+                md-search-text="searchText1"
+                md-items="item in querySearch(searchText1)"
+                md-selected-item-change="LegalCase.PropertyInfo.AgentId = item.ContactId"
+                md-item-text="item.Name"
+                md-min-length="3">
+              
+              <md-item-template>
+                  <span md-highlight-text="searchText1" md-highlight-flags="^i">{{item.Name}}</span>
+                </md-item-template>
+                <md-not-found>
+                  No matches found for "{{searchText1}}".
+                </md-not-found>
+            </md-autocomplete>
+
+        </div>--%>
+
+
+
+
+        <div>
+            <%For i = 0 To 40%>
+            <%-- <div class="contact_box" dx-select-box="InitContact('LegalCase.PropertyInfo.Agent<%=i %>Id')">
+            </div>--%>
+            <div class="contact_box" dx-autocomplete="InitContact('LegalCase.PropertyInfo.AgentId')">
+            </div>
+            <%Next%>
+            <%--<div class="contact_box" dx-autocomplete="InitContact('LegalCase.PropertyInfo.AgentId')">
+            </div>
+            <div class="contact_box" dx-autocomplete="InitContact('LegalCase.PropertyInfo.Agent3Id')">
+            </div>--%>
+        </div>
+        <input class="ss_form_input" ng-model="GetContactById(LegalCase.PropertyInfo.AgentId).OfficeNO">
+    </div>
     <div id="PortalCtrl" ng-controller="PortalCtrl">
+        <div>{{LegalCase.PropertyInfo.AgentId}}</div>
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
@@ -52,7 +95,7 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-                <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px" Name="dataPane">
+                <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px" Name="dataPane" >
                     <ContentCollection>
                         <dx:SplitterContentControl>
 
@@ -384,7 +427,7 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-                <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" PaneStyle-Paddings-Padding="0px" Name="LogPanel">
+                <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" PaneStyle-Paddings-Padding="0px" Name="LogPanel" >
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <div style="font-size: 12px; color: #9fa1a8;">
@@ -520,7 +563,10 @@
             $(document).ready(function () { angular.element(document.getElementById('PortalCtrl')).scope().LoadLeadsCase(BBLE) })
         }
 
-        var AllContact = <%= GetAllContact()%> ;
+        var AllContact = <%= GetAllContact()%>
+            function t() {
+
+            }
         var taskSN = '<%= Request.QueryString("sn")%>';
         <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
         var portalApp = angular.module('PortalApp', ['dx', 'ngMaterial']);
@@ -549,6 +595,7 @@
                 }
             };
         });
+
         portalApp.directive('maskMoney', function () {
             return {
                 restrict: 'A',
@@ -589,7 +636,7 @@
                 var lowercaseQuery = angular.lowercase(query);
 
                 return function filterFn(contact) {
-                    return (contact._lowername.indexOf(lowercaseQuery) != -1);;
+                    return contact.Name && (contact.Name.toLowerCase().indexOf(lowercaseQuery) != -1);
                 };
 
             }
@@ -763,7 +810,14 @@
                 alert(JSON.stringify(e));
             }
 
+            $scope.InitContactAutoComelted = function (id) {
+                return {
+                    dataSource: AllContact,//$scope.ContactDataSource,
+                    valueExpr: 'ContactId',
+                    displayExpr: 'Name',
 
+                };
+            }
             $scope.InitContact = function (id) {
 
 
@@ -795,8 +849,8 @@
                     success(function () {
                         alert("Save Success!");
                     }).
-                    error(function () {
-                        alert("Fail to save data.");
+                    error(function (data, status) {
+                        alert("Fail to save data. status " + status + "Error" + JSON.stringify(data));
                     });
 
                 //$.getJSON('/LegalUI/LegalUI.aspx/SaveCaseData', data, function (data) {                    

@@ -14,6 +14,24 @@ Option Explicit On
 Partial Public Class LegalUI
 
     '''<summary>
+    '''Div1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Div1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''PortalCtrl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents PortalCtrl As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
     '''ASPxSplitter1 control.
     '''</summary>
     '''<remarks>
