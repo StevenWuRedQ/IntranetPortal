@@ -34,11 +34,17 @@
 
             'Context.LeadsActivityLogs.Add(log)
 
-            Dim ld = Context.Leads.Find(bble)
-            If ld IsNot Nothing Then
-                ld.LastUpdate = DateTime.Now
-                ld.UpdateBy = empName
-            End If
+            Select Case category
+                Case LogCategory.ShortSale
+                    ShortSaleManage.UpdateDate(bble, empName)
+
+                Case Else
+                    Dim ld = Context.Leads.Find(bble)
+                    If ld IsNot Nothing Then
+                        ld.LastUpdate = DateTime.Now
+                        ld.UpdateBy = empName
+                    End If
+            End Select
 
             Context.SaveChanges()
 

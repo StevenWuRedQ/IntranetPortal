@@ -65,9 +65,9 @@
             gridCase.GroupBy("MortgageStatus", 0);
         }
 
-        //if (e.item.index == 2) {
-
-        //}
+        if (e.item.index == 2) {
+            SortLeadsList(document.getElementById("btnSortIcon"), "UpdateDate");
+        }
 
         //if (e.item.index == 3) {
         //    gridCase.GroupBy("Owner", 0);
@@ -187,6 +187,7 @@
                         </div>
                     </GroupRowTemplate>
                 </dx:GridViewDataTextColumn>
+
                 <dx:GridViewDataColumn FieldName="Owner" Visible="false" VisibleIndex="4">
                     <GroupRowTemplate>
                         <div>
@@ -318,6 +319,8 @@
         <dx:MenuItem Text="User" Name="User">
         </dx:MenuItem>
         <dx:MenuItem Text="Status" Name="Status">
+        </dx:MenuItem>
+        <dx:MenuItem Text="Last Update" Name="LastUpdate">
         </dx:MenuItem>
     </Items>
     <ClientSideEvents ItemClick="OnSortMenuClick" />

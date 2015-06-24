@@ -12,7 +12,6 @@
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
 
-
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
     <script type="text/javascript">

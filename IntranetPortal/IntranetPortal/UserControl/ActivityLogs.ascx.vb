@@ -849,6 +849,11 @@ Public Class ActivityLogs
                 Dim category = e.Parameter.Split("|")(3)
 
                 If Not String.IsNullOrEmpty(typeOfUpdate) Then
+
+                    'If Not String.IsNullOrEmpty(category) AndAlso String.IsNullOrEmpty(statusOfUpdate) Then
+                    '    Throw New Exception("Please select Status Update")
+                    'End If
+
                     If Not String.IsNullOrEmpty(statusOfUpdate) Then
                         RaiseEvent MortgageStatusUpdateEvent(typeOfUpdate, statusOfUpdate, category, hfBBLE.Value)
                     End If

@@ -314,7 +314,24 @@
         }
         if (addDate == null)
             addDate = new Date();
+        
+        if ($("#selCategory").attr("data-required") == "true" && $("#selCategory").val() == "")
+        {
+            alert("Please select Category");
+            return;
+        }
 
+        if ($("#selStatusUpdate").attr("data-required") == "true" && $("#selStatusUpdate").val() == "") {
+            alert("Please select Status Update");
+            return;
+        }
+
+        if (commentHtml == "")
+        {
+            alert("Comments can't be empty.")
+            return
+        }
+        
         addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate option:selected").text() + "|" + $("#selCategory").val());
         EmailBody.SetHtml("");
     }
@@ -371,13 +388,14 @@
 
         var liens = ["1st Lien", "2nd Lien"];
         var categorys = ["Assign", "Closed", "Dead", "Evictions", "Held", "Intake", "Litigation"];
-        var updates = ["Referral Update", "Seller Update", "Title"];
+        var updates = ["Referral Update", "Seller Update", "Title", "Pipeline"];
 
         if ($.inArray(type, categorys) > -1) {
             $("#selCategory").val(type);
             OnStatusCategoryChange(document.getElementById("selCategory"));
             $("#selCategory").attr("disabled", true);
 
+            $("#selStatusUpdate").attr("data-required", true);
             return;
         } else {
             $("#selCategory").val("");
@@ -388,10 +406,16 @@
             $("#selCategory").attr("disabled", true);
             $("#selStatusUpdate").attr("disabled", true);
             
+            $("#selStatusUpdate").attr("data-required", false);
+            $("#selCategory").attr("data-required", false);
+
             return;
         } else {
             $("#selCategory").attr("disabled", false);
             $("#selStatusUpdate").attr("disabled", false);
+
+            $("#selStatusUpdate").attr("data-required", true);
+            $("#selCategory").attr("data-required", true);
         }
 
         //if (type == "BPO/Appraisal") {
@@ -453,14 +477,14 @@
                             <% Next%>
                         </select>
                         <div class="color_gray upcase_text">Category</div>
-                        <select class="select_bootstrap select_margin " id="selCategory" onchange="OnStatusCategoryChange(this)">
+                        <select class="select_bootstrap select_margin " id="selCategory" onchange="OnStatusCategoryChange(this)" data-required="true">
                             <option value=""></option>
                             <% For Each category In IntranetPortal.ShortSale.PropertyMortgage.StatusCategory%>
                             <option value="<%= category%>"><%= category%></option>
                             <% Next%>
                         </select>
                         <div class="color_gray upcase_text">Status Update</div>
-                        <select class="select_bootstrap select_margin selStatusUpdate" id="selStatusUpdate">
+                        <select class="select_bootstrap select_margin selStatusUpdate" id="selStatusUpdate" data-required="true">
                             <option value=""></option>
                             <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
                             <option value="<%= mortStatus.Category & "-" & mortStatus.Name%>" style="display: none"><%= mortStatus.Name%></option>

@@ -299,7 +299,7 @@
           <![CDATA[<i class="fa fa-file"></i>]]>
         </FontClass>
       </PortalNavItem>
-      <PortalNavItem Name="ShortSale-Category-Upcoming" Text="Upcoming Sale" NavigationUrl="/ShortSale/ShortSale.aspx?category=Upcoming" ShowAmount="true">    
+      <PortalNavItem Name="ShortSale-Category-Upcoming" Text="Auction Date" NavigationUrl="/ShortSale/ShortSale.aspx?category=Upcoming" ShowAmount="true">    
         <FontClass>
           <![CDATA[<i class="fa fa-file"></i>]]>
         </FontClass>

@@ -28,16 +28,19 @@
 
     Public Sub Save()
         Using context As New ShortSaleEntities
-            Dim obj = context.PropertyOwners.Find(BBLE, FirstName, LastName)
 
-            If obj Is Nothing Then
+            If OwnerId = 0 Then
                 CreateDate = DateTime.Now
                 context.Entry(Me).State = Entity.EntityState.Added
             Else
-                If DataStatus = ModelStatus.Deleted Then
-                    context.PropertyOwners.Remove(obj)
-                Else
-                    obj = ShortSaleUtility.SaveChangesObj(obj, Me)
+                Dim obj = context.PropertyOwners.Find(OwnerId)
+
+                If obj IsNot Nothing Then
+                    If DataStatus = ModelStatus.Deleted Then
+                        context.PropertyOwners.Remove(obj)
+                    Else
+                        obj = ShortSaleUtility.SaveChangesObj(obj, Me)
+                    End If
                 End If
             End If
 

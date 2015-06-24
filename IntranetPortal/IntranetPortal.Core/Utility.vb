@@ -5,13 +5,23 @@ Public Class Utility
     Public Shared Function SaveChangesObj(oldObj As Object, newObj As Object) As Object
         Dim type = oldObj.GetType()
 
-        For Each prop In type.GetProperties
+        For Each prop In type.GetProperties.Where(Function(p) p.CanWrite)
             Dim newValue = prop.GetValue(newObj)
             If newValue IsNot Nothing Then
                 Dim oldValue = prop.GetValue(oldObj)
                 If Not newValue.Equals(oldValue) Then
                     If prop.CanWrite Then
                         prop.SetValue(oldObj, newValue)
+                    End If
+                End If
+            Else
+                Dim oldValue = prop.GetValue(oldObj)
+                If oldValue IsNot Nothing Then
+                    If prop.PropertyType Is GetType(DateTime?) OrElse prop.PropertyType Is GetType(Boolean?) OrElse prop.PropertyType Is GetType(Integer?) _
+                        OrElse prop.PropertyType Is GetType(String) Then
+                        If prop.CanWrite Then
+                            prop.SetValue(oldObj, newValue)
+                        End If
                     End If
                 End If
             End If

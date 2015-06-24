@@ -592,19 +592,27 @@ Partial Public Class ShortSaleCase
         End Using
     End Function
 
-
     Public Shared Function GetCaseByCategory(category As String, Optional owner As String = Nothing) As List(Of ShortSaleCase)
         Using ctx As New ShortSaleEntities
             If category = "All" Then
-                'Dim allCases = (From ss In ctx.ShortSaleCases
-                '                Let referrel = ctx.PartyContacts.Where(Function(pc) pc.ContactId = ss.Referral).FirstOrDefault
-                '                Select ss, referrel.Name).Distinct.ToList.Select(Function(ss)
-                '                                                                     ss.ss.ReferralName = ss.Name
-                '                                                                     Return ss.ss
-                '                                                                 End Function).ToList()
+                Dim allCases = (From ss In ctx.ShortSaleCases Where ss.Status <> CaseStatus.Archived AndAlso (ss.Owner = owner Or owner = Nothing)
+                                From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).Take(1).DefaultIfEmpty
+                                From status In ctx.MortgageStatusDatas.Where(Function(s) s.Name = mort.Status).DefaultIfEmpty
+                                Select ss, mort, status).Distinct.ToList.Select(Function(s)
+                                                                                    If s.mort IsNot Nothing Then
+                                                                                        s.ss.MortgageStatus = s.mort.Status
+                                                                                        s.ss.MortgageCategory = If(s.status Is Nothing, Nothing, s.status.Category)
+                                                                                    End If
 
-                Dim allCases = (From ss In ctx.ShortSaleCases Where ss.Status <> CaseStatus.Archived
-                                From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).DefaultIfEmpty
+                                                                                    Return s.ss
+                                                                                End Function).Distinct.ToList()
+
+                Return allCases
+            End If
+
+            If category = "Upcoming" Then
+                Dim allcases = (From ss In ctx.ShortSaleCases Where ss.Status <> CaseStatus.Archived And ss.SaleDate IsNot Nothing AndAlso (ss.Owner = owner Or owner = Nothing)
+                                From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).Take(1).DefaultIfEmpty
                                 Select ss, mort).Distinct.ToList.Select(Function(s)
                                                                             If s.mort IsNot Nothing Then
                                                                                 s.ss.MortgageStatus = s.mort.Status
@@ -613,7 +621,7 @@ Partial Public Class ShortSaleCase
                                                                             Return s.ss
                                                                         End Function).Distinct.ToList()
 
-                Return allCases
+                Return allcases
             End If
 
             Dim result = (From ss In ctx.ShortSaleCases
@@ -665,8 +673,18 @@ Partial Public Class ShortSaleCase
         Return GetCaseByStatus(status).Count
     End Function
     Public Shared Function GetCaseByBBLEs(bbles As List(Of String)) As List(Of ShortSaleCase)
-        Using context As New ShortSaleEntities
-            Return context.ShortSaleCases.Where(Function(ss) bbles.Contains(ss.BBLE)).ToList
+        Using ctx As New ShortSaleEntities
+            Dim result = (From ss In ctx.ShortSaleCases.Where(Function(s) bbles.Contains(s.BBLE))
+                         From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).Take(1).DefaultIfEmpty
+                          Select ss, mort).Distinct.ToList.Select(Function(s)
+                                                                      If s.mort IsNot Nothing Then
+                                                                          s.ss.MortgageStatus = s.mort.Status
+                                                                      End If
+                                                                      Return s.ss
+                                                                  End Function).OrderByDescending(Function(s) s.UpdateDate).Distinct.ToList()
+
+            Return result
+            'Return context.ShortSaleCases.Where(Function(ss) bbles.Contains(ss.BBLE)).ToList
         End Using
     End Function
 

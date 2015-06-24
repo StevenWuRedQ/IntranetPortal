@@ -200,10 +200,9 @@
         </EntityType>
         <EntityType Name="PropertyOwners">
           <Key>
-            <PropertyRef Name="BBLE" />
-            <PropertyRef Name="FirstName" />
-            <PropertyRef Name="LastName" />
+            <PropertyRef Name="OwnerId" />
           </Key>
+          <Property Name="OwnerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -402,7 +401,6 @@
           <EntitySet Name="CleareneceNotes" EntityType="IntranetPortalModel.CleareneceNote" />
           <EntitySet Name="PartyContacts" EntityType="IntranetPortalModel.PartyContact" />
           <EntitySet Name="PropertyFloors" EntityType="IntranetPortalModel.PropertyFloor" />
-          <EntitySet Name="PropertyOwners" EntityType="IntranetPortalModel.PropertyOwner" />
           <EntitySet Name="PropertyTitles" EntityType="IntranetPortalModel.PropertyTitle" />
           <EntitySet Name="ShortSaleCases" EntityType="IntranetPortalModel.ShortSaleCase" />
           <EntitySet Name="TitleClearences" EntityType="IntranetPortalModel.TitleClearence" />
@@ -417,6 +415,7 @@
           <EntitySet Name="GroupTypes" EntityType="IntranetPortalModel.GroupType" />
           <EntitySet Name="PropertyValueInfoes" EntityType="IntranetPortalModel.PropertyValueInfo" />
           <EntitySet Name="PropertyMortgages" EntityType="IntranetPortalModel.PropertyMortgage" />
+          <EntitySet Name="PropertyOwners" EntityType="IntranetPortalModel.PropertyOwner" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -467,38 +466,6 @@
           <Property Name="BoilerRoom" Type="Int32" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="PropertyOwner">
-          <Key>
-            <PropertyRef Name="BBLE" />
-            <PropertyRef Name="FirstName" />
-            <PropertyRef Name="LastName" />
-          </Key>
-          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SSN" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
-          <Property Name="DOB" Type="DateTime" Precision="0" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MailNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="MailStreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MailCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MailState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MailZip" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
-          <Property Name="Employed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EstateAttorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Bankruptcy" Type="Boolean" />
-          <Property Name="Bankaccount" Type="Boolean" />
-          <Property Name="TaxReturn" Type="Boolean" />
-          <Property Name="EstateDocument" Type="Boolean" />
-          <Property Name="ActingAsSellerAttorney" Type="Boolean" />
-          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="AttorneyPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AttorneyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MailApt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AdlPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PropertyTitle">
           <Key>
@@ -787,6 +754,37 @@
           <Property Name="LenderAttorney" Type="Int32" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="PropertyOwner">
+          <Key>
+            <PropertyRef Name="OwnerId" />
+          </Key>
+          <Property Name="OwnerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SSN" Type="String" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdlPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MailApt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MailNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MailStreetName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MailCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MailState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MailZip" Type="String" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="Employed" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EstateAttorney" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AttorneyPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AttorneyEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bankruptcy" Type="Boolean" />
+          <Property Name="Bankaccount" Type="Boolean" />
+          <Property Name="TaxReturn" Type="Boolean" />
+          <Property Name="EstateDocument" Type="Boolean" />
+          <Property Name="ActingAsSellerAttorney" Type="Boolean" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -841,37 +839,6 @@
                 <ScalarProperty Name="Bathroom" ColumnName="Bathroom" />
                 <ScalarProperty Name="Bedroom" ColumnName="Bedroom" />
                 <ScalarProperty Name="FloorId" ColumnName="FloorId" />
-                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PropertyOwners">
-            <EntityTypeMapping TypeName="IntranetPortalModel.PropertyOwner">
-              <MappingFragment StoreEntitySet="PropertyOwners">
-                <ScalarProperty Name="AdlPhone" ColumnName="AdlPhone" />
-                <ScalarProperty Name="MailApt" ColumnName="MailApt" />
-                <ScalarProperty Name="AttorneyEmail" ColumnName="AttorneyEmail" />
-                <ScalarProperty Name="AttorneyPhone" ColumnName="AttorneyPhone" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
-                <ScalarProperty Name="ActingAsSellerAttorney" ColumnName="ActingAsSellerAttorney" />
-                <ScalarProperty Name="EstateDocument" ColumnName="EstateDocument" />
-                <ScalarProperty Name="TaxReturn" ColumnName="TaxReturn" />
-                <ScalarProperty Name="Bankaccount" ColumnName="Bankaccount" />
-                <ScalarProperty Name="Bankruptcy" ColumnName="Bankruptcy" />
-                <ScalarProperty Name="EstateAttorney" ColumnName="EstateAttorney" />
-                <ScalarProperty Name="Employed" ColumnName="Employed" />
-                <ScalarProperty Name="MailZip" ColumnName="MailZip" />
-                <ScalarProperty Name="MailState" ColumnName="MailState" />
-                <ScalarProperty Name="MailCity" ColumnName="MailCity" />
-                <ScalarProperty Name="MailStreetName" ColumnName="MailStreetName" />
-                <ScalarProperty Name="MailNumber" ColumnName="MailNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="SSN" ColumnName="SSN" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1174,6 +1141,38 @@
                 <ScalarProperty Name="Lender" ColumnName="Lender" />
                 <ScalarProperty Name="CaseId" ColumnName="CaseId" />
                 <ScalarProperty Name="MortgageId" ColumnName="MortgageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PropertyOwners">
+            <EntityTypeMapping TypeName="IntranetPortalModel.PropertyOwner">
+              <MappingFragment StoreEntitySet="PropertyOwners">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="ActingAsSellerAttorney" ColumnName="ActingAsSellerAttorney" />
+                <ScalarProperty Name="EstateDocument" ColumnName="EstateDocument" />
+                <ScalarProperty Name="TaxReturn" ColumnName="TaxReturn" />
+                <ScalarProperty Name="Bankaccount" ColumnName="Bankaccount" />
+                <ScalarProperty Name="Bankruptcy" ColumnName="Bankruptcy" />
+                <ScalarProperty Name="AttorneyEmail" ColumnName="AttorneyEmail" />
+                <ScalarProperty Name="AttorneyPhone" ColumnName="AttorneyPhone" />
+                <ScalarProperty Name="EstateAttorney" ColumnName="EstateAttorney" />
+                <ScalarProperty Name="Employed" ColumnName="Employed" />
+                <ScalarProperty Name="MailZip" ColumnName="MailZip" />
+                <ScalarProperty Name="MailState" ColumnName="MailState" />
+                <ScalarProperty Name="MailCity" ColumnName="MailCity" />
+                <ScalarProperty Name="MailStreetName" ColumnName="MailStreetName" />
+                <ScalarProperty Name="MailNumber" ColumnName="MailNumber" />
+                <ScalarProperty Name="MailApt" ColumnName="MailApt" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="AdlPhone" ColumnName="AdlPhone" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="SSN" ColumnName="SSN" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

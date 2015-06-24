@@ -11,13 +11,16 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class PropertyOwner
+    Public Property OwnerId As Integer
     Public Property BBLE As String
     Public Property FirstName As String
     Public Property LastName As String
     Public Property SSN As String
     Public Property DOB As Nullable(Of Date)
     Public Property Phone As String
+    Public Property AdlPhone As String
     Public Property Email As String
+    Public Property MailApt As String
     Public Property MailNumber As String
     Public Property MailStreetName As String
     Public Property MailCity As String
@@ -25,6 +28,8 @@ Partial Public Class PropertyOwner
     Public Property MailZip As String
     Public Property Employed As String
     Public Property EstateAttorney As String
+    Public Property AttorneyPhone As String
+    Public Property AttorneyEmail As String
     Public Property Bankruptcy As Nullable(Of Boolean)
     Public Property Bankaccount As Nullable(Of Boolean)
     Public Property TaxReturn As Nullable(Of Boolean)
@@ -32,9 +37,5 @@ Partial Public Class PropertyOwner
     Public Property ActingAsSellerAttorney As Nullable(Of Boolean)
     Public Property CreateBy As String
     Public Property CreateDate As Nullable(Of Date)
-    Public Property AttorneyPhone As String
-    Public Property AttorneyEmail As String
-    Public Property MailApt As String
-    Public Property AdlPhone As String
 
 End Class
