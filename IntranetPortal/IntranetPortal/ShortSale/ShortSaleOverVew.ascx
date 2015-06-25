@@ -253,7 +253,7 @@
                                             </li>
                                             <li class="ss_form_item">
                                                 <label class="ss_form_input_title">List Price</label>
-                                                <input class="ss_form_input " data-field="ListPrice">
+                                                <input class="ss_form_input currency_input" data-field="ListPrice">
                                             </li>
 
                                             <li class="ss_form_item">

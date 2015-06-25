@@ -17,7 +17,7 @@
     Private _estateAttoeneyContact As PartyContact
     Public ReadOnly Property EstateAttorneyContact As PartyContact
         Get
-            If _estateAttoeneyContact IsNot Nothing Then
+            If _estateAttoeneyContact Is Nothing Then
 
                 If EstateAttorneyId.HasValue Then
 

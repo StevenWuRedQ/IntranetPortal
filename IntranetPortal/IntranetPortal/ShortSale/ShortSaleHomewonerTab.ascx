@@ -7,9 +7,9 @@
     </div>
 </div>
 <div data-array-index="0" data-field="PropertyInfo.Owners" class="ss_array" style="display: none">
-    <h4 class="ss_form_title title_with_line"  >
+    <h4 class="ss_form_title title_with_line">
         <span class="title_index title_span">Seller __index__1</span>&nbsp;
-        <i class="fa fa-expand expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i> &nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="Add"></i>
+        <i class="fa fa-expand expand_btn color_blue icon_btn color_blue tooltip-examples" onclick="expand_array_item(this)" title="Expand or Collapse"></i>&nbsp;<i class="fa fa-plus-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="AddArraryItem(event,this)" title="Add"></i>
         <i class="fa fa-times-circle icon_btn color_blue tooltip-examples ss_control_btn" onclick="delete_array_item(this)" title="Delete"></i>
     </h4>
     <div class="collapse_div">
@@ -41,7 +41,7 @@
                     <label class="ss_form_input_title">Email</label>
                     <input class="ss_form_input ss_email" data-item="Email" data-error="Seller __index__1 Email is Error" data-item-type="1">
                 </li>
-               <%-- <li class="ss_form_item">
+                <%-- <li class="ss_form_item">
                     <label class="ss_form_input_title">Phone #</label>
                     <input class="ss_form_input" id="phone_id__index__" onblur="format_phone(this)" data-item="Phone" data-item-type="1">
                 </li>
@@ -49,7 +49,6 @@
                     <label class="ss_form_input_title">Email</label>
                     <input class="ss_form_input" data-item="Email" data-item-type="1">
                 </li>--%>
-
             </ul>
         </div>
 
@@ -65,7 +64,7 @@
                     <label class="ss_form_input_title">street name</label>
                     <input class="ss_form_input" data-item="MailStreetName" data-item-type="1">
                 </li>
-                 <li class="ss_form_item">
+                <li class="ss_form_item">
                     <label class="ss_form_input_title">Apt #</label>
                     <input class="ss_form_input" data-item="MailApt" data-item-type="1">
                 </li>
@@ -107,16 +106,16 @@
                 <%--<li class="ss_form_item">
                       <input type="button" onclick="testClick()" value="Test">
                  </li>--%>
-              
+
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">bank account</label>
-                    
+
                     <input type="radio" id="checkYes_Bankaccount__index__" data-item="Bankaccount" data-radio="Y" data-item-type="1" name="45__index__" value="YES" class="ss_form_input">
                     <label for="checkYes_Bankaccount__index__" class="input_with_check"><span class="box_text">Yes</span></label>
 
                     <input type="radio" id="none_check_no452__index__" data-item="Bankaccount" data-item-type="1" name="45__index__" value="NO" class="ss_form_input">
                     <label for="none_check_no452__index__" class="input_with_check"><span class="box_text">No</span></label>
-                    
+
                 </li>
 
                 <li class="ss_form_item">
@@ -148,28 +147,52 @@
 
                 </li>
 
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden" value=" ">
-                </li>
-                <li class="ss_form_item">
-                    <label class="ss_form_input_title">&nbsp;</label>
-                    <input class="ss_form_input ss_form_hidden" value=" ">
-                </li>
-                <li class="ss_form_item">
+
+                <%-- <li class="ss_form_item">
                     <label class="ss_form_input_title">estate attorney</label>
-                    <input class="ss_form_input" data-item="EstateAttorney" data-item-type="1">
+                    <input class="ss_form_input" data-item="EstateAttorneyId" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">phone #</label>
-                    <input class="ss_form_input" <%--data-item="Phone" data-item-type="1"--%>>
+                    <input class="ss_form_input" data-item="AttorneyPhone" data-item-type="1">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">email address</label>
-                    <input class="ss_form_input" <%--data-item="Email" data-item-type="1"--%>>
+                    <input class="ss_form_input" data-item="Email" data-item-type="1" />
                 </li>
 
 
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">also acting as seller attorney</label>
+
+                    <input type="radio" id="checkYes_ActingAsSellerAttorney__index__" data-item="ActingAsSellerAttorney" data-item-type="1" data-radio="Y" name="48__index__" value="YES">
+                    <label for="checkYes_ActingAsSellerAttorney__index__" class="input_with_check"><span class="box_text">Yes</span></label>
+
+                    <input type="radio" id="none_check_no48__index__" data-item="ActingAsSellerAttorney" data-item-type="1" name="48__index__" value="NO">
+                    <label for="none_check_no48__index__" class="input_with_check"><span class="box_text">No</span></label>
+
+                </li>--%>
+            </ul>
+        </div>
+        <div class="ss_form">
+            <h4 class="ss_form_title">Estate Attorney
+                <i class="fa fa-plus-circle  color_blue_edit collapse_btn ss_control_btn" onclick="ShowSelectParty('PropertyInfo.Owners[__index__].EstateAttorneyContact', function(party){ShortSaleCaseData.PropertyInfo.Owners[__index__].EstateAttorneyId =party.ContactId; })"></i>
+
+            </h4>
+            <ul class="ss_form_box clearfix">
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Name</label>
+                    <input class="ss_form_input ss_not_edit" data-item="EstateAttorneyContact.Name" data-item-type="1">
+                </li>
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Office #</label>
+                    <input class="ss_form_input ss_not_edit" data-item="EstateAttorneyContact.OfficeNO" data-item-type="1">
+                </li>
+
+                <li class="ss_form_item">
+                    <label class="ss_form_input_title">Email</label>    
+                    <input class="ss_form_input ss_not_edit" data-item="EstateAttorneyContact.Email" data-item-type="1">
+                </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">also acting as seller attorney</label>
 
