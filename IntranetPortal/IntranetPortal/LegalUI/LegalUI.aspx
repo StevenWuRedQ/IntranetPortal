@@ -85,7 +85,7 @@
         <input class="ss_form_input" ng-model="GetContactById(LegalCase.PropertyInfo.AgentId).OfficeNO">
     </div>
     <div id="PortalCtrl" ng-controller="PortalCtrl">
-        <div>{{LegalCase.PropertyInfo.AgentId}}</div>
+     
         <dx:ASPxSplitter ID="ASPxSplitter1" runat="server" Height="100%" Width="100%" ClientInstanceName="splitter" Orientation="Horizontal" FullscreenMode="true">
             <Panes>
                 <dx:SplitterPane Name="listPanel" ShowCollapseBackwardButton="True" MinSize="100px" MaxSize="400px" Size="280px" PaneStyle-Paddings-Padding="0">
@@ -753,17 +753,20 @@
             var cStore = new DevExpress.data.CustomStore({
                 load: function (loadOptions) {
 
+                    if (AllContact) {
+                        if (loadOptions.searchValue)
+                        {
+                            return AllContact.filter(function (o) { if (o.Name) { return o.Name.toLowerCase().indexOf(loadOptions.searchValue.toLowerCase()) >=0 } return false });
+                        }
+                        return [];
+                    }
                     var d = $.Deferred();
                     if (loadOptions.searchValue) {
                         $.getJSON('/LegalUI/ContactService.svc/GetContacts?args=' + loadOptions.searchValue).done(function (data) {
                             d.resolve(data);
-
                         });
                     } else {
-                        if (AllContact) {
-                            d.promise();
-                            return AllContact;
-                        }
+                        
                         $.getJSON('/LegalUI/ContactService.svc/LoadContacts').done(function (data) {
                             d.resolve(data);
                             AllContact = data;
@@ -827,10 +830,12 @@
                 //    keyType: "Int32"
                 //});
                 return {
-                    dataSource: AllContact,//$scope.ContactDataSource,
+                    dataSource: $scope.ContactDataSource,
                     valueExpr: 'ContactId',
                     displayExpr: 'Name',
                     searchEnabled: true,
+                    minSearchLength: 2,
+                    noDataText:"Please input to search",
                     bindingOptions: { value: id }
                 };
             }
