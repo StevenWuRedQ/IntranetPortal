@@ -5,7 +5,6 @@
 <%@ Register Src="~/LegalUI/LegalSecondaryActionTab.ascx" TagPrefix="uc1" TagName="LegalSecondaryActionTab" %>
 <%@ Register Src="~/UserControl/LeadsSubMenu.ascx" TagPrefix="uc1" TagName="LeadsSubMenu" %>
 
-
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -36,16 +35,15 @@
         if (e == null) {
             SaveClicklCallbackCallbackClinet.PerformCallback(strJson);
         }
-
     }
+
     function saveComplete(s, e) {
         //RefreshContent();
         ShortSaleCaseData = $.parseJSON(e.result);
         clearArray(ShortSaleCaseData.Mortgages);
         clearArray(ShortSaleCaseData.PropertyInfo.Owners);
-
+        
         ShortSaleDataBand(2);
-
     }
 
     function ShowAcrisMap(propBBLE) {
@@ -187,7 +185,7 @@
                     </div>
                     <div class="tab-pane " id="Foreclosure_Review">
 
-                        <uc1:LegalForeclosureReviewTab runat="server" ID="LegalForeclosureReviewTab" />
+                        <uc1:LegalForeclosureReviewTab runat="server" ID="LegalForeclosureReviewTab"  Visible="false"/>
 
                     </div>
                     <div class="tab-pane" id="Secondary_Actions">

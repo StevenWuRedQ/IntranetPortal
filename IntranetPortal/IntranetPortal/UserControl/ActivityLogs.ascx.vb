@@ -23,7 +23,6 @@ Public Class ActivityLogs
         Else
             gridTracking.Settings.VerticalScrollableHeight = 600
         End If
-
     End Sub
 
     Public Sub BindData(bble As String)

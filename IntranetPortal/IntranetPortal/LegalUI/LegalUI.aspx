@@ -15,7 +15,7 @@
 
     <link href="/Scripts/jquery.webui-popover.css" rel="stylesheet" type="text/css" />
     <script src="/Scripts/jquery.webui-popover.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 
     <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/globalize/0.1.1/globalize.min.js"></script>
     <script type="text/javascript" src="http://cdn3.devexpress.com/jslib/14.2.7/js/angular-sanitize.js"></script>
@@ -30,16 +30,74 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
     <script src="/Scripts/jquery.formatCurrency-1.1.0.js"></script>
     <script src="/Scripts/stevenjs.js"></script>
-
-
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
-
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
 
+    <style type="text/css">
+        .chipsdemoContactChips md-content.autocomplete {
+            min-height: 250px;
+        }
+
+        .chipsdemoContactChips .md-item-text.compact {
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+
+        .chipsdemoContactChips .contact-item {
+            box-sizing: border-box;
+        }
+
+            .chipsdemoContactChips .contact-item.selected {
+                opacity: 0.5;
+            }
+
+                .chipsdemoContactChips .contact-item.selected h3 {
+                    opacity: 0.5;
+                }
+
+            .chipsdemoContactChips .contact-item .md-list-item-text {
+                padding: 14px 0;
+            }
+
+                .chipsdemoContactChips .contact-item .md-list-item-text h3 {
+                    margin: 0 !important;
+                    padding: 0;
+                    line-height: 1.2em !important;
+                }
+
+                .chipsdemoContactChips .contact-item .md-list-item-text h3,
+                .chipsdemoContactChips .contact-item .md-list-item-text p {
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+
+        @media (min-width: 900px) {
+            .chipsdemoContactChips .contact-item {
+                float: left;
+                width: 33%;
+            }
+        }
+
+        .chipsdemoContactChips md-contact-chips {
+            margin-bottom: 10px;
+        }
+
+        .chipsdemoContactChips .md-chips {
+            padding: 5px 0 8px;
+        }
+
+        .chipsdemoContactChips .fixedRows {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .md-contact-suggestion img {
+            margin-top: -35px;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
@@ -95,10 +153,9 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-                <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px" Name="dataPane" >
+                <dx:SplitterPane ShowCollapseBackwardButton="True" ScrollBars="Auto" PaneStyle-Paddings-Padding="0px" Name="dataPane">
                     <ContentCollection>
                         <dx:SplitterContentControl>
-
                             <script>
                                 $(document).ready(function () {
 
@@ -106,69 +163,7 @@
 
                                 });
                             </script>
-                            <style>
-                                .chipsdemoContactChips md-content.autocomplete {
-                                    min-height: 250px;
-                                }
 
-                                .chipsdemoContactChips .md-item-text.compact {
-                                    padding-top: 8px;
-                                    padding-bottom: 8px;
-                                }
-
-                                .chipsdemoContactChips .contact-item {
-                                    box-sizing: border-box;
-                                }
-
-                                    .chipsdemoContactChips .contact-item.selected {
-                                        opacity: 0.5;
-                                    }
-
-                                        .chipsdemoContactChips .contact-item.selected h3 {
-                                            opacity: 0.5;
-                                        }
-
-                                    .chipsdemoContactChips .contact-item .md-list-item-text {
-                                        padding: 14px 0;
-                                    }
-
-                                        .chipsdemoContactChips .contact-item .md-list-item-text h3 {
-                                            margin: 0 !important;
-                                            padding: 0;
-                                            line-height: 1.2em !important;
-                                        }
-
-                                        .chipsdemoContactChips .contact-item .md-list-item-text h3,
-                                        .chipsdemoContactChips .contact-item .md-list-item-text p {
-                                            text-overflow: ellipsis;
-                                            white-space: nowrap;
-                                            overflow: hidden;
-                                        }
-
-                                @media (min-width: 900px) {
-                                    .chipsdemoContactChips .contact-item {
-                                        float: left;
-                                        width: 33%;
-                                    }
-                                }
-
-                                .chipsdemoContactChips md-contact-chips {
-                                    margin-bottom: 10px;
-                                }
-
-                                .chipsdemoContactChips .md-chips {
-                                    padding: 5px 0 8px;
-                                }
-
-                                .chipsdemoContactChips .fixedRows {
-                                    height: 250px;
-                                    overflow: hidden;
-                                }
-
-                                .md-contact-suggestion img {
-                                    margin-top: -35px;
-                                }
-                            </style>
                             <%-- <div>{{contacts}}</div>
                             <md-content class="md-padding autocomplete" layout="column">
                                 <md-contact-chips ng-model="contacts" md-contacts="querySearch($query)" md-contact-name="Name" md-contact-image="image" md-contact-email="Email" md-require-match="" filter-selected="filterSelected" placeholder="Contacts">
@@ -427,7 +422,7 @@
                         </dx:SplitterContentControl>
                     </ContentCollection>
                 </dx:SplitterPane>
-                <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" PaneStyle-Paddings-Padding="0px" Name="LogPanel" >
+                <dx:SplitterPane ShowCollapseBackwardButton="True" PaneStyle-BackColor="#f9f9f9" PaneStyle-Paddings-Padding="0px" Name="LogPanel">
                     <ContentCollection>
                         <dx:SplitterContentControl>
                             <div style="font-size: 12px; color: #9fa1a8;">
@@ -569,6 +564,7 @@
             }
         var taskSN = '<%= Request.QueryString("sn")%>';
         <%--var LegalCase = $.parseJSON('<%= LegalCase%>');--%>
+
         var portalApp = angular.module('PortalApp', ['dx', 'ngMaterial']);
         portalApp.directive('ssDate', function () {
             return {
@@ -613,8 +609,6 @@
         });
 
         portalApp.controller('PortalCtrl', function ($scope, $http, $element) {
-
-
             $scope.LegalCase = { PropertyInfo: {}, ForeclosureInfo: {}, SecondaryInfo: {} };
             $http.post('/LegalUI/ContactService.svc/CheckInShortSale', { bble: leadsInfoBBLE }).success(function (data) {
 
@@ -661,8 +655,6 @@
             /**
              * Search for contacts.
              */
-
-
             $scope.SecondaryTypeSource = ["Statute Of Limitations", "Estate", "Miscellaneous", "Deed Reversal", "Partition", "Breach of Contract", "Quiet Title", ""];
 
             if (typeof LegalShowAll == 'undefined' || LegalShowAll == null) {
@@ -946,9 +938,8 @@
 
             //    $scope.selectBoxData = data;
             //});
-
-
         });
+
     </script>
     <uc1:VendorsPopup runat="server" ID="VendorsPopup" />
     <script src="/Scripts/bootstrap.min.js"></script>

@@ -494,28 +494,7 @@
 
                     <% End If%>
 
-                    <%-- <div <%= If(DisplayMode = ActivityLogMode.ShortSale, "style='display:none'", "")%>>Date of Comment:</div>
-                    <div class="border_under_line" <%= If(DisplayMode = ActivityLogMode.ShortSale, "style='display:none'", "style='height:80px'")%>>
-                        <dx:ASPxDateEdit ID="dateActivity" ClientInstanceName="dateActivityClient" Width="130px" runat="server" DisplayFormatString="d"></dx:ASPxDateEdit>
-                    </div>
-                    <div <%= If(DisplayMode = ActivityLogMode.Leads, "style='display:none'", "")%>>
-                        <div class="color_gray upcase_text">Type of update</div>
-                        <select class="select_bootstrap select_margin" id="selType1" onchange="ShortSaleUpdateTypeChange(this)">
-                            <option></option>
-                            <% For Each type In IntranetPortal.Core.CommonData.GetData("UpdateType")%>
-                            <option value="<%= type.Name%>"><%= type.Name%></option>
-                            <% Next%>                           
-                        </select>
-                        <div class="color_gray upcase_text">Status Update</div>
-                        <% If DisplayMode = ActivityLogMode.ShortSale Then%>
-                        <select class="select_bootstrap select_margin" id="selStatusUpdate">
-                            <option value=""></option>
-                            <% For Each mortStatus In IntranetPortal.ShortSale.PropertyMortgage.StatusData%>
-                            <option value="<%= mortStatus.Name%>"><%= mortStatus.Name%></option>
-                            <% Next%>
-                        </select>
-                        <% End If%>
-                    </div>--%>
+          
                 </div>
                 <div style="margin-top: 15px; float: right; margin-right: 5px;">
                     <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>

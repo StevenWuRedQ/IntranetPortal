@@ -11,6 +11,8 @@
 <%@ Register Src="~/ShortSale/ShortSaleSubMenu.ascx" TagPrefix="uc1" TagName="ShortSaleSubMenu" %>
 <%@ Register Src="~/PopupControl/VendorsPopup.ascx" TagPrefix="uc1" TagName="VendorsPopup" %>
 <%@ Register Src="~/UserControl/Common.ascx" TagPrefix="uc1" TagName="Common" %>
+<%@ Register Src="~/ShortSale/ShortSaleFileOverview.ascx" TagPrefix="uc1" TagName="ShortSaleFileOverview" %>
+
 
 <asp:Content ContentPlaceHolderID="MainContentPH" runat="server">
 
@@ -87,29 +89,29 @@
                                                                             <div class="font_size_bold">&nbsp;&nbsp;&nbsp;&nbsp;More&nbsp;&nbsp;&nbsp;&nbsp;</div>
                                                                         </a>
                                                                         <div class="shot_sale_sub">
-                                                                           
+
                                                                             <ul class="nav  clearfix" role="tablist">
                                                                                 <li class="short_sale_head_tab">
-                                                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="/ViewLeadsInfo.aspx?HiddenTab=true&id=<%= hfBBLE.Value %>" data-href="#more_leads"  onclick="LoadMoreFrame(this)">
+                                                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_leads" data-url="/ViewLeadsInfo.aspx?HiddenTab=true&id=<%= hfBBLE.Value %>" data-href="#more_leads" onclick="LoadMoreFrame(this)">
                                                                                         <i class="fa fa-folder head_tab_icon_padding"></i>
                                                                                         <div class="font_size_bold">Leads</div>
                                                                                     </a>
                                                                                 </li>
 
                                                                                 <li class="short_sale_head_tab">
-                                                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_evction" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_evction"  onclick="LoadMoreFrame(this)">
+                                                                                    <a role="tab" class="tab_button_a" data-toggle="tab" href="#more_evction" data-url="/ShortSale/ShortSale.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_evction" onclick="LoadMoreFrame(this)">
                                                                                         <i class="fa fa-sign-out head_tab_icon_padding"></i>
                                                                                         <div class="font_size_bold">Eviction</div>
                                                                                     </a>
                                                                                 </li>
-                                                                                <%If IntranetPortal.Legal.LegalCase.InLegal(hfBBLE.Value) Then %>
+                                                                                <%If IntranetPortal.Legal.LegalCase.InLegal(hfBBLE.Value) Then%>
                                                                                 <li class="short_sale_head_tab">
-                                                                                    <a role="tab" data-toggle="tab" class="tab_button_a" href="#more_legal" data-url="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_legal"  onclick="LoadMoreFrame(this)">
+                                                                                    <a role="tab" data-toggle="tab" class="tab_button_a" href="#more_legal" data-url="/LegalUI/LegalUI.aspx?HiddenTab=true&isEviction=true&bble=<%= hfBBLE.Value %>" data-href="#more_legal" onclick="LoadMoreFrame(this)">
                                                                                         <i class="fa fa-university head_tab_icon_padding"></i>
                                                                                         <div class="font_size_bold">Legal</div>
                                                                                     </a>
                                                                                 </li>
-                                                                                <% End If %>
+                                                                                <% End If%>
                                                                             </ul>
                                                                         </div>
                                                                     </li>
@@ -136,15 +138,15 @@
                                                                     <div class="tab-pane " id="documents">
                                                                         <uc1:DocumentsUI runat="server" ID="DocumentsUI" />
                                                                     </div>
-                                                                   <div class="tab-pane load_bg" id="more_leads">
+                                                                    <div class="tab-pane load_bg" id="more_leads">
                                                                         <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
                                                                     </div>
                                                                     <div class="tab-pane load_bg" id="more_evction">
-                                                                       <iframe   width="100%" height="100%" class="more_frame" frameborder="0" ></iframe>
-                                                                   </div>
+                                                                        <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                                                                    </div>
                                                                     <div class="tab-pane load_bg" id="more_legal">
-                                                                       <iframe   width="100%" height="100%" class="more_frame"  frameborder="0" ></iframe>
-                                                                   </div>
+                                                                        <iframe width="100%" height="100%" class="more_frame" frameborder="0"></iframe>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </dx:SplitterContentControl>
@@ -159,16 +161,20 @@
                                                                     <div style="font-size: 12px; color: #9fa1a8;">
                                                                         <ul class="nav nav-tabs clearfix" role="tablist" style="height: 70px; background: #295268; font-size: 18px; color: white">
                                                                             <li class="short_sale_head_tab activity_light_blue">
-                                                                                <a href="#property_info" role="tab" data-toggle="tab" class="tab_button_a">
+                                                                                <a href="#activity_log" role="tab" data-toggle="tab" class="tab_button_a">
                                                                                     <i class="fa fa-history head_tab_icon_padding"></i>
                                                                                     <div class="font_size_bold">Activity Log</div>
                                                                                 </a>
                                                                             </li>
+                                                                            <li class="short_sale_head_tab">
+                                                                                <a href="#file_overview" role="tab" data-toggle="tab" class="tab_button_a" onclick="">
+                                                                                    <i class="fa fa-info-circle head_tab_icon_padding"></i>
+                                                                                    <div class="font_size_bold">File Overview</div>
+                                                                                </a>
+                                                                            </li>
                                                                             <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
                                                                             <li style="margin-right: 30px; color: #7396a9; float: right">
-
-                                                                                <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);" style="display: none"></i>
-                                                                                <%--                                                                                 <i class="fa fa-file sale_head_button sale_head_button_left tooltip-examples" title="New File" onclick="LogClick('NewFile')"></i>--%>
+                                                                                <i class="fa fa-repeat sale_head_button tooltip-examples" title="Follow Up" onclick="ASPxPopupMenuClientControl.ShowAtElement(this);" style="display: none"></i>                                                                                
                                                                                 <i class="fa fa-folder-open sale_head_button sale_head_button_left tooltip-examples" title="Active" onclick="LogClick('Active')" style="display: none"></i>
                                                                                 <i class="fa fa-sign-out  sale_head_button sale_head_button_left tooltip-examples" title="Eviction" style="display: none" onclick="tmpBBLE=leadsInfoBBLE;popupEvictionUsers.PerformCallback();popupEvictionUsers.ShowAtElement(this);"></i>
                                                                                 <i class="fa fa-pause sale_head_button sale_head_button_left tooltip-examples" title="On Hold" onclick="LogClick('OnHold')" style="display: none"></i>
@@ -176,9 +182,15 @@
                                                                                 <%--                                                                                <i class="fa fa-print  sale_head_button sale_head_button_left tooltip-examples" title="Print" onclick="PrintLogInfo()"></i>--%>
                                                                             </li>
                                                                         </ul>
-                                                                        <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="ShortSale" />
-                                                                    </div>
-
+                                                                        <div class="tab-content">
+                                                                            
+                                                                            <div class="tab-pane active" id="activity_log">
+                                                                                <uc1:ActivityLogs runat="server" ID="ActivityLogs" DisplayMode="ShortSale" />
+                                                                            </div>
+                                                                            <div class="tab-pane" id="file_overview">
+                                                                                <uc1:ShortSaleFileOverview runat="server" id="ShortSaleFileOverview" />
+                                                                            </div>
+                                                                        </div>
                                                                     <dx:ASPxPopupMenu ID="ASPxPopupCallBackMenu2" runat="server" ClientInstanceName="ASPxPopupMenuClientControl"
                                                                         AutoPostBack="false" PopupHorizontalAlign="Center" PopupVerticalAlign="Below" PopupAction="LeftMouseClick"
                                                                         ForeColor="#3993c1" Font-Size="14px" CssClass="fix_pop_postion_s" Paddings-PaddingTop="15px" Paddings-PaddingBottom="18px">
@@ -304,7 +316,7 @@
 
         }
     </script>
-   
+
 </asp:Content>
 
 

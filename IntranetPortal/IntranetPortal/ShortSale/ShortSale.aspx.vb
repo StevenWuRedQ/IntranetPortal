@@ -226,6 +226,10 @@ Public Class ShortSalePage
         ucTitle.BindData(ShortSaleCaseData)
         ActivityLogs.DisplayMode = IntranetPortal.ActivityLogs.ActivityLogMode.ShortSale
         ActivityLogs.BindData(ShortSaleCaseData.BBLE)
+
+        ShortSaleFileOverview.BindData(ShortSaleCaseData.BBLE)
+
+
         'DocumentsUI.BindFileList(ShortSaleCaseData.BBLE)
         DocumentsUI.LeadsName = ShortSaleCaseData.CaseName
         DocumentsUI.LeadsBBLE = ShortSaleCaseData.BBLE
@@ -246,6 +250,9 @@ Public Class ShortSalePage
         ucTitle.BindData(ShortSaleCaseData)
         ActivityLogs.DisplayMode = IntranetPortal.ActivityLogs.ActivityLogMode.ShortSale
         ActivityLogs.BindData(ShortSaleCaseData.BBLE)
+
+        ShortSaleFileOverview.BindData(ShortSaleCaseData.BBLE)
+
         'DocumentsUI.BindFileList(ShortSaleCaseData.BBLE)
         DocumentsUI.LeadsName = ShortSaleCaseData.CaseName
         DocumentsUI.LeadsBBLE = ShortSaleCaseData.BBLE
