@@ -221,6 +221,7 @@
           <Property Name="EstateAttorney" Type="nvarchar" MaxLength="50" />
           <Property Name="AttorneyPhone" Type="nvarchar" MaxLength="50" />
           <Property Name="AttorneyEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="EstateAttorneyId" Type="int" />
           <Property Name="Bankruptcy" Type="bit" />
           <Property Name="Bankaccount" Type="bit" />
           <Property Name="TaxReturn" Type="bit" />
@@ -326,6 +327,16 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="CreateBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ShortSaleOverview">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BBLE" Type="nchar" MaxLength="11" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ActivityDate" Type="datetime" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="TitleClearences">
           <Key>
             <PropertyRef Name="ClearenceId" />
@@ -390,6 +401,7 @@
           <EntitySet Name="ShortSaleActivityLogs" EntityType="Self.ShortSaleActivityLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleCaseComments" EntityType="Self.ShortSaleCaseComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShortSaleCases" EntityType="Self.ShortSaleCases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShortSaleOverview" EntityType="Self.ShortSaleOverview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleClearences" EntityType="Self.TitleClearences" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TitleJudgementSearch" EntityType="Self.TitleJudgementSearch" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -416,6 +428,7 @@
           <EntitySet Name="PropertyValueInfoes" EntityType="IntranetPortalModel.PropertyValueInfo" />
           <EntitySet Name="PropertyMortgages" EntityType="IntranetPortalModel.PropertyMortgage" />
           <EntitySet Name="PropertyOwners" EntityType="IntranetPortalModel.PropertyOwner" />
+          <EntitySet Name="ShortSaleOverviews" EntityType="IntranetPortalModel.ShortSaleOverview" />
         </EntityContainer>
         <EntityType Name="CleareneceNote">
           <Key>
@@ -784,6 +797,17 @@
           <Property Name="ActingAsSellerAttorney" Type="Boolean" />
           <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="EstateAttorneyId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ShortSaleOverview">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BBLE" Type="String" Nullable="false" MaxLength="11" FixedLength="true" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ActivityDate" Type="DateTime" Precision="3" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1147,6 +1171,7 @@
           <EntitySetMapping Name="PropertyOwners">
             <EntityTypeMapping TypeName="IntranetPortalModel.PropertyOwner">
               <MappingFragment StoreEntitySet="PropertyOwners">
+                <ScalarProperty Name="EstateAttorneyId" ColumnName="EstateAttorneyId" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
                 <ScalarProperty Name="ActingAsSellerAttorney" ColumnName="ActingAsSellerAttorney" />
@@ -1173,6 +1198,17 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="BBLE" ColumnName="BBLE" />
                 <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShortSaleOverviews">
+            <EntityTypeMapping TypeName="IntranetPortalModel.ShortSaleOverview">
+              <MappingFragment StoreEntitySet="ShortSaleOverview">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="BBLE" ColumnName="BBLE" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

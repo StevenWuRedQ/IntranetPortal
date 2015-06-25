@@ -37,5 +37,6 @@ Partial Public Class PropertyOwner
     Public Property ActingAsSellerAttorney As Nullable(Of Boolean)
     Public Property CreateBy As String
     Public Property CreateDate As Nullable(Of Date)
+    Public Property EstateAttorneyId As Nullable(Of Integer)
 
 End Class

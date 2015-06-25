@@ -40,5 +40,6 @@ Partial Public Class ShortSaleEntities
     Public Overridable Property PropertyValueInfoes() As DbSet(Of PropertyValueInfo)
     Public Overridable Property PropertyMortgages() As DbSet(Of PropertyMortgage)
     Public Overridable Property PropertyOwners() As DbSet(Of PropertyOwner)
+    Public Overridable Property ShortSaleOverviews() As DbSet(Of ShortSaleOverview)
 
 End Class

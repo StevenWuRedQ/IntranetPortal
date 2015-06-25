@@ -14,6 +14,21 @@
         End Get
     End Property
 
+    Private _estateAttoeneyContact As PartyContact
+    Public ReadOnly Property EstateAttorneyContact As PartyContact
+        Get
+            If _estateAttoeneyContact IsNot Nothing Then
+
+                If EstateAttorneyId.HasValue Then
+
+                    _estateAttoeneyContact = PartyContact.GetContact(EstateAttorneyId)
+                End If
+            End If
+
+            Return _estateAttoeneyContact
+        End Get
+    End Property
+
     'Public Function GetOwner(bble As String, firstName As String, lastName As String)
     '    Using ctx As New ShortSaleEntities
     '        Dim owner = ctx.PropertyOwners.Where(Function(po) po.BBLE = bble And po.FirstName = firstName And po.LastName = lastName).SingleOrDefault
