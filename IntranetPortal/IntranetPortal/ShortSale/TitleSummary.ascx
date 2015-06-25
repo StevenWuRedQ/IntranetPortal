@@ -523,10 +523,12 @@
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="StatuStr" Caption="Status">
                                                     </dx:GridViewDataTextColumn>
+                                                   <dx:GridViewDataTextColumn FieldName="MortgageCategory" Caption="Category">
+                                                    </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
-                                                    </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn Name="FristMortageProgress" Caption="1st Mort Prog">                                                        
-                                                    </dx:GridViewDataTextColumn>
+                                                    </dx:GridViewDataTextColumn>                                                    
+                                                    <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="1st Mort Prog">                                                        
+                                                    </dx:GridViewDataTextColumn>                                                   
                                                     <dx:GridViewDataTextColumn FieldName="FristMortageLender" Caption="1st Mort Ser ">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="SencondMortageProgress" Caption="2nd Mort Prog">
@@ -574,6 +576,8 @@
                                                     <dx:GridViewDataTextColumn FieldName="PropertyOwner.LastName" Caption="Last Name">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="OccupiedBy" Caption="Occupancy">
+                                                    </dx:GridViewDataTextColumn>
+                                                     <dx:GridViewDataTextColumn FieldName="MortgageCategory" Caption="Category">
                                                     </dx:GridViewDataTextColumn>
                                                     <dx:GridViewDataTextColumn FieldName="FristMortageProgress" Caption="File Progress">
                                                     </dx:GridViewDataTextColumn>
@@ -643,10 +647,7 @@
 
                             <script type="text/javascript">
                                 function Fields_ValueChanged(s, e) {
-
-
                                     AllLeadsGridClient.PerformCallback();
-
                                 }
                             </script>
                             <div>
@@ -658,7 +659,7 @@
 
                                         <dx:ListEditItem Value="OwnerLastName" Text="Name" Selected="True" />
                                         <dx:ListEditItem Value="StatuStr" Text="Status" Selected="True" />
-
+                                        <dx:ListEditItem Value="MortgageCategory" Text="MortgageCategory" Selected="True" />
                                         <dx:ListEditItem Value="OccupiedBy" Text="Occupancy" />
 
                                         <dx:ListEditItem Value="FristMortageProgress" Text="1st Mort Prog" />

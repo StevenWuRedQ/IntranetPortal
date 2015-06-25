@@ -191,6 +191,7 @@ Public Class ShortSalePage
                     obj.Category = category
                     obj.Save()
 
+                    ssCase.RefreshStatus()
                     'If status = "Closed" Then
                     '    ssCase.Status = CaseStatus.Closed
                     'Else
@@ -208,7 +209,7 @@ Public Class ShortSalePage
                     obj.Category = category
                     obj.Save()
 
-                    'ssCase.Status = CaseStatus.Active
+                    ssCase.RefreshStatus()
                 End If
             End If
         End If

@@ -300,6 +300,7 @@
         }
     }
 
+    var needRefreshShortSale = false;
     function InsertNewComments() {
         //var comments = document.getElementById("txtComments");
 
@@ -328,6 +329,14 @@
         if (commentHtml == "") {
             alert("Comments can't be empty.")
             return
+        }
+
+        if ($("#selStatusUpdate").val() != "")
+        {
+            needRefreshShortSale = true;
+        } else
+        {
+            needRefreshShortSale = false;
         }
 
         addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate option:selected").text() + "|" + $("#selCategory").val());
@@ -381,6 +390,7 @@
     }
 
     var refreshLogs = false;
+   
     function ShortSaleUpdateTypeChange(s) {
         var type = s.value;
 
@@ -756,7 +766,7 @@
             <Settings VerticalScrollBarMode="Auto" ShowHeaderFilterButton="true" />
             <SettingsBehavior AllowFocusedRow="false" AllowClientEventsOnLoad="false" AllowDragDrop="false"
                 EnableRowHotTrack="false" ColumnResizeMode="Disabled" />
-            <ClientSideEvents EndCallback="function(s,e){if(typeof dateActivityClient != 'undefined'){dateActivityClient.SetDate(new Date());} if(NeedToRefreshList){RefreshList();}}" />
+            <ClientSideEvents EndCallback="function(s,e){if(typeof dateActivityClient != 'undefined'){dateActivityClient.SetDate(new Date());} if(NeedToRefreshList){RefreshList();} if(needRefreshShortSale){ if(typeof GetShortSaleData != 'undefined'){ GetShortSaleData(caseId);}} }" />
         </dx:ASPxGridView>
 
         <dx:ASPxPopupControl ClientInstanceName="popupFilterControl" Width="160px" Height="200px"

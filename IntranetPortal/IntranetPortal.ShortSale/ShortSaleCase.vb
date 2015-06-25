@@ -89,7 +89,7 @@ Partial Public Class ShortSaleCase
     Public Property PipeLine As ShortSaleActivityLog
     Public Property MortgageStatus As String
     Public Property ReferralName As String
-    Public Property MortgageCategory As String
+    'Public Property MortgageCategory As String
 
     Private _sellerTitle As PropertyTitle
     Public ReadOnly Property SellerTitle As PropertyTitle
@@ -286,6 +286,22 @@ Partial Public Class ShortSaleCase
         End Get
     End Property
 
+    Private _mortgageCategory As String
+    Public Property MortgageCategory As String
+        Get
+            If String.IsNullOrEmpty(_mortgageCategory) Then
+                If Mortgages IsNot Nothing AndAlso Mortgages.Count > 1 Then
+                    _mortgageCategory = Mortgages(0).Category
+                End If
+            End If
+
+            Return _mortgageCategory
+        End Get
+        Set(value As String)
+            _mortgageCategory = value
+        End Set
+    End Property
+
     Public ReadOnly Property SellerAttorneyContact As PartyContact
         Get
             If SellerAttorney.HasValue Then
@@ -450,12 +466,12 @@ Partial Public Class ShortSaleCase
         End Using
     End Sub
 
-    Public Sub RefreshStatus(ssCase As ShortSaleCase)
-        If ssCase.Mortgages.Where(Function(mt) mt.Status <> "").Count > 0 Then
-            If ssCase.Mortgages.Where(Function(mt) mt.Status = "Closed").Count = ssCase.Mortgages.Count Then
+    Public Sub RefreshStatus()
+        If Me.Mortgages.Where(Function(mt) mt.Status <> "").Count > 0 Then
+            If Mortgages.Where(Function(mt) mt.Status = "Closed").Count = Mortgages.Count Then
                 SaveStatus(CaseStatus.Closed)
             Else
-                If ssCase.Status = CaseStatus.NewFile Then
+                If Status = CaseStatus.NewFile Then
                     SaveStatus(CaseStatus.Active)
                 End If
             End If
@@ -581,12 +597,11 @@ Partial Public Class ShortSaleCase
         Using ctx As New ShortSaleEntities
             Dim allCases = (From ss In ctx.ShortSaleCases
                          Join mort In ctx.PropertyMortgages On ss.CaseId Equals mort.CaseId
-                         Join status In ctx.MortgageStatusDatas On mort.Status Equals status.Name
-                         Where ss.Status = CaseStatus.Archived
-                         Select ss, status.Category).Distinct.ToList.Select(Function(s)
-                                                                                s.ss.MortgageCategory = s.Category
-                                                                                Return s.ss
-                                                                            End Function).ToList()
+                        Where ss.Status = CaseStatus.Archived
+                         Select ss, mort).Distinct.ToList.Select(Function(s)
+                                                                     s.ss.MortgageCategory = s.mort.Category
+                                                                     Return s.ss
+                                                                 End Function).ToList()
 
             Return allCases
         End Using
@@ -597,15 +612,14 @@ Partial Public Class ShortSaleCase
             If category = "All" Then
                 Dim allCases = (From ss In ctx.ShortSaleCases Where ss.Status <> CaseStatus.Archived AndAlso (ss.Owner = owner Or owner = Nothing)
                                 From mort In ctx.PropertyMortgages.Where(Function(m) m.CaseId = ss.CaseId).Take(1).DefaultIfEmpty
-                                From status In ctx.MortgageStatusDatas.Where(Function(s) s.Name = mort.Status).DefaultIfEmpty
-                                Select ss, mort, status).Distinct.ToList.Select(Function(s)
-                                                                                    If s.mort IsNot Nothing Then
-                                                                                        s.ss.MortgageStatus = s.mort.Status
-                                                                                        s.ss.MortgageCategory = If(s.status Is Nothing, Nothing, s.status.Category)
-                                                                                    End If
+                                Select ss, mort).Distinct.ToList.Select(Function(s)
+                                                                            If s.mort IsNot Nothing Then
+                                                                                s.ss.MortgageStatus = s.mort.Status
+                                                                                s.ss.MortgageCategory = If(String.IsNullOrEmpty(s.mort.Category), Nothing, s.mort.Category)
+                                                                            End If
 
-                                                                                    Return s.ss
-                                                                                End Function).Distinct.ToList()
+                                                                            Return s.ss
+                                                                        End Function).Distinct.ToList()
 
                 Return allCases
             End If
@@ -626,8 +640,7 @@ Partial Public Class ShortSaleCase
 
             Dim result = (From ss In ctx.ShortSaleCases
                              Join mort In ctx.PropertyMortgages On ss.CaseId Equals mort.CaseId
-                             Join status In ctx.MortgageStatusDatas On mort.Status Equals status.Name
-                             Where status.Category = category And (ss.Owner = owner Or owner = Nothing) And ss.Status <> CaseStatus.Archived
+                            Where mort.Category = category And (ss.Owner = owner Or owner = Nothing) And ss.Status <> CaseStatus.Archived
                              Select ss, mort.Status).Distinct.ToList
 
             Dim ssCases = result.Select(Function(s)
@@ -690,13 +703,6 @@ Partial Public Class ShortSaleCase
 
     Public Shared Function GetEvictionCases() As List(Of ShortSaleCase)
         Using ctx As New ShortSaleEntities
-            'Dim result = (From ss In ctx.ShortSaleCases.Where(Function(ss) ss.Status = CaseStatus.Eviction)
-            '         Let evi = ctx.EvictionCases.Where(Function(e) e.BBLE = ss.BBLE).FirstOrDefault
-            '         Select New With {.case = ss, .Name = evi.Owner}).ToList.Select(Function(s) ShortsaleCaseWithEvictionOwner(s.case, s.Name)).ToList
-
-            'Dim result = (From ss In ctx.ShortSaleCases
-            '             Join evi In ctx.EvictionCases On ss.BBLE Equals evi.BBLE
-            '             Select New With {.case = ss, .Name = evi.Owner}).ToList.Select(Function(s) ShortsaleCaseWithEvictionOwner(s.case, s.Name)).ToList
 
             Dim result = (From evi In ctx.EvictionCases
                          Join ss In ctx.ShortSaleCases On ss.BBLE Equals evi.BBLE

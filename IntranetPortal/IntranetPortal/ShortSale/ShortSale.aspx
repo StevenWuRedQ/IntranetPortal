@@ -169,7 +169,7 @@
                                                                             <li class="short_sale_head_tab">
                                                                                 <a href="#file_overview" role="tab" data-toggle="tab" class="tab_button_a" onclick="">
                                                                                     <i class="fa fa-info-circle head_tab_icon_padding"></i>
-                                                                                    <div class="font_size_bold">File Overview</div>
+                                                                                    <div class="font_size_bold">File View</div>
                                                                                 </a>
                                                                             </li>
                                                                             <%--<li><a role="tab" data-toggle="tab">Settings</a></li>--%>
