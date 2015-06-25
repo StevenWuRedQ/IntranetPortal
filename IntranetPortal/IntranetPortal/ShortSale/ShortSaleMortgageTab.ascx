@@ -88,18 +88,18 @@
                 </li>
 
                 <li class="ss_form_item">
-                    <label class="ss_form_input_title">Tax Class</label>
-                    <input class="ss_form_input" data-field="PropertyInfo.TaxClass">
+                    <label class="ss_form_input_title" >Tax Class</label>
+                    <input class="ss_form_input" data-item-type="1" data-field="PropertyInfo.TaxClass">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title"># of Families</label>
-                    <input class="ss_form_input" data-field="PropertyInfo.NumOfFamilies">
+                    <input class="ss_form_input" data-item-type="1" data-field="PropertyInfo.NumOfFamilies">
                 </li>
 
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Payoff Expires</label>
-                    <input class="ss_form_input ss_date" data-field="PayoffExpired">
+                    <input class="ss_form_input ss_date" data-item="PayoffExpired" data-item-type="1">
                 </li>
 
                 <%--<li class="ss_form_item">

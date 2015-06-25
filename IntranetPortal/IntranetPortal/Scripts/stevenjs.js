@@ -196,6 +196,7 @@ function ShortSaleDataBand(data_stauts) {
     }
     var ss_data = ShortSaleCaseData;
     //var field_name = "PropertyInfo.Number";
+    ShorSaleArrayDataBand(data_stauts);
     var inputs = $(".ss_form_input");
     inputs.each(function (index) {
 
@@ -219,7 +220,7 @@ function ShortSaleDataBand(data_stauts) {
     });
 
     /*band short sale arrary item*/
-    ShorSaleArrayDataBand(data_stauts)
+    
 
     //d_log_assert(is_save, "the short sale after save " + JSON.stringify(ShortSaleCaseData));
     /*use for ui*/
@@ -525,17 +526,21 @@ function ShorSaleArrayDataBand(data_stauts) {
         elem.find("[data-item-type=1]").each(function (ind) {
 
             var item_field = $(this).attr("data-item");
-
+            var main_field = $(this).attr("data-field") ;
+            if(main_field)
+            {
+                item_field = main_field;
+            }
             if (is_save) {
 
                 if (!radio_check_no_edit($(this))) {
 
-                    get_sub_property(data_value, item_field, ss_field_data($(this), null));
+                    get_sub_property(main_field ? ss_data : data_value, item_field, ss_field_data($(this), null));
 
                 }
 
             }
-            var item_value = get_sub_property(data_value, item_field, null);
+            var item_value = get_sub_property(main_field ? ss_data : data_value, item_field, null);
 
             ss_field_data($(this), item_value);
 

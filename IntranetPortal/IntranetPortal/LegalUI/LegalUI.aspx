@@ -855,7 +855,7 @@
                         alert("Save Success!");
                     }).
                     error(function (data, status) {
-                        alert("Fail to save data. status " + status + "Error" + JSON.stringify(data));
+                        alert("Fail to save data. status " + status + "Error : " + JSON.stringify(data));
                     });
 
                 //$.getJSON('/LegalUI/LegalUI.aspx/SaveCaseData', data, function (data) {                    
