@@ -314,9 +314,8 @@
         }
         if (addDate == null)
             addDate = new Date();
-        
-        if ($("#selCategory").attr("data-required") == "true" && $("#selCategory").val() == "")
-        {
+
+        if ($("#selCategory").attr("data-required") == "true" && $("#selCategory").val() == "") {
             alert("Please select Category");
             return;
         }
@@ -326,12 +325,11 @@
             return;
         }
 
-        if (commentHtml == "")
-        {
+        if (commentHtml == "") {
             alert("Comments can't be empty.")
             return
         }
-        
+
         addCommentsCallbackClient.PerformCallback(addDate.toJSON() + "|" + $("#selType1").val() + "|" + $("#selStatusUpdate option:selected").text() + "|" + $("#selCategory").val());
         EmailBody.SetHtml("");
     }
@@ -405,7 +403,7 @@
         if ($.inArray(type, updates) > -1) {
             $("#selCategory").attr("disabled", true);
             $("#selStatusUpdate").attr("disabled", true);
-            
+
             $("#selStatusUpdate").attr("data-required", false);
             $("#selCategory").attr("data-required", false);
 
@@ -493,8 +491,6 @@
                     </div>
 
                     <% End If%>
-
-          
                 </div>
                 <div style="margin-top: 15px; float: right; margin-right: 5px;">
                     <i class="fa fa-plus-circle activity_add_buttons tooltip-examples icon_btn" title="Add Comment" style="margin-right: 15px; cursor: pointer" onclick="InsertNewComments()"></i>
