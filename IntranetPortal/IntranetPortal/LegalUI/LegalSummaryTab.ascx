@@ -12,27 +12,27 @@
                 <li class="ss_form_item" style="width: 100%">
                     <label class="ss_form_input_title">address</label>
 
-                    <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.PropertyAddress" style="width: 93.5%;" name="lender">
+                    <input class="ss_form_input" disabled="disabled"  ng-model="LegalCase.PropertyInfo.PropertyAddress" style="width: 93.5%;" name="lender">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Block</label>
-                    <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.Block">
+                    <input class="ss_form_input" disabled="disabled" ng-model="LegalCase.PropertyInfo.Block">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">lot</label>
-                    <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.Lot">
+                    <input class="ss_form_input" disabled="disabled" ng-model="LegalCase.PropertyInfo.Lot">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">BBLE</label>
-                    <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.BBLE">
+                    <input class="ss_form_input" disabled="disabled" ng-model="LegalCase.PropertyInfo.BBLE">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Class</label>
-                    <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.TaxClass">
+                    <input class="ss_form_input" disabled="disabled" ng-model="LegalCase.PropertyInfo.TaxClass">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Condition</label>
-                    <select class="ss_form_input" ng-model="LegalCase.PropertyInfo.Condition">
+                    <select class="ss_form_input" disabled="disabled" ng-model="LegalCase.PropertyInfo.Condition">
                         <option></option>
                         <option value="Great">Great</option>
                         <option value="Good">Good</option>
@@ -43,7 +43,7 @@
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Vacant/Occupied </label>
-                    <select class="ss_form_input" ng-model="LegalCase.PropertyInfo.VacantOrOccupied">
+                    <select class="ss_form_input" disabled="disabled" ng-model="LegalCase.PropertyInfo.VacantOrOccupied">
                         <option></option>
                         <option value="Vacant">Vacant</option>
                         <option value="Occupied">Occupied</option>
@@ -52,7 +52,7 @@
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Stage</label>
-                    <select class="ss_form_input">
+                    <select class="ss_form_input" disabled="disabled">
                         <option>Eviction</option>
                         <option>Short Sale</option>
                     </select>
@@ -65,33 +65,35 @@
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Use</label>
-                    <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.Use">
+                    <input class="ss_form_input" disabled="disabled" ng-model="LegalCase.PropertyInfo.Use">
                 </li>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Owner of Record </label>
-                    <input class="ss_form_input" ng-model="LegalCase.PropertyInfo.Use">
+                   <div class="contact_box" dx-select-box="InitContact('LegalCase.PropertyInfo.OwnerOfRecordId')">
+                    </div>
+                    
                 </li>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Case Contact person/owner </label>
                     <div class="contact_box" dx-select-box="InitContact('LegalCase.PropertyInfo.CaseContactId')">
                     </div>
-                    <%--<input class="ss_form_input" ng-model="LegalCase.PropertyInfo.CaseContactId">--%>
+                    <%--<input class="ss_form_input" disabled="disabled" ng-model="LegalCase.PropertyInfo.CaseContactId">--%>
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Phone number </label>
-                    <input class="ss_form_input" ng-model="GetContactById(LegalCase.PropertyInfo.CaseContactId).Cell">
+                    <input class="ss_form_input" disabled="disabled" ng-model="GetContactById(LegalCase.PropertyInfo.CaseContactId).Cell">
                 </li>
 
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">email  </label>
-                    <input class="ss_form_input" ng-model="GetContactById(LegalCase.PropertyInfo.CaseContactId).Email">
+                    <input class="ss_form_input" disabled="disabled" ng-model="GetContactById(LegalCase.PropertyInfo.CaseContactId).Email">
                 </li>
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Address</label>
-                    <input class="ss_form_input" ng-model="GetContactById(LegalCase.PropertyInfo.CaseContactId).Address">
+                    <input class="ss_form_input" disabled="disabled" ng-model="GetContactById(LegalCase.PropertyInfo.CaseContactId).Address">
                 </li>
 
             </ul>
@@ -110,7 +112,7 @@
                     </li>
                     <li class="ss_form_item">
                         <label class="ss_form_input_title">Servicer</label>
-                        <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.PlaintiffId')">
+                        <div class="contact_box" dx-select-box="InitContact('LegalCase.ForeclosureInfo.ServicerId')">
                         </div>
                     </li>
                     <li class="ss_form_item">
@@ -140,7 +142,7 @@
                     <li class="ss_form_item">
                         <span class="ss_form_input_title">HAMP </span>
 
-                        <input type="checkbox" id="pdf_check_yes30" name="1" class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.HAMP">
+                        <input type="checkbox" id="pdf_check_yes30" name="1" class="ss_form_input" disabled="disabled" ng-model="LegalCase.ForeclosureInfo.HAMP">
                         <label for="pdf_check_yes30" class="input_with_check">
                             <span class="box_text">Yes </span>
                         </label>
@@ -178,22 +180,22 @@
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Status </label>
-                    <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.Status">
+                    <input class="ss_form_input" disabled="disabled" ng-model="LegalCase.SecondaryInfo.Status">
                 </li>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Tasks </label>
-                    <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.Tasks">
+                    <input class="ss_form_input" disabled="disabled" ng-model="LegalCase.SecondaryInfo.Tasks">
                 </li>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Attorney working file  </label>
-                    <input class="ss_form_input" ng-model="LegalCase.SecondaryInfo.AttorneyWorkingFile">
+                    <input class="ss_form_input" disabled="disabled" ng-model="LegalCase.SecondaryInfo.AttorneyWorkingFile">
                 </li>
 
                 <li class="ss_form_item">
                     <label class="ss_form_input_title">Last Update </label>
-                    <input class="ss_form_input" ng-model="LegalCase.ForeclosureInfo.LastUpdate">
+                    <input class="ss_form_input" disabled="disabled" ng-model="LegalCase.ForeclosureInfo.LastUpdate">
                 </li>
 
 

@@ -104,7 +104,7 @@
             <li class="ss_form_item">
                 <label class="ss_form_input_title">Divorce</label>
                 <input type="checkbox" class="ss_form_input" data-field="PropertyInfo.CO" data-radio="Y" id="DivorceCheck" ng-model="LegalCase.ForeclosureInfo.Divorce">
-                <label for="key_PropertyInfo_checkYes_CO" class="input_with_check">
+                <label for="DivorceCheck" class="input_with_check">
                     <span class="box_text">Yes</span>
                 </label>
             </li>
